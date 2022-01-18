@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>EarlyYearsFoundationRecovery</title>
+    <title>Early Years Foundation Recovery</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,6 +10,9 @@
   </head>
 
   <body>
+    <%= content_tag(:p, notice, class: :notice) if notice %>
+    <%= content_tag(:p, alert, class: :alert) if alert %>
+    
     <%= yield %>
   </body>
 </html>
