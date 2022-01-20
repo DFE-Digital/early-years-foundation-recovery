@@ -1,4 +1,0 @@
-<%= form_for @user_form, url: extra_registration_path(current_step), method: :patch do |f|  %>
-  <%= render current_step.to_s, f: f %>
-  <%= f.submit "Save" %>
-<% end %>
