@@ -21,11 +21,13 @@ RSpec.describe "Authentication", type: :request do
       before { sign_in create(:user) }
 
       it "redirects to sign in page" do
+        pending("email confirmation enabled")
         get action_path
         expect(response).to redirect_to(new_user_session_path)
       end
 
       it "displays message that confirmation link email sent" do
+        pending("email confirmation enabled")
         get action_path
         follow_redirect!
         expect(response.body).to include("You have to confirm your email address")
@@ -72,11 +74,13 @@ RSpec.describe "Authentication", type: :request do
       before { sign_in create(:user) }
 
       it "redirects to sign in page" do
+        pending("email confirmation enabled")
         get action_path
         expect(response).to redirect_to(new_user_session_path)
       end
 
       it "displays message that confirmation link email sent" do
+        pending("email confirmation enabled")
         get action_path
         follow_redirect!
         expect(response.body).to include("You have to confirm your email address")
