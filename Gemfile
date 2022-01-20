@@ -43,6 +43,13 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 
   gem "rspec-rails"
+
+  # Set up objects for testing
+  gem "factory_bot_rails"
+
+  # Use fake data for specs
+  gem "faker"
+
 end
 
 group :development do
