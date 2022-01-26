@@ -1,2 +1,26 @@
 module ApplicationHelper
+  def navigation
+    govuk_header(service_name: "GOV.UK Early Years Foundation Recovery") do |header|
+      header.navigation_item(text: "Home", href: root_path, active: true)
+      header.navigation_item(text: "Training Modules", href: training_modules_path)
+    end
+  end
+
+  def configuration_summary_list
+    govuk_summary_list(
+      rows: [
+        { key: { text: "Rails version" }, value: { text:  Rails.version } },
+        { key: { text: "Ruby version" }, value: { text:  RUBY_VERSION } },
+        { key: {
+          text: "GOV.UK Frontend" },
+          value: {
+            text: JSON
+              .parse(File.read(Rails.root.join("package.json")))
+              .dig("dependencies", "govuk-frontend")
+              .tr("^", "")
+          }
+        }
+      ]
+    )
+  end
 end
