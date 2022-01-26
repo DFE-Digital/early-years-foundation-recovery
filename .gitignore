@@ -33,11 +33,6 @@
 app/assets/builds/*
 node_modules
 
-# Platform/IDE-specific settings
-.DS_Store
-.idea
-.vscode
-
 # Local env settings
 .env
 .envrc
