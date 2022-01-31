@@ -1,3 +1,3 @@
 # Early Years Recovery
 
-A Ruby on Rails app
+A Ruby on Rails 7 app
