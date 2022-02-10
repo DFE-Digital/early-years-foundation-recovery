@@ -1,0 +1,23 @@
+---
+learning-stuff:
+  about:
+    title: Learn stuff
+    body: This is the place to learn stuff
+  sections:
+    big:
+      type: text_only
+      title: Big stuff
+      video: https://youtu.be/rvXiWz-bZ9E
+      body: Stuff that is big is larger than other stuff
+    small:
+      type: text_with_video
+      title: Small stuff
+      video: https://youtu.be/rvXiWz-bZ9E
+      body: Stuff that is small is smaller that other stuff
+    medium:
+      title: Medium stuff
+      video: https://youtu.be/rvXiWz-bZ9E
+      body: Medium stuff is bigger that small stuff, and smaller than big stuff
+  recap:
+    title: What you learnt about stuff
+    body: Stuff comes in three sizes - big, medium and small

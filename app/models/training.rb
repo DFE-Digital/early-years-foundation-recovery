@@ -1,7 +1,6 @@
-class Training < ActiveYaml::Base
+class Training < YamlBase
   extend YamlFolder
 
-  set_root_path Rails.root.join("data")
   set_filename "training" # Note: this is a folder
 
   # Load the about data from training YAML file and use that to create the model instance

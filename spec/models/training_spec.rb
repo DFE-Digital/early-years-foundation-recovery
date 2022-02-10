@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Training, type: :model do
   describe ".load_file" do
     let(:training_data) { data_from_file("training/supporting-physical-development.yml") }
-    let(:training) { described_class.first }
+    let(:training) { described_class.find_by(training_module: 'supporting-physical-development') }
 
     it "loads models from expected path" do
       expect(training.title).to eq(training_data.dig('supporting-physical-development', 'sections', 'one', 'title'))

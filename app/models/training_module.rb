@@ -1,5 +1,4 @@
-class TrainingModule < ActiveYaml::Base
-  set_root_path Rails.root.join("data")
+class TrainingModule < YamlBase
   set_filename "training-modules"
 
   def self.load_file
@@ -7,5 +6,17 @@ class TrainingModule < ActiveYaml::Base
     raw_data.map do |name, values|
       values.merge(name: name)
     end
+  end
+
+  def about_training
+    @about ||= AboutTraining.find_by(training_module: name)
+  end
+
+  def trainings
+    @trainings ||= Training.where(training_module: name)
+  end
+
+  def recap_training
+    @recap_training ||= RecapTraining.find_by(training_module: name)
   end
 end

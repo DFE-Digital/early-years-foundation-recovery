@@ -1,7 +1,8 @@
 ---
 supporting-physical-development:
   about:
-    title: Hello mother
+    title: About Supporting Physical Development
+    body: Some information
   sections:
     one:       
       title: Department for eduction
@@ -12,5 +13,6 @@ supporting-physical-development:
       video: https://youtu.be/wsj2DYaxcEw
       body: And more
   recap:
-    title: Hello mother again
+    title: Supporting Physical Development recap
+    body: What you did.
 

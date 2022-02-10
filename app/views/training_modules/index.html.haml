@@ -1,2 +1,4 @@
 %h1 Training Modules
-%p Find me in app/views/training_modules/index.html.haml
+- @training_modules.each do |training_module|
+  %p=link_to training_module.title, training_module_training_index_path(training_module)
+
