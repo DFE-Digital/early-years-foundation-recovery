@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root "home#index"
   devise_for :users, controllers: { registrations: "registrations" }
   resources :modules, only: [:index], as: :training_modules, controller: :training_modules do
-    resources :training, only: [:index, :show] do
+    resources :topics, only: [:index, :show] do
       collection do
         get :recap
       end

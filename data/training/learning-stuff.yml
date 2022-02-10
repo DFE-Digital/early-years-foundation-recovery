@@ -3,7 +3,7 @@ learning-stuff:
   about:
     title: Learn stuff
     body: This is the place to learn stuff
-  sections:
+  topics:
     big:
       type: text_only
       title: Big stuff

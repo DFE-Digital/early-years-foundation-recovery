@@ -1,4 +1,4 @@
-class Training < YamlBase
+class Topic < YamlBase
   extend YamlFolder
 
   set_filename "training" # Note: this is a folder
@@ -7,7 +7,7 @@ class Training < YamlBase
   # Use the root key to populate training_module.
   def self.load_file
     nested_hashes = raw_data.map do |training_module, training_data|
-      training_data['sections'].map do |name, values|
+      training_data['topics'].map do |name, values|
         values.merge(
           training_module: training_module,
           name: name
