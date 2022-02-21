@@ -2,7 +2,7 @@ class RecapTraining < ActiveYaml::Base
   extend YamlFolder
 
   set_root_path Rails.root.join("data")
-  set_filename "training" # Note: this is a folder
+  set_folder "training"
 
   # Load the recap data from training YAML file and use that to create the model instance
   # Use the root key to populate training_module.
