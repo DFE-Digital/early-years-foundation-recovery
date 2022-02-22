@@ -1,7 +1,7 @@
 class Topic < YamlBase
   extend YamlFolder
 
-  set_filename "training" # Note: this is a folder
+  set_folder "training"
 
   # Load the about data from training YAML file and use that to create the model instance
   # Use the root key to populate training_module.

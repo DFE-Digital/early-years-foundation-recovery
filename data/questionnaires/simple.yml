@@ -1,0 +1,23 @@
+---
+simple:
+  heading: A simple questionnaire
+  content: It just has some questions and answers
+  questions:
+    one_from_many:
+      multi_select: false
+      label: Select one from many
+      answers:
+        one: One
+        two: Two
+        three: three
+      correct_answers:
+        - one
+    many_from_many:
+      multi_select: true
+      label: Select all the answers
+      answers:
+        one: One
+        two: two
+      correct_answers:
+        - one
+        - two
