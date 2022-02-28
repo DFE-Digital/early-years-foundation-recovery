@@ -42,7 +42,7 @@ gem "sassc-rails"
 gem "devise"
 
 # HTML abstraction markup language
-gem "haml-rails", "~> 2.0"
+gem "haml-rails", "~> 2.0", ">= 2.0.1"
 
 # Create models from static data such as hashes or YAML
 gem 'active_hash'
