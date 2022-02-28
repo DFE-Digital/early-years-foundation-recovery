@@ -9,7 +9,7 @@ simple:
       answers:
         one: One
         two: Two
-        three: three
+        three: Three
       correct_answers:
         - one
     many_from_many:
@@ -17,7 +17,7 @@ simple:
       label: Select all the answers
       answers:
         one: One
-        two: two
+        two: Two
       correct_answers:
         - one
         - two
