@@ -9,4 +9,5 @@ Rails.application.routes.draw do
     end
   end
   resources :extra_registrations, only: [:index, :edit, :update]
+  resources :questionnaires, only: [:show, :update]
 end
