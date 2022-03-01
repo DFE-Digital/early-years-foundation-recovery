@@ -18,7 +18,7 @@ class QuestionnairesController < ApplicationController
   private
 
   def questionnaire
-    @questionnaire ||= Questionnaire.find_by(name: params[:id])
+    @questionnaire ||= Questionnaire.find_by!(name: params[:id])
   end
 
   def update_questionnaire
@@ -28,7 +28,7 @@ class QuestionnairesController < ApplicationController
     end
   end
 
-  # Check how submitted answers match correct answers
+  # Check how submitted answers match defined correct answers
   def results
     questionnaire_params
     @results ||= questionnaire.questions.each_with_object({}) do |(question, data), result|
@@ -39,7 +39,7 @@ class QuestionnairesController < ApplicationController
 
   def generate_error_messages
     results.map do |question, result|
-      questionnaire.errors.add question, "is #{' not' unless result} correct"
+      questionnaire.errors.add question, "is#{ ' not' unless result } correct"
     end
   end
 

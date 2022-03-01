@@ -2,7 +2,8 @@
 %p=@questionnaire.content
 
 = form_with model: @questionnaire do |form|
-  %p=@questionnaire.errors.messages if @questionnaire.errors.present?
+  - if @questionnaire.errors.present?
+    .errors=@questionnaire.errors.messages
   - @questionnaire.questions.each do |question, data|
     %p= data[:label]
     %p
@@ -13,7 +14,7 @@
             -#
               Checkbox method is not automatically detecting correct checked status from questionnaire directly
               so have to set checked directly
-            = input.check_box #(checked: @questionnaire.send(question).include?(input.value.to_s))
+            = input.check_box(checked: @questionnaire.send(question)&.include?(input.value.to_s))
           - else
             = input.radio_button
           = input.label
