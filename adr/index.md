@@ -4,7 +4,7 @@ This log lists the architectural decisions for EYFS Recovery
 
 <!-- adrlog -- Regenerate the content by using "adr-log -i". You can install it via "npm install -g adr-log" -->
 
-- [ADR-0001](0000-use-ruby-on-rails.md) - Use Ruby-On-Rails as the primary project development language and framework
+- [ADR-0001](0001-use-ruby-on-rails.md) - Use Ruby-On-Rails as the primary project development language and framework
 
 <!-- adrlogstop -->
 
