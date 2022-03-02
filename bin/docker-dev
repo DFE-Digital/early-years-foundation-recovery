@@ -1,0 +1,11 @@
+#!/bin/sh
+# ------------------------------------------------------------------------------
+set -e
+
+docker-compose \
+  -f docker-compose.yml \
+  -f docker-compose.dev.yml \
+  --project-name eyfs \
+  up --detach
+
+docker attach eyfs_dev

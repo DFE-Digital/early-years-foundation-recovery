@@ -1,0 +1,14 @@
+#!/bin/sh
+# ------------------------------------------------------------------------------
+set -e
+
+if docker container ls | grep eyfs_dev; then
+  docker exec -it eyfs_dev rails "$@"
+else
+  docker-compose \
+    -f docker-compose.yml \
+    -f docker-compose.dev.yml \
+    --project-name eyfs \
+    run --rm app \
+    rails "$@"
+fi

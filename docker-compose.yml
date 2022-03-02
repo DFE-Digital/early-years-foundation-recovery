@@ -1,0 +1,31 @@
+---
+version: "3.8"
+services:
+  app:
+    tmpfs:
+      - /tmp
+    container_name: eyfs_prod
+    build:
+      context: .
+      target: app
+    image: eyfs:prod
+    command: rails server -b 0.0.0.0
+    environment:
+      RAILS_ENV: production
+    depends_on:
+      - db
+    networks:
+      - eyfs
+
+  db:
+    container_name: eyfs_db
+    image: postgres:alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_HOST_AUTH_METHOD: trust
+    networks:
+      - eyfs
+
+networks:
+  eyfs:

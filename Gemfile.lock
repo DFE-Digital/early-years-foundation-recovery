@@ -89,6 +89,10 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
     digest (3.1.0)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     erubi (1.10.0)
     erubis (2.7.0)
     factory_bot (6.2.0)
@@ -98,6 +102,7 @@ GEM
       railties (>= 5.0.0)
     faker (2.19.0)
       i18n (>= 1.6, < 2)
+    foreman (0.87.2)
     globalid (1.0.0)
       activesupport (>= 5.0)
     govuk-components (3.0.1)
@@ -271,8 +276,10 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise
+  dotenv-rails (~> 2.7)
   factory_bot_rails
   faker
+  foreman
   govuk-components
   govuk_design_system_formbuilder
   haml-rails (~> 2.0)

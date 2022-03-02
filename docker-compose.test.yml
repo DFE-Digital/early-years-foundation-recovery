@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  app:
+    container_name: eyfs_test
+    build:
+      target: test
+      cache_from:
+        - eyfs:test
+    image: eyfs:test
+    command: rspec
+    environment:
+      RAILS_ENV: test
+      DATABASE_URL: postgres://postgres:password@db:5432/early_years_foundation_recovery_test
+
+  db:
+    volumes:
+      - db_test:/var/lib/postgresql/data
+
+volumes:
+  db_test:

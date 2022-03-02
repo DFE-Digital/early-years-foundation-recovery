@@ -1,0 +1,11 @@
+#!/bin/sh
+# ------------------------------------------------------------------------------
+set -e
+
+docker-compose \
+  -f docker-compose.yml \
+  -f docker-compose.test.yml \
+  --project-name eyfs \
+  run \
+  --rm app \
+  rspec "$@"

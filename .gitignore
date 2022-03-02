@@ -6,6 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
+/vendor/bundle
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -37,3 +38,4 @@ node_modules
 .env
 .envrc
 .env.local
+.env.*.local
