@@ -21,5 +21,4 @@ else
   bundle exec rake db:prepare
 fi
 
-
 exec bundle exec "$@"
