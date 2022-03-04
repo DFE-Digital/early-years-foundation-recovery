@@ -1,0 +1,10 @@
+#!/bin/sh
+# ------------------------------------------------------------------------------
+set -e
+
+USER=`whoami`
+GROUP=`id -gn`
+
+for dir in app/assets log node_modules public tmp; do
+  sudo chown -R $USER:$GROUP $dir
+done

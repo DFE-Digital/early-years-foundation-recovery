@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  app:
+    container_name: recovery_dev
+    build:
+      target: dev
+    image: recovery:dev
+    command: foreman start -f Procfile.dev
+    environment:
+      RAILS_ENV: development
+      DATABASE_URL: postgres://postgres:password@db:5432/early_years_foundation_recovery_development
+      RAILS_SERVE_STATIC_FILES: "true"
+    volumes:
+      - .:/src
+    ports:
+      - 3000:3000
+    tty: true
+    stdin_open: true
+
+  db:
+    volumes:
+      - db_dev:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  db_dev:

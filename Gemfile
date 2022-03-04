@@ -44,17 +44,20 @@ gem "haml-rails", "~> 2.0", ">= 2.0.1"
 # Create models from static data such as hashes or YAML
 gem 'active_hash'
 
+gem "govuk-components", ">= 3.0.3"
+gem "govuk_design_system_formbuilder"
+
+
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
-
-  gem "rspec-rails"
-
-  # Set up objects for testing
-  gem "factory_bot_rails"
-
   # Use fake data for specs
   gem "faker"
+
+  gem "foreman"
+
+  gem "dotenv-rails", "~> 2.7"
+
+  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem "debug", platforms: %i[ mri mingw x64_mingw ]
 
 end
 
@@ -69,5 +72,7 @@ group :development do
   # gem "spring"
 end
 
-gem "govuk-components", ">= 3.0.3"
-gem "govuk_design_system_formbuilder"
+group :test do
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+end

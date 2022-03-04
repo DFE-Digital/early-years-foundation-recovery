@@ -1,0 +1,14 @@
+#!/bin/sh
+# ------------------------------------------------------------------------------
+set -e
+
+if docker container ls | grep recovery_dev; then
+  docker exec -it recovery_dev rails "$@"
+else
+  docker-compose \
+    -f docker-compose.yml \
+    -f docker-compose.dev.yml \
+    --project-name recovery \
+    run --rm app \
+    rails "$@"
+fi
