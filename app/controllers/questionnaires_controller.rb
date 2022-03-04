@@ -7,8 +7,7 @@ class QuestionnairesController < ApplicationController
     questionnaire.errors.clear
     update_questionnaire
     if results.values.all?(true)
-      # TODO: redirect to next step
-      render :show, status: :unprocessable_entity # status set to force page reload
+      redirect_to training_module_content_page_path(questionnaire.training_module, next_module_item)
     else
       generate_error_messages
       render :show, status: :unprocessable_entity
@@ -19,6 +18,11 @@ class QuestionnairesController < ApplicationController
 
   def questionnaire
     @questionnaire ||= Questionnaire.find_by!(name: params[:id])
+  end
+
+  def next_module_item
+    current_module_item = ModuleItem.find_by(training_module: questionnaire.training_module, id: questionnaire.name)
+    current_module_item.next_item
   end
 
   def update_questionnaire
