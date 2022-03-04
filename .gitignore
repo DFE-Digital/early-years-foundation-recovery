@@ -30,9 +30,11 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
 # Frontend artifacts and libs
 app/assets/builds/*
 node_modules
+yarn-error.log
 
 # Local env settings
 .env
