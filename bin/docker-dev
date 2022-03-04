@@ -5,7 +5,7 @@ set -e
 docker-compose \
   -f docker-compose.yml \
   -f docker-compose.dev.yml \
-  --project-name eyfs \
+  --project-name recovery \
   up --detach
 
-docker attach eyfs_dev
+docker attach recovery_dev

@@ -1,12 +1,12 @@
 version: "3.8"
 services:
   app:
-    container_name: eyfs_test
+    container_name: recovery_test
     build:
       target: test
       cache_from:
-        - eyfs:test
-    image: eyfs:test
+        - recovery:test
+    image: recovery:test
     command: rspec
     environment:
       RAILS_ENV: test

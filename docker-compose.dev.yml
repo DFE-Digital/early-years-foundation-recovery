@@ -1,10 +1,10 @@
 version: "3.8"
 services:
   app:
-    container_name: eyfs_dev
+    container_name: recovery_dev
     build:
       target: dev
-    image: eyfs:dev
+    image: recovery:dev
     command: foreman start -f Procfile.dev
     environment:
       RAILS_ENV: development

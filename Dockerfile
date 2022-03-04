@@ -42,7 +42,7 @@ RUN yarn; \
     yarn build; \
     yarn build:css
 
-RUN bundle exec rails assets:precompile
+RUN SECRET_KEY_BASE=secret bundle exec rails assets:precompile
 
 COPY ./docker-entrypoint.sh /
 
