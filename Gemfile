@@ -69,5 +69,5 @@ group :development do
   # gem "spring"
 end
 
-gem "govuk-components"
+gem "govuk-components", ">= 3.0.3"
 gem "govuk_design_system_formbuilder"
