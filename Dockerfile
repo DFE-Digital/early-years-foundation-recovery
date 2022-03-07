@@ -1,9 +1,20 @@
 # ------------------------------------------------------------------------------
 # Base
 # ------------------------------------------------------------------------------
-FROM ruby:3.1.0-alpine as base
+FROM ruby:3.1.1-slim as base
 
-RUN apk add --no-cache --no-progress build-base tzdata postgresql-dev yarn
+# RUN apk add --no-cache --no-progress build-base tzdata postgresql-dev yarn
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libpq-dev \
+    postgresql-client \
+    git \
+    nodejs \
+    npm \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN npm install -g yarn
+RUN gem update --system
 
 # ------------------------------------------------------------------------------
 # Production Stage
@@ -42,7 +53,7 @@ RUN yarn; \
     yarn build; \
     yarn build:css
 
-RUN SECRET_KEY_BASE=secret bundle exec rails assets:precompile
+#RUN SECRET_KEY_BASE=secret bundle exec rails assets:precompile
 
 COPY ./docker-entrypoint.sh /
 
