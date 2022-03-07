@@ -1,7 +1,8 @@
 ---
-simple:
+test:
   heading: A simple questionnaire
   content: It just has some questions and answers
+  training_module: test
   questions:
     one_from_many:
       multi_select: false

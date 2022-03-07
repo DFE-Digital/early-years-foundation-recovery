@@ -1,0 +1,6 @@
+---
+test:
+  test:
+    type: formative_assessment
+  basic:
+    type: text_page

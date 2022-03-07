@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         get :recap
       end
     end
+    resources :content_pages, only: [:show]
   end
   resources :extra_registrations, only: [:index, :edit, :update]
   resources :questionnaires, only: [:show, :update]
