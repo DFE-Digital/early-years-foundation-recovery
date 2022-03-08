@@ -6,12 +6,17 @@ class Questionnaire < YamlBase
   set_folder "questionnaires"
 
   def self.load_file
-    raw_data.map do |name, data|
-      data['name'] = name
-      data['questions'].deep_symbolize_keys!
-      data['questions'].keys.each { |question| data[question] = nil }
-      data
+    data = raw_data.map do |training_module, questionnaires|
+      questionnaires.map do |name, data|
+        data['name'] = name
+        data['training_module'] = training_module
+        data['questions'].deep_symbolize_keys!
+        data['questions'].keys.each { |question| data[question] = nil }
+        data
+      end
     end
+    data.flatten! # Using flatten! as more memory efficient.
+    data
   end
 
   def questions

@@ -11,7 +11,7 @@ class ContentPagesController < ApplicationController
     @model = module_item.model
 
     if @model.is_a?(Questionnaire)
-      redirect_to @model
+      redirect_to training_module_questionnaire_path(training_module, @model)
     else
       render module_item.type
     end
@@ -24,6 +24,6 @@ class ContentPagesController < ApplicationController
   end
 
   def training_module
-    params[:training_module_id]
+    @training_module ||= params[:training_module_id]
   end
 end

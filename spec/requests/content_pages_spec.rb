@@ -27,7 +27,7 @@ RSpec.describe "ContentPages", type: :request do
 
       it "redirects to questionnaire controller" do
         get training_module_content_page_path(:test, module_item.id)
-        expect(response).to redirect_to(questionnaire_path(module_item.model))
+        expect(response).to redirect_to(training_module_questionnaire_path(:test, module_item.model))
       end
     end
   end
