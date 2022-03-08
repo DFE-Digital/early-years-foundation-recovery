@@ -31,10 +31,14 @@ class ModuleItem < YamlBase
   delegate :valid?, to: :model
 
   def next_item
-    self.class.all.to_a[place_in_flow + 1]
+    module_items_in_this_training_module[place_in_flow + 1]
   end
 
   def place_in_flow
-    self.class.all.to_a.index(self)
+    module_items_in_this_training_module.index(self)
+  end
+
+  def module_items_in_this_training_module
+    @module_items_in_this_training_module ||= self.class.where(training_module: training_module).to_a
   end
 end

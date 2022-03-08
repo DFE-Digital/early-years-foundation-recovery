@@ -6,7 +6,6 @@ class ContentPagesController < ApplicationController
     redirect_to training_module_content_page_path(training_module, first_module_item)
   end
 
-
   def show
     @model = module_item.model
 
