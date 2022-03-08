@@ -23,4 +23,12 @@ module ApplicationHelper
       ]
     )
   end
+
+  def link_to_next_module_item(module_item)
+    if module_item.next_item
+      link_to "Next", training_module_content_page_path(module_item.training_module, module_item.next_item)
+    else
+      link_to "Finish", training_modules_path
+    end
+  end
 end

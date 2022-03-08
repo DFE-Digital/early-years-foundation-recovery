@@ -1,7 +1,7 @@
 %h1=@questionnaire.heading
 %p=@questionnaire.content
 
-= form_with model: @questionnaire do |form|
+= form_with model: @questionnaire, url: training_module_questionnaire_path(@training_module, @questionnaire) do |form|
   - if @questionnaire.errors.present?
     .errors=@questionnaire.errors.messages
   - @questionnaire.questions.each do |question, data|

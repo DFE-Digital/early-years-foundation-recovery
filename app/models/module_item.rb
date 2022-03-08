@@ -12,8 +12,8 @@ class ModuleItem < YamlBase
   # Override ActiveYaml::Base load_file method to get data nested within file and use parent keys to populate attributes
   def self.load_file
     data = raw_data.map do |training_module, items|
-      items.map do |id, values|
-        values.merge(id: id.to_s, training_module: training_module)
+      items.map do |name, values|
+        values.merge(name: name.to_s, training_module: training_module)
       end
     end
     data.flatten! # Using flatten! as more memory efficient.
@@ -23,7 +23,7 @@ class ModuleItem < YamlBase
   def model
     klass = MODELS[type.to_sym]
     if klass == Questionnaire
-      Questionnaire.find_by(name: id)
+      Questionnaire.find_by(name: name)
     else
       klass.new(attributes)
     end
@@ -31,14 +31,14 @@ class ModuleItem < YamlBase
   delegate :valid?, to: :model
 
   def next_item
-    self.class.all.to_a[place_in_flow + 1]
+    module_items_in_this_training_module[place_in_flow + 1]
   end
 
   def place_in_flow
-    self.class.all.to_a.index(self)
+    module_items_in_this_training_module.index(self)
   end
-  
-  def to_param
-    id
+
+  def module_items_in_this_training_module
+    @module_items_in_this_training_module ||= self.class.where(training_module: training_module).to_a
   end
 end
