@@ -1,4 +1,12 @@
 class ContentPagesController < ApplicationController
+  before_action :authenticate_registered_user!
+
+  def index
+    first_module_item = ModuleItem.find_by(training_module: training_module)
+    redirect_to training_module_content_page_path(training_module, first_module_item)
+  end
+
+
   def show
     @model = module_item.model
 
@@ -12,7 +20,7 @@ class ContentPagesController < ApplicationController
   private
 
   def module_item
-    @module_item ||= ModuleItem.find_by(training_module: training_module, id: params[:id])
+    @module_item ||= ModuleItem.find_by!(training_module: training_module, id: params[:id])
   end
 
   def training_module
