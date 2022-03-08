@@ -21,7 +21,7 @@ class QuestionnairesController < ApplicationController
   end
 
   def next_module_item
-    current_module_item = ModuleItem.find_by(training_module: training_module, id: questionnaire.name)
+    current_module_item = ModuleItem.find_by(training_module: training_module, name: questionnaire.name)
     current_module_item.next_item
   end
 

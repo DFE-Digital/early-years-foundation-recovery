@@ -6,13 +6,13 @@ RSpec.describe ContentPage, type: :model do
 
   describe "#heading" do
     it "returns the heading data from the content file" do
-      expect(content_page.heading).to eq(content.dig(content_page.id.to_s, 'heading'))
+      expect(content_page.heading).to eq(content.dig(content_page.name.to_s, 'heading'))
     end
   end
 
   describe "#body" do
     it "returns the body data from the content file" do
-      expect(content_page.body).to eq(content.dig(content_page.id.to_s, 'body'))
+      expect(content_page.body).to eq(content.dig(content_page.name.to_s, 'body'))
     end
   end
 end

@@ -20,7 +20,7 @@ class ContentPagesController < ApplicationController
   private
 
   def module_item
-    @module_item ||= ModuleItem.find_by!(training_module: training_module, id: params[:id])
+    @module_item ||= ModuleItem.find_by!(training_module: training_module, name: params[:id])
   end
 
   def training_module

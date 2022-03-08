@@ -18,7 +18,7 @@ RSpec.describe "ContentPages", type: :request do
     let(:module_item) { ModuleItem.find_by(training_module: :test, type: :text_page) }
 
     it "renders a template successfully" do
-      get training_module_content_page_path(:test, module_item.id)
+      get training_module_content_page_path(:test, module_item)
       expect(response).to have_http_status(:success)
     end
 
@@ -26,7 +26,7 @@ RSpec.describe "ContentPages", type: :request do
       let(:module_item) { ModuleItem.find_by(training_module: :test, type: :formative_assessment) }
 
       it "redirects to questionnaire controller" do
-        get training_module_content_page_path(:test, module_item.id)
+        get training_module_content_page_path(:test, module_item)
         expect(response).to redirect_to(training_module_questionnaire_path(:test, module_item.model))
       end
     end

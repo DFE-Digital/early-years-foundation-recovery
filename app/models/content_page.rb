@@ -2,12 +2,12 @@ class ContentPage
   include ActiveModel::Validations
   include ActiveModel::Model
 
-  attr_accessor :id, :type, :training_module
+  attr_accessor :id, :name, :type, :training_module
 
   validates :heading, :body, presence: true
 
   def i18n_scope
-    [:modules, training_module, id]
+    [:modules, training_module, name]
   end
 
   def heading

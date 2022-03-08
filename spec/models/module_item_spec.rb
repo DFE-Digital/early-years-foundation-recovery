@@ -5,7 +5,7 @@ RSpec.describe ModuleItem, type: :model do
   let(:module_item) { described_class.where(training_module: :test).first }
 
   it "loads data from file" do
-    expect(module_item.type).to eq(yaml_data.dig('test', module_item.id, 'type'))
+    expect(module_item.type).to eq(yaml_data.dig('test', module_item.name, 'type'))
   end
 
   describe "#next_item" do
@@ -26,7 +26,7 @@ RSpec.describe ModuleItem, type: :model do
 
     it "includes module item data" do
       expect(model.type).to eq(module_item.type)
-      expect(model.id).to eq(module_item.id)
+      expect(model.name).to eq(module_item.name)
     end
 
     context "when model is a questionniare" do
@@ -37,7 +37,7 @@ RSpec.describe ModuleItem, type: :model do
       end
 
       it "matches the module item" do
-        expect(model.name).to eq(module_item.id)
+        expect(model.name).to eq(module_item.name)
       end
     end
   end

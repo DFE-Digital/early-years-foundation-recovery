@@ -32,7 +32,7 @@ RSpec.describe "Questionnaires", type: :request do
       questionnaire.questions.transform_values { |_a| :foo }
     end
 
-    let(:module_item) { ModuleItem.find_by(training_module: questionnaire.training_module, id: questionnaire.name) }
+    let(:module_item) { ModuleItem.find_by(training_module: questionnaire.training_module, name: questionnaire.name) }
     
     it "does something without error" do
       patch training_module_questionnaire_path(:test, questionnaire), params: { questionnaire: correct_answers }
