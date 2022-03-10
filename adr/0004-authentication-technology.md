@@ -1,4 +1,4 @@
-# Use Docker and Docker Compose
+# Use Devise for authentication
 
 * Status: accepted
 
