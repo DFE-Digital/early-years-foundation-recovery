@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: "registrations" }
   resources :extra_registrations, only: [:index, :edit, :update]
+  resource :user, only: [:show, :edit, :update], controller: :user
 
   resources :modules, only: [:index], as: :training_modules, controller: :training_modules do
     resources :content_pages, only: [:index, :show]

@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe "Questionnaires", type: :request do
   let(:questionnaire) { Questionnaire.find_by(name: :test, training_module: :test) }
 
+  before do
+    sign_in create(:user, :registered)
+  end
+
   describe "GET /questionnaires/:id" do
     it "returns http success" do
       get training_module_questionnaire_path(:test, questionnaire)
