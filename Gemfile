@@ -76,3 +76,5 @@ group :test do
   gem "rspec-rails"
   gem "factory_bot_rails"
 end
+
+gem "govuk_notify_rails", "~> 2.2"
