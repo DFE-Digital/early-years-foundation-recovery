@@ -26,6 +26,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
 
     set_personalisation(
       email_subject: 'Confirm account',
+      name: record.name,
       confirmation_url: confirmation_url(record, confirmation_token: token)
     )
     mail(to: record.email)
