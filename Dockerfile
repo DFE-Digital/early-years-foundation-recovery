@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 FROM ruby:3.1.0-alpine as base
 
-RUN apk add --no-cache --no-progress build-base tzdata postgresql-dev yarn
+RUN apk add --no-cache --no-progress build-base tzdata postgresql-dev yarn gcompat
 
 # ------------------------------------------------------------------------------
 # Production Stage
@@ -35,8 +35,8 @@ COPY data ${APP_HOME}/data
 COPY config ${APP_HOME}/config
 COPY db ${APP_HOME}/db
 COPY app ${APP_HOME}/app
-COPY package.json /${APP_HOME}/package.json
-COPY yarn.lock /${APP_HOME}/yarn.lock
+COPY package.json ${APP_HOME}/package.json
+COPY yarn.lock ${APP_HOME}/yarn.lock
 
 RUN yarn; \
     yarn build; \

@@ -11,6 +11,8 @@ then
     bundle
   fi
 
+  yarn
+
   rm -f tmp/pids/server.pid
 fi
 
