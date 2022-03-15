@@ -10,9 +10,10 @@ RUN apk add --no-cache --no-progress build-base tzdata postgresql-dev yarn gcomp
 # ------------------------------------------------------------------------------
 FROM base AS app
 
+# ENV RAILS_ENV
+# ENV RAILS_MASTER_KEY
+
 ENV APP_HOME /src
-ENV RAILS_ENV ${RAILS_ENV:-production}
-ENV RAILS_MASTER_KEY ${RAILS_MASTER_KEY}
 ENV PATH $PATH:/usr/local/bundle/bin:/usr/local/bin
 
 RUN mkdir -p ${APP_HOME}/tmp/pids ${APP_HOME}/log
