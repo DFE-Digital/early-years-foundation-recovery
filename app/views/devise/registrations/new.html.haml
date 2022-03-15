@@ -1,21 +1,14 @@
-%h2 Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+.govuk-grid-row 
+  .govuk-grid-column-two-thirds-from-desktop 
+    = govuk_back_link(href: root_path)
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      = render "devise/shared/error_messages", resource: resource
+      = f.govuk_error_summary
+      = f.govuk_fieldset legend: { text: 'Create an early years training account', tag: :h1, size: 'l' } do
+        %p.govuk-body
+          Create an account to access training courses.
+        = f.govuk_email_field :email, autofocus: true, autocomplete: "email", label: { text: "Email address" }, width: 'one-half'
+        = f.govuk_password_field :password, autocomplete: "new-password", label: { text: "Create password" }, width: 'one-half', hint: { text: "(#{@minimum_password_length} characters minimum)" }
+        = f.govuk_password_field :password_confirmation, autocomplete: "new-password", label: { text: "Re-type password" }, width: 'one-half'
+      = f.govuk_submit "Continue"
+    = render "devise/shared/links"

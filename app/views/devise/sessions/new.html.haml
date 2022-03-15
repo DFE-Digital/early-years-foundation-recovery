@@ -1,30 +1,21 @@
 .govuk-grid-row 
   .govuk-grid-column-two-thirds-from-desktop
     = govuk_back_link(href: root_path)
-    %h1.govuk-heading-l Sign in to early years training
-    %p Enter your details to sign in to your personal early years training account. These details are different to any other GOV.UK accounts you may use.
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-      .govuk-form-group
-        %h1.govuk-label-wrapper
-          = f.label :email, class: 'govuk-label'
-          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'govuk-input'
-      .govuk-form-group
-        %h1.govuk-label-wrapper
-          = f.label :password, class: 'govuk-label'
-        %br/
-        = f.password_field :password, autocomplete: "current-password", class: 'govuk-input'
-      - if devise_mapping.rememberable?
+      = f.govuk_error_summary
+      = f.govuk_fieldset legend: { text: 'Sign in to early years training', tag: :h1, size: "l" } do
+        %p.govuk-body
+          Enter your details to sign in to your personal early years training account. These details are different to any other GOV.UK accounts you may use.
+        = f.govuk_email_field :email, autofocus: true, autocomplete: "email", label: { text: "Email address" }, width: 'one-half'
+        = f.govuk_password_field :password, autocomplete: "current-password", label: { text: "Password" }, width: 'one-half'
         .govuk-form-group
           = f.check_box :remember_me
           = f.label :remember_me
-      .actions
-        - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+        %p.govuk-body
           = link_to "Forgot your password?", new_user_password_path(resource_name)
-        - if devise_mapping.confirmable? && controller_name != 'confirmations'
+        %p.govuk-body
           = link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name)
-        - if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks'
-          = link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name)
-        = f.submit "Sign in", class: 'govuk-button'
+        = f.govuk_submit "Sign in"
   .govuk-grid-column-one-third-from-desktop
     .app-sidebar 
       %h2.govuk-heading-m
