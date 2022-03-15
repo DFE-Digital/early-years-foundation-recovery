@@ -50,10 +50,10 @@ jobs:
       - name: Prepare test database
         run: bin/rails db:prepare
         env:
-          DATABASE_URL: postgres://postgres:@localhost:5432/test
+          DATABASE_URL: postgres://postgres:password@localhost:5432/test
 
       # ------------------------------------------------------------------------
       - name: Run test suite
         run: bundle exec rspec
         env:
-          DATABASE_URL: postgres://postgres:@localhost:5432/test
+          DATABASE_URL: postgres://postgres:password@localhost:5432/test
