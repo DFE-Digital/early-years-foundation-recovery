@@ -1,0 +1,43 @@
+---
+name: Rspec within Docker
+on:
+  - push
+  - pull_request
+
+jobs:
+  test:
+    name: Run rspec test suite
+    runs-on: ubuntu-latest
+
+    steps:
+      # ------------------------------------------------------------------------
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      # ------------------------------------------------------------------------
+      - id: cache-docker
+        uses: actions/cache@v2
+        with:
+          path: /tmp/docker-save
+          key: docker-save-${{ hashFiles('Dockerfile', 'Gemfile.lock', 'yarn.lock') }}
+
+      # ------------------------------------------------------------------------
+      - name: Load cached Docker image
+        run: docker load -i /tmp/docker-save/snapshot.tar || true
+        if: steps.cache-docker.outputs.cache-hit == 'true'
+
+      # ------------------------------------------------------------------------
+      - name: Build application Docker image
+        run: docker-compose -f docker-compose.yml -f docker-compose.test.yml --project-name recovery build
+
+      # ------------------------------------------------------------------------
+      - name: Run Rspec suite
+        run: docker-compose -f docker-compose.yml -f docker-compose.test.yml run --rm app rspec
+
+      # ------------------------------------------------------------------------
+      - name: Update cached application Docker image
+        run: |
+          mkdir -p /tmp/docker-save
+          docker save recovery_app:latest -o /tmp/docker-save/snapshot.tar
+          ls -lh /tmp/docker-save
+        if: always() && steps.cache-docker.outputs.cache-hit != 'true'
