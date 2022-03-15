@@ -30,9 +30,23 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            current_password:
+              blank: Current password cannot be blank if changing.
+            email:
+              blank: Email address must not be blank.
+            password:
+              blank: Password must not be blank.
+              too_short: Password is too short.
+            password_confirmation:
+              confirmation: Confirmation doesn't match password.
   banners:
     alert: Warning
     error: Error
     important: Important
     notice: Important
+  ofsted_number: OFSTED Number

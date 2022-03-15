@@ -1,5 +1,3 @@
-= f.label :first_name
-= f.text_field :first_name
-%br/
-= f.label :last_name
-= f.text_field :last_name
+= f.govuk_fieldset legend: { text: "Name", tag: :h1, size: 'l' } do
+  = f.govuk_text_field :first_name, width: 'one-half'
+  = f.govuk_text_field :last_name, width: 'one-half'
