@@ -18,6 +18,10 @@ class ContentPage
     translate(:body)
   end
 
+  def image
+    translate(:image)
+  end
+
   def translate(label)
     # Suppress translation returning "translation missing" message so validation for presence works
     return unless I18n.exists?([i18n_scope, label])

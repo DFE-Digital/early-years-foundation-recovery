@@ -6,6 +6,9 @@ This log lists the architectural decisions for EYFS Recovery
 
 * [ADR-0001](0001-use-ruby-on-rails.md) - Use Ruby-on-Rails as the primary development language and framework
 * [ADR-0002](0002-use-docker.md) - Use Docker and Docker Compose
+* [ADR-0003](0003-video-hosting-platform.md) - Use YouTube for video  hosting platform
+* [ADR-0004](0004-authentication-technology.md) - Authentication technology
+* [ADR-0005](0005-content-storage-strategy.md) - Content storage strategy
 
 <!-- adrlogstop -->
 
