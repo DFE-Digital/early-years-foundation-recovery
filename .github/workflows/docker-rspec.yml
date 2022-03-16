@@ -17,7 +17,8 @@ jobs:
         uses: actions/checkout@v2
       -
         name: Build application Docker image
-        run: ./bin/docker-build
+        run: docker-compose -f docker-compose.yml -f docker-compose.test.yml --project-name recovery build
       -
         name: Run Rspec suite
-        run: ./bin/docker-rspec
+        run: docker-compose -f docker-compose.yml -f docker-compose.test.yml --project-name recovery run --rm app rspec -f doc
+

@@ -13,8 +13,6 @@ services:
     environment:
       - RAILS_ENV=production
       - RAILS_MASTER_KEY
-    volumes:
-      - .:/src
     depends_on:
       - db
     networks:

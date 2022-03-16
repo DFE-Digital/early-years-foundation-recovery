@@ -4,8 +4,6 @@ services:
     container_name: recovery_test
     build:
       target: test
-      cache_from:
-        - recovery:test
     image: recovery:test
     command: rspec
     environment:
