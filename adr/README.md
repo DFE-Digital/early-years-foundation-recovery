@@ -9,10 +9,12 @@ This log lists the architectural decisions for EYFS Recovery
 * [ADR-0003](0003-video-hosting-platform.md) - Use YouTube for video  hosting platform
 * [ADR-0004](0004-authentication-technology.md) - Authentication technology
 * [ADR-0005](0005-content-storage-strategy.md) - Content storage strategy
+* [ADR-0006](0006-secrets-management.md) - Secrets Management
+* [ADR-0007](0007-deployment-environments.md) - Deployment environments
 
 <!-- adrlogstop -->
 
-For new ADRs, please use [adr-template.md](adr-template.md) as basis.
+For new ADRs, please use [0000-template.md](0000-template.md) as basis.
 More information on MADR is available at <https://adr.github.io/madr/>.
 General information about architectural decision records is available at <https://adr.github.io/>.
 
