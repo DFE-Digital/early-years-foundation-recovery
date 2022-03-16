@@ -48,6 +48,7 @@ gem "govuk-components", ">= 3.0.3"
 gem "govuk_design_system_formbuilder"
 gem "govspeak" # Convert govspeak markdown to HTML
 gem 'rexml' # Required for govspeak to work
+gem "sass-rails", "~> 6.0" # required by the Govspeak dependency Sprockets
 
 group :development, :test do
   # Use fake data for specs
