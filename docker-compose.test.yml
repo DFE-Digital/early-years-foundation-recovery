@@ -9,8 +9,8 @@ services:
     image: recovery:test
     command: rspec
     environment:
-      RAILS_ENV: test
-      DATABASE_URL: postgres://postgres:password@db:5432/early_years_foundation_recovery_test
+      - RAILS_ENV=test
+      - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_test
 
   db:
     volumes:

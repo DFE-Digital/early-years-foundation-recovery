@@ -1,0 +1,19 @@
+---
+name: Rspec within Docker
+on:
+  - push
+
+jobs:
+  test:
+    name: Run the test suite inside Docker
+    runs-on: ubuntu-latest
+    env:
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+    steps:
+      -
+        name: Check out code
+        uses: actions/checkout@v2
+      -
+        name: Run Rspec suite
+        run: ./bin/docker-rspec

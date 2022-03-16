@@ -7,9 +7,9 @@ services:
     image: recovery:dev
     command: foreman start -f Procfile.dev
     environment:
-      RAILS_ENV: development
-      DATABASE_URL: postgres://postgres:password@db:5432/early_years_foundation_recovery_development
-      RAILS_SERVE_STATIC_FILES: "true"
+      - RAILS_ENV=development
+      - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
+      - RAILS_SERVE_STATIC_FILES=true
     ports:
       - 3000:3000
     tty: true
