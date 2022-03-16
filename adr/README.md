@@ -15,6 +15,7 @@ This log lists the architectural decisions for EYFS Recovery
 <!-- adrlogstop -->
 
 For new ADRs, please use [0000-template.md](0000-template.md) as basis.
+If using the ```adr-log``` tool ([here](https://adr.github.io/adr-log/)) then run ```adr-log -i README.md``` to update the TOC after adding am ADR.
 More information on MADR is available at <https://adr.github.io/madr/>.
 General information about architectural decision records is available at <https://adr.github.io/>.
 
