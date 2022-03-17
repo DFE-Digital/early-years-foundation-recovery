@@ -23,6 +23,10 @@ class Questionnaire < YamlBase
     self[:questions]
   end
 
+  def module_item
+    @module_item ||= ModuleItem.find_by(training_module: training_module, name: name)
+  end
+
   def errors
     @errors ||= ActiveModel::Errors.new(self)
   end
