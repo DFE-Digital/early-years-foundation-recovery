@@ -15,11 +15,26 @@ RSpec.describe ModuleItem, type: :model do
       expect(module_item.next_item).to eq(next_module_item)
     end
 
-    context "when items is last item" do
+    context "when item is last item" do
       let(:last_module_item) { described_class.where(training_module: :test).last }
 
       it "returns nil" do
         expect(last_module_item.next_item).to be_nil
+      end
+    end
+  end
+
+  describe "#previous_item" do
+    let(:first_module_item) { module_item }
+    let(:second_module_item) { described_class.where(training_module: :test).to_a[1] }
+
+    it "returns the previous module item" do
+      expect(second_module_item.previous_item).to eq(first_module_item)
+    end
+
+    context "when item is first item" do
+      it "returns nil" do
+        expect(first_module_item.previous_item).to be_nil
       end
     end
   end

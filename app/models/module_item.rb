@@ -34,6 +34,12 @@ class ModuleItem < YamlBase
     module_items_in_this_training_module[place_in_flow + 1]
   end
 
+  def previous_item
+    return if place_in_flow.zero?
+
+    module_items_in_this_training_module[place_in_flow - 1]
+  end
+
   def place_in_flow
     module_items_in_this_training_module.index(self)
   end

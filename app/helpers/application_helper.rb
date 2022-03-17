@@ -31,4 +31,13 @@ module ApplicationHelper
       link_to "Finish", training_modules_path
     end
   end
+
+  def link_to_previous_module_item(module_item)
+    link = if module_item.previous_item
+      training_module_content_page_path(module_item.training_module, module_item.previous_item)
+    else
+      training_modules_path
+    end
+    link_to "Previous", link
+  end
 end
