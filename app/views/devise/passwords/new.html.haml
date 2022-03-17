@@ -1,0 +1,8 @@
+- content_for :devise_form do 
+  = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+    = f.govuk_error_summary 
+    = f.govuk_fieldset legend: { text: 'Forgot your password?', tag: :h1, size: "l" } do
+      = f.govuk_email_field :email, autofocus: true, autocomplete: "email", width: 'one-half'
+    = f.govuk_submit "Send me reset password instructions"
+
+= render "devise/shared/form_wrap"

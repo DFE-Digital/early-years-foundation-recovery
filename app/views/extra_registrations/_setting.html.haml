@@ -1,5 +1,3 @@
-= f.label :postcode
-= f.text_field :postcode
-%br/
-= f.label :ofsted_number
-= f.text_field :ofsted_number
+= f.govuk_fieldset legend: { text: "Setting", tag: :h1, size: 'l' } do
+  = f.govuk_text_field :postcode, width: 'one-half'
+  = f.govuk_text_field :ofsted_number, width: 'one-half'
