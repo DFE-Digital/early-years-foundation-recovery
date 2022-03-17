@@ -1,0 +1,8 @@
+--title "Early Years Foundation Recovery"
+--plugin junk
+--protected
+--private
+--markup markdown
+-
+adr/*.md
+LICENSE

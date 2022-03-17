@@ -74,5 +74,7 @@ RUN bundle config unset without
 RUN bundle config set without development
 RUN bundle install --no-binstubs --retry=10 --jobs=4
 
-COPY .rspec ${APP_HOME}/.rspec
 COPY spec ${APP_HOME}/spec
+COPY .rspec ${APP_HOME}/.rspec
+COPY .rubocop.yml ${APP_HOME}/.rubocop.yml
+COPY .rubocop_todo.yml ${APP_HOME}/.rubocop_todo.yml

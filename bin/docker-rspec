@@ -1,5 +1,10 @@
 #!/bin/sh
 # ------------------------------------------------------------------------------
+# If the working directory is not mounted as a volume, then `RAILS_MASTER_KEY`
+# environment variable must be set using:
+#
+# "-e RAILS_MASTER_KEY=xxxx"
+#
 set -e
 
 docker-compose \
@@ -10,4 +15,3 @@ docker-compose \
   --volume="$PWD:/src" \
   --rm app \
   rspec "$@"
-

@@ -1,11 +1,11 @@
 ---
-name: Rspec within Docker
+name: Rspec & Rubocop within Docker
 on:
   - push
 
 jobs:
   test:
-    name: Run the test suite inside Docker
+    name: Run the test suite and linting check
     runs-on: ubuntu-latest
     environment: test
     env:
@@ -20,5 +20,7 @@ jobs:
         run: docker-compose -f docker-compose.yml -f docker-compose.test.yml --project-name recovery build
       -
         name: Run Rspec suite
-        run: docker-compose -f docker-compose.yml -f docker-compose.test.yml --project-name recovery run --rm app rspec -f doc
-
+        run: docker-compose -f docker-compose.yml -f docker-compose.test.yml --project-name recovery run --rm app rspec
+      -
+        name: Run Rubocop linting
+        run: docker-compose -f docker-compose.yml -f docker-compose.test.yml --project-name recovery run --rm app rubocop
