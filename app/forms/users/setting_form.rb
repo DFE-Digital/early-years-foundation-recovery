@@ -5,7 +5,7 @@ module Users
     validates :postcode, presence: true
 
     def save
-      user.update(postcode: postcode, ofsted_number: ofsted_number) if valid?
+      user.update(postcode:, ofsted_number:) if valid?
     end
   end
 end

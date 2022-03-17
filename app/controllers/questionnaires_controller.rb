@@ -19,11 +19,11 @@ class QuestionnairesController < ApplicationController
   private
 
   def questionnaire
-    @questionnaire ||= Questionnaire.find_by!(name: params[:id], training_module: training_module)
+    @questionnaire ||= Questionnaire.find_by!(name: params[:id], training_module:)
   end
 
   def next_module_item
-    current_module_item = ModuleItem.find_by(training_module: training_module, name: questionnaire.name)
+    current_module_item = ModuleItem.find_by(training_module:, name: questionnaire.name)
     current_module_item.next_item
   end
 
