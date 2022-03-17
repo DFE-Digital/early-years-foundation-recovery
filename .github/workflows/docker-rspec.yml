@@ -1,7 +1,9 @@
 ---
 name: Rspec & Rubocop within Docker
 on:
-  - push
+  workflow_dispatch:
+  push:
+  pull_request:
 
 jobs:
   test:
