@@ -11,7 +11,7 @@ How might we host video for incorporation into the module content
 * Infrastructure cost
 * Integration with content
 * Maintenance cost
-* Impact if videos are publically available outside of the module structure
+* Impact if videos are publicly available outside of the module structure
 
 ## Considered Options
 
