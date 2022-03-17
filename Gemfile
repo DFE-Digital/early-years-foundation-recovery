@@ -82,3 +82,14 @@ end
 gem "govuk_notify_rails", "~> 2.2", ">= 2.2.0"
 
 gem 'sass-rails'
+
+
+group :ui_auto do
+  gem 'capybara'
+  gem 'pry'
+  gem 'require_all'
+  gem 'rspec'
+  gem 'rubocop'
+  gem 'selenium-webdriver'
+  gem 'site_prism'
+end
