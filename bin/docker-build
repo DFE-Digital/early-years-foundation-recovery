@@ -3,5 +3,9 @@
 set -e
 
 for env in dev test; do
-  docker-compose -f docker-compose.yml -f docker-compose.$env.yml build
+  docker-compose \
+  -f docker-compose.yml \
+  -f docker-compose.$env.yml \
+  --project-name recovery \
+  build
 done

@@ -28,4 +28,4 @@ Chosen option: Create content as a mix of YAML and GovSpeak and mechanically tra
 * The integration of a CMS would be a non-complex task, as would modifying the EYFS Reforms CMS to support these additional requirements in the timescales we currently have.
 * Creating GDS compliant HTML directly would require intensive developer support.
 
-Using a text based YAML+GovSpeak file and building a translation and navigation engine would give the Content Editors a simple structure by which then could create content but, once the engine is developed, minimal developer support would be needed to add extra content. 
+Using a text based YAML+GovSpeak file and building a translation and navigation engine would give the Content Editors a simple structure by which then could create content but, once the engine is developed, minimal developer support would be needed to add extra content.

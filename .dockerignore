@@ -1,6 +1,8 @@
 .bundle
 .git
 adr
+config/master.key
+config/credentials/*.key
 log
 node_modules
 tmp

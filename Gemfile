@@ -46,8 +46,9 @@ gem 'active_hash'
 
 gem "govuk-components", ">= 3.0.3"
 gem "govuk_design_system_formbuilder"
-gem "govspeak" # Convert govspeak markdown to HTML
-gem 'rexml' # Required for govspeak to work
+
+gem "govspeak"              # Convert govspeak markdown to HTML
+gem 'rexml'                 # Required for govspeak to work
 
 group :development, :test do
   # Use fake data for specs
@@ -79,3 +80,4 @@ group :test do
 end
 
 gem "govuk_notify_rails", "~> 2.2", ">= 2.2.0"
+

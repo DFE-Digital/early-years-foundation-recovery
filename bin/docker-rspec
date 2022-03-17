@@ -7,5 +7,7 @@ docker-compose \
   -f docker-compose.test.yml \
   --project-name recovery \
   run \
+  --volume="$PWD:/src" \
   --rm app \
   rspec "$@"
+
