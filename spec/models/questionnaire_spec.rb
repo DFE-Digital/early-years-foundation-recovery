@@ -23,4 +23,9 @@ RSpec.describe Questionnaire, type: :model do
     correct_answers = yaml_data.dig('test', 'test', 'questions', 'one_from_many', 'correct_answers')
     expect(questionnaire.questions.dig(:one_from_many, :correct_answers)).to eq(correct_answers)
   end
+
+  it "is associated with matching module item" do
+    module_item = ModuleItem.find_by(training_module: :test, name: :test)
+    expect(questionnaire.module_item).to eq(module_item)
+  end
 end
