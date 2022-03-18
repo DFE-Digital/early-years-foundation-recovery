@@ -1,18 +1,25 @@
-require_relative '../ui_auto_helper'
+# frozen_string_literal: true
 
 describe Pages::Home do
-  context 'Just testing home Page instantiation' do
-
-    it "should say 'Hello World' when we call the say_hello method" do
+  context 'Dfe Homepage' do
+    before(:each) do
       @home_page = Pages::Home.new
-      @home_page.load
-      @home_page.header.logo.click
-      sleep(2)
-      @home_page.header.training_module.click
-      sleep(2)
-      @home_page.header.sign_in.click
-      sleep(2)
     end
 
+    it 'Should be displayed when the user navigates to the hame page and clicks the header logo' do
+      @home_page.load
+      @home_page.header.logo.click
+
+      expect(@home_page).to be_displayed
+    end
+
+    it 'should navigate away from the home page when the user clicks sign in' do
+      @home_page.load
+      @home_page.header.sign_in.click
+      @sign_in = Pages::SignIn.new
+      @sign_in.wait_until_header_visible
+
+      expect(@sign_in).to be_displayed
+    end
   end
 end

@@ -1,4 +1,4 @@
-module Page
+module Sections
   class Header < SitePrism::Section
     element :title_link, ".govuk-header__link govuk-header__link--service-name"
     element :logo, ".govuk-header__logotype-text"

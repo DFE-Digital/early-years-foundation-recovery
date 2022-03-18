@@ -4,18 +4,11 @@
 module Helpers
   # Configuration helper utility
   class ConfigHelper
-    # include Singleton
+    include Singleton
 
-=begin
-    def initialize
-    end
-
-    def config_file_path(file_name)
-    end
-=end
-
-    def self.config_file_contents(file_name)
-      config_yaml = File.join(File.expand_path(Dir.pwd, '..'), "/ui_automation/config_files/#{file_name}.yml")
+    def self.env_config
+      full_parent_dir_path = File.expand_path(Dir.pwd, '..')
+      config_yaml = File.join(full_parent_dir_path, '/ui_automation/config_files/environment.yml')
       raise 'the config yaml file could not be found' unless File.exist?(config_yaml)
 
       YAML.load_file(File.open(config_yaml))[ENV['ENV']]

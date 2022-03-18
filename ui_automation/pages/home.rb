@@ -1,7 +1,8 @@
 module Pages
   class Home < SitePrism::Page
-    set_url 'http://localhost:3000'
+    set_url Helpers::ConfigHelper.env_config['base_url']
+    set_url_matcher %r{/}
 
-    section :header, Page::Header, '.govuk-header'
+    section :header, Sections::Header, '.govuk-header'
   end
 end

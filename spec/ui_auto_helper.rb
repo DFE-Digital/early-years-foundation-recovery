@@ -7,21 +7,22 @@ require 'site_prism/all_there'
 require 'yaml'
 require 'require_all'
 
-require_relative '../ui_automation/helpers/config_helper'
-require_relative '../ui_automation/drivers/capybara_drivers'
+# default driver if none chosen
+ENV['BROWSER'] ||= 'chrome'
+# default environment for tests
+ENV['ENV'] ||= 'local'
 
+require_relative '../ui_automation/helpers/config_helper'
+require_rel '../ui_automation/drivers'
+
+# after loading all the driver classes register them all immediately.
 Drivers::CapybaraDrivers.register_all
 
 require_rel '../ui_automation/sections'
 require_rel '../ui_automation/pages'
 
-# default driver if none chosen
-ENV['BROWSER'] ||= 'chrome'
-ENV['ENV'] ||= 'local'
 
-p Helpers::ConfigHelper.config_file_contents('environment')
-
-# Then tell Capybara to use the Driver you've just defined as its default driver
+# Then tell Capybara to use your driver of choice
 Capybara.configure do |config|
-  config.default_driver = ENV['BROWSER'].to_sym
+  config.default_driver = Drivers::CapybaraDrivers.chosen_driver
 end

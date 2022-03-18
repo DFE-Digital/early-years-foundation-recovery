@@ -1,7 +1,8 @@
+# Pages namespace
 module Pages
-  class Home < SitePrism::Page
-    set_url 'http://localhost:3000'
+  class SignIn < SitePrism::Page
+    set_url_matcher(%r{users/sign_in})
 
-    section :header, Page::Header, '.govuk-header'
+    section :header, Sections::Header, '.govuk-header'
   end
 end
