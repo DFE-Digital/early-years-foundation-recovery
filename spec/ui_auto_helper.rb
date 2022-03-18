@@ -1,22 +1,27 @@
 require 'spec_helper'
-
 require 'capybara'
 require 'capybara/rspec'
 require 'selenium-webdriver'
 require 'site_prism'
 require 'site_prism/all_there'
+require 'yaml'
 require 'require_all'
+
+require_relative '../ui_automation/helpers/config_helper'
+require_relative '../ui_automation/drivers/capybara_drivers'
+
+Drivers::CapybaraDrivers.register_all
 
 require_rel '../ui_automation/sections'
 require_rel '../ui_automation/pages'
 
+# default driver if none chosen
+ENV['BROWSER'] ||= 'chrome'
+ENV['ENV'] ||= 'local'
 
-Capybara.register_driver :site_prism do |app|
-  browser = ENV.fetch('browser', 'firefox').to_sym
-  Capybara::Selenium::Driver.new(app, browser: browser, desired_capabilities: {})
-end
+p Helpers::ConfigHelper.config_file_contents('environment')
 
 # Then tell Capybara to use the Driver you've just defined as its default driver
 Capybara.configure do |config|
-  config.default_driver = :site_prism
+  config.default_driver = ENV['BROWSER'].to_sym
 end
