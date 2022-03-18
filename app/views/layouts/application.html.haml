@@ -15,7 +15,7 @@
 
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
-  %body.govuk-template__body
+  %body.govuk-template__body.govuk-body
     %script
       document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
     
