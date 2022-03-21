@@ -21,12 +21,12 @@ jobs:
       -
         name: Build image from Dockerfile
         run: |
-          docker build -t $DOCKER_IMAGE:${{ github.sha }} .
+          docker build -t ${{env.DOCKER_IMAGE}}:${{ github.sha }} .
       -
         name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: $DOCKER_IMAGE:${{ github.sha }}
+          image-ref: ${{env.DOCKER_IMAGE}}:${{ github.sha }}
           format: table
           exit-code: 1
           ignore-unfixed: true
