@@ -12,17 +12,17 @@
 # Turbo doesn't work with devise by default.
 # Keep tabs on https://github.com/heartcombo/devise/issues/5446 for a possible fix
 # Fix from https://gorails.com/episodes/devise-hotwire-turbo
-class TurboFailureApp < Devise::FailureApp 
+class TurboFailureApp < Devise::FailureApp
   def respond
     if request_format == :turbo_stream
       redirect
     else
-      super 
+      super
     end
   end
 
   def skip_format?
-    %w(html turbo_stream */*).include? request_format.to_s 
+    %w[html turbo_stream */*].include? request_format.to_s
   end
 end
 
@@ -297,8 +297,8 @@ Devise.setup do |config|
   #
   config.warden do |manager|
     manager.failure_app = TurboFailureApp
-  #   manager.intercept_401 = false
-  #   manager.default_strategies(scope: :user).unshift :some_external_strategy
+    #   manager.intercept_401 = false
+    #   manager.default_strategies(scope: :user).unshift :some_external_strategy
   end
 
   # ==> Mountable engine configurations

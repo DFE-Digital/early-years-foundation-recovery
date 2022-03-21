@@ -14,14 +14,14 @@ class NotifyMailer < GovukNotifyRails::Mailer
   #
   def test_email
     set_template(BLANK_TEMPLATE_ID)
-    @greeting = "Hi"
+    @greeting = 'Hi'
 
     set_personalisation(
       subject: 'This is just a test',
-      name: "Brett McHargue",
-      body: "this is the body?"
+      name: 'Brett McHargue',
+      body: 'this is the body?',
     )
-    mail to: "brett.mchargue@education.gov.uk"
+    mail to: 'brett.mchargue@education.gov.uk'
   end
 
   def confirmation_instructions(record, token, _opts = {})
@@ -30,7 +30,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
     set_personalisation(
       email_subject: 'Confirm account',
       name: record.name,
-      confirmation_url: confirmation_url(record, confirmation_token: token)
+      confirmation_url: confirmation_url(record, confirmation_token: token),
     )
     mail(to: record.email)
   end

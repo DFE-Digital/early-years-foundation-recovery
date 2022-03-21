@@ -17,13 +17,13 @@ module YamlFolder
   def set_filename(name)
     super
   end
-  alias_method :set_folder, :set_filename
 
-  private
+private
+
   # Loop through each file in the folder, extract a hash from each yaml file, and merge the hashes into a single hash
   def load_path(path)
-    results = Dir.glob(File.join(path, "*.yml")).map do |file|
-      YAML.load(ERB.new(File.read(file)).result)
+    results = Dir.glob(File.join(path, '*.yml')).map do |file|
+      YAML.safe_load(ERB.new(File.read(file)).result)
     end
     results.compact!
     results.reduce(:merge)

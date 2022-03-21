@@ -1,5 +1,5 @@
 class TrainingModule < YamlBase
-  set_filename "training-modules"
+  set_filename 'training-modules'
 
   def self.load_file
     # Override basic behaviour so that root key is stored as name

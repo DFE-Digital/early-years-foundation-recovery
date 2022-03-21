@@ -3,7 +3,7 @@ class Questionnaire < YamlBase
   # Required dependency for ActiveModel::Errors
   extend ActiveModel::Naming
 
-  set_folder "questionnaires"
+  set_folder 'questionnaires'
 
   def self.load_file
     data = raw_data.map do |training_module, questionnaires|
@@ -11,7 +11,7 @@ class Questionnaire < YamlBase
         data['name'] = name
         data['training_module'] = training_module
         data['questions'].deep_symbolize_keys!
-        data['questions'].keys.each { |question| data[question] = nil }
+        data['questions'].each_key { |question| data[question] = nil }
         data
       end
     end
