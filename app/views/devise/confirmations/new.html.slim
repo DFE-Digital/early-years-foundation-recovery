@@ -1,4 +1,4 @@
-- content_for :devise_form do 
+- content_for :devise_form do
   = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
     = f.govuk_error_summary
     = f.govuk_fieldset legend: { text: 'Resend confirmation instructions', tag: :h1, size: 'l' } do
