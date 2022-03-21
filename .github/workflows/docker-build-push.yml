@@ -4,10 +4,11 @@
 #
 # ghcr.io/dfe-digital/early-years-foundation-recovery-production:latest
 #
+# https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/docker-build-push.yml
+#
 name: Docker
 on:
-  - push
-  - pull_request
+  workflow_dispatch:
 
 jobs:
   test:
