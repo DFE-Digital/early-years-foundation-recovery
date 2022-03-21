@@ -1,0 +1,8 @@
+- content_for :devise_form do
+  = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+    = f.govuk_error_summary
+    = f.govuk_fieldset legend: { text: 'Resend confirmation instructions', tag: :h1, size: 'l' } do
+      = f.govuk_email_field :email, autofocus: true, autocomplete: "email", value: resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email, label: { text: "Email address" }, width: 'one-half'
+    = f.govuk_submit "Resend confirmation instructions"
+
+= render "devise/shared/form_wrap"

@@ -47,7 +47,7 @@ RSpec.describe "Questionnaires", type: :request do
       it "renders page with errors" do
         patch training_module_questionnaire_path(:test, questionnaire), params: { questionnaire: incorrect_answers }
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.body).to include("class='errors'")
+        expect(response.body).to include('class="errors"')
       end
     end
   end

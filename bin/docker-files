@@ -5,6 +5,6 @@ set -e
 USER=`whoami`
 GROUP=`id -gn`
 
-for dir in app/assets log node_modules public tmp; do
+for dir in app/assets coverage log node_modules public tmp; do
   sudo chown -R $USER:$GROUP $dir
 done

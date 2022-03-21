@@ -1,0 +1,11 @@
+.govuk-grid-row
+  .govuk-grid-column-two-thirds-from-desktop
+    = govuk_back_link(href: request.referrer)
+.govuk-grid-row
+  .govuk-grid-column-two-thirds-from-desktop
+    = yield :devise_form
+  .govuk-grid-column-one-third-from-desktop
+    = yield :devise_sidebar
+.govuk-grid-row
+  .govuk-grid-column-two-thirds-from-desktop
+    = render "devise/shared/links"

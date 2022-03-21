@@ -1,0 +1,30 @@
+---
+name: Rspec & Rubocop within Docker
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Run the test suite and linting check
+    runs-on: ubuntu-latest
+    environment: test
+    env:
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+    steps:
+      -
+        name: Check out code
+        uses: actions/checkout@v2
+      -
+        name: Build application Docker image
+        run: docker-compose -f docker-compose.yml -f docker-compose.test.yml --project-name recovery build
+      -
+        name: Run Rspec suite
+        run: docker-compose -f docker-compose.yml -f docker-compose.test.yml --project-name recovery run --rm app rspec
+      -
+        name: Run Rubocop linting
+        run: docker-compose -f docker-compose.yml -f docker-compose.test.yml --project-name recovery run --rm app rubocop

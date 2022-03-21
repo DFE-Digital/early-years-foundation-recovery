@@ -6,12 +6,12 @@
     "@hotwired/turbo-rails": "^7.1.0",
     "govuk-frontend": "^4.0.1",
     "esbuild": "^0.14.18",
-    "sass": "^1.49.7"
+    "sass": "^1.49.9"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --outdir=app/assets/builds",
     "build:css": "sass ./app/assets/stylesheets/application.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules",
-    "preinstall": "mkdir -p app/assets/builds/{fonts,images}",
+    "preinstall": "mkdir -p app/assets/builds",
     "postinstall": "cp -R node_modules/govuk-frontend/govuk/assets/fonts/. app/assets/builds/fonts && cp -R node_modules/govuk-frontend/govuk/assets/images/. app/assets/builds/images"
   }
 }
