@@ -38,6 +38,8 @@ module paas {
 terraform {
 
   backend "local" {
+    key  = "" # imitate S3 for the time being
+    path = "terraform.tfstate"
   }
 
   # backend "s3" {
