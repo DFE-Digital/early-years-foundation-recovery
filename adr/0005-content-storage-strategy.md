@@ -23,6 +23,7 @@ How might we introduce/store both module content and assessment content in the a
 ## Decision Outcome
 
 Chosen option: Create content as a mix of YAML and Markdown and mechanically translate to GDS compliant HTML.
+
 * A CMS would not natively support the creation of either questionnaire or navigation content, therefore this data would need to be stored and processed elsewhere. 
 * Any content stored in a CMS would also need to be translated into GDS compliant HTML. 
 * The integration of a CMS would be a non-complex task, as would modifying the EYFS Reforms CMS to support these additional requirements in the timescales we currently have.

@@ -1,42 +1,42 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.1.0"
+ruby '3.1.0'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", ">= 7.0.2.3"
+gem 'rails', '>= 7.0.2.3'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem "sprockets-rails"
+gem 'sprockets-rails'
 
 # Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
+gem 'pg', '~> 1.1'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 5.6"
+gem 'puma', '~> 5.6'
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails"
-gem "jsbundling-rails"
+gem 'importmap-rails'
+gem 'jsbundling-rails'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails"
+gem 'turbo-rails'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails"
-gem "cssbundling-rails"
+gem 'cssbundling-rails'
+gem 'stimulus-rails'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
+gem 'jbuilder'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", require: false
+gem 'bootsnap', require: false
 
 # User authentication
-gem "devise"
+gem 'devise'
 
 # HTML abstraction markup language
 gem "slim-rails", "~> 3.3"
@@ -44,28 +44,34 @@ gem "slim-rails", "~> 3.3"
 # Create models from static data such as hashes or YAML
 gem 'active_hash'
 
-gem "govuk-components", ">= 3.0.3"
-gem "govuk_design_system_formbuilder"
+gem 'govuk-components', '>= 3.0.3'
+gem 'govuk_design_system_formbuilder'
 
-gem "kramdown", "~> 2.3"      # Markdown support
+# Markdown support
+gem 'kramdown', '~> 2.3'
+
+gem 'govuk_notify_rails', '~> 2.2', '>= 2.2.0'
 
 group :development, :test do
   # Use fake data for specs
-  gem "faker"
-
-  gem "foreman"
-
-  gem "dotenv-rails", "~> 2.7", ">= 2.7.6"
+  gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
+  gem 'faker'
+  gem 'foreman'
+  gem 'pry-byebug'
+  gem 'pry-rails'
+  gem 'rubocop-govuk', require: false
+  gem 'rubocop-performance', require: false
 
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
-
+  gem 'debug', platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem "web-console"
-
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'web-console'
+  gem 'yard-junk'
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
@@ -74,9 +80,7 @@ group :development do
 end
 
 group :test do
-  gem "rspec-rails"
-  gem "factory_bot_rails"
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
+  gem 'simplecov'
 end
-
-gem "govuk_notify_rails", "~> 2.2", ">= 2.2.0"
-
