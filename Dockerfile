@@ -23,7 +23,6 @@ WORKDIR ${APP_HOME}
 COPY Gemfile $APP_HOME/Gemfile
 COPY Gemfile.lock $APP_HOME/Gemfile.lock
 
-RUN bundle config set frozen true
 RUN bundle config set no-cache true
 RUN bundle config set without development test
 RUN bundle install --no-binstubs --retry=10 --jobs=4

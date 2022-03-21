@@ -47,8 +47,8 @@ gem 'active_hash'
 gem 'govuk-components', '>= 3.0.3'
 gem 'govuk_design_system_formbuilder'
 
-gem 'govspeak'              # Convert govspeak markdown to HTML
-gem 'rexml'                 # Required for govspeak to work
+# Markdown support
+gem 'kramdown', '~> 2.3'
 
 gem 'govuk_notify_rails', '~> 2.2', '>= 2.2.0'
 
