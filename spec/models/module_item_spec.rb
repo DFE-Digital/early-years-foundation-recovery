@@ -63,5 +63,17 @@ RSpec.describe ModuleItem, type: :model do
         expect(model.name).to eq(module_item.name)
       end
     end
+
+    context "when model is a youtube page" do
+      let(:module_item) { described_class.find_by(training_module: :test, type: :youtube_page) }
+
+      it "returns a Youtube page" do
+        expect(model).to be_a(YoutubePage)
+      end
+
+      it "matches the module item" do
+        expect(model.name).to eq(module_item.name)
+      end
+    end
   end
 end

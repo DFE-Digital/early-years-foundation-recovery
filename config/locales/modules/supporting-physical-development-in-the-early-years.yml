@@ -23,3 +23,15 @@ en:
           ## Course feedback
 
           Next, you can tell us what you thought about this course.
+      2:
+        heading: What is GOV.UK
+        video_title: What is GOV.UK
+        youtube_url: https://www.youtube.com/embed/ucjmWjJ25Ho
+        body: |
+          Government Digital Service
+
+          GOV.UK is the single website for all central government services and information. It launched in 2012 and replaced nearly 2,000 government websites.
+
+          GOV.UK has been viewed more than 14 billion times since it went live. It gets an average 3.6 million visits a day. It has won awards and it has influenced governments all over the world from Australia to Israel.
+
+          But GOV.UK is much more than just a website for government - it’s the digital interface for millions of people interacting with central government.

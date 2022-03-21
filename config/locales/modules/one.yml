@@ -1,12 +1,6 @@
 ---
 en:
   modules:
-    test:
-      test:
-        heading: A test
-      basic:
-        heading: A text page
-        body: Some text
     one:
       1:
         heading: Module 1 - Foo
@@ -33,5 +27,3 @@ en:
       1-2-3:
         heading: How to avoid the stuff haters
         body: Hide behind stuff
-
-
