@@ -1,9 +1,9 @@
-!!!
-%html
-  %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Early Years Foundation Recovery
-    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title Early Years Foundation Recovery
+    meta content="width=device-width,initial-scale=1" name="viewport" /
     = tag :meta, property: 'og:image', content: asset_path('images/govuk-opengraph-image.png')
     = csrf_meta_tags
     = csp_meta_tag
@@ -15,17 +15,18 @@
 
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
-  %body.govuk-template__body.govuk-body
-    %script
-      document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
+  body.govuk-template__body.govuk-body
+    script
+      | document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
     
     = govuk_skip_link
 
     = navigation
 
-    .govuk-width-container 
-      %main.govuk-main-wrapper#main-content{role: "main"}
+    .govuk-width-container
+      main.govuk-main-wrapper#main-content role="main"
         - flash.each do |variant, message|
           = govuk_notification_banner title_text: t("banners.#{variant}"), text: message, success: false
+
         = yield
     = govuk_footer
