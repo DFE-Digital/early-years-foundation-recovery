@@ -70,8 +70,7 @@ jobs:
           cd terraform/app
           terraform init \
             -reconfigure \
-            -input=false \
-            -backend-config="key=${{ env.ENVIRONMENT }}/terraform.tfstate"
+            -input=false
           terraform plan -var-file ../workspace-variables/review.tfvars
           terraform apply \
             -input=false \
