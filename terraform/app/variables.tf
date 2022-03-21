@@ -3,6 +3,27 @@ variable "environment" {
   type        = string
 }
 
+
+# ------------------------------------------------------------------------------
+# Gov PaaS
+
+variable paas_space_name {
+  default = "eyfs-recovery"
+}
+
+variable paas_api_url {
+  default = "https://api.london.cloud.service.gov.uk"
+}
+
+variable paas_app_stopped {
+  default = false
+}
+
+variable paas_web_app_start_command {
+  default = "bundle exec rake db:prepare && bundle exec rails s -b 0.0.0.0"
+}
+
+
 # ------------------------------------------------------------------------------
 # Application
 
