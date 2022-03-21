@@ -6,6 +6,10 @@ module Helpers
   class ConfigHelper
     include Singleton
 
+    class << self
+      attr_accessor :project_root
+    end
+
     def self.env_config
       full_parent_dir_path = File.expand_path(Dir.pwd, '..')
       config_yaml = File.join(full_parent_dir_path, '/ui_automation/config_files/environment.yml')

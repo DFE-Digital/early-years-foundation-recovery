@@ -83,7 +83,6 @@ gem "govuk_notify_rails", "~> 2.2", ">= 2.2.0"
 group :ui_auto do
   gem 'capybara'
   gem 'pry'
-  gem 'require_all'
   gem 'rspec'
   gem 'rubocop'
   gem 'selenium-webdriver'
