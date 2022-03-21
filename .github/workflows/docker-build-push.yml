@@ -11,7 +11,7 @@ on:
 
 jobs:
   test:
-    name: Build Docker image
+    name: Build & Push Production
     runs-on: ubuntu-latest
     env:
       DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery

@@ -1,18 +1,22 @@
 ---
 # ------------------------------------------------------------------------------
 #
-name: Rspec
+name: Continuous Integration
 on:
-  - push
-  - pull_request
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
 
 env:
   RAILS_ENV: test
   RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+  DATABASE_URL: postgres://postgres:password@localhost:5432/test
 
 jobs:
   test:
-    name: Run rspec test suite
+    name: Rspec & Rubocop
     runs-on: ubuntu-latest
     environment: test
 
@@ -64,18 +68,14 @@ jobs:
           yarn build
           yarn build:css
 
-      # LINT -------------------------------------------------------------------
-      - name: Run rubocop
-        run: bundle exec rubocop
-
       # RSPEC ------------------------------------------------------------------
       -
         name: Prepare test database
         run: bin/rails db:prepare
-        env:
-          DATABASE_URL: postgres://postgres:password@localhost:5432/test
       -
         name: Run test suite
         run: bundle exec rspec
-        env:
-          DATABASE_URL: postgres://postgres:password@localhost:5432/test
+
+      # LINT -------------------------------------------------------------------
+      - name: Run rubocop
+        run: bundle exec rubocop
