@@ -5,7 +5,15 @@ variable environment {
 
 
 # ------------------------------------------------------------------------------
+# Cloud Foundry
+
+variable paas_cf_user {}
+variable paas_cf_password {}
+variable paas_cf_sso_passcode {}
+
+# ------------------------------------------------------------------------------
 # Gov PaaS
+
 
 variable paas_app_environment {
   default = "development"
@@ -13,10 +21,6 @@ variable paas_app_environment {
 
 variable paas_space_name {
   default = "eyfs-recovery"
-}
-
-variable paas_api_url {
-  default = "https://api.london.cloud.service.gov.uk"
 }
 
 variable paas_app_stopped {

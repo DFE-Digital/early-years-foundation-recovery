@@ -1,16 +1,10 @@
 # ------------------------------------------------------------------------------
 locals {
 
-  # app_env_domain  = {
-  #   "DOMAIN"              = "eyfs-${var.environment}.london.cloudapps.digital"
-  #   "GOVUK_APP_DOMAIN"    = "eyfs-${var.environment}.london.cloudapps.digital"
-  #   "GOVUK_WEBSITE_ROOT"  = "eyfs-${var.environment}.london.cloudapps.digital"
-  # }
-
   app_env_domain  = {
-    "DOMAIN"              = "${local.service_name}-${var.environment}.london.cloudapps.digital"
-    "GOVUK_APP_DOMAIN"    = "${local.service_name}-${var.environment}.london.cloudapps.digital"
-    "GOVUK_WEBSITE_ROOT"  = "${local.service_name}-${var.environment}.london.cloudapps.digital"
+    "DOMAIN"              = "eyfs-${var.environment}.london.cloudapps.digital"
+    "GOVUK_APP_DOMAIN"    = "eyfs-${var.environment}.london.cloudapps.digital"
+    "GOVUK_WEBSITE_ROOT"  = "eyfs-${var.environment}.london.cloudapps.digital"
   }
 
   app_environment = merge(

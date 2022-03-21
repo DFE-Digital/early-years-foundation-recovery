@@ -17,6 +17,12 @@ terraform {
 module paas {
   source = "./modules/paas"
 
+  cf_api_url                        = local.cf_api_url
+  cf_user                           = var.paas_cf_user
+  cf_password                       = var.paas_cf_password
+  cf_sso_passcode                   = var.paas_cf_sso_passcode
+
+
   environment                       = var.environment
 
   service_name                      = local.service_name
