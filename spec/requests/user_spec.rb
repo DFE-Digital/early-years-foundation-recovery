@@ -22,7 +22,7 @@ RSpec.describe "User", type: :request do
   describe "patch /user" do
     let(:first_name) { "Foo-Bar" }
 
-    subject { patch user_path, params: { user: { first_name: } } }
+    subject { patch user_path, params: { user: { first_name: first_name } } }
 
     it "updates the user" do
       expect { subject }.to change(user.reload, :first_name).to(first_name)

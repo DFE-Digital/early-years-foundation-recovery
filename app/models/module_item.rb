@@ -13,7 +13,7 @@ class ModuleItem < YamlBase
   def self.load_file
     data = raw_data.map do |training_module, items|
       items.map do |name, values|
-        values.merge(name: name.to_s, training_module:)
+        values.merge(name: name.to_s, training_module: training_module)
       end
     end
     data.flatten! # Using flatten! as more memory efficient.
@@ -23,7 +23,7 @@ class ModuleItem < YamlBase
   def model
     klass = MODELS[type.to_sym]
     if klass == Questionnaire
-      Questionnaire.find_by(name:)
+      Questionnaire.find_by(name: name)
     else
       klass.new(attributes)
     end
@@ -39,6 +39,6 @@ class ModuleItem < YamlBase
   end
 
   def module_items_in_this_training_module
-    @module_items_in_this_training_module ||= self.class.where(training_module:).to_a
+    @module_items_in_this_training_module ||= self.class.where(training_module: training_module).to_a
   end
 end
