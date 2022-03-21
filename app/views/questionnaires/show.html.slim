@@ -1,23 +1,23 @@
-%h1=@questionnaire.heading
-%p=@questionnaire.content
+h1=@questionnaire.heading
+p=@questionnaire.content
 
 = form_with model: @questionnaire, url: training_module_questionnaire_path(@training_module, @questionnaire) do |form|
   - if @questionnaire.errors.present?
     .errors=@questionnaire.errors.messages
   - @questionnaire.questions.each do |question, data|
-    %p= data[:label]
-    %p
+    p= data[:label]
+    p
       - collection_method = data[:multi_select] ? :collection_check_boxes : :collection_radio_buttons
       = form.send(collection_method, question, data[:answers], :first, :last) do |input|
-        %p
+        p
           - if data[:multi_select]
-            -#
-              Checkbox method is not automatically detecting correct checked status from questionnaire directly
-              so have to set checked directly
+            /
+              | Checkbox method is not automatically detecting correct checked status from questionnaire directly
+              | so have to set checked directly
             = input.check_box(checked: @questionnaire.send(question)&.include?(input.value.to_s))
           - else
             = input.radio_button
           = input.label
 
   = submit_tag "Submit"
-  %p= link_to_previous_module_item(@questionnaire.module_item)
+  p= link_to_previous_module_item(@questionnaire.module_item)

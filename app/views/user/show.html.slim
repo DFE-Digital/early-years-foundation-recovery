@@ -1,0 +1,18 @@
+h1 Your Profile
+dl
+  dt First name
+  dd= @user.first_name
+
+  dt Last name
+  dd= @user.last_name
+
+  dt Email address
+  dd= @user.email
+
+  dt Postcode
+  dd= @user.postcode
+
+  dt Ofsted Number
+  dd= @user.ofsted_number
+
+p= link_to "Edit", edit_user_path

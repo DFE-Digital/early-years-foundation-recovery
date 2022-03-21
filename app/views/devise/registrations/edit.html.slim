@@ -1,11 +1,11 @@
-- content_for :devise_form do 
+- content_for :devise_form do
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
     = f.govuk_error_summary
     = f.govuk_fieldset legend: { text: "Edit #{resource_name.to_s.humanize}", tag: :h1, size: 'l' } do
       = f.govuk_email_field :email, autofocus: true, autocomplete: "email", label: { text: "Email address" }, width: 'one-half'
       - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-        %div.govuk-body
-          Currently waiting confirmation for: #{resource.unconfirmed_email}
+        div.govuk-body
+          | Currently waiting confirmation for: #{resource.unconfirmed_email}
       = f.govuk_password_field :password, autocomplete: "new-password", label: { text: "New password" }, width: 'one-half', caption: { text: "(#{@minimum_password_length} characters minimum)" }, hint: { text: "Leave blank if you don't want to change it." }
       = f.govuk_password_field :password_confirmation, autocomplete: "new-password", label: { text: "Re-type password" }, width: 'one-half'
       = f.govuk_password_field :current_password, autocomplete: "current-password", label: { text: "Current password" }, width: 'one-half', hint: { text: "We need your current password to confirm your changes."}
