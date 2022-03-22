@@ -30,5 +30,3 @@ require_all '../ui_automation/pages'
 Capybara.configure do |config|
   config.default_driver = Drivers::CapybaraDrivers.chosen_driver
 end
-
-
