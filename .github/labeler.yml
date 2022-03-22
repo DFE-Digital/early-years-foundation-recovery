@@ -1,3 +1,11 @@
 ---
 ADR:
-- 'adr/*.md'
+- adr/*.md
+
+terraform:
+- terraform/*
+
+frontend:
+- app/assets/images/*
+- app/assets/stylesheets/*
+- app/javascript/*.js
