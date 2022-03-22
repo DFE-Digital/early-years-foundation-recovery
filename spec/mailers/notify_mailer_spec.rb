@@ -1,13 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe NotifyMailer, type: :mailer do
+  let(:user) { create(:user) }
   describe "user sign up" do
-    let(:user) { FactoryBot.create(:user) }
-
-    it "is a valid user" do
-      expect(user).to be_valid
-    end
-
     context "when signing up" do
       it "send confirmation email to correct user" do
         response = user.send_confirmation_instructions
@@ -18,8 +13,6 @@ RSpec.describe NotifyMailer, type: :mailer do
   end
 
   describe "reset password instructions" do
-    let(:user) { FactoryBot.create(:user) }
-
     context "when resetting password" do
       it "send instructions to correct user" do
         response = User.send_reset_password_instructions(email: user.email)
@@ -29,8 +22,6 @@ RSpec.describe NotifyMailer, type: :mailer do
   end
 
   describe "password change" do
-    let(:user) { FactoryBot.create(:user) }
-
     context "when changing password" do
       it "send confirmation to correct user" do
         response = user.send_password_change_notification
@@ -41,8 +32,6 @@ RSpec.describe NotifyMailer, type: :mailer do
   end
 
   describe "email change" do
-    let(:user) { FactoryBot.create(:user) }
-
     context "when changing email" do
       it "send confirmation to correct user" do
         response = user.send_email_changed_notification
