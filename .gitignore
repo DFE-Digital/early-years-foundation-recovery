@@ -49,3 +49,6 @@ doc
 
 # SimpleCov
 coverage
+
+localhost.crt
+localhost.key

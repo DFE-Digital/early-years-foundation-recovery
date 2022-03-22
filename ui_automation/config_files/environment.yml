@@ -1,4 +1,0 @@
-local:
-  base_url: http://localhost:3000
-int:
-  base_url: https://evening-thicket-25194.herokuapp.com

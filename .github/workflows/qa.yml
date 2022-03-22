@@ -1,0 +1,53 @@
+---
+# ------------------------------------------------------------------------------
+# Test deployed site
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - qa-workflow
+
+jobs:
+  test:
+    name: QA Framework
+    runs-on: ubuntu-latest
+
+    steps:
+      -
+        name: Check out code
+        uses: actions/checkout@v2
+      -
+        name: Build application Docker image
+        run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery build
+      -
+        name: Build self-signed certificates
+        run: |
+          openssl req -nodes \
+            -newkey rsa:2048 \
+            -keyout localhost.key \
+            -out localhost.crt \
+            -subj "/C=GB/ST=London/L=London/O=DfE/OU=EYFS/CN=example.com"
+      -
+        name: Firefox against Heroku
+        run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run --rm qa
+        env:
+          BASE_URL: https://evening-thicket-25194.herokuapp.com
+          BROWSER: firefox
+      -
+        name: Chrome against Heroku
+        run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run --rm qa
+        env:
+          BASE_URL: https://evening-thicket-25194.herokuapp.com
+          BROWSER: chrome
+      -
+        name: Firefox against production app in compose
+        run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run --rm qa
+        env:
+          BASE_URL: https://app:3000
+          BROWSER: firefox
+      -
+        name: Chrome against production app in compose
+        run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run --rm qa
+        env:
+          BASE_URL: https://app:3000
+          BROWSER: chrome

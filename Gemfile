@@ -84,10 +84,3 @@ group :test do
   gem 'rspec-rails'
   gem 'simplecov'
 end
-
-group :ui_auto do
-  gem 'capybara'
-  gem 'rspec'
-  gem 'selenium-webdriver'
-  gem 'site_prism'
-end

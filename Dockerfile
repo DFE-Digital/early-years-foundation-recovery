@@ -20,8 +20,7 @@ RUN mkdir -p ${APP_HOME}/tmp/pids ${APP_HOME}/log
 
 WORKDIR ${APP_HOME}
 
-COPY Gemfile $APP_HOME/Gemfile
-COPY Gemfile.lock $APP_HOME/Gemfile.lock
+COPY Gemfile* ./
 
 RUN bundle config set no-cache true
 RUN bundle config set without development test
@@ -77,3 +76,18 @@ COPY spec ${APP_HOME}/spec
 COPY .rspec ${APP_HOME}/.rspec
 COPY .rubocop.yml ${APP_HOME}/.rubocop.yml
 COPY .rubocop_todo.yml ${APP_HOME}/.rubocop_todo.yml
+
+# ------------------------------------------------------------------------------
+# QA Stage
+# ------------------------------------------------------------------------------
+FROM ruby:3.1.0-alpine as qa
+
+RUN apk add --no-cache --no-progress tzdata
+
+RUN gem install rspec capybara site_prism selenium-webdriver
+
+COPY uat /uat
+
+WORKDIR /uat
+
+CMD ["rspec"]

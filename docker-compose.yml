@@ -1,9 +1,6 @@
 ---
-version: "3.8"
 services:
   app:
-    tmpfs:
-      - /tmp
     container_name: recovery_prod
     build:
       context: .
@@ -24,8 +21,13 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
+    volumes:
+      - db_prod:/var/lib/postgresql/data
     networks:
       - recovery
+
+volumes:
+  db_prod:
 
 networks:
   recovery:

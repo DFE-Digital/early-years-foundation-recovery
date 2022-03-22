@@ -2,10 +2,8 @@
 # ------------------------------------------------------------------------------
 set -e
 
-for env in dev test qa; do
-  docker-compose \
+docker-compose \
   -f docker-compose.yml \
-  -f docker-compose.$env.yml \
+  -f docker-compose.qa.yml \
   --project-name recovery \
-  build
-done
+  run --rm qa
