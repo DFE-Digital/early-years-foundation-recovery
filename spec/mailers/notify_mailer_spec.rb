@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe NotifyMailer, type: :mailer do
   let(:user) { create(:user) }
+
   describe "user sign up" do
     context "when signing up" do
       it "send confirmation email to correct user" do
