@@ -4,3 +4,5 @@ test:
     type: formative_assessment
   basic:
     type: text_page
+  video:
+    type: youtube_page

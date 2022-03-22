@@ -1,8 +1,11 @@
 .bundle
 .git
+.yardoc
 adr
 config/master.key
 config/credentials/*.key
+coverage
+doc
 log
 node_modules
 tmp

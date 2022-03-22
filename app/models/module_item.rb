@@ -3,6 +3,7 @@ class ModuleItem < YamlBase
     module_intro: ContentPage,
     sub_module_intro: ContentPage,
     text_page: ContentPage,
+    youtube_page: YoutubePage,
     formative_assessment: Questionnaire
   }
 

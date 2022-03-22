@@ -23,6 +23,7 @@ How might we authenticate users?
 ## Decision Outcome
 
 Chosen option: Basic OAuth using the Ruby Gem 'Devise'. 
+
 * DfE Sign-In requires an educational establishment to be associated with the user, which is unlikely to be the case. 
 * Gov.UK Sign-in is not yet available to use (but would be an ideal long term solution in 2023). 
 * Social Media identity providers has not tested well. Users concerned as to why the system would require a link to the user's social media. Also, while potentially more secure than some methods by using Authentication OTP applications, we would not like to force users to create social media accounts if at all possible. 

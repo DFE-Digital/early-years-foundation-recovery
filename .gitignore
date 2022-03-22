@@ -43,3 +43,9 @@ yarn-error.log
 .env.local
 .env.*.local
 
+# Yard documentation
+.yardoc
+doc
+
+# SimpleCov
+coverage
