@@ -22,9 +22,8 @@ services:
     container_name: recovery_db
     image: postgres:alpine
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_HOST_AUTH_METHOD: trust
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
     networks:
       - recovery
 
