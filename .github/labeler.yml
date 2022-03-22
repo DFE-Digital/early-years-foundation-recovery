@@ -3,7 +3,7 @@ ADR:
 - adr/*.md
 
 terraform:
-- terraform/*
+- terraform/**/*
 
 frontend:
 - app/assets/images/*
