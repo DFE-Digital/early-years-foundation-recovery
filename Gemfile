@@ -84,3 +84,12 @@ group :test do
   gem 'rspec-rails'
   gem 'simplecov'
 end
+
+gem "govuk_notify_rails", "~> 2.2", ">= 2.2.0"
+
+group :ui_auto do
+  gem 'capybara'
+  gem 'rspec'
+  gem 'selenium-webdriver'
+  gem 'site_prism'
+end

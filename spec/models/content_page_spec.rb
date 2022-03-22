@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ContentPage, type: :model do
-  let(:content) { YAML.load_file(Rails.root.join("config/locales/modules.yml")).dig("en", "modules", "test") }
+  let(:content) { YAML.load_file(Rails.root.join("config/locales/modules/test.yml")).dig("en", "modules", "test") }
   let(:content_page) { ContentPage.new(id: :basic, training_module: :test, type: :text_page) }
 
   describe "#heading" do
