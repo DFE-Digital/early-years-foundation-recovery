@@ -9,8 +9,10 @@ terraform {
     }
   }
 
-  backend "local" {
-    path = "terraform.tfstate"
+  backend "s3" {
+    key     = "terraform.tfstate"
+    region  = "eu-west-2"
+    encrypt = "true"
   }
 }
 
