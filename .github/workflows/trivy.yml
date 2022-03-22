@@ -1,0 +1,38 @@
+---
+# ------------------------------------------------------------------------------
+# https://github.com/aquasecurity/trivy
+# https://github.com/aquasecurity/trivy-action#inputs
+#
+name: Trivy Docker Security
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
+
+jobs:
+  build:
+    name: Build & Run
+    runs-on: ubuntu-latest
+
+    steps:
+      -
+        name: Checkout code
+        uses: actions/checkout@v2
+      -
+        name: Build image from Dockerfile
+        run: |
+          docker build -t ${{env.DOCKER_IMAGE}}:${{ github.sha }} .
+      -
+        name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{env.DOCKER_IMAGE}}:${{ github.sha }}
+          format: table
+          exit-code: 1
+          ignore-unfixed: true
+          vuln-type: os,library
+          severity: CRITICAL,HIGH
