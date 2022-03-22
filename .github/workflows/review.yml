@@ -71,6 +71,7 @@ jobs:
           terraform init \
             -reconfigure \
             -input=false \
+            -backend-config="bucket=${{ secrets.AWS_BUCKET }}" \
             -backend-config="key=${{ env.ENVIRONMENT }}/terraform.tfstate"
           terraform plan -var-file ../workspace-variables/review.tfvars
           terraform apply \
