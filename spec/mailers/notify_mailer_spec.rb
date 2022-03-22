@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe NotifyMailer, type: :mailer do
   let(:user) { create(:user) }
-  
+
   describe "user sign up" do
     context "when signing up" do
-      it "send confirmation email to correct user" do   
+      it "send confirmation email to correct user" do
         response = user.send_confirmation_instructions
         expect(response.recipients[0]).to eq user.email
         expect(response.subject).to eq "Confirmation instructions"
-      end  
+      end
     end
   end
 
@@ -21,7 +21,7 @@ RSpec.describe NotifyMailer, type: :mailer do
       end
     end
   end
-  
+
   describe "password change" do
     context "when changing password" do
       it "send confirmation to correct user" do
@@ -31,7 +31,7 @@ RSpec.describe NotifyMailer, type: :mailer do
       end
     end
   end
-  
+
   describe "email change" do
     context "when changing email" do
       it "send confirmation to correct user" do
