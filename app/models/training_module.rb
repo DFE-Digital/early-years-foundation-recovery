@@ -9,7 +9,7 @@ class TrainingModule < YamlBase
   end
 
   def about_training
-    @about ||= AboutTraining.find_by(training_module: name)
+    @about_training ||= AboutTraining.find_by(training_module: name)
   end
 
   def topics

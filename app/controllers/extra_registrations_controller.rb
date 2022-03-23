@@ -50,6 +50,6 @@ private
   helper_method :current_step
 
   def current_form_klass
-    @current_form ||= STEP_FORMS[current_step]
+    @current_form_klass ||= STEP_FORMS[current_step]
   end
 end

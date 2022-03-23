@@ -7,12 +7,12 @@ class Questionnaire < YamlBase
 
   def self.load_file
     data = raw_data.map do |training_module, questionnaires|
-      questionnaires.map do |name, data|
-        data['name'] = name
-        data['training_module'] = training_module
-        data['questions'].deep_symbolize_keys!
-        data['questions'].each_key { |question| data[question] = nil }
-        data
+      questionnaires.map do |name, field|
+        field['name'] = name
+        field['training_module'] = training_module
+        field['questions'].deep_symbolize_keys!
+        field['questions'].each_key { |question| field[question] = nil }
+        field
       end
     end
     data.flatten! # Using flatten! as more memory efficient.

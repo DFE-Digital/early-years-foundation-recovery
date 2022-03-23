@@ -23,7 +23,7 @@ RSpec.describe 'ExtraRegistrations', type: :request do
   end
 
   describe 'PATCH /extra_registrations/:id' do
-    context 'Adds first name to user' do
+    context 'and adds first name to user' do
       subject do
         patch extra_registration_path(step), params: { user: user_params }
       end
@@ -37,17 +37,17 @@ RSpec.describe 'ExtraRegistrations', type: :request do
       end
 
       it 'Updates user name' do
-        expect { subject }.to change { user.reload.first_name }.to(user_params[:first_name])
+        expect { subject(:user) }.to change { user.reload.first_name }.to(user_params[:first_name])
       end
 
       it 'redirects to next step' do
         next_step = steps[steps.index(step) + 1]
-        subject
+        subject(:step)
         expect(response).to redirect_to(edit_extra_registration_path(next_step))
       end
     end
 
-    context 'last step' do
+    context 'when on last step' do
       subject do
         patch extra_registration_path(step), params: { user: user_params }
       end
@@ -60,11 +60,11 @@ RSpec.describe 'ExtraRegistrations', type: :request do
       end
 
       it 'Updates user name' do
-        expect { subject }.to change { user.reload.postcode }.to(user_params[:postcode])
+        expect { subject(:user) }.to change { user.reload.postcode }.to(user_params[:postcode])
       end
 
       it 'redirects to root' do
-        subject
+        subject(:path)
         expect(response).to redirect_to(root_path)
       end
     end

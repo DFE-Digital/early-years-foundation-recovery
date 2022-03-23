@@ -25,11 +25,11 @@ RSpec.describe 'User', type: :request do
     let(:first_name) { 'Foo-Bar' }
 
     it 'updates the user' do
-      expect { subject }.to change(user.reload, :first_name).to(first_name)
+      expect { subject(:user) }.to change(user.reload, :first_name).to(first_name)
     end
 
     it 'redirects back to the show page' do
-      expect(subject).to redirect_to(user_path)
+      expect(subject(:path)).to redirect_to(user_path)
     end
   end
 end
