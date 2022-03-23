@@ -106,8 +106,9 @@ RUN apk update && apk add --no-cache bash \
         chromium \
         chromium-chromedriver
 
-# SET ENVIRONMENT FOR TESTS TO RUN AGAINST
+# SET ENVIRONMENT FOR TESTS TO RUN AGAINST AND BROWSER
 ENV ENV=int
+ENV BROWSER='headless_chrome'
 
 COPY spec ${APP_HOME}/spec
 COPY .rspec ${APP_HOME}/.rspec
