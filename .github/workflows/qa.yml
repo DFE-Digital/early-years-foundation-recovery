@@ -1,6 +1,6 @@
 ---
 # ------------------------------------------------------------------------------
-# Test deployed site
+name: QA Framework
 on:
   workflow_dispatch:
   push:
@@ -13,7 +13,7 @@ env:
 
 jobs:
   test:
-    name: QA Framework
+    name: Test Docker Compose & Heroku
     runs-on: ubuntu-latest
     environment: production
 
@@ -34,9 +34,9 @@ jobs:
             -subj "/C=GB/ST=London/L=London/O=DfE/OU=EYFS/CN=example.com"
       -
         name: Preload Selenium
-          run: |
-            docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run --detach firefox \
-            docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run --detach chrome
+        run: |
+          docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run --detach firefox \
+          docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run --detach chrome
       -
         name: Firefox against Heroku
         run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run --rm qa
