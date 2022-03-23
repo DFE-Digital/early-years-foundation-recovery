@@ -17,7 +17,6 @@ describe 'Dfe' do
     it 'clicking the sign link navigates away from the home page' do
       home_page.load
       home_page.header.sign_in.click
-
       sign_in.wait_until_header_visible
 
       expect(sign_in).to be_displayed
