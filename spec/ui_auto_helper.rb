@@ -18,7 +18,14 @@ ENV['BROWSER'] ||= 'chrome'
 ENV['ENV'] ||= 'local'
 
 current_dir = File.dirname(__FILE__ )
+puts "The current test dir is: #{current_dir}"
+
 helpers_dir = File.expand_path('../ui_automation/helpers/', current_dir).to_s
+puts "ui test helpers dir is: #{helpers_dir}"
+puts `ls -al`
+puts `pwd`
+puts File.join(helpers_dir, 'config').to_s
+
 require File.join(helpers_dir, 'config')
 
 require_all '../ui_automation/drivers'
