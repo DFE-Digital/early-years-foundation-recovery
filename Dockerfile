@@ -80,6 +80,9 @@ RUN apk update
 RUN apk add xvfb
 RUN apk --no-cache add chromium chromium-chromedriver
 
+# SET ENVIRONMENT FOR TESTS TO RUN AGAINST
+ENV ENV=int
+
 COPY spec ${APP_HOME}/spec
 COPY .rspec ${APP_HOME}/.rspec
 COPY .rubocop.yml ${APP_HOME}/.rubocop.yml

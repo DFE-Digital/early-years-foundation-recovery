@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-p "loaded"
+
 # module Helpers
 module Helpers
   # Configuration helper utility
