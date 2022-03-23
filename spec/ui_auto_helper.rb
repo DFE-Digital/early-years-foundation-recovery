@@ -23,6 +23,8 @@ puts "The current test dir is: #{current_dir}"
 helpers_dir = File.expand_path('../ui_automation/helpers/', current_dir).to_s
 puts "ui test helpers dir is: #{helpers_dir}"
 puts `ls -al`
+puts 'Parent dir file contents'
+puts `cd .. && ls -al`
 puts `pwd`
 puts File.join(helpers_dir, 'config').to_s
 
