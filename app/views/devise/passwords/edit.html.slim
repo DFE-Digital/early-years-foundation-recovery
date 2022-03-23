@@ -1,4 +1,4 @@
-- content_for :devise_wrap do
+- content_for :devise_form do
   = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
     = f.govuk_error_summary
     = f.hidden_field :reset_password_token
