@@ -17,7 +17,10 @@ ENV['BROWSER'] ||= 'chrome'
 # default environment for tests
 ENV['ENV'] ||= 'local'
 
-require_relative '../ui_automation/helpers/config'
+current_dir = File.dirname(__FILE__ )
+helpers_dir = File.expand_path('../ui_automation/helpers/', current_dir).to_s
+require File.join(helpers_dir, 'config')
+
 require_all '../ui_automation/drivers'
 
 # after loading all the driver classes register them all immediately.

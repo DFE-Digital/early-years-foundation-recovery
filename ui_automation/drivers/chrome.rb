@@ -12,8 +12,7 @@ module Drivers
 
     def self.register_headless
       options = Selenium::WebDriver::Chrome::Options.new
-      options.add_preference(:download, prompt_for_download: false,
-                             default_directory: '/tmp/downloads')
+      # options.add_preference(:download, prompt_for_download: false, default_directory: '/tmp/downloads')
 
       options.add_preference(:browser, set_download_behavior: { behavior: 'allow' })
       Capybara.register_driver :headless_chrome do |app|
