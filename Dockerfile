@@ -24,6 +24,7 @@ WORKDIR ${APP_HOME}
 
 COPY Gemfile $APP_HOME/Gemfile
 COPY Gemfile.lock $APP_HOME/Gemfile.lock
+COPY ui_automation $APP_HOME/ui_automation
 
 RUN bundle config set no-cache true
 RUN bundle config set without development test
