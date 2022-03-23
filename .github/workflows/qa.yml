@@ -7,10 +7,15 @@ on:
     branches:
       - qa-workflow
 
+env:
+  RAILS_ENV: production
+  RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
 jobs:
   test:
     name: QA Framework
     runs-on: ubuntu-latest
+    environment: production
 
     steps:
       -
@@ -27,6 +32,11 @@ jobs:
             -keyout localhost.key \
             -out localhost.crt \
             -subj "/C=GB/ST=London/L=London/O=DfE/OU=EYFS/CN=example.com"
+      -
+        name: Preload Selenium
+          run: |
+            docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run --detach firefox \
+            docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run --detach chrome
       -
         name: Firefox against Heroku
         run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run --rm qa

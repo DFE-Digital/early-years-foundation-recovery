@@ -18,27 +18,23 @@ require 'site_prism/all_there'
 require 'yaml'
 
 Capybara.register_driver :chrome do |app|
-
   capabilities = Selenium::WebDriver::Remote::Capabilities.chrome
   capabilities['acceptInsecureCerts'] = true
 
   Capybara::Selenium::Driver.new(app,
-    browser: :remote,
-    url: 'http://chrome:4444/wd/hub',
-    capabilities: capabilities,
-  )
+                                 browser: :remote,
+                                 url: 'http://chrome:4444/wd/hub',
+                                 capabilities: capabilities)
 end
 
 Capybara.register_driver :firefox do |app|
-
   capabilities = Selenium::WebDriver::Remote::Capabilities.firefox
   capabilities['acceptInsecureCerts'] = true
 
   Capybara::Selenium::Driver.new(app,
-    browser: :remote,
-    url: 'http://firefox:4444/wd/hub',
-    capabilities: capabilities,
-  )
+                                 browser: :remote,
+                                 url: 'http://firefox:4444/wd/hub',
+                                 capabilities: capabilities)
 end
 
 %w[sections pages].each do |component|
