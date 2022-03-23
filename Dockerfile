@@ -24,7 +24,6 @@ WORKDIR ${APP_HOME}
 
 COPY Gemfile $APP_HOME/Gemfile
 COPY Gemfile.lock $APP_HOME/Gemfile.lock
-COPY ui_automation $APP_HOME/ui_automation
 
 RUN bundle config set no-cache true
 RUN bundle config set without development test
@@ -76,7 +75,14 @@ RUN bundle config unset without
 RUN bundle config set without development
 RUN bundle install --no-binstubs --retry=10 --jobs=4
 
+# Install chromedriver
+RUN apk update
+RUN apk add xvfb
+RUN apk --no-cache add chromium chromium-chromedriver
+
 COPY spec ${APP_HOME}/spec
 COPY .rspec ${APP_HOME}/.rspec
 COPY .rubocop.yml ${APP_HOME}/.rubocop.yml
 COPY .rubocop_todo.yml ${APP_HOME}/.rubocop_todo.yml
+COPY ui_automation $APP_HOME/ui_automation
+
