@@ -75,10 +75,36 @@ RUN bundle config unset without
 RUN bundle config set without development
 RUN bundle install --no-binstubs --retry=10 --jobs=4
 
-# Install chromedriver
-RUN apk update
-RUN apk add xvfb
-RUN apk --no-cache add chromium chromium-chromedriver
+# Install chromedriver alpine, longer dependency list
+
+RUN apk update && apk add --no-cache bash \
+        alsa-lib \
+        at-spi2-atk \
+        atk \
+        cairo \
+        cups-libs \
+        dbus-libs \
+        eudev-libs \
+        expat \
+        flac \
+        gdk-pixbuf \
+        glib \
+        libgcc \
+        libjpeg-turbo \
+        libpng \
+        libwebp \
+        libx11 \
+        libxcomposite \
+        libxdamage \
+        libxext \
+        libxfixes \
+        tzdata \
+        libexif \
+        udev \
+        xvfb \
+        zlib-dev \
+        chromium \
+        chromium-chromedriver
 
 # SET ENVIRONMENT FOR TESTS TO RUN AGAINST
 ENV ENV=int
