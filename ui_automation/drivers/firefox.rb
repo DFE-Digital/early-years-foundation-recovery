@@ -16,7 +16,7 @@ module Drivers
 
         Capybara::Selenium::Driver.new app,
                                        browser: :firefox,
-                                       options: options
+                                       browser_options: options
       end
     end
   end

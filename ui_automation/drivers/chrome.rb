@@ -24,7 +24,7 @@ module Drivers
         options.add_argument('--disable-gpu')
         options.add_argument('--window-size=1280,800')
 
-        Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+        Capybara::Selenium::Driver.new(app, browser: :chrome, browser_options: options)
       end
     end
   end
