@@ -96,6 +96,7 @@ jobs:
           echo "rspec dry run starting...."
           bundle exec --dry-run
           echo "....rspec dry run ended"
+          cd spec && ls -al && cd ..
           bundle exec rspec
 
       # LINT -------------------------------------------------------------------
