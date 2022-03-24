@@ -13,6 +13,8 @@ env:
   RAILS_ENV: test
   RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
   DATABASE_URL: postgres://postgres:password@localhost:5432/test
+  BROWSER: headless_chrome
+  ENV: int
 
 jobs:
   test:
@@ -82,7 +84,7 @@ jobs:
       - uses: nanasess/setup-chromedriver@v1
 
       -
-        name: install chromedriver
+        name: Install chromedriver
         run: |
           export DISPLAY=:99
           chromedriver --url-base=/wd/hub &
@@ -90,6 +92,8 @@ jobs:
       -
         name: Run test suite
         run: |
+          echo "The browser is:${{env.BROWSER}}"
+          echo "The env url is:${{env.ENV}}"
           bundle install
           bundle exec rspec
 
