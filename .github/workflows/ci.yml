@@ -98,7 +98,7 @@ jobs:
           bundle exec rspec --dry-run
           echo "....rspec dry run ended"
           cd spec && ls -al && cd ..
-          bundle exec rspec
+          bundle exec rspec -fd
 
       # LINT -------------------------------------------------------------------
       - name: Run rubocop
