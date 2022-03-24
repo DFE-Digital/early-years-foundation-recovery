@@ -93,8 +93,9 @@ jobs:
         name: Run test suite
         run: |
           bundle install
+          echo "bundle installed"
           echo "rspec dry run starting...."
-          bundle exec --dry-run
+          bundle exec rspec --dry-run
           echo "....rspec dry run ended"
           cd spec && ls -al && cd ..
           bundle exec rspec
