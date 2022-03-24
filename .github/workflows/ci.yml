@@ -89,7 +89,9 @@ jobs:
           sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
       -
         name: Run test suite
-        run: bundle exec rspec
+        run: |
+          bundle install
+          bundle exec rspec
 
       # LINT -------------------------------------------------------------------
       - name: Run rubocop
