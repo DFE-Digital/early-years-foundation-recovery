@@ -3,7 +3,8 @@
 # ------------------------------------------------------------------------------
 FROM ruby:3.1.0-alpine as base
 
-RUN apk add --no-cache --no-progress build-base tzdata postgresql-dev yarn gcompat
+RUN apk add --no-cache --no-progress \
+    build-base curl gcompat tzdata postgresql-dev yarn
 
 # ------------------------------------------------------------------------------
 # Production Stage

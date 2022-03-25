@@ -33,31 +33,26 @@ jobs:
             -out localhost.crt \
             -subj "/C=GB/ST=London/L=London/O=DfE/OU=EYFS/CN=example.com"
       -
-        name: Preload Selenium
-        run: |
-          docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run --detach firefox; \
-          docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run --detach chrome
-      -
         name: Firefox against Heroku
-        run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run --rm qa
+        run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery up qa
         env:
           BASE_URL: https://evening-thicket-25194.herokuapp.com
           BROWSER: firefox
       -
         name: Chrome against Heroku
-        run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run --rm qa
+        run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery up qa
         env:
           BASE_URL: https://evening-thicket-25194.herokuapp.com
           BROWSER: chrome
       -
         name: Firefox against production app in compose
-        run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run --rm qa
+        run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery up qa
         env:
           BASE_URL: https://app:3000
           BROWSER: firefox
       -
         name: Chrome against production app in compose
-        run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run --rm qa
+        run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery up qa
         env:
           BASE_URL: https://app:3000
           BROWSER: chrome

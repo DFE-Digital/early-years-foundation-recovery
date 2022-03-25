@@ -6,4 +6,4 @@ docker-compose \
   -f docker-compose.yml \
   -f docker-compose.qa.yml \
   --project-name recovery \
-  run --rm qa
+  up qa
