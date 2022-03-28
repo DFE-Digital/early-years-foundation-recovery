@@ -11,12 +11,15 @@
     = f.govuk_fieldset legend: { text: 'Sign in to early years training', tag: :h1, size: "l" } do
       p.govuk-body
         | Enter your details to sign in to your personal early years training account. These details are different to any other GOV.UK accounts you may use.
-      = f.govuk_email_field :email, autofocus: true, autocomplete: "email", label: { text: "Email address" }, width: 'one-half'
-      = f.govuk_password_field :password, autocomplete: "current-password", label: { text: "Password" }, width: 'one-half'
-      .govuk-form-group
-        = f.check_box :remember_me
-        = f.label :remember_me
+      = f.govuk_email_field :email, autofocus: true, autocomplete: "email", label: { text: t(:email) }, width: 'two-thirds'
+      = f.govuk_password_field :password, autocomplete: "current-password", label: { text: t(:password) }, width: 'two-thirds'
       = f.govuk_submit "Sign in"
-
+      = f.govuk_check_box :remember_me, 1, 0, multiple: false, link_errors: true, label: { text: t(:remember_me) }
+    br/
+  = govuk_details(summary_text: "Problems signing in") do
+    - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+      = govuk_link_to "I have forgotten my password", new_password_path(resource_name)
+    br/
+    = govuk_link_to "Other problems signing in", "#"
 
 = render "devise/shared/form_wrap"

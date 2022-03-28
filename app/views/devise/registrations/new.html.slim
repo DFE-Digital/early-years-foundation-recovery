@@ -4,9 +4,9 @@
     = f.govuk_fieldset legend: { text: 'Create an early years training account', tag: :h1, size: 'l' } do
       p.govuk-body
         | Create an account to access training courses.
-      = f.govuk_email_field :email, autofocus: true, autocomplete: "email", label: { text: "Email address" }, width: 'one-half'
-      = f.govuk_password_field :password, autocomplete: "new-password", label: { text: "Create password" }, width: 'one-half', hint: { text: "(#{@minimum_password_length} characters minimum)" }
-      = f.govuk_password_field :password_confirmation, autocomplete: "new-password", label: { text: "Re-type password" }, width: 'one-half'
+      = f.govuk_email_field :email, autofocus: true, autocomplete: "email", label: { text: "Email address" }, width: 'two-thirds', hint: { text: "We'll send you an email with an account" }
+      = f.govuk_password_field :password, autocomplete: "new-password", label: { text: "Create password" }, width: 'two-thirds', hint: { text: "(#{@minimum_password_length} characters minimum)" }
+      = f.govuk_password_field :password_confirmation, autocomplete: "new-password", label: { text: "Re-type password" }, width: 'two-thirds'
     = f.govuk_submit "Continue"
 
 = render "devise/shared/form_wrap"
