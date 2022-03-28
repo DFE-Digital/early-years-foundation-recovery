@@ -9,6 +9,8 @@ else
     -f docker-compose.yml \
     -f docker-compose.dev.yml \
     --project-name recovery \
-    run --rm app \
+    run \
+    --name recovery_rails \
+    --rm app \
     rails "$@"
 fi
