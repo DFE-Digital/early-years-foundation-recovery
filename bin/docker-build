@@ -7,5 +7,6 @@ for env in dev test qa; do
     -f docker-compose.yml \
     -f docker-compose.$env.yml \
     --project-name recovery \
-    build
+    build \
+    --no-cache
 done
