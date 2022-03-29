@@ -17,9 +17,11 @@ class UserController < ApplicationController
     end
   end
 
+  # rubocop:disable Naming/MemoizedInstanceVariableName
   def check_email
     @user ||= User.find(params[:id])
   end
+  # rubocop:enable Naming/MemoizedInstanceVariableName
 
   private
 

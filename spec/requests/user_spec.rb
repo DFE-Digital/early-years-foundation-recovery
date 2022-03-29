@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "User", type: :request do
   describe "Registered user, signed in" do
     let(:user) { create :user, :registered }
+
     before { sign_in user }
 
     describe "GET /user" do
