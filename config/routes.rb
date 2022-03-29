@@ -9,4 +9,6 @@ Rails.application.routes.draw do
     resources :content_pages, only: [:index, :show]
     resources :questionnaires, only: [:show, :update]
   end
+
+  resources :static, only: :show
 end
