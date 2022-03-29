@@ -5,6 +5,7 @@
 #
 name: Trivy Docker Security
 on:
+  workflow_dispatch:
   push:
     branches:
       - main

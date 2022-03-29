@@ -52,6 +52,10 @@ gem 'kramdown', '~> 2.3'
 
 gem 'govuk_notify_rails', '~> 2.2', '>= 2.2.0'
 
+# Sentry -Monitor errors
+gem "sentry-rails"
+gem "sentry-ruby"
+
 group :development, :test do
   # Use fake data for specs
   gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
