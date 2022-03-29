@@ -7,44 +7,8 @@
 # versions of RuboCop, may require this file to be generated again.
 
 # Offense count: 1
-Lint/ShadowingOuterLocalVariable:
-  Exclude:
-    - 'app/models/questionnaire.rb'
-
-# Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: AllowComments.
 Lint/UselessMethodDefinition:
   Exclude:
     - 'app/models/concerns/yaml_folder.rb'
-
-# Offense count: 2
-# Configuration parameters: EnforcedStyleForLeadingUnderscores.
-# SupportedStylesForLeadingUnderscores: disallowed, required, optional
-Naming/MemoizedInstanceVariableName:
-  Exclude:
-    - 'app/controllers/extra_registrations_controller.rb'
-    - 'app/models/training_module.rb'
-
-# Offense count: 2
-# Configuration parameters: Prefixes.
-# Prefixes: when, with, without
-RSpec/ContextWording:
-  Exclude:
-    - 'spec/requests/extra_registrations_spec.rb'
-
-# Offense count: 6
-# Configuration parameters: IgnoreSharedExamples.
-RSpec/NamedSubject:
-  Exclude:
-    - 'spec/requests/extra_registrations_spec.rb'
-    - 'spec/requests/user_spec.rb'
-
-# Offense count: 2
-# Configuration parameters: Database, Include.
-# SupportedDatabases: mysql, postgresql
-# Include: db/migrate/*.rb
-Rails/BulkChangeTable:
-  Exclude:
-    - 'db/migrate/20220118140440_add_names_to_users.rb'
-    - 'db/migrate/20220120133710_add_settings_fields_to_users.rb'
