@@ -1,0 +1,7 @@
+#!/bin/sh
+# ------------------------------------------------------------------------------
+set -e
+
+docker stop $(docker ps --filter name=recovery --all --quiet)
+
+docker rm $(docker ps --filter name=recovery --all --quiet)

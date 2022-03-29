@@ -9,6 +9,10 @@ services:
     environment:
       - RAILS_ENV=test
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_test
+    volumes:
+      - .:/src
+    tty: true
+    stdin_open: true
 
   db:
     volumes:

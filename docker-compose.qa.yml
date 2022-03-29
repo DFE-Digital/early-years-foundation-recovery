@@ -1,12 +1,13 @@
 # https://github.com/SeleniumHQ/docker-selenium
 #
 # BASE_URL=https://app:3000 ./bin/docker-qa
+# BASE_URL=https://evening-thicket-25194.herokuapp.com:443
 #
+# uses self-signed certificates which need to be generated
 # ------------------------------------------------------------------------------
 ---
 services:
   app:
-    # uses self-signed certificates which need to be generated
     command: rails server -b 'ssl://0.0.0.0:3000?key=localhost.key&cert=localhost.crt'
     healthcheck:
       test: curl --fail --insecure https://app:3000/health || exit 1
@@ -25,11 +26,8 @@ services:
       target: qa
     image: recovery:qa
     environment:
-      - BROWSER
       - BASE_URL
-      # - BROWSER=firefox
-      # - BASE_URL=https://evening-thicket-25194.herokuapp.com:443
-      # - BASE_URL=https://app:3000
+      - BROWSER=chrome
     depends_on:
       app:
         condition: service_healthy
@@ -39,6 +37,8 @@ services:
         condition: service_healthy
     networks:
       - recovery
+    tty: true
+    stdin_open: true
 
   chrome:
     container_name: recovery_chrome

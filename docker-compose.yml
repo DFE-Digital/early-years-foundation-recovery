@@ -25,6 +25,8 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
+    healthcheck:
+      test: pg_isready
     volumes:
       - db_prod:/var/lib/postgresql/data
     networks:

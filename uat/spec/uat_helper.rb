@@ -1,3 +1,5 @@
+require 'pry-byebug'
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
@@ -42,5 +44,5 @@ end
 end
 
 Capybara.configure do |config|
-  config.default_driver = ENV.fetch('BROWSER', 'chrome').to_sym
+  config.default_driver = ENV['BROWSER'].to_sym
 end

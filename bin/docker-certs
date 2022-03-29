@@ -2,7 +2,8 @@
 # ------------------------------------------------------------------------------
 set -e
 
-openssl req -nodes \
+openssl req \
+  -nodes -x509 -sha256 \
   -newkey rsa:2048 \
   -keyout localhost.key \
   -out localhost.crt \
