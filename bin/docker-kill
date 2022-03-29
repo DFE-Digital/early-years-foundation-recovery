@@ -2,4 +2,10 @@
 # ------------------------------------------------------------------------------
 set -e
 
-docker-compose --project-name recovery down
+for env in dev test qa; do
+  docker-compose \
+    -f docker-compose.yml \
+    -f docker-compose.$env.yml \
+    --project-name recovery \
+    down
+done
