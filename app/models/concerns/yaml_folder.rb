@@ -14,9 +14,11 @@ module YamlFolder
 
   # When loading from a folder, the set_filename is used, but aliased as set_folder
   # For that to work within this module, the method has to exist - hence this pass-through method
+  # rubocop:disable Lint/UselessMethodDefinition
   def set_filename(name)
     super
   end
+  # rubocop:enable Lint/UselessMethodDefinition
 
 private
 
