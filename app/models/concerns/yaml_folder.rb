@@ -18,7 +18,7 @@ module YamlFolder
   def set_filename(name)
     super
   end
-  # rubocop:enable Lint/UselessMethodDefinition
+# rubocop:enable Lint/UselessMethodDefinition
 
 private
 
