@@ -3,7 +3,9 @@
 # ------------------------------------------------------------------------------
 FROM ruby:3.1.0-alpine as base
 
-RUN apk add --no-cache --no-progress build-base tzdata postgresql-dev yarn gcompat
+RUN apk add --no-cache --no-progress \
+    build-base tzdata postgresql-dev yarn gcompat \
+    "gmp>=6.2.1-r1" "gmp-dev>=6.2.1-r1" "libretls>=3.3.4-r3"
 
 # ------------------------------------------------------------------------------
 # Production Stage
