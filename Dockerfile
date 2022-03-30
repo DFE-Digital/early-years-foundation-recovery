@@ -84,7 +84,9 @@ COPY .rubocop_todo.yml ${APP_HOME}/.rubocop_todo.yml
 # ------------------------------------------------------------------------------
 FROM ruby:3.1.0-alpine as qa
 
-RUN apk add --no-cache --no-progress build-base tzdata
+RUN apk add --no-cache --no-progress build-base tzdata \
+    "gmp>=6.2.1-r1" "gmp-dev>=6.2.1-r1" "libgmpxx>=6.2.1-r1 " \
+    "libretls>=3.3.4-r3" "libssl1.1>=1.1.1n-r0" "libcrypto1.1>=1.1.1n-r0"
 
 RUN gem install pry-byebug rspec capybara site_prism selenium-webdriver
 
