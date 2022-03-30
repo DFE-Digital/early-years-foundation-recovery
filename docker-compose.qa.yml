@@ -17,7 +17,8 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - .:/src
+      - ./localhost.key:/src/localhost.key
+      - ./localhost.crt:/src/localhost.crt
 
   qa:
     container_name: recovery_qa
