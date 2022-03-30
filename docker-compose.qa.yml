@@ -11,7 +11,9 @@ services:
     ports:
       - 3000:3000
     volumes:
-      # NB: ensure RAILS_MASTER_KEY=<production master key> is in .env
+      # NB: or ensure RAILS_MASTER_KEY=<production master key> is in .env
+      - ./config/credentials/production.key:/src/config/credentials/production.key
+      # NB: run ./bin/docker-certs to generate a self-signed certificate
       - ./localhost.key:/src/localhost.key
       - ./localhost.crt:/src/localhost.crt
 
