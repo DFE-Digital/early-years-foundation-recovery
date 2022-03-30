@@ -27,7 +27,7 @@ jobs:
       -
         name: Build self-signed certificates
         run: |
-          openssl req
+          openssl req \
             -nodes -x509 -sha256 \
             -newkey rsa:2048 \
             -keyout localhost.key \
