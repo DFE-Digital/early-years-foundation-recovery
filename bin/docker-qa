@@ -1,4 +1,14 @@
 #!/bin/sh
+#
+# Uses self-signed certificates which need to be generated
+#
+# NB: ensure RAILS_MASTER_KEY=<production master key> is in .env
+#
+# https://github.com/SeleniumHQ/docker-selenium
+# @example
+#   BASE_URL=https://app:3000 ./bin/docker-qa
+#   BASE_URL=https://evening-thicket-25194.herokuapp.com:443
+#
 # ------------------------------------------------------------------------------
 set -e
 
