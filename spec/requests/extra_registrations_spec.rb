@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'ExtraRegistrations', type: :request do
+  subject(:user) { create(:user, :confirmed) }
+
   let(:steps) { ExtraRegistrationsController::STEPS }
-  let(:user) { create(:user, :confirmed) }
 
   before do
     sign_in user
@@ -23,11 +24,11 @@ RSpec.describe 'ExtraRegistrations', type: :request do
   end
 
   describe 'PATCH /extra_registrations/:id' do
-    context 'and adds first name to user' do
-      subject do
-        patch extra_registration_path(step), params: { user: user_params }
-      end
+    let(:update_user) do
+      patch extra_registration_path(step), params: { user: user_params }
+    end
 
+    context 'and adds first name to user' do
       let(:step) { :name }
       let(:user_params) do
         {
@@ -37,21 +38,17 @@ RSpec.describe 'ExtraRegistrations', type: :request do
       end
 
       it 'Updates user name' do
-        expect { subject(:user) }.to change { user.reload.first_name }.to(user_params[:first_name])
+        expect { update_user }.to change { user.reload.first_name }.to(user_params[:first_name])
       end
 
       it 'redirects to next step' do
         next_step = steps[steps.index(step) + 1]
-        subject(:step)
+        update_user
         expect(response).to redirect_to(edit_extra_registration_path(next_step))
       end
     end
 
     context 'when on last step' do
-      subject do
-        patch extra_registration_path(step), params: { user: user_params }
-      end
-
       let(:step) { :setting }
       let(:user_params) do
         {
@@ -60,11 +57,11 @@ RSpec.describe 'ExtraRegistrations', type: :request do
       end
 
       it 'Updates user name' do
-        expect { subject(:user) }.to change { user.reload.postcode }.to(user_params[:postcode])
+        expect { update_user }.to change { user.reload.postcode }.to(user_params[:postcode])
       end
 
       it 'redirects to root' do
-        subject(:path)
+        update_user
         expect(response).to redirect_to(root_path)
       end
     end

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'User', type: :request do
-  let(:user) { create :user, :registered }
+  subject(:user) { create :user, :registered }
 
   before { sign_in user }
 
@@ -20,16 +20,18 @@ RSpec.describe 'User', type: :request do
   end
 
   describe 'patch /user' do
-    subject { patch user_path, params: { user: { first_name: first_name } } }
+    let(:update_user) do
+      patch user_path, params: { user: { first_name: first_name } }
+    end
 
     let(:first_name) { 'Foo-Bar' }
 
     it 'updates the user' do
-      expect { subject(:user) }.to change(user.reload, :first_name).to(first_name)
+      expect { update_user }.to change(user.reload, :first_name).to(first_name)
     end
 
     it 'redirects back to the show page' do
-      expect(subject(:path)).to redirect_to(user_path)
+      expect(update_user).to redirect_to(user_path)
     end
   end
 end
