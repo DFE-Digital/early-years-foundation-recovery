@@ -56,6 +56,9 @@ gem 'govuk_notify_rails', '~> 2.2', '>= 2.2.0'
 gem "sentry-rails"
 gem "sentry-ruby"
 
+# Manage seeds
+gem "dibber"
+
 group :development, :test do
   # Use fake data for specs
   gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'

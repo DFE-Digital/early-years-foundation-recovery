@@ -2,5 +2,5 @@ h1=@model.heading
 =image_tag(@model.image) if @model.image.present?
 p=translate_markdown(@model.body)
 p
-  =link_to_previous_module_item(@module_item)
-  =link_to_next_module_item(@module_item)
+  = link_to_previous_module_item(@module_item)
+  =< link_to_next_module_item(@module_item)
