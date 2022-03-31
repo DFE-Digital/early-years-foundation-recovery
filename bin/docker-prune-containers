@@ -1,4 +1,7 @@
 #!/bin/sh
+#
+# Clean up containers matching the project name.
+# Useful if containers are being developed or renamed.
 # ------------------------------------------------------------------------------
 set -e
 

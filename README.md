@@ -2,6 +2,12 @@
 
 [![Continuous Integration][ci-badge]][ci-workflow]
 
+## Getting Started
+
+1. Clone the repository
+2. Obtain the master keys
+3. Run!
+
 ## Rails Credentials
 
 We use rails credentials to manage secrets. If you need to modify secrets for one
@@ -33,8 +39,9 @@ The commands run common tasks inside containers:
 
 - `bin/docker-dev` starts `Procfile.dev`, containerised equivalent of `bin/dev`,
     using the `docker-compose.dev.yml` override
+- `bin/docker-rails db:seed` populates the containerised postgres database
 - `bin/docker-rails console` drops into a running development environment or starts one,
-    containerised equivalent of `bin/rails`
+    containerised equivalent of `bin/rails console`
 - `bin/docker-rspec -f doc` runs the test suite with optional arguments, containerised
     equivalent of `bin/rspec`
 - `BASE_URL=https://app:3000 bin/docker-qa` runs the browser tests against a
@@ -43,6 +50,7 @@ The commands run common tasks inside containers:
 These commands can be used to debug problems:
 
 - `docker ps` lists all active **Docker** processes
+- `docker system prune` tidies up your system
 - `docker-compose -f docker-compose.yml -f docker-compose.<FILE>.yml --project-name recovery run --rm app`  can help identify why the application is not running in either the `dev`, `test`, or `qa` contexts
 
 ---
