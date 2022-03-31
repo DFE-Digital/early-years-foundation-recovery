@@ -21,5 +21,15 @@ describe 'Dfe' do
 
       expect(sign_in).to be_displayed
     end
+
+    it 'logs in the created user', { wip: true } do
+      home_page.load
+      home_page.header.sign_in.click
+      sign_in.wait_until_header_visible
+
+      sign_in.email.set 'example@example.com'
+      sign_in.password.set 'password'
+      sign_in.sign_in_button.click
+    end
   end
 end
