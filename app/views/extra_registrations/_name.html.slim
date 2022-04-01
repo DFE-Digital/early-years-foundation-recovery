@@ -1,3 +1,5 @@
-= f.govuk_fieldset legend: { text: "Name", tag: :h1, size: 'l' } do
-  = f.govuk_text_field :first_name, width: 'one-half', label: { text: t(:first_name) }
-  = f.govuk_text_field :last_name, width: 'one-half', label: { text: t(:last_name) }
+= f.govuk_fieldset legend: { text: t(:heading, scope: [:extra_registration, current_step]), tag: :h1, size: 'l' } do
+  p.govuk_body
+    = t(:hint, scope: [:extra_registration, current_step])
+  = f.govuk_text_field :first_name, width: 'two-thirds', label: { text: t(:first_name, scope: [:extra_registration, current_step]) }
+  = f.govuk_text_field :last_name, width: 'two-thirds', label: { text: t(:last_name, scope: [:extra_registration, current_step]) }

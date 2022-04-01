@@ -6,8 +6,10 @@
     |  to access training material.
 
 - content_for :devise_form do
-  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-    = f.govuk_error_summary
+  = form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: false } ) do |f|
+    = f.govuk_error_summary do 
+      p.govuk-body
+        You will need to reset your password if you enter the wrong details five times.
     = f.govuk_fieldset legend: { text: 'Sign in to early years training', tag: :h1, size: "l" } do
       p.govuk-body
         | Enter your details to sign in to your personal early years training account. These details are different to any other GOV.UK accounts you may use.
