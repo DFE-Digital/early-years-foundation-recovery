@@ -1,11 +1,15 @@
 ---
 # ------------------------------------------------------------------------------
+#
+# Run the end-to-end test suit against applications running in production
+#
 name: QA Framework
 on:
   workflow_dispatch:
+  pull_request:
   push:
     branches:
-      - qa-workflow
+      - main
 
 env:
   RAILS_ENV: production

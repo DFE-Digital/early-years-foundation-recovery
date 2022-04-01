@@ -10,8 +10,9 @@
 
 ## Useful Links
 
-- [review-app][review-app]
-- [prototype][prototype]
+- [Review Application][review-app]
+- [Prototype][prototype]
+- [Flow Diagram][figma]
 
 ## Rails Credentials
 
@@ -110,4 +111,5 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 [notify]: https://www.notifications.service.gov.uk
 [review-app]: https://github.com/ife-dev1/DFE-Digital-early-years-foundation-recovery
 [prototype]: https://eye-recovery.herokuapp.com/home
+[figma]: https://www.figma.com/file/FGW1NJJwnYRqoZ2DV0l5wW/Training-content?node-id=1%3A19
 
