@@ -5,7 +5,7 @@ class ExtraRegistrationsController < ApplicationController
   STEP_FORMS = {
     # partial => form object class
     name: Users::NameForm,
-    setting: Users::SettingForm
+    setting: Users::SettingForm,
   }.freeze
   STEPS = STEP_FORMS.keys.freeze
 
@@ -27,11 +27,11 @@ class ExtraRegistrationsController < ApplicationController
       redirect_to edit_extra_registration_path(next_step)
     else
       current_user.update! registration_complete: true
-      redirect_to root_path, notice: "Registration complete"
+      redirect_to root_path, notice: 'Registration complete'
     end
   end
 
-  private
+private
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :postcode, :ofsted_number)
@@ -50,6 +50,6 @@ class ExtraRegistrationsController < ApplicationController
   helper_method :current_step
 
   def current_form_klass
-    @current_form ||= STEP_FORMS[current_step]
+    @current_form_klass ||= STEP_FORMS[current_step]
   end
 end

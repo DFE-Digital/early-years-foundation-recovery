@@ -39,7 +39,7 @@ gem 'bootsnap', require: false
 gem 'devise'
 
 # HTML abstraction markup language
-gem "slim-rails", "~> 3.3"
+gem 'slim-rails', '~> 3.3'
 
 # Create models from static data such as hashes or YAML
 gem 'active_hash'
@@ -53,11 +53,11 @@ gem 'kramdown', '~> 2.3'
 gem 'govuk_notify_rails', '~> 2.2', '>= 2.2.0'
 
 # Sentry -Monitor errors
-gem "sentry-rails"
-gem "sentry-ruby"
+gem 'sentry-rails'
+gem 'sentry-ruby'
 
 # Manage seeds
-gem "dibber"
+gem 'dibber'
 
 group :development, :test do
   # Use fake data for specs

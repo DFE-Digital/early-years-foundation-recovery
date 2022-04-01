@@ -1,40 +1,40 @@
 require 'rails_helper'
 
 RSpec.describe YoutubePage, type: :model do
-  let(:content) { YAML.load_file(Rails.root.join("config/locales/modules/test.yml")).dig("en", "modules", "test") }
+  let(:content) { YAML.load_file(Rails.root.join('config/locales/modules/test.yml')).dig('en', 'modules', 'test') }
   let(:youtube_page) { described_class.new(name: :video, training_module: :test, type: :youtube_page) }
 
-  describe "#heading" do
-    it "returns the heading data from the content file" do
+  describe '#heading' do
+    it 'returns the heading data from the content file' do
       expect(youtube_page.heading).to eq(content.dig(youtube_page.name.to_s, 'heading'))
     end
   end
 
-  describe "#body" do
-    it "returns the body data from the content file" do
+  describe '#body' do
+    it 'returns the body data from the content file' do
       expect(youtube_page.body).to eq(content.dig(youtube_page.name.to_s, 'body'))
     end
   end
 
-  describe "#video_title" do
-    it "returns the video title data from the content file" do
+  describe '#video_title' do
+    it 'returns the video title data from the content file' do
       expect(youtube_page.video_title).to eq(content.dig(youtube_page.name.to_s, 'video_title'))
     end
   end
 
-  describe "#youtube_url" do
-    it "returns the Youtube URL data from the content file" do
+  describe '#youtube_url' do
+    it 'returns the Youtube URL data from the content file' do
       expect(youtube_page.youtube_url).to eq(content.dig(youtube_page.name.to_s, 'youtube_url'))
     end
 
-    it "is valid" do
+    it 'is valid' do
       expect(youtube_page).to be_valid
     end
 
-    context "when URL is not for an embeded youtube video" do
-      before { allow(youtube_page).to receive(:youtube_url).and_return("http://example.com") }
+    context 'when URL is not for an embeded youtube video' do
+      before { allow(youtube_page).to receive(:youtube_url).and_return('http://example.com') }
 
-      it "is invalid" do
+      it 'is invalid' do
         expect(youtube_page).to be_invalid
       end
     end
