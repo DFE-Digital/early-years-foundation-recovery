@@ -2,18 +2,17 @@
 
 [![Continuous Integration][ci-badge]][ci-workflow]
 
+## Getting Started
 
-## Development using Docker
+1. Clone the repository
+2. Obtain the master keys
+3. Run!
 
-Containerised services in development have exposed ports for local access.
+## Useful Links
 
-- `bin/docker-build` creates tagged docker images
-- `bin/docker-dev` starts `Procfile.dev`, containerised equivalent of `bin/dev`
-- `bin/docker-rails console` drops into a running dev environment or starts one
-- `bin/docker-rspec -f doc` runs the test suite with optional arguments
-
-Permissions on any files generated within Docker, in the development environment with a mounted volume, will be owned by root.
-You can correct the permissions in your local working directory by running `bin/docker-files`.
+- [Review Application][review-app]
+- [Prototype][prototype]
+- [Flow Diagram][figma]
 
 ## Rails Credentials
 
@@ -22,6 +21,45 @@ of the deployed environments, you can get the encryption keys from another devel
 
 Once you have the keys, run `rails credentials:edit --environment <env>`.
 Full instructions can be found by running `rails credentials:help`
+
+---
+
+## Using Docker
+
+Containerised services are available for use by developers and testers.
+There are a number of convenience scripts to make working with **Docker** easier.
+All containers for the project are named with the prefix `recovery_`.
+The project uses chained **Docker Compose** files to prepare different environments.
+
+These commands help maintain your containerised workspace:
+
+- `bin/docker-build` creates tagged images for all the services
+- `bin/docker-certs` generates a self-signed certificate for running the app in production
+- `bin/docker-files` changes the ownership of files to your current user, files
+    generated inside containers are created by *root*
+- `bin/docker-kill` brings down any active project containers
+- `bin/docker-prune-containers` deletes all project containers
+- `bin/docker-prune-images` deletes all tagged images
+
+The commands run common tasks inside containers:
+
+- `bin/docker-dev` starts `Procfile.dev`, containerised equivalent of `bin/dev`,
+    using the `docker-compose.dev.yml` override
+- `bin/docker-rails db:seed` populates the containerised postgres database
+- `bin/docker-rails console` drops into a running development environment or starts one,
+    containerised equivalent of `bin/rails console`
+- `bin/docker-rspec -f doc` runs the test suite with optional arguments, containerised
+    equivalent of `bin/rspec`
+- `BASE_URL=https://app:3000 bin/docker-qa` runs the browser tests against a
+    running production application, change browser using `BROWSER=firefox`
+
+These commands can be used to debug problems:
+
+- `docker ps` lists all active **Docker** processes
+- `docker system prune` tidies up your system
+- `docker-compose -f docker-compose.yml -f docker-compose.<FILE>.yml --project-name recovery run --rm app`  can help identify why the application is not running in either the `dev`, `test`, or `qa` contexts
+
+---
 
 ## Emails
 
@@ -67,6 +105,11 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
 
 ---
+
 [ci-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml/badge.svg
 [ci-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml
 [notify]: https://www.notifications.service.gov.uk
+[review-app]: https://github.com/ife-dev1/DFE-Digital-early-years-foundation-recovery
+[prototype]: https://eye-recovery.herokuapp.com/home
+[figma]: https://www.figma.com/file/FGW1NJJwnYRqoZ2DV0l5wW/Training-content?node-id=1%3A19
+

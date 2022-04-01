@@ -1,4 +1,4 @@
-version: "3.8"
+---
 services:
   app:
     container_name: recovery_dev
@@ -6,6 +6,8 @@ services:
       target: dev
     image: recovery:dev
     command: foreman start -f Procfile.dev
+    healthcheck:
+      test: curl --fail http://localhost:3000/health || exit 1
     environment:
       - RAILS_ENV=development
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development

@@ -1,14 +1,19 @@
 #!/bin/sh
+#
+# Run `rails` commands in the development environment.
+# Starts a container unless one is actively running.
 # ------------------------------------------------------------------------------
 set -e
 
-if docker container ls | grep recovery_dev; then
+if docker container ls -q -f name=recovery_dev; then
   docker exec -it recovery_dev rails "$@"
 else
   docker-compose \
     -f docker-compose.yml \
     -f docker-compose.dev.yml \
     --project-name recovery \
-    run --rm app \
+    run \
+    --name recovery_rails \
+    --rm app \
     rails "$@"
 fi

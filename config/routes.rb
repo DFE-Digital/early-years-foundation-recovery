@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'home#index'
 
+  get 'health', to: 'home#show'
+
   devise_for :users, controllers: { registrations: 'registrations' }
   resources :extra_registrations, only: %i[index edit update]
   resource :user, only: %i[show edit update], controller: :user do

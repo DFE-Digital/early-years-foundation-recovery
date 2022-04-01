@@ -2,7 +2,7 @@
 .git
 .yardoc
 adr
-config/master.key
+config/*.key
 config/credentials/*.key
 coverage
 doc
