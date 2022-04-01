@@ -11,7 +11,7 @@ class UserController < ApplicationController
 
   def update
     if user.update(user_params)
-      redirect_to user_path, notice: "Profile updated"
+      redirect_to user_path, notice: 'Profile updated'
     else
       render :edit
     end
@@ -21,7 +21,7 @@ class UserController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  private
+private
 
   def user
     @user ||= current_user

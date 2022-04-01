@@ -16,7 +16,7 @@ class QuestionnairesController < ApplicationController
     end
   end
 
-  private
+private
 
   def questionnaire
     @questionnaire ||= Questionnaire.find_by!(name: params[:id], training_module: training_module)
@@ -44,7 +44,7 @@ class QuestionnairesController < ApplicationController
 
   def generate_error_messages
     results.map do |question, result|
-      questionnaire.errors.add question, "is#{ ' not' unless result } correct"
+      questionnaire.errors.add question, "is#{' not' unless result} correct"
     end
   end
 
@@ -61,7 +61,7 @@ class QuestionnairesController < ApplicationController
   # as they are submitted as an array within params
   def permitted_methods
     questionnaire.questions.map do |question, data|
-      data[:multi_select] ? {question => []} : question
+      data[:multi_select] ? { question => [] } : question
     end
   end
 end

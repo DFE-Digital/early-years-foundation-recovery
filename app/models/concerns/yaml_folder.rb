@@ -1,29 +1,41 @@
-# Extends ActiveYaml::Base so that objects can be defined across a number of files in a folder
+# @abstract Extends ActiveYaml::Base so that objects can be defined
+#   across a number of files in a folder
 #
-# Usage:
+# @example
 #   class Something < ActiveYaml::Base
 #     extend YamlFolder
 #     set_folder 'path/to/folder'
 #   end
-
+#
 module YamlFolder
-  # Override the full path to point at a folder rather than a file
+  # @overload full_path
+  #   The full path to point at a folder rather than a file
+  #
+  # @return [String]
   def full_path
     File.join(actual_root_path, filename)
   end
 
-  # When loading from a folder, the set_filename is used, but aliased as set_folder
-  # For that to work within this module, the method has to exist - hence this pass-through method
-  def set_filename(name)
-    super
+  # Alias of `set_filename`
+  #
+  # @param name [String]
+  #
+  # @return [String]
+  def set_folder(name)
+    set_filename(name)
   end
-  alias_method :set_folder, :set_filename
 
-  private
-  # Loop through each file in the folder, extract a hash from each yaml file, and merge the hashes into a single hash
+private
+
+  # @overload load_path
+  #   Iterate over each YAML file in the folder and combine into a single hash
+  #
+  # @param path [String]
+  #
+  # @return [Hash]
   def load_path(path)
-    results = Dir.glob(File.join(path, "*.yml")).map do |file|
-      YAML.load(ERB.new(File.read(file)).result)
+    results = Dir.glob(File.join(path, '*.yml')).map do |file|
+      YAML.safe_load(ERB.new(File.read(file)).result)
     end
     results.compact!
     results.reduce(:merge)

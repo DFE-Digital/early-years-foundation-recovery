@@ -16,7 +16,7 @@ class ContentPagesController < ApplicationController
     end
   end
 
-  private
+private
 
   def module_item
     @module_item ||= ModuleItem.find_by!(training_module: training_module, name: params[:id])
