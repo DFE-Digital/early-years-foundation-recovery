@@ -57,7 +57,7 @@ gem 'sentry-rails'
 gem 'sentry-ruby'
 
 # Manage seeds
-gem "dibber"
+gem 'dibber'
 
 group :development, :test do
   # Use fake data for specs

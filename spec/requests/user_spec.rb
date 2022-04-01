@@ -32,7 +32,7 @@ RSpec.describe 'User', type: :request do
       end
 
       it 'redirects back to the show page' do
-        expect { update_user }.to redirect_to(user_path)
+        expect(update_user).to redirect_to(user_path)
       end
     end
   end
