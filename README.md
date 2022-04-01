@@ -8,6 +8,11 @@
 2. Obtain the master keys
 3. Run!
 
+## Useful Links
+
+- [review-app][review-app]
+- [prototype][prototype]
+
 ## Rails Credentials
 
 We use rails credentials to manage secrets. If you need to modify secrets for one
@@ -103,3 +108,6 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 [ci-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml/badge.svg
 [ci-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml
 [notify]: https://www.notifications.service.gov.uk
+[review-app]: https://github.com/ife-dev1/DFE-Digital-early-years-foundation-recovery
+[prototype]: https://eye-recovery.herokuapp.com/home
+

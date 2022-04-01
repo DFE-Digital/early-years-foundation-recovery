@@ -25,7 +25,7 @@ services:
     image: recovery:qa
     environment:
       - BASE_URL
-      - BROWSER=chrome
+      - BROWSER
     depends_on:
       app:
         condition: service_healthy

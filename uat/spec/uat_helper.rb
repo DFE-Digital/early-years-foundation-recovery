@@ -17,7 +17,6 @@ require 'capybara/rspec'
 require 'selenium-webdriver'
 require 'site_prism'
 require 'site_prism/all_there'
-require 'yaml'
 
 Capybara.register_driver :chrome do |app|
   capabilities = Selenium::WebDriver::Remote::Capabilities.chrome

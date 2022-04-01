@@ -2,7 +2,8 @@
 #
 # @see https://github.com/SeleniumHQ/docker-selenium
 #
-# NB: Generate self-signed certificates before running, `./bin/docker-certs`
+# Generate self-signed certificates before running using:
+#   $ ./bin/docker-certs
 #
 # @example
 #

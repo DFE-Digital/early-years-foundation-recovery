@@ -13,7 +13,7 @@ env:
 
 jobs:
   test:
-    name: Test Docker Compose & Heroku
+    name: Run Rspec
     runs-on: ubuntu-latest
     environment: production
 
@@ -22,7 +22,7 @@ jobs:
         name: Check out code
         uses: actions/checkout@v2
       -
-        name: Build application Docker image
+        name: Build Docker images
         run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery build
       -
         name: Build self-signed certificates
@@ -33,26 +33,20 @@ jobs:
             -keyout localhost.key \
             -out localhost.crt \
             -subj "/C=GB/ST=London/L=London/O=DfE/OU=EYFS/CN=example.com"
+      # -
+      #   name: Example against Heroku
+      #   run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run qa
+      #   env:
+      #     BASE_URL: https://evening-thicket-25194.herokuapp.com
+      #     BROWSER: firefox
       -
-        name: Firefox against Heroku
-        run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run qa
-        env:
-          BASE_URL: https://evening-thicket-25194.herokuapp.com
-          BROWSER: firefox
-      -
-        name: Chrome against Heroku
-        run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run qa
-        env:
-          BASE_URL: https://evening-thicket-25194.herokuapp.com
-          BROWSER: chrome
-      -
-        name: Firefox against production app in compose
+        name: Firefox against production app
         run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run qa
         env:
           BASE_URL: https://app:3000
           BROWSER: firefox
       -
-        name: Chrome against production app in compose
+        name: Chrome against production app
         run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run qa
         env:
           BASE_URL: https://app:3000
