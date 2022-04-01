@@ -1,9 +1,9 @@
 #!/bin/sh
 # ------------------------------------------------------------------------------
-# If the working directory is not mounted as a volume, then `RAILS_MASTER_KEY`
-# environment variable must be set using:
+# If the working directory is not mounted as a volume, then the test environment
+# RAILS_MASTER_KEY variable must be passed in.
 #
-# "-e RAILS_MASTER_KEY=xxxx"
+# This behaviour is used in a GitHub workflow, however this script adds the mount
 #
 set -e
 
@@ -13,5 +13,6 @@ docker-compose \
   --project-name recovery \
   run \
   --volume="$PWD:/src" \
+  --name recovery_rspec \
   --rm app \
   rspec "$@"

@@ -1,11 +1,14 @@
 #!/bin/sh
+#
+# Builds and tags all project images
+# Force a rebuild using `./bin/docker-build --no-cache`
 # ------------------------------------------------------------------------------
 set -e
 
-for env in dev test; do
+for env in dev test qa; do
   docker-compose \
-  -f docker-compose.yml \
-  -f docker-compose.$env.yml \
-  --project-name recovery \
-  build
+    -f docker-compose.yml \
+    -f docker-compose.$env.yml \
+    --project-name recovery \
+    build "$@"
 done

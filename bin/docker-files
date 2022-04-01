@@ -1,4 +1,6 @@
 #!/bin/sh
+#
+# Reclaim ownership of files in the working directory generated as root in Docker
 # ------------------------------------------------------------------------------
 set -e
 

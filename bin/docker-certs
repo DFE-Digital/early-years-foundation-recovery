@@ -1,0 +1,10 @@
+#!/bin/sh
+# ------------------------------------------------------------------------------
+set -e
+
+openssl req \
+  -nodes -x509 -sha256 \
+  -newkey rsa:2048 \
+  -keyout localhost.key \
+  -out localhost.crt \
+  -subj "/C=GB/ST=London/L=London/O=DfE/OU=EYFS/CN=example.com"

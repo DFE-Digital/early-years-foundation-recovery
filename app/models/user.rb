@@ -5,6 +5,6 @@ class User < ApplicationRecord
          :validatable, :rememberable, :confirmable
 
   def name
-    [first_name, last_name].compact.join(" ")
+    [first_name, last_name].compact.join(' ')
   end
 end

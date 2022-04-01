@@ -1,5 +1,14 @@
-@use "govuk-frontend/govuk/all";
+@import "govuk-frontend/govuk/all";
 
 .debug_dump {
   background: beige;
+}
+
+.app-sidebar {
+  padding: govuk-spacing(5) govuk-spacing(3);
+  background-color: govuk-colour("light-grey");
+
+  *:last-child {
+    margin: 0;
+  }
 }

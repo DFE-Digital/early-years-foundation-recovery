@@ -18,15 +18,20 @@ html
   body.govuk-template__body.govuk-body
     script
       | document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
-    
     = govuk_skip_link
 
     = navigation
 
     .govuk-width-container
+      = govuk_phase_banner(tag: { text: "Beta" }) do
+        | This is a new service, your
+        =< govuk_link_to("feedback", "#")
+        |  will help us improve it.
+      .govuk-grid-row
+        .govuk-grid-column-two-thirds-from-desktop
+          = govuk_back_link(href: request.referrer)
       main.govuk-main-wrapper#main-content role="main"
         - flash.each do |variant, message|
           = govuk_notification_banner title_text: t("banners.#{variant}"), text: message, success: false
-
         = yield
     = govuk_footer

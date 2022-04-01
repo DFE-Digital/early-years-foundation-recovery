@@ -11,6 +11,8 @@ This log lists the architectural decisions for EYFS Recovery
 * [ADR-0005](0005-content-storage-strategy.md) - Content storage strategy
 * [ADR-0006](0006-secrets-management.md) - Secrets Management
 * [ADR-0007](0007-deployment-environments.md) - Deployment environments
+* [ADR-0008](0008-linting.md) - Linting
+* [ADR-0009](0009-trivy.md) - Container security scanning
 
 <!-- adrlogstop -->
 

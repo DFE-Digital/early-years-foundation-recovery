@@ -4,11 +4,11 @@ class ModuleItem < YamlBase
     sub_module_intro: ContentPage,
     text_page: ContentPage,
     youtube_page: YoutubePage,
-    formative_assessment: Questionnaire
-  }
+    formative_assessment: Questionnaire,
+  }.freeze
 
   extend YamlFolder
-  set_folder "modules"
+  set_folder 'modules'
 
   # Override ActiveYaml::Base load_file method to get data nested within file and use parent keys to populate attributes
   def self.load_file

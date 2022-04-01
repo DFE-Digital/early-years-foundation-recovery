@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# Clean up containers matching the project name.
+# Useful if containers are being developed or renamed.
+# ------------------------------------------------------------------------------
+set -e
+
+docker stop $(docker ps --filter name=recovery --all --quiet)
+
+docker rm $(docker ps --filter name=recovery --all --quiet)

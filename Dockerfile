@@ -3,7 +3,10 @@
 # ------------------------------------------------------------------------------
 FROM ruby:3.1.0-alpine as base
 
-RUN apk add --no-cache --no-progress build-base tzdata postgresql-dev yarn gcompat
+RUN apk add --no-cache --no-progress \
+    build-base curl tzdata postgresql-dev yarn gcompat \
+    "gmp>=6.2.1-r1" "zlib>=1.2.12-r0" \
+    "libretls>=3.3.4-r3" "libssl1.1>=1.1.1n-r0" "libcrypto1.1>=1.1.1n-r0"
 
 # ------------------------------------------------------------------------------
 # Production Stage
@@ -20,8 +23,7 @@ RUN mkdir -p ${APP_HOME}/tmp/pids ${APP_HOME}/log
 
 WORKDIR ${APP_HOME}
 
-COPY Gemfile $APP_HOME/Gemfile
-COPY Gemfile.lock $APP_HOME/Gemfile.lock
+COPY Gemfile* ./
 
 RUN bundle config set no-cache true
 RUN bundle config set without development test
@@ -52,7 +54,6 @@ EXPOSE 3000
 
 CMD ["bundle", "exec", "rails", "server"]
 
-
 # ------------------------------------------------------------------------------
 # Development Stage
 # ------------------------------------------------------------------------------
@@ -77,3 +78,20 @@ COPY spec ${APP_HOME}/spec
 COPY .rspec ${APP_HOME}/.rspec
 COPY .rubocop.yml ${APP_HOME}/.rubocop.yml
 COPY .rubocop_todo.yml ${APP_HOME}/.rubocop_todo.yml
+
+# ------------------------------------------------------------------------------
+# QA Stage
+# ------------------------------------------------------------------------------
+FROM ruby:3.1.0-alpine as qa
+
+RUN apk add --no-cache --no-progress build-base tzdata gcompat \
+    "gmp>=6.2.1-r1" "zlib>=1.2.12-r0" \
+    "libretls>=3.3.4-r3" "libssl1.1>=1.1.1n-r0" "libcrypto1.1>=1.1.1n-r0"
+
+RUN gem install pry-byebug rspec capybara site_prism selenium-webdriver
+
+COPY uat /uat
+
+WORKDIR /uat
+
+CMD ["rspec"]
