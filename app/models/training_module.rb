@@ -8,10 +8,6 @@ class TrainingModule < YamlBase
     end
   end
 
-  def about_training
-    @about_training ||= AboutTraining.find_by(training_module: name)
-  end
-
   def topics
     @topics ||= Topic.where(training_module: name)
   end
