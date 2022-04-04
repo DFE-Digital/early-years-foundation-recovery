@@ -42,7 +42,7 @@ RSpec.describe NotifyMailer, type: :mailer do
     end
   end
 
-  describe "unlock email" do
+  describe 'unlock email' do
     context 'when account is locked' do
       it 'send unlock email to correct user' do
         response = User.send_unlock_instructions(email: user.email)
