@@ -16,12 +16,9 @@ RSpec.describe NotifyMailer, type: :mailer do
   describe 'reset password instructions' do
     context 'when resetting password' do
       it 'send instructions to correct user' do
-        # response = User.send_reset_password_instructions(email: user.email)
-        # expect(response.email).to eq user.email
-
-        mail = NotifyMailer.reset_password_instructions(user, :anything)
+        mail = described_class.reset_password_instructions(user, :anything)
         expect(mail.to.first).to eq user.email
-        expect(mail.subject).to eq "Reset password instructions"
+        expect(mail.subject).to eq 'Reset password instructions'
       end
     end
   end
@@ -49,12 +46,9 @@ RSpec.describe NotifyMailer, type: :mailer do
   describe 'unlock email' do
     context 'when account is locked' do
       it 'send unlock email to correct user' do
-        # response = User.send_unlock_instructions(email: user.email)
-        # expect(response.email).to eq user.email
-        
-        mail = NotifyMailer.unlock_instructions(user, :anything)
+        mail = described_class.unlock_instructions(user, :anything)
         expect(mail.to.first).to eq user.email
-        expect(mail.subject).to eq "Unlock instructions"
+        expect(mail.subject).to eq 'Unlock instructions'
       end
     end
   end
