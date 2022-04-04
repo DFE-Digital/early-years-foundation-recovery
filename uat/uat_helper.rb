@@ -18,11 +18,14 @@ require 'selenium-webdriver'
 require 'site_prism'
 require 'site_prism/all_there'
 
+# default driver if none chosen
+ENV['BROWSER'] ||= 'chrome'
+
 def require_all_files_in_dir(dir_path)
   Dir[Pathname(__dir__).realpath.join(dir_path)].each(&method(:require))
 end
 
-require_all_files_in_dir('lib/drivers')
+require_all_files_in_dir('lib/drivers/*')
 
 %w[sections pages].each do |component|
   require_all_files_in_dir("lib/#{component}/*")
