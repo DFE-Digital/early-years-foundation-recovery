@@ -22,6 +22,7 @@ module Drivers
       when 'chrome' then :chrome
       when 'headless_chrome' then :headless_chrome
       when 'headless_firefox' then :headless_firefox
+      when 'remote_chrome' then :remote_chrome
       else abort 'BROWSER variable needs to be set to something valid, or left alone'
       end
     end
