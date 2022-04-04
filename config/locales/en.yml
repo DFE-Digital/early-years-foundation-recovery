@@ -43,8 +43,26 @@ en:
               blank: Enter a surname.
             postcode:
               blank: Enter your setting's postcode.
+            email:
+              blank: Enter an email address.
+            password:
+              blank: Enter a password.
+              too_short: Password is too short.
+            password_confirmation:
+              confirmation: Confirmation doesn't match password.
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
             current_password:
-              blank: Current password cannot be blank if changing.
+              blank: Enter your current password.
+            first_name:
+              blank: Enter a first name.
+            last_name:
+              blank: Enter a surname.
+            postcode:
+              blank: Enter your setting's postcode.
             email:
               blank: Enter an email address.
             password:
