@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../uat_helper'
+
 describe 'home_page' do
   context 'when unauthenticated' do
     let(:home_page) { Pages::Home.new }
