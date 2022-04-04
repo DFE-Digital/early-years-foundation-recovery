@@ -26,7 +26,7 @@ module Drivers
 
     def self.register_remote
       remote_url = 'http://chrome:4444/wd/hub'
-      Capybara.register_driver :chrome do |app|
+      Capybara.register_driver :remote_chrome do |app|
         capabilities = Selenium::WebDriver::Remote::Capabilities.chrome
         capabilities['acceptInsecureCerts'] = true
 
