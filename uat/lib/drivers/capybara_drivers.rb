@@ -1,4 +1,3 @@
-
 module Drivers
   # Capybara registration for all drivers
   class CapybaraDrivers

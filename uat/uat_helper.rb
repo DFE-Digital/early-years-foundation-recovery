@@ -31,6 +31,9 @@ require_all_files_in_dir('lib/drivers/*')
   require_all_files_in_dir("lib/#{component}/*")
 end
 
+require_relative 'lib/site_prism_sub_class'
+require_relative 'lib/dfe'
+
 Drivers::CapybaraDrivers.register_all
 
 Capybara.configure do |config|
