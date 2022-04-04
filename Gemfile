@@ -91,3 +91,12 @@ group :test do
   gem 'rspec-rails'
   gem 'simplecov'
 end
+
+group :ui_auto do
+  gem 'capybara'
+  gem 'capybara-selenium'
+  gem 'rspec'
+  gem 'selenium-webdriver'
+  gem 'site_prism'
+  gem 'webdrivers'
+end
