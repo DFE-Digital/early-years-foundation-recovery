@@ -7,6 +7,7 @@ module Drivers
       Firefox.register_headless
       Chrome.register
       Chrome.register_headless
+      Chrome.register_remote
     end
 
     def self.chosen_driver
