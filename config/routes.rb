@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'home#index'
 
+  get '/404', to: 'errors#not_found', via: :all
   get 'health', to: 'home#show'
 
   devise_for :users, controllers: { registrations: 'registrations' }
