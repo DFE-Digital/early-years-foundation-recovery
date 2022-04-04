@@ -97,6 +97,10 @@ group :test do
 end
 
 group :ui do
+  gem 'capybara'
   gem 'capybara-selenium'
+  gem 'rspec'
+  gem 'selenium-webdriver'
   gem 'site_prism'
+  gem 'webdrivers'
 end
