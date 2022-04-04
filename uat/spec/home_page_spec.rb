@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'uat_helper'
+require_relative '../uat_helper'
 
 describe 'home_page' do
   context 'when unauthenticated' do
