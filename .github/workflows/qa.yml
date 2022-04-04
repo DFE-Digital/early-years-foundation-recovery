@@ -1,57 +1,6 @@
 ---
 # ------------------------------------------------------------------------------
 #
-# Run the end-to-end test suit against applications running in production
-#
 name: QA Framework
 on:
   workflow_dispatch:
-  pull_request:
-  push:
-    branches:
-      - main
-
-env:
-  RAILS_ENV: production
-  RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-
-jobs:
-  test:
-    name: Run Rspec
-    runs-on: ubuntu-latest
-    environment: production
-
-    steps:
-      -
-        name: Check out code
-        uses: actions/checkout@v2
-      -
-        name: Build Docker images
-        run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery build
-      -
-        name: Build self-signed certificates
-        run: |
-          openssl req \
-            -nodes -x509 -sha256 \
-            -newkey rsa:2048 \
-            -keyout localhost.key \
-            -out localhost.crt \
-            -subj "/C=GB/ST=London/L=London/O=DfE/OU=EYFS/CN=example.com"
-      # -
-      #   name: Example against Heroku
-      #   run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run qa
-      #   env:
-      #     BASE_URL: https://evening-thicket-25194.herokuapp.com
-      #     BROWSER: firefox
-      -
-        name: Firefox against production app
-        run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run qa
-        env:
-          BASE_URL: https://app:3000
-          BROWSER: firefox
-      -
-        name: Chrome against production app
-        run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run qa
-        env:
-          BASE_URL: https://app:3000
-          BROWSER: chrome

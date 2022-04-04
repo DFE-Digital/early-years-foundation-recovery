@@ -24,6 +24,11 @@ Full instructions can be found by running `rails credentials:help`
 
 ---
 
+## Working locally
+
+- `bin/dev` start processes
+- `bin/qa` run qa framework under `/ui`
+
 ## Using Docker
 
 Containerised services are available for use by developers and testers.
@@ -34,6 +39,7 @@ The project uses chained **Docker Compose** files to prepare different environme
 These commands help maintain your containerised workspace:
 
 - `bin/docker-build` creates tagged images for all the services
+- `bin/docker-yarn` recompile inside the container (temp solution)
 - `bin/docker-certs` generates a self-signed certificate for running the app in production
 - `bin/docker-files` changes the ownership of files to your current user, files
     generated inside containers are created by *root*
@@ -50,8 +56,7 @@ The commands run common tasks inside containers:
     containerised equivalent of `bin/rails console`
 - `bin/docker-rspec -f doc` runs the test suite with optional arguments, containerised
     equivalent of `bin/rspec`
-- `BASE_URL=https://app:3000 bin/docker-qa` runs the browser tests against a
-    running production application, change browser using `BROWSER=firefox`
+- `bin/docker-qa` runs the browser tests against a running production application
 
 These commands can be used to debug problems:
 
@@ -102,6 +107,14 @@ The status of GovUK notify can be checked here: <https://status.notifications.se
 
 For more information the Notify team can be contacted here: <https://www.notifications.service.gov.uk/support>,
 or in the UK Government digital slack workspace in the `#govuk-notify` channel.
+
+
+---
+
+## QA Framework
+
+- `brew install chromedriver geckodriver`
+- `xattr -d com.apple.quarantine /usr/local/bin/chromedriver`
 
 
 ---

@@ -87,7 +87,14 @@ group :development do
 end
 
 group :test do
+  gem 'capybara'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'simplecov'
+end
+
+group :ui do
+  gem 'capybara-selenium'
+  gem 'selenium-webdriver'
+  gem 'site_prism'
 end

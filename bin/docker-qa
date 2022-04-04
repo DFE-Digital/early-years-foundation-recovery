@@ -7,14 +7,14 @@
 #
 # @example
 #
-#   $ BROWSER=firefox BASE_URL=https://app:3000 ./bin/docker-qa
-#
+#   $ BROWSER=standalone_firefox BASE_URL=https://app:3000 ./bin/docker-qa
 #   $ BASE_URL=https://evening-thicket-25194.herokuapp.com ./bin/docker-qa
 #
 # ------------------------------------------------------------------------------
 set -e
 
-docker-compose \
+BROWSER=${BROWSER-'standalone_chrome'} \
+  docker-compose \
   -f docker-compose.yml \
   -f docker-compose.qa.yml \
   --project-name recovery \
