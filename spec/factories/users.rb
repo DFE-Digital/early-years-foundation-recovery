@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
     email { Faker::Internet.safe_email }
-    password { Faker::Lorem.characters(number: 10) }
+    password { 'StrongPassword123' }
 
     trait :confirmed do
       confirmed_at { 1.minute.ago }

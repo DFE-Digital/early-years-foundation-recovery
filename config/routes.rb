@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/404', to: 'errors#not_found', via: :all
   get 'health', to: 'home#show'
 
-  devise_for :users, controllers: { registrations: 'registrations', sessions: 'users/sessions' }
+  devise_for :users, controllers: { sessions: 'users/sessions' }
   resources :extra_registrations, only: %i[index edit update]
   resource :user, only: %i[show edit update], controller: :user do
     get 'check_email'
