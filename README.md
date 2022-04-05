@@ -27,6 +27,7 @@ Full instructions can be found by running `rails credentials:help`
 ## Working locally
 
 - `bin/dev` start processes
+- `bin/rspec` run test suite under `/spec`
 - `bin/qa` run qa framework under `/ui`
 
 ## Using Docker
@@ -39,7 +40,6 @@ The project uses chained **Docker Compose** files to prepare different environme
 These commands help maintain your containerised workspace:
 
 - `bin/docker-build` creates tagged images for all the services
-- `bin/docker-yarn` recompile inside the container (temp solution)
 - `bin/docker-certs` generates a self-signed certificate for running the app in production
 - `bin/docker-files` changes the ownership of files to your current user, files
     generated inside containers are created by *root*
