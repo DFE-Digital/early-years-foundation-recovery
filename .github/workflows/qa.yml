@@ -4,3 +4,85 @@
 name: QA Framework
 on:
   workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+
+env:
+  RAILS_ENV: test
+  RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+  DATABASE_URL: postgres://postgres:password@localhost:5432/test
+  BASE_URL: http://localhost:3000
+
+jobs:
+  test:
+    name: Run Rspec
+    runs-on: ubuntu-latest
+    environment: test
+
+    services:
+      postgres:
+        image: postgres:alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+      -
+        name: Checkout code
+        uses: actions/checkout@v2
+
+      # RUBY -------------------------------------------------------------------
+      -
+        name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.0
+      -
+        name: Set up ruby gem cache
+        uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      -
+        name: Install Rubygems
+        run: |
+          bundle config path vendor/bundle
+          bundle config set with test ui
+          bundle install --jobs 20 --retry 3
+
+      # NODE -------------------------------------------------------------------
+      -
+        name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 17.6
+      -
+        name: Install asset dependencies
+        run: |
+          yarn
+          yarn build
+          yarn build:css
+
+      # BROWSERS----------------------------------------------------------------
+      - uses: browser-actions/setup-geckodriver@latest
+      - uses: nanasess/setup-chromedriver@v1
+
+      # RSPEC ------------------------------------------------------------------
+      -
+        name: Prepare test database
+        run: bin/rails db:prepare
+      -
+        name: Chrome against test app
+        run: bundle exec rspec --default-path ui
+      -
+        name: Firefox against test app
+        run: bundle exec rspec --default-path ui
+        env:
+          BROWSER: firefox
