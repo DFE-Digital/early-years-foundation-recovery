@@ -17,6 +17,7 @@ require 'capybara/rspec'
 require 'selenium-webdriver'
 require 'site_prism'
 require 'site_prism/all_there'
+require 'faker'
 
 # default driver if none chosen
 ENV['BROWSER'] ||= 'chrome'
@@ -35,7 +36,9 @@ require_relative 'lib/site_prism_sub_class'
 require_relative 'lib/dfe'
 
 Drivers::CapybaraDrivers.register_all
+WAIT_TIME = 5
 
 Capybara.configure do |config|
+  config.default_max_wait_time = WAIT_TIME
   config.default_driver = Drivers::CapybaraDrivers.chosen_driver
 end
