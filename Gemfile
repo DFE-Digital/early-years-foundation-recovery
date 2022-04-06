@@ -95,6 +95,5 @@ end
 
 group :ui do
   gem 'capybara-selenium'
-  gem 'selenium-webdriver'
   gem 'site_prism'
 end

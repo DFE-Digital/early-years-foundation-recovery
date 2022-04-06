@@ -4,8 +4,8 @@
 
 ## Getting Started
 
-1. Clone the repository
-2. Obtain the master keys
+1. Clone the repository. This is a Rails 7 application using [the DfE template][rails-template]
+2. Obtain the master keys.
 3. Run!
 
 ## Useful Links
@@ -26,9 +26,28 @@ Full instructions can be found by running `rails credentials:help`
 
 ## Working locally
 
-- `bin/dev` start processes
-- `bin/rspec` run test suite under `/spec`
-- `bin/qa` run qa framework under `/ui`
+**Development**
+
+> Gemfile group :development
+
+Use `bin/dev` to start the process workers (watching for changes to asset files).
+
+**Testing**
+
+> Gemfile group :test
+
+Use `bin/rspec` to run the test suite under `/spec`.
+Rails system specs use RackTest only for efficiency.
+
+**UI Framework**
+
+> Gemfile group :ui
+
+Use `bin/qa` to run the test framework under `/ui` against a given URL.
+These tests have additional dependencies:
+
+- `brew install chromedriver geckodriver`
+- `xattr -d com.apple.quarantine /usr/local/bin/chromedriver`
 
 ## Using Docker
 
@@ -56,7 +75,7 @@ The commands run common tasks inside containers:
     containerised equivalent of `bin/rails console`
 - `bin/docker-rspec -f doc` runs the test suite with optional arguments, containerised
     equivalent of `bin/rspec`
-- `bin/docker-qa` runs the browser tests against a running production application
+- `bin/docker-qa` runs the browser tests against a running production application, a containerised equivalent of `bin/qa`
 
 These commands can be used to debug problems:
 
@@ -119,6 +138,7 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
 ---
 
+[rails-template]: https://github.com/DFE-Digital/rails-template
 [ci-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml/badge.svg
 [ci-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml
 [notify]: https://www.notifications.service.gov.uk
