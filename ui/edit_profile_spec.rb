@@ -2,7 +2,7 @@
 
 require_relative '../uat_helper'
 
-describe 'Edit Profile', {wiper: true} do
+describe 'Edit Profile' do
   let(:home) { Pages::Home.new }
   let(:sign_in) { Pages::SignIn.new }
   let(:profile) { Pages::Profile.new }
