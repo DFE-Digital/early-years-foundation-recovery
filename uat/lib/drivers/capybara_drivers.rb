@@ -13,8 +13,6 @@ module Drivers
       browser
     end
 
-    private
-
     def self.browser
       case ENV['BROWSER']
       when 'firefox' then :firefox
