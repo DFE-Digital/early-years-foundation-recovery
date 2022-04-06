@@ -130,14 +130,6 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
 ---
 
-## QA Framework
-
-- `brew install chromedriver geckodriver`
-- `xattr -d com.apple.quarantine /usr/local/bin/chromedriver`
-
-
----
-
 [rails-template]: https://github.com/DFE-Digital/rails-template
 [ci-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml/badge.svg
 [ci-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml
