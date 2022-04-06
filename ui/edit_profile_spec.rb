@@ -2,7 +2,7 @@
 
 require_relative '../uat_helper'
 
-describe 'Edit Profile' do
+describe 'Edit Profile', {wiper: true} do
   let(:home) { Pages::Home.new }
   let(:sign_in) { Pages::SignIn.new }
   let(:profile) { Pages::Profile.new }
@@ -33,7 +33,7 @@ describe 'Edit Profile' do
     it 'then the first name alone is updated when requested' do
       expected_first_name = Faker::Name.first_name
       profile.first_name.set expected_first_name
-      profile.update.click
+      profile.update_button.click
 
       user.displayed?
       user.wait_until_edit_visible
@@ -46,7 +46,7 @@ describe 'Edit Profile' do
     it 'then the last name alone is updated when requested' do
       expected_last_name = Faker::Name.last_name
       profile.last_name.set expected_last_name
-      profile.update.click
+      profile.update_button.click
 
       user.displayed?
       user.wait_until_edit_visible
@@ -59,7 +59,7 @@ describe 'Edit Profile' do
     it 'then the postcode alone is updated when requested' do
       expected_post_code = Faker::Address.postcode
       profile.post_code.set expected_post_code
-      profile.update.click
+      profile.update_button.click
 
       user.displayed?
       user.wait_until_edit_visible
@@ -72,7 +72,7 @@ describe 'Edit Profile' do
     it 'then the ofsted nuumber alone is updated when requested' do
       expected_ofsted_number = Faker::Number.number(digits: 10).to_s
       profile.ofsted_number.set expected_ofsted_number
-      profile.update.click
+      profile.update_button.click
 
       user.displayed?
       user.wait_until_edit_visible
@@ -82,7 +82,7 @@ describe 'Edit Profile' do
       expect(actual_ofsted_number).to eq(expected_ofsted_number)
     end
 
-    it 'then the changes to the first name, last name, postcode and ofsted number are updated when requested', {wiper: true}  do
+    it 'then the changes to the first name, last name, postcode and ofsted number occurs' do
       expected_first_name = Faker::Name.first_name
       expected_last_name = Faker::Name.last_name
       expected_post_code = Faker::Address.postcode
@@ -93,7 +93,7 @@ describe 'Edit Profile' do
       profile.post_code.set expected_post_code
       profile.ofsted_number.set expected_ofsted_number
 
-      profile.update.click
+      profile.update_button.click
 
       user.displayed?
       user.wait_until_edit_visible

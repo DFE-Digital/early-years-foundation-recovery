@@ -6,7 +6,7 @@ module Pages
     element :last_name, '#user-last-name-field'
     element :post_code, '#user-postcode-field'
     element :ofsted_number, '#user-ofsted-number-field'
-    element :update, 'button.govuk-button'
+    element :update_button, 'button.govuk-button'
 
     section :header, Sections::Header, '.govuk-header'
   end
