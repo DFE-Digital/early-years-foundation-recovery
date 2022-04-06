@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  default_form_builder(GOVUKDesignSystemFormBuilder::FormBuilder)
+  default_form_builder(EarlyYearsRecoveryFormBuilder)
 
   def authenticate_registered_user!
     authenticate_user! unless user_signed_in?

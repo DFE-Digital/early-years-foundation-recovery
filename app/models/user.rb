@@ -7,4 +7,8 @@ class User < ApplicationRecord
   def name
     [first_name, last_name].compact.join(' ')
   end
+
+  def email_to_confirm
+    pending_reconfirmation? ? unconfirmed_email : email
+  end
 end
