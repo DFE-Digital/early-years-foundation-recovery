@@ -4,5 +4,5 @@
       = form.govuk_error_summary
       = form.govuk_fieldset legend: { text: 'Edit your profile' } do
         - [:first_name, :last_name, :postcode, :ofsted_number].each do |field|
-          = form.govuk_text_field field, width: 'two-thirds', label: { text: t(field) }
+          = form.govuk_text_field field, label: { text: t(field) }
         = form.govuk_submit "Update"
