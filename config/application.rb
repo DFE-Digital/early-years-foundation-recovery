@@ -22,5 +22,7 @@ module EarlyYearsFoundationRecovery
     config.generators do |g|
       g.test_framework :rspec
     end
+
+    config.feedback_url = ENV.fetch('FEEDBACK_URL', '#FEEDBACK_URL_env_var_missing')
   end
 end

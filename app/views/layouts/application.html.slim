@@ -24,7 +24,7 @@ html
 
     .govuk-width-container
       = govuk_phase_banner(tag: { text: "Beta" }) do
-        = t('phase_banner', feedback_url: govuk_link_to("feedback", ENV.fetch('FEEDBACK_URL', '#feedback_url-to-come'))).html_safe
+        = t('phase_banner_html', feedback_link: govuk_link_to("feedback", Rails.configuration.feedback_url))
       .govuk-grid-row
         .govuk-grid-column-two-thirds-from-desktop
           = govuk_back_link(href: request.referrer)
