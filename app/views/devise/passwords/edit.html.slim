@@ -3,8 +3,8 @@
     = f.govuk_error_summary
     = f.hidden_field :reset_password_token
     = f.govuk_fieldset legend: { text: 'Change your password', tag: :h1, size: 'l' } do
-      = f.govuk_password_field :password, autocomplete: "new-password", label: { text: "New password" }, width: 'one-half', hint: { text: "(#{@minimum_password_length} characters minimum)" }
-      = f.govuk_password_field :password_confirmation, autocomplete: "new-password", label: { text: "Confirm new password" }, width: 'one-half'
+      = f.govuk_password_field :password, autocomplete: "new-password", label: { text: "New password" }, hint: { text: "(#{@minimum_password_length} characters minimum)" }
+      = f.govuk_password_field :password_confirmation, autocomplete: "new-password", label: { text: "Confirm new password" }
     = f.govuk_submit "Change my password"
 
 = render "devise/shared/form_wrap"
