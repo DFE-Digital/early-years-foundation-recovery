@@ -59,10 +59,11 @@ gem 'sentry-ruby'
 # Manage seeds
 gem 'dibber'
 
+gem 'faker', group: %i[development test ui_auto]
+
 group :development, :test do
   # Use fake data for specs
   gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
-  gem 'faker'
   gem 'foreman'
   gem 'pry-byebug'
   gem 'pry-rails'
