@@ -13,7 +13,7 @@
 # it.
 
 require 'simplecov'
-# SimpleCov.minimum_coverage 87
+SimpleCov.minimum_coverage 90
 SimpleCov.start 'rails'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration

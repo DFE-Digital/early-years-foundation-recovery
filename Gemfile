@@ -94,3 +94,8 @@ group :test do
   gem 'rspec-rails'
   gem 'simplecov'
 end
+
+group :ui do
+  gem 'capybara-selenium'
+  gem 'site_prism'
+end
