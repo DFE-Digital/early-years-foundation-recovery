@@ -1,7 +1,6 @@
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
-    = govuk_back_link(href: request.referrer)
-    = form_for @user_form, url: extra_registration_path(current_step), method: :patch do |f|
-      = render current_step.to_s, f: f
+    = form_for @user_form, url: extra_registration_path(current_step), data: { turbo: false }, method: :patch do |f|
       = f.govuk_error_summary
-      = f.govuk_submit "Save"
+      = render current_step.to_s, f: f
+      = f.govuk_submit t(:submit, scope: [:extra_registration, current_step])
