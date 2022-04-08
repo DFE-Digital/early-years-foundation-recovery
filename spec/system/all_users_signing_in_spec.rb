@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe 'Users sign in', type: :system do
   before do
-    driven_by(:rack_test)
     visit '/users/sign_in'
   end
 

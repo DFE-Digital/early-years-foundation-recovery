@@ -48,7 +48,8 @@ gem 'govuk-components', '>= 3.0.3'
 gem 'govuk_design_system_formbuilder'
 
 # Markdown support
-gem 'kramdown', '~> 2.3'
+gem 'govspeak', '~> 6.8'
+gem 'sassc', '~> 2.4' # govspeak assets
 
 gem 'govuk_notify_rails', '~> 2.2', '>= 2.2.0'
 

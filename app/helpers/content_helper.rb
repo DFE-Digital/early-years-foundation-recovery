@@ -1,6 +1,6 @@
 module ContentHelper
+  # @return [String] GDS formatted markdown as HTML
   def translate_markdown(markdown)
-    doc = Kramdown::Document.new markdown
-    raw doc.to_html
+    raw Govspeak::Document.new(markdown).to_html
   end
 end
