@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe 'ApplicationHelper', type: :helper do
   describe '#link_to_next_module_item' do
