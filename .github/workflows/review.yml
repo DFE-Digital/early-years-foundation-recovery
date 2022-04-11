@@ -17,6 +17,7 @@ jobs:
     steps:
       -
         # The pull request number.
+        # ghcr.io/dfe-digital/early-years-foundation-recovery-review:review-pr-xx
         name: setup-inputs
         run: |
           echo "ENVIRONMENT=review-pr-${{ github.event.number }}" >> $GITHUB_ENV
@@ -83,9 +84,6 @@ jobs:
             -input=false \
             -auto-approve \
             -var-file ../workspace-variables/review.tfvars \
-
-            -var='paas_app_env_secrets=${{ toJson(secrets) }}'
-
             -var='paas_app_env_secrets={
               "RAILS_MASTER_KEY": "${{ secrets.RAILS_MASTER_KEY }}",
               "AWS_ACCESS_KEY_ID": "${{ secrets.AWS_ACCESS_KEY_ID }}",
