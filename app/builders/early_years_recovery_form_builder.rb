@@ -4,7 +4,7 @@ class EarlyYearsRecoveryFormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
   end
 
   def govuk_email_field(attribute_name, options = {})
-    super(attribute_name, **options.reverse_merge(width: 'two-thirds', label: { text: 'Email address' }))
+    super(attribute_name, **options.reverse_merge(width: 'two-thirds', label: { text: 'Email address', size: 's' }))
   end
 
   def govuk_password_field(attribute_name, options = {})
