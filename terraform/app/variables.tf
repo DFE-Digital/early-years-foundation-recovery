@@ -54,6 +54,11 @@ variable "paas_web_app_memory" {
   type    = number
 }
 
+# set on review.tfvars, workflow action timedout before paas was ready
+variable "paas_web_app_start_timeout" {
+  default = 360
+  type    = number
+}
 
 # ------------------------------------------------------------------------------
 # Database
