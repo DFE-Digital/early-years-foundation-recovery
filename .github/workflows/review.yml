@@ -15,10 +15,11 @@ jobs:
       DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery-review
 
     steps:
-      # -
-      #   name: setup-inputs
-      #   run: |
-      #     echo "ENVIRONMENT=review-pr-${{ github.event.number }}" >> $GITHUB_ENV
+      -
+        # The pull request number.
+        name: setup-inputs
+        run: |
+          echo "ENVIRONMENT=review-pr-${{ github.event.number }}" >> $GITHUB_ENV
       -
         name: Checkout Code
         uses: actions/checkout@v2
