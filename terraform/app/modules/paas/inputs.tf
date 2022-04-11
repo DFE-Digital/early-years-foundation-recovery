@@ -14,13 +14,10 @@ variable "service_name" {
 # Cloud Foundry
 variable "cf_api_url" {}
 variable "cf_space_name" {}
+# set user/password/passcode to be blank by default in variables.tf
 variable "cf_user" {}
 variable "cf_password" {}
-variable "cf_sso_passcode" {
-  type = string
-  # description = ""
-  default = ""
-}
+variable "cf_sso_passcode" {}
 
 
 # Docker

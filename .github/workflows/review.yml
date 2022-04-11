@@ -1,6 +1,10 @@
 ---
 # ------------------------------------------------------------------------------
 #
+# NB: debugging output
+# https://github.com/DFE-Digital/early-years-foundation-recovery/settings/secrets/actions
+# https://docs.github.com/en/enterprise-server@3.4/actions/monitoring-and-troubleshooting-workflows/enabling-debug-logging
+#
 name: Deploy Review App
 on:
   pull_request:
@@ -16,11 +20,10 @@ jobs:
 
     steps:
       -
-        # The pull request number.
         # ghcr.io/dfe-digital/early-years-foundation-recovery-review:review-pr-xx
         name: setup-inputs
         run: |
-          echo "ENVIRONMENT=review-pr-${{ github.event.number }}" >> $GITHUB_ENV
+          echo "REVIEW_PR_NUMBER=review-pr-${{ github.event.number }}" >> $GITHUB_ENV
       -
         name: Checkout Code
         uses: actions/checkout@v2
@@ -50,12 +53,12 @@ jobs:
             BUILDKIT_INLINE_CACHE=1
             SHA=${{ github.event.pull_request.head.sha }}
           cache-from: |
-            ${{ env.DOCKER_IMAGE }}:${{ env.ENVIRONMENT }}
+            ${{ env.DOCKER_IMAGE }}:${{ env.REVIEW_PR_NUMBER }}
             ${{ env.DOCKER_IMAGE }}:latest
           push: true
           tags: |
             ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
-            ${{ env.DOCKER_IMAGE }}:${{ env.ENVIRONMENT }}
+            ${{ env.DOCKER_IMAGE }}:${{ env.REVIEW_PR_NUMBER }}
             ${{ env.DOCKER_IMAGE }}:latest
           target: app
       -
@@ -66,23 +69,21 @@ jobs:
           TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
           TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
         run: |
-          env | sort
           export TF_VAR_paas_app_docker_image=${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
           cd terraform/app
-          terraform init -reconfigure -input=false -backend-config="bucket=${{ secrets.AWS_BUCKET }}" -backend-config="key=${{ env.ENVIRONMENT }}/terraform.tfstate"
+          terraform init -reconfigure -input=false -backend-config="bucket=${{ secrets.AWS_BUCKET }}" -backend-config="key=${{ env.REVIEW_PR_NUMBER }}/terraform.tfstate"
 
-      # -
-      #   name: Deploy Review App (plan)
-      #   env:
-      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
-      #     TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
-      #   run: |
-      #     export TF_VAR_paas_app_docker_image=${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
-      #     cd terraform/app
-      #     terraform plan -var-file ../workspace-variables/review.tfvars
-
+      -
+        name: Deploy Review App (plan)
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
+          TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
+        run: |
+          export TF_VAR_paas_app_docker_image=${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
+          cd terraform/app
+          terraform plan -var-file ../workspace-variables/review.tfvars
 
       -
         name: Deploy Review App (apply)
@@ -94,19 +95,16 @@ jobs:
         run: |
           export TF_VAR_paas_app_docker_image=${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
           cd terraform/app
-          terraform apply -input=false -auto-approve -var-file ../workspace-variables/review.tfvars -var='paas_app_env_secrets={"RAILS_MASTER_KEY":"${{secrets.RAILS_MASTER_KEY}}", "AWS_ACCESS_KEY_ID": "${{secrets.AWS_ACCESS_KEY_ID}}", "AWS_SECRET_ACCESS_KEY": "${{secrets.AWS_SECRET_ACCESS_KEY}}", "AWS_REGION": "${{secrets.AWS_REGION}}", "AWS_BUCKET": "${{secrets.AWS_BUCKET}}"}' -var='environment=${{env.ENVIRONMENT}}'
-
+          terraform apply -input=false -auto-approve -var-file ../workspace-variables/review.tfvars -var='paas_app_env_secrets={"RAILS_MASTER_KEY":"${{secrets.RAILS_MASTER_KEY}}", "AWS_ACCESS_KEY_ID": "${{secrets.AWS_ACCESS_KEY_ID}}", "AWS_SECRET_ACCESS_KEY": "${{secrets.AWS_SECRET_ACCESS_KEY}}", "AWS_REGION": "${{secrets.AWS_REGION}}", "AWS_BUCKET": "${{secrets.AWS_BUCKET}}"}'
 
         # run: |
-        #   echo "ENV:"
-        #   echo ${{ env }}
         #   export TF_VAR_paas_app_docker_image=${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
         #   cd terraform/app
         #   terraform init \
         #     -reconfigure \
         #     -input=false \
         #     -backend-config="bucket=${{ secrets.AWS_BUCKET }}" \
-        #     -backend-config="key=review/terraform.tfstate"
+        #     -backend-config="key=${{ env.REVIEW_PR_NUMBER }}/terraform.tfstate"
         #   terraform plan -var-file ../workspace-variables/review.tfvars
         #   terraform apply \
         #     -input=false \

@@ -31,11 +31,16 @@ variable "paas_app_docker_image" {
 # ------------------------------------------------------------------------------
 # Cloud Foundry
 
-variable "paas_cf_user" {}
-variable "paas_cf_password" {}
-variable "paas_cf_sso_passcode" {}
 variable "paas_cf_space_name" {}
-
+variable "paas_cf_user" {
+  default = ""
+}
+variable "paas_cf_password" {
+  default = ""
+}
+variable "paas_cf_sso_passcode" {
+  default = ""
+}
 
 # ------------------------------------------------------------------------------
 # Application
@@ -54,7 +59,7 @@ variable "paas_web_app_memory" {
   type    = number
 }
 
-# set on review.tfvars, workflow action timedout before paas was ready
+# set on review.tfvars, workflow action timed out before paas was ready
 variable "paas_web_app_start_timeout" {
   default = 360
   type    = number
