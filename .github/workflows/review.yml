@@ -64,11 +64,12 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
           TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
+          #
+          GITHUB_SECRETS_JSON: ${{ toJson(secrets) }} # !DEBUG!
+          #
         run: |
           echo "ENV:"
           echo ${{ env }}
-          echo "SECRETS:"
-          echo ${{ toJson(secrets) }}
 
           export TF_VAR_paas_app_docker_image=${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
           cd terraform/app
