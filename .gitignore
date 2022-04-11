@@ -50,5 +50,10 @@ doc
 # SimpleCov
 coverage
 
+# Self-signed certificates
 localhost.crt
 localhost.key
+
+# Terraform
+**/.terraform/*
+**/.terraform*

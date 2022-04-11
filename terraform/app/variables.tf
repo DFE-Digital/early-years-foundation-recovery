@@ -1,64 +1,69 @@
-variable environment {
-  description = "Environment"
+# ------------------------------------------------------------------------------
+# Config
+
+variable "paas_app_config_file" {
   type        = string
+  description = "Path to YAML config"
+  default     = "app_config.yml"
+}
+
+
+# ------------------------------------------------------------------------------
+# Environments
+
+variable "paas_app_environment" {
+  type        = string
+  description = "Deployment type: review/staging/production"
+  default     = "development"
+}
+
+#
+variable "paas_app_env_secrets" {
+  description = "GH environment secrets as JSON"
+  default     = {}
+}
+
+variable "paas_app_docker_image" {
+  default = ""
 }
 
 
 # ------------------------------------------------------------------------------
 # Cloud Foundry
 
-variable paas_cf_user {}
-variable paas_cf_password {}
-variable paas_cf_sso_passcode {}
-
-# ------------------------------------------------------------------------------
-# Gov PaaS
-
-
-variable paas_app_environment {
-  default = "development"
-}
-
-variable paas_space_name {
-  default = "eyfs-recovery"
-}
-
-variable paas_app_stopped {
-  default = false
-}
-
-variable paas_app_start_timeout {
-  default = 300
-}
+variable "paas_cf_user" {}
+variable "paas_cf_password" {}
+variable "paas_cf_sso_passcode" {}
+variable "paas_cf_space_name" {}
 
 
 # ------------------------------------------------------------------------------
 # Application
 
-variable paas_web_app_start_command {
+variable "paas_web_app_start_command" {
   default = "bundle exec rake db:prepare && bundle exec rails s -b 0.0.0.0"
 }
 
-variable paas_web_app_instances {
+variable "paas_web_app_instances" {
   default = 1
+  type    = number
 }
 
-variable paas_web_app_memory {
+variable "paas_web_app_memory" {
   default = 512
-}
-
-variable paas_web_app_deployment_strategy {
-  default = "blue-green-v2"
+  type    = number
 }
 
 
 # ------------------------------------------------------------------------------
 # Database
 
-variable paas_postgres_service_plan {
+variable "paas_postgres_service_plan" {
   default = "tiny-unencrypted-11"
+  type    = string
 }
 
-variable paas_postgres_create_timeout {
+variable "paas_postgres_create_timeout" {
   default = "15m"
+  type    = string
 }

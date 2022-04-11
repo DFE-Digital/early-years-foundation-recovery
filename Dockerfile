@@ -13,6 +13,7 @@ RUN apk add --no-cache --no-progress \
 # ------------------------------------------------------------------------------
 FROM base AS app
 
+# ENV NODE_ENV
 # ENV RAILS_ENV
 # ENV RAILS_MASTER_KEY
 
