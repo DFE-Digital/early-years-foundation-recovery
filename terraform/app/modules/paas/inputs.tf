@@ -13,10 +13,14 @@ variable "service_name" {
 
 # Cloud Foundry
 variable "cf_api_url" {}
+variable "cf_space_name" {}
 variable "cf_user" {}
 variable "cf_password" {}
-variable "cf_sso_passcode" {}
-variable "cf_space_name" {}
+variable "cf_sso_passcode" {
+  type = string
+  # description = ""
+  default = ""
+}
 
 
 # Docker
