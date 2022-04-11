@@ -7,4 +7,11 @@ RSpec.describe 'Static', type: :request do
       expect(response).to have_http_status(:success)
     end
   end
+
+  describe 'GET static/accessibility_statement' do
+    it 'renders successfully' do
+      get static_path(:accessibility_statement)
+      expect(response).to have_http_status(:success)
+    end
+  end
 end
