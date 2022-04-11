@@ -17,7 +17,7 @@ locals {
   app_config_file = file("${path.module}/../workspace-variables/${var.paas_app_config_file}")
   app_config      = yamldecode(local.app_config_file)[var.paas_app_environment]
 
-  # Combine workspace variables with GH secrets
+  # Combine workspace variables with GH secrets which take precedence
   paas_app_env_values = merge(local.app_config, var.paas_app_env_secrets)
 
   # Boolean checks
