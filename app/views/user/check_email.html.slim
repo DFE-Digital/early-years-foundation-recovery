@@ -3,17 +3,23 @@
     h1.govuk-heading-l Check your email
 
     p.govuk-body
-      | We have sent you an email with instructions for how to verify your email address.  We sent the email to:
-
-    p class="govuk-body govuk-!-font-weight-bold"
-      = @user.email
+      | We have sent you an email with instructions for how to verify your email address.  
+      
+    - if @user
+      span
+        | We sent the email to:
+      p class="govuk-body govuk-!-font-weight-bold"
+        = @user.email
 
     p.govuk-body
       | To continue setting up your training account you must click the link in the email. If you have not received the email after a few minutes, please check you spam folder.
 
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
-    = govuk_details(summary_text: "Need us to resend the email?") do
-      = govuk_link_to "I haven't received the email", new_confirmation_path(@user)
-      br/
-      = govuk_link_to "I don't have access to the email address I entered", "#"
+    - if @user
+      = govuk_details(summary_text: "Need us to resend the email?") do
+        = govuk_link_to "I haven't received the email", new_confirmation_path(@user)
+        br/
+        = govuk_link_to "I don't have access to the email address I entered", "#"
+    - else
+        = govuk_link_to "I haven't received the email", new_password_path(:user)

@@ -18,7 +18,7 @@ class UserController < ApplicationController
   end
 
   def check_email
-    @user = User.find(params[:id])
+    @user = User.find(params[:id]) if params[:id]
   end
 
 private

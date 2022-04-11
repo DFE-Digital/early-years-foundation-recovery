@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'users/timeout', to: 'errors#timeout'
   get 'health', to: 'home#show'
 
-  devise_for :users, controllers: { sessions: 'users/sessions' }
+  devise_for :users, controllers: { sessions: 'users/sessions', passwords: 'passwords' }
   resources :extra_registrations, only: %i[index edit update]
   resource :user, only: %i[show edit update], controller: :user do
     get 'check_email'
