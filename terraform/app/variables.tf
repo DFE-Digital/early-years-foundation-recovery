@@ -47,7 +47,7 @@ variable "paas_cf_sso_passcode" {
 # Application
 
 variable "paas_web_app_start_command" {
-  default = "bundle exec rake db:prepare && bundle exec rails s -b 0.0.0.0"
+  default = "bundle exec rails server -b 0.0.0.0"
 }
 
 variable "paas_web_app_instances" {

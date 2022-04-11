@@ -14,7 +14,7 @@ variable "service_name" {
 # Cloud Foundry
 variable "cf_api_url" {}
 variable "cf_space_name" {}
-# set user/password/passcode to be blank by default in variables.tf
+# NB: main.tf expects the folowing to all fallback to an empty string value
 variable "cf_user" {}
 variable "cf_password" {}
 variable "cf_sso_passcode" {}
@@ -61,7 +61,7 @@ variable "web_app_deployment_strategy" {
 }
 
 
-# DB
+# DB (deployment time 5m9s)
 # ------------------------------------------------------------------------------
 
 variable "postgres_create_timeout" {

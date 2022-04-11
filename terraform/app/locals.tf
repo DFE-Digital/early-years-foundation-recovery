@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------
 locals {
-  # Project Name
-  service_name = "eyfs-recovery"
+  # Project Name (space prefix)
+  service_name = "ey-recovery"
 
   # Load Rails application env vars
   # ./terraform/workspace-variables/app_config.yml
@@ -11,11 +11,6 @@ locals {
 
   cf_api_url = "https://api.london.cloud.service.gov.uk"
 
-  #
-  paas_app_env_values = merge(
-    # local.paas_app_env_yml_values,
-    local.app_config,
-    # var.secret_paas_app_env_values # app secrets injected by GH actions
-    var.paas_app_env_secrets # app secrets injected by GH actions
-  )
+  # Combine workspace variables with GH secrets
+  paas_app_env_values = merge(local.app_config, var.paas_app_env_secrets)
 }
