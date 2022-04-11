@@ -11,7 +11,7 @@ describe 'Edit Profile' do
 
     dfe.sign_in.wait_until_header_visible
     dfe.sign_in.email.set 'user@example.com'
-    dfe.sign_in.password.set 'EarlyYears123'
+    dfe.sign_in.password.set ENV['PASS']
     dfe.sign_in.sign_in_button.click
 
     dfe.home.displayed?(5)
