@@ -2,7 +2,7 @@
   = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
     = f.govuk_error_summary
     = f.hidden_field :reset_password_token
-    = f.govuk_fieldset legend: { text: 'Choose a new password', tag: :h1, size: 'l' } do
+    = f.govuk_fieldset legend: { text: 'Choose a new password' } do
       = f.govuk_password_field :password, autocomplete: "new-password", label: { text: "New password" }, hint: { text: "Requires upper and lower case letters, a number and at least #{@minimum_password_length} characters." }
       = f.govuk_password_field :password_confirmation, autocomplete: "new-password", label: { text: "Confirm your password" }
     = f.govuk_submit "Reset password"
