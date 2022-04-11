@@ -1,5 +1,11 @@
 module Drivers
   class Chrome
+    def self.all_drivers
+      register
+      register_remote
+      register_headless
+    end
+
     def self.register
       Capybara.register_driver :chrome do |app|
         Capybara::Selenium::Driver.new(app, browser: :chrome)
@@ -24,12 +30,12 @@ module Drivers
       end
     end
 
+    # Only accessible inside Docker -----------
     def self.register_remote
+      capabilities = Selenium::WebDriver::Remote::Capabilities.chrome
+      capabilities['acceptInsecureCerts'] = true
       remote_url = 'http://chrome:4444/wd/hub'
       Capybara.register_driver :remote_chrome do |app|
-        capabilities = Selenium::WebDriver::Remote::Capabilities.chrome
-        capabilities['acceptInsecureCerts'] = true
-
         Capybara::Selenium::Driver.new(app, browser: :remote, url: remote_url, capabilities: capabilities)
       end
     end

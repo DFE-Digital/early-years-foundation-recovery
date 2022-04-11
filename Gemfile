@@ -60,7 +60,11 @@ gem 'sentry-ruby'
 # Manage seeds
 gem 'dibber'
 
-gem 'faker', group: %i[development test ui_auto]
+# Functional UI automation
+gem 'capybara'
+
+# Test data generator
+gem 'faker'
 
 group :development, :test do
   # Use fake data for specs
@@ -91,14 +95,12 @@ group :development do
 end
 
 group :test do
-  gem 'capybara'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'simplecov'
 end
 
 group :ui do
-  gem 'capybara'
   gem 'capybara-selenium'
   gem 'rspec'
   gem 'selenium-webdriver'

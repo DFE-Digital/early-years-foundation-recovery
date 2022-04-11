@@ -2,11 +2,9 @@ module Drivers
   # Capybara registration for all drivers
   class CapybaraDrivers
     def self.register_all
-      Firefox.register
-      Firefox.register_headless
-      Chrome.register
-      Chrome.register_headless
-      Chrome.register_remote
+      klasses = Drivers.constants.select { |klass| Drivers.const_get(klass).is_a?(Class) }
+      klasses.delete_if { |score| score.match?(/CapybaraDrivers/) }
+      klasses.each { |klass| "Drivers::#{klass}".constantize.send(:all_drivers) }
     end
 
     def self.chosen_driver
