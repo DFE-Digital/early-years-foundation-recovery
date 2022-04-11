@@ -4,8 +4,10 @@ locals {
   service_name = "ey-recovery"
   cf_api_url   = "https://api.london.cloud.service.gov.uk"
 
+  # Append a custom hostname on to the service name to create the web app domain
+  #
   # "ey-recovery" or "ey-recovery-review-pr-52"
-  app_hostname = var.paas_app_hostname != "" ? local.service_name : "${local.service_name}-${var.paas_app_hostname}"
+  app_hostname = var.paas_app_hostname != "" ? "${local.service_name}-${var.paas_app_hostname}" : local.service_name
 
   # TODO:
   # db_hostname =

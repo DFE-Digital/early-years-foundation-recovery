@@ -17,12 +17,6 @@ variable "paas_app_environment" {
   default     = "development"
 }
 
-variable "paas_app_hostname" {
-  type        = string
-  description = "appended to service name unless blank"
-  default     = ""
-}
-
 #
 variable "paas_app_env_secrets" {
   type        = map(string)
@@ -51,6 +45,12 @@ variable "paas_cf_sso_passcode" {
 
 # ------------------------------------------------------------------------------
 # Application
+
+variable "paas_app_hostname" {
+  type        = string
+  description = "appended to service name unless blank"
+  default     = ""
+}
 
 variable "paas_web_app_start_command" {
   default = "bundle exec rails server -b 0.0.0.0"
