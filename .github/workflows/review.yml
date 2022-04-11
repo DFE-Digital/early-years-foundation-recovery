@@ -69,8 +69,7 @@ jobs:
           GITHUB_SECRETS_JSON: ${{ toJson(secrets) }} # !DEBUG!
           #
         run: |
-          echo "ENV:"
-          echo ${{env}}
+          env
           export TF_VAR_paas_app_docker_image=${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
           cd terraform/app
           terraform init -reconfigure -input=false -backend-config="bucket=${{ secrets.AWS_BUCKET }}" -backend-config="key=${{ env.ENVIRONMENT }}/terraform.tfstate"
@@ -86,8 +85,7 @@ jobs:
           GITHUB_SECRETS_JSON: ${{ toJson(secrets) }} # !DEBUG!
           #
         run: |
-          echo "ENV:"
-          echo ${{env}}
+          env
           export TF_VAR_paas_app_docker_image=${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
           cd terraform/app
           terraform plan -var-file ../workspace-variables/review.tfvars
@@ -104,8 +102,7 @@ jobs:
           GITHUB_SECRETS_JSON: ${{ toJson(secrets) }} # !DEBUG!
           #
         run: |
-          echo "ENV:"
-          echo ${{env}}
+          env
           export TF_VAR_paas_app_docker_image=${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
           cd terraform/app
           terraform apply -input=false -auto-approve -var-file ../workspace-variables/review.tfvars -var='paas_app_env_secrets={"RAILS_MASTER_KEY":"${{secrets.RAILS_MASTER_KEY}}", "AWS_ACCESS_KEY_ID": "${{secrets.AWS_ACCESS_KEY_ID}}", "AWS_SECRET_ACCESS_KEY": "${{secrets.AWS_SECRET_ACCESS_KEY}}", "AWS_REGION": "${{secrets.AWS_REGION}}", "AWS_BUCKET": "${{secrets.AWS_BUCKET}}"}' -var='environment=${{env.ENVIRONMENT}}'
