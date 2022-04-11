@@ -6,7 +6,7 @@ describe 'home_page' do
   context 'when unauthenticated' do
     let(:dfe) { Dfe.new }
 
-    before { home_page.load }
+    before { dfe.home_page.load }
 
     it 'is displayed when the user navigates to the home page and clicks the header logo' do
       dfe.home_page.header.logo.click
