@@ -44,6 +44,7 @@ jobs:
         name: Build and push Docker production image
         uses: docker/build-push-action@v2
         with:
+          target: app
           context: .
           build-args: |
             BUILDKIT_INLINE_CACHE=1
@@ -54,7 +55,6 @@ jobs:
           tags: |
             ${{ env.DOCKER_IMAGE }}:${{ env.REVIEW_PR_NUMBER }}
             ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
-          target: app
 
       -
         name: Deploy Review App
@@ -83,3 +83,9 @@ jobs:
               "RAILS_MASTER_KEY": "${{ secrets.RAILS_MASTER_KEY }}"
             }'
 
+      - name: Comment URL to PR
+        uses: mshick/add-pr-comment@v1
+        with:
+          # https://ey-recovery-review-pr-123.london.cloudapps.digital
+          message: https://ey-recovery-${{ env.REVIEW_PR_NUMBER }}.london.cloudapps.digital
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
