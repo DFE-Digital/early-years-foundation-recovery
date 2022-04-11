@@ -19,7 +19,8 @@ variable "paas_app_environment" {
 
 #
 variable "paas_app_env_secrets" {
-  description = "GH environment secrets as JSON"
+  type        = map(string)
+  description = "GH environment secrets as JSON mapped to object"
   default     = {}
 }
 
