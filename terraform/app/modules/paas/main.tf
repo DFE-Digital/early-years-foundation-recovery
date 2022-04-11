@@ -25,9 +25,9 @@ provider "cloudfoundry" {
 
 
 resource "cloudfoundry_app" "web_app" {
-  name                       = local.web_app_name        # ey-recovery-review-pr-52
-  environment                = local.app_environment     # {}
-  command                    = var.web_app_start_command # rails server -b 0.0.0.0
+  environment                = local.app_environment     # default: {}
+  name                       = var.web_app_name          # default: ey-recovery
+  command                    = var.web_app_start_command # default: rails server -b 0.0.0.0
   instances                  = var.web_app_instances     # default: 1
   memory                     = var.web_app_memory        # default: 512
   health_check_type          = "http"
@@ -56,10 +56,10 @@ resource "cloudfoundry_app" "web_app" {
 resource "cloudfoundry_route" "web_app_route" {
   domain   = data.cloudfoundry_domain.cloudapps_digital.id
   space    = data.cloudfoundry_space.space.id
-  hostname = local.web_app_name
+  hostname = var.web_app_name
 }
 
-
+# TODO: module assumes db type is postgres
 resource "cloudfoundry_service_instance" "postgres_instance" {
   name         = local.postgres_service_name
   space        = data.cloudfoundry_space.space.id

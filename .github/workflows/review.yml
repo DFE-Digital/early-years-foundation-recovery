@@ -82,7 +82,7 @@ jobs:
             -input=false \
             -auto-approve \
             -var-file ../workspace-variables/review.tfvars \
-            -var='app_hostname=${{ env.REVIEW_PR_NUMBER }}' \
+            -var='paas_app_hostname=${{ env.REVIEW_PR_NUMBER }}' \
             -var='paas_app_env_secrets={
               "AWS_ACCESS_KEY_ID": "${{ secrets.AWS_ACCESS_KEY_ID }}",
               "AWS_SECRET_ACCESS_KEY": "${{ secrets.AWS_SECRET_ACCESS_KEY }}",

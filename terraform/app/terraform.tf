@@ -16,10 +16,11 @@ terraform {
 
 module "paas" {
   source                  = "./modules/paas"
-  cf_api_url              = local.cf_api_url          #
-  service_name            = local.service_name        # eyfs-recovery
-  app_environment         = var.paas_app_environment  # Terraform Workspace: review/prod/qa
-  app_env_values          = local.paas_app_env_values # hash of YAML and GH secrets
+  cf_api_url              = local.cf_api_url
+  service_name            = local.service_name
+  web_app_name            = local.app_hostname
+  app_env_values          = local.paas_app_env_values
+  app_environment         = var.paas_app_environment
   cf_user                 = var.paas_cf_user
   cf_password             = var.paas_cf_password
   cf_sso_passcode         = var.paas_cf_sso_passcode
@@ -30,6 +31,4 @@ module "paas" {
   web_app_instances       = var.paas_web_app_instances
   web_app_memory          = var.paas_web_app_memory
   web_app_start_command   = var.paas_web_app_start_command
-
 }
-

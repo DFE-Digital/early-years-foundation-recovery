@@ -1,18 +1,8 @@
 # ------------------------------------------------------------------------------
 locals {
-
-  # @example: ey-recovery
-  # web_app_name = var.service_name
-
-  # @example: ey-recovery-review
-  # web_app_name = "${var.service_name}-${var.app_environment}"
-
-  # @example: ey-recovery-review-pr-52
-  web_app_name = "${var.service_name}-${var.app_hostname}"
-
   # HOSTNAME only
   app_env_domain = {
-    "DOMAIN" = "${local.web_app_name}.london.cloudapps.digital"
+    "DOMAIN" = "${var.web_app_name}.london.cloudapps.digital"
 
     # plek
     # "GOVUK_APP_DOMAIN"   = "eyfs-${var.environment}.london.cloudapps.digital"

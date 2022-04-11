@@ -17,6 +17,12 @@ variable "paas_app_environment" {
   default     = "development"
 }
 
+variable "paas_app_hostname" {
+  type        = string
+  description = "appended to service name unless blank"
+  default     = ""
+}
+
 #
 variable "paas_app_env_secrets" {
   type        = map(string)
@@ -52,12 +58,10 @@ variable "paas_web_app_start_command" {
 
 variable "paas_web_app_instances" {
   default = 1
-  type    = number
 }
 
 variable "paas_web_app_memory" {
   default = 512
-  type    = number
 }
 
 # set on review.tfvars, workflow action timed out before paas was ready
