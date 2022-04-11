@@ -25,9 +25,9 @@ provider "cloudfoundry" {
 
 
 resource "cloudfoundry_app" "web_app" {
-  name                       = local.web_app_name        # <project>-<env>
+  name                       = local.web_app_name        # ey-recovery-review-pr-52
   environment                = local.app_environment     # {}
-  command                    = var.web_app_start_command # rails s -b 0.0.0.0
+  command                    = var.web_app_start_command # rails server -b 0.0.0.0
   instances                  = var.web_app_instances     # default: 1
   memory                     = var.web_app_memory        # default: 512
   health_check_type          = "http"
@@ -37,7 +37,6 @@ resource "cloudfoundry_app" "web_app" {
   timeout                    = 300
   docker_image               = var.app_docker_image
   space                      = data.cloudfoundry_space.space.id
-
 
   dynamic "service_binding" {
     for_each = local.app_service_bindings
