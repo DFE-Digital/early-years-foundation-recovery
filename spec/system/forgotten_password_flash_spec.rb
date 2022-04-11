@@ -10,7 +10,6 @@ RSpec.describe 'Comfirmed user, following forgotten password process', type: :sy
       fill_in 'New password', with: 'abc123'
       fill_in 'Confirm your password', with: 'abc123'
       click_on "Reset password"
-      expect(page).to have_current_path("/")
       expect(page).to have_selector ".govuk-notification-banner--success"
       expect(page).to have_selector ".govuk-notification-banner__title", text: "Success"
       expect(page).to have_selector ".govuk-notification-banner__content", text: "Your password has been reset."
