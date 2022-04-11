@@ -5,8 +5,8 @@ GOVUKDesignSystemFormBuilder.configure do |config|
 
   # config.brand: 'govuk'
   #
-  # config.default_legend_size: 'm'
-  # config.default_legend_tag: nil
+  config.default_legend_size = 'l'
+  config.default_legend_tag = :h1
   # config.default_caption_size: 'm'
   # config.default_submit_button_text: 'Continue'
   # config.default_radio_divider_text: 'or'

@@ -14,16 +14,12 @@ services:
       - RAILS_SERVE_STATIC_FILES=true
     volumes:
       - .:/src
-    ports:
-      - 3000:3000
     tty: true
     stdin_open: true
 
   db:
     volumes:
       - db_dev:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
 
 volumes:
   db_dev:

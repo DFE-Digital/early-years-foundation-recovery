@@ -24,14 +24,12 @@ html
 
     .govuk-width-container
       = govuk_phase_banner(tag: { text: "Beta" }) do
-        | This is a new service, your
-        =< govuk_link_to("feedback", "#")
-        |  will help us improve it.
+        = t('phase_banner_html', feedback_link: govuk_link_to("feedback", Rails.configuration.feedback_url))
       .govuk-grid-row
         .govuk-grid-column-two-thirds-from-desktop
           = govuk_back_link(href: request.referrer)
       main.govuk-main-wrapper#main-content role="main"
         - flash.each do |variant, message|
-          = govuk_notification_banner title_text: t("banners.#{variant}"), text: message, success: false
+          = govuk_notification_banner title_text: t("banners.#{variant}"), text: translate_markdown(message), success: %w[important notice].include?(variant)
         = yield
     = govuk_footer

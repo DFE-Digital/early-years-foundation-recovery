@@ -27,7 +27,7 @@ WORKDIR ${APP_HOME}
 COPY Gemfile* ./
 
 RUN bundle config set no-cache true
-RUN bundle config set without development test
+RUN bundle config set without development test ui
 RUN bundle install --no-binstubs --retry=10 --jobs=4
 
 COPY config.ru ${APP_HOME}/config.ru
@@ -61,7 +61,7 @@ CMD ["bundle", "exec", "rails", "server"]
 FROM app as dev
 
 RUN bundle config unset without
-RUN bundle config set without test
+RUN bundle config set without test ui
 RUN bundle install --no-binstubs --retry=10 --jobs=4
 
 RUN yarn global add adr-log
@@ -72,7 +72,7 @@ RUN yarn global add adr-log
 FROM app as test
 
 RUN bundle config unset without
-RUN bundle config set without development
+RUN bundle config set without development ui
 RUN bundle install --no-binstubs --retry=10 --jobs=4
 
 COPY spec ${APP_HOME}/spec
@@ -80,8 +80,27 @@ COPY .rspec ${APP_HOME}/.rspec
 COPY .rubocop.yml ${APP_HOME}/.rubocop.yml
 COPY .rubocop_todo.yml ${APP_HOME}/.rubocop_todo.yml
 
+CMD ["bundle", "exec", "rspec"]
+
 # ------------------------------------------------------------------------------
-# QA Stage
+# Test UI Stage (additional non-Ruby dependencies, containerised version of local dev experience)
+# ------------------------------------------------------------------------------
+FROM app as ui
+
+RUN apk add --no-cache --no-progress \
+        chromium-chromedriver
+
+RUN bundle config unset without
+RUN bundle config set without development
+RUN bundle install --no-binstubs --retry=10 --jobs=4
+
+COPY ui ${APP_HOME}/ui
+
+CMD ["bundle", "exec", "rspec", "--default-path", "ui"]
+
+
+# ------------------------------------------------------------------------------
+# QA Stage (self-contained and headless for pipeline)
 # ------------------------------------------------------------------------------
 FROM ruby:3.1.0-alpine as qa
 
@@ -91,8 +110,9 @@ RUN apk add --no-cache --no-progress build-base tzdata gcompat \
 
 RUN gem install pry-byebug rspec capybara site_prism selenium-webdriver
 
-COPY uat /uat
+WORKDIR /src
 
-WORKDIR /uat
+COPY ui /src/spec
+COPY .rspec /src/.rspec
 
 CMD ["rspec"]

@@ -1,9 +1,8 @@
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
-    = govuk_back_link(href: request.referrer)
     = form_for @user do |form|
       = form.govuk_error_summary
       = form.govuk_fieldset legend: { text: 'Edit your profile' } do
         - [:first_name, :last_name, :postcode, :ofsted_number].each do |field|
-          = form.govuk_text_field field, width: 'one-half', label: { text: t(field) }
+          = form.govuk_text_field field, label: { text: t(field) }
         = form.govuk_submit "Update"

@@ -7,7 +7,7 @@ RSpec.describe NotifyMailer, type: :mailer do
     context 'when signing up' do
       it 'send confirmation email to correct user' do
         response = user.send_confirmation_instructions
-        expect(response.recipients[0]).to eq user.email
+        expect(response.recipients).to contain_exactly(user.email)
         expect(response.subject).to eq 'Confirmation instructions'
       end
     end
@@ -16,8 +16,9 @@ RSpec.describe NotifyMailer, type: :mailer do
   describe 'reset password instructions' do
     context 'when resetting password' do
       it 'send instructions to correct user' do
-        response = User.send_reset_password_instructions(email: user.email)
-        expect(response.email).to eq user.email
+        mail = described_class.reset_password_instructions(user, :anything)
+        expect(mail.to).to contain_exactly(user.email)
+        expect(mail.subject).to eq 'Reset password instructions'
       end
     end
   end
@@ -26,7 +27,7 @@ RSpec.describe NotifyMailer, type: :mailer do
     context 'when changing password' do
       it 'send confirmation to correct user' do
         response = user.send_password_change_notification
-        expect(response.recipients[0]).to eq user.email
+        expect(response.recipients).to contain_exactly(user.email)
         expect(response.subject).to eq 'Password change'
       end
     end
@@ -36,8 +37,18 @@ RSpec.describe NotifyMailer, type: :mailer do
     context 'when changing email' do
       it 'send confirmation to correct user' do
         response = user.send_email_changed_notification
-        expect(response.recipients[0]).to eq user.email
+        expect(response.recipients).to contain_exactly(user.email)
         expect(response.subject).to eq 'Email changed'
+      end
+    end
+  end
+
+  describe 'unlock email' do
+    context 'when account is locked' do
+      it 'send unlock email to correct user' do
+        mail = described_class.unlock_instructions(user, :anything)
+        expect(mail.to).to contain_exactly(user.email)
+        expect(mail.subject).to eq 'Unlock instructions'
       end
     end
   end

@@ -27,7 +27,7 @@ class ExtraRegistrationsController < ApplicationController
       redirect_to edit_extra_registration_path(next_step)
     else
       current_user.update! registration_complete: true
-      redirect_to root_path, notice: 'Registration complete'
+      redirect_to root_path, notice: t(:complete, scope: :extra_registration)
     end
   end
 

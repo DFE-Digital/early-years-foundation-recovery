@@ -17,6 +17,8 @@ services:
       - RAILS_MASTER_KEY
     depends_on:
       - db
+    ports:
+      - 3000:3000
     networks:
       - recovery
 
@@ -30,6 +32,8 @@ services:
       test: pg_isready
     volumes:
       - db_prod:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
     networks:
       - recovery
 

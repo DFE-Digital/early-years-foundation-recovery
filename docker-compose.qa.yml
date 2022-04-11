@@ -8,8 +8,6 @@ services:
     environment:
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_production
       - RAILS_SERVE_STATIC_FILES=true
-    ports:
-      - 3000:3000
     volumes:
       # NB: or ensure RAILS_MASTER_KEY=<production master key> is in .env
       - ./config/credentials/production.key:/src/config/credentials/production.key
