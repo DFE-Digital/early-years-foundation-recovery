@@ -14,7 +14,7 @@ RSpec.describe 'Errors', type: :request do
       expect(response).to have_http_status(:success)
     end
   end
-  
+
   describe 'internal server error' do
     it 'returns http success' do
       get '/500'
