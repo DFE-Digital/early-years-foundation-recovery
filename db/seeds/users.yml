@@ -2,7 +2,6 @@
 demo@example.com:
   first_name: Demo
   last_name: User
-  # TODO: meet UAT and security requirements
-  password: <%= ENV.fetch('DEMO_USER_PASWORD', 'password') %>
+  password: <%= ENV.fetch('DEMO_USER_PASSWORD', 'password') %>
   confirmed_at: <%= 1.minute.ago %>
   registration_complete: true
