@@ -2,7 +2,7 @@
 
 require_relative './spec_helper'
 
-describe 'home_page' do
+describe 'home page' do
   context 'when unauthenticated' do
     let(:dfe) { Dfe.new }
 
