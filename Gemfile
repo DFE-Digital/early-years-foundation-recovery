@@ -60,9 +60,6 @@ gem 'sentry-ruby'
 # Manage seeds
 gem 'dibber'
 
-# Test data generator
-gem 'faker'
-
 group :development, :test do
   # Use fake data for specs
   gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
@@ -98,9 +95,9 @@ group :test do
 end
 
 group :ui do
-  # Functional UI automation
   gem 'capybara'
   gem 'capybara-selenium'
+  gem 'faker'
   gem 'selenium-webdriver'
   gem 'site_prism'
   gem 'webdrivers'

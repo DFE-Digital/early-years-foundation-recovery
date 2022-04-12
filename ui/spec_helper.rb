@@ -25,8 +25,9 @@ require_relative './dfe'
 
 Drivers::CapybaraDrivers.register_all
 
+# If no browser is chosen, then default to the following browser
 ENV['BROWSER'] ||= 'chrome'
 
 Capybara.configure do |config|
-  config.default_driver = ENV['BROWSER'].to_sym
+  config.default_driver = Drivers::CapybaraDrivers.chosen_driver
 end

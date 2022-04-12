@@ -2,17 +2,14 @@
 
 require_relative './spec_helper'
 
-describe 'Edit Profile' do
+describe 'Edit Profile', er_1: true do
   let(:dfe) { Dfe.new }
 
   before do
     dfe.home.load
     dfe.home.header.sign_in.click
 
-    dfe.sign_in.wait_until_header_visible
-    dfe.sign_in.email.set ENV['USERNAME']
-    dfe.sign_in.password.set ENV['PASS']
-    dfe.sign_in.sign_in_button.click
+    dfe.sign_in.with_email_and_password(ENV['UI_USERNAME'], ENV['UI_PASS'])
 
     dfe.home.displayed?(5)
     dfe.home.header.profile.click

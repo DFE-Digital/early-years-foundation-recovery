@@ -1,17 +1,26 @@
 module Drivers
   class Chrome
+    # Registers all drivers in the current class
+    #
+    # @return [Capybara] result of invoking all the chrome drivers requested for registration
     def self.all_drivers
       register
       register_remote
       register_headless
     end
 
+    # Registers all drivers in class
+    #
+    # @return [Capybara] bare bones chrome driver
     def self.register
       Capybara.register_driver :chrome do |app|
         Capybara::Selenium::Driver.new(app, browser: :chrome)
       end
     end
 
+    # Registers a headless chrome driver
+    #
+    # @return [Capybara] the headless chrome driver
     def self.register_headless
       options = Selenium::WebDriver::Chrome::Options.new
       # options.add_preference(:download, prompt_for_download: false, default_directory: '/tmp/downloads')
@@ -30,12 +39,14 @@ module Drivers
       end
     end
 
-    # Only accessible inside Docker -----------
+    # Registers a remote firefox driver - Only accessible inside docker
+    #
+    # @return [Capybara] the remote chrome driver
     def self.register_remote
       capabilities = Selenium::WebDriver::Remote::Capabilities.chrome
       capabilities['acceptInsecureCerts'] = true
       remote_url = 'http://chrome:4444/wd/hub'
-      Capybara.register_driver :remote_chrome do |app|
+      Capybara.register_driver :standalone_chrome do |app|
         Capybara::Selenium::Driver.new(app, browser: :remote, url: remote_url, capabilities: capabilities)
       end
     end

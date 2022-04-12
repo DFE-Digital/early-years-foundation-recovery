@@ -1,6 +1,7 @@
 class Dfe
   include Pages::Base
 
+  # @todo Creates instance methods for all the page classes in the application
   def initialize
     page_classes = Dir.entries("#{__dir__}/pages")
     page_classes.reject { |f| File.directory? f }.map { |x| x.gsub!('.rb', '') }

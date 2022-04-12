@@ -1,18 +1,26 @@
 module Drivers
   class Firefox
+    # Registers all drivers in class
+    #
+    # @return [Capybara] result of invoking all the firefox drivers requested for registration
     def self.all_drivers
       register
       register_remote
       register_headless
     end
 
+    # Registers a firefox driver
+    #
+    # @return [Capybara] the firefox driver
     def self.register
       Capybara.register_driver :firefox do |app|
-        browser = ENV.fetch('browser', 'firefox').to_sym
-        Capybara::Selenium::Driver.new(app, browser: browser, desired_capabilities: {})
+        Capybara::Selenium::Driver.new(app, browser: :firefox)
       end
     end
 
+    # Registers a headless firefox driver
+    #
+    # @return [Capybara] the headless firefox driver
     def self.register_headless
       Capybara.register_driver :headless_firefox do |app|
         options = Selenium::WebDriver::Firefox::Options.new
@@ -22,7 +30,9 @@ module Drivers
       end
     end
 
-    # Only accessible inside Docker -----------
+    # Registers a remote firefox driver - Only accessible inside docker
+    #
+    # @return [Capybara] the remote firefox driver
     def self.register_remote
       firefox_capabilities = Selenium::WebDriver::Remote::Capabilities.firefox
       firefox_capabilities['acceptInsecureCerts'] = true
