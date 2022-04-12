@@ -9,8 +9,12 @@
 name: Deploy Review App
 on:
   pull_request:
-    branches: [ main ]
-    types: [ opened, synchronize, reopened ]
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
 
 jobs:
   deploy:
@@ -58,7 +62,7 @@ jobs:
             ${{ env.DOCKER_IMAGE }}:${{ env.REVIEW_PR_NUMBER }}
             ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
 
-      -
+      - # shared tfstate file in bucket for all PRs in review workspace?
         name: Deploy Review App
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}         # init
