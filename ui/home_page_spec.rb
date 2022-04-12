@@ -6,16 +6,21 @@ describe 'home_page' do
   context 'when unauthenticated' do
     let(:dfe) { Dfe.new }
 
-    before { dfe.home_page.load }
+    before { dfe.home.load }
+
+    after do
+      browser = Capybara.current_session.driver.browser
+      browser.manage.delete_all_cookies
+    end
 
     it 'is displayed when the user navigates to the home page and clicks the header logo' do
-      dfe.home_page.header.logo.click
+      dfe.home.header.logo.click
 
-      expect(dfe.home_page).to be_displayed
+      expect(dfe.home).to be_displayed
     end
 
     it 'navigates away from the home page when the user clicks sign in' do
-      dfe.home_page.header.sign_in.click
+      dfe.home.header.sign_in.click
 
       dfe.sign_in.wait_until_header_visible
 
