@@ -1,7 +1,8 @@
 ---
-user@example.com:
-  first_name: Test
+demo@example.com:
+  first_name: Demo
   last_name: User
-  password: <%= Rails.application.credentials.user_seed_password %>
+  # TODO: meet UAT and security requirements
+  password: <%= ENV.fetch('DEMO_USER_PASWORD', 'password') %>
   confirmed_at: <%= 1.minute.ago %>
   registration_complete: true

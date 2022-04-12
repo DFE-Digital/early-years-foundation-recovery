@@ -17,3 +17,4 @@ review:
   RAILS_ENV: production
   NODE_ENV: production
   DATABASE_URL: postgres://postgres@localhost:5432/review
+  DEMO_USER_PASWORD: pa$$w0rd
