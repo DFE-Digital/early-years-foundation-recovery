@@ -7,7 +7,7 @@ describe 'ContentHelper#translate_markdown', type: :helper do
     let(:input) { 'text' }
 
     it 'returns text within p tags' do
-      expect(html).to include '<p>text</p>'
+      expect(html.strip).to eq '<p>text</p>'
     end
   end
 
@@ -15,7 +15,7 @@ describe 'ContentHelper#translate_markdown', type: :helper do
     let(:input) { '## text' }
 
     it 'translates markdown' do
-      expect(html).to include '<h2 id="text">text</h2>'
+      expect(html.strip).to eq '<h2 id="text">text</h2>'
     end
   end
 
