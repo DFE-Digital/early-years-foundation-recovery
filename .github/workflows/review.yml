@@ -17,7 +17,7 @@ jobs:
     env:
       WORKSPACE: review
       DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
-      REVIEW_PR_NUMBER: ${{ env.WORKSPACE }}-pr-${{ github.event.number }}
+      REVIEW_PR_NUMBER: review-pr-${{ github.event.number }}
       GITHUB_SECRETS_JSON: ${{ toJson(secrets) }}
     steps:
       -
