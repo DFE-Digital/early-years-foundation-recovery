@@ -60,9 +60,6 @@ gem 'sentry-ruby'
 # Manage seeds
 gem 'dibber'
 
-# Functional UI automation
-gem 'capybara'
-
 # Test data generator
 gem 'faker'
 
@@ -101,8 +98,9 @@ group :test do
 end
 
 group :ui do
+  # Functional UI automation
+  gem 'capybara'
   gem 'capybara-selenium'
-  gem 'rspec'
   gem 'selenium-webdriver'
   gem 'site_prism'
   gem 'webdrivers'
