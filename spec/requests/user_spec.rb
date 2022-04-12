@@ -40,9 +40,9 @@ RSpec.describe 'User', type: :request do
   describe 'Unconfirmed user, not signed in' do
     let(:unconfirmed_user) { create :user }
 
-    describe 'GET /user/check_email' do
+    describe 'GET /user/check_email_confirmation' do
       it 'renders check email page' do
-        get check_email_user_path(id: unconfirmed_user)
+        get check_email_confirmation_user_path(id: unconfirmed_user)
         expect(response).to have_http_status(:success)
         expect(response.body).to include('Check your email')
         expect(response.body).to include(unconfirmed_user.email)
