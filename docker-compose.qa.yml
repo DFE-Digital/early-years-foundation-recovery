@@ -26,8 +26,6 @@ services:
     environment:
       - BASE_URL
       - BROWSER
-      - USERNAME
-      - PASS
     depends_on:
       app:
         condition: service_healthy
