@@ -2,7 +2,7 @@ class Dfe
   include Pages::Base
 
   def initialize
-    page_classes = Dir.entries("#{File.dirname(__FILE__)}/pages")
+    page_classes = Dir.entries("#{__dir__}/pages")
     page_classes.reject { |f| File.directory? f }.map { |x| x.gsub!('.rb', '') }
     page_classes.delete_if { |file| file.match?(/base/) }
 
