@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-  before_action :authenticate_registered_user!, except: [:check_email, :check_email_password_reset]
+  before_action :authenticate_registered_user!, except: %i[check_email check_email_password_reset]
 
   def show
     user
@@ -18,11 +18,10 @@ class UserController < ApplicationController
   end
 
   def check_email
-    @user = User.find(params[:id]) if params[:id]
+    @user = User.find(params[:id])
   end
 
-  def check_email_password_reset
-  end
+  def check_email_password_reset; end
 
 private
 
