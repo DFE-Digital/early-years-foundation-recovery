@@ -2,8 +2,6 @@
 # ------------------------------------------------------------------------------
 set -e
 
-export PATH=/usr/local/bundle/bin:/usr/local/bin:$PATH
-
 if [ !${RAILS_ENV}=="production" ]
 then
   if bundle check

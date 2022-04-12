@@ -1,0 +1,3 @@
+echo "Welcome to the EYFS Recovery Application"
+
+export PATH=$PATH:/usr/local/bin:/usr/local/bundle/bin

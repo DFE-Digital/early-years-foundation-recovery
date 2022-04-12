@@ -19,6 +19,8 @@ FROM base AS app
 
 ENV APP_HOME /src
 
+COPY .docker-profile /root/.profile
+
 RUN mkdir -p ${APP_HOME}/tmp/pids ${APP_HOME}/log
 
 WORKDIR ${APP_HOME}
