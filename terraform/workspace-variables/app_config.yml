@@ -2,19 +2,18 @@
 # ------------------------------------------------------------------------------
 #
 defaults: &defaults
-  ASSETS_PRECOMPILE: true
   RAILS_SERVE_STATIC_FILES: true
   RAILS_LOG_TO_STDOUT: true
   RAILS_MAX_THREADS: 5
-
-review:
-  <<: *defaults
-  RAILS_ENV: production
-  NODE_ENV: production
-  DATABASE_URL: postgres://postgres@localhost:5432
   # RAILS_MASTER_KEY:
   # APP_URL:
   # GOVUK_NOTIFY_API_KEY:
   # GOVUK_APP_DOMAIN:
   # GOVUK_WEBSITE_ROOT:
   # FEEDBACK_URL:
+
+review:
+  <<: *defaults
+  RAILS_ENV: production
+  NODE_ENV: production
+  DATABASE_URL: postgres://postgres@localhost:5432/review
