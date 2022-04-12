@@ -39,7 +39,7 @@ gem 'bootsnap', require: false
 gem 'devise'
 
 # HTML abstraction markup language
-gem 'slim-rails', '~> 3.3'
+gem 'slim-rails', '~> 3.4', '>= 3.4.0'
 
 # Create models from static data such as hashes or YAML
 gem 'active_hash'
@@ -48,7 +48,7 @@ gem 'govuk-components', '>= 3.0.3'
 gem 'govuk_design_system_formbuilder'
 
 # Markdown support
-gem 'govspeak', '~> 6.8'
+gem 'govspeak', '~> 6.8', '>= 6.8.2'
 gem 'sassc', '~> 2.4' # govspeak assets
 
 gem 'govuk_notify_rails', '~> 2.2', '>= 2.2.0'
