@@ -20,7 +20,6 @@ jobs:
       WORKSPACE: review
       DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
       REVIEW_PR_NUMBER: review-pr-${{ github.event.number }}
-      GITHUB_SECRETS_JSON: ${{ toJson(secrets) }}
     steps:
       -
         name: Checkout Code
@@ -67,6 +66,8 @@ jobs:
           TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
           TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
           TF_VAR_paas_app_docker_image: ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
+          TF_VAR_paas_app_env_secrets: ${{ toJson(secrets) }}
+          TF_VAR_paas_app_hostname: ${{ env.REVIEW_PR_NUMBER }}
         run: |
           cd terraform/app
           terraform init \
@@ -79,9 +80,7 @@ jobs:
           terraform apply \
             -input=false \
             -auto-approve \
-            -var-file ../workspace-variables/${{ env.WORKSPACE }}.tfvars \
-            -var='paas_app_hostname=${{ env.REVIEW_PR_NUMBER }}' \
-            -var='paas_app_env_secrets=${{ env.GITHUB_SECRETS_JSON }}'
+            -var-file ../workspace-variables/${{ env.WORKSPACE }}.tfvars
 
       - name: Comment URL to PR
         uses: mshick/add-pr-comment@v1
