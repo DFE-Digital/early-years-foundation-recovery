@@ -10,7 +10,7 @@ module Drivers
     end
 
     # Get the current browser
-    # @return [String] the current browser
+    # @return [Symbol] the current browser
     def self.chosen_driver
       browser
     end

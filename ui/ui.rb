@@ -1,4 +1,4 @@
-class Dfe
+class Ui
   include Pages::Base
 
   # @todo Creates instance methods for all the page classes in the application
@@ -7,8 +7,7 @@ class Dfe
     page_classes.reject { |f| File.directory? f }.map { |x| x.gsub!('.rb', '') }
     page_classes.delete_if { |file| file.match?(/base/) }
 
-    # NB: page names and file names must match!
-
+    # @note page names and file names must match!
     page_classes.each do |result|
       self.class.send(:define_method, result) do
         "Pages::#{result.demodulize.camelize}".constantize.new

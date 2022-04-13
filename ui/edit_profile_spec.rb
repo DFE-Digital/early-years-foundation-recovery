@@ -3,19 +3,19 @@
 require_relative './spec_helper'
 
 describe 'Edit Profile', er_1: true do
-  let(:dfe) { Dfe.new }
+  let(:ui) { Ui.new }
 
   before do
-    dfe.home.load
-    dfe.home.header.sign_in.click
+    ui.home.load
+    ui.home.header.sign_in.click
 
-    dfe.sign_in.with_email_and_password(ENV['UI_USERNAME'], ENV['UI_PASS'])
+    ui.sign_in.with_email_and_password(ENV['UI_USERNAME'], ENV['UI_PASS'])
 
-    dfe.home.displayed?(5)
-    dfe.home.header.profile.click
+    ui.home.displayed?(5)
+    ui.home.header.profile.click
 
-    dfe.profile.displayed?
-    dfe.profile.wait_until_first_name_visible
+    ui.profile.displayed?
+    ui.profile.wait_until_first_name_visible
   end
 
   after do
@@ -27,53 +27,53 @@ describe 'Edit Profile', er_1: true do
   context 'when an existing user' do
     it 'then the first name alone is updated when requested' do
       expected_first_name = Faker::Name.first_name
-      dfe.profile.first_name.set expected_first_name
-      dfe.profile.update_button.click
+      ui.profile.first_name.set expected_first_name
+      ui.profile.update_button.click
 
-      dfe.user.displayed?(5)
-      dfe.user.wait_until_edit_visible
-      dfe.user.edit.click
+      ui.user.displayed?(5)
+      ui.user.wait_until_edit_visible
+      ui.user.edit.click
 
-      actual_first_name = dfe.profile.first_name.value
+      actual_first_name = ui.profile.first_name.value
       expect(actual_first_name).to eq(expected_first_name)
     end
 
     it 'then the last name alone is updated when requested' do
       expected_last_name = Faker::Name.last_name
-      dfe.profile.last_name.set expected_last_name
-      dfe.profile.update_button.click
+      ui.profile.last_name.set expected_last_name
+      ui.profile.update_button.click
 
-      dfe.user.displayed?(5)
-      dfe.user.wait_until_edit_visible
-      dfe.user.edit.click
+      ui.user.displayed?(5)
+      ui.user.wait_until_edit_visible
+      ui.user.edit.click
 
-      actual_last_name = dfe.profile.last_name.value
+      actual_last_name = ui.profile.last_name.value
       expect(actual_last_name).to eq(expected_last_name)
     end
 
     it 'then the postcode alone is updated when requested' do
       expected_post_code = Faker::Address.postcode
-      dfe.profile.post_code.set expected_post_code
-      dfe.profile.update_button.click
+      ui.profile.post_code.set expected_post_code
+      ui.profile.update_button.click
 
-      dfe.user.displayed?(5)
-      dfe.user.wait_until_edit_visible
-      dfe.user.edit.click
+      ui.user.displayed?(5)
+      ui.user.wait_until_edit_visible
+      ui.user.edit.click
 
-      actual_post_code = dfe.profile.post_code.value
+      actual_post_code = ui.profile.post_code.value
       expect(actual_post_code).to eq(expected_post_code)
     end
 
     it 'then the ofsted nuumber alone is updated when requested' do
       expected_ofsted_number = Faker::Number.number(digits: 10).to_s
-      dfe.profile.ofsted_number.set expected_ofsted_number
-      dfe.profile.update_button.click
+      ui.profile.ofsted_number.set expected_ofsted_number
+      ui.profile.update_button.click
 
-      dfe.user.displayed?(5)
-      dfe.user.wait_until_edit_visible
-      dfe.user.edit.click
+      ui.user.displayed?(5)
+      ui.user.wait_until_edit_visible
+      ui.user.edit.click
 
-      actual_ofsted_number = dfe.profile.ofsted_number.value
+      actual_ofsted_number = ui.profile.ofsted_number.value
       expect(actual_ofsted_number).to eq(expected_ofsted_number)
     end
 
@@ -83,21 +83,21 @@ describe 'Edit Profile', er_1: true do
       expected_post_code = Faker::Address.postcode
       expected_ofsted_number = Faker::Number.number(digits: 10).to_s
 
-      dfe.profile.first_name.set expected_first_name
-      dfe.profile.last_name.set expected_last_name
-      dfe.profile.post_code.set expected_post_code
-      dfe.profile.ofsted_number.set expected_ofsted_number
+      ui.profile.first_name.set expected_first_name
+      ui.profile.last_name.set expected_last_name
+      ui.profile.post_code.set expected_post_code
+      ui.profile.ofsted_number.set expected_ofsted_number
 
-      dfe.profile.update_button.click
+      ui.profile.update_button.click
 
-      dfe.user.displayed?(5)
-      dfe.user.wait_until_edit_visible
-      dfe.user.edit.click
+      ui.user.displayed?(5)
+      ui.user.wait_until_edit_visible
+      ui.user.edit.click
 
-      actual_first_name = dfe.profile.first_name.value
-      actual_last_name = dfe.profile.last_name.value
-      actual_post_code = dfe.profile.post_code.value
-      actual_ofsted_number = dfe.profile.ofsted_number.value
+      actual_first_name = ui.profile.first_name.value
+      actual_last_name = ui.profile.last_name.value
+      actual_post_code = ui.profile.post_code.value
+      actual_ofsted_number = ui.profile.ofsted_number.value
 
       expect(actual_first_name).to eq(expected_first_name)
       expect(actual_last_name).to eq(expected_last_name)

@@ -21,7 +21,7 @@ ENV['BASE_URL'] ||= 'http://localhost:3000'
   Dir[Pathname(__dir__).realpath.join("#{component}/*")].each(&method(:require))
 end
 
-require_relative './dfe'
+require_relative './ui'
 
 Drivers::CapybaraDrivers.register_all
 
