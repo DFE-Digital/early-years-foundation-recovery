@@ -95,7 +95,6 @@ group :test do
 end
 
 group :ui do
-  gem 'capybara'
   gem 'capybara-selenium'
   gem 'faker'
   gem 'selenium-webdriver'
