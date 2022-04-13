@@ -1,23 +1,25 @@
+# ------------------------------------------------------------------------------
 name: Run Pa11y
 
 on:
   workflow_dispatch:
 
 env: 
-  # Replace the site URL with that of the test site
-  site_url: https://staticsitea11y.z33.web.core.windows.net
-  
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+  BASE_URL: https://ey-recovery-staging.london.cloudapps.digital
+
 jobs:
   pa11y:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js 12.x
+      -
+        uses: actions/checkout@v2
+      -
+        name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
-      - name: Run pa11y
+      -
+        name: Run pa11y
         run: |
           npm install -g pa11y
-          pa11y $site_url
+          pa11y $BASE_URL

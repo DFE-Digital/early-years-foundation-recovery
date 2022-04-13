@@ -1,4 +1,5 @@
-name: Teardown Review App
+# ------------------------------------------------------------------------------
+name: Teardown Content App
 
 on:
   workflow_dispatch:
@@ -7,7 +8,7 @@ on:
       - closed
 
 jobs:
-  teardown:
+  teardown-content:
     # conditional on "deployed" label
     # if: contains(github.event.pull_request.labels.*.name, 'deployed')
     runs-on: ubuntu-latest
