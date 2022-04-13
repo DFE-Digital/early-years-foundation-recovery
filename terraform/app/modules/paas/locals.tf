@@ -16,7 +16,6 @@ locals {
   app_cf_service_instances = [cloudfoundry_service_instance.postgres_instance.id]
   app_service_bindings     = concat(local.app_cf_service_instances)
 
-  # prematurely assumed the db is postgres
-  postgres_service_name = "${var.service_name}-postgres-${var.app_environment}"
-  # app_db_name = "${var.service_name}-db-${var.app_environment}"
+  # example: ey-recovery-db-review
+  db_service_name = "${var.service_name}-db-${var.app_environment}"
 }

@@ -5,7 +5,7 @@ FROM ruby:3.1.0-alpine as base
 
 RUN apk add --no-cache --no-progress \
     build-base curl tzdata postgresql-dev yarn gcompat \
-    "gmp>=6.2.1-r1" "zlib>=1.2.12-r0" \
+    "gmp>=6.2.1-r1" "zlib>=1.2.12-r0" "busybox>=1.34.1-r5" \
     "libretls>=3.3.4-r3" "libssl1.1>=1.1.1n-r0" "libcrypto1.1>=1.1.1n-r0"
 
 # ------------------------------------------------------------------------------
@@ -13,11 +13,7 @@ RUN apk add --no-cache --no-progress \
 # ------------------------------------------------------------------------------
 FROM base AS app
 
-# ENV NODE_ENV
-# ENV RAILS_ENV
-# ENV RAILS_MASTER_KEY
-
-ENV APP_HOME /src
+ENV APP_HOME /srv
 
 COPY .docker-profile /root/.profile
 
@@ -106,14 +102,14 @@ CMD ["bundle", "exec", "rspec", "--default-path", "ui"]
 FROM ruby:3.1.0-alpine as qa
 
 RUN apk add --no-cache --no-progress build-base tzdata gcompat \
-    "gmp>=6.2.1-r1" "zlib>=1.2.12-r0" \
+    "gmp>=6.2.1-r1" "zlib>=1.2.12-r0" "busybox>=1.34.1-r5" \
     "libretls>=3.3.4-r3" "libssl1.1>=1.1.1n-r0" "libcrypto1.1>=1.1.1n-r0"
 
 RUN gem install pry-byebug rspec capybara site_prism selenium-webdriver
 
-WORKDIR /src
+WORKDIR /srv
 
-COPY ui /src/spec
-COPY .rspec /src/.rspec
+COPY ui /srv/spec
+COPY .rspec /srv/.rspec
 
 CMD ["rspec"]

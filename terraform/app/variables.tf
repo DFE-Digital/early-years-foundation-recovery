@@ -1,26 +1,32 @@
 # ------------------------------------------------------------------------------
-# Config
-
-variable "paas_app_config_file" {
-  type        = string
-  description = "Path to YAML config"
-  default     = "app_config.yml"
-}
-
-
-# ------------------------------------------------------------------------------
-# Environments
+# Environment
 
 variable "paas_app_environment" {
   type        = string
-  description = "Deployment type: review/staging/production"
-  default     = "development"
+  description = "Terraform workspace name"
+  default     = "production"
 }
 
-#
+# merged into paas_app_env_values
+
+# 1.
+variable "paas_app_config_file" {
+  type        = string
+  description = "Terraform workspace application variables"
+  default     = "app_config.yml"
+}
+
+# 2.
 variable "paas_app_env_secrets" {
   type        = map(string)
   description = "GH environment secrets as JSON mapped to object"
+  default     = {}
+}
+
+# 3.
+variable "paas_app_envs" {
+  type        = map(string)
+  description = "GH workflow envs as JSON mapped to object"
   default     = {}
 }
 
@@ -64,7 +70,8 @@ variable "paas_web_app_memory" {
   default = 512
 }
 
-# set on review.tfvars, workflow action timed out before paas was ready
+# set on review.tfvars
+# NB: Reform experienced workflow action timed out before paas was ready
 variable "paas_web_app_start_timeout" {
   default = 360
   type    = number

@@ -59,9 +59,8 @@ resource "cloudfoundry_route" "web_app_route" {
   hostname = var.web_app_name
 }
 
-# TODO: module assumes db type is postgres
 resource "cloudfoundry_service_instance" "postgres_instance" {
-  name         = local.postgres_service_name
+  name         = local.db_service_name
   space        = data.cloudfoundry_space.space.id
   service_plan = data.cloudfoundry_service.postgres.service_plans[var.postgres_service_plan]
   json_params  = "{\"enable_extensions\": [\"pgcrypto\", \"fuzzystrmatch\", \"plpgsql\"]}"

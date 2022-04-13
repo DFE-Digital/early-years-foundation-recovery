@@ -5,6 +5,9 @@ defaults: &defaults
   RAILS_SERVE_STATIC_FILES: true
   RAILS_LOG_TO_STDOUT: true
   RAILS_MAX_THREADS: 5
+  RAILS_ENV: production
+  NODE_ENV: production
+  DATABASE_URL: postgres://postgres@localhost:5432/db
   # RAILS_MASTER_KEY:
   # APP_URL:
   # GOVUK_NOTIFY_API_KEY:
@@ -14,7 +17,10 @@ defaults: &defaults
 
 review:
   <<: *defaults
-  RAILS_ENV: production
-  NODE_ENV: production
-  DATABASE_URL: postgres://postgres@localhost:5432/review
-  DEMO_USER_PASSWORD: pa$$w0rd
+  DEMO_USER_PASSWORD: pa$$w0rd # triggers db:seed in docker entrypoint
+
+staging:
+  <<: *defaults
+
+production:
+  <<: *defaults
