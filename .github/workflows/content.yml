@@ -32,9 +32,13 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     env:
-      WORKSPACE: review
-      DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery-review
+      WORKSPACE: content
+      DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery-content
       PR_NUMBER: pr-${{ github.event.number }}
+      # application - TODO: build these in previous step
+      DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
+      GOVUK_APP_DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
+      GOVUK_WEBSITE_ROOT: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
     steps:
       -
         name: Checkout Code

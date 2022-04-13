@@ -9,11 +9,11 @@ on:
 jobs:
   teardown:
     # conditional on "deployed" label
-    if: contains(github.event.pull_request.labels.*.name, 'deployed')
+    # if: contains(github.event.pull_request.labels.*.name, 'deployed')
     runs-on: ubuntu-latest
     environment: production
     env:
-      REVIEW_PR_NUMBER: review-pr-${{ github.event.number }}
+      PR_NUMBER: pr-${{ github.event.number }}
     steps:
       -
         name: Checkout Code
@@ -46,7 +46,7 @@ jobs:
         # cf ssh ey-recovery-${{ env.REVIEW_PR_NUMBER }} -c 'cd /src; export PATH=$PATH:/usr/local/bundle/bin:/usr/local/bin rails db:drop'
         # cf login -s $CF_SPACE_NAME
         run: |
-          cf ssh ey-recovery-${{ env.REVIEW_PR_NUMBER }} -c 'source .profile; cd $APP_HOME; rails db:drop'
-          cf stop ey-recovery-${{ env.REVIEW_PR_NUMBER }}
-          cf unbind-service ey-recovery-${{ env.REVIEW_PR_NUMBER }} ey-recovery-postgres-review
-          cf delete ey-recovery-${{ env.REVIEW_PR_NUMBER }} -r -f
+          cf ssh ey-recovery-${{ env.PR_NUMBER }} -c 'source .profile; cd $APP_HOME; rails db:drop'
+          cf stop ey-recovery-${{ env.PR_NUMBER }}
+          cf unbind-service ey-recovery-${{ env.PR_NUMBER }} ey-recovery-db-review
+          cf delete ey-recovery-${{ env.PR_NUMBER }} -r -f

@@ -5,9 +5,9 @@ locals {
   # DOMAIN values
   # These should not be in the module and are app specific
   app_env_values = {
-    "DOMAIN"             = "${var.web_app_name}.london.cloudapps.digital"
-    "GOVUK_APP_DOMAIN"   = "${var.web_app_name}.london.cloudapps.digital"
-    "GOVUK_WEBSITE_ROOT" = "${var.web_app_name}.london.cloudapps.digital"
+    # "DOMAIN"             = "${var.web_app_name}.london.cloudapps.digital"
+    # "GOVUK_APP_DOMAIN"   = "${var.web_app_name}.london.cloudapps.digital"
+    # "GOVUK_WEBSITE_ROOT" = "${var.web_app_name}.london.cloudapps.digital"
   }
 
   # Combine module with main module variables which take precedence
@@ -16,6 +16,6 @@ locals {
   app_cf_service_instances = [cloudfoundry_service_instance.postgres_instance.id]
   app_service_bindings     = concat(local.app_cf_service_instances)
 
-  # example: ey-recovery-db-review
+  # example: ey-recovery-db-production or ey-recovery-db-production
   db_service_name = "${var.service_name}-db-${var.app_environment}"
 }

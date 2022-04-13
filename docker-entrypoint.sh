@@ -25,11 +25,4 @@ else
   bundle exec rails db:prepare
 fi
 
-if [ -z ${DEMO_USER_PASSWORD} ]
-then
-  echo "DEMO_USER_PASSWORD is not defined, database will not be seeded"
-else
-  bundle exec rails db:seed
-fi
-
 exec bundle exec "$@"

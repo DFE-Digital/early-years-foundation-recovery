@@ -1,6 +1,6 @@
 ---
 # ------------------------------------------------------------------------------
-#
+# Terraform workspaces align to Cloud Foundry spaces
 defaults: &defaults
   RAILS_SERVE_STATIC_FILES: true
   RAILS_LOG_TO_STDOUT: true
@@ -8,19 +8,20 @@ defaults: &defaults
   RAILS_ENV: production
   NODE_ENV: production
   DATABASE_URL: postgres://postgres@localhost:5432/db
-  # RAILS_MASTER_KEY:
-  # APP_URL:
-  # GOVUK_NOTIFY_API_KEY:
-  # GOVUK_APP_DOMAIN:
-  # GOVUK_WEBSITE_ROOT:
-  # FEEDBACK_URL:
 
-review:
+  # "DOMAIN"             = "${var.web_app_name}.london.cloudapps.digital"
+  # "GOVUK_APP_DOMAIN"   = "${var.web_app_name}.london.cloudapps.digital"
+  # "GOVUK_WEBSITE_ROOT" = "${var.web_app_name}.london.cloudapps.digital"
+
+# ey-recovery
+production:
   <<: *defaults
-  DEMO_USER_PASSWORD: pa$$w0rd # triggers db:seed in docker entrypoint
 
+# ey-recovery-staging
 staging:
   <<: *defaults
 
-production:
+# ey-recovery-content
+content:
   <<: *defaults
+  DEMO_USER_PASSWORD: pa$$w0rd
