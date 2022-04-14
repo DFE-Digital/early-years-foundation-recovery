@@ -1,17 +1,17 @@
 class Ui
   include Pages::Base
 
-  # @todo Creates instance methods for all the page classes in the application
-  def initialize
-    page_classes = Dir.entries("#{__dir__}/pages")
-    page_classes.reject { |f| File.directory? f }.map { |x| x.gsub!('.rb', '') }
-    page_classes.delete_if { |file| file.match?(/base/) }
+  def method_missing(method_name)
+    pages[method_name] ||= "Pages::#{method_name.to_s.demodulize.camelize}".constantize.new
+  end
 
-    # @note page names and file names must match!
-    page_classes.each do |result|
-      self.class.send(:define_method, result) do
-        "Pages::#{result.demodulize.camelize}".constantize.new
-      end
-    end
+  def respond_to_missing?(method_name, include_private = false)
+    method_name.to_s.start_with?(/^[a-z]+/) || super
+  end
+
+private
+
+  def pages
+    @pages ||= {}
   end
 end
