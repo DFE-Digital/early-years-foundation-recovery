@@ -6,7 +6,9 @@ class Ui
   end
 
   def respond_to_missing?(method_name, include_private = false)
-    method_name.to_s.start_with?(/^[a-z]+/) || super
+    "Pages::#{method_name.to_s.demodulize.camelize}".constantize
+  rescue NameError => _e
+    super
   end
 
 private
