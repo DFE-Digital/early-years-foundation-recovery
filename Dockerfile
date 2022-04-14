@@ -5,7 +5,7 @@ FROM ruby:3.1.0-alpine as base
 
 RUN apk add --no-cache --no-progress \
     build-base curl tzdata postgresql-dev yarn gcompat \
-    "gmp>=6.2.1-r1" "zlib>=1.2.12-r0" \
+    "gmp>=6.2.1-r1" "zlib>=1.2.12-r0" "busybox>=1.34.1-r5"  \
     "libretls>=3.3.4-r3" "libssl1.1>=1.1.1n-r0" "libcrypto1.1>=1.1.1n-r0"
 
 # ------------------------------------------------------------------------------
