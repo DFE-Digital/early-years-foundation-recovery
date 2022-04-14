@@ -4,8 +4,11 @@ name: Teardown Content App
 on:
   workflow_dispatch:
   pull_request:
-    types:
-      - closed
+  #   types:
+  #     - closed
+  # remove before merging in
+    branches:
+      - main
 
 jobs:
   teardown-content:

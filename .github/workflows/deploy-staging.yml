@@ -6,6 +6,10 @@ on:
   push:
     branches:
       - main
+  # remove before merging in
+  pull_request:
+    branches:
+      - main
 
 jobs:
   deploy-staging:
