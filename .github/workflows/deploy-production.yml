@@ -2,11 +2,11 @@
 # ------------------------------------------------------------------------------
 name: Deploy Production App
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: Version to deploy
-        required: true
+  # workflow_dispatch:
+  #   inputs:
+  #     version:
+  #       description: Version to deploy
+  #       required: true
   # remove before merging in
   pull_request:
     branches:
@@ -24,7 +24,8 @@ jobs:
         name: Checkout Code
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.inputs.version }}
+          # ref: ${{ github.event.inputs.version }}
+          ref: ${{ github.event.pull_request.head.sha }}
       -
         name: Pin Terraform version
         uses: hashicorp/setup-terraform@v1.3.2
@@ -51,9 +52,11 @@ jobs:
             BUILDKIT_INLINE_CACHE=1
             SHA=${{ github.event.pull_request.head.sha }}
           cache-from: |
-            ${{ env.DOCKER_IMAGE }}:${{ github.event.inputs.version }}
+            ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
+          # ${{ env.DOCKER_IMAGE }}:${{ github.event.inputs.version }}
           tags: |
-            ${{ env.DOCKER_IMAGE }}:${{ github.event.inputs.version }}
+            ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
+          # ${{ env.DOCKER_IMAGE }}:${{ github.event.inputs.version }}
       -
         name: Production Release
         env:
@@ -80,14 +83,15 @@ jobs:
             -input=false \
             -auto-approve \
             -var-file ../workspace-variables/${{ env.WORKSPACE }}.tfvars
-      # -
-      #   name: Install Cloud Foundry CLI
-      #   uses: DFE-Digital/github-actions/setup-cf-cli@master
-      #   with:
-      #     CF_USERNAME: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
-      #     CF_PASSWORD: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
-      #     CF_SPACE_NAME: ey-recovery
-      # -
-      #   name: Map production DNS route
-      #   run: |
-      #     cf map-route ey-recovery-prod education.gov.uk --hostname ey-recovery-prod
+      -
+        name: Install Cloud Foundry CLI
+        uses: DFE-Digital/github-actions/setup-cf-cli@master
+        with:
+          CF_USERNAME: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
+          CF_PASSWORD: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
+          CF_SPACE_NAME: ey-recovery
+      -
+        name: Map production DNS route
+        run: |
+          cf map-route ey-recovery-production london.cloudapps.digital --hostname eyfs-covid-recovery
+        # cf map-route ey-recovery-production education.gov.uk --hostname eyfs-covid-recovery
