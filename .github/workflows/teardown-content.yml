@@ -12,12 +12,9 @@ on:
 
 jobs:
   teardown-content:
-    # conditional on "deployed" label
-    # if: contains(github.event.pull_request.labels.*.name, 'deployed')
+    if: contains(github.event.pull_request.labels.*.name, 'deployed')
     runs-on: ubuntu-latest
     environment: production
-    env:
-      PR_NUMBER: pr-${{ github.event.number }}
     steps:
       -
         name: Checkout Code
@@ -43,14 +40,12 @@ jobs:
           CF_SPACE_NAME: ey-recovery-content
       -
         name: Drop branch database and delete application
-        # TODO: shared db service across features?
-        # cf delete-service ey-recovery-postgres-review -f
-        # or
-        # drop table in app first
-        # cf ssh ey-recovery-${{ env.REVIEW_PR_NUMBER }} -c 'cd /src; export PATH=$PATH:/usr/local/bundle/bin:/usr/local/bin rails db:drop'
-        # cf login -s $CF_SPACE_NAME
+        env:
+          APP_NAME: ey-recovery-pr-${{ github.event.number }}
+          DB_NAME: ey-recovery-db-review
+          CMD: source .profile; cd $APP_HOME; DISABLE_DATABASE_ENVIRONMENT_CHECK=1 rails db:drop
         run: |
-          cf ssh ey-recovery-${{ env.PR_NUMBER }} -c 'source .profile; cd $APP_HOME; rails db:drop'
-          cf stop ey-recovery-${{ env.PR_NUMBER }}
-          cf unbind-service ey-recovery-${{ env.PR_NUMBER }} ey-recovery-db-review
-          cf delete ey-recovery-${{ env.PR_NUMBER }} -r -f
+          cf ssh $APP_NAME -c $CMD
+          cf stop $APP_NAME
+          cf unbind-service $APP_NAME $DB_NAME
+          cf delete $APP_NAME -r -f
