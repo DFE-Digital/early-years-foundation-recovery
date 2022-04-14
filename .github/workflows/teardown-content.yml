@@ -43,7 +43,7 @@ jobs:
         env:
           APP_NAME: ey-recovery-pr-${{ github.event.number }}
           DB_NAME: ey-recovery-db-review
-          CMD: source .profile; cd $APP_HOME; DISABLE_DATABASE_ENVIRONMENT_CHECK=1 rails db:drop
+          CMD: 'source .profile; cd $APP_HOME; DISABLE_DATABASE_ENVIRONMENT_CHECK=1 rails db:drop'
         run: |
           cf ssh $APP_NAME -c $CMD
           cf stop $APP_NAME
