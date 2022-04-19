@@ -95,7 +95,7 @@ group :test do
 end
 
 group :ui do
-  gem 'capybara-selenium'
+  # gem 'capybara-selenium'
   gem 'dry-inflector'
   gem 'faker'
   gem 'selenium-webdriver'
