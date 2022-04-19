@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Common functionality for all pages.
 module Pages
   # base module with instance methods that will be included in all pages
   module Base

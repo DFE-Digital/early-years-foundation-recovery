@@ -1,4 +1,6 @@
+# Pages namespace to include all pages in the application.
 module Pages
+  # Sing in page POM.
   class SignIn < SitePrism::Page
     set_url_matcher %r{users/sign_in}
 

@@ -4,7 +4,6 @@ require 'selenium-webdriver'
 require 'site_prism'
 require 'site_prism/all_there'
 require 'faker'
-# require 'active_support/core_ext/string/inflections'
 require 'dry/inflector'
 
 Capybara.server_host = 'app'

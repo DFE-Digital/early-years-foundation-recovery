@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './spec_helper'
+# require_relative './spec_helper'
 
 describe 'home page' do
   context 'when unauthenticated' do

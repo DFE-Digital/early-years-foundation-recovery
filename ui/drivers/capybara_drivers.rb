@@ -1,3 +1,4 @@
+# Namespace for Driver related functionality
 module Drivers
   # Capybara registration for all drivers
   class CapybaraDrivers

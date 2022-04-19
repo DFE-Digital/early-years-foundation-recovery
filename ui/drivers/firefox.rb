@@ -1,4 +1,6 @@
+# Drivers module for driver related functionality
 module Drivers
+  # Firefox related drivers
   class Firefox
     # Registers all drivers in class
     #

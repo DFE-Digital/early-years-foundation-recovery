@@ -1,4 +1,6 @@
+# Drivers module for driver related functionality
 module Drivers
+  # Chrome driver versions
   class Chrome
     # Registers all drivers in the current class
     #
