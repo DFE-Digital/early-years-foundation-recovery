@@ -1,30 +1,53 @@
+# https://github.com/docker/build-push-action
+# https://github.com/DFE-Digital/early-years-foundation-recovery/settings/secrets/actions
+# https://docs.github.com/en/enterprise-server@3.4/actions/monitoring-and-troubleshooting-workflows/enabling-debug-logging
+# https://docs.cloudfoundry.org/devguide/deploy-apps/streaming-logs.html
 ---
 # ------------------------------------------------------------------------------
-name: Deploy Production App
+# Automatically deploy PRs labelled "deployed"
+#
+# ghcr.io/dfe-digital/early-years-foundation-recovery:pr-123
+#
+# https://ey-recovery-pr-123.london.cloudapps.digital
+#
+name: Deploy Content App
 on:
-  # workflow_dispatch:
-  #   inputs:
-  #     version:
-  #       description: Version to deploy
-  #       required: true
-  # remove before merging in
+  workflow_dispatch:
   pull_request:
     branches:
       - main
+    types:
+      - opened
+      - synchronize
+      - reopened
 
 jobs:
-  deploy-production:
+  turnstyle:
+    if: contains(github.event.pull_request.labels.*.name, 'deployed')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: softprops/turnstyle@v1
+        name: Check workflow concurrency
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy:
+    needs: turnstyle
     runs-on: ubuntu-latest
     environment: production
     env:
-      WORKSPACE: production
-      DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery-production
+      WORKSPACE: content
+      DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
+      PR_NUMBER: pr-${{ github.event.number }}
+      # application - TODO: build these in previous step
+      DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
+      GOVUK_APP_DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
+      GOVUK_WEBSITE_ROOT: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
     steps:
       -
         name: Checkout Code
         uses: actions/checkout@v2
         with:
-          # ref: ${{ github.event.inputs.version }}
           ref: ${{ github.event.pull_request.head.sha }}
       -
         name: Pin Terraform version
@@ -51,14 +74,13 @@ jobs:
           build-args: |
             BUILDKIT_INLINE_CACHE=1
             SHA=${{ github.event.pull_request.head.sha }}
-          cache-from: |
-            ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
-          # ${{ env.DOCKER_IMAGE }}:${{ github.event.inputs.version }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           tags: |
             ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
-          # ${{ env.DOCKER_IMAGE }}:${{ github.event.inputs.version }}
+            ${{ env.DOCKER_IMAGE }}:${{ env.PR_NUMBER }}
       -
-        name: Production Release
+        name: Deploy Review App
         env:
           # init
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -67,7 +89,7 @@ jobs:
           TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
           TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
           TF_VAR_paas_app_docker_image: ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
-          TF_VAR_paas_app_hostname: ${{ env.REVIEW_PR_NUMBER }}
+          TF_VAR_paas_app_hostname: ${{ env.PR_NUMBER }}
           TF_VAR_paas_app_env_secrets: ${{ toJson(secrets) }}
           TF_VAR_paas_app_envs: ${{ toJson(env) }}
         run: |
@@ -76,22 +98,16 @@ jobs:
             -reconfigure \
             -input=false \
             -backend-config="bucket=${{ secrets.AWS_BUCKET }}" \
-            -backend-config="key=${{ env.WORKSPACE }}/terraform.tfstate"
+            -backend-config="key=${{ env.PR_NUMBER }}/terraform.tfstate"
           terraform plan \
             -var-file ../workspace-variables/${{ env.WORKSPACE }}.tfvars
           terraform apply \
             -input=false \
             -auto-approve \
             -var-file ../workspace-variables/${{ env.WORKSPACE }}.tfvars
-      -
-        name: Install Cloud Foundry CLI
-        uses: DFE-Digital/github-actions/setup-cf-cli@master
+
+      - name: Comment URL to PR
+        uses: mshick/add-pr-comment@v1
         with:
-          CF_USERNAME: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
-          CF_PASSWORD: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
-          CF_SPACE_NAME: ey-recovery
-      -
-        name: Map production DNS route
-        run: |
-          cf map-route ey-recovery-production london.cloudapps.digital --hostname eyfs-covid-recovery
-        # cf map-route ey-recovery-production education.gov.uk --hostname eyfs-covid-recovery
+          message: https://ey-recovery-${{ env.PR_NUMBER }}.london.cloudapps.digital
+          repo-token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,44 +1,29 @@
 ---
 # ------------------------------------------------------------------------------
+# Automatically deploy latest commit from "main" and tag "latest"
 #
-# https://github.com/DFE-Digital/early-years-foundation-recovery/settings/secrets/actions
-# https://docs.github.com/en/enterprise-server@3.4/actions/monitoring-and-troubleshooting-workflows/enabling-debug-logging
-# https://docs.cloudfoundry.org/devguide/deploy-apps/streaming-logs.html
+# ghcr.io/dfe-digital/early-years-foundation-recovery:latest
 #
+# https://ey-recovery-staging.london.cloudapps.digital
 #
-name: Deploy Content App
+name: Deploy Staging App
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+  # remove before merging in
   pull_request:
     branches:
       - main
-    types:
-      - opened
-      - synchronize
-      - reopened
 
 jobs:
-  turnstyle:
-    if: contains(github.event.pull_request.labels.*.name, 'deployed')
-    runs-on: ubuntu-latest
-    steps:
-      - uses: softprops/turnstyle@v1
-        name: Check workflow concurrency
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  deploy-content:
-    needs: turnstyle
+  deploy:
     runs-on: ubuntu-latest
     environment: production
     env:
-      WORKSPACE: content
-      DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery-content
-      PR_NUMBER: pr-${{ github.event.number }}
-      # application - TODO: build these in previous step
-      DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
-      GOVUK_APP_DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
-      GOVUK_WEBSITE_ROOT: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
+      WORKSPACE: staging
+      DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
     steps:
       -
         name: Checkout Code
@@ -61,7 +46,6 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       -
-        # ghcr.io/dfe-digital/early-years-foundation-recovery-review:pr-123
         name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
@@ -72,12 +56,12 @@ jobs:
             BUILDKIT_INLINE_CACHE=1
             SHA=${{ github.event.pull_request.head.sha }}
           cache-from: |
-            ${{ env.DOCKER_IMAGE }}:${{ env.PR_NUMBER }}
+            ${{ env.DOCKER_IMAGE }}:latest
           tags: |
-            ${{ env.DOCKER_IMAGE }}:${{ env.PR_NUMBER }}
+            ${{ env.DOCKER_IMAGE }}:latest
             ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
       -
-        name: Deploy Review App
+        name: Deploy Integration Application
         env:
           # init
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -86,7 +70,7 @@ jobs:
           TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
           TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
           TF_VAR_paas_app_docker_image: ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
-          TF_VAR_paas_app_hostname: ${{ env.PR_NUMBER }}
+          TF_VAR_paas_app_hostname: staging
           TF_VAR_paas_app_env_secrets: ${{ toJson(secrets) }}
           TF_VAR_paas_app_envs: ${{ toJson(env) }}
         run: |
@@ -95,17 +79,10 @@ jobs:
             -reconfigure \
             -input=false \
             -backend-config="bucket=${{ secrets.AWS_BUCKET }}" \
-            -backend-config="key=${{ env.PR_NUMBER }}/terraform.tfstate"
+            -backend-config="key=${{ env.WORKSPACE }}/terraform.tfstate"
           terraform plan \
             -var-file ../workspace-variables/${{ env.WORKSPACE }}.tfvars
           terraform apply \
             -input=false \
             -auto-approve \
             -var-file ../workspace-variables/${{ env.WORKSPACE }}.tfvars
-
-      - name: Comment URL to PR
-        uses: mshick/add-pr-comment@v1
-        with:
-          # https://ey-recovery-pr-123.london.cloudapps.digital
-          message: https://ey-recovery-${{ env.PR_NUMBER }}.london.cloudapps.digital
-          repo-token: ${{ secrets.GITHUB_TOKEN }}

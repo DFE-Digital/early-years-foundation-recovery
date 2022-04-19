@@ -47,7 +47,6 @@ jobs:
         name: Firefox against deployed review app
         run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run qa
         env:
-          # BASE_URL: https://evening-thicket-25194.herokuapp.com
           BASE_URL: https://ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
           BROWSER: standalone_firefox
       -

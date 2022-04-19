@@ -19,7 +19,7 @@ module "paas" {
   cf_api_url              = local.cf_api_url
   service_name            = local.service_name
   web_app_name            = local.app_hostname
-  app_env_values          = local.paas_app_env_values
+  web_app_env             = local.app_envs
   app_environment         = var.paas_app_environment
   cf_user                 = var.paas_cf_user
   cf_password             = var.paas_cf_password

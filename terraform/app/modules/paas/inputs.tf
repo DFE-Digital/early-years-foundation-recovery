@@ -1,10 +1,11 @@
+# Terraform
+# ------------------------------------------------------------------------------
 variable "app_environment" {
   type        = string
-  description = "Terraform workspace: review/qa/staging/prod"
-  default     = "demo"
+  description = "Terraform workspace: content/staging/production"
+  default     = "staging"
 }
 
-# currently used to build db hostname in locals.tf
 variable "service_name" {
   type        = string
   description = "Your project"
@@ -13,26 +14,30 @@ variable "service_name" {
 
 
 # Cloud Foundry
+# ------------------------------------------------------------------------------
 variable "cf_api_url" {}
 variable "cf_space_name" {}
-# NB: main.tf expects the following to all fallback to an empty string value
 variable "cf_user" {}
 variable "cf_password" {}
 variable "cf_sso_passcode" {}
 
 
 # Docker
+# ------------------------------------------------------------------------------
 variable "app_docker_image" {}
-
-variable "app_env_values" {}
 
 
 # APP
 # ------------------------------------------------------------------------------
+variable "web_app_env" {
+  type = object
+  description = "Application Environment Variables"
+  default = {}
+}
 
 variable "web_app_name" {
   type        = string
-  description = "domain hostname"
+  description = "Domain Hostname"
 }
 
 variable "web_app_instances" {

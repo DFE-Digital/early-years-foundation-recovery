@@ -25,7 +25,7 @@ provider "cloudfoundry" {
 
 
 resource "cloudfoundry_app" "web_app" {
-  environment                = local.app_environment     # default: {}
+  environment                = var.web_app_env           # default: {}
   name                       = var.web_app_name          # default: ey-recovery
   command                    = var.web_app_start_command # default: rails server -b 0.0.0.0
   instances                  = var.web_app_instances     # default: 1

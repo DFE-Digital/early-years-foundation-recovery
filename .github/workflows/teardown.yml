@@ -1,4 +1,10 @@
+---
 # ------------------------------------------------------------------------------
+# Runs if a PR labelled "deployed" is closed, or on demand.
+#
+#   - Drop application database table from "ey-recovery-db-review" service
+#   - Remove application from "ey-recovery-content" space
+#
 name: Teardown Content App
 
 on:
@@ -11,7 +17,7 @@ on:
       - main
 
 jobs:
-  teardown-content:
+  teardown:
     if: contains(github.event.pull_request.labels.*.name, 'deployed')
     runs-on: ubuntu-latest
     environment: production
@@ -39,13 +45,13 @@ jobs:
           CF_PASSWORD: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
           CF_SPACE_NAME: ey-recovery-content
       -
-        name: Drop branch database and delete application
+        name: Drop database and delete application
         env:
           APP_NAME: ey-recovery-pr-${{ github.event.number }}
           DB_NAME: ey-recovery-db-review
           CMD: source .profile; cd $APP_HOME; DISABLE_DATABASE_ENVIRONMENT_CHECK=1 rails db:drop
         run: |
-          cf ssh $APP_NAME -c "$CMD"
+          cf ssh $APP_NAME -c "'$CMD'"
           cf stop $APP_NAME
           cf unbind-service $APP_NAME $DB_NAME
           cf delete $APP_NAME -r -f
