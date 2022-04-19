@@ -12,7 +12,18 @@
 # Turbo doesn't work with devise by default.
 # Keep tabs on https://github.com/heartcombo/devise/issues/5446 for a possible fix
 # Fix from https://gorails.com/episodes/devise-hotwire-turbo
-class TurboFailureApp < Devise::FailureApp
+
+class CustomFailureApp < Devise::FailureApp
+  def redirect
+    store_location!
+    message = warden.message || warden_options[:message]
+    if message == :timeout
+      redirect_to users_timeout_path
+    else
+      super
+    end
+  end
+
   def respond
     if request_format == :turbo_stream
       redirect
@@ -206,7 +217,7 @@ Devise.setup do |config|
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
-  # config.timeout_in = 30.minutes
+  config.timeout_in = Rails.configuration.x.user_timeout_minutes.minutes
 
   # ==> Configuration for :lockable
   # Defines which strategy will be used to lock an account.
@@ -296,7 +307,7 @@ Devise.setup do |config|
   # change the failure app, you can configure them inside the config.warden block.
   #
   config.warden do |manager|
-    manager.failure_app = TurboFailureApp
+    manager.failure_app = CustomFailureApp
     #   manager.intercept_401 = false
     #   manager.default_strategies(scope: :user).unshift :some_external_strategy
   end

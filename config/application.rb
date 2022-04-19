@@ -24,5 +24,8 @@ module EarlyYearsFoundationRecovery
     end
 
     config.feedback_url = ENV.fetch('FEEDBACK_URL', '#FEEDBACK_URL_env_var_missing')
+
+    # Timeout - number of minutes of inactivity before a user is logged out
+    config.x.user_timeout_minutes = 30
   end
 end

@@ -15,6 +15,9 @@ services:
       - RAILS_ENV=production
       - NODE_ENV=production
       - RAILS_MASTER_KEY
+      - RAILS_LOG_TO_STDOUT
+      - GOVUK_APP_DOMAIN
+      - GOVUK_WEBSITE_ROOT
     depends_on:
       - db
     ports:

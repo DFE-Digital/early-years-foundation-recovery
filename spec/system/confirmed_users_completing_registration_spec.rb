@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe 'Confirmed users completing registration' do
   before do
-    driven_by(:rack_test)
     visit '/users/sign_in'
     fill_in 'Email address', with: user.email
     fill_in 'Password', with: 'StrongPassword123'

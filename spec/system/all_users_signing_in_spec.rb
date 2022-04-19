@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe 'Users sign in', type: :system do
   before do
-    driven_by(:rack_test)
     visit '/users/sign_in'
   end
 
@@ -37,12 +36,12 @@ RSpec.describe 'Users sign in', type: :system do
     it 'provides link when i forgot my password' do
       click_link 'I have forgotten my password', visible: false
 
-      expect(page).to have_text('Forgot your password?')
+      expect(page).to have_text('I have forgotten my password')
 
       fill_in 'Email', with: user.email
-      click_button 'Send me reset password instructions'
+      click_button 'Send email'
 
-      expect(page).to have_text('You will receive an email with instructions on how to reset your password in a few minutes.')
+      expect(page).to have_text('Check your email')
     end
   end
 
