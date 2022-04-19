@@ -19,5 +19,9 @@ p=@questionnaire.content
             = input.radio_button
           = input.label
 
-  = submit_tag "Submit"
-  p= link_to_previous_module_item(@questionnaire.module_item)
+  hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible govuk-!-margin-top-4"
+  .govuk-grid-row
+    .govuk-grid-column-one-half
+      = link_to_previous_module_item(@questionnaire.module_item, class: "govuk-button govuk-button--secondary")
+    div class="govuk-grid-column-one-half govuk-!-text-align-right"
+      = submit_tag "Next", class: "govuk-button"
