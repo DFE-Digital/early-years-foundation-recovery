@@ -30,7 +30,6 @@ variable "app_docker_image" {}
 # APP
 # ------------------------------------------------------------------------------
 variable "web_app_env" {
-  type = object
   description = "Application Environment Variables"
   default = {}
 }
