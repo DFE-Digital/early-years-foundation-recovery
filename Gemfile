@@ -96,6 +96,7 @@ end
 
 group :ui do
   gem 'capybara-selenium'
+  gem 'dry-inflector'
   gem 'faker'
   gem 'selenium-webdriver'
   gem 'site_prism'
