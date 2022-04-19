@@ -4,9 +4,10 @@ module Drivers
     # Invoke the #all_drivers methods on each of the driver classes within the drivers directory.
     # @return [Array] Driver classes
     def self.register_all
+      inflector = Dry::Inflector.new
       klasses = Drivers.constants.select { |klass| Drivers.const_get(klass).is_a?(Class) }
       klasses.delete_if { |score| score.match?(/CapybaraDrivers/) }
-      klasses.each { |klass| "Drivers::#{klass}".constantize.send(:all_drivers) }
+      klasses.each { |klass| inflector.constantize("Drivers::#{klass}").send(:all_drivers) }
     end
 
     # Get the current browser

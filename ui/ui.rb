@@ -8,7 +8,6 @@ class Ui
   end
 
   def method_missing(method_name)
-    # camelized_method = @inflector.camelize("Pages/#{method_name}")
     pages[method_name] ||= get_constantized_instance_name(method_name).new
   end
 
