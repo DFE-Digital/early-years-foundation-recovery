@@ -1,10 +1,11 @@
+# https://docs.github.com/en/actions/using-jobs/using-conditions-to-control-job-execution
 # https://github.com/docker/build-push-action
 # https://github.com/actions/checkout#Checkout-a-different-branch
 ---
 # ------------------------------------------------------------------------------
-# Automatically deploy latest tagged version
-# Manually deploy tagged version
-# Rebuilding cached docker image and tagging with version number
+# - Automatically deploy latest tagged version (WIP)
+# - Rebuilding cached docker image and tagging with version number (WIP)
+# - Manually deploy tagged version
 #
 # ghcr.io/dfe-digital/early-years-foundation-recovery:v1
 #
@@ -12,22 +13,14 @@
 #
 name: Deploy Production App
 on:
-
   workflow_dispatch:
     inputs:
       version:
         description: Version to deploy
         required: true
-
   push:
-    branches:
-      - main
     tags:
       - v*
-
-  release:
-    types:
-      - published
 
   # remove before merging in
   pull_request:
@@ -36,6 +29,7 @@ on:
 
 jobs:
   deploy:
+    # if: startsWith(github.event.release.tag_name, 'v')
     runs-on: ubuntu-latest
     environment: production
     env:
@@ -46,7 +40,8 @@ jobs:
         name: Checkout Code
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.inputs.version || github.event.release.tag_name }}
+          # ref: ${{ github.event.inputs.version || github.event.release.tag_name }}
+          ref: ${{ github.event.inputs.version }}
       -
         name: Pin Terraform version
         uses: hashicorp/setup-terraform@v1.3.2
@@ -74,10 +69,10 @@ jobs:
             SHA=${{ github.event.pull_request.head.sha }}
           cache-from: |
             ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
-            ${{ env.DOCKER_IMAGE }}:${{ github.event.release.tag_name }}
+          # ${{ env.DOCKER_IMAGE }}:${{ github.event.release.tag_name }}
           tags: |
             ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
-            ${{ env.DOCKER_IMAGE }}:${{ github.event.release.tag_name }}
+          # ${{ env.DOCKER_IMAGE }}:${{ github.event.release.tag_name }}
       -
         name: Production Release
         env:

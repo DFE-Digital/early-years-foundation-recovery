@@ -22,24 +22,25 @@ on:
       - reopened
 
 jobs:
-  turnstyle:
-    if: contains(github.event.pull_request.labels.*.name, 'deployed')
-    runs-on: ubuntu-latest
-    steps:
-      - uses: softprops/turnstyle@v1
-        name: Check workflow concurrency
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # turnstyle:
+  #   if: contains(github.event.pull_request.labels.*.name, 'deployed')
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: softprops/turnstyle@v1
+  #       name: Check workflow concurrency
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   deploy:
-    needs: turnstyle
+    if: contains(github.event.pull_request.labels.*.name, 'deployed')
+    # needs: turnstyle
     runs-on: ubuntu-latest
     environment: production
     env:
       WORKSPACE: content
       DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
       PR_NUMBER: pr-${{ github.event.number }}
-      # application - TODO: build these in previous step
+      # app variables
       DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
       GOVUK_APP_DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
       GOVUK_WEBSITE_ROOT: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital

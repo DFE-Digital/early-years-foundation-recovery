@@ -2,7 +2,7 @@
 # ------------------------------------------------------------------------------
 # Runs if a PR labelled "deployed" is closed, or on demand.
 #
-#   - Drop application database table from "ey-recovery-db-review" service
+#   - Drop application database table from "ey-recovery-db-content" service
 #   - Remove application from "ey-recovery-content" space
 #
 name: Teardown Content App
@@ -21,6 +21,9 @@ jobs:
     if: contains(github.event.pull_request.labels.*.name, 'deployed')
     runs-on: ubuntu-latest
     environment: production
+    env:
+      WORKSPACE: content
+      PR_NUMBER: pr-${{ github.event.number }}
     steps:
       -
         name: Checkout Code
@@ -33,25 +36,57 @@ jobs:
         with:
           terraform_version: 1.1.7
       -
-        name: Install Cloud Foundry CLI
-        uses: DFE-Digital/github-actions/setup-cf-cli@master
-        with:
-          # default arg values
-          # CF_CLI_VERSION: v7
-          # CF_ORG_NAME: dfe
-          # CF_API_URL:  https://api.london.cloud.service.gov.uk
-          # INSTALL_CONDUIT: false
-          CF_USERNAME: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
-          CF_PASSWORD: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
-          CF_SPACE_NAME: ey-recovery-content
-      -
-        name: Drop database and delete application
+        name: Destroy Application
         env:
-          APP_NAME: ey-recovery-pr-${{ github.event.number }}
-          DB_NAME: ey-recovery-db-review
-          CMD: cd $APP_HOME; DISABLE_DATABASE_ENVIRONMENT_CHECK=1 /usr/local/bundle/bin/rails db:drop
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
+          TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
         run: |
-          cf ssh $APP_NAME -c "'$CMD'"
-          cf stop $APP_NAME
-          cf unbind-service $APP_NAME $DB_NAME
-          cf delete $APP_NAME -r -f
+          cd terraform/app
+          terraform init \
+            -reconfigure \
+            -input=false \
+            -backend-config="bucket=${{ secrets.AWS_BUCKET }}" \
+            -backend-config="key=${{ env.PR_NUMBER }}/terraform.tfstate"
+          terraform destroy \
+            -input=false \
+            -auto-approve \
+            -var-file ../workspace-variables/${{ env.WORKSPACE }}.tfvars
+      -
+        name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      -
+        name: Delete terraform backend files
+        run: |
+          aws s3 rm s3://${{ secrets.AWS_BUCKET }}/${{ env.PR_NUMBER }}/terraform.tfstate
+
+
+      # -
+      #   name: Install Cloud Foundry CLI
+      #   uses: DFE-Digital/github-actions/setup-cf-cli@master
+      #   with:
+      #     # default arg values
+      #     # CF_CLI_VERSION: v7
+      #     # CF_ORG_NAME: dfe
+      #     # CF_API_URL:  https://api.london.cloud.service.gov.uk
+      #     # INSTALL_CONDUIT: false
+      #     CF_USERNAME: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
+      #     CF_PASSWORD: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
+      #     CF_SPACE_NAME: ey-recovery-content
+      # -
+      #   name: Drop database and delete application
+      #   env:
+      #     APP_NAME: ey-recovery-pr-${{ github.event.number }}
+      #     DB_NAME: ey-recovery-db-review
+      #     CMD: cd $APP_HOME; DISABLE_DATABASE_ENVIRONMENT_CHECK=1 /usr/local/bundle/bin/rails db:drop
+      #   run: |
+      #     cf ssh $APP_NAME -c "'$CMD'"
+      #     cf stop $APP_NAME
+      #     cf unbind-service $APP_NAME $DB_NAME
+      #     cf delete $APP_NAME -r -f
+

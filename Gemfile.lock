@@ -452,7 +452,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   foreman
-  govspeak (~> 6.8)
+  govspeak (~> 6.8, >= 6.8.2)
   govuk-components (>= 3.0.3)
   govuk_design_system_formbuilder
   govuk_notify_rails (~> 2.2, >= 2.2.0)
@@ -473,7 +473,7 @@ DEPENDENCIES
   sentry-ruby
   simplecov
   site_prism
-  slim-rails (~> 3.3)
+  slim-rails (~> 3.4, >= 3.4.0)
   sprockets-rails
   stimulus-rails
   turbo-rails
