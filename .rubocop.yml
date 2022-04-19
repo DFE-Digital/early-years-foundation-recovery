@@ -22,3 +22,6 @@ Style/StringLiterals:
 Style/HashSyntax:
   EnforcedStyle: ruby19
   EnforcedShorthandSyntax: either
+
+Rails/CreateTableWithTimestamps:
+  Enabled: false
