@@ -57,6 +57,7 @@ jobs:
             SHA=${{ github.event.pull_request.head.sha }}
           cache-from: |
             ${{ env.DOCKER_IMAGE }}:latest
+            ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
           tags: |
             ${{ env.DOCKER_IMAGE }}:latest
             ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
