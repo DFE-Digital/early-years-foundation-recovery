@@ -30,6 +30,7 @@ resource "cloudfoundry_app" "web_app" {
   command                    = var.web_app_start_command # default: rails server -b 0.0.0.0
   instances                  = var.web_app_instances     # default: 1
   memory                     = var.web_app_memory        # default: 512
+  disk_quota                 = var.web_app_disk_quota    # default: 2GB
   health_check_type          = "http"
   health_check_http_endpoint = "/health"
   stopped                    = false

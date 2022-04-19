@@ -30,28 +30,37 @@ variable "app_docker_image" {}
 # APP
 # ------------------------------------------------------------------------------
 variable "web_app_env" {
-  description = "Application Environment Variables"
+  description = "Application environment variables"
   default = {}
 }
 
 variable "web_app_name" {
   type        = string
-  description = "Domain Hostname"
+  description = "Application domain hostname"
 }
 
 variable "web_app_instances" {
   type    = number
+  description = "Application instances"
   default = 1
 }
 
 variable "web_app_memory" {
   type    = number
+  description = "Application memory"
   default = 512
+}
+
+variable "web_app_disk_quota" {
+  type        = number
+  description = "Application disk quota"
+  default     = 2048
+  # default     = 3072
 }
 
 variable "web_app_start_command" {
   type        = string
-  description = "Application Server"
+  description = "Application start command"
   default     = "bundle exec rails server -b 0.0.0.0"
 }
 
