@@ -1,14 +1,17 @@
 class QuestionnairesController < ApplicationController
   before_action :authenticate_registered_user!
+  before_action :archive_previous_user_answers, only: [:update]
 
   def show
+    @user_answers = existing_user_answers
+    update_questionnaire if @user_answers.present?
     questionnaire
   end
 
   def update
     questionnaire.errors.clear
     update_questionnaire
-    if results.values.all?(true)
+    if user_answers.all?(&:correct)
       redirect_to training_module_content_page_path(training_module, next_module_item)
     else
       generate_error_messages
@@ -27,24 +30,28 @@ private
   end
 
   def update_questionnaire
-    questionnaire_params.each do |key, value|
-      value.select!(&:present?) if value.is_a?(Array) # Remove spurious empty entry created by form
-      questionnaire.send("#{key}=", value)
+    user_answers.each do |user_answer|
+      answer = questionnaire.questions[user_answer.question.to_sym][:multi_select] ? user_answer.answer : user_answer.answer.first
+      questionnaire.send("#{user_answer.question}=", answer)
     end
   end
 
-  # Check how submitted answers match defined correct answers
-  def results
-    questionnaire_params
-    @results ||= questionnaire.questions.each_with_object({}) do |(question, data), result|
+  def user_answers
+    @user_answers ||= questionnaire.questions.map do |question, data|
       # Put into an array and then flattened so single and multi-choice questions can be handled in the same way
-      result[question] = [questionnaire_params[question]].flatten.select(&:present?) == data[:correct_answers]
+      answer = [questionnaire_params[question]].flatten.select(&:present?)
+      current_user.user_answers.create!(
+        questionnaire: questionnaire,
+        question: question,
+        answer: answer,
+        correct: answer == data[:correct_answers],
+      )
     end
   end
 
   def generate_error_messages
-    results.map do |question, result|
-      questionnaire.errors.add question, "is#{' not' unless result} correct"
+    user_answers.map do |user_answer|
+      questionnaire.errors.add user_answer.question, "is#{' not' unless user_answer.correct?} correct"
     end
   end
 
@@ -63,5 +70,13 @@ private
     questionnaire.questions.map do |question, data|
       data[:multi_select] ? { question => [] } : question
     end
+  end
+
+  def archive_previous_user_answers
+    existing_user_answers.update_all(archived: true)
+  end
+
+  def existing_user_answers
+    current_user.user_answers.not_archived.where(questionnaire_id: questionnaire.id)
   end
 end
