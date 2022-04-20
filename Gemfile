@@ -63,6 +63,7 @@ gem 'dibber'
 group :development, :test do
   # Use fake data for specs
   gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
+  gem 'faker'
   gem 'foreman'
   gem 'pry-byebug'
   gem 'pry-rails'
@@ -95,9 +96,7 @@ group :test do
 end
 
 group :ui do
-  # gem 'capybara-selenium'
   gem 'dry-inflector'
-  gem 'faker'
   gem 'selenium-webdriver'
   gem 'site_prism'
   gem 'webdrivers'
