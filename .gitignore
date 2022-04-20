@@ -53,9 +53,9 @@ coverage
 localhost.crt
 localhost.key
 
-# Yarn Zero-Installs files
+# Yarn files
+.pnp.*
 .yarn/*
-!.yarn/cache
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
