@@ -21,8 +21,4 @@ locals {
     var.paas_app_env_secrets,   # GitHub Secrets
     var.paas_app_envs           # Workflow Envs
   )
-
-  # Boolean checks
-  # is_production = local.app_config["RAILS_ENV"] == "production"
-  # is_review     = var.paas_app_environment == "review"
 }

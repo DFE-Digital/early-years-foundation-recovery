@@ -1,6 +1,5 @@
 ---
 # ------------------------------------------------------------------------------
-# Automatically deploy latest commit from "main" and tag "latest"
 #
 # ghcr.io/dfe-digital/early-years-foundation-recovery:latest
 #
@@ -10,10 +9,6 @@ name: Deploy Staging App
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
-  # remove before merging in
-  pull_request:
     branches:
       - main
 
@@ -64,10 +59,8 @@ jobs:
       -
         name: Deploy Integration Application
         env:
-          # init
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          # plan/apply
           TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
           TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
           TF_VAR_paas_app_docker_image: ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}

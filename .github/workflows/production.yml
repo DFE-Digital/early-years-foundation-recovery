@@ -3,9 +3,9 @@
 # https://github.com/actions/checkout#Checkout-a-different-branch
 ---
 # ------------------------------------------------------------------------------
+# - Manually deploy tagged version
 # - Automatically deploy latest tagged version (WIP)
 # - Rebuilding cached docker image and tagging with version number (WIP)
-# - Manually deploy tagged version
 #
 # ghcr.io/dfe-digital/early-years-foundation-recovery:v1
 #
@@ -18,14 +18,9 @@ on:
       version:
         description: Version to deploy
         required: true
-  push:
-    tags:
-      - v*
-
-  # remove before merging in
-  pull_request:
-    branches:
-      - main
+  # push:
+  #   tags:
+  #     - v*
 
 jobs:
   deploy:

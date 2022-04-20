@@ -13,9 +13,6 @@ on:
       - opened
       - synchronize
       - reopened
-  push:
-    branches:
-      - main
 
 env:
   RAILS_ENV: production
@@ -24,6 +21,7 @@ env:
 jobs:
   test:
     name: Run Rspec
+    if: contains(github.event.pull_request.labels.*.name, 'deployed')
     runs-on: ubuntu-latest
     environment: production
 
