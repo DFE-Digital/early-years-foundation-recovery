@@ -12,7 +12,7 @@ then
   fi
 
   if [ ! -d "node_modules" ]; then
-    yarn
+    bundle exec rails assets:precompile
   fi
 
   rm -f tmp/pids/server.pid
@@ -22,7 +22,7 @@ if [ -z ${DATABASE_URL} ]
 then
   echo "$DATABASE_URL is not defined, skipping database setup"
 else
-  bundle exec rake db:prepare
+  bundle exec rails db:prepare
 fi
 
 exec bundle exec "$@"
