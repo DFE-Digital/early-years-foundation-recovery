@@ -9,7 +9,7 @@ describe 'Edit Profile', er_1: true do
     ui.home.load
     ui.home.header.sign_in.click
 
-    ui.sign_in.with_email_and_password(ENV['UI_USERNAME'], ENV['UI_PASS'])
+    ui.sign_in.with_email_and_password(ENV['DEMO_USERNAME'], ENV['DEMO_USER_PASSWORD'])
 
     ui.home.displayed?(5)
     ui.home.header.profile.click

@@ -28,7 +28,7 @@ Drivers::CapybaraDrivers.register_all
 # If no browser is chosen, then default to the following browser
 ENV['BROWSER'] ||= 'chrome'
 
-raise 'Please specify environment variables UI_PASS and UI_USERNAME' if ENV['UI_USERNAME'].nil? || ENV['UI_PASS'].nil?
+raise 'Please specify environment variables DEMO_USER_PASSWORD and DEMO_USER_PASSWORD' if ENV['DEMO_USERNAME'].nil? || ENV['DEMO_USER_PASSWORD'].nil?
 
 Capybara.configure do |config|
   config.default_driver = Drivers::CapybaraDrivers.chosen_driver
