@@ -2,6 +2,6 @@
 user@example.com:
   first_name: Test
   last_name: User
-  password: <%= Rails.application.credentials.user_seed_password %>
+  password: <%= ENV.fetch('DEMO_USER_PASSWORD', 'password') %>
   confirmed_at: <%= 1.minute.ago %>
   registration_complete: true
