@@ -26,6 +26,8 @@ services:
     environment:
       - BASE_URL
       - BROWSER
+      - DEMO_USERNAME
+      - DEMO_USER_PASSWORD
     depends_on:
       app:
         condition: service_healthy
