@@ -14,6 +14,8 @@ on:
 env:
   RAILS_ENV: production
   RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+  DEMO_USERNAME: ${{ secrets.DEMO_USERNAME }}
+  DEMO_USER_PASSWORD: ${{ secrets.DEMO_USER_PASSWORD }}
 
 jobs:
   test:
