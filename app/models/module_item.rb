@@ -25,13 +25,13 @@ class ModuleItem < YamlBase
 
   # Returns all the module items that belong to a particular topic within a training module
   scope :where_topic, lambda { |training_module, topic|
-    pattern = /\A\d+\W#{topic}(?=(\D|$))/ # Start with number, then non-word (e.g. - or .). Can be followed by either a non-digit or end of line
+    pattern = /\A(\d+\W){2}#{topic}(?=(\D|$))/ # Start with two number then non-word character pairs (e.g. 2-4- or 13.4.). Can be followed by either a non-digit or end of line
     where(training_module: training_module).select { |m| m.name =~ pattern }
   }
 
   # rubocop:disable Lint/MixedRegexpCaptureTypes
   def topic
-    pattern = /\A\d+\W(?<topic>\d+)(?=(\D|$))/
+    pattern = /\A(\d+\W){2}(?<topic>\d+)(?=(\D|$))/
     matches = name.match(pattern)
     matches[:topic] if matches
   end

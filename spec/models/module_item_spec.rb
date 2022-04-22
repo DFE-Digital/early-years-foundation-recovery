@@ -84,7 +84,7 @@ RSpec.describe ModuleItem, type: :model do
 
   describe '.where_topic' do
     let!(:topic_one_item) { create :module_item, name: '1-1-1' }
-    let!(:topic_two_item) { create :module_item, name: '1-2-1' }
+    let!(:topic_two_item) { create :module_item, name: '1-1-2' }
 
     it 'returns module items matching the topic' do
       expect(described_class.where_topic(:test, 1)).to include(topic_one_item)
@@ -99,14 +99,14 @@ RSpec.describe ModuleItem, type: :model do
 
   describe '#topic' do
     let(:topic) { Faker::Number.number(digits: 2).to_s }
-    let(:module_item) { create :module_item, name: "22-#{topic}-1" }
+    let(:module_item) { create :module_item, name: "22-1-#{topic}" }
 
     it 'extracts the topic number from the name' do
       expect(module_item.topic).to eq(topic)
     end
 
-    context 'with topic intro' do
-      let(:module_item) { create :module_item, name: "33-#{topic}" }
+    context 'with topic subpage' do
+      let(:module_item) { create :module_item, name: "33-22-#{topic}-3" }
 
       it 'extracts the topic number from the name' do
         expect(module_item.topic).to eq(topic)
@@ -115,9 +115,9 @@ RSpec.describe ModuleItem, type: :model do
   end
 
   describe '#position_within_topic' do
-    let!(:topic_item_one) { create :module_item, name: '1-1-1' }
-    let!(:topic_item_two) { create :module_item, name: '1-1-2' }
-    let!(:topic_item_three) { create :module_item, name: '1-1-5' }
+    let!(:topic_item_one) { create :module_item, name: '1-1-2' }
+    let!(:topic_item_two) { create :module_item, name: '1-1-2-1' }
+    let!(:topic_item_three) { create :module_item, name: '1-1-2-5' }
 
     it 'returns the position of the item within the topic' do
       expect(topic_item_one.position_within_topic).to eq(0)
