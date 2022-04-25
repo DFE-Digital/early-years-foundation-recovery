@@ -20,9 +20,9 @@ fi
 
 if [ -z ${DATABASE_URL} ]
 then
-  echo "$DATABASE_URL is not defined, skipping database setup"
+  echo "DATABASE_URL is not defined and cannot be prepared"
 else
-  bundle exec rake db:prepare
+  bundle exec rails db:prepare
 fi
 
 exec bundle exec "$@"

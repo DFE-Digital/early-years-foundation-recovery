@@ -80,4 +80,5 @@ test:
 #
 production:
   <<: *default
-
+  # review workflow feature branch deployment override, example: pr-123
+  database: <%= ENV['PR_NUMBER'] %>
