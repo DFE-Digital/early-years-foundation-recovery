@@ -2,7 +2,11 @@ class UserAnswer < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   belongs_to :user
-  belongs_to :questionnaire
+  belongs_to :questionnaire_data, foreign_key: :questionnaire_id
+
+  def questionnaire
+    @questionnaire ||= questionnaire_data.build_questionnaire
+  end
 
   serialize :answer, Array
 

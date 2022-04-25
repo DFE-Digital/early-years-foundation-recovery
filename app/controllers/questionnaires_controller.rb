@@ -41,7 +41,7 @@ private
       # Put into an array and then flattened so single and multi-choice questions can be handled in the same way
       answer = [questionnaire_params[question]].flatten.select(&:present?)
       current_user.user_answers.create!(
-        questionnaire: questionnaire,
+        questionnaire_id: questionnaire.id,
         question: question,
         answer: answer,
         correct: answer == data[:correct_answers],

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Questionnaires', type: :request do
-  let(:questionnaire) { Questionnaire.find_by(name: :test, training_module: :test) }
+  let(:questionnaire) { Questionnaire.find_by!(name: :test, training_module: :test) }
   let(:user) { create(:user, :registered) }
 
   before do
@@ -73,7 +73,7 @@ RSpec.describe 'Questionnaires', type: :request do
     end
 
     context 'with an existing user answer' do
-      let!(:user_answer) { create :user_answer, user: user, questionnaire: questionnaire }
+      let!(:user_answer) { create :user_answer, user: user, questionnaire_id: questionnaire.id }
 
       it 'archives the existing user answer' do
         submit_questionnaire

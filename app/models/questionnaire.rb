@@ -1,33 +1,48 @@
-class Questionnaire < YamlBase
-  extend YamlFolder
-  # Required dependency for ActiveModel::Errors
-  extend ActiveModel::Naming
-
-  set_folder 'questionnaires'
-
-  def self.load_file
-    data = raw_data.map do |training_module, questionnaires|
-      questionnaires.map do |name, field|
-        field['name'] = name
-        field['training_module'] = training_module
-        field['questions'].deep_symbolize_keys!
-        field['questions'].each_key { |question| field[question] = nil }
-        field
-      end
-    end
-    data.flatten! # Using flatten! as more memory efficient.
-    data
+class Questionnaire < OpenStruct
+  def self.find_by!(args)
+    questionnaire_data = QuestionnaireData.find_by!(args)
+    questionnaire_data.build_questionnaire
   end
 
-  def questions
-    self[:questions]
-  end
+  include ActiveModel::Validations
+
+  validate :correct_answers_exceed_threshold
 
   def module_item
     @module_item ||= ModuleItem.find_by(training_module: training_module, name: name)
   end
 
-  def errors
-    @errors ||= ActiveModel::Errors.new(self)
+  def to_param
+    name
+  end
+
+private
+
+  def correct_answers_exceed_threshold
+    return if required_percentage_correct&.zero?
+
+    return if required_percentage_correct.present? && required_percentage_correct <= percentage_of_answers_correct
+
+    results.each do |question, result|
+      errors.add(question, 'is wrong') unless result
+    end
+  end
+
+  def results
+    @results ||= questions.each_with_object({}) do |(question, data), hash|
+      hash[question] = if data[:correct_answers].present?
+                         send(question) == data[:correct_answers]
+                       else
+                         true # If there are no correct answers set, assume any answer much be true
+                       end
+    end
+  end
+
+  def number_of_correct_answers
+    results.values.tally.fetch(true, 0)
+  end
+
+  def percentage_of_answers_correct
+    (number_of_correct_answers / questions.length.to_f) * 100
   end
 end
