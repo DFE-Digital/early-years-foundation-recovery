@@ -30,6 +30,7 @@ RUN bundle install --no-binstubs --retry=10 --jobs=4
 COPY package.json ${APP_HOME}/package.json
 COPY yarn.lock ${APP_HOME}/yarn.lock
 COPY .yarn ${APP_HOME}/.yarn
+COPY .yarnrc.yml ${APP_HOME}/.yarnrc.yml
 
 COPY config.ru ${APP_HOME}/config.ru
 COPY Rakefile ${APP_HOME}/Rakefile
@@ -58,11 +59,12 @@ CMD ["bundle", "exec", "rails", "server"]
 # ------------------------------------------------------------------------------
 FROM app as dev
 
+RUN apk add --no-cache --no-progress npm
+RUN npm install -g adr-log
+
 RUN bundle config unset without
 RUN bundle config set without test ui
 RUN bundle install --no-binstubs --retry=10 --jobs=4
-
-RUN yarn global add adr-log
 
 # ------------------------------------------------------------------------------
 # Test Stage
