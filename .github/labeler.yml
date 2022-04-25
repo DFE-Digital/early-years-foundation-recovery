@@ -9,3 +9,6 @@ frontend:
 - app/assets/images/*
 - app/assets/stylesheets/*
 - app/javascript/*.js
+
+deployed:
+- ui/*
