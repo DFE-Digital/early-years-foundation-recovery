@@ -23,8 +23,8 @@ jobs:
       -
         name: Checkout Code
         uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
+        # with:
+        #   ref: ${{ github.sha }}
       -
         name: Pin Terraform version
         uses: hashicorp/setup-terraform@v1.3.2
@@ -49,13 +49,12 @@ jobs:
           push: true
           build-args: |
             BUILDKIT_INLINE_CACHE=1
-            SHA=${{ github.event.pull_request.head.sha }}
+            SHA=${{ github.sha }}
           cache-from: |
-            ${{ env.DOCKER_IMAGE }}:latest
-            ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
+            ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
           tags: |
+            ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
             ${{ env.DOCKER_IMAGE }}:latest
-            ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
       -
         name: Deploy Integration Application
         env:
@@ -63,7 +62,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
           TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
-          TF_VAR_paas_app_docker_image: ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
+          TF_VAR_paas_app_docker_image: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
           TF_VAR_paas_app_hostname: staging
           TF_VAR_paas_app_env_secrets: ${{ toJson(secrets) }}
           TF_VAR_paas_app_envs: ${{ toJson(env) }}
