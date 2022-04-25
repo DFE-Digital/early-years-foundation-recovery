@@ -1,0 +1,27 @@
+---
+brain-development-in-early-years:
+  1-1-1-1b:
+    content: 
+    questions:
+      one:
+        multi_select: false
+        label: How many areas of the brain are there?
+        answers:
+          4: "4"
+          5: "5"
+          6: "6"
+          7: "7"
+        correct_answers:
+          - "5"
+  1-1-1-3b:
+    questions:
+      one:
+        multi_select: false
+        label: Premature birth, low birth weight and underdeveloped brain, might be due to which influence?
+        answers:
+          1: "Illness during pregnancy"
+          2: "Poor diet during pregnancy"
+          3: "Smoking during pregnancy"
+          4: "Drinking during pregnancy"
+        correct_answers:
+          - "3"
