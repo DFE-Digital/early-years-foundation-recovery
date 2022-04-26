@@ -31,7 +31,7 @@ private
   def results
     @results ||= questions.each_with_object({}) do |(question, data), hash|
       hash[question] = if data[:correct_answers].present?
-                         send(question) == data[:correct_answers]
+                         flattened_array(send(question)) == flattened_array(data[:correct_answers])
                        else
                          true # If there are no correct answers set, assume any answer much be true
                        end
@@ -44,5 +44,9 @@ private
 
   def percentage_of_answers_correct
     (number_of_correct_answers / questions.length.to_f) * 100
+  end
+
+  def flattened_array(item)
+    [item].flatten.select(&:present?)
   end
 end
