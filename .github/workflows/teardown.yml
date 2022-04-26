@@ -1,0 +1,58 @@
+---
+# ------------------------------------------------------------------------------
+name: Teardown Content App
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  teardown:
+    if: contains(github.event.pull_request.labels.*.name, 'deployed')
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      WORKSPACE: content
+      PR_NUMBER: pr-${{ github.event.number }}
+    steps:
+      -
+        name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      -
+        name: Pin Terraform version
+        uses: hashicorp/setup-terraform@v1.3.2
+        with:
+          terraform_version: 1.1.7
+      -
+        name: Destroy Application
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
+          TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
+        run: |
+          cd terraform/app
+          terraform init \
+            -reconfigure \
+            -input=false \
+            -backend-config="bucket=${{ secrets.AWS_BUCKET }}" \
+            -backend-config="key=${{ env.PR_NUMBER }}/terraform.tfstate"
+          terraform destroy \
+            -input=false \
+            -auto-approve \
+            -var-file ../workspace-variables/${{ env.WORKSPACE }}.tfvars
+      -
+        name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-2
+      -
+        name: Remove terraform state from AWS bucket
+        run: |
+          aws s3 rm s3://${{ secrets.AWS_BUCKET }}/${{ env.PR_NUMBER }}/terraform.tfstate

@@ -4,6 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable,
          :validatable, :rememberable, :confirmable, :lockable, :timeoutable
 
+  has_many :user_answers
+  has_many :visits, class_name: 'Ahoy::Visit'
+  has_many :events, class_name: 'Ahoy::Event'
+
   def name
     [first_name, last_name].compact.join(' ')
   end

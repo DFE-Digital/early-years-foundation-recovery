@@ -1,5 +1,14 @@
 ---
 # ------------------------------------------------------------------------------
+# https://docs.cloud.service.gov.uk/deploying_apps.html#deploying-public-apps
+#
+# $ cf push --help
+# $ cf stop eyfs_recovery_wip
+#
 #
 applications:
-- name: eyfs_recovery
+-
+  name: eyfs_recovery_wip
+  # docker_image:
+  health_check_type: http
+  health_check_http_endpoint: /health

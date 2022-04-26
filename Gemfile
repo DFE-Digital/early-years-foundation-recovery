@@ -60,6 +60,9 @@ gem 'sentry-ruby'
 # Manage seeds
 gem 'dibber'
 
+# Track users
+gem 'ahoy_matey', '~> 4.0'
+
 group :development, :test do
   # Use fake data for specs
   gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'

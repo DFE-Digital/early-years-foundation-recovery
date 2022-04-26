@@ -50,6 +50,7 @@ doc
 # SimpleCov
 coverage
 
+# Self-signed certificates
 localhost.crt
 localhost.key
 
@@ -61,3 +62,7 @@ localhost.key
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Terraform
+**/.terraform/*
+**/.terraform*
