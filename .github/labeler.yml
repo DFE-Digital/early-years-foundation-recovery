@@ -11,4 +11,4 @@ frontend:
 - app/javascript/*.js
 
 deployed:
-- ui/*
+- ui/**/*
