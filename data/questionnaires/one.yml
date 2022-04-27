@@ -3,6 +3,7 @@ one:
   1-1-4:
     heading: A Question of Stuff
     content: A simple question
+    required_percentage_correct: 100
     questions:
       like_stuff:
         multi_select: false

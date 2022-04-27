@@ -11,10 +11,10 @@ class QuestionnairesController < ApplicationController
   def update
     questionnaire.errors.clear
     update_questionnaire
-    if user_answers.all?(&:correct)
+
+    if questionnaire.valid?
       redirect_to training_module_content_page_path(training_module, next_module_item)
     else
-      generate_error_messages
       render :show, status: :unprocessable_entity
     end
   end
@@ -41,17 +41,11 @@ private
       # Put into an array and then flattened so single and multi-choice questions can be handled in the same way
       answer = [questionnaire_params[question]].flatten.select(&:present?)
       current_user.user_answers.create!(
-        questionnaire: questionnaire,
+        questionnaire_id: questionnaire.id,
         question: question,
         answer: answer,
         correct: answer == data[:correct_answers],
       )
-    end
-  end
-
-  def generate_error_messages
-    user_answers.map do |user_answer|
-      questionnaire.errors.add user_answer.question, "is#{' not' unless user_answer.correct?} correct"
     end
   end
 

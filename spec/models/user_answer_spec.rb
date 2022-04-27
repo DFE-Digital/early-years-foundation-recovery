@@ -4,7 +4,7 @@ RSpec.describe UserAnswer, type: :model do
   let(:user_answer) { create :user_answer }
 
   # Testing this association to check ActiveHash associations are working
-  it 'is associated with a questionnaire' do
-    expect(user_answer.questionnaire).to be_a(Questionnaire)
+  it 'is associated with a questionnaire data instance' do
+    expect(user_answer.questionnaire_data).to be_a(QuestionnaireData)
   end
 end
