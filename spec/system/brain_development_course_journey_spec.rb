@@ -23,16 +23,21 @@ RSpec.describe 'Brain Development training registered user' do
      
       expect(page).to have_text('How many areas of the brain are there?')  
       choose '5'
-      click_button 'Next' # go to 1-1-1-2a Learning content page
-      
+      click_button 'Next' # to see assessment_summary
+      expect(page).to have_text("That's right")
+      click_link 'Next' # go to 1-1-1-2a Learning content page
+
+      click_link 'Next' # go to 1-1-1-2b Formative assessment
+
+      expect(page).to have_text("In which trimester does the baby's brain triple in weight?")
+      choose '3'
+      click_button 'Next' # to see assessment_summary
+      expect(page).to have_text("That's right")
       click_link 'Next' # go to 1-1-1-3a Learning content page
+
       click_link 'Next' # go to 1-1-1-3b Formative assessment
-
       expect(page).to have_text('Premature birth, low birth weight and underdeveloped brain, might be due to which influence?')
-      choose 'Smoking during pregnancy'
-      click_button 'Next'
 
-      expect(page).to have_text('Learning check')
     end
   end
 end

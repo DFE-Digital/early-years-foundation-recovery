@@ -1,0 +1,3 @@
+= f.govuk_radio_buttons_fieldset(:question, legend: { size: 'm', text: question.label }) do
+  - question.answers.each do |k, v|
+    = f.govuk_radio_button question.name, k, label: { text: translate_markdown(v) }

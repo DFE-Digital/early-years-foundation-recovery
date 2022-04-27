@@ -54,9 +54,14 @@ coverage
 localhost.crt
 localhost.key
 
+
 # Yarn files
 .yarn/*
 
 # Terraform
 **/.terraform/*
 **/.terraform*
+
+# RSpec
+spec/examples.txt
+
