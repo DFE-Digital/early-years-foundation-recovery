@@ -13,6 +13,13 @@ on:
       - opened
       - synchronize
       - reopened
+  workflow_run:
+    workflows:
+      - Deploy Content App
+    branches:
+      - main
+    types:
+      - completed
 
 env:
   RAILS_ENV: production
@@ -21,7 +28,7 @@ env:
 jobs:
   test:
     name: Run Rspec
-    if: contains(github.event.pull_request.labels.*.name, 'deployed')
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     environment: production
 
