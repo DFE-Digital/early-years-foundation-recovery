@@ -1,0 +1,34 @@
+---
+# ------------------------------------------------------------------------------
+# Terraform workspaces align to Cloud Foundry spaces
+defaults: &defaults
+  RAILS_SERVE_STATIC_FILES: true
+  RAILS_LOG_TO_STDOUT: true
+  RAILS_MAX_THREADS: 5
+  RAILS_ENV: production
+  NODE_ENV: production
+  DATABASE_URL: postgres://postgres@localhost:5432/db
+  FEEDBACK_URL: replace-me
+
+# ey-recovery
+production:
+  <<: *defaults
+  DOMAIN: ey-recovery.london.cloudapps.digital
+  GOVUK_APP_DOMAIN: ey-recovery.london.cloudapps.digital
+  GOVUK_WEBSITE_ROOT: ey-recovery.london.cloudapps.digital
+
+# ey-recovery-staging
+staging:
+  <<: *defaults
+  DOMAIN: ey-recovery-staging.london.cloudapps.digital
+  GOVUK_APP_DOMAIN: ey-recovery-staging.london.cloudapps.digital
+  GOVUK_WEBSITE_ROOT: ey-recovery-staging.london.cloudapps.digital
+
+# ey-recovery-content
+content:
+  <<: *defaults
+  DEMO_USER_PASSWORD: pa$$w0rd
+  # @see workflow
+  # DOMAIN: xxx.london.cloudapps.digital
+  # GOVUK_APP_DOMAIN: xxx.london.cloudapps.digital
+  # GOVUK_WEBSITE_ROOT: xxx.london.cloudapps.digital

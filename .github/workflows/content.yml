@@ -1,0 +1,103 @@
+# https://github.com/docker/build-push-action
+# https://github.com/DFE-Digital/early-years-foundation-recovery/settings/secrets/actions
+# https://docs.github.com/en/enterprise-server@3.4/actions/monitoring-and-troubleshooting-workflows/enabling-debug-logging
+# https://docs.cloudfoundry.org/devguide/deploy-apps/streaming-logs.html
+---
+# ------------------------------------------------------------------------------
+# Automatically deploy PRs labelled "deployed"
+#
+# ghcr.io/dfe-digital/early-years-foundation-recovery:pr-123
+#
+# https://ey-recovery-pr-123.london.cloudapps.digital
+#
+name: Deploy Content App
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  deploy:
+    if: contains(github.event.pull_request.labels.*.name, 'deployed')
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      WORKSPACE: content
+      DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
+      PR_NUMBER: pr-${{ github.event.number }}
+      # app variables
+      DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
+      GOVUK_APP_DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
+      GOVUK_WEBSITE_ROOT: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
+    steps:
+      -
+        name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      -
+        name: Pin Terraform version
+        uses: hashicorp/setup-terraform@v1.3.2
+        with:
+          terraform_version: 1.1.7
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to Github Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      -
+        name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          target: app
+          context: .
+          push: true
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
+            SHA=${{ github.event.pull_request.head.sha }}
+          cache-from: |
+            ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
+            ${{ env.DOCKER_IMAGE }}:${{ env.PR_NUMBER }}
+          tags: |
+            ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
+            ${{ env.DOCKER_IMAGE }}:${{ env.PR_NUMBER }}
+      -
+        name: Deploy Content Review App
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
+          TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
+          TF_VAR_paas_app_docker_image: ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
+          TF_VAR_paas_app_hostname: ${{ env.PR_NUMBER }}
+          TF_VAR_paas_app_env_secrets: ${{ toJson(secrets) }}
+          TF_VAR_paas_app_envs: ${{ toJson(env) }}
+        run: |
+          cd terraform/app
+          terraform init \
+            -reconfigure \
+            -input=false \
+            -backend-config="bucket=${{ secrets.AWS_BUCKET }}" \
+            -backend-config="key=${{ env.PR_NUMBER }}/terraform.tfstate"
+          terraform plan \
+            -var-file ../workspace-variables/${{ env.WORKSPACE }}.tfvars
+          terraform apply \
+            -input=false \
+            -auto-approve \
+            -var-file ../workspace-variables/${{ env.WORKSPACE }}.tfvars
+
+      - name: Comment URL to PR
+        uses: mshick/add-pr-comment@v1
+        with:
+          message: https://ey-recovery-${{ env.PR_NUMBER }}.london.cloudapps.digital
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
