@@ -6,13 +6,13 @@
 name: QA Framework using Docker Compose
 on:
   workflow_dispatch:
-  pull_request:
-    branches:
-      - main
-    types:
-      - opened
-      - synchronize
-      - reopened
+  # pull_request:
+  #   branches:
+  #     - main
+  #   types:
+  #     - opened
+  #     - synchronize
+  #     - reopened
   workflow_run:
     workflows:
       - Deploy Content App
@@ -28,7 +28,7 @@ env:
 jobs:
   test:
     name: Run Rspec
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     environment: production
 
