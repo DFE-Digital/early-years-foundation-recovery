@@ -7,6 +7,8 @@ test:
       one_from_many:
         multi_select: false
         label: Select one from many
+        assessment_summary: Passed!
+        assessment_fail_summary: Failed
         answers:
           one: One
           two: Two
@@ -16,9 +18,25 @@ test:
       many_from_many:
         multi_select: true
         label: Select all the answers
+        assessment_summary: Completed
         answers:
           one: One
           two: Two
         correct_answers:
           - one
           - two
+  formative_assessment:
+    heading: A formative assessment
+    content: It has just one question
+    questions:
+      favourite_colour:
+        multi_select: false
+        label: What is your favourite colour
+        assessment_summary: Thank you for choosing a colour
+        assessment_fail_summary: Failed. That is not the answer we wanted
+        answers:
+          red: Red
+          green: Green
+          blue: Blue
+        correct_answers:
+          - blue

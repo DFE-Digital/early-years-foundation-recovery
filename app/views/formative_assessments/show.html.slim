@@ -1,0 +1,30 @@
+h1=@questionnaire.heading
+p=@questionnaire.content
+
+= form_with model: @questionnaire, url: training_module_formative_assessment_path(@training_module, @questionnaire), method: :patch do |form|
+  - @questionnaire.questions.each do |question, data|
+    p= data[:label]
+    p
+      - collection_method = data[:multi_select] ? :collection_check_boxes : :collection_radio_buttons
+      = form.send(collection_method, question, data[:answers], :first, :last) do |input|
+        p
+          - if data[:multi_select]
+            /
+              | Checkbox method is not automatically detecting correct checked status from questionnaire directly
+              | so have to set checked directly
+            = input.check_box(checked: @questionnaire.send(question)&.include?(input.value.to_s))
+          - else
+            = input.radio_button(checked: @questionnaire.send(question)&.include?(input.value.to_s))
+          = input.label
+
+    = render('assessment_banner', questionnaire: @questionnaire, question: question) if @questionnaire.send(question).present?
+
+  hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible govuk-!-margin-top-4"
+  .govuk-grid-row
+    .govuk-grid-column-one-half
+      = link_to_previous_module_item(@questionnaire.module_item, class: "govuk-button govuk-button--secondary")
+    div class="govuk-grid-column-one-half govuk-!-text-align-right"
+      - if @questionnaire.vvvvvvvvvvsubmitted
+        = link_to_next_module_item(@questionnaire.module_item, class: "govuk-button")
+      - else
+        = submit_tag "Next", class: "govuk-button"
