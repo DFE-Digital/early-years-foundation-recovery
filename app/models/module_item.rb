@@ -48,7 +48,7 @@ class ModuleItem < YamlBase
   def model
     klass = MODELS[type.to_sym]
     if klass == Questionnaire
-      Questionnaire.find_by(name: name)
+      Questionnaire.find_by!(name: name)
     else
       klass.new(attributes)
     end

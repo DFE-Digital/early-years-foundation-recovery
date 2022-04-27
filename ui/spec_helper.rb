@@ -1,10 +1,5 @@
 require 'pry-byebug'
 
-ENV['BROWSER'] ||= 'chrome'
-
-# Site Prism URL defaults to SSL in production
-ENV['BASE_URL'] ||= 'https://localhost:3000'
-
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
@@ -17,12 +12,21 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end
 
-require_relative './support/capybara'
+require_relative './support/env'
 
-%w[sections pages].each do |component|
-  Dir[Pathname(__dir__).realpath.join("support/#{component}/*")].each(&method(:require))
+# Site Prism URL defaults to SSL in production
+ENV['BASE_URL'] ||= 'http://localhost:3000'
+# If no browser is chosen, then default to the following browser
+ENV['BROWSER'] ||= 'chrome'
+
+%w[drivers sections pages].each do |component|
+  Dir[Pathname(__dir__).realpath.join("#{component}/*")].each(&method(:require))
 end
 
+require_relative './ui'
+
+Drivers::CapybaraDrivers.register_all
+
 Capybara.configure do |config|
-  config.default_driver = ENV['BROWSER'].to_sym
+  config.default_driver = Drivers::CapybaraDrivers.chosen_driver
 end

@@ -11,7 +11,7 @@ confirmed@example.com:
   confirmed_at: <%= 1.minute.ago %>
 
 # registered and confirmed and profile completed
-complete@example.com:
+completed@example.com:
   password: <%= ENV.fetch('USER_PASSWORD', 'password') %>
   registration_complete: true
   confirmed_at: <%= 1.minute.ago %>
