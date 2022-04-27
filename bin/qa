@@ -13,4 +13,4 @@
 set -e
 
 BASE_URL=${BASE_URL-'http://localhost:3000'} \
-  bundle exec rspec --default-path ui
+  bundle exec rspec --default-path ui "$@"

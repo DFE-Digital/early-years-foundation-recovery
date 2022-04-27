@@ -1,24 +1,30 @@
 # frozen_string_literal: true
 
-describe 'home_page' do
+describe 'home page' do
   context 'when unauthenticated' do
-    let(:home_page) { Pages::Home.new }
-    let(:sign_in) { Pages::SignIn.new }
+    let(:ui) { Ui.new }
 
-    before { home_page.load }
+    before do
+      ui.home.load
+    end
+
+    after do
+      browser = Capybara.current_session.driver.browser
+      browser.manage.delete_all_cookies
+    end
 
     it 'is displayed when the user navigates to the home page and clicks the header logo' do
-      home_page.header.logo.click
+      ui.home.header.logo.click
 
-      expect(home_page).to be_displayed
+      expect(ui.home).to be_displayed
     end
 
     it 'navigates away from the home page when the user clicks sign in' do
-      home_page.header.sign_in.click
+      ui.home.header.sign_in.click
 
-      sign_in.wait_until_header_visible
+      ui.sign_in.wait_until_header_visible
 
-      expect(sign_in).to be_displayed
+      expect(ui.sign_in).to be_displayed
     end
   end
 end
