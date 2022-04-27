@@ -27,7 +27,6 @@ staging:
 # ey-recovery-content
 content:
   <<: *defaults
-  DEMO_USER_PASSWORD: pa$$w0rd
   # @see workflow
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_APP_DOMAIN: xxx.london.cloudapps.digital
