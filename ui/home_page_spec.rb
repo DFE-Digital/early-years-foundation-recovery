@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require_relative './spec_helper'
-
 describe 'home page' do
   context 'when unauthenticated' do
     let(:ui) { Ui.new }
 
-    before { ui.home.load }
+    before do
+      ui.home.load
+    end
 
     after do
       browser = Capybara.current_session.driver.browser

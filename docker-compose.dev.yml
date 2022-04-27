@@ -13,7 +13,7 @@ services:
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
       - RAILS_SERVE_STATIC_FILES=true
     volumes:
-      - .:/src
+      - .:/srv
     tty: true
     stdin_open: true
 

@@ -17,8 +17,7 @@ on:
 env:
   RAILS_ENV: production
   RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-  DEMO_USERNAME: ${{ secrets.DEMO_USERNAME }}
-  DEMO_USER_PASSWORD: ${{ secrets.DEMO_USER_PASSWORD }}
+  USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
 
 jobs:
   test:
@@ -59,15 +58,11 @@ jobs:
         name: Firefox against production app
         run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run qa
         env:
-          DEMO_USERNAME: ${{ secrets.DEMO_USERNAME }}
-          DEMO_USER_PASSWORD: ${{ secrets.DEMO_USER_PASSWORD }}
           BASE_URL: https://app:3000
           BROWSER: standalone_firefox
       -
         name: Chrome against production app
         run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run qa
         env:
-          DEMO_USERNAME: ${{ secrets.DEMO_USERNAME }}
-          DEMO_USER_PASSWORD: ${{ secrets.DEMO_USER_PASSWORD }}
           BASE_URL: https://app:3000
           BROWSER: standalone_chrome

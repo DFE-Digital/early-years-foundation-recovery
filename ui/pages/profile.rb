@@ -1,6 +1,4 @@
-# Pages namespace to include all pages in the application.
 module Pages
-  # Profile page POM.
   class Profile < SitePrism::Page
     set_url_matcher(%r{/user/edit})
 
@@ -10,6 +8,6 @@ module Pages
     element :ofsted_number, '#user-ofsted-number-field'
     element :update_button, 'button.govuk-button'
 
-    section :header, Sections::Header, '.govuk-header'
+    section :header, Sections::Header, 'header.govuk-header'
   end
 end

@@ -12,10 +12,10 @@ services:
       - GOVUK_WEBSITE_ROOT=www
     volumes:
       # NB: or ensure RAILS_MASTER_KEY=<production master key> is in .env
-      - ./config/credentials/production.key:/src/config/credentials/production.key
+      - ./config/credentials/production.key:/srv/config/credentials/production.key
       # NB: run ./bin/docker-certs to generate a self-signed certificate
-      - ./localhost.key:/src/localhost.key
-      - ./localhost.crt:/src/localhost.crt
+      - ./localhost.key:/srv/localhost.key
+      - ./localhost.crt:/srv/localhost.crt
 
   qa:
     container_name: recovery_qa
@@ -26,8 +26,7 @@ services:
     environment:
       - BASE_URL
       - BROWSER
-      - DEMO_USERNAME
-      - DEMO_USER_PASSWORD
+      - USER_PASSWORD
     depends_on:
       app:
         condition: service_healthy
@@ -43,6 +42,8 @@ services:
   chrome:
     container_name: recovery_chrome
     image: selenium/standalone-chrome:latest
+    ports:
+      - 4441:4444
     healthcheck:
       test: curl --fail http://chrome:4444 || exit 1
     networks:
@@ -51,6 +52,8 @@ services:
   firefox:
     container_name: recovery_firefox
     image: selenium/standalone-firefox:latest
+    ports:
+      - 4442:4444
     healthcheck:
       test: curl --fail http://firefox:4444 || exit 1
     networks:

@@ -1,9 +1,6 @@
-# Entry point for page objects
 class Ui
-  # inflector instance variable
   attr_reader :inflector
 
-  # Include Base methods into pages.
   include Pages::Base
 
   # Set class defaults

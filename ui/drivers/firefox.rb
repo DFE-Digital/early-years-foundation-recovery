@@ -11,18 +11,17 @@ module Drivers
       register_headless
     end
 
-    # Registers a firefox driver
-    #
-    # @return [Capybara] the firefox driver
+    # @return [Capybara]
     def self.register
+      capabilities = Selenium::WebDriver::Remote::Capabilities.firefox
+      capabilities['acceptInsecureCerts'] = true
+
       Capybara.register_driver :firefox do |app|
-        Capybara::Selenium::Driver.new(app, browser: :firefox)
+        Capybara::Selenium::Driver.new(app, browser: :firefox, capabilities: capabilities)
       end
     end
 
-    # Registers a headless firefox driver
-    #
-    # @return [Capybara] the headless firefox driver
+    # @return [Capybara]
     def self.register_headless
       Capybara.register_driver :headless_firefox do |app|
         options = Selenium::WebDriver::Firefox::Options.new
@@ -32,15 +31,21 @@ module Drivers
       end
     end
 
-    # Registers a remote firefox driver - Only accessible inside docker
-    #
-    # @return [Capybara] the remote firefox driver
+    # @return [Capybara]
     def self.register_remote
-      firefox_capabilities = Selenium::WebDriver::Remote::Capabilities.firefox
-      firefox_capabilities['acceptInsecureCerts'] = true
-      remote_url = 'http://firefox:4444/wd/hub'
+      capabilities = Selenium::WebDriver::Remote::Capabilities.firefox
+      capabilities['acceptInsecureCerts'] = true
+
+      remote_url =
+        case ENV['BASE_URL']
+        when 'https://app:3000'
+          'http://firefox:4444/wd/hub'
+        else
+          'http://localhost:4442/wd/hub'
+        end
+
       Capybara.register_driver :standalone_firefox do |app|
-        Capybara::Selenium::Driver.new(app, browser: :remote, url: remote_url, capabilities: firefox_capabilities)
+        Capybara::Selenium::Driver.new(app, browser: :remote, url: remote_url, capabilities: capabilities)
       end
     end
   end
