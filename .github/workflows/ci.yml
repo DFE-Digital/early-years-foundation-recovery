@@ -62,12 +62,19 @@ jobs:
         with:
           node-version: 17.6
       -
-        name: Install asset dependencies
-        run: |
-          yarn set version berry
-          yarn
-          yarn build
-          yarn build:css
+        # name: Install asset dependencies
+        # run: |
+        #   yarn
+        #   yarn build
+        #   yarn build:css
+        name: Run yarn install
+        run: yarn
+
+        name: Run yarn build
+        run: yarn build
+
+        name: Run yarn build:css
+        run: yarn build:css
 
       # RSPEC ------------------------------------------------------------------
       -
