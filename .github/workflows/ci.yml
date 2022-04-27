@@ -64,7 +64,10 @@ jobs:
       -
         name: Install asset dependencies
         run: |
-          bundle exec rails assets:precompile
+          yarn set version berry
+          yarn
+          yarn build
+          yarn build:css
 
       # RSPEC ------------------------------------------------------------------
       -
