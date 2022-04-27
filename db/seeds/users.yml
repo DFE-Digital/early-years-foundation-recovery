@@ -1,7 +1,19 @@
 ---
-demo@example.com:
+# registered and unconfirmed
+registered@example.com:
+  password: <%= ENV.fetch('USER_PASSWORD', 'password') %>
+  registration_complete: true
+
+# registered and confirmed
+confirmed@example.com:
+  password: <%= ENV.fetch('USER_PASSWORD', 'password') %>
+  registration_complete: true
+  confirmed_at: <%= 1.minute.ago %>
+
+# registered and confirmed and profile completed
+complete@example.com:
+  password: <%= ENV.fetch('USER_PASSWORD', 'password') %>
+  registration_complete: true
+  confirmed_at: <%= 1.minute.ago %>
   first_name: Demo
   last_name: User
-  password: <%= ENV.fetch('DEMO_USER_PASSWORD', 'password') %>
-  confirmed_at: <%= 1.minute.ago %>
-  registration_complete: true

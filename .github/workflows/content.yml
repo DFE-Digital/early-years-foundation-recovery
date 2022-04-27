@@ -45,7 +45,7 @@ jobs:
       DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
       GOVUK_APP_DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
       GOVUK_WEBSITE_ROOT: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
-      DEMO_USER_PASSWORD: ${{ secrets.DEMO_USER_PASSWORD }}
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
     steps:
       -
         name: Checkout Code
