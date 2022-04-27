@@ -1,7 +1,7 @@
 ---
-demo@example.com:
+user@example.com:
   first_name: Demo
   last_name: User
-  password: <%= ENV.fetch('DEMO_USER_PASSWORD', 'password') %>
+  password: <%= ENV.fetch('DEMO_USER_PASSWORD', Rails.application.credentials.user_seed_password) %>
   confirmed_at: <%= 1.minute.ago %>
   registration_complete: true
