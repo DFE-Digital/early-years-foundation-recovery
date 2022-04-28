@@ -45,7 +45,7 @@ module Drivers
 
       remote_url =
         case ENV['BASE_URL']
-        when 'https://app:3000'
+        when 'https://app:3000', /london\.cloudapps\.digital/ # NB: remove regexp for workflows/qa.yml
           'http://chrome:4444/wd/hub'
         else
           'http://localhost:4441/wd/hub'
