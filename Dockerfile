@@ -14,7 +14,7 @@ FROM base AS app
 
 RUN apk add --no-cache --no-progress postgresql-dev yarn
 
-ENV APP_HOME /src
+ENV APP_HOME /srv
 ENV RAILS_ENV ${RAILS_ENV:-production}
 
 COPY .docker-profile /root/.profile
@@ -107,9 +107,9 @@ FROM base as qa
 
 RUN gem install pry-byebug rspec capybara site_prism selenium-webdriver
 
-WORKDIR /src
+WORKDIR /srv
 
-COPY ui /src/spec
-COPY .rspec /src/.rspec
+COPY ui /srv/spec
+COPY .rspec /srv/.rspec
 
 CMD ["rspec"]

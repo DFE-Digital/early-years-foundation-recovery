@@ -63,10 +63,7 @@ jobs:
           node-version: 17.6
       -
         name: Install asset dependencies
-        run: |
-          yarn
-          yarn build
-          yarn build:css
+        run: bundle exec rails assets:precompile
 
       # RSPEC ------------------------------------------------------------------
       -
