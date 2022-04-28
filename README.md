@@ -128,6 +128,18 @@ The status of GovUK notify can be checked here: <https://status.notifications.se
 For more information the Notify team can be contacted here: <https://www.notifications.service.gov.uk/support>,
 or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
+## Content
+
+### YAML
+
+- [guide](https://www.commonwl.org/user_guide/yaml)
+
+### Govspeak
+
+- [live preview](https://govspeak-preview.publishing.service.gov.uk)
+- [designer guide](https://govspeak-preview.publishing.service.gov.uk/guide)
+- [developer guide](https://docs.publishing.service.gov.uk/repos/govspeak.html)
+
 
 ---
 
