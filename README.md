@@ -63,7 +63,7 @@ These commands help maintain your containerised workspace:
 - `bin/docker-files` changes the ownership of files to your current user, files
     generated inside containers are created by *root*
 - `bin/docker-kill` brings down any active project containers
-- `bin/docker-prune-containers` deletes all project containers
+- `bin/docker-prune` deletes all project containers and volumes
 - `bin/docker-prune-images` deletes all tagged images
 
 The commands run common tasks inside containers:
@@ -83,6 +83,22 @@ These commands can be used to debug problems:
 - `docker system prune` tidies up your system
 - `docker-compose -f docker-compose.yml -f docker-compose.<FILE>.yml --project-name recovery run --rm app`  can help identify why the application is not running in either the `dev`, `test`, or `qa` contexts
 - `BASE_URL=https://app:3000 docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery up app` debug the UAT tests
+
+
+---
+
+## Deployment Pipeline
+
+- Manually adding the **"deployed"** label to a pull request in Github will cause it to be deployed.
+  This supports manual testing and content review in a production environment.
+- Changes to the **"/ui"** folder will automatically label the PR with **"deployed"** and trigger deployment.
+  This supports automated UA tests.
+- When a feature branch review application is deployed, the URL to access it is added as a comment in the PR conversation.
+- Review applications are deployed with 3 seeded user accounts that share a restricted password.
+  This facilitates team members demoing content and functionality, so registration is not required.
+- UA tests are currently automated against a docker composed service, mirroring the local development environment, and a deployed review application. A draft workflow that does not require docker-compose has been added.
+- Staging is deployed to automatically with the latest commit merged into main.
+- Production is deployed automatically when a version is tagged.
 
 ---
 

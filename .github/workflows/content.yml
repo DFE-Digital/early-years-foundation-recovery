@@ -42,6 +42,7 @@ jobs:
       DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
       PR_NUMBER: pr-${{ github.event.number }}
       # app variables
+      APP_URL: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
       DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
       GOVUK_APP_DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
       GOVUK_WEBSITE_ROOT: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital

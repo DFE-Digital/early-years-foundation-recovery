@@ -18,25 +18,28 @@ on:
       version:
         description: Version to deploy
         required: true
-  # push:
-  #   tags:
-  #     - v*
+  push:
+    tags:
+      - v*
 
 jobs:
   deploy:
-    # if: startsWith(github.event.release.tag_name, 'v')
     runs-on: ubuntu-latest
     environment: production
     env:
       WORKSPACE: production
       DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
+      # app variables
+      APP_URL: eyfs-covid-recovery.london.cloudapps.digital
+      DOMAIN: eyfs-covid-recovery.london.cloudapps.digital
+      GOVUK_APP_DOMAIN: eyfs-covid-recovery.london.cloudapps.digital
+      GOVUK_WEBSITE_ROOT: eyfs-covid-recovery.london.cloudapps.digital
     steps:
       -
         name: Checkout Code
         uses: actions/checkout@v2
         with:
-          # ref: ${{ github.event.inputs.version || github.event.release.tag_name }}
-          ref: ${{ github.event.inputs.version }}
+          ref: ${{ github.event.inputs.version || github.ref_name }}
       -
         name: Pin Terraform version
         uses: hashicorp/setup-terraform@v1.3.2
@@ -64,10 +67,10 @@ jobs:
             SHA=${{ github.sha }}
           cache-from: |
             ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
-          # ${{ env.DOCKER_IMAGE }}:${{ github.event.release.tag_name }}
+            ${{ env.DOCKER_IMAGE }}:${{ github.event.release.tag_name }}
           tags: |
             ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
-          # ${{ env.DOCKER_IMAGE }}:${{ github.event.release.tag_name }}
+            ${{ env.DOCKER_IMAGE }}:${{ github.event.release.tag_name }}
       -
         name: Production Release
         env:
