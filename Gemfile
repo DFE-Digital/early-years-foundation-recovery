@@ -99,7 +99,13 @@ group :test do
   gem 'simplecov'
 end
 
+# NB:
+# This gem group is being installed into an as yet unused Docker target 'ui' that
+# adds additional test dependencies for /ui tests alongside application code.
+# However, this is also available in an isolated container, target 'qa'.
+#
 group :ui do
-  gem 'capybara-selenium'
+  gem 'dry-inflector'
+  gem 'selenium-webdriver'
   gem 'site_prism'
 end

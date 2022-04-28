@@ -15,9 +15,11 @@ set -e
 
 BROWSER=${BROWSER-'standalone_chrome'} \
   docker-compose \
-  -f docker-compose.yml \
-  -f docker-compose.qa.yml \
-  --project-name recovery \
-  up --detach
-
-docker attach recovery_qa
+    -f docker-compose.yml \
+    -f docker-compose.qa.yml \
+    --project-name recovery \
+    run \
+    --volume="$PWD/ui:/srv/spec" \
+    --name recovery_qa \
+    --rm qa \
+    rspec "$@"

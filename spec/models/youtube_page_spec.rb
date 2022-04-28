@@ -31,7 +31,7 @@ RSpec.describe YoutubePage, type: :model do
       expect(youtube_page).to be_valid
     end
 
-    context 'when URL is not for an embeded youtube video' do
+    context 'when URL is not for an embedded YouTube video' do
       before { allow(youtube_page).to receive(:youtube_url).and_return('http://example.com') }
 
       it 'is invalid' do

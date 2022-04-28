@@ -14,4 +14,11 @@ RSpec.describe 'Static', type: :request do
       expect(response).to have_http_status(:success)
     end
   end
+
+  describe 'GET static/privacy_policy' do
+    it 'renders successfully' do
+      get static_path(:privacy_policy)
+      expect(response).to have_http_status(:success)
+    end
+  end
 end
