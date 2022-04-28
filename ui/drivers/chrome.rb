@@ -30,7 +30,7 @@ module Drivers
           disable-gpu
           no-sandbox
           window-size=1280,800
-        ]
+        ],
       }
 
       Capybara.register_driver :headless_chrome do |app|
@@ -56,7 +56,8 @@ module Drivers
           app,
           browser: :remote,
           url: remote_url,
-          capabilities: capabilities)
+          capabilities: capabilities,
+        )
       end
     end
   end

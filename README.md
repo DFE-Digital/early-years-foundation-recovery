@@ -83,6 +83,7 @@ These commands can be used to debug problems:
 - `docker system prune` tidies up your system
 - `docker-compose -f docker-compose.yml -f docker-compose.<FILE>.yml --project-name recovery run --rm app`  can help identify why the application is not running in either the `dev`, `test`, or `qa` contexts
 - `BASE_URL=https://app:3000 docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery up app` debug the UAT tests
+
 ---
 
 ## Emails

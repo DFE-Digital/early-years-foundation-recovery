@@ -4,8 +4,8 @@ module Sections
     element :logo, '.govuk-header__logotype-text', text: 'GOV.UK'
     element :home, "a[href='/']", text: 'Home'
     element :training_module, "a[href='/modules']", text: 'Training Modules'
-    element :sign_in, "a[href='/users/sign_in']" #, text: 'Sign In'
-    element :sign_out, "a[href='/users/sign_out']", text: 'Sign Out'
+    element :sign_in, "a[href='/users/sign_in']", text: 'Sign in'
+    element :sign_out, "a[href='/users/sign_out']", text: 'Sign out'
     element :profile, "a[href='/user/edit']", text: 'Profile'
   end
 end
