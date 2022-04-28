@@ -54,6 +54,9 @@ coverage
 localhost.crt
 localhost.key
 
+# Yarn files
+.yarn/*
+
 # Terraform
 **/.terraform/*
 **/.terraform*
