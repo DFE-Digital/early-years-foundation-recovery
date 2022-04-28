@@ -1,11 +1,11 @@
 module Sections
   class Header < SitePrism::Section
-    element :title_link, '.govuk-header__link govuk-header__link--service-name'
-    element :logo, '.govuk-header__logotype-text'
-    element :home, "a[href='/']"
-    element :training_module, "a[href='/modules']"
-    element :sign_in, "a[href='/users/sign_in']"
-    element :sign_out, "a[href='/users/sign_out']"
-    element :profile, "a[href='/user/edit']"
+    element :title_link, '.govuk-header__link govuk-header__link--service-name', text: 'GOV.UK Early Years Foundation Recovery'
+    element :logo, '.govuk-header__logotype-text', text: 'GOV.UK'
+    element :home, "a[href='/']", text: 'Home'
+    element :training_module, "a[href='/modules']", text: 'Training Modules'
+    element :sign_in, "a[href='/users/sign_in']" #, text: 'Sign In'
+    element :sign_out, "a[href='/users/sign_out']", text: 'Sign Out'
+    element :profile, "a[href='/user/edit']", text: 'Profile'
   end
 end
