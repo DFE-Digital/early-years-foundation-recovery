@@ -17,9 +17,20 @@ on:
     branches:
       - main
     types:
-      - opened
-      - synchronize
-      - reopened
+      - labeled                 # a label is applied to the pull request
+      - synchronize             # commit(s) pushed to the pull request
+      - ready_for_review        # pull request is taken out from draft mode
+      # - assigned                # a user is assigned to the pull request
+      # - unassigned              # a user is unassigned from the pull request
+      # - unlabeled               # a label is removed from the pull request
+      # - opened                  # pull request is created
+      # - edited                  # title, body, or the base branch of the PR is modified
+      # - closed                  # pull request is closed (as opposed to merged)
+      # - reopened                # closed pull request is reopened
+      # - locked                  # pull request is locked
+      # - unlocked                # pull request is unlocked
+      # - review_requested        # request a user for review
+      # - review_request_removed  # remove request from user for review
 
 jobs:
   deploy:
@@ -34,6 +45,7 @@ jobs:
       DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
       GOVUK_APP_DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
       GOVUK_WEBSITE_ROOT: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
     steps:
       -
         name: Checkout Code

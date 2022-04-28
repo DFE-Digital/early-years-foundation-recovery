@@ -4,5 +4,7 @@ module Pages
     set_url_matcher %r{/}
 
     section :header, Sections::Header, '.govuk-header'
+
+    # NB: remove once test of "deployed" label is confirmed
   end
 end

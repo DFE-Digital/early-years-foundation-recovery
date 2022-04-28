@@ -83,6 +83,7 @@ These commands can be used to debug problems:
 - `docker system prune` tidies up your system
 - `docker-compose -f docker-compose.yml -f docker-compose.<FILE>.yml --project-name recovery run --rm app`  can help identify why the application is not running in either the `dev`, `test`, or `qa` contexts
 - `BASE_URL=https://app:3000 docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery up app` debug the UAT tests
+
 ---
 
 ## Emails
@@ -126,6 +127,18 @@ The status of GovUK notify can be checked here: <https://status.notifications.se
 
 For more information the Notify team can be contacted here: <https://www.notifications.service.gov.uk/support>,
 or in the UK Government digital slack workspace in the `#govuk-notify` channel.
+
+## Content
+
+### YAML
+
+- [guide](https://www.commonwl.org/user_guide/yaml)
+
+### Govspeak
+
+- [live preview](https://govspeak-preview.publishing.service.gov.uk)
+- [designer guide](https://govspeak-preview.publishing.service.gov.uk/guide)
+- [developer guide](https://docs.publishing.service.gov.uk/repos/govspeak.html)
 
 
 ---
