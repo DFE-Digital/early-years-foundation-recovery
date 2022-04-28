@@ -63,8 +63,8 @@ jobs:
             BUILDKIT_INLINE_CACHE=1
             SHA=${{ github.sha }}
           cache-from: |
-          # ${{ env.DOCKER_IMAGE }}:${{ github.event.release.tag_name }}
             ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+          # ${{ env.DOCKER_IMAGE }}:${{ github.event.release.tag_name }}
           tags: |
             ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
           # ${{ env.DOCKER_IMAGE }}:${{ github.event.release.tag_name }}
