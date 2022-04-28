@@ -63,7 +63,7 @@ describe 'Edit Profile', er_1: true do
       expect(actual_post_code).to eq(expected_post_code)
     end
 
-    it 'then the ofsted nuumber alone is updated when requested' do
+    it 'then the ofsted number alone is updated when requested' do
       expected_ofsted_number = Faker::Number.number(digits: 10).to_s
       ui.profile.ofsted_number.set expected_ofsted_number
       ui.profile.update_button.click

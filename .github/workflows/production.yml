@@ -61,12 +61,12 @@ jobs:
           push: true
           build-args: |
             BUILDKIT_INLINE_CACHE=1
-            SHA=${{ github.event.pull_request.head.sha }}
+            SHA=${{ github.sha }}
           cache-from: |
-            ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
+            ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
           # ${{ env.DOCKER_IMAGE }}:${{ github.event.release.tag_name }}
           tags: |
-            ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
+            ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
           # ${{ env.DOCKER_IMAGE }}:${{ github.event.release.tag_name }}
       -
         name: Production Release
@@ -77,7 +77,7 @@ jobs:
           # plan/apply
           TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
           TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
-          TF_VAR_paas_app_docker_image: ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
+          TF_VAR_paas_app_docker_image: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
           TF_VAR_paas_app_env_secrets: ${{ toJson(secrets) }}
           TF_VAR_paas_app_envs: ${{ toJson(env) }}
         run: |
