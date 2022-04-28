@@ -30,10 +30,9 @@ jobs:
       WORKSPACE: production
       DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
       # app variables
-      APP_URL: eyfs-covid-recovery.london.cloudapps.digital
       DOMAIN: eyfs-covid-recovery.london.cloudapps.digital
-      GOVUK_APP_DOMAIN: eyfs-covid-recovery.london.cloudapps.digital
-      GOVUK_WEBSITE_ROOT: eyfs-covid-recovery.london.cloudapps.digital
+      GOVUK_APP_DOMAIN: london.cloudapps.digital
+      GOVUK_WEBSITE_ROOT: eyfs-covid-recovery
     steps:
       -
         name: Checkout Code

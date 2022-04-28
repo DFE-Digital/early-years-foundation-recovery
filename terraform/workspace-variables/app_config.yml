@@ -9,25 +9,23 @@ defaults: &defaults
   NODE_ENV: production
   DATABASE_URL: postgres://postgres@localhost:5432/db
   FEEDBACK_URL: replace-me
+  GOVUK_APP_DOMAIN: london.cloudapps.digital
 
 # ey-recovery
 production:
   <<: *defaults
   DOMAIN: ey-recovery.london.cloudapps.digital
-  GOVUK_APP_DOMAIN: ey-recovery.london.cloudapps.digital
-  GOVUK_WEBSITE_ROOT: ey-recovery.london.cloudapps.digital
+  GOVUK_WEBSITE_ROOT: ey-recovery
 
 # ey-recovery-staging
 staging:
   <<: *defaults
   DOMAIN: ey-recovery-staging.london.cloudapps.digital
-  GOVUK_APP_DOMAIN: ey-recovery-staging.london.cloudapps.digital
-  GOVUK_WEBSITE_ROOT: ey-recovery-staging.london.cloudapps.digital
+  GOVUK_WEBSITE_ROOT: ey-recovery-staging
 
 # ey-recovery-content
 content:
   <<: *defaults
   # @see workflow
   # DOMAIN: xxx.london.cloudapps.digital
-  # GOVUK_APP_DOMAIN: xxx.london.cloudapps.digital
-  # GOVUK_WEBSITE_ROOT: xxx.london.cloudapps.digital
+  # GOVUK_WEBSITE_ROOT: xxx
