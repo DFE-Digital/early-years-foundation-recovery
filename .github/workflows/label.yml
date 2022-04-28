@@ -7,8 +7,10 @@
 
 name: Labeler
 on:
-  - pull_request
-
+  pull_request:
+    types:
+      - synchronize
+      - ready_for_review
 jobs:
   label:
     name: Add labels
