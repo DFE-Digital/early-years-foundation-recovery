@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Stop all project containers.
+# Take down all project services.
 # ------------------------------------------------------------------------------
 set -e
 

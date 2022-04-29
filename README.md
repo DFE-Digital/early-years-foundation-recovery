@@ -65,9 +65,8 @@ These commands help maintain your containerised workspace:
 - `bin/docker-certs` generates a self-signed certificate for running the app in production
 - `bin/docker-files` changes the ownership of files to your current user, files
     generated inside containers are created by *root*
-- `bin/docker-kill` brings down any active project containers
-- `bin/docker-prune` deletes all project containers and volumes
-- `bin/docker-prune-images` deletes all tagged images
+- `bin/docker-down` stop any active services
+- `bin/docker-prune` purge project containers, volumes and images
 
 The commands run common tasks inside containers:
 

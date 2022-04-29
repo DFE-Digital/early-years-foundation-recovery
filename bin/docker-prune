@@ -1,12 +1,35 @@
 #!/bin/sh
 #
-# Clean up containers and volumes matching the project name.
-# Useful if containers are being developed or renamed.
+# Purge project containers, volumes and images.
 # ------------------------------------------------------------------------------
 set -e
 
-docker stop $(docker ps --filter name=recovery --all --quiet)
+PROJECT="recovery"
 
-docker rm $(docker ps --filter name=recovery --all --quiet)
+CONTAINERS=$(docker ps --filter name=$PROJECT --all --quiet)
 
-docker volume rm $(docker volume ls --filter name=recovery --quiet)
+if [[ ! -z "$CONTAINERS" ]]; then
+  echo "Pruning containers:"
+  docker stop $CONTAINERS
+  docker rm $CONTAINERS
+else
+  echo "No project containers found"
+fi
+
+VOLUMES=$(docker volume ls --filter name=$PROJECT --quiet)
+
+if [[ ! -z "$VOLUMES" ]]; then
+  echo "Pruning volumes:"
+  docker volume rm $VOLUMES
+else
+  echo "No project volumes found"
+fi
+
+IMAGES=$(docker images $PROJECT --all --quiet)
+
+if [[ ! -z "$IMAGES" ]]; then
+  echo "Pruning images:"
+  docker rmi $IMAGES
+else
+  echo "No project images found"
+fi
