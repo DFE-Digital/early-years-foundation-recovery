@@ -1,0 +1,12 @@
+div class= "govuk-notification-banner #{'govuk-notification-banner--success' if questionnaire.valid?}" role='alert' aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner"
+  .govuk-notification-banner__header
+    h2.govuk-notification-banner__title id= "govuk-notification-banner-title"
+      = @questionnaire.valid? ? "That's right" : "That's not quite right"
+
+  .govuk-notification-banner__content
+    h3.govuk-notification-banner__heading
+      - if questionnaire.errors.has_key?(question.to_s)
+        = questionnaire.questions.dig(question.to_sym, :assessment_fail_summary) || questionnaire.questions.dig(question.to_sym, :assessment_summary)
+      - else
+        = questionnaire.questions.dig(question.to_sym, :assessment_summary)
+

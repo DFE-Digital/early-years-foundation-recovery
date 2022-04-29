@@ -7,4 +7,13 @@ class ApplicationController < ActionController::Base
 
     redirect_to extra_registrations_path, notice: 'Please complete registration'
   end
+
+  def questionnaire_path(training_module, module_item)
+    case module_item.type
+    when 'formative_assessment'
+      training_module_formative_assessment_path(training_module, module_item.model)
+    else
+      training_module_questionnaire_path(training_module, module_item.model)
+    end
+  end
 end
