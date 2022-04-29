@@ -43,8 +43,8 @@ jobs:
       PR_NUMBER: pr-${{ github.event.number }}
       # app variables
       DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
-      GOVUK_APP_DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
-      GOVUK_WEBSITE_ROOT: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
+      GOVUK_APP_DOMAIN: london.cloudapps.digital
+      GOVUK_WEBSITE_ROOT: ey-recovery-pr-${{ github.event.number }}
       USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
     steps:
       -

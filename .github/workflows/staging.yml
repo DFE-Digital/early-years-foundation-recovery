@@ -19,6 +19,10 @@ jobs:
     env:
       WORKSPACE: staging
       DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
+      # app variables
+      DOMAIN: ey-recovery-staging.london.cloudapps.digital
+      GOVUK_APP_DOMAIN: london.cloudapps.digital
+      GOVUK_WEBSITE_ROOT: ey-recovery-staging
     steps:
       -
         name: Checkout Code
