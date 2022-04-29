@@ -2,6 +2,9 @@
 ADR:
 - adr/*.md
 
+documentation:
+- README.md
+
 terraform:
 - terraform/**/*
 
