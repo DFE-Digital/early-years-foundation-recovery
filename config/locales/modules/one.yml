@@ -3,6 +3,7 @@ en:
   modules:
     one:
       1:
+        # views/module_intro
         heading: Module 1 - Foo
         body: This is important and here is some text
       1-1:
