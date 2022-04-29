@@ -1,4 +1,6 @@
 #!/bin/sh
+#
+# https://support.apple.com/en-gb/guide/keychain-access
 # ------------------------------------------------------------------------------
 set -e
 

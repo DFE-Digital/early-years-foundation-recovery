@@ -100,7 +100,17 @@ These commands can be used to debug problems:
 - When a feature branch review application is deployed, the URL to access it is added as a comment in the PR conversation in the format: <https://ey-recovery-pr-##.london.cloudapps.digital/>
 - Review applications are deployed with 3 seeded user accounts that share a restricted password.
   This facilitates team members demoing content and functionality, so registration is not required.
-- UA tests are currently automated against a docker composed service, mirroring the local development environment, and a deployed review application. A draft workflow that does not require docker-compose has been added.
+
+## Quality Assurance
+
+The UI/UA test suite can be run against any site. A production-like application is available as a composed Docker service for local development. To run a self-signed certificate must first be generated.
+
+1. `./bin/docker-certs` (Mac users can trust the certificate in [Keychain Access](https://support.apple.com/en-gb/guide/keychain-access))
+2. `./bin/docker-qa` (this will build and bring up the application)
+3. `docker exec -it recovery_prod rails db:seed` (seed the pre-requisite user accounts)
+4. `BASE_URL=https://app:3000 ./bin/docker-qa` (test against the seeded application)
+
+WIP: proposed Github workflow that does not require `docker-compose`.
 
 ---
 
