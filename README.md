@@ -10,6 +10,7 @@
 
 ## Useful Links
 
+- [Project Documentation][confluence]
 - [Production Environment][production]
 - [Staging Environment][staging]
 - [Prototype Repo][prototype-repo]
@@ -163,6 +164,7 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
 ---
 
+[confluence]: https://dfedigital.atlassian.net/wiki/spaces/ER/overview
 [production]: https://eyfs-covid-recovery.london.cloudapps.digital
 [staging]: https://ey-recovery-staging.london.cloudapps.digital
 [prototype-repo]: https://github.com/ife-dev1/DFE-Digital-early-years-foundation-recovery
