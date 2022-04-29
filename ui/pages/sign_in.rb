@@ -5,6 +5,8 @@ module Pages
     element :email_locator, '#user-email-field'
     element :password_locator, '#user-password-field'
     element :sign_in_button, 'button.govuk-button'
+    element :create_account, 'a[href="/users/sign_up"]'
+
 
     section :header, Sections::Header, '.govuk-header'
 
