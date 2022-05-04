@@ -1,5 +1,8 @@
-h1=@questionnaire.heading
-p=@questionnaire.content
+h1= @questionnaire.heading
+
+-# https://components.publishing.service.gov.uk/component-guide/govspeak
+= render 'govuk_publishing_components/components/govspeak', {} do
+  = translate_markdown(@questionnaire.body)
 
 = form_with model: @questionnaire, url: training_module_formative_assessment_path(@training_module, @questionnaire), method: :patch do |form|
   - @questionnaire.questions.each do |question, data|
@@ -24,7 +27,7 @@ p=@questionnaire.content
     .govuk-grid-column-one-half
       = link_to_previous_module_item(@questionnaire.module_item, class: "govuk-button govuk-button--secondary")
     div class="govuk-grid-column-one-half govuk-!-text-align-right"
-      - if @questionnaire.vvvvvvvvvvsubmitted
+      - if @questionnaire.submitted
         = link_to_next_module_item(@questionnaire.module_item, class: "govuk-button")
       - else
         = submit_tag "Next", class: "govuk-button"

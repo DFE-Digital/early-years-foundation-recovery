@@ -19,11 +19,14 @@ en:
         body: Hurrah!
       1-1-4:
         heading: What did you learn about stuff
+        body: I learned some stuff
       1-2-1:
         heading: Not for everyone
         body: Some people don't like stuff
       1-2-2:
         heading: What sort of people don't like stuff
+        body: |
+          %Warning: people like stuff!%
       1-2-3:
         heading: How to avoid the stuff haters
         body: Hide behind stuff

@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe QuestionnaireData, type: :model do
-  let(:yaml_data) { data_from_file('questionnaires/test.yml') }
-  let(:questionnaire_data) { described_class.find_by!(name: :test, training_module: :test) }
+  let(:yaml_data) do
+    data_from_file('questionnaires/test.yml')
+  end
 
-  it 'loads basic method' do
-    expect(questionnaire_data.heading).to eq(yaml_data.dig('test', 'test', 'heading'))
-    expect(questionnaire_data.content).to eq(yaml_data.dig('test', 'test', 'content'))
+  let(:questionnaire_data) do
+    described_class.find_by!(name: :test, training_module: :test)
   end
 
   it 'loads questions as a hash' do
