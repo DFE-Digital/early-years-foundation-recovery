@@ -29,7 +29,7 @@ class Questionnaire < OpenStruct
 
   # @return [Array] list of question ostruct objects
   def question_list
-    questions.map{|name, attrs| Question.new(attrs.merge(name: name))}
+    questions.map { |name, attrs| Question.new(attrs.merge(name: name)) }
   end
 
 private

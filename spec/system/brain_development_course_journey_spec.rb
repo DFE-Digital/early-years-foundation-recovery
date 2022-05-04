@@ -20,8 +20,8 @@ RSpec.describe 'Brain Development training registered user' do
       click_link 'Next' # go to 1-1-1 Topic intro page
       click_link 'Next' # go to 1-1-1-1a Learning content page
       click_link 'Next' # go to 1-1-1-1b Formative assessment
-     
-      expect(page).to have_text('How many areas of the brain are there?')  
+
+      expect(page).to have_text('How many areas of the brain are there?')
       choose '5'
       click_button 'Next' # to see assessment_summary
       expect(page).to have_text("That's right")
@@ -37,7 +37,6 @@ RSpec.describe 'Brain Development training registered user' do
 
       click_link 'Next' # go to 1-1-1-3b Formative assessment
       expect(page).to have_text('Premature birth, low birth weight and underdeveloped brain, might be due to which influence?')
-
     end
   end
 end
