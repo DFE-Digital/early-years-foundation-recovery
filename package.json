@@ -5,7 +5,7 @@
     "build": "esbuild app/javascript/*.* --bundle --outdir=app/assets/builds",
     "build:css": "sass ./app/assets/stylesheets/application.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules --quiet-deps",
     "preinstall": "mkdir -p app/assets/builds",
-    "postinstall": "cp -R node_modules/govuk-frontend/govuk/assets/fonts/. app/assets/builds/fonts && cp -R node_modules/govuk-frontend/govuk/assets/images/. app/assets/builds/images"
+    "postinstall": "cp -R node_modules/govuk-frontend/govuk/assets/fonts/. app/assets/builds/fonts && cp -R node_modules/govuk-frontend/govuk/assets/images/. app/assets/builds/images && cp -R $(bundle info govuk_publishing_components --path)/app/assets/javascripts/govuk_publishing_components app/javascript && cp -R $(bundle info govuk_publishing_components --path)/app/assets/stylesheets/govuk_publishing_components app/assets/stylesheets"
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.0.1",
