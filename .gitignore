@@ -32,12 +32,10 @@
 /config/master.key
 /config/credentials/*.key
 
-# Frontend artefacts and libs
+# Frontend artifacts and libs
 app/assets/builds/*
 node_modules
 yarn-error.log
-app/javascript/govuk_publishing_components
-app/assets/stylesheets/govuk_publishing_components
 
 # Local env settings
 .env
