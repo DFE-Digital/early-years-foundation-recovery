@@ -5,6 +5,7 @@ class Questionnaire < OpenStruct
   end
 
   include ActiveModel::Validations
+  include TranslateFromLocale
 
   validate :correct_answers_exceed_threshold
 
@@ -14,6 +15,16 @@ class Questionnaire < OpenStruct
 
   def to_param
     name
+  end
+
+  # @return [String] plain text content
+  def heading
+    translate(:heading)
+  end
+
+  # @return [String] unparsed govspeak content
+  def body
+    translate(:body)
   end
 
 private

@@ -1,8 +1,6 @@
 ---
 test:
   test:
-    heading: A simple questionnaire
-    content: It just has some questions and answers
     questions:
       one_from_many:
         multi_select: false
@@ -26,8 +24,6 @@ test:
           - one
           - two
   formative_assessment:
-    heading: A formative assessment
-    content: It has just one question
     questions:
       favourite_colour:
         multi_select: false
