@@ -1,6 +1,8 @@
 ---
 test:
   test:
+    type: questionnaire
+  formative_assessment:
     type: formative_assessment
   basic:
     type: text_page

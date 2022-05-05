@@ -8,7 +8,7 @@ RSpec.describe 'Questionnaires', type: :request do
     sign_in user
   end
 
-  describe 'GET /questionnaires/:id' do
+  describe 'GET /modules/:training_module_id/questionnaires/:id' do
     it 'returns http success' do
       get training_module_questionnaire_path(:test, questionnaire)
       expect(response).to have_http_status(:success)
@@ -26,7 +26,7 @@ RSpec.describe 'Questionnaires', type: :request do
     end
   end
 
-  describe 'PATCH /questionaires/:id' do
+  describe 'PATCH /modules/:training_module_id/questionaires/:id' do
     subject(:submit_questionnaire) do
       patch training_module_questionnaire_path(:test, questionnaire), params: { questionnaire: answers }
     end

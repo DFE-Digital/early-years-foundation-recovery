@@ -7,10 +7,12 @@ class ContentPagesController < ApplicationController
   end
 
   def show
+    ahoy.track "Viewing #{params[:id]}", request.path_parameters
+
     @model = module_item.model
 
     if @model.is_a?(Questionnaire)
-      redirect_to training_module_questionnaire_path(training_module, @model)
+      redirect_to questionnaire_path(training_module, module_item)
     else
       render module_item.type
     end

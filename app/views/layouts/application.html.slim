@@ -1,5 +1,5 @@
 doctype html
-html
+html lang="en"
   head
     meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
     title Early Years Foundation Recovery
@@ -25,9 +25,6 @@ html
     .govuk-width-container
       = govuk_phase_banner(tag: { text: "Beta" }) do
         = t('phase_banner_html', feedback_link: govuk_link_to("feedback", Rails.configuration.feedback_url))
-      .govuk-grid-row
-        .govuk-grid-column-two-thirds-from-desktop
-          = govuk_back_link(href: request.referrer)
       main.govuk-main-wrapper#main-content role="main"
         - flash.each do |variant, message|
           = govuk_notification_banner title_text: t("banners.#{variant}"), text: translate_markdown(message), success: %w[important notice].include?(variant)

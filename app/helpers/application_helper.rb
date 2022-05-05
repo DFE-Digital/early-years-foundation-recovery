@@ -5,7 +5,7 @@ module ApplicationHelper
       header.navigation_item(text: 'Training Modules', href: training_modules_path)
       if user_signed_in?
         header.navigation_item(text: 'Account', href: edit_user_registration_path)
-        header.navigation_item(text: 'Profile', href: edit_user_path)
+        header.navigation_item(text: 'Profile', href: user_path)
         header.navigation_item(text: 'Sign out', href: destroy_user_session_path, options: { data: { turbo_method: :delete } })
       else
         header.navigation_item(text: 'Sign in', href: new_user_session_path)
@@ -31,11 +31,11 @@ module ApplicationHelper
     )
   end
 
-  def link_to_next_module_item(module_item)
+  def link_to_next_module_item(module_item, link_args = { class: 'govuk-button' })
     if module_item.next_item
-      link_to 'Next', training_module_content_page_path(module_item.training_module, module_item.next_item)
+      link_to 'Next', training_module_content_page_path(module_item.training_module, module_item.next_item), link_args
     else
-      link_to 'Finish', training_modules_path
+      link_to 'Finish', training_modules_path, link_args
     end
   end
 

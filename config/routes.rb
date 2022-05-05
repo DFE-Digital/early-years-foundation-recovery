@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :modules, only: [:index], as: :training_modules, controller: :training_modules do
     resources :content_pages, only: %i[index show]
     resources :questionnaires, only: %i[show update]
+    resources :formative_assessments, only: %i[show update]
   end
 
   resources :static, only: :show

@@ -7,6 +7,9 @@ class ContentPage
 
   validates :heading, :body, presence: true
 
+  # @see config/locales/modules
+  #
+  # @return [String]
   def heading
     translate(:heading)
   end

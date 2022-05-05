@@ -6,9 +6,15 @@ en:
         heading: A test
       basic:
         heading: A text page
-        body: Some text
+        body: |
+          - Govspeak compatible Markdown
+          - HTML
+          - plain text
       video:
         heading: A video
         video_title: What is GOV.UK
         youtube_url: https://www.youtube.com/embed/ucjmWjJ25Ho
-        body: Some text
+        body: |
+          - Govspeak compatible Markdown
+          - HTML
+          - plain text
