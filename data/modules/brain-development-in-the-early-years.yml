@@ -1,0 +1,144 @@
+---
+brain-development-in-early-years:
+  1:
+    type: module_intro
+  1-1:
+    type: sub_module_intro
+  1-1-1:
+    type: text_page
+  1-1-1-1a:
+    type: text_page
+  1-1-1-1b:
+    type: formative_assessment
+  1-1-1-2a:
+    type: text_page
+  1-1-1-2b:
+    type: formative_assessment
+  1-1-1-3a:
+    type: text_page
+  1-1-1-3b:
+    type: formative_assessment
+  1-1-1-3c:
+    type: formative_assessment
+  1-1-1-4a:
+    type: text_page
+  1-1-1-4b:
+    type: formative_assessment
+  1-1-2: 
+    type: text_page
+  1-1-2-1a:
+    type: text_page
+  1-1-2-1b:
+    type: formative_assessment
+  1-1-2-1c:
+    type: formative_assessment
+  1-1-2-2:
+    type: text_page 
+  1-1-2-3a:
+    type: text_page 
+      #1-1-2-3b:
+      #type: formative_assessment
+  1-1-3:
+    type: text_page
+  1-1-3-1a:
+    type: text_page
+      #1-1-3-1b:
+      #type: formative_assessment
+  1-1-3-2a:
+    type: text_page
+      #1-1-3-2b:
+      #type: formative_assessment
+  1-1-3-3:
+    type: text_page
+  1-1-3-4a:
+    type: text_page
+  1-1-3-4b:
+    type: text_page
+  1-1-3-5a:
+    type: text_page
+      #1-1-3-5b:
+      #type: formative_assessment
+      #1-1-3-5c:
+      #type: formative_assessment
+  1-2:
+    type: sub_module_intro
+  1-2-1: 
+    type: text_page
+  1-2-1-1a:
+    type: text_page
+      #1-2-1-1b:
+      #type: formative_assessment
+  1-2-1-2:
+    type: text_page
+  1-2-2-3a:
+    type: text_page
+      #1-2-2-3b:
+      #type: formative_assessment
+      #1-2-3-3c:
+      #type: formative_assessment
+  1-2-3-4: 
+    type: text_page
+  1-2-2-5a:
+    type: text_page
+      #1-2-2-5b:
+      #type: formative_assessment
+  1-2-2-6:
+    type: text_page
+  1-2-2-7:
+    type: text_page
+  1-2-2: 
+    type: sub_module_intro
+  1-2-2-1a:
+    type: text_page
+      #1-2-2-1b:
+      #type: formative_assessment
+  1-2-2-2:
+    type: text_page
+  1-2-2-3:
+    type: text_page
+  1-2-2-4a:
+    type: text_page
+      #1-2-2-4b:
+      #type: formative_assessment
+  1-2-2-5a:
+    type: text_page
+      #1-2-2-5b:
+      #type: formative_assessment
+  1-2-2-6:
+    type: text_page
+  1-2-2-7a:
+    type: text_page
+      #1-2-2-7b:
+      #type: formative_assessment
+  1-2-2-8:
+    type: text_page
+  1-2-3: 
+    type: sub_module_intro
+  1-2-3-1a:
+    type: text_page
+      #1-2-3-1b:
+      #type: formative_assessment
+  1-2-3-2a:
+    type: text_page
+      #1-2-3-2b:
+      #type: formative_assessment
+  1-2-3-3:
+    type: text_page
+  1-2-3-4a:
+    type: text_page
+      #1-2-3-4b:
+      #type: formative_assessment
+  1-2-3-5:
+    type: text_page
+  1-2-3-6a:
+    type: text_page
+      # 1-2-3-6b:
+      # type: formative_assessment
+      # 1-2-3-6c:
+      # type: formative_assessment
+  1-2-3-7:
+    type: text_page
+  1-recap:
+    type: text_page
+  1-test:
+    type: formative_assessment

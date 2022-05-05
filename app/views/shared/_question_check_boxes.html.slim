@@ -1,0 +1,3 @@
+= f.govuk_check_boxes_fieldset(question.name, legend: { text: translate_markdown(question.label), size: 'm' }) do 
+  - question.answers.each do |k, v|
+    = f.govuk_check_box question.name, k, label: { text: translate_markdown(v)}

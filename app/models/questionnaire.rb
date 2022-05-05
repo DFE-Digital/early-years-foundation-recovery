@@ -27,6 +27,11 @@ class Questionnaire < OpenStruct
     translate(:body)
   end
 
+  # @return [Array] list of question ostruct objects
+  def question_list
+    questions.map { |name, attrs| Question.new(attrs.merge(name: name)) }
+  end
+
 private
 
   def correct_answers_exceed_threshold
