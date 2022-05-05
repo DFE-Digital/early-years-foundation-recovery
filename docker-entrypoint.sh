@@ -12,6 +12,7 @@ then
   fi
 
   if [ ! -d "node_modules" ]; then
+    yarn
     bundle exec rails assets:precompile
   fi
 
