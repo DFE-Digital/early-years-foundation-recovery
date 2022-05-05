@@ -176,7 +176,7 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 [confluence]: https://dfedigital.atlassian.net/wiki/spaces/ER/overview
 [production]: https://eyfs-covid-recovery.london.cloudapps.digital
 [staging]: https://ey-recovery-staging.london.cloudapps.digital
-[prototype-repo]: https://github.com/ife-dev1/DFE-Digital-early-years-foundation-recovery
+[prototype-repo]: https://github.com/DFE-Digital/ey-recovery-prototype
 [prototype-app]: https://eye-recovery.london.cloudapps.digital
 [rails-template]: https://github.com/DFE-Digital/rails-template
 [ci-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml/badge.svg
