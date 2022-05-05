@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Comfirmed user, following forgotten password process', type: :system do
+RSpec.describe 'Confirmed user, following forgotten password process', type: :system do
   let(:user) { create :user, :confirmed }
   let(:token) { user.send_reset_password_instructions }
 

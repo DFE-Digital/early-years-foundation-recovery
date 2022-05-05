@@ -1,25 +1,24 @@
 ---
 one:
   1-1-4:
-    heading: A Question of Stuff
-    content: A simple question
     required_percentage_correct: 100
     questions:
       like_stuff:
         multi_select: false
         label: Do you like stuff
+        assessment_summary: Hey! You like stuff
+        assessment_fail_summary: You should like stuff
         answers:
-          "yes": "Yes" # Set as string as YAML parses yes as true
-          "no": "No" # Set as string as YAML parses no as false
+          'yes': 'Yes'  # Set as string as YAML parses yes as true
+          'no': 'No'    # Set as string as YAML parses no as false
         correct_answers:
-          - "yes"
+          - 'yes'
   1-2-2:
-    heading: What sort of people don't like stuff
-    content: So who?
     questions:
       who_likes_stuff:
         multi_select: true
         label: Who likes stuff
+        assessment_summary: Stuffy people and people who do stuffing don't like stuff.
         answers:
           stuffy_people: Stuffy people
           everybody: Everybody

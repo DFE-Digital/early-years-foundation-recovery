@@ -7,12 +7,4 @@ class TrainingModule < YamlBase
       values.merge(name: name)
     end
   end
-
-  def topics
-    @topics ||= Topic.where(training_module: name)
-  end
-
-  def recap_training
-    @recap_training ||= RecapTraining.find_by(training_module: name)
-  end
 end
