@@ -16,3 +16,9 @@ dl
   dd= @user.ofsted_number
 
 p= link_to "Edit", edit_user_path
+
+h2 Events
+= render @user.events
+
+h2 Visits
+= render @user.visits
