@@ -9,7 +9,7 @@
 #
 # ghcr.io/dfe-digital/early-years-foundation-recovery:v1
 #
-# https://ey-recovery.london.cloudapps.digital
+# https://eyfs-covid-recovery.london.cloudapps.digital
 #
 name: Deploy Production App
 on:

@@ -1,7 +1,0 @@
-#!/bin/sh
-#
-# Delete tagged project images.
-# ------------------------------------------------------------------------------
-set -e
-
-docker rmi $(docker images recovery --all --quiet)

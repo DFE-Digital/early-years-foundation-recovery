@@ -1,18 +1,20 @@
 ---
+# ------------------------------------------------------------------------------
+# config/locales/modules/one.yml
+#
 en:
   modules:
     one:
-      1:
-        # views/module_intro
+      1:      # http://localhost:3000/modules/one/content_pages/1
         heading: Module 1 - Foo
         body: This is important and here is some text
-      1-1:
-        heading: Foo Part One
+      1-1:    # http://localhost:3000/modules/one/content_pages/1-1
+        heading: Foo Part One (edited)
         body: In this submodule we'll discuss some stuff
-      1-1-1:
+      1-1-1:  # http://localhost:3000/modules/one/content_pages/1-1-1
         heading: Stuff is cool
         body: Oh yes!
-      1-1-2:
+      1-1-2:  # # http://localhost:3000/modules/one/content_pages/1-1-2
         heading: Stuff everywhere
         body: It's all around us
       1-1-3:

@@ -5,13 +5,16 @@
 ## Getting Started
 
 1. Clone the repository. This is a Rails 7 application using [the DfE template][rails-template]
-2. Obtain the master keys.
-3. Run!
+2. Obtain the master keys. Optionally create `.env` to override default variables.
+3. Run! (*running locally in the production rails environment requires self-signed certificates*)
 
 ## Useful Links
 
-- [Review Application][review-app]
-- [Prototype][prototype]
+- [Project Documentation][confluence]
+- [Production Environment][production]
+- [Staging Environment][staging]
+- [Prototype Repo][prototype-repo]
+- [Prototype App][prototype-app]
 - [Flow Diagram][figma]
 
 ## Rails Credentials
@@ -62,9 +65,8 @@ These commands help maintain your containerised workspace:
 - `bin/docker-certs` generates a self-signed certificate for running the app in production
 - `bin/docker-files` changes the ownership of files to your current user, files
     generated inside containers are created by *root*
-- `bin/docker-kill` brings down any active project containers
-- `bin/docker-prune` deletes all project containers and volumes
-- `bin/docker-prune-images` deletes all tagged images
+- `bin/docker-down` stop any active services
+- `bin/docker-prune` purge project containers, volumes and images
 
 The commands run common tasks inside containers:
 
@@ -89,16 +91,26 @@ These commands can be used to debug problems:
 
 ## Deployment Pipeline
 
+- [Production][production] is deployed automatically when a version is tagged.
+- [Staging][staging] is deployed automatically with the latest commit from `main`.
 - Manually adding the **"deployed"** label to a pull request in Github will cause it to be deployed.
   This supports manual testing and content review in a production environment.
 - Changes to the **"/ui"** folder will automatically label the PR with **"deployed"** and trigger deployment.
   This supports automated UA tests.
-- When a feature branch review application is deployed, the URL to access it is added as a comment in the PR conversation.
+- When a feature branch review application is deployed, the URL to access it is added as a comment in the PR conversation in the format: <https://ey-recovery-pr-##.london.cloudapps.digital/>
 - Review applications are deployed with 3 seeded user accounts that share a restricted password.
   This facilitates team members demoing content and functionality, so registration is not required.
-- UA tests are currently automated against a docker composed service, mirroring the local development environment, and a deployed review application. A draft workflow that does not require docker-compose has been added.
-- Staging is deployed to automatically with the latest commit merged into main.
-- Production is deployed automatically when a version is tagged.
+
+## Quality Assurance
+
+The UI/UA test suite can be run against any site. A production-like application is available as a composed Docker service for local development. To run a self-signed certificate must first be generated.
+
+1. `./bin/docker-certs` (Mac users can trust the certificate in [Keychain Access](https://support.apple.com/en-gb/guide/keychain-access))
+2. `./bin/docker-qa` (this will build and bring up the application)
+3. `docker exec -it recovery_prod rails db:seed` (seed the pre-requisite user accounts)
+4. `BASE_URL=https://app:3000 ./bin/docker-qa` (test against the seeded application)
+
+WIP: proposed Github workflow that does not require `docker-compose`.
 
 ---
 
@@ -144,6 +156,8 @@ The status of GovUK notify can be checked here: <https://status.notifications.se
 For more information the Notify team can be contacted here: <https://www.notifications.service.gov.uk/support>,
 or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
+---
+
 ## Content
 
 ### YAML
@@ -159,11 +173,14 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
 ---
 
+[confluence]: https://dfedigital.atlassian.net/wiki/spaces/ER/overview
+[production]: https://eyfs-covid-recovery.london.cloudapps.digital
+[staging]: https://ey-recovery-staging.london.cloudapps.digital
+[prototype-repo]: https://github.com/DFE-Digital/ey-recovery-prototype
+[prototype-app]: https://eye-recovery.london.cloudapps.digital
 [rails-template]: https://github.com/DFE-Digital/rails-template
 [ci-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml/badge.svg
 [ci-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml
 [notify]: https://www.notifications.service.gov.uk
-[review-app]: https://github.com/ife-dev1/DFE-Digital-early-years-foundation-recovery
-[prototype]: https://eye-recovery.herokuapp.com/home
 [figma]: https://www.figma.com/file/FGW1NJJwnYRqoZ2DV0l5wW/Training-content?node-id=1%3A19
 
