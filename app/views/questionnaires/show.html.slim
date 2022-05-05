@@ -1,3 +1,5 @@
+= render 'debug'
+
 h1= @questionnaire.heading
 
 -# https://components.publishing.service.gov.uk/component-guide/govspeak
@@ -6,7 +8,7 @@ h1= @questionnaire.heading
 
 = form_with model: @questionnaire, url: training_module_questionnaire_path(@training_module, @questionnaire), method: :patch do |form|
   - if @questionnaire.errors.present?
-   .errors=@questionnaire.errors.messages 
+   .errors= @questionnaire.errors.messages
   - @questionnaire.question_list.each do |question|
     = render partial: question.to_partial_path, locals: {f: form}, object: question, as: :question
 

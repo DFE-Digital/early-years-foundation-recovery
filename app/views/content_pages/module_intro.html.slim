@@ -1,6 +1,8 @@
-- content_for :content_page do 
-  h1=@model.heading
-  =image_tag(@model.image) if @model.image.present?
-  p=translate_markdown(@model.body)
+= render 'debug'
+
+- content_for :content_page do
+  h1= @model.heading
+  = image_tag(@model.image) if @model.image.present?
+  = translate_markdown(@model.body)
 
 = render 'shared/content_wrap'
