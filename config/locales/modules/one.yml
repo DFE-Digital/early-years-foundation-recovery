@@ -9,7 +9,7 @@ en:
         heading: Module 1 - Foo
         body: This is important and here is some text
       1-1:    # http://localhost:3000/modules/one/content_pages/1-1
-        heading: Foo Part One (edited)
+        heading: Foo Part One
         body: In this submodule we'll discuss some stuff
       1-1-1:  # http://localhost:3000/modules/one/content_pages/1-1-1
         heading: Stuff is cool

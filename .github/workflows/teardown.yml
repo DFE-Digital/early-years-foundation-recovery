@@ -10,7 +10,6 @@ on:
 
 jobs:
   teardown:
-    if: contains(github.event.pull_request.labels.*.name, 'deployed')
     runs-on: ubuntu-latest
     environment: production
     env:
