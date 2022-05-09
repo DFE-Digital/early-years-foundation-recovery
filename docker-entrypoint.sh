@@ -11,11 +11,6 @@ then
     bundle
   fi
 
-  if [ ! -d "node_modules" ]; then
-    yarn
-    bundle exec rails assets:precompile
-  fi
-
   rm -f tmp/pids/server.pid
 fi
 

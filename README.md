@@ -4,9 +4,20 @@
 
 ## Getting Started
 
-1. Clone the repository. This is a Rails 7 application using [the DfE template][rails-template]
-2. Obtain the master keys. Optionally create `.env` to override default variables.
-3. Run! (*running locally in the production rails environment requires self-signed certificates*)
+1. Clone the repository
+
+  This is a Rails 7 application using the [DfE template][rails-template].
+
+2. Obtain the master keys
+
+  Optionally create `.env` to override or set default variables like `DATABASE_URL`.
+
+3. Start the server
+
+  - `bin/dev` *(requires a running database server)*
+  - `bin/docker-dev` if using [Docker][docker]
+
+  NB: The initial two runs of these commands will bootstrap the asset pipeline dependencies.
 
 ## Useful Links
 
@@ -42,6 +53,10 @@ Use `bin/dev` to start the process workers (watching for changes to asset files)
 Use `bin/rspec` to run the test suite under `/spec`.
 Rails system specs use RackTest only for efficiency.
 
+**Production**
+
+Running locally in the production rails environment requires generating a self-signed certificate. Use `bin/docker-certs`
+
 **UI Framework**
 
 > Gemfile group :ui
@@ -67,6 +82,7 @@ These commands help maintain your containerised workspace:
     generated inside containers are created by *root*
 - `bin/docker-down` stop any active services
 - `bin/docker-prune` purge project containers, volumes and images
+- `bin/docker-dev-restart` restarts the running server
 
 The commands run common tasks inside containers:
 
@@ -183,4 +199,4 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 [ci-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml
 [notify]: https://www.notifications.service.gov.uk
 [figma]: https://www.figma.com/file/FGW1NJJwnYRqoZ2DV0l5wW/Training-content?node-id=1%3A19
-
+[docker]: https://www.docker.com
