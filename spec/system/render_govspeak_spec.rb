@@ -26,10 +26,6 @@ RSpec.describe '', type: :system do
       expect(page).to have_text '‘ write content here ’'
     end
 
-    it 'is rendering quotes' do
-      expect(page).to have_text '‘ write content here ’'
-    end
-
     it 'is rendering callout' do
       expect(page.source).to include '<div class="example">'
       expect(page).to have_text 'Open the pod bay doors'
@@ -57,6 +53,5 @@ RSpec.describe '', type: :system do
         expect(page).to have_text 'Hercules House'
       end
     end
-
   end
 end
