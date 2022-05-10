@@ -1,0 +1,76 @@
+' https://github.com/mattjhayes/PlantUML-Examples/blob/master/docs/Diagram-Types/source/deployment-like-diagram.md
+' https://www.guru99.com/deployment-diagram-uml-example.html
+@startuml
+' custom themes
+' !theme sketchy-outline
+
+' make <<foo>> invisible
+hide stereotype
+
+
+<style>
+  ' <<s>>
+  .s {
+    BackgroundColor LightGreen
+  }
+  ' <<i>>
+  .i {
+    BackgroundColor SkyBlue
+    FontStyle italic
+  }
+  ' <<b>>
+  .b {
+    BackgroundColor LightSlateGray
+    FontStyle italic
+  }
+}
+</style>
+
+' Legend colours need to be updated manually
+legend
+|<back:LightGreen>Environments</back>|
+|<back:SkyBlue>Services</back>|
+|<back:LightSlateGrey>Backend Services</back>|
+endlegend
+
+
+rectangle "Early Years Recovery Deployment" {
+  rectangle "Application" as app {
+    node "Rails Server" as rails <<i>>
+    database "Postgres Server" as postgres <<b>>
+  }
+
+  rectangle "Prototype" as prototype {
+    rectangle "Node Server" <<i>>
+  }
+
+  rectangle "Deployment Environments" {
+    rectangle "Heroku" <<s>>
+
+    rectangle "Cloud Foundry Spaces" as cf {
+      rectangle "ey-recovery" as production <<s>>
+      rectangle "ey-recovery-staging" as staging <<s>>
+      rectangle "ey-recovery-content" as content <<s>>
+      rectangle sandbox <<s>>
+    }
+  }
+
+  rectangle "Gov.uk Notify" as notify <<b>> {
+
+  }
+}
+
+' straight horizontal/vertical connecting lines
+' skinparam linetype ortho
+
+rails --> postgres
+rails --> notify
+prototype --> Heroku: User research (manual)
+prototype --> content: Interim (manual)
+app --> sandbox: Feature branches (auto)
+app --> production: Production tagged releases (auto)
+app --> staging: Bleeding edge (auto)
+
+
+
+@enduml

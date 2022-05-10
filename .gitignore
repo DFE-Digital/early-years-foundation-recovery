@@ -65,3 +65,6 @@ localhost.key
 # RSpec
 spec/examples.txt
 
+# Infrastructure
+uml/*.svg
+uml/*.png
