@@ -1,1 +1,16 @@
-= visit.inspect
+h2=visit.id
+
+table
+  thead
+    tr
+      td Started 
+      td Referrer 
+      td Browser 
+  tbody 
+    tr 
+      td=visit.started_at 
+      td=visit.referrer 
+      td=visit.browser
+
+h3 Events
+= render visit.events

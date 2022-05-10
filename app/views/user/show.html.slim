@@ -15,10 +15,8 @@ dl
   dt Ofsted Number
   dd= @user.ofsted_number
 
+= render 'training_modules'
+
 p= link_to "Edit", edit_user_path
 
-h2 Events
-= render @user.events
-
-h2 Visits
-= render @user.visits
+= render 'debug'
