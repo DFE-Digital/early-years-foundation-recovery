@@ -1,0 +1,71 @@
+' https://github.com/mattjhayes/PlantUML-Examples/blob/master/docs/Diagram-Types/source/deployment-like-diagram.md
+' https://www.guru99.com/deployment-diagram-uml-example.html
+@startuml
+' custom themes
+' !theme sketchy-outline
+
+' make <<foo>> invisible
+hide stereotype
+
+
+<style>
+  ' <<s>>
+  .s {
+    BackgroundColor LightGreen
+  }
+  ' <<i>>
+  .i {
+    BackgroundColor SkyBlue
+    FontStyle italic
+  }
+  ' <<b>>
+  .b {
+    BackgroundColor LightSlateGray
+    FontStyle italic
+  }
+}
+</style>
+
+' Legend colours need to be updated manually
+legend
+|<back:LightGreen>Environments</back>|
+|<back:SkyBlue>Services</back>|
+|<back:LightSlateGrey>Backend Services</back>|
+endlegend
+
+
+rectangle "Early Years Recovery Docker Environment" {
+  rectangle "docker-compose.yml" as prod {
+    node "RAILS_ENV=production"
+    database "Postgres"
+  }
+
+  rectangle "docker-compose.dev.yml" as dev {
+    node "RAILS_ENV=development"
+    database "Postgres"
+  }
+
+  rectangle "docker-compose.test.yml" as test {
+    node "RAILS_ENV=test"
+    database "Postgres"
+  }
+
+  rectangle "docker-compose.qa.yml" as qa {
+    node "RAILS_ENV=production"
+    database "Postgres"
+    node Firefox
+    node Chrome
+  }
+
+}
+
+' straight horizontal/vertical connecting lines
+skinparam linetype ortho
+
+prod --> dev : mount working directory
+prod --> test
+prod --> qa
+
+
+
+@enduml
