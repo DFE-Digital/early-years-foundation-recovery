@@ -11,6 +11,10 @@ then
     bundle
   fi
 
+  if [ ! -d "node_modules" ]; then
+    yarn install
+  fi
+
   rm -f tmp/pids/server.pid
 fi
 
