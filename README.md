@@ -87,19 +87,22 @@ These commands help maintain your containerised workspace:
 The commands run common tasks inside containers:
 
 - `bin/docker-dev` starts `Procfile.dev`, containerised equivalent of `bin/dev`,
-    using the `docker-compose.dev.yml` override
+    using the `docker-compose.dev.yml` override.
+    Additionally, it will install bundle and yarn dependencies.
 - `bin/docker-rails db:seed` populates the containerised postgres database
 - `bin/docker-rails console` drops into a running development environment or starts one,
     containerised equivalent of `bin/rails console`
 - `bin/docker-rspec -f doc` runs the test suite with optional arguments, containerised
     equivalent of `bin/rspec`
-- `bin/docker-qa` runs the browser tests against a running production application, a containerised equivalent of `bin/qa`
+- `bin/docker-qa` runs the browser tests against a running production application,
+    a containerised equivalent of `bin/qa`
 
 These commands can be used to debug problems:
 
 - `docker ps` lists all active **Docker** processes
 - `docker system prune` tidies up your system
-- `docker-compose -f docker-compose.yml -f docker-compose.<FILE>.yml --project-name recovery run --rm app`  can help identify why the application is not running in either the `dev`, `test`, or `qa` contexts
+- `docker-compose -f docker-compose.yml -f docker-compose.<FILE>.yml --project-name recovery run --rm app`
+    can help identify why the application is not running in either the `dev`, `test`, or `qa` contexts
 - `BASE_URL=https://app:3000 docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery up app` debug the UAT tests
 
 
@@ -119,7 +122,8 @@ These commands can be used to debug problems:
 
 ## Quality Assurance
 
-The UI/UA test suite can be run against any site. A production-like application is available as a composed Docker service for local development. To run a self-signed certificate must first be generated.
+The UI/UA test suite can be run against any site. A production-like application is available as a composed Docker service for local development.
+To run a self-signed certificate must first be generated.
 
 1. `./bin/docker-certs` (Mac users can trust the certificate in [Keychain Access](https://support.apple.com/en-gb/guide/keychain-access))
 2. `./bin/docker-qa` (this will build and bring up the application)
