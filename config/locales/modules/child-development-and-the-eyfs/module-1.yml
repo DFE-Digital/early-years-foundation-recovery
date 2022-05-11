@@ -1,9 +1,9 @@
 ---
 en:
   modules:
-    brain-development-in-early-years:
+    child-development-and-the-eyfs:
       1:
-        heading: Brain development in the early years
+        heading: Child development and the EYFS
         body: |
           On completion of this module you will be able to: 
 
@@ -18,6 +18,64 @@ en:
           It’s important to understand developmental patterns and factors that can affect a child’s development. Both genetic and environmental factors impact on brain development.
 
           Brain development is also integral to a child’s ability to acquire and develop their language skills. As communication and language will underpin all other areas of development it is essential that we promote both brain and communication development.
+
+          #Here is an H1 title
+
+          ##Here is an H2 title
+
+          Being able to use **bold text** may be useful
+
+          With poor markdown skills, it could be harder for CMS users to create:
+
+          - bullet points
+          - more bullet points
+          - even more bullet points
+
+          It could be even more difficult for them to create:
+
+          1. numbered lists
+          2. like
+          3. this
+
+          ###Putting pictures in markdown
+
+          ![Laminated faces showing different emotions
+          ](https://eyfs-cms-preprod.london.cloudapps.digital/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBNZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--f66cb1eb99e938e8c4cdebd55edb0d606c9a2917/psed_emotions_activity1.jpg "Laminated faces showing different emotions")
+
+          CMS users can learn how best to express their emotions [(using inline links)](/understanding-the-world), and define what each emotion means for them [(sense of self)](/personal-social-and-emotional-development/sense-of-self). 
+
+          ^“Markdown users can use information callouts, which lets them share their thoughts and feelings with confidence. They are encouraged to build on emotional knowledge - receiving time, attention and comfort by caregivers, and feeling heard.”^
+
+          %This is a warning callout%
+
+          $E
+          **Example**: Open the pod bay doors
+          $E
+
+          @This is a very important message or warning@
+
+          $I
+          This is information
+          $I
+          $CTA
+          This is a call to action
+          $CTA
+
+          <div class="govuk-inset-text">
+          <h2 class="govuk-heading-m">Practitioner prompt</h2>
+
+          <p class="govuk-body">Let's think about how you support children's development in your setting. </p>
+
+          <p class="govuk-body">How does your setting find out about starting points? Who do you involve? </p>
+
+          <p class="govuk-body">What information do you need? </p>
+
+          <p class="govuk-body">How does this information inform your practice? </p>
+
+          </div>
+
+
+
       1-0:
         heading: Brain development in the early years
         body: |
