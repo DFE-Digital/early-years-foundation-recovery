@@ -5,3 +5,6 @@ db/schema.rb linguist-generated
 
 # Mark any vendored files as having been vendored.
 vendor/* linguist-vendored
+
+# Normalise line endings to LF
+* text=auto eol=lf
