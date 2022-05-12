@@ -10,8 +10,6 @@ class User < ApplicationRecord
 
   validates_with OfstedValidator
 
-  validates :postcode, presence: true
-
   def name
     [first_name, last_name].compact.join(' ')
   end

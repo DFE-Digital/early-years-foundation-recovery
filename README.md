@@ -180,6 +180,13 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
 ## Content
 
+Content designers are using the docker development environment.
+You can demo this environment locally using `completed@example.com:password`.
+When the are significant changes to content structure or styling it may be necessary to either:
+
+- `bin/docker-dev-restart` restart the server
+- `bin/docker-rails assets:precompile` rebuild the assets
+
 ### YAML
 
 - [guide](https://www.commonwl.org/user_guide/yaml)
