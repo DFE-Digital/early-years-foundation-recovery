@@ -1,0 +1,5 @@
+#!/bin/sh
+# ------------------------------------------------------------------------------
+set -e
+
+docker exec -it recovery_dev touch ./tmp/restart.txt

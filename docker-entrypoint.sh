@@ -12,8 +12,7 @@ then
   fi
 
   if [ ! -d "node_modules" ]; then
-    yarn
-    bundle exec rails assets:precompile
+    yarn install
   fi
 
   rm -f tmp/pids/server.pid

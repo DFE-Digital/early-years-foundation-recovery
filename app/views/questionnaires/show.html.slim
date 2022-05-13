@@ -1,9 +1,9 @@
 = render 'debug'
 
-h1= @questionnaire.heading
+h1
+  = @questionnaire.heading
 
--# https://components.publishing.service.gov.uk/component-guide/govspeak
-= render 'govuk_publishing_components/components/govspeak' do
+.gem-c-govspeak
   = translate_markdown(@questionnaire.body)
 
 = form_with model: @questionnaire, url: training_module_questionnaire_path(@training_module, @questionnaire), method: :patch do |form|
