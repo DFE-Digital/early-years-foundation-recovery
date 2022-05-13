@@ -187,6 +187,11 @@ When the are significant changes to content structure or styling it may be neces
 - `bin/docker-dev-restart` restart the server
 - `bin/docker-rails assets:precompile` rebuild the assets
 
+When starting the project for the first time the frontend requires third-party libraries.
+On slower machines it is best to install these explicitly.
+
+- `bin/docker-yarn` bootstrap the asset libraries
+
 ### YAML
 
 - [guide](https://www.commonwl.org/user_guide/yaml)
