@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+# ------------------------------------------------------------------------------
+set -e
+
+for dir in ".yarn/cache" "node_modules" "vendor/bundle"; do
+  find $dir -type f -print0 | xargs -0 dos2unix
+done

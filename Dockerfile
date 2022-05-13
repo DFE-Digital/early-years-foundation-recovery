@@ -61,7 +61,7 @@ CMD ["bundle", "exec", "rails", "server"]
 # ------------------------------------------------------------------------------
 FROM app as dev
 
-RUN apk add --no-cache --no-progress npm
+RUN apk add --no-cache --no-progress npm dos2unix
 RUN npm install -g adr-log
 
 RUN bundle config unset without
