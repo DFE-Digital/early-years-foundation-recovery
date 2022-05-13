@@ -2,10 +2,17 @@
 # ------------------------------------------------------------------------------
 set -e
 
-docker-compose \
+if [[ ! -z "$MSYSTEM" ]]; then
+  echo "You are running Windows!"
+  PREFIX="winpty"
+else
+  PREFIX=""
+fi
+
+$PREFIX docker-compose \
   -f docker-compose.yml \
   -f docker-compose.dev.yml \
   --project-name recovery \
   up --detach
 
-docker attach recovery_dev
+$PREFIX docker attach recovery_dev
