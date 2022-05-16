@@ -88,7 +88,7 @@ en:
       heading: About your setting
       hint: Your details and training progress won't be shared with anyone without your permission.
       ofsted_number: Your setting's Ofsted number
-      ofsted_hint: This might start with EY followed by 6 numbers, or it might be an 8 letter number. If you don't know your setting's Ofsted number, you can look it up on the Ofsted website.
+      ofsted_hint: This might start with EY or VC followed by 6 numbers, or it might be an 8 letter number. If you don't know your setting's Ofsted number, you can look it up on the Ofsted website.
       postcode: Your setting's postcode
       postcode_hint: If you have multiple locations, enter the one where you work most often.
       submit: Complete
