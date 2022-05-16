@@ -1,9 +1,10 @@
 # ------------------------------------------------------------------------------
 terraform {
+  # https://registry.terraform.io/providers/cloudfoundry-community/cloudfoundry/latest
   required_providers {
     cloudfoundry = {
       source  = "cloudfoundry-community/cloudfoundry"
-      version = ">= 1.1.7"
+      version = ">= 0.15.3"
     }
   }
 
