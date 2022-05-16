@@ -25,4 +25,16 @@ class GovspeakDecorator < DelegateClass(Govspeak::Document)
   def kramdown_doc
     __getobj__.send('kramdown_doc')
   end
+
+  # If you are using UJS then enable automatic nonce generation
+  # Rails.application.config.content_security_policy_nonce_generator = -> request { SecureRandom.base64(16) }
+
+  # Set the nonce only to specific directives
+  # Rails.application.config.content_security_policy_nonce_directives = %w(script-src)
+
+  # Report CSP violations to a specified URI
+  # For further information see the following documentation:
+  # @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only
+  # Should only be used in development
+  # Rails.application.config.content_security_policy_report_only = true
 end
