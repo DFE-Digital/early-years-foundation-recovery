@@ -8,6 +8,30 @@ RUN apk add --no-cache --no-progress build-base less curl tzdata gcompat \
     "libretls>=3.3.4-r3" "libssl1.1>=1.1.1n-r0" "libcrypto1.1>=1.1.1n-r0"
 
 # ------------------------------------------------------------------------------
+# Dependencies
+# ------------------------------------------------------------------------------
+FROM base as deps
+
+RUN apk add --no-cache --no-progress postgresql-dev yarn
+
+ENV APP_HOME /build
+
+WORKDIR ${APP_HOME}
+
+COPY package.json ${APP_HOME}/package.json
+COPY yarn.lock ${APP_HOME}/yarn.lock
+COPY .yarn ${APP_HOME}/.yarn
+COPY .yarnrc.yml ${APP_HOME}/.yarnrc.yml
+
+RUN yarn install
+
+COPY Gemfile* ./
+
+RUN bundle config set no-cache true
+RUN bundle config set without development test ui
+RUN bundle install --no-binstubs --retry=10 --jobs=4
+
+# ------------------------------------------------------------------------------
 # Production Stage - nodejs v16.14.2, postgresql v13.6
 # ------------------------------------------------------------------------------
 FROM base AS app
@@ -24,15 +48,7 @@ RUN mkdir -p ${APP_HOME}/tmp/pids ${APP_HOME}/log
 WORKDIR ${APP_HOME}
 
 COPY Gemfile* ./
-
-RUN bundle config set no-cache true
-RUN bundle config set without development test ui
-RUN bundle install --no-binstubs --retry=10 --jobs=4
-
-COPY package.json ${APP_HOME}/package.json
-COPY yarn.lock ${APP_HOME}/yarn.lock
-COPY .yarn ${APP_HOME}/.yarn
-COPY .yarnrc.yml ${APP_HOME}/.yarnrc.yml
+COPY --from=deps /usr/local/bundle /usr/local/bundle
 
 COPY config.ru ${APP_HOME}/config.ru
 COPY Rakefile ${APP_HOME}/Rakefile
@@ -42,6 +58,12 @@ COPY data ${APP_HOME}/data
 COPY config ${APP_HOME}/config
 COPY db ${APP_HOME}/db
 COPY app ${APP_HOME}/app
+
+COPY package.json ${APP_HOME}/package.json
+COPY yarn.lock ${APP_HOME}/yarn.lock
+COPY .yarnrc.yml ${APP_HOME}/.yarnrc.yml
+COPY --from=deps /build/.yarn ${APP_HOME}/.yarn
+COPY --from=deps /build/node_modules ${APP_HOME}/node_modules
 
 RUN SECRET_KEY_BASE=x \
     GOVUK_APP_DOMAIN=x \
