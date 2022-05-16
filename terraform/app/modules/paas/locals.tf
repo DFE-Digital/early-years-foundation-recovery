@@ -5,6 +5,6 @@ locals {
 
   # ey-recovery-db-production
   # ey-recovery-db-staging
-  # ey-recovery-db-content
-  db_service_name = "${var.service_name}-db-${var.app_environment}"
+  # ey-recovery-db-pr-123
+  db_service_name = "${var.service_name}-db-${var.web_app_name}"
 }
