@@ -31,7 +31,7 @@ variable "app_docker_image" {}
 # ------------------------------------------------------------------------------
 variable "web_app_env" {
   description = "Application environment variables"
-  default     = {}
+  default = {}
 }
 
 variable "web_app_name" {
@@ -40,15 +40,15 @@ variable "web_app_name" {
 }
 
 variable "web_app_instances" {
-  type        = number
+  type    = number
   description = "Application instances"
-  default     = 1
+  default = 1
 }
 
 variable "web_app_memory" {
-  type        = number
+  type    = number
   description = "Application memory"
-  default     = 512
+  default = 512
 }
 
 variable "web_app_disk_quota" {
@@ -64,11 +64,9 @@ variable "web_app_start_command" {
   default     = "bundle exec rails server -b 0.0.0.0"
 }
 
-# set on review.tfvars
-# NB: Reform experienced workflow action timed out before paas was ready
 variable "web_app_start_timeout" {
   type    = number
-  default = 360
+  default = 300
 }
 
 variable "web_app_stopped" {

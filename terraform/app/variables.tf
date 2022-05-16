@@ -63,17 +63,30 @@ variable "paas_web_app_start_command" {
   default = "bundle exec rails db:prepare && bundle exec rails server -b 0.0.0.0"
 }
 
-variable "paas_web_app_instances" {}
+variable "paas_web_app_instances" {
+  default = 1
+}
 
-variable "paas_web_app_memory" {}
+variable "paas_web_app_memory" {
+  default = 512
+}
 
-variable "paas_web_app_start_timeout" {}
+# set on review.tfvars
+# NB: Reform experienced workflow action timed out before paas was ready
+variable "paas_web_app_start_timeout" {
+  default = 360
+  type    = number
+}
 
 # ------------------------------------------------------------------------------
 # Database
 
-variable "paas_postgres_service_plan" {}
+variable "paas_postgres_service_plan" {
+  default = "tiny-unencrypted-11"
+  type    = string
+}
 
-variable "paas_postgres_create_timeout" {}
-
-variable "paas_postgres_json_params" {}
+variable "paas_postgres_create_timeout" {
+  default = "15m"
+  type    = string
+}
