@@ -95,3 +95,16 @@ variable "postgres_service_plan" {
   description = "$ cf marketplace -e postgres"
   default     = "tiny-unencrypted-11"
 }
+
+# "{\"enable_extensions\": [\"pgcrypto\", \"fuzzystrmatch\", \"plpgsql\"]}"
+variable "postgres_json_params" {
+  description = "Postgres JSON params"
+  default = {
+    enable_extensions = [
+      "pgcrypto",
+      "fuzzystrmatch",
+      "plpgsql",
+    ]
+  }
+  type = map(any)
+}

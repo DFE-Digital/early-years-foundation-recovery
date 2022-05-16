@@ -7,4 +7,6 @@ locals {
   # ey-recovery-db-staging
   # ey-recovery-db-pr-123
   db_service_name = "${var.service_name}-db-${var.web_app_name}"
+
+  db_json_params = jsonencode(var.postgres_json_params)
 }
