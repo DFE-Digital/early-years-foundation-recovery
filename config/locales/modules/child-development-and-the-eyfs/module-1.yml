@@ -3,351 +3,617 @@ en:
   modules:
     child-development-and-the-eyfs:
       1:
-        heading: Child development and the EYFS
+        heading: Understanding child development and the EYFS
         body: |
           On completion of this module you will be able to: 
 
-            - establish and explore the stages of children’s brain development
-            - explore the impact of brain development on children’s holistic development
-            - examine the connection between brain development and children’s learning
-            - define and evaluate the importance of effective relationships
-            - explore a range of theories underpinning best practice 
-            
-          From birth to 5 years old, a child’s brain develops more than at any other point in life. Brain development is a long process. The brain starts to develop around 2 weeks after conception and continues into adulthood.
-
-          It’s important to understand developmental patterns and factors that can affect a child’s development. Both genetic and environmental factors impact on brain development.
-
-          Brain development is also integral to a child’s ability to acquire and develop their language skills. As communication and language will underpin all other areas of development it is essential that we promote both brain and communication development.
-
-          #Here is an H1 title
-
-          ##Here is an H2 title
-
-          Being able to use **bold text** may be useful
-
-          With poor markdown skills, it could be harder for CMS users to create:
-
-          - bullet points
-          - more bullet points
-          - even more bullet points
-
-          It could be even more difficult for them to create:
-
-          1. numbered lists
-          2. like
-          3. this
-
-          ###Putting pictures in markdown
-
-          ![Laminated faces showing different emotions
-          ](https://eyfs-cms-preprod.london.cloudapps.digital/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBNZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--f66cb1eb99e938e8c4cdebd55edb0d606c9a2917/psed_emotions_activity1.jpg "Laminated faces showing different emotions")
-
-          CMS users can learn how best to express their emotions [(using inline links)](/understanding-the-world), and define what each emotion means for them [(sense of self)](/personal-social-and-emotional-development/sense-of-self). 
-
-          ^“Markdown users can use information callouts, which lets them share their thoughts and feelings with confidence. They are encouraged to build on emotional knowledge - receiving time, attention and comfort by caregivers, and feeling heard.”^
-
-          %This is a warning callout%
-
-          $E
-          **Example**: Open the pod bay doors
-          $E
-
-          @This is a very important message or warning@
+          - explain the importance of early childhood education and care including strategies you can use to provide a positive approach
+          - explore the importance of child development knowledge including an awareness of contributing factors
+          - consider effective delivery of the early years foundation stage (EYFS)
+          - describe the impact that the coronavirus (COVID-19) pandemic has had on children's development
 
           $I
-          This is information
+          "No job is more important than working with children in the early years"
+
+          Development Matters, 2021
           $I
-          $CTA
-          This is a call to action
-          $CTA
+          
+          You are supporting children to learn during the most crucial stage of their development. The choices you make and the curriculum you offer are vital to ensuring that all children have the opportunity to reach their full potential.
+
+          Almost all children will experience the same developmental milestones. However, every child is unique. Children will develop at different rates, have different strengths and face different challenges. Each child’s development will have been shaped by their previous experiences. Acknowledging this will ensure you are able to support them effectively in the future.
+
+          Understanding how children develop will enable you to meet the needs of all the children in your care.
+
+          The modules included in this course will help you to understand how:
+
+          - children develop
+          - external factors, including the coronavirus (COVID-19) pandemic, impact on child development
+          - effective practice and use of the EYFS framework will support successful development
 
           <div class="govuk-inset-text">
-          <h2 class="govuk-heading-m">Practitioner prompt</h2>
+            <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
-          <p class="govuk-body">Let's think about how you support children's development in your setting. </p>
+            <p class="govuk-body">As you travel through the course you will see practitioners prompts.</p>
+          </div>
 
-          <p class="govuk-body">How does your setting find out about starting points? Who do you involve? </p>
+          These prompts are intended to:
 
-          <p class="govuk-body">What information do you need? </p>
+          - encourage reflection on your current practice
+          - introduce new strategies
+          - reinforce effective teaching and learning
+          - embed new knowledge
 
-          <p class="govuk-body">How does this information inform your practice? </p>
+          Reflection is one of the most powerful tools you can use as a practitioner. In practice, you don't often have the time to stop and reflect. However, taking an opportunity to pause and think back can enable you to ask:
+
+          - what had I intended?
+          - did I successfully implement my intentions?
+          - how do I know?
+          - what impact did I see?
+          - what would I do differently next time?
+
+          As you reflect upon your practice, remember that no child should be considered as low ability. Every child can make progress as long as the correct support is implemented.
+
+          In the same way that children develop holistically, you should approach the care you provide holistically. You will revisit key messages throughout the course to reinforce how different areas of development overlap.
+
+      1-1:
+        heading: An informed approach to care and education
+        body: |
+          As an early years practitioner, it is crucial that you have a good understanding of children’s development. This will ensure that you are able to offer the high quality care that is required and expected. Parents will trust you and every child will thrive.
+
+          This first section of the module includes:
+
+          - the importance of understanding child development
+          - factors affecting children's development
+
+      1-1-1:
+        heading: The importance of understanding child development
+        body: |
+          Understanding how children develop will help you to plan and implement an early years curriculum that promotes inclusion and progress for all.
+
+          This will reduce any opportunities for unnecessary barriers to learning and prevent any gaps in a child’s development.
+
+          This topic includes:
+
+          - how understanding child development benefits the child, practitioner and wider support network
+          - the potential impact of limited child development knowledge
+          - how improved child development knowledge supports outstanding practice including:
+            - scaffolding learning
+            - behaviour management
+            - effective holistic support
+
+      1-1-1-1:
+        heading: How understanding child development benefits the child
+        body: |
+          ##Increased resilience, confidence and self-efficacy
+          
+          Every child has the capability to be resilient, confident and to have self-efficacy. Self-efficacy is the measure of whether a child feels they can succeed.
+
+          Your knowledge of child development will help you to support children to develop these qualities.
+
+          When you provide an enabling environment, children will experience:
+
+          - problem solving opportunities
+          - appropriate challenge
+          - managed risk
+          - opportunities to learn, rehearse and then remember new knowledge and skills
+          
+          This will help them to develop their resilience. Resilient children will approach activities and experiences with high self-efficacy and a strong “I can” attitude. Their exploration will help them to develop their knowledge and skills.
+
+          ##Early help
+          
+          Your knowledge of child development will help you to plan an environment and curriculum that promotes success for all. You will be able to identify the correct level of support needed, adjust your approach and implement the appropriate level of early help.
+
+          Early help can successfully:
+
+          - minimise and remove the potential risk factors preventing children from achieving their full potential
+          - reduce opportunities for children to become disengaged, isolated or withdrawn
+          - reduce the time needed for children to become secure in their understanding and development
+          - improve outcomes for children with effective integration of specialist support where appropriate
+          
+          ##A tailored experience
+          
+          Your knowledge and understanding of child development will help you offer each child a unique learning journey with improved outcomes.
+
+          ##Supporting children to gain new knowledge
+          
+          Cognitive skills are the mental processes involved in learning and understanding things. If you understand how children learn concepts and skills, this will help you to support the children in your care to gain new knowledge.
+
+          <div class="govuk-inset-text">
+            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+
+            <p class="govuk-body">Do you know what strategies your setting has in place for early intervention?</p>
+            <p class="govuk-body">What early assessment is carried out?</p>
+            <p class="govuk-body">What strategies are put in place as a result?</p>
+          </div>
+      
+      1-1-1-2:
+        heading: How understanding child development benefits the practitioner
+        body: |        
+          When you are planning your curriculum, you need to consider the intent, implementation and impact.
+
+          $I
+          "Intent is what you want pupils to learn: your curriculum thinking and high-level planning.
+          
+          Implementation is the teaching activities you choose to teach your curriculum.
+          
+          Impact is when that curriculum content is learned."
+
+          [Ofsted, 2021](https://educationinspection.blog.gov.uk/2021/12/08/curriculum-keeping-it-simple/)
+          $I
+
+          When doing this planning, you need to consider each child’s:
+
+          - level of skill, knowledge and understanding
+          - needs for successful learning to take place
+          
+          While all the children in your group may be of a similar age, this does not mean they will be at the same developmental level. You will need to call upon your knowledge of child development to consider different levels of secure knowledge and understanding.
+
+          Some children may be in need of additional care, instruction and support, because of missing out on prior experiences. You’ll need to adapt your practice accordingly to ensure that these children receive the adult help needed to develop.
+
+          You may need to differentiate activities to make an experience more simple, or adapt it to ensure that all members of the group are sufficiently challenged.
+
+          Combining your professional judgment and knowledge of child development will help you to plan and put in place an early years curriculum that:
+
+          - promotes inclusion and progress for all
+          - reduces unnecessary barriers to learning
+
+          <div class="govuk-inset-text">
+            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+
+            <p class="govuk-body">Take a moment to think about the children you care for and pick a specific age group.</p>
+
+            <p class="govuk-body">Note down a physical activity you would frequently offer. Now consider how you would provide this activity for 3 different levels of experience all at the same time. What do you need to consider?</p>
+          </div>
+
+          Using your child development knowledge will help you to measure the impact of your intentions - has the child successfully learnt what you intended them to learn? Children need opportunities to reinforce their knowledge and learning. This ensures that they are secure in their level of understanding before being challenged to progress.
+
+          Your knowledge of child development will support you to assess the correct secure age and stage for the child. It will also help you to offer the correct learning environment, experiences and opportunities to support their progress.
+
+      1-1-1-3:
+        heading: How understanding child development benefits the wider support network
+        body: |   
+          Improving your knowledge of child development will help you to create and maintain positive partnerships with parents and others.
+
+          ##Promoting positive relationships with parents
+          
+          ßThe foundations of parent partnerships are built on trust. Demonstrating your knowledge of child development will give parents confidence in your ability to care for their child. Confident parents will be keen to share information and strategies with you. This will benefit both you and the child.
+
+          It is crucial that you are able to have honest dialogue with parents to ensure they fully appreciate their child's needs. This includes when additional support is needed and how support can be given at home to enable their child to flourish.
+
+          ##Effective multi agency working
+          
+          Your knowledge of child development will help you to identify where a child is not making progress and requires further support.
+
+          You will be able to use this knowledge to implement policies and procedures and ensure that children are referred to the support needed and at the earliest point possible.
+
+          Your knowledge of child development will help you to accurately fill out the required reports. This means the child will be offered appropriate support.
+
+          ##A consistent approach
+          
+          There are many benefits to all practitioners within a setting having knowledge of child development.
+
+          ###Consistent and shared best practice
+          
+          You will be able to help colleagues with your knowledge of how to support children of a variety of ages and stages. Sharing ideas between the team will reduce planning and resource creation.
+
+          ###Maximum impact on development
+          
+          When all practitioners are focussed on supporting children’s development, you will be able to provide a highly effective environment, resources and experiences for every child. This will result in high quality care for all.
+
+          ###Improved differentiation
+          
+          Greater awareness of child development, improved resource creation and shared workload will result in a broad range of opportunities.
+
+          <div class="govuk-inset-text">
+            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+
+            <p class="govuk-body">Make a list of all the ways that you work in partnership with the children’s parents.</p>
+            <p class="govuk-body">What activities take place at the beginning of the children’s care?</p>
+            <p class="govuk-body">Which activities take place on a regular basis?</p>
+            <p class="govuk-body">Take one item from your list and consider it in more detail. Ask yourself:
+              <ul class="govuk-list govuk-list--bullet">
+                <li>how do those involved benefit?</li>
+                <li>does the engagement have a specific purpose?</li>
+                <li>does the activity achieve its intended purpose?</li>
+                <li>how could it be improved?</li>
+              </ul>
+            </p>
+          </div>
+
+      1-1-1-4:
+        heading: The potential impact of limited child development knowledge
+        body: |   
+          Limited knowledge of child development may lead to unintentional consequences for the children in your care.
+
+          ##Incorrect level of challenge
+          
+          An incorrect level of challenge for children can be a contributing factor to their engagement and behaviour.
+
+          When the environment and activities are not challenging enough, a child may complete tasks quickly or become bored. They may then start on an alternative task or entertain themselves with a destructive or distracting activity.
+
+          When the environment and activities are too challenging, a child may become frustrated and disengaged if they do not understand expectations or are afraid of failure.
+
+          Both situations lead to missed opportunities to learn, develop and thrive.
+
+          ##Delayed support
+          
+          Incomplete knowledge of child development may prevent you from identifying where a child requires support in a particular area of development. This may delay them getting help early on.
+
+          This could result in lost opportunities for children to learn and rehearse skills and affect a child’s understanding of behavioural expectations.
+
+          Your knowledge of child development will help you to create and implement an effective curriculum. This reduces the gaps in learning and so removes the need for additional support.
+
+          <div class="govuk-inset-text">
+            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+
+            <p class="govuk-body">Do you have a child or children who are disengaged or disruptive? </p>
+
+            <p class="govuk-body">What strategies have you tried so far and have they made a difference?</p>
+
+            <p class="govuk-body">Have you: </p>
+
+            <ul class="govuk-list govuk-list--bullet">
+              <li>considered the child holistically?</li>
+              <li>looked at each area of development? </li>
+              <li>evaluated the environment? </li>
+
+            </ul>
+
+            <p class="govuk-body">Children can quickly become labelled as behaving in a certain way and this becomes their accepted behaviour. Behaviour always has a cause, but have you been able to work out the true cause?</p>
+
+            <p class="govuk-body">How could further knowledge regarding child development support this? </p>
+
+            <p class="govuk-body">What do your colleagues think?</p>
 
           </div>
 
+      1-1-1-5:
+        heading: How improved child development knowledge supports outstanding practice - scaffolding learning
+        body: |  
+          With an identified starting point you will be able to effectively support children to build on existing learning. Imagine trying to do the simplest tasks without a set of instructions or any prior experience. This is how a child will feel if they are attempting a task that is simply too difficult or has not previously been experienced or explained. Your knowledge of child development will support you to follow a consistent process.
 
+          To establish the starting point, you should consider the following.
 
-      1-0:
-        heading: Brain development in the early years
-        body: |
-          As we discussed in the introductory module all children develop at different rates and understanding developmental patterns and factors that can affect children will develop all aspects of your practice.
-
-          # Working With Parents 
-
-          Parents and carers are the child’s primary educator and have a wealth of valuable information that you can use to support their child effectively. Having good understanding of brain development will support you to further understand any information shared with you about the child’s overall health, well-being and development. 
-
-          Being able to show parents that you understand the factors affecting their child will support you to build trust and a professional relationship which will ensure you are able to work together effectively and share experiences and strategies that will benefit the child.
-
-          # Creating an Enabling Environment 
-
-          It is important to remember that a child will take more benefit from being secure in an area of understanding than being exposed to more challenging concepts and tasks too early as a result of expected age related milestones. Children will need you to scaffold their learning as discussed in the introductory module. To do this successfully a child will need secure foundations to build upon. Understanding where a child needs to revisit concepts and experiences before moving on will be essential and will be influenced by your knowledge of the child and developmental patterns. 
-      1-1:
-        heading: The developing brain
-        body: |
-          The first section of this module is about:
-
-          -	the expected pattern of brain development before birth
-          -	the expected pattern of brain development from 0 to 5 years
-          -	factors affecting brain development
-      1-1-1:
-        heading: Brain development before birth
-        body: |
-          Babies’ brain development is a complex process that starts at around 2 weeks after conception and continues throughout pregnancy. 
-
-          This topic looks at the expected pattern of brain development before birth and the factors that can influence it. It also includes how communication develops before birth. 
-      1-1-1-1a:
-        heading: Parts of the brain
-        body: |
-          ## Brain stem
-          The brain stem at the top of your spinal cord where your head joins your neck. This is the most developed section of your brain at birth. This vital part of the brain controls your breathing, heart rate and blood pressure.
-
-          It also supports newborn reflexes such as crying, startling and sucking.
+          1. How old is the child and what is the relevant expected development?
+          2. Is that child at that level yet?
+          3. Does the child need you to start at a lower level of description or task, or has the child mastered that expectation?
           
-          # Cerebellum
-          The cerebellum is at the back of your head. This is the area in charge of motor development. It controls balance and coordinates movements. The cerebellum combines the signals from the eyes, ears and muscles with motor commands.
+          Now you have your starting foundation block to build upon.
 
-          This is the area of the brain that supports babies to progress with motor skills such as the progression from rolling to crawling to walking. Repeating challenging activities helps this area of the brain to develop.
+          You can use your knowledge of child development to set the correct pace of learning and consider what you would like to aim towards next.
 
-          # Frontal lobes
-          The frontal lobes are located behind your forehead and are the largest part of your brain. They are involved in:
-          - moral reasoning
-          - critical thinking
-          - planning ahead
-          - decision making
-          - impulse control
+          Knowledge of children’s language and communication skills is also essential for successful scaffolding. Children may not holistically develop at the same rate and so may be at the expected level of development physically, but lack the language skills to interpret instructions. Therefore the child may experience difficulties with tasks intended to develop them physically if communication is challenging. It is crucial that you use a wide variety of activities to help the child develop their communication skills.
+
+          Offering these temporary levels of successive support ensures that children develop the confidence and self belief needed to become secure in their knowledge and skills before becoming ready to attempt the next challenge.
           
-          The frontal lobes continue to develop until you are in your twenties or thirties- shaped by your experiences and environment.
+           <div class="govuk-inset-text">
+            <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
-          # Occipital lobes
-          The occipital lobes are the back part of the brain. They allow us to make sense of information that comes from our eyes.
+            <p class="govuk-body">Can you think of a child in your care who is struggling with a particular skill or knowledge and understanding? </p>
 
-          At birth, the neural pathways used to carry the information from the eyes to the brain are not fully developed. Babies can only see 20 to 30 cm in front of them. To develop these neural pathways babies needs to use them,and they can do this by looking at a variety of objects. Babies’ vision improves steadily, and by 8 months they will see almost as well as an adult.
+            <p class="govuk-body">Are they at the expected level of development? </p>
+            <p class="govuk-body">Are the instructions, demonstrations or level of support being offered too challenging? </p>
+            <p class="govuk-body">Have they become secure in the foundation knowledge needed to attempt the task? </p>
+            <p class="govuk-body">If you were to write step by step instructions, which step are they at confidently? </p>
+            <p class="govuk-body">What would the next step be for their expected level? </p>
+            <p class="govuk-body">How will you temporarily offer supportive steps to help them get there? </p>
+            <p class="govuk-body">You have just successfully scaffolded learning! </p>
 
-          # Temporal lobes
-          The temporal lobes are at the side of your brain, just above your ears. One of their important functions is to help us understand and process sounds.
+           </div>
 
-          Other functions include recognising faces and objects, as well as memory acquisition.
-
-          It’s essential that a child is exposed to a wide variety of visual, auditory and practical tasks that enable them to test concepts and build memory skills.
-
-          # Parietal lobes
-          The parietal lobes are located behind the frontal lobes and above the temporal lobes. One of their main functions is to make sense of things we touch. They also tell us where our body is in relation to objects around us.
-
-          Diagram needed
-      1-1-1-2a:
-        heading: Brain development before birth
+      1-1-1-6:
+        heading: How improved child development knowledge supports outstanding practice - understanding behaviour
         body: |
-          # First trimester
-          The neural plate - which is the basis of the nervous system - starts to form around 2 weeks after conception. It will grow longer and longer until it becomes the neural tube at approximately 5 weeks. At 6 weeks, the tube closes to become the brain and spinal cord. 
+          Children can display challenging behaviour for a broad variety of reasons including:
 
-          When the tube does not successfully close and is left exposed to amniotic fluid, neural tube defects such as spina bifida can occur. 
-
-          In this first trimester, the brain will grow millions of neurones. A neurone is a nerve cell. It carries electrical impulses from one part of the body to another to transmit information. Neurones do not connect physically. Where neurones meet, there is a gap called a synapse. Synapses begin to form from 7 weeks. 
-
-          The first electrical activity in the brain starts at 8 weeks.This means the baby will begin to spontaneously move in the womb.  
-
-          # Second trimester
-          The brain develops rapidly during the the second trimester. 
-
-          The brain stem will coordinate practice breathes as it directs compression of the chest muscles and movement of the diaphragm. 
-
-          Movement will become more coordinated with increased kicking and stretching. 
-          The brainwaves that occur during sleep form by 28 weeks and the baby will start to experience sleep cycles. 
-          The brain stem is almost fully developed by the end of the second trimester 
-
-          # Third trimester 
-          A baby’s brain triples in weight during the third trimester. During this time, a fatty substance called myelin begins to coat the neurones. This is called myelination. and it increases the speed that electrical impulses can travel.
-
-          # Ongoing development
-          After birth, when a baby repeats and practices a skill, it leads to myelination of the neurones involved. This improves the speed at which the message travels and so improves the skill. 
-
-          The brain will also get rid of old unused neurone pathways. It’s important for children to experience a wide variety of opportunities so that their neurones develop. 
-          Diagram needed
-      1-1-1-3a:
-        heading: Influences on brain development before birth
-        body: |
-          There are a variety of influences and complications that can impact on brain development before birth. 
-
-          # Illness in pregnancy
-          When pregnant women have certain infections or illnesses during pregnancy, it can impact on their babies’ brain development. If a woman experiences chicken pox or measles during her pregnancy, it can lead to her baby having limb and brain abnormalities. In a very small number of cases, if a mother experiences pre-eclampsia, it can result in severe complications for the baby.
+          - being hungry
+          - feeling unwell
+          - feeling tired
+          - learning difficulties or disabilities
+          - not knowing the unspoken rules of friendly, respectful behaviour
           
-          # Smoking in pregnancy
-          If a mother smokes during pregnancy, this increases the likelihood of premature birth and low birth weight. Cigarette smoke reduces the amount of oxygen the baby receives and reduces the forming of neurones. This can result in an underdeveloped brain.  
+          The learning environment can also offer potential triggers for unwanted behaviour. Your knowledge of child development will help you to avoid, minimise and resolve such incidents.
+
+          ##Communication issues
           
-          # Diet
-          When a pregnant mother’s diet does not cover the energy needs of both mother and baby, this can lead to poor brain development. Taking folic acid supplements and eating foods rich in omega 3 can support brain development. 
+          If instructions, activities and experiences are not tailored to a child’s needs or communication level, they may become frustrated. You can use your knowledge of child development to apply suitable strategies to avoid such frustrations and reduce lost learning time.
+
+          ##Unsuitable activities and experiences
           
-          # Drinking alcohol in pregnancy
-          Current NHS guidance is for a mother to avoid alcohol while pregnant. When a pregnant mother drinks alcohol it passes through the placenta to the baby. The liver is one of the last organs to fully develop. This means a baby will struggle to process the alcohol. This results in an increased risk of misscarriage, premature birth and developmental damage. 
-          If a mother drinks while pregnant, their child may have Foetal Alcohol Spectrum Disorder (FASD). This can lead to issues for the child with:
-          - speech and communication
-          - learning and development
-          - managing their emotions
-          - developing social skills
+          If a child is not challenged by their environment, or feels a task is too difficult, they may want to avoid it and involve themselves in an alternative task. This may be unproductive or disruptive to others. You should provide a stage appropriate environment with managed risk and calculated challenge.
+
+          ##Inconsistency
           
-          # Complications during labour
-          Any complications during labour that result in prolonged periods of oxygen deprivation for the baby can result in brain injury.  Hypoxic Ischemic Encephalopathy affects around 3 in 1000 births and can result in disabilities and tragically death.
-      1-1-1-4a:
-        heading: Heading to come!
+          For effective learning to take place children need to experience consistency regarding boundaries, routines and key people. These strategies need to be deployed to meet the child’s level of communication and cognitive skills to reap maximum benefits. A child who feels secure and understood will be free to explore and learn.
+
+          Furthering your understanding of how patterns of development can influence the way children build relationships, develop their confidence and respond to strategies will help you support them by encouraging positive behaviour and promoting successful learning environments.
+
+      1-1-1-7:
+        heading: How improved child development knowledge supports outstanding practice - effective holistic support
         body: |
-          This is the body!
-      1-1-2: 
-        heading: Heading to come!
+          All areas of child development are interconnected. Improving your knowledge of child development will help you to understand how progress in one area may be impacting or supporting progress for another.
+
+          For example, for a child to actively engage in an obstacle course they will need to be able to:
+
+          - understand and remember instructions
+          - actively listen and process information
+          - understand key physical movement names
+          - develop balance, coordination and spatial awareness
+          - comprehend the importance of turn taking where the activity involves a group
+          - develop trust if the course includes challenge
+          
+          Being aware of expected milestones in all areas of development will ensure that opportunities and experiences are accessible to all children. It will also help you to identify where further support may be required in a particular area.
+
+          There are many benefits to taking a holistic approach to learning and development.
+
+          ##Encouraging curiousity
+          
+          Holistic learning encourages children to be curious as they consider concepts and topics from more than one perspective. A curious child will ask more questions, test more ideas and share their enthusiasm with others.
+
+          ##Using children's interests
+          
+          You can use a child’s interests to encourage them to engage in areas that they may otherwise avoid. For example a child may dislike number, colour and shape, but will quickly become immersed in a dinosaur hunt that requires problem solving involving the same concepts. You can combine your knowledge of the individual child and your understanding of their developmental stage to help them thrive.
+
+          Some children may not yet have developed particular interests, for example as a result of limited resources at home. You will need to ensure children can explore a wide variety of resources and experiences to support them to express their likes and dislikes.
+
+          ##Meeting all the needs of a child
+          
+          Holistic learning ensures that the physical , emotional and psychological needs of a child are considered.
+
+          <div class="govuk-inset-text">
+            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+
+            <p class="govuk-body">Think about an activity you carry out with the children in your care. </p>
+
+            <p class="govuk-body">Write down each of the areas of learning and add the skills and knowledge the activity supports in each area.</p>
+
+            <p class="govuk-body">Have any opportunities been missed?</p>
+
+            <p class="govuk-body">Can the activity be further developed to include other areas?</p>
+
+            <p class="govuk-body">How does the activity promote language and communication skills? </p>
+
+            <p class="govuk-body">How can you ensure you are prepared to differentiate to include all children? </p>
+
+          </div>
+
+      1-1-2:
+        heading: Factors affecting children’s development
         body: |
-          This is the body!
-      1-1-2-1a:
-        heading: Heading to come!
+          Children will potentially experience a range of challenges and experiences that may impact on their development. However, this should not impact on their ability to succeed. Understanding these factors will help you to develop appropriate strategies and support mechanisms to guide children to reach their full potential.
+
+          This topic includes:
+
+          - nature versus nurture
+          - the impact of the COVID-19 pandemic on:
+            - communication, language and literacy
+            - mathematics
+            - physical development
+            - knowledge and undertanding of the world
+            - personal, social and emotional development
+            - expressive arts
+          - the importance of language skills
+          - being a role model for communication
+
+      1-1-2-1:
+        heading: Nature versus nurture
         body: |
-          This is the body!
+          The long standing debate of nature versus nurture questions whether aspects of children’s development and behaviour are influenced more by biological (nature) or environmental (nurture) influences.
+
+          The debate raises questions including:
+
+          - how do we become the person we are?
+          - are we born pre programmed to develop in a certain way despite environmental influences?
+          - to what extent will our experiences and opportunities shape us?
+          
+          The children in your care will experience a broad range of influences that could potentially shape their learning and development. Some examples could include:
+
+          - adverse experiences including violence and abuse
+          - physical factors including housing conditions
+          - financial factors - determining access to resources, activities and experiences
+          - exposure and access to physical activity, adequate sleep and a healthy diet
+          - family beliefs and culture
+          - exposure to social interaction and communication
+          - specialised knowledge - for example many children will know about dinosaurs because their parents or carers have shared this with them
+          - having English as a second language
+          - medical conditions or illnesses resulting in prolonged periods of missed learning
+          - the impact of stereotypical views and discrimination
+          - the impact of the coronavirus (COVID-19) pandemic
+          
+          Your role is to ensure that any potential influences don’t become barriers and to ensure that every child has access to all learning and development opportunities.
+
+          A robust understanding of children’s expected development will further support you to ensure that the choices you make as a practitioner and the quality of the environment that children experience will support children to progress and succeed.
+
       1-1-2-2:
-        heading: Heading to come!
+        heading: The impact of the COVID-19 pandemic
         body: |
-          This is the body!
-      1-1-2-3a:
-        heading: Heading to come!
+          Every child’s experience of the COVID-19 pandemic will have been different. It is likely that different areas of a child’s development may have been impacted positively or negatively during this time.
+
+          You will also need to consider how characteristics of a child’s environment may have further magnified this impact. For example, some children will have had limited access to technology, books, outdoor space and a varied diet.
+
+      1-1-2-3:
+        heading: The impact of the COVID-19 pandemic on communication, language and literacy
         body: |
-          This is the body!
-      1-1-3:
-        heading: Heading to come!
+          ##Positive impact
+          
+          During the COVID-19 pandemic, some children may have spent extended periods with their parents and carers. They may have read more, had more conversations and increased their vocabulary through new hobbies.
+
+          ##Negative impact
+          
+          Some children may not have had access to books or regular involvement in conversations, singing or opportunities to read. They may have had a smaller variety of social interactions and so less chances to learn and use new vocabulary.
+
+          Some children may have spent extended periods experiencing inappropriate behaviour, such as inappropriate language from older siblings. They may now have difficulty improving their behaviour and understanding why they need to do so.
+
+      1-1-2-4:
+        heading: The impact of the COVID-19 pandemic on mathematics
         body: |
-          This is the body!
-      1-1-3-1a:
-        heading: Heading to come!
+          ##Positive impact
+          
+          Some children with access to technology may have played with number related apps and games. They may also have been involved in practical activities such as cookery requiring them to weigh and measure.
+
+          Children may have had access to toys, games and jigsaws that require problem solving and matching. They may have explored mathematical concepts such as time, shape and distance through interactions with their parents or carers.
+
+          ##Negative impact
+          
+          Some children may not have had access to toys, games or learning experiences that supported their mathematical understanding. A lack of social interaction may have resulted in limited opportunities to explore mathematical concepts such as time, shape and distance.
+
+          Some parents may have a limited understanding of how to support their child with maths and what their child should be learning. They may have avoided this subject and focused on other activities.
+
+      1-1-2-5:
+        heading: The impact of the COVID-19 pandemic on physical development
         body: |
-          This is the body!
-      1-1-3-2a:
-        heading: Heading to come!
+          ##Positive impact
+          
+          Some children with access to outside space and opportunities to go out may have spent more of their day outside. They may have explored more or learned a new skill such as riding a bike or scooter.
+
+          If children have older siblings they may have spent a lot of time doing challenging physical activities where they copied their siblings’ behaviour. They may have developed skills they otherwise might not have been exposed to.
+
+          ##Negative impact
+          
+          Some children may have had restricted access or opportunity for physical activity and outdoor space. This may have resulted in reduced movement. Children who have been able to take extended naps and periods of rest may now lack the stamina needed to complete a day in a chilcare setting.
+
+          Where parents have worked from home, children may have spent more time watching TV or playing on tablets or games consoles to maintain their interest. This will have resulted in prolonged periods of inactivity.
+
+      1-1-2-6:
+        heading: The impact of the COVID-19 pandemic on knowledge and understanding of the world
         body: |
-          This is the body!
-      1-1-3-3:
-        heading: Heading to come!
+          ##Positive impact
+
+          Some children with access to technology, books and adult interaction may have benefitted from extended periods of online exploration and discussion. They may have had opportunities to get involved in family projects such as growing vegetables or learning about fixing household items.
+
+          ##Negative impact
+          
+          Some children may have had limited opportunities to participate in day trips and travel, and so less chance to experience new environments. They may have spent longer periods of time staying inside their home, possibly with use of a garden.
+
+      1-1-2-7:
+        heading: The impact of the COVID-19 pandemic on personal, social and emotional development
         body: |
-          This is the body!
-      1-1-3-4a:
-        heading: Heading to come!
+          ##Positive impact
+          
+          Some children may have become more resilient regarding how to maintain communication with others, how to support those around them and how to manage uncertainty. Some children who have had the freedom to explore existing interests and knowledge, with limited or no expectation of outcome, may now have increased imagination.
+
+          Some children who have had opportunity to express and discuss their feelings associated with the pandemic may now have emotional maturity.
+
+          Some children who have spent more time with parents, carers and older siblings may have benefited from increased reinforcement of positive behaviours, rules and routines modelled to them, for example appropriate table manners.
+
+          ##Negative impact
+          
+          Limited opportunities to interact with others, particularly those unfamiliar to children, may have impacted on children’s confidence. Children may now have increased anxieties and concerns surrounding cleanliness, illness and safety, resulting in difficulties engaging and concentrating. They may have experienced an increase in stressful situations such as financial difficulties.
+
+          Staying at home means children may have lost opportunities to experience social etiquette, for example in restaurants. They may also have had limited opportunities to learn, rehearse and develop social skills such as turn taking and sharing.
+
+      1-1-2-8:
+        heading: The impact of the COVID-19 pandemic on expressive arts
         body: |
-          This is the body!
-      1-1-3-4b:
-        heading: Heading to come!
+          ##Positive impact
+
+          Some children with increased exposure to technology will have developed new skills. Children with access to the outdoors, creative materials and imaginary play will have used their imagination and creativity.
+
+          Children may have had increased opportunities to listen to music, sing, dance or participate in other creative activities with parents and carers or siblings. As a result they may have developed new skills.
+
+          ##Negative impact
+          
+          Some children will have had limited exposure to dance, music and art. Children with limited or no access to creative materials, role play items or musical activity may have limited skills and development in these areas.
+
+      1-1-2-9:
+        heading: The importance of language skills
         body: |
-          This is the body!
-      1-1-3-5a:
-        heading: Heading to come!
+          As one of the 3 prime areas of the EYFS, communication and language development provides the essential foundations for all areas of learning.
+
+          If a child is not currently at the expected level of communication development, but is expected to participate at that level, the consequences will be seen across all areas of development.
+
+          Throughout all the modules within this course you will continually consider how a child’s ability to understand information, express themselves and communicate their needs will impact on their overall holistic development and interactions.
+
+          You must remember that communication is not just verbal. Children will also be supported and influenced by non verbal communication including eye contact, facial expressions, body language, gestures and written forms of communication.
+
+          Effective communication skills will support children to:
+
+          - create and maintain relationships
+          - feel valued and important
+          - express their individual needs and preferences
+          - increase resilience and self efficacy
+          - manage their behaviour
+          
+          Research demonstrates proven links between positive early childhood language experiences and outcomes in later life.
+
+          You can support children’s communication and language skills in a number of ways including:
+
+          - creating a language rich environment
+          - modelling positive behaviour
+          - providing learning opportunities
+
+          ##Language rich environments
+          
+          A successful language rich environment will provide children with opportunities to hear language, see language and test their language skills without fear.
+
+          Examples of successful language rich environments include opportunities to:
+
+          - be quiet and process information, for example by reading alone or carrying out individual tasks
+          - read and comprehend, using labelled display boards and resources, story corners, activity instructions or cookery recipes
+          - interact, talk, or read books with others
+          - engage in imaginative play, like role play
+          - be musical, including listening to music and singing
+          
+          Your knowledge of children’s language and communication development will help you provide an environment that contains experiences, resources and activities that can challenge every child.
+
+          <div class="govuk-inset-text">
+            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+
+            <p class="govuk-body">When was the last time you were able to evaluate your environment and curriculum? </p>
+            <p class="govuk-body">Do you know which areas are most used?  </p>
+            <p class="govuk-body">Are there areas the children do not use?  </p>
+            <p class="govuk-body">Does the environment strike the right balance between social interaction and quiet areas? </p>
+            <p class="govuk-body">How do practitioners in your setting make sure children hear and experience a range of conversation, including new and repeated vocabulary? </p>
+            <p class="govuk-body">How do you create opportunities to extend children's language?</p>
+            <p class="govuk-body">Are children who need help developing their communication skills receiving targeted, adult led interactions to help them develop their language? </p>
+            <p class="govuk-body">What could you do differently?  </p>
+
+          </div>
+
+      1-1-2-10:
+        heading: Being a role model for communication
         body: |
-          This is the body!
-      1-2:
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-1: 
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-1-1a:
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-1-2:
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-2-3a:
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-3-4: 
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-2-5a:
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-2-6:
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-2-7:
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-2: 
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-2-1a:
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-2-2:
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-2-3:
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-2-4a:
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-2-5a:
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-2-6:
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-2-7a:
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-2-8:
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-3: 
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-3-1a:
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-3-2a:
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-3-3:
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-3-4a:
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-3-5:
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-3-6a:
-        heading: Heading to come!
-        body: |
-          This is the body!
-      1-2-3-7:
-        heading: Heading to come!
-        body: |
-          This is the body!
+          ##Being a positive role model
+          
+          As a practitioner you join other influential adults in the child’s life as an important and essential role model for communication. The environment you provide and the language you model will be reflected in the skills that children develop.
+
+          You can help children to develop secure attachments with you. This means they will have trust and confidence in you, allowing you to be an effective role model. The brain development module explores the role of attachment in further detail.
+
+          Your actions will be a continuous and important source of influence. Children will observe:
+
+          - how you interact with others
+          - how characters interact with each other in the stories you read to them
+          
+          Children will copy these interactions as they develop and test their own communication. This also impacts on the child’s social skills. For example, if a child observes a positive interaction between yourself and their parent they may mimic the interaction they have observed.
+
+          Ensuring children have opportunities to speak and feel that they are being heard will impact on children’s confidence, self-esteem and self-worth. Use active listening to help children feel that they are being heard.
+
+          Hearing repetitive language such as routine instruction, praise or general comments, for example “your turn, my turn”, will provide increased opportunities for children to learn, rehearse and develop their communication skills.
+
+          It is essential that you are using the correct names and words for items and actions, using correct pronunciation and avoiding the use of slang or abbreviations as children will easily become confused or frustrated if they do not understand.
+
+          Promoting positive handling and use of resources such as books and including them in the daily routine will help children to understand their importance and encourage further independent exploration.
+
+          <div class="govuk-inset-text">
+            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+
+            <p class="govuk-body">A child’s day is full of opportunities to develop their vocabulary and test their communication skills. Thinking about your recent practice, let’s consider the following. </p>
+            <p class="govuk-body">How many spontaneous opportunities did you use to communicate with the children in your care?  </p>
+            <p class="govuk-body">What planned activities did you use to support and extend children's language?</p>
+            <p class="govuk-body">Did the children know the colours of the beakers at the snack table? </p>
+            <p class="govuk-body">What was the conversation during hygiene routines? </p>
+            <p class="govuk-body">What new information did you learn about the children in your care?   </p>
+
+          </div>
+
+          The communication and language module of this training (coming soon) will consider the stages of development, the practitioner’s role and effective practice in further detail.
+
+          $I
+          here is something in a dollar I
+          
+          and another one
+          $I
+
       1-recap:
         heading: This is the recap page 
         body: |
