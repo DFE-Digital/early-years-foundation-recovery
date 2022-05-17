@@ -13,5 +13,7 @@ frontend:
 - app/assets/stylesheets/*
 - app/javascript/*.js
 
-deployed:
-- ui/**/*
+# Disabled as otherwise manually added labels are removed if they do not match.
+#
+# deployed:
+# - ui/**/*
