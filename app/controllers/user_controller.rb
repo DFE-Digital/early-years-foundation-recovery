@@ -28,7 +28,7 @@ class UserController < ApplicationController
 
   def update
     if user.update(user_params)
-      redirect_to user_path, notice: 'Your have saved your details'
+      redirect_to user_path, notice: 'You have saved your details'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -46,7 +46,7 @@ class UserController < ApplicationController
 
   def update_email
     if user.update(user_params)
-      redirect_to user_path, notice: 'Your have saved your details'
+      redirect_to user_path, notice: 'You have saved your details'
     else
       render :edit_email, status: :unprocessable_entity
     end
@@ -54,7 +54,7 @@ class UserController < ApplicationController
 
   def update_postcode
     if user.update(user_params)
-      redirect_to user_path, notice: 'Your have saved your details'
+      redirect_to user_path, notice: 'You have saved your details'
     else
       render :edit_postcode, status: :unprocessable_entity
     end
@@ -62,7 +62,7 @@ class UserController < ApplicationController
 
   def update_ofsted_number
     if user.update(user_params)
-      redirect_to user_path, notice: 'Your have saved your details'
+      redirect_to user_path, notice: 'You have saved your details'
     else
       render :edit_ofsted_number, status: :unprocessable_entity
     end

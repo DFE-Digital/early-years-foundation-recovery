@@ -15,6 +15,7 @@ en:
               blank: Enter your setting's postcode.
             email:
               blank: Enter an email address.
+              invalid: This email address is invalid.
             password:
               blank: Enter a password.
               too_short: Password is too short.
@@ -36,6 +37,7 @@ en:
               blank: Enter your setting's postcode.
             email:
               blank: Enter an email address.
+              invalid: This email address is invalid.
             password:
               blank: Enter a password.
               too_short: Password is too short.

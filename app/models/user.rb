@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :visits, class_name: 'Ahoy::Visit'
   has_many :events, class_name: 'Ahoy::Event'
 
-  validates_with OfstedValidator
+  validates :ofsted_number, ofsted_number: true
 
   def name
     [first_name, last_name].compact.join(' ')

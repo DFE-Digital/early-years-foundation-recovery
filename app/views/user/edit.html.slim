@@ -6,4 +6,4 @@
         - [:first_name, :last_name].each do |field|
           = form.govuk_text_field field, label: { text: t(field) }
         = form.govuk_submit 'Save'
-        p= link_to 'Cancel', profile_path
+        p= link_to 'Cancel', my_account_path

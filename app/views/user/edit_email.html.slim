@@ -1,6 +1,6 @@
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
-    = form_for @user do |form|
+    = form_for @user, url: update_email_user_path(@user) do |form|
       = form.govuk_error_summary
       = form.govuk_fieldset legend: { text: 'Change email address' } do
         = form.govuk_email_field :email, autofocus: true, autocomplete: "email", label: { text: t(:email) }
@@ -8,4 +8,4 @@
         | Currently waiting confirmation for: 
         = @user.unconfirmed_email
       p= form.govuk_submit 'Save'
-      p= link_to 'Cancel', profile_path
+      p= link_to 'Cancel', my_account_path

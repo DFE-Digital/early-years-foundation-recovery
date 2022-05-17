@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get '/500', to: 'errors#internal_server_error', via: :all
   get 'users/timeout', to: 'errors#timeout'
   get 'health', to: 'home#show'
-  get 'profile', to: 'user#show'
+  get 'my_account', to: 'user#show'
 
   resources :settings, only: %i[show]
 

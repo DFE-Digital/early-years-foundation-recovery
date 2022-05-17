@@ -1,4 +1,4 @@
-class OfstedValidator < ActiveModel::Validator
+class OfstedNumberValidator < ActiveModel::Validator
   def validate(record)
     return if record.ofsted_number.nil?
 
