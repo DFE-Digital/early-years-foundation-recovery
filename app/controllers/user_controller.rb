@@ -1,5 +1,6 @@
 class UserController < ApplicationController
-  before_action :authenticate_registered_user!, except: %i[check_email_confirmation check_email_password_reset]
+  before_action :authenticate_registered_user!,
+                except: %i[check_email_confirmation check_email_password_reset]
 
   def show
     user
