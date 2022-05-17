@@ -11,6 +11,14 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'users/sessions', passwords: 'passwords' }
   resources :extra_registrations, only: %i[index edit update]
   resource :user, only: %i[show edit update], controller: :user do
+    get 'edit_email'
+    get 'edit_ofsted_number'
+    get 'edit_password'
+    get 'edit_postcode'
+    patch 'update_email'
+    patch 'update_ofsted_number'
+    patch 'update_password'
+    patch 'update_postcode'
     get 'check_email_confirmation'
     get 'check_email_password_reset'
   end

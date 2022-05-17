@@ -1,24 +1,27 @@
-h1 Your Profile
-dl
-  dt First name
-  dd= @user.first_name
-
-  dt Last name
-  dd= @user.last_name
-
-  dt Email address
-  dd= @user.email
-
-  dt Postcode
-  dd= @user.postcode
-
-  dt Ofsted Number
-  dd= @user.ofsted_number
-
-p= link_to "Edit", edit_user_path
-
-h2 Events
-= render @user.events
-
-h2 Visits
-= render @user.visits
+.govuk-grid-row 
+  .govuk-grid-column-full
+    h1.govuk-heading-l Manage your account
+    h2.govuk-heading-m Your details
+    = govuk_summary_list do |your_details|
+      - your_details.row do |row|
+        - row.key { t(:name, scope: :my_account) }
+        - row.value { @user.name }
+        - row.action(text: "Change", href: edit_user_path, visually_hidden_text: 'name')
+      - your_details.row do |row|
+        - row.key { t(:email, scope: :my_account) }
+        - row.value { @user.email }
+        - row.action(text: t(:change), href: edit_email_user_path, visually_hidden_text: 'email')
+      - your_details.row do |row|
+        - row.key { t(:password, scope: :my_account) }
+        - row.value { t(:password_last_changed, password_last_changed: @user.password_last_changed, scope: :my_account) }
+        - row.action(text: t(:change), href: edit_password_user_path, visually_hidden_text: 'password')
+    h2.govuk-heading-m About your setting
+    = govuk_summary_list do |setting|
+      - setting.row do |row|
+        - row.key { t(:postcode, scope: :my_account) }
+        - row.value { @user.postcode }
+        - row.action(text: t(:change), href: edit_postcode_user_path, visually_hidden_text: 'postcode')
+      - setting.row do |row|
+        - row.key { t(:ofsted_number, scope: :my_account) }
+        - row.value { @user.ofsted_number }
+        - row.action(text: t(:change), href: edit_ofsted_number_user_path, visually_hidden_text: 'ofsted_number')

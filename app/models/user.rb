@@ -17,4 +17,12 @@ class User < ApplicationRecord
   def email_to_confirm
     pending_reconfirmation? ? unconfirmed_email : email
   end
+
+  def password_last_changed
+    self.password_changed_events&.time&.to_date&.to_formatted_s(:rfc822)
+  end
+
+  def password_changed_events
+    self.events.where(name: "password_changed")&.last
+  end
 end
