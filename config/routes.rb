@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/500', to: 'errors#internal_server_error', via: :all
   get 'users/timeout', to: 'errors#timeout'
   get 'health', to: 'home#show'
+  get 'profile', to: 'user#show'
 
   devise_for :users, controllers: { sessions: 'users/sessions', passwords: 'passwords' }
   resources :extra_registrations, only: %i[index edit update]
