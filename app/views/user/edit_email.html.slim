@@ -4,8 +4,8 @@
       = form.govuk_error_summary
       = form.govuk_fieldset legend: { text: 'Change email address' } do
         = form.govuk_email_field :email, autofocus: true, autocomplete: "email", label: { text: t(:email) }
-      - if @user.pending_reconfirmation?
-        | Currently waiting confirmation for: 
+        - if @user.pending_reconfirmation?
+          | Currently waiting confirmation for: 
         = @user.unconfirmed_email
-      p= form.govuk_submit "Save"
-      p= link_to "Cancel", url_for(@user)
+        p= form.govuk_submit "Save"
+        p= link_to "Cancel", url_for(@user)

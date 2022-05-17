@@ -19,10 +19,10 @@ class User < ApplicationRecord
   end
 
   def password_last_changed
-    self.password_changed_events&.time&.to_date&.to_formatted_s(:rfc822)
+    password_changed_events&.time&.to_date&.to_formatted_s(:rfc822)
   end
 
   def password_changed_events
-    self.events.where(name: "password_changed")&.last
+    events.where(name: 'password_changed')&.last
   end
 end

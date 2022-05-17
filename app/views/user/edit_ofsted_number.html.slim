@@ -5,5 +5,5 @@
       = form.govuk_error_summary
       = form.govuk_fieldset legend: { text: 'Edit your ofsted number' } do
         = form.govuk_text_field :ofsted_number, label: { text: t(:ofsted_number) }
-        = form.govuk_submit "Save"
+        p= form.govuk_submit "Save"
         p= link_to "Cancel", url_for(@user)

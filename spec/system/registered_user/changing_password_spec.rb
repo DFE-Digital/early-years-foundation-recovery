@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Registered user changing password', type: :system do
   let(:user) { create :user, :registered }
-  
+
   before do
     visit '/users/sign_in'
     fill_in 'Email address', with: user.email
