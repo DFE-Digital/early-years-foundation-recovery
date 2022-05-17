@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :events, class_name: 'Ahoy::Event'
 
   validates_with OfstedValidator
-  validates :first_name, :last_name, presence: true
+  validates :first_name, :last_name, presence: true, if: Proc.new {|u| u.registration_complete }
 
   def name
     [first_name, last_name].compact.join(' ')

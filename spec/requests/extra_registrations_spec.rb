@@ -52,6 +52,8 @@ RSpec.describe 'ExtraRegistrations', type: :request do
       let(:step) { :setting }
       let(:user_params) do
         {
+          first_name: Faker::Name.first_name,
+          last_name: Faker::Name.last_name,
           postcode: Faker::Address.postcode,
         }
       end

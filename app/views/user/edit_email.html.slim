@@ -1,6 +1,6 @@
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
-    = form_for @user do |form|
+    = form_for @user, url: { action: "update_email" } do |form|
       = form.govuk_error_summary
       = form.govuk_fieldset legend: { text: 'Change email address' } do
         = form.govuk_email_field :email, autofocus: true, autocomplete: "email", label: { text: t(:email) }
