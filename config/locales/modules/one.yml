@@ -93,7 +93,12 @@ en:
         body: In this submodule we'll discuss some stuff
       1-1-1:  # http://localhost:3000/modules/one/content_pages/1-1-1
         heading: Stuff is cool
-        body: Oh yes!
+        body: | # type=text_page
+          ## subheading
+
+          ^Govspeak Callout Test^
+
+          Oh yes!
       1-1-2:  # # http://localhost:3000/modules/one/content_pages/1-1-2
         heading: Stuff everywhere
         body: It's all around us
