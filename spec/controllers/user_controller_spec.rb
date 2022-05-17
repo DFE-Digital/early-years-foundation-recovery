@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe UserController, type: :controller do
-  describe 'update_password' do
+  describe '#update_password' do
     let(:user) { create :user, :registered }
 
     before do
       sign_in user
     end
 
-    context 'successful' do
+    context 'when successful' do
       it 'redirects' do
         post :update_password, params: {
           user: {
@@ -32,7 +32,7 @@ RSpec.describe UserController, type: :controller do
       end
     end
 
-    context 'fails' do
+    context 'when unsuccesful' do
       it 'renders edit' do
         post :update_password, params: {
           user: {

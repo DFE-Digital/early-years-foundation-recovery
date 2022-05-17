@@ -404,6 +404,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    uk_postcode (2.1.7)
     unicode-display_width (2.1.0)
     unicorn (6.1.0)
       kgio (~> 2.6)
@@ -484,6 +485,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
+  uk_postcode
   web-console
   yard-junk
 

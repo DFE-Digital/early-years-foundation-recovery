@@ -6,7 +6,7 @@ class UserController < ApplicationController
     user
   end
 
-  def edit
+  def edit_name
     user
   end
 
@@ -26,11 +26,11 @@ class UserController < ApplicationController
     user
   end
 
-  def update
+  def update_name
     if user.update(user_params)
       redirect_to user_path, notice: 'You have saved your details'
     else
-      render :edit, status: :unprocessable_entity
+      render :edit_name, status: :unprocessable_entity
     end
   end
 

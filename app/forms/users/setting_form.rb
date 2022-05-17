@@ -3,7 +3,7 @@ module Users
     attr_accessor :postcode, :ofsted_number
 
     validates :ofsted_number, ofsted_number: true
-    validates :postcode, presence: true
+    validates :postcode, postcode: true
 
     def save
       user.update!(postcode: postcode, ofsted_number: ofsted_number) if valid?

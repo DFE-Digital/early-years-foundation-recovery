@@ -5,17 +5,19 @@ Rails.application.routes.draw do
   get '/500', to: 'errors#internal_server_error', via: :all
   get 'users/timeout', to: 'errors#timeout'
   get 'health', to: 'home#show'
-  get 'my_account', to: 'user#show'
 
   resources :settings, only: %i[show]
 
   devise_for :users, controllers: { sessions: 'users/sessions', passwords: 'passwords' }
   resources :extra_registrations, only: %i[index edit update]
-  resource :user, only: %i[show edit update], controller: :user do
+
+  resource :user, controller: :user, only: %i[show] do
+    get 'edit_name'
     get 'edit_email'
     get 'edit_ofsted_number'
     get 'edit_password'
     get 'edit_postcode'
+    patch 'update_name'
     patch 'update_email'
     patch 'update_ofsted_number'
     patch 'update_password'

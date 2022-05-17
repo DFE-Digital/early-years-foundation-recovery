@@ -3,6 +3,7 @@
     = form_for @user, url: { action: 'update_postcode' } do |form|
       = form.govuk_error_summary
       = form.govuk_fieldset legend: { text: 'Edit your postcode' } do
-        = form.govuk_text_field :postcode, label: { text: t(:postcode) }
-        p= form.govuk_submit 'Save'
-        p= link_to 'Cancel', my_account_path
+        = form.govuk_text_field :postcode, autofocus: true, label: { text: t(:postcode) }
+        = form.govuk_submit 'Save'
+
+        p= link_to 'Cancel', user_path

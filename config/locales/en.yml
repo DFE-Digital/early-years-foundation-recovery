@@ -34,7 +34,7 @@ en:
             last_name:
               blank: Enter a surname.
             postcode:
-              blank: Enter your setting's postcode.
+              invalid: Enter your setting's postcode.
             email:
               blank: Enter an email address.
               invalid: This email address is invalid.
@@ -43,7 +43,11 @@ en:
               too_short: Password is too short.
             password_confirmation:
               confirmation: Confirmation doesn't match password.
-  phase_banner_html: "This is a new service, your %{feedback_link} will help us improve it."
+            ofsted_number:
+              invalid: This Ofsted number is not recognised.
+  phase_banner_html: This is a new service, your %{feedback_link} will help us improve it.
+  links:
+    change: Change
   banners:
     alert: Warning
     error: Error

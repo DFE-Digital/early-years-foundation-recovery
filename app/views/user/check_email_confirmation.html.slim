@@ -13,7 +13,7 @@
 
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
-    = govuk_details(summary_text: "Need us to resend the email?") do
+    = govuk_details(summary_text: 'Need us to resend the email?') do
       = govuk_link_to "I haven't received the email", new_confirmation_path(@user)
       br/
-      = govuk_link_to "I don't have access to the email address I entered", "#"
+      = govuk_link_to "I don't have access to the email address I entered", '#'

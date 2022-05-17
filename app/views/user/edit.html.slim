@@ -1,9 +1,0 @@
-.govuk-grid-row
-  .govuk-grid-column-two-thirds-from-desktop
-    = form_for @user do |form|
-      = form.govuk_error_summary
-      = form.govuk_fieldset legend: { text: 'Edit about you' } do
-        - %i[first_name last_name].each do |field|
-          = form.govuk_text_field field, label: { text: t(field) }
-        = form.govuk_submit 'Save'
-        p= link_to 'Cancel', my_account_path
