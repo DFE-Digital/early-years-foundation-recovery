@@ -11,7 +11,7 @@ class UserController < ApplicationController
   end
 
   def edit_password
-    user 
+    user
   end
 
   def edit_postcode
@@ -36,7 +36,7 @@ class UserController < ApplicationController
 
   def update_password
     if user.update_with_password(user_password_params)
-      ahoy.track("password_changed")
+      ahoy.track('password_changed')
       bypass_sign_in(user)
       redirect_to user, notice: 'Your password has been reset'
     else
@@ -83,7 +83,7 @@ private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :postcode, :ofsted_number, :email)
   end
-  
+
   def user_password_params
     params.require(:user).permit(:current_password, :password, :password_confirmation)
   end

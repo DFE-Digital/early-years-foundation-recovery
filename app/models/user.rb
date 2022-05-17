@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :events, class_name: 'Ahoy::Event'
 
   validates :ofsted_number, ofsted_number: true
+  validates :first_name, :last_name, presence: true, if: proc { |u| u.registration_complete }
 
   def name
     [first_name, last_name].compact.join(' ')
@@ -19,10 +20,10 @@ class User < ApplicationRecord
   end
 
   def password_last_changed
-    self.password_changed_events&.time&.to_date&.to_formatted_s(:rfc822)
+    password_changed_events&.time&.to_date&.to_formatted_s(:rfc822)
   end
 
   def password_changed_events
-    self.events.where(name: "password_changed")&.last
+    events.where(name: 'password_changed')&.last
   end
 end
