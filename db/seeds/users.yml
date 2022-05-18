@@ -15,5 +15,7 @@ completed@example.com:
   password: <%= ENV.fetch('USER_PASSWORD', 'password') %>
   registration_complete: true
   confirmed_at: <%= 1.minute.ago %>
-  first_name: Demo
-  last_name: User
+  first_name: Demo      # mandatory
+  last_name: User       # mandatory
+  postcode: M1 2WD      # mandatory
+  # ofsted_number:      # optional
