@@ -1,45 +1,33 @@
 require 'rails_helper'
 
-RSpec.describe 'Registered user changing postcode', type: :system do
+RSpec.describe 'Registered user changing name', type: :system do
   include_context 'with registered user'
 
-  let(:postcode) { user.postcode }
-
   before do
-    visit '/user/edit_postcode'
-    fill_in "Setting's postcode", with: postcode
+    visit '/user/edit_name'
   end
 
   context 'when valid' do
-    let(:postcode) { 'wd180dn' }
-
-    it 'updates postcode' do
+    it 'updates name' do
+      fill_in 'First name', with: 'Foo'
+      fill_in 'Surname', with: 'Bar'
       click_button 'Save'
 
       expect(page).to have_current_path '/user'
       expect(page).to have_text('Manage your account')
         .and have_text('You have saved your details')
-        .and have_text('WD18 0DN')
-    end
-  end
-
-  context 'when invalid' do
-    let(:postcode) { 'foo' }
-
-    it 'renders an error message' do
-      click_button 'Save'
-
-      expect(page).to have_text "Enter your setting's postcode."
+        .and have_text('Foo Bar')
     end
   end
 
   context 'when empty' do
-    let(:postcode) { '' }
-
     it 'renders an error message' do
+      fill_in 'First name', with: ''
+      fill_in 'Surname', with: ''
       click_button 'Save'
 
-      expect(page).to have_text "can't be blank"
+      expect(page).to have_text 'Enter a first name.'
+      expect(page).to have_text 'Enter a surname.'
     end
   end
 

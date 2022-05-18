@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Registered user changing Ofsted number', type: :system do
-  include_context 'with registered user'
-
   subject(:user) { create :user, :registered, ofsted_number: '12345678' }
+
+  include_context 'with registered user'
 
   let(:ofsted_number) { user.ofsted_number }
 
@@ -19,8 +19,8 @@ RSpec.describe 'Registered user changing Ofsted number', type: :system do
       click_button 'Save'
 
       expect(page).to have_current_path '/user'
-      expect(page).to have_text('Manage your account')      # page heading
-        .and have_text('You have saved your details')       # flash message
+      expect(page).to have_text('Manage your account')
+        .and have_text('You have saved your details')
         .and have_text('VC123456')
     end
   end
