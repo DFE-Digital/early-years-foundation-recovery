@@ -91,5 +91,18 @@ variable "postgres_create_timeout" {
 variable "postgres_service_plan" {
   type        = string
   description = "$ cf marketplace -e postgres"
-  default     = "tiny-unencrypted-11"
+  default     = "tiny-unencrypted-13"
+}
+
+# "{\"enable_extensions\": [\"pgcrypto\", \"fuzzystrmatch\", \"plpgsql\"]}"
+variable "postgres_json_params" {
+  description = "Postgres JSON params"
+  default = {
+    enable_extensions = [
+      "pgcrypto",
+      "fuzzystrmatch",
+      "plpgsql",
+    ]
+  }
+  type = map(any)
 }
