@@ -71,8 +71,8 @@ en:
       submit: Complete
   email: Email address
   my_account:
-    password_last_changed: "Password last changed on %{password_last_changed}"
+    password_last_changed: Password last changed on %{password_last_changed}
   first_name: First name
   last_name: Surname
-  postcode: Settings postcode
+  postcode: Setting's postcode
   ofsted_number: Ofsted number
