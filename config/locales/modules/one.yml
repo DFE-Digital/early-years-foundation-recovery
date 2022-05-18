@@ -113,3 +113,224 @@ en:
       1-2-3:
         heading: How to avoid the stuff haters
         body: Hide behind stuff
+
+      1-3:
+        heading: A test module-intro page
+        body: |
+          #Here is an H1 title
+
+          Learn more about markdown as part of the early years foundation stage (EYFS) including all the different types of markdown we use on the help for early years providers website
+
+          ##Why markdown is important
+
+          Understanding markdown is critical to being able to use the CMS. Markdown users feel a range of user needs, but cannot express them unless they know how to format them in markdown. Being able to use **bold text** may help.
+
+          With poor markdown skills, it could be harder for CMS users to create:
+
+          - bullet points
+          - more bullet points
+          - even more bullet points
+
+          It may be even more difficult for them to create:
+
+          1 numbered lists
+          2 like
+          3 this
+
+          ##Video with an H2 title
+
+          In this video, a markdown expert explains the importance of markdown. There are also some tips on how to support content editors in this area.
+
+
+          $YoutubeVideo[OPTIONAL TITLE](https://www.youtube.com/watch?v=U0W2aejgBaU&list=PL7914115EB65911A5&index=1)$EndYoutubeVideo
+
+          ##Suggested activities
+
+          ###Putting pictures in markdown
+
+            ![Laminated faces showing different emotions
+            ](https://eyfs-cms-preprod.london.cloudapps.digital/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBNZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--f66cb1eb99e938e8c4cdebd55edb0d606c9a2917/psed_emotions_activity1.jpg "Laminated faces showing different emotions")
+
+          You’ll need:
+
+          - a way to write markdown
+          - a CMS
+
+          CMS users can learn how best to express their emotions [(using inline links)](/understanding-the-world), and define what each emotion means for them [(sense of self)](/personal-social-and-emotional-development/sense-of-self). 
+
+          ##Other activities
+
+          [Using external links](https://www.bbc.co.uk/cbeebies/joinin/talking-to-your-child-about-emotions)
+
+          [Using more external links](https://www.bbc.co.uk/teach/class-clips-video/pshe-early-years-foundation-stage-ks1-feeling-better/zm2st39): short videos about different feelings, using puppets.
+
+          ##Quotes using information callouts
+
+          ^“Markdown users can use information callouts, which lets them share their thoughts and feelings with confidence. They are encouraged to build on emotional knowledge - receiving time, attention and comfort by caregivers, and feeling heard.”^
+
+          Hannah, Daisychain Nursery, Clifton.
+
+          ##Some markdown formats that we use less frequently
+
+          %This is a warning callout%
+
+          $E
+          **Example**: Open the pod bay doors
+          $E
+
+          @This is a very important message or warning@
+
+          $I
+          This is information
+          $I
+          
+          $CTA
+          This is a call to action
+          $CTA
+
+      1-3-1:
+        heading: A test sub module intro page
+        body: |
+          #Here is an H1 title
+
+          Learn more about markdown as part of the early years foundation stage (EYFS) including all the different types of markdown we use on the help for early years providers website
+
+          ##Why markdown is important
+
+          Understanding markdown is critical to being able to use the CMS. Markdown users feel a range of user needs, but cannot express them unless they know how to format them in markdown. Being able to use **bold text** may help.
+
+          With poor markdown skills, it could be harder for CMS users to create:
+
+          - bullet points
+          - more bullet points
+          - even more bullet points
+
+          It may be even more difficult for them to create:
+
+          1 numbered lists
+          2 like
+          3 this
+
+          ##Video with an H2 title
+
+          In this video, a markdown expert explains the importance of markdown. There are also some tips on how to support content editors in this area.
+
+
+          $YoutubeVideo[OPTIONAL TITLE](https://www.youtube.com/watch?v=U0W2aejgBaU&list=PL7914115EB65911A5&index=1)$EndYoutubeVideo
+
+          ##Suggested activities
+
+          ###Putting pictures in markdown
+
+            ![Laminated faces showing different emotions
+            ](https://eyfs-cms-preprod.london.cloudapps.digital/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBNZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--f66cb1eb99e938e8c4cdebd55edb0d606c9a2917/psed_emotions_activity1.jpg "Laminated faces showing different emotions")
+
+          You’ll need:
+
+          - a way to write markdown
+          - a CMS
+
+          CMS users can learn how best to express their emotions [(using inline links)](/understanding-the-world), and define what each emotion means for them [(sense of self)](/personal-social-and-emotional-development/sense-of-self). 
+
+          ##Other activities
+
+          [Using external links](https://www.bbc.co.uk/cbeebies/joinin/talking-to-your-child-about-emotions)
+
+          [Using more external links](https://www.bbc.co.uk/teach/class-clips-video/pshe-early-years-foundation-stage-ks1-feeling-better/zm2st39): short videos about different feelings, using puppets.
+
+          ##Quotes using information callouts
+
+          ^“Markdown users can use information callouts, which lets them share their thoughts and feelings with confidence. They are encouraged to build on emotional knowledge - receiving time, attention and comfort by caregivers, and feeling heard.”^
+
+          Hannah, Daisychain Nursery, Clifton.
+
+          ##Some markdown formats that we use less frequently
+
+          %This is a warning callout%
+
+          $E
+          **Example**: Open the pod bay doors
+          $E
+
+          @This is a very important message or warning@
+
+          $I
+          This is information
+          $I
+          
+          $CTA
+          This is a call to action
+          $CTA
+      1-3-2:
+        heading: A test text page page
+        body: |
+          #Here is an H1 title
+
+          Learn more about markdown as part of the early years foundation stage (EYFS) including all the different types of markdown we use on the help for early years providers website
+
+          ##Why markdown is important
+
+          Understanding markdown is critical to being able to use the CMS. Markdown users feel a range of user needs, but cannot express them unless they know how to format them in markdown. Being able to use **bold text** may help.
+
+          With poor markdown skills, it could be harder for CMS users to create:
+
+          - bullet points
+          - more bullet points
+          - even more bullet points
+
+          It may be even more difficult for them to create:
+
+          1 numbered lists
+          2 like
+          3 this
+
+          ##Video with an H2 title
+
+          In this video, a markdown expert explains the importance of markdown. There are also some tips on how to support content editors in this area.
+
+
+          $YoutubeVideo[OPTIONAL TITLE](https://www.youtube.com/watch?v=U0W2aejgBaU&list=PL7914115EB65911A5&index=1)$EndYoutubeVideo
+
+          ##Suggested activities
+
+          ###Putting pictures in markdown
+
+            ![Laminated faces showing different emotions
+            ](https://eyfs-cms-preprod.london.cloudapps.digital/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBNZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--f66cb1eb99e938e8c4cdebd55edb0d606c9a2917/psed_emotions_activity1.jpg "Laminated faces showing different emotions")
+
+          You’ll need:
+
+          - a way to write markdown
+          - a CMS
+
+          CMS users can learn how best to express their emotions [(using inline links)](/understanding-the-world), and define what each emotion means for them [(sense of self)](/personal-social-and-emotional-development/sense-of-self). 
+
+          ##Other activities
+
+          [Using external links](https://www.bbc.co.uk/cbeebies/joinin/talking-to-your-child-about-emotions)
+
+          [Using more external links](https://www.bbc.co.uk/teach/class-clips-video/pshe-early-years-foundation-stage-ks1-feeling-better/zm2st39): short videos about different feelings, using puppets.
+
+          ##Quotes using information callouts
+
+          ^“Markdown users can use information callouts, which lets them share their thoughts and feelings with confidence. They are encouraged to build on emotional knowledge - receiving time, attention and comfort by caregivers, and feeling heard.”^
+
+          Hannah, Daisychain Nursery, Clifton.
+
+          ##Some markdown formats that we use less frequently
+
+          %This is a warning callout%
+
+          $E
+          **Example**: Open the pod bay doors
+          $E
+
+          @This is a very important message or warning@
+
+          $I
+          This is information
+          $I
+          
+          $CTA
+          This is a call to action
+          $CTA
