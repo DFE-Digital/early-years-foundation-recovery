@@ -35,7 +35,10 @@ class UserController < ApplicationController
     end
   end
 
+  # @see config/initializers/devise.rb
   def update_password
+    @minimum_password_length = User.password_length.first
+
     if user.update_with_password(user_password_params)
       ahoy.track('password_changed')
       bypass_sign_in(user)
