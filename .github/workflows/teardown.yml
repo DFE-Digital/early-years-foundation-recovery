@@ -3,7 +3,6 @@
 name: Teardown Content App
 
 on:
-  workflow_dispatch:
   pull_request:
     types:
       - closed
