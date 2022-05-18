@@ -26,6 +26,7 @@ staging:
 # ey-recovery-content
 content:
   <<: *defaults
+  TIMEOUT_MINUTES: 60
   # @see workflow
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx

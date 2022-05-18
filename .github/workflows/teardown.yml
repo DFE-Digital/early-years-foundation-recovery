@@ -3,14 +3,12 @@
 name: Teardown Content App
 
 on:
-  workflow_dispatch:
   pull_request:
     types:
       - closed
 
 jobs:
   teardown:
-    if: contains(github.event.pull_request.labels.*.name, 'deployed')
     runs-on: ubuntu-latest
     environment: production
     env:
