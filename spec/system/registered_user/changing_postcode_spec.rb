@@ -33,6 +33,16 @@ RSpec.describe 'Registered user changing postcode', type: :system do
     end
   end
 
+  context 'when missing' do
+    let(:postcode) { '' }
+
+    it 'renders an error message' do
+      click_button 'Save'
+
+      expect(page).to have_text "can't be blank"
+    end
+  end
+
   context 'when cancelled' do
     it 'returns to account page' do
       click_link 'Cancel'
