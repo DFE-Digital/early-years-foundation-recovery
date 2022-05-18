@@ -28,6 +28,7 @@ class UserController < ApplicationController
 
   def update_name
     if user.update(user_params)
+      ahoy.track('name_changed')
       redirect_to user_path, notice: 'You have saved your details'
     else
       render :edit_name, status: :unprocessable_entity
@@ -38,7 +39,7 @@ class UserController < ApplicationController
     if user.update_with_password(user_password_params)
       ahoy.track('password_changed')
       bypass_sign_in(user)
-      redirect_to user, notice: 'Your password has been reset'
+      redirect_to user_path, notice: 'Your password has been reset'
     else
       render :edit_password, status: :unprocessable_entity
     end
@@ -46,6 +47,7 @@ class UserController < ApplicationController
 
   def update_email
     if user.update(user_params)
+      ahoy.track('email_changed')
       redirect_to user_path, notice: 'You have saved your details'
     else
       render :edit_email, status: :unprocessable_entity
@@ -54,6 +56,7 @@ class UserController < ApplicationController
 
   def update_postcode
     if user.update(user_params)
+      ahoy.track('postcode_changed')
       redirect_to user_path, notice: 'You have saved your details'
     else
       render :edit_postcode, status: :unprocessable_entity
@@ -62,6 +65,7 @@ class UserController < ApplicationController
 
   def update_ofsted_number
     if user.update(user_params)
+      ahoy.track('ofsted_number_changed')
       redirect_to user_path, notice: 'You have saved your details'
     else
       render :edit_ofsted_number, status: :unprocessable_entity
