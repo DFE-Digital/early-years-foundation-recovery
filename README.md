@@ -12,12 +12,15 @@
 
   Optionally create `.env` to override or set default variables like `DATABASE_URL`.
 
-3. Start the server
+3. Install the frontend dependencies
+
+  - `yarn install; bin/rails assets:precompile`
+  - `bin/docker-yarn` if using [Docker][docker]
+
+4. Start the server
 
   - `bin/dev` *(requires a running database server)*
   - `bin/docker-dev` if using [Docker][docker]
-
-  NB: The initial two runs of these commands will bootstrap the asset pipeline dependencies.
 
 ## Useful Links
 
@@ -83,6 +86,7 @@ These commands help maintain your containerised workspace:
 - `bin/docker-down` stop any active services
 - `bin/docker-prune` purge project containers, volumes and images
 - `bin/docker-dev-restart` restarts the running server
+- `bin/docker-yarn` warm the cache of frontend dependencies
 
 The commands run common tasks inside containers:
 
@@ -186,11 +190,6 @@ When the are significant changes to content structure or styling it may be neces
 
 - `bin/docker-dev-restart` restart the server
 - `bin/docker-rails assets:precompile` rebuild the assets
-
-When starting the project for the first time the frontend requires third-party libraries.
-On slower machines it is best to install these explicitly.
-
-- `bin/docker-yarn` bootstrap the asset libraries
 
 ### YAML
 
