@@ -133,9 +133,9 @@ en:
 
           It may be even more difficult for them to create:
 
-          1 numbered lists
-          2 like
-          3 this
+          1. numbered lists
+          2. like
+          3. this
 
           ##Video with an H2 title
 
@@ -192,6 +192,8 @@ en:
         heading: A test sub module intro page
         body: |
           #Here is an H1 title
+
+          ^“Markdown users can use information callouts, which lets them share their thoughts and feelings with confidence. They are encouraged to build on emotional knowledge - receiving time, attention and comfort by caregivers, and feeling heard.”^
 
           Learn more about markdown as part of the early years foundation stage (EYFS) including all the different types of markdown we use on the help for early years providers website
 
