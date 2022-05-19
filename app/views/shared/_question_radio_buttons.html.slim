@@ -1,12 +1,1 @@
 = f.govuk_collection_radio_buttons question.name, question.answers, :first, :last, legend: { text: question.label }
-
-- if ENV['RAILS_ENV'].eql?('development')
-  pre.debug_dump
-    |
-      question: #{question.inspect}
-      useranswer: #{question.answer}
-      id: #{question.id}
-      name: #{question.name}
-      answers: #{question.answers}
-      questionnaire: #{@questionnaire.questions[question.name]}
-      questionanswer: #{@questionnaire.send(question.name)}

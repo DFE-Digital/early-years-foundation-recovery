@@ -1,14 +1,1 @@
-= f.govuk_check_boxes_fieldset(question.name, legend: { text: translate_markdown(question.label), size: 'm' }) do 
-  - question.answers.each do |k, v|
-    = f.govuk_check_box question.name, k, label: { text: translate_markdown(v)}
-
-- if ENV['RAILS_ENV'].eql?('development')
-  pre.debug_dump
-    |
-      question: #{question.inspect}
-      useranswer: #{question.answer}
-      id: #{question.id}
-      name: #{question.name}
-      answers: #{question.answers}
-      questionnaire: #{@questionnaire.questions[question.name]}
-      questionanswer: #{@questionnaire.send(question.name)}
+= f.govuk_collection_check_boxes(question.name, question.answers, :first, :last, legend: { text: question.label, size: 'm' })
