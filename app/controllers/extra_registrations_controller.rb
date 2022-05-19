@@ -1,12 +1,18 @@
+# Registration is completed in a number of steps.
+#
+# Each steps has:
+#   - a partial (that displays the form elements for the step)
+#   - a form object (that defines validations rules and save options)
+#
 class ExtraRegistrationsController < ApplicationController
-  # Registration is completed in a number of steps.
-  # Each steps has a partial (that displays the form elements for the step),
-  # and a form object (that defines validations rules and save options).
+  # @return [Hash] partial => form object class
   STEP_FORMS = {
-    # partial => form object class
     name: Users::NameForm,
     setting: Users::SettingForm,
   }.freeze
+
+  # @return [Array<Symbol>]
+  #
   STEPS = STEP_FORMS.keys.freeze
 
   before_action :authenticate_user!
@@ -37,6 +43,7 @@ private
     params.require(:user).permit(:first_name, :last_name, :postcode, :ofsted_number)
   end
 
+  # @return [Symbol]
   def next_step
     return if STEPS.last == current_step
 
@@ -44,11 +51,13 @@ private
     STEPS[index + 1]
   end
 
+  # @return [Symbol]
   def current_step
     @current_step ||= params[:id].to_sym
   end
   helper_method :current_step
 
+  # @return [NameForm, SettingForm]
   def current_form_klass
     @current_form_klass ||= STEP_FORMS[current_step]
   end
