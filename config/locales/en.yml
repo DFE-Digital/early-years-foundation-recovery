@@ -53,6 +53,8 @@ en:
     error: Error
     important: Success
     notice: Success
+
+  # TODO: convert registration form to use inferred labels and hints where possible
   extra_registration:
     complete: Thank you for creating an early years training account. You can now start the first module.
     name:
@@ -69,10 +71,32 @@ en:
       postcode: Your setting's postcode
       postcode_hint: If you have multiple locations, enter the one where you work most often.
       submit: Complete
-  email: Email address
-  my_account:
-    password_last_changed: Password last changed on %{password_last_changed}
-  first_name: First name
-  last_name: Surname
-  postcode: Setting's postcode
-  ofsted_number: Ofsted number
+
+  password_last_changed: Password last changed on %{date}
+
+  # Form Builder ---------------------------------------------------------------
+  helpers:
+    label:
+      user:
+        first_name: First name
+        last_name: Surname
+        email: Email address
+        current_password: Enter your current password
+        password: Create a new password
+        password_confirmation: Re-type your new password
+        postcode: Your setting's postcode
+        ofsted_number: Your setting's Ofsted number
+    hint:
+      user:
+        postcode: If you have multiple locations, enter the one where you work most often.
+        ofsted_number: This might start with EY or VC followed by 6 numbers, or it might be an 8 letter number. If you don't know your setting's Ofsted number, you can look it up on the Ofsted website.
+        current_password: We need your current password to confirm your changes.
+
+    caption:
+      user:
+        first_name: We're asking for your details so we can personalise your training certificates.
+
+    # legend:
+    #   user:
+
+

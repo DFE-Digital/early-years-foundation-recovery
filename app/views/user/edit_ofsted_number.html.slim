@@ -2,8 +2,8 @@
   .govuk-grid-column-two-thirds-from-desktop
     = form_for @user, url: { action: 'update_ofsted_number' } do |form|
       = form.govuk_error_summary
-      = form.govuk_fieldset legend: { text: 'Edit your ofsted number' } do
-        = form.govuk_text_field :ofsted_number, autofocus: true, label: { text: t(:ofsted_number) }
+      = form.govuk_fieldset legend: { text: 'Edit Ofsted number' } do
+        = form.govuk_text_field :ofsted_number, autofocus: true
         = form.govuk_submit 'Save'
 
-        p= link_to "Cancel", user_path
+        p= link_to 'Cancel', user_path

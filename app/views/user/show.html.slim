@@ -5,26 +5,26 @@
 
     = govuk_summary_list do |your_details|
       - your_details.row do |row|
-        - row.key { t(:name, scope: :my_account) }
+        - row.key { 'Name' }
         - row.value { @user.name }
         - row.action(text: t('links.change'), href: edit_name_user_path, visually_hidden_text: 'name')
       - your_details.row do |row|
-        - row.key { t(:email, scope: :my_account) }
+        - row.key { 'Email' }
         - row.value { @user.email }
         - row.action(text: t('links.change'), href: edit_email_user_path, visually_hidden_text: 'email')
       - your_details.row do |row|
-        - row.key { t(:password, scope: :my_account) }
-        - row.value { t(:password_last_changed, password_last_changed: @user.password_last_changed, scope: :my_account) }
+        - row.key { 'Password' }
+        - row.value { t(:password_last_changed, date: @user.password_last_changed) }
         - row.action(text: t('links.change'), href: edit_password_user_path, visually_hidden_text: 'password')
 
     h2.govuk-heading-m About your setting
 
     = govuk_summary_list do |setting|
       - setting.row do |row|
-        - row.key { t(:postcode, scope: :my_account) }
+        - row.key { 'Postcode' }
         - row.value { @user.postcode }
         - row.action(text: t('links.change'), href: edit_postcode_user_path, visually_hidden_text: 'postcode')
       - setting.row do |row|
-        - row.key { t(:ofsted_number, scope: :my_account) }
+        - row.key { 'Ofsted number' }
         - row.value { @user.ofsted_number }
         - row.action(text: t('links.change'), href: edit_ofsted_number_user_path, visually_hidden_text: 'ofsted_number')
