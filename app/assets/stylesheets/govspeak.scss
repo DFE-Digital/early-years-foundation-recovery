@@ -1,0 +1,38 @@
+// vendor original
+@import "./govspeak/_advisory";
+@import "./govspeak/attachment";
+@import "./govspeak/button";
+@import "./govspeak/call-to-action";
+@import "./govspeak/charts";
+@import "./govspeak/contact";
+@import "./govspeak/example";
+@import "./govspeak/footnotes";
+@import "./govspeak/form-download";
+@import "./govspeak/fraction";
+@import "./govspeak/highlight-answer";
+@import "./govspeak/images";
+@import "./govspeak/information-callout";
+@import "./govspeak/legislative-list";
+@import "./govspeak/media-player";
+@import "./govspeak/place";
+@import "./govspeak/stat-headline";
+@import "./govspeak/steps";
+@import "./govspeak/summary";
+@import "./govspeak/tables";
+@import "./govspeak/typography";
+@import "./govspeak/warning-callout";
+
+// custom overrides
+@import "./govspeak/overrides/accordion";
+@import "./govspeak/overrides/call-to-action";
+@import "./govspeak/overrides/contents-list";
+@import "./govspeak/overrides/highlights";
+@import "./govspeak/overrides/quote";
+@import "./govspeak/overrides/tables";
+
+.gem-c-govspeak {
+  &.direction-rtl {
+    direction: rtl;
+    text-align: start;
+  }
+}

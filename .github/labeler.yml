@@ -13,5 +13,12 @@ frontend:
 - app/assets/stylesheets/*
 - app/javascript/*.js
 
-deployed:
-- ui/**/*
+content:
+- config/locales/modules/**/*.yml
+- config/locales/static/*.yml
+- data/**/*.yml
+
+# Disabled as otherwise manually added labels are removed if they do not match.
+#
+# deployed:
+# - ui/**/*
