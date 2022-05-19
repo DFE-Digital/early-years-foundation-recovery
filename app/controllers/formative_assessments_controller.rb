@@ -44,9 +44,9 @@ private
   def populate_questionnaire(question_input)
     return if question_input.empty?
 
-    questionnaire.questions.each_key do |question|
-      answer = [question_input[question]].flatten.select(&:present?)
-      questionnaire.send("#{question}=", answer)
+    questionnaire.question_list.each do |question|
+      answer = [question_input[question.name]].flatten.select(&:present?)
+      question.set_answer(answer: answer)
     end
     questionnaire.submitted = true
   end
@@ -61,14 +61,14 @@ private
 
   def save_answers
     questionnaire.questions.each do |question, data|
-      answer = questionnaire.send(question)
+      answer = Array(questionnaire.send(question))
       next if answer.empty?
 
       current_user.user_answers.create!(
         questionnaire_id: questionnaire.id,
         question: question,
         answer: answer,
-        correct: answer == data[:correct_answers],
+        correct: answer == data[:correct_answers].map(&:to_sym),
       )
     end
   end
