@@ -10,7 +10,7 @@ RSpec.describe 'Registered user changing password', type: :system do
     fill_in 'Enter your current password', with: 'StrongPassword123'
   end
 
-  let(:today) { Date.today.to_formatted_s(:rfc822) } # 18 May 2022
+  let(:today) { Time.zone.today.to_formatted_s(:rfc822) } # 18 May 2022
 
   context 'when successful' do
     it 'updates password' do
