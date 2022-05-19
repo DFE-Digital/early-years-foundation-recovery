@@ -6,10 +6,12 @@ en:
       confirmed: "Your email address has been successfully confirmed."
       confirmed: |
         Thank you, your email address is now verified.
-
+        <br/>
+        <br/>
         You can now finish setting up your early training account. We will ask you some questions about your setting and your experience. This is so we can make sure we are providing training that is useful to everyone in the early years sector.
-
-        Your information will be shared without your permission.
+        <br />
+        <br />
+        Your information will not be shared without your permission.
       send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
     failure:
