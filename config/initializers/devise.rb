@@ -38,6 +38,7 @@ class CustomFailureApp < Devise::FailureApp
 
 protected
 
+  # overwriting the default method 
   def i18n_message(default = nil)
     message = warden_message || default || :unauthenticated
 
@@ -45,6 +46,7 @@ protected
       options = {}
       options[:resource_name] = scope
       options[:scope] = 'devise.failure'
+      # add Devise.unlock_in to Devise locales file
       options[:unlock_in] = scope_class.unlock_in / 3600
       options[:default] = [message]
       auth_keys = scope_class.authentication_keys
