@@ -38,7 +38,8 @@ class CustomFailureApp < Devise::FailureApp
 
 protected
 
-  # overwriting the default method 
+  # overwriting the default method
+  # @return [String] the i18n message
   def i18n_message(default = nil)
     message = warden_message || default || :unauthenticated
 
