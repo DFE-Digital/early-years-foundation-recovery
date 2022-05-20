@@ -19,7 +19,7 @@ en:
               invalid: This email address is invalid.
             password:
               blank: Enter a password.
-              too_short: Password is too short.
+              too_short: Password must be at least 8 characters. # devise override
             password_confirmation:
               confirmation: Confirmation doesn't match password.
   activerecord:
@@ -42,7 +42,8 @@ en:
               invalid: This email address is invalid.
             password:
               blank: Enter a password.
-              too_short: Password is too short.
+              invalid: A password requires both upper and lower case letters and a number.
+              too_short: Password must be at least 8 characters. # devise override
             password_confirmation:
               confirmation: Confirmation doesn't match password.
             ofsted_number:
