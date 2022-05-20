@@ -29,6 +29,6 @@ html lang="en"
         - flash.each do |variant, message|
           = govuk_notification_banner title_text: t("banners.#{variant}"), text: translate_markdown(message), success: %w[important notice].include?(variant)
         = yield
-  footer.govuk-footer[role="contentinfo"]
-    = render 'layouts/footer_content'
-      
+  = govuk_footer do |footer|
+    - footer.navigation(role: "contentinfo") do
+      = render 'layouts/footer_content'
