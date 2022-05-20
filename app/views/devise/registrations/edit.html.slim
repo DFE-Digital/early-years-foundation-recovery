@@ -6,7 +6,7 @@
       - if devise_mapping.confirmable? && resource.pending_reconfirmation?
         div.govuk-body
           | Currently waiting confirmation for: #{resource.unconfirmed_email}
-      = f.govuk_password_field :password, autocomplete: "new-password", label: { text: "New password" }, caption: { text: "(#{@minimum_password_length} characters minimum)" }, hint: { text: "Leave blank if you don't want to change it." }
+      = f.govuk_password_field :password, autocomplete: "new-password", label: { text: "New password" }, caption: { text: "(Requires upper and lower case letters, a number and at least #{@minimum_password_length} characters.)" }, hint: { text: "Leave blank if you don't want to change it." }
       = f.govuk_password_field :password_confirmation, autocomplete: "new-password", label: { text: "Re-type password" }
       = f.govuk_password_field :current_password, autocomplete: "current-password", label: { text: "Current password" }, hint: { text: "We need your current password to confirm your changes."}
     = f.govuk_submit "Update"

@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :events, class_name: 'Ahoy::Event'
 
   validates_with OfstedValidator
+  validates_with PasswordValidator
 
   def name
     [first_name, last_name].compact.join(' ')

@@ -3,7 +3,7 @@
     h1.govuk-heading-l Check your email
 
     p.govuk-body
-      | We have sent you an email with instructions for how to verify your email address.  We sent the email to:
+      | We have sent you an email with instructions for how to verify your email address. We sent the email to:
 
     p class="govuk-body govuk-!-font-weight-bold"
       = @user.email
@@ -13,7 +13,24 @@
 
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
-    = govuk_details(summary_text: "Need us to resend the email?") do
-      = govuk_link_to "I haven't received the email", new_confirmation_path(@user)
+    = govuk_details(summary_text: "Problems with the activation email?") do
+      p
+        strong I haven’t received the email
+      p 
+        | Please wait a few minutes for the email to arrive. If it doesn’t 
+          appear in your inbox, please check your spam or junk email folder. lf you still cannot see the email, we can send it again. 
+      = govuk_link_to "Send me another email", new_confirmation_path(@user)
+
       br/
-      = govuk_link_to "I don't have access to the email address I entered", "#"
+      br/
+      p 
+        strong I don’t have access to the email address 
+      p I used to register You can set up your account using a different email address.
+
+      p
+        | Please #{govuk_link_to "create a new account", new_registration_path(@user)}
+      p 
+        strong I have a different problem 
+      p For other problems with creating your account or signing in.
+      p
+        | Please #{govuk_link_to "contact us", "#"}

@@ -19,7 +19,7 @@ class UserController < ApplicationController
   end
 
   def check_email_confirmation
-    @user = User.find(params[:id])
+    @user = User.find_by(email: params[:email])
   end
 
   def check_email_password_reset; end
