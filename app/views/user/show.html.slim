@@ -2,6 +2,7 @@
   .govuk-grid-column-full
     h1.govuk-heading-l Manage your account
     h2.govuk-heading-m Your details
+    hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     = govuk_summary_list do |your_details|
       - your_details.row do |row|
@@ -19,6 +20,7 @@
 
     -# "setting" is a common practitioner term denoting the place where you practice
     h2.govuk-heading-m About your setting
+    hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     = govuk_summary_list do |setting|
       - setting.row do |row|
