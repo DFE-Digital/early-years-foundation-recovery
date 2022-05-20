@@ -17,6 +17,7 @@
         - row.value { t(:password_last_changed, date: @user.password_last_changed) }
         - row.action(text: t('links.change'), href: edit_password_user_path, visually_hidden_text: 'password')
 
+    -# "setting" is a common practitioner term denoting the place where you practice
     h2.govuk-heading-m About your setting
 
     = govuk_summary_list do |setting|
