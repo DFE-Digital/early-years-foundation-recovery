@@ -49,13 +49,15 @@ RSpec.describe 'ExtraRegistrations', type: :request do
     end
 
     context 'when on last step' do
+      subject(:user) do
+        create(:user, :confirmed,
+               first_name: Faker::Name.first_name,
+               last_name: Faker::Name.last_name)
+      end
+
       let(:step) { :setting }
       let(:user_params) do
-        {
-          first_name: Faker::Name.first_name,
-          last_name: Faker::Name.last_name,
-          postcode: Faker::Address.postcode,
-        }
+        { postcode: Faker::Address.postcode }
       end
 
       it 'Updates user name' do
