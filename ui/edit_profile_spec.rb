@@ -8,10 +8,10 @@ describe 'Edit Profile', er_1: true do
     ui.home.header.sign_in.click
 
     ui.sign_in.with_email_and_password
-
+    
     ui.home.displayed?(5)
-
     ui.home.header.profile.click
+    ui.user.edit.click
 
     ui.profile.displayed?
     ui.profile.wait_until_first_name_visible

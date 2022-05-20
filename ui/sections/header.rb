@@ -6,6 +6,6 @@ module Sections
     element :training_module, "a[href='/modules']", text: 'Training Modules'
     element :sign_in, "a[href='/users/sign_in']", text: 'Sign in'
     element :sign_out, "a[href='/users/sign_out']", text: 'Sign out'
-    element :profile, "a[href='/user/edit']", text: 'Profile'
+    element :profile, "a[href='/user']", text: 'Profile'
   end
 end

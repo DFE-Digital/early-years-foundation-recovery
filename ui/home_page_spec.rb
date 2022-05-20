@@ -15,7 +15,6 @@ describe 'home page' do
 
     it 'is displayed when the user navigates to the home page and clicks the header logo' do
       ui.home.header.logo.click
-
       expect(ui.home).to be_displayed
     end
 
