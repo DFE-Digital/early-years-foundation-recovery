@@ -4,7 +4,7 @@ RSpec.describe 'Registered user changing name', type: :system do
   include_context 'with registered user'
 
   before do
-    visit '/user/edit_name'
+    visit '/my-account/edit-name'
   end
 
   context 'when valid' do
@@ -13,7 +13,7 @@ RSpec.describe 'Registered user changing name', type: :system do
       fill_in 'Surname', with: 'Bar'
       click_button 'Save'
 
-      expect(page).to have_current_path '/user'
+      expect(page).to have_current_path '/my-account'
       expect(page).to have_text('Manage your account')
         .and have_text('You have saved your details')
         .and have_text('Foo Bar')
@@ -35,7 +35,7 @@ RSpec.describe 'Registered user changing name', type: :system do
     it 'returns to account page' do
       click_link 'Cancel'
 
-      expect(page).to have_current_path '/user'
+      expect(page).to have_current_path '/my-account'
       expect(page).not_to have_text 'You have saved your details'
     end
   end

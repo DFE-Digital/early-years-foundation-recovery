@@ -74,6 +74,10 @@ en:
 
   password_last_changed: Password last changed on %{date}
 
+  # /users/sign_in
+  password: Password
+  remember_me: Remember me
+
   # Form Builder ---------------------------------------------------------------
   helpers:
     label:
@@ -81,8 +85,8 @@ en:
         first_name: First name
         last_name: Surname
         email: Email address
+        password: Create a new password # /my-account/edit-password
         current_password: Enter your current password
-        password: Create a new password
         password_confirmation: Re-type your new password
         postcode: Your setting's postcode
         ofsted_number: Your setting's Ofsted number

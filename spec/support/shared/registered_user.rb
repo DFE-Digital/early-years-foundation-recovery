@@ -2,7 +2,7 @@ RSpec.shared_context 'with registered user' do
   let(:user) { create(:user, :registered) }
 
   before do
-    visit '/users/sign_in'
+    visit '/users/sign_in' # TODO: use hyphen
     fill_in 'Email address', with: user.email
     fill_in 'Password', with: 'StrongPassword123'
     click_button 'Sign in'

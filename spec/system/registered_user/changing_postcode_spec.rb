@@ -6,8 +6,8 @@ RSpec.describe 'Registered user changing postcode', type: :system do
   let(:postcode) { user.postcode }
 
   before do
-    visit '/user/edit_postcode'
-    fill_in "Setting's postcode", with: postcode
+    visit '/my-account/edit-postcode'
+    fill_in "Your setting's postcode", with: postcode
   end
 
   context 'when valid' do
@@ -16,7 +16,7 @@ RSpec.describe 'Registered user changing postcode', type: :system do
     it 'updates postcode' do
       click_button 'Save'
 
-      expect(page).to have_current_path '/user'
+      expect(page).to have_current_path '/my-account'
       expect(page).to have_text('Manage your account')
         .and have_text('You have saved your details')
         .and have_text('WD18 0DN')
@@ -47,7 +47,7 @@ RSpec.describe 'Registered user changing postcode', type: :system do
     it 'returns to account page' do
       click_link 'Cancel'
 
-      expect(page).to have_current_path '/user'
+      expect(page).to have_current_path '/my-account'
       expect(page).not_to have_text 'You have saved your details'
     end
   end

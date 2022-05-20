@@ -6,7 +6,7 @@ RSpec.describe 'Registered user changing password', type: :system do
   include_context 'with registered user'
 
   before do
-    visit '/user/edit_password'
+    visit '/my-account/edit-password'
     fill_in 'Enter your current password', with: 'StrongPassword123'
   end
 
@@ -18,7 +18,7 @@ RSpec.describe 'Registered user changing password', type: :system do
       fill_in 'Re-type your new password', with: 'NewPasswordXYZ'
       click_button 'Save'
 
-      expect(page).to have_current_path '/user'
+      expect(page).to have_current_path '/my-account'
       expect(page).to have_text('Manage your account')      # page heading
         .and have_text('Your password has been reset')      # flash message
         .and have_text("Password last changed on #{today}") # event
@@ -40,7 +40,7 @@ RSpec.describe 'Registered user changing password', type: :system do
     it 'returns to account page' do
       click_link 'Cancel'
 
-      expect(page).to have_current_path '/user'
+      expect(page).to have_current_path '/my-account'
       expect(page).not_to have_text 'Your password has been reset'
     end
   end

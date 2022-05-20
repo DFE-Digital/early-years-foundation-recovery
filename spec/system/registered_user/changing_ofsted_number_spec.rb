@@ -8,8 +8,8 @@ RSpec.describe 'Registered user changing Ofsted number', type: :system do
   let(:ofsted_number) { user.ofsted_number }
 
   before do
-    visit '/user/edit_ofsted_number'
-    fill_in 'Ofsted number', with: ofsted_number
+    visit '/my-account/edit-ofsted-number'
+    fill_in "Your setting's Ofsted number", with: ofsted_number
   end
 
   context 'when successful' do
@@ -18,7 +18,7 @@ RSpec.describe 'Registered user changing Ofsted number', type: :system do
     it 'updates Ofsted number' do
       click_button 'Save'
 
-      expect(page).to have_current_path '/user'
+      expect(page).to have_current_path '/my-account'
       expect(page).to have_text('Manage your account')
         .and have_text('You have saved your details')
         .and have_text('VC123456')
@@ -41,7 +41,7 @@ RSpec.describe 'Registered user changing Ofsted number', type: :system do
     it 'deletes the saved Ofsted number' do
       click_button 'Save'
 
-      expect(page).to have_current_path '/user'
+      expect(page).to have_current_path '/my-account'
       expect(page).to have_text 'You have saved your details'
       expect(page).not_to have_text '12345678'
     end
@@ -51,7 +51,7 @@ RSpec.describe 'Registered user changing Ofsted number', type: :system do
     it 'returns to account page' do
       click_link 'Cancel'
 
-      expect(page).to have_current_path '/user'
+      expect(page).to have_current_path '/my-account'
       expect(page).not_to have_text 'You have saved your details'
     end
   end
