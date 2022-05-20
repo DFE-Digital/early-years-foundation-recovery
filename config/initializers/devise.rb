@@ -35,6 +35,28 @@ class CustomFailureApp < Devise::FailureApp
   def skip_format?
     %w[html turbo_stream */*].include? request_format.to_s
   end
+  
+  protected
+  
+  def i18n_message(default = nil)
+    message = warden_message || default || :unauthenticated
+
+    if message.is_a?(Symbol)
+      options = {}
+      options[:resource_name] = scope
+      options[:scope] = "devise.failure"
+      options[:unlock_in] = scope_class.unlock_in / 3600
+      options[:default] = [message]
+      auth_keys = scope_class.authentication_keys
+      keys = (auth_keys.respond_to?(:keys) ? auth_keys.keys : auth_keys).map { |key| scope_class.human_attribute_name(key) }
+      options[:authentication_keys] = keys.join(I18n.translate(:"support.array.words_connector"))
+      options = i18n_options(options)
+  
+      I18n.t(:"#{scope}.#{message}", **options)
+    else
+      message.to_s
+    end
+  end
 end
 
 Devise.setup do |config|
