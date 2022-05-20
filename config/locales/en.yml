@@ -13,6 +13,7 @@ en:
               blank: Enter a surname.
             postcode:
               blank: Enter your setting's postcode.
+              invalid: Your setting's postcode is invalid.
             email:
               blank: Enter an email address.
               invalid: This email address is invalid.
@@ -34,7 +35,8 @@ en:
             last_name:
               blank: Enter a surname.
             postcode:
-              invalid: Enter your setting's postcode.
+              blank: Enter your setting's postcode.
+              invalid: Your setting's postcode is invalid.
             email:
               blank: Enter an email address.
               invalid: This email address is invalid.
