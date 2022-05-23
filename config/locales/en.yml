@@ -79,6 +79,23 @@ en:
     # /users/sign_in
     label: Password
     remember_me: Remember me
+  check_email_confirmation:
+    heading: Check your email
+    body: "We have sent you an email with instructions for how to verify your email address. We sent the email to:"
+    body_two: We have sent you an email with instructions for how to verify your email address. We sent the email to
+    summary_text: Problems with the activation email?
+    not_recieved:
+      title: I haven’t received the email
+      text: Please wait a few minutes for the email to arrive. If it doesn’t appear in your inbox, please check your spam or junk email folder. lf you still cannot see the email, we can send it again.
+      link_text: Send me another email
+    no_access_to_email:
+      title: I don’t have access to the email address I used to register 
+      text: You can set up your account using a different email address.
+      link_text: create a new account
+    diff_problem:
+      title: I have a different problem
+      text: For other problems with creating your account or signing in.
+      link_text: contact us
 
   # Form Builder ---------------------------------------------------------------
   helpers:

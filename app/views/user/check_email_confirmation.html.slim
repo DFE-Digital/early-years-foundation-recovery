@@ -1,36 +1,37 @@
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
-    h1.govuk-heading-l Check your email
+    h1.govuk-heading-l #{t('check_email_confirmation.heading')}
 
     p.govuk-body
-      | We have sent you an email with instructions for how to verify your email address. We sent the email to:
+      | #{t('check_email_confirmation.body')}
 
     p class="govuk-body govuk-!-font-weight-bold"
       = @user.email
 
     p.govuk-body
-      | To continue setting up your training account you must click the link in the email. If you have not received the email after a few minutes, please check you spam folder.
+      | #{t('check_email_confirmation.body_two')}
 
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
-    = govuk_details(summary_text: "Problems with the activation email?") do
-      p
-        strong I haven’t received the email
-      p 
-        | Please wait a few minutes for the email to arrive. If it doesn’t 
-          appear in your inbox, please check your spam or junk email folder. lf you still cannot see the email, we can send it again. 
-      = govuk_link_to "Send me another email", new_confirmation_path(@user)
+    = govuk_details(summary_text: t('check_email_confirmation.summary_text')) do
+      p class="govuk-!-margin-bottom-3"
+        strong #{t('check_email_confirmation.not_recieved.title')}
+      p class="govuk-!-margin-bottom-3"
+        | #{t('check_email_confirmation.not_recieved.text')}
+      p class="govuk-!-margin-bottom-3"
+        = govuk_link_to t('check_email_confirmation.not_recieved.link_text'), new_confirmation_path(@user)
 
-      br/
-      br/
-      p 
-        strong I don’t have access to the email address 
-      p I used to register You can set up your account using a different email address.
 
-      p
-        | Please #{govuk_link_to "create a new account", new_registration_path(@user)}
-      p 
-        strong I have a different problem 
-      p For other problems with creating your account or signing in.
-      p
-        | Please #{govuk_link_to "contact us", "#"}
+      p class="govuk-!-margin-bottom-3"
+        strong #{t('check_email_confirmation.no_access_to_email.title')}
+      p class="govuk-!-margin-bottom-3" 
+        | #{t('check_email_confirmation.no_access_to_email.text')}
+      p class="govuk-!-margin-bottom-3"
+        | Please #{govuk_link_to t('check_email_confirmation.no_access_to_email.link_text'), new_registration_path(@user)}
+
+      p class="govuk-!-margin-bottom-3" 
+        strong #{t('check_email_confirmation.diff_problem.title')} 
+      p class="govuk-!-margin-bottom-3"
+        | #{t('check_email_confirmation.diff_problem.text')} 
+      p class="govuk-!-margin-bottom-3"
+        | Please #{govuk_link_to t('check_email_confirmation.diff_problem.link_text'), "#"}
