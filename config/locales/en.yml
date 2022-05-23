@@ -60,22 +60,17 @@ en:
     important: Success
     notice: Success
 
-  # TODO: convert registration form to use inferred labels and hints where possible
   extra_registration:
     complete: Thank you for creating an early years training account. You can now start the first module.
+    # /extra_registrations/name/edit
     name:
       heading: About you
       hint: We're asking for your details so we can personalise your training certificates.
-      first_name: First name
-      last_name: Surname
       submit: Continue
+    # /extra_registrations/setting/edit
     setting:
       heading: About your setting
       hint: Your details and training progress won't be shared with anyone without your permission.
-      ofsted_number: Your setting's Ofsted number
-      ofsted_hint: This might start with EY or VC followed by 6 numbers, or it might be an 8 letter number. If you don't know your setting's Ofsted number, you can look it up on the Ofsted website.
-      postcode: Your setting's postcode
-      postcode_hint: If you have multiple locations, enter the one where you work most often.
       submit: Complete
 
   password:
