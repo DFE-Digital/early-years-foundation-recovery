@@ -32,7 +32,8 @@ RSpec.describe User, type: :model do
       expect(build(:user, ofsted_number: nil)).to be_valid
       expect(build(:user, ofsted_number: 'EY123456')).to be_valid
       expect(build(:user, ofsted_number: 'vc123456')).to be_valid
-      expect(build(:user, ofsted_number: '12345678')).to be_valid
+      expect(build(:user, ofsted_number: '1234567')).to be_valid
+      expect(build(:user, ofsted_number: '123456')).to be_valid
       expect(build(:user, ofsted_number: 'foo')).not_to be_valid
     end
 

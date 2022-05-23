@@ -16,7 +16,7 @@ RSpec.describe 'Confirmed users completing registration' do
       expect(page).to have_text('About your setting')
 
       fill_in "Your setting's postcode", with: 'SE6 2TS'
-      fill_in "Your setting's Ofsted number", with: '12345678'
+      fill_in "Your setting's Ofsted number", with: '1234567'
       click_button 'Complete'
 
       expect(page).to have_text('Success')

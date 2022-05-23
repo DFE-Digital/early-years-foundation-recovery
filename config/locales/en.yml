@@ -95,7 +95,10 @@ en:
     hint:
       user:
         postcode: If you have multiple locations, enter the one where you work most often.
-        ofsted_number: This might start with EY or VC followed by 6 numbers, or it might be an 8 letter number. If you don't know your setting's Ofsted number, you can look it up on the Ofsted website.
+        ofsted_number: |
+          This might start with EY or VC followed by a 6 digit number.
+          Or, it might be a 6 or 7 digit number with no letters at the start.
+          If you don't know your setting's Ofsted number, you can look it up on the Ofsted website.
         current_password: We need your current password to confirm your changes.
 
     caption:
