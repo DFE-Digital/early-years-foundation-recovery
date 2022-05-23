@@ -1,10 +1,15 @@
 class PasswordValidator < ActiveModel::Validator
-  def validate(record)
-    return if record.password.nil?
+  PASSWORD_FORMAT = /\A
+    (?=.*\d)    # a number
+    (?=.*[a-z]) # a lower case letter
+    (?=.*[A-Z]) # an upper case letter
+  /x
+  # (?=.{8,})   # 8 or more characters
 
-    # Validates upper and lower case letters, a number and at least 8 characters.
-    unless record.password.match? %r{^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$}i
-      record.errors.add :password, 'Password does not match the set criteria'
-    end
+  def validate(record)
+    return if record.password.blank? || record.password =~ PASSWORD_FORMAT
+
+    record.errors.add :password,
+                      I18n.t('activerecord.errors.models.user.attributes.password.invalid')
   end
 end
