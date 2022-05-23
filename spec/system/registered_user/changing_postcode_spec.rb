@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Registered user changing postcode', type: :system do
-  include_context 'with registered user'
+  include_context 'with user'
 
   let(:postcode) { user.postcode }
 
@@ -29,7 +29,7 @@ RSpec.describe 'Registered user changing postcode', type: :system do
     it 'renders an error message' do
       click_button 'Save'
 
-      expect(page).to have_text "Enter your setting's postcode."
+      expect(page).to have_text "Your setting's postcode is invalid."
     end
   end
 
@@ -39,7 +39,7 @@ RSpec.describe 'Registered user changing postcode', type: :system do
     it 'renders an error message' do
       click_button 'Save'
 
-      expect(page).to have_text "can't be blank"
+      expect(page).to have_text "Enter your setting's postcode."
     end
   end
 

@@ -12,19 +12,7 @@ class User < ApplicationRecord
             presence: true,
             if: proc { |u| u.registration_complete }
 
-
-    # (?=.{8,})   # Must contain 8 or more characters
-  PASSWORD_FORMAT = /\A
-    (?=.*\d)    # Must contain a digit
-    (?=.*[a-z]) # Must contain a lower case character
-    (?=.*[A-Z]) # Must contain an upper case character
-  /x
-
-  validates :password,
-    length: { in: Devise.password_length },
-    format: { with: PASSWORD_FORMAT },
-    confirmation: true
-
+  validates :password, password: true
   validates :postcode, postcode: true
   validates :ofsted_number, ofsted_number: true
 

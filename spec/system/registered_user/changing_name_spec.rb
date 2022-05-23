@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Registered user changing name', type: :system do
-  include_context 'with registered user'
+  include_context 'with user'
 
   before do
     visit '/my-account/edit-name'

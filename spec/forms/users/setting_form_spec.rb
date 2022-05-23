@@ -7,7 +7,7 @@ RSpec.describe Users::SettingForm do
     it 'must be valid' do
       setting_form.postcode = 'foo'
       setting_form.validate
-      expect(setting_form.errors[:postcode].first).to eq "Enter your setting's postcode."
+      expect(setting_form.errors[:postcode].first).to eq "Your setting's postcode is invalid."
     end
   end
 

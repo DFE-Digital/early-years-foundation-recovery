@@ -20,8 +20,11 @@ en:
             password:
               blank: Enter a password.
               too_short: Password must be at least 8 characters. # devise override
+              invalid: New password requires upper and lower case letters, a number and at least 8 characters.
             password_confirmation:
               confirmation: Confirmation doesn't match password.
+            ofsted_number:
+              invalid: This Ofsted number is not recognised.
   activerecord:
     errors:
       models:
@@ -42,8 +45,8 @@ en:
               invalid: This email address is invalid.
             password:
               blank: Enter a password.
-              invalid: A password requires both upper and lower case letters and a number.
               too_short: Password must be at least 8 characters. # devise override
+              invalid: New password requires upper and lower case letters, a number and at least 8 characters.
             password_confirmation:
               confirmation: Confirmation doesn't match password.
             ofsted_number:
@@ -75,11 +78,12 @@ en:
       postcode_hint: If you have multiple locations, enter the one where you work most often.
       submit: Complete
 
-  password_last_changed: Password last changed on %{date}
-
-  # /users/sign_in
-  password: Password
-  remember_me: Remember me
+  password:
+    last_changed: Password last changed on %{date}
+    hardness: Your password must contain at least %{length} characters, upper and lowercase letter and at least 1 number.
+    # /users/sign_in
+    label: Password
+    remember_me: Remember me
 
   # Form Builder ---------------------------------------------------------------
   helpers:

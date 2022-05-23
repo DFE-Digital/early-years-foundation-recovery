@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Registered user changing Ofsted number', type: :system do
   subject(:user) { create :user, :registered, ofsted_number: '12345678' }
 
-  include_context 'with registered user'
+  include_context 'with user'
 
   let(:ofsted_number) { user.ofsted_number }
 

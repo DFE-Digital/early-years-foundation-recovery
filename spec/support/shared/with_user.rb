@@ -1,4 +1,4 @@
-RSpec.shared_context 'with registered user' do
+RSpec.shared_context 'with user' do
   let(:user) { create(:user, :registered) }
 
   before do

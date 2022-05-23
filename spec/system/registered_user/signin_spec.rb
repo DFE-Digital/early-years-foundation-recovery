@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Registered user sign in', type: :system do
-  include_context 'with registered user'
+  include_context 'with user'
 
   context 'when successful' do
     it 'returns to homepage' do

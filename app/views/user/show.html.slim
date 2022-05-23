@@ -15,7 +15,7 @@
         - row.action(text: t('links.change'), href: edit_email_user_path, visually_hidden_text: 'email')
       - your_details.row do |row|
         - row.key { 'Password' }
-        - row.value { t(:password_last_changed, date: @user.password_last_changed) }
+        - row.value { t('password.last_changed', date: @user.password_last_changed) }
         - row.action(text: t('links.change'), href: edit_password_user_path, visually_hidden_text: 'password')
 
     -# "setting" is a common practitioner term denoting the place where you practice

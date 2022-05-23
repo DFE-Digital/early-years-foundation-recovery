@@ -14,9 +14,9 @@
       p.govuk-body
         | Enter your details to sign in to your personal early years training account. These details are different to any other GOV.UK accounts you may use.
       = f.govuk_email_field :email, autofocus: true, autocomplete: 'email'
-      = f.govuk_password_field :password, autocomplete: 'current-password', label: { text: t(:password) }
+      = f.govuk_password_field :password, autocomplete: 'current-password', label: { text: t('password.label') }
       = f.govuk_submit 'Sign in'
-      = f.govuk_check_box :remember_me, 1, 0, multiple: false, link_errors: true, label: { text: t(:remember_me) }
+      = f.govuk_check_box :remember_me, 1, 0, multiple: false, link_errors: true, label: { text: t('password.remember_me') }
     br/
 
   = govuk_details(summary_text: 'Problems signing in') do
