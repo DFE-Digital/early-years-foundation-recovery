@@ -1,0 +1,10 @@
+.govuk-grid-row
+  .govuk-grid-column-two-thirds-from-desktop
+    = form_for @user, url: { action: 'update_name' } do |form|
+      = form.govuk_error_summary
+      = form.govuk_fieldset legend: { text: 'Edit about you' } do
+        = form.govuk_text_field :first_name, autofocus: true
+        = form.govuk_text_field :last_name
+        = form.govuk_submit 'Save'
+
+        p= link_to 'Cancel', user_path

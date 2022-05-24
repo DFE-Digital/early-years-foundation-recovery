@@ -8,6 +8,6 @@
         | To reset your password we need to send you an email with a validation link.
       p.govuk-body 
         | If you can’t see it in your inbox within a few minutes, please check your spam folder.
-      = f.govuk_email_field :email, autofocus: true, autocomplete: "email"
-    = f.govuk_submit "Send email"
-= render "devise/shared/form_wrap"
+      = f.govuk_email_field :email, autofocus: true, autocomplete: 'email'
+    = f.govuk_submit 'Send email'
+= render 'devise/shared/form_wrap'

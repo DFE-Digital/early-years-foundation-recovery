@@ -1,7 +1,14 @@
 .govuk-grid-row
-  .govuk-grid-column-two-thirds
-    h1.govuk-heading-xl
-      | Home
+  .govuk-grid-column-full
+    .app-search-form-container
+      h1.govuk-heading-xl
+        | Child development training for early years providers
+      p.govuk-body 
+        | This free, online training provides an overview of child development and gives practical advice for supporting the development of children in your early years setting.
     p.govuk-body
-      | Your application is ready
+
+      = link_to "Explore the course content", training_modules_path, class: 'govuk-button govuk-button--secondary'
+
+- if ENV['RAILS_ENV'].eql?('development')
+  pre.debug_dump
     = configuration_summary_list

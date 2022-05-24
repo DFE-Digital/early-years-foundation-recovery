@@ -1,19 +1,18 @@
 ---
-# registered and unconfirmed
 registered@example.com:
-  password: <%= ENV.fetch('USER_PASSWORD', 'password') %>
-  registration_complete: true
+  password: <%= ENV.fetch('USER_PASSWORD', 'Passw0rd') %>
 
-# registered and confirmed
 confirmed@example.com:
-  password: <%= ENV.fetch('USER_PASSWORD', 'password') %>
-  registration_complete: true
+  password: <%= ENV.fetch('USER_PASSWORD', 'Passw0rd') %>
   confirmed_at: <%= 1.minute.ago %>
 
-# registered and confirmed and profile completed
 completed@example.com:
-  password: <%= ENV.fetch('USER_PASSWORD', 'password') %>
-  registration_complete: true
+  password: <%= ENV.fetch('USER_PASSWORD', 'Passw0rd') %>
   confirmed_at: <%= 1.minute.ago %>
+  registration_complete: true
+  # mandatory if "registration_complete"
   first_name: Demo
   last_name: User
+  postcode: M1 2WD
+  # optional
+  ofsted_number:
