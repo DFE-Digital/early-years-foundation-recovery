@@ -114,14 +114,25 @@ These commands can be used to debug problems:
 
 ## Deployment Pipeline
 
-- [Production][production] is deployed automatically when a version is tagged.
-- [Staging][staging] is deployed automatically with the latest commit from `main`.
-- Manually adding the **"deployed"** label to a pull request in Github will cause it to be deployed.
+### Production Space
+
+[Production][production] is deployed automatically when a version is tagged.
+We use [semantic versioning](https://semver.org/) and a release can be triggered by:
+
+- `git checkout main`
+- `git tag v0.0.x`
+- `git push origin v0.0.x`
+
+### Staging Space
+
+[Staging][staging] is deployed automatically with the latest commit from `main`.
+
+### Content Space
+
+Manually adding the **"deployed"** label to a pull request in Github will cause it to be deployed.
   This supports manual testing and content review in a production environment.
-- Changes to the **"/ui"** folder will automatically label the PR with **"deployed"** and trigger deployment.
-  This supports automated UA tests.
-- When a feature branch review application is deployed, the URL to access it is added as a comment in the PR conversation in the format: <https://ey-recovery-pr-##.london.cloudapps.digital/>
-- Review applications are deployed with 3 seeded user accounts that share a restricted password.
+When a feature branch review application is deployed, the URL to access it is added as a comment in the PR conversation in the format: <https://ey-recovery-pr-##.london.cloudapps.digital/>
+Review applications are deployed with 3 seeded user accounts that share a restricted password.
   This facilitates team members demoing content and functionality, so registration is not required.
 
 ## Quality Assurance
