@@ -75,10 +75,11 @@ en:
 
   password:
     last_changed: Password last changed on %{date}
-    hardness: Your password must contain at least %{length} characters, upper and lowercase letter and at least 1 number.
+    hardness: Your password must contain at least %{length} characters, upper and lowercase letters and at least 1 number.
     # /users/sign_in
     label: Password
     remember_me: Remember me
+
   check_email_confirmation:
     heading: Check your email
     body: "We have sent you an email with instructions for how to verify your email address. We sent the email to:"
