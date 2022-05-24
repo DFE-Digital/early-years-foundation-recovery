@@ -65,7 +65,7 @@ RSpec.describe 'User', type: :request do
 
     describe 'GET /user/check_email_confirmation' do
       it 'renders check email page' do
-        get check_email_confirmation_user_path(id: unconfirmed_user)
+        get check_email_confirmation_user_path(email: unconfirmed_user.email)
         expect(response).to have_http_status(:success)
         expect(response.body).to include('Check your email')
         expect(response.body).to include(unconfirmed_user.email)
