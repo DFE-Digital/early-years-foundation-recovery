@@ -12,7 +12,7 @@ RSpec.describe 'Brain Development training registered user' do
     end
 
     specify 'good path journey' do
-      click_link 'Training Modules'
+      click_link 'Explore the course content'
       click_link 'Brain development in early years'
 
       expect(page).to have_text('Brain development in the early years') # 1 Module intro page

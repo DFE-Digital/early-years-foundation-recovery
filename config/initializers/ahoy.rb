@@ -8,3 +8,6 @@ Ahoy.api = false
 # we recommend configuring local geocoding as well
 # see https://github.com/ankane/ahoy#geocoding
 Ahoy.geocode = false
+
+# Ensure events are tracked in the test suite
+Ahoy.track_bots = Rails.env.test?

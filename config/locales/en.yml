@@ -1,34 +1,3 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   "true": "foo"
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
   activemodel:
     errors:
@@ -37,19 +6,25 @@ en:
           attributes:
             current_password:
               blank: Enter your current password.
+              invalid: Current password is invalid.
             first_name:
               blank: Enter a first name.
             last_name:
               blank: Enter a surname.
             postcode:
               blank: Enter your setting's postcode.
+              invalid: Your setting's postcode is invalid.
             email:
               blank: Enter an email address.
+              invalid: This email address is invalid.
             password:
               blank: Enter a password.
-              too_short: Password is too short.
+              too_short: Password must be at least 8 characters. # devise override
+              invalid: New password requires upper and lower case letters, a number and at least 8 characters.
             password_confirmation:
               confirmation: Confirmation doesn't match password.
+            ofsted_number:
+              invalid: This Ofsted number is not recognised.
   activerecord:
     errors:
       models:
@@ -57,39 +32,97 @@ en:
           attributes:
             current_password:
               blank: Enter your current password.
+              invalid: Current password is invalid.
             first_name:
               blank: Enter a first name.
             last_name:
               blank: Enter a surname.
             postcode:
               blank: Enter your setting's postcode.
+              invalid: Your setting's postcode is invalid.
             email:
               blank: Enter an email address.
+              invalid: This email address is invalid.
             password:
               blank: Enter a password.
-              too_short: Password is too short.
+              too_short: Password must be at least 8 characters. # devise override
+              invalid: New password requires upper and lower case letters, a number and at least 8 characters.
             password_confirmation:
               confirmation: Confirmation doesn't match password.
-  phase_banner_html: "This is a new service, your %{feedback_link} will help us improve it."
+            ofsted_number:
+              invalid: This Ofsted number is not recognised.
+  phase_banner_html: This is a new service, your %{feedback_link} will help us improve it.
+  links:
+    change: Change
   banners:
     alert: Warning
     error: Error
     important: Success
     notice: Success
+
   extra_registration:
     complete: Thank you for creating an early years training account. You can now start the first module.
+    # /extra_registrations/name/edit
     name:
       heading: About you
       hint: We're asking for your details so we can personalise your training certificates.
-      first_name: First name
-      last_name: Surname
       submit: Continue
+    # /extra_registrations/setting/edit
     setting:
       heading: About your setting
       hint: Your details and training progress won't be shared with anyone without your permission.
-      ofsted_number: Your setting's Ofsted number
-      ofsted_hint: This might start with EY or VC followed by 6 numbers, or it might be an 8 letter number. If you don't know your setting's Ofsted number, you can look it up on the Ofsted website.
-      postcode: Your setting's postcode
-      postcode_hint: If you have multiple locations, enter the one where you work most often.
       submit: Complete
-  email: Email address
+
+  password:
+    last_changed: Password last changed on %{date}
+    hardness: Your password must contain at least %{length} characters, upper and lowercase letter and at least 1 number.
+    # /users/sign_in
+    label: Password
+    remember_me: Remember me
+  check_email_confirmation:
+    heading: Check your email
+    body: "We have sent you an email with instructions for how to verify your email address. We sent the email to:"
+    body_two: We have sent you an email with instructions for how to verify your email address. We sent the email to
+    summary_text: Problems with the activation email?
+    not_recieved:
+      title: I haven’t received the email
+      text: Please wait a few minutes for the email to arrive. If it doesn’t appear in your inbox, please check your spam or junk email folder. lf you still cannot see the email, we can send it again.
+      link_text: Send me another email
+    no_access_to_email:
+      title: I don’t have access to the email address I used to register 
+      text: You can set up your account using a different email address.
+      link_text: create a new account
+    diff_problem:
+      title: I have a different problem
+      text: For other problems with creating your account or signing in.
+      link_text: contact us
+
+  # Form Builder ---------------------------------------------------------------
+  helpers:
+    label:
+      user:
+        first_name: First name
+        last_name: Surname
+        email: Email address
+        password: Create a new password # /my-account/edit-password
+        current_password: Enter your current password
+        password_confirmation: Re-type your new password
+        postcode: Your setting's postcode
+        ofsted_number: Your setting's Ofsted number
+    hint:
+      user:
+        postcode: If you have multiple locations, enter the one where you work most often.
+        ofsted_number: |
+          This might start with EY or VC followed by a 6 digit number.
+          Or, it might be a 6 or 7 digit number with no letters at the start.
+          If you don't know your setting's Ofsted number, you can look it up on the Ofsted website.
+        current_password: We need your current password to confirm your changes.
+
+    caption:
+      user:
+        first_name: We're asking for your details so we can personalise your training certificates.
+
+    # legend:
+    #   user:
+
+

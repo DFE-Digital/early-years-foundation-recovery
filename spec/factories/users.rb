@@ -1,20 +1,23 @@
 FactoryBot.define do
-  # registered
   factory :user do
     email { Faker::Internet.safe_email }
     password { 'StrongPassword123' }
 
-    # confirmed
     trait :confirmed do
       confirmed_at { 1.minute.ago }
     end
 
-    # completed
     trait :registered do
       confirmed
       registration_complete { true }
       first_name { Faker::Name.first_name }
       last_name { Faker::Name.last_name }
+      postcode { Faker::Address.postcode }
+    end
+
+    trait :completed do
+      registered
+      ofsted_number { 'EY123456' }
     end
   end
 end
