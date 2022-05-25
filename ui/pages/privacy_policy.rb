@@ -1,10 +1,9 @@
-# Pages namespace to include all pages in the application.
+# frozen_string_literal: true
+
 module Pages
-  # Privacy Policy page, POM.
-  class PrivacyPolicy < SitePrism::Page
-    set_url ENV['PRIVACY_URL']
-    set_url_matcher %r{static/privacy_policy}
-    
-    section :header, Sections::Header, '.govuk-header'
+  class PrivacyPolicy < Base
+    set_url '/static/privacy_policy'
+
+    element :heading, 'h1', text: 'Privacy policy'
   end
 end

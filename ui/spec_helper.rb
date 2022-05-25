@@ -13,11 +13,11 @@ RSpec.configure do |config|
 end
 
 require_relative './support/env'
+require_relative './support/shared/with_user'
+require_relative './support/shared/with_guest'
 
 # Site Prism URL defaults to SSL in production
 ENV['BASE_URL'] ||= 'http://localhost:3000'
-ENV['PRIVACY_URL']||= 'http://localhost:3000/static/privacy_policy'
-ENV['TERMS_URL']||= 'http://localhost:3000/static/terms_and_conditions'
 
 # If no browser is chosen, then default to the following browser
 ENV['BROWSER'] ||= 'chrome'

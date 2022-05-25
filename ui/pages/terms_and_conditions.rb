@@ -1,10 +1,9 @@
-# Pages namespace to include all pages in the application.
-module Pages
-  # Terms and Conditions page, POM.
-  class TermsAndConditions < SitePrism::Page
-    set_url ENV['TERMS_URL']
-    set_url_matcher %r{static/terms_and_conditions}
+# frozen_string_literal: true
 
-    section :header, Sections::Header, '.govuk-header'
+module Pages
+  class TermsAndConditions < Base
+    set_url '/static/terms_and_conditions'
+
+    element :heading, 'h1', text: 'Terms and conditions'
   end
 end

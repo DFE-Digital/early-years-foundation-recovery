@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Sections
   class Header < SitePrism::Section
     element :title_link, '.govuk-header__link govuk-header__link--service-name', text: 'GOV.UK Early Years Foundation Recovery'
@@ -6,6 +8,6 @@ module Sections
     element :training_module, "a[href='/modules']", text: 'Training Modules'
     element :sign_in, "a[href='/users/sign_in']", text: 'Sign in'
     element :sign_out, "a[href='/users/sign_out']", text: 'Sign out'
-    element :profile, "a[href='/user']", text: 'Profile'
+    element :my_account, "a[href='/my-account']", text: 'My account'
   end
 end
