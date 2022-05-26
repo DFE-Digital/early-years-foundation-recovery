@@ -8,7 +8,7 @@
 # @example
 #
 #   $ BROWSER=standalone_firefox BASE_URL=https://app:3000 ./bin/docker-qa
-#   $ BASE_URL=https://evening-thicket-25194.herokuapp.com ./bin/docker-qa
+#   $ BASE_URL=https://ey-recovery.london.cloudapps.digital ./bin/docker-qa
 #
 # ------------------------------------------------------------------------------
 set -e
