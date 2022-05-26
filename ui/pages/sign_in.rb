@@ -1,21 +1,25 @@
-module Pages
-  class SignIn < SitePrism::Page
-    set_url_matcher %r{users/sign_in}
+# frozen_string_literal: true
 
-    element :email_locator, '#user-email-field'
-    element :password_locator, '#user-password-field'
+module Pages
+  class SignIn < Base
+    set_url '/users/sign_in'
+
+    element :email_field, '#user-email-field'
+    element :password_field, '#user-password-field'
     element :sign_in_button, 'button.govuk-button'
 
-    section :header, Sections::Header, '.govuk-header'
-
-    # Convenience method to login with the email address and password strings
+    # Authenticate using email and password
     #
-    # @param email [String] login email address
-    # @param password [String] login password
+    # @param email [String] login email address (default: completed@example.com)
+    # @param password [String] login password (default: Passw0rd)
     def with_email_and_password(email = nil, password = nil)
       wait_until_header_visible
-      email_locator.set email || 'completed@example.com'
-      password_locator.set password || ENV.fetch('USER_PASSWORD', 'password')
+
+      email ||= 'completed@example.com'
+      password ||= ENV.fetch('USER_PASSWORD', 'Passw0rd')
+
+      email_field.set(email)
+      password_field.set(password)
       sign_in_button.click
     end
   end

@@ -14,7 +14,7 @@ RSpec.describe 'Users sign in', type: :system do
       click_button 'Sign in'
 
       expect(page).to have_text('Signed in successfully')
-        .and have_text('Your application is ready') # home page
+        .and have_text('Child development training for early years providers') # home page
     end
 
     it 'warns when invalid email or password' do
@@ -55,6 +55,17 @@ RSpec.describe 'Users sign in', type: :system do
 
       expect(page).to have_text('Signed in successfully')
         .and have_text('About you') # extra registration
+    end
+
+    it 'locks my account after 6 incorrect password attempts' do
+      6.times do
+        fill_in 'Email address', with: user.email
+        fill_in 'Password', with: 'IncorrectPassword'
+        click_button 'Sign in'
+      end
+
+      expect(page).to have_text('Warning')
+        .and have_text('For security reasons your account has been locked for 2 hours. For faster access we have sent you an email to reset your password.')
     end
   end
 end

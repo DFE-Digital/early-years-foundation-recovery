@@ -1,4 +1,4 @@
 h3 Training Modules
 - TrainingModule.all.each do |t|
-  p=t.title
+  p= t.title
   p= @user.started?(training_module: t) ? link_to("Resume", url_for(@user.last_page_for(training_module: t))) : "Not started"

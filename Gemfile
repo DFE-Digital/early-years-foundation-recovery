@@ -57,6 +57,9 @@ gem 'govuk_notify_rails', '~> 2.2', '>= 2.2.0'
 gem 'sentry-rails'
 gem 'sentry-ruby'
 
+# Validate and normalise user postcodes
+gem 'uk_postcode'
+
 # Manage seeds
 gem 'dibber'
 

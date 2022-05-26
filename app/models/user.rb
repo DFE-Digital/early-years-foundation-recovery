@@ -8,7 +8,13 @@ class User < ApplicationRecord
   has_many :visits, class_name: 'Ahoy::Visit'
   has_many :events, class_name: 'Ahoy::Event'
 
-  validates_with OfstedValidator
+  validates :first_name, :last_name, :postcode,
+            presence: true,
+            if: proc { |u| u.registration_complete }
+
+  validates :password, password: true
+  validates :postcode, postcode: true
+  validates :ofsted_number, ofsted_number: true
 
   def last_page_for(training_module:)
     events.where_properties(training_module_id: training_module.name).last&.properties
@@ -24,5 +30,22 @@ class User < ApplicationRecord
 
   def email_to_confirm
     pending_reconfirmation? ? unconfirmed_email : email
+  end
+
+  def password_last_changed
+    timestamp = password_changed_events&.time || created_at
+    timestamp.to_date&.to_formatted_s(:rfc822)
+  end
+
+  def password_changed_events
+    events.where(name: 'password_changed')&.last
+  end
+
+  def postcode=(input)
+    super UKPostcode.parse(input.to_s).to_s
+  end
+
+  def ofsted_number=(input)
+    super input.to_s.strip.upcase
   end
 end

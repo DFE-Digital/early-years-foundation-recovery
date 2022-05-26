@@ -1,22 +1,37 @@
-h1 Your Profile
-dl
-  dt First name
-  dd= @user.first_name
+.govuk-grid-row
+  .govuk-grid-column-full
+    h1.govuk-heading-l Manage your account
+    h2.govuk-heading-m Your details
+    hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
-  dt Last name
-  dd= @user.last_name
+    = govuk_summary_list do |your_details|
+      - your_details.row do |row|
+        - row.key { 'Name' }
+        - row.value { @user.name }
+        - row.action(text: t('links.change'), href: edit_name_user_path, visually_hidden_text: 'name')
+      - your_details.row do |row|
+        - row.key { 'Email' }
+        - row.value { @user.email }
+        - row.action(text: t('links.change'), href: edit_email_user_path, visually_hidden_text: 'email')
+      - your_details.row do |row|
+        - row.key { 'Password' }
+        - row.value { t('password.last_changed', date: @user.password_last_changed) }
+        - row.action(text: t('links.change'), href: edit_password_user_path, visually_hidden_text: 'password')
 
-  dt Email address
-  dd= @user.email
+    -# "setting" is a common practitioner term denoting the place where you practice
+    h2.govuk-heading-m About your setting
+    hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
-  dt Postcode
-  dd= @user.postcode
+    = govuk_summary_list do |setting|
+      - setting.row do |row|
+        - row.key { 'Postcode' }
+        - row.value { @user.postcode }
+        - row.action(text: t('links.change'), href: edit_postcode_user_path, visually_hidden_text: 'postcode')
+      - setting.row do |row|
+        - row.key { 'Ofsted number' }
+        - row.value { @user.ofsted_number }
+        - row.action(text: t('links.change'), href: edit_ofsted_number_user_path, visually_hidden_text: 'ofsted_number')
 
-  dt Ofsted Number
-  dd= @user.ofsted_number
 
 = render 'training_modules'
-
-p= link_to "Edit", edit_user_path
-
 = render 'debug'
