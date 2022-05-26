@@ -1,7 +1,7 @@
 class Ui
   attr_reader :inflector
 
-  include Pages::Base
+  # include Pages::Base
 
   # Set class defaults
   def initialize

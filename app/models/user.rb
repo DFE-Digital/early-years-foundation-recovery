@@ -16,6 +16,14 @@ class User < ApplicationRecord
   validates :postcode, postcode: true
   validates :ofsted_number, ofsted_number: true
 
+  def last_page_for(training_module:)
+    events.where_properties(training_module_id: training_module.name).last&.properties
+  end
+
+  def started?(training_module:)
+    last_page_for(training_module:).present?
+  end
+
   def name
     [first_name, last_name].compact.join(' ')
   end
