@@ -38,7 +38,8 @@ class CustomFailureApp < Devise::FailureApp
 
 protected
 
-  # overwriting the default method
+  # Add `Devise.unlock_in` to locales
+  #
   # @return [String] the i18n message
   def i18n_message(default = nil)
     message = warden_message || default || :unauthenticated
@@ -47,7 +48,6 @@ protected
       options = {}
       options[:resource_name] = scope
       options[:scope] = 'devise.failure'
-      # add Devise.unlock_in to Devise locales file
       options[:unlock_in] = scope_class.unlock_in / 3600
       options[:default] = [message]
       auth_keys = scope_class.authentication_keys
@@ -242,7 +242,7 @@ Devise.setup do |config|
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
-  config.timeout_in = Rails.configuration.x.user_timeout_minutes.minutes
+  config.timeout_in = Rails.configuration.user_timeout_minutes.minutes
 
   # ==> Configuration for :lockable
   # Defines which strategy will be used to lock an account.
@@ -265,7 +265,7 @@ Devise.setup do |config|
   config.maximum_attempts = 6
 
   # Time interval to unlock the account if :time is enabled as unlock_strategy.
-  config.unlock_in = ENV.fetch('UNLOCK_IN_MINUTES', 2 * 60).to_i.minutes
+  config.unlock_in = Rails.configuration.unlock_in_minutes.minutes
 
   # Warn on the last attempt before the account is locked.
   config.last_attempt_warning = true
