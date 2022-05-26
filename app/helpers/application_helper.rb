@@ -4,7 +4,7 @@ module ApplicationHelper
       header.navigation_item(text: 'Home', href: root_path)
       if user_signed_in?
         header.navigation_item(text: 'My account', href: user_path)
-        header.navigation_item(text: 'Sign out', href: destroy_user_session_path, options: { data: { turbo_method: :delete } })
+        header.navigation_item(text: 'Sign out', href: destroy_user_session_path, options: { data: { turbo_method: :get } })
       else
         header.navigation_item(text: 'Sign in', href: new_user_session_path)
       end
