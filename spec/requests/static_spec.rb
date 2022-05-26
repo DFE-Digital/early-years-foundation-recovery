@@ -7,6 +7,8 @@ RSpec.describe 'Static page', type: :request do
 
   specify { expect('/static/privacy_policy').to be_successful }
 
+  specify { expect('/static/contact').to be_successful }
+
   specify { expect('/users/timeout').to be_successful }
 
   specify { expect('/404').to be_successful }
