@@ -71,7 +71,7 @@ RSpec.describe 'Sign in', type: :system do
 
       expect(page).to have_text('Warning')
         .and have_text('Please ensure you have entered your valid email address and password.')
-        # .and have_text('For security reasons your account has been locked for 2 hours. For faster access we have sent you an email to reset your password.')
+      # .and have_text('For security reasons your account has been locked for 2 hours. For faster access we have sent you an email to reset your password.')
     end
   end
 end
