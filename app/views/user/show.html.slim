@@ -1,4 +1,4 @@
-.govuk-grid-row 
+.govuk-grid-row
   .govuk-grid-column-full
     h1.govuk-heading-l Manage your account
     h2.govuk-heading-m Your details
@@ -31,3 +31,7 @@
         - row.key { 'Ofsted number' }
         - row.value { @user.ofsted_number }
         - row.action(text: t('links.change'), href: edit_ofsted_number_user_path, visually_hidden_text: 'ofsted_number')
+
+
+= render 'training_modules'
+= render 'debug'
