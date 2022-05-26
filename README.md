@@ -131,7 +131,7 @@ To run a self-signed certificate must first be generated.
 
 1. `./bin/docker-certs` (Mac users can trust the certificate in [Keychain Access](https://support.apple.com/en-gb/guide/keychain-access))
 2. `./bin/docker-qa` (this will build and bring up the application)
-3. `docker exec -it recovery_prod rails db:seed` (seed the pre-requisite user accounts)
+3. `docker exec -it recovery_prod rails db:seed` (seed the prerequisite user accounts)
 4. `BASE_URL=https://app:3000 ./bin/docker-qa` (test against the seeded application)
 
 WIP: proposed Github workflow that does not require `docker-compose`.
