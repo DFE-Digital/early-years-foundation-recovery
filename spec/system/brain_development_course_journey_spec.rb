@@ -2,21 +2,16 @@ require 'rails_helper'
 
 RSpec.describe 'Brain Development training registered user' do
   context 'when registered user' do
-    let(:user) { create :user, :registered }
+    include_context 'with user'
 
     before do
-      visit '/users/sign_in'
-      fill_in 'Email address', with: user.email
-      fill_in 'Password', with: 'StrongPassword123'
-      click_button 'Sign in'
+      visit '/modules'
+      click_link 'Brain development in early years'
     end
 
     specify 'good path journey' do
-      click_link 'Explore the course content'
-      click_link 'Brain development in early years'
-
       expect(page).to have_text('Brain development in the early years') # 1 Module intro page
-      click_link 'Next' # go to 1-1 Sub-module into page
+      click_link 'Next' # go to 1-1 Sub-module intro page
       click_link 'Next' # go to 1-1-1 Topic intro page
       click_link 'Next' # go to 1-1-1-1a Learning content page
       click_link 'Next' # go to 1-1-1-1b Formative assessment

@@ -14,7 +14,6 @@ RSpec.describe 'Users sign in', type: :system do
       click_button 'Sign in'
 
       expect(page).to have_text('Signed in successfully')
-        .and have_text('Child development training for early years providers') # home page
     end
 
     it 'warns when invalid email or password' do

@@ -16,14 +16,29 @@ class User < ApplicationRecord
   validates :postcode, postcode: true
   validates :ofsted_number, ofsted_number: true
 
+  # @return [Array]
+  def learning(state:)
+    training_modules = TrainingModule.all
+
+    case state
+    when :started
+      training_modules.select { |mod| started?(training_module: mod) }
+    when :not_started
+      training_modules.reject { |mod| started?(training_module: mod) }
+    end
+  end
+
+  # @return [Hash<String>]
   def last_page_for(training_module:)
     events.where_properties(training_module_id: training_module.name).last&.properties
   end
 
+  # @return [Boolean]
   def started?(training_module:)
     last_page_for(training_module:).present?
   end
 
+  # @return [String]
   def name
     [first_name, last_name].compact.join(' ')
   end

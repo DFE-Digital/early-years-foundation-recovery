@@ -5,10 +5,16 @@ Rails.application.routes.draw do
   get '/500', to: 'errors#internal_server_error', via: :all
   get 'users/timeout', to: 'errors#timeout'
   get 'health', to: 'home#show'
+  get 'my-learning', to: 'training#index'
+
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    passwords: 'passwords',
+    registrations: 'registrations',
+  }
 
   resources :settings, only: %i[show]
-
-  devise_for :users, controllers: { sessions: 'users/sessions', passwords: 'passwords', registrations: 'registrations' }
+  resources :static, only: %i[show]
   resources :extra_registrations, only: %i[index edit update]
 
   resource :user, controller: :user, path: 'my-account', only: %i[show] do
@@ -31,6 +37,4 @@ Rails.application.routes.draw do
     resources :questionnaires, only: %i[show update]
     resources :formative_assessments, only: %i[show update]
   end
-
-  resources :static, only: :show
 end

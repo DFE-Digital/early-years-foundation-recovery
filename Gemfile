@@ -44,6 +44,7 @@ gem 'slim-rails', '~> 3.4', '>= 3.4.0'
 # Create models from static data such as hashes or YAML
 gem 'active_hash'
 
+# TODO: add ey-recovery to https://github.com/DFE-Digital/govuk-components
 gem 'govuk-components', '>= 3.0.3'
 gem 'govuk_design_system_formbuilder'
 

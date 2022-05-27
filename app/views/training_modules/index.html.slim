@@ -2,7 +2,7 @@ h1 Training Modules
 
 ol.govuk-list.govuk-list--spaced
   - @training_modules.each do |training_module|
-    li= link_to training_module.title, training_module_content_pages_path(training_module)
+    li= govuk_link_to training_module.title, training_module_content_pages_path(training_module)
 
     - if ENV['RAILS_ENV'].eql?('development')
       pre.debug_dump

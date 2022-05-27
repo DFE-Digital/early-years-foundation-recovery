@@ -1,14 +1,50 @@
-.govuk-grid-row
-  .govuk-grid-column-full
-    .app-search-form-container
-      h1.govuk-heading-xl
-        | Child development training for early years providers
-      p.govuk-body 
-        | This free, online training provides an overview of child development and gives practical advice for supporting the development of children in your early years setting.
-    p.govuk-body
-
-      = link_to "Explore the course content", training_modules_path, class: 'govuk-button govuk-button--secondary'
-
 - if ENV['RAILS_ENV'].eql?('development')
   pre.debug_dump
     = configuration_summary_list
+
+.govuk-grid-row
+  .govuk-grid-column-full
+    .light-grey-box
+      .govuk-grid-row
+        .govuk-grid-column-two-thirds
+          h1.govuk-heading-l
+            | Child development training for early years providers
+          p.govuk-body
+            | This free, online training provides an overview of child development
+            |  and gives practical advice for supporting the development of children
+            |  in your early years setting.
+
+          a class='govuk-button govuk-button--start govuk-!-margin-bottom-4' role='button' draggable='false' data-module='govuk-button' href=training_modules_path
+            | Learn more and enrol
+            .govuk-visually-hidden
+              p on the course
+
+            svg class='govuk-button__start-icon' xmlns='http://www.w3.org/2000/svg' width='17.5' height='19' viewBox='0 0 33 40' aria-hidden="true" focusable='false'
+              path fill='currentColor' d='M0 0h13l20 20-20 20H0l20-20z'
+
+        .govuk-grid-column-one-third
+          img src='https://eye-recovery.herokuapp.com/public/images/home/image4.jpg' alt='A practitioner smiling and holding a baby' width=300
+
+
+.govuk-grid-row
+  .govuk-grid-column-one-half
+    h2.govuk-heading-m About this training course
+    p class='govuk-body govuk-!-padding-bottom-4'
+      | Each training module on this site covers an important area of child development and has
+      |  been written by early years experts, working with the Department for Education and Ofsted.
+    h2.govuk-heading-m Why should I take this training?
+    p.govuk-body This training:
+    ul.govuk-list.govuk-list--bullet
+      li is free for childminders and nurseries
+      li combines theory and practical tips
+      li includes opportunities to reflect on your practice
+      li links to additional resources
+      li offers the opportunity to download certificates of completion
+      li has been developed by expert practitioners
+
+  .govuk-grid-column-one-half
+    .light-grey-box
+      h2.govuk-heading-m Return to your training
+      p Sign in to continue learning, see your progress and download certificates.
+      = govuk_button_to 'Sign in', new_user_session_path
+      = govuk_link_to 'or create an account', new_user_registration_path
