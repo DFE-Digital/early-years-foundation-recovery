@@ -1,6 +1,6 @@
 ---
 en:
   static:
-    accessibility_statement:
+    accessibility-statement:
       heading: Accessibility statement for [service name] service
       content: \[Content goes here\]
