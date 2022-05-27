@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     resources :formative_assessments, only: %i[show update]
   end
 
-  %w[accessibility-statement privacy-policy terms-and-conditions].each do |static_page|
+  %w[accessibility-statement privacy-policy terms-and-conditions contact].each do |static_page|
     get "/#{static_page}", to: "static##{static_page}"
   end
 
