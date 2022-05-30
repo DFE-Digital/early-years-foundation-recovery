@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Confirmed user, following forgotten password process', type: :system do
   let(:user) { create :user, :confirmed }
   let(:token) { user.send_reset_password_instructions }
-  let(:password) { 'ABC123xyh' }
+  let(:password) { 'NewPassword123' }
 
   context 'when resetting password' do
     it 'flash message displays correctly' do
