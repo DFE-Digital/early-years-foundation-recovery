@@ -35,6 +35,31 @@ class CustomFailureApp < Devise::FailureApp
   def skip_format?
     %w[html turbo_stream */*].include? request_format.to_s
   end
+
+protected
+
+  # overwriting the default method
+  # @return [String] the i18n message
+  def i18n_message(default = nil)
+    message = warden_message || default || :unauthenticated
+
+    if message.is_a?(Symbol)
+      options = {}
+      options[:resource_name] = scope
+      options[:scope] = 'devise.failure'
+      # add Devise.unlock_in to Devise locales file
+      options[:unlock_in] = scope_class.unlock_in / 3600
+      options[:default] = [message]
+      auth_keys = scope_class.authentication_keys
+      keys = (auth_keys.respond_to?(:keys) ? auth_keys.keys : auth_keys).map { |key| scope_class.human_attribute_name(key) }
+      options[:authentication_keys] = keys.join(I18n.translate(:"support.array.words_connector"))
+      options = i18n_options(options)
+
+      I18n.t(:"#{scope}.#{message}", **options)
+    else
+      message.to_s
+    end
+  end
 end
 
 Devise.setup do |config|
@@ -207,7 +232,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length.
-  config.password_length = 6..128
+  config.password_length = 8..128
 
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
@@ -237,10 +262,10 @@ Devise.setup do |config|
 
   # Number of authentication tries before locking an account if lock_strategy
   # is failed attempts.
-  config.maximum_attempts = 5
+  config.maximum_attempts = 6
 
   # Time interval to unlock the account if :time is enabled as unlock_strategy.
-  config.unlock_in = 2.hours
+  config.unlock_in = ENV.fetch('UNLOCK_IN_MINUTES', 2 * 60).to_i.minutes
 
   # Warn on the last attempt before the account is locked.
   config.last_attempt_warning = true
@@ -257,7 +282,7 @@ Devise.setup do |config|
 
   # When set to false, does not sign a user in automatically after their password is
   # reset. Defaults to true, so a user is signed in automatically after a reset.
-  # config.sign_in_after_reset_password = true
+  config.sign_in_after_reset_password = false
 
   # ==> Configuration for :encryptable
   # Allow you to use another hashing or encryption algorithm besides bcrypt (default).
@@ -295,7 +320,7 @@ Devise.setup do |config|
   config.navigational_formats = ['*/*', :html, :turbo_stream]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
-  config.sign_out_via = :delete
+  config.sign_out_via = :get
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting

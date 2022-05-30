@@ -1,3 +1,6 @@
-ul
-  li= event.name 
-  li= event.properties
+= event.time
+br
+- event.properties.each do |k,v|
+  = k + ": " + v
+  br
+hr

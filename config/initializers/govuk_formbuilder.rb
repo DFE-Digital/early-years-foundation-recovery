@@ -26,5 +26,5 @@ GOVUKDesignSystemFormBuilder.configure do |config|
   # config.localisation_schema_caption: nil
   #
   # config.enable_logger: true
-  # config.trust_error_messages: false
+  config.trust_error_messages = true
 end

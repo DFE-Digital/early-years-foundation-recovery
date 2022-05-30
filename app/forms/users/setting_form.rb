@@ -2,9 +2,8 @@ module Users
   class SettingForm < BaseForm
     attr_accessor :postcode, :ofsted_number
 
-    validates_with OfstedValidator
-
-    validates :postcode, presence: true
+    validates :ofsted_number, ofsted_number: true
+    validates :postcode, presence: true, postcode: true
 
     def save
       user.update!(postcode: postcode, ofsted_number: ofsted_number) if valid?

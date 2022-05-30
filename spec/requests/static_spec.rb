@@ -1,24 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe 'Static', type: :request do
-  describe 'GET static/terms_and_conditions' do
-    it 'renders successfully' do
-      get static_path(:terms_and_conditions)
-      expect(response).to have_http_status(:success)
-    end
-  end
+RSpec.describe 'Static page', type: :request do
+  specify { expect('/static/terms_and_conditions').to be_successful }
 
-  describe 'GET static/accessibility_statement' do
-    it 'renders successfully' do
-      get static_path(:accessibility_statement)
-      expect(response).to have_http_status(:success)
-    end
-  end
+  specify { expect('/static/accessibility_statement').to be_successful }
 
-  describe 'GET static/privacy_policy' do
-    it 'renders successfully' do
-      get static_path(:privacy_policy)
-      expect(response).to have_http_status(:success)
-    end
-  end
+  specify { expect('/static/privacy_policy').to be_successful }
+
+  specify { expect('/static/contact').to be_successful }
+
+  specify { expect('/users/timeout').to be_successful }
+
+  specify { expect('/404').to be_successful }
+
+  specify { expect('/500').to be_successful }
 end
