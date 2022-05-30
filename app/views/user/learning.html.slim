@@ -55,7 +55,7 @@ hr
           .govuk-card.govuk-card__height
             .govuk-card__content
               h3.govuk-heading-s= mod.title
-              p.govuk-body mod.description
+              p.govuk-body= mod.description
             .govuk-card__actions
               = govuk_link_to 'View more information about this module', training_module_content_page_path(mod, 1)
 
