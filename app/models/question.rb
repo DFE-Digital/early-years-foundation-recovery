@@ -7,6 +7,6 @@ class Question < OpenStruct
   end
 
   def to_partial_path
-    multi_select? ? 'shared/question_check_boxes' : 'shared/question_radio_buttons'
+    !!multi_select ? 'shared/question_check_boxes' : 'shared/question_radio_buttons'
   end
 end
