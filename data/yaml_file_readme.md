@@ -3,18 +3,16 @@
 The content and flow of most pages in this app are defined via a set of YAML files. There are four types of file:
 
 1. Overview of training modules
-
 2. Training module structure
-
 3. Training module content
-
 4. Questionnaires
 
 ## Overview of training modules
 
 */data/training-module.yml*
 
-This file defines which training modules appear in the list of training modules on the page `training_modules#index` page. The data are store in `TrainingModule` instances
+This file defines which training modules appear in the list of training modules on the page `training_modules#index` page.
+The data are store in `TrainingModule` instances
 
 ### Data Structure
 
@@ -36,7 +34,9 @@ This file defines the structure of the training module. Pages will appear in the
 ```yaml
 training_module_name:
   page_name:
-    type: Page type - for example text_page or formative_assessment
+    # Page type - for example
+    type: text_page
+    type: formative_assessment
 ```
 
 Each page will be displayed at:

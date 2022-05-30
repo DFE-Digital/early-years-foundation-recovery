@@ -1,18 +1,26 @@
 h1.govuk-heading-l My learning
+- if ENV['RAILS_ENV'].eql?('development')
+  pre.debug_dump
+    | Last page
+    br
+    - TrainingModule.all.each do |mod|
+      | #{ModuleItem.find_by(training_module: mod.name).last_page_name}: #{mod.title}
+      br
 
 .govuk-grid-row id='started'
   .govuk-grid-column-full
     h2.govuk-heading-m In progress
+    - if ENV['RAILS_ENV'].eql?('development')
+      pre.debug_dump
+        | Furthest page
+        br
+        - @started.each do |mod|
+          | #{@user.last_page_for(training_module: mod)['id']}: #{mod.title}
+          br
 
     - if @started.none?
       p You have not started any modules. To begin the training course, start an available module.
     - else
-      - if ENV['RAILS_ENV'].eql?('development')
-        pre.debug_dump
-          - @started.each do |mod|
-            | #{@user.last_page_for(training_module: mod)['id']}: #{mod.title}
-            br
-
       div class='govuk-grid-row govuk-!-margin-bottom-7'
         - @started.each do |mod|
           .govuk-grid-column-one-quarter
@@ -30,8 +38,10 @@ hr
 .govuk-grid-row id='available'
   .govuk-grid-column-full
     h2.govuk-heading-m Available modules
-    - @not_started.each do |mod|
-      p= mod.title
+
+    ul
+      - @not_started.each do |mod|
+        li= link_to mod.title, training_module_content_page_path(mod, 1)
 
 hr
 .govuk-grid-row id='upcoming'
@@ -41,4 +51,4 @@ hr
 hr
 .govuk-grid-row id='completed'
   .govuk-grid-column-full
-    = completed_modules_table
+    = modules_table(@completed)

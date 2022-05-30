@@ -16,26 +16,18 @@ class User < ApplicationRecord
   validates :postcode, postcode: true
   validates :ofsted_number, ofsted_number: true
 
-  # @return [Array]
-  def learning(state:)
+  # @return [Array] modules by state
+  def modules_by_state(state)
     training_modules = TrainingModule.all
 
-    case state
+    case state.to_sym
     when :started
-      training_modules.select { |mod| started?(training_module: mod) }
+      training_modules.select { |mod| started?(training_module: mod) && !completed?(training_module: mod) }
     when :not_started
       training_modules.reject { |mod| started?(training_module: mod) }
+    when :completed
+      training_modules.select { |mod| completed?(training_module: mod) }
     end
-  end
-
-  # @return [Hash<String>]
-  def last_page_for(training_module:)
-    events.where_properties(training_module_id: training_module.name).last&.properties
-  end
-
-  # @return [Boolean]
-  def started?(training_module:)
-    last_page_for(training_module:).present?
   end
 
   # @return [String]
@@ -52,10 +44,6 @@ class User < ApplicationRecord
     timestamp.to_date&.to_formatted_s(:rfc822)
   end
 
-  def password_changed_events
-    events.where(name: 'password_changed')&.last
-  end
-
   def postcode=(input)
     super UKPostcode.parse(input.to_s).to_s
   end
@@ -63,4 +51,32 @@ class User < ApplicationRecord
   def ofsted_number=(input)
     super input.to_s.strip.upcase
   end
+
+# private
+
+  def password_changed_events
+    events.where(name: 'password_changed')&.last
+  end
+
+  # @return [Boolean]
+  def completed?(training_module:)
+    mod_item = ModuleItem.find_by(training_module: training_module.name)
+    mod_item_last_page = mod_item.module_items_in_this_training_module.last.name
+
+    # test page (this doesn't mean they passed/completed)
+    furthest_page = last_page_for(training_module: training_module)
+
+    furthest_page ? mod_item_last_page.eql?(furthest_page['id']) : false
+  end
+
+  # @return [Hash<String>] furthest step reached in a module
+  def last_page_for(training_module:)
+    events.where_properties(training_module_id: training_module.name).last&.properties
+  end
+
+  # @return [Boolean]
+  def started?(training_module:)
+    last_page_for(training_module:).present?
+  end
+
 end

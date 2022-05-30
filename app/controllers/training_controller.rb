@@ -6,8 +6,10 @@ class TrainingController < ApplicationController
   # "My learning" tab
   def index
     @user = current_user
-    @started = current_user.learning(state: :started)
-    @not_started = current_user.learning(state: :not_started)
+    @started = current_user.modules_by_state(:started)
+    @not_started = current_user.modules_by_state(:not_started)
+    @completed = current_user.modules_by_state(:completed)
+
     render 'user/learning'
   end
 end

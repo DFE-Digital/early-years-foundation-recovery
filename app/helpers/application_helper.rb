@@ -48,9 +48,7 @@ module ApplicationHelper
     link_to 'Previous', link, link_args
   end
 
-  def completed_modules_table
-    modules = TrainingModule.all.to_a
-
+  def modules_table(modules)
     rows = [
       ['Module name', 'Date completed', 'Actions'],
       *modules.map do |mod|

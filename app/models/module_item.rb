@@ -72,4 +72,9 @@ class ModuleItem < YamlBase
   def module_items_in_this_training_module
     @module_items_in_this_training_module ||= self.class.where(training_module: training_module).to_a
   end
+
+  # @return [String] "1-2-3"
+  def last_page_name
+    module_items_in_this_training_module.last.name
+  end
 end
