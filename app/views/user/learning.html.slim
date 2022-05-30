@@ -48,6 +48,17 @@ hr
   .govuk-grid-column-full
     h2.govuk-heading-m Upcoming modules
 
+  - TrainingModule.all.take(3).each do |mod|
+    .govuk-grid-column-one-third
+      .govuk-card__flex-container
+        .govuk-card__flex-item
+          .govuk-card.govuk-card__height
+            .govuk-card__content
+              h3.govuk-heading-s= mod.title
+              p.govuk-body mod.description
+            .govuk-card__actions
+              = govuk_link_to 'View more information about this module', training_module_content_page_path(mod, 1)
+
 hr
 .govuk-grid-row id='completed'
   .govuk-grid-column-full
