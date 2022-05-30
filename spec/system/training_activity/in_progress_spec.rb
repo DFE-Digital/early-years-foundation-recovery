@@ -10,7 +10,7 @@ RSpec.describe 'User modules "In progress"', type: :system do
 
     it 'is empty' do
       within '#started' do
-        expect(page).to_not have_text('A Training Module')
+        expect(page).not_to have_text('A Training Module')
         expect(page).to have_text('In progress')
           .and have_text('You have not started any modules.')
       end
@@ -25,7 +25,7 @@ RSpec.describe 'User modules "In progress"', type: :system do
 
     it 'shows the module' do
       within '#started' do
-        expect(page).to_not have_text('You have not started any modules.')
+        expect(page).not_to have_text('You have not started any modules.')
         expect(page).to have_text('In progress').and have_text('A Training Module')
       end
     end
@@ -40,7 +40,7 @@ RSpec.describe 'User modules "In progress"', type: :system do
 
     it 'does not show the module' do
       within '#started' do
-        expect(page).to_not have_text('A Training Module')
+        expect(page).not_to have_text('A Training Module')
         expect(page).to have_text('In progress')
           .and have_text('You have not started any modules.')
       end

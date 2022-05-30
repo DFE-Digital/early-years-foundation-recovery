@@ -52,7 +52,7 @@ class User < ApplicationRecord
     super input.to_s.strip.upcase
   end
 
-# private
+  # private
 
   def password_changed_events
     events.where(name: 'password_changed')&.last
@@ -78,5 +78,4 @@ class User < ApplicationRecord
   def started?(training_module:)
     last_page_for(training_module:).present?
   end
-
 end

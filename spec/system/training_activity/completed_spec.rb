@@ -11,7 +11,7 @@ RSpec.describe 'User modules "Completed"', type: :system do
     it 'is empty' do
       within '#completed' do
         expect(page).to have_text('Completed modules')
-        expect(page).to_not have_text('A Training Module')
+        expect(page).not_to have_text('A Training Module')
       end
     end
   end
