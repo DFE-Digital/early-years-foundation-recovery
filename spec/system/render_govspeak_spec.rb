@@ -9,7 +9,7 @@ RSpec.describe '', type: :system do
     fill_in 'Password', with: 'StrongPassword123'
     click_button 'Sign in'
 
-    visit 'modules/one/formative_assessments/1-2-2'
+    visit 'modules/one/formative-assessments/1-2-2'
   end
 
   describe 'Govspeak page content' do

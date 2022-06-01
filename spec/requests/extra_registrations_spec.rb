@@ -11,7 +11,7 @@ RSpec.describe 'ExtraRegistrations', type: :request do
 
   describe 'GET /extra_registrations' do
     it 'redirects to first step' do
-      get '/extra_registrations'
+      get '/extra-registrations'
       expect(response).to redirect_to(edit_extra_registration_path(steps.first))
     end
   end
