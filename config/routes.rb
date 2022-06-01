@@ -32,5 +32,5 @@ Rails.application.routes.draw do
     resources :formative_assessments, only: %i[show update]
   end
 
-  get "/:id", to: "static#show"
+  get '/:id', to: 'static#show'
 end
