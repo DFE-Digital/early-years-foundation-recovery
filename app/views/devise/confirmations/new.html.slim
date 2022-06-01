@@ -1,3 +1,4 @@
+a.govuk-back-link href=url_for(:back) Back
 - content_for :devise_form do
   = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
     = f.govuk_error_summary
