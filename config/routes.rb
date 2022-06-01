@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'users/timeout', to: 'errors#timeout'
   get 'health', to: 'home#show'
 
-  resources :settings, only: %i[show]
+  resources :settings, only: :show
 
   devise_for :users, controllers: { sessions: 'users/sessions', passwords: 'passwords', registrations: 'registrations' }
   resources :extra_registrations, only: %i[index edit update]
@@ -32,5 +32,5 @@ Rails.application.routes.draw do
     resources :formative_assessments, only: %i[show update]
   end
 
-  resources :static, only: :show
+  get "/:id", to: "static#show"
 end
