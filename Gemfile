@@ -87,6 +87,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'redcarpet' # code syntax in Yardoc
   gem 'web-console'
   gem 'yard-junk'
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]

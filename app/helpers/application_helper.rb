@@ -48,17 +48,15 @@ module ApplicationHelper
     link_to 'Previous', link, link_args
   end
 
-  def modules_table(modules)
-    rows = [
-      ['Module name', 'Date completed', 'Actions'],
-      *modules.map do |mod|
-        [
-          govuk_link_to(mod.title, training_module_content_pages_path(mod)),
-          Time.zone.today.to_formatted_s(:rfc822),
-          '',
-        ]
-      end,
-    ]
-    govuk_table(rows: rows, caption: 'Completed modules', first_cell_is_header: true)
+  def completed_modules_table(modules)
+    header = ['Module name', 'Date completed', 'Actions']
+    rows = modules.map do |mod, timestamp|
+      [
+        govuk_link_to(mod.title, training_module_content_pages_path(mod)),
+        timestamp.to_date.to_formatted_s(:rfc822),
+        govuk_link_to('View certificate', '#'),
+      ]
+    end
+    govuk_table(rows: [header, *rows], caption: 'Completed modules', first_cell_is_header: true)
   end
 end

@@ -5,7 +5,7 @@ brain-development-in-early-years:
   1-1:
     type: sub_module_intro
   1-1-1:
-    type: text_page
+    type: text_page # topic_intro
   1-1-1-1a:
     type: text_page
   1-1-1-1b:

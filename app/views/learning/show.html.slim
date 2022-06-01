@@ -1,54 +1,40 @@
 h1.govuk-heading-l My learning
-- if ENV['RAILS_ENV'].eql?('development')
-  pre.debug_dump
-    | Last page
-    br
-    - TrainingModule.all.each do |mod|
-      | #{ModuleItem.find_by(training_module: mod.name).last_page_name}: #{mod.title}
-      br
+= render 'debug'
 
 .govuk-grid-row id='started'
   .govuk-grid-column-full
     h2.govuk-heading-m In progress
-    - if ENV['RAILS_ENV'].eql?('development')
-      pre.debug_dump
-        | Furthest page
-        br
-        - @started.each do |mod|
-          | #{@user.last_page_for(training_module: mod)['id']}: #{mod.title}
-          br
-
-    - if @started.none?
+    - if @user.training_modules_by_state(:in_progress).none?
       p You have not started any modules. To begin the training course, start an available module.
     - else
       div class='govuk-grid-row govuk-!-margin-bottom-7'
-        - @started.each do |mod|
+        - @user.training_modules_by_state(:in_progress).each do |mod|
           .govuk-grid-column-one-quarter
             .govuk-card__flex-container
               .govuk-card__flex-item
                 .govuk-card.govuk-card--contained.govuk-card--selectable
-                  a href=url_for(@user.last_page_for(training_module: mod))
+                  a href=training_module_content_page_path(mod, @user.last_page_for(mod))
                   div class='govuk-card__hero govuk-!-margin-bottom-2'
                     img src=image_path(mod.thumbnail) width=180 alt=mod.name
                   .govuk-card__content
-                    h3.govuk-heading-m
-                      = mod.title
+                    h3.govuk-heading-m= mod.title
 
-hr
+hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
+
 .govuk-grid-row id='available'
   .govuk-grid-column-full
     h2.govuk-heading-m Available modules
+    ul.govuk-list.govuk-list--bullet
+      - current_user.training_modules_by_state(:available).each do |mod|
+        li= govuk_link_to mod.title, training_module_path(mod)
 
-    ul
-      - @not_started.each do |mod|
-        li= link_to mod.title, training_module_content_page_path(mod, 1)
+hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
 
-hr
 .govuk-grid-row id='upcoming'
   .govuk-grid-column-full
     h2.govuk-heading-m Upcoming modules
 
-  - TrainingModule.all.take(3).each do |mod|
+  - @user.training_modules_by_state(:upcoming).take(3).each do |mod|
     .govuk-grid-column-one-third
       .govuk-card__flex-container
         .govuk-card__flex-item
@@ -57,9 +43,11 @@ hr
               h3.govuk-heading-s= mod.title
               p.govuk-body= mod.description
             .govuk-card__actions
-              = govuk_link_to 'View more information about this module', training_module_content_page_path(mod, 1)
+              - unless mod.draft?
+                = govuk_link_to 'View more information about this module', training_module_path(mod)
 
-hr
+hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
+
 .govuk-grid-row id='completed'
   .govuk-grid-column-full
-    = modules_table(@completed)
+    = completed_modules_table(@user.completed_table_data)

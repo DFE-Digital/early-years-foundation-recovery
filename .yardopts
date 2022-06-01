@@ -5,4 +5,5 @@
 --markup markdown
 -
 adr/*.md
+data/*.md
 LICENSE

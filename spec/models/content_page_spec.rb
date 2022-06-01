@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ContentPage, type: :model do
   let(:file) do
-    Rails.root.join('config/locales/modules/test.yml')
+    Rails.root.join('config/locales/modules/test/test.yml')
   end
 
   let(:content) do

@@ -1,0 +1,5 @@
+h1= @training_module.title
+
+p= @training_module.description
+
+= govuk_button_to 'Start', training_module_content_pages_path(@training_module), method: :get

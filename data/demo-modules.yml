@@ -1,0 +1,31 @@
+---
+alpha:
+  title: First Training Module
+  thumbnail: introduction_to_supporting_physical_development
+  description: This is the first module description
+
+bravo:
+  title: Second Training Module
+  thumbnail: introduction_to_supporting_physical_development
+  description: This is the second module description
+  depends_on: alpha
+
+charlie:
+  title: Third Training Module
+  thumbnail: introduction_to_supporting_physical_development
+  description: This is the third module description
+  depends_on: beta
+
+delta:
+  title: Fourth Training Module
+  thumbnail: introduction_to_supporting_physical_development
+  description: This module is unpublished and therefore not clickable
+  depends_on: beta
+  draft: true
+
+brain-development-in-early-years:
+  title: Brain development in early years
+  thumbnail: introduction_to_supporting_physical_development
+  description: |
+    This module will reinforce your understanding of how the brain develops
+    and how to consider factors affecting brain development when planning for your setting.

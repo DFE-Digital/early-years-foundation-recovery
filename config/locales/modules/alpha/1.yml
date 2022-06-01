@@ -1,14 +1,19 @@
 ---
 # ------------------------------------------------------------------------------
-# config/locales/modules/one.yml
-#
 en:
   modules:
-    one:
-      1:      # http://localhost:3000/modules/one/content_pages/1
-        heading: First Example Module (Govspeak)
+    alpha:
+      1:
+        heading: Module Alpha Introduction
         body: |
+          ## Govspeak examples
+
+          [jump to last page](1-2-4)
+
           %Warning: people like stuff!%
+
+
+          `%Warning: people like stuff!%`
 
           s1. numbers
           s2. to the start
@@ -88,13 +93,13 @@ en:
           [Find out about call charges](/call-charges)
           $C
 
-      1-1:    # http://localhost:3000/modules/one/content_pages/1-1
-        heading: Foo Part One
-        body: In this submodule we'll discuss some stuff
-      1-1-1:  # http://localhost:3000/modules/one/content_pages/1-1-1
+      1-1:
+        heading: Sub-module intro heading (the module has begun)
+        body: Sub-module intro body
+      1-1-1:
         heading: Stuff is cool
         body: Oh yes!
-      1-1-2:  # # http://localhost:3000/modules/one/content_pages/1-1-2
+      1-1-2:
         heading: Stuff everywhere
         body: It's all around us
       1-1-3:
@@ -113,3 +118,6 @@ en:
       1-2-3:
         heading: How to avoid the stuff haters
         body: Hide behind stuff
+      1-2-4:
+        heading: Last page
+        body: By viewing this page the training module is marked as complete

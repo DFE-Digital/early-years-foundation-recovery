@@ -1,3 +1,5 @@
+= render 'debug'
+
 .govuk-grid-row
   .govuk-grid-column-full
     h1.govuk-heading-l Manage your account
@@ -18,7 +20,6 @@
         - row.value { t('password.last_changed', date: @user.password_last_changed) }
         - row.action(text: t('links.change'), href: edit_password_user_path, visually_hidden_text: 'password')
 
-    -# "setting" is a common practitioner term denoting the place where you practice
     h2.govuk-heading-m About your setting
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
@@ -31,5 +32,3 @@
         - row.key { 'Ofsted number' }
         - row.value { @user.ofsted_number }
         - row.action(text: t('links.change'), href: edit_ofsted_number_user_path, visually_hidden_text: 'ofsted_number')
-
-= render 'debug'
