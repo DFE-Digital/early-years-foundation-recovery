@@ -96,6 +96,8 @@ en:
       title: I have a different problem
       text: For other problems with creating your account or signing in.
       link_text: contact us
+  edit_name:
+    submit: Continue
 
   # Form Builder ---------------------------------------------------------------
   helpers:

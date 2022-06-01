@@ -5,6 +5,6 @@
       = form.govuk_fieldset legend: { text: 'Edit about you' } do
         = form.govuk_text_field :first_name, autofocus: true
         = form.govuk_text_field :last_name
-        = form.govuk_submit 'Save'
-
+        = form.govuk_submit t('edit_name.submit')
+        
         p= link_to 'Cancel', user_path
