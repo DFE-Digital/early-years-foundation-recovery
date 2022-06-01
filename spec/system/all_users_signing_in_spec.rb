@@ -8,7 +8,7 @@ RSpec.describe 'Sign in', type: :system do
   context 'when user is registered' do
     let(:user) { create :user, :registered }
 
-    it 'is successfull with valid credentials' do
+    it 'is successful with valid credentials' do
       fill_in 'Email address', with: user.email
       fill_in 'Password', with: 'StrongPassword123'
       click_button 'Sign in'

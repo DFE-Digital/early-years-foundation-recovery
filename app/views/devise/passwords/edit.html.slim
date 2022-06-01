@@ -4,7 +4,7 @@
     = f.hidden_field :reset_password_token
     = f.govuk_fieldset legend: { text: 'Choose a new password' } do
       p.govuk-hint
-      = t('password.hardness', length: @minimum_password_length)
+        = t('password.hardness', length: @minimum_password_length)
       = f.govuk_password_field :password, label: { text: 'New password', size: 's' }
       = f.govuk_password_field :password_confirmation, label: { text: 'Confirm your password', size: 's' }
     = f.govuk_submit 'Reset password'
