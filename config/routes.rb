@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :settings, only: :show
 
   devise_for :users, controllers: { sessions: 'users/sessions', passwords: 'passwords', registrations: 'registrations' }
-  resources :extra_registrations, only: %i[index edit update]
+  resources :extra_registrations, only: %i[index edit update], path: 'extra-registrations'
 
   resource :user, controller: :user, path: 'my-account', only: %i[show] do
     get 'edit-name'
@@ -22,15 +22,15 @@ Rails.application.routes.draw do
     patch 'update-ofsted-number'
     patch 'update-password'
     patch 'update-postcode'
-    get 'check_email_confirmation'
-    get 'check_email_password_reset'
+    get 'check-email-confirmation'
+    get 'check-email-password-reset'
   end
 
   resources :modules, only: [:index], as: :training_modules, controller: :training_modules do
-    resources :content_pages, only: %i[index show]
+    resources :content_pages, only: %i[index show], path: 'content-pages'
     resources :questionnaires, only: %i[show update]
-    resources :formative_assessments, only: %i[show update]
+    resources :formative_assessments, only: %i[show update], path: 'formative-assessments'
   end
 
-  get '/:id', to: 'static#show'
+  get '/:id', to: 'static#show', controller: :static
 end
