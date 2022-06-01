@@ -97,6 +97,19 @@ en:
       title: I have a different problem
       text: For other problems with creating your account or signing in.
       link_text: contact us
+  check_email_password_reset:
+    heading: Check your email
+    body_one: We have sent you an email with instructions for how to reset your password.
+    body_two: If you have not receieved the email after a few minutes, please check your spam folder.
+    summary_text: Problems with the email?
+    not_received:
+      title: I haven’t received the email
+      text: Please wait a few minutes for the email to arrive. If it doesn’t appear in your inbox, please check your spam or junk email folder. lf you still cannot see the email, we can send it again.
+      link_text: Send me another email
+    diff_problem:
+      title: I have a different problem
+      text: For other problems with creating your account or signing in, please
+      link_text: contact us
 
   # Form Builder ---------------------------------------------------------------
   helpers:
