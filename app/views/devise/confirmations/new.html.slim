@@ -2,7 +2,7 @@
   = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
     = f.govuk_error_summary
     = f.govuk_fieldset legend: { text: 'Resend confirmation instructions'} do
-      = f.govuk_email_field :email, autofocus: true, autocomplete: "email", value: resource.email_to_confirm, label: { text: t(:email) }
-    = f.govuk_submit "Resend confirmation instructions"
+      = f.govuk_email_field :email, autofocus: true, autocomplete: 'email', value: resource.email_to_confirm, label: { text: t(:email) }
+    = f.govuk_submit 'Resend confirmation instructions'
 
-= render "devise/shared/form_wrap"
+= render 'devise/shared/form_wrap'
