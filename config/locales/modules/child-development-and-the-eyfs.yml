@@ -3,7 +3,7 @@ en:
   modules:
     child-development-and-the-eyfs:
       1:
-        heading: Understanding child development and the EYFS!
+        heading: Understanding child development and the EYFS
         body: |
           On completion of this module you will be able to: 
 
@@ -610,12 +610,6 @@ en:
           </div>
 
           The communication and language module of this training (coming soon) will consider the stages of development, the practitioner’s role and effective practice in further detail.
-
-          $I
-          here is something in a dollar I
-          
-          and another one
-          $I
 
       1-2:
         heading: A positive approach to care and education
