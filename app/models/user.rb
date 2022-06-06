@@ -12,7 +12,6 @@ class User < ApplicationRecord
             presence: true,
             if: proc { |u| u.registration_complete }
 
-  validates :password, password: true
   validates :postcode, postcode: true
   validates :ofsted_number, ofsted_number: true
 

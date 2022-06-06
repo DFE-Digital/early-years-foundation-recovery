@@ -36,20 +36,11 @@ RSpec.describe 'Registered user changing password', type: :system do
   end
 
   context 'when too short' do
-    let(:password) { 'short' }        # first validation (length)
+    let(:password) { 'short' }
 
     it 'renders an error message' do
       click_button 'Save'
-      expect(page).to have_text 'Password must be at least 8 characters.'
-    end
-  end
-
-  context 'when too simple' do
-    let(:password) { '12345678' }     # second validation (complexity)
-
-    it 'renders an error message' do
-      click_button 'Save'
-      expect(page).to have_text 'New password requires upper and lower case letters, a number and at least 8 characters.'
+      expect(page).to have_text 'Password must be at least 10 characters.'
     end
   end
 end

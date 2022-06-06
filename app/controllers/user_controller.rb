@@ -11,6 +11,7 @@ class UserController < ApplicationController
   end
 
   def edit_password
+    @minimum_password_length = User.password_length.first
     user
   end
 
