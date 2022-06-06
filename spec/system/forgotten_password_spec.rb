@@ -56,12 +56,12 @@ RSpec.describe 'User following forgotten password process', type: :system do
     it 'shows "Check email" page' do
       visit '/users/sign_in'
       click_link 'I have forgotten my password', visible: false
-  
+
       expect(page).to have_text('I have forgotten my password')
-  
+
       fill_in 'Email', with: user.email
       click_button 'Send email'
-  
+
       expect(page).to have_text('Check your email')
     end
   end
@@ -73,24 +73,24 @@ RSpec.describe 'User following forgotten password process', type: :system do
 
     it 'provides link to resend the email' do
       click_link 'Send me another email', visible: false
-  
+
       expect(page).to have_current_path('/users/password/new')
     end
-  
+
     it 'provides link to contact us' do
-      expect(page).to have_link 'contact us', href: '#', visible: false
+      expect(page).to have_link 'contact us', href: '#', visible: :hidden
     end
   end
-  
+
   context 'when navigating to the "Check email" page' do
     it 'provides back button to sign in page' do
       visit '/users/password/new'
       fill_in 'Email', with: user.email
       click_button 'Send email'
-  
+
       expect(page).to have_text('Check your email')
       click_link 'Back'
-      
+
       expect(page).to have_current_path(new_user_session_path)
     end
   end
