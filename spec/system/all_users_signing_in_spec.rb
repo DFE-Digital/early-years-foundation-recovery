@@ -42,6 +42,17 @@ RSpec.describe 'Sign in', type: :system do
 
       expect(page).to have_text('Check your email')
     end
+
+    it 'provides back button to homepage' do
+      visit '/users/password/new'
+      fill_in 'Email', with: user.email
+      click_button 'Send email'
+
+      expect(page).to have_text('Check your email')
+      click_link 'Back'
+      
+      expect(page).to have_current_path(new_user_session_path)
+    end
   end
 
   context 'when user is confirmed' do
