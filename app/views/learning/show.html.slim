@@ -4,11 +4,11 @@ h1.govuk-heading-l My learning
 .govuk-grid-row id='started'
   .govuk-grid-column-full
     h2.govuk-heading-m In progress
-    - if @user.training_modules_by_state(:active).none?
+    - if @user.in_progress_modules.none?
       p You have not started any modules. To begin the training course, start an available module.
     - else
       div class='govuk-grid-row govuk-!-margin-bottom-7'
-        - @user.training_modules_by_state(:active).each do |mod|
+        - @user.in_progress_modules.each do |mod|
           .govuk-grid-column-one-quarter
             .govuk-card__flex-container
               .govuk-card__flex-item

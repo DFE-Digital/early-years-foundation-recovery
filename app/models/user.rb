@@ -16,6 +16,14 @@ class User < ApplicationRecord
   validates :postcode, postcode: true
   validates :ofsted_number, ofsted_number: true
 
+  def postcode=(input)
+    super UKPostcode.parse(input.to_s).to_s
+  end
+
+  def ofsted_number=(input)
+    super input.to_s.strip.upcase
+  end
+
   # @return [String]
   def name
     [first_name, last_name].compact.join(' ')
@@ -32,24 +40,17 @@ class User < ApplicationRecord
     timestamp.to_date&.to_formatted_s(:rfc822)
   end
 
-  def postcode=(input)
-    super UKPostcode.parse(input.to_s).to_s
+  # @return [Array<TrainingModule>] training modules that have been started
+  def in_progress_modules
+    training_modules_by_state(:active)
   end
 
-  def ofsted_number=(input)
-    super input.to_s.strip.upcase
-  end
-
-  #
-  # My learning --------------------------------------------------
-  #
-
-  # @return [Array<TrainingModule>] training modules with no incomplete dependency
+  # @return [Array<TrainingModule>] published training modules with no incomplete dependency
   def available_modules
-    training_modules_by_state(:upcoming).reject { |mod| !available?(mod) }
+    training_modules_by_state(:upcoming).select { |mod| available?(mod) && !mod.draft? }
   end
 
-  # @return [Array<TrainingModule>]
+  # @return [Array<TrainingModule>] three unavailable or draft modules
   def upcoming_modules
     training_modules_by_state(:upcoming).reject { |mod| available?(mod) }.take(3)
   end
@@ -64,11 +65,6 @@ class User < ApplicationRecord
 
       [mod, completed_at]
     end
-  end
-
-  # @return [Array<TrainingModule>] training modules by state
-  def training_modules_by_state(state)
-    TrainingModule.by_state(user: self, state: state)
   end
 
   # @return [Boolean] module content has been viewed
@@ -97,10 +93,10 @@ class User < ApplicationRecord
     !started?(mod) && !completed?(mod)
   end
 
-  # @return [Boolean]
+  # @return [Boolean] true unless a mandatory prerequisite module must be finished
   def available?(mod)
     dependent = TrainingModule.find_by(name: mod.depends_on)
-    dependent ? completed?(dependent) : false
+    dependent ? completed?(dependent) : true
   end
 
   # @return [String] training module 'milestone' content id
@@ -111,10 +107,6 @@ class User < ApplicationRecord
 
 private
 
-  #
-  # Events --------------------------------------------------
-  #
-
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
   def password_changed_events
     events.where(name: 'password_changed')
@@ -123,5 +115,10 @@ private
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
   def training_module_events(mod)
     events.where_properties(training_module_id: mod.name)
+  end
+
+  # @return [Array<TrainingModule>] training modules by state
+  def training_modules_by_state(state)
+    TrainingModule.by_state(user: self, state: state)
   end
 end
