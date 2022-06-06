@@ -4,11 +4,11 @@ h1.govuk-heading-l My learning
 .govuk-grid-row id='started'
   .govuk-grid-column-full
     h2.govuk-heading-m In progress
-    - if @user.training_modules_by_state(:in_progress).none?
+    - if @user.training_modules_by_state(:active).none?
       p You have not started any modules. To begin the training course, start an available module.
     - else
       div class='govuk-grid-row govuk-!-margin-bottom-7'
-        - @user.training_modules_by_state(:in_progress).each do |mod|
+        - @user.training_modules_by_state(:active).each do |mod|
           .govuk-grid-column-one-quarter
             .govuk-card__flex-container
               .govuk-card__flex-item
@@ -19,35 +19,35 @@ h1.govuk-heading-l My learning
                   .govuk-card__content
                     h3.govuk-heading-m= mod.title
 
-hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
+- if @user.available_modules.any?
+  hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
+  .govuk-grid-row id='available'
+    .govuk-grid-column-full
+      h2.govuk-heading-m Available modules
+      ul.govuk-list.govuk-list--bullet
+        - @user.available_modules.each do |mod|
+          li= govuk_link_to mod.title, training_module_path(mod)
 
-.govuk-grid-row id='available'
-  .govuk-grid-column-full
-    h2.govuk-heading-m Available modules
-    ul.govuk-list.govuk-list--bullet
-      - current_user.training_modules_by_state(:available).each do |mod|
-        li= govuk_link_to mod.title, training_module_path(mod)
+- if @user.upcoming_modules.any?
+  hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
+  .govuk-grid-row id='upcoming'
+    .govuk-grid-column-full
+      h2.govuk-heading-m Upcoming modules
 
-hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
+    - @user.upcoming_modules.each do |mod|
+      .govuk-grid-column-one-third
+        .govuk-card__flex-container
+          .govuk-card__flex-item
+            .govuk-card.govuk-card__height
+              .govuk-card__content
+                h3.govuk-heading-s= mod.title
+                p.govuk-body= mod.description
+              .govuk-card__actions
+                - unless mod.draft?
+                  = govuk_link_to 'View more information about this module', training_module_path(mod)
 
-.govuk-grid-row id='upcoming'
-  .govuk-grid-column-full
-    h2.govuk-heading-m Upcoming modules
-
-  - @user.training_modules_by_state(:upcoming).take(3).each do |mod|
-    .govuk-grid-column-one-third
-      .govuk-card__flex-container
-        .govuk-card__flex-item
-          .govuk-card.govuk-card__height
-            .govuk-card__content
-              h3.govuk-heading-s= mod.title
-              p.govuk-body= mod.description
-            .govuk-card__actions
-              - unless mod.draft?
-                = govuk_link_to 'View more information about this module', training_module_path(mod)
-
-hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
-
-.govuk-grid-row id='completed'
-  .govuk-grid-column-full
-    = completed_modules_table(@user.completed_table_data)
+- if @user.completed_modules.any?
+  hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
+  .govuk-grid-row id='completed'
+    .govuk-grid-column-full
+      = completed_modules_table(@user.completed_modules)

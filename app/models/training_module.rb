@@ -9,10 +9,11 @@ class TrainingModule < YamlBase
   # @return [Array<TrainingModule>]
   def self.by_state(user:, state:)
     case state.to_sym
-    when :in_progress then all.select { |mod| user.in_progress?(mod) }
-    when :completed   then all.select { |mod| user.completed?(mod) }
-    when :upcoming    then all.select { |mod| user.upcoming?(mod) }[1..]
-    when :available   then Array(all.find { |mod| user.upcoming?(mod) })
+    when :active    then all.select { |mod| user.active?(mod) }
+    when :upcoming  then all.select { |mod| user.upcoming?(mod) }
+    when :completed then all.select { |mod| user.completed?(mod) }
+    else
+      raise 'TrainingModule#by_state can query either :active, :upcoming or :completed modules'
     end
   end
 

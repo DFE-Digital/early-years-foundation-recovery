@@ -14,13 +14,13 @@ charlie:
   title: Third Training Module
   thumbnail: introduction_to_supporting_physical_development
   description: This is the third module description
-  depends_on: beta
+  depends_on: bravo
 
 delta:
   title: Fourth Training Module
   thumbnail: introduction_to_supporting_physical_development
   description: This module is unpublished and therefore not clickable
-  depends_on: beta
+  depends_on: bravo
   draft: true
 
 brain-development-in-early-years:

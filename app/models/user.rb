@@ -44,6 +44,28 @@ class User < ApplicationRecord
   # My learning --------------------------------------------------
   #
 
+  # @return [Array<TrainingModule>] training modules with no incomplete dependency
+  def available_modules
+    training_modules_by_state(:upcoming).reject { |mod| !available?(mod) }
+  end
+
+  # @return [Array<TrainingModule>]
+  def upcoming_modules
+    training_modules_by_state(:upcoming).reject { |mod| available?(mod) }.take(3)
+  end
+
+  # TODO: use a dedicated event for module completion
+  #
+  # @return [Array<Array>] Tabular data of completed training module
+  def completed_modules
+    training_modules_by_state(:completed).map do |mod|
+      final_page = mod.module_items.last.name
+      completed_at = training_module_events(mod).where_properties(id: final_page).first.time
+
+      [mod, completed_at]
+    end
+  end
+
   # @return [Array<TrainingModule>] training modules by state
   def training_modules_by_state(state)
     TrainingModule.by_state(user: self, state: state)
@@ -66,7 +88,7 @@ class User < ApplicationRecord
   end
 
   # @return [Boolean]
-  def in_progress?(mod)
+  def active?(mod)
     started?(mod) && !completed?(mod)
   end
 
@@ -75,15 +97,10 @@ class User < ApplicationRecord
     !started?(mod) && !completed?(mod)
   end
 
-  # TODO: use a dedicated event for module completion
-  #
-  # @return [Array<Array>] training module and date completed
-  def completed_table_data
-    training_modules_by_state(:completed).map do |mod|
-      completed_at = training_module_events(mod).where_properties(id: mod.module_items.last.name).first.time
-
-      [mod, completed_at]
-    end
+  # @return [Boolean]
+  def available?(mod)
+    dependent = TrainingModule.find_by(name: mod.depends_on)
+    dependent ? completed?(mod) : false
   end
 
   # @return [String] training module 'milestone' content id
