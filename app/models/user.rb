@@ -100,7 +100,7 @@ class User < ApplicationRecord
   # @return [Boolean]
   def available?(mod)
     dependent = TrainingModule.find_by(name: mod.depends_on)
-    dependent ? completed?(mod) : false
+    dependent ? completed?(dependent) : false
   end
 
   # @return [String] training module 'milestone' content id
