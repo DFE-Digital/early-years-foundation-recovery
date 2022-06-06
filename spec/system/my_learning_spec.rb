@@ -40,8 +40,14 @@ RSpec.describe 'Learning activity', type: :system do
         within '#upcoming' do
           expect(page).to have_text 'Upcoming modules'
           expect(page).to have_text 'Second Training Module'
+          expect(page).to have_link 'View more information about this module', href: '/modules/bravo'
+
           expect(page).to have_text 'Third Training Module'
+          expect(page).to have_link 'View more information about this module', href: '/modules/charlie'
+
+          # unpublished draft module
           expect(page).to have_text 'Fourth Training Module'
+          expect(page).not_to have_link 'View more information about this module', href: '/modules/delta'
 
           expect(page).not_to have_text 'First Training Module'
         end
@@ -49,16 +55,8 @@ RSpec.describe 'Learning activity', type: :system do
     end
 
     describe 'Completed modules' do
-      it 'is empty' do
-        within '#completed' do
-          expect(page).to have_text 'Completed modules'
-
-          expect(page).not_to have_text 'First Training Module'
-          expect(page).not_to have_text 'Second Training Module'
-          expect(page).not_to have_text 'Third Training Module'
-          expect(page).not_to have_text 'Fourth Training Module'
-          # expect(page).not_to have_text 'Brain development in early years'
-        end
+      it 'is hidden' do
+        expect(page).not_to have_selector '#completed'
       end
     end
   end

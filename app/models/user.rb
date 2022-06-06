@@ -40,7 +40,7 @@ class User < ApplicationRecord
   end
 
   # @return [Array<TrainingModule>] training modules that have been started
-  def in_progress_modules
+  def current_modules
     training_modules_by_state(:active)
   end
 
@@ -80,6 +80,11 @@ class User < ApplicationRecord
     return false if mod.draft?
 
     training_module_events(mod).where_properties(id: mod.module_items.last.name).present?
+  end
+
+  # @return [Boolean]
+  def course_completed?
+    TrainingModule.all.map { |mod| completed?(mod) }
   end
 
   # @return [Boolean]

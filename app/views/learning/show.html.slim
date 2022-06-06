@@ -4,11 +4,11 @@ h1.govuk-heading-l My learning
 .govuk-grid-row id='started'
   .govuk-grid-column-full
     h2.govuk-heading-m In progress
-    - if @user.in_progress_modules.none?
+    - if @user.current_modules.none?
       p You have not started any modules. To begin the training course, start an available module.
     - else
       div class='govuk-grid-row govuk-!-margin-bottom-7'
-        - @user.in_progress_modules.each do |mod|
+        - @user.current_modules.each do |mod|
           .govuk-grid-column-one-quarter
             .govuk-card__flex-container
               .govuk-card__flex-item
@@ -19,14 +19,17 @@ h1.govuk-heading-l My learning
                   .govuk-card__content
                     h3.govuk-heading-m= mod.title
 
-- if @user.available_modules.any?
+- if @user.available_modules.any? || @user.course_completed?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
   .govuk-grid-row id='available'
     .govuk-grid-column-full
       h2.govuk-heading-m Available modules
-      ul.govuk-list.govuk-list--bullet
-        - @user.available_modules.each do |mod|
-          li= govuk_link_to mod.title, training_module_path(mod)
+      - if @user.available_modules.any?
+        ul.govuk-list.govuk-list--bullet
+          - @user.available_modules.each do |mod|
+            li= govuk_link_to mod.title, training_module_path(mod)
+      - elsif @user.course_completed?
+        p You do not have any modules available.
 
 - if @user.upcoming_modules.any?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
