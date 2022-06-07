@@ -1,13 +1,5 @@
 - if ENV['TRAINING_MODULES']
   pre.debug_dump
-    - TrainingModule.all.each do |mod|
-      |
-        title: #{mod.title}
-        name: #{mod.name}
-        draft: #{!!mod.draft}
-        started: #{@user.started?(mod)}
-        completed: #{@user.completed?(mod)}
-        available: #{@user.available?(mod)}
-        last: #{mod.module_items.last.name unless mod.draft?}
-        furthest: #{@user.last_page_for(mod)}
+    - @user.training.debug_summary.each do |summary|
+      = summary
       hr

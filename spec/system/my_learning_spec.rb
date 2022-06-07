@@ -36,7 +36,7 @@ RSpec.describe 'Learning activity', type: :system do
     end
 
     describe 'Upcoming modules' do
-      it 'shows the other mandatory modules' do
+      it 'shows other modules including drafts' do
         within '#upcoming' do
           expect(page).to have_text 'Upcoming modules'
           expect(page).to have_text 'Second Training Module'
@@ -61,43 +61,18 @@ RSpec.describe 'Learning activity', type: :system do
     end
   end
 
-  # context 'when none have been started' do
-  #   it 'is empty' do
-  #     within '#started' do
-  #       expect(page).not_to have_text 'A Training Module'
-  #       expect(page).to have_text('In progress')
-  #         .and have_text('You have not started any modules.')
-  #     end
-  #   end
-  # end
+  context 'when a user has started the first mandatory module' do
+    before do
+      visit '/modules/alpha/content_pages/1-1' # first page after module intro
+      visit '/my-learning'
+    end
 
-  # context 'when a module has been started' do
-  #   before do
-  #     visit '/modules/one/content_pages/1-1'  # first page after module intro
-  #     visit '/my-learning'
-  #   end
-
-  #   it 'shows the module' do
-  #     within '#started' do
-  #       expect(page).not_to have_text('You have not started any modules.')
-  #       expect(page).to have_text('In progress').and have_text('A Training Module')
-  #     end
-  #   end
-  # end
-
-  # context 'when a module is completed' do
-  #   before do
-  #     visit '/modules/one/content_pages/1-1'    # first page after module intro
-  #     visit '/modules/one/content_pages/1-2-3'  # last page
-  #     visit '/my-learning'
-  #   end
-
-  #   it 'does not show the module' do
-  #     within '#started' do
-  #       expect(page).not_to have_text('A Training Module')
-  #       expect(page).to have_text('In progress')
-  #         .and have_text('You have not started any modules.')
-  #     end
-  #   end
-  # end
+    it 'shows the started module' do
+      within '#started' do
+        expect(page).to have_text 'In progress'
+        expect(page).to have_text 'First Training Module'
+        expect(page).not_to have_text 'You have not started any modules.'
+      end
+    end
+  end
 end

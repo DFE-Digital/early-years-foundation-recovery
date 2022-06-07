@@ -6,17 +6,6 @@ class TrainingModule < YamlBase
     raw_data.map { |name, values| values.merge(name: name) }
   end
 
-  # @return [Array<TrainingModule>]
-  def self.by_state(user:, state:)
-    case state.to_sym
-    when :active    then all.select { |mod| user.active?(mod) }
-    when :upcoming  then all.select { |mod| user.upcoming?(mod) }
-    when :completed then all.select { |mod| user.completed?(mod) }
-    else
-      raise 'TrainingModule#by_state can query either :active, :upcoming or :completed modules'
-    end
-  end
-
   # @return [Boolean]
   def draft?
     attributes.fetch(:draft, false)
@@ -33,12 +22,12 @@ class TrainingModule < YamlBase
   end
 
   # @return [ModuleItem]
-  def overview_page
+  def module_intro
     module_items_by_type('module_intro').first
   end
 
-  # @return [ModuleItem]
+  # @return [ModuleItem] viewing this page determines if the module is "started"
   def first_content_page
-    overview_page.next_item
+    module_intro.next_item
   end
 end
