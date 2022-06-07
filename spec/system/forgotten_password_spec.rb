@@ -77,6 +77,7 @@ RSpec.describe 'User following forgotten password process', type: :system do
       expect(page).to have_current_path('/users/password/new')
     end
 
+    # to be changed when link is provided
     it 'provides link to contact us' do
       expect(page).to have_link 'contact us', href: '#', visible: :hidden
     end
@@ -84,11 +85,7 @@ RSpec.describe 'User following forgotten password process', type: :system do
 
   context 'when navigating to the "Check email" page' do
     it 'provides back button to sign in page' do
-      visit '/users/password/new'
-      fill_in 'Email', with: user.email
-      click_button 'Send email'
-
-      expect(page).to have_text('Check your email')
+      visit '/my-account/check_email_password_reset'
       click_link 'Back'
 
       expect(page).to have_current_path(new_user_session_path)
