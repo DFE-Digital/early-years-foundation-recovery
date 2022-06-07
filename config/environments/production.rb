@@ -38,8 +38,11 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
   # Security Headers
+  # @see https://www.keycdn.com/blog/http-security-headers
   config.action_dispatch.default_headers = {
-    'X-Xss-Protection' => '0',
+    'X-XSS-Protection' => '0',
+    'X-Frame-Options' => 'SAMEORIGIN',
+    'X-Content-Type-Options' => 'nosniff',
   }
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
