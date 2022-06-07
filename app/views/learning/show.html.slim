@@ -13,7 +13,7 @@ h1.govuk-heading-l My learning
             .govuk-card__flex-container
               .govuk-card__flex-item
                 .govuk-card.govuk-card--contained.govuk-card--selectable
-                  a href=training_module_content_page_path(mod, @user.training.last_page_for(mod))
+                  a href=training_module_content_page_path(mod, @user.training.milestone(mod.name))
                   div class='govuk-card__hero govuk-!-margin-bottom-2'
                     img src=image_path(mod.thumbnail) width=180 alt=mod.name
                   .govuk-card__content

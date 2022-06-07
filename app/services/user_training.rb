@@ -28,21 +28,22 @@ class UserTraining
   def completed_modules
     by_state(:completed).map do |mod|
       final_page = mod.module_items.last.name
-      completed_at = training_module_events(mod).where_properties(id: final_page).first.time
+      completed_at = training_module_events(mod.name).where_properties(id: final_page).first.time
 
       [mod, completed_at]
     end
   end
 
-  # @return [String] training module 'milestone' content id
-  def last_page_for(mod)
-    page = training_module_events(mod).last
+  # @param module_id [String] training module name
+  # @return [String] name of last page viewed in module
+  def milestone(module_id)
+    page = training_module_events(module_id).last
     page.properties['id'] if page.present?
   end
 
   # @return [Boolean]
   def course_completed?
-    training_modules.all? { |mod| completed?(mod) }
+    published_modules.all? { |mod| completed?(mod) }
   end
 
   # @return [Array<String>]
@@ -56,18 +57,57 @@ class UserTraining
         completed: #{completed?(mod)}
         available: #{available?(mod)}
         last: #{mod.module_items.last.name unless mod.draft?}
-        furthest: #{last_page_for(mod)}
+        milestone: #{milestone(mod.name)}
       SUMMARY
     end
   end
 
 private
 
+  # @param module_id [String] training module name
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
-  def training_module_events(mod)
-    user.events.where_properties(training_module_id: mod.name)
+  def training_module_events(module_id)
+    user.events.where_properties(training_module_id: module_id)
   end
 
+  # @param mod [TrainingModule]
+  # @return [Boolean]
+  def active?(mod)
+    started?(mod) && !completed?(mod)
+  end
+
+  # @param mod [TrainingModule]
+  # @return [Boolean]
+  def upcoming?(mod)
+    !started?(mod) && !completed?(mod)
+  end
+
+  # @param mod [TrainingModule]
+  # @return [Boolean] true unless a mandatory prerequisite module must be finished
+  def available?(mod)
+    dependent = TrainingModule.find_by(name: mod.depends_on)
+    dependent ? completed?(dependent) : true
+  end
+
+  # @param mod [TrainingModule]
+  # @return [Boolean] module content has been viewed
+  def started?(mod)
+    return false if mod.draft?
+
+    training_module_events(mod.name).where_properties(id: mod.first_content_page.name).present?
+  end
+
+  # TODO: this state is currently true if the last page was viewed
+  #
+  # @param mod [TrainingModule]
+  # @return [Boolean]
+  def completed?(mod)
+    return false if mod.draft?
+
+    training_module_events(mod.name).where_properties(id: mod.module_items.last.name).present?
+  end
+
+  # @param state [Symbol, String] :active, :upcoming or :completed
   # @return [Array<TrainingModule>] training modules by state
   def by_state(state)
     case state.to_sym
@@ -79,38 +119,12 @@ private
     end
   end
 
-  # @return [Boolean]
-  def active?(mod)
-    started?(mod) && !completed?(mod)
+  # @return [Array<TrainingModule>] training modules with finalised content
+  def published_modules
+    training_modules.reject(&:draft?)
   end
 
-  # @return [Boolean]
-  def upcoming?(mod)
-    !started?(mod) && !completed?(mod)
-  end
-
-  # @return [Boolean] true unless a mandatory prerequisite module must be finished
-  def available?(mod)
-    dependent = TrainingModule.find_by(name: mod.depends_on)
-    dependent ? completed?(dependent) : true
-  end
-
-  # @return [Boolean] module content has been viewed
-  def started?(mod)
-    return false if mod.draft?
-
-    training_module_events(mod).where_properties(id: mod.first_content_page.name).present?
-  end
-
-  # TODO: this state is currently true if the last page was viewed
-  #
-  # @return [Boolean]
-  def completed?(mod)
-    return false if mod.draft?
-
-    training_module_events(mod).where_properties(id: mod.module_items.last.name).present?
-  end
-
+  # @return [Array<TrainingModule>] all training modules
   def training_modules
     @training_modules ||= TrainingModule.all
   end
