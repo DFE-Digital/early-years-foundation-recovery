@@ -23,6 +23,18 @@ class User < ApplicationRecord
     super input.to_s.strip.upcase
   end
 
+  # @see Devise database_authenticatable
+  # @param params [Hash]
+  # @return [Boolean]
+  def update_with_password(params)
+    if params[:password].blank?
+      errors.add :password, :blank
+      return false
+    end
+
+    super
+  end
+
   # @return [String]
   def name
     [first_name, last_name].compact.join(' ')

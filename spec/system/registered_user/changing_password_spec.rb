@@ -43,4 +43,13 @@ RSpec.describe 'Registered user changing password', type: :system do
       expect(page).to have_text 'Password must be at least 10 characters.'
     end
   end
+
+  context 'when blank' do
+    let(:password) { '' }
+
+    it 'renders an error message' do
+      click_button 'Save'
+      expect(page).to have_text 'Enter a password.'
+    end
+  end
 end
