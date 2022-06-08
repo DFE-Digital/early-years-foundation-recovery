@@ -1,15 +1,19 @@
 ---
 en:
   modules:
+    # name of module
     test:
-      test:
-        heading: A test
+
+      # ContentPage
       basic:
         heading: A text page
+        image: foo
         body: |
           - Govspeak compatible Markdown
           - HTML
           - plain text
+
+      # YoutubePage
       video:
         heading: A video
         video_title: What is GOV.UK

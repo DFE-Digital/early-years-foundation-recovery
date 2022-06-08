@@ -3,4 +3,4 @@
     = form_for @user_form, url: extra_registration_path(current_step), data: { turbo: false }, method: :patch do |f|
       = f.govuk_error_summary
       = render current_step.to_s, f: f
-      = f.govuk_submit t(:submit, scope: [:extra_registration, current_step])
+      = f.govuk_submit t(:button, scope: [:extra_registration, current_step])

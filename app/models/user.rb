@@ -15,36 +15,51 @@ class User < ApplicationRecord
   validates :postcode, postcode: true
   validates :ofsted_number, ofsted_number: true
 
-  def last_page_for(training_module:)
-    events.where_properties(training_module_id: training_module.name).last&.properties
-  end
-
-  def started?(training_module:)
-    last_page_for(training_module:).present?
-  end
-
-  def name
-    [first_name, last_name].compact.join(' ')
-  end
-
-  def email_to_confirm
-    pending_reconfirmation? ? unconfirmed_email : email
-  end
-
-  def password_last_changed
-    timestamp = password_changed_events&.time || created_at
-    timestamp.to_date&.to_formatted_s(:rfc822)
-  end
-
-  def password_changed_events
-    events.where(name: 'password_changed')&.last
-  end
-
   def postcode=(input)
     super UKPostcode.parse(input.to_s).to_s
   end
 
   def ofsted_number=(input)
     super input.to_s.strip.upcase
+  end
+
+  # @see Devise database_authenticatable
+  # @param params [Hash]
+  # @return [Boolean]
+  def update_with_password(params)
+    if params[:password].blank?
+      errors.add :password, :blank
+      return false
+    end
+
+    super
+  end
+
+  # @return [String]
+  def name
+    [first_name, last_name].compact.join(' ')
+  end
+
+  # @return [String]
+  def email_to_confirm
+    pending_reconfirmation? ? unconfirmed_email : email
+  end
+
+  # @return [String]
+  def password_last_changed
+    timestamp = password_changed_events&.last&.time || created_at
+    timestamp.to_date&.to_formatted_s(:rfc822)
+  end
+
+  # @return [UserTraining] learning activity query interface
+  def training
+    @training ||= UserTraining.new(user: self)
+  end
+
+private
+
+  # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
+  def password_changed_events
+    events.where(name: 'password_changed')
   end
 end

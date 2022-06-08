@@ -1,14 +1,20 @@
 Rails.application.routes.draw do
   root 'home#index'
+  get 'health', to: 'home#show'
+  get 'my-learning', to: 'learning#show'
 
   get '/404', to: 'errors#not_found', via: :all
   get '/500', to: 'errors#internal_server_error', via: :all
   get 'users/timeout', to: 'errors#timeout'
-  get 'health', to: 'home#show'
+
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    passwords: 'passwords',
+    registrations: 'registrations',
+  }
 
   resources :settings, only: %i[show]
-
-  devise_for :users, controllers: { sessions: 'users/sessions', passwords: 'passwords', registrations: 'registrations' }
+  resources :static, only: %i[show]
   resources :extra_registrations, only: %i[index edit update]
 
   resource :user, controller: :user, path: 'my-account', only: %i[show] do
@@ -26,11 +32,9 @@ Rails.application.routes.draw do
     get 'check_email_password_reset'
   end
 
-  resources :modules, only: [:index], as: :training_modules, controller: :training_modules do
+  resources :modules, only: %i[index show], as: :training_modules, controller: :training_modules do
     resources :content_pages, only: %i[index show]
     resources :questionnaires, only: %i[show update]
     resources :formative_assessments, only: %i[show update]
   end
-
-  resources :static, only: :show
 end
