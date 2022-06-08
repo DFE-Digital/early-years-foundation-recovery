@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Users sign in', type: :system do
   before do
-    visit '/users/sign_in'
+    visit '/users/sign-in'
   end
 
   context 'when I am a registered user' do

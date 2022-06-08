@@ -4,7 +4,7 @@ RSpec.describe '', type: :system do
   let(:user) { create :user, :registered }
 
   before do
-    visit '/users/sign_in'
+    visit '/users/sign-in'
     fill_in 'Email address', with: user.email
     fill_in 'Password', with: 'StrongPassword123'
     click_button 'Sign in'

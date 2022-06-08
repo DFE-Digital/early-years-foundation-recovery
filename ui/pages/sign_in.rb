@@ -2,7 +2,7 @@
 
 module Pages
   class SignIn < Base
-    set_url '/users/sign_in'
+    set_url '/users/sign-in'
 
     element :email_field, '#user-email-field'
     element :password_field, '#user-password-field'
