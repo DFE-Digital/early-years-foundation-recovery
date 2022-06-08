@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'User following forgotten password process', type: :system do
   let(:user) { create :user, :confirmed }
   let(:token) { user.send_reset_password_instructions }
-  let(:password) { 'ABC123xyh' }
+  let(:password) { 'ABCDE123xyh' }
 
   context 'when choosing a new password' do
     before do
