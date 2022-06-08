@@ -1,5 +1,6 @@
 @import "govuk-frontend/govuk/all";
 @import "./govspeak";
+@import "./card";
 
 .debug_dump {
   background: beige;
@@ -20,6 +21,16 @@
 
 .govuk-notification-banner__content {
   p {
+    margin: 0;
+  }
+}
+
+.light-grey-box {
+  padding: govuk-spacing(5);
+  margin-bottom: govuk-spacing(5);
+  background: govuk-colour("light-grey");
+
+  .govuk-button {
     margin: 0;
   }
 }

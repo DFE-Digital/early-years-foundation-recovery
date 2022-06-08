@@ -1,0 +1,139 @@
+.govuk-card__flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  width:100%;
+}
+
+.govuk-card__flex-item {
+  display: flex;
+  overflow: hidden;
+}
+
+.govuk-card {
+  border-bottom: 3px solid;
+  box-sizing: border-box;
+  border-color: #1D70B8;
+  padding: 20px;
+}
+
+.govuk-card--contained {
+  background-color: #E5E5E5;
+}
+
+.govuk-card--contained--on-background {
+  background-color: #fff;
+}
+
+.govuk-card--borderless {
+  border: 0;
+  padding-bottom: 0;
+}
+
+.govuk-card--selectable {
+  position: relative;
+}
+
+.govuk-card--selectable h3 {
+  color: #1D70B8;
+}
+
+.govuk-card--selectable a {
+  position: relative;
+  z-index: 1;
+}
+
+.govuk-card--selectable:hover {
+  background-color: #1D70B8;
+}
+
+.govuk-card--selectable:hover > .govuk-card__content > h3,
+.govuk-card--selectable:hover > .govuk-card__content > p,
+.govuk-card--selectable:hover > .govuk-card__content > h3 > a,
+.govuk-card--selectable:hover > .govuk-card__actions > ul > li > a {
+  color: #fff !important;
+}
+
+.govuk-card--selectable:hover .govuk-card__content a,
+.govuk-card--selectable:hover  .govuk-card__actions  ul > li > a:hover {
+  color: lighten(#fff, 30%) !important;
+}
+
+.govuk-card--selectable > a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
+
+.govuk-card--selectable > a:focus {
+  background-color: initial !important;
+}
+
+.govuk-card__hero {
+  line-height: 0;
+}
+
+.gov-card__img{
+  border-bottom: 1px solid #f0f4f5;
+  display: block;
+  width: 100%
+}
+
+.govuk-card__content {
+  padding-bottom: 0;
+}
+
+.govuk-card__content p {
+  margin-bottom: 0;
+}
+
+.govuk-card__actions {
+  padding-top:10px;
+  padding-bottom: 0;
+}
+
+.govuk-card__actions > .govuk-c-button {
+  margin-bottom: 0;
+}
+
+.govuk-card__height{
+  min-height:300px;
+}
+
+@media screen and (max-width:1320px) {
+  .govuk-card__height{
+    min-height:375px;
+  }
+}
+
+@media screen and (max-width:1037px) {
+  .govuk-card__height{
+    min-height:410px;
+  }
+}
+
+@media screen and (max-width:912px) {
+  .govuk-card__height{
+    min-height:430px;
+  }
+}
+
+@media screen and (max-width:885px) {
+  .govuk-card__height{
+    min-height:500px;
+  }
+}
+
+@media screen and (max-width:812px) {
+  .govuk-card__height{
+    min-height:530px;
+  }
+}
+
+@media screen and (max-width:812px) {
+  .govuk-card__height{
+    min-height:220px;
+  }
+}

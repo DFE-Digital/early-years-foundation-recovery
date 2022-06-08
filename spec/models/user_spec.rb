@@ -44,4 +44,15 @@ RSpec.describe User, type: :model do
       expect(user.ofsted_number).to eq 'VC123456'
     end
   end
+
+  describe '#training' do
+    subject(:user) { create(:user, :registered) }
+
+    it 'provides modules by state' do
+      expect(user.training.current_modules).to be_an Array
+      expect(user.training.available_modules).to be_an Array
+      expect(user.training.upcoming_modules).to be_an Array
+      expect(user.training.completed_modules).to be_an Array
+    end
+  end
 end
