@@ -1,16 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  it 'is valid after registration' do
+    expect(build(:user, :registered)).to be_valid
+  end
+
   describe '#first_name' do
     it 'must be present' do
-      expect(build(:user, :registered)).to be_valid
       expect(build(:user, :registered, first_name: nil)).not_to be_valid
     end
   end
 
   describe '#last_name' do
     it 'must be present' do
-      expect(build(:user, :registered)).to be_valid
       expect(build(:user, :registered, last_name: nil)).not_to be_valid
     end
   end
@@ -40,6 +42,17 @@ RSpec.describe User, type: :model do
     it 'is normalised' do
       user = create(:user, ofsted_number: 'vc123456')
       expect(user.ofsted_number).to eq 'VC123456'
+    end
+  end
+
+  describe '#training' do
+    subject(:user) { create(:user, :registered) }
+
+    it 'provides modules by state' do
+      expect(user.training.current_modules).to be_an Array
+      expect(user.training.available_modules).to be_an Array
+      expect(user.training.upcoming_modules).to be_an Array
+      expect(user.training.completed_modules).to be_an Array
     end
   end
 end

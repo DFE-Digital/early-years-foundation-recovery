@@ -19,8 +19,7 @@ en:
               invalid: This email address is invalid.
             password:
               blank: Enter a password.
-              too_short: Password must be at least 8 characters. # devise override
-              invalid: New password requires upper and lower case letters, a number and at least 8 characters.
+              too_short: Password must be at least 10 characters. # devise override
             password_confirmation:
               confirmation: Confirmation doesn't match password.
             ofsted_number:
@@ -45,8 +44,7 @@ en:
               invalid: This email address is invalid.
             password:
               blank: Enter a password.
-              too_short: Password must be at least 8 characters. # devise override
-              invalid: New password requires upper and lower case letters, a number and at least 8 characters.
+              too_short: Password must be at least 10 characters. # devise override
             password_confirmation:
               confirmation: Confirmation doesn't match password.
             ofsted_number:
@@ -54,6 +52,7 @@ en:
   phase_banner_html: This is a new service, your %{feedback_link} will help us improve it.
   links:
     change: Change
+    save: Save
   banners:
     alert: Warning
     error: Error
@@ -62,23 +61,25 @@ en:
 
   extra_registration:
     complete: Thank you for creating an early years training account. You can now start the first module.
-    # /extra_registrations/name/edit
     name:
       heading: About you
-      hint: We're asking for your details so we can personalise your training certificates.
-      submit: Continue
-    # /extra_registrations/setting/edit
+      body: We're asking for your details so we can personalise your training certificates.
+      button: Continue
     setting:
       heading: About your setting
-      hint: Your details and training progress won't be shared with anyone without your permission.
-      submit: Complete
+      body: Your details and training progress won't be shared with anyone without your permission.
+      button: Complete
+
+  setting:
+    heading: Change your setting's information
 
   password:
     last_changed: Password last changed on %{date}
-    hardness: Your password must contain at least %{length} characters, upper and lowercase letter and at least 1 number.
+    hardness: Your password must contain at least %{length} characters.
     # /users/sign_in
     label: Password
     remember_me: Remember me
+
   check_email_confirmation:
     heading: Check your email
     body: "We have sent you an email with instructions for how to verify your email address. We sent the email to:"
@@ -117,12 +118,3 @@ en:
           Or, it might be a 6 or 7 digit number with no letters at the start.
           If you don't know your setting's Ofsted number, you can look it up on the Ofsted website.
         current_password: We need your current password to confirm your changes.
-
-    caption:
-      user:
-        first_name: We're asking for your details so we can personalise your training certificates.
-
-    # legend:
-    #   user:
-
-

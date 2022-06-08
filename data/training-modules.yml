@@ -1,17 +1,17 @@
 ---
-#one:
-  #title: A Training Module
-#supporting-physical-development-in-the-early-years:
-  #title: Supporting physical development in the early years
-#understanding-childrens-development:
-  #title: Understanding children's Development
-#brain-development-in-early-years:
-  #title: Brain development in early years
-#personal-social-and-emotional-development:
-  #title: Personal social and emotional development
 child-development-and-the-eyfs:
   title: 1. Child development and the EYFS
+  thumbnail: introduction_to_supporting_physical_development
+  description: about child-development-and-the-eyfs
+
 brain-development-and-how-children-learn:
   title: 2. Brain development and how children learn
+  thumbnail: introduction_to_supporting_physical_development
+  description: about brain-development-and-how-children-learn
+  depends_on: child-development-and-the-eyfs
+
 personal-social-and-emotional-development:
   title: 3. Supporting children’s personal, social and emotional development
+  thumbnail: introduction_to_supporting_physical_development
+  description: about personal-social-and-emotional-development
+  depends_on: brain-development-and-how-children-learn

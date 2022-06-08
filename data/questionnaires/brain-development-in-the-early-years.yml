@@ -1,7 +1,7 @@
 ---
 brain-development-in-early-years:
   1-1-1-1b:
-    content: 
+    content:
     questions:
       1_how_many_areas:
         multi_select: false
@@ -89,7 +89,7 @@ brain-development-in-early-years:
       # 1. Brain development
       Image of the brain with an arrow
     questions:
-      Q1: 
+      Q1:
         multi_select: false
         label: |
           # 1. Brain development
@@ -101,7 +101,7 @@ brain-development-in-early-years:
           3: option 3
         correct_answers:
         - "2"
-      Q2: 
+      Q2:
         multi_select: false
         label: |
           # 2. Brain development
@@ -110,18 +110,18 @@ brain-development-in-early-years:
           A: Coordinates practice breaths
           B: Improved sleep cycles
           C: Development of the brain stem
-          D: Neuron connection 
+          D: Neuron connection
         correct_answers:
           - "D"
       Q3:
         multi_select: false
         label: |
-          # 3. Brain development 
+          # 3. Brain development
           After birth, repetition and practice of a skill further encourages myelination of the neurons involved. What does myelination improve?
         answers:
           A: the speed at which the neurons move therefore improving the skill.
           B: the communication between the synapsis and the message.
-          C: the speed at which the message travels therefore improving the skill. 
+          C: the speed at which the message travels therefore improving the skill.
           D: the communication between the myelination and the brain stem.
       Q4:
         multi_select: false
@@ -165,8 +165,8 @@ brain-development-in-early-years:
         answers:
           A: Piaget and Bruner
           B: Vygotsky and Piaget
-          C: Vygotsky and Bruner 
-          D: Maslow and Vygotsky 
+          C: Vygotsky and Bruner
+          D: Maslow and Vygotsky
         correct_answers:
           - "C"
       Q8:
@@ -176,7 +176,7 @@ brain-development-in-early-years:
           Children are said to develop different attachment types, depending on their early experiences. What are the different attachment types?
         answers:
           A: Avoidant, ambivalent, secure, disorganised
-          B: Avoidant, secure, concrete, organised 
+          B: Avoidant, secure, concrete, organised
           C: Avoidance, ambivalent, secure, organised
           D: Avoidant, ambivalent, insecure, disorganised
         correct_answers:
@@ -184,7 +184,7 @@ brain-development-in-early-years:
       Q9:
         multi_select: false
         label: |
-          # 9. The practitioner’s role 
+          # 9. The practitioner’s role
           
           Positive and healthy relationships will effectively promote a range of qualities and skills. What are 4 characteristics of positive and healthy relationships?
         answers:
@@ -197,7 +197,7 @@ brain-development-in-early-years:
       Q10:
         multi_select: false
         label: |
-          # 10. Social and emotional development 
+          # 10. Social and emotional development
           What term describes a child who attempts a task with confidence that they can complete it:
         answers:
           A: Self-confidence
@@ -209,7 +209,7 @@ brain-development-in-early-years:
       Q11:
         multi_select: false
         label: |
-          # 11. Building secure relationationships 
+          # 11. Building secure relationationships
           Which of the following would promote successful parent partnerships:
         answers:
           A: Increased consistency, shared realistic expectations, role modelling
@@ -217,16 +217,16 @@ brain-development-in-early-years:
           C: Increased consistency, parent partnerships, role modelling
           D: Increased consistency, shared realistic expectations, modelling
         correct-answers:
-          - "A" 
-      Q12: 
+          - "A"
+      Q12:
         multi_select: false
         label: |
           # 12. Self-regulation
           Proprioceptive activities can be used to positively support self-regulation. What type of activity is this?
         answers:
-          A: Problem solving activity 
-          B: Weight bearing activity 
-          C: Memory building activity 
+          A: Problem solving activity
+          B: Weight bearing activity
+          C: Memory building activity
           D: Communication development activity
         correct_answers:
           - "B"
