@@ -45,6 +45,7 @@ class UserController < ApplicationController
       bypass_sign_in(user)
       redirect_to user_path, notice: 'Your password has been reset'
     else
+      ahoy.track('password_change_attempt_failed')
       render :edit_password, status: :unprocessable_entity
     end
   end

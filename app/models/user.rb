@@ -15,6 +15,18 @@ class User < ApplicationRecord
   validates :postcode, postcode: true
   validates :ofsted_number, ofsted_number: true
 
+  # @see Devise database_authenticatable
+  # @param params [Hash]
+  # @return [Boolean]
+  def update_with_password(params)
+    if params[:password].blank?
+      errors.add :password, :blank
+      return false
+    end
+
+    super
+  end
+
   def last_page_for(training_module:)
     events.where_properties(training_module_id: training_module.name).last&.properties
   end
