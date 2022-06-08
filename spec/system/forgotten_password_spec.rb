@@ -3,21 +3,21 @@ require 'rails_helper'
 RSpec.describe 'Confirmed user, following forgotten password process', type: :system do
   let(:user) { create :user, :confirmed }
   let(:token) { user.send_reset_password_instructions }
-  let(:password) { 'NewPassword123' }
 
-  
   context 'when on the "Choose a password" page' do
     before do
       visit "/users/password/edit?reset_password_token=#{token}"
     end
-    
+
     # Happy path scenario
-    context 'enter correct credentials' do
+    context 'when correct credentials are entered' do
+      let(:password) { 'NewPassword123' }
+
       it 'flash message displays correctly' do
         fill_in 'New password', with: password
         fill_in 'Confirm your password', with: password
         click_on 'Reset password'
-  
+
         expect(page).to have_current_path('/users/sign_in')
           .and have_text('Success')
           .and have_text('Your password has been changed successfully.')
@@ -26,7 +26,7 @@ RSpec.describe 'Confirmed user, following forgotten password process', type: :sy
 
     # Unhappy path scenarios
     context 'when password is less than 10 characters' do
-      let(:password) {'Password'}
+      let(:password) { 'Password' }
 
       it 'displays error message' do
         fill_in 'New password', with: password
@@ -36,10 +36,10 @@ RSpec.describe 'Confirmed user, following forgotten password process', type: :sy
         expect(page).to have_text('Password must be at least 10 characters.')
       end
     end
-    
+
     context "when password and confirm password don't match" do
-      let(:password) {'NewPassword123'}
-      let(:confirm_password) {'NewPassword456'}
+      let(:password) { 'NewPassword123' }
+      let(:confirm_password) { 'NewPassword456' }
 
       it 'displays error message' do
         fill_in 'New password', with: password
