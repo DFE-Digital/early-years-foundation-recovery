@@ -4,7 +4,7 @@ RSpec.describe 'Confirmed user, following forgotten password process', type: :sy
   let(:user) { create :user, :confirmed }
   let(:token) { user.send_reset_password_instructions }
 
-  context 'when on the "Choose a password" page' do
+  context 'when choosing a new password' do
     before do
       visit "/users/password/edit?reset_password_token=#{token}"
     end
