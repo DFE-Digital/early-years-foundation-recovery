@@ -8,17 +8,25 @@ class FormativeAssessmentsController < ApplicationController
 
   def update
     archive_previous_user_answers
-    if questionnaire_params.values.all?(&:present?)
-      populate_questionnaire(questionnaire_params)
-      save_answers
-      flash[:alert] = nil
+    if params.has_key?(:questionnaire)
+     process_questionaire
     else
-      flash[:alert] = 'Please select an answer'
+      flash[:alert] = 'Please select an answer' 
     end
     render :show, status: :unprocessable_entity
   end
 
 private
+
+  def process_questionaire
+    if questionnaire_params.values.all?(&:present?)
+      populate_questionnaire(questionnaire_params)
+      save_answers
+      flash[:alert] = nil
+    else
+      flash[:alert] = 'Please select an answer' 
+    end
+  end
 
   def questionnaire
     @questionnaire ||= Questionnaire.find_by!(name: params[:id], training_module: training_module)

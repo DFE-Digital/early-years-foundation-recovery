@@ -1,5 +1,8 @@
 class ContentPagesController < ApplicationController
+  include ApplicationHelper 
   before_action :authenticate_registered_user!
+  before_action :clear_flash
+  
 
   def index
     first_module_item = ModuleItem.find_by(training_module: training_module)
