@@ -7,7 +7,7 @@ alpha:
         multi_select: false
         label: Do you like stuff
         assessment_summary: Hey! You like stuff
-        assessment_fail_summary: You should like stuff
+        assessment_fail_summary: You should like stuff!
         answers:
           'yes': 'Yes'
           'no': 'No'
@@ -18,7 +18,7 @@ alpha:
       who_likes_stuff:
         multi_select: true
         label: Who likes stuff
-        assessment_summary: Stuffy people and people who do stuffing don't like stuff.
+        assessment_summary: Stuffy people and people who do stuffffffffing don't like stuff.
         answers:
           stuffy_people: Stuffy people
           everybody: Everybody
