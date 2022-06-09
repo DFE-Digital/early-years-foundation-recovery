@@ -8,10 +8,10 @@ class FormativeAssessmentsController < ApplicationController
 
   def update
     archive_previous_user_answers
-    if params.has_key?(:questionnaire)
-     process_questionaire
+    if params.key?(:questionnaire)
+      process_questionaire
     else
-      flash[:alert] = 'Please select an answer' 
+      flash[:alert] = 'Please select an answer'
     end
     render :show, status: :unprocessable_entity
   end
@@ -24,7 +24,7 @@ private
       save_answers
       flash[:alert] = nil
     else
-      flash[:alert] = 'Please select an answer' 
+      flash[:alert] = 'Please select an answer'
     end
   end
 

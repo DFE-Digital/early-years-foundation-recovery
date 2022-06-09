@@ -63,5 +63,4 @@ module ApplicationHelper
   def clear_flash
     flash[:alert] = nil
   end
-
 end
