@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Confirmed user, following forgotten password process', type: :system do
+RSpec.describe 'User following forgotten password process', type: :system do
   let(:user) { create :user, :confirmed }
   let(:token) { user.send_reset_password_instructions }
 
@@ -10,7 +10,7 @@ RSpec.describe 'Confirmed user, following forgotten password process', type: :sy
     end
 
     # Happy path scenario
-    context 'when correct credentials are entered' do
+    context 'and new password meets criteria' do
       let(:password) { 'NewPassword123' }
 
       it 'flash message displays correctly' do
@@ -25,7 +25,7 @@ RSpec.describe 'Confirmed user, following forgotten password process', type: :sy
     end
 
     # Unhappy path scenarios
-    context 'when password is less than 10 characters' do
+    context 'and password is less than 10 characters' do
       let(:password) { 'Password' }
 
       it 'displays error message' do
@@ -37,7 +37,7 @@ RSpec.describe 'Confirmed user, following forgotten password process', type: :sy
       end
     end
 
-    context "when password and confirm password don't match" do
+    context "and password and confirm password don't match" do
       let(:password) { 'NewPassword123' }
       let(:confirm_password) { 'NewPassword456' }
 
