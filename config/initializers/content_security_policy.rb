@@ -13,8 +13,9 @@
 
 GOVUK_DOMAINS = [
   '*.education.gov.uk',
-  '*.s3.eu-west-2.amazonaws.com',
-  'eyfs-cms-preprod.london.cloudapps.digital',
+  # Uncomment or add url links in order to import imgs / js files from a specific domain
+  # '*.s3.eu-west-2.amazonaws.com',
+  # 'eyfs-cms-preprod.london.cloudapps.digital',
 ].uniq.freeze
 
 GOOGLE_ANALYTICS_DOMAINS = %w[www.google-analytics.com
