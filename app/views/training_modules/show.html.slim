@@ -3,3 +3,13 @@ h1= @training_module.title
 p= @training_module.description
 
 = govuk_button_to 'Start', training_module_content_pages_path(@training_module), method: :get
+
+= govuk_tag(text: '15 topics', colour: 'green')
+= govuk_tag(text: '3 hours', colour: 'green')
+
+= govuk_accordion do |accordion|
+  - accordion.section(heading_text: "One", summary_text: 'First summary') { tag.p("One content") }
+
+  - accordion.section(heading_text: "Two", summary_text: 'Second summary') { tag.p("Two content") }
+
+  - accordion.section(heading_text: "Three", summary_text: 'Third summary') { tag.p("Three content") }
