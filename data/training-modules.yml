@@ -15,3 +15,9 @@ personal-social-and-emotional-development:
   thumbnail: introduction_to_supporting_physical_development
   description: about personal-social-and-emotional-development
   depends_on: brain-development-and-how-children-learn
+
+end-of-modules-summetive-assessment:
+  title: End of in early years assessment
+  thumbnail: introduction_to_supporting_physical_development
+  description: Go through the assessment
+  depends_on: brain-development-in-early-years
