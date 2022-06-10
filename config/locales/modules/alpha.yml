@@ -94,11 +94,14 @@ en:
           $C
 
       1-1:
-        heading: Sub-module intro heading (the module has begun)
+        heading: Sub-module intro heading
         body: Sub-module intro body
       1-1-1:
         heading: Stuff is cool
-        body: Oh yes!
+        body: |
+          ## subheading
+
+          ^Govspeak Callout Test^
       1-1-2:
         heading: Stuff everywhere
         body: It's all around us

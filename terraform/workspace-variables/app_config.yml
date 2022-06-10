@@ -22,7 +22,6 @@ staging:
   <<: *defaults
   DOMAIN: ey-recovery-staging.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-staging
-  TRAINING_MODULES: demo-modules
 
 # ey-recovery-content
 content:
