@@ -27,8 +27,14 @@ class ModuleItem < YamlBase
   end
 
   # Returns all the module items that belong to a particular topic within a training module
-  scope :where_topic, lambda { |training_module, topic|
-    pattern = /\A(\d+\W){2}#{topic}(?=(\D|$))/ # Start with two number then non-word character pairs (e.g. 2-4- or 13.4.). Can be followed by either a non-digit or end of line
+  scope :where_topic, lambda { |training_module, topic_name|
+    pattern = /\A(\d+\W){2}#{topic_name}(?=(\D|$))/ # Start with two number then non-word character pairs (e.g. 2-4- or 13.4.). Can be followed by either a non-digit or end of line
+    where(training_module: training_module).select { |m| m.name =~ pattern }
+  }
+
+  # Returns all the module items that belong to a particular submodule within a training module
+  scope :where_submodule, lambda { |training_module, submodule_name|
+    pattern = /\A(\d+\W){1}#{submodule_name}(?=(\D|$))/
     where(training_module: training_module).select { |m| m.name =~ pattern }
   }
 
@@ -48,48 +54,67 @@ class ModuleItem < YamlBase
       klass.new(attributes)
     end
   end
+
+  # @see https://docs.rubocop.org/rubocop/cops_lint.html#lintmixedregexpcapturetypes
+  #
+  # @return [String, nil] Third digit, if present
+  def topic_name
+    pattern = /\A(\d+\W){2}(?<topic>\d+)(?=(\D|$))/
+    matches = name.match(pattern)
+    matches[:topic] if matches
+  end
+
+  # @return [String, nil] Second digit, if present
+  def submodule_name
+    pattern = /\A(\d+\W){1}(?<submodule>\d+)(?=(\D|$))/
+    matches = name.match(pattern)
+    matches[:submodule] if matches
+  end
+
+  # predicates ---------------------------------
+
+  # @return [Boolean]
   delegate :valid?, to: :model
+
+  # @return [Boolean] if the page name has a third digit
+  def topic?
+    topic.present?
+  end
+
+  # @return [Boolean]
+  def submodule?
+    type.eql?('sub_module_intro')
+  end
 
   # position ---------------------------------
 
-  # @return [Integer] current item position (zero index)
+  # @return [Integer, nil] current item position (zero index)
   def position_within_training_module
     module_items_in_this_training_module.index(self)
   end
 
-  # @return [Integer] current item position (zero index)
+  # @return [Integer, nil] current item position (zero index)
+  def position_within_submodule
+    self.class.where_submodule(training_module, submodule_name).index(self)
+  end
+
+  # @return [Integer, nil] current item position (zero index)
   def position_within_topic
-    self.class.where_topic(training_module, topic).index(self)
+    self.class.where_topic(training_module, topic_name).index(self)
   end
 
   # sequence ---------------------------------
 
-  # @return [ModuleItem]
+  # @return [ModuleItem, nil]
   def previous_item
     return if position_within_training_module.zero?
 
     module_items_in_this_training_module[position_within_training_module - 1]
   end
 
-  # @return [ModuleItem]
+  # @return [ModuleItem, nil]
   def next_item
     module_items_in_this_training_module[position_within_training_module + 1]
-  end
-
-  # key attribute values ---------------------------------
-
-  #
-  #
-  #   "1", "1-1", "1-1-1", "1-1-1-1a", "1-1-1-1b", "1-1-1-2a", "1-1-1-2b",
-  #   "1-1-1-3a", "1-1-1-3b", "1-1-1-3c", "1-recap", "1-test"
-  #
-  # @see https://docs.rubocop.org/rubocop/cops_lint.html#lintmixedregexpcapturetypes
-  #
-  # @return [Integer] Third digit, if present
-  def topic
-    pattern = /\A(\d+\W){2}(?<topic>\d+)(?=(\D|$))/
-    matches = name.match(pattern)
-    matches[:topic] if matches
   end
 
   # collections -------------------------
