@@ -1,4 +1,4 @@
-div class="full-width-container govuk-!-padding-top-7 govuk-!-padding-bottom-7 govuk-!-margin-bottom-4"
+div class="full-width-container govuk-!-margin-top-0 govuk-!-padding-top-7 govuk-!-padding-bottom-7 govuk-!-margin-bottom-4"
   h1.govuk-heading-l= @training_module.title
 
   p= @training_module.description
@@ -8,11 +8,7 @@ div class="full-width-container govuk-!-padding-top-7 govuk-!-padding-bottom-7 g
 = govuk_tag(text: "15 topics", colour: 'green')
 = govuk_tag(text: @training_module.duration, colour: 'green')
 
-= govuk_accordion do |accordion|
-  - @module_item.each do |item|
-    - accordion.section(heading_text: item.model.heading, summary_text: item.model.heading) { tag.p("Content") }
-  / - accordion.section(heading_text: "One", summary_text: 'First summary') { tag.p("One content") }
-
-  / - accordion.section(heading_text: "Two", summary_text: 'Second summary') { tag.p("Two content") }
-
-  / - accordion.section(heading_text: "Three", summary_text: 'Third summary') { tag.p("Three content") }
+div class='govuk-!-margin-top-5'
+  = govuk_accordion do |accordion|
+    - @module_item.each do |item, index|
+      - accordion.section(heading_text: item.model.heading, summary_text: item.model.heading) { tag.p("Content") }
