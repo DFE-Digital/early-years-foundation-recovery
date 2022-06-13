@@ -6,7 +6,7 @@
 
 How might we best manage secrets, keys etc. within the application environment?
 
-## Decision Drivers <!-- optional -->
+## Decision Drivers
 
 * Security
 * Cost

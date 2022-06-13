@@ -6,7 +6,7 @@
 
 How might we authenticate users?
 
-## Decision Drivers <!-- optional -->
+## Decision Drivers
 
 * The authentication system must be secure
 * The system must integrate with Gov.uk Notify which is to be used for email second factor if a built in 2FA system not already included.

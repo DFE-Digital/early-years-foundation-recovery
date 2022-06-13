@@ -6,7 +6,7 @@
 
 How might we ensure the security of our Docker images?
 
-## Decision Drivers <!-- optional -->
+## Decision Drivers
 
 * Shift left: Eliminate issues as early as possible
 * CI/CD integration
