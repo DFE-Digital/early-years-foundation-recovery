@@ -4,6 +4,8 @@ brain-development-in-early-years:
     content:
     questions:
       1_how_many_areas:
+        assessment_summary: Passed!
+        assessment_fail_summary: Failed
         multi_select: false
         label: How many areas of the brain are there?
         answers:
