@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     get 'check-email-password-reset'
   end
 
-  resources :modules, only: [:index :show], as: :training_modules, controller: :training_modules do
+  resources :modules, only: %i[index show], as: :training_modules, controller: :training_modules do
     resources :content_pages, only: %i[index show], path: 'content-pages'
     resources :questionnaires, only: %i[show update]
     resources :formative_assessments, only: %i[show update], path: 'formative-assessments'
