@@ -8,6 +8,6 @@
       - if @user.pending_reconfirmation?
         p Currently waiting confirmation for: #{@user.unconfirmed_email}
 
-      = form.govuk_submit 'Save'
+      = form.govuk_submit t('links.save')
 
       p= link_to 'Cancel', user_path

@@ -44,6 +44,7 @@ gem 'slim-rails', '~> 3.4', '>= 3.4.0'
 # Create models from static data such as hashes or YAML
 gem 'active_hash'
 
+# TODO: add ey-recovery to https://github.com/DFE-Digital/govuk-components
 gem 'govuk-components', '>= 3.0.3'
 gem 'govuk_design_system_formbuilder'
 
@@ -86,6 +87,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'redcarpet' # code syntax in Yardoc
   gem 'web-console'
   gem 'yard-junk'
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]

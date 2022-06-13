@@ -1,13 +1,13 @@
 ---
 registered@example.com:
-  password: <%= ENV.fetch('USER_PASSWORD', 'Passw0rd') %>
+  password: <%= ENV.fetch('USER_PASSWORD', 'StrongPassword') %>
 
 confirmed@example.com:
-  password: <%= ENV.fetch('USER_PASSWORD', 'Passw0rd') %>
+  password: <%= ENV.fetch('USER_PASSWORD', 'StrongPassword') %>
   confirmed_at: <%= 1.minute.ago %>
 
 completed@example.com:
-  password: <%= ENV.fetch('USER_PASSWORD', 'Passw0rd') %>
+  password: <%= ENV.fetch('USER_PASSWORD', 'StrongPassword') %>
   confirmed_at: <%= 1.minute.ago %>
   registration_complete: true
   # mandatory if "registration_complete"

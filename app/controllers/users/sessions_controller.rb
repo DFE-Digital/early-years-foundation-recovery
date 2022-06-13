@@ -5,7 +5,7 @@ protected
 
   def after_sign_in_path_for(resource)
     if resource.registration_complete?
-      super
+      my_learning_path
     else
       extra_registrations_path
     end

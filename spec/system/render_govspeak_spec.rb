@@ -1,18 +1,24 @@
 require 'rails_helper'
 
-RSpec.describe '', type: :system do
-  let(:user) { create :user, :registered }
+RSpec.describe 'Govspeak', type: :system do
+  include_context 'with user'
 
-  before do
-    visit '/users/sign-in'
-    fill_in 'Email address', with: user.email
-    fill_in 'Password', with: 'StrongPassword123'
-    click_button 'Sign in'
+  context 'with module intro' do
+    before do
+      visit '/modules/alpha/content_pages/1'
+    end
 
-    visit 'modules/one/formative-assessments/1-2-2'
+    it 'is displayed' do
+      expect(page.source).to include '<div role="note" aria-label="Warning" class="application-notice help-notice">'
+      expect(page).to have_text 'Warning: people like stuff!'
+    end
   end
 
-  describe 'Govspeak page content' do
+  context 'with formative assessments' do
+    before do
+      visit '/modules/alpha/formative_assessments/1-2-2'
+    end
+
     it 'is displayed' do
       expect(page.source).to include '<div role="note" aria-label="Warning" class="application-notice help-notice">'
       expect(page).to have_text 'Warning: people like stuff!'

@@ -1,0 +1,40 @@
+---
+alpha:
+  1-1-4:
+    required_percentage_correct: 100
+    questions:
+      like_stuff:
+        multi_select: false
+        label: Do you like stuff
+        assessment_summary: Hey! You like stuff
+        assessment_fail_summary: You should like stuff!
+        answers:
+          'yes': 'Yes'
+          'no': 'No'
+        correct_answers:
+          - 'yes'
+  1-2-2:
+    questions:
+      who_likes_stuff:
+        multi_select: true
+        label: Who likes stuff
+        assessment_summary: Stuffy people and people who do stuffffffffing don't like stuff.
+        answers:
+          stuffy_people: Stuffy people
+          everybody: Everybody
+          nobody: Nobody
+          stuffers: People who do the stuffing
+        correct_answers:
+          - stuffy_people
+          - stuffers
+  1-2-4:
+    questions:
+      multiples_of_three:
+        multi_select: true
+        label: label
+        assessment_summary: assessment summary
+        answers:
+          1: Three
+          2: Eleven
+          3: Fifteen
+        correct_answers: [ '1', '3' ]

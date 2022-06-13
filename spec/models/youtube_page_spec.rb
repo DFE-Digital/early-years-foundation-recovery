@@ -1,8 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe YoutubePage, type: :model do
-  let(:content) { YAML.load_file(Rails.root.join('config/locales/modules/test.yml')).dig('en', 'modules', 'test') }
-  let(:youtube_page) { described_class.new(name: :video, training_module: :test, type: :youtube_page) }
+  let(:file) do
+    Rails.root.join('config/locales/modules/test.yml')
+  end
+
+  let(:content) do
+    YAML.load_file(file).dig('en', 'modules', 'test')
+  end
+
+  let(:youtube_page) do
+    described_class.new(name: :video, training_module: :test, type: :youtube_page)
+  end
 
   describe '#heading' do
     it 'returns the heading data from the content file' do
