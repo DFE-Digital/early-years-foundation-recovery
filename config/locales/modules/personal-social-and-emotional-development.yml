@@ -171,9 +171,11 @@ en:
           <div class="govuk-inset-text">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
-            <p class="govuk-body">Around the age of 4, does the child play alongside others or do they always want to play alone? Does the child take part in pretend play (for example, being ‘mummy’ or ‘daddy’?) </p>
-
-          </div>
+            <p class="govuk-body"> Think of a child around the age of 4 in your care. </p>
+            <ul>
+            <li> Does the child play alongside others or do they always want to play alone? 
+            <li> Does the child take part in pretend play (for example, being ‘mummy’ or ‘daddy’?)
+        
 
       3-1-1-5a:
         heading: Stages of social and emotional development
