@@ -15,7 +15,7 @@ class Question < OpenStruct
     if multi_select
       questionnaire.send("#{name}=", answer.map(&:to_sym))
     else
-      questionnaire.send("#{name}=", answer.first.to_sym)
+      questionnaire.send("#{name}=", answer&.first.to_sym)
     end
   end
 end
