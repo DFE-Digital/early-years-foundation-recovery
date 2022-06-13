@@ -202,10 +202,10 @@ en:
           <div class="govuk-inset-text">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
-            <p class="govuk-body">Think of a child in your care.  </p>
+            <p class="govuk-body">Think of a child around the age of 5 in your care.  </p>
 
             <ul class="govuk-list govuk-list--bullet">
-              <li>Do they match the expected level of development for their age range? </li>
+              <li>Do they meet the expected level of development for their age range? </li>
               <li>How do you know? </li>
               <li>What are their next steps? </li>
               <li>What opportunities does your environment offer them to progress and develop? </li> 
