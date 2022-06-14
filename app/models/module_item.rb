@@ -2,6 +2,21 @@
 #
 #
 class ModuleItem < YamlBase
+  extend YamlFolder
+  set_folder 'modules'
+
+  # @overload ActiveYaml::Base load_file
+  #   gets data nested within files and uses parent keys to populate attributes
+  def self.load_file
+    data = raw_data.map do |training_module, items|
+      items.map do |name, values|
+        values.merge(name: name.to_s, training_module: training_module)
+      end
+    end
+    data.flatten! # Using flatten! as more memory efficient.
+    data
+  end
+
   # @return [Hash] 'Type' to 'View object' mapping
   MODELS = {
     module_intro: ContentPage,
@@ -20,21 +35,6 @@ class ModuleItem < YamlBase
   # @return [Regexp] 4th digit (and optional suffix) if present: 1-1-1-[1a]
   # PAGE_PATTERN = %r"\A(?<prefix>\d+\W){3}(?<page>\d+)(?=(?<suffix>\D|$))".freeze
   PAGE_PATTERN = %r"\A(?<prefix>\d+\W){3}(?<page>\d+\D+)$"
-
-  extend YamlFolder
-  set_folder 'modules'
-
-  # @overload ActiveYaml::Base load_file
-  #   gets data nested within files and uses parent keys to populate attributes
-  def self.load_file
-    data = raw_data.map do |training_module, items|
-      items.map do |name, values|
-        values.merge(name: name.to_s, training_module: training_module)
-      end
-    end
-    data.flatten! # Using flatten! as more memory efficient.
-    data
-  end
 
   # Start with two number then non-word character pairs (e.g. 2-4- or 13.4.)
   # Can be followed by either a non-digit or end of line
@@ -58,6 +58,41 @@ class ModuleItem < YamlBase
 
   # composition ---------------------------------
 
+  # @return [String]
+  def debug_summary
+    <<~SUMMARY
+      id: #{id}
+      module: #{training_module}
+      name: #{name}
+
+      ---
+      previous: #{previous_item&.name}
+      next: #{next_item&.name}
+      type: #{type}
+
+      ---
+      submodule name: #{submodule_name || 'none'}
+      topic name: #{topic_name || 'none'}
+      page name: #{page_name || 'none'}
+
+      ---
+      position in module: #{position_within_training_module}
+      position in submodule: #{position_within_submodule}
+      position in topic: #{position_within_topic}
+
+      ---
+      submodule items count: #{number_within_submodule}
+      topic items count: #{number_within_topic}
+    SUMMARY
+  end
+
+  # @return [Hash<Symbol>, nil]
+  def page_number
+    return unless position_within_submodule
+
+    { current: position_within_submodule, total: number_within_submodule }
+  end
+
   # @return [TrainingModule]
   def parent
     TrainingModule.find_by(name: training_module)
@@ -77,47 +112,55 @@ class ModuleItem < YamlBase
 
   # @return [String, nil] 2nd digit if present: 1-[1]-1-1
   def submodule_name
-    name.match(SUBMODULE_PATTERN)[:submodule]
+    matches = name.match(SUBMODULE_PATTERN)
+    matches[:submodule] if matches
   end
 
   # @return [String, nil] 3rd digit if present: 1-1-[1]-1
   def topic_name
-    name.match(TOPIC_PATTERN)[:topic]
+    matches = name.match(TOPIC_PATTERN)
+    matches[:topic] if matches
   end
 
-  # @return [String, nil] 4th digit if present: 1-1-1-[1]
+  # @return [String, nil] 4th digit (and optional suffix) if present: 1-1-1-[1a]
   def page_name
-    name.match(PAGE_PATTERN)[:page]
+    matches = name.match(PAGE_PATTERN)
+    matches[:page] if matches
   end
 
   # predicates ---------------------------------
+  # TODO: Use types to check rather than names
 
   # @return [Boolean]
   delegate :valid?, to: :model
 
-  # @return [Boolean] if the page name has a third digit
+  # @return [Boolean]
   def topic?
-    topic.present?
+    topic_name.present?
   end
 
   # @return [Boolean]
   def submodule?
-    type.eql?('sub_module_intro')
+    # type.eql?('sub_module_intro')
+    submodule_name.present?
   end
 
   # position ---------------------------------
 
+  # Module intro will be position 0
   # @return [Integer, nil] current item position (zero index)
   def position_within_training_module
     parent.module_items.index(self)
   end
 
+  # Submodule intro will be position 0
   # @return [Integer, nil] current item position (zero index)
   def position_within_submodule
     self.class.where_submodule(training_module, submodule_name).index(self)
     # parent.module_items_by_submodule(submodule_name).index(self)
   end
 
+  # Topic intro will be position 0
   # @return [Integer, nil] current item position (zero index)
   def position_within_topic
     self.class.where_topic(training_module, topic_name).index(self)
@@ -126,16 +169,17 @@ class ModuleItem < YamlBase
 
   # counters ---------------------------------
 
-  # @return [Integer]
+  # @return [Integer] module items excluding the submodule intro
   def number_within_submodule
-    self.class.where_submodule(training_module, submodule_name).count
-    # parent.module_items_by_submodule(submodule_name).count
+    parent.module_items_by_submodule(submodule_name).count - 1
   end
 
-  # @return [Integer]
+  # @return [Integer] module items excluding the topic intro
   def number_within_topic
-    self.class.where_topic(training_module, topic_name).count
-    # parent.module_items_by_topic(topic_name).count
+    # parent.module_items_by_topic(topic_name).count - 1
+
+    total = self.class.where_topic(training_module, topic_name).count
+    total.zero? ? 0 : total - 1
   end
 
   # sequence ---------------------------------

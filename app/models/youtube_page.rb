@@ -12,21 +12,33 @@ class YoutubePage
   # Use the URL within the embeded code. For example:
   #  https://www.youtube.com/embed/ucjmWjJ25Ho
   #
-  validates :youtube_url, format: /\Ahttps:\/\/www\.youtube\.com\/embed/
+  validates :youtube_url, format: %r"\Ahttps://www\.youtube\.com/embed"
 
+  # @return [Hash, nil]
+  delegate :page_number, to: :module_item
+
+  # @return [String]
   def heading
     translate(:heading)
   end
 
+  # @return [String]
   def body
     translate(:body)
   end
 
+  # @return [String]
   def video_title
     translate(:video_title)
   end
 
+  # @return [String]
   def youtube_url
     translate(:youtube_url)
+  end
+
+  # @return [ModuleItem]
+  def module_item
+    @module_item ||= ModuleItem.find_by(training_module: training_module, name: name)
   end
 end

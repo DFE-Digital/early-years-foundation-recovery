@@ -12,24 +12,24 @@ en:
         body: first sub intro
       1-1-1:
         heading: text_page
-        body: topic 1
+        body: page 1 of sub 1 (topic 1)
       1-1-2:
         heading: youtube_page
-        body: topic 2
+        body: page 2 of sub 1 (topic 2)
       1-1-2-1:
         heading: text_page
-        body: second page of second topic
+        body: page 3 of sub 1 (topic 2 page 2)
       # --------------------------------------
       1-2:
         heading: sub_module_intro
         body: second sub intro
       1-2-1:
         heading: text_page
-        body: topic 1
+        body: page 1 of sub 2 (topic 1)
       1-2-2:
         heading: youtube_page
-        body: topic 2
+        body: page 2 of sub 2 (topic 2)
       1-2-2-1:
         heading: text_page
-        body: second page of second topic
+        body: page 3 of sub 2 (topic 2 page 2)
       # --------------------------------------
