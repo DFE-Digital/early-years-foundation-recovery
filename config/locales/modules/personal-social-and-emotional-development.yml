@@ -60,7 +60,7 @@ en:
         body: |
           ![A baby lying on its tummy on a sofa. There are some toys in front of the baby and the baby is smiing.](/assets/3-1-1-1-871598028.jpg)
           
-          Development Matters shows us the skills children will be learning and working towards. Over the next few pages we will take a closer look at the expected milestones for personal, social and emotional development between birth and the age of 5.
+          Development Matters (2021) shows us the skills children will be learning and working towards. Over the next few pages we will take a closer look at the expected milestones for personal, social and emotional development between birth and the age of 5.
 
           As always, it is important to remember that while we will discuss the expected milestones of development, every child will develop at their own rate. No child should be considered as low ability in comparison to these milestones. Some children may require additional support to reduce gaps in learning that have occurred during the COVID-19 pandemic, and every child should be supported to achieve their full potential. 
           
@@ -146,7 +146,7 @@ en:
           <div class="govuk-inset-text">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
-            <p class="govuk-body">Ensure the environment used by 2 to 3 year olds provides lots of opportunities for spontaneous role play. Observe the children from a distance and note what feelings children express and explore.</p>
+            <p class="govuk-body">Ensure the environment used by 2 to 3 year olds provides lots of opportunities for spontaneous role play. Observe the children from a distance and notice what feelings children express and explore.</p>
             
             <p class="govuk-body">Use this information to support your planning. For example, do you have books the children can explore or puppets they can use? Can you use planned opportunities such as morning circle time to discuss and explore feelings? </p>
 
@@ -156,7 +156,9 @@ en:
         body: |
           ![Two four year olds sat on the floor doing a painting activity. They are looking at each other and the child on the left is smiling.](/assets/3-1-1-4a-653274692.jpg)
           
-          At around 4 years old, children would rather play with others than alone. They will be making friendships and forming bonds with their peers. At this age, children’s cooperation skills will be improving and they will be more aware of the feelings of others. In your setting you should take opportunities to encourage both child led and adult led activities. Children’s play will also be more creative, with an increase in purposeful imaginative play. For example, you will likely see them using role play to act out significant figures in their lives. Providing child led opportunities to explore and express their thoughts and feelings will help children to navigate relationships.
+          At around 4 years old, children would rather play with others than alone. They will be making friendships and forming bonds with their peers. At this age, children’s cooperation skills will be improving and they will be more aware of the feelings of others. In your setting you should take opportunities to encourage both child led and adult led activities. 
+          
+          Children’s play will also be more creative, with an increase in purposeful imaginative play. For example, you will likely see them using role play to act out significant figures in their lives. Providing child led opportunities to explore and express their thoughts and feelings will help children to navigate relationships.
           
           Some children will now talk more about what they like and what they are interested in and will have more of their own opinions and beliefs. You should support children to explore these in a child led way, and give adult led opportunities to discuss them. 
           
@@ -171,9 +173,11 @@ en:
           <div class="govuk-inset-text">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
-            <p class="govuk-body">Around the age of 4, does the child play alongside others or do they always want to play alone? Does the child take part in pretend play (for example, being ‘mummy’ or ‘daddy’?) </p>
-
-          </div>
+            <p class="govuk-body"> Think of a child around the age of 4 in your care. </p>
+            <ul>
+            <li> Does the child play alongside others or do they always want to play alone? 
+            <li> Does the child take part in pretend play (for example, being ‘mummy’ or ‘daddy’?)
+        
 
       3-1-1-5a:
         heading: Stages of social and emotional development
@@ -198,10 +202,10 @@ en:
           <div class="govuk-inset-text">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
-            <p class="govuk-body">Think of a child in your care.  </p>
+            <p class="govuk-body">Think of a child around the age of 5 in your care.  </p>
 
             <ul class="govuk-list govuk-list--bullet">
-              <li>Do they match the expected level of development for their age range? </li>
+              <li>Do they meet the expected level of development for their age range? </li>
               <li>How do you know? </li>
               <li>What are their next steps? </li>
               <li>What opportunities does your environment offer them to progress and develop? </li> 
@@ -465,7 +469,7 @@ en:
           
           Children who are anxious and worried may struggle to settle, concentrate or engage, which may present itself as challenging behaviour. They will need reassurance, additional explanation and repetition to support the adjustment. 
           
-          Working in partnership with parents will support you to further understand the children’s experiences and will enable you to incorporate familiar items and routines where possible.
+          Working in partnership with parents and carers will support you to further understand the children’s experiences and will enable you to incorporate familiar items and routines where possible.
 
           ##Development challenges 
 
@@ -567,7 +571,7 @@ en:
         body: |
           ![A practitioner supporting a young child as they play.](/assets/3-2-468663512.jpg)
           
-          The very early relationships children experience, usually with their parents, will shape the way that they develop and maintain later relationships.
+          The very early relationships children experience, usually with their parents and carers, will shape the way that they develop and maintain later relationships.
           
           Research shows that children who experience healthy, trusting relationships are:  
           
@@ -643,7 +647,11 @@ en:
           
           At every stage the babies’ reactions were observed to determine their level of distress and how easily they could be comforted.
           
-          As a result of the experiment Ainsworth categorised attachment into 3 types: secure attachment, insecure avoidant attachment, and insecure ambivalent attachment.
+          As a result of the experiment Ainsworth categorised attachment into 3 types:
+           
+          - secure attachment
+          - insecure avoidant attachment
+          - insecure ambivalent attachment
           
           Ainsworth concluded that the quality of the attachment would differ between children as a result of the care received. 
           
@@ -688,7 +696,7 @@ en:
           Older children may:
           
           - have limited friendships
-          - be anxious about what others think of them. 
+          - be anxious about what others think of them 
           - be constantly focused on the negative and try to avoid tasks
           - demand the practitioner’s attention 
           - have poor concentration 
@@ -710,7 +718,7 @@ en:
 
           Older children may:
           
-          - try to take on the parental role and act as the caregiver to their parent and others
+          - try to take on the parental role and act as the caregiver to their parent or carer and others
           - refuse to engage in work 
           - try to create chaotic environments
       3-2-1-4:
@@ -775,7 +783,7 @@ en:
       3-2-2:
         heading: Supporting children to develop secure relationships 
         body: |
-          The first relationships children build are with their parents. After building these initial parent-child relationships, they will go on to build further relationships with others through a process of social referencing. Social referencing is where babies and young children observe and mimic their parents' reactions to meeting new people, and use these reactions to form their own relationships. 
+          The first relationships children build are with their parents and carers. After building these initial parent-child relationships, they will go on to build further relationships with others through a process of social referencing. Social referencing is where babies and young children observe and mimic their parents' and carers' reactions to meeting new people, and use these reactions to form their own relationships. 
           
           Along with a child’s family, you will be a significant attachment in a child’s life.
           
@@ -801,7 +809,7 @@ en:
           
           ##Increased consistency
           
-          An effective partnership between you and a child’s parents or carers will promote trust and increase the chances of them adopting any care and education strategies that you suggest. A parent who trusts you will also share the information you need to help you mimic the child’s home environment and meet their needs.
+          An effective partnership between you and a child’s parents or carers will promote trust and increase the chances of them adopting any care and education strategies that you suggest. A parent or carer who trusts you will also share the information you need to help you mimic the child’s home environment and meet their needs.
           
           ##Shared realistic expectations 
           
@@ -811,15 +819,15 @@ en:
 
           When children see that you have a positive relationship with their parents or carers, it builds their trust in you and improves your relationship with them. This will make children feel more safe and secure, and will help them to feel confident and settled within your setting. 
 
-          As they look to you as a role model, children are also likely to copy your behaviour and treat their parents in the same way you do. 
+          As they look to you as a role model, children are also likely to copy your behaviour and treat their parents and carers in the same way you do. 
 
           Knowing about the significant adult roles in a child’s life is important and will support you to help them. 
 
           <div class="govuk-inset-text">
           <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
-          <p class="govuk-body">How do you build partnerships with parents? </p>
-          <p class="govuk-body">How do you involve parents in their child’s learning? How many different methods can you think of?</p>
+          <p class="govuk-body">How do you build partnerships with parents and carers? </p>
+          <p class="govuk-body">How do you involve parents and carers in their child’s learning? How many different methods can you think of?</p>
           <p class="govuk-body">Do you have any examples of parents or carers who you do not know as well as you’d like? What do you think the barriers are? </p>
           <p class="govuk-body">To help you get to know the children you could complete an ‘all about me’ book with the family. The profile allows you to gather some important facts about the child’s strengths, needs and interests. </p>
           </div>   
@@ -834,11 +842,11 @@ en:
           
           ##Negative experiences
           
-          If parents have had their own negative experiences with learning and education, they may be more reluctant to engage in their child’s education and care.
+          If parents and carers have had their own negative experiences with learning and education, they may be more reluctant to engage in their child’s education and care.
           
           ##Time
           
-          Busier lifestyles mean that it may not be parents that drop off and collect children from your setting. As a result, you’ll need to find alternative methods of communication. Potential communication methods could include telephone calls, emails or a message book kept in the child’s bag. 
+          Busier lifestyles mean that it may not be parents or carers that drop off and collect children from your setting. As a result, you’ll need to find alternative methods of communication. Potential communication methods could include telephone calls, emails or a message book kept in the child’s bag. 
           
           ##Sharing information 
           
@@ -846,7 +854,7 @@ en:
           
           ##COVID-19
           
-          During the pandemic, the way that children were dropped off and picked up changed. This may have impacted on your opportunities to meet children and parents before they start in your setting. For example, parents or carers may not have given information on a form that would naturally have come up during a settling in visit in your setting. In turn, this will have impacted on what we know about our children and parents.
+          During the pandemic, the way that children were dropped off and picked up changed. This may have impacted on your opportunities to meet children and parents before they start in your setting. For example, parents or carers may not have given information on a form that would naturally have come up during a settling in visit in your setting. In turn, this will have impacted on what we know about our children and their parents or carers.
       3-2-2-3:
         heading: Supporting secure relationships
         body: |
@@ -971,7 +979,9 @@ en:
       3-3:
         heading: "Supporting self-regulation"
         body: |    
-          How well a child is able to self-regulate can impact on all areas of their development. 
+          Children's self-regulation and executive function can impact on all areas of their development. 
+
+          Executive function refers to the skills we need to be able to achieve things, while self-regulation refers to the skills we need to keep our emotions and behaviour stable.   
           
           Children are not born with executive function skills or the ability to self-regulate. They need to learn, develop and practice these skills. 
           
@@ -1003,8 +1013,13 @@ en:
         body: |    
           ![A young child concentrating hard on balancing some wooden blocks and looking happy with what she's achieved.](/assets/3-3-1-1-813846928.jpg)          
           
-          Executive function refers to the skills we need to achieve things, like those that support organisation and planning, focussing attention and retaining information. Self-regulation refers to the skills we need to keep our emotions and behaviour stable so that we can achieve things, such as persevering in challenging situations, ignoring distractions and thinking before acting. 
+          ## Executive function
+          Executive function refers to the skills we need to achieve things, like those that support organisation and planning, focussing attention and retaining information. 
           
+          ## Self-regulation
+          Self-regulation refers to the skills we need to keep our emotions and behaviour stable so that we can achieve things, such as persevering in challenging situations, ignoring distractions and thinking before acting. 
+          
+          ## Developing self-regulation and executive function skills
           Children are not born with executive function skills or the ability to self-regulate. They need to learn, develop and practice these skills. 
           
           The environment, experiences and opportunities that children are exposed to will influence the level of executive function and self-regulation skills they acquire and develop.
