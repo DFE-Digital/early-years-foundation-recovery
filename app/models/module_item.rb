@@ -109,17 +109,19 @@ class ModuleItem < YamlBase
 
   # @return [Integer, nil] current item position (zero index)
   def position_within_training_module
-    module_items_in_this_training_module.index(self)
+    parent.module_items.index(self)
   end
 
   # @return [Integer, nil] current item position (zero index)
   def position_within_submodule
     self.class.where_submodule(training_module, submodule_name).index(self)
+    # parent.module_items_by_submodule(submodule_name).index(self)
   end
 
   # @return [Integer, nil] current item position (zero index)
   def position_within_topic
     self.class.where_topic(training_module, topic_name).index(self)
+    # parent.module_items_by_topic(topic_name).index(self)
   end
 
   # counters ---------------------------------
@@ -127,11 +129,13 @@ class ModuleItem < YamlBase
   # @return [Integer]
   def number_within_submodule
     self.class.where_submodule(training_module, submodule_name).count
+    # parent.module_items_by_submodule(submodule_name).count
   end
 
   # @return [Integer]
   def number_within_topic
-    self.class.where_submodule(training_module, topic_name).count
+    self.class.where_topic(training_module, topic_name).count
+    # parent.module_items_by_topic(topic_name).count
   end
 
   # sequence ---------------------------------
@@ -140,43 +144,11 @@ class ModuleItem < YamlBase
   def previous_item
     return if position_within_training_module.zero?
 
-    module_items_in_this_training_module[position_within_training_module - 1]
+    parent.module_items[position_within_training_module - 1]
   end
 
   # @return [ModuleItem, nil]
   def next_item
-    module_items_in_this_training_module[position_within_training_module + 1]
+    parent.module_items[position_within_training_module + 1]
   end
-
-  # collections -------------------------
-
-  # @return [Array<ModuleItem>]
-  def module_items_in_this_training_module
-    @module_items_in_this_training_module ||= self.class.where(training_module: training_module).to_a
-  end
-
-  # # @return [Array<ModuleItem>]
-  # def by_type(type)
-  #   self.class.where(training_module: training_module, type: type).to_a
-  # end
-
-  # # @return [Array<ModuleItem>] type: text_page
-  # def text_pages
-  #   @text_pages ||= by_type('text_page')
-  # end
-
-  # # @return [Array<ModuleItem>] type: youtube_page
-  # def youtube_pages
-  #   @youtube_pages ||= by_type('youtube_page')
-  # end
-
-  # # @return [Array<ModuleItem>] type: formative_assessment
-  # def formative_assessments
-  #   @formative_assessments ||= by_type('formative_assessment')
-  # end
-
-  # # @return [Array<ModuleItem>] type: sub_module_intro
-  # def sub_modules
-  #   @sub_modules ||= by_type('sub_module_intro')
-  # end
 end

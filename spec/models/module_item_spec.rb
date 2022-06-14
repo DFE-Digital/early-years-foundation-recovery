@@ -13,6 +13,8 @@ RSpec.describe ModuleItem, type: :model do
     expect(module_item.type).to eq(yaml_data.dig('test', module_item.name, 'type'))
   end
 
+  # scopes ---------------------------------
+
   describe '.where_topic' do
     let!(:topic_one_item) { create :module_item, name: '1-1-1' }
     let!(:topic_two_item) { create :module_item, name: '1-1-2' }
@@ -174,10 +176,5 @@ RSpec.describe ModuleItem, type: :model do
   end
 
   describe '#submodule?' do
-  end
-
-  # collections -------------------------
-
-  describe '#module_items_in_this_training_module' do
   end
 end
