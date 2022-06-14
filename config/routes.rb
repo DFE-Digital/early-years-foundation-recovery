@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :settings, only: :show
 
-  devise_for :users, controllers: { sessions: 'users/sessions', passwords: 'passwords', registrations: 'registrations' }, path_names: { sign_in: 'sign-in', sign_out: 'sign-out', sign_up: 'sign-up' }
+  devise_for :users, controllers: { sessions: 'users/sessions', confirmations: 'confirmations', passwords: 'passwords', registrations: 'registrations' }, path_names: { sign_in: 'sign-in', sign_out: 'sign-out', sign_up: 'sign-up' }
   resources :extra_registrations, only: %i[index edit update], path: 'extra-registrations'
 
   resource :user, controller: :user, path: 'my-account', only: %i[show] do
