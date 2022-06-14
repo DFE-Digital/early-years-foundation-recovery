@@ -1,5 +1,3 @@
-h2 Resend unlock instructions
-
 = form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
   = render 'devise/shared/error_messages', resource: resource
   .field
@@ -8,5 +6,12 @@ h2 Resend unlock instructions
     = f.email_field :email, autofocus: true, autocomplete: 'email'
   .actions
     = f.submit 'Resend unlock instructions'
-
-= render 'devise/shared/links'
+  
+  / new markup
+  = f.govuk_fieldset legend: { text: 'The link you followed has expired' } do
+  
+    p.govuk-body
+      | To request a new account unlock link, enter your email address.
+  
+    = f.govuk_email_field :email, autofocus: true, autocomplete: 'email'
+    = f.govuk_submit 'Next'
