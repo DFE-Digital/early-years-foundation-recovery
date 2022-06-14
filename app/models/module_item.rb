@@ -11,6 +11,16 @@ class ModuleItem < YamlBase
     formative_assessment: Questionnaire,
   }.freeze
 
+  # @return [Regexp] 2nd digit if present: 1-[1]-1-1
+  SUBMODULE_PATTERN = %r"\A(?<prefix>\d+\W){1}(?<submodule>\d+)(?=(?<suffix>\D|$))"
+
+  # @return [Regexp] 3rd digit if present: 1-1-[1]-1
+  TOPIC_PATTERN = %r"\A(?<prefix>\d+\W){2}(?<topic>\d+)(?=(?<suffix>\D|$))"
+
+  # @return [Regexp] 4th digit (and optional suffix) if present: 1-1-1-[1a]
+  # PAGE_PATTERN = %r"\A(?<prefix>\d+\W){3}(?<page>\d+)(?=(?<suffix>\D|$))".freeze
+  PAGE_PATTERN = %r"\A(?<prefix>\d+\W){3}(?<page>\d+\D+)$"
+
   extend YamlFolder
   set_folder 'modules'
 
@@ -26,16 +36,24 @@ class ModuleItem < YamlBase
     data
   end
 
-  # Returns all the module items that belong to a particular topic within a training module
+  # Start with two number then non-word character pairs (e.g. 2-4- or 13.4.)
+  # Can be followed by either a non-digit or end of line
+  #
+  # @return [Array<ModuleItem>] module items within a given module's topic
   scope :where_topic, lambda { |training_module, topic_name|
-    pattern = /\A(\d+\W){2}#{topic_name}(?=(\D|$))/ # Start with two number then non-word character pairs (e.g. 2-4- or 13.4.). Can be followed by either a non-digit or end of line
+    pattern = %r"\A(\d+\W){2}#{topic_name}(?=(\D|$))"
     where(training_module: training_module).select { |m| m.name =~ pattern }
   }
 
-  # Returns all the module items that belong to a particular submodule within a training module
+  # @return [Array<ModuleItem>] module items within a given module's submodule
   scope :where_submodule, lambda { |training_module, submodule_name|
-    pattern = /\A(\d+\W){1}#{submodule_name}(?=(\D|$))/
+    pattern = %r"\A(\d+\W){1}#{submodule_name}(?=(\D|$))"
     where(training_module: training_module).select { |m| m.name =~ pattern }
+  }
+
+  # @return [Array<ModuleItem>] module items of a specific type
+  scope :where_type, lambda { |training_module, type|
+    where(training_module: training_module, type: type)
   }
 
   # composition ---------------------------------
@@ -55,20 +73,21 @@ class ModuleItem < YamlBase
     end
   end
 
-  # @see https://docs.rubocop.org/rubocop/cops_lint.html#lintmixedregexpcapturetypes
-  #
-  # @return [String, nil] Third digit, if present
-  def topic_name
-    pattern = /\A(\d+\W){2}(?<topic>\d+)(?=(\D|$))/
-    matches = name.match(pattern)
-    matches[:topic] if matches
+  # names ---------------------------------
+
+  # @return [String, nil] 2nd digit if present: 1-[1]-1-1
+  def submodule_name
+    name.match(SUBMODULE_PATTERN)[:submodule]
   end
 
-  # @return [String, nil] Second digit, if present
-  def submodule_name
-    pattern = /\A(\d+\W){1}(?<submodule>\d+)(?=(\D|$))/
-    matches = name.match(pattern)
-    matches[:submodule] if matches
+  # @return [String, nil] 3rd digit if present: 1-1-[1]-1
+  def topic_name
+    name.match(TOPIC_PATTERN)[:topic]
+  end
+
+  # @return [String, nil] 4th digit if present: 1-1-1-[1]
+  def page_name
+    name.match(PAGE_PATTERN)[:page]
   end
 
   # predicates ---------------------------------
@@ -101,6 +120,18 @@ class ModuleItem < YamlBase
   # @return [Integer, nil] current item position (zero index)
   def position_within_topic
     self.class.where_topic(training_module, topic_name).index(self)
+  end
+
+  # counters ---------------------------------
+
+  # @return [Integer]
+  def number_within_submodule
+    self.class.where_submodule(training_module, submodule_name).count
+  end
+
+  # @return [Integer]
+  def number_within_topic
+    self.class.where_submodule(training_module, topic_name).count
   end
 
   # sequence ---------------------------------

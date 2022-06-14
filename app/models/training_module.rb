@@ -6,10 +6,14 @@ class TrainingModule < YamlBase
     raw_data.map { |name, values| values.merge(name: name) }
   end
 
+  # predicates ---------------------------------
+
   # @return [Boolean]
   def draft?
     attributes.fetch(:draft, false)
   end
+
+  # collections -------------------------
 
   # @return [Array<ModuleItem>]
   def module_items
@@ -19,7 +23,7 @@ class TrainingModule < YamlBase
   # @param type [String]
   # @return [Array<ModuleItem>]
   def module_items_by_type(type)
-    ModuleItem.where(training_module: name, type: type).to_a
+    ModuleItem.where_type(name, type)
   end
 
   # @param submodule_name [Integer, String]
@@ -34,10 +38,12 @@ class TrainingModule < YamlBase
     ModuleItem.where_topic(name, topic_name)
   end
 
-  # @return [ModuleItem]
+  # @return [Array<ModuleItem>]
   def module_intros
     module_items_by_type('module_intro')
   end
+
+  # sequence ---------------------------------
 
   # @return [ModuleItem] viewing this page determines if the module is "started"
   def first_content_page

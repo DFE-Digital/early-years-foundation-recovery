@@ -35,8 +35,8 @@ RSpec.describe UserTraining do
     # create viewing event for last page
     it 'is true once all published modules are completed' do
       view_module_page_event('alpha', '1-2-4')
-      view_module_page_event('bravo', '1-1-2')
-      view_module_page_event('charlie', '1-1-2')
+      view_module_page_event('bravo', '1-2-2-1')
+      view_module_page_event('charlie', '1-1-3')
 
       expect(learning.course_completed?).to be true
     end
@@ -88,7 +88,7 @@ RSpec.describe UserTraining do
       .from(1).to(0)
 
       # complete the second module
-      expect { view_module_page_event('bravo', '1-1-2') }
+      expect { view_module_page_event('bravo', '1-2-2-1') }
       .to change { learning.available_modules.count }
       .from(0).to(1)
 
@@ -122,7 +122,7 @@ RSpec.describe UserTraining do
 
     it 'returns the completion date' do
       travel_to Time.zone.parse('2022-06-30') do
-        view_module_page_event('bravo', '1-1-2')
+        view_module_page_event('bravo', '1-2-2-1')
         expect(learning.completed_modules.count).to be 1
         completion_time = learning.completed_modules.first[1]
         expect(completion_time).to be_an ActiveSupport::TimeWithZone

@@ -13,6 +13,29 @@ RSpec.describe ModuleItem, type: :model do
     expect(module_item.type).to eq(yaml_data.dig('test', module_item.name, 'type'))
   end
 
+  describe '.where_topic' do
+    let!(:topic_one_item) { create :module_item, name: '1-1-1' }
+    let!(:topic_two_item) { create :module_item, name: '1-1-2' }
+
+    it 'returns module items matching the topic' do
+      expect(described_class.where_topic(:test, 1)).to include(topic_one_item)
+      expect(described_class.where_topic(:test, 2)).to include(topic_two_item)
+    end
+
+    it 'does not return items from other topics' do
+      expect(described_class.where_topic(:test, 1)).not_to include(topic_two_item)
+      expect(described_class.where_topic(:test, 2)).not_to include(topic_one_item)
+    end
+  end
+
+  describe '.where_submodule' do
+  end
+
+  describe '.where_type' do
+  end
+
+  # sequence ---------------------------------
+
   describe '#next_item' do
     let(:next_module_item) { described_class.where(training_module: :test).to_a[1] }
 
@@ -57,7 +80,7 @@ RSpec.describe ModuleItem, type: :model do
       expect(model.name).to eq(module_item.name)
     end
 
-    context 'when model is a questionniare' do
+    context 'when model is a questionnaire' do
       let(:module_item) { described_class.find_by(training_module: :test, type: :formative_assessment) }
 
       it 'returns a questionnaire' do
@@ -82,37 +105,32 @@ RSpec.describe ModuleItem, type: :model do
     end
   end
 
-  describe '.where_topic' do
-    let!(:topic_one_item) { create :module_item, name: '1-1-1' }
-    let!(:topic_two_item) { create :module_item, name: '1-1-2' }
+  # names ---------------------------------
 
-    it 'returns module items matching the topic' do
-      expect(described_class.where_topic(:test, 1)).to include(topic_one_item)
-      expect(described_class.where_topic(:test, 2)).to include(topic_two_item)
-    end
-
-    it 'does not return items from other topics' do
-      expect(described_class.where_topic(:test, 1)).not_to include(topic_two_item)
-      expect(described_class.where_topic(:test, 2)).not_to include(topic_one_item)
-    end
-  end
-
-  describe '#topic' do
+  describe '#topic_name' do
     let(:topic) { Faker::Number.number(digits: 2).to_s }
     let(:module_item) { create :module_item, name: "22-1-#{topic}" }
 
     it 'extracts the topic number from the name' do
-      expect(module_item.topic).to eq(topic)
+      expect(module_item.topic_name).to eq(topic)
     end
 
     context 'with topic subpage' do
       let(:module_item) { create :module_item, name: "33-22-#{topic}-3" }
 
       it 'extracts the topic number from the name' do
-        expect(module_item.topic).to eq(topic)
+        expect(module_item.topic_name).to eq(topic)
       end
     end
   end
+
+  describe '#submodule_name' do
+  end
+
+  describe '#page_name' do
+  end
+
+  # position ---------------------------------
 
   describe '#position_within_topic' do
     let!(:topic_item_one) { create :module_item, name: '1-1-2' }
@@ -137,5 +155,29 @@ RSpec.describe ModuleItem, type: :model do
       expect(first_item.position_within_training_module).to eq(0)
       expect(last_item.position_within_training_module).to eq(described_class.where(training_module: :test).count - 1)
     end
+  end
+
+  describe '#position_within_submodule' do
+  end
+
+  # counters ---------------------------------
+
+  describe '#number_within_submodule' do
+  end
+
+  describe '#number_within_topic' do
+  end
+
+  # predicates ---------------------------------
+
+  describe '#topic?' do
+  end
+
+  describe '#submodule?' do
+  end
+
+  # collections -------------------------
+
+  describe '#module_items_in_this_training_module' do
   end
 end
