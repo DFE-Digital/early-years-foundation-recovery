@@ -29,7 +29,7 @@ class Questionnaire < OpenStruct
 
   # @return [Array] list of question ostruct objects
   def question_list
-    questions.map { |name, attrs| Question.new(attrs.merge(name: name)) }
+    questions.map { |name, attrs| Question.new(attrs.merge(questionnaire: self, name: name)) }
   end
 
 private
@@ -47,7 +47,7 @@ private
   def results
     @results ||= questions.each_with_object({}) do |(question, data), hash|
       hash[question] = if data[:correct_answers].present?
-                         flattened_array(send(question)) == flattened_array(data[:correct_answers])
+                         flattened_array(Array(send(question)).map(&:downcase)).map(&:to_sym) == flattened_array(data[:correct_answers].map(&:to_sym))
                        else
                          true # If there are no correct answers set, assume any answer much be true
                        end
