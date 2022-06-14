@@ -37,7 +37,6 @@ RSpec.describe UserTraining do
       view_module_page_event('alpha', '1-2-4')
       view_module_page_event('bravo', '1-1-2')
       view_module_page_event('charlie', '1-1-2')
-      view_module_page_event('brain-development-in-early-years', '1-test')
 
       expect(learning.course_completed?).to be true
     end
@@ -71,32 +70,30 @@ RSpec.describe UserTraining do
     it 'returns a list of modules that can be started' do
       expect(learning.available_modules.map(&:name)).to eq %w[
         alpha
-        brain-development-in-early-years
       ]
 
       # start the first module with a dependent
       expect { view_module_page_event('alpha', '1-1') }
       .to change { learning.available_modules.count }
-      .from(2).to(1)
+      .from(1).to(0)
 
       # complete the first module
       expect { view_module_page_event('alpha', '1-2-4') }
       .to change { learning.available_modules.count }
-      .from(1).to(2)
+      .from(0).to(1)
 
       # start the second module with a dependent
       expect { view_module_page_event('bravo', '1-1') }
       .to change { learning.available_modules.count }
-      .from(2).to(1)
+      .from(1).to(0)
 
       # complete the second module
       expect { view_module_page_event('bravo', '1-1-2') }
       .to change { learning.available_modules.count }
-      .from(1).to(2)
+      .from(0).to(1)
 
       expect(learning.available_modules.map(&:name)).to eq %w[
         charlie
-        brain-development-in-early-years
       ]
     end
   end
