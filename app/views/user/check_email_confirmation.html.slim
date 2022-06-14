@@ -1,12 +1,14 @@
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
+    / on second visit to users/confirmation/new, email is not available so display generic page
+    - user = @user.nil? ? :user : @user
     h1.govuk-heading-l #{t('check_email_confirmation.heading')}
 
     p.govuk-body
       | #{t('check_email_confirmation.body')}
 
     p class="govuk-body govuk-!-font-weight-bold"
-      = @user.email
+        = user.email unless @user.nil?
 
     p.govuk-body
       | #{t('check_email_confirmation.body_two')}
@@ -16,11 +18,11 @@
     = govuk_details(summary_text: t('check_email_confirmation.summary_text')) do
       p.govuk-heading-s= t('check_email_confirmation.not_recieved.title')
       p.govuk-body= t('check_email_confirmation.not_recieved.text')
-      p= govuk_link_to t('check_email_confirmation.not_recieved.link_text'), new_confirmation_path(@user)
+      p= govuk_link_to t('check_email_confirmation.not_recieved.link_text'), new_confirmation_path(user)
 
       p.govuk-heading-s= t('check_email_confirmation.no_access_to_email.title')
       p.govuk-body= t('check_email_confirmation.no_access_to_email.text')
-      p.govuk-body Please #{govuk_link_to t('check_email_confirmation.no_access_to_email.link_text'), new_registration_path(@user)}.
+      p.govuk-body Please #{govuk_link_to t('check_email_confirmation.no_access_to_email.link_text'), new_registration_path(user)}.
 
       p.govuk-heading-s= t('check_email_confirmation.diff_problem.title') 
       p.govuk-body #{t('check_email_confirmation.diff_problem.text')}
