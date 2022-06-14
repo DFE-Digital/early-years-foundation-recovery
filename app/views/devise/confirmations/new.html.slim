@@ -1,4 +1,3 @@
-a.govuk-back-link href=url_for(:back) Back
 - content_for :devise_form do
   = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
     = f.govuk_error_summary
@@ -8,4 +7,4 @@ a.govuk-back-link href=url_for(:back) Back
       = f.govuk_email_field :email, autofocus: true, autocomplete: "email", value: resource.email_to_confirm, label: { text: t('helpers.label.user.email') }
     = f.govuk_submit "Send email"
 
-= render 'devise/shared/form_wrap'
+= render "devise/shared/form_wrap"
