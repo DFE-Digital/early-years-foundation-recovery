@@ -203,6 +203,8 @@ en:
 
           Later in this module we will look at a wider range of theories that further explore the social and behavioural influences on development, and consider their relevance within your practice
 
+          ## Piaget's theory
+
           Jean Piaget was a Swiss psychologist who carried out research into children’s cognitive development. Piaget concluded that children travel through 4 distinct stages.
 
           Piaget’s research showed that babies' development started with a set of reflexes and travelled through a series of stages until children had developed more advanced skills.
@@ -425,7 +427,7 @@ en:
         body: |
           ![A young boy using the resources in a childcare setting](/assets/2-1-3-4a-1204168565.jpg)
 
-          4.3 million children in the UK currently live in poverty. This is around 3 in every 10 children. This means that there will be children within your care whose parents or carers cannot afford the basics in relation to food, shelter and clothing.
+          4.3 million children in the UK currently live in poverty. This is around 3 in every 10 children. This means that there will likely be children within your care whose parents or carers cannot afford the basics in relation to food, shelter and clothing.
 
           Living in poverty can affect all aspects of a child’s development. Coming to your care hungry, being bullied because of what they are wearing or not being able to access toys and books, are all common difficulties for children living in poverty.
 
@@ -556,9 +558,9 @@ en:
 
           Also known as acquired injury, accidental cause is where cognitive impairment results from an injury affecting the head and brain.
 
-          ##Neurological disorder
+          ##Neurodiversity
 
-          Individuals with neurological disorders such as Autism Spectrum Disorder can experience delayed cognitive processing skills and communication difficulties.
+          Neurodiverse individuals, such as those with autism, can experience delayed cognitive processing skills and communication difficulties.
 
           ##Pregnancy and birth related issues
 
@@ -661,7 +663,7 @@ en:
 
           Vygotsky’s theory suggests that social interactions, cultures and the environment play a significant role in children’s development of cognitive skills.
 
-          Vygotsky believed that children have 2 stages of development. The first stage is the skills and knowledge they can develop by themselves. The second stage is the learning that can take place with the support of a more experienced individual, referred to as a “more knowledgeable other”.
+          Vygotsky believed that children have 2 stages of development. The first stage is the skills and knowledge they can develop by themselves. The second stage is the learning that can take place with the support of a more experienced individual, referred to as a 'more knowledgeable other' (MKO).
 
           Vygotsky referred to this period as the zone of proximal development (ZPD). This is where children’s learning is supported by another individual who has a greater understanding than them. As the child becomes more confident and competent in this area the support is weaned away as the skill joins the first stage of learning and therefore becomes one the child can develop alone.
 
@@ -748,6 +750,8 @@ en:
           <div class="govuk-inset-text">
           <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
+          <img src="/assets/2-2-2-1a-maslow.jpg" alt="Maslow's hierarchy of needs, shown as a pyramid. At the bottom of the pyramid is physiological needs. Above that, in order, are safety needs, social belonging and self-esteem. At the top is self-actualisation.">
+
           <p class="govuk-body">Take another look at Maslow’s pyramid. </p>
 
           <p class="govuk-body">How does your environment meet the children’s needs at each level? </p>
@@ -762,15 +766,15 @@ en:
         body: |
           ![A child doing an outdoor activity. A practitioner is helping them as a more knowledgeable other](/assets/2-2-2-7a-494562097.jpg)
 
-          Both Vygotsky’s ZPD and Bruner’s spiral curriculum acknowledge scaffolding. This is where children’s learning is supported and guided by a more knowledgeable other (MKO) to support understanding.
+          Both Vygotsky’s zone of proximal development (ZPD) and Bruner’s spiral curriculum acknowledge scaffolding. This is where children’s learning is supported and guided by a more knowledgeable other (MKO) to support understanding.
 
-          Within scaffolding, the ‘more knowledgeable other’ can be a parent, carer, practitioner or peer. At first, the support given may be intensive with lots of direction. Next the child will attempt the task with less support and the MKO might use questioning or visual aids as guidance.
+          Within scaffolding, the MKO can be a parent, carer, practitioner or peer. At first, the support given may be intensive with lots of direction. Next the child will attempt the task with less support and the MKO might use questioning or visual aids as guidance.
 
           The MKO continues to gradually withdraw the support techniques until the child has acquired the knowledge and skills to complete the task alone.
 
           Scaffolding techniques can include:
 
-          - modeling
+          - modelling
           - providing examples
           - working one-on-one with children
           - using visual aids
@@ -778,7 +782,7 @@ en:
           - using prior knowledge
           - chunking knowledge to make it achievable
 
-          Bandura’s social learning theory and concept of self efficacy can also be considered. When children are observing the ‘more knowledgeable other’ they are learning from their behaviours and communication. When practitioners successfully scaffold children’s learning, they are supporting children to master new skills and develop their own self efficacy.
+          Bandura’s social learning theory and concept of self efficacy can also be considered. When children are observing the MKO they are learning from their behaviours and communication. When practitioners successfully scaffold children’s learning, they are supporting children to master new skills and develop their own self efficacy.
 
           <div class="govuk-inset-text">
           <h2 class="govuk-heading-m">Practitioner prompt</h2>
@@ -905,7 +909,7 @@ en:
 
           ##Imposed lockdowns
 
-          The COVID-19 pandemic will have increased the amount of time children have been inactive. For those without access to outdoor space and limited indoor space, physical activity may have decreased significantly. Parents who have been working from home may not have been able to incorporate physical activity into children’s daily routines. For very young children, days without physical activity may have become the norm. As a practitioner, you may need to reinforce the importance of being physically active and support children to develop and understand the associated skills.
+          The COVID-19 pandemic will have increased the amount of time children have been inactive. For those without access to outdoor space and limited indoor space, physical activity may have decreased significantly. Parents and carers who have been working from home may not have been able to incorporate physical activity into children’s daily routines. For very young children, days without physical activity may have become the norm. As a practitioner, you may need to reinforce the importance of being physically active and support children to develop and understand the associated skills.
 
           ##Transport
 
@@ -917,8 +921,9 @@ en:
           <p class="govuk-body">How do you incorporate and promote physical activity into your environment? </p>
 
           <p class="govuk-body">How many different ideas and strategies can you think of surrounding physical activity?  </p>
+          
 
-          <p class="govuk-body">How many of these did you consider? </p>
+          <p class="govuk-body">How many of the ideas below did you consider? </p>
 
           <h3 class="govuk-heading-s">Babies </h3>
 
@@ -946,19 +951,19 @@ en:
 
           Parents and carers are the most influential individuals in a child’s life. It is essential that you work in partnership to ensure you are supporting wishes, beliefs and needs whilst also promoting healthy lifestyles. Working together with parents and carers will support consistent understanding and care for children.
 
-          As a practitioner you can offer support to parents who lack the confidence or knowledge to let children try new activities and foods. In return, parents can provide a wealth of information regarding children’s interests and preferences which will encourage participation in healthy living activities and support the child to feel valued.
+          As a practitioner you can offer support to parents and carers who lack the confidence or knowledge to let children try new activities and foods. In return, parents and carers can provide a wealth of information regarding children’s interests and preferences which will encourage participation in healthy living activities and support the child to feel valued.
 
 
-          You can support parents and children by:
+          You can support parents, carers and children by:
 
-          - sharing the setting's menus with parents to highlight healthy choices
-          - inviting parents to participate in parent and child cookery activities
-          - sharing resources such as story sacks relating to “The Hungry Caterpillar”
-          - encouraging parents to access advice and guidance regarding healthy lifestyle initiatives such as Healthier Families (linked in further activities at the end of the module)
-          - inviting parents into the setting to participate in physical activities
+          - sharing the setting's menus with parents and carers to highlight healthy choices
+          - inviting parents and carers to participate in parent and child cookery activities
+          - sharing resources such as story sacks
+          - encouraging parents and carers to access advice and guidance regarding healthy lifestyle initiatives such as Healthier Families (linked in further activities at the end of the module)
+          - inviting parents and carers into the setting to participate in physical activities
           - sharing knowledge of local groups and clubs that promote exercise and healthy eating
           - encouraging children’s interests, such as sports teams
-          - encouraging parents to join the setting for activities such as "grow your own"
+          - encouraging parents and carers to join the setting for activities such as "grow your own"
 
       2-2-3-4a:
         heading: Meal times
@@ -1087,6 +1092,8 @@ en:
           Read [advice about food safety and young children](https://help-for-early-years-providers.education.gov.uk/safeguarding-and-welfare/food-safety).
 
           Find out about the [Healthier Families programme](https://www.nhs.uk/healthier-families/).
+
+          Learn more about [NHS physical activity guidelines for children (under 5 years).](https://www.nhs.uk/live-well/exercise/exercise-guidelines/physical-activity-guidelines-children-under-five-years/)
 
           ##Further reading
 
