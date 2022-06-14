@@ -927,21 +927,33 @@ en:
 
           <h3 class="govuk-heading-s">Babies </h3>
 
-          <p class="govuk-body">Treasure baskets, baby gyms, incorporating opportunities to roll, practise crawling. </p>
+          <p class="govuk-body">
+          Activities could include:
+          <ul>
+          <li> treasure baskets </li> <li> baby gyms</li> <li> incorporating opportunities to roll </li>  <li> practice crawling </li> </ul> </p>
 
           <h3 class="govuk-heading-s">Toddlers </h3>
 
-          <p class="govuk-body">Puddle jumping, walk like an animal, obstacle course, action songs, parachute play, nature walks such as we are going on a bear hunt.  </p>
-
-          <p class="govuk-body">Bubble play, bean bag toss, egg and spoon, hide and seek.  </p>
+          <p class="govuk-body">
+          Activities could include:
+          <ul> 
+          <li> walk like an animal </li> <li> parachute play </li> 
+          <li> nature walks, such as 'we are going on a bear hunt'</li> <li> bubble play </li>
+          </ul> 
+          </p>
 
           <h3 class="govuk-heading-s">Pre-school </h3>
 
-          <p class="govuk-body">Large equipment including climbing frames, obstacle course, bikes, skipping, bowling, action songs such as duck, duck, goose.  </p>
-
-          <p class="govuk-body">Balance beam, dance party, yoga.  </p>
-
-          </div>
+          <p class="govuk-body"> 
+          Activities could include:
+          <ul>
+          <li> large equipment, including climbing frames, obstacles or bikes </li>
+          <li> action songs, such as 'duck, duck, goose'</li> 
+          <li> dance parties </li> 
+          <li> yoga </li> 
+          </ul> 
+          </p> 
+          </div>  
 
 
       2-2-3-3:
