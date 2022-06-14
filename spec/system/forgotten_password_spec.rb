@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'User following forgotten password process', type: :system do
   let(:user) { create :user, :confirmed }
   let(:token) { user.send_reset_password_instructions }
+  let(:password) { 'ABCDE123xyh' }
 
   context 'when choosing a new password' do
     before do
@@ -48,6 +49,46 @@ RSpec.describe 'User following forgotten password process', type: :system do
 
         expect(page).to have_text("Confirmation doesn't match password.")
       end
+    end
+  end
+
+  context 'when entering valid email address' do
+    it 'shows "Check email" page' do
+      visit '/users/sign_in'
+      click_link 'I have forgotten my password', visible: false
+
+      expect(page).to have_text('I have forgotten my password')
+
+      fill_in 'Email', with: user.email
+      click_button 'Send email'
+
+      expect(page).to have_text('Check your email')
+    end
+  end
+
+  context 'when navigating to reset password page' do
+    before do
+      visit '/my-account/check_email_password_reset'
+    end
+
+    it 'provides link to resend the email' do
+      click_link 'Send me another email', visible: false
+
+      expect(page).to have_current_path('/users/password/new')
+    end
+
+    # to be changed when link is provided
+    it 'provides link to contact us' do
+      expect(page).to have_link 'contact us', href: '#', visible: :hidden
+    end
+  end
+
+  context 'when navigating to the "Check email" page' do
+    it 'provides back button to sign in page' do
+      visit '/my-account/check_email_password_reset'
+      click_link 'Back'
+
+      expect(page).to have_current_path(new_user_session_path)
     end
   end
 end
