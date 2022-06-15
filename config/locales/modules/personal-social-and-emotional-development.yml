@@ -273,7 +273,12 @@ en:
           <div class="govuk-inset-text">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
-            <p class="govuk-body">Do you have activities that the children can help themselves to? Do you have a table and floor space that children can bring an activity of their choice to? You can also use this as an opportunity to encourage appropriate responsibility, by encouraging children to put one activity away before selecting another.  </p>
+            <p class="govuk-body"> Consider how you promote choice in your setting. Do you:</p>
+            <ul class="govuk-list govuk-list--bullet">
+            <li>have activities that the children can help themselves to?</li> 
+            <li>have a table and floor space that children can bring an activity of their choice to?</li>
+            </ul>
+            <p class="govuk-body">You can also use this as an opportunity to encourage appropriate responsibility, by encouraging children to put one activity away before selecting another.</p>
             </div>     
 
           ##Reinforce individual characteristics
@@ -285,9 +290,22 @@ en:
           <div class="govuk-inset-text">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
-            <p class="govuk-body">In your setting, reinforce these ideas through books, display boards, activity materials, role play and educational visits.</p>
+            <p class="govuk-body">In your setting, reinforce these ideas through:</p>
+            <ul class="govuk-list govuk-list--bullet">
+            <li>books</li>
+            <li>display boards</li>
+            <li>activity materials</li>
+            <li>role play</li>
+            <li>educational visits</li>
+            </ul>
             
-            <p class="govuk-body">Long term planning will support you to ensure that a wide range of cultural, religious and diverse themes and activities can be incorporated into the setting. Encouraging the children to bring items from home to create displays on a given theme will support the creation of a diverse environment, and will support children’s confidence and communication skills. </p>
+            <p class="govuk-body">Long term planning will support you to ensure that a wide range of cultural, religious and diverse themes and activities can be incorporated into the setting. 
+            
+            Encouraging the children to bring items from home to create displays on a given theme will support:</p>
+            <ul class="govuk-list govuk-list--bullet">
+            <li>the creation of a diverse environment</li>
+            <li>children’s confidence and communication skills</li>
+            </ul>
             </div>   
 
           ##Social stories
