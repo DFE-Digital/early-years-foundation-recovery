@@ -76,14 +76,14 @@ class ModuleItem < YamlBase
       type: #{type}
 
       ---
-      submodule name: #{submodule_name || 'none'}
-      topic name: #{topic_name || 'none'}
-      page name: #{page_name || 'none'}
+      submodule name: #{submodule_name || 'N/A'}
+      topic name: #{topic_name || 'N/A'}
+      page name: #{page_name || 'N/A'}
 
       ---
-      position in module: #{(position_within_training_module + 1).ordinalize}
-      position in submodule: #{(position_within_submodule + 1).ordinalize}
-      position in topic: #{(position_within_topic + 1).ordinalize}
+      position in module: #{(position_within_module + 1).ordinalize}
+      position in submodule: #{position_within_submodule ? (position_within_submodule + 1).ordinalize : 'N/A'}
+      position in topic: #{position_within_topic ? (position_within_topic + 1).ordinalize : 'N/A'}
 
       ---
       submodule items count: #{number_within_submodule}
@@ -133,80 +133,76 @@ class ModuleItem < YamlBase
     matches[:page] if matches
   end
 
-  # predicates ---------------------------------
-  # TODO: Use types to check rather than names
-
   # @return [Boolean]
   delegate :valid?, to: :model
-
-  # # @return [Boolean]
-  # def topic?
-  #   topic_name.present?
-  # end
-
-  # # @return [Boolean]
-  # def submodule?
-  #   # type.eql?('sub_module_intro')
-  #   submodule_name.present?
-  # end
 
   # position ---------------------------------
 
   # Module intro will be position 0
   # @return [Integer, nil] current item position (zero index)
-  def position_within_training_module
-    parent.module_items.index(self)
+  def position_within_module
+    current_module_items.index(self)
   end
 
   # Submodule intro will be position 0
   # @return [Integer, nil] current item position (zero index)
   def position_within_submodule
-    current_submodule.index(self)
+    current_submodule_items.index(self)
   end
 
   # Topic intro will be position 0
   # @return [Integer, nil] current item position (zero index)
   def position_within_topic
-    current_submodule_topic.index(self)
+    current_submodule_topic_items.index(self)
   end
 
   # counters ---------------------------------
 
-  # @return [Integer] number of module items excluding the submodule intro
+  # @return [Integer] number of submodule items 1-[1]-1-1, (excluding intro)
   def number_within_submodule
-    current_submodule.count - 1
+    if type.eql?('module_intro')
+      0
+    else
+      current_submodule_items.count - 1
+    end
   end
 
-  # @return [Integer] number of module items
+  # @return [Integer] number of topic items 1-1-[1]-1
   def number_within_topic
-    current_submodule_topic.count
+    current_submodule_topic_items.count
   end
 
   # sequence ---------------------------------
 
   # @return [ModuleItem, nil]
   def previous_item
-    return if position_within_training_module.zero?
+    return if position_within_module.zero?
 
-    parent.module_items[position_within_training_module - 1]
+    current_module_items[position_within_module - 1]
   end
 
   # @return [ModuleItem, nil]
   def next_item
-    parent.module_items[position_within_training_module + 1]
+    current_module_items[position_within_module + 1]
   end
 
 private
 
   # collections -------------------------
 
+  # @return [Array<ModuleItem>] module items in the same module
+  def current_module_items
+    # parent.module_items # alternatively
+    self.class.where(training_module: training_module).to_a
+  end
+
   # @return [Array<ModuleItem>] module items in the same submodule
-  def current_submodule
-    self.class.where_submodule(training_module, submodule_name)
+  def current_submodule_items
+    self.class.where_submodule(training_module, submodule_name).to_a
   end
 
   # @return [Array<ModuleItem>] module items in the same submodule and topic
-  def current_submodule_topic
-    self.class.where_submodule_topic(training_module, submodule_name, topic_name)
+  def current_submodule_topic_items
+    self.class.where_submodule_topic(training_module, submodule_name, topic_name).to_a
   end
 end

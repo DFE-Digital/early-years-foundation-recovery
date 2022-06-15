@@ -1,3 +1,25 @@
+- if ENV['RAILS_ENV'].eql?('development')
+  - training_service = UserTraining.new(user: current_user)
+  pre.debug_dump
+    |
+      duration: #{@training_module.duration}
+      topics: #{@training_module.topic_count}
+      milestone: #{training_service.milestone(@training_module.name)}
+    hr
+    | Submodules
+    - @training_module.items_by_submodule.map do |sub_name, items|
+      - if sub_name.present?
+        | #{sub_name}: #{'complete' if items.all? { |item| training_service.item_events(@training_module.name, item.name).present? } }
+      br
+    hr
+    | Topics
+    - @training_module.items_by_topic.map do |topic_name, items|
+      - if topic_name.present?
+        | #{topic_name}: #{'complete' if items.all? { |item| training_service.item_events(@training_module.name, item.name).present? } }
+      br
+    hr
+
+
 div class="full-width-container govuk-!-margin-top-0 govuk-!-padding-top-7 govuk-!-padding-bottom-7 govuk-!-margin-bottom-4"
   h1.govuk-heading-l= @training_module.title
 
@@ -9,6 +31,21 @@ div class="full-width-container govuk-!-margin-top-0 govuk-!-padding-top-7 govuk
 = govuk_tag(text: @training_module.duration, colour: 'green')
 
 div class='govuk-!-margin-top-5'
-  = govuk_accordion do |accordion|
-    - @module_item.each do |item, index|
+  - @training_module.module_items.each.with_index(1) do |item, pos|
+    |
+      #{pos.ordinalize}:
+    strong
+      |  #{item.name}
+    - if item.topic_name
+      em
+        | (topic #{item.topic_name})
+      br
+    - else
+      em
+        | (submodule #{item.submodule_name})
+      br
+      | -----
+    br
+
+  /= govuk_accordion do |accordion|
       - accordion.section(heading_text: item.model.heading, summary_text: item.model.heading) { tag.p("Content") }

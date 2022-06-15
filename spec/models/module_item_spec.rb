@@ -15,11 +15,11 @@ RSpec.describe ModuleItem, type: :model do
 
   # scopes ---------------------------------
 
-  describe '.where_submodule' do
-  end
+  # describe '.where_submodule' do
+  # end
 
-  describe '.where_type' do
-  end
+  # describe '.where_type' do
+  # end
 
   describe '.where_submodule_topic' do
     let!(:first_submodule_first_topic) { create :module_item, name: '1-1-1' }
@@ -131,11 +131,11 @@ RSpec.describe ModuleItem, type: :model do
     end
   end
 
-  describe '#submodule_name' do
-  end
+  # describe '#submodule_name' do
+  # end
 
-  describe '#page_name' do
-  end
+  # describe '#page_name' do
+  # end
 
   # position ---------------------------------
 
@@ -154,32 +154,24 @@ RSpec.describe ModuleItem, type: :model do
     end
   end
 
-  describe '#position_within_training_module' do
+  describe '#position_within_module' do
     let(:first_item) { described_class.find_by(training_module: :test) }
     let(:last_item) { described_class.where(training_module: :test).last }
 
     it 'return position in array of module items in training module' do
-      expect(first_item.position_within_training_module).to eq(0)
-      expect(last_item.position_within_training_module).to eq(described_class.where(training_module: :test).count - 1)
+      expect(first_item.position_within_module).to eq(0)
+      expect(last_item.position_within_module).to eq(described_class.where(training_module: :test).count - 1)
     end
   end
 
-  describe '#position_within_submodule' do
-  end
+  # describe '#position_within_submodule' do
+  # end
 
   # counters ---------------------------------
 
-  describe '#number_within_submodule' do
-  end
-
-  describe '#number_within_topic' do
-  end
-
-  # predicates ---------------------------------
-
-  # describe '#topic?' do
+  # describe '#number_within_submodule' do
   # end
 
-  # describe '#submodule?' do
+  # describe '#number_within_topic' do
   # end
 end

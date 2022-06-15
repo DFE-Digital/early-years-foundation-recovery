@@ -25,6 +25,16 @@ class TrainingModule < YamlBase
     ModuleItem.where(training_module: name).to_a
   end
 
+  # @return [Array<ModuleItem>]
+  def items_by_submodule
+    module_items.group_by(&:submodule_name)
+  end
+
+  # @return [Array<ModuleItem>]
+  def items_by_topic
+    module_items.group_by(&:topic_name)
+  end
+
   # @param type [String]
   # @return [Array<ModuleItem>]
   def module_items_by_type(type)

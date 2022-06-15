@@ -22,28 +22,31 @@ RSpec.describe TrainingModule, type: :model do
 
   # predicates ---------------------------------
 
-  describe '#draft?' do
-  end
+  # describe '#draft?' do
+  # end
 
   # collections -------------------------
 
-  describe '#module_items' do
-  end
-
-  describe '#module_items_by_type' do
-  end
-
-  describe '#module_items_by_submodule' do
-  end
-
-  # describe '#module_items_by_topic' do
+  # describe '#module_items' do
   # end
 
-  describe '#module_intros' do
-  end
+  # describe '#module_items_by_type' do
+  # end
+
+  # describe '#module_items_by_submodule' do
+  # end
+
+  # describe '#items_by_submodule' do
+  # end
+
+  # describe '#items_by_topic' do
+  # end
+
+  # describe '#module_intros' do
+  # end
 
   # sequence ---------------------------------
 
-  describe '#first_content_page' do
-  end
+  # describe '#first_content_page' do
+  # end
 end

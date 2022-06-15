@@ -62,6 +62,13 @@ class UserTraining
     end
   end
 
+  # TODO: Move this method into a new "service" for module specific queries
+  #
+  # checks for a page view event for each module item
+  def item_events(module_id, item_id)
+    user.events.where_properties(training_module_id: module_id, id: item_id)
+  end
+
 private
 
   # @param module_id [String] training module name
