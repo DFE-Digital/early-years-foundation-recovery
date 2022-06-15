@@ -12,7 +12,7 @@
         | #{sub_name}: #{'complete' if items.all? { |item| training_service.item_events(@training_module.name, item.name).present? } }
       br
     hr
-    | Topics
+    | Submodule / Topics
     - @training_module.items_by_topic.map do |topic_name, items|
       - if topic_name.present?
         | #{topic_name}: #{'complete' if items.all? { |item| training_service.item_events(@training_module.name, item.name).present? } }
@@ -33,18 +33,20 @@ div class="full-width-container govuk-!-margin-top-0 govuk-!-padding-top-7 govuk
 div class='govuk-!-margin-top-5'
   - @training_module.module_items.each.with_index(1) do |item, pos|
     |
-      #{pos.ordinalize}:
+      #{pos.ordinalize} item:
     strong
       |  #{item.name}
     - if item.topic_name
       em
-        | (topic #{item.topic_name})
-      br
-    - else
+        | ... (topic #{item.topic_name})
+    - elsif item.submodule_name
       em
-        | (submodule #{item.submodule_name})
+        | ... (submodule #{item.submodule_name})
       br
       | -----
+    - if item.page_number && item.page_number[:current] > 0
+      | ...
+      = t('page_number', **item.page_number)
     br
 
   /= govuk_accordion do |accordion|

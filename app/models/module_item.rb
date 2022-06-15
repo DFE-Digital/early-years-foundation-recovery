@@ -47,11 +47,6 @@ class ModuleItem < YamlBase
     where(training_module: training_module).select { |m| m.name =~ pattern }
   }
 
-  # @return [Array<ModuleItem>]
-  scope :topics, lambda { |training_module|
-    where(training_module: training_module).select { |m| m.topic_name.present? }
-  }
-
   # Start with two number then non-word character pairs (e.g. 2-4- or 13.4.)
   # Can be followed by either a non-digit or end of line
   #

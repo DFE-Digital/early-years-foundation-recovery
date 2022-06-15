@@ -8,7 +8,7 @@ class TrainingModule < YamlBase
 
   # @return [Integer]
   def topic_count
-    ModuleItem.topics(name).group_by { |m| [m.submodule_name, m.topic_name] }.count
+    items_by_topic.except(nil).count
   end
 
   # predicates ---------------------------------
@@ -25,17 +25,29 @@ class TrainingModule < YamlBase
     ModuleItem.where(training_module: name).to_a
   end
 
-  # @return [Array<ModuleItem>]
+  # @example
+  #   {
+  #     "1" => [1-1-1, 1-1-2],
+  #     "2" => [1-2-1, 1-2-2],
+  #   }
+  #
+  # @return [{String=>Array<ModuleItem>}]
   def items_by_submodule
     module_items.group_by(&:submodule_name)
   end
 
-  # @return [Array<ModuleItem>]
+  # @example
+  #   {
+  #     ["1", "1"] => [1-1-1-1a, 1-1-1-1b],
+  #     ["1", "2"] => [1-1-2-1, 1-1-2-2],
+  #   }
+  #
+  # @return [{Array<String>=>Array<ModuleItem>}]
   def items_by_topic
-    module_items.group_by(&:topic_name)
+    module_items.group_by { |m| [m.submodule_name, m.topic_name] if m.topic_name }
   end
 
-  # @param type [String]
+  # @param type [String] text_page, youtube_page...
   # @return [Array<ModuleItem>]
   def module_items_by_type(type)
     ModuleItem.where_type(name, type)
@@ -54,7 +66,8 @@ class TrainingModule < YamlBase
 
   # sequence ---------------------------------
 
-  # @return [ModuleItem] viewing this page determines if the module is "started"
+  # Viewing this page determines if the module is "started"
+  # @return [ModuleItem]
   def first_content_page
     module_intros.first.next_item
   end
