@@ -32,8 +32,9 @@ RSpec.describe 'Questionnaires', type: :request do
     end
 
     let(:answers) do
-      questionnaire.questions.transform_values do |question|
-        question[:multi_select] ? question[:correct_answers] : question[:correct_answers].first
+      questionnaire.question_list.each_with_object({}) do |question, answer_hash|
+        answer = question.multi_select ? question.correct_answers.map(&:to_sym) : question.correct_answers.first.to_sym
+        answer_hash[question.name] = answer
       end
     end
 

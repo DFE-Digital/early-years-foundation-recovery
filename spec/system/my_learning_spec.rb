@@ -63,7 +63,7 @@ RSpec.describe 'Learning activity', type: :system do
 
   context 'when a user has started the first mandatory module' do
     before do
-      visit '/modules/alpha/content_pages/1-1' # first page after module intro
+      visit '/modules/alpha/content-pages/1-1' # first page after module intro
       visit '/my-learning'
     end
 
