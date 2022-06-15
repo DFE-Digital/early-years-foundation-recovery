@@ -28,26 +28,39 @@ div class="full-width-container govuk-!-margin-top-0 govuk-!-padding-top-7 govuk
   = govuk_button_to 'Start', training_module_content_pages_path(@training_module), method: :get
 
 = govuk_tag(text: "#{@training_module.topic_count} topics", colour: 'green')
-= govuk_tag(text: @training_module.duration, colour: 'green')
+= govuk_tag(text: "#{@training_module.duration} hours", colour: 'green')
 
 div class='govuk-!-margin-top-5'
-  - @training_module.module_items.each.with_index(1) do |item, pos|
-    |
-      #{pos.ordinalize} item:
-    strong
-      |  #{item.name}
-    - if item.topic_name
-      em
-        | ... (topic #{item.topic_name})
-    - elsif item.submodule_name
-      em
-        | ... (submodule #{item.submodule_name})
-      br
-      | -----
-    - if item.page_number && item.page_number[:current] > 0
-      | ...
-      = t('page_number', **item.page_number)
-    br
 
-  /= govuk_accordion do |accordion|
-      - accordion.section(heading_text: item.model.heading, summary_text: item.model.heading) { tag.p("Content") }
+  - if ENV['RAILS_ENV'].eql?('development')
+    - training_service = UserTraining.new(user: current_user)
+    pre.debug_dump
+      - @training_module.module_items.each.with_index(1) do |item, pos|
+        |
+          #{pos.ordinalize}:
+        strong
+          |  #{item.name}
+        - if item.topic_name
+          em
+            | ____ (submodule #{item.submodule_name} / topic #{item.topic_name}.#{item.page_name})
+        - elsif item.submodule_name
+          em
+            | ____ (submodule #{item.submodule_name})
+        - if item.page_number && item.page_number[:current] > 0
+          | ____ Submodule
+          = t('page_number', **item.page_number)
+        br
+
+
+
+
+  = govuk_accordion do |accordion|
+    - @training_module.items_by_topic.except(nil).map do |topic_name, items|
+      - accordion.section(heading_text: 'topic ' + topic_name.join('.')) do
+        ul
+          - items.map do |item|
+            li= govuk_link_to item.model.heading, training_module_content_page_path(item.training_module, item)
+
+
+
+

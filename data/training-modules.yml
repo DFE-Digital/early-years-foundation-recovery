@@ -3,16 +3,18 @@ child-development-and-the-eyfs:
   title: 1. Child development and the EYFS
   thumbnail: introduction_to_supporting_physical_development
   description: about child-development-and-the-eyfs
-  duration: 3 hours
+  duration: 1.5
 
 brain-development-and-how-children-learn:
   title: 2. Brain development and how children learn
   thumbnail: introduction_to_supporting_physical_development
   description: about brain-development-and-how-children-learn
   depends_on: child-development-and-the-eyfs
+  duration: 2
 
 personal-social-and-emotional-development:
   title: 3. Supporting children’s personal, social and emotional development
   thumbnail: introduction_to_supporting_physical_development
   description: about personal-social-and-emotional-development
   depends_on: brain-development-and-how-children-learn
+  duration: 3

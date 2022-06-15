@@ -34,7 +34,7 @@ class ModuleItem < YamlBase
 
   # @return [Regexp] 4th digit (and optional suffix) if present: 1-1-1-[1a]
   # PAGE_PATTERN = %r"\A(?<prefix>\d+\W){3}(?<page>\d+)(?=(?<suffix>\D|$))".freeze
-  PAGE_PATTERN = %r"\A(?<prefix>\d+\W){3}(?<page>\d+\D+)$"
+  PAGE_PATTERN = %r"\A(?<prefix>\d+\W){3}(?<page>\d+\D*)$"
 
   # @return [Array<ModuleItem>] module items of a specific type
   scope :where_type, lambda { |training_module, type|
@@ -125,7 +125,7 @@ class ModuleItem < YamlBase
   # @return [String, nil] 4th digit (and optional suffix) if present: 1-1-1-[1a]
   def page_name
     matches = name.match(PAGE_PATTERN)
-    matches[:page] if matches
+    matches ? matches[:page] : 0
   end
 
   # @return [Boolean]
