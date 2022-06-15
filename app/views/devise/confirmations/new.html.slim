@@ -1,4 +1,4 @@
-- if url_for(:back).include?('my-account/check_email_confirmation')
+- if url_for(:back).include?(check_email_confirmation_user_path)
   a.govuk-back-link href=url_for(:back) Back
 - content_for :devise_form do
   = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
@@ -11,5 +11,5 @@
 
 = render "devise/shared/form_wrap"
 
-- if url_for(:back).include?('my-account/check_email_confirmation')
+- if url_for(:back).include?(check_email_confirmation_user_path)
   a.govuk-link href=url_for(:back) Go back to check your email
