@@ -146,9 +146,9 @@ en:
   check_email_confirmation:
     heading: Check your email
     body: 
-      one: We have sent you an email with instructions for how to verify your email address.
-      two: "We sent the email to:"
-      three: To continue setting up your training account you must click the link in the email. If you have not recieved the email after a few minutes, please check your spam folder.
+      0: We have sent you an email with instructions for how to verify your email address.
+      1: "We sent the email to:"
+      2: To continue setting up your training account you must click the link in the email. If you have not recieved the email after a few minutes, please check your spam folder.
     summary_text: Problems with the activation email?
     not_recieved:
       title: I haven’t received the email

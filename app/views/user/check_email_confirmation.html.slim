@@ -6,14 +6,14 @@
     h1.govuk-heading-l #{t('check_email_confirmation.heading')}
 
     p.govuk-body
-      = t('check_email_confirmation.body.one')
-      = " " + t('check_email_confirmation.body.two') unless @user.nil?
+      = t('check_email_confirmation.body.0')
+      = " " + t('check_email_confirmation.body.1') unless @user.nil?
 
     p class="govuk-body govuk-!-font-weight-bold"
         = user.email unless @user.nil?
 
     p.govuk-body
-      | #{t('check_email_confirmation.body.three')}
+      | #{t('check_email_confirmation.body.2')}
 
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop

@@ -5,14 +5,14 @@ RSpec.describe 'Following registration journey' do
 
   context 'when on the check your email page' do
     before do
-      visit "my-account/check_email_confirmation?email=#{user.email}"
+      visit check_email_confirmation_user_path + "?email=#{user.email}"
     end
 
     context 'and can click on "I haven\'t receieved the email" link' do
       it 'taken to "resend your confirmation" page' do
         click_on 'Send me another email', visible: :hidden
         
-        expect(page.current_path).to eq('/users/confirmation/new')
+        expect(page.current_path).to eq(new_user_confirmation_path)
         expect(page).to have_text('Resend your confirmation')
       end
     end
@@ -21,7 +21,7 @@ RSpec.describe 'Following registration journey' do
       it 'I am taken to the ‘create your account’ page to re-register' do
         click_on 'create a new account', visible: :hidden
         
-        expect(page.current_path).to eq('/users/sign_up')
+        expect(page.current_path).to eq(new_user_registration_path)
         expect(page).to have_text('Create an early years training account')
       end
     end
@@ -43,7 +43,7 @@ RSpec.describe 'Following registration journey' do
   
   context 'when on the ‘resend your confirmation’ page' do
     before do
-      visit "/users/confirmation/new"
+      visit new_user_confirmation_path
     end
 
     context 'and can enter email address and click send' do
