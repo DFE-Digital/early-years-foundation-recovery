@@ -15,25 +15,30 @@ RSpec.describe ModuleItem, type: :model do
 
   # scopes ---------------------------------
 
-  describe '.where_topic' do
-    let!(:topic_one_item) { create :module_item, name: '1-1-1' }
-    let!(:topic_two_item) { create :module_item, name: '1-1-2' }
-
-    it 'returns module items matching the topic' do
-      expect(described_class.where_topic(:test, 1)).to include(topic_one_item)
-      expect(described_class.where_topic(:test, 2)).to include(topic_two_item)
-    end
-
-    it 'does not return items from other topics' do
-      expect(described_class.where_topic(:test, 1)).not_to include(topic_two_item)
-      expect(described_class.where_topic(:test, 2)).not_to include(topic_one_item)
-    end
-  end
-
   describe '.where_submodule' do
   end
 
   describe '.where_type' do
+  end
+
+  describe '.where_submodule_topic' do
+    let!(:first_submodule_first_topic) { create :module_item, name: '1-1-1' }
+    let!(:first_submodule_second_topic) { create :module_item, name: '1-1-2' }
+
+    let!(:second_submodule_first_topic) { create :module_item, name: '1-2-1' }
+    let!(:second_submodule_second_topic) { create :module_item, name: '1-2-2' }
+
+    it 'returns module items matching the topic' do
+      expect(described_class.where_submodule_topic(:test, 1, 1)).to include(first_submodule_first_topic)
+      expect(described_class.where_submodule_topic(:test, 1, 2)).to include(first_submodule_second_topic)
+    end
+
+    it 'does not return items from other topics' do
+      expect(described_class.where_submodule_topic(:test, 1, 1)).not_to include(first_submodule_second_topic)
+      expect(described_class.where_submodule_topic(:test, 1, 1)).not_to include(second_submodule_first_topic)
+      expect(described_class.where_submodule_topic(:test, 1, 2)).not_to include(first_submodule_first_topic)
+      expect(described_class.where_submodule_topic(:test, 1, 2)).not_to include(second_submodule_second_topic)
+    end
   end
 
   # sequence ---------------------------------
@@ -172,9 +177,9 @@ RSpec.describe ModuleItem, type: :model do
 
   # predicates ---------------------------------
 
-  describe '#topic?' do
-  end
+  # describe '#topic?' do
+  # end
 
-  describe '#submodule?' do
-  end
+  # describe '#submodule?' do
+  # end
 end

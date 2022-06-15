@@ -5,7 +5,7 @@ div class="full-width-container govuk-!-margin-top-0 govuk-!-padding-top-7 govuk
 
   = govuk_button_to 'Start', training_module_content_pages_path(@training_module), method: :get
 
-= govuk_tag(text: "15 topics", colour: 'green')
+= govuk_tag(text: "#{@training_module.topic_count} topics", colour: 'green')
 = govuk_tag(text: @training_module.duration, colour: 'green')
 
 div class='govuk-!-margin-top-5'

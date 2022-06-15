@@ -36,13 +36,9 @@ class ModuleItem < YamlBase
   # PAGE_PATTERN = %r"\A(?<prefix>\d+\W){3}(?<page>\d+)(?=(?<suffix>\D|$))".freeze
   PAGE_PATTERN = %r"\A(?<prefix>\d+\W){3}(?<page>\d+\D+)$"
 
-  # Start with two number then non-word character pairs (e.g. 2-4- or 13.4.)
-  # Can be followed by either a non-digit or end of line
-  #
-  # @return [Array<ModuleItem>] module items within a given module's topic
-  scope :where_topic, lambda { |training_module, topic_name|
-    pattern = %r"\A(\d+\W){2}#{topic_name}(?=(\D|$))"
-    where(training_module: training_module).select { |m| m.name =~ pattern }
+  # @return [Array<ModuleItem>] module items of a specific type
+  scope :where_type, lambda { |training_module, type|
+    where(training_module: training_module, type: type)
   }
 
   # @return [Array<ModuleItem>] module items within a given module's submodule
@@ -51,9 +47,18 @@ class ModuleItem < YamlBase
     where(training_module: training_module).select { |m| m.name =~ pattern }
   }
 
-  # @return [Array<ModuleItem>] module items of a specific type
-  scope :where_type, lambda { |training_module, type|
-    where(training_module: training_module, type: type)
+  # @return [Array<ModuleItem>]
+  scope :topics, lambda { |training_module|
+    where(training_module: training_module).select { |m| m.topic_name.present? }
+  }
+
+  # Start with two number then non-word character pairs (e.g. 2-4- or 13.4.)
+  # Can be followed by either a non-digit or end of line
+  #
+  # @return [Array<ModuleItem>] module items within a given module's topic
+  scope :where_submodule_topic, lambda { |training_module, submodule_name, topic_name|
+    pattern = %r"\A(\d+\W){2}#{topic_name}(?=(\D|$))"
+    where_submodule(training_module, submodule_name).select { |m| m.name =~ pattern }
   }
 
   # composition ---------------------------------
@@ -76,9 +81,9 @@ class ModuleItem < YamlBase
       page name: #{page_name || 'none'}
 
       ---
-      position in module: #{position_within_training_module}
-      position in submodule: #{position_within_submodule}
-      position in topic: #{position_within_topic}
+      position in module: #{(position_within_training_module + 1).ordinalize}
+      position in submodule: #{(position_within_submodule + 1).ordinalize}
+      position in topic: #{(position_within_topic + 1).ordinalize}
 
       ---
       submodule items count: #{number_within_submodule}
@@ -134,16 +139,16 @@ class ModuleItem < YamlBase
   # @return [Boolean]
   delegate :valid?, to: :model
 
-  # @return [Boolean]
-  def topic?
-    topic_name.present?
-  end
+  # # @return [Boolean]
+  # def topic?
+  #   topic_name.present?
+  # end
 
-  # @return [Boolean]
-  def submodule?
-    # type.eql?('sub_module_intro')
-    submodule_name.present?
-  end
+  # # @return [Boolean]
+  # def submodule?
+  #   # type.eql?('sub_module_intro')
+  #   submodule_name.present?
+  # end
 
   # position ---------------------------------
 
@@ -156,30 +161,25 @@ class ModuleItem < YamlBase
   # Submodule intro will be position 0
   # @return [Integer, nil] current item position (zero index)
   def position_within_submodule
-    self.class.where_submodule(training_module, submodule_name).index(self)
-    # parent.module_items_by_submodule(submodule_name).index(self)
+    current_submodule.index(self)
   end
 
   # Topic intro will be position 0
   # @return [Integer, nil] current item position (zero index)
   def position_within_topic
-    self.class.where_topic(training_module, topic_name).index(self)
-    # parent.module_items_by_topic(topic_name).index(self)
+    current_submodule_topic.index(self)
   end
 
   # counters ---------------------------------
 
-  # @return [Integer] module items excluding the submodule intro
+  # @return [Integer] number of module items excluding the submodule intro
   def number_within_submodule
-    parent.module_items_by_submodule(submodule_name).count - 1
+    current_submodule.count - 1
   end
 
-  # @return [Integer] module items excluding the topic intro
+  # @return [Integer] number of module items
   def number_within_topic
-    # parent.module_items_by_topic(topic_name).count - 1
-
-    total = self.class.where_topic(training_module, topic_name).count
-    total.zero? ? 0 : total - 1
+    current_submodule_topic.count
   end
 
   # sequence ---------------------------------
@@ -194,5 +194,19 @@ class ModuleItem < YamlBase
   # @return [ModuleItem, nil]
   def next_item
     parent.module_items[position_within_training_module + 1]
+  end
+
+private
+
+  # collections -------------------------
+
+  # @return [Array<ModuleItem>] module items in the same submodule
+  def current_submodule
+    self.class.where_submodule(training_module, submodule_name)
+  end
+
+  # @return [Array<ModuleItem>] module items in the same submodule and topic
+  def current_submodule_topic
+    self.class.where_submodule_topic(training_module, submodule_name, topic_name)
   end
 end

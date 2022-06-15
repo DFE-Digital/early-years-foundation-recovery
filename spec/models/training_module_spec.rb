@@ -36,8 +36,8 @@ RSpec.describe TrainingModule, type: :model do
   describe '#module_items_by_submodule' do
   end
 
-  describe '#module_items_by_topic' do
-  end
+  # describe '#module_items_by_topic' do
+  # end
 
   describe '#module_intros' do
   end

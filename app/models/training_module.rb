@@ -6,6 +6,11 @@ class TrainingModule < YamlBase
     raw_data.map { |name, values| values.merge(name: name) }
   end
 
+  # @return [Integer]
+  def topic_count
+    ModuleItem.topics(name).group_by { |m| [m.submodule_name, m.topic_name] }.count
+  end
+
   # predicates ---------------------------------
 
   # @return [Boolean]
@@ -30,12 +35,6 @@ class TrainingModule < YamlBase
   # @return [Array<ModuleItem>]
   def module_items_by_submodule(submodule_name)
     ModuleItem.where_submodule(name, submodule_name)
-  end
-
-  # @param topic_name [Integer, String]
-  # @return [Array<ModuleItem>]
-  def module_items_by_topic(topic_name)
-    ModuleItem.where_topic(name, topic_name)
   end
 
   # @return [Array<ModuleItem>]

@@ -12,7 +12,7 @@ class YoutubePage
   # Use the URL within the embeded code. For example:
   #  https://www.youtube.com/embed/ucjmWjJ25Ho
   #
-  validates :youtube_url, format: %r"\Ahttps://www\.youtube\.com/embed"
+  validates :youtube_url, format: %r{\Ahttps://www\.youtube\.com/embed}
 
   # @return [Hash, nil]
   delegate :page_number, to: :module_item
