@@ -2,8 +2,7 @@
 
   = f.govuk_fieldset legend: { text: 'The link you followed has expired' } do
   
-    p.govuk-body
-      | To request a new account unlock link, enter your email address.
+    p.govuk-body To request a new account unlock link, enter your email address.
   
     = f.govuk_email_field :email, autofocus: true, autocomplete: 'email'
     = f.govuk_submit 'Next'
