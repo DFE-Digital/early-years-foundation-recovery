@@ -41,3 +41,8 @@
   padding: 0 9999rem;
   margin-top: -45px;
 }
+
+// added so the above code for a full-width-container doesn't make the horizontal scrolling continue forever
+html, body {
+  overflow-x: hidden;
+}
