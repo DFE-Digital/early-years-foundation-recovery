@@ -65,17 +65,14 @@ brain-development-and-how-children-learn:
         multi_select: true
         label: Which of these is a proven benefit of talking to an unborn child? (Select all answers that apply)
         assessment_summary: Babies will recognise voices they have heard during pregnancy and are more likely to be quickly reassured  by the same voices after birth. This reduces stress and helps them to recognise feelings. 
-        assessment_fail_summary: There are no proven links between a child’s sight and being spoken to during pregnancy. Babies will recognise voices they have heard during pregnancy and are more likely to be quickly reassured  by the same voi     
+        assessment_fail_summary: There are no proven links between a child’s sight and being spoken to during pregnancy. Babies will recognise voices they have heard during pregnancy and are more likely to be quickly reassured by the same voice.     
         answers:
           1: "Increased bond between the baby and parent or carer"
           2: "Reduced stress"                    
           3: "Improved sight"
           4: "Improved social and emotional development"
         correct_answers: ["1","2","4"]
-          # - "1"
-          # - "2"
-          # - "4"
-    2-1-2-1b:
+  2-1-2-1b:
     content:
     questions:
       1_piaget_stage:
