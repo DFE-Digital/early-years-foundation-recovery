@@ -5,7 +5,7 @@ RSpec.describe 'ContentPages', type: :request do
     sign_in create(:user, :registered)
   end
 
-  describe 'GET /modules/:training_module_id/content_pages' do
+  describe 'GET /modules/:training_module_id/content-pages' do
     let(:first_module_item) { ModuleItem.where(training_module: :test).first }
 
     it 'redirects to first item' do
@@ -14,7 +14,7 @@ RSpec.describe 'ContentPages', type: :request do
     end
   end
 
-  describe 'GET /modules/:training_module_id/content_pages/:id' do
+  describe 'GET /modules/:training_module_id/content-pages/:id' do
     let(:module_item) { ModuleItem.find_by(training_module: :test, type: :text_page) }
 
     it 'renders a template successfully' do

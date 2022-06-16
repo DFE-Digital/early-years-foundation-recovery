@@ -3,18 +3,21 @@ alpha:
   title: First Training Module
   thumbnail: introduction_to_supporting_physical_development
   description: This is the first module description
+  duration: 3
 
 bravo:
   title: Second Training Module
   thumbnail: introduction_to_supporting_physical_development
   description: This is the second module description
   depends_on: alpha
+  duration: 3
 
 charlie:
   title: Third Training Module
   thumbnail: introduction_to_supporting_physical_development
   description: This is the third module description
   depends_on: bravo
+  duration: 3
 
 delta:
   title: Fourth Training Module
