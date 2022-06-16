@@ -106,4 +106,4 @@ jobs:
         name: Map production DNS route
         run: |
           cf map-route ey-recovery london.cloudapps.digital --hostname eyfs-covid-recovery
-        # cf map-route ey-recovery education.gov.uk --hostname eyfs-covid-recovery
+        # cf map-route ey-recovery education.gov.uk --hostname child-development-training
