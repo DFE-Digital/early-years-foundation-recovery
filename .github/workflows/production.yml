@@ -1,16 +1,10 @@
-# https://docs.github.com/en/actions/using-jobs/using-conditions-to-control-job-execution
-# https://github.com/docker/build-push-action
-# https://github.com/actions/checkout#Checkout-a-different-branch
----
 # ------------------------------------------------------------------------------
-# - Manually deploy tagged version
-# - Automatically deploy latest tagged version (WIP)
-# - Rebuilding cached docker image and tagging with version number (WIP)
+# https://child-development-training.education.gov.uk
 #
-# ghcr.io/dfe-digital/early-years-foundation-recovery:v1
+# - Automatically deploy tag
+# - Manually (re)deploy tag
 #
-# https://eyfs-covid-recovery.london.cloudapps.digital
-#
+---
 name: Deploy Production App
 on:
   workflow_dispatch:
@@ -105,5 +99,4 @@ jobs:
       -
         name: Map production DNS route
         run: |
-          cf map-route ey-recovery london.cloudapps.digital --hostname eyfs-covid-recovery
-        # cf map-route ey-recovery education.gov.uk --hostname child-development-training
+          cf map-route ey-recovery education.gov.uk --hostname child-development-training
