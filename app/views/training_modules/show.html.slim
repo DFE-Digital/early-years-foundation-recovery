@@ -21,6 +21,7 @@ div class='govuk-!-margin-top-5'
                           summary_text: summary_text) do
         ul class="govuk-list"
           - items.map do |item|
-            li= govuk_link_to item.model.heading, training_module_content_page_path(item.training_module, item)
-            strong class="govuk-tag" Completed
+            li
+              = govuk_link_to item.model.heading, training_module_content_page_path(item.training_module, item)
+              strong class="govuk-tag" Completed
       - prev_submodule_name = submodule_name
