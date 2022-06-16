@@ -1,5 +1,7 @@
 ---
 test:
+  intro:
+    type: module_intro
   test:
     type: questionnaire
   formative_assessment:

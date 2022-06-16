@@ -45,14 +45,14 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#training' do
+  describe '#course' do
     subject(:user) { create(:user, :registered) }
 
     it 'provides modules by state' do
-      expect(user.training.current_modules).to be_an Array
-      expect(user.training.available_modules).to be_an Array
-      expect(user.training.upcoming_modules).to be_an Array
-      expect(user.training.completed_modules).to be_an Array
+      expect(user.course.current_modules).to be_an Array
+      expect(user.course.available_modules).to be_an Array
+      expect(user.course.upcoming_modules).to be_an Array
+      expect(user.course.completed_modules).to be_an Array
     end
   end
 end

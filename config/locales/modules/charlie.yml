@@ -4,17 +4,17 @@ en:
   modules:
     charlie:
       1:
-        heading: Heading - Module 3, page 1
-        body: Body - Module 3, page 1
+        heading: module_intro
+        body: 3rd module, page 1
       1-1:
-        heading: Heading - Module 3, page 1-1
-        body: Body - Module 3, page 1-1
+        heading: sub_module_intro
+        body: 3rd module, page 1-1
       1-1-1:
-        heading: Heading - Module 3, page 1-1-1
-        body: Body - Module 3, page 1-1-1
+        heading: text_page
+        body: 3rd module, page 1-1-1
       1-1-2:
-        heading: Heading - Module 3, page 1-1-2
-        body: Body - Module 3, page 1-1-2
+        heading: text_page
+        body: 3rd module, page 1-1-2
       1-1-3:
-        heading: Heading - Module 3, page 1-1-3
-        body: Body - Module 3, page 1-1-3
+        heading: youtube_page
+        body: 3rd module, page 1-1-3
