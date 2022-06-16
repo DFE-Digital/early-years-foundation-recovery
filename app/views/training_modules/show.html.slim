@@ -7,12 +7,15 @@ div class="full-width-container govuk-!-margin-top-0 govuk-!-padding-top-7 govuk
 
   - if @course_progress.completed?(@training_module)
     - button_text = "Retake"
+    - button_link = training_module_content_page_path(@training_module, @module_progress.milestone)
   - elsif @course_progress.started?(@training_module)
     - button_text = "Continue module"
+    - button_link = training_module_content_page_path(@training_module, @module_progress.milestone)
   - else
     - button_text ='Start'
+    - button_link = training_module_content_pages_path(@training_module)
 
-  = govuk_button_to button_text, training_module_content_page_path(@training_module, @module_progress.milestone), method: :get
+  = govuk_button_to button_text, button_link, method: :get
 
 strong class="govuk-tag govuk-!-margin-right-1 govuk-tag--green" #{@training_module.topic_count} topics
 = govuk_tag(text: "#{@training_module.duration} hours", colour: 'green')
