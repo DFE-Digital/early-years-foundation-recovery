@@ -25,9 +25,3 @@ delta:
   description: This module is unpublished and therefore not clickable
   depends_on: bravo
   draft: true
-
-test:
-  title: phase me out
-  thumbnail: introduction_to_supporting_physical_development
-  description: |
-    This training module is the parent of orphaned test fixture content

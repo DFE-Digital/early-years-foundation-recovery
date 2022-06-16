@@ -1,24 +1,4 @@
-- if ENV['RAILS_ENV'].eql?('development')
-  - training_service = UserTraining.new(user: current_user)
-  pre.debug_dump
-    |
-      duration: #{@training_module.duration}
-      topics: #{@training_module.topic_count}
-      milestone: #{training_service.milestone(@training_module.name)}
-    hr
-    | Submodules
-    - @training_module.items_by_submodule.map do |sub_name, items|
-      - if sub_name.present?
-        | #{sub_name}: #{'complete' if items.all? { |item| training_service.item_events(@training_module.name, item.name).present? } }
-      br
-    hr
-    | Submodule / Topics
-    - @training_module.items_by_topic.map do |topic_name, items|
-      - if topic_name.present?
-        | #{topic_name}: #{'complete' if items.all? { |item| training_service.item_events(@training_module.name, item.name).present? } }
-      br
-    hr
-
+= render 'debug'
 
 div class="full-width-container govuk-!-margin-top-0 govuk-!-padding-top-7 govuk-!-padding-bottom-7 govuk-!-margin-bottom-4"
   h1.govuk-heading-l= @training_module.title
@@ -30,37 +10,12 @@ div class="full-width-container govuk-!-margin-top-0 govuk-!-padding-top-7 govuk
 = govuk_tag(text: "#{@training_module.topic_count} topics", colour: 'green')
 = govuk_tag(text: "#{@training_module.duration} hours", colour: 'green')
 
+= render 'wip'
+
 div class='govuk-!-margin-top-5'
-
-  - if ENV['RAILS_ENV'].eql?('development')
-    - training_service = UserTraining.new(user: current_user)
-    pre.debug_dump
-      - @training_module.module_items.each.with_index(1) do |item, pos|
-        |
-          #{pos.ordinalize}:
-        strong
-          |  #{item.name}
-        - if item.topic_name
-          em
-            | ____ (submodule #{item.submodule_name} / topic #{item.topic_name}.#{item.page_name})
-        - elsif item.submodule_name
-          em
-            | ____ (submodule #{item.submodule_name})
-        - if item.page_number && item.page_number[:current] > 0
-          | ____ Submodule
-          = t('page_number', **item.page_number)
-        br
-
-
-
-
   = govuk_accordion do |accordion|
     - @training_module.items_by_topic.except(nil).map do |topic_name, items|
       - accordion.section(heading_text: 'topic ' + topic_name.join('.')) do
         ul
           - items.map do |item|
             li= govuk_link_to item.model.heading, training_module_content_page_path(item.training_module, item)
-
-
-
-

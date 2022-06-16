@@ -1,6 +1,6 @@
 # User's course progress and module state
 #
-class UserTraining
+class CourseProgress
   def initialize(user:)
     @user = user
   end
@@ -62,13 +62,6 @@ class UserTraining
     end
   end
 
-  # TODO: Move this method into a new "service" for module specific queries
-  #
-  # checks for a page view event for each module item
-  def item_events(module_id, item_id)
-    user.events.where_properties(training_module_id: module_id, id: item_id)
-  end
-
 private
 
   # @param module_id [String] training module name
@@ -122,7 +115,7 @@ private
     when :upcoming  then training_modules.select { |mod| upcoming?(mod) }
     when :completed then training_modules.select { |mod| completed?(mod) }
     else
-      raise 'UserTraining#by_state can query either :active, :upcoming or :completed modules'
+      raise 'CourseProgress#by_state can query either :active, :upcoming or :completed modules'
     end
   end
 
