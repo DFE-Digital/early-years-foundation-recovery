@@ -64,7 +64,7 @@ brain-development-and-how-children-learn:
       1_why_talk_to_unborn:
         multi_select: true
         label: Which of these is a proven benefit of talking to an unborn child? (Select all answers that apply)
-        assessment_summary: Babies will recognise voices they have heard during pregnancy and are more likely to be quickly reassured  by the same voices after birth. This reduces stress and helps them to recognise feelings. 
+        assessment_summary: Babies will recognise voices they have heard during pregnancy and are more likely to be quickly reassured by the same voices after birth. This reduces stress and helps them to recognise feelings. 
         assessment_fail_summary: There are no proven links between a child’s sight and being spoken to during pregnancy. Babies will recognise voices they have heard during pregnancy and are more likely to be quickly reassured by the same voice.     
         answers:
           1: "Increased bond between the baby and parent or carer"
@@ -85,7 +85,7 @@ brain-development-and-how-children-learn:
           2: "Fine motor"                    
           3: "Sensorimotor"
           4: "Senses"
-        correct_answers: ["1","2","4"]
+        correct_answers: ["3"]
   2-1-2-1c:
     content:
     questions:
@@ -197,7 +197,7 @@ brain-development-and-how-children-learn:
           3: "Increased self-efficacy"
           4: "Informed practice"
         correct_answers: ["1","2","3","4"]
-    2-2-2-1b:
+  2-2-2-1b:
     content:
     questions:
       1_maslow_needs:
@@ -211,7 +211,7 @@ brain-development-and-how-children-learn:
           3: "Self-esteem"
           4: "Self-actualisation"
         correct_answers: ["2"]
-    2-2-2-4b:
+  2-2-2-4b:
     content:
     questions:
       1_bandura:
@@ -237,7 +237,7 @@ brain-development-and-how-children-learn:
           3: "4"
           4: "5"
         correct_answers: ["4"]
-    2-2-2-5b:
+  2-2-2-5b:
     content:
     questions:
       1_bruner:
@@ -263,7 +263,7 @@ brain-development-and-how-children-learn:
           3: "Intellect"
           4: "Individual"
         correct_answers: ["2"]
-    2-2-2-7b:
+  2-2-2-7b:
     content:
     questions:
       1_more_knowledgeable_other:
@@ -277,7 +277,7 @@ brain-development-and-how-children-learn:
           3: "Scaffolding"
           4: "Structuring"
         correct_answers: ["3"]
-    2-2-3-1b:
+  2-2-3-1b:
     content:
     questions:
       1_nhs_physical_hours:
@@ -291,7 +291,7 @@ brain-development-and-how-children-learn:
           3: "3"
           4: "4"
         correct_answers: ["3"]
-    2-2-3-2b:
+  2-2-3-2b:
     content:
     questions:
       1_prolonged_inactivity:
@@ -305,7 +305,7 @@ brain-development-and-how-children-learn:
           3: "Increased access to technology"
           4: "Imposed lockdowns"
         correct_answers: ["2","3","4"]
-    2-2-3-4b:
+  2-2-3-4b:
     content:
     questions:
       1_meal_times:
@@ -324,7 +324,7 @@ brain-development-and-how-children-learn:
           3: "Laying the table"
           4: "Serving themselves"
         correct_answers: ["1","3","4"]
-    2-2-3-6b:
+  2-2-3-6b:
     content:
     questions:
       1_relationships_observe_experience:
@@ -338,7 +338,7 @@ brain-development-and-how-children-learn:
           3: "Parent to parent"
           4: "Peer to peer"
         correct_answers: ["1","2","4"]  
-    2-2-3-6c:
+  2-2-3-6c:
     content:
     questions:
       1_test_understanding_relationships:
@@ -353,7 +353,7 @@ brain-development-and-how-children-learn:
     
 #END-OF-MODULE-TEST
 
-    2-test-1:
+  2-test-1:
     content:
     questions:
       1_brain_eyes:
@@ -368,7 +368,7 @@ brain-development-and-how-children-learn:
           4: "Brain stem"
         correct_answers: ["1"]  
 
-    2-test-2:
+  2-test-2:
     content:
     questions:
       1_myelin_neurones:
@@ -386,7 +386,7 @@ brain-development-and-how-children-learn:
           2: "False"
         correct_answers: ["2"]  
 
-    2-test-3:
+  2-test-3:
     content:
     questions:
       1_ability_tasks:
@@ -403,7 +403,7 @@ brain-development-and-how-children-learn:
           4: "Too much independence"
         correct_answers: ["2"]  
   
-    2-test-4:
+  2-test-4:
     content:
     questions:
       1_low_income:
@@ -421,7 +421,7 @@ brain-development-and-how-children-learn:
           4: "Limited growth"
         correct_answers: ["1","3"]  
 
-    2-test-5:
+  2-test-5:
     content:
     questions:
       1_learn_effectively:
@@ -437,7 +437,7 @@ brain-development-and-how-children-learn:
           2: "False"
         correct_answers: ["1"]  
 
-    2-test-6:
+  2-test-6:
     content:
     questions:
       1_development_delay:
@@ -454,7 +454,7 @@ brain-development-and-how-children-learn:
           4: "Disadvantaged"
         correct_answers: ["2"]  
     
-    2-test-7:
+  2-test-7:
     content:
     questions:
       1_negatively_impact_development_delay:
@@ -471,7 +471,7 @@ brain-development-and-how-children-learn:
           4: "Accidents"
         correct_answers: ["1","2","4"]  
 
-    2-test-8:
+  2-test-8:
     content:
     questions:
       1_negatively_impact_development_delay:
@@ -488,7 +488,7 @@ brain-development-and-how-children-learn:
           4: "Maslow"
         correct_answers: ["1","3"]  
 
-    2-test-9:
+  2-test-9:
     content:
     questions:
       1_scaffolding_techniques:
@@ -505,7 +505,7 @@ brain-development-and-how-children-learn:
           4: "Using visual aids"
         correct_answers: ["1","3","4"] 
 
-    2-test-10:
+  2-test-10:
     content:
     questions:
       1_scaffolding_techniques:
