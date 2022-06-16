@@ -50,6 +50,7 @@ en:
             ofsted_number:
               invalid: This Ofsted number is not recognised.
   phase_banner_html: This is a new service, your %{feedback_link} will help us improve it.
+  page_number: Page %{current} of %{total}
   links:
     change: Change
     save: Save

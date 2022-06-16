@@ -1,8 +1,9 @@
 = render 'debug'
 
 - content_for :content_page do
+  - if @model.page_number
+    span.govuk-caption-l= t('page_number', **@model.page_number)
   h1= @model.heading
-  .gem-c-govspeak
-    = translate_markdown(@model.body)
+  .gem-c-govspeak= translate_markdown(@model.body)
 
 = render 'shared/content_wrap'
