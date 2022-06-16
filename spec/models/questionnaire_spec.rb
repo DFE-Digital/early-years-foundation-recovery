@@ -31,8 +31,8 @@ RSpec.describe Questionnaire, type: :model do
   context 'with required_percentage_correct not set and all answers correct' do
     before do
       questionnaire.required_percentage_correct = nil
-      questionnaire.questions.each do |question, data|
-        questionnaire.send("#{question}=", data[:correct_answers])
+      questionnaire.question_list.each do |question|
+        question.set_answer(answer: question.correct_answers)
       end
     end
 
@@ -56,8 +56,8 @@ RSpec.describe Questionnaire, type: :model do
   context 'with a question correct and below required_percentage_correct threshold' do
     before do
       questionnaire.required_percentage_correct = 1
-      question, data = questionnaire.questions.first
-      questionnaire.send("#{question}=", data[:correct_answers])
+      question = questionnaire.question_list.first
+      question.set_answer(answer: question.correct_answers)
     end
 
     it 'is valid' do

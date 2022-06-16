@@ -59,4 +59,8 @@ module ApplicationHelper
     end
     govuk_table(rows: [header, *rows], caption: 'Completed modules', first_cell_is_header: true)
   end
+
+  def clear_flash
+    flash[:alert] = nil
+  end
 end

@@ -5,7 +5,7 @@ RSpec.describe 'Govspeak', type: :system do
 
   context 'with module intro' do
     before do
-      visit '/modules/alpha/content_pages/1'
+      visit '/modules/alpha/content-pages/1'
     end
 
     it 'is displayed' do
@@ -16,7 +16,7 @@ RSpec.describe 'Govspeak', type: :system do
 
   context 'with formative assessments' do
     before do
-      visit '/modules/alpha/formative_assessments/1-2-2'
+      visit '/modules/alpha/formative-assessments/1-2-2'
     end
 
     it 'is displayed' do

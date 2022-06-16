@@ -1,6 +1,6 @@
 # User's course progress and module state
 #
-class UserTraining
+class CourseProgress
   def initialize(user:)
     @user = user
   end
@@ -115,7 +115,7 @@ private
     when :upcoming  then training_modules.select { |mod| upcoming?(mod) }
     when :completed then training_modules.select { |mod| completed?(mod) }
     else
-      raise 'UserTraining#by_state can query either :active, :upcoming or :completed modules'
+      raise 'CourseProgress#by_state can query either :active, :upcoming or :completed modules'
     end
   end
 
