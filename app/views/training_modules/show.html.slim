@@ -14,8 +14,13 @@ div class="full-width-container govuk-!-margin-top-0 govuk-!-padding-top-7 govuk
 
 div class='govuk-!-margin-top-5'
   = govuk_accordion do |accordion|
-    - @training_module.items_by_topic.except(nil).map do |topic_name, items|
-      - accordion.section(heading_text: 'topic ' + topic_name.join('.')) do
-        ul
+    - prev_submodule_name = nil
+    - @training_module.items_by_submodule.except(nil).each do |submodule_name, items|
+      - summary_text = "#{prev_submodule_name} must be completed before you begin this section" unless prev_submodule_name.nil?
+      - accordion.section(heading_text: submodule_name,
+                          summary_text: summary_text) do
+        ul class="govuk-list"
           - items.map do |item|
             li= govuk_link_to item.model.heading, training_module_content_page_path(item.training_module, item)
+            strong class="govuk-tag" Completed
+      - prev_submodule_name = submodule_name
