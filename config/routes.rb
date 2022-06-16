@@ -36,5 +36,8 @@ Rails.application.routes.draw do
     resources :content_pages, only: %i[index show]
     resources :questionnaires, only: %i[show update]
     resources :formative_assessments, only: %i[show update]
+    resources :summetive_assessments, only: %i[show update] do
+      get 'results'
+    end
   end
 end

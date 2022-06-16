@@ -9,6 +9,8 @@ class ModuleItem < YamlBase
     text_page: ContentPage,
     youtube_page: YoutubePage,
     formative_assessment: Questionnaire,
+    summetive_assessment: Questionnaire,
+    summetive_assessment_result: QuestionnaireResults,
   }.freeze
 
   extend YamlFolder
@@ -17,6 +19,7 @@ class ModuleItem < YamlBase
   # @overload ActiveYaml::Base load_file
   #   gets data nested within files and uses parent keys to populate attributes
   def self.load_file
+
     data = raw_data.map do |training_module, items|
       items.map do |name, values|
         values.merge(name: name.to_s, training_module: training_module)

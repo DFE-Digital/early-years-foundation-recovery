@@ -1,6 +1,10 @@
-class Questionnaire < OpenStruct
+class QuestionnaireResults < OpenStruct
   def self.find_by!(args)
+    puts 'args'
+    puts args
+    puts 'args'
     questionnaire_data = SummativeQuestionnaire.find_by(args) ? SummativeQuestionnaire.find_by(args):QuestionnaireData.find_by(args)
+    # questionnaire_data = QuestionnaireData.find_by(args)
     questionnaire_data.build_questionnaire
   end
 
