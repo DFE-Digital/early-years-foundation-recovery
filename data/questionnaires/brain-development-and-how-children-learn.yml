@@ -218,14 +218,15 @@ brain-development-and-how-children-learn:
         multi_select: false 
         label: According to Bandura, how many sources potentially influence a child’s development of self-efficacy? 
         assessment_summary: | 
-          "That’s right. Bandura believed that a child’s development of self-efficacy came from 4 potential sources:
+          Bandura believed that a child’s development of self-efficacy came from 4 potential sources:
+
           - mastery - opportunities to master tasks or skills and experience success
           - vicarious experiences - opportunities to observe others who are similar to themselves succeeding
           - persuasion - support, praise and encouragement from influential role models in the child’s life 
           - imagination  - the ability for the child to imagine themselves succeeding"
 
         assessment_fail_summary: | 
-          "That’s right. Bandura believed that a child’s development of self-efficacy came from 4 potential sources:
+          Bandura believed that a child’s development of self-efficacy came from 4 potential sources:
           
           - mastery - opportunities to master tasks or skills and experience success
           - vicarious experiences - opportunities to observe others who are similar to themselves succeeding
@@ -312,12 +313,21 @@ brain-development-and-how-children-learn:
         multi_select: true 
         label: Which of these is an example of encouraging children to become involved in meal times? (Select all answers that apply) 
         assessment_summary: |
-          "Encouraging children to become involved in food preparation, lay the table and serve themselves will: 
+          Encouraging children to become involved in food preparation, lay the table and serve themselves will: 
           
           - promote positive social interaction
           - develop motor skills 
-          - encourage healthier lifestyles "
-          assessment_fail_summary: Limiting food options will take away the children’s choice and reduce their involvement."
+          - encourage healthier lifestyles
+
+          Limiting food options will take away the children’s choice and reduce their involvement.
+        assessment_fail_summary: |
+          Encouraging children to become involved in food preparation, lay the table and serve themselves will: 
+          
+          - promote positive social interaction
+          - develop motor skills 
+          - encourage healthier lifestyles.
+          
+          Limiting food options will take away the children’s choice and reduce their involvement.
         answers:
           1: "Food preparation"
           2: "Limiting food options"

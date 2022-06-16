@@ -18,18 +18,18 @@ personal-social-and-emotional-development:
     type: text_page
   3-1-1-3a:
     type: text_page
-  # 3-1-1-3b:
-  #   type: formative_assessment
-  # 3-1-1-3c:
-  #   type: formative_assessment
+  3-1-1-3b:
+    type: formative_assessment
+  3-1-1-3c:
+    type: formative_assessment
   3-1-1-4a:
     type: text_page
-  # 3-1-1-4b:
-  #   type: formative_assessment
+  3-1-1-4b:
+    type: formative_assessment
   3-1-1-5a:
     type: text_page
-  # 3-1-1-5b:
-  #   type: formative_assessment
+  3-1-1-5b:
+    type: formative_assessment
 
   3-1-2:
     type: text_page         # submodule 1 / topic 2
@@ -37,29 +37,29 @@ personal-social-and-emotional-development:
     type: text_page
   3-1-2-2a:
     type: text_page
-  # 3-1-2-2b:
-  #   type: formative_assessment
-  # 3-1-2-2c
-  #   type: formative_assessment
+  3-1-2-2b:
+    type: formative_assessment
+  3-1-2-2c:
+    type: formative_assessment
   3-1-2-3a:
     type: text_page
-  # 3-1-2-3b:
-  #   type: formative_assessment
-  # 3-1-2-3c:
-  #   type: formative_assessment
+  3-1-2-3b:
+    type: formative_assessment
+  3-1-2-3c:
+    type: formative_assessment
 
   3-1-3:
     type: text_page         # submodule 1 / topic 3
   3-1-3-1a:
     type: text_page
-  # 3-1-3-1b:
-  #   type: formative_assessment
+  3-1-3-1b:
+    type: formative_assessment
   3-1-3-2:
     type: text_page
   3-1-3-3a:
     type: text_page
-  # 3-1-3-3b:
-  #   type: formative_assessment
+  3-1-3-3b:
+    type: formative_assessment
 
   # ----------------------------------------------------------------------------
   # Submodule 2
@@ -76,14 +76,14 @@ personal-social-and-emotional-development:
     type: text_page
   3-2-1-3a:
     type: text_page
-  # 3-2-1-3b:
-  #   type: formative_assessment
-  # 3-2-1-3c:
-  #   type: formative_assessment
-  # 3-2-1-3d:
-  #   type: formative_assessment
-  # 3-2-1-3e:
-  #   type: formative_assessment
+  3-2-1-3b:
+    type: formative_assessment
+  3-2-1-3c:
+    type: formative_assessment
+  3-2-1-3d:
+    type: formative_assessment
+  3-2-1-3e:
+    type: formative_assessment
   3-2-1-4:
     type: text_page
 
@@ -93,8 +93,8 @@ personal-social-and-emotional-development:
     type: text_page
   3-2-2-2a:
     type: text_page
-  # 3-2-2-2b:
-  #   type: formative_assessment
+  3-2-2-2b:
+    type: formative_assessment
   3-2-2-3:
     type: text_page
 
@@ -104,8 +104,8 @@ personal-social-and-emotional-development:
     type: text_page
   3-2-3-2a:
     type: text_page
-  # 3-2-3-2b:
-  #   type: formative_assessment
+  3-2-3-2b:
+    type: formative_assessment
   3-2-3-3:
     type: module_intro 
 
@@ -124,8 +124,8 @@ personal-social-and-emotional-development:
     type: text_page
   3-3-1-3a:
     type: text_page
-  # 3-3-1-3b:
-  #   type: formative_assessment
+  3-3-1-3b:
+    type: formative_assessment
 
   3-3-2:
     type: text_page         # submodule 3 / topic 2
@@ -133,10 +133,10 @@ personal-social-and-emotional-development:
     type: text_page
   3-3-2-2a:
     type: text_page
-  # 3-3-2-2b:
-  #   type: formative_assessment
-  # 3-3-2-2c:
-  #   type: formative_assessment
+  3-3-2-2b:
+    type: formative_assessment
+  3-3-2-2c:
+    type: formative_assessment
   3-3-2-3:
     type: text_page
   3-3-2-4:
