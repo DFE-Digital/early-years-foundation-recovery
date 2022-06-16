@@ -1,4 +1,5 @@
 = f.govuk_fieldset legend: { text: t(:heading, scope: [:extra_registration, current_step]) } do
-  p.govuk_body = t(:hint, scope: [:extra_registration, current_step])
+  p.govuk_body
+    = t(:body, scope: [:extra_registration, current_step])
   = f.govuk_text_field :postcode
   = f.govuk_text_field :ofsted_number

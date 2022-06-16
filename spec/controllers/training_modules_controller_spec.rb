@@ -13,7 +13,7 @@ RSpec.describe TrainingModulesController, type: :controller do
     end
 
     context 'when user has times out' do
-      let(:timeout) { Rails.configuration.x.user_timeout_minutes.minutes + 1.second }
+      let(:timeout) { Rails.configuration.user_timeout_minutes.minutes + 1.second }
 
       it 'redirects to timeout error' do
         get :index, session: { 'warden.user.user.session' => { 'last_request_at' => timeout.ago } }

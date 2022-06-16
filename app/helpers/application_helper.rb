@@ -3,6 +3,7 @@ module ApplicationHelper
     govuk_header(service_name: 'Early Years Foundation') do |header|
       header.navigation_item(text: 'Home', href: root_path)
       if user_signed_in?
+        header.navigation_item(text: 'My learning', href: my_learning_path)
         header.navigation_item(text: 'My account', href: user_path)
         header.navigation_item(text: 'Sign out', href: destroy_user_session_path, options: { data: { turbo_method: :get } })
       else
@@ -45,5 +46,21 @@ module ApplicationHelper
         training_modules_path
       end
     link_to 'Previous', link, link_args
+  end
+
+  def completed_modules_table(modules)
+    header = ['Module name', 'Date completed', 'Actions']
+    rows = modules.map do |mod, timestamp|
+      [
+        govuk_link_to(mod.title, training_module_content_pages_path(mod)),
+        timestamp.to_date.to_formatted_s(:rfc822),
+        govuk_link_to('View certificate', '#'),
+      ]
+    end
+    govuk_table(rows: [header, *rows], caption: 'Completed modules', first_cell_is_header: true)
+  end
+
+  def clear_flash
+    flash[:alert] = nil
   end
 end

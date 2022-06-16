@@ -4,4 +4,8 @@ class TrainingModulesController < ApplicationController
   def index
     @training_modules = TrainingModule.all
   end
+
+  def show
+    @training_module = TrainingModule.find_by(name: params[:id])
+  end
 end

@@ -38,7 +38,8 @@ class CustomFailureApp < Devise::FailureApp
 
 protected
 
-  # overwriting the default method
+  # Add `Devise.unlock_in` to locales
+  #
   # @return [String] the i18n message
   def i18n_message(default = nil)
     message = warden_message || default || :unauthenticated
@@ -47,7 +48,6 @@ protected
       options = {}
       options[:resource_name] = scope
       options[:scope] = 'devise.failure'
-      # add Devise.unlock_in to Devise locales file
       options[:unlock_in] = scope_class.unlock_in / 3600
       options[:default] = [message]
       auth_keys = scope_class.authentication_keys
@@ -144,7 +144,7 @@ Devise.setup do |config|
   # It will change confirmation, password recovery and other workflows
   # to behave the same regardless if the e-mail provided was right or wrong.
   # Does not affect registerable.
-  # config.paranoid = true
+  config.paranoid = true
 
   # By default Devise will store the user in session. You can skip storage for
   # particular strategies by setting this option.
@@ -183,10 +183,10 @@ Devise.setup do |config|
   # config.pepper = '4593c4ce86055f3b5b98e71644cc0ba3739484cff6a35c539fc21e522bf03ece501f01a65728854d1e7000853c3f0e2b57c3540c39ec8207c454f3d6d77ac4b6'
 
   # Send a notification to the original email when the user's email is changed.
-  # config.send_email_changed_notification = false
+  config.send_email_changed_notification = true
 
   # Send a notification email when the user's password is changed.
-  # config.send_password_change_notification = false
+  config.send_password_change_notification = true
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -232,7 +232,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length.
-  config.password_length = 8..128
+  config.password_length = 10..128
 
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
@@ -242,7 +242,7 @@ Devise.setup do |config|
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
-  config.timeout_in = Rails.configuration.x.user_timeout_minutes.minutes
+  config.timeout_in = Rails.configuration.user_timeout_minutes.minutes
 
   # ==> Configuration for :lockable
   # Defines which strategy will be used to lock an account.
@@ -265,7 +265,7 @@ Devise.setup do |config|
   config.maximum_attempts = 6
 
   # Time interval to unlock the account if :time is enabled as unlock_strategy.
-  config.unlock_in = ENV.fetch('UNLOCK_IN_MINUTES', 2 * 60).to_i.minutes
+  config.unlock_in = Rails.configuration.unlock_in_minutes.minutes
 
   # Warn on the last attempt before the account is locked.
   config.last_attempt_warning = true

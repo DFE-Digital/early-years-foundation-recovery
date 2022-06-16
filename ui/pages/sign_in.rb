@@ -2,7 +2,7 @@
 
 module Pages
   class SignIn < Base
-    set_url '/users/sign_in'
+    set_url '/users/sign-in'
 
     element :email_field, '#user-email-field'
     element :password_field, '#user-password-field'
@@ -11,12 +11,12 @@ module Pages
     # Authenticate using email and password
     #
     # @param email [String] login email address (default: completed@example.com)
-    # @param password [String] login password (default: Passw0rd)
+    # @param password [String] login password (default: StrongPassword)
     def with_email_and_password(email = nil, password = nil)
       wait_until_header_visible
 
       email ||= 'completed@example.com'
-      password ||= ENV.fetch('USER_PASSWORD', 'Passw0rd')
+      password ||= ENV.fetch('USER_PASSWORD', 'StrongPassword')
 
       email_field.set(email)
       password_field.set(password)

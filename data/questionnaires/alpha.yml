@@ -1,5 +1,5 @@
 ---
-one:
+alpha:
   1-1-4:
     required_percentage_correct: 100
     questions:
@@ -9,8 +9,8 @@ one:
         assessment_summary: Hey! You like stuff
         assessment_fail_summary: You should like stuff!
         answers:
-          'yes': 'Yes'  # Set as string as YAML parses yes as true
-          'no': 'No'    # Set as string as YAML parses no as false
+          'yes': 'Yes'
+          'no': 'No'
         correct_answers:
           - 'yes'
   1-2-2:
@@ -27,3 +27,14 @@ one:
         correct_answers:
           - stuffy_people
           - stuffers
+  1-2-4:
+    questions:
+      multiples_of_three:
+        multi_select: true
+        label: label
+        assessment_summary: assessment summary
+        answers:
+          1: Three
+          2: Eleven
+          3: Fifteen
+        correct_answers: [ '1', '3' ]

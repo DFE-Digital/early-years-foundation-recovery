@@ -8,10 +8,8 @@ class FormativeAssessmentsController < ApplicationController
 
   def update
     archive_previous_user_answers
-    if questionnaire_params.values.all?(&:present?)
-      populate_questionnaire(questionnaire_params)
-      save_answers
-      flash[:alert] = nil
+    if params.key?(:questionnaire)
+      process_questionaire
     else
       flash[:alert] = 'Please select an answer'
     end
@@ -19,6 +17,16 @@ class FormativeAssessmentsController < ApplicationController
   end
 
 private
+
+  def process_questionaire
+    if questionnaire_params.values.all?(&:present?)
+      populate_questionnaire(questionnaire_params)
+      save_answers
+      flash[:alert] = nil
+    else
+      flash[:alert] = 'Please select an answer'
+    end
+  end
 
   def questionnaire
     @questionnaire ||= Questionnaire.find_by!(name: params[:id], training_module: training_module)
@@ -44,9 +52,9 @@ private
   def populate_questionnaire(question_input)
     return if question_input.empty?
 
-    questionnaire.questions.each_key do |question|
-      answer = [question_input[question]].flatten.select(&:present?)
-      questionnaire.send("#{question}=", answer)
+    questionnaire.question_list.each do |question|
+      answer = [question_input[question.name]].flatten.select(&:present?)
+      question.set_answer(answer: answer)
     end
     questionnaire.submitted = true
   end
@@ -61,14 +69,14 @@ private
 
   def save_answers
     questionnaire.questions.each do |question, data|
-      answer = questionnaire.send(question)
+      answer = Array(questionnaire.send(question))
       next if answer.empty?
 
       current_user.user_answers.create!(
         questionnaire_id: questionnaire.id,
         question: question,
         answer: answer,
-        correct: answer == data[:correct_answers],
+        correct: answer == data[:correct_answers].map(&:to_sym),
       )
     end
   end
