@@ -6,7 +6,7 @@ en:
       intro:
         heading: module_intro
         body: intro
-      interruption:
+      before-you-start:
         heading: interruption_page
         body: interruption
       1-1:

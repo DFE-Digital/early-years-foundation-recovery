@@ -2,7 +2,7 @@
 test:
   intro:
     type: module_intro
-  interruption:
+  before-you-start:
     type: interruption_page
   test:
     type: questionnaire

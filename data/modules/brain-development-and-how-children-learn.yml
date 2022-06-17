@@ -2,7 +2,7 @@
 brain-development-and-how-children-learn:
   intro:
     type: module_intro
-  interruption:
+  before-you-start:
     type: interruption_page
 
   # ----------------------------------------------------------------------------

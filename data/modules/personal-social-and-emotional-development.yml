@@ -2,7 +2,7 @@
 personal-social-and-emotional-development:
   intro:
     type: module_intro
-  interruption:
+  before-you-start:
     type: interruption_page
 
   # ----------------------------------------------------------------------------

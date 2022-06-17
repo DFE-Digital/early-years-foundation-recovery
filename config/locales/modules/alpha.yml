@@ -94,7 +94,7 @@ en:
           $C
 
       # --------------------------------------
-      interruption:
+      before-you-start:
         heading: What to expect during the training
         body: |
           ### Check your learning
