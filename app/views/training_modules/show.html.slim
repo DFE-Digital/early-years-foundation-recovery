@@ -25,12 +25,13 @@ strong class="govuk-tag govuk-!-margin-right-1 govuk-tag--green" #{@training_mod
 div class='govuk-!-margin-top-5'
   = govuk_accordion do |accordion|
     - prev_submodule_name = nil
-    - @training_module.items_by_submodule.except(nil).each do |submodule_name, items|
+    - @training_module.items_by_submodule.except(nil).each do |submodule_num, items|
       - summary_text = "#{prev_submodule_name} must be completed before you begin this section" unless prev_submodule_name.nil?
-      - accordion.section(heading_text: submodule_name, summary_text: summary_text) do
+      - accordion.section(heading_text: items.first.model.heading, summary_text: summary_text) do
+        
         ul class="govuk-list"
-          - items.map do |item|
+          - items[1..-1].each do |item|
             li
               = govuk_link_to item.model.heading, training_module_content_page_path(item.training_module, item)
               strong class="govuk-tag align-right" Completed
-      - prev_submodule_name = submodule_name
+      - prev_submodule_name = items.first.model.heading
