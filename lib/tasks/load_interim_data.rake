@@ -6,7 +6,7 @@ def view_module_page_event(module_name, page_name, user)
     controller: 'content_pages',
     training_module_id: module_name,
   })
-  user.save
+  user.save!
 end
 
 namespace :db do
@@ -16,13 +16,8 @@ namespace :db do
       seed_file = Rails.root.join('db', 'seeds', 'interim_test_data.yml')
       config = YAML::load_file(seed_file)
       config.each do |user_attributes|
-        user = User.create!(user_attributes)
-        # Generate new random password for each user
-        user.tap do |admin|
-          admin.password = SecureRandom.base64(13)
-        end
-        user.save!
-        # end
+        updated_attributes = user_attributes.merge(password: SecureRandom.base64(12))
+        user = User.create!(updated_attributes)
         module_item = ModuleItem.where(training_module: 'child-development-and-the-eyfs').map &:name
         module_item.each do |page_name|
           view_module_page_event('child-development-and-the-eyfs', page_name, user)
