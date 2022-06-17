@@ -69,13 +69,13 @@ class TrainingModule < YamlBase
   # sequence ---------------------------------
 
   # @return [ModuleItem]
-  def interuption_page
+  def interruption_page
     module_items.first
   end
 
   # @return [ModuleItem]
   def intro_page
-    interuption_page.next_item
+    interruption_page.next_item
   end
 
   # Viewing this page determines if the module is "started"
