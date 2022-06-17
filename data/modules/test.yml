@@ -1,9 +1,9 @@
 ---
 test:
-  intro:
-    type: module_intro
   before-you-start:
     type: interruption_page
+  intro:
+    type: module_intro
   test:
     type: questionnaire
   formative_assessment:

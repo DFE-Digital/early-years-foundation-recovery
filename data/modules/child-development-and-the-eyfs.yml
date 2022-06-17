@@ -1,9 +1,9 @@
 ---
 child-development-and-the-eyfs:
-  intro:
-    type: module_intro
   before-you-start:
     type: interruption_page
+  intro:
+    type: module_intro
 
   # ----------------------------------------------------------------------------
   # Submodule 1
