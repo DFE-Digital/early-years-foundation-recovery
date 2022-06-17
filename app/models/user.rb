@@ -51,9 +51,9 @@ class User < ApplicationRecord
     timestamp.to_date&.to_formatted_s(:rfc822)
   end
 
-  # @return [UserTraining] learning activity query interface
-  def training
-    @training ||= UserTraining.new(user: self)
+  # @return [CourseProgress] course activity query interface
+  def course
+    @course ||= CourseProgress.new(user: self)
   end
 
 private

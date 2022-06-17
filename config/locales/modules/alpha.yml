@@ -93,34 +93,37 @@ en:
           [Find out about call charges](/call-charges)
           $C
 
+      # --------------------------------------
       1-1:
         heading: Sub-module intro heading
         body: Sub-module intro body
       1-1-1:
-        heading: Stuff is cool
+        heading: 1-1-1
         body: |
           ## subheading
 
           ^Govspeak Callout Test^
       1-1-2:
-        heading: Stuff everywhere
-        body: It's all around us
+        heading: 1-1-2
+        body: second topic, only page
       1-1-3:
-        heading: We like stuff
-        body: Hurrah!
+        heading: 1-1-3
+        body: third topic, only page
       1-1-4:
-        heading: What did you learn about stuff
-        body: I learned some stuff
+        heading: 1-1-4
+        body: 4th topic, only page
+
+      # --------------------------------------
       1-2-1:
-        heading: Not for everyone
-        body: Some people don't like stuff
+        heading: 1-2-1
+        body: First page in second submodule
       1-2-2:
-        heading: What sort of people don't like stuff
+        heading: 1-2-2
         body: |
           %Warning: people like stuff!%
       1-2-3:
-        heading: How to avoid the stuff haters
-        body: Hide behind stuff
+        heading: 1-2-3
+        body: Penultimate page
       1-2-4:
-        heading: Last page
+        heading: 1-2-4
         body: By viewing this page the training module is marked as complete

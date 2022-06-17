@@ -15,6 +15,38 @@ RSpec.describe TrainingModule, type: :model do
   end
 
   it 'has fields' do
-    expect(described_class.field_names).to eq %i[title thumbnail description name depends_on draft]
+    expect(described_class.field_names).to eq %i[
+      title thumbnail description duration name depends_on draft
+    ]
   end
+
+  # predicates ---------------------------------
+
+  # describe '#draft?' do
+  # end
+
+  # collections -------------------------
+
+  # describe '#module_items' do
+  # end
+
+  # describe '#module_items_by_type' do
+  # end
+
+  # describe '#module_items_by_submodule' do
+  # end
+
+  # describe '#items_by_submodule' do
+  # end
+
+  # describe '#items_by_topic' do
+  # end
+
+  # describe '#module_intros' do
+  # end
+
+  # sequence ---------------------------------
+
+  # describe '#first_content_page' do
+  # end
 end

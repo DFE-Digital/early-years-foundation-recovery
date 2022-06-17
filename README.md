@@ -29,6 +29,7 @@
 - [Staging Environment][staging]
 - [Prototype Repo][prototype-repo]
 - [Prototype App][prototype-app]
+- [Experts & Mentors Interim App][interim-prototype-app]
 - [Flow Diagram][figma]
 
 ## Rails Credentials
@@ -219,7 +220,8 @@ When the are significant changes to content structure or styling it may be neces
 [production]: https://eyfs-covid-recovery.london.cloudapps.digital
 [staging]: https://ey-recovery-staging.london.cloudapps.digital
 [prototype-repo]: https://github.com/DFE-Digital/ey-recovery-prototype
-[prototype-app]: https://eye-recovery.london.cloudapps.digital
+[prototype-app]: https://eye-recovery.herokuapp.com
+[interim-prototype-app]: https://child-development-training-prototype.london.cloudapps.digital
 [rails-template]: https://github.com/DFE-Digital/rails-template
 [ci-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml/badge.svg
 [ci-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml
