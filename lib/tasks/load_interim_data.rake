@@ -16,7 +16,7 @@ namespace :db do
       seed_file = Rails.root.join('db', 'seeds', 'interim_test_data.yml')
       config = YAML::load_file(seed_file)
       config.each do |user_attributes|
-        updated_attributes = user_attributes.merge(password: SecureRandom.base64(12))
+        updated_attributes = user_attributes.merge(password: SecureRandom.base64(12), confirmed_at: '2022-06-16 00:00:00')
         user = User.create!(updated_attributes)
         module_item = ModuleItem.where(training_module: 'child-development-and-the-eyfs').map &:name
         module_item.each do |page_name|
