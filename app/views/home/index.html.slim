@@ -14,7 +14,7 @@
             |  and gives practical advice for supporting the development of children
             |  in your early years setting.
 
-          a class='govuk-button govuk-button--start govuk-!-margin-bottom-4' role='button' draggable='false' data-module='govuk-button' href=training_modules_path
+          a class='govuk-button govuk-button--start govuk-!-margin-bottom-4' role='button' draggable='false' data-module='govuk-button' href=course_overview_path
             - if @user
               | Learn more
             - else
@@ -26,7 +26,6 @@
 
         .govuk-grid-column-one-third
           img src='https://eye-recovery.herokuapp.com/public/images/home/image4.jpg' alt='A practitioner smiling and holding a baby' width=300
-
 
 .govuk-grid-row
   .govuk-grid-column-one-half
@@ -44,10 +43,12 @@
       li offers the opportunity to download certificates of completion
       li has been developed by expert practitioners
 
-  - unless @user
+  - unless current_user
     .govuk-grid-column-one-half
       .light-grey-box
         h2.govuk-heading-m Return to your training
         p Sign in to continue learning, see your progress and download certificates.
-        = govuk_button_to 'Sign in', new_user_session_path, class: 'govuk-!-margin-bottom-4'
-        = govuk_link_to 'or create an account', new_user_registration_path
+        = govuk_link_to 'Sign in', new_user_session_path, class: 'govuk-!-margin-bottom-4 govuk-button'
+        '
+        ' or
+        = govuk_link_to 'create an account', new_user_registration_path
