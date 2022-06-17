@@ -34,7 +34,7 @@ module ApplicationHelper
     if module_item.next_item
       link_to 'Next', training_module_content_page_path(module_item.training_module, module_item.next_item), link_args
     else
-      link_to 'Finish', training_modules_path, link_args
+      link_to 'Finish', course_overview_path, link_args
     end
   end
 
@@ -43,7 +43,7 @@ module ApplicationHelper
       if module_item.previous_item
         training_module_content_page_path(module_item.training_module, module_item.previous_item)
       else
-        training_modules_path
+        course_overview_path
       end
     link_to 'Previous', link, link_args
   end

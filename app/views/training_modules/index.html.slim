@@ -1,13 +1,42 @@
-h1 Training Modules
+/ https://eye-recovery.herokuapp.com/sprint-6/brain-development/course-overview
 
-ol.govuk-list.govuk-list--spaced
-  - @training_modules.each do |training_module|
-    li= govuk_link_to training_module.title, training_module_content_pages_path(training_module)
+= link_to 'Back', root_path, class: 'govuk-back-link'
 
-    - if ENV['TRAINING_MODULES']
-      pre.debug_dump
-        |
-          id: #{training_module.id}
-          title: #{training_module.title}
-          name: #{training_module.name}
+h1.govuk-heading-l About this training course
 
+p.govuk-body This training course will give you a thorough understanding of the most important aspects of child development in the early years.
+p.govuk-body
+  |
+    The course has 10 modules.
+    #{@published_modules.count} modules are currently available.
+    You must complete modules 1, 2 and 3 in order.
+
+p.govuk-body Each module should take between 1 and 2 hours to complete.
+p.govuk-body You can pause and restart the training as much as you like.
+p.govuk-body Each module includes opportunities to reflect on your learning and practice.
+p.govuk-body
+  | Some modules will also have:
+  ul.govuk-list.govuk-list--bullet
+    li learning check questions to test your understanding
+    li an end of module quiz
+    li the opportunity to download a personalised certificate of completion
+
+- unless current_user
+  .govuk-grid-row
+    .govuk-grid-column-two-thirds
+      div class='light-grey-box govuk-!-margin-bottom-4'
+        h2.govuk-heading-m Ready to get started?
+        p.govuk-body Enrol on this course and begin the first module. You will need to sign in or create an account before starting a module.
+        = govuk_link_to 'Create an account', new_user_registration_path, class: 'govuk-!-margin-bottom-4 govuk-button'
+        '
+        ' or
+        = govuk_link_to 'sign in', new_user_session_path
+
+.govuk-grid-row
+  .govuk-grid-column-full
+    = govuk_accordion do |accordion|
+      - @published_modules.each.with_index(1).map do |mod, pos|
+        - accordion.section(heading_text: "Module #{pos}: #{mod.title}", summary_text: mod.description) do
+          .gem-c-govspeak= translate_markdown(mod.objective)
+      - accordion.section(heading_text: t('experts.heading'), summary_text: t('experts.summary')) do
+          .gem-c-govspeak= translate_markdown(t('experts.body'))
