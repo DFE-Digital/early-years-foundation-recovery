@@ -2,6 +2,7 @@
 en:
   modules:
     personal-social-and-emotional-development:
+      before-you-start:
       intro:
         heading: Supporting children’s personal, social and emotional development
         body: |
@@ -24,10 +25,6 @@ en:
           The impact of any difficulty in mastering these skills will be seen across all other areas of development. 
           
           As communication and language underpin all other areas of development it is essential that children develop the skills to express themselves and their needs. 
-      before-you-start:
-        heading: What to expect during the training
-        body: |
-          ### Check your learning
       3-1:
         heading: Development of personal, social and emotional skills
         body: |

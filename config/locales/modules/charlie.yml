@@ -7,8 +7,7 @@ en:
         heading: module_intro
         body: intro
       before-you-start:
-        heading: interruption_page
-        body: interruption
+
       1-1:
         heading: sub_module_intro
         body: 3rd module, page 1-1
