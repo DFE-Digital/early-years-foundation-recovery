@@ -53,7 +53,6 @@ div class='govuk-!-margin-top-5'
                   | In progress
                 - else
                   | Not started
-                / = @module_progress.all?(items) ? "Completed" : 'Not started'
           .govuk-accordion__section-summary.govuk-body id="summary-#{submodule_num}"
             | hello
             / - if training_modules[submodule_num.to_i - 1]
@@ -73,6 +72,4 @@ div class='govuk-!-margin-top-5'
                     | Completed
                   - else
                     | Not started
-
-                  / = @module_progress.all?([item]) ? "Completed" : 'Not started'
       - prev_submodule_name = items.first.model.heading
