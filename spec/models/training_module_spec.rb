@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe TrainingModule, type: :model do
+  let(:training_module) { described_class.first }
+
   describe '.load_file' do
     let(:training_module_data) { data_from_file('demo-modules.yml') }
-    let(:training_module) { described_class.first }
 
     it 'loads models from expected path' do
       expect(training_module.title).to eq(training_module_data.values.first['title'])
@@ -27,6 +28,9 @@ RSpec.describe TrainingModule, type: :model do
 
   # collections -------------------------
 
+  # describe '#questionnaires' do
+  # end
+
   # describe '#module_items' do
   # end
 
@@ -42,10 +46,13 @@ RSpec.describe TrainingModule, type: :model do
   # describe '#items_by_topic' do
   # end
 
-  # describe '#module_intros' do
+  # sequence ---------------------------------
+
+  # describe '#interruption_page' do
   # end
 
-  # sequence ---------------------------------
+  # describe '#intro_page' do
+  # end
 
   # describe '#first_content_page' do
   # end

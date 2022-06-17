@@ -30,6 +30,7 @@ module ApplicationHelper
     )
   end
 
+  # @return [String] next content page or course overview
   def link_to_next_module_item(module_item, link_args = { class: 'govuk-button' })
     if module_item.next_item
       link_to 'Next', training_module_content_page_path(module_item.training_module, module_item.next_item), link_args
@@ -38,12 +39,13 @@ module ApplicationHelper
     end
   end
 
-  def link_to_previous_module_item(module_item, link_args = {})
+  # @return [String] previous content page or module overview
+  def link_to_previous_module_item(module_item, link_args = { class: 'govuk-button govuk-button--secondary' })
     link =
       if module_item.previous_item
         training_module_content_page_path(module_item.training_module, module_item.previous_item)
       else
-        course_overview_path
+        training_module_path(module_item.training_module)
       end
     link_to 'Previous', link, link_args
   end

@@ -38,5 +38,6 @@ p.govuk-body
       - @published_modules.each.with_index(1).map do |mod, pos|
         - accordion.section(heading_text: "Module #{pos}: #{mod.title}", summary_text: mod.description) do
           .gem-c-govspeak= translate_markdown(mod.objective)
+
       - accordion.section(heading_text: t('experts.heading'), summary_text: t('experts.summary')) do
           .gem-c-govspeak= translate_markdown(t('experts.body'))

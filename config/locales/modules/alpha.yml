@@ -3,7 +3,7 @@
 en:
   modules:
     alpha:
-      1:
+      intro:
         heading: Module Alpha Introduction
         body: |
           ## Govspeak examples
@@ -92,6 +92,9 @@ en:
 
           [Find out about call charges](/call-charges)
           $C
+
+      # --------------------------------------
+      before-you-start:
 
       # --------------------------------------
       1-1:

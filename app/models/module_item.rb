@@ -21,6 +21,7 @@ class ModuleItem < YamlBase
   MODELS = {
     module_intro: ContentPage,
     sub_module_intro: ContentPage,
+    interruption_page: ContentPage,
     text_page: ContentPage,
     youtube_page: YoutubePage,
     formative_assessment: Questionnaire,
@@ -62,13 +63,13 @@ class ModuleItem < YamlBase
   def debug_summary
     <<~SUMMARY
       id: #{id}
-      module: #{training_module}
-      name: #{name}
+      name: #{training_module}
+      path: #{name}
+      type: #{type}
 
       ---
       previous: #{previous_item&.name}
       next: #{next_item&.name}
-      type: #{type}
 
       ---
       submodule name: #{submodule_name || 'N/A'}

@@ -98,6 +98,18 @@ en:
       She has spent the last 10 years as a nursery manager, ensuring that children
       and their families experience excellent care that is fun and exciting.
 
+  interruption:
+    formative: |
+      ## Check your learning with quizzes
+
+      Throughout this module there are activities to check you understand what you have learned.
+      You will be able to see if you get these questions right or wrong.
+      The scores for these activities are not recorded and they do not count towards the certificate of achievement.
+    summative: |
+      ## End of module test
+
+      Once you have completed all of the topics, there is an end of module
+      test and an opportunity to download a certificate of achievement.
 
   check_email_confirmation:
     heading: Check your email
