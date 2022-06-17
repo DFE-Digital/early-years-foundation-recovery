@@ -8,6 +8,11 @@ class ModuleProgress
 
   attr_reader :user
 
+  def items
+    @mod.items_by_submodule.except(nil).map {|num, items| [num, items]}.to_h
+  end
+
+  # @return [Boolean]
   def all?(items)
     state(:all?, items)
   end
