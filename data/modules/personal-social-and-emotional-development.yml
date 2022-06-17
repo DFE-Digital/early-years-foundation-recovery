@@ -1,6 +1,8 @@
 ---
 personal-social-and-emotional-development:
-  3:
+  before-you-start:
+    type: interruption_page
+  intro:
     type: module_intro
 
   # ----------------------------------------------------------------------------

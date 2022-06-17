@@ -1,8 +1,8 @@
 class TrainingModulesController < ApplicationController
-  before_action :authenticate_registered_user!
+  before_action :authenticate_registered_user!, only: :show
 
   def index
-    @training_modules = TrainingModule.all
+    @published_modules = TrainingModule.where(draft: nil)
   end
 
   def show
