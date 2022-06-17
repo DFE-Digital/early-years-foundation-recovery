@@ -14,24 +14,14 @@
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
     = govuk_details(summary_text: t('check_email_confirmation.summary_text')) do
-      p class="govuk-!-margin-bottom-3"
-        strong #{t('check_email_confirmation.not_recieved.title')}
-      p class="govuk-!-margin-bottom-3"
-        | #{t('check_email_confirmation.not_recieved.text')}
-      p class="govuk-!-margin-bottom-3"
-        = govuk_link_to t('check_email_confirmation.not_recieved.link_text'), new_confirmation_path(@user)
+      p.govuk-heading-s= t('check_email_confirmation.not_recieved.title')
+      p.govuk-body= t('check_email_confirmation.not_recieved.text')
+      p= govuk_link_to t('check_email_confirmation.not_recieved.link_text'), new_confirmation_path(@user)
 
+      p.govuk-heading-s= t('check_email_confirmation.no_access_to_email.title')
+      p.govuk-body= t('check_email_confirmation.no_access_to_email.text')
+      p.govuk-body Please #{govuk_link_to t('check_email_confirmation.no_access_to_email.link_text'), new_registration_path(@user)}.
 
-      p class="govuk-!-margin-bottom-3"
-        strong #{t('check_email_confirmation.no_access_to_email.title')}
-      p class="govuk-!-margin-bottom-3" 
-        | #{t('check_email_confirmation.no_access_to_email.text')}
-      p class="govuk-!-margin-bottom-3"
-        | Please #{govuk_link_to t('check_email_confirmation.no_access_to_email.link_text'), new_registration_path(@user)}
-
-      p class="govuk-!-margin-bottom-3" 
-        strong #{t('check_email_confirmation.diff_problem.title')} 
-      p class="govuk-!-margin-bottom-3"
-        | #{t('check_email_confirmation.diff_problem.text')} 
-      p class="govuk-!-margin-bottom-3"
-        | Please #{govuk_link_to t('check_email_confirmation.diff_problem.link_text'), "#"}
+      p.govuk-heading-s= t('check_email_confirmation.diff_problem.title') 
+      p.govuk-body #{t('check_email_confirmation.diff_problem.text')}
+        #{govuk_link_to t('check_email_confirmation.diff_problem.link_text'), "#"}.

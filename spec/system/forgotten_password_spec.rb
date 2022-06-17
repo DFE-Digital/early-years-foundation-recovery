@@ -7,7 +7,7 @@ RSpec.describe 'User following forgotten password process', type: :system do
 
   context 'when choosing a new password' do
     before do
-      visit "/users/password/edit?reset_password_token=#{token}"
+      visit edit_user_password_path + "?reset_password_token=#{token}"
     end
 
     # Happy path scenario
@@ -19,7 +19,7 @@ RSpec.describe 'User following forgotten password process', type: :system do
         fill_in 'Confirm your password', with: password
         click_on 'Reset password'
 
-        expect(page).to have_current_path('/users/sign_in')
+        expect(page).to have_current_path(new_user_session_path)
           .and have_text('Success')
           .and have_text('Your password has been changed successfully.')
       end
@@ -54,7 +54,7 @@ RSpec.describe 'User following forgotten password process', type: :system do
 
   context 'when entering valid email address' do
     it 'shows "Check email" page' do
-      visit '/users/sign_in'
+      visit new_user_session_path
       click_link 'I have forgotten my password', visible: false
 
       expect(page).to have_text('I have forgotten my password')
@@ -68,13 +68,13 @@ RSpec.describe 'User following forgotten password process', type: :system do
 
   context 'when navigating to reset password page' do
     before do
-      visit '/my-account/check_email_password_reset'
+      visit check_email_password_reset_user_path
     end
 
     it 'provides link to resend the email' do
       click_link 'Send me another email', visible: false
 
-      expect(page).to have_current_path('/users/password/new')
+      expect(page).to have_current_path(new_user_password_path)
     end
 
     # to be changed when link is provided
@@ -85,7 +85,7 @@ RSpec.describe 'User following forgotten password process', type: :system do
 
   context 'when navigating to the "Check email" page' do
     it 'provides back button to sign in page' do
-      visit '/my-account/check_email_password_reset'
+      visit check_email_password_reset_user_path
       click_link 'Back'
 
       expect(page).to have_current_path(new_user_session_path)

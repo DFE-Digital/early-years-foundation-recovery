@@ -2,17 +2,6 @@
 #
 #
 class ModuleItem < YamlBase
-  # @return [Hash] 'Type' to 'View object' mapping
-  MODELS = {
-    module_intro: ContentPage,
-    sub_module_intro: ContentPage,
-    text_page: ContentPage,
-    youtube_page: YoutubePage,
-    formative_assessment: Questionnaire,
-    summetive_assessment: Questionnaire,
-    summetive_assessment_result: QuestionnaireResults,
-  }.freeze
-
   extend YamlFolder
   set_folder 'modules'
 
@@ -29,13 +18,82 @@ class ModuleItem < YamlBase
     data
   end
 
-  # Returns all the module items that belong to a particular topic within a training module
-  scope :where_topic, lambda { |training_module, topic|
-    pattern = /\A(\d+\W){2}#{topic}(?=(\D|$))/ # Start with two number then non-word character pairs (e.g. 2-4- or 13.4.). Can be followed by either a non-digit or end of line
+  # @return [Hash] 'Type' to 'View object' mapping
+  MODELS = {
+    module_intro: ContentPage,
+    sub_module_intro: ContentPage,
+    text_page: ContentPage,
+    youtube_page: YoutubePage,
+    formative_assessment: Questionnaire,
+    summative_assessment: Questionnaire,
+  }.freeze
+
+  # @return [Regexp] 2nd digit if present: 1-[1]-1-1
+  SUBMODULE_PATTERN = %r"\A(?<prefix>\d+\W){1}(?<submodule>\d+)(?=(?<suffix>\D|$))"
+
+  # @return [Regexp] 3rd digit if present: 1-1-[1]-1
+  TOPIC_PATTERN = %r"\A(?<prefix>\d+\W){2}(?<topic>\d+)(?=(?<suffix>\D|$))"
+
+  # @return [Regexp] 4th digit (and optional suffix) if present: 1-1-1-[1a]
+  # PAGE_PATTERN = %r"\A(?<prefix>\d+\W){3}(?<page>\d+)(?=(?<suffix>\D|$))".freeze
+  PAGE_PATTERN = %r"\A(?<prefix>\d+\W){3}(?<page>\d+\D*)$"
+
+  # @return [Array<ModuleItem>] module items of a specific type
+  scope :where_type, lambda { |training_module, type|
+    where(training_module: training_module, type: type)
+  }
+
+  # @return [Array<ModuleItem>] module items within a given module's submodule
+  scope :where_submodule, lambda { |training_module, submodule_name|
+    pattern = %r"\A(\d+\W){1}#{submodule_name}(?=(\D|$))"
     where(training_module: training_module).select { |m| m.name =~ pattern }
   }
 
+  # Start with two number then non-word character pairs (e.g. 2-4- or 13.4.)
+  # Can be followed by either a non-digit or end of line
+  #
+  # @return [Array<ModuleItem>] module items within a given module's topic
+  scope :where_submodule_topic, lambda { |training_module, submodule_name, topic_name|
+    pattern = %r"\A(\d+\W){2}#{topic_name}(?=(\D|$))"
+    where_submodule(training_module, submodule_name).select { |m| m.name =~ pattern }
+  }
+
   # composition ---------------------------------
+
+  # @return [String]
+  def debug_summary
+    <<~SUMMARY
+      id: #{id}
+      module: #{training_module}
+      name: #{name}
+
+      ---
+      previous: #{previous_item&.name}
+      next: #{next_item&.name}
+      type: #{type}
+
+      ---
+      submodule name: #{submodule_name || 'N/A'}
+      topic name: #{topic_name || 'N/A'}
+      page name: #{page_name || 'N/A'}
+
+      ---
+      position in module: #{(position_within_module + 1).ordinalize}
+      position in submodule: #{position_within_submodule ? (position_within_submodule + 1).ordinalize : 'N/A'}
+      position in topic: #{position_within_topic ? (position_within_topic + 1).ordinalize : 'N/A'}
+
+      ---
+      submodule items count: #{number_within_submodule}
+      topic items count: #{number_within_topic}
+    SUMMARY
+  end
+
+  # @return [Hash<Symbol>, nil]
+  def page_number
+    return unless position_within_submodule
+
+    { current: position_within_submodule, total: number_within_submodule }
+  end
 
   # @return [TrainingModule]
   def parent
@@ -44,86 +102,107 @@ class ModuleItem < YamlBase
 
   # @return [ContentPage, YoutubePage, Questionnaire]
   def model
-    klass = MODELS[type.to_sym]
+    klass = MODELS[type.to_sym]    
+    puts 'type'
+    puts klass
+    puts 'type'
     if klass == Questionnaire
       Questionnaire.find_by!(name: name)
     else
       klass.new(attributes)
     end
   end
+
+  # names ---------------------------------
+
+  # @return [String, nil] 2nd digit if present: 1-[1]-1-1
+  def submodule_name
+    matches = name.match(SUBMODULE_PATTERN)
+    matches[:submodule] if matches
+  end
+
+  # @return [String, nil] 3rd digit if present: 1-1-[1]-1
+  def topic_name
+    matches = name.match(TOPIC_PATTERN)
+    matches[:topic] if matches
+  end
+
+  # @return [String, nil] 4th digit (and optional suffix) if present: 1-1-1-[1a]
+  def page_name
+    matches = name.match(PAGE_PATTERN)
+    matches ? matches[:page] : 0
+  end
+
+  # @return [Boolean]
   delegate :valid?, to: :model
 
   # position ---------------------------------
 
-  # @return [Integer] current item position (zero index)
-  def position_within_training_module
-    module_items_in_this_training_module.index(self)
+  # Module intro will be position 0
+  # @return [Integer, nil] current item position (zero index)
+  def position_within_module
+    current_module_items.index(self)
   end
 
-  # @return [Integer] current item position (zero index)
+  # Submodule intro will be position 0
+  # @return [Integer, nil] current item position (zero index)
+  def position_within_submodule
+    current_submodule_items.index(self)
+  end
+
+  # Topic intro will be position 0
+  # @return [Integer, nil] current item position (zero index)
   def position_within_topic
-    self.class.where_topic(training_module, topic).index(self)
+    current_submodule_topic_items.index(self)
+  end
+
+  # counters ---------------------------------
+
+  # @return [Integer] number of submodule items 1-[1]-1-1, (excluding intro)
+  def number_within_submodule
+    if type.eql?('module_intro')
+      0
+    else
+      current_submodule_items.count - 1
+    end
+  end
+
+  # @return [Integer] number of topic items 1-1-[1]-1
+  def number_within_topic
+    current_submodule_topic_items.count
   end
 
   # sequence ---------------------------------
 
-  # @return [ModuleItem]
+  # @return [ModuleItem, nil]
   def previous_item
-    return if position_within_training_module.zero?
+    return if position_within_module.zero?
 
-    module_items_in_this_training_module[position_within_training_module - 1]
+    current_module_items[position_within_module - 1]
   end
 
-  # @return [ModuleItem]
+  # @return [ModuleItem, nil]
   def next_item
-    module_items_in_this_training_module[position_within_training_module + 1]
+    current_module_items[position_within_module + 1]
   end
 
-  # key attribute values ---------------------------------
-
-  #
-  #
-  #   "1", "1-1", "1-1-1", "1-1-1-1a", "1-1-1-1b", "1-1-1-2a", "1-1-1-2b",
-  #   "1-1-1-3a", "1-1-1-3b", "1-1-1-3c", "1-recap", "1-test"
-  #
-  # @see https://docs.rubocop.org/rubocop/cops_lint.html#lintmixedregexpcapturetypes
-  #
-  # @return [Integer] Third digit, if present
-  def topic
-    pattern = /\A(\d+\W){2}(?<topic>\d+)(?=(\D|$))/
-    matches = name.match(pattern)
-    matches[:topic] if matches
-  end
+private
 
   # collections -------------------------
 
-  # @return [Array<ModuleItem>]
-  def module_items_in_this_training_module
-    @module_items_in_this_training_module ||= self.class.where(training_module: training_module).to_a
+  # @return [Array<ModuleItem>] module items in the same module
+  def current_module_items
+    # parent.module_items # alternatively
+    self.class.where(training_module: training_module).to_a
   end
 
-  # # @return [Array<ModuleItem>]
-  # def by_type(type)
-  #   self.class.where(training_module: training_module, type: type).to_a
-  # end
+  # @return [Array<ModuleItem>] module items in the same submodule
+  def current_submodule_items
+    self.class.where_submodule(training_module, submodule_name).to_a
+  end
 
-  # # @return [Array<ModuleItem>] type: text_page
-  # def text_pages
-  #   @text_pages ||= by_type('text_page')
-  # end
-
-  # # @return [Array<ModuleItem>] type: youtube_page
-  # def youtube_pages
-  #   @youtube_pages ||= by_type('youtube_page')
-  # end
-
-  # # @return [Array<ModuleItem>] type: formative_assessment
-  # def formative_assessments
-  #   @formative_assessments ||= by_type('formative_assessment')
-  # end
-
-  # # @return [Array<ModuleItem>] type: sub_module_intro
-  # def sub_modules
-  #   @sub_modules ||= by_type('sub_module_intro')
-  # end
+  # @return [Array<ModuleItem>] module items in the same submodule and topic
+  def current_submodule_topic_items
+    self.class.where_submodule_topic(training_module, submodule_name, topic_name).to_a
+  end
 end

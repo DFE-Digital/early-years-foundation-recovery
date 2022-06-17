@@ -50,6 +50,7 @@ en:
             ofsted_number:
               invalid: This Ofsted number is not recognised.
   phase_banner_html: This is a new service, your %{feedback_link} will help us improve it.
+  page_number: Page %{current} of %{total}
   links:
     change: Change
     save: Save
@@ -83,7 +84,7 @@ en:
   check_email_confirmation:
     heading: Check your email
     body: "We have sent you an email with instructions for how to verify your email address. We sent the email to:"
-    body_two: We have sent you an email with instructions for how to verify your email address. We sent the email to
+    body_two: To continue setting up your training account you must click the link in the email. If you have not recieved the email after a few minutes, please check your spam folder.
     summary_text: Problems with the activation email?
     not_recieved:
       title: I haven’t received the email
@@ -95,7 +96,7 @@ en:
       link_text: create a new account
     diff_problem:
       title: I have a different problem
-      text: For other problems with creating your account or signing in.
+      text: For other problems with creating your account or signing in, please
       link_text: contact us
   check_email_password_reset:
     heading: Check your email
