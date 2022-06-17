@@ -36,18 +36,12 @@
   }
 }
 
-.full-width-container {
-  background-color: #f3f2f1;
-  margin: 0 -9999rem;
-  padding: 0 9999rem;
-  margin-top: -45px;
+.light-grey-box-wide {
+  background: govuk-colour("light-grey");
+  width: 100%
 }
 
-// added so the above code for a full-width-container doesn't make the horizontal scrolling continue forever
-html, body {
-  overflow-x: hidden;
-}
-
-.align-right {
+.float-right {
   float: right;
+  display: block;
 }

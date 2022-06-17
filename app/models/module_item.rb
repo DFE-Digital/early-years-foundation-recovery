@@ -129,8 +129,15 @@ class ModuleItem < YamlBase
     matches ? matches[:page] : 0
   end
 
+  # predicates ---------------------------------
+
   # @return [Boolean]
   delegate :valid?, to: :model
+
+  # @return [Boolean]
+  def topic?
+    page_name.to_i.zero?
+  end
 
   # position ---------------------------------
 

@@ -81,6 +81,17 @@ en:
     label: Password
     remember_me: Remember me
 
+  module_indicator:
+    completed: complete
+    started: in progress
+    not_started: not started
+
+  resume_button:
+    completed: Retake end of module test
+    started: Resume training
+    not_started: Start
+
+
   experts:
     heading: The experts
     summary: This module has been created by 3 early years experts.

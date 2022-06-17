@@ -1,75 +1,44 @@
 = render 'debug'
 
-div class="full-width-container govuk-!-margin-top-0 govuk-!-padding-top-7 govuk-!-padding-bottom-7 govuk-!-margin-bottom-4"
-  h1.govuk-heading-l= @training_module.title
+.govuk-grid-row
+  .govuk-grid-column-full
+    h1.govuk-heading-l= @training_module.title
+    p.govuk-caption-m= @training_module.description
 
-  p= @training_module.description
+    - @module_progress.call_to_action do |state, (mod, page)|
+      = govuk_link_to t(state, scope: 'resume_button'), training_module_content_page_path(mod, page), class: 'govuk-button'
 
-  - if @course_progress.completed?(@training_module)
-    - button_text = "Retake end of module test"
-    / to be updated
-    - button_link = '#'
-  - elsif @course_progress.started?(@training_module)
-    - button_text = "Resume training"
-    - button_link = training_module_content_page_path(@training_module, @module_progress.milestone)
-  - else
-    - button_text ='Start'
-    - button_link = training_module_content_pages_path(@training_module)
-
-  = govuk_button_to button_text, button_link, method: :get
-
-strong class="govuk-tag govuk-!-margin-right-1 govuk-tag--green" #{@training_module.topic_count} topics
+= govuk_tag(text: "#{@training_module.topic_count} topics", colour: 'green')
+'
 = govuk_tag(text: "#{@training_module.duration} hours", colour: 'green')
 
 = render 'wip'
 
-div class='govuk-!-margin-top-5'
-  / = govuk_accordion do |accordion|
-  /   - prev_submodule_name = nil
-  /   - @module_progress.items.each do |submodule_num, items|
-  /     - summary_text = "#{prev_submodule_name} must be completed before you begin this section" unless prev_submodule_name.nil?
-  /     - accordion.section(heading_text: items.first.model.heading, summary_text: summary_text) do
-        
-  /       ul class="govuk-list"
-  /         - items[1..-1].each do |item|
-  /           li
-  /             = govuk_link_to item.model.heading, training_module_content_page_path(item.training_module, item)
-  /             / strong class="govuk-tag align-right" Completed
-  /     - prev_submodule_name = items.first.model.heading
+.govuk-grid-row
+  .govuk-grid-column-full
+      .govuk-accordion data-module="govuk-accordion"
+        - @module_progress.topics_by_submodule.each do |num, heading, status, prev, topics|
 
+          .govuk-accordion__section id="section-#{num}"
+            .govuk-accordion__section-header
+              h2.govuk-accordion__section-heading
+                span.govuk-accordion__section-button aria-controls="section-button-#{num}" aria-expanded="false" id="section-button-#{num}"
+                  = heading
+                  .float-right
+                    = govuk_tag(text: t(status, scope: 'module_indicator'), colour: 'purple')
 
-  .govuk-accordion data-module="govuk-accordion"
-    - training_modules = @training_module.items_by_submodule.except(nil)
-    - training_modules.each do |submodule_num, items|
-      .govuk-accordion__section id="section-#{submodule_num}"
-        .govuk-accordion__section-header
-          h2.govuk-accordion__section-heading
-            span.govuk-accordion__section-button aria-controls="section-button-#{submodule_num}" aria-expanded="false" id="section-button-#{submodule_num}"
-              = items.first.model.heading
-              strong.govuk-tag.govuk-tag--purple.align-right
-                - if @module_progress.all?(items)
-                  | Completed
-                - elsif @module_progress.any?(items)
-                  | In progress
-                - else
-                  | Not started
-          .govuk-accordion__section-summary.govuk-body id="summary-#{submodule_num}"
-            | hello
-            / - if training_modules[submodule_num.to_i - 1]
-            /   | #{training_modules[submodule_num.to_i - 1]&.model.heading} must be completed before you begin this section
-        .govuk-accordion__section-content aria-labelledby="section-content-#{submodule_num}" id="section-content-#{submodule_num}"
-          ul.govuk-list
-            - items[1..-1].each do |item|
-              li
-                - if @module_progress.all?([item])
-                  = govuk_link_to item.model.heading, training_module_content_page_path(item.training_module, item)
-                - else 
-                  = item.model.heading
-                strong.govuk-tag.align-right
-                  - if @module_progress.milestone == item.name
-                    | In progress
-                  - elsif @module_progress.any?([item])
-                    | Completed
-                  - else
-                    | Not started
-      - prev_submodule_name = items.first.model.heading
+              .govuk-accordion__section-summary.govuk-body id="summary-#{num}"
+                - if prev
+                  | #{prev} must be completed before you begin this section
+
+            .govuk-accordion__section-content aria-labelledby="section-content-#{num}" id="section-content-#{num}"
+              ul.govuk-list
+                - topics.each do |mod, item, heading, completed, status|
+                  li
+                    - if completed
+                      = govuk_link_to heading, training_module_content_page_path(mod, item)
+                    - else
+                      = heading
+
+                    .float-right
+                      = govuk_tag(text: t(status, scope: 'module_indicator'), colour: 'blue')

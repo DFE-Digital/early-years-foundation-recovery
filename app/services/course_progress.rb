@@ -62,6 +62,8 @@ class CourseProgress
     end
   end
 
+private
+
   # @param mod [TrainingModule]
   # @return [Boolean] module content has been viewed
   def started?(mod)
@@ -79,8 +81,6 @@ class CourseProgress
 
     training_module_events(mod.name).where_properties(id: mod.module_items.last.name).present?
   end
-
-private
 
   # @param module_id [String] training module name
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]

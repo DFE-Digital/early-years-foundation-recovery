@@ -98,7 +98,7 @@ en:
 
       # --------------------------------------
       1-1:
-        heading: Sub-module intro heading
+        heading: The first submodule
         body: Sub-module intro body
       1-1-1:
         heading: 1-1-1
@@ -116,7 +116,11 @@ en:
         heading: 1-1-4
         body: 4th topic, only page
 
+
       # --------------------------------------
+      1-2:
+        heading: The second submodule
+        body: Second sub module intro
       1-2-1:
         heading: 1-2-1
         body: First page in second submodule
