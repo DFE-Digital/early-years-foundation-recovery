@@ -47,7 +47,13 @@ div class='govuk-!-margin-top-5'
             span.govuk-accordion__section-button aria-controls="section-button-#{submodule_num}" aria-expanded="false" id="section-button-#{submodule_num}"
               = items.first.model.heading
               strong.govuk-tag.govuk-tag--purple.align-right
-                = @module_progress.all?(items) ? "Completed" : 'Not started'
+                - if @module_progress.all?(items)
+                  | Completed
+                - elsif @module_progress.any?(items)
+                  | In progress
+                - else
+                  | Not started
+                / = @module_progress.all?(items) ? "Completed" : 'Not started'
           .govuk-accordion__section-summary.govuk-body id="summary-#{submodule_num}"
             | hello
             / - if training_modules[submodule_num.to_i - 1]
@@ -56,7 +62,17 @@ div class='govuk-!-margin-top-5'
           ul.govuk-list
             - items[1..-1].each do |item|
               li
-                = govuk_link_to item.model.heading, training_module_content_page_path(item.training_module, item)
+                - if @module_progress.all?([item])
+                  = govuk_link_to item.model.heading, training_module_content_page_path(item.training_module, item)
+                - else 
+                  = item.model.heading
                 strong.govuk-tag.align-right
-                  = @module_progress.all?([item]) ? "Completed" : 'Not started'
+                  - if @module_progress.milestone == item.name
+                    | In progress
+                  - elsif @module_progress.any?([item])
+                    | Completed
+                  - else
+                    | Not started
+
+                  / = @module_progress.all?([item]) ? "Completed" : 'Not started'
       - prev_submodule_name = items.first.model.heading
