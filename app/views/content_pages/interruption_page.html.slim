@@ -1,8 +1,15 @@
 = render 'debug'
 
 - content_for :content_page do
-  div style='background: blue'
-    h1= @model.heading
-    .gem-c-govspeak= translate_markdown(@model.body)
+  .interrupt-panel
+    h1 What to expect during the training
+
+    .gem-c-govspeak
+      - unless @model.body
+        = translate_markdown(t('interruption.formative'))
+      - else
+        = translate_markdown(t('interruption.summative', pass_mark: @model.body))
+
+    hr class='govuk-section-break govuk-section-break--l govuk-section-break--visible govuk-!-margin-top-4'
 
 = render 'shared/content_wrap'

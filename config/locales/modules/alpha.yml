@@ -95,9 +95,7 @@ en:
 
       # --------------------------------------
       before-you-start:
-        heading: What to expect during the training
-        body: |
-          ### Check your learning
+        body: 90/100
 
       # --------------------------------------
       1-1:
