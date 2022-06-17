@@ -100,30 +100,16 @@ en:
 
   interruption:
     formative: |
-      Formative no questionnnaire
-
       ## Check your learning with quizzes
 
-      Throughout each module and topic there are activities to check you understand what you have learned. You will be able to see if you get these questions right or wrong. The scores for these activities are not recorded and they do not count towards the certificate of achievement.
-
-      ## Your progress is saved automatically
-
-      Your progress is automatically saved as you move through the module. You can sign out or close the browser at any time without losing your progress. When you next login, you can restart from where you left off.
-
-      ## Get a certificate of achievement
-
-      At the end of this module, you will be able to download a certificate of achievement, showing what you have learned.
-
-      ## Reflect on your learning with practitioner prompts
-
-      You will see practitioner prompts throughout the course. These are intended to:
-
-      - encourage you to reflect on your current practice
-      - introduce you to new strategies
-      - reinforce effective teaching and learning
-      - help you to think about what you have learned
+      Throughout this module there are activities to check you understand what you have learned.
+      You will be able to see if you get these questions right or wrong.
+      The scores for these activities are not recorded and they do not count towards the certificate of achievement.
     summative: |
-      Summative has questionnnaire
+      ## End of module test
+
+      Once you have completed all of the topics, there is an end of module
+      test and an opportunity to download a certificate of achievement.
 
   check_email_confirmation:
     heading: Check your email
