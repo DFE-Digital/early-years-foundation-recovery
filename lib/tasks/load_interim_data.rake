@@ -17,10 +17,11 @@ namespace :db do
       config = YAML::load_file(seed_file)
       config.each do |user_attributes|
         user = User.create!(user_attributes)
-        view_module_page_event('child-development-and-the-eyfs', '1-1', user)
-        view_module_page_event('child-development-and-the-eyfs', '1-recap', user)
+        module_item = ModuleItem.where(training_module: 'child-development-and-the-eyfs').map &:name
+        module_item.each do |page_name|
+          view_module_page_event('child-development-and-the-eyfs', page_name, user)
+        end
       end
     end
   end
 end
-
