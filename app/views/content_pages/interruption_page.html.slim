@@ -3,12 +3,11 @@
 - content_for :content_page do
   .interrupt-panel
     h1 What to expect during the training
-
     .gem-c-govspeak
-      - unless @model.body
-        = translate_markdown(t('interruption.formative'))
+      - if @model.formative?
+        = translate_markdown t('interruption.formative')
       - else
-        = translate_markdown(t('interruption.summative', pass_mark: @model.body))
+        = translate_markdown t('interruption.summative')
 
     hr class='govuk-section-break govuk-section-break--l govuk-section-break--visible govuk-!-margin-top-4'
 

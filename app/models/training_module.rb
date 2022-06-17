@@ -20,6 +20,13 @@ class TrainingModule < YamlBase
 
   # collections -------------------------
 
+  # @return [Array<Questionnaire>]
+  def questionnaires
+    Questionnaire.find_by!(training_module: name)
+  rescue ActiveHash::RecordNotFound
+    []
+  end
+
   # @return [Array<ModuleItem>]
   def module_items
     ModuleItem.where(training_module: name).to_a
@@ -59,21 +66,21 @@ class TrainingModule < YamlBase
     ModuleItem.where_submodule(name, submodule_name)
   end
 
-  # @return [Array<ModuleItem>]
-  def module_intros
-    module_items_by_type('module_intro')
-  end
-
   # sequence ---------------------------------
 
   # @return [ModuleItem]
   def interuption_page
-    module_intros.first.next_item
+    module_items.first
+  end
+
+  # @return [ModuleItem]
+  def intro_page
+    interuption_page.next_item
   end
 
   # Viewing this page determines if the module is "started"
   # @return [ModuleItem]
   def first_content_page
-    interuption_page.next_item
+    intro_page.next_item
   end
 end

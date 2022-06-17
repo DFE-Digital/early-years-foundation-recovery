@@ -100,6 +100,8 @@ en:
 
   interruption:
     formative: |
+      Formative no questionnnaire
+
       ## Check your learning with quizzes
 
       Throughout each module and topic there are activities to check you understand what you have learned. You will be able to see if you get these questions right or wrong. The scores for these activities are not recorded and they do not count towards the certificate of achievement.
@@ -121,7 +123,7 @@ en:
       - reinforce effective teaching and learning
       - help you to think about what you have learned
     summative: |
-      You need: %{pass_mark}
+      Summative has questionnnaire
 
   check_email_confirmation:
     heading: Check your email
