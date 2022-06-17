@@ -3,6 +3,7 @@ class UserController < ApplicationController
                 except: %i[check_email_confirmation check_email_password_reset]
 
   def show
+    track('profile_page')
     user
   end
 
@@ -29,9 +30,10 @@ class UserController < ApplicationController
 
   def update_name
     if user.update(user_params)
-      ahoy.track('name_changed')
+      track('user_name_changed', success: true)
       redirect_to user_path, notice: 'You have saved your details'
     else
+      track('user_name_changed', success: false)
       render :edit_name, status: :unprocessable_entity
     end
   end
@@ -41,38 +43,41 @@ class UserController < ApplicationController
     @minimum_password_length = User.password_length.first
 
     if user.update_with_password(user_password_params)
-      ahoy.track('password_changed')
+      track('user_password_change', success: true)
       bypass_sign_in(user)
       redirect_to user_path, notice: 'Your password has been reset'
     else
-      ahoy.track('password_change_attempt_failed')
+      track('user_password_change', success: false)
       render :edit_password, status: :unprocessable_entity
     end
   end
 
   def update_email
     if user.update(user_params)
-      ahoy.track('email_changed')
+      track('user_email_change', success: true)
       redirect_to user_path, notice: 'You have saved your details'
     else
+      track('user_email_change', success: false)
       render :edit_email, status: :unprocessable_entity
     end
   end
 
   def update_postcode
     if user.update(user_params)
-      ahoy.track('postcode_changed')
+      track('user_postcode_change', success: true)
       redirect_to user_path, notice: 'You have saved your details'
     else
+      track('user_postcode_change', success: false)
       render :edit_postcode, status: :unprocessable_entity
     end
   end
 
   def update_ofsted_number
     if user.update(user_params)
-      ahoy.track('ofsted_number_changed')
+      track('ofsted_number_change', success: true)
       redirect_to user_path, notice: 'You have saved your details'
     else
+      track('ofsted_number_change', success: false)
       render :edit_ofsted_number, status: :unprocessable_entity
     end
   end
