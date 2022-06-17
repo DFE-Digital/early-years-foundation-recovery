@@ -3,9 +3,12 @@
 en:
   modules:
     bravo:
-      1:
+      intro:
         heading: module_intro
         body: intro
+      interruption:
+        heading: interruption_page
+        body: interruption
       # --------------------------------------
       1-1:
         heading: sub_module_intro

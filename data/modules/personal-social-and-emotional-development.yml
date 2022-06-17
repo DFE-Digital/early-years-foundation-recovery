@@ -1,7 +1,9 @@
 ---
 personal-social-and-emotional-development:
-  3:
+  intro:
     type: module_intro
+  interruption:
+    type: interruption_page
 
   # ----------------------------------------------------------------------------
   # Submodule 1

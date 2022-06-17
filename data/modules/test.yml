@@ -2,6 +2,8 @@
 test:
   intro:
     type: module_intro
+  interruption:
+    type: interruption_page
   test:
     type: questionnaire
   formative_assessment:

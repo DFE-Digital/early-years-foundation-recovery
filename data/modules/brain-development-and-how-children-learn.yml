@@ -1,7 +1,9 @@
 ---
 brain-development-and-how-children-learn:
-  2:
+  intro:
     type: module_intro
+  interruption:
+    type: interruption_page
 
   # ----------------------------------------------------------------------------
   # Submodule 1

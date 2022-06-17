@@ -2,7 +2,6 @@ class TrainingModulesController < ApplicationController
   before_action :authenticate_registered_user!, only: :show
 
   def index
-    track('course_overview_page')
     @published_modules = TrainingModule.where(draft: nil)
   end
 

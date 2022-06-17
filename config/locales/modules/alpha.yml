@@ -3,7 +3,7 @@
 en:
   modules:
     alpha:
-      1:
+      intro:
         heading: Module Alpha Introduction
         body: |
           ## Govspeak examples
@@ -92,6 +92,12 @@ en:
 
           [Find out about call charges](/call-charges)
           $C
+
+      # --------------------------------------
+      interruption:
+        heading: What to expect during the training
+        body: |
+          ### Check your learning
 
       # --------------------------------------
       1-1:

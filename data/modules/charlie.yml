@@ -1,7 +1,9 @@
 ---
 charlie:
-  1:
+  intro:
     type: module_intro
+  interruption:
+    type: interruption_page
   1-1:
     type: sub_module_intro
   1-1-1:

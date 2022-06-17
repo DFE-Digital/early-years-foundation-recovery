@@ -2,7 +2,7 @@
 en:
   modules:
     brain-development-and-how-children-learn:
-      2:
+      intro:
         heading: Brain development and how children learn
         body: |
           ![A practitioner doing an activity with two young children](/assets/2-467960262.jpg)
@@ -17,6 +17,10 @@ en:
           Brain development is a long process which can be impacted by both genetic and environmental factors. As an early years practitioner, understanding the developmental patterns and factors that can affect children’s brain development will help you to best support them to grow and learn.
 
           As communication and language will underpin all other areas of development, it is essential that we promote both brain and communication development.
+      interruption:
+        heading: What to expect during the training
+        body: |
+          ### Check your learning
       2-1:
         heading: The developing brain
         body: |

@@ -3,9 +3,12 @@
 en:
   modules:
     charlie:
-      1:
+      intro:
         heading: module_intro
-        body: 3rd module, page 1
+        body: intro
+      interruption:
+        heading: interruption_page
+        body: interruption
       1-1:
         heading: sub_module_intro
         body: 3rd module, page 1-1
