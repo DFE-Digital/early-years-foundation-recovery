@@ -17,6 +17,12 @@ namespace :db do
       config = YAML::load_file(seed_file)
       config.each do |user_attributes|
         user = User.create!(user_attributes)
+        # Generate new random password for each user
+        user.tap do |admin|
+          admin.password = SecureRandom.base64(13)
+        end
+        user.save!
+        # end
         module_item = ModuleItem.where(training_module: 'child-development-and-the-eyfs').map &:name
         module_item.each do |page_name|
           view_module_page_event('child-development-and-the-eyfs', page_name, user)
