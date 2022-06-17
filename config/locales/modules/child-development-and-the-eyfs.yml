@@ -1081,3 +1081,19 @@ en:
 
           See [guidance to provide support](https://www.gov.uk/government/publications/progress-check-at-age-2) when completing the early years foundation stage (EYFS) progress check at age 2.
 
+      1-confidence:
+        heading: Reflect on your learning
+        body: |
+          To help DfE to measure our impact, please answer the following questions. 
+
+          Answers will be anonymous, and we will not know what you individually select.
+
+          You can also give feedback about the training. 
+
+          To what extent do you agree with the following statements:
+      
+      1-end:
+        heading: Thank you
+        body: |
+          If you would like to give us some feedback, you can do that here 
+    

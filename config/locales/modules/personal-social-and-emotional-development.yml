@@ -1281,3 +1281,19 @@ en:
           If you want to receive a certificate of achievement for this module, you need to receive an overall score of at least 70%.
           
           If you do not score 70%, you will be able to see which questions you got wrong. You can repeat the test to improve your score as many times as you want to.
+
+      3-confidence:
+        heading: Reflect on your learning
+        body: |
+          To help DfE to measure our impact, please answer the following questions. 
+
+          Answers will be anonymous, and we will not know what you individually select.
+
+          You can also give feedback about the training. 
+
+          To what extent do you agree with the following statements:
+      
+      3-end:
+        heading: Thank you
+        body: |
+          If you would like to give us some feedback, you can do that here 

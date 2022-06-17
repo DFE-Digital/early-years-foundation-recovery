@@ -414,7 +414,8 @@ personal-social-and-emotional-development:
     questions:
       1_secure_attachment_requirements:
         multi_select: true
-        label: Which of the following do children require when they are developing secure attachments? (Select all answers that apply) 
+        label: |
+          Which of the following do children require when they are developing secure attachments? (Select all answers that apply) 
         assessment_summary: 
         assessment_fail_summary: |
           When children are developing secure attachments they require predictable routines, rules and relationships. 
@@ -543,3 +544,105 @@ personal-social-and-emotional-development:
           2: "False"
         correct_answers:
           - "1" 
+
+  3-confidence-1:
+    content:
+    questions:
+      1_understanding_pse:
+        multi_select: false
+        label:  |
+          This training has improved my understanding of how childrens’ personal, social and emotional skills develop and how they can influence children’s behaviour.
+        assessment_summary: 
+        assessment_fail_summary:
+        answers:
+          1: "Strongly agree"
+          2: "Agree"
+          3: "Neither agree nor disagree"
+          4: "Disagree"
+          5: "Strongly disagree"
+        correct_answers: ["1","2","3","4","5"]
+
+  3-confidence-2:
+    content:
+    questions:
+      1_supporting_pse:
+        multi_select: false
+        label:  |
+          This training has improved my confidence in supporting children to develop personal, social and emotional skills.
+        assessment_summary: 
+        assessment_fail_summary:
+        answers:
+          1: "Strongly agree"
+          2: "Agree"
+          3: "Neither agree nor disagree"
+          4: "Disagree"
+          5: "Strongly disagree"
+        correct_answers: ["1","2","3","4","5"]
+
+  3-confidence-3:
+    content:
+    questions:
+      1_self_regulation_understanding:
+        multi_select: false
+        label:  |
+          This training has improved my understanding of  what self regulation and executive functions are and why they are important.
+        assessment_summary: 
+        assessment_fail_summary:
+        answers:
+          1: "Strongly agree"
+          2: "Agree"
+          3: "Neither agree nor disagree"
+          4: "Disagree"
+          5: "Strongly disagree"
+        correct_answers: ["1","2","3","4","5"]
+
+  3-confidence-4:
+    content:
+    questions:
+      1_self_regulation_supporting:
+        multi_select: false
+        label:  |
+          This training has improved my confidence in supporting children to develop executive function and self regulation skills.
+        assessment_summary: 
+        assessment_fail_summary:
+        answers:
+          1: "Strongly agree"
+          2: "Agree"
+          3: "Neither agree nor disagree"
+          4: "Disagree"
+          5: "Strongly disagree"
+        correct_answers: ["1","2","3","4","5"]
+
+  3-confidence-5:
+    content:
+    questions:
+      1_attachment_theory:
+        multi_select: false
+        label:  |
+          This training has improved my understanding of attachment theory and how secure relationships affect learning and behaviour. 
+        assessment_summary: 
+        assessment_fail_summary:
+        answers:
+          1: "Strongly agree"
+          2: "Agree"
+          3: "Neither agree nor disagree"
+          4: "Disagree"
+          5: "Strongly disagree"
+        correct_answers: ["1","2","3","4","5"]
+
+  3-confidence-6:
+    content:
+    questions:
+      1_secure_relationships:
+        multi_select: false
+        label:  |
+          This training has improved my confidence in supporting children to develop secure relationships.
+        assessment_summary: 
+        assessment_fail_summary:
+        answers:
+          1: "Strongly agree"
+          2: "Agree"
+          3: "Neither agree nor disagree"
+          4: "Disagree"
+          5: "Strongly disagree"
+        correct_answers: ["1","2","3","4","5"]
