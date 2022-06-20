@@ -12,7 +12,12 @@ class Question < OpenStruct
   end
 
   def set_answer(answer:)
+
     if multi_select
+      # puts 'answer.map(&:to_sym) booo'
+      # puts answer
+      # puts questionnaire.inspect
+      # puts 'answer.map(&:to_sym) booo'
       questionnaire.send("#{name}=", answer.map(&:to_sym))
     else
       begin

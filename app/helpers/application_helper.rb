@@ -60,6 +60,14 @@ module ApplicationHelper
     govuk_table(rows: [header, *rows], caption: 'Completed modules', first_cell_is_header: true)
   end
 
+  def link_to_retake_quiz(module_item, link_args = { class: 'govuk-button' })
+    link_to 'Retake quiz', training_modules_path, link_args
+  end
+
+  def link_to_my_learning(module_item, link_args = { class: 'govuk-link, govuk-!-margin-right-4' })
+    link_to 'Go to my Learning', training_modules_path, link_args
+  end
+
   def clear_flash
     flash[:alert] = nil
   end

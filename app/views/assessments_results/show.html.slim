@@ -1,0 +1,35 @@
+h1
+  = @module_item.model.heading
+
+.gem-c-govspeak
+  = translate_markdown(@module_item.model.body)
+  = govuk_notification_banner title_text: "Revisit the module", text: translate_markdown("<div><strong>You scored #{@quiz.percentage_of_answers_correct}%</strong> <p>Unfortunatly you have not scored highly enough to recieve a certificate. </p><div/>") if @quiz.percentage_of_answers_correct < 60
+  = govuk_notification_banner title_text: "Congratulations", text: translate_markdown("<div><strong>You scored #{@quiz.percentage_of_answers_correct}%</strong> <p>Congratulations - you have scored highly enough to recieve a certificate for this module. </p><div/>") if @quiz.percentage_of_answers_correct > 60
+  Congratulations
+= form_with url: '', method: :patch do |f|
+  - @quiz.user_saved_incorrect_answers.each do |questions|
+      - qu = @quiz.questionnaire(name:questions.name, training_module: questions.module)
+      - qu.question_list.each do |question|
+        - question.set_answer(answer: questions.answer)
+        / = qu.send(question.name).present?
+        / = questions.answer[0]
+        / = question.answers
+        = f.govuk_collection_radio_buttons(question.name, question.answers, :first, :last, legend: { text: question.label }) if !question.multi_select
+        = f.govuk_collection_check_boxes(question.name, question.answers,  :first, :last, legend: { text: question.label, size: 'm' }) if question.multi_select
+
+        = render('assessment_banner', questionnaire: qu, question: question, answer: questions.answer) if qu.send(question.name).present?
+.govuk-grid-row
+  .govuk-grid-column-two-thirds-from-desktop
+    = yield :content_page
+
+hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible govuk-!-margin-top-4"
+.govuk-grid-row
+  .govuk-grid-column-one-half
+    = link_to_previous_module_item(@module_item, class: "govuk-button govuk-button--secondary")
+  - if @quiz.percentage_of_answers_correct > 60
+    div class="govuk-grid-column-one-half govuk-!-text-align-right"
+      = link_to_next_module_item(@module_item)
+  - if @quiz.percentage_of_answers_correct < 60
+    div class="govuk-grid-column-one-half govuk-!-text-align-right"
+      = link_to_my_learning(@module_item)
+      = link_to_retake_quiz(@module_item)

@@ -1,14 +1,14 @@
 ---
-end-of-modules-summetive-assessment:
+end-of-modules-summative-assessment:
   1:
     type: module_intro
   1-1:
-    type: summetive_assessment
+    type: summative_assessment
   1-1-1:
-    type: summetive_assessment
+    type: summative_assessment
   1-2:
-    type: summetive_assessment
+    type: summative_assessment
   1-2-1:
-    type: summetive_assessment_result
+    type: summative_assessment_result
   1-2-2:
     type: text_page

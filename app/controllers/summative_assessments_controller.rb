@@ -1,8 +1,9 @@
-class SummetiveAssessmentsController < ApplicationController
-  include QuestionsService
+class SummativeAssessmentsController < ApplicationController
+  include AssessmentQuestions
   before_action :authenticate_registered_user!
 
   def show
+    puts @module_item.inspect
     existing_answers = existing_user_answers.pluck(:question, :answer)
     populate_questionnaire(existing_answers.to_h.symbolize_keys) if existing_answers.present?
   end
@@ -15,15 +16,5 @@ class SummetiveAssessmentsController < ApplicationController
       flash[:alert] = 'Please select an answer'
     end
     render :show, status: :unprocessable_entity
-  end
-
-  def results
-    summative_questions = summative_questions(params['training_module_id'])
-    question_lists = questions_key(summative_questions)
-    user_answers = users_answered_questions(question_lists)
-    d = merge_summative_users_answers(summative_questions, user_answers)
-    # puts 'd.inspect'
-    # puts d.inspect
-    # puts 'd.inspect'
   end
 end

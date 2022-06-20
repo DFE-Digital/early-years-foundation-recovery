@@ -14,10 +14,11 @@ class ApplicationController < ActionController::Base
     case module_item.type
     when 'formative_assessment'
       training_module_formative_assessment_path(training_module, module_item.model)
-    when 'summetive_assessment'
-      training_module_summetive_assessment_path(training_module, module_item.model)
-    when 'summetive_assessment_result'
-      training_module_summetive_assessment_results_path(training_module, module_item.model)
+    when 'summative_assessment'
+      training_module_summative_assessment_path(training_module, module_item.model)
+    when 'assessments_results'
+      puts module_item.inspect
+      training_module_assessments_result_path(training_module, module_item)
     else
       training_module_questionnaire_path(training_module, module_item.model)
     end

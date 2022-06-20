@@ -1,34 +1,7 @@
-module QuestionsService
-  def summative_questions(training_module_id)
-    SummativeQuestionnaire.where(training_module: training_module_id)
-  end
-
-  def questions_key(questions_list)
-    questions_list.map { |u| u.questions.keys[0] }
-  end
-
-  def users_answered_questions(question_lists)
-    current_user.user_answers.not_archived.where(question: question_lists)
-  end
-
-  def merge_summative_users_answers(summative_questions, users_answers)
-    question_populated = []
-    users_answers.map{ |q|
-      module_question = find_question_name(summative_questions, q.question)
-      existing_answers = {:question => q.question, :answer => q.answer }
-      question_populated.push(populate_questionnaire_results(module_question, existing_answers.to_h.symbolize_keys)) if existing_answers.present?
-    }
-
-    puts question_populated
-  end
-
-  def find_question_name(summative_questions, question)
-    summative_questions.select{ |key| key.questions.keys[0].to_s === question.to_s }
-  end
-
+module AssessmentQuestions
   def populate_questionnaire_results(module_question, question_input)
     return if question_input.empty?
-
+    
     questionnaire = Questionnaire.find_by!(name: module_question[0][:name], training_module: module_question[0][:training_module])
     questionnaire.question_list.each do |question|
       answer = [question_input[question.name]].flatten.select(&:present?)
@@ -36,7 +9,8 @@ module QuestionsService
     end
 
     puts questionnaire.inspect
-    questionnaire.submitted = true
+    
+    questionnaire.submitted = true if question_input.answer.present?
   end
 
   def process_questionaire
@@ -85,7 +59,7 @@ module QuestionsService
   end
 
   def existing_user_answers
-    current_user.user_answers.not_archived.where(questionnaire_id: questionnaire.id)
+    current_user.user_answers.not_archived.where(assessments_type:questionnaire.assessments_type, module:questionnaire.training_module, name:questionnaire.name)
   end
 
   def save_answers
@@ -94,6 +68,9 @@ module QuestionsService
       next if answer.empty?
 
       current_user.user_answers.create!(
+        assessments_type: questionnaire.assessments_type,
+        module: questionnaire.training_module,
+        name: questionnaire.name,
         questionnaire_id: questionnaire.id,
         question: question,
         answer: answer,

@@ -26,6 +26,7 @@ class ModuleItem < YamlBase
     youtube_page: YoutubePage,
     formative_assessment: Questionnaire,
     summative_assessment: Questionnaire,
+    assessments_results: AssessmentsResults,
   }.freeze
 
   # @return [Regexp] 2nd digit if present: 1-[1]-1-1
@@ -104,7 +105,7 @@ class ModuleItem < YamlBase
   def model
     klass = MODELS[type.to_sym]    
     puts 'type'
-    puts klass
+    puts type.to_sym
     puts 'type'
     if klass == Questionnaire
       Questionnaire.find_by!(name: name)

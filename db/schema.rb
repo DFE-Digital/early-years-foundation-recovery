@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_19_121105) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_17_020303) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,6 +65,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_121105) do
     t.boolean "archived"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "module"
+    t.string "name"
+    t.string "assessments_type"
     t.index ["questionnaire_id", "user_id"], name: "index_user_answers_on_questionnaire_id_and_user_id"
     t.index ["questionnaire_id"], name: "index_user_answers_on_questionnaire_id"
     t.index ["user_id"], name: "index_user_answers_on_user_id"

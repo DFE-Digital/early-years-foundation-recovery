@@ -4,7 +4,7 @@ h1
 .gem-c-govspeak
   = translate_markdown(@questionnaire.body)
 
-= form_with model: @questionnaire, url: training_module_summetive_assessment_path(@training_module, @questionnaire), method: :patch do |f|
+= form_with model: @questionnaire, url: training_module_summative_assessment_path(@training_module, @questionnaire), method: :patch do |f|
   - @questionnaire.question_list.each do |question|
     = render partial: question.to_partial_path, locals: {f: f}, object: question, as: :question
 
