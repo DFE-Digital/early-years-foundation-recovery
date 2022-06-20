@@ -63,11 +63,11 @@ module ApplicationHelper
   end
 
   def link_to_retake_quiz(module_item, link_args = { class: 'govuk-button' })
-    link_to 'Retake quiz', training_modules_path, link_args
+    link_to 'Retake quiz', training_module_path, link_args
   end
 
   def link_to_my_learning(module_item, link_args = { class: 'govuk-link, govuk-!-margin-right-4' })
-    link_to 'Go to my Learning', training_modules_path, link_args
+    link_to 'Go to my Learning', training_module_path, link_args
   end
 
   def clear_flash

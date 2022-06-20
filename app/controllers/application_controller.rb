@@ -17,7 +17,6 @@ class ApplicationController < ActionController::Base
     when 'summative_assessment'
       training_module_summative_assessment_path(training_module, module_item.model)
     when 'assessments_results'
-      puts module_item.inspect
       training_module_assessments_result_path(training_module, module_item)
     else
       training_module_questionnaire_path(training_module, module_item.model)

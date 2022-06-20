@@ -9,10 +9,6 @@ class AssessmentsResultsController < ApplicationController
     quiz
     module_item
     model_assessment = @module_item.model
-    puts '@module_item.model.inspect'
-    puts model_assessment.heading
-    puts '@module_item.model.inspect'
-    
   end
 
   private

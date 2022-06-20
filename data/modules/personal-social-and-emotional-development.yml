@@ -154,26 +154,27 @@ personal-social-and-emotional-development:
   3-test:
     type: text_page
   3-test-1:
-    type: formative_assessment
+    type: summative_assessment
   3-test-2:
-    type: formative_assessment
+    type: summative_assessment
   3-test-3:
-    type: formative_assessment
+    type: summative_assessment
   3-test-4:
-    type: formative_assessment
+    type: summative_assessment
   3-test-5:
-    type: formative_assessment
+    type: summative_assessment
   3-test-6:
-    type: formative_assessment
+    type: summative_assessment
   3-test-7:
-    type: formative_assessment
+    type: summative_assessment
   3-test-8:
-    type: formative_assessment
+    type: summative_assessment
   3-test-9:
-    type: formative_assessment
+    type: summative_assessment
   3-test-10:
-    type: formative_assessment
-
+    type: summative_assessment
+  3-test-11:
+    type: assessments_results
   # ----------------------------------------------------------------------------
   # Confidence check
   # ----------------------------------------------------------------------------

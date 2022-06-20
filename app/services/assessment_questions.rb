@@ -8,8 +8,6 @@ module AssessmentQuestions
       question.set_answer(answer: answer) if answer.present?
     end
 
-    puts questionnaire.inspect
-    
     questionnaire.submitted = true if question_input.answer.present?
   end
 
@@ -49,6 +47,9 @@ module AssessmentQuestions
 
     questionnaire.question_list.each do |question|
       answer = [question_input[question.name]].flatten.select(&:present?)
+        puts 'question.correct_answers'
+        puts answer
+        puts 'question.correct_answers'
       question.set_answer(answer: answer)
     end
     questionnaire.submitted = true
@@ -66,7 +67,11 @@ module AssessmentQuestions
     questionnaire.questions.each do |question, data|
       answer = Array(questionnaire.send(question))
       next if answer.empty?
-
+      # puts 'data.inspect'
+      puts data.inspect
+      puts flattened_array(data[:correct_answers])
+      puts answer.inspect
+      # puts 'data.inspect'
       current_user.user_answers.create!(
         assessments_type: questionnaire.assessments_type,
         module: questionnaire.training_module,
@@ -74,8 +79,12 @@ module AssessmentQuestions
         questionnaire_id: questionnaire.id,
         question: question,
         answer: answer,
-        correct: answer == data[:correct_answers].map(&:to_sym),
+        correct: answer == flattened_array(data[:correct_answers]),
       )
     end
+  end
+
+  def flattened_array(item)
+    [item].flatten.select(&:present?)
   end
 end

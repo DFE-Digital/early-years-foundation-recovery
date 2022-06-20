@@ -104,10 +104,7 @@ class ModuleItem < YamlBase
 
   # @return [ContentPage, YoutubePage, Questionnaire]
   def model
-    klass = MODELS[type.to_sym]    
-    puts 'type'
-    puts type.to_sym
-    puts 'type'
+    klass = MODELS[type.to_sym]
     if klass == Questionnaire
       Questionnaire.find_by!(name: name)
     else

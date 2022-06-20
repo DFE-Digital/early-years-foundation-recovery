@@ -2,5 +2,5 @@
   p You answered #{answer[0]}
   = question[:answers][answer[0].to_s]
   / = question[:answers].find { |key, values| values.include?(answer) }.first
-  = question.assessment_fail_results_summary
+  = question.assessment_fail_summary
 
