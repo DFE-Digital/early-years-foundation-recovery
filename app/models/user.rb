@@ -57,7 +57,7 @@ class User < ApplicationRecord
   end
 
   def training_module_completed_at(_mod)
-    '4 June 2022'
+    'Date completed: TBD'
   end
 
 private

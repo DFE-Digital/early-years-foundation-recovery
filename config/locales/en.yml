@@ -207,9 +207,3 @@ en:
           Or, it might be a 6 or 7 digit number with no letters at the start.
           If you don't know your setting's Ofsted number, you can look it up on the Ofsted website.
         current_password: We need your current password to confirm your changes.
-
-  certificate:
-    signature: |
-      Debbie Parry
-
-      On behalf of the Department for Education

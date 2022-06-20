@@ -1,3 +1,11 @@
+h1 Get your certificate 
+
+p.govuk_body Congratulations! You have now completed this module.
+
+p.govuk_body If the name or setting on your certificate is not what you expect, you can update them in your profile settings.
+
+hr class='govuk-section-break govuk-section-break--l govuk-section-break--visible govuk-!-margin-top-4'
+
 h3 Certificate of achievement
 h1 = current_user.name 
 p.govuk_body has completed the following course:
@@ -10,6 +18,12 @@ p.govuk_body This course has covered how to:
 
 = translate_markdown(@training_module.criteria)
 
-= translate_markdown(t('certificate.signature'))
+h3 Certified by Department for Education
+
+.govuk-grid-row
+  .govuk-grid-column-one-third-from-desktop
+    = image_tag('department-for-education-certificate.png', width: '320')
 
 = print_button
+
+hr class='govuk-section-break govuk-section-break--l govuk-section-break--visible govuk-!-margin-top-4'
