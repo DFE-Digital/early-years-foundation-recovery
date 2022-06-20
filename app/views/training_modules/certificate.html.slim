@@ -1,0 +1,15 @@
+h3 Certificate of achievement
+h1 = current_user.name 
+p.govuk_body has completed the following course:
+
+h2 = @training_module.title
+
+p.govuk_body= current_user.training_module_completed_at(@training_module)
+
+p.govuk_body This course has covered how to:
+
+= translate_markdown(@training_module.criteria)
+
+= translate_markdown(t('certificate.signature'))
+
+= print_button

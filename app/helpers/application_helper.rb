@@ -56,7 +56,7 @@ module ApplicationHelper
       [
         govuk_link_to(mod.title, training_module_content_pages_path(mod)),
         timestamp.to_date.to_formatted_s(:rfc822),
-        govuk_link_to('View certificate', '#'),
+        govuk_link_to('View certificate', training_module_certificate_path(mod)),
       ]
     end
     govuk_table(rows: [header, *rows], caption: 'Completed modules', first_cell_is_header: true)
