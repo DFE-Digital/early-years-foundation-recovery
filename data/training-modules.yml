@@ -2,7 +2,7 @@
 child-development-and-the-eyfs:
   duration: 1.5
   title: Child development and the EYFS
-  thumbnail: introduction_to_supporting_physical_development
+  thumbnail: 1-thumb-1355279156.jpg
   description: |
     As an early years practitioner, understanding how children develop will enable
     you to meet the needs of all the children in your care.
@@ -26,7 +26,7 @@ brain-development-and-how-children-learn:
   depends_on: child-development-and-the-eyfs
   duration: 2
   title: Brain development and how children learn
-  thumbnail: introduction_to_supporting_physical_development
+  thumbnail: 2-thumb-1203132106.jpg
   description: |
     The rapid changes that happen in the brain in a child's first years lay critical
     foundations for later childhood and adult life.
@@ -49,7 +49,7 @@ personal-social-and-emotional-development:
   depends_on: brain-development-and-how-children-learn
   duration: 3
   title: Supporting children’s personal, social and emotional development
-  thumbnail: introduction_to_supporting_physical_development
+  thumbnail: 3-thumb-1159321535.jpg
   description: |
     In your everyday practice you’ll be helping children to learn, develop and
     rehearse their key personal, social and emotional skills.
