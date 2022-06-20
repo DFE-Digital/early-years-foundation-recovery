@@ -81,14 +81,62 @@ en:
     label: Password
     remember_me: Remember me
 
+  module_indicator:
+    completed: complete
+    started: in progress
+    not_started: not started
+
+  resume_button:
+    completed: Retake end of module test
+    started: Resume training
+    not_started: Start
+
+
+  experts:
+    heading: The experts
+    summary: This module has been created by 3 early years experts.
+    body: |
+      **Debbie Parry** spent several years working as an early years practitioner in
+      private day nurseries, before going on to use her knowledge and experience to teach
+      the practitioners of the future.
+
+      **Melissa Tharm** worked in SEND residential environments for a number of years
+      and now brings her experience and knowledge of training programmes to professionals
+      in the health, care and education sectors.
+
+      **Catherine Mcelroy** has over 20 years' experience working in private day
+      nurseries with children under 5.
+      She has spent the last 10 years as a nursery manager, ensuring that children
+      and their families experience excellent care that is fun and exciting.
+
+  interruption:
+    formative: |
+      ## Check your learning with quizzes
+
+      Throughout this module there are activities to check you understand what you have learned.
+      You will be able to see if you get these questions right or wrong.
+      The scores for these activities are not recorded and they do not count towards the certificate of achievement.
+    summative: |
+      ## End of module test
+
+      Once you have completed all of the topics, there is an end of module
+      test and an opportunity to download a certificate of achievement.
+
   check_email_confirmation:
     heading: Check your email
-    body: "We have sent you an email with instructions for how to verify your email address. We sent the email to:"
-    body_two: To continue setting up your training account you must click the link in the email. If you have not recieved the email after a few minutes, please check your spam folder.
+    body: |
+      We have sent you an email with instructions for how to verify your email address.
+      We sent the email to:
+    body_two: |
+      To continue setting up your training account you must click the link in the email.
+      If you have not recieved the email after a few minutes, please check your spam folder.
     summary_text: Problems with the activation email?
     not_recieved:
       title: I haven’t received the email
-      text: Please wait a few minutes for the email to arrive. If it doesn’t appear in your inbox, please check your spam or junk email folder. lf you still cannot see the email, we can send it again.
+      text: |
+        Please wait a few minutes for the email to arrive.
+        If it doesn’t appear in your inbox, please check your spam or junk email folder.
+        If you still cannot see the email, we can send it again.
       link_text: Send me another email
     no_access_to_email:
       title: I don’t have access to the email address I used to register 
@@ -106,7 +154,10 @@ en:
     summary_text: Problems with the email?
     not_received:
       title: I haven’t received the email
-      text: Please wait a few minutes for the email to arrive. If it doesn’t appear in your inbox, please check your spam or junk email folder. lf you still cannot see the email, we can send it again.
+      text: |
+        Please wait a few minutes for the email to arrive.
+        If it doesn’t appear in your inbox, please check your spam or junk email folder.
+        If you still cannot see the email, we can send it again.
       link_text: Send me another email
     diff_problem:
       title: I have a different problem

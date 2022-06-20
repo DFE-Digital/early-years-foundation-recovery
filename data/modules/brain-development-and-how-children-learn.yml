@@ -1,6 +1,8 @@
 ---
 brain-development-and-how-children-learn:
-  2:
+  before-you-start:
+    type: interruption_page
+  intro:
     type: module_intro
 
   # ----------------------------------------------------------------------------

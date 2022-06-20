@@ -2,7 +2,8 @@
 en:
   modules:
     brain-development-and-how-children-learn:
-      2:
+      before-you-start:
+      intro:
         heading: Brain development and how children learn
         body: |
           ![A practitioner doing an activity with two young children](/assets/2-467960262.jpg)
