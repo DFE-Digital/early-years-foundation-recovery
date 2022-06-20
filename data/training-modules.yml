@@ -2,7 +2,7 @@
 child-development-and-the-eyfs:
   duration: 1.5
   title: Understanding child development and the EYFS
-  thumbnail: introduction_to_supporting_physical_development
+  thumbnail: 1-thumb-1355279156.jpg
   description: |
     As an early years practitioner, understanding child development and the early years foundation stage (EYFS) will enable you to meet the needs of all the children in your care. 
   objective: |
@@ -22,7 +22,7 @@ brain-development-and-how-children-learn:
   depends_on: child-development-and-the-eyfs
   duration: 2
   title: Brain development and how children learn
-  thumbnail: introduction_to_supporting_physical_development
+  thumbnail: 2-thumb-1203132106.jpg
   description: |
     The rapid changes that happen in the brain in a child's first years lay critical foundations for later childhood and adult life. As an early years practitioner, you can play a significant role in encouraging and supporting children’s brain development.
   objective: |
@@ -40,9 +40,9 @@ brain-development-and-how-children-learn:
 
 personal-social-and-emotional-development:
   depends_on: brain-development-and-how-children-learn
-  duration: 3
+  duration: 2
   title: Supporting children’s personal, social and emotional development
-  thumbnail: introduction_to_supporting_physical_development
+  thumbnail: 3-thumb-1159321535.jpg
   description: |
     This module explores how you can best support children to learn, develop and rehearse their key personal, social and emotional skills in your everyday practice.
   objective: |
