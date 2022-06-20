@@ -27,7 +27,7 @@ brain-development-and-how-children-learn:
         label: |
           In which trimester does the baby’s brain triple in weight?
         assessment_summary: |
-          Myelination also occurs during this trimester which is where a fatty substance called myelin begins to coat the neurones.
+          In the third trimester the baby’s brain triples in weight. Myelination also occurs during this trimester which is where a fatty substance called myelin begins to coat the neurones.
         assessment_fail_summary: |
           In the third trimester the baby’s brain triples in weight. Myelination also occurs during this trimester which is where a fatty substance called myelin begins to coat the neurones.
         answers:
@@ -42,7 +42,7 @@ brain-development-and-how-children-learn:
       1_what_during_pregnancy:
         multi_select: false 
         label: |
-          Complete the statement: __________ during pregnancy may lead to premature birth, low birth weight and an underdeveloped brain.
+          Complete the statement: BLANK during pregnancy may lead to premature birth, low birth weight and an underdeveloped brain.
         assessment_summary: |
           Cigarette smoke reduces the amount of oxygen the baby receives and reduces the forming of neurones. This can result in premature birth, low birth weight and an underdeveloped brain.    
         assessment_fail_summary: |
@@ -95,7 +95,7 @@ brain-development-and-how-children-learn:
       1_piaget_stage:
         multi_select: false 
         label: |
-          Complete the statement: Jean Piaget labelled the 0 to 2 year stage of child development the __________ stage.
+          Complete the statement: Jean Piaget labelled the 0 to 2 year stage of child development the BLANK stage.
         assessment_summary: |
           Piaget labelled the 0 to 2 years old stage of development as the sensorimotor stage. In this stage, babies use their senses to explore and grow.
         assessment_fail_summary: |
@@ -271,7 +271,7 @@ brain-development-and-how-children-learn:
           - mastery - opportunities to master tasks or skills and experience success
           - vicarious experiences - opportunities to observe others who are similar to themselves succeeding
           - persuasion - support, praise and encouragement from influential role models in the child’s life 
-          - imagination  - the ability for the child to imagine themselves succeeding"
+          - imagination  - the ability for the child to imagine themselves succeeding
 
         assessment_fail_summary: | 
           Bandura believed that a child’s development of self-efficacy came from 4 potential sources:
@@ -279,7 +279,7 @@ brain-development-and-how-children-learn:
           - mastery - opportunities to master tasks or skills and experience success
           - vicarious experiences - opportunities to observe others who are similar to themselves succeeding
           - persuasion - support, praise and encouragement from influential role models in the child’s life 
-          - imagination  - the ability for the child to imagine themselves succeeding"
+          - imagination  - the ability for the child to imagine themselves succeeding
         answers:
           1: "6"
           2: "7"
