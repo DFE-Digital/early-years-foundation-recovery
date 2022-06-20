@@ -24,46 +24,46 @@ brain-development-and-how-children-learn:
     type: formative_assessment
   2-1-1-3a:
     type: text_page
-  # 2-1-1-3b:
-  #   type: formative_assessment
-  # 2-1-1-3c:
-  #   type: formative assessment
+  2-1-1-3b:
+    type: formative_assessment
+  2-1-1-3c:
+    type: formative_assessment
   2-1-1-4a:
     type: text_page
-  # 2-1-1-4b:
-  #   type: formative_assessment
+  2-1-1-4b:
+    type: formative_assessment
 
   2-1-2:
     type: text_page         # submodule 1 / topic 2
   2-1-2-1a:
     type: text_page
-  # 2-1-2-1b:
-  #   type: formative_assessment
-  # 2-1-2-1c:
-  #   type: formative_assessment
+  2-1-2-1b:
+    type: formative_assessment
+  2-1-2-1c:
+    type: formative_assessment
   2-1-2-2:
     type: text_page
   2-1-2-3a:
     type: text_page
-  # 2-1-2-3b:
-  #   type: formative_assessment
+  2-1-2-3b:
+    type: formative_assessment
 
   2-1-3:
     type: text_page         # submodule 1 / topic 3
   2-1-3-1a:
     type: text_page
-  # 2-1-3-1b:
-  #   type: formative_assessment
+  2-1-3-1b:
+    type: formative_assessment
   2-1-3-2a:
     type: text_page
-      #2-1-3-2b:
-      #type: formative_assessment
+  2-1-3-2b:
+    type: formative_assessment
   2-1-3-3:
     type: text_page
   2-1-3-4a:
     type: text_page
-  # 2-1-3-4b:
-  #   type: formative_assessment
+  2-1-3-4b:
+    type: formative_assessment
   2-1-3-5:
     type: text_page
 
@@ -78,41 +78,41 @@ brain-development-and-how-children-learn:
     type: text_page         # submodule 2 / topic 1
   2-2-1-1a:
     type: text_page
-  # 2-2-1-1b:
-  #   type: formative_assessment
+  2-2-1-1b:
+    type: formative_assessment
   2-2-1-2:
     type: text_page
   2-2-1-3a:
     type: text_page
-  # 2-2-1-3b:
-  #   type: formative_assessment
-  # 2-2-1-3c:
-  #   type: formative_assessment
+  2-2-1-3b:
+    type: formative_assessment
+  2-2-1-3c:
+    type: formative_assessment
 
   2-2-2:
     type: text_page         # submodule 2 / topic 2
   2-2-2-1a:
     type: text_page
-  # 2-2-2-1b:
-  #   type: formative_assessment
+  2-2-2-1b:
+    type: formative_assessment
   2-2-2-2:
     type: text_page
   2-2-2-3:
     type: text_page
   2-2-2-4a:
     type: text_page
-  # 2-2-2-4b:
-  #   type: formative_assessment
+  2-2-2-4b:
+    type: formative_assessment
   2-2-2-5a:
     type: text_page
-  # 2-2-2-5b:
-  #   type: formative_assessment
+  2-2-2-5b:
+    type: formative_assessment
   2-2-2-6:
     type: text_page
   2-2-2-7a:
     type: text_page
-  # 2-2-2-7b:
-  #   type: formative_assessment
+  2-2-2-7b:
+    type: formative_assessment
   2-2-2-8:
     type: text_page
 
@@ -120,30 +120,72 @@ brain-development-and-how-children-learn:
     type: text_page         # submodule 2 / topic 3
   2-2-3-1a:
     type: text_page
-  # 2-2-3-1b:
-  #   type: formative_assessment
+  2-2-3-1b:
+    type: formative_assessment
   2-2-3-2a:
     type: text_page
-  # 2-2-3-2b:
-  #   type: formative_assessment
+  2-2-3-2b:
+    type: formative_assessment
   2-2-3-3:
     type: text_page
   2-2-3-4a:
     type: text_page
-  # 2-2-3-4b:
-  #   type: formative_assessment
+  2-2-3-4b:
+    type: formative_assessment
   2-2-3-5:
     type: text_page
   2-2-3-6a:
     type: text_page
-  # 2-2-3-6b:
-  #   type: formative_assessment
-  # 2-2-3-6c:
-  #   type: formative_assessment
+  2-2-3-6b:
+    type: formative_assessment
+  2-2-3-6c:
+    type: formative_assessment
   2-2-3-7:
     type: text_page
 
   2-recap:
     type: text_page
+
+  # ----------------------------------------------------------------------------
+  # End of module test
+  # ----------------------------------------------------------------------------
+
   2-test:
+    type: text_page
+  2-test-1:
+    type: formative_assessment
+  2-test-2:
+    type: formative_assessment
+  2-test-3:
+    type: formative_assessment
+  2-test-4:
+    type: formative_assessment
+  2-test-5:
+    type: formative_assessment
+  2-test-6:
+    type: formative_assessment
+  2-test-7:
+    type: formative_assessment
+  2-test-8:
+    type: formative_assessment
+  2-test-9:
+    type: formative_assessment
+  2-test-10:
+    type: formative_assessment
+
+  # ----------------------------------------------------------------------------
+  # Confidence check
+  # ----------------------------------------------------------------------------
+
+  2-confidence:
+    type: text_page
+  2-confidence-1:
+    type: formative_assessment  
+  2-confidence-2:
+    type: formative_assessment  
+  2-confidence-3:
+    type: formative_assessment  
+  2-confidence-4:
+    type: formative_assessment  
+  2-end:
     type: text_page
