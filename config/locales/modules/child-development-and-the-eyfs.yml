@@ -2,7 +2,8 @@
 en:
   modules:
     child-development-and-the-eyfs:
-      1:
+      before-you-start:
+      intro:
         heading: Understanding child development and the EYFS
         body: |
           ![Three young children playing on the floor in an early years setting](/assets/1-532263705.jpg)             
@@ -58,12 +59,12 @@ en:
 
           As you reflect upon your practice, remember that no child should be considered as low ability. Every child can make progress as long as the correct support is implemented.
 
-          In the same way that children develop holistically, you should approach the care you provide holistically. You will revisit key messages throughout the course to reinforce how different areas of development overlap.
-
+          In the same way that children develop holistically, you should approach the care you provide holistically. This means paying attention to children's physical, personal, social and emotional wellbeing, as well as cognitive aspects of learning. You will revisit key messages throughout the course to reinforce how different areas of development overlap.
+          
       1-1:
         heading: An informed approach to care and education
         body: |
-          As an early years practitioner, it is crucial that you have a good understanding of children’s development. This will ensure that you are able to offer the high quality care that is required and expected. Parents and carers will trust you and every child will thrive.
+          As an early years practitioner, it is crucial that you have a good understanding of children’s development. This will ensure that you are able to offer the high quality care that is required and expected.
 
           This first section of the module includes:
 
@@ -445,7 +446,7 @@ en:
           
           Your role is to ensure that any potential influences don’t become barriers and to ensure that every child has access to all learning and development opportunities.
 
-          A robust understanding of children’s expected development will further support you to ensure that the choices you make as a practitioner and the quality of the environment that children experience will support children to progress and succeed.
+          A robust understanding of children’s expected development will further support you to ensure that the choices you make as a practitioner, and the quality of the environment and curriculum that children experience, will support children to progress and succeed.
 
       1-1-2-2:
         heading: The impact of the COVID-19 pandemic
@@ -514,7 +515,7 @@ en:
 
           ##Negative impact
           
-          Some children may have had limited opportunities to participate in day trips and travel, and so less chance to experience new environments. They may have spent longer periods of time staying inside their home, possibly with use of a garden.
+          Some children may have had limited opportunities to participate in day trips and travel, and so less chance to experience new environments. They may have spent longer periods of time staying inside their home. 
 
       1-1-2-7:
         heading: The impact of the COVID-19 pandemic on personal, social and emotional development
@@ -597,7 +598,7 @@ en:
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">When was the last time you were able to evaluate your environment and curriculum? </p>
-            <p class="govuk-body">Do you know which areas are most used?  </p>
+            <p class="govuk-body">Do you know which areas of your environment are most used?  </p>
             <p class="govuk-body">Are there areas the children do not use?  </p>
             <p class="govuk-body">Does the environment strike the right balance between social interaction and quiet areas? </p>
             <p class="govuk-body">How do practitioners in your setting make sure children hear and experience a range of conversation, including new and repeated vocabulary? </p>
@@ -641,7 +642,8 @@ en:
             <p class="govuk-body">What planned activities did you use to support and extend children's language?</p>
             <p class="govuk-body">Did the children know the colours of the beakers at the snack table? </p>
             <p class="govuk-body">What was the conversation during hygiene routines? </p>
-            <p class="govuk-body">What new information did you learn about the children in your care?   </p>
+            <p class="govuk-body">What new information did you learn about the children in your care? </p>
+            <p class="govuk-body"> How do you plan to use new vocabulary in planned activities? </p>
 
           </div>
 
@@ -718,7 +720,7 @@ en:
           
           ##Giving children responsibility
           
-          All children, including those with SEND, can be given responsibility appropriate to their individual level of development.
+          All children can be given responsibility appropriate to their individual level of development.
 
           Giving children responsibility will provide them with the opportunity to make mistakes and learn from their responses which will support further resilience. Responsibility will often also offer opportunity for children to be involved in decision making and to develop an understanding of the consequences associated with their actions. This will ensure that every child has received the necessary skills and preparation to adapt to the need for responsibility in later life.
 
@@ -773,7 +775,7 @@ en:
       1-2-1-4:
         heading: Successful enabling environments
         body: |     
-          ![A young child at the top of a slide at a playground.](/assets/1-2-1-4-1316143700.jpg)             
+          ![A young child looking at a display board with lots of things they can touch, like zips, cogs and shapes.](/assets/1-2-1-4-1281242369.jpg)             
           
           Children are constantly learning and require an ambitious curriculum that gives them the opportunity to make sense of their thoughts and experiences and considers their:
 
@@ -796,6 +798,8 @@ en:
 
           ##Access to outdoor environments
           
+          ![A young child at the top of a slide at a playground.](/assets/1-2-1-4-1316143700.jpg)  
+          
           Often children feel a greater sense of freedom outdoors which leads to greater use of imagination.
 
           Outdoor areas will provide children with further opportunity to experience activities to rehearse, explore and develop knowledge and understanding of the world, creativity and imagination. Activities could include mud kitchens, grow your own and caring for animals.
@@ -808,7 +812,7 @@ en:
           
           Children will benefit from the familiarity of routine and an environment that has been well planned to include key features such as dedicated areas for reading, creativity and role play. Children will then need to be challenged through the introduction of new and unfamiliar items, for example those relating to unfamiliar countries or festivals.
 
-          Children will need access to familiar and consistent activities that support them to secure knowledge and skills and then the introduction of challenge or unfamiliar activities and resources to support development.
+          Children will first need access to familiar and consistent activities that support them to secure knowledge and skills. Then, you should introduce challenging or unfamiliar activities and resources to support their development.
 
           ##A secure emotional environment
           Children will thrive in an environment where they:
@@ -964,7 +968,7 @@ en:
           
           Using the 7 areas of learning within the EYFS to shape the learning programmes experienced by children will naturally encourage you to focus on holistic development and promote progress.
 
-          Further focus on the prime areas will put language at the heart of the curriculum and place emphasis on physical development and personal, social and emotional development (PSED).
+          Further focus on the prime areas will put language at the heart of the curriculum and place emphasis on physical development and personal, social and emotional development.
 
           Critically, effective implementation of the EYFS, combined with professional judgement and child development knowledge, will stop gaps from opening or widening any further as it strives to offer benefits to all children.
 
@@ -1021,16 +1025,20 @@ en:
           - not take practitioners away from children for prolonged periods
           - be well planned
           - clearly inform practitioners about next steps
-          
-          A robust understanding of children’s development will be essential to support you to clearly identify the correct opportunities and experiences needed to promote progress without overwhelming children or allowing learning gaps to widen.
 
-          Ongoing formative assessment is crucial to support you to continually identify what knowledge and skills a child has secured, what they are still developing and what their next steps need to be.It is important to avoid focussing on an assumed ticklist of behaviours and qualities and instead concentrate on individual progress in relation to a child’s unique characteristics. This will ensure that support is offered to all children and not just the most advantaged.
+          A robust understanding of children’s development will be essential to support you to clearly identify the correct opportunities and experiences needed to promote progress without overwhelming children or allowing learning gaps to widen.
+          
+          ## Formative assessment
+          
+          Ongoing formative assessment is crucial to support you to continually identify what knowledge and skills a child has secured, what they are still developing and what their next steps need to be. It is important to avoid focussing on an assumed ticklist of behaviours and qualities and instead concentrate on individual progress in relation to a child’s unique characteristics. This will ensure that you offer appropriate support to all children.
 
           Understanding how to adapt the learning environment and to identify potential SEND needs will also be critical. You will be able to continually tailor environments, experiences and activities through successful intent and implementation.
 
           The observation checkpoint prompts found in Development Matters will support you to carry out formative assessment opportunities in relation to each of the areas of learning and identify relevant strengths and areas for development.
 
-          The opportunity for summative assessment at the 2 year check provides you with opportunities to reinforce our full understanding of a child’s level of knowledge and understanding and work in partnership with parents and carers to support development.
+          ##Summative assessment
+
+          The opportunity for summative assessment at the 2 year check provides you with opportunities to reinforce our full understanding of a child’s level of knowledge and understanding, and work in partnership with parents and carers to support development.
 
           While the 2 year check will be a written summary of the child’s progress in the 3 prime areas of the EYFS, you can use your knowledge to give parents and carers a more detailed understanding of their child’s progress.
 
@@ -1074,3 +1082,19 @@ en:
 
           See [guidance to provide support](https://www.gov.uk/government/publications/progress-check-at-age-2) when completing the early years foundation stage (EYFS) progress check at age 2.
 
+      1-confidence:
+        heading: Reflect on your learning
+        body: |
+          To help DfE to measure our impact, please answer the following questions. 
+
+          Answers will be anonymous, and we will not know what you individually select.
+
+          You can also give feedback about the training. 
+
+          To what extent do you agree with the following statements:
+      
+      1-end:
+        heading: Thank you
+        body: |
+          If you would like to give us some feedback, you can do that here 
+    

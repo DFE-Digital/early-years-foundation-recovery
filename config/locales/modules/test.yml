@@ -3,6 +3,10 @@ en:
   modules:
     # name of module
     test:
+      # intro:
+      # before-you-start:
+      # test:
+      # formative_assessment:
 
       # ContentPage
       basic:

@@ -2,20 +2,23 @@
 alpha:
   title: First Training Module
   thumbnail: introduction_to_supporting_physical_development
-  description: This is the first module description
+  description: first module description
+  objective: first module objective
   duration: 3
 
 bravo:
   title: Second Training Module
   thumbnail: introduction_to_supporting_physical_development
-  description: This is the second module description
+  description: second module description
+  objective: second module objective
   depends_on: alpha
   duration: 3
 
 charlie:
   title: Third Training Module
   thumbnail: introduction_to_supporting_physical_development
-  description: This is the third module description
+  description: third module description
+  objective: third module objective
   depends_on: bravo
   duration: 3
 
@@ -23,5 +26,6 @@ delta:
   title: Fourth Training Module
   thumbnail: introduction_to_supporting_physical_development
   description: This module is unpublished and therefore not clickable
+  objective: fourth module objective
   depends_on: bravo
   draft: true

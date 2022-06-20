@@ -2,7 +2,8 @@
 en:
   modules:
     personal-social-and-emotional-development:
-      3:
+      before-you-start:
+      intro:
         heading: Supporting children’s personal, social and emotional development
         body: |
           ![Three children taking part in an activity with building blocks. One child has their hands clasped together and is laughing.](/assets/3-511017078.jpg)          
@@ -226,8 +227,6 @@ en:
       3-1-2-1:
         heading: Strategies to support personal, social and emotional development
         body: |
-          ![A practitioner with two children during snack time. The practitioner is making eye contact with one of the children and listening to what they are saying. ](/assets/3-1-2-1-140080209.jpg)
-          
           In your practice, you should help children to develop key personal, social and emotional skills and qualities, like:
 
           - self-worth - how important they feel
@@ -241,6 +240,8 @@ en:
 
           ##Active listening
           
+          ![A practitioner with two children during snack time. The practitioner is making eye contact with one of the children and listening to what they are saying. ](/assets/3-1-2-1-140080209.jpg)
+
           Children, like adults, feel important when they feel valued. This starts right from birth when a baby cries and receives affection. You can help children feel valued by making eye contact and coming down to the child’s level where possible. This will help them feel listened to and encourage their engagement, which will promote further communication. 
           
           Avoid making children feel rushed. Where appropriate, try to ask questions, as this will help them to build their vocabulary and communication skills.
@@ -273,11 +274,18 @@ en:
           <div class="govuk-inset-text">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
-            <p class="govuk-body">Do you have activities that the children can help themselves to? Do you have a table and floor space that children can bring an activity of their choice to? You can also use this as an opportunity to encourage appropriate responsibility, by encouraging children to put one activity away before selecting another.  </p>
+            <p class="govuk-body"> Consider how you promote choice in your setting. Do you:</p>
+            <ul class="govuk-list govuk-list--bullet">
+            <li>have activities that the children can help themselves to?</li> 
+            <li>have a table and floor space that children can bring an activity of their choice to?</li>
+            </ul>
+            <p class="govuk-body">You can also use this as an opportunity to encourage appropriate responsibility, by encouraging children to put one activity away before selecting another.</p>
             </div>     
 
           ##Reinforce individual characteristics
 
+          ![A practitioner with two children during snack time. The practitioner is making eye contact with one of the children and listening to what they are saying. ](/assets/3-1-2-1-1092434156.jpg)          
+          
           When children see images they can relate to, such as someone who wears glasses like they do, or someone wearing familiar traditional dress, it can help them feel important and valued. 
           
           When children see images of people they can relate to being healthy and successful, they will believe that they can be healthy and successful too. 
@@ -285,9 +293,22 @@ en:
           <div class="govuk-inset-text">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
-            <p class="govuk-body">In your setting, reinforce these ideas through books, display boards, activity materials, role play and educational visits.</p>
+            <p class="govuk-body">In your setting, reinforce these ideas through:</p>
+            <ul class="govuk-list govuk-list--bullet">
+            <li>books</li>
+            <li>display boards</li>
+            <li>activity materials</li>
+            <li>role play</li>
+            <li>educational visits</li>
+            </ul>
             
-            <p class="govuk-body">Long term planning will support you to ensure that a wide range of cultural, religious and diverse themes and activities can be incorporated into the setting. Encouraging the children to bring items from home to create displays on a given theme will support the creation of a diverse environment, and will support children’s confidence and communication skills. </p>
+            <p class="govuk-body">Long term planning will support you to ensure that a wide range of cultural, religious and diverse themes and activities can be incorporated into the setting. 
+            
+            Encouraging the children to bring items from home to create displays on a given theme will support:</p>
+            <ul class="govuk-list govuk-list--bullet">
+            <li>the creation of a diverse environment</li>
+            <li>children’s confidence and communication skills</li>
+            </ul>
             </div>   
 
           ##Social stories
@@ -524,10 +545,6 @@ en:
           If we have low or inconsistent expectations, children will become confused or frustrated. This can then result in challenging or unwanted behaviour. 
           
           The challenge may come when different significant individuals in the child’s life have different expectations. In your setting, policies, procedures and staff development will create and support a consistent environment. Encouraging positive relationships with parents and carers can help build consistency.
-
-          ##Access to outdoor environments
-          
-          We have previously discussed how children can feel a greater sense of freedom outdoors, and how this can allow them to explore their feelings or frustrations before they present as challenging behaviour.
           
           ##Understanding of consequences
           
@@ -659,6 +676,8 @@ en:
       3-2-1-3a:
         heading: Attachment types
         body: |
+          ![A smiling young child holding onto a climbing frame in a playground. An adult is holding them and helping them with the activity.](/assets/3-2-1-3a-1284279233.jpg)          
+          
           ##Secure attachment 
           
           This type of attachment suggests that a warm and loving relationship with a significant adult has been experienced from an early age.
@@ -1260,6 +1279,22 @@ en:
           
           You can review your total score for the test at the end.
           
-          If you want to receive a certificate of achievement for this module, you need to receive an overall score of at least 66%.
+          If you want to receive a certificate of achievement for this module, you need to receive an overall score of at least 70%.
           
-          If you do not score 66%, you will be able to see which questions you got wrong. You can repeat the test to improve your score as many times as you want to.
+          If you do not score 70%, you will be able to see which questions you got wrong. You can repeat the test to improve your score as many times as you want to.
+
+      3-confidence:
+        heading: Reflect on your learning
+        body: |
+          To help DfE to measure our impact, please answer the following questions. 
+
+          Answers will be anonymous, and we will not know what you individually select.
+
+          You can also give feedback about the training. 
+
+          To what extent do you agree with the following statements:
+      
+      3-end:
+        heading: Thank you
+        body: |
+          If you would like to give us some feedback, you can do that here 

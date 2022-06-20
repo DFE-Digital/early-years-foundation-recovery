@@ -15,7 +15,9 @@
 #
 ---
 alpha:
-  1:
+  before-you-start:
+    type: interruption_page
+  intro:
     type: module_intro
 
   # ----------------------------------------------------------------------------
