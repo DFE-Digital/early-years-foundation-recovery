@@ -15,7 +15,7 @@ h2 = @training_module.title
 
 p.govuk_body= current_user.training_module_completed_at(@training_module)
 
-p.govuk_body This course has covered how to:
+p.govuk_body This course has covered:
 
 = translate_markdown(@training_module.criteria)
 
