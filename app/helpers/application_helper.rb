@@ -1,6 +1,6 @@
 module ApplicationHelper
   def navigation
-    govuk_header(service_name: 'Early Years Foundation') do |header|
+    govuk_header(service_name: 'Early Years Foundation', classes: 'noprint') do |header|
       header.navigation_item(text: 'Home', href: root_path)
       if user_signed_in?
         header.navigation_item(text: 'My learning', href: my_learning_path)

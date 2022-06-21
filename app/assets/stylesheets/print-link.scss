@@ -1,3 +1,16 @@
+@media print {
+  @page {
+    size: A4 landscape;
+    margin-top: 0;
+  }
+
+  .noprint {
+    visibility: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
 .gem-c-print-link {
   display: none
 }
@@ -95,7 +108,7 @@
   .gem-c-print-link__button,
   .gem-c-govspeak .mc-toggle-button,
   .govuk-body-s {
-    color: #000
+    color: #000 !important;
   }
 }
 
@@ -103,7 +116,7 @@
   .gem-c-print-link__button,
   .gem-c-govspeak .mc-toggle-button,
   .govuk-body-s {
-    font-family: sans-serif
+    font-family: sans-serif !important;
   }
 }
 
@@ -121,8 +134,8 @@
   .gem-c-print-link__button,
   .gem-c-govspeak .mc-toggle-button,
   .govuk-body-s {
-    font-size: 14pt;
-    line-height: 1.2
+    font-size: 14pt !important;
+    line-height: 1.2 !important;
   }
 }
 
