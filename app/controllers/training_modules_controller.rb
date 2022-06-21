@@ -13,6 +13,6 @@ class TrainingModulesController < ApplicationController
 
     # Render verbose summary of module activity for the current user
     # /modules/alpha?debug=y
-    render partial: 'wip' if params[:debug] && Rails.env.development?
+    render partial: 'wip' if params[:debug] # && Rails.env.development?
   end
 end
