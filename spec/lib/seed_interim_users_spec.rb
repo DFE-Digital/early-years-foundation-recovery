@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'SeedInterimUsers'
+require 'seed_interim_users'
 require 'rake'
 
 RSpec.describe SeedInterimUsers do
