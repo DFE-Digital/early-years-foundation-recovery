@@ -1,4 +1,4 @@
-require "SeedInterimUsers"
+require 'SeedInterimUsers'
 
 namespace :db do
   namespace :seed do
