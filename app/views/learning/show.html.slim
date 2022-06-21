@@ -11,7 +11,7 @@ h1.govuk-heading-l My learning
         - @user.course.current_modules.each do |mod|
           .govuk-grid-column-one-quarter
             .govuk-card__flex-container
-              .govuk-card__flex-item
+              .govuk-card__flex-item id=mod.name
                 .govuk-card.govuk-card--contained.govuk-card--selectable
                   a href=training_module_path(mod)
                   div class='govuk-card__hero govuk-!-margin-bottom-2'
@@ -40,14 +40,14 @@ h1.govuk-heading-l My learning
     - @user.course.upcoming_modules.each do |mod|
       .govuk-grid-column-one-third
         .govuk-card__flex-container
-          .govuk-card__flex-item
+          .govuk-card__flex-item id=mod.name
             .govuk-card.govuk-card__height
               .govuk-card__content
                 h3.govuk-heading-s= mod.title
                 p.govuk-body= mod.description
               .govuk-card__actions
                 - unless mod.draft?
-                  = govuk_link_to 'View more information about this module', training_module_path(mod)
+                  = govuk_link_to 'View more information about this module', course_overview_path
 
 - if @user.course.completed_modules.any?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l

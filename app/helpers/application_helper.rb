@@ -54,7 +54,7 @@ module ApplicationHelper
     header = ['Module name', 'Date completed', 'Actions']
     rows = modules.map do |mod, timestamp|
       [
-        govuk_link_to(mod.title, training_module_content_pages_path(mod)),
+        govuk_link_to(mod.title, training_module_path(mod)),
         timestamp.to_date.to_formatted_s(:rfc822),
         govuk_link_to('View certificate', '#'),
       ]

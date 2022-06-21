@@ -6,50 +6,7 @@ class ModuleProgress
     @mod = mod
   end
 
-  attr_reader :user
-
-  # @yield [Array]
-  def call_to_action
-    if completed?
-      yield(:completed, [@mod, @mod.test_page])
-    elsif started?
-      yield(:started, [@mod, milestone])
-    else
-      yield(:not_started, [@mod, @mod.interruption_page])
-    end
-  end
-
-  # @return [Array]
-  def topics_by_submodule
-    @mod.items_by_submodule.except(nil).map do |num, items|
-      prev_num = (num.to_i - 1).to_s
-
-      prev = @mod
-        .items_by_submodule
-        .select { |sub_num, _| sub_num == prev_num }
-        .map { |_, prev_items| prev_items.first.model.heading }.first
-
-      intro = items.first # submodule intro
-      topics = items[1..].select(&:topic?) # exclude intro or subpages
-
-      [
-        num,                    # submodule digit
-        intro.model.heading,    # intro heading
-        status(topics),         # symbol
-        prev,
-
-        topics.map do |i|
-          [
-            i.training_module,  # training module
-            i,                  # topic module item
-            i.model.heading,    # topic page heading
-            all?([i]),          # boolean
-            status([i]),        # symbol
-          ]
-        end,
-      ]
-    end
-  end
+  attr_reader :user, :mod
 
   # @param mod [TrainingModule]
   # @return [Boolean] module content has been viewed
@@ -65,19 +22,6 @@ class ModuleProgress
   def completed?
     last_page = @mod.module_items.last.name
     training_module_events.where_properties(id: last_page).present?
-  end
-
-  # @return [Symbol]
-  def status(items)
-    if all?(items)
-      :completed
-    elsif any?(items)
-      :started
-    elsif none?(items)
-      :not_started
-    else
-      :unknown
-    end
   end
 
   # @return [Boolean] all items viewed
@@ -102,7 +46,18 @@ class ModuleProgress
     page.properties['id'] if page.present?
   end
 
+  # Name of next unvisited page
+  # @return [String]
+  def resume_page
+    unvisited.first&.name
+  end
+
 private
+
+  # @return [Array<ModuleItem>]
+  def unvisited
+    @unvisited ||= mod.module_items.select { |item| module_item_events(item.name).none? }
+  end
 
   # @param method [Symbol]
   # @param items [Array<ModuleItem>]

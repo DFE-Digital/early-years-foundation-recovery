@@ -82,7 +82,7 @@ en:
     remember_me: Remember me
 
   module_indicator:
-    completed: complete
+    completed: completed
     started: in progress
     not_started: not started
 

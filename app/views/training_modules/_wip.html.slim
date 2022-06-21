@@ -1,18 +1,22 @@
-- if ENV['RAILS_ENV'].eql?('development')
-  pre.debug_dump
-    - @training_module.module_items.each.with_index(1) do |item, pos|
-      |
-        #{pos.ordinalize}:
-      strong
-        |  #{item.name}
-      - if item.topic_name
-        em
-          | ____ (submodule #{item.submodule_name} / topic #{item.topic_name}.#{item.page_name})
-      - elsif item.submodule_name
-        em
-          | ____ (submodule #{item.submodule_name})
-      - if item.page_number && item.page_number[:current] > 0
-        | ____ Submodule
-        = t('page_number', **item.page_number)
-      br
-
+pre.debug_dump
+  - @training_module.module_items.each.with_index(1) do |item, pos|
+    - if current_user.events.where_properties(training_module_id: @training_module.name, id: item.name).any?
+      | [x]
+    - else
+      | [_]
+    '
+    | #{pos.ordinalize}:
+    '
+    strong
+      |  #{item.name}
+      '
+    - if item.topic_name
+      em
+        | (submodule #{item.submodule_name} / topic #{item.topic_name}.#{item.page_name})
+    - elsif item.submodule_name
+      em
+        | (submodule #{item.submodule_name})
+    - if item.page_number && item.page_number[:current] > 0
+      '
+      = t('page_number', **item.page_number)
+    br

@@ -8,7 +8,7 @@ class TrainingModule < YamlBase
 
   # @return [Integer]
   def topic_count
-    items_by_topic.except(nil).count
+    items_by_topic.count
   end
 
   # predicates ---------------------------------
@@ -40,7 +40,7 @@ class TrainingModule < YamlBase
   #
   # @return [{String=>Array<ModuleItem>}]
   def items_by_submodule
-    module_items.group_by(&:submodule_name)
+    @items_by_submodule ||= module_items.group_by(&:submodule_name).except(nil)
   end
 
   # @example
@@ -51,7 +51,9 @@ class TrainingModule < YamlBase
   #
   # @return [{Array<String>=>Array<ModuleItem>}]
   def items_by_topic
-    module_items.group_by { |m| [m.submodule_name, m.topic_name] if m.topic_name }
+    @items_by_topic ||= module_items.group_by { |m|
+      [m.submodule_name, m.topic_name] if m.topic_name
+    }.except(nil)
   end
 
   # @param type [String] text_page, youtube_page...

@@ -7,6 +7,12 @@ class TrainingModulesController < ApplicationController
 
   def show
     @training_module = TrainingModule.find_by(name: params[:id])
-    @module_progress = ModuleProgress.new(user: current_user, mod: @training_module)
+
+    mod_progress = ModuleProgress.new(user: current_user, mod: @training_module)
+    @module_progress = ModuleOverviewDecorator.new(mod_progress)
+
+    # Render verbose summary of module activity for the current user
+    # /modules/alpha?debug=y
+    render partial: 'wip' if params[:debug] && Rails.env.development?
   end
 end
