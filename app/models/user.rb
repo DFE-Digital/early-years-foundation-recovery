@@ -36,6 +36,18 @@ class User < ApplicationRecord
     super
   end
 
+  # @see Devise::Confirmable
+  # send_confirmation_instructions
+  def send_on_create_confirmation_instructions
+    unless @raw_confirmation_token
+      generate_confirmation_token!
+    end
+    
+    opts = pending_reconfirmation? ? { to: unconfirmed_email } : { }
+    send_devise_notification(:activation_instructions, @raw_confirmation_token, opts)
+  end
+
+
   # @return [String]
   def name
     [first_name, last_name].compact.join(' ')

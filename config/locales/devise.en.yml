@@ -28,8 +28,10 @@ en:
       unauthenticated: "You need to sign in or sign up before continuing."
       unconfirmed: "You have to confirm your email address before continuing."
     mailer:
+      activation_instructions:
+        subject: "Activate your GOV.UK early years training account"
       confirmation_instructions:
-        subject: "Activate your GOV.UK child development training account"
+        subject: "Confirm your email"
       reset_password_instructions:
         subject: "Reset password instructions"
       unlock_instructions:
