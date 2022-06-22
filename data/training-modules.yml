@@ -1,17 +1,59 @@
 ---
 child-development-and-the-eyfs:
-  title: 1. Child development and the EYFS
-  thumbnail: introduction_to_supporting_physical_development
-  description: about child-development-and-the-eyfs
+  duration: 1.5
+  title: Understanding child development and the EYFS
+  thumbnail: 1-thumb-1355279156.jpg
+  description: |
+    As an early years practitioner, understanding child development and the early years foundation stage (EYFS) will enable you to meet the needs of all the children in your care. 
+  objective: |
+    This module will encourage you to reflect on why knowledge of child development is important, and help you to effectively implement the EYFS. It also considers the impact of the coronavirus (COVID-19) pandemic on children and their development.
+
+    ###What you’ll learn###
+
+    In this module, you will learn about:
+
+    - the importance of early childhood education and care, including how to implement strategies to provide a positive approach in your setting
+    - the importance of child development knowledge and the various factors that impact on children’s development 
+    - how you can effectively deliver the EYFS
+    - the impact of the COVID-19 pandemic on children's development
+
 
 brain-development-and-how-children-learn:
-  title: 2. Brain development and how children learn
-  thumbnail: introduction_to_supporting_physical_development
-  description: about brain-development-and-how-children-learn
   depends_on: child-development-and-the-eyfs
+  duration: 2
+  title: Brain development and how children learn
+  thumbnail: 2-thumb-1203132106.jpg
+  description: |
+    The rapid changes that happen in the brain in a child's first years lay critical foundations for later childhood and adult life. As an early years practitioner, you can play a significant role in encouraging and supporting children’s brain development.
+  objective: |
+    This module will reinforce your understanding of how a child's brain develops, and help you to consider factors affecting children’s brain development when planning for your setting.
+
+    ###What you’ll learn###
+
+    In this module, you will learn about:
+
+    - the stages of children’s brain development
+    - how brain development impacts on children’s holistic development
+    - the connection between brain development and children’s learning
+    - a range of theories underpinning best practice
+
 
 personal-social-and-emotional-development:
-  title: 3. Supporting children’s personal, social and emotional development
-  thumbnail: introduction_to_supporting_physical_development
-  description: about personal-social-and-emotional-development
   depends_on: brain-development-and-how-children-learn
+  duration: 2
+  title: Supporting children’s personal, social and emotional development
+  thumbnail: 3-thumb-1159321535.jpg
+  description: |
+    This module explores how you can best support children to learn, develop and rehearse their key personal, social and emotional skills in your everyday practice.
+  objective: |
+    It will help you to consider how the development of these skills impact on a child’s overall development.
+
+    ###What you’ll learn###
+
+    In this module, you will learn about: 
+    
+    - the stages of children’s personal, social and emotional development
+    - the importance of effective relationships
+    - how different factors influence children’s behaviour
+    - self-regulation and its role in children's development
+

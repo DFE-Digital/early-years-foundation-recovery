@@ -11,7 +11,7 @@ RSpec.describe 'ExtraRegistrations', type: :request do
 
   describe 'GET /extra_registrations' do
     it 'redirects to first step' do
-      get '/extra_registrations'
+      get '/extra-registrations'
       expect(response).to redirect_to(edit_extra_registration_path(steps.first))
     end
   end
@@ -64,9 +64,9 @@ RSpec.describe 'ExtraRegistrations', type: :request do
         expect { update_user }.to change { user.reload.postcode }.to(user_params[:postcode])
       end
 
-      it 'redirects to root' do
+      it 'redirects to my-learning' do
         update_user
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(my_learning_path)
       end
     end
   end

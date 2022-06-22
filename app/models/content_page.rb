@@ -7,18 +7,31 @@ class ContentPage
 
   validates :heading, :body, presence: true
 
-  # @see config/locales/modules
-  #
+  # @return [Hash, nil]
+  delegate :page_number, to: :module_item
+
   # @return [String]
   def heading
     translate(:heading)
   end
 
+  # @return [String]
   def body
     translate(:body)
   end
 
+  # @return [String]
   def image
     translate(:image)
+  end
+
+  # @return [ModuleItem]
+  def module_item
+    @module_item ||= ModuleItem.find_by(training_module: training_module, name: name)
+  end
+
+  # @return [Boolean]
+  def formative?
+    module_item.parent.questionnaires.none?
   end
 end

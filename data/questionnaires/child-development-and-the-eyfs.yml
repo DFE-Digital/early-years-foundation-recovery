@@ -1,0 +1,86 @@
+---
+child-development-and-the-eyfs:
+  1-confidence-1:
+    content:
+    questions:
+      1_importance_child_development:
+        multi_select: false
+        label:  |
+          This training has improved my understanding of the importance of child development knowledge. 
+        assessment_summary: Thank you
+        assessment_fail_summary: Thank you
+        answers:
+          1: "Strongly agree"
+          2: "Agree"
+          3: "Neither agree nor disagree"
+          4: "Disagree"
+          5: "Strongly disagree"
+        correct_answers: ["1","2","3","4","5"]
+
+  1-confidence-2:
+    content:
+    questions:
+      1_factors_development:
+        multi_select: false
+        label:  |
+          This training has improved my understanding of the different factors that can affect childrens’ development.
+        assessment_summary: Thank you
+        assessment_fail_summary: Thank you
+        answers:
+          1: "Strongly agree"
+          2: "Agree"
+          3: "Neither agree nor disagree"
+          4: "Disagree"
+          5: "Strongly disagree"
+        correct_answers: ["1","2","3","4","5"]
+
+  1-confidence-3:
+    content:
+    questions:
+      1_covid19:
+        multi_select: false
+        label:  |
+          This training has improved my understanding of how the coronavirus (COVID-19) pandemic has impacted on childrens’ development.
+        assessment_summary: 
+        assessment_fail_summary: 
+        answers:
+          1: "Strongly agree"
+          2: "Agree"
+          3: "Neither agree nor disagree"
+          4: "Disagree"
+          5: "Strongly disagree"
+        correct_answers: ["1","2","3","4","5"]
+
+  1-confidence-4:
+    content:
+    questions:
+      1_doing_my_best:
+        multi_select: false
+        label:  |
+          This training has improved my confidence in doing my best to support each child in my care. 
+        assessment_summary: Thank you
+        assessment_fail_summary: Thank you
+        answers:
+          1: "Strongly agree"
+          2: "Agree"
+          3: "Neither agree nor disagree"
+          4: "Disagree"
+          5: "Strongly disagree"
+        correct_answers: ["1","2","3","4","5"]
+
+  1-confidence-5:
+    content:
+    questions:
+      1_delivering_eyfs:
+        multi_select: false
+        label:  |
+          This training has improved my confidence in delivering the EYFS framework in an effective way. 
+        assessment_summary: Thank you
+        assessment_fail_summary: Thank you
+        answers:
+          1: "Strongly agree"
+          2: "Agree"
+          3: "Neither agree nor disagree"
+          4: "Disagree"
+          5: "Strongly disagree"
+        correct_answers: ["1","2","3","4","5"]

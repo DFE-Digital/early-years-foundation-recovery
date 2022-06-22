@@ -1,17 +1,46 @@
+#
+# ContentPage
+#   - module_intro
+#   - sub_module_intro
+#   - text_page
+#
+# YoutubePage
+#   - youtube_page
+#
+# formative_assessment
+#   - Questionnaire
+
+
+#
+#
 ---
 alpha:
-  1:
+  before-you-start:
+    type: interruption_page
+  intro:
     type: module_intro
+
+  # ----------------------------------------------------------------------------
+  # Submodule 1
+  # ----------------------------------------------------------------------------
+
   1-1:
     type: sub_module_intro
   1-1-1:
-    type: text_page # topic?
+    type: text_page # submodule 1 / topic 1
   1-1-2:
-    type: text_page
+    type: text_page # submodule 1 / topic 2
   1-1-3:
-    type: text_page
+    type: text_page # submodule 1 / topic 3
+  1-1-3-1:
+    type: text_page # submodule 1 / topic 3  / topic page
   1-1-4:
     type: formative_assessment
+
+  # ----------------------------------------------------------------------------
+  # Submodule 2
+  # ----------------------------------------------------------------------------
+
   1-2:
     type: sub_module_intro
   1-2-1:

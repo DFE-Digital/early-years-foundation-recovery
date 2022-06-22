@@ -1,5 +1,5 @@
 class SettingsController < ApplicationController
   def show
-    render template: "settings/#{params[:id]}"
+    render params[:id].underscore
   end
 end

@@ -1,5 +1,44 @@
-h1= @training_module.title
+= render 'debug'
 
-p= @training_module.description
+.govuk-grid-row
+  .govuk-grid-column-full
+    h1.govuk-heading-l= @training_module.title
+    p.govuk-caption-m= @training_module.description
 
-= govuk_button_to 'Start', training_module_content_pages_path(@training_module), method: :get
+    - @module_progress.call_to_action do |state, (mod, page)|
+      = govuk_link_to t(state, scope: 'resume_button'), training_module_content_page_path(mod, page), class: 'govuk-button'
+
+= govuk_tag(text: "#{@training_module.topic_count} topics", colour: 'green')
+'
+= govuk_tag(text: "#{@training_module.duration} hours", colour: 'green')
+
+= render 'wip'
+
+.govuk-grid-row
+  .govuk-grid-column-full
+      .govuk-accordion data-module="govuk-accordion"
+        - @module_progress.topics_by_submodule.each do |num, heading, status, prev, topics|
+
+          .govuk-accordion__section id="section-#{num}"
+            .govuk-accordion__section-header
+              h2.govuk-accordion__section-heading
+                span.govuk-accordion__section-button aria-controls="section-button-#{num}" aria-expanded="false" id="section-button-#{num}"
+                  = heading
+                  .float-right
+                    = govuk_tag(text: t(status, scope: 'module_indicator'), colour: 'purple')
+
+              .govuk-accordion__section-summary.govuk-body id="summary-#{num}"
+                - if prev
+                  | #{prev} must be completed before you begin this section
+
+            .govuk-accordion__section-content aria-labelledby="section-content-#{num}" id="section-content-#{num}"
+              ul.govuk-list
+                - topics.each do |mod, item, heading, completed, status|
+                  li
+                    - if completed
+                      = govuk_link_to heading, training_module_content_page_path(mod, item)
+                    - else
+                      = heading
+
+                    .float-right
+                      = govuk_tag(text: t(status, scope: 'module_indicator'), colour: 'blue')

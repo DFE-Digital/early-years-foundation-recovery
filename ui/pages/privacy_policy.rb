@@ -2,7 +2,7 @@
 
 module Pages
   class PrivacyPolicy < Base
-    set_url '/static/privacy_policy'
+    set_url '/privacy-policy'
 
     element :heading, 'h1', text: 'Privacy policy'
   end

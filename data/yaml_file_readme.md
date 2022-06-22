@@ -20,6 +20,9 @@ The data are store in `TrainingModule` instances.
 ```yaml
 training_module_name:
   title: The module name as it will appear on the page
+  thumbnail: Image file name as seen in a card within the my learning page
+  description: The module description
+  depends_on: The name of a dependent module that must be completed before this module can be started
 ```
 
 The training module name can be any string.
@@ -90,10 +93,11 @@ en:
   modules:
     training_module_name:
       page_name:
-        heading: The text that will appear at the top of the page
-        image: optional_path_to_image_file.jpg
+        heading: |
+          The text that will appear at the top of the page
         body: |
           Govspeak flavoured markdown
+        image: optional_path_to_image_file.jpg
 ```
 
 **Note**
@@ -110,13 +114,13 @@ en:
       page_name:
         heading: The text that will appear at the top of the page
         video_title: The title used for the video
-        youtube_url: The url for an embed youtube item
+        youtube_url: The URL for an embed YouTube item
         body: Govspeak markdown that will be placed below the elements above
 ```
 
-To get the embed youtube url, find the video on youtube and select *Share*.
+To get the embed YouTube URL, find the video on YouTube and select *Share*.
 Then click on the *Embed* option.
-The url will be presented as the `src` attribute in the code snippet that appears.
+The URL will be presented as the `src` attribute in the code snippet that appears.
 
 The video will appear between the heading and the body
 

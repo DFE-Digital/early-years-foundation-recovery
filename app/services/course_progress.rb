@@ -1,6 +1,6 @@
 # User's course progress and module state
 #
-class UserTraining
+class CourseProgress
   def initialize(user:)
     @user = user
   end
@@ -64,6 +64,24 @@ class UserTraining
 
 private
 
+  # @param mod [TrainingModule]
+  # @return [Boolean] module content has been viewed
+  def started?(mod)
+    return false if mod.draft?
+
+    training_module_events(mod.name).where_properties(id: mod.first_content_page.name).present?
+  end
+
+  # TODO: this state is currently true if the last page was viewed
+  #
+  # @param mod [TrainingModule]
+  # @return [Boolean]
+  def completed?(mod)
+    return false if mod.draft?
+
+    training_module_events(mod.name).where_properties(id: mod.module_items.last.name).present?
+  end
+
   # @param module_id [String] training module name
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
   def training_module_events(module_id)
@@ -89,24 +107,6 @@ private
     dependent ? completed?(dependent) : true
   end
 
-  # @param mod [TrainingModule]
-  # @return [Boolean] module content has been viewed
-  def started?(mod)
-    return false if mod.draft?
-
-    training_module_events(mod.name).where_properties(id: mod.first_content_page.name).present?
-  end
-
-  # TODO: this state is currently true if the last page was viewed
-  #
-  # @param mod [TrainingModule]
-  # @return [Boolean]
-  def completed?(mod)
-    return false if mod.draft?
-
-    training_module_events(mod.name).where_properties(id: mod.module_items.last.name).present?
-  end
-
   # @param state [Symbol, String] :active, :upcoming or :completed
   # @return [Array<TrainingModule>] training modules by state
   def by_state(state)
@@ -115,7 +115,7 @@ private
     when :upcoming  then training_modules.select { |mod| upcoming?(mod) }
     when :completed then training_modules.select { |mod| completed?(mod) }
     else
-      raise 'UserTraining#by_state can query either :active, :upcoming or :completed modules'
+      raise 'CourseProgress#by_state can query either :active, :upcoming or :completed modules'
     end
   end
 

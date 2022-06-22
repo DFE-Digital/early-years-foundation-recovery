@@ -1,6 +1,7 @@
 @import "govuk-frontend/govuk/all";
 @import "./govspeak";
 @import "./card";
+@import "./interruption";
 
 .debug_dump {
   background: beige;
@@ -33,4 +34,14 @@
   .govuk-button {
     margin: 0;
   }
+}
+
+.light-grey-box-wide {
+  background: govuk-colour("light-grey");
+  width: 100%
+}
+
+.float-right {
+  float: right;
+  display: block;
 }

@@ -12,8 +12,8 @@ describe 'ApplicationHelper', type: :helper do
 
     context 'when module item is last item' do
       it 'returns a link to training modules root' do
-        link = helper.link_to_next_module_item(module_item)
-        expect(link).to include(training_modules_path)
+        link = helper.link_to_next_module_item(last_module_item)
+        expect(link).to include(course_overview_path)
       end
     end
   end
@@ -30,7 +30,7 @@ describe 'ApplicationHelper', type: :helper do
     context 'when module item is first item' do
       it 'returns a link to training modules root' do
         link = helper.link_to_previous_module_item(first_module_item)
-        expect(link).to include(training_modules_path)
+        expect(link).to include(training_module_path(first_module_item.training_module))
       end
     end
   end

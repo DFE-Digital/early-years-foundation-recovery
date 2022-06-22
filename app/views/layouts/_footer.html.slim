@@ -1,16 +1,10 @@
 .govuk-footer__section.govuk-grid-column-one-third
   ul.govuk-footer__list.govuk-footer__list--columns-1
-    li: a.govuk-footer__link href="/static/accessibility_statement"
-      | Accessibility statement
-    li: a.govuk-footer__link href="/settings/cookie_policy"
-      | Cookies
-    li: a.govuk-footer__link href="/static/privacy_policy"
-      | Privacy policy
+    li= link_to "Accessibility statement", static_path('accessibility-statement'), class: "govuk-footer__link"
+    li= link_to "Cookies", setting_path('cookie-policy'), class: "govuk-footer__link"
+    li= link_to "Privacy policy", static_path('privacy-policy'), class: "govuk-footer__link"
 .govuk-footer__section.govuk-grid-column-two-thirds
   ul.govuk-footer__list.govuk-footer__list--columns-1
-    li: a.govuk-footer__link href="/static/terms_and_conditions"
-      | Terms and conditions
-    li: a.govuk-footer__link href="/static/contact"
-      | Contact
-    li: a.govuk-footer__link href="#"
-      | Feedback
+    li= link_to "Terms and conditions", static_path('terms-and-conditions'), class: "govuk-footer__link"
+    li= link_to "Contact", static_path('contact'), class: "govuk-footer__link"
+    li= link_to "Feedback", '#', class: "govuk-footer__link"

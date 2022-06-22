@@ -1,68 +1,104 @@
 ---
 child-development-and-the-eyfs:
-  1:
+  before-you-start:
+    type: interruption_page
+  intro:
     type: module_intro
+
+  # ----------------------------------------------------------------------------
+  # Submodule 1
+  # ----------------------------------------------------------------------------
+
   1-1:
-    type: sub_module_intro
+    type: sub_module_intro  # submodule 1
+
   1-1-1:
-    type: module_intro
+    type: text_page         # submodule 1 / topic 1
   1-1-1-1:
-    type: module_intro
+    type: text_page
   1-1-1-2:
-    type: module_intro
+    type: text_page
   1-1-1-3:
-    type: module_intro
+    type: text_page
   1-1-1-4:
-    type: module_intro
+    type: text_page
   1-1-1-5:
-    type: module_intro
+    type: text_page
   1-1-1-6:
-    type: module_intro
+    type: text_page
   1-1-1-7:
-    type: module_intro
+    type: text_page
+
   1-1-2:
-    type: module_intro
+    type: text_page         # submodule 1 / topic 2
   1-1-2-1:
-    type: module_intro
+    type: text_page
   1-1-2-2:
-    type: module_intro
+    type: text_page
   1-1-2-3:
-    type: module_intro
+    type: text_page
   1-1-2-4:
-    type: module_intro
+    type: text_page
   1-1-2-5:
-    type: module_intro
+    type: text_page
   1-1-2-6:
-    type: module_intro
+    type: text_page
   1-1-2-7:
-    type: module_intro
+    type: text_page
   1-1-2-8:
-    type: module_intro
+    type: text_page
   1-1-2-9:
-    type: module_intro
+    type: text_page
   1-1-2-10:
     type: text_page
+
+  # ----------------------------------------------------------------------------
+  # Submodule 2
+  # ----------------------------------------------------------------------------
+
   1-2:
-    type: module_intro
+    type: sub_module_intro  # submodule 2
+
   1-2-1:
-    type: module_intro
+    type: text_page         # submodule 2 / topic 1
   1-2-1-1:
-    type: module_intro
+    type: text_page
   1-2-1-2:
-    type: module_intro
+    type: text_page
   1-2-1-3:
-    type: module_intro
+    type: text_page
   1-2-1-4:
-    type: module_intro
+    type: text_page
   1-2-1-5:
-    type: module_intro
+    type: text_page
   1-2-1-6:
-    type: module_intro
+    type: text_page
+
   1-2-2:
-    type: module_intro
+    type: text_page         # submodule 2 / topic 2
   1-2-2-1:
-    type: module_intro
+    type: text_page
   1-2-2-2:
-    type: module_intro
+    type: text_page
+
   1-recap:
-    type: module_intro
+    type: text_page
+
+  # ----------------------------------------------------------------------------
+  # Confidence check
+  # ----------------------------------------------------------------------------
+
+  1-confidence:
+    type: text_page
+  1-confidence-1:
+    type: formative_assessment
+  1-confidence-2:
+    type: formative_assessment
+  1-confidence-3:
+    type: formative_assessment
+  1-confidence-4:
+    type: formative_assessment
+  1-confidence-5:
+    type: formative_assessment
+  1-end:
+    type: text_page

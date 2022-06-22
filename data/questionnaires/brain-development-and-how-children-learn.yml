@@ -4,10 +4,13 @@ brain-development-and-how-children-learn:
     content:
     questions:
       1_what_brain_area:
-        multi_select: false
-        label: "Complete the statement: The BLANK is the area of the brain responsible for motor development."
-        assessment_summary: The cerebellum is at the back of your head. This is the area in charge of motor development. It controls balance and coordinates movements. The cerebellum combines the signals from the eyes, ears and muscles with motor commands.
-        assessment_fail_summary: The cerebellum is at the back of your head. This is the area in charge of motor development. It controls balance and coordinates movements. The cerebellum combines the signals from the eyes, ears and muscles with motor commands.
+        multi_select: false 
+        label: |
+          Complete the statement: The BLANK is the area of the brain responsible for motor development.
+        assessment_summary:  |
+          The cerebellum is at the back of your head. This is the area in charge of motor development. It controls balance and coordinates movements. The cerebellum combines the signals from the eyes, ears and muscles with motor commands. 
+        assessment_fail_summary: |
+          The cerebellum is at the back of your head. This is the area in charge of motor development. It controls balance and coordinates movements. The cerebellum combines the signals from the eyes, ears and muscles with motor commands. 
         answers:
           1: Cerebellum
           2: Brain stem
@@ -15,13 +18,18 @@ brain-development-and-how-children-learn:
           4: Temporal lobes
         correct_answers:
           - '1'
+
   2-1-1-2b:
+    content:
     questions:
       1_which_timester:
-        multi_select: false
-        label: In which trimester does the baby’s brain triple in weight?
-        assessment_summary: Myelination also occurs during this trimester which is where a fatty substance called myelin begins to coat the neurones.
-        assessment_fail_summary: In the third trimester the baby’s brain triples in weight. Myelination also occurs during this trimester which is where a fatty substance called myelin begins to coat the neurones.
+        multi_select: false 
+        label: |
+          In which trimester does the baby’s brain triple in weight?
+        assessment_summary: |
+          Myelination also occurs during this trimester which is where a fatty substance called myelin begins to coat the neurones.
+        assessment_fail_summary: |
+          In the third trimester the baby’s brain triples in weight. Myelination also occurs during this trimester which is where a fatty substance called myelin begins to coat the neurones.
         answers:
           1: "Trimester 1"
           2: "Trimester 2"
@@ -32,10 +40,13 @@ brain-development-and-how-children-learn:
     content:
     questions:
       1_what_during_pregnancy:
-        multi_select: false
-        label: "Complete the statement: __________ during pregnancy may lead to premature birth, low birth weight and an underdeveloped brain.  "
-        assessment_summary: Cigarette smoke reduces the amount of oxygen the baby receives and reduces the forming of neurones. This can result in premature birth, low birth weight and an underdeveloped brain.
-        assessment_fail_summary: Cigarette smoke reduces the amount of oxygen the baby receives and reduces the forming of neurones. This can result in premature birth, low birth weight and an underdeveloped brain.
+        multi_select: false 
+        label: |
+          Complete the statement: __________ during pregnancy may lead to premature birth, low birth weight and an underdeveloped brain.
+        assessment_summary: |
+          Cigarette smoke reduces the amount of oxygen the baby receives and reduces the forming of neurones. This can result in premature birth, low birth weight and an underdeveloped brain.    
+        assessment_fail_summary: |
+          Cigarette smoke reduces the amount of oxygen the baby receives and reduces the forming of neurones. This can result in premature birth, low birth weight and an underdeveloped brain.    
         answers:
           1: "Illness"
           2: "Poor diet"
@@ -47,10 +58,13 @@ brain-development-and-how-children-learn:
     content:
     questions:
       1_why_folic_acid:
-        multi_select: false
-        label: Taking folic acid supplements will help to improve which potentially negative influence on a child’s brain development?
-        assessment_summary: When a pregnant mother’s diet does not cover the needs of both mother and baby, it can lead to poor brain development. Taking folic acid supplements and eating foods rich in omega 3 can support the baby’s brain development.
-        assessment_fail_summary: Taking folic acid supplements and eating foods rich in omega 3 can help make sure that a pregnant mother’s diet cover the needs of both mother and baby. This positively supports brain development.
+        multi_select: false 
+        label: |
+          Taking folic acid supplements will help to improve which potentially negative influence on a child’s brain development?
+        assessment_summary: |
+          When a pregnant mother’s diet does not cover the needs of both mother and baby, it can lead to poor brain development. Taking folic acid supplements and eating foods rich in omega 3 can support the baby’s brain development.  
+        assessment_fail_summary: |
+          Taking folic acid supplements and eating foods rich in omega 3 can help make sure that a pregnant mother’s diet cover the needs of both mother and baby. This positively supports brain development.
         answers:
           1: "Illness during pregnancy"
           2: "The mother's diet during pregnancy"
@@ -63,47 +77,53 @@ brain-development-and-how-children-learn:
     questions:
       1_why_talk_to_unborn:
         multi_select: true
-        label: Which of these is a proven benefit of talking to an unborn child? (Select all answers that apply)
-        assessment_summary: Babies will recognise voices they have heard during pregnancy and are more likely to be quickly reassured  by the same voices after birth. This reduces stress and helps them to recognise feelings.
-        assessment_fail_summary: There are no proven links between a child’s sight and being spoken to during pregnancy. Babies will recognise voices they have heard during pregnancy and are more likely to be quickly reassured  by the same voi
+        label: |
+          Which of these is a proven benefit of talking to an unborn child? (Select all answers that apply)
+        assessment_summary: |
+          Babies will recognise voices they have heard during pregnancy and are more likely to be quickly reassured by the same voices after birth. This reduces stress and helps them to recognise feelings. 
+        assessment_fail_summary: |
+          There are no proven links between a child’s sight and being spoken to during pregnancy. Babies will recognise voices they have heard during pregnancy and are more likely to be quickly reassured by the same voice.     
         answers:
           1: "Increased bond between the baby and parent or carer"
-          2: "Reduced stress"
+          2: "Reduced stress"                    
           3: "Improved sight"
           4: "Improved social and emotional development"
         correct_answers: ["1","2","4"]
-          # - "1"
-          # - "2"
-          # - "4"
-    2-1-2-1b:
+  2-1-2-1b:
     content:
     questions:
       1_piaget_stage:
-        multi_select: false
-        label: "Complete the statement: Jean Piaget labelled the 0 to 2 year stage of child development the __________ stage."
-        assessment_summary: Piaget labelled the 0 to 2 years old stage of development as the sensorimotor stage. In this stage, babies use their senses to explore and grow.
-        assessment_fail_summary: Piaget labelled the 0 to 2 years old stage of development as the sensorimotor stage. In this stage, babies use their senses to explore and grow.
+        multi_select: false 
+        label: |
+          Complete the statement: Jean Piaget labelled the 0 to 2 year stage of child development the __________ stage.
+        assessment_summary: |
+          Piaget labelled the 0 to 2 years old stage of development as the sensorimotor stage. In this stage, babies use their senses to explore and grow.
+        assessment_fail_summary: |
+          Piaget labelled the 0 to 2 years old stage of development as the sensorimotor stage. In this stage, babies use their senses to explore and grow.
         answers:
           1: "Gross motor"
-          2: "Fine motor"
+          2: "Fine motor"                    
           3: "Sensorimotor"
           4: "Senses"
-        correct_answers: ["1","2","4"]
+        correct_answers: ["3"]
   2-1-2-1c:
     content:
     questions:
       1_early-years-approach:
         multi_select: true
-        label: Which of these is an early years approach based on the work of Piaget? (Select all that apply)
-        assessment_summary: Piaget did not believe that babies were born with a fixed intellectual ability. Instead, he said that a child’s interaction with their environment, combined with their growing brain would shape their developing their cognitive skills.
-        assessment_fail_summary: "Piaget’s work highlighted the importance of:
-        - a supportive environment to promote development
-        - social interaction and peer teaching to promote development
-        - opportunities to test inconsistencies to promote development
-        Piaget did not believe that babies were born with a fixed intellectual ability. Instead, he said that a child’s interaction with their environment, combined with their growing brain would shape their developing their cognitive skills. "
+        label: |
+          Which of these is an early years approach based on the work of Piaget? (Select all that apply) 
+        assessment_summary: |
+          Piaget did not believe that babies were born with a fixed intellectual ability. Instead, he said that a child’s interaction with their environment, combined with their growing brain would shape their developing their cognitive skills. 
+        assessment_fail_summary: |
+          Piaget’s work highlighted the importance of:
+          - a supportive environment to promote development 
+          - social interaction and peer teaching to promote development 
+          - opportunities to test inconsistencies to promote development 
+          Piaget did not believe that babies were born with a fixed intellectual ability. Instead, he said that a child’s interaction with their environment, combined with their growing brain would shape their developing their cognitive skills. 
         answers:
           1: "The importance of a supportive environment "
-          2: "Promotion of social interaction and peer teaching "
+          2: "Promotion of social interaction and peer teaching "                    
           3: "Opportunities to test inconsistencies in thoughts "
           4: "Fixed intellectual ability"
         correct_answers: ["1","2","3"]
@@ -112,12 +132,15 @@ brain-development-and-how-children-learn:
     questions:
       1_piaget_factors:
         multi_select: true
-        label: Which of these did Piaget consider when testing his theory? (Select all that apply)
-        assessment_summary: Piaget’s research was criticised for not taking into account a wide variety of socio-economic factors within the environment as much of his research was conducted with children of well educated professionals.
-        assessment_fail_summary: Piaget’s research was criticised for not taking into account a wide variety of socio-economic factors within the environment as much of his research was conducted with children of well educated professionals.
+        label: |
+          Which of these did Piaget consider when testing his theory? (Select all that apply)
+        assessment_summary: |
+          Piaget’s research was criticised for not taking into account a wide variety of socio-economic factors within the environment as much of his research was conducted with children of well educated professionals.
+        assessment_fail_summary: |
+          Piaget’s research was criticised for not taking into account a wide variety of socio-economic factors within the environment as much of his research was conducted with children of well educated professionals.
         answers:
           1: "Forming abstract thoughts"
-          2: "Making meaningful relationships"
+          2: "Making meaningful relationships"                    
           3: "Socio-economic factors"
           4: "Sensorimotor actions"
         correct_answers: ["1","2","4"]
@@ -126,12 +149,15 @@ brain-development-and-how-children-learn:
     questions:
       1_child_relaxed:
         multi_select: false
-        label: "Select 1 answer to complete the statement: When a child is relaxed, they are more likely to BLANK. "
-        assessment_summary: When children feel relaxed they are more confident to explore and experiment, which will result in increased learning opportunities.
-        assessment_fail_summary: When children feel relaxed they are more confident to explore and experiment, which will result in increased learning opportunities.
+        label: |
+          Select 1 answer to complete the statement: When a child is relaxed, they are more likely to BLANK. "
+        assessment_summary: |
+          When children feel relaxed they are more confident to explore and experiment, which will result in increased learning opportunities. 
+        assessment_fail_summary: |
+          When children feel relaxed they are more confident to explore and experiment, which will result in increased learning opportunities. 
         answers:
           1: "Experience high levels of stress"
-          2: "Explore and learn"
+          2: "Explore and learn"                    
           3: "Limit social interaction"
         correct_answers: ["2"]
   2-1-3-2b:
@@ -139,9 +165,12 @@ brain-development-and-how-children-learn:
     questions:
       1_healthy_diet:
         multi_select: false
-        label: "Complete the statement: A healthy diet will BLANK. "
-        assessment_summary: When children eat a balanced diet they will have all the necessary nutrients to support growth and development.
-        assessment_fail_summary: When children eat a balanced diet they will have all the necessary nutrients to support growth and development.
+        label: |
+          Complete the statement: A healthy diet will BLANK.
+        assessment_summary: |
+          When children eat a balanced diet they will have all the necessary nutrients to support growth and development.
+        assessment_fail_summary: |
+          When children eat a balanced diet they will have all the necessary nutrients to support growth and development.
         answers:
           1: "Support slower development"
           2: "Increase the need for sleep"
@@ -153,21 +182,27 @@ brain-development-and-how-children-learn:
     questions:
       1_managed_risk:
         multi_select: false
-        label: "True or false? Experiencing managed risk and challenge will increase myelination of neurons and support the development of new skills. "
-        assessment_summary: When children try new things and challenge themselves this promotes myelination of neurons. This improves the speed at which the message travels in the brain, and so improves the skill.
-        assessment_fail_summary: When children try new things and challenge themselves this promotes myelination of neurons. This improves the speed at which the message travels in the brain, and so improves the skill.
+        label: |
+          True or false? Experiencing managed risk and challenge will increase myelination of neurons and support the development of new skills.
+        assessment_summary: |
+          When children try new things and challenge themselves this promotes myelination of neurons. This improves the speed at which the message travels in the brain, and so improves the skill.
+        assessment_fail_summary: |
+          When children try new things and challenge themselves this promotes myelination of neurons. This improves the speed at which the message travels in the brain, and so improves the skill.
         answers:
           1: "True"
-          2: "False"
+          2: "False"                    
         correct_answers: ["1"]
   2-2-1-1b:
     content:
     questions:
       1_cognitive_development_delay:
-        multi_select: false
-        label: What is cognitive development delay?
-        assessment_summary: Remember that this is a very subjective concept that does not take a child’s unique development journey into consideration.
-        assessment_fail_summary: Cognitive development delay is when a child is at a lower level than their expected milestone. Remember that this is a very subjective concept that does not take a child’s unique development journey into consideration.
+        multi_select: false 
+        label: |
+          What is cognitive development delay?
+        assessment_summary: |
+          Remember that this is a very subjective concept that does not take a child’s unique development journey into consideration. 
+        assessment_fail_summary: |
+          Cognitive development delay is when a child is at a lower level than their expected milestone. Remember that this is a very subjective concept that does not take a child’s unique development journey into consideration. 
         answers:
           1: "When a child is exceeding their expected milestone"
           2: "When a child is at a lower level than their expected milestone"
@@ -178,10 +213,13 @@ brain-development-and-how-children-learn:
     content:
     questions:
       1_cognitive_development_accidental:
-        multi_select: false
-        label: True or false? Cognitive development delay can be caused accidentally.
-        assessment_summary: Also known as acquired injury, accidental cause is where cognitive impairment results from an injury affecting the head and brain.
-        assessment_fail_summary: Also known as acquired injury, accidental cause is where cognitive impairment results from an injury affecting the head and brain.
+        multi_select: false 
+        label: |
+          True or false? Cognitive development delay can be caused accidentally.
+        assessment_summary: |
+          Also known as acquired injury, accidental cause is where cognitive impairment results from an injury affecting the head and brain.
+        assessment_fail_summary: |
+          Also known as acquired injury, accidental cause is where cognitive impairment results from an injury affecting the head and brain.
         answers:
           1: "True"
           2: "False"
@@ -191,48 +229,56 @@ brain-development-and-how-children-learn:
     questions:
       1_gaps_in_learning:
         multi_select: true
-        label: Which of the following will ensure that any potential gaps in a child's learning are not able to develop or widen? (Select all answers that apply)
-        assessment_summary: Observation checkpoints, child development knowledge, an enabling environment and high quality practitioner interactions will all be essential in ensuring that any potential gaps in a child’s learning are not able to develop or widen.
-        assessment_fail_summary: Observation checkpoints, child development knowledge, an enabling environment and high quality practitioner interactions will all be essential in ensuring that any potential gaps in a child’s learning are not able to develop or widen.
+        label: |
+          Which of the following will ensure that any potential gaps in a child's learning are not able to develop or widen? (Select all answers that apply)
+        assessment_summary: |
+          Observation checkpoints, child development knowledge, an enabling environment and high quality practitioner interactions will all be essential in ensuring that any potential gaps in a child’s learning are not able to develop or widen.
+        assessment_fail_summary: |
+          Observation checkpoints, child development knowledge, an enabling environment and high quality practitioner interactions will all be essential in ensuring that any potential gaps in a child’s learning are not able to develop or widen.
         answers:
           1: "Early intervention"
           2: "Improved outcomes"
           3: "Increased self-efficacy"
           4: "Informed practice"
         correct_answers: ["1","2","3","4"]
-    2-2-2-1b:
+  2-2-2-1b:
     content:
     questions:
       1_maslow_needs:
-        multi_select: false
-        label: Maslow considered BLANK needs to be the most important.
-        assessment_summary: Maslow believed the most important needs are the physiological needs, the things needed for survival. These needs include food, water, warmth and rest. Maslow concluded that all other levels depended on these needs being met first.
-        assessment_fail_summary: Maslow believed the most important needs are the physiological needs, the things needed for survival. These needs include food, water, warmth and rest. Maslow concluded that all other levels depended on these needs being met first.
+        multi_select: false 
+        label: |
+          Maslow considered BLANK needs to be the most important. 
+        assessment_summary: |
+          Maslow believed the most important needs are the physiological needs, the things needed for survival. These needs include food, water, warmth and rest. Maslow concluded that all other levels depended on these needs being met first.
+        assessment_fail_summary: |
+          Maslow believed the most important needs are the physiological needs, the things needed for survival. These needs include food, water, warmth and rest. Maslow concluded that all other levels depended on these needs being met first.
         answers:
           1: "Safety"
           2: "Physiological"
           3: "Self-esteem"
           4: "Self-actualisation"
         correct_answers: ["2"]
-    2-2-2-4b:
+  2-2-2-4b:
     content:
     questions:
       1_bandura:
-        multi_select: false
-        label: According to Bandura, how many sources potentially influence a child’s development of self-efficacy?
-        assessment_summary: |
-          "That’s right. Bandura believed that a child’s development of self-efficacy came from 4 potential sources:
+        multi_select: false 
+        label: |
+          According to Bandura, how many sources potentially influence a child’s development of self-efficacy? 
+        assessment_summary: | 
+          Bandura believed that a child’s development of self-efficacy came from 4 potential sources:
+
           - mastery - opportunities to master tasks or skills and experience success
           - vicarious experiences - opportunities to observe others who are similar to themselves succeeding
-          - persuasion - support, praise and encouragement from influential role models in the child’s life
+          - persuasion - support, praise and encouragement from influential role models in the child’s life 
           - imagination  - the ability for the child to imagine themselves succeeding"
 
-        assessment_fail_summary: |
-          "That’s right. Bandura believed that a child’s development of self-efficacy came from 4 potential sources:
-
+        assessment_fail_summary: | 
+          Bandura believed that a child’s development of self-efficacy came from 4 potential sources:
+          
           - mastery - opportunities to master tasks or skills and experience success
           - vicarious experiences - opportunities to observe others who are similar to themselves succeeding
-          - persuasion - support, praise and encouragement from influential role models in the child’s life
+          - persuasion - support, praise and encouragement from influential role models in the child’s life 
           - imagination  - the ability for the child to imagine themselves succeeding"
         answers:
           1: "6"
@@ -240,163 +286,192 @@ brain-development-and-how-children-learn:
           3: "4"
           4: "5"
         correct_answers: ["4"]
-    2-2-2-5b:
+  2-2-2-5b:
     content:
     questions:
       1_bruner:
-        multi_select: false
-        label: "Complete the statement: The 3 learning methods included in Bruner’s spiral curriculum are Enactive, BLANK and Symbolic representation."
+        multi_select: false 
+        label: |
+          Complete the statement: The 3 learning methods included in Bruner’s spiral curriculum are Enactive, BLANK and Symbolic representation.
 
-        assessment_summary: |
-          "Bruner’s methods included:
-
+        assessment_summary: | 
+          Bruner’s methods included:
+        
           - Enactive - where children learn through hands on experiences and physical movements
           - Iconic - where children build upon the memories of the hands on experience and reinforce this imagery, so that when they think about an object or concept they can picture a relevant image
-          - Symbolic representation - where children will learn the correct language and symbols to explain their learning"
+          - Symbolic representation - where children will learn the correct language and symbols to explain their learning
 
-        assessment_fail_summary: |
-          "Bruner’s methods included:
-
+        assessment_fail_summary: | 
+          Bruner’s methods included:
+        
           - Enactive - where children learn through hands on experiences and physical movements
           - Iconic - where children build upon the memories of the hands on experience and reinforce this imagery, so that when they think about an object or concept they can picture a relevant image
-          - Symbolic representation - where children will learn the correct language and symbols to explain their learning"
+          - Symbolic representation - where children will learn the correct language and symbols to explain their learning
         answers:
           1: "Ideas"
           2: "Iconic"
           3: "Intellect"
           4: "Individual"
         correct_answers: ["2"]
-    2-2-2-7b:
+  2-2-2-7b:
     content:
     questions:
       1_more_knowledgeable_other:
-        multi_select: false
-        label: "Complete the statement: BLANK is the term used to describe when a more knowledgeable other helps children to acquire new skills and knowledge."
-        assessment_summary: Scaffolding is where support and techniques are used to guide a child’s learning. This help can then be reduced until the child is able to complete the task alone.
-        assessment_fail_summary: Scaffolding is where support and techniques are used to guide a child’s learning. This help can then be reduced until the child is able to complete the task alone.
+        multi_select: false 
+        label: |
+          Complete the statement: BLANK is the term used to describe when a more knowledgeable other helps children to acquire new skills and knowledge.
+        assessment_summary: |
+          Scaffolding is where support and techniques are used to guide a child’s learning. This help can then be reduced until the child is able to complete the task alone. 
+        assessment_fail_summary: |
+          Scaffolding is where support and techniques are used to guide a child’s learning. This help can then be reduced until the child is able to complete the task alone. 
         answers:
           1: "Supporting"
           2: "Staging"
           3: "Scaffolding"
           4: "Structuring"
         correct_answers: ["3"]
-    2-2-3-1b:
+  2-2-3-1b:
     content:
     questions:
       1_nhs_physical_hours:
-        multi_select: false
-        label: "Complete the statement: According to NHS guidance, toddlers aged between 1 to 2 years should be active for BLANK hours a day."
-        assessment_summary: It is important to remember that this is not 3 hours of planned physical activity that involves running, jumping, or climbing, but that it also includes light activity such as standing and walking.
-        assessment_fail_summary: NHS guidance states that children aged 1 to 2 should be active for at least 3 hours per day. It is important to remember that this is not 3 hours of planned physical activity that involves running, jumping, or climbing, but that it also includes light activity such as standing and walking.
+        multi_select: false 
+        label: |
+          Complete the statement: According to NHS guidance, toddlers aged between 1 to 2 years should be active for BLANK hours a day.
+        assessment_summary: |
+          It is important to remember that this is not 3 hours of planned physical activity that involves running, jumping, or climbing, but that it also includes light activity such as standing and walking. 
+        assessment_fail_summary: |
+          NHS guidance states that children aged 1 to 2 should be active for at least 3 hours per day. It is important to remember that this is not 3 hours of planned physical activity that involves running, jumping, or climbing, but that it also includes light activity such as standing and walking. 
         answers:
           1: "1"
           2: "2"
           3: "3"
           4: "4"
         correct_answers: ["3"]
-    2-2-3-2b:
+  2-2-3-2b:
     content:
     questions:
       1_prolonged_inactivity:
-        multi_select: true
-        label: Which of the following influences could result in prolonged periods of inactivity? (Select all answers that apply)
-        assessment_summary: Busier lifestyles leading to increased car use, prolonged periods watching the TV and restricted access to activity during lockdowns could all result in prolonged periods of inactivity.
-        assessment_fail_summary: Busier lifestyles leading to increased car use, prolonged periods watching the TV and restricted access to activity during lockdowns could all result in prolonged periods of inactivity.
+        multi_select: true 
+        label: |
+          Which of the following influences could result in prolonged periods of inactivity? (Select all answers that apply)
+        assessment_summary: |
+          Busier lifestyles leading to increased car use, prolonged periods watching the TV and restricted access to activity during lockdowns could all result in prolonged periods of inactivity.
+        assessment_fail_summary: |
+          Busier lifestyles leading to increased car use, prolonged periods watching the TV and restricted access to activity during lockdowns could all result in prolonged periods of inactivity.
         answers:
           1: "Increased engagement"
           2: "Busier lifestyles"
           3: "Increased access to technology"
           4: "Imposed lockdowns"
         correct_answers: ["2","3","4"]
-    2-2-3-4b:
+  2-2-3-4b:
     content:
     questions:
       1_meal_times:
-        multi_select: true
-        label: Which of these is an example of encouraging children to become involved in meal times? (Select all answers that apply)
+        multi_select: true 
+        label: |
+          Which of these is an example of encouraging children to become involved in meal times? (Select all answers that apply) 
         assessment_summary: |
-          Encouraging children to become involved in food preparation, lay the table and serve themselves will:
-
+          Encouraging children to become involved in food preparation, lay the table and serve themselves will: 
+          
           - promote positive social interaction
-          - develop motor skills
+          - develop motor skills 
           - encourage healthier lifestyles
 
-        assessment_fail_summary: Limiting food options will take away the children’s choice and reduce their involvement.
+          Limiting food options will take away the children’s choice and reduce their involvement.
+        assessment_fail_summary: |
+          Encouraging children to become involved in food preparation, lay the table and serve themselves will: 
+          
+          - promote positive social interaction
+          - develop motor skills 
+          - encourage healthier lifestyles.
+          
+          Limiting food options will take away the children’s choice and reduce their involvement.
         answers:
           1: "Food preparation"
           2: "Limiting food options"
           3: "Laying the table"
           4: "Serving themselves"
         correct_answers: ["1","3","4"]
-    2-2-3-6b:
+  2-2-3-6b:
     content:
     questions:
       1_relationships_observe_experience:
-        multi_select: true
-        label: Which of these relationships will a child observe and experience in your setting? (Select all answers that apply)
-        assessment_summary: Practitioner to practitioner, practitioner to parent, and peer to peer interaction will be influential when children are learning about positive relationships. Children may occasionally see parents interact with each other but this will not be a main influence when children are learning about positive relationships.
-        assessment_fail_summary: Practitioner to practitioner, practitioner to parent, and peer to peer interaction will be influential when children are learning about positive relationships. Children may occasionally see parents interact with each other but this will not be a main influence when children are learning about positive relationships.
+        multi_select: true 
+        label: |
+          Which of these relationships will a child observe and experience in your setting? (Select all answers that apply)
+        assessment_summary: |
+          Practitioner to practitioner, practitioner to parent, and peer to peer interaction will be influential when children are learning about positive relationships. Children may occasionally see parents interact with each other but this will not be a main influence when children are learning about positive relationships.
+        assessment_fail_summary: |
+          Practitioner to practitioner, practitioner to parent, and peer to peer interaction will be influential when children are learning about positive relationships. Children may occasionally see parents interact with each other but this will not be a main influence when children are learning about positive relationships.
         answers:
           1: "Practitioner to practitioner"
           2: "Practitioner to parent"
           3: "Parent to parent"
           4: "Peer to peer"
-        correct_answers: ["1","2","4"]
-    2-2-3-6c:
+        correct_answers: ["1","2","4"]  
+  2-2-3-6c:
     content:
     questions:
       1_test_understanding_relationships:
-        multi_select: false
-        label: True or false? Children need opportunities to test their understanding of the relationships they have experienced.
-        assessment_summary: Following high quality adult interaction, children will then benefit from opportunities to test their understanding of the relationships they have experienced.
-        assessment_fail_summary: Following high quality adult interaction, children will then benefit from opportunities to test their understanding of the relationships they have experienced.
+        multi_select: false 
+        label: |
+          True or false? Children need opportunities to test their understanding of the relationships they have experienced. 
+        assessment_summary: |
+          Following high quality adult interaction, children will then benefit from opportunities to test their understanding of the relationships they have experienced.
+        assessment_fail_summary: |
+          Following high quality adult interaction, children will then benefit from opportunities to test their understanding of the relationships they have experienced.
         answers:
           1: "True"
           2: "False"
-        correct_answers: ["1"]
-
+        correct_answers: ["1"]  
+    
 #END-OF-MODULE-TEST
 
-    2-test-1:
+  2-test-1:
     content:
     questions:
       1_brain_eyes:
-        multi_select: false
-        label: "Complete the statement: The part of the brain that makes sense of the information that comes from our eyes is known as the BLANK"
-        assessment_summary:
-        assessment_fail_summary: The occipital lobes are the visual processing area of the brain. You may want to revisit the section on parts of the brain (LINK TO 2.1.1.1).
+        multi_select: false 
+        label: |
+          Complete the statement: The part of the brain that makes sense of the information that comes from our eyes is known as the BLANK
+        assessment_summary: 
+        assessment_fail_summary: |
+          The occipital lobes are the visual processing area of the brain. You may want to revisit the section on parts of the brain (LINK TO 2.1.1.1).
         answers:
           1: "Occipital lobes"
           2: "Parietal lobes"
           3: "Cerebellum"
           4: "Brain stem"
-        correct_answers: ["1"]
+        correct_answers: ["1"]  
 
-    2-test-2:
+  2-test-2:
     content:
     questions:
       1_myelin_neurones:
-        multi_select: false
-        label: True or false? When myelin coats the neurones, it decreases the speed that electrical impulses can travel.
-        assessment_summary:
+        multi_select: false 
+        label: |
+          True or false? When myelin coats the neurones, it decreases the speed that electrical impulses can travel.
+        assessment_summary: 
         assessment_fail_summary: |
-          The myelination process coats the neurones in a fatty substance called myelin and it increases the speed that electrical impulses can travel.
-
-          After birth, when a baby or young child repeats and practises a skill, it leads to myelination of the neurones involved. This increases the speed at which the message travels between neurones and so improves the skill.
+          The myelination process coats the neurones in a fatty substance called myelin and it increases the speed that electrical impulses can travel. 
+          
+          After birth, when a baby or young child repeats and practises a skill, it leads to myelination of the neurones involved. This increases the speed at which the message travels between neurones and so improves the skill. 
 
           You might want to revisit the section on brain development before birth. (LINK TO 2.1.1)
         answers:
           1: "True"
           2: "False"
-        correct_answers: ["2"]
+        correct_answers: ["2"]  
 
-    2-test-3:
+  2-test-3:
     content:
     questions:
       1_ability_tasks:
-        multi_select: false
-        label: "Complete the statement: BLANK will impact upon a child's ability to carry out tasks."
-        assessment_summary:
+        multi_select: false 
+        label: |
+          Complete the statement: BLANK will impact upon a child's ability to carry out tasks.
+        assessment_summary: 
         assessment_fail_summary: |
           Prolonged exposure to negative influences such as social isolation, a lack of stimulation and limited exposure to language and communication will impact on all aspects of a child’s learning and development . Children may experience restricted language and communication difficulties, be more prone to mental health concerns and be unable to carry out basic tasks.
           You might want to revisit the section on factors affecting brain development. (LINK TO 2.1.3)
@@ -405,17 +480,18 @@ brain-development-and-how-children-learn:
           2: "Social isolation"
           3: "Overexposure to adult led activities"
           4: "Too much independence"
-        correct_answers: ["2"]
-
-    2-test-4:
+        correct_answers: ["2"]  
+  
+  2-test-4:
     content:
     questions:
       1_low_income:
         multi_select: true
-        label: Research shows that children living in low income households are 3 times more likely to experience which negative effects on their cognitive development? (Select all answers that apply)
-        assessment_summary:
+        label: |
+          Research shows that children living in low income households are 3 times more likely to experience which negative effects on their cognitive development? (Select all answers that apply) 
+        assessment_summary: 
         assessment_fail_summary: |
-          Research shows that children living in low income households are 3 times more likely to experience mental health issues and have lower academic success than children from more affluent backgrounds.Coming from a disadvantaged area or a household in poverty should not restrict a child’s chances to succeed. Being able to identify where a child requires support and addressing individual needs is essential to ensure the child can continue to progress.
+          Research shows that children living in low income households are 3 times more likely to experience mental health issues and have lower academic success than children from more affluent backgrounds.Coming from a disadvantaged area or a household in poverty should not restrict a child’s chances to succeed. Being able to identify where a child requires support and addressing individual needs is essential to ensure the child can continue to progress. 
           You might want to revisit the section on factors affecting brain development. (LINK TO 2.1.3)
 
         answers:
@@ -423,15 +499,16 @@ brain-development-and-how-children-learn:
           2: "Delayed physical development"
           3: "Lower academic success"
           4: "Limited growth"
-        correct_answers: ["1","3"]
+        correct_answers: ["1","3"]  
 
-    2-test-5:
+  2-test-5:
     content:
     questions:
       1_learn_effectively:
-        multi_select: false
-        label: True or false? Children learn most effectively in an environment that offers a balance of both child and adult led activity.
-        assessment_summary:
+        multi_select: false 
+        label: |
+          True or false? Children learn most effectively in an environment that offers a balance of both child and adult led activity.
+        assessment_summary: 
         assessment_fail_summary: |
           A positive learning environment includes a balance of both adult and child led experiences. Children need to learn and receive guidance from adult interaction, but they also need time to process and explore the knowledge learnt through child initiated activity.
 
@@ -439,66 +516,71 @@ brain-development-and-how-children-learn:
         answers:
           1: "True"
           2: "False"
-        correct_answers: ["1"]
+        correct_answers: ["1"]  
 
-    2-test-6:
+  2-test-6:
     content:
     questions:
       1_development_delay:
-        multi_select: false
-        label: "Complete the statement: The term ‘cognitive development delay’ refers to a child who is BLANK."
-        assessment_summary:
+        multi_select: false 
+        label: |
+          Complete the statement: The term ‘cognitive development delay’ refers to a child who is BLANK.
+        assessment_summary: 
         assessment_fail_summary: |
-          "‘Cognitive development delay’ means that a child is at a lower level than the expected milestone. No child should ever be considered to be low ability, and every child is able to progress and achieve with the correct support. Maintaining your knowledge of expected development milestones will ensure you are able to intervene early and offer appropriate support to ensure every child can progress.
-          You might want to revisit the section on delays in brain development and the potential impact on learning. (LINK TO 2.2.1)"
+          ‘Cognitive development delay’ means that a child is at a lower level than the expected milestone. No child should ever be considered to be low ability, and every child is able to progress and achieve with the correct support. Maintaining your knowledge of expected development milestones will ensure you are able to intervene early and offer appropriate support to ensure every child can progress.
+          
+          You might want to revisit the section on delays in brain development and the potential impact on learning. (LINK TO 2.2.1)
         answers:
           1: "Unable to progress"
           2: "At a lower level than the expected milestone"
           3: "Low ability"
           4: "Disadvantaged"
-        correct_answers: ["2"]
-
-    2-test-7:
+        correct_answers: ["2"]  
+    
+  2-test-7:
     content:
     questions:
       1_negatively_impact_development_delay:
-        multi_select: true
-        label: "Complete the statement: Which of the following could negatively impact on cognitive delay? (Select all answers that apply)"
-        assessment_summary:
+        multi_select: true 
+        label: |
+          Complete the statement: Which of the following could negatively impact on cognitive delay? (Select all answers that apply)
+        assessment_summary: 
         assessment_fail_summary: |
-          Neurological disorders, accidents and abuse could all negatively impact on cognitive development.
+          Neurological disorders, accidents and abuse could all negatively impact on cognitive development. 
           You might want to revisit the section on causes of cognitive development delay. (LINK TO 2.2.1)
         answers:
           1: "Neurological disorders"
           2: "Abuse"
           3: "Increased use of resources"
           4: "Accidents"
-        correct_answers: ["1","2","4"]
+        correct_answers: ["1","2","4"]  
 
-    2-test-8:
+  2-test-8:
     content:
     questions:
       1_negatively_impact_development_delay:
-        multi_select: true
-        label: "Complete the statement: The theorists BLANK and BLANK both acknowledge the importance of scaffolding, where children’s learning is supported by others."
-        assessment_summary:
+        multi_select: true 
+        label: |
+          Complete the statement: The theorists BLANK and BLANK both acknowledge the importance of scaffolding, where children’s learning is supported by others.
+        assessment_summary: 
         assessment_fail_summary: |
-          Both Vygotsky’s ZPD and Bruner’s spiral curriculum acknowledge scaffolding. This is where children’s learning is supported and guided by a more knowledgeable other (MKO) to support understanding.
+          Both Vygotsky’s ZPD and Bruner’s spiral curriculum acknowledge scaffolding. This is where children’s learning is supported and guided by a more knowledgeable other (MKO) to support understanding. 
           You might want to revisit the section on theories of how children learn. (LINK TO 2.2.2)
         answers:
           1: "Vygotsky"
           2: "Piaget"
           3: "Bruner"
           4: "Maslow"
-        correct_answers: ["1","3"]
+        correct_answers: ["1","3"]  
 
-    2-test-9:
+  2-test-9:
     content:
     questions:
       1_scaffolding_techniques:
-        multi_select: true
-        label: "Complete the statement: Which of the following are scaffolding techniques? (Select all answers that apply)"
-        assessment_summary:
+        multi_select: true 
+        label: |
+          Complete the statement: Which of the following are scaffolding techniques? (Select all answers that apply)
+        assessment_summary: 
         assessment_fail_summary: |
           Modeling, providing examples and using visual aids are all examples of scaffolding techniques.
           You might want to revisit the section on how children learn. (LINK TO 2.2.2.)
@@ -507,15 +589,16 @@ brain-development-and-how-children-learn:
           2: "Extra time to work out the answer"
           3: "Providing examples"
           4: "Using visual aids"
-        correct_answers: ["1","3","4"]
+        correct_answers: ["1","3","4"] 
 
-    2-test-10:
+  2-test-10:
     content:
     questions:
       1_scaffolding_techniques:
-        multi_select: true
-        label: "Complete the statement: Which of the following are benefits of adult participation in children’s physical activity? (Select all answers that apply)"
-        assessment_summary:
+        multi_select: true 
+        label: |
+          Complete the statement: Which of the following are benefits of adult participation in children’s physical activity? (Select all answers that apply)
+        assessment_summary: 
         assessment_fail_summary: |
           When adults participate in children’s physical activity children will benefit from increased vocabulary, increased participation and positive role modelling.
           You might want to revisit the section on the importance of a healthy lifestyle for learning. (LINK TO 2.2.3)
@@ -524,239 +607,72 @@ brain-development-and-how-children-learn:
           2: "Increased child participation"
           3: "Increased vocabulary"
           4: "Faster pace"
-        correct_answers: ["2","3"]
+        correct_answers: ["2","3"] 
 
+  2-confidence-1:
+    content:
+    questions:
+      1_understanding_brain_development:
+        multi_select: false
+        label:  |
+          This training has improved my understanding of the stages of children's brain development and the factors that can affect it. 
+        assessment_summary: 
+        assessment_fail_summary:
+        answers:
+          1: "Strongly agree"
+          2: "Agree"
+          3: "Neither agree nor disagree"
+          4: "Disagree"
+          5: "Strongly disagree"
+        correct_answers: ["1","2","3","4","5"]
 
+  2-confidence-2:
+    content:
+    questions:
+      1_how_children_learn:
+        multi_select: false
+        label:  |
+          This training has improved my understanding of how children learn and how those theories influence practice.  
+        assessment_summary: 
+        assessment_fail_summary:
+        answers:
+          1: "Strongly agree"
+          2: "Agree"
+          3: "Neither agree nor disagree"
+          4: "Disagree"
+          5: "Strongly disagree"
+        correct_answers: ["1","2","3","4","5"]
 
+  2-confidence-3:
+    content:
+    questions:
+      1_healthy_lifestyle:
+        multi_select: false
+        label:  |
+          This training has improved my understanding of the importance of a healthy lifestyle for learning.  
+        assessment_summary: 
+        assessment_fail_summary:
+        answers:
+          1: "Strongly agree"
+          2: "Agree"
+          3: "Neither agree nor disagree"
+          4: "Disagree"
+          5: "Strongly disagree"
+        correct_answers: ["1","2","3","4","5"]
 
-
-  # 1-1-1-1b:
-  #   content:
-  #   questions:
-  #     1_how_many_areas:
-  #       multi_select: false
-  #       label: How many areas of the brain are there?
-  #       answers:
-  #         4: "4"
-  #         5: "5"
-  #         6: "6"
-  #         7: "7"
-  #       correct_answers:
-  #         - "5"
-  # 1-1-1-2b:
-  #   questions:
-  #     1_which_trimester:
-  #       multi_select: false
-  #       label: In which trimester does the baby's brain triple in weight?
-  #       answers:
-  #         1: "Trimester 1"
-  #         2: "Trimester 2"
-  #         3: "Trimester 3"
-  #       correct_answers:
-  #         - "3"
-  # 1-1-1-3b:
-  #   questions:
-  #     1_premature_birth_low_birth_weight_and_underdeveloped_brain:
-  #       multi_select: false
-  #       label: Premature birth, low birth weight and underdeveloped brain, might be due to which influence?
-  #       answers:
-  #         1: "Illness during pregnancy"
-  #         2: "Poor diet during pregnancy"
-  #         3: "Smoking during pregnancy"
-  #         4: "Drinking during pregnancy"
-  #       correct_answers:
-  #         - "3"
-  # 1-1-1-3c:
-  #   questions:
-  #     1_increasing_folic_acid:
-  #       multi_select: false
-  #       label: Increasing the amount of folic acid will help to improve which influence on brain development?
-  #       answers:
-  #         1: Illness during pregnancy
-  #         2: Diet
-  #         3: Smoking during pregnancy
-  #         4: Complications during labour
-  #       correct_answers:
-  #         - "2"
-  # 1-1-1-4b:
-  #   questions:
-  #     1_not_a_proven_benefit_of_talking_to_a_child:
-  #       multi_select: false
-  #       label: Which of these is NOT a proven benefit of talking to an unborn child?
-  #       answers:
-  #         1: Promotes the bond between the baby and parent/carer
-  #         2: Relaxes and reduces any unnecessary stress
-  #         3: Improves physical abilities
-  #         4: Supports social and emotional development
-  #       correct_answers:
-  #       - "3"
-  # 1-1-2-1b:
-  #   questions:
-  #     1_jean_piaget_label_0_to_2:
-  #       multi_select: false
-  #       label: What did jean Piaget label the 0 to 2 year stage of development?
-  #       answers:
-  #         1: Gross motor
-  #         2: Fine motor
-  #         3: Sensorimotor
-  #         4: Senses
-  #       correct_answers:
-  #       - "3"
-  # 1-1-2-1c:
-  #   questions:
-  #     1_not_early_years_based_on_piaget:
-  #       multi_select: false
-  #       label: Which of these is NOT an early years approach based on the work of Piaget?
-  #       answers:
-  #         1: The importance of a supportive environment
-  #         2: Promotion of social interaction and peer teaching
-  #         3: Opportunities to test inconsistencies in thoughts
-  #         4: Opportunity to develop physically
-  #       correct_answers:
-  #         - "4"
-  # 1-test:
-    # content: |
-    #   # 1. Brain development
-    #   Image of the brain with an arrow
-    # questions:
-    #   Q1:
-    #     multi_select: false
-    #     label: |
-    #       # 1. Brain development
-    #       ** Image of the brain with an arrow **
-    #       What is the main function of the identified section of the brain?
-    #     answers:
-    #       1: option 1
-    #       2: option 2
-    #       3: option 3
-    #     correct_answers:
-    #     - "2"
-    #   Q2:
-    #     multi_select: false
-    #     label: |
-    #       # 2. Brain development
-    #       What is supported during the myelination process?
-    #     answers:
-    #       A: Coordinates practice breaths
-    #       B: Improved sleep cycles
-    #       C: Development of the brain stem
-    #       D: Neuron connection
-    #     correct_answers:
-    #       - "D"
-    #   Q3:
-    #     multi_select: false
-    #     label: |
-    #       # 3. Brain development
-    #       After birth, repetition and practice of a skill further encourages myelination of the neurons involved. What does myelination improve?
-    #     answers:
-    #       A: the speed at which the neurons move therefore improving the skill.
-    #       B: the communication between the synapsis and the message.
-    #       C: the speed at which the message travels therefore improving the skill.
-    #       D: the communication between the myelination and the brain stem.
-    #   Q4:
-    #     multi_select: false
-    #     label: |
-    #       # 4. Factors impacting on cognitive development
-    #       Down Syndrome is an example of what type of condition that can impact on cognitive development?
-    #     answers:
-    #       A: Environmental
-    #       B: Genetic
-    #       C: Socio-economic
-    #       D: Financial
-    #   Q5:
-    #     multi_select: false
-    #     label: |
-    #       # 5. The impact of the environment
-    #       Which of the following will impact upon a child's ability to carry out tasks?
-    #     answers:
-    #       A: Increased myelination
-    #       B: Social isolation
-    #       C: Overexposure to adult led activities
-    #       D: Too much independence
-    #     correct_answers:
-    #       - "B"
-    #   Q6:
-    #     multi_select: false
-    #     label: |
-    #       # 6. How brain development affects learning
-    #       Which D is a disorder that affects children’s development, understanding and use of spoken language?
-    #     answers:
-    #       A: Dyscalculia
-    #       B: Disphasia
-    #       C: Dysgraphia
-    #       D: Dyslexia
-    #     correct_answers:
-    #       - "B"
-    #   Q7:
-    #     multi_select: false
-    #     label: |
-    #       # 7. Cognitive learning theory
-    #       Which two theorists both acknowledge the importance of scaffolding which is where learning is supported by others?
-    #     answers:
-    #       A: Piaget and Bruner
-    #       B: Vygotsky and Piaget
-    #       C: Vygotsky and Bruner
-    #       D: Maslow and Vygotsky
-    #     correct_answers:
-    #       - "C"
-    #   Q8:
-    #     multi_select: false
-    #     label: |
-    #       # 8. Attachment theory
-    #       Children are said to develop different attachment types, depending on their early experiences. What are the different attachment types?
-    #     answers:
-    #       A: Avoidant, ambivalent, secure, disorganised
-    #       B: Avoidant, secure, concrete, organised
-    #       C: Avoidance, ambivalent, secure, organised
-    #       D: Avoidant, ambivalent, insecure, disorganised
-    #     correct_answers:
-    #       - "A"
-    #   Q9:
-    #     multi_select: false
-    #     label: |
-    #       # 9. The practitioner’s role
-
-    #       Positive and healthy relationships will effectively promote a range of qualities and skills. What are 4 characteristics of positive and healthy relationships?
-    #     answers:
-    #       A: Respect, effective communication, trust and empathy
-    #       B: Respect, ineffective communication, trust and empathy
-    #       C: Respect, effective communication, timekeeping and empathy
-    #       D: Respect, effective communication, trust and sympathy
-    #     correct_answers:
-    #       - "A"
-    #   Q10:
-    #     multi_select: false
-    #     label: |
-    #       # 10. Social and emotional development
-    #       What term describes a child who attempts a task with confidence that they can complete it:
-    #     answers:
-    #       A: Self-confidence
-    #       B: Self-worth
-    #       C: Self-efficacy
-    #       D: All of the above
-    #     correct_answers:
-    #       - "D"
-    #   Q11:
-    #     multi_select: false
-    #     label: |
-    #       # 11. Building secure relationationships
-    #       Which of the following would promote successful parent partnerships:
-    #     answers:
-    #       A: Increased consistency, shared realistic expectations, role modelling
-    #       B: Decreased consistency, shared realistic expectations, role modelling
-    #       C: Increased consistency, parent partnerships, role modelling
-    #       D: Increased consistency, shared realistic expectations, modelling
-    #     correct-answers:
-    #       - "A"
-    #   Q12:
-    #     multi_select: false
-    #     label: |
-    #       # 12. Self-regulation
-    #       Proprioceptive activities can be used to positively support self-regulation. What type of activity is this?
-    #     answers:
-    #       A: Problem solving activity
-    #       B: Weight bearing activity
-    #       C: Memory building activity
-    #       D: Communication development activity
-    #     correct_answers:
-    #       - "B"
+  2-confidence-4:
+    content:
+    questions:
+      1_supporting_brain_development_learning:
+        multi_select: false
+        label:  |
+          This training has improved my confidence in supporting childrens’ brain development and learning. 
+        assessment_summary: 
+        assessment_fail_summary:
+        answers:
+          1: "Strongly agree"
+          2: "Agree"
+          3: "Neither agree nor disagree"
+          4: "Disagree"
+          5: "Strongly disagree"
+        correct_answers: ["1","2","3","4","5"]
