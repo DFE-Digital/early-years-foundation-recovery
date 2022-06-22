@@ -86,8 +86,6 @@ brain-development-and-how-children-learn:
     type: text_page
   2-2-1-3b:
     type: formative_assessment
-  2-2-1-3c:
-    type: formative_assessment
 
   2-2-2:
     type: text_page         # submodule 2 / topic 2

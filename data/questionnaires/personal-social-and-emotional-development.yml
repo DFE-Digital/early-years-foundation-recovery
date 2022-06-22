@@ -20,9 +20,9 @@ personal-social-and-emotional-development:
         multi_select: false 
         label: |
           Read the scenario and answer the question: 
-          Aisha and Noah are playing together outside when Noah trips and bumps his knee, which causes him to cry. Aisha is quick to try to comfort Noah and looks for help from an adult. 
-          Later, Aisha recreates the situation with dolls and uses the opportunity to express her worries about the accident.
-          At around what age would you expect to start seeing Aisha’s behaviour?
+          Yusuf and Noah are playing together outside when Noah trips and bumps his knee, which causes him to cry. Yusuf is quick to try to comfort Noah and looks for help from an adult. 
+          Later, Yusuf recreates the situation with dolls and uses the opportunity to express his worries about the accident.
+          At around what age would you expect to start seeing Yusuf’s behaviour?
         assessment_summary: At around 3 years old children will be showing more affection for friends and will visibly show concern when their friends are upset.  
         assessment_fail_summary: At around 3 years old children will be showing more affection for friends and will visibly show concern when their friends are upset.  
         answers:
@@ -157,9 +157,9 @@ personal-social-and-emotional-development:
       1_stereotypes:
         multi_select: false 
         label: |
-          True or false? Children are born with pre formed stereotypical and biased views.
-        assessment_summary: Children are not born with pre formed views of others around them. Children will notice difference and can easily develop misconceptions, however they will not naturally hold stereotypical assumptions or be biased.
-        assessment_fail_summary: Children are not born with pre formed views of others around them. Children will notice difference and can easily develop misconceptions, however they will not naturally hold stereotypical assumptions or be biased.
+          True or false? Children are born with preformed stereotypical and biased views.
+        assessment_summary: Children are not born with preformed views of others around them. Children will notice difference and can easily develop misconceptions, however they will not naturally hold stereotypical assumptions or be biased.
+        assessment_fail_summary: Children are not born with preformed views of others around them. Children will notice difference and can easily develop misconceptions, however they will not naturally hold stereotypical assumptions or be biased.
         answers:
           1: "True"
           2: "False"
@@ -171,7 +171,7 @@ personal-social-and-emotional-development:
       1_overstimulation:
         multi_select: false 
         label: |
-          Complete the statement: BLANK is the term used to describe the potential impact aspects of their environment such as noise, light, or crowds can have on children.
+          What term describes the impact that aspects of the environment, such as noise, light or crowds, can have on children? 
         assessment_summary: |
           ‘Overstimulation’ is the term used to describe the potential impact aspects of the environment such as noise, light, or crowds can have on children. 
         
@@ -385,7 +385,7 @@ personal-social-and-emotional-development:
 
         answers:
           1: "How confident a child is"
-          2: "How tall a child is"
+          2: "How attached a child feels"
           3: "How developed a child’s skills are "
           4: "How important and valued a child feels "
         correct_answers:
@@ -461,7 +461,7 @@ personal-social-and-emotional-development:
           Complete the statement: Effective communication between practitioners and parents will result in BLANK expectations for children.
         assessment_summary: 
         assessment_fail_summary: |
-          When there is effective communication between practitioners and parents, everyone caring for the child will have a full understanding of their needs, preferences and level of development. This will support better understanding of both the child’s current skills and the plan to promote progress. When everyone has realistic expectations, the child will have the freedom to learn in supportive environments. 
+          When everyone has realistic expectations, the child will have the freedom to learn in supportive environments. When there is effective communication between practitioners and parents, everyone caring for the child will have a full understanding of their needs, preferences and level of development. This will support better understanding of both the child’s current skills and the plan to promote progress.  
         
           You might want to revisit the section on ??? (LINK TO ???)
         answers:
@@ -477,7 +477,7 @@ personal-social-and-emotional-development:
       1_manage_feelings:
         multi_select: true
         label: |
-          Complete the statement: Supporting children to understand and manage their feelings will help to increase their BLANK and BLANK.
+          Supporting children to understand and manage their feelings will help to increase what two skills?
         assessment_summary: 
         assessment_fail_summary: |
           Supporting children to understand and manage their feelings will help them to increase their resilience, raise their self-efficacy and manage their behaviour.
@@ -485,7 +485,7 @@ personal-social-and-emotional-development:
           You might want to revisit the section on early relationship experiences. (LINK TO 3.2.3.1)
         answers:
           1: "Resilience"
-          2: "Temperature"
+          2: "Independence"
           3: "Anxiety"
           4: "Self-efficacy"
         correct_answers:
