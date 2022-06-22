@@ -218,6 +218,9 @@ en:
       text: For other problems with creating your account or signing in, please
       link_text: contact us
 
+  # Notice ---------------------------------------------------------------------
+  notice: 
+    email_changed: We have sent you an email with link to confirm your email address
   # Form Builder ---------------------------------------------------------------
   helpers:
     label:
