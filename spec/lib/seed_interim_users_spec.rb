@@ -6,7 +6,7 @@ RSpec.describe SeedInterimUsers do
   Rails.application.load_tasks
 
   let(:seed_file) do
-    Rails.root.join('db/seeds/interim_test_data.yml')
+    Rails.root.join('db/seeds/interim_data.yml')
   end
   let(:users) do
     YAML.load_file(seed_file)
