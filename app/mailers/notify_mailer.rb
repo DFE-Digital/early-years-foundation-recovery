@@ -32,7 +32,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
     set_personalisation(
       confirmation_url: confirmation_url(record, confirmation_token: token),
     )
-    mail(to: record.email)
+    mail(to: record.unconfirmed_email? ? record.unconfirmed_email : record.email)
   end
 
   def confirmation_instructions(record, token, _opts = {})
@@ -41,7 +41,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
     set_personalisation(
       confirmation_url: confirmation_url(record, confirmation_token: token),
     )
-    mail(to: record.email)
+    mail(to: record.unconfirmed_email? ? record.unconfirmed_email : record.email)
   end
 
   def reset_password_instructions(record, token, _opts = {})
