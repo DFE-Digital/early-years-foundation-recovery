@@ -63,14 +63,51 @@ module ApplicationHelper
   end
 
   def link_to_retake_quiz(module_item, link_args = { class: 'govuk-button' })
+    d = AssessmentQuiz.new(user: current_user, type: 'summative', training_module_id: module_item.training_module, name: module_item.name)
     link_to 'Retake quiz', training_module_path, link_args
   end
 
   def link_to_my_learning(module_item, link_args = { class: 'govuk-link, govuk-!-margin-right-4' })
-    link_to 'Go to my Learning', training_module_path, link_args
+    link_to 'Go to my Learning', course_overview_path, link_args
   end
 
   def clear_flash
     flash[:alert] = nil
+  end
+
+  def answers_checkbox(user_answers, checkbox_value)
+    return if !user_answers.present?
+    user_answers.include? checkbox_value.to_s
+  end
+
+  def disable_checkbox(questionnaire)
+    begin
+      return if !questionnaire.submitted.present?
+      (questionnaire.assessments_type != 'confidence_check')? true : false
+    rescue => exception
+      true
+    end
+  end
+
+  
+  def correct_answers_checkbox(questions_options, user_answers)
+    return if !user_answers.present?
+
+    correct_answers = []
+    questions_options.each do |q|
+      if user_answers.map(&:to_s).include? q[0].to_s
+        correct_answers.push(q[1])
+      end
+    end
+
+    correct_answers.join(', ')
+  end
+
+  def link_to_next_module_item_from_controller(module_item)
+    if module_item.next_item
+      redirect_to training_module_content_page_path(module_item.training_module, module_item.next_item)
+    else
+       redirect_to course_overview_path and return
+    end
   end
 end

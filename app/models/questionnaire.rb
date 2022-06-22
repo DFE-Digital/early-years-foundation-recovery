@@ -1,7 +1,18 @@
 class Questionnaire < OpenStruct
   def self.find_by!(args)
-    questionnaire_data = SummativeQuestionnaire.find_by(args) ? SummativeQuestionnaire.find_by(args) : QuestionnaireData.find_by(args)
-    questionnaire_data.build_questionnaire
+    if SummativeQuestionnaire.find_by(args)
+      questionnaire_data = SummativeQuestionnaire.find_by(args)
+    elsif QuestionnaireData.find_by(args)
+      questionnaire_data = QuestionnaireData.find_by(args)
+    elsif ConfidenceQuestionnaire.find_by(args)
+      questionnaire_data = ConfidenceQuestionnaire.find_by(args)
+    end
+
+    begin
+      questionnaire_data.build_questionnaire
+    rescue StandardError
+      nil
+    end
   end
 
   include ActiveModel::Validations
@@ -32,6 +43,9 @@ class Questionnaire < OpenStruct
     questions.map { |name, attrs| Question.new(attrs.merge(questionnaire: self, name: name)) }
   end
 
+  def test_block
+    'booo'
+  end
 private
 
   def correct_answers_exceed_threshold

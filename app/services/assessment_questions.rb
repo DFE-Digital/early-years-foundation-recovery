@@ -11,16 +11,6 @@ module AssessmentQuestions
     questionnaire.submitted = true if question_input.answer.present?
   end
 
-  def process_questionaire
-    if questionnaire_params.values.all?(&:present?)
-      populate_questionnaire(questionnaire_params)
-      save_answers
-      flash[:alert] = nil
-    else
-      flash[:alert] = 'Please select an answer'
-    end
-  end
-
   def questionnaire
     @questionnaire ||= Questionnaire.find_by!(name: params[:id], training_module: training_module)
   end
@@ -38,7 +28,7 @@ module AssessmentQuestions
   # as they are submitted as an array within params
   def permitted_methods
     questionnaire.questions.map do |question, data|
-      data[:multi_select] ? { question => [] } : question
+      data[:multi_select] ? { question =>[]} : question
     end
   end
 
@@ -47,9 +37,6 @@ module AssessmentQuestions
 
     questionnaire.question_list.each do |question|
       answer = [question_input[question.name]].flatten.select(&:present?)
-        puts 'question.correct_answers'
-        puts answer
-        puts 'question.correct_answers'
       question.set_answer(answer: answer)
     end
     questionnaire.submitted = true
@@ -67,11 +54,7 @@ module AssessmentQuestions
     questionnaire.questions.each do |question, data|
       answer = Array(questionnaire.send(question))
       next if answer.empty?
-      # puts 'data.inspect'
-      puts data.inspect
-      puts flattened_array(data[:correct_answers])
-      puts answer.inspect
-      # puts 'data.inspect'
+
       current_user.user_answers.create!(
         assessments_type: questionnaire.assessments_type,
         module: questionnaire.training_module,
@@ -79,12 +62,45 @@ module AssessmentQuestions
         questionnaire_id: questionnaire.id,
         question: question,
         answer: answer,
-        correct: answer == flattened_array(data[:correct_answers]),
+        correct: flattened_array(answer.map(&:to_s)) == flattened_array(data[:correct_answers]),
       )
     end
   end
 
   def flattened_array(item)
     [item].flatten.select(&:present?)
+  end
+
+  def check_empty(param_to_check)
+    questionaire_param = param_to_check.compact_blank
+    (questionaire_param.blank?) ? false : true
+  end
+
+  def validate_param_empty
+    validate_param = []
+
+    questionnaire.questions.map do |question, data|
+      validate_param = data[:multi_select] ? check_empty(params[:questionnaire][question]) : params.key?(:questionnaire)
+    end
+
+    validate_param
+  end
+  def module_page_id
+    url_referer = request.referrer.to_s.split('/')
+    puts url_referer.inspect
+  end
+
+  def which_referrer
+    module_page_id
+    puts 'which_referrer'
+    puts "request.referrer #{request.referrer}"
+    puts "Session referrer #{session[:referrer]}"
+    puts 'which_referrer'
+  end
+
+  def referrer_set
+    puts 'referrer_set'
+    session[:referrer] = request.referrer
+    puts 'referrer_set'
   end
 end

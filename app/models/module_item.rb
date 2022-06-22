@@ -27,6 +27,7 @@ class ModuleItem < YamlBase
     youtube_page: YoutubePage,
     formative_assessment: Questionnaire,
     summative_assessment: Questionnaire,
+    confidence_check: Questionnaire,
     assessments_results: AssessmentsResults,
   }.freeze
 

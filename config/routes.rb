@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     resources :questionnaires, only: %i[show update]
     resources :formative_assessments, only: %i[show update], path: 'formative-assessments'
     resources :summative_assessments, only: %i[show update], path: 'summative-assessments'
+    resources :confidence_checks, only: %i[show update], path: 'confidence-check'
     resources :assessments_results, only: %i[show], path: 'assessment-result'
   end
 

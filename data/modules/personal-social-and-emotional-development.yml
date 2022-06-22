@@ -182,17 +182,17 @@ personal-social-and-emotional-development:
   3-confidence:
     type: text_page
   3-confidence-1:
-    type: formative_assessment  
+    type: confidence_check
   3-confidence-2:
-    type: formative_assessment  
+    type: confidence_check
   3-confidence-3:
-    type: formative_assessment  
+    type: confidence_check
   3-confidence-4:
-    type: formative_assessment  
+    type: confidence_check
   3-confidence-5:
-    type: formative_assessment  
+    type: confidence_check
   3-confidence-6:
-    type: formative_assessment  
+    type: confidence_check
   
   3-end:
     type: text_page

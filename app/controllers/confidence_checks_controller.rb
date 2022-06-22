@@ -1,11 +1,9 @@
-class SummativeAssessmentsController < ApplicationController
+class ConfidenceChecksController < ApplicationController
   include AssessmentQuestions
   include ApplicationHelper
   before_action :authenticate_registered_user!
 
   def show
-    which_referrer
-    referrer_set
     existing_answers = existing_user_answers.pluck(:question, :answer)
     populate_questionnaire(existing_answers.to_h.symbolize_keys) if existing_answers.present?
   end
@@ -24,21 +22,4 @@ class SummativeAssessmentsController < ApplicationController
 
     render :show, status: :unprocessable_entity and return
   end
-
-  private
-
-  def process_summative_questionaire
-    if questionnaire_params.values.all?(&:present?)
-      populate_questionnaire(questionnaire_params)
-      save_answers
-      flash[:alert] = nil
-    else
-      flash[:alert] = 'Please select an answer'
-    end
-  end
-
-  def set_flash_mesg
-    flash[:alert] = 'Please select an answer'
-  end
-
 end

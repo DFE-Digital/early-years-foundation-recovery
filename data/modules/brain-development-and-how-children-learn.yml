@@ -181,12 +181,12 @@ brain-development-and-how-children-learn:
   2-confidence:
     type: text_page
   2-confidence-1:
-    type: formative_assessment  
+    type: confidence_check  
   2-confidence-2:
-    type: formative_assessment  
+    type: confidence_check  
   2-confidence-3:
-    type: formative_assessment  
+    type: confidence_check  
   2-confidence-4:
-    type: formative_assessment  
+    type: confidence_check  
   2-end:
     type: text_page

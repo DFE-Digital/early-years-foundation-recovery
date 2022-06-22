@@ -1,6 +1,5 @@
 .govuk-inset-text
-  p You answered #{answer[0]}
+  p You answered #{correct_answers_checkbox(question[:answers], answer)}
   = question[:answers][answer[0].to_s]
-  / = question[:answers].find { |key, values| values.include?(answer) }.first
   = question.assessment_fail_summary
 
