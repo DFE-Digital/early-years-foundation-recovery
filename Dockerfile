@@ -54,6 +54,7 @@ COPY config.ru ${APP_HOME}/config.ru
 COPY Rakefile ${APP_HOME}/Rakefile
 COPY public ${APP_HOME}/public
 COPY bin ${APP_HOME}/bin
+COPY lib ${APP_HOME}/lib
 COPY data ${APP_HOME}/data
 COPY config ${APP_HOME}/config
 COPY db ${APP_HOME}/db
