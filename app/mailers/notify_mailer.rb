@@ -84,7 +84,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
       name: record.name,
       is_unconfirmed_email: record.unconfirmed_email? ? 'Yes' : 'No',
       is_not_unconfirmed_email: record.unconfirmed_email? ? 'No' : 'Yes',
-      email: record.email,
+      email: record.unconfirmed_email? ? record.unconfirmed_email : record.email,
     )
     mail(to: record.email)
   end
