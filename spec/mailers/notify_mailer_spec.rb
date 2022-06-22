@@ -11,6 +11,7 @@ RSpec.describe NotifyMailer, type: :mailer do
         expect(response.subject).to eq 'Activation instructions'
       end
     end
+
     context 'when already signed up' do
       it 'send confirmation email to correct user' do
         user.registration_complete = true
