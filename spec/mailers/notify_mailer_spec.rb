@@ -3,9 +3,17 @@ require 'rails_helper'
 RSpec.describe NotifyMailer, type: :mailer do
   let(:user) { create(:user) }
 
-  describe 'user sign up' do
+  describe 'email confirmation / account activation' do
     context 'when signing up' do
+      it 'send activation email to correct user' do
+        response = user.send_confirmation_instructions
+        expect(response.recipients).to contain_exactly(user.email)
+        expect(response.subject).to eq 'Activation instructions'
+      end
+    end
+    context 'when already signed up' do
       it 'send confirmation email to correct user' do
+        user.registration_complete = true
         response = user.send_confirmation_instructions
         expect(response.recipients).to contain_exactly(user.email)
         expect(response.subject).to eq 'Confirmation instructions'
