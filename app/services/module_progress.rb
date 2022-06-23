@@ -15,7 +15,7 @@ class ModuleProgress
     page.properties['id'] if page.present?
   end
 
-  # Name of next unvisited page
+  # Last visited module item
   # @return [ModuleItem]
   def resume_page
     unvisited.first&.previous_item
@@ -23,20 +23,20 @@ class ModuleProgress
 
 protected # decorator predicates
 
-  # @param mod [TrainingModule]
   # @return [Boolean] module content has been viewed
   def started?
-    first_page = @mod.first_content_page.name
+    training_module_events.any?
+  end
+
+  # @return [Boolean] module content has been viewed
+  def started_content?
+    first_page = mod.first_content_page.name
     training_module_events.where_properties(id: first_page).present?
   end
 
-  # TODO: this state is currently true if the last page was viewed
-  #
-  # @param mod [TrainingModule]
   # @return [Boolean]
   def completed?
-    last_page = @mod.module_items.last.name
-    training_module_events.where_properties(id: last_page).present?
+    all?(mod.module_items)
   end
 
   # @return [Boolean] all items viewed
@@ -72,11 +72,11 @@ private
   # @param item_id [String] module item name
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
   def module_item_events(item_id)
-    user.events.where_properties(training_module_id: @mod.name, id: item_id)
+    user.events.where_properties(training_module_id: mod.name, id: item_id)
   end
 
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
   def training_module_events
-    user.events.where_properties(training_module_id: @mod.name)
+    user.events.where_properties(training_module_id: mod.name)
   end
 end

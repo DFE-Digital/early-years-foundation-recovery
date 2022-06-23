@@ -88,7 +88,7 @@ class TrainingModule < YamlBase
   # Viewing this page determines if the module is "started"
   # @return [ModuleItem]
   def first_content_page
-    intro_page.next_item
+    intro_page.next_item.next_item # TODO: improve this (first page after submod intro)
   end
 
   # @return [ModuleItem]

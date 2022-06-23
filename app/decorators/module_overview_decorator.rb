@@ -76,19 +76,14 @@ private
     ]
   end
 
-  #
-  # link logic and value
+  # true if submodule is started/completed or previous submodule is completed
   #
   # @param submodule [String]
   # @param topic_item [ModuleItem]
   #
-  # @return [Boolean] completed or previous mod completed
+  # @return [Boolean]
   def clickable?(submodule:, topic_item:)
-    # call to action must be used first
-    return false unless all?([
-      topic_item.parent.interruption_page,
-      topic_item.parent.intro_page,
-    ])
+    return false unless started_content?
 
     previous_topic = find_previous_topic(topic_item.topic_name, submodule)
     previous_topic_items = previous_topic.values.first.to_a
@@ -104,11 +99,14 @@ private
   end
 
   # @param num [String]
+  #
   # @return [String]
   def previous(num)
     (num.to_i - 1).to_s
   end
 
+  # @param num [String]
+  #
   # @return [Array<Array>] ['1'] [item, item, item]
   def find_previous_submodule(num)
     mod.items_by_submodule.select do |sub_num, _|
@@ -116,8 +114,8 @@ private
     end
   end
 
-  # @param current_top_num [?]
-  # @param current_sub_num [?]
+  # @param current_top_num [String]
+  # @param current_sub_num [String]
   #
   # @return [Array<Array>] [1,2] [item, item, item]
   def find_previous_topic(current_top_num, current_sub_num)
@@ -126,9 +124,9 @@ private
     end
   end
 
-  # @param num [?]
+  # @param num [String]
   #
-  # @return [?]
+  # @return [String]
   def previous_submodule_heading_text(num)
     find_previous_submodule(num).map { |_, items| items.first.model.heading }.first
   end
