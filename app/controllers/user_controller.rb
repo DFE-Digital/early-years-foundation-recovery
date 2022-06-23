@@ -30,10 +30,10 @@ class UserController < ApplicationController
 
   def update_name
     if user.update(user_params)
-      track('user_name_changed', success: true)
+      track('user_name_change', success: true)
       redirect_to user_path, notice: 'You have saved your details'
     else
-      track('user_name_changed', success: false)
+      track('user_name_change', success: false)
       render :edit_name, status: :unprocessable_entity
     end
   end
