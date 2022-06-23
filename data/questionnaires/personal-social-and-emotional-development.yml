@@ -363,7 +363,7 @@ personal-social-and-emotional-development:
         assessment_fail_summary: |
           At 2 years old children will be copying those around them. They will get excited to be with other children, even though they continue to mainly play alongside others and not with them. They will start to play imaginative games and become more independent, although this will also be accompanied by increased defiance.
         
-          You might want to revisit the section on children’s social and emotional development (LINK TO 3.1.1)
+          You might want to revisit the section on children’s social and emotional development.
         answers:
           1: "2"
           2: "3"
@@ -381,7 +381,7 @@ personal-social-and-emotional-development:
         assessment_fail_summary: |
           Self-worth is how important and valued a child feels. A child with high self-worth is more likely to approach learning with confidence, enthusiasm and motivation.
 
-          You might want to revisit the section on supporting skill development (LINK TO 3.1.2)
+          You might want to revisit the section on supporting skill development.
 
         answers:
           1: "How confident a child is"
@@ -401,7 +401,7 @@ personal-social-and-emotional-development:
         assessment_fail_summary: |
           Some children can become overstimulated by their environment. This can present as frustration or challenging behaviour. Children may not be familiar with the wealth of activity and interaction being offered. Shy and reticent children and those with SEND will also benefit from a quiet area. 
 
-          You might want to revisit the section on How social and emotional skills affect behaviour (LINK TO 3.1.3) 
+          You might want to revisit the section on How social and emotional skills affect behaviour.
         answers:
           1: "Overstimulation"
           2: "Group activities"
@@ -420,7 +420,7 @@ personal-social-and-emotional-development:
         assessment_fail_summary: |
           When children are developing secure attachments they require predictable routines, rules and relationships. 
         
-          You might want to revisit the introduction to attachment theory section (LINK TO 3.2.1)
+          You might want to revisit the introduction to attachment theory section.
         answers:
           1: "Routines"
           2: "Relationships"
@@ -444,7 +444,7 @@ personal-social-and-emotional-development:
         
           In the third and final stage, detachment, children may lose their trust in people. Bowlby suggested that this stage will apply when children are separated from their most significant attachment for a longer period of time.
         
-          You might want to revisit the section on attachment theory (LINK TO 3.2.1)
+          You might want to revisit the section on attachment theory.
         answers:
           1: "7"
           2: "4"
@@ -463,7 +463,7 @@ personal-social-and-emotional-development:
         assessment_fail_summary: |
           When everyone has realistic expectations, the child will have the freedom to learn in supportive environments. When there is effective communication between practitioners and parents, everyone caring for the child will have a full understanding of their needs, preferences and level of development. This will support better understanding of both the child’s current skills and the plan to promote progress.  
         
-          You might want to revisit the section on ??? (LINK TO ???)
+          You might want to revisit the section on supporting children to develop secure relationships. 
         answers:
           1: "Reasonable"
           2: "High"
@@ -477,12 +477,12 @@ personal-social-and-emotional-development:
       1_manage_feelings:
         multi_select: true
         label: |
-          Supporting children to understand and manage their feelings will help to increase what two skills?
+          Supporting children to understand and manage their feelings will help to increase what? (select 2)
         assessment_summary: 
         assessment_fail_summary: |
           Supporting children to understand and manage their feelings will help them to increase their resilience, raise their self-efficacy and manage their behaviour.
 
-          You might want to revisit the section on early relationship experiences. (LINK TO 3.2.3.1)
+          You might want to revisit the section on early relationship experiences.
         answers:
           1: "Resilience"
           2: "Independence"
@@ -500,7 +500,7 @@ personal-social-and-emotional-development:
         assessment_fail_summary: |
           That’s not quite right. Proprioceptive activities are weight bearing activities like walking, crawling and running which can support self-regulation, help children to focus and calm sensory overload. 
 
-          You might want to revisit the section on strategies for supporting executive function and self regulation (LINK TO 3.3.2)
+          You might want to revisit the section on strategies for supporting executive function and self regulation.
         answers:
           1: "Problem solving activities "
           2: "Weight bearing activities "
@@ -519,7 +519,7 @@ personal-social-and-emotional-development:
         assessment_fail_summary: |
           At approximately 12 to 18 months old, children start to develop an awareness of social expectations and are able to change their behaviour when asked, if clearly directed and supported by an adult. 
 
-          You might want to revisit the section on defining self-regulation and executive function (LINK TO 3.3.1.1)
+          You might want to revisit the section on defining self-regulation and executive function.
         answers:
           1: "3 to 6 months"
           2: "2 to 3 years"
@@ -538,7 +538,7 @@ personal-social-and-emotional-development:
         assessment_fail_summary: |
           Visual reminders can help children to develop their self-regulation skills. For example, a child may call out every time they have a thought as they struggle to control the impulse to share the information. A visual reminder to put up their hand and wait, or write their thought down until a more appropriate moment, will help the child to remember the appropriate behaviour for the situation. 
         
-          You might want to revisit the section on supporting self-regulation (LINK TO 3.3.2.3)
+          You might want to revisit the section on supporting self-regulation.
         answers:
           1: "True"
           2: "False"
