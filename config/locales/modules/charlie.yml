@@ -3,9 +3,11 @@
 en:
   modules:
     charlie:
-      1:
+      intro:
         heading: module_intro
-        body: 3rd module, page 1
+        body: intro
+      before-you-start:
+
       1-1:
         heading: sub_module_intro
         body: 3rd module, page 1-1

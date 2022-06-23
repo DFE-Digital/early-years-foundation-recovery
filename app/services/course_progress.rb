@@ -64,6 +64,24 @@ class CourseProgress
 
 private
 
+  # @param mod [TrainingModule]
+  # @return [Boolean] module content has been viewed
+  def started?(mod)
+    return false if mod.draft?
+
+    training_module_events(mod.name).where_properties(id: mod.first_content_page.name).present?
+  end
+
+  # TODO: this state is currently true if the last page was viewed
+  #
+  # @param mod [TrainingModule]
+  # @return [Boolean]
+  def completed?(mod)
+    return false if mod.draft?
+
+    training_module_events(mod.name).where_properties(id: mod.module_items.last.name).present?
+  end
+
   # @param module_id [String] training module name
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
   def training_module_events(module_id)
@@ -87,24 +105,6 @@ private
   def available?(mod)
     dependent = TrainingModule.find_by(name: mod.depends_on)
     dependent ? completed?(dependent) : true
-  end
-
-  # @param mod [TrainingModule]
-  # @return [Boolean] module content has been viewed
-  def started?(mod)
-    return false if mod.draft?
-
-    training_module_events(mod.name).where_properties(id: mod.first_content_page.name).present?
-  end
-
-  # TODO: this state is currently true if the last page was viewed
-  #
-  # @param mod [TrainingModule]
-  # @return [Boolean]
-  def completed?(mod)
-    return false if mod.draft?
-
-    training_module_events(mod.name).where_properties(id: mod.module_items.last.name).present?
   end
 
   # @param state [Symbol, String] :active, :upcoming or :completed
