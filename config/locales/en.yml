@@ -16,12 +16,12 @@ en:
               invalid: Your setting's postcode is invalid.
             email:
               blank: Enter an email address.
-              invalid: This email address is invalid.
+              invalid: Enter a valid email address.
             password:
               blank: Enter a password.
               too_short: Password must be at least 10 characters. # devise override
             password_confirmation:
-              confirmation: Confirmation doesn't match password.
+              confirmation: Sorry, your passwords don't match.
             ofsted_number:
               invalid: This Ofsted number is not recognised.
             setting_type:
@@ -43,12 +43,12 @@ en:
               invalid: Your setting's postcode is invalid.
             email:
               blank: Enter an email address.
-              invalid: This email address is invalid.
+              invalid: Enter a valid email address.
             password:
               blank: Enter a password.
               too_short: Password must be at least 10 characters. # devise override
             password_confirmation:
-              confirmation: Confirmation doesn't match password.
+              confirmation: Sorry, your passwords don't match.
             ofsted_number:
               invalid: This Ofsted number is not recognised.
   phase_banner_html: This is a new service, your %{feedback_link} will help us improve it.
