@@ -1,31 +1,31 @@
--# if ENV['RAILS_ENV'].eql?('development')
-pre.debug_dump
-  |
-    duration: #{@training_module.duration}
-    topics: #{@training_module.topic_count}
-    milestone: #{@module_progress.milestone}
-  hr
-  | Submodule
-  - @training_module.items_by_submodule.map do |sub_name, items|
-    - if sub_name
-      | - #{sub_name}:
-      - if @module_progress.all?(items)
-        | complete
-      - elsif @module_progress.any?(items)
-        | in progress
-      - elsif @module_progress.none?(items)
-        | not started
-    br
-  hr
-  | Submodule/Topic
-  - @training_module.items_by_topic.map do |(sub_name, topic_name), items|
-    - if topic_name
-      | - #{sub_name}/#{topic_name}:
-      - if @module_progress.all?(items)
-        | complete
-      - elsif @module_progress.any?(items)
-        | in progress
-      - elsif @module_progress.none?(items)
-        | not started
-    br
-  hr
+- if ENV['RAILS_ENV'].eql?('development')
+  pre.debug_dump
+    |
+      duration: #{@training_module.duration}
+      topics: #{@training_module.topic_count}
+      milestone: #{@module_progress.milestone}
+    hr
+    | Submodule
+    - @training_module.items_by_submodule.map do |sub_name, items|
+      - if sub_name
+        | - #{sub_name}:
+        - if @module_progress.all?(items)
+          | complete
+        - elsif @module_progress.any?(items)
+          | in progress
+        - elsif @module_progress.none?(items)
+          | not started
+      br
+    hr
+    | Submodule/Topic
+    - @training_module.items_by_topic.map do |(sub_name, topic_name), items|
+      - if topic_name
+        | - #{sub_name}/#{topic_name}:
+        - if @module_progress.all?(items)
+          | complete
+        - elsif @module_progress.any?(items)
+          | in progress
+        - elsif @module_progress.none?(items)
+          | not started
+      br
+    hr

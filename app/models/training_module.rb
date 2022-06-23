@@ -83,4 +83,9 @@ class TrainingModule < YamlBase
   def first_content_page
     intro_page.next_item
   end
+
+  # @return [ModuleItem]
+  def test_page
+    ModuleItem.where_type(name, 'formative_assessment').first
+  end
 end

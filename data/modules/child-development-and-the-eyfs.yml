@@ -83,3 +83,22 @@ child-development-and-the-eyfs:
 
   1-recap:
     type: text_page
+
+  # ----------------------------------------------------------------------------
+  # Confidence check
+  # ----------------------------------------------------------------------------
+
+  1-confidence:
+    type: text_page
+  1-confidence-1:
+    type: formative_assessment
+  1-confidence-2:
+    type: formative_assessment
+  1-confidence-3:
+    type: formative_assessment
+  1-confidence-4:
+    type: formative_assessment
+  1-confidence-5:
+    type: formative_assessment
+  1-end:
+    type: text_page
