@@ -18,6 +18,11 @@ class TrainingModule < YamlBase
     attributes.fetch(:draft, false)
   end
 
+  # @return [Boolean]
+  def formative?
+    @formative ||= ModuleItem.where_type(name, 'formative_assessment').any?
+  end
+
   # collections -------------------------
 
   # @return [Array<Questionnaire>]
@@ -29,7 +34,7 @@ class TrainingModule < YamlBase
 
   # @return [Array<ModuleItem>]
   def module_items
-    ModuleItem.where(training_module: name).to_a
+    @module_items ||= ModuleItem.where(training_module: name).to_a
   end
 
   # @example
