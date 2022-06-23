@@ -4,6 +4,11 @@ alpha:
   thumbnail: introduction_to_supporting_physical_development
   description: first module description
   objective: first module objective
+  criteria: |
+    - first thing
+    - second thing
+    - third thing
+    - final thing
   duration: 3
 
 bravo:
@@ -11,6 +16,11 @@ bravo:
   thumbnail: introduction_to_supporting_physical_development
   description: second module description
   objective: second module objective
+  criteria: |
+    - first thing
+    - second thing
+    - third thing
+    - final thing
   depends_on: alpha
   duration: 3
 
@@ -19,6 +29,11 @@ charlie:
   thumbnail: introduction_to_supporting_physical_development
   description: third module description
   objective: third module objective
+  criteria: |
+    - first thing
+    - second thing
+    - third thing
+    - final thing
   depends_on: bravo
   duration: 3
 
@@ -27,5 +42,10 @@ delta:
   thumbnail: introduction_to_supporting_physical_development
   description: This module is unpublished and therefore not clickable
   objective: fourth module objective
+  criteria: |
+    - first thing
+    - second thing
+    - third thing
+    - final thing
   depends_on: bravo
   draft: true

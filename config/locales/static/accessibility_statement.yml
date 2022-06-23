@@ -2,5 +2,18 @@
 en:
   static:
     accessibility_statement:
-      heading: Accessibility statement for [service name] service
-      content: \[Content goes here\]
+      heading: Accessibility statement for Child development training
+      content: |
+        A full accessibility statement will appear on this page before Child 
+        development training is made available to the public.
+
+        The page will cover:
+
+        * the efforts we have made to comply with the Public Sector Bodies 
+        (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018
+        * how this website meets the Web Content Accessibility Guidelines version 
+        2.1 AA standard
+
+        If you have any feedback on the accessibility of this website, please 
+        [contact us](mailto:child.development.training@education.gov.uk?subject=Accessibility).
+

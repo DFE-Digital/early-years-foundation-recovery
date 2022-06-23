@@ -134,3 +134,8 @@ en:
       1-2-4:
         heading: 1-2-4
         body: By viewing this page the training module is marked as complete
+    certificate:
+      - the first thing you learned
+      - the second thing you learned
+      - the third thing you learned
+      - exploring the ramifications of everything you learned
