@@ -15,4 +15,8 @@ class TrainingModulesController < ApplicationController
     # /modules/alpha?debug=y
     render partial: 'wip' if params[:debug] # && Rails.env.development?
   end
+
+  def certificate
+    @training_module = TrainingModule.find_by(name: params[:training_module_id])
+  end
 end
