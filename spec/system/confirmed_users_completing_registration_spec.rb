@@ -42,7 +42,7 @@ RSpec.describe 'Confirmed users completing registration' do
 
       expect(page).to have_text('There is a problem')
         .and have_text("Enter your setting's postcode.")
-        .and have_text("Select a setting type.")
+        .and have_text('Select a setting type.')
 
       choose 'Nursery'
       fill_in "Your setting's postcode", with: 'foo'
