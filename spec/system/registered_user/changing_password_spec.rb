@@ -11,7 +11,7 @@ RSpec.describe 'Registered user changing password', type: :system do
     visit '/my-account/edit-password'
     fill_in 'Enter your current password', with: 'StrongPassword123'
     fill_in 'Create a new password', with: password
-    fill_in 'Re-type your new password', with: password
+    fill_in 'Confirm password', with: password
   end
 
   context 'when cancelled' do
