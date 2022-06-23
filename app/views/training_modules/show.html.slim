@@ -1,18 +1,19 @@
 = render 'debug'
 
-.govuk-grid-row
-  .govuk-grid-column-full
-    h1.govuk-heading-l= @training_module.title
-    p.govuk-caption-m= @training_module.description
+.light-grey-box
+  .govuk-grid-row
+    .govuk-grid-column-full
+      h1.govuk-heading-l= @training_module.title
+      p.govuk-caption-m= @training_module.description
 
-    - @module_progress.call_to_action do |state, (mod, page)|
-      = govuk_link_to t(state, scope: 'resume_button'), training_module_content_page_path(mod, page), class: 'govuk-button'
+      - @module_progress.call_to_action do |state, (mod, page)|
+        = govuk_link_to t(state, scope: 'resume_button'), training_module_content_page_path(mod, page), class: 'govuk-button'
 
 = govuk_tag(text: "#{@training_module.topic_count} topics", colour: 'green')
 '
 = govuk_tag(text: "#{@training_module.duration} hours", colour: 'green')
 
-.govuk-grid-row
+.govuk-grid-row class='govuk-!-padding-top-6'
   .govuk-grid-column-full
       .govuk-accordion data-module="govuk-accordion"
         - @module_progress.topics_by_submodule.each do |num, current_heading, previous_heading, status, topics|
