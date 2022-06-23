@@ -21,11 +21,12 @@ RSpec.describe CourseProgress do
       expect(course.course_completed?).to be false
     end
 
-    # create viewing event for last page
-    it 'is true once all published modules are completed' do
-      view_module_page_event('alpha', '1-2-4')
-      view_module_page_event('bravo', '1-2-2-1')
-      view_module_page_event('charlie', '1-1-3')
+    it 'is true once all published module pages are viewed' do
+      %i[alpha bravo charlie].map do |mod_name|
+        TrainingModule.find_by(name: mod_name).module_items.map do |item|
+          view_module_page_event(mod_name.to_s, item.name)
+        end
+      end
 
       expect(course.course_completed?).to be true
     end
@@ -58,14 +59,13 @@ RSpec.describe CourseProgress do
   describe '#available_modules' do
     it 'returns a list of modules that can be started' do
       expect(course.available_modules.map(&:name)).to eq %w[alpha]
-
       # start the first module with a dependent
       expect { view_module_page_event('alpha', '1-1') }
       .to change { course.available_modules.count }
       .from(1).to(0)
 
       # complete the first module
-      expect { view_module_page_event('alpha', '1-2-4') }
+      expect { view_whole_module(alpha) }
       .to change { course.available_modules.count }
       .from(0).to(1)
 
@@ -75,7 +75,7 @@ RSpec.describe CourseProgress do
       .from(1).to(0)
 
       # complete the second module
-      expect { view_module_page_event('bravo', '1-2-2-1') }
+      expect { view_whole_module(bravo) }
       .to change { course.available_modules.count }
       .from(0).to(1)
 
@@ -107,7 +107,10 @@ RSpec.describe CourseProgress do
 
     it 'returns the completion date' do
       travel_to Time.zone.parse('2022-06-30') do
-        view_module_page_event('bravo', '1-2-2-1')
+        bravo.module_items.map do |item|
+          view_module_page_event('bravo', item.name)
+        end
+
         expect(course.completed_modules.count).to be 1
         completion_time = course.completed_modules.first[1]
         expect(completion_time).to be_an ActiveSupport::TimeWithZone

@@ -17,4 +17,25 @@ RSpec.describe ModuleProgress do
       expect(progress.milestone).to eq '1-1-3'
     end
   end
+
+  describe '#resume_page' do
+    it 'returns the furthest visited module item' do
+      %w[
+        before-you-start
+        intro
+        1-1
+        1-1-1
+        1-1-2
+        1-1-3
+        1-1-3-1
+      ].map do |page|
+        view_module_page_event('alpha', page)
+      end
+
+      expect(progress.resume_page.name).to eq '1-1-3-1'
+
+      view_module_page_event('alpha', '1-1')
+      expect(progress.resume_page.name).to eq '1-1-3-1'
+    end
+  end
 end

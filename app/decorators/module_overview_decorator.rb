@@ -4,10 +4,10 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
   #   previous_module ? all?(previous_module.module_items) : true
   # end
 
-  # @yield [Array]
+  # @yield [Array] locales key and content page
   def call_to_action
     if completed?
-      yield(:completed, [mod, mod.test_page])
+      yield(:completed, [mod, mod.assessment_page])
     elsif started?
       yield(:started, [mod, resume_page])
     else
@@ -87,7 +87,7 @@ private
     # call to action must be used first
     return false unless all?([
       topic_item.parent.interruption_page,
-      topic_item.parent.intro_page
+      topic_item.parent.intro_page,
     ])
 
     previous_topic = find_previous_topic(topic_item.topic_name, submodule)
@@ -130,9 +130,7 @@ private
   #
   # @return [?]
   def previous_submodule_heading_text(num)
-    find_previous_submodule(num).map { |_, prev_items|
-      prev_items.first.model.heading
-    }.first
+    find_previous_submodule(num).map { |_, items| items.first.model.heading }.first
   end
 
   #

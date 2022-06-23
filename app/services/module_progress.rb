@@ -8,6 +8,21 @@ class ModuleProgress
 
   attr_reader :user, :mod
 
+  # Name of last page viewed in module
+  # @return [String]
+  def milestone
+    page = training_module_events.last
+    page.properties['id'] if page.present?
+  end
+
+  # Name of next unvisited page
+  # @return [ModuleItem]
+  def resume_page
+    unvisited.first&.previous_item
+  end
+
+protected # decorator predicates
+
   # @param mod [TrainingModule]
   # @return [Boolean] module content has been viewed
   def started?
@@ -37,19 +52,6 @@ class ModuleProgress
   # @return [Boolean] no items viewed
   def none?(items)
     state(:none?, items)
-  end
-
-  # Name of last page viewed in module
-  # @return [String]
-  def milestone
-    page = training_module_events.last
-    page.properties['id'] if page.present?
-  end
-
-  # Name of next unvisited page
-  # @return [String]
-  def resume_page
-    unvisited.first&.name
   end
 
 private
