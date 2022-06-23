@@ -28,7 +28,7 @@ html.govuk-template lang="en"
     = navigation
 
     .govuk-width-container
-      = govuk_phase_banner(tag: { text: 'Beta' }) do
+      = govuk_phase_banner(tag: { text: 'Beta' }, classes: 'noprint') do
         = t('phase_banner_html', feedback_link: govuk_link_to('feedback', Rails.configuration.feedback_url))
 
       main.govuk-main-wrapper#main-content role='main'
@@ -36,6 +36,6 @@ html.govuk-template lang="en"
           = govuk_notification_banner title_text: t("banners.#{variant}"), text: translate_markdown(message), success: %w[important notice].include?(variant)
         = yield
 
-    = govuk_footer do |footer|
+    = govuk_footer classes: 'noprint' do |footer|
       - footer.navigation(role: 'contentinfo') do
         = render 'layouts/footer'
