@@ -61,7 +61,7 @@ en:
     notice: Success
 
   extra_registration:
-    complete: Thank you for creating an early years training account. You can now start the first module.
+    complete: Thank you for creating a child development training account. You can now start the first module.
     name:
       heading: About you
       body: We're asking for your details so we can personalise your training certificates.
