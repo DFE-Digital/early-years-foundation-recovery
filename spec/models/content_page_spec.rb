@@ -24,4 +24,13 @@ RSpec.describe ContentPage, type: :model do
       expect(content_page.body).to eq content.dig(content_page.name.to_s, 'body')
     end
   end
+
+  # describe '#image' do
+  # end
+
+  # describe '#module_item' do
+  # end
+
+  # describe '#formative?' do
+  # end
 end

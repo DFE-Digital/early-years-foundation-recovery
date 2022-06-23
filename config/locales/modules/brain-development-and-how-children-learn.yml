@@ -2,7 +2,8 @@
 en:
   modules:
     brain-development-and-how-children-learn:
-      2:
+      before-you-start:
+      intro:
         heading: Brain development and how children learn
         body: |
           ![A practitioner doing an activity with two young children](/assets/2-467960262.jpg)
@@ -225,7 +226,7 @@ en:
 
           Piaget’s thoughts also included the idea that babies in the sensorimotor stage lacked the skill of object permanence. Object permanence is the ability to mentally picture an item even when it was no longer there.
 
-          Piaget made connections between object permanence and separation anxiety which babies generally experience until around 9 to 10 months. During this time, babies don’t understand that their carer still exists, even though they can no longer see them.
+          Piaget made connections between object permanence and separation anxiety which babies generally experience until around 9 to 10 months. During this time, babies do not yet understand that their carer still exists, even when they are out of sight.
 
           Jean Piaget also believed that children:
 
@@ -285,7 +286,7 @@ en:
           - the opportunity for practitioners to support when learning becomes overwhelming or if they need further help
 
       2-1-2-3a:
-        heading: Recent updates to Piaget’s theories
+        heading: Recent updates to Piaget’s theory
         body: |
           ![A practitioner and a young child playing with a musical toy](/assets/2-1-2-3a-1158972312.jpg)
 
@@ -509,10 +510,8 @@ en:
           For example, as described in Development Matters (2021), at a 12 month observation checkpoint, we ask:
 
           <ul class="govuk-list govuk-list--bullet">
-          <blockquote>
           <li>does the baby ‘take turns’ by babbling and using single words? </li>
           <li>does the baby point to things and use gestures to show things to adults and share interests? </li>
-          </blockquote>
           </ul>
 
           If the answer to either of these questions is no, we should not necessarily assume that the child:
@@ -808,15 +807,13 @@ en:
 
           Bruner explained that the sophistication of child’s play increases when an adult is involved.
 
-          In contrast, Bandura explains the importance of children having the opportunity to learn by watching others and to imagine their own success. This may not always be possible within adult led activities. This is because these activities are often more focussed and potentially offer less time for observing others. Some children may feel the need to stay on task and meet expectations and be less likely to "wonder" or imagine.
+          In contrast, Bandura explains the importance of children having the opportunity to learn by watching others and to imagine their own success. Adults should be conscious of this during guided activities. This is because these activities are often more focussed and potentially offer less time for observing others. Some children may feel the need to stay on task and meet expectations, and so be less likely to "wonder" or imagine, but adults should encourage them to do so where appropriate.
 
           Striking a balance of both child and adult led activity will be important to ensure that children can access all aspects of learning.
 
           In Development Matters (2021), it’s explained that:
 
-          <blockquote>
           “Children need opportunities to develop their own play and independent exploration. This is enjoyable and motivating. They also need adults to ‘scaffold’ their learning by giving them just enough help to achieve something they could not do independently. Helping children to think, discuss and plan ahead is important, like gathering the materials they need to make a den before they start building. These are ways of helping children to develop the characteristics of effective learning."
-          </blockquote>
 
           <div class="govuk-inset-text">
           <h2 class="govuk-heading-m">Practitioner prompt</h2>
@@ -927,21 +924,33 @@ en:
 
           <h3 class="govuk-heading-s">Babies </h3>
 
-          <p class="govuk-body">Treasure baskets, baby gyms, incorporating opportunities to roll, practise crawling. </p>
+          <p class="govuk-body">
+          Activities could include:
+          <ul>
+          <li> treasure baskets </li> <li> baby gyms</li> <li> incorporating opportunities to roll </li>  <li> practice crawling </li> </ul> </p>
 
           <h3 class="govuk-heading-s">Toddlers </h3>
 
-          <p class="govuk-body">Puddle jumping, walk like an animal, obstacle course, action songs, parachute play, nature walks such as we are going on a bear hunt.  </p>
-
-          <p class="govuk-body">Bubble play, bean bag toss, egg and spoon, hide and seek.  </p>
+          <p class="govuk-body">
+          Activities could include:
+          <ul> 
+          <li> walk like an animal </li> <li> parachute play </li> 
+          <li> nature walks, such as 'we are going on a bear hunt'</li> <li> bubble play </li>
+          </ul> 
+          </p>
 
           <h3 class="govuk-heading-s">Pre-school </h3>
 
-          <p class="govuk-body">Large equipment including climbing frames, obstacle course, bikes, skipping, bowling, action songs such as duck, duck, goose.  </p>
-
-          <p class="govuk-body">Balance beam, dance party, yoga.  </p>
-
-          </div>
+          <p class="govuk-body"> 
+          Activities could include:
+          <ul>
+          <li> large equipment, including climbing frames, obstacles or bikes </li>
+          <li> action songs, such as 'duck, duck, goose'</li> 
+          <li> dance parties </li> 
+          <li> yoga </li> 
+          </ul> 
+          </p> 
+          </div>  
 
 
       2-2-3-3:
@@ -979,7 +988,7 @@ en:
           - laying the table
           - cookery activities
           - participating in activities to promote children’s understanding of healthy and unhealthy food
-          - unfamiliar food tasting
+          - unfamiliar food tasting and sensory food education (see the further activities at the end of this module for more information)
 
           These activities and experiences will:
 
@@ -1095,6 +1104,8 @@ en:
 
           Learn more about [NHS physical activity guidelines for children (under 5 years).](https://www.nhs.uk/live-well/exercise/exercise-guidelines/physical-activity-guidelines-children-under-five-years/)
 
+          Find out about [how sensory food education can help young children engage with food.](https://help-for-early-years-providers.education.gov.uk/get-help-to-improve-your-practice/sensory-food-education)
+
           ##Further reading
 
           You can find help and guidance on the Department for Education's [Help for early years providers website](https://help-for-early-years-providers.education.gov.uk/).
@@ -1122,13 +1133,25 @@ en:
 
           You can review your total score for the test at the end.
 
-          If you want to receive a certificate of achievement for this module, you need to receive an overall score of at least 66%.
+          If you want to receive a certificate of achievement for this module, you need to receive an overall score of at least 70%.
 
-          If you do not score 66%, you will be able to see which questions you got wrong. You can repeat the test to improve your score as many times as you want to.
+          If you do not score 70%, you will be able to see which questions you got wrong. You can repeat the test to improve your score as many times as you want to.
 
+      2-confidence:
+        heading: Reflect on your learning
+        body: |
+          To help DfE to measure our impact, please answer the following questions. 
 
+          Answers will be anonymous, and we will not know what you individually select.
 
+          You can also [give feedback about the training](https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxURFNMQkgwQk80N1lZWkRFMkE5N09DQVg0NCQlQCN0PWcu). 
 
+          To what extent do you agree with the following statements:
+
+      2-end:
+        heading: Thank you
+        body: |
+          If you would like to give us some feedback, you can do that here...
 
 
 

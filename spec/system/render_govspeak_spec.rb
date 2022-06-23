@@ -5,7 +5,7 @@ RSpec.describe 'Govspeak', type: :system do
 
   context 'with module intro' do
     before do
-      visit '/modules/alpha/content-pages/1'
+      visit '/modules/alpha/content-pages/intro'
     end
 
     it 'is displayed' do
