@@ -1,3 +1,4 @@
+= link_to 'Back', root_path, class: 'govuk-back-link'
 - content_for :devise_form do
   = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
     = f.govuk_error_summary
