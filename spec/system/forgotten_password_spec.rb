@@ -21,7 +21,7 @@ RSpec.describe 'User following forgotten password process', type: :system do
 
         expect(page).to have_current_path(new_user_session_path)
           .and have_text('Success')
-          .and have_text('Your password has been changed successfully.')
+          .and have_text('Your new password has been saved.')
       end
     end
 
