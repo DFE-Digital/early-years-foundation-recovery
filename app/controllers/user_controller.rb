@@ -90,7 +90,7 @@ private
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :postcode, :ofsted_number, :email)
+    params.require(:user).permit(:first_name, :last_name, :postcode, :ofsted_number, :email, :setting_type, :setting_type_other)
   end
 
   def user_password_params

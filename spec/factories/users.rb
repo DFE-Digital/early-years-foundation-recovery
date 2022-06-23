@@ -17,6 +17,7 @@ FactoryBot.define do
 
     trait :completed do
       registered
+      setting_type { 'school' }
       ofsted_number { 'EY123456' }
     end
   end

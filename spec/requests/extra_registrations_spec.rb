@@ -57,11 +57,19 @@ RSpec.describe 'ExtraRegistrations', type: :request do
 
       let(:step) { :setting }
       let(:user_params) do
-        { postcode: Faker::Address.postcode }
+        { postcode: Faker::Address.postcode, setting_type: 'other', setting_type_other: 'coop' }
       end
 
-      it 'Updates user name' do
+      it 'Updates user postcode' do
         expect { update_user }.to change { user.reload.postcode }.to(user_params[:postcode])
+      end
+
+      it 'Updates user setting type' do
+        expect { update_user }.to change { user.reload.setting_type }.to(user_params[:setting_type])
+      end
+
+      it 'Updates user setting type other' do
+        expect { update_user }.to change { user.reload.setting_type_other }.to(user_params[:setting_type_other])
       end
 
       it 'redirects to my-learning' do

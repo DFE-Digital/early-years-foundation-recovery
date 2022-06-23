@@ -15,6 +15,7 @@ RSpec.describe 'Confirmed users completing registration' do
 
       expect(page).to have_text('About your setting')
 
+      choose 'Nursery'
       fill_in "Your setting's postcode", with: 'SE6 2TS'
       fill_in "Your setting's Ofsted number", with: '1234567'
       click_button 'Complete'
@@ -23,7 +24,7 @@ RSpec.describe 'Confirmed users completing registration' do
         .and have_text('Thank you for creating an early years training account.')
     end
 
-    it 'requires name and a valid setting postcode to be complete' do
+    it 'requires name and a setting type and a valid setting postcode to be complete' do
       click_button 'Continue'
 
       expect(page).to have_text('There is a problem')
@@ -41,7 +42,9 @@ RSpec.describe 'Confirmed users completing registration' do
 
       expect(page).to have_text('There is a problem')
         .and have_text("Enter your setting's postcode.")
+        .and have_text("Select a setting type.")
 
+      choose 'Nursery'
       fill_in "Your setting's postcode", with: 'foo'
       click_button 'Complete'
 
