@@ -1,4 +1,4 @@
-# Early Years Recovery
+# Child development training
 
 [![Continuous Integration][ci-badge]][ci-workflow]
 

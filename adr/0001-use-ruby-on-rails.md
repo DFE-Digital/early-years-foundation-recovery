@@ -6,7 +6,7 @@
 
 Within the DfE three programming languages are commonly used for implementation of software: JavaScript, C# and Ruby-on-Rails. Which programming language should we use for this project?
 
-## Decision Drivers <!-- optional -->
+## Decision Drivers
 
 * The existing team are Ruby developers and they have EYFS sector domain knowledge
 * Ruby appears to be the favoured development language within the DfE

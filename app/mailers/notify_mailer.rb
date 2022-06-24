@@ -29,7 +29,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
     set_template(CONFIRMATION_TEMPLATE_ID)
 
     set_personalisation(
-      email_subject: 'Activate your GOV.UK early years training account',
+      email_subject: 'Activate your GOV.UK child development training account',
       name: record.name,
       confirmation_url: confirmation_url(record, confirmation_token: token),
     )

@@ -9,7 +9,7 @@ class ContentPagesController < ApplicationController
   end
 
   def show
-    ahoy.track "Viewing #{params[:id]}", request.path_parameters
+    track('module_content_page')
 
     @model = module_item.model
 

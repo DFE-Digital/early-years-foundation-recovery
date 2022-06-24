@@ -189,9 +189,14 @@ class ModuleItem < YamlBase
     current_module_items[position_within_module + 1]
   end
 
-private
-
   # collections -------------------------
+
+  # @return [Array<ModuleItem>] module items in the same submodule and topic
+  def current_submodule_topic_items
+    self.class.where_submodule_topic(training_module, submodule_name, topic_name).to_a
+  end
+
+private
 
   # @return [Array<ModuleItem>] module items in the same module
   def current_module_items
@@ -202,10 +207,5 @@ private
   # @return [Array<ModuleItem>] module items in the same submodule
   def current_submodule_items
     self.class.where_submodule(training_module, submodule_name).to_a
-  end
-
-  # @return [Array<ModuleItem>] module items in the same submodule and topic
-  def current_submodule_topic_items
-    self.class.where_submodule_topic(training_module, submodule_name, topic_name).to_a
   end
 end
