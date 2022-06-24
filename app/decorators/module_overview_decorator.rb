@@ -1,9 +1,4 @@
 class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
-  # @return [Boolean] previous module completed
-  # def ready_to_start?
-  #   previous_module ? all?(previous_module.module_items) : true
-  # end
-
   # @yield [Array] locales key and content page
   def call_to_action
     if completed?

@@ -7,6 +7,12 @@ RSpec.describe ModuleProgress do
 
   include_context 'with progress'
 
+  # describe '#started?' do
+  # end
+
+  # describe '#completed?' do
+  # end
+
   describe '#milestone' do
     it 'returns the name of the last viewed page' do
       view_module_page_event('alpha', '1-1')

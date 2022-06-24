@@ -50,7 +50,7 @@ RSpec.describe CourseProgress do
       ]
 
       # complete the first module
-      expect { view_module_page_event('alpha', '1-2-4') }
+      expect { view_whole_module(alpha) }
       .to change { course.current_modules.count }
       .from(2).to(1)
     end

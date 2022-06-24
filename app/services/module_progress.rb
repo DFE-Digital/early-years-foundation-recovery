@@ -21,34 +21,45 @@ class ModuleProgress
     unvisited.first&.previous_item
   end
 
-protected # decorator predicates
-
-  # @return [Boolean] module content has been viewed
-  def started?
-    training_module_events.any?
-  end
-
-  # @return [Boolean] module content has been viewed
-  def started_content?
-    first_page = mod.first_content_page.name
-    training_module_events.where_properties(id: first_page).present?
-  end
-
+  # @see CourseProgress
   # @return [Boolean]
   def completed?
     all?(mod.module_items)
   end
 
+  # @see CourseProgress
+  # @return [Boolean] module pages have been viewed
+  def started?
+    training_module_events.any?
+  end
+
+# @return [Boolean] previous module completed
+# def ready_to_start?
+#   previous_module ? all?(previous_module.module_items) : true
+# end
+
+protected
+
+  # @see ModuleOverviewDecorator
+  # @return [Boolean] module content pages have been viewed
+  def started_content?
+    first_page = mod.first_content_page.name
+    training_module_events.where_properties(id: first_page).present?
+  end
+
+  # @see ModuleOverviewDecorator
   # @return [Boolean] all items viewed
   def all?(items)
     state(:all?, items)
   end
 
+  # @see ModuleOverviewDecorator
   # @return [Boolean] some items viewed
   def any?(items)
     state(:any?, items)
   end
 
+  # @see ModuleOverviewDecorator
   # @return [Boolean] no items viewed
   def none?(items)
     state(:none?, items)
