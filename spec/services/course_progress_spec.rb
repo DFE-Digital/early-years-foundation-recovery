@@ -35,12 +35,12 @@ RSpec.describe CourseProgress do
   describe '#current_modules' do
     it 'returns a list of modules in progress' do
       # start a module
-      expect { view_module_page_event('alpha', '1-1') }
+      expect { start_module(alpha) }
       .to change { course.current_modules.count }
       .from(0).to(1)
 
       # force start a second concurrent module
-      expect { view_module_page_event('bravo', '1-1') }
+      expect { start_module(bravo) }
       .to change { course.current_modules.count }
       .from(1).to(2)
 
@@ -60,7 +60,7 @@ RSpec.describe CourseProgress do
     it 'returns a list of modules that can be started' do
       expect(course.available_modules.map(&:name)).to eq %w[alpha]
       # start the first module with a dependent
-      expect { view_module_page_event('alpha', '1-1') }
+      expect { start_module(alpha) }
       .to change { course.available_modules.count }
       .from(1).to(0)
 
@@ -70,7 +70,7 @@ RSpec.describe CourseProgress do
       .from(0).to(1)
 
       # start the second module with a dependent
-      expect { view_module_page_event('bravo', '1-1') }
+      expect { start_module(bravo) }
       .to change { course.available_modules.count }
       .from(1).to(0)
 

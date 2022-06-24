@@ -13,6 +13,12 @@ RSpec.shared_context 'with progress' do
     mod.module_items.map { |item| view_module_page_event(mod.name, item.name) }
   end
 
+  # Visit the module intro page
+  #
+  def start_module(mod)
+    view_module_page_event(mod.name, 'intro')
+  end
+
   # @return [true] create a fake event log item
   def view_module_page_event(module_name, page_name)
     tracker.track('page_view', {

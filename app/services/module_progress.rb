@@ -28,9 +28,9 @@ class ModuleProgress
   end
 
   # @see CourseProgress
-  # @return [Boolean] module pages have been viewed
+  # @return [Boolean] module pages have been viewed (past interruption)
   def started?
-    training_module_events.any?
+    visited?(mod.intro_page)
   end
 
 # @return [Boolean] previous module completed
@@ -43,8 +43,7 @@ protected
   # @see ModuleOverviewDecorator
   # @return [Boolean] module content pages have been viewed
   def started_content?
-    first_page = mod.first_content_page.name
-    training_module_events.where_properties(id: first_page).present?
+    visited?(mod.first_content_page)
   end
 
   # @see ModuleOverviewDecorator
@@ -63,6 +62,11 @@ protected
   # @return [Boolean] no items viewed
   def none?(items)
     state(:none?, items)
+  end
+
+  # @return [Boolean] view event logged for page
+  def visited?(page)
+    training_module_events.where_properties(id: page.name).present?
   end
 
 private
