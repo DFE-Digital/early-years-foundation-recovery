@@ -32,6 +32,8 @@ Rails.application.routes.draw do
     resources :content_pages, only: %i[index show], path: 'content-pages'
     resources :questionnaires, only: %i[show update]
     resources :formative_assessments, only: %i[show update], path: 'formative-assessments'
+
+    get 'certificate'
   end
 
   get '/:id', to: 'static#show', as: :static

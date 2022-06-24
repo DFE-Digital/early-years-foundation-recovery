@@ -2,6 +2,7 @@
 @import "./govspeak";
 @import "./card";
 @import "./interruption";
+@import "./print-link";
 
 .debug_dump {
   background: beige;
@@ -34,11 +35,6 @@
   .govuk-button {
     margin: 0;
   }
-}
-
-.light-grey-box-wide {
-  background: govuk-colour("light-grey");
-  width: 100%
 }
 
 .float-right {

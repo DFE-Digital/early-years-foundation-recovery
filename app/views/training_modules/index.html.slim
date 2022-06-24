@@ -1,4 +1,5 @@
-= link_to 'Back', root_path, class: 'govuk-back-link'
+= govuk_back_link href: root_path
+
 
 h1.govuk-heading-l About this training course
 
@@ -36,6 +37,9 @@ p.govuk-body
       - @published_modules.each.with_index(1).map do |mod, pos|
         - accordion.section(heading_text: "Module #{pos}: #{mod.title}", summary_text: mod.description) do
           .gem-c-govspeak= translate_markdown(mod.objective)
+          h2 What you&rsquo;ll learn 
+          p.govuk_body On completion of this module you will be able to:
+          .gem-c-govspeak= translate_markdown(mod.criteria)
 
       - accordion.section(heading_text: t('experts.heading'), summary_text: t('experts.summary')) do
           .gem-c-govspeak= translate_markdown(t('experts.body'))

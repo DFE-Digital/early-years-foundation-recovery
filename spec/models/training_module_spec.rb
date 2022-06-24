@@ -17,7 +17,7 @@ RSpec.describe TrainingModule, type: :model do
 
   it 'has fields' do
     expect(described_class.field_names).to eq %i[
-      title thumbnail description objective duration name depends_on draft
+      title thumbnail description objective criteria duration name depends_on draft
     ]
   end
 
