@@ -1,20 +1,10 @@
 require 'rails_helper'
 require 'seed_interim_users'
-require 'rake'
 
 RSpec.describe SeedInterimUsers do
-  Rails.application.load_tasks
-
-  let(:seed_file) do
-    Rails.root.join('db/seeds/interim_data.yml')
-  end
-  let(:users) do
-    YAML.load_file(seed_file)
-  end
-
-  describe 'load_interim_data.rake' do
+  describe 'seed_interim_users.rake' do
     it 'adds valid user to database and views all module 1 pages' do
-      described_class.seed_interim_users(users)
+      described_class.new.seed_interim_users
       user = User.find_by(email: 'ben.miller@test.com')
       expect(user).to be_present
       module_items = ModuleItem.where(training_module: 'child-development-and-the-eyfs')
@@ -25,15 +15,15 @@ RSpec.describe SeedInterimUsers do
     end
 
     it 'if email is invalid, does not add user' do
-      described_class.seed_interim_users(users)
+      described_class.new.seed_interim_users
       expect(User.where(email: 'ttttolatunjihtest.com')).not_to exist
-      expect { described_class.seed_interim_users(users) }.to output(a_string_including('Skipping user: ttttolatunjihtest.com creation as it is invalid.')).to_stdout
+      expect { described_class.new.seed_interim_users }.to output(a_string_including('Skipping user: ttttolatunjihtest.com creation as it is invalid.')).to_stdout
     end
 
     it 'if email already exists, does not add user' do
-      Rake::Task['db:seed'].invoke
-      expect(User.where(email: 'ben.miller@test.com')).to exist
-      expect { described_class.seed_interim_users(users) }.to output(a_string_including('Skipping user: ben.miller@test.com creation as it already exists.')).to_stdout
+      user = create(:user, :confirmed, email: 'ben.miller@test.com')
+      expect(User.find_by(email: 'ben.miller@test.com')).to be_present
+      expect { described_class.new.seed_interim_users }.to output(a_string_including('Skipping user: ben.miller@test.com creation as it already exists.')).to_stdout
     end
   end
 end

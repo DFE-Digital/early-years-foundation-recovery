@@ -1,13 +1,15 @@
 class SeedInterimUsers
-  def self.seed_interim_users(users)
+  def seed_interim_users()
+    seed_file = Rails.root.join('db/seeds/interim_data.yml')
+    users = YAML.load_file(seed_file)
     users.each do |user_attributes|
       if !User.exists?(email: user_attributes['email']) && valid_email?(user_attributes['email'])
         updated_attributes = user_attributes.merge(password: SecureRandom.base64(12))
         user = User.create!(updated_attributes)
         puts("User: #{user.email} succesfully created.")
-        module_items = ModuleItem.where(training_module: 'child-development-and-the-eyfs').map(&:name)
-        module_items.each do |page_name|
-          view_module_page_event('child-development-and-the-eyfs', page_name, user)
+        module_items = ModuleItem.where(training_module: 'child-development-and-the-eyfs')
+        module_items.each do |item|
+          view_module_page_event('child-development-and-the-eyfs', item.name, user)
         end
       elsif !valid_email?(user_attributes['email'])
         puts("Skipping user: #{user_attributes['email']} creation as it is invalid.")
@@ -17,7 +19,7 @@ class SeedInterimUsers
     end
   end
 
-  def self.view_module_page_event(module_name, page_name, user)
+  def view_module_page_event(module_name, page_name, user)
     ahoy = Ahoy::Tracker.new(user: user, controller: 'content_pages')
     ahoy.track("Viewing #{page_name}", {
       id: page_name,
@@ -30,7 +32,7 @@ class SeedInterimUsers
 
   EMAIL_REGEX = /\A[^@\s]+@[^@\s]+\z/
 
-  def self.valid_email?(email)
+  def valid_email?(email)
     email =~ EMAIL_REGEX
   end
 end
