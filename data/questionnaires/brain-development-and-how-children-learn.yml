@@ -6,7 +6,7 @@ brain-development-and-how-children-learn:
       1_what_brain_area:
         multi_select: false 
         label: |
-          Complete the statement: The BLANK is the area of the brain responsible for motor development.
+          Which area of the brain is responsible for motor development? 
         assessment_summary:  |
           The cerebellum is at the back of your head. This is the area in charge of motor development. It controls balance and coordinates movements. The cerebellum combines the signals from the eyes, ears and muscles with motor commands. 
         assessment_fail_summary: |
@@ -42,7 +42,7 @@ brain-development-and-how-children-learn:
       1_what_during_pregnancy:
         multi_select: false 
         label: |
-          Complete the statement: BLANK during pregnancy may lead to premature birth, low birth weight and an underdeveloped brain.
+          If experienced by the mother during pregnancy, which of the following may lead to preamture birth, low birth weight and an underdeveloped brain?
         assessment_summary: |
           Cigarette smoke reduces the amount of oxygen the baby receives and reduces the forming of neurones. This can result in premature birth, low birth weight and an underdeveloped brain.    
         assessment_fail_summary: |
@@ -95,7 +95,7 @@ brain-development-and-how-children-learn:
       1_piaget_stage:
         multi_select: false 
         label: |
-          Complete the statement: Jean Piaget labelled the 0 to 2 year stage of child development the BLANK stage.
+         What did Jean Piaget label the 0 to 2 year stage of child development?
         assessment_summary: |
           Piaget labelled the 0 to 2 years old stage of development as the sensorimotor stage. In this stage, babies use their senses to explore and grow. 
 
@@ -105,10 +105,10 @@ brain-development-and-how-children-learn:
 
           You can support babies' understanding of the world around them by providing sensory rich environments. For example, while teaching them the word 'apple', babies might be able to repeat the word but might not know what an apple is. If a baby gets to see, touch, smell and taste an apple, they will be able to complete the view in their mind that the word apple is the green fruit that tastes like this and smells like that.
         answers:
-          1: "Gross motor"
-          2: "Fine motor"                    
-          3: "Sensorimotor"
-          4: "Senses"
+          1: "Gross motor stage"
+          2: "Fine motor stage"                    
+          3: "Sensorimotor stage"
+          4: "Senses stage"
         correct_answers: ["3"]
   2-1-2-1c:
     content:
@@ -156,7 +156,7 @@ brain-development-and-how-children-learn:
       1_child_relaxed:
         multi_select: false
         label: |
-          Select 1 answer to complete the statement: When a child is relaxed, they are more likely to BLANK. 
+          What is a child more likely to do when they are relaxed?
         assessment_summary: |
           When children feel relaxed they are more confident to explore and experiment, which will result in increased learning opportunities. 
         assessment_fail_summary: |
@@ -172,7 +172,7 @@ brain-development-and-how-children-learn:
       1_healthy_diet:
         multi_select: false
         label: |
-          Complete the statement: A healthy diet will BLANK.
+          Feeding children a healthy diet will do which of the following?
         assessment_summary: |
           When children eat a balanced diet they will have all the necessary nutrients to support growth and development.
         assessment_fail_summary: |
@@ -239,7 +239,7 @@ brain-development-and-how-children-learn:
       1_maslow_needs:
         multi_select: false 
         label: |
-          Maslow considered BLANK needs to be the most important. 
+          Which type of needs did Maslow consider to be the most important?
         assessment_summary: |
           Maslow believed the most important needs are the physiological needs, the things needed for survival. These needs include food, water, warmth and rest. Maslow concluded that all other levels depended on these needs being met first.
         assessment_fail_summary: |
@@ -284,7 +284,7 @@ brain-development-and-how-children-learn:
       1_bruner:
         multi_select: false 
         label: |
-          Complete the statement: The 3 learning methods included in Bruner’s spiral curriculum are Enactive, BLANK and Symbolic representation.
+          The 3 learning methods included in Bruner’s spiral curriculum are Enactive, Symbolic representation and which of the following?
 
         assessment_summary: | 
           Bruner’s methods included:
@@ -311,7 +311,7 @@ brain-development-and-how-children-learn:
       1_more_knowledgeable_other:
         multi_select: false 
         label: |
-          Complete the statement: BLANK is the term used to describe when a more knowledgeable other helps children to acquire new skills and knowledge.
+          What is the term used to describe when a more knowledgeable other helps children to acquire new skills and knowledge?
         assessment_summary: |
           Scaffolding is where support and techniques are used to guide a child’s learning. Scaffolding could include modelling, chunking knowledge to make it achievable and using visual aids and questions to support learning. This help can then be reduced until the child is able to complete the task alone. 
         assessment_fail_summary: |
@@ -328,9 +328,9 @@ brain-development-and-how-children-learn:
       1_nhs_physical_hours:
         multi_select: false 
         label: |
-          Complete the statement: According to NHS guidance, toddlers aged between 1 to 2 years should participate in a mixture of running, jumping, balancing and light activities like standing and walking for BLANK hours a day.
+          According to NHS guidance, toddlers aged between 1 to 2 years should participate in a mixture of running, jumping, balancing and light activities like standing and walking for how many hours each day?
         assessment_summary: |
-          It is important to remember that this is not 3 hours of planned physical activity that involves running, jumping, or climbing, but that it also includes light activity such as standing and walking. 
+          NHS guidance states that children aged 1 to 2 should be active for at least 3 hours per day. It is important to remember that this is not 3 hours of planned physical activity that involves running, jumping, or climbing, but that it also includes light activity such as standing and walking. 
         assessment_fail_summary: |
           NHS guidance states that children aged 1 to 2 should be active for at least 3 hours per day. It is important to remember that this is not 3 hours of planned physical activity that involves running, jumping, or climbing, but that it also includes light activity such as standing and walking. 
         answers:
@@ -426,7 +426,7 @@ brain-development-and-how-children-learn:
       1_brain_eyes:
         multi_select: false 
         label: |
-          Complete the statement: The part of the brain that makes sense of the information that comes from our eyes is known as the BLANK
+          Which part of the brain makes sense of the information that comes from our eyes?
         assessment_summary: 
         assessment_fail_summary: |
           The occipital lobes are the visual processing area of the brain. You might want to revisit the section on parts of the brain.
@@ -462,7 +462,7 @@ brain-development-and-how-children-learn:
       1_ability_tasks:
         multi_select: false 
         label: |
-          Complete the statement: BLANK will impact upon a child's ability to carry out tasks.
+          Which of the following will impact upon a child's ability to carry out tasks?
         assessment_summary: 
         assessment_fail_summary: |
           Prolonged exposure to negative influences such as social isolation, a lack of stimulation and limited exposure to language and communication will impact on all aspects of a child’s learning and development. Children may experience restricted language and communication difficulties, be more prone to mental health concerns and be unable to carry out basic tasks.
@@ -517,7 +517,7 @@ brain-development-and-how-children-learn:
       1_development_delay:
         multi_select: true 
         label: |
-          How can you support a child with cognitive development delay? Choose all that apply.
+          How can you support a child with cognitive development delay? (Select all answers that apply)
         assessment_summary: 
         assessment_fail_summary: |
           ‘Cognitive development delay’ means that a child is at a lower level than the expected milestone. No child should ever be considered to be low ability, and every child is able to progress and achieve with the correct support. Maintaining your knowledge of expected development milestones will ensure you are able to intervene early and offer appropriate support to ensure every child can progress.
@@ -554,7 +554,7 @@ brain-development-and-how-children-learn:
       1_negatively_impact_development_delay:
         multi_select: true 
         label: |
-          Which two theorists acknowledge the importance of scaffolding, where children’s learning is supported by others? (Select two)
+          Which two theorists acknowledge the importance of scaffolding, where children’s learning is supported by others? (Select all answers that apply)
         assessment_summary: 
         assessment_fail_summary: |
           Both Vygotsky’s zone of proximal development (ZPD) and Bruner’s spiral curriculum acknowledge scaffolding. This is where children’s learning is supported and guided by a more knowledgeable other (MKO) to support understanding. 
