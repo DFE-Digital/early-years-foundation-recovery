@@ -1,3 +1,4 @@
+= govuk_link_to 'Back', edit_extra_registration_path('name'), class: 'govuk-back-link'
 = f.govuk_fieldset legend: { text: t(:heading, scope: [:extra_registration, current_step]) } do
   p.govuk_body
     = translate_markdown(t(:body, scope: [:extra_registration, current_step]))
