@@ -18,5 +18,6 @@ class TrainingModulesController < ApplicationController
 
   def certificate
     @training_module = TrainingModule.find_by(name: params[:training_module_id])
+    @module_progress = ModuleProgress.new(user: current_user, mod: @training_module)
   end
 end
