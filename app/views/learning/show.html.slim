@@ -5,7 +5,10 @@ h1.govuk-heading-l My learning
   .govuk-grid-column-full
     h2.govuk-heading-m In progress
     - if @user.course.current_modules.none?
-      p You have not started any modules. To begin the training course, start an available module.
+      - if @user.course.completed_modules.none?
+        p You have not started any modules. To begin the training course, start an available module.
+      - else
+        p You have not started any modules. Please choose an available module.
     - else
       div class='govuk-grid-row govuk-!-margin-bottom-7'
         - @user.course.current_modules.each do |mod|
