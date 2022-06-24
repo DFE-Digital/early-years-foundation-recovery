@@ -38,7 +38,7 @@ personal-social-and-emotional-development:
       1_rather_play_with_others:
         multi_select: false 
         label: | 
-          Complete the statement: At BLANK years old, most children would rather play with others than alone.
+          At what age would children rather play with others than alone?
         assessment_summary: At 4 years old, children would rather play with others than alone and they are making friendships and forming bonds with their peers. 
         assessment_fail_summary: At 4 years old, children would rather play with others than alone and they are making friendships and forming bonds with their peers.
         answers:
@@ -68,7 +68,7 @@ personal-social-and-emotional-development:
       1_high_self_efficacy:
         multi_select: false 
         label: |
-          Complete the statement: When a child has high self-efficacy they BLANK.
+          What does it mean if a child has high self-efficacy? 
         assessment_summary: |
           Children with high self-efficacy will believe they can succeed and are more likely to attempt challenging activities. 
           You can support children to build self-efficacy by:
@@ -85,10 +85,10 @@ personal-social-and-emotional-development:
           - actively listening to them so that they feel heard and important 
           - encouraging them to try challenging but achievable activities
         answers:
-          1: "Have limited confidence"
-          2: "Believe they can succeed"
-          3: "Have positive emotional responses"
-          4: "Do not notice change"
+          1: "They have limited confidence"
+          2: "They believe they can succeed"
+          3: "They have positive emotional responses"
+          4: "They do not notice change"
         correct_answers:
           - "2"  
   3-1-2-2c:
@@ -97,7 +97,7 @@ personal-social-and-emotional-development:
       1_promoting_choice:
         multi_select: false 
         label: | 
-          Complete the statement: Promoting choices in your setting will BLANK.
+          How will promoting choices in your setting impact children? 
         assessment_summary: |
           Frequent use of choice encourages self-worth, as being involved in choices and decisions will support children to feel valued and important. It will also help children to: 
 
@@ -112,10 +112,10 @@ personal-social-and-emotional-development:
           - understand the concepts of actions and consequences
           - develop their language skills by engaging in conversations and discussing their choices
         answers:
-          1: "Confuse children"
-          2: "Frustrate children"
-          3: "Encourage self-worth"
-          4: "Limit language development"
+          1: "It will confuse children"
+          2: "It will frustrate children"
+          3: "It will encourage self-worth in children"
+          4: "It will limit language development"
         correct_answers:
           - "3"  
   3-1-2-3b:
@@ -171,7 +171,7 @@ personal-social-and-emotional-development:
       1_overstimulation:
         multi_select: false 
         label: |
-          What term describes the impact that aspects of the environment, such as noise, light or crowds, can have on children? 
+          What is the term used to describe the potential impact aspects of their environment such as noise, light, or crowds can have on children?
         assessment_summary: |
           ‘Overstimulation’ is the term used to describe the potential impact aspects of the environment such as noise, light, or crowds can have on children. 
         
@@ -208,14 +208,14 @@ personal-social-and-emotional-development:
       1_ainsworth:
         multi_select: false 
         label: |
-          Complete the statement: Ainsworth’s experiment was called The BLANK Situation.
+          What was the name of Ainsworth’s experiment? 
         assessment_summary: The experiment Ainsworth conducted to investigate a baby’s quality of attachment was called the “Strange Situation”. 
         assessment_fail_summary: The experiment Ainsworth conducted to investigate a baby’s quality of attachment was called the “Strange Situation”. 
         answers:
-          1: "Social"
-          2: "Funny"
-          3: "Strange"
-          4: "Physical"
+          1: "The Social Situation"
+          2: "The Funny Situation"
+          3: "The Strange Situation"
+          4: "The Physical Situation"
         correct_answers:
           - "3"  
   3-2-1-3c:
@@ -337,16 +337,16 @@ personal-social-and-emotional-development:
       1_understand_regulate:
         multi_select: false 
         label: |
-          Complete the statement: If children are not effectively supported to understand and regulate their feelings they can become BLANK."
+          What can happen if children are not effectively supported to understand and regulate their feelings? 
         assessment_summary: |
           Children can become overwhelmed and will struggle with challenges experienced as part of their daily lives if they are not effectively supported to understand and regulate their feelings. Developing self-regulation requires guidance and support. As children begin to recognise and name their feelings, they will also need your support to learn to regulate them. This support can be referred to as co-regulation, meaning when you work in cooperation with others to develop skills. 
         assessment_fail_summary: |
           Children can become overwhelmed and will struggle with challenges experienced as part of their daily lives if they are not effectively supported to understand and regulate their feelings. Developing self-regulation requires guidance and support. As children begin to recognise and name their feelings, they will also need your support to learn to regulate them. This support can be referred to as co-regulation, meaning when you work in cooperation with others to develop skills. 
         answers:
-          1: "Overwhelmed"
-          2: "Physically active"
-          3: "More organised"
-          4: "Tired"
+          1: "They can become overwhelmed"
+          2: "They can become more physically active"
+          3: "They can become more organised"
+          4: "They can become tired"
         correct_answers:
           - "1"  
 
@@ -376,7 +376,7 @@ personal-social-and-emotional-development:
       1_self-worth-definition:
         multi_select: false 
         label: |
-          Complete the statement: Self-worth is the term used to describe BLANK.
+          What is the term ‘self-worth’ used to describe?
         assessment_summary: 
         assessment_fail_summary: |
           Self-worth is how important and valued a child feels. A child with high self-worth is more likely to approach learning with confidence, enthusiasm and motivation.
@@ -396,7 +396,7 @@ personal-social-and-emotional-development:
       1_quiet_area:
         multi_select: false 
         label: |
-          Complete the statement: Providing a quiet area within the setting will help to prevent BLANK.
+          Providing a quiet area within the setting will help to prevent which of the following? 
         assessment_summary: 
         assessment_fail_summary: |
           Some children can become overstimulated by their environment. This can present as frustration or challenging behaviour. Children may not be familiar with the wealth of activity and interaction being offered. Shy and reticent children and those with SEND will also benefit from a quiet area. 
@@ -458,17 +458,17 @@ personal-social-and-emotional-development:
       1_communication_practitioners_parents:
         multi_select: false
         label: |
-          Complete the statement: Effective communication between practitioners and parents will result in BLANK expectations for children.
+          Effective communication between practitioners and parents will result in what kind of expectations for children? 
         assessment_summary: 
         assessment_fail_summary: |
           When everyone has realistic expectations, the child will have the freedom to learn in supportive environments. When there is effective communication between practitioners and parents, everyone caring for the child will have a full understanding of their needs, preferences and level of development. This will support better understanding of both the child’s current skills and the plan to promote progress.  
         
           You might want to revisit the section on supporting children to develop secure relationships. 
         answers:
-          1: "Reasonable"
-          2: "High"
-          3: "Realistic"
-          4: "Low"
+          1: "Reasonable expectations"
+          2: "High expectations"
+          3: "Realistic expectations"
+          4: "Low expectations"
         correct_answers:
           - "3" 
   3-test-7:
@@ -477,17 +477,17 @@ personal-social-and-emotional-development:
       1_manage_feelings:
         multi_select: true
         label: |
-          Supporting children to understand and manage their feelings will help to increase what? (select 2)
+          Supporting children to understand and manage their feelings will help them to increase which of the following? (Select all answers that apply) 
         assessment_summary: 
         assessment_fail_summary: |
           Supporting children to understand and manage their feelings will help them to increase their resilience, raise their self-efficacy and manage their behaviour.
 
           You might want to revisit the section on early relationship experiences.
         answers:
-          1: "Resilience"
-          2: "Independence"
-          3: "Anxiety"
-          4: "Self-efficacy"
+          1: "Their resilience"
+          2: "Their independence"
+          3: "Their anxiety"
+          4: "Their self-efficacy"
         correct_answers:
           - ["1","4"] 
   3-test-8:
@@ -514,7 +514,7 @@ personal-social-and-emotional-development:
       1_social_expectations:
         multi_select: false
         label: |
-          At approximately what age do children start to develop an awareness of social expectations and are able to change their behaviour when asked, if clearly directed and supported by an adult. 
+          At approximately what age do children start to develop an awareness of social expectations and become able to change their behaviour when asked, if clearly directed and supported by an adult? 
         assessment_summary: 
         assessment_fail_summary: |
           At approximately 12 to 18 months old, children start to develop an awareness of social expectations and are able to change their behaviour when asked, if clearly directed and supported by an adult. 
