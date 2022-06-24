@@ -41,12 +41,6 @@ class ModuleProgress
 protected
 
   # @see ModuleOverviewDecorator
-  # @return [Boolean] module content pages have been viewed
-  def started_content?
-    visited?(mod.first_content_page)
-  end
-
-  # @see ModuleOverviewDecorator
   # @return [Boolean] all items viewed
   def all?(items)
     state(:all?, items)

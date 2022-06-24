@@ -71,14 +71,13 @@ private
     ]
   end
 
-  # true if submodule is started/completed or previous submodule is completed
-  #
   # @param submodule [String]
   # @param topic_item [ModuleItem]
   #
   # @return [Boolean]
   def clickable?(submodule:, topic_item:)
-    return false unless started_content?
+    submodule_intro = mod.module_items_by_submodule(submodule).first
+    return false unless visited?(submodule_intro)
 
     previous_topic = find_previous_topic(topic_item.topic_name, submodule)
     previous_topic_items = previous_topic.values.first.to_a
