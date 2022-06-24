@@ -4,7 +4,8 @@
 
 ## Context and Problem Statement
 
-## Decision Drivers <!-- optional -->
+<!-- Decision Drivers are optional -->
+## Decision Drivers
 
 ## Considered Options
 

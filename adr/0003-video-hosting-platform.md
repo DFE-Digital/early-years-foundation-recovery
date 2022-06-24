@@ -6,7 +6,7 @@
 
 How might we host video for incorporation into the module content
 
-## Decision Drivers <!-- optional -->
+## Decision Drivers
 
 * Infrastructure cost
 * Integration with content

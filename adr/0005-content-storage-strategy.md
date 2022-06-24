@@ -6,7 +6,7 @@
 
 How might we introduce/store both module content and assessment content in the application so that it may be navigated through and displayed to the user.
 
-## Decision Drivers <!-- optional -->
+## Decision Drivers
 
 * Limited delivery timescales, i.e. 4 sprint private beta development period
 * Navigation structures need to be defined

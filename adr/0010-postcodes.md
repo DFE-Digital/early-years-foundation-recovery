@@ -6,7 +6,7 @@
 
 How might we ensure the mandatory postcode field entered by a user is valid.
 
-## Decision Drivers <!-- optional -->
+## Decision Drivers
 
 - Third-party libraries provide additional functionality with zero tech-debt.
 - Handling the validation in app adds a slight overhead with additional testing.
