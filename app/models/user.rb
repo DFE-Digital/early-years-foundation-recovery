@@ -44,11 +44,8 @@ class User < ApplicationRecord
     end
 
     opts = pending_reconfirmation? ? { to: unconfirmed_email } : {}
-    if registration_complete
-      send_devise_notification(:confirmation_instructions, @raw_confirmation_token, opts)
-    else
-      send_devise_notification(:activation_instructions, @raw_confirmation_token, opts)
-    end
+    mailer = registration_complete? ? :confirmation_instructions : :activation_instructions
+    send_devise_notification(mailer, @raw_confirmation_token, opts)
   end
 
   # @return [String]
