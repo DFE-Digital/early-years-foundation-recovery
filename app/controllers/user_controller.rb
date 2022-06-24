@@ -55,7 +55,7 @@ class UserController < ApplicationController
   def update_email
     if user.update(user_params)
       track('user_email_change', success: true)
-      redirect_to user_path, notice: 'You have saved your details'
+      redirect_to user_path, notice: t('notice.email_changed')
     else
       track('user_email_change', success: false)
       render :edit_email, status: :unprocessable_entity

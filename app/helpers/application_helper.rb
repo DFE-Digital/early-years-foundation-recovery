@@ -63,6 +63,10 @@ module ApplicationHelper
     govuk_table(rows: [header, *rows], caption: 'Completed modules', first_cell_is_header: true)
   end
 
+  def module_completed_at(module_progress)
+    "Date completed:  #{module_progress.completed_at.to_date.strftime('%-d %B %Y')}"
+  end
+
   def clear_flash
     flash[:alert] = nil
   end
