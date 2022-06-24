@@ -87,8 +87,8 @@ personal-social-and-emotional-development:
         answers:
           1: "Have limited confidence"
           2: "Believe they can succeed"
-          3: "Feel unvalued"
-          4: "Are anxious about a challenge"
+          3: "Have positive emotional responses"
+          4: "Do not notice change"
         correct_answers:
           - "2"  
   3-1-2-2c:

@@ -27,9 +27,9 @@ brain-development-and-how-children-learn:
         label: |
           In which trimester does the baby’s brain triple in weight?
         assessment_summary: |
-          In the third trimester the baby’s brain triples in weight. Myelination also occurs during this trimester which is where a fatty substance called myelin begins to coat the neurones.
+          In the third trimester the baby’s brain triples in weight. Myelination also occurs during this trimester, which is where a fatty substance called myelin begins to coat the neurones.
         assessment_fail_summary: |
-          In the third trimester the baby’s brain triples in weight. Myelination also occurs during this trimester which is where a fatty substance called myelin begins to coat the neurones.
+          In the third trimester the baby’s brain triples in weight. Myelination also occurs during this trimester, which is where a fatty substance called myelin begins to coat the neurones.
         answers:
           1: "Trimester 1"
           2: "Trimester 2"
@@ -97,9 +97,13 @@ brain-development-and-how-children-learn:
         label: |
           Complete the statement: Jean Piaget labelled the 0 to 2 year stage of child development the BLANK stage.
         assessment_summary: |
-          Piaget labelled the 0 to 2 years old stage of development as the sensorimotor stage. In this stage, babies use their senses to explore and grow.
+          Piaget labelled the 0 to 2 years old stage of development as the sensorimotor stage. In this stage, babies use their senses to explore and grow. 
+
+          You can support babies' understanding of the world around them by providing sensory rich environments. For example, while teaching them the word 'apple', babies might be able to repeat the word but might not know what an apple is. If a baby gets to see, touch, smell and taste an apple, they will be able to complete the view in their mind that the word apple is the green fruit that tastes like this and smells like that.
         assessment_fail_summary: |
           Piaget labelled the 0 to 2 years old stage of development as the sensorimotor stage. In this stage, babies use their senses to explore and grow.
+
+          You can support babies' understanding of the world around them by providing sensory rich environments. For example, while teaching them the word 'apple', babies might be able to repeat the word but might not know what an apple is. If a baby gets to see, touch, smell and taste an apple, they will be able to complete the view in their mind that the word apple is the green fruit that tastes like this and smells like that.
         answers:
           1: "Gross motor"
           2: "Fine motor"                    
@@ -114,7 +118,7 @@ brain-development-and-how-children-learn:
         label: |
           Which of these is an early years approach based on the work of Piaget? (Select all that apply) 
         assessment_summary: |
-          Piaget did not believe that babies were born with a fixed intellectual ability. Instead, he said that a child’s interaction with the environment, combined with their growing brain would shape how their cognitive skills develop. 
+          Piaget did not believe that babies were born with a fixed intellectual ability. Instead, he said that a child’s interaction with the environment, combined with their growing brain, would shape how their cognitive skills develop. 
         assessment_fail_summary: |
           Piaget’s work highlighted the importance of:
           
@@ -122,7 +126,7 @@ brain-development-and-how-children-learn:
           - social interaction and peer teaching to promote development 
           - opportunities to test inconsistencies to promote development 
           
-          Instead, he said that a child’s interaction with the environment, combined with their growing brain would shape how their cognitive skills develop. 
+          Instead, he said that a child’s interaction with the environment, combined with their growing brain, would shape how their cognitive skills develop. 
         answers:
           1: "The importance of a supportive environment "
           2: "Promotion of social interaction and peer teaching "                    
@@ -309,9 +313,9 @@ brain-development-and-how-children-learn:
         label: |
           Complete the statement: BLANK is the term used to describe when a more knowledgeable other helps children to acquire new skills and knowledge.
         assessment_summary: |
-          Scaffolding is where support and techniques are used to guide a child’s learning, Scaffolding could include modelling, chunking knowledge to make it achievable and using visual aids and questions to support learning. This help can then be reduced until the child is able to complete the task alone. 
+          Scaffolding is where support and techniques are used to guide a child’s learning. Scaffolding could include modelling, chunking knowledge to make it achievable and using visual aids and questions to support learning. This help can then be reduced until the child is able to complete the task alone. 
         assessment_fail_summary: |
-          Scaffolding is where support and techniques are used to guide a child’s learning, Scaffolding could include modelling, chunking knowledge to make it achievable and using visual aids and questions to support learning. This help can then be reduced until the child is able to complete the task alone.  
+          Scaffolding is where support and techniques are used to guide a child’s learning. Scaffolding could include modelling, chunking knowledge to make it achievable and using visual aids and questions to support learning. This help can then be reduced until the child is able to complete the task alone.  
         answers:
           1: "Supporting"
           2: "Staging"
@@ -425,7 +429,7 @@ brain-development-and-how-children-learn:
           Complete the statement: The part of the brain that makes sense of the information that comes from our eyes is known as the BLANK
         assessment_summary: 
         assessment_fail_summary: |
-          The occipital lobes are the visual processing area of the brain. You may want to revisit the section on parts of the brain.
+          The occipital lobes are the visual processing area of the brain. You might want to revisit the section on parts of the brain.
         answers:
           1: "Occipital lobes"
           2: "Parietal lobes"
@@ -462,6 +466,7 @@ brain-development-and-how-children-learn:
         assessment_summary: 
         assessment_fail_summary: |
           Prolonged exposure to negative influences such as social isolation, a lack of stimulation and limited exposure to language and communication will impact on all aspects of a child’s learning and development. Children may experience restricted language and communication difficulties, be more prone to mental health concerns and be unable to carry out basic tasks.
+
           You might want to revisit the section on factors affecting brain development.
         answers:
           1: "Increased myelination"
