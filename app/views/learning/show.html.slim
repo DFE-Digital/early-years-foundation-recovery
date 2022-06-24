@@ -44,7 +44,7 @@ h1.govuk-heading-l My learning
                 p.govuk-body= mod.description
               .govuk-card__actions
                 - unless mod.draft?
-                  = govuk_link_to 'View more information about this module', course_overview_path + "#module-#{mod.id}-#{mod.title.downcase.gsub(' ', '-')}"
+                  = govuk_link_to 'View more information about this module', course_overview_path + "#module-#{mod.id}-#{mod.title.downcase.parameterize}"
 
 - if @user.course.completed_modules.any?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
