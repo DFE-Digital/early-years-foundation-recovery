@@ -43,18 +43,18 @@ RSpec.describe 'Learning activity', type: :system do
 
           within '#bravo' do
             expect(page).to have_text 'Second Training Module'
-            expect(page).to have_link 'View more information about this module', href: '/about-training'
+            expect(page).to have_link 'View more information about this module', href: '/about-training#module-2-second-training-module'
           end
 
           within '#charlie' do
             expect(page).to have_text 'Third Training Module'
-            expect(page).to have_link 'View more information about this module', href: '/about-training'
+            expect(page).to have_link 'View more information about this module', href: '/about-training#module-3-third-training-module'
           end
 
           # unpublished draft module
           within '#delta' do
             expect(page).to have_text 'Fourth Training Module'
-            expect(page).not_to have_link 'View more information about this module', href: '/about-training'
+            expect(page).not_to have_link 'View more information about this module', href: '/about-training#module-4-fourth-training-module'
           end
         end
       end
