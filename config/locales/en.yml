@@ -184,7 +184,28 @@ en:
       title: I have a different problem
       text: For other problems with creating your account or signing in, please 
       link_text: contact us
+  assessments_results:
+    passed:
+      heading: Congratulations
+      text: |
+        ## **You scored %{score}%** 
+        
+        Congratulations - you have scored highly enough to recieve a certificate of achievement for this module.
+    failed:
+      heading: Revisit the module
+      text: | 
+        ## **You scored %{score}%**
 
+
+        Unfortunatly you have not scored highly enough to recieve a certificate.
+
+
+        You can see the questions you aswered incorrectly.
+
+
+        You may wish to revisit some of the learning before the test again.
+
+    you_answered:  You answered %{users_answers}. That's not quite right.
   # Form Builder ---------------------------------------------------------------
   helpers:
     label:

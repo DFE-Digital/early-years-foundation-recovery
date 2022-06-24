@@ -82,25 +82,6 @@ module AssessmentQuestions
     questionnaire.questions.map do |question, data|
       validate_param = data[:multi_select] ? check_empty(params[:questionnaire][question]) : params.key?(:questionnaire)
     end
-
     validate_param
-  end
-  def module_page_id
-    url_referer = request.referrer.to_s.split('/')
-    puts url_referer.inspect
-  end
-
-  def which_referrer
-    module_page_id
-    puts 'which_referrer'
-    puts "request.referrer #{request.referrer}"
-    puts "Session referrer #{session[:referrer]}"
-    puts 'which_referrer'
-  end
-
-  def referrer_set
-    puts 'referrer_set'
-    session[:referrer] = request.referrer
-    puts 'referrer_set'
   end
 end

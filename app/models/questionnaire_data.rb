@@ -14,7 +14,7 @@ class QuestionnaireData < YamlBase
   def self.load_file
     data = raw_data.map do |training_module, questionnaires|
       questionnaires.map do |name, field|
-        field['assessments_type'] = 'formative'
+        field['assessments_type'] = 'formative_assessment'
         # field['id'] = 6.times.map { rand(0..9) }.join # make the id longer so not duplicated by other questions models
         field['name'] = name
         field['training_module'] = training_module

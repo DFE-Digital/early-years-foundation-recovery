@@ -10,11 +10,11 @@ class FormativeAssessmentsController < ApplicationController
   def update
     archive_previous_user_answers
     if validate_param_empty
-      flash[:alert] = 'Please select an answer'
-    else
       populate_questionnaire(questionnaire_params)
       save_answers
       flash[:alert] = nil
+    else
+      flash[:alert] = 'Please select an answer'
     end
 
     render :show, status: :unprocessable_entity

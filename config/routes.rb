@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :summative_assessments, only: %i[show update], path: 'summative-assessments'
     resources :confidence_checks, only: %i[show update], path: 'confidence-check'
     resources :assessments_results, only: %i[show], path: 'assessment-result'
+    get 'retake-quiz', to: 'assessments_results#retake_quiz'
   end
 
   get '/:id', to: 'static#show', as: :static

@@ -4,8 +4,6 @@ class SummativeAssessmentsController < ApplicationController
   before_action :authenticate_registered_user!
 
   def show
-    which_referrer
-    referrer_set
     existing_answers = existing_user_answers.pluck(:question, :answer)
     populate_questionnaire(existing_answers.to_h.symbolize_keys) if existing_answers.present?
   end

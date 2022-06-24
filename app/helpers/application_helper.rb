@@ -63,8 +63,7 @@ module ApplicationHelper
   end
 
   def link_to_retake_quiz(module_item, link_args = { class: 'govuk-button' })
-    d = AssessmentQuiz.new(user: current_user, type: 'summative', training_module_id: module_item.training_module, name: module_item.name)
-    link_to 'Retake quiz', training_module_path, link_args
+    link_to 'Retake test', training_module_retake_quiz_path(module_item.training_module), link_args
   end
 
   def link_to_my_learning(module_item, link_args = { class: 'govuk-link, govuk-!-margin-right-4' })
@@ -90,7 +89,7 @@ module ApplicationHelper
   end
 
   
-  def correct_answers_checkbox(questions_options, user_answers)
+  def incorrect_answers_checkbox(questions_options, user_answers)
     return if !user_answers.present?
 
     correct_answers = []

@@ -6,7 +6,7 @@ class SummativeQuestionnaire < YamlBase
   def self.load_file
     data = raw_data.map do |training_module, questionnaires|
       questionnaires.map do |name, field|
-        field['assessments_type'] = 'summative'
+        field['assessments_type'] = 'summative_assessment'
         # field['id'] = 6.times.map { rand(0..9) }.join # make the id loger duplicated by other questions models
         field['name'] = name
         field['training_module'] = training_module
