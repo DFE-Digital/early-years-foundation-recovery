@@ -5,6 +5,5 @@ class LearningController < ApplicationController
 
   def show
     @user = current_user
-    # @end_of_training_module_assessment = TrainingModule.find_by(name: ENV['SUMMATIVE_ASSESSMENT_NAME'])
   end
 end
