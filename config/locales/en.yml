@@ -70,7 +70,11 @@ en:
       button: Continue
     setting:
       heading: About your setting
-      body: Your details and training progress won't be shared with anyone without your permission.
+      body: |
+        Your details and training progress won't be shared with anyone without your permission.
+
+        {:.govuk-hint}
+        If you work in multiple settings, choose the one where you work most often.
       button: Complete
 
   setting:

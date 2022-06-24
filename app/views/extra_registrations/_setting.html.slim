@@ -1,7 +1,7 @@
 = f.govuk_fieldset legend: { text: t(:heading, scope: [:extra_registration, current_step]) } do
   p.govuk_body
-    = t(:body, scope: [:extra_registration, current_step])
-  = f.govuk_radio_buttons_fieldset(:setting_type, legend: { text: t(:setting_type, scope: 'helpers.labels.setting_type'), size: 's'})
+    = translate_markdown(t(:body, scope: [:extra_registration, current_step]))
+  = f.govuk_radio_buttons_fieldset(:setting_type, legend: { text: t(:setting_type, scope: 'helpers.label.user'), size: 's'}, hint: {text: 'Select one'})
     = f.govuk_radio_button :setting_type, 'nursery', label: { text: 'Nursery' }, link_errors: true
     = f.govuk_radio_button :setting_type, 'childminder', label: { text: 'Childminder' }
     = f.govuk_radio_button :setting_type, 'school', label: { text: 'School' }
