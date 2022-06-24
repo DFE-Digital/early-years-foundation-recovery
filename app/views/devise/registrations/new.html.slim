@@ -1,4 +1,4 @@
-= link_to 'Back', root_path, class: 'govuk-back-link'
+= govuk_link_to 'Back', root_path, class: 'govuk-back-link'
 - content_for :devise_form do
   = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
     = f.govuk_error_summary
@@ -9,7 +9,7 @@
       = f.govuk_password_field :password, label: { text: 'Create password' }, hint: { text: t('password.hardness', length: @minimum_password_length) }
       = f.govuk_password_field :password_confirmation
       = govuk_inset_text do 
-        p By continuing, you accept the #{link_to 'terms and conditions', static_path('terms-and-conditions'), class: 'govuk-link'} and #{link_to 'privacy policy', static_path('privacy-policy'), class: 'govuk-link'}.
+        p By continuing, you accept the #{govuk_link_to 'terms and conditions', static_path('terms-and-conditions')} and #{govuk_link_to 'privacy policy', static_path('privacy-policy')}.
     = f.govuk_submit 'Continue'
 
 = render 'devise/shared/form_wrap'
