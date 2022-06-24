@@ -50,12 +50,13 @@ module ApplicationHelper
     link_to 'Previous', link, link_args
   end
 
+  # Date format guidelines: "1 June 2002"
   def completed_modules_table(modules)
     header = ['Module name', 'Date completed', 'Actions']
     rows = modules.map do |mod, timestamp|
       [
         govuk_link_to(mod.title, training_module_path(mod)),
-        timestamp.to_date.to_formatted_s(:rfc822),
+        timestamp.to_date.strftime('%-d %B %Y'),
         govuk_link_to('View certificate', training_module_certificate_path(mod)),
       ]
     end
