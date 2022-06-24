@@ -13,14 +13,14 @@ RSpec.describe 'User', type: :request do
       end
     end
 
-    describe 'GET /user/edit_name' do
+    describe 'GET /user/edit-name' do
       it 'renders edit name form' do
         get edit_name_user_path
         expect(response).to have_http_status(:success)
       end
     end
 
-    describe 'patch /user/update_name' do
+    describe 'patch /user/update-name' do
       let(:update_user) do
         patch update_name_user_path, params: { user: { first_name: first_name } }
       end
@@ -36,14 +36,14 @@ RSpec.describe 'User', type: :request do
       end
     end
 
-    describe 'GET /user/edit_postcode' do
+    describe 'GET /user/edit-postcode' do
       it 'renders the edit postcode form' do
         get edit_postcode_user_path
         expect(response).to have_http_status(:success)
       end
     end
 
-    describe 'patch /user/update_postcode' do
+    describe 'patch /user/update-postcode' do
       let(:update_user) do
         patch update_name_user_path, params: { user: { postcode: 'wd180dn' } }
       end
@@ -58,12 +58,14 @@ RSpec.describe 'User', type: :request do
     end
 
     # TODO: spec coverage for user edit forms - email, ofsted_number
+    # describe '' do
+    # end
   end
 
   describe 'Unconfirmed user, not signed in' do
     let(:unconfirmed_user) { create :user }
 
-    describe 'GET /user/check_email_confirmation' do
+    describe 'GET /user/check-email-confirmation' do
       it 'renders check email page' do
         get check_email_confirmation_user_path(email: unconfirmed_user.email)
         expect(response).to have_http_status(:success)

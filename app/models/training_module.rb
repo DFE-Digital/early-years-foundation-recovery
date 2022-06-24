@@ -8,7 +8,7 @@ class TrainingModule < YamlBase
 
   # @return [Integer]
   def topic_count
-    items_by_topic.except(nil).count
+    items_by_topic.count
   end
 
   # predicates ---------------------------------
@@ -16,6 +16,11 @@ class TrainingModule < YamlBase
   # @return [Boolean]
   def draft?
     attributes.fetch(:draft, false)
+  end
+
+  # @return [Boolean]
+  def formative?
+    @formative ||= ModuleItem.where_type(name, 'formative_assessment').any?
   end
 
   # collections -------------------------
@@ -29,7 +34,7 @@ class TrainingModule < YamlBase
 
   # @return [Array<ModuleItem>]
   def module_items
-    ModuleItem.where(training_module: name).to_a
+    @module_items ||= ModuleItem.where(training_module: name).to_a
   end
 
   # @example
@@ -40,7 +45,7 @@ class TrainingModule < YamlBase
   #
   # @return [{String=>Array<ModuleItem>}]
   def items_by_submodule
-    module_items.group_by(&:submodule_name)
+    @items_by_submodule ||= module_items.group_by(&:submodule_name).except(nil)
   end
 
   # @example
@@ -51,7 +56,9 @@ class TrainingModule < YamlBase
   #
   # @return [{Array<String>=>Array<ModuleItem>}]
   def items_by_topic
-    module_items.group_by { |m| [m.submodule_name, m.topic_name] if m.topic_name }
+    @items_by_topic ||= module_items.group_by { |m|
+      [m.submodule_name, m.topic_name] if m.topic_name
+    }.except(nil)
   end
 
   # @param type [String] text_page, youtube_page...
@@ -81,11 +88,11 @@ class TrainingModule < YamlBase
   # Viewing this page determines if the module is "started"
   # @return [ModuleItem]
   def first_content_page
-    intro_page.next_item
+    intro_page.next_item.next_item # TODO: improve this (first page after submod intro)
   end
 
   # @return [ModuleItem]
-  def test_page
+  def assessment_page
     ModuleItem.where_type(name, 'formative_assessment').first
   end
 end

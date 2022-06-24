@@ -26,7 +26,7 @@ en:
       unconfirmed: "You have to confirm your email address before continuing."
     mailer:
       confirmation_instructions:
-        subject: "Activate your GOV.UK early years training account"
+        subject: "Activate your GOV.UK child development training account"
       reset_password_instructions:
         subject: "Reset password instructions"
       unlock_instructions:

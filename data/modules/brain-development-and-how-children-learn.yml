@@ -144,7 +144,7 @@ brain-development-and-how-children-learn:
     type: text_page
 
   2-recap:
-    type: text_page
+    type: sub_module_intro
 
   # ----------------------------------------------------------------------------
   # End of module test
@@ -188,4 +188,4 @@ brain-development-and-how-children-learn:
   2-confidence-4:
     type: formative_assessment  
   2-end:
-    type: text_page
+    type: sub_module_intro

@@ -23,6 +23,7 @@ class CourseProgress
   end
 
   # TODO: use a dedicated event for module completion
+  # TODO: continue refactor to leverage ModuleProgress methods in this class
   #
   # @return [Array<Array>] Tabular data of completed training module
   def completed_modules
@@ -34,6 +35,7 @@ class CourseProgress
     end
   end
 
+  # TODO: continue refactor to leverage ModuleProgress methods in this class
   # @param module_id [String] training module name
   # @return [String] name of last page viewed in module
   def milestone(module_id)
@@ -69,23 +71,15 @@ private
   def started?(mod)
     return false if mod.draft?
 
-    training_module_events(mod.name).where_properties(id: mod.first_content_page.name).present?
+    module_progess(mod).started?
   end
 
-  # TODO: this state is currently true if the last page was viewed
-  #
   # @param mod [TrainingModule]
   # @return [Boolean]
   def completed?(mod)
     return false if mod.draft?
 
-    training_module_events(mod.name).where_properties(id: mod.module_items.last.name).present?
-  end
-
-  # @param module_id [String] training module name
-  # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
-  def training_module_events(module_id)
-    user.events.where_properties(training_module_id: module_id)
+    module_progess(mod).completed?
   end
 
   # @param mod [TrainingModule]
@@ -127,5 +121,17 @@ private
   # @return [Array<TrainingModule>] all training modules
   def training_modules
     @training_modules ||= TrainingModule.all
+  end
+
+  # @return [ModuleProgress]
+  def module_progess(mod)
+    ModuleProgress.new(user: user, mod: mod)
+  end
+
+  # TODO: module_progess responsibility
+  # @param module_id [String] training module name
+  # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
+  def training_module_events(module_id)
+    user.events.where_properties(training_module_id: module_id)
   end
 end
