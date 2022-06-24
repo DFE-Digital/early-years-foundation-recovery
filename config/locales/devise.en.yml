@@ -13,14 +13,17 @@ en:
         <br />
         Your information will not be shared without your permission.
       send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
-      send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
+      send_paranoid_instructions: |
+        We will check if a training account has been created using the email address you entered. If it has, you will receive an email shortly with a validation link.  Please click the validation link in the email to reset your password. 
     failure:
       already_authenticated: "You are already signed in."
       inactive: "Your account is not activated yet."
-      invalid: "Please ensure you have entered your valid email address and password."
+      invalid: |
+        Enter a valid email address and password. Your account will be locked after 5 unsuccessful attempts. We will email you instructions to unlock your account.
       locked: "For security reasons your account has been locked for %{unlock_in} hours. For faster access we have sent you an email to reset your password."
       last_attempt: "You have one more attempt before your account is locked."
-      not_found_in_database: "Please ensure you have entered your valid email address and password."
+      not_found_in_database: |
+        Enter a valid email address and password. Your account will be locked after 5 unsuccessful attempts. We will email you instructions to unlock your account.
       timeout: "Your session expired. Please sign in again to continue."
       unauthenticated: "You need to sign in or sign up before continuing."
       unconfirmed: "You have to confirm your email address before continuing."
@@ -43,7 +46,8 @@ en:
     passwords:
       no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
       send_instructions: ""
-      send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
+      send_paranoid_instructions: |
+        We will check if a training account has been created using the email address you entered. If it has, you will receive an email shortly with a validation link.  Please click the validation link in the email to reset your password. 
       updated: "Your password has been reset."
       updated_not_active: "Your password has been changed successfully."
     registrations:

@@ -1,5 +1,6 @@
-.govuk-grid-row
+.govkk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
+    =govuk_back_link(href: url_for(:back))
     / on second visit to users/confirmation/new, email is not available so display generic page
     - user = @user.nil? ? :user : @user
 
