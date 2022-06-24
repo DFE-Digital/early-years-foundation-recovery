@@ -23,7 +23,7 @@ module EarlyYearsFoundationRecovery
       g.test_framework :rspec
     end
 
-    config.feedback_url = ENV.fetch('FEEDBACK_URL', '#FEEDBACK_URL_env_var_missing')
+    config.feedback_url = ENV.fetch('FEEDBACK_URL', 'https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxUMk01Qlc1R0dKRUQ0WEpPUUFYVzdWRllXUCQlQCN0PWcu')
     config.user_timeout_minutes = ENV.fetch('TIMEOUT_MINUTES', '15').to_i
     config.unlock_in_minutes = ENV.fetch('UNLOCK_IN_MINUTES', '120').to_i
   end

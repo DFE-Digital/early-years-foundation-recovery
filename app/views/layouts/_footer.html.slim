@@ -7,4 +7,4 @@
   ul.govuk-footer__list.govuk-footer__list--columns-1
     li= link_to "Terms and conditions", static_path('terms-and-conditions'), class: "govuk-footer__link"
     li= link_to "Contact", static_path('contact'), class: "govuk-footer__link"
-    li= link_to "Feedback", '#', class: "govuk-footer__link"
+    li= link_to "Feedback", Rails.configuration.feedback_url, target: :_blank, class: "govuk-footer__link"
