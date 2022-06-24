@@ -6,7 +6,7 @@
 
 How might we ensure the consistency of our code syntax?
 
-## Decision Drivers <!-- optional -->
+## Decision Drivers
 
 * Uniformity across DfE projects
 * Linting of application code and test suite

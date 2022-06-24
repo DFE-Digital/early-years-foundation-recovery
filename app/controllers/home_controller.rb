@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   def index
     @user = current_user
+    track('home_page')
   end
 
   def show
