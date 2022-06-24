@@ -1287,11 +1287,9 @@ en:
 
           Answers will be anonymous, and we will not know what you individually select.
 
-          You can also [give feedback about the training](https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxUQ0ZUNURIUUc1OVZLSjdNUUs5TU9TR1YwRCQlQCN0PWcu). 
-
           To what extent do you agree with the following statements:
       
       3-end:
         heading: Thank you
         body: |
-          If you would like to give us some feedback, you can do that here 
+          You can also [give feedback about the training](https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxUQ0ZUNURIUUc1OVZLSjdNUUs5TU9TR1YwRCQlQCN0PWcu). 
