@@ -42,7 +42,7 @@ brain-development-and-how-children-learn:
       1_what_during_pregnancy:
         multi_select: false 
         label: |
-          If experienced by the mother during pregnancy, which of the following may lead to preamture birth, low birth weight and an underdeveloped brain?
+          If experienced by the mother during pregnancy, which of the following may lead to premature birth, low birth weight and an underdeveloped brain?
         assessment_summary: |
           Cigarette smoke reduces the amount of oxygen the baby receives and reduces the forming of neurones. This can result in premature birth, low birth weight and an underdeveloped brain.    
         assessment_fail_summary: |
