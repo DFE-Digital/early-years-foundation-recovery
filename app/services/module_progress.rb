@@ -27,6 +27,13 @@ class ModuleProgress
     all?(mod.module_items)
   end
 
+  # Completed date for module
+  # @return [DateTime]
+  def completed_at
+    last_page = mod.module_items.last.name
+    training_module_events.where_properties(id: last_page).first.time
+  end
+
   # @see CourseProgress
   # @return [Boolean] module pages have been viewed (past interruption)
   def started?

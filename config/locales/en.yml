@@ -59,6 +59,7 @@ en:
     error: Error
     important: Success
     notice: Success
+  date_completed: "Date completed: %{date}"
 
   extra_registration:
     complete: Thank you for creating a child development training account. You can now start the first module.

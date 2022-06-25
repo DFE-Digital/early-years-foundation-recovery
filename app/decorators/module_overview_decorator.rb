@@ -38,6 +38,10 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
     end
   end
 
+  def module_completed_at
+    completed_at.to_date.strftime('%-d %B %Y')
+  end
+
 private
 
   # exclude intro or subpages
