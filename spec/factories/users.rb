@@ -13,6 +13,7 @@ FactoryBot.define do
       first_name { Faker::Name.first_name }
       last_name { Faker::Name.last_name }
       postcode { Faker::Address.postcode }
+      setting_type { 'school' }
     end
 
     trait :completed do

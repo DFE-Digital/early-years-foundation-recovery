@@ -41,7 +41,7 @@ class ExtraRegistrationsController < ApplicationController
 private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :postcode, :ofsted_number)
+    params.require(:user).permit(:first_name, :last_name, :postcode, :ofsted_number, :setting_type, :setting_type_other)
   end
 
   # @return [Symbol]
