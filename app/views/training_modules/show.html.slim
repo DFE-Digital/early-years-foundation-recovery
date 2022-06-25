@@ -1,44 +1,45 @@
+= govuk_back_link href: my_learning_path
+
 = render 'debug'
 
-.govuk-grid-row
-  .govuk-grid-column-full
-    h1.govuk-heading-l= @training_module.title
-    p.govuk-caption-m= @training_module.description
+.light-grey-box
+  .govuk-grid-row
+    .govuk-grid-column-full
+      h1.govuk-heading-l= @training_module.title
+      p.govuk-caption-m= @training_module.description
 
-    - @module_progress.call_to_action do |state, (mod, page)|
-      = govuk_link_to t(state, scope: 'resume_button'), training_module_content_page_path(mod, page), class: 'govuk-button'
+      - @module_progress.call_to_action do |state, (mod, page)|
+        = govuk_link_to t(state, scope: 'resume_button'), training_module_content_page_path(mod, page), class: 'govuk-button'
 
 = govuk_tag(text: "#{@training_module.topic_count} topics", colour: 'green')
 '
 = govuk_tag(text: "#{@training_module.duration} hours", colour: 'green')
 
-= render 'wip'
-
-.govuk-grid-row
+.govuk-grid-row class='govuk-!-padding-top-6'
   .govuk-grid-column-full
-      .govuk-accordion data-module="govuk-accordion"
-        - @module_progress.topics_by_submodule.each do |num, heading, status, prev, topics|
+      .govuk-accordion data-module='govuk-accordion'
+        - @module_progress.topics_by_submodule.each do |num, current_heading, previous_heading, status, topics|
 
           .govuk-accordion__section id="section-#{num}"
             .govuk-accordion__section-header
               h2.govuk-accordion__section-heading
                 span.govuk-accordion__section-button aria-controls="section-button-#{num}" aria-expanded="false" id="section-button-#{num}"
-                  = heading
+                  = current_heading
                   .float-right
                     = govuk_tag(text: t(status, scope: 'module_indicator'), colour: 'purple')
 
               .govuk-accordion__section-summary.govuk-body id="summary-#{num}"
-                - if prev
-                  | #{prev} must be completed before you begin this section
+                - if previous_heading
+                  | #{previous_heading} must be completed before you begin this section
 
             .govuk-accordion__section-content aria-labelledby="section-content-#{num}" id="section-content-#{num}"
               ul.govuk-list
-                - topics.each do |mod, item, heading, completed, status|
+                - topics.each do |mod, topic_heading, clickable, status|
                   li
-                    - if completed
-                      = govuk_link_to heading, training_module_content_page_path(mod, item)
+                    - if clickable
+                      = govuk_link_to topic_heading, training_module_content_page_path(mod, clickable)
                     - else
-                      = heading
+                      = topic_heading
 
                     .float-right
                       = govuk_tag(text: t(status, scope: 'module_indicator'), colour: 'blue')

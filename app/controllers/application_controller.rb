@@ -2,6 +2,21 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   default_form_builder(EarlyYearsRecoveryFormBuilder)
 
+  # Record user event
+  #
+  # @param key [String]
+  # @param data [Hash]
+  #
+  # @return [Boolean]
+  def track(key, **data)
+    properties = {
+      path: request.fullpath,     # user perspective
+      **request.path_parameters,  # developer perspective
+      **data,
+    }
+    ahoy.track(key, properties)
+  end
+
   def authenticate_registered_user!
     authenticate_user! unless user_signed_in?
     return true if current_user.registration_complete?

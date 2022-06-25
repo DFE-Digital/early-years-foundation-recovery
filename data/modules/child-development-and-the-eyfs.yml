@@ -82,7 +82,7 @@ child-development-and-the-eyfs:
     type: text_page
 
   1-recap:
-    type: text_page
+    type: sub_module_intro
 
   # ----------------------------------------------------------------------------
   # Confidence check
@@ -101,4 +101,4 @@ child-development-and-the-eyfs:
   1-confidence-5:
     type: formative_assessment
   1-end:
-    type: text_page
+    type: sub_module_intro

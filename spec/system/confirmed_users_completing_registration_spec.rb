@@ -21,7 +21,7 @@ RSpec.describe 'Confirmed users completing registration' do
       click_button 'Complete'
 
       expect(page).to have_text('Success')
-        .and have_text('Thank you for creating an early years training account.')
+        .and have_text('Thank you for creating a child development training account.')
     end
 
     it 'requires name and a setting type and a valid setting postcode to be complete' do

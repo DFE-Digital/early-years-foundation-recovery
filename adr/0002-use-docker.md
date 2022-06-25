@@ -6,7 +6,7 @@
 
 How might we ensure the consistency of our environments across different operating systems?
 
-## Decision Drivers <!-- optional -->
+## Decision Drivers
 
 * Parity of development environment for each developer
 * Faster bootstrapping for new developers

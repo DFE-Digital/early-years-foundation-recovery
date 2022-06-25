@@ -39,17 +39,23 @@ RSpec.describe 'Learning activity', type: :system do
       it 'shows other modules including drafts' do
         within '#upcoming' do
           expect(page).to have_text 'Upcoming modules'
-          expect(page).to have_text 'Second Training Module'
-          expect(page).to have_link 'View more information about this module', href: '/modules/bravo'
+          expect(page).not_to have_text 'First Training Module'
 
-          expect(page).to have_text 'Third Training Module'
-          expect(page).to have_link 'View more information about this module', href: '/modules/charlie'
+          within '#bravo' do
+            expect(page).to have_text 'Second Training Module'
+            expect(page).to have_link 'View more information about this module', href: '/about-training#module-2-second-training-module'
+          end
+
+          within '#charlie' do
+            expect(page).to have_text 'Third Training Module'
+            expect(page).to have_link 'View more information about this module', href: '/about-training#module-3-third-training-module'
+          end
 
           # unpublished draft module
-          expect(page).to have_text 'Fourth Training Module'
-          expect(page).not_to have_link 'View more information about this module', href: '/modules/delta'
-
-          expect(page).not_to have_text 'First Training Module'
+          within '#delta' do
+            expect(page).to have_text 'Fourth Training Module'
+            expect(page).not_to have_link 'View more information about this module', href: '/about-training#module-4-fourth-training-module'
+          end
         end
       end
     end
@@ -63,7 +69,7 @@ RSpec.describe 'Learning activity', type: :system do
 
   context 'when a user has started the first mandatory module' do
     before do
-      visit '/modules/alpha/content-pages/1-1' # first page after module intro
+      visit '/modules/alpha/content-pages/intro'
       visit '/my-learning'
     end
 
