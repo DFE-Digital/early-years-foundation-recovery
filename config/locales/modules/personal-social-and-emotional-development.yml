@@ -1244,7 +1244,7 @@ en:
           Usually as children’s language skills develop, episodes of challenging behaviour decrease. Their growing understanding of receptive language, which is their understanding of written and spoken language, improves their ability to understand situations from another perspective. The development of their expressive language, which is their ability to express themselves through speech and other appropriate forms of communication, helps them to share their needs.
           
           Research shows that children with higher levels of expressive language develop self-regulation faster.
-      3-recap:
+      3-4:
         heading: Recap
         body: |    
           Every child will develop at their own individual rate and will experience a wide variety of influences that could potentially impact upon their social and emotional development. 
@@ -1276,7 +1276,10 @@ en:
           Supporting material is available on the [Foundation Years website](https://foundationyears.org.uk/).
 
           See [guidance to provide support](https://www.gov.uk/government/publications/progress-check-at-age-2) when completing the early years foundation stage (EYFS) progress check at age 2.
-      3-test:
+      
+#END OF MODULE TEST      
+      
+      3-5:
         heading: End of module test
         body: |    
           This end of module test is here to revisit what you have learned and the impact on your practice. It is not aimed to provide a pass or fail.
@@ -1286,16 +1289,16 @@ en:
           This test has 10 multiple choice questions.
           
           You must answer all of the questions.
-          
-          You must complete this test in one sitting. If you exit part way through the test, your progress will not be saved.
-          
+        
           You can review your total score for the test at the end.
           
           To receive a certificate of achievement for this module, you need to receive an overall score of at least 70%.
           
           If you do not score 70%, you will be able to see which questions you got wrong. You can repeat the test to improve your score as many times as you want to.
 
-      3-confidence:
+#CONFIDENCE CHECK
+
+      3-6:
         heading: Reflect on your learning
         body: |
           To help DfE to measure our impact, please answer the following questions. 
@@ -1304,7 +1307,7 @@ en:
 
           To what extent do you agree with the following statements:
       
-      3-end:
+      3-6-6:
         heading: Thank you
         body: |
-          You can also [give feedback about the training](https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxUQ0ZUNURIUUc1OVZLSjdNUUs5TU9TR1YwRCQlQCN0PWcu). 
+          You can also <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxUQ0ZUNURIUUc1OVZLSjdNUUs5TU9TR1YwRCQlQCN0PWcu" target="blank">give feedback about the training (opens in new window)</a>
