@@ -352,7 +352,7 @@ personal-social-and-emotional-development:
 
 #END-OF-MODULE-TEST
 
-  3-test-1:
+  3-5-1:
     content:
     questions:
       1_age_play_alongside:
@@ -370,7 +370,7 @@ personal-social-and-emotional-development:
           3: "4"
           4: "5"
         correct_answers: ["1"]  
-  3-test-2:
+  3-5-2:
     content:
     questions:
       1_self-worth-definition:
@@ -390,7 +390,7 @@ personal-social-and-emotional-development:
           4: "How important and valued a child feels "
         correct_answers:
           - "4"  
-  3-test-3:
+  3-5-3:
     content:
     questions:
       1_quiet_area:
@@ -409,7 +409,7 @@ personal-social-and-emotional-development:
           4: "Adult led activity "
         correct_answers:
           - "1"  
-  3-test-4:
+  3-5-4:
     content:
     questions:
       1_secure_attachment_requirements:
@@ -428,7 +428,7 @@ personal-social-and-emotional-development:
           4: "Rules "
         correct_answers:
           - ["1","2","4"]  
-  3-test-5:
+  3-5-5:
     content:
     questions:
       1_stages_of_separation_anxiety:
@@ -452,7 +452,7 @@ personal-social-and-emotional-development:
           4: "3 "
         correct_answers:
           - "4" 
-  3-test-6:
+  3-5-6:
     content:
     questions:
       1_communication_practitioners_parents:
@@ -471,7 +471,7 @@ personal-social-and-emotional-development:
           4: "Low expectations"
         correct_answers:
           - "3" 
-  3-test-7:
+  3-5-7:
     content:
     questions:
       1_manage_feelings:
@@ -490,7 +490,7 @@ personal-social-and-emotional-development:
           4: "Their self-efficacy"
         correct_answers:
           - ["1","4"] 
-  3-test-8:
+  3-5-8:
     content:
     questions:
       1_proprioceptive_activities:
@@ -508,7 +508,7 @@ personal-social-and-emotional-development:
           4: "Communication development activities "
         correct_answers:
           - "2" 
-  3-test-9:
+  3-5-9:
     content:
     questions:
       1_social_expectations:
@@ -527,7 +527,7 @@ personal-social-and-emotional-development:
           4: "3 to 4 years"
         correct_answers:
           - "3" 
-  3-test-10:
+  3-5-10:
     content:
     questions:
       1_visual-reminders:
@@ -545,7 +545,7 @@ personal-social-and-emotional-development:
         correct_answers:
           - "1" 
 
-  3-confidence-1:
+  3-6-1:
     content:
     questions:
       1_understanding_pse:
@@ -562,7 +562,7 @@ personal-social-and-emotional-development:
           5: "Strongly disagree"
         correct_answers: ["1","2","3","4","5"]
 
-  3-confidence-2:
+  3-6-2:
     content:
     questions:
       1_supporting_pse:
@@ -579,7 +579,7 @@ personal-social-and-emotional-development:
           5: "Strongly disagree"
         correct_answers: ["1","2","3","4","5"]
 
-  3-confidence-3:
+  3-6-3:
     content:
     questions:
       1_self_regulation_understanding:
@@ -596,7 +596,7 @@ personal-social-and-emotional-development:
           5: "Strongly disagree"
         correct_answers: ["1","2","3","4","5"]
 
-  3-confidence-4:
+  3-6-4:
     content:
     questions:
       1_self_regulation_supporting:
@@ -613,7 +613,7 @@ personal-social-and-emotional-development:
           5: "Strongly disagree"
         correct_answers: ["1","2","3","4","5"]
 
-  3-confidence-5:
+  3-6-5:
     content:
     questions:
       1_attachment_theory:
@@ -630,7 +630,7 @@ personal-social-and-emotional-development:
           5: "Strongly disagree"
         correct_answers: ["1","2","3","4","5"]
 
-  3-confidence-6:
+  3-6-6:
     content:
     questions:
       1_secure_relationships:

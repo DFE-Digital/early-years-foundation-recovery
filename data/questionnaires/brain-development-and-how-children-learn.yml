@@ -420,7 +420,7 @@ brain-development-and-how-children-learn:
     
 #END-OF-MODULE-TEST
 
-  2-test-1:
+  2-4-1:
     content:
     questions:
       1_brain_eyes:
@@ -437,7 +437,7 @@ brain-development-and-how-children-learn:
           4: "Brain stem"
         correct_answers: ["1"]  
 
-  2-test-2:
+  2-4-2:
     content:
     questions:
       1_myelin_neurones:
@@ -456,7 +456,7 @@ brain-development-and-how-children-learn:
           2: "False"
         correct_answers: ["2"]  
 
-  2-test-3:
+  2-4-3:
     content:
     questions:
       1_ability_tasks:
@@ -475,7 +475,7 @@ brain-development-and-how-children-learn:
           4: "Lots of independence"
         correct_answers: ["2"]  
   
-  2-test-4:
+  2-4-4:
     content:
     questions:
       1_low_income:
@@ -494,7 +494,7 @@ brain-development-and-how-children-learn:
           4: "Limited growth"
         correct_answers: ["1","3"]  
 
-  2-test-5:
+  2-4-5:
     content:
     questions:
       1_learn_effectively:
@@ -511,7 +511,7 @@ brain-development-and-how-children-learn:
           2: "False"
         correct_answers: ["1"]  
 
-  2-test-6:
+  2-4-6:
     content:
     questions:
       1_development_delay:
@@ -530,7 +530,7 @@ brain-development-and-how-children-learn:
           4: "Recording and reporting any concerns in line with your setting's requirements"
         correct_answers: ["1","2","4"]  
     
-  2-test-7:
+  2-4-7:
     content:
     questions:
       1_negatively_impact_development_delay:
@@ -548,7 +548,7 @@ brain-development-and-how-children-learn:
           4: "Accidents"
         correct_answers: ["1","2","4"]  
 
-  2-test-8:
+  2-4-8:
     content:
     questions:
       1_negatively_impact_development_delay:
@@ -566,7 +566,7 @@ brain-development-and-how-children-learn:
           4: "Maslow"
         correct_answers: ["1","3"]  
 
-  2-test-9:
+  2-4-9:
     content:
     questions:
       1_scaffolding_techniques:
@@ -584,7 +584,7 @@ brain-development-and-how-children-learn:
           4: "Using visual aids"
         correct_answers: ["1","3","4"] 
 
-  2-test-10:
+  2-4-10:
     content:
     questions:
       1_scaffolding_techniques:
@@ -602,7 +602,7 @@ brain-development-and-how-children-learn:
           4: "Faster pace"
         correct_answers: ["2","3"] 
 
-  2-confidence-1:
+  2-5-1:
     content:
     questions:
       1_understanding_brain_development:
@@ -619,7 +619,7 @@ brain-development-and-how-children-learn:
           5: "Strongly disagree"
         correct_answers: ["1","2","3","4","5"]
 
-  2-confidence-2:
+  2-5-2:
     content:
     questions:
       1_how_children_learn:
@@ -636,7 +636,7 @@ brain-development-and-how-children-learn:
           5: "Strongly disagree"
         correct_answers: ["1","2","3","4","5"]
 
-  2-confidence-3:
+  2-5-3:
     content:
     questions:
       1_healthy_lifestyle:
@@ -653,7 +653,7 @@ brain-development-and-how-children-learn:
           5: "Strongly disagree"
         correct_answers: ["1","2","3","4","5"]
 
-  2-confidence-4:
+  2-5-4:
     content:
     questions:
       1_supporting_brain_development_learning:
