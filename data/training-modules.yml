@@ -8,10 +8,10 @@ child-development-and-the-eyfs:
   objective: |
     This module will encourage you to reflect on why knowledge of child development is important, and help you to effectively implement the EYFS. It also considers the impact of the coronavirus (COVID-19) pandemic on children and their development.
   criteria: |
-    - explain the importance of early childhood education and care, including how to implement strategies to provide a positive approach in your setting
-    - understand the importance of child development knowledge and the various factors that impact on children’s development 
-    - put in place strategies to effectively deliver the EYFS
-    - understand the impact of the COVID-19 pandemic on children's development
+    - explain the importance of early childhood education and care including strategies you can use to provide a positive approach
+    - explore the importance of child development knowledge including an awareness of contributing factors
+    - consider effective delivery of the early years foundation stage (EYFS)
+    - describe the impact that the coronavirus (COVID-19) pandemic has had on children’s development
 
 brain-development-and-how-children-learn:
   depends_on: child-development-and-the-eyfs
@@ -23,10 +23,10 @@ brain-development-and-how-children-learn:
   objective: |
     This module will reinforce your understanding of how a child's brain develops, and help you to consider factors affecting children’s brain development when planning for your setting.
   criteria: |
-    - describe the stages of children’s brain development
-    - explain how brain development impacts on children’s holistic development
-    - understand the connection between brain development and children’s learning
-    - discuss a range of theories underpinning best practice
+    - establish and explore the stages of children’s brain development
+    - explore the impact of brain development on children’s holistic development
+    - examine the connection between brain development and children’s learning
+    - explore a range of theories underpinning best practice
 
 personal-social-and-emotional-development:
   depends_on: brain-development-and-how-children-learn
@@ -38,7 +38,7 @@ personal-social-and-emotional-development:
   objective: |
     It will help you to consider how the development of these skills impact on a child’s overall development.
   criteria: |
-    - describe the stages of children’s personal, social and emotional development
-    - explain the importance of effective relationships
-    - understand how different factors influence children’s behaviour
-    - support children's self-regulation and understand its role in their development
+    - establish and explore the stages of children’s personal, social and emotional development
+    - discuss the importance of effective relationships
+    - explore how different factors influence children's behaviour
+    - explain and explore the role of self-regulation in children's development
