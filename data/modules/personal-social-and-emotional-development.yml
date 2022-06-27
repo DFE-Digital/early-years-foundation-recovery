@@ -144,63 +144,55 @@ personal-social-and-emotional-development:
   3-3-2-4:
     type: text_page
 
-  # ----------------------------------------------------------------------------
-  # Recap
-  # ----------------------------------------------------------------------------
-
-
-  3-4:
+  3-recap:
     type: sub_module_intro
 
   # ----------------------------------------------------------------------------
   # End of module test
   # ----------------------------------------------------------------------------
 
-  3-5:
+  3-test:
     type: text_page
-  3-5-1:
-    type: formative_assessment
-  3-5-2:
-    type: formative_assessment
-  3-5-3:
-    type: formative_assessment
-  3-5-4:
-    type: formative_assessment
-  3-5-5:
-    type: formative_assessment
-  3-5-6:
-    type: formative_assessment
-  3-5-7:
-    type: formative_assessment
-  3-5-8:
-    type: formative_assessment
-  3-5-9:
-    type: formative_assessment
-  3-5-10:
-    type: formative_assessment
-
+  3-test-1:
+    type: summative_assessment
+  3-test-2:
+    type: summative_assessment
+  3-test-3:
+    type: summative_assessment
+  3-test-4:
+    type: summative_assessment
+  3-test-5:
+    type: summative_assessment
+  3-test-6:
+    type: summative_assessment
+  3-test-7:
+    type: summative_assessment
+  3-test-8:
+    type: summative_assessment
+  3-test-9:
+    type: summative_assessment
+  3-test-10:
+    type: summative_assessment
+  3-test-11:
+    type: assessments_results
   # ----------------------------------------------------------------------------
   # Confidence check
   # ----------------------------------------------------------------------------
 
-  3-6:
+  3-confidence:
     type: text_page
-  3-6-1:
-    type: confidence_check  
-  3-6-2:
-    type: confidence_check  
-  3-6-3:
-    type: confidence_check  
-  3-6-4:
-    type: confidence_check  
-  3-6-5:
-    type: confidence_check  
-  3-6-6:
-    type: confidence_check  
+  3-confidence-1:
+    type: confidence_check
+  3-confidence-2:
+    type: confidence_check
+  3-confidence-3:
+    type: confidence_check
+  3-confidence-4:
+    type: confidence_check
+  3-confidence-5:
+    type: confidence_check
+  3-confidence-6:
+    type: confidence_check
   
-  # ----------------------------------------------------------------------------
-  # Thank you and feedback
-  # ----------------------------------------------------------------------------
-
-  3-6-7:
+  3-end:
     type: sub_module_intro
