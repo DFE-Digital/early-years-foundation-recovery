@@ -21,7 +21,7 @@ RSpec.describe SeedInterimUsers do
     end
 
     it 'if email already exists, does not add user' do
-      user = create(:user, :confirmed, email: 'ben.miller@test.com')
+      create(:user, :confirmed, email: 'ben.miller@test.com')
       expect(User.find_by(email: 'ben.miller@test.com')).to be_present
       expect { described_class.new.seed_interim_users }.to output(a_string_including('Skipping user: ben.miller@test.com creation as it already exists.')).to_stdout
     end
