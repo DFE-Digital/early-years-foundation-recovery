@@ -27,6 +27,7 @@ env:
   RAILS_ENV: production
   RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
   USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+  INTERIM_PASSWORD: ${{ SecureRandom.base64(12) }}
 
 jobs:
   test:
