@@ -20,9 +20,9 @@ personal-social-and-emotional-development:
         multi_select: false 
         label: |
           Read the scenario and answer the question: 
-          Aisha and Noah are playing together outside when Noah trips and bumps his knee, which causes him to cry. Aisha is quick to try to comfort Noah and looks for help from an adult. 
-          Later, Aisha recreates the situation with dolls and uses the opportunity to express her worries about the accident.
-          At around what age would you expect to start seeing Aisha’s behaviour?
+          Yusuf and Noah are playing together outside when Noah trips and bumps his knee, which causes him to cry. Yusuf is quick to try to comfort Noah and looks for help from an adult. 
+          Later, Yusuf recreates the situation with dolls and uses the opportunity to express his worries about the accident.
+          At around what age would you expect to start seeing Yusuf’s behaviour?
         assessment_summary: At around 3 years old children will be showing more affection for friends and will visibly show concern when their friends are upset.  
         assessment_fail_summary: At around 3 years old children will be showing more affection for friends and will visibly show concern when their friends are upset.  
         answers:
@@ -38,7 +38,7 @@ personal-social-and-emotional-development:
       1_rather_play_with_others:
         multi_select: false 
         label: | 
-          Complete the statement: At BLANK years old, most children would rather play with others than alone.
+          At what age would children rather play with others than alone?
         assessment_summary: At 4 years old, children would rather play with others than alone and they are making friendships and forming bonds with their peers. 
         assessment_fail_summary: At 4 years old, children would rather play with others than alone and they are making friendships and forming bonds with their peers.
         answers:
@@ -68,14 +68,14 @@ personal-social-and-emotional-development:
       1_high_self_efficacy:
         multi_select: false 
         label: |
-          Complete the statement: When a child has high self-efficacy they BLANK.
+          What does it mean if a child has high self-efficacy? 
         assessment_summary: |
           Children with high self-efficacy will believe they can succeed and are more likely to attempt challenging activities. 
           You can support children to build self-efficacy by:
 
           - offering lots of praise and reward
           - actively listening to them so that they feel heard and important 
-          - encouraging them to try challenging but achievable activities"
+          - encouraging them to try challenging but achievable activities
 
         assessment_fail_summary: |
           Children with high self-efficacy will believe they can succeed and are more likely to attempt challenging activities. 
@@ -85,10 +85,10 @@ personal-social-and-emotional-development:
           - actively listening to them so that they feel heard and important 
           - encouraging them to try challenging but achievable activities
         answers:
-          1: "Have limited confidence"
-          2: "Believe they can succeed"
-          3: "Feel unvalued"
-          4: "Are anxious about a challenge"
+          1: "They have limited confidence"
+          2: "They believe they can succeed"
+          3: "They have positive emotional responses"
+          4: "They do not notice change"
         correct_answers:
           - "2"  
   3-1-2-2c:
@@ -97,7 +97,7 @@ personal-social-and-emotional-development:
       1_promoting_choice:
         multi_select: false 
         label: | 
-          Complete the statement: Promoting choices in your setting will BLANK.
+          How will promoting choices in your setting impact children? 
         assessment_summary: |
           Frequent use of choice encourages self-worth, as being involved in choices and decisions will support children to feel valued and important. It will also help children to: 
 
@@ -112,10 +112,10 @@ personal-social-and-emotional-development:
           - understand the concepts of actions and consequences
           - develop their language skills by engaging in conversations and discussing their choices
         answers:
-          1: "Confuse children"
-          2: "Frustrate children"
-          3: "Encourage self-worth"
-          4: "Limit language development"
+          1: "It will confuse children"
+          2: "It will frustrate children"
+          3: "It will encourage self-worth in children"
+          4: "It will limit language development"
         correct_answers:
           - "3"  
   3-1-2-3b:
@@ -157,9 +157,9 @@ personal-social-and-emotional-development:
       1_stereotypes:
         multi_select: false 
         label: |
-          True or false? Children are born with pre formed stereotypical and biased views.
-        assessment_summary: Children are not born with pre formed views of others around them. Children will notice difference and can easily develop misconceptions, however they will not naturally hold stereotypical assumptions or be biased.
-        assessment_fail_summary: Children are not born with pre formed views of others around them. Children will notice difference and can easily develop misconceptions, however they will not naturally hold stereotypical assumptions or be biased.
+          True or false? Children are born with preformed stereotypical and biased views.
+        assessment_summary: Children are not born with preformed views of others around them. Children will notice difference and can easily develop misconceptions, however they will not naturally hold stereotypical assumptions or be biased.
+        assessment_fail_summary: Children are not born with preformed views of others around them. Children will notice difference and can easily develop misconceptions, however they will not naturally hold stereotypical assumptions or be biased.
         answers:
           1: "True"
           2: "False"
@@ -171,7 +171,7 @@ personal-social-and-emotional-development:
       1_overstimulation:
         multi_select: false 
         label: |
-          Complete the statement: BLANK is the term used to describe the potential impact aspects of their environment such as noise, light, or crowds can have on children.
+          What is the term used to describe the potential impact aspects of their environment such as noise, light, or crowds can have on children?
         assessment_summary: |
           ‘Overstimulation’ is the term used to describe the potential impact aspects of the environment such as noise, light, or crowds can have on children. 
         
@@ -208,14 +208,14 @@ personal-social-and-emotional-development:
       1_ainsworth:
         multi_select: false 
         label: |
-          Complete the statement: Ainsworth’s experiment was called The BLANK Situation.
+          What was the name of Ainsworth’s experiment? 
         assessment_summary: The experiment Ainsworth conducted to investigate a baby’s quality of attachment was called the “Strange Situation”. 
         assessment_fail_summary: The experiment Ainsworth conducted to investigate a baby’s quality of attachment was called the “Strange Situation”. 
         answers:
-          1: "Social"
-          2: "Funny"
-          3: "Strange"
-          4: "Physical"
+          1: "The Social Situation"
+          2: "The Funny Situation"
+          3: "The Strange Situation"
+          4: "The Physical Situation"
         correct_answers:
           - "3"  
   3-2-1-3c:
@@ -325,7 +325,7 @@ personal-social-and-emotional-development:
           Successful strategies can include :
           - following a daily routine with visual clue reminders
           - using timers for activities or tidying up 
-          - singing songs and rhymes about the days of the week or the time of year "
+          - singing songs and rhymes about the days of the week or the time of year 
         answers:
           1: "True"
           2: "False"
@@ -337,18 +337,20 @@ personal-social-and-emotional-development:
       1_understand_regulate:
         multi_select: false 
         label: |
-          Complete the statement: If children are not effectively supported to understand and regulate their feelings they can become BLANK."
+          What can happen if children are not effectively supported to understand and regulate their feelings? 
         assessment_summary: |
           Children can become overwhelmed and will struggle with challenges experienced as part of their daily lives if they are not effectively supported to understand and regulate their feelings. Developing self-regulation requires guidance and support. As children begin to recognise and name their feelings, they will also need your support to learn to regulate them. This support can be referred to as co-regulation, meaning when you work in cooperation with others to develop skills. 
         assessment_fail_summary: |
           Children can become overwhelmed and will struggle with challenges experienced as part of their daily lives if they are not effectively supported to understand and regulate their feelings. Developing self-regulation requires guidance and support. As children begin to recognise and name their feelings, they will also need your support to learn to regulate them. This support can be referred to as co-regulation, meaning when you work in cooperation with others to develop skills. 
         answers:
-          1: "Overwhelmed"
-          2: "Physically active"
-          3: "More organised"
-          4: "Tired"
+          1: "They can become overwhelmed"
+          2: "They can become more physically active"
+          3: "They can become more organised"
+          4: "They can become tired"
         correct_answers:
           - "1"  
 
 #END-OF-MODULE-TEST
+
+
 

@@ -1,5 +1,6 @@
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
+    =govuk_back_link(href: url_for(:back))
     / on second visit to users/confirmation/new, email is not available so display generic page
     - user = @user.nil? ? :user : @user
 
@@ -28,4 +29,4 @@
 
       p.govuk-heading-s= t('check_email_confirmation.diff_problem.title') 
       p.govuk-body #{t('check_email_confirmation.diff_problem.text')}
-        #{govuk_link_to t('check_email_confirmation.diff_problem.link_text'), "#"}.
+        #{govuk_link_to t('check_email_confirmation.diff_problem.link_text'), Rails.application.credentials.contact_us}.

@@ -1,6 +1,6 @@
 module ApplicationHelper
   def navigation
-    govuk_header(service_name: 'Early Years Foundation', classes: 'noprint') do |header|
+    govuk_header(service_name: 'Child development training', classes: 'noprint') do |header|
       header.navigation_item(text: 'Home', href: root_path)
       if user_signed_in?
         header.navigation_item(text: 'My learning', href: my_learning_path)
@@ -50,12 +50,13 @@ module ApplicationHelper
     link_to 'Previous', link, link_args
   end
 
+  # Date format guidelines: "1 June 2002"
   def completed_modules_table(modules)
     header = ['Module name', 'Date completed', 'Actions']
     rows = modules.map do |mod, timestamp|
       [
-        govuk_link_to(mod.title, training_module_content_pages_path(mod)),
-        timestamp.to_date.to_formatted_s(:rfc822),
+        govuk_link_to(mod.title, training_module_path(mod)),
+        timestamp.to_date.strftime('%-d %B %Y'),
         govuk_link_to('View certificate', training_module_certificate_path(mod)),
       ]
     end

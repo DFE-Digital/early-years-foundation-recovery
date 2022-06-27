@@ -6,7 +6,7 @@ brain-development-and-how-children-learn:
       1_what_brain_area:
         multi_select: false 
         label: |
-          Complete the statement: The BLANK is the area of the brain responsible for motor development.
+          Which area of the brain is responsible for motor development? 
         assessment_summary:  |
           The cerebellum is at the back of your head. This is the area in charge of motor development. It controls balance and coordinates movements. The cerebellum combines the signals from the eyes, ears and muscles with motor commands. 
         assessment_fail_summary: |
@@ -27,9 +27,9 @@ brain-development-and-how-children-learn:
         label: |
           In which trimester does the baby’s brain triple in weight?
         assessment_summary: |
-          Myelination also occurs during this trimester which is where a fatty substance called myelin begins to coat the neurones.
+          In the third trimester the baby’s brain triples in weight. Myelination also occurs during this trimester, which is where a fatty substance called myelin begins to coat the neurones.
         assessment_fail_summary: |
-          In the third trimester the baby’s brain triples in weight. Myelination also occurs during this trimester which is where a fatty substance called myelin begins to coat the neurones.
+          In the third trimester the baby’s brain triples in weight. Myelination also occurs during this trimester, which is where a fatty substance called myelin begins to coat the neurones.
         answers:
           1: "Trimester 1"
           2: "Trimester 2"
@@ -42,7 +42,7 @@ brain-development-and-how-children-learn:
       1_what_during_pregnancy:
         multi_select: false 
         label: |
-          Complete the statement: __________ during pregnancy may lead to premature birth, low birth weight and an underdeveloped brain.
+          If experienced by the mother during pregnancy, which of the following may lead to premature birth, low birth weight and an underdeveloped brain?
         assessment_summary: |
           Cigarette smoke reduces the amount of oxygen the baby receives and reduces the forming of neurones. This can result in premature birth, low birth weight and an underdeveloped brain.    
         assessment_fail_summary: |
@@ -95,16 +95,20 @@ brain-development-and-how-children-learn:
       1_piaget_stage:
         multi_select: false 
         label: |
-          Complete the statement: Jean Piaget labelled the 0 to 2 year stage of child development the __________ stage.
+         What did Jean Piaget label the 0 to 2 year stage of child development?
         assessment_summary: |
-          Piaget labelled the 0 to 2 years old stage of development as the sensorimotor stage. In this stage, babies use their senses to explore and grow.
+          Piaget labelled the 0 to 2 years old stage of development as the sensorimotor stage. In this stage, babies use their senses to explore and grow. 
+
+          You can support babies' understanding of the world around them by providing sensory rich environments. For example, while teaching them the word 'apple', babies might be able to repeat the word but might not know what an apple is. If a baby gets to see, touch, smell and taste an apple, they will be able to complete the view in their mind that the word apple is the green fruit that tastes like this and smells like that.
         assessment_fail_summary: |
           Piaget labelled the 0 to 2 years old stage of development as the sensorimotor stage. In this stage, babies use their senses to explore and grow.
+
+          You can support babies' understanding of the world around them by providing sensory rich environments. For example, while teaching them the word 'apple', babies might be able to repeat the word but might not know what an apple is. If a baby gets to see, touch, smell and taste an apple, they will be able to complete the view in their mind that the word apple is the green fruit that tastes like this and smells like that.
         answers:
-          1: "Gross motor"
-          2: "Fine motor"                    
-          3: "Sensorimotor"
-          4: "Senses"
+          1: "Gross motor stage"
+          2: "Fine motor stage"                    
+          3: "Sensorimotor stage"
+          4: "Senses stage"
         correct_answers: ["3"]
   2-1-2-1c:
     content:
@@ -114,13 +118,15 @@ brain-development-and-how-children-learn:
         label: |
           Which of these is an early years approach based on the work of Piaget? (Select all that apply) 
         assessment_summary: |
-          Piaget did not believe that babies were born with a fixed intellectual ability. Instead, he said that a child’s interaction with their environment, combined with their growing brain would shape their developing their cognitive skills. 
+          Piaget did not believe that babies were born with a fixed intellectual ability. Instead, he said that a child’s interaction with the environment, combined with their growing brain, would shape how their cognitive skills develop. 
         assessment_fail_summary: |
           Piaget’s work highlighted the importance of:
+          
           - a supportive environment to promote development 
           - social interaction and peer teaching to promote development 
           - opportunities to test inconsistencies to promote development 
-          Piaget did not believe that babies were born with a fixed intellectual ability. Instead, he said that a child’s interaction with their environment, combined with their growing brain would shape their developing their cognitive skills. 
+          
+          Instead, he said that a child’s interaction with the environment, combined with their growing brain, would shape how their cognitive skills develop. 
         answers:
           1: "The importance of a supportive environment "
           2: "Promotion of social interaction and peer teaching "                    
@@ -150,15 +156,15 @@ brain-development-and-how-children-learn:
       1_child_relaxed:
         multi_select: false
         label: |
-          Select 1 answer to complete the statement: When a child is relaxed, they are more likely to BLANK. "
+          What is a child more likely to do when they are relaxed?
         assessment_summary: |
           When children feel relaxed they are more confident to explore and experiment, which will result in increased learning opportunities. 
         assessment_fail_summary: |
           When children feel relaxed they are more confident to explore and experiment, which will result in increased learning opportunities. 
         answers:
-          1: "Experience high levels of stress"
+          1: "Experience changes in stress levels"
           2: "Explore and learn"                    
-          3: "Limit social interaction"
+          3: "Seek social interaction"
         correct_answers: ["2"]
   2-1-3-2b:
     content:
@@ -166,7 +172,7 @@ brain-development-and-how-children-learn:
       1_healthy_diet:
         multi_select: false
         label: |
-          Complete the statement: A healthy diet will BLANK.
+          Feeding children a healthy diet will do which of the following?
         assessment_summary: |
           When children eat a balanced diet they will have all the necessary nutrients to support growth and development.
         assessment_fail_summary: |
@@ -209,22 +215,8 @@ brain-development-and-how-children-learn:
           3: "When a child remains at the same stage of development"
           4: "A delayed response when talking to someone"
         correct_answers: ["2"]
+
   2-2-1-3b:
-    content:
-    questions:
-      1_cognitive_development_accidental:
-        multi_select: false 
-        label: |
-          True or false? Cognitive development delay can be caused accidentally.
-        assessment_summary: |
-          Also known as acquired injury, accidental cause is where cognitive impairment results from an injury affecting the head and brain.
-        assessment_fail_summary: |
-          Also known as acquired injury, accidental cause is where cognitive impairment results from an injury affecting the head and brain.
-        answers:
-          1: "True"
-          2: "False"
-        correct_answers: ["1"]
-  2-2-1-3c:
     content:
     questions:
       1_gaps_in_learning:
@@ -247,7 +239,7 @@ brain-development-and-how-children-learn:
       1_maslow_needs:
         multi_select: false 
         label: |
-          Maslow considered BLANK needs to be the most important. 
+          Which type of needs did Maslow consider to be the most important?
         assessment_summary: |
           Maslow believed the most important needs are the physiological needs, the things needed for survival. These needs include food, water, warmth and rest. Maslow concluded that all other levels depended on these needs being met first.
         assessment_fail_summary: |
@@ -271,7 +263,7 @@ brain-development-and-how-children-learn:
           - mastery - opportunities to master tasks or skills and experience success
           - vicarious experiences - opportunities to observe others who are similar to themselves succeeding
           - persuasion - support, praise and encouragement from influential role models in the child’s life 
-          - imagination  - the ability for the child to imagine themselves succeeding"
+          - imagination  - the ability for the child to imagine themselves succeeding
 
         assessment_fail_summary: | 
           Bandura believed that a child’s development of self-efficacy came from 4 potential sources:
@@ -279,20 +271,20 @@ brain-development-and-how-children-learn:
           - mastery - opportunities to master tasks or skills and experience success
           - vicarious experiences - opportunities to observe others who are similar to themselves succeeding
           - persuasion - support, praise and encouragement from influential role models in the child’s life 
-          - imagination  - the ability for the child to imagine themselves succeeding"
+          - imagination  - the ability for the child to imagine themselves succeeding
         answers:
           1: "6"
           2: "7"
           3: "4"
           4: "5"
-        correct_answers: ["4"]
+        correct_answers: ["3"]
   2-2-2-5b:
     content:
     questions:
       1_bruner:
         multi_select: false 
         label: |
-          Complete the statement: The 3 learning methods included in Bruner’s spiral curriculum are Enactive, BLANK and Symbolic representation.
+          The 3 learning methods included in Bruner’s spiral curriculum are Enactive, Symbolic representation and which of the following?
 
         assessment_summary: | 
           Bruner’s methods included:
@@ -319,11 +311,11 @@ brain-development-and-how-children-learn:
       1_more_knowledgeable_other:
         multi_select: false 
         label: |
-          Complete the statement: BLANK is the term used to describe when a more knowledgeable other helps children to acquire new skills and knowledge.
+          What is the term used to describe when a more knowledgeable other helps children to acquire new skills and knowledge?
         assessment_summary: |
-          Scaffolding is where support and techniques are used to guide a child’s learning. This help can then be reduced until the child is able to complete the task alone. 
+          Scaffolding is where support and techniques are used to guide a child’s learning. Scaffolding could include modelling, chunking knowledge to make it achievable and using visual aids and questions to support learning. This help can then be reduced until the child is able to complete the task alone. 
         assessment_fail_summary: |
-          Scaffolding is where support and techniques are used to guide a child’s learning. This help can then be reduced until the child is able to complete the task alone. 
+          Scaffolding is where support and techniques are used to guide a child’s learning. Scaffolding could include modelling, chunking knowledge to make it achievable and using visual aids and questions to support learning. This help can then be reduced until the child is able to complete the task alone.  
         answers:
           1: "Supporting"
           2: "Staging"
@@ -336,9 +328,9 @@ brain-development-and-how-children-learn:
       1_nhs_physical_hours:
         multi_select: false 
         label: |
-          Complete the statement: According to NHS guidance, toddlers aged between 1 to 2 years should be active for BLANK hours a day.
+          According to NHS guidance, toddlers aged between 1 to 2 years should participate in a mixture of running, jumping, balancing and light activities like standing and walking for how many hours each day?
         assessment_summary: |
-          It is important to remember that this is not 3 hours of planned physical activity that involves running, jumping, or climbing, but that it also includes light activity such as standing and walking. 
+          NHS guidance states that children aged 1 to 2 should be active for at least 3 hours per day. It is important to remember that this is not 3 hours of planned physical activity that involves running, jumping, or climbing, but that it also includes light activity such as standing and walking. 
         assessment_fail_summary: |
           NHS guidance states that children aged 1 to 2 should be active for at least 3 hours per day. It is important to remember that this is not 3 hours of planned physical activity that involves running, jumping, or climbing, but that it also includes light activity such as standing and walking. 
         answers:
@@ -370,7 +362,7 @@ brain-development-and-how-children-learn:
       1_meal_times:
         multi_select: true 
         label: |
-          Which of these is an example of encouraging children to become involved in meal times? (Select all answers that apply) 
+          Which of these could you do with children in your setting to encourage involvment in meal times? (Select all answers that apply) 
         assessment_summary: |
           Encouraging children to become involved in food preparation, lay the table and serve themselves will: 
           
@@ -388,10 +380,10 @@ brain-development-and-how-children-learn:
           
           Limiting food options will take away the children’s choice and reduce their involvement.
         answers:
-          1: "Food preparation"
+          1: "Preparing food"
           2: "Limiting food options"
           3: "Laying the table"
-          4: "Serving themselves"
+          4: "Allowing children to serve themselves"
         correct_answers: ["1","3","4"]
   2-2-3-6b:
     content:
@@ -401,14 +393,14 @@ brain-development-and-how-children-learn:
         label: |
           Which of these relationships will a child observe and experience in your setting? (Select all answers that apply)
         assessment_summary: |
-          Practitioner to practitioner, practitioner to parent, and peer to peer interaction will be influential when children are learning about positive relationships. Children may occasionally see parents interact with each other but this will not be a main influence when children are learning about positive relationships.
+          Practitioner to practitioner, practitioner to parent, and child to child interaction will be influential when children are learning about positive relationships. Children may occasionally see parents interact with each other but this will not be a main influence when children are learning about positive relationships.
         assessment_fail_summary: |
-          Practitioner to practitioner, practitioner to parent, and peer to peer interaction will be influential when children are learning about positive relationships. Children may occasionally see parents interact with each other but this will not be a main influence when children are learning about positive relationships.
+          Practitioner to practitioner, practitioner to parent, and child to child interaction will be influential when children are learning about positive relationships. Children may occasionally see parents interact with each other but this will not be a main influence when children are learning about positive relationships.
         answers:
           1: "Practitioner to practitioner"
           2: "Practitioner to parent"
           3: "Parent to parent"
-          4: "Peer to peer"
+          4: "Child to child"
         correct_answers: ["1","2","4"]  
   2-2-3-6c:
     content:
@@ -424,4 +416,8 @@ brain-development-and-how-children-learn:
         answers:
           1: "True"
           2: "False"
-        correct_answers: ["1"]
+        correct_answers: ["1"]  
+    
+#END-OF-MODULE-TEST
+
+

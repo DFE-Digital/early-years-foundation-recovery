@@ -32,6 +32,7 @@ class ExtraRegistrationsController < ApplicationController
     if next_step
       redirect_to edit_extra_registration_path(next_step)
     else
+      track('user_registration', success: true)
       current_user.update! registration_complete: true
       redirect_to my_learning_path, notice: t(:complete, scope: :extra_registration)
     end
@@ -40,7 +41,7 @@ class ExtraRegistrationsController < ApplicationController
 private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :postcode, :ofsted_number)
+    params.require(:user).permit(:first_name, :last_name, :postcode, :ofsted_number, :setting_type, :setting_type_other)
   end
 
   # @return [Symbol]

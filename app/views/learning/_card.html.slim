@@ -1,0 +1,8 @@
+.govuk-card__flex-container
+  .govuk-card__flex-item id=mod.name
+    .govuk-card.govuk-card--contained.govuk-card--selectable
+      a href=training_module_path(mod)
+      div class='govuk-card__hero govuk-!-margin-bottom-2'
+        img src=image_path(mod.thumbnail) width=200 alt=mod.name
+      .govuk-card__content
+        h3.govuk-heading-m= mod.title

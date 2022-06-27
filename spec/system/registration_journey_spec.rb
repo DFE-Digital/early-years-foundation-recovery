@@ -22,13 +22,13 @@ RSpec.describe 'Following registration journey' do
         click_on 'create a new account', visible: :hidden
 
         expect(page).to have_current_path(new_user_registration_path, ignore_query: true)
-        expect(page).to have_text('Create an early years training account')
+        expect(page).to have_text('Create a child development training account')
       end
     end
 
     context 'and can click on the ‘other problems’ link' do
       it 'taken to the ‘MS form to contact us’' do
-        expect(page).to have_link 'contact us', href: '#', visible: :hidden
+        expect(page).to have_link 'contact us', href: Rails.application.credentials.contact_us, visible: :hidden
       end
     end
 

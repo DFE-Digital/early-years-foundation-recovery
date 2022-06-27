@@ -145,7 +145,7 @@ personal-social-and-emotional-development:
     type: text_page
 
   3-recap:
-    type: text_page
+    type: sub_module_intro
 
   # ----------------------------------------------------------------------------
   # End of module test
@@ -195,4 +195,4 @@ personal-social-and-emotional-development:
     type: confidence_check
   
   3-end:
-    type: text_page
+    type: sub_module_intro

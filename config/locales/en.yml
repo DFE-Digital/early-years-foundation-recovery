@@ -24,6 +24,8 @@ en:
               confirmation: Confirmation doesn't match password.
             ofsted_number:
               invalid: This Ofsted number is not recognised.
+            setting_type:
+              blank: Select a setting type.
   activerecord:
     errors:
       models:
@@ -59,16 +61,21 @@ en:
     error: Error
     important: Success
     notice: Success
+  date_completed: "Date completed: %{date}"
 
   extra_registration:
-    complete: Thank you for creating an early years training account. You can now start the first module.
+    complete: Thank you for creating a child development training account. You can now start the first module.
     name:
       heading: About you
       body: We're asking for your details so we can personalise your training certificates.
       button: Continue
     setting:
       heading: About your setting
-      body: Your details and training progress won't be shared with anyone without your permission.
+      body: |
+        Your details and training progress won't be shared with anyone without your permission.
+
+        {:.govuk-hint}
+        If you work in multiple settings, choose the one where you work most often.
       button: Complete
 
   setting:
@@ -82,7 +89,7 @@ en:
     remember_me: Remember me
 
   module_indicator:
-    completed: complete
+    completed: completed
     started: in progress
     not_started: not started
 
@@ -96,11 +103,16 @@ en:
     heading: The experts
     summary: This training course has been created by 3 early years experts.
     body: |
-      ### Debbie Parry 
+      ### Debbie Parry
 
-      Debbie Parry has over 20 years of experience in education and training. She spent several years working as an early years practitioner in private day nurseries, before going on to use her knowledge and experience to teach the practitioners of the future in college environments. 
-      
-      Debbie has supported a wide range of practitioners including childminders, apprentices and nursery staff. Most recently, she has been designing and delivering bespoke training packages for those working in the early years sector.
+      Debbie Parry has over 20 years of experience in education and training.
+      She spent several years working as an early years practitioner in private day nurseries,
+      before going on to use her knowledge and experience to teach the practitioners
+      of the future in college environments.
+
+      Debbie has supported a wide range of practitioners including childminders,
+      apprentices and nursery staff. Most recently, she has been designing and delivering
+      bespoke training packages for those working in the early years sector.
 
       Debbie's qualifications include:
 
@@ -111,7 +123,9 @@ en:
 
       ### Melissa Tharm
 
-      Melissa Tharm worked in SEND residential environments for a number of years. She now brings her experience and knowledge to designing and delivering outstanding training programmes to professionals in the health, care and education sectors.
+      Melissa Tharm worked in SEND residential environments for a number of years.
+      She now brings her experience and knowledge to designing and delivering
+      outstanding training programmes to professionals in the health, care and education sectors.
 
       Melissa's qualifications include:
 
@@ -122,9 +136,11 @@ en:
 
       ### Catherine Mcelroy
 
-      Catherine Mcelroy has over 20 years of experience working in private day nurseries with children under 5. She has spent the last 10 years as a nursery manager, ensuring that children and their families experience excellent care that is fun and exciting.
+      Catherine Mcelroy has over 20 years of experience working in private day nurseries with children under 5.
+      She has spent the last 10 years as a nursery manager, ensuring that
+      children and their families experience excellent care that is fun and exciting.
 
-      Catherine's qualifications include: 
+      Catherine's qualifications include:
 
       - BTEC National Diploma in Early Childhood Studies
       - Foundation Degree in Early Childhood Studies
@@ -142,11 +158,33 @@ en:
 
       Once you have completed all of the topics, there is an end of module
       test and an opportunity to download a certificate of achievement.
+    common: |
+      ## Your progress is saved automatically
+
+      Your progress is automatically saved as you move through the module.
+      You can sign out or close the browser at any time without losing your progress.
+      When you next login, you can restart from where you left off.
+
+      ## Get a certificate of achievement
+
+      At the end of this module, you will be able to download a certificate of
+      achievement, showing what you have learned.
+
+      ## Reflect on your learning with practitioner prompts
+
+      You will see practitioner prompts throughout the course.
+      These are intended to:
+
+      - encourage you to reflect on your current practice
+      - introduce you to new strategies
+      - reinforce effective teaching and learning
+      - help you to think about what you have learned
+
 
   check_email_confirmation:
     heading: Check your email
-    body: 
-      0: | 
+    body:
+      0: |
         We have sent you an email with instructions for how to verify your email address.
       1: |
         We sent the email to:
@@ -162,7 +200,7 @@ en:
         If you still cannot see the email, we can send it again.
       link_text: Send me another email
     no_access_to_email:
-      title: I don’t have access to the email address I used to register 
+      title: I don’t have access to the email address I used to register
       text: You can set up your account using a different email address.
       link_text: create a new account
     diff_problem:
@@ -184,7 +222,7 @@ en:
       link_text: Send me another email
     diff_problem:
       title: I have a different problem
-      text: For other problems with creating your account or signing in, please 
+      text: For other problems with creating your account or signing in, please
       link_text: contact us
   assessments_results:
     passed:
@@ -218,6 +256,8 @@ en:
         password: Create a new password # /my-account/edit-password
         current_password: Enter your current password
         password_confirmation: Re-type your new password
+        setting_type: Your setting type
+        setting_type_other: Other setting
         postcode: Your setting's postcode
         ofsted_number: Your setting's Ofsted number
     hint:

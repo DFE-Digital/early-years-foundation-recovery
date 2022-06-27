@@ -42,3 +42,10 @@ bravo:
     type: youtube_page
   1-2-2-1:
     type: text_page
+
+  # Assessment
+  # ----------------------------------------------------------------------------
+  1-quiz-1:
+    type: formative_assessment
+  1-quiz-2:
+    type: formative_assessment

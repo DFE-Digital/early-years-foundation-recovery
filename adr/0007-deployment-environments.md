@@ -6,7 +6,7 @@
 
 How might we specify the "Route-to-live" environments.
 
-## Decision Drivers <!-- optional -->
+## Decision Drivers
 
 * Costs need to be kept to a reasonable minimum
 * Necessary and sufficient
