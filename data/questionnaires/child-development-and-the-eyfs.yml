@@ -1,6 +1,6 @@
 ---
 child-development-and-the-eyfs:
-  1-confidence-1:
+  1-4-1:
     content:
     questions:
       1_importance_child_development:
@@ -17,7 +17,7 @@ child-development-and-the-eyfs:
           5: "Strongly disagree"
         correct_answers: ["1","2","3","4","5"]
 
-  1-confidence-2:
+  1-4-2:
     content:
     questions:
       1_factors_development:
@@ -34,7 +34,7 @@ child-development-and-the-eyfs:
           5: "Strongly disagree"
         correct_answers: ["1","2","3","4","5"]
 
-  1-confidence-3:
+  1-4-3:
     content:
     questions:
       1_covid19:
@@ -51,7 +51,7 @@ child-development-and-the-eyfs:
           5: "Strongly disagree"
         correct_answers: ["1","2","3","4","5"]
 
-  1-confidence-4:
+  1-4-4:
     content:
     questions:
       1_doing_my_best:
@@ -68,7 +68,7 @@ child-development-and-the-eyfs:
           5: "Strongly disagree"
         correct_answers: ["1","2","3","4","5"]
 
-  1-confidence-5:
+  1-4-5:
     content:
     questions:
       1_delivering_eyfs:

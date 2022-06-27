@@ -141,49 +141,53 @@ brain-development-and-how-children-learn:
   2-2-3-7:
     type: text_page
 
-  2-recap:
+  # ----------------------------------------------------------------------------
+  # Recap
+  # ----------------------------------------------------------------------------
+
+  2-3:
     type: sub_module_intro
 
   # ----------------------------------------------------------------------------
   # End of module test
   # ----------------------------------------------------------------------------
 
-  2-test:
+  2-4:
     type: text_page
-  2-test-1:
+  2-4-1:
     type: formative_assessment
-  2-test-2:
+  2-4-2:
     type: formative_assessment
-  2-test-3:
+  2-4-3:
     type: formative_assessment
-  2-test-4:
+  2-4-4:
     type: formative_assessment
-  2-test-5:
+  2-4-5:
     type: formative_assessment
-  2-test-6:
+  2-4-6:
     type: formative_assessment
-  2-test-7:
+  2-4-7:
     type: formative_assessment
-  2-test-8:
+  2-4-8:
     type: formative_assessment
-  2-test-9:
+  2-4-9:
     type: formative_assessment
-  2-test-10:
+  2-4-10:
     type: formative_assessment
 
   # ----------------------------------------------------------------------------
   # Confidence check
   # ----------------------------------------------------------------------------
 
-  2-confidence:
+  2-5:
     type: text_page
-  2-confidence-1:
+  2-5-1:
     type: formative_assessment  
-  2-confidence-2:
+  2-5-2:
     type: formative_assessment  
-  2-confidence-3:
+  2-5-3:
     type: formative_assessment  
-  2-confidence-4:
+  2-5-4:
     type: formative_assessment  
-  2-end:
+  2-5-5:
     type: sub_module_intro
