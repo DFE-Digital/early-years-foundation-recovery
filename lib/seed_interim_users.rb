@@ -1,10 +1,10 @@
 class SeedInterimUsers
-  def seed_interim_users()
+  def seed_interim_users
     seed_file = Rails.root.join('db/seeds/interim_data.yml')
     users = YAML.load_file(seed_file)
     users.each do |user_attributes|
       if !User.exists?(email: user_attributes['email']) && valid_email?(user_attributes['email'])
-        updated_attributes = user_attributes.merge(password: SecureRandom.base64(12))
+        updated_attributes = user_attributes.merge(password: ENV.fetch('INTERIM_PASSWORD', 'StrongPassword'), confirmed_at: '2022-06-16 00:00:00')
         user = User.create!(updated_attributes)
         puts("User: #{user.email} succesfully created.")
         module_items = ModuleItem.where(training_module: 'child-development-and-the-eyfs')
