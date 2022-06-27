@@ -28,10 +28,7 @@ class CourseProgress
   # @return [Array<Array>] Tabular data of completed training module
   def completed_modules
     by_state(:completed).map do |mod|
-      final_page = mod.module_items.last.name
-      completed_at = training_module_events(mod.name).where_properties(id: final_page).first.time
-
-      [mod, completed_at]
+      [mod, module_progress(mod).completed_at]
     end
   end
 
@@ -71,7 +68,7 @@ private
   def started?(mod)
     return false if mod.draft?
 
-    module_progess(mod).started?
+    module_progress(mod).started?
   end
 
   # @param mod [TrainingModule]
@@ -79,7 +76,7 @@ private
   def completed?(mod)
     return false if mod.draft?
 
-    module_progess(mod).completed?
+    module_progress(mod).completed?
   end
 
   # @param mod [TrainingModule]
@@ -124,7 +121,7 @@ private
   end
 
   # @return [ModuleProgress]
-  def module_progess(mod)
+  def module_progress(mod)
     ModuleProgress.new(user: user, mod: mod)
   end
 

@@ -24,6 +24,8 @@ en:
               confirmation: Confirmation doesn't match password.
             ofsted_number:
               invalid: This Ofsted number is not recognised.
+            setting_type:
+              blank: Select a setting type.
   activerecord:
     errors:
       models:
@@ -59,6 +61,7 @@ en:
     error: Error
     important: Success
     notice: Success
+  date_completed: "Date completed: %{date}"
 
   extra_registration:
     complete: Thank you for creating a child development training account. You can now start the first module.
@@ -68,7 +71,11 @@ en:
       button: Continue
     setting:
       heading: About your setting
-      body: Your details and training progress won't be shared with anyone without your permission.
+      body: |
+        Your details and training progress won't be shared with anyone without your permission.
+
+        {:.govuk-hint}
+        If you work in multiple settings, choose the one where you work most often.
       button: Complete
 
   setting:
@@ -228,6 +235,8 @@ en:
         password: Create a new password # /my-account/edit-password
         current_password: Enter your current password
         password_confirmation: Re-type your new password
+        setting_type: Your setting type
+        setting_type_other: Other setting
         postcode: Your setting's postcode
         ofsted_number: Your setting's Ofsted number
     hint:

@@ -1,12 +1,20 @@
 module Users
   class SettingForm < BaseForm
-    attr_accessor :postcode, :ofsted_number
+    attr_accessor :postcode, :ofsted_number, :setting_type, :setting_type_other
 
+    validates :setting_type, presence: true
     validates :ofsted_number, ofsted_number: true
     validates :postcode, presence: true, postcode: true
 
     def save
-      user.update!(postcode: postcode, ofsted_number: ofsted_number) if valid?
+      if valid?
+        user.update!(
+          postcode: postcode,
+          ofsted_number: ofsted_number,
+          setting_type: setting_type,
+          setting_type_other: setting_type_other,
+        )
+      end
     end
   end
 end
