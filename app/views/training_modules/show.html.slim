@@ -38,7 +38,7 @@
               ul.govuk-list
                 - topics.each do |mod, topic_heading, clickable, status|
                   li
-                    - if topic_heading.include? "Reflect on your learning"
+                    - if defined?(topic_heading) && topic_heading.include? "Reflect on your learning"
                       - if clickable && quiz_status == false
                         = govuk_link_to topic_heading, training_module_content_page_path(mod, clickable)
                       - else
@@ -49,7 +49,7 @@
                       = topic_heading
 
                     .float-right
-                      - if topic_heading.include? "End of module test"
+                      - if defined?(topic_heading) && topic_heading.include? "End of module test"
                         - status_quiz = (quiz_status)? 'retake_quiz' : status
                         = govuk_tag(text: t(status_quiz, scope: 'module_indicator'), colour: 'blue')
                       - else
