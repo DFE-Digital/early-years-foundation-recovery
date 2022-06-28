@@ -116,7 +116,7 @@ brain-development-and-how-children-learn:
       1_early-years-approach:
         multi_select: true
         label: |
-          Which of these is an early years approach based on the work of Piaget? (Select all that apply) 
+          Which of these are early years approaches based on the work of Piaget? (Select all that apply) 
         assessment_summary: |
           Piaget did not believe that babies were born with a fixed intellectual ability. Instead, he said that a child’s interaction with the environment, combined with their growing brain, would shape how their cognitive skills develop. 
         assessment_fail_summary: |
