@@ -11,7 +11,7 @@ RSpec.describe 'Sign up', type: :system do
     it 'prevents user enumeration exploit' do
       fill_in 'Email address', with: user.email
       fill_in 'Create password', with: 'StrongPassword123'
-      fill_in 'Re-type your new password', with: 'StrongPassword123'
+      fill_in 'Confirm password', with: 'StrongPassword123'
       click_button 'Continue'
 
       expect(page).to have_text('We sent the email to').and have_text(user.email)

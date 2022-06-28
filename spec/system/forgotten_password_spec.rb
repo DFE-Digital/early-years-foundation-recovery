@@ -47,7 +47,7 @@ RSpec.describe 'User following forgotten password process', type: :system do
         fill_in 'Confirm your password', with: confirm_password
         click_on 'Reset password'
 
-        expect(page).to have_text("Confirmation doesn't match password.")
+        expect(page).to have_text("Sorry, your passwords don't match.")
       end
     end
   end
