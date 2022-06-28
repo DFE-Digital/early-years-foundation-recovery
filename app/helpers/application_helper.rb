@@ -32,11 +32,17 @@ module ApplicationHelper
 
   # @return [String] next content page or course overview
   def link_to_next_module_item(module_item, link_args = { class: 'govuk-button' })
-    if module_item.next_item
+
+    if defined?(module_item.next_item.type) && module_item.next_item.type == 'assessments_results'
+      link_to 'Finish test', training_module_content_page_path(module_item.training_module, module_item.next_item), link_args
+    elsif defined?(module_item.next_item.type) && module_item.next_item.type == 'summative_assessment' && module_item.type != 'summative_assessment'
+      link_to 'Start test', training_module_content_page_path(module_item.training_module, module_item.next_item), link_args
+    elsif module_item.next_item
       link_to 'Next', training_module_content_page_path(module_item.training_module, module_item.next_item), link_args
     else
       link_to 'Finish', course_overview_path, link_args
     end
+
   end
 
   # @return [String] previous content page or module overview
@@ -67,8 +73,24 @@ module ApplicationHelper
     link_to 'Retake test', training_module_retake_quiz_path(module_item.training_module), link_args
   end
 
+  def link_to_retake_quiz_training_module(module_item, link_args = { class: 'govuk-link' })
+    quiz = AssessmentQuiz.new(user: current_user, type: 'summative_assessment', training_module_id: module_item.name, name: '')
+     if quiz.check_if_saved_result
+       if quiz.calculate_status == 'failed'
+        link_to 'Retake end of module test', training_module_retake_quiz_path(module_item.name), link_args
+       end
+     end
+  end
+
+  def link_to_quiz_results_page(module_item, link_args = { class: 'govuk-link' })
+    quiz = AssessmentQuiz.new(user: current_user, type: 'summative_assessment', training_module_id: module_item.name, name: '')
+     if quiz.check_if_saved_result
+      link_to 'View previous test result ', training_module_assessments_result_path(quiz.assessment_results_page.first.training_module, quiz.assessment_results_page.first.name), link_args
+  end
+
+  end
   def link_to_my_learning(module_item, link_args = { class: 'govuk-link, govuk-!-margin-right-4' })
-    link_to 'Go to my Learning', course_overview_path, link_args
+    link_to 'Go to my Learning', my_learning_path, link_args
   end
 
   def clear_flash
@@ -109,5 +131,18 @@ module ApplicationHelper
     else
        redirect_to course_overview_path and return
     end
+  end
+
+  def get_quiz_status(module_name)
+     quiz = AssessmentQuiz.new(user: current_user, type: 'summative_assessment', training_module_id: module_name, name: '')
+     if quiz.check_if_saved_result
+      if quiz.calculate_status == 'failed'
+        true
+      else
+        false
+      end
+     end
+
+     false
   end
 end

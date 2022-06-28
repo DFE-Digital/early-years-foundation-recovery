@@ -1,10 +1,12 @@
 class AssessmentQuiz
 
   def initialize(user:, type:, training_module_id:, name:)
+    puts user.inspect
     @user = user
     @type = type
     @training_module_id = training_module_id
     @name = name
+    @type_assesment_result = 'assessments_results'
     module_item
     training_module
   end
@@ -22,14 +24,21 @@ class AssessmentQuiz
   end
 
   def calculate_status
-    (percentage_of_assessment_answers_correct <= @training_module.summative_assessment_precentage_pass_threshold)? 'failed' : 'passed'
+    begin
+      (percentage_of_assessment_answers_correct <= @training_module.summative_assessment_precentage_pass_threshold)? 'failed' : 'passed'
+    rescue => exception
+      puts exception
+      'not started'
+    end
   end
 
   def check_if_saved_result
     begin
       answer_user =  existing_user_assessment_answers.first
+      puts answer_user.inspect
       (answer_user.user_assessment_id.blank?)? false : true
     rescue => exception
+      puts exception
       false
     end
   end
@@ -51,8 +60,6 @@ class AssessmentQuiz
     rescue => exception
       []
     end
-
-    puts user_assessment.inspect
   end
 
   def percentage_of_assessment_answers_correct
@@ -67,10 +74,6 @@ class AssessmentQuiz
     existing_user_assessment_answers.update_all(archived: true)
   end
 
-  def link_user_assessment
-    existing_user_assessment_answers.update_all(user_assessment_id: true)
-  end
-
   def existing_user_assessment_answers
     @user.user_answers.not_archived.where(assessments_type: @type, module: @training_module_id)
   end
@@ -81,7 +84,7 @@ class AssessmentQuiz
 
   def get_all_type_pages
    grouped_pages = @module_item.group_by { |m| m.type }
-   grouped_pages[@type]
+  #  grouped_pages[@type]
   end
 
   # This assumes page before the first assessment page will be the intro page 
@@ -95,10 +98,27 @@ class AssessmentQuiz
   end
 
   def assessment_first_page
-    get_all_type_pages.first
+    get_all_type_pages[@type].first
   end
 
   def assessment_last_page
-    get_all_type_pages.last
+    get_all_type_pages[@type].last
+  end
+
+  def assessment_results_page
+    get_all_type_pages[@type_assesment_result]
+  end
+
+  def last_page_visited
+    results = @user.user_answers.not_archived.where(assessments_type: @type, module: @training_module_id).sort_by(&:created_at)
+    if results.blank?
+      false
+    else
+      results.last
+    end
+  end
+  def check_if_assessment_taken
+    results = @user.user_assessments.where(assessments_type: @type, module: @training_module_id).sort_by(&:created_at)
+    (results.blank?)? true : false
   end
 end

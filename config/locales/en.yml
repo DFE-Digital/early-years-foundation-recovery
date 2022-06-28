@@ -92,6 +92,7 @@ en:
     completed: completed
     started: in progress
     not_started: not started
+    retake_quiz: retake quiz
 
   resume_button:
     completed: Retake end of module test

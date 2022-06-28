@@ -1,6 +1,6 @@
 = render 'debug'
-- if @questionnaire.module_item.page_number
-  span.govuk-caption-l= t('page_number', ** @questionnaire.module_item  .page_number)
+/ - if @questionnaire.module_item.page_number
+/   span.govuk-caption-l= t('page_number', ** @questionnaire.module_item  .page_number)
 h1
   = @questionnaire.heading
 
@@ -18,4 +18,7 @@ h1
       - if @questionnaire.submitted
         = link_to_next_module_item(@questionnaire.module_item, class: "govuk-button")
       - else
-        = submit_tag "Next", class: "govuk-button"
+        - if @questionnaire.module_item.next_item.type == 'assessments_results'
+          = submit_tag "Finish test", class: "govuk-button"
+        - else 
+          = submit_tag "Save and continue", class: "govuk-button"
