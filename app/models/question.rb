@@ -13,10 +13,14 @@ class Question < OpenStruct
 
   def set_answer(answer:)
     if multi_select
-      questionnaire.send("#{name}=", answer.map(&:to_sym))
+      ans = []
+      aswers_user = answer.each { |string| ans.push(string.to_s) }
+      questionnaire.send("#{name}=", answer.map(&:to_sym)) # assemment result check for this value need to change this behaviour
+      questionnaire.send("user_answers=", ans) # so the checkbox can be selected
     else
       begin
         questionnaire.send("#{name}=", answer.first.to_sym)
+        questionnaire.send("user_answers=", answer.to_s) # so the checkbox can be selected
       rescue StandardError
         nil
       end

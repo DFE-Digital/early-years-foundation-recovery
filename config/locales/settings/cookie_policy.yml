@@ -12,7 +12,8 @@ en:
 
         ## Essential cookies
 
-        Essential cookies keep your information secure while you use Child development training. We do not need to ask permission to use them.
+        Essential cookies keep your information secure while you use Help for 
+        early years providers. We do not need to ask permission to use them.
 
         | Name                                      | Purpose                                                                        | Expires                   |
         | ------------------------------------------| ------------------------------------------------------------------------------ | ------------------------- |
@@ -20,22 +21,3 @@ en:
         | ahoy_visit	                              | Tracks where you are in the module and allows you to pause and restart modules | 3 hours                   |
         | ahoy_visitor                              | Tracks your progress through the training module                               | 2 years                   |
         | remember_user_token                       | Stores whether you clicked the remember me checkbox when you signed in         | 48 hours                  |
-
-        ## Analytics cookies (optional)
-        
-        With your permission, we use Google Analytics software to collect anonymised data about how you use Child development training. This information helps us to improve our service.
-
-        Google is not allowed to use or share our analytics data with anyone.
-
-        Google Analytics stores anonymised information about:
-
-        - how you got to Child development training
-        - the pages you visit on Child development training and how long you spend on them
-        - any errors you see while using Child development training
-
-        Google Analytics sets the following cookies:
-
-        | Name                                      | Purpose                                                                        | Expires                   |
-        | ------------------------------------------| ------------------------------------------------------------------------------ | ------------------------- |
-        | _ga_L17YMGD11W                            | Used to persist session state                                                  | 2 years                   |
-        | _ga                                       | Used to distinguish users                                                      | 2 years                   |

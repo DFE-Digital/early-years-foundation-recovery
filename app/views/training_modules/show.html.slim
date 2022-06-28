@@ -1,7 +1,7 @@
 = govuk_back_link href: my_learning_path
-
+- quiz_status = get_quiz_status(@training_module.name)
 = render 'debug'
-
+- module_status = ''
 .light-grey-box
   .govuk-grid-row
     .govuk-grid-column-full
@@ -9,7 +9,9 @@
       p.govuk-caption-m= @training_module.description
 
       - @module_progress.call_to_action do |state, (mod, page)|
-        = govuk_link_to t(state, scope: 'resume_button'), training_module_content_page_path(mod, page), class: 'govuk-button'
+        - module_status = state
+        - if defined?(page) && defined?(mod) && !page.blank?
+          = govuk_link_to t(state, scope: 'resume_button'), training_module_content_page_path(mod, page), class: 'govuk-button'
 
 = govuk_tag(text: "#{@training_module.topic_count} topics", colour: 'green')
 '
@@ -36,10 +38,25 @@
               ul.govuk-list
                 - topics.each do |mod, topic_heading, clickable, status|
                   li
+                    / - if defined?(topic_heading) && (topic_heading.include? "Reflect on your learning")
+                    /   - if clickable && quiz_status == false
+                    /     = govuk_link_to topic_heading, training_module_content_page_path(mod, clickable)
+                    /   - else
+                    /     = topic_heading
                     - if clickable
                       = govuk_link_to topic_heading, training_module_content_page_path(mod, clickable)
                     - else
                       = topic_heading
 
                     .float-right
+                      / - if defined?(topic_heading) && (topic_heading.include? "End of module test")
+                      /   - status_quiz = (quiz_status)? 'retake_quiz' : status
+                      /   = govuk_tag(text: t(status_quiz, scope: 'module_indicator'), colour: 'blue')
+                      / - else
                       = govuk_tag(text: t(status, scope: 'module_indicator'), colour: 'blue')
+                
+                - if defined?(module_status) && module_status === :completed
+                  li 
+                    = govuk_link_to('Download your certificate', training_module_certificate_path(@training_module.name))
+                / - else
+                /   li Download your certificate

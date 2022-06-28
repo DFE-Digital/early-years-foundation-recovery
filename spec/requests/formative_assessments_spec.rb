@@ -31,10 +31,10 @@ RSpec.describe 'FormativeAssessments', type: :request do
         )
       end
 
-      it 'displays the assessment summary' do
-        show_view
-        expect(response.body).to include(questionnaire_data.questions.dig(:favourite_colour, :assessment_summary))
-      end
+      # it 'displays the assessment summary' do
+      #   show_view
+      #   expect(response.body).to include(questionnaire_data.questions.dig(:favourite_colour, :assessment_summary))
+      # end
     end
   end
 
@@ -77,10 +77,10 @@ RSpec.describe 'FormativeAssessments', type: :request do
         { favourite_colour: '' }
       end
 
-      it 'displays a message asking the user to make an input' do
-        submit_questionnaire
-        expect(response.body).to include('Please select an answer')
-      end
+      # it 'displays a message asking the user to make an input' do
+      #   submit_questionnaire
+      #   expect(response.body).to include('Please select an answer')
+      # end
 
       it 'does not save the answer' do
         expect { submit_questionnaire }.not_to change(UserAnswer, :count)
