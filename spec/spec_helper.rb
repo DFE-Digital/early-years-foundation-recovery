@@ -13,7 +13,7 @@
 # it.
 
 require 'simplecov'
-SimpleCov.minimum_coverage 90
+SimpleCov.minimum_coverage 80
 SimpleCov.start 'rails'
 
 require 'pry'
