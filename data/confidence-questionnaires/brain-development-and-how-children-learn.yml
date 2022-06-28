@@ -1,6 +1,6 @@
 ---
 brain-development-and-how-children-learn:
-  2-confidence-1:
+  2-3-3-1:
     content:
     questions:
       1_understanding_brain_development:
@@ -17,7 +17,7 @@ brain-development-and-how-children-learn:
           5: "Strongly disagree"
         correct_answers: ["1","2","3","4","5"]
 
-  2-confidence-2:
+  2-3-3-2:
     content:
     questions:
       1_how_children_learn:
@@ -34,7 +34,7 @@ brain-development-and-how-children-learn:
           5: "Strongly disagree"
         correct_answers: ["1","2","3","4","5"]
 
-  2-confidence-3:
+  2-3-3-3:
     content:
     questions:
       1_healthy_lifestyle:
@@ -51,7 +51,7 @@ brain-development-and-how-children-learn:
           5: "Strongly disagree"
         correct_answers: ["1","2","3","4","5"]
 
-  2-confidence-4:
+  2-3-3-4:
     content:
     questions:
       1_supporting_brain_development_learning:

@@ -1081,7 +1081,11 @@ en:
 
           </div>
 
-      2-recap:
+      2-3:
+        heading: Summary and next steps
+        body: |
+            fbewbfbew
+      2-3-1:
         heading: Recap
         body: |
           Every child will develop at their own individual rate and will experience a wide variety of influences that could potentially impact upon their brain development.
@@ -1120,7 +1124,7 @@ en:
 
           See [guidance to provide support](https://www.gov.uk/government/publications/progress-check-at-age-2) when completing the early years foundation stage (EYFS) progress check at age 2.
 
-      2-test:
+      2-3-2:
         heading: End of module test
         body: |
           This end of module test is here to revisit what you have learned and the impact on your practice. It is not aimed to provide a pass or fail.
@@ -1139,7 +1143,7 @@ en:
 
           If you do not score 70%, you will be able to see which questions you got wrong. You can repeat the test to improve your score as many times as you want to.
 
-      2-confidence:
+      2-3-3:
         heading: Reflect on your learning
         body: |
           To help DfE to measure our impact, please answer the following questions. 
@@ -1148,7 +1152,7 @@ en:
 
           To what extent do you agree with the following statements:
 
-      2-end:
+      2-3-3-5:
         heading: Thank you
         body: |
           You can also [give feedback about the training](https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxURFNMQkgwQk80N1lZWkRFMkE5N09DQVg0NCQlQCN0PWcu). 

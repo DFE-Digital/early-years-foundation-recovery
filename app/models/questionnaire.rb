@@ -61,7 +61,7 @@ private
   def results
     @results ||= questions.each_with_object({}) do |(question, data), hash|
       hash[question] = if data[:correct_answers].present?
-                         flattened_array(Array(send(question)).map(&:downcase)) == flattened_array(data[:correct_answers])
+                         flattened_array(Array(send(question)).map(&:to_s)) == flattened_array(data[:correct_answers])
                        else
                          true # If there are no correct answers set, assume any answer much be true
                        end
