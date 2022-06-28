@@ -362,7 +362,7 @@ brain-development-and-how-children-learn:
       1_meal_times:
         multi_select: true 
         label: |
-          Which of these could you do with children in your setting to encourage involvment in meal times? (Select all answers that apply) 
+          Which of these could you do with children in your setting to encourage involvement in meal times? (Select all answers that apply) 
         assessment_summary: |
           Encouraging children to become involved in food preparation, lay the table and serve themselves will: 
           
