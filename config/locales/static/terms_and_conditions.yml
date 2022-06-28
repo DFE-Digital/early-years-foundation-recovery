@@ -115,7 +115,7 @@ en:
         * if it breaches copyright laws, contains sensitive personal data or 
         material that may be considered obscene or defamatory
 
-        <a class='govuk-link' href='mailto:child.development.training@education.gov.uk?subject=Request%20to%20remove%20content'>Contact us</a>
+        [Contact us](mailto:child.development.training@education.gov.uk?subject=Request%20to%20remove%20content){:class="govuk-link"}
         to ask for content to be removed. You'll need to send us the web address
         (URL) of the content and explain why you think it should be removed. We'll 
         reply to let you know whether we'll remove it.
