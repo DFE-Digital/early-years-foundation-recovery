@@ -1,7 +1,7 @@
 = govuk_back_link href: my_learning_path
 - quiz_status = get_quiz_status(@training_module.name)
 = render 'debug'
-
+- module_status = ''
 .light-grey-box
   .govuk-grid-row
     .govuk-grid-column-full
@@ -9,6 +9,7 @@
       p.govuk-caption-m= @training_module.description
 
       - @module_progress.call_to_action do |state, (mod, page)|
+        - module_status = state
         - if defined?(page) && defined?(mod) && !page.blank?
           = govuk_link_to t(state, scope: 'resume_button'), training_module_content_page_path(mod, page), class: 'govuk-button'
 
@@ -53,3 +54,9 @@
                         = govuk_tag(text: t(status_quiz, scope: 'module_indicator'), colour: 'blue')
                       - else
                         = govuk_tag(text: t(status, scope: 'module_indicator'), colour: 'blue')
+                
+                - if defined?(module_status) && module_status === :completed
+                  li 
+                    = govuk_link_to('Download your certificate', training_module_certificate_path(@training_module.name))
+                - else
+                  li Download your certificate
