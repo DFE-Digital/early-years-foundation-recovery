@@ -1,4 +1,4 @@
-= govuk_link_to 'Back', new_user_session_path, class: 'govuk-back-link'
+= govuk_link_to 'Back', url_for(:back), class: 'govuk-back-link'
 - content_for :devise_form do
   = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
     = f.govuk_error_summary
