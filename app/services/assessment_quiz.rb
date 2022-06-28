@@ -33,7 +33,7 @@ class AssessmentQuiz
   def check_if_saved_result
     begin
       answer_user =  existing_user_assessment_answers.first
-      (answer_user.user_assessment_id.blank?)? false : true
+      (defined?(answer_user.user_assessment_id) && answer_user.user_assessment_id.blank?)? false : true
     rescue => exception
       false
     end

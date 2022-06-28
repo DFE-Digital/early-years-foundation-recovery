@@ -40,7 +40,7 @@ module ApplicationHelper
     elsif module_item.next_item
       link_to 'Next', training_module_content_page_path(module_item.training_module, module_item.next_item), link_args
     else
-      link_to 'Finish', course_overview_path, link_args
+      link_to 'Finish',  training_module_certificate_path(module_item.training_module), link_args
     end
 
   end
