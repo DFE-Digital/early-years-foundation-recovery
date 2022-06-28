@@ -4,12 +4,12 @@ en:
     terms_and_conditions:
       heading: Terms and conditions
       content: |
-        This page and any pages it links to explains Child development training’s terms of use. 
+        This page and any pages it links to explains Child development training's terms of use. 
         You must agree to these to use Child development training. 
 
         ## Who we are
         Child development training is managed by the Department for Education (DfE). 
-        DfE will be referred to as ‘we’ from now on.
+        DfE will be referred to as 'we' from now on.
 
         ## Using Child development training
         By using Child development training, you agree to:
@@ -26,7 +26,7 @@ en:
 
         We welcome and encourage other websites to link to Child development training.
 
-        You must [contact us](mailto:child.development.training@education.gov.uk?subject=Request%20permission) 
+        You must [contact us](mailto:child.development.training@education.gov.uk?subject=Request%20permission){:class="govuk-link"}
         for permission if you want to say your website is associated with or 
         endorsed by Child development training or another government department 
         or agency.
@@ -38,7 +38,7 @@ en:
         organisations. We do not have any control over the content on these 
         websites.
 
-        We’re not responsible for:
+        We're not responsible for:
 
         * the protection of any information you give to these websites
         * any loss or damage that may come from your use of these websites, or 
@@ -70,11 +70,11 @@ en:
         * complete
         * free from bugs or viruses
 
-        We’re not liable for any loss or damage that may come from using Child 
+        We're not liable for any loss or damage that may come from using Child 
         development training. This includes:
 
         * any direct, indirect or consequential losses
-        * any loss or damage caused by civil wrongs (‘tort’, including negligence), 
+        * any loss or damage caused by civil wrongs ('tort', including negligence), 
         breach of contract or otherwise
         * the use of Child development training and any websites that are linked
         to or from it
@@ -108,24 +108,23 @@ en:
         ## Requests to remove content
 
         You can ask for content to be removed from Child development training.
-        We’ll remove content:
+        We'll remove content:
 
         * in order to comply with data protection legislation covering the 
         rights and freedoms of individuals
         * if it breaches copyright laws, contains sensitive personal data or 
         material that may be considered obscene or defamatory
 
-        [Contact us](mailto:child.development.training@education.gov.uk?subject=Request%20to%20remove%20content) 
-        to ask for content to be removed. You’ll need to send us the web address
-        (URL) of the content and explain why you think it should be removed. We’ll 
-        reply to let you know whether we’ll remove it.
+        [Contact us](mailto:child.development.training@education.gov.uk?subject=Request%20to%20remove%20content){:class="govuk-link"}
+        to ask for content to be removed. You'll need to send us the web address
+        (URL) of the content and explain why you think it should be removed. We'll 
+        reply to let you know whether we'll remove it.
 
 
         We remove content at our discretion in discussion with the department or 
-        agency responsible for it. You can still request information under the 
-        [Freedom of Information Act](https://www.gov.uk/make-a-freedom-of-information-request) 
-        and the [Data Protection Act](https://www.gov.uk/data-protection).
-
+        agency responsible for it. You can still request information under the
+        [Freedom of Information Act](https://www.gov.uk/make-a-freedom-of-information-request){:class="govuk-link"}
+        and the [Data Protection Act](https://www.gov.uk/data-protection){:class="govuk-link"}.
 
         ## Information about you and your visits to Child development training
 
@@ -142,22 +141,22 @@ en:
         malicious computer code or other forms of interference which can damage your 
         computer system.
 
-        We’re not responsible for any loss, disruption or damage to your data or 
+        We're not responsible for any loss, disruption or damage to your data or 
         computer system that might happen when you use Child development training.
 
         ## Viruses, hacking and other offences
 
         When using Child development training, you must not introduce viruses, 
-        trojans, worms, logic bombs or any other material that’s malicious or 
+        trojans, worms, logic bombs or any other material that's malicious or 
         technologically harmful.
 
         You must not try to gain unauthorised access to Child development training, 
-        the server on which it’s stored or any server, computer or database connected to it.
+        the server on which it's stored or any server, computer or database connected to it.
 
         You must not attack Child development training in any way. This includes 
         denial-of-service attacks.
 
-        We’ll report any attacks or attempts to gain unauthorised access to Child 
+        We'll report any attacks or attempts to gain unauthorised access to Child 
         development training to the relevant law enforcement authorities and share 
         information about you with them.
 
@@ -187,7 +186,7 @@ en:
         Please check these terms and conditions regularly. We can update them at 
         any time without notice.
 
-        You’ll agree to any changes if you continue to use Child development 
+        You'll agree to any changes if you continue to use Child development 
         training after the terms and conditions have been updated.
 
         Last updated 9 June 2022
