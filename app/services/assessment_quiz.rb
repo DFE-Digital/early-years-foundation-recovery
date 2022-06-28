@@ -1,7 +1,6 @@
 class AssessmentQuiz
 
   def initialize(user:, type:, training_module_id:, name:)
-    puts user.inspect
     @user = user
     @type = type
     @training_module_id = training_module_id
@@ -27,7 +26,6 @@ class AssessmentQuiz
     begin
       (percentage_of_assessment_answers_correct <= @training_module.summative_assessment_precentage_pass_threshold)? 'failed' : 'passed'
     rescue => exception
-      puts exception
       'not started'
     end
   end
@@ -35,10 +33,8 @@ class AssessmentQuiz
   def check_if_saved_result
     begin
       answer_user =  existing_user_assessment_answers.first
-      puts answer_user.inspect
       (answer_user.user_assessment_id.blank?)? false : true
     rescue => exception
-      puts exception
       false
     end
   end
