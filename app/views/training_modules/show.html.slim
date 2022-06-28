@@ -58,5 +58,5 @@
                 - if defined?(module_status) && module_status === :completed
                   li 
                     = govuk_link_to('Download your certificate', training_module_certificate_path(@training_module.name))
-                - else
-                  li Download your certificate
+                / - else
+                /   li Download your certificate
