@@ -77,9 +77,8 @@ RSpec.describe 'User following forgotten password process', type: :system do
       expect(page).to have_current_path(new_user_password_path)
     end
 
-    # to be changed when link is provided
     it 'provides link to contact us' do
-      expect(page).to have_link 'contact us', href: '#', visible: :hidden
+      expect(page).to have_link 'contact us', href: Rails.application.credentials.contact_us, visible: :hidden
     end
   end
 
