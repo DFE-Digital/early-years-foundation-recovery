@@ -43,9 +43,6 @@ class Questionnaire < OpenStruct
     questions.map { |name, attrs| Question.new(attrs.merge(questionnaire: self, name: name)) }
   end
 
-  def test_block
-    'booo'
-  end
 private
 
   def correct_answers_exceed_threshold

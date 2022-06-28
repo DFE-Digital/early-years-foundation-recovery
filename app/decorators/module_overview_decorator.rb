@@ -134,21 +134,4 @@ private
   def previous_module
     TrainingModule.find_by(id: mod.id - 1)
   end
-
-  def summative_assessment_topic_status(items)
-    begin
-      puts items.first.next_item.type
-      if items.first.next_item.type = 'summative_assessment'
-        puts 'AssessmentQuiz'
-        quiz = AssessmentQuiz.new(user: user, type: items.first.next_item.type, training_module_id: items.first.next_item.training_module, name: '')
-        quiz.calculate_status
-        puts quiz.calculate_status
-        puts 'AssessmentQuiz'
-      else
-        false
-      end
-    rescue => exception
-      false
-    end
-  end
 end
