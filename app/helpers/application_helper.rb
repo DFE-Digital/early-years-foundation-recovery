@@ -84,10 +84,9 @@ module ApplicationHelper
 
   def link_to_quiz_results_page(module_item, link_args = { class: 'govuk-link' })
     quiz = AssessmentQuiz.new(user: current_user, type: 'summative_assessment', training_module_id: module_item.name, name: '')
-     if quiz.check_if_saved_result
+     if quiz.check_if_saved_result && defined?(quiz.assessment_results_page.first)
       link_to 'View previous test result ', training_module_assessments_result_path(quiz.assessment_results_page.first.training_module, quiz.assessment_results_page.first.name), link_args
-  end
-
+    end
   end
   def link_to_my_learning(module_item, link_args = { class: 'govuk-link, govuk-!-margin-right-4' })
     link_to 'Go to my Learning', my_learning_path, link_args
