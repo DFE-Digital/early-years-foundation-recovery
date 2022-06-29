@@ -23,7 +23,7 @@ class SeedInterimUsers
 
   def view_module_page_event(module_name, page_name, user)
     ahoy = Ahoy::Tracker.new(user: user, controller: 'content_pages')
-    ahoy.track('module_content_page' {
+    ahoy.track('module_content_page', {
       id: page_name,
       action: 'show',
       controller: 'content_pages',
