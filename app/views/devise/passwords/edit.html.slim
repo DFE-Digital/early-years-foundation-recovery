@@ -6,7 +6,7 @@
       p.govuk-hint
         = t('password.hardness', length: @minimum_password_length)
       = f.govuk_password_field :password, label: { text: 'New password', size: 's' }
-      = f.govuk_password_field :password_confirmation, label: { text: 'Confirm your password', size: 's' }
+      = f.govuk_password_field :password_confirmation, label: { text: 'Confirm password', size: 's' }
     = f.govuk_submit 'Reset password'
 
 = render "devise/shared/form_wrap"

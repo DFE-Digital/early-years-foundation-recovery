@@ -1,3 +1,4 @@
+= govuk_link_to 'Back', url_for(:back), class: 'govuk-back-link'
 - content_for :devise_form do
   = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
     = f.govuk_error_summary
@@ -7,7 +8,7 @@
       p.govuk-body
         | To reset your password we need to send you an email with a validation link.
       p.govuk-body 
-        | If you can’t see it in your inbox within a few minutes, please check your spam folder.
+        | If you can't see it in your inbox within a few minutes, please check your spam folder.
       = f.govuk_email_field :email, autofocus: true, autocomplete: 'email'
     = f.govuk_submit 'Send email'
 = render 'devise/shared/form_wrap'

@@ -72,7 +72,7 @@ en:
     setting:
       heading: About your setting
       body: |
-        Your details and training progress won't be shared with anyone without your permission.
+        Your training progress won't be shared with anyone without your permission.
 
         {:.govuk-hint}
         If you work in multiple settings, choose the one where you work most often.
@@ -260,12 +260,10 @@ en:
         setting_type: Your setting type
         setting_type_other: Other setting
         postcode: Your setting's postcode
-        ofsted_number: Your setting's Ofsted number
+        ofsted_number: Your setting's Ofsted number, if you have one
     hint:
       user:
-        postcode: If you have multiple locations, enter the one where you work most often.
+        postcode: If you work in multiple settings, choose the one where you work most often.
         ofsted_number: |
-          This might start with EY or VC followed by a 6 digit number.
-          Or, it might be a 6 or 7 digit number with no letters at the start.
-          If you don't know your setting's Ofsted number, you can look it up on the Ofsted website.
+          This might start with EY followed by 6 numbers, or it might be a number that is 6 or 7 digits long.
         current_password: We need your current password to confirm your changes.
