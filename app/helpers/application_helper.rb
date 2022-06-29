@@ -86,7 +86,7 @@ module ApplicationHelper
   end
 
   def link_to_my_learning(_module_item, link_args = { class: 'govuk-link, govuk-!-margin-right-4' })
-    link_to 'Go to my Learning', my_learning_path, link_args
+    link_to 'Go to My learning', my_learning_path, link_args
   end
 
   def clear_flash
