@@ -8,7 +8,7 @@ RSpec.describe 'Following registration journey' do
       visit check_email_confirmation_user_path + "?email=#{user.email}"
     end
 
-    context 'and can click on "I haven\'t receieved the email" link' do
+    context 'and can click on "I haven\'t received the email" link' do
       it 'taken to "resend your confirmation" page' do
         click_on 'Send me another email', visible: :hidden
 
