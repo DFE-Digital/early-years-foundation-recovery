@@ -267,4 +267,8 @@ en:
         ofsted_number: |
           This might start with EY followed by 6 numbers, or it might be a number that is 6 or 7 digits long.
         current_password: We need your current password to confirm your changes.
-        
+  notice:
+    email_changed: |
+      We have sent an email to your new email address with a link to click to confirm the change.
+      
+      If you have not received the email after a few minutes, please check your spam folder.
