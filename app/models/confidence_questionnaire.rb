@@ -2,7 +2,6 @@ class ConfidenceQuestionnaire < YamlBase
   extend YamlFolder
 
   set_folder 'confidence-questionnaires'
-
   def self.load_file
     data = raw_data.map do |training_module, questionnaires|
       questionnaires.map do |name, field|

@@ -191,9 +191,9 @@ en:
         We sent the email to:
       2: |
         To continue setting up your training account you must click the link in the email.
-        If you have not recieved the email after a few minutes, please check your spam folder.
+        If you have not received the email after a few minutes, please check your spam folder.
     summary_text: Problems with the activation email?
-    not_recieved:
+    not_received:
       title: I haven’t received the email
       text: |
         Please wait a few minutes for the email to arrive.
@@ -212,7 +212,7 @@ en:
     heading: Check your email
     body:
       - We have sent you an email with instructions for how to reset your password.
-      - If you have not receieved the email after a few minutes, please check your spam folder.
+      - If you have not received the email after a few minutes, please check your spam folder.
     summary_text: Problems with the email?
     not_received:
       title: I haven’t received the email

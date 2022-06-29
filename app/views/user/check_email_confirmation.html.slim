@@ -19,9 +19,9 @@
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
     = govuk_details(summary_text: t('check_email_confirmation.summary_text')) do
-      p.govuk-heading-s= t('check_email_confirmation.not_recieved.title')
-      p.govuk-body= t('check_email_confirmation.not_recieved.text')
-      p= govuk_link_to t('check_email_confirmation.not_recieved.link_text'), new_confirmation_path(user)
+      p.govuk-heading-s= t('check_email_confirmation.not_received.title')
+      p.govuk-body= t('check_email_confirmation.not_received.text')
+      p= govuk_link_to t('check_email_confirmation.not_received.link_text'), new_confirmation_path(user)
 
       p.govuk-heading-s= t('check_email_confirmation.no_access_to_email.title')
       p.govuk-body= t('check_email_confirmation.no_access_to_email.text')
