@@ -1,22 +1,23 @@
 .govuk-width-container
   .govuk-grid-row class="govuk-!-margin-bottom-7"
-    h1 = t("settings.cookie.heading")
+    .govuk-grid-column-two-thirds-from-desktop
+      h1 = t("settings.cookie.heading")
 
-    .content = translate_markdown(t("settings.cookie.content"))
+      .content.gem-c-govspeak = translate_markdown(t("settings.cookie.content"))
 
-    = form_with url: settings_path, method: :post, local: true do |form|
-      = form.hidden_field :return_url, value: request.path
-      div.govuk-form-group
-        fieldset.govuk-fieldset
-          legend.govuk-fieldset__legend.govuk-fieldset__legend--s Do you want to accept analytics cookies?
-          = form.hidden_field :notify_if_successful, value: true
-          div.govuk-radios.govuk-radios--inline
-            div.govuk-radios__item
-              = form.text_field :track_analytics, id: "analytics-cookies", type: "radio", class: "govuk-radios__input", value: "Yes", checked: (cookies[:track_analytics] == "Yes")
-              = form.label "analytics-cookies", "Yes", class: "govuk-label govuk-radios__label"
-  
-            div.govuk-radios__item
-              = form.text_field :track_analytics, id: "analytics-cookies-2", type: "radio", class: "govuk-radios__input", value: "No", checked: (cookies[:track_analytics] == "No")
-              = form.label "analytics-cookies-2", "No", class: "govuk-label govuk-radios__label"
+      = form_with url: settings_path, method: :post, local: true do |form|
+        = form.hidden_field :return_url, value: request.path
+        div.govuk-form-group
+          fieldset.govuk-fieldset
+            legend.govuk-fieldset__legend.govuk-fieldset__legend--s Do you want to accept analytics cookies?
+            = form.hidden_field :notify_if_successful, value: true
+            div.govuk-radios.govuk-radios--inline
+              div.govuk-radios__item
+                = form.text_field :track_analytics, id: "analytics-cookies", type: "radio", class: "govuk-radios__input", value: "Yes", checked: (cookies[:track_analytics] == "Yes")
+                = form.label "analytics-cookies", "Yes", class: "govuk-label govuk-radios__label"
+    
+              div.govuk-radios__item
+                = form.text_field :track_analytics, id: "analytics-cookies-2", type: "radio", class: "govuk-radios__input", value: "No", checked: (cookies[:track_analytics] == "No")
+                = form.label "analytics-cookies-2", "No", class: "govuk-label govuk-radios__label"
 
-      = form.submit "Save cookie settings", class: "govuk-button"
+        = form.submit "Save cookie settings", class: "govuk-button"
