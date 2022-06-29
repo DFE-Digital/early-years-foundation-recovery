@@ -120,7 +120,7 @@ brain-development-and-how-children-learn:
         assessment_summary: 
         assessment_fail_summary: |
           Neurological disorders, accidents and abuse could all negatively impact on cognitive development. 
-          You might want to revisit the section on causes of cognitive development delay. (LINK TO 2.2.1)
+          You might want to revisit the section on causes of cognitive development delay.
         answers:
           1: "Neurological disorders"
           2: "Abuse"
@@ -158,7 +158,7 @@ brain-development-and-how-children-learn:
           Modelling, providing examples and using visual aids are all examples of scaffolding techniques.
           You might want to revisit the section on how children learn.
         answers:
-          1: "Modeling"
+          1: "Modelling"
           2: "Extra time to work out the answer"
           3: "Providing examples"
           4: "Using visual aids"
