@@ -22,20 +22,20 @@ RSpec.describe 'FormativeAssessments', type: :request do
       expect(response.body).not_to include(questionnaire_data.questions.dig(:favourite_colour, :assessment_summary))
     end
 
-    context 'with existing correct answers' do
-      before do
-        user.user_answers.create(
-          questionnaire_id: questionnaire_data.id,
-          question: :favourite_colour,
-          answer: questionnaire_data.questions.dig(:favourite_colour, :correct_answers),
-        )
-      end
+    # context 'with existing correct answers' do
+    #   before do
+    #     user.user_answers.create(
+    #       questionnaire_id: questionnaire_data.id,
+    #       question: :favourite_colour,
+    #       answer: questionnaire_data.questions.dig(:favourite_colour, :correct_answers),
+    #     )
+    #   end
 
-      # it 'displays the assessment summary' do
-      #   show_view
-      #   expect(response.body).to include(questionnaire_data.questions.dig(:favourite_colour, :assessment_summary))
-      # end
-    end
+    #   it 'displays the assessment summary' do
+    #     show_view
+    #     expect(response.body).to include(questionnaire_data.questions.dig(:favourite_colour, :assessment_summary))
+    #   end
+    # end
   end
 
   describe 'PATCH /modules/:training_module_id/formative_assessments/:id' do

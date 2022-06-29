@@ -23,7 +23,7 @@ class SummativeAssessmentsController < ApplicationController
     render :show, status: :unprocessable_entity and return
   end
 
-  private
+private
 
   def process_summative_questionaire
     if questionnaire_params.values.all?(&:present?)
@@ -38,5 +38,4 @@ class SummativeAssessmentsController < ApplicationController
   def set_flash_mesg
     flash[:alert] = 'Please select an answer'
   end
-
 end

@@ -1,5 +1,4 @@
 class AssessmentQuiz
-
   def initialize(user:, type:, training_module_id:, name:)
     @user = user
     @type = type
@@ -23,39 +22,32 @@ class AssessmentQuiz
   end
 
   def calculate_status
-    begin
-      (percentage_of_assessment_answers_correct <= @training_module.summative_assessment_precentage_pass_threshold)? 'failed' : 'passed'
-    rescue => exception
-      'not started'
-    end
+    percentage_of_assessment_answers_correct >= @training_module.summative_assessment_precentage_pass_threshold ? 'passed' : 'failed'
+  rescue StandardError
+    'not started'
   end
 
   def check_if_saved_result
-    begin
-      answer_user =  existing_user_assessment_answers.first
-      (defined?(answer_user.user_assessment_id) && answer_user.user_assessment_id.blank?)? false : true
-    rescue => exception
-      false
-    end
+    answer_user = existing_user_assessment_answers.first
+    true if defined?(answer_user.user_assessment_id) && !answer_user.user_assessment_id.blank?
+  rescue StandardError
+    false
   end
 
   def save_user_assessment
+    user_assessment = UserAssessment.create!(
+      user_id: @user.id,
+      score: percentage_of_assessment_answers_correct,
+      status: calculate_status,
+      module: @training_module_id,
+      assessments_type: @type,
+    )
 
-    begin
-      user_assessment = UserAssessment.create(
-          user_id: @user.id,
-          score: percentage_of_assessment_answers_correct,
-          status: calculate_status,
-          module: @training_module_id,
-          assessments_type: @type
-        )
-
-        if !user_assessment.id.blank?
-          existing_user_assessment_answers.update_all(user_assessment_id: user_assessment.id)
-        end
-    rescue => exception
-      []
+    if user_assessment.id.present?
+      existing_user_assessment_answers.update_all(user_assessment_id: user_assessment.id)
     end
+  rescue StandardError
+    []
   end
 
   def percentage_of_assessment_answers_correct
@@ -79,11 +71,10 @@ class AssessmentQuiz
   end
 
   def get_all_type_pages
-   grouped_pages = @module_item.group_by { |m| m.type }
-  #  grouped_pages[@type]
+    @module_item.group_by(&:type)
   end
 
-  # This assumes page before the first assessment page will be the intro page 
+  # This assumes page before the first assessment page will be the intro page
   def assessment_intro_page
     module_item_page = ModuleItem.find_by(training_module: @training_module_id, name: assessment_first_page.name)
     module_item_page.previous_item
@@ -113,8 +104,10 @@ class AssessmentQuiz
       results.last
     end
   end
+
   def check_if_assessment_taken
     results = @user.user_assessments.where(assessments_type: @type, module: @training_module_id).sort_by(&:created_at)
-    (results.blank?)? true : false
+    puts results.inspect
+    results.blank? ? false : true
   end
 end
