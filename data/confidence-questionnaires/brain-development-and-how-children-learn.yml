@@ -23,7 +23,7 @@ brain-development-and-how-children-learn:
       1_how_children_learn:
         multi_select: false
         label:  |
-          This training has improved my understanding of how children learn and how those theories influence practice.  
+          This training has improved my understanding of different theories around how children learn, and how those theories influence practice.
         assessment_summary: 
         assessment_fail_summary:
         answers:
