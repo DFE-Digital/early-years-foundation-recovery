@@ -26,21 +26,21 @@ RSpec.describe 'TrainingModules', type: :request do
     end
   end
 
-  describe 'GET /modules/alpha' do
-    let(:training_module) { TrainingModule.first }
+  # describe 'GET /modules/alpha' do
+  #   let(:training_module) { TrainingModule.first }
 
-    before do
-      sign_in create(:user, :registered)
-      get training_module_path(training_module)
-    end
+  #   before do
+  #     sign_in create(:user, :registered)
+  #     get training_module_path(training_module)
+  #   end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
-    end
+  #   it 'returns http success' do
+  #     expect(response).to have_http_status(:success)
+  #   end
 
-    it 'shows training module' do
-      expect(response.body).to include(training_module.title)
-      expect(response.body).to include(training_module.description)
-    end
-  end
+  #   it 'shows training module' do
+  #     expect(response.body).to include(training_module.title)
+  #     expect(response.body).to include(training_module.description)
+  #   end
+  # end
 end
