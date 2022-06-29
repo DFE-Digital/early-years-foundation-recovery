@@ -2,7 +2,7 @@ class SummativeQuestionnaire < YamlBase
   extend YamlFolder
 
   set_folder 'summative-questionnaires'
-  
+
   def self.load_file
     data = raw_data.map do |training_module, questionnaires|
       questionnaires.map do |name, field|

@@ -32,7 +32,6 @@ module ApplicationHelper
 
   # @return [String] next content page or course overview
   def link_to_next_module_item(module_item, link_args = { class: 'govuk-button' })
-
     if defined?(module_item.next_item.type) && module_item.next_item.type == 'assessments_results'
       link_to 'Finish test', training_module_content_page_path(module_item.training_module, module_item.next_item), link_args
     elsif defined?(module_item.next_item.type) && module_item.next_item.type == 'summative_assessment' && module_item.type != 'summative_assessment'
@@ -40,9 +39,8 @@ module ApplicationHelper
     elsif module_item.next_item
       link_to 'Next', training_module_content_page_path(module_item.training_module, module_item.next_item), link_args
     else
-      link_to 'Finish',  training_module_certificate_path(module_item.training_module), link_args
+      link_to 'Finish', training_module_certificate_path(module_item.training_module), link_args
     end
-
   end
 
   # @return [String] previous content page or module overview
@@ -75,20 +73,19 @@ module ApplicationHelper
 
   def link_to_retake_quiz_training_module(module_item, link_args = { class: 'govuk-link' })
     quiz = AssessmentQuiz.new(user: current_user, type: 'summative_assessment', training_module_id: module_item.name, name: '')
-     if quiz.check_if_saved_result
-       if quiz.calculate_status == 'failed'
-        link_to 'Retake end of module test', training_module_retake_quiz_path(module_item.name), link_args
-       end
-     end
+    if quiz.check_if_saved_result && (quiz.calculate_status == 'failed')
+      link_to 'Retake end of module test', training_module_retake_quiz_path(module_item.name), link_args
+    end
   end
 
   def link_to_quiz_results_page(module_item, link_args = { class: 'govuk-link' })
     quiz = AssessmentQuiz.new(user: current_user, type: 'summative_assessment', training_module_id: module_item.name, name: '')
-     if quiz.check_if_saved_result && defined?(quiz.assessment_results_page.first)
+    if quiz.check_if_saved_result && defined?(quiz.assessment_results_page.first)
       link_to 'View previous test result ', training_module_assessments_result_path(quiz.assessment_results_page.first.training_module, quiz.assessment_results_page.first.name), link_args
     end
   end
-  def link_to_my_learning(module_item, link_args = { class: 'govuk-link, govuk-!-margin-right-4' })
+
+  def link_to_my_learning(_module_item, link_args = { class: 'govuk-link, govuk-!-margin-right-4' })
     link_to 'Go to my Learning', my_learning_path, link_args
   end
 
@@ -97,22 +94,21 @@ module ApplicationHelper
   end
 
   def answers_checkbox(user_answers, checkbox_value)
-    return if !user_answers.present?
+    return if user_answers.blank?
+
     user_answers.include? checkbox_value.to_s
   end
 
   def disable_checkbox(questionnaire)
-    begin
-      return if !questionnaire.submitted.present?
-      (questionnaire.assessments_type != 'confidence_check')? true : false
-    rescue => exception
-      true
-    end
+    return if questionnaire.submitted.blank?
+
+    questionnaire.assessments_type != 'confidence_check'
+  rescue StandardError
+    true
   end
 
-  
   def incorrect_answers_checkbox(questions_options, user_answers)
-    return if !user_answers.present?
+    return if user_answers.blank?
 
     correct_answers = []
     questions_options.each do |q|
@@ -128,20 +124,40 @@ module ApplicationHelper
     if module_item.next_item
       redirect_to training_module_content_page_path(module_item.training_module, module_item.next_item)
     else
-       redirect_to course_overview_path and return
+      redirect_to course_overview_path and return
     end
   end
 
   def get_quiz_status(module_name)
-     quiz = AssessmentQuiz.new(user: current_user, type: 'summative_assessment', training_module_id: module_name, name: '')
-     if quiz.check_if_saved_result
-      if quiz.calculate_status == 'failed'
-        true
-      else
-        false
-      end
-     end
+    quiz = AssessmentQuiz.new(user: current_user, type: 'summative_assessment', training_module_id: module_name, name: '')
+    if quiz.check_if_saved_result
+      quiz.calculate_status == 'failed'
+    end
+    false
+  end
 
-     false
+  def set_quiz_status(module_name, topic_name, status)
+    if  topic_name.include?('End of module test') && (status.to_s == 'completed')
+      quiz = AssessmentQuiz.new(user: current_user, type: 'summative_assessment', training_module_id: module_name, name: '')
+
+      return 'started'.to_sym if quiz.check_if_assessment_taken && quiz.calculate_status == 'failed'
+
+      if quiz.check_if_saved_result && (quiz.calculate_status == 'failed')
+        return 'started'.to_sym
+      end
+    end
+    status
+  end
+
+  def set_quiz_status_resume_button(module_name, page, state)
+    quiz = AssessmentQuiz.new(user: current_user, type: 'summative_assessment', training_module_id: module_name.name, name: '')
+
+    if quiz.check_if_saved_result
+      Rails.logger.debug 'result'
+      if quiz.calculate_status == 'failed'
+        return link_to 'Retake test', training_module_retake_quiz_path(module_name), class: 'govuk-button'
+      end
+    end
+    govuk_link_to t(state, scope: 'resume_button'), training_module_content_page_path(module_name.name, page), class: 'govuk-button'
   end
 end
