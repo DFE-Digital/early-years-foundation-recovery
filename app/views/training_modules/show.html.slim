@@ -9,9 +9,11 @@
       p.govuk-caption-m= @training_module.description
 
       - @module_progress.call_to_action do |state, (mod, page)|
+        
         - module_status = state
         - if defined?(page) && defined?(mod) && !page.blank?
-          = govuk_link_to t(state, scope: 'resume_button'), training_module_content_page_path(mod, page), class: 'govuk-button'
+          // = govuk_link_to t(state, scope: 'resume_button'), training_module_content_page_path(mod, page), class: 'govuk-button'
+          = set_quiz_status_resume_button(@training_module, page, state)
 
 = govuk_tag(text: "#{@training_module.topic_count} topics", colour: 'green')
 '
@@ -49,14 +51,4 @@
                       = topic_heading
 
                     .float-right
-                      / - if defined?(topic_heading) && (topic_heading.include? "End of module test")
-                      /   - status_quiz = (quiz_status)? 'retake_quiz' : status
-                      /   = govuk_tag(text: t(status_quiz, scope: 'module_indicator'), colour: 'blue')
-                      / - else
-                      = govuk_tag(text: t(status, scope: 'module_indicator'), colour: 'blue')
-                
-                - if defined?(module_status) && module_status === :completed
-                  li 
-                    = govuk_link_to('Download your certificate', training_module_certificate_path(@training_module.name))
-                / - else
-                /   li Download your certificate
+                      = govuk_tag(text: t(set_quiz_status(mod, topic_heading, status), scope: 'module_indicator'), colour: 'blue')

@@ -1,7 +1,6 @@
 module AssessmentQuestions
   def populate_questionnaire_results(module_question, question_input)
     return if question_input.empty?
-    
     questionnaire = Questionnaire.find_by!(name: module_question[0][:name], training_module: module_question[0][:training_module])
     questionnaire.question_list.each do |question|
       answer = [question_input[question.name]].flatten.select(&:present?)
@@ -28,7 +27,7 @@ module AssessmentQuestions
   # as they are submitted as an array within params
   def permitted_methods
     questionnaire.questions.map do |question, data|
-      data[:multi_select] ? { question =>[]} : question
+      data[:multi_select] ? { question => [] } : question
     end
   end
 
@@ -47,7 +46,7 @@ module AssessmentQuestions
   end
 
   def existing_user_answers
-    current_user.user_answers.not_archived.where(assessments_type:questionnaire.assessments_type, module:questionnaire.training_module, name:questionnaire.name)
+    current_user.user_answers.not_archived.where(assessments_type: questionnaire.assessments_type, module: questionnaire.training_module, name: questionnaire.name)
   end
 
   def save_answers
@@ -73,7 +72,7 @@ module AssessmentQuestions
 
   def check_empty(param_to_check)
     questionaire_param = param_to_check.compact_blank
-    (questionaire_param.blank?) ? false : true
+    questionaire_param.blank? ? false : true
   end
 
   def validate_param_empty

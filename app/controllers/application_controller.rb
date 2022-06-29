@@ -46,7 +46,6 @@ class ApplicationController < ActionController::Base
   end
 
   def reload_yaml
-    [QuestionnaireData, SummativeQuestionnaire ].each { |m| m.reload(true) }
+    [QuestionnaireData, SummativeQuestionnaire].each { |m| m.reload(true) }
   end
-
 end

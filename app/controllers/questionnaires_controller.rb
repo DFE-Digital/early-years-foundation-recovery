@@ -69,7 +69,6 @@ private
   def archive_previous_user_answers
     existing_user_answers.update_all(archived: true)
   end
-  
   # change this to where module and name as ids are auto generated
   def existing_user_answers
     current_user.user_answers.not_archived.where(questionnaire_id: questionnaire.id)

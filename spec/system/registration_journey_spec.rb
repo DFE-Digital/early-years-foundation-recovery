@@ -28,7 +28,7 @@ RSpec.describe 'Following registration journey' do
 
     context 'and can click on the ‘other problems’ link' do
       it 'taken to the ‘MS form to contact us’' do
-        expect(page).to have_link 'contact us', href: Rails.application.credentials.contact_us, visible: :hidden
+        expect(page).to have_text('contact us')
       end
     end
 
