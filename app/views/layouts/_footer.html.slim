@@ -1,10 +1,8 @@
-.govuk-footer__section.govuk-grid-column-one-third
-  ul.govuk-footer__list.govuk-footer__list--columns-1
-    li= link_to "Accessibility statement", static_path('accessibility-statement'), class: "govuk-footer__link"
-    li= link_to "Cookies", setting_path('cookie-policy'), class: "govuk-footer__link"
-    li= link_to "Privacy policy", static_path('privacy-policy'), class: "govuk-footer__link"
 .govuk-footer__section.govuk-grid-column-two-thirds
-  ul.govuk-footer__list.govuk-footer__list--columns-1
-    li= link_to "Terms and conditions", static_path('terms-and-conditions'), class: "govuk-footer__link"
-    li= link_to "Contact",  Rails.application.credentials.contact_us, class: "govuk-footer__link", target: "_blank"
-    li= link_to "Feedback", Rails.configuration.feedback_url, class: "govuk-footer__link",  target: "_blank"
+  ul.govuk-footer__list.govuk-footer__list--columns-2
+    li.govuk-footer__list-item= link_to "Accessibility statement", static_path('accessibility-statement'), class: "govuk-footer__link"
+    li.govuk-footer__list-item= link_to "Cookies", setting_path('cookie-policy'), class: "govuk-footer__link"
+    li.govuk-footer__list-item= link_to "Privacy policy", static_path('privacy-policy'), class: "govuk-footer__link"
+    li.govuk-footer__list-item= link_to "Terms and conditions", static_path('terms-and-conditions'), class: "govuk-footer__link"
+    li.govuk-footer__list-item= link_to "Contact",  Rails.application.credentials.contact_us, class: "govuk-footer__link", target: "_blank"
+    li.govuk-footer__list-item= link_to "Feedback", Rails.configuration.feedback_url, class: "govuk-footer__link",  target: "_blank"
