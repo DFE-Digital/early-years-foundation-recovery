@@ -6,7 +6,7 @@ module Pages
 
     element :email_field, '#user-email-field'
     element :password_field, '#user-password-field'
-    element :sign_in_button, 'button.govuk-button'
+    element :sign_in_button, 'button.govuk-button', text: 'Sign in'
 
     # Authenticate using email and password
     #
