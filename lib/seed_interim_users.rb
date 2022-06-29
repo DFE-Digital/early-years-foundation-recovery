@@ -28,7 +28,7 @@ class SeedInterimUsers
       action: 'show',
       controller: 'content_pages',
       training_module_id: module_name,
-      seed: true
+      seed: true,
     })
     user.save!
   end
