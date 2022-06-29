@@ -5,19 +5,11 @@
 
       .content.gem-c-govspeak = translate_markdown(t("settings.cookie.content"))
 
-      = form_with url: settings_path, method: :post, local: true do |form|
-        = form.hidden_field :return_url, value: request.path
-        div.govuk-form-group
-          fieldset.govuk-fieldset
-            legend.govuk-fieldset__legend.govuk-fieldset__legend--s Do you want to accept analytics cookies?
-            = form.hidden_field :notify_if_successful, value: true
-            div.govuk-radios.govuk-radios--inline
-              div.govuk-radios__item
-                = form.text_field :track_analytics, id: "analytics-cookies", type: "radio", class: "govuk-radios__input", value: "Yes", checked: (cookies[:track_analytics] == "Yes")
-                = form.label "analytics-cookies", "Yes", class: "govuk-label govuk-radios__label"
-    
-              div.govuk-radios__item
-                = form.text_field :track_analytics, id: "analytics-cookies-2", type: "radio", class: "govuk-radios__input", value: "No", checked: (cookies[:track_analytics] == "No")
-                = form.label "analytics-cookies-2", "No", class: "govuk-label govuk-radios__label"
-
-        = form.submit "Save cookie settings", class: "govuk-button"
+      h2.govuk-heading-l = t("settings.cookie.change_cookies_header")
+      = form_with url: settings_path, method: :post, local: true do |f|
+        = f.hidden_field :return_url, value: request.path
+        = f.govuk_radio_buttons_fieldset(:checked, legend: { size: 'm', text: t('settings.cookie.change_cookies_question') }, inline: true ) do
+          = f.hidden_field :notify_if_successful, value: true
+          = f.govuk_radio_button :track_analytics, 'Yes', label: { text: 'Yes' }, checked: (cookies[:track_analytics] == "Yes")
+          = f.govuk_radio_button :track_analytics, 'No', label: { text: 'No' }, checked: (cookies[:track_analytics] == "No")
+        = f.submit "Save cookie settings", class: "govuk-button"
