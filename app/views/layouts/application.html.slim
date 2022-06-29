@@ -3,7 +3,7 @@ html.govuk-template lang="en"
   head
     meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
     title Child development training
-    = render 'layouts/analytics_header'
+    = render 'layouts/analytics_header' if cookies[:track_analytics] == 'Yes'
     meta content="width=device-width,initial-scale=1" name="viewport" /
     meta name="robots" content="noindex,nofollow" /
     = tag :meta, property: 'og:image', content: asset_path('images/govuk-opengraph-image.png')
@@ -21,7 +21,10 @@ html.govuk-template lang="en"
     script
       | document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
     
-    = render 'layouts/analytics_body'
+    = render 'layouts/analytics_body' if cookies[:track_analytics] == 'Yes'
+
+    - if !cookies[:track_analytics]
+      = render 'layouts/cookie_banner'
     
     = govuk_skip_link
 
