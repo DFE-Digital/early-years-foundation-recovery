@@ -3,7 +3,7 @@ span.noprint
 
   p.govuk_body Congratulations! You have now completed this module.
 
-  p.govuk_body If the name or setting on your certificate is not what you expect, you can update them in your profile settings.
+  p.govuk_body If the name on your certificate is not what you expect, you can update it in <a href="/my-account">My account</a>.
 
   hr class='govuk-section-break govuk-section-break--l govuk-section-break--visible govuk-!-margin-top-4'
 
@@ -19,13 +19,13 @@ p.govuk_body This course has covered:
 
 = translate_markdown(@training_module.criteria)
 
-p class='govuk-!-margin-top-9'
+p class='govuk-!-margin-top-7'
 
 h3 Certified by Department for Education
 
 .govuk-grid-row
   .govuk-grid-column-one-third-from-desktop
-    = image_tag('department-for-education-certificate.png', width: '320')
+    = image_tag('department-for-education-certificate.png', width: '220')
 
 span.noprint
   = print_button
