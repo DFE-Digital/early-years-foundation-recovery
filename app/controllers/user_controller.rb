@@ -45,7 +45,7 @@ class UserController < ApplicationController
     if user.update_with_password(user_password_params)
       track('user_password_change', success: true)
       bypass_sign_in(user)
-      redirect_to user_path, notice: 'Your password has been reset'
+      redirect_to user_path, notice: 'Your new password has been saved.'
     else
       track('user_password_change', success: false)
       render :edit_password, status: :unprocessable_entity

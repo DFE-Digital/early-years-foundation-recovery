@@ -1,1 +1,10 @@
-= f.govuk_collection_radio_buttons question.name, question.answers, :first, :last, legend: { text: question.label }
+= f.govuk_radio_buttons_fieldset question.name, legend: { text: question.label, size: "m" } do
+  - question.answers.each do |option|
+    - checked = answers_checkbox(question.questionnaire.user_answers, option[0])
+    - disabled = disable_checkbox(@questionnaire)
+    = f.govuk_radio_button question.name,
+      option[0],
+      label: { text: option[1] },
+      link_errors: true,
+      checked: checked,
+      disabled: disabled

@@ -57,12 +57,12 @@ jobs:
         env:
           BASE_URL: https://app:3000
           BROWSER: standalone_firefox
-      -
-        name: Chrome against docker app
-        run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run qa
-        env:
-          BASE_URL: https://app:3000
-          BROWSER: standalone_chrome
+      # -
+      #   name: Chrome against docker app
+      #   run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run qa
+      #   env:
+      #     BASE_URL: https://app:3000
+      #     BROWSER: standalone_chrome
       # -
       #   name: Firefox against deployed app
       #   run: docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery run qa

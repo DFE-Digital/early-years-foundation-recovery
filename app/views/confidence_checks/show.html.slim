@@ -1,0 +1,22 @@
+= render 'debug'
+/ - if @questionnaire.module_item.page_number
+/   span.govuk-caption-l= t('page_number', ** @questionnaire.module_item  .page_number)
+
+h1
+  = @questionnaire.heading
+
+.gem-c-govspeak
+  = translate_markdown(@questionnaire.body)
+
+= form_with model: @questionnaire, url: training_module_confidence_check_path(@training_module, @questionnaire), method: :patch do |f|
+  - @questionnaire.question_list.each do |question|
+    = render partial: question.to_partial_path, locals: {f: f}, object: question, as: :question
+  hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible govuk-!-margin-top-4"
+  .govuk-grid-row
+    .govuk-grid-column-one-half
+      = link_to_previous_module_item(@questionnaire.module_item, class: "govuk-button govuk-button--secondary")
+    div class="govuk-grid-column-one-half govuk-!-text-align-right"
+      / - if @questionnaire.submitted
+      /   = link_to_next_module_item(@questionnaire.module_item, class: "govuk-button")
+      / - else
+      = submit_tag "Next", class: "govuk-button"

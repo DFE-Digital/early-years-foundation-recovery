@@ -24,7 +24,7 @@ RSpec.describe UserController, type: :controller do
       end
 
       it 'renders a flash notice' do
-        expect(flash[:notice]).to match(/Your password has been reset/)
+        expect(flash[:notice]).to match(/Your new password has been saved./)
       end
     end
 

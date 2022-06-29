@@ -12,8 +12,7 @@ class ContentPagesController < ApplicationController
     track('module_content_page')
 
     @model = module_item.model
-
-    if @model.is_a?(Questionnaire)
+    if @model.is_a?(Questionnaire) || @model.is_a?(AssessmentsResults)
       redirect_to questionnaire_path(training_module, module_item)
     else
       render module_item.type
