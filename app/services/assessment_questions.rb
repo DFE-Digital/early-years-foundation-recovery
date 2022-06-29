@@ -1,6 +1,7 @@
 module AssessmentQuestions
   def populate_questionnaire_results(module_question, question_input)
     return if question_input.empty?
+
     questionnaire = Questionnaire.find_by!(name: module_question[0][:name], training_module: module_question[0][:training_module])
     questionnaire.question_list.each do |question|
       answer = [question_input[question.name]].flatten.select(&:present?)

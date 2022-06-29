@@ -10,6 +10,7 @@ class SeedInterimUsers
         module_items = ModuleItem.where(training_module: 'child-development-and-the-eyfs')
         module_items.each do |item|
           break if item.name == '1-3-2'
+
           view_module_page_event('child-development-and-the-eyfs', item.name, user)
         end
       elsif !valid_email?(user_attributes['email'])

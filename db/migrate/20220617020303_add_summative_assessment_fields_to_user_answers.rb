@@ -5,6 +5,7 @@ class AddSummativeAssessmentFieldsToUserAnswers < ActiveRecord::Migration[7.0]
     add_column :user_answers, :name, :string
     add_column :user_answers, :assessments_type, :string
   end
+
   def down
     remove_column :user_answers, :module
     remove_column :user_answers, :name

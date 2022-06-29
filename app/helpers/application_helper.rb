@@ -41,7 +41,6 @@ module ApplicationHelper
     else
       link_to 'Finish', training_module_certificate_path(module_item.training_module), link_args
     end
-
   end
 
   # @return [String] previous content page or module overview
