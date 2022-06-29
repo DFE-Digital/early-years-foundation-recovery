@@ -29,7 +29,7 @@ html.govuk-template lang="en"
 
     .govuk-width-container
       = govuk_phase_banner(tag: { text: 'Beta' }, classes: 'noprint') do
-        = t('phase_banner_html', feedback_link: govuk_link_to('feedback', Rails.configuration.feedback_url))
+        = t('phase_banner_html', feedback_link: govuk_link_to('feedback', Rails.configuration.feedback_url, target: :_blank))
 
       main.govuk-main-wrapper#main-content role='main'
         - flash.each do |variant, message|
