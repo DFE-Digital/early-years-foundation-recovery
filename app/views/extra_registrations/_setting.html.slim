@@ -1,3 +1,4 @@
+= govuk_link_to 'Back', edit_extra_registration_path('name'), class: 'govuk-back-link'
 = f.govuk_fieldset legend: { text: t(:heading, scope: [:extra_registration, current_step]) } do
   p.govuk_body
     = translate_markdown(t(:body, scope: [:extra_registration, current_step]))
@@ -7,5 +8,5 @@
     = f.govuk_radio_button :setting_type, 'school', label: { text: 'School' }
     = f.govuk_radio_button :setting_type, 'other', label: { text: 'Other' } do
       = f.govuk_text_field :setting_type_other, label: { text: 'Other setting'}
-  = f.govuk_text_field :postcode
+  = f.govuk_text_field :postcode, hint: nil
   = f.govuk_text_field :ofsted_number

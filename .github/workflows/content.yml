@@ -46,6 +46,7 @@ jobs:
       GOVUK_APP_DOMAIN: london.cloudapps.digital
       GOVUK_WEBSITE_ROOT: ey-recovery-pr-${{ github.event.number }}
       USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+      INTERIM_PASSWORD: 'StrongPassword'
     steps:
       -
         name: Checkout Code

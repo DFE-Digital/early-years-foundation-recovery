@@ -1,6 +1,7 @@
 class NotifyMailer < GovukNotifyRails::Mailer
   BLANK_TEMPLATE_ID = '36555d23-b0e0-4c10-9b85-9c79c98eb1fe'.freeze
-  CONFIRMATION_TEMPLATE_ID = 'a44bc231-d779-41d8-a5e0-180497dfa711'.freeze
+  ACTIVATION_TEMPLATE_ID = 'd6ab2e3b-923e-429e-abd2-cfe7be0e9193'.freeze
+  CONFIRMATION_TEMPLATE_ID = 'a2412831-e253-4df4-a8f1-19332eed4cef'.freeze
   RESET_PASSWORD_TEMPLATE_ID = 'ad77aab8-d903-4f77-b074-a16c2658ca79'.freeze
   UNLOCK_TEMPLATE_ID = 'e18e8419-cfcc-4fcb-abdb-84f932f3cf55'.freeze
   PASSWORD_CHANGED_TEMPLATE_ID = 'f77e1eba-3fa8-45ae-9cec-a4cc54633395'.freeze
@@ -25,15 +26,22 @@ class NotifyMailer < GovukNotifyRails::Mailer
     mail to: 'brett.mchargue@education.gov.uk'
   end
 
+  def activation_instructions(record, token, _opts = {})
+    set_template(ACTIVATION_TEMPLATE_ID)
+
+    set_personalisation(
+      confirmation_url: confirmation_url(record, confirmation_token: token),
+    )
+    mail(to: record.unconfirmed_email? ? record.unconfirmed_email : record.email)
+  end
+
   def confirmation_instructions(record, token, _opts = {})
     set_template(CONFIRMATION_TEMPLATE_ID)
 
     set_personalisation(
-      email_subject: 'Activate your GOV.UK child development training account',
-      name: record.name,
       confirmation_url: confirmation_url(record, confirmation_token: token),
     )
-    mail(to: record.email)
+    mail(to: record.unconfirmed_email? ? record.unconfirmed_email : record.email)
   end
 
   def reset_password_instructions(record, token, _opts = {})
@@ -76,7 +84,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
       name: record.name,
       is_unconfirmed_email: record.unconfirmed_email? ? 'Yes' : 'No',
       is_not_unconfirmed_email: record.unconfirmed_email? ? 'No' : 'Yes',
-      email: record.email,
+      email: record.unconfirmed_email? ? record.unconfirmed_email : record.email,
     )
     mail(to: record.email)
   end

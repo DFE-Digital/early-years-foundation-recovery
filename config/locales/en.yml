@@ -72,7 +72,7 @@ en:
     setting:
       heading: About your setting
       body: |
-        Your details and training progress won't be shared with anyone without your permission.
+        Your training progress won't be shared with anyone without your permission.
 
         {:.govuk-hint}
         If you work in multiple settings, choose the one where you work most often.
@@ -191,9 +191,9 @@ en:
         We sent the email to:
       2: |
         To continue setting up your training account you must click the link in the email.
-        If you have not recieved the email after a few minutes, please check your spam folder.
+        If you have not received the email after a few minutes, please check your spam folder.
     summary_text: Problems with the activation email?
-    not_recieved:
+    not_received:
       title: I haven’t received the email
       text: |
         Please wait a few minutes for the email to arrive.
@@ -212,7 +212,7 @@ en:
     heading: Check your email
     body:
       - We have sent you an email with instructions for how to reset your password.
-      - If you have not receieved the email after a few minutes, please check your spam folder.
+      - If you have not received the email after a few minutes, please check your spam folder.
     summary_text: Problems with the email?
     not_received:
       title: I haven’t received the email
@@ -231,20 +231,20 @@ en:
       text: |
         ## **You scored %{score}%** 
         
-        Congratulations - you have scored highly enough to recieve a certificate of achievement for this module.
+        Congratulations - you have scored highly enough to receive a certificate of achievement for this module.
     failed:
       heading: Revisit the module
       text: | 
         ## **You scored %{score}%**
 
 
-        Unfortunatly you have not scored highly enough to recieve a certificate.
+        Unfortunately you have not scored highly enough to receive a certificate.
 
 
         You can see the questions you aswered incorrectly.
 
 
-        You may wish to revisit some of the learning before the test again.
+        You may wish to revisit some of the learning before taking the test again.
 
     you_answered:  You answered %{users_answers}. That's not quite right.
   # Form Builder ---------------------------------------------------------------
@@ -260,12 +260,11 @@ en:
         setting_type: Your setting type
         setting_type_other: Other setting
         postcode: Your setting's postcode
-        ofsted_number: Your setting's Ofsted number
+        ofsted_number: Your setting's Ofsted number, if you have one
     hint:
       user:
-        postcode: If you have multiple locations, enter the one where you work most often.
+        postcode: If you work in multiple settings, choose the one where you work most often.
         ofsted_number: |
-          This might start with EY or VC followed by a 6 digit number.
-          Or, it might be a 6 or 7 digit number with no letters at the start.
-          If you don't know your setting's Ofsted number, you can look it up on the Ofsted website.
+          This might start with EY followed by 6 numbers, or it might be a number that is 6 or 7 digits long.
         current_password: We need your current password to confirm your changes.
+        

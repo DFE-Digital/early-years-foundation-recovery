@@ -1,5 +1,15 @@
 .govuk-width-container
   .govuk-grid-row class="govuk-!-margin-bottom-7"
-    h1 = t("settings.cookie.heading")
+    .govuk-grid-column-two-thirds-from-desktop
+      h1 = t("settings.cookie.heading")
 
-    .content = translate_markdown(t("settings.cookie.content"))
+      .content.gem-c-govspeak = translate_markdown(t("settings.cookie.content"))
+
+      h2.govuk-heading-l = t("settings.cookie.change_cookies_header")
+      = form_with url: settings_path, method: :post, local: true do |f|
+        = f.hidden_field :return_url, value: request.path
+        = f.govuk_radio_buttons_fieldset(:checked, legend: { size: 'm', text: t('settings.cookie.change_cookies_question') }, inline: true ) do
+          = f.hidden_field :notify_if_successful, value: true
+          = f.govuk_radio_button :track_analytics, 'Yes', label: { text: 'Yes' }, checked: (cookies[:track_analytics] == "Yes")
+          = f.govuk_radio_button :track_analytics, 'No', label: { text: 'No' }, checked: (cookies[:track_analytics] == "No")
+        = f.submit "Save cookie settings", class: "govuk-button"
