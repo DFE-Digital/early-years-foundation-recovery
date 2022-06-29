@@ -141,9 +141,9 @@ brain-development-and-how-children-learn:
         label: |
           Which of these did Piaget consider when testing his theory? (Select all that apply)
         assessment_summary: |
-          Piaget’s research was criticised for not taking into account a wide variety of socio-economic factors within the environment as much of his research was conducted with children of well educated professionals.
+          Piaget’s research was criticised for not taking into account a wide variety of socio-economic factors within the environment, as much of his research was conducted with children of well educated professionals.
         assessment_fail_summary: |
-          Piaget’s research was criticised for not taking into account a wide variety of socio-economic factors within the environment as much of his research was conducted with children of well educated professionals.
+          Piaget’s research was criticised for not taking into account a wide variety of socio-economic factors within the environment, as much of his research was conducted with children of well educated professionals.
         answers:
           1: "Forming abstract thoughts"
           2: "Making meaningful relationships"                    

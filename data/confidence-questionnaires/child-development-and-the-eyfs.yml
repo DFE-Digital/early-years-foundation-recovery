@@ -23,7 +23,7 @@ child-development-and-the-eyfs:
       1_factors_development:
         multi_select: false
         label:  |
-          This training has improved my understanding of the different factors that can affect childrens’ development.
+          This training has improved my understanding of the different factors that can affect children's development.
         assessment_summary: Thank you
         assessment_fail_summary: Thank you
         answers:
@@ -40,7 +40,7 @@ child-development-and-the-eyfs:
       1_covid19:
         multi_select: false
         label:  |
-          This training has improved my understanding of how the coronavirus (COVID-19) pandemic has impacted on childrens’ development.
+          This training has improved my understanding of how the coronavirus (COVID-19) pandemic has impacted on children's development.
         assessment_summary: 
         assessment_fail_summary: 
         answers:
