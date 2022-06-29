@@ -152,12 +152,26 @@ module ApplicationHelper
   def set_quiz_status_resume_button(module_name, page, state)
     quiz = AssessmentQuiz.new(user: current_user, type: 'summative_assessment', training_module_id: module_name.name, name: '')
 
-    if quiz.check_if_saved_result
-      Rails.logger.debug 'result'
-      if quiz.calculate_status == 'failed'
-        return link_to 'Retake test', training_module_retake_quiz_path(module_name), class: 'govuk-button'
+    if quiz.check_if_saved_result && (quiz.calculate_status == 'failed')
+      return link_to 'Retake test', training_module_retake_quiz_path(module_name), class: 'govuk-button'
+    end
+
+    if quiz.check_if_assessment_taken && (quiz.calculate_status == 'failed')
+      return link_to 'Retake test', training_module_retake_quiz_path(module_name), class: 'govuk-button'
+    end
+    
+    govuk_link_to t(state, scope: 'resume_button'), training_module_content_page_path(module_name.name, page), class: 'govuk-button'
+  end
+
+  def stop_clickable(module_name, topic_name, status)
+    if topic_name.include?('End of module test') && (status.to_s == 'completed')
+      quiz = AssessmentQuiz.new(user: current_user, type: 'summative_assessment', training_module_id: module_name, name: '')
+
+      return true if quiz.check_if_assessment_taken && quiz.calculate_status == 'failed'
+
+      if quiz.check_if_saved_result && (quiz.calculate_status == 'failed')
+        true
       end
     end
-    govuk_link_to t(state, scope: 'resume_button'), training_module_content_page_path(module_name.name, page), class: 'govuk-button'
   end
 end

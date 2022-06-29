@@ -39,12 +39,17 @@
 
             .govuk-accordion__section-content aria-labelledby="section-content-#{num}" id="section-content-#{num}"
               ul.govuk-list
+                - quiz_status = false
                 - topics.each do |mod, topic_heading, clickable, status|
                   li
-                    - if clickable
+
+                    - if clickable && !quiz_status
                       = govuk_link_to topic_heading, training_module_content_page_path(mod, clickable)
                     - else
                       = topic_heading
 
                     .float-right
                       = govuk_tag(text: t(set_quiz_status(mod, topic_heading, status), scope: 'module_indicator'), colour: 'blue')
+
+                    - if stop_clickable(mod, topic_heading, status)
+                      - quiz_status = true
