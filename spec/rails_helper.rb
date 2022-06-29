@@ -64,4 +64,7 @@ RSpec.configure do |config|
 
   # enable #travel_to
   config.include ActiveSupport::Testing::TimeHelpers
+
+  # enable ShowMeTheCookies
+  config.include ShowMeTheCookies, type: :system
 end

@@ -11,21 +11,21 @@ RSpec.describe 'Selecting cookie options' do
     end
 
     context 'when cookie banner is displayed' do
-      it 'can click to read cookie policy' do
+      it 'visitor can click to read cookie policy' do
         click_on 'Read the cookie policy'
         expect(page).to have_content('Cookies')
           .and have_current_path('/settings/cookie-policy')
       end
 
-      it 'can click to accept analytics cookies' do
+      it 'visitor can click to accept analytics cookies' do
         click_on 'Accept analytics cookies'
-        expect(cookies[:track_analytics]).to eq 'No'
+        expect(get_me_the_cookie('track_analytics')[:value]).to eq 'Yes'
         expect(page).not_to have_content('Cookies on Child development training')
       end
 
-      it 'can click to reject analytics cookies' do
+      it 'visitor can click to reject analytics cookies' do
         click_on 'Reject analytics cookies'
-        expect(cookies[:track_analytics]).to eq 'Yes'
+        expect(get_me_the_cookie('track_analytics')[:value]).to eq 'No'
         expect(page).not_to have_content('Cookies on Child development training')
       end
     end
@@ -37,11 +37,11 @@ RSpec.describe 'Selecting cookie options' do
       visit setting_path('cookie-policy')
     end
 
-    it 'can change cookie choice to accept' do
+    it 'visitor can change cookie choice to accept cookies' do
       choose('Yes')
       click_on 'Save cookie settings'
 
-      expect(cookies[:track_analytics]).to eq 'Yes'
+      expect(get_me_the_cookie('track_analytics')[:value]).to eq 'Yes'
     end
   end
 
@@ -51,11 +51,11 @@ RSpec.describe 'Selecting cookie options' do
       visit setting_path('cookie-policy')
     end
 
-    it 'can change cookie choice to reject' do
+    it 'visitor can change cookie choice to reject cookies' do
       choose('No')
       click_on 'Save cookie settings'
 
-      expect(cookies[:track_analytics]).to eq 'No'
+      expect(get_me_the_cookie('track_analytics')[:value]).to eq 'No'
     end
   end
 end
