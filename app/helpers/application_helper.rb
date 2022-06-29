@@ -80,10 +80,6 @@ module ApplicationHelper
 
   def link_to_quiz_results_page(module_item, link_args = { class: 'govuk-link' })
     quiz = AssessmentQuiz.new(user: current_user, type: 'summative_assessment', training_module_id: module_item.name, name: '')
-    puts 'quiz.check_if_saved_result.inspect'
-    puts quiz.check_if_saved_result.inspect
-    puts quiz.assessment_results_page.first.inspect
-     puts 'quiz.check_if_saved_result.inspect'
     if quiz.check_if_saved_result && defined?(quiz.assessment_results_page.first)
       link_to 'View previous test result ', training_module_assessments_result_path(quiz.assessment_results_page.first.training_module, quiz.assessment_results_page.first.name), link_args
     end
@@ -141,19 +137,13 @@ module ApplicationHelper
   end
 
   def set_quiz_status(module_name, topic_name, status)
-    if  topic_name.include?('End of module test')
-      if status.to_s === 'completed'
-        quiz = AssessmentQuiz.new(user: current_user, type: 'summative_assessment', training_module_id: module_name, name: '')
+    if  topic_name.include?('End of module test') && (status.to_s == 'completed')
+      quiz = AssessmentQuiz.new(user: current_user, type: 'summative_assessment', training_module_id: module_name, name: '')
 
-        if quiz.check_if_assessment_taken && quiz.calculate_status == 'failed'
-           return 'started'.to_sym
-        end
-        
-        if quiz.check_if_saved_result
-          if quiz.calculate_status == 'failed'
-            return 'started'.to_sym
-          end
-        end
+      return 'started'.to_sym if quiz.check_if_assessment_taken && quiz.calculate_status == 'failed'
+
+      if quiz.check_if_saved_result && (quiz.calculate_status == 'failed')
+        return 'started'.to_sym
       end
     end
     status
@@ -161,9 +151,9 @@ module ApplicationHelper
 
   def set_quiz_status_resume_button(module_name, page, state)
     quiz = AssessmentQuiz.new(user: current_user, type: 'summative_assessment', training_module_id: module_name.name, name: '')
-    
+
     if quiz.check_if_saved_result
-      puts 'result'
+      Rails.logger.debug 'result'
       if quiz.calculate_status == 'failed'
         return link_to 'Retake test', training_module_retake_quiz_path(module_name), class: 'govuk-button'
       end

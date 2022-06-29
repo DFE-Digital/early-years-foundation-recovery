@@ -29,7 +29,7 @@ class AssessmentQuiz
 
   def check_if_saved_result
     answer_user = existing_user_assessment_answers.first
-    true if defined?(answer_user.user_assessment_id) && !answer_user.user_assessment_id.blank?
+    true if defined?(answer_user.user_assessment_id) && answer_user.user_assessment_id.present?
   rescue StandardError
     false
   end
@@ -107,7 +107,7 @@ class AssessmentQuiz
 
   def check_if_assessment_taken
     results = @user.user_assessments.where(assessments_type: @type, module: @training_module_id).sort_by(&:created_at)
-    puts results.inspect
+    Rails.logger.debug results.inspect
     results.blank? ? false : true
   end
 end
