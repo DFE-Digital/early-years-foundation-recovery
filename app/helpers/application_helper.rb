@@ -159,7 +159,7 @@ module ApplicationHelper
     if quiz.check_if_assessment_taken && (quiz.calculate_status == 'failed')
       return link_to 'Retake test', training_module_retake_quiz_path(module_name), class: 'govuk-button'
     end
-    
+
     govuk_link_to t(state, scope: 'resume_button'), training_module_content_page_path(module_name.name, page), class: 'govuk-button'
   end
 
