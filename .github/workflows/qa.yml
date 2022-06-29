@@ -64,8 +64,8 @@ jobs:
         env:
           BROWSER: standalone_firefox
         run: bin/rspec --default-path ui
-      -
-        name: Run test suite against chrome
-        env:
-          BROWSER: standalone_chrome
-        run: bin/rspec --default-path ui
+      # -
+      #   name: Run test suite against chrome
+      #   env:
+      #     BROWSER: standalone_chrome
+      #   run: bin/rspec --default-path ui

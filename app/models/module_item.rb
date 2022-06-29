@@ -25,6 +25,9 @@ class ModuleItem < YamlBase
     text_page: ContentPage,
     youtube_page: YoutubePage,
     formative_assessment: Questionnaire,
+    summative_assessment: Questionnaire,
+    confidence_check: Questionnaire,
+    assessments_results: AssessmentsResults,
   }.freeze
 
   # @return [Regexp] 2nd digit if present: 1-[1]-1-1

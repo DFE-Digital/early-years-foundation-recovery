@@ -6,3 +6,7 @@
         img src=image_path(mod.thumbnail) width=200 alt=mod.name
       .govuk-card__content
         h3.govuk-heading-m= mod.title
+        p 
+          = link_to_retake_quiz_training_module(mod)
+        p 
+          = link_to_quiz_results_page(mod)

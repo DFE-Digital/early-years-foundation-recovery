@@ -65,9 +65,28 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_134456) do
     t.boolean "archived"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "module"
+    t.string "name"
+    t.string "assessments_type"
+    t.bigint "user_assessment_id"
     t.index ["questionnaire_id", "user_id"], name: "index_user_answers_on_questionnaire_id_and_user_id"
     t.index ["questionnaire_id"], name: "index_user_answers_on_questionnaire_id"
+    t.index ["user_assessment_id"], name: "index_user_answers_on_user_assessment_id"
     t.index ["user_id"], name: "index_user_answers_on_user_id"
+  end
+
+  create_table "user_assessments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "score"
+    t.string "status"
+    t.string "module"
+    t.string "assessments_type"
+    t.boolean "archived"
+    t.datetime "completed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["score", "status"], name: "index_user_assessments_on_score_and_status"
+    t.index ["user_id"], name: "index_user_assessments_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -98,5 +117,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_134456) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token"
   end
 
+  add_foreign_key "user_answers", "user_assessments"
   add_foreign_key "user_answers", "users"
+  add_foreign_key "user_assessments", "users"
 end

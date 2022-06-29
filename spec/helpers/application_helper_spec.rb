@@ -13,7 +13,7 @@ describe 'ApplicationHelper', type: :helper do
     context 'when module item is last item' do
       it 'returns a link to training modules root' do
         link = helper.link_to_next_module_item(last_module_item)
-        expect(link).to include(course_overview_path)
+        expect(link).to include('certificate')
       end
     end
   end

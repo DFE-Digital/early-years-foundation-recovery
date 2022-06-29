@@ -1,7 +1,18 @@
 class Questionnaire < OpenStruct
   def self.find_by!(args)
-    questionnaire_data = QuestionnaireData.find_by!(args)
-    questionnaire_data.build_questionnaire
+    if SummativeQuestionnaire.find_by(args)
+      questionnaire_data = SummativeQuestionnaire.find_by(args)
+    elsif QuestionnaireData.find_by(args)
+      questionnaire_data = QuestionnaireData.find_by(args)
+    elsif ConfidenceQuestionnaire.find_by(args)
+      questionnaire_data = ConfidenceQuestionnaire.find_by(args)
+    end
+
+    begin
+      questionnaire_data.build_questionnaire
+    rescue StandardError
+      nil
+    end
   end
 
   include ActiveModel::Validations
@@ -47,7 +58,7 @@ private
   def results
     @results ||= questions.each_with_object({}) do |(question, data), hash|
       hash[question] = if data[:correct_answers].present?
-                         flattened_array(Array(send(question)).map(&:downcase)).map(&:to_sym) == flattened_array(data[:correct_answers].map(&:to_sym))
+                         flattened_array(Array(send(question)).map(&:to_s)) == flattened_array(data[:correct_answers])
                        else
                          true # If there are no correct answers set, assume any answer much be true
                        end
