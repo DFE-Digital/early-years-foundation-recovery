@@ -27,7 +27,6 @@ jobs:
       DOMAIN: child-development-training.education.gov.uk
       GOVUK_APP_DOMAIN: london.cloudapps.digital
       GOVUK_WEBSITE_ROOT: eyfs-covid-recovery
-      INTERIM_PASSWORD: ${{ SecureRandom.base64(12) }}
     steps:
       -
         name: Checkout Code
