@@ -41,6 +41,7 @@ en:
         | ------------------------------------------| ------------------------------------------------------------------------------ | ------------------------- |
         | _ga_L17YMGD11W                            | Used to persist session state                                                  | 2 years                   |
         | _ga                                       | Used to distinguish users                                                      | 2 years                   |
+        | _gid                                      | Used to distinguish users                                                      | 24 hours                   |
 
       change_cookies_header: Change your cookie settings
       change_cookies_question: Do you want to accept analytics cookies?
