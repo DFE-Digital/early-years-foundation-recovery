@@ -154,7 +154,7 @@ personal-social-and-emotional-development:
   # ----------------------------------------------------------------------------
 
   3-4-2:
-    type: text_page
+    type: sub_module_intro
   3-4-2-1:
     type: summative_assessment
   3-4-2-2:
