@@ -41,3 +41,8 @@
   float: right;
   display: block;
 }
+
+.accordion-section-left-column {
+  display: inline-block;
+  max-width: calc(100% - 142px);
+}
