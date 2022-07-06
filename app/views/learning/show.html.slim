@@ -25,7 +25,7 @@ h1.govuk-heading-l My learning
     - else
       div class='govuk-grid-row govuk-!-margin-bottom-7'
         - @user.course.current_modules.each do |mod|
-          .govuk-grid-column-one-third
+          .govuk-grid-column-one-third-from-desktop.govuk-grid-column-one-half class='govuk-!-margin-bottom-2'
             = render 'card', mod: mod
 
 - if @user.course.available_modules.any? || @user.course.course_completed?
@@ -35,7 +35,7 @@ h1.govuk-heading-l My learning
       h2.govuk-heading-m Available modules
       - if @user.course.available_modules.any?
         - @user.course.available_modules.each do |mod|
-          .govuk-grid-column-one-third
+          .govuk-grid-column-one-third-from-desktop.govuk-grid-column-one-half class='govuk-!-margin-bottom-2'
             = render 'card', mod: mod
 
       - elsif @user.course.course_completed?
@@ -48,7 +48,7 @@ h1.govuk-heading-l My learning
       h2.govuk-heading-m Upcoming modules
 
     - @user.course.upcoming_modules.each do |mod|
-      .govuk-grid-column-one-third
+      .govuk-grid-column-one-third-from-desktop.govuk-grid-column-one-half
         .govuk-card__flex-container
           .govuk-card__flex-item id=mod.name
             .govuk-card.govuk-card__height
