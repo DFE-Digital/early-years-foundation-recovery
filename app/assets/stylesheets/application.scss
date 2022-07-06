@@ -41,3 +41,12 @@
   float: right;
   display: block;
 }
+
+.full-width-img {
+  width: 100%;
+}
+
+.accordion-section-left-column {
+  display: inline-block;
+  max-width: calc(100% - 142px);
+}
