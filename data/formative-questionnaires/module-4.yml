@@ -1,23 +1,157 @@
 ---
 module-4:
-  2-1-1-1b:
+  4-1-1-1c:
     content:
     questions:
-      1_what_brain_area:
+      1_babies_expressive_language:
         multi_select: false 
         label: |
-          Which area of the brain is responsible for motor development? 
+          True or false? Babies understand expressive language before receptive language. 
         assessment_summary:  |
-          The cerebellum is at the back of your head. This is the area in charge of motor development. It controls balance and coordinates movements. The cerebellum combines the signals from the eyes, ears and muscles with motor commands. 
+          Babies will understand what they hear (receptive language) before they are able to express themselves (expressive language). This is why it is important to constantly talk to babies and narrate whatever you are doing. 
         assessment_fail_summary: |
-          The cerebellum is at the back of your head. This is the area in charge of motor development. It controls balance and coordinates movements. The cerebellum combines the signals from the eyes, ears and muscles with motor commands. 
+          Babies will understand what they hear (receptive language) before they are able to express themselves (expressive language). This is why it is important to constantly talk to babies and narrate whatever you are doing.  
         answers:
-          1: Cerebellum
-          2: Brain stem
-          3: Frontal lobes
-          4: Temporal lobes
+          1: "True"
+          2: "False"
         correct_answers:
-          - '1'
+          - "2"
+
+  4-1-1-1d:
+    content:
+    questions:
+      1_prelinguistic_stage:
+        multi_select: false 
+        label: |
+          At what age does the pre-linguistic stage usually occur? 
+        assessment_summary:  |
+          The pre-linguistic stage occurs between 0 and 1 year old. This is where babies use pre-speech sounds such as babbling and cooing. 
+        assessment_fail_summary: |
+          The pre-linguistic stage occurs between 0 and 1 year old. This is where babies use pre-speech sounds such as babbling and cooing.  
+        answers:
+          1: "0 to 1 year"
+          2: "1 to 2 years"
+          3: "2 to 3 years"
+          4: "3 to 4 years"
+        correct_answers:
+          - "1"
+
+  4-1-1-2b:
+    content:
+    questions:
+      1_first_words:
+        multi_select: false 
+        label: |
+          Which type of words will children recognise and attempt first?
+        assessment_summary:  |
+          To begin with children will recognise and attempt to use nouns such as ‘dog’, ‘ball’, ‘cup’. Next will come understanding of verbs such as ‘drink’, ‘eat’, ‘walk’. Understanding of adjectives such as ‘small’, ‘red’, ‘cold’ will then follow. You can support children by extending their use of a noun. For example if a child says ‘cup’ you can say “yes, you are drinking from a yellow cup”. 
+        assessment_fail_summary: |
+          To begin with children will recognise and attempt to use nouns such as ‘dog’, ‘ball’, ‘cup’. Next will come understanding of verbs such as ‘drink’, ‘eat’, ‘walk’. Understanding of adjectives such as ‘small’, ‘red’, ‘cold’ will then follow. You can support children by extending their use of a noun. For example if a child says ‘cup’ you can say “yes, you are drinking from a yellow cup”.  
+        answers:
+          1: "Adverbs – words used to describe a verb in more detail, such as accidentally, gently, clearly"
+          2: "Adjectives – words used to describe a noun, such as nervous, adorable, big"
+          3: "Nouns – the name of a place, person or object such as man, lion, flower"
+          4: "Verbs – a doing word that describes an action, such as climb, grow, learn"
+        correct_answers:
+          - "3"
+
+  4-1-1-4b:
+    content:
+    questions:
+      1_incorrect_pronunciation_grammar:
+        multi_select: false 
+        label: |
+          What is the best action to take if a child does not use the correct pronounciation or grammar?
+        assessment_summary:  |
+          You should model the correct use of language. For example, a child may say “I drawed a picture for you”. Your response could be “that’s right, you have drawn a picture for me”. This will provide opportunity for the child to learn by imitation.  
+        assessment_fail_summary: |
+          You should model the correct use of language. For example, a child may say “I drawed a picture for you”. Your response could be “that’s right, you have drawn a picture for me”. This will provide opportunity for the child to learn by imitation.  
+        answers:
+          1: "Tell them they are wrong and ask them to try again"
+          2: "Model the correct answer back to them"
+          3: "Ask the group if the child is right or wrong"
+          4: "Plan an activity on pronunciation"
+        correct_answers:
+          - "2"
+  
+  4-1-1-4c:
+    content:
+    questions:
+      1_incorrect_pronunciation_grammar:
+        multi_select: false 
+        label: |
+          True or false? Sustained shared thinking can extend children's vocabulary. 
+        assessment_summary:  |
+          You can support language development by encouraging children to:
+
+          - work with others to solve problems
+          - take part in discussions
+          - share stories
+          - investigate
+
+          This is called sustained shared thinking. This will lead to extended discussions and questions, which will result in opportunities to hear and practice new vocabulary.
+  
+        assessment_fail_summary: |
+          You can support language development by encouraging children to:
+
+          - work with others to solve problems
+          - take part in discussions
+          - share stories
+          - investigate
+
+          This is called sustained shared thinking. This will lead to extended discussions and questions, which will result in opportunities to hear and practice new vocabulary.  
+        answers:
+          1: "True"
+          2: "False"
+        correct_answers:
+          - "1"
+  
+  4-1-2-4b:
+    content:
+    questions:
+      1_incorrect_pronunciation_grammar:
+        multi_select: false 
+        label: |
+          True or false? The main principles of Skinner’s theory were imitation, reinforcement and conditioning. 
+        assessment_summary:  |
+          Skinner’s theory had 3 principles which were imitation, reinforcement and conditioning.
+
+          Skinner believed that children are born with a blank mind and develop their language skills through learning and opportunity to mimic others. Skinner believed that the response to the behaviour would shape future behaviour.
+          
+          For example if you talk to a baby or child, they will be able to try and respond by copying your behaviour. You can then reinforce their attempts with verbal praise, a smile and another response. The child will then want to repeat this behaviour to receive another positive response and this will promote their development.
+  
+        assessment_fail_summary: |
+          Skinner’s theory had 3 principles which were imitation, reinforcement and conditioning.
+
+          Skinner believed that children are born with a blank mind and develop their language skills through learning and opportunity to mimic others. Skinner believed that the response to the behaviour would shape future behaviour.
+          
+          For example if you talk to a baby or child, they will be able to try and respond by copying your behaviour. You can then reinforce their attempts with verbal praise, a smile and another response. The child will then want to repeat this behaviour to receive another positive response and this will promote their development.  
+        answers:
+          1: "True"
+          2: "False"
+        correct_answers:
+          - "1"
+  
+  4-1-2-4c:
+    content:
+    questions:
+      1_incorrect_pronunciation_grammar:
+        multi_select: false 
+        label: |
+          Which theorist believed that social and emotional relationships are not important for children’s language development? 
+ 
+        assessment_summary:  |
+          Piaget did not think that social and emotional relationships were important. Instead he believed that children need to understand a word before they can use it. In contrast, Bruner and Skinner thought that interactions with others were crucial to support language development. 
+  
+        assessment_fail_summary: |
+          Piaget did not think that social and emotional relationships were important. Instead he believed that children need to understand a word before they can use it. In contrast, Bruner and Skinner thought that interactions with others were crucial to support language development.   
+        answers:
+          1: "Bruner"
+          2: "Chomsky"
+          3: "Skinner"
+          4: "Piaget"
+        correct_answers:
+          - "4"
 
   2-1-2-3b:
     content:
@@ -36,6 +170,7 @@ module-4:
           3: "Socio-economic factors"
           4: "Sensorimotor actions"
         correct_answers: ["1","2","4"]
+  
   2-1-3-1b:
     content:
     questions:
