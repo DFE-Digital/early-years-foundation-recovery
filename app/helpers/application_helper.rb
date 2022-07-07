@@ -137,7 +137,7 @@ module ApplicationHelper
   end
 
   def set_quiz_status(module_name, topic_name, status)
-    if  topic_name.include?('End of module test') && (status.to_s == 'completed')
+    if  topic_name.to_s.include?('End of module test') && (status.to_s == 'completed')
       quiz = AssessmentQuiz.new(user: current_user, type: 'summative_assessment', training_module_id: module_name, name: '')
 
       return 'started'.to_sym if quiz.check_if_assessment_taken && quiz.calculate_status == 'failed'
@@ -164,7 +164,7 @@ module ApplicationHelper
   end
 
   def stop_clickable(module_name, topic_name, status)
-    if topic_name.include?('End of module test') && (status.to_s == 'completed')
+    if topic_name.to_s.include?('End of module test') && (status.to_s == 'completed')
       quiz = AssessmentQuiz.new(user: current_user, type: 'summative_assessment', training_module_id: module_name, name: '')
 
       return true if quiz.check_if_assessment_taken && quiz.calculate_status == 'failed'
