@@ -152,7 +152,7 @@ brain-development-and-how-children-learn:
   # ----------------------------------------------------------------------------
 
   2-3-2:
-    type: text_page
+    type: sub_module_intro
   2-3-2-1:
     type: summative_assessment
   2-3-2-2:
@@ -180,7 +180,7 @@ brain-development-and-how-children-learn:
   # ----------------------------------------------------------------------------
 
   2-3-3:
-    type: text_page
+    type: sub_module_intro
   2-3-3-1:
     type: confidence_check  
   2-3-3-2:
