@@ -124,16 +124,93 @@ en:
       1-2-1:
         heading: 1-2-1
         body: First page in second submodule
-      1-2-2:
-        heading: 1-2-2
+      1-2-1-1:
+        heading: 1-2-1-1
         body: |
           %Warning: people like stuff!%
-      1-2-3:
+      1-2-1-2:
         heading: 1-2-3
         body: Penultimate page
-      1-2-4:
+      1-2-2-3:
         heading: 1-2-4
         body: By viewing this page the training module is marked as complete
+
+      1-3:
+        heading: Summary and next steps
+        body: |
+          You have reached the end of this module's training content.
+
+          This next section of the module includes:
+
+          - a recap of what you have learned
+          - the end of module test
+          - an opportunity to reflect on your learning
+          - the chance to give us feedback about the module
+      
+      1-3-1:
+        heading: Recap
+        body: |
+          Every child will develop at their own individual rate and will experience a wide variety of influences that could potentially impact upon their brain development.
+
+          Your role is to promote positive development and minimise negative influences and their potential impact.
+
+          It will be common for children to experience periods where they require support to meet their expected milestones. It is important that you are able to identify where support is needed to prevent potential gaps in learning from occurring or widening further.
+
+          It is important to continually develop your knowledge of the differing theories and concepts surrounding how children learn. This will support you to identify new and applicable strategies to support the children in your care. Not every theory or concept will apply, however this new knowledge will support you to renew and shape your approach as needed.
+
+          Promoting and role modelling healthy lifestyles is crucial to support children and their wider families to understand the associated benefits for development.
+
+          Without knowledge of the expected stages of development and knowledge of your individual children, it will be difficult to provide the correct environment necessary for success.
+
+          ##Further activities
+
+          Read [advice for using the internet with children in a safe way](https://help-for-early-years-providers.education.gov.uk/safeguarding-and-welfare/internet-safety).
+
+          Read [advice about food safety and young children](https://help-for-early-years-providers.education.gov.uk/safeguarding-and-welfare/food-safety).
+
+          Find out about the [Healthier Families programme](https://www.nhs.uk/healthier-families/).
+
+          Learn more about [NHS physical activity guidelines for children (under 5 years).](https://www.nhs.uk/live-well/exercise/exercise-guidelines/physical-activity-guidelines-children-under-five-years/)
+
+          Find out about [how sensory food education can help young children engage with food.](https://help-for-early-years-providers.education.gov.uk/get-help-to-improve-your-practice/sensory-food-education)
+
+          ##Further reading
+
+          You can find help and guidance on the Department for Education's [Help for early years providers website](https://help-for-early-years-providers.education.gov.uk/).
+
+          [Development Matters non-statutory curriculum guidance](https://www.gov.uk/government/publications/development-matters--2) offers a top-level view of how children develop and learn for all early years practitioners.
+
+          Read the [early years foundation stage (EYFS) statutory framework](https://www.gov.uk/government/publications/early-years-foundation-stage-framework--2).
+
+          Supporting material is available on the [Foundation Years website](https://foundationyears.org.uk/).
+
+          See [guidance to provide support](https://www.gov.uk/government/publications/progress-check-at-age-2) when completing the early years foundation stage (EYFS) progress check at age 2.
+
+      1-3-2:
+        heading: End of module test
+        body: |
+          This end of module test is here to revisit what you have learned and the impact on your practice. It is not aimed to provide a pass or fail.
+
+          ##Before you start
+
+          This test has 10 multiple choice questions.
+
+          You must answer all of the questions.
+
+          You can review your total score for the test at the end.
+
+          To receive a certificate of achievement for this module, you need to receive an overall score of at least 70%.
+
+          If you do not score 70%, you will be able to see which questions you got wrong. You can repeat the test to improve your score as many times as you want to.
+
+      1-3-3:
+        heading: Reflect on your learning
+        body: |
+          To help DfE to measure our impact, please answer the following questions. 
+
+          Answers will be anonymous, and we will not know what you individually select.
+
+          To what extent do you agree with the following statements:
     certificate:
       - the first thing you learned
       - the second thing you learned

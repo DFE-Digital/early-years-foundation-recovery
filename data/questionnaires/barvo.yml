@@ -1,6 +1,6 @@
 ---
-alpha:
-  1-1-4:
+bravo:
+  1-2-2-2:
     required_percentage_correct: 100
     questions:
       like_stuff:
@@ -13,7 +13,7 @@ alpha:
           'no': 'No'
         correct_answers: 
           - 'yes'
-  1-2-1-1:
+  1-2-2-3:
     questions:
       who_likes_stuff:
         multi_select: true
@@ -25,14 +25,3 @@ alpha:
           nobody: Nobody
           stuffers: People who do the stuffing
         correct_answers: ['stuffy_people','stuffers']
-  1-2-1-3:
-    questions:
-      multiples_of_three:
-        multi_select: true
-        label: label
-        assessment_summary: assessment summary
-        answers:
-          1: Three
-          2: Eleven
-          3: Fifteen
-        correct_answers: [ '1', '3' ]
