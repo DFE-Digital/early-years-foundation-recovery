@@ -1,37 +1,219 @@
 ---
 module-4:
-  2-3-2-1:
+  4-4-1-1:
     content:
     questions:
-      1_brain_eyes:
+      1_babies_babbling:
         multi_select: false 
         label: |
-          Which part of the brain makes sense of the information that comes from our eyes?
+          At what age would you expect babies to begin babbling?
         assessment_summary: 
         assessment_fail_summary: |
-          The occipital lobes are the visual processing area of the brain. You might want to revisit the section on parts of the brain.
+          At around 6 to 8 months most babies enter the babbling stage. This is where a baby will begin to make sounds such as ba-ba, da-da,ma-ma. This is the way that babies will learn, rehearse and develop future language skills. 
+          You might want to revisit the section on Language development -  Prelinguistic stage.
         answers:
-          1: "Occipital lobes"
-          2: "Parietal lobes"
-          3: "Cerebellum"
-          4: "Brain stem"
-        correct_answers: ["1"]  
+          1: "3 to 6 months"
+          2: "6 to 8 months"
+          3: "11 to 12 months"
+          4: "13 to 15 months"
+        correct_answers:
+        - "2"  
 
-  2-3-2-4:
+  4-4-1-2:
     content:
     questions:
-      1_low_income:
-        multi_select: true
+      1_last_stage:
+        multi_select: false
         label: |
-          Research shows that children living in low income households are 3 times more likely to experience which negative effects on their cognitive development? (Select all answers that apply) 
+          Which of the following is the last stage of language development before a child can speak fluently? 
         assessment_summary: 
         assessment_fail_summary: |
-          Research shows that children living in low income households are 3 times more likely to experience mental health issues and have lower academic success than children from more affluent backgrounds. Coming from a disadvantaged area or a household in poverty should not restrict a child’s chances to succeed. Being able to identify where a child requires support and addressing individual needs is essential to ensure the child can continue to progress. 
-          You might want to revisit the section on factors affecting brain development.
+          The telegraphic stage is the last stage of language development before a child can speak fluently. This stage normally begins from around 2 years onwards.
+          This is where children can put together more meaningful sentences. Sentences will still not be complete, and connecting or descriptive words will be missing. An example of telegraphic speech could be “cat drink milk”. 
+
+          You might want to revisit the section on Language Development Linguistic stage 4.1.1.1
 
         answers:
-          1: "Mental health issues"
-          2: "Delayed physical development"
-          3: "Lower academic success"
-          4: "Limited growth"
-        correct_answers: ["1","3"]  
+          1: "Prelinguistic stage"
+          2: "One word stage"
+          3: "Two word stage"
+          4: "Telegraphic stage"
+        correct_answers:
+        - "4"
+
+  4-4-1-3:
+    content:
+    questions:
+      1_imitation_reinforcement_conditioning:
+        multi_select: false
+        label: |
+          Which theorist emphasised the importance of imitation, reinforcement and conditioning to support children’s language development? 
+        assessment_summary: 
+        assessment_fail_summary: |
+          Skinner’s “behaviourism” theory has 3 principles:
+
+          - imitation - where a child has the opportunity to observe and copy behaviour 
+          - reinforcement - where a child receives a positive or negative response to their behaviour 
+          - conditioning - where a child’s learning is shaped by their experiences
+
+          You might want to revisit the section on Theoretical Perspectives 4.1.2
+        answers:
+          1: "Skinner"
+          2: "Bruner"
+          3: "Chomsky"
+          4: "Piaget"
+        correct_answers:
+        - "1"
+  
+  4-4-1-4:
+    content:
+    questions:
+      1_socioeconomic_factors:
+        multi_select: false
+        label: |
+          Which of the following is a socioeconomic factor that could affect language development? 
+        assessment_summary: 
+        assessment_fail_summary: |
+          Some parents or carers who  have experienced negative or limited learning opportunities may not see the importance of supporting their child’s learning and development. For example if they do not appreciate the value of books and reading, they may not provide these opportunities for their child.
+
+          You might want to revisit the section on Factors affecting language development - Socioeconomic 4.1.3.1
+        answers:
+          1: "Child observation"
+          2: "Weather"
+          3: "Parents' or carers' education"
+          4: "The practitioner's role"
+        correct_answers:
+        - "3"
+
+  4-4-1-5:
+    content:
+    questions:
+      1_supporting_difficulty:
+        multi_select: false
+        label: |
+          What is the term used to describe identifying and supporting a difficulty quickly?
+        assessment_summary: 
+        assessment_fail_summary: |
+          Early intervention is when you identify a difficulty as soon as possible and use appropriate activities to support development.
+          
+          You might want to revisit the section on Identifying language needs 4.2.1
+
+        answers:
+          1: "Speech, language and communication needs"
+          2: "A language rich approach"
+          3: "Early intervention"
+          4: "Practitioner support"
+        correct_answers:
+        - "3"
+ 
+  4-4-1-6:
+    content:
+    questions:
+      1_supporting_difficulty:
+        multi_select: false
+        label: |
+          Complete the statement: 
+          
+          Limited communication will impact on a child’s ability to self-regulate because they will experience ________.
+
+        assessment_summary: 
+        assessment_fail_summary: |
+          If a child lacks the communication skills to express their needs it could result in frustration. If children become frustrated it can be shown as negative behaviour.
+
+          You might want to revisit the section on How language development supports PSED 4.2.2
+
+
+        answers:
+          1: "Hunger"
+          2: "Frustration"
+          3: "Happiness"
+          4: "Friendship"
+        correct_answers:
+        - "2"
+  
+  4-4-1-7:
+    content:
+    questions:
+      1_observation_planning:
+        multi_select: false
+        label: |
+          Complete the statement: 
+          
+          Observations and assessments should not be __________.
+
+
+        assessment_summary: 
+        assessment_fail_summary: |
+          Observations and the recording of them should not be time consuming or take you away from interacting with the children.
+          
+          You might want to revisit the section on Observation, assessment and planning 4.2.1.2
+        answers:
+          1: "Used in planning"
+          2: "Recorded"
+          3: "Time consuming"
+          4: "Accurate"
+        correct_answers:
+        - "3"
+
+  4-4-1-8:
+    content:
+    questions:
+      1_self_talk:
+        multi_select: false 
+        label: |
+          Self talk and parallel talk are both types of which strategy?
+        assessment_summary: 
+        assessment_fail_summary: |
+          Self talk and parallel talk are both ways that you can model language for children. This is where you add commentary to tasks and actions to make sure that children hear a wide variety of vocabulary 
+          
+          You might want to revisit the section on The practitioners role 4.3.1
+        answers:
+          1: "Self-regulation"
+          2: "Peer interactions"
+          3: "Modelling language"
+          4: "Socioeconomic support"
+        correct_answers:
+        - "3"
+
+  4-4-1-9:
+    content:
+    questions:
+      1_successful_environment:
+        multi_select: false 
+        label: |
+          A successful environment will promote which of the following?
+        assessment_summary: 
+        assessment_fail_summary: |
+          A successful environment will promote interactions with others. You should also consider how areas and activities in the environment promote discussion and curiosity, leading to investigation.
+          
+          You might want to revisit the section on The physical environment  4.3.2.1
+        answers:
+          1: "An emphasis on child led activity"
+          2: "Limited interactions"
+          3: "Small group activities"
+          4: "Interactions with others"
+        correct_answers:
+        - "4"
+
+  4-4-1-10:
+    content:
+    questions:
+      1_positive_partnerships:
+        multi_select: false 
+        label: |
+          Complete the statement: 
+          
+          Positive partnerships with parents and carers will build a sense of security for children. This will support them to communicate with __________.
+
+        assessment_summary: 
+        assessment_fail_summary: |
+          Parents and carers are the most knowledgeable person regarding their child and they will be able to share lots of information to support you. Finding out about experiences, siblings and interests will help you to plan to meet their language needs. The information you learn will support you to build a sense of security, which will result in more confidence when communicating.
+          
+          You might want to revisit the section on Effective partnership strategies 4.3.3.1 
+        answers:
+          1: "Confidence"
+          2: "Correct grammar"
+          3: "Hesitation"
+          4: "A loud voice"
+        correct_answers:
+        - "1"
