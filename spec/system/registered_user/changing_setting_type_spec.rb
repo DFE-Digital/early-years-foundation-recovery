@@ -7,13 +7,13 @@ RSpec.describe 'Registered user changing setting type', type: :system do
 
   before do
     visit '/my-account/edit-setting-type'
-    fill_in 'Your setting type', with: setting_type
   end
 
   context 'when valid' do
-    let(:setting_type) { 'nursery' }
+    let(:updated_setting_type) { 'nursery' }
 
     it 'updates setting type' do
+      choose updated_setting_type.capitalize
       click_button 'Save'
 
       expect(page).to have_current_path '/my-account'
@@ -24,11 +24,12 @@ RSpec.describe 'Registered user changing setting type', type: :system do
   end
 
   context 'when other' do
-    let(:setting_type) { 'other' }
+    let(:updated_setting_type) { 'other' }
     let(:setting_type_other) { 'Foo' }
 
     it 'updates setting type' do
-      fill_in 'Other', with: setting_type_other
+      choose updated_setting_type.capitalize
+      fill_in 'Other setting', with: setting_type_other
       click_button 'Save'
 
       expect(page).to have_current_path '/my-account'
