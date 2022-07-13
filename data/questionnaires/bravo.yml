@@ -5,14 +5,14 @@ bravo:
     questions:
       like_stuff:
         multi_select: false
-        label: Do you like stuff
-        assessment_summary: Hey! You like stuff
-        assessment_fail_summary: You should like stuff!
+        label: What does DFE Stands for.
+        assessment_summary: You got this correct it stand for Department for Education
+        assessment_fail_summary: Unfortunatly you have got this one wrong
         answers:
-          'yes': 'Yes'
-          'no': 'No'
+          1: 'Department for Education'
+          2: 'Department for Employment'
         correct_answers: 
-          - 'yes'
+          - '1'
   1-2-2-3:
     questions:
       who_likes_stuff:
