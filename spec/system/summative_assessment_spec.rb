@@ -29,7 +29,7 @@ RSpec.describe 'Assessment' do
       click_on 'Finish test'
     end
 
-    it 'reflect on learning link becomes clickable' do
+    it 'can navigate to confidence check' do
       visit training_module_path('alpha')
 
       expect(page).to have_link('Reflect on your learning')
@@ -54,7 +54,7 @@ RSpec.describe 'Assessment' do
       click_on 'Finish test'
     end
 
-    it 'reflect on learning link remains unclickable' do
+    it 'cannot navigate to confidence check' do
       visit training_module_path('alpha')
 
       expect(page).to have_content('Reflect on your learning')
