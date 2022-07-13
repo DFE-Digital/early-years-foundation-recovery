@@ -19,11 +19,13 @@ Rails.application.routes.draw do
     get 'edit-ofsted-number'
     get 'edit-password'
     get 'edit-postcode'
+    get 'edit-setting-type'
     patch 'update-name'
     patch 'update-email'
     patch 'update-ofsted-number'
     patch 'update-password'
     patch 'update-postcode'
+    patch 'update-setting-type'
     get 'check-email-confirmation'
     get 'check-email-password-reset'
   end
