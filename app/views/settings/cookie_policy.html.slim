@@ -1,6 +1,7 @@
 .govuk-width-container
   .govuk-grid-row class="govuk-!-margin-bottom-7"
     .govuk-grid-column-two-thirds-from-desktop
+      =govuk_back_link(href: url_for(:back))
       h1 = t("settings.cookie.heading")
 
       .content.gem-c-govspeak = translate_markdown(t("settings.cookie.content"))
