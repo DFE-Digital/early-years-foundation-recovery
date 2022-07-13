@@ -1,6 +1,6 @@
 = render 'debug'
-- if @questionnaire['page_number'].present?
-  span.govuk-caption-l= t('page_number', current: @questionnaire['page_number'], total: @questionnaire['total_questions'])
+
+= page_number(current: @questionnaire['page_number'], total: @questionnaire['total_questions'])
 
 = govuk_heading(@questionnaire.heading)
 
