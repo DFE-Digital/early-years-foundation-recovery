@@ -25,6 +25,10 @@
   p {
     margin: 0;
   }
+
+  & > * {
+    max-width: none;
+  }
 }
 
 .govuk-notification-banner--error {
@@ -54,8 +58,4 @@
 .accordion-section-left-column {
   display: inline-block;
   max-width: calc(100% - 142px);
-}
-
-.assessment-banner-text {
-  max-width: none;
 }
