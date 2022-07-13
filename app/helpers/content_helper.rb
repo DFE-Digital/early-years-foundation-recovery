@@ -7,10 +7,10 @@ module ContentHelper
   end
 
   def govuk_heading(text, tag: :h1)
-    if text.present?
-      content_tag tag, class: 'govuk-heading-m' do
-        text
-      end
+    return if text.blank?
+
+    content_tag tag, class: 'govuk-heading-m' do
+      text
     end
   end
 
