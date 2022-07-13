@@ -22,7 +22,8 @@ module ContentHelper
 
   def page_number(current:, total:)
     return if current.blank?
-    content_tag :span, class: 'govuk-caption-l' do 
+
+    content_tag :span, class: 'govuk-caption-l' do
       t('page_number', current: current, total: total)
     end
   end
