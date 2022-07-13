@@ -5,7 +5,6 @@ RSpec.describe 'Module overview page' do
   include_context 'with user'
   
   before do
-    # probably should change to be done more programatically
     visit training_module_path('alpha')
   end
 
