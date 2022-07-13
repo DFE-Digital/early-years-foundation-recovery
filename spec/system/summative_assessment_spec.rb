@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Assessment' do
+RSpec.describe 'Summative assessment' do
   include_context 'with progress'
 
   before do

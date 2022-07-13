@@ -24,7 +24,13 @@ RSpec.shared_context 'with progress' do
   def view_pages_before_summative_assessment(mod)
     view_pages_before(mod, 'summative_assessment')
   end
-  
+
+  # Visit every page before the formative assessment
+  #
+  def view_pages_before_formative_assessment(mod)
+    view_pages_before(mod, 'formative_assessment')
+  end
+
   # @return [true] create a fake event log item
   def view_module_page_event(module_name, page_name)
     tracker.track('page_view', {
