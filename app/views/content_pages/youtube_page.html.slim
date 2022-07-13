@@ -1,8 +1,8 @@
 = render 'debug'
 
 - content_for :content_page do
-  - if @model.page_number
-    span.govuk-caption-l= t('page_number', **@model.page_number)
+  = page_number(**@model.pagination)
+
   h1= @model.heading
 
   .govspeak-embed-container

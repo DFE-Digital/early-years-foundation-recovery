@@ -2,15 +2,15 @@ require 'rails_helper'
 
 RSpec.describe ContentPage, type: :model do
   let(:file) do
-    Rails.root.join('config/locales/modules/test.yml')
+    Rails.root.join('config/locales/modules/alpha.yml')
   end
 
   let(:content) do
-    YAML.load_file(file).dig('en', 'modules', 'test')
+    YAML.load_file(file).dig('en', 'modules', 'alpha')
   end
 
   let(:content_page) do
-    described_class.new(id: :basic, training_module: :test, type: :text_page)
+    described_class.new(training_module: 'alpha', type: :text_page, id: '1-1-1')
   end
 
   describe '#heading' do

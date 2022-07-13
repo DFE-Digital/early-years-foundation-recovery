@@ -17,7 +17,7 @@ RSpec.describe 'Formative assessment' do
     end
   end
 
-  context 'when a user has passed the formative assessment' do
+  context 'when a user has passed' do
     before do
       visit '/modules/alpha/formative-assessments/1-1-4'
       choose 'Correct answer 1'
@@ -30,14 +30,14 @@ RSpec.describe 'Formative assessment' do
       expect(page).to have_link('1-2-1')
     end
 
-    it 'is not able to retake the assessment' do
+    it 'is not able to be retaken' do
       visit '/modules/alpha/formative-assessments/1-1-4'
 
       expect(page).to have_selector('.govuk-radios__input:disabled')
     end
   end
 
-  context 'when a user has failed the formative assessment' do
+  context 'when a user has failed' do
     before do
       visit '/modules/alpha/formative-assessments/1-1-4'
       choose 'Wrong answer 1'
@@ -50,7 +50,7 @@ RSpec.describe 'Formative assessment' do
       expect(page).to have_link('1-2-1')
     end
 
-    it 'is not able to retake the assessment' do
+    it 'is not able to be retaken' do
       visit '/modules/alpha/formative-assessments/1-1-4'
 
       expect(page).to have_selector('.govuk-radios__input:disabled')

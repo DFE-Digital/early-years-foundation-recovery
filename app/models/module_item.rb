@@ -90,16 +90,25 @@ class ModuleItem < YamlBase
     SUMMARY
   end
 
-  # @return [Hash<Symbol>, nil]
-  def page_number
-    return unless position_within_submodule
-
+  # @return [Hash{Symbol => nil, Integer}]
+  def pagination
     { current: position_within_submodule, total: number_within_submodule }
   end
 
   # @return [TrainingModule]
   def parent
     TrainingModule.find_by(name: training_module)
+  end
+
+  # @return [String]
+  def next_item_button_text
+    if next_item.type.eql?('assessments_results')
+      'Finish test'
+    elsif next_item.type.eql?('summative_assessment') && !type.eql?('summative_assessment')
+      'Start test'
+    else
+      'Next'
+    end
   end
 
   # @return [ContentPage, YoutubePage, Questionnaire]

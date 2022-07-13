@@ -1,18 +1,5 @@
 h1.govuk-heading-l My learning
 = render 'debug'
-/ .govuk-grid-row id='summative-assessment'
-/   .govuk-grid-column-full
-/     h2.govuk-heading-m Summative assessment
-/     div class='govuk-grid-row govuk-!-margin-bottom-7'
-/       .govuk-grid-column-one-quarter
-/         .govuk-card__flex-container
-/           .govuk-card__flex-item
-/             .govuk-card.govuk-card--contained.govuk-card--selectable
-/               a href=training_module_path(@end_of_training_module_assessment)
-/               div class='govuk-card__hero govuk-!-margin-bottom-2'
-/                 img src=image_path(@end_of_training_module_assessment.thumbnail) width=180 alt=@end_of_training_module_assessment.name
-/               .govuk-card__content
-/                 h3.govuk-heading-m= @end_of_training_module_assessment.title
 
 .govuk-grid-row id='started'
   .govuk-grid-column-full

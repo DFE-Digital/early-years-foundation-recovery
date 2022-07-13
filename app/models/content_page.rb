@@ -7,8 +7,8 @@ class ContentPage
 
   validates :heading, :body, presence: true
 
-  # @return [Hash, nil]
-  delegate :page_number, to: :module_item
+  # @return [Hash]
+  delegate :pagination, to: :module_item
 
   # @return [String]
   def heading

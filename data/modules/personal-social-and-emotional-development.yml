@@ -144,6 +144,10 @@ personal-social-and-emotional-development:
   3-3-2-4:
     type: text_page
 
+  # ----------------------------------------------------------------------------
+  # Module Summary
+  # ----------------------------------------------------------------------------
+
   3-4:
     type: sub_module_intro
   3-4-1:
@@ -177,6 +181,7 @@ personal-social-and-emotional-development:
     type: summative_assessment
   3-4-2-11:
     type: assessments_results
+
   # ----------------------------------------------------------------------------
   # Confidence check
   # ----------------------------------------------------------------------------

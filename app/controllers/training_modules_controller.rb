@@ -9,9 +9,8 @@ class TrainingModulesController < ApplicationController
   def show
     track('module_overview_page')
     @training_module = TrainingModule.find_by(name: params[:id])
-
-    mod_progress = ModuleProgress.new(user: current_user, mod: @training_module)
-    @module_progress = ModuleOverviewDecorator.new(mod_progress)
+    @module_progress = ModuleOverviewDecorator.new(helpers.module_progress(@training_module))
+    @assessment_progress = helpers.assessment_progress(@training_module)
 
     # Render verbose summary of module activity for the current user
     # /modules/alpha?debug=y
@@ -20,7 +19,6 @@ class TrainingModulesController < ApplicationController
 
   def certificate
     @training_module = TrainingModule.find_by(name: params[:training_module_id])
-    mod_progress = ModuleProgress.new(user: current_user, mod: @training_module)
-    @module_progress = ModuleOverviewDecorator.new(mod_progress)
+    @module_progress = ModuleOverviewDecorator.new(helpers.module_progress(@training_module))
   end
 end

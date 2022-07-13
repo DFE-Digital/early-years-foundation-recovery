@@ -31,11 +31,11 @@ alpha:
   1-1-2:
     type: text_page # submodule 1 / topic 2
   1-1-3:
-    type: text_page # submodule 1 / topic 3
+    type: text_page # submodule 1 / topic 3  / topic intro
   1-1-3-1:
-    type: text_page # submodule 1 / topic 3  / topic page
+    type: text_page # submodule 1 / topic 3  / topic content
   1-1-4:
-    type: formative_assessment
+    type: formative_assessment # 5th page in submodule
 
   # ----------------------------------------------------------------------------
   # Submodule 2
@@ -53,13 +53,18 @@ alpha:
     type: formative_assessment
 
   # ----------------------------------------------------------------------------
-  # Submodule 3 summative assessment
+  # Module Summary
   # ----------------------------------------------------------------------------
 
   1-3:
     type: sub_module_intro
   1-3-1:
     type: sub_module_intro
+
+  # ----------------------------------------------------------------------------
+  # summative assessment
+  # ----------------------------------------------------------------------------
+
   1-3-2:
     type: sub_module_intro
   1-3-2-1:
@@ -73,9 +78,8 @@ alpha:
   1-3-2-5:
     type: assessments_results
 
-
   # ----------------------------------------------------------------------------
-  # Submodule 4 Confidence check end summary
+  # confidence check
   # ----------------------------------------------------------------------------
 
   1-3-3:

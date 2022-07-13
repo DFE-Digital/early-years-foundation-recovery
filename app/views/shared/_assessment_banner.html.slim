@@ -1,0 +1,9 @@
+- style = questionnaire.valid? ? 'success' : 'error'
+
+.govuk-notification-banner class="govuk-notification-banner--#{style}" role='alert' aria-labelledby='govuk-notification-banner-title' data-module='govuk-notification-banner'
+
+  .govuk-notification-banner__header
+    h2#govuk-notification-banner-title.govuk-notification-banner__title
+      = questionnaire.valid? ? "That's right" : "That's not quite right"
+  .govuk-notification-banner__content
+    p.govuk-body= questionnaire.summary_for(question)

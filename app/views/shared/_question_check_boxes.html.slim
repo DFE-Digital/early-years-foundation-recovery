@@ -1,11 +1,11 @@
-= f.govuk_check_boxes_fieldset question.name, legend: {text: translate_markdown(question.label), hidden: question.legend_hidden?} do
+= f.govuk_check_boxes_fieldset question.name, legend: { text: translate_markdown(question.label), hidden: question.legend_hidden? } do
+
   = translate_markdown(question.body)
-  - question.answers.each do |option|
-    - checked = answers_checkbox(question.questionnaire.user_answers, option[0])
-    - disabled = disable_checkbox(@questionnaire)
+
+  - question.fields.each do |id, label, checked|
     = f.govuk_check_box question.name,
-      option[0],
-      label: { text: option[1] },
+      id,
+      label: { text: label },
       link_errors: true,
       checked: checked,
-      disabled: disabled
+      disabled: question.disabled?

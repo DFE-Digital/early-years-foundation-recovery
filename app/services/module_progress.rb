@@ -1,12 +1,17 @@
 # User's module progress and submodule/topic state
 #
 class ModuleProgress
+  # @param user [User]
+  # @param mod [TrainingModule]
   def initialize(user:, mod:)
     @user = user
     @mod = mod
+    @summative_assessment = SummativeAssessmentProgress.new(user: user, mod: mod)
   end
 
-  attr_reader :user, :mod
+  # TODO: use correct yard syntax here
+  # @return [SummativeAssessmentProgress]
+  attr_reader :user, :mod, :summative_assessment
 
   # Name of last page viewed in module
   # @return [String]
@@ -40,11 +45,6 @@ class ModuleProgress
     visited?(mod.intro_page)
   end
 
-# @return [Boolean] previous module completed
-# def ready_to_start?
-#   previous_module ? all?(previous_module.module_items) : true
-# end
-
 protected
 
   # @see ModuleOverviewDecorator
@@ -70,11 +70,18 @@ protected
     training_module_events.where_properties(id: page.name).present?
   end
 
+  # @see SummativeAssessmentProgress
+  #
+  # @return [Boolean]
+  def failed_attempt?
+    summative_assessment.attempted? && summative_assessment.failed?
+  end
+
 private
 
   # @return [Array<ModuleItem>]
   def unvisited
-    @unvisited ||= mod.module_items.select { |item| module_item_events(item.name).none? }
+    mod.module_items.select { |item| module_item_events(item.name).none? }
   end
 
   # @param method [Symbol]

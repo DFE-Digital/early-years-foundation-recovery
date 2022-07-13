@@ -1,4 +1,5 @@
 class TrainingModule < YamlBase
+  # TODO: move to Rails.configuration
   set_filename ENV.fetch('TRAINING_MODULES', 'training-modules')
 
   # Override basic behaviour so that root key is stored as name
@@ -97,7 +98,29 @@ class TrainingModule < YamlBase
   end
 
   # @return [ModuleItem]
-  def assessment_page
-    ModuleItem.where_type(name, 'formative_assessment').first
+  def assessment_intro_page
+    first_assessment_page.previous_item
+  end
+
+  # @return [ModuleItem]
+  def first_assessment_page
+    ModuleItem.where_type(name, 'summative_assessment').first
+  end
+
+  # @return [ModuleItem]
+  def last_assessment_page
+    ModuleItem.where_type(name, 'summative_assessment').last
+  end
+
+  # @return [ModuleItem]
+  def assessment_results_page
+    ModuleItem.where_type(name, 'assessments_results').first
+  end
+
+  # Summative results if module includes assessment
+  #
+  # @return [ModuleItem]
+  def last_page
+    assessment_results_page || module_items.last
   end
 end

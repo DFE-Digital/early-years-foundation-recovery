@@ -1,25 +1,14 @@
-class ConfidenceChecksController < ApplicationController
-  include AssessmentQuestions
-  include ApplicationHelper
-  before_action :authenticate_registered_user!
-
-  def show
-    existing_answers = existing_user_answers.pluck(:question, :answer)
-    populate_questionnaire(existing_answers.to_h.symbolize_keys) if existing_answers.present?
-  end
-
+class ConfidenceChecksController < AssessmentController
   def update
-    archive_previous_user_answers
-    if validate_param_empty
-      populate_questionnaire(questionnaire_params)
-      save_answers
-      flash[:error] = nil
-      link_to_next_module_item_from_controller(questionnaire.module_item)
-      return
-    else
-      flash[:error] = 'Please select an answer'
-    end
+    questionnaire_taker.archive
 
-    render :show, status: :unprocessable_entity and return
+    if unanswered?
+      flash[:error] = 'Please select an answer'
+      render :show, status: :unprocessable_entity
+    else
+      populate_and_persist
+
+      redirect_to next_assessment_path(questionnaire.module_item)
+    end
   end
 end

@@ -6,28 +6,41 @@ RSpec.describe 'ContentPages', type: :request do
   end
 
   describe 'GET /modules/:training_module_id/content-pages' do
-    let(:first_module_item) { ModuleItem.where(training_module: :test).first }
+    before do
+      get training_module_content_pages_path(:alpha)
+    end
+
+    let(:module_item) do
+      ModuleItem.where(training_module: :alpha).first
+    end
 
     it 'redirects to first item' do
-      get training_module_content_pages_path(:test)
-      expect(response).to redirect_to(training_module_content_page_path(:test, first_module_item))
+      expect(response).to redirect_to(training_module_content_page_path(:alpha, module_item))
     end
   end
 
   describe 'GET /modules/:training_module_id/content-pages/:id' do
-    let(:module_item) { ModuleItem.find_by(training_module: :test, type: :text_page) }
-
-    it 'renders a template successfully' do
-      get training_module_content_page_path(:test, module_item)
-      expect(response).to have_http_status(:success)
+    before do
+      get training_module_content_page_path(:alpha, module_item)
     end
 
-    context 'when module item is a questionnaire' do
-      let(:module_item) { ModuleItem.find_by(training_module: :test, type: :formative_assessment) }
+    context 'when module item is a text content page' do
+      let(:module_item) do
+        ModuleItem.where(training_module: :alpha, type: :text_page).first
+      end
 
-      it 'redirects to questionnaire controller' do
-        get training_module_content_page_path(:test, module_item)
-        expect(response).to redirect_to(training_module_formative_assessment_path(:test, module_item.model))
+      it 'renders a template successfully' do
+        expect(response).to have_http_status(:success)
+      end
+    end
+
+    context 'when module item is a formative question' do
+      let(:module_item) do
+        ModuleItem.where(training_module: :alpha, type: :formative_assessment).first
+      end
+
+      it 'redirects to formative assesment controller' do
+        expect(response).to redirect_to(training_module_formative_assessment_path(:alpha, module_item.model))
       end
     end
   end

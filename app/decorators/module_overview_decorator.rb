@@ -1,8 +1,11 @@
 class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
+  # Symbol, TrainingModule, String/Nil
   # @yield [Array] locales key and content page
   def call_to_action
     if completed?
-      yield(:completed, [mod, mod.assessment_page])
+      yield(:completed, [mod, mod.last_page])
+    elsif failed_attempt?
+      yield(:failed, [mod, nil])
     elsif started?
       yield(:started, [mod, resume_page])
     else
@@ -25,7 +28,7 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
     end
   end
 
-  # public for debugging only?
+  # Check every item has been visited (public for debugging)
   #
   # @return [Symbol]
   def status(items)
@@ -58,22 +61,32 @@ private
     end
   end
 
-  # @param topic [ModuleItem]
   # @param submodule [String]
+  # @param topic_item [ModuleItem]
   #
-  # @return [Array<String, Symbol>]
+  # @return [Array<Array>]
   def accordion_content(submodule:, topic_item:)
     topic_status = status(topic_item.current_submodule_topic_items)
 
+    # providing the next page name enables the hyperlink
     if clickable?(topic_item: topic_item, submodule: submodule)
       next_item_name = topic_status.eql?(:started) ? resume_page : topic_item
     end
 
+    # SummativeAssessmentProgress conditional pass
+    if failed_attempt?
+      topic_status = :failed if topic_item.model.heading.eql?('End of module test')
+      next_item_name = nil if topic_item.model.heading.eql?('Reflect on your learning')
+    else
+      topic_status = :completed if topic_item.model.heading.eql?('End of module test')
+      next_item_name = topic_item if topic_item.model.heading.eql?('Reflect on your learning')
+    end
+
     [
-      topic_item.training_module,   # string (module name)
-      topic_item.model.heading,     # string (content page heading)
-      next_item_name,               # string (module_item name)
-      topic_status,                 # symbol (all items viewed)
+      topic_item.training_module,   # TrainingModule [mod]
+      topic_item.model.heading,     # String (content page heading) [topic_heading]
+      next_item_name,               # String/nil (module_item name) [next_item]
+      topic_status,                 # Symbol (all items viewed) [status]
     ]
   end
 

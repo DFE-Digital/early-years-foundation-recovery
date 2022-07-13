@@ -141,9 +141,12 @@ brain-development-and-how-children-learn:
   2-2-3-7:
     type: text_page
 
+  # ----------------------------------------------------------------------------
+  # Module Summary
+  # ----------------------------------------------------------------------------
+
   2-3:
     type: sub_module_intro
-
   2-3-1:
     type: sub_module_intro
 
@@ -175,6 +178,7 @@ brain-development-and-how-children-learn:
     type: summative_assessment
   2-3-2-11:
     type: assessments_results
+
   # ----------------------------------------------------------------------------
   # Confidence check
   # ----------------------------------------------------------------------------

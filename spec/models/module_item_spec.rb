@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe ModuleItem, type: :model do
-  let(:yaml_data) { data_from_file('modules/test.yml') }
-  let(:module_item) { described_class.where(training_module: :test).first }
+  let(:yaml_data) { data_from_file('modules/alpha.yml') }
+  let(:module_item) { described_class.where(training_module: :alpha).first }
 
   after do
     described_class.delete_all
@@ -10,7 +10,7 @@ RSpec.describe ModuleItem, type: :model do
   end
 
   it 'loads data from file' do
-    expect(module_item.type).to eq(yaml_data.dig('test', module_item.name, 'type'))
+    expect(module_item.type).to eq(yaml_data.dig('alpha', module_item.name, 'type'))
   end
 
   # scopes ---------------------------------
@@ -29,29 +29,29 @@ RSpec.describe ModuleItem, type: :model do
     let!(:second_submodule_second_topic) { create :module_item, name: '1-2-2' }
 
     it 'returns module items matching the topic' do
-      expect(described_class.where_submodule_topic(:test, 1, 1)).to include(first_submodule_first_topic)
-      expect(described_class.where_submodule_topic(:test, 1, 2)).to include(first_submodule_second_topic)
+      expect(described_class.where_submodule_topic(:delta, 1, 1)).to include(first_submodule_first_topic)
+      expect(described_class.where_submodule_topic(:delta, 1, 2)).to include(first_submodule_second_topic)
     end
 
     it 'does not return items from other topics' do
-      expect(described_class.where_submodule_topic(:test, 1, 1)).not_to include(first_submodule_second_topic)
-      expect(described_class.where_submodule_topic(:test, 1, 1)).not_to include(second_submodule_first_topic)
-      expect(described_class.where_submodule_topic(:test, 1, 2)).not_to include(first_submodule_first_topic)
-      expect(described_class.where_submodule_topic(:test, 1, 2)).not_to include(second_submodule_second_topic)
+      expect(described_class.where_submodule_topic(:delta, 1, 1)).not_to include(first_submodule_second_topic)
+      expect(described_class.where_submodule_topic(:delta, 1, 1)).not_to include(second_submodule_first_topic)
+      expect(described_class.where_submodule_topic(:delta, 1, 2)).not_to include(first_submodule_first_topic)
+      expect(described_class.where_submodule_topic(:delta, 1, 2)).not_to include(second_submodule_second_topic)
     end
   end
 
   # sequence ---------------------------------
 
   describe '#next_item' do
-    let(:next_module_item) { described_class.where(training_module: :test).to_a[1] }
+    let(:next_module_item) { described_class.where(training_module: :alpha).to_a[1] }
 
     it 'returns the next module item' do
       expect(module_item.next_item).to eq(next_module_item)
     end
 
     context 'when item is last item' do
-      let(:last_module_item) { described_class.where(training_module: :test).last }
+      let(:last_module_item) { described_class.where(training_module: :alpha).last }
 
       it 'returns nil' do
         expect(last_module_item.next_item).to be_nil
@@ -61,7 +61,7 @@ RSpec.describe ModuleItem, type: :model do
 
   describe '#previous_item' do
     let(:first_module_item) { module_item }
-    let(:second_module_item) { described_class.where(training_module: :test).to_a[1] }
+    let(:second_module_item) { described_class.where(training_module: :alpha).to_a[1] }
 
     it 'returns the previous module item' do
       expect(second_module_item.previous_item).to eq(first_module_item)
@@ -75,7 +75,7 @@ RSpec.describe ModuleItem, type: :model do
   end
 
   describe '#model' do
-    let(:module_item) { described_class.find_by(training_module: :test, type: :text_page) }
+    let(:module_item) { described_class.find_by(training_module: :alpha, type: :text_page) }
     let(:model) { module_item.model }
 
     it 'returns the match model object' do
@@ -88,7 +88,9 @@ RSpec.describe ModuleItem, type: :model do
     end
 
     context 'when model is a questionnaire' do
-      let(:module_item) { described_class.find_by(training_module: :test, type: :formative_assessment) }
+      let(:module_item) do
+        described_class.find_by(training_module: :alpha, type: :formative_assessment)
+      end
 
       it 'returns a questionnaire' do
         expect(model).to be_a(Questionnaire)
@@ -100,7 +102,9 @@ RSpec.describe ModuleItem, type: :model do
     end
 
     context 'when model is a youtube page' do
-      let(:module_item) { described_class.find_by(training_module: :test, type: :youtube_page) }
+      let(:module_item) do
+        described_class.find_by(training_module: :alpha, type: :youtube_page)
+      end
 
       it 'returns a Youtube page' do
         expect(model).to be_a(YoutubePage)
@@ -155,12 +159,12 @@ RSpec.describe ModuleItem, type: :model do
   end
 
   describe '#position_within_module' do
-    let(:first_item) { described_class.find_by(training_module: :test) }
-    let(:last_item) { described_class.where(training_module: :test).last }
+    let(:first_item) { described_class.find_by(training_module: :alpha) }
+    let(:last_item) { described_class.where(training_module: :alpha).last }
 
     it 'return position in array of module items in training module' do
       expect(first_item.position_within_module).to eq(0)
-      expect(last_item.position_within_module).to eq(described_class.where(training_module: :test).count - 1)
+      expect(last_item.position_within_module).to eq(described_class.where(training_module: :alpha).count - 1)
     end
   end
 
