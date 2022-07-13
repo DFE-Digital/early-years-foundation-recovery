@@ -16,7 +16,7 @@ RSpec.describe 'Govspeak', type: :system do
 
   context 'with formative assessments' do
     before do
-      visit '/modules/alpha/formative-assessments/1-2-2'
+      visit '/modules/alpha/formative-assessments/1-2-1-1'
     end
 
     it 'is displayed' do
