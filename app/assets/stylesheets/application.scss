@@ -27,6 +27,11 @@
   }
 }
 
+.govuk-notification-banner--error {
+  border-color: $govuk-error-colour;
+  background-color: $govuk-error-colour;
+}
+
 .light-grey-box {
   padding: govuk-spacing(5);
   margin-bottom: govuk-spacing(5);
@@ -40,4 +45,13 @@
 .float-right {
   float: right;
   display: block;
+}
+
+.full-width-img {
+  width: 100%;
+}
+
+.accordion-section-left-column {
+  display: inline-block;
+  max-width: calc(100% - 142px);
 }

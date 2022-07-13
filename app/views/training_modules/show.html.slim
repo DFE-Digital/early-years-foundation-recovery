@@ -29,7 +29,7 @@
             .govuk-accordion__section-header
               h2.govuk-accordion__section-heading
                 span.govuk-accordion__section-button aria-controls="section-button-#{num}" aria-expanded="false" id="section-button-#{num}"
-                  = current_heading
+                  span.accordion-section-left-column = current_heading
                   .float-right
                     = govuk_tag(text: t(status, scope: 'module_indicator'), colour: 'purple')
 
@@ -42,11 +42,11 @@
                 - quiz_status = false
                 - topics.each do |mod, topic_heading, clickable, status|
                   li
-
-                    - if clickable && !quiz_status
-                      = govuk_link_to topic_heading, training_module_content_page_path(mod, clickable)
-                    - else
-                      = topic_heading
+                    span.accordion-section-left-column
+                      - if clickable && !quiz_status
+                        = govuk_link_to topic_heading, training_module_content_page_path(mod, clickable)
+                      - else
+                        = topic_heading
 
                     .float-right
                       = govuk_tag(text: t(set_quiz_status(mod, topic_heading, status), scope: 'module_indicator'), colour: 'blue')
