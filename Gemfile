@@ -104,7 +104,7 @@ group :test do
   gem 'capybara'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
-  gem 'show_me_the_cookies', git: 'https://github.com/nruth/show_me_the_cookies.git'
+  gem 'show_me_the_cookies'
   gem 'simplecov'
 end
 

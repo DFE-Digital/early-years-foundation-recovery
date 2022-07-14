@@ -18,12 +18,14 @@ RSpec.describe 'Selecting cookie options' do
       end
 
       it 'visitor can click to accept analytics cookies' do
+        pending 're-enable when new show_me_the_cookies gem is available (6.0.0)'
         click_on 'Accept analytics cookies'
         expect(get_me_the_cookie('track_analytics')[:value]).to eq 'Yes'
         expect(page).not_to have_content('Cookies on Child development training')
       end
 
       it 'visitor can click to reject analytics cookies' do
+        pending 're-enable when new show_me_the_cookies gem is available (6.0.0)'
         click_on 'Reject analytics cookies'
         expect(get_me_the_cookie('track_analytics')[:value]).to eq 'No'
         expect(page).not_to have_content('Cookies on Child development training')
@@ -38,6 +40,7 @@ RSpec.describe 'Selecting cookie options' do
     end
 
     it 'visitor can change cookie choice to accept cookies' do
+      pending 're-enable when new show_me_the_cookies gem is available (6.0.0)'
       choose('Yes')
       click_on 'Save cookie settings'
 
@@ -52,6 +55,7 @@ RSpec.describe 'Selecting cookie options' do
     end
 
     it 'visitor can change cookie choice to reject cookies' do
+      pending 're-enable when new show_me_the_cookies gem is available (6.0.0)'
       choose('No')
       click_on 'Save cookie settings'
 
