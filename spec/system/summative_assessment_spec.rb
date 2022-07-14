@@ -22,10 +22,11 @@ RSpec.describe 'Summative assessment' do
     before do
       visit training_module_summative_assessment_path('alpha', '1-3-2-1')
       2.times do
-        choose '5'
+        check 'Correct answer 1'
+        check 'Correct answer 2'
         click_on 'Save and continue'
       end
-      choose '5'
+      choose 'Correct answer 1'
       click_on 'Finish test'
     end
 
@@ -38,7 +39,7 @@ RSpec.describe 'Summative assessment' do
     it 'is not able to retake the assessment' do
       visit training_module_summative_assessment_path('alpha', '1-3-2-1')
 
-      expect(page).to have_selector('.govuk-radios__input:disabled')
+      expect(page).to have_selector('.govuk-checkboxes__input:disabled')
     end
   end
 
@@ -47,10 +48,11 @@ RSpec.describe 'Summative assessment' do
     before do
       visit training_module_summative_assessment_path('alpha', '1-3-2-1')
       2.times do
-        choose '4'
+        check 'Wrong answer 1'
+        check 'Wrong answer 2'
         click_on 'Save and continue'
       end
-      choose '4'
+      choose 'Wrong answer 1'
       click_on 'Finish test'
     end
 
@@ -64,7 +66,7 @@ RSpec.describe 'Summative assessment' do
     it 'is able to retake the assessment' do
       visit training_module_summative_assessment_path('alpha', '1-3-2-1')
 
-      expect(page).to have_selector('.govuk-radios__input')
+      expect(page).to have_selector('.govuk-checkboxes__input')
     end
   end
 end

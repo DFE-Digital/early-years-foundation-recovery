@@ -21,7 +21,7 @@ RSpec.describe 'Formative assessment' do
     # Pass the formative assessment
     before do
       visit training_module_formative_assessment_path('alpha', '1-1-4')
-      choose 'Yes'
+      choose 'Correct answer 1'
       2.times { click_on 'Next' }
     end
 
@@ -42,7 +42,7 @@ RSpec.describe 'Formative assessment' do
     # Fail the formative assessment
     before do
       visit training_module_formative_assessment_path('alpha', '1-1-4')
-      choose 'No'
+      choose 'Wrong answer 1'
       2.times { click_on 'Next' }
     end
 
