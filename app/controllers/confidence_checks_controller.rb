@@ -17,7 +17,7 @@ class ConfidenceChecksController < ApplicationController
       link_to_next_module_item_from_controller(questionnaire.module_item)
       return
     else
-      flash[:alert] = 'Please select an answer'
+      flash[:error] = 'Please select an answer'
     end
 
     render :show, status: :unprocessable_entity and return
