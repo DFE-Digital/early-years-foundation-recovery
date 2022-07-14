@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.0'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '>= 7.0.2.4'
+gem 'rails', '>= 7.0.3.1'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
@@ -104,7 +104,7 @@ group :test do
   gem 'capybara'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
-  gem 'show_me_the_cookies'
+  gem 'show_me_the_cookies', git: 'https://github.com/nruth/show_me_the_cookies.git'
   gem 'simplecov'
 end
 
