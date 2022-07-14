@@ -28,6 +28,10 @@ class UserController < ApplicationController
     user
   end
 
+  def edit_setting_type
+    user
+  end
+
   def update_name
     if user.update(user_params)
       track('user_name_change', success: true)
@@ -79,6 +83,16 @@ class UserController < ApplicationController
     else
       track('ofsted_number_change', success: false)
       render :edit_ofsted_number, status: :unprocessable_entity
+    end
+  end
+
+  def update_setting_type
+    if user.update(user_params)
+      track('user_setting_type_change', success: true)
+      redirect_to user_path, notice: 'You have saved your details'
+    else
+      track('user_setting_type_change', success: false)
+      render :edit_postcode, status: :unprocessable_entity
     end
   end
 
