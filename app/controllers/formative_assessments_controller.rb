@@ -14,7 +14,7 @@ class FormativeAssessmentsController < ApplicationController
       save_answers
       flash[:alert] = nil
     else
-      flash[:alert] = 'Please select an answer'
+      flash[:error] = 'Please select an answer'
     end
 
     render :show, status: :unprocessable_entity

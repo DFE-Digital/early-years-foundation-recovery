@@ -38,7 +38,7 @@ html.govuk-template lang="en"
 
       main.govuk-main-wrapper#main-content role='main'
         - flash.each do |variant, message|
-          = govuk_notification_banner title_text: t("banners.#{variant}"), text: translate_markdown(message), success: %w[important notice].include?(variant)
+          = govuk_notification_banner title_text: t("banners.#{variant}"), text: translate_markdown(message), success: %w[important notice].include?(variant), classes: "govuk-notification-banner--#{variant}"
         = yield
 
     = govuk_footer classes: 'noprint' do |footer|

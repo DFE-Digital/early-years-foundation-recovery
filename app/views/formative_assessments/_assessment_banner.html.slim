@@ -1,4 +1,4 @@
-div class= "govuk-notification-banner #{questionnaire.valid? ? 'govuk-notification-banner--success' : 'govuk-notification-banner--error'}" role='alert' aria-labelledby='govuk-notification-banner-title' data-module='govuk-notification-banner'
+div class= "govuk-notification-banner #{questionnaire.valid? ? 'govuk-notification-banner--success' : 'govuk-notification-banner'}" role='alert' aria-labelledby='govuk-notification-banner-title' data-module='govuk-notification-banner'
   .govuk-notification-banner__header
     h2.govuk-notification-banner__title id= "govuk-notification-banner-title"
       = @questionnaire.valid? ? "That's right" : "That's not quite right"
