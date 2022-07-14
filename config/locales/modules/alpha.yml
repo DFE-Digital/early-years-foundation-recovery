@@ -124,16 +124,64 @@ en:
       1-2-1:
         heading: 1-2-1
         body: First page in second submodule
-      1-2-2:
-        heading: 1-2-2
+      1-2-1-1:
+        heading: 1-2-1-1
         body: |
           %Warning: people like stuff!%
-      1-2-3:
-        heading: 1-2-3
-        body: Penultimate page
-      1-2-4:
+      1-2-1-2:
+        heading: 1-2-1-2
+        body: Youtube page
+      1-2-2-3:
         heading: 1-2-4
         body: By viewing this page the training module is marked as complete
+
+      1-3:
+        heading: Summary and next steps
+        body: |
+          You have reached the end of this module's training content.
+
+          This next section of the module includes:
+
+          - a recap of what you have learned
+          - the end of module test
+          - an opportunity to reflect on your learning
+          - the chance to give us feedback about the module
+      
+      1-3-1:
+        heading: Recap
+        body: |
+          This page contains a recap of what you have learnt and also Further activities and Further reading links on the live module.
+      1-3-2:
+        heading: End of module test
+        body: |
+          This end of module test is here to revisit what you have learned and the impact on your practice. It is not aimed to provide a pass or fail.
+
+          ##Before you start
+
+          This test has 3 multiple choice questions.
+
+          You must answer all of the questions.
+
+          You can review your total score for the test at the end.
+
+          To receive a certificate of achievement for this module, you need to receive an overall score of at least 70%.
+
+          If you do not score 70%, you will be able to see which questions you got wrong. You can repeat the test to improve your score as many times as you want to.
+
+      1-3-3:
+        heading: Reflect on your learning
+        body: |
+          To help DfE to measure our impact, please answer the following questions. 
+
+          Answers will be anonymous, and we will not know what you individually select.
+
+          To what extent do you agree with the following statements:
+
+      1-3-3-4:
+        heading: Thank you
+        body: |
+          You can also <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxURFNMQkgwQk80N1lZWkRFMkE5N09DQVg0NCQlQCN0PWcu" target="blank">give feedback about the training (opens in new window)</a> 
+
     certificate:
       - the first thing you learned
       - the second thing you learned
