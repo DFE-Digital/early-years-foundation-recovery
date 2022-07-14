@@ -25,9 +25,9 @@ module-4:
         label: |
           At what age does the pre-linguistic stage usually occur? 
         assessment_summary:  |
-          The pre-linguistic stage occurs between 0 and 1 year old. This is where babies use pre-speech sounds such as babbling and cooing. 
+          The pre-linguistic stage occurs between birth and 1 year old. This is where babies use pre-speech sounds such as babbling and cooing. 
         assessment_fail_summary: |
-          The pre-linguistic stage occurs between 0 and 1 year old. This is where babies use pre-speech sounds such as babbling and cooing.  
+          The pre-linguistic stage occurs between birth and 1 year old. This is where babies use pre-speech sounds such as babbling and cooing.  
         answers:
           1: "0 to 1 year"
           2: "1 to 2 years"
@@ -198,10 +198,10 @@ module-4:
           Which of the following is a visual aid that can support children with English as an additional language?
  
         assessment_summary:  |
-          PECS, which is a picture exchange communication system. This is where you provide children with pictures to help them to express themselves and to understand the routine. This can reduce anxiety for children and minimise frustration when they are not able to communicate their needs. 
+          PECS is a picture exchange communication system. This is where you provide children with pictures to help them to express themselves and to understand the routine. This can reduce anxiety for children and minimise frustration when they are not able to communicate their needs. 
   
         assessment_fail_summary: |
-          PECS, which is a picture exchange communication system. This is where you provide children with pictures to help them to express themselves and to understand the routine. This can reduce anxiety for children and minimise frustration when they are not able to communicate their needs.  
+          PECS is a picture exchange communication system. This is where you provide children with pictures to help them to express themselves and to understand the routine. This can reduce anxiety for children and minimise frustration when they are not able to communicate their needs.  
         answers:
           1: "EYFS"
           2: "EAL"
@@ -248,7 +248,7 @@ module-4:
           1: "English as an additional language"
           2: "Special educational needs"
           3: "Speech, language and communication needs"
-          4: "Socioeconomic factors"
+          4: "Socio-economic factors"
         correct_answers:
           - "3"
   4-2-1-3b:
@@ -299,10 +299,10 @@ module-4:
           Which of the following can be a positive outcome of the pandemic lockdowns? 
  
         assessment_summary:  |
-          Children with older siblings may have experienced a more advanced vocabulary. They may also have had access to resources designed for older children. This means children will have experienced and rehearsed challenging vocabulary.  
+          Children with older siblings may have had access to resources designed for older children. They may also have experienced and rehearsed a more advanced vocabulary. 
   
         assessment_fail_summary: |
-          Children with older siblings may have experienced a more advanced vocabulary. They may also have had access to resources designed for older children. This means children will have experienced and rehearsed challenging vocabulary.  
+          Children with older siblings may have had access to resources designed for older children. They may also have experienced and rehearsed a more advanced vocabulary. 
         answers:
           1: "Limited outdoor space"
           2: "Having access to resources belonging to older siblings"
@@ -316,8 +316,7 @@ module-4:
       1_pandemic_negative:
         multi_select: false 
         label: |
-          Complete the statement: 
-          Increased __________ during the pandemic lockdowns may have had a negative impact on children’s language skills.
+          Which of these may have had a negative impact on children’s language skills during the pandemic lockdowns?
 
         assessment_summary:  |
           Children may have had increased access to technology including computers, TVs and phones. Whilst this means that children will have heard vocabulary, it is not as effective as the interactions that take place between people.  
@@ -361,10 +360,10 @@ module-4:
           Which of the following describes the self talk strategy?
 
         assessment_summary:  |
-          Self talk is where you add commentary to your actions such as ‘I am putting the books away in the bookcase, can you see all the books?’ or ‘I am washing my hands, so that they are clean. The soap is pink.’ This can sometimes make you feel silly, but it is extremely beneficial to children.  
+          Self talk is where you add commentary to your actions such as "I am putting the books away in the bookcase, can you see all the books?" or "I am washing my hands, so that they are clean. The soap is pink." This can sometimes make you feel silly, but it is extremely beneficial to children.  
   
         assessment_fail_summary: |
-          Self talk is where you add commentary to your actions such as ‘I am putting the books away in the bookcase, can you see all the books?’ or ‘I am washing my hands, so that they are clean. The soap is pink.’ This can sometimes make you feel silly, but it is extremely beneficial to children.  
+          Self talk is where you add commentary to your actions such as "I am putting the books away in the bookcase, can you see all the books?" or "I am washing my hands, so that they are clean. The soap is pink." This can sometimes make you feel silly, but it is extremely beneficial to children.  
         answers:
           1: "Making eye contact"
           2: "Adding gestures and facial expressions when you talk"
@@ -381,15 +380,15 @@ module-4:
         label: |
           Which of the following are benefits of creative and imaginative activities? (Select all that apply) 
         assessment_summary: |
-          Creative and imaginative activities often result in more spontaneous conversation. It can help children to discuss personal information such as their families or their interests. When you carry out these activities with children individually you can also create an opportunity for children to talk about their feelings on a one to one basis.
+          Creative and imaginative activities often result in more spontaneous conversation. It can help children to discuss personal information such as their families or their interests. When you carry out these activities with children individually you can also create an opportunity for children to talk about their feelings on a 1 to 1 basis.
         
         assessment_fail_summary: |
-          Creative and imaginative activities often result in more spontaneous conversation. It can help children to discuss personal information such as their families or their interests. When you carry out these activities with children individually you can also create an opportunity for children to talk about their feelings on a one to one basis.
+          Creative and imaginative activities often result in more spontaneous conversation. It can help children to discuss personal information such as their families or their interests. When you carry out these activities with children individually you can also create an opportunity for children to talk about their feelings on a 1 to 1 basis.
         answers:
           1: "Increased opportunities for spontaneous conversation"
           2: "Helping children to discuss personal information"                    
           3: "Teaching children to take turns when talking"
-          4: "Supporting children to understand and express their feelings on a one to one basis"
+          4: "Supporting children to understand and express their feelings on a 1 to 1 basis"
         correct_answers: ["1","2","3","4"]
   
   4-3-2-2b:
@@ -419,7 +418,7 @@ module-4:
       1_child_led:
         multi_select: false 
         label: |
-          Complete the statement: Improving parents’ and carers’ understanding of __________ will make them more likely to adopt shared strategies to support their child’s language development.
+          Improving parents’ and carers’ understanding of which of these will make them more likely to adopt shared strategies to support their child’s language development.
 
         assessment_summary:  |
           Improving parents' and carers' understanding of a language rich approach will help them copy this at home. This will provide a consistent approach to language development for all children.   
