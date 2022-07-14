@@ -18,6 +18,7 @@ services:
       - RAILS_LOG_TO_STDOUT
       - GOVUK_APP_DOMAIN
       - GOVUK_WEBSITE_ROOT
+      - GROVER_NO_SANDBOX=true
     depends_on:
       - db
     ports:
