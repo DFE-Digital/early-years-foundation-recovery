@@ -31,6 +31,12 @@ RSpec.shared_context 'with progress' do
     view_pages_before(mod, 'formative_assessment')
   end
 
+  # Visit every page before the first confidence check
+  #
+  def view_pages_before_confidence_check(mod)
+    view_pages_before(mod, 'confidence_check')
+  end
+
   # @return [true] create a fake event log item
   def view_module_page_event(module_name, page_name)
     tracker.track('page_view', {
