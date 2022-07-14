@@ -36,8 +36,9 @@ RUN bundle install --no-binstubs --retry=10 --jobs=4
 # ------------------------------------------------------------------------------
 FROM base AS app
 
-RUN apk add --no-cache --no-progress postgresql-dev yarn
+RUN apk add --no-cache --no-progress postgresql-dev yarn chromium-browser
 
+ENV GROVER_NO_SANDBOX true
 ENV APP_HOME /srv
 ENV RAILS_ENV ${RAILS_ENV:-production}
 

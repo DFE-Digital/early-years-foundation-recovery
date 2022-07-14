@@ -29,5 +29,6 @@ h3 Certified by the Department for Education
 
 span.noprint
   = print_button
+  = link_to 'Download', training_module_certificate_path(@training_module, format: :pdf), class: 'govuk-link'
 
   hr class='govuk-section-break govuk-section-break--l govuk-section-break--visible govuk-!-margin-top-4'

@@ -12,6 +12,7 @@
     "@hotwired/turbo-rails": "^7.1.0",
     "esbuild": "^0.14.36",
     "govuk-frontend": "^4.0.1",
+    "puppeteer": "^15.3.0",
     "sass": "^1.50.1"
   }
 }
