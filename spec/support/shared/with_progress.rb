@@ -17,7 +17,7 @@ RSpec.shared_context 'with progress' do
   #
   def start_module(mod)
     view_pages_before(mod, 'module_intro')
-  end  
+  end
 
   # Visit every page before the first summative assessment
   #
