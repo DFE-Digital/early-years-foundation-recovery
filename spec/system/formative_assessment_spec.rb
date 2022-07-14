@@ -9,8 +9,8 @@ RSpec.describe 'Formative assessment' do
 
   include_context 'with user'
 
-  context 'when a user has visited each module up to and including a formative assessment' do
-    it 'can click to resume training to visit the formative assessment page' do
+  context 'when a user has visited each page up to and including a formative assessment' do
+    it 'call to action resumes the assessment at the furthest visited page' do
       visit training_module_path('alpha')
       click_on 'Resume training'
       expect(page).to have_current_path training_module_formative_assessment_path('alpha', '1-1-4'), ignore_query: true

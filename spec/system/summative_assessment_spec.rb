@@ -29,7 +29,7 @@ RSpec.describe 'Summative assessment' do
       click_on 'Finish test'
     end
 
-    it 'can navigate to confidence check' do
+    it 'can navigate to confidence check from module overview page' do
       visit training_module_path('alpha')
 
       expect(page).to have_link('Reflect on your learning')
@@ -54,7 +54,7 @@ RSpec.describe 'Summative assessment' do
       click_on 'Finish test'
     end
 
-    it 'cannot navigate to confidence check' do
+    it 'cannot navigate to confidence check from module overview page' do
       visit training_module_path('alpha')
 
       expect(page).to have_content('Reflect on your learning')

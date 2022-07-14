@@ -19,13 +19,13 @@ RSpec.shared_context 'with progress' do
     view_pages_before(mod, 'intro')
   end
 
-  # Visit every page before the summative assessment
+  # Visit every page before the first summative assessment
   #
   def view_pages_before_summative_assessment(mod)
     view_pages_before(mod, 'summative_assessment')
   end
 
-  # Visit every page before the formative assessment
+  # Visit every page before the first formative assessment
   #
   def view_pages_before_formative_assessment(mod)
     view_pages_before(mod, 'formative_assessment')
@@ -43,7 +43,7 @@ RSpec.shared_context 'with progress' do
 
 private
 
-  # Visit every page before the given module
+  # Visit every page before the given page type
   #
   def view_pages_before(mod, type)
     mod.module_items.map do |item|
