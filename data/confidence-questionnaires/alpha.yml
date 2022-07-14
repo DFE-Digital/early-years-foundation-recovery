@@ -4,7 +4,7 @@ alpha:
       alpha_confidence_question_one:
         multi_select: true
         label: Question One Select from following
-        assessment_summary: You got selected the correct answer's
+        assessment_summary: You selected the correct answer's
         assessment_fail_summary: Unfortunatly you have got this one wrong
         answers:
           1: Correct answer 1
@@ -18,7 +18,7 @@ alpha:
       alpha_confidence_question_two:
         multi_select: true
         label: Question Two Select from following
-        assessment_summary: You got selected the correct answer's
+        assessment_summary: You selected the correct answer's
         assessment_fail_summary: Unfortunatly you have got this one wrong
         answers:
           1: Correct answer 1
@@ -32,7 +32,7 @@ alpha:
       alpha_confidence_question_three:
         multi_select: false
         label: Question Three Select from following
-        assessment_summary: You got selected the correct answer's
+        assessment_summary: You selected the correct answer
         assessment_fail_summary: Unfortunatly you have got this one wrong
         answers:
           1: Correct answer 1
