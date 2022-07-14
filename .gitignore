@@ -66,4 +66,3 @@ localhost.key
 spec/examples.txt
 
 .vscode/settings.json
-.env.test
