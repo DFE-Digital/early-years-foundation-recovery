@@ -16,19 +16,25 @@ RSpec.shared_context 'with progress' do
   # Visit the module intro page
   #
   def start_module(mod)
-    view_pages_before(mod, 'intro')
+    view_pages_before(mod, 'module_intro')
   end
 
-  # Visit every page before the summative assessment
+  # Visit every page before the first summative assessment
   #
   def view_pages_before_summative_assessment(mod)
     view_pages_before(mod, 'summative_assessment')
   end
 
-  # Visit every page before the formative assessment
+  # Visit every page before the first formative assessment
   #
   def view_pages_before_formative_assessment(mod)
     view_pages_before(mod, 'formative_assessment')
+  end
+
+  # Visit every page before the first confidence check
+  #
+  def view_pages_before_confidence_check(mod)
+    view_pages_before(mod, 'confidence_check')
   end
 
   # @return [true] create a fake event log item
@@ -43,7 +49,7 @@ RSpec.shared_context 'with progress' do
 
 private
 
-  # Visit every page before the given module
+  # Visit every page before the given page type
   #
   def view_pages_before(mod, type)
     mod.module_items.map do |item|
