@@ -1,4 +1,5 @@
-= f.govuk_radio_buttons_fieldset question.name, legend: { text: question.label, size: "m" } do
+= f.govuk_radio_buttons_fieldset question.name, legend: { text: translate_markdown(question.label), hidden: question.legend_hidden? } do
+  = translate_markdown(question.body)
   - question.answers.each do |option|
     - checked = answers_checkbox(question.questionnaire.user_answers, option[0])
     - disabled = disable_checkbox(@questionnaire)
