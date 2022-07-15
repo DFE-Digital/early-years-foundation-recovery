@@ -86,6 +86,12 @@ RSpec.describe 'When a user visits the module overview page' do
       end
     end
 
+    it 'first content page tag says that the module has not been started yet' do
+      within '#section-content-1 .govuk-list:first-child' do
+        expect(page).to have_content('not started')
+      end
+    end
+
     it 'can click on the call to action button to continue the module' do
       click_link('Resume training')
 
@@ -93,7 +99,7 @@ RSpec.describe 'When a user visits the module overview page' do
     end
   end
 
-  context 'when the user has started the first submodule' do
+  context 'when the user has viewed the first submodule page' do
     before do
       start_submodule(alpha)
       visit '/modules/alpha'
@@ -105,7 +111,7 @@ RSpec.describe 'When a user visits the module overview page' do
       end
     end
 
-    it 'can click on first topic link from the module overview page' do
+    it 'can click on first topic link' do
       within '#section-content-1' do
         click_link('1-1-1')
 
@@ -113,10 +119,39 @@ RSpec.describe 'When a user visits the module overview page' do
       end
     end
 
+    # flaky test - seems to depend on the order
     it 'can click on the call to action button to continue the module' do
       click_link('Resume training')
 
-      expect(page).to have_current_path('/modules/alpha/content-pages/1-1')
+      expect(page).to have_current_path('/modules/alpha/content-pages/1-1-1')
+    end
+  end
+
+  context 'when the user has viewed the first content page' do
+    before do
+      view_first_content_page(alpha)
+      visit '/modules/alpha'
+    end
+
+    it 'submodule tag says that the module has been started' do
+      within '#section-button-1' do
+        expect(page).to have_content('in progress')
+      end
+    end
+
+    it 'can click on second topic link' do
+      within '#section-content-1' do
+        click_link('1-1-2')
+
+        expect(page).to have_current_path('/modules/alpha/content-pages/1-1-2')
+      end
+    end
+
+    # flaky test - seems to depend on the order
+    it 'can click on the call to action button to continue the module' do
+      click_link('Resume training')
+
+      expect(page).to have_current_path('/modules/alpha/content-pages/1-1-2')
     end
   end
 end
