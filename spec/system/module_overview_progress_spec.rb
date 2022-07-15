@@ -4,23 +4,25 @@ RSpec.describe 'When a user visits the module overview page' do
   include_context 'with progress'
   include_context 'with user'
   
-  before do
-    visit '/modules/alpha'
-  end
-
+  
   context 'when the user has not begun the module' do
-    it 'submodule tag says that the module has not been started yet' do
+    before do
+      visit '/modules/alpha'
+    end
+
+    it 'first submodule has not been started yet' do
       within '#section-button-1' do
         expect(page).to have_content('not started')
       end
-    end
 
-    it 'first topic text is visible but is not a link' do
       within '#section-content-1' do
         expect(page).to have_content('1-1-1')
           .and have_content('not started')
         expect(page).not_to have_link('1-1-1')
       end
+
+      click_on('Start')
+      expect(page).to have_current_path('/modules/alpha/content-pages/before-you-start')
     end
   end
   
@@ -30,29 +32,18 @@ RSpec.describe 'When a user visits the module overview page' do
       visit '/modules/alpha'
     end
 
-    it 'submodule tag says that the module has not been started yet' do
+    it 'first submodule has not been started yet' do
       within '#section-button-1' do
         expect(page).to have_content('not started')
       end
-    end
-
-    it 'first topic text is visible but is not a link' do
-      within '#section-content-1' do
+    
+      within '#section-content-1 .govuk-list li:first-child' do
         expect(page).to have_content('1-1-1')
           .and have_content('not started')
         expect(page).not_to have_link('1-1-1')
       end
-    end
 
-    it 'first content page tag says that the module has not been started yet' do
-      within '#section-content-1 .govuk-list:first-child' do
-        expect(page).to have_content('not started')
-      end
-    end
-
-    it 'can click on the call to action button to continue the module' do
-      click_link('Resume training')
-
+      click_on('Resume training')
       expect(page).to have_current_path('/modules/alpha/content-pages/intro')
     end
   end
@@ -63,53 +54,43 @@ RSpec.describe 'When a user visits the module overview page' do
       visit '/modules/alpha'
     end
 
-    it 'submodule tag says that the module has been started' do
+    it 'submodule has been started' do
       within '#section-button-1' do
         expect(page).to have_content('in progress')
       end
-    end
-
-    it 'can click on first topic link' do
-      within '#section-content-1' do
-        click_link('1-1-1')
-
+    
+      within '#section-content-1 .govuk-list li:first-child' do
+        expect(page).to have_content('not started')
+        click_on('1-1-1')
         expect(page).to have_current_path('/modules/alpha/content-pages/1-1-1')
       end
-    end
 
-    # flaky test - seems to depend on the order
-    it 'can click on the call to action button to continue the module' do
-      click_link('Resume training')
-
-      expect(page).to have_current_path('/modules/alpha/content-pages/1-1-1')
+      # flaky test - seems to depend on the order
+      click_on('Resume training')
+      expect(page).to have_current_path('/modules/alpha/content-pages/1-1')
     end
   end
 
-  context 'when the user has viewed the first content page' do
+  context 'when the user has viewed the first topic' do
     before do
-      view_first_content_page(alpha)
+      start_topic(alpha)
       visit '/modules/alpha'
     end
 
-    it 'submodule tag says that the module has been started' do
+    it 'first topic has been started' do
       within '#section-button-1' do
         expect(page).to have_content('in progress')
       end
-    end
-
-    it 'can click on second topic link' do
-      within '#section-content-1' do
-        click_link('1-1-2')
-
+    
+      within '#section-content-1 .govuk-list li:first-child' do
+        expect(page).to have_content('in progress')
+        click_on('1-1-2')
         expect(page).to have_current_path('/modules/alpha/content-pages/1-1-2')
       end
-    end
 
-    # flaky test - seems to depend on the order
-    it 'can click on the call to action button to continue the module' do
-      click_link('Resume training')
-
-      expect(page).to have_current_path('/modules/alpha/content-pages/1-1-2')
+      # flaky test - seems to depend on the order
+      click_on('Resume training')
+      expect(page).to have_current_path('/modules/alpha/content-pages/1-1-1')
     end
   end
 
@@ -119,25 +100,18 @@ RSpec.describe 'When a user visits the module overview page' do
       visit '/modules/alpha'
     end
 
-    it 'submodule tag says that the module has been started' do
+    it 'first submodule is complete' do
       within '#section-button-1' do
-        expect(page).to have_content('completed')
+        expect(page).to have_content('complete')
       end
-    end
-
-    it 'can click on second topic link' do
-      within '#section-content-2' do
-        click_link('1-2-1')
-
-        expect(page).to have_current_path('/modules/alpha/content-pages/1-2-1')
+    
+      within '#section-content-1 .govuk-list li:first-child' do
+        expect(page).to have_content('complete')
       end
-    end
 
-    # flaky test - seems to depend on the order
-    it 'can click on the call to action button to continue the module' do
-      click_link('Resume training')
-
-      expect(page).to have_current_path('/modules/alpha/content-pages/1-2-1')
+      # flaky test - seems to depend on the order
+      click_on('Resume training')
+      expect(page).to have_current_path('/modules/alpha/content-pages/1-2')
     end
   end
 end
