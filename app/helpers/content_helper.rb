@@ -19,4 +19,12 @@ module ContentHelper
     classes = ['gem-c-print-link', 'print-button'] + additional_classes
     content_tag :div, button, class: classes
   end
+
+  def page_number(current:, total:)
+    return if current.blank?
+
+    content_tag :span, class: 'govuk-caption-l' do
+      t('page_number', current: current, total: total)
+    end
+  end
 end
