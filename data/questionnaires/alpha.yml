@@ -16,10 +16,17 @@ alpha:
         assessment_summary: You selected the correct answer
         assessment_fail_summary: Unfortunatly you have got this one wrong
         answers:
+<<<<<<< HEAD
           1: Correct answer 1
           2: Wrong answer 1
         correct_answers: 
           - '1'
+=======
+          'yes': 'Yes'
+          'no': 'No'
+        correct_answers: 
+          - 'yes'
+>>>>>>> 7537ce5 (updated training modules)
   1-2-1-1:
     questions:
       alpha_question_two:
@@ -31,11 +38,19 @@ alpha:
         assessment_summary: You selected the correct answer's
         assessment_fail_summary: Unfortunatly you have got this one wrong
         answers:
+<<<<<<< HEAD
           1: Correct answer 1
           2: Wrong answer 1
           3: Correct answer 2
         correct_answers: 
           - ['1', '3']
+=======
+          stuffy_people: Stuffy people
+          everybody: Everybody
+          nobody: Nobody
+          stuffers: People who do the stuffing
+        correct_answers: ['stuffy_people','stuffers']
+>>>>>>> 7537ce5 (updated training modules)
   1-2-1-3:
     questions:
       alpha_question_three:
