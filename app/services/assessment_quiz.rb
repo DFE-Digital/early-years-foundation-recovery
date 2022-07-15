@@ -22,7 +22,7 @@ class AssessmentQuiz
   end
 
   def calculate_status
-    percentage_of_assessment_answers_correct >= @training_module.summative_assessment_precentage_pass_threshold ? 'passed' : 'failed'
+    percentage_of_assessment_answers_correct >= @training_module.summative_threshold ? 'passed' : 'failed'
   rescue StandardError
     'not started'
   end
