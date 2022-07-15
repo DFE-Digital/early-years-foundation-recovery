@@ -78,7 +78,6 @@ RSpec.describe 'Summative assessment' do
   end
 
   context 'when a user has failed the summative assessment' do
-    # Fail the summative assessment
     before do
       visit '/modules/alpha/summative-assessments/1-3-2-1'
       3.times do
