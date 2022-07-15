@@ -18,7 +18,6 @@ RSpec.describe 'Summative assessment' do
   end
 
   context 'when a user has passed the summative assessment with a score of 100%' do
-    # Pass the summative assessment with score of 100%
     before do
       visit '/modules/alpha/summative-assessments/1-3-2-1'
       3.times do
@@ -53,7 +52,6 @@ RSpec.describe 'Summative assessment' do
   end
 
   context 'when a user has passed the summative assessment with a score of 75%' do
-    # Pass the summative assessment with score of 75%
     before do
       visit '/modules/alpha/summative-assessments/1-3-2-1'
       2.times do
