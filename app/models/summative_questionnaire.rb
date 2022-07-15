@@ -4,12 +4,13 @@ class SummativeQuestionnaire < YamlBase
   set_folder 'summative-questionnaires'
   def self.load_file
     data = raw_data.map do |training_module, questionnaires|
-      questionnaires.map do |name, field|
+      questionnaires.each_with_index.map do |(name, field), index|
         field['assessments_type'] = 'summative_assessment'
-        # field['id'] = 6.times.map { rand(0..9) }.join # make the id loger duplicated by other questions models
         field['name'] = name
         field['training_module'] = training_module
         field['questions'].deep_symbolize_keys!
+        field['page_number'] = index + 1
+        field['total_questions'] = questionnaires.count
         field
       end
     end

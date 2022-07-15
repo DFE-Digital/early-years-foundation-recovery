@@ -5,7 +5,14 @@ alpha:
     questions:
       alpha_question_one:
         multi_select: false
-        label: Question One Select from following
+        body: |
+          Question One Select from following
+
+          Describe with a list 
+            - one
+            - two
+            - three
+            - four
         assessment_summary: You selected the correct answer
         assessment_fail_summary: Unfortunatly you have got this one wrong
         answers:
@@ -17,7 +24,10 @@ alpha:
     questions:
       alpha_question_two:
         multi_select: true
-        label: Question Two Select from following
+        body: |
+          Question Two Select from following
+
+          **this is really important**
         assessment_summary: You selected the correct answer's
         assessment_fail_summary: Unfortunatly you have got this one wrong
         answers:
@@ -30,7 +40,8 @@ alpha:
     questions:
       alpha_question_three:
         multi_select: true
-        label: Question Three Select from following
+        body: |
+          Question Three Select from following
         assessment_summary: You selected the correct answer's
         assessment_fail_summary: Unfortunatly you have got this one wrong
         answers:

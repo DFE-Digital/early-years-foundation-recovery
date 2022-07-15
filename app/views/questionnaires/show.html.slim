@@ -1,7 +1,6 @@
 = render 'debug'
 
-h1
-  = @questionnaire.heading
+= govuk_heading(@questionnaire.heading)
 
 .gem-c-govspeak
   = translate_markdown(@questionnaire.body)

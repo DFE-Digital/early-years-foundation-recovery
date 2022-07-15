@@ -1,5 +1,5 @@
 .govuk-inset-text
   p = t('assessments_results.you_answered', users_answers: incorrect_answers_checkbox(question[:answers], answer))
   = question[:answers][answer[0].to_s]
-  = question.assessment_fail_summary
+  = translate_markdown(question.assessment_fail_summary)
 

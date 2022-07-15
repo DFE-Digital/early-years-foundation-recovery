@@ -4,9 +4,8 @@ div class= "govuk-notification-banner #{'govuk-notification-banner--success' if 
       = @questionnaire.valid? ? "That's right" : "That's not quite right"
 
   .govuk-notification-banner__content
-    h3.govuk-notification-banner__heading
+    p.govuk-body
       - if questionnaire.errors.has_key?(question.name.to_s)
         = questionnaire.questions.dig(question.name.to_sym, :assessment_fail_summary) || questionnaire.questions.dig(question.name.to_sym, :assessment_summary)
       - else
         = questionnaire.questions.dig(question.name.to_sym, :assessment_summary)
-

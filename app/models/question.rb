@@ -7,6 +7,10 @@ class Question < OpenStruct
     Question.new(question.merge(questionnaire: questionnaire, name: name))
   end
 
+  def legend_hidden?
+    label.nil?
+  end
+
   def to_partial_path
     !!multi_select ? 'shared/question_check_boxes' : 'shared/question_radio_buttons'
   end
