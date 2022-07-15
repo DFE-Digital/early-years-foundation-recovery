@@ -21,8 +21,7 @@ RSpec.describe 'When a user visits the module overview page' do
         expect(page).not_to have_link('1-1-1')
       end
 
-      click_on('Start')
-      expect(page).to have_current_path('/modules/alpha/content-pages/before-you-start')
+      expect(page).to have_link('Start', href: '/modules/alpha/content-pages/before-you-start')
     end
   end
   
@@ -43,8 +42,7 @@ RSpec.describe 'When a user visits the module overview page' do
         expect(page).not_to have_link('1-1-1')
       end
 
-      click_on('Resume training')
-      expect(page).to have_current_path('/modules/alpha/content-pages/intro')
+      expect(page).to have_link('Resume training', href: '/modules/alpha/content-pages/intro')
     end
   end
 
@@ -61,13 +59,10 @@ RSpec.describe 'When a user visits the module overview page' do
     
       within '#section-content-1 .govuk-list li:first-child' do
         expect(page).to have_content('not started')
-        click_on('1-1-1')
-        expect(page).to have_current_path('/modules/alpha/content-pages/1-1-1')
+          .and have_link('1-1-1', href:  '/modules/alpha/content-pages/1-1-1')
       end
 
-      # flaky test - seems to depend on the order
-      click_on('Resume training')
-      expect(page).to have_current_path('/modules/alpha/content-pages/1-1')
+      expect(page).to have_link('Resume training', href: '/modules/alpha/content-pages/1-1')
     end
   end
 
@@ -77,26 +72,27 @@ RSpec.describe 'When a user visits the module overview page' do
       visit '/modules/alpha'
     end
 
-    it 'first topic has been started' do
+    it 'first topic has been completed' do
       within '#section-button-1' do
         expect(page).to have_content('in progress')
       end
     
       within '#section-content-1 .govuk-list li:first-child' do
-        expect(page).to have_content('in progress')
-        click_on('1-1-2')
-        expect(page).to have_current_path('/modules/alpha/content-pages/1-1-2')
+        expect(page).to have_content('complete')
+      end
+      
+      within '#section-content-1 .govuk-list li:nth-child(2)' do
+        expect(page).to have_content('not started')
+          .and have_link('1-1-2', href:  '/modules/alpha/content-pages/1-1-2')
       end
 
-      # flaky test - seems to depend on the order
-      click_on('Resume training')
-      expect(page).to have_current_path('/modules/alpha/content-pages/1-1-1')
+      expect(page).to have_link('Resume training', href: '/modules/alpha/content-pages/1-1-1')
     end
   end
 
   context 'when the user has finished the first submodule' do
     before do
-      start_second_submodule(alpha)
+      view_pages_before_formative_assessment(alpha)
       visit '/modules/alpha'
     end
 
@@ -105,13 +101,11 @@ RSpec.describe 'When a user visits the module overview page' do
         expect(page).to have_content('complete')
       end
     
-      within '#section-content-1 .govuk-list li:first-child' do
-        expect(page).to have_content('complete')
+      within '#section-content-1 .govuk-list' do
+        expect(page).to have_content('complete', count: 4)
       end
 
-      # flaky test - seems to depend on the order
-      click_on('Resume training')
-      expect(page).to have_current_path('/modules/alpha/content-pages/1-2')
+      expect(page).to have_link('Resume training', href: '/modules/alpha/content-pages/1-1-4')
     end
   end
 end
