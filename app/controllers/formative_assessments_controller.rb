@@ -12,7 +12,7 @@ class FormativeAssessmentsController < ApplicationController
     if validate_param_empty
       populate_questionnaire(questionnaire_params)
       save_answers
-      flash[:alert] = nil
+      flash[:error] = nil
     else
       flash[:error] = 'Please select an answer'
     end

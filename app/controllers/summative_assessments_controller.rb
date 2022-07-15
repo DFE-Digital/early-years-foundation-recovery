@@ -13,7 +13,7 @@ class SummativeAssessmentsController < ApplicationController
     if validate_param_empty
       populate_questionnaire(questionnaire_params)
       save_answers
-      flash[:alert] = nil
+      flash[:error] = nil
       link_to_next_module_item_from_controller(questionnaire.module_item)
       return
     else
