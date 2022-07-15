@@ -30,6 +30,10 @@ RSpec.describe 'Summative assessment' do
       click_on 'Finish test'
     end
 
+    it 'displays the correct score' do
+      expect(page).to have_content 'You scored 100%'
+    end
+
     it 'can navigate to confidence check from module overview page' do
       visit '/modules/alpha'
 
@@ -54,6 +58,10 @@ RSpec.describe 'Summative assessment' do
       end
       choose 'Wrong answer 1'
       click_on 'Finish test'
+    end
+
+    it 'displays the correct score' do
+      expect(page).to have_content 'You scored 0%'
     end
 
     it 'cannot navigate to confidence check from module overview page' do
