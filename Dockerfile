@@ -36,8 +36,9 @@ RUN bundle install --no-binstubs --retry=10 --jobs=4
 # ------------------------------------------------------------------------------
 FROM base AS app
 
-RUN apk add --no-cache --no-progress postgresql-dev yarn
+RUN apk add --no-cache --no-progress postgresql-dev yarn chromium-chromedriver
 
+ENV GROVER_NO_SANDBOX true
 ENV APP_HOME /srv
 ENV RAILS_ENV ${RAILS_ENV:-production}
 
@@ -111,9 +112,6 @@ CMD ["bundle", "exec", "rspec"]
 # Test UI Stage (additional non-Ruby dependencies, containerised version of local dev experience)
 # ------------------------------------------------------------------------------
 FROM app as ui
-
-RUN apk add --no-cache --no-progress \
-        chromium-chromedriver
 
 RUN bundle config unset without
 RUN bundle config set without development

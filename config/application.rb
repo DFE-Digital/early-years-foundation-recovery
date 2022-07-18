@@ -6,6 +6,8 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+require 'grover'
+
 module EarlyYearsFoundationRecovery
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -26,5 +28,6 @@ module EarlyYearsFoundationRecovery
     config.feedback_url = ENV.fetch('FEEDBACK_URL', '#FEEDBACK_URL_env_var_missing')
     config.user_timeout_minutes = ENV.fetch('TIMEOUT_MINUTES', '15').to_i
     config.unlock_in_minutes = ENV.fetch('UNLOCK_IN_MINUTES', '120').to_i
+    config.middleware.use Grover::Middleware
   end
 end

@@ -10,6 +10,7 @@ defaults: &defaults
   DATABASE_URL: postgres://postgres@localhost:5432/db
   FEEDBACK_URL: https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxUMk01Qlc1R0dKRUQ0WEpPUUFYVzdWRllXUCQlQCN0PWcu
   GOVUK_APP_DOMAIN: london.cloudapps.digital
+  GROVER_NO_SANDBOX: true
 
 # ey-recovery
 production:

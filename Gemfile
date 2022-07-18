@@ -67,6 +67,9 @@ gem 'dibber'
 # Track users
 gem 'ahoy_matey', '~> 4.0'
 
+# PDF generator middleware
+gem 'grover', '~> 1.1'
+
 group :development, :test do
   # Use fake data for specs
   gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
