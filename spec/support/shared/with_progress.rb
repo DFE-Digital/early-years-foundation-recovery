@@ -24,7 +24,7 @@ RSpec.shared_context 'with progress' do
   def start_submodule(mod)
     view_pages_before(mod, 'sub_module_intro')
   end
-  
+
   # Visit the first topic page in first submodule
   #
   def start_topic(mod)
@@ -69,11 +69,11 @@ private
 
   # Visit every page before the given instance of the given page type
   #
-  def view_pages_before(mod, type, instances=1)
+  def view_pages_before(mod, type, instances = 1)
     i = 0
     mod.module_items.map do |item|
       view_module_page_event(mod.name, item.name)
-      i+=1 if item.type == type
+      i += 1 if item.type == type
       break if i == instances
     end
   end

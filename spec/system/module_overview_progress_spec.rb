@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'When a user visits the module overview page' do
   include_context 'with progress'
   include_context 'with user'
-  
+
   context 'when the user has not begun the module' do
     before do
       visit '/modules/alpha'
@@ -23,7 +23,7 @@ RSpec.describe 'When a user visits the module overview page' do
       expect(page).to have_link('Start', href: '/modules/alpha/content-pages/before-you-start')
     end
   end
-  
+
   context 'when the user has viewed the interruption page and module intro' do
     before do
       start_module(alpha)
@@ -34,7 +34,7 @@ RSpec.describe 'When a user visits the module overview page' do
       within '#section-button-1' do
         expect(page).to have_content('not started')
       end
-    
+
       within '#section-content-1 .govuk-list li:first-child' do
         expect(page).to have_content('1-1-1')
           .and have_content('not started')
@@ -55,7 +55,7 @@ RSpec.describe 'When a user visits the module overview page' do
       within '#section-button-1' do
         expect(page).to have_content('in progress')
       end
-    
+
       within '#section-content-1 .govuk-list li:first-child' do
         expect(page).to have_content('not started')
           .and have_link('1-1-1', href:  '/modules/alpha/content-pages/1-1-1')
@@ -75,11 +75,11 @@ RSpec.describe 'When a user visits the module overview page' do
       within '#section-button-1' do
         expect(page).to have_content('in progress')
       end
-    
+
       within '#section-content-1 .govuk-list li:first-child' do
         expect(page).to have_content('complete')
       end
-      
+
       within '#section-content-1 .govuk-list li:nth-child(2)' do
         expect(page).to have_content('not started')
           .and have_link('1-1-2', href:  '/modules/alpha/content-pages/1-1-2')
@@ -99,7 +99,7 @@ RSpec.describe 'When a user visits the module overview page' do
       within '#section-button-1' do
         expect(page).to have_content('complete')
       end
-    
+
       within '#section-content-1 .govuk-list' do
         expect(page).to have_content('complete', count: 4)
       end
@@ -123,7 +123,7 @@ RSpec.describe 'When a user visits the module overview page' do
     end
 
     it 'button shows option to retake test' do
-      expect(page).to have_content("Retake test")
+      expect(page).to have_content('Retake test')
     end
   end
 end

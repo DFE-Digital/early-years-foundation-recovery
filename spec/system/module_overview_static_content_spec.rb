@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'When a user visits the module overview page' do
   include_context 'with progress'
   include_context 'with user'
-  
+
   before do
     visit '/modules/alpha'
   end
