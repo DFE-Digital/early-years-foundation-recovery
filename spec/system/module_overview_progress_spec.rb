@@ -4,14 +4,13 @@ RSpec.describe 'When a user visits the module overview page' do
   include_context 'with progress'
   include_context 'with user'
   
-  
   context 'when the user has not begun the module' do
     before do
       visit '/modules/alpha'
     end
 
     it 'first submodule has not been started yet' do
-      within '#section-button-1' do
+      within '#section-content-1 .govuk-list li:first-child' do
         expect(page).to have_content('not started')
       end
 
@@ -66,7 +65,7 @@ RSpec.describe 'When a user visits the module overview page' do
     end
   end
 
-  context 'when the user has viewed the first topic' do
+  context 'when the user has viewed the first topic page' do
     before do
       start_topic(alpha)
       visit '/modules/alpha'
@@ -106,6 +105,25 @@ RSpec.describe 'When a user visits the module overview page' do
       end
 
       expect(page).to have_link('Resume training', href: '/modules/alpha/content-pages/1-1-4')
+    end
+  end
+
+  context 'when the user has failed a summative assessment' do
+    before do
+      view_pages_before_summative_assessment(alpha)
+      visit '/modules/alpha/summative-assessments/1-3-2-1'
+      3.times do
+        check 'Wrong answer 1'
+        check 'Wrong answer 2'
+        click_on 'Save and continue'
+      end
+      choose 'Wrong answer 1'
+      click_on 'Finish test'
+      visit '/modules/alpha'
+    end
+
+    it 'button shows option to retake test' do
+      expect(page).to have_content("Retake test")
     end
   end
 end
