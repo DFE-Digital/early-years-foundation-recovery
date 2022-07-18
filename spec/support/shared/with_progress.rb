@@ -69,12 +69,12 @@ private
 
   # Visit every page before the given instance of the given page type
   #
-  def view_pages_before(mod, type, instances = 1)
-    i = 0
+  def view_pages_before(mod, type, count = 1)
+    counter = 0
     mod.module_items.map do |item|
       view_module_page_event(mod.name, item.name)
-      i += 1 if item.type == type
-      break if i == instances
+      counter += 1 if item.type == type
+      break if counter == count
     end
   end
 end

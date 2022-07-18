@@ -9,7 +9,7 @@ RSpec.describe 'When a user visits the module overview page' do
       visit '/modules/alpha'
     end
 
-    it 'first submodule has not been started yet' do
+    it 'shows first submodule has not been started yet' do
       within '#section-content-1 .govuk-list li:first-child' do
         expect(page).to have_content('not started')
       end
@@ -30,7 +30,7 @@ RSpec.describe 'When a user visits the module overview page' do
       visit '/modules/alpha'
     end
 
-    it 'first submodule has not been started yet' do
+    it 'shows first submodule has not been started yet' do
       within '#section-button-1' do
         expect(page).to have_content('not started')
       end
@@ -51,7 +51,7 @@ RSpec.describe 'When a user visits the module overview page' do
       visit '/modules/alpha'
     end
 
-    it 'submodule has been started' do
+    it 'shows submodule has been started' do
       within '#section-button-1' do
         expect(page).to have_content('in progress')
       end
@@ -71,7 +71,7 @@ RSpec.describe 'When a user visits the module overview page' do
       visit '/modules/alpha'
     end
 
-    it 'first topic has been completed' do
+    it 'shows first topic has been completed' do
       within '#section-button-1' do
         expect(page).to have_content('in progress')
       end
@@ -95,7 +95,7 @@ RSpec.describe 'When a user visits the module overview page' do
       visit '/modules/alpha'
     end
 
-    it 'first submodule is complete' do
+    it 'shows first submodule is complete' do
       within '#section-button-1' do
         expect(page).to have_content('complete')
       end
@@ -122,8 +122,6 @@ RSpec.describe 'When a user visits the module overview page' do
       visit '/modules/alpha'
     end
 
-    it 'button shows option to retake test' do
-      expect(page).to have_content('Retake test')
-    end
+    specify { expect(page).to have_link('Retake test') }
   end
 end
