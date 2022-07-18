@@ -8,7 +8,6 @@ RSpec.describe 'When a user visits the module overview page' do
     visit '/modules/alpha'
   end
 
-  specify { expect(page).to have_content('First Training Module') }
   it 'has the module name' do
     expect(page).to have_content('First Training Module')
   end
