@@ -17,7 +17,7 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
         num,                                  # submodule digit
         items.first.model.heading,            # submodule intro heading
         previous_submodule_heading_text(num), # previous submodule heading
-        status(items),                        # symbol  - all items in the submodule
+        status(items.drop(1)),                # symbol  - all items in the submodule
         topics(submodule: num, items: items), # Array(String, Symbol)
       ]
     end

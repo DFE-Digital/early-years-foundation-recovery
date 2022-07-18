@@ -53,7 +53,7 @@ RSpec.describe 'When a user visits the module overview page' do
 
     it 'shows submodule has been started' do
       within '#section-button-1' do
-        expect(page).to have_content('in progress')
+        expect(page).to have_content('not started')
       end
 
       within '#section-content-1 .govuk-list li:first-child' do
