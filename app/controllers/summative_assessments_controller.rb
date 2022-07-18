@@ -13,29 +13,13 @@ class SummativeAssessmentsController < ApplicationController
     if validate_param_empty
       populate_questionnaire(questionnaire_params)
       save_answers
-      flash[:alert] = nil
+      flash[:error] = nil
       link_to_next_module_item_from_controller(questionnaire.module_item)
       return
     else
-      flash[:alert] = 'Please select an answer'
+      flash[:error] = 'Please select an answer'
     end
 
     render :show, status: :unprocessable_entity and return
-  end
-
-private
-
-  def process_summative_questionaire
-    if questionnaire_params.values.all?(&:present?)
-      populate_questionnaire(questionnaire_params)
-      save_answers
-      flash[:alert] = nil
-    else
-      flash[:alert] = 'Please select an answer'
-    end
-  end
-
-  def set_flash_mesg
-    flash[:alert] = 'Please select an answer'
   end
 end
