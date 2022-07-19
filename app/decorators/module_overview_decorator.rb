@@ -12,12 +12,12 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
 
   # @return [Array<String, Symbol, Array>]
   def topics_by_submodule
-    mod.items_by_submodule_excluding_intro.map do |num, items|
+    mod.items_by_submodule.map do |num, items|
       [
         num,                                  # submodule digit
         items.first.model.heading,            # submodule intro heading
         previous_submodule_heading_text(num), # previous submodule heading
-        status(items),                        # symbol  - all items in the submodule
+        status(items[1..-1]),                 # symbol - all content pages in the submodule
         topics(submodule: num, items: items), # Array(String, Symbol)
       ]
     end
