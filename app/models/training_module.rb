@@ -49,9 +49,11 @@ class TrainingModule < YamlBase
   end
 
   def items_by_submodule_excluding_intro
-    items_by_submodule do |item|
-      p item
-    end
+    # items_by_submodule.map do |key, value|
+    #   [key, value.reject { |item| item.type == 'sub_module_intro' }]
+    # end
+
+    items_by_submodule.map { |key, value| [key, value.reject { |item| item.type == 'sub_module_intro' }] }.to_h
   end
 
   # @example
