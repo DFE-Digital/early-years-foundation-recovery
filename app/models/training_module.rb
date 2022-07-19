@@ -48,6 +48,12 @@ class TrainingModule < YamlBase
     @items_by_submodule ||= module_items.group_by(&:submodule_name).except(nil)
   end
 
+  def items_by_submodule_excluding_intro
+    items_by_submodule do |item|
+      p item
+    end
+  end
+
   # @example
   #   {
   #     ["1", "1"] => [1-1-1-1a, 1-1-1-1b],
