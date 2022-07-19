@@ -12,7 +12,7 @@ then
   fi
 
   if [ ! -d "node_modules" ]; then
-    yarn install
+    yarn install --json
   fi
 
   rm -f tmp/pids/server.pid
