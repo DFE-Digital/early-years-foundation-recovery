@@ -12,7 +12,9 @@ then
   fi
 
   if [ ! -d "node_modules" ]; then
-    yarn install
+    # NB: Streaming console output as NDJSON was appended to fix an unidentified
+    # quirk that was introduced with the puppeteer dependency
+    yarn install --json
   fi
 
   rm -f tmp/pids/server.pid

@@ -1,6 +1,6 @@
 {
   "name": "eyfs-recovery",
-  "packageManager": "yarn@3.2.0",
+  "packageManager": "yarn@3.2.1",
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --outdir=app/assets/builds",
     "build:css": "sass ./app/assets/stylesheets/application.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules --quiet-deps",
@@ -12,6 +12,7 @@
     "@hotwired/turbo-rails": "^7.1.0",
     "esbuild": "^0.14.36",
     "govuk-frontend": "^4.0.1",
+    "puppeteer": "^15.3.0",
     "sass": "^1.50.1"
   }
 }

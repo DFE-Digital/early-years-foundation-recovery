@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.0'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '>= 7.0.2.4'
+gem 'rails', '>= 7.0.3.1'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
@@ -66,6 +66,9 @@ gem 'dibber'
 
 # Track users
 gem 'ahoy_matey', '~> 4.0'
+
+# PDF generator middleware
+gem 'grover', '~> 1.1'
 
 group :development, :test do
   # Use fake data for specs

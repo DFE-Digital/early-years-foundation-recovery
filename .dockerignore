@@ -3,7 +3,7 @@
 .github
 .yardoc
 .yarn
-!.yarn/releases/yarn-3.2.0.cjs
+!.yarn/releases/yarn-3.2.1.cjs
 adr
 app/assets/builds
 config/*.key

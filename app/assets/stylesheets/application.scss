@@ -36,6 +36,11 @@
   background-color: $govuk-error-colour;
 }
 
+.govuk-notification-banner--error, .govuk-notification-banner--alert {
+  border-color: $govuk-error-colour;
+  background-color: $govuk-error-colour;
+}
+
 .light-grey-box {
   padding: govuk-spacing(5);
   margin-bottom: govuk-spacing(5);
