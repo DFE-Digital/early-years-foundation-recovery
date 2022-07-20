@@ -47,7 +47,7 @@ RSpec.describe 'When a user visits the module overview page' do
 
   context 'when the user has viewed the first submodule page' do
     before do
-      start_submodule(alpha)
+      start_first_submodule(alpha)
       visit '/modules/alpha'
     end
 
@@ -67,7 +67,7 @@ RSpec.describe 'When a user visits the module overview page' do
 
   context 'when the user has viewed the first topic page' do
     before do
-      start_topic(alpha)
+      start_first_topic(alpha)
       visit '/modules/alpha'
     end
 
