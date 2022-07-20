@@ -23,6 +23,12 @@ COPY yarn.lock ${APP_HOME}/yarn.lock
 COPY .yarn ${APP_HOME}/.yarn
 COPY .yarnrc.yml ${APP_HOME}/.yarnrc.yml
 
+# NB: Developers using ARM64 hardware will need to comment out the following 2 lines
+# only whilst building images because of the node package puppeteer
+#
+# 1. (#32) RUN yarn install
+# 2. (#74) COPY --from=deps /build/node_modules ${APP_HOME}/node_modules
+#
 RUN yarn install
 
 COPY Gemfile* ./
