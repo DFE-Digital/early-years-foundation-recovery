@@ -49,6 +49,15 @@ RSpec.shared_context 'with progress' do
     view_pages_before(mod, 'confidence_check')
   end
 
+  # Visit every page before the summative
+  #
+  def view_pages_before_summative_assessment(mod)
+    mod.module_items.map do |item|
+      view_module_page_event(mod.name, item.name)
+      break if item.type == 'summative_assessment'
+    end
+  end
+
   # @return [true] create a fake event log item
   def view_module_page_event(module_name, page_name)
     tracker.track('page_view', {
