@@ -99,7 +99,7 @@ RSpec.describe 'When a user visits the module overview page' do
       within '#section-button-1' do
         expect(page).to have_content('complete')
       end
-      
+
       within '#section-content-1 .govuk-list' do
         expect(page).to have_content('complete', count: 4)
       end
