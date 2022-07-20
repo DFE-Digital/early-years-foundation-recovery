@@ -18,7 +18,6 @@ RSpec.describe 'Formative assessment' do
   end
 
   context 'when a user has passed the formative assessment' do
-    # Pass the formative assessment
     before do
       visit '/modules/alpha/formative-assessments/1-1-4'
       choose 'Correct answer 1'
@@ -39,7 +38,6 @@ RSpec.describe 'Formative assessment' do
   end
 
   context 'when a user has failed the formative assessment' do
-    # Fail the formative assessment
     before do
       visit '/modules/alpha/formative-assessments/1-1-4'
       choose 'Wrong answer 1'

@@ -19,6 +19,18 @@ RSpec.shared_context 'with progress' do
     view_pages_before(mod, 'module_intro')
   end
 
+  def start_first_submodule(mod)
+    view_pages_before(mod, 'sub_module_intro')
+  end
+
+  def start_first_topic(mod)
+    view_pages_before(mod, 'text_page')
+  end
+
+  def start_second_submodule(mod)
+    view_pages_before(mod, 'sub_module_intro', 2)
+  end
+
   # Visit every page before the first summative assessment
   #
   def view_pages_before_summative_assessment(mod)
@@ -49,12 +61,14 @@ RSpec.shared_context 'with progress' do
 
 private
 
-  # Visit every page before the given page type
+  # Visit every page before the given instance of the given page type
   #
-  def view_pages_before(mod, type)
+  def view_pages_before(mod, type, count = 1)
+    counter = 0
     mod.module_items.map do |item|
       view_module_page_event(mod.name, item.name)
-      break if item.type == type
+      counter += 1 if item.type == type
+      break if counter == count
     end
   end
 end
