@@ -22,7 +22,7 @@ RSpec.shared_context 'with progress' do
   def start_first_submodule(mod)
     view_pages_before(mod, 'sub_module_intro')
   end
-  
+
   # Visit the first topic page in first submodule
   #
   def start_topic(mod)
