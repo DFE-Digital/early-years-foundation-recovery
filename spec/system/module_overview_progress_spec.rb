@@ -51,7 +51,7 @@ RSpec.describe 'When a user visits the module overview page' do
       visit '/modules/alpha'
     end
 
-    it 'shows submodule has been started' do
+    it 'shows submodule has not been started yet' do
       within '#section-button-1' do
         expect(page).to have_content('not started')
       end
