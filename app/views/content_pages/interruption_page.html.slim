@@ -4,11 +4,8 @@
   .interrupt-panel.govuk-grid-column-full
     h1 What to expect during the training
     .gem-c-govspeak
-      - if @model.formative?
-        = translate_markdown t('interruption.formative')
-      - else
-        = translate_markdown t('interruption.summative')
-
+      = translate_markdown t('interruption.formative') if @model.formative
+      = translate_markdown t('interruption.summative') if @model.summative
       = translate_markdown t('interruption.common')
 
     hr class='govuk-section-break govuk-section-break--l govuk-section-break--visible govuk-!-margin-top-4'

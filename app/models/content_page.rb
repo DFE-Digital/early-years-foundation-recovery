@@ -35,4 +35,8 @@ class ContentPage
   def formative?
     module_item.parent.formative?
   end
+
+  def summative?
+    module_item.parent.summative?
+  end
 end
