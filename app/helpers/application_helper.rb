@@ -90,7 +90,7 @@ module ApplicationHelper
   end
 
   def clear_flash
-    flash[:alert] = nil
+    flash[:error] = nil
   end
 
   def answers_checkbox(user_answers, checkbox_value)

@@ -1,5 +1,6 @@
 class TrainingModulesController < ApplicationController
   before_action :authenticate_registered_user!, only: :show
+  before_action :clear_flash
 
   def index
     track('course_overview_page')
