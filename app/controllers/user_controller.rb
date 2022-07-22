@@ -97,7 +97,9 @@ class UserController < ApplicationController
   end
 
   def check_email_confirmation
-    @user = User.find_by(email: params[:email])
+    return unless params[:ref]
+
+    @user = User.find_by(confirmation_token: params[:ref])
   end
 
   def check_email_password_reset; end
