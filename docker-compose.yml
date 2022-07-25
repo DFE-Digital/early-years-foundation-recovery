@@ -19,6 +19,7 @@ services:
       - GOVUK_APP_DOMAIN
       - GOVUK_WEBSITE_ROOT
       - GROVER_NO_SANDBOX=true
+      - TRACKING_ID=GTM-W6W95FD 
     depends_on:
       - db
     ports:
