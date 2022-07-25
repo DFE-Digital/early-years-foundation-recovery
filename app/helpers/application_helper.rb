@@ -174,4 +174,8 @@ module ApplicationHelper
       end
     end
   end
+
+  def track_analytics?
+    cookies[:track_analytics] == "Yes"
+  end
 end
