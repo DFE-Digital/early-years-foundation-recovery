@@ -13,6 +13,7 @@ services:
       - GOVUK_WEBSITE_ROOT=www
       - USER_PASSWORD
       - TIMEOUT_MINUTES
+      - TRACKING_ID=GTM-W6W95FD
     volumes:
       # NB: or ensure RAILS_MASTER_KEY=<production master key> is in .env
       - ./config/credentials/production.key:/srv/config/credentials/production.key
