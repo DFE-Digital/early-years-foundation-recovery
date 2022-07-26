@@ -25,6 +25,8 @@ class RegistrationsController < Devise::RegistrationsController
       # TODO: log and respond to attempt
       @user = resource
       render 'user/check_email_confirmation', status: :unprocessable_entity
+      
+      resource.send_email_taken_notification
     else
       # always hide taken message
       resource.errors.delete(:email) if resource.errors.first.type.eql?(:taken)

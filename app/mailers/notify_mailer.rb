@@ -6,6 +6,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
   UNLOCK_TEMPLATE_ID = 'e18e8419-cfcc-4fcb-abdb-84f932f3cf55'.freeze
   PASSWORD_CHANGED_TEMPLATE_ID = 'f77e1eba-3fa8-45ae-9cec-a4cc54633395'.freeze
   EMAIL_CHANGED_TEMPLATE_ID = 'c1228884-6621-4a1e-9606-b219bedb677f'.freeze
+  EMAIL_TAKEN_TEMPLATE_ID = '857dc6d0-7179-48bf-8079-916fedb43528'.freeze
 
   include Devise::Controllers::UrlHelpers
 
@@ -85,6 +86,17 @@ class NotifyMailer < GovukNotifyRails::Mailer
       is_unconfirmed_email: record.unconfirmed_email? ? 'Yes' : 'No',
       is_not_unconfirmed_email: record.unconfirmed_email? ? 'No' : 'Yes',
       email: record.unconfirmed_email? ? record.unconfirmed_email : record.email,
+    )
+    mail(to: record.email)
+  end
+
+  def email_taken(record)
+    set_template(EMAIL_TAKEN_TEMPLATE_ID)
+
+    set_personalisation(
+      email_subject: 'Email taken',
+      name: record.name,
+      email: record.email,
     )
     mail(to: record.email)
   end
