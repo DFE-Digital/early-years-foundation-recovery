@@ -50,8 +50,7 @@ class User < ApplicationRecord
 
   # send email to registered user if attempt is made to create account with registered email
   def send_email_taken_notification
-    mailer = :email_taken
-    send_devise_notification(mailer)
+    send_devise_notification(:email_taken)
   end
 
   # @return [String]
