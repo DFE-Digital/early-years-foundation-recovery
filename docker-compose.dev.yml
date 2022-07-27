@@ -14,7 +14,6 @@ services:
       - RAILS_SERVE_STATIC_FILES=true
       - TIMEOUT_MINUTES=360
       - TRAINING_MODULES
-      - TRACKING_ID=GTM-W6W95FD
     volumes:
       - .:/srv
     tty: true
