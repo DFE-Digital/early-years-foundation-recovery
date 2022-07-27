@@ -97,6 +97,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
       email_subject: 'Email taken',
       name: record.name,
       email: record.email,
+      sign_in_url: new_user_session_url
     )
     mail(to: record.email)
   end
