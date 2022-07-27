@@ -5,7 +5,16 @@ RSpec.describe 'Following registration journey' do
 
   context 'when on the check your email page' do
     before do
-      visit check_email_confirmation_user_path + "?email=#{user.email}"
+      visit "/my-account/check-email-confirmation?ref=#{user.confirmation_token}"
+    end
+
+    context 'and the user is already confirmed' do
+      let(:user) { create :user, :confirmed }
+
+      it 'does not show the email address' do
+        expect(page).not_to have_text 'We sent the email to'
+        expect(page).not_to have_text user.email
+      end
     end
 
     context 'and can click on "I haven\'t received the email" link' do

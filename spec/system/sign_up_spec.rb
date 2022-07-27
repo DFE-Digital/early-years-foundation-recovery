@@ -8,7 +8,8 @@ RSpec.describe 'Sign up', type: :system do
   context 'when user already exists' do
     let(:user) { create(:user, :registered) }
 
-    it 'prevents user enumeration exploit' do
+    # re-registration / enumeration exploit
+    it 'does not expose email accounts' do
       fill_in 'Email address', with: user.email
       fill_in 'Create password', with: 'StrongPassword123'
       fill_in 'Confirm password', with: 'StrongPassword123'

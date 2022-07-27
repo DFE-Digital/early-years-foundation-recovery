@@ -21,8 +21,10 @@ class RegistrationsController < Devise::RegistrationsController
     # imitate success
     elsif resource.errors.one? && resource.errors.first.type.eql?(:taken)
       resource.errors.delete :email
+
       # TODO: log and respond to attempt
-      redirect_to check_email_confirmation_user_path(email: resource.email)
+      @user = resource
+      render 'user/check_email_confirmation'
     else
       # always hide taken message
       resource.errors.delete(:email) if resource.errors.first.type.eql?(:taken)
@@ -36,6 +38,6 @@ class RegistrationsController < Devise::RegistrationsController
 protected
 
   def after_inactive_sign_up_path_for(resource)
-    check_email_confirmation_user_path(email: resource.email)
+    check_email_confirmation_user_path(ref: resource.confirmation_token)
   end
 end
