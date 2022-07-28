@@ -22,5 +22,6 @@ class TrainingModulesController < ApplicationController
     @training_module = TrainingModule.find_by(name: params[:training_module_id])
     mod_progress = ModuleProgress.new(user: current_user, mod: @training_module)
     @module_progress = ModuleOverviewDecorator.new(mod_progress)
+    track('module_complete')
   end
 end

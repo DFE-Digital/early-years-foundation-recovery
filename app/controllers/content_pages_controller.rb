@@ -10,12 +10,18 @@ class ContentPagesController < ApplicationController
 
   def show
     track('module_content_page')
-
+    mod_progress = ModuleProgress.new(user: current_user, mod: module_item.parent)
+    if params[:id] == 'intro'
+      track('module_start')
+    end
     @model = module_item.model
     if @model.is_a?(Questionnaire) || @model.is_a?(AssessmentsResults)
       redirect_to questionnaire_path(training_module, module_item)
     else
       render module_item.type
+    end
+    if mod_progress.completed?
+      track('confidence_questionnaire_complete')
     end
   end
 
