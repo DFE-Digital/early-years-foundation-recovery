@@ -3,6 +3,7 @@ class FormativeAssessmentsController < ApplicationController
   before_action :authenticate_registered_user!
 
   def show
+    quiz = AssessmentQuiz.new(user: current_user, type: 'formative_assessment', training_module_id: params[:training_module_id], name: params[:id])
     existing_answers = existing_user_answers.pluck(:question, :answer)
     populate_questionnaire(existing_answers.to_h.symbolize_keys) if existing_answers.present?
   end
@@ -13,10 +14,10 @@ class FormativeAssessmentsController < ApplicationController
       populate_questionnaire(questionnaire_params)
       save_answers
       flash[:error] = nil
+      track('questionnaire_answer')
     else
       flash[:error] = 'Please select an answer'
     end
-
     render :show, status: :unprocessable_entity
   end
 end
