@@ -55,6 +55,23 @@ RSpec.describe 'Check ahoy tracking' do
     end
   end
 
+  context 'when a user has answered a confidence check question' do
+    before do
+      view_pages_before_confidence_check(alpha)
+      visit '/modules/alpha/confidence-check/1-3-3-1'
+      check 'Correct answer 1'
+      check 'Correct answer 2'
+      click_on 'Next'
+    end
+
+    it 'ahoy tracks when a confidence check question has been answered - track(questionnaire_answered)' do
+      expect(page).to have_current_path '/modules/alpha/confidence-check/1-3-3-2', ignore_query: true
+      # check ahoy is tracking the event
+      events = Ahoy::Event.where(user_id: user.id, name: 'questionnaire_answer').where_properties(training_module_id: 'alpha')
+      expect(events.size).to eq 1
+    end
+  end
+
   context 'when a user has finished the confidence check (at the thank you page)' do
     before do
       view_pages_before_confidence_check(alpha)
@@ -87,6 +104,23 @@ RSpec.describe 'Check ahoy tracking' do
       expect(page).to have_current_path '/modules/alpha/summative-assessments/1-3-2-1', ignore_query: true
       # check ahoy is tracking the event
       events = Ahoy::Event.where(user_id: user.id, name: 'summative_assessment_start').where_properties(training_module_id: 'alpha')
+      expect(events.size).to eq 1
+    end
+  end
+
+  context 'when a user has answered a summative assessment question' do
+    before do
+      view_pages_before_summative_assessment(alpha)
+      visit '/modules/alpha/summative-assessments/1-3-2-1'
+      check 'Correct answer 1'
+      check 'Correct answer 2'
+      click_on 'Save and continue'
+    end
+
+    it 'ahoy tracks when a summative assessment question has been answered - track(questionnaire_answered)' do
+      expect(page).to have_current_path '/modules/alpha/summative-assessments/1-3-2-2', ignore_query: true
+      # check ahoy is tracking the event
+      events = Ahoy::Event.where(user_id: user.id, name: 'questionnaire_answer').where_properties(training_module_id: 'alpha')
       expect(events.size).to eq 1
     end
   end
