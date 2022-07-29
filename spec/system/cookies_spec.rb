@@ -19,13 +19,13 @@ RSpec.describe 'Selecting cookie options' do
 
       it 'visitor can click to accept analytics cookies' do
         click_on 'Accept analytics cookies'
-        expect(get_me_the_cookie('track_analytics')[:value]).to eq 'Yes'
+        expect(get_me_the_cookie('track_analytics')[:value]).to eq 'true'
         expect(page).not_to have_content('Cookies on Child development training')
       end
 
       it 'visitor can click to reject analytics cookies' do
         click_on 'Reject analytics cookies'
-        expect(get_me_the_cookie('track_analytics')[:value]).to eq 'No'
+        expect(get_me_the_cookie('track_analytics')[:value]).to eq 'false'
         expect(page).not_to have_content('Cookies on Child development training')
       end
     end
@@ -33,7 +33,7 @@ RSpec.describe 'Selecting cookie options' do
 
   context 'when I am a visitor that has rejected cookie option and visit cookie page' do
     before do
-      cookies[:track_analytics] = 'No'
+      cookies[:track_analytics] = 'false'
       visit setting_path('cookie-policy')
     end
 
@@ -41,7 +41,7 @@ RSpec.describe 'Selecting cookie options' do
       choose('Yes')
       click_on 'Save cookie settings'
 
-      expect(get_me_the_cookie('track_analytics')[:value]).to eq 'Yes'
+      expect(get_me_the_cookie('track_analytics')[:value]).to eq 'true'
     end
   end
 
@@ -55,7 +55,7 @@ RSpec.describe 'Selecting cookie options' do
       choose('No')
       click_on 'Save cookie settings'
 
-      expect(get_me_the_cookie('track_analytics')[:value]).to eq 'No'
+      expect(get_me_the_cookie('track_analytics')[:value]).to eq 'false'
     end
   end
 end

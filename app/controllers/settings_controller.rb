@@ -11,7 +11,7 @@ class SettingsController < ApplicationController
 private
 
   def track_analytics
-    params.fetch(:track_analytics, 'No')
+    params.fetch(:track_analytics, 'false')
   end
 
   def set_analytics_preference
