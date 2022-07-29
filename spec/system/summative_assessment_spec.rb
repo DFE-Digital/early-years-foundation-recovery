@@ -9,6 +9,13 @@ RSpec.describe 'Summative assessment' do
 
   include_context 'with user'
 
+  context 'when user views the end of module intro page' do
+    it 'shows the correct content' do
+      visit '/modules/alpha/content-pages/1-3-2'
+      expect(page).to have_content 'End of module test'
+    end
+  end
+
   context 'when a user has visited each module up to and including a summative assessment' do
     it 'can click to resume training to visit the summative assessment page' do
       visit '/modules/alpha'
