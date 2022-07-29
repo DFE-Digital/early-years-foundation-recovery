@@ -24,6 +24,7 @@ RSpec.describe 'Check ahoy tracking' do
       view_pages_before_confidence_check(alpha)
     end
     it 'ahoy tracks the completion of a module - track(module_complete)' do
+      visit '/modules/alpha/content-pages/intro'
       visit '/modules/alpha/content-pages/1-3-3'
       click_on 'Next'
       2.times do
@@ -64,7 +65,7 @@ RSpec.describe 'Check ahoy tracking' do
       click_on 'Next'
     end
 
-    it 'ahoy tracks when a confidence check question has been answered - track(questionnaire_answered)' do
+    it 'ahoy tracks when a confidence check question has been answered - track(questionnaire_answer)' do
       expect(page).to have_current_path '/modules/alpha/confidence-check/1-3-3-2', ignore_query: true
       # check ahoy is tracking the event
       events = Ahoy::Event.where(user_id: user.id, name: 'questionnaire_answer').where_properties(training_module_id: 'alpha')
@@ -117,7 +118,7 @@ RSpec.describe 'Check ahoy tracking' do
       click_on 'Save and continue'
     end
 
-    it 'ahoy tracks when a summative assessment question has been answered - track(questionnaire_answered)' do
+    it 'ahoy tracks when a summative assessment question has been answered - track(questionnaire_answer)' do
       expect(page).to have_current_path '/modules/alpha/summative-assessments/1-3-2-2', ignore_query: true
       # check ahoy is tracking the event
       events = Ahoy::Event.where(user_id: user.id, name: 'questionnaire_answer').where_properties(training_module_id: 'alpha')
@@ -147,7 +148,7 @@ RSpec.describe 'Check ahoy tracking' do
     end
   end
 
-  context 'when a user has visited & answered a formative assessment question' do
+  context 'when a user has visited & answered formative assessment questions' do
     before do
       view_pages_before_formative_assessment(alpha)
       visit '/modules/alpha'
@@ -159,7 +160,7 @@ RSpec.describe 'Check ahoy tracking' do
       2.times { click_on 'Next' }
     end
 
-    it 'ahoy tracks when a formative assessment has been answered- track(formative_assessment_answered)' do
+    it 'ahoy tracks when a formative assessment question has been answered- track(questionnaire_answer)' do
       expect(page).to have_current_path '/modules/alpha/content-pages/1-2-1-2', ignore_query: true
       # check ahoy is tracking the event
       events = Ahoy::Event.where(user_id: user.id, name: 'questionnaire_answer').where_properties(training_module_id: 'alpha')
