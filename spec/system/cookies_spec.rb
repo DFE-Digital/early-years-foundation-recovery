@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Selecting cookie options' do
+  let(:track_analytics_cookie) { get_me_the_cookie('track_analytics')[:value] }
+
   context 'when I am a visitor that has not selected their cookie options' do
     before do
       visit root_path
@@ -19,13 +21,13 @@ RSpec.describe 'Selecting cookie options' do
 
       it 'visitor can click to accept analytics cookies' do
         click_on 'Accept analytics cookies'
-        expect(get_me_the_cookie('track_analytics')[:value]).to eq 'true'
+        expect(track_analytics_cookie).to eq 'true'
         expect(page).not_to have_content('Cookies on Child development training')
       end
 
       it 'visitor can click to reject analytics cookies' do
         click_on 'Reject analytics cookies'
-        expect(get_me_the_cookie('track_analytics')[:value]).to eq 'false'
+        expect(track_analytics_cookie).to eq 'false'
         expect(page).not_to have_content('Cookies on Child development training')
       end
     end
@@ -41,7 +43,7 @@ RSpec.describe 'Selecting cookie options' do
       choose('Yes')
       click_on 'Save cookie settings'
 
-      expect(get_me_the_cookie('track_analytics')[:value]).to eq 'true'
+      expect(track_analytics_cookie).to eq 'true'
     end
   end
 
@@ -55,7 +57,7 @@ RSpec.describe 'Selecting cookie options' do
       choose('No')
       click_on 'Save cookie settings'
 
-      expect(get_me_the_cookie('track_analytics')[:value]).to eq 'false'
+      expect(track_analytics_cookie).to eq 'false'
     end
   end
 end
