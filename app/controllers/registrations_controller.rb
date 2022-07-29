@@ -27,6 +27,8 @@ class RegistrationsController < Devise::RegistrationsController
       render 'user/check_email_confirmation', status: :unprocessable_entity
 
       resource.send_email_taken_notification
+
+      track('email_address_taken', email: resource.email, ip: request.ip)
     else
       # always hide taken message
       resource.errors.delete(:email) if resource.errors.first.type.eql?(:taken)
