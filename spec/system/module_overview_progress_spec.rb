@@ -133,5 +133,4 @@ RSpec.describe 'When a user visits the module overview page' do
 
     specify { expect(page).not_to have_link('Retake test') }
   end
-
 end
