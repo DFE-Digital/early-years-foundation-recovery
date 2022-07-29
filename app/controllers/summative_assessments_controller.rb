@@ -5,7 +5,8 @@ class SummativeAssessmentsController < ApplicationController
 
   def show
     quiz = AssessmentQuiz.new(user: current_user, type: 'summative_assessment', training_module_id: params[:training_module_id], name: params[:id])
-    if params[:id] == quiz.assessment_first_page.name
+    event = Ahoy::Event.where(user_id: current_user, name: 'summative_assessment_start').where_properties(training_module_id: params[:training_module_id])
+    if params[:id] == quiz.assessment_first_page.name && !event.exists?
       track('summative_assessment_start')
     end
     existing_answers = existing_user_answers.pluck(:question, :answer)

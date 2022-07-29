@@ -9,7 +9,8 @@ class AssessmentsResultsController < ApplicationController
     module_item
     @module_item.model
     result = AssessmentQuiz.new(user: current_user, type: 'summative_assessment', training_module_id: params[:training_module_id], name: params[:id])
-    if result.check_if_assessment_taken
+    event = Ahoy::Event.where(user_id: current_user, name: 'summative_assessment_complete').where_properties(training_module_id: params[:training_module_id])
+    if result.check_if_assessment_taken && !event.exists?
       track('summative_assessment_complete')
     end
   end
