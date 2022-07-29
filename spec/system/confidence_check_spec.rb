@@ -15,6 +15,13 @@ RSpec.describe 'Confidence check' do
     expect(page).to have_selector '.govuk-radios__input'
   end
 
+  describe 'intro' do
+    it 'uses generic content' do
+      visit '/modules/alpha/content-pages/1-3-3'
+      expect(page).to have_content 'Reflect on your learning'
+    end
+  end
+
   context 'when started' do
     it 'can be resumed' do
       visit '/modules/alpha'
