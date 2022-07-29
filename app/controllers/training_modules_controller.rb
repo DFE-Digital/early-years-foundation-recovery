@@ -25,7 +25,7 @@ class TrainingModulesController < ApplicationController
     event = Ahoy::Event.where(user_id: current_user, name: 'module_complete').where_properties(training_module_id: params[:training_module_id])
     if !event.exists?
       track('module_complete')
-      mod_time = ModuleTime.new(user: current_user, training_module_id: params[:training_module_id])
+      mod_time = ModuleTimeToComplete.new(user: current_user, training_module_id: params[:training_module_id])
       mod_time.update_time
     end
   end
