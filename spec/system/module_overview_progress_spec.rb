@@ -124,4 +124,14 @@ RSpec.describe 'When a user visits the module overview page' do
 
     specify { expect(page).to have_link('Retake test') }
   end
+
+  context 'when the user has completed the entire module' do
+    before do
+      view_whole_module(alpha)
+      visit '/modules/alpha'
+    end
+
+    specify { expect(page).not_to have_link('Retake test') }
+  end
+
 end
