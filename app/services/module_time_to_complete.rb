@@ -1,5 +1,5 @@
 # User's time taken to complete a module - calculated in seconds
-# 
+#
 class ModuleTimeToComplete
   def initialize(user:, training_module_id:)
     @user = user
@@ -10,22 +10,22 @@ class ModuleTimeToComplete
 
   # @return [Hash{String => Integer}]
   def update_time
-    user.update(module_time_to_completion: { training_module_id => result })
+    user.update!(module_time_to_completion: { training_module_id => result })
     user.module_time_to_completion
   end
-  
-  private
-  
+
+private
+
   # @return [Integer] time in seconds
-  def result 
+  def result
     (module_complete_time - module_start_time).to_i
   end
 
-  # @return [Time] 
+  # @return [Time]
   def module_start_time
     user.events.where(name: 'module_start').where_properties(training_module_id: training_module_id).first.time
   end
-  
+
   # @return [Time]
   def module_complete_time
     user.events.where(name: 'module_complete').where_properties(training_module_id: training_module_id).first.time

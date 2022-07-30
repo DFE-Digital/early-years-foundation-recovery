@@ -9,6 +9,7 @@ RSpec.describe 'Check ahoy tracking' do
     before do
       start_module(alpha)
     end
+
     it 'ahoy tracks the starting of a module - track(module_start)' do
       visit '/modules/alpha/content-pages/before-you-start'
       click_on 'Next'
@@ -23,6 +24,7 @@ RSpec.describe 'Check ahoy tracking' do
     before do
       view_pages_before_confidence_check(alpha)
     end
+
     it 'ahoy tracks the completion of a module - track(module_complete)' do
       visit '/modules/alpha/content-pages/intro'
       visit '/modules/alpha/content-pages/1-3-3'
@@ -46,6 +48,7 @@ RSpec.describe 'Check ahoy tracking' do
     before do
       view_pages_before_confidence_check(alpha)
     end
+
     it 'ahoy tracks the starting of the confidence check - track(confidence_questionnaire_start)' do
       visit '/modules/alpha/content-pages/1-3-3'
       click_on 'Next'
@@ -77,6 +80,7 @@ RSpec.describe 'Check ahoy tracking' do
     before do
       view_pages_before_confidence_check(alpha)
     end
+
     it 'ahoy tracks the completion of the confidence check - track(confidence_questionnaire_complete)' do
       visit '/modules/alpha/content-pages/1-3-3'
       click_on 'Next'
