@@ -6,8 +6,7 @@ class ModuleTimeToComplete
     @training_module_id = training_module_id
   end
 
-  attr_reader :user
-  attr_reader :training_module_id
+  attr_reader :user, :training_module_id
 
   # @return [Hash{String => Integer}]
   def update_time
