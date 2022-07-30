@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe ModuleTimeToComplete do
-  let(:user) { create(:user, :confirmed) }
   subject(:completion_time) { described_class.new(user: user, training_module_id: 'alpha') }
+
+  let(:user) { create(:user, :confirmed) }
 
   include_context 'with progress'
 
@@ -10,15 +11,15 @@ RSpec.describe ModuleTimeToComplete do
     # instantiate user now otherwise GovUk Notify client borks with:
     # "AuthError: Error: Your system clock must be accurate to within 30 seconds"
     user
-    
-    # create a fake event log item for module_start
+
+    # create a fake event log item for 'module_start' event key
     travel_to Time.zone.parse('2022-06-30 00:00:00') do
-      view_module_page_event('alpha', 'intro', 'module_start', 'content_pages')
+      view_module_page_event_with_specified_key('alpha', 'intro', 'module_start', 'content_pages')
     end
 
-    # create a fake event log item for module_complete
+    # create a fake event log item for 'module_complete' event key
     travel_to Time.zone.parse('2022-06-30 00:10:20') do
-      view_module_page_event('alpha', 'certificate', 'module_complete', 'training_modules')
+      view_module_page_event_with_specified_key('alpha', 'certificate', 'module_complete', 'training_modules')
     end
   end
 
