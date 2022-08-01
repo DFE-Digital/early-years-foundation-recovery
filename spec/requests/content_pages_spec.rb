@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'ContentPages', type: :request do
   let(:alpha) { TrainingModule.find_by(name: 'alpha') }
-  
+
   before do
     sign_in create(:user, :registered)
   end
