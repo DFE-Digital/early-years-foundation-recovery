@@ -28,6 +28,8 @@ class ModuleItem < YamlBase
     summative_assessment: Questionnaire,
     confidence_check: Questionnaire,
     assessments_results: AssessmentsResults,
+    end_of_module_test_intro: ContentPage,
+    confidence_check_intro: ContentPage,
   }.freeze
 
   # @return [Regexp] 2nd digit if present: 1-[1]-1-1
