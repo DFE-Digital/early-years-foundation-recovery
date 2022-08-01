@@ -10,6 +10,8 @@ class ContentPagesController < ApplicationController
   def show
     track('module_content_page')
 
+    @training_mod = TrainingModule.find_by(name: training_module)
+
     @model = module_item.model
 
     if @model.is_a?(Questionnaire)
