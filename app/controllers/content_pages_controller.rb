@@ -10,9 +10,8 @@ class ContentPagesController < ApplicationController
 
   def show
     track('module_content_page')
-    mod_progress = ModuleProgress.new(user: current_user, mod: module_item.parent)
-    start_event = Ahoy::Event.where(user_id: current_user, name: 'module_start').where_properties(training_module_id: training_module)
-    if params[:id] == 'intro' && !start_event.exists?
+    module_start_event = Ahoy::Event.where(user_id: current_user, name: 'module_start').where_properties(training_module_id: training_module)
+    if params[:id] == 'intro' && !module_start_event.exists?
       track('module_start')
     end
     @model = module_item.model
@@ -21,8 +20,9 @@ class ContentPagesController < ApplicationController
     else
       render module_item.type
     end
-    confidence_complete_event = Ahoy::Event.where(user_id: current_user, name: 'confidence_questionnaire_complete').where_properties(training_module_id: training_module)
-    if mod_progress.completed? && !confidence_complete_event.exists?
+    mod_progress = ModuleProgress.new(user: current_user, mod: module_item.parent)
+    confidence_check_complete_event = Ahoy::Event.where(user_id: current_user, name: 'confidence_questionnaire_complete').where_properties(training_module_id: training_module)
+    if mod_progress.completed? && !confidence_check_complete_event.exists?
       track('confidence_questionnaire_complete')
     end
   end
