@@ -20,7 +20,7 @@ class ConfidenceChecksController < ApplicationController
       save_answers
       flash[:error] = nil
       link_to_next_module_item_from_controller(questionnaire.module_item)
-      track('questionnaire_answer')
+      track('questionnaire_answer', success: true, type: 'confidence_check', questionnaire_id: params[:id])
       return
     else
       flash[:error] = 'Please select an answer'

@@ -11,7 +11,7 @@ class AssessmentsResultsController < ApplicationController
     result = AssessmentQuiz.new(user: current_user, type: 'summative_assessment', training_module_id: params[:training_module_id], name: params[:id])
     event = Ahoy::Event.where(user_id: current_user, name: 'summative_assessment_complete').where_properties(training_module_id: params[:training_module_id])
     if result.check_if_assessment_taken && !event.exists?
-      track('summative_assessment_complete')
+      track('summative_assessment_complete', success: true, type: 'summative_assessment', score: result.percentage_of_assessment_answers_correct, questionnaire_id: params[:id])
     end
   end
 

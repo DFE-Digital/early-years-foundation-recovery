@@ -13,7 +13,7 @@ class FormativeAssessmentsController < ApplicationController
       populate_questionnaire(questionnaire_params)
       save_answers
       flash[:error] = nil
-      track('questionnaire_answer')
+      track('questionnaire_answer', success: true, type: 'formative_assessment', questionnaire_id: params[:id])
     else
       flash[:error] = 'Please select an answer'
     end
