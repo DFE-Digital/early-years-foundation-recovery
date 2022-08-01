@@ -79,9 +79,9 @@ brain-development-and-how-children-learn:
         label: |
           Which of these is a proven benefit of talking to an unborn child? (Select all answers that apply)
         assessment_summary: |
-          Babies will recognise voices they have heard during pregnancy and are more likely to be quickly reassured by the same voices after birth. This reduces stress and helps them to recognise feelings. 
+          Babies will recognise voices they have heard during pregnancy and are more likely to be quickly reassured by the same voices after birth. This reduces stress and helps them to recognise feelings, as well as improving the bond between the baby and their parent or carer.  
         assessment_fail_summary: |
-          There are no proven links between a child’s sight and being spoken to during pregnancy. Babies will recognise voices they have heard during pregnancy and are more likely to be quickly reassured by the same voice.     
+          Babies will recognise voices they have heard during pregnancy and are more likely to be quickly reassured by the same voices after birth. This reduces stress and helps them to recognise feelings, as well as improving the bond between the baby and their parent or carer. There are no proven links between a child’s sight and being spoken to during pregnancy.
         answers:
           1: "Increased bond between the baby and parent or carer"
           2: "Reduced stress"                    
@@ -227,10 +227,10 @@ brain-development-and-how-children-learn:
         assessment_fail_summary: |
           Observation checkpoints, child development knowledge, an enabling environment and high quality practitioner interactions will all be essential in ensuring that any potential gaps in a child’s learning are not able to develop or widen.
         answers:
-          1: "Early intervention"
-          2: "Improved outcomes"
-          3: "Increased self-efficacy"
-          4: "Informed practice"
+          1: "Observation checkpoints"
+          2: "An enabling environment"
+          3: "Child development knowledge"
+          4: "High quality practitioner interactions"
         correct_answers: ["1","2","3","4"]
   2-2-2-1b:
     content:
