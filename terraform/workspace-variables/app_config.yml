@@ -17,12 +17,14 @@ production:
   <<: *defaults
   DOMAIN: child-development-training.education.gov.uk
   GOVUK_WEBSITE_ROOT: child-development-training
+  TRACKING_ID: GTM-NFZ88TP  # Live data
 
 # ey-recovery-staging
 staging:
   <<: *defaults
   DOMAIN: ey-recovery-staging.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-staging
+  TRACKING_ID: GTM-W6W95FD  # Test data
 
 # ey-recovery-content
 content:
