@@ -20,8 +20,8 @@ class ContentPagesController < ApplicationController
       render module_item.type
     end
     mod_progress = ModuleProgress.new(user: current_user, mod: module_item.parent)
-    if mod_progress.completed? && !tracked?('confidence_questionnaire_complete', training_module_id: training_module)
-      track('confidence_questionnaire_complete')
+    if mod_progress.completed? && !tracked?('confidence_check_complete', training_module_id: training_module)
+      track('confidence_check_complete')
     end
   end
 

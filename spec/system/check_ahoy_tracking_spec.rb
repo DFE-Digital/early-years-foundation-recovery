@@ -49,12 +49,12 @@ RSpec.describe 'Check ahoy tracking' do
       view_pages_before_confidence_check(alpha)
     end
 
-    it 'ahoy tracks the starting of the confidence check - track(confidence_questionnaire_start)' do
+    it 'ahoy tracks the starting of the confidence check - track(confidence_check_start)' do
       visit '/modules/alpha/content-pages/1-3-3'
       click_on 'Next'
       expect(page).to have_current_path '/modules/alpha/confidence-check/1-3-3-1', ignore_query: true
       # check ahoy is tracking the event
-      events = Ahoy::Event.where(user_id: user.id, name: 'confidence_questionnaire_start').where_properties(training_module_id: 'alpha')
+      events = Ahoy::Event.where(user_id: user.id, name: 'confidence_check_start').where_properties(training_module_id: 'alpha')
       expect(events.size).to eq 1
     end
   end
@@ -81,7 +81,7 @@ RSpec.describe 'Check ahoy tracking' do
       view_pages_before_confidence_check(alpha)
     end
 
-    it 'ahoy tracks the completion of the confidence check - track(confidence_questionnaire_complete)' do
+    it 'ahoy tracks the completion of the confidence check - track(confidence_check_complete)' do
       visit '/modules/alpha/content-pages/1-3-3'
       click_on 'Next'
       2.times do
@@ -93,7 +93,7 @@ RSpec.describe 'Check ahoy tracking' do
       click_on 'Next'
       expect(page).to have_current_path '/modules/alpha/content-pages/1-3-3-4', ignore_query: true
       # check ahoy is tracking the event
-      events = Ahoy::Event.where(user_id: user.id, name: 'confidence_questionnaire_complete').where_properties(training_module_id: 'alpha')
+      events = Ahoy::Event.where(user_id: user.id, name: 'confidence_check_complete').where_properties(training_module_id: 'alpha')
       expect(events.size).to eq 1
     end
   end
