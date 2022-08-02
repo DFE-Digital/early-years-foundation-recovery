@@ -18,12 +18,11 @@ class ApplicationController < ActionController::Base
     ahoy.track(key, properties)
   end
 
-  
   # Check if a specific user event has already been logged
   #
   # @param key [String]
   # @param params [Hash]
-  # 
+  #
   # @return [Boolean]
   def tracked?(key, **params)
     Ahoy::Event.where(user_id: current_user, name: key).where_properties(**params).exists?

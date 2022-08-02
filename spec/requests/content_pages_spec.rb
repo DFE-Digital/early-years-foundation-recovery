@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'ContentPages', type: :request do
-
   before do
     sign_in create(:user, :registered)
   end
