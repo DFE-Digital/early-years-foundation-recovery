@@ -22,8 +22,7 @@ class TrainingModulesController < ApplicationController
     @training_module = TrainingModule.find_by(name: params[:training_module_id])
     mod_progress = ModuleProgress.new(user: current_user, mod: @training_module)
     @module_progress = ModuleOverviewDecorator.new(mod_progress)
-    event = Ahoy::Event.where(user_id: current_user, name: 'module_complete').where_properties(training_module_id: params[:training_module_id])
-    unless event.exists?
+    unless tracked?('module_complete', training_module_id: params[:training_module_id])
       track('module_complete')
       mod_time = ModuleTimeToComplete.new(user: current_user, training_module_id: params[:training_module_id])
       mod_time.update_time
