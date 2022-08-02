@@ -48,6 +48,11 @@ class User < ApplicationRecord
     send_devise_notification(mailer, @raw_confirmation_token, opts)
   end
 
+  # send email to registered user if attempt is made to create account with registered email
+  def send_email_taken_notification
+    send_devise_notification(:email_taken)
+  end
+
   # @return [String]
   def name
     [first_name, last_name].compact.join(' ')

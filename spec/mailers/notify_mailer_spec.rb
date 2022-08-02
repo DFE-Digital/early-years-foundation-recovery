@@ -61,4 +61,14 @@ RSpec.describe NotifyMailer, type: :mailer do
       end
     end
   end
+
+  describe 'email address taken' do
+    context 'when email is taken' do
+      it 'send email to user to tell them how to access their account' do
+        mail = described_class.email_taken(user)
+        expect(mail.to).to contain_exactly(user.email)
+        expect(mail.subject).to eq 'Email taken'
+      end
+    end
+  end
 end
