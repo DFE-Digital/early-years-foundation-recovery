@@ -17,6 +17,10 @@ class AssessmentQuiz
     @user.user_answers.not_archived.where(assessments_type: @type, module: @training_module_id, correct: true)
   end
 
+  def correct_answer?
+    @user.user_answers.not_archived.where(assessments_type: @type, module: @training_module_id, correct: true, name: @name).exists?
+  end
+
   def user_saved_incorrect_answers
     @user.user_answers.not_archived.where(assessments_type: @type, module: @training_module_id, correct: false)
   end
@@ -64,6 +68,10 @@ class AssessmentQuiz
 
   def existing_user_assessment_answers
     @user.user_answers.not_archived.where(assessments_type: @type, module: @training_module_id)
+  end
+
+  def get_answers
+    @user.user_answers.not_archived.where(assessments_type: @type, module: @training_module_id, name: @name)
   end
 
   def module_item
