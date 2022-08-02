@@ -11,7 +11,6 @@ defaults: &defaults
   FEEDBACK_URL: https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxUMk01Qlc1R0dKRUQ0WEpPUUFYVzdWRllXUCQlQCN0PWcu
   GOVUK_APP_DOMAIN: london.cloudapps.digital
   GROVER_NO_SANDBOX: true
-  TRACKING_ID: GTM-W6W95FD  # Test data
 
 # ey-recovery
 production:
@@ -25,6 +24,7 @@ staging:
   <<: *defaults
   DOMAIN: ey-recovery-staging.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-staging
+  TRACKING_ID: GTM-W6W95FD  # Test data
 
 # ey-recovery-content
 content:
