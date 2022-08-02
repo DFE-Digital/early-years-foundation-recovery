@@ -9,6 +9,13 @@ RSpec.describe 'Confidence check' do
 
   include_context 'with user'
 
+  context 'when user views the start page' do
+    it 'shows the correct content' do
+      visit '/modules/alpha/content-pages/1-3-3'
+      expect(page).to have_content 'Reflect on your learning'
+    end
+  end
+
   context 'when a user has visited each module up to and including a confidence check' do
     it 'can click to resume training to visit the confidence check page' do
       visit '/modules/alpha'
