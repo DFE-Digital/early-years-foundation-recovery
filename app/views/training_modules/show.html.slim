@@ -14,7 +14,8 @@
         - module_status = state
         - if defined?(page) && defined?(mod) && !page.blank?
           // = govuk_link_to t(state, scope: 'resume_button'), training_module_content_page_path(mod, page), class: 'govuk-button'
-          = set_quiz_status_resume_button(@training_module, page, state)
+          - unless module_status.to_s == 'completed'
+            = set_quiz_status_resume_button(@training_module, page, state)
 
 = govuk_tag(text: "#{@training_module.topic_count} topics", colour: 'green')
 '
