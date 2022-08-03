@@ -43,4 +43,8 @@ module ApplicationHelper
   def module_progress(mod)
     ModuleProgress.new(user: current_user, mod: mod)
   end
+
+  def track_analytics?
+    cookies[:track_analytics] == 'true'
+  end
 end

@@ -1,14 +1,15 @@
-= govuk_cookie_banner do |cb|
-  - cb.message(heading_text: "Cookies on Child development training") do |m|
-    - m.action { govuk_button_to "Accept analytics cookies", settings_path, 
-      params: { track_analytics: "Yes", return_url: request.path } }
-    - m.action { govuk_button_to "Reject analytics cookies", settings_path, 
-      params: { track_analytics: "No", return_url: request.path } }
-    - m.action { govuk_link_to "Read the cookie policy", setting_path('cookie-policy') }
+- if cookies[:track_analytics].nil?
+  = govuk_cookie_banner do |cb|
+    - cb.message(heading_text: "Cookies on Child development training") do |m|
+      - m.action { govuk_button_to "Accept analytics cookies", settings_path, 
+        params: { track_analytics: "true", return_url: request.path } }
+      - m.action { govuk_button_to "Reject analytics cookies", settings_path, 
+        params: { track_analytics: "false", return_url: request.path } }
+      - m.action { govuk_link_to "Read the cookie policy", setting_path('cookie-policy') }
 
-    p
-      | We use some essential cookies to make this service work.
+      p
+        | We use some essential cookies to make this service work.
 
-    p
-      | We’d also like to use analytics cookies so we can understand
-        how you use the service and make improvements.
+      p
+        | We’d also like to use analytics cookies so we can understand
+          how you use the service and make improvements.
