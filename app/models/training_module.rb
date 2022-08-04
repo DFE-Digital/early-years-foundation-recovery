@@ -23,6 +23,11 @@ class TrainingModule < YamlBase
     @formative ||= ModuleItem.where_type(name, 'formative_assessment').any?
   end
 
+  # @return [Boolean]
+  def summative?
+    @summative ||= ModuleItem.where_type(name, 'summative_assessment').any?
+  end
+
   # collections -------------------------
 
   # @return [Array<Questionnaire>]

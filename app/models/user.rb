@@ -82,6 +82,6 @@ private
 
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
   def password_changed_events
-    events.where(name: 'password_changed')
+    events.where(name: 'user_password_change')
   end
 end
