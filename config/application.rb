@@ -30,5 +30,6 @@ module EarlyYearsFoundationRecovery
     config.unlock_in_minutes = ENV.fetch('UNLOCK_IN_MINUTES', '120').to_i
     config.middleware.use Grover::Middleware
     config.active_record.yaml_column_permitted_classes = [Symbol]
+    config.google_analytics_tracking_id = ENV.fetch('TRACKING_ID', '#TRACKING_ID_env_var_missing')
   end
 end
