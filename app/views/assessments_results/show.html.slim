@@ -2,11 +2,11 @@ h1= @module_item.model.heading
 
 .gem-c-govspeak
   = translate_markdown(@module_item.model.body)
-  = results_banner(**@assessment_progress.result)
+  = results_banner(**@assessment.result)
 
 = form_with url: '', method: :patch do |f|
 
-  - @assessment_progress.wrong_answers_feedback.each do |question|
+  - @assessment.wrong_answers_feedback.each do |question|
     = render partial: question.to_partial_path, locals: { f: f }, object: question, as: :question
 
     .govuk-inset-text
@@ -22,7 +22,7 @@ hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class
     = link_to_previous_module_item(@module_item)
 
   .govuk-grid-column-one-half class='govuk-!-text-align-right'
-    - if @assessment_progress.passed?
+    - if @assessment.passed?
       = link_to_next_module_item(@module_item)
 
     - else

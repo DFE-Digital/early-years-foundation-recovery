@@ -8,7 +8,7 @@ class AssessmentsResultsController < ApplicationController
   end
 
   def show
-    @assessment_progress = helpers.assessment_progress(training_module)
+    @assessment = helpers.assessment_progress(training_module)
     @module_item = ModuleItem.find_by(training_module: params[:training_module_id], name: params[:id])
   end
 
