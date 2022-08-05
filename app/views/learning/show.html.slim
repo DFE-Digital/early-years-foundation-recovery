@@ -14,6 +14,7 @@ h1.govuk-heading-l My learning
         - @user.course.current_modules.each do |mod|
           .govuk-grid-column-one-third-from-desktop.govuk-grid-column-one-half class='govuk-!-margin-bottom-2'
             = render 'card', mod: mod
+            p= link_to_retake_or_results(mod)
 
 - if @user.course.available_modules.any? || @user.course.course_completed?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
