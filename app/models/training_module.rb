@@ -1,6 +1,5 @@
 class TrainingModule < YamlBase
-  # TODO: move to Rails.configuration
-  set_filename ENV.fetch('TRAINING_MODULES', 'training-modules')
+  set_filename Rails.configuration.training_modules
 
   # Override basic behaviour so that root key is stored as name
   def self.load_file
