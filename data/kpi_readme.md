@@ -87,6 +87,7 @@ Example event data from the `ahoy_visits` table.
 | [x]  | User password change   | `UserController#update_password`         | `user_password_change` | `/my-account/update-password`         |
 | [x]  | User postcode change   | `UserController#update_postcode`         | `user_postcode_change` | `/my-account/update-postcode`         |
 | [x]  | User ofsted change     | `UserController#update_ofsted_number`    | `user_ofsted_change`   | `/my-account/update-ofsted-number`    |
+| [x]  | Email address taken    | `RegistrationsController#create`         | `email_address_taken`  | `/users/sign-up`                      |
 | [x]  | User inactivity logout | `ErrorsController#timeout`               | `error_page`           | `/timeout`                            |
 | [x]  | 404 Error              | `ErrorsController#not_found`             | `error_page`           | `/404`                                |
 | [x]  | 500 Error              | `ErrorsController#internal_server_error` | `error_page`           | `/500`                                |

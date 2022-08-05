@@ -22,9 +22,12 @@ class RegistrationsController < Devise::RegistrationsController
     elsif resource.errors.one? && resource.errors.first.type.eql?(:taken)
       resource.errors.delete :email
 
-      # TODO: log and respond to attempt
       @user = resource
-      render 'user/check_email_confirmation'
+      render 'user/check_email_confirmation', status: :unprocessable_entity
+
+      resource.send_email_taken_notification
+
+      track('email_address_taken', email: resource.email, ip: request.ip, user_agent: request.user_agent)
     else
       # always hide taken message
       resource.errors.delete(:email) if resource.errors.first.type.eql?(:taken)
