@@ -77,6 +77,13 @@ protected
     summative_assessment.attempted? && summative_assessment.failed?
   end
 
+  # @see SummativeAssessmentProgress
+  #
+  # @return [Boolean]
+  def successful_attempt?
+    summative_assessment.attempted? && summative_assessment.passed?
+  end
+
 private
 
   # @return [Array<ModuleItem>]

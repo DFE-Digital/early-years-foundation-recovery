@@ -15,12 +15,22 @@ RSpec.describe 'When a user visits the module overview page' do
       end
 
       within '#section-content-1' do
-        expect(page).to have_content('1-1-1')
-          .and have_content('not started')
+        expect(page).to have_content('1-1-1').and have_content('not started')
         expect(page).not_to have_link('1-1-1')
       end
 
       expect(page).to have_link('Start', href: '/modules/alpha/content-pages/before-you-start')
+    end
+
+    it 'shows the end of module test has not been attempted' do
+      within '#section-content-3' do
+        expect(page).not_to have_content('in progress')
+        expect(page).not_to have_content('completed')
+      end
+    end
+
+    it 'shows the module recap is not clickable' do
+      expect(page).not_to have_link('Reflect on your learning', href: '/modules/alpha/content-pages/1-3-3')
     end
   end
 
