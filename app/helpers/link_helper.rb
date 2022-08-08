@@ -29,7 +29,7 @@ module LinkHelper
     text = t(state, scope: 'module_call_to_action')
     path =
       if state.eql?(:failed)
-        new_training_module_assessments_result_path(mod)
+        new_training_module_assessment_result_path(mod)
       else
         training_module_content_page_path(mod, page)
       end
@@ -39,9 +39,9 @@ module LinkHelper
   # @return [String]
   def link_to_retake_or_results(mod)
     if assessment_progress(mod).failed?
-      govuk_link_to 'Retake end of module test', new_training_module_assessments_result_path(mod)
+      govuk_link_to 'Retake end of module test', new_training_module_assessment_result_path(mod)
     else
-      govuk_link_to 'View previous test result', training_module_assessments_result_path(mod, mod.assessment_results_page)
+      govuk_link_to 'View previous test result', training_module_assessment_result_path(mod, mod.assessment_results_page)
     end
   end
 end

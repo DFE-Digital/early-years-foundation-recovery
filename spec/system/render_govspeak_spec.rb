@@ -14,9 +14,9 @@ RSpec.describe 'Govspeak', type: :system do
     end
   end
 
-  context 'with formative assessments' do
+  context 'with formative questionnaire' do
     before do
-      visit '/modules/alpha/formative-assessments/1-2-1-1'
+      visit '/modules/alpha/questionnaires/1-2-1-1'
     end
 
     it 'is displayed' do
@@ -25,9 +25,9 @@ RSpec.describe 'Govspeak', type: :system do
     end
   end
 
-  context 'with summative assessments' do
+  context 'with summative questionnaire' do
     before do
-      visit '/modules/alpha/summative-assessments/1-3-2-3'
+      visit '/modules/alpha/questionnaires/1-3-2-3'
     end
 
     it 'is displayed' do
@@ -36,9 +36,9 @@ RSpec.describe 'Govspeak', type: :system do
     end
   end
 
-  context 'with confidence checks' do
+  context 'with confidence questionnaire' do
     before do
-      visit '/modules/alpha/confidence-check/1-3-3-2'
+      visit '/modules/alpha/questionnaires/1-3-3-2'
     end
 
     it 'is displayed' do

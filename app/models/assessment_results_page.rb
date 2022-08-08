@@ -1,4 +1,4 @@
-class AssessmentsResults < OpenStruct
+class AssessmentResultsPage < OpenStruct
   include ActiveModel::Validations
   include ActiveModel::Model
   include TranslateFromLocale

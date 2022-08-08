@@ -1,17 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe 'FormativeAssessments', type: :request do
+RSpec.describe 'Questionnaires', type: :request do
   let(:user) { create(:user, :registered) }
   let(:questionnaire_data) { module_item.model }
   let(:module_item) do
-    ModuleItem.find_by(training_module: :alpha, type: :formative_assessment, name: '1-1-4')
+    ModuleItem.find_by(training_module: :alpha, type: :formative_questionnaire, name: '1-1-4')
   end
 
   before { sign_in user }
 
-  describe 'GET /modules/:training_module_id/formative_assessments/:id' do
+  describe 'GET /modules/:training_module_id/questionnaires/:id' do
     subject(:show_view) do
-      get training_module_formative_assessment_path(:alpha, questionnaire_data)
+      get training_module_questionnaire_path(:alpha, questionnaire_data)
     end
 
     before { show_view }
@@ -21,9 +21,9 @@ RSpec.describe 'FormativeAssessments', type: :request do
     end
   end
 
-  describe 'PATCH /modules/:training_module_id/formative_assessments/:id' do
+  describe 'PATCH /modules/:training_module_id/questionnaires/:id' do
     subject(:submit_questionnaire) do
-      patch training_module_formative_assessment_path(:alpha, questionnaire_data), params: { questionnaire: answers }
+      patch training_module_questionnaire_path(:alpha, questionnaire_data), params: { questionnaire: answers }
     end
 
     context 'when correct (radio buttons)' do
@@ -38,7 +38,7 @@ RSpec.describe 'FormativeAssessments', type: :request do
 
     context 'when correct (check boxes)' do
       let(:module_item) do
-        ModuleItem.find_by(training_module: :alpha, type: :formative_assessment, name: '1-2-1-1')
+        ModuleItem.find_by(training_module: :alpha, type: :formative_questionnaire, name: '1-2-1-1')
       end
 
       let(:answers) do

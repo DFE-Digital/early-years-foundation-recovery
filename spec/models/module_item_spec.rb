@@ -89,7 +89,7 @@ RSpec.describe ModuleItem, type: :model do
 
     context 'when model is a questionnaire' do
       let(:module_item) do
-        described_class.find_by(training_module: :alpha, type: :formative_assessment)
+        described_class.find_by(training_module: :alpha, type: :formative_questionnaire)
       end
 
       it 'returns a questionnaire' do

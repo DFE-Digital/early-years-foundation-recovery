@@ -101,7 +101,7 @@ RSpec.describe 'When a user visits the module overview page' do
 
   context 'when the user has finished the first submodule' do
     before do
-      view_pages_before_formative_assessment(alpha)
+      view_pages_before_formative_questionnaire(alpha)
       visit '/modules/alpha'
     end
 
@@ -120,8 +120,8 @@ RSpec.describe 'When a user visits the module overview page' do
 
   context 'when the user has failed a summative assessment' do
     before do
-      view_pages_before_summative_assessment(alpha)
-      visit '/modules/alpha/summative-assessments/1-3-2-1'
+      start_summative_assessment(alpha)
+      visit '/modules/alpha/questionnaires/1-3-2-1'
       3.times do
         check 'Wrong answer 1'
         check 'Wrong answer 2'

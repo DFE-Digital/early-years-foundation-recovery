@@ -4,10 +4,10 @@ RSpec.describe 'Confidence check' do
   include_context 'with progress'
   include_context 'with user'
 
-  let(:first_question_path) { '/modules/alpha/confidence-check/1-3-3-1' }
+  let(:first_question_path) { '/modules/alpha/questionnaires/1-3-3-1' }
 
   before do
-    view_pages_before_confidence_check(alpha)
+    start_confidence_check(alpha)
     visit first_question_path
   end
 
@@ -15,16 +15,16 @@ RSpec.describe 'Confidence check' do
     expect(page).to have_selector '.govuk-radios__input'
   end
 
-  context 'when a user has reached the confidence check' do
-    it 'can resume from the module overview page' do
+  context 'when started' do
+    it 'can be resumed' do
       visit '/modules/alpha'
       click_on 'Resume training'
       expect(page).to have_current_path(first_question_path, ignore_query: true)
     end
   end
 
-  context 'when a user has completed the questionnnaire' do
-    it 'is able to be retaken' do
+  context 'when completed' do
+    it 'can be edited' do
       3.times do
         choose 'Strongly agree'
         click_on 'Next'

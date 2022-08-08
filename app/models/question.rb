@@ -10,7 +10,7 @@ class Question < OpenStruct
   # @return [String]
   def to_partial_path
     fields = multi_select? ? :check_boxes : :radio_buttons
-    "shared/question_#{fields}"
+    "questionnaires/question_#{fields}"
   end
 
   # @return [Boolean] radio_buttons or check_boxes
@@ -33,7 +33,7 @@ class Question < OpenStruct
   #
   # @return [Boolean]
   def disabled?
-    return false if questionnaire.confidence_check?
+    return false if questionnaire.confidence?
 
     questionnaire.submitted?
   end

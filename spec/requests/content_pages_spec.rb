@@ -36,11 +36,11 @@ RSpec.describe 'ContentPages', type: :request do
 
     context 'when module item is a formative question' do
       let(:module_item) do
-        ModuleItem.where(training_module: :alpha, type: :formative_assessment).first
+        ModuleItem.where(training_module: :alpha, type: :formative_questionnaire).first
       end
 
-      it 'redirects to formative assesment controller' do
-        expect(response).to redirect_to(training_module_formative_assessment_path(:alpha, module_item.model))
+      it 'redirects to formative assessment controller' do
+        expect(response).to redirect_to(training_module_questionnaire_path(:alpha, module_item.model))
       end
     end
   end

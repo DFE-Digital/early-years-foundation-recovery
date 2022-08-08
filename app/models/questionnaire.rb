@@ -52,6 +52,8 @@ class Questionnaire < OpenStruct
 
   # @return [Hash{Symbol => nil, Integer}]
   def pagination
+    return module_item.pagination if formative?
+
     { current: page_number, total: total_questions }
   end
 
@@ -62,9 +64,18 @@ class Questionnaire < OpenStruct
     end
   end
 
-  # @see QuizHelper
   # @return [Boolean]
-  def confidence_check?
+  def formative?
+    assessments_type == 'formative_assessment'
+  end
+
+  # @return [Boolean]
+  def summative?
+    assessments_type == 'summative_assessment'
+  end
+
+  # @return [Boolean]
+  def confidence?
     assessments_type == 'confidence_check'
   end
 
@@ -147,7 +158,7 @@ private
   # @return [Hash{Symbol => Boolean}]
   def results
     @results ||= questions.each_with_object({}) do |(key, _data), hash|
-      hash[key] = !confidence_check? ? correct?(key) : true
+      hash[key] = !confidence? ? correct?(key) : true
     end
   end
 

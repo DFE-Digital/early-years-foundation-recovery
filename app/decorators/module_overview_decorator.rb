@@ -75,11 +75,11 @@ private
 
     # SummativeAssessmentProgress conditional pass
     if failed_attempt?
-      topic_status = :failed if topic_item.model.heading.eql?('End of module test')
-      next_item_name = nil if topic_item.model.heading.eql?('Reflect on your learning')
+      topic_status = :failed if topic_item.assessment_intro?
+      next_item_name = nil if topic_item.confidence_intro?
     elsif successful_attempt?
-      topic_status = :completed if topic_item.model.heading.eql?('End of module test')
-      next_item_name = topic_item if topic_item.model.heading.eql?('Reflect on your learning')
+      topic_status = :completed if topic_item.assessment_intro?
+      next_item_name = topic_item if topic_item.confidence_intro?
     end
 
     [

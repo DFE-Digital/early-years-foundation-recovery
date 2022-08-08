@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe 'Summative assessment' do
+RSpec.describe 'Summative questionnaire' do
   include_context 'with progress'
   include_context 'with user'
 
-  let(:first_question_path) { '/modules/alpha/summative-assessments/1-3-2-1' }
+  let(:first_question_path) { '/modules/alpha/questionnaires/1-3-2-1' }
 
   before do
-    view_pages_before_summative_assessment(alpha)
+    start_summative_assessment(alpha)
   end
 
   context 'when a user has reached the assessment' do
@@ -18,7 +18,7 @@ RSpec.describe 'Summative assessment' do
     end
   end
 
-  context 'when a user answers every question correctly' do
+  context 'when every question answered correctly' do
     before do
       visit first_question_path
       3.times do
@@ -59,7 +59,7 @@ RSpec.describe 'Summative assessment' do
     end
   end
 
-  context 'when a user has passed the threshold' do
+  context 'when the threshold is passed' do
     before do
       visit first_question_path
       2.times do
@@ -99,7 +99,7 @@ RSpec.describe 'Summative assessment' do
     end
   end
 
-  context 'when a user has failed' do
+  context 'when failed' do
     before do
       visit first_question_path
       3.times do

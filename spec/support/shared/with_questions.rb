@@ -35,7 +35,7 @@ RSpec.shared_context 'with questions' do
 
   let(:data_dir) { 'data/formative-questionnaires' }
 
-  let(:type) { 'formative_assessment' }
+  let(:type) { 'formative_questionnaire' }
 
   let(:questionnaire_data) do
     Rails.root.join(data_dir).children.select { |mod| mod.extname.eql?('.yml') }

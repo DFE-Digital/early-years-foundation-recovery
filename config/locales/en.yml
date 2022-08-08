@@ -221,7 +221,7 @@ en:
       text: For other problems with creating your account or signing in, please
       link_text: contact us
 
-  assessments_results:
+  assessment_results:
     show:
       incorrect: You answered %{answers}. That's not quite right.
       pass:

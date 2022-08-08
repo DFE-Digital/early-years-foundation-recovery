@@ -32,10 +32,8 @@ Rails.application.routes.draw do
 
   resources :modules, only: %i[show], as: :training_modules, controller: :training_modules do
     resources :content_pages, only: %i[index show], path: 'content-pages'
-    resources :formative_assessments, only: %i[show update], path: 'formative-assessments'
-    resources :summative_assessments, only: %i[show update], path: 'summative-assessments'
-    resources :confidence_checks, only: %i[show update], path: 'confidence-check'
-    resources :assessments_results, only: %i[show new], path: 'assessment-result'
+    resources :questionnaires, only: %i[show update]
+    resources :assessment_results, only: %i[show new], path: 'assessment-result'
     get 'certificate'
   end
 

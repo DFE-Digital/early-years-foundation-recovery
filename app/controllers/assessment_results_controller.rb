@@ -1,4 +1,4 @@
-class AssessmentsResultsController < ApplicationController
+class AssessmentResultsController < ApplicationController
   before_action :authenticate_registered_user!
   before_action :clear_flash
 

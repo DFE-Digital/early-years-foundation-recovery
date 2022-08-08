@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'When a user visits the module overview page' do
+RSpec.describe 'Module overview' do
   include_context 'with progress'
   include_context 'with user'
 

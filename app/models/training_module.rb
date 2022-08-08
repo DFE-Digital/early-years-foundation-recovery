@@ -20,12 +20,12 @@ class TrainingModule < YamlBase
 
   # @return [Boolean]
   def formative?
-    @formative ||= ModuleItem.where_type(name, 'formative_assessment').any?
+    @formative ||= ModuleItem.where_type(name, 'formative_questionnaire').any?
   end
 
   # @return [Boolean]
   def summative?
-    @summative ||= ModuleItem.where_type(name, 'summative_assessment').any?
+    @summative ||= ModuleItem.where_type(name, 'summative_questionnaire').any?
   end
 
   # collections -------------------------
@@ -103,17 +103,17 @@ class TrainingModule < YamlBase
 
   # @return [ModuleItem]
   def first_assessment_page
-    ModuleItem.where_type(name, 'summative_assessment').first
+    ModuleItem.where_type(name, 'summative_questionnaire').first
   end
 
   # @return [ModuleItem]
   def last_assessment_page
-    ModuleItem.where_type(name, 'summative_assessment').last
+    ModuleItem.where_type(name, 'summative_questionnaire').last
   end
 
   # @return [ModuleItem]
   def assessment_results_page
-    ModuleItem.where_type(name, 'assessments_results').first
+    ModuleItem.where_type(name, 'assessment_results').first
   end
 
   # Summative results if module includes assessment

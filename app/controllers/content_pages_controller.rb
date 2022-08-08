@@ -12,10 +12,12 @@ class ContentPagesController < ApplicationController
 
     @model = module_item.model
 
-    if @model.is_a?(Questionnaire) || @model.is_a?(AssessmentsResults)
-      redirect_to questionnaire_path(training_module_name, module_item)
+    if @model.is_a?(Questionnaire)
+      redirect_to training_module_questionnaire_path(training_module_name, module_item)
+    elsif module_item.assessment_results?
+      redirect_to training_module_assessment_result_path(training_module_name, module_item)
     else
-      render module_item.type
+      render content_page_partial(module_item)
     end
   end
 
@@ -27,5 +29,13 @@ private
 
   def training_module_name
     @training_module_name ||= params[:training_module_id]
+  end
+
+  def content_page_partial(module_item)
+    case module_item.type
+    when /intro/ then 'intro_page'
+    else
+      module_item.type
+    end
   end
 end
