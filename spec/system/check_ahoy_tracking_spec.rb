@@ -108,6 +108,7 @@ RSpec.describe 'Check ahoy tracking' do
   context 'when a user has finished alpha module (at the certificate page)' do
     before do
       visit '/modules/alpha/content-pages/intro'
+      travel_to 5.minutes.from_now
       view_pages_before(alpha, 'sub_module_intro', 7)
       visit 'modules/alpha/content-pages/1-3-3-4'
       click_on 'Finish'
@@ -116,6 +117,11 @@ RSpec.describe 'Check ahoy tracking' do
     it 'ahoy tracks the completion of a module - track(module_complete)' do
       expect(page).to have_current_path '/modules/alpha/certificate', ignore_query: true
       expect(alpha_event.where(name: 'module_complete').size).to eq 1
+    end
+
+    it 'displays the time taken to complete the module' do
+      expect(alpha_event.where(name: 'time_taken_to_complete_module')
+        .first.properties['time_in_seconds']).to be_within(1).of(300)
     end
 
     context 'when user starts the second module' do

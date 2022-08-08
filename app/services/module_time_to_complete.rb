@@ -14,12 +14,12 @@ class ModuleTimeToComplete
     user.module_time_to_completion
   end
 
-private
-
   # @return [Integer] time in seconds
   def result
     (module_complete_time - module_start_time).to_i
   end
+
+private
 
   # @return [Time]
   def module_start_time

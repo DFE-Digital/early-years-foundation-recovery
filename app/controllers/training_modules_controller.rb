@@ -26,6 +26,7 @@ class TrainingModulesController < ApplicationController
       track('module_complete')
       mod_time = ModuleTimeToComplete.new(user: current_user, training_module_id: params[:training_module_id])
       mod_time.update_time
+      track('time_taken_to_complete_module', time_in_seconds: mod_time.result)
     end
   end
 end
