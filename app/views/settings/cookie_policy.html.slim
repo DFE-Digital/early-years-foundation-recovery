@@ -11,6 +11,6 @@
         = f.hidden_field :return_url, value: request.path
         = f.govuk_radio_buttons_fieldset(:checked, legend: { size: 'm', text: t('settings.cookie.change_cookies_question') }, inline: true ) do
           = f.hidden_field :notify_if_successful, value: true
-          = f.govuk_radio_button :track_analytics, 'Yes', label: { text: 'Yes' }, checked: (cookies[:track_analytics] == "Yes")
-          = f.govuk_radio_button :track_analytics, 'No', label: { text: 'No' }, checked: (cookies[:track_analytics] == "No")
+          = f.govuk_radio_button :track_analytics, 'true', label: { text: 'Yes' }, checked: (track_analytics?)
+          = f.govuk_radio_button :track_analytics, 'false', label: { text: 'No' }, checked: (!track_analytics?)
         = f.submit "Save cookie settings", class: "govuk-button"
