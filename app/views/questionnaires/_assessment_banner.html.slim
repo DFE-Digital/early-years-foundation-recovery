@@ -6,4 +6,5 @@
     h2#govuk-notification-banner-title.govuk-notification-banner__title
       = questionnaire.valid? ? "That's right" : "That's not quite right"
   .govuk-notification-banner__content
-    p.govuk-body= questionnaire.summary_for(question)
+    .gem-c-govspeak
+      = translate_markdown questionnaire.summary_for(question)
