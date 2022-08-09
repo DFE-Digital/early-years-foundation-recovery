@@ -62,7 +62,7 @@ class QuestionnaireTaker
     existing_user_answers.update_all(archived: true)
   end
 
-  private
+private
 
   # @return [Hash{Symbol => Array<Integer>}]
   def answer_data
