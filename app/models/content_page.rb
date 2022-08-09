@@ -12,7 +12,8 @@ class ContentPage
 
   # @return [String]
   def heading
-    translate(:heading).present? ? translate(:heading) : I18n.t("#{type}.heading")
+    !I18n.t("#{type}.heading").include?('translation missing') ? 
+      I18n.t("#{type}.heading") : translate(:heading)
   end
 
   # @return [String]
