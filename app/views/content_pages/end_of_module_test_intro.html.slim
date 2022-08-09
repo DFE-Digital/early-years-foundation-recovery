@@ -2,6 +2,7 @@
 
 - content_for :content_page do
   .gem-c-govspeak
-    = translate_markdown t('end_of_module_test_intro', passmark: @training_mod.summative_threshold)
+    = translate_markdown t('end_of_module_test_intro', 
+      passmark: @training_mod.summative_threshold)
 
 = render 'shared/content_wrap'

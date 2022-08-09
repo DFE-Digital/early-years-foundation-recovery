@@ -160,28 +160,11 @@ en:
       1-3-1:
         heading: Recap
         body: |
-          - recap of what you have learnt
-          - followup activities
-          - further reading links
+          This page contains a recap of what you have learnt and also further 
+          activities and further reading links on the live module.
+
       1-3-2:
-        heading: End of module test
-        body: |
-          This end of module test is here to revisit what you have learned and the
-          impact on your practice. It is not aimed to provide a pass or fail.
-
-          ## Before you start
-
-          This test has 3 multiple choice questions.
-
-          You must answer all of the questions.
-
-          You can review your total score for the test at the end.
-
-          To receive a certificate of achievement for this module, you need to
-          receive an overall score of at least 70%.
-
-          If you do not score 70%, you will be able to see which questions you got wrong.
-          You can repeat the test to improve your score as many times as you want to.
+        # assessment intro
       1-3-2-1:
         # questionnaire
       1-3-2-2:
@@ -194,14 +177,7 @@ en:
         # questionnaire
 
       1-3-3:
-        heading: Reflect on your learning
-        body: |
-          To help DfE to measure our impact, please answer the following questions.
-
-          Answers will be anonymous, and we will not know what you individually select.
-
-          To what extent do you agree with the following statements:
-
+        # confidence intro
       1-3-3-1:
         # questionnaire
       1-3-3-2:
@@ -213,4 +189,3 @@ en:
         body: |
           You can also <a href="#" target="blank">give feedback about the training
           (opens in new window)</a>
-
