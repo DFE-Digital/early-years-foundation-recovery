@@ -4,6 +4,6 @@
   h1= t('end_of_module_test_intro.heading')
   .gem-c-govspeak
     = translate_markdown t('end_of_module_test_intro.body', 
-      passmark: @training_mod.summative_threshold)
+      passmark: @model.module_item.parent.summative_threshold)
 
 = render 'shared/content_wrap'

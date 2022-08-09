@@ -12,7 +12,7 @@ class ContentPage
 
   # @return [String]
   def heading
-    if !I18n.t("#{type}.heading").include?('translation missing')
+    if module_item.confidence_intro? || module_item.assessment_intro?
       I18n.t("#{type}.heading")
     else
       translate(:heading)

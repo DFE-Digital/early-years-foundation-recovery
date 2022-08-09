@@ -176,7 +176,7 @@ en:
       - reinforce effective teaching and learning
       - help you to think about what you have learned
 
-  end_of_module_test_intro:
+  assessment_intro:
     heading: End of module test
     body: |
       This end of module test is here to revisit what you have learned and the 
@@ -200,7 +200,7 @@ en:
       you got wrong. You can repeat the test to improve your score as many times 
       as you want to. 
 
-  confidence_check_intro:
+  confidence_intro:
     heading: Reflect on your learning
     body: |
       To help DfE to measure our impact, please answer the following questions.

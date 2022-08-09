@@ -10,7 +10,7 @@ RSpec.describe ContentPage, type: :model do
   end
 
   let(:content_page) do
-    described_class.new(training_module: 'alpha', type: :text_page, id: '1-1-1')
+    described_class.new(training_module: 'alpha', type: :text_page, id: '1-1-1', name: '1-1-1')
   end
 
   describe '#heading' do
