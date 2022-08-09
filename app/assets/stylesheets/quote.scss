@@ -1,0 +1,49 @@
+blockquote {
+  all: revert;
+  position: relative;
+  border: 3px solid #000;
+  padding: 20px;
+
+}
+
+blockquote:before {
+  all: revert;
+  position: absolute;
+  content: open-quote;
+  font-size: 8em;
+  margin-top: -0.4em;
+  background-color: #fff;
+  line-height: 0.9;
+  width: 7%;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+
+blockquote p {
+  all: revert;
+  /*display: inline;*/
+  padding-left: 40px;
+  padding-top: 10px;
+  position: relative;
+  z-index: 9999;
+
+}
+
+cite:before {
+  content: "-";
+}
+
+cite {
+  padding-left: 40px;
+  font-family: "GDS Transport", arial, sans-serif;
+  font-style: normal;
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.blockquote-wrap {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

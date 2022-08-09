@@ -12,6 +12,23 @@ en:
 
           %Warning: people like stuff!%
 
+          <div class="govuk-inset-text prompt prompt">
+            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+
+            <p class="govuk-body">Think of an occasion when you used one of these techniques and consider the following questions: </p>
+
+            <ul class="govuk-list govuk-list--bullet">
+            <li>did you know that you were scaffolding learning?  </li>
+            <li>what did you hope to achieve?  </li>
+            <li>what other information did you need about the child to make scaffolding successful? </li>
+            <li>what was the outcome? </li>
+            </ul>
+          </div>
+
+          > No job is more important than working with children in the early years
+          <cite>Development Matters, 2021</cite>
+          
+
 
           `%Warning: people like stuff!%`
 
