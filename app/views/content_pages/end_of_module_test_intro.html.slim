@@ -1,8 +1,9 @@
 = render 'debug'
 
 - content_for :content_page do
+  h1= t('end_of_module_test_intro.heading')
   .gem-c-govspeak
-    = translate_markdown t('end_of_module_test_intro', 
+    = translate_markdown t('end_of_module_test_intro.body', 
       passmark: @training_mod.summative_threshold)
 
 = render 'shared/content_wrap'

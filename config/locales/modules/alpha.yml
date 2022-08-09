@@ -187,5 +187,5 @@ en:
       1-3-3-4:
         heading: Thank you
         body: |
-          You can also <a href="#" target="blank">give feedback about the training
+          You can also <a href="#" target="_blank">give feedback about the training
           (opens in new window)</a>
