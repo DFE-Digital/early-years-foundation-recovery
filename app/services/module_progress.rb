@@ -9,8 +9,12 @@ class ModuleProgress
     @summative_assessment = SummativeAssessmentProgress.new(user: user, mod: mod)
   end
 
-  # TODO: use correct yard syntax here
-  # @return [SummativeAssessmentProgress]
+  # @!attribute [r] user
+  #   @return [User]
+  # @!attribute [r] mod
+  #   @return [TrainingModule]
+  # @!attribute [r] summative_assessment
+  #   @return [SummativeAssessmentProgress]
   attr_reader :user, :mod, :summative_assessment
 
   # Name of last page viewed in module
