@@ -12,7 +12,7 @@ class ContentPage
 
   # @return [String]
   def heading
-    if module_item.confidence_intro? || module_item.assessment_intro?
+    if module_item.confidence_intro? || module_item.assessment_intro? || module_item.ending_intro?
       I18n.t("#{type}.heading")
     else
       translate(:heading)
@@ -21,7 +21,11 @@ class ContentPage
 
   # @return [String]
   def body
-    translate(:body)
+    if module_item.confidence_intro? || module_item.assessment_intro? || module_item.ending_intro?
+      I18n.t("#{type}.body", passmark: module_item.parent.summative_threshold, feedback_url: Rails.configuration.feedback_url)
+    else
+      translate(:body)
+    end
   end
 
   # @return [String]

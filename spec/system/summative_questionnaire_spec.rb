@@ -13,7 +13,8 @@ RSpec.describe 'Summative questionnaire' do
   describe 'intro' do
     it 'uses generic content' do
       visit '/modules/alpha/content-pages/1-3-2'
-      expect(page).to have_content 'End of module test'
+      expect(page).to have_content('End of module test')
+        .and have_content('This end of module test is here to revisit what you have learned')
     end
   end
 

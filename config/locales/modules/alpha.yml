@@ -185,7 +185,4 @@ en:
       1-3-3-3:
         # questionnaire
       1-3-3-4:
-        heading: Thank you
-        body: |
-          You can also <a href="#" target="_blank">give feedback about the training
-          (opens in new window)</a>
+        # ending intro

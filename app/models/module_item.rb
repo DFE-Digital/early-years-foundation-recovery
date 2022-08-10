@@ -21,6 +21,7 @@ class ModuleItem < YamlBase
   MODELS = {
     assessment_intro: ContentPage,
     confidence_intro: ContentPage,
+    ending_intro: ContentPage,
     interruption_page: ContentPage,
     module_intro: ContentPage,
     sub_module_intro: ContentPage,
@@ -189,6 +190,11 @@ class ModuleItem < YamlBase
   # @return [Boolean]
   def confidence_intro?
     type.eql?('confidence_intro')
+  end
+  
+  # @return [Boolean]
+  def ending_intro?
+    type.eql?('ending_intro')
   end
 
   # position ---------------------------------
