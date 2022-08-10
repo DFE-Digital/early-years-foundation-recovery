@@ -36,8 +36,10 @@ module LinkHelper
     govuk_link_to text, path, class: 'govuk-button'
   end
 
-  # @return [String]
+  # @return [String, nil]
   def link_to_retake_or_results(mod)
+    return unless assessment_progress(mod).attempted?
+
     if assessment_progress(mod).failed?
       govuk_link_to 'Retake end of module test', new_training_module_assessment_result_path(mod)
     else
