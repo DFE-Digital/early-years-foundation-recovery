@@ -3,6 +3,12 @@ class QuestionnairesController < ApplicationController
 
   def show
     questionnaire_taker.prepare
+
+    # TODO: port missing tracking keys
+    # summative_assessment_start
+    # summative_assessment_complete
+    # confidence_check_start
+    # confidence_check_complete
   end
 
   def update
@@ -59,6 +65,7 @@ protected
       flash[:error] = 'Please select an answer'
     else
       populate_and_persist
+      track_questionnaire_answer
     end
 
     render :show, status: :unprocessable_entity
@@ -70,6 +77,7 @@ protected
       render :show, status: :unprocessable_entity
     else
       populate_and_persist
+      track_questionnaire_answer
 
       redirect_to next_item_path(questionnaire.module_item)
     end
@@ -81,6 +89,7 @@ protected
       render :show, status: :unprocessable_entity
     else
       populate_and_persist
+      track_questionnaire_answer
 
       mod = questionnaire.module_item.parent
 
@@ -91,5 +100,15 @@ protected
         redirect_to next_item_path(questionnaire.module_item)
       end
     end
+  end
+
+  def track_questionnaire_answer
+    key = questionnaire.questions.keys.first
+
+    track('questionnaire_answer',
+          type: questionnaire.assessments_type,
+          success: questionnaire.result_for(key),
+          answer: questionnaire.answer_for(key),
+          )
   end
 end

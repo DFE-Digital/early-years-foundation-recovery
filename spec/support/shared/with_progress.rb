@@ -55,6 +55,16 @@ RSpec.shared_context 'with progress' do
     })
   end
 
+  # @return [true] create a fake event log item for a specific event key and controller
+  def view_module_page_event_with_specified_key(module_name, page_name, track_key, controller_name)
+    tracker.track(track_key, {
+      id: page_name,
+      action: 'show',
+      controller: controller_name,
+      training_module_id: module_name,
+    })
+  end
+
 private
 
   # Visit every page before the given instance of the given page type

@@ -9,6 +9,8 @@ class ContentPagesController < ApplicationController
 
   def show
     track('module_content_page')
+    track('module_start') if track_module_start?
+    track('confidence_check_complete') if track_confidence_check_complete?
 
     @model = module_item.model
 
@@ -37,5 +39,13 @@ private
     else
       module_item.type
     end
+  end
+
+  def track_module_start?
+    module_item.module_intro? && !tracked?('module_start', training_module_id: training_module_name)
+  end
+
+  def track_confidence_check_complete?
+    helpers.module_progress(module_item.parent).completed? && !tracked?('confidence_check_complete', training_module_id: training_module_name)
   end
 end

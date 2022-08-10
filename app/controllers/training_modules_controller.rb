@@ -20,5 +20,19 @@ class TrainingModulesController < ApplicationController
   def certificate
     @training_module = TrainingModule.find_by(name: params[:training_module_id])
     @module_progress = ModuleOverviewDecorator.new(helpers.module_progress(@training_module))
+
+    track('module_complete', time_in_seconds: mod_time.result) if track_module_complete?
+
+    mod_time.update_time
+  end
+
+private
+
+  def track_module_complete?
+    !tracked?('module_complete', training_module_id: @training_module.name)
+  end
+
+  def mod_time
+    @mod_time ||= ModuleTimeToComplete.new(user: current_user, training_module_id: @training_module.name)
   end
 end
