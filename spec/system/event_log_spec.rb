@@ -109,7 +109,6 @@ RSpec.describe 'Event log' do
       travel_to 5.minutes.from_now
       visit 'modules/alpha/content-pages/1-3-3-4'
       click_on 'Finish'
-      p page.current_path
     end
 
     it 'tracks completion' do
