@@ -1,4 +1,26 @@
 module ApplicationHelper
+  # @return [String]
+  def html_title 
+    #action_and_title = [params[:action], training_module_title].join(' ').capitalize if @training_module.present?
+    title = t(params.permit("controller", "action", "training_module_id", "id").values.join('.'), scope: 'html_title', default: nil)
+    ["Child development training", @model&.heading || training_module_title || module_item_title || title].join(" : ")
+  end
+
+  def training_module_title
+    case @training_module
+    when TrainingModule
+      [@training_module.title, params['id']].join(' ')
+    when String
+      [TrainingModule.find_by(name: @training_module).title, params['id']].join(' ')
+    end
+  end
+
+  def module_item_title
+    return nil if @module_item.blank?
+    
+    @module_item.model.type.humanize
+  end
+
   def navigation
     govuk_header(service_name: 'Child development training', classes: 'noprint') do |header|
       header.navigation_item(text: 'Home', href: root_path)
