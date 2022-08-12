@@ -23,7 +23,7 @@ class TrainingModulesController < ApplicationController
 
     track('module_complete') if track_module_complete?
 
-    mod_time.update_time
+    mod_time.update_time(params[:training_module_id])
   end
 
 private
