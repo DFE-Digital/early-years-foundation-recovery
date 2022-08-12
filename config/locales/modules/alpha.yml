@@ -25,8 +25,12 @@ en:
             </ul>
           </div>
 
-          > No job is more important than working with children in the early years
-          <cite>Development Matters, 2021</cite>
+          <div class='blockquote-wrap'>
+            <blockquote class='quote'>
+              <p>No job is more important than working with children in the early years</p>
+              <cite>Development Matters, 2021</cite>
+            </blockquote>
+          </div>
           
 
 
