@@ -16,6 +16,8 @@ class ModuleTimeToComplete
 
   # @return [Integer] time in seconds
   def result
+    return nil if module_complete_time.nil? || module_start_time.nil?
+    
     (module_complete_time - module_start_time).to_i
   end
 
@@ -23,11 +25,13 @@ private
 
   # @return [Time]
   def module_start_time
-    user.events.where(name: 'module_start').where_properties(training_module_id: training_module_id).first.time
+    first_event = user.events.where(name: 'module_start').where_properties(training_module_id: training_module_id).first
+    first_event.nil? ? nil : first_event.time
   end
 
   # @return [Time]
   def module_complete_time
-    user.events.where(name: 'module_complete').where_properties(training_module_id: training_module_id).first.time
+    first_event = user.events.where(name: 'module_complete').where_properties(training_module_id: training_module_id).first
+    first_event.nil? ? nil : first_event.time
   end
 end
