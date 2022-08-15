@@ -68,7 +68,7 @@ RSpec.describe 'When a user visits the module overview page' do
 
       within '#section-content-1 .govuk-list li:first-child' do
         expect(page).to have_content('not started')
-          .and have_link('1-1-1', href:  '/modules/alpha/content-pages/1-1-1')
+        expect(page).not_to have_link('1-1-1', href:  '/modules/alpha/content-pages/1-1-1')
       end
 
       expect(page).to have_link('Resume training', href: '/modules/alpha/content-pages/1-1')
@@ -88,11 +88,12 @@ RSpec.describe 'When a user visits the module overview page' do
 
       within '#section-content-1 .govuk-list li:first-child' do
         expect(page).to have_content('complete')
+        expect(page).to have_link('1-1-1', href:  '/modules/alpha/content-pages/1-1-1')
       end
 
       within '#section-content-1 .govuk-list li:nth-child(2)' do
         expect(page).to have_content('not started')
-          .and have_link('1-1-2', href:  '/modules/alpha/content-pages/1-1-2')
+        expect(page).not_to have_link('1-1-2', href:  '/modules/alpha/content-pages/1-1-2')
       end
 
       expect(page).to have_link('Resume training', href: '/modules/alpha/content-pages/1-1-1')
