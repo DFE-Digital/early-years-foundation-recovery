@@ -52,3 +52,5 @@ delta:
   summative_threshold: 70
 test:
   title: Test Module
+  thumbnail: test_module_thumbnail
+  draft: true
