@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :reload_yaml if Rails.env.development?
   before_action :set_analytics_tracking_id
- 
+
   default_form_builder(EarlyYearsRecoveryFormBuilder)
 
   # Record user event

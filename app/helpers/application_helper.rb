@@ -1,9 +1,8 @@
 module ApplicationHelper
   # @return [String]
-  def html_title 
-    #action_and_title = [params[:action], training_module_title].join(' ').capitalize if @training_module.present?
-    title = t(params.permit("controller", "action", "training_module_id", "id").values.join('.'), scope: 'html_title', default: nil)
-    ["Child development training", @model&.heading || training_module_title || module_item_title || title].join(" : ")
+  def html_title
+    title = t(params.permit('controller', 'action', 'training_module_id', 'id').values.join('.'), scope: 'html_title', default: nil)
+    ['Child development training', @model&.heading || training_module_title || module_item_title || title].join(' : ')
   end
 
   def training_module_title
@@ -17,7 +16,7 @@ module ApplicationHelper
 
   def module_item_title
     return nil if @module_item.blank?
-    
+
     @module_item.model.type.humanize
   end
 
