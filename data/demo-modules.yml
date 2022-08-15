@@ -50,3 +50,5 @@ delta:
   depends_on: bravo
   draft: true
   summative_threshold: 70
+test:
+  title: Test Module
