@@ -13,13 +13,13 @@ class ModuleTimeToComplete
   def update_time(training_module_id)
     @training_module_id = training_module_id
     user.module_time_to_completion[training_module_id] = result
-    user.save
+    user.save if !result.nil?
     user.module_time_to_completion
   end
 
   # @return [Integer] time in seconds
   def result
-    return nil if module_complete_time.nil? && module_start_time.nil?
+    return if module_complete_time.nil? && module_start_time.nil?
     
     return 0 if module_complete_time.nil?
 

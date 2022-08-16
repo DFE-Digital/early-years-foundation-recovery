@@ -6,7 +6,7 @@ RSpec.describe ModuleTimeToComplete do
   let(:module_name) { alpha.name }
 
   subject(:completion_time) { described_class.new(user: user, training_module_id: module_name) }
-  let(:user) { create(:user, :confirmed) }
+  let(:user) { create(:user, :completed) }
 
   let(:alpha_event) do
     Ahoy::Event.new(user_id: user.id, name: 'module_start', time: Time.new(2000,01,01),
@@ -26,7 +26,16 @@ RSpec.describe ModuleTimeToComplete do
     Ahoy::Event.new(user_id: user.id, name: 'module_start', time: Time.new(2000,01,04),
       properties: {training_module_id: 'charlie'}, visit: Ahoy::Visit.new()).save!
   end
+
+  let(:user_completion_time) { User.first.module_time_to_completion }
   
+  describe '#update_time' do
+    it 'returns empty hash before any modules taken' do
+      result = completion_time.update_time(module_name)
+      expect(user_completion_time).to eq result
+    end
+  end
+
   before do
     alpha_event
   end
@@ -34,7 +43,7 @@ RSpec.describe ModuleTimeToComplete do
   describe '#update_time' do
     it 'returns a hash containing time to complete alpha' do
       result = completion_time.update_time(module_name)
-      expect(result).to include('alpha' => 172800)
+      expect(user_completion_time).to eq result
     end
   end
 
@@ -48,7 +57,7 @@ RSpec.describe ModuleTimeToComplete do
       result = completion_time.update_time(module_name)
       module_name = 'bravo'
       result = completion_time.update_time(module_name)
-      expect(result).to include('alpha' => 172800, 'bravo' => 259200)
+      expect(user_completion_time).to eq result
     end
   end
 
@@ -65,7 +74,7 @@ RSpec.describe ModuleTimeToComplete do
       result = completion_time.update_time(module_name)
       module_name = 'charlie'
       result = completion_time.update_time(module_name)
-      expect(result).to include('alpha' => 172800, 'bravo' => 259200, 'charlie' => 0)
+      expect(user_completion_time).to eq result
     end
   end
 end
