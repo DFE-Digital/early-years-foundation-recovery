@@ -11,9 +11,9 @@ class ModuleTimeToComplete
 
   # @return [Hash{String => Integer}]
   def update_time(training_module_id)
-    # binding.pry
     @training_module_id = training_module_id
     user.module_time_to_completion[training_module_id] = result
+    user.save
     user.module_time_to_completion
   end
 

@@ -31,6 +31,7 @@ class QuestionnairesController < ApplicationController
 protected
 
   def track_summative_assessment_started?
+    return false if questionnaire.module_item.parent.first_assessment_page.nil?
     questionnaire.module_item.parent.first_assessment_page.name == params[:id]
   end
 
@@ -38,12 +39,13 @@ protected
     !tracked?('summative_assessment_start', training_module_id: params[:training_module_id])
   end
 
+  def track_confidence_check_started?
+    return false if questionnaire.module_item.parent.first_confidence_page.nil?
+    questionnaire.module_item.parent.first_confidence_page.name == params[:id]
+  end
+  
   def confidence_untracked?
     !tracked?('confidence_check_start', training_module_id: params[:training_module_id])
-  end
-
-  def track_confidence_check_started? 
-    questionnaire.module_item.parent.first_confidence_page.name == params[:id]
   end
 
   def questionnaire
