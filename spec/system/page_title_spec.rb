@@ -30,7 +30,7 @@ RSpec.describe 'Page' do
     it { has_title('Resend unlock instructions') { visit new_user_unlock_path } }
 
     # valid unlock redirects to sign in page
-    it "and is a valid unlock" do
+    it 'and is a valid unlock' do
       has_title('Sign in') do
         user = create :user
         token = user.lock_access!
@@ -38,7 +38,7 @@ RSpec.describe 'Page' do
       end
     end
 
-    it "and is an expired/invalid unlock" do
+    it 'and is an expired/invalid unlock' do
       has_title('Resend unlock instructions') do
         user = create :user
         user.lock_access!

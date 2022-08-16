@@ -1,26 +1,26 @@
 module ApplicationHelper
   # @return [String]
-  def html_title
-    ['Child development training', @model&.heading || training_module_title || module_item_title || default_html_title].join(' : ')
+  def html_title(model_heading, training_module_title, module_item_title)
+    ['Child development training', model_heading || training_module_title || module_item_title || default_html_title].join(' : ')
   end
 
   def default_html_title
-    t(params.permit('controller', 'action', 'training_module_id', 'id').values.join('.'), scope: 'html_title') #, default: nil)
+    t(params.permit('controller', 'action', 'training_module_id', 'id').values.join('.'), scope: 'html_title', default: nil)
   end
 
-  def training_module_title
-    case @training_module
+  def training_module_title(training_module)
+    case training_module
     when TrainingModule
-      [@training_module.title, params['id']].join(' ')
+      [training_module.title, params['id']].join(' ')
     when String
-      [TrainingModule.find_by(name: @training_module).title, params['id']].join(' ')
+      [TrainingModule.find_by(name: training_module).title, params['id']].join(' ')
     end
   end
 
-  def module_item_title
-    return nil if @module_item.blank?
+  def module_item_title(module_item)
+    return nil if module_item.blank?
 
-    @module_item.model.type.humanize
+    module_item.model.type.humanize
   end
 
   def navigation
