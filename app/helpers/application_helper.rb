@@ -1,8 +1,11 @@
 module ApplicationHelper
   # @return [String]
   def html_title
-    title = t(params.permit('controller', 'action', 'training_module_id', 'id').values.join('.'), scope: 'html_title', default: nil)
-    ['Child development training', @model&.heading || training_module_title || module_item_title || title].join(' : ')
+    ['Child development training', @model&.heading || training_module_title || module_item_title || default_html_title].join(' : ')
+  end
+
+  def default_html_title
+    t(params.permit('controller', 'action', 'training_module_id', 'id').values.join('.'), scope: 'html_title') #, default: nil)
   end
 
   def training_module_title

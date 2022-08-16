@@ -298,7 +298,8 @@ en:
       new: Resend your confirmation
       show: Resend your confirmation
     devise/unlocks:
-      new: The link you followed has expired
+      new: Resend unlock instructions
+      show: Resend unlock instructions
     extra_registrations:
       edit:
         name: About you

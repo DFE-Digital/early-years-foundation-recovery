@@ -27,14 +27,22 @@ RSpec.describe 'Page' do
       end
     } # valid confirmation redirects to sign in page - no page to show once validated
 
-    it { has_title('The link you followed has expired') { visit new_user_unlock_path } }
+    it { has_title('Resend unlock instructions') { visit new_user_unlock_path } }
 
     # valid unlock redirects to sign in page
-    xit do
+    it "and is a valid unlock" do
       has_title('Sign in') do
         user = create :user
+        token = user.lock_access!
+        visit user_unlock_path(unlock_token: token)
+      end
+    end
+
+    it "and is an expired/invalid unlock" do
+      has_title('Resend unlock instructions') do
+        user = create :user
         user.lock_access!
-        visit user_unlock_path(unlock_token: user.reload.unlock_token)
+        visit user_unlock_path(unlock_token: 'invalid_token')
       end
     end
   end
