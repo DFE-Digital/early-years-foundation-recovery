@@ -6,7 +6,7 @@ def has_title(expected_title)
 end
 
 RSpec.describe 'Page' do
-  context 'that is public' do
+  context 'when it is public' do
     it { has_title('Home page') { visit root_path } }
     it { has_title('Sign in') { visit new_user_session_path } }
     it { has_title('Reset password') { visit new_user_password_path } }
@@ -39,7 +39,7 @@ RSpec.describe 'Page' do
     end
   end
 
-  context 'that is for user' do
+  context 'when user is logged in' do
     include_context 'with user'
 
     it { has_title('Home page') { visit root_path } }
@@ -61,7 +61,7 @@ RSpec.describe 'Page' do
     it { has_title('Check email password reset') { visit check_email_password_reset_user_path } }
     it { has_title('My account') { visit user_path } }
 
-    context 'training module' do
+    context 'and using training module' do
       let(:training_module_id) { 'alpha' }
 
       it { has_title('First Training Module') { visit training_module_content_pages_path(training_module_id: training_module_id) } }
