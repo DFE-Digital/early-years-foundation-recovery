@@ -1,42 +1,52 @@
 # User's time taken to complete a module - calculated in seconds
 #
 class ModuleTimeToComplete
-  def initialize(user:, training_module_id:)
-    @user = user
-    @training_module_id = training_module_id
-  end
-
   attr_reader :user
-  attr_accessor :training_module_id
+  
+  def initialize(user:)
+    @user = user
+  end
 
   # @return [Hash{String => Integer}]
-  def update_time(training_module_id)
-    @training_module_id = training_module_id
-    user.module_time_to_completion[training_module_id] = result
-    user.save if !result.nil?
-    user.module_time_to_completion
-  end
+  def update_time(training_modules = all_training_modules)
+    training_modules.each do |training_module|
+      @training_module = training_module
+      return if module_start_time.nil?
 
-  # @return [Integer] time in seconds
-  def result
-    return if module_complete_time.nil? && module_start_time.nil?
-    
-    return 0 if module_complete_time.nil?
-
-    (module_complete_time - module_start_time).to_i
+      user.module_time_to_completion[@training_module] = result
+      user.save if !result.nil?
+      user.module_time_to_completion
+    end
   end
 
 private
+  
+  # @return [Integer] time in seconds
+  def result
+    return 0 if module_complete_time.nil?
+    
+    (module_complete_time - module_start_time).to_i
+  end
+  
+  # @return [Array<String>]
+  def all_training_modules
+    TrainingModule.all.map do |training_module|
+      training_module.name
+    end
+  end
+
+  # @return [Ahoy::Event]
+  def module_event(event_name)
+    user.events.where(name: event_name).where_properties(training_module_id: @training_module).first
+  end
 
   # @return [Time]
   def module_start_time
-    first_event = user.events.where(name: 'module_start').where_properties(training_module_id: training_module_id).first
-    first_event.nil? ? nil : first_event.time
+    module_event('module_start').nil? ? nil : module_event('module_start').time
   end
 
   # @return [Time]
   def module_complete_time
-    first_event = user.events.where(name: 'module_complete').where_properties(training_module_id: training_module_id).first
-    first_event.nil? ? nil : first_event.time
+    module_event('module_complete').nil? ? nil : module_event('module_complete').time
   end
 end

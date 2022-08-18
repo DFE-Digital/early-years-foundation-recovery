@@ -12,7 +12,7 @@ class ContentPagesController < ApplicationController
     
     if track_module_start?
       track('module_start')
-      mod_time.update_time(params[:training_module_id])
+      mod_time.update_time(training_module_name)
     end
 
     track('confidence_check_complete') if track_confidence_check_complete?

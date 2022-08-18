@@ -4,9 +4,9 @@ RSpec.describe ModuleTimeToComplete do
   include_context 'with progress'
 
   let(:module_name) { alpha.name }
-
-  subject(:completion_time) { described_class.new(user: user, training_module_id: module_name) }
   let(:user) { create(:user, :completed) }
+
+  subject(:completion_time) { described_class.new(user: user) }
 
   let(:alpha_event) do
     Ahoy::Event.new(user_id: user.id, name: 'module_start', time: Time.new(2000,01,01),
@@ -27,54 +27,49 @@ RSpec.describe ModuleTimeToComplete do
       properties: {training_module_id: 'charlie'}, visit: Ahoy::Visit.new()).save!
   end
 
-  let(:user_completion_time) { User.first.module_time_to_completion }
+  let(:user_completion_time) { user.module_time_to_completion }
   
   describe '#update_time' do
-    it 'returns empty hash before any modules taken' do
-      result = completion_time.update_time(module_name)
-      expect(user_completion_time).to eq result
+    context 'when no modules have been taken'
+      it 'returns empty hash' do
+        completion_time.update_time
+        expect(user_completion_time).to eq Hash.new
+      end
     end
-  end
 
-  before do
-    alpha_event
-  end
+    context 'when alpha has been completed' do
+      before do
+        alpha_event
+      end
+
+      it 'returns hash containing time to complete alpha' do
+        completion_time.update_time
+        expect(user_completion_time).to eq('alpha' => 172800)
+      end
+
+    context 'when bravo has been completed' do
+      before do
+        alpha_event
+        bravo_event
+      end
     
-  describe '#update_time' do
-    it 'returns a hash containing time to complete alpha' do
-      result = completion_time.update_time(module_name)
-      expect(user_completion_time).to eq result
+      it 'returns hash containing time to complete alpha and bravo' do
+        completion_time.update_time
+        expect(user_completion_time).to eq('alpha' => 172800, 'bravo' => 259200)
+      end
     end
-  end
 
-  before do
-    alpha_event
-    bravo_event
-  end
-    
-  describe '#update_time' do
-    it 'returns a hash containing time to complete alpha and bravo' do
-      result = completion_time.update_time(module_name)
-      module_name = 'bravo'
-      result = completion_time.update_time(module_name)
-      expect(user_completion_time).to eq result
-    end
-  end
-
-  before do
-    alpha_event
-    bravo_event
-    charlie_event
-  end
-    
-  describe '#update_time' do
-    it 'returns a hash containing time to complete alpha, bravo and charlie' do
-      result = completion_time.update_time(module_name)
-      module_name = 'bravo'
-      result = completion_time.update_time(module_name)
-      module_name = 'charlie'
-      result = completion_time.update_time(module_name)
-      expect(user_completion_time).to eq result
+    context 'when charlie has been started' do
+      before do
+        alpha_event
+        bravo_event
+        charlie_event
+      end
+  
+      it 'returns hash containing time to complete alpha and bravo, charlie as a zero' do
+        completion_time.update_time
+        expect(user_completion_time).to eq('alpha' => 172800, 'bravo' => 259200, 'charlie' => 0)
+      end
     end
   end
 end
