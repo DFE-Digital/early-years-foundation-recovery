@@ -2,12 +2,7 @@ require 'rails_helper'
 require 'module_completion_existing_users'
 
 RSpec.describe ModuleCompletionExistingUsers do
-  include_context 'with progress'
-
-  let(:module_name) { alpha.name }
-
-  let(:user1) { create(:user, :completed) }
-  let(:user2) { create(:user, :completed) }
+  include_context 'with foo'
   
   let(:test_modules) do
     [
@@ -18,20 +13,14 @@ RSpec.describe ModuleCompletionExistingUsers do
   end
 
   let!(:events) do
-    Ahoy::Event.new(user: user1, name: 'module_content_page', time: Time.new(2000,01,01),
-      properties: {training_module_id: 'alpha', id: 'intro'}, visit: Ahoy::Visit.new()).save!
-    Ahoy::Event.new(user: user1, name: 'module_content_page', time: Time.new(2000,01,03),
-      properties: {training_module_id: 'alpha', id: '1-3-3-4'}, visit: Ahoy::Visit.new()).save!
+    create_event(user1, 'module_content_page', Time.new(2000,01,01), 'alpha', 'intro')
+    create_event(user1, 'module_content_page', Time.new(2000,01,03), 'alpha', '1-3-3-4')
 
-    Ahoy::Event.new(user: user2, name: 'module_content_page', time: Time.new(2000,01,02),
-      properties: {training_module_id: 'alpha', id: 'intro'}, visit: Ahoy::Visit.new()).save!
-    Ahoy::Event.new(user: user2, name: 'module_content_page', time: Time.new(2000,01,03),
-      properties: {training_module_id: 'alpha', id: '1-3-3-4'}, visit: Ahoy::Visit.new()).save!
+    create_event(user2, 'module_content_page', Time.new(2000,01,02), 'alpha', 'intro')
+    create_event(user2, 'module_content_page', Time.new(2000,01,03), 'alpha', '1-3-3-4')
 
-    Ahoy::Event.new(user: user1, name: 'module_content_page', time: Time.new(2000,01,02),
-      properties: {training_module_id: 'bravo', id: 'intro'}, visit: Ahoy::Visit.new()).save!
-    Ahoy::Event.new(user: user1, name: 'module_content_page', time: Time.new(2000,01,03),
-      properties: {training_module_id: 'bravo', id: '1-2-2-3'}, visit: Ahoy::Visit.new()).save!
+    create_event(user1, 'module_content_page', Time.new(2000,01,02), 'bravo', 'intro')
+    create_event(user1, 'module_content_page', Time.new(2000,01,03), 'bravo', '1-2-2-3')
   end
 
   let!(:completion_event) { described_class.new.calculate_completion_time(test_modules) }

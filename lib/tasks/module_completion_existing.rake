@@ -9,6 +9,5 @@ namespace :db do
   ]
   task calculate_completion_time: :environment do
     ModuleCompletionExistingUsers.new.calculate_completion_time(modules)
-    p 'done'
   end
 end

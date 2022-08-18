@@ -55,6 +55,6 @@ private
   end
 
   def mod_time
-    @mod_time ||= ModuleTimeToComplete.new(user: current_user, training_module_id: training_module_name)
+    @mod_time ||= ModuleTimeToComplete.new(user: current_user)
   end
 end
