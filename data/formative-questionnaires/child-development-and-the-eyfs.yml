@@ -1,0 +1,405 @@
+---
+child-development-and-the-eyfs:
+  1-1-1-1b: 
+    questions:
+      1_self_efficacy:
+        multi_select: false
+        label: |
+          Self-efficacy is a measure of which of the following? 
+          
+        assessment_summary:  |
+          Self-efficacy is the measure of whether a child feels they can succeed. 
+          
+          Resilient children will approach activities and experiences with high self-efficacy and a strong 'I can' attitude. 
+          Their exploration will help them to develop their knowledge and skills.
+
+        assessment_fail_summary: |
+          Self-efficacy is the measure of whether a child feels they can succeed. 
+          
+          Resilient children will approach activities and experiences with high self-efficacy and a strong 'I can' attitude. 
+          Their exploration will help them to develop their knowledge and skills.
+        answers:
+          1: A child’s problem-solving abilities
+          2: A child’s ability to understand their own emotions
+          3: A child’s belief that they can succeed
+          4: A child’s independence
+        correct_answers:
+          - 3
+  1-1-1-2b: 
+    questions:
+      1_curriculum_planning:
+        multi_select: false
+        label: |
+          When planning your curriculum, what is implementation?  
+        assessment_summary:  |
+          Implementation is the activities you choose to teach your curriculum. 
+
+          Intent is what you want pupils to learn: your curriculum thinking and high-level planning. 
+
+          Impact is when that curriculum content is learned.
+
+        assessment_fail_summary: |
+          Implementation is the activities you choose to teach your curriculum. 
+
+          Intent is what you want pupils to learn: your curriculum thinking and high-level planning. 
+
+          Impact is when that curriculum content is learned.
+        answers:
+          1: The teaching activities you choose 
+          2: What you want the children to learn 
+          3: How you create an inclusive environment
+          4: The outcome of your curriculum on the children 
+        correct_answers:
+          - 1
+
+  1-1-1-4b: 
+    questions:
+      1_learning_environment:
+        multi_select: false
+        label: |
+          True or false? 
+
+          When the learning environment and activities are too challenging, a child may become frustrated and disengaged. 
+        assessment_summary:  |
+          A child may become frustrated and disengaged if they do not understand expectations and are afraid of failure.
+          This can happen when the learning environment and activities are too challenging.
+        assessment_fail_summary: |
+          A  child may become frustrated and disengaged if they do not understand expectations and are afraid of failure.
+          This can happen when the learning environment and activities are too challenging.
+        answers: 
+          1: "True"
+          2: "False"
+        correct_answers:
+          - 1
+  
+  1-1-1-6b: 
+    questions: 
+      1_behavioural_triggers:
+        multi_select: true 
+        label: |
+          Which of the following aspects of the learning environment can trigger unwanted or challenging behaviour? (Select all answers that apply)
+        assessment_summary: 
+          <p>Children can display challenging and unwanted behaviour if:</p> 
+
+          - instructions, activities and experiences are not tailored to their communication level or other needs
+
+          - they are not challenged by their environment, or feel a task is too difficult
+
+          - they experience inconsistency regarding boundaries, routines and key people 
+
+        assessment_fail_summary: 
+          <p>Children can display challenging and unwanted behaviour if:</p> 
+
+          - instructions, activities and experiences are not tailored to their communication level or other needs
+
+          - they are not challenged by their environment, or feel a task is too difficult
+
+          - they experience inconsistency regarding boundaries, routines and key people
+
+        answers: 
+          1: Labelling the learning environment 
+          2: Communication issues 
+          3: Inconsistency 
+          4: Unsuitable activities or experiences
+        correct_answers: 
+          - 2
+          - 3
+          - 4
+
+
+  1-1-1-7b: 
+    questions:
+      1_numbers_activity:
+        multi_select: false
+        label: |
+          Read the scenario and answer the question.
+          
+          Fatima does not enjoy learning about numbers. Every time her childminder tries to engage her in an activity to teach her about numbers, Fatima gets frustrated and goes to play with her toy cars instead.
+          
+          What should Fatima’s childminder do? 
+
+        assessment_summary:  |
+          Her childminder should create a new numbers activity that involves the toy cars. They can use Fatima’s interest in toy cars to encourage her to engage in areas that she may otherwise avoid, like numbers.
+          
+          In your practice, you can combine your knowledge of the individual child and your understanding of their developmental stage to help them thrive.
+
+        assessment_fail_summary: |
+          Her childminder should create a new numbers activity that involves the toy cars. They can use Fatima’s interest in toy cars to encourage her to engage in areas that she may otherwise avoid, like numbers.
+          
+          In your practice, you can combine your knowledge of the individual child and your understanding of their developmental stage to help them thrive.
+        answers:
+          1: Take the toy cars away from Fatima, and tell her she can only play with them once she has completed the numbers activity
+          2: Stop the numbers activity and let Fatima play with the toy cars, to encourage her to develop her interests 
+          3: Make the numbers activity easier, so that Fatima feels more confident completing it
+          4: Create a new numbers activity that involves the toy cars, for example counting the toy cars as Fatima drives them into the toy garage
+        correct_answers:
+          - 4
+  
+  1-1-2-3b: 
+    questions: 
+      1_social_interactions:
+        multi_select: false 
+        label: | 
+          During the pandemic, some children may have had a smaller variety of social interactions. This may have reduced their opportunities to do which of the following? 
+      
+        assessment_summary: |
+          During the pandemic, some children may have had a smaller variety of social interactions and so fewer chances to learn and use new vocabulary.
+      
+        assessment_fail_summary: |
+          During the pandemic, some children may have had a smaller variety of social interactions and so fewer chances to learn and use new vocabulary.
+      
+        answers: 
+          1: Be physically active
+          2: Learn and practise new vocabulary 
+          3: Develop new hobbies 
+          4: Build self-efficacy
+      
+        correct_answers: 
+          - 2
+  
+  1-1-2-5b: 
+    questions: 
+      1_pandemic_positive: 
+        multi_select: true 
+        label: |
+          Doing which of the following could have had a positive impact on children's physical development during the pandemic? (Select all answers that apply)
+        assessment_summary: |
+          Some children with access to outside space and opportunities to go out may have spent more of their day outside. They may have explored more or learnt a new skill such as riding a bike or scooter.
+
+          If children have older siblings, they may have spent prolonged periods of time participating in challenging physical activity where they have copied their siblings behaviour. They may have developed skills that they may not have otherwise been exposed to.
+        assessment_summary: | 
+          Some children with access to outside space and opportunities to go out may have spent more of their day outside. They may have explored more or learnt a new skill such as riding a bike or scooter.
+
+          If children have older siblings, they may have spent prolonged periods of time participating in challenging physical activity where they have copied their siblings behaviour. They may have developed skills that they may not have otherwise been exposed to.
+        answers: 
+          1: Spending more time watching TV
+          2: Copying older siblings during physical activity 
+          3: Taking extended naps 
+          4: Spending more time outside
+        correct_answers:
+          - 2
+          - 4
+    
+  1-1-2-7b: 
+    questions:
+      1_emotional_maturity:
+        multi_select: False
+        label: |
+          True or false? 
+
+          Some children may have become more emotionally mature as a result of the pandemic.
+        assessment_summary:  |
+          Some children who have had the opportunity to express and discuss their feelings associated with the pandemic may now have increased emotional maturity. Remember that each child in your care will have been impacted by Covid-19 differently. As a practitioner, you should take into account children’s individual emotional starting points to make sure you plan appropriate next steps.
+        assessment_fail_summary: |
+          Some children who have had the opportunity to express and discuss their feelings associated with the pandemic may now have increased emotional maturity. Remember that each child in your care will have been impacted by Covid-19 differently. As a practitioner, you should take into account children’s individual emotional starting points to make sure you plan appropriate next steps.
+        answers: 
+          1: "True"
+          2: "False"
+        correct_answers:
+          - 1
+
+  1-1-2-9b: 
+    questions: 
+      1_communication_skills: 
+        multi_select: true 
+        label: "Having effective communication skills can help children to do which of the following? (Select all answers that apply)"
+        assessment_summary: |
+          Effective communication skills will support children to:
+
+          - manage their behaviour 
+          - feel valued and important 
+          - express their individual needs and preferences 
+
+          They can also help children to increase their resilience and self efficacy, and to create and maintain relationships.
+        assessment_summary: | 
+          Effective communication skills will support children to:
+
+          - manage their behaviour 
+          - feel valued and important 
+          - express their individual needs and preferences 
+
+          They can also help children to increase their resilience and self efficacy, and to create and maintain relationships.
+        answers: 
+          1: Sleep better
+          2: Express their individual needs and preferences 
+          3: Feel valued and important 
+          4: Manage their behaviour
+        correct_answers:
+          - 2
+          - 3
+          - 4
+  
+  1-1-2-10b: 
+      questions:
+        1_mimic_interractions:
+          multi_select: False
+          label: |
+            True or false? 
+
+            If a child observes a positive interaction between you and their parent or carer, they may mimic the interaction they have observed.
+          assessment_summary:  |
+            Children will copy your interactions as they develop and test their own communication skills. This also impacts on the child’s social skills. As a practitioner, you should ensure that you are role modelling positive interactions for children to observe. This will support the development of their social skills.
+          assessment_fail_summary: |
+            Children will copy your interactions as they develop and test their own communication skills. This also impacts on the child’s social skills. As a practitioner, you should ensure that you are role modelling positive interactions for children to observe. This will support the development of their social skills.
+          answers: 
+            1: "True"
+            2: "False"
+          correct_answers:
+            - 1
+  
+  1-2-1-2b: 
+    questions: 
+      1_giving_responsibility: 
+        multi_select: false 
+        label: |
+          True or false? 
+
+          Giving children responsibility will help to increase their resilience.
+        assessment_summary:  |
+          Giving children responsibility will provide them with the opportunity to make mistakes and learn from their responses, which will support further resilience. It is important that you consider each child’s individual starting point and give them responsibility appropriate to their age and stage.
+        assessment_fail_summary: |
+          Giving children responsibility will provide them with the opportunity to make mistakes and learn from their responses, which will support further resilience. It is important that you consider each child’s individual starting point and give them responsibility appropriate to their age and stage.
+        answers: 
+          1: "True"
+          2: "False"
+        correct_answers:
+          - 1
+  
+  1-2-1-4b: 
+    questions: 
+      1_motor_skills: 
+        multi_select: false 
+        label: |
+          Which of the following can help children to develop their gross motor skills?
+        assessment_summary:  |
+          Having access to outdoor environments and activities often gives children greater opportunity to develop gross motor skills. In your setting, you could give children the option to participate in obstacle courses and access equipment such as bikes, balls, trampolines, slides or climbing apparatus.
+        assessment_fail_summary: |
+          Having access to outdoor environments and activities often gives children greater opportunity to develop gross motor skills. In your setting, you could give children the option to participate in obstacle courses and access equipment such as bikes, balls, trampolines, slides or climbing apparatus.
+        answers: 
+          1: Access to outdoor environments and activities 
+          2: A bright, colourful learning environment
+          3: Having consistent routines in the setting
+          4: Resources and activities that celebrate individuality 
+        correct_answers:
+          - 1
+  1-2-1-4c: 
+    questions: 
+      1_changing_routine: 
+        multi_select: false 
+        label: |
+          True or false? 
+
+          Regularly changing the routine in your setting will help children to feel more confident in their learning.
+        assessment_summary:  |
+          Children will benefit from a familiar routine and an environment that has been well planned to include key features such as dedicated areas for reading, creativity and role play. The stability of routine and familiarity will reinforce their confidence and enable them to participate in learning without hesitance or concern.
+        assessment_fail_summary: |
+          Children will benefit from a familiar routine and an environment that has been well planned to include key features such as dedicated areas for reading, creativity and role play. The stability of routine and familiarity will reinforce their confidence and enable them to participate in learning without hesitance or concern.
+        answers: 
+          1: "True"
+          2: "False"
+        correct_answers:
+          - 2
+
+  1-2-1-5b: 
+    questions: 
+      1_motor_skills: 
+        multi_select: true 
+        label: "Which of the following are benefits of child led play? (Select all answers that apply)"
+        assessment_summary:  |
+          Child led play can help children to increase their: 
+
+          - imagination and creativity 
+          - communication skills 
+          - confidence
+          - independence 
+          - social and emotional development 
+
+          However, children also need to take part in adult led activities. Including adult-led activities in your practice gives more opportunities for you to 'scaffold' children's learning, by giving them just enough help to achieve something they could not do independently.
+
+        assessment_fail_summary: |
+          Child led play can help children to increase their: 
+
+          - imagination and creativity 
+          - communication skills 
+          - confidence
+          - independence 
+          - social and emotional development 
+
+          However, children also need to take part in adult led activities. Including adult-led activities in your practice gives more opportunities for you to 'scaffold' children's learning, by giving them just enough help to achieve something they could not do independently.
+        answers: 
+          1: Access to outdoor environments and activities 
+          2: A bright, colourful learning environment
+          3: Having consistent routines in the setting
+          4: Resources and activities that celebrate individuality 
+        correct_answers:
+          - 1
+          - 3
+          - 4
+  
+  1-1-2-6b: 
+    questions: 
+      1_adult_led_activities: 
+        multi_select: false 
+        label: |
+          True or false? 
+
+          Children will not be enthusiastic about adult led activities as they do not incorporate their interests and preferences.
+        assessment_summary:  |
+          Adult led activities will have been planned for a specific reason or outcome. As a result of ongoing assessment you will know where children would benefit from further learning and will plan accordingly. When done effectively this will still offer opportunity to incorporate children’s interests and preferences to encourage engagement and enthusiastic interaction. 
+        assessment_fail_summary: |
+          Adult led activities will have been planned for a specific reason or outcome. As a result of ongoing assessment you will know where children would benefit from further learning and will plan accordingly. When done effectively this will still offer opportunity to incorporate children’s interests and preferences to encourage engagement and enthusiastic interaction. 
+        answers: 
+          1: "True"
+          2: "False"
+        correct_answers:
+          - 2
+  1-2-2-1b:
+    questions: 
+      1_EYFS_benefits:
+        multi_select: true 
+        label: |
+          Which of the following are benefits of successfully implementing the EYFS? (Select all answers that apply)
+        assessment_summary:  |
+          Effective implementation of the EYFS framework will: 
+
+          - ensure that every child receives the same high standard of care
+          - promote positive partnerships with parents, carers, colleagues and other professionals
+          - give every child access to a full and unedited curriculum that celebrates their abilities and nurtures their individual development
+
+          It will also offer all children quality and consistency as they work towards the skills and knowledge required by the academic year in which they turn 5.
+ 
+        assessment_fail_summary: |
+          Effective implementation of the EYFS framework will: 
+
+          - ensure that every child receives the same high standard of care
+          - promote positive partnerships with parents, carers, colleagues and other professionals
+          - give every child access to a full and unedited curriculum that celebrates their abilities and nurtures their individual development
+
+          It will also offer all children quality and consistency as they work towards the skills and knowledge required by the academic year in which they turn 5.
+        answers: 
+          1: Reduced planning time 
+          2: Positive relationships with parents and carers 
+          3: Quality and consistency of care
+          4: Equality of opportunity
+        correct_answers:
+          - 2
+          - 3
+          - 4
+  1-2-2-2b:
+    questions: 
+      1_learning_check:
+        multi_select: false 
+        label: |
+          The 2 year learning check is an example of which type of assessment? 
+        assessment_summary:  |
+          The 2 year learning check is a form of summative assessment. It provides you with opportunities to reinforce your full understanding of a child’s level of knowledge and understanding and to work in partnership with parents to support development.
+        assessment_fail_summary: |
+          The 2 year learning check is a form of summative assessment. It provides you with opportunities to reinforce your full understanding of a child’s level of knowledge and understanding and to work in partnership with parents to support development.
+        answers: 
+          1: Formative 
+          2: Ongoing 
+          3: Oral
+          4: Summative
+        correct_answers:
+          - 4
+  
