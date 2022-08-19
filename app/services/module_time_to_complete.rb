@@ -8,9 +8,10 @@ class ModuleTimeToComplete
   end
 
   # @return [Hash{String => Integer}]
-  def update_time(training_modules = all_training_modules)
-    training_modules.each do |training_module|
-      @training_module = training_module
+  def update_time(training_modules = default_training_modules)
+    Array(training_modules).each do |training_module|
+      
+      set_instance_variables(training_module)
       return if module_start_time.nil?
 
       user.module_time_to_completion[@training_module] = result
@@ -20,6 +21,10 @@ class ModuleTimeToComplete
   end
 
 private
+
+  def set_instance_variables(training_module)
+    @training_module = training_module
+  end
   
   # @return [Integer] time in seconds
   def result
@@ -29,7 +34,7 @@ private
   end
   
   # @return [Array<String>]
-  def all_training_modules
+  def default_training_modules
     TrainingModule.all.map do |training_module|
       training_module.name
     end

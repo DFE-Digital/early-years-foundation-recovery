@@ -3,22 +3,17 @@ class CompletionTimeExistingUsers < ModuleTimeToComplete
     super(user: user)
     @modules = modules
   end
-
-  # @return [Hash{String => Integer}]
-  def update_time(training_modules = all_training_modules)
-    @modules.each do |training_module|
-      
-      @training_module = training_module[0]
-      @end_page = training_module[1]
-      return if module_start_time.nil?
-
-      user.module_time_to_completion[@training_module] = result
-      user.save if !result.nil?
-      user.module_time_to_completion
-    end
-  end
   
 private
+
+  def set_instance_variables(training_module)
+    @training_module = training_module[0]
+    @end_page = training_module[1]
+  end
+
+  def default_training_modules
+    @modules
+  end
 
   # @return [Ahoy::Event]
   def module_event(event_name, page_name)
