@@ -11,3 +11,6 @@ Ahoy.geocode = false
 
 # Ensure events are tracked in the test suite
 Ahoy.track_bots = Rails.env.test?
+
+# Fidus Pen Test Issue 6.1.7
+Ahoy.cookie_options = { httponly: true }
