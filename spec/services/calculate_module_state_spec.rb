@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ModuleTimeToComplete do
+RSpec.describe CalculateModuleState do
   include_context 'with foo'
 
   subject(:completion_time) { described_class.new(user: user) }
@@ -22,7 +22,7 @@ RSpec.describe ModuleTimeToComplete do
   describe '#update_time' do
     context 'when no modules have been taken'
       it 'returns empty hash' do
-        completion_time.update_time
+        completion_time.call
         expect(user1.module_time_to_completion).to eq Hash.new
       end
     end
@@ -33,7 +33,7 @@ RSpec.describe ModuleTimeToComplete do
       end
 
       it 'returns hash containing time to complete alpha' do
-        completion_time.update_time
+        completion_time.call
         expect(user.module_time_to_completion).to eq('alpha' => 172800)
       end
 
@@ -44,8 +44,8 @@ RSpec.describe ModuleTimeToComplete do
       end
     
       it 'returns hash containing time to complete alpha and bravo' do
-        completion_time.update_time
-        expect(user.module_time_to_completion).to eq('alpha' => 172800, 'bravo' => 259200)
+        ttc = completion_time.call
+        expect(ttc).to eq('alpha' => 172800, 'bravo' => 259200)
       end
     end
 
@@ -57,7 +57,7 @@ RSpec.describe ModuleTimeToComplete do
       end
   
       it 'returns hash containing time to complete alpha and bravo, charlie as a zero' do
-        completion_time.update_time
+        completion_time.call
         expect(user.module_time_to_completion).to eq('alpha' => 172800, 'bravo' => 259200, 'charlie' => 0)
       end
     end

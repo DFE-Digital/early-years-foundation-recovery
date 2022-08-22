@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'module_completion_existing_users'
 
-RSpec.describe ModuleCompletionExistingUsers do
+RSpec.describe BackfillModuleState do
   include_context 'with foo'
   
   let(:test_modules) do
@@ -23,7 +23,8 @@ RSpec.describe ModuleCompletionExistingUsers do
     create_event(user1, 'module_content_page', Time.new(2000,01,03), 'bravo', '1-2-2-3')
   end
 
-  let!(:completion_event) { described_class.new.calculate_completion_time(test_modules) }
+  let!(:completion_event) { described_class.new(user: user1).call }
+  let!(:completion_event2) { described_class.new(user: user2).call }
 
   it 'calculates completion time for existing users' do
     expect(User.first.module_time_to_completion).to eq('alpha' => 172800, 'bravo' => 86400)
