@@ -1,4 +1,4 @@
-RSpec.shared_context 'with foo' do
+RSpec.shared_context 'with events' do
   let(:module_name) { alpha.name }
   
   let(:user) { create(:user, :completed) }

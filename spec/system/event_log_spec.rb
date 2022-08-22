@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Event log' do
-  include_context 'with foo'
+  include_context 'with events'
   include_context 'with progress'
   include_context 'with user'
 

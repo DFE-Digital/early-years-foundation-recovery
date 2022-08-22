@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe CalculateModuleState do
-  include_context 'with foo'
+  include_context 'with events'
 
   subject(:completion_time) { described_class.new(user: user) }
 

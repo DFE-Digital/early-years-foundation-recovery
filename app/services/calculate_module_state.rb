@@ -9,30 +9,27 @@ class CalculateModuleState
 
   def call
     module_names.each do |training_module|
-
       current_value = user.module_time_to_completion[training_module]
 
       # do nothing - because time_to_completion has been calculated already
       next if current_value.to_i > 0
       
-      updated_value = new_time(training_module, current_value.to_i)
+      updated_value = new_time(training_module)
       
       unless updated_value == current_value
         user.module_time_to_completion[training_module] = updated_value
         user.save
       end
-      
     end
     # might need to reload to get latest change
     user.module_time_to_completion
   end
   
-  private
+private
   
   # @param training_module [String]
-  # @param current_value [Integer]
   # @return [Integer] time in seconds
-  def new_time(training_module, current_value)
+  def new_time(training_module)
     module_complete = mod_complete(training_module)
     module_start = mod_start(training_module)
     

@@ -9,10 +9,10 @@ class ContentPagesController < ApplicationController
 
   def show
     track('module_content_page')
-    
+
     if track_module_start?
       track('module_start')
-      mod_time.update_time(training_module_name)
+      CalculateModuleState.new(user: current_user).call
     end
 
     track('confidence_check_complete') if track_confidence_check_complete?
@@ -52,9 +52,5 @@ private
 
   def track_confidence_check_complete?
     helpers.module_progress(module_item.parent).completed? && !tracked?('confidence_check_complete', training_module_id: training_module_name)
-  end
-
-  def mod_time
-    @mod_time ||= ModuleTimeToComplete.new(user: current_user)
   end
 end

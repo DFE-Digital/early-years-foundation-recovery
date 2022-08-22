@@ -23,16 +23,12 @@ class TrainingModulesController < ApplicationController
 
     track('module_complete') if track_module_complete?
 
-    mod_time.update_time(params[:training_module_id])
+    CalculateModuleState.new(user: current_user).call
   end
 
 private
 
   def track_module_complete?
     !tracked?('module_complete', training_module_id: @training_module.name)
-  end
-
-  def mod_time
-    @mod_time ||= ModuleTimeToComplete.new(user: current_user)
   end
 end

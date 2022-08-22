@@ -1,5 +1,3 @@
-require 'module_completion_existing_users'
-
 namespace :db do
   desc 'Calculate module completion time for existing users'
   task calculate_completion_time: :environment do
