@@ -25,8 +25,8 @@ class ApplicationController < ActionController::Base
   # @param params [Hash]
   #
   # @return [Boolean]
-  def tracked?(key, **params)
-    Ahoy::Event.where(user_id: current_user, name: key).where_properties(**params).exists?
+  def untracked?(key, **params)
+    Ahoy::Event.where(user_id: current_user, name: key).where_properties(**params).empty?
   end
 
   def authenticate_registered_user!

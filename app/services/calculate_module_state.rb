@@ -39,6 +39,8 @@ private
     # 'not started' => 'in progress'
     elsif module_start.present?
       0
+    else
+      nil # no op
     end
   end
 

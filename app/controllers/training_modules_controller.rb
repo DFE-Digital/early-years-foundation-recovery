@@ -21,14 +21,16 @@ class TrainingModulesController < ApplicationController
     @training_module = TrainingModule.find_by(name: params[:training_module_id])
     @module_progress = ModuleOverviewDecorator.new(helpers.module_progress(@training_module))
 
-    track('module_complete') if track_module_complete?
+    track('module_complete') if module_complete_untracked?
 
     CalculateModuleState.new(user: current_user).call
   end
 
 private
 
-  def track_module_complete?
-    !tracked?('module_complete', training_module_id: @training_module.name)
+  def module_complete_untracked?
+    return false if untracked?('module_start', training_module_id: @training_module.name)
+    
+    untracked?('module_complete', training_module_id: @training_module.name)
   end
 end

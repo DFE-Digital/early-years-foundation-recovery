@@ -36,7 +36,7 @@ protected
   end
 
   def summative_untracked?
-    !tracked?('summative_assessment_start', training_module_id: params[:training_module_id])
+    untracked?('summative_assessment_start', training_module_id: params[:training_module_id])
   end
 
   def track_confidence_check_started?
@@ -45,7 +45,7 @@ protected
   end
   
   def confidence_untracked?
-    !tracked?('confidence_check_start', training_module_id: params[:training_module_id])
+    untracked?('confidence_check_start', training_module_id: params[:training_module_id])
   end
 
   def questionnaire

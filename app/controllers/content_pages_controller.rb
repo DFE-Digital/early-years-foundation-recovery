@@ -47,10 +47,10 @@ private
   end
 
   def track_module_start?
-    module_item.module_intro? && !tracked?('module_start', training_module_id: training_module_name)
+    module_item.module_intro? && untracked?('module_start', training_module_id: training_module_name)
   end
 
   def track_confidence_check_complete?
-    helpers.module_progress(module_item.parent).completed? && !tracked?('confidence_check_complete', training_module_id: training_module_name)
+    helpers.module_progress(module_item.parent).completed? && untracked?('confidence_check_complete', training_module_id: training_module_name)
   end
 end

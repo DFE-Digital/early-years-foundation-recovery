@@ -7,6 +7,10 @@ private
     'personal-social-and-emotional-development' => '3-4-3-7',
   }
 
+  def module_names
+    FINAL_PAGE_NAMES.keys
+  end
+
   def mod_event(training_module, event_name, page_name)
     user.events.where(name: event_name).where_properties(training_module_id: training_module, id: page_name).first
   end

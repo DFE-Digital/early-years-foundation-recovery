@@ -31,6 +31,6 @@ private
   end
 
   def assessment_untracked?
-    !tracked?('summative_assessment_complete', training_module_id: params[:training_module_id])
+    untracked?('summative_assessment_complete', training_module_id: params[:training_module_id])
   end
 end

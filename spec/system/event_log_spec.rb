@@ -5,6 +5,8 @@ RSpec.describe 'Event log' do
   include_context 'with progress'
   include_context 'with user'
 
+  let(:module_name) { alpha.name }
+
   describe 'confidence check' do
     before do
       start_confidence_check(alpha)
