@@ -19,15 +19,20 @@ class ModuleItem < YamlBase
 
   # @return [Hash] 'Type' to 'View object' mapping
   MODELS = {
+    assessment_intro: ContentPage,
+    confidence_intro: ContentPage,
+    interruption_page: ContentPage,
     module_intro: ContentPage,
     sub_module_intro: ContentPage,
-    interruption_page: ContentPage,
     text_page: ContentPage,
+
     youtube_page: YoutubePage,
-    formative_assessment: Questionnaire,
-    summative_assessment: Questionnaire,
-    confidence_check: Questionnaire,
-    assessments_results: AssessmentsResults,
+
+    confidence_questionnaire: Questionnaire,
+    formative_questionnaire: Questionnaire,
+    summative_questionnaire: Questionnaire,
+
+    assessment_results: AssessmentResultsPage,
   }.freeze
 
   # @return [Regexp] 2nd digit if present: 1-[1]-1-1
@@ -90,16 +95,25 @@ class ModuleItem < YamlBase
     SUMMARY
   end
 
-  # @return [Hash<Symbol>, nil]
-  def page_number
-    return unless position_within_submodule
-
+  # @return [Hash{Symbol => nil, Integer}]
+  def pagination
     { current: position_within_submodule, total: number_within_submodule }
   end
 
   # @return [TrainingModule]
   def parent
     TrainingModule.find_by(name: training_module)
+  end
+
+  # @return [String]
+  def next_button_text
+    if next_item.assessment_results?
+      'Finish test'
+    elsif next_item.summative_questionnaire? && !summative_questionnaire?
+      'Start test'
+    else
+      'Next'
+    end
   end
 
   # @return [ContentPage, YoutubePage, Questionnaire]
@@ -142,6 +156,41 @@ class ModuleItem < YamlBase
     page_name.to_i.zero?
   end
 
+  # @return [Boolean]
+  def assessment_results?
+    type.eql?('assessment_results')
+  end
+
+  # @return [Boolean]
+  def summative_questionnaire?
+    type.eql?('summative_questionnaire')
+  end
+
+  # @return [Boolean]
+  def formative_questionnaire?
+    type.eql?('formative_questionnaire')
+  end
+
+  # @return [Boolean]
+  def confidence_questionnaire?
+    type.eql?('confidence_questionnaire')
+  end
+
+  # @return [Boolean]
+  def module_intro?
+    type.eql?('module_intro')
+  end
+
+  # @return [Boolean]
+  def assessment_intro?
+    type.eql?('assessment_intro')
+  end
+
+  # @return [Boolean]
+  def confidence_intro?
+    type.eql?('confidence_intro')
+  end
+
   # position ---------------------------------
 
   # Module intro will be position 0
@@ -166,7 +215,7 @@ class ModuleItem < YamlBase
 
   # @return [Integer] number of submodule items 1-[1]-1-1, (excluding intro)
   def number_within_submodule
-    if type.eql?('module_intro')
+    if module_intro?
       0
     else
       current_submodule_items.count - 1

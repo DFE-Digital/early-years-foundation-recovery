@@ -4,8 +4,13 @@
 FROM ruby:3.1.0-alpine as base
 
 RUN apk add --no-cache --no-progress build-base less curl tzdata gcompat \
-    "gmp>=6.2.1-r1" "zlib>=1.2.12-r0" "busybox>=1.34.1-r5" \
-    "libretls>=3.3.4-r3" "libssl1.1>=1.1.1n-r0" "libcrypto1.1>=1.1.1n-r0"
+    "busybox>=1.34.1-r5" \
+    "gmp>=6.2.1-r1" \
+    "libretls>=3.3.4-r3" \
+    "ncurses-libs>=6.3_p20211120-r1" \
+    "nodejs>=16.16.0-r0" \
+    "ssl_client>=1.34.1-r5" \
+    "zlib>=1.2.12-r0"
 
 # ------------------------------------------------------------------------------
 # Dependencies
@@ -29,7 +34,7 @@ COPY .yarnrc.yml ${APP_HOME}/.yarnrc.yml
 # 1. (#32) RUN yarn install
 # 2. (#74) COPY --from=deps /build/node_modules ${APP_HOME}/node_modules
 #
-RUN yarn install
+RUN yarn install --json
 
 COPY Gemfile* ./
 

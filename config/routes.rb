@@ -33,12 +33,13 @@ Rails.application.routes.draw do
   resources :modules, only: %i[show], as: :training_modules, controller: :training_modules do
     resources :content_pages, only: %i[index show], path: 'content-pages'
     resources :questionnaires, only: %i[show update]
-    resources :formative_assessments, only: %i[show update], path: 'formative-assessments'
-    resources :summative_assessments, only: %i[show update], path: 'summative-assessments'
-    resources :confidence_checks, only: %i[show update], path: 'confidence-check'
-    resources :assessments_results, only: %i[show], path: 'assessment-result'
-    get 'retake-quiz', to: 'assessments_results#retake_quiz'
+    resources :assessment_results, only: %i[show new], path: 'assessment-result'
     get 'certificate'
+
+    # TODO: retire aliases after accessibility audit
+    get 'confidence-check/:id' => 'questionnaires#show'
+    get 'summative-assessments/:id' => 'questionnaires#show'
+    get 'formative-assessments/:id' => 'questionnaires#show'
   end
 
   get '/:id', to: 'static#show', as: :static

@@ -1,0 +1,11 @@
+= f.govuk_check_boxes_fieldset question.name, legend: { text: translate_markdown(question.label), hidden: question.legend_hidden? } do
+
+  .gem-c-govspeak= translate_markdown(question.body)
+
+  - question.fields.each do |id, label, checked|
+    = f.govuk_check_box question.name,
+      id,
+      label: { text: label },
+      link_errors: true,
+      checked: checked,
+      disabled: question.disabled?

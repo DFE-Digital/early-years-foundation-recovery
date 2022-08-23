@@ -97,7 +97,6 @@ These commands help maintain your containerised workspace:
     generated inside containers are created by *root*
 - `bin/docker-down` stop any active services
 - `bin/docker-prune` purge project containers, volumes and images
-- `bin/docker-dev-restart` restarts the running server
 - `bin/docker-yarn` warm the cache of frontend dependencies
 
 The commands run common tasks inside containers:

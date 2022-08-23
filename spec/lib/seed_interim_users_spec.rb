@@ -2,7 +2,9 @@ require 'rails_helper'
 require 'seed_interim_users'
 
 RSpec.describe SeedInterimUsers do
-  describe 'seed_interim_users.rake' do
+  xdescribe 'seed_interim_users.rake' do
+    # skip unless ENV['INTERIM']
+
     it 'adds valid user to database and views all module 1 pages' do
       described_class.new.seed_interim_users
       user = User.find_by(email: 'ben.miller@test.com')

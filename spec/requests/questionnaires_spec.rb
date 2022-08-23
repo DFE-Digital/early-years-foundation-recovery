@@ -1,89 +1,72 @@
 require 'rails_helper'
 
 RSpec.describe 'Questionnaires', type: :request do
-  let(:questionnaire) { Questionnaire.find_by!(name: :test, training_module: :test) }
   let(:user) { create(:user, :registered) }
-
-  before do
-    sign_in user
+  let(:questionnaire_data) { module_item.model }
+  let(:module_item) do
+    ModuleItem.find_by(training_module: :alpha, type: :formative_questionnaire, name: '1-1-4')
   end
+
+  before { sign_in user }
 
   describe 'GET /modules/:training_module_id/questionnaires/:id' do
+    subject(:show_view) do
+      get training_module_questionnaire_path(:alpha, questionnaire_data)
+    end
+
+    before { show_view }
+
     it 'returns http success' do
-      get training_module_questionnaire_path(:test, questionnaire)
       expect(response).to have_http_status(:success)
     end
-
-    it 'does not display an error' do
-      get training_module_questionnaire_path(:test, questionnaire)
-      expect(response.body).not_to include("class='errors'")
-    end
-
-    # context 'with unknown name' do
-    #   it 'raises error' do
-    #     expect { get training_module_questionnaire_path(:test, :unknown) }.to raise_error(ActiveHash::RecordNotFound)
-    #   end
-    # end
   end
 
-  describe 'PATCH /modules/:training_module_id/questionaires/:id' do
+  describe 'PATCH /modules/:training_module_id/questionnaires/:id' do
     subject(:submit_questionnaire) do
-      patch training_module_questionnaire_path(:test, questionnaire), params: { questionnaire: answers }
+      patch training_module_questionnaire_path(:alpha, questionnaire_data), params: { questionnaire: answers }
     end
 
-    let(:answers) do
-      questionnaire.question_list.each_with_object({}) do |question, answer_hash|
-        answer = question.multi_select ? question.correct_answers.map(&:to_sym) : question.correct_answers.first.to_sym
-        answer_hash[question.name] = answer
+    context 'when correct (radio buttons)' do
+      let(:answers) do
+        { alpha_question_one: 'Correct answer 1' }
+      end
+
+      it 'saves the answer' do
+        expect { submit_questionnaire }.to change(UserAnswer, :count).by(1)
       end
     end
 
-    let(:module_item) { ModuleItem.find_by(training_module: questionnaire.training_module, name: questionnaire.name) }
-
-    it 'does something without error' do
-      submit_questionnaire
-      expect(response).to redirect_to(training_module_content_page_path(module_item.training_module, module_item.next_item))
-    end
-
-    it 'creates a record of the answer' do
-      expect { submit_questionnaire }.to change(UserAnswer, :count).by(questionnaire.questions.size)
-    end
-
-    it 'flags the stored answer as correct' do
-      submit_questionnaire
-      expect(UserAnswer.last).to be_correct
-    end
-
-    context 'with incorrect answers' do
-      let(:answers) { questionnaire.questions.transform_values { |_a| :foo } }
-
-      it 'renders page with errors' do
-        submit_questionnaire
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.body).to include('class="errors"')
+    context 'when correct (check boxes)' do
+      let(:module_item) do
+        ModuleItem.find_by(training_module: :alpha, type: :formative_questionnaire, name: '1-2-1-1')
       end
 
-      it 'creates a record of the answer' do
-        expect { submit_questionnaire }.to change(UserAnswer, :count).by(questionnaire.questions.size)
+      let(:answers) do
+        { alpha_question_two: ['Correct answer 1', 'Correct answer 2'] }
       end
 
-      it 'flags the stored answer as not correct' do
-        submit_questionnaire
-        expect(UserAnswer.last).not_to be_correct
+      it 'saves the answer' do
+        expect { submit_questionnaire }.to change(UserAnswer, :count).by(1)
       end
     end
 
-    context 'with an existing user answer' do
-      let!(:user_answer) { create :user_answer, user: user, questionnaire_id: questionnaire.id }
-
-      it 'archives the existing user answer' do
-        submit_questionnaire
-        expect(user_answer.reload).to be_archived
+    context 'when incorrect' do
+      let(:answers) do
+        { alpha_question_one: 'Wrong answer 1' }
       end
 
-      it 'does not archive the new user answers' do
-        submit_questionnaire
-        expect(UserAnswer.last).not_to be_archived
+      it 'saves the answer' do
+        expect { submit_questionnaire }.to change(UserAnswer, :count).by(1)
+      end
+    end
+
+    context 'when unanswered' do
+      let(:answers) do
+        { alpha_question_one: '' }
+      end
+
+      it 'does not save the answer' do
+        expect { submit_questionnaire }.not_to change(UserAnswer, :count)
       end
     end
   end

@@ -1,90 +1,47 @@
 require 'rails_helper'
 
 RSpec.describe Questionnaire, type: :model do
-  let(:questionnaire) { described_class.find_by!(name: :test, training_module: :test) }
+  subject(:questionnaire) do
+    described_class.find_by!(name: page_name, training_module: training_module_name)
+  end
+
+  #   1: Correct answer 1
+  #   2: Wrong answer 1
+  #   3: Correct answer 2
+  #   4: Wrong answer 2
+  let(:page_name) { '1-2-1-3' }
+
+  let(:training_module_name) { 'alpha' }
 
   it 'is associated with matching module item' do
-    module_item = ModuleItem.find_by(training_module: :test, name: :test)
+    module_item = ModuleItem.find_by(training_module: training_module_name, name: page_name)
     expect(questionnaire.module_item).to eq(module_item)
   end
 
-  context 'with zero required_percentage_correct' do
-    before do
-      questionnaire.required_percentage_correct = 0
+  # describe '#next_button_text' do
+  # end
+
+  describe 'validations' do # not currently used
+    context 'when unanswered' do
+      specify { expect(questionnaire).to be_invalid }
     end
 
-    it 'is valid' do
-      expect(questionnaire).to be_valid
-    end
-  end
+    context 'when answered' do
+      context 'and correct' do
+        before do
+          questionnaire.question_list.first.submit_answers([1, 3])
+        end
 
-  context 'with required_percentage_correct set' do
-    before do
-      questionnaire.required_percentage_correct = 100
-    end
-
-    it 'is invalid' do
-      expect(questionnaire).to be_invalid
-    end
-  end
-
-  context 'with required_percentage_correct not set and all answers correct' do
-    before do
-      questionnaire.required_percentage_correct = nil
-      questionnaire.question_list.each do |question|
-        question.set_answer(answer: question.correct_answers)
+        specify { expect(questionnaire).to be_valid }
       end
-    end
 
-    it 'is valid' do
-      expect(questionnaire).to be_valid
-    end
-  end
+      context 'and incorrect' do
+        before do
+          questionnaire.question_list.first.submit_answers([2, 4])
+        end
 
-  context 'with a question correct and required_percentage_correct not set' do
-    before do
-      questionnaire.required_percentage_correct = nil
-      question, data = questionnaire.questions.first
-      questionnaire.send("#{question}=", data[:correct_answers])
-    end
-
-    it 'is valid' do
-      expect(questionnaire).to be_invalid
-    end
-  end
-
-  context 'with a question correct and below required_percentage_correct threshold' do
-    before do
-      questionnaire.required_percentage_correct = 1
-      question = questionnaire.question_list.first
-      question.set_answer(answer: question.correct_answers)
-    end
-
-    it 'is valid' do
-      expect(questionnaire).to be_valid
-    end
-  end
-
-  context 'with a question correct and above required_percentage_correct threshold' do
-    before do
-      questionnaire.required_percentage_correct = 99
-      question, data = questionnaire.questions.first
-      questionnaire.send("#{question}=", data[:correct_answers])
-    end
-
-    it 'is valid' do
-      expect(questionnaire).to be_invalid
-    end
-  end
-
-  context 'with required_percentage_correct not set and no correct answers' do
-    before do
-      questionnaire.required_percentage_correct = nil
-      questionnaire.questions.each_value { |question| question.delete(:correct_answers) }
-    end
-
-    it 'is valid' do
-      expect(questionnaire).to be_valid
+        specify { expect(questionnaire).to be_invalid }
+      end
     end
   end
 end

@@ -1,18 +1,5 @@
 h1.govuk-heading-l My learning
 = render 'debug'
-/ .govuk-grid-row id='summative-assessment'
-/   .govuk-grid-column-full
-/     h2.govuk-heading-m Summative assessment
-/     div class='govuk-grid-row govuk-!-margin-bottom-7'
-/       .govuk-grid-column-one-quarter
-/         .govuk-card__flex-container
-/           .govuk-card__flex-item
-/             .govuk-card.govuk-card--contained.govuk-card--selectable
-/               a href=training_module_path(@end_of_training_module_assessment)
-/               div class='govuk-card__hero govuk-!-margin-bottom-2'
-/                 img src=image_path(@end_of_training_module_assessment.thumbnail) width=180 alt=@end_of_training_module_assessment.name
-/               .govuk-card__content
-/                 h3.govuk-heading-m= @end_of_training_module_assessment.title
 
 .govuk-grid-row id='started'
   .govuk-grid-column-full
@@ -26,7 +13,7 @@ h1.govuk-heading-l My learning
       div class='govuk-grid-row govuk-!-margin-bottom-7'
         - @user.course.current_modules.each do |mod|
           .govuk-grid-column-one-third-from-desktop.govuk-grid-column-one-half class='govuk-!-margin-bottom-2'
-            = render 'card', mod: mod
+            = render 'card', mod: mod, current: true
 
 - if @user.course.available_modules.any? || @user.course.course_completed?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
@@ -36,7 +23,7 @@ h1.govuk-heading-l My learning
       - if @user.course.available_modules.any?
         - @user.course.available_modules.each do |mod|
           .govuk-grid-column-one-third-from-desktop.govuk-grid-column-one-half class='govuk-!-margin-bottom-2'
-            = render 'card', mod: mod
+            = render 'card', mod: mod, current: false
 
       - elsif @user.course.course_completed?
         p You do not have any modules available.

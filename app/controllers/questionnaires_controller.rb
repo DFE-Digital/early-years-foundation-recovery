@@ -1,77 +1,95 @@
 class QuestionnairesController < ApplicationController
   before_action :authenticate_registered_user!
-  before_action :archive_previous_user_answers, only: [:update]
 
   def show
-    @user_answers = existing_user_answers
-    update_questionnaire if @user_answers.present?
-    questionnaire
+    questionnaire_taker.prepare
   end
 
   def update
-    questionnaire.errors.clear
-    update_questionnaire
+    # TODO: why?
+    # questionnaire_taker.archive
 
-    if questionnaire.valid?
-      redirect_to training_module_content_page_path(training_module, next_module_item)
-    else
-      render :show, status: :unprocessable_entity
-    end
+    immediate_feedback if questionnaire.formative?
+    marked_assessment if questionnaire.summative?
+    next_question if questionnaire.confidence?
   end
 
-private
+protected
 
   def questionnaire
-    @questionnaire ||= Questionnaire.find_by!(name: params[:id], training_module: training_module)
+    @questionnaire ||= Questionnaire.find_by!(name: params[:id], training_module: params[:training_module_id])
   end
 
-  def next_module_item
-    questionnaire.module_item.next_item
+  def questionnaire_taker
+    @questionnaire_taker ||= QuestionnaireTaker.new(user: current_user, questionnaire: questionnaire)
   end
 
-  def update_questionnaire
-    user_answers.each do |user_answer|
-      answer = questionnaire.questions[user_answer.question.to_sym][:multi_select] ? user_answer.answer : user_answer.answer.first
-      questionnaire.send("#{user_answer.question}=", answer)
+  def next_item_path(item)
+    if item.next_item
+      training_module_content_page_path(item.training_module, item.next_item)
+    else
+      course_overview_path
     end
-  end
-
-  def user_answers
-    @user_answers ||= questionnaire.questions.map do |question, data|
-      # Put into an array and then flattened so single and multi-choice questions can be handled in the same way
-      answer = [questionnaire_params[question]].flatten.select(&:present?)
-      current_user.user_answers.create!(
-        questionnaire_id: questionnaire.id,
-        question: question,
-        answer: answer,
-        correct: answer == data[:correct_answers],
-      )
-    end
-  end
-
-  def training_module
-    @training_module ||= params[:training_module_id]
   end
 
   def questionnaire_params
-    @questionnaire_params ||= params.require(:questionnaire).permit(permitted_methods)
+    params.require(:questionnaire).permit(questionnaire.permitted_methods)
   end
 
-  # An attribute is permitted if it is defined in the questionnaire's YAML data
-  # Added complication because multi-choice questions need to be set as hash within `permit` call
-  # as they are submitted as an array within params
-  def permitted_methods
-    questionnaire.questions.map do |question, data|
-      data[:multi_select] ? { question => [] } : question
+  def populate_and_persist
+    questionnaire_taker.populate(questionnaire_params)
+    questionnaire_taker.persist
+
+    clear_flash
+  end
+
+  # return [Boolean]
+  def unanswered?
+    # radio_buttons
+    return true unless params[:questionnaire]
+
+    # check_boxes
+    ((question_key, _data)) = questionnaire.questions.to_a
+    check_boxes = params[:questionnaire][question_key]
+    Array(check_boxes).compact_blank.empty?
+  end
+
+  def immediate_feedback
+    if unanswered?
+      flash[:error] = 'Please select an answer'
+    else
+      populate_and_persist
+    end
+
+    render :show, status: :unprocessable_entity
+  end
+
+  def next_question
+    if unanswered?
+      flash[:error] = 'Please select an answer'
+      render :show, status: :unprocessable_entity
+    else
+      populate_and_persist
+
+      redirect_to next_item_path(questionnaire.module_item)
     end
   end
 
-  def archive_previous_user_answers
-    existing_user_answers.update_all(archived: true)
-  end
+  def marked_assessment
+    if unanswered?
+      flash[:error] = 'Please select an answer'
+      render :show, status: :unprocessable_entity
+    else
+      populate_and_persist
 
-  # change this to where module and name as ids are auto generated
-  def existing_user_answers
-    current_user.user_answers.not_archived.where(questionnaire_id: questionnaire.id)
+      mod = questionnaire.module_item.parent
+
+      if questionnaire.final_question?
+        helpers.assessment_progress(mod).save!
+        redirect_to training_module_assessment_result_path(mod, mod.assessment_results_page)
+      else
+        redirect_to next_item_path(questionnaire.module_item)
+      end
+    end
   end
 end
