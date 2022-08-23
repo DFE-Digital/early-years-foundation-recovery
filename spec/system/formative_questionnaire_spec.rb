@@ -24,12 +24,6 @@ RSpec.describe 'Formative questionnaire' do
       2.times { click_on 'Next' }
     end
 
-    it 'can navigate to next submodule intro' do
-      visit '/modules/alpha'
-
-      expect(page).to have_link('1-2-1')
-    end
-
     it 'is not able to be retaken' do
       visit '/modules/alpha/questionnaires/1-1-4'
 
@@ -42,12 +36,6 @@ RSpec.describe 'Formative questionnaire' do
       visit '/modules/alpha/questionnaires/1-1-4'
       choose 'Wrong answer 1'
       2.times { click_on 'Next' }
-    end
-
-    it 'can navigate to next submodule intro' do
-      visit '/modules/alpha'
-
-      expect(page).to have_link('1-2-1')
     end
 
     it 'is not able to be retaken' do

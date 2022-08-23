@@ -98,14 +98,14 @@ private
     submodule_intro = mod.module_items_by_submodule(submodule).first
     return false unless visited?(submodule_intro)
 
-    previous_topic = find_previous_topic(topic_item.topic_name, submodule)
-    previous_topic_items = previous_topic.values.first.to_a
+    current_topic = find_current_topic(topic_item.topic_name, submodule)
+    current_topic_items = current_topic.values.first.to_a
 
     previous_submodule = find_previous_submodule(topic_item.submodule_name)
     previous_submodule_items = previous_submodule.values.first.to_a
 
-    if previous_topic && previous_submodule
-      all?(previous_topic_items) && all?(previous_submodule_items)
+    if current_topic && previous_submodule
+      all?(current_topic_items) && all?(previous_submodule_items)
     else
       all?([topic_item])
     end
@@ -131,9 +131,9 @@ private
   # @param current_sub_num [String]
   #
   # @return [Array<Array>] [1,2] [item, item, item]
-  def find_previous_topic(current_top_num, current_sub_num)
+  def find_current_topic(current_top_num, current_sub_num)
     mod.items_by_topic.select do |(sub_num, topic_num), _items|
-      sub_num.eql?(current_sub_num) && previous(current_top_num).eql?(topic_num)
+      sub_num.eql?(current_sub_num) && current_top_num.eql?(topic_num)
     end
   end
 
