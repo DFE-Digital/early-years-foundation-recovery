@@ -6,6 +6,21 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
+# Offense count: 2
+# Configuration parameters: Database, Include.
+# SupportedDatabases: mysql, postgresql
+# Include: db/migrate/*.rb
+Rails/BulkChangeTable:
+  Exclude:
+    - 'db/migrate/20220617020303_add_summative_assessment_fields_to_user_answers.rb'
+
+# Offense count: 2
+# Configuration parameters: Include.
+# Include: db/migrate/*.rb
+Rails/CreateTableWithTimestamps:
+  Exclude:
+    - 'db/migrate/20220419121105_create_ahoy_visits_and_events.rb'
+
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: AllowImplicitReturn, AllowedReceivers.

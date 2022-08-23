@@ -5,10 +5,10 @@ span.noprint
 
   p.govuk_body If the name on your certificate is not what you expect, you can update it in <a href="/my-account">My account</a>.
 
-  hr class='govuk-section-break govuk-section-break--l govuk-section-break--visible govuk-!-margin-top-4'
+  hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
 
 h3 Certificate of achievement
-h1 = current_user.name 
+h1= current_user.name
 p.govuk_body has completed the following module:
 
 h2 = @training_module.title
@@ -31,4 +31,4 @@ span.noprint
   = print_button
   = govuk_link_to 'Download', training_module_certificate_path(@training_module, format: :pdf)
 
-  hr class='govuk-section-break govuk-section-break--l govuk-section-break--visible govuk-!-margin-top-4'
+  hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'

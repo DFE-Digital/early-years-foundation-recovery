@@ -7,6 +7,6 @@ FactoryBot.define do
   #  end
   # See: https://github.com/active-hash/active_hash#saving-in-memory-records
   factory :module_item do
-    training_module { :test }
+    training_module { :delta }
   end
 end

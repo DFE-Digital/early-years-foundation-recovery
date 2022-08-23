@@ -92,13 +92,13 @@ en:
     completed: completed
     started: in progress
     not_started: not started
-    retake_quiz: retake quiz
+    failed: retake test
 
-  resume_button:
-    completed: Retake end of module test
+  module_call_to_action:
+    completed: View certificate
+    failed: Retake test
     started: Resume training
     not_started: Start
-
 
   experts:
     heading: The experts
@@ -220,28 +220,31 @@ en:
       title: I have a different problem
       text: For other problems with creating your account or signing in, please
       link_text: contact us
-  assessments_results:
-    passed:
-      heading: Congratulations
-      text: |
-        ## **You scored %{score}%** 
-        
-        Congratulations - you have scored highly enough to receive a certificate of achievement for this module.
-    failed:
-      heading: Revisit the module
-      text: | 
-        ## **You scored %{score}%**
+
+  assessment_results:
+    show:
+      incorrect: You answered %{answers}. That's not quite right.
+      pass:
+        heading: Congratulations
+        text: |
+          ## **You scored %{score}%**
+
+          Congratulations - you have scored highly enough to receive a certificate of achievement for this module.
+      fail:
+        heading: Revisit the module
+        text: |
+          ## **You scored %{score}%**
 
 
-        Unfortunately you have not scored highly enough to receive a certificate.
+          Unfortunately you have not scored highly enough to receive a certificate.
 
 
-        You can see the questions you aswered incorrectly.
+          You can see the questions you answered incorrectly.
 
 
-        You may wish to revisit some of the learning before taking the test again.
+          You may wish to revisit some of the learning before taking the test again.
 
-    you_answered:  You answered %{users_answers}. That's not quite right.
+
   # Form Builder ---------------------------------------------------------------
   helpers:
     label:
