@@ -8,16 +8,27 @@
 
   This is a Rails 7 application using the [DfE template][rails-template].
 
-2. Obtain the master keys
+2. Install git-secrets
+
+  This will help to prevent unintentional commits of access keys.
+
+  - `brew install git-secrets`
+  - `cd /path/to/my/repo`
+  - `git secrets --install`
+  - `git secrets --register-aws`
+
+Find advanced settings and other installation options at the [git-secrets project][git-secrets].
+
+3. Obtain the master keys
 
   Optionally create `.env` to override or set default variables like `DATABASE_URL`.
 
-3. Install the frontend dependencies
+4. Install the frontend dependencies
 
   - `yarn install; bin/rails assets:precompile`
   - `bin/docker-yarn` if using [Docker][docker]
 
-4. Start the server
+5. Start the server
 
   - `bin/dev` *(requires a running database server)*
   - `bin/docker-dev` if using [Docker][docker]
@@ -221,3 +232,4 @@ When the are significant changes to content structure or styling it may be neces
 [notify]: https://www.notifications.service.gov.uk
 [figma]: https://www.figma.com/file/FGW1NJJwnYRqoZ2DV0l5wW/Training-content?node-id=1%3A19
 [docker]: https://www.docker.com
+[git-secrets]: https://github.com/awslabs/git-secrets
