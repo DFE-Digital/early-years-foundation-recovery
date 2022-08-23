@@ -14,8 +14,8 @@ class YoutubePage
   #
   validates :youtube_url, format: %r{\Ahttps://www\.youtube\.com/embed}
 
-  # @return [Hash, nil]
-  delegate :page_number, to: :module_item
+  # @return [Hash]
+  delegate :pagination, to: :module_item
 
   # @return [String]
   def heading

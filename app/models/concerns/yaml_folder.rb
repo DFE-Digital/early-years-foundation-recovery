@@ -11,7 +11,7 @@ module YamlFolder
   # @overload full_path
   #   The full path to point at a folder rather than a file
   #
-  # @return [String]
+  # @return [String] "/srv/data/formative-questionnaires"
   def full_path
     File.join(actual_root_path, filename)
   end

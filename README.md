@@ -8,16 +8,27 @@
 
   This is a Rails 7 application using the [DfE template][rails-template].
 
-2. Obtain the master keys
+2. Install git-secrets
+
+  This will help to prevent unintentional commits of access keys.
+
+  - `brew install git-secrets`
+  - `cd /path/to/my/repo`
+  - `git secrets --install`
+  - `git secrets --register-aws`
+
+Find advanced settings and other installation options at the [git-secrets project][git-secrets].
+
+3. Obtain the master keys
 
   Optionally create `.env` to override or set default variables like `DATABASE_URL`.
 
-3. Install the frontend dependencies
+4. Install the frontend dependencies
 
   - `yarn install; bin/rails assets:precompile`
   - `bin/docker-yarn` if using [Docker][docker]
 
-4. Start the server
+5. Start the server
 
   - `bin/dev` *(requires a running database server)*
   - `bin/docker-dev` if using [Docker][docker]
@@ -86,7 +97,6 @@ These commands help maintain your containerised workspace:
     generated inside containers are created by *root*
 - `bin/docker-down` stop any active services
 - `bin/docker-prune` purge project containers, volumes and images
-- `bin/docker-dev-restart` restarts the running server
 - `bin/docker-yarn` warm the cache of frontend dependencies
 
 The commands run common tasks inside containers:
@@ -157,33 +167,27 @@ Emails are sent using the [GOV.UK Notify][notify].
 ### Getting a GovUK Notify account
 
 You need an account before you can use [GOV.UK Notify][notify] to send emails.
-To obtain one ask a current member of the team to add you to the PQ tracker service,
+To obtain one ask a current member of the team to add you to the "Early Years Foundation Recovery" service,
 by navigating to the `Team members` page and clicking the `Invite a team member`
 button and entering a government email address.
 This will send an email inviting you to use the service.
 
-### Getting a key for local development
+The credentials file for each environment holds an API key for [Notify][notify]:
 
-The credentials file for the development environment holds an API key for Notify;
-it is a test only and does not send out emails. We use test keys in local development
-to ensure we do not send out too many emails. If it is necessary to send emails
-from your local machine, you can use a `Team and whitelist` API key.
+- `railsdevelopment-...` Team and guest list (limits who you can send to)
+- `railstest-...` Test (pretends to send messages)
+- `railsproduction-...` Live (sends to anyone)
 
-- Sign into [GOV.UK Notify][notify]
-- Go to the ‘API integration’ page
-- Click ‘API keys’
-- Click the ‘Create an API’ button
-- Choose the ‘Team and whitelist’ option.
-- Copy your key and add it to your `.env` with the name `GOVUK_NOTIFY_API_KEY`
+It is possible to temporarily override the key by defining `GOVUK_NOTIFY_API_KEY` in `.env`.
 
+### Accessing information in the Notify service
 
-## Accessing information in the Notify service
-
-Once you have an account you can view the `Dashboard` with details of how many emails have been sent out and any that have failed to send. 
+Once you have an account you can view the `Dashboard` with details of how many
+emails have been sent out and any that have failed to send.
 
 You can update the content of the emails in the `Templates` section.
 
-## For more information
+### For more information
 
 Documentation for GovUK Notify can be found here: <https://docs.notifications.service.gov.uk/ruby.html>
 
@@ -228,3 +232,4 @@ When the are significant changes to content structure or styling it may be neces
 [notify]: https://www.notifications.service.gov.uk
 [figma]: https://www.figma.com/file/FGW1NJJwnYRqoZ2DV0l5wW/Training-content?node-id=1%3A19
 [docker]: https://www.docker.com
+[git-secrets]: https://github.com/awslabs/git-secrets

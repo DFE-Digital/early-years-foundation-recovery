@@ -46,6 +46,6 @@ bravo:
   # Assessment
   # ----------------------------------------------------------------------------
   1-2-2-2:
-    type: formative_assessment
+    type: formative_questionnaire
   1-2-2-3:
-    type: formative_assessment
+    type: formative_questionnaire

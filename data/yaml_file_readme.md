@@ -136,13 +136,14 @@ Instead the page content is defined within the questionnaire data (see below):
 These files define the behaviour of questionnaires.
 There are three main behaviours required:
 
-1. Formative Assessment
-2. Summative Assessment
-3. Confidence Check
-
-At time of writing only Formative Assessment has been defined in code.
+1. Formative Questionnaires
+2. Summative Questionnaires
+3. Confidence Questionnaires
 
 There is a generic Questionnaire model/structure that will probably become redundant when all three main types of questionnaire behaviour have been defined.
+
+TODO: Remove the `Questionnaire` object. There is only ever one question per page.
+Remove the `#question_list`, move methods into `Question` and have a `QuestionController`.
 
 ### Data structure
 
@@ -151,7 +152,6 @@ training_module_name:
   page_name:
     heading: Content for the top of the page
     content: Content for the body of the page
-    required_percentage_correct: Optional - assumed 100% if not set
     questions:
       question_name:
         multi_select: defines whether to use checkboxes(true) or radios(false)
@@ -159,16 +159,12 @@ training_module_name:
         assessment_summary: Output for result banner for this question
         assessment_fail_summary: Optional - alternative result text on fail
         answers:
-          answer_name: Answer label that will appear on page
+          1: Correct answer label that will appear on page
+          2: Wrong answer label
         correct_answers:
-          - Array of answer names to match against to determine success
+          - 1
 ```
 
-The structure uses question and answer names to identify individual elements.
-Using humanized names will make the code more readable, but is not essential.
-If you run out of names `a` `b` `c` will work fine.
-However, question names must be unique within each questionnaire, and answer names within each question.
+The questions are multiple choice and answer keys are therefore easier to handle if we use numeric keys.
 
 Also be aware that `true` `false` `yes` and `no` are translated into booleans by YAML so put them in quotes when using them for answers.
-
-If both `required_percentage_correct` and `correct_answers` are absent the percentage correct level is assumed to be 0% - that is, a submission will always be valid.
