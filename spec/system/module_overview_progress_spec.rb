@@ -22,8 +22,9 @@ RSpec.describe 'Module overview page progress' do
         expect(page).to have_content 'not started'
       end
 
-      within '#section-content-2 .govuk-list' do
-        expect(page).to have_content 'not started', count: 1
+      within '#section-content-1' do
+        expect(page).to have_content('1-1-1').and have_content('not started')
+        expect(page).not_to have_link('1-1-1')
       end
 
       within '#section-button-3' do
@@ -40,6 +41,17 @@ RSpec.describe 'Module overview page progress' do
 
     it 'resumes from the interruption page' do
       expect(page).to have_link 'Start', href: '/modules/alpha/content-pages/before-you-start'
+    end
+
+    it 'shows the end of module test has not been attempted' do
+      within '#section-content-3' do
+        expect(page).not_to have_content('in progress')
+        expect(page).not_to have_content('completed')
+      end
+    end
+
+    it 'shows the module recap is not clickable' do
+      expect(page).not_to have_link('Reflect on your learning', href: '/modules/alpha/content-pages/1-3-3')
     end
   end
 

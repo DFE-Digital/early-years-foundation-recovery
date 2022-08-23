@@ -180,7 +180,7 @@ personal-social-and-emotional-development:
   3-4-2-10:
     type: summative_questionnaire
   3-4-2-11:
-    type: assessments_results
+    type: assessment_results
 
   # ----------------------------------------------------------------------------
   # Confidence check
