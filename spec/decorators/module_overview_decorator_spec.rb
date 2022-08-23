@@ -11,7 +11,7 @@ RSpec.describe ModuleOverviewDecorator do
   describe '#call_to_action' do
     let(:output) do
       decorator.call_to_action do |state, (mod, item)|
-        { state: state, module: mod.title, page: item.name }
+        { state: state, module: mod.title, page: item&.name }
       end
     end
 
@@ -53,7 +53,7 @@ RSpec.describe ModuleOverviewDecorator do
 
         expect(user.events.count).to be 12
         expect(output[:state]).to be :completed
-        expect(output[:page]).to eql '1-2-2-2'
+        expect(output[:page]).to eql '1-2-2-3'
       end
     end
   end

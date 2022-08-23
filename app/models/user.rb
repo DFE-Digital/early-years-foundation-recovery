@@ -74,10 +74,6 @@ class User < ApplicationRecord
     @course ||= CourseProgress.new(user: self)
   end
 
-  def training_module_completed_at(_mod)
-    'Date completed: TBD'
-  end
-
 private
 
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]

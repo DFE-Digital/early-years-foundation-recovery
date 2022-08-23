@@ -15,12 +15,22 @@ RSpec.describe 'When a user visits the module overview page' do
       end
 
       within '#section-content-1' do
-        expect(page).to have_content('1-1-1')
-          .and have_content('not started')
+        expect(page).to have_content('1-1-1').and have_content('not started')
         expect(page).not_to have_link('1-1-1')
       end
 
       expect(page).to have_link('Start', href: '/modules/alpha/content-pages/before-you-start')
+    end
+
+    it 'shows the end of module test has not been attempted' do
+      within '#section-content-3' do
+        expect(page).not_to have_content('in progress')
+        expect(page).not_to have_content('completed')
+      end
+    end
+
+    it 'shows the module recap is not clickable' do
+      expect(page).not_to have_link('Reflect on your learning', href: '/modules/alpha/content-pages/1-3-3')
     end
   end
 
@@ -65,13 +75,13 @@ RSpec.describe 'When a user visits the module overview page' do
     end
   end
 
-  context 'when the user has viewed the first topic page' do
+  context 'when the first topic is complete' do
     before do
       start_first_topic(alpha)
       visit '/modules/alpha'
     end
 
-    it 'shows first topic has been completed' do
+    it 'has status indicators' do
       within '#section-button-1' do
         expect(page).to have_content('in progress')
       end
@@ -89,13 +99,13 @@ RSpec.describe 'When a user visits the module overview page' do
     end
   end
 
-  context 'when the user has finished the first submodule' do
+  context 'when the first submodule is complete' do
     before do
-      view_pages_before_formative_assessment(alpha)
+      view_pages_before_formative_questionnaire(alpha)
       visit '/modules/alpha'
     end
 
-    it 'shows first submodule is complete' do
+    it 'has status indicators' do
       within '#section-button-1' do
         expect(page).to have_content('complete')
       end
@@ -108,10 +118,10 @@ RSpec.describe 'When a user visits the module overview page' do
     end
   end
 
-  context 'when the user has failed a summative assessment' do
+  context 'when the summative assessment was failed' do
     before do
-      view_pages_before_summative_assessment(alpha)
-      visit '/modules/alpha/summative-assessments/1-3-2-1'
+      start_summative_assessment(alpha)
+      visit '/modules/alpha/questionnaires/1-3-2-1'
       3.times do
         check 'Wrong answer 1'
         check 'Wrong answer 2'
@@ -123,5 +133,14 @@ RSpec.describe 'When a user visits the module overview page' do
     end
 
     specify { expect(page).to have_link('Retake test') }
+  end
+
+  context 'when the whole module is complete' do
+    before do
+      view_whole_module(alpha)
+      visit '/modules/alpha'
+    end
+
+    specify { expect(page).not_to have_link('Retake test') }
   end
 end

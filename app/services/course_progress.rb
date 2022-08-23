@@ -22,9 +22,6 @@ class CourseProgress
     by_state(:upcoming).reject { |mod| available?(mod) }.take(3)
   end
 
-  # TODO: use a dedicated event for module completion
-  # TODO: continue refactor to leverage ModuleProgress methods in this class
-  #
   # @return [Array<Array>] Tabular data of completed training module
   def completed_modules
     by_state(:completed).map do |mod|
@@ -32,7 +29,6 @@ class CourseProgress
     end
   end
 
-  # TODO: continue refactor to leverage ModuleProgress methods in this class
   # @param module_id [String] training module name
   # @return [String] name of last page viewed in module
   def milestone(module_id)
@@ -125,7 +121,6 @@ private
     ModuleProgress.new(user: user, mod: mod)
   end
 
-  # TODO: module_progess responsibility
   # @param module_id [String] training module name
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
   def training_module_events(module_id)

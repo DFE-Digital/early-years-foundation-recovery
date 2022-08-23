@@ -31,11 +31,11 @@ alpha:
   1-1-2:
     type: text_page # submodule 1 / topic 2
   1-1-3:
-    type: text_page # submodule 1 / topic 3
+    type: text_page # submodule 1 / topic 3  / topic intro
   1-1-3-1:
-    type: text_page # submodule 1 / topic 3  / topic page
+    type: text_page # submodule 1 / topic 3  / topic content
   1-1-4:
-    type: formative_assessment
+    type: formative_questionnaire # 5th page in submodule
 
   # ----------------------------------------------------------------------------
   # Submodule 2
@@ -44,47 +44,51 @@ alpha:
   1-2:
     type: sub_module_intro
   1-2-1:
-    type: text_page # topic?
+    type: text_page
   1-2-1-1:
-    type: formative_assessment
+    type: formative_questionnaire
   1-2-1-2:
     type: youtube_page
   1-2-1-3:
-    type: formative_assessment
+    type: formative_questionnaire
 
   # ----------------------------------------------------------------------------
-  # Submodule 3 summative assessment
+  # Module Summary
   # ----------------------------------------------------------------------------
 
   1-3:
     type: sub_module_intro
   1-3-1:
     type: sub_module_intro
-  1-3-2:
-    type: sub_module_intro
-  1-3-2-1:
-    type: summative_assessment
-  1-3-2-2:
-    type: summative_assessment
-  1-3-2-3:
-    type: summative_assessment
-  1-3-2-4:
-    type: summative_assessment
-  1-3-2-5:
-    type: assessments_results
-
 
   # ----------------------------------------------------------------------------
-  # Submodule 4 Confidence check end summary
+  # summative assessment
+  # ----------------------------------------------------------------------------
+
+  1-3-2:
+    type: assessment_intro
+  1-3-2-1:
+    type: summative_questionnaire
+  1-3-2-2:
+    type: summative_questionnaire
+  1-3-2-3:
+    type: summative_questionnaire
+  1-3-2-4:
+    type: summative_questionnaire
+  1-3-2-5:
+    type: assessment_results
+
+  # ----------------------------------------------------------------------------
+  # confidence check
   # ----------------------------------------------------------------------------
 
   1-3-3:
-    type: sub_module_intro
+    type: confidence_intro
   1-3-3-1:
-    type: confidence_check  
+    type: confidence_questionnaire
   1-3-3-2:
-    type: confidence_check  
+    type: confidence_questionnaire
   1-3-3-3:
-    type: confidence_check
+    type: confidence_questionnaire
   1-3-3-4:
     type: sub_module_intro

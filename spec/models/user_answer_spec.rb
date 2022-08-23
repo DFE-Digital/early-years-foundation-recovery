@@ -1,10 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe UserAnswer, type: :model do
-  let(:user_answer) { create :user_answer }
+  subject(:user_answer) do
+    create(:user_answer,
+           name: questionnaire.name,
+           module: questionnaire.training_module,
+           questionnaire_id: questionnaire.id)
+  end
 
-  # Testing this association to check ActiveHash associations are working
-  it 'is associated with a questionnaire data instance' do
-    expect(user_answer.questionnaire_data).to be_a(QuestionnaireData)
+  let(:questionnaire) do
+    Questionnaire.find_by!(name: '1-1-4', training_module: 'alpha')
+  end
+
+  it 'is associated with a questionnaire' do
+    expect(user_answer.questionnaire).to be_a(Questionnaire)
+    expect(user_answer.questionnaire.questions.keys).to eql [:alpha_question_one]
   end
 end
