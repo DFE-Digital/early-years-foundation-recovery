@@ -23,10 +23,10 @@ class NotifyMailer < GovukNotifyRails::Mailer
     )
     mail(to: record.unconfirmed_email? ? record.unconfirmed_email : record.email)
   end
-  
+
   def email_changed(record, _opts = {})
     set_template(EMAIL_CHANGED_TEMPLATE_ID)
-    
+
     set_personalisation(
       is_unconfirmed_email: record.unconfirmed_email? ? 'Yes' : 'No',
       is_not_unconfirmed_email: record.unconfirmed_email? ? 'No' : 'Yes',
@@ -43,7 +43,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
     )
     mail(to: record.unconfirmed_email? ? record.unconfirmed_email : record.email)
   end
-  
+
   def email_taken(record)
     set_template(EMAIL_TAKEN_TEMPLATE_ID)
 
@@ -54,7 +54,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
     )
     mail(to: record.email)
   end
-  
+
   def password_change(record, _opts = {})
     set_template(PASSWORD_CHANGED_TEMPLATE_ID)
 
@@ -64,7 +64,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
     )
     mail(to: record.email)
   end
-  
+
   def reset_password_instructions(record, token, _opts = {})
     set_template(RESET_PASSWORD_TEMPLATE_ID)
 
