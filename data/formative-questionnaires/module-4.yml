@@ -1,87 +1,100 @@
 ---
 module-4:
   4-1-1-1c:
-    content:
     questions:
       1_babies_expressive_language:
-        multi_select: false 
+        multi_select: false
         label: |
-          True or false? Babies understand expressive language before receptive language. 
-        assessment_summary:  |
-          Babies will understand what they hear (receptive language) before they are able to express themselves (expressive language). This is why it is important to constantly talk to babies and narrate whatever you are doing. 
+          True or false? Babies understand expressive language before receptive language.
+        assessment_summary: |
+          Babies will understand what they hear (receptive language) before they are able to express themselves (expressive language).
+          This is why it is important to constantly talk to babies and narrate whatever you are doing.
         assessment_fail_summary: |
-          Babies will understand what they hear (receptive language) before they are able to express themselves (expressive language). This is why it is important to constantly talk to babies and narrate whatever you are doing.  
+          Babies will understand what they hear (receptive language) before they are able to express themselves (expressive language).
+          This is why it is important to constantly talk to babies and narrate whatever you are doing.
         answers:
           1: "True"
           2: "False"
         correct_answers:
-          - "2"
+          - 2
 
   4-1-1-1d:
-    content:
     questions:
       1_prelinguistic_stage:
-        multi_select: false 
+        multi_select: false
         label: |
-          At what age does the pre-linguistic stage usually occur? 
-        assessment_summary:  |
-          The pre-linguistic stage occurs between birth and 1 year old. This is where babies use pre-speech sounds such as babbling and cooing. 
+          At what age does the pre-linguistic stage usually occur?
+        assessment_summary: |
+          The pre-linguistic stage occurs between birth and 1 year old.
+          This is where babies use pre-speech sounds such as babbling and cooing.
         assessment_fail_summary: |
-          The pre-linguistic stage occurs between birth and 1 year old. This is where babies use pre-speech sounds such as babbling and cooing.  
+          The pre-linguistic stage occurs between birth and 1 year old.
+          This is where babies use pre-speech sounds such as babbling and cooing.
         answers:
-          1: "0 to 1 year"
-          2: "1 to 2 years"
-          3: "2 to 3 years"
-          4: "3 to 4 years"
+          1: 0 to 1 year
+          2: 1 to 2 years
+          3: 2 to 3 years
+          4: 3 to 4 years
         correct_answers:
-          - "1"
+          - 1
 
   4-1-1-2b:
-    content:
     questions:
       1_first_words:
-        multi_select: false 
+        multi_select: false
         label: |
           Which type of words will children recognise and attempt first?
-        assessment_summary:  |
-          To begin with children will recognise and attempt to use nouns such as ‘dog’, ‘ball’, ‘cup’. Next will come understanding of verbs such as ‘drink’, ‘eat’, ‘walk’. Understanding of adjectives such as ‘small’, ‘red’, ‘cold’ will then follow. You can support children by extending their use of a noun. For example if a child says ‘cup’ you can say “yes, you are drinking from a yellow cup”. 
+        assessment_summary: |
+          To begin with children will recognise and attempt to use nouns such as ‘dog’, ‘ball’, ‘cup’.
+          Next will come understanding of verbs such as ‘drink’, ‘eat’, ‘walk’.
+          Understanding of adjectives such as ‘small’, ‘red’, ‘cold’ will then follow.
+          You can support children by extending their use of a noun.
+          For example if a child says ‘cup’ you can say “yes, you are drinking from a yellow cup”.
         assessment_fail_summary: |
-          To begin with children will recognise and attempt to use nouns such as ‘dog’, ‘ball’, ‘cup’. Next will come understanding of verbs such as ‘drink’, ‘eat’, ‘walk’. Understanding of adjectives such as ‘small’, ‘red’, ‘cold’ will then follow. You can support children by extending their use of a noun. For example if a child says ‘cup’ you can say “yes, you are drinking from a yellow cup”.  
+          To begin with children will recognise and attempt to use nouns such as ‘dog’, ‘ball’, ‘cup’.
+          Next will come understanding of verbs such as ‘drink’, ‘eat’, ‘walk’.
+          Understanding of adjectives such as ‘small’, ‘red’, ‘cold’ will then follow.
+          You can support children by extending their use of a noun.
+          For example if a child says ‘cup’ you can say “yes, you are drinking from a yellow cup”.
         answers:
-          1: "Adverbs – words used to describe a verb in more detail, such as accidentally, gently, clearly"
-          2: "Adjectives – words used to describe a noun, such as nervous, adorable, big"
-          3: "Nouns – the name of a place, person or object such as man, lion, flower"
-          4: "Verbs – a doing word that describes an action, such as climb, grow, learn"
+          1: Adverbs – words used to describe a verb in more detail, such as accidentally, gently, clearly
+          2: Adjectives – words used to describe a noun, such as nervous, adorable, big
+          3: Nouns – the name of a place, person or object such as man, lion, flower
+          4: Verbs – a doing word that describes an action, such as climb, grow, learn
         correct_answers:
-          - "3"
+          - 3
 
   4-1-1-4b:
-    content:
     questions:
       1_incorrect_pronunciation_grammar:
-        multi_select: false 
+        multi_select: false
         label: |
           What is the best action to take if a child does not use the correct pronounciation or grammar?
-        assessment_summary:  |
-          You should model the correct use of language. For example, a child may say “I drawed a picture for you”. Your response could be “that’s right, you have drawn a picture for me”. This will provide opportunity for the child to learn by imitation.  
+        assessment_summary: |
+          You should model the correct use of language.
+          For example, a child may say “I drawed a picture for you”.
+          Your response could be “that’s right, you have drawn a picture for me”.
+          This will provide opportunity for the child to learn by imitation.
         assessment_fail_summary: |
-          You should model the correct use of language. For example, a child may say “I drawed a picture for you”. Your response could be “that’s right, you have drawn a picture for me”. This will provide opportunity for the child to learn by imitation.  
+          You should model the correct use of language.
+          For example, a child may say “I drawed a picture for you”.
+          Your response could be “that’s right, you have drawn a picture for me”.
+          This will provide opportunity for the child to learn by imitation.
         answers:
-          1: "Tell them they are wrong and ask them to try again"
-          2: "Model the correct answer back to them"
-          3: "Ask the group if the child is right or wrong"
-          4: "Plan an activity on pronunciation"
+          1: Tell them they are wrong and ask them to try again
+          2: Model the correct answer back to them
+          3: Ask the group if the child is right or wrong
+          4: Plan an activity on pronunciation
         correct_answers:
-          - "2"
-  
+          - 2
+
   4-1-1-4c:
-    content:
     questions:
       1_sustained_shared_thinking:
-        multi_select: false 
+        multi_select: false
         label: |
-          True or false? Sustained shared thinking can extend children's vocabulary. 
-        assessment_summary:  |
+          True or false? Sustained shared thinking can extend children's vocabulary.
+        assessment_summary: |
           You can support language development by encouraging children to:
 
           - work with others to solve problems
@@ -89,8 +102,8 @@ module-4:
           - share stories
           - investigate
 
-          This is called sustained shared thinking. This will lead to extended discussions and questions, which will result in opportunities to hear and practice new vocabulary.
-  
+          This is called sustained shared thinking.
+          This will lead to extended discussions and questions, which will result in opportunities to hear and practice new vocabulary.
         assessment_fail_summary: |
           You can support language development by encouraging children to:
 
@@ -99,251 +112,265 @@ module-4:
           - share stories
           - investigate
 
-          This is called sustained shared thinking. This will lead to extended discussions and questions, which will result in opportunities to hear and practice new vocabulary.  
+          This is called sustained shared thinking.
+          This will lead to extended discussions and questions, which will result in opportunities to hear and practice new vocabulary.
         answers:
           1: "True"
           2: "False"
         correct_answers:
-          - "1"
-  
+          - 1
+
   4-1-2-4b:
-    content:
     questions:
       1_skinner_theory:
-        multi_select: false 
+        multi_select: false
         label: |
-          True or false? The main principles of Skinner’s theory were imitation, reinforcement and conditioning. 
-        assessment_summary:  |
+          True or false? The main principles of Skinner’s theory were imitation, reinforcement and conditioning.
+        assessment_summary: |
           Skinner’s theory had 3 principles which were imitation, reinforcement and conditioning.
 
-          Skinner believed that children are born with a blank mind and develop their language skills through learning and opportunity to mimic others. Skinner believed that the response to the behaviour would shape future behaviour.
-          
-          For example if you talk to a baby or child, they will be able to try and respond by copying your behaviour. You can then reinforce their attempts with verbal praise, a smile and another response. The child will then want to repeat this behaviour to receive another positive response and this will promote their development.
-  
+          Skinner believed that children are born with a blank mind and develop their language skills through learning and opportunity to mimic others.
+          Skinner believed that the response to the behaviour would shape future behaviour.
+
+          For example if you talk to a baby or child, they will be able to try and respond by copying your behaviour.
+          You can then reinforce their attempts with verbal praise, a smile and another response.
+          The child will then want to repeat this behaviour to receive another positive response and this will promote their development.
         assessment_fail_summary: |
           Skinner’s theory had 3 principles which were imitation, reinforcement and conditioning.
 
-          Skinner believed that children are born with a blank mind and develop their language skills through learning and opportunity to mimic others. Skinner believed that the response to the behaviour would shape future behaviour.
-          
-          For example if you talk to a baby or child, they will be able to try and respond by copying your behaviour. You can then reinforce their attempts with verbal praise, a smile and another response. The child will then want to repeat this behaviour to receive another positive response and this will promote their development.  
+          Skinner believed that children are born with a blank mind and develop their language skills through learning and opportunity to mimic others.
+          Skinner believed that the response to the behaviour would shape future behaviour.
+
+          For example if you talk to a baby or child, they will be able to try and respond by copying your behaviour.
+          You can then reinforce their attempts with verbal praise, a smile and another response.
+          The child will then want to repeat this behaviour to receive another positive response and this will promote their development.
         answers:
           1: "True"
           2: "False"
         correct_answers:
-          - "1"
-  
+          - 1
+
   4-1-2-4c:
-    content:
     questions:
       1_social_emotional_relationships:
-        multi_select: false 
+        multi_select: false
         label: |
-          Which theorist believed that social and emotional relationships are not important for children’s language development? 
- 
-        assessment_summary:  |
-          Piaget did not think that social and emotional relationships were important. Instead he believed that children need to understand a word before they can use it. In contrast, Bruner and Skinner thought that interactions with others were crucial to support language development. 
-  
+          Which theorist believed that social and emotional relationships are not important for children’s language development?
+        assessment_summary: |
+          Piaget did not think that social and emotional relationships were important.
+          Instead he believed that children need to understand a word before they can use it.
+          In contrast, Bruner and Skinner thought that interactions with others were crucial to support language development.
         assessment_fail_summary: |
-          Piaget did not think that social and emotional relationships were important. Instead he believed that children need to understand a word before they can use it. In contrast, Bruner and Skinner thought that interactions with others were crucial to support language development.   
+          Piaget did not think that social and emotional relationships were important.
+          Instead he believed that children need to understand a word before they can use it.
+          In contrast, Bruner and Skinner thought that interactions with others were crucial to support language development.
         answers:
-          1: "Bruner"
-          2: "Chomsky"
-          3: "Skinner"
-          4: "Piaget"
+          1: Bruner
+          2: Chomsky
+          3: Skinner
+          4: Piaget
         correct_answers:
-          - "4"
+          - 4
+
   4-1-2-4d:
-    content:
     questions:
       1_chomsky_theory:
-        multi_select: false 
+        multi_select: false
         label: |
           True or false? Chomsky believes that children learn language instinctively.
- 
-        assessment_summary:  |
-          Chomsky suggests that all children have the instinct and ability to develop their language skills, regardless of how and where they grow up. It is important to remember that this may not always be the case for all children. Children will all develop at their own individual pace. You will also need to take into account contributing factors, such as learning difficulties. 
-  
+        assessment_summary: |
+          Chomsky suggests that all children have the instinct and ability to develop their language skills, regardless of how and where they grow up.
+          It is important to remember that this may not always be the case for all children.
+          Children will all develop at their own individual pace.
+          You will also need to take into account contributing factors, such as learning difficulties.
         assessment_fail_summary: |
-          Chomsky suggests that all children have the instinct and ability to develop their language skills, regardless of how and where they grow up. It is important to remember that this may not always be the case for all children. Children will all develop at their own individual pace. You will also need to take into account contributing factors, such as learning difficulties.   
+          Chomsky suggests that all children have the instinct and ability to develop their language skills, regardless of how and where they grow up.
+          It is important to remember that this may not always be the case for all children.
+          Children will all develop at their own individual pace.
+          You will also need to take into account contributing factors, such as learning difficulties.
         answers:
           1: "True"
           2: "False"
         correct_answers:
-          - "1"
-  
+          - 1
+
   4-1-3-2b:
-    content:
     questions:
       1_income_language_development:
-        multi_select: false 
+        multi_select: false
         label: |
           True or false? Higher household income will always result in better language development.
- 
-        assessment_summary:  |
-          Higher household income might give children access to more resources and outings. However, this does not guarantee that they will experience high quality and frequent interactions. 
-  
+        assessment_summary: |
+          Higher household income might give children access to more resources and outings.
+          However, this does not guarantee that they will experience high quality and frequent interactions.
         assessment_fail_summary: |
-          Higher household income might give children access to more resources and outings. However, this does not guarantee that they will experience high quality and frequent interactions.   
+          Higher household income might give children access to more resources and outings.
+          However, this does not guarantee that they will experience high quality and frequent interactions.
         answers:
           1: "True"
           2: "False"
         correct_answers:
-          - "2"
+          - 2
+
   4-1-3-4b:
-    content:
     questions:
       1_visual_aid:
-        multi_select: false 
+        multi_select: false
         label: |
           Which of the following is a visual aid that can support children with English as an additional language?
- 
-        assessment_summary:  |
-          PECS is a picture exchange communication system. This is where you provide children with pictures to help them to express themselves and to understand the routine. This can reduce anxiety for children and minimise frustration when they are not able to communicate their needs. 
-  
+        assessment_summary: |
+          PECS is a picture exchange communication system.
+          This is where you provide children with pictures to help them to express themselves and to understand the routine.
+          This can reduce anxiety for children and minimise frustration when they are not able to communicate their needs.
         assessment_fail_summary: |
-          PECS is a picture exchange communication system. This is where you provide children with pictures to help them to express themselves and to understand the routine. This can reduce anxiety for children and minimise frustration when they are not able to communicate their needs.  
+          PECS is a picture exchange communication system.
+          This is where you provide children with pictures to help them to express themselves and to understand the routine.
+          This can reduce anxiety for children and minimise frustration when they are not able to communicate their needs.
         answers:
-          1: "EYFS"
-          2: "EAL"
-          3: "PECS"
-          4: "EAD"
+          1: EYFS
+          2: EAL
+          3: PECS
+          4: EAD
         correct_answers:
-          - "3"
+          - 3
 
   4-1-3-4c:
-    content:
     questions:
       1_acknowledging_first_language:
-        multi_select: false 
+        multi_select: false
         label: |
-          Which of the following will acknowledging and celebrating a child's first language promote? 
- 
-        assessment_summary:  |
-          Acknowledging a child’s first language will support them to develop positive self image and confidence. This will make children feel valued and important and will motivate them to communicate with others.  
-  
+          Which of the following will acknowledging and celebrating a child's first language promote?
+        assessment_summary: |
+          Acknowledging a child’s first language will support them to develop positive self image and confidence.
+          This will make children feel valued and important and will motivate them to communicate with others.
         assessment_fail_summary: |
-          Acknowledging a child’s first language will support them to develop positive self image and confidence. This will make children feel valued and important and will motivate them to communicate with others.  
+          Acknowledging a child’s first language will support them to develop positive self image and confidence.
+          This will make children feel valued and important and will motivate them to communicate with others.
         answers:
-          1: "Discrimination"
-          2: "Intelligence"
-          3: "Positive self image and confidence"
-          4: "Resources"
+          1: Discrimination
+          2: Intelligence
+          3: Positive self image and confidence
+          4: Resources
         correct_answers:
-          - "3"  
+          - 3
 
   4-2-1-1b:
-    content:
     questions:
       1_term_language_skills:
-        multi_select: false 
+        multi_select: false
         label: |
           What term is used when a child’s language skills are lower than expected?
- 
-        assessment_summary:  |
-          If a child’s skills are below the expected norms for their age they may be referred to as having speech, language and communication needs (SLCN). It is important to remember that all children develop at their own pace. If a child has lower than expected skills they may simply need more time and interactions.  
-  
+        assessment_summary: |
+          If a child’s skills are below the expected norms for their age they may be referred to as having speech, language and communication needs (SLCN).
+          It is important to remember that all children develop at their own pace.
+          If a child has lower than expected skills they may simply need more time and interactions.
         assessment_fail_summary: |
-          If a child’s skills are below the expected norms for their age they may be referred to as having speech, language and communication needs (SLCN). It is important to remember that all children develop at their own pace. If a child has lower than expected skills they may simply need more time and interactions.  
+          If a child’s skills are below the expected norms for their age they may be referred to as having speech, language and communication needs (SLCN).
+          It is important to remember that all children develop at their own pace.
+          If a child has lower than expected skills they may simply need more time and interactions.
         answers:
-          1: "English as an additional language"
-          2: "Special educational needs"
-          3: "Speech, language and communication needs"
-          4: "Socio-economic factors"
+          1: English as an additional language
+          2: Special educational needs
+          3: Speech, language and communication needs
+          4: Socio-economic factors
         correct_answers:
-          - "3"
+          - 3
+
   4-2-1-3b:
-    content:
     questions:
       1_addressing_concerns:
-        multi_select: false 
+        multi_select: false
         label: |
-          True or false? Although important, addressing concerns around a child's language skills could cause parents and carers to worry. 
- 
-        assessment_summary:  |
-          Information from parents and carers will support you to identify children’s language needs. However, it is important to address the subject with sensitivity to avoid causing any unnecessary worry.  
-  
+          True or false? Although important, addressing concerns around a child's language skills could cause parents and carers to worry.
+        assessment_summary: |
+          Information from parents and carers will support you to identify children’s language needs.
+          However, it is important to address the subject with sensitivity to avoid causing any unnecessary worry.
         assessment_fail_summary: |
-          Information from parents and carers will support you to identify children’s language needs. However, it is important to address the subject with sensitivity to avoid causing any unnecessary worry.  
+          Information from parents and carers will support you to identify children’s language needs.
+          However, it is important to address the subject with sensitivity to avoid causing any unnecessary worry.
         answers:
           1: "True"
           2: "False"
         correct_answers:
-          - "1"
-  
+          - 1
+
   4-2-1-5b:
-    content:
     questions:
       1_communication_frustration:
-        multi_select: false 
+        multi_select: false
         label: |
-          Which of the following can support children to manage communication frustration? 
- 
-        assessment_summary:  |
-          If you make sure that the daily routine and your behaviour are predictable it will support children to feel safe and secure. This will help them to feel confident. If children feel confident and settled, their reactions to frustrations will be minimised.  
-  
+          Which of the following can support children to manage communication frustration?
+        assessment_summary: |
+          If you make sure that the daily routine and your behaviour are predictable it will support children to feel safe and secure.
+          This will help them to feel confident.
+          If children feel confident and settled, their reactions to frustrations will be minimised.
         assessment_fail_summary: |
-          If you make sure that the daily routine and your behaviour are predictable it will support children to feel safe and secure. This will help them to feel confident. If children feel confident and settled, their reactions to frustrations will be minimised.  
+          If you make sure that the daily routine and your behaviour are predictable it will support children to feel safe and secure.
+          This will help them to feel confident.
+          If children feel confident and settled, their reactions to frustrations will be minimised.
         answers:
-          1: "Highlighting negative behaviour"
-          2: "Having predictable behaviour and routines"
-          3: "Limited knowledge of children’s needs"
-          4: "Limited use of PECS"
+          1: Highlighting negative behaviour
+          2: Having predictable behaviour and routines
+          3: Limited knowledge of children’s needs
+          4: Limited use of PECS
         correct_answers:
-          - "2"
+          - 2
+
   4-2-3-1b:
-    content:
     questions:
       1_pandemic_positive:
-        multi_select: false 
+        multi_select: false
         label: |
-          Which of the following can be a positive outcome of the pandemic lockdowns? 
- 
+          Which of the following can be a positive outcome of the pandemic lockdowns?
         assessment_summary:  |
-          Children with older siblings may have had access to resources designed for older children. They may also have experienced and rehearsed a more advanced vocabulary. 
-  
+          Children with older siblings may have had access to resources designed for older children.
+          They may also have experienced and rehearsed a more advanced vocabulary.
         assessment_fail_summary: |
-          Children with older siblings may have had access to resources designed for older children. They may also have experienced and rehearsed a more advanced vocabulary. 
+          Children with older siblings may have had access to resources designed for older children.
+          They may also have experienced and rehearsed a more advanced vocabulary.
         answers:
-          1: "Limited outdoor space"
-          2: "Having access to resources belonging to older siblings"
-          3: "Limited interaction"
-          4: "Increased screen time"
+          1: Limited outdoor space
+          2: Having access to resources belonging to older siblings
+          3: Limited interaction
+          4: Increased screen time
         correct_answers:
-          - "2"
+          - 2
+
   4-2-3-2b:
-    content:
     questions:
       1_pandemic_negative:
-        multi_select: false 
+        multi_select: false
         label: |
           Which of these may have had a negative impact on children’s language skills during the pandemic lockdowns?
-
-        assessment_summary:  |
-          Children may have had increased access to technology including computers, TVs and phones. Whilst this means that children will have heard vocabulary, it is not as effective as the interactions that take place between people.  
-  
+        assessment_summary: |
+          Children may have had increased access to technology including computers, TVs and phones.
+          Whilst this means that children will have heard vocabulary, it is not as effective as the interactions that take place between people.
         assessment_fail_summary: |
-          Children may have had increased access to technology including computers, TVs and phones. Whilst this means that children will have heard vocabulary, it is not as effective as the interactions that take place between people.  
+          Children may have had increased access to technology including computers, TVs and phones.
+          Whilst this means that children will have heard vocabulary, it is not as effective as the interactions that take place between people.
         answers:
-          1: "Musical activity"
-          2: "Outdoor activity"
-          3: "Interactions"
-          4: "Screen time"
+          1: Musical activity
+          2: Outdoor activity
+          3: Interactions
+          4: Screen time
         correct_answers:
-          - "4"
-  
+          - 4
+
+# ---------------
+
   4-3-1-1b:
     content:
     questions:
       1_support_communication:
-        multi_select: false 
+        multi_select: false
         label: |
           What is an effective way to support your communication with children?
 
         assessment_summary:  |
-          When children feel valued they will believe their thoughts are important and will be more likely to communicate. When you create a positive relationship with children, you will instil confidence in them. This will make them more motivated to learn.  
-  
+          When children feel valued they will believe their thoughts are important and will be more likely to communicate. When you create a positive relationship with children, you will instil confidence in them. This will make them more motivated to learn.
+
         assessment_fail_summary: |
-          When children feel valued they will believe their thoughts are important and will be more likely to communicate. When you create a positive relationship with children, you will instil confidence in them. This will make them more motivated to learn.  
+          When children feel valued they will believe their thoughts are important and will be more likely to communicate. When you create a positive relationship with children, you will instil confidence in them. This will make them more motivated to learn.
         answers:
           1: "Speak loudly"
           2: "Increase their screen time"
@@ -355,15 +382,15 @@ module-4:
     content:
     questions:
       1_self_talk_strategy:
-        multi_select: false 
+        multi_select: false
         label: |
           Which of the following describes the self talk strategy?
 
         assessment_summary:  |
-          Self talk is where you add commentary to your actions such as "I am putting the books away in the bookcase, can you see all the books?" or "I am washing my hands, so that they are clean. The soap is pink." This can sometimes make you feel silly, but it is extremely beneficial to children.  
-  
+          Self talk is where you add commentary to your actions such as "I am putting the books away in the bookcase, can you see all the books?" or "I am washing my hands, so that they are clean. The soap is pink." This can sometimes make you feel silly, but it is extremely beneficial to children.
+
         assessment_fail_summary: |
-          Self talk is where you add commentary to your actions such as "I am putting the books away in the bookcase, can you see all the books?" or "I am washing my hands, so that they are clean. The soap is pink." This can sometimes make you feel silly, but it is extremely beneficial to children.  
+          Self talk is where you add commentary to your actions such as "I am putting the books away in the bookcase, can you see all the books?" or "I am washing my hands, so that they are clean. The soap is pink." This can sometimes make you feel silly, but it is extremely beneficial to children.
         answers:
           1: "Making eye contact"
           2: "Adding gestures and facial expressions when you talk"
@@ -378,32 +405,32 @@ module-4:
       1_creative_activities:
         multi_select: true
         label: |
-          Which of the following are benefits of creative and imaginative activities? (Select all that apply) 
+          Which of the following are benefits of creative and imaginative activities? (Select all that apply)
         assessment_summary: |
           Creative and imaginative activities often result in more spontaneous conversation. It can help children to discuss personal information such as their families or their interests. When you carry out these activities with children individually you can also create an opportunity for children to talk about their feelings on a 1 to 1 basis.
-        
+
         assessment_fail_summary: |
           Creative and imaginative activities often result in more spontaneous conversation. It can help children to discuss personal information such as their families or their interests. When you carry out these activities with children individually you can also create an opportunity for children to talk about their feelings on a 1 to 1 basis.
         answers:
           1: "Increased opportunities for spontaneous conversation"
-          2: "Helping children to discuss personal information"                    
+          2: "Helping children to discuss personal information"
           3: "Teaching children to take turns when talking"
           4: "Supporting children to understand and express their feelings on a 1 to 1 basis"
         correct_answers: ["1","2","3","4"]
-  
+
   4-3-2-2b:
     content:
     questions:
       1_child_led:
-        multi_select: false 
+        multi_select: false
         label: |
           Which of the following might be a disadvantage of child led activity?
 
         assessment_summary:  |
-          If children do not experience any adult led activity, they may use incorrect communication for a long time. This is because they will miss out on opportunities for incorrect communications to be corrected.   
-  
+          If children do not experience any adult led activity, they may use incorrect communication for a long time. This is because they will miss out on opportunities for incorrect communications to be corrected.
+
         assessment_fail_summary: |
-          If children do not experience any adult led activity, they may use incorrect communication for a long time. This is because they will miss out on opportunities for incorrect communications to be corrected.   
+          If children do not experience any adult led activity, they may use incorrect communication for a long time. This is because they will miss out on opportunities for incorrect communications to be corrected.
         answers:
           1: "Peer interaction"
           2: "Increased exploration"
@@ -411,20 +438,20 @@ module-4:
           4: "Sustained shared thinking"
         correct_answers:
           - "3"
-  
+
   4-3-3-1b:
     content:
     questions:
       1_child_led:
-        multi_select: false 
+        multi_select: false
         label: |
           Improving parents’ and carers’ understanding of which of these will make them more likely to adopt shared strategies to support their child’s language development.
 
         assessment_summary:  |
-          Improving parents' and carers' understanding of a language rich approach will help them copy this at home. This will provide a consistent approach to language development for all children.   
-  
+          Improving parents' and carers' understanding of a language rich approach will help them copy this at home. This will provide a consistent approach to language development for all children.
+
         assessment_fail_summary: |
-          Improving parents' and carers' understanding of a language rich approach will help them copy this at home. This will provide a consistent approach to language development for all children.   
+          Improving parents' and carers' understanding of a language rich approach will help them copy this at home. This will provide a consistent approach to language development for all children.
         answers:
           1: "A second language"
           2: "A language rich approach"
@@ -432,7 +459,7 @@ module-4:
           4: "Self-regulation"
         correct_answers:
           - "2"
-  
+
   2-1-3-4b:
     content:
     questions:
@@ -446,19 +473,19 @@ module-4:
           When children try new things and challenge themselves this promotes myelination of neurons. This improves the speed at which the message travels in the brain, and so improves the skill.
         answers:
           1: "True"
-          2: "False"                    
+          2: "False"
         correct_answers: ["1"]
   2-2-1-1b:
     content:
     questions:
       1_cognitive_development_delay:
-        multi_select: false 
+        multi_select: false
         label: |
           What is cognitive development delay?
         assessment_summary: |
-          Remember that this is a very subjective concept that does not take a child’s unique development journey into consideration. 
+          Remember that this is a very subjective concept that does not take a child’s unique development journey into consideration.
         assessment_fail_summary: |
-          Cognitive development delay is when a child is at a lower level than their expected milestone. Remember that this is a very subjective concept that does not take a child’s unique development journey into consideration. 
+          Cognitive development delay is when a child is at a lower level than their expected milestone. Remember that this is a very subjective concept that does not take a child’s unique development journey into consideration.
         answers:
           1: "When a child is exceeding their expected milestone"
           2: "When a child is at a lower level than their expected milestone"
@@ -487,7 +514,7 @@ module-4:
     content:
     questions:
       1_maslow_needs:
-        multi_select: false 
+        multi_select: false
         label: |
           Which type of needs did Maslow consider to be the most important?
         assessment_summary: |
@@ -504,23 +531,23 @@ module-4:
     content:
     questions:
       1_bandura:
-        multi_select: false 
+        multi_select: false
         label: |
-          According to Bandura, how many sources potentially influence a child’s development of self-efficacy? 
-        assessment_summary: | 
+          According to Bandura, how many sources potentially influence a child’s development of self-efficacy?
+        assessment_summary: |
           Bandura believed that a child’s development of self-efficacy came from 4 potential sources:
 
           - mastery - opportunities to master tasks or skills and experience success
           - vicarious experiences - opportunities to observe others who are similar to themselves succeeding
-          - persuasion - support, praise and encouragement from influential role models in the child’s life 
+          - persuasion - support, praise and encouragement from influential role models in the child’s life
           - imagination  - the ability for the child to imagine themselves succeeding
 
-        assessment_fail_summary: | 
+        assessment_fail_summary: |
           Bandura believed that a child’s development of self-efficacy came from 4 potential sources:
-          
+
           - mastery - opportunities to master tasks or skills and experience success
           - vicarious experiences - opportunities to observe others who are similar to themselves succeeding
-          - persuasion - support, praise and encouragement from influential role models in the child’s life 
+          - persuasion - support, praise and encouragement from influential role models in the child’s life
           - imagination  - the ability for the child to imagine themselves succeeding
         answers:
           1: "6"
@@ -532,20 +559,20 @@ module-4:
     content:
     questions:
       1_bruner:
-        multi_select: false 
+        multi_select: false
         label: |
           The 3 learning methods included in Bruner’s spiral curriculum are Enactive, Symbolic representation and which of the following?
 
-        assessment_summary: | 
+        assessment_summary: |
           Bruner’s methods included:
-        
+
           - Enactive - where children learn through hands on experiences and physical movements
           - Iconic - where children build upon the memories of the hands on experience and reinforce this imagery, so that when they think about an object or concept they can picture a relevant image
           - Symbolic representation - where children will learn the correct language and symbols to explain their learning
 
-        assessment_fail_summary: | 
+        assessment_fail_summary: |
           Bruner’s methods included:
-        
+
           - Enactive - where children learn through hands on experiences and physical movements
           - Iconic - where children build upon the memories of the hands on experience and reinforce this imagery, so that when they think about an object or concept they can picture a relevant image
           - Symbolic representation - where children will learn the correct language and symbols to explain their learning
@@ -559,13 +586,13 @@ module-4:
     content:
     questions:
       1_more_knowledgeable_other:
-        multi_select: false 
+        multi_select: false
         label: |
           What is the term used to describe when a more knowledgeable other helps children to acquire new skills and knowledge?
         assessment_summary: |
-          Scaffolding is where support and techniques are used to guide a child’s learning. Scaffolding could include modelling, chunking knowledge to make it achievable and using visual aids and questions to support learning. This help can then be reduced until the child is able to complete the task alone. 
+          Scaffolding is where support and techniques are used to guide a child’s learning. Scaffolding could include modelling, chunking knowledge to make it achievable and using visual aids and questions to support learning. This help can then be reduced until the child is able to complete the task alone.
         assessment_fail_summary: |
-          Scaffolding is where support and techniques are used to guide a child’s learning. Scaffolding could include modelling, chunking knowledge to make it achievable and using visual aids and questions to support learning. This help can then be reduced until the child is able to complete the task alone.  
+          Scaffolding is where support and techniques are used to guide a child’s learning. Scaffolding could include modelling, chunking knowledge to make it achievable and using visual aids and questions to support learning. This help can then be reduced until the child is able to complete the task alone.
         answers:
           1: "Supporting"
           2: "Staging"
@@ -576,13 +603,13 @@ module-4:
     content:
     questions:
       1_nhs_physical_hours:
-        multi_select: false 
+        multi_select: false
         label: |
           According to NHS guidance, toddlers aged between 1 to 2 years should participate in a mixture of running, jumping, balancing and light activities like standing and walking for how many hours each day?
         assessment_summary: |
-          NHS guidance states that children aged 1 to 2 should be active for at least 3 hours per day. It is important to remember that this is not 3 hours of planned physical activity that involves running, jumping, or climbing, but that it also includes light activity such as standing and walking. 
+          NHS guidance states that children aged 1 to 2 should be active for at least 3 hours per day. It is important to remember that this is not 3 hours of planned physical activity that involves running, jumping, or climbing, but that it also includes light activity such as standing and walking.
         assessment_fail_summary: |
-          NHS guidance states that children aged 1 to 2 should be active for at least 3 hours per day. It is important to remember that this is not 3 hours of planned physical activity that involves running, jumping, or climbing, but that it also includes light activity such as standing and walking. 
+          NHS guidance states that children aged 1 to 2 should be active for at least 3 hours per day. It is important to remember that this is not 3 hours of planned physical activity that involves running, jumping, or climbing, but that it also includes light activity such as standing and walking.
         answers:
           1: "1"
           2: "2"
@@ -593,7 +620,7 @@ module-4:
     content:
     questions:
       1_prolonged_inactivity:
-        multi_select: true 
+        multi_select: true
         label: |
           Which of the following influences could result in prolonged periods of inactivity? (Select all answers that apply)
         assessment_summary: |
@@ -610,24 +637,24 @@ module-4:
     content:
     questions:
       1_meal_times:
-        multi_select: true 
+        multi_select: true
         label: |
-          Which of these could you do with children in your setting to encourage involvement in meal times? (Select all answers that apply) 
+          Which of these could you do with children in your setting to encourage involvement in meal times? (Select all answers that apply)
         assessment_summary: |
-          Encouraging children to become involved in food preparation, lay the table and serve themselves will: 
-          
+          Encouraging children to become involved in food preparation, lay the table and serve themselves will:
+
           - promote positive social interaction
-          - develop motor skills 
+          - develop motor skills
           - encourage healthier lifestyles
 
           Limiting food options will take away the children’s choice and reduce their involvement.
         assessment_fail_summary: |
-          Encouraging children to become involved in food preparation, lay the table and serve themselves will: 
-          
+          Encouraging children to become involved in food preparation, lay the table and serve themselves will:
+
           - promote positive social interaction
-          - develop motor skills 
+          - develop motor skills
           - encourage healthier lifestyles.
-          
+
           Limiting food options will take away the children’s choice and reduce their involvement.
         answers:
           1: "Preparing food"
@@ -639,7 +666,7 @@ module-4:
     content:
     questions:
       1_relationships_observe_experience:
-        multi_select: true 
+        multi_select: true
         label: |
           Which of these relationships will a child observe and experience in your setting? (Select all answers that apply)
         assessment_summary: |
@@ -651,14 +678,14 @@ module-4:
           2: "Practitioner to parent"
           3: "Parent to parent"
           4: "Child to child"
-        correct_answers: ["1","2","4"]  
+        correct_answers: ["1","2","4"]
   2-2-3-6c:
     content:
     questions:
       1_test_understanding_relationships:
-        multi_select: false 
+        multi_select: false
         label: |
-          True or false? Children need opportunities to test their understanding of the relationships they have experienced. 
+          True or false? Children need opportunities to test their understanding of the relationships they have experienced.
         assessment_summary: |
           Following high quality adult interaction, children will then benefit from opportunities to test their understanding of the relationships they have experienced.
         assessment_fail_summary: |
@@ -666,8 +693,8 @@ module-4:
         answers:
           1: "True"
           2: "False"
-        correct_answers: ["1"]  
-    
+        correct_answers: ["1"]
+
 #END-OF-MODULE-TEST
 
 
