@@ -2,19 +2,24 @@ class QuestionnairesController < ApplicationController
   before_action :authenticate_registered_user!
 
   def show
+    one_session
     questionnaire_taker.prepare
   end
 
   def update
     # TODO: why?
     # questionnaire_taker.archive
-
+    
     immediate_feedback if questionnaire.formative?
     marked_assessment if questionnaire.summative?
     next_question if questionnaire.confidence?
   end
 
 protected
+  def one_session
+   assessment_flow =  AssessmentFlow.new(user: current_user, type: SUMMATIVE, mod: questionnaire.module_item.parent, request: request)
+   redirect_to assessment_flow.intro_page if assessment_flow.authenticate_flow
+  end
 
   def questionnaire
     @questionnaire ||= Questionnaire.find_by!(name: params[:id], training_module: params[:training_module_id])
