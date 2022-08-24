@@ -1,17 +1,25 @@
 require 'rails_helper'
 
-RSpec.describe 'When a user visits the module overview page' do
+RSpec.describe 'Module overview page progress' do
   include_context 'with progress'
   include_context 'with user'
 
-  context 'when the user has not begun the module' do
+  context 'when the module has not been started' do
     before do
       visit '/modules/alpha'
     end
 
-    it 'shows first submodule has not been started yet' do
-      within '#section-content-1 .govuk-list li:first-child' do
-        expect(page).to have_content('not started')
+    it 'all the indicators are "not started"' do
+      within '#section-button-1' do
+        expect(page).to have_content 'not started'
+      end
+
+      within '#section-content-1 .govuk-list' do
+        expect(page).to have_content 'not started', count: 4
+      end
+
+      within '#section-button-2' do
+        expect(page).to have_content 'not started'
       end
 
       within '#section-content-1' do
@@ -19,7 +27,31 @@ RSpec.describe 'When a user visits the module overview page' do
         expect(page).not_to have_link('1-1-1')
       end
 
-      expect(page).to have_link('Start', href: '/modules/alpha/content-pages/before-you-start')
+      within '#section-button-3' do
+        expect(page).to have_content 'not started'
+      end
+
+      within '#section-content-3 .govuk-list' do
+        expect(page).to have_content 'not started', count: 3
+        expect(page).not_to have_link 'Recap'
+        expect(page).not_to have_link 'End of module test'
+        expect(page).not_to have_link 'Reflect on your learning'
+      end
+    end
+
+    it 'resumes from the interruption page' do
+      expect(page).to have_link 'Start', href: '/modules/alpha/content-pages/before-you-start'
+    end
+
+    it 'shows the end of module test has not been attempted' do
+      within '#section-content-3' do
+        expect(page).not_to have_content('in progress')
+        expect(page).not_to have_content('completed')
+      end
+    end
+
+    it 'shows the module recap is not clickable' do
+      expect(page).not_to have_link('Reflect on your learning', href: '/modules/alpha/content-pages/1-3-3')
     end
 
     it 'shows the end of module test has not been attempted' do
@@ -34,43 +66,37 @@ RSpec.describe 'When a user visits the module overview page' do
     end
   end
 
-  context 'when the user has viewed the interruption page and module intro' do
+  context 'when the module intro is reached' do
     before do
       start_module(alpha)
       visit '/modules/alpha'
     end
 
-    it 'shows first submodule has not been started yet' do
-      within '#section-button-1' do
-        expect(page).to have_content('not started')
-      end
-
-      within '#section-content-1 .govuk-list li:first-child' do
-        expect(page).to have_content('1-1-1')
-          .and have_content('not started')
-        expect(page).not_to have_link('1-1-1')
-      end
-
+    it 'resumes from the last visited page' do
       expect(page).to have_link('Resume training', href: '/modules/alpha/content-pages/intro')
     end
   end
 
-  context 'when the user has viewed the first submodule page' do
+  context 'when the first submodule intro is reached' do
     before do
       start_first_submodule(alpha)
       visit '/modules/alpha'
     end
 
-    it 'shows submodule has not been started yet' do
+    it 'the submodule indicator is "not started"' do
       within '#section-button-1' do
-        expect(page).to have_content('not started')
+        expect(page).to have_content 'not started'
       end
+    end
 
+    it 'the first topic indicator is "not started"' do
       within '#section-content-1 .govuk-list li:first-child' do
-        expect(page).to have_content('not started')
-          .and have_link('1-1-1', href:  '/modules/alpha/content-pages/1-1-1')
+        expect(page).to have_content 'not started'
+        expect(page).not_to have_link('1-1-1', href: '/modules/alpha/content-pages/1-1-1')
       end
+    end
 
+    it 'resumes from the last visited page' do
       expect(page).to have_link('Resume training', href: '/modules/alpha/content-pages/1-1')
     end
   end
@@ -81,44 +107,53 @@ RSpec.describe 'When a user visits the module overview page' do
       visit '/modules/alpha'
     end
 
-    it 'has status indicators' do
+    it 'the submodule indicator is "in progress"' do
       within '#section-button-1' do
-        expect(page).to have_content('in progress')
+        expect(page).to have_content 'in progress'
       end
+    end
 
+    it 'the first topic indicator is "complete"' do
       within '#section-content-1 .govuk-list li:first-child' do
-        expect(page).to have_content('complete')
+        expect(page).to have_content 'complete'
+        expect(page).to have_link '1-1-1', href: '/modules/alpha/content-pages/1-1-1'
       end
+    end
 
+    it 'the second topic indicator is "not started"' do
       within '#section-content-1 .govuk-list li:nth-child(2)' do
-        expect(page).to have_content('not started')
-          .and have_link('1-1-2', href:  '/modules/alpha/content-pages/1-1-2')
+        expect(page).to have_content 'not started'
+        expect(page).not_to have_link '1-1-2', href: '/modules/alpha/content-pages/1-1-2'
       end
+    end
 
-      expect(page).to have_link('Resume training', href: '/modules/alpha/content-pages/1-1-1')
+    it 'resumes from the last visited page' do
+      expect(page).to have_link 'Resume training', href: '/modules/alpha/content-pages/1-1-1'
     end
   end
 
-  context 'when the first submodule is complete' do
+  context 'when the last page of the first submodule is reached' do
     before do
       view_pages_before_formative_questionnaire(alpha)
       visit '/modules/alpha'
     end
 
-    it 'has status indicators' do
+    it 'all the indicators in the submodule are "complete"' do
       within '#section-button-1' do
-        expect(page).to have_content('complete')
+        expect(page).to have_content 'complete'
       end
 
       within '#section-content-1 .govuk-list' do
-        expect(page).to have_content('complete', count: 4)
+        expect(page).to have_content 'complete', count: 4
       end
+    end
 
-      expect(page).to have_link('Resume training', href: '/modules/alpha/content-pages/1-1-4')
+    it 'resumes from the last visited page' do
+      expect(page).to have_link 'Resume training', href: '/modules/alpha/content-pages/1-1-4'
     end
   end
 
-  context 'when the summative assessment was failed' do
+  context 'when the summative assessment is failed' do
     before do
       start_summative_assessment(alpha)
       visit '/modules/alpha/questionnaires/1-3-2-1'
@@ -132,7 +167,16 @@ RSpec.describe 'When a user visits the module overview page' do
       visit '/modules/alpha'
     end
 
-    specify { expect(page).to have_link('Retake test') }
+    specify { expect(page).to have_link 'Retake test' }
+  end
+
+  context 'when the whole module is complete' do
+    before do
+      view_whole_module(alpha)
+      visit '/modules/alpha'
+    end
+
+    specify { expect(page).not_to have_link 'Retake test' }
   end
 
   context 'when the whole module is complete' do
