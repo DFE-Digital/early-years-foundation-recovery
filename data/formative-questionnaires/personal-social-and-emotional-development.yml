@@ -25,10 +25,13 @@ personal-social-and-emotional-development:
         multi_select: false
         label: |
           Read the scenario and answer the question:
+
           Yusuf and Noah are playing together outside when Noah trips and bumps his knee,
           which causes him to cry. Yusuf is quick to try to comfort Noah and looks for help from an adult.
+          
           Later, Yusuf recreates the situation with dolls and uses the opportunity
           to express his worries about the accident.
+          
           At around what age would you expect to start seeing Yusuf’s behaviour?
         assessment_summary: |
           At around 3 years old children will be showing more affection for friends
@@ -72,8 +75,10 @@ personal-social-and-emotional-development:
         multi_select: false
         label: |
           True or false? Around the age of 5, a child will begin to choose their friends based upon characteristics they would like for themselves.
-        assessment_summary: At age 5 children will want to please others and are able to take part in activities and tasks that involve cooperation and direction. They will be choosing their own friends and will see characteristics in friends that they would like for themselves.
-        assessment_fail_summary: At age 5 children will want to please others and are able to take part in activities and tasks that involve cooperation and direction. They will be choosing their own friends and will see characteristics in friends that they would like for themselves.
+        assessment_summary: |
+          At age 5 children will want to please others and are able to take part in activities and tasks that involve cooperation and direction. They will be choosing their own friends and will see characteristics in friends that they would like for themselves.
+        assessment_fail_summary: |
+          At age 5 children will want to please others and are able to take part in activities and tasks that involve cooperation and direction. They will be choosing their own friends and will see characteristics in friends that they would like for themselves.
         answers:
           1: "True"
           2: "False"
@@ -90,6 +95,7 @@ personal-social-and-emotional-development:
         assessment_summary: |
           Children with high self-efficacy will believe they can succeed and are more
           likely to attempt challenging activities.
+
           You can support children to build self-efficacy by:
 
           - offering lots of praise and reward
@@ -99,6 +105,7 @@ personal-social-and-emotional-development:
         assessment_fail_summary: |
           Children with high self-efficacy will believe they can succeed and are more
           likely to attempt challenging activities.
+
           You can support children to build self-efficacy by:
 
           - offering lots of praise and reward
@@ -122,6 +129,7 @@ personal-social-and-emotional-development:
         assessment_summary: |
           Frequent use of choice encourages self-worth, as being involved in choices
           and decisions will support children to feel valued and important.
+
           It will also help children to:
 
           - develop independence
@@ -130,6 +138,7 @@ personal-social-and-emotional-development:
         assessment_fail_summary: |
           Frequent use of choice encourages self-worth, as being involved in choices
           and decisions will support children to feel valued and important.
+          
           It will also help children to:
 
           - develop independence
@@ -150,6 +159,7 @@ personal-social-and-emotional-development:
         multi_select: false
         label: |
           Read the scenario and answer the question:
+          
           Benjamin likes to dress up in a wide variety of role play clothes, including
           items his friends think should be worn by girls.
 
@@ -158,24 +168,23 @@ personal-social-and-emotional-development:
 
           What should you do?
         assessment_summary: |
-          You should intervene, as this is an opportunity for you to support children’s
-          understanding of accepting individuality. Initially this intervention could be a
-          spontaneous discussion where the children involved are encouraged to share their thoughts and feelings.
+          You should intervene, as this is an opportunity for you to support children’s understanding of accepting individuality. Initially this intervention could be a spontaneous discussion where the children involved are encouraged to share their thoughts and feelings.
 
           Planned activities could also include:
+
           - use of puppets or structured role play to encourage expression of feelings and thoughts
           - shared stories relating to unkind actions and the resulting feelings
         assessment_fail_summary: |
-          You should intervene, as this is an opportunity for you to support children’s
-          understanding of accepting individuality. Initially this intervention could be a
-          spontaneous discussion where the children involved are encouraged to share their thoughts and feelings.
+          You should intervene, as this is an opportunity for you to support children’s understanding of accepting individuality. Initially this intervention could be a spontaneous discussion where the children involved are encouraged to share their thoughts and feelings.
 
           Planned activities could also include:
+
           - use of puppets or structured role play to encourage expression of feelings and thoughts
           - shared stories relating to unkind actions and the resulting feelings
 
           You should not wait to see how Benjamin reacts, as this may lead to difficulties
           and confusion for him around managing feelings and building positive relationships.
+          
           You also should not stop Benjamin from playing with the items, as all children should
           have the freedom to play with whatever they choose without fear of being teased.
         answers:
@@ -194,10 +203,12 @@ personal-social-and-emotional-development:
           True or false? Children are born with preformed stereotypical and biased views.
         assessment_summary: |
           Children are not born with preformed views of others around them.
+
           Children will notice difference and can easily develop misconceptions,
           however they will not naturally hold stereotypical assumptions or be biased.
         assessment_fail_summary: |
           Children are not born with preformed views of others around them.
+          
           Children will notice difference and can easily develop misconceptions,
           however they will not naturally hold stereotypical assumptions or be biased.
         answers:
@@ -220,18 +231,22 @@ personal-social-and-emotional-development:
 
           When children become overstimulated, their responses may be interpreted as
           challenging or unwanted behaviour.
+
           In your setting, children will benefit from a designated quiet area that
           they know they can retreat to if things become too much.
+          
           A knowledge of children’s interests can also be helpful here, as they can be used as a distraction.
         assessment_fail_summary: |
           ‘Overstimulation’ is the term used to describe the potential impact aspects
           of the environment such as noise, light, or crowds can have on children.
 
-          When children become overstimulated, their responses may be interpreted
-          as challenging or unwanted behaviour. In your setting, children will benefit
-          from a designated quiet area that they know they can retreat to if things become too much.
-          A knowledge of children’s interests can also be helpful here, as they can
-          be used as a distraction.
+          When children become overstimulated, their responses may be interpreted as
+          challenging or unwanted behaviour.
+
+          In your setting, children will benefit from a designated quiet area that
+          they know they can retreat to if things become too much.
+          
+          A knowledge of children’s interests can also be helpful here, as they can be used as a distraction.
         answers:
           1: Understimulation
           2: Developmental challenge
@@ -249,15 +264,19 @@ personal-social-and-emotional-development:
         assessment_summary: |
           Redirection is an effective strategy for children aged 18 to 36 months,
           as redirection strategies will help to shape and guide their behaviour.
+
           For example, instead of telling a child “don’t shout”, you could say
           “can we talk quietly please? Your friends are sleeping”.
+          
           This is because asking the child not to shout does not guide them to the
           behaviour you are looking for, or explain why you need them to behave differently.
         assessment_fail_summary: |
           Redirection is an effective strategy for children aged 18 to 36 months,
           as redirection strategies will help to shape and guide their behaviour.
+          
           For example, instead of telling a child “don’t shout”, you could say
           “can we talk quietly please? Your friends are sleeping”.
+          
           This is because asking the child not to shout does not guide them to the
           behaviour you are looking for, or explain why you need them to behave differently.
         answers:
@@ -275,8 +294,10 @@ personal-social-and-emotional-development:
         multi_select: false
         label: |
           What was the name of Ainsworth’s experiment?
-        assessment_summary: The experiment Ainsworth conducted to investigate a baby’s quality of attachment was called the “Strange Situation”.
-        assessment_fail_summary: The experiment Ainsworth conducted to investigate a baby’s quality of attachment was called the “Strange Situation”.
+        assessment_summary: |
+          The experiment Ainsworth conducted to investigate a baby’s quality of attachment was called the “Strange Situation”.
+        assessment_fail_summary: |
+          The experiment Ainsworth conducted to investigate a baby’s quality of attachment was called the “Strange Situation”.
         answers:
           1: The Social Situation
           2: The Funny Situation
@@ -291,8 +312,12 @@ personal-social-and-emotional-development:
       1_secure_attachment:
         multi_select: false
         label: Which of the following is a sign of secure attachment?
-        assessment_summary: This type of attachment suggests a warm and loving relationship with a significant adult has been experienced from an early age.
-        assessment_fail_summary:  A secure attachment suggests a warm and loving relationship with a significant adult has been experienced from an early age. This would support positive self-worth for children, help them to follow adults' instructions and support them to build and maintain other secure relationships, like friendships.
+        assessment_summary: |
+          This type of attachment suggests a warm and loving relationship with a significant adult has been experienced from an early age.
+        assessment_fail_summary:  |
+          A secure attachment suggests a warm and loving relationship with a significant adult has been experienced from an early age. 
+          
+          This would support positive self-worth for children, help them to follow adults' instructions and support them to build and maintain other secure relationships, like friendships.
         answers:
           1: The child questions their worth
           2: The child shares their successes with you
@@ -307,8 +332,10 @@ personal-social-and-emotional-development:
       1_unpredictable_responses:
         multi_select: false
         label: Children who have experienced unpredictable responses from early attachments may form which type of attachment?
-        assessment_summary: Where a child cannot predict the response they will receive from an adult, they may form an insecure ambivalent attachment. This may be as a result of inconsistent care, resulting in unpredictability and a lack of trust.
-        assessment_fail_summary:  Where a child cannot predict the response they will receive from an adult, they may form an insecure ambivalent attachment. This may be as a result of inconsistent care, resulting in unpredictability and a lack of trust.
+        assessment_summary: |
+          Where a child cannot predict the response they will receive from an adult, they may form an insecure ambivalent attachment. This may be as a result of inconsistent care, resulting in unpredictability and a lack of trust.
+        assessment_fail_summary:  |
+          Where a child cannot predict the response they will receive from an adult, they may form an insecure ambivalent attachment. This may be as a result of inconsistent care, resulting in unpredictability and a lack of trust.
         answers:
           1: Insecure ambivalent attachment
           2: Insecure avoidant attachment
@@ -323,9 +350,19 @@ personal-social-and-emotional-development:
       1_josh_attachment:
         multi_select: false
         label: |
-          Read the scenario and answer the question: Josh prefers to carry out tasks and activities alone and has not established any strong friendships within the group. Josh is reluctant to carry out adult led activity and often tells adults he can not complete tasks before he has attempted them. Which type of attachment has Josh most likely experienced?
-        assessment_summary: Josh’s behaviour suggests that he may have experienced a disorganised controlling attachment style. Children with disorganised controlling attachment prefer to be alone, have low self-esteem and are more prone to stress.
-        assessment_fail_summary: Josh’s behaviour suggests that he may have experienced a disorganised controlling attachment style. Children with disorganised controlling attachment prefer to be alone, have low self-esteem and are more prone to stress.
+          Read the scenario and answer the question: 
+          
+          Josh prefers to carry out tasks and activities alone and has not established any strong friendships within the group. Josh is reluctant to carry out adult led activity and often tells adults he can not complete tasks before he has attempted them. 
+          
+          Which type of attachment has Josh most likely experienced?
+        assessment_summary: |
+          Josh’s behaviour suggests that he may have experienced a disorganised controlling attachment style. 
+          
+          Children with disorganised controlling attachment prefer to be alone, have low self-esteem and are more prone to stress.
+        assessment_fail_summary: |
+          Josh’s behaviour suggests that he may have experienced a disorganised controlling attachment style. 
+          
+          Children with disorganised controlling attachment prefer to be alone, have low self-esteem and are more prone to stress.
         answers:
           1: Insecure ambivalent attachment
           2: Secure attachment
@@ -345,14 +382,18 @@ personal-social-and-emotional-development:
         assessment_summary: |
           Communication, negative experiences and busy lifestyles can all be barriers
           to building effective partnerships with parents and carers.
+
           For example, English may be a second language for the child’s family,
           or parents and carers may lack confidence with communication and understanding.
+          
           You may need to take time to make sure you can provide information in their first language.
         assessment_fail_summary: |
           Communication, negative experiences and busy lifestyles can all be barriers
           to effective parent partnerships.
+
           For example, English may be a second language for the child’s family,
           or parents and carers may lack confidence with communication and understanding.
+          
           You may need to take time to make sure you can provide information in their first language.
         answers:
           1: Happiness
@@ -372,11 +413,13 @@ personal-social-and-emotional-development:
           loving environment are more likely to be skilled at self-expression.
         assessment_summary: |
           Children who recognise their feelings are more likely to be skilled at self-expression.
+          
           Children who do not grow up in an environment full of love, respect and
           compassion are more likely to struggle with self expression and experience mental
           health difficulties in later life.
         assessment_fail_summary: |
           Children who recognise their feelings are more likely to be skilled at self-expression.
+          
           Children who do not grow up in an environment full of love, respect and
           compassion are more likely to struggle with self expression and experience mental
           health difficulties in later life.
@@ -396,16 +439,16 @@ personal-social-and-emotional-development:
           and improve the ability to cope with stress.
         assessment_summary: |
           Being able to self-regulate supports the development of increased resilience
-          and improves the ability to cope with stress. Good self-regulation skills
-          will also promote positive mental health and well being, encourage healthy
-          brain development and reduce the likelihood of medical issues like heart disease
-          and obesity.
+          and improves the ability to cope with stress. 
+          
+          Good self-regulation skills will also promote positive mental health and well being, encourage healthy
+          brain development and reduce the likelihood of medical issues like heart disease and obesity.
         assessment_fail_summary: |
           Being able to self-regulate supports the development of increased resilience
-          and improves the ability to cope with stress.
-          Good self-regulation skills will also promote positive mental health and well being,
-          encourage healthy brain development and reduce the likelihood of medical
-          issues like heart disease and obesity.
+          and improves the ability to cope with stress. 
+          
+          Good self-regulation skills will also promote positive mental health and well being, encourage healthy
+          brain development and reduce the likelihood of medical issues like heart disease and obesity.
         answers:
           1: "True"
           2: "False"
@@ -424,7 +467,8 @@ personal-social-and-emotional-development:
           Using strategies to encourage children’s understanding of time and
           routine will support them to develop planning and organisation skills.
 
-          Successful strategies can include :
+          Successful strategies can include:
+
           - following a daily routine with visual clue reminders
           - using timers for activities or tidying up
           - singing songs and rhymes about the days of the week or the time of year
@@ -432,7 +476,8 @@ personal-social-and-emotional-development:
           Using strategies to encourage children’s understanding of time and routine
           will support them to develop planning and organisation skills.
 
-          Successful strategies can include :
+          Successful strategies can include:
+
           - following a daily routine with visual clue reminders
           - using timers for activities or tidying up
           - singing songs and rhymes about the days of the week or the time of year
@@ -452,18 +497,24 @@ personal-social-and-emotional-development:
           and regulate their feelings?
         assessment_summary: |
           Children can become overwhelmed and will struggle with challenges experienced
-          as part of their daily lives if they are not effectively supported to understand
-          and regulate their feelings. Developing self-regulation requires guidance and support.
-          As children begin to recognise and name their feelings, they will also
-          need your support to learn to regulate them.
-          This support can be referred to as co-regulation, meaning when you work in
-          cooperation with others to develop skills.
+          as part of their daily lives if they are not effectively supported to
+          understand and regulate their feelings. 
+          
+          Developing self-regulation requires guidance and support. 
+          
+          As children begin to recognise and name their feelings, they will also need your support to learn to regulate them.
+          
+          This support can be referred to as co-regulation, meaning when you work
+          in cooperation with others to develop skills.
         assessment_fail_summary: |
           Children can become overwhelmed and will struggle with challenges experienced
           as part of their daily lives if they are not effectively supported to
-          understand and regulate their feelings. Developing self-regulation requires
-          guidance and support. As children begin to recognise and name their feelings,
-          they will also need your support to learn to regulate them.
+          understand and regulate their feelings. 
+          
+          Developing self-regulation requires guidance and support. 
+          
+          As children begin to recognise and name their feelings, they will also need your support to learn to regulate them.
+          
           This support can be referred to as co-regulation, meaning when you work
           in cooperation with others to develop skills.
         answers:
