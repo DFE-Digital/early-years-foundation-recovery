@@ -10,7 +10,7 @@ class SummativeAssessmentProgress
 
   attr_reader :user, :mod
 
-  # @see SummativeAssessmentsController#update
+  # @see QuestionnairesController#marked_assessment
   #
   # @return [Integer]
   def save!
@@ -36,7 +36,7 @@ class SummativeAssessmentProgress
     array
   end
 
-  # @see QuizHelper#results_banner
+  # @see ContentHelper#results_banner
   #
   # @return [Hash]
   def result

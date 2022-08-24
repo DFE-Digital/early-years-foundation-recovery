@@ -15,6 +15,39 @@ en:
 
           %Warning: people like stuff!%
 
+          <div class="govuk-inset-text prompt">
+            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+
+            <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In 
+              facilisis massa quam, a sagittis ligula commodo a.</p>
+
+            <ul class="govuk-list govuk-list--bullet">
+              <li>Vivamus a dapibus nisi, eget ullamcorper est. Mauris non urna purus. 
+                Curabitur fringilla eros ut metus mollis rutrum. Duis rhoncus eros 
+                orci. Nam sollicitudin, risus sed tincidunt blandit, purus mauris 
+                rutrum nisl, sit amet luctus velit magna quis est.</li>
+              <li>Integer rhoncus sem ac hendrerit ultrices.</li>
+              <li>Sed ac sem eget neque cursus facilisis a ac massa. Nulla egestas 
+                diam urna, eget gravida purus fringilla et.</li>
+            </ul>
+          </div>
+
+          <div class='blockquote-container'>
+            <blockquote class='quote'>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In 
+              facilisis massa quam, a sagittis ligula commodo a. Vivamus a dapibus 
+              nisi, eget ullamcorper est. Mauris non urna purus. Curabitur fringilla 
+              eros ut metus mollis rutrum. Duis rhoncus eros orci. Nam sollicitudin, 
+              risus sed tincidunt blandit, purus mauris rutrum nisl, sit amet luctus 
+              velit magna quis est. Integer rhoncus sem ac hendrerit ultrices. Sed 
+              ac sem eget neque cursus facilisis a ac massa. Nulla egestas diam urna, 
+              eget gravida purus fringilla et.</p>
+              <cite>Nulla consectetur maximus tortor, et tempor eros fermentum in., 2021</cite>
+            </blockquote>
+          </div>
+          
+
+
           `%Warning: people like stuff!%`
 
           s1. numbers
@@ -160,8 +193,9 @@ en:
       1-3-1:
         heading: Recap
         body: |
-          This page contains a recap of what you have learnt and also further 
-          activities and further reading links on the live module.
+          - recap of what you have learnt
+          - followup activities
+          - further reading links
 
       1-3-2:
         # assessment intro

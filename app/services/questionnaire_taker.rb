@@ -1,3 +1,6 @@
+#
+# Inject form values or saved answers into a Questionnaire, and save new answers
+#
 class QuestionnaireTaker
   # @param user [User]
   # @param questionnaire [Questionnaire]
@@ -6,17 +9,20 @@ class QuestionnaireTaker
     @questionnaire = questionnaire
   end
 
+  # @!attribute [r] user
+  #   @return [User]
+  # @!attribute [r] questionnaire
+  #   @return [Questionnaire]
   attr_reader :user, :questionnaire
 
   # Fill with persisted answers
   #
-  # @return [nil, ?]
+  # @return [nil, true]
   def prepare
-    existing_answers = existing_user_answers.pluck(:question, :answer)
-    populate(existing_answers.to_h.symbolize_keys) if existing_answers.any?
+    populate(answer_data) if answer_data.any?
   end
 
-  # Update with new input
+  # Update with new form input
   #
   # @param params [Hash{Symbol => String}]
   #
@@ -54,6 +60,13 @@ class QuestionnaireTaker
   # @return [Integer]
   def archive
     existing_user_answers.update_all(archived: true)
+  end
+
+private
+
+  # @return [Hash{Symbol => Array<Integer>}]
+  def answer_data
+    existing_user_answers.pluck(:question, :answer).to_h.symbolize_keys
   end
 
   # @return [UserAnswer::ActiveRecord_AssociationRelation]

@@ -1,7 +1,6 @@
 ---
 bravo:
   1-2-2-2:
-    required_percentage_correct: 100
     questions:
       bravo_question_one:
         multi_select: false

@@ -6,6 +6,7 @@
 .gem-c-govspeak
   = translate_markdown(@questionnaire.body)
 
+-# TODO: refactor required (questionnaire->question)
 = form_with model: @questionnaire, url: training_module_questionnaire_path(@questionnaire.training_module, @questionnaire), method: :patch do |f|
   - @questionnaire.question_list.each do |question|
     = render partial: question.to_partial_path, locals: { f: f }, object: question, as: :question
@@ -18,23 +19,5 @@
   .govuk-grid-row
     .govuk-grid-column-one-half
       = link_to_previous_module_item(@questionnaire.module_item)
-
     .govuk-grid-column-one-half class='govuk-!-text-align-right'
-
-      - if @questionnaire.confidence?
-        = submit_tag 'Next', class: 'govuk-button'
-
-      - if @questionnaire.formative?
-        - if @questionnaire.submitted?
-          = link_to_next_module_item(@questionnaire.module_item)
-        - else
-          = submit_tag 'Next', class: 'govuk-button'
-
-      - if @questionnaire.summative?
-        - if @questionnaire.submitted?
-          = link_to_next_module_item(@questionnaire.module_item)
-        - else
-          - unless @questionnaire.final_question?
-            = submit_tag 'Save and continue', class: 'govuk-button'
-          - else
-            = submit_tag 'Finish test', class: 'govuk-button'
+      = link_to_next_question(@questionnaire)

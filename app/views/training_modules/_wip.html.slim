@@ -16,7 +16,7 @@ pre.debug_dump
     - elsif item.submodule_name
       em
         | (submodule #{item.submodule_name})
-    - if item.pagination[:current]
-      '
-      = t('page_number', **item.pagination)
+
+    '
+    = page_number(**item.pagination)
     br

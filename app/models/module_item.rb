@@ -107,7 +107,7 @@ class ModuleItem < YamlBase
   end
 
   # @return [String]
-  def next_item_button_text
+  def next_button_text
     if next_item.assessment_results?
       'Finish test'
     elsif next_item.summative_questionnaire? && !summative_questionnaire?

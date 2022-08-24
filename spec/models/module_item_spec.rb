@@ -178,4 +178,7 @@ RSpec.describe ModuleItem, type: :model do
 
   # describe '#number_within_topic' do
   # end
+
+  # describe '#next_button_text' do
+  # end
 end

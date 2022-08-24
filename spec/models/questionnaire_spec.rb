@@ -6,69 +6,43 @@ RSpec.describe Questionnaire, type: :model do
     described_class.find_by!(name: page_name, training_module: training_module_name)
   end
 
-  let(:page_name) { '1-1-4' }
-  let(:training_module_name) { 'alpha' }
-  let(:passmark) { nil }
+  #   1: Correct answer 1
+  #   2: Wrong answer 1
+  #   3: Correct answer 2
+  #   4: Wrong answer 2
+  let(:page_name) { '1-2-1-3' }
 
-  before do
-    questionnaire.required_percentage_correct = passmark
-  end
+  let(:training_module_name) { 'alpha' }
 
   it 'is associated with matching module item' do
     module_item = ModuleItem.find_by(training_module: training_module_name, name: page_name)
     expect(questionnaire.module_item).to eq(module_item)
   end
 
-  context 'with theshold not set' do
-    context 'and all answers correct' do
-      before do
-        questionnaire.question_list.each do |question|
-          question.submit_answers(question.correct_answers)
+  # describe '#next_button_text' do
+  # end
+
+  describe 'validations' do # not currently used
+    context 'when unanswered' do
+      specify { expect(questionnaire).to be_invalid }
+    end
+
+    context 'when answered' do
+      context 'and correct' do
+        before do
+          questionnaire.question_list.first.submit_answers([1, 3])
         end
+
+        specify { expect(questionnaire).to be_valid }
       end
 
-      specify { expect(questionnaire).to be_valid }
-    end
-
-    context 'and all answers incorrect' do
-      before do
-        questionnaire.questions.each_value do |question|
-          question.delete(:correct_answers)
+      context 'and incorrect' do
+        before do
+          questionnaire.question_list.first.submit_answers([2, 4])
         end
+
+        specify { expect(questionnaire).to be_invalid }
       end
-
-      specify { expect(questionnaire).to be_valid }
-    end
-  end
-
-  context 'with 0% theshold' do
-    let(:passmark) { 0 }
-
-    specify { expect(questionnaire).to be_valid }
-  end
-
-  context 'with 100% theshold' do
-    let(:passmark) { 100 }
-
-    specify { expect(questionnaire).to be_invalid }
-  end
-
-  context 'when some answers are correct' do
-    before do
-      question = questionnaire.question_list.first
-      question.submit_answers(question.correct_answers)
-    end
-
-    context 'and below threshold' do
-      let(:passmark) { 1 }
-
-      specify { expect(questionnaire).to be_valid }
-    end
-
-    context 'and above threshold' do
-      let(:passmark) { 99 }
-
-      specify { expect(questionnaire).to be_valid }
     end
   end
 end
