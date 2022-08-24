@@ -3,7 +3,7 @@ class QuestionnairesController < ApplicationController
 
   def show
     questionnaire_taker.prepare
-    @module_item = ModuleItem.find_by(training_module: module_params["training_module_id"], name: module_params["id"])
+    @module_item = ModuleItem.find_by(training_module: module_params['training_module_id'], name: module_params['id'])
   end
 
   def update

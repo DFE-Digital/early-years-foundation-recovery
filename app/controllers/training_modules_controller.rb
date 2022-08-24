@@ -23,7 +23,7 @@ class TrainingModulesController < ApplicationController
     @module_progress = ModuleOverviewDecorator.new(helpers.module_progress(@training_module))
   end
 
-  protected
+protected
 
   def module_item
     @module_item ||= ModuleItem.find_by(training_module: training_module_name, name: params[:id]) || ModuleItem.find_by(training_module: params[:id])

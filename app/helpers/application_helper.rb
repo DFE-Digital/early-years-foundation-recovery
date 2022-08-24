@@ -56,7 +56,7 @@ module ApplicationHelper
     [
       site_title,
       module_title,
-      title
-  ].compact.join(' : ')
+      title,
+    ].compact.join(' : ')
   end
 end

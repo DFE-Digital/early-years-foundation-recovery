@@ -65,7 +65,7 @@ RSpec.describe 'Page' do
     it { expect(edit_password_user_path).to have_page_title('Change password') }
     it { expect(edit_postcode_user_path).to have_page_title("Change your setting's postcode information") }
     it { expect(edit_ofsted_number_user_path).to have_page_title("Change your setting's Ofsted number") }
-    it { expect(edit_setting_type_user_path).to have_page_title("Change your setting type") }
+    it { expect(edit_setting_type_user_path).to have_page_title('Change your setting type') }
     it { expect(check_email_confirmation_user_path).to have_page_title('Check email confirmation') }
     it { expect(check_email_password_reset_user_path).to have_page_title('Check email password reset') }
     it { expect(user_path).to have_page_title('My account') }
