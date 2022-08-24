@@ -24,7 +24,7 @@ RSpec.describe 'Page content (locales/modules)' do
     let(:data_dir) { 'data/formative-questionnaires' }
     let(:type) { 'formative_questionnaire' }
 
-    specify { expect(FormativeQuestionnaire.count).to be 46 }
+    specify { expect(FormativeQuestionnaire.count).to be 63 }
   end
 
   describe 'summative' do
@@ -33,7 +33,7 @@ RSpec.describe 'Page content (locales/modules)' do
     let(:data_dir) { 'data/summative-questionnaires' }
     let(:type) { 'summative_questionnaire' }
 
-    specify { expect(SummativeQuestionnaire.count).to be 24 }
+    specify { expect(SummativeQuestionnaire.count).to be 34 }
   end
 
   describe 'confidence' do
