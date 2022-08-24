@@ -15,7 +15,7 @@ class ContentPage
     if static_page?
       I18n.t("#{type}.heading")
     else
-      translate(:heading)
+      translate(:heading) || name
     end
   end
 
