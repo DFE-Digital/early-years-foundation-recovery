@@ -18,6 +18,7 @@ class TrainingModulesController < ApplicationController
   end
 
   def certificate
+    track('certificate_page')
     @module_item = ModuleItem.find_by(training_module: training_module_name, name: 'certificate')
     @training_module = TrainingModule.find_by(name: params[:training_module_id])
     @module_progress = ModuleOverviewDecorator.new(helpers.module_progress(@training_module))

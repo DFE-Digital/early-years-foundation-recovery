@@ -48,6 +48,7 @@ RSpec.describe 'Page' do
   end
 
   context 'when user is logged in' do
+    include_context 'with progress'
     include_context 'with user'
 
     it { expect(root_path).to have_page_title('Home page') }
@@ -101,15 +102,7 @@ RSpec.describe 'Page' do
       it { expect(training_module_content_page_path(training_module_id: training_module_id, id: '1-3-3-4')).to have_page_title 'First Training Module : Thank you' }
 
       it {
-        ahoy = Ahoy::Tracker.new(user: user, controller: 'content_pages')
-        # viewing the last page of the module
-        ahoy.track('module_content_page', {
-          id: 'certificate', # last page of alpha module
-          action: 'show',
-          controller: 'content_pages',
-          training_module_id: training_module_id,
-        })
-        user.save!
+        view_whole_module(alpha)
         expect(training_module_certificate_path(training_module_id: training_module_id)).to have_page_title('First Training Module : certificate')
       }
 
