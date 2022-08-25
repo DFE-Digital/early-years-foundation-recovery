@@ -75,7 +75,7 @@ child-development-and-the-eyfs:
       1_behavioural_triggers:
         multi_select: true
         label: |
-          Which of the following aspects of the learning environment can trigger unwanted or challenging behaviour? (Select all answers that apply)
+          Which of the following aspects of the learning environment can trigger challenging behaviour? (Select all answers that apply)
         assessment_summary: |
           Children can display challenging and unwanted behaviour if:
 
@@ -404,12 +404,12 @@ child-development-and-the-eyfs:
       1_learning_check:
         multi_select: false
         label: |
-          The 2 year learning check is an example of which type of assessment?
+          The 2 year old progress check is an example of which type of assessment?
         assessment_summary: |
-          The 2 year learning check is a form of summative assessment.
+          The 2 year old progress check is a form of summative assessment.
           It provides you with opportunities to reinforce your full understanding of a child’s level of knowledge and understanding and to work in partnership with parents to support development.
         assessment_fail_summary: |
-          The 2 year learning check is a form of summative assessment.
+          The 2 year old progress check is a form of summative assessment.
           It provides you with opportunities to reinforce your full understanding of a child’s level of knowledge and understanding and to work in partnership with parents to support development.
         answers:
           1: Formative
