@@ -3,6 +3,8 @@
 @import "./card";
 @import "./interruption";
 @import "./print-link";
+@import "./prompt";
+@import "./quote";
 
 .debug_dump {
   background: beige;
@@ -63,4 +65,9 @@
 .accordion-section-left-column {
   display: inline-block;
   max-width: calc(100% - 142px);
+}
+
+// nested bullets (level 2) to be unfilled circles
+ul > li > ul > li {
+  list-style-type: circle;
 }
