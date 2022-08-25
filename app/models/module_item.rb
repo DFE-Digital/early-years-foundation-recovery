@@ -19,14 +19,16 @@ class ModuleItem < YamlBase
 
   # @return [Hash] 'Type' to 'View object' mapping
   MODELS = {
+    # 'intros' and 'pages' are sorted into two different groups
     assessment_intro: ContentPage,
     confidence_intro: ContentPage,
     ending_intro: ContentPage,
-    interruption_page: ContentPage,
     module_intro: ContentPage,
     sub_module_intro: ContentPage,
+    
+    interruption_page: ContentPage,
     text_page: ContentPage,
-
+    
     youtube_page: YoutubePage,
 
     confidence_questionnaire: Questionnaire,
