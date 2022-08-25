@@ -23,9 +23,10 @@ class ContentPage
   def body
     if module_item.confidence_intro? || module_item.assessment_intro? || module_item.ending_intro?
       I18n.t(
-        "#{type}.body", 
-        passmark: module_item.parent.summative_threshold, 
-        feedback_url: I18n.t("modules.#{training_module}.#{module_item.name}.url"))
+        "#{type}.body",
+        passmark: module_item.parent.summative_threshold,
+        feedback_url: I18n.t("modules.#{training_module}.#{module_item.name}.url"),
+      )
     else
       translate(:body)
     end

@@ -191,7 +191,7 @@ class ModuleItem < YamlBase
   def confidence_intro?
     type.eql?('confidence_intro')
   end
-  
+
   # @return [Boolean]
   def ending_intro?
     type.eql?('ending_intro')

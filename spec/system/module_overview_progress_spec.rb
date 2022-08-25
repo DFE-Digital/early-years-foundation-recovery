@@ -53,17 +53,6 @@ RSpec.describe 'Module overview page progress' do
     it 'shows the module recap is not clickable' do
       expect(page).not_to have_link('Reflect on your learning', href: '/modules/alpha/content-pages/1-3-3')
     end
-
-    it 'shows the end of module test has not been attempted' do
-      within '#section-content-3' do
-        expect(page).not_to have_content('in progress')
-        expect(page).not_to have_content('completed')
-      end
-    end
-
-    it 'shows the module recap is not clickable' do
-      expect(page).not_to have_link('Reflect on your learning', href: '/modules/alpha/content-pages/1-3-3')
-    end
   end
 
   context 'when the module intro is reached' do
