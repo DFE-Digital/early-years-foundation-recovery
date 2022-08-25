@@ -13,9 +13,7 @@ class QuestionnairesController < ApplicationController
     end
 
     # TODO: port missing tracking keys
-    # summative_assessment_start
     # summative_assessment_complete
-    # confidence_check_start
     # confidence_check_complete
   end
 
