@@ -83,7 +83,7 @@ module-4:
         answers:
           1: Tell them they are wrong and ask them to try again
           2: Model the correct answer back to them
-          3: Ask the group if the child is right or wrong
+          3: Ask other children what the correct pronunciation is
           4: Plan an activity on pronunciation
         correct_answers:
           - 2
@@ -387,10 +387,10 @@ module-4:
           Which of the following describes the self talk strategy?
 
         assessment_summary:  |
-          Self talk is where you add commentary to your actions such as "I am putting the books away in the bookcase, can you see all the books?" or "I am washing my hands, so that they are clean. The soap is pink." This can sometimes make you feel silly, but it is extremely beneficial to children.
+          Self talk is where you add commentary to your actions such as "I am putting the books away in the bookcase, can you see all the books?" or "I am washing my hands, so that they are clean. The soap is pink." This can sometimes feel unnatural, but it is extremely beneficial to children.
 
         assessment_fail_summary: |
-          Self talk is where you add commentary to your actions such as "I am putting the books away in the bookcase, can you see all the books?" or "I am washing my hands, so that they are clean. The soap is pink." This can sometimes make you feel silly, but it is extremely beneficial to children.
+          Self talk is where you add commentary to your actions such as "I am putting the books away in the bookcase, can you see all the books?" or "I am washing my hands, so that they are clean. The soap is pink." This can sometimes feel unnatural, but it is extremely beneficial to children.
         answers:
           1: "Making eye contact"
           2: "Adding gestures and facial expressions when you talk"
@@ -448,10 +448,10 @@ module-4:
           Improving parents’ and carers’ understanding of which of these will make them more likely to adopt shared strategies to support their child’s language development.
 
         assessment_summary:  |
-          Improving parents' and carers' understanding of a language rich approach will help them copy this at home. This will provide a consistent approach to language development for all children.
+          Improving parents' and carers' understanding of a language rich approach will help them continue this at home. This will provide a consistent approach to language development for all children.
 
         assessment_fail_summary: |
-          Improving parents' and carers' understanding of a language rich approach will help them copy this at home. This will provide a consistent approach to language development for all children.
+          Improving parents' and carers' understanding of a language rich approach will help them continue this at home. This will provide a consistent approach to language development for all children.
         answers:
           1: "A second language"
           2: "A language rich approach"
