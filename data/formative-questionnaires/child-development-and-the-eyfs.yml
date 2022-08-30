@@ -159,7 +159,7 @@ child-development-and-the-eyfs:
 
           If children have older siblings, they may have spent prolonged periods of time participating in challenging physical activity where they have copied their siblings behaviour.
           They may have developed skills that they may not have otherwise been exposed to.
-        assessment_summary: |
+        assessment_fail_summary: |
           Some children with access to outside space and opportunities to go out may have spent more of their day outside.
           They may have explored more or learnt a new skill such as riding a bike or scooter.
 
@@ -207,7 +207,7 @@ child-development-and-the-eyfs:
           - express their individual needs and preferences
 
           They can also help children to increase their resilience and self efficacy, and to create and maintain relationships.
-        assessment_summary: |
+        assessment_fail_summary: |
           Effective communication skills will support children to:
 
           - manage their behaviour
@@ -315,6 +315,7 @@ child-development-and-the-eyfs:
           Child led play can help children to increase their:
 
           - imagination and creativity
+          - concentration
           - communication skills
           - confidence
           - independence
@@ -327,6 +328,7 @@ child-development-and-the-eyfs:
           Child led play can help children to increase their:
 
           - imagination and creativity
+          - concentration
           - communication skills
           - confidence
           - independence
@@ -336,16 +338,16 @@ child-development-and-the-eyfs:
           Including adult-led activities in your practice gives more opportunities for you to 'scaffold' children's learning,
           by giving them just enough help to achieve something they could not do independently.
         answers:
-          1: Access to outdoor environments and activities
-          2: A bright, colourful learning environment
-          3: Having consistent routines in the setting
-          4: Resources and activities that celebrate individuality
+          1: Increased social and emotional development
+          2: Increased opportunities for scaffolding learning
+          3: Increased concentration
+          4: Increased imagination and creativity
         correct_answers:
           - 1
           - 3
           - 4
 
-  1-1-2-6b:
+  1-2-1-6b:
     questions:
       1_adult_led_activities:
         multi_select: false
