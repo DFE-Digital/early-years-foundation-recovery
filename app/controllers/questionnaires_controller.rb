@@ -18,7 +18,7 @@ class QuestionnairesController < ApplicationController
 protected
 
   def questionnaire
-    @questionnaire ||= Questionnaire.find_by!(name: params[:id], training_module: params[:training_module_id])
+    @questionnaire ||= Questionnaire.find_by!(name: module_params[:id], training_module: module_params[:training_module_id])
   end
 
   def questionnaire_taker

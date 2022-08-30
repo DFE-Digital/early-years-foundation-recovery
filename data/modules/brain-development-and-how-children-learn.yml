@@ -195,3 +195,5 @@ brain-development-and-how-children-learn:
     type: confidence_questionnaire
   2-3-3-5:
     type: ending_intro
+  2-3-4:
+    type: certificate

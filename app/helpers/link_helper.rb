@@ -13,9 +13,9 @@ module LinkHelper
   # @param item [ModuleItem]
   def link_to_next_module_item(item, link_args = { class: 'govuk-button' })
     mod = item.training_module
-    
+
     if item.next_item.certificate?
-      link_to 'Finish', training_module_certificate_path(mod), link_args
+      link_to 'Finish', training_module_content_page_path(mod, item.next_item), link_args
     else
       link_to item.next_button_text, training_module_content_page_path(mod, item.next_item), link_args
     end

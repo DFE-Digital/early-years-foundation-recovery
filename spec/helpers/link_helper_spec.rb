@@ -4,8 +4,8 @@ describe 'LinkHelper', type: :helper do
   let(:module_items) { ModuleItem.where(training_module: :alpha) }
 
   describe '#link_to_next_module_item' do
-    let(:module_item) { module_items.to_a[-2] }
-    let(:last_module_item) { module_items.to_a[-1] }
+    let(:module_item) { module_items.to_a[-3] }
+    let(:last_module_item) { module_items.to_a[-2] }
 
     it 'returns a link to the next content page' do
       link = helper.link_to_next_module_item(module_item)
@@ -15,7 +15,7 @@ describe 'LinkHelper', type: :helper do
     context 'when module item is last item' do
       it 'returns a link to training modules root' do
         link = helper.link_to_next_module_item(last_module_item)
-        expect(link).to include('certificate')
+        expect(link).to include('1-3-4')
       end
     end
   end

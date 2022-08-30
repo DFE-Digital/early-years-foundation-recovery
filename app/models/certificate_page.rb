@@ -4,6 +4,6 @@ class CertificatePage < OpenStruct
   attr_accessor :id, :name, :type, :training_module
 
   def heading
-    name
+    'Download your certificate'
   end
 end

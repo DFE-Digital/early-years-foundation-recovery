@@ -103,7 +103,7 @@ RSpec.describe 'Page' do
 
       it {
         view_whole_module(alpha)
-        expect(training_module_certificate_path(training_module_id: training_module_id)).to have_page_title('First Training Module : certificate')
+        expect(training_module_content_page_path(training_module_id: training_module_id, id: '1-3-4')).to have_page_title('First Training Module : Download your certificate')
       }
 
       it { expect(training_module_path(:alpha)).to have_page_title('First Training Module : before-you-start-heading') }

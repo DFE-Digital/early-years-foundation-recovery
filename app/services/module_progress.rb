@@ -100,7 +100,7 @@ private
   #
   # @return [Boolean]
   def state(method, items)
-    items.send(method) { |item| module_item_events(item.name).present? || item.certificate? }
+    items.send(method) { |item| module_item_events(item.name).present? }
   end
 
   # @param item_id [String] module item name
