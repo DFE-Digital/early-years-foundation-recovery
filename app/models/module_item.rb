@@ -25,10 +25,10 @@ class ModuleItem < YamlBase
     ending_intro: ContentPage,
     module_intro: ContentPage,
     sub_module_intro: ContentPage,
-    
+
     interruption_page: ContentPage,
     text_page: ContentPage,
-    
+
     youtube_page: YoutubePage,
 
     confidence_questionnaire: Questionnaire,

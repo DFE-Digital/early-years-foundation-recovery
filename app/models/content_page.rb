@@ -55,7 +55,7 @@ private
   def static_page?
     module_item.confidence_intro? || module_item.assessment_intro? || module_item.ending_intro?
   end
-  
+
   # @return [String]
   def static_body
     I18n.t(
