@@ -1,20 +1,9 @@
 class QuestionnairesController < ApplicationController
   before_action :authenticate_registered_user!
+  before_action :track_events
 
   def show
     questionnaire_taker.prepare
-    
-    if track_confidence_check_started? && confidence_untracked?
-      track('confidence_check_start')
-    end
-
-    if track_summative_assessment_started? && summative_untracked?
-      track('summative_assessment_start')
-    end
-
-    # TODO: port missing tracking keys
-    # summative_assessment_complete
-    # confidence_check_complete
   end
 
   def update
@@ -30,6 +19,7 @@ protected
 
   def track_summative_assessment_started?
     return false if questionnaire.module_item.parent.first_assessment_page.nil?
+
     questionnaire.module_item.parent.first_assessment_page.name == params[:id]
   end
 
@@ -39,9 +29,10 @@ protected
 
   def track_confidence_check_started?
     return false if questionnaire.module_item.parent.first_confidence_page.nil?
+
     questionnaire.module_item.parent.first_confidence_page.name == params[:id]
   end
-  
+
   def confidence_untracked?
     untracked?('confidence_check_start', training_module_id: params[:training_module_id])
   end
@@ -132,7 +123,18 @@ protected
     track('questionnaire_answer',
           type: questionnaire.assessments_type,
           success: questionnaire.result_for(key),
-          answer: questionnaire.answer_for(key),
-          )
+          answer: questionnaire.answer_for(key))
+  end
+
+private
+
+  def track_events
+    if track_confidence_check_started? && confidence_untracked?
+      track('confidence_check_start')
+    end
+
+    if track_summative_assessment_started? && summative_untracked?
+      track('summative_assessment_start')
+    end
   end
 end

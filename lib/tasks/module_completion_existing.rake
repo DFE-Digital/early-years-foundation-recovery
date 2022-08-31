@@ -4,14 +4,14 @@ namespace :db do
     number_updated = 0
     total_records = 0
     User.update_all(module_time_to_completion: {})
-    
+
     User.all.map do |user|
       original = user.module_time_to_completion
       BackfillModuleState.new(user: user).call
       updated = user.reload.module_time_to_completion
 
       p "User id: #{user.id} - #{updated}"
-      
+
       number_updated += 1 if original != updated
       total_records += 1
     end

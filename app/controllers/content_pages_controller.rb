@@ -1,6 +1,7 @@
 class ContentPagesController < ApplicationController
   before_action :authenticate_registered_user!
   before_action :clear_flash
+  before_action :track_events
 
   def index
     first_module_item = ModuleItem.find_by(training_module: training_module_name)
@@ -8,15 +9,6 @@ class ContentPagesController < ApplicationController
   end
 
   def show
-    track('module_content_page')
-
-    if track_module_start?
-      track('module_start')
-      CalculateModuleState.new(user: current_user).call
-    end
-
-    track('confidence_check_complete') if track_confidence_check_complete?
-
     @model = module_item.model
 
     if @model.is_a?(Questionnaire)
@@ -29,6 +21,17 @@ class ContentPagesController < ApplicationController
   end
 
 private
+
+  def track_events
+    track('module_content_page')
+
+    if track_module_start?
+      track('module_start')
+      CalculateModuleState.new(user: current_user).call
+    end
+
+    track('confidence_check_complete') if track_confidence_check_complete?
+  end
 
   def module_item
     @module_item ||= ModuleItem.find_by!(training_module: training_module_name, name: params[:id])

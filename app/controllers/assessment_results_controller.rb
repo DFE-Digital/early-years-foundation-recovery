@@ -15,8 +15,7 @@ class AssessmentResultsController < ApplicationController
       track('summative_assessment_complete',
             success: @assessment.passed?,
             type: 'summative_assessment',
-            score: @assessment.score,
-      )
+            score: @assessment.score)
     end
   end
 

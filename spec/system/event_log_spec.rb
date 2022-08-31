@@ -19,7 +19,7 @@ RSpec.describe 'Event log' do
         expect(events.where(name: 'confidence_check_start').size).to eq 1
       end
     end
-  
+
     context 'when answering the first question' do
       before do
         choose 'Strongly agree'
@@ -30,7 +30,7 @@ RSpec.describe 'Event log' do
         expect(events.where(name: 'questionnaire_answer').where_properties(success: true, type: 'confidence_check').size).to eq 1
       end
     end
-  
+
     context 'when answering the final question' do
       before do
         3.times do
@@ -56,7 +56,7 @@ RSpec.describe 'Event log' do
       expect(events.where(name: 'module_start').size).to eq 1
     end
   end
-  
+
   describe 'summative assessment' do
     before do
       start_summative_assessment(alpha)
@@ -69,35 +69,35 @@ RSpec.describe 'Event log' do
         expect(events.where(name: 'summative_assessment_start').size).to eq 1
       end
     end
-    
+
     context 'when answering first question' do
       before do
         check 'Correct answer 1'
         check 'Correct answer 2'
         click_on 'Save and continue'
       end
-      
+
       it 'tracks question answered' do
         expect(events.where(name: 'questionnaire_answer').where_properties(type: 'summative_assessment').size).to eq 1
       end
     end
-    
+
     context 'when answering final question' do
       before do
         complete_summative_assessment_correct
       end
-      
+
       it 'tracks completion' do
         expect(events.where(name: 'summative_assessment_complete').where_properties(score: 100).size).to eq 1
       end
     end
   end
-    
+
   describe 'formative assessment' do
     before do
       view_pages_before_formative_questionnaire(alpha)
       visit '/modules/alpha'
-      click_on 'Resume training'  
+      click_on 'Resume training'
       complete_formative_assessment_correct
     end
 
@@ -106,7 +106,7 @@ RSpec.describe 'Event log' do
     end
   end
 
-  context 'complete first module' do
+  describe 'complete first module' do
     before do
       visit '/modules/alpha/content-pages/intro'
       view_pages_before(alpha, 'sub_module_intro', 7)

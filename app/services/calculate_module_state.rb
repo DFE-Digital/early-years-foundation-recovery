@@ -2,7 +2,7 @@
 #
 class CalculateModuleState
   attr_reader :user
-  
+
   def initialize(user:)
     @user = user
   end
@@ -12,35 +12,33 @@ class CalculateModuleState
       current_value = user.module_time_to_completion[training_module]
 
       # do nothing - because time_to_completion has been calculated already
-      next if current_value.to_i > 0
-      
+      next if current_value.to_i.positive?
+
       updated_value = new_time(training_module)
-      
+
       unless updated_value == current_value
         user.module_time_to_completion[training_module] = updated_value
-        user.save
+        user.save!
       end
     end
     # might need to reload to get latest change
     user.module_time_to_completion
   end
-  
+
 private
-  
+
   # @param training_module [String]
   # @return [Integer] time in seconds
   def new_time(training_module)
     module_complete = mod_complete(training_module)
     module_start = mod_start(training_module)
-    
+
     # 'in progress' => 'completed'
     if module_complete.present? && module_start.present?
       (module_complete.time - module_start.time).to_i
     # 'not started' => 'in progress'
     elsif module_start.present?
       0
-    else
-      nil # no op
     end
   end
 
@@ -55,7 +53,7 @@ private
   def mod_complete(training_module)
     mod_event(training_module, 'module_complete')
   end
-  
+
   def mod_start(training_module)
     mod_event(training_module, 'module_start')
   end

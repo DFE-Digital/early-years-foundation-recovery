@@ -30,7 +30,7 @@ private
 
   def module_complete_untracked?
     return false if untracked?('module_start', training_module_id: @training_module.name)
-    
+
     untracked?('module_complete', training_module_id: @training_module.name)
   end
 end
