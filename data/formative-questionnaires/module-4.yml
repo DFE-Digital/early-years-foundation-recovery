@@ -23,7 +23,7 @@ module-4:
       1_prelinguistic_stage:
         multi_select: false
         label: |
-          At what age does the pre-linguistic stage usually occur?
+          At what age does the pre-linguistic stage usually occur? (Select one answer)
         assessment_summary: |
           The pre-linguistic stage occurs between birth and 1 year old.
           This is where babies use pre-speech sounds such as babbling and cooing.
@@ -43,7 +43,7 @@ module-4:
       1_first_words:
         multi_select: false
         label: |
-          Which type of words will children recognise and attempt first?
+          Which type of words will children recognise and attempt first? (Select one answer)
         assessment_summary: |
           To begin with children will recognise and attempt to use nouns such as ‘dog’, ‘ball’, ‘cup’.
           Next will come understanding of verbs such as ‘drink’, ‘eat’, ‘walk’.
@@ -69,7 +69,7 @@ module-4:
       1_incorrect_pronunciation_grammar:
         multi_select: false
         label: |
-          What is the best action to take if a child does not use the correct pronounciation or grammar?
+          What is the best action to take if a child does not use the correct pronounciation or grammar? (Select one answer)
         assessment_summary: |
           You should model the correct use of language.
           For example, a child may say “I drawed a picture for you”.
@@ -155,7 +155,7 @@ module-4:
       1_social_emotional_relationships:
         multi_select: false
         label: |
-          Which theorist believed that social and emotional relationships are not important for children’s language development?
+          Which theorist believed that social and emotional relationships are not important for children’s language development? (Select one answer)
         assessment_summary: |
           Piaget did not think that social and emotional relationships were important.
           Instead he believed that children need to understand a word before they can use it.
@@ -217,7 +217,7 @@ module-4:
       1_visual_aid:
         multi_select: false
         label: |
-          Which of the following is a visual aid that can support children with English as an additional language?
+          Which of the following is a visual aid that can support children with English as an additional language? (Select one answer)
         assessment_summary: |
           PECS is a picture exchange communication system.
           This is where you provide children with pictures to help them to express themselves and to understand the routine.
@@ -239,7 +239,7 @@ module-4:
       1_acknowledging_first_language:
         multi_select: false
         label: |
-          Which of the following will acknowledging and celebrating a child's first language promote?
+          Which of the following will acknowledging and celebrating a child's first language promote? (Select one answer)
         assessment_summary: |
           Acknowledging a child’s first language will support them to develop positive self image and confidence.
           This will make children feel valued and important and will motivate them to communicate with others.
@@ -259,7 +259,7 @@ module-4:
       1_term_language_skills:
         multi_select: false
         label: |
-          What term is used when a child’s language skills are lower than expected?
+          What term is used when a child’s language skills are lower than expected? (Select one answer)
         assessment_summary: |
           If a child’s skills are below the expected norms for their age they may be referred to as having speech, language and communication needs (SLCN).
           It is important to remember that all children develop at their own pace.
@@ -299,7 +299,7 @@ module-4:
       1_communication_frustration:
         multi_select: false
         label: |
-          Which of the following can support children to manage communication frustration?
+          Which of the following can support children to manage communication frustration? (Select one answer)
         assessment_summary: |
           If you make sure that the daily routine and your behaviour are predictable it will support children to feel safe and secure.
           This will help them to feel confident.
@@ -321,7 +321,7 @@ module-4:
       1_pandemic_positive:
         multi_select: false
         label: |
-          Which of the following can be a positive outcome of the pandemic lockdowns?
+          Which of the following can be a positive outcome of the pandemic lockdowns? (Select one answer)
         assessment_summary:  |
           Children with older siblings may have had access to resources designed for older children.
           They may also have experienced and rehearsed a more advanced vocabulary.
@@ -341,7 +341,7 @@ module-4:
       1_pandemic_negative:
         multi_select: false
         label: |
-          Which of these may have had a negative impact on children’s language skills during the pandemic lockdowns?
+          Which of these may have had a negative impact on children’s language skills during the pandemic lockdowns? (Select one answer)
         assessment_summary: |
           Children may have had increased access to technology including computers, TVs and phones.
           Whilst this means that children will have heard vocabulary, it is not as effective as the interactions that take place between people.
@@ -364,7 +364,7 @@ module-4:
       1_support_communication:
         multi_select: false
         label: |
-          What is an effective way to support your communication with children?
+          What is an effective way to support your communication with children? (Select one answer)
 
         assessment_summary:  |
           When children feel valued they will believe their thoughts are important and will be more likely to communicate. When you create a positive relationship with children, you will instil confidence in them. This will make them more motivated to learn.
@@ -384,7 +384,7 @@ module-4:
       1_self_talk_strategy:
         multi_select: false
         label: |
-          Which of the following describes the self talk strategy?
+          Which of the following describes the self talk strategy? (Select one answer)
 
         assessment_summary:  |
           Self talk is where you add commentary to your actions such as "I am putting the books away in the bookcase, can you see all the books?" or "I am washing my hands, so that they are clean. The soap is pink." This can sometimes feel unnatural, but it is extremely beneficial to children.
@@ -405,7 +405,7 @@ module-4:
       1_creative_activities:
         multi_select: true
         label: |
-          Which of the following are benefits of creative and imaginative activities? (Select all that apply)
+          Which of the following are benefits of creative and imaginative activities? (Select all answers that apply)
         assessment_summary: |
           Creative and imaginative activities often result in more spontaneous conversation. It can help children to discuss personal information such as their families or their interests. When you carry out these activities with children individually you can also create an opportunity for children to talk about their feelings on a 1 to 1 basis.
 
@@ -424,7 +424,7 @@ module-4:
       1_child_led:
         multi_select: false
         label: |
-          Which of the following might be a disadvantage of child led activity?
+          Which of the following might be a disadvantage of child led activity? (Select one answer)
 
         assessment_summary:  |
           If children do not experience any adult led activity, they may use incorrect communication for a long time. This is because they will miss out on opportunities for incorrect communications to be corrected.
@@ -445,7 +445,7 @@ module-4:
       1_child_led:
         multi_select: false
         label: |
-          Improving parents’ and carers’ understanding of which of these will make them more likely to adopt shared strategies to support their child’s language development.
+          Improving parents’ and carers’ understanding of which of the following will make them more likely to adopt shared strategies to support their child’s language development? (Select one answer)
 
         assessment_summary:  |
           Improving parents' and carers' understanding of a language rich approach will help them continue this at home. This will provide a consistent approach to language development for all children.
