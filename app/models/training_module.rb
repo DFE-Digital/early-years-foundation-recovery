@@ -1,5 +1,5 @@
 class TrainingModule < YamlBase
-  set_filename ENV.fetch('TRAINING_MODULES', 'training-modules')
+  set_filename Rails.configuration.training_modules
 
   # Override basic behaviour so that root key is stored as name
   def self.load_file
@@ -20,12 +20,12 @@ class TrainingModule < YamlBase
 
   # @return [Boolean]
   def formative?
-    @formative ||= ModuleItem.where_type(name, 'formative_assessment').any?
+    @formative ||= ModuleItem.where_type(name, 'formative_questionnaire').any?
   end
 
   # @return [Boolean]
   def summative?
-    @summative ||= ModuleItem.where_type(name, 'summative_assessment').any?
+    @summative ||= ModuleItem.where_type(name, 'summative_questionnaire').any?
   end
 
   # collections -------------------------
@@ -97,7 +97,29 @@ class TrainingModule < YamlBase
   end
 
   # @return [ModuleItem]
-  def assessment_page
-    ModuleItem.where_type(name, 'formative_assessment').first
+  def assessment_intro_page
+    first_assessment_page.previous_item
+  end
+
+  # @return [ModuleItem]
+  def first_assessment_page
+    ModuleItem.where_type(name, 'summative_questionnaire').first
+  end
+
+  # @return [ModuleItem]
+  def last_assessment_page
+    ModuleItem.where_type(name, 'summative_questionnaire').last
+  end
+
+  # @return [ModuleItem]
+  def assessment_results_page
+    ModuleItem.where_type(name, 'assessment_results').first
+  end
+
+  # Summative results if module includes assessment
+  #
+  # @return [ModuleItem]
+  def last_page
+    assessment_results_page || module_items.last
   end
 end

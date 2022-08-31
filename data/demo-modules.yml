@@ -11,6 +11,7 @@ alpha:
     - final thing
   duration: 3
   summative_threshold: 70
+
 bravo:
   title: Second Training Module
   thumbnail: introduction_to_supporting_physical_development
@@ -24,6 +25,7 @@ bravo:
   depends_on: alpha
   duration: 3
   summative_threshold: 70
+
 charlie:
   title: Third Training Module
   thumbnail: introduction_to_supporting_physical_development
@@ -37,6 +39,7 @@ charlie:
   depends_on: bravo
   duration: 3
   summative_threshold: 70
+
 delta:
   title: Fourth Training Module
   thumbnail: introduction_to_supporting_physical_development
@@ -49,4 +52,3 @@ delta:
     - final thing
   depends_on: bravo
   draft: true
-  summative_threshold: 70

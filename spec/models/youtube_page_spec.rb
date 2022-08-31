@@ -2,15 +2,15 @@ require 'rails_helper'
 
 RSpec.describe YoutubePage, type: :model do
   let(:file) do
-    Rails.root.join('config/locales/modules/test.yml')
+    Rails.root.join('config/locales/modules/alpha.yml')
   end
 
   let(:content) do
-    YAML.load_file(file).dig('en', 'modules', 'test')
+    YAML.load_file(file).dig('en', 'modules', 'alpha')
   end
 
   let(:youtube_page) do
-    described_class.new(name: :video, training_module: :test, type: :youtube_page)
+    described_class.new(training_module: 'alpha', type: :youtube_page, name: '1-2-1-2')
   end
 
   describe '#heading' do

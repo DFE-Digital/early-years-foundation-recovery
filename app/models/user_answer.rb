@@ -2,20 +2,10 @@ class UserAnswer < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   belongs_to :user
-  belongs_to :questionnaire_data, foreign_key: :questionnaire_id
-  belongs_to :summative_questionnaire, foreign_key: :questionnaire_id
-  belongs_to :confidence_questionnaire, foreign_key: :questionnaire_id
 
+  # @return [Questionnaire]
   def questionnaire
-    @questionnaire ||= questionnaire_data.build_questionnaire
-  end
-
-  def questionnaire_summative
-    @questionnaire_summative ||= summative_questionnaire.build_questionnaire
-  end
-
-  def confidence_questionnaire
-    @confidence_questionnaire ||= confidence_questionnaire.build_questionnaire
+    @questionnaire ||= Questionnaire.find_by!(training_module: self.module, name: name)
   end
 
   serialize :answer, Array
