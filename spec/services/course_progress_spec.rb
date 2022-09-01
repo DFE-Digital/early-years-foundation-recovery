@@ -107,12 +107,12 @@ RSpec.describe CourseProgress do
 
     it 'returns the completion date' do
       travel_to Time.zone.parse('2022-06-30') do
-        bravo.module_items.map do |item|
-          view_module_page_event('bravo', item.name)
-        end
+        view_whole_module(bravo)
+        # OPTIMIZE: Move this into the RSpec shared context helper methods
+        tracker.track('module_complete', { training_module_id: bravo.name })
 
         expect(course.completed_modules.count).to be 1
-        completion_time = course.completed_modules.first[1]
+        ((_mod, completion_time)) = course.completed_modules
         expect(completion_time).to be_an ActiveSupport::TimeWithZone
         expect(completion_time.to_s).to eq '2022-06-30 00:00:00 UTC'
       end

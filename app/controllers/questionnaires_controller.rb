@@ -1,6 +1,6 @@
 class QuestionnairesController < ApplicationController
   before_action :authenticate_registered_user!
-  before_action :track_events
+  before_action :track_events, only: :show
 
   def show
     questionnaire_taker.prepare
@@ -16,26 +16,6 @@ class QuestionnairesController < ApplicationController
   end
 
 protected
-
-  def track_summative_assessment_started?
-    return false if questionnaire.module_item.parent.first_assessment_page.nil?
-
-    questionnaire.module_item.parent.first_assessment_page.name == params[:id]
-  end
-
-  def summative_untracked?
-    untracked?('summative_assessment_start', training_module_id: params[:training_module_id])
-  end
-
-  def track_confidence_check_started?
-    return false if questionnaire.module_item.parent.first_confidence_page.nil?
-
-    questionnaire.module_item.parent.first_confidence_page.name == params[:id]
-  end
-
-  def confidence_untracked?
-    untracked?('confidence_check_start', training_module_id: params[:training_module_id])
-  end
 
   def questionnaire
     @questionnaire ||= Questionnaire.find_by!(name: params[:id], training_module: params[:training_module_id])
@@ -108,7 +88,7 @@ protected
 
       mod = questionnaire.module_item.parent
 
-      if questionnaire.final_question?
+      if questionnaire.last_assessment?
         helpers.assessment_progress(mod).save!
         redirect_to training_module_assessment_result_path(mod, mod.assessment_results_page)
       else
@@ -129,12 +109,20 @@ protected
 private
 
   def track_events
-    if track_confidence_check_started? && confidence_untracked?
+    if questionnaire.first_confidence? && confidence_untracked?
       track('confidence_check_start')
     end
 
-    if track_summative_assessment_started? && summative_untracked?
+    if questionnaire.first_assessment? && summative_untracked?
       track('summative_assessment_start')
     end
+  end
+
+  def summative_untracked?
+    untracked?('summative_assessment_start', training_module_id: params[:training_module_id])
+  end
+
+  def confidence_untracked?
+    untracked?('confidence_check_start', training_module_id: params[:training_module_id])
   end
 end

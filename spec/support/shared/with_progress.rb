@@ -7,6 +7,16 @@ RSpec.shared_context 'with progress' do
   let(:charlie) { TrainingModule.find_by(name: 'charlie') }
   let(:delta) { TrainingModule.find_by(name: 'delta') }
 
+  # OPTIMIZE: Consider adding specific keys for:
+  # confidence_check_complete
+  # confidence_check_start
+  # module_complete
+  # module_content_page
+  # module_start
+  # questionnaire_answer
+  # summative_assessment_complete
+  # summative_assessment_start
+
   # Visit every page in the module
   #
   def view_whole_module(mod)
@@ -51,16 +61,6 @@ RSpec.shared_context 'with progress' do
       id: page_name,
       action: 'show',
       controller: 'content_pages',
-      training_module_id: module_name,
-    })
-  end
-
-  # @return [true] create a fake event log item for a specific event key and controller
-  def view_module_page_event_with_specified_key(module_name, page_name, track_key, controller_name)
-    tracker.track(track_key, {
-      id: page_name,
-      action: 'show',
-      controller: controller_name,
       training_module_id: module_name,
     })
   end
