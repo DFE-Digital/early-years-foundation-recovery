@@ -3,7 +3,6 @@ namespace :db do
   task calculate_completion_time: :environment do
     number_updated = 0
     total_records = 0
-    User.update_all(module_time_to_completion: {})
 
     User.all.map do |user|
       original = user.module_time_to_completion
