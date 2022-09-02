@@ -93,12 +93,12 @@ class Questionnaire < OpenStruct
   def last_assessment?
     module_item.parent.last_assessment_page.eql?(module_item)
   end
-  
+
   # @return [Boolean]
   def first_confidence?
     module_item.parent.first_confidence_page.eql?(module_item)
   end
-  
+
   # @return [Boolean]
   def first_assessment?
     module_item.parent.first_assessment_page.eql?(module_item)

@@ -2,12 +2,12 @@ class ContentPagesController < ApplicationController
   before_action :authenticate_registered_user!
   before_action :clear_flash
   before_action :track_events, only: :show
-  
+
   def index
     first_module_item = ModuleItem.find_by(training_module: training_module_name)
     redirect_to training_module_content_page_path(training_module_name, first_module_item)
   end
-  
+
   def show
     @model = module_item.model
 
@@ -24,12 +24,12 @@ private
 
   def track_events
     track('module_content_page')
-    
+
     if track_module_start?
       track('module_start')
-      CalculateModuleState.new(user: current_user).call
+      helpers.calculate_module_state
     end
-    
+
     track('confidence_check_complete') if track_confidence_check_complete?
   end
 
