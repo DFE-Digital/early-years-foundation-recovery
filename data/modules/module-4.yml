@@ -86,8 +86,6 @@ module-4:
     type: text_page
   4-2-1-3a:
     type: text_page
-  4-2-1-3b:
-    type: formative_questionnaire
   4-2-1-4:
     type: text_page
   4-2-1-5a:
@@ -99,6 +97,8 @@ module-4:
     type: text_page         # submodule 2 / topic 2
   4-2-2-1:
     type: text_page
+  4-2-2-1b: 
+    type: formative_questionnaire
   4-2-2-2:
     type: text_page
 
@@ -110,8 +110,6 @@ module-4:
     type: formative_questionnaire
   4-2-3-2a:
     type: text_page
-  4-2-3-2b:
-    type: formative_questionnaire
 
  # ----------------------------------------------------------------------------
  # Submodule 3

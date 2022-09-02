@@ -275,8 +275,8 @@ module-4:
           4: Socio-economic factors
         correct_answers:
           - 3
-
-  4-2-1-3b:
+  
+  4-2-1-5b:
     questions:
       1_addressing_concerns:
         multi_select: false
@@ -293,8 +293,7 @@ module-4:
           2: "False"
         correct_answers:
           - 1
-
-  4-2-1-5b:
+  4-2-2-1b:
     questions:
       1_communication_frustration:
         multi_select: false
@@ -315,7 +314,6 @@ module-4:
           4: Limited use of PECS
         correct_answers:
           - 2
-
   4-2-3-1b:
     questions:
       1_pandemic_positive:
@@ -335,26 +333,6 @@ module-4:
           4: Increased screen time
         correct_answers:
           - 2
-
-  4-2-3-2b:
-    questions:
-      1_pandemic_negative:
-        multi_select: false
-        label: |
-          Which of these may have had a negative impact on children’s language skills during the pandemic lockdowns? (Select one answer)
-        assessment_summary: |
-          Children may have had increased access to technology including computers, TVs and phones.
-          Whilst this means that children will have heard vocabulary, it is not as effective as the interactions that take place between people.
-        assessment_fail_summary: |
-          Children may have had increased access to technology including computers, TVs and phones.
-          Whilst this means that children will have heard vocabulary, it is not as effective as the interactions that take place between people.
-        answers:
-          1: Musical activity
-          2: Outdoor activity
-          3: Interactions
-          4: Screen time
-        correct_answers:
-          - 4
 
 # ---------------
 
@@ -377,7 +355,7 @@ module-4:
           3: "Build a positive relationship"
           4: "Plan for child led activities only"
         correct_answers:
-          - "3"
+          - 3
   4-3-1-2b:
     content:
     questions:
@@ -397,7 +375,7 @@ module-4:
           3: "Adding a commentary to your actions"
           4: "Expanding what a child has said"
         correct_answers:
-          - "3"
+          - 3
 
   4-3-2-1b:
     content:
@@ -416,7 +394,11 @@ module-4:
           2: "Helping children to discuss personal information"
           3: "Teaching children to take turns when talking"
           4: "Supporting children to understand and express their feelings on a 1 to 1 basis"
-        correct_answers: ["1","2","3","4"]
+        correct_answers:
+          - 1 
+          - 2
+          - 3
+          - 4
 
   4-3-2-2b:
     content:
@@ -437,7 +419,7 @@ module-4:
           3: "Incorrect communication will not be corrected"
           4: "Sustained shared thinking"
         correct_answers:
-          - "3"
+          - 3
 
   4-3-3-1b:
     content:
@@ -458,4 +440,4 @@ module-4:
           3: "The EYFS"
           4: "Self-regulation"
         correct_answers:
-          - "2"
+          - 2
