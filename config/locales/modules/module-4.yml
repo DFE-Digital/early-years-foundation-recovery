@@ -102,7 +102,7 @@ en:
 
           Babbling will become more purposeful and the baby will try to imitate simple words. They will also begin to accompany their babbling with gestures. The babbling stage continues until a baby is around 12 months old.
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">To support a baby’s language development at this age you can:</p>
@@ -251,7 +251,7 @@ en:
 
           “Around 18 months, is the toddler listening and responding to a simple instruction like: ‘Adam, put on your shoes?’”
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">Talk your way through your day, describing your routine actions and explaining what is happening. You should use descriptive words to make sure that children use a wide variety of vocabulary.</p>
@@ -300,7 +300,7 @@ en:
           - try not to ask too many questions, as they may feel pressure and then not respond
           - comment on the child’s actions to ensure that they hear a wide variety of vocabulary – for example, “you are pushing your baby very carefully”
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">You should provide lots of opportunities for children to share books. </p>
@@ -350,7 +350,7 @@ en:
           
           While working with others, a child will have extended discussions and ask and answer questions. This will give them lots of opportunities to hear and practice new vocabulary.
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">Try setting up an experiment style activity to encourage sustained shared thinking. A good example is a homemade volcano using baking soda and vinegar.
@@ -496,7 +496,7 @@ en:
 
           Skinner’s critics argued that children cannot learn the grammar rules of language development through imitation alone. They also said that his theory does not take cognitive development or individual needs into consideration. Bruner’s theory takes all of these points into consideration.
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">The theories of Skinner, Bruner, Piaget and Chomsky show us the importance of considering children’s language development from more than one perspective.</p>                                      <p class="govuk-body">Consider a day’s planning for your setting. Does it have the key components needed for effective language development?</p>  
@@ -589,7 +589,7 @@ en:
 
           This will help all children to progress, regardless of their previous experiences.
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <ul class="govuk-list govuk-list--bullet">
@@ -652,7 +652,7 @@ en:
 
           This all helps to create a diverse environment for children in your care. Later in the module you will look at further strategies to help you do this.
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">If you are already caring for a child with English as an additional language:</p>                                      
@@ -719,7 +719,7 @@ en:
 
           A child may not have difficulty with all aspects of communication. For example, they may struggle with talking, while being good at understanding others. Another child may have no difficulty with talking, but may find it difficult to use language appropriately. For example, children may have difficulty with conversation skills. This could include taking turns or understanding how their conversations will make others feel. They may also find it difficult to support their conversation with non verbal cues like eye contact or facial expressions.
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <ul class="govuk-list govuk-list--bullet">
@@ -801,7 +801,7 @@ en:
           - challenging the child to answer questions or participate in discussions with fuller responses
           - encouraging the child to create and share their own stories
         
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">Think of a specific child you care for:</p>
@@ -848,7 +848,7 @@ en:
 
           You will look at observation, assessment and planning in more detail in a future module.
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">Do you know what your setting's policy says about observation, assessment and planning?</p>
@@ -882,9 +882,12 @@ en:
         body: |
           ![Two children working together to complete an activity.](/assets/4-2-2-1-175391338.jpg)                  
           
-          Development Matters (2021) tells us: 
-
-          “Language development is central to self-regulation: children use language to guide their actions and plans.”
+          <div class='blockquote-container'>
+            <blockquote class='quote'>
+              <p>Language development is central to self-regulation: children use language to guide their actions and plans.</p>
+              <cite>Development Matters, 2021</cite>
+            </blockquote>
+          </div>
 
           Self-regulation is the ability to manage your behaviour and your reactions. You learnt about self-regulation in module 3. A child’s level of communication will affect their ability to self-regulate. 
 
@@ -920,7 +923,7 @@ en:
           - have lots of activities and resources available for the next stage of development 
           - be prepared to extend a child’s thinking with appropriately challenging questions and comments
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
             <ul class="govuk-list govuk-list--bullet">
               <li>How do you make sure that the children in your care are appropriately challenged?</li> 
@@ -965,7 +968,7 @@ en:
 
           You should model your expectations in a variety of group sizes, both indoors and outdoors. This will make sure that children understand what positive social communication looks like in different situations.
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">Have you tried using a communication buddying system for children around 3 years of age or older?</p>
@@ -1276,7 +1279,7 @@ en:
           - areas that encourage children to gather in small groups 
           - quiet areas where children can process their learning or look at books
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">You can use the points identified on this page to carry out an evaluation of your setting. You should consider how each area or activity promotes interactions and discussion. You should also think about whether they encourage curiosity.</p> 
@@ -1493,7 +1496,7 @@ en:
 
           Success will look different for each child. It's important to look out for a child making efforts and improvements which you can praise. You should share these successes with parents and carers, so they can also recognise their child's development . Praise also helps a child to feel important and motivated to learn.
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">Take one of these strategies that are new to you or that you feel could be improved. Suggest it as a discussion point at your next staff meeting. Discuss how the strategy could be implemented into your practice.</p>
