@@ -3,7 +3,9 @@ span.noprint
 
   p.govuk_body Congratulations! You have now completed this module.
 
-  p.govuk_body If the name on your certificate is not what you expect, you can update it in <a href="/my-account">My account</a>.
+  p.govuk_body If the name on your certificate is not what you expect, you can update it in <a class="govuk-link" href="/my-account">My account</a>.
+
+  p.govuk_body You can return to <a class="govuk-link" href="/my-learning">My learning</a> to start a new module or to review your progress.
 
   hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
 
@@ -32,3 +34,6 @@ span.noprint
   = govuk_link_to 'Download', training_module_certificate_path(@training_module, format: :pdf)
 
   hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
+
+div.noprint class='govuk-!-text-align-right'
+  = govuk_link_to 'Go to My Learning', my_learning_path, class: 'govuk-button'
