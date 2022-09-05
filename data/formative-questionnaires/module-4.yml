@@ -45,17 +45,13 @@ module-4:
         label: |
           Which type of words will children recognise and attempt first? (Select one answer)
         assessment_summary: |
-          To begin with children will recognise and attempt to use nouns such as ‘dog’, ‘ball’, ‘cup’.
-          Next will come understanding of verbs such as ‘drink’, ‘eat’, ‘walk’.
-          Understanding of adjectives such as ‘small’, ‘red’, ‘cold’ will then follow.
-          You can support children by extending their use of a noun.
-          For example if a child says ‘cup’ you can say “yes, you are drinking from a yellow cup”.
+          To begin with children will recognise and attempt to use nouns such as ‘dog’, ‘ball’, ‘cup’. Next will come understanding of verbs such as ‘drink’, ‘eat’, ‘walk’. Understanding of adjectives such as ‘small’, ‘red’, ‘cold’ will then follow.
+
+          You can support children by extending their use of a noun. For example if a child says ‘cup’ you can say “yes, you are drinking from a yellow cup”.
         assessment_fail_summary: |
-          To begin with children will recognise and attempt to use nouns such as ‘dog’, ‘ball’, ‘cup’.
-          Next will come understanding of verbs such as ‘drink’, ‘eat’, ‘walk’.
-          Understanding of adjectives such as ‘small’, ‘red’, ‘cold’ will then follow.
-          You can support children by extending their use of a noun.
-          For example if a child says ‘cup’ you can say “yes, you are drinking from a yellow cup”.
+          To begin with children will recognise and attempt to use nouns such as ‘dog’, ‘ball’, ‘cup’. Next will come understanding of verbs such as ‘drink’, ‘eat’, ‘walk’. Understanding of adjectives such as ‘small’, ‘red’, ‘cold’ will then follow.
+
+          You can support children by extending their use of a noun. For example if a child says ‘cup’ you can say “yes, you are drinking from a yellow cup”.
         answers:
           1: Adverbs – words used to describe a verb in more detail, such as accidentally, gently, clearly
           2: Adjectives – words used to describe a noun, such as nervous, adorable, big
@@ -72,13 +68,13 @@ module-4:
           What is the best action to take if a child does not use the correct pronounciation or grammar? (Select one answer)
         assessment_summary: |
           You should model the correct use of language.
-          For example, a child may say “I drawed a picture for you”.
-          Your response could be “that’s right, you have drawn a picture for me”.
+
+          For example, a child may say “I drawed a picture for you”. Your response could be “that’s right, you have drawn a picture for me”.
+          
           This will provide opportunity for the child to learn by imitation.
         assessment_fail_summary: |
-          You should model the correct use of language.
-          For example, a child may say “I drawed a picture for you”.
-          Your response could be “that’s right, you have drawn a picture for me”.
+          You should model the correct use of language. 
+          For example, a child may say “I drawed a picture for you”. Your response could be “that’s right, you have drawn a picture for me”.
           This will provide opportunity for the child to learn by imitation.
         answers:
           1: Tell them they are wrong and ask them to try again
@@ -141,9 +137,7 @@ module-4:
           Skinner believed that children are born with a blank mind and develop their language skills through learning and opportunity to mimic others.
           Skinner believed that the response to the behaviour would shape future behaviour.
 
-          For example if you talk to a baby or child, they will be able to try and respond by copying your behaviour.
-          You can then reinforce their attempts with verbal praise, a smile and another response.
-          The child will then want to repeat this behaviour to receive another positive response and this will promote their development.
+          For example if you talk to a baby or child, they will be able to try and respond by copying your behaviour. You can then reinforce their attempts with verbal praise, a smile and another response. The child will then want to repeat this behaviour to receive another positive response and this will promote their development.
         answers:
           1: "True"
           2: "False"
@@ -179,15 +173,13 @@ module-4:
         label: |
           True or false? Chomsky believes that children learn language instinctively.
         assessment_summary: |
-          Chomsky suggests that all children have the instinct and ability to develop their language skills, regardless of how and where they grow up.
-          It is important to remember that this may not always be the case for all children.
-          Children will all develop at their own individual pace.
-          You will also need to take into account contributing factors, such as learning difficulties.
+          Chomsky suggests that all children have the instinct and ability to develop their language skills, regardless of how and where they grow up. It is important to remember that this may not always be the case for all children.
+          
+          Children will all develop at their own individual pace. You will also need to take into account contributing factors, such as learning difficulties.
         assessment_fail_summary: |
-          Chomsky suggests that all children have the instinct and ability to develop their language skills, regardless of how and where they grow up.
-          It is important to remember that this may not always be the case for all children.
-          Children will all develop at their own individual pace.
-          You will also need to take into account contributing factors, such as learning difficulties.
+          Chomsky suggests that all children have the instinct and ability to develop their language skills, regardless of how and where they grow up. It is important to remember that this may not always be the case for all children.
+          
+          Children will all develop at their own individual pace. You will also need to take into account contributing factors, such as learning difficulties.
         answers:
           1: "True"
           2: "False"
@@ -219,13 +211,9 @@ module-4:
         label: |
           Which of the following is a visual aid that can support children with English as an additional language? (Select one answer)
         assessment_summary: |
-          PECS is a picture exchange communication system.
-          This is where you provide children with pictures to help them to express themselves and to understand the routine.
-          This can reduce anxiety for children and minimise frustration when they are not able to communicate their needs.
+          PECS is a picture exchange communication system. This is where you provide children with pictures to help them to express themselves and to understand the routine. This can reduce anxiety for children and minimise frustration when they are not able to communicate their needs.
         assessment_fail_summary: |
-          PECS is a picture exchange communication system.
-          This is where you provide children with pictures to help them to express themselves and to understand the routine.
-          This can reduce anxiety for children and minimise frustration when they are not able to communicate their needs.
+          PECS is a picture exchange communication system. This is where you provide children with pictures to help them to express themselves and to understand the routine. This can reduce anxiety for children and minimise frustration when they are not able to communicate their needs.
         answers:
           1: EYFS
           2: EAL
@@ -241,11 +229,9 @@ module-4:
         label: |
           Which of the following will acknowledging and celebrating a child's first language promote? (Select one answer)
         assessment_summary: |
-          Acknowledging a child’s first language will support them to develop positive self image and confidence.
-          This will make children feel valued and important and will motivate them to communicate with others.
+          Acknowledging a child’s first language will support them to develop positive self image and confidence. This will make children feel valued and important and will motivate them to communicate with others.
         assessment_fail_summary: |
-          Acknowledging a child’s first language will support them to develop positive self image and confidence.
-          This will make children feel valued and important and will motivate them to communicate with others.
+          Acknowledging a child’s first language will support them to develop positive self image and confidence. This will make children feel valued and important and will motivate them to communicate with others.
         answers:
           1: Discrimination
           2: Intelligence
@@ -262,12 +248,10 @@ module-4:
           What term is used when a child’s language skills are lower than expected? (Select one answer)
         assessment_summary: |
           If a child’s skills are below the expected norms for their age they may be referred to as having speech, language and communication needs (SLCN).
-          It is important to remember that all children develop at their own pace.
-          If a child has lower than expected skills they may simply need more time and interactions.
+          It is important to remember that all children develop at their own pace. If a child has lower than expected skills they may simply need more time and interactions.
         assessment_fail_summary: |
           If a child’s skills are below the expected norms for their age they may be referred to as having speech, language and communication needs (SLCN).
-          It is important to remember that all children develop at their own pace.
-          If a child has lower than expected skills they may simply need more time and interactions.
+          It is important to remember that all children develop at their own pace. If a child has lower than expected skills they may simply need more time and interactions.
         answers:
           1: English as an additional language
           2: Special educational needs
@@ -283,11 +267,9 @@ module-4:
         label: |
           True or false? Although important, addressing concerns around a child's language skills could cause parents and carers to worry.
         assessment_summary: |
-          Information from parents and carers will support you to identify children’s language needs.
-          However, it is important to address the subject with sensitivity to avoid causing any unnecessary worry.
+          Information from parents and carers will support you to identify children’s language needs. However, it is important to address the subject with sensitivity to avoid causing any unnecessary worry.
         assessment_fail_summary: |
-          Information from parents and carers will support you to identify children’s language needs.
-          However, it is important to address the subject with sensitivity to avoid causing any unnecessary worry.
+          Information from parents and carers will support you to identify children’s language needs. However, it is important to address the subject with sensitivity to avoid causing any unnecessary worry.
         answers:
           1: "True"
           2: "False"
@@ -301,12 +283,10 @@ module-4:
           Which of the following can support children to manage communication frustration? (Select one answer)
         assessment_summary: |
           If you make sure that the daily routine and your behaviour are predictable it will support children to feel safe and secure.
-          This will help them to feel confident.
-          If children feel confident and settled, their reactions to frustrations will be minimised.
+          This will help them to feel confident. If children feel confident and settled, their reactions to frustrations will be minimised.
         assessment_fail_summary: |
           If you make sure that the daily routine and your behaviour are predictable it will support children to feel safe and secure.
-          This will help them to feel confident.
-          If children feel confident and settled, their reactions to frustrations will be minimised.
+          This will help them to feel confident. If children feel confident and settled, their reactions to frustrations will be minimised.
         answers:
           1: Highlighting negative behaviour
           2: Having predictable behaviour and routines
@@ -321,11 +301,9 @@ module-4:
         label: |
           Which of the following can be a positive outcome of the pandemic lockdowns? (Select one answer)
         assessment_summary:  |
-          Children with older siblings may have had access to resources designed for older children.
-          They may also have experienced and rehearsed a more advanced vocabulary.
+          Children with older siblings may have had access to resources designed for older children. They may also have experienced and rehearsed a more advanced vocabulary.
         assessment_fail_summary: |
-          Children with older siblings may have had access to resources designed for older children.
-          They may also have experienced and rehearsed a more advanced vocabulary.
+          Children with older siblings may have had access to resources designed for older children. They may also have experienced and rehearsed a more advanced vocabulary.
         answers:
           1: Limited outdoor space
           2: Having access to resources belonging to older siblings
