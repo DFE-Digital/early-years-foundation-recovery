@@ -19,11 +19,14 @@ class ModuleItem < YamlBase
 
   # @return [Hash] 'Type' to 'View object' mapping
   MODELS = {
+    # 'intros' and 'pages' are sorted into two different groups
     assessment_intro: ContentPage,
     confidence_intro: ContentPage,
-    interruption_page: ContentPage,
+    ending_intro: ContentPage,
     module_intro: ContentPage,
     sub_module_intro: ContentPage,
+
+    interruption_page: ContentPage,
     text_page: ContentPage,
 
     youtube_page: YoutubePage,
@@ -189,6 +192,11 @@ class ModuleItem < YamlBase
   # @return [Boolean]
   def confidence_intro?
     type.eql?('confidence_intro')
+  end
+
+  # @return [Boolean]
+  def ending_intro?
+    type.eql?('ending_intro')
   end
 
   # position ---------------------------------

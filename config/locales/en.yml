@@ -176,6 +176,47 @@ en:
       - reinforce effective teaching and learning
       - help you to think about what you have learned
 
+  assessment_intro:
+    heading: End of module test
+    body: |
+      This end of module test is here to revisit what you have learned and the 
+      impact on your practice. It is not aimed to provide a pass or fail.
+      
+      ## Before you start
+      
+      This test has 10 multiple choice questions.
+      
+      You must answer all of the questions.
+
+      You must complete this test in one sitting. If you exit part way through 
+      the test, your progress will not be saved.
+
+      You can review your total score for the test at the end.
+
+      To receive a certificate of achievement for this module, you need to 
+      receive an overall score of at least %{passmark}%.
+
+      If you do not score %{passmark}%, you will be able to see which questions
+      you got wrong. You can repeat the test to improve your score as many times 
+      as you want to. 
+
+  confidence_intro:
+    heading: Reflect on your learning
+    body: |
+      To help DfE to measure our impact, please answer the following questions.
+
+      You must complete these questions in one sitting. If you exit part way 
+      through, your progress will not be saved.
+
+      Answers will be anonymous, and we will not know what you individually select.
+
+      Please rate to what extent you agree with the statements on the following pages.
+
+  ending_intro:
+    heading: Thank you
+    body: |
+      You can also <a href='%{feedback_url}' target="_blank">give feedback about
+      the training (opens in new window)</a>
 
   check_email_confirmation:
     heading: Check your email
