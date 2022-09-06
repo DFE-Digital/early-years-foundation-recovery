@@ -2,23 +2,44 @@ class QuestionnairesController < ApplicationController
   before_action :authenticate_registered_user!
 
   def show
+    # find the correct event when we merge with events pr
+
     one_session
+    track_questionnaire
     questionnaire_taker.prepare
   end
 
   def update
     # TODO: why?
     # questionnaire_taker.archive
-    
+
     immediate_feedback if questionnaire.formative?
     marked_assessment if questionnaire.summative?
     next_question if questionnaire.confidence?
   end
 
 protected
+
+  def track_questionnaire
+    track('module_questionnaire_formative_page') if questionnaire.formative?
+    track('module_questionnaire_summative_page') if questionnaire.summative?
+    track('module_questionnaire_confidence_page') if questionnaire.confidence?
+  end
+
   def one_session
-   assessment_flow =  AssessmentFlow.new(user: current_user, type: SUMMATIVE, mod: questionnaire.module_item.parent, request: request)
-   redirect_to assessment_flow.intro_page if assessment_flow.authenticate_flow
+    if questionnaire.summative? && (assessment_flow.auth_summative_flow && !assessment_flow.passed)
+      redirect_to assessment_flow.intro_page
+    end
+
+    if questionnaire.confidence?
+      if assessment_flow.auth_confidence_flow && !assessment_flow.passed
+        redirect_to assessment_flow.intro_page
+      end
+    end
+  end
+
+  def assessment_flow
+    @assessment_flow ||= AssessmentFlow.new(user: current_user, type: questionnaire.assessments_type, mod: questionnaire.module_item.parent)
   end
 
   def questionnaire

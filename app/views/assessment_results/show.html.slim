@@ -19,12 +19,16 @@ hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class
 
 .govuk-grid-row
   .govuk-grid-column-one-half
-    = link_to_previous_module_item(@module_item)
-
+    - if @assessment.passed?
+      = link_to_previous_module_item(@module_item)
+    - else
+      /!
+        Adding a empty p tag to keep page layout from distorting need to 
+        find a better solution if this affects accessibility
+      p 
   .govuk-grid-column-one-half class='govuk-!-text-align-right'
     - if @assessment.passed?
       = link_to_next_module_item(@module_item)
-
     - else
       = govuk_link_to 'Go to My learning', my_learning_path, class: 'govuk-button govuk-button--secondary govuk-!-margin-right-4'
 

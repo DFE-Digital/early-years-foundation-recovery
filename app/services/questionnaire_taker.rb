@@ -52,6 +52,7 @@ class QuestionnaireTaker
         questionnaire_id: questionnaire.id,
         question: key,
         answer: answers,
+        archived: false, # set to false so its easy to search and update later.
         correct: questionnaire.result_for(key),
       )
     end

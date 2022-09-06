@@ -10,59 +10,26 @@ class ConfidenceCheckProgress
 
   attr_reader :user, :mod
 
-  # @see QuestionnairesController#marked_assessment
+  # @see AssessmentFlow#retake
   #
   # @return [Integer]
   def save!
+    return if answers.empty? # we should not create an attempt if there is no questions answered
+
     user_assessment = create_user_assessment
 
     if answers.all?(&:persisted?) && user_assessment.persisted?
-      answers.update_all(user_assessment_id: user_assessment.id)
+      answers.where(archived: false).update_all(user_assessment_id: user_assessment.id)
+      completed(user_assessment.id)
     end
   end
 
-  # @return [Array<Question>]
-  def wrong_answers_feedback
-    array = []
-    incorrect_answers.each do |user_answer|
-      questionnaire = find_questionnaire(name: user_answer.name)
-
-      questionnaire.question_list.each do |question|
-        question.submit_answers(user_answer.answer)
-
-        array << question
-      end
+  # @param user_assessment_id [UserAssessment.id]
+  def completed(user_assessment_id)
+    if answers.length == questions.length
+      user_assessment_to_complete = UserAssessment.find_by(id: user_assessment_id)
+      user_assessment_to_complete.update!(completed: Time.zone.now)
     end
-    array
-  end
-
-  # @see ContentHelper#results_banner
-  #
-  # @return [Hash]
-  def result
-    { success: passed?, score: score.to_i }
-  end
-
-  # @see #passed?
-  #
-  # @return [Symbol]
-  def status
-    passed? ? :passed : :failed
-  end
-
-  # @return [Boolean]
-  def failed?
-    !passed?
-  end
-
-  # @return [Boolean]
-  def passed?
-    score >= mod.summative_threshold
-  end
-
-  # @return [Boolean] CTA failed_attempt state
-  def attempted?
-    user.user_assessments.where(assessments_type: CONFIDENCE, module: mod.name).any?
   end
 
   # @return [Integer]
@@ -70,53 +37,31 @@ class ConfidenceCheckProgress
     answers.update_all(archived: true)
   end
 
-  # End of assessment score for many questions
-  #
-  # @return [Float] percentage of correct answers
-  def score
-    (correct_answers.count.to_f / questions.count) * 100
-  rescue ZeroDivisionError
-    0.0
-  rescue FloatDomainError
-    0.0
+  def result_passed?
+    user.user_assessments.where(assessments_type: CONFIDENCE, module: mod.name).where.not(completed: [nil]).order(completed: :asc).empty?
   end
 
 private
-
-  # @return [Questionnaire]
-  def find_questionnaire(name:)
-    Questionnaire.find_by!(name: name, training_module: mod.name)
-  end
-
-  # @return [UserAnswer::ActiveRecord_AssociationRelation]
-  def incorrect_answers
-    answers.where(correct: false)
-  end
-
-  # @return [UserAnswer::ActiveRecord_AssociationRelation]
-  def correct_answers
-    answers.where(correct: true)
-  end
 
   # @return [UserAnswer::ActiveRecord_AssociationRelation]
   def answers
     user.user_answers.not_archived.where(assessments_type: CONFIDENCE, module: mod.name)
   end
 
-  # @return [SummativeQuestionnaire]
+  # @return [ConfidenceQuestionnaire]
   def questions
-    @questions ||= SummativeQuestionnaire.where(training_module: mod.name)
+    @questions ||= ConfidenceQuestionnaire.where(training_module: mod.name)
   end
 
   # @return [UserAssessment]
   def create_user_assessment
     UserAssessment.create!(
       user_id: user.id,
-      score: score.to_i,
-      status: status,
+      # score: We do not track scores for this assessment
+      # status: We do not track satus for this assessment
       module: mod.name,
       # archived: no-op
-      # completed: no-op
+      # completed: Used to populate only when user has completed the assessment
       assessments_type: CONFIDENCE,
     )
   end

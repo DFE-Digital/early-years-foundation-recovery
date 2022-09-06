@@ -116,6 +116,16 @@ class TrainingModule < YamlBase
     ModuleItem.where_type(name, 'assessment_results').first
   end
 
+  # @return [ModuleItem]
+  def confidence_intro_page
+    ModuleItem.where_type(name, 'confidence_intro').first
+  end
+
+  # @return [ModuleItem]
+  def confidence_thank_you_page
+    module_items.last
+  end
+
   # Summative results if module includes assessment
   #
   # @return [ModuleItem]

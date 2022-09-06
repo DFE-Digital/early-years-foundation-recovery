@@ -138,6 +138,8 @@ en:
           - Govspeak compatible Markdown
           - HTML
           - plain text
+          $YoutubeVideo[Video title](https://www.youtube.com/watch?v=EpjSlCJtPLo&list=PL4IuMlmijgAfTwwEiZmMp28Eaf66S3a1R&index=2&t=0s)$EndYoutubeVideo
+          
         video_title: What is GOV.UK
         youtube_url: https://www.youtube.com/embed/ucjmWjJ25Ho
       1-2-1-3:

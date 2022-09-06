@@ -8,8 +8,6 @@ class ContentPagesController < ApplicationController
   end
 
   def show
-    track('module_content_page')
-
     @model = module_item.model
 
     if @model.is_a?(Questionnaire)
@@ -17,6 +15,7 @@ class ContentPagesController < ApplicationController
     elsif module_item.assessment_results?
       redirect_to training_module_assessment_result_path(training_module_name, module_item)
     else
+      track('module_content_page')
       render content_page_partial(module_item)
     end
   end

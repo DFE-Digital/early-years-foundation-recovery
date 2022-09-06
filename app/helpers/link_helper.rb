@@ -61,4 +61,14 @@ module LinkHelper
       govuk_link_to 'View previous test result', training_module_assessment_result_path(mod, mod.assessment_results_page)
     end
   end
+
+  # @param mod [TrainingModule]
+  # @return [String, nil]
+  def link_to_failed_results(mod)
+    return unless assessment_progress(mod).attempted?
+
+    if assessment_progress(mod).last_attempt && !assessment_progress(mod).result_passed?
+      govuk_link_to 'View previous test result', training_module_assessment_result_path(mod, mod.assessment_results_page)
+    end
+  end
 end

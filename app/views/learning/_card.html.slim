@@ -7,4 +7,6 @@
       .govuk-card__content
         h3.govuk-heading-m= mod.title
 
-        = link_to_retake_or_results(mod) if current
+        div = link_to_retake_or_results(mod) if current
+        div = link_to_failed_results(mod) if current
+        

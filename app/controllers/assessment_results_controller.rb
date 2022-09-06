@@ -3,11 +3,13 @@ class AssessmentResultsController < ApplicationController
   before_action :clear_flash
 
   def new
+    helpers.assessment_progress(training_module).save!
     helpers.assessment_progress(training_module).archive_attempt
     redirect_to training_module_content_page_path(training_module, training_module.assessment_intro_page)
   end
 
   def show
+    track('module_assessment_results_page')
     @assessment = helpers.assessment_progress(training_module)
     @module_item = ModuleItem.find_by(training_module: params[:training_module_id], name: params[:id])
   end

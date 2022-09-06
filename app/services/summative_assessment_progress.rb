@@ -14,17 +14,20 @@ class SummativeAssessmentProgress
   #
   # @return [Integer]
   def save!
+    return if answers.empty? # we should not create an attempt if there is no questions answered
+
     user_assessment = create_user_assessment
 
     if answers.all?(&:persisted?) && user_assessment.persisted?
-      answers.update_all(user_assessment_id: user_assessment.id)
+      answers.where(archived: false).update_all(user_assessment_id: user_assessment.id)
+      completed(user_assessment.id)
     end
   end
 
   # @return [Array<Question>]
   def wrong_answers_feedback
     array = []
-    incorrect_answers.each do |user_answer|
+    incorrect_attempt_answers.each do |user_answer|
       questionnaire = find_questionnaire(name: user_answer.name)
 
       questionnaire.question_list.each do |question|
@@ -36,11 +39,28 @@ class SummativeAssessmentProgress
     array
   end
 
+  # @param user_assessment_id [UserAssessment.id]
+  def completed(user_assessment_id)
+    if answers.length == questions.length
+      user_assessment_to_complete = UserAssessment.find_by(id: user_assessment_id)
+      user_assessment_to_complete.update!(completed: Time.zone.now)
+    end
+  end
+
   # @see ContentHelper#results_banner
   #
   # @return [Hash]
   def result
-    { success: passed?, score: score.to_i }
+    { success: result_passed?, score: last_attempt.score.to_i }
+  end
+
+  # @raise [NoMethodError] Somtimes in the code when user visits the question there will not be any last attempt
+  #
+  # @return [Boolean]
+  def result_passed?
+    last_attempt.score.to_i >= mod.summative_threshold
+  rescue NoMethodError
+    false
   end
 
   # @see #passed?
@@ -79,6 +99,21 @@ class SummativeAssessmentProgress
     0.0
   end
 
+  # @return [UserAssessments::ActiveRecord_AssociationRelation]
+  def last_attempt
+    user.user_assessments.where(assessments_type: 'summative_assessment', module: mod.name).where.not(completed: [nil]).order(completed: :asc).last
+  end
+
+  # @return [UserAnswer::ActiveRecord_AssociationRelation]
+  def attempt_answers
+    user.user_answers.where(assessments_type: 'summative_assessment', module: mod.name, user_assessment_id: last_attempt.id)
+  end
+
+  # @return [UserAnswer::ActiveRecord_AssociationRelation]
+  def incorrect_attempt_answers
+    attempt_answers.where(correct: false)
+  end
+
 private
 
   # @return [Questionnaire]
@@ -94,6 +129,11 @@ private
   # @return [UserAnswer::ActiveRecord_AssociationRelation]
   def correct_answers
     answers.where(correct: true)
+  end
+
+  # @return [UserAnswer::ActiveRecord_AssociationRelation]
+  def attempt_correct_answers
+    attempt_answers.where(correct: true)
   end
 
   # @return [UserAnswer::ActiveRecord_AssociationRelation]
@@ -114,7 +154,6 @@ private
       status: status,
       module: mod.name,
       # archived: no-op
-      # completed: no-op
       assessments_type: 'summative_assessment',
     )
   end
