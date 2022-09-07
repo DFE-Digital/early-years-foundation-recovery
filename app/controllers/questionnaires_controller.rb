@@ -1,9 +1,8 @@
 class QuestionnairesController < ApplicationController
-  before_action :authenticate_registered_user!
+  before_action :authenticate_registered_user!, :module_item
 
   def show
     questionnaire_taker.prepare
-    @module_item = ModuleItem.find_by(training_module: module_params['training_module_id'], name: module_params['id'])
   end
 
   def update
@@ -16,6 +15,10 @@ class QuestionnairesController < ApplicationController
   end
 
 protected
+
+  def module_item
+    @module_item ||= ModuleItem.find_by(training_module: module_params['training_module_id'], name: module_params['id'])
+  end
 
   def questionnaire
     @questionnaire ||= Questionnaire.find_by!(name: module_params[:id], training_module: module_params[:training_module_id])
