@@ -1,4 +1,4 @@
 - if ENV['RAILS_ENV'].eql?('development')
   pre.debug_dump
+    = @questionnaire.debug_summary
     = @questionnaire.module_item.debug_summary
-
