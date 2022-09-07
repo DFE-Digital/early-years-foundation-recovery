@@ -3,18 +3,14 @@
 #
 # ghcr.io/dfe-digital/early-years-foundation-recovery:latest
 #
-# https://ey-recovery-staging.london.cloudapps.digital
+# https://ey-recovery-dev.london.cloudapps.digital
 #
-name: Deploy Staging App
+name: Deploy Development App
 on:
   workflow_dispatch:
-    inputs:
-      version:
-        description: Candidate to deploy
-        required: true
   push:
-    tags:
-      - rc*
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -24,9 +20,9 @@ jobs:
       WORKSPACE: staging
       DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
       # app variables
-      DOMAIN: ey-recovery-staging.london.cloudapps.digital
+      DOMAIN: ey-recovery-dev.london.cloudapps.digital
       GOVUK_APP_DOMAIN: london.cloudapps.digital
-      GOVUK_WEBSITE_ROOT: ey-recovery-staging
+      GOVUK_WEBSITE_ROOT: ey-recovery-dev
     steps:
       -
         name: Checkout Code
@@ -60,10 +56,9 @@ jobs:
             SHA=${{ github.sha }}
           cache-from: |
             ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
-            ${{ env.DOCKER_IMAGE }}:${{ github.ref_name }}
           tags: |
             ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
-            ${{ env.DOCKER_IMAGE }}:${{ github.ref_name }}
+            ${{ env.DOCKER_IMAGE }}:latest
       -
         name: Deploy Integration Application
         env:
@@ -72,7 +67,7 @@ jobs:
           TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
           TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
           TF_VAR_paas_app_docker_image: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
-          TF_VAR_paas_app_hostname: staging
+          TF_VAR_paas_app_hostname: dev
           TF_VAR_paas_app_env_secrets: ${{ toJson(secrets) }}
           TF_VAR_paas_app_envs: ${{ toJson(env) }}
         run: |

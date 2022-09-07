@@ -89,6 +89,8 @@ There are a number of convenience scripts to make working with **Docker** easier
 All containers for the project are named with the prefix `recovery_`.
 The project uses chained **Docker Compose** files to prepare different environments.
 
+Visit the project [Github Container Registry][ghcr].
+
 These commands help maintain your containerised workspace:
 
 - `bin/docker-build` creates tagged images for all the services
@@ -229,6 +231,7 @@ When the are significant changes to content structure or styling it may be neces
 [rails-template]: https://github.com/DFE-Digital/rails-template
 [ci-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml/badge.svg
 [ci-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml
+[ghcr]: https://github.com/dfe-digital/early-years-foundation-recovery/pkgs/container/early-years-foundation-recovery
 [notify]: https://www.notifications.service.gov.uk
 [figma]: https://www.figma.com/file/FGW1NJJwnYRqoZ2DV0l5wW/Training-content?node-id=1%3A19
 [docker]: https://www.docker.com
