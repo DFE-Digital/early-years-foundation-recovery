@@ -1,16 +1,25 @@
-# ------------------------------------------------------------------------------
-# https://child-development-training.education.gov.uk
-#
-# - Automatically deploy tag
-# - Manually (re)deploy tag
-#
 ---
+# ------------------------------------------------------------------------------
+# Run workflow:
+#   https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/production.yml
+#
+# Build image:
+#   ghcr.io/dfe-digital/early-years-foundation-recovery:v0.0.x
+#
+# Deploy to:
+#   https://child-development-training.education.gov.uk
+#
 name: Deploy Production App
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: Version to deploy
+        description: Create release version ("vx.x.x")
+        type: string
+        required: true
+      ref:
+        description: Release candidate to deploy ("rcx.x.x")
+        type: string
         required: true
   push:
     tags:
@@ -22,17 +31,20 @@ jobs:
     environment: production
     env:
       WORKSPACE: production
-      DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
-      # app variables
-      DOMAIN: child-development-training.education.gov.uk
-      GOVUK_APP_DOMAIN: london.cloudapps.digital
-      GOVUK_WEBSITE_ROOT: eyfs-covid-recovery
+      REGISTRY: ghcr.io/dfe-digital/early-years-foundation-recovery
     steps:
       -
         name: Checkout Code
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.inputs.version || github.ref_name }}
+          ref: ${{ inputs.ref || github.ref_name }}
+      -
+        name: Tag version
+        if:  ${{ inputs.version }}
+        run: |
+          git tag --force ${{ inputs.version }}
+          git push --force origin refs/tags/${{ inputs.version }}
+          echo "HEAD=$(git rev-parse ${{ inputs.version }})" >> $GITHUB_ENV
       -
         name: Pin Terraform version
         uses: hashicorp/setup-terraform@v1.3.2
@@ -59,11 +71,11 @@ jobs:
             BUILDKIT_INLINE_CACHE=1
             SHA=${{ github.sha }}
           cache-from: |
-            ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
-            ${{ env.DOCKER_IMAGE }}:${{ github.ref_name }}
+            ${{ env.REGISTRY }}:${{ github.sha }}
+            ${{ env.REGISTRY }}:${{ inputs.ref || github.ref_name }}
           tags: |
-            ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
-            ${{ env.DOCKER_IMAGE }}:${{ github.ref_name }}
+            ${{ env.REGISTRY }}:${{ github.sha }}
+            ${{ env.REGISTRY }}:${{ inputs.ref || github.ref_name }}
       -
         name: Production Release
         env:
@@ -73,7 +85,7 @@ jobs:
           # plan/apply
           TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
           TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
-          TF_VAR_paas_app_docker_image: ${{ env.DOCKER_IMAGE }}:${{ github.ref_name }}
+          TF_VAR_paas_app_docker_image: ${{ env.REGISTRY }}:${{ inputs.ref || github.ref_name }}
           TF_VAR_paas_app_env_secrets: ${{ toJson(secrets) }}
           TF_VAR_paas_app_envs: ${{ toJson(env) }}
         run: |

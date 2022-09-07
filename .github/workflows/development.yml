@@ -1,9 +1,10 @@
 ---
 # ------------------------------------------------------------------------------
+# Build image:
+#   ghcr.io/dfe-digital/early-years-foundation-recovery:latest
 #
-# ghcr.io/dfe-digital/early-years-foundation-recovery:latest
-#
-# https://ey-recovery-dev.london.cloudapps.digital
+# Deploy to:
+#   https://ey-recovery-dev.london.cloudapps.digital
 #
 name: Deploy Development App
 on:
@@ -11,18 +12,25 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - .env.example
+      - .gitignore
+      - .rubocop*
+      - .tool-versions
+      - adr/*
+      - bin/*
+      - docker-compose.yml
+      - README.md
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: production
     env:
-      WORKSPACE: staging
-      DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
-      # app variables
-      DOMAIN: ey-recovery-dev.london.cloudapps.digital
-      GOVUK_APP_DOMAIN: london.cloudapps.digital
-      GOVUK_WEBSITE_ROOT: ey-recovery-dev
+      WORKSPACE: development
+      REGISTRY: ghcr.io/dfe-digital/early-years-foundation-recovery
+      # app envs
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
     steps:
       -
         name: Checkout Code
@@ -55,18 +63,18 @@ jobs:
             BUILDKIT_INLINE_CACHE=1
             SHA=${{ github.sha }}
           cache-from: |
-            ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+            ${{ env.REGISTRY }}:${{ github.sha }}
           tags: |
-            ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
-            ${{ env.DOCKER_IMAGE }}:latest
+            ${{ env.REGISTRY }}:${{ github.sha }}
+            ${{ env.REGISTRY }}:latest
       -
-        name: Deploy Integration Application
+        name: Deploy Development App
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
           TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
-          TF_VAR_paas_app_docker_image: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+          TF_VAR_paas_app_docker_image: ${{ env.REGISTRY }}:latest
           TF_VAR_paas_app_hostname: dev
           TF_VAR_paas_app_env_secrets: ${{ toJson(secrets) }}
           TF_VAR_paas_app_envs: ${{ toJson(env) }}

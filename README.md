@@ -89,8 +89,6 @@ There are a number of convenience scripts to make working with **Docker** easier
 All containers for the project are named with the prefix `recovery_`.
 The project uses chained **Docker Compose** files to prepare different environments.
 
-Visit the project [Github Container Registry][ghcr].
-
 These commands help maintain your containerised workspace:
 
 - `bin/docker-build` creates tagged images for all the services
@@ -127,30 +125,48 @@ These commands can be used to debug problems:
 
 ## Deployment Pipeline
 
-### Production Space
+Visit the [Github Container Registry][ghcr].
 
-[Production][production] is deployed automatically when a version is tagged.
-We use [semantic versioning](https://semver.org/) and a release can be triggered by:
+### Development Space
 
-- `git checkout main`
-- `git tag v0.0.x`
-- `git push origin v0.0.x`
-
-### Staging Space
-
-[Staging][staging] is deployed automatically with the latest commit from `main`.
+[Development][development] is deployed automatically with the latest commit from `main`.
 
 ### Content Space
 
 Manually adding the **"deployed"** label to a pull request in Github will cause it to be deployed.
-  This supports manual testing and content review in a production environment.
-When a feature branch review application is deployed, the URL to access it is added as a comment in the PR conversation in the format: <https://ey-recovery-pr-##.london.cloudapps.digital/>
+This supports manual testing and content review in a production environment.
+
+When a feature branch review application is deployed, the URL to access it is added as a comment
+in the PR conversation in the format: <https://ey-recovery-pr-##.london.cloudapps.digital/>
+
 Review applications are deployed with 3 seeded user accounts that share a restricted password.
-  This facilitates team members demoing content and functionality, so registration is not required.
+This facilitates team members demoing content and functionality, so registration is not required.
+
+### Staging Space
+
+[Staging][staging] is deployed automatically when a candidate tag is pushed.
+
+- `git checkout <ref/branch>`
+- `git tag rc0.0.x`
+- `git push origin rc0.0.x`
+
+A tag can also be created and a deployment run from this [workflow][staging-workflow].
+We intend to use [semantic versioning](https://semver.org/).
+
+### Production Space
+
+[Production][production] is deployed automatically when a version tag is pushed.
+
+- `git checkout rc0.0.x`
+- `git tag v0.0.x`
+- `git push origin v0.0.x`
+
+A tag can also be created and a deployment run from this [workflow][production-workflow].
 
 ## Quality Assurance
 
-The UI/UA test suite can be run against any site. A production-like application is available as a composed Docker service for local development.
+The UI/UA test suite can be run against any site.
+A production-like application is available as a composed Docker service for local development.
 To run a self-signed certificate must first be generated.
 
 1. `./bin/docker-certs` (Mac users can trust the certificate in [Keychain Access](https://support.apple.com/en-gb/guide/keychain-access))
@@ -225,12 +241,15 @@ When the are significant changes to content structure or styling it may be neces
 [confluence]: https://dfedigital.atlassian.net/wiki/spaces/ER/overview
 [production]: https://eyfs-covid-recovery.london.cloudapps.digital
 [staging]: https://ey-recovery-staging.london.cloudapps.digital
+[development]: https://ey-recovery-dev.london.cloudapps.digital
 [prototype-repo]: https://github.com/DFE-Digital/ey-recovery-prototype
 [prototype-app]: https://eye-recovery.herokuapp.com
 [interim-prototype-app]: https://child-development-training-prototype.london.cloudapps.digital
 [rails-template]: https://github.com/DFE-Digital/rails-template
 [ci-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml/badge.svg
 [ci-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml
+[production-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/production.yml
+[staging-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/staging.yml
 [ghcr]: https://github.com/dfe-digital/early-years-foundation-recovery/pkgs/container/early-years-foundation-recovery
 [notify]: https://www.notifications.service.gov.uk
 [figma]: https://www.figma.com/file/FGW1NJJwnYRqoZ2DV0l5wW/Training-content?node-id=1%3A19
