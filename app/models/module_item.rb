@@ -112,6 +112,8 @@ class ModuleItem < YamlBase
       'Finish test'
     elsif next_item.summative_questionnaire? && !summative_questionnaire?
       'Start test'
+    elsif next_item.certificate?
+      'Finish'
     else
       'Next'
     end

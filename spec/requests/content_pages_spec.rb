@@ -56,7 +56,8 @@ RSpec.describe 'ContentPages', type: :request do
 
       it 'does not have the users name' do
         get training_module_content_page_path(:alpha, '1-3-4')
-        expect(response.body).not_to include('John Doe')
+        expect(response.body).not_to include(user.first_name)
+        expect(response.body).not_to include(user.last_name)
       end
     end
 
