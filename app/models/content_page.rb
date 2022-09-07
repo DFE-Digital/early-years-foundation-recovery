@@ -12,20 +12,12 @@ class ContentPage
 
   # @return [String]
   def heading
-    if static_page?
-      I18n.t("#{type}.heading")
-    else
-      translate(:heading) || name
-    end
+    translate(:heading)
   end
 
   # @return [String]
   def body
-    if static_page?
-      static_body
-    else
-      translate(:body)
-    end
+    translate(:body)
   end
 
   # @return [String]
@@ -44,24 +36,7 @@ class ContentPage
     module_item.parent.formative?
   end
 
-  # @return [Boolean]
   def summative?
     module_item.parent.summative?
-  end
-
-private
-
-  # @return [Boolean]
-  def static_page?
-    module_item.confidence_intro? || module_item.assessment_intro? || module_item.ending_intro?
-  end
-
-  # @return [String]
-  def static_body
-    I18n.t(
-      "#{type}.body",
-      passmark: module_item.parent.summative_threshold,
-      feedback_url: I18n.t("modules.#{training_module}.#{module_item.name}.url"),
-    )
   end
 end

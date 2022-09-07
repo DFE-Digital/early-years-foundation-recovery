@@ -202,6 +202,6 @@ personal-social-and-emotional-development:
     type: confidence_questionnaire
   
   3-4-3-7:
-    type: ending_intro
+    type: sub_module_intro
   3-4-4:
     type: certificate
