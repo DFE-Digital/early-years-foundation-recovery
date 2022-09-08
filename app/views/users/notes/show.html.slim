@@ -1,0 +1,11 @@
+h1 Your learning log
+p View your notes from all modules here. You can also use the links provided to revisit a specific topic.
+
+= govuk_tabs(title: "Your learning log") do |c|
+  - @training_modules.each do |tm|
+    - c.tab(label: "Module #{tm.id}") do 
+      = govuk_heading("Notes for " + tm.title)
+      = render(@user.notes.where(training_module: tm.name)) || "You have not made any notes for this module."
+
+span.noprint
+  = print_button

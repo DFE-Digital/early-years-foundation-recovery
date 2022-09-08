@@ -1,0 +1,36 @@
+= render 'debug'
+
+= page_number(**@model.pagination)
+
+h1= @model.heading
+.gem-c-govspeak= translate_markdown(@model.body)
+
+.govuk-inset-text.prompt
+  =govuk_heading('Practitioner prompt')
+  =translate_markdown(@model.prompt)
+
+= form_with(model: note, url: '/user/notes') do |form|
+  .form-container class='govuk-!-margin-bottom-4'
+    =govuk_heading("Activity")
+
+    = form.govuk_error_summary
+    = form.govuk_fieldset legend: { text: "Consider the practitioner prompt on this page." }
+      = form.govuk_text_area :body,
+        label: { text: "Use this space to reflect on your chosen activity." },
+        hint: {text: 'Your responses will not be marked. You do not need to complete this activity to receive your certificate of achievement.'},
+        value: note.body,
+        class: 'govuk-textarea',
+        rows: 5
+    = form.hidden_field :module_item_id, value: @module_item.id
+    = form.hidden_field :id, value: note.id
+    = form.hidden_field :title, value: note.title || @module_item.model.heading || @module_item.name
+    = form.hidden_field :training_module, value: note.training_module || @module_item.training_module
+    = form.hidden_field :name, value: note.name || @module_item.name
+    p.govuk-body You can view all of your responses in your #{govuk_link_to "learning log", user_notes_path}.
+  hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
+
+  .govuk-grid-row
+    .govuk-grid-column-one-half
+      = link_to_previous_module_item(@module_item)
+    .govuk-grid-column-one-half class='govuk-!-text-align-right'
+      = form.submit "Save and continue", class: 'govuk-button'

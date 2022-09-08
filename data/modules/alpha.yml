@@ -33,7 +33,7 @@ alpha:
   1-1-3:
     type: text_page # submodule 1 / topic 3  / topic intro
   1-1-3-1:
-    type: text_page # submodule 1 / topic 3  / topic content
+    type: prompt_page # submodule 1 / topic 3  / topic content / with prompt
   1-1-4:
     type: formative_questionnaire # 5th page in submodule
 
@@ -51,6 +51,8 @@ alpha:
     type: youtube_page
   1-2-1-3:
     type: formative_questionnaire
+  1-2-1-4:
+    type: prompt_page
 
   # ----------------------------------------------------------------------------
   # Module Summary
@@ -60,6 +62,8 @@ alpha:
     type: sub_module_intro
   1-3-1:
     type: sub_module_intro
+  1-3-1-1:
+    type: prompt_page
 
   # ----------------------------------------------------------------------------
   # summative assessment

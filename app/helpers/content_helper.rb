@@ -24,10 +24,10 @@ module ContentHelper
   end
 
   # @return [String]
-  def govuk_heading(text, tag: :h1)
+  def govuk_heading(text, tag: :h1, size: 'm')
     return if text.blank?
 
-    content_tag(tag, class: 'govuk-heading-m') { text }
+    content_tag(tag, class: "govuk-heading-#{size}") { text }
   end
 
   # @return [String]

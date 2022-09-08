@@ -26,6 +26,7 @@ class ModuleItem < YamlBase
     sub_module_intro: ContentPage,
     text_page: ContentPage,
     certificate: CertificatePage,
+    prompt_page: ContentPage::PromptPage,
 
     youtube_page: YoutubePage,
 

@@ -145,8 +145,17 @@ en:
         heading: 1-1-3
         body: third topic, first page
       1-1-3-1:
-        heading: 1-1-3-1
-        body: third topic, second page
+        heading: 1-1-3-1 Heading
+        body: |
+          This is the first learning page with a practitioner prompt
+        prompt: |
+          Think of something you want to right about in your learning log
+          
+          How did it support?
+
+          How many benefits?
+
+          Could you improve?
 
       # Topic with only a question needs a heading
       1-1-4:

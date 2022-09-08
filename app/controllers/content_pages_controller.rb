@@ -1,7 +1,7 @@
 class ContentPagesController < ApplicationController
   before_action :authenticate_registered_user!
   before_action :clear_flash
-  helper_method :module_item, :training_module
+  helper_method :module_item, :training_module, :note
 
   def index
     first_module_item = ModuleItem.find_by(training_module: training_module_name)
@@ -23,6 +23,10 @@ class ContentPagesController < ApplicationController
   end
 
 private
+
+  def note
+    @note ||= current_user.notes.where(training_module: training_module_name, name: params[:id]).first || User::Note.new
+  end
 
   def module_item
     @module_item ||= ModuleItem.find_by!(training_module: training_module_name, name: module_params[:id])

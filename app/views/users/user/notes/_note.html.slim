@@ -1,0 +1,11 @@
+= govuk_heading(note.logged_at, tag: :h3, size: 's')
+
+p
+  <strong>Page:</strong>
+  =< govuk_link_to(note.title, training_module_content_page_path(note.training_module, note.name))
+
+.log-entry
+  = govuk_heading("You wrote:", tag: :h4, size: "s")
+
+  p.govuk_body
+  = translate_markdown(note.body)

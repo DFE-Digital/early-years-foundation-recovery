@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root 'home#index'
   get 'health', to: 'home#show'
+  # TODO: retire my-learning alias?
   get 'my-learning', to: 'learning#show'
+  get 'my-modules', to: 'learning#show'
   get 'about-training', to: 'training_modules#index', as: :course_overview
 
   get '/404', to: 'errors#not_found', via: :all
@@ -12,6 +14,10 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { sessions: 'users/sessions', confirmations: 'confirmations', passwords: 'passwords', registrations: 'registrations' }, path_names: { sign_in: 'sign-in', sign_out: 'sign-out', sign_up: 'sign-up' }
   resources :extra_registrations, only: %i[index edit update], path: 'extra-registrations'
+
+  resource :user do
+    resource :notes, controller: 'users/notes' 
+  end
 
   resource :user, controller: :user, path: 'my-account', only: %i[show] do
     get 'edit-name'
