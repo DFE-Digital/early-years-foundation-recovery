@@ -294,23 +294,6 @@ module-4:
           4: Limited use of PECS
         correct_answers:
           - 2
-  4-2-3-1b:
-    questions:
-      1_pandemic_positive:
-        multi_select: false
-        label: |
-          Which of the following can be a positive outcome of the pandemic lockdowns? (Select one answer)
-        assessment_summary:  |
-          Children with older siblings may have had access to resources designed for older children. They may also have experienced and rehearsed a more advanced vocabulary.
-        assessment_fail_summary: |
-          Children with older siblings may have had access to resources designed for older children. They may also have experienced and rehearsed a more advanced vocabulary.
-        answers:
-          1: Limited outdoor space
-          2: Having access to resources belonging to older siblings
-          3: Limited interaction
-          4: Increased screen time
-        correct_answers:
-          - 2
 
 # ---------------
 
