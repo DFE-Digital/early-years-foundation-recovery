@@ -98,8 +98,6 @@ class Questionnaire < OpenStruct
   def next_button_text
     if summative?
       final_question? ? 'Finish test' : 'Save and continue'
-    elsif certificate?
-      'Finish'
     else
       'Next'
     end
