@@ -128,7 +128,7 @@ class TrainingModule < YamlBase
   end
 
   def tab_label
-    ['Module', id].join(" ")
+    ['Module', id].join(' ')
   end
 
   def tab_anchor

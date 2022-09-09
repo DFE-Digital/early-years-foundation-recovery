@@ -1,13 +1,12 @@
 class Users::NotesController < ApplicationController
   helper_method :note
 
-  def show 
+  def show
     @user = current_user
     @training_modules = TrainingModule.all
   end
 
-
-  def create 
+  def create
     note = User::Note.new(note_params)
     @model = module_item.model
 
@@ -31,7 +30,7 @@ class Users::NotesController < ApplicationController
     end
   end
 
-  private
+private
 
   def existing_note
     current_user.notes.where(training_module: training_module_name, name: note_name).first

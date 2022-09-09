@@ -3,5 +3,4 @@ class ContentPage::PromptPage < ContentPage
   def prompt
     translate(:prompt)
   end
-
 end
