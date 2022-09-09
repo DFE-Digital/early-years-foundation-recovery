@@ -1,6 +1,7 @@
 class User::Note < ApplicationRecord
   belongs_to :user
 
+  encrypts :body
   validates :body, length: { maximum: 20000 }
 
   def logged_at 
