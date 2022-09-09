@@ -6,6 +6,12 @@
 @import "./prompt";
 @import "./quote";
 
+pre.code-tip {
+  padding: 0 5px;
+  color: #d4351c;
+  background-color: govuk-colour("light-grey");
+}
+
 .debug_dump {
   background: beige;
 }
@@ -21,26 +27,6 @@
 
 .govuk-label {
   font-weight: normal;
-}
-
-.govuk-notification-banner__content {
-  p {
-    margin: 0;
-  }
-
-  & > * {
-    max-width: none;
-  }
-}
-
-.govuk-notification-banner--error {
-  border-color: $govuk-error-colour;
-  background-color: $govuk-error-colour;
-}
-
-.govuk-notification-banner--error, .govuk-notification-banner--alert {
-  border-color: $govuk-error-colour;
-  background-color: $govuk-error-colour;
 }
 
 .light-grey-box {

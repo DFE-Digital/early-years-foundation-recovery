@@ -1,0 +1,15 @@
+.govuk-notification-banner__content {
+  & > * {
+    max-width: none;
+  }
+}
+
+.govuk-notification-banner--error {
+  border-color: $govuk-error-colour;
+  background-color: $govuk-error-colour;
+}
+
+.govuk-notification-banner--error, .govuk-notification-banner--alert {
+  border-color: $govuk-error-colour;
+  background-color: $govuk-error-colour;
+}

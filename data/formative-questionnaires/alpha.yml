@@ -6,9 +6,11 @@ alpha:
         multi_select: false
         body: |
           Question One - Select from following
-        label:
-        assessment_summary: You selected the correct answer
-        assessment_fail_summary: You did not select the correct answers
+        # label:
+        assessment_summary: |
+          You selected the correct answers
+        assessment_fail_summary: |
+          You did not select the correct answers
         answers:
           1: Correct answer 1
           2: Wrong answer 1
@@ -21,9 +23,11 @@ alpha:
         multi_select: true
         body: |
           Question Two - Select from following
-        assessment_summary: You selected the correct answers
-        label:
-        assessment_fail_summary: You did not select the correct answers
+        # label:
+        assessment_summary: |
+          You selected the correct answers
+        assessment_fail_summary: |
+          You did not select the correct answers
         answers:
           1: Correct answer 1
           2: Wrong answer
@@ -38,8 +42,13 @@ alpha:
         multi_select: true
         body: |
           Question Three - Select from following
-        assessment_summary: You selected the correct answers
-        assessment_fail_summary: You did not select the correct answers
+        # label:
+        assessment_summary: |
+          You selected the correct answers
+
+          Well done!
+        assessment_fail_summary: |
+          You did not select the correct answers
         answers:
           1: Correct answer 1
           2: Wrong answer 1

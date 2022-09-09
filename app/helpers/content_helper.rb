@@ -3,9 +3,7 @@ module ContentHelper
   # @param markdown [String]
   # @return [String]
   def translate_markdown(markdown)
-    return if markdown.blank?
-
-    raw GovspeakDecorator.translate_markdown(markdown)
+    raw Govspeak::Document.to_html(markdown, sanitize: false)
   end
 
   # Date format guidelines: "1 June 2002"
