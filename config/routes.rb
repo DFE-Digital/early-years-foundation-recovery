@@ -15,10 +15,6 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'users/sessions', confirmations: 'confirmations', passwords: 'passwords', registrations: 'registrations' }, path_names: { sign_in: 'sign-in', sign_out: 'sign-out', sign_up: 'sign-up' }
   resources :extra_registrations, only: %i[index edit update], path: 'extra-registrations'
 
-  resource :user do
-    resource :notes, controller: 'users/notes' 
-  end
-
   resource :user, controller: :user, path: 'my-account', only: %i[show] do
     get 'edit-name'
     get 'edit-email'
@@ -34,6 +30,7 @@ Rails.application.routes.draw do
     patch 'update-setting-type'
     get 'check-email-confirmation'
     get 'check-email-password-reset'
+    resource :notes, controller: 'users/notes', path: 'learning-log'
   end
 
   resources :modules, only: %i[show], as: :training_modules, controller: :training_modules do

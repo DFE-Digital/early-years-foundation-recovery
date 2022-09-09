@@ -34,16 +34,17 @@ RSpec.describe ModuleOverviewDecorator do
           intro
           1-1
           1-1-1
+          1-1-1-1
           1-1-2
           1-1-2-1a
-          1-1-2
+          1-1-2-2
         ].map do |page|
           view_module_page_event('bravo', page)
         end
 
-        expect(user.events.count).to be 7
+        expect(user.events.count).to be 8
         expect(output[:state]).to be :started
-        expect(output[:page]).to eql '1-1-2-1a'
+        expect(output[:page]).to eql '1-1-2-2'
       end
     end
 
@@ -51,7 +52,7 @@ RSpec.describe ModuleOverviewDecorator do
       it 'retakes the assessment' do
         bravo.module_items.map { |i| view_module_page_event('bravo', i.name) }
 
-        expect(user.events.count).to be 13
+        expect(user.events.count).to be 16
         expect(output[:state]).to be :completed
         expect(output[:page]).to eql '1-2-3'
       end

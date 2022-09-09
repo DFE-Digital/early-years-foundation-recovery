@@ -126,4 +126,12 @@ class TrainingModule < YamlBase
   def last_page
     assessment_results_page || module_items.last
   end
+
+  def tab_label
+    ['Module', id].join(" ")
+  end
+
+  def tab_anchor
+    tab_label.parameterize
+  end
 end
