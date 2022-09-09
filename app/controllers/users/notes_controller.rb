@@ -53,7 +53,7 @@ private
   end
 
   def note_params
-    permitted_params.permit(:title, :body, :training_module, :name).merge(user: current_user)
+    permitted_params.permit(:title, :body, :training_module, :name).with_defaults(user: current_user)
   end
 
   def training_module_name
