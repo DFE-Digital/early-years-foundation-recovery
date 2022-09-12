@@ -1,0 +1,40 @@
+= render 'debug'
+
+- content_for :content_page do
+  = page_number(**@model.pagination)
+
+  h1= @model.heading
+
+  .gem-c-govspeak= translate_markdown(@model.body)
+
+  - if @model.video_provider == 'vimeo'
+    = render partial: 'vimeo_video'
+  - else render partial: 'youtube_video'
+
+= render 'content_wrap_full_width'
+
+
+
+/ video page
+/ = render 'debug'
+
+/ - content_for :content_page do
+/   = page_number(**@model.pagination)
+
+/   h1= @model.heading
+/   = render partial: 'video_and_transcript'
+
+/ = render 'content_wrap_full_width'
+
+
+/ old stuff video and transcript
+/ .govspeak-embed-container style="background-color: #f3f2f1;padding:30px;position:relative;" 
+/   .gem-c-govspeak= translate_markdown(@model.body)
+  
+/   details.govuk-details class="govuk-!-margin-top-6" data-module="govuk-details"
+/     summary.govuk-details__summary
+/       span.govuk-details__summary-text
+/         | Transcript
+/     .govuk-details__text style=("background-color:white; border-left:none !important;")
+/       h2.gov-uk-heading-m class="govuk-!-margin-top-2" Transcript
+/       .gem-c-govspeak= translate_markdown(@model.transcript)
