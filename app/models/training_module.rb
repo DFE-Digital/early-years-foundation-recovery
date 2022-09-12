@@ -66,7 +66,7 @@ class TrainingModule < YamlBase
     }.except(nil)
   end
 
-  # @param type [String] text_page, youtube_page...
+  # @param type [String] text_page, video_page...
   # @return [Array<ModuleItem>]
   def module_items_by_type(type)
     ModuleItem.where_type(name, type)
