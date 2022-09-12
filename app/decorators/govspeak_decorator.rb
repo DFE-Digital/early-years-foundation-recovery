@@ -6,11 +6,24 @@ class GovspeakDecorator < DelegateClass(Govspeak::Document)
     newdoc.to_html
   end
 
-  Govspeak::Document.extension('YoutubeVideo', /\$YoutubeVideo(?:\[(.*?)\])?\((.*?)\)\$EndYoutubeVideo/m) do |title, youtube_link|
-    youtube_id = youtube_link.scan(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/)[0][1]
+  Govspeak::Document.extension('YoutubeVideo', /\$YoutubeVideo(?:\[(.*?)\])?\((.*?)\)\$EndYoutubeVideo/m) do |title, youtube_id|
     embed_url = %(https://www.youtube.com/embed/#{youtube_id}?enablejsapi=1&amp;origin=#{ENV['DOMAIN']})
     optional_title = title ? %(title="#{title}") : ''
-    %(<div class="govspeak-embed-container"><iframe class="govspeak-embed-video" src="#{embed_url}" #{optional_title} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>)
+    %(<h1 class="govuk-heading-l govuk-!-margin-top-2"> Video: #{title} </h1><div class="govspeak-embed-container" style="padding:56.19% 0 0 0;position:relative;"><iframe class="govspeak-embed-video" style="position:absolute;top:0;left:0;width:100%;height:100%;" src="#{embed_url}" #{optional_title} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>)
+  end
+
+
+  Govspeak::Document.extension('VimeoVideo', /\$VimeoVideo(?:\[(.*?)\])?\((.*?)\)\$EndVimeoVideo/m) do |title, vimeo_id|
+    embed_url = %(https://player.vimeo.com/video/#{vimeo_id}?enablejsapi=1&amp;origin=#{ENV['DOMAIN']})
+    optional_title = title ? %(title="#{title}") : ''
+    %(<h1 class="govuk-heading-l govuk-!-margin-top-2"> Video: #{title} </h1><div class="govspeak-embed-container" style="padding:56.19% 0 0 0;position:relative;"><iframe class="govspeak-embed-video" style="position:absolute;top:0;left:0;width:100%;height:100%;" src="#{embed_url}" #{optional_title} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>)
+  end
+
+  Govspeak::Document.extension('VideoTranscript', /\$VideoTranscript(?:\[(.*?)\])?\((.*?)\)\$EndVideoTranscript/m) do |title, video_transcript_id|
+    transcript_file = Rails.root.join(%(data/video-transcripts/#{video_transcript_id}.yml))
+    optional_title = title ? %(title="#{title}") : ''
+    transcript_hash = YAML.load_file(transcript_file)
+    # TODO: define hasharray_to_html(transcript_hash) ?
   end
 
   # TODO: Determine why commenting this method out has no affect on the specs
