@@ -4,8 +4,8 @@ p View your notes from all modules here. You can also use the links provided to 
 = govuk_tabs(title: "Your learning log") do |c|
   - @training_modules.each do |tm|
     - c.tab(label: tm.tab_label) do 
-      = govuk_heading("Notes for " + tm.title)
+      = govuk_heading("Notes for #{tm.tab_label}: " + tm.title, tag: :h2)
       = render(@user.notes.where(training_module: tm.name)) || "You have not made any notes for this module."
-
-span.noprint
-  = print_button
+      span.noprint
+        hr
+        = print_button
