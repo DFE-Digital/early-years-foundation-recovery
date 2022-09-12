@@ -9,5 +9,4 @@
         | Transcript
     .govuk-details__text style=("background-color:white; border-left:none !important;")
       h2.gov-uk-heading-m class="govuk-!-margin-top-2" Transcript
-      / = @model.transcript
-      / .gem-c-govspeak= translate_markdown(@model.transcript)
+      = @model.transcript
