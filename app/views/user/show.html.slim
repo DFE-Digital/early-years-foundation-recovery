@@ -1,5 +1,3 @@
-= render 'debug'
-
 .govuk-grid-row
   .govuk-grid-column-full
     h1.govuk-heading-l Manage your account
@@ -39,3 +37,5 @@
         - else
           - row.value { @user.setting_type.capitalize }
         - row.action(text: t('links.change'), href: edit_setting_type_user_path, visually_hidden_text: 'setting_type')
+
+= render 'debug'

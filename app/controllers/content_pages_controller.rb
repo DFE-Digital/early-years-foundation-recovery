@@ -1,6 +1,7 @@
 class ContentPagesController < ApplicationController
   before_action :authenticate_registered_user!
   before_action :clear_flash
+  helper_method :module_item, :training_module
 
   def index
     first_module_item = ModuleItem.find_by(training_module: training_module_name)
@@ -9,7 +10,7 @@ class ContentPagesController < ApplicationController
 
   def show
     track('module_content_page')
-
+    @module_progress = ModuleOverviewDecorator.new(helpers.module_progress(module_item.parent))
     @model = module_item.model
 
     if @model.is_a?(Questionnaire)
@@ -24,11 +25,15 @@ class ContentPagesController < ApplicationController
 private
 
   def module_item
-    @module_item ||= ModuleItem.find_by!(training_module: training_module_name, name: params[:id])
+    @module_item ||= ModuleItem.find_by!(training_module: training_module_name, name: module_params[:id])
+  end
+
+  def training_module
+    module_item.parent
   end
 
   def training_module_name
-    @training_module_name ||= params[:training_module_id]
+    @training_module_name ||= module_params[:training_module_id]
   end
 
   def content_page_partial(module_item)
@@ -37,5 +42,9 @@ private
     else
       module_item.type
     end
+  end
+
+  def module_params
+    params.permit(:training_module_id, :id)
   end
 end

@@ -15,14 +15,12 @@ en:
           - consider effective delivery of the early years foundation stage (EYFS)
           - describe the impact that the coronavirus (COVID-19) pandemic has had on children's development
 
-
-
-
-          $I
-          "No job is more important than working with children in the early years"
-
-          Development Matters, 2021
-          $I
+          <div class='blockquote-container'>
+            <blockquote class='quote'>
+              <p>No job is more important than working with children in the early years</p>
+              <cite>Development Matters, 2021</cite>
+            </blockquote>
+          </div>
           
           You are supporting children to learn during the most crucial stage of their development. The choices you make and the curriculum you offer are vital to ensuring that all children have the opportunity to reach their full potential.
 
@@ -36,7 +34,7 @@ en:
           - external factors, including the coronavirus (COVID-19) pandemic, impact on child development
           - effective practice and use of the EYFS framework will support successful development
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">As you travel through the course you will see practitioners prompts.</p>
@@ -173,14 +171,14 @@ en:
           
           Cognitive skills are the mental processes involved in learning and understanding things. If you understand how children learn concepts and skills, this will help you to support the children in your care to gain new knowledge.
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">Do you know what strategies your setting has in place for early intervention?</p>
             <p class="govuk-body">What early assessment is carried out?</p>
             <p class="govuk-body">What strategies are put in place as a result?</p>
           </div>
-    
+
       1-1-1-3:
         heading: How understanding child development benefits the wider support network
         body: |   
@@ -218,7 +216,7 @@ en:
           
           Greater awareness of child development, improved resource creation and shared workload will result in a broad range of opportunities.
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">Make a list of all the ways that you work in partnership with the children’s parents and carers.</p>
@@ -259,7 +257,7 @@ en:
 
           Your knowledge of child development will help you to create and implement an effective curriculum. This reduces the gaps in learning and so removes the need for additional support.
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">Do you have a child or children who are disengaged or disruptive? </p>
@@ -304,7 +302,7 @@ en:
 
           Offering these temporary levels of successive support ensures that children develop the confidence and self belief needed to become secure in their knowledge and skills before becoming ready to attempt the next challenge.
           
-           <div class="govuk-inset-text">
+           <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">Can you think of a child in your care who is struggling with a particular skill or knowledge and understanding? </p>
@@ -382,7 +380,7 @@ en:
           
           Holistic learning ensures that the physical , emotional and psychological needs of a child are considered.
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">Think about an activity you carry out with the children in your care. </p>
@@ -602,7 +600,7 @@ en:
           
           Your knowledge of children’s language and communication development will help you provide an environment that contains experiences, resources and activities that can challenge every child.
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">When was the last time you were able to evaluate your environment and curriculum? </p>
@@ -638,7 +636,7 @@ en:
 
           Promoting positive handling and use of resources, such as books, and including them in the daily routine will help children to understand their importance and encourage further independent exploration.
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">A child’s day is full of opportunities to develop their vocabulary and test their communication skills. Thinking about your recent practice, let’s consider the following. </p>
@@ -668,11 +666,14 @@ en:
         body: |      
           To support children to reach their potential you will need to have high expectations for each and every child in your care. You will recognise that every child deserves to have an equal chance at success.
 
-          $I
-          “Children who may struggle in their early learning are not ‘low ability’. We do not know what their potential might be. Every child can make progress with the right support.”
-
-          Development Matters, 2021
-          $I
+          <div class='blockquote-container'>
+            <blockquote class='quote'>
+              <p>Children who may struggle in their early learning are not
+              ‘low ability’. We do not know what their potential might be. Every
+              child can make progress with the right support.</p>
+              <cite>Development Matters, 2021</cite>
+            </blockquote>
+          </div>
 
           Whilst it is essential that we acknowledge impacting factors such as difficult life experiences, an identified SEND or being from a disadvantaged background, these factors should not be seen as barriers to success but as an opportunity to offer tailored support.
 
@@ -699,7 +700,7 @@ en:
 
           Recognising and acknowledging a child’s individual strengths will be powerful in supporting children to develop confidence, resilience and self-efficacy and will impact on how they approach their learning and development.
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">How do you recognise a child's individual strengths? </p>
@@ -755,12 +756,16 @@ en:
         heading: Supporting individual potential
         body: |  
           ![A young child has stacked some tubs on top of each other. She is smiling and happy with what she's done.](/assets/1-2-1-3-1290051621.jpg)             
-          
-          $I
-          “Practitioners must consider the individual needs, interests, and development of each child in their care, and must use this information to plan a challenging and enjoyable experience for each child in all areas of learning and development”
 
-          Early years foundation stage framework, 2021
-          $I
+          <div class='blockquote-container'>
+            <blockquote class='quote'>
+              <p>Practitioners must consider the individual needs, interests, and
+              development of each child in their care, and must use this information
+              to plan a challenging and enjoyable experience for each child in all
+              areas of learning and development</p>
+              <cite>Early years foundation stage framework, 2021</cite>
+            </blockquote>
+          </div>
 
           To successfully empower and support children to progress you will need to start from the foundation of what children know and can do already.
 
@@ -768,7 +773,7 @@ en:
 
           You should find out about the child’s home life, previous experiences, preferences and interests. You should then decide how the care you provide and the learning environment offered by the setting can compliment this.
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">Let's think about how you support children's development in your setting. </p>
@@ -849,7 +854,7 @@ en:
           - use of activities to encourage social skills and friendships including shared reading and role play puppets
           - building self esteem through praise and reward
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">What activities take place outside? </p>
@@ -868,11 +873,15 @@ en:
           
           There are extensive benefits associated with both child led and adult led activity in an early years setting. The key is to use your professional judgement and child development knowledge to strike the correct balance to ensure the benefits are maximised for each child.
 
-          $I
-          “Children need opportunities to develop their own play and independent exploration. This is enjoyable and motivating. They also need adults to ‘scaffold’ their learning by giving them just enough help to achieve something they could not do independently.”
-
-          Development Matters, 2021
-          $I
+          <div class='blockquote-container'>
+            <blockquote class='quote'>
+              <p>Children need opportunities to develop their own play and independent
+              exploration. This is enjoyable and motivating. They also need adults
+              to ‘scaffold’ their learning by giving them just enough help to achieve
+              something they could not do independently.</p>
+              <cite>Development Matters, 2021</cite>
+            </blockquote>
+          </div>
 
           There are many benefits to child led play.
 
@@ -910,7 +919,7 @@ en:
 
           Limited adult led activity and formative assessment opportunities will also cause delays in identifying and supporting these gaps.
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
             <p class="govuk-body">What is the current balance of child led and adult led in your setting? </p>
             <p class="govuk-body">Are resources accessible to children for independent choice?  </p>
@@ -953,7 +962,7 @@ en:
 
           Your professional judgment, knowledge of individual children and understanding of children’s development will support you to ensure that the choices you make within your environment will promote success for all children.
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">Look at your planning for the day or environment and use different coloured pens to identify opportunities for child led and adult opportunities. </p>
@@ -1011,7 +1020,7 @@ en:
 
           We know that all children will potentially face a range of environmental and biological influences that will need to be considered when meeting their learning and development needs. It is crucial that we identify SEND early to prevent gaps in learning opening or widening further. Research shows us that children from disadvantaged areas will typically be approximately 4 months behind peers when they start their reception year.
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">Let’s think about the practice in your setting. </p>
@@ -1057,7 +1066,7 @@ en:
 
           While the 2 year check will be a written summary of the child’s progress in the 3 prime areas of the EYFS, you can use your knowledge to give parents and carers a more detailed understanding of their child’s progress.
 
-          <div class="govuk-inset-text">
+          <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">How do you use the observation checkpoints from Development Matters to support your practice? </p>
