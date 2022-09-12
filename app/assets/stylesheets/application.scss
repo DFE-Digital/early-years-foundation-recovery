@@ -71,3 +71,15 @@
 ul > li > ul > li {
   list-style-type: circle;
 }
+
+.remove-header th {
+  display: none;
+}
+
+.remove-borders td {
+  border: none;
+}
+
+.first-column-bold td:first-child {
+  font-weight: bold;
+}
