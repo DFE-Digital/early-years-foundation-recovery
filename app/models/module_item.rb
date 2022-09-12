@@ -30,7 +30,7 @@ class ModuleItem < YamlBase
     text_page: ContentPage,
     certificate: CertificatePage,
 
-    youtube_page: YoutubePage,
+    video_page: VideoPage,
 
     confidence_questionnaire: Questionnaire,
     formative_questionnaire: Questionnaire,
@@ -122,7 +122,7 @@ class ModuleItem < YamlBase
     end
   end
 
-  # @return [ContentPage, YoutubePage, Questionnaire]
+  # @return [ContentPage, VideoPage, Questionnaire]
   def model
     klass = MODELS[type.to_sym]
     if klass == Questionnaire
