@@ -145,18 +145,38 @@ en:
         heading: 1-1-3
         body: third topic, first page
       1-1-3-1:
-        heading: 1-1-3-1 Heading
+        heading: Relationships (Example from Module 2)
         body: |
-          This is the first learning page with a practitioner prompt
+          ![A young child and a practitioner playing together with brightly coloured building blocks](/assets/2-1-3-1a-636672368.jpg)
+
+          Babies and young children need to experience positive, reassuring and dependable relationships to support their brain development. This begins with parents and carers, but as an early years practitioner you also have a significant role. Children will need to be supported to understand what appropriate relationships look like and to understand the boundaries of acceptable behaviour. This will ensure that all children are protected from pursuing the wrong relationships that could put them at risk.
+
+          You can support their understanding through the use of appropriate activities such as:
+
+          - shared stories
+          - adult led discussion
+          - robust role modelling
+
+          Babies will begin to attempt to communicate from the very beginning. At first they communicate by crying and babbling, before moving onto more developed language skills. When others respond to these attempts at communication, these positive interactions encourage babies and young children to practise their communication skills further. As they do so, their related neurones develop further.
+
+          When a child has built a trusting relationship with an adult, they feel less stressed and more relaxed. Relaxed children are more open to exploring and learning.
+
+          Consistency within a relationship will further promote development. Children are more likely to become fully engaged in the environment and the experiences on offer if they have consistent:
+
+          - responses to their behaviour
+          - boundaries
+          - expectations
+
+          Children who experience positive relationships in early life are more likely to go on to build and maintain positive relationships in the future.
+
+          Children need opportunities to explore their understanding of these relationships. Spontaneous play and role play provide excellent opportunities for children to experiment with behaviour they have observed or experienced. This gives the space to navigate their associated feelings and thoughts, and to express themselves freely without concern of judgment or expectation. Observing such play is a great opportunity to understand a child’s development.
+
         prompt: |
-          Think of something you want to right about in your learning log
-          
-          How did it support?
+          Do you have easily accessible role play and spontaneous play opportunities?
 
-          How many benefits?
+          Do children have opportunities within the day to communicate with other children and staff members?
 
-          Could you improve?
-
+          How does your setting ensure children receive consistent care across all staff members?
       # Topic with only a question needs a heading
       1-1-4:
         heading: 1-1-4
