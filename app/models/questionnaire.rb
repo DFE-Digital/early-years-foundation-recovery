@@ -43,7 +43,7 @@ class Questionnaire < OpenStruct
 
   # @return [String] plain text content
   def heading
-    translate(:heading)
+    translate(:heading) || name
   end
 
   # @return [String] unparsed govspeak content
