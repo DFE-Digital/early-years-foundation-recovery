@@ -52,23 +52,11 @@ class VideoPage
 
     transcript_table = Builder::XmlMarkup.new(:indent => 2)
     transcript_table.table(class:"govuk-table") {
-      transcript_table.tbody(class:"govuk-table__body first-column-bold remove-header")
-      transcript_table.tr(class:"govuk-table__row") { transcript_data[0].keys.each { |key| transcript_table.th(key)}}
+      transcript_table.tbody(class:"govuk-table__body first-column-bold")
+      transcript_table.tr(class:"govuk-table__row") { transcript_data[0].keys.each { |key| transcript_table.th(key, class:"hide-header")}}
       transcript_data.each { |row| transcript_table.tr(class:"govuk-table__row") { row.values.each { |value| transcript_table.td(value, class:"govuk-table__cell remove-borders")}}}
     }
     return transcript_table
-    # transcript_array = transcript_data.map { |hash| hash.to_a}
-    # transcript_array = transcript_data.flat_map(&:values)
-    # array = transcript_hash.to_a
-    # puts "12!@@$@$@$@£$$@$@"
-    # puts array
-    # transcript_array = transcript_hash.flat_map(&:values)
-    # puts "@£$%$£@£$%^^%$£@£$%^"
-    # puts transcript_array
-
-    # transcript_array = transcript_hash.map { |key, value| value }
-    # binding.pry
-    # TODO: iterate and convert to html table
   end
 
   # @return [ModuleItem]
