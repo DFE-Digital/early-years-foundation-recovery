@@ -4,8 +4,8 @@
 #   - sub_module_intro
 #   - text_page
 #
-# YoutubePage
-#   - youtube_page
+# VideoPage
+#   - video_page
 #
 # formative_assessment
 #   - Questionnaire
@@ -48,7 +48,7 @@ alpha:
   1-2-1-1:
     type: formative_questionnaire
   1-2-1-2:
-    type: youtube_page
+    type: video_page
   1-2-1-3:
     type: formative_questionnaire
 

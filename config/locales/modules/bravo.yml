@@ -16,7 +16,7 @@ en:
         heading: text_page
         body: page 1 of sub 1 (topic 1)
       1-1-2:
-        heading: youtube_page
+        heading: video_page
         body: page 2 of sub 1 (topic 2)
       1-1-2-1:
         heading: text_page
@@ -29,7 +29,7 @@ en:
         heading: text_page
         body: page 1 of sub 2 (topic 1)
       1-2-2:
-        heading: youtube_page
+        heading: video_page
         body: page 2 of sub 2 (topic 2)
       1-2-2-1:
         heading: text_page
