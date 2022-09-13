@@ -15,6 +15,8 @@ en:
 
           %Warning: people like stuff!%
 
+          $VimeoVideo[Video Title Example](362469157)$EndVimeoVideo
+
           <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
@@ -164,7 +166,7 @@ en:
         body: |
           %Warning: Govspeak test%
       1-2-1-2:
-        heading: 1-2-1-2
+        heading: Video Page
         body: |
           In this video an early years expert explains the importance of the diverse world
           in the early years foundation stage framework. There are also some tips on how to
