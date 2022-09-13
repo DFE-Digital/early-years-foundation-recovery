@@ -29,7 +29,7 @@ staging:
 # ey-recovery-content
 content:
   <<: *defaults
-  # TRAINING_MODULES: demo-modules
+  TRAINING_MODULES: demo-modules
   TIMEOUT_MINUTES: 60
   # @see workflow
   # DOMAIN: xxx.london.cloudapps.digital
