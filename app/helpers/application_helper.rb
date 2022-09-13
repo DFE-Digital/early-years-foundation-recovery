@@ -51,4 +51,16 @@ module ApplicationHelper
   def calculate_module_state
     CalculateModuleState.new(user: current_user).call
   end
+
+  # @return [String]
+  def html_title(module_item)
+    site_title = 'Child development training'
+    module_title = module_item&.parent&.title
+    title = t(params.permit('controller', 'action', 'id').values.join('.'), scope: 'html_title', default: module_item&.model&.heading)
+    [
+      site_title,
+      module_title,
+      title,
+    ].compact.join(' : ')
+  end
 end

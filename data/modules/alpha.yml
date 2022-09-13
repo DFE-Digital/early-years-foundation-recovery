@@ -92,3 +92,5 @@ alpha:
     type: confidence_questionnaire
   1-3-3-4:
     type: sub_module_intro
+  1-3-4:
+    type: certificate
