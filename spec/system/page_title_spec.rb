@@ -69,7 +69,7 @@ RSpec.describe 'Page' do
       it { expect(training_module_content_page_path(training_module_id: training_module_id, id: '1-1-1')).to have_page_title 'First Training Module : 1-1-1' }
       it { expect(training_module_content_page_path(training_module_id: training_module_id, id: '1-1-2')).to have_page_title 'First Training Module : 1-1-2' }
       it { expect(training_module_content_page_path(training_module_id: training_module_id, id: '1-1-3')).to have_page_title 'First Training Module : 1-1-3' }
-      it { expect(training_module_content_page_path(training_module_id: training_module_id, id: '1-1-3-1')).to have_page_title 'First Training Module : 1-1-3-1 Heading' }
+      it { expect(training_module_content_page_path(training_module_id: training_module_id, id: '1-1-3-1')).to have_page_title 'First Training Module : Relationships (Example from Module 2)' }
       it { expect(training_module_questionnaire_path(training_module_id: training_module_id, id: '1-1-4')).to have_page_title 'First Training Module : 1-1-4' }
       it { expect(training_module_content_page_path(training_module_id: training_module_id, id: '1-2')).to have_page_title 'First Training Module : The second submodule' }
       it { expect(training_module_content_page_path(training_module_id: training_module_id, id: '1-2-1')).to have_page_title 'First Training Module : 1-2-1' }
