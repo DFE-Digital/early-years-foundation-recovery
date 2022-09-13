@@ -176,6 +176,9 @@ en:
       - reinforce effective teaching and learning
       - help you to think about what you have learned
 
+  prompt:
+    tip: This is a custom TIP prompt!
+    foo: This is foo is da bomb!
 
   check_email_confirmation:
     heading: Check your email

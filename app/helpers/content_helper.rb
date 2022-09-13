@@ -28,6 +28,12 @@ module ContentHelper
     content_tag(tag, class: 'govuk-heading-m') { text }
   end
 
+  # @param icon [String, Symbol] Fontawesome icon name
+  # @return [String]
+  def icon(icon)
+    content_tag(:i, nil, class: "fa-solid fa-3x fa-#{icon}")
+  end
+
   # @return [String]
   def print_button(*additional_classes)
     button = '<button class="govuk-link gem-c-print-link__button" onclick="window.print()" data-module="print-link" >Print this page</button>'.html_safe

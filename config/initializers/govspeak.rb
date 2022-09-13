@@ -4,14 +4,24 @@ GOVSPEAK_TEMPLATES = {
   # vimeo: Slim::Template.new('app/views/govspeak/_vimeo.html.slim'),
 }.freeze
 
+GOVSPEAK_ICONS = {
+  tip: 'brain',
+  foo: 'bomb',
+}
+
+# preload
+I18n.load_path += Dir[Rails.root.join('config/locales/**/*.yml')]
+
 # Custom Practitioner Prompts
-%w[tip foo].each do |type|
+%i[tip foo].each do |type|
   prompt_name = "prompt-#{type}"
   prompt_code = Govspeak::Document.surrounded_by("$#{type.upcase}")
+  icon = GOVSPEAK_ICONS[type]
+  heading = I18n.t(type, scope: 'prompt')
 
   Govspeak::Document.extension(prompt_name, prompt_code) do |content|
-    html = Govspeak::Document.to_html(content)
-    GOVSPEAK_TEMPLATES[:prompt].render(nil, icon: type, body: html)
+    body = Govspeak::Document.to_html(content)
+    GOVSPEAK_TEMPLATES[:prompt].render(nil, icon: icon, heading: heading, body: body)
   end
 end
 
