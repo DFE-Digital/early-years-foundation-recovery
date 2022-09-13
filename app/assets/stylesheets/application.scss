@@ -88,9 +88,6 @@ ul > li > ul > li {
   width: 100%;
   height: 100%;
 }
-.hide-header {
-  display: none;
-}
 
 .remove-borders {
   border: none;
@@ -98,4 +95,14 @@ ul > li > ul > li {
 
 .first-column-bold td:first-child {
   font-weight: bold;
+}
+
+.light-grey-background {
+  background-color: govuk-colour("light-grey");
+  padding: govuk-spacing(6);
+}
+
+.white-background {
+  background-color: govuk-colour("white");; 
+  border-left: none !important;
 }
