@@ -19,4 +19,12 @@ en:
         body: 3rd module, page 1-1-2
       1-1-3:
         heading: video_page
-        body: 3rd module, page 1-1-3
+        body: |
+          $YoutubeVideo[Youtube Test Video](YMxHFQBBXjs)$EndYoutubeVideo
+          In this video an early years expert explains the importance of the diverse world
+          in the early years foundation stage framework. There are also some tips on how to
+          support children in this area.
+        video:
+          id: XnP6jaK7ZAY
+          title: Youtube Video Title
+          provider: youtube 
