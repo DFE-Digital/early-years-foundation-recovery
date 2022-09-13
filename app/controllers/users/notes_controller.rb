@@ -3,7 +3,7 @@ class Users::NotesController < ApplicationController
 
   def show
     @user = current_user
-    @training_modules = TrainingModule.all
+    @training_modules = TrainingModule.where(draft: nil)
   end
 
   def create

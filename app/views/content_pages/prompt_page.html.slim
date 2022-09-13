@@ -11,10 +11,10 @@ h1= @model.heading
 
 = form_with(model: note, url: user_notes_path) do |form|
   .form-container class='govuk-!-margin-bottom-4'
-    =govuk_heading("Activity")
+    =govuk_heading("Activity", tag: :h3)
 
     = form.govuk_error_summary
-    = form.govuk_fieldset legend: { text: "Consider the practitioner prompt on this page." }
+    = form.govuk_fieldset legend: { text: "Consider the practitioner prompt on this page.", tag: :h5 }
       = form.govuk_text_area :body,
         label: { text: "Use this space to reflect on your chosen activity." },
         hint: {text: 'Your responses will not be marked. You do not need to complete this activity to receive your certificate of achievement.'},
