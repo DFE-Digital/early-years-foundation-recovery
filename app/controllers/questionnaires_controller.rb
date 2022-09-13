@@ -1,5 +1,5 @@
 class QuestionnairesController < ApplicationController
-  before_action :authenticate_registered_user!
+  before_action :authenticate_registered_user!, :module_item
 
   def show
     questionnaire_taker.prepare
@@ -16,8 +16,12 @@ class QuestionnairesController < ApplicationController
 
 protected
 
+  def module_item
+    @module_item ||= ModuleItem.find_by(training_module: module_params['training_module_id'], name: module_params['id'])
+  end
+
   def questionnaire
-    @questionnaire ||= Questionnaire.find_by!(name: params[:id], training_module: params[:training_module_id])
+    @questionnaire ||= Questionnaire.find_by!(name: module_params[:id], training_module: module_params[:training_module_id])
   end
 
   def questionnaire_taker
@@ -34,6 +38,10 @@ protected
 
   def questionnaire_params
     params.require(:questionnaire).permit(questionnaire.permitted_methods)
+  end
+
+  def module_params
+    params.permit(:training_module_id, :id)
   end
 
   def populate_and_persist
