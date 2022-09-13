@@ -4,12 +4,9 @@
   }
 }
 
-.govuk-notification-banner--error {
-  border-color: $govuk-error-colour;
-  background-color: $govuk-error-colour;
-}
-
-.govuk-notification-banner--error, .govuk-notification-banner--alert {
-  border-color: $govuk-error-colour;
-  background-color: $govuk-error-colour;
+.govuk-notification-banner {
+  &--error, &--alert {
+    border-color: $govuk-error-colour;
+    background-color: $govuk-error-colour;
+  }
 }
