@@ -273,3 +273,53 @@ en:
       We have sent an email to your new email address with a link to click to confirm the change.
       
       If you have not received the email after a few minutes, please check your spam folder.
+  html_title:
+    content_pages:
+      show:
+        before-you-start: Before you start
+        intro: Introduction
+    home:
+      index: Home page
+    learning:
+      show: My learning
+    user:
+      show: My account
+      edit_name: Change name
+      edit_email: Change email address
+      edit_password: Change password
+      edit_postcode: Change your setting's postcode information
+      edit_ofsted_number: Change your setting's Ofsted number
+      edit_setting_type: Change your setting type
+      check_email_confirmation: Check email confirmation
+      check_email_password_reset: Check email password reset
+    training_modules:
+      index: About training
+    errors:
+      timeout: User timeout
+    users/sessions:
+      new: Sign in
+    passwords:
+      new: Reset password
+      edit: Choose a new password
+    registrations:
+      new: Create a child development training account
+      edit: Change your password
+    confirmations:
+      new: Resend your confirmation
+      show: Resend your confirmation
+    devise/unlocks:
+      new: Resend unlock instructions
+      show: Resend unlock instructions
+    extra_registrations:
+      edit:
+        name: About you
+        setting: About your setting
+    settings:
+      show:
+        cookie_policy: Cookie policy
+    static:
+      show:
+        privacy-policy: Privacy policy
+        accessibility-statement: Accessibility statement
+        other-problems-signing-in: Other problems signing in
+        terms-and-conditions: Terms and conditions
