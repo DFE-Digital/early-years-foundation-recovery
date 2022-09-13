@@ -1,4 +1,6 @@
+// https://design-system.service.gov.uk/styles/colour/
+
 .govuk-inset-text.prompt {
   background-color: #BFE3E0;
-  border-color: #28A197;
+  border-color: govuk-colour("turquoise");
 }
