@@ -1,8 +1,8 @@
 class Users::NotesController < ApplicationController
+  before_action :authenticate_registered_user!
   helper_method :note
 
   def show
-    @user = current_user
     @training_modules = TrainingModule.where(draft: nil)
   end
 
