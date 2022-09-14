@@ -46,8 +46,7 @@ class VideoPage
 
   # @return [String]
   def transcript
-    video_transcript_id = translate(:video)[:id]
-    transcript_file = Rails.root.join(%(data/video-transcripts/#{video_transcript_id}.yml))
+    transcript_file = Rails.root.join(%(data/video-transcripts/#{video_id}.yml))
     transcript_data = YAML.load_file(transcript_file)
     hasharray_to_html(transcript_data)
   end
