@@ -1,14 +1,10 @@
-# https://github.com/docker/build-push-action
-# https://github.com/DFE-Digital/early-years-foundation-recovery/settings/secrets/actions
-# https://docs.github.com/en/enterprise-server@3.4/actions/monitoring-and-troubleshooting-workflows/enabling-debug-logging
-# https://docs.cloudfoundry.org/devguide/deploy-apps/streaming-logs.html
 ---
 # ------------------------------------------------------------------------------
-# Automatically deploy PRs labelled "deployed"
+# Build image:
+#   ghcr.io/dfe-digital/early-years-foundation-recovery:pr-123
 #
-# ghcr.io/dfe-digital/early-years-foundation-recovery:pr-123
-#
-# https://ey-recovery-pr-123.london.cloudapps.digital
+# Deploy to:
+#   https://ey-recovery-pr-123.london.cloudapps.digital
 #
 name: Deploy Content App
 on:
@@ -39,14 +35,13 @@ jobs:
     environment: production
     env:
       WORKSPACE: content
-      DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
+      REGISTRY: ghcr.io/dfe-digital/early-years-foundation-recovery
       PR_NUMBER: pr-${{ github.event.number }}
-      # app variables
+      # @see terraform/workspace-variables/app_config.yml[:content]
       DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
       GOVUK_APP_DOMAIN: london.cloudapps.digital
       GOVUK_WEBSITE_ROOT: ey-recovery-pr-${{ github.event.number }}
       USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
-      INTERIM_PASSWORD: 'StrongPassword'
     steps:
       -
         name: Checkout Code
@@ -75,9 +70,9 @@ jobs:
           context: .
           build-args: BUILDKIT_INLINE_CACHE=1
           cache-from: |
-            ${{ env.DOCKER_IMAGE }}:deps
+            ${{ env.REGISTRY }}:deps
           push: true
-          tags: ${{ env.DOCKER_IMAGE }}:deps
+          tags: ${{ env.REGISTRY }}:deps
           target: deps
       -
         name: Build and push Docker image
@@ -90,19 +85,19 @@ jobs:
             BUILDKIT_INLINE_CACHE=1
             SHA=${{ github.event.pull_request.head.sha }}
           cache-from: |
-            ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
-            ${{ env.DOCKER_IMAGE }}:${{ env.PR_NUMBER }}
+            ${{ env.REGISTRY }}:${{ github.event.pull_request.head.sha }}
+            ${{ env.REGISTRY }}:${{ env.PR_NUMBER }}
           tags: |
-            ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
-            ${{ env.DOCKER_IMAGE }}:${{ env.PR_NUMBER }}
+            ${{ env.REGISTRY }}:${{ github.event.pull_request.head.sha }}
+            ${{ env.REGISTRY }}:${{ env.PR_NUMBER }}
       -
-        name: Deploy Content Review App
+        name: Deploy Review App
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
           TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
-          TF_VAR_paas_app_docker_image: ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
+          TF_VAR_paas_app_docker_image: ${{ env.REGISTRY }}:${{ github.event.pull_request.head.sha }}
           TF_VAR_paas_app_hostname: ${{ env.PR_NUMBER }}
           TF_VAR_paas_app_env_secrets: ${{ toJson(secrets) }}
           TF_VAR_paas_app_envs: ${{ toJson(env) }}
