@@ -1,50 +1,42 @@
 ---
 # ------------------------------------------------------------------------------
-# Run workflow:
-#   https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/production.yml
-#
 # Build image:
-#   ghcr.io/dfe-digital/early-years-foundation-recovery:v0.0.x
+#   ghcr.io/dfe-digital/early-years-foundation-recovery:latest
 #
 # Deploy to:
-#   https://child-development-training.education.gov.uk
+#   https://ey-recovery-dev.london.cloudapps.digital
 #
-name: Deploy Production App
+name: Deploy Development App
 on:
   workflow_dispatch:
-    inputs:
-      version:
-        description: Create release version ("vx.x.x")
-        type: string
-        required: true
-      ref:
-        description: Release candidate to deploy ("rcx.x.x")
-        type: string
-        required: true
   push:
-    tags:
-      - v*
+    branches:
+      - main
+    paths-ignore:
+      - .env.example
+      - .gitignore
+      - .rubocop*
+      - .tool-versions
+      - adr/*
+      - bin/*
+      - docker-compose.yml
+      - README.md
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: production
     env:
-      WORKSPACE: production
+      WORKSPACE: development
       REGISTRY: ghcr.io/dfe-digital/early-years-foundation-recovery
+      # app envs
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
     steps:
       -
         name: Checkout Code
         uses: actions/checkout@v2
-        with:
-          ref: ${{ inputs.ref || github.ref_name }}
-      -
-        name: Tag version
-        if:  ${{ inputs.version }}
-        run: |
-          git tag --force ${{ inputs.version }}
-          git push --force origin refs/tags/${{ inputs.version }}
-          echo "HEAD=$(git rev-parse ${{ inputs.version }})" >> $GITHUB_ENV
+        # with:
+        #   ref: ${{ github.sha }}
       -
         name: Pin Terraform version
         uses: hashicorp/setup-terraform@v1.3.2
@@ -72,20 +64,18 @@ jobs:
             SHA=${{ github.sha }}
           cache-from: |
             ${{ env.REGISTRY }}:${{ github.sha }}
-            ${{ env.REGISTRY }}:${{ inputs.ref || github.ref_name }}
           tags: |
             ${{ env.REGISTRY }}:${{ github.sha }}
-            ${{ env.REGISTRY }}:${{ inputs.ref || github.ref_name }}
+            ${{ env.REGISTRY }}:latest
       -
-        name: Production Release
+        name: Deploy Development App
         env:
-          # init
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          # plan/apply
           TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
           TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
-          TF_VAR_paas_app_docker_image: ${{ env.REGISTRY }}:${{ inputs.ref || github.ref_name }}
+          TF_VAR_paas_app_docker_image: ${{ env.REGISTRY }}:latest
+          TF_VAR_paas_app_hostname: dev
           TF_VAR_paas_app_env_secrets: ${{ toJson(secrets) }}
           TF_VAR_paas_app_envs: ${{ toJson(env) }}
         run: |
@@ -101,14 +91,3 @@ jobs:
             -input=false \
             -auto-approve \
             -var-file ../workspace-variables/${{ env.WORKSPACE }}.tfvars
-      -
-        name: Install Cloud Foundry CLI
-        uses: DFE-Digital/github-actions/setup-cf-cli@master
-        with:
-          CF_USERNAME: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
-          CF_PASSWORD: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
-          CF_SPACE_NAME: ey-recovery
-      -
-        name: Map production DNS route
-        run: |
-          cf map-route ey-recovery education.gov.uk --hostname child-development-training
