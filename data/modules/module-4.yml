@@ -106,8 +106,6 @@ module-4:
     type: text_page         # submodule 2 / topic 3
   4-2-3-1a:
     type: text_page
-  4-2-3-1b:
-    type: formative_questionnaire
   4-2-3-2a:
     type: text_page
 
