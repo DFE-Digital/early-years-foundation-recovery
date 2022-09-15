@@ -1,7 +1,9 @@
 ---
 personal-social-and-emotional-development:
-  before-you-start:
+  what-to-expect:
     type: interruption_page
+  before-you-start:
+    type: prompt_page
   intro:
     type: module_intro
 

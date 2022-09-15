@@ -5,23 +5,31 @@ GOVSPEAK_TEMPLATES = {
 }.freeze
 
 GOVSPEAK_ICONS = {
-  tip: 'brain',
-  foo: 'bomb',
-}
+  bang: 'exclamation',
+  book: 'book',
+  brain: 'brain',
+}.freeze
 
 # preload
 I18n.load_path += Dir[Rails.root.join('config/locales/**/*.yml')]
 
 # Custom Practitioner Prompts
-%i[tip foo].each do |type|
+GOVSPEAK_ICONS.each do |type, icon|
   prompt_name = "prompt-#{type}"
   prompt_code = Govspeak::Document.surrounded_by("$#{type.upcase}")
-  icon = GOVSPEAK_ICONS[type]
-  heading = I18n.t(type, scope: 'prompt')
+
+  styles = []
+  styles.push('green') if icon.eql?('book')
 
   Govspeak::Document.extension(prompt_name, prompt_code) do |content|
-    body = Govspeak::Document.to_html(content)
-    GOVSPEAK_TEMPLATES[:prompt].render(nil, icon: icon, heading: heading, body: body)
+    locals = {
+      icon: icon,
+      styles: styles,
+      heading: I18n.t(type, scope: 'prompt'),
+      body: Govspeak::Document.to_html(content),
+    }
+
+    GOVSPEAK_TEMPLATES[:prompt].render(nil, locals)
   end
 end
 

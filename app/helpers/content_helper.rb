@@ -30,8 +30,8 @@ module ContentHelper
 
   # @param icon [String, Symbol] Fontawesome icon name
   # @return [String]
-  def icon(icon)
-    content_tag(:i, nil, class: "fa-solid fa-3x fa-#{icon}")
+  def icon(icon, size: 2, **)
+    content_tag(:i, nil, class: "fa-solid fa-#{size}x fa-#{icon} icon")
   end
 
   # @return [String]

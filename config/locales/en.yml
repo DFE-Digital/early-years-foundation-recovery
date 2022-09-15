@@ -146,39 +146,10 @@ en:
       - BTEC National Diploma in Early Childhood Studies
       - Foundation Degree in Early Childhood Studies
 
-
-  interruption:
-    formative: |
-      ## Check your learning with quizzes
-
-      Throughout this module there are activities to check you understand what you have learned.
-      You will be able to see if you get these questions right or wrong.
-      The scores for these activities are not recorded and they do not count towards the certificate of achievement.
-    summative: |
-      ## End of module test
-
-      Once you have completed all of the topics, there is an end of module
-      test and an opportunity to download a certificate of achievement.
-    common: |
-      ## Your progress is saved automatically
-
-      Your progress is automatically saved as you move through the module.
-      You can sign out or close the browser at any time without losing your progress.
-      When you next sign in, you can restart from where you left off.
-
-      ## Reflect on your learning with practitioner prompts
-
-      You will see practitioner prompts throughout the course.
-      These are intended to:
-
-      - encourage you to reflect on your current practice
-      - introduce you to new strategies
-      - reinforce effective teaching and learning
-      - help you to think about what you have learned
-
   prompt:
-    tip: This is a custom TIP prompt!
-    foo: This is foo is da bomb!
+    bang: In your setting prompt
+    book: Book prompt
+    brain: Reflection point prompt
 
   check_email_confirmation:
     heading: Check your email

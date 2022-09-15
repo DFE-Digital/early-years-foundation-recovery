@@ -1,7 +1,11 @@
-.govuk-inset-text.prompt
-  i.fa-3x.fa-solid class="fa-#{icon}"
+.prompt class=styles
+  .govuk-grid-row
+    .govuk-grid-column-one-quarter
+      i.fa-3x.fa-solid class="fa-#{icon}"
 
-  h2.govuk-heading-m
-    = heading
-  .gem-c-govspeak
-    == body
+
+    .govuk-grid-column-three-quarters
+      h2.govuk-heading-m
+        = heading
+      .gem-c-govspeak
+        == body

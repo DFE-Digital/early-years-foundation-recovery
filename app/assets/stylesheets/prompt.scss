@@ -1,6 +1,17 @@
 // https://design-system.service.gov.uk/styles/colour/
 
-.govuk-inset-text.prompt {
-  background-color: #BFE3E0;
+.prompt {
+  // background-color: #BFE3E0;
+  background-color: govuk-colour("light-grey");
   border-color: govuk-colour("turquoise");
+  border-bottom: govuk-colour("turquoise") solid 5px;
+  margin: 10px 0px 20px 0px;
+
+  .govuk-grid-column-three-quarters {
+    padding: 20px;
+  }
+}
+
+.green {
+  background-color: lighten(govuk-colour("turquoise"), 50%);
 }

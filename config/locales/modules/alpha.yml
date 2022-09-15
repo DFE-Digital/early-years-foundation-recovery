@@ -3,10 +3,8 @@
 en:
   modules:
     alpha:
-      # --------------------------------------
+      what-to-expect:
       before-you-start:
-        heading: before-you-start-heading
-        body: before-you-start-body
       intro:
         heading: Govspeak Reference Page
         body: |
@@ -23,25 +21,36 @@ en:
           $YT[With a Title](EpjSlCJtPLo)$ENDYT
           $YT(EpjSlCJtPLo)$ENDYT
 
-          $TIP
+          $BANG
           Usage:
 
           <pre class="code-tip">
-          &#36;TIP
+          &#36;BANG
           Add your Govspeak markup here
-          &#36;TIP
+          &#36;BANG
           </pre>
-          $TIP
+          $BANG
 
-          $FOO
+          $BRAIN
           Usage:
 
           <pre class="code-tip">
-          &#36;FOO
+          &#36;BRAIN
           Add your Govspeak markup here
-          &#36;FOO
+          &#36;BRAIN
           </pre>
-          $FOO
+          $BRAIN
+
+          $BOOK
+          Usage:
+
+          <pre class="code-tip">
+          &#36;BOOK
+          Add your Govspeak markup here
+          &#36;BOOK
+          </pre>
+          $BOOK
+
 
 
           ## Rspec

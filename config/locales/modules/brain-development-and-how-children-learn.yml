@@ -2,6 +2,7 @@
 en:
   modules:
     brain-development-and-how-children-learn:
+      what-to-expect:
       before-you-start:
       intro:
         heading: Brain development and how children learn
@@ -365,7 +366,7 @@ en:
 
           Children need opportunities to explore their understanding of these relationships. Spontaneous play and role play provide excellent opportunities for children to experiment with behaviour they have observed or experienced. This gives the space to navigate their associated feelings and thoughts, and to express themselves freely without concern of judgment or expectation. Observing such play is a great opportunity to understand a child’s development.
 
-          <div class="govuk-inset-text prompt">
+          <div class="govuk-inset-text">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>
 
             <p class="govuk-body">Do you have easily accessible role play and spontaneous play opportunities?  </p>
@@ -375,9 +376,7 @@ en:
             <p class="govuk-body">How does your setting ensure children receive consistent care across all staff members? </p>
           </div>
 
-          $TIP
-          ### Practitioner prompt
-
+          $BANG
           Do you have easily accessible role play and spontaneous play opportunities?
 
           Do children have opportunities within the day to communicate with other children and staff members?
@@ -389,8 +388,7 @@ en:
             - points
           - two
           - three
-          $TIP
-
+          $BANG
       2-1-3-2a:
         heading: A healthy diet
         body: |
