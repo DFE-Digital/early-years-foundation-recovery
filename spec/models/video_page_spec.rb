@@ -45,25 +45,7 @@ RSpec.describe VideoPage, type: :model do
 
   describe '#video_transcript' do
     it 'returns the video provider data from the content file' do
-      expect(video_page.transcript).to include("Balancing adult and child led activities")
+      expect(video_page.transcript).to include('Balancing adult and child led activities')
     end
   end
-
-  # describe '#youtube_url' do
-  #   it 'returns the Youtube URL data from the content file' do
-  #     expect(video_page.youtube_url).to eq(content.dig(video_page.name.to_s, 'youtube_url'))
-  #   end
-
-  #   it 'is valid' do
-  #     expect(video_page).to be_valid
-  #   end
-
-  #   context 'when URL is not for an embedded YouTube video' do
-  #     before { allow(video_page).to receive(:youtube_url).and_return('http://example.com') }
-
-  #     it 'is invalid' do
-  #       expect(video_page).to be_invalid
-  #     end
-  #   end
-  # end
 end

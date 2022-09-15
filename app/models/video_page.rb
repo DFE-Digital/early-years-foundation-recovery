@@ -1,5 +1,3 @@
-require "builder/xmlmarkup"
-
 class VideoPage
   include ActiveModel::Validations
   include ActiveModel::Model

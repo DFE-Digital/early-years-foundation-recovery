@@ -54,7 +54,7 @@ Rails.application.config.content_security_policy do |policy|
                      '*.ytimg.com',
                      'www.youtube.com',
                      'www.youtube-nocookie.com',
-                    # Allow Vimeo Embeds
+                     # Allow Vimeo Embeds
                      'player.vimeo.com',
                      'www.vimeo.com',
                      # Allow all inline scripts until we can conclusively

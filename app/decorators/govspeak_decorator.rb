@@ -8,22 +8,23 @@ class GovspeakDecorator < DelegateClass(Govspeak::Document)
 
   Govspeak::Document.extension('YoutubeVideo', /\$YoutubeVideo(?:\[(.*?)\])?\((.*?)\)\$EndYoutubeVideo/m) do |title, youtube_id|
     embed_url = %(https://www.youtube.com/embed/#{youtube_id}?enablejsapi=1&amp;origin=#{ENV['DOMAIN']})
-    optional_title = title ? %(title="#{title}") : ''
-    %(<h1 class="govuk-heading-l govuk-!-margin-top-2"> Video: #{title} </h1><div class="govspeak-embed-container" style="padding:56.19% 0 0 0;position:relative;"><iframe class="govspeak-embed-video" style="position:absolute;top:0;left:0;width:100%;height:100%;" src="#{embed_url}" #{optional_title} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>)
+    optional_title = title ? %(Video="#{title}") : ''
+    %(<h1 class="govuk-heading-l govuk-!-margin-top-2"> #{optional_title} </h1><div class="govspeak-embed-container" style="padding:56.19% 0 0 0;position:relative;"><iframe class="govspeak-embed-video" style="position:absolute;top:0;left:0;width:100%;height:100%;" src="#{embed_url}" #{optional_title} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>)
   end
 
 
   Govspeak::Document.extension('VimeoVideo', /\$VimeoVideo(?:\[(.*?)\])?\((.*?)\)\$EndVimeoVideo/m) do |title, vimeo_id|
     embed_url = %(https://player.vimeo.com/video/#{vimeo_id}?enablejsapi=1&amp;origin=#{ENV['DOMAIN']})
-    optional_title = title ? %(title="#{title}") : ''
-    %(<h1 class="govuk-heading-l govuk-!-margin-top-2"> Video: #{title} </h1><div class="govspeak-embed-container" style="padding:56.19% 0 0 0;position:relative;"><iframe class="govspeak-embed-video" style="position:absolute;top:0;left:0;width:100%;height:100%;" src="#{embed_url}" #{optional_title} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>)
+    optional_title = title ? %(Video="#{title}") : ''
+    %(<h1 class="govuk-heading-l govuk-!-margin-top-2"> #{optional_title} </h1><div class="govspeak-embed-container" style="padding:56.19% 0 0 0;position:relative;"><iframe class="govspeak-embed-video" style="position:absolute;top:0;left:0;width:100%;height:100%;" src="#{embed_url}" #{optional_title} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>)
   end
 
-  Govspeak::Document.extension('VideoTranscript', /\$VideoTranscript(?:\[(.*?)\])?\((.*?)\)\$EndVideoTranscript/m) do |title, video_transcript_id|
-    transcript_file = Rails.root.join(%(data/video-transcripts/#{video_transcript_id}.yml))
-    optional_title = title ? %(title="#{title}") : ''
-    transcript_data = YAML.load_file(transcript_file)
-  end
+  # TODO: Complete transcript govspeak tag
+  # Govspeak::Document.extension('VideoTranscript', /\$VideoTranscript(?:\[(.*?)\])?\((.*?)\)\$EndVideoTranscript/m) do |title, video_transcript_id|
+  #   transcript_file = Rails.root.join(%(data/video-transcripts/#{video_transcript_id}.yml))
+  #   optional_title = title ? %(title="#{title}") : ''
+  #   YAML.load_file(transcript_file)
+  # end
 
   # TODO: Determine why commenting this method out has no affect on the specs
   # Find out what content is meant to be blocked/fixed by GovspeakDecorator::HtmlSanitizerDecorator
