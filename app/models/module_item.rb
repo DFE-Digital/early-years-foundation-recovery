@@ -160,6 +160,12 @@ class ModuleItem < YamlBase
   # @return [Boolean]
   delegate :valid?, to: :model
 
+  def notes?
+    model.notes?
+  rescue StandardError
+    false
+  end
+
   # @return [Boolean]
   def topic?
     page_name.to_i.zero?

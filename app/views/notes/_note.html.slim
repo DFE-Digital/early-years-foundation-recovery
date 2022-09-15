@@ -1,0 +1,12 @@
+div id="#{dom_id note}"
+  = govuk_heading(note.logged_at, tag: :h3)
+
+  p
+    <strong>Page:</strong>
+    =< govuk_link_to(note.title, training_module_content_page_path(note.training_module, note.name))
+
+  .log-entry
+    = govuk_heading("You wrote:", tag: :h4)
+
+    p.govuk_body
+    = simple_format(note.body)

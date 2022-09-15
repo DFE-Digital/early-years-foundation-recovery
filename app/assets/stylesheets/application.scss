@@ -98,3 +98,16 @@ ul > li > ul > li {
   border-left: none !important;
   padding: govuk-spacing(4);
 }
+
+.log-entry {
+  border: 0.5px solid;
+  border-color: #b1b4b6;
+  padding: 20px;
+  width: 600px;
+  margin-bottom: 40px;
+}
+
+.form-container {
+  padding: 30px;
+  background: #f3f2f1;
+}
