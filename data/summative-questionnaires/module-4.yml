@@ -46,7 +46,7 @@ module-4:
     content:
     questions:
       1_imitation_reinforcement_conditioning:
-        multi_select: false
+        multi_select: true
         label: |
           Which of the following are one of the 3 principles of Skinner's "behaviourism" theory? 
         assessment_summary: 
