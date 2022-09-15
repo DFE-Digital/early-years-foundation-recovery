@@ -27,25 +27,25 @@ RSpec.describe VideoPage, type: :model do
 
   describe '#video_id' do
     it 'returns the video id data from the content file' do
-      expect(video_page.video_id).to eq(content.dig(video_page.name.to_s, 'video_id'))
+      expect(video_page.video_id).to eq(content.dig(video_page.name.to_s, 'video', 'id'))
     end
   end
 
   describe '#video_title' do
     it 'returns the video title data from the content file' do
-      expect(video_page.video_title).to eq(content.dig(video_page.name.to_s, 'video_title'))
+      expect(video_page.video_title).to eq(content.dig(video_page.name.to_s, 'video', 'title'))
     end
   end
 
   describe '#video_provider' do
     it 'returns the video provider data from the content file' do
-      expect(video_page.video_provider).to eq(content.dig(video_page.name.to_s, 'video_provider'))
+      expect(video_page.video_provider).to eq(content.dig(video_page.name.to_s, 'video', 'provider'))
     end
   end
 
   describe '#video_transcript' do
     it 'returns the video provider data from the content file' do
-      expect(video_page.video_transcript).to eq(content.dig(video_page.name.to_s, 'video_transcript'))
+      expect(video_page.transcript).to include("Balancing adult and child led activities")
     end
   end
 

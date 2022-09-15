@@ -22,8 +22,7 @@ class GovspeakDecorator < DelegateClass(Govspeak::Document)
   Govspeak::Document.extension('VideoTranscript', /\$VideoTranscript(?:\[(.*?)\])?\((.*?)\)\$EndVideoTranscript/m) do |title, video_transcript_id|
     transcript_file = Rails.root.join(%(data/video-transcripts/#{video_transcript_id}.yml))
     optional_title = title ? %(title="#{title}") : ''
-    transcript_hash = YAML.load_file(transcript_file)
-    # TODO: define hasharray_to_html(transcript_hash) ?
+    transcript_data = YAML.load_file(transcript_file)
   end
 
   # TODO: Determine why commenting this method out has no affect on the specs
