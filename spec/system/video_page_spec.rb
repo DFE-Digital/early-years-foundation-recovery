@@ -9,7 +9,7 @@ RSpec.describe 'Video page' do
   end
 
   it 'renders the page header' do
-    expect(page).to have_content('Video Page Heading')
+    expect(page).to have_content('1-2-1-2')
   end
 
   it 'renders the page body' do
