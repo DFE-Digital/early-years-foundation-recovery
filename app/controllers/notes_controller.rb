@@ -1,5 +1,6 @@
 class NotesController < ApplicationController
   before_action :authenticate_registered_user!
+  helper_method :note
 
   # GET /my-account/learning-log
   def show
@@ -12,9 +13,9 @@ class NotesController < ApplicationController
     @model = module_item.model
 
     if @note.save
-      track('user_notes', **tracking_properties)
+      track('user_note_created', **tracking_properties)
       redirect_to training_module_content_page_path(module_item.training_module, module_item.next_item)
-    else
+    else # not validations, so branch is not expected to be used
       render "content_pages/#{module_item.type}", local: { note: @note }
     end
   end
@@ -22,14 +23,17 @@ class NotesController < ApplicationController
   # PATCH/PUT /my-account/learning-log
   def update
     @note = current_user.notes.where(training_module: note_params[:training_module], name: note_params[:name]).first
+    @model = module_item.model
 
     if @note.update(note_params.except(:module_item_id))
-      track('user_notes', **tracking_properties)
+      track('user_note_updated', **tracking_properties)
       redirect_to training_module_content_page_path(module_item.training_module, module_item.next_item)
-    else
+    else # no validations, so this branch is not expected to be used
       render "content_pages/#{module_item.type}", local: { note: @note }
     end
   end
+
+  attr_reader :note
 
 private
 
