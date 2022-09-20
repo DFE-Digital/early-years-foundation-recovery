@@ -147,9 +147,11 @@ en:
       - Foundation Degree in Early Childhood Studies
 
   prompt:
-    bang: In your setting prompt
-    book: Book prompt
-    brain: Reflection point prompt
+    bang: In your setting
+    book: Further reading
+    brain: Reflection point
+    note: Add to your learning log
+    test: Check your understanding
 
   check_email_confirmation:
     heading: Check your email
@@ -244,9 +246,12 @@ en:
       We have sent an email to your new email address with a link to click to confirm the change.
       
       If you have not received the email after a few minutes, please check your spam folder.
+
+  # Browser and bookmarks ------------------------------------------------------
   html_title:
     content_pages:
       show:
+        what-to-expect: What to expect during the training
         before-you-start: Before you start
         intro: Introduction
     home:

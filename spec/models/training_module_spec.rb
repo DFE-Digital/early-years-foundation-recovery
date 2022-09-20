@@ -46,6 +46,9 @@ RSpec.describe TrainingModule, type: :model do
 
   # sequence ---------------------------------
 
+  # describe '#prompt_page' do
+  # end
+
   # describe '#interruption_page' do
   # end
 

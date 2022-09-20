@@ -1,9 +1,9 @@
 ---
 brain-development-and-how-children-learn:
   what-to-expect:
-    type: interruption_page
-  before-you-start:
     type: prompt_page
+  before-you-start:
+    type: interruption_page
   intro:
     type: module_intro
 

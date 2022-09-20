@@ -15,10 +15,10 @@
 #
 ---
 alpha:
-  what-to-expect:       # formerly "before-you-start"
-    type: interruption_page
+  what-to-expect:
+    type: prompt_page
   before-you-start:
-    type: prompt_page   # icons legend
+    type: interruption_page
   intro:
     type: module_intro
 

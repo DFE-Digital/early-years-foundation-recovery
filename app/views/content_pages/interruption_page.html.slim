@@ -1,38 +1,12 @@
 = render 'debug'
 
 - content_for :content_page do
-  .govuk-grid-row
-    .govuk-grid-column-full
-      h1.govuk-heading-l What to expect during the training
+  .govuk-grid-column-full.interrupt-panel
+    h1.govuk-heading-l Before you start
+    h2.govuk-heading-m End of module test
+    p Once you have completed all topics, there is an end of module test and an opportunity to download a certificate of achievement.
 
-      p You can expect to see various icons throughout the training course.
-
-  .govuk-grid-row
-    .govuk-grid-column-one-quarter
-      = icon(:exclamation, size: 2)
-    .govuk-grid-column-three-quarters
-      h2.govuk-heading-m In your setting
-      p The exclamation point icon highlights practical tips to use in your setting.
-
-
-  .govuk-grid-row
-    .govuk-grid-column-one-quarter
-      = icon(:brain)
-    .govuk-grid-column-three-quarters
-      h2.govuk-heading-m Reflection point
-      p The brain icon signals a chance to reflect on what you’ve learned and how it applies to your practice.
-
-
-
-
-
-
-    h2.govuk-heading-m Learning log
-    = icon(:pencil)
-    p When you see the pencil icon, you can use the space to make notes on the reflection point. You can view all your notes in your personal learning log.
-
-    h2.govuk-heading-m Learning check
-    = icon(:question)
-    p You’ll see the question mark icon next to quiz questions throughout the module. These questions are to check you understand what you have learned.You will be able to see if you get these questions right or wrong. Your scores are not recorded and they do not count towards the certificate of achievem
+    h2.govuk-heading-m Your progress is saved automatically
+    p Your progress is automatically saved as you move through the module. You can sign out or close the browser at any time without losing your progress. When you next login, you can restart from where you left off.
 
 = render 'content_wrap'

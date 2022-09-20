@@ -38,19 +38,19 @@ describe 'ContentHelper#translate_markdown', type: :helper do
       end
     end
 
-    describe '$TIP' do
+    describe '$BANG' do
       let(:input) do
-        <<~TIP
-          $TIP
+        <<~BANG
+          $BANG
           - one
           - two
           - three
-          $TIP
-        TIP
+          $BANG
+        BANG
       end
 
       it 'renders a tip' do
-        expect(html).to include '<h2 class="govuk-heading-m">TIP</h2>'
+        expect(html).to include '<h2 class="govuk-heading-m">In your setting</h2>'
         expect(html).to include '<li>one</li>'
       end
     end

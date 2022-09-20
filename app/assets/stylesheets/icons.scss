@@ -7,7 +7,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import '@fortawesome/fontawesome-free/scss/v4-shims';
 
 .svg-inline--fa {
+  background-color: $prompt-hue;
   color: govuk-colour("white");
-  background-color: govuk-colour("turquoise");
   padding: govuk-spacing(4) !important;
 }

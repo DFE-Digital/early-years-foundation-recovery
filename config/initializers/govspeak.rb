@@ -5,7 +5,7 @@ GOVSPEAK_TEMPLATES = {
 }.freeze
 
 GOVSPEAK_ICONS = {
-  bang: 'exclamation',
+  bang: 'info',
   book: 'book',
   brain: 'brain',
 }.freeze
@@ -19,7 +19,7 @@ GOVSPEAK_ICONS.each do |type, icon|
   prompt_code = Govspeak::Document.surrounded_by("$#{type.upcase}")
 
   styles = []
-  styles.push('green') if icon.eql?('book')
+  styles.push('prompt-bg') if icon.eql?('book')
 
   Govspeak::Document.extension(prompt_name, prompt_code) do |content|
     locals = {
