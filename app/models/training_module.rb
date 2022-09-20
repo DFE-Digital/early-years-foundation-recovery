@@ -116,6 +116,11 @@ class TrainingModule < YamlBase
     ModuleItem.where_type(name, 'assessment_results').first
   end
 
+  # @return [ModuleItem]
+  def first_confidence_page
+    ModuleItem.where_type(name, 'confidence_questionnaire').first
+  end
+  
   def certificate_page
     ModuleItem.where_type(name, 'certificate').first
   end

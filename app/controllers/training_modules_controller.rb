@@ -1,5 +1,6 @@
 class TrainingModulesController < ApplicationController
   before_action :authenticate_registered_user!, only: :show
+  before_action :track_events, only: :show
 
   def index
     track('course_overview_page')
@@ -7,7 +8,6 @@ class TrainingModulesController < ApplicationController
   end
 
   def show
-    track('module_overview_page')
     @training_module = TrainingModule.find_by(name: params[:id])
     @module_progress = ModuleOverviewDecorator.new(helpers.module_progress(@training_module))
     @assessment_progress = helpers.assessment_progress(@training_module)
@@ -25,5 +25,23 @@ protected
 
   def training_module_name
     @training_module_name ||= params[:training_module_id]
+  end
+
+private
+
+  def module_complete_untracked?
+    return false if untracked?('module_start', training_module_id: @training_module.name)
+
+    untracked?('module_complete', training_module_id: @training_module.name)
+  end
+
+  def track_events
+    track('module_overview_page')
+
+    if module_complete_untracked?
+      track('module_complete')
+
+      helpers.calculate_module_state
+    end
   end
 end
