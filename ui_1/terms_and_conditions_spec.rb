@@ -14,5 +14,4 @@ describe 'Terms and conditions', er_136: true do
   it 'then the page has a heading' do
     expect(ui.terms_and_conditions).to have_heading
   end
-
 end

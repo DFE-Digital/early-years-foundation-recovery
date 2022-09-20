@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-#ER-261: Privacy notice HTML page
-#
 describe 'Privacy Page', er_137: true do
   include_context 'as guest'
 

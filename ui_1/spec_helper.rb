@@ -33,7 +33,3 @@ Drivers::CapybaraDrivers.register_all
 Capybara.configure do |config|
   config.default_driver = Drivers::CapybaraDrivers.chosen_driver
 end
-
-Capybara.configure do |config|
-  config.automatic_label_click = true
-end
