@@ -129,4 +129,33 @@ private
   def confidence_untracked?
     untracked?('confidence_check_start', training_module_id: params[:training_module_id])
   end
+  
+  def track_questionnaire_answer
+    key = questionnaire.questions.keys.first
+
+    track('questionnaire_answer',
+          type: questionnaire.assessments_type,
+          success: questionnaire.result_for(key),
+          answer: questionnaire.answer_for(key))
+  end
+
+private
+
+  def track_events
+    if questionnaire.first_confidence? && confidence_untracked?
+      track('confidence_check_start')
+    end
+
+    if questionnaire.first_assessment? && summative_untracked?
+      track('summative_assessment_start')
+    end
+  end
+
+  def summative_untracked?
+    untracked?('summative_assessment_start', training_module_id: params[:training_module_id])
+  end
+
+  def confidence_untracked?
+    untracked?('confidence_check_start', training_module_id: params[:training_module_id])
+  end
 end
