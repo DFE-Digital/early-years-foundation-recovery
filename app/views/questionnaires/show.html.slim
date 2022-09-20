@@ -1,6 +1,7 @@
 = render 'questionnaire_debug'
 
 = page_number(**@questionnaire.pagination)
+= govuk_heading(@questionnaire.heading)
 
 .gem-c-govspeak
   = translate_markdown(@questionnaire.body)

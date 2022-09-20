@@ -1,4 +1,5 @@
 h1.govuk-heading-l My learning
+= render 'debug'
 
 .govuk-grid-row id='started'
   .govuk-grid-column-full
@@ -50,5 +51,3 @@ h1.govuk-heading-l My learning
   .govuk-grid-row id='completed'
     .govuk-grid-column-full
       = completed_modules_table(@user.course.completed_modules)
-
-= render 'debug'

@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     resources :content_pages, only: %i[index show], path: 'content-pages'
     resources :questionnaires, only: %i[show update]
     resources :assessment_results, only: %i[show new], path: 'assessment-result'
+    get 'certificate'
 
     # TODO: retire aliases after accessibility audit
     get 'confidence-check/:id' => 'questionnaires#show'

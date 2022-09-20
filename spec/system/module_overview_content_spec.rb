@@ -21,7 +21,7 @@ RSpec.describe 'Module overview' do
   end
 
   it 'has the number of topics available in the module' do
-    expect(page).to have_content('9 topics')
+    expect(page).to have_content('8 topics')
   end
 
   it 'has the time taken to complete the module' do

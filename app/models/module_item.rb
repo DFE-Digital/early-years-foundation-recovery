@@ -25,7 +25,6 @@ class ModuleItem < YamlBase
     module_intro: ContentPage,
     sub_module_intro: ContentPage,
     text_page: ContentPage,
-    certificate: CertificatePage,
 
     youtube_page: YoutubePage,
 
@@ -112,8 +111,6 @@ class ModuleItem < YamlBase
       'Finish test'
     elsif next_item.summative_questionnaire? && !summative_questionnaire?
       'Start test'
-    elsif next_item.certificate?
-      'Finish'
     else
       'Next'
     end
@@ -192,10 +189,6 @@ class ModuleItem < YamlBase
   # @return [Boolean]
   def confidence_intro?
     type.eql?('confidence_intro')
-  end
-
-  def certificate?
-    type.eql?('certificate')
   end
 
   # position ---------------------------------

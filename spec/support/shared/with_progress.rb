@@ -1,5 +1,5 @@
 RSpec.shared_context 'with progress' do
-  let(:user) { create(:user, :registered) }
+  let(:user) { create(:user) }
   let(:tracker) { Ahoy::Tracker.new(user: user, controller: 'content_pages') }
 
   let(:alpha) { TrainingModule.find_by(name: 'alpha') }

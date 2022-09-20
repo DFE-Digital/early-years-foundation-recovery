@@ -1,7 +1,7 @@
 / FIXME: questionnaire validity checks multiple questions, currently there is only ever one
-- style = 'govuk-notification-banner--success' if questionnaire.result_for(question.name)
+- style = questionnaire.result_for(question.name) ? 'success' : 'error'
 
-.govuk-notification-banner class="#{style}" role='alert' aria-labelledby='govuk-notification-banner-title' data-module='govuk-notification-banner'
+.govuk-notification-banner class="govuk-notification-banner--#{style}" role='alert' aria-labelledby='govuk-notification-banner-title' data-module='govuk-notification-banner'
 
   .govuk-notification-banner__header
     h2#govuk-notification-banner-title.govuk-notification-banner__title

@@ -17,7 +17,7 @@ RSpec.describe NotifyMailer, type: :mailer do
         user.registration_complete = true
         response = user.send_confirmation_instructions
         expect(response.recipients).to contain_exactly(user.email)
-        expect(response.subject).to eq 'Email confirmation instructions'
+        expect(response.subject).to eq 'Confirmation instructions'
       end
     end
   end
