@@ -39,7 +39,7 @@ class TrainingModule < YamlBase
 
   # @return [Array<ModuleItem>]
   def module_items
-    @module_items ||= ModuleItem.where(training_module: name)
+    @module_items ||= ModuleItem.where(training_module: name).to_a
   end
 
   # @example
@@ -121,14 +121,20 @@ class TrainingModule < YamlBase
     ModuleItem.where_type(name, 'assessment_results').first
   end
 
+  # @return [ModuleItem]
   def certificate_page
     ModuleItem.where_type(name, 'certificate').first
   end
 
-  # Summative results if module includes assessment
+  # @return [ModuleItem]
+  def first_confidence_page
+    ModuleItem.where_type(name, 'confidence_questionnaire').first
+  end
+
+  # Certificate page if included
   #
   # @return [ModuleItem]
   def last_page
-    assessment_results_page || module_items.last
+    certificate_page || module_items.last
   end
 end
