@@ -21,7 +21,9 @@ module ContentHelper
     govuk_table(rows: [header, *rows], caption: 'Completed modules', first_cell_is_header: true)
   end
 
-  # @return [String]
+  # @param text [String] Tag content
+  # @param tag [Symbol] HTML element (default h1)
+  # @return [String, nil]
   def govuk_heading(text, tag: :h1)
     return if text.blank?
 
@@ -29,6 +31,7 @@ module ContentHelper
   end
 
   # @param icon [String, Symbol] Fontawesome icon name
+  # @param size [Integer] Icon scale factor
   # @return [String]
   def icon(icon, size: 2, **)
     content_tag(:i, nil, class: "fa-solid fa-#{size}x fa-#{icon} icon")
@@ -44,7 +47,7 @@ module ContentHelper
   # @see ModuleItem.pagination
   # @see Questionnaire.pagination
   #
-  # @return [String]
+  # @return [String, nil]
   def page_number(current:, total:)
     return if current.blank?
 
@@ -64,6 +67,8 @@ module ContentHelper
     govuk_notification_banner(title_text: title, text: translate_markdown(text))
   end
 
+  # @param status [String, Symbol]
+  # @param colour [String]
   # @return [String]
   def progress_indicator(status, colour)
     govuk_tag(text: t(status, scope: 'module_indicator'), colour: colour)
