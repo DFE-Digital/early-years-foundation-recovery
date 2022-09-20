@@ -142,25 +142,9 @@ class Questionnaire < OpenStruct
   # @return [String]
   def debug_summary
     <<~SUMMARY
-      id: #{id}
-      name: #{training_module}
-      path: #{name}
-      type: #{type}
 
       ---
-      previous: #{previous_item&.name}
-      next: #{next_item&.name}
-
-      ---
-      submodule name: #{submodule_name || 'N/A'}
-      topic name: #{topic_name || 'N/A'}
-      page name: #{page_name || 'N/A'}
-
-      ---
-
-      ---
-      submodule items count: #{number_within_submodule}
-      topic items count: #{number_within_topic}
+      correct answer(s): #{questions.values.first[:correct_answers]}
     SUMMARY
   end
 
