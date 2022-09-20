@@ -37,9 +37,10 @@ class ModuleProgress
   end
 
   # Completed date for module
-  # @return [DateTime, nil]
+  # @return [DateTime]
   def completed_at
-    user.events.where(name: 'module_complete').where_properties(training_module_id: mod.name).first&.time
+    last_page = mod.module_items.last.name
+    training_module_events.where_properties(id: last_page).first.time
   end
 
   # @see CourseProgress

@@ -89,25 +89,15 @@ class Questionnaire < OpenStruct
     !!submitted
   end
 
-  # @return [Boolean]
-  def last_assessment?
+  # @return [Boolean] end of summative assessment
+  def final_question?
     module_item.parent.last_assessment_page.eql?(module_item)
-  end
-
-  # @return [Boolean]
-  def first_confidence?
-    module_item.parent.first_confidence_page.eql?(module_item)
-  end
-
-  # @return [Boolean]
-  def first_assessment?
-    module_item.parent.first_assessment_page.eql?(module_item)
   end
 
   # @return [String]
   def next_button_text
     if summative?
-      last_assessment? ? 'Finish test' : 'Save and continue'
+      final_question? ? 'Finish test' : 'Save and continue'
     else
       'Next'
     end

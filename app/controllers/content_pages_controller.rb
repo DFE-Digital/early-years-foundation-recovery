@@ -1,7 +1,6 @@
 class ContentPagesController < ApplicationController
   before_action :authenticate_registered_user!
   before_action :clear_flash
-  before_action :track_events, only: :show
   helper_method :module_item, :training_module
 
   def index
@@ -10,6 +9,7 @@ class ContentPagesController < ApplicationController
   end
 
   def show
+    track('module_content_page')
     @module_progress = ModuleOverviewDecorator.new(helpers.module_progress(module_item.parent))
     @model = module_item.model
 
@@ -23,17 +23,6 @@ class ContentPagesController < ApplicationController
   end
 
 private
-
-  def track_events
-    track('module_content_page')
-
-    if track_module_start?
-      track('module_start')
-      helpers.calculate_module_state
-    end
-
-    track('confidence_check_complete') if track_confidence_check_complete?
-  end
 
   def module_item
     @module_item ||= ModuleItem.find_by!(training_module: training_module_name, name: module_params[:id])
@@ -55,16 +44,6 @@ private
     end
   end
 
-  # @return [Boolean]
-  def track_module_start?
-    module_item.module_intro? && untracked?('module_start', training_module_id: training_module_name)
-  end
-
-  # @return [Boolean]
-  def track_confidence_check_complete?
-    helpers.module_progress(module_item.parent).completed? && untracked?('confidence_check_complete', training_module_id: training_module_name)
-  end
-  
   def module_params
     params.permit(:training_module_id, :id)
   end

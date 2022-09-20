@@ -48,10 +48,6 @@ module ApplicationHelper
     cookies[:track_analytics] == 'true'
   end
 
-  def calculate_module_state
-    CalculateModuleState.new(user: current_user).call
-  end
-
   # @return [String]
   def html_title(module_item)
     site_title = 'Child development training'
