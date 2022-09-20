@@ -24,10 +24,10 @@ class ModuleProgress
     page.properties['id'] if page.present?
   end
 
-  # Last visited module item
+  # Last visited module item (with fallback to first, if new start page added)
   # @return [ModuleItem]
   def resume_page
-    unvisited.first&.previous_item
+    unvisited.first&.previous_item || mod.module_items.first
   end
 
   # @see CourseProgress
