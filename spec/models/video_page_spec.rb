@@ -58,4 +58,22 @@ RSpec.describe VideoPage, type: :model do
       expect(video_page.youtube_url).to eq("https://wwww.youtube.com/embed/#{video_id}?enablejsapi=1&amp;origin=")
     end
   end
+
+  describe '#vimeo_video?' do
+    it 'returns true if the provider is vimeo' do
+      result = expect(video_page.video_provider).to eq(content.dig(video_page.name.to_s, 'video', 'provider'))
+      expect(video_page.vimeo_video?).to eq result
+    end
+  end
+
+  describe '#youtube_video?' do
+    let(:file) { Rails.root.join('config/locales/modules/charlie.yml') }
+    let(:content) { YAML.load_file(file).dig('en', 'modules', 'charlie') }
+    let(:video_page) { described_class.new(training_module: 'charlie', type: :video_page, name: '1-1-3') }
+
+    it 'returns true if the provider is youtube' do
+      result = expect(video_page.video_provider).to eq(content.dig(video_page.name.to_s, 'video', 'provider'))
+      expect(video_page.youtube_video?).to eq result
+    end
+  end
 end

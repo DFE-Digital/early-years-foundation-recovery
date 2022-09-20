@@ -42,12 +42,24 @@ class VideoPage
     translate(:video)[:provider]
   end
 
+  # @return [String]
   def vimeo_url
     %(https://player.vimeo.com/video/#{video_id}?enablejsapi=1&amp;origin=#{ENV['DOMAIN']})
   end
 
+  # @return [String]
   def youtube_url
     %(https://wwww.youtube.com/embed/#{video_id}?enablejsapi=1&amp;origin=#{ENV['DOMAIN']})
+  end
+
+  # @return [Boolean]
+  def vimeo_video?
+    video_provider == 'vimeo'
+  end
+
+  # @return [Boolean]
+  def youtube_video?
+    video_provider == 'youtube'
   end
 
   # @return [String]
