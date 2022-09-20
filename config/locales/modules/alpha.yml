@@ -15,7 +15,7 @@ en:
 
           %Warning: people like stuff!%
 
-          $VimeoVideo[Video Title Example](743243040)$EndVimeoVideo
+          $VIMEO[Video Title Example](743243040)$VIMEO
 
           <div class="govuk-inset-text prompt">
             <h2 class="govuk-heading-m">Practitioner prompt</h2>

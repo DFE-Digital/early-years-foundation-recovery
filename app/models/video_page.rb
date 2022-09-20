@@ -26,7 +26,7 @@ class VideoPage
   def body
     translate(:body)
   end
-  
+
   # @return [String]
   def video_id
     translate(:video)[:id]
@@ -40,6 +40,14 @@ class VideoPage
   # @return [String]
   def video_provider
     translate(:video)[:provider]
+  end
+
+  def vimeo_url
+    %(https://player.vimeo.com/video/#{video_id}?enablejsapi=1&amp;origin=#{ENV['DOMAIN']})
+  end
+
+  def youtube_url
+    %(https://wwww.youtube.com/embed/#{video_id}?enablejsapi=1&amp;origin=#{ENV['DOMAIN']})
   end
 
   # @return [String]

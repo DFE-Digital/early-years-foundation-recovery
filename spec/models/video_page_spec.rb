@@ -1,17 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe VideoPage, type: :model do
-  let(:file) do
-    Rails.root.join('config/locales/modules/alpha.yml')
-  end
-
-  let(:content) do
-    YAML.load_file(file).dig('en', 'modules', 'alpha')
-  end
-
-  let(:video_page) do
-    described_class.new(training_module: 'alpha', type: :video_page, name: '1-2-1-2')
-  end
+  let(:file) { Rails.root.join('config/locales/modules/alpha.yml') }
+  let(:content) { YAML.load_file(file).dig('en', 'modules', 'alpha') }
+  let(:video_page) { described_class.new(training_module: 'alpha', type: :video_page, name: '1-2-1-2') }
 
   describe '#heading' do
     it 'returns the heading data from the content file' do
@@ -44,8 +36,26 @@ RSpec.describe VideoPage, type: :model do
   end
 
   describe '#video_transcript' do
-    it 'returns the video provider data from the content file' do
+    it 'returns the video provider data' do
       expect(video_page.transcript).to include('Balancing adult and child led activities')
+    end
+  end
+
+  describe '#vimeo_url' do
+    it 'returns the url of the embedded vimeo video' do
+      video_id = content.dig(video_page.name.to_s, 'video', 'id')
+      expect(video_page.vimeo_url).to eq("https://player.vimeo.com/video/#{video_id}?enablejsapi=1&amp;origin=")
+    end
+  end
+
+  describe '#youtube_url' do
+    let(:file) { Rails.root.join('config/locales/modules/charlie.yml') }
+    let(:content) { YAML.load_file(file).dig('en', 'modules', 'charlie') }
+    let(:video_page) { described_class.new(training_module: 'charlie', type: :video_page, name: '1-1-3') }
+
+    it 'returns the url of the embedded youtube video' do
+      video_id = content.dig(video_page.name.to_s, 'video', 'id')
+      expect(video_page.youtube_url).to eq("https://wwww.youtube.com/embed/#{video_id}?enablejsapi=1&amp;origin=")
     end
   end
 end

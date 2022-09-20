@@ -24,7 +24,7 @@ en:
           in the early years foundation stage framework. There are also some tips on how to
           support children in this area.
 
-          $YoutubeVideo[Youtube Test Video](XnP6jaK7ZAY)$EndYoutubeVideo
+          $YOUTUBE[Youtube Test Video](XnP6jaK7ZAY)$YOUTUBE
         video:
           id: XnP6jaK7ZAY
           title: Youtube Video Title
