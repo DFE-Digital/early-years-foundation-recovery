@@ -16,7 +16,7 @@
 ---
 alpha:
   what-to-expect:
-    type: prompt_page
+    type: expectation_page
   before-you-start:
     type: interruption_page
   intro:

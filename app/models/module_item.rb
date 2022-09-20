@@ -26,7 +26,7 @@ class ModuleItem < YamlBase
     confidence_intro: ContentPage,
     # static content
     interruption_page: ContentPage,
-    prompt_page: ContentPage,
+    expectation_page: ContentPage,
     # dynamic content
     text_page: ContentPage,
     # video

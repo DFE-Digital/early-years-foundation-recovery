@@ -27,7 +27,7 @@ class ModuleProgress
   # Last visited module item (with fallback to first, if new start page added)
   # @return [ModuleItem]
   def resume_page
-    unvisited.first&.previous_item || mod.module_items.first
+    unvisited.first&.previous_item || mod.expectation_page
   end
 
   # @see CourseProgress
