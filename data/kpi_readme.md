@@ -72,7 +72,7 @@ Example event data from the `ahoy_visits` table.
 ## Transactions
 
 
-| Done | Feature                       | Controllers and actions        | Key                             | Path                                         |
+| Done | Feature                       | Controllers                    | Key                             | Path                                         |
 | :--- | :---                          | :---                           | :---                            | :---                                         |
 | [x]  | Homepage                      | `HomeController`               | `home_page`                     | `/`                                          |
 | [x]  | Monitoring progress           | `LearningController`           | `learning_page`                 | `/my-learning`                               |
