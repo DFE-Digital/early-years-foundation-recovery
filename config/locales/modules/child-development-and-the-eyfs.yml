@@ -94,15 +94,14 @@ en:
           
           When you are planning your curriculum, you need to consider the intent, implementation and impact.
 
-          $I
-          "Intent is what you want pupils to learn: your curriculum thinking and high-level planning.
-          
-          Implementation is the teaching activities you choose to teach your curriculum.
-          
-          Impact is when that curriculum content is learned."
-
-          [Ofsted, 2021](https://educationinspection.blog.gov.uk/2021/12/08/curriculum-keeping-it-simple/)
-          $I
+          <div class='blockquote-container'>
+            <blockquote class='quote'>
+              <p>Intent is what you want pupils to learn: your curriculum thinking and high-level planning.</p>
+              <p>Implementation is the teaching activities you choose to teach your curriculum.</p>
+              <p>Impact is when that curriculum content is learned.</p>
+              <cite>Ofsted, 2021</cite>
+            </blockquote>
+          </div>
 
           When doing this planning, you need to consider each child's:
 
@@ -411,7 +410,9 @@ en:
       1-1-2:
         heading: Factors affecting children’s development
         body: |
-          Children will potentially experience a range of challenges and experiences that may impact on their development. However, this should not impact on their ability to succeed. Understanding these factors will help you to develop appropriate strategies and support mechanisms to guide children to reach their full potential.
+          Children will potentially experience a range of challenges and experiences that may impact on their development. However, this should not impact on their ability to succeed. 
+          
+          Understanding these factors will help you to develop appropriate strategies and support mechanisms to guide children to reach their full potential.
 
           This topic includes:
 
