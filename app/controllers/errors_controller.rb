@@ -2,7 +2,7 @@ class ErrorsController < ApplicationController
   before_action :log_error
 
   def not_found
-    render status: 404
+    render status: :not_found
   end
 
   def timeout
@@ -10,7 +10,7 @@ class ErrorsController < ApplicationController
   end
 
   def internal_server_error
-    render status: 500
+    render status: :internal_server_error
   end
 
 private
