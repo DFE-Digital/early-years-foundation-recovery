@@ -30,11 +30,12 @@
   
     &:before {
       position: absolute;
-      content: open-quote;
+      content: '“';
       font-size: 8em;
       margin-top: -0.4em;
       background-color: #fff;
       line-height: 0.9;
+      height: 50px;
       padding-left: 10px;
       padding-right: 10px;
       font-family: serif;
