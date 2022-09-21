@@ -21,7 +21,7 @@ en:
           $YT[With a Title](EpjSlCJtPLo)$ENDYT
           $YT(EpjSlCJtPLo)$ENDYT
 
-          $BANG
+          $INFO
 
           Tempor non non id nulla tempor eiusmod sit excepteur culpa duis commodo
           adipisicing labore sunt eu officia nisi quis eu elit pariatur sint enim
@@ -39,7 +39,7 @@ en:
           Add your Govspeak markup here
           &#36;BANG
           </pre>
-          $BANG
+          $INFO
 
           $BRAIN
 

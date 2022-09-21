@@ -38,14 +38,14 @@ describe 'ContentHelper#translate_markdown', type: :helper do
       end
     end
 
-    describe '$BANG' do
+    describe '$INFO' do
       let(:input) do
         <<~BANG
-          $BANG
+          $INFO
           - one
           - two
           - three
-          $BANG
+          $INFO
         BANG
       end
 

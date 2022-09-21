@@ -366,13 +366,13 @@ en:
 
           Children need opportunities to explore their understanding of these relationships. Spontaneous play and role play provide excellent opportunities for children to experiment with behaviour they have observed or experienced. This gives the space to navigate their associated feelings and thoughts, and to express themselves freely without concern of judgment or expectation. Observing such play is a great opportunity to understand a child’s development.
 
-          $BANG
+          $INFO
           Do you have easily accessible role play and spontaneous play opportunities?
 
           Do children have opportunities within the day to communicate with other children and staff members?
 
           How does your setting ensure children receive consistent care across all staff members?
-          $BANG
+          $INFO
 
       2-1-3-2a:
         heading: A healthy diet
@@ -389,13 +389,13 @@ en:
 
           Children who are worried about when their next meal or snack is coming will not be able to learn effectively. Routines that include consistent snack and mealtimes will ensure that children do not become hungry. They can concentrate without worrying about their next meal.
 
-          $BANG
+          $INFO
           How does your setting promote healthy eating?
 
           Do you carry out activities to develop the children’s understanding of the importance of healthy eating?
 
           How did you use this opportunity to develop the children’s language and communication skills?
-          $BANG
+          $INFO
 
       2-1-3-3:
         heading: The environment
@@ -434,14 +434,14 @@ en:
 
           Children require routines to ensure that they are able to relax and feel comfortable. When children know which staff will work with them and what will happen next, they will be relaxed and ready to learn.
 
-          $BANG
+          $INFO
             You can support children by using visual reminders of the daily routine and what comes next.
             At regular points in the day you can review  the routine so that children
             can revisit what has been completed and what will come next.
 
             You can encourage older children to get involved in deciding some parts of the routine.
             This will encourage responsibility, choice and independence.
-          $BANG
+          $INFO
 
       2-1-3-4a:
         heading: Living in poverty
@@ -456,7 +456,7 @@ en:
 
           Coming from a disadvantaged area or a household in poverty should not restrict a child’s chances to succeed. Being able to identify where a child requires support and addressing individual needs is essential to ensure the child can continue to progress.
 
-          $BANG
+          $INFO
           You can support children by:
 
           - offering a familiar, predictable and reassuring environment
@@ -464,7 +464,7 @@ en:
           - offering creative and imaginative activities to support expression of feelings
           - actively listening to support children to feel valued and important
           - scaffolding the use of unfamiliar resources including books, puzzles and games
-          $BANG
+          $INFO
 
       2-1-3-5:
         heading: Adverse childhood experiences
@@ -619,13 +619,13 @@ en:
           If a child experiences these difficulties for a prolonged period despite interventions,
           they may need support from a wider team of professionals.
 
-          $BANG
+          $INFO
           You can support children by:
 
           - using observation checkpoints
           - recording and reporting any concerns in line with your setting's requirements
           - planning to meet individual needs
-          $BANG
+          $INFO
 
       2-2-2:
         heading: Theories of how children learn
@@ -676,13 +676,13 @@ en:
 
           Maslow concluded that without securing each stage they could not move onto the next.
 
-          $BANG
+          $INFO
           You can support children by:
 
           - ensuring their physiological and security needs are met within the setting's routine
           - encouraging them to participate in activities to promote self esteem
           - challenging them to reach their full potential
-          $BANG
+          $INFO
 
       2-2-2-2:
         heading: |
@@ -952,7 +952,7 @@ en:
           Busier lifestyles and increasing numbers of cars on the road means that fewer children are walking and accessing public transport.
           This has resulted in less active lifestyles for children.
 
-          $BANG
+          $INFO
 
           How do you incorporate and promote physical activity into your environment?
           How many different ideas and strategies can you think of surrounding physical activity?
@@ -985,7 +985,7 @@ en:
           - dance parties
           - yoga
 
-          $BANG
+          $INFO
 
       2-2-3-3:
         heading: Positive partnerships with parents and carers
