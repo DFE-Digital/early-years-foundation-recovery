@@ -33,7 +33,7 @@ class ModuleProgress
   # @see CourseProgress
   # @return [Boolean]
   def completed?
-    all?(mod.module_items)
+    all?(mod.module_course_items)
   end
 
   # Completed date for module
@@ -91,7 +91,7 @@ private
 
   # @return [Array<ModuleItem>]
   def unvisited
-    mod.module_items.select { |item| module_item_events(item.name).none? }
+    mod.module_course_items.select { |item| module_item_events(item.name).none? }
   end
 
   # @param method [Symbol]

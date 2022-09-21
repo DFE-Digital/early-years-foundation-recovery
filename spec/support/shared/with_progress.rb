@@ -100,6 +100,15 @@ RSpec.shared_context 'with progress' do
     2.times { click_on 'Next' }
   end
 
+  def complete_module(mod)
+    name = mod.name
+    visit "/modules/#{name}/content-pages/intro"
+    view_pages_before(mod, 'assessment_results')
+    travel_to 5.minutes.from_now
+    visit "/modules/#{name}/content-pages/#{mod.last_page.name}"
+    click_on 'Go to My learning'
+  end
+
 private
 
   # Visit every page before the given instance of the given page type

@@ -42,6 +42,13 @@ class TrainingModule < YamlBase
     @module_items ||= ModuleItem.where(training_module: name).to_a
   end
 
+  # @return [Array<ModuleItem>]
+  # excludes certificate page
+  def module_course_items 
+    excluded_page_types = %w[certificate]
+    @module_course_items ||= ModuleItem.where(training_module: name).where.not(type: excluded_page_types).to_a
+  end
+  
   # @example
   #   {
   #     "1" => [1-1-1, 1-1-2],
@@ -131,10 +138,8 @@ class TrainingModule < YamlBase
     ModuleItem.where_type(name, 'confidence_questionnaire').first
   end
 
-  # Certificate page if included
-  #
   # @return [ModuleItem]
   def last_page
-    certificate_page || module_items.last
+    assessment_results_page || module_course_items.last
   end
 end

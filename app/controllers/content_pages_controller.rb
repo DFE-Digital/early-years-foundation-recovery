@@ -56,7 +56,7 @@ private
       helpers.calculate_module_state
     end
 
-    if module_item.certificate? && module_complete_untracked?
+    if module_item.assessment_results? && module_complete_untracked?
       track('module_complete')
       helpers.calculate_module_state
     end

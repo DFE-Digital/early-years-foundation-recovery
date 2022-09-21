@@ -54,6 +54,7 @@ class CourseProgress
         completed: #{completed?(mod)}
         available: #{available?(mod)}
         last: #{mod.module_items.last.name unless mod.draft?}
+        last_course_module_item: #{mod.module_course_items.last.name unless mod.draft?}
         milestone: #{milestone(mod.name)}
       SUMMARY
     end

@@ -109,9 +109,9 @@ RSpec.describe 'Event log' do
   describe 'complete first module' do
     before do
       visit '/modules/alpha/content-pages/intro'
-      view_pages_before(alpha, 'sub_module_intro', 8)
+      view_pages_before(alpha, 'assessment_results')
       travel_to 5.minutes.from_now
-      visit 'modules/alpha/content-pages/1-3-4'
+      visit 'modules/alpha/content-pages/1-3-2-5'
     end
 
     it 'tracks completion' do

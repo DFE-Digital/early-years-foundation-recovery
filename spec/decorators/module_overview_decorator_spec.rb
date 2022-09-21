@@ -54,7 +54,7 @@ RSpec.describe ModuleOverviewDecorator do
 
         expect(user.events.count).to be 14
         expect(output[:state]).to be :completed
-        expect(output[:page]).to eql '1-2-3'
+        expect(output[:page]).to eql '1-2-2-4'
       end
     end
   end
