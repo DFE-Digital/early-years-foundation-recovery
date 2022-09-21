@@ -18,13 +18,6 @@ class GovspeakDecorator < DelegateClass(Govspeak::Document)
     %(<h2 class="govuk-heading-m govuk-!-margin-top-2">#{optional_title}</h2><div class="govspeak-embed-container" style="padding:56.19% 0 0 0;position:relative;"><iframe class="govspeak-embed-video" style="position:absolute;top:0;left:0;width:100%;height:100%;" src="#{embed_url}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>)
   end
 
-  # TODO: Complete transcript govspeak tag
-  # Govspeak::Document.extension('VideoTranscript', /\$TRANSCRIPT(?:\[(.*?)\])?\((.*?)\)\$TRANSCRIPT/m) do |title, transcript_id|
-  #   transcript_file = Rails.root.join(%(data/video-transcripts/#{transcript_id}.yml))
-  #   optional_title = title ? %(title="#{title}") : ''
-  #   YAML.load_file(transcript_file)
-  # end
-
   # TODO: Determine why commenting this method out has no affect on the specs
   # Find out what content is meant to be blocked/fixed by GovspeakDecorator::HtmlSanitizerDecorator
   def to_html
