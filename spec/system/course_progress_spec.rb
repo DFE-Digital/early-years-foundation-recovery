@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe CourseProgress do
-  subject(:course) { described_class.new(user: user) }
 
   include_context 'with progress'
   include_context 'with user'
 
+  subject(:course) { described_class.new(user: user) }
   describe '#milestone' do
     it 'returns the name of the last viewed page' do
       view_module_page_event('alpha', '1-1')
