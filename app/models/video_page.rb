@@ -69,7 +69,7 @@ class VideoPage
       transcript_data = YAML.load_file(transcript_file)
       transcript_data['transcript']
     else
-      "Transcript unavailable"
+      'Transcript unavailable'
     end
   end
 
