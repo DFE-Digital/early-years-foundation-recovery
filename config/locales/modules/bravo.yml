@@ -18,6 +18,10 @@ en:
       1-1-2:
         heading: video_page
         body: page 2 of sub 1 (topic 2)
+        video:
+          id:
+          title:
+          provider:
       1-1-2-1:
         heading: text_page
         body: page 3 of sub 1 (topic 2 page 2)
@@ -31,6 +35,10 @@ en:
       1-2-2:
         heading: video_page
         body: page 2 of sub 2 (topic 2)
+        video:
+          id:
+          title:
+          provider:
       1-2-2-1:
         heading: text_page
         body: page 3 of sub 2 (topic 2 page 2)

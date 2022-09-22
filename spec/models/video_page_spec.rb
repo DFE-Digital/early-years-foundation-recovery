@@ -55,7 +55,7 @@ RSpec.describe VideoPage, type: :model do
 
     it 'returns the url of the embedded youtube video' do
       video_id = content.dig(video_page.name.to_s, 'video', 'id')
-      expect(video_page.youtube_url).to eq("https://wwww.youtube.com/embed/#{video_id}?enablejsapi=1&amp;origin=")
+      expect(video_page.youtube_url).to eq("https://www.youtube.com/embed/#{video_id}?enablejsapi=1&amp;origin=")
     end
   end
 
