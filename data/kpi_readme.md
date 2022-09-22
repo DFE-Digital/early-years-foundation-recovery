@@ -88,6 +88,8 @@ Example event data from the `ahoy_visits` table.
 | [x]  | User postcode change   | `UserController#update_postcode`         | `user_postcode_change` | `/my-account/update-postcode`         |
 | [x]  | User ofsted change     | `UserController#update_ofsted_number`    | `user_ofsted_change`   | `/my-account/update-ofsted-number`    |
 | [x]  | Email address taken    | `RegistrationsController#create`         | `email_address_taken`  | `/users/sign-up`                      |
+| [x]  | User note created      | `NotesController#create`                 | `user_note_created`    | `/my-account/learning-log`            |
+| [x]  | User note updated      | `NotesController#update`                 | `user_note_updated`    | `/my-account/learning-log`            |
 | [x]  | User inactivity logout | `ErrorsController#timeout`               | `error_page`           | `/timeout`                            |
 | [x]  | 404 Error              | `ErrorsController#not_found`             | `error_page`           | `/404`                                |
 | [x]  | 500 Error              | `ErrorsController#internal_server_error` | `error_page`           | `/500`                                |
