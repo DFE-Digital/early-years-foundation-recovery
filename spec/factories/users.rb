@@ -14,6 +14,7 @@ FactoryBot.define do
       last_name { Faker::Name.last_name }
       postcode { Faker::Address.postcode }
       setting_type { 'school' }
+      terms_and_conditions_agreed_at { Date.new(2000,01,01) }
     end
 
     trait :completed do

@@ -8,8 +8,19 @@
       = f.govuk_email_field :email, autofocus: true, autocomplete: 'email', hint: { text: "We'll send you an email with an account activation link." }
       = f.govuk_password_field :password, label: { text: 'Create password' }, hint: { text: t('password.hardness', length: @minimum_password_length) }
       = f.govuk_password_field :password_confirmation
-      = govuk_inset_text do 
-        p By continuing, you accept the #{govuk_link_to 'terms and conditions', static_path('terms-and-conditions')} and #{govuk_link_to 'privacy policy', static_path('privacy-policy')}.
+
+      div.light-grey-box
+      
+        p.govuk-body
+          | To use this service, you must accept the #{govuk_link_to 'terms and conditions', static_path('terms-and-conditions')} and #{govuk_link_to 'privacy policy', static_path('privacy-policy')}.
+          
+        = f.govuk_check_box :terms_and_conditions_agreed_at,
+          Time.now,
+          nil,
+          multiple: false,
+          link_errors: true,
+          label: { text: "I confirm that I accept the terms and conditions and privacy policy." }
+      
     = f.govuk_submit 'Continue'
 
 = render 'devise/shared/form_wrap'
