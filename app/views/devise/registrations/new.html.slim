@@ -8,12 +8,10 @@
       = f.govuk_email_field :email, autofocus: true, autocomplete: 'email', hint: { text: "We'll send you an email with an account activation link." }
       = f.govuk_password_field :password, label: { text: 'Create password' }, hint: { text: t('password.hardness', length: @minimum_password_length) }
       = f.govuk_password_field :password_confirmation
-
-      div.light-grey-box
-      
+      = f.govuk_check_boxes_fieldset :terms_and_conditions_agreed_at,
+        legend: nil, classes: 'light-grey-box' do
         p.govuk-body
           | To use this service, you must accept the #{govuk_link_to 'terms and conditions', static_path('terms-and-conditions')} and #{govuk_link_to 'privacy policy', static_path('privacy-policy')}.
-          
         = f.govuk_check_box :terms_and_conditions_agreed_at,
           Time.now,
           nil,
