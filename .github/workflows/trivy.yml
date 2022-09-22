@@ -12,7 +12,7 @@ on:
   pull_request:
 
 env:
-  DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
+  REGISTRY: ghcr.io/dfe-digital/early-years-foundation-recovery
 
 jobs:
   build:
@@ -26,12 +26,12 @@ jobs:
       - # TODO: replace with "docker/build-push-action@v2" for caching
         name: Build image from Dockerfile
         run: |
-          docker build --target app --tag ${{ env.DOCKER_IMAGE }}:${{ github.sha }} .
+          docker build --target app --tag ${{ env.REGISTRY }}:${{ github.sha }} .
       -
         name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+          image-ref: ${{ env.REGISTRY }}:${{ github.sha }}
           format: table
           exit-code: 1
           ignore-unfixed: true
