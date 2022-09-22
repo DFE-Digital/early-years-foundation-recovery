@@ -139,6 +139,15 @@ class Questionnaire < OpenStruct
     end
   end
 
+  # @return [String]
+  def debug_summary
+    <<~SUMMARY
+
+      ---
+      correct answer(s): #{questions.values.first[:correct_answers]}
+    SUMMARY
+  end
+
 private
 
   # Validations are not used in any logic currently
