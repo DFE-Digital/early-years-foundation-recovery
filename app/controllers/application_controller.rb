@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     ahoy.track(key, properties)
   end
 
-  # Check if a specific user event has already been logged 
+  # Check if a specific user event has already been logged
   #
   # @param key [String]
   # @param data [Hash]

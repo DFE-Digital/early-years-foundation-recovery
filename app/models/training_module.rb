@@ -44,11 +44,11 @@ class TrainingModule < YamlBase
 
   # @return [Array<ModuleItem>]
   # excludes certificate page
-  def module_course_items 
+  def module_course_items
     excluded_page_types = %w[certificate]
     @module_course_items ||= ModuleItem.where(training_module: name).where.not(type: excluded_page_types).to_a
   end
-  
+
   # @example
   #   {
   #     "1" => [1-1-1, 1-1-2],

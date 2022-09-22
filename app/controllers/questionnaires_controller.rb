@@ -104,7 +104,7 @@ protected
       end
     end
   end
-  
+
   def track_questionnaire_answer
     key = questionnaire.questions.keys.first
 

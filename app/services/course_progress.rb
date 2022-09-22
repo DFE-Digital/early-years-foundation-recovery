@@ -21,7 +21,7 @@ class CourseProgress
   def upcoming_modules
     by_state(:upcoming).reject { |mod| available?(mod) }.take(3)
   end
-  
+
   # Completed modules are modules for which every module item has been viewed
   # completed_at comes from a specific named event
   # @return [Array<Array>] Tabular data of completed training module
