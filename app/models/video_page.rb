@@ -49,7 +49,7 @@ class VideoPage
 
   # @return [String]
   def youtube_url
-    %(https://wwww.youtube.com/embed/#{video_id}?enablejsapi=1&amp;origin=#{ENV['DOMAIN']})
+    %(https://www.youtube.com/embed/#{video_id}?enablejsapi=1&amp;origin=#{ENV['DOMAIN']})
   end
 
   # @return [Boolean]
@@ -64,9 +64,13 @@ class VideoPage
 
   # @return [String]
   def transcript
-    transcript_file = Rails.root.join(%(data/video-transcripts/#{video_id}.yml))
-    transcript_data = YAML.load_file(transcript_file)
-    transcript_data['transcript']
+    if File.exist?(Rails.root.join(%(data/video-transcripts/#{video_id}.yml)))
+      transcript_file = Rails.root.join(%(data/video-transcripts/#{video_id}.yml))
+      transcript_data = YAML.load_file(transcript_file)
+      transcript_data['transcript']
+    else
+      "Transcript unavailable"
+    end
   end
 
   # @return [ModuleItem]

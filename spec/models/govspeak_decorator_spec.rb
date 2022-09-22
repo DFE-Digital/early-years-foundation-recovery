@@ -20,13 +20,12 @@ RSpec.describe GovspeakDecorator do
     expect(rendered).to eq(expected_html)
   end
 
-  #  Not sure about this spec
-  # it 'returns kramdown doc if sanitize false' do
-  #   govspeak_md = '$YOUTUBE(EpjSlCJtPLos)$YOUTUBE'
-  #   expected_html = %(<h2 class="govuk-heading-m govuk-!-margin-top-2"></h2>\n<div class="govspeak-embed-container" style="padding:56.19% 0 0 0;position:relative;"><iframe class="govspeak-embed-video" style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube.com/embed/EpjSlCJtPLos?enablejsapi=1&amp;origin=#{ENV['DOMAIN']}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>\n)
-  #   rendered = described_class.translate_markdown(govspeak_md, sanitize: false)
-  #   expect(rendered).to eq(expected_html)
-  # end
+  it 'returns kramdown doc if sanitize false' do
+    govspeak_md = '$YOUTUBE(EpjSlCJtPLos)$YOUTUBE'
+    expected_html = %(<h2 class="govuk-heading-m govuk-!-margin-top-2"></h2>\n<div class="govspeak-embed-container" style="padding:56.19% 0 0 0;position:relative;"><iframe class="govspeak-embed-video" style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube.com/embed/EpjSlCJtPLos?enablejsapi=1&amp;origin=#{ENV['DOMAIN']}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>\n)
+    rendered = described_class.translate_markdown(govspeak_md, sanitize: false)
+    expect(rendered).to eq(expected_html)
+  end
 
   it 'embeds Vimeo  as iframe and without a title' do
     govspeak_md = '$VIMEO(123456789)$VIMEO'
