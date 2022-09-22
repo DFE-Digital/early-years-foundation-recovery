@@ -9,10 +9,11 @@ class User < ApplicationRecord
   has_many :visits, class_name: 'Ahoy::Visit'
   has_many :events, class_name: 'Ahoy::Event'
 
-  validates :first_name, :last_name, :postcode, :setting_type, :terms_and_conditions_agreed_at,
+  validates :first_name, :last_name, :postcode, :setting_type,
             presence: true,
             if: proc { |u| u.registration_complete }
-
+  
+  validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
   validates :postcode, postcode: true
   validates :ofsted_number, ofsted_number: true
 
