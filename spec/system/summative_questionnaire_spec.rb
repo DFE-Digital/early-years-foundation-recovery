@@ -10,6 +10,14 @@ RSpec.describe 'Summative questionnaire' do
     start_summative_assessment(alpha)
   end
 
+  describe 'intro' do
+    it 'uses generic content' do
+      visit '/modules/alpha/content-pages/1-3-2'
+      expect(page).to have_content('End of module test')
+        .and have_content('This end of module test is here to revisit what you have learned')
+    end
+  end
+
   context 'when a user has reached the assessment' do
     it 'can resume from the module overview page' do
       visit '/modules/alpha'
