@@ -44,7 +44,7 @@ RSpec.describe VideoPage, type: :model do
   describe '#vimeo_url' do
     it 'returns the url of the embedded vimeo video' do
       video_id = content.dig(video_page.name.to_s, 'video', 'id')
-      expect(video_page.vimeo_url).to eq("https://player.vimeo.com/video/#{video_id}?enablejsapi=1&amp;origin=")
+      expect(video_page.vimeo_url).to eq("https://player.vimeo.com/video/#{video_id}?enablejsapi=1&amp;origin=#{ENV['DOMAIN']}")
     end
   end
 
@@ -55,7 +55,7 @@ RSpec.describe VideoPage, type: :model do
 
     it 'returns the url of the embedded youtube video' do
       video_id = content.dig(video_page.name.to_s, 'video', 'id')
-      expect(video_page.youtube_url).to eq("https://www.youtube.com/embed/#{video_id}?enablejsapi=1&amp;origin=")
+      expect(video_page.youtube_url).to eq("https://www.youtube.com/embed/#{video_id}?enablejsapi=1&amp;origin=#{ENV['DOMAIN']}")
     end
   end
 
