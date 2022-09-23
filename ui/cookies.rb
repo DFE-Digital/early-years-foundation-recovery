@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require_relative './spec_helper'
 
 describe 'Cookies policy', er_138: true do
   include_context 'as guest'

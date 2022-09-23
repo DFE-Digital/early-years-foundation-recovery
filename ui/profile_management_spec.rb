@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require_relative './spec_helper'
 
 describe 'Profile management' do
   include_context 'with user'

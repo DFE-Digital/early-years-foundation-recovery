@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require_relative './spec_helper'
 
 #ER-124: 2. Sign-in error messages for invalid or not recognised credentials
 
