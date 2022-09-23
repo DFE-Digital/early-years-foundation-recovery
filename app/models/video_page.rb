@@ -5,7 +5,7 @@ class VideoPage
 
   attr_accessor :id, :name, :type, :training_module, :video
 
-  validates :heading, :body, presence: true
+  validates :heading, :body, :video, presence: true
 
   # To display without error the Youtube URL should be the embedded url.
   # On the target video page, click Share and then selected embeded.
@@ -34,7 +34,11 @@ class VideoPage
 
   # @return [String]
   def video_title
-    translate(:video)[:title]
+    if translate(:video)[:title].nil?
+      '[Enter a title here]'
+    else
+      translate(:video)[:title]
+    end
   end
 
   # @return [String]
