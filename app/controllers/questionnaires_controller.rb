@@ -96,12 +96,8 @@ protected
 
       mod = questionnaire.module_item.parent
 
-      if questionnaire.last_assessment?
-        helpers.assessment_progress(mod).save!
-        redirect_to training_module_assessment_result_path(mod, mod.assessment_results_page)
-      else
-        redirect_to next_item_path(questionnaire.module_item)
-      end
+      helpers.assessment_progress(mod).save! if questionnaire.last_assessment?
+      redirect_to next_item_path(questionnaire.module_item)
     end
   end
 
