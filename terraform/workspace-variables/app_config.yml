@@ -35,7 +35,7 @@ development:
 # ey-recovery-content
 content:
   <<: *defaults
-  TRAINING_MODULES: demo-modules
+  # TRAINING_MODULES: demo-modules
   TIMEOUT_MINUTES: 60
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
