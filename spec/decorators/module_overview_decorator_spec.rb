@@ -52,7 +52,7 @@ RSpec.describe ModuleOverviewDecorator do
       it 'retakes the assessment' do
         bravo.module_items.map { |i| view_module_page_event('bravo', i.name) }
 
-        expect(user.events.count).to be 14
+        expect(user.events.count).to be 15
         expect(output[:state]).to be :completed
         expect(output[:page]).to eql '1-2-2-4'
       end
