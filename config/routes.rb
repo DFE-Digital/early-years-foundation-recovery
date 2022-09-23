@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'about-training', to: 'training_modules#index', as: :course_overview
 
   get '/404', to: 'errors#not_found', via: :all
+  # get '/422', to: 'errors#unacceptable', via: :all
   get '/500', to: 'errors#internal_server_error', via: :all
   get 'users/timeout', to: 'errors#timeout'
 
