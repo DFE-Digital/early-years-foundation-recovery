@@ -4,7 +4,7 @@
   
   blockquote.quote {
     position: relative;
-    border: 3px solid #000;
+    border: 3px solid govuk-colour("black");
     padding: 20px;
     margin: 16px 20px;
 
@@ -33,7 +33,7 @@
       content: open-quote;
       font-size: 8em;
       margin-top: -0.4em;
-      background-color: #fff;
+      background-color: govuk-colour("white");
       line-height: 0.9;
       padding-left: 10px;
       padding-right: 10px;

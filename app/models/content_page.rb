@@ -38,7 +38,6 @@ class ContentPage
     @module_item ||= ModuleItem.find_by(training_module: training_module, name: name)
   end
 
-  # Interruption page content is different for each type
   # @return [Boolean]
   def formative?
     module_item.parent.formative?

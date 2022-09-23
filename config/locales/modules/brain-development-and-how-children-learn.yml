@@ -2,6 +2,7 @@
 en:
   modules:
     brain-development-and-how-children-learn:
+      what-to-expect:
       before-you-start:
       intro:
         heading: Brain development and how children learn
@@ -365,15 +366,13 @@ en:
 
           Children need opportunities to explore their understanding of these relationships. Spontaneous play and role play provide excellent opportunities for children to experiment with behaviour they have observed or experienced. This gives the space to navigate their associated feelings and thoughts, and to express themselves freely without concern of judgment or expectation. Observing such play is a great opportunity to understand a child’s development.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
+          Do you have easily accessible role play and spontaneous play opportunities?
 
-            <p class="govuk-body">Do you have easily accessible role play and spontaneous play opportunities?  </p>
+          Do children have opportunities within the day to communicate with other children and staff members?
 
-            <p class="govuk-body">Do children have opportunities within the day to communicate with other children and staff members?  </p>
-
-            <p class="govuk-body">How does your setting ensure children receive consistent care across all staff members? </p>
-          </div>
+          How does your setting ensure children receive consistent care across all staff members?
+          $INFO
 
       2-1-3-2a:
         heading: A healthy diet
@@ -390,15 +389,13 @@ en:
 
           Children who are worried about when their next meal or snack is coming will not be able to learn effectively. Routines that include consistent snack and mealtimes will ensure that children do not become hungry. They can concentrate without worrying about their next meal.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
+          How does your setting promote healthy eating?
 
-            <p class="govuk-body">How does your setting promote healthy eating?  </p>
+          Do you carry out activities to develop the children’s understanding of the importance of healthy eating?
 
-            <p class="govuk-body">Do you carry out activities to develop the children’s understanding of the importance of healthy eating?  </p>
-
-            <p class="govuk-body">How did you use this opportunity to develop the children’s language and communication skills? </p>
-          </div>
+          How did you use this opportunity to develop the children’s language and communication skills?
+          $INFO
 
       2-1-3-3:
         heading: The environment
@@ -433,18 +430,18 @@ en:
           - result in a very short attention span
           - result in children becoming withdrawn and isolated
 
-          ##Routines
+          ## Routines
 
           Children require routines to ensure that they are able to relax and feel comfortable. When children know which staff will work with them and what will happen next, they will be relaxed and ready to learn.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
+            You can support children by using visual reminders of the daily routine and what comes next.
+            At regular points in the day you can review  the routine so that children
+            can revisit what has been completed and what will come next.
 
-            <p class="govuk-body">You can support children by using visual reminders of the daily routine and what comes next. At regular points in the day you can review  the routine so that children can revisit what has been completed and what will come next.  </p>
-
-            <p class="govuk-body">You can encourage older children to get involved in deciding some parts of the routine. This will encourage responsibility, choice and independence.   </p>
-
-          </div>
+            You can encourage older children to get involved in deciding some parts of the routine.
+            This will encourage responsibility, choice and independence.
+          $INFO
 
       2-1-3-4a:
         heading: Living in poverty
@@ -459,20 +456,15 @@ en:
 
           Coming from a disadvantaged area or a household in poverty should not restrict a child’s chances to succeed. Being able to identify where a child requires support and addressing individual needs is essential to ensure the child can continue to progress.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
+          You can support children by:
 
-            <p class="govuk-body">You can support children by: </p>
-
-            <ul class="govuk-list govuk-list--bullet">
-              <li>offering a familiar, predictable and reassuring environment </li>
-              <li>building children’s self worth through praise and reward </li>
-              <li>offering creative and imaginative activities to support expression of feelings </li>
-              <li>actively listening to support children to feel valued and important </li>
-              <li>scaffolding the use of unfamiliar resources including books, puzzles and games </li>
-
-            </ul>
-          </div>
+          - offering a familiar, predictable and reassuring environment
+          - building children’s self worth through praise and reward
+          - offering creative and imaginative activities to support expression of feelings
+          - actively listening to support children to feel valued and important
+          - scaffolding the use of unfamiliar resources including books, puzzles and games
+          $INFO
 
       2-1-3-5:
         heading: Adverse childhood experiences
@@ -526,16 +518,16 @@ en:
         body: |
           ![A child playing with a shape matching toy](/assets/2-2-1-1a-1297399726.jpg)
 
-          The term ‘cognitive development delay’ refers to the condition of children who are considered to be at a lower level than the expected milestone for their age. However this is a very subjective concept that does not take a child’s unique development journey into consideration.
+          The term ‘cognitive development delay’ refers to the condition of children
+          who are considered to be at a lower level than the expected milestone for their age.
+          However this is a very subjective concept that does not take a child’s unique development journey into consideration.
 
           All children develop at an individual rate and experience a broad range of variations in their care and education.
 
           For example, as described in Development Matters (2021), at a 12 month observation checkpoint, we ask:
 
-          <ul class="govuk-list govuk-list--bullet">
-          <li>does the baby ‘take turns’ by babbling and using single words? </li>
-          <li>does the baby point to things and use gestures to show things to adults and share interests? </li>
-          </ul>
+          - does the baby ‘take turns’ by babbling and using single words?
+          - does the baby point to things and use gestures to show things to adults and share interests?
 
           If the answer to either of these questions is no, we should not necessarily assume that the child:
 
@@ -543,7 +535,8 @@ en:
           - is low ability
           - will not be able to develop this skill
 
-          Depending on when the baby or child joined your care, you may already be aware of any individual needs or circumstances that have impacted their development.
+          Depending on when the baby or child joined your care, you may already be
+          aware of any individual needs or circumstances that have impacted their development.
 
           You may want to consider whether the child has not previously had the opportunity to:
 
@@ -551,42 +544,50 @@ en:
           - take turns to communicate
           - share their interests or ideas
 
-          It is essential that you ask the relevant questions surrounding development as a child settles with you. This will ensure you can support the child’s needs fully.
+          It is essential that you ask the relevant questions surrounding development as a child settles with you.
+          This will ensure you can support the child’s needs fully.
 
           This is then the perfect opportunity to provide appropriate activities and experiences to help the baby to develop these skills.
 
-          It’s also important to monitor if this makes an impact. If you are able to see progress, it is likely that the baby or young child simply requires more support and nurturing in that area to help secure their understanding and skills.
+          It’s also important to monitor if this makes an impact. If you are able to see progress,
+          it is likely that the baby or young child simply requires more support and
+          nurturing in that area to help secure their understanding and skills.
 
-          If after support the baby or child continues to make no progress, then further specialist support may be needed to identify if the child is experiencing a cognitive development delay.
+          If after support the baby or child continues to make no progress,
+          then further specialist support may be needed to identify if the child is experiencing a cognitive development delay.
 
       2-2-1-2:
         heading: Causes of cognitive development delay
         body: |
           There are different factors that can cause cognitive development delay.
 
-          ##Abuse
+          ## Abuse
 
-          Babies and young children require environments that are stimulating and relationships that are nurturing. When a baby or child does not receive these, they will not have the essential opportunities to develop and test their cognitive skills.
+          Babies and young children require environments that are stimulating and relationships that are nurturing.
+          When a baby or child does not receive these, they will not have the essential opportunities to develop and test their cognitive skills.
 
-          ##Neglect
+          ## Neglect
 
-          Babies and young children require language rich environments that provide sufficient attention and interaction. Without these they will lack the stimulation needed to promote development.
+          Babies and young children require language rich environments that provide sufficient attention and interaction.
+          Without these they will lack the stimulation needed to promote development.
 
-          ##Genetic conditions
+          ## Genetic conditions
 
-          The most common genetic condition that causes cognitive impairment is Down’s syndrome. Individuals with Down's syndrome have, on average, smaller brains than individuals where the syndrome is not present.
+          The most common genetic condition that causes cognitive impairment is Down’s syndrome.
+          Individuals with Down's syndrome have, on average, smaller brains than individuals where the syndrome is not present.
 
-          ##Accidental cause
+          ## Accidental cause
 
           Also known as acquired injury, accidental cause is where cognitive impairment results from an injury affecting the head and brain.
 
-          ##Neurodiversity
+          ## Neurodiversity
 
           Neurodiverse individuals, such as those with autism, can experience delayed cognitive processing skills and communication difficulties.
 
-          ##Pregnancy and birth related issues
+          ## Pregnancy and birth related issues
 
-          Exposure to substances such as drugs or alcohol during pregnancy can also result in cognitive difficulties for children. Birth difficulties resulting in oxygen deprivation can also cause cognitive impairment.
+          Exposure to substances such as drugs or alcohol during pregnancy can also result in cognitive difficulties for children.
+          Birth difficulties resulting in oxygen deprivation can also cause cognitive impairment.
 
           Later in the module we will explore how cognitive development delay may impact on learning and development.
 
@@ -605,33 +606,36 @@ en:
 
           Just as each child develops differently, they will also experience the difficulties of cognitive development delay differently.
 
-          Each day can be different too, with some days more difficult than others. This inconsistent performance can make it difficult to identify a child’s specific delays. This can be frustrating for the child, especially if their difficulties are mistakenly identified as unwanted or challenging behaviour.
+          Each day can be different too, with some days more difficult than others.
+          This inconsistent performance can make it difficult to identify a child's specific delays.
+          This can be frustrating for the child, especially if their difficulties are mistakenly identified as unwanted or challenging behaviour.
 
-          A child struggling with these difficulties will often develop low self esteem. This will impact on other areas of their development and their level of self efficacy.
+          A child struggling with these difficulties will often develop low self esteem.
+          This will impact on other areas of their development and their level of self efficacy.
 
-          Observation checkpoints, child development knowledge, an enabling environment and high quality practitioner interactions will all be essential. This will ensure that any potential gaps in learning are not able to develop or widen.
+          Observation checkpoints, child development knowledge, an enabling environment and high quality practitioner interactions will all be essential.
+          This will ensure that any potential gaps in learning are not able to develop or widen.
 
-          If a child experiences these difficulties for a prolonged period despite interventions, they may need support from a wider team of professionals.
+          If a child experiences these difficulties for a prolonged period despite interventions,
+          they may need support from a wider team of professionals.
 
-          <div class="govuk-inset-text prompt">
-          <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
+          You can support children by:
 
-          <p class="govuk-body">You can support children by: </p>
-
-          <ul class="govuk-list govuk-list--bullet">
-          <li>using observation checkpoints </li>
-          <li>recording and reporting any concerns in line with your setting's requirements </li>
-          <li>planning to meet individual needs </li>
-
-          </ul>
-          </div>
+          - using observation checkpoints
+          - recording and reporting any concerns in line with your setting's requirements
+          - planning to meet individual needs
+          $INFO
 
       2-2-2:
         heading: Theories of how children learn
         body: |
-          This section of the module looks at a range of theories regarding how children learn and develop their cognitive skills - the mental processes involved in learning and understanding things.
+          This section of the module looks at a range of theories regarding how children learn
+          and develop their cognitive skills - the mental processes involved in learning and understanding things.
 
-          It is important to remember that theory is just that - theoretical ideas based on the research of individuals. These theories are from a number of years ago, more recent research has both supported and criticised them. As all children are unique, you will need to consider a variety of theories and use different activities to support each child.
+          It is important to remember that theory is just that - theoretical ideas based on the research of individuals.
+          These theories are from a number of years ago, more recent research has both supported and criticised them.
+          As all children are unique, you will need to consider a variety of theories and use different activities to support each child.
 
           This topic includes:
 
@@ -650,13 +654,21 @@ en:
         heading: |
           Theories of how children learn: Maslow
         body: |
-          ![Maslow's hierarchy of needs, shown as a pyramid. At the bottom of the pyramid is physiological needs. Above that, in order, are safety needs, social belonging and self-esteem. At the top is self-actualisation.](/assets/2-2-2-1a-maslow.jpg)
+          ![Maslow's hierarchy of needs, shown as a pyramid.
+          At the bottom of the pyramid is physiological needs.
+          Above that, in order, are safety needs, social belonging and self-esteem.
+          At the top is self-actualisation.](/assets/2-2-2-1a-maslow.jpg)
 
-          Abraham Maslow’s hierarchy of needs is a theory that explains the basic needs of children and the order of importance to support effective learning.
+          Abraham Maslow’s hierarchy of needs is a theory that explains the
+          basic needs of children and the order of importance to support effective learning.
 
-          Maslow’s hierarchy of needs is often depicted as a pyramid. He describes children’s needs in levels of importance. The most important needs form the foundation of the pyramid as the basis to build upon.
+          Maslow’s hierarchy of needs is often depicted as a pyramid.
+          He describes children’s needs in levels of importance.
+          The most important needs form the foundation of the pyramid as the basis to build upon.
 
-          Maslow believed the most important needs are the physiological needs, the things needed for survival. These needs include food, water, warmth and rest. Maslow concluded that all other levels depended on these needs being met first. Next came the needs of safety and security.
+          Maslow believed the most important needs are the physiological needs, the things needed for survival.
+          These needs include food, water, warmth and rest. Maslow concluded that all other levels depended on these needs being met first.
+          Next came the needs of safety and security.
 
           It was after these needs were met that Maslow believed children could then move onto to secure belongingness and love, self esteem and self actualisation.
 
@@ -664,18 +676,13 @@ en:
 
           Maslow concluded that without securing each stage they could not move onto the next.
 
-          <div class="govuk-inset-text prompt">
-          <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
+          You can support children by:
 
-          <p class="govuk-body">You can support children by: </p>
-
-          <ul class="govuk-list govuk-list--bullet">
-          <li>ensuring their physiological and security needs are met within the setting's routine </li>
-          <li>encouraging them to participate in activities to promote self esteem </li>
-          <li>challenging them to reach their full potential  </li>
-
-          </ul>
-          </div>
+          - ensuring their physiological and security needs are met within the setting's routine
+          - encouraging them to participate in activities to promote self esteem
+          - challenging them to reach their full potential
+          $INFO
 
       2-2-2-2:
         heading: |
@@ -921,70 +928,77 @@ en:
         body: |
           ![A baby crawling up a ramp on an outdoor baby gym, supported by a practitioner](/assets/2-2-3-2a-1170397465.jpg)
 
-          It’s not ideal for children to experience long periods of inactivity. However, there are many reasons why they may do so.
+          It’s not ideal for children to experience long periods of inactivity.
+          However, there are many reasons why they may do so.
 
-          ##Technology
+          ## Technology
 
-          Increased access to technology means that even young children are spending more time on devices such as tablets and smartphones. Access to on demand TV also means that age appropriate television programmes can be accessed for longer periods throughout the day. There are many advantages to using technology within the setting - including to support children’s language and cognitive development. However, technology should be used as part of a balanced curriculum and should have a clear set of learning intentions. You can read advice for using the internet with children in a safe way in the further activities at the end of the module.
+          Increased access to technology means that even young children are spending more time on devices such as tablets and smartphones.
+          Access to on demand TV also means that age appropriate television programmes can be accessed for longer periods throughout the day.
+          There are many advantages to using technology within the setting - including to support children’s language and cognitive development.
+          However, technology should be used as part of a balanced curriculum and should have a clear set of learning intentions.
+          You can read advice for using the internet with children in a safe way in the further activities at the end of the module.
 
-          ##Imposed lockdowns
+          ## Imposed lockdowns
 
-          The COVID-19 pandemic will have increased the amount of time children have been inactive. For those without access to outdoor space and limited indoor space, physical activity may have decreased significantly. Parents and carers who have been working from home may not have been able to incorporate physical activity into children’s daily routines. For very young children, days without physical activity may have become the norm. As a practitioner, you may need to reinforce the importance of being physically active and support children to develop and understand the associated skills.
+          The COVID-19 pandemic will have increased the amount of time children have been inactive.
+          For those without access to outdoor space and limited indoor space, physical activity may have decreased significantly.
+          Parents and carers who have been working from home may not have been able to incorporate physical activity into children’s daily routines.
+          For very young children, days without physical activity may have become the norm.
+          As a practitioner, you may need to reinforce the importance of being physically active and support children to develop and understand the associated skills.
 
-          ##Transport
+          ## Transport
 
-          Busier lifestyles and increasing numbers of cars on the road means that fewer children are walking and accessing public transport. This has resulted in less active lifestyles for children.
+          Busier lifestyles and increasing numbers of cars on the road means that fewer children are walking and accessing public transport.
+          This has resulted in less active lifestyles for children.
 
-          <div class="govuk-inset-text prompt">
-          <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
 
-          <p class="govuk-body">How do you incorporate and promote physical activity into your environment? </p>
+          How do you incorporate and promote physical activity into your environment?
+          How many different ideas and strategies can you think of surrounding physical activity?
+          How many of the ideas below did you consider?
 
-          <p class="govuk-body">How many different ideas and strategies can you think of surrounding physical activity?  </p>
-          
+          ### Babies
 
-          <p class="govuk-body">How many of the ideas below did you consider? </p>
-
-          <h3 class="govuk-heading-s">Babies </h3>
-
-          <p class="govuk-body">
           Activities could include:
-          <ul>
-          <li> treasure baskets </li> <li> baby gyms</li> <li> incorporating opportunities to roll </li>  <li> practice crawling </li> </ul> </p>
 
-          <h3 class="govuk-heading-s">Toddlers </h3>
+          - treasure baskets
+          - baby gyms
+          - incorporating opportunities to roll
+          - practice crawling
 
-          <p class="govuk-body">
+          ### Toddlers
+
           Activities could include:
-          <ul> 
-          <li> walk like an animal </li> <li> parachute play </li> 
-          <li> nature walks, such as 'we are going on a bear hunt'</li> <li> bubble play </li>
-          </ul> 
-          </p>
 
-          <h3 class="govuk-heading-s">Pre-school </h3>
+          - walk like an animal
+          - parachute play
+          - nature walks, such as 'we are going on a bear hunt'
+          - bubble play
 
-          <p class="govuk-body"> 
+          ### Pre-school
+
           Activities could include:
-          <ul>
-          <li> large equipment, including climbing frames, obstacles or bikes </li>
-          <li> action songs, such as 'duck, duck, goose'</li> 
-          <li> dance parties </li> 
-          <li> yoga </li> 
-          </ul> 
-          </p> 
-          </div>  
 
+          - large equipment, including climbing frames, obstacles or bikes
+          - action songs, such as 'duck, duck, goose'
+          - dance parties
+          - yoga
+
+          $INFO
 
       2-2-3-3:
         heading: Positive partnerships with parents and carers
         body: |
           ![A parent and a practitioner with a baby in an early years setting](/assets/2-2-3-3-180713861.jpg)
 
-          Parents and carers are the most influential individuals in a child’s life. It is essential that you work in partnership to ensure you are supporting wishes, beliefs and needs whilst also promoting healthy lifestyles. Working together with parents and carers will support consistent understanding and care for children.
+          Parents and carers are the most influential individuals in a child’s life.
+          It is essential that you work in partnership to ensure you are supporting wishes, beliefs and needs whilst also promoting healthy lifestyles.
+          Working together with parents and carers will support consistent understanding and care for children.
 
-          As a practitioner you can offer support to parents and carers who lack the confidence or knowledge to let children try new activities and foods. In return, parents and carers can provide a wealth of information regarding children’s interests and preferences which will encourage participation in healthy living activities and support the child to feel valued.
-
+          As a practitioner you can offer support to parents and carers who lack the confidence or knowledge to let children try new activities and foods.
+          In return, parents and carers can provide a wealth of information regarding children’s interests
+          and preferences which will encourage participation in healthy living activities and support the child to feel valued.
 
           You can support parents, carers and children by:
 
@@ -1153,6 +1167,32 @@ en:
           Supporting material is available on the [Foundation Years website](https://foundationyears.org.uk/).
 
           See [guidance to provide support](https://www.gov.uk/government/publications/progress-check-at-age-2) when completing the early years foundation stage (EYFS) progress check at age 2.
+
+      2-3-2:
+        heading: End of module test
+        body: |
+          This end of module test is here to revisit what you have learned and the impact on your practice. It is not aimed to provide a pass or fail.
+
+          ##Before you start
+
+          This test has 10 multiple choice questions.
+
+          You must answer all of the questions.
+
+          You can review your total score for the test at the end.
+
+          To receive a certificate of achievement for this module, you need to receive an overall score of at least 70%.
+
+          If you do not score 70%, you will be able to see which questions you got wrong. You can repeat the test to improve your score as many times as you want to.
+
+      2-3-3:
+        heading: Reflect on your learning
+        body: |
+          To help DfE to measure our impact, please answer the following questions.
+
+          Answers will be anonymous, and we will not know what you individually select.
+
+          To what extent do you agree with the following statements:
 
       2-3-3-5:
         url: "https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxURFNMQkgwQk80N1lZWkRFMkE5N09DQVg0NCQlQCN0PWcu"

@@ -1,5 +1,7 @@
 ---
 child-development-and-the-eyfs:
+  what-to-expect:
+    type: expectation_page
   before-you-start:
     type: interruption_page
   intro:
