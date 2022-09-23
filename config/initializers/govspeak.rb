@@ -29,14 +29,14 @@ end
 
 # Youtube Embedded Videos
 Govspeak::Document.extension('youtube', /\$YT(?:\[(.*?)\])?\((.*?)\)\$ENDYT/m) do |title, video|
-  optional_title = title ? "Video: #{title}" : ''
+  optional_title = title ? title : ''
   params = { enablejsapi: 1, origin: ENV['DOMAIN'] }
   GOVSPEAK_TEMPLATES[:youtube].render(nil, title: optional_title, video: video, params: params.to_param, transcript: Govspeak::Document.to_html(transcript(video), sanitize: false), provider: 'youtube')
 end
 
 # Vimeo Embedded Videos
 Govspeak::Document.extension('vimeo', /\$VM(?:\[(.*?)\])?\((.*?)\)\$ENDVM/m) do |title, video|
-  optional_title = title ? "Video: #{title}" : ''
+  optional_title = title ? title : ''
   params = { enablejsapi: 1, origin: ENV['DOMAIN'] }
   GOVSPEAK_TEMPLATES[:vimeo].render(nil, title: optional_title, video: video, params: params.to_param, transcript: Govspeak::Document.to_html(transcript(video), sanitize: false), provider: 'vimeo')
 end

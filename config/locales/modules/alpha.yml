@@ -21,15 +21,15 @@ en:
           **Usage:**
 
           <pre class="code-tip">
-          &#36;VM[Vimeo Video Title](Vimeo Video ID)&#36;ENDVM
+          &#36;VM[Optional Video Title](Vimeo Video ID)&#36;ENDVM
           </pre>
 
-          $YT[With a Title](EpjSlCJtPLo)$ENDYT
+          $YT[Youtube Video Title](EpjSlCJtPLo)$ENDYT
 
           **Usage:**
 
           <pre class="code-tip">
-          &#36;YT[Youtube Video Title](Youtube Video ID)&#36;ENDYT
+          &#36;YT[Optional Video Title](Youtube Video ID)&#36;ENDYT
           </pre>
 
           $INFO
