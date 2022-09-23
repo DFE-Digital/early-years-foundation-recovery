@@ -17,7 +17,7 @@ module ContentHelper
         timestamp.to_date.strftime('%-d %B %Y'),
         if mod.certificate_page
           govuk_link_to('View certificate', training_module_content_page_path(mod, mod.certificate_page))
-        end
+        end,
       ]
     end
     govuk_table(rows: [header, *rows], caption: 'Completed modules', first_cell_is_header: true)

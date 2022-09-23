@@ -43,7 +43,7 @@ class ModuleProgress
   end
 
   def certificate_achieved_at
-    user.events.where(name: 'module_complete').where_properties(training_module_id: mod.name).first&.time 
+    user.events.where(name: 'module_complete').where_properties(training_module_id: mod.name).first&.time
   end
 
   def last_page_completed_at
