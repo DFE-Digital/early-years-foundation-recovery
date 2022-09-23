@@ -1367,7 +1367,7 @@ en:
           
           Get [ideas for activities to help children communicate through arts](https://help-for-early-years-providers.education.gov.uk/expressive-arts-and-design/communicating-through-arts). 
           
-          ##Further reading
+          $BOOK
           
           You can find help and guidance on the Department for Education's [Help for early years providers website](https://help-for-early-years-providers.education.gov.uk/).
 
@@ -1378,6 +1378,8 @@ en:
           Supporting material is available on the [Foundation Years website](https://foundationyears.org.uk/).
 
           See [guidance to provide support](https://www.gov.uk/government/publications/progress-check-at-age-2) when completing the early years foundation stage (EYFS) progress check at age 2.
+
+          $BOOK
         
         3-4-3-7:
           url: "https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxUQ0ZUNURIUUc1OVZLSjdNUUs5TU9TR1YwRCQlQCN0PWcu"
