@@ -81,8 +81,13 @@ class TrainingModule < YamlBase
   # sequence ---------------------------------
 
   # @return [ModuleItem]
-  def interruption_page
+  def expectation_page
     module_items.first
+  end
+
+  # @return [ModuleItem]
+  def interruption_page
+    expectation_page.next_item
   end
 
   # @return [ModuleItem]

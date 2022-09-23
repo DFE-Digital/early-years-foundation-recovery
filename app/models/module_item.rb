@@ -19,24 +19,27 @@ class ModuleItem < YamlBase
 
   # @return [Hash] 'Type' to 'View object' mapping
   MODELS = {
-    # 'intros' and 'pages' are sorted into two different groups
+    # intros
+    module_intro: ContentPage,
+    sub_module_intro: ContentPage,
     assessment_intro: ContentPage,
     confidence_intro: ContentPage,
     ending_intro: ContentPage,
-    module_intro: ContentPage,
-    sub_module_intro: ContentPage,
-
+    # static content
     interruption_page: ContentPage,
+    expectation_page: ContentPage,
+    # dynamic content
     text_page: ContentPage,
-    certificate: CertificatePage,
-
+    # video
     video_page: VideoPage,
-
+    # questions
     confidence_questionnaire: Questionnaire,
     formative_questionnaire: Questionnaire,
     summative_questionnaire: Questionnaire,
-
+    # test score
     assessment_results: AssessmentResultsPage,
+    # pdf
+    certificate: CertificatePage,
   }.freeze
 
   # @return [Regexp] 2nd digit if present: 1-[1]-1-1

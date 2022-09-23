@@ -9,7 +9,15 @@ RSpec.describe 'Static page', type: :request do
 
   specify { expect('/users/timeout').to be_successful }
 
-  specify { expect('/404').to be_successful }
+  context 'with errors' do
+    specify do
+      get '/404'
+      expect(response).to have_http_status(:not_found)
+    end
 
-  specify { expect('/500').to be_successful }
+    specify do
+      get '/500'
+      expect(response).to have_http_status(:internal_server_error)
+    end
+  end
 end
