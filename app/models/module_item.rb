@@ -24,6 +24,7 @@ class ModuleItem < YamlBase
     sub_module_intro: ContentPage,
     assessment_intro: ContentPage,
     confidence_intro: ContentPage,
+    ending_intro: ContentPage,
     # static content
     interruption_page: ContentPage,
     expectation_page: ContentPage,
@@ -197,6 +198,11 @@ class ModuleItem < YamlBase
   # @return [Boolean]
   def confidence_intro?
     type.eql?('confidence_intro')
+  end
+
+  # @return [Boolean]
+  def ending_intro?
+    type.eql?('ending_intro')
   end
 
   def certificate?
