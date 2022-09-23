@@ -3,6 +3,7 @@
 module Pages
   class MyLearning < Base
     set_url '/my-learning'
+    #set_url '/my-learning'
 
     element :heading, 'h1', text: 'My learning'
     element :available_module_title, 'h2', text: 'Available modules'
