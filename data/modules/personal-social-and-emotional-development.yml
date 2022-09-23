@@ -1,5 +1,7 @@
 ---
 personal-social-and-emotional-development:
+  what-to-expect:
+    type: expectation_page
   before-you-start:
     type: interruption_page
   intro:
@@ -202,6 +204,6 @@ personal-social-and-emotional-development:
     type: confidence_questionnaire
   
   3-4-3-7:
-    type: sub_module_intro
+    type: ending_intro
   3-4-4:
     type: certificate

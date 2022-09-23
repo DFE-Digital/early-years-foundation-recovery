@@ -37,22 +37,22 @@
 
 .gem-c-print-link__link:hover,
 .gem-c-print-link__button:hover {
-  background-color: #f3f2f1
+  background-color: govuk-colour("light-grey")
 }
 
 .gem-c-print-link__link {
-  box-shadow: inset 0 0 0 1px #b1b4b6;
+  box-shadow: inset 0 0 0 1px govuk-colour("mid-grey");
   text-decoration: none
 }
 
 .gem-c-print-link__link:focus {
   border: 0;
-  box-shadow: 0 3px #0b0c0c
+  box-shadow: 0 3px govuk-colour("black")
 }
 
 .gem-c-print-link__button {
-  border: 1px solid #b1b4b6;
-  color: #1d70b8;
+  border: 1px solid govuk-colour("mid-grey");
+  color: govuk-colour("blue");
   cursor: pointer;
   margin: 0;
   font-family: "GDS Transport", arial, sans-serif;
@@ -68,33 +68,20 @@
 
 .gem-c-print-link__button:focus {
   outline: 3px solid transparent;
-  color: #0b0c0c;
-  background-color: #fd0;
-  box-shadow: 0 -2px #fd0, 0 4px #0b0c0c;
+  color: govuk-colour("black");
+  background-color: govuk-colour("yellow");
+  box-shadow: 0 -2px govuk-colour("yellow"), 0 4px govuk-colour("black");
   text-decoration: none;
-  background-color: #fd0;
-  border-color: transparent
-}
-
-
-.gem-c-print-link__button:focus {
-  outline: 3px solid transparent;
-  color: #0b0c0c;
-  background-color: #fd0;
-  box-shadow: 0 -2px #fd0, 0 4px #0b0c0c;
-  text-decoration: none;
-  background-color: #fd0;
   border-color: transparent
 }
 
 .gem-c-govspeak .mc-toggle-button,
 .govuk-body-s {
-  color: #0b0c0c;
+  color: govuk-colour("black");
   font-family: "GDS Transport", arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  font-size: 14px;
   font-size: .875rem;
   line-height: 1.1428571429;
   margin-top: 0;
@@ -106,7 +93,7 @@
   .gem-c-print-link__button,
   .gem-c-govspeak .mc-toggle-button,
   .govuk-body-s {
-    color: #000 !important;
+    color: govuk-colour("black") !important;
   }
 }
 

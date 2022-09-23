@@ -13,8 +13,7 @@ en:
         <br />
         Your information will not be shared without your permission.
       send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
-      send_paranoid_instructions: |
-        We will check if a training account has been created using the email address you entered. If it has, you will receive an email shortly with a validation link.  Please click the validation link in the email to reset your password.
+      send_paranoid_instructions: ""
     failure:
       already_authenticated: "You are already signed in."
       inactive: "Your account is not activated yet."

@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+# FormativeAssessment
 RSpec.describe Questionnaire, type: :model do
   subject(:questionnaire) do
     described_class.find_by!(name: page_name, training_module: training_module_name)
