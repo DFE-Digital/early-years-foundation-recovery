@@ -89,6 +89,7 @@ en:
             - effective holistic support
 
       1-1-1-1:
+        notes: true
         heading: How understanding child development benefits the child
         body: |
           ![A young child exploring a climbing frame at a playground.](/assets/1-1-1-1-869488712.jpg)   
@@ -127,15 +128,23 @@ en:
           
           Cognitive skills are the mental processes involved in learning and understanding things. If you understand how children learn concepts and skills, this will help you to support the children in your care to gain new knowledge.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $BRAIN 
 
-            <p class="govuk-body">Do you know what strategies your setting has in place for early intervention?</p>
-            <p class="govuk-body">What early assessment is carried out?</p>
-            <p class="govuk-body">What strategies are put in place as a result?</p>
-          </div>
+          Reflect on what you have read about early help.  
+
+          Think about your early years setting. 
+
+          Consider the following questions:
+
+          - What strategies does your setting have in place for early help?
+          - How effective do you think these strategies are and why?
+          - What impact do they have on the children in your care?  
+          - How could you improve or extend these strategies? 
+
+          $BRAIN 
       
       1-1-1-2:
+        notes: true
         heading: How understanding child development benefits the practitioner
         body: |        
           ![A practitioner caring for a baby and a young child. They are sat at a child-level table and doing an activity with paint pots.](/assets/1-1-1-2-957284474.jpg)   
@@ -167,19 +176,25 @@ en:
           - promotes inclusion and progress for all
           - reduces unnecessary barriers to learning
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
-
-            <p class="govuk-body">Take a moment to think about the children you care for and pick a specific age group.</p>
-
-            <p class="govuk-body">Note down a physical activity you would frequently offer. Now consider how you would provide this activity for 3 different levels of experience all at the same time. What do you need to consider?</p>
-          </div>
-
           Using your child development knowledge will help you to measure the impact of your intentions - has the child successfully learnt what you intended them to learn? Children need opportunities to reinforce their knowledge and learning. This ensures that they are secure in their level of understanding before being challenged to progress.
 
           Your knowledge of child development will support you to assess the correct secure age and stage for the child. It will also help you to offer the correct learning environment, experiences and opportunities to support their progress.
 
+          $BRAIN
+
+          Reflect on what you have read about curriculum planning.   
+
+          Think about a physical activity you often carry out with the children in your care.  
+
+          Consider the following questions: 
+
+          - How can you plan your curriculum to make this activity suitable for children of 3 different experience levels at the same time?   
+          - What are the benefits of this approach for the children?
+
+          $BRAIN
+
       1-1-1-3:
+        notes: true
         heading: How understanding child development benefits the wider support network
         body: |   
           ![Adults and children holding hands.](/assets/1-1-1-3-1127324447.jpg)   
@@ -216,23 +231,25 @@ en:
           
           Greater awareness of child development, improved resource creation and shared workload will result in a broad range of opportunities.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $BRAIN
 
-            <p class="govuk-body">Make a list of all the ways that you work in partnership with the children’s parents and carers.</p>
-            <p class="govuk-body">What activities take place at the beginning of the children’s care?</p>
-            <p class="govuk-body">Which activities take place on a regular basis?</p>
-            <p class="govuk-body">Take one item from your list and consider it in more detail. Ask yourself:
-              <ul class="govuk-list govuk-list--bullet">
-                <li>how do those involved benefit?</li>
-                <li>does the engagement have a specific purpose?</li>
-                <li>does the activity achieve its intended purpose?</li>
-                <li>how could it be improved?</li>
-              </ul>
-            </p>
-          </div>
+          Reflect on what you have read about working in partnership with parents and carers. 
+
+          Make a list of all the ways that you do this in your setting. 
+
+          Choose one item from your list. 
+
+          Consider the following questions:
+
+          - What is the purpose of the activity?
+          - To what extent does the activity achieve this purpose?
+          - How does the activity benefit the children, parents and carers, and the practitioners in your setting? 
+          - How could you improve or extend the activity?
+
+          $BRAIN
 
       1-1-1-4:
+        notes: true
         heading: The potential impact of limited child development knowledge
         body: |   
           ![A practitioner and a toddler choosing a toy from a large wooden toy box.](/assets/1-1-1-4-1365603117.jpg)   
@@ -257,31 +274,24 @@ en:
 
           Your knowledge of child development will help you to create and implement an effective curriculum. This reduces the gaps in learning and so removes the need for additional support.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $BRAIN 
 
-            <p class="govuk-body">Do you have a child or children who are disengaged or disruptive? </p>
+          Reflect on what you have read about incorrect appropriate level of challenge and delayed support. 
 
-            <p class="govuk-body">What strategies have you tried so far and have they made a difference?</p>
+          Think of a child in your setting who has been disengaged or frustrated. 
 
-            <p class="govuk-body">Have you: </p>
+          Consider the following questions: 
 
-            <ul class="govuk-list govuk-list--bullet">
-              <li>considered the child holistically?</li>
-              <li>looked at each area of development? </li>
-              <li>evaluated the environment? </li>
+          - What do you think has caused this child to be disengaged and frustrated?
+          - What strategies have you put in place to address this and how effective have they been? 
+          - Are there any changes you could make to the curriculum or learning environment to improve the child's engagement? 
+          - Do you have any gaps in your knowledge of child development or of this particular child?
+          - If so, how could you address these gaps?
 
-            </ul>
-
-            <p class="govuk-body">Children can quickly become labelled as behaving in a certain way and this becomes their accepted behaviour. Behaviour always has a cause, but have you been able to work out the true cause?</p>
-
-            <p class="govuk-body">How could further knowledge regarding child development support this? </p>
-
-            <p class="govuk-body">What do your colleagues think?</p>
-
-          </div>
+          $BRAIN
 
       1-1-1-5:
+        notes: true
         heading: How improved child development knowledge supports outstanding practice - scaffolding learning
         body: |
           ![A baby stacking the sections of a rainbow model on top of each other.](/assets/1-1-1-5-1354999787.jpg)   
@@ -302,21 +312,22 @@ en:
 
           Offering these temporary levels of successive support ensures that children develop the confidence and self belief needed to become secure in their knowledge and skills before becoming ready to attempt the next challenge.
           
-           <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $BRAIN 
 
-            <p class="govuk-body">Can you think of a child in your care who is struggling with a particular skill or knowledge and understanding? </p>
+          Reflect on what you have read about scaffolding learning. 
 
-            <p class="govuk-body">Are they at the expected level of development? </p>
-            <p class="govuk-body">Are the instructions, demonstrations or level of support being offered too challenging? </p>
-            <p class="govuk-body">Have they become secure in the foundation knowledge needed to attempt the task? </p>
-            <p class="govuk-body">If you were to write step by step instructions, which step are they at confidently? </p>
-            <p class="govuk-body">What would the next step be for their expected level? </p>
-            <p class="govuk-body">How will you temporarily offer supportive steps to help them get there? </p>
-            <p class="govuk-body">You have just successfully scaffolded learning! </p>
+          Think about a child in your setting who has struggled with a particular skill or task. 
 
-           </div>
+          Consider the following questions:
 
+          - What is the expected level of development for this skill or task, based on the child's age and stage? 
+          - Reviewing your curriculum, can you identify anything that may be preventing the child from reaching the expected level? 
+          - How could you change your instructions or demonstrations to offer a more appropriate level of challenge? 
+          - How does your curriculum ensure the child is secure in the foundation knowledge needed for this task or skill?  
+          - What temporary support (scaffolding) could you give the child to reach the next step towards the expected level in the task or skill?    
+
+          $BRAIN
+ 
       1-1-1-6:
         heading: How improved child development knowledge supports outstanding practice - understanding behaviour
         body: |
@@ -347,6 +358,7 @@ en:
           Furthering your understanding of how patterns of development can influence the way children build relationships, develop their confidence and respond to strategies will help you support them by encouraging positive behaviour and promoting successful learning environments.
 
       1-1-1-7:
+        notes: true
         heading: How improved child development knowledge supports outstanding practice - effective holistic support
         body: |
           ![Two young children crawling through large tubes as part of an obstacle course.](/assets/1-1-1-7-480953105.jpg)   
@@ -380,22 +392,22 @@ en:
           
           Holistic learning ensures that the physical , emotional and psychological needs of a child are considered.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $BRAIN 
 
-            <p class="govuk-body">Think about an activity you carry out with the children in your care. </p>
+          Reflect on what you have read about holistic learning. 
 
-            <p class="govuk-body">Write down each of the areas of learning and add the skills and knowledge the activity supports in each area.</p>
+          Think about a learning objective that you had planned and the associated activity you carried out with the children in your care. 
+          
+          Compare this to your curriculum plan. 
 
-            <p class="govuk-body">Have any opportunities been missed?</p>
+          Consider the following questions:
 
-            <p class="govuk-body">Can the activity be further developed to include other areas?</p>
+          - Have any opportunities for learning been missed?
+          - How could you develop the activity further to include other learning areas?
+          - How does the activity promote language and communication skills?
+          - How can you ensure you are prepared to challenge all children?
 
-            <p class="govuk-body">How does the activity promote language and communication skills? </p>
-
-            <p class="govuk-body">How can you ensure you are prepared to differentiate to include all children? </p>
-
-          </div>
+          $BRAIN
 
       1-1-2:
         heading: Factors affecting children’s development
