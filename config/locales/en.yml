@@ -222,7 +222,9 @@ en:
     heading: Check your email
     body:
       0: |
-        We have sent you an email with instructions for how to verify your email address.
+        We will check if a training account has been created using the email address
+        you entered. If it has, you will receive an email shortly with instructions 
+        for how to verify your email address.
       1: |
         We sent the email to:
       2: |
