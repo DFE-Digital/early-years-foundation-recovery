@@ -16,12 +16,21 @@ en:
           ## Custom Tags
           ---
 
-          $YoutubeVideo[Video title](https://www.youtube.com/watch?v=EpjSlCJtPLo&list=PL4IuMlmijgAfTwwEiZmMp28Eaf66S3a1R&index=2&t=0s)$EndYoutubeVideo
+          $VM[Vimeo Title Example](743243040)$ENDVM
+
+          **Usage:**
+
+          <pre class="code-tip">
+          &#36;VM[Vimeo Video Title](Vimeo Video ID)&#36;ENDVM
+          </pre>
 
           $YT[With a Title](EpjSlCJtPLo)$ENDYT
-          $YT(EpjSlCJtPLo)$ENDYT
 
-          $VIMEO[Vimeo Title Example](743243040)$VIMEO
+          **Usage:**
+
+          <pre class="code-tip">
+          &#36;YT[Youtube Video Title](Youtube Video ID)&#36;ENDYT
+          </pre>
 
           $INFO
 
