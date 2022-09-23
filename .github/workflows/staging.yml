@@ -1,16 +1,30 @@
 ---
 # ------------------------------------------------------------------------------
+# Run workflow:
+#   https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/staging.yml
 #
-# ghcr.io/dfe-digital/early-years-foundation-recovery:latest
+# Build image:
+#   ghcr.io/dfe-digital/early-years-foundation-recovery:rc0.0.1
 #
-# https://ey-recovery-staging.london.cloudapps.digital
+# Deploy to:
+#   https://ey-recovery-staging.london.cloudapps.digital
 #
 name: Deploy Staging App
 on:
   workflow_dispatch:
+    inputs:
+      candidate:
+        description: Create release candidate version ("rcx.x.x")
+        type: string
+        required: true
+      ref:
+        description: Git ref or branch to deploy
+        type: string
+        required: true
+        default: main
   push:
-    branches:
-      - main
+    tags:
+      - rc*
 
 jobs:
   deploy:
@@ -18,18 +32,20 @@ jobs:
     environment: production
     env:
       WORKSPACE: staging
-      DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
-      # app variables
-      DOMAIN: ey-recovery-staging.london.cloudapps.digital
-      GOVUK_APP_DOMAIN: london.cloudapps.digital
-      GOVUK_WEBSITE_ROOT: ey-recovery-staging
-      INTERIM_PASSWORD: 'StrongPassword'
+      REGISTRY: ghcr.io/dfe-digital/early-years-foundation-recovery
     steps:
       -
         name: Checkout Code
         uses: actions/checkout@v2
-        # with:
-        #   ref: ${{ github.sha }}
+        with:
+          ref: ${{ inputs.ref || github.ref_name }}
+      -
+        name: Tag candidate
+        if:  ${{ inputs.candidate }}
+        run: |
+          git tag --force ${{ inputs.candidate }}
+          git push --force origin refs/tags/${{ inputs.candidate }}
+          echo "HEAD=$(git rev-parse ${{ inputs.candidate }})" >> $GITHUB_ENV
       -
         name: Pin Terraform version
         uses: hashicorp/setup-terraform@v1.3.2
@@ -56,18 +72,19 @@ jobs:
             BUILDKIT_INLINE_CACHE=1
             SHA=${{ github.sha }}
           cache-from: |
-            ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+            ${{ env.REGISTRY }}:${{ github.sha }}
+            ${{ env.REGISTRY }}:${{ inputs.ref || github.ref_name }}
           tags: |
-            ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
-            ${{ env.DOCKER_IMAGE }}:latest
+            ${{ env.REGISTRY }}:${{ github.sha }}
+            ${{ env.REGISTRY }}:${{ inputs.ref || github.ref_name }}
       -
-        name: Deploy Integration Application
+        name: Deploy Release Candidate
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
           TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
-          TF_VAR_paas_app_docker_image: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+          TF_VAR_paas_app_docker_image: ${{ env.REGISTRY }}:${{ inputs.ref || github.ref_name }}
           TF_VAR_paas_app_hostname: staging
           TF_VAR_paas_app_env_secrets: ${{ toJson(secrets) }}
           TF_VAR_paas_app_envs: ${{ toJson(env) }}

@@ -17,6 +17,8 @@ RUN apk add --no-cache --no-progress build-base less curl tzdata gcompat \
 # ------------------------------------------------------------------------------
 FROM base as deps
 
+LABEL org.opencontainers.image.description "Application Dependencies"
+
 RUN apk add --no-cache --no-progress postgresql-dev yarn
 
 ENV APP_HOME /build
@@ -46,6 +48,8 @@ RUN bundle install --no-binstubs --retry=10 --jobs=4
 # Production Stage - nodejs v16.14.2, postgresql v13.6
 # ------------------------------------------------------------------------------
 FROM base AS app
+
+LABEL org.opencontainers.image.description "Early Years Recovery Rails Application"
 
 RUN apk add --no-cache --no-progress postgresql-dev yarn chromium-chromedriver
 

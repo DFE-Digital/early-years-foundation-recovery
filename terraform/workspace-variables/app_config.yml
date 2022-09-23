@@ -26,11 +26,17 @@ staging:
   GOVUK_WEBSITE_ROOT: ey-recovery-staging
   TRACKING_ID: GTM-W6W95FD  # Test data
 
+# ey-recovery-dev
+development:
+  <<: *defaults
+  DOMAIN: ey-recovery-dev.london.cloudapps.digital
+  GOVUK_WEBSITE_ROOT: ey-recovery-dev
+
 # ey-recovery-content
 content:
   <<: *defaults
   # TRAINING_MODULES: demo-modules
   TIMEOUT_MINUTES: 60
-  # @see workflow
+  # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx

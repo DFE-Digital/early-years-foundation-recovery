@@ -46,12 +46,34 @@ RSpec.describe TrainingModule, type: :model do
 
   # sequence ---------------------------------
 
-  # describe '#interruption_page' do
+  describe '#expectation_page' do
+    it 'is the first page' do
+      expect(training_module.expectation_page.id).to be 1
+      expect(training_module.expectation_page.name).to eql 'what-to-expect'
+    end
+  end
+
+  describe '#interruption_page' do
+    it 'is the second page' do
+      expect(training_module.interruption_page.id).to be 2
+      expect(training_module.interruption_page.name).to eql 'before-you-start'
+    end
+  end
+
+  describe '#intro_page' do
+    it 'is the third page' do
+      expect(training_module.intro_page.id).to be 3
+      expect(training_module.intro_page.name).to eql 'intro'
+    end
+  end
+
+  # describe '#first_submodule_intro_page' do
   # end
 
-  # describe '#intro_page' do
-  # end
-
-  # describe '#first_content_page' do
-  # end
+  describe '#first_content_page' do
+    it 'is the fifth page' do
+      expect(training_module.first_content_page.id).to be 5
+      expect(training_module.first_content_page.name).to eql '1-1-1'
+    end
+  end
 end
