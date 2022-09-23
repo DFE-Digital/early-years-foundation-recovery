@@ -1,5 +1,7 @@
 ---
 bravo:
+  what-to-expect:
+    type: expectation_page
   before-you-start:
     type: interruption_page
   intro:
@@ -49,3 +51,5 @@ bravo:
     type: formative_questionnaire
   1-2-2-3:
     type: formative_questionnaire
+  1-2-3:
+    type: certificate

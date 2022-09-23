@@ -4,6 +4,9 @@ name: Run Pa11y
 
 on:
   workflow_dispatch:
+  push:
+    tags:
+      - rc*
 
 env: 
   BASE_URL: https://ey-recovery-staging.london.cloudapps.digital

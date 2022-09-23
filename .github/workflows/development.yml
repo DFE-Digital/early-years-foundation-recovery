@@ -1,0 +1,93 @@
+---
+# ------------------------------------------------------------------------------
+# Build image:
+#   ghcr.io/dfe-digital/early-years-foundation-recovery:latest
+#
+# Deploy to:
+#   https://ey-recovery-dev.london.cloudapps.digital
+#
+name: Deploy Development App
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - .env.example
+      - .gitignore
+      - .rubocop*
+      - .tool-versions
+      - adr/*
+      - bin/*
+      - docker-compose.yml
+      - README.md
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      WORKSPACE: development
+      REGISTRY: ghcr.io/dfe-digital/early-years-foundation-recovery
+      # app envs
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+    steps:
+      -
+        name: Checkout Code
+        uses: actions/checkout@v2
+        # with:
+        #   ref: ${{ github.sha }}
+      -
+        name: Pin Terraform version
+        uses: hashicorp/setup-terraform@v1.3.2
+        with:
+          terraform_version: 1.1.7
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to Github Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      -
+        name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          target: app
+          context: .
+          push: true
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
+            SHA=${{ github.sha }}
+          cache-from: |
+            ${{ env.REGISTRY }}:${{ github.sha }}
+          tags: |
+            ${{ env.REGISTRY }}:${{ github.sha }}
+            ${{ env.REGISTRY }}:latest
+      -
+        name: Deploy Development App
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
+          TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
+          TF_VAR_paas_app_docker_image: ${{ env.REGISTRY }}:latest
+          TF_VAR_paas_app_hostname: dev
+          TF_VAR_paas_app_env_secrets: ${{ toJson(secrets) }}
+          TF_VAR_paas_app_envs: ${{ toJson(env) }}
+        run: |
+          cd terraform/app
+          terraform init \
+            -reconfigure \
+            -input=false \
+            -backend-config="bucket=${{ secrets.AWS_BUCKET }}" \
+            -backend-config="key=${{ env.WORKSPACE }}/terraform.tfstate"
+          terraform plan \
+            -var-file ../workspace-variables/${{ env.WORKSPACE }}.tfvars
+          terraform apply \
+            -input=false \
+            -auto-approve \
+            -var-file ../workspace-variables/${{ env.WORKSPACE }}.tfvars

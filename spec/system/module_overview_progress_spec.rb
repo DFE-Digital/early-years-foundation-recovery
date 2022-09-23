@@ -32,15 +32,16 @@ RSpec.describe 'Module overview page progress' do
       end
 
       within '#section-content-3 .govuk-list' do
-        expect(page).to have_content 'not started', count: 3
+        expect(page).to have_content 'not started', count: 4
         expect(page).not_to have_link 'Recap'
         expect(page).not_to have_link 'End of module test'
         expect(page).not_to have_link 'Reflect on your learning'
+        expect(page).not_to have_link 'Download your certificate'
       end
     end
 
     it 'resumes from the interruption page' do
-      expect(page).to have_link 'Start', href: '/modules/alpha/content-pages/before-you-start'
+      expect(page).to have_link 'Start', href: '/modules/alpha/content-pages/what-to-expect'
     end
 
     it 'shows the end of module test has not been attempted' do

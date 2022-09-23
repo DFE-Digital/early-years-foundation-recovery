@@ -3,9 +3,7 @@ module ContentHelper
   # @param markdown [String]
   # @return [String]
   def translate_markdown(markdown)
-    return if markdown.blank?
-
-    raw GovspeakDecorator.translate_markdown(markdown)
+    raw Govspeak::Document.to_html(markdown, sanitize: false)
   end
 
   # Date format guidelines: "1 June 2002"
@@ -17,17 +15,26 @@ module ContentHelper
       [
         govuk_link_to(mod.title, training_module_path(mod)),
         timestamp.to_date.strftime('%-d %B %Y'),
-        govuk_link_to('View certificate', training_module_certificate_path(mod)),
+        govuk_link_to('View certificate', training_module_content_page_path(mod, mod.certificate_page)),
       ]
     end
     govuk_table(rows: [header, *rows], caption: 'Completed modules', first_cell_is_header: true)
   end
 
-  # @return [String]
+  # @param text [String] Tag content
+  # @param tag [Symbol] HTML element (default h1)
+  # @return [String, nil]
   def govuk_heading(text, tag: :h1)
     return if text.blank?
 
     content_tag(tag, class: 'govuk-heading-m') { text }
+  end
+
+  # @param icon [String, Symbol] Fontawesome icon name
+  # @param size [Integer] Icon scale factor
+  # @return [String]
+  def icon(icon, size: 2, **)
+    content_tag(:i, nil, class: "fa-solid fa-#{size}x fa-#{icon} icon")
   end
 
   # @return [String]
@@ -40,7 +47,7 @@ module ContentHelper
   # @see ModuleItem.pagination
   # @see Questionnaire.pagination
   #
-  # @return [String]
+  # @return [String, nil]
   def page_number(current:, total:)
     return if current.blank?
 
@@ -60,6 +67,8 @@ module ContentHelper
     govuk_notification_banner(title_text: title, text: translate_markdown(text))
   end
 
+  # @param status [String, Symbol]
+  # @param colour [String]
   # @return [String]
   def progress_indicator(status, colour)
     govuk_tag(text: t(status, scope: 'module_indicator'), colour: colour)

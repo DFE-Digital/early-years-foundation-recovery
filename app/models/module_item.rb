@@ -19,20 +19,27 @@ class ModuleItem < YamlBase
 
   # @return [Hash] 'Type' to 'View object' mapping
   MODELS = {
-    assessment_intro: ContentPage,
-    confidence_intro: ContentPage,
-    interruption_page: ContentPage,
+    # intros
     module_intro: ContentPage,
     sub_module_intro: ContentPage,
+    assessment_intro: ContentPage,
+    confidence_intro: ContentPage,
+    ending_intro: ContentPage,
+    # static content
+    interruption_page: ContentPage,
+    expectation_page: ContentPage,
+    # dynamic content
     text_page: ContentPage,
-
+    # video
     youtube_page: YoutubePage,
-
+    # questions
     confidence_questionnaire: Questionnaire,
     formative_questionnaire: Questionnaire,
     summative_questionnaire: Questionnaire,
-
+    # test score
     assessment_results: AssessmentResultsPage,
+    # pdf
+    certificate: CertificatePage,
   }.freeze
 
   # @return [Regexp] 2nd digit if present: 1-[1]-1-1
@@ -111,6 +118,8 @@ class ModuleItem < YamlBase
       'Finish test'
     elsif next_item.summative_questionnaire? && !summative_questionnaire?
       'Start test'
+    elsif next_item.certificate?
+      'Finish'
     else
       'Next'
     end
@@ -189,6 +198,15 @@ class ModuleItem < YamlBase
   # @return [Boolean]
   def confidence_intro?
     type.eql?('confidence_intro')
+  end
+
+  # @return [Boolean]
+  def ending_intro?
+    type.eql?('ending_intro')
+  end
+
+  def certificate?
+    type.eql?('certificate')
   end
 
   # position ---------------------------------

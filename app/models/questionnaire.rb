@@ -43,7 +43,7 @@ class Questionnaire < OpenStruct
 
   # @return [String] plain text content
   def heading
-    translate(:heading)
+    translate(:heading) || name
   end
 
   # @return [String] unparsed govspeak content
@@ -137,6 +137,15 @@ class Questionnaire < OpenStruct
     questions.map do |question, data|
       data[:multi_select] ? { question => [] } : question
     end
+  end
+
+  # @return [String]
+  def debug_summary
+    <<~SUMMARY
+
+      ---
+      correct answer(s): #{questions.values.first[:correct_answers]}
+    SUMMARY
   end
 
 private

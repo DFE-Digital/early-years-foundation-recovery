@@ -12,7 +12,7 @@ class AssessmentResultsPage < OpenStruct
 
   # @return [String]
   def heading
-    translate(:heading)
+    translate(:heading) || name
   end
 
   # @return [String]

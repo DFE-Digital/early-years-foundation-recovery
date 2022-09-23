@@ -1,5 +1,7 @@
 ---
 charlie:
+  what-to-expect:
+    type: expectation_page
   before-you-start:
     type: interruption_page
   intro:
@@ -12,3 +14,5 @@ charlie:
     type: text_page
   1-1-3:
     type: youtube_page
+  1-1-4:
+    type: certificate

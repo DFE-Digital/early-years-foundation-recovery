@@ -4,46 +4,32 @@ RSpec.describe 'Govspeak', type: :system do
   include_context 'with user'
 
   context 'with module intro' do
-    before do
-      visit '/modules/alpha/content-pages/intro'
-    end
+    let(:path) { '/modules/alpha/content-pages/intro' }
 
-    it 'is displayed' do
-      expect(page.source).to include '<div role="note" aria-label="Warning" class="application-notice help-notice">'
-      expect(page).to have_text 'Warning: people like stuff!'
-    end
+    it_behaves_like 'a Govspeak page'
   end
 
-  context 'with formative questionnaire' do
-    before do
-      visit '/modules/alpha/questionnaires/1-2-1-1'
-    end
+  context 'with youtube page' do
+    let(:path) { '/modules/alpha/content-pages/1-2-1-2' }
 
-    it 'is displayed' do
-      expect(page.source).to include '<div role="note" aria-label="Warning" class="application-notice help-notice">'
-      expect(page).to have_text 'Warning: Govspeak test'
-    end
+    it_behaves_like 'a Govspeak page'
   end
 
-  context 'with summative questionnaire' do
-    before do
-      visit '/modules/alpha/questionnaires/1-3-2-3'
-    end
+  context 'with formative question' do
+    let(:path) { '/modules/alpha/questionnaires/1-2-1-1' }
 
-    it 'is displayed' do
-      expect(page.source).to include '<div role="note" aria-label="Warning" class="application-notice help-notice">'
-      expect(page).to have_text 'Warning: Govspeak test'
-    end
+    it_behaves_like 'a Govspeak page'
   end
 
-  context 'with confidence questionnaire' do
-    before do
-      visit '/modules/alpha/questionnaires/1-3-3-2'
-    end
+  context 'with summative question' do
+    let(:path) { '/modules/alpha/questionnaires/1-3-2-3' }
 
-    it 'is displayed' do
-      expect(page.source).to include '<div role="note" aria-label="Warning" class="application-notice help-notice">'
-      expect(page).to have_text 'Warning: Govspeak test'
-    end
+    it_behaves_like 'a Govspeak page'
+  end
+
+  context 'with confidence question' do
+    let(:path) { '/modules/alpha/questionnaires/1-3-3-2' }
+
+    it_behaves_like 'a Govspeak page'
   end
 end
