@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe AnalyticsBuild do
+RSpec.xdescribe AnalyticsBuild do
   let(:users_all) { User.all }
 
   let(:users_results) { described_class.new(bucket_name: 'test_bucket', folder_path: 'test_bucket/user', result_set: users_all, file_name: 'users', json_property_name: 'module_time_to_completion') }
