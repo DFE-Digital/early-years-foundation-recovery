@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_23_134456) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_22_231543) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,11 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_134456) do
     t.bigint "user_id"
     t.string "name"
     t.jsonb "properties"
-    t.datetime "time"
-    t.index ["name", "time"], name: "index_ahoy_events_on_name_and_time"
-    t.index ["properties"], name: "index_ahoy_events_on_properties", opclass: :jsonb_path_ops, using: :gin
-    t.index ["user_id"], name: "index_ahoy_events_on_user_id"
-    t.index ["visit_id"], name: "index_ahoy_events_on_visit_id"
+    t.datetime "time", precision: nil
   end
 
   create_table "ahoy_visits", force: :cascade do |t|
@@ -51,9 +47,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_134456) do
     t.string "app_version"
     t.string "os_version"
     t.string "platform"
-    t.datetime "started_at"
-    t.index ["user_id"], name: "index_ahoy_visits_on_user_id"
-    t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
+    t.datetime "started_at", precision: nil
+  end
+
+  create_table "arask_jobs", force: :cascade do |t|
+    t.string "job"
+    t.datetime "execute_at"
+    t.string "interval"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["execute_at"], name: "index_arask_jobs_on_execute_at"
   end
 
   create_table "user_answers", force: :cascade do |t|
@@ -63,16 +66,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_134456) do
     t.string "answer"
     t.boolean "correct"
     t.boolean "archived"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "module"
     t.string "name"
     t.string "assessments_type"
     t.bigint "user_assessment_id"
-    t.index ["questionnaire_id", "user_id"], name: "index_user_answers_on_questionnaire_id_and_user_id"
-    t.index ["questionnaire_id"], name: "index_user_answers_on_questionnaire_id"
-    t.index ["user_assessment_id"], name: "index_user_answers_on_user_assessment_id"
-    t.index ["user_id"], name: "index_user_answers_on_user_id"
   end
 
   create_table "user_assessments", force: :cascade do |t|
@@ -82,25 +81,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_134456) do
     t.string "module"
     t.string "assessments_type"
     t.boolean "archived"
-    t.datetime "completed"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["score", "status"], name: "index_user_assessments_on_score_and_status"
-    t.index ["user_id"], name: "index_user_assessments_on_user_id"
+    t.datetime "completed", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
+    t.datetime "confirmed_at", precision: nil
+    t.datetime "confirmation_sent_at", precision: nil
     t.string "unconfirmed_email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "first_name"
     t.string "last_name"
     t.boolean "registration_complete"
@@ -111,13 +108,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_134456) do
     t.string "unlock_token"
     t.string "setting_type"
     t.string "setting_type_other"
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["unlock_token"], name: "index_users_on_unlock_token"
+    t.jsonb "module_time_to_completion", default: {}, null: false
   end
 
-  add_foreign_key "user_answers", "user_assessments"
-  add_foreign_key "user_answers", "users"
-  add_foreign_key "user_assessments", "users"
+  add_foreign_key "user_answers", "user_assessments", name: "user_answers_user_assessment_id_fkey"
+  add_foreign_key "user_answers", "users", name: "user_answers_user_id_fkey"
+  add_foreign_key "user_assessments", "users", name: "user_assessments_user_id_fkey"
 end
