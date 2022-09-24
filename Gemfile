@@ -9,6 +9,9 @@ gem 'rails', '>= 7.0.3.1'
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
 
+# to query Google cloud
+gem 'google-cloud-storage'
+
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 
@@ -69,6 +72,8 @@ gem 'ahoy_matey', '~> 4.0'
 
 # PDF generator middleware
 gem 'grover', '~> 1.1'
+# background task runner
+gem 'arask'
 
 group :development, :test do
   # Use fake data for specs
