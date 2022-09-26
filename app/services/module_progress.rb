@@ -47,7 +47,7 @@ class ModuleProgress
   end
 
   def last_page_completed_at
-    last_page = mod.module_items.last.name
+    last_page = mod.module_course_items.last.name
     training_module_events.where_properties(id: last_page).first.time
   end
 
