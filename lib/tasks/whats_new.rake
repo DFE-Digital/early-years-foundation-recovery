@@ -6,7 +6,7 @@ namespace :db do
 
     User.all.map do |user|
       user.display_whats_new = true
-      user.save
+      user.save!
 
       number_updated += 1 if user.display_whats_new == true
       total_records += 1

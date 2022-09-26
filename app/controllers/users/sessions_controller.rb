@@ -7,7 +7,7 @@ protected
     if resource.registration_complete?
       if resource.display_whats_new
         resource.display_whats_new = false
-        resource.save
+        resource.save!
         static_path('whats-new')
       else
         my_learning_path

@@ -22,7 +22,7 @@ FactoryBot.define do
     end
 
     trait :display_whats_new do
-      display_whats_new {true}
+      display_whats_new { true }
     end
   end
 end
