@@ -18,22 +18,6 @@ RSpec.describe 'Sign up', type: :system do
         .and have_text('You must accept the terms and conditions and privacy policy to create an account.')
     end
   end
-  
-
-  # DONT MERGE ME - JUST FOR TESTING ---------------------------
-  context 'when user does not exist' do
-    let(:user) { create(:user) }
-
-    it 'must accept terms and conditions' do
-      fill_in 'Email address', with: user.email
-      fill_in 'Create password', with: user.password
-      fill_in 'Confirm password', with: user.password
-      click_button 'Continue'
-
-      expect(page).to have_current_path '/users/sign-up'
-    end
-  end
-  # -----------------------------------------------------------
 
   context 'when user already exists' do
     let(:user) { create(:user, :registered) }

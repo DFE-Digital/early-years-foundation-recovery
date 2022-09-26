@@ -12,7 +12,7 @@ namespace :db do
         updated = user.save
 
         if original != updated
-          number_updated += 1 
+          number_updated += 1
           p "User id: #{user.id} updated"
         end
       end
