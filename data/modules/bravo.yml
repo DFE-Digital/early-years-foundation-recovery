@@ -48,8 +48,10 @@ bravo:
   # Assessment
   # ----------------------------------------------------------------------------
   1-2-2-2:
-    type: formative_questionnaire
+    type: summative_questionnaire
   1-2-2-3:
-    type: formative_questionnaire
+    type: summative_questionnaire
+  1-2-2-4:
+    type: assessment_results
   1-2-3:
     type: certificate
