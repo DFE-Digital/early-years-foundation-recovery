@@ -161,9 +161,7 @@ class ModuleItem < YamlBase
   delegate :valid?, to: :model
 
   def notes?
-    model.notes?
-  rescue StandardError
-    false
+    model.notes? if model.respond_to?(:notes?)
   end
 
   # @return [Boolean]
