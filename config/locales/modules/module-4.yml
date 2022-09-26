@@ -286,6 +286,7 @@ en:
 
 
       4-1-1-3: 
+        notes: true
         heading: |
           The linguistic stage: meaningful sentences
         body: |
@@ -318,23 +319,38 @@ en:
           - try not to ask too many questions, as they may feel pressure and then not respond
           - comment on the child’s actions to ensure that they hear a wide variety of vocabulary – for example, “you are pushing your baby very carefully”
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
 
-            <p class="govuk-body">You should provide lots of opportunities for children to share books. </p>
-            
-            <p>When sharing books, you can:</p>
+          You should provide lots of opportunities for children to share books. 
 
-            <ul class="govuk-list govuk-list--bullet">
-              <li>use both picture books and books with a range of simple and more complex text for children to follow</li>
-              <li>encourage the children to point to items of interest and find the items you are talking about</li>
-              <li>leave lots of pauses for children to share their thoughts and respond to your questions and comments</li>
-            </ul>
+          When sharing books, you can:
 
-            <p class="govuk-body">You should also find time to share books that children bring to you, as well as encourage the sharing of books between the setting and home. This will encourage children’s interests and likes, as well as their language development.</p>
-          </div>
+          - use both picture books and books with a range of simple and more complex text for children to follow 
+          - encourage the children to point to items of interest and find the items you are talking about 
+          - leave lots of pauses for children to share their thoughts and respond to your questions and comments
+
+          You should also find time to share books that children bring to you, as well as encourage the sharing of books between the setting and home. This will encourage children’s interests and likes, as well as their language development.
+
+          $INFO
+
+          $BRAIN
+
+          Reflect on what you have read about providing opportunities for children to share books.
+
+          Think about your practice. 
+
+          Consider the following questions:
+          
+          - How do you consider book sharing when planning your curriculum?
+          - What strategies do you currently have for sharing books with children?
+          - How do you share books children have brought to you?
+          - How do you share books between the setting and home?
+          - How could you extend or improve on these strategies?
+
+          $BRAIN
 
       4-1-1-4a:  
+        notes: true
         heading: |
           The linguistic stage: fluent speech
         body: |
@@ -370,13 +386,40 @@ en:
           
           While working with others, a child will have extended discussions and ask and answer questions. This will give them lots of opportunities to hear and practice new vocabulary.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
 
-            <p class="govuk-body">Try setting up an experiment style activity to encourage sustained shared thinking. A good example is a homemade volcano using baking soda and vinegar.
-            
-            This will provide lots of opportunity for prediction, problem solving and discussion.</p>
-          </div>
+          Try setting up an experiment style activity to encourage sustained shared thinking. 
+
+          For example, you could set up a water tray and explore which objects will float and sink.
+
+          This will provide lots of opportunity for prediction, problem solving and discussion.
+
+          You could ask before:
+
+          - what do you think will happen?
+          - why do you think that?
+
+          You could ask after:
+
+          - how could we change what happens?
+          - are you surprised by that?
+
+          $INFO
+
+          $BRAIN
+
+          Reflect on what you have read about planning opportunities for children to hear new vocabulary.
+
+          Think about your practice. 
+
+          Consider the following questions:
+          
+          - How do you currently plan opportunities for children to hear new vocabulary?
+          - Could you plan more opportunities for this?
+          - How do you make sure you're aware of individual children's starting points and take these into account when planning?
+
+          $BRAIN
+
 
       4-1-2: 
         heading: Theories of language development
@@ -516,22 +559,22 @@ en:
 
           Skinner’s critics argued that children cannot learn the grammar rules of language development through imitation alone. They also said that his theory does not take cognitive development or individual needs into consideration. Bruner’s theory takes all of these points into consideration.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
 
-            <p class="govuk-body">The theories of Skinner, Bruner, Piaget and Chomsky show us the importance of considering children’s language development from more than one perspective.</p>                                      <p class="govuk-body">Consider a day’s planning for your setting. Does it have the key components needed for effective language development?</p>  
- 
-            <p class="govuk-body">These key components are:</p>
+          We have discussed the theories of Skinner, Bruner, Piaget and Chomsky. They show how important it is to consider children's language development from more than one perspective. 
 
-            <ul class="govuk-list govuk-list--bullet">
-              <li>adult led activity for children to imitate</li>
-              <li>child led activity for children to rehearse language they have heard</li>
-              <li>opportunities for adults to support language development during child initiated play</li>
-              <li>age and stage appropriate activities that provide opportunities for children to develop their language</li>
-              <li>opportunities for children to hear language in conversations, music, story telling</li>
-              <li>opportunities for children to interact with others</li>
-            </ul>
-          </div>
+          When curriculum planning, make sure you include the key components needed for effective language development.  
+
+          These could be:
+
+          - adult led activity for children to imitate 
+          - child led activity for children to rehearse language they have heard 
+          - opportunities for adults to support language development during child initiated play 
+          - age and stage appropriate activities that help children to develop their language
+          - opportunities for children to hear language in conversations, music, and stories
+          - opportunities for children to interact with others
+
+          $INFO
 
       4-1-3: 
         heading: Factors affecting language development
@@ -586,6 +629,7 @@ en:
           Housing conditions may impact on a child’s quality of sleep, the diet they eat and their hygiene. These factors can affect their self confidence, concentration and learning.
   
       4-1-3-2a: 
+        notes: true
         heading: Supporting children affected by socio-economic factors	
         body: |
           ![A child and practitioner playing with wooden blocks in a nursery setting](/assets/4-1-3-2a-962169936.jpg)           
@@ -613,14 +657,19 @@ en:
 
           This will help all children to progress, regardless of their previous experiences.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $BRAIN
 
-            <ul class="govuk-list govuk-list--bullet">
-              <li>Do you use your knowledge of a child’s socio-economic background to support your planning?</li>
-              <li>How do you ensure that all children are included and develop positive self image?</li>
-            </ul>
-          </div>
+          Reflect on what you have read about supporting children whose language development is affected by socio-economic factors.  
+
+          Think about your practice. 
+
+          Consider the following questions: 
+
+          - How do you use your knowledge of children's socio-economic background to support your planning? 
+          - What strategies do you use to make sure all children are included and develop positive self-image? 
+          - How could you extend or improve on these strategies? 
+
+          $BRAIN
 
       4-1-3-3:
         heading: English as an additional language
@@ -638,6 +687,7 @@ en:
           Some children may appear to speak English well. However, you should not assume that other aspects of their understanding of English are as well developed. 
 
       4-1-3-4a: 
+        notes: true
         heading: Supporting children with English as an additional language
         body: |  
           ![A practitioner sits in front of a group of nursery aged children of different ethnicities. The practitioner leads the children in a song as they sing and clap their hands.](/assets/4-1-3-4a-1295150002.jpg) 
@@ -672,24 +722,20 @@ en:
 
           This all helps to create a diverse environment for children in your care. Later in the module you will look at further strategies to help you do this.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $BRAIN
 
-            <p class="govuk-body">If you are already caring for a child with English as an additional language:</p>                                      
-            <ul class="govuk-list govuk-list--bullet">
-              <li>how do you celebrate their language? </li>
-              <li>what resources do you have?</li>
-              <li>do you provide age and stage appropriate activities that provide opportunities for children to develop their language?</li>
-              <li>have you learnt any key words to support the child?</li>
-              <li>how have you worked with parents to support the child?</li>
-            </ul>
-            <p class="govuk-body">If you are not already caring for a child with English as an additional language:</p>
-            <ul class ="govuk-list govul-list--bullet">
-                <li>what steps would you take to make the child and family welcome?</li>
-                <li>how would you support the child’s language development?</li>
-                <li>what adaptations would you need to make to your setting and the resources that you use?</li>
-            </ul>
-          </div>
+          Reflect on what you have read about supporting children with English as an additional language (EAL). 
+
+          Think about your setting. 
+
+          Consider the following questions:
+
+          - How could you make a child with EAL and their family feel welcome? 
+          - What activities and resources could you use to support the child's language development? 
+          - How could you adapt your curriculum to better support the child? 
+          - How could you work with the child's parents or carers to support the child's language development? 
+
+          $BRAIN
 
       4-2: 
         heading: The impact of language skills on learning and behaviour
@@ -721,6 +767,7 @@ en:
           - Using effective observation, assessments and planning to support speech, language and communication needs
 
       4-2-1-1a: 
+        notes: true
         heading: Identifying speech, language and communication needs
         body: |
           ![A group of children and practitioners reading a book](/assets/4-2-1-1a-544351338.jpg)           
@@ -742,16 +789,20 @@ en:
 
           A child may not have difficulty with all aspects of communication. For example, they may struggle with talking, while being good at understanding others. Another child may have no difficulty with talking, but may find it difficult to use language appropriately. For example, children may have difficulty with conversation skills. This could include taking turns or understanding how their conversations will make others feel. They may also find it difficult to support their conversation with non verbal cues like eye contact or facial expressions.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $BRAIN
 
-            <ul class="govuk-list govuk-list--bullet">
-              <li>What procedures do you have in place for observing and recording children’s language development?</li>
-              <li>How do you share observations with parents and carers?</li>
-              <li>What steps do you take when you have concerns about children’s development?</li> 
-              <li>What does your setting's policy and procedure say?</li>
-            </ul>
-          </div>
+          Reflect on what you have read about identifying speech, language and communication needs (SLCN).
+
+          Think about your setting. 
+          
+          Consider the following questions:  
+
+          - How do you observe and record children's language development?  
+          - How do you share observations with parents and carers?
+          - What steps do you take when you have concerns about children’s language development? 
+          - Is there anything else you could do to support children with SLCN?
+
+          $BRAIN
   
       4-2-1-2: 
         heading: Early intervention for speech, language and communication needs
@@ -812,6 +863,7 @@ en:
           You will learn more about children’s additional needs in a later module about special educational needs and disability.
 
       4-2-1-4: 
+        notes: true
         heading: Supporting children with advanced communication and language skills
         body: |
           ![A child sat on the floor reading a book in front of some bookshelves](/assets/4-2-1-4-1141094720.jpg)                
@@ -824,18 +876,21 @@ en:
           - challenging the child to answer questions or participate in discussions with fuller responses
           - encouraging the child to create and share their own stories
         
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $BRAIN
 
-            <p class="govuk-body">Think of a specific child you care for:</p>
+          Reflect on what you have read about supporting children with their communication and language skills. 
 
-            <ul class="govuk-list govuk-list--bullet">
-              <li>do you know if they are below, meeting or exceeding their expected level of development?</li> 
-              <li>what strategies do you have in place?</li> 
-              <li>are their parents working on the same strategies?</li> 
-              <li>how are you recording and sharing progress?</li>
-            </ul>
-          </div>
+          Think of a child in your care. 
+
+          Consider the following questions: 
+
+          - Do you think this child is below, meeting or exceeding their expected level of development? 
+          - What makes you think this? 
+          - What strategies have you put in place to help them develop and progress?  
+          - How could you change or improve  your curriculum to support this child further? 
+
+          $BRAIN 
+
 
       4-2-1-5a: 
         heading: Observation, assessment and planning
@@ -871,20 +926,6 @@ en:
 
           You will look at observation, assessment and planning in more detail in a future module.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
-
-            <p class="govuk-body">Do you know what your setting's policy says about observation, assessment and planning?</p>
-            
-            <p class="govuk-body">Take 5 minutes to observe a child and record your observations according to your setting’s requirements.</p>
-
-            <ul class="govuk-list govuk-list--bullet">
-              <li>What have you learnt about the child’s language needs?</li> 
-              <li>What will you do next?</li> 
-              <li>Who will you share your findings with? </li> 
-            </ul>
-          </div>
-
       4-2-2: 
         heading: How language development supports personal, social and emotional development
         body: |
@@ -901,6 +942,7 @@ en:
           - The impact on building relationships and social skills
       
       4-2-2-1:
+        notes: true
         heading: The impact on self-regulation
         body: |
           ![Two children working together to complete an activity.](/assets/4-2-2-1-175391338.jpg)                  
@@ -947,15 +989,21 @@ en:
           - have lots of activities and resources available for the next stage of development 
           - be prepared to extend a child’s thinking with appropriately challenging questions and comments
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
-            <ul class="govuk-list govuk-list--bullet">
-              <li>How do you make sure that the children in your care are appropriately challenged?</li> 
-              <li>Do you have resources available that are intended for a higher stage of development?</li> 
-              <li>Do you know the individual needs of your children, so that you can ask appropriately challenging questions during storytime and discussions?</li>
-              <li>How do you support parents to continue to appropriately challenge their children at home? For example, do you share regular updates on progress? Do you recommend or share resources?</li> 
-            </ul>
-          </div>
+          $BRAIN
+
+          Reflect on what you have read about the impact of language development on self-regulation. 
+
+          Think about your practice. 
+
+          Consider the following questions: 
+
+          - How do you make sure that the children in your care are challenged according to their individual starting points? 
+          - When planning your curriculum, how do you tailor your activities, discussions and resources to meet the needs of children of different ability levels?
+          - How do you support parents to continue to challenge their children at home?
+          - What impact does this have on the children's behaviour and learning? 
+          - Is there anything you could change or improve? 
+
+          $BRAIN
           
       4-2-2-2: 
         heading: The impact on building relationships and social skills
@@ -1001,16 +1049,19 @@ en:
 
           You should model your expectations in a variety of group sizes, both indoors and outdoors. This will make sure that children understand what positive social communication looks like in different situations.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
 
-            <p class="govuk-body">Have you tried using a communication buddying system for children around 3 years of age or older?</p>
-            
-            <p class="govuk-body">This is where you group children with varying communication skills together during adult led or large group activities. Children who lack confidence will benefit from working with more confident children. Children who are above their expected level will develop their positive self image by helping others.</p>
+          You could try using a communication buddying system for children around 3 years of age or older. 
 
-            <p class="govuk-body">It is important that you move the groups around to make sure that children experience a variety of communication styles and levels. Remember that children with advanced communication will need additional opportunities to develop their own skills.</p>
+          This is where you group children with varying levels of communication skills together during adult led or large group activities. 
 
-          </div>
+          Children who lack confidence will benefit from working with more confident children. Children who are above their expected level will develop their positive self image by helping others. 
+
+          Make sure you move the groups around so that children experience a variety of communication styles and levels.
+
+          Remember to also consider children whose communication skills are above the expected level. They will need additional opportunities to develop their own skills. 
+
+          $INFO
 
       4-2-3: 
         heading: The impact of the coronavirus (COVID-19) pandemic on language development
@@ -1115,6 +1166,7 @@ en:
           - Strategies to help children develop language and communication skills 
  
       4-3-1-1a: 
+        notes: true
         heading: The importance of the practitioner’s role in a language rich approach
         body: |
           ![A practitioner working with some children in a nursery setting](/assets/4-3-1-1a-1-1346506872.jpg)                  
@@ -1188,6 +1240,22 @@ en:
           ##High expectations for every child
 
           No child should be considered as low ability. You should tailor your practice and the opportunities you give a child to meet their needs. This applies to all children, including those who are below the expected level and those who need further challenge. 
+
+          $BRAIN 
+
+          Reflect on what you have read about the importance of the practitioner's role in children's language development. 
+
+          Think about your practice. 
+
+          Consider the following questions:
+          
+          - How do you make sure that children learn about social expectations for communication?
+          - What opportunities do you plan into the day for relationship building and talking?
+          - In group discussions, how do you make sure each child is heard?
+          - How do you make sure that children feel their interactions are valued?
+          - Could you extend or improve your curriculum to further support this?
+
+          $BRAIN
           
       4-3-1-2a: 
         heading: Strategies to help children develop language and communication skills
@@ -1328,14 +1396,22 @@ en:
           - areas that encourage children to gather in small groups 
           - quiet areas where children can process their learning or look at books
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
 
-            <p class="govuk-body">You can use the points identified on this page to carry out an evaluation of your setting. You should consider how each area or activity promotes interactions and discussion. You should also think about whether they encourage curiosity.</p> 
-            
-            <p class="govuk-body">Over one week, observe how the children use the setting. This will help you identify whether certain times of the day or certain types of activities promote more interaction. You can then use this information to make any necessary changes to your environment.</p>
-          
-          </div> 
+          You can use the points identified on this page to evaluate your setting. 
+
+          Consider how each area or activity: 
+
+          - promotes interactions and discussion
+          - encourages curiosity and creativity
+
+          Over one week, watch how the children use the setting.
+
+          This will help you identify whether certain times of the day or types of activities promote more interaction. 
+
+          You can then use this information to make any changes to your curriculum and environment.
+
+          $INFO
 
       4-3-2-2a: 
         heading: A balanced approach
@@ -1424,6 +1500,7 @@ en:
           Discussing personal pictures with a child will help their communication confidence by giving them a familiar focus and sense of pride. You can also use the pictures as part of larger group activities, or place them in a basket for children to access and discuss with each other. 
 
       4-3-2-4: 
+        notes: true
         heading: The outdoor environment
         body: |
           ![Children exploring a garden with a practitioner. One child is pointing at something interesting.](/assets/4-3-2-4-671254038.jpg)             
@@ -1493,6 +1570,21 @@ en:
 
           For older children, walks can be used as an opportunity to make up stories about where they are travelling and what they might find when they get there.
 
+          $BRAIN
+
+          Reflect on what you have read about how the outdoor environment can support children's language development. 
+          
+          Think about a recent outdoor activity and interaction with a child in your setting.
+
+          Consider the following questions: 
+
+          - How did you include commentary before and during the activity? 
+          - How did you encourage discussion? 
+          - How did you include both an adult and child led focus? 
+          - How could you extend the activity further? 
+
+          $BRAIN  
+
       4-3-3:
         heading: Working with parents and carers
         body: |
@@ -1511,6 +1603,7 @@ en:
           - Effective assessment and collaboration
 
       4-3-3-1a:
+        notes: true
         heading: Strategies for working with parents and carers
         body: |
           ![A practitioner playing a guitar and singing a song with children and some other adults. Some children are playing musical instruments.](/assets/4-3-3-1a-1127326292.jpg)   
@@ -1562,14 +1655,21 @@ en:
 
           Success will look different for each child. It's important to look out for a child making efforts and improvements which you can praise. You should share these successes with parents and carers, so they can also recognise their child's development . Praise also helps a child to feel important and motivated to learn.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $BRAIN
 
-            <p class="govuk-body">Take one of these strategies that are new to you or that you feel could be improved. Suggest it as a discussion point at your next staff meeting. Discuss how the strategy could be implemented into your practice.</p>
-            
-            <p class="govuk-body">If you work independently as a childminder, you could ask for feedback from your parents on how they would like to become more involved. </p>
+          Reflect on what you have read about strategies for working with parents and carers. 
 
-          </div>
+          Think about your practice. 
+
+          Consider the following questions:
+          
+          - How do you work with parents and carers to understand more about their children? 
+          - How do you build parents and carers' confidence and knowledge, so that they can support their children's language development at home? 
+          - What opportunities do you create to invite parents and carers in to your setting or share resources with them? 
+          - What impact do these strategies have on the children's learning and development? 
+          - How could you extend or improve on these strategies?
+
+          $BRAIN
 
       4-3-3-2: 
         heading: Effective assessment and collaboration 
@@ -1651,7 +1751,7 @@ en:
 
           You must also work with parents to support their child’s language development.
 
-          ##Further reading 
+          $BOOK 
 
           You can find help and guidance on the Department for Education's [Help for early years providers website](https://help-for-early-years-providers.education.gov.uk/).
 
@@ -1666,6 +1766,8 @@ en:
           Learn more about [the Picture Exchange Communication System (PECS)](https://nationalautismresources.com/the-picture-exchange-communication-system-pecs/).
 
           Get [Makaton resources and training](https://makaton.org/).
+
+          $BOOK
 
       4-4-1:
         heading: End of module test
