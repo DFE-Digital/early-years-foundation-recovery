@@ -69,6 +69,8 @@ en:
         heading: |
           The pre-linguistic stage: sounds and noises before talking
         body: | 
+          ![A practitioner talking to a baby](/assets/4-1-1-1a-1221602959.jpg)
+
           ##Before birth
 
           In module 2, you learned that a baby’s language development begins as early as 20 weeks of pregnancy. At around 23 weeks most babies will start to hear sounds from outside the womb. 
@@ -83,8 +85,6 @@ en:
           ##Pre-linguistic stage
 
           The first year of life is known as the pre-linguistic stage. In this stage babies cannot yet speak and instead use sounds. 
-
-          ![A practitioner talking to a baby](/assets/4-1-1-1a-1221602959.jpg)
 
           When a baby cries and you respond, they will feel that their attempts to communicate are working. This will encourage them to continue interacting with you.  As a baby grows, they will start to communicate in other ways. For example, as well as crying they might start: 
 
@@ -102,22 +102,21 @@ en:
 
           Babbling will become more purposeful and the baby will try to imitate simple words. They will also begin to accompany their babbling with gestures. The babbling stage continues until a baby is around 12 months old.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
 
-            <p class="govuk-body">To support a baby’s language development at this age you can:</p>
+          You can support a baby’s language development at this age by:
+ 
+          - acknowledging all attempts at communication, no matter how small
+          - reading and talk about the images in picture books
+          - talking about everyday actions, such as the nappy changing routine or the preparations taking place at mealtimes
+          - singing with them and to them
+          - making eye contact and use facial expressions to support your actions 
+          - leaving gaps after your comments or questions to encourage their understanding of how to interact with others
 
-            <ul class="govuk-list govuk-list--bullet">
-              <li>acknowledge all attempts at communication, no matter how small</li>
-              <li>read and talk about the images in picture books</li>
-              <li> talk about everyday actions, such as the nappy changing routine or the preparations taking place at mealtimes</li>
-              <li>sing with them and to them</li>
-              <li>make eye contact and use facial expressions to support your actions</li> 
-              <li>leave gaps after your comments or questions to encourage their understanding of how to interact with others</li>
-            </ul>
-          </div>
+          $INFO
 
       4-1-1-1b: 
+        notes: true
         heading: | 
           The pre-linguistic stage: effective practice
         body: |
@@ -201,6 +200,20 @@ en:
           - patterns
 
           You can also make comments about the adventures the toys might be going on. For example, you could add a toy dinosaur and talk about the noises it makes as it stomps through the jungle.
+
+          $BRAIN 
+
+          Reflect on what you have read about effective practice for the pre-linguistic stage.
+          
+          Think about your practice. 
+
+          Consider the following questions:
+          
+          - How do you support babies' language development in your setting? 
+          - Which of the above strategies do you currently use to help babies' language development?
+          - How could you extend or improve on these strategies?
+
+          $BRAIN 
     
       4-1-1-2a:
         heading: |
@@ -253,21 +266,24 @@ en:
             </blockquote>
           </div>
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
 
-            <p class="govuk-body">Talk your way through your day, describing your routine actions and explaining what is happening. You should use descriptive words to make sure that children use a wide variety of vocabulary.</p>
-          
-            <p class="govuk-body">For example, if you are preparing fruit for a snack, you can include words that describe the texture such as rough, smooth, sticky, or cold. You can then use this language again when the child is handling and eating the fruit. You can comment “you have picked a banana, is it squishy? Is it cold?” Children will then be able to make the connection between the word and the feeling.</p>
-            
-             <p class="govuk-body">This will help children to:</p>
+          Talk your way through your day. This is exactly what it suggests. 
 
-            <ul class="govuk-list govuk-list--bullet">
-              <li>hear a wide variety of vocabulary</li>
-              <li>connect the language to the item, task or situation</li>
-              <li>organise and use their language in the correct way</li>
-            </ul>
-          </div>
+          Make sure that you describe your routine actions and explain what is happening. You should use descriptive words to help children experience a wide variety of vocabulary. 
+
+          For example, if you are preparing fruit for a snack, you can include words that describe the texture such as rough, smooth, sticky, or cold.
+
+          You can then use this language again when the child is handling and eating the fruit. You can make comments like “you have picked a banana, is it squishy? Is it cold?” Children will then be able to make the connection between the word and the feeling. 
+
+          This will help children to:
+
+          - hear a wide variety of vocabulary
+          - connect the language to the item, task or situation
+          - organise and use their language in the correct way
+
+          $INFO
+
 
       4-1-1-3: 
         heading: |
