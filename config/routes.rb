@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root 'home#index'
   get 'health', to: 'home#show'
-  get 'my-learning', to: 'learning#show'
   get 'my-modules', to: 'learning#show'
   get 'about-training', to: 'training_modules#index', as: :course_overview
 

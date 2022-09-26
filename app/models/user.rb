@@ -75,6 +75,10 @@ class User < ApplicationRecord
     @course ||= CourseProgress.new(user: self)
   end
 
+  def course_started?
+    !module_time_to_completion.empty?
+  end
+
 private
 
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]

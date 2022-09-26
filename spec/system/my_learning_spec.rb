@@ -4,7 +4,7 @@ RSpec.describe 'Learning activity', type: :system do
   include_context 'with user'
 
   before do
-    visit '/my-learning'
+    visit '/my-modules'
   end
 
   context 'when the user has not begun any modules' do
@@ -70,7 +70,7 @@ RSpec.describe 'Learning activity', type: :system do
   context 'when a user has started the first mandatory module' do
     before do
       visit '/modules/alpha/content-pages/intro'
-      visit '/my-learning'
+      visit '/my-modules'
     end
 
     it 'shows the started module' do
