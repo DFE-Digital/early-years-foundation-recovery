@@ -47,7 +47,6 @@ personal-social-and-emotional-development:
   summative_threshold: 70
 
 module-4:
-  draft: true
   depends_on: personal-social-and-emotional-development
   duration: 2
   title: Supporting language development in the early years
