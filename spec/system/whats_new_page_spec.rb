@@ -17,7 +17,7 @@ RSpec.describe 'Whats new page', type: :system do
     
     context "when what's new page has not been viewed" do
       it "visits what's new page after sign in" do
-        expect(page).to have_current_path '/whats_new'
+        expect(page).to have_current_path '/whats-new'
       end
     end
     
@@ -25,7 +25,7 @@ RSpec.describe 'Whats new page', type: :system do
       let(:user) { create :user, :completed, :display_whats_new }
       
       it "does not visit what's new page after sign in" do
-        click_button 'Sign out'
+        click_on 'Sign out'
         
         visit '/users/sign-in'
         fill_in 'Email address', with: user.email

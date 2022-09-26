@@ -5,7 +5,13 @@ protected
 
   def after_sign_in_path_for(resource)
     if resource.registration_complete?
-      my_learning_path
+      if resource.display_whats_new
+        resource.display_whats_new = false
+        resource.save
+        static_path('whats-new')
+      else
+        my_learning_path
+      end
     else
       extra_registrations_path
     end
