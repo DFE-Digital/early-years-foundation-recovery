@@ -50,7 +50,7 @@ class FillPageViews
     end
   end
 
-  private
+private
 
   def users
     User.order(:id).all
