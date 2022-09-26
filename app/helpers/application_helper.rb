@@ -59,4 +59,9 @@ module ApplicationHelper
       title,
     ].compact.join(' : ')
   end
+
+  # @return [String]
+  def calculate_module_state
+    CalculateModuleState.new(user: current_user).call
+  end
 end
