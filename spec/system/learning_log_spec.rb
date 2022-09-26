@@ -4,16 +4,16 @@ RSpec.describe 'Learning log', type: :system do
   include_context 'with user'
   include_context 'with progress'
 
-  context 'before training starts' do
+  context 'when training has not started' do
     describe 'navigation menu' do
       it 'does not show learning log' do
         visit '/'
-        expect(page.find('nav')).to_not have_text('Learning log')
+        expect(page.find('nav')).not_to have_text('Learning log')
       end
     end
   end
 
-  context 'after training starts' do
+  context 'when training starts' do
     before do
       start_first_submodule(alpha)
     end

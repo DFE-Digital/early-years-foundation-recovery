@@ -11,7 +11,7 @@ RSpec.describe 'Learning activity', type: :system do
     describe 'In progress' do
       it 'is empty' do
         within '#started' do
-          expect(page).to have_text 'In progress'
+          expect(page).to have_text 'Modules in progress'
           expect(page).to have_text 'You have not started any modules.'
 
           expect(page).not_to have_text 'First Training Module'
@@ -75,7 +75,7 @@ RSpec.describe 'Learning activity', type: :system do
 
     it 'shows the started module' do
       within '#started' do
-        expect(page).to have_text 'In progress'
+        expect(page).to have_text 'Modules in progress'
         expect(page).to have_text 'First Training Module'
         expect(page).not_to have_text 'You have not started any modules.'
       end

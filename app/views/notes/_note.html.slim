@@ -6,7 +6,11 @@ div id="#{dom_id note}"
     =< govuk_link_to(note.title, training_module_content_page_path(note.training_module, note.name))
 
   .log-entry
-    = govuk_heading("You wrote:", tag: :h4)
+    - if note.body.present?
+      = govuk_heading("You wrote:", tag: :h4)
 
-    p.govuk_body
-    = simple_format(note.body)
+      p.govuk_body
+      = simple_format(note.body)
+    - else 
+      p.govuk_body aria-label= "You have not made any notes for #{note.title}"
+        | You have not made any notes on this page yet.
