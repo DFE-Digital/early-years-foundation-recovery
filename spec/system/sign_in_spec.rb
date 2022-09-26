@@ -61,4 +61,30 @@ RSpec.describe 'Sign in', type: :system do
         .and have_text('Enter a valid email address and password. Your account will be locked after 5 unsuccessful attempts. We will email you instructions to unlock your account.')
     end
   end
+
+  context "when what's new page has not been viewed" do
+    let(:user) { create :user, :completed, :display_whats_new }
+
+    it "visits what's new page after sign in" do
+      fill_in 'Email address', with: user.email
+      fill_in 'Password', with: user.password
+      click_button 'Sign in'
+
+      expect(page).to have_current_path('/whats_new')
+    end
+  end
+  
+  context "when what's new page has been viewed" do
+    let(:user) { create :user, :completed, :dont_display_whats_new }
+    
+    it "does not visit what's new page after sign in" do
+      fill_in 'Email address', with: user.email
+      fill_in 'Password', with: user.password
+      click_button 'Sign in'
+
+      expect(page).not_to have_current_path('/whats_new')
+    end
+  end
+
+
 end
