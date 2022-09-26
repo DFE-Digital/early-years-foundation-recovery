@@ -746,6 +746,15 @@ en:
           - persuasion - support from influential role models in the child’s life with praise and encouragement
           - imagination  - the ability for the child to imagine themselves succeeding
 
+      2-2-2-4video:
+        heading: Supporting children to build resilience
+        body: |
+          This video explains the importance of supporting children to build resillience, as part of the early years foundation stage framework. There are also some tips on how to support children in this area.
+        video:
+          id:
+          title: 
+          provider:
+
       2-2-2-5a:
         heading: |
           Theories of how children learn: Bruner
@@ -767,6 +776,15 @@ en:
           Bruner believed that both play and spending time with adults are vital to children’s learning. He conducted experiments that showed children’s play was less sophisticated without an adult’s input.
 
           Critics suggest that Bruner’s theory does not take into consideration an individual’s stage of development or opportunity for self expression.
+
+      2-2-2-5video:
+        heading: Scaffolding children’s learning
+        body: |
+          This video explains the importance of scaffolding children's learning, as part of the early years foundation stage framework. There are also some tips on how to support children in this area.
+        video:
+          id:
+          title: 
+          provider:
 
       2-2-2-6:
         heading: |
