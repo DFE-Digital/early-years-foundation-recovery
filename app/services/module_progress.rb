@@ -24,10 +24,22 @@ class ModuleProgress
     page.properties['id'] if page.present?
   end
 
+  # Assumes gaps in page views due to skipping or revisions to content
+  # @return [ModuleItem]
+  def furthest_page
+    visited.last
+  end
+
   # Last visited module item with fallback to first item
   # @return [ModuleItem]
   def resume_page
     unvisited.first&.previous_item || mod.expectation_page
+  end
+
+  # @see FillPageViews task
+  # @return [Boolean] non-sequential gaps present
+  def skipped?
+    (unvisited.first.id..unvisited.last.id).count != unvisited.map(&:id).count
   end
 
   # @see CourseProgress
@@ -47,6 +59,11 @@ class ModuleProgress
   # @return [Boolean] module pages have been viewed (past interruption)
   def started?
     visited?(mod.intro_page)
+  end
+
+  # @return [Boolean] view event logged for page
+  def visited?(page)
+    module_item_events(page.name).present?
   end
 
 protected
@@ -69,11 +86,6 @@ protected
     state(:none?, items)
   end
 
-  # @return [Boolean] view event logged for page
-  def visited?(page)
-    training_module_events.where_properties(id: page.name).present?
-  end
-
   # @see SummativeAssessmentProgress
   #
   # @return [Boolean]
@@ -91,8 +103,13 @@ protected
 private
 
   # @return [Array<ModuleItem>]
+  def visited
+    mod.module_items.select { |item| visited?(item) }
+  end
+
+  # @return [Array<ModuleItem>]
   def unvisited
-    mod.module_items.select { |item| module_item_events(item.name).none? }
+    mod.module_items.reject { |item| visited?(item) }
   end
 
   # @param method [Symbol]
