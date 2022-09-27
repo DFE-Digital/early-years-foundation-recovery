@@ -34,7 +34,7 @@ class ExtraRegistrationsController < ApplicationController
     else
       track('user_registration', success: true)
       current_user.update! registration_complete: true
-      redirect_to my_learning_path, notice: t(:complete, scope: :extra_registration)
+      redirect_to my_modules_path, notice: t(:complete, scope: :extra_registration)
     end
   end
 

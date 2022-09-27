@@ -301,7 +301,7 @@ en:
     home:
       index: Home page
     learning:
-      show: My learning
+      show: My modules
     user:
       show: My account
       edit_name: Change name

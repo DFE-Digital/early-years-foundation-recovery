@@ -52,7 +52,7 @@ RSpec.describe 'Authentication', type: :request do
   end
 
   describe 'viewing :authenticate_registered_user! controller action' do
-    let(:action_path) { my_learning_path }
+    let(:action_path) { my_modules_path }
 
     context 'with User not signed in' do
       it 'redirects to sign in page' do
