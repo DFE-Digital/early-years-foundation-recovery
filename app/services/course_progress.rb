@@ -22,6 +22,8 @@ class CourseProgress
     by_state(:upcoming).reject { |mod| available?(mod) }.take(3)
   end
 
+  # Completed modules are modules for which every module item has been viewed
+  # completed_at comes from a specific named event
   # @return [Array<Array>] Tabular data of completed training module
   def completed_modules
     by_state(:completed).map do |mod|
@@ -52,6 +54,7 @@ class CourseProgress
         completed: #{completed?(mod)}
         available: #{available?(mod)}
         last: #{mod.module_items.last.name unless mod.draft?}
+        last_course_module_item: #{mod.module_course_items.last.name unless mod.draft?}
         milestone: #{milestone(mod.name)}
       SUMMARY
     end
