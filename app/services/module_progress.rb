@@ -30,16 +30,30 @@ class ModuleProgress
     visited.last
   end
 
+  # @return [ModuleItem]
+  def final_content_page
+    mod.module_course_items.last
+  end
+
   # Last visited module item with fallback to first item
   # @return [ModuleItem]
   def resume_page
     unvisited.first&.previous_item || mod.expectation_page
   end
 
+  # Identify new content that has not been seen and would effect module state
+  #
   # @see FillPageViews task
-  # @return [Boolean] non-sequential gaps present
+  # @return [Boolean]
   def skipped?
-    (unvisited.first.id..unvisited.last.id).count != unvisited.map(&:id).count
+    if unvisited.none?
+      false
+    # elsif key_event('module_complete') && unvisited.any?
+    elsif module_item_events(final_content_page.name).first && unvisited.any?
+      true
+    elsif gaps?
+      true
+    end
   end
 
   # @see CourseProgress
@@ -54,13 +68,14 @@ class ModuleProgress
     certificate_achieved_at || last_page_completed_at
   end
 
+  # @return [DateTime, nil]
   def certificate_achieved_at
-    user.events.where(name: 'module_complete').where_properties(training_module_id: mod.name).first&.time
+    key_event('module_complete')&.time
   end
 
+  # @return [DateTime, nil]
   def last_page_completed_at
-    last_page = mod.module_course_items.last.name
-    training_module_events.where_properties(id: last_page).first.time
+    module_item_events(final_content_page.name).first&.time
   end
 
   # @see CourseProgress
@@ -108,6 +123,12 @@ protected
     summative_assessment.attempted? && summative_assessment.passed?
   end
 
+  # In progress modules with new pages that have been skipped
+  # @return [Boolean]
+  def gaps?
+    (unvisited.first.id..unvisited.last.id).count != unvisited.map(&:id).count
+  end
+
 private
 
   # @return [Array<ModuleItem>]
@@ -137,5 +158,11 @@ private
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
   def training_module_events
     user.events.where_properties(training_module_id: mod.name)
+  end
+
+  # @param key [String] module_start, module_complete
+  # @return [Ahoy::Event]
+  def key_event(key)
+    training_module_events.where(name: key).first
   end
 end
