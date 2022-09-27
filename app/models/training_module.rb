@@ -1,6 +1,8 @@
 class TrainingModule < YamlBase
   set_filename Rails.configuration.training_modules
 
+  scope :active, -> { where(draft: nil) }
+
   # Override basic behaviour so that root key is stored as name
   def self.load_file
     raw_data.map { |name, values| values.merge(name: name) }
@@ -141,5 +143,13 @@ class TrainingModule < YamlBase
   # @return [ModuleItem]
   def last_page
     assessment_results_page || module_course_items.last
+  end
+
+  def tab_label
+    ['Module', id].join(' ')
+  end
+
+  def tab_anchor
+    tab_label.parameterize
   end
 end

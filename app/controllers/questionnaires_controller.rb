@@ -101,15 +101,6 @@ protected
     end
   end
 
-  def track_questionnaire_answer
-    key = questionnaire.questions.keys.first
-
-    track('questionnaire_answer',
-          type: questionnaire.assessments_type,
-          success: questionnaire.result_for(key),
-          answer: questionnaire.answer_for(key))
-  end
-
 private
 
   def track_events
@@ -128,5 +119,14 @@ private
 
   def confidence_untracked?
     untracked?('confidence_check_start', training_module_id: params[:training_module_id])
+  end
+
+  def track_questionnaire_answer
+    key = questionnaire.questions.keys.first
+
+    track('questionnaire_answer',
+          type: questionnaire.assessments_type,
+          success: questionnaire.result_for(key),
+          answer: questionnaire.answer_for(key))
   end
 end

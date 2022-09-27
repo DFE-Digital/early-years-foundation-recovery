@@ -1,7 +1,7 @@
 class ContentPagesController < ApplicationController
   before_action :authenticate_registered_user!
   before_action :clear_flash
-  helper_method :module_item, :training_module
+  helper_method :module_item, :training_module, :note
   after_action :track_events, only: :show
 
   def index
@@ -30,6 +30,10 @@ private
 
   def training_module
     module_item.parent
+  end
+
+  def note
+    @note ||= current_user.notes.where(training_module: training_module_name, name: module_params[:id]).first_or_initialize(title: module_item.model.heading)
   end
 
   def training_module_name

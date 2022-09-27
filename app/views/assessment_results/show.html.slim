@@ -26,7 +26,7 @@ hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class
       = link_to_next_module_item(@module_item)
 
     - else
-      = govuk_link_to 'Go to My learning', my_learning_path, class: 'govuk-button govuk-button--secondary govuk-!-margin-right-4'
+      = govuk_link_to 'Go to My modules', my_modules_path, class: 'govuk-button govuk-button--secondary govuk-!-margin-right-4'
 
       = govuk_link_to 'Retake test', new_training_module_assessment_result_path(@module_item.training_module), class: 'govuk-button'
 

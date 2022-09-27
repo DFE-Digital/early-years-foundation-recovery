@@ -33,6 +33,11 @@ class ContentPage
     translate(:image)
   end
 
+  # @return [Boolean]
+  def notes?
+    translate(:notes).present?
+  end
+
   # @return [ModuleItem]
   def module_item
     @module_item ||= ModuleItem.find_by(training_module: training_module, name: name)
