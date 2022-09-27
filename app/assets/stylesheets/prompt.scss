@@ -28,15 +28,23 @@ $prompt-hue: govuk-colour("turquoise");
 
   .govuk-grid-column-three-quarters {
     padding: govuk-spacing(3) govuk-spacing(0);
+    
+    @media(min-width: 48em) and (max-width: 61.5em) {
+      padding-left: govuk-spacing(6);
+    }
   }
 
   .gem-c-govspeak {
     padding-top: govuk-spacing(4);
+    @media(max-width: 40.0625em ) {
+      padding-right: govuk-spacing(4);
+    }
   }
-}
 
-.prompt.prompt-bg {
-  background-color: lighten($prompt-hue, 50%);
+  &.prompt-bg {
+    background-color: lighten($prompt-hue, 50%);
+  }
+
 }
 
 .legend {
