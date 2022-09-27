@@ -8,7 +8,7 @@ namespace :db do
       user.display_whats_new = true
       user.save!
 
-      number_updated += 1 if user.display_whats_new == true
+      number_updated += 1 if user.display_whats_new
       total_records += 1
     end
     p "Updated #{number_updated} of #{total_records} records"
