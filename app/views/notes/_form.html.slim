@@ -1,25 +1,31 @@
+
 = form_with(model: note, url: user_notes_path) do |form|
-  .form-container class='govuk-!-margin-bottom-4'
-    =govuk_heading('Add to your learning log')
-    
-    - if note.errors.any?
-      div style="color: red"
-        h2 = "#{pluralize(note.errors.count, 'error')} prohibited this note from being saved:"
-        ul
-          - note.errors.each do |error|
-            li = error.full_message
-    = form.govuk_text_area :body,
-      label: { text: 'Use this space to reflect on your chosen activity.' },
-      hint: { text: 'Your responses will not be marked. You do not need to complete this activity to receive your certificate of achievement.' },
-      rows: 5
-    = form.hidden_field :module_item_id, value: @module_item.id
-    = form.hidden_field :title
-    = form.hidden_field :training_module
-    = form.hidden_field :name
-    p.govuk_body
-      | You can view all your responses in your 
-      = govuk_link_to 'learning log', user_notes_path(anchor: @module_item.parent.tab_anchor)
-      | .
+  .prompt
+    .govuk-grid-row 
+      .govuk-grid-column-one-quarter 
+        = icon(:pencil)
+      .govuk-grid-column-three-quarters
+        .form-container class='govuk-!-margin-bottom-4'
+          =govuk_heading('Add to your learning log', tag: :h2)
+          
+          - if note.errors.any?
+            div style="color: red"
+              h2 = "#{pluralize(note.errors.count, 'error')} prohibited this note from being saved:"
+              ul
+                - note.errors.each do |error|
+                  li = error.full_message
+          = form.govuk_text_area :body,
+            label: { text: 'Use this space to make notes on the reflection point.' },
+            hint: { text: 'Your responses will not be marked. You do not need to complete this activity to receive your certificate of achievement.' },
+            rows: 5
+          = form.hidden_field :module_item_id, value: @module_item.id
+          = form.hidden_field :title
+          = form.hidden_field :training_module
+          = form.hidden_field :name
+          p.govuk_body
+            | You can view all your responses in your 
+            = govuk_link_to 'learning log', user_notes_path(anchor: @module_item.parent.tab_anchor)
+            | .
   hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
 
   .govuk-grid-row
