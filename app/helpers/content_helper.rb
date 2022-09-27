@@ -26,10 +26,10 @@ module ContentHelper
   # @param text [String] Tag content
   # @param tag [Symbol] HTML element (default h1)
   # @return [String, nil]
-  def govuk_heading(text, tag: :h1)
+  def govuk_heading(text, tag: :h1, size: 'm')
     return if text.blank?
 
-    content_tag(tag, class: 'govuk-heading-m') { text }
+    content_tag(tag, class: "govuk-heading-#{size}") { text }
   end
 
   # @param icon [String, Symbol] Fontawesome icon name
