@@ -13,7 +13,11 @@ module LinkHelper
   # @param item [ModuleItem]
   def link_to_next_module_item(item, link_args = { class: 'govuk-button' })
     mod = item.training_module
-    link_to item.next_button_text, training_module_content_page_path(mod, item.next_item), link_args
+    if item.next_item
+      link_to item.next_button_text, training_module_content_page_path(mod, item.next_item), link_args
+    else
+      link_to 'Finish', course_overview_path, link_args
+    end
   end
 
   # @return [String] previous content page or module overview

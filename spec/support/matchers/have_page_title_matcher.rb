@@ -1,10 +1,14 @@
-RSpec::Matchers.define :have_page_title do |expected_page_title|
+RSpec::Matchers.define :have_page_title do |title_suffix|
   match do |path|
     visit path
-    page.title.eql? "Child development training : #{expected_page_title}"
+    page.title.eql? "Child development training : #{title_suffix}"
   end
 
   failure_message do |path|
-    "expected when visiting #{path} to have title #{expected_page_title}, not #{page.title} "
+    "expected #{path} to have title 'Child development training : #{title_suffix}', not '#{page.title}'"
+  end
+
+  description do
+    "have title 'Child development training : #{title_suffix}'"
   end
 end

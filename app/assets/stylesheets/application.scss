@@ -1,14 +1,26 @@
 @import "govuk-frontend/govuk/all";
 @import "./govspeak";
 @import "./card";
+@import "./prompt";
 @import "./interruption";
 @import "./print-link";
-@import "./prompt";
 @import "./quote";
+@import "./icons";
+
+/*
+Internal
+-----------------------------------------------
+*/
+pre.code-tip {
+  padding: 0 5px;
+  color: govuk-colour("red");
+  background-color: govuk-colour("light-grey");
+}
 
 .debug_dump {
   background: beige;
 }
+// --------------------------------------------
 
 .app-sidebar {
   padding: govuk-spacing(5) govuk-spacing(3);
@@ -21,26 +33,6 @@
 
 .govuk-label {
   font-weight: normal;
-}
-
-.govuk-notification-banner__content {
-  p {
-    margin: 0;
-  }
-
-  & > * {
-    max-width: none;
-  }
-}
-
-.govuk-notification-banner--error {
-  border-color: $govuk-error-colour;
-  background-color: $govuk-error-colour;
-}
-
-.govuk-notification-banner--error, .govuk-notification-banner--alert {
-  border-color: $govuk-error-colour;
-  background-color: $govuk-error-colour;
 }
 
 .light-grey-box {
@@ -70,4 +62,39 @@
 // nested bullets (level 2) to be unfilled circles
 ul > li > ul > li {
   list-style-type: circle;
+}
+.embed-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  .iframe,
+  .object,
+  .embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.remove-borders {
+  border: none;
+}
+
+.first-column-bold td:first-child {
+  font-weight: bold;
+}
+
+.light-grey-background {
+  background-color: govuk-colour("light-grey");
+  padding: govuk-spacing(6);
+}
+
+.white-background {
+  background-color: govuk-colour("white");; 
+  border-left: none !important;
+  padding: govuk-spacing(4);
 }

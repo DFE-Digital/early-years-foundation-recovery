@@ -24,22 +24,30 @@ class ModuleProgress
     page.properties['id'] if page.present?
   end
 
-  # Last visited module item
+  # Last visited module item with fallback to first item
   # @return [ModuleItem]
   def resume_page
-    unvisited.first&.previous_item
+    unvisited.first&.previous_item || mod.expectation_page
   end
 
   # @see CourseProgress
   # @return [Boolean]
   def completed?
-    all?(mod.module_items)
+    all?(mod.module_course_items)
   end
 
   # Completed date for module
-  # @return [DateTime]
+  # @return [DateTime, nil]
   def completed_at
-    last_page = mod.module_items.last.name
+    certificate_achieved_at || last_page_completed_at
+  end
+
+  def certificate_achieved_at
+    user.events.where(name: 'module_complete').where_properties(training_module_id: mod.name).first&.time
+  end
+
+  def last_page_completed_at
+    last_page = mod.module_course_items.last.name
     training_module_events.where_properties(id: last_page).first.time
   end
 
@@ -92,7 +100,7 @@ private
 
   # @return [Array<ModuleItem>]
   def unvisited
-    mod.module_items.select { |item| module_item_events(item.name).none? }
+    mod.module_course_items.select { |item| module_item_events(item.name).none? }
   end
 
   # @param method [Symbol]

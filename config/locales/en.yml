@@ -150,42 +150,62 @@ en:
       - BTEC National Diploma in Early Childhood Studies
       - Foundation Degree in Early Childhood Studies
 
+  prompt:
+    info: In your setting
+    book: Further reading
+    brain: Reflection point
+    note: Add to your learning log
+    test: Check your understanding
 
-  interruption:
-    formative: |
-      ## Check your learning with quizzes
+  assessment_intro:
+    heading: End of module test
+    body: |
+      This end of module test is here to revisit what you have learned and the
+      impact on your practice. It is not aimed to provide a pass or fail.
 
-      Throughout this module there are activities to check you understand what you have learned.
-      You will be able to see if you get these questions right or wrong.
-      The scores for these activities are not recorded and they do not count towards the certificate of achievement.
-    summative: |
-      ## End of module test
+      ## Before you start
 
-      Once you have completed all of the topics, there is an end of module
-      test and an opportunity to download a certificate of achievement.
-    common: |
-      ## Your progress is saved automatically
+      This test has 10 multiple choice questions.
 
-      Your progress is automatically saved as you move through the module.
-      You can sign out or close the browser at any time without losing your progress.
-      When you next sign in, you can restart from where you left off.
+      You must answer all of the questions.
 
-      ## Reflect on your learning with practitioner prompts
+      You must complete this test in one sitting. If you exit part way through
+      the test, your progress will not be saved.
 
-      You will see practitioner prompts throughout the course.
-      These are intended to:
+      You can review your total score for the test at the end.
 
-      - encourage you to reflect on your current practice
-      - introduce you to new strategies
-      - reinforce effective teaching and learning
-      - help you to think about what you have learned
+      To receive a certificate of achievement for this module, you need to
+      receive an overall score of at least %{passmark}%.
 
+      If you do not score %{passmark}%, you will be able to see which questions
+      you got wrong. You can repeat the test to improve your score as many times
+      as you want to.
+
+  confidence_intro:
+    heading: Reflect on your learning
+    body: |
+      To help DfE to measure our impact, please answer the following questions.
+
+      You must complete these questions in one sitting. If you exit part way
+      through, your progress will not be saved.
+
+      Answers will be anonymous, and we will not know what you individually select.
+
+      Please rate to what extent you agree with the statements on the following pages.
+
+  ending_intro:
+    heading: Thank you
+    body: |
+      You can also <a href='%{feedback_url}' target="_blank">give feedback about
+      the training (opens in new window)</a>
 
   check_email_confirmation:
     heading: Check your email
     body:
       0: |
-        We have sent you an email with instructions for how to verify your email address.
+        We will check if a training account has been created using the email address
+        you entered. If it has, you will receive an email shortly with instructions
+        for how to verify your email address.
       1: |
         We sent the email to:
       2: |
@@ -274,9 +294,12 @@ en:
       We have sent an email to your new email address with a link to click to confirm the change.
       
       If you have not received the email after a few minutes, please check your spam folder.
+
+  # Browser and bookmarks ------------------------------------------------------
   html_title:
     content_pages:
       show:
+        what-to-expect: What to expect during the training
         before-you-start: Before you start
         intro: Introduction
     home:

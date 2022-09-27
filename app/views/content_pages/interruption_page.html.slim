@@ -1,13 +1,12 @@
 = render 'debug'
 
 - content_for :content_page do
-  .interrupt-panel.govuk-grid-column-full
-    h1 What to expect during the training
-    .gem-c-govspeak
-      = translate_markdown t('interruption.formative') if @model.formative?
-      = translate_markdown t('interruption.summative') if @model.summative?
-      = translate_markdown t('interruption.common')
+  .govuk-grid-column-full.interrupt-panel
+    h1.govuk-heading-l Before you start
+    h2.govuk-heading-m End of module test
+    p Once you have completed all topics, there is an end of module test and an opportunity to download a certificate of achievement.
 
-    hr class='govuk-section-break govuk-section-break--l govuk-section-break--visible govuk-!-margin-top-4'
+    h2.govuk-heading-m Your progress is saved automatically
+    p Your progress is automatically saved as you move through the module. You can sign out or close the browser at any time without losing your progress. When you next login, you can restart from where you left off.
 
 = render 'content_wrap'

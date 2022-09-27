@@ -27,6 +27,7 @@ RSpec.describe ModuleProgress do
   describe '#resume_page' do
     it 'returns the furthest visited module item' do
       %w[
+        what-to-expect
         before-you-start
         intro
         1-1

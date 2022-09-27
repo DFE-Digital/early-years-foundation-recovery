@@ -1,0 +1,33 @@
+= render 'debug'
+
+- content_for :content_page do
+  .govuk-grid-row
+    .govuk-grid-column-full
+      h1.govuk-heading-l What to expect during the training
+      p You can expect to see various icons throughout the training course.
+
+      ul.govuk-list.govuk-list--spaced.legend
+        li
+          h2.govuk-heading-m In your setting
+          = icon(:info)
+          p The information icon highlights practical tips to use in your setting.
+        li
+          h2.govuk-heading-m Reflection point
+          = icon(:brain)
+          p The brain icon signals a chance to reflect on what you’ve learned and how it applies to your practice.
+        li
+          h2.govuk-heading-m Learning log
+          = icon(:pencil)
+          p
+            | When you see the pencil icon, you can use the space to make notes on the reflection point.
+            |  You can view all your notes in your personal learning log.
+        li
+          h2.govuk-heading-m Learning check
+          = icon(:question)
+          p
+            | You’ll see the question mark icon next to quiz questions throughout the module.
+            |  These questions are to check you understand what you have learned.
+            |  You will be able to see if you get these questions right or wrong.
+            |  Your scores are not recorded and they do not count towards the certificate of achievement.
+
+= render 'content_wrap'

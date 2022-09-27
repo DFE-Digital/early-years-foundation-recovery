@@ -39,7 +39,14 @@ class TrainingModule < YamlBase
 
   # @return [Array<ModuleItem>]
   def module_items
-    @module_items ||= ModuleItem.where(training_module: name)
+    @module_items ||= ModuleItem.where(training_module: name).to_a
+  end
+
+  # @return [Array<ModuleItem>]
+  # excludes certificate page
+  def module_course_items
+    excluded_page_types = %w[certificate]
+    @module_course_items ||= ModuleItem.where(training_module: name).where.not(type: excluded_page_types).to_a
   end
 
   # @example
@@ -66,7 +73,7 @@ class TrainingModule < YamlBase
     }.except(nil)
   end
 
-  # @param type [String] text_page, youtube_page...
+  # @param type [String] text_page, video_page...
   # @return [Array<ModuleItem>]
   def module_items_by_type(type)
     ModuleItem.where_type(name, type)
@@ -81,8 +88,13 @@ class TrainingModule < YamlBase
   # sequence ---------------------------------
 
   # @return [ModuleItem]
-  def interruption_page
+  def expectation_page
     module_items.first
+  end
+
+  # @return [ModuleItem]
+  def interruption_page
+    expectation_page.next_item
   end
 
   # @return [ModuleItem]
@@ -116,14 +128,18 @@ class TrainingModule < YamlBase
     ModuleItem.where_type(name, 'assessment_results').first
   end
 
+  # @return [ModuleItem]
   def certificate_page
     ModuleItem.where_type(name, 'certificate').first
   end
 
-  # Summative results if module includes assessment
-  #
+  # @return [ModuleItem]
+  def first_confidence_page
+    ModuleItem.where_type(name, 'confidence_questionnaire').first
+  end
+
   # @return [ModuleItem]
   def last_page
-    assessment_results_page || module_items.last
+    assessment_results_page || module_course_items.last
   end
 end

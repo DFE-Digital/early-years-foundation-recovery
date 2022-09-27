@@ -89,15 +89,25 @@ class Questionnaire < OpenStruct
     !!submitted
   end
 
-  # @return [Boolean] end of summative assessment
-  def final_question?
+  # @return [Boolean]
+  def last_assessment?
     module_item.parent.last_assessment_page.eql?(module_item)
+  end
+
+  # @return [Boolean]
+  def first_confidence?
+    module_item.parent.first_confidence_page.eql?(module_item)
+  end
+
+  # @return [Boolean]
+  def first_assessment?
+    module_item.parent.first_assessment_page.eql?(module_item)
   end
 
   # @return [String]
   def next_button_text
     if summative?
-      final_question? ? 'Finish test' : 'Save and continue'
+      last_assessment? ? 'Finish test' : 'Save and continue'
     else
       'Next'
     end
@@ -137,6 +147,15 @@ class Questionnaire < OpenStruct
     questions.map do |question, data|
       data[:multi_select] ? { question => [] } : question
     end
+  end
+
+  # @return [String]
+  def debug_summary
+    <<~SUMMARY
+
+      ---
+      correct answer(s): #{questions.values.first[:correct_answers]}
+    SUMMARY
   end
 
 private

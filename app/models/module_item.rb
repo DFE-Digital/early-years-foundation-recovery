@@ -19,21 +19,27 @@ class ModuleItem < YamlBase
 
   # @return [Hash] 'Type' to 'View object' mapping
   MODELS = {
-    assessment_intro: ContentPage,
-    confidence_intro: ContentPage,
-    interruption_page: ContentPage,
+    # intros
     module_intro: ContentPage,
     sub_module_intro: ContentPage,
+    assessment_intro: ContentPage,
+    confidence_intro: ContentPage,
+    ending_intro: ContentPage,
+    # static content
+    interruption_page: ContentPage,
+    expectation_page: ContentPage,
+    # dynamic content
     text_page: ContentPage,
-    certificate: CertificatePage,
-
-    youtube_page: YoutubePage,
-
+    # video
+    video_page: VideoPage,
+    # questions
     confidence_questionnaire: Questionnaire,
     formative_questionnaire: Questionnaire,
     summative_questionnaire: Questionnaire,
-
+    # test score
     assessment_results: AssessmentResultsPage,
+    # pdf
+    certificate: CertificatePage,
   }.freeze
 
   # @return [Regexp] 2nd digit if present: 1-[1]-1-1
@@ -119,7 +125,7 @@ class ModuleItem < YamlBase
     end
   end
 
-  # @return [ContentPage, YoutubePage, Questionnaire]
+  # @return [ContentPage, VideoPage, Questionnaire]
   def model
     klass = MODELS[type.to_sym]
     if klass == Questionnaire
@@ -192,6 +198,11 @@ class ModuleItem < YamlBase
   # @return [Boolean]
   def confidence_intro?
     type.eql?('confidence_intro')
+  end
+
+  # @return [Boolean]
+  def ending_intro?
+    type.eql?('ending_intro')
   end
 
   def certificate?
