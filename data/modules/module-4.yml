@@ -1,5 +1,7 @@
 ---
 module-4:
+  what-to-expect:
+    type: expectation_page
   before-you-start:
     type: interruption_page
   intro:
