@@ -50,22 +50,23 @@ en:
         your notes in your personal learning log. You can access your learning log
         from the main menu and from any page where the learning log appears.
 
-        <div class="govuk-prompt govuk-prompt__grey">
-          <div class="govuk-prompt__icon">
-            <i style="color:white;" class="fa-solid fa-pencil icon fa-2x"></i>
+        <div class="form-container govuk-!-margin-bottom-4">
+          <h1 class="govuk-heading-m">Add to your learning log</h1>
+          <div class="govuk-form-group">
+            <label for="note-body-field" class="govuk-label">
+              <p>Use this space to make notes on the reflection point. Do not enter 
+              any personal or sensitive information like children's names.</p>
+              <p>All your notes will be added to your personal learning log.</p>
+              <p>Your notes</p>
+            </label>
+            <textarea id="note-body-field" class="govuk-textarea" rows="5" aria-describedby="note-body-hint" name="note[body]">
+            </textarea>
           </div>
-          <h2 class="govuk-heading-m">Add to your learning log</h2>
-          <p class="govuk-body">Use this space to make notes on the reflection point. Do not enter any personal or sensitive information like children's names.</p>
-          <p class="govuk-body">All your notes will be added to your personal learning log.</p>
-    
-        
-          <div class="govuk-form-group govuk-log-text">
-          <label class="govuk-label" for="label-as-page-heading">
-            Your notes
-          </label>
-          <textarea class="govuk-textarea govuk-js-character-count" id="label-as-page-heading" name="log-reflect-3" rows="5" aria-describedby="label-as-page-heading-info"></textarea>
-          </div>
+          <input value="8" autocomplete="off" type="hidden" name="note[module_item_id]" id="note_module_item_id">
+          <input autocomplete="off" type="hidden" value="1-1-3-1" name="note[title]" id="note_title">
+          <input autocomplete="off" type="hidden" value="alpha" name="note[training_module]" id="note_training_module">
+          <input autocomplete="off" type="hidden" value="1-1-3-1" name="note[name]" id="note_name">
+          <p class="govuk_body">You can view all your responses in your <a class="govuk-link" href="/my-account/learning-log#module-1">learning log</a>.</p>
         </div>
-        
         <a class="govuk-button" href="my-modules">Continue to My modules</a>
         
