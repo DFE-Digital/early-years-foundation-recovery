@@ -46,17 +46,17 @@ RSpec.describe TrainingModule, type: :model do
 
   # sequence ---------------------------------
 
-  describe '#expectation_page' do
+  describe '#interruption_page' do
     it 'is the first page' do
-      expect(training_module.expectation_page.id).to be 1
-      expect(training_module.expectation_page.name).to eql 'what-to-expect'
+      expect(training_module.interruption_page.id).to be 1
+      expect(training_module.interruption_page.name).to eql 'before-you-start'
     end
   end
 
-  describe '#interruption_page' do
+  describe '#expectation_page' do
     it 'is the second page' do
-      expect(training_module.interruption_page.id).to be 2
-      expect(training_module.interruption_page.name).to eql 'before-you-start'
+      expect(training_module.expectation_page.id).to be 2
+      expect(training_module.expectation_page.name).to eql 'what-to-expect'
     end
   end
 

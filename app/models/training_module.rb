@@ -87,23 +87,23 @@ class TrainingModule < YamlBase
 
   # sequence ---------------------------------
 
-  # @return [ModuleItem]
-  def expectation_page
+  # @return [ModuleItem] page 1
+  def interruption_page
     module_items.first
   end
 
-  # @return [ModuleItem]
-  def interruption_page
-    expectation_page.next_item
-  end
-
-  # @return [ModuleItem]
-  def intro_page
+  # @return [ModuleItem] page 2
+  def expectation_page
     interruption_page.next_item
   end
 
+  # @return [ModuleItem] page 3
+  def intro_page
+    expectation_page.next_item
+  end
+
   # Viewing this page determines if the module is "started"
-  # @return [ModuleItem]
+  # @return [ModuleItem] page 5
   def first_content_page
     intro_page.next_item.next_item # TODO: improve this (first page after submod intro)
   end

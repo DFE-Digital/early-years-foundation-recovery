@@ -23,15 +23,15 @@ RSpec.describe ModuleOverviewDecorator do
       it 'goes to the prompt page' do
         expect(user.events.count).to be_zero
         expect(output[:state]).to be :not_started
-        expect(output[:page]).to eql 'what-to-expect'
+        expect(output[:page]).to eql 'before-you-start'
       end
     end
 
     context 'when the module has begun' do
       it 'goes to the furthest page' do
         %w[
-          what-to-expect
           before-you-start
+          what-to-expect
           intro
           1-1
           1-1-1
