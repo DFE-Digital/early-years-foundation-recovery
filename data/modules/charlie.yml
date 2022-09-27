@@ -13,6 +13,6 @@ charlie:
   1-1-2:
     type: text_page
   1-1-3:
-    type: youtube_page
+    type: video_page
   1-1-4:
     type: certificate

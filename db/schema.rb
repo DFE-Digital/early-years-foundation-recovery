@@ -112,6 +112,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_26_104904) do
     t.string "setting_type"
     t.string "setting_type_other"
     t.boolean "display_whats_new", default: false
+    t.jsonb "module_time_to_completion", default: {}, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
