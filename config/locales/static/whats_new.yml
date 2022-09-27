@@ -8,47 +8,44 @@ en:
           We’ve added a few things since you were last here. 
         </div>
 
-        <h2>Videos</h2>
+        ## Videos
 
-        We’ve added videos to modules 1, 2 and 3. These videos will enhance your 
-        understanding of a specific area of child development and how it applies 
-        to your practice. Each video has captions and a transcript. You can look 
-        out for these videos as you go through the training.
+        We’ve added videos to modules 1, 2 and 3.
+        These videos will enhance your understanding of a specific area of child
+        development and how it applies to your practice.
+        Each video has captions and a transcript.
+        You can look out for these videos as you go through the training.
 
-        <h2>In your setting prompts</h2>
+        ## In your setting prompts
 
         The information icon highlights practical tips to use in your setting. 
 
         $INFO
-
-        You should provide activities that require children to share of resources
-        and take turns. This will help them to develop to promote problem solving
-        and cooperation skills. 
-
+        You should provide activities that require children to share of resources and take turns.
+        This will help them to develop to promote problem solving and cooperation skills.
         $INFO
 
-        <h2>Reflection points</h2>
 
-        We’ve replaced practitioner prompts with reflection points. This is  a
-        chance to reflect on what you’ve learned and how it applies to your practice.
+        ## Reflection points
+
+        We’ve replaced practitioner prompts with reflection points.
+        This is a chance to reflect on what you’ve learned and how it applies to your practice.
 
         $BRAIN
-
         Reflect on what you have read about supporting children’s individual development.
 
         Consider the following questions:
-        <ul>
-          <li>What information do you gather to understand each child’s starting point?</li>
-          <li>Who do you involve?</li>
-        </ul>
 
+        - What information do you gather to understand each child’s starting point?
+        - Who do you involve?
         $BRAIN
 
-        <h2>Learning log</h2>
 
-        You now have a space to make notes on reflection points. You can view all
-        your notes in your personal learning log. You can access your learning log
-        from the main menu and from any page where the learning log appears.
+        ## Learning log
+
+        You now have a space to make notes on reflection points.
+        You can view all your notes in your personal learning log.
+        You can access your learning log from the main menu and from any page where the learning log appears.
 
         <div class="form-container govuk-!-margin-bottom-4">
           <h1 class="govuk-heading-m">Add to your learning log</h1>
