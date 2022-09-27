@@ -812,6 +812,15 @@ en:
               <li>positively model social skills that promote positive relationships between peers – including being polite, sharing resources and taking turns  </li>
           </ul> 
           </div>   
+      3-2-1-4video:
+        heading: The impact of coronavirus (COVID-19) on attachment 
+        body: |
+          This video explains the impact of coronavirus (COVID-19) on attachment. There are also some tips on how to support children in this area.
+        video:
+          id:
+          title:
+          provider:
+
       3-2-2:
         heading: Supporting children to develop secure relationships 
         body: |
