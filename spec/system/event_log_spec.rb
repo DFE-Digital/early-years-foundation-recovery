@@ -47,8 +47,7 @@ RSpec.describe 'Event log' do
 
   describe 'first module page' do
     before do
-      start_module(alpha)
-      visit '/modules/alpha/content-pages/before-you-start'
+      visit '/modules/alpha/content-pages/what-to-expect'
       click_on 'Next'
     end
 
