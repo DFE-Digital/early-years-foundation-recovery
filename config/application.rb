@@ -8,10 +8,14 @@ Bundler.require(*Rails.groups)
 
 require 'grover'
 
+ALLOWED_TAGS = %w[p ul li div ol strong].freeze
+
 module EarlyYearsFoundationRecovery
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+    # @see ErrorsController
+    config.exceptions_app = routes
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -32,5 +36,7 @@ module EarlyYearsFoundationRecovery
     config.middleware.use Grover::Middleware
     config.active_record.yaml_column_permitted_classes = [Symbol]
     config.google_analytics_tracking_id = ENV.fetch('TRACKING_ID', '#TRACKING_ID_env_var_missing')
+
+    config.action_view.sanitized_allowed_tags = ALLOWED_TAGS
   end
 end

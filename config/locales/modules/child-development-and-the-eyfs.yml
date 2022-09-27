@@ -2,6 +2,7 @@
 en:
   modules:
     child-development-and-the-eyfs:
+      what-to-expect:
       before-you-start:
       intro:
         heading: Understanding child development and the EYFS
@@ -230,6 +231,7 @@ en:
               </ul>
             </p>
           </div>
+        notes: true
 
       1-1-1-4:
         heading: The potential impact of limited child development knowledge
@@ -279,6 +281,7 @@ en:
             <p class="govuk-body">What do your colleagues think?</p>
 
           </div>
+        notes: true
 
       1-1-1-5:
         heading: How improved child development knowledge supports outstanding practice - scaffolding learning
@@ -326,6 +329,7 @@ en:
             <p class="govuk-body">You have just successfully scaffolded learning! </p>
 
            </div>
+        notes: true
 
       1-1-1-6:
         heading: How improved child development knowledge supports outstanding practice - understanding behaviour
@@ -406,6 +410,7 @@ en:
             <p class="govuk-body">How can you ensure you are prepared to differentiate to include all children? </p>
 
           </div>
+        notes: true
 
       1-1-2:
         heading: Factors affecting children’s development
@@ -620,6 +625,7 @@ en:
             <p class="govuk-body">Are there areas the children do not use?  </p>
             <p class="govuk-body">Does the environment strike the right balance between social interaction and quiet areas? </p>
           </div>
+        notes: true
 
           It is important that you plan and regularly evaluate your learning environments to ensure that children remain curious and motivated to learn. You should also make sure there are opportunities for children to effectively learn, rehearse and develop their communication skills. 
       1-1-2-10:
@@ -662,6 +668,7 @@ en:
           </div>
 
           The communication and language module of this training (coming soon) will consider the stages of development, the practitioner’s role and effective practice in further detail.
+        notes: true
 
       1-2:
         heading: A positive approach to care and education
@@ -728,6 +735,7 @@ en:
           It is important to recognise and celebrate children’s accomplishments. Even where the accomplishment might be considered small, it is essential that the child feels recognised for their achievement. This will encourage children to attempt more challenging tasks even when there is an opportunity for them to make a mistake, as they will seek that acknowledgement again.
 
           All children will have strengths and it is important to embrace and celebrate those individual strengths. This will positively support them and empower them to develop self-worth, self-respect and confidence.
+        notes: true
 
       1-2-1-2:
         heading: Empowering children
@@ -801,6 +809,7 @@ en:
           When you are able to successfully identify individual children’s starting points you can stop potential gaps in learning from opening or widening further by giving the correct support.
 
           The remainder of this module will consider how using your professional judgement and child development knowledge can ensure that this support is accessible through enabling environments and implementation of the EYFS.
+        notes: true
 
       1-2-1-4:
         heading: Successful enabling environments
@@ -877,6 +886,7 @@ en:
             </p>
 
           </div>
+        notes: true
 
       1-2-1-5:
         heading: "A balanced approach to learning: child led play"
@@ -936,6 +946,7 @@ en:
             <p class="govuk-body">What is the current balance of child led and adult led in your setting? </p>
             <p class="govuk-body">Are resources accessible to children for independent choice?  </p>
           </div>
+        notes: true
 
       1-2-1-6:
         heading: "A balanced approach to learning: adult led activities"
@@ -986,6 +997,7 @@ en:
 
             <p class="govuk-body">How can you increase adult led activity?
             </p>
+        notes: true
 
       1-2-2:
         heading: Effective implementation of the EYFS
@@ -1048,6 +1060,7 @@ en:
           <p class="govuk-body"> How do you know if you are having an impact?  </p>
 
           </div>
+        notes: true
 
       1-2-2-2:
         heading: Effective assessment
@@ -1086,6 +1099,7 @@ en:
             <p class="govuk-body">How are 2 year checks recorded and shared?  </p>
 
           </div>
+        notes: true
 
       1-3:
         heading: Summary and next steps
@@ -1128,16 +1142,5 @@ en:
 
           See [guidance to provide support](https://www.gov.uk/government/publications/progress-check-at-age-2) when completing the early years foundation stage (EYFS) progress check at age 2.
 
-      1-3-2:
-        heading: Reflect on your learning
-        body: |
-          To help DfE to measure our impact, please answer the following questions. 
-
-          Answers will be anonymous, and we will not know what you individually select.
-
-          To what extent do you agree with the following statements:
-      
       1-3-2-6:
-        heading: Thank you
-        body: |
-          You can also <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxUQVY5VUpLRkI4T0owS0VPRk0zSkQzSjZHTiQlQCN0PWcu" target="blank">give feedback about the training (opens in new window). 
+        url: "https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxUQVY5VUpLRkI4T0owS0VPRk0zSkQzSjZHTiQlQCN0PWcu"

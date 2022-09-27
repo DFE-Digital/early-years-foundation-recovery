@@ -20,16 +20,17 @@ RSpec.describe ModuleOverviewDecorator do
     end
 
     context 'when the module has not begun' do
-      it 'goes to the interruption page' do
+      it 'goes to the prompt page' do
         expect(user.events.count).to be_zero
         expect(output[:state]).to be :not_started
-        expect(output[:page]).to eql 'before-you-start'
+        expect(output[:page]).to eql 'what-to-expect'
       end
     end
 
     context 'when the module has begun' do
       it 'goes to the furthest page' do
         %w[
+          what-to-expect
           before-you-start
           intro
           1-1
@@ -41,7 +42,7 @@ RSpec.describe ModuleOverviewDecorator do
           view_module_page_event('bravo', page)
         end
 
-        expect(user.events.count).to be 7
+        expect(user.events.count).to be 8
         expect(output[:state]).to be :started
         expect(output[:page]).to eql '1-1-2-1a'
       end
@@ -51,9 +52,9 @@ RSpec.describe ModuleOverviewDecorator do
       it 'retakes the assessment' do
         bravo.module_items.map { |i| view_module_page_event('bravo', i.name) }
 
-        expect(user.events.count).to be 13
+        expect(user.events.count).to be 15
         expect(output[:state]).to be :completed
-        expect(output[:page]).to eql '1-2-3'
+        expect(output[:page]).to eql '1-2-2-4'
       end
     end
   end
