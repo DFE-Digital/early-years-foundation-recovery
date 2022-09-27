@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   # Check if a specific user event has already been logged
   #
   # @param key [String]
-  # @param data [Hash]
+  # @param params [Hash]
   #
   # @return [Boolean]
   def untracked?(key, **params)
