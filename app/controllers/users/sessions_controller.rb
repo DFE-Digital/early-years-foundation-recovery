@@ -10,7 +10,7 @@ protected
         resource.save!
         static_path('whats-new')
       else
-        my_learning_path
+        my_modules_path
       end
     else
       extra_registrations_path

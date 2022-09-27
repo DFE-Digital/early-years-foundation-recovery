@@ -59,7 +59,7 @@ Example event data from the `ahoy_visits` table.
 | user_id          | `1`                                                                                                                         |
 | ip               | `172.25.0.1`                                                                                                                |
 | user_agent       | `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36` |
-| referrer         | `http://localhost:3000/my-learning`                                                                                         |
+| referrer         | `http://localhost:3000/my-modules`                                                                                         |
 | referring_domain | `localhost`                                                                                                                 |
 | landing_page     | `http://localhost:3000/modules/alpha/content-pages/1`                                                                       |
 | browser          | `Chrome`                                                                                                                    |
@@ -75,7 +75,7 @@ Example event data from the `ahoy_visits` table.
 | Done | Feature                | Controllers and actions                  | Key                    | Path                                  |
 | :--- | :---                   | :---                                     | :---                   | :---                                  |
 | [x]  | Homepage               | `HomeController#index`                   | `home_page`            | `/`                                   |
-| [x]  | Monitoring progress    | `LearningController#show`                | `learning_page`        | `/my-learning`                        |
+| [x]  | Monitoring progress    | `LearningController#show`                | `learning_page`        | `/my-modules`                        |
 | [x]  | Course overview        | `TrainingModulesController#index`        | `course_overview_page` | `/modules`                            |
 | [x]  | Module overview        | `TrainingModulesController#show`         | `module_overview_page` | `/modules/{alpha}`                    |
 | [x]  | Module content         | `ContentPagesController#show`            | `module_content_page`  | `/modules/{alpha}/content-pages/{1}`  |
@@ -88,6 +88,8 @@ Example event data from the `ahoy_visits` table.
 | [x]  | User postcode change   | `UserController#update_postcode`         | `user_postcode_change` | `/my-account/update-postcode`         |
 | [x]  | User ofsted change     | `UserController#update_ofsted_number`    | `user_ofsted_change`   | `/my-account/update-ofsted-number`    |
 | [x]  | Email address taken    | `RegistrationsController#create`         | `email_address_taken`  | `/users/sign-up`                      |
+| [x]  | User note created      | `NotesController#create`                 | `user_note_created`    | `/my-account/learning-log`            |
+| [x]  | User note updated      | `NotesController#update`                 | `user_note_updated`    | `/my-account/learning-log`            |
 | [x]  | User inactivity logout | `ErrorsController#timeout`               | `error_page`           | `/timeout`                            |
 | [x]  | 404 Error              | `ErrorsController#not_found`             | `error_page`           | `/404`                                |
 | [x]  | 500 Error              | `ErrorsController#internal_server_error` | `error_page`           | `/500`                                |
