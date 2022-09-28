@@ -38,7 +38,7 @@ RSpec.describe FillPageViews do
         expect(event).to be_nil
       end
 
-      expect { service.call }.to output(/user \[\d+\] module \[\d+\] - \[2\] skipped before page \[10\]/).to_stdout_from_any_process
+      expect { service.call }.to output(/user \[\d+\] module \[\d+\] - \[2\] skipped before page \[1-2\]/).to_stdout_from_any_process
 
       expect(Ahoy::Event.count).to be 10
 
@@ -75,7 +75,7 @@ RSpec.describe FillPageViews do
         expect(event).to be_nil
       end
 
-      expect { service.call }.to output(/user \[\d+\] module \[\d+\] - \[5\] skipped before page \[28\]/).to_stdout_from_any_process
+      expect { service.call }.to output(/user \[\d+\] module \[\d+\] - \[5\] skipped before page \[1-3-4\]/).to_stdout_from_any_process
 
       expect(Ahoy::Event.count).to be 28
 
