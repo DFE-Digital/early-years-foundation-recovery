@@ -14,6 +14,7 @@ class User < ApplicationRecord
             presence: true,
             if: proc { |u| u.registration_complete }
 
+  validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
   validates :postcode, postcode: true
   validates :ofsted_number, ofsted_number: true
 

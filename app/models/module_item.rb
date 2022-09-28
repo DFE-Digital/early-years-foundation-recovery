@@ -27,7 +27,7 @@ class ModuleItem < YamlBase
     ending_intro: ContentPage,
     # static content
     interruption_page: ContentPage,
-    expectation_page: ContentPage,
+    icons_page: ContentPage,
     # dynamic content
     text_page: ContentPage,
     # video

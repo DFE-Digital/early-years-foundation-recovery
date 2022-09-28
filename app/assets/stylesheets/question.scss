@@ -1,12 +1,18 @@
-.govuk-notification-banner__content {
-  & > * {
-    max-width: none;
-  }
-}
-
 .govuk-notification-banner {
+  &__content {
+    & > * {
+      max-width: none;
+    }
+  }
+
   &--error, &--alert {
     border-color: $govuk-error-colour;
     background-color: $govuk-error-colour;
+  }
+
+  &--error, &--success {
+    p {
+      margin: 0;
+    }
   }
 }

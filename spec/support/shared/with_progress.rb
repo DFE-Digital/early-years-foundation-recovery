@@ -10,12 +10,18 @@ RSpec.shared_context 'with progress' do
   # OPTIMIZE: Consider adding specific keys for:
   # confidence_check_complete
   # confidence_check_start
-  # module_complete
   # module_content_page
-  # module_start
   # questionnaire_answer
   # summative_assessment_complete
   # summative_assessment_start
+
+  def module_start(mod)
+    tracker.track('module_start', training_module_id: mod.name)
+  end
+
+  def module_complete(mod)
+    tracker.track('module_complete', training_module_id: mod.name)
+  end
 
   # Visit every page in the module
   #
