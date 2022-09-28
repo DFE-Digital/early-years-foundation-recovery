@@ -57,12 +57,12 @@ class VideoPage
 
   # @return [Boolean]
   def vimeo_video?
-    video_provider == 'vimeo'
+    video_provider.casecmp('vimeo')
   end
 
   # @return [Boolean]
   def youtube_video?
-    video_provider == 'youtube'
+    video_provider.casecmp('youtube')
   end
 
   # @return [String]
