@@ -26,6 +26,7 @@ class FillPageViews
         end
 
         skipped = 0
+        page = progress.furthest_page.name
 
         mod.module_items.each do |item|
           break if item.eql?(progress.furthest_page.next_item)
@@ -45,7 +46,7 @@ class FillPageViews
           end
         end
 
-        log "user [#{user.id}] module [#{mod.id}] - [#{skipped}] skipped before page [#{progress.furthest_page.id}]"
+        log "user [#{user.id}] module [#{mod.id}] - [#{skipped}] skipped before page [#{page}]"
       end
     end
   end
