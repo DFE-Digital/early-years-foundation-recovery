@@ -65,11 +65,6 @@ en:
                   <textarea id="note-body-field" class="govuk-textarea" rows="5" aria-describedby="note-body-hint" name="note[body]">
                   </textarea>
                 </div>
-                <p class="govuk_body">You can view all your responses in your 
-                <a class="govuk-link" href="/my-account/learning-log#module-1">
-                  learning log
-                </a>.
-                </p>
               </div>
             </div>
           </div>
