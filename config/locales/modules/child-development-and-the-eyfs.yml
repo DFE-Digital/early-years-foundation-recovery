@@ -989,9 +989,9 @@ en:
         body: |
           This video explains the importance of balancing adult and child led activities, as part of the early years foundation stage framework. There are also some tips on how to support children in this area.
         video:
-          id:
-          title: 
-          provider:
+          id: 754722535
+          title: Balancing adult and child led activities
+          provider: vimeo
 
       1-2-2:
         heading: Effective implementation of the EYFS
