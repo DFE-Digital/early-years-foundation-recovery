@@ -62,8 +62,7 @@ en:
                     <p>All your notes will be added to your personal learning log.</p>
                     <p>Your notes</p>
                   </label>
-                  <textarea id="note-body-field" class="govuk-textarea" rows="5" aria-describedby="note-body-hint" name="note[body]">
-                  </textarea>
+                  <textarea id="note-body-field" class="govuk-textarea" rows="5" aria-describedby="note-body-hint" name="note[body]"></textarea>
                 </div>
               </div>
             </div>

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Whats new page' do
   include_context 'with user'
 
-  context 'when exisiting user' do
+  context 'when existing user' do
     let(:user) { create :user, :completed, :display_whats_new }
 
     context "and 'whats new' page has not been viewed" do
