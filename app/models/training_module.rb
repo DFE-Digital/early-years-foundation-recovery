@@ -95,13 +95,13 @@ class TrainingModule < YamlBase
   end
 
   # @return [ModuleItem] page 2
-  def expectation_page
+  def icons_page
     interruption_page.next_item
   end
 
   # @return [ModuleItem] page 3
   def intro_page
-    expectation_page.next_item
+    icons_page.next_item
   end
 
   # Viewing this page determines if the module is "started"
