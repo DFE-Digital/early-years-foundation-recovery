@@ -5,5 +5,3 @@ namespace :post do
     FillPageViews.new.call
   end
 end
-
-task post_release: ['post:content']

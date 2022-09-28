@@ -13,7 +13,7 @@ I18n.load_path += Dir[Rails.root.join('config/locales/**/*.yml')]
   prompt_code = Govspeak::Document.surrounded_by("$#{icon.upcase}")
 
   styles = []
-  styles.push('prompt-bg') if icon.eql?(:book)
+  styles.push('prompt-bg') if icon.eql?(:brain) # reflection point
 
   Govspeak::Document.extension(prompt_name, prompt_code) do |content|
     locals = {

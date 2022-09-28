@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   # Check if a specific user event has already been logged
   #
   # @param key [String]
-  # @param data [Hash]
+  # @param params [Hash]
   #
   # @return [Boolean]
   def untracked?(key, **params)
@@ -37,6 +37,7 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:terms_and_conditions_agreed_at])
     update_attrs = %i[password password_confirmation current_password]
     devise_parameter_sanitizer.permit :account_update, keys: update_attrs
   end

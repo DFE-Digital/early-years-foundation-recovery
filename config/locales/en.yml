@@ -22,6 +22,8 @@ en:
               too_short: Password must be at least 10 characters. # devise override
             password_confirmation:
               confirmation: Sorry, your passwords don't match.
+            terms_and_conditions_agreed_at:
+              blank: You must accept the terms and conditions and privacy policy to create an account.
             ofsted_number:
               invalid: This Ofsted number is not recognised.
             setting_type:
@@ -49,6 +51,8 @@ en:
               too_short: Password must be at least 10 characters. # devise override
             password_confirmation:
               confirmation: Sorry, your passwords don't match.
+            terms_and_conditions_agreed_at:
+              blank: You must accept the terms and conditions and privacy policy to create an account.
             ofsted_number:
               invalid: This Ofsted number is not recognised.
   phase_banner_html: This is a new service, your %{feedback_link} will help us improve it.
@@ -343,3 +347,4 @@ en:
         accessibility-statement: Accessibility statement
         other-problems-signing-in: Other problems signing in
         terms-and-conditions: Terms and conditions
+        whats-new: What's new
