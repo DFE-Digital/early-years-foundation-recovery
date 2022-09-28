@@ -31,7 +31,7 @@ class ModuleItem < YamlBase
     # dynamic content
     text_page: ContentPage,
     # video
-    youtube_page: YoutubePage,
+    video_page: VideoPage,
     # questions
     confidence_questionnaire: Questionnaire,
     formative_questionnaire: Questionnaire,
@@ -125,7 +125,7 @@ class ModuleItem < YamlBase
     end
   end
 
-  # @return [ContentPage, YoutubePage, Questionnaire]
+  # @return [ContentPage, VideoPage, Questionnaire]
   def model
     klass = MODELS[type.to_sym]
     if klass == Questionnaire
@@ -159,6 +159,10 @@ class ModuleItem < YamlBase
 
   # @return [Boolean]
   delegate :valid?, to: :model
+
+  def notes?
+    model.notes? if model.respond_to?(:notes?)
+  end
 
   # @return [Boolean]
   def topic?

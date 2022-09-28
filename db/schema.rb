@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_23_134456) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_20_144050) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,6 +54,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_134456) do
     t.datetime "started_at"
     t.index ["user_id"], name: "index_ahoy_visits_on_user_id"
     t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title"
+    t.text "body"
+    t.string "training_module"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
   create_table "user_answers", force: :cascade do |t|
@@ -111,12 +122,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_134456) do
     t.string "unlock_token"
     t.string "setting_type"
     t.string "setting_type_other"
+    t.jsonb "module_time_to_completion", default: {}, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token"
   end
 
+  add_foreign_key "notes", "users"
   add_foreign_key "user_answers", "user_assessments"
   add_foreign_key "user_answers", "users"
   add_foreign_key "user_assessments", "users"

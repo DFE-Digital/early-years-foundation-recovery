@@ -15,7 +15,9 @@ module ContentHelper
       [
         govuk_link_to(mod.title, training_module_path(mod)),
         timestamp.to_date.strftime('%-d %B %Y'),
-        govuk_link_to('View certificate', training_module_content_page_path(mod, mod.certificate_page)),
+        if mod.certificate_page
+          govuk_link_to('View certificate', training_module_content_page_path(mod, mod.certificate_page))
+        end,
       ]
     end
     govuk_table(rows: [header, *rows], caption: 'Completed modules', first_cell_is_header: true)
@@ -24,10 +26,10 @@ module ContentHelper
   # @param text [String] Tag content
   # @param tag [Symbol] HTML element (default h1)
   # @return [String, nil]
-  def govuk_heading(text, tag: :h1)
+  def govuk_heading(text, tag: :h1, size: 'm')
     return if text.blank?
 
-    content_tag(tag, class: 'govuk-heading-m') { text }
+    content_tag(tag, class: "govuk-heading-#{size}") { text }
   end
 
   # @param icon [String, Symbol] Fontawesome icon name

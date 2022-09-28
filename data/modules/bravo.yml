@@ -22,7 +22,7 @@ bravo:
   # Topic 2
   # ----------------------------------------------------------------------------
   1-1-2:
-    type: youtube_page
+    type: video_page
   1-1-2-1a:
     type: text_page
 
@@ -41,15 +41,17 @@ bravo:
   # Topic 4
   # ----------------------------------------------------------------------------
   1-2-2:
-    type: youtube_page
+    type: video_page
   1-2-2-1:
     type: text_page
 
   # Assessment
   # ----------------------------------------------------------------------------
   1-2-2-2:
-    type: formative_questionnaire
+    type: summative_questionnaire
   1-2-2-3:
-    type: formative_questionnaire
+    type: summative_questionnaire
+  1-2-2-4:
+    type: assessment_results
   1-2-3:
     type: certificate
