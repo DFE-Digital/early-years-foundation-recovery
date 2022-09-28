@@ -10,7 +10,7 @@
     background-color: $govuk-error-colour;
   }
 
-  &--error {
+  &--error, &--success {
     p {
       margin: 0;
     }
