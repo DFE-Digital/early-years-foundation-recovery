@@ -6,4 +6,4 @@ namespace :post do
   end
 end
 
-task post_release: ['post:content']
+task post_release: ['db:prepare', 'post:content']
