@@ -782,9 +782,9 @@ en:
         body: |
           This video explains the importance of scaffolding children's learning, as part of the early years foundation stage framework. There are also some tips on how to support children in this area.
         video:
-          id:
-          title: 
-          provider:
+          id: 754787115
+          title: Scaffolding children’s learning
+          provider: vimeo
 
       2-2-2-6:
         heading: |

@@ -911,9 +911,9 @@ en:
         body: |
           This video explains the impact of coronavirus (COVID-19) on attachment. There are also some tips on how to support children in this area.
         video:
-          id:
-          title:
-          provider:
+          id: 754814727
+          title: The impact of coronavirus (COVID-19) on attachment
+          provider: vimeo
 
       3-2-2:
         heading: Supporting children to develop secure relationships 
