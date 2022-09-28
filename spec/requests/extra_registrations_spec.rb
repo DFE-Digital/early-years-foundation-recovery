@@ -74,7 +74,7 @@ RSpec.describe 'ExtraRegistrations', type: :request do
 
       it 'redirects to my-learning' do
         update_user
-        expect(response).to redirect_to(my_learning_path)
+        expect(response).to redirect_to(my_modules_path)
       end
     end
   end

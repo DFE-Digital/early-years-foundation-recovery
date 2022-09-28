@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :user_assessments
   has_many :visits, class_name: 'Ahoy::Visit'
   has_many :events, class_name: 'Ahoy::Event'
+  has_many :notes
 
   validates :first_name, :last_name, :postcode, :setting_type,
             presence: true,
@@ -73,6 +74,10 @@ class User < ApplicationRecord
   # @return [CourseProgress] course activity query interface
   def course
     @course ||= CourseProgress.new(user: self)
+  end
+
+  def course_started?
+    !module_time_to_completion.empty?
   end
 
 private

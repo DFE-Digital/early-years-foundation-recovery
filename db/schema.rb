@@ -56,6 +56,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_145201) do
     t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
   end
 
+  create_table "notes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title"
+    t.text "body"
+    t.string "training_module"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
   create_table "user_answers", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "questionnaire_id", null: false
@@ -119,6 +130,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_145201) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token"
   end
 
+  add_foreign_key "notes", "users"
   add_foreign_key "user_answers", "user_assessments"
   add_foreign_key "user_answers", "users"
   add_foreign_key "user_assessments", "users"

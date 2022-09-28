@@ -51,7 +51,7 @@ RSpec.describe 'Page' do
 
     it { expect(root_path).to have_page_title('Home page') }
     it { expect(user_path).to have_page_title('My account') }
-    it { expect(my_learning_path).to have_page_title('My learning') }
+    it { expect(my_modules_path).to have_page_title('My modules') }
     it { expect(course_overview_path).to have_page_title('About training') }
     it { expect(users_timeout_path).to have_page_title('User timeout') }
     it { expect(setting_path(id: :cookie_policy)).to have_page_title('Cookie policy') }

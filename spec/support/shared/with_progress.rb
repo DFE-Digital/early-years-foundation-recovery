@@ -106,7 +106,6 @@ RSpec.shared_context 'with progress' do
     view_pages_before(mod, 'assessment_results')
     travel_to 5.minutes.from_now
     visit "/modules/#{name}/content-pages/#{mod.last_page.name}"
-    click_on 'Go to My learning'
   end
 
 private
@@ -120,5 +119,6 @@ private
       counter += 1 if item.type == type
       break if counter == count
     end
+    CalculateModuleState.new(user: user).call
   end
 end

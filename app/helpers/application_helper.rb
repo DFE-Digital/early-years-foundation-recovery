@@ -4,7 +4,8 @@ module ApplicationHelper
     govuk_header(service_name: 'Child development training', classes: 'noprint') do |header|
       header.navigation_item(text: 'Home', href: root_path)
       if user_signed_in?
-        header.navigation_item(text: 'My learning', href: my_learning_path)
+        header.navigation_item(text: 'My modules', href: my_modules_path)
+        header.navigation_item(text: 'Learning log', href: user_notes_path) if current_user.course_started?
         header.navigation_item(text: 'My account', href: user_path)
         header.navigation_item(text: 'Sign out', href: destroy_user_session_path, options: { data: { turbo_method: :get } })
       else
