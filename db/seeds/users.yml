@@ -1,14 +1,17 @@
 ---
 registered@example.com:
   password: <%= ENV.fetch('USER_PASSWORD', 'StrongPassword') %>
+  terms_and_conditions_agreed_at: <%= 1.minute.ago %>
 
 confirmed@example.com:
   password: <%= ENV.fetch('USER_PASSWORD', 'StrongPassword') %>
   confirmed_at: <%= 1.minute.ago %>
+  terms_and_conditions_agreed_at: <%= 1.minute.ago %>
 
 completed@example.com:
   password: <%= ENV.fetch('USER_PASSWORD', 'StrongPassword') %>
   confirmed_at: <%= 1.minute.ago %>
+  terms_and_conditions_agreed_at: <%= 1.minute.ago %>
   registration_complete: true
   # mandatory if "registration_complete"
   first_name: Demo
