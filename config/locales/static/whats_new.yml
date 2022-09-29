@@ -16,20 +16,23 @@ en:
         Each video has captions and a transcript.
         You can look out for these videos as you go through the training.
 
-        ## In your setting prompts
+        ## In your setting practical tips
 
-        The information icon highlights practical tips to use in your setting. 
+        Look out for the information icon where you will find practical tips to 
+        use in your setting.
 
         $INFO
-        You should provide activities that require children to share of resources and take turns.
-        This will help them to develop to promote problem solving and cooperation skills.
+        You should provide activities that require children to share resources and
+        take turns. This will help them to develop problem solving and co-operation
+        skills.
         $INFO
 
 
         ## Reflection points
 
         We’ve replaced practitioner prompts with reflection points.
-        This is a chance to reflect on what you’ve learned and how it applies to your practice.
+        This is a chance to reflect on what you’ve learned and how it applies 
+        to your practice.
 
         $BRAIN
         Reflect on what you have read about supporting children’s individual development.
