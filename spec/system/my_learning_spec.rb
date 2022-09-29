@@ -4,14 +4,14 @@ RSpec.describe 'Learning activity', type: :system do
   include_context 'with user'
 
   before do
-    visit '/my-learning'
+    visit '/my-modules'
   end
 
   context 'when the user has not begun any modules' do
     describe 'In progress' do
       it 'is empty' do
         within '#started' do
-          expect(page).to have_text 'In progress'
+          expect(page).to have_text 'Modules in progress'
           expect(page).to have_text 'You have not started any modules.'
 
           expect(page).not_to have_text 'First Training Module'
@@ -70,12 +70,12 @@ RSpec.describe 'Learning activity', type: :system do
   context 'when a user has started the first mandatory module' do
     before do
       visit '/modules/alpha/content-pages/intro'
-      visit '/my-learning'
+      visit '/my-modules'
     end
 
     it 'shows the started module' do
       within '#started' do
-        expect(page).to have_text 'In progress'
+        expect(page).to have_text 'Modules in progress'
         expect(page).to have_text 'First Training Module'
         expect(page).not_to have_text 'You have not started any modules.'
       end

@@ -35,26 +35,19 @@ en:
           - external factors, including the coronavirus (COVID-19) pandemic, impact on child development
           - effective practice and use of the EYFS framework will support successful development
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $BRAIN 
 
-            <p class="govuk-body">As you travel through the course you will see practitioners prompts.</p>
-          </div>
+          As you travel through the course you will see reflection points. These are indicated by the brain icon we introduced earlier.
 
-          These prompts are intended to:
+          $BRAIN
 
-          - encourage reflection on your current practice
-          - introduce new strategies
-          - reinforce effective teaching and learning
-          - embed new knowledge
+          Reflection is one of the most powerful tools you can use as a practitioner. In practice, you don't often have the time to stop and reflect. However, taking time to pause and think can help you to evaluate your practice, setting and curriculum by considering:
 
-          Reflection is one of the most powerful tools you can use as a practitioner. In practice, you don't often have the time to stop and reflect. However, taking an opportunity to pause and think back can enable you to ask:
+          - what works well 
+          - what opportunities there are to build and improve
+          - how you can use your child development knowledge to inform your planning
 
-          - what had I intended?
-          - did I successfully implement my intentions?
-          - how do I know?
-          - what impact did I see?
-          - what would I do differently next time?
+          You can make notes on the reflection points in your learning log. You can find this directly below the reflection point, at the bottom of the page.
 
           As you reflect upon your practice, remember that no child should be considered as low ability. Every child can make progress as long as the correct support is implemented.
 
@@ -134,7 +127,8 @@ en:
             <p class="govuk-body">What early assessment is carried out?</p>
             <p class="govuk-body">What strategies are put in place as a result?</p>
           </div>
-      
+        notes: true 
+        
       1-1-1-2:
         heading: How understanding child development benefits the practitioner
         body: |        
@@ -178,6 +172,7 @@ en:
           Using your child development knowledge will help you to measure the impact of your intentions - has the child successfully learnt what you intended them to learn? Children need opportunities to reinforce their knowledge and learning. This ensures that they are secure in their level of understanding before being challenged to progress.
 
           Your knowledge of child development will support you to assess the correct secure age and stage for the child. It will also help you to offer the correct learning environment, experiences and opportunities to support their progress.
+        notes: true
 
       1-1-1-3:
         heading: How understanding child development benefits the wider support network
@@ -231,6 +226,7 @@ en:
               </ul>
             </p>
           </div>
+        notes: true
 
       1-1-1-4:
         heading: The potential impact of limited child development knowledge
@@ -280,6 +276,7 @@ en:
             <p class="govuk-body">What do your colleagues think?</p>
 
           </div>
+        notes: true
 
       1-1-1-5:
         heading: How improved child development knowledge supports outstanding practice - scaffolding learning
@@ -316,6 +313,7 @@ en:
             <p class="govuk-body">You have just successfully scaffolded learning! </p>
 
            </div>
+        notes: true
 
       1-1-1-6:
         heading: How improved child development knowledge supports outstanding practice - understanding behaviour
@@ -396,6 +394,7 @@ en:
             <p class="govuk-body">How can you ensure you are prepared to differentiate to include all children? </p>
 
           </div>
+        notes: true
 
       1-1-2:
         heading: Factors affecting children’s development
@@ -605,6 +604,7 @@ en:
             <p class="govuk-body">What could you do differently?  </p>
 
           </div>
+        notes: true
 
       1-1-2-10:
         heading: Being a role model for communication
@@ -646,6 +646,7 @@ en:
           </div>
 
           The communication and language module of this training (coming soon) will consider the stages of development, the practitioner’s role and effective practice in further detail.
+        notes: true
 
       1-2:
         heading: A positive approach to care and education
@@ -712,6 +713,7 @@ en:
           It is important to recognise and celebrate children’s accomplishments. Even where the accomplishment might be considered small, it is essential that the child feels recognised for their achievement. This will encourage children to attempt more challenging tasks even when there is an opportunity for them to make a mistake, as they will seek that acknowledgement again.
 
           All children will have strengths and it is important to embrace and celebrate those individual strengths. This will positively support them and empower them to develop self-worth, self-respect and confidence.
+        notes: true
 
       1-2-1-2:
         heading: Empowering children
@@ -785,6 +787,7 @@ en:
           When you are able to successfully identify individual children’s starting points you can stop potential gaps in learning from opening or widening further by giving the correct support.
 
           The remainder of this module will consider how using your professional judgement and child development knowledge can ensure that this support is accessible through enabling environments and implementation of the EYFS.
+        notes: true
 
       1-2-1-4:
         heading: Successful enabling environments
@@ -861,6 +864,7 @@ en:
             </p>
 
           </div>
+        notes: true
 
       1-2-1-5:
         heading: "A balanced approach to learning: child led play"
@@ -920,6 +924,7 @@ en:
             <p class="govuk-body">What is the current balance of child led and adult led in your setting? </p>
             <p class="govuk-body">Are resources accessible to children for independent choice?  </p>
           </div>
+        notes: true
 
       1-2-1-6:
         heading: "A balanced approach to learning: adult led activities"
@@ -970,6 +975,16 @@ en:
 
             <p class="govuk-body">How can you increase adult led activity?
             </p>
+        notes: true
+
+      1-2-1-6video:
+        heading: Balancing adult and child led activities
+        body: |
+          This video explains the importance of balancing adult and child led activities and what makes them successful, as part of the early years foundation stage framework. The video demonstrates a planned adult led activity and the child led activity that follows. There are also some tips on how to support children in this area.
+        video:
+          id: 754722535
+          title: Balancing adult and child led activities
+          provider: vimeo
 
       1-2-2:
         heading: Effective implementation of the EYFS
@@ -1032,6 +1047,7 @@ en:
           <p class="govuk-body"> How do you know if you are having an impact?  </p>
 
           </div>
+        notes: true
 
       1-2-2-2:
         heading: Effective assessment
@@ -1070,6 +1086,7 @@ en:
             <p class="govuk-body">How are 2 year old progress checks recorded and shared?  </p>
 
           </div>
+        notes: true
 
       1-3:
         heading: Summary and next steps

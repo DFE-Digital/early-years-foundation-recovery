@@ -8,17 +8,20 @@ p.govuk-body
   |
     The course has 10 modules.
     #{@published_modules.count} modules are currently available.
-    You must complete modules 1, 2 and 3 in order.
+    You must complete the available modules in order.
 
 p.govuk-body Each module should take between 1 and 2 hours to complete.
 p.govuk-body You can pause and restart the training as much as you like.
-p.govuk-body Each module includes:  
-ul.govuk-list.govuk-list--bullet
+p.govuk-body
+  | Each module includes:
+  ul.govuk-list.govuk-list--bullet
     li opportunities to reflect on your learning and practice
+    li a learning log to make notes on your reflections
+    li practical tips and ideas to use in your setting 
     li learning check questions to test your understanding
     li an end of module test
     li the opportunity to download a personalised certificate of completion
-
+p.govuk-body Some modules also have short videos to enhance your understanding. 
 - unless current_user
   .govuk-grid-row
     .govuk-grid-column-two-thirds

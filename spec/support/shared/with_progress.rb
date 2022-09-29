@@ -7,6 +7,22 @@ RSpec.shared_context 'with progress' do
   let(:charlie) { TrainingModule.find_by(name: 'charlie') }
   let(:delta) { TrainingModule.find_by(name: 'delta') }
 
+  # OPTIMIZE: Consider adding specific keys for:
+  # confidence_check_complete
+  # confidence_check_start
+  # module_content_page
+  # questionnaire_answer
+  # summative_assessment_complete
+  # summative_assessment_start
+
+  def module_start(mod)
+    tracker.track('module_start', training_module_id: mod.name)
+  end
+
+  def module_complete(mod)
+    tracker.track('module_complete', training_module_id: mod.name)
+  end
+
   # Visit every page in the module
   #
   def view_whole_module(mod)
@@ -55,6 +71,49 @@ RSpec.shared_context 'with progress' do
     })
   end
 
+  def complete_summative_assessment_incorrect
+    3.times do
+      check 'Wrong answer 1'
+      check 'Wrong answer 2'
+      click_on 'Save and continue'
+    end
+    choose 'Wrong answer 1'
+    click_on 'Finish test'
+  end
+
+  def complete_summative_assessment_correct
+    3.times do
+      check 'Correct answer 1'
+      check 'Correct answer 2'
+      click_on 'Save and continue'
+    end
+    choose 'Correct answer 1'
+    click_on 'Finish test'
+  end
+
+  def complete_formative_assessment_correct
+    choose 'Correct answer 1'
+    4.times { click_on 'Next' }
+    check 'Correct answer 1'
+    check 'Correct answer 2'
+    2.times { click_on 'Next' }
+  end
+
+  def complete_formative_assessment_incorrect
+    choose 'Wrong answer 1'
+    4.times { click_on 'Next' }
+    check 'Wrong answer 1'
+    2.times { click_on 'Next' }
+  end
+
+  def complete_module(mod)
+    name = mod.name
+    visit "/modules/#{name}/content-pages/intro"
+    view_pages_before(mod, 'assessment_results')
+    travel_to 5.minutes.from_now
+    visit "/modules/#{name}/content-pages/#{mod.last_page.name}"
+  end
+
 private
 
   # Visit every page before the given instance of the given page type
@@ -66,5 +125,6 @@ private
       counter += 1 if item.type == type
       break if counter == count
     end
+    CalculateModuleState.new(user: user).call
   end
 end
