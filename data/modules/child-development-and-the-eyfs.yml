@@ -1,9 +1,9 @@
 ---
 child-development-and-the-eyfs:
   what-to-expect:
-    type: expectation_page
-  before-you-start:
     type: interruption_page
+  before-you-start:
+    type: icons_page
   intro:
     type: module_intro
 
@@ -75,6 +75,8 @@ child-development-and-the-eyfs:
     type: text_page
   1-2-1-6:
     type: text_page
+  1-2-1-6video:
+    type: video_page
 
   1-2-2:
     type: text_page

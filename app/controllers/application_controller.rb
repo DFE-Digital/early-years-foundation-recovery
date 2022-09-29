@@ -19,6 +19,16 @@ class ApplicationController < ActionController::Base
     ahoy.track(key, properties)
   end
 
+  # Check if a specific user event has already been logged
+  #
+  # @param key [String]
+  # @param params [Hash]
+  #
+  # @return [Boolean]
+  def untracked?(key, **params)
+    Ahoy::Event.where(user_id: current_user, name: key).where_properties(**params).empty?
+  end
+
   def authenticate_registered_user!
     authenticate_user! unless user_signed_in?
     return true if current_user.registration_complete?
@@ -27,6 +37,7 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:terms_and_conditions_agreed_at])
     update_attrs = %i[password password_confirmation current_password]
     devise_parameter_sanitizer.permit :account_update, keys: update_attrs
   end

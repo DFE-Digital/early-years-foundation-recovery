@@ -2,6 +2,7 @@
 @import "./govspeak";
 @import "./card";
 @import "./prompt";
+@import "./question";
 @import "./interruption";
 @import "./print-link";
 @import "./quote";
@@ -97,4 +98,17 @@ ul > li > ul > li {
   background-color: govuk-colour("white");; 
   border-left: none !important;
   padding: govuk-spacing(4);
+}
+
+.log-entry {
+  border: 0.5px solid;
+  border-color: #b1b4b6;
+  padding: 20px;
+  width: 600px;
+  margin-bottom: 40px;
+}
+
+.form-container {
+  padding: 30px;
+  background: #f3f2f1;
 }

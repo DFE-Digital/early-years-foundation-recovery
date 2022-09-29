@@ -1,6 +1,8 @@
 class TrainingModule < YamlBase
   set_filename Rails.configuration.training_modules
 
+  scope :active, -> { where(draft: nil) }
+
   # Override basic behaviour so that root key is stored as name
   def self.load_file
     raw_data.map { |name, values| values.merge(name: name) }
@@ -39,7 +41,14 @@ class TrainingModule < YamlBase
 
   # @return [Array<ModuleItem>]
   def module_items
-    @module_items ||= ModuleItem.where(training_module: name)
+    @module_items ||= ModuleItem.where(training_module: name).to_a
+  end
+
+  # @return [Array<ModuleItem>]
+  # excludes certificate page
+  def module_course_items
+    excluded_page_types = %w[certificate]
+    @module_course_items ||= ModuleItem.where(training_module: name).where.not(type: excluded_page_types).to_a
   end
 
   # @example
@@ -80,23 +89,23 @@ class TrainingModule < YamlBase
 
   # sequence ---------------------------------
 
-  # @return [ModuleItem]
-  def expectation_page
+  # @return [ModuleItem] page 1
+  def interruption_page
     module_items.first
   end
 
-  # @return [ModuleItem]
-  def interruption_page
-    expectation_page.next_item
-  end
-
-  # @return [ModuleItem]
-  def intro_page
+  # @return [ModuleItem] page 2
+  def icons_page
     interruption_page.next_item
   end
 
+  # @return [ModuleItem] page 3
+  def intro_page
+    icons_page.next_item
+  end
+
   # Viewing this page determines if the module is "started"
-  # @return [ModuleItem]
+  # @return [ModuleItem] page 5
   def first_content_page
     intro_page.next_item.next_item # TODO: improve this (first page after submod intro)
   end
@@ -121,14 +130,26 @@ class TrainingModule < YamlBase
     ModuleItem.where_type(name, 'assessment_results').first
   end
 
+  # @return [ModuleItem]
   def certificate_page
     ModuleItem.where_type(name, 'certificate').first
   end
 
-  # Summative results if module includes assessment
-  #
+  # @return [ModuleItem]
+  def first_confidence_page
+    ModuleItem.where_type(name, 'confidence_questionnaire').first
+  end
+
   # @return [ModuleItem]
   def last_page
-    assessment_results_page || module_items.last
+    assessment_results_page || module_course_items.last
+  end
+
+  def tab_label
+    ['Module', id].join(' ')
+  end
+
+  def tab_anchor
+    tab_label.parameterize
   end
 end

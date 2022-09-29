@@ -27,7 +27,7 @@ class ModuleItem < YamlBase
     ending_intro: ContentPage,
     # static content
     interruption_page: ContentPage,
-    expectation_page: ContentPage,
+    icons_page: ContentPage,
     # dynamic content
     text_page: ContentPage,
     # video
@@ -159,6 +159,10 @@ class ModuleItem < YamlBase
 
   # @return [Boolean]
   delegate :valid?, to: :model
+
+  def notes?
+    model.notes? if model.respond_to?(:notes?)
+  end
 
   # @return [Boolean]
   def topic?
