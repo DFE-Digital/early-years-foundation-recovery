@@ -72,49 +72,31 @@ Example event data from the `ahoy_visits` table.
 ## Transactions
 
 
-| Done | Feature                | Controllers and actions                  | Key                    | Path                                  |
-| :--- | :---                   | :---                                     | :---                   | :---                                  |
-| [x]  | Homepage               | `HomeController#index`                   | `home_page`            | `/`                                   |
-| [x]  | Monitoring progress    | `LearningController#show`                | `learning_page`        | `/my-modules`                        |
-| [x]  | Course overview        | `TrainingModulesController#index`        | `course_overview_page` | `/modules`                            |
-| [x]  | Module overview        | `TrainingModulesController#show`         | `module_overview_page` | `/modules/{alpha}`                    |
-| [x]  | Module content         | `ContentPagesController#show`            | `module_content_page`  | `/modules/{alpha}/content-pages/{1}`  |
-| [x]  | Static page content    | `StaticController#show`                  | `static_page`          | `/example-page`                       |
-| [x]  | Account completion     | `ExtraRegistrationsController#update`    | `user_registration`    | `/extra-registrations/{name,setting}` |
-| [x]  | User profile           | `UserController#show`                    | `profile_page`         | `/my-account`                         |
-| [x]  | User name change       | `UserController#update_name`             | `user_name_change`     | `/my-account/update-name`             |
-| [x]  | User email change      | `UserController#update_email`            | `user_email_change`    | `/my-account/update-email`            |
-| [x]  | User password change   | `UserController#update_password`         | `user_password_change` | `/my-account/update-password`         |
-| [x]  | User postcode change   | `UserController#update_postcode`         | `user_postcode_change` | `/my-account/update-postcode`         |
-| [x]  | User ofsted change     | `UserController#update_ofsted_number`    | `user_ofsted_change`   | `/my-account/update-ofsted-number`    |
-| [x]  | Email address taken    | `RegistrationsController#create`         | `email_address_taken`  | `/users/sign-up`                      |
-| [x]  | User note created      | `NotesController#create`                 | `user_note_created`    | `/my-account/learning-log`            |
-| [x]  | User note updated      | `NotesController#update`                 | `user_note_updated`    | `/my-account/learning-log`            |
-| [x]  | User inactivity logout | `ErrorsController#timeout`               | `error_page`           | `/timeout`                            |
-| [x]  | 404 Error              | `ErrorsController#not_found`             | `error_page`           | `/404`                                |
-| [x]  | 500 Error              | `ErrorsController#internal_server_error` | `error_page`           | `/500`                                |
-| [ ]  | tbc                    |                                          |                        |                                       |
-
-
-## To be completed
-
-Incremental course progress events, recording results only where relevant.
-
-Starting
-- `module_start`
-- `submodule_start`
-- `topic_start`
-- `formative_assessment_start`
-- `summative_assessment_start`
-- `confidence_check_start`
-
-Stopping
-- `module_complete`
-- `submodule_complete`
-- `topic_complete`
-- `formative_assessment_complete`
-- `summative_assessment_complete`, `{ success: true, score: 23 }`
-- `confidence_check_complete`
-
-Milestones
-- `questionnaire_answer`, `{ success: true }`
+| Done | Feature                       | Controllers                    | Key                             | Path                                         |
+| :--- | :---                          | :---                           | :---                            | :---                                         |
+| [x]  | Homepage                      | `HomeController`               | `home_page`                     | `/`                                          |
+| [x]  | Monitoring progress           | `LearningController`           | `learning_page`                 | `/my-modules`                                |
+| [x]  | Course overview               | `TrainingModulesController`    | `course_overview_page`          | `/modules`                                   |
+| [x]  | Module overview               | `TrainingModulesController`    | `module_overview_page`          | `/modules/{alpha}`                           |
+| [x]  | Module content                | `ContentPagesController`       | `module_content_page`           | `/modules/{alpha}/content-pages/{1}`         |
+| [x]  | Static page content           | `StaticController`             | `static_page`                   | `/example-page`                              |
+| [x]  | Account completion            | `ExtraRegistrationsController` | `user_registration`             | `/extra-registrations/{name,setting}`        |
+| [x]  | User profile                  | `UserController`               | `profile_page`                  | `/my-account`                                |
+| [x]  | User name change              | `UserController`               | `user_name_change`              | `/my-account/update-name`                    |
+| [x]  | User email change             | `UserController`               | `user_email_change`             | `/my-account/update-email`                   |
+| [x]  | User password change          | `UserController`               | `user_password_change`          | `/my-account/update-password`                |
+| [x]  | User postcode change          | `UserController`               | `user_postcode_change`          | `/my-account/update-postcode`                |
+| [x]  | User ofsted change            | `UserController`               | `user_ofsted_change`            | `/my-account/update-ofsted-number`           |
+| [x]  | Email address taken           | `RegistrationsController`      | `email_address_taken`           | `/users/sign-up`                             |
+| [x]  | User inactivity logout        | `ErrorsController`             | `error_page`                    | `/timeout`                                   |
+| [x]  | 404 Error                     | `ErrorsController`             | `error_page`                    | `/404`                                       |
+| [x]  | 500 Error                     | `ErrorsController`             | `error_page`                    | `/500`                                       |
+| [x]  | Module start                  | `ContentPagesController`       | `module_start`                  | `/modules/{alpha}/content-pages/{intro}`     |
+| [x]  | Module complete               | `TrainingModulesController`    | `module_complete`               | `/modules/{alpha}/certificate`               |
+| [x]  | Questionnaire answered        | `QuestionnairesController`     | `questionnaire_answer`          | `/modules/{alpha}/questionnaires/{path}`     |
+| [x]  | Summative assessment start    | `QuestionnairesController`     | `summative_assessment_start`    | `/modules/{alpha}/questionnaires/{path}`     |
+| [x]  | Summative assessment complete | `AssessmentResultsController`  | `summative_assessment_complete` | `/modules/{alpha}/assessment-results/{path}` |
+| [x]  | Confidence check start        | `QuestionnairesController`     | `confidence_check_start`        | `/modules/{alpha}/questionnaires/{path}`     |
+| [x]  | Confidence check complete     | `ContentPagesController`       | `confidence_check_complete`     | `/modules/{alpha}/questionnaires/{path}`     |
+| [x]  | User note created             | `NotesController`              | `user_note_created`             | `/my-account/learning-log`                   |
+| [x]  | User note updated             | `NotesController`              | `user_note_updated`             | `/my-account/learning-log`                   |
