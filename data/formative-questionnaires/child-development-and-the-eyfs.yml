@@ -184,10 +184,12 @@ child-development-and-the-eyfs:
           Some children may have become more emotionally mature as a result of the pandemic.
         assessment_summary: |
           Some children who have had the opportunity to express and discuss their feelings associated with the pandemic may now have increased emotional maturity.
-          Remember that each child in your care will have been impacted by Covid-19 differently. As a practitioner, you should take into account children’s individual emotional starting points to make sure you plan appropriate next steps.
+
+          Remember that each child in your care will have been impacted by COVID-19 differently. As a practitioner, you should take into account children’s individual emotional starting points to make sure you plan appropriate next steps.
         assessment_fail_summary: |
           Some children who have had the opportunity to express and discuss their feelings associated with the pandemic may now have increased emotional maturity.
-          Remember that each child in your care will have been impacted by Covid-19 differently. As a practitioner, you should take into account children’s individual emotional starting points to make sure you plan appropriate next steps.
+          
+          Remember that each child in your care will have been impacted by COVID-19 differently. As a practitioner, you should take into account children’s individual emotional starting points to make sure you plan appropriate next steps.
         answers:
           1: "True"
           2: "False"
