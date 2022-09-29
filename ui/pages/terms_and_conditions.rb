@@ -5,5 +5,6 @@ module Pages
     set_url '/terms-and-conditions'
 
     element :heading, 'h1', text: 'Terms and conditions'
+    element :back_link, '.govuk-back-link', text:"Back"
   end
 end
