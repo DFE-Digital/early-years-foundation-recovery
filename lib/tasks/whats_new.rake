@@ -4,7 +4,7 @@ namespace :db do
     number_updated = 0
     total_records = 0
 
-    User.all.map do |user|
+    User.registered.map do |user|
       user.display_whats_new = true
       user.save!
 
