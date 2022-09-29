@@ -25,6 +25,7 @@ personal-social-and-emotional-development:
         multi_select: false
         label: |
           Read the scenario and answer the question:
+
           Yusuf and Noah are playing together outside when Noah trips and bumps his knee, which causes him to cry. Yusuf is quick to try to comfort Noah and looks for help from an adult.
 
           Later, Yusuf recreates the situation with dolls and uses the opportunity to express his worries about the accident.
@@ -214,25 +215,13 @@ personal-social-and-emotional-development:
           What is the term used to describe the potential impact aspects of their
           environment such as noise, light, or crowds can have on children?
         assessment_summary: |
-          ‘Overstimulation’ is the term used to describe the potential impact aspects
-          of the environment such as noise, light, or crowds can have on children.
+          ‘Overstimulation’ is the term used to describe the potential impact aspects of the environment such as noise, light, or crowds can have on children. When children become overstimulated, their responses may be interpreted as challenging or unwanted behaviour.
 
-          When children become overstimulated, their responses may be interpreted as
-          challenging or unwanted behaviour.
-
-          In your setting, children will benefit from a designated quiet area that
-          they know they can retreat to if things become too much.
-          
-          A knowledge of children’s interests can also be helpful here, as they can be used as a distraction.
+          In your setting, children will benefit from a designated quiet area that they know they can retreat to if things become too much. A knowledge of children’s interests can also be helpful here, as they can be used as a distraction.
         assessment_fail_summary: |
-          ‘Overstimulation’ is the term used to describe the potential impact aspects
-          of the environment such as noise, light, or crowds can have on children.
+          ‘Overstimulation’ is the term used to describe the potential impact aspects of the environment such as noise, light, or crowds can have on children. When children become overstimulated, their responses may be interpreted as challenging or unwanted behaviour.
 
-          When children become overstimulated, their responses may be interpreted
-          as challenging or unwanted behaviour. In your setting, children will benefit
-          from a designated quiet area that they know they can retreat to if things become too much.
-          A knowledge of children’s interests can also be helpful here, as they can
-          be used as a distraction.
+          In your setting, children will benefit from a designated quiet area that they know they can retreat to if things become too much. A knowledge of children’s interests can also be helpful here, as they can be used as a distraction.
         answers:
           1: Understimulation
           2: Developmental challenge
