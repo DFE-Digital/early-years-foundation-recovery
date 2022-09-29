@@ -10,6 +10,9 @@ class User < ApplicationRecord
   has_many :events, class_name: 'Ahoy::Event'
   has_many :notes
 
+  scope :registered, -> { where(registration_complete: true) }
+  scope :not_registered, -> { where(registration_complete: nil) }
+
   validates :first_name, :last_name, :postcode, :setting_type,
             presence: true,
             if: proc { |u| u.registration_complete }
