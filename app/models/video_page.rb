@@ -9,10 +9,9 @@ class VideoPage
 
   # To display without error the Youtube URL should be the embedded url.
   # On the target video page, click Share and then selected embeded.
-  # Use the URL within the embeded code. For example:
+  # Use the URL within the embedded code. For example:
   #  https://www.youtube.com/embed/ucjmWjJ25Ho
   #
-  # validates :youtube_url, format: %r{\Ahttps://www\.youtube\.com/embed}
 
   # @return [Hash]
   delegate :pagination, to: :module_item
@@ -35,7 +34,7 @@ class VideoPage
   # @return [String]
   def video_title
     if translate(:video)[:title].nil?
-      '[Enter a title here]'
+      '[Title to be added]'
     else
       translate(:video)[:title]
     end
@@ -58,12 +57,12 @@ class VideoPage
 
   # @return [Boolean]
   def vimeo_video?
-    video_provider == 'vimeo'
+    video_provider.casecmp?('vimeo')
   end
 
   # @return [Boolean]
   def youtube_video?
-    video_provider == 'youtube'
+    video_provider.casecmp?('youtube')
   end
 
   # @return [String]
@@ -73,7 +72,7 @@ class VideoPage
       transcript_data = YAML.load_file(transcript_file)
       transcript_data['transcript']
     else
-      'Transcript unavailable'
+      'Transcript currently unavailable'
     end
   end
 
