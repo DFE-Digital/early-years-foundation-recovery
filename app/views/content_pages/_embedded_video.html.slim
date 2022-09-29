@@ -3,7 +3,7 @@
   h2.govuk-heading-m class="govuk-!-margin-top-2" Video: #{@model.video_title}
   div class='embed-container'
       - if @model.video_id.nil?
-        p.govuk-body class='govuk-!-text-align-centre' Add a video
+        p.govuk-body class='govuk-!-text-align-centre' [Video to be added]
       - else
         - if @model.vimeo_video?
           iframe.govspeak-embed-video allow=("autoplay; fullscreen; picture-in-picture; accelerometer; clipboard-write; encrypted-media; gyroscope;") allowfullscreen="" frameborder="0" src=@model.vimeo_url style="position:absolute;top:0;left:0;width:100%;height:100%;"  script src="https://player.vimeo.com/api/player.js"

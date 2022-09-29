@@ -131,20 +131,30 @@ en:
             </blockquote>
           </div>
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
 
-            <p class="govuk-body">If you work with toddlers, when was the last time you supported them to:</p>
+          By planning appropriate activities and opportunities, you can help toddlers develop these important skills. 
 
-            <ul class="govuk-list govuk-list--bullet">
-              <li>become problem solvers by allowing sufficient time for them to try things for themselves without rushing? This could include activities, such as puzzles, and everyday routine tasks, such as trying to put a foot in a shoe or an arm in a coat</li>
-              <li>resolve conflict by explaining how their actions have made others feel and the importance of saying sorry?</li>
-              <li>participate in joint play opportunities through adult led paired and small group activities? </li>
+          ##Problem solving 
 
-            </ul>
-          </div>
+          You can help toddlers become problem solvers by giving them enough time to try things themselves, without rushing. This could include activities, like puzzles, and routine tasks, like trying to put their foot in a shoe. 
+
+          ##Conflict resolution 
+
+          You can help toddlers learn to resolve conflict by explaining:
+          
+          - how their actions have made others feel
+          - the importance of saying sorry
+
+          ##Joint play 
+          
+          You can help toddlers play well together through adult-led paired and small group activities. 
+
+          $INFO
+
 
       3-1-1-3a:
+        notes: true
         heading: "Social and emotional development: 2 to 3 years old"
         body: |
           ![A baby lying on its tummy on a sofa. There are some toys in front of the baby and the baby is smiing.](/assets/3-1-1-3a-507032862.jpg)
@@ -175,15 +185,22 @@ en:
             </blockquote>
           </div>
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $BRAIN
 
-            <p class="govuk-body">Ensure the environment used by 2 to 3 year olds provides lots of opportunities for spontaneous role play. Observe the children from a distance and notice what feelings children express and explore.</p>
-            
-            <p class="govuk-body">Use this information to support your planning. For example, do you have books the children can explore or puppets they can use? Can you use planned opportunities such as morning circle time to discuss and explore feelings? </p>
+          Reflect on what you have read about the social and emotional development of children aged 2 to 3.
 
-          </div>
+          Think about your work with 2 to 3 year olds (where applicable).  
+
+          Consider the following questions: 
+
+          - What activities, resources and opportunities do you  plan to help 2 to 3 year olds discuss and process their feelings?
+          - What impact do they have on the children and their development?  
+          - How could you develop your planning to extend or improve on these activities, resources and opportunities? 
+
+          $BRAIN
+
       3-1-1-4a:
+        notes: true
         heading: "Social and emotional development: 4 years old"
         body: |
           ![Two four year olds sat on the floor doing a painting activity. They are looking at each other and the child on the left is smiling.](/assets/3-1-1-4a-653274692.jpg)
@@ -202,16 +219,23 @@ en:
           - planning trips and visits to the setting
           - offering open ended materials that can be used in multiple ways, such as sand and arts and crafts equipment
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $BRAIN
 
-            <p class="govuk-body"> Think of a child around the age of 4 in your care. </p>
-            <ul>
-            <li> Does the child play alongside others or do they always want to play alone? 
-            <li> Does the child take part in pretend play (for example, being ‘mummy’ or ‘daddy’?)
+          Reflect on what you have read about the social and emotional development of children aged 4.
+
+          Think about your work with 4 year olds (where applicable).  
+
+          Consider the following questions: 
+
+          - What opportunities do you plan to help 4 year olds express their likes, opinions and beliefs? 
+          - How do you encourage 4 year olds to be curious about the world around them?
+          - How could you develop your planning to support their curiosity and self-expression?  
+
+          $BRAIN
         
 
       3-1-1-5a:
+        notes: true
         heading: Stages of social and emotional development
         body: |
           ![A group of children listening to a practitioner tell them about a globe.](/assets/3-1-1-5a-506475616.jpg)
@@ -231,19 +255,22 @@ en:
           
           They will have their own opinions to share and will be asking lots of questions to shape their thoughts. In your setting, make sure that children experience diverse environments, conversations and roles to help them to develop broad and informed opinions and views.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $BRAIN
 
-            <p class="govuk-body">Think of a child around the age of 5 in your care.  </p>
+          Reflect on what you have read about the social and emotional development of children aged 5.
 
-            <ul class="govuk-list govuk-list--bullet">
-              <li>Do they meet the expected level of development for their age range? </li>
-              <li>How do you know? </li>
-              <li>What are their next steps? </li>
-              <li>What opportunities does your environment offer them to progress and develop? </li> 
+          Think of a child around the age of 5 in your care (where applicable). 
 
-            </ul>
-          </div>
+          Consider the following questions: 
+
+          - To what extent do you think this child meets the expected level of development for their age range?  
+          - What makes you think this?  
+          - What are this child's next steps? 
+          - What opportunities and support can you offer to help them progress and develop? 
+
+          $BRAIN
+
+
       3-1-2:
         heading: Supporting skill development
         body: |
@@ -255,9 +282,10 @@ en:
           
           - Strategies to support personal, social and emotional development 
           - An inclusive approach to personal, social and emotional development
-      3-1-2-1:
+      3-1-2-1a:
         heading: Strategies to support personal, social and emotional development
         body: |
+          ![A practitioner working with a group of young children.](/assets/3-1-2-1a-678867216.jpg)     
           In your practice, you should help children to develop key personal, social and emotional skills and qualities, like:
 
           - self-worth - how important they feel
@@ -269,9 +297,20 @@ en:
 
           In this section, we will explore the different strategies you can use to encourage children’s personal, social and emotional development.
 
-          ##Active listening
-          
-          ![A practitioner with two children during snack time. The practitioner is making eye contact with one of the children and listening to what they are saying. ](/assets/3-1-2-1-140080209.jpg)
+          These strategies include:
+
+          - active listening
+          - promoting choice
+          - reinforcing individual characteristics
+          - social stories
+          - encouraging responsibility
+          - including children's preferences
+
+      3-1-2-1b:
+        heading: |
+          Active listening
+        body: |
+          ![A practitioner sitting talking to four children. The practitioner is making eye contact with one of the children and listening to what they are saying. ](/assets/3-1-2-1-1092434156.jpg)      
 
           Children, like adults, feel important when they feel valued. This starts right from birth when a baby cries and receives affection. You can help children feel valued by making eye contact and coming down to the child’s level where possible. This will help them feel listened to and encourage their engagement, which will promote further communication. 
           
@@ -279,88 +318,111 @@ en:
           
           Listen to even the smallest of things, even when they might feel insignificant, as children will then feel comfortable to come to you with the bigger things. 
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
 
-            <p class="govuk-body">Choose a familiar or nominated item, such as a bear or talking stick, and ensure that children know that it is their turn to speak when they have the nominated item.  </p>
-
-            <p class="govuk-body">Make sure that: </p>
-
-            <ul class="govuk-list govuk-list--bullet">
-              <li>the rest of the group listen to the friend who has the item </li>
-              <li>the item is passed around during group discussion activities </li>
-              <li>everyone gets the chance to have the item at some point in a given time period, such as a day  </li>
-            </ul>
-            <p class="govuk-body"> This will ensure that conversation is not dominated by a given few and will support those lacking in confidence to feel important.  </p>      
-            </div>
-
-          ##Promote choice
+          Try this activity to encourage active listening and turn taking in conversations.
           
-          Ensuring that children feel that they have a choice will support them to feel valued, important and in control of their development. Offering choice, no matter how small,  will lead to better choice making in the future. Small choices, such as the decision between peas and carrots, may lead to larger choices, such as choosing between right and wrong.  
+          Choose a familiar or nominated item, such as a bear or talking stick, and ensure that children know that it is their turn to speak when they have the nominated item.
+          
+          Make sure that:
+          
+          - the rest of the group listen to the friend who has the item
+          - the item is passed around during group discussion activities
+          - everyone gets the chance to have the item at some point in a given time period, such as a day
+          
+          This will ensure that conversation is not dominated by a given few and will support those lacking in confidence to feel important.
+
+          $INFO
+
+      3-1-2-1c:
+        notes: true
+        heading: |
+          Promoting choice
+        body: |
+          ![A young child choosing fruit during a visit to a supermarket.](/assets/3-1-2-1c-1401886549.jpg)
+          
+          In your curriculum planning, ensuring that children feel that they have a choice will support them to feel valued, important and in control of their development. 
+          
+          Offering choice, no matter how small,  will lead to better choice making in the future. Small choices, such as the decision between peas and carrots, may lead to larger choices, such as choosing between right and wrong. 
+
+          To promote choice in your setting, you should make sure that children can:
+
+          - help themselves to activities and resources
+          - bring these activities and resources to a freely available table or floor space
           
           Being able to choose a task the children know they can complete will increase their self-efficacy when they are able to succeed. More difficult tasks can then be scaffolded appropriately.
+
+          You can also use this as an opportunity to encourage appropriate responsibility, by encouraging children to put one activity away before selecting another.
           
           Offering children choices will promote independence and encourage them to consider the consequences of their actions.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $BRAIN
 
-            <p class="govuk-body"> Consider how you promote choice in your setting. Do you:</p>
-            <ul class="govuk-list govuk-list--bullet">
-            <li>have activities that the children can help themselves to?</li> 
-            <li>have a table and floor space that children can bring an activity of their choice to?</li>
-            </ul>
-            <p class="govuk-body">You can also use this as an opportunity to encourage appropriate responsibility, by encouraging children to put one activity away before selecting another.</p>
-            </div>     
+          Reflect on what you have read about promoting choice. 
 
-          ##Reinforce individual characteristics
+          Think about your setting. 
 
-          ![A practitioner with two children during snack time. The practitioner is making eye contact with one of the children and listening to what they are saying. ](/assets/3-1-2-1-1092434156.jpg)          
+          Consider the following questions: 
+          
+          - What opportunities do you offer for children to make choices? 
+          - To what extent do the activities, resources and layout of the setting encourage independent choice? 
+          - What impact does this have on the children's learning, development and behaviour? 
+          - What other steps could you take to promote choice in your setting?  
+
+          $BRAIN
+
+      3-1-2-1d:
+        heading: |
+          Reinforcing individual characteristics
+        body: |    
+          ![A practitioner reading a book with a young child.](/assets/3-1-2-1d-961758544.jpg)
           
           When children see images they can relate to, such as someone who wears glasses like they do, or someone wearing familiar traditional dress, it can help them feel important and valued. 
           
           When children see images of people they can relate to being healthy and successful, they will believe that they can be healthy and successful too. 
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
 
-            <p class="govuk-body">In your setting, reinforce these ideas through:</p>
-            <ul class="govuk-list govuk-list--bullet">
-            <li>books</li>
-            <li>display boards</li>
-            <li>activity materials</li>
-            <li>role play</li>
-            <li>educational visits</li>
-            </ul>
-            
-            <p class="govuk-body">Long term planning will support you to ensure that a wide range of cultural, religious and diverse themes and activities can be incorporated into the setting. 
-            
-            Encouraging the children to bring items from home to create displays on a given theme will support:</p>
-            <ul class="govuk-list govuk-list--bullet">
-            <li>the creation of a diverse environment</li>
-            <li>children’s confidence and communication skills</li>
-            </ul>
-            </div>   
+          You can reinforce these ideas through:
+          
+          - books
+          - display boards
+          - activity materials
+          - role play
+          - educational visits
 
-          ##Social stories
+          Long term planning will also help you incorporate a wide range of cultural, religious and diverse themes and activities into the setting. 
 
+          For example, encouraging the children to bring items from home to create displays on a given theme will support the creation of a diverse environment, It will also help to build children’s confidence and communication skills.
+
+          $INFO
+
+      3-1-2-1e:
+        heading: |
+          Social stories
+        body: |
+          ![A young child playing in a cardboard box.](/assets/3-1-2-1e-1354217928.jpg)          
           Social stories are a set of instructions, supported by visual clues, to help children remember how to navigate social situations and changes in routine.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
 
-            <p class="govuk-body">Work with children to create their own social stories. You can encourage them to draw or stick visual reminders to create a social story which will help them follow daily routines within the setting. You can also involve children in creating social stories for non routine changes, like:</p>
+          You can encourage children to create their own social stories by drawing or sticking visual reminders which will help them follow daily routines within the setting. 
 
-            <ul class="govuk-list govuk-list--bullet">
-              <li>moving house </li>
-              <li>welcoming a new sibling </li>
-              <li>going to a doctor's appointment </li>
-              <li>navigating illness or death</li>
-            </ul> 
-            </div>          
+          You can also involve children in creating social stories for non-routine changes, like:
 
-          ##Encourage responsibility
-          ![A young child choosing a book from a bookshelf in an early years setting.](/assets/3-1-2-1-1161936935.jpg)
+          - moving house
+          - welcoming a new sibling
+          - going to a doctor's appointment
+          - navigating illness or death
+
+          $INFO
+
+      3-1-2-1f:
+        notes: true
+        heading: |
+          Encouraging responsibility
+        body: |
+          ![A young child tidying toys into a basket. ](/assets/3-1-2-1f-953970566.jpg)
 
           Giving children responsibility that is appropriate to their stage of development will support them to develop a wealth of skills. For younger children, this may start with something as simple as a choice of toy, or the decision of which story to read. 
           
@@ -370,32 +432,48 @@ en:
           
           Encouraging children to take responsibility will promote self-worth, self-efficacy and self-esteem.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $BRAIN
 
-            <p class="govuk-body">What responsibilities do you give to the children in your care? </p>
+          Reflect on what you have read about encouraging responsibility. 
 
-            <p class="govuk-body">Are all children given stage appropriate responsibilities? If not, why not? What responsibilities could you give them?</p>
-          </div>
+          Think about your expectations on responsibility.
 
-          ##Include children's preferences
+          Consider the following questions: 
+          
+          - What responsibilities do you give to the children in your care?
+          - How do you ensure that all children are given stage appropriate responsibilities? 
+          - How do these responsibilities impact on the children's learning, development and behaviour? 
+          - What else could you do to encourage responsibility? 
 
+          $BRAIN
+
+      3-1-2-1g:
+        notes: true
+        heading: |
+          Including children's preferences
+        body: |
+          ![A childminder holding a child in front of a fridge, choosing some food together. ](/assets/3-1-2-1g-1369773759.jpg)
+          
           When a child can see that their individual interests and needs have been taken into account, their learning will be more effective. The obvious reason for this is that children will be more engaged because it is something of interest to them. However, children will also feel important and valued because you have taken their individuality into consideration. This will result in more conversation, and therefore more opportunities to develop their communication skills. 
           
           Children will feel more confident to discuss topics they feel more knowledgeable about. This is a good opportunity for you to encourage the use of questioning and to introduce new vocabulary.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $BRAIN
 
-            <p class="govuk-body">Think of a child in your care:</p>
+          Reflect on what you have read about including children's preferences. 
 
-            <ul class="govuk-list govuk-list--bullet">
-              <li>How do you incorporate their likes and preferences? </li>
-              <li>How did you find out their interests? </li>
-              <li>Have you been able to incorporate them into all areas of learning? </li>
-              <li>What has the impact been? </li>
-            </ul> 
-            </div>
+          Think of a child in your care. 
+
+          Consider the following questions: 
+
+          - How did you find out about their likes and interests?
+          - How do you incorporate their likes and interests into your activities and daily routine? 
+          - What impact has this had on the child's learning, development and behaviour?
+
+          $BRAIN
+
+
+
 
       3-1-2-2a:
         heading: An inclusive approach to personal, social and emotional development 
@@ -410,20 +488,20 @@ en:
           
           It is important that the responsibilities you offer are gender neutral to support inclusion and unbiased views. 
           
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
 
-            <p class="govuk-body">You can support children by:</p>
+          You can support children by:
 
-            <ul class="govuk-list govuk-list--bullet">
-              <li>ensuring they all get to carry out appropriate responsibilities </li>
-              <li>being patient with them if they are reluctant to make choices or participate in responsibilities </li>
-              <li>encouraging them to negotiate their responsibilities where appropriate </li>
-              <li>teaching them about responsibility through stories and discussions about the concepts of actions and consequences </li>
-            </ul> 
-            </div>   
+          - giving every child appropriate responsibilities 
+          - being patient with them if they are reluctant to make choices or take part in responsibilities
+          - encouraging them to negotiate their responsibilities where appropriate
+          - teaching them about responsibility through stories and discussions about actions and consequences
+
+          $INFO
+
 
       3-1-2-3a:
+        notes: true
         heading: Developing views 
         body: |
           Children are not born with preformed views of others around them. As they develop their knowledge and understanding of the world, they will use their experiences with others and the environments they access to shape their views and opinions. Along with parents and carers, as a practitioner you will play a significant role in shaping children’s views. 
@@ -450,14 +528,22 @@ en:
           - celebrates diversity with resources, displays, activities and visitors
           - encourages curiosity and exploration through handling unfamiliar items, experiencing unfamiliar foods and learning about new places
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $BRAIN
 
-            <p class="govuk-body">How does your setting promote unbiased views?</p>
-            <p class="govuk-body">How do you encourage children to be curious about unfamiliar situations, cultures, and roles?</p>
-            <p class="govuk-body">How do you deal with children’s questions and views? </p>
+          Reflect on what you have read about developing views. 
 
-            </div>   
+          Think about your curriculum plan.
+
+          Consider the following questions: 
+
+          - How do you promote unbiased views in your setting?
+          - How do you encourage children to be curious about unfamiliar situations, cultures, and roles?
+          - How do you respond to children’s questions and views?
+          - What impact does this have on the children's learning, development and behaviour? 
+          - Are there any other resources, activities or strategies you could use to help promote unbiased views? 
+
+          $BRAIN
+
 
       3-1-3:
         heading: How social and emotional skills affect behaviour 
@@ -529,18 +615,18 @@ en:
 
           If a task or experience is too difficult, children may present challenging behaviour to prevent others finding out that they do not understand. If children do attempt the task, they may become frustrated or upset when they are not able to understand or complete it. 
  
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
 
-            <p class="govuk-body">You can support children by: </p>
+          You can support children by:
 
-            <ul class="govuk-list govuk-list--bullet">
-              <li>breaking the task or knowledge into smaller chunks and celebrating each achievement </li>
-              <li>pairing or grouping children to support each other </li>
-              <li>working with the child 1 to 1 </li>
-            </ul> 
-            </div>   
+          - breaking the task or knowledge into smaller chunks
+          - celebrating individual achievement, no matter how small
+          - pairing or grouping children to support each other
+          - giving them 1 to 1 support
+
+          $INFO
           
+
           ##Changes in daily routines
 
           ![A young child meeting their new sibling.](/assets/3-1-3-1a-1305634049.jpg)
@@ -551,16 +637,25 @@ en:
           
           A transition will create a change in routine. Moving house, welcoming a new baby or a divorce will all potentially leave children feeling unsettled. Being excited, nervous or worried can all present as challenging or unwanted behaviour. 
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
 
-            <p class="govuk-body">You can create a visual reminder of the daily routine in your setting and use it as an opportunity to encourage the children to get involved. This will support children to talk about their likes, dislikes or worries in relation to the routine and can support them to understand related feelings.  </p>
+          As mentioned earlier in the module, you can create a visual reminder of the daily routine, and encourage the children to get involved. 
 
-            <p class="govuk-body">You can use puppets, role play or stories to support children to navigate the feelings associated with a new sibling, house move or medical appointment. Children will benefit from hearing from peers who have already experienced a similar transition that they are willing to share.  </p>
+          This will help children to talk about their likes, dislikes or worries in relation to the routine. It can also build their understanding of related feelings.  
 
-            </div>   
+          You can also use puppets, role play or stories to hep children navigate the feelings associated with transitions like:  
+
+          - welcoming a new sibling
+          - moving house 
+          - going to a medical appointment 
+
+          They will benefit from hearing from other children who have already experienced a similar transition that they are willing to share. 
+
+
+          $INFO
 
       3-1-3-2:
+        notes: true
         heading: Supporting positive behaviour
         body: |
           ![A practitioner and 4 children are sat on the floor. One child is sat on the practitioner's knee and they are reading a book together.](/assets/3-1-3-2-533571126.jpg)
@@ -589,14 +684,21 @@ en:
           
           Consequences can be another deterrent for children – for example, having to sit out of an activity for 5 minutes, or not being able to play with the toy they have fought over.
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $BRAIN
 
-            <p class="govuk-body">Think about the behaviour management policy in your setting. What are the key principles for behaviour management?  </p>
+          Reflect on what you have read about supporting positive behaviour. 
 
-            <p class="govuk-body">Think of a recent situation where you managed an incident of unwanted behaviour. What triggered the behaviour? </p>
+          Think about a time where you managed an incident of unwanted behaviour. 
 
-            </div>   
+          Consider the following questions: 
+
+          - What do you think triggered the behaviour?
+          - How did you respond to the behaviour?
+          - How did you use your setting's behaviour management policy and principles to guide your response?
+          - How did you help the child to understand and reflect on the consequences of their actions?
+          - How effective do you think your response was and why? 
+
+          $BRAIN
 
       3-1-3-3a:
         heading: Strategies for shaping and guiding behaviour 
@@ -678,14 +780,6 @@ en:
           
           In the third and final stage, detachment, children may lose their trust in people. Bowlby suggested that this stage will apply when children are separated from their most significant attachment for a longer period of time.
           
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
-
-            <p class="govuk-body">For those of you working with babies, can you relate to the protest phase? </p>
-
-            <p class="govuk-body">What strategies do you have in place to support children through this?  </p>
-
-            </div>   
       3-2-1-2:
         heading: Mary Ainsworth’s theory of attachment
         body: |
@@ -799,18 +893,19 @@ en:
           
           If you have had to put consequences in place as a result of challenging behaviour, be sure that relatively quickly afterwards the child knows that you are still there to support them. Where children have not been used to set expectations, consequences can be very unsettling and may impact on any progress made. 
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
 
-            <p class="govuk-body">To support children, you can: </p>
+          To support children, you can:
 
-            <ul class="govuk-list govuk-list--bullet">
-              <li>use stories, discussions, puppets, role play and questioning to help them name and manage their feelings and anxieties </li>
-              <li>involve them in discussions about changes in routine, and use visual aids as regular reminders of the new routine </li>
-              <li>offer regular reassurance and praise  </li>
-              <li>explain why you have set consequences for their actions as soon as the actions have occurred, to ensure they know that the incident has been dealt with and that they do not need to dwell on it  </li>
-            </ul> 
-            </div>   
+          - use stories, discussions, puppets, role play and questioning to help them name and manage their feelings and anxieties
+          - involve them in discussions about changes in routine
+          - use visual aids as regular reminders of the new routine
+          - offer regular reassurance and praise
+
+          You should also explain why you have set consequences for children's actions as soon as they happen. This makes sure they know that you have dealt with the incident and they do not need to dwell on it.
+
+          $INFO
+
 
           ##Have realistic expectations 
             
@@ -824,17 +919,25 @@ en:
             
           Positive peer relationships can support the development of self-esteem, which can also aid development of self-worth. Peer relationships can also help children to explore and understand their feelings and thoughts.
 
-          <div class="govuk-inset-text prompt">
-          <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
 
-          <p class="govuk-body">To support children, you can: </p>
+          You can support children in your setting in several ways. You should make sure to discuss expected behaviour and rules with children. This will help them to understand your expectations and behave accordingly. 
 
-          <ul class="govuk-list govuk-list--bullet">
-              <li>discuss expected behaviour and rules with them, to increase their understanding and ability to behave accordingly </li>
-              <li>encourage paired and small group activities that promote the need to work together to achieve a set outcome  </li>
-              <li>positively model social skills that promote positive relationships between peers – including being polite, sharing resources and taking turns  </li>
-          </ul> 
-          </div>   
+          You should also model social skills that promote positive peer relationships. This includes things like being polite, taking turns and sharing resources. 
+
+          As well as this, you can introduce paired and small group activities where children must work together to achieve a goal. This helps to encourage communication, co-operation and relationship building. 
+
+          $INFO
+          
+      3-2-1-4video:
+        heading: The impact of coronavirus (COVID-19) on attachment 
+        body: |
+          In this video practitioners talk about the impact coronavirus (COVID-19) has had on attachment for children in their setting and some strategies they have put in place to support these children. This is from the perspective of real life practitioners and are provided as ideas only.
+        video:
+          id: 754814727
+          title: The impact of coronavirus (COVID-19) on attachment
+          provider: vimeo
+
       3-2-2:
         heading: Supporting children to develop secure relationships 
         body: |
@@ -850,6 +953,7 @@ en:
           - Overcoming barriers to successful parent and carer partnerships
           - Supporting secure relationships
       3-2-2-1:
+        notes: true
         heading: Successful parent and carer partnerships
         body: |
           ![A young child and his parent talking to a practitioner.](/assets/3-2-2-1-1356661529.jpg)
@@ -878,15 +982,37 @@ en:
 
           Knowing about the significant adult roles in a child’s life is important and will support you to help them. 
 
-          <div class="govuk-inset-text prompt">
-          <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $INFO
 
-          <p class="govuk-body">How do you build partnerships with parents and carers? </p>
-          <p class="govuk-body">How do you involve parents and carers in their child’s learning? How many different methods can you think of?</p>
-          <p class="govuk-body">Do you have any examples of parents or carers who you do not know as well as you’d like? What do you think the barriers are? </p>
-          <p class="govuk-body">To help you get to know the children you could complete an ‘all about me’ book with the family. The profile allows you to gather some important facts about the child’s strengths, needs and interests. </p>
-          </div>   
+          You could ask the children's families to create an "all about me" book to get to know the children better. 
+
+          The profile helps you find out important facts about each child's needs, strengths and interests.
+
+          You can encourage them to share information on their children's:  
+          
+          - family, friends and pets 
+          - favourite toys, rhymes and stories 
+          - hobbies and interests 
+          - likes and dislikes
+
+          $INFO
+
+          $BRAIN
+
+          Reflect on what you have read about successful parent and carer partnerships. 
+
+          Think about how you work with parents and carers. 
+
+          Consider the following questions: 
+
+          - Are there any barriers that stop you from getting to know some parents and carers as well as you would like? 
+          - What could you do to overcome these barriers? 
+          - What impact does your relationship with parents and carers have on their children's learning, development and behaviour? 
+
+          $BRAIN
+
       3-2-2-2a:
+        notes: true
         heading: Overcoming barriers to successful parent and carer partnerships 
         body: |
           Occasionally, you may face barriers to building positive partnerships with parents and carers that you will need to overcome.
@@ -911,6 +1037,7 @@ en:
           
           During the pandemic, the way that children were dropped off and picked up changed. This may have impacted on your opportunities to meet children and parents before they start in your setting. For example, parents or carers may not have given information on a form that would naturally have come up during a settling in visit in your setting. In turn, this will have impacted on what we know about our children and their parents or carers.
       3-2-2-3:
+        notes: true
         heading: Supporting secure relationships
         body: |
           ![A practitioner supporting a young child in a craft activity. The child is cutting an egg box using some scissors. The practitioner is helping to hold the egg box and looking supportive.](/assets/3-2-2-3-544358376.jpg)          
@@ -929,14 +1056,6 @@ en:
           - complete observation, assessment and planning 
           - promote the child’s independence 
 
-          <div class="govuk-inset-text prompt">
-          <h2 class="govuk-heading-m">Practitioner prompt</h2>
-
-          <p class="govuk-body">How does the key person role work in your setting? How many children are you the key person for? </p>
-          <p class="govuk-body">What are your responsibilities?</p>
-          <p class="govuk-body">In your role as a key person, how have you supported a specific child? What are their next steps?</p>
-          </div>   
-
           It will be clear that a child has achieved secure relationships when they: 
           
           - seek you out for reassurance if they are worried
@@ -945,6 +1064,23 @@ en:
           - are able to wait without becoming anxious 
           - are responsive to discipline 
           - know they are valued 
+
+          $BRAIN
+
+          Reflect on what you have read about supporting secure relationships. 
+
+          Think about your role as a key person for a specific child (where applicable). 
+
+          Consider the following questions: 
+
+          - What are your main responsiblities as a key person for this child? 
+          - How do you build and maintain a positive relationship with them? 
+          - What impact does your work as a key person have on your key child's learning, development and behaviour? 
+          - What are this child's next steps, and how could you support them to get there?  
+
+          $BRAIN
+
+
       3-2-3:
         heading: How secure relationships affect learning and behaviour
         body: |
@@ -1138,6 +1274,7 @@ en:
           - Supporting skills: the practitioner’s role
           - Activities to support executive function development
       3-3-2-1:
+        notes: true
         heading: "Supporting skills: the practitioner’s role"
         body: |    
           ![Three young children are sat at a low table in an early years setting. They are playing with blocks and plastic tubs which can be put together in order of size. Two practitioners are supporting them and smiling encouragingly.](/assets/3-3-2-1-1125881964.jpg)
@@ -1181,13 +1318,23 @@ en:
 
           It is important to have patience and remain calm while children develop their self-regulation skills. Remember that children will take your lead on how to behave in a situation. 
 
-          <div class="govuk-inset-text prompt">
-          <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $BRAIN
 
-          <p class="govuk-body">What planned activities do you lead to help children to manage their feelings?</p>
-          <p class="govuk-body">How do you support children to regulate their responses?</p>
-          <p class="govuk-body">What are the consequences when children do not respond appropriately?</p>
-          </div>   
+          Reflect on what you have read about the practitioner's role in supporting skills development. 
+
+          Think about your practice. 
+
+          Consider the following questions:
+
+          - How do you help children to regulate their feelings and responses?
+          - How do you support children to deal with conflict? 
+          - What activities do you plan to help children learn to manage their feelings?  
+          - What strategies do you apply when children do not respond appropriately?
+          - What impact do these strategies have on the children's learning, development and behaviour? 
+
+          $BRAIN
+
+
       3-3-2-2a:
         heading: Activities to support executive function development 
         body: |    
@@ -1305,7 +1452,7 @@ en:
           
           Get [ideas for activities to help children communicate through arts](https://help-for-early-years-providers.education.gov.uk/expressive-arts-and-design/communicating-through-arts). 
           
-          ##Further reading
+          $BOOK
           
           You can find help and guidance on the Department for Education's [Help for early years providers website](https://help-for-early-years-providers.education.gov.uk/).
 
@@ -1316,6 +1463,8 @@ en:
           Supporting material is available on the [Foundation Years website](https://foundationyears.org.uk/).
 
           See [guidance to provide support](https://www.gov.uk/government/publications/progress-check-at-age-2) when completing the early years foundation stage (EYFS) progress check at age 2.
+
+          $BOOK
         
         3-4-3-7:
           url: "https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxUQ0ZUNURIUUc1OVZLSjdNUUs5TU9TR1YwRCQlQCN0PWcu"
