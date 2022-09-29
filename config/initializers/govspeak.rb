@@ -45,6 +45,6 @@ def transcript(video)
     transcript_data = YAML.load_file(transcript_file)
     transcript_data['transcript']
   else
-    'Transcript unavailable'
+    'Transcript currently unavailable'
   end
 end
