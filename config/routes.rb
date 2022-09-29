@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   root 'home#index'
   get 'health', to: 'home#show'
-  get 'my-learning', to: 'learning#show'
+  get 'my-modules', to: 'learning#show'
   get 'about-training', to: 'training_modules#index', as: :course_overview
 
   get '/404', to: 'errors#not_found', via: :all
+  # get '/422', to: 'errors#unacceptable', via: :all
   get '/500', to: 'errors#internal_server_error', via: :all
   get 'users/timeout', to: 'errors#timeout'
 
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
     patch 'update-setting-type'
     get 'check-email-confirmation'
     get 'check-email-password-reset'
+    resource :notes, path: 'learning-log', only: %i[show create update]
   end
 
   resources :modules, only: %i[show], as: :training_modules, controller: :training_modules do

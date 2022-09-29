@@ -35,26 +35,19 @@ en:
           - external factors, including the coronavirus (COVID-19) pandemic, impact on child development
           - effective practice and use of the EYFS framework will support successful development
 
-          <div class="govuk-inset-text prompt">
-            <h2 class="govuk-heading-m">Practitioner prompt</h2>
+          $BRAIN 
 
-            <p class="govuk-body">As you travel through the course you will see practitioners prompts.</p>
-          </div>
+          As you travel through the course you will see reflection points. These are indicated by the brain icon we introduced earlier.
 
-          These prompts are intended to:
+          $BRAIN
 
-          - encourage reflection on your current practice
-          - introduce new strategies
-          - reinforce effective teaching and learning
-          - embed new knowledge
+          Reflection is one of the most powerful tools you can use as a practitioner. In practice, you don't often have the time to stop and reflect. However, taking time to pause and think can help you to evaluate your practice, setting and curriculum by considering:
 
-          Reflection is one of the most powerful tools you can use as a practitioner. In practice, you don't often have the time to stop and reflect. However, taking an opportunity to pause and think back can enable you to ask:
+          - what works well 
+          - what opportunities there are to build and improve
+          - how you can use your child development knowledge to inform your planning
 
-          - what had I intended?
-          - did I successfully implement my intentions?
-          - how do I know?
-          - what impact did I see?
-          - what would I do differently next time?
+          You can make notes on the reflection points in your learning log. You can find this directly below the reflection point, at the bottom of the page.
 
           As you reflect upon your practice, remember that no child should be considered as low ability. Every child can make progress as long as the correct support is implemented.
 
@@ -179,6 +172,7 @@ en:
           Using your child development knowledge will help you to measure the impact of your intentions - has the child successfully learnt what you intended them to learn? Children need opportunities to reinforce their knowledge and learning. This ensures that they are secure in their level of understanding before being challenged to progress.
 
           Your knowledge of child development will support you to assess the correct secure age and stage for the child. It will also help you to offer the correct learning environment, experiences and opportunities to support their progress.
+        notes: true
 
           $BRAIN
 
@@ -662,6 +656,7 @@ en:
           $INFO
 
           The communication and language module of this training (coming soon) will consider the stages of development, the practitioner’s role and effective practice in further detail.
+        notes: true
 
       1-2:
         heading: A positive approach to care and education
@@ -805,6 +800,7 @@ en:
           When you are able to successfully identify individual children’s starting points you can stop potential gaps in learning from opening or widening further by giving the correct support.
 
           The remainder of this module will consider how using your professional judgement and child development knowledge can ensure that this support is accessible through enabling environments and implementation of the EYFS.
+        notes: true
 
           $BRAIN
 
@@ -1003,6 +999,15 @@ en:
 
           Your professional judgment, knowledge of individual children and understanding of children’s development will support you to ensure that the choices you make within your environment will promote success for all children.
 
+      1-2-1-6video:
+        heading: Balancing adult and child led activities
+        body: |
+          This video explains the importance of balancing adult and child led activities and what makes them successful, as part of the early years foundation stage framework. The video demonstrates a planned adult led activity and the child led activity that follows. There are also some tips on how to support children in this area.
+        video:
+          id: 754722535
+          title: Balancing adult and child led activities
+          provider: vimeo
+
       1-2-2:
         heading: Effective implementation of the EYFS
         body: |   
@@ -1087,9 +1092,9 @@ en:
 
           ##Summative assessment
 
-          The opportunity for summative assessment at the 2 year check provides you with opportunities to reinforce our full understanding of a child’s level of knowledge and understanding, and work in partnership with parents and carers to support development.
+          The opportunity for summative assessment at the 2 year old progress check provides you with opportunities to reinforce our full understanding of a child’s level of knowledge and understanding, and work in partnership with parents and carers to support development.
 
-          While the 2 year check will be a written summary of the child’s progress in the 3 prime areas of the EYFS, you can use your knowledge to give parents and carers a more detailed understanding of their child’s progress.
+          While the 2 year old progress check will be a written summary of the child’s progress in the 3 prime areas of the EYFS, you can use your knowledge to give parents and carers a more detailed understanding of their child’s progress.
 
       1-3:
         heading: Summary and next steps

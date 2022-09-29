@@ -1,0 +1,238 @@
+---
+child-development-and-the-eyfs:
+  1-3-2-1:
+    questions:
+      1_understanding_benefits:
+        multi_select: true
+        label: |
+          Which of the following are benefits of increasing your understanding of child development? (Select all answers that apply)
+        assessment_summary:
+        assessment_fail_summary: |
+          Improving your understanding of child development will help you to:
+
+          - support children to develop resilience, confidence and self-efficacy
+          - plan an environment and curriculum that promotes success for all by identifying and implementing the correct level of support
+          - offer each child a unique learning journey with improved outcomes
+          - help children in your care to gain new knowledge
+
+          You might want to revisit the section on [how understanding child development benefits the child](/modules/child-development-and-the-eyfs/content-pages/1-1-1-1).
+        answers:
+          1: Helping children to develop resilience, confidence and self-efficacy
+          2: Supporting children to gain new knowledge
+          3: Helping you plan a curriculum and environment that promotes success for all
+          4: Reducing the amount of support children need from parents and carers
+        correct_answers:
+          - 1
+          - 2
+          - 3
+
+  1-3-2-2:
+    questions:
+      1_child_struggling:
+        multi_select: false
+        label: |
+          True or false?
+
+          If a child in your care is struggling with their learning, you should not tell their parents or carers, so as to avoid worrying them.
+
+        assessment_summary:
+        assessment_fail_summary: |
+
+          The foundations of parent and carer partnerships are built on trust. It is crucial that you are able to talk honestly with parents and carers to ensure they fully appreciate their child’s needs. This includes explaining to parents when children need additional support and how they can help at home to enable their child to flourish.
+
+          You might want to revisit the section on [how understanding child development benefits the wider support network](/modules/child-development-and-the-eyfs/content-pages/1-1-1-3).
+        answers:
+          1: "True"
+          2: "False"
+        correct_answers:
+          - 2
+
+  1-3-2-3:
+    questions:
+      1_successive_support:
+        multi_select: false
+        label: |
+          Which of the following is the process practitioners can use to give children temporary levels of successive support?
+        assessment_summary:
+        assessment_fail_summary: |
+          Scaffolding offers children temporary levels of successive support that help them to tackle more challenging tasks and build on existing learning. It helps children to develop their confidence and self belief. This means they will be secure in their knowledge and skills before becoming ready to attempt the next challenge.
+
+          You can use your knowledge of child development and of each child’s communication skills to scaffold and set the correct pace of learning. You can then consider what you would like to aim towards next.
+
+          You might want to revisit the section on [how improved child development knowledge supports outstanding practice: scaffolding learning](/modules/child-development-and-the-eyfs/content-pages/1-1-1-5).
+        answers:
+          1: Scaffolding
+          2: Early intervention
+          3: Holistic development
+          4: Summative assessment
+        correct_answers:
+          - 1
+
+  1-3-2-4:
+    questions:
+      1_holistic_learning:
+        multi_select: true
+        label: |
+          Which of the following are benefits of taking a holistic approach to learning and development? (Select all answers that apply)
+        assessment_summary:
+        assessment_fail_summary: |
+          Holistic learning:
+
+          - encourages children to be curious as they consider concepts and topics from more than one perspective
+          - uses a child’s interests to encourage them to engage in areas that they may otherwise avoid
+          - ensures that the physical, emotional and psychological needs of a child are considered
+
+          You might want to revisit the section on [how improved child development knowledge supports outstanding practice: effective holistic support](/modules/child-development-and-the-eyfs/content-pages/1-1-1-7).
+        answers:
+          1: Encouraging curiosity
+          2: Increasing engagement by using children's interests
+          3: Meeting all the needs of the child
+          4: Doing less planning
+        correct_answers:
+          - 1
+          - 2
+          - 3
+
+  1-3-2-5:
+    questions:
+      1_mathematics_skills:
+        multi_select: true
+        label: Which of the following activities may have helped children to develop their mathematics skills during the pandemic? (Select all answers that apply)
+        assessment_summary:
+        assessment_fail_summary: |
+          During the pandemic, some children will have been able to play with number related apps  and games that help build their mathematics skills. They may also have been involved in practical activities such as cooking, which require them to weigh and measure.
+
+          Children may also have:
+
+          - had access to toys, games and jigsaws that require problem solving and matching
+          - explored mathematical concepts such as time, shape and distance through interactions with their parents or carers
+
+          You might want to revisit the section on [the impact of the COVID-19 pandemic on mathematics](/modules/child-development-and-the-eyfs/content-pages/1-1-2-4).
+
+        answers:
+          1: Learning to ride a bike or scooter
+          2: Cooking
+          3: Playing with number related apps and games
+          4: Growing vegetables
+        correct_answers:
+          - 2
+          - 3
+
+  1-3-2-6:
+    questions:
+      1_creative_materials:
+        multi_select: false
+        label: |
+          During the pandemic some children may have had limited access to creative materials, role play items or musical activity. This may have impacted on which of the following?
+        assessment_summary:
+        assessment_fail_summary: |
+          During the pandemic, some children will have had limited exposure to expressive arts like dance, music and art. Children with limited or no access to creative materials, role play items or musical activity may have limited skills and development in these areas.
+
+          You might want to revisit the section on [the impact of the COVID-19 pandemic on expressive arts](/modules/child-development-and-the-eyfs/content-pages/1-1-2-8).
+        answers:
+          1: Their self-efficacy
+          2: Their mathematics skills
+          3: Their expressive arts skills
+          4: Their energy levels
+        correct_answers:
+          - 3
+
+  1-3-2-7:
+    questions:
+      1_acknoweldging_achievements:
+        multi_select: false
+        label: |
+          True or false?
+
+          Acknowledging small achievements can encourage children to try more challenging tasks.
+        assessment_summary:
+        assessment_fail_summary: |
+          It is important to recognise and celebrate children’s accomplishments. Even where the accomplishment might be considered small it is essential that the child feels recognised for their achievement. This will encourage children to attempt more challenging tasks, even when there is an opportunity for them to make a mistake, as they will seek that acknowledgement again.
+
+          You might want to revisit the section on [acknowledging children's individual strengths](/modules/child-development-and-the-eyfs/content-pages/1-2-1-1).
+        answers:
+          1: "True"
+          2: "False"
+        correct_answers:
+          - 1
+
+  1-3-2-8:
+    questions:
+      1_proprioceptive_activities:
+        multi_select: true
+        label: |
+          Which of the following should you consider when planning the curriculum for your setting? (Select all answers that apply)
+        assessment_summary:
+        assessment_fail_summary: |
+          Children are constantly learning and require an ambitious curriculum that gives them the opportunity to make sense of their thoughts and experiences and considers their:
+
+          - identity and culture
+          - interests and learning needs
+          - individual communication needs
+          - previous experiences
+
+          Children’s learning and development opportunities will be maximised in environments that are varied, that offer challenge with minimised risk and where children are protected from harm and abuse.
+
+          You might want to revisit the section on [successful enabling environments](/modules/child-development-and-the-eyfs/content-pages/1-2-1-4).
+        answers:
+          1: Children's identity and culture
+          2: Children's interests and learning needs
+          3: Children's individual communication needs
+          4: Children's previous experiences
+        correct_answers:
+          - 1
+          - 2
+          - 3
+          - 4
+
+  1-3-2-9:
+    questions:
+      1_child_led_activities:
+        multi_select: true
+        label: |
+          How do child-led activities benefit children? (Select all answers that apply)
+        assessment_summary:
+        assessment_fail_summary: |
+          Child-led activities allow children to trial new ideas without any expectation, often leading to increased imagination and creativity.
+
+          They can allow children to attempt an activity independently without worrying about the outcome, often leading to skill development and increased independence.
+
+          They also give children the opportunity to navigate social skills such as sharing, turn taking and negotiating the views of others with minimal intervention from practitioners
+
+          In contrast, adult-led activities will ensure that all children can be actively involved. This will be because you have differentiated the activity. You can make sure all children are engaged in conversation opportunities. Across a planned period of time all children will be encouraged to participate.
+
+          You might want to revisit the sections on [a balanced approach to learning: child led play](/modules/child-development-and-the-eyfs/content-pages/1-2-1-5) and [a balanced approach to learning: adult led activities](/modules/child-development-and-the-eyfs/content-pages/1-2-1-6).
+        answers:
+          1: Ensuring that all children are included and engaged
+          2: Increasing children’s imagination and creativity
+          3: Increasing children’s independence
+          4: Helping children to navigate social skills like sharing and turn taking
+        correct_answers:
+          - 2
+          - 3
+          - 4
+
+  1-3-2-10:
+    questions:
+      1_visual-reminders:
+        multi_select: false
+        label: |
+          True or false?
+
+          Due to the planning needed, effective assessment will require practitioners to be away from children for prolonged periods.
+        assessment_summary:
+        assessment_fail_summary: |
+          Successful assessment is key to helping you identify children’s starting points and planning appropriate environments and experiences to support progress.
+
+          Effective assessment should:
+
+          - not take practitioners away from children for prolonged periods
+          - be well planned
+          - clearly inform practitioners about next steps
+
+          You might want to revisit the section on [effective assessment](/modules/child-development-and-the-eyfs/content-pages/1-2-2-2).
+        answers:
+          1: 'True'
+          2: 'False'
+        correct_answers:
+          - 2
