@@ -4,7 +4,7 @@ namespace :db do
     number_updated = 0
     total_records = 0
 
-    User.all.map do |user|
+    User.registered.map do |user|
       original = user.module_time_to_completion
       BackfillModuleState.new(user: user).call
       updated = user.reload.module_time_to_completion

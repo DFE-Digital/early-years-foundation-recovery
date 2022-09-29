@@ -22,5 +22,9 @@ FactoryBot.define do
       registered
       ofsted_number { 'EY123456' }
     end
+
+    trait :display_whats_new do
+      display_whats_new { true }
+    end
   end
 end

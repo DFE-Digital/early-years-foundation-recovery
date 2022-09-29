@@ -2,7 +2,7 @@
   .govuk-grid-column-two-thirds-from-desktop
     = yield :content_page
 
-- if @module_item.notes?
-  = render partial: "notes/form"
-- else
-  = render partial: 'content_pages/course_pages_footer'
+    - if @module_item.notes?
+      = render partial: "notes/form"
+    - else
+      = render partial: 'content_pages/course_pages_footer'
