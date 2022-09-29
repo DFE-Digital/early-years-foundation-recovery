@@ -30,11 +30,11 @@ RSpec.describe 'Video page' do
 
   it 'shows the transcript body after the dropdown has been clicked' do
     find('span', text: 'Transcript').click
-    expect(page).to have_selector('.gem-c-govspeak', text: 'Through this activity the practitioner is looking to:', visible: :visible)
+    expect(page).to have_selector('.gem-c-govspeak', text: "So let's look at an example of adult led learning.", visible: :visible)
   end
 
   it 'collapses the transcript dropdown and hides the transcript body after being clicked twice' do
     2.times { find('span', text: 'Transcript').click }
-    expect(page).not_to have_selector('.gem-c-govspeak', text: 'Through this activity the practitioner is looking to:', visible: :visible)
+    expect(page).not_to have_selector('.gem-c-govspeak', text: "So let's look at an example of adult led learning.", visible: :visible)
   end
 end

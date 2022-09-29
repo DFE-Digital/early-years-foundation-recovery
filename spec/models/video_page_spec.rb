@@ -37,7 +37,7 @@ RSpec.describe VideoPage, type: :model do
 
   describe '#video_transcript' do
     it 'returns the video provider data' do
-      expect(video_page.transcript).to include('Balancing adult and child led activities')
+      expect(video_page.transcript).to include("So let's look at an example of adult led learning.")
     end
   end
 
