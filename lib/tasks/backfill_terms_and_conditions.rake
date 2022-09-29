@@ -8,7 +8,7 @@ namespace :db do
       original = user.terms_and_conditions_agreed_at
       if original.nil?
         user.terms_and_conditions_agreed_at = user.created_at
-        user.save(validate: false)
+        user.save!(validate: false)
 
         if original != user.reload.terms_and_conditions_agreed_at
           number_updated += 1
