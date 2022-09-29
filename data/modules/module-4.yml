@@ -188,3 +188,26 @@ module-4:
     type: summative_questionnaire
   4-4-1-11:
     type: assessment_results
+
+# ----------------------------------------------------------------------------
+# Confidence check
+# ----------------------------------------------------------------------------
+
+  4-4-2: 
+    type: confidence_intro
+  4-4-2-1: 
+    type: confidence_questionnaire
+  4-4-2-2: 
+    type: confidence_questionnaire
+  4-4-2-3: 
+    type: confidence_questionnaire
+  4-4-2-4: 
+    type: confidence_questionnaire
+  4-4-2-5: 
+    type: confidence_questionnaire
+  4-4-2-6: 
+    type: confidence_questionnaire
+  4-4-2-7: 
+    type: ending_intro 
+  4-4-3: 
+    type: certificate
