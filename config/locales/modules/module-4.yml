@@ -1331,14 +1331,14 @@ en:
           - which book to read
           - creative materials, for example which colour of paint to use
       
-      4-3-1-2video:
-        heading: Strategies to support language development
-        body: |
-          This video explains the different strategies to support language development, including specific examples of when, why and how to use expansion, narration, reasoning and positive feedback, as part of the early years foundation stage framework.
-        video:
-          id: 754858769
-          title: Strategies to support language development
-          provider: vimeo
+      ##4-3-1-2video:
+        ##heading: Strategies to support language development
+        ##body: |
+          ##This video explains the different strategies to support language development, including specific examples of when, why and how to use expansion, narration, reasoning and positive feedback, as part of the early years foundation stage framework.
+        ##video:
+          ##id: 
+          ##title: Strategies to support language development
+          ##provider: vimeo
 
       4-3-1-2video2:
         heading: Communicating with children in your care
