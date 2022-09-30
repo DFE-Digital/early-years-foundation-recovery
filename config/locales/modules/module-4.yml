@@ -1285,9 +1285,11 @@ en:
 
           Sharing commentary will support children to name everyday items and understand routine tasks.
 
-          Routine tasks such as nappy changing and mealtimes are also ideal opportunities to engage children in commentary and conversation. For younger children this will be an opportunity to identify objects, foods and colours. These are also good times to ask questions, such as whether the children are enjoying their food or what they can see around the changing mat. Even when you are not expecting a response, this is a chance to show children the importance of turn taking in conversation. You should acknowledge any attempt to respond positively, to reinforce further attempts. Older children may take these opportunities to discuss related topics, or to have a general discussion they are keen to share.
+          Routine tasks such as nappy changing and mealtimes are also ideal opportunities to engage children in commentary and conversation. For younger children this will be an opportunity to identify objects, foods and colours. These are also good times to ask questions, such as whether the children are enjoying their food or what they can see around the changing mat. 
+          
+          Even when you are not expecting a response, this is a chance to show children the importance of turn taking in conversation. You should acknowledge any attempt to respond positively, to reinforce further attempts. Older children may take these opportunities to discuss related topics, or to have a general discussion they are keen to share. 
 
-          ###Expansion
+          ##Expansion
 
           Another strategy for modelling language is expansion, where you expand on what the child is saying. For example if a child says "bear", you could respond by saying "Yes, it’s a bear and it’s wearing a lovely blue shirt". This will help the child to learn a wider range of vocabulary.
 
@@ -1328,6 +1330,24 @@ en:
           - which songs to sing
           - which book to read
           - creative materials, for example which colour of paint to use
+      
+      4-3-1-2video:
+        heading: Strategies to support language development
+        body: |
+          This video explains the different strategies to support language development, including specific examples of when, why and how to use expansion, narration, reasoning and positive feedback, as part of the early years foundation stage framework.
+        video:
+          id: 754858769
+          title: Strategies to support language development
+          provider: vimeo
+
+      4-3-1-2video2:
+        heading: Communicating with children in your care
+        body: |
+          This video shows examples of practitioners interacting and communicating with children during different activities within a setting, as part of the early years foundation stage framework. This video is intended to provide useful tips and ideas on different ways to communicate with children in your care.
+        video:
+          id: 755039862
+          title: Communicating with children in your care
+          provider: vimeo
 
       4-3-2:
         heading: Creating a positive environment
