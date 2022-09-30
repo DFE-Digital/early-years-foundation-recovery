@@ -9,10 +9,8 @@
     border-color: $govuk-error-colour;
     background-color: $govuk-error-colour;
   }
-
-  &--error, &--success {
-    p {
-      margin: 0;
-    }
+  
+  p {
+    margin-top: 0;
   }
 }
