@@ -25,17 +25,16 @@ personal-social-and-emotional-development:
         multi_select: false
         label: |
           Read the scenario and answer the question:
-          Yusuf and Noah are playing together outside when Noah trips and bumps his knee,
-          which causes him to cry. Yusuf is quick to try to comfort Noah and looks for help from an adult.
-          Later, Yusuf recreates the situation with dolls and uses the opportunity
-          to express his worries about the accident.
+
+          Yusuf and Noah are playing together outside when Noah trips and bumps his knee, which causes him to cry. Yusuf is quick to try to comfort Noah and looks for help from an adult.
+
+          Later, Yusuf recreates the situation with dolls and uses the opportunity to express his worries about the accident.
+          
           At around what age would you expect to start seeing Yusuf’s behaviour?
         assessment_summary: |
-          At around 3 years old children will be showing more affection for friends
-          and will visibly show concern when their friends are upset.
+          At around 3 years old children will be showing more affection for friends and will visibly show concern when their friends are upset.
         assessment_fail_summary: |
-          At around 3 years old children will be showing more affection for friends
-          and will visibly show concern when their friends are upset.
+          At around 3 years old children will be showing more affection for friends and will visibly show concern when their friends are upset.
         answers:
           1: "4"
           2: "1"
@@ -52,11 +51,9 @@ personal-social-and-emotional-development:
         label: |
           At what age would children rather play with others than alone?
         assessment_summary: |
-          At 4 years old, children would rather play with others than alone and they
-          are making friendships and forming bonds with their peers.
+          At 4 years old, children would rather play with others than alone and they are making friendships and forming bonds with their peers.
         assessment_fail_summary: |
-          At 4 years old, children would rather play with others than alone and they
-          are making friendships and forming bonds with their peers.
+          At 4 years old, children would rather play with others than alone and they are making friendships and forming bonds with their peers.
         answers:
           1: "2"
           2: "3"
@@ -72,8 +69,14 @@ personal-social-and-emotional-development:
         multi_select: false
         label: |
           True or false? Around the age of 5, a child will begin to choose their friends based upon characteristics they would like for themselves.
-        assessment_summary: At age 5 children will want to please others and are able to take part in activities and tasks that involve cooperation and direction. They will be choosing their own friends and will see characteristics in friends that they would like for themselves.
-        assessment_fail_summary: At age 5 children will want to please others and are able to take part in activities and tasks that involve cooperation and direction. They will be choosing their own friends and will see characteristics in friends that they would like for themselves.
+        assessment_summary: |
+          At age 5 children will want to please others and are able to take part in activities and tasks that involve cooperation and direction.
+          
+          They will be choosing their own friends and will see characteristics in friends that they would like for themselves.
+        assessment_fail_summary: |
+          At age 5 children will want to please others and are able to take part in activities and tasks that involve cooperation and direction. 
+          
+          They will be choosing their own friends and will see characteristics in friends that they would like for themselves.
         answers:
           1: "True"
           2: "False"
@@ -158,26 +161,23 @@ personal-social-and-emotional-development:
 
           What should you do?
         assessment_summary: |
-          You should intervene, as this is an opportunity for you to support children’s
-          understanding of accepting individuality. Initially this intervention could be a
-          spontaneous discussion where the children involved are encouraged to share their thoughts and feelings.
+          You should intervene, as this is an opportunity for you to support children’s understanding of accepting individuality. Initially this intervention could be a spontaneous discussion where the children involved are encouraged to share their thoughts and feelings.
 
           Planned activities could also include:
+
           - use of puppets or structured role play to encourage expression of feelings and thoughts
           - shared stories relating to unkind actions and the resulting feelings
         assessment_fail_summary: |
-          You should intervene, as this is an opportunity for you to support children’s
-          understanding of accepting individuality. Initially this intervention could be a
-          spontaneous discussion where the children involved are encouraged to share their thoughts and feelings.
+          You should intervene, as this is an opportunity for you to support children’s understanding of accepting individuality. Initially this intervention could be a spontaneous discussion where the children involved are encouraged to share their thoughts and feelings.
 
           Planned activities could also include:
+
           - use of puppets or structured role play to encourage expression of feelings and thoughts
           - shared stories relating to unkind actions and the resulting feelings
 
-          You should not wait to see how Benjamin reacts, as this may lead to difficulties
-          and confusion for him around managing feelings and building positive relationships.
-          You also should not stop Benjamin from playing with the items, as all children should
-          have the freedom to play with whatever they choose without fear of being teased.
+          You should not wait to see how Benjamin reacts, as this may lead to difficulties and confusion for him around managing feelings and building positive relationships.
+
+          You also should not stop Benjamin from playing with the items, as all children should have the freedom to play with whatever they choose without fear of being teased.
         answers:
           1: Wait to see how Benjamin reacts
           2: Intervene
@@ -215,23 +215,13 @@ personal-social-and-emotional-development:
           What is the term used to describe the potential impact aspects of their
           environment such as noise, light, or crowds can have on children?
         assessment_summary: |
-          ‘Overstimulation’ is the term used to describe the potential impact aspects
-          of the environment such as noise, light, or crowds can have on children.
+          ‘Overstimulation’ is the term used to describe the potential impact aspects of the environment such as noise, light, or crowds can have on children. When children become overstimulated, their responses may be interpreted as challenging or unwanted behaviour.
 
-          When children become overstimulated, their responses may be interpreted as
-          challenging or unwanted behaviour.
-          In your setting, children will benefit from a designated quiet area that
-          they know they can retreat to if things become too much.
-          A knowledge of children’s interests can also be helpful here, as they can be used as a distraction.
+          In your setting, children will benefit from a designated quiet area that they know they can retreat to if things become too much. A knowledge of children’s interests can also be helpful here, as they can be used as a distraction.
         assessment_fail_summary: |
-          ‘Overstimulation’ is the term used to describe the potential impact aspects
-          of the environment such as noise, light, or crowds can have on children.
+          ‘Overstimulation’ is the term used to describe the potential impact aspects of the environment such as noise, light, or crowds can have on children. When children become overstimulated, their responses may be interpreted as challenging or unwanted behaviour.
 
-          When children become overstimulated, their responses may be interpreted
-          as challenging or unwanted behaviour. In your setting, children will benefit
-          from a designated quiet area that they know they can retreat to if things become too much.
-          A knowledge of children’s interests can also be helpful here, as they can
-          be used as a distraction.
+          In your setting, children will benefit from a designated quiet area that they know they can retreat to if things become too much. A knowledge of children’s interests can also be helpful here, as they can be used as a distraction.
         answers:
           1: Understimulation
           2: Developmental challenge
@@ -323,9 +313,20 @@ personal-social-and-emotional-development:
       1_josh_attachment:
         multi_select: false
         label: |
-          Read the scenario and answer the question: Josh prefers to carry out tasks and activities alone and has not established any strong friendships within the group. Josh is reluctant to carry out adult led activity and often tells adults he can not complete tasks before he has attempted them. Which type of attachment has Josh most likely experienced?
-        assessment_summary: Josh’s behaviour suggests that he may have experienced a disorganised controlling attachment style. Children with disorganised controlling attachment prefer to be alone, have low self-esteem and are more prone to stress.
-        assessment_fail_summary: Josh’s behaviour suggests that he may have experienced a disorganised controlling attachment style. Children with disorganised controlling attachment prefer to be alone, have low self-esteem and are more prone to stress.
+          Read the scenario and answer the question: 
+          
+          Josh prefers to carry out tasks and activities alone and has not established any strong friendships within the group. Josh is reluctant to carry out adult led activity and often tells adults he can not complete tasks before he has attempted them. 
+          
+          Which type of attachment has Josh most likely experienced?
+        assessment_summary: |
+          Josh’s behaviour suggests that he may have experienced a disorganised controlling attachment style. 
+        
+          Children with disorganised controlling attachment prefer to be alone, have low self-esteem and are more prone to stress.
+        
+        assessment_fail_summary: |
+          Josh’s behaviour suggests that he may have experienced a disorganised controlling attachment style. 
+        
+          Children with disorganised controlling attachment prefer to be alone, have low self-esteem and are more prone to stress.
         answers:
           1: Insecure ambivalent attachment
           2: Secure attachment
@@ -345,14 +346,18 @@ personal-social-and-emotional-development:
         assessment_summary: |
           Communication, negative experiences and busy lifestyles can all be barriers
           to building effective partnerships with parents and carers.
+          
           For example, English may be a second language for the child’s family,
           or parents and carers may lack confidence with communication and understanding.
+          
           You may need to take time to make sure you can provide information in their first language.
         assessment_fail_summary: |
           Communication, negative experiences and busy lifestyles can all be barriers
           to effective parent partnerships.
+          
           For example, English may be a second language for the child’s family,
           or parents and carers may lack confidence with communication and understanding.
+          
           You may need to take time to make sure you can provide information in their first language.
         answers:
           1: Happiness
@@ -372,11 +377,13 @@ personal-social-and-emotional-development:
           loving environment are more likely to be skilled at self-expression.
         assessment_summary: |
           Children who recognise their feelings are more likely to be skilled at self-expression.
+          
           Children who do not grow up in an environment full of love, respect and
           compassion are more likely to struggle with self expression and experience mental
           health difficulties in later life.
         assessment_fail_summary: |
           Children who recognise their feelings are more likely to be skilled at self-expression.
+          
           Children who do not grow up in an environment full of love, respect and
           compassion are more likely to struggle with self expression and experience mental
           health difficulties in later life.
@@ -392,20 +399,15 @@ personal-social-and-emotional-development:
       1_self-regulate:
         multi_select: false
         label: |
-          True or false? Being able to self-regulate helps to increase resilience
-          and improve the ability to cope with stress.
+          True or false? Being able to self-regulate helps to increase resilience and improve the ability to cope with stress.
         assessment_summary: |
-          Being able to self-regulate supports the development of increased resilience
-          and improves the ability to cope with stress. Good self-regulation skills
-          will also promote positive mental health and well being, encourage healthy
-          brain development and reduce the likelihood of medical issues like heart disease
-          and obesity.
+          Being able to self-regulate supports the development of increased resilience and improves the ability to cope with stress. 
+          
+          Good self-regulation skills will also promote positive mental health and well being, encourage healthy brain development and reduce the likelihood of medical issues like heart disease and obesity.
         assessment_fail_summary: |
-          Being able to self-regulate supports the development of increased resilience
-          and improves the ability to cope with stress.
-          Good self-regulation skills will also promote positive mental health and well being,
-          encourage healthy brain development and reduce the likelihood of medical
-          issues like heart disease and obesity.
+          Being able to self-regulate supports the development of increased resilience and improves the ability to cope with stress. 
+          
+          Good self-regulation skills will also promote positive mental health and well being, encourage healthy brain development and reduce the likelihood of medical issues like heart disease and obesity.
         answers:
           1: "True"
           2: "False"
@@ -424,15 +426,16 @@ personal-social-and-emotional-development:
           Using strategies to encourage children’s understanding of time and
           routine will support them to develop planning and organisation skills.
 
-          Successful strategies can include :
+          Successful strategies can include:
+
           - following a daily routine with visual clue reminders
           - using timers for activities or tidying up
           - singing songs and rhymes about the days of the week or the time of year
         assessment_fail_summary: |
-          Using strategies to encourage children’s understanding of time and routine
-          will support them to develop planning and organisation skills.
+          Using strategies to encourage children’s understanding of time and routine will support them to develop planning and organisation skills.
 
-          Successful strategies can include :
+          Successful strategies can include:
+
           - following a daily routine with visual clue reminders
           - using timers for activities or tidying up
           - singing songs and rhymes about the days of the week or the time of year
@@ -451,21 +454,15 @@ personal-social-and-emotional-development:
           What can happen if children are not effectively supported to understand
           and regulate their feelings?
         assessment_summary: |
-          Children can become overwhelmed and will struggle with challenges experienced
-          as part of their daily lives if they are not effectively supported to understand
-          and regulate their feelings. Developing self-regulation requires guidance and support.
+          Children can become overwhelmed and will struggle with challenges experienced as part of their daily lives if they are not effectively supported to understand and regulate their feelings. Developing self-regulation requires guidance and support.
+          
           As children begin to recognise and name their feelings, they will also
-          need your support to learn to regulate them.
-          This support can be referred to as co-regulation, meaning when you work in
-          cooperation with others to develop skills.
+          need your support to learn to regulate them. This support can be referred to as co-regulation, meaning when you work in cooperation with others to develop skills.
         assessment_fail_summary: |
-          Children can become overwhelmed and will struggle with challenges experienced
-          as part of their daily lives if they are not effectively supported to
-          understand and regulate their feelings. Developing self-regulation requires
-          guidance and support. As children begin to recognise and name their feelings,
-          they will also need your support to learn to regulate them.
-          This support can be referred to as co-regulation, meaning when you work
-          in cooperation with others to develop skills.
+          Children can become overwhelmed and will struggle with challenges experienced as part of their daily lives if they are not effectively supported to understand and regulate their feelings. Developing self-regulation requires guidance and support.
+          
+          As children begin to recognise and name their feelings, they will also
+          need your support to learn to regulate them. This support can be referred to as co-regulation, meaning when you work in cooperation with others to develop skills.
         answers:
           1: They can become overwhelmed
           2: They can become more physically active

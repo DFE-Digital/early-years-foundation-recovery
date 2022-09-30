@@ -7,15 +7,9 @@ brain-development-and-how-children-learn:
         label: |
           Which area of the brain is responsible for motor development?
         assessment_summary:  |
-          The cerebellum is at the back of your head.
-          This is the area in charge of motor development.
-          It controls balance and coordinates movements.
-          The cerebellum combines the signals from the eyes, ears and muscles with motor commands.
+          The cerebellum is at the back of your head. This is the area in charge of motor development. It controls balance and coordinates movements. The cerebellum combines the signals from the eyes, ears and muscles with motor commands.
         assessment_fail_summary: |
-          The cerebellum is at the back of your head.
-          This is the area in charge of motor development.
-          It controls balance and coordinates movements.
-          The cerebellum combines the signals from the eyes, ears and muscles with motor commands.
+          The cerebellum is at the back of your head. This is the area in charge of motor development. It controls balance and coordinates movements. The cerebellum combines the signals from the eyes, ears and muscles with motor commands.
         answers:
           1: Cerebellum
           2: Brain stem
@@ -33,9 +27,11 @@ brain-development-and-how-children-learn:
           In which trimester does the baby’s brain triple in weight?
         assessment_summary: |
           In the third trimester the baby’s brain triples in weight.
+
           Myelination also occurs during this trimester, which is where a fatty substance called myelin begins to coat the neurones.
         assessment_fail_summary: |
           In the third trimester the baby’s brain triples in weight.
+          
           Myelination also occurs during this trimester, which is where a fatty substance called myelin begins to coat the neurones.
         answers:
           1: Trimester 1
@@ -95,6 +91,7 @@ brain-development-and-how-children-learn:
         assessment_fail_summary: |
           Babies will recognise voices they have heard during pregnancy and are more likely to be quickly reassured by the same voices after birth.
           This reduces stress and helps them to recognise feelings, as well as improving the bond between the baby and their parent or carer.
+          
           There are no proven links between a child’s sight and being spoken to during pregnancy.
         answers:
           1: Increased bond between the baby and parent or carer
@@ -451,9 +448,11 @@ brain-development-and-how-children-learn:
           Which of these relationships will a child observe and experience in your setting? (Select all answers that apply)
         assessment_summary: |
           Practitioner to practitioner, practitioner to parent, and child to child interaction will be influential when children are learning about positive relationships.
+
           Children may occasionally see parents interact with each other but this will not be a main influence when children are learning about positive relationships.
         assessment_fail_summary: |
           Practitioner to practitioner, practitioner to parent, and child to child interaction will be influential when children are learning about positive relationships.
+          
           Children may occasionally see parents interact with each other but this will not be a main influence when children are learning about positive relationships.
         answers:
           1: Practitioner to practitioner
