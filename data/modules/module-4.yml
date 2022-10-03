@@ -126,8 +126,8 @@ module-4:
     type: formative_questionnaire
   4-3-1-2a:
     type: text_page
-  ## 4-3-1-2video:
-    ## type: video_page
+  4-3-1-2video:
+    type: video_page
   ##4-3-1-2video2:
     ##type: video_page
   4-3-1-2b:
