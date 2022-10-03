@@ -844,15 +844,6 @@ en:
 
           Critics suggest that Bruner’s theory does not take into consideration an individual’s stage of development or opportunity for self expression.
 
-      2-2-2-5video:
-        heading: Scaffolding children’s learning
-        body: |
-          This video explains the importance of scaffolding children's learning, as part of the early years foundation stage framework, and demonstrates a specific example of helping a group of 3 year olds to recognise their name by scaffolding their learning. There are also some tips on how to support children in this area.
-        video:
-          id: 754787115
-          title: Scaffolding children’s learning
-          provider: vimeo
-
       2-2-2-6:
         notes: true
         heading: |
@@ -919,6 +910,15 @@ en:
           - What could you have done differently?
 
           $BRAIN 
+      
+      2-2-2-7video:
+        heading: Scaffolding children’s learning
+        body: |
+          This video explains the importance of scaffolding children's learning, as part of the early years foundation stage framework, and demonstrates a specific example of helping a group of 3 year olds to recognise their name by scaffolding their learning. There are also some tips on how to support children in this area.
+        video:
+          id: 754787115
+          title: Scaffolding children’s learning
+          provider: vimeo
 
       2-2-2-8:
         heading: |

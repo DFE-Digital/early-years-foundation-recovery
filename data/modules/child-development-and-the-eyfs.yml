@@ -53,16 +53,16 @@ child-development-and-the-eyfs:
     type: formative_questionnaire
   1-1-2-4:
     type: text_page
+  1-1-2-4b:
+    type: formative_questionnaire
   1-1-2-5:
     type: text_page
-  1-1-2-5b:
-    type: formative_questionnaire
   1-1-2-6:
     type: text_page
+  1-1-2-6b:
+    type: formative_questionnaire
   1-1-2-7:
     type: text_page
-  1-1-2-7b:
-    type: formative_questionnaire
   1-1-2-8:
     type: text_page
   1-1-2-9:
@@ -103,8 +103,8 @@ child-development-and-the-eyfs:
     type: formative_questionnaire
   1-2-1-6:
     type: text_page
-  1-2-1-6video:
-    type: video_page
+  ##1-2-1-6video:
+    ##type: video_page
   1-2-1-6b:
     type: formative_questionnaire
 
