@@ -146,8 +146,30 @@ child-development-and-the-eyfs:
           4: Build self-efficacy
         correct_answers:
           - 2
+  
+  1-1-2-4b:
+    questions:
+      1_emotional_maturity:
+        multi_select: False
+        label: |
+          True or false?
 
-  1-1-2-5b:
+          Some children may have become more emotionally mature as a result of the pandemic.
+        assessment_summary: |
+          Some children who have had the opportunity to express and discuss their feelings associated with the pandemic may now have increased emotional maturity.
+
+          Remember that each child in your care will have been impacted by COVID-19 differently. As a practitioner, you should take into account children’s individual emotional starting points to make sure you plan appropriate next steps.
+        assessment_fail_summary: |
+          Some children who have had the opportunity to express and discuss their feelings associated with the pandemic may now have increased emotional maturity.
+          
+          Remember that each child in your care will have been impacted by COVID-19 differently. As a practitioner, you should take into account children’s individual emotional starting points to make sure you plan appropriate next steps.
+        answers:
+          1: "True"
+          2: "False"
+        correct_answers:
+          - 1
+
+  1-1-2-6b:
     questions:
       1_pandemic_positive:
         multi_select: true
@@ -173,28 +195,6 @@ child-development-and-the-eyfs:
         correct_answers:
           - 2
           - 4
-
-  1-1-2-7b:
-    questions:
-      1_emotional_maturity:
-        multi_select: False
-        label: |
-          True or false?
-
-          Some children may have become more emotionally mature as a result of the pandemic.
-        assessment_summary: |
-          Some children who have had the opportunity to express and discuss their feelings associated with the pandemic may now have increased emotional maturity.
-
-          Remember that each child in your care will have been impacted by COVID-19 differently. As a practitioner, you should take into account children’s individual emotional starting points to make sure you plan appropriate next steps.
-        assessment_fail_summary: |
-          Some children who have had the opportunity to express and discuss their feelings associated with the pandemic may now have increased emotional maturity.
-          
-          Remember that each child in your care will have been impacted by COVID-19 differently. As a practitioner, you should take into account children’s individual emotional starting points to make sure you plan appropriate next steps.
-        answers:
-          1: "True"
-          2: "False"
-        correct_answers:
-          - 1
 
   1-1-2-9b:
     questions:
