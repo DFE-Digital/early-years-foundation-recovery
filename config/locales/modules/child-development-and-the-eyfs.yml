@@ -151,10 +151,10 @@ en:
 
           <div class='blockquote-container'>
             <blockquote class='quote'>
-              <p>Intent is what you want pupils to learn: your curriculum thinking and high-level planning.</p>
+              <p>Intent is simply what you want pupils to learn: your curriculum thinking and high-level planning.</p>
               <p>Implementation is the teaching activities you choose to teach your curriculum.</p>
               <p>Impact is when that curriculum content is learned.</p>
-              <cite><a href='https://educationinspection.blog.gov.uk/2021/12/08/curriculum-keeping-it-simple/'>Ofsted, 2021</a></cite>
+              <cite> 'Curriculum: keeping it simple', Ofsted, 2021 </cite>
             </blockquote>
           </div>
 
@@ -706,7 +706,8 @@ en:
 
           $INFO
 
-          The communication and language module of this training (coming soon) will consider the stages of development, the practitioner’s role and effective practice in further detail.
+          The communication and language module of this training considers the stages of development, the practitioner’s role and effective practice in further detail.
+        notes: true
 
       1-1-2-10b:
         # question
@@ -1199,6 +1200,8 @@ en:
           Supporting material is available on the [Foundation Years website](https://foundationyears.org.uk/).
 
           See [guidance to provide support](https://www.gov.uk/government/publications/progress-check-at-age-2) when completing the early years foundation stage (EYFS) progress check at age 2.
+
+          Ofsted's blog ['Curriculum: keeping it simple'](https://educationinspection.blog.gov.uk/2021/12/08/curriculum-keeping-it-simple/) explains how inspectors assess the quality of a school's curriculum. 
 
           $BOOK
 
