@@ -1340,14 +1340,14 @@ en:
           title: Strategies to support language development
           provider: vimeo
 
-      ##4-3-1-2video2:
-        ##heading: Communicating with children in your care
-        ##body: |
-          ##This video shows examples of practitioners interacting and communicating with children during different activities within a setting, as part of the early years foundation stage framework. This video is intended to provide useful tips and ideas on different ways to communicate with children in your care.
-        ##video:
-          ##id: 
-          ##title: Communicating with children in your care
-          ##provider: vimeo
+      4-3-1-2video2:
+        heading: Communicating with children in your care
+        body: |
+          This video shows examples of practitioners interacting and communicating with children during different activities within a setting, as part of the early years foundation stage framework. This video is intended to provide useful tips and ideas on different ways to communicate with children in your care.
+        video:
+          id: 756705363
+          title: Communicating with children in your care
+          provider: vimeo
 
       4-3-2:
         heading: Creating a positive environment
