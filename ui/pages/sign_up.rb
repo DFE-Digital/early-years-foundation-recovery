@@ -9,6 +9,8 @@ module Pages
     element :password_confirmation_field, '#user-password-confirmation-field'
     element :continue_button, 'button.govuk-button', text: 'Continue'
     element :error_summary_title, '#error-summary-title', text: 'There is a problem'
+    element :terms_and_conditions_check_box, '.govuk-checkboxes__label', text:'I confirm that I accept the terms and conditions and privacy policy.'
+
     # Authenticate using email and password
     #
     # @param email [String] login email address (default: completed@example.com)
@@ -21,6 +23,7 @@ module Pages
       email_field.set(email)
       password_field.set(password)
       password_confirmation_field.set(password)
+      terms_and_conditions_check_box.click
       continue_button.click
     end
 

@@ -2,10 +2,10 @@
 
 module Pages
   class MyLearning < Base
-    set_url '/my-learning'
+    set_url '/my-modules'
     #set_url '/my-learning'
 
-    element :heading, 'h1', text: 'My learning'
+    element :heading, 'h1', text: 'My modules'
     element :available_module_title, 'h2', text: 'Available modules'
     element :upcoming_module_title, 'h2', text: 'Upcoming modules'
     element :module_one_link, "a[href='/modules/child-development-and-the-eyfs']"

@@ -8,6 +8,7 @@ module Pages
     element :next_button_1,'input[type="submit"]'
     element :finish_button, '.govuk-button', text: 'Finish'
     element :go_to_my_learning_button, '.govuk-button', text: 'Go to My Learning'
+    element :go_to_my_modules_button, '.govuk-button', text: 'Go to My modules'
 
     element :start_button_module_one, "a[href='/modules/child-development-and-the-eyfs/content-pages/what-to-expect']"
 
@@ -22,8 +23,61 @@ module Pages
     element :disagree, '#questionnaire-1-importance-child-development-4-field'
     element :strongly_disagree, '#questionnaire-1-importance-child-development-5-field'
 
-    element :start_button_module_two, "a[href='/modules/brain-development-and-how-children-learn/content-pages/before-you-start']"
+
+    #element :start_button_module_two, "a[href='/modules/brain-development-and-how-children-learn/content-pages/before-you-start']"
+    element :start_button_module_two, "a[href='/modules/brain-development-and-how-children-learn/content-pages/what-to-expect']"
     element :start_button, 'button.govuk-button', text: 'Start'
+
+    element :a_childs_belief_that_they_can_succeed_radio_button, '.govuk-radios__label', text:'A child’s belief that they can succeed'
+    element :the_teaching_activities_you_choose_radio_button, '.govuk-radios__label', text:'The teaching activities you choose'
+
+    element :communication_issues_check_box,'.govuk-checkboxes__label', text: 'Communication issues'
+    element :inconsistency_check_box,'.govuk-checkboxes__label', text: 'Inconsistency'
+    element :unsuitable_activities_or_experiences_check_box,'.govuk-checkboxes__label', text:'Unsuitable activities or experiences'
+
+    element :express_their_individual_needs_and_preferences_check_box,'.govuk-checkboxes__label', text: 'Express their individual needs and preferences'
+    element :feel_valued_and_important_check_box,'.govuk-checkboxes__label', text: 'Feel valued and important'
+    element :manage_their_behaviour_check_box,'.govuk-checkboxes__label', text: 'Manage their behaviour'
+
+    element :access_to_outdoor_environments_and_activities_radio_button, '.govuk-radios__label', text:'Access to outdoor environments and activities'
+
+    element :summative_radio_button, '.govuk-radios__label', text:'Summative'
+
+    element :create_a_new_numbers_activity_that_involves_the_toy_cars_radio_button, '.govuk-radios__label', text:'Create a new numbers activity that involves the toy cars'
+    element :learn_and_practise_new_vocabulary_radio_button, '.govuk-radios__label', text:'Learn and practise new vocabulary'
+
+    element :copying_older_siblings_during_physical_activity_check_box,'.govuk-checkboxes__label', text:'Copying older siblings during physical activity'
+    element :spending_more_time_outside_check_box, '.govuk-checkboxes__label', text:'Spending more time outside'
+    element :increased_social_and_emotional_development_check_box,'.govuk-checkboxes__label', text: 'Increased social and emotional development'
+    element :increased_concentration_check_box,'.govuk-checkboxes__label', text: 'Increased concentration'
+    element :increased_imagination_and_creativity_check_box,'.govuk-checkboxes__label', text: 'Increased imagination and creativity'
+
+    element :positive_relationships_with_parents_and_carers_check_box,'.govuk-checkboxes__label', text: 'Positive relationships with parents and carers'
+    element :quality_and_consistency_of_care_check_box,'.govuk-checkboxes__label', text: 'Quality and consistency of care'
+    element :equality_of_opportunity_check_box,'.govuk-checkboxes__label', text: 'Equality of opportunity'
+
+    element :helping_children_to_develop_resilience_confidence_and_self_efficacy_check_box,'.govuk-checkboxes__label', text: 'Helping children to develop resilience, confidence and self-efficacy'
+    element :supporting_children_to_gain_new_knowledge_check_box_check_box,'.govuk-checkboxes__label', text: 'Supporting children to gain new knowledge'
+    element :helping_you_plan_a_curriculum_and_environment_that_promotes_success_for_all_check_box, '.govuk-checkboxes__label', text: 'Helping you plan a curriculum and environment that promotes success for all'
+
+    element :encouraging_curiosity_check_box,'.govuk-checkboxes__label', text: 'Encouraging curiosity'
+    element :increasing_engagement_by_using_childrens_interests_check_box,'.govuk-checkboxes__label', text: 'Increasing engagement by using children\'s interests'
+    element :meeting_all_the_needs_of_the_child_check_box,'.govuk-checkboxes__label', text: 'Meeting all the needs of the child'
+
+    element :cooking_check_box,'.govuk-checkboxes__label', text: 'Cooking'
+    element :playing_with_number_related_apps_and_games_check_box,'.govuk-checkboxes__label', text: 'Playing with number related apps and games'
+
+    element :their_expressive_arts_skills_radio_button, '.govuk-radios__label', text:'Their expressive arts skills'
+
+    element :childrens_identity_and_culture_check_box,'.govuk-checkboxes__label', text:'Children\'s identity and culture'
+    element :childrens_interests_and_learning_needs_check_box,'.govuk-checkboxes__label', text:'Children\'s interests and learning needs'
+    element :childrens_individual_communication_needs_check_box,'.govuk-checkboxes__label', text:'Children\'s individual communication needs'
+    element :childrens_previous_experiences_check_box,'.govuk-checkboxes__label', text:'Children\'s previous experiences'
+
+    element :increasing_childrens_imagination_and_creativity_check_box,'.govuk-checkboxes__label', text:'Increasing children’s imagination and creativity'
+    element :increasing_childrens_independence_check_box,'.govuk-checkboxes__label', text:'Increasing children’s independence'
+    element :helping_children_to_navigate_social_skills_like_sharing_and_turn_taking_check_box,'.govuk-checkboxes__label', text:'Helping children to navigate social skills like sharing and turn taking'
+
 
     element :cerebellum_radio_button, '.govuk-radios__label', text: 'Cerebellum'
     element :trimester_three_radio_button, '.govuk-radios__label', text: 'Trimester 3'
@@ -72,6 +126,7 @@ module Pages
     element :laying_the_table_check_box, '.govuk-checkboxes__label', text: 'Laying the table'
     element :allowing_children_to_serve_themselves_check_box, '.govuk-checkboxes__label', text: 'Allowing children to serve themselves'
 
+
     element :parent_to_parent_check_box, '.govuk-checkboxes__label', text: 'Parent to parent'
     element :practitioner_to_practitioner_check_box,'.govuk-checkboxes__label', text: 'Practitioner to practitioner'
     element :practitioner_to_parent_check_box, '.govuk-checkboxes__label', text: 'Practitioner to parent'
@@ -108,7 +163,8 @@ module Pages
     element :increased_vocabulary_check_box,'.govuk-checkboxes__label', text: 'Increased vocabulary'
     element :increased_child_participation_check_box,'.govuk-checkboxes__label', text: 'Increased child participation'
 
-    element :start_button_module_three, "a[href='/modules/personal-social-and-emotional-development/content-pages/before-you-start']"
+    #element :start_button_module_three, "a[href='/modules/personal-social-and-emotional-development/content-pages/before-you-start']"
+    element :start_button_module_three, "a[href='/modules/personal-social-and-emotional-development/content-pages/what-to-expect']"
     element :they_have_positive_emotional_responses_radio_button, '.govuk-radios__label', text:'They have positive emotional responses'
     element :they_believe_they_can_succeed_radio_button, '.govuk-radios__label', text:'They believe they can succeed'
     element :it_will_encourage_self_worth_in_children_radio_button, '.govuk-radios__label', text:'It will encourage self-worth in children'
@@ -145,7 +201,61 @@ module Pages
       #resume_training_button.click
       next_button.click
       sleep(2)
+      # [x] 1st:  what-to-expect
       next_button.click
+      sleep(2)
+      #[x] 2nd:  before-you-start
+      next_button.click
+      sleep(2)
+      #[x] 3rd:  intro
+      next_button.click
+      sleep(2)
+      next_button.click
+      sleep(2)
+      #[_] 4th:  1-1 (submodule 1) Page 0 of 29
+      save_and_continue_button.click
+      sleep(2)
+      a_childs_belief_that_they_can_succeed_radio_button.click
+      sleep(2)
+      #[_] 5th:  1-1-1 (submodule 1 / topic 1.0) Page 1 of 29
+      next_button_1.click
+      sleep(2)
+      next_button.click
+      sleep(2)
+      #[_] 6th:  1-1-1-1 (submodule 1 / topic 1.1) Page 2 of 29
+      save_and_continue_button.click
+      sleep(2)
+      the_teaching_activities_you_choose_radio_button.click
+      #[_] 7th:  1-1-1-1b (submodule 1 / topic 1.1b) Page 3 of 29
+      next_button_1.click
+      sleep(2)
+      next_button.click
+      sleep(2)
+      save_and_continue_button.click
+      sleep(2)
+      save_and_continue_button.click
+      sleep(2)
+      true_radio_button.click
+      sleep(2)
+      next_button_1.click
+      sleep(2)
+      next_button.click
+      sleep(2)
+      save_and_continue_button.click
+      sleep(2)
+      next_button.click
+      sleep(2)
+      communication_issues_check_box.click
+      inconsistency_check_box.click
+      unsuitable_activities_or_experiences_check_box.click
+      next_button_1.click
+      sleep(2)
+      next_button.click
+      sleep(2)
+      save_and_continue_button.click
+      sleep(2)
+      create_a_new_numbers_activity_that_involves_the_toy_cars_radio_button.click
+      next_button_1.click
       sleep(2)
       next_button.click
       sleep(2)
@@ -157,7 +267,8 @@ module Pages
       sleep(2)
       next_button.click
       sleep(2)
-      next_button.click
+      learn_and_practise_new_vocabulary_radio_button.click
+      next_button_1.click
       sleep(2)
       next_button.click
       sleep(2)
@@ -165,7 +276,9 @@ module Pages
       sleep(2)
       next_button.click
       sleep(2)
-      next_button.click
+      copying_older_siblings_during_physical_activity_check_box.click
+      spending_more_time_outside_check_box.click
+      next_button_1.click
       sleep(2)
       next_button.click
       sleep(2)
@@ -173,7 +286,28 @@ module Pages
       sleep(2)
       next_button.click
       sleep(2)
+      true_radio_button.click
+      sleep(2)
+      next_button_1.click
+      sleep(2)
       next_button.click
+      sleep(2)
+      next_button.click
+      sleep(2)
+      save_and_continue_button.click
+      sleep(2)
+      express_their_individual_needs_and_preferences_check_box.click
+      feel_valued_and_important_check_box.click
+      manage_their_behaviour_check_box.click
+      next_button_1.click
+      sleep(2)
+      next_button.click
+      sleep(2)
+      save_and_continue_button.click
+      sleep(2)
+      true_radio_button.click
+      sleep(2)
+      next_button_1.click
       sleep(2)
       next_button.click
       sleep(2)
@@ -181,7 +315,65 @@ module Pages
       sleep(2)
       next_button.click
       sleep(2)
+      save_and_continue_button.click
+      sleep(2)
       next_button.click
+      sleep(2)
+      true_radio_button.click
+      sleep(2)
+      next_button_1.click
+      sleep(2)
+      next_button.click
+      sleep(2)
+      save_and_continue_button.click
+      sleep(2)
+      save_and_continue_button.click
+      sleep(2)
+      access_to_outdoor_environments_and_activities_radio_button.click
+      next_button_1.click
+      sleep(2)
+      next_button.click
+      sleep(2)
+      false_radio_button.click
+      sleep(2)
+      next_button_1.click
+      sleep(2)
+      next_button.click
+      sleep(2)
+      save_and_continue_button.click
+      sleep(2)
+      increased_social_and_emotional_development_check_box.click
+      increased_concentration_check_box.click
+      increased_imagination_and_creativity_check_box.click
+      next_button_1.click
+      sleep(2)
+      next_button.click
+      sleep(2)
+      save_and_continue_button.click
+      sleep(2)
+      next_button.click
+      sleep(2)
+      false_radio_button.click
+      sleep(2)
+      next_button_1.click
+      sleep(2)
+      next_button.click
+      sleep(2)
+      next_button.click
+      sleep(2)
+      save_and_continue_button.click
+      sleep(2)
+      positive_relationships_with_parents_and_carers_check_box.click
+      quality_and_consistency_of_care_check_box.click
+      equality_of_opportunity_check_box.click
+      next_button_1.click
+      sleep(2)
+      next_button.click
+      sleep(2)
+      save_and_continue_button.click
+      sleep(2)
+      summative_radio_button.click
+      next_button_1.click
       sleep(2)
       next_button.click
       sleep(2)
@@ -189,16 +381,7 @@ module Pages
       sleep(2)
       next_button.click
       sleep(2)
-      next_button.click
-      sleep(2)
-      next_button.click
-      sleep(2)
-      next_button.click
-      sleep(2)
-      next_button.click
-      sleep(2)
-      next_button.click
-      sleep(2)
+=begin
       next_button.click
       sleep(2)
       next_button.click
@@ -219,6 +402,60 @@ module Pages
       sleep(2)
       #next_button.click
       sleep(10)
+=end
+    end
+
+    def complete_module_one_test
+      sleep(2)
+      start_test_button.click
+      sleep(2)
+      helping_children_to_develop_resilience_confidence_and_self_efficacy_check_box.click
+      supporting_children_to_gain_new_knowledge_check_box_check_box.click
+      helping_you_plan_a_curriculum_and_environment_that_promotes_success_for_all_check_box.click
+      sleep(2)
+      save_and_continue_button.click
+      sleep(2)
+      false_radio_button.click
+      sleep(2)
+      save_and_continue_button.click
+      sleep(2)
+      scaffolding_radio_button.click
+      sleep(2)
+      save_and_continue_button.click
+      sleep(4)
+      encouraging_curiosity_check_box.click
+      increasing_engagement_by_using_childrens_interests_check_box.click
+      meeting_all_the_needs_of_the_child_check_box.click
+      sleep(2)
+      save_and_continue_button.click
+      sleep(2)
+      cooking_check_box.click
+      playing_with_number_related_apps_and_games_check_box.click
+      sleep(2)
+      save_and_continue_button.click
+      sleep(2)
+      their_expressive_arts_skills_radio_button.click
+      save_and_continue_button.click
+      sleep(2)
+      true_radio_button.click
+      sleep(2)
+      save_and_continue_button.click
+      sleep(2)
+      childrens_identity_and_culture_check_box.click
+      childrens_interests_and_learning_needs_check_box.click
+      childrens_individual_communication_needs_check_box.click
+      childrens_previous_experiences_check_box.click
+      save_and_continue_button.click
+      sleep(2)
+      increasing_childrens_imagination_and_creativity_check_box.click
+      increasing_childrens_independence_check_box.click
+      helping_children_to_navigate_social_skills_like_sharing_and_turn_taking_check_box.click
+      save_and_continue_button.click
+      sleep(2)
+      false_radio_button.click
+      sleep(2)
+      finish_test_button.click
+      sleep(5)
     end
 
     def complete_module_one_confidence_check
@@ -244,6 +481,8 @@ module Pages
       start_button_module_two.click
       #resume_training_button.click
       sleep(10)
+      next_button.click
+      sleep(2)
       next_button.click
       sleep(2)
       next_button.click
@@ -400,10 +639,14 @@ module Pages
       next_button.click
       sleep(2)
       next_button.click
+      sleep(2)
+      next_button.click
       sleep(90)
       four_radio_button.click
       sleep(2)
       next_button_1.click
+      sleep(2)
+      next_button.click
       sleep(2)
       next_button.click
       sleep(2)
@@ -578,6 +821,8 @@ module Pages
       sleep(2)
       next_button.click
       sleep(2)
+      save_and_continue_button.click
+      sleep(2)
       true_radio_button.click
       sleep(2)
       next_button_1.click
@@ -590,7 +835,7 @@ module Pages
       sleep(2)
       next_button.click
       sleep(2)
-      next_button.click
+      save_and_continue_button.click
       sleep(2)
       four_radio_button.click
       sleep(2)
@@ -598,7 +843,7 @@ module Pages
       sleep(2)
       next_button.click
       sleep(2)
-      next_button.click
+      save_and_continue_button.click
       sleep(2)
       true_radio_button.click
       sleep(2)
@@ -609,6 +854,18 @@ module Pages
       next_button.click
       sleep(2)
       next_button.click
+      sleep(2)
+      next_button.click
+      sleep(3)
+      save_and_continue_button.click
+      sleep(2)
+      next_button.click
+      sleep(3)
+      next_button.click
+      sleep(3)
+      save_and_continue_button.click
+      sleep(2)
+      save_and_continue_button.click
       sleep(2)
       next_button.click
       sleep(3)
@@ -624,7 +881,7 @@ module Pages
       sleep(2)
       next_button.click
       sleep(2)
-      next_button.click
+      save_and_continue_button.click
       sleep(2)
       intervene_radio_button.click
       sleep(2)
@@ -648,7 +905,7 @@ module Pages
       sleep(2)
       next_button.click
       sleep(2)
-      next_button.click
+      save_and_continue_button.click
       sleep(2)
       next_button.click
       sleep(2)
@@ -698,7 +955,9 @@ module Pages
       sleep(2)
       next_button.click
       sleep(2)
-      next_button.click
+      save_and_continue_button.click
+      sleep(2)
+      save_and_continue_button.click
       sleep(2)
       communication_radio_button.click
       sleep(2)
@@ -706,7 +965,7 @@ module Pages
       sleep(2)
       next_button.click
       sleep(2)
-      next_button.click
+      save_and_continue_button.click
       sleep(2)
       next_button.click
       sleep(2)
@@ -740,7 +999,7 @@ module Pages
       sleep(2)
       next_button.click
       sleep(2)
-      next_button.click
+      save_and_continue_button.click
       sleep(2)
       next_button.click
       sleep(2)

@@ -13,13 +13,16 @@ describe 'Complete modules' do
         ui.my_learning.module_one_link.click
         sleep(10)
         ui.modules.complete_module_one
-        ui.modules.complete_module_one_confidence_check
-        expect(ui.modules).to have_content 'Thank you'
+        ui.modules.complete_module_one_test
+        #ui.modules.complete_module_one_confidence_check
+        #expect(ui.modules).to have_content 'Thank you'
         sleep(2)
         ui.interruption_page.finish_button.click
         sleep(10)
         expect(ui.modules).to have_content 'Get your certificate'
         sleep(10)
+        ui.confidence_check.load
+        ui.modules.complete_module_one_confidence_check
       end
 
       describe 'Module two ' do
@@ -40,7 +43,7 @@ describe 'Complete modules' do
           ui.modules.complete_module_two_confidence_check
           expect(ui.modules).to have_content 'Get your certificate'
           sleep(2)
-          ui.modules.go_to_my_learning_button.click
+          ui.modules.go_to_my_modules_button.click
           sleep(10)
         end
 
