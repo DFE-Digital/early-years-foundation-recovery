@@ -5,7 +5,7 @@ describe 'home page' do
     include_context 'as guest'
 
     before do
-        ui.home.load
+      ui.home.load
     end
 
     it 'is displayed when the user clicks the header logo' do

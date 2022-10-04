@@ -8,6 +8,5 @@ module Sections
     element :privacy_policy, "a[href='/privacy-policy']", text: 'Privacy policy'
     element :feedback, "a[href='#FEEDBACK_URL_env_var_missing']", text: 'Feedback'
     element :contact, "a[href='https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-ZowRD4JFgJFvn7gnkFCHDBUMDlIRzVDRlZHTDFNRzFDSUw1V1hFTUFHVyQlQCN0PWcu']", text: 'Contact'
-
   end
 end
