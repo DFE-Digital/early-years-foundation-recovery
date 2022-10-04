@@ -1,3 +1,7 @@
+# Page model for pages with module_item specific content
+#
+# Pagination is optional for these pages based on type
+#
 class ContentPage
   include ActiveModel::Validations
   include ActiveModel::Model
@@ -12,30 +16,26 @@ class ContentPage
 
   # @return [String]
   def heading
-    if static_page?
-      I18n.t("#{type}.heading")
-    else
-      translate(:heading)
-    end
+    translate(:heading)
   end
 
   # @return [String]
   def body
-    if static_page?
-      static_body
-    else
-      translate(:body)
-    end
-  end
-
-  # @return [String]
-  def image
-    translate(:image)
+    translate(:body)
   end
 
   # @return [Boolean]
   def notes?
     translate(:notes).present?
+  end
+
+  # @return [Boolean]
+  def page_numbers?
+    case module_item.type
+    when /intro|thankyou/ then false
+    else
+      true
+    end
   end
 
   # @return [ModuleItem]
@@ -51,21 +51,5 @@ class ContentPage
   # @return [Boolean]
   def summative?
     module_item.parent.summative?
-  end
-
-private
-
-  # @return [Boolean]
-  def static_page?
-    module_item.confidence_intro? || module_item.assessment_intro? || module_item.ending_intro?
-  end
-
-  # @return [String]
-  def static_body
-    I18n.t(
-      "#{type}.body",
-      passmark: module_item.parent.summative_threshold,
-      feedback_url: I18n.t("modules.#{training_module}.#{module_item.name}.url"),
-    )
   end
 end

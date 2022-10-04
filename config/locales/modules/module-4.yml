@@ -2,7 +2,10 @@
 en:
   modules:
     module-4:
+      what-to-expect:
+        # preamble
       before-you-start:
+        # preamble
       intro:
         heading: Supporting language development in the early years
         body: |
@@ -216,6 +219,11 @@ en:
 
           $BRAIN
 
+      4-1-1-1c:
+        # question
+      4-1-1-1d:
+        # question
+
       4-1-1-2a:
         heading: |
           The linguistic stage: one and two word sentences
@@ -285,6 +293,8 @@ en:
 
           $INFO
 
+      4-1-1-2b:
+        # question
 
       4-1-1-3:
         notes: true
@@ -421,6 +431,10 @@ en:
 
           $BRAIN
 
+      4-1-1-4b:
+        # question
+      4-1-1-4c:
+        # question
 
       4-1-2:
         heading: Theories of language development
@@ -577,6 +591,13 @@ en:
 
           $INFO
 
+      4-1-2-4b:
+        # question
+      4-1-2-4c:
+        # question
+      4-1-2-4d:
+        # question
+
       4-1-3:
         heading: Factors affecting language development
         body: |
@@ -677,6 +698,9 @@ en:
 
           $BRAIN
 
+      4-1-3-2b:
+        # question
+
       4-1-3-3:
         heading: English as an additional language
         body: |
@@ -742,6 +766,11 @@ en:
           - How could you work with the child's parents or carers to support the child's language development?
 
           $BRAIN
+
+      4-1-3-4b:
+        # question
+      4-1-3-4c:
+        # question
 
       4-2:
         heading: The impact of language skills on learning and behaviour
@@ -809,6 +838,9 @@ en:
           - Is there anything else you could do to support children with SLCN?
 
           $BRAIN
+
+      4-2-1-1b:
+        # question
 
       4-2-1-2:
         heading: Early intervention for speech, language and communication needs
@@ -932,6 +964,9 @@ en:
 
           You will look at observation, assessment and planning in more detail in a future module.
 
+      4-2-1-5b:
+        # question
+
       4-2-2:
         heading: How language development supports personal, social and emotional development
         body: |
@@ -1010,6 +1045,9 @@ en:
           - Is there anything you could change or improve?
 
           $BRAIN
+
+      4-2-2-1b:
+        # question
 
       4-2-2-2:
         heading: The impact on building relationships and social skills
@@ -1263,6 +1301,9 @@ en:
 
           $BRAIN
 
+      4-3-1-1b:
+        # question
+
       4-3-1-2a:
         heading: Strategies to help children develop language and communication skills
         body: |
@@ -1285,9 +1326,9 @@ en:
 
           Sharing commentary will support children to name everyday items and understand routine tasks.
 
-          Routine tasks such as nappy changing and mealtimes are also ideal opportunities to engage children in commentary and conversation. For younger children this will be an opportunity to identify objects, foods and colours. These are also good times to ask questions, such as whether the children are enjoying their food or what they can see around the changing mat. 
-          
-          Even when you are not expecting a response, this is a chance to show children the importance of turn taking in conversation. You should acknowledge any attempt to respond positively, to reinforce further attempts. Older children may take these opportunities to discuss related topics, or to have a general discussion they are keen to share. 
+          Routine tasks such as nappy changing and mealtimes are also ideal opportunities to engage children in commentary and conversation. For younger children this will be an opportunity to identify objects, foods and colours. These are also good times to ask questions, such as whether the children are enjoying their food or what they can see around the changing mat.
+
+          Even when you are not expecting a response, this is a chance to show children the importance of turn taking in conversation. You should acknowledge any attempt to respond positively, to reinforce further attempts. Older children may take these opportunities to discuss related topics, or to have a general discussion they are keen to share.
 
           ##Expansion
 
@@ -1330,7 +1371,10 @@ en:
           - which songs to sing
           - which book to read
           - creative materials, for example which colour of paint to use
-      
+
+      4-3-1-2b:
+        # question
+
       4-3-1-2video:
         heading: Strategies to support language development
         body: |
@@ -1439,6 +1483,9 @@ en:
 
           $INFO
 
+      4-3-2-1b:
+        # question
+
       4-3-2-2a:
         heading: A balanced approach
         body: |
@@ -1477,6 +1524,9 @@ en:
           Some children will feel more confident in smaller groups, or groups they have created themselves. This will build their confidence and lead to increased conversation.
 
           When children are more curious or interested in a topic, they will ask more questions. However, if an adult is not involved, the child may not receive the correct answers. You can use the child’s particular interest to plan adult led or 1 to 1 activities. The child can then ask their questions and you can extend the discussion further.
+
+      4-3-2-2b:
+        # question
 
       4-3-2-3:
         heading: A diverse environment
@@ -1697,6 +1747,9 @@ en:
 
           $BRAIN
 
+      4-3-3-1b:
+        # question
+
       4-3-3-2:
         heading: Effective assessment and collaboration
         body: |
@@ -1704,7 +1757,7 @@ en:
 
           It is important that you continue to share information about children’s language development with parents, carers and other professionals. This helps to ensure that the care and support the children receive meets their needs.
 
-          ##Effective assessment
+          ## Effective assessment
 
           You will be able to use your knowledge of child development and the individual child to make a professional judgement about:
 
@@ -1719,7 +1772,7 @@ en:
           - what you want to know from the assessment
           - how the information gathered will be useful
 
-          ##Effective collaboration
+          ## Effective collaboration
 
           You should share your assessment findings to ensure that children receive the most appropriate, high quality care for their needs.
 
@@ -1798,60 +1851,46 @@ en:
           $BOOK
 
       4-4-1:
-        heading: End of module test
-        body: |
-          This end of module test is here to revisit what you have learned and the impact on your practice. It is not aimed to provide a pass or fail.
-
-          ##Before you start
-
-          This test has 10 multiple choice questions.
-
-          You must answer all of the questions.
-
-          You can review your total score for the test at the end.
-
-          To receive a certificate of achievement for this module, you need to receive an overall score of at least 70%.
-
-          If you do not score 70%, you will be able to see which questions you got wrong. You can repeat the test to improve your score as many times as you want to.
+        # assessment intro
+      4-4-1-1:
+        # question
+      4-4-1-2:
+        # question
+      4-4-1-3:
+        # question
+      4-4-1-4:
+        # question
+      4-4-1-5:
+        # question
+      4-4-1-6:
+        # question
+      4-4-1-7:
+        # question
+      4-4-1-8:
+        # question
+      4-4-1-9:
+        # question
+      4-4-1-10:
+        # question
+      4-4-1-11:
+        # results
 
       4-4-2:
-        url: "https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxUREo3TUdDT1ZQWjNJRjNGQkUxT0xRV1E5SSQlQCN0PWcu"
+        # confidence intro
+      4-4-2-1:
+        # question
+      4-4-2-2:
+        # question
+      4-4-2-3:
+        # question
+      4-4-2-4:
+        # question
+      4-4-2-5:
+        # question
+      4-4-2-6:
+        # question
+      4-4-2-7:
+        form: yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxUREo3TUdDT1ZQWjNJRjNGQkUxT0xRV1E5SSQlQCN0PWcu
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      4-4-3:
+        # certificate

@@ -218,6 +218,6 @@ personal-social-and-emotional-development:
     type: confidence_questionnaire
   
   3-4-3-7:
-    type: ending_intro
+    type: thankyou
   3-4-4:
     type: certificate

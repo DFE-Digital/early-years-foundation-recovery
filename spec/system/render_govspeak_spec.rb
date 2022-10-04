@@ -15,7 +15,7 @@ RSpec.describe 'Govspeak', type: :system do
     it_behaves_like 'a Govspeak page'
   end
 
-  context 'with formative question' do
+  xcontext 'with formative question' do
     let(:path) { '/modules/alpha/questionnaires/1-2-1-1' }
 
     it_behaves_like 'a Govspeak page'

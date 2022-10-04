@@ -19,16 +19,17 @@ class ModuleItem < YamlBase
 
   # @return [Hash] 'Type' to 'View object' mapping
   MODELS = {
-    # intros
+    # common
+    interruption_page: CommonPage,
+    icons_page: CommonPage,
+    assessment_intro: CommonPage,
+    assessment_results: CommonPage,
+    confidence_intro: CommonPage,
+    thankyou: CommonPage,
+    certificate: CommonPage,
+    # content
     module_intro: ContentPage,
     sub_module_intro: ContentPage,
-    assessment_intro: ContentPage,
-    confidence_intro: ContentPage,
-    ending_intro: ContentPage,
-    # static content
-    interruption_page: ContentPage,
-    icons_page: ContentPage,
-    # dynamic content
     text_page: ContentPage,
     # video
     video_page: VideoPage,
@@ -36,10 +37,6 @@ class ModuleItem < YamlBase
     confidence_questionnaire: Questionnaire,
     formative_questionnaire: Questionnaire,
     summative_questionnaire: Questionnaire,
-    # test score
-    assessment_results: AssessmentResultsPage,
-    # pdf
-    certificate: CertificatePage,
   }.freeze
 
   # @return [Regexp] 2nd digit if present: 1-[1]-1-1
@@ -160,8 +157,9 @@ class ModuleItem < YamlBase
   # @return [Boolean]
   delegate :valid?, to: :model
 
+  # @return [Boolean]
   def notes?
-    model.notes? if model.respond_to?(:notes?)
+    model.respond_to?(:notes?) ? model.notes? : false
   end
 
   # @return [Boolean]
@@ -205,8 +203,8 @@ class ModuleItem < YamlBase
   end
 
   # @return [Boolean]
-  def ending_intro?
-    type.eql?('ending_intro')
+  def thankyou?
+    type.eql?('thankyou')
   end
 
   def certificate?

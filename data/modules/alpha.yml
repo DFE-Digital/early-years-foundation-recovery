@@ -93,6 +93,6 @@ alpha:
   1-3-3-3:
     type: confidence_questionnaire
   1-3-3-4:
-    type: ending_intro
+    type: thankyou
   1-3-4:
     type: certificate

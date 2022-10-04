@@ -4,7 +4,9 @@ en:
   modules:
     bravo:
       what-to-expect:
+        # preamble
       before-you-start:
+        # preamble
       intro:
         heading: module_intro
         body: intro
@@ -25,6 +27,7 @@ en:
       1-1-2-1:
         heading: text_page
         body: page 3 of sub 1 (topic 2 page 2)
+
       # --------------------------------------
       1-2:
         heading: sub_module_intro
@@ -44,10 +47,10 @@ en:
         body: page 3 of sub 2 (topic 2 page 2)
       # --------------------------------------
       1-2-2-2:
-        # summative_questionnaire
+        # question
       1-2-2-3:
-        # summative_questionnaire
+        # question
       1-2-2-4:
-        # assessment results
+        # results
       1-2-3:
         # certificate

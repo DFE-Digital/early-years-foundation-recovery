@@ -212,6 +212,6 @@ module-4:
   4-4-2-6: 
     type: confidence_questionnaire
   4-4-2-7: 
-    type: ending_intro 
+    type: thankyou
   4-4-3: 
     type: certificate

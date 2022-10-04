@@ -18,7 +18,7 @@ class ContentPagesController < ApplicationController
     elsif module_item.assessment_results?
       redirect_to training_module_assessment_result_path(training_module_name, module_item)
     else
-      render content_page_partial(module_item)
+      render_content_page_partial
     end
   end
 
@@ -40,12 +40,10 @@ private
     @training_module_name ||= module_params[:training_module_id]
   end
 
-  def content_page_partial(module_item)
-    case module_item.type
-    when /intro/ then 'intro_page'
-    else
-      module_item.type
-    end
+  def render_content_page_partial
+    render module_item.type
+  rescue ActionView::MissingTemplate
+    render 'text_page'
   end
 
   def module_params
