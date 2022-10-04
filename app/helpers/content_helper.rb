@@ -3,7 +3,14 @@ module ContentHelper
   # @param markdown [String]
   # @return [String]
   def translate_markdown(markdown)
-    raw Govspeak::Document.to_html(markdown, sanitize: false)
+    output = Govspeak::Document.to_html(markdown, sanitize: false)
+
+    if output.exclude?("class='govuk-link'")
+      output['<a class="'] = '<a class="govuk-link' if output.include?('<a class="')
+      output['<a'] = '<a class="govuk-link"' if output.include?('<a')
+    end
+
+    raw output
   end
 
   # Date format guidelines: "1 June 2002"
