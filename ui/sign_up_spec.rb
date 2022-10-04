@@ -10,7 +10,6 @@ describe 'Sign up page' do
 
     it 'can sign up Successfully' do
       ui.sign_up.with_email_and_password
-      #add terms check box select in method
       expect(ui.check_your_email).to have_heading
     end
 
@@ -23,7 +22,5 @@ describe 'Sign up page' do
       ui.sign_up.with_invalid_email_and_password
       expect(ui.sign_up).to have_error_summary_title
     end
-
-
   end
 end

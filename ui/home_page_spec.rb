@@ -5,7 +5,7 @@ describe 'home page' do
     include_context 'as guest'
 
     before do
-      ui.home.load
+        ui.home.load
     end
 
     it 'is displayed when the user clicks the header logo' do
@@ -37,7 +37,6 @@ describe 'home page' do
         expect(ui.guest_about_this_training_course).to be_displayed
         expect(ui.guest_about_this_training_course).to have_heading
       end
-
     end
   end
 end

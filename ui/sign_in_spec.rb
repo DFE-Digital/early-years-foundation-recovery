@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#ER-124: 2. Sign-in error messages for invalid or not recognised credentials
+# ER-124: 2. Sign-in error messages for invalid or not recognised credentials
 
 describe 'Sign in page' do
   context 'when unauthenticated' do
@@ -35,6 +35,5 @@ describe 'Sign in page' do
       ui.sign_in.forgotten_my_password_link.click
       expect(ui.forgotten_my_password).to have_heading
     end
-
   end
 end

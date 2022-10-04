@@ -11,7 +11,6 @@ module Pages
     element :other_setting_field, '#user-setting-type-other-field'
     element :nursery_radio_button2, './/label[contains(text(),"nursery")]/input[@id="user-setting-type-nursery-field"]'
 
-
     element :button, 'button.govuk-button', text: 'Save'
   end
 end

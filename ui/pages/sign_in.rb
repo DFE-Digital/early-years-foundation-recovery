@@ -8,7 +8,7 @@ module Pages
     element :password_field, '#user-password-field'
     element :sign_in_button, 'button.govuk-button', text: 'Sign in'
     element :warning_title, '#govuk-notification-banner-title', text: 'Warning'
-    element :problem_signing_in,'.govuk-details__summary-text'
+    element :problem_signing_in, '.govuk-details__summary-text'
     element :forgotten_my_password_link, '.govuk-link', text: 'I have forgotten my password'
     # Authenticate using email and password
     #
@@ -34,7 +34,6 @@ module Pages
       email_field.set(email)
       password_field.set(password)
       sign_in_button.click
-
     end
 
     def with_invalid_email_and_password(email = nil, password = nil)
@@ -46,7 +45,6 @@ module Pages
       email_field.set(email)
       password_field.set(password)
       sign_in_button.click
-
     end
   end
 end

@@ -5,6 +5,6 @@ module Pages
     set_url '/my-account/check-email-confirmation'
 
     element :heading, 'h1', text: 'Check your email'
-    element :back_link, '.govuk-back-link', text:"Back"
+    element :back_link, '.govuk-back-link', text: 'Back'
   end
 end

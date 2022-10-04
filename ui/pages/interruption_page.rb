@@ -6,8 +6,7 @@ module Pages
 
     element :next_button, '.govuk-button', text: 'Next'
     element :previous_button, 'button.govuk-button', text: 'Previous'
-    element :next_button_1,'input[type="submit"]'
+    element :next_button_1, 'input[type="submit"]'
     element :finish_button, '.govuk-button', text: 'Finish'
-
   end
 end

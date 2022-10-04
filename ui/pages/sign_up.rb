@@ -9,13 +9,13 @@ module Pages
     element :password_confirmation_field, '#user-password-confirmation-field'
     element :continue_button, 'button.govuk-button', text: 'Continue'
     element :error_summary_title, '#error-summary-title', text: 'There is a problem'
-    element :terms_and_conditions_check_box, '.govuk-checkboxes__label', text:'I confirm that I accept the terms and conditions and privacy policy.'
+    element :terms_and_conditions_check_box, '.govuk-checkboxes__label', text: 'I confirm that I accept the terms and conditions and privacy policy.'
 
     # Authenticate using email and password
     #
     # @param email [String] login email address (default: completed@example.com)
     # @param password [String] login password (default: StrongPassword)
-    def with_email_and_password(email = nil, password = nil, confirmation = nil)
+    def with_email_and_password(email = nil, password = nil, _confirmation = nil)
       wait_until_header_visible
       email ||= Faker::Internet.email
       password ||= ENV.fetch('USER_PASSWORD', 'StrongPassword')
@@ -37,7 +37,6 @@ module Pages
       password_field.set(password)
       password_confirmation_field.set(password)
       continue_button.click
-
     end
 
     def with_invalid_email_and_password(email = nil, password = nil)
@@ -51,6 +50,5 @@ module Pages
       password_confirmation_field.set(password)
       continue_button.click
     end
-
   end
 end

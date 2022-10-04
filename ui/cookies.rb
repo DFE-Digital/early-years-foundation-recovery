@@ -14,5 +14,4 @@ describe 'Cookies policy', er_138: true do
   it 'then the page has a heading' do
     expect(ui.cookies).to have_heading
   end
-
 end

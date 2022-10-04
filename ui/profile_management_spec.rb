@@ -48,7 +48,7 @@ describe 'Profile management' do
       expect(ui.edit_postcode).to have_error_summary_title
     end
 
-    #ER-209: My account page unhappy path - Edit your settings post code
+    # ER-209: My account page unhappy path - Edit your settings post code
     it 'edit postcode with random' do
       expected_post_code = Faker::Address.postcode
       expect(ui.my_account).to be_displayed
