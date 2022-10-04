@@ -102,8 +102,8 @@ personal-social-and-emotional-development:
     type: formative_questionnaire
   3-2-1-4:
     type: text_page
-  ##3-2-1-4video:
-    ##type: video_page
+  3-2-1-4video:
+    type: video_page
 
   3-2-2:
     type: text_page
