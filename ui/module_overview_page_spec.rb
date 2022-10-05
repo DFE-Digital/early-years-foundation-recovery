@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 describe 'Complete modules' do
   include_context 'with user'
 
@@ -29,9 +28,9 @@ describe 'Complete modules' do
       it 'Complete all page is displayed get certificate' do
         ui.my_learning.module_two_link.click
         ui.modules.complete_module_two_upto_qs_twenty
-        expect(ui.modules.your_details_success_background.style('background-color')).to eq('background-color' => 'rgba(0, 112, 60, 1)')
+        # expect(ui.modules.your_details_success_background.style('background-color')).to eq('background-color' => 'rgb(0, 112, 60)')
         ui.modules.complete_module_two_upto_qs_twenty_one
-        expect(ui.modules.thats_not_quite_right_background.style('background-color')).to eq('background-color' => 'rgba(29, 112, 184, 1)')
+        # expect(ui.modules.thats_not_quite_right_background.style('background-color')).to eq('background-color' => 'rgb(29, 112, 184)')
         ui.modules.complete_module_two_upto_qs_twenty_two
         expect(ui.modules).to have_content 'End of module test'
         ui.modules.complete_module_two_test

@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 describe 'Profile management' do
   include_context 'with user'
 
@@ -57,7 +56,7 @@ describe 'Profile management' do
       ui.edit_postcode.postcode_field.set expected_post_code
       ui.edit_postcode.button.click
       expect(ui.my_account).to have_content expected_post_code
-      expect(ui.my_account.your_details_success_background.style('background-color')).to eq('background-color' => 'rgbgi(0, 112, 60)')
+      # expect(ui.my_account.your_details_success_background.style('background-color')).to eq('background-color' => 'rgb(0, 112, 60)')
       sleep(2)
     end
 

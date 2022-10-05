@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 describe 'About this training course' do
   context 'when unauthenticated' do
     include_context 'as guest'

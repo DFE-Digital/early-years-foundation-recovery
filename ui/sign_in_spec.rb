@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # ER-124: 2. Sign-in error messages for invalid or not recognised credentials
-
 describe 'Sign in page' do
   context 'when unauthenticated' do
     include_context 'as guest'

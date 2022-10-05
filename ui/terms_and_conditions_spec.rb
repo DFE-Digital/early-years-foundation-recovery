@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 describe 'Terms and conditions', er_136: true do
   include_context 'as guest'
 

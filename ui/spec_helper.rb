@@ -20,7 +20,7 @@ require_relative './support/shared/with_guest'
 ENV['BASE_URL'] ||= 'http://localhost:3000'
 
 # If no browser is chosen, then default to the following browser
-ENV['BROWSER'] ||= 'chrome'
+ENV['BROWSER'] ||= 'firefox'
 
 %w[drivers sections pages].each do |component|
   Dir[Pathname(__dir__).realpath.join("#{component}/*")].each(&method(:require))
