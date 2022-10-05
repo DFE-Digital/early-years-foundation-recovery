@@ -22,6 +22,7 @@ class ModuleItem < YamlBase
     # common
     interruption_page: CommonPage,
     icons_page: CommonPage,
+    summary_intro: CommonPage,
     assessment_intro: CommonPage,
     assessment_results: CommonPage,
     confidence_intro: CommonPage,

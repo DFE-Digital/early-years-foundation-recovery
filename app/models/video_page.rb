@@ -52,7 +52,7 @@ class VideoPage < ContentPage
     @module_item ||= ModuleItem.find_by(training_module: training_module, name: name)
   end
 
-  private
+private
 
   # @return [String]
   def transcript_file

@@ -1484,16 +1484,7 @@ en:
           Research shows that children with higher levels of expressive language develop self-regulation faster.
 
       3-4:
-        heading: Summary and next steps
-        body: |
-          You have reached the end of this module's training content.
-
-          This next section of the module includes:
-
-          - a recap of what you have learned
-          - the end of module test
-          - an opportunity to reflect on your learning
-          - the chance to give us feedback about the module
+        # summary intro
 
       3-4-1:
         heading: Recap and further reading

@@ -153,7 +153,7 @@ brain-development-and-how-children-learn:
   # ----------------------------------------------------------------------------
 
   2-3:
-    type: sub_module_intro
+    type: summary_intro
   2-3-1:
     type: sub_module_intro
 

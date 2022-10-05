@@ -138,16 +138,8 @@ en:
 
       # --------------------------------------
       1-3:
-        heading: Summary and next steps
-        body: |
-          You have reached the end of this module's training content.
+        # summary intro
 
-          This next section of the module includes:
-
-          - a recap of what you have learned
-          - the end of module test
-          - an opportunity to reflect on your learning
-          - the chance to give us feedback about the module
       1-3-1:
         heading: Recap
         body: |
