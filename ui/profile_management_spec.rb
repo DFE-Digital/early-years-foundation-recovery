@@ -57,7 +57,7 @@ describe 'Profile management' do
       ui.edit_postcode.postcode_field.set expected_post_code
       ui.edit_postcode.button.click
       expect(ui.my_account).to have_content expected_post_code
-      expect(ui.my_account.your_details_success_background.style('background-color')).to eq('background-color' => 'rgba(0, 112, 60, 1)')
+      expect(ui.my_account.your_details_success_background.style('background-color')).to eq('background-color' => 'rgba(0, 112, 60)')
       sleep(2)
     end
 

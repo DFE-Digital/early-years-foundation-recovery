@@ -268,7 +268,7 @@ module Pages
       next_button.click
       sleep(2)
       next_button.click
-      sleep(2)
+      sleep(3)
       next_button.click
       sleep(2)
       copying_older_siblings_during_physical_activity_check_box.click
