@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 describe 'Sign up page' do
   context 'when unauthenticated' do
     include_context 'as guest'

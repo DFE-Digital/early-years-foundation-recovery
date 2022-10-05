@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 describe 'Profile management' do
   include_context 'with user'
 
