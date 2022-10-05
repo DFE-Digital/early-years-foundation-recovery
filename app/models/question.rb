@@ -10,7 +10,7 @@ class Question < OpenStruct
   # @return [String]
   def to_partial_path
     fields = multi_select? ? :check_boxes : :radio_buttons
-    "questionnaires/question_#{fields}"
+    "questionnaires/#{questionnaire.type}_#{fields}"
   end
 
   # @return [Boolean] radio_buttons or check_boxes

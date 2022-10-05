@@ -1,0 +1,18 @@
+=govuk_heading 'Learning check', size: 'l'
+= f.govuk_check_boxes_fieldset question.name, legend: { text: translate_markdown(question.label), hidden: question.legend_hidden? } do
+  .prompt.gem-c-govspeak
+    .govuk-grid-row 
+      .govuk-grid-column-one-quarter
+        = icon(:question)
+      .govuk-grid-column-three-quarters 
+        =govuk_heading 'Check your understanding', tag: :h2, size: 'm'
+        div class='govuk-!-margin-botton-4 govuk-!-margin-top-4'
+          = translate_markdown(question.body)
+
+          - question.fields.each do |id, label, checked|
+            = f.govuk_check_box question.name,
+              id,
+              label: { text: label },
+              link_errors: true,
+              checked: checked,
+              disabled: question.disabled?
