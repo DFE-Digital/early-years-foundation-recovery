@@ -1,9 +1,9 @@
 ---
 personal-social-and-emotional-development:
   what-to-expect:
-    type: expectation_page
-  before-you-start:
     type: interruption_page
+  before-you-start:
+    type: icons_page
   intro:
     type: module_intro
 
@@ -37,7 +37,19 @@ personal-social-and-emotional-development:
 
   3-1-2:
     type: text_page
-  3-1-2-1:
+  3-1-2-1a:
+    type: text_page
+  3-1-2-1b:
+    type: text_page
+  3-1-2-1c:
+    type: text_page
+  3-1-2-1d:
+    type: text_page
+  3-1-2-1e:
+    type: text_page
+  3-1-2-1f:
+    type: text_page
+  3-1-2-1g:
     type: text_page
   3-1-2-2a:
     type: text_page
@@ -90,6 +102,8 @@ personal-social-and-emotional-development:
     type: formative_questionnaire
   3-2-1-4:
     type: text_page
+  3-2-1-4video:
+    type: video_page
 
   3-2-2:
     type: text_page

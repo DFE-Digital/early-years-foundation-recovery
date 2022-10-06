@@ -20,7 +20,7 @@ The data are store in `TrainingModule` instances.
 ```yaml
 training_module_name:
   title: The module name as it will appear on the page
-  thumbnail: Image file name as seen in a card within the my learning page
+  thumbnail: Image file name as seen in a card within the my modules page
   description: The module description
   depends_on: The name of a dependent module that must be completed before this module can be started
 ```

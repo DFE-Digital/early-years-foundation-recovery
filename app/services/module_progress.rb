@@ -24,29 +24,69 @@ class ModuleProgress
     page.properties['id'] if page.present?
   end
 
+  # Assumes gaps in page views due to skipping or revisions to content
+  # @return [ModuleItem]
+  def furthest_page
+    visited.last
+  end
+
+  # @return [ModuleItem]
+  def final_content_page
+    mod.module_course_items.last
+  end
+
   # Last visited module item with fallback to first item
   # @return [ModuleItem]
   def resume_page
-    unvisited.first&.previous_item || mod.expectation_page
+    unvisited.first&.previous_item || mod.icons_page
+  end
+
+  # Identify new content that has not been seen and would effect module state
+  #
+  # @see FillPageViews task
+  # @return [Boolean]
+  def skipped?
+    if unvisited.none?
+      false
+    # elsif key_event('module_complete') && unvisited.any?
+    elsif module_item_events(final_content_page.name).first && unvisited.any?
+      true
+    elsif gaps?
+      true
+    end
   end
 
   # @see CourseProgress
   # @return [Boolean]
   def completed?
-    all?(mod.module_items)
+    all?(mod.module_course_items)
   end
 
   # Completed date for module
-  # @return [DateTime]
+  # @return [DateTime, nil]
   def completed_at
-    last_page = mod.module_items.last.name
-    training_module_events.where_properties(id: last_page).first.time
+    certificate_achieved_at || last_page_completed_at
+  end
+
+  # @return [DateTime, nil]
+  def certificate_achieved_at
+    key_event('module_complete')&.time
+  end
+
+  # @return [DateTime, nil]
+  def last_page_completed_at
+    module_item_events(final_content_page.name).first&.time
   end
 
   # @see CourseProgress
   # @return [Boolean] module pages have been viewed (past interruption)
   def started?
     visited?(mod.intro_page)
+  end
+
+  # @return [Boolean] view event logged for page
+  def visited?(page)
+    module_item_events(page.name).present?
   end
 
 protected
@@ -69,11 +109,6 @@ protected
     state(:none?, items)
   end
 
-  # @return [Boolean] view event logged for page
-  def visited?(page)
-    training_module_events.where_properties(id: page.name).present?
-  end
-
   # @see SummativeAssessmentProgress
   #
   # @return [Boolean]
@@ -88,11 +123,22 @@ protected
     summative_assessment.attempted? && summative_assessment.passed?
   end
 
+  # In progress modules with new pages that have been skipped
+  # @return [Boolean]
+  def gaps?
+    (unvisited.first.id..unvisited.last.id).count != unvisited.map(&:id).count
+  end
+
 private
 
   # @return [Array<ModuleItem>]
+  def visited
+    mod.module_items.select { |item| visited?(item) }
+  end
+
+  # @return [Array<ModuleItem>]
   def unvisited
-    mod.module_items.select { |item| module_item_events(item.name).none? }
+    mod.module_course_items.reject { |item| visited?(item) }
   end
 
   # @param method [Symbol]
@@ -112,5 +158,11 @@ private
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
   def training_module_events
     user.events.where_properties(training_module_id: mod.name)
+  end
+
+  # @param key [String] module_start, module_complete
+  # @return [Ahoy::Event]
+  def key_event(key)
+    training_module_events.where(name: key).first
   end
 end

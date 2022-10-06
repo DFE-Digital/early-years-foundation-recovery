@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_22_231543) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_26_104904) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -57,6 +57,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_231543) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["execute_at"], name: "index_arask_jobs_on_execute_at"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title"
+    t.text "body"
+    t.string "training_module"
+    t.string "name"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "user_answers", force: :cascade do |t|
@@ -109,8 +119,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_231543) do
     t.string "setting_type"
     t.string "setting_type_other"
     t.jsonb "module_time_to_completion", default: {}, null: false
+    t.datetime "terms_and_conditions_agreed_at", precision: nil
+    t.boolean "display_whats_new", default: false
   end
 
+  add_foreign_key "notes", "users", name: "notes_user_id_fkey"
   add_foreign_key "user_answers", "user_assessments", name: "user_answers_user_assessment_id_fkey"
   add_foreign_key "user_answers", "users", name: "user_answers_user_id_fkey"
   add_foreign_key "user_assessments", "users", name: "user_assessments_user_id_fkey"

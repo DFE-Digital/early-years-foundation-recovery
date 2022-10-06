@@ -16,10 +16,21 @@ en:
           ## Custom Tags
           ---
 
-          $YoutubeVideo[Video title](https://www.youtube.com/watch?v=EpjSlCJtPLo&list=PL4IuMlmijgAfTwwEiZmMp28Eaf66S3a1R&index=2&t=0s)$EndYoutubeVideo
+          $VM[Vimeo Title Example](743243040)$ENDVM
 
-          $YT[With a Title](EpjSlCJtPLo)$ENDYT
-          $YT(EpjSlCJtPLo)$ENDYT
+          **Usage:**
+
+          <pre class="code-tip">
+          &#36;VM[Optional Video Title](Vimeo Video ID)&#36;ENDVM
+          </pre>
+
+          $YT[Youtube Video Title](EpjSlCJtPLo)$ENDYT
+
+          **Usage:**
+
+          <pre class="code-tip">
+          &#36;YT[Optional Video Title](Youtube Video ID)&#36;ENDYT
+          </pre>
 
           $INFO
 
@@ -96,6 +107,7 @@ en:
       1-1-3-1:
         heading: 1-1-3-1
         body: third topic, second page
+        notes: true
 
       # Topic with only a question needs a heading
       1-1-4:
@@ -115,11 +127,15 @@ en:
       1-2-1-2:
         heading: 1-2-1-2
         body: |
-          ## Youtube page
+          In this video an early years expert explains the importance of the diverse world
+          in the early years foundation stage framework. There are also some tips on how to
+          support children in this area.
 
           %Warning: Govspeak test%
-        video_title: What is GOV.UK
-        youtube_url: https://www.youtube.com/embed/ucjmWjJ25Ho
+        video:
+          id: 743243040
+          title: Vimeo Video Title
+          provider: vimeo
       1-2-1-3:
       1-2-2-3:
         heading: 1-2-2-3

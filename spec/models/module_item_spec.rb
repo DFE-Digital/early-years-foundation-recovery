@@ -101,13 +101,13 @@ RSpec.describe ModuleItem, type: :model do
       end
     end
 
-    context 'when model is a youtube page' do
+    context 'when model is a video page' do
       let(:module_item) do
-        described_class.find_by(training_module: :alpha, type: :youtube_page)
+        described_class.find_by(training_module: :alpha, type: :video_page)
       end
 
-      it 'returns a Youtube page' do
-        expect(model).to be_a(YoutubePage)
+      it 'returns a Video page' do
+        expect(model).to be_a(VideoPage)
       end
 
       it 'matches the module item' do

@@ -25,7 +25,9 @@ GOOGLE_ANALYTICS_DOMAINS = %w[www.google-analytics.com
                               *.ytimg.com
                               www.youtube.com
                               www.youtube-nocookie.com
-                              *.hotjar.com].freeze
+                              *.hotjar.com
+                              www.vimeo.com
+                              player.vimeo.com].freeze
 
 OPTIMIZE_DOMAINS = %w[www.googleoptimize.com
                       optimize.google.com
@@ -52,6 +54,9 @@ Rails.application.config.content_security_policy do |policy|
                      '*.ytimg.com',
                      'www.youtube.com',
                      'www.youtube-nocookie.com',
+                     # Allow Vimeo Embeds
+                     'player.vimeo.com',
+                     'www.vimeo.com',
                      # Allow all inline scripts until we can conclusively
                      # document all the inline scripts we use,
                      # and there's a better way to filter out junk reports

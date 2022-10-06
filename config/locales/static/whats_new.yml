@@ -1,0 +1,75 @@
+---
+en:
+  static:
+    whats_new:
+      heading: What's new in the training
+      content: |
+        <div class="govuk-inset-text">
+          We’ve added a few things since you were last here. 
+        </div>
+
+        ## Videos
+
+        We’ve added videos to the training.
+        These videos will enhance your understanding of a specific area of child
+        development and how it applies to your practice.
+        Each video has captions and a transcript.
+        You can look out for these videos as you go through the training.
+
+        ## In your setting practical tips
+
+        Look out for the information icon where you will find practical tips to 
+        use in your setting.
+
+        $INFO
+        You should provide activities that require children to share resources and
+        take turns. This will help them to develop problem solving and co-operation
+        skills.
+        $INFO
+
+
+        ## Reflection points
+
+        We’ve replaced practitioner prompts with reflection points.
+        This is a chance to reflect on what you’ve learned and how it applies 
+        to your practice.
+
+        $BRAIN
+        Reflect on what you have read about supporting children’s individual development.
+
+        Consider the following questions:
+
+        - What information do you gather to understand each child’s starting point?
+        - Who do you involve?
+        $BRAIN
+
+
+        ## Learning log
+
+        You now have a space to make notes on reflection points. When making your notes, do not enter any personal or sensitive information like children's names.
+        You can view all your notes in your personal learning log.
+        You can access your learning log from the main menu and from any page where the learning log appears.
+
+        <div class='prompt'>
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-one-quarter">
+              <i class='fa-2x fa-solid fa-pencil'></i>
+            </div>
+            <div class="govuk-grid-column-three-quarters">
+              <div class="govuk-!-margin-bottom-4">
+                <h2 class="govuk-heading-m">Add to your learning log</h2>
+                <div class="gem-c-govspeak govuk-form-group">
+                  <label for="note-body-field" class="govuk-label">
+                    <p>Use this space to make notes on the reflection point. Do not enter 
+                    any personal or sensitive information like children's names.</p>
+                    <p>All your notes will be added to your personal learning log.</p>
+                    <p>Your notes</p>
+                  </label>
+                  <textarea id="note-body-field" class="govuk-textarea" rows="5" aria-describedby="note-body-hint" name="note[body]"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a class="govuk-button" href="my-modules">Continue to My modules</a>
+        
