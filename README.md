@@ -147,8 +147,8 @@ This facilitates team members demoing content and functionality, so registration
 [Staging][staging] is deployed automatically when a candidate tag is pushed.
 
 - `git checkout <ref/branch>`
-- `git tag rc0.0.x`
-- `git push origin rc0.0.x`
+- `git tag --force rc0.0.x`
+- `git push --force origin rc0.0.x`
 
 A tag can also be created and a deployment run from this [workflow][staging-workflow].
 We intend to use [semantic versioning](https://semver.org/).

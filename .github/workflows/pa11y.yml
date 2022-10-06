@@ -8,9 +8,6 @@ on:
     tags:
       - rc*
 
-env: 
-  BASE_URL: https://ey-recovery-staging.london.cloudapps.digital
-
 jobs:
   pa11y:
     runs-on: ubuntu-latest
@@ -23,7 +20,7 @@ jobs:
         with:
           node-version: 12.x
       -
-        name: Run pa11y
+        name: Run pa11y-ci
         run: |
-          npm install -g pa11y
-          pa11y $BASE_URL
+          npm install -g pa11y-ci
+          pa11y-ci

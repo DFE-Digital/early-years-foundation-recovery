@@ -1,0 +1,14 @@
+{
+    "defaults": {
+        "standard": "WCAG2AA",
+        "timeout": 1000,
+        "viewport": {
+            "width": 320,
+            "height": 480
+        }
+    },
+    "urls": [
+        "https://ey-recovery-staging.london.cloudapps.digital",
+        "https://ey-recovery-staging.london.cloudapps.digital/accessibility-statement"
+    ]
+}
