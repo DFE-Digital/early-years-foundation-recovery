@@ -5,7 +5,12 @@ class CloudStorage
   attr_accessor :gcs
 
   def initialize
+    
+    # @gcs = Google::Cloud::Storage.new project: project_id, credentials: JSON.parse(ENV['GOOGLE_CLOUD_STORAGE'])
+  end
+
+  def gcs
     project_id = ENV['GOOGLE_CLOUD_PROJECT_ID']
-    @gcs = Google::Cloud::Storage.new project: project_id, credentials: JSON.parse(ENV['GOOGLE_CLOUD_STORAGE'])
+    @gcs ||= Google::Cloud::Storage.new project: project_id, credentials: JSON.parse(ENV['GOOGLE_CLOUD_STORAGE'])
   end
 end
