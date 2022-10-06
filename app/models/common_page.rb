@@ -3,12 +3,7 @@
 #
 # Pagination is disabled for these pages
 #
-class CommonPage
-  include ActiveModel::Model
-  include TranslateFromLocale
-
-  attr_accessor :id, :name, :type, :training_module
-
+class CommonPage < ContentPage
   # @return [String]
   def heading
     I18n.t('heading', scope: type)
@@ -22,11 +17,6 @@ class CommonPage
   # @return [false]
   def page_numbers?
     false
-  end
-
-  # @return [ModuleItem]
-  def module_item
-    @module_item ||= ModuleItem.find_by(training_module: training_module, name: name)
   end
 
 private

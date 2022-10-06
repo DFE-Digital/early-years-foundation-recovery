@@ -1,4 +1,4 @@
-= render 'content_pages/debug'
+= render 'debug'
 
 - content_for :content_page do
   = page_number(**@model.pagination) if @model.page_numbers?
@@ -6,4 +6,4 @@
   h1= @model.heading
   .gem-c-govspeak= translate_markdown(@model.body)
 
-= render 'content_pages/content_wrap'
+= render 'content_wrap'

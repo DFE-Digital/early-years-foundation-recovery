@@ -42,14 +42,4 @@ class ContentPage
   def module_item
     @module_item ||= ModuleItem.find_by(training_module: training_module, name: name)
   end
-
-  # @return [Boolean]
-  def formative?
-    module_item.parent.formative?
-  end
-
-  # @return [Boolean]
-  def summative?
-    module_item.parent.summative?
-  end
 end
