@@ -1,7 +1,7 @@
 class TrainingModule < YamlBase
   set_filename Rails.configuration.training_modules
 
-  scope :active, -> { where(draft: nil) }
+  scope :published, -> { where(draft: nil) }
 
   # Override basic behaviour so that root key is stored as name
   def self.load_file
@@ -14,6 +14,11 @@ class TrainingModule < YamlBase
   end
 
   # predicates ---------------------------------
+
+  # @return [Boolean]
+  def published?
+    !draft?
+  end
 
   # @return [Boolean]
   def draft?
@@ -103,6 +108,11 @@ class TrainingModule < YamlBase
   # @return [ModuleItem]
   def assessment_intro_page
     first_assessment_page.previous_item
+  end
+
+  # @return [ModuleItem]
+  def first_question_page
+    ModuleItem.where_type(name, 'formative_questionnaire').first
   end
 
   # @return [ModuleItem]

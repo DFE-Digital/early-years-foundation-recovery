@@ -1,0 +1,5 @@
+#!/bin/sh
+# ------------------------------------------------------------------------------
+set -e
+
+docker exec -it -w /srv/adr recovery_dev adr-log -i README.md

@@ -101,6 +101,7 @@ These commands help maintain your containerised workspace:
 
 The commands run common tasks inside containers:
 
+- `bin/docker-adr` rebuilds the architecture decision records table of contents
 - `bin/docker-dev` starts `Procfile.dev`, containerised equivalent of `bin/dev`,
     using the `docker-compose.dev.yml` override.
     Additionally, it will install bundle and yarn dependencies.
@@ -111,6 +112,7 @@ The commands run common tasks inside containers:
     equivalent of `bin/rspec`
 - `bin/docker-qa` runs the browser tests against a running production application,
     a containerised equivalent of `bin/qa`
+- `bin/docker-pa11y` runs WCAG checks against a generated `sitemap.xml`
 
 These commands can be used to debug problems:
 
@@ -120,6 +122,14 @@ These commands can be used to debug problems:
     can help identify why the application is not running in either the `dev`, `test`, or `qa` contexts
 - `BASE_URL=https://app:3000 docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery up app` debug the UAT tests
 
+## Using Custom Tasks
+
+- `rails db:bot` creates a user account for automated testing in the `staging` environment
+- `rails db:backfill_terms_and_conditions`
+- `rails db:calculate_completion_time`
+- `rails db:display_whats_new`
+- `rails db:seed:interim_users`
+- `rails post:content`
 
 ---
 
@@ -176,6 +186,16 @@ To run a self-signed certificate must first be generated.
 
 WIP: proposed Github workflow that does not require `docker-compose`.
 
+
+## Accessibility Standards
+
+An automated accessibility audit can be run against a development server running
+in Docker using `./bin/docker-pa11y`. The test uses [pa11y-ci](https://github.com/pa11y/pa11y-ci)
+and a dynamic `sitemap.xml` file to ensure the project meets [WCAG2AA](https://www.w3.org/WAI/WCAG2AA-Conformance) standards.
+A secure HTTP header is used to provide access to pages that require authentication.
+The secret `$BOT` environment variable defines the account to seed.
+`docker-pa11y` accepts an optional argument to test external sites.
+
 ---
 
 ## Emails
@@ -219,11 +239,9 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 ## Content
 
 Content designers are using the docker development environment.
-You can demo this environment locally using `completed@example.com:password`.
-When the are significant changes to content structure or styling it may be necessary to either:
-
-- `bin/docker-dev-restart` restart the server
-- `bin/docker-rails assets:precompile` rebuild the assets
+You can demo this environment locally using the account `completed@example.com:StrongPassword`.
+When there are significant changes to content structure a soft restart the server may be necessary `./bin/docker-rails restart`.
+Styling changes show render automatically.
 
 ### YAML
 

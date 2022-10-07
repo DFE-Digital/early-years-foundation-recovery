@@ -1,4 +1,4 @@
-- if ENV['RAILS_ENV'].eql?('development')
+- if Rails.env.development?
   pre.debug_dump
     h2 Visits
     = render @user.visits

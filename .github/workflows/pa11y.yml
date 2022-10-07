@@ -1,26 +1,43 @@
 ---
 # ------------------------------------------------------------------------------
-name: Run Pa11y
+name: Check WCAG Standards on Staging
 
 on:
+  # push:
+  #   tags:
+  #     - rc*
+  workflow_run:
+    workflows:
+      - Deploy Staging App
+    branches:
+      - main
+    types:
+      - completed
   workflow_dispatch:
-  push:
-    tags:
-      - rc*
+    inputs:
+      workspace:
+        description: Deployment workspace to test against (staging, dev, pr-xxx)
+        type: string
+        default: staging
 
 jobs:
   pa11y:
     runs-on: ubuntu-latest
+    environment: staging
+    env:
+      BOT: ${{ secrets.BOT_TOKEN }}
+      DOMAIN: ey-recovery-${{ inputs.workspace }}.london.cloudapps.digital
     steps:
       -
+        name: Checkout Code
         uses: actions/checkout@v2
       -
-        name: Use Node.js 12.x
-        uses: actions/setup-node@v1
+        name: Use Node.js 16
+        uses: actions/setup-node@v3
         with:
-          node-version: 12.x
+          node-version: 16
       -
         name: Run pa11y-ci
         run: |
           npm install -g pa11y-ci
-          pa11y-ci
+          pa11y-ci --sitemap $DOMAIN/sitemap.xml
