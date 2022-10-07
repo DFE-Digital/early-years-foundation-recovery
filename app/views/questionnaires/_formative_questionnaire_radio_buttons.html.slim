@@ -1,4 +1,4 @@
-=govuk_heading 'Learning check', size: 'l'
+h1 Learning check
 = f.govuk_radio_buttons_fieldset question.name, legend: { text: translate_markdown(question.label), hidden: question.legend_hidden? } do
   .prompt.gem-c-govspeak
     .govuk-grid-row
@@ -6,7 +6,7 @@
         = icon(:question)
       .govuk-grid-column-three-quarters
         =govuk_heading 'Check your understanding', tag: :h2, size: 'm'
-        div class='govuk-!-margin-bottom-4 govuk-!-margin-top-4'
+        div class='govuk-!-margin-4'
           = translate_markdown(question.body)
 
           - question.fields.each do |id, label, checked|
