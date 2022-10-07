@@ -21,7 +21,7 @@ class CommonPage < ContentPage
 
 private
 
-  # @return [Hash]
+  # @return [Hash<Symbol>]
   def locals
     if module_item.assessment_intro?
       { passmark: passmark }

@@ -123,10 +123,10 @@ class ModuleItem < YamlBase
     end
   end
 
-  # @return [ContentPage, VideoPage, Questionnaire]
+  # @return [CommonPage, ContentPage, VideoPage, Questionnaire]
   def model
     klass = MODELS[type.to_sym]
-    if klass == Questionnaire
+    if klass.is_a?(Questionnaire)
       Questionnaire.find_by!(name: name)
     else
       klass.new(attributes)
@@ -159,9 +159,7 @@ class ModuleItem < YamlBase
   delegate :valid?, to: :model
 
   # @return [Boolean]
-  def notes?
-    model.respond_to?(:notes?) ? model.notes? : false
-  end
+  delegate :notes?, to: :model
 
   # @return [Boolean]
   def topic?
@@ -208,6 +206,7 @@ class ModuleItem < YamlBase
     type.eql?('thankyou')
   end
 
+  # @return [Boolean]
   def certificate?
     type.eql?('certificate')
   end
