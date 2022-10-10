@@ -96,7 +96,7 @@ RSpec.describe 'Page' do
         ['1-3-2-2',           'First Training Module : 1-3-2-2'],
         ['1-3-2-3',           'First Training Module : 1-3-2-3'],
         ['1-3-2-4',           'First Training Module : 1-3-2-4'],
-        ['1-3-2-5',           'First Training Module : 1-3-2-5'],
+        ['1-3-2-5',           'First Training Module : Assessment results'],
         ['1-3-3',             'First Training Module : Reflect on your learning'],
         ['1-3-3-1',           'First Training Module : 1-3-3-1'],
         ['1-3-3-2',           'First Training Module : 1-3-3-2'],

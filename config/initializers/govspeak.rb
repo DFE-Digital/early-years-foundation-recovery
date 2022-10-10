@@ -1,7 +1,6 @@
 GOVSPEAK_TEMPLATES = {
   prompt: Slim::Template.new('app/views/govspeak/_prompt.html.slim'),
-  youtube: Slim::Template.new('app/views/govspeak/_embedded_video.html.slim'),
-  vimeo: Slim::Template.new('app/views/govspeak/_embedded_video.html.slim'),
+  video: Slim::Template.new('app/views/govspeak/_video.html.slim'),
 }.freeze
 
 # Custom Practitioner Prompts
@@ -24,27 +23,26 @@ GOVSPEAK_TEMPLATES = {
   end
 end
 
-# Youtube Embedded Videos
+# Youtube Videos
 Govspeak::Document.extension('youtube', /\$YT(?:\[(.*?)\])?\((.*?)\)\$ENDYT/m) do |title, video|
-  optional_title = title || ''
-  params = { enablejsapi: 1, origin: ENV['DOMAIN'] }
-  GOVSPEAK_TEMPLATES[:youtube].render(nil, title: optional_title, video: video, params: params.to_param, transcript: Govspeak::Document.to_html(transcript(video), sanitize: false), provider: 'youtube')
+  params = { enablejsapi: 1, origin: ENV['DOMAIN'] }.to_param
+
+  locals = {
+    title: title,
+    url: "https://www.youtube.com/embed/#{video}?#{params}",
+  }
+
+  GOVSPEAK_TEMPLATES[:video].render(nil, locals)
 end
 
-# Vimeo Embedded Videos
+# Vimeo Videos
 Govspeak::Document.extension('vimeo', /\$VM(?:\[(.*?)\])?\((.*?)\)\$ENDVM/m) do |title, video|
-  optional_title = title || ''
-  params = { enablejsapi: 1, origin: ENV['DOMAIN'] }
-  GOVSPEAK_TEMPLATES[:vimeo].render(nil, title: optional_title, video: video, params: params.to_param, transcript: Govspeak::Document.to_html(transcript(video), sanitize: false), provider: 'vimeo')
-end
+  params = { enablejsapi: 1, origin: ENV['DOMAIN'] }.to_param
 
-# Video transcripts
-def transcript(video)
-  if File.exist?(Rails.root.join(%(data/video-transcripts/#{video}.yml)))
-    transcript_file = Rails.root.join(%(data/video-transcripts/#{video}.yml))
-    transcript_data = YAML.load_file(transcript_file)
-    transcript_data['transcript']
-  else
-    'Transcript currently unavailable'
-  end
+  locals = {
+    title: title,
+    url: "https://player.vimeo.com/video/#{video}?#{params}",
+  }
+
+  GOVSPEAK_TEMPLATES[:video].render(nil, locals)
 end

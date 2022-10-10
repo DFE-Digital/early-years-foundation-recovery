@@ -2,11 +2,7 @@
 
 - content_for :content_page do
   .govuk-grid-column-full.interrupt-panel
-    h1.govuk-heading-l What to expect during the training
-    h2.govuk-heading-m End of module test
-    p Once you have completed all topics, there is an end of module test and an opportunity to download a certificate of achievement.
-
-    h2.govuk-heading-m Your progress is saved automatically
-    p Your progress is automatically saved as you move through the module. You can sign out or close the browser at any time without losing your progress. When you next login, you can restart from where you left off.
+    h1.govuk-heading-l= @model.heading
+    .gem-c-govspeak= translate_markdown(@model.body)
 
 = render 'content_wrap_full_width'

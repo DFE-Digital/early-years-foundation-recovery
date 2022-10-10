@@ -36,7 +36,7 @@ RSpec.describe ModuleOverviewDecorator do
           1-1
           1-1-1
           1-1-2
-          1-1-2-1a
+          1-1-2-1
           1-1-2
         ].map do |page|
           view_module_page_event('bravo', page)
@@ -44,7 +44,7 @@ RSpec.describe ModuleOverviewDecorator do
 
         expect(user.events.count).to be 8
         expect(output[:state]).to be :started
-        expect(output[:page]).to eql '1-1-2-1a'
+        expect(output[:page]).to eql '1-1-2-1'
       end
     end
 
