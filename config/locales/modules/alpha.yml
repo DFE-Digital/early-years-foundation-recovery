@@ -4,7 +4,9 @@ en:
   modules:
     alpha:
       what-to-expect:
+        # preamble
       before-you-start:
+        # preamble
       intro:
         heading: Govspeak Reference Page
         body: |
@@ -109,9 +111,8 @@ en:
         body: third topic, second page
         notes: true
 
-      # Topic with only a question needs a heading
       1-1-4:
-        heading: 1-1-4
+        # question
 
       # --------------------------------------
       1-2:
@@ -121,15 +122,11 @@ en:
         heading: 1-2-1
         body: First page in second submodule
       1-2-1-1:
-        heading: 1-2-1-1
-        body: |
-          %Warning: Govspeak test%
+        # question
       1-2-1-2:
         heading: 1-2-1-2
         body: |
-          In this video an early years expert explains the importance of the diverse world
-          in the early years foundation stage framework. There are also some tips on how to
-          support children in this area.
+          In this video an early years expert explains...
 
           %Warning: Govspeak test%
         video:
@@ -137,22 +134,12 @@ en:
           title: Vimeo Video Title
           provider: vimeo
       1-2-1-3:
-      1-2-2-3:
-        heading: 1-2-2-3
-        body: Third page in second submodule
+        # question
 
       # --------------------------------------
       1-3:
-        heading: Summary and next steps
-        body: |
-          You have reached the end of this module's training content.
+        # summary intro
 
-          This next section of the module includes:
-
-          - a recap of what you have learned
-          - the end of module test
-          - an opportunity to reflect on your learning
-          - the chance to give us feedback about the module
       1-3-1:
         heading: Recap
         body: |
@@ -171,7 +158,7 @@ en:
       1-3-2-4:
         # question
       1-3-2-5:
-        # question
+        # results
 
       1-3-3:
         # confidence intro
@@ -182,5 +169,7 @@ en:
       1-3-3-3:
         # question
       1-3-3-4:
-        # ending intro
-        url: 'https://forms.office.com/'
+        form: xxxxx
+
+      1-3-4:
+        # certificate

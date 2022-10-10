@@ -3,7 +3,9 @@ en:
   modules:
     brain-development-and-how-children-learn:
       what-to-expect:
+        # preamble
       before-you-start:
+        # preamble
       intro:
         heading: Brain development and how children learn
         body: |
@@ -94,6 +96,9 @@ en:
           The parietal lobes are located behind the frontal lobes and above the temporal lobes. One of their main functions is to make sense of things we touch.
           They also tell us where our body is in relation to objects around us.
 
+      2-1-1-1b:
+        # question
+
       2-1-1-2a:
         heading: Brain development before birth
         body: |
@@ -132,6 +137,9 @@ en:
 
           The brain will also get rid of old unused neurone pathways.
           It’s important for children to experience a wide variety of opportunities so that their neurones develop.
+
+      2-1-1-2b:
+        # question
 
       2-1-1-3a:
         heading: Influences on brain development before birth
@@ -175,6 +183,11 @@ en:
           Any complications during labour that result in prolonged periods of oxygen deprivation for the baby can result in brain injury.
           Hypoxic Ischemic Encephalopathy affects around 3 in 1,000 births and can result in disabilities and death.
 
+      2-1-1-3b:
+        # question
+      2-1-1-3c:
+        # question
+
       2-1-1-4a:
         heading: How communication develops before birth
         body: |
@@ -196,6 +209,9 @@ en:
 
           Communication with an unborn child also supports other areas of development.
           For example, as the baby moves around in response to detecting sound, they exercise the neurones associated with movement skills. This encourages further neurone connections and leads to more coordinated movements.
+
+      2-1-1-4b:
+        # question
 
       2-1-2:
         heading: Piaget’s theory of cognitive development from 0 to 5 years
@@ -262,6 +278,11 @@ en:
           - the promotion of social interaction and peer teaching
           - that children need opportunities to test inconsistencies in their thoughts
 
+      2-1-2-1b:
+        # question
+      2-1-2-1c:
+        # question
+
       2-1-2-2:
         notes: true
         heading: |
@@ -310,18 +331,18 @@ en:
           - the freedom to explore and test their ideas and understanding
           - the opportunity for practitioners to support when learning becomes overwhelming or if they need further help
 
-          $BRAIN 
+          $BRAIN
 
-          Reflect on what you have read about the  preoperational stage of  brain development. 
+          Reflect on what you have read about the  preoperational stage of  brain development.
 
           Think about your early years setting.
 
-          Consider the following questions: 
+          Consider the following questions:
 
           - What is the benefit of high quality adult interactions on a child's brain development?
-          - Why is it important for brain development to give children the freedom to explore and test their ideas and understanding? 
+          - Why is it important for brain development to give children the freedom to explore and test their ideas and understanding?
 
-          $BRAIN 
+          $BRAIN
 
 
       2-1-2-3a:
@@ -334,12 +355,15 @@ en:
           However, more recent research also shows some criticisms and questions regarding Piaget’s work.
 
           Piaget believed that babies in the sensorimotor stage lacked the skill of object permanence. In more recent research, examples have been documented of babies having the ability to show surprise and look for things that have disappeared from their environment.
-          
+
           This suggests that they have some understanding of object permanence, as they can have the expectation that an object continues to exist even though they can no longer see it.
 
           Piaget’s research was also criticised for not taking into account a wide variety of socio-economic factors within the environment as much of his research was conducted with children of well educated professionals. Piaget’s theory also does not give consideration to how the stages of development may be influenced by individual characteristics such as culture or gender. However neither of these factors should provide barriers to children’s learning as all children's needs must be acknowledged and met.
 
           Some current research has found that babies and young children learn through a combination of sensorimotor activities like using their senses to explore their environment and the opportunity to build upon previous experiences and opportunities. This supports Piaget’s thoughts regarding the importance of the environment and a child’s ability to explore using their senses.
+
+      2-1-2-3b:
+        # question
 
       2-1-3:
         heading: Factors affecting brain development
@@ -384,11 +408,11 @@ en:
 
           $BRAIN
 
-          Reflect on what you have read about the impact of relationships on a child's brain development. 
+          Reflect on what you have read about the impact of relationships on a child's brain development.
 
           Think about your early years setting.
 
-          Consider the following questions: 
+          Consider the following questions:
 
           - How do you help children to develop relationships with staff members?
           - How do you help children to develop relationships with other children?
@@ -396,6 +420,9 @@ en:
           - Could you do anything else to help children to develop these relationships?
 
           $BRAIN
+
+      2-1-3-1b:
+        # question
 
       2-1-3-2a:
         notes: true
@@ -415,16 +442,19 @@ en:
 
           $BRAIN
 
-          Reflect on what you have read about the impact of a healthy diet on a child's brain development. 
+          Reflect on what you have read about the impact of a healthy diet on a child's brain development.
 
           Think about your early years setting.
 
-          Consider the following questions: 
+          Consider the following questions:
 
-          - How do you help children understand the importance of healthy eating?  
+          - How do you help children understand the importance of healthy eating?
           - Could you do anything else to promote healthy eating?
 
           $BRAIN
+
+      2-1-3-2b:
+        # question
 
       2-1-3-3:
         notes: true
@@ -466,11 +496,11 @@ en:
 
           $BRAIN
 
-          Reflect on what you have read about the impact of the envrionment on a child's brain development. 
+          Reflect on what you have read about the impact of the envrionment on a child's brain development.
 
-          Think about your early years setting. 
+          Think about your early years setting.
 
-          Consider the following questions: 
+          Consider the following questions:
 
           - How do you help children to understand the routine?
           - Could you do anything else to help children to understand the routine?
@@ -504,18 +534,21 @@ en:
 
           $BRAIN
 
-          Reflect on what you have read about the impact living in poverty has on a child's brain development. 
+          Reflect on what you have read about the impact living in poverty has on a child's brain development.
 
-          Think about your early years setting. 
+          Think about your early years setting.
 
-          Consider the following questions: 
+          Consider the following questions:
 
-          - How would you recognise that a child might be living in poverty? 
+          - How would you recognise that a child might be living in poverty?
           - How would you plan a curriculum that has child poverty in mind?
           - How would you support a child who might be living in poverty?
-          - How might you engage key people surrounding that child? 
+          - How might you engage key people surrounding that child?
 
           $BRAIN
+
+      2-1-3-4b:
+        # question
 
       2-1-3-5:
         heading: Adverse childhood experiences
@@ -607,6 +640,9 @@ en:
           If after support the baby or child continues to make no progress,
           then further specialist support may be needed to identify if the child is experiencing a cognitive development delay.
 
+      2-2-1-1b:
+        # question
+
       2-2-1-2:
         heading: Causes of cognitive development delay
         body: |
@@ -681,11 +717,11 @@ en:
 
           $BRAIN
 
-          Reflect on what you have read about cognitive development delay.  
+          Reflect on what you have read about cognitive development delay.
 
-          Think about your early years setting. 
+          Think about your early years setting.
 
-          Consider the following questions: 
+          Consider the following questions:
 
           - What do you do if you suspect a child may have cognitive development delay?
           - Within your curriculum, what strategies do you use to support children who you suspect might have cognitive development delay?
@@ -693,6 +729,9 @@ en:
           - How might you adapt the curriculum to support those children further?
 
           $BRAIN
+
+      2-2-1-3b:
+        # question
 
       2-2-2:
         heading: Theories of how children learn
@@ -750,6 +789,9 @@ en:
           - encouraging them to participate in activities to promote self esteem
           - challenging them to reach their full potential
           $INFO
+
+      2-2-2-1b:
+        # question
 
       2-2-2-2:
         heading: |
@@ -813,8 +855,12 @@ en:
           - persuasion - support from influential role models in the child’s life with praise and encouragement
           - imagination  - the ability for the child to imagine themselves succeeding
 
+      2-2-2-4b:
+        # question
+
       2-2-2-4video:
-        heading: Supporting children to build resilience
+        heading: |
+          Supporting children to build resilience
         body: |
           This video explains the concept of self-efficacy and its importance for supporting children to build resilience, along with examples. There are also some tips on how to support children in this area.
         video:
@@ -844,6 +890,9 @@ en:
 
           Critics suggest that Bruner’s theory does not take into consideration an individual’s stage of development or opportunity for self expression.
 
+      2-2-2-5b:
+        # question
+
       2-2-2-6:
         notes: true
         heading: |
@@ -857,15 +906,15 @@ en:
 
           $BRAIN
 
-          Reflect on what you have read about how considering Maslow's hierarchy of needs can help to create an enabling enviroment. 
+          Reflect on what you have read about how considering Maslow's hierarchy of needs can help to create an enabling enviroment.
 
-          Think about your setting. 
+          Think about your setting.
 
-          Consider the following questions: 
+          Consider the following questions:
 
           - How well does your curriculum and environment  meet the children’s needs at each level?
-          - Do you think it meets some needs better than others? 
-          - If so, which ones and why? 
+          - Do you think it meets some needs better than others?
+          - If so, which ones and why?
           - Could you improve your curriculum and environment to better meet these needs?
 
           $BRAIN
@@ -899,20 +948,24 @@ en:
 
           Reflect on what you have read about techniques for scaffolding.
 
-          Think about an occasion when you've used one of these techniques. 
+          Think about an occasion when you've used one of these techniques.
 
-          Consider the following questions: 
+          Consider the following questions:
 
-          - What information did you have about the child before you started? 
+          - What information did you have about the child before you started?
           - Why did you choose this scaffolding technique?
           - What did you hope to achieve and what was the outcome?
           - Does your curriculum allow opportunity for activities in which you can use these techniques?
           - What could you have done differently?
 
-          $BRAIN 
-      
+          $BRAIN
+
+      2-2-2-7b:
+        # question
+
       2-2-2-7video:
-        heading: Scaffolding children’s learning
+        heading: |
+          Scaffolding children’s learning
         body: |
           This video explains the importance of scaffolding children's learning, as part of the early years foundation stage framework, and demonstrates a specific example of helping a group of 3 year olds to recognise their name by scaffolding their learning. There are also some tips on how to support children in this area.
         video:
@@ -974,19 +1027,19 @@ en:
 
           $INFO
 
-          You can use different activities to encourage children to take part in physical activities. 
+          You can use different activities to encourage children to take part in physical activities.
 
           ### Babies
-          
+
           Activities could include:
 
           - treasure baskets
           - baby gyms
           - incorporating opportunities to roll
           - practice crawling
-          
+
           ### Toddlers
-          
+
           Activities could include:
 
           - walk like an animal
@@ -995,7 +1048,7 @@ en:
           - bubble play
 
           ### Pre-school
-          
+
           Activities could include:
 
           - large equipment, including climbing frames, obstacles or bikes
@@ -1020,19 +1073,22 @@ en:
 
           $BRAIN
 
-          Reflect on what you have read about the importance of physical activity for learning. 
+          Reflect on what you have read about the importance of physical activity for learning.
 
-          Think about your early years setting. 
+          Think about your early years setting.
 
-          Consider the following questions: 
+          Consider the following questions:
 
           - What physical activity is included in your daily planning?
           - How do you adapt your planning to you encourage all children to take part?
           - How do these planned activities support children's brain and overall development?
-          - How do you ensure phsycial activity is inclusive for all and non gender stereotypical?  
+          - How do you ensure phsycial activity is inclusive for all and non gender stereotypical?
           - How do you encourage spontaneous physical play?
 
           $BRAIN
+
+      2-2-3-1b:
+        # question
 
       2-2-3-2a:
         heading: Periods of inactivity
@@ -1044,20 +1100,23 @@ en:
 
           ## Technology
 
-          Increased access to technology means that even young children are spending more time on devices such as tablets and smartphones. Access to on demand TV also means that age appropriate television programmes can be accessed for longer periods throughout the day. 
-          
+          Increased access to technology means that even young children are spending more time on devices such as tablets and smartphones. Access to on demand TV also means that age appropriate television programmes can be accessed for longer periods throughout the day.
+
           There are many advantages to using technology within the setting - including to support children’s language and cognitive development. However, technology should be used as part of a balanced curriculum and should have a clear set of learning intentions. You can read advice for using the internet with children in a safe way in the further activities at the end of the module.
 
           ## Imposed lockdowns
 
           The COVID-19 pandemic will have increased the amount of time children have been inactive. For those without access to outdoor space and limited indoor space, physical activity may have decreased significantly. Parents and carers who have been working from home may not have been able to incorporate physical activity into children’s daily routines. For very young children, days without physical activity may have become the norm.
-          
+
           As a practitioner, you may need to reinforce the importance of being physically active and support children to develop and understand the associated skills.
 
           ## Transport
 
           Busier lifestyles and increasing numbers of cars on the road means that fewer children are walking and accessing public transport.
           This has resulted in less active lifestyles for children.
+
+      2-2-3-2b:
+        # question
 
       2-2-3-3:
         heading: Positive partnerships with parents and carers
@@ -1108,6 +1167,9 @@ en:
 
           You can read advice about food safety and young children in the further activities at the end of the module.
 
+      2-2-3-4b:
+        # question
+
       2-2-3-5:
         heading: Adult participation
         body: |
@@ -1121,8 +1183,8 @@ en:
 
           ##Increased vocabulary
 
-          As you explain your actions or encourage children to communicate about their actions, you are increasing the vocabulary children hear. Providing a commentary that names your movements such as “kick your leg” or “raise your arm” will support children to be able to repeat these actions when they carry out activities independently or need to follow verbal or written instructions in the future. 
-          
+          As you explain your actions or encourage children to communicate about their actions, you are increasing the vocabulary children hear. Providing a commentary that names your movements such as “kick your leg” or “raise your arm” will support children to be able to repeat these actions when they carry out activities independently or need to follow verbal or written instructions in the future.
+
           Understanding the language associated with physical activity will make activities feel more achievable and support children’s self-efficacy.
 
           ##Positive modelling
@@ -1152,6 +1214,11 @@ en:
 
           Children will need opportunities to test their understanding of the relationships they have experienced. Spontaneous play opportunities that allow for increased imagination and creativity will ensure children are supported to test observed behaviours.
 
+      2-2-3-6b:
+        # question
+      2-2-3-6c:
+        # question
+
       2-2-3-7:
         notes: true
         heading: Planning influenced by knowledge
@@ -1178,38 +1245,28 @@ en:
 
           $BRAIN
 
-          Reflect on what you've read about using your knowledge of how children learn to plan. 
-          
+          Reflect on what you've read about using your knowledge of how children learn to plan.
+
           Think about a time when you have planned an activity for children to:
 
           - play and explore
-          - experience active learning 
+          - experience active learning
           - create and think critically
 
-          Consider the following questions: 
+          Consider the following questions:
 
-          - What was the learning goal for each activity? 
-          - How effective were the activities in meeting these goals? 
-          - How did the activities impact on the children's learning, development and behaviour? 
-          - What did the children gain from each experience? 
+          - What was the learning goal for each activity?
+          - How effective were the activities in meeting these goals?
+          - How did the activities impact on the children's learning, development and behaviour?
+          - What did the children gain from each experience?
 
           $BRAIN
 
       2-3:
-        heading: Summary and next steps
-        body: |
-          You have reached the end of this module's training content.
-
-          This next section of the module includes:
-
-          - a recap of what you have learned
-          - the end of module test
-          - an opportunity to reflect on your learning
-          - the chance to give us feedback about the module
-
+        # summary intro
 
       2-3-1:
-        heading: Recap
+        heading: Recap and further reading
         body: |
           Every child will develop at their own individual rate and will experience a wide variety of influences that could potentially impact upon their brain development.
 
@@ -1235,7 +1292,7 @@ en:
 
           Find out about [how sensory food education can help young children engage with food.](https://help-for-early-years-providers.education.gov.uk/get-help-to-improve-your-practice/sensory-food-education)
 
-          $BOOK 
+          $BOOK
 
           You can find help and guidance on the Department for Education's [Help for early years providers website](https://help-for-early-years-providers.education.gov.uk/).
 
@@ -1250,30 +1307,42 @@ en:
           $BOOK
 
       2-3-2:
-        heading: End of module test
-        body: |
-          This end of module test is here to revisit what you have learned and the impact on your practice. It is not aimed to provide a pass or fail.
-
-          ##Before you start
-
-          This test has 10 multiple choice questions.
-
-          You must answer all of the questions.
-
-          You can review your total score for the test at the end.
-
-          To receive a certificate of achievement for this module, you need to receive an overall score of at least 70%.
-
-          If you do not score 70%, you will be able to see which questions you got wrong. You can repeat the test to improve your score as many times as you want to.
+        # assessment intro
+      2-3-2-1:
+        # question
+      2-3-2-2:
+        # question
+      2-3-2-3:
+        # question
+      2-3-2-4:
+        # question
+      2-3-2-5:
+        # question
+      2-3-2-6:
+        # question
+      2-3-2-7:
+        # question
+      2-3-2-8:
+        # question
+      2-3-2-9:
+        # question
+      2-3-2-10:
+        # question
+      2-3-2-11:
+        # results
 
       2-3-3:
-        heading: Reflect on your learning
-        body: |
-          To help DfE to measure our impact, please answer the following questions.
-
-          Answers will be anonymous, and we will not know what you individually select.
-
-          To what extent do you agree with the following statements:
-
+        # confidence intro
+      2-3-3-1:
+        # question
+      2-3-3-2:
+        # question
+      2-3-3-3:
+        # question
+      2-3-3-4:
+        # question
       2-3-3-5:
-        url: "https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxURFNMQkgwQk80N1lZWkRFMkE5N09DQVg0NCQlQCN0PWcu"
+        form: yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxURFNMQkgwQk80N1lZWkRFMkE5N09DQVg0NCQlQCN0PWcu
+
+      2-3-4:
+        # certificate

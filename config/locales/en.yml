@@ -157,6 +157,18 @@ en:
     note: Add to your learning log
     test: Check your understanding
 
+  summary_intro:
+    heading: Summary and next steps
+    body: |
+      You have reached the end of this module's training content.
+
+      This next section of the module includes:
+
+      - a recap of what you have learned
+      - the end of module test
+      - an opportunity to reflect on your learning
+      - the chance to give us feedback about the module
+
   assessment_intro:
     heading: End of module test
     body: |
@@ -193,11 +205,31 @@ en:
 
       Please rate to what extent you agree with the statements on the following pages.
 
-  ending_intro:
+  thankyou:
     heading: Thank you
     body: |
       You can also <a href='%{feedback_url}' target="_blank">give feedback about
       the training (opens in new window)</a>
+
+  certificate:
+    heading: Download your certificate
+
+  interruption_page:
+    heading: What to expect during the training
+    body: |
+      ## End of module test
+
+      Once you have completed all topics, there is an end of module test and an
+      opportunity to download a certificate of achievement.
+
+      ## Your progress is saved automatically
+
+      Your progress is automatically saved as you move through the module.
+      You can sign out or close the browser at any time without losing your progress.
+      When you next login, you can restart from where you left off.
+
+  icons_page:
+    heading: Before you start
 
   check_email_confirmation:
     heading: Check your email
@@ -246,6 +278,7 @@ en:
       link_text: contact us
 
   assessment_results:
+    heading: Assessment results
     show:
       incorrect: You answered %{answers}. That's not quite right.
       pass:
