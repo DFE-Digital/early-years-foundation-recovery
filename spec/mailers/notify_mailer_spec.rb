@@ -71,4 +71,14 @@ RSpec.describe NotifyMailer, type: :mailer do
       end
     end
   end
+
+  describe 'account deletion' do
+    context 'when account has been deleted' do
+      it 'sends email to user to confirm email has been deleted' do
+        mail = described_class.account_deleted(user)
+        expect(mail.to).to contain_exactly(user.email)
+        expect(mail.subject).to eq 'Account deleted'
+      end
+    end
+  end
 end
