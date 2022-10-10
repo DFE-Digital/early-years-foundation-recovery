@@ -114,3 +114,10 @@ ul > li > ul > li {
   padding: 30px;
   background: #f3f2f1;
 }
+
+.gem-c-govspeak {
+  a {
+    @include govuk-link-common;
+    @include govuk-link-style-default;
+  }
+}

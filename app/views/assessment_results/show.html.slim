@@ -7,7 +7,7 @@
   - @assessment.wrong_answers_feedback.each do |question|
     = render partial: question.to_partial_path, locals: { f: f }, object: question, as: :question
 
-    .govuk-inset-text
+    .govuk-inset-text.gem-c-govspeak
       p= t('.incorrect', answers: question.submitted_answers_values.to_sentence)
 
       = translate_markdown(question.assessment_fail_summary)
