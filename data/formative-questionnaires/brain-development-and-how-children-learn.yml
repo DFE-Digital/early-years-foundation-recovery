@@ -4,7 +4,7 @@ brain-development-and-how-children-learn:
     questions:
       1_what_brain_area:
         multi_select: false
-        label: |
+        body: |
           Which area of the brain is responsible for motor development?
         assessment_summary:  |
           The cerebellum is at the back of your head. This is the area in charge of motor development. It controls balance and coordinates movements. The cerebellum combines the signals from the eyes, ears and muscles with motor commands.
@@ -23,7 +23,7 @@ brain-development-and-how-children-learn:
     questions:
       1_which_timester:
         multi_select: false
-        label: |
+        body: |
           In which trimester does the baby’s brain triple in weight?
         assessment_summary: |
           In the third trimester the baby’s brain triples in weight.
@@ -45,7 +45,7 @@ brain-development-and-how-children-learn:
     questions:
       1_what_during_pregnancy:
         multi_select: false
-        label: |
+        body: |
           If experienced by the mother during pregnancy, which of the following may lead to premature birth, low birth weight and an underdeveloped brain?
         assessment_summary: |
           Cigarette smoke reduces the amount of oxygen the baby receives and reduces the forming of neurones. This can result in premature birth, low birth weight and an underdeveloped brain.
@@ -64,7 +64,7 @@ brain-development-and-how-children-learn:
     questions:
       1_why_folic_acid:
         multi_select: false
-        label: |
+        body: |
           Taking folic acid supplements will help to improve which potentially negative influence on a child’s brain development?
         assessment_summary: |
           When a pregnant mother’s diet does not cover the needs of both mother and baby, it can lead to poor brain development. Taking folic acid supplements and eating foods rich in omega 3 can support the baby’s brain development.
@@ -83,7 +83,7 @@ brain-development-and-how-children-learn:
     questions:
       1_why_talk_to_unborn:
         multi_select: true
-        label: |
+        body: |
           Which of these is a proven benefit of talking to an unborn child? (Select all answers that apply)
         assessment_summary: |
           Babies will recognise voices they have heard during pregnancy and are more likely to be quickly reassured by the same voices after birth.
@@ -108,7 +108,7 @@ brain-development-and-how-children-learn:
     questions:
       1_piaget_stage:
         multi_select: false
-        label: |
+        body: |
          What did Jean Piaget label the 0 to 2 year stage of child development?
         assessment_summary: |
           Piaget labelled the 0 to 2 years old stage of development as the sensorimotor stage. In this stage, babies use their senses to explore and grow.
@@ -131,7 +131,7 @@ brain-development-and-how-children-learn:
     questions:
       1_early-years-approach:
         multi_select: true
-        label: |
+        body: |
           Which of these are early years approaches based on the work of Piaget? (Select all that apply)
         assessment_summary: |
           Piaget did not believe that babies were born with a fixed intellectual ability. Instead, he said that a child’s interaction with the environment, combined with their growing brain, would shape how their cognitive skills develop.
@@ -158,7 +158,7 @@ brain-development-and-how-children-learn:
     questions:
       1_piaget_factors:
         multi_select: true
-        label: |
+        body: |
           Which of these did Piaget consider when testing his theory? (Select all that apply)
         assessment_summary: |
           Piaget’s research was criticised for not taking into account a wide variety of socio-economic factors within the environment, as much of his research was conducted with children of well educated professionals.
@@ -179,7 +179,7 @@ brain-development-and-how-children-learn:
     questions:
       1_child_relaxed:
         multi_select: false
-        label: |
+        body: |
           What is a child more likely to do when they are relaxed?
         assessment_summary: |
           When children feel relaxed they are more confident to explore and experiment, which will result in increased learning opportunities.
@@ -197,7 +197,7 @@ brain-development-and-how-children-learn:
     questions:
       1_healthy_diet:
         multi_select: false
-        label: |
+        body: |
           Feeding children a healthy diet will do which of the following?
         assessment_summary: |
           When children eat a balanced diet they will have all the necessary nutrients to support growth and development.
@@ -216,7 +216,7 @@ brain-development-and-how-children-learn:
     questions:
       1_managed_risk:
         multi_select: false
-        label: |
+        body: |
           True or false? Experiencing managed risk and challenge will increase myelination of neurons and support the development of new skills.
         assessment_summary: |
           When children try new things and challenge themselves this promotes myelination of neurons. This improves the speed at which the message travels in the brain, and so improves the skill.
@@ -233,7 +233,7 @@ brain-development-and-how-children-learn:
     questions:
       1_cognitive_development_delay:
         multi_select: false
-        label: |
+        body: |
           What is cognitive development delay?
         assessment_summary: |
           Remember that this is a very subjective concept that does not take a child’s unique development journey into consideration.
@@ -252,7 +252,7 @@ brain-development-and-how-children-learn:
     questions:
       1_gaps_in_learning:
         multi_select: true
-        label: |
+        body: |
           Which of the following will ensure that any potential gaps in a child's learning are not able to develop or widen? (Select all answers that apply)
         assessment_summary: |
           Observation checkpoints, child development knowledge, an enabling environment and high quality practitioner interactions will all be essential in ensuring that any potential gaps in a child’s learning are not able to develop or widen.
@@ -274,7 +274,7 @@ brain-development-and-how-children-learn:
     questions:
       1_maslow_needs:
         multi_select: false
-        label: |
+        body: |
           Which type of needs did Maslow consider to be the most important?
         assessment_summary: |
           Maslow believed the most important needs are the physiological needs, the things needed for survival. These needs include food, water, warmth and rest. Maslow concluded that all other levels depended on these needs being met first.
@@ -293,7 +293,7 @@ brain-development-and-how-children-learn:
     questions:
       1_bandura:
         multi_select: false
-        label: |
+        body: |
           According to Bandura, how many sources potentially influence a child’s development of self-efficacy?
         assessment_summary: |
           Bandura believed that a child’s development of self-efficacy came from 4 potential sources:
@@ -323,7 +323,7 @@ brain-development-and-how-children-learn:
     questions:
       1_bruner:
         multi_select: false
-        label: |
+        body: |
           The 3 learning methods included in Bruner’s spiral curriculum are Enactive, Symbolic representation and which of the following?
 
         assessment_summary: |
@@ -352,7 +352,7 @@ brain-development-and-how-children-learn:
     questions:
       1_more_knowledgeable_other:
         multi_select: false
-        label: |
+        body: |
           What is the term used to describe when a more knowledgeable other helps children to acquire new skills and knowledge?
         assessment_summary: |
           Scaffolding is where support and techniques are used to guide a child’s learning. Scaffolding could include modelling, chunking knowledge to make it achievable and using visual aids and questions to support learning. This help can then be reduced until the child is able to complete the task alone.
@@ -371,7 +371,7 @@ brain-development-and-how-children-learn:
     questions:
       1_nhs_physical_hours:
         multi_select: false
-        label: |
+        body: |
           According to NHS guidance, toddlers aged between 1 to 2 years should participate in a mixture of running, jumping, balancing and light activities like standing and walking for how many hours each day?
         assessment_summary: |
           NHS guidance states that children aged 1 to 2 should be active for at least 3 hours per day. It is important to remember that this is not 3 hours of planned physical activity that involves running, jumping, or climbing, but that it also includes light activity such as standing and walking.
@@ -390,7 +390,7 @@ brain-development-and-how-children-learn:
     questions:
       1_prolonged_inactivity:
         multi_select: true
-        label: |
+        body: |
           Which of the following influences could result in prolonged periods of inactivity? (Select all answers that apply)
         assessment_summary: |
           Busier lifestyles leading to increased car use, prolonged periods watching the TV and restricted access to activity during lockdowns could all result in prolonged periods of inactivity.
@@ -411,7 +411,7 @@ brain-development-and-how-children-learn:
     questions:
       1_meal_times:
         multi_select: true
-        label: |
+        body: |
           Which of these could you do with children in your setting to encourage involvement in meal times? (Select all answers that apply)
         assessment_summary: |
           Encouraging children to become involved in food preparation, lay the table and serve themselves will:
@@ -444,7 +444,7 @@ brain-development-and-how-children-learn:
     questions:
       1_relationships_observe_experience:
         multi_select: true
-        label: |
+        body: |
           Which of these relationships will a child observe and experience in your setting? (Select all answers that apply)
         assessment_summary: |
           Practitioner to practitioner, practitioner to parent, and child to child interaction will be influential when children are learning about positive relationships.
@@ -469,7 +469,7 @@ brain-development-and-how-children-learn:
     questions:
       1_test_understanding_relationships:
         multi_select: false
-        label: |
+        body: |
           True or false? Children need opportunities to test their understanding of the relationships they have experienced.
         assessment_summary: |
           Following high quality adult interaction, children will then benefit from opportunities to test their understanding of the relationships they have experienced.
