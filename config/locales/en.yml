@@ -245,6 +245,26 @@ en:
       text: For other problems with creating your account or signing in, please
       link_text: contact us
 
+  delete_account:
+    body:
+      - You can begin the process of closing your account.
+      - You need to check a few things before your account is closed.
+    button: Request to close account
+  confirm_delete_account:
+    heading: Are you sure you would like to close your account?
+    body:
+      - Your personal information will be deleted in up to 10 working days,
+      - We might keep anonymous data for these reasons, but we will delete anything personalised.
+      - You will lose any progress and certificates and will be unsubscribed from any emails.
+    confirm: Close my account
+    cancel: Cancel and go back to my account
+  account_deleted:
+    heading: Account closed
+    body:
+      - You have successfully closed your account and all associated data.
+      - You have also been logged out.
+    survey_url: '#'
+
   assessment_results:
     show:
       incorrect: You answered %{answers}. That's not quite right.
@@ -343,8 +363,9 @@ en:
         cookie_policy: Cookie policy
     static:
       show:
-        privacy-policy: Privacy policy
+        account-deleted: Account closed
         accessibility-statement: Accessibility statement
         other-problems-signing-in: Other problems signing in
+        privacy-policy: Privacy policy
         terms-and-conditions: Terms and conditions
         whats-new: What's new
