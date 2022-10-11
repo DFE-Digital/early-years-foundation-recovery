@@ -20,16 +20,6 @@ class TrainingModule < YamlBase
     attributes.fetch(:draft, false)
   end
 
-  # @return [Boolean]
-  def formative?
-    @formative ||= ModuleItem.where_type(name, 'formative_questionnaire').any?
-  end
-
-  # @return [Boolean]
-  def summative?
-    @summative ||= ModuleItem.where_type(name, 'summative_questionnaire').any?
-  end
-
   # collections -------------------------
 
   # @return [Array<Questionnaire>]

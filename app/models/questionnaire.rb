@@ -29,6 +29,8 @@ class Questionnaire < OpenStruct
 
   validate :check_answers
 
+  delegate :type, to: :module_item
+
   # @return [ModuleItem]
   def module_item
     @module_item ||= ModuleItem.find_by(training_module: training_module, name: name)
