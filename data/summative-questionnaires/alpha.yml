@@ -5,7 +5,7 @@ alpha:
         multi_select: true
         label: Question One - Select from following
         assessment_summary: You have selected the correct answers
-        assessment_fail_summary: Unfortunately you have got this one wrong
+        assessment_fail_summary: Unfortunately you have got this one wrong. Link to [revisit topic](#)
         answers:
           1: Correct answer 1
           2: Wrong answer 1
@@ -21,7 +21,7 @@ alpha:
         multi_select: true
         label: Question Two - Select from following
         assessment_summary: You have selected the correct answers
-        assessment_fail_summary: Unfortunately you have got this one wrong
+        assessment_fail_summary: Unfortunately you have got this one wrong. Link to [revisit topic](#)
         answers:
           1: Wrong answer 1
           2: Correct answer 1
@@ -39,7 +39,7 @@ alpha:
         body: |
           %Warning: Govspeak test%
         assessment_summary: You have selected the correct answers
-        assessment_fail_summary: Unfortunately you have got this one wrong
+        assessment_fail_summary: Unfortunately you have got this one wrong. Link to [revisit topic](#)
         answers:
           1: Wrong answer 1
           2: Wrong answer 2
@@ -55,7 +55,7 @@ alpha:
         multi_select: false
         label: Question Four - Select from following
         assessment_summary: You selected the correct answer
-        assessment_fail_summary: Unfortunately you have got this one wrong
+        assessment_fail_summary: Unfortunately you have got this one wrong. Link to [revisit topic](#)
         answers:
           1: Wrong answer 1
           2: Wrong answer 2

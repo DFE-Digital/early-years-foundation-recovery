@@ -1,3 +1,5 @@
+$govuk-new-link-styles: true;
+
 @import "govuk-frontend/govuk/all";
 @import "./govspeak";
 @import "./card";
@@ -111,4 +113,11 @@ ul > li > ul > li {
 .form-container {
   padding: 30px;
   background: #f3f2f1;
+}
+
+.gem-c-govspeak {
+  a {
+    @include govuk-link-common;
+    @include govuk-link-style-default;
+  }
 }
