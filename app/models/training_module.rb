@@ -82,62 +82,80 @@ class TrainingModule < YamlBase
     ModuleItem.where_submodule(name, submodule_name)
   end
 
+  # @return [Array<ModuleItem>]
+  def formative_questions
+    module_items_by_type('formative_questionnaire')
+  end
+
+  # @return [Array<ModuleItem>]
+  def summative_questions
+    module_items_by_type('summative_questionnaire')
+  end
+
+  # @return [Array<ModuleItem>]
+  def confidence_questions
+    module_items_by_type('confidence_questionnaire')
+  end
+
+  # @return [Array<ModuleItem>]
+  def video_pages
+    module_items_by_type('video_page')
+  end
+
   # sequence ---------------------------------
 
   # @return [ModuleItem] page 1
   def interruption_page
     module_items.first
+    # module_items_by_type('interruption_page').first
   end
 
   # @return [ModuleItem] page 2
   def icons_page
     interruption_page.next_item
+    # module_items_by_type('icons_page').first
   end
 
   # @return [ModuleItem] page 3
   def intro_page
     icons_page.next_item
+    # module_items_by_type('module_intro').first
   end
 
   # Viewing this page determines if the module is "started"
   # @return [ModuleItem] page 5
   def first_content_page
-    intro_page.next_item.next_item # TODO: improve this (first page after submod intro)
+    module_items_by_type('sub_module_intro').first.next_item
+  end
+
+  # @return [ModuleItem]
+  def summary_intro_page
+    module_items_by_type('summary_intro').first
   end
 
   # @return [ModuleItem]
   def assessment_intro_page
-    first_assessment_page.previous_item
-  end
-
-  # @return [ModuleItem]
-  def first_question_page
-    ModuleItem.where_type(name, 'formative_questionnaire').first
-  end
-
-  # @return [ModuleItem]
-  def first_assessment_page
-    ModuleItem.where_type(name, 'summative_questionnaire').first
-  end
-
-  # @return [ModuleItem]
-  def last_assessment_page
-    ModuleItem.where_type(name, 'summative_questionnaire').last
+    module_items_by_type('assessment_intro').first
   end
 
   # @return [ModuleItem]
   def assessment_results_page
-    ModuleItem.where_type(name, 'assessment_results').first
+    module_items_by_type('assessment_results').first
+  end
+
+  # @return [ModuleItem]
+  def confidence_intro_page
+    module_items_by_type('confidence_intro').first
+  end
+
+  # @return [ModuleItem]
+  def thankyou_page
+    module_items_by_type('thankyou').first
   end
 
   # @return [ModuleItem]
   def certificate_page
-    ModuleItem.where_type(name, 'certificate').first
-  end
-
-  # @return [ModuleItem]
-  def first_confidence_page
-    ModuleItem.where_type(name, 'confidence_questionnaire').first
+    module_items_by_type('certificate').first
   end
 
   # @return [ModuleItem]

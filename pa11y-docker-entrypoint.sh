@@ -2,17 +2,18 @@
 # ------------------------------------------------------------------------------
 set -e
 
-if [ ! -z "$1" ]; then
-  echo "Sitemap using: $1"
-  SITE=$1
-else
-  SITE=$DOMAIN
-fi
-
 sed -i "s/foo/${BOT}/g" /usr/config.json
 
-exec pa11y-ci \
+if [ ! -z "$1" ]; then
+  echo "Sitemap using: $1"
+
+  exec pa11y-ci \
       --config /usr/config.json \
-      --sitemap ${DOMAIN}/sitemap.xml \
-      --sitemap-find ${DOMAIN} \
-      --sitemap-replace ${SITE}
+      --sitemap http://${DOMAIN}/sitemap.xml \
+      --sitemap-find http://${DOMAIN} \
+      --sitemap-replace ${1}
+else
+  exec pa11y-ci \
+      --config /usr/config.json \
+      --sitemap http://${DOMAIN}/sitemap.xml
+fi

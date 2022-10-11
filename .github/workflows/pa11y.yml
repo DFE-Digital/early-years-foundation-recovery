@@ -1,11 +1,8 @@
 ---
 # ------------------------------------------------------------------------------
-name: Check WCAG Standards on Staging
+name: Check WCAG Standards
 
 on:
-  # push:
-  #   tags:
-  #     - rc*
   workflow_run:
     workflows:
       - Deploy Staging App
@@ -21,23 +18,36 @@ on:
         default: staging
 
 jobs:
-  pa11y:
+  test:
     runs-on: ubuntu-latest
     environment: staging
     env:
-      BOT: ${{ secrets.BOT_TOKEN }}
+      # BOT: ${{ secrets.BOT_TOKEN }}
+      BOT: bot # remove this line before merging
       DOMAIN: ey-recovery-${{ inputs.workspace }}.london.cloudapps.digital
     steps:
       -
         name: Checkout Code
         uses: actions/checkout@v2
       -
-        name: Use Node.js 16
+        name: Use Node.js 18
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
       -
-        name: Run pa11y-ci
+        name: Prepare
         run: |
-          npm install -g pa11y-ci
-          pa11y-ci --sitemap $DOMAIN/sitemap.xml
+          apt-get install -y chromium
+          npm install --global --unsafe-perm puppeteer pa11y-ci
+          sed -i "s/foo/${BOT}/g" .pa11yci
+      -
+        name: Debug
+        run: |
+          cat .pa11yci
+          curl -i https://${DOMAIN}/sitemap.xml
+          curl -i -L -H "BOT: ${BOT}" https://${DOMAIN}/my-account
+      -
+        name: Run
+        run: |
+          echo "Testing: https://${DOMAIN}/sitemap.xml"
+          pa11y-ci --sitemap https://${DOMAIN}/sitemap.xml

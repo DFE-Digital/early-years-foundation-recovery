@@ -9,9 +9,9 @@ services:
     healthcheck:
       test: curl --fail http://localhost:3000/health || exit 1
     environment:
-      - DOMAIN=http://app:3000
-      - RAILS_ENV=development
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
+      - RAILS_ENV=development
+      - DOMAIN=app:3000
       - RAILS_SERVE_STATIC_FILES=true
       - TIMEOUT_MINUTES=360
       - TRAINING_MODULES
@@ -32,10 +32,12 @@ services:
       dockerfile: pa11y.Dockerfile
     image: recovery:pa11y
     environment:
-      - DOMAIN=http://app:3000
+      - DOMAIN=app:3000
       - BOT
     networks:
       - recovery
+    volumes:
+      - ./tmp/pa11y:/tmp/pa11y
     tty: true
     stdin_open: true
 

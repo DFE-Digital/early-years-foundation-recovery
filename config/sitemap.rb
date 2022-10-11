@@ -14,7 +14,8 @@
 #     }
 #   ]
 #
-SitemapGenerator::Sitemap.default_host = ENV['DOMAIN']
+protocol = Rails.env.production? ? 'https://' : 'http://'
+SitemapGenerator::Sitemap.default_host = protocol + ENV['DOMAIN']
 SitemapGenerator::Sitemap.compress = false
 
 # Run this command to update /public/sitemap.xml
@@ -89,11 +90,15 @@ SitemapGenerator::Sitemap.create do
   add training_module_content_page_path(mod, mod.icons_page)
   add training_module_content_page_path(mod, mod.intro_page)
   add training_module_content_page_path(mod, mod.first_content_page)
-  add training_module_content_page_path(mod, mod.first_question_page)
+  add training_module_content_page_path(mod, mod.video_pages.first)
+  add training_module_content_page_path(mod, mod.formative_questions.first)
+  add training_module_content_page_path(mod, mod.summary_intro_page)
   add training_module_content_page_path(mod, mod.assessment_intro_page)
-  add training_module_content_page_path(mod, mod.first_assessment_page)
+  add training_module_content_page_path(mod, mod.summative_questions.first)
   add training_module_content_page_path(mod, mod.assessment_results_page)
-  add training_module_content_page_path(mod, mod.first_confidence_page)
+  add training_module_content_page_path(mod, mod.confidence_intro_page)
+  add training_module_content_page_path(mod, mod.confidence_questions.first)
+  add training_module_content_page_path(mod, mod.thankyou_page)
   add training_module_content_page_path(mod, mod.certificate_page)
   # TODO: test dynamic page content like question feedback
 end

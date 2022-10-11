@@ -40,3 +40,4 @@ content:
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
+  BOT: bot # remove this line before merging

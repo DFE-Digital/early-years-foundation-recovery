@@ -6,6 +6,9 @@
         "--no-sandbox"
       ]
     },
+    "actions": [
+      "screen capture /tmp/pa11y/screenshot.png"
+    ],
     "headers": {
       "BOT": "foo"
     }
