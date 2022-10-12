@@ -1355,7 +1355,6 @@ module Pages
       sleep(2)
       next_button.click
       sleep(2)
-      
       next_button.click
       sleep(2)
       save_and_continue_button.click
@@ -1437,7 +1436,6 @@ module Pages
       next_button.click
       sleep(2)
       next_button.click
-
     end
 
     def complete_module_four_confidence_check
@@ -1463,6 +1461,5 @@ module Pages
       finish_button.click
       sleep(10)
     end
-
-    end
+  end
 end
