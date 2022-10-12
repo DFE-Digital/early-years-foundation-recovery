@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require_relative './spec_helper'
 
 describe 'Complete modules' do
   include_context 'with user'
@@ -8,7 +7,7 @@ describe 'Complete modules' do
     ui.my_modules.load
   end
 
-  describe 'Module One  ' do
+  describe 'Module One ' do
     it ' Complete all page is displayed Get certificate' do
       expect(ui.my_modules).to be_displayed
       ui.my_modules.module_one_link.click
@@ -26,7 +25,7 @@ describe 'Complete modules' do
       ui.confidence_check.load
     end
 
-    describe 'Module two ' do
+    describe 'Module two' do
       it 'Complete all page is displayed get certificate' do
         ui.my_modules.module_two_link.click
         ui.modules.complete_module_two_upto_qs_twenty
@@ -48,7 +47,7 @@ describe 'Complete modules' do
         sleep(10)
       end
 
-      describe 'Module three ' do
+      describe 'Module three' do
         it 'Complete all page is displayed get certificate' do
           ui.my_modules.module_three_link.click
           sleep(30)
@@ -65,20 +64,20 @@ describe 'Complete modules' do
           sleep(10)
         end
 
-      describe 'Module four ' do
-        it 'Complete all page is displayed get certificate' do
-          ui.my_modules.module_four_link.click
-          sleep(30)
-          ui.modules.complete_module_four
-          ui.modules.complete_module_four_test
-          ui.modules.complete_module_four_confidence_check
-          expect(ui.modules).to have_content 'Get your certificate'
-          sleep(2)
-          ui.modules.go_to_my_modules_button.click
-          sleep(10)
+        describe 'Module four' do
+          it 'Complete all page is displayed get certificate' do
+            ui.my_modules.module_four_link.click
+            sleep(30)
+            ui.modules.complete_module_four
+            ui.modules.complete_module_four_test
+            ui.modules.complete_module_four_confidence_check
+            expect(ui.modules).to have_content 'Get your certificate'
+            sleep(2)
+            ui.modules.go_to_my_modules_button.click
+            sleep(10)
+          end
         end
-        end
+      end
     end
   end
-  end
-  end
+end
