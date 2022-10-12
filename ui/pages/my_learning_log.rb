@@ -6,6 +6,5 @@ module Pages
     # set_url '/my-learning'
 
     element :heading, 'h1', text: 'Your learning log'
-   
   end
 end
