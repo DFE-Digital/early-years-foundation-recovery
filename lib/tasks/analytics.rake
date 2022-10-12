@@ -9,51 +9,55 @@ namespace :db do
       # AnalyticsBuild::build_json_sql function to create a sql which can be used to populate csv files.
       # we use COALESCE function to ass null value as currently we find on occassions google data studio struggles with empty values.
 
-      # REMOVE THESE: once we fix the data dashboard to macth dynamic keys we can remove these from sql
+      # REMOVE THESE: once we fix the data dashboard to match dynamic keys we can remove these from sql
       # COALESCE(module_time_to_completion->>'child-development-and-the-eyfs', 'null') AS module_1_time,
       # COALESCE(module_time_to_completion->>'brain-development-and-how-children-learn', 'null') AS module_2_time,
       # COALESCE(module_time_to_completion->>'personal-social-and-emotional-development', 'null') AS module_3_time,
       # COALESCE(module_time_to_completion->>'module-4', 'null') AS module_4_time,
 
-
-
-      user_json = User.select("module_time_to_completion as json_column").order("pg_column_size(module_time_to_completion)").last
+      sql = "SELECT id, module_time_to_completion as json_column, (SELECT COUNT(*) FROM jsonb_object_keys(module_time_to_completion)) nbr_keys FROM public.users order by nbr_keys desc limit 1"
+      user_json = ActiveRecord::Base.connection.execute(sql)
       users_all = User.select(" id, 
                                 TO_CHAR(created_at, 'YYYY-MM-DD') AS registered_at, 
                                 COALESCE(NULLIF(setting_type, 'other'), COALESCE(setting_type_other, 'null')) AS setting, 
-                                COALESCE(postcode, 'null'),
+                                COALESCE(postcode, 'null') AS postcode,
                                 COALESCE(module_time_to_completion->>'child-development-and-the-eyfs', 'null') AS module_1_time,
                                 COALESCE(module_time_to_completion->>'brain-development-and-how-children-learn', 'null') AS module_2_time,
                                 COALESCE(module_time_to_completion->>'personal-social-and-emotional-development', 'null') AS module_3_time,
                                 COALESCE(module_time_to_completion->>'module-4', 'null') AS module_4_time,
+                                #{AnalyticsBuild::build_json_sql('module_time_to_completion', JSON.parse(user_json.first['json_column']))},
                                 module_time_to_completion").all
 
       users = AnalyticsBuild.new( bucket_name: 'eyfs-data-dashboard-live', 
                                   folder_path: 'userdata', 
                                   result_set: users_all, file_name: 'users'
                                 )
-      users.create
-      # users.delete_files
-      # users.upload
+
+      users.create if Rails.env.development?
+      users.delete_files  if Rails.env.production?
+      users.upload  if Rails.env.production?
     end
 
     desc 'ahoy_events table'
     task ahoy_events: :environment do
-      # event_json = Ahoy::Event.select("id, properties as json_column").order("pg_column_size(properties)").last
-      puts event_json.inspect
+      sql = "SELECT id, properties as json_column, (SELECT COUNT(*) FROM jsonb_object_keys(properties)) nbr_keys FROM public.ahoy_events order by nbr_keys desc limit 1"
+      event_json = ActiveRecord::Base.connection.execute(sql)
+
       events_results = Ahoy::Event.select(" id, visit_id, 
                                             user_id, 
-                                            COALESCE(name, 'null'), 
+                                            COALESCE(name, 'null') as name, 
                                             TO_CHAR(time, 'YYYY-MM-DD HH:MM:SS') as event_time, 
-                                            properties").where(id: 22013)
+                                            #{AnalyticsBuild::build_json_sql('properties', JSON.parse(event_json.first['json_column']))},
+                                            properties").all
       events = AnalyticsBuild.new(  bucket_name: 'eyfs-data-dashboard-live', 
                                     folder_path: 'eventsdata', 
                                     result_set: events_results, 
                                     file_name: 'ahoy_events'
                                   )
-      events.create
-      # events.delete_files
-      # events.upload
+
+      events.create if Rails.env.development?
+      events.delete_files if Rails.env.production?
+      events.upload if Rails.env.production?
     end
 
     desc 'user_assessments table'
@@ -64,8 +68,11 @@ namespace :db do
                                         result_set: user_assessments, 
                                         file_name: 'user_assessments'
                                       )
-      assessments.delete_files
-      assessments.upload
+      
+      assessments.create if Rails.env.development?
+      assessments.delete_files if Rails.env.production?
+      assessments.upload if Rails.env.production?
+
     end
 
     desc 'user_answers table'
@@ -76,8 +83,10 @@ namespace :db do
                                     result_set: user_answers,
                                     file_name: 'user_answers'
                                   )
-      answers.delete_files
-      answers.upload
+
+      answers.create if Rails.env.development?
+      answers.delete_files if Rails.env.production?
+      answers.upload if Rails.env.production?
     end
 
     desc 'ahoy_visits table'
@@ -88,8 +97,9 @@ namespace :db do
                                         result_set: ahoy_visits, 
                                         file_name: 'ahoy_visits' 
                                       )
-      ahoy_visit.delete_files
-      ahoy_visit.upload
+      ahoy_visit.create if Rails.env.development?
+      ahoy_visit.delete_files  if Rails.env.production?
+      ahoy_visit.upload  if Rails.env.production?
     end
   end
 end
