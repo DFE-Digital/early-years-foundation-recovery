@@ -82,9 +82,8 @@ SitemapGenerator::Sitemap.create do
   add my_modules_path
   add user_notes_path
 
-  # module content
+  # Representative content
   mod = TrainingModule.published.first
-
   add training_module_path(mod)
   add training_module_content_page_path(mod, mod.interruption_page)
   add training_module_content_page_path(mod, mod.icons_page)
@@ -101,4 +100,11 @@ SitemapGenerator::Sitemap.create do
   add training_module_content_page_path(mod, mod.thankyou_page)
   add training_module_content_page_path(mod, mod.certificate_page)
   # TODO: test dynamic page content like question feedback
+
+  # # All content
+  # TrainingModule.published.each do |mod|
+  #   mod.module_items.each do |item|
+  #     add training_module_content_page_path(mod, item)
+  #   end
+  # end
 end

@@ -22,8 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: staging
     env:
-      # BOT: ${{ secrets.BOT_TOKEN }}
-      BOT: bot # remove this line before merging
+      BOT: ${{ secrets.BOT_TOKEN }}
       DOMAIN: ey-recovery-${{ inputs.workspace }}.london.cloudapps.digital
     steps:
       -
@@ -43,12 +42,6 @@ jobs:
           npm install --global --unsafe-perm puppeteer pa11y-ci
           mkdir /tmp/pa11y
           sed -i "s/foo/${BOT}/g" .pa11yci
-      # -
-      #   name: Debug
-      #   run: |
-      #     cat .pa11yci
-      #     curl -i https://${DOMAIN}/sitemap.xml
-      #     curl -i -L -H "BOT: ${BOT}" https://${DOMAIN}/my-account
       -
         name: Audit
         run: |
