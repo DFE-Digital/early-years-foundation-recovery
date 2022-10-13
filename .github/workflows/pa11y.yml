@@ -33,21 +33,24 @@ jobs:
         name: Use Node.js 18
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 18.x
       -
-        name: Prepare
+        name: Install Chrome
+        uses: browser-actions/setup-chrome@latest
+      -
+        name: Install pa11y-ci
         run: |
-          apt-get install -y chromium
           npm install --global --unsafe-perm puppeteer pa11y-ci
+          mkdir /tmp/pa11y
           sed -i "s/foo/${BOT}/g" .pa11yci
+      # -
+      #   name: Debug
+      #   run: |
+      #     cat .pa11yci
+      #     curl -i https://${DOMAIN}/sitemap.xml
+      #     curl -i -L -H "BOT: ${BOT}" https://${DOMAIN}/my-account
       -
-        name: Debug
-        run: |
-          cat .pa11yci
-          curl -i https://${DOMAIN}/sitemap.xml
-          curl -i -L -H "BOT: ${BOT}" https://${DOMAIN}/my-account
-      -
-        name: Run
+        name: Audit
         run: |
           echo "Testing: https://${DOMAIN}/sitemap.xml"
           pa11y-ci --sitemap https://${DOMAIN}/sitemap.xml
