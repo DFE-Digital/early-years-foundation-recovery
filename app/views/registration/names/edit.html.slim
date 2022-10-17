@@ -1,0 +1,12 @@
+= govuk_link_to 'Back', edit_registration_name_path, class: 'govuk-back-link'
+.govuk-grid-row
+  .govuk-grid-column-two-thirds-from-desktop
+    = form_for @user_form, url: registration_name_path, data: { turbo: false }, method: :patch do |f|
+      = f.govuk_error_summary
+      = f.govuk_fieldset legend: { text: t(:heading, scope: [:extra_registration, 'name']) } do
+        p.govuk_body
+          = t(:body, scope: [:extra_registration, 'name'])
+        = f.govuk_text_field :first_name
+        = f.govuk_text_field :last_name
+
+      = f.govuk_submit t(:button, scope: [:extra_registration, 'name'])

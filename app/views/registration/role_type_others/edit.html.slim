@@ -1,0 +1,11 @@
+= govuk_link_to 'Back', edit_registration_role_type_path, class: 'govuk-back-link'
+
+.govuk-grid-row
+  .govuk-grid-column-two-thirds-from-desktop
+    = form_for @user_form, url: registration_role_type_other_path, data: { turbo: false }, method: :patch do |f|
+      = f.govuk_error_summary
+      = f.govuk_fieldset legend: { text: t(:heading, scope: [:extra_registration, 'role_type_other']) } do
+        p.govuk_body
+          = translate_markdown(t(:body, scope: [:extra_registration, 'role_type_other']))
+        = f.govuk_text_area, :role_type_other
+      = f.govuk_submit t(:button, scope: [:extra_registration, 'role_type_other'])

@@ -13,7 +13,7 @@ protected
         my_modules_path
       end
     else
-      extra_registrations_path
+      edit_registration_name_path
     end
   end
 end

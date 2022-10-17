@@ -48,7 +48,7 @@ RSpec.describe 'ExtraRegistrations', type: :request do
       end
     end
 
-    context 'when on last step' do
+    context 'when on setting type step' do
       subject(:user) do
         create(:user, :confirmed,
                first_name: Faker::Name.first_name,
@@ -57,24 +57,17 @@ RSpec.describe 'ExtraRegistrations', type: :request do
 
       let(:step) { :setting }
       let(:user_params) do
-        { postcode: Faker::Address.postcode, setting_type: 'other', setting_type_other: 'coop' }
-      end
-
-      it 'Updates user postcode' do
-        expect { update_user }.to change { user.reload.postcode }.to(user_params[:postcode])
+        { setting_type: 'other' }
       end
 
       it 'Updates user setting type' do
         expect { update_user }.to change { user.reload.setting_type }.to(user_params[:setting_type])
       end
 
-      it 'Updates user setting type other' do
-        expect { update_user }.to change { user.reload.setting_type_other }.to(user_params[:setting_type_other])
-      end
-
-      it 'redirects to my-learning' do
+      it 'redirects to next step' do
+        next_step = steps[steps.index(step) + 1]
         update_user
-        expect(response).to redirect_to(my_modules_path)
+        expect(response).to redirect_to(edit_extra_registration_path(next_step))
       end
     end
   end

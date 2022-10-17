@@ -13,21 +13,11 @@ class User < ApplicationRecord
   scope :registered, -> { where(registration_complete: true) }
   scope :not_registered, -> { where(registration_complete: nil) }
 
-  validates :first_name, :last_name, :postcode, :setting_type,
+  validates :first_name, :last_name, :setting_type, :role_type
             presence: true,
             if: proc { |u| u.registration_complete }
 
   validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
-  validates :postcode, postcode: true
-  validates :ofsted_number, ofsted_number: true
-
-  def postcode=(input)
-    super UKPostcode.parse(input.to_s).to_s
-  end
-
-  def ofsted_number=(input)
-    super input.to_s.strip.upcase
-  end
 
   # @see Devise database_authenticatable
   # @param params [Hash]

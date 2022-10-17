@@ -27,7 +27,7 @@ en:
             ofsted_number:
               invalid: This Ofsted number is not recognised.
             setting_type:
-              blank: Select a setting type.
+              blank: You need to enter the setting type you work in. 
   activerecord:
     errors:
       models:
@@ -74,13 +74,31 @@ en:
       body: We're asking for your details so we can personalise your training certificates.
       button: Continue
     setting:
-      heading: About your setting
+      heading: What setting type do you work in?
       body: |
-        Your training progress won't be shared with anyone without your permission.
+        {:.govuk-hint}
+          Search for the type of setting or organisation you work in, for example childminder or nursery.
+          
+        {:.govuk-hint}
+          If you work in more than one early years setting, enter the one where you work most often.
 
         {:.govuk-hint}
-        If you work in multiple settings, choose the one where you work most often.
-      button: Complete
+          Your training progress won't be shared with anyone without your permission.
+      button: Continue
+    other_setting_type: I cannot find my setting or organisation
+    local_authority:
+      heading: What local authority area do you work in?
+      body: |
+        {:.govuk-hint}
+          This could be your county council, district council or London borough.
+      button: Continue
+    multiple_local_authorities: I work across more than one local authority
+    role_type:
+      heading: Which of the following best describes your role?
+      body: |
+        Your role
+      button: Continue
+    role_type_other: I would describe my role in another way.
 
   setting:
     heading: Change your setting's information

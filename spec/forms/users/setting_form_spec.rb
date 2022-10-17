@@ -3,24 +3,11 @@ require 'rails_helper'
 RSpec.describe Users::SettingForm do
   subject(:setting_form) { described_class.new(user: create(:user)) }
 
-  describe 'postcode' do
-    it 'must be valid' do
-      setting_form.postcode = 'foo'
+  describe 'setting type' do
+    it 'must be present' do
+      setting_form.setting_type = nil
       setting_form.validate
-      expect(setting_form.errors[:postcode].first).to eq "Your setting's postcode is invalid."
-    end
-  end
-
-  describe 'ofsted_number' do
-    it 'is optional' do
-      setting_form.validate
-      expect(setting_form.errors[:ofsted_number]).to be_empty
-    end
-
-    it 'must be valid' do
-      setting_form.ofsted_number = 'foo'
-      setting_form.validate
-      expect(setting_form.errors[:ofsted_number].first).to eq 'This Ofsted number is not recognised.'
+      expect(setting_form.errors[:setting_type].first).to eq "You need to enter the setting type you work in."
     end
   end
 end
