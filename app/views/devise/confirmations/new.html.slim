@@ -1,15 +1,16 @@
 - if url_for(:back).include?(check_email_confirmation_user_path)
   a.govuk-back-link href=url_for(:back) Back
+
 - content_for :devise_form do
   = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
     = f.govuk_error_summary
     = f.govuk_fieldset legend: { text: 'Resend your confirmation'} do
       p.govuk-body
         | If you haven't received an email from us containing a link to validate your email, please check your spam folder.
-      = f.govuk_email_field :email, autofocus: true, autocomplete: "email", value: resource.email_to_confirm, label: { text: t('helpers.label.user.email') }
-    = f.govuk_submit "Send email"
+      = f.govuk_email_field :email, autofocus: true, autocomplete: 'email', value: resource.email_to_confirm, label: { text: t('helpers.label.user.email') }, 'aria-required': true
+    = f.govuk_submit 'Send email'
 
-= render "devise/shared/form_wrap"
+= render 'devise/shared/form_wrap'
 
 - if url_for(:back).include?(check_email_confirmation_user_path)
   a.govuk-link href=url_for(:back) Go back to check your email

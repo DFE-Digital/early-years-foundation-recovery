@@ -1,5 +1,5 @@
 = f.govuk_fieldset legend: { text: t(:heading, scope: [:extra_registration, current_step]) } do
   p.govuk_body
     = t(:body, scope: [:extra_registration, current_step])
-  = f.govuk_text_field :first_name
-  = f.govuk_text_field :last_name
+  = f.govuk_text_field :first_name, 'aria-required': true
+  = f.govuk_text_field :last_name, 'aria-required': true

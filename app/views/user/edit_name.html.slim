@@ -5,8 +5,8 @@
       = form.govuk_fieldset legend: { text: 'Change name' } do
         p.govuk_body
           = t(:body, scope: [:extra_registration, :name])
-        = form.govuk_text_field :first_name, autofocus: true
-        = form.govuk_text_field :last_name
+        = form.govuk_text_field :first_name, autofocus: true, 'aria-required': true
+        = form.govuk_text_field :last_name, 'aria-required': true
         = form.govuk_submit t('links.save')
 
         p= govuk_link_to 'Cancel', user_path

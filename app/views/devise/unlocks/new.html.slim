@@ -4,5 +4,5 @@
   
     p.govuk-body To request a new account unlock link, enter your email address.
   
-    = f.govuk_email_field :email, autofocus: true, autocomplete: 'email'
+    = f.govuk_email_field :email, autofocus: true, autocomplete: 'email', 'aria-required': true
     = f.govuk_submit 'Next'
