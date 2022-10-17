@@ -13,7 +13,9 @@ env:
   RAILS_ENV: test
   RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
   DATABASE_URL: postgres://postgres:password@localhost:5432/test
+  DOMAIN: recovery.app
   TRAINING_MODULES: demo-modules
+  BOT: bot_token
 
 jobs:
   test:

@@ -32,16 +32,14 @@ jobs:
   deploy:
     if: contains(github.event.pull_request.labels.*.name, 'deployed')
     runs-on: ubuntu-latest
-    environment: production
+    environment: content
     env:
       WORKSPACE: content
       REGISTRY: ghcr.io/dfe-digital/early-years-foundation-recovery
       PR_NUMBER: pr-${{ github.event.number }}
       # @see terraform/workspace-variables/app_config.yml[:content]
       DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
-      GOVUK_APP_DOMAIN: london.cloudapps.digital
       GOVUK_WEBSITE_ROOT: ey-recovery-pr-${{ github.event.number }}
-      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
     steps:
       -
         name: Checkout Code

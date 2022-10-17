@@ -373,7 +373,9 @@ en:
         setting: About your setting
     settings:
       show:
+        # FIXME: routing
         cookie_policy: Cookie policy
+        cookie-policy: Cookie policy
     static:
       show:
         privacy-policy: Privacy policy

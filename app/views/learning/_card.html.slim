@@ -1,6 +1,7 @@
 .govuk-card__flex-container
   .govuk-card__flex-item id=mod.name
     .govuk-card.govuk-card--contained.govuk-card--selectable
+      -# FIXME: a link without text raises accessibility error
       a href=training_module_path(mod)
       div class='govuk-card__hero govuk-!-margin-bottom-2'
         img.full-width-img src=image_path(mod.thumbnail) width=200 alt=mod.name
