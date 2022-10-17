@@ -237,7 +237,7 @@ module-4:
       1_acknowledging_first_language:
         multi_select: false
         body: |
-          Which of the following will acknowledging and celebrating a child's first language promote? (Select one answer)
+          Which of the following will be promoted by acknowledging and celebrating a child's first language? (Select one answer)
         assessment_summary: |
           Acknowledging a child’s first language will support them to develop positive self image and confidence. This will make children feel valued and important and will motivate them to communicate with others.
         assessment_fail_summary: |

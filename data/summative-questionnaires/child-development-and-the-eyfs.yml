@@ -190,16 +190,16 @@ child-development-and-the-eyfs:
       1_child_led_activities:
         multi_select: true
         label: |
-          How do child-led activities benefit children? (Select all answers that apply)
+          How do child led activities benefit children? (Select all answers that apply)
         assessment_summary:
         assessment_fail_summary: |
-          Child-led activities allow children to trial new ideas without any expectation, often leading to increased imagination and creativity.
+          Child led activities allow children to trial new ideas without any expectation, often leading to increased imagination and creativity.
 
           They can allow children to attempt an activity independently without worrying about the outcome, often leading to skill development and increased independence.
 
           They also give children the opportunity to navigate social skills such as sharing, turn taking and negotiating the views of others with minimal intervention from practitioners
 
-          In contrast, adult-led activities will ensure that all children can be actively involved. This will be because you have differentiated the activity. You can make sure all children are engaged in conversation opportunities. Across a planned period of time all children will be encouraged to participate.
+          In contrast, adult led activities will ensure that all children can be actively involved. This will be because you have differentiated the activity. You can make sure all children are engaged in conversation opportunities. Across a planned period of time all children will be encouraged to participate.
 
           You might want to revisit the sections on [a balanced approach to learning: child led play](/modules/child-development-and-the-eyfs/content-pages/1-2-1-5) and [a balanced approach to learning: adult led activities](/modules/child-development-and-the-eyfs/content-pages/1-2-1-6).
         answers:
