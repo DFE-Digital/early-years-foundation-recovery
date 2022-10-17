@@ -25,12 +25,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: production
+    environment: development
     env:
       WORKSPACE: development
       REGISTRY: ghcr.io/dfe-digital/early-years-foundation-recovery
-      # app envs
-      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
     steps:
       -
         name: Checkout Code

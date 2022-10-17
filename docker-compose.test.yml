@@ -6,9 +6,11 @@ services:
       target: test
     image: recovery:test
     environment:
-      - RAILS_ENV=test
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_test
+      - RAILS_ENV=test
+      - DOMAIN=recovery.app
       - TRAINING_MODULES=demo-modules
+      - BOT=bot_token
     tty: true
     stdin_open: true
 

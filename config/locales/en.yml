@@ -224,7 +224,7 @@ en:
 
       Your progress is automatically saved as you move through the module.
       You can sign out or close the browser at any time without losing your progress.
-      When you next login, you can restart from where you left off.
+      When you next sign in, you can restart from where you left off.
 
   icons_page:
     heading: Before you start
@@ -371,7 +371,9 @@ en:
         setting: About your setting
     settings:
       show:
+        # FIXME: routing
         cookie_policy: Cookie policy
+        cookie-policy: Cookie policy
     static:
       show:
         privacy-policy: Privacy policy
