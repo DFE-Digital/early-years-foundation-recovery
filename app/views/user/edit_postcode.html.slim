@@ -6,4 +6,4 @@
         = form.govuk_text_field :postcode, autofocus: true
         = form.govuk_submit t('links.save')
 
-        p= link_to 'Cancel', user_path
+        p= govuk_link_to 'Cancel', user_path
