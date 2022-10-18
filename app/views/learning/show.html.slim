@@ -32,18 +32,14 @@ h1.govuk-heading-l My modules
   .govuk-grid-row id='upcoming'
     .govuk-grid-column-full
       h2.govuk-heading-m Upcoming modules
-
-    - @user.course.upcoming_modules.each do |mod|
-      .govuk-grid-column-one-third-from-desktop.govuk-grid-column-one-half
-        .govuk-card__flex-container
-          .govuk-card__flex-item id=mod.name
-            .govuk-card.govuk-card__height
-              .govuk-card__content
-                h3.govuk-heading-s= mod.title
-                p.govuk-body= mod.description
-              .govuk-card__actions
-                - unless mod.draft?
-                  = govuk_link_to 'View more information about this module', course_overview_path + "#module-#{mod.id}-#{mod.title.downcase.parameterize}"
+      .grid-container
+        - @user.course.upcoming_modules.each do |mod|
+          .govuk-card
+            h3.govuk-heading-s= mod.title
+            p.govuk-body= mod.description
+            .govuk-card__actions
+            - unless mod.draft?
+              = govuk_link_to 'View more information about this module', course_overview_path + "#module-#{mod.id}-#{mod.title.downcase.parameterize}"
 
 - if @user.course.completed_modules.any?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l

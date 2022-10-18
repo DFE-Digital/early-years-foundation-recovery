@@ -136,3 +136,10 @@
     min-height:220px;
   }
 }
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(100px,291px), 1fr));
+  grid-gap: 30px;
+}
