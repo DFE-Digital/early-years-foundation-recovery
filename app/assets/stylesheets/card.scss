@@ -139,7 +139,13 @@
 
 
 .grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(max(100px,291px), 1fr));
-  grid-gap: 30px;
+  display: flex;
+  flex-direction: column;
+  max-width: 360px;
+
+  @media screen and (min-width: 640px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(max(100px,291px), 1fr));
+    grid-gap: 30px;
+  }
 }
