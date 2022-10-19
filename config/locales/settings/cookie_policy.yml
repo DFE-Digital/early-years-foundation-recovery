@@ -25,7 +25,7 @@ en:
 
         ## Analytics cookies (optional)
         
-        With your permission, we use Google Analytics software to collect anonymised data about how you use Child development training. This information helps us to improve our service.
+        With your permission, we use Google Analytics and Hotjar software to collect anonymised data about how you use Child development training. This information helps us to improve our service.
 
         Google is not allowed to use or share our analytics data with anyone.
 
@@ -41,9 +41,27 @@ en:
         | ------------------------------------------| ------------------------------------------------------------------------------ | ------------------------- |
         | _ga_L17YMGD11W                            | Used to persist session state                                                  | 2 years                   |
         | _ga                                       | Used to distinguish users                                                      | 2 years                   |
-        | _gid                                      | Used to distinguish users                                                      | 24 hours                   |
-        | _ga_WRRWDTSGBP                            | Used to distinguish users                                                      | 2 years                    |
-        | _ga_76JLPNZBCP                            | Used to distinguish users                                                      | 18 months                    |
+        | _gid                                      | Used to distinguish users                                                      | 24 hours                  |
+        | _ga_WRRWDTSGBP                            | Used to distinguish users                                                      | 2 years                   |
+        | _ga_76JLPNZBCP                            | Used to distinguish users                                                      | 18 months                 |
+
+        Hotjar sets the following cookies:
+
+        | Name                      | Purpose                                                                                                                                                                           | 	Expires   |
+        | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+        | _hjClosedSurveyInvites    | Tell us whether a Hotjar survey invite has been closed to stop it displaying again	                                                                                              | 1 year      |
+        | _hjDonePolls              | Tell us whether a Hotjar feedback poll has been completed to stop the same poll reappearing	                                                                                      | 1 year      |
+        | _hjMinimizedPolls	        | Keep Hotjar feedback poll widgets minimised (once minimised by the user) when the user navigates through the website	                                                            | 1 year      |
+        | _hjDoneTestersWidgets	    | Set when a user submits information in the Hotjar recruit user testers widget. They stop the form reappearing once it has been completed	                                        | 1 year      |
+        | _hjIncludedInSample	      | Lets Hotjar know whether a user is included in the sample for tracking user journeys to important pages on the website	                                                          | 1 year      |
+        | _hjShownFeedbackMessage	  | Set when a user minimises or completes a Hotjar feedback survey. The survey will stay minimised if the user navigates to a page where it is set to show	                          | 1 year      |
+        | _hjid	                    | Help us track users who visit the website multiple times. A unique Hotjar user ID is used to link their visits together	                                                          | 1 year      |
+        | _hjRecordingLastActivity  | Updated when a user recording starts and when a user performs an action on a page that Hotjar records. Found in sessionStorage rather than cookies	                              | Per session |
+        | _hjTLDTest                | Stored temporarily and used to determine the root (or top-level) domain so that tracking works on all pages	                                                                      | Per session |
+        | _hjUserAttributesHash     | Store user attributes during a user’s browser session so Hotjar knows when an attribute has changed and needs to be updated	                                                      | Per session |
+        | _hjCachedUserAttributes   | Store user attributes that are sent through the Hotjar identify API whenever the user is not in the sample. Attributes are only saved if the user interacts with a feedback tool	| Per session |
+        | _hjLocalStorageTest       | Used to check if the Hotjar tracking script can use local browser storage	                                                                                                        | Per session |
+
 
       change_cookies_header: Change your cookie settings
       change_cookies_question: Do you want to accept analytics cookies?
