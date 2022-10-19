@@ -60,10 +60,6 @@ class CourseProgress
     end
   end
 
-  def module_number(mod)
-    training_modules.to_a.index(mod) + 1
-  end
-
 private
 
   # @param mod [TrainingModule]

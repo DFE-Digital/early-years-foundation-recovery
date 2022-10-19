@@ -39,10 +39,9 @@ h1.govuk-heading-l My modules
           .govuk-card__flex-item id=mod.name
             .govuk-card.govuk-card__height
               .govuk-card__content
-                - if mod.draft?
-                  h3.govuk-heading-s= "Coming soon - Module #{@user.course.module_number(mod)}: #{mod.title}"
-                - else
-                  h3.govuk-heading-s= "Module #{@user.course.module_number(mod)}: #{mod.title}"
+                h3.govuk-heading-s
+                  = "Coming soon - " if mod.draft?
+                  = "Module #{mod.id}: #{mod.title}"
                 p.govuk-body= mod.description
               .govuk-card__actions
                 - unless mod.draft?
