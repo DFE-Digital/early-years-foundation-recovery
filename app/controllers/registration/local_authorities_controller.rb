@@ -1,6 +1,6 @@
 class Registration::LocalAuthoritiesController < ApplicationController
   before_action :authenticate_user!
-  
+
   def edit
     @user_form = Users::LocalAuthorityForm.new(user: current_user)
   end

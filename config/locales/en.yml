@@ -28,6 +28,8 @@ en:
               invalid: This Ofsted number is not recognised.
             setting_type:
               blank: You need to enter the setting type you work in. 
+            setting_type_other:
+              blank: You need to enter the type of setting or organisation where you work.
   activerecord:
     errors:
       models:
@@ -70,10 +72,7 @@ en:
   extra_registration:
     complete: Thank you for creating a child development training account. You can now start the first module.
     name:
-      heading: About you
-      body: We're asking for your details so we can personalise your training certificates.
-      button: Continue
-    setting:
+    setting_type:
       heading: What setting type do you work in?
       body: |
         {:.govuk-hint}
@@ -85,14 +84,8 @@ en:
         {:.govuk-hint}
           Your training progress won't be shared with anyone without your permission.
       button: Continue
-    other_setting_type: I cannot find my setting or organisation
+    setting_type_other: I cannot find my setting or organisation
     local_authority:
-      heading: What local authority area do you work in?
-      body: |
-        {:.govuk-hint}
-          This could be your county council, district council or London borough.
-      button: Continue
-    multiple_local_authorities: I work across more than one local authority
     role_type:
       heading: Which of the following best describes your role?
       body: |
@@ -100,7 +93,52 @@ en:
       button: Continue
     role_type_other: I would describe my role in another way.
 
-  setting:
+  registration:
+    names:
+      edit:
+        heading: About you
+        body: We're asking for your details so we can personalise your training certificates.
+        button: Continue
+    setting_types:
+      edit:
+        heading: What settings do you work in?
+        body: |
+          {:.govuk-hint}
+            Search for the type of setting or organisation you work in, for example childminder or nursery.
+            
+          {:.govuk-hint}
+            If you work in more than one early years setting, enter the one where you work most often.
+  
+          {:.govuk-hint}
+            Your training progress won't be shared with anyone without your permission.
+        button: Continue
+        link_to_setting_type_other: I cannot find my setting or organisation
+    setting_type_others:
+      edit:
+        heading: Where do you work?
+        body: Enter the type of setting or organisation where you work.
+        button: Continue
+    local_authorities: 
+      edit:
+        heading: What local authority area do you work in?
+        body: |
+          {:.govuk-hint}
+            This could be your county council, district council or London borough.
+        button: Continue
+        multiple_local_authorities: I work across more than one local authority
+    role_types:
+      edit:
+        heading: Which of the following best describes your role?
+        body: |
+          Your role
+        button: Complete
+        link_to_role_type_other: I would describe my role in another way.
+    role_type_others:
+      edit:
+        heading: What is your role?
+        body: Enter you job title.
+        button: Complete
+  setting_type:
     heading: Change your setting's information
 
   password:
@@ -390,10 +428,6 @@ en:
     devise/unlocks:
       new: Resend unlock instructions
       show: Resend unlock instructions
-    extra_registrations:
-      edit:
-        name: About you
-        setting: About your setting
     settings:
       show:
         # FIXME: routing

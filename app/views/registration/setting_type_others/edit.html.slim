@@ -4,10 +4,6 @@
   .govuk-grid-column-two-thirds-from-desktop
     = form_for @user_form, url: registration_setting_type_other_path, data: { turbo: false }, method: :patch do |f|
       = f.govuk_error_summary
-      = f.govuk_fieldset legend: { text: t(:heading, scope: [:extra_registration, 'setting_type_other']) } do
-        p.govuk_body
-          = translate_markdown(t(:body, scope: [:extra_registration, 'setting_type_other']))
-        = f.govuk_text :setting_type_other
-        p.govuk_body
-          = govuk_link_to t(:setting_type_other, scope: [:extra_registration]), edit_registration_setting_type_other_path)
+      = f.govuk_fieldset legend: { text: t('.heading') } do
+        = f.govuk_text_field :setting_type_other, label: {text: t('.body')}
       = f.govuk_submit t(:button, scope: [:extra_registration, 'setting_type'])

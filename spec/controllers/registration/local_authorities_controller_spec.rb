@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Registration::NamesController, type: :controller do
+RSpec.describe Registration::LocalAuthoritiesController, type: :controller do
   context 'when not signed in' do
     describe 'GET #edit' do
       it 'redirects' do
@@ -31,8 +31,8 @@ RSpec.describe Registration::NamesController, type: :controller do
 
     describe 'POST #update' do
       it 'succeeds' do
-        post :update, params: { user: { first_name: 'Jane', last_name: 'Smith' } }
-        expect(response).to redirect_to edit_registration_setting_type_path
+        post :update, params: { user: { local_authority: 'A Local Authority' } }
+        expect(response).to redirect_to edit_registration_role_type_path
       end
     end
   end

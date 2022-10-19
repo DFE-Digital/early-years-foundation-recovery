@@ -35,31 +35,6 @@ RSpec.describe 'User', type: :request do
         expect(update_user).to redirect_to(user_path)
       end
     end
-
-    describe 'GET /user/edit-postcode' do
-      it 'renders the edit postcode form' do
-        get edit_postcode_user_path
-        expect(response).to have_http_status(:success)
-      end
-    end
-
-    describe 'patch /user/update-postcode' do
-      let(:update_user) do
-        patch update_name_user_path, params: { user: { postcode: 'wd180dn' } }
-      end
-
-      it "updates the user's postcode" do
-        expect { update_user }.to change(user.reload, :postcode).to('WD18 0DN')
-      end
-
-      it 'redirects back to the account page' do
-        expect(update_user).to redirect_to(user_path)
-      end
-    end
-
-    # TODO: spec coverage for user edit forms - email, ofsted_number
-    # describe '' do
-    # end
   end
 
   describe 'Unconfirmed user, not signed in' do

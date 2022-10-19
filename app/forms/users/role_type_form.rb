@@ -4,6 +4,10 @@ module Users
 
     validates :role_type, presence: true
 
+    def name
+      'role_types'
+    end
+
     def save
       if valid?
         user.update!(

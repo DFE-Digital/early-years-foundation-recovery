@@ -1,6 +1,6 @@
 class Registration::NamesController < ApplicationController
   before_action :authenticate_user!
-  
+
   def edit
     @user_form = Users::NameForm.new(user: current_user)
   end

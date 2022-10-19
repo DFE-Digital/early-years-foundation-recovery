@@ -4,6 +4,10 @@ module Users
 
     validates :first_name, :last_name, presence: true
 
+    def name
+      'names'
+    end
+
     def save
       user.update!(first_name: first_name, last_name: last_name) if valid?
     end

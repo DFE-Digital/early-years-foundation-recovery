@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Registration::NamesController, type: :controller do
+RSpec.describe Registration::RoleTypesController, type: :controller do
   context 'when not signed in' do
     describe 'GET #edit' do
       it 'redirects' do
@@ -18,7 +18,7 @@ RSpec.describe Registration::NamesController, type: :controller do
   end
 
   context 'when confirmed user signed in' do
-    let(:confirmed_user) { create :user, :confirmed }
+    let(:confirmed_user) { create :user, :confirmed, :name, :setting_type }
 
     before { sign_in confirmed_user }
 
@@ -31,8 +31,9 @@ RSpec.describe Registration::NamesController, type: :controller do
 
     describe 'POST #update' do
       it 'succeeds' do
-        post :update, params: { user: { first_name: 'Jane', last_name: 'Smith' } }
-        expect(response).to redirect_to edit_registration_setting_type_path
+        post :update, params: { user: { role_type: 'Manager' } }
+        expect(response).to redirect_to my_modules_path
+        expect(confirmed_user.reload).to be_registration_complete
       end
     end
   end

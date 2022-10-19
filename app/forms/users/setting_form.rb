@@ -4,6 +4,10 @@ module Users
 
     validates :setting_type, presence: true
 
+    def name
+      'setting_types'
+    end
+
     def save
       if valid?
         user.update!(

@@ -13,7 +13,7 @@ class User < ApplicationRecord
   scope :registered, -> { where(registration_complete: true) }
   scope :not_registered, -> { where(registration_complete: nil) }
 
-  validates :first_name, :last_name, :setting_type, :role_type
+  validates :first_name, :last_name, :setting_type, :role_type,
             presence: true,
             if: proc { |u| u.registration_complete }
 

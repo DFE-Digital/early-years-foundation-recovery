@@ -62,9 +62,12 @@ RSpec.describe 'Page' do
     it { expect(edit_user_registration_path).to have_page_title('Change your password') }
     it { expect(new_user_confirmation_path).to have_page_title('Resend your confirmation') }
 
-    it { expect(extra_registrations_path).to have_page_title 'About you' }
-    it { expect(edit_extra_registration_path(:name)).to have_page_title('About you') }
-    it { expect(edit_extra_registration_path(:setting)).to have_page_title('About your setting') }
+    it { expect(edit_registration_name_path).to have_page_title 'Registration form : About you' }
+    it { expect(edit_registration_setting_type_path).to have_page_title('Registration form : What settings do you work in?') }
+    it { expect(edit_registration_setting_type_other_path).to have_page_title('Registration form : Where do you work?') }
+    it { expect(edit_registration_local_authority_path).to have_page_title('Registration form : What local authority area do you work in?') }
+    it { expect(edit_registration_role_type_path).to have_page_title('Registration form : Which of the following best describes your role?') }
+    it { expect(edit_registration_role_type_other_path).to have_page_title('Registration form : What is your role?') }
 
     it { expect(edit_name_user_path).to have_page_title('Change name') }
     it { expect(edit_email_user_path).to have_page_title('Change email address') }
