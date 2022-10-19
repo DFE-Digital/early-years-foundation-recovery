@@ -4,6 +4,7 @@
       = t(:heading, scope: :assessment_results)
 
     .gem-c-govspeak
+      -# t(:body, scope: :assessment_results) if @assessment.failed?
       = results_banner(**@assessment.result)
 
     = form_with url: '', method: :patch do |f|

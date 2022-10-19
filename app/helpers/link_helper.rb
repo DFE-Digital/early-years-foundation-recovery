@@ -5,7 +5,7 @@ module LinkHelper
     if questionnaire.submitted? && !questionnaire.confidence?
       link_to_next_module_item(questionnaire.module_item)
     else
-      submit_tag questionnaire.next_button_text, class: 'govuk-button'
+      govuk_button_to questionnaire.next_button_text
     end
   end
 
@@ -14,9 +14,9 @@ module LinkHelper
   def link_to_next_module_item(item, link_args = { class: 'govuk-button' })
     mod = item.training_module
     if item.next_item
-      link_to item.next_button_text, training_module_content_page_path(mod, item.next_item), link_args
+      govuk_link_to item.next_button_text, training_module_content_page_path(mod, item.next_item), link_args
     else
-      link_to 'Finish', course_overview_path, link_args
+      govuk_link_to 'Finish', course_overview_path, link_args
     end
   end
 
@@ -30,7 +30,7 @@ module LinkHelper
       else
         training_module_path(mod)
       end
-    link_to 'Previous', path, link_args
+    govuk_link_to 'Previous', path, link_args
   end
 
   # @param state [Symbol]

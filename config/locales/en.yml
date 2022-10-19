@@ -278,6 +278,8 @@ en:
 
   assessment_results:
     heading: Assessment results
+    # body: |
+    #   **Wrong** answers are shown below
     show:
       incorrect: You answered %{answers}. That's not quite right.
       pass:

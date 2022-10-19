@@ -15,7 +15,7 @@ services:
       - RAILS_SERVE_STATIC_FILES=true
       - TIMEOUT_MINUTES=360
       - TRAINING_MODULES
-      - BOT
+      - BOT_TOKEN
     volumes:
       - .:/srv
     tty: true
@@ -36,7 +36,7 @@ services:
       # - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
       # - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
       - DOMAIN=app:3000
-      - BOT
+      - BOT_TOKEN
     networks:
       - recovery
     volumes:
