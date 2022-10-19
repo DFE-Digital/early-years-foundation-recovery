@@ -32,6 +32,7 @@ module EarlyYearsFoundationRecovery
     config.bot_token = ENV['BOT']
     config.feedback_url = ENV.fetch('FEEDBACK_URL', '#FEEDBACK_URL_env_var_missing')
     config.google_analytics_tracking_id = ENV.fetch('TRACKING_ID', '#TRACKING_ID_env_var_missing')
+    config.hotjar_site_id = ENV.fetch('HOTJAR_SITE_ID', '#HOTJAR_SITE_ID_env_var_missing')
     config.training_modules = ENV.fetch('TRAINING_MODULES', 'training-modules')
     config.unlock_in_minutes = ENV.fetch('UNLOCK_IN_MINUTES', '120').to_i
     config.user_timeout_minutes = ENV.fetch('TIMEOUT_MINUTES', '15').to_i
