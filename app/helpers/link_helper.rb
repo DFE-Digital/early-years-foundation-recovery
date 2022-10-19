@@ -1,14 +1,4 @@
 module LinkHelper
-  # @param questionnaire [Questionnaire]
-  # @return [String]
-  def link_to_next_question(questionnaire)
-    if questionnaire.submitted? && !questionnaire.confidence?
-      link_to_next_module_item(questionnaire.module_item)
-    else
-      govuk_button_to questionnaire.next_button_text
-    end
-  end
-
   # @return [String] next content page or course overview
   # @param item [ModuleItem]
   def link_to_next_module_item(item, link_args = { class: 'govuk-button' })
