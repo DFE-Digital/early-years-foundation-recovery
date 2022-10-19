@@ -1,11 +1,11 @@
 doctype html
-html.govuk-template lang="en"
+html.govuk-template lang='en'
   head
-    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
-    title=html_title(@module_item)
+    meta content='text/html; charset=UTF-8' http-equiv='Content-Type' /
+    title= html_title(@module_item)
     = render 'layouts/analytics_header'
-    meta content="width=device-width,initial-scale=1" name="viewport" /
-    meta name="robots" content="noindex,nofollow" /
+    meta content='width=device-width,initial-scale=1' name='viewport' /
+    meta name='robots' content='noindex,nofollow' /
     = tag :meta, property: 'og:image', content: asset_path('images/govuk-opengraph-image.png')
     = csrf_meta_tags
     = csp_meta_tag
@@ -15,8 +15,8 @@ html.govuk-template lang="en"
     = favicon_link_tag asset_path('images/govuk-apple-touch-icon-167x167.png'), rel: 'apple-touch-icon', type: 'image/png', size: '167x167'
     = favicon_link_tag asset_path('images/govuk-apple-touch-icon-180x180.png'), rel: 'apple-touch-icon', type: 'image/png', size: '180x180'
 
-    = stylesheet_link_tag "application", "data-turbo-track": "reload"
-    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
+    = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true
   body.govuk-template__body.govuk-body
     script
       | document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
@@ -37,6 +37,4 @@ html.govuk-template lang="en"
           = govuk_notification_banner title_text: t("banners.#{variant}"), text: translate_markdown(message), success: %w[important notice].include?(variant), classes: "govuk-notification-banner--#{variant}"
         = yield
 
-    = govuk_footer classes: 'noprint' do |footer|
-      - footer.navigation(role: 'contentinfo') do
-        = render 'layouts/footer'
+    = render 'layouts/footer'

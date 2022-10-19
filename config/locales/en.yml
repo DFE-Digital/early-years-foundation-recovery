@@ -257,6 +257,7 @@ en:
       title: I have a different problem
       text: For other problems with creating your account or signing in, please
       link_text: contact us
+
   check_email_password_reset:
     heading: Check your email
     body:
@@ -316,10 +317,12 @@ en:
         ofsted_number: Your setting's Ofsted number, if you have one
     hint:
       user:
-        postcode: If you work in multiple settings, choose the one where you work most often.
+        postcode: |
+          If you work in multiple settings, choose the one where you work most often.
         ofsted_number: |
           This might start with EY followed by 6 numbers, or it might be a number that is 6 or 7 digits long.
-        current_password: We need your current password to confirm your changes.
+        current_password: |
+          We need your current password to confirm your changes.
   notice:
     email_changed: |
       We have sent an email to your new email address with a link to click to confirm the change.
@@ -381,3 +384,4 @@ en:
         other-problems-signing-in: Other problems signing in
         terms-and-conditions: Terms and conditions
         whats-new: What's new
+        sitemap: Sitemap

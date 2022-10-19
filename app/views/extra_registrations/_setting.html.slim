@@ -14,4 +14,4 @@
       = f.govuk_text_field :setting_type_other, label: { text: t(:setting_type_other, scope: 'helpers.label.user') }
 
   = f.govuk_text_field :postcode, hint: nil, 'aria-required': true
-  = f.govuk_text_field :ofsted_number
+  = f.govuk_text_field :ofsted_number, 'aria-required': false

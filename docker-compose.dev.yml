@@ -32,6 +32,9 @@ services:
       dockerfile: pa11y.Dockerfile
     image: recovery:pa11y
     environment:
+      - PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+      # - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+      # - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
       - DOMAIN=app:3000
       - BOT
     networks:
