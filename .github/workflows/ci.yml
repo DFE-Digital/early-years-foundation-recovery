@@ -15,7 +15,7 @@ env:
   DATABASE_URL: postgres://postgres:password@localhost:5432/test
   DOMAIN: recovery.app
   TRAINING_MODULES: demo-modules
-  BOT: bot_token
+  BOT_TOKEN: bot_token
 
 jobs:
   test:
