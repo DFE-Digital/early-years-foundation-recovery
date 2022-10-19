@@ -1,6 +1,4 @@
-class Registration::RoleTypeOthersController < ApplicationController
-  before_action :authenticate_user!
-
+class Registration::RoleTypeOthersController < Registration::BaseController
   def edit
     @user_form = Users::RoleTypeOtherForm.new(user: current_user)
   end
@@ -9,9 +7,13 @@ class Registration::RoleTypeOthersController < ApplicationController
     @user_form = Users::RoleTypeOtherForm.new(user_params.merge(user: current_user))
 
     if @user_form.save
-      track('user_registration', success: true)
-      current_user.update! registration_complete: true
-      redirect_to my_modules_path, notice: t(:complete, scope: :extra_registration)
+      if current_user.registration_complete?
+        redirect_to user_path, notice: 'Role is updated'
+      else
+        track('user_registration', success: true)
+        current_user.update! registration_complete: true
+        redirect_to my_modules_path, notice: t('.complete', scope: :registration)
+      end
     else
       render :edit
     end

@@ -1,6 +1,4 @@
-class Registration::SettingTypesController < ApplicationController
-  before_action :authenticate_user!
-
+class Registration::SettingTypesController < Registration::BaseController
   def edit
     @user_form = Users::SettingForm.new(user: current_user)
   end
@@ -9,7 +7,7 @@ class Registration::SettingTypesController < ApplicationController
     @user_form = Users::SettingForm.new(user_params.merge(user: current_user))
 
     if @user_form.save
-      redirect_to edit_registration_local_authority_path
+      redirect_to next_action { edit_registration_local_authority_path }
     else
       render :edit
     end

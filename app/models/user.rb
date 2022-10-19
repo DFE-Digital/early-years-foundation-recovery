@@ -73,6 +73,14 @@ class User < ApplicationRecord
     !module_time_to_completion.empty?
   end
 
+  def setting
+    setting_type == 'other' ? setting_type_other : setting_type
+  end
+
+  def role 
+    role_type == 'other' ? role_type_other : role_type
+  end
+
 private
 
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]

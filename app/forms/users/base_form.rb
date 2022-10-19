@@ -32,7 +32,7 @@ module Users
     end
 
     def parent
-      OpenStruct.new(title: 'Registration form')
+      OpenStruct.new(title: nil)
     end
 
     attr_accessor :user

@@ -1,4 +1,4 @@
-= govuk_link_to 'Back', edit_registration_setting_type_other_path, class: 'govuk-back-link'
+= govuk_link_to 'Back', edit_registration_setting_type_path, class: 'govuk-back-link'
 
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
@@ -6,4 +6,4 @@
       = f.govuk_error_summary
       = f.govuk_fieldset legend: { text: t('.heading') } do
         = f.govuk_text_field :setting_type_other, label: {text: t('.body')}
-      = f.govuk_submit t(:button, scope: [:extra_registration, 'setting_type'])
+      = f.govuk_submit t('.button')

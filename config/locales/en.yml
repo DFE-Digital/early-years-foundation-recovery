@@ -69,11 +69,9 @@ en:
     notice: Success
   date_completed: "Date completed: %{date}"
 
-  extra_registration:
-    complete: Thank you for creating a child development training account. You can now start the first module.
-    name:
-    setting_type:
-      heading: What setting type do you work in?
+  registration:
+    edit_setting_type:
+      heading: Your setting type
       body: |
         {:.govuk-hint}
           Search for the type of setting or organisation you work in, for example childminder or nursery.
@@ -83,17 +81,9 @@ en:
 
         {:.govuk-hint}
           Your training progress won't be shared with anyone without your permission.
-      button: Continue
-    setting_type_other: I cannot find my setting or organisation
-    local_authority:
-    role_type:
-      heading: Which of the following best describes your role?
-      body: |
-        Your role
-      button: Continue
-    role_type_other: I would describe my role in another way.
-
-  registration:
+      button: Save
+      link_to_setting_type_other: I cannot find my setting or organisation
+    complete: Thank you for creating a child development training account. You can now start the first module.
     names:
       edit:
         heading: About you

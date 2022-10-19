@@ -22,8 +22,6 @@ Rails.application.routes.draw do
     resource :role_type_other, only: %i[edit update]
   end
 
-  resources :extra_registrations, only: %i[index edit update], path: 'extra-registrations'
-
   resource :user, controller: :user, path: 'my-account', only: %i[show] do
     get 'edit-name'
     get 'edit-email'
