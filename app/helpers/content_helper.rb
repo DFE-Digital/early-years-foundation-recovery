@@ -22,15 +22,6 @@ module ContentHelper
     govuk_table(rows: [header, *rows], caption: 'Completed modules')
   end
 
-  # @param text [String] Tag content
-  # @param tag [Symbol] HTML element (default h1)
-  # @return [String, nil]
-  def govuk_heading(text, tag: :h1, size: 'm')
-    return if text.blank?
-
-    content_tag(tag, class: "govuk-heading-#{size}") { text }
-  end
-
   # @param mod [TrainingModule]
   # @return [String]
   def training_module_image(mod)
