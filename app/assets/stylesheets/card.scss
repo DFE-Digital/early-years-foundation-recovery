@@ -31,6 +31,7 @@
 .govuk-card--selectable {
   position: relative;
 
+  // TODO: add content to link, whilst hiding, and retain click-ability
   // a {
   //   // visibility: hidden;
   //   // display: none;
@@ -73,6 +74,12 @@
 .govuk-card--selectable:hover  .govuk-card__actions  ul > li > a:hover {
   color: lighten(#fff, 30%) !important;
 }
+
+/* TODO: change card background to blue if tabbed to using keyboard
+.govuk-card--selectable > a:focus {
+  background-color: govuk-colour("blue");
+}
+*/
 
 .govuk-card--selectable > a:focus {
   background-color: initial !important;
