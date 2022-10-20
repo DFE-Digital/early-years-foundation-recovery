@@ -10,7 +10,12 @@ Rails.application.routes.draw do
   get 'users/timeout', to: 'errors#timeout'
 
   resources :settings, controller: :settings, only: %i[show create]
-
+  
+  devise_scope :user do
+    get   "/check_session_timeout"    => "session_timeout#check_session_timeout"
+    get   "/session_timeout"          => "session_timeout#render_timeout"
+  end
+  
   devise_for :users, controllers: { sessions: 'users/sessions', confirmations: 'confirmations', passwords: 'passwords', registrations: 'registrations' }, path_names: { sign_in: 'sign-in', sign_out: 'sign-out', sign_up: 'sign-up' }
   resources :extra_registrations, only: %i[index edit update], path: 'extra-registrations'
 
