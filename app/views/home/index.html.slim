@@ -14,7 +14,7 @@
             |  and gives practical advice for supporting the development of children
             |  in your early years setting.
 
-          a.govuk-button.govuk-button--start class='govuk-!-margin-bottom-4' role='button' draggable=false data-module='govuk-button' href=course_overview_path
+          = govuk_button_link_to course_overview_path, class: 'govuk-button--start govuk-!-margin-bottom-4' do
             - if @user
               | Learn more
             - else
@@ -49,7 +49,7 @@
       .light-grey-box
         h2.govuk-heading-m Return to your training
         p Sign in to continue learning, see your progress and download certificates.
-        = govuk_link_to 'Sign in', new_user_session_path, class: 'govuk-!-margin-bottom-4 govuk-button'
+        = govuk_button_link_to 'Sign in', new_user_session_path, class: 'govuk-!-margin-bottom-4'
         '
         ' or
         = govuk_link_to 'create an account', new_user_registration_path

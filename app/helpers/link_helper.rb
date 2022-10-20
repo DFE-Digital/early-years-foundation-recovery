@@ -1,18 +1,18 @@
 module LinkHelper
   # @return [String] next content page or course overview
   # @param item [ModuleItem]
-  def link_to_next_module_item(item, link_args = { class: 'govuk-button' })
+  def link_to_next_module_item(item)
     mod = item.training_module
     if item.next_item
-      govuk_link_to item.next_button_text, training_module_content_page_path(mod, item.next_item), link_args
+      govuk_button_link_to item.next_button_text, training_module_content_page_path(mod, item.next_item)
     else
-      govuk_link_to 'Finish', course_overview_path, link_args
+      govuk_button_link_to 'Finish', course_overview_path
     end
   end
 
   # @return [String] previous content page or module overview
   # @param item [ModuleItem]
-  def link_to_previous_module_item(item, link_args = { class: 'govuk-button govuk-button--secondary' })
+  def link_to_previous_module_item(item)
     mod = item.training_module
     path =
       if item.previous_item
@@ -20,7 +20,7 @@ module LinkHelper
       else
         training_module_path(mod)
       end
-    govuk_link_to 'Previous', path, link_args
+    govuk_button_link_to 'Previous', path, class: 'govuk-button--secondary'
   end
 
   # @param state [Symbol]
@@ -36,7 +36,7 @@ module LinkHelper
       else
         training_module_content_page_path(mod, item)
       end
-    govuk_link_to text, path, class: 'govuk-button'
+    govuk_button_link_to text, path
   end
 
   # @param mod [TrainingModule]
