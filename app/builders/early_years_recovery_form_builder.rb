@@ -17,7 +17,7 @@ class EarlyYearsRecoveryFormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
                     nil,
                     multiple: false,
                     link_errors: true,
-                    'aria-required': true,
+                    aria: { required: true },
                     label: { text: 'I confirm that I accept the terms and conditions and privacy policy.' }
   end
 end

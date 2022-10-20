@@ -8,8 +8,8 @@
         | Create an account to access training courses.
 
       = f.govuk_email_field :email, autofocus: true, autocomplete: 'email', label: { text: t('helpers.label.user.email') }, hint: { text: "We'll send you an email with an account activation link." }
-      = f.govuk_password_field :password, label: { text: 'Create password' }, hint: { text: t('password.hardness', length: @minimum_password_length) }, 'aria-required': true
-      = f.govuk_password_field :password_confirmation, 'aria-required': true
+      = f.govuk_password_field :password, label: { text: 'Create password' }, hint: { text: t('password.hardness', length: @minimum_password_length) }, aria: { required: true }
+      = f.govuk_password_field :password_confirmation, aria: { required: true }
 
       = f.govuk_check_boxes_fieldset :terms_and_conditions_agreed_at,
         legend: { class: 'govuk-visually-hidden', text: 'Terms and conditions'}, classes: 'light-grey-box' do

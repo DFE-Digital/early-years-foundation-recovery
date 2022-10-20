@@ -5,8 +5,8 @@
     = f.govuk_fieldset legend: { text: 'Choose a new password' } do
       p.govuk-hint
         = t('password.hardness', length: @minimum_password_length)
-      = f.govuk_password_field :password, label: { text: 'New password', size: 's' }, 'aria-required': true
-      = f.govuk_password_field :password_confirmation, label: { text: 'Confirm password', size: 's' }, 'aria-required': true
+      = f.govuk_password_field :password, label: { text: 'New password', size: 's' }, aria: { required: true }
+      = f.govuk_password_field :password_confirmation, label: { text: 'Confirm password', size: 's' }, aria: { required: true }
     = f.govuk_submit 'Reset password'
 
 = render "devise/shared/form_wrap"

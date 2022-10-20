@@ -3,7 +3,7 @@
     = form_for @user, url: { action: 'update_email' } do |f|
       = f.govuk_error_summary
       = f.govuk_fieldset legend: { text: 'Change email address' } do
-        = f.govuk_email_field :email, autofocus: true, autocomplete: 'email', 'aria-required': true
+        = f.govuk_email_field :email, autofocus: true, autocomplete: 'email', aria: { required: true }
 
       - if @user.pending_reconfirmation?
         p Currently waiting confirmation for: #{@user.unconfirmed_email}

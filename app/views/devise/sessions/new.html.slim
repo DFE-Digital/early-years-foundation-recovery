@@ -14,8 +14,8 @@
     = f.govuk_fieldset legend: { text: 'Sign in to child development training' } do
       p.govuk-body
         | Enter your details to sign in to your personal child development training account. These details are different to any other GOV.UK accounts you may use.
-      = f.govuk_email_field :email, autofocus: true, autocomplete: 'email', label: { text: t('helpers.label.user.email') }, 'aria-required': true
-      = f.govuk_password_field :password, label: { text: 'Password' }, 'aria-required': true
+      = f.govuk_email_field :email, autofocus: true, autocomplete: 'email', label: { text: t('helpers.label.user.email') }, aria: { required: true }
+      = f.govuk_password_field :password, label: { text: 'Password' }, aria: { required: true }
 
       = govuk_details(summary_text: 'Problems signing in') do
         -# OPTIMIZE: refactor to render with locals

@@ -7,7 +7,7 @@
     = f.govuk_fieldset legend: { text: 'Resend your confirmation'} do
       p.govuk-body
         | If you haven't received an email from us containing a link to validate your email, please check your spam folder.
-      = f.govuk_email_field :email, autofocus: true, autocomplete: 'email', value: resource.email_to_confirm, label: { text: t('helpers.label.user.email') }, 'aria-required': true
+      = f.govuk_email_field :email, autofocus: true, autocomplete: 'email', value: resource.email_to_confirm, label: { text: t('helpers.label.user.email') }, aria: { required: true }
     = f.govuk_submit 'Send email'
 
 = render 'devise/shared/form_wrap'
