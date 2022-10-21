@@ -8,7 +8,6 @@ html.govuk-template lang='en'
     = tag.meta name: 'robots', content: 'noindex,nofollow'
     = tag.meta property: 'og:image', content: asset_path('images/govuk-opengraph-image.png')
     = csrf_meta_tags
-    = csp_meta_tag
     = favicon_link_tag asset_path('images/favicon.ico')
     = favicon_link_tag asset_path('images/govuk-apple-touch-icon.png'), rel: 'apple-touch-icon', type: 'image/png'
     = favicon_link_tag asset_path('images/govuk-apple-touch-icon-152x152.png'), rel: 'apple-touch-icon', type: 'image/png', sizes: '152x152'

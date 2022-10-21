@@ -48,13 +48,15 @@ RSpec.shared_context 'with progress' do
   end
 
   def start_confidence_check(mod)
-    # view_pages_before(mod, 'confidence_intro')
     view_pages_before(mod, 'confidence_questionnaire')
   end
 
   def start_summative_assessment(mod)
-    # view_pages_before(mod, 'assessment_intro')
     view_pages_before(mod, 'summative_questionnaire')
+  end
+
+  def fail_summative_assessment(mod)
+    create(:user_assessment, user_id: user.id, module: mod.name)
   end
 
   def view_pages_before_formative_questionnaire(mod)
@@ -107,11 +109,10 @@ RSpec.shared_context 'with progress' do
   end
 
   def complete_module(mod)
-    name = mod.name
-    visit "/modules/#{name}/content-pages/intro"
+    visit "/modules/#{mod.name}/content-pages/intro"
     view_pages_before(mod, 'assessment_results')
     travel_to 5.minutes.from_now
-    visit "/modules/#{name}/content-pages/#{mod.last_page.name}"
+    visit "/modules/#{mod.name}/content-pages/#{mod.last_page.name}"
   end
 
 private
