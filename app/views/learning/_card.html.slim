@@ -9,6 +9,6 @@
         = training_module_image(mod)
 
       .govuk-card__content
-        h3.govuk-heading-m= mod.title
+        h3.govuk-heading-m= "Module #{mod.id}: #{mod.title}"
 
         = link_to_retake_or_results(mod) if current
