@@ -35,10 +35,10 @@ RSpec.describe 'Learning activity', type: :system do
       end
     end
 
-    describe 'Upcoming modules' do
+    describe 'Future modules' do
       it 'shows other modules including drafts' do
         within '#upcoming' do
-          expect(page).to have_text 'Upcoming modules'
+          expect(page).to have_text 'Future modules in this course'
           expect(page).not_to have_text 'First Training Module'
 
           within '#bravo' do
