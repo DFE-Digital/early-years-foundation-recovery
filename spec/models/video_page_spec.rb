@@ -27,7 +27,7 @@ RSpec.describe VideoPage, type: :model do
   describe '#video_url' do
     context 'when vimeo' do
       it 'sources from vimeo' do
-        expect(video_page.video_url).to eq 'https://player.vimeo.com/video/743243040?enablejsapi=1&amp;origin=https://recovery.app'
+        expect(video_page.video_url).to eq 'https://player.vimeo.com/video/743243040?enablejsapi=1&amp;origin=recovery.app'
       end
     end
 
@@ -36,7 +36,7 @@ RSpec.describe VideoPage, type: :model do
       let(:mod_name) { 'charlie' }
 
       it 'sources from youtube' do
-        expect(video_page.video_url).to eq 'https://www.youtube.com/embed/XnP6jaK7ZAY?enablejsapi=1&amp;origin=https://recovery.app'
+        expect(video_page.video_url).to eq 'https://www.youtube.com/embed/XnP6jaK7ZAY?enablejsapi=1&amp;origin=recovery.app'
       end
     end
   end

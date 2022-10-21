@@ -31,7 +31,7 @@ h1.govuk-heading-l My modules
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
   .govuk-grid-row id='upcoming'
     .govuk-grid-column-full
-      h2.govuk-heading-m Upcoming modules
+      h2.govuk-heading-m Future modules in this course
 
     - @user.course.upcoming_modules.each do |mod|
       .govuk-grid-column-one-third-from-desktop.govuk-grid-column-one-half
@@ -39,7 +39,9 @@ h1.govuk-heading-l My modules
           .govuk-card__flex-item id=mod.name
             .govuk-card.govuk-card__height
               .govuk-card__content
-                h3.govuk-heading-s= mod.title
+                h3.govuk-heading-s
+                  = "Coming soon - " if mod.draft?
+                  = "Module #{mod.id}: #{mod.title}"
                 p.govuk-body= mod.description
               .govuk-card__actions
                 - unless mod.draft?
