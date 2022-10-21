@@ -1,0 +1,57 @@
+---
+module-5:
+  5-1-1-2b:
+    questions:
+      1_newborn_reflexes:
+        multi_select: false
+        body: |
+          Which of the newborn reflexes work together together to enable a baby to successfully feed?
+        assessment_summary: |
+          The rooting reflex works together with the sucking reflex to enable the baby to feed. The rooting reflex supports the baby to locate the nipple or teat. The sucking reflex supports successful feeding. 
+        assessment_fail_summary: |
+          Babies will understand what they hear (receptive language) before they are able to express themselves (expressive language).
+          This is why it is important to constantly talk to babies and narrate whatever you are doing.
+        answers:
+          1: "Moro and startle"
+          2: "Rooting and sucking"
+          3: "Sucking and palmar grasp"
+          4: "Sucking and Moro"
+        correct_answers:
+          - 2
+
+  5-1-1-3b:
+    questions:
+      1_newborn_reflexes:
+        multi_select: false
+        body: |
+          Which of the following will gross motor activity help to promote? 
+        assessment_summary: |
+          Activities and opportunities that promote gross motor skills will help to develop: 
+
+          - spatial awareness
+          - core strength
+          - stability
+          - balance
+          - co-ordination
+          - agility
+
+          Early gross motor development will also promote a healthy lifestyle in later life. It is important to plan an environment and curriculum that promotes gross motor activities.
+        assessment_fail_summary: |
+          Activities and opportunities that promote gross motor skills will help to develop: 
+
+          - spatial awareness
+          - core strength
+          - stability
+          - balance
+          - co-ordination
+          - agility
+
+          Early gross motor development will also promote a healthy lifestyle in later life. It is important to plan an environment and curriculum that promotes gross motor activities.
+
+        answers:
+          1: "Weaning"
+          2: "Spatial awareness"
+          3: "Reflexes"
+          4: "Grasp"
+        correct_answers:
+          - 2
