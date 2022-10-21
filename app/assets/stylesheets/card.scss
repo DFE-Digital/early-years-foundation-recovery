@@ -136,3 +136,46 @@
     min-height:220px;
   }
 }
+
+.grid-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 360px;
+
+  @media screen and (min-width: 640px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(max(100px,291px), 1fr));
+    grid-gap: 30px;
+  }
+}
+
+.new-card {
+  position: relative;
+  background-color: govuk-colour("light-grey");
+  border-bottom: 3px solid govuk-colour("blue");
+  color: govuk-colour("blue");
+
+  &:hover {
+    background-color: govuk-colour("blue");
+    a {
+      color: govuk-colour("white") !important;
+    }
+  }
+
+  &-container {
+    padding: 20px;
+  }
+  
+  &-link {
+    text-decoration: none;
+    &:after {
+      position: absolute;
+      content: '';
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
+}
+
