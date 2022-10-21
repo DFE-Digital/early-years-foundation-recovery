@@ -1,4 +1,4 @@
-# Use Ruby-on-Rails as the primary development language and framework
+# Primary development language and framework
 
 * Status: accepted
 
@@ -20,4 +20,4 @@ Within the DfE three programming languages are commonly used for implementation 
 
 ## Decision Outcome
 
-Chosen option: Ruby-on-Rails, because it enables the delivery of the project with the existing team who have knowledge of the project landscape, challenges and domain knowledge.
+Chosen option: [Ruby-on-Rails](https://rubyonrails.org), because it enables the delivery of the project with the existing team who have knowledge of the project landscape, challenges and domain knowledge.
