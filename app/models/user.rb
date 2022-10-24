@@ -58,6 +58,10 @@ class User < ApplicationRecord
     send_devise_notification(:email_taken)
   end
 
+  def send_account_deleted_notification
+    send_devise_notification(:account_deleted)
+  end
+
   # @return [String]
   def name
     [first_name, last_name].compact.join(' ')

@@ -101,8 +101,9 @@ class UserController < ApplicationController
 
     @user = User.find_by(confirmation_token: params[:ref])
   end
-  
+
   def delete_account
+    user.send_account_deleted_notification
     redact_user_info
     sign_out user
     redirect_to static_path('account-deleted')
@@ -128,7 +129,7 @@ private
 
   def redact_user_info
     user.skip_reconfirmation!
-    user.update(first_name: nil, last_name: nil, account_deleted_at: Time.now, email: "redacted_user#{user.id}")
+    user.update!(first_name: 'Redacted', last_name: 'User', account_deleted_at: Time.zone.now, email: "redacted_user#{user.id}@example.com", ofsted_number: nil)
     user.notes.update_all(body: nil)
   end
 end
