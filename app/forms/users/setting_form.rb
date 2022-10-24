@@ -12,7 +12,7 @@ module Users
       if valid?
         user.update!(
           setting_type_id: setting_type_id,
-          setting_type: SettingType.find(setting_type_id).name
+          setting_type: SettingType.find(setting_type_id).name,
         )
       end
     end

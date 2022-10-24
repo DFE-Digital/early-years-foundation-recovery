@@ -7,21 +7,21 @@ RSpec.describe UserController, type: :controller do
   describe '#update_email' do
     before do
       sign_in user
-      post :update_email, params: {user: params }
+      post :update_email, params: { user: params }
     end
 
     context 'when successful' do
       let(:params) do
         {
-          email: 'user@example.com'
+          email: 'user@example.com',
         }
       end
-      
-      it 'redirects' do 
+
+      it 'redirects' do
         expect(response).to have_http_status(:redirect)
       end
 
-      it 'renders a flash notice' do 
+      it 'renders a flash notice' do
         expect(flash[:notice]).to match(/We have sent an email to your new email address with a link to click to confirm the change.\n\nIf you have not received the email after a few minutes, please check your spam folder.\n/)
       end
     end
@@ -29,10 +29,10 @@ RSpec.describe UserController, type: :controller do
     context 'when email is wrong' do
       let(:params) do
         {
-          email: 'invalidemail'
+          email: 'invalidemail',
         }
       end
-      
+
       it 'renders edit' do
         expect(response).to have_http_status(:unprocessable_entity)
       end

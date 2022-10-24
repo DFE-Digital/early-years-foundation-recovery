@@ -31,6 +31,7 @@ RSpec.describe User, type: :model do
         end
       end
     end
+
     context 'none' do
       SettingType.none.each do |setting|
         it 'is not required' do

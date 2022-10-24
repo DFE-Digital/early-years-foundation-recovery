@@ -6,7 +6,7 @@ RSpec.describe Users::LocalAuthorityForm do
 
   specify 'updates local authority' do
     local_authority_form.local_authority = 'local authority'
-    local_authority_form.save
+    local_authority_form.save!
     expect(user.local_authority).to eq('local authority')
   end
 

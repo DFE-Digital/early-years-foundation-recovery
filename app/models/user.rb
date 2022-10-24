@@ -16,7 +16,7 @@ class User < ApplicationRecord
   validates :first_name, :last_name, :setting_type_id,
             presence: true,
             if: proc { |u| u.registration_complete }
-  validates :role_type, presence: true, if: proc {|u| u.role_type_required? }
+  validates :role_type, presence: true, if: proc { |u| u.role_type_required? }
 
   validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
 
@@ -78,7 +78,7 @@ class User < ApplicationRecord
     setting_type == 'other' ? setting_type_other : setting_type
   end
 
-  def role 
+  def role
     role_type == 'other' ? role_type_other : role_type
   end
 

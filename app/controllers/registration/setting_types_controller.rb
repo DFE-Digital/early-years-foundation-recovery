@@ -8,13 +8,11 @@ class Registration::SettingTypesController < Registration::BaseController
 
     if @user_form.save
       if local_authority_next?
-        redirect_to next_action { edit_registration_local_authority_path } 
+        redirect_to next_action { edit_registration_local_authority_path }
+      elsif role_types_next?
+        redirect_to next_action { edit_registration_role_type_apth }
       else
-        if role_types_next?
-          redirect_to next_action { edit_registration_role_type_apth }
-        else
-          complete_registration
-        end
+        complete_registration
       end
     else
       render :edit
