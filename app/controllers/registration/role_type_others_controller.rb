@@ -13,7 +13,7 @@ class Registration::RoleTypeOthersController < Registration::BaseController
         complete_registration
       end
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

@@ -9,7 +9,7 @@ class Registration::SettingTypeOthersController < Registration::BaseController
     if @user_form.save
       redirect_to(next_action { edit_registration_local_authority_path })
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

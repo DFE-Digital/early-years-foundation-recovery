@@ -10,12 +10,12 @@ class Registration::SettingTypesController < Registration::BaseController
       if local_authority_next?
         redirect_to(next_action { edit_registration_local_authority_path })
       elsif role_types_next?
-        redirect_to(next_action { edit_registration_role_type_apth })
+        redirect_to(next_action { edit_registration_role_type_path })
       else
         complete_registration
       end
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

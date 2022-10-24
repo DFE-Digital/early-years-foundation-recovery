@@ -2,7 +2,7 @@
 
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
-    = form_for @user_form, url: registration_role_type_other_path, data: { turbo: false }, method: :patch do |f|
+    = form_for @user_form, url: registration_role_type_other_path, method: :patch do |f|
       = f.govuk_error_summary
       = f.govuk_fieldset legend: { text: t('.heading') } do
         = f.govuk_text_field :role_type_other, label: { text: t('.body') }

@@ -1,7 +1,7 @@
 = link_to_user_action 'Back', edit_registration_setting_type_path, classes: 'govuk-back-link'
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
-    = form_for @user_form, url: registration_local_authority_path, data: { turbo: false }, method: :patch do |f|
+    = form_for @user_form, url: registration_local_authority_path, method: :patch do |f|
       = f.govuk_error_summary
       = f.govuk_fieldset legend: { text: t('.heading') } do
         =translate_markdown(t('.body'))
