@@ -31,7 +31,8 @@ RSpec.describe Registration::SettingTypesController, type: :controller do
 
     describe 'POST #update' do
       it 'succeeds' do
-        post :update, params: { user: { setting_type: 'Nursery' } }
+        setting_type = SettingType.find_by(name: 'Private nursery')
+        post :update, params: { user: { setting_type_id: setting_type.id } }
         expect(response).to redirect_to edit_registration_local_authority_path
       end
     end

@@ -26,10 +26,14 @@ en:
               blank: You must accept the terms and conditions and privacy policy to create an account.
             ofsted_number:
               invalid: This Ofsted number is not recognised.
-            setting_type:
+            setting_type_id:
               blank: You need to enter the setting type you work in. 
             setting_type_other:
               blank: You need to enter the type of setting or organisation where you work.
+            role_type: 
+              blank: You need to select a role.
+            role_type_other:
+              blank: Enter a job title.
   activerecord:
     errors:
       models:
@@ -83,7 +87,6 @@ en:
           Your training progress won't be shared with anyone without your permission.
       button: Save
       link_to_setting_type_other: I cannot find my setting or organisation
-    complete: Thank you for creating a child development training account. You can now start the first module.
     names:
       edit:
         heading: About you
@@ -103,6 +106,8 @@ en:
             Your training progress won't be shared with anyone without your permission.
         button: Continue
         link_to_setting_type_other: I cannot find my setting or organisation
+      update:
+        complete: Thank you for creating a child development training account. You can now start the first module.
     setting_type_others:
       edit:
         heading: Where do you work?
@@ -123,11 +128,15 @@ en:
           Your role
         button: Complete
         link_to_role_type_other: I would describe my role in another way.
+      update:
+        complete: Thank you for creating a child development training account. You can now start the first module.
     role_type_others:
       edit:
         heading: What is your role?
-        body: Enter you job title.
+        body: Enter your job title.
         button: Complete
+      update:
+        complete: Thank you for creating a child development training account. You can now start the first module.
   setting_type:
     heading: Change your setting's information
 

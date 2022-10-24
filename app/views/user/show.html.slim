@@ -24,7 +24,7 @@
     = govuk_summary_list do |other_details|
       - other_details.row do |row|
         - row.key { 'Setting type' }
-        - row.value { @user.setting }
+        - row.value { @user.setting_name }
         - row.action(text: t('links.change'), href: edit_registration_setting_type_path, visually_hidden_text: 'setting_type')
       - other_details.row do |row|
         - row.key { 'Local authority' }

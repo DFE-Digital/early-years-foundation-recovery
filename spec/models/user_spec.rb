@@ -24,8 +24,20 @@ RSpec.describe User, type: :model do
   end
 
   describe '#role_type' do
-    it 'must be present' do
-      expect(build(:user, :registered, role_type: nil)).not_to be_valid
+    context 'childminder and other require a role type' do
+      SettingType.role_type_required.each do |setting_type|
+        it 'must be present' do
+          expect(build(:user, :registered, setting_type_id: setting_type.id, role_type: nil)).not_to be_valid
+        end
+      end
+    end
+    context 'none' do
+      SettingType.none.each do |setting|
+        it 'is not required' do
+          user = build(:user, :registered, setting_type_id: setting.id, role_type: nil)
+          expect(user).to be_valid
+        end
+      end
     end
   end
 

@@ -11,6 +11,12 @@ private
     end
   end
 
+  def complete_registration
+    track('user_registration', success: true)
+    current_user.update! registration_complete: true
+    redirect_to my_modules_path, notice: t('.complete')
+  end
+
   # @see Auditing
   # @return [Boolean]
   def authenticate_user!

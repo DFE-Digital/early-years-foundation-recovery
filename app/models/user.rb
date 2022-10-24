@@ -13,9 +13,10 @@ class User < ApplicationRecord
   scope :registered, -> { where(registration_complete: true) }
   scope :not_registered, -> { where(registration_complete: nil) }
 
-  validates :first_name, :last_name, :setting_type, :role_type,
+  validates :first_name, :last_name, :setting_type_id,
             presence: true,
             if: proc { |u| u.registration_complete }
+  validates :role_type, presence: true, if: proc {|u| u.role_type_required? }
 
   validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
 
@@ -73,7 +74,7 @@ class User < ApplicationRecord
     !module_time_to_completion.empty?
   end
 
-  def setting
+  def setting_name
     setting_type == 'other' ? setting_type_other : setting_type
   end
 
@@ -81,7 +82,23 @@ class User < ApplicationRecord
     role_type == 'other' ? role_type_other : role_type
   end
 
+  def childminder?
+    setting_type_id == 'other' ? false : (setting.role_type == 'childminder')
+  end
+
+  def role_type_required?
+    return false unless setting_type_id
+    return false if setting_type_id == 'other'
+    return false unless registration_complete?
+
+    setting.role_type != 'none'
+  end
+
 private
+
+  def setting
+    @setting ||= SettingType.find(setting_type_id) if setting_type_id
+  end
 
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
   def password_changed_events

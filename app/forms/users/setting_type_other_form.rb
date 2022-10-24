@@ -11,7 +11,7 @@ module Users
     def save
       if valid?
         user.update!(
-          setting_type: 'other',
+          setting_type_id: 'other',
           setting_type_other: setting_type_other,
         )
       end

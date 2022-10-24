@@ -8,6 +8,14 @@ module Users
       'role_types'
     end
 
+    def role_types
+      if user.childminder?
+        RoleType.where(group: :childminder)
+      else
+        RoleType.where(group: :other)
+      end
+    end
+
     def save
       if valid?
         user.update!(

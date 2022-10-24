@@ -1,8 +1,8 @@
 module Users
   class SettingForm < BaseForm
-    attr_accessor :setting_type
+    attr_accessor :setting_type_id
 
-    validates :setting_type, presence: true
+    validates :setting_type_id, presence: true
 
     def name
       'setting_types'
@@ -11,7 +11,8 @@ module Users
     def save
       if valid?
         user.update!(
-          setting_type: setting_type,
+          setting_type_id: setting_type_id,
+          setting_type: SettingType.find(setting_type_id).name
         )
       end
     end

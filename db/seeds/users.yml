@@ -16,7 +16,8 @@ completed@example.com:
   # mandatory if "registration_complete"
   first_name: Demo
   last_name: User
-  setting_type: school
-  role_type: manager
+  setting_type_id: <%= SettingType.first.id %>
+  setting_type: <%= SettingType.first.name %>
+  role_type: <%= RoleType.first.name %>
   # optional
   local_authority: local authority
