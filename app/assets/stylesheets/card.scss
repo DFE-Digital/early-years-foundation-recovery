@@ -158,7 +158,14 @@
   &:hover {
     background-color: govuk-colour("blue");
     a {
-      color: govuk-colour("white") !important;
+      color: govuk-colour("white");
+    }
+  }
+
+  &:focus-within {
+    background-color: govuk-colour("blue");
+    a {
+      color: govuk-colour("black");
     }
   }
 
@@ -175,6 +182,12 @@
       top: 0;
       right: 0;
       bottom: 0;
+    }
+
+    &:focus {
+      @include govuk-focused-text;
+      background-color: $govuk-focus-colour;
+      border-color: transparent;
     }
   }
 }
