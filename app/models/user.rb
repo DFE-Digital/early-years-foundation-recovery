@@ -75,7 +75,7 @@ class User < ApplicationRecord
   end
 
   def setting_name
-    setting_type == 'other' ? setting_type_other : setting_type
+    setting_type_id == 'other' ? setting_type_other : setting_type
   end
 
   def role

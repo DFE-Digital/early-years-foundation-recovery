@@ -1,5 +1,5 @@
 module Users
-  class SettingForm < BaseForm
+  class SettingTypeForm < BaseForm
     attr_accessor :setting_type_id
 
     validates :setting_type_id, presence: true

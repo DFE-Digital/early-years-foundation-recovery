@@ -6,5 +6,6 @@
       = f.govuk_fieldset legend: { text: t('.heading') } do
         =translate_markdown(t('.body'))
         = f.govuk_collection_select :local_authority, LocalAuthority.all, :name, :name, options: { include_blank: true }, label: { text: 'Local authority', class: 'govuk-visually-hidden' }
-        = link_to_user_action t('.multiple_local_authorities'), edit_registration_role_type_path
+        p.govuk_body
+          = link_to_user_action t('.multiple_local_authorities'), edit_registration_role_type_path
       = f.govuk_submit t('.button')

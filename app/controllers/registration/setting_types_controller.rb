@@ -1,10 +1,10 @@
 class Registration::SettingTypesController < Registration::BaseController
   def edit
-    @user_form = Users::SettingForm.new(user: current_user)
+    @user_form = Users::SettingTypeForm.new(user: current_user)
   end
 
   def update
-    @user_form = Users::SettingForm.new(user_params.merge(user: current_user))
+    @user_form = Users::SettingTypeForm.new(user_params.merge(user: current_user))
 
     if @user_form.save
       if local_authority_next?
