@@ -7,7 +7,7 @@ class Registration::SettingTypeOthersController < Registration::BaseController
     @user_form = Users::SettingTypeOtherForm.new(user_params.merge(user: current_user))
 
     if @user_form.save
-      redirect_to next_action { edit_registration_local_authority_path }
+      redirect_to(next_action { edit_registration_local_authority_path })
     else
       render :edit
     end

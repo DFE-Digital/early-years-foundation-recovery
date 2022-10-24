@@ -8,9 +8,9 @@ class Registration::SettingTypesController < Registration::BaseController
 
     if @user_form.save
       if local_authority_next?
-        redirect_to next_action { edit_registration_local_authority_path }
+        redirect_to(next_action { edit_registration_local_authority_path })
       elsif role_types_next?
-        redirect_to next_action { edit_registration_role_type_apth }
+        redirect_to(next_action { edit_registration_role_type_apth })
       else
         complete_registration
       end
@@ -26,7 +26,7 @@ private
   end
 
   def setting
-    @setting_type ||= SettingType.find user_params[:setting_type_id]
+    @setting ||= SettingType.find user_params[:setting_type_id]
   end
 
   def local_authority_next?
