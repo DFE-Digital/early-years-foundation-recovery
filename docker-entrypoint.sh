@@ -12,7 +12,7 @@ then
   fi
 
   if [ ! -d "node_modules" ]; then
-    yarn install
+    bundle exec rails yarn:install
   fi
 
   rm -f tmp/pids/server.pid

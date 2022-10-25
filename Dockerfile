@@ -153,6 +153,8 @@ CMD ["rspec"]
 # ------------------------------------------------------------------------------
 FROM base as pa11y
 
+LABEL org.opencontainers.image.description "Accessibility auditor"
+
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
 
@@ -160,6 +162,6 @@ RUN apk add --no-cache --no-progress npm chromium
 RUN npm install --global --unsafe-perm puppeteer pa11y-ci
 
 COPY .pa11yci /usr/config.json
-COPY pa11y-docker-entrypoint.sh /docker-entrypoint.sh
+COPY docker-entrypoint.pa11y.sh /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
