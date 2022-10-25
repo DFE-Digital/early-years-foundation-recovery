@@ -164,6 +164,7 @@
 
   &:focus-within {
     background-color: govuk-colour("blue");
+    outline: 3px solid govuk-colour('yellow');
     a {
       color: govuk-colour("black");
     }
