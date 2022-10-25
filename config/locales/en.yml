@@ -94,7 +94,7 @@ en:
         button: Continue
     setting_types:
       edit:
-        heading: What settings do you work in?
+        heading: What setting type do you work in?
         body: |
           {:.govuk-hint}
             Search for the type of setting or organisation you work in, for example childminder or nursery.
