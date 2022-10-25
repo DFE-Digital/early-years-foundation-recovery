@@ -8,6 +8,7 @@ services:
     command: foreman start -f Procfile.dev
     healthcheck:
       test: curl --fail http://localhost:3000/health || exit 1
+    restart: on-failure
     environment:
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
       - RAILS_ENV=development
@@ -29,12 +30,9 @@ services:
     container_name: recovery_pa11y
     build:
       context: .
-      dockerfile: pa11y.Dockerfile
+      target: pa11y
     image: recovery:pa11y
     environment:
-      - PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-      # - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
-      # - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
       - DOMAIN=app:3000
       - BOT_TOKEN
     networks:
