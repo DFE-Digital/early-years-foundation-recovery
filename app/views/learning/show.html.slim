@@ -37,7 +37,6 @@ h1.govuk-heading-l My modules
           .govuk-card
             h3.govuk-heading-s= mod.title
             p.govuk-body= mod.description
-            .govuk-card__actions
             - unless mod.draft?
               = govuk_link_to 'View more information about this module', course_overview_path + "#module-#{mod.id}-#{mod.title.downcase.parameterize}"
 
