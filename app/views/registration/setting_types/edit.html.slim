@@ -7,7 +7,7 @@
       = f.govuk_fieldset legend: { text: t('.heading') } do
         p.govuk_body
           = translate_markdown(t('.body'))
-        = f.govuk_collection_select :setting_type_id, SettingType.all, :id, :name, options: { include_blank: true }, label: { text: 'Setting type', class: 'govuk-visually-hidden' }
+        = f.govuk_collection_select :setting_type_id, SettingType.all, :id, :name, options: { include_blank: true }, label: { text: 'Setting type', class: 'govuk-visually-hidden' }, data: { controller: 'autocomplete' }
         p.govuk_body
           = govuk_link_to t('.link_to_setting_type_other'), edit_registration_setting_type_other_path
       = f.govuk_submit t('.button')
