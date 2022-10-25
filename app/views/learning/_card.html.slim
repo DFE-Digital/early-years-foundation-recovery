@@ -1,25 +1,5 @@
-/ .govuk-card__flex-container
-/   .govuk-card__flex-item id=mod.name
-/     .govuk-card.govuk-card--contained.govuk-card--selectable
-/       -# FIXME: a link without text raises accessibility error
-/       a href=training_module_path(mod)
-/       div class='govuk-card__hero govuk-!-margin-bottom-2'
-/         img.full-width-img src=image_path(mod.thumbnail) width=200 alt=mod.name
-/       .govuk-card__content
-/         h3.govuk-heading-m= "Module #{mod.id}: #{mod.title}"
-/         = link_to_retake_or_results(mod) if current
-
 div.new-card
   div.new-card-container
     img.full-width-img src=image_path(mod.thumbnail) width=200 alt=mod.name
     h3.govuk-heading-m
       a.new-card-link href=training_module_path(mod) Module #{mod.id}: #{mod.title}
-
-/ <li>  
-/     <img src="/path/to/image.png" alt="">
-/     <h2>
-/         <a href="/card-design-woes">Card design woes</a>
-/     </h2>
-/     <p>Ten common pitfalls to avoid when designing card components.</p>
-/     <small>By Heydon Pickering</small>
-/ </li>  
