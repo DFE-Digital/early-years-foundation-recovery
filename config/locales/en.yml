@@ -106,6 +106,7 @@ en:
             Your training progress won't be shared with anyone without your permission.
         button: Continue
         link_to_setting_type_other: I cannot find my setting or organisation
+        autocomplete-not-found: No setting found.
       update:
         complete: Thank you for creating a child development training account. You can now start the first module.
     setting_type_others:
@@ -121,6 +122,7 @@ en:
             This could be your county council, district council or London borough.
         button: Continue
         multiple_local_authorities: I work across more than one local authority
+        autocomplete-not-found: No local authority found.
     role_types:
       edit:
         heading: Which of the following best describes your role?
