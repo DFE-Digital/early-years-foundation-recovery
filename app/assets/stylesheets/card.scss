@@ -153,7 +153,6 @@
   position: relative;
   background-color: govuk-colour("light-grey");
   border-bottom: 3px solid govuk-colour("blue");
-  color: govuk-colour("blue");
 
   &:hover {
     background-color: govuk-colour("blue");
@@ -176,6 +175,8 @@
   
   &-link {
     text-decoration: none;
+    color: govuk-colour("blue");
+    
     &:after {
       position: absolute;
       content: '';
