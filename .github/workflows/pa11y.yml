@@ -41,6 +41,8 @@ jobs:
         uses: browser-actions/setup-chrome@latest
       -
         name: Install pa11y-ci
+        env:
+          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: 'true'
         run: |
           npm install --global --unsafe-perm puppeteer pa11y-ci
           mkdir /tmp/pa11y
@@ -48,5 +50,4 @@ jobs:
       -
         name: Audit
         run: |
-          echo "Testing: https://${DOMAIN}/sitemap.xml"
           pa11y-ci --sitemap https://${DOMAIN}/sitemap.xml

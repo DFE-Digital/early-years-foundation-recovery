@@ -56,10 +56,10 @@ jobs:
           bundle config path vendor/bundle
           bundle install --jobs 20 --retry 3
       -
-        name: Set up Node
-        uses: actions/setup-node@v1
+        name: Use Node.js 18
+        uses: actions/setup-node@v3
         with:
-          node-version: 17.6
+          node-version: 18.x
       -
         name: Install asset dependencies
         run: bundle exec rails assets:precompile

@@ -243,10 +243,11 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
 ## Content
 
-Content designers are using the docker development environment.
+Content designers are also using the docker development environment.
+
 You can demo this environment locally using the account `completed@example.com:StrongPassword`.
 When there are significant changes to content structure a soft restart the server may be necessary `./bin/docker-rails restart`.
-Styling changes show render automatically.
+CSS styling changes will appear automatically without needing to restart.
 
 ### YAML
 
