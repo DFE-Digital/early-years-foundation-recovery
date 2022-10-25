@@ -24,27 +24,5 @@ module Pages
       password_field.set(password)
       sign_in_button.click
     end
-
-    def with_blank_email_and_password(email = nil, password = nil)
-      wait_until_header_visible
-
-      email ||= ''
-      password ||= ENV.fetch('USER_PASSWORD', 'StrongPassword')
-
-      email_field.set(email)
-      password_field.set(password)
-      sign_in_button.click
-    end
-
-    def with_invalid_email_and_password(email = nil, password = nil)
-      wait_until_header_visible
-
-      email ||= 'completedexample.com'
-      password ||= ENV.fetch('USER_PASSWORD', 'Strongassword')
-
-      email_field.set(email)
-      password_field.set(password)
-      sign_in_button.click
-    end
   end
 end

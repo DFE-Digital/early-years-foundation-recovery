@@ -9,12 +9,12 @@ describe 'Sign in page' do
     end
 
     it 'Warning is displayed when the user clicks login with blank username' do
-      ui.sign_in.with_blank_email_and_password
+      ui.sign_in.with_email_and_password('','')
       expect(ui.sign_in).to have_warning_title
     end
 
     it 'Warning is displayed when the user clicks login with invalid username' do
-      ui.sign_in.with_invalid_email_and_password
+      ui.sign_in.with_email_and_password( nil ,'Strongassword')
       expect(ui.sign_in).to have_warning_title
     end
 
