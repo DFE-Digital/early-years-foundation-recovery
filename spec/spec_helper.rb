@@ -13,10 +13,8 @@
 # it.
 
 require 'simplecov'
-SimpleCov.minimum_coverage 70
+SimpleCov.minimum_coverage 93
 SimpleCov.start 'rails'
-
-ENV['DOMAIN'] ||= 'https://recovery.app'
 
 require 'pry'
 

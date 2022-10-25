@@ -16,6 +16,7 @@ class ExtraRegistrationsController < ApplicationController
   STEPS = STEP_FORMS.keys.freeze
 
   before_action :authenticate_user!
+  helper_method :current_step
 
   def index
     redirect_to edit_extra_registration_path(STEPS.first)
@@ -40,6 +41,14 @@ class ExtraRegistrationsController < ApplicationController
 
 private
 
+  # @see Auditing
+  # @return [Boolean]
+  def authenticate_user!
+    return true if bot?
+
+    super
+  end
+
   def user_params
     params.require(:user).permit(:first_name, :last_name, :postcode, :ofsted_number, :setting_type, :setting_type_other)
   end
@@ -56,7 +65,6 @@ private
   def current_step
     @current_step ||= params[:id].to_sym
   end
-  helper_method :current_step
 
   # @return [NameForm, SettingForm]
   def current_form_klass

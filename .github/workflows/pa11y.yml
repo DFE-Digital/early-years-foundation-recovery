@@ -1,29 +1,49 @@
 ---
 # ------------------------------------------------------------------------------
-name: Run Pa11y
+name: Check WCAG Standards
 
 on:
+  workflow_run:
+    workflows:
+      - Deploy Staging App
+    branches:
+      - main
+    types:
+      - completed
   workflow_dispatch:
-  push:
-    tags:
-      - rc*
-
-env: 
-  BASE_URL: https://ey-recovery-staging.london.cloudapps.digital
+    inputs:
+      workspace:
+        description: Deployment workspace to test against (staging, dev, pr-xxx)
+        type: string
+        default: staging
 
 jobs:
-  pa11y:
+  test:
     runs-on: ubuntu-latest
+    environment: staging
+    env:
+      BOT: ${{ secrets.BOT_TOKEN }}
+      DOMAIN: ey-recovery-${{ inputs.workspace }}.london.cloudapps.digital
     steps:
       -
+        name: Checkout Code
         uses: actions/checkout@v2
       -
-        name: Use Node.js 12.x
-        uses: actions/setup-node@v1
+        name: Use Node.js 18
+        uses: actions/setup-node@v3
         with:
-          node-version: 12.x
+          node-version: 18.x
       -
-        name: Run pa11y
+        name: Install Chrome
+        uses: browser-actions/setup-chrome@latest
+      -
+        name: Install pa11y-ci
         run: |
-          npm install -g pa11y
-          pa11y $BASE_URL
+          npm install --global --unsafe-perm puppeteer pa11y-ci
+          mkdir /tmp/pa11y
+          sed -i "s/foo/${BOT}/g" .pa11yci
+      -
+        name: Audit
+        run: |
+          echo "Testing: https://${DOMAIN}/sitemap.xml"
+          pa11y-ci --sitemap https://${DOMAIN}/sitemap.xml

@@ -23,14 +23,14 @@ RSpec.describe 'Whats new page' do
         fill_in 'Password', with: user.password
         click_button 'Sign in'
 
-        expect(page).not_to have_current_path '/whats_new'
+        expect(page).not_to have_current_path '/whats-new'
       end
     end
   end
 
   context 'when new user is created' do
     it "does not visit what's new page" do
-      expect(page).not_to have_current_path '/whats_new'
+      expect(page).not_to have_current_path '/whats-new'
     end
   end
 end

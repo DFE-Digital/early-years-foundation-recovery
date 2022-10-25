@@ -31,14 +31,17 @@ h1.govuk-heading-l My modules
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
   .govuk-grid-row id='upcoming'
     .govuk-grid-column-full
-      h2.govuk-heading-m Upcoming modules
+      h2.govuk-heading-m Future modules in this course
+
       .grid-container
         - @user.course.upcoming_modules.each do |mod|
           .govuk-card
-            h3.govuk-heading-s= mod.title
+            h3.govuk-heading-s
+              = "Coming soon - " if mod.draft?
+              = "Module #{mod.id}: #{mod.title}"
             p.govuk-body= mod.description
-            - unless mod.draft?
-              = govuk_link_to 'View more information about this module', course_overview_path + "#module-#{mod.id}-#{mod.title.downcase.parameterize}"
+              - unless mod.draft?
+                = govuk_link_to 'View more information about this module', course_overview_path + "#module-#{mod.id}-#{mod.title.downcase.parameterize}"
 
 - if @user.course.completed_modules.any?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
