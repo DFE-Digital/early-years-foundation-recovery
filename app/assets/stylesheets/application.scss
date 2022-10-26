@@ -58,6 +58,11 @@ pre.code-tip {
   width: 100%;
 }
 
+abbr {
+  cursor: help;
+  text-decoration: none;
+}
+
 .accordion-section-left-column {
   display: inline-block;
   max-width: calc(100% - 142px);
