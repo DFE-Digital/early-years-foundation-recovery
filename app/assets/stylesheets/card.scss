@@ -153,8 +153,14 @@
     }
   }
 
-  &:hover &-link--retake:hover {
-    color: #E7F3FD
+  &:hover &-link--retake {
+    &:hover {
+      color: #E7F3FD
+    }
+
+    &:focus {
+      color: govuk-colour("black");
+    }
   }
 
   &:focus-within {
@@ -166,6 +172,9 @@
       @include govuk-focused-text;
       background-color: $govuk-focus-colour;
       border-color: transparent;
+      outline: 2px solid govuk-colour('yellow');
+      outline-offset: 2px;
+      box-shadow: none;
 
       .new-card-container & {
         color: govuk-colour("black");
