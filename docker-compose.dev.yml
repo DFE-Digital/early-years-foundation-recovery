@@ -35,6 +35,9 @@ services:
     environment:
       - DOMAIN=app:3000
       - BOT_TOKEN
+    depends_on:
+      app:
+        condition: service_healthy
     networks:
       - recovery
     volumes:
