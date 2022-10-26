@@ -342,6 +342,8 @@ en:
       index: Home page
     learning:
       show: My modules
+    notes:
+      show: Learning log
     user:
       show: My account
       edit_name: Change name
