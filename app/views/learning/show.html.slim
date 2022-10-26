@@ -42,7 +42,7 @@ h1.govuk-heading-l My modules
                 h3.govuk-heading-s
                   = "Coming soon - " if mod.draft?
                   = "Module #{mod.id}: #{mod.title}"
-                p.govuk-body= mod.description
+                p.govuk-body= mod.short_description
               .govuk-card__actions
                 - unless mod.draft?
                   = govuk_link_to 'View more information about this module', course_overview_path + "#module-#{mod.id}-#{mod.title.downcase.parameterize}"
