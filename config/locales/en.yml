@@ -176,22 +176,21 @@ en:
       impact on your practice. It is not aimed to provide a pass or fail.
 
       ## Before you start
-
       This test has 10 multiple choice questions.
 
       You must answer all of the questions.
 
-      You must complete this test in one sitting. If you exit part way through
-      the test, your progress will not be saved.
+      You can pause and restart the test as much as you like. If you exit part way through, your progress will be saved.
 
       You can review your total score for the test at the end.
+      
+      To receive a certificate of achievement for this module, you need to receive an overall score of at least %{passmark}%.
 
-      To receive a certificate of achievement for this module, you need to
-      receive an overall score of at least %{passmark}%.
+      If you do not score %{passmark}%, you will be able to see which questions you got wrong. You can repeat the test to improve your score as many times as you want.
+      
+      Your score may be shared anonymously with the Child Development Training team to help DfE measure the impact of this training.
 
-      If you do not score %{passmark}%, you will be able to see which questions
-      you got wrong. You can repeat the test to improve your score as many times
-      as you want to.
+      Scores are not shared with any other third parties or organisations.
 
   confidence_intro:
     heading: Reflect on your learning
