@@ -55,7 +55,7 @@ module LinkHelper
     return unless assessment_progress(mod).attempted?
 
     if assessment_progress(mod).failed?
-      govuk_link_to 'Retake end of module test', new_training_module_assessment_result_path(mod)
+      govuk_link_to 'Retake end of module test', new_training_module_assessment_result_path(mod), no_visited_state: true, class: 'new-card-link--retake'
     else
       govuk_link_to 'View previous test result', training_module_assessment_result_path(mod, mod.assessment_results_page)
     end
