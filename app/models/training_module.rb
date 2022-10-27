@@ -170,4 +170,15 @@ class TrainingModule < YamlBase
   def tab_anchor
     tab_label.parameterize
   end
+
+  # @return [String]
+  def card_title
+    coming_soon = "Coming soon - " if draft?
+    "#{coming_soon}Module #{id}: #{title}"
+  end
+
+  # @return [String]
+  def card_anchor
+    "#{Rails.application.routes.url_helpers.course_overview_path}#module-#{id}-#{title.downcase.parameterize}"
+  end
 end

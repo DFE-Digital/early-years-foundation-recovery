@@ -37,11 +37,9 @@ h1.govuk-heading-l My modules
         - @user.course.upcoming_modules.each do |mod|
           .govuk-card
             h3.govuk-heading-s
-              = "Coming soon - " if mod.draft?
-              = "Module #{mod.id}: #{mod.title}"
+              = mod.card_title
             p.govuk-body= mod.description
-              - unless mod.draft?
-                = govuk_link_to 'View more information about this module', course_overview_path + "#module-#{mod.id}-#{mod.title.downcase.parameterize}"
+            = govuk_link_to 'View more information about this module', mod.card_anchor unless mod.draft?
 
 - if @user.course.completed_modules.any?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
