@@ -67,5 +67,6 @@ localhost.key
 spec/examples.txt
 
 # Infrastructure
-uml/*.svg
-uml/*.png
+uml/*.*
+!uml/*.puml
+erd.svg

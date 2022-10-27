@@ -1,0 +1,7 @@
+---
+title: Child development training
+filetype: svg
+exclude:
+  - ActiveRecord::InternalMetadata
+  - ActiveRecord::SchemaMigration
+inheritance: true

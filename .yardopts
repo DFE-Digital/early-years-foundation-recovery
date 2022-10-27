@@ -4,6 +4,7 @@
 --private
 --markup markdown
 -
-adr/*.md
 data/*.md
+uml/*.md
+adr/*.md
 LICENSE

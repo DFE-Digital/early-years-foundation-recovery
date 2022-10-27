@@ -1,24 +1,17 @@
-' https://github.com/mattjhayes/PlantUML-Examples/blob/master/docs/Diagram-Types/source/deployment-like-diagram.md
-' https://www.guru99.com/deployment-diagram-uml-example.html
 @startuml
-' custom themes
-' !theme sketchy-outline
-
-' make <<foo>> invisible
 hide stereotype
 
-
 <style>
-  ' <<s>>
+  .f {
+    BackgroundColor Pink
+  }
   .s {
     BackgroundColor LightGreen
   }
-  ' <<i>>
   .i {
     BackgroundColor SkyBlue
     FontStyle italic
   }
-  ' <<b>>
   .b {
     BackgroundColor LightSlateGray
     FontStyle italic
@@ -28,33 +21,32 @@ hide stereotype
 
 ' Legend colours need to be updated manually
 legend
-|<back:LightGreen>Environments</back>|
-|<back:SkyBlue>Services</back>|
-|<back:LightSlateGrey>Backend Services</back>|
+|<back:LightGreen>Composition</back>|
+|<back:SkyBlue>Application</back>|
+|<back:LightSlateGrey>Database</back>|
+|<back:Pink>Service</back>|
 endlegend
 
 
-rectangle "Early Years Recovery Docker Environment" {
-  rectangle "docker-compose.yml" as prod {
-    node "RAILS_ENV=production"
-    database "Postgres"
+rectangle "Early Years Recovery Docker" {
+  rectangle "docker-compose.dev.yml" <<s>> {
+    node "RAILS_ENV=development" as dev <<i>>
+    database "early_years_foundation_recovery_development" <<b>>
+    artifact Pa11y <<f>>
+    artifact Yard <<f>>
+    artifact PlantUML <<f>>
   }
 
-  rectangle "docker-compose.dev.yml" as dev {
-    node "RAILS_ENV=development"
-    database "Postgres"
+  rectangle "docker-compose.test.yml" <<s>> {
+    node "RAILS_ENV=test" as test <<i>>
+    database "early_years_foundation_recovery_test" <<b>>
   }
 
-  rectangle "docker-compose.test.yml" as test {
-    node "RAILS_ENV=test"
-    database "Postgres"
-  }
-
-  rectangle "docker-compose.qa.yml" as qa {
-    node "RAILS_ENV=production"
-    database "Postgres"
-    node Firefox
-    node Chrome
+  rectangle "docker-compose.qa.yml" <<s>> {
+    node "RAILS_ENV=production" as qa <<i>>
+    database "early_years_foundation_recovery_production" <<b>>
+    artifact Firefox <<f>>
+    artifact Chrome <<f>>
   }
 
 }
@@ -62,10 +54,13 @@ rectangle "Early Years Recovery Docker Environment" {
 ' straight horizontal/vertical connecting lines
 skinparam linetype ortho
 
-prod --> dev : mount working directory
-prod --> test
-prod --> qa
+dev --> early_years_foundation_recovery_development
+test --> early_years_foundation_recovery_test
+qa --> early_years_foundation_recovery_production
 
+Pa11y --> dev
 
+Firefox <-- qa
+Chrome <-- qa
 
 @enduml
