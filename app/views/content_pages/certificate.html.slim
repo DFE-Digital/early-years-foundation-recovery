@@ -42,14 +42,15 @@ h3 Certified by the Department for Education
   = print_button
 
   p.govuk-body
-    = govuk_link_to 'Download certificate', training_module_content_page_path(training_module, training_module.certificate_page, format: :pdf)
-    br
-    span
+    = govuk_link_to 'Download certificate', training_module_content_page_path(training_module, training_module.certificate_page, format: :pdf), aria: { describedby: 'pdf-details' }
+
+  p#pdf-details.govuk-body
+    span aria-label='file type'
       abbr title='Portable Document Format' PDF
     = ', '
-    span 0.4 MB
+    span aria-label='file size' 0.4 MB
     = ', '
-    span lang='en' 1 page
+    span aria-label='page size' 1 page
 
 
   hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
