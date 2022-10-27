@@ -1,7 +1,7 @@
-div.new-card
-  div.new-card-container
+.new-card
+  .new-card-container
     img.full-width-img src=image_path(mod.thumbnail) width=200 alt=mod.name
     h3.govuk-heading-m
-      a.new-card-link--header href=training_module_path(mod) Module #{mod.id}: #{mod.title}
+      = govuk_link_to "Module #{mod.id}: #{mod.title}", training_module_path(mod), no_visited_state: true, class: 'new-card-link--header'
 
     = link_to_retake_or_results(mod) if current
