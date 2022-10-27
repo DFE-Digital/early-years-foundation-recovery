@@ -1,9 +1,7 @@
 .govuk-card__flex-container
   .govuk-card__flex-item id=mod.name
     .govuk-card.govuk-card--contained.govuk-card--selectable
-      -# hiding the link text breaks clickability
       a href=training_module_path(mod)
-        /= "Go to module #{mod.id}: #{mod.title}"
 
       .govuk-card__hero class='govuk-!-margin-bottom-2'
         = training_module_image(mod)

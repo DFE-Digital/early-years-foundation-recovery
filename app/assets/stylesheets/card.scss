@@ -31,14 +31,6 @@
 .govuk-card--selectable {
   position: relative;
 
-  // TODO: add content to link, whilst hiding, and retain click-ability
-  // a {
-  //   // visibility: hidden;
-  //   // display: none;
-  //   position: relative;
-  //   // z-index: -2;
-  // }
-
   h3 {
     color: govuk-colour("blue");
   }
@@ -50,14 +42,7 @@
   left: 0;
   height: 100%;
   width: 100%;
-  // z-index: 0;
-  // display: none;
 }
-
-// .govuk-card--selectable a {
-//   position: relative;
-//   z-index: 1;
-// }
 
 .govuk-card--selectable:hover {
   background-color: govuk-colour("blue");
@@ -74,12 +59,6 @@
 .govuk-card--selectable:hover  .govuk-card__actions  ul > li > a:hover {
   color: lighten(#fff, 30%) !important;
 }
-
-/* TODO: change card background to blue if tabbed to using keyboard
-.govuk-card--selectable > a:focus {
-  background-color: govuk-colour("blue");
-}
-*/
 
 .govuk-card--selectable > a:focus {
   background-color: initial !important;

@@ -1,6 +1,7 @@
 ---
 alpha:
   title: First Training Module
+  thumbnail: introduction_to_supporting_physical_development
   description: first module description
   objective: first module objective
   criteria: |
@@ -10,12 +11,10 @@ alpha:
     - final thing
   duration: 3
   summative_threshold: 70
-  image:
-    file: introduction_to_supporting_physical_development
-    caption: description of image
 
 bravo:
   title: Second Training Module
+  thumbnail: introduction_to_supporting_physical_development
   description: second module description
   objective: second module objective
   criteria: |
@@ -26,12 +25,10 @@ bravo:
   depends_on: alpha
   duration: 3
   summative_threshold: 70
-  image:
-    file: introduction_to_supporting_physical_development
-    caption: description of image
 
 charlie:
   title: Third Training Module
+  thumbnail: introduction_to_supporting_physical_development
   description: third module description
   objective: third module objective
   criteria: |
@@ -42,12 +39,10 @@ charlie:
   depends_on: bravo
   duration: 3
   summative_threshold: 70
-  image:
-    file: introduction_to_supporting_physical_development
-    caption: description of image
 
 delta:
   title: Fourth Training Module
+  thumbnail: introduction_to_supporting_physical_development
   description: This module is unpublished and therefore not clickable
   objective: fourth module objective
   criteria: |
@@ -57,6 +52,3 @@ delta:
     - final thing
   depends_on: bravo
   draft: true
-  image:
-    file: introduction_to_supporting_physical_development
-    caption: description of image

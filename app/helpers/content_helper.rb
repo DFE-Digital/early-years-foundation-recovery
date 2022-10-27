@@ -25,11 +25,7 @@ module ContentHelper
   # @param mod [TrainingModule]
   # @return [String]
   def training_module_image(mod)
-    image_tag image_path(mod.image['file']),
-              class: 'full-width-img',
-              width: 200,
-              alt: mod.image['caption'],
-              title: mod.image['caption']
+    image_tag image_path(mod.thumbnail), class: 'full-width-img', width: 200, alt: '', title: ''
   end
 
   # @param icon [String, Symbol] Fontawesome icon name
