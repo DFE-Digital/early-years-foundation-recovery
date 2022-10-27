@@ -4,7 +4,7 @@ child-development-and-the-eyfs:
   title: Understanding child development and the EYFS
   thumbnail: 1-thumb-1355279156.jpg
   short_description : |
-    As an early years practitioner, understanding child development and the early years foundation stage (EYFS) will enable you to meet the needs of all the children in your care. 
+
   description: |
     As an early years practitioner, understanding child development and the early years foundation stage (EYFS) will enable you to meet the needs of all the children in your care. 
   objective: |
@@ -22,7 +22,7 @@ brain-development-and-how-children-learn:
   title: Brain development and how children learn
   thumbnail: 2-thumb-1203132106.jpg
   short_description: |
-    The rapid changes that happen in the brain in a child's first years lay critical foundations for later childhood and adult life. As an early years practitioner, you can play a significant role in encouraging and supporting children’s brain development.
+    This module will reinforce your understanding of how a child's brain develops and how to consider factors affecting brain development when planning for your setting. You can start it once you have completed module 1.
   description: |
     The rapid changes that happen in the brain in a child's first years lay critical foundations for later childhood and adult life. As an early years practitioner, you can play a significant role in encouraging and supporting children’s brain development.
   objective: |
@@ -40,7 +40,7 @@ personal-social-and-emotional-development:
   title: Supporting children’s personal, social and emotional development
   thumbnail: 3-thumb-1159321535.jpg
   short_description: |
-    This module explores how you can best support children to learn, develop and rehearse their key personal, social and emotional skills in your everyday practice.
+    This module explores how you can best support children to develop, learn and rehearse their key personal, social and emotional skills. You can start it once you have completed modules 1 and 2.
   description: |
     This module explores how you can best support children to learn, develop and rehearse their key personal, social and emotional skills in your everyday practice.
   objective: |
@@ -58,7 +58,7 @@ module-4:
   title: Supporting language development in the early years
   thumbnail: 4-thumb-157720194.jpg
   short_description: |
-    Children’s speech, language and communication skills affect the way they behave, learn, and interact with the world. As an early years practitioner, you will play a central role in helping children to learn, practise and use a wide range of language with confidence.
+    This module explores how children develop their speech, language and communication skills. It also explains your role in helping children to learn, practise and use a wide range of language with confidence. You can start it once you have completed modules 1, 2 and 3. 
   description: |
     Children’s speech, language and communication skills affect the way they behave, learn, and interact with the world. As an early years practitioner, you will play a central role in helping children to learn, practise and use a wide range of language with confidence.
   objective: |
@@ -69,3 +69,99 @@ module-4:
     - how language skills impact on learning and behaviour
     - the importance of the environment to promote development
   summative_threshold: 70
+
+module-5:
+  depends_on: personal-social-and-emotional-development
+  duration: 2
+  title: Physical development
+  thumbnail: 
+  short_description: |
+    This module explores the different stages of children’s physical development and how you can support them to progress. 
+  description: 
+    
+  objective: 
+    
+  criteria: 
+
+  summative_threshold: 70
+  draft: true
+
+module-6:
+  depends_on: personal-social-and-emotional-development
+  duration: 2
+  title: Encouraging holistic development
+  thumbnail: 
+  short_description: |
+    This module explores what holistic development is, why it’s important for children and how you can promote it in your early years setting.
+  description: 
+    
+  objective: 
+    
+  criteria: 
+
+  summative_threshold: 70
+  draft: true
+
+module-7:
+  depends_on: personal-social-and-emotional-development
+  duration: 2
+  title: Mathematics
+  thumbnail: 
+  short_description: |
+    This module explores how you can teach mathematics in combination with other areas of the early years foundation stage (EYFS). It also considers how you can help children to develop their understanding of number in your setting.
+  description: 
+    
+  objective: 
+    
+  criteria: 
+
+  summative_threshold: 70
+  draft: true
+
+module-8:
+  depends_on: personal-social-and-emotional-development
+  duration: 2
+  title: Planning inclusive learning
+  thumbnail: 
+  short_description: |
+    This module explores strategies to create a diverse and inclusive curriculum and learning environment for all children in your care.
+  description: 
+    
+  objective: 
+    
+  criteria: 
+
+  summative_threshold: 70
+  draft: true
+
+module-9:
+  depends_on: personal-social-and-emotional-development
+  duration: 2
+  title: Effective observation and assessment
+  thumbnail: 
+  short_description: |
+    This module explores different types of observation and assessment, including when and how to use these effectively. It also considers how to ensure that observation does not disrupt children’s learning.
+  description: 
+    
+  objective: 
+    
+  criteria: 
+
+  summative_threshold: 70
+  draft: true
+
+module-10:
+  depends_on: personal-social-and-emotional-development
+  duration: 2
+  title: Supporting individual needs
+  thumbnail: 
+  short_description: |
+    This module explores the importance of identifying children’s individual starting points and needs. It also considers how your knowledge of each child can help you support them to reach their full potential.
+  description: 
+    
+  objective: 
+    
+  criteria:  
+
+  summative_threshold: 70
+  draft: true
