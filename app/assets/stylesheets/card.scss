@@ -137,7 +137,7 @@
   }
 }
 
-.new-card {
+.card {
   position: relative;
   background-color: govuk-colour("light-grey");
   border-bottom: 3px solid govuk-colour("blue");
@@ -176,7 +176,7 @@
       outline-offset: 2px;
       box-shadow: none;
 
-      .new-card-container & {
+      .card-container & {
         color: govuk-colour("black");
       }
     }
