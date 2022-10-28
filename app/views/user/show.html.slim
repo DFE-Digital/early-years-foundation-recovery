@@ -32,7 +32,7 @@
         - row.action(text: t('links.change'), href: edit_ofsted_number_user_path, visually_hidden_text: 'ofsted_number')
       - setting.row do |row|
         - row.key { 'Setting type' }
-        - if @user.setting_type == 'custom'
+        - if @user.setting_type == 'other'
           - row.value { @user.setting_type_other }
         - else
           - row.value { @user.setting_type.capitalize }
