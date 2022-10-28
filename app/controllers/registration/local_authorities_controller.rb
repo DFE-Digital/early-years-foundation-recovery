@@ -1,13 +1,17 @@
 class Registration::LocalAuthoritiesController < Registration::BaseController
   def edit
-    @user_form = Users::LocalAuthorityForm.new(user: current_user)
+    @user_form = Users::LocalAuthorityForm.new(user: current_user, setting_type_id: current_user.setting_type_id, local_authority: current_user.local_authority)
   end
 
   def update
-    @user_form = Users::LocalAuthorityForm.new(user_params.merge(user: current_user))
+    @user_form = Users::LocalAuthorityForm.new(user_params.merge(user: current_user, setting_type_id: current_user.setting_type_id))
 
     if @user_form.save
-      redirect_to(next_action { edit_registration_role_type_path })
+      if @user_form.role_type_next?
+        redirect_to(next_action { edit_registration_role_type_path })
+      else
+        complete_registration
+      end
     else
       render :edit, status: :unprocessable_entity
     end

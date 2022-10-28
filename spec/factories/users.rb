@@ -33,6 +33,10 @@ FactoryBot.define do
       setting_type_id { SettingType.all.sample.id }
     end
 
+    trait :setting_type_with_role_type do
+      setting_type_id { SettingType.where(role_type: ['childminder', 'other']).sample.id }
+    end
+
     trait :display_whats_new do
       display_whats_new { true }
     end

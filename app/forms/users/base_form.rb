@@ -3,9 +3,16 @@ module Users
     include ActiveModel::Model
     include ActiveModel::Validations
 
+    attr_accessor :user, :setting_type_id
+
     def self.model_name
       ActiveModel::Name.new(self, nil, 'User')
     end
+
+    def setting_type
+      SettingType.find setting_type_id 
+    end
+    delegate :local_authority_next?, :role_type_next?, to: :setting_type
 
     def model
       self
@@ -34,8 +41,6 @@ module Users
     def parent
       OpenStruct.new(title: nil)
     end
-
-    attr_accessor :user
 
     def save
       raise 'Define in child class'

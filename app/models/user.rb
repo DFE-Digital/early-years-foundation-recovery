@@ -17,6 +17,9 @@ class User < ApplicationRecord
             presence: true,
             if: proc { |u| u.registration_complete }
   validates :role_type, presence: true, if: proc { |u| u.role_type_required? }
+  validates :setting_type_id,
+            inclusion: { in: SettingType.valid_setting_types },
+            if: proc { |u| u.registration_complete }
 
   validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
 
@@ -88,8 +91,9 @@ class User < ApplicationRecord
 
   def role_type_required?
     return false unless setting_type_id
-    return false if setting_type_id == 'other'
     return false unless registration_complete?
+    return true if setting_type_id == 'other'
+    return false unless SettingType.valid_setting_types.include?(setting_type_id)
 
     setting.role_type != 'none'
   end

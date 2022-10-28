@@ -17,12 +17,12 @@ RSpec.describe 'Confirmed users completing registration' do
     fill_in 'Surname', with: 'Doe'
     click_button 'Continue'
 
-    expect(page).to have_text('What settings do you work in?')
+    expect(page).to have_text('What setting type do you work in?')
 
     click_button 'Continue'
 
     expect(page).to have_text('There is a problem')
-      .and have_text('You need to enter the setting type you work in.')
+      .and have_text('Enter the setting type you work in.')
 
     click_link 'I cannot find my setting or organisation'
 

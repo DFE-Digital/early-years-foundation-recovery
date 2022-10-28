@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Registration local authority', type: :request do
-  subject(:user) { create(:user, :confirmed, :name) }
+  subject(:user) { create(:user, :confirmed, :name, :setting_type_with_role_type) }
 
   before do
     sign_in user

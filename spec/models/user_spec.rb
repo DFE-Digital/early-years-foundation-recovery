@@ -21,6 +21,10 @@ RSpec.describe User, type: :model do
     it 'must be present' do
       expect(build(:user, :registered, setting_type: nil)).not_to be_valid
     end
+
+    it 'must be in list' do
+      expect(build(:user, :registered, setting_type_id: 'wrong')).not_to be_valid
+    end
   end
 
   describe '#role_type' do

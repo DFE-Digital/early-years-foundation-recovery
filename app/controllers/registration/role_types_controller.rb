@@ -2,7 +2,7 @@ class Registration::RoleTypesController < Registration::BaseController
   before_action :authenticate_user!
 
   def edit
-    @user_form = Users::RoleTypeForm.new(user: current_user)
+    @user_form = Users::RoleTypeForm.new(user: current_user, role_type: current_user.role_type)
   end
 
   def update

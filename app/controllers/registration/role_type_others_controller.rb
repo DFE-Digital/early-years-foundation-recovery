@@ -1,6 +1,6 @@
 class Registration::RoleTypeOthersController < Registration::BaseController
   def edit
-    @user_form = Users::RoleTypeOtherForm.new(user: current_user)
+    @user_form = Users::RoleTypeOtherForm.new(user: current_user, role_type_other: current_user.role_type_other)
   end
 
   def update

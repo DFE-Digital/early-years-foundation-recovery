@@ -63,7 +63,7 @@ RSpec.describe 'Page' do
     it { expect(new_user_confirmation_path).to have_page_title('Resend your confirmation') }
 
     it { expect(edit_registration_name_path).to have_page_title 'About you' }
-    it { expect(edit_registration_setting_type_path).to have_page_title('What settings do you work in?') }
+    it { expect(edit_registration_setting_type_path).to have_page_title('What setting type do you work in?') }
     it { expect(edit_registration_setting_type_other_path).to have_page_title('Where do you work?') }
     it { expect(edit_registration_local_authority_path).to have_page_title('What local authority area do you work in?') }
     it { expect(edit_registration_role_type_path).to have_page_title('Which of the following best describes your role?') }

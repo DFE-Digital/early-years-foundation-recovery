@@ -1,6 +1,18 @@
 class SettingType < YamlBase
   set_filename 'setting-type'
 
+  def self.valid_setting_types
+    all.map(&:id).push('other')
+  end
+  
+  def local_authority_next?
+    local_authority?
+  end
+
+  def role_type_next?
+    role_type != 'none'
+  end
+
   def self.childminder
     where(role_type: 'childminder').to_a
   end

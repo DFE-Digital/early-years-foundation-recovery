@@ -18,7 +18,7 @@ RSpec.describe Registration::LocalAuthoritiesController, type: :controller do
   end
 
   context 'when confirmed user signed in' do
-    let(:confirmed_user) { create :user, :confirmed }
+    let(:confirmed_user) { create :user, :confirmed, :name, :setting_type_with_role_type }
 
     before { sign_in confirmed_user }
 
