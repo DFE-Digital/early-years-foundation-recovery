@@ -15,26 +15,18 @@ Rails.application.routes.draw do
 
   namespace :registration do
     resource :name, only: %i[edit update]
-    resource :setting_type, only: %i[edit update]
-    resource :setting_type_other, only: %i[edit update]
-    resource :local_authority, only: %i[edit update]
-    resource :role_type, only: %i[edit update]
-    resource :role_type_other, only: %i[edit update]
+    resource :setting_type, only: %i[edit update], path: 'setting-type'
+    resource :setting_type_other, only: %i[edit update], path: 'setting-type-other'
+    resource :local_authority, only: %i[edit update], path: 'local-authority'
+    resource :role_type, only: %i[edit update], path: 'role-type'
+    resource :role_type_other, only: %i[edit update], path: 'role-type-other'
   end
 
   resource :user, controller: :user, path: 'my-account', only: %i[show] do
-    get 'edit-name'
     get 'edit-email'
-    get 'edit-ofsted-number'
     get 'edit-password'
-    get 'edit-postcode'
-    get 'edit-setting-type'
-    patch 'update-name'
     patch 'update-email'
-    patch 'update-ofsted-number'
     patch 'update-password'
-    patch 'update-postcode'
-    patch 'update-setting-type'
     get 'check-email-confirmation'
     get 'check-email-password-reset'
     resource :notes, path: 'learning-log', only: %i[show create update]

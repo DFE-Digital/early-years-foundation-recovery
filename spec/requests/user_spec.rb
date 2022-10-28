@@ -15,14 +15,14 @@ RSpec.describe 'User', type: :request do
 
     describe 'GET /user/edit-name' do
       it 'renders edit name form' do
-        get edit_name_user_path
+        get edit_registration_name_path
         expect(response).to have_http_status(:success)
       end
     end
 
     describe 'patch /user/update-name' do
       let(:update_user) do
-        patch update_name_user_path, params: { user: { first_name: first_name } }
+        patch registration_name_path, params: { user: { first_name: first_name, last_name: user.last_name } }
       end
 
       let(:first_name) { 'Foo-Bar' }

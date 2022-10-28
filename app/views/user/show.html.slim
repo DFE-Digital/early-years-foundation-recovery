@@ -8,7 +8,7 @@
       - your_details.row do |row|
         - row.key { 'Name' }
         - row.value { @user.name }
-        - row.action(text: t('links.change'), href: edit_name_user_path, visually_hidden_text: 'name')
+        - row.action(text: t('links.change'), href: edit_registration_name_path, visually_hidden_text: 'name')
       - your_details.row do |row|
         - row.key { 'Email' }
         - row.value { @user.email }

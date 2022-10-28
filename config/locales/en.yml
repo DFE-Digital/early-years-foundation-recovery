@@ -129,7 +129,7 @@ en:
         heading: Which of the following best describes your role?
         body: |
           Your role
-        button: Complete
+        button: Continue
         link_to_role_type_other: I would describe my role in another way.
       update:
         complete: Thank you for creating a child development training account. You can now start the first module.
@@ -137,7 +137,7 @@ en:
       edit:
         heading: What is your role?
         body: Enter your job title.
-        button: Complete
+        button: Continue
       update:
         complete: Thank you for creating a child development training account. You can now start the first module.
   setting_type:

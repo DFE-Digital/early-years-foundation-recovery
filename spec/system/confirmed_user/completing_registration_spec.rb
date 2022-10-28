@@ -39,7 +39,7 @@ RSpec.describe 'Confirmed users completing registration' do
 
     expect(page).to have_text('Which of the following best describes your role?')
 
-    click_button 'Complete'
+    click_button 'Continue'
 
     expect(page).to have_text('There is a problem')
       .and have_text('You need to select a role.')
@@ -49,14 +49,14 @@ RSpec.describe 'Confirmed users completing registration' do
     expect(page).to have_text('What is your role?')
       .and have_text('Enter your job title.')
 
-    click_button 'Complete'
+    click_button 'Continue'
 
     expect(page).to have_text('There is a problem')
       .and have_text('Enter a job title.')
 
     fill_in 'Enter your job title.', with: 'user defined job title'
 
-    click_button 'Complete'
+    click_button 'Continue'
 
     expect(page).to have_text('Thank you for creating a child development training account. You can now start the first module.')
   end

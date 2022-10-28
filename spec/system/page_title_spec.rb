@@ -69,7 +69,6 @@ RSpec.describe 'Page' do
     it { expect(edit_registration_role_type_path).to have_page_title('Which of the following best describes your role?') }
     it { expect(edit_registration_role_type_other_path).to have_page_title('What is your role?') }
 
-    it { expect(edit_name_user_path).to have_page_title('Change name') }
     it { expect(edit_email_user_path).to have_page_title('Change email address') }
     it { expect(edit_password_user_path).to have_page_title('Change password') }
 
