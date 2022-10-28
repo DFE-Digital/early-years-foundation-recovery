@@ -33,6 +33,12 @@ RSpec.describe 'Learning activity', type: :system do
           expect(page).not_to have_text 'Fourth Training Module'
         end
       end
+
+      it 'visits interruption page when clicked' do
+        within '#available' do
+          expect(page).to have_link '', href: '/modules/alpha/content-pages/what-to-expect'
+        end
+      end
     end
 
     describe 'Future modules' do
@@ -78,6 +84,12 @@ RSpec.describe 'Learning activity', type: :system do
         expect(page).to have_text 'Modules in progress'
         expect(page).to have_text 'First Training Module'
         expect(page).not_to have_text 'You have not started any modules.'
+      end
+    end
+
+    it 'visits my modules page when clicked' do
+      within '#started' do
+        expect(page).to have_link '', href: '/modules/alpha'
       end
     end
   end

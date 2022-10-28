@@ -54,6 +54,23 @@ RSpec.describe 'Module overview page progress' do
     it 'shows the module recap is not clickable' do
       expect(page).not_to have_link('Reflect on your learning', href: '/modules/alpha/content-pages/1-3-3')
     end
+
+    it 'can click back button to return to interruption page' do
+      click_on 'Back'
+      expect(page).to have_current_path '/modules/alpha/content-pages/what-to-expect'
+    end
+  end
+
+  context 'when the module has been started' do
+    before do
+      start_module(alpha)
+      visit '/modules/alpha'
+    end
+    
+    it 'can click back button to return to my modules page' do
+      click_on 'Back'
+      expect(page).to have_current_path '/my-modules'
+    end
   end
 
   context 'when the module intro is reached' do
