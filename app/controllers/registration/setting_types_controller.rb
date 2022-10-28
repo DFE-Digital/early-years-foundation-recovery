@@ -5,7 +5,7 @@ class Registration::SettingTypesController < Registration::BaseController
 
   def update
     @user_form = Users::SettingTypeForm.new(user_params.merge(user: current_user))
-    
+
     if @user_form.save
       if @user_form.local_authority_next?
         redirect_to(next_action { edit_registration_local_authority_path })

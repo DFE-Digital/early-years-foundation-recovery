@@ -9,7 +9,7 @@ RSpec.describe Users::SettingTypeForm do
       setting_type_form.validate
       expect(setting_type_form.errors[:setting_type_id].first).to eq 'Enter the setting type you work in.'
     end
-    
+
     it 'must be in list' do
       setting_type_form.setting_type_id = 'wrong'
       setting_type_form.validate

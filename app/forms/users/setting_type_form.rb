@@ -6,7 +6,7 @@ module Users
 
     validates :setting_type_id,
               inclusion: { in: SettingType.all.map(&:id).push('other') }
-              
+
     def name
       'setting_types'
     end

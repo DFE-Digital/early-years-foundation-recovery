@@ -4,7 +4,7 @@ class SettingType < YamlBase
   def self.valid_setting_types
     all.map(&:id).push('other')
   end
-  
+
   def local_authority_next?
     local_authority?
   end
