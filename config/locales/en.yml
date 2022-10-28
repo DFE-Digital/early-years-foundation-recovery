@@ -11,9 +11,6 @@ en:
               blank: Enter a first name.
             last_name:
               blank: Enter a surname.
-            postcode:
-              blank: Enter your setting's postcode.
-              invalid: Your setting's postcode is invalid.
             email:
               blank: Enter an email address.
               invalid: Enter a valid email address.
@@ -24,8 +21,6 @@ en:
               confirmation: Sorry, your passwords don't match.
             terms_and_conditions_agreed_at:
               blank: You must accept the terms and conditions and privacy policy to create an account.
-            ofsted_number:
-              invalid: This Ofsted number is not recognised.
             setting_type_id:
               blank: Enter the setting type you work in. 
               inclusion: Enter the setting type you work in.
@@ -35,6 +30,8 @@ en:
               blank: You need to select a role.
             role_type_other:
               blank: Enter a job title.
+            local_authority:
+              blank: Enter the local authority of the setting or organisation you work in most of the time.
   activerecord:
     errors:
       models:
