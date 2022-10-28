@@ -9,7 +9,7 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
     elsif started?
       yield(:started, resume_page)
     else
-      yield(:not_started, mod.interruption_page)
+      yield(:not_started, mod.icons_page)
     end
   end
 

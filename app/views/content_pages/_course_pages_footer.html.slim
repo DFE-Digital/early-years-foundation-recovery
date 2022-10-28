@@ -2,7 +2,14 @@ hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class
 
 .govuk-grid-row
   .govuk-grid-column-one-half
-    = link_to_previous_module_item(@module_item)
+    - if @model.module_item.type == 'interruption_page'
+      = govuk_button_link_to 'Previous', my_modules_path, secondary: true
+    - else
+      = link_to_previous_module_item(@module_item)
 
   .govuk-grid-column-one-half class='govuk-!-text-align-right'
-    = link_to_next_module_item(@module_item)
+    - if @model.module_item.type == 'interruption_page'
+      = govuk_button_link_to 'Next', training_module_path(@model.training_module)
+    - else
+      = link_to_next_module_item(@module_item)
+      

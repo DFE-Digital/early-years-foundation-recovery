@@ -1,7 +1,10 @@
 - content_for(:head) do 
   = tag.meta name: 'turbo-visit-control', content: 'reload'
 
-= govuk_back_link href: my_modules_path
+- if @module_progress.started?
+  = govuk_back_link href: my_modules_path
+- else
+  = govuk_back_link href: training_module_content_page_path(@training_module, @training_module.interruption_page)
 
 .light-grey-box
   .govuk-grid-row

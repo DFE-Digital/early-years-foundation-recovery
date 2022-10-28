@@ -16,10 +16,10 @@ RSpec.describe ModuleOverviewDecorator do
     end
 
     context 'when the module has not begun' do
-      it 'goes to the prompt page' do
+      it 'goes to the icons page' do
         expect(user.events.count).to be_zero
         expect(output[:state]).to be :not_started
-        expect(output[:page]).to eql 'what-to-expect'
+        expect(output[:page]).to eql 'before-you-start'
       end
     end
 

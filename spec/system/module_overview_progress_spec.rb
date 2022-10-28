@@ -40,8 +40,8 @@ RSpec.describe 'Module overview page progress' do
       end
     end
 
-    it 'resumes from the interruption page' do
-      expect(page).to have_link 'Start', href: '/modules/alpha/content-pages/what-to-expect'
+    it 'resumes from the icons page' do
+      expect(page).to have_link 'Start', href: '/modules/alpha/content-pages/before-you-start'
     end
 
     it 'shows the end of module test has not been attempted' do

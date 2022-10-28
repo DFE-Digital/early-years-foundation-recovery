@@ -84,10 +84,10 @@ SitemapGenerator::Sitemap.create do
   add user_notes_path
 
   mod = TrainingModule.published.first
-  add training_module_path(mod)
 
   # Representative content
   add training_module_content_page_path(mod, mod.interruption_page)
+  add training_module_path(mod)
   add training_module_content_page_path(mod, mod.icons_page)
   add training_module_content_page_path(mod, mod.intro_page)
   add training_module_content_page_path(mod, mod.first_content_page)
