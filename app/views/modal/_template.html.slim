@@ -5,7 +5,7 @@
     | **Your about to be signed out**
   p
     | We do this to keep your information secure.
-dialog#js-timeout-warning.govuk-timeout-warning.dialog[data-module="govuk-timeout-warning" data-minutes-idle-timeout="1" data-minutes-modal-visible="{{ data['modalVisibleTime'] or '0.2'}}" data-url-redirect="/timeout" role="dialog" aria-live="polite" aria-labelledby="dialog-title" aria-describedby="at-timer"]
+dialog#js-timeout-warning.govuk-timeout-warning.dialog[data-module="govuk-timeout-warning" data-user-status="#{current_user.present?}" data-minutes-idle-timeout="#{Devise.timeout_in.seconds.in_minutes.to_i-9}"  data-url-redirect="/users/sign-out" role="dialog" aria-live="polite" aria-labelledby="dialog-title" aria-describedby="at-timer"]
   h1#dialog-title.govuk-heading-l
     |  Your about to be signed out
 
@@ -19,5 +19,5 @@ dialog#js-timeout-warning.govuk-timeout-warning.dialog[data-module="govuk-timeou
     | Stay signed in
   br
   br
-  button.govuk-button.govuk-button--secondary[data-module="govuk-button"]
+  button.govuk-button.govuk-button--secondary.js-dialog-cancel[data-module="govuk-button"]
     | Sign out now

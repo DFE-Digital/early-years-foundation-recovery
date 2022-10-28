@@ -1,5 +1,6 @@
 // import '../../vendor/polyfills/Function/prototype/bind'
 // import '../../vendor/polyfills/Element/prototype/classList'
+import axios from 'axios';
 
 function TimeoutWarning ($module) {
 
@@ -17,11 +18,15 @@ function TimeoutWarning ($module) {
   this.idleMinutesBeforeTimeOut = $module.getAttribute('data-minutes-idle-timeout') ? $module.getAttribute('data-minutes-idle-timeout') : 25
   this.timeOutRedirectUrl = $module.getAttribute('data-url-redirect') ? $module.getAttribute('data-url-redirect') : 'timeout'
   this.minutesTimeOutModalVisible = $module.getAttribute('data-minutes-modal-visible') ? $module.getAttribute('data-minutes-modal-visible') : 5
+  this.userLoggedIn = $module.getAttribute('data-user-status') ? $module.getAttribute('data-user-status') : false
   this.timeUserLastInteractedWithPage = ''
+  this.timeUserLastInteractedOnServer = ''
+  this.timeUserLastInteractedOnServerTimout = ''
 }
 
 // Initialise component
 TimeoutWarning.prototype.init = function () {
+
   // Check for module
   if (!this.$module) {
     return
@@ -32,12 +37,16 @@ TimeoutWarning.prototype.init = function () {
     return
   }
 
-  this.pollForSessionTimeout();
+  if(this.userLoggedIn == 'false') {
+    return
+  }
+  //this.pollForSessionTimeout();
   // Start watching for idleness
   this.countIdleTime()
 
   this.$closeButton.addEventListener('click', this.closeDialog.bind(this))
   this.$module.addEventListener('keydown', this.escClose.bind(this))
+  this.$cancelButton.addEventListener('click', this.redirect.bind(this))
 
   // Debugging tip: This event doesn't kick in in Chrome if you have Inspector panel open and have clicked on it
   // as it is now the active element. Click on the window to make it active before moving to another tab.
@@ -81,7 +90,9 @@ TimeoutWarning.prototype.countIdleTime = function () {
   function resetIdleTime () {
     // As user has interacted with the page, reset idle time
     clearTimeout(idleTime)
-
+    console.log('Timer started')
+    console.log(milliSecondsBeforeTimeOut)
+    console.log('Timer started')
     // Start new idle time
     idleTime = setTimeout(this.openDialog.bind(this), milliSecondsBeforeTimeOut)
 
@@ -100,6 +111,7 @@ TimeoutWarning.prototype.openDialog = function () {
   // GET last interactive time from server before showing warning
   // User could be interacting with site in 2nd tab
   // Update time left accordingly
+
   if (!this.isDialogOpen()) {
     document.querySelector('body').classList.add(this.overLayClass)
     this.saveLastFocusedEl()
@@ -258,6 +270,9 @@ TimeoutWarning.prototype.closeDialog = function () {
     this.removeInertFromPageContent()
 
     this.clearTimers()
+    this.pollForSessionTimeout()
+    this.resetSessionTimeout()
+    this.pollForSessionTimeout()
   }
 }
 
@@ -403,37 +418,69 @@ TimeoutWarning.prototype.numberToWords = function () {
   return words.reverse().join(' ')
 }
 
-function nodeListForEach (nodes, callback) {
-  if (window.NodeList.prototype.forEach) {
-    return nodes.forEach(callback)
-  }
-  for (var i = 0; i < nodes.length; i++) {
-    callback.call(window, nodes[i], i, nodes)
-  }
-}
+// function nodeListForEach (nodes, callback) {
+//   if (window.NodeList.prototype.forEach) {
+//     return nodes.forEach(callback)
+//   }
+//   for (var i = 0; i < nodes.length; i++) {
+//     callback.call(window, nodes[i], i, nodes)
+//   }
+// }
 
 
-TimeoutWarning.prototype.pollForSessionTimeout = function() {
-  
-  let request = new XMLHttpRequest();
-  request.onload = function (event) {
-    var status = event.target.status;
-    var response = event.target.response;
+// TimeoutWarning.prototype.pollForSessionTimeout = function() {
+//   // let app = this;
+//   let request = new XMLHttpRequest();
+//   request.onload = function (event) {
+//     var status = event.target.status;
+//     var response = event.target.response;
     
-    // if the remaining valid time for the current user session is less than or equals to 0 seconds.
-    if (status === 200 && (response <= 0)) {
-      window.location.href = '/session_timeout';
-    }
-  };
-  request.open('GET', '/check_session_timeout', true);
-  request.responseType = 'json';
-  request.send();
+//     // if the remaining valid time for the current user session is less than or equals to 0 seconds.
+//     // if (status === 200 && (response <= 0)) {
+//     //   window.location.href = '/users/sign-out';
+//     // }
+//   };
+//   request.open('GET', '/check_session_timeout', true);
+//   request.responseType = 'json';
+//   request.send();
 
-  return response;
+//   request.onreadystatechange = function() {
+//       if (request.readyState == XMLHttpRequest.DONE) {
+//           this.timeUserLastInteractedOnServer = request.response
+//       }
+//   }
+  
+// }
+TimeoutWarning.prototype.pollForSessionTimeout = function() {
+  axios.get('/check_session_timeout')
+    .then((response) => {
+      if(response.data){
+        console.log(response.data);
+        window.localStorage.setItem('timeUserLastInteractedWithPage', new Date())
+      }
+    })
+    .catch(error => console.log(error));
 }
 
- var $timeoutWarnings = document.querySelectorAll('[data-module="govuk-timeout-warning"]')
-  nodeListForEach($timeoutWarnings, function ($timeoutWarning) {
-    new TimeoutWarning($timeoutWarning).init()
-  });
-// export default TimeoutWarning;
+TimeoutWarning.prototype.resetSessionTimeout = function() {
+  axios.get('/extend_session')
+    .then((response))
+    .catch(error => console.log(error));
+}
+
+TimeoutWarning.prototype.serverResponse = function(responseServer) {
+  this.timeUserLastInteractedOnServer = responseServer;
+}
+
+TimeoutWarning.prototype.serverResponsePoll = function(responseServer) {
+  clearTimeout(this.timeUserLastInteractedOnServerTimout)
+  this.timeUserLastInteractedOnServerTimout = setTimeout(this.pollForSessionTimeout(), 200);
+}
+
+
+//  var $timeoutWarnings = document.querySelectorAll('[data-module="govuk-timeout-warning"]')
+//   nodeListForEach($timeoutWarnings, function ($timeoutWarning) {
+//     new TimeoutWarning($timeoutWarning).init()
+//   });
+
+  export default TimeoutWarning;
