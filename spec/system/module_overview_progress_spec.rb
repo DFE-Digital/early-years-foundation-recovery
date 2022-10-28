@@ -66,7 +66,7 @@ RSpec.describe 'Module overview page progress' do
       start_module(alpha)
       visit '/modules/alpha'
     end
-    
+
     it 'can click back button to return to my modules page' do
       click_on 'Back'
       expect(page).to have_current_path '/my-modules'
