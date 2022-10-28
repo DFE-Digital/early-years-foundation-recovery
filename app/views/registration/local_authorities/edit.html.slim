@@ -1,4 +1,4 @@
-= link_to_user_action 'Back', edit_registration_setting_type_path, classes: 'govuk-back-link'
+= govuk_back_link href: :back
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
     = form_for @user_form, url: registration_local_authority_path, method: :patch do |f|

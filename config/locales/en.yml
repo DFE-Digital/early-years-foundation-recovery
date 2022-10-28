@@ -27,9 +27,9 @@ en:
             setting_type_other:
               blank: Enter the setting type you work in. 
             role_type: 
-              blank: You need to select a role.
+              blank: Select your role.
             role_type_other:
-              blank: Enter a job title.
+              blank: Enter your job title.
             local_authority:
               blank: Enter the local authority of the setting or organisation you work in most of the time.
   activerecord:
