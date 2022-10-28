@@ -29,7 +29,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: production
+    environment: staging
     env:
       WORKSPACE: staging
       REGISTRY: ghcr.io/dfe-digital/early-years-foundation-recovery

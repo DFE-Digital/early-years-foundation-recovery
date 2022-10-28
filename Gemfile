@@ -70,6 +70,9 @@ gem 'ahoy_matey', '~> 4.0'
 # PDF generator middleware
 gem 'grover', '~> 1.1'
 
+# Pa11y accessibility testing
+gem 'sitemap_generator'
+
 group :development, :test do
   # Use fake data for specs
   gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'

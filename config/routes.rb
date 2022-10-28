@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'about-training', to: 'training_modules#index', as: :course_overview
 
   get '/404', to: 'errors#not_found', via: :all
-  # get '/422', to: 'errors#unacceptable', via: :all
+  get '/422', to: 'errors#unprocessable_entity', via: :all
   get '/500', to: 'errors#internal_server_error', via: :all
   get 'users/timeout', to: 'errors#timeout'
 
@@ -43,11 +43,6 @@ Rails.application.routes.draw do
     resources :content_pages, only: %i[index show], path: 'content-pages'
     resources :questionnaires, only: %i[show update]
     resources :assessment_results, only: %i[show new], path: 'assessment-result'
-
-    # TODO: retire aliases after accessibility audit
-    get 'confidence-check/:id' => 'questionnaires#show'
-    get 'summative-assessments/:id' => 'questionnaires#show'
-    get 'formative-assessments/:id' => 'questionnaires#show'
   end
 
   get '/:id', to: 'static#show', as: :static
