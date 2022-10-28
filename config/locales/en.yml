@@ -28,6 +28,7 @@ en:
               invalid: This Ofsted number is not recognised.
             setting_type_id:
               blank: Enter the setting type you work in. 
+              inclusion: Enter the setting type you work in.
             setting_type_other:
               blank: Enter the setting type you work in. 
             role_type: 
