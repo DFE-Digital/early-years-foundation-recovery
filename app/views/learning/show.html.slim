@@ -34,7 +34,7 @@ h1.govuk-heading-l My modules
 
       .grid-container
         - @user.course.upcoming_modules.each do |mod|
-          .govuk-card
+          .govuk-card id=mod.name
             h3.govuk-heading-s
               = mod.card_title
             p.govuk-body= mod.description
