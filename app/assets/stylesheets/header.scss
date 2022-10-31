@@ -1,0 +1,18 @@
+.govuk-header {
+  background-color: $dfe-blue;
+}
+
+.govuk-header__container {
+  position: relative;
+  margin-bottom: -10px;
+  padding-top: 25px;
+  padding-bottom: 15px;
+  border-bottom: 10px solid $accent;
+}
+
+.govuk-header__product-name, .govuk-header__logotype-text {
+  line-height: 2.5rem !important;
+  font-size: 1.2rem;
+}
+
+.govuk-header__logotype-crown-fallback-image{height: 45px; width: 45px;}

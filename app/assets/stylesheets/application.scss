@@ -1,7 +1,10 @@
 $govuk-new-link-styles: true;
+$dfe-blue: #003a69;
+$accent: #347ca9;
 
 @import "govuk-frontend/govuk/all";
 @import "./govspeak";
+@import "./header";
 @import "./card";
 @import "./prompt";
 @import "./video";
