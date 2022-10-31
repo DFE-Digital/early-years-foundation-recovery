@@ -2,14 +2,8 @@ module LinkHelper
   # @return [String] next content page (ends on certificate)
   # @param item [ModuleItem]
   def link_to_next_module_item(item)
-    path = training_module_content_page_path(item.training_module, item.next_item)
-    # NB: WIP
-    # - Next (content page)
-    # - Save and continue (question page) not used by this method because it is a form
-    # - Start test (assessment intro)
-    # - Finish test (last question)
-    # - Finish (penultimate page)
     text = item.next_button_text
+    path = training_module_content_page_path(item.training_module, item.next_item)
 
     govuk_button_link_to text, path, aria: { label: 'Go to the next page' }
   end
@@ -44,8 +38,6 @@ module LinkHelper
       end
 
     govuk_button_link_to text, path
-    # TODO: maybe label the CTA for accessibility?
-    # , aria: { label: 'Descriptive call to action' }
   end
 
   # Bottom of my-modules card component
