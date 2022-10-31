@@ -179,6 +179,6 @@ class TrainingModule < YamlBase
 
   # @return [String]
   def card_anchor
-    Rails.application.routes.url_helpers.course_overview_path
+    "#module-#{id}-#{title.downcase.parameterize}"
   end
 end
