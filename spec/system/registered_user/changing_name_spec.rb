@@ -4,7 +4,9 @@ RSpec.describe 'Registered user changing name', type: :system do
   include_context 'with user'
 
   before do
-    visit '/registration/name/edit'
+    visit '/'
+    click_link 'My account'
+    click_link(id: 'edit_name_registration')
   end
 
   context 'when valid' do
