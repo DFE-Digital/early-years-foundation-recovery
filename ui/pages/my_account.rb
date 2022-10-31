@@ -6,6 +6,6 @@ module Pages
 
     element :name, '.govuk-summary-list__value', match: :first
 
-    element :edit_name, "#edit_name_registration", text: 'Change'
+    element :edit_name, '#edit_name_registration', text: 'Change'
   end
 end
