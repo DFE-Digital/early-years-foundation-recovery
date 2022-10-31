@@ -100,114 +100,130 @@ module-5:
           Which of the following is a document detailing healthy eating guidance?
         assessment_summary: 
         assessment_fail_summary: |
+          The Eatwell Guide, published by the NHS, shows how much of what we eat overall should come from each food group to achieve a healthy, balanced diet.
+
           Children will need to eat a balance of all the food groups to support and promote physical development. More information can be found on the example menus, linked to in the further reading section of this module. You can use these example menus to offer healthy, balanced and nutritious meals for children.
           
-          You might want to revisit the section on [early intervention for speech, language and communication needs](/modules/module-4/content-pages/4-2-1-2).
+          You might want to revisit the section on [nutrition](/modules/module-5/content-pages/5-1-3-2a).
 
         answers:
-          1: "Nutrients guide"
-          2: "Eatwell guide"
-          3: "Food group guide"
-          4: "Healthy lifestyles guide"
+          1: "Nutrients Guide"
+          2: "Eatwell Guide"
+          3: "Food Group Guide"
+          4: "Healthy Lifestyles Guide"
         correct_answers:
         - 2
  
   5-4-1-6:
     content:
     questions:
-      1_supporting_difficulty:
+      1_holistic_impact:
         multi_select: false
         label: |
-          Limited communication will impact on a child’s ability to self-regulate because they will experience what?
+          Which of the following can be reduced significantly when children take part in regular physical activity?
 
         assessment_summary: 
         assessment_fail_summary: |
-          If a child lacks the communication skills to express their needs it could result in frustration. If children become frustrated it can be shown as negative behaviour.
+          Being active can positively support children’s mental health. Being able to practice and master a skill, for example throwing and catching a ball with control, can help to build a child’s confidence. This will help to reduce the likelihood of children experiencing anxiety and depression. 
+          
+          You will need to make sure that children can access activities that are achievable with appropriate challenge and support. If a child is not able to make progress, even small steps, they will not feel this sense of achievement. It is important that you know about each child’s starting point with physical skills to ensure that you can plan a suitable environment and activities. 
 
-          You might want to revisit the section on [how language development impacts on self-regulation](/modules/module-4/content-pages/4-2-2-1).
+          You might want to revisit the section on activity in the [outdoor environment](/modules/module-5/content-pages/5-3-2-6a).
 
         answers:
           1: "Hunger"
-          2: "Frustration"
-          3: "Happiness"
-          4: "Friendship"
+          2: "Sleep"
+          3: "Illness"
+          4: "Anxiety and depression"
         correct_answers:
-        - 2
+        - 4
   
   5-4-1-7:
     content:
     questions:
-      1_observation_planning:
+      1_limited_physical:
         multi_select: false
         label: |
-          Observations and assessments should not be what?
+          Which of the following might be affected by a child’s limited physical skills?
 
         assessment_summary: 
         assessment_fail_summary: |
-          Observations and the recording of them should not be time consuming or take you away from interacting with the children.
+          A lack of independence as a result of limited physical skills or additional needs may impact upon a child’s feeling of self worth. This will impact on the child’s self efficacy and they will become more reluctant to try as they become overwhelmed by the thought that they cannot succeed. They will then become more and more dependent on others to meet their needs. 
           
-          You might want to revisit the section on [observation, assessment and planning](/modules/module-4/content-pages/4-2-1-5a).
+          It is important that children are empowered to be ambitious for themselves. You will need to adapt your planning to set children small tasks that result in lots of praise and achievement.
+          
+          You might want to revisit the section on the [holistic impact of physical skills](/modules/module-5/content-pages/5-2-1).
         answers:
-          1: "Used in planning"
-          2: "Recorded"
-          3: "Time consuming"
-          4: "Accurate"
+          1: "Self-worth"
+          2: "Sight"
+          3: "Appetite"
+          4: "Hearing"
         correct_answers:
-        - 3
+        - 1
 
   5-4-1-8:
     content:
     questions:
-      1_self_talk:
+      1_practitioners-role:
         multi_select: false 
         label: |
-          Self talk and parallel talk are both types of which strategy?
+          Which of the following best describes your role in children’s physical development?
         assessment_summary: 
         assessment_fail_summary: |
-          Self talk and parallel talk are both ways that you can model language for children. This is where you add commentary to tasks and actions to make sure that children hear a wide variety of vocabulary 
-          
-          You might want to revisit the section on [strategies to help children develop language and communication skills](/modules/module-4/content-pages/4-3-1-2a).
+          You will need to plan an active curriculum to ensure that children’s fine and gross motor skills are promoted. Being an enthusiastic role model will support children’s enthusiasm and motivation to be physically active.
+
+          You might want to revisit the section on [the practitioner's role](/modules/module-5/content-pages/5-3-1).
         answers:
-          1: "Self-regulation"
-          2: "Peer interactions"
-          3: "Modelling language"
-          4: "Socio-economic support"
+          1: "Cautious and considerate"
+          2: "Active and enthusiastic"
+          3: "Informed and involved"
+          4: "Balanced and inclusive"
         correct_answers:
-        - 3
+        - 2
 
   5-4-1-9:
     content:
     questions:
-      1_successful_environment:
-        multi_select: false 
+      1_positive_environment:
+        multi_select: true 
         label: |
-          A successful environment will promote which of the following?
+          Which of the following are significantly improved when children have regular access to an outdoor space?
+          
+          Choose all that apply.
         assessment_summary: 
         assessment_fail_summary: |
-          A successful environment will promote interactions with others. You should also consider how areas and activities in the environment promote discussion and curiosity, leading to investigation.
+          Research shows us that children who regularly access outdoor environments have improved strength, agility and coordination as the freedom to run, climb and swing uses different movements, muscles and control to those needed for indoor movement. 
           
-          You might want to revisit the section on [the physical environment](/modules/module-4/content-pages/4-3-2-1a).
+          Children who have opportunities to test and develop new movement skills also develop greater self confidence.
+
+          You might want to revisit the section on [the outdoor environment](/modules/module-5/content-pages/5-3-2-6a).
         answers:
-          1: "An emphasis on child led activity"
-          2: "Limited interactions"
-          3: "Small group activities"
-          4: "Interactions with others"
+          1: "Strength"
+          2: "Hunger"
+          3: "Agility"
+          4: "Co-ordination"
         correct_answers:
+        - 1
+        - 2
         - 4
 
   5-4-1-10:
     content:
     questions:
       1_positive_partnerships:
-        multi_select: false 
+        multi_select: true
         label: |
-          Positive partnerships with parents and carers will build a sense of security for children. This will support them to communicate with what?
+          Which of the following may affect a child’s physical experiences outside of the setting?
+          
+          Choose all that apply.
 
         assessment_summary: 
         assessment_fail_summary: |
-          Parents and carers are the most knowledgeable person regarding their child and they will be able to share lots of information to support you. Finding out about experiences, siblings and interests will help you to plan to meet their language needs. The information you learn will support you to build a sense of security, which will result in more confidence when communicating.
+          Children’s experiences of physical activity outside of the setting will vary greatly and there are many factors which may influence this including parents having limited time or understanding of expected development. 
           
-          You might want to revisit the section on [strategies for working with parents and carers](/modules/module-4/content-pages/4-3-3-1).
+          You will need to be aware of children’s previous experiences to ensure that you can plan from children’s starting points.
+          
+          You might want to revisit the section on [positive partnerships](/modules/module-5/content-pages/5-3-3).
         answers:
           1: "Confidence"
           2: "Correct grammar"
