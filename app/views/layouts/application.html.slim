@@ -25,7 +25,8 @@ html.govuk-template lang='en'
     
     = govuk_skip_link
 
-    = navigation
+    / = navigation
+    = render 'layouts/header'
 
     .govuk-width-container
       = govuk_phase_banner(tag: { text: 'Beta' }, classes: 'noprint') do
