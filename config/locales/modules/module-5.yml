@@ -354,6 +354,7 @@ en:
           $INFO
 
       5-1-1-7a:
+        notes: true
         heading: |
           Stages of physical development: 37 to 48 months
         body: |
@@ -464,6 +465,7 @@ en:
           $INFO
 
       5-1-2-2:
+        notes: true
         heading: |
           Theories of development - Lev Vygotsky
         body: |
@@ -501,7 +503,7 @@ en:
           - How can you use scaffolding and a more knowledgeable other (MKO) to help them develop their physical skills? 
           - What benefits do you think each of these approaches has for the child?  
 
-
+          $BRAIN
 
       5-1-3:
         heading: |
@@ -521,6 +523,7 @@ en:
           - Additional needs
 
       5-1-3-1a:
+        notes: true
         heading: |
           Socio-economic factors 
         body: |
@@ -578,6 +581,7 @@ en:
           $BRAIN
 
       5-1-3-2a:
+        notes: true
         heading: |
           Nutrition
         body: |
@@ -703,6 +707,7 @@ en:
           - cognitive and language development
 
       5-2-1-1:
+        notes: true
         heading: |
           Health and wellbeing
         body: |
@@ -797,6 +802,7 @@ en:
           You will look at additional needs in more detail in a future module.
 
       5-2-1-3a:
+        notes: true
         heading: |
           Cognitive and language development
         body: |
@@ -940,12 +946,15 @@ en:
           - An enthusiastic approach 
 
       5-3-1-1:
+        notes: true
         heading: |
           Planning an active curriculum
         body: |
           It is essential that you plan a curriculum and environment that encourages children to move and develop physical skills. Child led activities allow children to use their gross and fine motor skills. However, without effective planning they will miss out on opportunities for you to support, correct and promote development.
 
-          Children are more likely to carry out tasks that they feel confident with or are more interested in. This may mean that, without your planning and encouragement, they may never use the painting easel or drawing table. During imaginative play, children may prefer to avoid clothing with lots of fasteners. Or, they may prefer not to go outside if it means having to put on and fasten their coat. Children will also be more comfortable in situations they are familiar with. For example, children may not have had an opportunity to spoon feed themselves. Older children may also still be used to having food cut up for them. 
+          Children are more likely to carry out tasks that they feel confident with or are more interested in. This may mean that, without your planning and encouragement, they may never use the painting easel or drawing table. During imaginative play, children may prefer to avoid clothing with lots of fasteners. Or, they may prefer not to go outside if it means having to put on and fasten their coat. 
+          
+          Children will also be more comfortable in situations they are familiar with. For example, children may not have had an opportunity to spoon feed themselves. Older children may also still be used to having food cut up for them. 
 
           Parents and carers may have avoided risk or might need support to understand an appropriate level of challenge for their child’s age and stage of development. This may mean that children have not experienced certain activities, like going down a taller slide or using scissors. These will need to be planned for. 
 
@@ -1130,6 +1139,7 @@ en:
           Children also need to see and use resources that they can relate to and so it important that the displays, books and resources you use reflect the broad abilities of all genders and abilities. This will support the children to build positive self image and encourage them to try new things and strive to achieve. 
 
       5-3-2-4:
+        notes: true
         heading: |
           Managing risk
         body: |       
@@ -1159,6 +1169,7 @@ en:
 
 
       5-3-2-5a:
+        notes: true
         heading: |
           Cultural diversity
         body: |       
@@ -1184,6 +1195,7 @@ en:
           $BRAIN
 
       5-3-2-6a:
+        notes: true
         heading: |
           The outdoor environment
         body: |       
@@ -1291,6 +1303,7 @@ en:
           You can find links to more information about supporting good oral health in your setting in the further reading section at the end of this module. 
 
       5-3-3-3:
+        notes: true
         heading: |
           Nutrition
         body: |       
