@@ -10,18 +10,17 @@
 }
 
 .govuk-card {
-  border-bottom: 3px solid;
+  border-bottom: govuk-colour("blue") 3px solid;
   box-sizing: border-box;
-  border-color: govuk-colour("blue");
   padding: 20px;
-}
 
-.govuk-card--contained {
-  background-color: govuk-colour("light-grey");
-}
+  &--contained {
+    background-color: govuk-colour("light-grey");
+  }
 
-.govuk-card--contained--on-background {
-  background-color: govuk-colour("white");
+  &--contained--on-background {
+    background-color: govuk-colour("white");
+  }
 }
 
 .govuk-card--borderless {
@@ -31,15 +30,18 @@
 
 .govuk-card--selectable {
   position: relative;
+
+  h3 {
+    color: govuk-colour("blue");
+  }
 }
 
-.govuk-card--selectable h3 {
-  color: govuk-colour("blue");
-}
-
-.govuk-card--selectable a {
-  position: relative;
-  z-index: 1;
+.govuk-card--selectable > a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
 }
 
 .govuk-card--selectable:hover {
@@ -56,15 +58,6 @@
 .govuk-card--selectable:hover .govuk-card__content a,
 .govuk-card--selectable:hover  .govuk-card__actions  ul > li > a:hover {
   color: lighten(#fff, 30%) !important;
-}
-
-.govuk-card--selectable > a {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 0;
 }
 
 .govuk-card--selectable > a:focus {
@@ -134,5 +127,70 @@
 @media screen and (max-width:812px) {
   .govuk-card__height{
     min-height:220px;
+  }
+}
+
+.card {
+  position: relative;
+  background-color: govuk-colour("light-grey");
+  border-bottom: 3px solid govuk-colour("blue");
+
+  &-container {
+    padding: 20px;
+  }
+
+  &:hover, &:focus-within {
+    background-color: govuk-colour("blue");
+    a {
+      color: govuk-colour("white");
+    }
+  }
+
+  &:hover &-link--retake {
+    &:hover {
+      color: govuk-colour("light-grey");
+    }
+
+    &:focus {
+      color: govuk-colour("black");
+    }
+  }
+
+  &:focus-within {
+    outline: 3px solid govuk-colour('yellow');
+  }
+
+  &-link--retake, &-link--header {
+    &:focus {
+      @include govuk-focused-text;
+      background-color: $govuk-focus-colour;
+      border-color: transparent;
+      outline: 2px solid govuk-colour('yellow');
+      outline-offset: 2px;
+      box-shadow: none;
+
+      .card-container & {
+        color: govuk-colour("black");
+      }
+    }
+  }
+
+  &-link--retake {
+    position: relative;
+    z-index: 2;
+  }
+  
+  &-link--header {
+    text-decoration: none;
+    color: govuk-colour("blue");
+    
+    &:after {
+      position: absolute;
+      content: '';
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+    }
   }
 }
