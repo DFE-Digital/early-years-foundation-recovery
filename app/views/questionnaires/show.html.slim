@@ -19,6 +19,10 @@
 
       .govuk-grid-row
         .govuk-grid-column-one-half
-          = link_to_previous_module_item(@questionnaire.module_item)
+          = link_to_previous_module_item @questionnaire.module_item
+
         .govuk-grid-column-one-half class='govuk-!-text-align-right'
-          = link_to_next_question(@questionnaire)
+          - if @questionnaire.submitted? && !@questionnaire.confidence?
+            = link_to_next_module_item @questionnaire.module_item
+          - else
+            = f.govuk_submit @questionnaire.next_button_text
