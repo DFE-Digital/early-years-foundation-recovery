@@ -5,5 +5,5 @@
     = form_for @user_form, url: registration_role_type_other_path, method: :patch do |f|
       = f.govuk_error_summary
       = f.govuk_fieldset legend: { text: t('.heading') } do
-        = f.govuk_text_field :role_type_other, label: { text: t('.body') }
+        = f.govuk_text_field :role_type_other, label: { text: t('.body') }, aria: { required: true }
       = f.govuk_submit t('.button')

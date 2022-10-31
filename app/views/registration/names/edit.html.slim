@@ -6,7 +6,7 @@
       = f.govuk_fieldset legend: { text: t('.heading') } do
         p.govuk_body
           = t('.body')
-        = f.govuk_text_field :first_name
-        = f.govuk_text_field :last_name
+        = f.govuk_text_field :first_name, aria: { required: true }
+        = f.govuk_text_field :last_name, aria: { required: true }
 
       = f.govuk_submit t('.button')
