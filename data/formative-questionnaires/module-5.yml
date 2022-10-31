@@ -21,7 +21,7 @@ module-5:
 
   5-1-1-3b:
     questions:
-      1_newborn_reflexes:
+      1_gross_motor_activity:
         multi_select: false
         body: |
           Which of the following will gross motor activity help to promote? 
@@ -55,3 +55,314 @@ module-5:
           4: "Grasp"
         correct_answers:
           - 2
+
+  5-1-1-4b:
+    questions:
+      1_grasp:
+        multi_select: false
+        body: |
+          What is the name of the grasp which describes when a baby uses their forefinger and thumb to pick up an item?
+        assessment_summary: |
+          Between 7 to 12 months most babies will develop their ability to pick things up with their forefinger and thumb. This is known as the pincer grasp.
+        assessment_fail_summary: |
+          Between 7 to 12 months most babies will develop their ability to pick things up with their forefinger and thumb. This is known as the pincer grasp.
+        answers:
+          1: "Palmar"
+          2: "Pincer"
+          3: "Reflex"
+          4: "Standing"
+        correct_answers:
+          - 2
+
+  5-1-1-5b:
+    questions:
+      1_activity_minutes:
+        multi_select: false
+        body: |
+          How many minutes of activity should a child aged 13 to 24 months complete every day?
+        assessment_summary: |
+          At this age children should be active for at least 180 minutes per day. Their activities should include both indoor and outdoor play. This can include light activity such as standing and moving around, and more energetic activity such as running, jumping and climbing.
+        assessment_fail_summary: |
+          At this age children should be active for at least 180 minutes per day. Their activities should include both indoor and outdoor play. This can include light activity such as standing and moving around, and more energetic activity such as running, jumping and climbing.
+        answers:
+          1: "240"
+          2: "180"
+          3: "200"
+          4: "60"
+        correct_answers:
+          - 2
+
+  5-1-1-7b:
+    questions:
+      1_moderate_vigorous:
+        multi_select: false
+        body: |
+          How many minutes of moderate to vigorous exercise should children aged 48 months have in a day?
+        assessment_summary: |
+          Children of this age should be active for at least 180 minutes per day. At least 60 minutes of this should be moderate to vigorous activity. Children should experience opportunities to be active in both indoor and outdoor areas. In your setting you should plan a wide variety of activities to encourage movement throughout the day. 
+        assessment_fail_summary: |
+          Children of this age should be active for at least 180 minutes per day. At least 60 minutes of this should be moderate to vigorous activity. Children should experience opportunities to be active in both indoor and outdoor areas. In your setting you should plan a wide variety of activities to encourage movement throughout the day. 
+        answers:
+          1: "30"
+          2: "60"
+          3: "90"
+          4: "120"
+        correct_answers:
+          - 2
+
+  5-1-2-1b:
+    questions:
+      1_moderate_vigorous:
+        multi_select: false
+        body: |
+          According to Gesell’s critics, which area of child development did his theories leave out?
+        assessment_summary: |
+          Fellow psychologists, like Piaget, criticised Gesell’s theory. They argued that he did not take a child’s emotional development into consideration. They also disagreed with Gesell’s belief that the environment or interacting with others were not important for children’s development.
+        assessment_fail_summary: |
+          Fellow psychologists, like Piaget, criticised Gesell’s theory. They argued that he did not take a child’s emotional development into consideration. They also disagreed with Gesell’s belief that the environment or interacting with others were not important for children’s development.
+        answers:
+          1: "emotional"
+          2: "social"
+          3: "physical"
+          4: "intellectual"
+        correct_answers:
+          - 1
+
+  5-1-3-1b:
+    questions:
+      1_socio-economic:
+        multi_select: false
+        body: |
+          Which of the following socio-economic factors could have a positive impact on physical development?
+        assessment_summary: |
+          Children from lower income households may have limited access to technology such as tablets and computers. Without these distractions, they may spend more time outdoors or being physically active.
+        assessment_fail_summary: |
+          Children from lower income households may have limited access to technology such as tablets and computers. Without these distractions, they may spend more time outdoors or being physically active.
+        answers:
+          1: "sleeping in a room with multiple people"
+          2: "limited access to technology such as tablets, phones and computers"
+          3: "accommodation with limited outdoor space"
+          4: "a restricted diet"
+        correct_answers:
+          - 2
+
+  5-1-3-2b:
+    questions:
+      1_calories:
+        multi_select: false
+        body: |
+          How many calories do toddlers and pre school aged children need in a day?
+        assessment_summary: |
+          A toddler or pre school aged child needs around 1000 to 1800 calories in a day. These calories should come from a wide range of foods that contain a healthy balance from all food groups. You should teach good habits around healthy eating to children of this age so they continue to eat well throughout their life. 
+        assessment_fail_summary: |
+          A toddler or pre school aged child needs around 1000 to 1800 calories in a day. These calories should come from a wide range of foods that contain a healthy balance from all food groups. You should teach good habits around healthy eating to children of this age so they continue to eat well throughout their life. 
+        answers:
+          1: "800 to 900"
+          2: "1000 to 1800"
+          3: "1800 to 2000"
+          4: "2000 to 2500"
+        correct_answers:
+          - 2
+
+  5-2-1-1b:
+    questions:
+      1_engagement:
+        multi_select: false
+        body: |
+          Which of these factors would not help a practitioner to increase a child’s engagement and motivation in a physical activity?
+        assessment_summary: |
+          Using the same activity for every child would not increase engagement. You should consider children's previous experiences, individual starting points and any additional needs when planning physical activity. This will help you to create an inclusive curriculum. 
+        assessment_fail_summary: |
+          Using the same activity for every child would not increase engagement. You should consider children's previous experiences, individual starting points and any additional needs when planning physical activity. This will help you to create an inclusive curriculum. 
+        answers:
+          1: "Observation and assessment of the child's ability"
+          2: "Adapting activities to cater for all children"
+          3: "1 to 1 support"
+          4: "Using the same activity for every child"
+        correct_answers:
+          - 4
+
+  5-2-1-3b:
+    questions:
+      1_engagement:
+        multi_select: false
+        body: |
+          True or false? 
+          
+          Physical development improves cognitive function.
+        assessment_summary: |
+          Increased movement will result in improved messages and increased blood flow in the brain. This will enhance skills which are vital for a child's development, including: 
+
+          - concentration 
+          - memory
+          - thinking
+          - cognitive skills 
+          
+          Activities with movement will also help children to hear and rehearse new language. You should plan a curriculum and environment with lots of opportunities for children to move and use their fine motor skills. 
+        assessment_fail_summary: |
+          Increased movement will result in improved messages and increased blood flow in the brain. This will enhance skills which are vital for a child's development, including: 
+
+          - concentration 
+          - memory
+          - thinking
+          - cognitive skills 
+          
+          Activities with movement will also help children to hear and rehearse new language. You should plan a curriculum and environment with lots of opportunities for children to move and use their fine motor skills. 
+        answers:
+          1: "True"
+          2: "False"
+        correct_answers:
+          - 1
+
+  5-2-2-2b:
+    questions:
+      1_freedom:
+        multi_select: false
+        body: |
+          True or false? 
+          
+          Freedom to explore can improve children’s strength.
+        assessment_summary: |
+          If children were able to experience an outdoor environment with no time constraints, they may have benefitted from freedom to explore or learn new skills. For example, they could have learned how to forward roll or take part in racing activities. Extended time to practice will have improved their strength, agility, balance and confidence. 
+
+          You should plan your curriculum to include time for children to explore and test new skills. 
+        assessment_fail_summary: |
+          If children were able to experience an outdoor environment with no time constraints, they may have benefitted from freedom to explore or learn new skills. For example, they could have learned how to forward roll or take part in racing activities. Extended time to practice will have improved their strength, agility, balance and confidence. 
+
+          You should plan your curriculum to include time for children to explore and test new skills. 
+        answers:
+          1: "True"
+          2: "False"
+        correct_answers:
+          - 1
+
+  5-3-1-2b:
+    questions:
+      1_freedom:
+        multi_select: true
+        body: |
+          Which of the following will promote physical literacy with children? Choose all that apply.
+        assessment_summary: |
+          Physical literacy is the confidence, motivation and skill levels needed to take part in physical activities. You can promote physical literacy by: 
+          
+          - providing a wealth of activities that support children’s physical skills
+          - making physical activity part of a regular routine 
+          - being a good role model 
+          - offering lots of praise and encouragement for engagement in physical activities 
+          - introducing and reinforcing language relating to movement and physical skills 
+        assessment_fail_summary: |
+          Physical literacy is the confidence, motivation and skill levels needed to take part in physical activities. You can promote physical literacy by: 
+          
+          - providing a wealth of activities that support children’s physical skills
+          - making physical activity part of a regular routine 
+          - being a good role model 
+          - offering lots of praise and encouragement for engagement in physical activities 
+          - introducing and reinforcing language relating to movement and physical skills 
+        answers:
+          1: "Encouraging children’s physical confidence "
+          2: "Being a good role model "
+          3: "Ensuring the routine includes regular opportunities for physical activity "
+          4: "Introducing vocabulary relating to physical activity"
+        correct_answers:
+          - 1
+
+  5-3-2-5b:
+    questions:
+      1_most_effective:
+        multi_select: false
+        body: |
+          Which of the following is most effective for supporting children’s physical development?
+        assessment_summary: |
+          It is important that you use your knowledge of a child’s current level of development and their expected level of development to plan an environment that includes adult and child led activities.
+          
+          You should also plan your environment to ensure that children have access to environments and resources that allow for unplanned opportunities. 
+        assessment_fail_summary: |
+          It is important that you use your knowledge of a child’s current level of development and their expected level of development to plan an environment that includes adult and child led activities.
+          
+          You should also plan your environment to ensure that children have access to environments and resources that allow for unplanned opportunities. 
+        answers:
+          1: "Child led activity "
+          2: "Adult led activity "
+          3: "Unplanned opportunities"
+          4: "A combination of child led, adult led and unplanned opportunities"
+        correct_answers:
+          - 4
+
+  5-3-2-5c:
+    questions:
+      1_risk_averse:
+        multi_select: false
+        body: |
+          What could be the impact of children growing up in risk averse households?
+        assessment_summary: |
+          It is important that you use your knowledge of a child’s current level of development and their expected level of development to plan an environment that includes adult and child led activities.
+          
+          You should also plan your environment to ensure that children have access to environments and resources that allow for unplanned opportunities. 
+        assessment_fail_summary: |
+          It is important that you use your knowledge of a child’s current level of development and their expected level of development to plan an environment that includes adult and child led activities.
+          
+          You should also plan your environment to ensure that children have access to environments and resources that allow for unplanned opportunities. 
+        answers:
+          1: "Excessive challenge "
+          2: "Limited language development"
+          3: "Children who are daring and fearless"
+          4: "Limited experience of risk and challenge"
+        correct_answers:
+          - 4
+
+  5-3-2-6b:
+    questions:
+      1_most_effective:
+        multi_select: false
+        body: |
+          Which of the following vitamins are boosted by outdoor learning?
+        assessment_summary: |
+          Spending time in sunlight can support children’s overall mood and the exposure to vitamin D supports the development of strong and healthy bones and teeth. Children naturally become even more curious when they are outside which will result in spontaneous learning opportunities. Your planning should include lots of opportunities for children to access the outdoors in all seasons. 
+        assessment_fail_summary: |
+          Spending time in sunlight can support children’s overall mood and the exposure to vitamin D supports the development of strong and healthy bones and teeth. Children naturally become even more curious when they are outside which will result in spontaneous learning opportunities. Your planning should include lots of opportunities for children to access the outdoors in all seasons. 
+        answers:
+          1: "Vitamin A"
+          2: "Vitamin B"
+          3: "Vitamin C"
+          4: "Vitamin D"
+        correct_answers:
+          - 4
+
+  5-3-3-4b:
+    questions:
+      1_most_effective:
+        multi_select: false
+        body: |
+          Which C best describes the type of experiences a child should have to promote physical development?
+        assessment_summary: |
+          If children receive consistent experiences at home and in your setting, they are more likely to adopt healthy lifestyles in later life. You can support parents, carers and children by sharing your knowledge and practice and encourage similar practices at home.
+        assessment_fail_summary: |
+          If children receive consistent experiences at home and in your setting, they are more likely to adopt healthy lifestyles in later life. You can support parents, carers and children by sharing your knowledge and practice and encourage similar practices at home.
+        answers:
+          1: "Cautious"
+          2: "Confident"
+          3: "Consistent"
+          4: "Calming"
+        correct_answers:
+          - 3
+
+  5-3-3-4c:
+    questions:
+      1_most_effective:
+        multi_select: true
+        body: |
+          Which of the following can be affected by a child’s oral health? (choose all that apply)
+        assessment_summary: |
+          Poor oral health can impact on all areas of a child’s development as a result of pain and missed learning opportunities. You should share the importance of good oral health with children, parents and carers to positively support development. 
+        assessment_fail_summary: |
+          Poor oral health can impact on all areas of a child’s development as a result of pain and missed learning opportunities. You should share the importance of good oral health with children, parents and carers to positively support development. 
+        answers:
+          1: "Sleep patterns"
+          2: "Eating patterns"
+          3: "Learning opportunities"
+          4: "Relationships"
+        correct_answers:
+          - 1 
+          - 2
+          - 3
+          - 4

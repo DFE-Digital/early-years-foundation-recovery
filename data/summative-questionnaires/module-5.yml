@@ -1,0 +1,217 @@
+---
+module-5:
+  5-4-1-1:
+    content:
+    questions:
+      1_fundamental_motor_skills:
+        multi_select: false 
+        label: |
+          Which 3 skill sets are fundamental motor skills ?
+        assessment_summary: 
+        assessment_fail_summary: |
+          Fundamental motor skills are divided into three different skill sets: manipulation, locomotor and stability. 
+
+          Manipulation skills support us to control objects, locomotor skills  include running, galloping,hopping, skipping,dodging, leaping, twisting and dodging. Stability skills are those 
+
+          needed to control our body and include stopping,, stretching,, landing, twisting and,climbing 
+          
+          You might want to revisit the section on [fundamental motor skills](/modules/module-5/content-pages/5-1-1-1).
+        answers:
+          1: "standing, rolling and hopping"
+          2: "throwing, catching and bouncing"
+          3: "resting, stretching and balancing"
+          4: "manipulation, locomotor and stability"
+        correct_answers:
+        - 4
+
+  5-4-1-2:
+    content:
+    questions:
+      1_7_to_12_months:
+        multi_select: false
+        label: |
+          Which of the following physical actions would you expect a child aged between 7 and 12 months to be able to achieve?
+        assessment_summary: 
+        assessment_fail_summary: |
+          During this period, with the correct support, gross motor skills will develop to include:
+
+          - sitting without support
+          - beginning to crawl 
+          - standing while holding onto something 
+
+          You might want to revisit the section on [stages of physical development: 7 to 12 months](/modules/module-5/content-pages/5-1-1-4a).
+
+        answers:
+          1: "jump on the spot with both feet on the floor"
+          2: "climb onto a chair"
+          3: "sit unsupported"
+          4: "roll a large ball using hands and arms"
+        correct_answers:
+        - 3
+
+  5-4-1-3:
+    content:
+    questions:
+      1_independent:
+        multi_select: true
+        label: |
+          At what age do children show an increased desire to be independent?
+        assessment_summary: 
+        assessment_fail_summary: |
+          Between 25 and 36 months children will be showing an increased desire to be independent. This is a perfect opportunity to encourage skills whilst dressing and undressing, during mealtimes and with self care such as washing hands and toileting. 
+
+          You might want to revisit the section on [stages of physical development: 25 to 36 months](/modules/module-5/content-pages/5-1-1-6).
+        answers:
+          1: "7 to 12 months"
+          2: "13 to 24 months"
+          3: "25 to 36 months"
+          4: "37 to 48 months"
+        correct_answers:
+        - 3
+  
+  5-4-1-4:
+    content:
+    questions:
+      1_gesell:
+        multi_select: false
+        label: |
+          Which of the following was not a key principle of Gesell’s research? 
+        assessment_summary: 
+        assessment_fail_summary: |
+          Gesell did not think that stimulation was essential but suggested that internal factors such as the growth of the child’s nervous system underpinned a child’s development regardless of the interactions they experienced.
+          
+          Criticisms of Gesell’s work and more recent research shows us that children benefit most when we have a clear understanding of their developmental level and use the interactions of others to support this. 
+
+          You might want to revisit the section on [theories of physical development](/modules/module-4/content-pages/5-1-2).
+        answers:
+          1: "All children travel through a set of predictable milestones but do so at their own pace "
+          2: "The pace of a child's development is determined by their internal physical and mental development"
+          3: "Any delays that were experienced are as a result of hereditary factors"
+          4: "Children’s development is heavily influenced  by the interaction of others "
+        correct_answers:
+        - 4
+
+  5-4-1-5:
+    content:
+    questions:
+      1_eatwell:
+        multi_select: false
+        label: |
+          Which of the following is a document detailing healthy eating guidance?
+        assessment_summary: 
+        assessment_fail_summary: |
+          Children will need to eat a balance of all the food groups to support and promote physical development. More information can be found on the example menus, linked to in the further reading section of this module. You can use these example menus to offer healthy, balanced and nutritious meals for children.
+          
+          You might want to revisit the section on [early intervention for speech, language and communication needs](/modules/module-4/content-pages/4-2-1-2).
+
+        answers:
+          1: "Nutrients guide"
+          2: "Eatwell guide"
+          3: "Food group guide"
+          4: "Healthy lifestyles guide"
+        correct_answers:
+        - 2
+ 
+  5-4-1-6:
+    content:
+    questions:
+      1_supporting_difficulty:
+        multi_select: false
+        label: |
+          Limited communication will impact on a child’s ability to self-regulate because they will experience what?
+
+        assessment_summary: 
+        assessment_fail_summary: |
+          If a child lacks the communication skills to express their needs it could result in frustration. If children become frustrated it can be shown as negative behaviour.
+
+          You might want to revisit the section on [how language development impacts on self-regulation](/modules/module-4/content-pages/4-2-2-1).
+
+        answers:
+          1: "Hunger"
+          2: "Frustration"
+          3: "Happiness"
+          4: "Friendship"
+        correct_answers:
+        - 2
+  
+  5-4-1-7:
+    content:
+    questions:
+      1_observation_planning:
+        multi_select: false
+        label: |
+          Observations and assessments should not be what?
+
+        assessment_summary: 
+        assessment_fail_summary: |
+          Observations and the recording of them should not be time consuming or take you away from interacting with the children.
+          
+          You might want to revisit the section on [observation, assessment and planning](/modules/module-4/content-pages/4-2-1-5a).
+        answers:
+          1: "Used in planning"
+          2: "Recorded"
+          3: "Time consuming"
+          4: "Accurate"
+        correct_answers:
+        - 3
+
+  5-4-1-8:
+    content:
+    questions:
+      1_self_talk:
+        multi_select: false 
+        label: |
+          Self talk and parallel talk are both types of which strategy?
+        assessment_summary: 
+        assessment_fail_summary: |
+          Self talk and parallel talk are both ways that you can model language for children. This is where you add commentary to tasks and actions to make sure that children hear a wide variety of vocabulary 
+          
+          You might want to revisit the section on [strategies to help children develop language and communication skills](/modules/module-4/content-pages/4-3-1-2a).
+        answers:
+          1: "Self-regulation"
+          2: "Peer interactions"
+          3: "Modelling language"
+          4: "Socio-economic support"
+        correct_answers:
+        - 3
+
+  5-4-1-9:
+    content:
+    questions:
+      1_successful_environment:
+        multi_select: false 
+        label: |
+          A successful environment will promote which of the following?
+        assessment_summary: 
+        assessment_fail_summary: |
+          A successful environment will promote interactions with others. You should also consider how areas and activities in the environment promote discussion and curiosity, leading to investigation.
+          
+          You might want to revisit the section on [the physical environment](/modules/module-4/content-pages/4-3-2-1a).
+        answers:
+          1: "An emphasis on child led activity"
+          2: "Limited interactions"
+          3: "Small group activities"
+          4: "Interactions with others"
+        correct_answers:
+        - 4
+
+  5-4-1-10:
+    content:
+    questions:
+      1_positive_partnerships:
+        multi_select: false 
+        label: |
+          Positive partnerships with parents and carers will build a sense of security for children. This will support them to communicate with what?
+
+        assessment_summary: 
+        assessment_fail_summary: |
+          Parents and carers are the most knowledgeable person regarding their child and they will be able to share lots of information to support you. Finding out about experiences, siblings and interests will help you to plan to meet their language needs. The information you learn will support you to build a sense of security, which will result in more confidence when communicating.
+          
+          You might want to revisit the section on [strategies for working with parents and carers](/modules/module-4/content-pages/4-3-3-1).
+        answers:
+          1: "Confidence"
+          2: "Correct grammar"
+          3: "Hesitation"
+          4: "A loud voice"
+        correct_answers:
+        - 1

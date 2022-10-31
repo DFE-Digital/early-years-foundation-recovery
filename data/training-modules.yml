@@ -61,3 +61,16 @@ module-4:
     - how language skills impact on learning and behaviour
     - the importance of the environment to promote development
   summative_threshold: 70
+
+module-5:
+  depends_on: module-4
+  duration: 2
+  title: Supporting physical development in the early years
+  thumbnail: 4-thumb-157720194.jpg
+  description: |
+    Physical development description
+  objective: |
+    Physical development objective
+  criteria: |
+    - criteria
+  summative_threshold: 70
