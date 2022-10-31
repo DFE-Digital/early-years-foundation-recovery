@@ -35,6 +35,7 @@ SitemapGenerator::Sitemap.create do
     privacy-policy
     terms-and-conditions
     whats-new
+    sitemap
   ].each do |path|
     add static_path(path)
   end
@@ -82,9 +83,10 @@ SitemapGenerator::Sitemap.create do
   add my_modules_path
   add user_notes_path
 
-  # Representative content
   mod = TrainingModule.published.first
   add training_module_path(mod)
+
+  # Representative content
   add training_module_content_page_path(mod, mod.interruption_page)
   add training_module_content_page_path(mod, mod.icons_page)
   add training_module_content_page_path(mod, mod.intro_page)
@@ -101,7 +103,11 @@ SitemapGenerator::Sitemap.create do
   add training_module_content_page_path(mod, mod.certificate_page)
   # TODO: test dynamic page content like question feedback
 
-  # # All content
+  # All content
+  # mod.module_items.each do |item|
+  #   add training_module_content_page_path(mod, item)
+  # end
+
   # TrainingModule.published.each do |mod|
   #   mod.module_items.each do |item|
   #     add training_module_content_page_path(mod, item)

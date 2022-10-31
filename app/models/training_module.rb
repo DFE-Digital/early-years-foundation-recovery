@@ -160,7 +160,7 @@ class TrainingModule < YamlBase
 
   # @return [ModuleItem]
   def last_page
-    assessment_results_page || module_course_items.last
+    module_course_items.last
   end
 
   def tab_label
