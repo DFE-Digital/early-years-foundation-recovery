@@ -38,7 +38,9 @@ h1.govuk-heading-l My modules
             h3.govuk-heading-s
               = mod.card_title
             p.govuk-body= mod.description
-            = govuk_link_to 'View more information about this module', mod.card_anchor unless mod.draft?
+            - unless mod.draft?
+              = govuk_link_to 'View more information about this module',
+                mod.card_anchor + '#module-#{id}-#{title.downcase.parameterize'
 
 - if @user.course.completed_modules.any?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
