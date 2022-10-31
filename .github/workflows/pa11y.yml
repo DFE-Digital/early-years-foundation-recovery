@@ -49,5 +49,7 @@ jobs:
           sed -i "s/token/${BOT_TOKEN}/g" .pa11yci
       -
         name: Audit
+        env:
+          PUPPETEER_EXECUTABLE_PATH: /opt/hostedtoolcache/chromium/latest/x64/chrome
         run: |
           pa11y-ci --sitemap https://${DOMAIN}/sitemap.xml
