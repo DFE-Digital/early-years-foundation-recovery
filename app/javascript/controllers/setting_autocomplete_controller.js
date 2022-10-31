@@ -8,7 +8,7 @@ export default class extends Controller {
   connect() {
     accessibleAutocomplete.enhanceSelectElement({
       tNoResults: () => this.messageValue,
-      selectElement: document.querySelector('.govuk-select')
+      selectElement: document.querySelector('#user-setting-type-id-field')
     })
   }
 }
