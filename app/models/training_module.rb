@@ -173,7 +173,7 @@ class TrainingModule < YamlBase
 
   # @return [String]
   def card_title
-    coming_soon = "Coming soon - " if draft?
+    coming_soon = 'Coming soon - ' if draft?
     "#{coming_soon}Module #{id}: #{title}"
   end
 

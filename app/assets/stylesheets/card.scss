@@ -134,6 +134,7 @@
 .grid-container {
   display: flex;
   flex-direction: column;
+  grid-gap: 15px;
 
   @media screen and (min-width: 640px) {
     display: grid;
@@ -146,6 +147,7 @@
   position: relative;
   background-color: govuk-colour("light-grey");
   border-bottom: 3px solid govuk-colour("blue");
+  max-width: 300px;
 
   &-container {
     padding: 20px;

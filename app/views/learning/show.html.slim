@@ -9,10 +9,9 @@ h1.govuk-heading-l My modules
       - else
         p You have not started any modules. Please choose an available module.
     - else
-      div class='govuk-grid-row govuk-!-margin-bottom-7'
+      .grid-container
         - @user.course.current_modules.each do |mod|
-          .govuk-grid-column-one-third-from-desktop.govuk-grid-column-one-half class='govuk-!-margin-bottom-2'
-            = render 'card', mod: mod, current: true
+          = render 'card', mod: mod, current: true
 
 - if @user.course.available_modules.any? || @user.course.course_completed?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
@@ -20,8 +19,8 @@ h1.govuk-heading-l My modules
     .govuk-grid-column-full
       h2.govuk-heading-m Available modules
       - if @user.course.available_modules.any?
-        - @user.course.available_modules.each do |mod|
-          .govuk-grid-column-one-third-from-desktop.govuk-grid-column-one-half class='govuk-!-margin-bottom-2'
+        .grid-container
+          - @user.course.available_modules.each do |mod|
             = render 'card', mod: mod, current: false
 
       - elsif @user.course.course_completed?
