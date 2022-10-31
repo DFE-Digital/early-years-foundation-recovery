@@ -225,9 +225,10 @@ module-5:
           
           You might want to revisit the section on [positive partnerships](/modules/module-5/content-pages/5-3-3).
         answers:
-          1: "Confidence"
-          2: "Correct grammar"
-          3: "Hesitation"
-          4: "A loud voice"
+          1: "Parents and carers with limited time"
+          2: "Older siblings"
+          3: "Limited understanding of expected development"
+          4: "Bad weather"
         correct_answers:
         - 1
+        - 3
