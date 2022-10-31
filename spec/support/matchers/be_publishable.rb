@@ -20,3 +20,21 @@ RSpec::Matchers.define :be_publishable do |_|
     'ready to be published'
   end
 end
+
+# Confirm all essential ModuleItem types are present
+#
+RSpec::Matchers.define :have_all_types do |_|
+  match do |mod_name|
+    module_types[mod_name].uniq.sort.eql?(essential_types.sort)
+  end
+
+  failure_message do |mod_name|
+    missing_types = essential_types.difference(module_types[mod_name].uniq)
+
+    "#{mod_name} is missing #{missing_types.to_sentence}"
+  end
+
+  description do
+    'contains all necessary page types'
+  end
+end

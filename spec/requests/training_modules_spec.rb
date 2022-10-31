@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'TrainingModules', type: :request do
   describe 'GET /about-training' do
-    let(:published_modules) { TrainingModule.where(draft: nil) }
+    let(:published_modules) { TrainingModule.published }
 
     before do
       sign_in create(:user, :registered)
