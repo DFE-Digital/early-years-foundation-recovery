@@ -17,12 +17,10 @@
   .space {
     BackgroundColor LightGreen
   }
-  ' <<i>>
   .i {
     BackgroundColor SkyBlue
     FontStyle italic
   }
-  ' <<b>>
   .b {
     BackgroundColor LightSlateGray
     FontStyle italic
@@ -40,13 +38,6 @@ legend
 endlegend
 
 
-' DataAccess - [First Component]
-' [First Component] ..> HTTP : use
-
-' [Component] as C
-
-' note top of C: A top note
-
 
 rectangle "Early Years Recovery Deployment" {
   rectangle "Application" as app <<app>> {
@@ -58,15 +49,12 @@ rectangle "Early Years Recovery Deployment" {
     node "Node JS"
   }
 
-  rectangle "Gov.uk Notify" as notify <<b>>
+  ' rectangle "Gov.uk Notify" as notify <<b>>
 
   rectangle "Deployment Environments" {
-    rectangle "Heroku" <<platform>> {
-      artifact "eye-recovery.herokuapp.com" as UR <<i>>
-    }
 
     rectangle "Railway" <<platform>> {
-      artifact "eye-recovery.railway.app" as URnew <<i>>
+      artifact "eye-recovery.railway.app" as UR <<i>>
     }
 
     rectangle "GPaaS" as cf <<platform>> {
@@ -89,27 +77,19 @@ rectangle "Early Years Recovery Deployment" {
   }
 }
 
-' https://plantuml.com/creole
-note right of rails: Rails v7.0.3.1, Ruby 3.1.0
 
+note right of rails
+Rails v7.0.4, Ruby 3.1.0
+endnote
 note bottom of main: main
 note bottom of 123: ER-456-new-feature
 note bottom of rc1: rc0.0.1
 note bottom of v1: v0.0.1
 
-' note bottom of v1
-' foo
-' endnote
-
-' [[https://child-development-training.education.gov.uk]]
 
 rails --> postgres
-rails --> notify
-
 prototype --> UR: User research
-prototype --> URnew: User research (wip)
-
-app --> main: Latest code
+app --> main: Bleeding edge
 app --> 123: Feature review
 app --> rc1: Pre-production candidate
 app --> v1: Production release

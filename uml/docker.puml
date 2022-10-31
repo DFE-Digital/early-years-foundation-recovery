@@ -34,7 +34,6 @@ rectangle "Early Years Recovery Docker" {
     database "early_years_foundation_recovery_development" <<b>>
     artifact Pa11y <<f>>
     artifact Yard <<f>>
-    artifact PlantUML <<f>>
   }
 
   rectangle "docker-compose.test.yml" <<s>> {

@@ -1,44 +1,57 @@
 # README
 
-The Unified Modelling Language™ (UML®) is a standard visual modelling language intended to be used for
+The Unified Modelling Language™ (UML®) is a standard visual modelling language.
 
-- modelling business and similar processes,
-- analysis, design, and implementation of software-based systems
+## Setup
 
-UML is a common language for business analysts, software architects and developers used to describe,
-specify, design, and document existing or new business processes,
-structure and behaviour of artefacts of software systems.
-
+Run a [UML server][server] locally inside [Docker][docker]:
 
 `docker run -d -p 8080:8080 plantuml/plantuml-server:jetty`
 
-https://yuml.me/
+Or use the public [UML sandbox][sandbox] to create images and debug code.
+
+Integration with graphic tools and IDEs is available:
+
+1. [Sublime Text][sublime]
+2. [VS Code][vscode]
+3. [Microsoft Visio][visio]
+
+Configure your system to output in SVG format and add new diagrams below.
+
+## Diagrams
+
+<!--
+### Application UML
+
+![Application UML](application.svg "Application")
+-->
+
+### Entity Relationship Diagram
+
+![Entity Relationship](../erd.svg "Database")
+
+### Docker Compose Environments
+
+![Docker UML](docker.svg "Docker")
+
+### Deployment Workflows
+
+![Deployment UML](deployment.svg "Deployment")
 
 
-- https://plantuml.com/
-- [UML Sandbox and debugger](https://www.plantuml.com/plantuml/uml)
+## References
 
-
+- https://plantuml.com/creole
+- https://tallyfy.com/uml-diagram/#deployment-diagram
 - https://www.uml-diagrams.org/deployment-diagrams.html
-
 - https://github.com/mattjhayes/PlantUML-Examples/blob/master/docs/Diagram-Types/source/deployment-like-diagram.md
 - https://www.guru99.com/deployment-diagram-uml-example.html
 
-Installation depends on Java and Graphviz.
+---
 
-1. [Sublime Text](https://github.com/evandrocoan/PlantUmlDiagrams)
-2. [VS Code](https://github.com/qjebbs/vscode-plantuml)
-3. Microsoft Visio
-
-
-![docker UML](docker.svg "Docker")
-![deployment UML](deployment.svg "Deployment")
-![application UML](application.svg "Application")
-
-![ERD](../erd.svg "Foo")
-
-
-https://tallyfy.com/uml-diagram/#deployment-diagram
-
-https://github.com/plantuml/plantuml-server
-https://hub.docker.com/r/plantuml/plantuml-server
+[sandbox]: https://www.plantuml.com/plantuml/uml
+[server]: https://github.com/plantuml/plantuml-server
+[docker]: https://hub.docker.com/r/plantuml/plantuml-server
+[sublime]: https://github.com/evandrocoan/PlantUmlDiagrams
+[vscode]: https://github.com/qjebbs/vscode-plantuml
+[visio]: https://products.office.com/en/visio/flowchart-software
