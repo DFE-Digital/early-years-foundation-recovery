@@ -8,7 +8,9 @@ export default class extends Controller {
   connect() {
     accessibleAutocomplete.enhanceSelectElement({
       tNoResults: () => this.messageValue,
-      selectElement: document.querySelector('#user-setting-type-id-field')
+      selectElement: document.querySelector(
+        '#user-setting-type-id-field, #user-setting-type-id-field-error, #user-local-authority-field, #user-local-authority-field-error'
+        )
     })
   }
 }

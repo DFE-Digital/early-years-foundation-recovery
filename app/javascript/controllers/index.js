@@ -4,8 +4,5 @@
 
 import { application } from "./application"
 
-import SettingAutocompleteController from "./setting_autocomplete_controller.js"
-application.register("setting_autocomplete", SettingAutocompleteController)
-
-import LocalAuthorityAutocompleteController from "./local_authority_autocomplete_controller.js"
-application.register("local_authority_autocomplete", LocalAuthorityAutocompleteController)
+import AutocompleteController from "./autocomplete_controller.js"
+application.register("autocomplete", AutocompleteController)
