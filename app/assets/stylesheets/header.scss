@@ -48,13 +48,16 @@
       align-self: center;
       width: auto;
     }
-  
+    
     &__content {
       margin-left: auto;
+      flex-shrink: 0;
     }
-  
+    
     &__logotype {
       display: flex;
+      flex-wrap: wrap;
+      align-items: center;
       gap: 5px;
     }
   }
