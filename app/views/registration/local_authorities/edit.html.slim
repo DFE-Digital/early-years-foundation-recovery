@@ -1,4 +1,4 @@
-= govuk_back_link href: :back
+= govuk_back_link href: edit_registration_setting_type_path
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
     = form_for @user_form, url: registration_local_authority_path, method: :patch do |f|
@@ -7,5 +7,5 @@
         =translate_markdown(t('.body'))
         = f.govuk_collection_select :local_authority, LocalAuthority.all, :name, :name, options: { include_blank: true }, label: { text: 'Local authority', class: 'govuk-visually-hidden' }, data: { controller: 'autocomplete', 'autocomplete-message-value': t('.autocomplete-not-found') }
         p.govuk_body
-          = link_to_user_action t('.multiple_local_authorities'), edit_registration_role_type_path
+          = govuk_link_to t('.multiple_local_authorities'), edit_registration_role_type_path
       = f.govuk_submit t('.button')

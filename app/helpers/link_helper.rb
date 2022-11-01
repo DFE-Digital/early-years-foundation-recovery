@@ -53,12 +53,4 @@ module LinkHelper
       govuk_link_to 'View previous test result', training_module_assessment_result_path(mod, mod.assessment_results_page)
     end
   end
-
-  def link_to_user_action(link_text, next_action, classes: nil)
-    if current_user.registration_complete?
-      govuk_link_to link_text, user_path, class: classes
-    else
-      govuk_link_to link_text, next_action, class: classes
-    end
-  end
 end
