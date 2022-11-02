@@ -36,7 +36,8 @@ RSpec.describe 'Learning activity', type: :system do
 
       it 'visits interruption page when clicked' do
         within '#available' do
-          expect(page).to have_link '', href: '/modules/alpha/content-pages/what-to-expect'
+          click_link 'Module 1: First Training Module'
+          expect(page).to have_current_path '/modules/alpha/content-pages/what-to-expect'
         end
       end
     end
@@ -89,7 +90,8 @@ RSpec.describe 'Learning activity', type: :system do
 
     it 'visits my modules page when clicked' do
       within '#started' do
-        expect(page).to have_link '', href: '/modules/alpha'
+        click_link 'Module 1: First Training Module'
+        expect(page).to have_current_path '/modules/alpha'
       end
     end
   end
