@@ -66,6 +66,7 @@ RSpec.shared_context 'with content' do
       formative_questionnaire
       video_page
       summary_intro
+      recap_page
       assessment_intro
       summative_questionnaire
       assessment_results

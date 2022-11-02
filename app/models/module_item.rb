@@ -32,6 +32,7 @@ class ModuleItem < YamlBase
     module_intro: ContentPage,
     sub_module_intro: ContentPage,
     text_page: ContentPage,
+    recap_page: ContentPage,
     # video
     video_page: VideoPage,
     # questions
@@ -187,8 +188,38 @@ class ModuleItem < YamlBase
   end
 
   # @return [Boolean]
+  def icons_page?
+    type.eql?('icons_page')
+  end
+
+  # @return [Boolean]
   def module_intro?
     type.eql?('module_intro')
+  end
+
+  # @return [Boolean]
+  def submodule_intro?
+    type.eql?('sub_module_intro')
+  end
+
+  # @return [Boolean]
+  def recap_page?
+    type.eql?('recap_page')
+  end
+
+  # @return [Boolean]
+  def text_page?
+    type.eql?('text_page')
+  end
+
+  # @return [Boolean]
+  def video_page?
+    type.eql?('video_page')
+  end
+
+  # @return [Boolean]
+  def summary_intro?
+    type.eql?('summary_intro')
   end
 
   # @return [Boolean]
@@ -263,9 +294,35 @@ class ModuleItem < YamlBase
 
   # collections -------------------------
 
+  # @return [Array<ModuleItem>] module items in the same submodule
+  def current_submodule_items
+    self.class.where_submodule(training_module, submodule_name).to_a
+  end
+
   # @return [Array<ModuleItem>] module items in the same submodule and topic
   def current_submodule_topic_items
     self.class.where_submodule_topic(training_module, submodule_name, topic_name).to_a
+  end
+
+  # decorations -------------------------
+
+  # @return [String]
+  def ordinal
+    (position_within_module + 1).ordinalize
+  end
+
+  # @return [String]
+  def meta
+    if topic_name
+      "(submodule #{submodule_name} / topic #{topic_name}.#{page_name})"
+    elsif submodule_name
+      "(submodule #{submodule_name})"
+    end
+  end
+
+  # @return [Boolean]
+  def progress_ball?
+    icons_page? || module_intro? || submodule_intro? || summary_intro? || assessment_intro?
   end
 
 private
@@ -274,10 +331,5 @@ private
   def current_module_items
     # parent.module_items # alternatively
     self.class.where(training_module: training_module).to_a
-  end
-
-  # @return [Array<ModuleItem>] module items in the same submodule
-  def current_submodule_items
-    self.class.where_submodule(training_module, submodule_name).to_a
   end
 end

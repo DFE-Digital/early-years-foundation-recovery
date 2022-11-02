@@ -134,6 +134,11 @@ class TrainingModule < YamlBase
   end
 
   # @return [ModuleItem]
+  def recap_page
+    module_items_by_type('recap_page').first
+  end
+
+  # @return [ModuleItem]
   def assessment_intro_page
     module_items_by_type('assessment_intro').first
   end
@@ -157,6 +162,8 @@ class TrainingModule < YamlBase
   def certificate_page
     module_items_by_type('certificate').first
   end
+
+  # decorations -------------------------
 
   # @return [ModuleItem]
   def last_page

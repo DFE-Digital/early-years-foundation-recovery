@@ -1,21 +1,52 @@
-- @training_module.module_items.each.with_index(1) do |item, pos|
-  - if current_user.events.where_properties(training_module_id: @training_module.name, id: item.name).any?
+h1 Progress bar
+
+= link_to 'mockup', 'https://www.figma.com/proto/FGW1NJJwnYRqoZ2DV0l5wW/Training-content?page-id=4806%3A59177&node-id=4864%3A62938&viewport=434%2C368%2C0.05&scaling=min-zoom&starting-point-node-id=4864%3A62011'
+
+
+ol
+  - @module_progress.milestones.each.with_index(1) do |item, pos|
+    li
+      - if @module_progress.milestone_complete?(item)
+        | &#9677;
+      - elsif @module_progress.milestone_started?(item)
+        | &#9711;
+      - else
+        | &#9676;
+      '
+      br
+      strong Heading:
+      '
+      = item.model.heading
+      br
+      Strong Type:
+      '
+      = item.type
+      br
+      Strong Name:
+      '
+      = item.name
+
+hr
+
+
+
+
+
+h1 #{@module_progress.value}% complete
+
+- @training_module.module_items.map do |page|
+
+  - if @module_progress.visited?(page)
     | [x]
   - else
     | [_]
   '
-  | #{pos.ordinalize}:
+  = page.ordinal
+  ':
+  strong= page.name
   '
-  strong
-    |  #{item.name}
-    '
-  - if item.topic_name
-    em
-      | (submodule #{item.submodule_name} / topic #{item.topic_name}.#{item.page_name})
-  - elsif item.submodule_name
-    em
-      | (submodule #{item.submodule_name})
-
+  em= page.meta
   '
-  = page_number(**item.pagination)
+  = page_number(**page.pagination)
   br
+
