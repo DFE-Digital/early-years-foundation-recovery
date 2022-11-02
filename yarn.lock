@@ -647,7 +647,7 @@ __metadata:
     "@hotwired/stimulus": ^3.0.1
     "@hotwired/turbo-rails": ^7.1.0
     esbuild: ^0.14.36
-    govuk-frontend: ^4.0.1
+    govuk-frontend: ^4.3.1
     puppeteer: ^15.3.0
     sass: ^1.50.1
   languageName: unknown
@@ -784,10 +784,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"govuk-frontend@npm:^4.0.1":
-  version: 4.2.0
-  resolution: "govuk-frontend@npm:4.2.0"
-  checksum: cee95b6aee658b1434e220310a040c793e9cef52d093b5388f82b5e018d18302d6d462f889239a4948dc2f008f48ec642e8538d0cedfd4dec9a943dd03290c1a
+"govuk-frontend@npm:^4.3.1":
+  version: 4.3.1
+  resolution: "govuk-frontend@npm:4.3.1"
+  checksum: ea2d658f666481ffcac8c5ba2433f1cfe5087c281b8db1157567628f1db094734c64eb0879f57f87e75944adb06459487e735a4cd184a960de6ab1249f75b6d3
   languageName: node
   linkType: hard
 
