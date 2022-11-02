@@ -5,7 +5,7 @@ RSpec.describe 'Interruption page', type: :system do
     include_context 'with user'
 
     before do
-      visit '/modules/alpha/content-pages/what-to-expect'
+      visit '/modules/alpha/what-to-expect'
     end
 
     it 'can click on the next button' do

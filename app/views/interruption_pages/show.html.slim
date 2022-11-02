@@ -1,0 +1,16 @@
+/ = render 'debug'
+
+.govuk-grid-row
+  .govuk-grid-column-full-from-desktop
+    .govuk-grid-column-full.interrupt-panel
+      h1.govuk-heading-l= @model.heading
+      .gem-c-govspeak= translate_markdown(@model.body)
+
+hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
+
+.govuk-grid-row
+  .govuk-grid-column-one-half
+    = govuk_button_link_to 'Previous', my_modules_path, secondary: true
+
+  .govuk-grid-column-one-half class='govuk-!-text-align-right'
+    = govuk_button_link_to 'Next', training_module_path(@training_module_name)

@@ -57,7 +57,7 @@ RSpec.describe 'Module overview page progress' do
 
     it 'can click back button to return to interruption page' do
       click_on 'Back'
-      expect(page).to have_current_path '/modules/alpha/content-pages/what-to-expect'
+      expect(page).to have_current_path '/modules/alpha/what-to-expect'
     end
   end
 

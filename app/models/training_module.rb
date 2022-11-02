@@ -104,15 +104,9 @@ class TrainingModule < YamlBase
 
   # sequence ---------------------------------
 
-  # @return [ModuleItem] page 1
-  def interruption_page
-    module_items.first
-    # module_items_by_type('interruption_page').first
-  end
-
   # @return [ModuleItem] page 2
   def icons_page
-    interruption_page.next_item
+    module_items.first
     # module_items_by_type('icons_page').first
   end
 

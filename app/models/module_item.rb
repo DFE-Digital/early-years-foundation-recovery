@@ -20,7 +20,6 @@ class ModuleItem < YamlBase
   # @return [Hash] 'Type' to 'View object' mapping
   MODELS = {
     # common
-    interruption_page: CommonPage,
     icons_page: CommonPage,
     summary_intro: CommonPage,
     assessment_intro: CommonPage,

@@ -1,7 +1,5 @@
 ---
 module-4:
-  what-to-expect:
-    type: interruption_page
   before-you-start:
     type: icons_page
   intro:

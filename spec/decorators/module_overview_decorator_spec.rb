@@ -64,7 +64,7 @@ RSpec.describe ModuleOverviewDecorator do
       end
 
       it 'goes to the certificate' do
-        expect(user.events.count).to be 16
+        expect(user.events.count).to be 15
         expect(output[:state]).to be :completed
         expect(output[:page]).to eql '1-2-3'
       end

@@ -13,8 +13,8 @@ RSpec.shared_context 'with content' do
 
   # {
   #   alpha => {
-  #     what-to-expect => {
-  #       thpe => interruption_page
+  #     before-you-start => {
+  #       thpe => icons_page
   #     }
   #   },
   #   ...
@@ -58,7 +58,6 @@ RSpec.shared_context 'with content' do
 
   let(:essential_types) do
     %w[
-      interruption_page
       icons_page
       module_intro
       sub_module_intro

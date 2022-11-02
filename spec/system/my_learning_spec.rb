@@ -37,7 +37,7 @@ RSpec.describe 'Learning activity', type: :system do
       it 'visits interruption page when clicked' do
         within '#available' do
           click_link 'Module 1: First Training Module'
-          expect(page).to have_current_path '/modules/alpha/content-pages/what-to-expect'
+          expect(page).to have_current_path '/modules/alpha/what-to-expect'
         end
       end
     end

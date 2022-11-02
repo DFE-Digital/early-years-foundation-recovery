@@ -4,7 +4,7 @@
 - if @module_progress.started?
   = govuk_back_link href: my_modules_path
 - else
-  = govuk_back_link href: training_module_content_page_path(@training_module, @training_module.interruption_page)
+  = govuk_back_link href: training_module_interruption_page_path(@training_module)
 
 .light-grey-box
   .govuk-grid-row

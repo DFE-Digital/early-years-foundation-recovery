@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   end
 
   resources :modules, only: %i[show], as: :training_modules, controller: :training_modules do
+    resource :interruption_page, only: %i[show], path: 'what-to-expect'
     resources :content_pages, only: %i[index show], path: 'content-pages'
     resources :questionnaires, only: %i[show update]
     resources :assessment_results, only: %i[show new], path: 'assessment-result'

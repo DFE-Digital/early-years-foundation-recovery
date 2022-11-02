@@ -333,9 +333,10 @@ en:
 
   # Browser and bookmarks ------------------------------------------------------
   html_title:
+    interruption_pages:
+      show: What to expect during the training
     content_pages:
       show:
-        what-to-expect: What to expect during the training
         before-you-start: Before you start
         intro: Introduction
     home:
