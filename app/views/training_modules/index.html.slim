@@ -1,5 +1,7 @@
-= govuk_back_link href: root_path
+- content_for(:head) do 
+  = tag.meta name: 'turbo-visit-control', content: 'reload'
 
+= govuk_back_link href: root_path
 
 h1.govuk-heading-l About this training course
 

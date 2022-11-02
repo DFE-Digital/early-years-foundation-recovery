@@ -1,3 +1,6 @@
+- content_for(:head) do 
+  = tag.meta name: 'turbo-visit-control', content: 'reload'
+
 = govuk_back_link href: my_modules_path
 
 .light-grey-box
