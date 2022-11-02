@@ -41,7 +41,7 @@ jobs:
         name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.1.0
+          ruby-version: 3.1.2
       -
         name: Set up ruby gem cache
         uses: actions/cache@v1

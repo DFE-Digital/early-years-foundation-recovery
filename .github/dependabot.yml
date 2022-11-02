@@ -1,0 +1,22 @@
+---
+version: 2
+updates:
+  - package-ecosystem: bundler
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: sunday
+    open-pull-requests-limit: 5
+    versioning-strategy: auto
+    labels:
+      - dependencies
+
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: sunday
+    open-pull-requests-limit: 5
+    versioning-strategy: auto
+    labels:
+      - dependencies
