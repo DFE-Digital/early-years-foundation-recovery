@@ -1,15 +1,15 @@
 class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
-  # Symbol, TrainingModule, String/Nil
-  # @yield [Array] locales key and content page
+  # @yield [Symbol, ModuleItem] state locales key and target page
   def call_to_action
     if completed?
-      yield(:completed, [mod, mod.last_page])
+      yield(:completed, mod.certificate_page)
     elsif failed_attempt?
-      yield(:failed, [mod, nil])
+      # via AssessmentResultsController#new to archive attempt
+      yield(:failed, mod.assessment_intro_page)
     elsif started?
-      yield(:started, [mod, resume_page])
+      yield(:started, resume_page)
     else
-      yield(:not_started, [mod, mod.interruption_page])
+      yield(:not_started, mod.interruption_page)
     end
   end
 

@@ -2,7 +2,7 @@
 # ------------------------------------------------------------------------------
 set -e
 
-sed -i "s/foo/${BOT}/g" /usr/config.json
+sed -i "s/token/${BOT_TOKEN}/g" /usr/config.json
 
 if [ ! -z "$1" ]; then
   echo "Sitemap using: $1"

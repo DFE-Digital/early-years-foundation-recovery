@@ -39,8 +39,7 @@ RSpec.describe 'Registered user changing setting type', type: :system do
       click_button 'Save'
 
       expect(page).to have_current_path '/my-account'
-      expect(page).to have_text('Manage your account')
-        .and have_text('Foo')
+      expect(page).to have_text('Manage your account').and have_text('Foo')
     end
   end
 
@@ -49,8 +48,7 @@ RSpec.describe 'Registered user changing setting type', type: :system do
       click_link 'Cancel'
 
       expect(page).to have_current_path '/my-account'
-      expect(page).to have_text('Manage your account')
-        .and have_text('School')
+      expect(page).to have_text('Manage your account').and have_text('School')
     end
   end
 end

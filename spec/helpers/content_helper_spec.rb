@@ -59,7 +59,7 @@ describe 'ContentHelper#translate_markdown', type: :helper do
       end
 
       it 'uses the info icon' do
-        expect(html).to include '<i class="fa-2x fa-solid fa-info">'
+        expect(html).to include '<i aria-describedby="info icon" class="fa-2x fa-solid fa-info">'
         expect(html).to include '<h2 class="govuk-heading-m">In your setting</h2>'
         expect(html).to include '<li>one</li>'
       end
@@ -77,7 +77,7 @@ describe 'ContentHelper#translate_markdown', type: :helper do
       end
 
       it 'uses the brain icon' do
-        expect(html).to include '<i class="fa-2x fa-solid fa-brain">'
+        expect(html).to include '<i aria-describedby="brain icon" class="fa-2x fa-solid fa-brain">'
         expect(html).to include '<h2 class="govuk-heading-m">Reflection point</h2>'
         expect(html).to include '<li>one</li>'
       end
@@ -95,7 +95,7 @@ describe 'ContentHelper#translate_markdown', type: :helper do
       end
 
       it 'uses the book icon' do
-        expect(html).to include '<i class="fa-2x fa-solid fa-book">'
+        expect(html).to include '<i aria-describedby="book icon" class="fa-2x fa-solid fa-book">'
         expect(html).to include '<h2 class="govuk-heading-m">Further reading</h2>'
         expect(html).to include '<li>one</li>'
       end

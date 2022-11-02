@@ -13,6 +13,6 @@ $PREFIX docker-compose \
   -f docker-compose.yml \
   -f docker-compose.dev.yml \
   --project-name recovery \
-  up --detach
+  up --detach app
 
 $PREFIX docker attach recovery_dev
