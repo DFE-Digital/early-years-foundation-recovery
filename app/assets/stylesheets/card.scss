@@ -13,6 +13,7 @@
   border-bottom: govuk-colour("blue") 3px solid;
   box-sizing: border-box;
   padding: 20px;
+  max-width: 300px;
 
   &--contained {
     background-color: govuk-colour("light-grey");
@@ -130,10 +131,23 @@
   }
 }
 
+.grid-container {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 15px;
+
+  @media screen and (min-width: 640px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 30px;
+  }
+}
+
 .card {
   position: relative;
   background-color: govuk-colour("light-grey");
   border-bottom: 3px solid govuk-colour("blue");
+  max-width: 300px;
 
   &-container {
     padding: 20px;
