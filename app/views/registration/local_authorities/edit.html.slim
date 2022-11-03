@@ -5,7 +5,7 @@
       = f.govuk_error_summary
       = f.govuk_fieldset legend: { text: t('.heading') }, aria: { required: true } do
         =translate_markdown(t('.body'))
-        = f.govuk_collection_select :local_authority, LocalAuthority.all, :name, :name, options: { include_blank: true }, label: { text: 'Local authority', class: 'govuk-visually-hidden' }, data: { controller: 'autocomplete', 'autocomplete-message-value': t('.autocomplete-not-found') }
+        = f.govuk_collection_select :local_authority, LocalAuthority.all, :name, :name, options: { include_blank: true }, label: { text: 'Local authority', class: 'govuk-visually-hidden' }, data: { controller: 'autocomplete', 'autocomplete-message-value': t('.autocomplete-not-found') }, aria: {label: 'registration local authority'}
         p.govuk_body
           = govuk_link_to t('.multiple_local_authorities'), edit_registration_role_type_path
       = f.govuk_submit t('.button')
