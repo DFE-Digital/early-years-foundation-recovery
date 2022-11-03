@@ -45,15 +45,8 @@ jobs:
         name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.1.0
-      -
-        name: Set up ruby gem cache
-        uses: actions/cache@v3
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
+          ruby-version: 3.1.2
+          bundler-cache: true
       -
         name: Install Rubygems
         run: |
