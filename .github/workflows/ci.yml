@@ -44,7 +44,7 @@ jobs:
           ruby-version: 3.1.2
       -
         name: Set up ruby gem cache
-        uses: actions/cache@v1
+        uses: actions/cache@v3
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
@@ -67,7 +67,7 @@ jobs:
         name: Prepare test database
         run: bin/rails db:prepare
         env:
-          NOTIFY_API_KEY: ""
+          NOTIFY_API_KEY: foo
       -
         name: Run test suite
         run: bundle exec rspec
