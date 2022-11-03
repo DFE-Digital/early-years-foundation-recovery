@@ -75,15 +75,15 @@ child-development-and-the-eyfs:
       1_behavioural_triggers:
         multi_select: true
         body: |
-          Which of the following aspects of the learning environment can trigger challenging behaviour? (Select all answers that apply)
+          Which of the following aspects of the learning environment can trigger behaviour that practitioners may find challenging? (Select all answers that apply)
         assessment_summary: |
-          Children can display challenging and unwanted behaviour if:
+          Children can display behaviour you may find challenging if:
 
           - instructions, activities and experiences are not tailored to their communication level or other needs
           - they are not challenged by their environment, or feel a task is too difficult
           - they experience inconsistency regarding boundaries, routines and key people
         assessment_fail_summary: |
-          Children can display challenging and unwanted behaviour if:
+          Children can display behaviour you may find challenging if:
 
           - instructions, activities and experiences are not tailored to their communication level or other needs
           - they are not challenged by their environment, or feel a task is too difficult
