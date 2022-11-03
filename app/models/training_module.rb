@@ -13,6 +13,11 @@ class TrainingModule < YamlBase
     items_by_topic.count
   end
 
+  # @return [Integer]
+  def submodule_count
+    items_by_submodule.count
+  end
+
   # predicates ---------------------------------
 
   # @return [Boolean]

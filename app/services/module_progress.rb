@@ -1,15 +1,6 @@
 # User's module progress and submodule/topic state
 #
 class ModuleProgress
-  # item types that become progress bar circles
-  MILESTONES = %w[
-    icons_page
-    module_intro
-    sub_module_intro
-    summary_intro
-    assessment_intro
-  ].freeze
-
   # @param user [User]
   # @param mod [TrainingModule]
   def initialize(user:, mod:)
@@ -25,11 +16,6 @@ class ModuleProgress
   # @!attribute [r] summative_assessment
   #   @return [SummativeAssessmentProgress]
   attr_reader :user, :mod, :summative_assessment
-
-  # @return [Array<ModuleItem>]
-  def milestones
-    MILESTONES.flat_map { |type| mod.module_items_by_type(type) }
-  end
 
   # @return [Float] Module completion
   def value

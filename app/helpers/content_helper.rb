@@ -34,7 +34,16 @@ module ContentHelper
   def icon(icon, size: 2, **)
     content_tag :i, nil,
                 class: "fa-solid fa-#{size}x fa-#{icon} icon",
-                'aria-describedby': "#{icon} icon"
+                aria: { label: "#{icon} icon" }
+  end
+
+  # @param icon [String, Symbol] Fontawesome icon name
+  # @param style [String, Symbol] Icon weight
+  # @return [String]
+  def progress_ball(icon, style, colour, label)
+    content_tag :i, nil,
+                class: "fa-#{style} fa-3x fa-#{icon} #{colour}",
+                aria: { label: label }
   end
 
   # @return [String]

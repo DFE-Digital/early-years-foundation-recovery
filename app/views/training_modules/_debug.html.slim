@@ -4,6 +4,7 @@
     h4 Module
     ul
       li duration: #{@training_module.duration}
+      li submodules: #{@training_module.submodule_count}
       li topics: #{@training_module.topic_count}
       li milestone: #{@module_progress.milestone}
       li resume page: #{@module_progress.resume_page&.name}
@@ -22,4 +23,9 @@
       - @training_module.items_by_topic.map do |(sub_name, topic_name), items|
         li #{sub_name}.#{topic_name}: #{@module_progress.status(items)}
 
+    hr
+    h4 Milestones
+    ul
+      - @module_progress.milestones.map do |item|
+        li #{item.name} / #{item.type}
     hr

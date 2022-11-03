@@ -11,3 +11,16 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
   color: govuk-colour("white");
   padding: govuk-spacing(4) !important;
 }
+
+#progress .svg-inline--fa {
+  background-color: transparent;
+  padding: 0 !important;
+
+  &.grey {
+    color: govuk-colour("dark-grey");
+  }
+
+  &.green {
+    color: govuk-colour("green");
+  }
+}

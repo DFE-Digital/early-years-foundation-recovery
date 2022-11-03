@@ -20,6 +20,11 @@ class TrainingModulesController < ApplicationController
       module_item
 
       render partial: 'progress' if params[:debug] && Rails.env.development?
+
+      if params[:demo] && Rails.env.development?
+        module_progress_bar = ModuleProgressBarDecorator.new(helpers.module_progress(@training_module))
+        render :demo, locals: { bar: module_progress_bar }
+      end
     end
   end
 

@@ -1,35 +1,4 @@
 class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
-  # ----------------------------------------
-
-  # @return [Integer] Percentage complete
-  def value
-    (super * 100).to_i
-  end
-
-  # @return [Boolean]
-  def milestone_complete?(item)
-    if item.icons_page? || item.module_intro?
-      visited?(item)
-    elsif item.summary_intro?
-      visited?(item.parent.recap_page)
-    elsif item.assessment_intro?
-      visited?(item.parent.assessment_results_page) && successful_attempt?
-    elsif item.submodule_intro?
-      all?(item.current_submodule_items)
-    end
-  end
-
-  # @return [Boolean]
-  def milestone_started?(item)
-    if item.icons_page? || item.module_intro? || item.summary_intro? || item.assessment_intro?
-      visited?(item)
-    elsif item.submodule_intro?
-      visited?(item.next_item)
-    end
-  end
-
-  # ----------------------------------------
-
   # @yield [Symbol, ModuleItem] state locales key and target page
   def call_to_action
     if completed?

@@ -1,0 +1,23 @@
+h1 Progress bar
+
+h2 #{bar.value} complete
+
+= govuk_button_link_to 'mockup', 'https://www.figma.com/proto/FGW1NJJwnYRqoZ2DV0l5wW/Training-content?page-id=4806%3A59177&node-id=4864%3A62938&viewport=434%2C368%2C0.05&scaling=min-zoom&starting-point-node-id=4864%3A62011', secondary: true
+
+pre.debug_dump
+  hr
+  h4 Milestones
+  ol
+    - bar.milestones.map do |item|
+      li #{item.name} / #{item.type}
+  hr
+
+
+ol#progress.govuk-list.govuk-list--spaced
+  - bar.milestones.map do |item|
+    li
+      = progress_ball(*bar.icon(item))
+
+      h3 class='govuk-!-text-align-right'= item.model.heading
+
+
