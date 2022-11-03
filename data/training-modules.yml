@@ -79,12 +79,15 @@ module-5:
   thumbnail: 
   short_description: |
     This module explores how children develop physical skills. It also discusses how to consider their impact on learning, development and behaviour when planning for your setting. 
-  description: 
-    
-  objective: 
-    
-  criteria: 
-
+  description: |
+    Physical activity is central to children’s all-round development. It  helps them to master control of their body and build healthy habits. As an early years practitioner, you will help children develop the fine and gross motor skills they need for independence.  
+  objective: |
+    This module will explore how your planning, curriculum and environment can help children learn, develop and refine their physical skills.
+  criteria: |
+    - the different stages and theories of children’s physical development
+    - potential factors that can affect physical development 
+    - how physical skills impact on learning, development and behaviour
+    - the importance of the curriculum, environment and relationships for promoting physical development 
   summative_threshold: 70
   draft: true
 
