@@ -67,7 +67,7 @@ jobs:
         name: Prepare test database
         run: bin/rails db:prepare
         env:
-          NOTIFY_API_KEY: ""
+          NOTIFY_API_KEY: foo
       -
         name: Run test suite
         run: bundle exec rspec
