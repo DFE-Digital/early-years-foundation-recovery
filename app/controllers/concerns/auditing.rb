@@ -1,7 +1,5 @@
 # Bypass authentication using HTTP Header for automated accessibility audit
 #
-# curl -i -L -H "BOT: bot_token@example.com" http://localhost:3000/my-account
-#
 module Auditing
   extend ActiveSupport::Concern
 

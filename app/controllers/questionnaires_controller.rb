@@ -10,15 +10,20 @@ class QuestionnairesController < ApplicationController
     # TODO: why?
     # questionnaire_taker.archive
 
-    immediate_feedback if questionnaire.formative?
-    marked_assessment if questionnaire.summative?
-    next_question if questionnaire.confidence?
+    if unanswered?
+      flash[:error] = 'Please select an answer'
+      render :show, status: :unprocessable_entity
+    else
+      populate_and_persist
+      track_questionnaire_answer
+      redirect
+    end
   end
 
 protected
 
   def module_item
-    @module_item ||= ModuleItem.find_by(training_module: module_params['training_module_id'], name: module_params['id'])
+    @module_item ||= questionnaire.module_item
   end
 
   def questionnaire
@@ -27,14 +32,6 @@ protected
 
   def questionnaire_taker
     @questionnaire_taker ||= QuestionnaireTaker.new(user: current_user, questionnaire: questionnaire)
-  end
-
-  def next_item_path(item)
-    if item.next_item
-      training_module_content_page_path(item.training_module, item.next_item)
-    else
-      course_overview_path
-    end
   end
 
   def questionnaire_params
@@ -63,45 +60,21 @@ protected
     Array(check_boxes).compact_blank.empty?
   end
 
-  def immediate_feedback
-    if unanswered?
-      flash[:error] = 'Please select an answer'
-    else
-      populate_and_persist
-      track_questionnaire_answer
-    end
-
-    render :show, status: :unprocessable_entity
-  end
-
-  def next_question
-    if unanswered?
-      flash[:error] = 'Please select an answer'
-      render :show, status: :unprocessable_entity
-    else
-      populate_and_persist
-      track_questionnaire_answer
-
-      redirect_to next_item_path(questionnaire.module_item)
-    end
-  end
-
-  def marked_assessment
-    if unanswered?
-      flash[:error] = 'Please select an answer'
-      render :show, status: :unprocessable_entity
-    else
-      populate_and_persist
-      track_questionnaire_answer
-
-      mod = questionnaire.module_item.parent
-
-      helpers.assessment_progress(mod).save! if questionnaire.last_assessment?
-      redirect_to next_item_path(questionnaire.module_item)
-    end
-  end
-
 private
+
+  def redirect
+    if questionnaire.formative?
+      redirect_to training_module_questionnaire_path(module_item.training_module, module_item)
+
+    elsif questionnaire.summative?
+      helpers.assessment_progress(module_item.parent).save! if questionnaire.last_assessment?
+
+      redirect_to training_module_content_page_path(module_item.training_module, module_item.next_item)
+
+    elsif questionnaire.confidence?
+      redirect_to training_module_content_page_path(module_item.training_module, module_item.next_item)
+    end
+  end
 
   def track_events
     if questionnaire.first_confidence? && confidence_untracked?

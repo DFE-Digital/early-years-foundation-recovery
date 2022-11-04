@@ -1,5 +1,5 @@
 div id="#{dom_id note}"
-  = govuk_heading(note.logged_at, tag: :h3)
+  h3.govuk-heading-m= note.logged_at
 
   p
     <strong>Page:</strong>
@@ -7,10 +7,10 @@ div id="#{dom_id note}"
 
   .log-entry
     - if note.body.present?
-      = govuk_heading("You wrote:", tag: :h4)
+      h4.govuk-heading-m You wrote:
 
       p.govuk_body
-      = simple_format(note.body)
+        = simple_format(note.body)
     - else 
-      p.govuk_body aria-label= "You have not made any notes for #{note.title}"
+      p.govuk_body aria-label="You have not made any notes for #{note.title}"
         | You have not made any notes on this page yet.

@@ -10,7 +10,7 @@ services:
       - RAILS_ENV=test
       - DOMAIN=recovery.app
       - TRAINING_MODULES=demo-modules
-      - BOT=bot_token
+      - BOT_TOKEN=bot_token
     tty: true
     stdin_open: true
 
