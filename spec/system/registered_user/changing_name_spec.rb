@@ -31,12 +31,4 @@ RSpec.describe 'Registered user changing name', type: :system do
       expect(page).to have_text 'Enter a surname.'
     end
   end
-
-  context 'when cancelled' do
-    it 'returns to account page' do
-      click_link 'Back'
-
-      expect(page).to have_current_path '/my-account'
-    end
-  end
 end
