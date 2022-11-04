@@ -13,7 +13,11 @@ protected
         my_modules_path
       end
     else
-      edit_registration_name_path
+      if resource.private_beta_registration_complete?
+        static_path('new_registration')
+      else
+        edit_registration_name_path
+      end
     end
   end
 end
