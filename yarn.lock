@@ -26,20 +26,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hotwired/turbo-rails@npm:^7.1.0":
-  version: 7.1.3
-  resolution: "@hotwired/turbo-rails@npm:7.1.3"
+"@hotwired/turbo-rails@npm:^7.2.4":
+  version: 7.2.4
+  resolution: "@hotwired/turbo-rails@npm:7.2.4"
   dependencies:
-    "@hotwired/turbo": "npm:^7.1.0"
-    "@rails/actioncable": "npm:^7.0"
-  checksum: 7f741b50dbb46bf297c82e48a31b1b485c6f9bcc508616b812ba8ff8cbb69366a81157419990d196b3926d4169c2766650699f61b6da47d02eafc976767f091e
+    "@hotwired/turbo": ^7.2.4
+    "@rails/actioncable": ^7.0
+  checksum: 658059626a8f1ede0c3e88003f44d764c0da8a852ffb7bd7a09e26298228b2dd2961e1adce4ab0763d3abf5b989456c6ca16cb52bc93b42950ebe73aa6b2f4cf
   languageName: node
   linkType: hard
 
-"@hotwired/turbo@npm:^7.1.0":
-  version: 7.1.0
-  resolution: "@hotwired/turbo@npm:7.1.0"
-  checksum: 4f71ebf2ff6a396d4031d048fa4d4dba6039aed9ad68436e6df4527e975acd8427c7d2f9b3e7f61f3e9c1af987193adf4e2b640c4033d4afd3e1f914ed05ba9f
+"@hotwired/turbo@npm:^7.2.4":
+  version: 7.2.4
+  resolution: "@hotwired/turbo@npm:7.2.4"
+  checksum: 83cbcda22cf2fa251a30aa898a57ea6dd9a2b0de71f4d3e364baa300a01a8d52631ae13b44533b516965a557d663788325a930fbc3edab3f85616126b7834c4c
   languageName: node
   linkType: hard
 
@@ -654,10 +654,10 @@ __metadata:
   dependencies:
     "@fortawesome/fontawesome-free": ^6.2.0
     "@hotwired/stimulus": ^3.0.1
-    "@hotwired/turbo-rails": ^7.1.0
+    "@hotwired/turbo-rails": ^7.2.4
     accessible-autocomplete: ^2.0.4
     esbuild: ^0.14.36
-    govuk-frontend: ^4.0.1
+    govuk-frontend: ^4.3.1
     puppeteer: ^15.3.0
     sass: ^1.50.1
   languageName: unknown
@@ -794,10 +794,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"govuk-frontend@npm:^4.0.1":
-  version: 4.2.0
-  resolution: "govuk-frontend@npm:4.2.0"
-  checksum: cee95b6aee658b1434e220310a040c793e9cef52d093b5388f82b5e018d18302d6d462f889239a4948dc2f008f48ec642e8538d0cedfd4dec9a943dd03290c1a
+"govuk-frontend@npm:^4.3.1":
+  version: 4.3.1
+  resolution: "govuk-frontend@npm:4.3.1"
+  checksum: ea2d658f666481ffcac8c5ba2433f1cfe5087c281b8db1157567628f1db094734c64eb0879f57f87e75944adb06459487e735a4cd184a960de6ab1249f75b6d3
   languageName: node
   linkType: hard
 
