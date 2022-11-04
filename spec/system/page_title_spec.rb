@@ -77,7 +77,7 @@ RSpec.describe 'Page' do
     it { expect(check_email_password_reset_user_path).to have_page_title('Check email password reset') }
 
     it { expect(training_module_path('alpha')).to have_page_title('First Training Module')}
-    it { expect(training_module_interruption_page_path('alpha')).to have_page_title('What to expect during the training')}
+    it { expect(training_module_interruption_page_path('alpha')).to have_page_title('First Training Module : What to expect during the training')}
 
     context 'and viewing module content' do
       [
