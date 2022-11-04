@@ -64,16 +64,13 @@ en:
         | ----------- | ----------- | ----------- |
         | _hjSession_3169682	| Holds current session data. Ensures subsequent requests in the session window are attributed to the same session.	| 30 minutes
         | _hjSessionTooLarge	| Causes Hotjar to stop collecting data if a session becomes too large.	| Per session
-        | _hjSessionRejected	| If present, set to '1' for the duration of a user's session, when Hotjar has rejected the session from connecting to our WebSocket due to server overload.
-        Applied in extremely rare situations to prevent severe performance issues.	| Per session
+        | _hjSessionRejected	| If present, set to '1' for the duration of a user's session, when Hotjar has rejected the session from connecting to our WebSocket due to server overload. Applied in extremely rare situations to prevent severe performance issues.	| Per session
         | _hjSessionResumed	| Set when a session/recording is reconnected to Hotjar servers after a break in connection.	| Per session
         | _hjLocalStorageTest	| Used to check if the Hotjar tracking script can use local browser storage	| Per session
         | _hjIncludedInPageviewSample	| Set to determine if a user is included in the data sampling defined by your site's pageview limit.	| 30 minutes
         | _hjIncludedInSessionSample	| Set to determine if a user is included in the data sampling defined by your site's daily session limit.	| 30 minutes
-        | _hjAbsoluteSessionInProgress	| Used to detect the first pageview session of a user.
-          | 30 minutes
+        | _hjAbsoluteSessionInProgress	| Used to detect the first pageview session of a user. | 30 minutes
         | _hjTLDTest	| We try to store the _hjTLDTest cookie for different URL substring alternatives until it fails. Enables us to try to determine the most generic cookie path to use, instead of page hostname. It means that cookies can be shared across subdomains (where applicable). After this check, the cookie is removed.	| Per session
-
 
         ### Relating to recordings
 
@@ -81,7 +78,6 @@ en:
         | ----------- | ----------- | ----------- |
         | _hjRecordingEnabled	| Set when a Recording starts. Read when the Recording module is initialised to see if the user is already in a recording in a particular session.	| Per session
         | _hjRecordingLastActivity	| Set in Session storage as opposed to cookies. Updated when a user recording starts and when data is sent through the WebSocket (the user performs an action that Hotjar records).	| Per session
-
 
         ### Relating to feedback and survey tools
 
@@ -91,11 +87,6 @@ en:
         | _hjDonePolls	| Tell us whether a Hotjar feedback poll has been completed to stop the same poll reappearing	| 365 days
         | _hjMinimizedPolls	| Keeps Hotjar feedback poll widgets minimised (once minimised by the user) when the user navigates through the website	| 365 days
         | _hjShownFeedbackMessage	| Set when a user minimises or completes a Hotjar feedback survey. The survey will stay minimised if the user navigates to a page where it is set to show	| 365 days
-
-
-
-
-
 
       change_cookies_header: Change your cookie settings
       change_cookies_question: Do you want to accept analytics cookies?
