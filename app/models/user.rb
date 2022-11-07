@@ -98,6 +98,10 @@ class User < ApplicationRecord
     setting.role_type != 'none'
   end
 
+  def private_beta_registration_complete?
+    !!private_beta_registration_complete
+  end
+
 private
 
   def setting

@@ -114,7 +114,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_03_162127) do
     t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
-    t.boolean "private_beta_registration_complete"
+    t.boolean "private_beta_registration_complete", default: false
     t.string "postcode"
     t.string "ofsted_number"
     t.integer "failed_attempts", default: 0, null: false
