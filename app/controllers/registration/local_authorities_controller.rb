@@ -8,7 +8,7 @@ class Registration::LocalAuthoritiesController < Registration::BaseController
 
     if @user_form.save
       if @user_form.role_type_next?
-        redirect_to(next_action { edit_registration_role_type_path })
+        redirect_to edit_registration_role_type_path
       else
         complete_registration
       end

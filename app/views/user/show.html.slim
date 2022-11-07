@@ -18,21 +18,19 @@
         - row.value { t('password.last_changed', date: @user.password_last_changed) }
         - row.action(text: t('links.change'), href: edit_password_user_path, visually_hidden_text: 'password', html_attributes: { id: :edit_password_user })
 
-    h2.govuk-heading-m About your other details
-    hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
-
     = govuk_summary_list do |other_details|
+      - other_details.row do |row|
+        - row.key { t('.your_setting_details_html') }
+        - row.value { nil }
+        - row.action(text: t('links.change'), href: edit_registration_setting_type_path, visually_hidden_text: 'setting_type', html_attributes: { id: :edit_setting_type_registration })
       - other_details.row do |row|
         - row.key { 'Setting type' }
         - row.value { @user.setting_name }
-        - row.action(text: t('links.change'), href: edit_registration_setting_type_path, visually_hidden_text: 'setting_type', html_attributes: { id: :edit_setting_type_registration })
       - other_details.row do |row|
         - row.key { 'Local authority' }
         - row.value { @user.local_authority }
-        - row.action(text: t('links.change'), href: edit_registration_local_authority_path, visually_hidden_text: 'local_authority', html_attributes: { id: :edit_local_authority_registration })
       - other_details.row do |row|
         - row.key { 'Role' }
         - row.value { @user.role }
-        - row.action(text: t('links.change'), href: edit_registration_role_type_path, visually_hidden_text: 'role_type', html_attributes: { id: :edit_role_type_registration })
 
 = render 'debug'

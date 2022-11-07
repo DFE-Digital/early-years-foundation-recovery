@@ -1,4 +1,8 @@
 en:
+  user:
+    show:
+      your_setting_details_html:
+        <h2 class='govuk-heading-m'>Your setting details</h2>
   activemodel:
     errors:
       models:
@@ -121,6 +125,8 @@ en:
         button: Continue
         multiple_local_authorities: I work across more than one local authority
         autocomplete-not-found: No local authority found.
+      update:
+        complete: Thank you for creating a child development training account. You can now start the first module.
     role_types:
       edit:
         heading: Which of the following best describes your role?

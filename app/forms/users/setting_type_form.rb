@@ -13,10 +13,15 @@ module Users
 
     def save
       if valid?
-        user.update!(
+        object = SettingType.find(setting_type_id)
+        update_attributes = {
           setting_type_id: setting_type_id,
-          setting_type: SettingType.find(setting_type_id).name,
-        )
+          setting_type: object.name,
+        }
+        update_attributes.merge!(local_authority: nil) unless setting_type.local_authority_next?
+        update_attributes.merge!(role_type: nil) unless setting_type.role_type_next?
+        user.update(update_attributes)
+        user.save!(validate: false)
       end
     end
   end

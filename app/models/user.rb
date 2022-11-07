@@ -94,8 +94,17 @@ class User < ApplicationRecord
     return false unless registration_complete?
     return true if setting_type_id == 'other'
     return false unless SettingType.valid_setting_types.include?(setting_type_id)
+    return true if new_setting_type_role_required?
 
     setting.role_type != 'none'
+  end
+
+  def new_setting_type_role_required?
+    if setting_type_id_changed?
+      SettingType.find(setting_type_id_change[1]).role_type != 'none'
+    else
+      false
+    end
   end
 
   def private_beta_registration_complete?
