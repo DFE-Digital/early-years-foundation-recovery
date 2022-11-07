@@ -37,11 +37,11 @@ jobs:
       chrome:
         image: selenium/standalone-chrome:latest
         ports:
-          - 4444:4444
+          - 4441:4444
       firefox:
         image: selenium/standalone-firefox:latest
         ports:
-          - 4444:4444
+          - 4442:4444
 
     steps:
       -
@@ -63,11 +63,11 @@ jobs:
         name: Use Chrome
         env:
           BROWSER: standalone_chrome
-          DRIVER: chrome:4444
+          DRIVER: chrome:4441
         run: bin/rspec --default-path ui
       -
         name: Use Firefox
         env:
           BROWSER: standalone_firefox
-          DRIVER: firefox:4444
+          DRIVER: firefox:4442
         run: bin/rspec --default-path ui
