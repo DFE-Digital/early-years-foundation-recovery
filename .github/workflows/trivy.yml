@@ -61,7 +61,7 @@ jobs:
             BUILDKIT_INLINE_CACHE=1
             SHA=${{ github.sha }}
           cache-from: |
-            ${{ env.REGISTRY }}:${{ github.sha }}
+            ${{ env.REGISTRY }}:latest
           tags: |
             ${{ env.REGISTRY }}:${{ github.sha }}
       -
