@@ -29,9 +29,11 @@ Rails.application.routes.draw do
     patch 'update-setting-type'
     get 'check-email-confirmation'
     get 'check-email-password-reset'
-    get 'confirm-delete-account'
-    post 'delete_account'
     resource :notes, path: 'learning-log', only: %i[show create update]
+    resource :account_deletion, path: 'account-deletion', only: %i[edit update] do
+      get 'confirm-delete-account'
+      post 'delete_account'
+    end
   end
 
   resources :modules, only: %i[show], as: :training_modules, controller: :training_modules do

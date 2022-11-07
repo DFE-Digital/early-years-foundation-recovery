@@ -23,7 +23,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
       name: record.name,
       email: record.email,
     )
-    mail(to: record.email)
+    mail(to: record.email, bcc: 'child-development.training@education.gov.uk')
   end
 
   def activation_instructions(record, token, _opts = {})

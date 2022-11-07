@@ -39,8 +39,7 @@
         - row.action(text: t('links.change'), href: edit_setting_type_user_path, visually_hidden_text: 'setting_type')
       
     h2.govuk-heading-m Closing your account 
-    - t('delete_account.body').each do |paragraph|
-      p.govuk-body= paragraph
-    = govuk_button_link_to t('delete_account.button'), confirm_delete_account_user_path
+    p.govuk-body= t('delete_account.body')
+    = govuk_button_link_to t('delete_account.button'), edit_user_account_deletion_path
 
 = render 'debug'

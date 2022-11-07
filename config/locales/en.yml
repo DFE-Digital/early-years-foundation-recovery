@@ -246,16 +246,30 @@ en:
       link_text: contact us
 
   delete_account:
-    body:
-      - You can begin the process of closing your account.
-      - You need to check a few things before your account is closed.
+    body: |
+      You can begin the process of closing your account.
+      You need to check a few things before your account is closed.
     button: Request to close account
   confirm_delete_account:
-    heading: Are you sure you would like to close your account?
-    body:
-      - Your personal information will be deleted in up to 10 working days,
-      - We might keep anonymous data for these reasons, but we will delete anything personalised.
-      - You will lose any progress and certificates and will be unsubscribed from any emails.
+    heading: Confirm you want to close your account
+    body: |
+      After you close your account you will no longer be able to access the training modules.
+      
+      Any certificates you have earned will be permanently deleted.
+      
+      We will delete your personal information within 10 working days. The personal information we will delete includes:
+      
+      - your name
+      - your email address
+      - your postcode, if you provided it when you registered
+      - any notes you have written in your learning log 
+
+      We will keep some anonymous information about your role, your local authority and your usage of the training modules. 
+      This is to help us improve the training. None of this information will be personally identifiable to you.
+
+      You may still receive emails while we are processing your account closure. 
+      After your personal information is deleted, you will not receive any further emails from Early years child development training. 
+
     confirm: Close my account
     cancel: Cancel and go back to my account
   account_deleted:

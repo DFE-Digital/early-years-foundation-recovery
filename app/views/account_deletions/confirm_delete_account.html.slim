@@ -1,8 +1,7 @@
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
     h1.govuk-heading-l= t('confirm_delete_account.heading')
-    - t('confirm_delete_account.body').each do |paragraph|
-      h1.govuk-body= paragraph
+    p.govuk-body= translate_markdown(t('confirm_delete_account.body'))
 
     = govuk_button_to t('confirm_delete_account.confirm'), 'delete_account', warning: true
     = govuk_link_to t('confirm_delete_account.cancel'), user_path

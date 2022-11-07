@@ -1,0 +1,9 @@
+.govuk-grid-row
+  .govuk-grid-column-two-thirds-from-desktop
+    = govuk_back_link(href: user_path)
+    = form_for @user, url: { action: 'update' } do |f|
+      = f.govuk_error_summary
+      = f.govuk_fieldset legend: { text: 'Enter your password' } do
+        = f.govuk_password_field :current_password, autofocus: true
+
+      = f.govuk_submit 'Continue'
