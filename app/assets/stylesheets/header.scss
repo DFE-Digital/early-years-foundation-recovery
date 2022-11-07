@@ -29,13 +29,16 @@
     line-height: 2.5rem !important;
     font-size: 1.2rem;
   }
-
+  
+  &__link--homepage {
+    display: inline-block;
+  }
+  
   &__logotype-crown-fallback-image{height: 45px; width: 45px;}
   
   @media screen and (min-width: 768px) {
     &__container {
       display: flex;
-      
       position: relative;
       margin-bottom: -10px;
       padding-top: 25px;

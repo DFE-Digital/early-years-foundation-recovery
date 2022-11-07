@@ -6,7 +6,7 @@ module ApplicationHelper
       header.custom_logo do
         image_tag('crest.png', alt: "Department for Education homepage", class: 'govuk-header__logotype-crown-fallback-image') +
           " " + ("<span class='govuk-header__logotype-text'>Department for Education | </span>").html_safe +
-          ("<span class='govuk-header__product-name'>Child development training</span>").html_safe
+          ("<span class='govuk-header__product-name'>Early years child development training</span>").html_safe
       end
       if user_signed_in?
         header.navigation_item(text: 'My modules', href: my_modules_path)
