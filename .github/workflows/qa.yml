@@ -3,19 +3,13 @@ name: QA Framework
 on:
   workflow_dispatch:
 
-  # pull_request:
-  #   branches:
-  #     - main
-  #   types:
-  #     - synchronize
-
-  # workflow_run:
-  #   workflows:
-  #     - Deploy Content App
-  #   branches:
-  #     - main
-  #   types:
-  #     - completed
+  workflow_run:
+    workflows:
+      - Deploy Content App
+    branches:
+      - main
+    types:
+      - completed
 
 env:
   BASE_URL: https://ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
@@ -51,12 +45,12 @@ jobs:
         name: Install Rubygems
         run: bundle install --jobs 20 --retry 3
       -
+        name: Run test suite against chrome
+        env:
+          BROWSER: standalone_chrome
+        run: bin/rspec --default-path ui
+      -
         name: Run test suite against firefox
         env:
           BROWSER: standalone_firefox
         run: bin/rspec --default-path ui
-      # -
-      #   name: Run test suite against chrome
-      #   env:
-      #     BROWSER: standalone_chrome
-      #   run: bin/rspec --default-path ui

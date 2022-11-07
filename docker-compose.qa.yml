@@ -29,10 +29,11 @@ services:
     environment:
       - BASE_URL
       - BROWSER
+      - DRIVER
       - USER_PASSWORD
     depends_on:
-      # app:
-      #   condition: service_healthy
+      app:
+        condition: service_healthy
       chrome:
         condition: service_healthy
       firefox:
@@ -48,7 +49,7 @@ services:
     ports:
       - 4441:4444
     healthcheck:
-      test: curl --fail http://chrome:4444 || exit 1
+      test: curl --fail http://localhost:4444 || exit 1
     networks:
       - recovery
 
@@ -58,6 +59,6 @@ services:
     ports:
       - 4442:4444
     healthcheck:
-      test: curl --fail http://firefox:4444 || exit 1
+      test: curl --fail http://localhost:4444 || exit 1
     networks:
       - recovery
