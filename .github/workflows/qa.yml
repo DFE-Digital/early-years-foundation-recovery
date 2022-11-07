@@ -2,11 +2,11 @@
 name: QA Framework
 on:
   workflow_dispatch:
-    inputs:
-      workspace:
-        description: Deployment workspace to test against (dev, pr-xxx)
-        type: string
-        default: dev
+  #   inputs:
+  #     workspace:
+  #       description: Deployment workspace to test against (dev, pr-xxx)
+  #       type: string
+  #       default: dev
 
   pull_request:
     branches:
@@ -24,7 +24,7 @@ on:
 
 env:
   # BASE_URL: https://ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
-  BASE_URL: https://ey-recovery-${{ inputs.workspace || (pr-${{ github.event.number }}) }}.london.cloudapps.digital
+  BASE_URL: https://ey-recovery-dev.london.cloudapps.digital
   USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
 
 jobs:
