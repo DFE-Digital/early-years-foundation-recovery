@@ -1,12 +1,12 @@
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
-    = form_for @user, url: { action: 'update_name' } do |form|
-      = form.govuk_error_summary
-      = form.govuk_fieldset legend: { text: 'Change name' } do
+    = form_for @user, url: { action: 'update_name' } do |f|
+      = f.govuk_error_summary
+      = f.govuk_fieldset legend: { text: 'Change name' } do
         p.govuk_body
           = t(:body, scope: [:extra_registration, :name])
-        = form.govuk_text_field :first_name, autofocus: true
-        = form.govuk_text_field :last_name
-        = form.govuk_submit t('links.save')
+        = f.govuk_text_field :first_name, autofocus: true, aria: { required: true }
+        = f.govuk_text_field :last_name, aria: { required: true }
+        = f.govuk_submit t('links.save')
 
-        p= link_to 'Cancel', user_path
+        p= govuk_link_to 'Cancel', user_path

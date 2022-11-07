@@ -13,7 +13,9 @@ env:
   RAILS_ENV: test
   RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
   DATABASE_URL: postgres://postgres:password@localhost:5432/test
+  DOMAIN: recovery.app
   TRAINING_MODULES: demo-modules
+  BOT_TOKEN: bot_token
 
 jobs:
   test:
@@ -33,31 +35,22 @@ jobs:
 
     steps:
       -
-        name: Checkout code
-        uses: actions/checkout@v2
+        name: Checkout Code
+        uses: actions/checkout@v3
       -
         name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.1.0
-      -
-        name: Set up ruby gem cache
-        uses: actions/cache@v1
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
+          ruby-version: 3.1.2
+          bundler-cache: true
       -
         name: Install Rubygems
-        run: |
-          bundle config path vendor/bundle
-          bundle install --jobs 20 --retry 3
+        run: bundle install --jobs 20 --retry 3
       -
-        name: Set up Node
-        uses: actions/setup-node@v1
+        name: Use Node.js 18
+        uses: actions/setup-node@v3
         with:
-          node-version: 17.6
+          node-version: 18.x
       -
         name: Install asset dependencies
         run: bundle exec rails assets:precompile
@@ -65,7 +58,7 @@ jobs:
         name: Prepare test database
         run: bin/rails db:prepare
         env:
-          NOTIFY_API_KEY: ""
+          NOTIFY_API_KEY: foo
       -
         name: Run test suite
         run: bundle exec rspec

@@ -29,14 +29,15 @@ module EarlyYearsFoundationRecovery
       g.test_framework :rspec
     end
 
-    config.training_modules = ENV.fetch('TRAINING_MODULES', 'training-modules')
+    config.bot_token = ENV['BOT_TOKEN']
     config.feedback_url = ENV.fetch('FEEDBACK_URL', '#FEEDBACK_URL_env_var_missing')
-    config.user_timeout_minutes = ENV.fetch('TIMEOUT_MINUTES', '15').to_i
+    config.google_analytics_tracking_id = ENV.fetch('TRACKING_ID', '#TRACKING_ID_env_var_missing')
+    config.training_modules = ENV.fetch('TRAINING_MODULES', 'training-modules')
     config.unlock_in_minutes = ENV.fetch('UNLOCK_IN_MINUTES', '120').to_i
+    config.user_timeout_minutes = ENV.fetch('TIMEOUT_MINUTES', '15').to_i
+
     config.middleware.use Grover::Middleware
     config.active_record.yaml_column_permitted_classes = [Symbol]
-    config.google_analytics_tracking_id = ENV.fetch('TRACKING_ID', '#TRACKING_ID_env_var_missing')
-
     config.action_view.sanitized_allowed_tags = ALLOWED_TAGS
   end
 end

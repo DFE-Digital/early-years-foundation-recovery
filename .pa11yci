@@ -1,0 +1,16 @@
+{
+  "defaults": {
+    "standard": "WCAG2AA",
+    "chromeLaunchConfig": {
+      "args": [
+        "--no-sandbox"
+      ]
+    },
+    "actions": [
+      "screen capture /tmp/pa11y/screenshot.png"
+    ],
+    "headers": {
+      "BOT": "token"
+    }
+  }
+}

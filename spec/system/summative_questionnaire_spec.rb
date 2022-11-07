@@ -147,5 +147,9 @@ RSpec.describe 'Summative questionnaire' do
 
       expect(page).to have_selector '.govuk-checkboxes__input'
     end
+
+    it 'links back to content' do
+      expect(page).to have_link 'revisit topic'
+    end
   end
 end

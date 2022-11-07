@@ -61,7 +61,6 @@ class NotifyMailer < GovukNotifyRails::Mailer
     set_personalisation(
       name: record.name,
       email: record.email,
-      sign_in_url: new_user_password_url, # to be removed when ER-454 has been merged in
       reset_password_url: new_user_password_url,
     )
     mail(to: record.email)

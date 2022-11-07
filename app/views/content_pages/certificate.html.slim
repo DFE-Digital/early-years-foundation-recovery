@@ -1,4 +1,4 @@
-span.noprint
+.noprint
   h1 Get your certificate 
 
   - if @module_progress.completed?
@@ -6,7 +6,10 @@ span.noprint
   - else
     p You have not yet completed the module.
 
-  p.govuk_body If the name on your certificate is not what you expect, you can update it in <a href="/my-account">My account</a>.
+  p.govuk_body
+    | If the name on your certificate is not what you expect, you can update it in
+    =< govuk_link_to 'My account', user_path
+    | .
 
   hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
 
@@ -33,13 +36,24 @@ h3 Certified by the Department for Education
 
 .govuk-grid-row
   .govuk-grid-column-one-third-from-desktop
-    = image_tag('department-for-education-certificate.png', width: '220')
+    = image_tag('department-for-education-certificate.png', width: '220', alt: '', title: '')
 
-span.noprint
+.noprint
   = print_button
-  = govuk_link_to 'Download', training_module_content_page_path(training_module, training_module.certificate_page, format: :pdf)
+
+  p.govuk-body
+    = govuk_link_to 'Download certificate', training_module_content_page_path(training_module, training_module.certificate_page, format: :pdf), aria: { describedby: 'pdf-details' }
+
+  p#pdf-details.govuk-body
+    span aria-label='file type'
+      abbr title='Portable Document Format' PDF
+    = ', '
+    span aria-label='file size' 0.4 MB
+    = ', '
+    span aria-label='page size' 1 page
+
 
   hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
 
-div.noprint class='govuk-!-text-align-right'
-  = govuk_link_to 'Go to My modules', my_modules_path, class: 'govuk-button'
+  div class='govuk-!-text-align-right'
+    = govuk_button_link_to 'Go to My modules', my_modules_path

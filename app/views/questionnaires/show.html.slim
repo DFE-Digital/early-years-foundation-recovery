@@ -5,18 +5,24 @@
 .gem-c-govspeak
   = translate_markdown(@questionnaire.body)
 
--# TODO: refactor required (questionnaire->question)
-= form_with model: @questionnaire, url: training_module_questionnaire_path(@questionnaire.training_module, @questionnaire), method: :patch do |f|
-  - @questionnaire.question_list.each do |question|
-    = render partial: question.to_partial_path, locals: { f: f }, object: question, as: :question
+.govuk-grid-row 
+  .govuk-grid-column-two-thirds-from-desktop
+    -# TODO: refactor required (questionnaire->question)
+    = form_with model: @questionnaire, url: training_module_questionnaire_path(@questionnaire.training_module, @questionnaire), method: :patch do |f|
+      - @questionnaire.question_list.each do |question|
+        = render partial: question.to_partial_path, locals: { f: f }, object: question, as: :question
 
-    - if @questionnaire.formative? && @questionnaire.answered?(question)
-      = render 'assessment_banner', questionnaire: @questionnaire, question: question
+        - if @questionnaire.formative? && @questionnaire.answered?(question)
+          = render 'assessment_banner', questionnaire: @questionnaire, question: question
 
-  hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
+      hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
 
-  .govuk-grid-row
-    .govuk-grid-column-one-half
-      = link_to_previous_module_item(@questionnaire.module_item)
-    .govuk-grid-column-one-half class='govuk-!-text-align-right'
-      = link_to_next_question(@questionnaire)
+      .govuk-grid-row
+        .govuk-grid-column-one-half
+          = link_to_previous_module_item @questionnaire.module_item
+
+        .govuk-grid-column-one-half class='govuk-!-text-align-right'
+          - if @questionnaire.submitted? && !@questionnaire.confidence?
+            = link_to_next_module_item @questionnaire.module_item
+          - else
+            = f.govuk_submit @questionnaire.next_button_text

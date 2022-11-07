@@ -9,10 +9,9 @@ h1.govuk-heading-l My modules
       - else
         p You have not started any modules. Please choose an available module.
     - else
-      div class='govuk-grid-row govuk-!-margin-bottom-7'
+      .grid-container
         - @user.course.current_modules.each do |mod|
-          .govuk-grid-column-one-third-from-desktop.govuk-grid-column-one-half class='govuk-!-margin-bottom-2'
-            = render 'card', mod: mod, current: true
+          = render 'card', mod: mod, current: true
 
 - if @user.course.available_modules.any? || @user.course.course_completed?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
@@ -20,8 +19,8 @@ h1.govuk-heading-l My modules
     .govuk-grid-column-full
       h2.govuk-heading-m Available modules
       - if @user.course.available_modules.any?
-        - @user.course.available_modules.each do |mod|
-          .govuk-grid-column-one-third-from-desktop.govuk-grid-column-one-half class='govuk-!-margin-bottom-2'
+        .grid-container
+          - @user.course.available_modules.each do |mod|
             = render 'card', mod: mod, current: false
 
       - elsif @user.course.course_completed?
@@ -31,24 +30,22 @@ h1.govuk-heading-l My modules
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
   .govuk-grid-row id='upcoming'
     .govuk-grid-column-full
-      h2.govuk-heading-m Upcoming modules
+      h2.govuk-heading-m Future modules in this course
 
-    - @user.course.upcoming_modules.each do |mod|
-      .govuk-grid-column-one-third-from-desktop.govuk-grid-column-one-half
-        .govuk-card__flex-container
-          .govuk-card__flex-item id=mod.name
-            .govuk-card.govuk-card__height
-              .govuk-card__content
-                h3.govuk-heading-s= mod.title
-                p.govuk-body= mod.description
-              .govuk-card__actions
-                - unless mod.draft?
-                  = govuk_link_to 'View more information about this module', course_overview_path + "#module-#{mod.id}-#{mod.title.downcase.parameterize}"
+      .grid-container
+        - @user.course.upcoming_modules.each do |mod|
+          .govuk-card id=mod.name
+            h3.govuk-heading-s
+              = mod.card_title
+            p.govuk-body= mod.description
+            - unless mod.draft?
+              = govuk_link_to 'View more information about this module',
+                course_overview_path + mod.card_anchor
 
 - if @user.course.completed_modules.any?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
   .govuk-grid-row id='completed'
     .govuk-grid-column-full
-      = completed_modules_table(@user.course.completed_modules)
+      = completed_modules_table
 
 = render 'debug'

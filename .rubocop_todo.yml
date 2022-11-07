@@ -21,9 +21,10 @@ Rails/CreateTableWithTimestamps:
   Exclude:
     - 'db/migrate/20220419121105_create_ahoy_visits_and_events.rb'
 
-# Offense count: 1
+# Offense count: 2
 # Cop supports --auto-correct.
 # Configuration parameters: AllowImplicitReturn, AllowedReceivers.
 Rails/SaveBang:
   Exclude:
     - 'app/controllers/registrations_controller.rb'
+    - 'config/sitemap.rb'

@@ -88,8 +88,6 @@ en:
   password:
     last_changed: Password last changed on %{date}
     hardness: Your password must contain at least %{length} characters.
-    # /users/sign_in
-    label: Password
     remember_me: Remember me
 
   module_indicator:
@@ -157,6 +155,18 @@ en:
     note: Add to your learning log
     test: Check your understanding
 
+  summary_intro:
+    heading: Summary and next steps
+    body: |
+      You have reached the end of this module's training content.
+
+      This next section of the module includes:
+
+      - a recap of what you have learned
+      - the end of module test
+      - an opportunity to reflect on your learning
+      - the chance to give us feedback about the module
+
   assessment_intro:
     heading: End of module test
     body: |
@@ -193,11 +203,31 @@ en:
 
       Please rate to what extent you agree with the statements on the following pages.
 
-  ending_intro:
+  thankyou:
     heading: Thank you
     body: |
       You can also <a href='%{feedback_url}' target="_blank">give feedback about
       the training (opens in new window)</a>
+
+  certificate:
+    heading: Download your certificate
+
+  interruption_page:
+    heading: What to expect during the training
+    body: |
+      ## End of module test
+
+      Once you have completed all topics, there is an end of module test and an
+      opportunity to download a certificate of achievement.
+
+      ## Your progress is saved automatically
+
+      Your progress is automatically saved as you move through the module.
+      You can sign out or close the browser at any time without losing your progress.
+      When you next sign in, you can restart from where you left off.
+
+  icons_page:
+    heading: Before you start
 
   check_email_confirmation:
     heading: Check your email
@@ -227,6 +257,7 @@ en:
       title: I have a different problem
       text: For other problems with creating your account or signing in, please
       link_text: contact us
+
   check_email_password_reset:
     heading: Check your email
     body:
@@ -280,6 +311,9 @@ en:
     survey_url: '#'
 
   assessment_results:
+    heading: Assessment results
+    # body: |
+    #   **Wrong** answers are shown below
     show:
       incorrect: You answered %{answers}. That's not quite right.
       pass:
@@ -313,16 +347,18 @@ en:
         password: Create a new password # /my-account/edit-password
         current_password: Enter your current password
         password_confirmation: Confirm password
+        postcode: Your setting's postcode
         setting_type: Your setting type
         setting_type_other: Other setting
-        postcode: Your setting's postcode
         ofsted_number: Your setting's Ofsted number, if you have one
     hint:
       user:
-        postcode: If you work in multiple settings, choose the one where you work most often.
+        postcode: |
+          If you work in multiple settings, choose the one where you work most often.
         ofsted_number: |
           This might start with EY followed by 6 numbers, or it might be a number that is 6 or 7 digits long.
-        current_password: We need your current password to confirm your changes.
+        current_password: |
+          We need your current password to confirm your changes.
   notice:
     email_changed: |
       We have sent an email to your new email address with a link to click to confirm the change.
@@ -340,6 +376,8 @@ en:
       index: Home page
     learning:
       show: My modules
+    notes:
+      show: Learning log
     user:
       show: My account
       edit_name: Change name
@@ -374,7 +412,9 @@ en:
         setting: About your setting
     settings:
       show:
+        # FIXME: routing
         cookie_policy: Cookie policy
+        cookie-policy: Cookie policy
     static:
       show:
         account-deleted: Account closed
@@ -383,3 +423,4 @@ en:
         privacy-policy: Privacy policy
         terms-and-conditions: Terms and conditions
         whats-new: What's new
+        sitemap: Sitemap
