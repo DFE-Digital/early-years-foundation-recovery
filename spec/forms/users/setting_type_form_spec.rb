@@ -16,14 +16,16 @@ RSpec.describe Users::SettingTypeForm do
       expect(setting_type_form.errors[:setting_type_id].first).to eq 'Enter the setting type you work in.'
     end
 
+    # rubocop:disable Rails/SaveBang
     it 'must maintain consistency with existing users' do
       user = create(:user, :registered, setting_type_id: 'childminder_independent', local_authority: 'Cambridgeshire County Council', role_type: 'Childminder')
-      form = described_class.new(user: user, setting_type_id: 'department_for_education' )
+      form = described_class.new(user: user, setting_type_id: 'department_for_education')
 
       form.save
       expect(user.setting_type).to eq('Department for Education')
       expect(user.local_authority).to eq(nil)
       expect(user.role_type).to eq(nil)
     end
+    # rubocop:enable Rails/SaveBang
   end
 end

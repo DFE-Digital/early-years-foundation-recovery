@@ -11,6 +11,7 @@ module Users
       'setting_types'
     end
 
+    # rubocop:disable Rails/SaveBang
     def save
       if valid?
         object = SettingType.find(setting_type_id)
@@ -18,11 +19,12 @@ module Users
           setting_type_id: setting_type_id,
           setting_type: object.name,
         }
-        update_attributes.merge!(local_authority: nil) unless setting_type.local_authority_next?
-        update_attributes.merge!(role_type: nil) unless setting_type.role_type_next?
+        update_attributes[:local_authority] = nil unless setting_type.local_authority_next?
+        update_attributes[:role_type] = nil unless setting_type.role_type_next?
         user.update(update_attributes)
-        user.save!(validate: false)
+        user.save(validate: false)
       end
     end
+    # rubocop:enable Rails/SaveBang
   end
 end
