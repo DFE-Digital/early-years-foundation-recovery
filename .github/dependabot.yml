@@ -10,6 +10,7 @@ updates:
     versioning-strategy: auto
     labels:
       - dependencies
+      - ruby
 
   - package-ecosystem: npm
     directory: "/"
@@ -20,3 +21,4 @@ updates:
     versioning-strategy: auto
     labels:
       - dependencies
+      - frontend
