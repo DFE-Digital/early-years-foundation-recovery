@@ -19,10 +19,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hotwired/stimulus@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "@hotwired/stimulus@npm:3.0.1"
-  checksum: 5f2dbfeb3dfff8472e1d0ef7db59a18d71540651861c0c5839fa32c56fcd5cae3fc6183a94746303c5adfbd66a9b552a3167e7e193c04dfaa6f51a8e5bea8e5e
+"@hotwired/stimulus@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "@hotwired/stimulus@npm:3.1.1"
+  checksum: acb70e4b11495f125305171e67569f961b067059d71ecbeb0cacd794517bd2f3a9d9760c35e6ebcc098b8e083302a8511a8537bfec6bab7ed1fba950f653687e
   languageName: node
   linkType: hard
 
@@ -653,7 +653,7 @@ __metadata:
   resolution: "eyfs-recovery@workspace:."
   dependencies:
     "@fortawesome/fontawesome-free": ^6.2.0
-    "@hotwired/stimulus": ^3.0.1
+    "@hotwired/stimulus": ^3.1.1
     "@hotwired/turbo-rails": ^7.2.4
     accessible-autocomplete: ^2.0.4
     esbuild: ^0.14.36
