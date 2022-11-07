@@ -63,11 +63,11 @@ jobs:
         name: Use Chrome
         env:
           BROWSER: standalone_chrome
-          DRIVER: chrome:4441
+          # DRIVER: chrome:4441
         run: bin/rspec --default-path ui
       -
         name: Use Firefox
         env:
           BROWSER: standalone_firefox
-          DRIVER: firefox:4442
+          # DRIVER: firefox:4442
         run: bin/rspec --default-path ui
