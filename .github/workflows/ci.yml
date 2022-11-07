@@ -53,7 +53,7 @@ jobs:
           node-version: 18.x
           cache: npm
       -
-        name: Install asset dependencies
+        name: Compile assets
         run: bundle exec rails assets:precompile
       -
         name: Prepare test database

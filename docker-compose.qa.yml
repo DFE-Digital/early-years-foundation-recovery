@@ -31,8 +31,8 @@ services:
       - BROWSER
       - USER_PASSWORD
     depends_on:
-      app:
-        condition: service_healthy
+      # app:
+      #   condition: service_healthy
       chrome:
         condition: service_healthy
       firefox:
