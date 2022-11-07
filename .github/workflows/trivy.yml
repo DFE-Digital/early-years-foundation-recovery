@@ -47,9 +47,9 @@ jobs:
             BUILDKIT_INLINE_CACHE=1
             SHA=${{ github.sha }}
           cache-from: |
-            ${{ env.REGISTRY }}:deps-${{ github.sha }}
+            ${{ env.REGISTRY }}:deps
           tags: |
-            ${{ env.REGISTRY }}:deps-${{ github.sha }}
+            ${{ env.REGISTRY }}:deps
       -
         name: Build and push Docker image (application)
         uses: docker/build-push-action@v3
@@ -66,7 +66,7 @@ jobs:
             ${{ env.REGISTRY }}:${{ github.sha }}
       -
         name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@0.8.0
+        uses: aquasecurity/trivy-action@0.7.0
         with:
           image-ref: ${{ env.REGISTRY }}:${{ github.sha }}
           format: table
