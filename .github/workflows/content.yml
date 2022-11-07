@@ -29,7 +29,7 @@ on:
 
   workflow_run:
     workflows:
-      - Trivy Docker Security
+      - OS Security
     types:
       - completed
 

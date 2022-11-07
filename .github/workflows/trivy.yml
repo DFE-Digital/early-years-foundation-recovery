@@ -3,7 +3,7 @@
 # https://github.com/aquasecurity/trivy
 # https://github.com/aquasecurity/trivy-action#inputs
 #
-name: Trivy Docker Security
+name: OS Security
 on:
   workflow_dispatch:
   push:
@@ -37,7 +37,21 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       -
-        name: Build and push Docker image
+        name: Build and push Docker image (dependencies)
+        uses: docker/build-push-action@v3
+        with:
+          target: deps
+          context: .
+          push: true
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
+            SHA=${{ github.sha }}
+          cache-from: |
+            ${{ env.REGISTRY }}:deps-${{ github.sha }}
+          tags: |
+            ${{ env.REGISTRY }}:deps-${{ github.sha }}
+      -
+        name: Build and push Docker image (application)
         uses: docker/build-push-action@v3
         with:
           target: app
