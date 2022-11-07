@@ -19,7 +19,7 @@ env:
 
 jobs:
   test:
-    name: Rspec & Rubocop
+    name: Test and lint code
     runs-on: ubuntu-latest
     environment: test
 

@@ -31,7 +31,7 @@ env:
 
 jobs:
   test:
-    name: Run Rspec
+    name: QA checks (docker-compose)
     # if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     environment: production

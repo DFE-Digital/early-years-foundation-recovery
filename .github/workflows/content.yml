@@ -13,8 +13,8 @@ on:
       - main
     types:
       - labeled                 # a label is applied to the pull request
-      - synchronize             # commit(s) pushed to the pull request
       - ready_for_review        # pull request is taken out from draft mode
+      # - synchronize             # commit(s) pushed to the pull request
       # - assigned                # a user is assigned to the pull request
       # - unassigned              # a user is unassigned from the pull request
       # - unlabeled               # a label is removed from the pull request
@@ -26,6 +26,12 @@ on:
       # - unlocked                # pull request is unlocked
       # - review_requested        # request a user for review
       # - review_request_removed  # remove request from user for review
+
+  workflow_run:
+    workflows:
+      - Trivy Docker Security
+    types:
+      - completed
 
 jobs:
   deploy:

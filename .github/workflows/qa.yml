@@ -23,7 +23,7 @@ env:
 
 jobs:
   test:
-    name: Standalone UI tests
+    name: QA checks
     runs-on: ubuntu-latest
 
     services:
