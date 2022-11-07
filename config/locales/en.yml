@@ -226,6 +226,10 @@ en:
       You can sign out or close the browser at any time without losing your progress.
       When you next sign in, you can restart from where you left off.
 
+      ## Videos and mobile data usage 
+
+      This module contains videos. Connect to wifi before starting the module to watch the videos without using any mobile data. If you are not able or prefer not to play the videos, you can use the full transcripts provided.
+
   icons_page:
     heading: Before you start
 
