@@ -2,6 +2,11 @@
 name: QA Framework
 on:
   workflow_dispatch:
+    inputs:
+      workspace:
+        description: Deployment workspace to test against (staging, dev, pr-xxx)
+        type: string
+        default: staging
 
   workflow_run:
     workflows:
@@ -12,7 +17,8 @@ on:
       - completed
 
 env:
-  BASE_URL: https://ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
+  # BASE_URL: https://ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
+  BASE_URL: https://ey-recovery-${{ inputs.workspace || pr-${{ github.event.number }} }}.london.cloudapps.digital
   USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
 
 jobs:
@@ -20,18 +26,21 @@ jobs:
     name: QA checks
     runs-on: ubuntu-latest
 
+    # https://docs.github.com/en/actions/using-containerized-services/about-service-containers
     services:
       chrome:
         image: selenium/standalone-chrome:latest
         ports:
-          - 4441:4444
-
+          - 4444:4444
       firefox:
         image: selenium/standalone-firefox:latest
         ports:
-          - 4442:4444
+          - 4444:4444
 
     steps:
+      -
+        name: Print URL
+        run: echo $BASE_URL
       -
         name: Checkout Code
         uses: actions/checkout@v3
@@ -45,12 +54,14 @@ jobs:
         name: Install Rubygems
         run: bundle install --jobs 20 --retry 3
       -
-        name: Run test suite against chrome
+        name: Use Chrome
         env:
           BROWSER: standalone_chrome
+          DRIVER: chrome:4444
         run: bin/rspec --default-path ui
       -
-        name: Run test suite against firefox
+        name: Use Firefox
         env:
           BROWSER: standalone_firefox
+          DRIVER: firefox:4444
         run: bin/rspec --default-path ui
