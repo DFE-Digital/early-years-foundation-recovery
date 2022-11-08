@@ -6,11 +6,11 @@ name: QA Framework
 on:
   pull_request:
 
-  workflow_run:
-    workflows:
-      - Deploy Content App
-    types:
-      - completed
+  # workflow_run:
+  #   workflows:
+  #     - Deploy Content App
+  #   types:
+  #     - completed
 
 env:
   BASE_URL: https://ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
@@ -19,7 +19,7 @@ env:
 jobs:
   test:
     name: QA checks
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     # https://docs.github.com/en/actions/using-containerized-services/about-service-containers
