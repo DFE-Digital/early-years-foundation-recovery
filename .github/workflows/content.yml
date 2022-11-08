@@ -18,12 +18,16 @@ on:
       - synchronize
     paths-ignore:
       - '**/*.md'
+      - .docker*
       - .env.example
       - .gitignore
-      - .rubocop*
+      - .pa11yci
       - .tool-versions
+      - .yardopts
       - bin/*
       - docker-compose.*
+      - Dockerfile
+      - terraform
 
 jobs:
   deploy:

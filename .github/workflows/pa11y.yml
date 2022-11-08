@@ -8,12 +8,10 @@ name: Check WCAG Standards
 
 on:
   workflow_run:
-    workflows:
-      - Deploy Development App
-    branches:
-      - main
-    types:
-      - completed
+    workflows: [Deploy Development App]
+    branches: [main]
+    types: [completed]
+
   workflow_dispatch:
     inputs:
       workspace:

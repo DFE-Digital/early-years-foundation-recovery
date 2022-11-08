@@ -8,9 +8,7 @@
 #
 name: OS Security
 on:
-  pull_request:
-    types:
-      - synchronize
+  push:
     paths:
       - Dockerfile
 

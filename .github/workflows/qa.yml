@@ -5,12 +5,8 @@
 name: QA Framework
 on:
   workflow_run:
-    workflows:
-      - Deploy Content App
-    branches:
-      - main
-    types:
-      - completed
+    workflows: [Deploy Content App]
+    types: [completed]
 
 env:
   BASE_URL: https://ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
