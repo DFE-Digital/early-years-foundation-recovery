@@ -4,6 +4,13 @@
 #
 name: QA Framework
 on:
+  workflow_dispatch:
+    inputs:
+      workspace:
+        description: PR number to test against (pr-xxx)
+        type: string
+        required: true
+
   pull_request:
 
   # workflow_run:
@@ -13,7 +20,7 @@ on:
   #     - completed
 
 env:
-  BASE_URL: https://ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
+  BASE_URL: https://ey-recovery-pr-${{ inputs.ref || github.event.number }}.london.cloudapps.digital
   USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
 
 jobs:
