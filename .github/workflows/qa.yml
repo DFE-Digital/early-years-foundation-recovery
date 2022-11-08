@@ -5,7 +5,7 @@
 name: QA Framework
 on:
   workflow_run:
-    workflows: [Deploy Content App]
+    workflows: ['Deploy Content App']
     types: [completed]
 
 env:
@@ -15,7 +15,7 @@ env:
 jobs:
   test:
     name: QA checks
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     # https://docs.github.com/en/actions/using-containerized-services/about-service-containers
