@@ -15,6 +15,7 @@ RSpec.describe 'Page' do
     it { expect(static_path('privacy-policy')).to have_page_title 'Privacy policy' }
     it { expect(static_path('terms-and-conditions')).to have_page_title 'Terms and conditions' }
     it { expect(static_path('whats-new')).to have_page_title "What's new" }
+    it { expect(static_path('new-registration')).to have_page_title "Please update your registration" }
 
     context 'and is confirmed' do
       let(:user) { create(:user, :confirmed) }

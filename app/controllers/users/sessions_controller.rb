@@ -13,7 +13,7 @@ protected
         my_modules_path
       end
     elsif resource.private_beta_registration_complete?
-      static_path('new_registration')
+      static_path('new-registration')
     else
       edit_registration_name_path
     end
