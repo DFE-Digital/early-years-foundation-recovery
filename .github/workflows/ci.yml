@@ -3,11 +3,19 @@
 #
 name: Continuous Integration
 on:
-  workflow_dispatch:
   pull_request:
-  push:
-    branches:
-      - main
+    paths-ignore:
+      - '**/*.md'
+      - .docker*
+      - .env.example
+      - .gitignore
+      - .pa11yci
+      - .tool-versions
+      - .yardopts
+      - bin/*
+      - docker-compose.*
+      - Dockerfile
+      - terraform
 
 env:
   RAILS_ENV: test
