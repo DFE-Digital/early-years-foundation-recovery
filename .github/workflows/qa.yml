@@ -37,8 +37,8 @@ jobs:
       -
         name: Checkout deployed code
         uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.workflow_run.head_branch }}
+        # with:
+        #   ref: ${{ github.event.workflow_run.head_branch }}
       -
         name: Setup Ruby
         uses: ruby/setup-ruby@v1
