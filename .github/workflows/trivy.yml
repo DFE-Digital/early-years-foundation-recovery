@@ -13,6 +13,16 @@ on:
     branches:
       - main
   pull_request:
+    paths-ignore:
+      - .github/**/*
+      - .env.example
+      - .gitignore
+      - .rubocop*
+      - .tool-versions
+      - adr/*
+      - bin/*
+      - docker-compose.*
+      - README.md
 
 env:
   REGISTRY: ghcr.io/dfe-digital/early-years-foundation-recovery
