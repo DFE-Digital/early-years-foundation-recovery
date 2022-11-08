@@ -35,7 +35,8 @@ on:
 
 jobs:
   deploy:
-    if: contains(github.event.pull_request.labels.*.name, 'deployed')
+    # Deploy review app after the trivy check has passed reusing the cached Docker image
+    if: contains(github.event.pull_request.labels.*.name, 'deployed') and ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     environment: content
     env:
