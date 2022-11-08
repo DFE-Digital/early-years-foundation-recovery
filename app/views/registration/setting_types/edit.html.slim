@@ -1,0 +1,13 @@
+= govuk_back_link href: edit_registration_name_path
+
+.govuk-grid-row
+  .govuk-grid-column-two-thirds-from-desktop
+    = form_for @user_form, url: registration_setting_type_path, method: :patch do |f|
+      = f.govuk_error_summary
+      = f.govuk_fieldset legend: { text: t('.heading') }, aria: { required: true } do
+        p.govuk_body
+          = translate_markdown(t('.body'))
+        = f.govuk_collection_select :setting_type_id, SettingType.all, :id, :name, options: { include_blank: true }, label: { text: 'Setting type', class: 'govuk-visually-hidden' }, data: { controller: 'autocomplete', 'autocomplete-message-value': t('.autocomplete-not-found') }, aria: { label: 'registration setting type'}
+        p.govuk_body
+          = govuk_link_to t('.link_to_setting_type_other'), edit_registration_setting_type_other_path
+      = f.govuk_submit t('.button')

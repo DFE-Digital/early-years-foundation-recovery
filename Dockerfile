@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------
 # Base
 # ------------------------------------------------------------------------------
-FROM ruby:3.1.0-alpine as base
+FROM ruby:3.1.2-alpine as base
 
 RUN apk add --no-cache --no-progress build-base less curl tzdata gcompat \
     "busybox>=1.34.1-r5" \
@@ -19,8 +19,10 @@ FROM base as deps
 
 LABEL org.opencontainers.image.description "Application Dependencies"
 
-RUN apk add --no-cache --no-progress postgresql-dev yarn
+RUN apk add --no-cache --no-progress postgresql-dev yarn chromium
 
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
 ENV APP_HOME /build
 
 WORKDIR ${APP_HOME}
@@ -30,13 +32,7 @@ COPY yarn.lock ${APP_HOME}/yarn.lock
 COPY .yarn ${APP_HOME}/.yarn
 COPY .yarnrc.yml ${APP_HOME}/.yarnrc.yml
 
-# NB: Developers using ARM64 hardware will need to comment out the following 2 lines
-# only whilst building images because of the node package puppeteer
-#
-# 1. (#32) RUN yarn install
-# 2. (#74) COPY --from=deps /build/node_modules ${APP_HOME}/node_modules
-#
-RUN yarn install --json
+RUN yarn install
 
 COPY Gemfile* ./
 
@@ -45,15 +41,17 @@ RUN bundle config set without development test ui
 RUN bundle install --no-binstubs --retry=10 --jobs=4
 
 # ------------------------------------------------------------------------------
-# Production Stage - nodejs v16.14.2, postgresql v13.6
+# Production Stage - nodejs v16.17.1, postgresql v14.5, chromium v102.0.5005.182
 # ------------------------------------------------------------------------------
 FROM base AS app
 
 LABEL org.opencontainers.image.description "Early Years Recovery Rails Application"
 
-RUN apk add --no-cache --no-progress postgresql-dev yarn chromium-chromedriver
+RUN apk add --no-cache --no-progress postgresql-dev yarn chromium
 
 ENV GROVER_NO_SANDBOX true
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
 ENV APP_HOME /srv
 ENV RAILS_ENV ${RAILS_ENV:-production}
 
@@ -101,7 +99,7 @@ CMD ["bundle", "exec", "rails", "server"]
 FROM app as dev
 
 RUN apk add --no-cache --no-progress npm
-RUN npm install -g adr-log
+RUN npm install --global adr-log
 
 RUN bundle config unset without
 RUN bundle config set without test ui
@@ -149,3 +147,21 @@ COPY ui /srv/spec
 COPY .rspec /srv/.rspec
 
 CMD ["rspec"]
+
+# ------------------------------------------------------------------------------
+# Pa11y CI
+# ------------------------------------------------------------------------------
+FROM base as pa11y
+
+LABEL org.opencontainers.image.description "Accessibility auditor"
+
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
+
+RUN apk add --no-cache --no-progress npm chromium
+RUN npm install --global --unsafe-perm puppeteer pa11y-ci
+
+COPY .pa11yci /usr/config.json
+COPY docker-entrypoint.pa11y.sh /docker-entrypoint.sh
+
+ENTRYPOINT ["/docker-entrypoint.sh"]

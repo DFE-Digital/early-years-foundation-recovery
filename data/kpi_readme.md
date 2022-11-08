@@ -80,7 +80,7 @@ Example event data from the `ahoy_visits` table.
 | [x]  | Module overview               | `TrainingModulesController`    | `module_overview_page`          | `/modules/{alpha}`                           |
 | [x]  | Module content                | `ContentPagesController`       | `module_content_page`           | `/modules/{alpha}/content-pages/{1}`         |
 | [x]  | Static page content           | `StaticController`             | `static_page`                   | `/example-page`                              |
-| [x]  | Account completion            | `ExtraRegistrationsController` | `user_registration`             | `/extra-registrations/{name,setting}`        |
+| [x]  | Account completion            | `Registration::RoleType{Other}sController` | `user_registration` | `/registration/role-type`                    |
 | [x]  | User profile                  | `UserController`               | `profile_page`                  | `/my-account`                                |
 | [x]  | User name change              | `UserController`               | `user_name_change`              | `/my-account/update-name`                    |
 | [x]  | User email change             | `UserController`               | `user_email_change`             | `/my-account/update-email`                   |

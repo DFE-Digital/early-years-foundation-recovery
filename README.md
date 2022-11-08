@@ -80,7 +80,8 @@ Use `bin/qa` to run the test framework under `/ui` against a given URL.
 These tests have additional dependencies:
 
 - `brew install chromedriver geckodriver`
-- `xattr -d com.apple.quarantine /usr/local/bin/chromedriver`
+- `xattr -d com.apple.quarantine /usr/local/bin/chromedriver` on Intel
+- `xattr -d com.apple.quarantine /opt/homebrew/bin/chromedriver` on ARM
 
 ## Using Docker
 
@@ -192,8 +193,13 @@ WIP: proposed Github workflow that does not require `docker-compose`.
 An automated accessibility audit can be run against a development server running
 in Docker using `./bin/docker-pa11y`. The test uses [pa11y-ci](https://github.com/pa11y/pa11y-ci)
 and a dynamic `sitemap.xml` file to ensure the project meets [WCAG2AA](https://www.w3.org/WAI/WCAG2AA-Conformance) standards.
-A secure HTTP header is used to provide access to pages that require authentication.
-The secret `$BOT` environment variable defines the account to seed.
+A secure HTTP header `BOT` is used to provide access to pages that require authentication.
+The secret `$BOT_TOKEN` environment variable defines the account to seed.
+
+```
+curl -i -L -H "BOT: ${BOT_TOKEN}" http://localhost:3000/my-account
+```
+
 `docker-pa11y` accepts an optional argument to test external sites.
 
 ---
@@ -238,10 +244,11 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
 ## Content
 
-Content designers are using the docker development environment.
+Content designers are also using the docker development environment.
+
 You can demo this environment locally using the account `completed@example.com:StrongPassword`.
 When there are significant changes to content structure a soft restart the server may be necessary `./bin/docker-rails restart`.
-Styling changes show render automatically.
+CSS styling changes will appear automatically without needing to restart.
 
 ### YAML
 

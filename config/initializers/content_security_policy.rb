@@ -10,40 +10,56 @@
 #
 # - {https://csp-evaluator.withgoogle.com}
 # - {https://cspvalidator.org}
+#
+# Add URLs in order to import images or javascript from another domain
+#
+# '*.s3.eu-west-2.amazonaws.com',
+# 'eyfs-cms-preprod.london.cloudapps.digital',
+GOVUK_DOMAINS = %w[
+  *.education.gov.uk
+].freeze
 
-GOVUK_DOMAINS = [
-  '*.education.gov.uk',
-  # Uncomment or add url links in order to import imgs / js files from a specific domain
-  # '*.s3.eu-west-2.amazonaws.com',
-  # 'eyfs-cms-preprod.london.cloudapps.digital',
-].uniq.freeze
+GOOGLE_ANALYTICS_DOMAINS = %w[
+  www.google-analytics.com
+  ssl.google-analytics.com
+  stats.g.doubleclick.net
+  www.googletagmanager.com
+  *.hotjar.com
+  *.ytimg.com
+  www.youtube.com
+  www.youtube-nocookie.com
+  i.vimeocdn.com
+  player.vimeo.com
+  www.vimeo.com
+].freeze
 
-GOOGLE_ANALYTICS_DOMAINS = %w[www.google-analytics.com
-                              ssl.google-analytics.com
-                              stats.g.doubleclick.net
-                              www.googletagmanager.com
-                              *.ytimg.com
-                              www.youtube.com
-                              www.youtube-nocookie.com
-                              *.hotjar.com
-                              www.vimeo.com
-                              player.vimeo.com].freeze
+OPTIMIZE_DOMAINS = %w[
+  www.googleoptimize.com
+  optimize.google.com
+  fonts.googleapis.com
+].freeze
 
-OPTIMIZE_DOMAINS = %w[www.googleoptimize.com
-                      optimize.google.com
-                      fonts.googleapis.com].freeze
-
-GOOGLE_STATIC_DOMAINS = %w[fonts.gstatic.com www.gstatic.com *.hotjar.com].freeze
+GOOGLE_STATIC_DOMAINS = %w[
+  fonts.gstatic.com
+  www.gstatic.com
+].freeze
 
 Rails.application.config.content_security_policy do |policy|
-  policy.default_src :self, :https, *GOVUK_DOMAINS
-  policy.font_src    :self, :https, *GOVUK_DOMAINS, *GOOGLE_STATIC_DOMAINS, :data
-  policy.frame_src   :self, *GOOGLE_ANALYTICS_DOMAINS, *OPTIMIZE_DOMAINS
+  policy.default_src :self,
+                     :https,
+                     *GOVUK_DOMAINS
+  policy.font_src    :self,
+                     :https,
+                     *GOVUK_DOMAINS,
+                     *GOOGLE_STATIC_DOMAINS,
+                     :data
+  policy.frame_src   :self,
+                     *GOOGLE_ANALYTICS_DOMAINS,
+                     *OPTIMIZE_DOMAINS
   policy.img_src     :self,
                      *GOVUK_DOMAINS,
                      *GOOGLE_ANALYTICS_DOMAINS, # Tracking pixels
                      *OPTIMIZE_DOMAINS,
-                     'i.vimeocdn.com',
                      :data # Base64 encoded images
   policy.object_src  :none
   policy.script_src  :self,
@@ -51,18 +67,15 @@ Rails.application.config.content_security_policy do |policy|
                      *GOOGLE_ANALYTICS_DOMAINS,
                      *GOOGLE_STATIC_DOMAINS,
                      *OPTIMIZE_DOMAINS,
-                     # Allow YouTube Embeds (Govspeak turns YouTube links into embeds)
-                     '*.ytimg.com',
-                     'www.youtube.com',
-                     'www.youtube-nocookie.com',
-                     # Allow Vimeo Embeds
-                     'player.vimeo.com',
-                     'www.vimeo.com',
                      # Allow all inline scripts until we can conclusively
                      # document all the inline scripts we use,
                      # and there's a better way to filter out junk reports
                      :unsafe_inline
-  policy.style_src   :self, *GOVUK_DOMAINS, *GOOGLE_STATIC_DOMAINS, *OPTIMIZE_DOMAINS, :unsafe_inline
+  policy.style_src   :self,
+                     *GOVUK_DOMAINS,
+                     *GOOGLE_STATIC_DOMAINS,
+                     *OPTIMIZE_DOMAINS,
+                     :unsafe_inline
   if Rails.env.development?
     # :nocov: by definition will not run in test
     policy.connect_src :self,
@@ -84,7 +97,7 @@ end
 
 # If you are using UJS then enable automatic nonce generation
 #
-# Rails.application.config.content_security_policy_nonce_generator = -> request { SecureRandom.base64(16) }
+# Rails.application.config.content_security_policy_nonce_generator = ->(_request) { SecureRandom.base64(16) }
 #
 # Set the nonce only to specific directives
 #

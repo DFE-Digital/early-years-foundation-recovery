@@ -26,20 +26,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hotwired/turbo-rails@npm:^7.1.0":
-  version: 7.1.3
-  resolution: "@hotwired/turbo-rails@npm:7.1.3"
+"@hotwired/turbo-rails@npm:^7.2.4":
+  version: 7.2.4
+  resolution: "@hotwired/turbo-rails@npm:7.2.4"
   dependencies:
-    "@hotwired/turbo": "npm:^7.1.0"
-    "@rails/actioncable": "npm:^7.0"
-  checksum: 7f741b50dbb46bf297c82e48a31b1b485c6f9bcc508616b812ba8ff8cbb69366a81157419990d196b3926d4169c2766650699f61b6da47d02eafc976767f091e
+    "@hotwired/turbo": ^7.2.4
+    "@rails/actioncable": ^7.0
+  checksum: 658059626a8f1ede0c3e88003f44d764c0da8a852ffb7bd7a09e26298228b2dd2961e1adce4ab0763d3abf5b989456c6ca16cb52bc93b42950ebe73aa6b2f4cf
   languageName: node
   linkType: hard
 
-"@hotwired/turbo@npm:^7.1.0":
-  version: 7.1.0
-  resolution: "@hotwired/turbo@npm:7.1.0"
-  checksum: 4f71ebf2ff6a396d4031d048fa4d4dba6039aed9ad68436e6df4527e975acd8427c7d2f9b3e7f61f3e9c1af987193adf4e2b640c4033d4afd3e1f914ed05ba9f
+"@hotwired/turbo@npm:^7.2.4":
+  version: 7.2.4
+  resolution: "@hotwired/turbo@npm:7.2.4"
+  checksum: 83cbcda22cf2fa251a30aa898a57ea6dd9a2b0de71f4d3e364baa300a01a8d52631ae13b44533b516965a557d663788325a930fbc3edab3f85616126b7834c4c
   languageName: node
   linkType: hard
 
@@ -97,6 +97,15 @@ __metadata:
   version: 1.1.1
   resolution: "abbrev@npm:1.1.1"
   checksum: a4a97ec07d7ea112c517036882b2ac22f3109b7b19077dc656316d07d308438aac28e4d9746dc4d84bf6b1e75b4a7b0a5f3cb30592419f128ca9a8cee3bcfa17
+  languageName: node
+  linkType: hard
+
+"accessible-autocomplete@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "accessible-autocomplete@npm:2.0.4"
+  dependencies:
+    preact: ^8.3.1
+  checksum: e1eeff2785476bb37be022a1a149e68f3bacd4e29a264b442ddd2d6c94fe900ecaf109a87098791e55774fe7ec9d93e6d55039390c9e82207d3ebb18576f182a
   languageName: node
   linkType: hard
 
@@ -645,11 +654,12 @@ __metadata:
   dependencies:
     "@fortawesome/fontawesome-free": ^6.2.0
     "@hotwired/stimulus": ^3.0.1
-    "@hotwired/turbo-rails": ^7.1.0
+    "@hotwired/turbo-rails": ^7.2.4
+    accessible-autocomplete: ^2.0.4
     esbuild: ^0.14.36
-    govuk-frontend: ^4.0.1
+    govuk-frontend: ^4.3.1
     puppeteer: ^15.3.0
-    sass: ^1.50.1
+    sass: ^1.56.0
   languageName: unknown
   linkType: soft
 
@@ -784,10 +794,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"govuk-frontend@npm:^4.0.1":
-  version: 4.2.0
-  resolution: "govuk-frontend@npm:4.2.0"
-  checksum: cee95b6aee658b1434e220310a040c793e9cef52d093b5388f82b5e018d18302d6d462f889239a4948dc2f008f48ec642e8538d0cedfd4dec9a943dd03290c1a
+"govuk-frontend@npm:^4.3.1":
+  version: 4.3.1
+  resolution: "govuk-frontend@npm:4.3.1"
+  checksum: ea2d658f666481ffcac8c5ba2433f1cfe5087c281b8db1157567628f1db094734c64eb0879f57f87e75944adb06459487e735a4cd184a960de6ab1249f75b6d3
   languageName: node
   linkType: hard
 
@@ -1281,6 +1291,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"preact@npm:^8.3.1":
+  version: 8.5.3
+  resolution: "preact@npm:8.5.3"
+  checksum: 1a2d90816abdc62673842190b819b7ce2f552b4b412cc0d2118395d8167e79f4e988229993079700277a0cae6b7fd895b3bfe5a43091bbc1f4df43903b04d1e7
+  languageName: node
+  linkType: hard
+
 "progress@npm:2.0.3":
   version: 2.0.3
   resolution: "progress@npm:2.0.3"
@@ -1394,16 +1411,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.50.1":
-  version: 1.53.0
-  resolution: "sass@npm:1.53.0"
+"sass@npm:^1.56.0":
+  version: 1.56.0
+  resolution: "sass@npm:1.56.0"
   dependencies:
-    chokidar: "npm:>=3.0.0 <4.0.0"
-    immutable: "npm:^4.0.0"
-    source-map-js: "npm:>=0.6.2 <2.0.0"
+    chokidar: ">=3.0.0 <4.0.0"
+    immutable: ^4.0.0
+    source-map-js: ">=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: 4bcb0617d6a4d1f2c089a1cb5c32f65a9ee874b23559f2742fab07cf8478fb74ad20c0730cf9f93915d7dbfc258901f89970674228c3ac91c3883a0a62a0ddab
+  checksum: 37fb48b838f7a12f3c3efbf27bfc5f2b7fba015ed4b11effe32bd9488e30e1d5cefcbfef1e5c5dbd95557889fe2c7ec72f33e898cfc76182ea34eae03b1a4fb1
   languageName: node
   linkType: hard
 

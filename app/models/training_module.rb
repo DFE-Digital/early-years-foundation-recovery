@@ -160,7 +160,7 @@ class TrainingModule < YamlBase
 
   # @return [ModuleItem]
   def last_page
-    assessment_results_page || module_course_items.last
+    module_course_items.last
   end
 
   def tab_label
@@ -169,5 +169,16 @@ class TrainingModule < YamlBase
 
   def tab_anchor
     tab_label.parameterize
+  end
+
+  # @return [String]
+  def card_title
+    coming_soon = 'Coming soon - ' if draft?
+    "#{coming_soon}Module #{id}: #{title}"
+  end
+
+  # @return [String]
+  def card_anchor
+    "#module-#{id}-#{title.downcase.parameterize}"
   end
 end
