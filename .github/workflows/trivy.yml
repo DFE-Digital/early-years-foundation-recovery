@@ -8,28 +8,18 @@
 #
 name: OS Security
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
   pull_request:
-    paths-ignore:
-      - .github/**/*
-      - .env.example
-      - .gitignore
-      - .rubocop*
-      - .tool-versions
-      - adr/*
-      - bin/*
-      - docker-compose.*
-      - README.md
+    types:
+      - synchronize
+    paths:
+      - Dockerfile
 
 env:
   REGISTRY: ghcr.io/dfe-digital/early-years-foundation-recovery
 
 jobs:
   build:
-    name: Build and validate Docker container
+    name: Build and validate Docker image
     runs-on: ubuntu-latest
     steps:
       -
@@ -73,6 +63,7 @@ jobs:
             BUILDKIT_INLINE_CACHE=1
             SHA=${{ github.sha }}
           cache-from: |
+            ${{ env.REGISTRY }}:${{ github.sha }}
             ${{ env.REGISTRY }}:latest
           tags: |
             ${{ env.REGISTRY }}:${{ github.sha }}

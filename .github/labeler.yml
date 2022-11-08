@@ -4,21 +4,17 @@ ADR:
 
 documentation:
 - README.md
+- data/*.md
 
 terraform:
 - terraform/**/*
 
 frontend:
 - app/assets/images/*
-- app/assets/stylesheets/*
-- app/javascript/*.js
+- app/assets/stylesheets/**/*
+- app/javascript/**/*
 
 content:
 - config/locales/modules/**/*.yml
 - config/locales/static/*.yml
 - data/**/*.yml
-
-# Disabled as otherwise manually added labels are removed if they do not match.
-#
-# deployed:
-# - ui/**/*

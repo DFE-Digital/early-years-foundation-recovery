@@ -1,8 +1,6 @@
 ---
 # ------------------------------------------------------------------------------
-# Deploy if:
-#   1. the "deployed" label is added
-#   2. the Docker image is built and validated
+# Deploy if the "deployed" label is added
 #
 # Build image:
 #   ghcr.io/dfe-digital/early-years-foundation-recovery:pr-123
@@ -16,30 +14,11 @@ on:
     branches:
       - main
     types:
-      - labeled                 # a label is applied to the pull request
-      # - ready_for_review        # pull request is taken out from draft mode
-      # - synchronize             # commit(s) pushed to the pull request
-      # - assigned                # a user is assigned to the pull request
-      # - unassigned              # a user is unassigned from the pull request
-      # - unlabeled               # a label is removed from the pull request
-      # - opened                  # pull request is created
-      # - edited                  # title, body, or the base branch of the PR is modified
-      # - closed                  # pull request is closed (as opposed to merged)
-      # - reopened                # closed pull request is reopened
-      # - locked                  # pull request is locked
-      # - unlocked                # pull request is unlocked
-      # - review_requested        # request a user for review
-      # - review_request_removed  # remove request from user for review
-
-  workflow_run:
-    workflows:
-      - OS Security
-    types:
-      - completed
-
+      - labeled
+      - synchronize
 jobs:
   deploy:
-    if: ${{ contains(github.event.pull_request.labels.*.name, 'deployed') || (github.event.workflow_run.conclusion == 'success') }}
+    if: contains(github.event.pull_request.labels.*.name, 'deployed')
     runs-on: ubuntu-latest
     environment: content
     env:
@@ -94,6 +73,7 @@ jobs:
           cache-from: |
             ${{ env.REGISTRY }}:${{ github.event.pull_request.head.sha }}
             ${{ env.REGISTRY }}:${{ env.PR_NUMBER }}
+            ${{ env.REGISTRY }}:latest
           tags: |
             ${{ env.REGISTRY }}:${{ github.event.pull_request.head.sha }}
             ${{ env.REGISTRY }}:${{ env.PR_NUMBER }}
