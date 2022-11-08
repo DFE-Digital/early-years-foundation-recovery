@@ -94,7 +94,7 @@ EXPOSE 3000
 CMD ["bundle", "exec", "rails", "server"]
 
 # ------------------------------------------------------------------------------
-# Development Stage
+# Development Stage - ./bin/docker-dev
 # ------------------------------------------------------------------------------
 FROM app as dev
 
@@ -106,7 +106,7 @@ RUN bundle config set without test ui
 RUN bundle install --no-binstubs --retry=10 --jobs=4
 
 # ------------------------------------------------------------------------------
-# Test Stage
+# Test Stage - ./bin/docker-rspec
 # ------------------------------------------------------------------------------
 FROM app as test
 
@@ -135,7 +135,7 @@ COPY ui ${APP_HOME}/ui
 CMD ["bundle", "exec", "rspec", "--default-path", "ui"]
 
 # ------------------------------------------------------------------------------
-# QA Stage (self-contained and headless for pipeline)
+# QA Stage - ./bin/docker-qa
 # ------------------------------------------------------------------------------
 FROM base as qa
 
@@ -149,7 +149,7 @@ COPY .rspec /srv/.rspec
 CMD ["rspec"]
 
 # ------------------------------------------------------------------------------
-# Pa11y CI
+# Pa11y CI - ./bin/docker-pa11y
 # ------------------------------------------------------------------------------
 FROM base as pa11y
 

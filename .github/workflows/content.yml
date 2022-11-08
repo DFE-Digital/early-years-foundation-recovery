@@ -16,6 +16,15 @@ on:
     types:
       - labeled
       - synchronize
+    paths-ignore:
+      - '**/*.md'
+      - .env.example
+      - .gitignore
+      - .rubocop*
+      - .tool-versions
+      - bin/*
+      - docker-compose.*
+
 jobs:
   deploy:
     if: contains(github.event.pull_request.labels.*.name, 'deployed')
