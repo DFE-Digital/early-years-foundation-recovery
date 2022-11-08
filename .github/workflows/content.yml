@@ -118,8 +118,8 @@ jobs:
             -input=false \
             -auto-approve \
             -var-file ../workspace-variables/${{ env.WORKSPACE }}.tfvars
-
-      - name: Comment URL to PR
+      -
+        name: Comment URL to PR
         uses: mshick/add-pr-comment@v1
         with:
           message: https://ey-recovery-${{ env.PR_NUMBER }}.london.cloudapps.digital

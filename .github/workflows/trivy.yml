@@ -16,9 +16,7 @@ env:
 
 jobs:
   build:
-    name: Build and validate Docker container
     runs-on: ubuntu-latest
-
     steps:
       -
         name: Checkout Code
