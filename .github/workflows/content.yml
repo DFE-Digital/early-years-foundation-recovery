@@ -1,5 +1,9 @@
 ---
 # ------------------------------------------------------------------------------
+# Deploy if:
+#   1. the "deployed" label is added
+#   2. the Docker image is built and validated
+#
 # Build image:
 #   ghcr.io/dfe-digital/early-years-foundation-recovery:pr-123
 #
@@ -35,8 +39,7 @@ on:
 
 jobs:
   deploy:
-    # Deploy review app after the trivy check has passed reusing the cached Docker image
-    if: ${{ contains(github.event.pull_request.labels.*.name, 'deployed') && (github.event.workflow_run.conclusion == 'success') }}
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'deployed') || (github.event.workflow_run.conclusion == 'success') }}
     runs-on: ubuntu-latest
     environment: content
     env:

@@ -3,6 +3,9 @@
 # https://github.com/aquasecurity/trivy
 # https://github.com/aquasecurity/trivy-action#inputs
 #
+# Build image:
+#   ghcr.io/dfe-digital/early-years-foundation-recovery:latest
+#
 name: OS Security
 on:
   workflow_dispatch:
@@ -16,7 +19,7 @@ env:
 
 jobs:
   build:
-    # name: Build and validate Docker container
+    name: Build and validate Docker container
     runs-on: ubuntu-latest
     steps:
       -
