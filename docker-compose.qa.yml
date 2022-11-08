@@ -1,13 +1,16 @@
 # ------------------------------------------------------------------------------
+# Seed the production database:
+#
+#   $ docker exec -it recovery_prod rails db:seed
+#
 ---
 services:
   app:
     command: rails server -b 'ssl://0.0.0.0:3000?key=localhost.key&cert=localhost.crt'
     healthcheck:
-      test: curl --fail --insecure https://app:3000/health || exit 1
+      test: curl --fail --insecure https://localhost:3000/health || exit 1
     environment:
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_production
-      - RAILS_SERVE_STATIC_FILES=true
       - DOMAIN=https://localhost:3000
       - GOVUK_APP_DOMAIN=recovery.eyfs.dfe.gov.uk
       - GOVUK_WEBSITE_ROOT=www

@@ -13,8 +13,9 @@
 # ------------------------------------------------------------------------------
 set -e
 
-TYPE=${TYPE-'chrome'}
+TYPE=${TYPE-"chrome"}
 
+BASE_URL=${BASE_URL-"https://app:3000"} \
 BROWSER=${BROWSER-"standalone_$TYPE"} \
 DRIVER=${DRIVER-"$TYPE:4444"} \
   docker-compose \

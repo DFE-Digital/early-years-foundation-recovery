@@ -1,6 +1,6 @@
 ---
 # ------------------------------------------------------------------------------
-# Runs once the review app is deployed
+# TODO: Run once the review app is deployed
 #
 name: QA Framework
 on:
@@ -26,7 +26,10 @@ env:
 jobs:
   test:
     name: QA checks
+    # trigger by deployment
     # if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    # trigger by label
+    if: contains(github.event.pull_request.labels.*.name, 'deployed')
     runs-on: ubuntu-latest
 
     # https://docs.github.com/en/actions/using-containerized-services/about-service-containers
