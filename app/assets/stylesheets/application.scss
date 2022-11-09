@@ -15,10 +15,23 @@ $accent: #347ca9;
 @import "./icons";
 @import "./autocomplete";
 
+* {
+  font-family: 
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen-Sans,
+    Ubuntu,
+    Cantarell,
+    'Helvetica Neue',
+    sans-serif !important;
+}
+
 /*
 Internal
 -----------------------------------------------
 */
+
 pre.code-tip {
   padding: 0 5px;
   color: govuk-colour("red");
@@ -27,7 +40,11 @@ pre.code-tip {
 
 .debug_dump {
   background: beige;
+  &, * {
+    font-family: monospace !important;
+  }
 }
+
 // --------------------------------------------
 
 .app-sidebar {
@@ -114,4 +131,8 @@ ul > li > ul > li {
     @include govuk-link-common;
     @include govuk-link-style-default;
   }
+}
+
+.govuk-footer__copyright-logo {
+  display: none;
 }
