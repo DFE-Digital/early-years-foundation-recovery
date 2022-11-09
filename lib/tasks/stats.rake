@@ -1,5 +1,4 @@
 module Reporting
-
   def users
     {
       users: {
@@ -8,7 +7,7 @@ module Reporting
         total: total,
         started_learning: started_learning,
         not_started_learning: not_started_learning,
-      }
+      },
     }
   end
 
@@ -25,7 +24,6 @@ module Reporting
       }
     end
   end
-
 
 private
 
