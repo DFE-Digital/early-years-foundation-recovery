@@ -3,7 +3,9 @@ en:
   modules:
     personal-social-and-emotional-development:
       what-to-expect:
+        # preamble
       before-you-start:
+        # preamble
       intro:
         heading: Supporting children’s personal, social and emotional development
         body: |
@@ -199,6 +201,11 @@ en:
 
           $BRAIN
 
+      3-1-1-3b:
+        # question
+      3-1-1-3c:
+        # question
+
       3-1-1-4a:
         notes: true
         heading: "Social and emotional development: 4 years old"
@@ -233,6 +240,8 @@ en:
 
           $BRAIN
 
+      3-1-1-4b:
+        # question
 
       3-1-1-5a:
         notes: true
@@ -270,6 +279,8 @@ en:
 
           $BRAIN
 
+      3-1-1-5b:
+        # question
 
       3-1-2:
         heading: Supporting skill development
@@ -499,6 +510,10 @@ en:
 
           $INFO
 
+      3-1-2-2b:
+        # question
+      3-1-2-2c:
+        # question
 
       3-1-2-3a:
         notes: true
@@ -544,6 +559,10 @@ en:
 
           $BRAIN
 
+      3-1-2-3b:
+        # question
+      3-1-2-3c:
+        # question
 
       3-1-3:
         heading: How social and emotional skills affect behaviour
@@ -651,8 +670,13 @@ en:
 
           They will benefit from hearing from other children who have already experienced a similar transition that they are willing to share.
 
-
           $INFO
+
+      3-1-2-3b:
+        # question
+
+      3-1-3-1b:
+        # question
 
       3-1-3-2:
         notes: true
@@ -720,6 +744,10 @@ en:
           Children of this age will continue to need time in a quiet area. This will help them to avoid overstimulation and also offer opportunities for them to reflect on situations and work through their feelings with a supportive, trusted adult.
 
           Appropriate praise when a child is behaving in the way you want will boost their confidence and remind them that they are meeting your expectations.
+
+      3-1-3-3b:
+        # question
+
       3-2:
         heading: Building secure relationships
         body: |
@@ -870,6 +898,15 @@ en:
           - try to take on the parental role and act as the caregiver to their parent or carer and others
           - refuse to engage in work
           - try to create chaotic environments
+
+      3-2-1-3b:
+        # question
+      3-2-1-3c:
+        # question
+      3-2-1-3d:
+        # question
+      3-2-1-3e:
+        # question
       3-2-1-4:
         heading: The practitioner's role
         body: |
@@ -929,14 +966,14 @@ en:
 
           $INFO
 
-      ##3-2-1-4video:
-        ##heading: The impact of coronavirus (COVID-19) on attachment
-        ##body: |
-          ##In this video practitioners talk about the impact coronavirus (COVID-19) has had on attachment for children in their setting and some strategies they have put in place to support these children. This is from the perspective of real life practitioners and are provided as ideas only.
-        ##video:
-          ##id: 754814727
-          ##title: The impact of coronavirus (COVID-19) on attachment
-          ##provider: vimeo
+      3-2-1-4video:
+        heading: The impact of coronavirus (COVID-19) on attachment
+        body: |
+          In this video practitioners talk about the impact coronavirus (COVID-19) has had on attachment for children in their setting and some strategies they have put in place to support these children. This is from the perspective of real life practitioners and are provided as ideas only.
+        video:
+          id: 756703837
+          title: The impact of coronavirus (COVID-19) on attachment
+          provider: vimeo
 
       3-2-2:
         heading: Supporting children to develop secure relationships
@@ -1036,6 +1073,10 @@ en:
           ##COVID-19
 
           During the pandemic, the way that children were dropped off and picked up changed. This may have impacted on your opportunities to meet children and parents before they start in your setting. For example, parents or carers may not have given information on a form that would naturally have come up during a settling in visit in your setting. In turn, this will have impacted on what we know about our children and their parents or carers.
+
+      3-2-2-2b:
+        # question
+
       3-2-2-3:
         notes: true
         heading: Supporting secure relationships
@@ -1093,6 +1134,7 @@ en:
           - the impact of early relationship experiences
           - supporting self-expression
           - holistic development: the impact of social and emotional key skills
+
       3-2-3-1:
         heading: The impact of early relationship experiences
         body: |
@@ -1153,6 +1195,10 @@ en:
           - be motivated to ask questions
           - explore their feelings
           - choose items that express their individuality
+
+      3-2-3-2b:
+        # question
+
       3-2-3-3:
         heading: "Holistic development: the impact of social and emotional key skills"
         body: |
@@ -1167,6 +1213,7 @@ en:
           A child with high self-efficacy will approach tasks and experiences feeling that they can succeed. This makes them more likely to try challenging tasks which will help them to continually develop.
 
           A child with strong self-worth will feel valued and important, and will be more likely to engage in conversations and group activities, further promoting their development.
+
       3-3:
         heading: "Supporting self-regulation"
         body: |
@@ -1264,6 +1311,10 @@ en:
           ##Behavioural consequences
 
           Children with limited executive function may lack the flexibility to accommodate changes in plans, activities and rules, which in turn may result in frustration. They may give up in the middle of activities, or forget the task directions during an activity. Frustrations may lead to outbursts, which for some children may become physical.
+
+      3-3-1-3b:
+        # question
+
       3-3-2:
         heading: Strategies for supporting executive function and self-regulation
         body: |
@@ -1360,6 +1411,12 @@ en:
           ##Initiating tasks
 
           It is important to teach children to take action. If children are always led, they will not have the opportunity to consider how to start a task or idea for themselves. Ensure that children have frequent opportunity to explore freely, with child led activities to encourage their ability to initiate and carry out activities independently. This will result in improved planning and organisation skills and a greater sense of achievement, supporting improved self-efficacy.
+
+      3-3-2-2b:
+        # question
+      3-3-2-2c:
+        # question
+
       3-3-2-3:
         heading: Supporting self-regulation
         body: |
@@ -1444,7 +1501,7 @@ en:
 
           The remaining modules within this course will support you to further develop your understanding and practice. Make sure you sign up to receive email updates when new modules become available.
 
-          ##Further activities
+          ## Further activities
 
           Read about an [activity to help children learn to name emotions](https://help-for-early-years-providers.education.gov.uk/personal-social-and-emotional-development/emotions/#naming-emotions).
 
@@ -1464,5 +1521,49 @@ en:
 
           $BOOK
 
+
+      3-4-2:
+        # assessment intro
+      3-4-2-1:
+        # question
+      3-4-2-2:
+        # question
+      3-4-2-3:
+        # question
+      3-4-2-4:
+        # question
+      3-4-2-5:
+        # question
+      3-4-2-6:
+        # question
+      3-4-2-7:
+        # question
+      3-4-2-8:
+        # question
+      3-4-2-9:
+        # question
+      3-4-2-10:
+        # question
+      3-4-2-11:
+        # results
+
+
+      3-4-3:
+        # confidence intro
+      3-4-3-1:
+        # question
+      3-4-3-2:
+        # question
+      3-4-3-3:
+        # question
+      3-4-3-4:
+        # question
+      3-4-3-5:
+        # question
+      3-4-3-6:
+        # question
       3-4-3-7:
-        url: "https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxUQ0ZUNURIUUc1OVZLSjdNUUs5TU9TR1YwRCQlQCN0PWcu"
+        form: yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxUQ0ZUNURIUUc1OVZLSjdNUUs5TU9TR1YwRCQlQCN0PWcu
+
+      3-4-4:
+        # certificate
