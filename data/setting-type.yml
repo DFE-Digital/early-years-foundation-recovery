@@ -1,0 +1,68 @@
+- id: childminder_agency
+  name: Childminder as part of an agency
+  local_authority: true
+  role_type: childminder
+- id: childminder_independent
+  name: Independent childminder
+  local_authority: true
+  role_type: childminder
+- id: nursery_local_authority
+  name: Local authority maintained nursery school
+  local_authority: true
+  role_type: other 
+- id: nursery_private
+  name: Private nursery
+  local_authority: true
+  role_type: other
+- id: nurser_independent
+  name: Independent nursery
+  local_authority: true
+  role_type: other
+- id: daycare
+  name: Daycare
+  local_authority: true
+  role_type: other
+- id: preschool
+  name: Preschool
+  local_authority: true
+  role_type: other
+- id: playgroup
+  name: Playgroup
+  local_authority: true
+  role_type: other
+- id: childcare_centre
+  name: Childcare centre
+  local_authority: true
+  role_type: other
+- id: nursery_attached_to_school
+  name: Nursery attached to a school
+  local_authority: true
+  role_type: other
+- id: free_school
+  name: Free School
+  local_authority: true
+  role_type: other
+- id: special_school
+  name: Special school
+  local_authority: true
+  role_type: other
+- id: academy
+  name: Academy
+  local_authority: true
+  role_type: other
+- id: training_provider
+  name: Training provider
+  local_authority: false
+  role_type: none
+- id: central_government
+  name: Central government
+  local_authority: false
+  role_type: none
+- id: department_for_education
+  name: Department for Education
+  local_authority: false
+  role_type: none
+- id: local_authority
+  name: Local authority
+  local_authority: true
+  role_type: none

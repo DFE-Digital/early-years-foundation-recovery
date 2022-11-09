@@ -13,21 +13,15 @@ class User < ApplicationRecord
   scope :registered, -> { where(registration_complete: true) }
   scope :not_registered, -> { where(registration_complete: nil) }
 
-  validates :first_name, :last_name, :postcode, :setting_type,
+  validates :first_name, :last_name, :setting_type_id,
             presence: true,
+            if: proc { |u| u.registration_complete }
+  validates :role_type, presence: true, if: proc { |u| u.role_type_required? }
+  validates :setting_type_id,
+            inclusion: { in: SettingType.valid_setting_types },
             if: proc { |u| u.registration_complete }
 
   validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
-  validates :postcode, postcode: true
-  validates :ofsted_number, ofsted_number: true
-
-  def postcode=(input)
-    super UKPostcode.parse(input.to_s).to_s
-  end
-
-  def ofsted_number=(input)
-    super input.to_s.strip.upcase
-  end
 
   # @see Devise database_authenticatable
   # @param params [Hash]
@@ -87,7 +81,45 @@ class User < ApplicationRecord
     !module_time_to_completion.empty?
   end
 
+  def setting_name
+    setting_type_id == 'other' ? setting_type_other : setting_type
+  end
+
+  def role
+    role_type == 'other' ? role_type_other : role_type
+  end
+
+  def childminder?
+    setting_type_id == 'other' ? false : (setting.role_type == 'childminder')
+  end
+
+  def role_type_required?
+    return false unless setting_type_id
+    return false unless registration_complete?
+    return true if setting_type_id == 'other'
+    return false unless SettingType.valid_setting_types.include?(setting_type_id)
+    return true if new_setting_type_role_required?
+
+    setting.role_type != 'none'
+  end
+
+  def new_setting_type_role_required?
+    if setting_type_id_changed?
+      SettingType.find(setting_type_id_change[1]).role_type != 'none'
+    else
+      false
+    end
+  end
+
+  def private_beta_registration_complete?
+    !!private_beta_registration_complete
+  end
+
 private
+
+  def setting
+    @setting ||= SettingType.find(setting_type_id) if setting_type_id
+  end
 
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
   def password_changed_events

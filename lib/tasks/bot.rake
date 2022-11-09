@@ -9,11 +9,11 @@ namespace :db do
         password: ENV.fetch('USER_PASSWORD', 'StrongPassword'),
         confirmed_at: Time.zone.now,
         terms_and_conditions_agreed_at: Time.zone.now,
-        registration_complete: true,
         first_name: 'Bot',
         last_name: 'User',
-        postcode: 'M1 2WD',
-        setting_type: 'school',
+        setting_type_id: 'childminder_independent',
+        local_authority: 'Lewisham',
+        role_type: 'childminder',
       )
     end
   end
