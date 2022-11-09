@@ -124,8 +124,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_03_162127) do
     t.string "setting_type_other"
     t.jsonb "module_time_to_completion", default: {}, null: false
     t.datetime "terms_and_conditions_agreed_at"
-    t.boolean "display_whats_new", default: false
     t.datetime "account_deleted_at"
+    t.boolean "display_whats_new", default: false
     t.string "local_authority"
     t.string "role_type"
     t.string "role_type_other"
