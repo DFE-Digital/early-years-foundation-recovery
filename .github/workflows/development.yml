@@ -19,6 +19,7 @@ on:
       - .tool-versions
       - adr/*
       - bin/*
+      - uml/*
       - docker-compose.yml
       - README.md
 
