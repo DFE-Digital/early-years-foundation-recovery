@@ -42,20 +42,13 @@ module Drivers
     def self.register_remote
       capabilities = Selenium::WebDriver::Remote::Capabilities.firefox
       capabilities['acceptInsecureCerts'] = true
-
-      remote_url =
-        case ENV['BASE_URL']
-        when 'https://app:3000', /london\.cloudapps\.digital/ # NB: remove regexp for workflows/qa.yml
-          'http://firefox:4444/wd/hub'
-        else
-          'http://localhost:4442/wd/hub'
-        end
+      driver = ENV.fetch('DRIVER', 'localhost:4442')
 
       Capybara.register_driver :standalone_firefox do |app|
         Capybara::Selenium::Driver.new(
           app,
           browser: :remote,
-          url: remote_url,
+          url: "http://#{driver}/wd/hub",
           capabilities: capabilities,
         )
       end

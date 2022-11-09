@@ -13,14 +13,16 @@ on:
     branches:
       - main
     paths-ignore:
+      - '**/*.md'
+      - .docker*
       - .env.example
       - .gitignore
-      - .rubocop*
+      - .pa11yci
       - .tool-versions
-      - adr/*
+      - .yardopts
       - bin/*
-      - docker-compose.yml
-      - README.md
+      - docker-compose.*
+      - uml/*
 
 jobs:
   deploy:
@@ -52,7 +54,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       -
         name: Build and push Docker image
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           target: app
           context: .

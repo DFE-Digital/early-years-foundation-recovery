@@ -1,37 +1,43 @@
 ---
+# ------------------------------------------------------------------------------
+# TODO: Run once the review app is deployed
+#
 name: QA Framework
 on:
   workflow_dispatch:
+    inputs:
+      workspace:
+        description: PR number to test against (pr-xxx)
+        type: string
+        required: true
 
-  # pull_request:
-  #   branches:
-  #     - main
-  #   types:
-  #     - synchronize
+  pull_request:
 
   # workflow_run:
   #   workflows:
   #     - Deploy Content App
-  #   branches:
-  #     - main
   #   types:
   #     - completed
 
 env:
-  BASE_URL: https://ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
+  BASE_URL: https://ey-recovery-pr-${{ inputs.ref || github.event.number }}.london.cloudapps.digital
   USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
 
 jobs:
   test:
-    name: Standalone UI tests
+    name: QA checks
+    # trigger by deployment
+    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    # trigger by label
+    if: contains(github.event.pull_request.labels.*.name, 'deployed')
     runs-on: ubuntu-latest
 
+    # https://docs.github.com/en/actions/using-containerized-services/about-service-containers
     services:
       chrome:
         image: selenium/standalone-chrome:latest
         ports:
           - 4441:4444
-
       firefox:
         image: selenium/standalone-firefox:latest
         ports:
@@ -39,10 +45,12 @@ jobs:
 
     steps:
       -
-        name: Checkout Code
+        name: Checkout deployed code
         uses: actions/checkout@v3
+        # with:
+        #   ref: ${{ github.event.workflow_run.head_branch }}
       -
-        name: Set up Ruby
+        name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1.2
@@ -51,12 +59,12 @@ jobs:
         name: Install Rubygems
         run: bundle install --jobs 20 --retry 3
       -
-        name: Run test suite against firefox
+        name: Use Chrome
+        env:
+          BROWSER: standalone_chrome
+        run: bin/rspec --default-path ui
+      -
+        name: Use Firefox
         env:
           BROWSER: standalone_firefox
         run: bin/rspec --default-path ui
-      # -
-      #   name: Run test suite against chrome
-      #   env:
-      #     BROWSER: standalone_chrome
-      #   run: bin/rspec --default-path ui
