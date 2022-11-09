@@ -1,4 +1,4 @@
-# YAML file README
+# Structured Content using YAML
 
 The content and flow of most pages in this app are defined via a set of YAML files.
 There are four types of file:
