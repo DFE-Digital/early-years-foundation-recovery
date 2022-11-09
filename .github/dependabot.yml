@@ -1,7 +1,15 @@
 ---
 version: 2
 updates:
-  - package-ecosystem: bundler
+  -
+    package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: daily
+    labels:
+      - pipeline
+  -
+    package-ecosystem: bundler
     directory: "/"
     schedule:
       interval: weekly
@@ -11,8 +19,8 @@ updates:
     labels:
       - dependencies
       - ruby
-
-  - package-ecosystem: npm
+  -
+    package-ecosystem: npm
     directory: "/"
     schedule:
       interval: weekly
