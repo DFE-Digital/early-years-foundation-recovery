@@ -1,6 +1,6 @@
-# README
+# Diagrams
 
-The Unified Modelling Language™ (UML®) is a standard visual modelling language.
+The [Unified Modelling Language][plantuml]™ (UML®) is a standard visual modelling language.
 
 ## Setup
 
@@ -29,7 +29,7 @@ Options:
 
 ### Entity Relationship Diagram
 
-![Entity Relationship](../erd.svg "Database")
+![Entity Relationship](erd.svg "Database")
 
 ### Docker Compose Environments
 
@@ -40,16 +40,9 @@ Options:
 ![Deployment UML](deployment.svg "Deployment")
 
 
-## References
-
-- https://plantuml.com/creole
-- https://tallyfy.com/uml-diagram/#deployment-diagram
-- https://www.uml-diagrams.org/deployment-diagrams.html
-- https://github.com/mattjhayes/PlantUML-Examples/blob/master/docs/Diagram-Types/source/deployment-like-diagram.md
-- https://www.guru99.com/deployment-diagram-uml-example.html
-
 ---
 
+[plantuml]: https://plantuml.com/creole
 [sandbox]: https://www.plantuml.com/plantuml/uml
 [server]: https://github.com/plantuml/plantuml-server
 [docker]: https://hub.docker.com/r/plantuml/plantuml-server

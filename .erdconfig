@@ -1,6 +1,7 @@
 ---
 title: Child development training
 filetype: svg
+filename: uml/erd
 exclude:
   - ActiveRecord::InternalMetadata
   - ActiveRecord::SchemaMigration

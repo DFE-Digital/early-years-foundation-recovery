@@ -69,4 +69,3 @@ spec/examples.txt
 # Infrastructure
 uml/*.*
 !uml/*.puml
-erd.svg
