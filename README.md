@@ -102,6 +102,7 @@ The commands run common tasks inside containers:
 - `bin/docker-rspec -f doc` runs the test suite with optional arguments, containerised
     equivalent of `bin/rspec`
 - `bin/docker-doc` runs a YARD documentation server
+- `bin/docker-uml` exports UML diagrams as default PNGs
 - `bin/docker-qa` runs the browser tests against a running production application,
     a containerised equivalent of `bin/qa`
 - `bin/docker-pa11y` runs WCAG checks against a generated `sitemap.xml`

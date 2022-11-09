@@ -4,24 +4,25 @@ The Unified Modelling Language™ (UML®) is a standard visual modelling languag
 
 ## Setup
 
-Run a [UML server][server] locally inside [Docker][docker]:
+- `SVG` versions are automatically generate when the documentation server starts.
+- `PNG` versions can be built using `./bin/docker-uml`.
 
-`docker run -d -p 8080:8080 plantuml/plantuml-server:jetty`
+Alternatively, you can integrate a [UML server][server] with your IDE:
 
-Or use the public [UML sandbox][sandbox] to create images and debug code.
+- locally inside [Docker][docker]
+- using the public [UML sandbox][sandbox] to create images and debug code.
 
-Integration with graphic tools and IDEs is available:
+Options:
 
 1. [Sublime Text][sublime]
 2. [VS Code][vscode]
 3. [Microsoft Visio][visio]
 
-Configure your system to output in SVG format and add new diagrams below.
 
 ## Diagrams
 
 <!--
-### Application UML
+### (WIP) Application UML
 
 ![Application UML](application.svg "Application")
 -->
