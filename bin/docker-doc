@@ -1,0 +1,13 @@
+#!/bin/sh
+# ------------------------------------------------------------------------------
+set -e
+
+# Regenerate diagrams
+./bin/docker-rails erd
+./bin/docker-uml -svg
+
+docker-compose \
+  -f docker-compose.yml \
+  -f docker-compose.dev.yml \
+  --project-name recovery \
+  up doc
