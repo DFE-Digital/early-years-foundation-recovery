@@ -71,7 +71,8 @@ Use `bin/qa` to run the test framework under `/ui` against a given URL.
 These tests have additional dependencies:
 
 - `brew install chromedriver geckodriver`
-- `xattr -d com.apple.quarantine /usr/local/bin/chromedriver`
+- `xattr -d com.apple.quarantine /usr/local/bin/chromedriver` on Intel
+- `xattr -d com.apple.quarantine /opt/homebrew/bin/chromedriver` on ARM
 
 ## Using Docker
 

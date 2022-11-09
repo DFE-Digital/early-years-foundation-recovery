@@ -16,19 +16,7 @@ class UserController < ApplicationController
     user
   end
 
-  def edit_postcode
-    user
-  end
-
-  def edit_ofsted_number
-    user
-  end
-
   def edit_email
-    user
-  end
-
-  def edit_setting_type
     user
   end
 
@@ -63,36 +51,6 @@ class UserController < ApplicationController
     else
       track('user_email_change', success: false)
       render :edit_email, status: :unprocessable_entity
-    end
-  end
-
-  def update_postcode
-    if user.update(user_params)
-      track('user_postcode_change', success: true)
-      redirect_to user_path, notice: 'You have saved your details'
-    else
-      track('user_postcode_change', success: false)
-      render :edit_postcode, status: :unprocessable_entity
-    end
-  end
-
-  def update_ofsted_number
-    if user.update(user_params)
-      track('ofsted_number_change', success: true)
-      redirect_to user_path, notice: 'You have saved your details'
-    else
-      track('ofsted_number_change', success: false)
-      render :edit_ofsted_number, status: :unprocessable_entity
-    end
-  end
-
-  def update_setting_type
-    if user.update(user_params)
-      track('user_setting_type_change', success: true)
-      redirect_to user_path, notice: 'You have saved your details'
-    else
-      track('user_setting_type_change', success: false)
-      render :edit_postcode, status: :unprocessable_entity
     end
   end
 
