@@ -13,6 +13,7 @@
   border-bottom: govuk-colour("blue") 3px solid;
   box-sizing: border-box;
   padding: 20px;
+  max-width: 300px;
 
   &--contained {
     background-color: govuk-colour("light-grey");
@@ -127,5 +128,83 @@
 @media screen and (max-width:812px) {
   .govuk-card__height{
     min-height:220px;
+  }
+}
+
+.grid-container {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 15px;
+
+  @media screen and (min-width: 640px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 30px;
+  }
+}
+
+.card {
+  position: relative;
+  background-color: govuk-colour("light-grey");
+  border-bottom: 3px solid govuk-colour("blue");
+  max-width: 300px;
+
+  &-container {
+    padding: 20px;
+  }
+
+  &:hover, &:focus-within {
+    background-color: govuk-colour("blue");
+    a {
+      color: govuk-colour("white");
+    }
+  }
+
+  &:hover &-link--retake {
+    &:hover {
+      color: govuk-colour("light-grey");
+    }
+
+    &:focus {
+      color: govuk-colour("black");
+    }
+  }
+
+  &:focus-within {
+    outline: 3px solid govuk-colour('yellow');
+  }
+
+  &-link--retake, &-link--header {
+    &:focus {
+      @include govuk-focused-text;
+      background-color: $govuk-focus-colour;
+      border-color: transparent;
+      outline: 2px solid govuk-colour('yellow');
+      outline-offset: 2px;
+      box-shadow: none;
+
+      .card-container & {
+        color: govuk-colour("black");
+      }
+    }
+  }
+
+  &-link--retake {
+    position: relative;
+    z-index: 2;
+  }
+  
+  &-link--header {
+    text-decoration: none;
+    color: govuk-colour("blue");
+    
+    &:after {
+      position: absolute;
+      content: '';
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+    }
   }
 }

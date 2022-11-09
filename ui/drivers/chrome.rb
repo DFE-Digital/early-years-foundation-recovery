@@ -42,20 +42,13 @@ module Drivers
     def self.register_remote
       capabilities = Selenium::WebDriver::Remote::Capabilities.chrome
       capabilities['acceptInsecureCerts'] = true
-
-      remote_url =
-        case ENV['BASE_URL']
-        when 'https://app:3000', /london\.cloudapps\.digital/ # NB: remove regexp for workflows/qa.yml
-          'http://chrome:4444/wd/hub'
-        else
-          'http://localhost:4441/wd/hub'
-        end
+      driver = ENV.fetch('DRIVER', 'localhost:4441')
 
       Capybara.register_driver :standalone_chrome do |app|
         Capybara::Selenium::Driver.new(
           app,
           browser: :remote,
-          url: remote_url,
+          url: "http://#{driver}/wd/hub",
           capabilities: capabilities,
         )
       end

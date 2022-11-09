@@ -1,0 +1,7 @@
+---
+en:
+  static:
+    new_registration:
+      heading: Please update your registration
+      content: |
+        We've updated our registration process.
