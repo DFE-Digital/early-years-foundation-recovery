@@ -54,7 +54,7 @@ en:
         | _hjSessionUser_3169682	| Helps us track visits from users. Set when a user first lands on a page. Ensures data from subsequent visits to the same site are attributed to the same user ID.	| 365 days
         | _hjid	| Help us track users who visit the website multiple times. A unique Hotjar user ID is used to link their visits together.	| 365 days
         | _hjFirstSeen	| Identifies a new user’s first session.	| Per session
-        | _hjUserAttributesHash	| Store user attributes during a user’s browser session so Hotjar knows when an attribute has changed and needs to be updated.	| Per session
+        | _hjUserAttributesHash	| Stores user attributes during a user’s browser session so Hotjar knows when an attribute has changed and needs to be updated.	| Per session
         | _hjCachedUserAttributes	| Stores user attributes that are sent through the Hotjar identify API whenever the user is not in the sample. Attributes are only saved if the user interacts with a feedback tool.	| Per session
         | _hjViewportId	| Stores user viewport details such as size and dimensions.	| Per session
 
@@ -83,8 +83,8 @@ en:
 
         | Name      | Purpose | 	Expires
         | ----------- | ----------- | ----------- |
-        | _hjClosedSurveyInvites	| Tell us whether a Hotjar survey invite has been closed to stop it displaying again	| 365 days
-        | _hjDonePolls	| Tell us whether a Hotjar feedback poll has been completed to stop the same poll reappearing	| 365 days
+        | _hjClosedSurveyInvites	| Tells us whether a Hotjar survey invite has been closed to stop it displaying again	| 365 days
+        | _hjDonePolls	| Tells us whether a Hotjar feedback poll has been completed to stop the same poll reappearing	| 365 days
         | _hjMinimizedPolls	| Keeps Hotjar feedback poll widgets minimised (once minimised by the user) when the user navigates through the website	| 365 days
         | _hjShownFeedbackMessage	| Set when a user minimises or completes a Hotjar feedback survey. The survey will stay minimised if the user navigates to a page where it is set to show	| 365 days
 
