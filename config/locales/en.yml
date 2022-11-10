@@ -116,6 +116,8 @@ en:
         heading: Where do you work?
         body: Enter the type of setting or organisation where you work.
         button: Continue
+      update:
+        complete: Thank you for creating a child development training account. You can now start the first module.
     local_authorities: 
       edit:
         heading: What local authority area do you work in?
@@ -449,4 +451,4 @@ en:
         terms-and-conditions: Terms and conditions
         whats-new: What's new
         sitemap: Sitemap
-        new-registration: Please update your registration
+        new-registration: Update your registration details
