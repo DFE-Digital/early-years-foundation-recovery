@@ -63,21 +63,19 @@ SitemapGenerator::Sitemap.create do
   # private pages
   # ------------------------------------------
 
-  # account details forms
-  add edit_extra_registration_path(:name)
-  add edit_extra_registration_path(:setting)
-
   # account
   add user_path
   add edit_user_registration_path
 
-  # edit account
-  add edit_name_user_path
+  # edit registration/account
   add edit_email_user_path
   add edit_password_user_path
-  add edit_postcode_user_path
-  add edit_ofsted_number_user_path
-  add edit_setting_type_user_path
+  add edit_registration_name_path
+  add edit_registration_setting_type_path
+  add edit_registration_setting_type_other_path
+  add edit_registration_local_authority_path
+  add edit_registration_role_type_path
+  add edit_registration_role_type_other_path
 
   # learning
   add my_modules_path
