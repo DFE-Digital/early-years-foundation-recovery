@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # Run the QA framework against a given URL:
-# The QA framework is expected to run aqainst a production environment
+# The QA framework is expected to run against a production environment
 # defaults to using 'chrome' and using 'https'
 #
 # This script instead points to a local development server
