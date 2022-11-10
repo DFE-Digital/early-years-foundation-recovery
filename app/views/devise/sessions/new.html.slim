@@ -2,18 +2,18 @@
   h2.govuk-heading-m
     | Don't have an account yet?
   - if devise_mapping.registerable? && controller_name != 'registrations'
-    = link_to 'Create a child development training account', new_registration_path(resource_name), class: 'govuk-link'
+    = link_to 'Create an Early years child development training account', new_registration_path(resource_name), class: 'govuk-link'
     |  to access training material.
 
 - content_for :devise_form do
   = form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: false } ) do |f|
-    = f.govuk_error_summary do 
+    = f.govuk_error_summary do
       p.govuk-body
         | You will need to reset your password if you enter the wrong details five times.
 
-    = f.govuk_fieldset legend: { text: 'Sign in to child development training' } do
+    = f.govuk_fieldset legend: { text: 'Sign in to Early years child development training' } do
       p.govuk-body
-        | Enter your details to sign in to your personal child development training account. These details are different to any other GOV.UK accounts you may use.
+        | Enter your details to sign in to your personal Early years child development training account. These details are different to any other GOV.UK accounts you may use.
       = f.govuk_email_field :email, autofocus: true, autocomplete: 'email', label: { text: t('helpers.label.user.email') }, aria: { required: true }
       = f.govuk_password_field :password, label: { text: 'Password' }, aria: { required: true }
 
