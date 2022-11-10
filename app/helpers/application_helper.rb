@@ -1,7 +1,7 @@
 module ApplicationHelper
   # @return [String]
   def navigation
-    govuk_header(service_name: 'Child development training', classes: 'noprint') do |header|
+    govuk_header(service_name: 'Early years child development training', classes: 'noprint') do |header|
       header.navigation_item(text: 'Home', href: root_path)
       if user_signed_in?
         header.navigation_item(text: 'My modules', href: my_modules_path)

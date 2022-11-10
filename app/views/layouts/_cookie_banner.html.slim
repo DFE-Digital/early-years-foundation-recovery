@@ -1,6 +1,6 @@
 - if cookies[:track_analytics].nil?
   = govuk_cookie_banner do |cb|
-    - cb.message(heading_text: "Cookies on Child development training") do |m|
+    - cb.message(heading_text: "Cookies on Early years child development training") do |m|
       - m.action { govuk_button_to "Accept analytics cookies", settings_path, 
         params: { track_analytics: "true", return_url: request.path } }
       - m.action { govuk_button_to "Reject analytics cookies", settings_path, 

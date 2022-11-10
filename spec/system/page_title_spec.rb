@@ -5,8 +5,8 @@ RSpec.describe 'Page' do
     it { expect(root_path).to have_page_title 'Home page' }
     it { expect(new_user_session_path).to have_page_title 'Sign in' }
     it { expect(new_user_password_path).to have_page_title 'Reset password' }
-    it { expect(cancel_user_registration_path).to have_page_title 'Create a child development training account' }
-    it { expect(new_user_registration_path).to have_page_title 'Create a child development training account' }
+    it { expect(cancel_user_registration_path).to have_page_title 'Create an Early years child development training account' }
+    it { expect(new_user_registration_path).to have_page_title 'Create an Early years child development training account' }
 
     it { expect(setting_path('cookie-policy')).to have_page_title 'Cookie policy' }
 
