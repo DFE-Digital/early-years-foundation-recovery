@@ -2,7 +2,7 @@ doctype html
 html.govuk-template lang='en'
   head
     = tag.meta content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type'
-    title= html_title(@module_item)
+    title= html_title(@module_item || @user_form)
     = render 'layouts/analytics_header'
     = tag.meta content: 'width=device-width,initial-scale=1', name: 'viewport'
     = tag.meta name: 'robots', content: 'noindex,nofollow'
@@ -16,6 +16,7 @@ html.govuk-template lang='en'
 
     = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
     = javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true
+    = yield(:head)
   body.govuk-template__body.govuk-body
     script
       | document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');

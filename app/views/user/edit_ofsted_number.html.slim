@@ -1,9 +1,0 @@
-.govuk-grid-row
-  .govuk-grid-column-two-thirds-from-desktop
-    = form_for @user, url: { action: 'update_ofsted_number' } do |f|
-      = f.govuk_error_summary
-      = f.govuk_fieldset legend: { text: t('setting.heading') } do
-        = f.govuk_text_field :ofsted_number, autofocus: true, 'aria-required': false
-        = f.govuk_submit t('links.save')
-
-        p= govuk_link_to 'Cancel', user_path

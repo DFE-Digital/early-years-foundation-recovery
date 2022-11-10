@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------
-# Base
+# Base - AMD64 & ARM64 compatible
 # ------------------------------------------------------------------------------
-FROM ruby:3.1.0-alpine as base
+FROM ruby:3.1.2-alpine as base
 
 RUN apk add --no-cache --no-progress build-base less curl tzdata gcompat \
     "busybox>=1.34.1-r5" \
@@ -41,7 +41,7 @@ RUN bundle config set without development test ui
 RUN bundle install --no-binstubs --retry=10 --jobs=4
 
 # ------------------------------------------------------------------------------
-# Production Stage - nodejs v16.14.2, postgresql v13.6
+# Production Stage - nodejs v16.17.1, postgresql v14.5, chromium v102.0.5005.182
 # ------------------------------------------------------------------------------
 FROM base AS app
 
@@ -94,11 +94,11 @@ EXPOSE 3000
 CMD ["bundle", "exec", "rails", "server"]
 
 # ------------------------------------------------------------------------------
-# Development Stage
+# Development Stage - ./bin/docker-dev
 # ------------------------------------------------------------------------------
 FROM app as dev
 
-RUN apk add --no-cache --no-progress npm
+RUN apk add --no-cache --no-progress npm graphviz
 RUN npm install --global adr-log
 
 RUN bundle config unset without
@@ -106,7 +106,7 @@ RUN bundle config set without test ui
 RUN bundle install --no-binstubs --retry=10 --jobs=4
 
 # ------------------------------------------------------------------------------
-# Test Stage
+# Test Stage - ./bin/docker-rspec
 # ------------------------------------------------------------------------------
 FROM app as test
 
@@ -135,7 +135,7 @@ COPY ui ${APP_HOME}/ui
 CMD ["bundle", "exec", "rspec", "--default-path", "ui"]
 
 # ------------------------------------------------------------------------------
-# QA Stage (self-contained and headless for pipeline)
+# QA Stage - ./bin/docker-qa
 # ------------------------------------------------------------------------------
 FROM base as qa
 
@@ -149,7 +149,7 @@ COPY .rspec /srv/.rspec
 CMD ["rspec"]
 
 # ------------------------------------------------------------------------------
-# Pa11y CI
+# Pa11y CI - ./bin/docker-pa11y
 # ------------------------------------------------------------------------------
 FROM base as pa11y
 
