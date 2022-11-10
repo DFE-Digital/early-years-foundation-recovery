@@ -19,16 +19,16 @@ private
     @training_module ||= TrainingModule.find_by(name: params[:training_module_id])
   end
 
-  def track_summative_assessment_complete?
-    @assessment.attempted? && assessment_untracked?
+  def track_summative_assessment_pass?
+    @assessment.successful_attempt? && assessment_pass_untracked?
   end
 
-  def assessment_untracked?
-    untracked?('summative_assessment_complete', training_module_id: params[:training_module_id])
+  def assessment_pass_untracked?
+    untracked?('summative_assessment_complete', training_module_id: params[:training_module_id], success: true)
   end
 
   def track_events
-    if track_summative_assessment_complete?
+    if track_summative_assessment_pass?
       track('summative_assessment_complete',
             success: @assessment.passed?,
             type: 'summative_assessment',

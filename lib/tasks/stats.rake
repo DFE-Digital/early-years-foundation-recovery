@@ -1,12 +1,27 @@
+# https://tableconvert.com/csv-to-markdown
+#
 require 'csv'
 
 module Reporting
   # ----------------------------------------------------------------------------
 
+  #
+  # | registered | not_registered | total | started_learning | not_started_learning |
+  # |------------|----------------|-------|------------------|----------------------|
+  # | 1          | 0              | 3     | 0                | 1                    |
+  #
   def export_users
     export('user_status', users.keys, [users.values])
   end
 
+  #
+  # | id | name                                      | title                                                              | not_started | in_progress | completed | engagement | module_start | module_complete | confidence_check | pass_assessment | fail_assessment |
+  # |----|-------------------------------------------|--------------------------------------------------------------------|-------------|-------------|-----------|------------|--------------|-----------------|------------------|-----------------|-----------------|
+  # | 1  | child-development-and-the-eyfs            | Understanding child development and the EYFS                       | 1           | 0           | 0         | 0          | 0            | 0               | 0                | 0               | 0               |
+  # | 2  | brain-development-and-how-children-learn  | Brain development and how children learn                           | 1           | 0           | 0         | 0          | 0            | 0               | 0                | 0               | 0               |
+  # | 3  | personal-social-and-emotional-development | "Supporting children’s personal, social and emotional development" | 1           | 0           | 0         | 0          | 0            | 0               | 0                | 0               | 0               |
+  # | 4  | module-4                                  | Supporting language development in the early years                 | 1           | 0           | 0         | 0          | 0            | 0               | 0                | 0               | 0               |
+  #
   def export_modules
     export('module_status', modules.first.keys, modules.map(&:values))
   end
