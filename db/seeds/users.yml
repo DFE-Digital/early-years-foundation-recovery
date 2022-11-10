@@ -33,3 +33,14 @@ private-beta-completed@example.com:
   setting_type: 'school'
   # optional
 
+whats-new-private-beta-completed@example.com:
+  password: <%= ENV.fetch('USER_PASSWORD', 'StrongPassword') %>
+  confirmed_at: <%= 1.year.ago %>
+  display_whats_new: true
+  terms_and_conditions_agreed_at: <%= 1.year.ago %>
+  private_beta_registration_complete: true
+  # mandatory if "registration_complete"
+  first_name: Private beta Demo
+  last_name: DemoUser
+  setting_type: 'school'
+  # optional
