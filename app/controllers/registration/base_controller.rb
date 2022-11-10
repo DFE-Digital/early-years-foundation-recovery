@@ -14,7 +14,7 @@ private
   def complete_registration
     track('user_registration', success: true)
     current_user.update! registration_complete: true
-    if current_user.display_whats_new
+    if current_user.display_whats_new?
       current_user.update! display_whats_new: false
       redirect_to static_path('whats-new'), notice: t('.complete')
     else
