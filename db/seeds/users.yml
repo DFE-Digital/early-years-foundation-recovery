@@ -21,3 +21,15 @@ completed@example.com:
   role_type: <%= RoleType.first.name %>
   # optional
   local_authority: local authority
+
+private-beta-completed@example.com:
+  password: <%= ENV.fetch('USER_PASSWORD', 'StrongPassword') %>
+  confirmed_at: <%= 1.year.ago %>
+  terms_and_conditions_agreed_at: <%= 1.year.ago %>
+  private_beta_registration_complete: true
+  # mandatory if "registration_complete"
+  first_name: Private beta Demo
+  last_name: DemoUser
+  setting_type: 'school'
+  # optional
+
