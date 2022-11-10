@@ -4,9 +4,11 @@ module ApplicationHelper
     govuk_header(classes: 'noprint') do |header|
       header.navigation_item(text: 'Home', href: root_path)
       header.custom_logo do
-        image_tag('crest.png', alt: "Department for Education homepage", class: 'govuk-header__logotype-crown-fallback-image') +
-          " " + ("<span class='govuk-header__logotype-text'>Department for Education | </span>").html_safe +
-          ("<span class='govuk-header__product-name'>Early years child development training</span>").html_safe
+        # rubocop:disable Style/StringConcatenation
+        image_tag('crest.png', alt: 'Department for Education homepage', class: 'govuk-header__logotype-crown-fallback-image') +
+          ' ' + "<span class='govuk-header__logotype-text'>Department for Education | </span>".html_safe +
+          "<span class='govuk-header__product-name'>Early years child development training</span>".html_safe
+        # rubocop:enable Style/StringConcatenation
       end
       if user_signed_in?
         header.navigation_item(text: 'My modules', href: my_modules_path)

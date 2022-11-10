@@ -14,8 +14,18 @@
     text-decoration: underline solid 3px govuk-colour('white');
     text-underline-offset: 1.6px;
 
+    &:focus, &:active {
+      color: govuk-colour('black');
+      text-decoration: none;
+    }
+
     .govuk-header__link:visited {
-      color: white;
+      color: govuk-colour('white');
+
+      &:focus, &:active {
+        color: govuk-colour('black');
+        text-decoration: none;
+      }
     }
   }
   
