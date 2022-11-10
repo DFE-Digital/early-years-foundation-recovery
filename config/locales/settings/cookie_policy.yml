@@ -4,15 +4,15 @@ en:
     cookie:
       heading: Cookies
       content: |
-        Cookies are small files saved on your phone, tablet or computer when you 
+        Cookies are small files saved on your phone, tablet or computer when you
         visit a website.
 
-        We use cookies to make this site work and collect information about how 
+        We use cookies to make this site work and collect information about how
         you use our service.
 
         ## Essential cookies
 
-        Essential cookies keep your information secure while you use Help for 
+        Essential cookies keep your information secure while you use Help for
         early years providers. We do not need to ask permission to use them.
 
         | Name                                      | Purpose                                                                        | Expires                   |
@@ -24,16 +24,16 @@ en:
         | track_analytics                           | Saves your cookie consent settings                                             | 6 months                  |
 
         ## Analytics cookies (optional)
-        
-        With your permission, we use Google Analytics and Hotjar software to collect anonymised data about how you use Child development training. This information helps us to improve our service.
+
+        With your permission, we use Google Analytics and Hotjar software to collect anonymised data about how you use Early years child development training. This information helps us to improve our service.
 
         Google is not allowed to use or share our analytics data with anyone.
 
         Google Analytics stores anonymised information about:
 
-        - how you got to Child development training
-        - the pages you visit on Child development training and how long you spend on them
-        - any errors you see while using Child development training
+        - how you got to Early years child development training
+        - the pages you visit on Early years child development training and how long you spend on them
+        - any errors you see while using Early years child development training
 
         Google Analytics sets the following cookies:
 
@@ -90,4 +90,4 @@ en:
 
       change_cookies_header: Change your cookie settings
       change_cookies_question: Do you want to accept analytics cookies?
-      preferences_saved_html: You’ve set your cookie preferences. <a class='govuk-link' href='%{return_url}'>Go back to Child development training.</a>
+      preferences_saved_html: You’ve set your cookie preferences. <a class='govuk-link' href='%{return_url}'>Go back to Early years child development training.</a>
