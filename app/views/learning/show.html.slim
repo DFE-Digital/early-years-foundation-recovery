@@ -37,7 +37,7 @@ h1.govuk-heading-l My modules
           .govuk-card id=mod.name
             h3.govuk-heading-s
               = mod.card_title
-            p.govuk-body= mod.description
+            p.govuk-body= mod.short_description
             - unless mod.draft?
               = govuk_link_to 'View more information about this module',
                 course_overview_path + mod.card_anchor
