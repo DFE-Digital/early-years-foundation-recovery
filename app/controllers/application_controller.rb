@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_analytics_tracking_id
+  before_action :set_analytics_tracking_id, :set_hotjar_site_id
 
   default_form_builder(EarlyYearsRecoveryFormBuilder)
 
@@ -28,6 +28,10 @@ class ApplicationController < ActionController::Base
 
   def set_analytics_tracking_id
     @tracking_id = Rails.configuration.google_analytics_tracking_id
+  end
+
+  def set_hotjar_site_id
+    @hotjar_id = Rails.configuration.hotjar_site_id
   end
 
 private
