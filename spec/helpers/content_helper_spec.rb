@@ -108,4 +108,3 @@ describe 'ContentHelper', type: :helper do
     it { expect(helper.service_name).to eq 'Early years child development training' }
   end
 end
-  
