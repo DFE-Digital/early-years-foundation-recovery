@@ -1,4 +1,8 @@
 en:
+  user:
+    show:
+      your_setting_details_html:
+        <h2 class='govuk-heading-m'>Your setting details</h2>
   activemodel:
     errors:
       models:
@@ -11,9 +15,6 @@ en:
               blank: Enter a first name.
             last_name:
               blank: Enter a surname.
-            postcode:
-              blank: Enter your setting's postcode.
-              invalid: Your setting's postcode is invalid.
             email:
               blank: Enter an email address.
               invalid: Enter a valid email address.
@@ -24,10 +25,17 @@ en:
               confirmation: Sorry, your passwords don't match.
             terms_and_conditions_agreed_at:
               blank: You must accept the terms and conditions and privacy policy to create an account.
-            ofsted_number:
-              invalid: This Ofsted number is not recognised.
-            setting_type:
-              blank: Select a setting type.
+            setting_type_id:
+              blank: Enter the setting type you work in. 
+              inclusion: Enter the setting type you work in.
+            setting_type_other:
+              blank: Enter the setting type you work in. 
+            role_type: 
+              blank: Select your role.
+            role_type_other:
+              blank: Enter your job title.
+            local_authority:
+              blank: Enter the local authority of the setting or organisation you work in most of the time.
   activerecord:
     errors:
       models:
@@ -67,22 +75,75 @@ en:
     notice: Success
   date_completed: "Date completed: %{date}"
 
-  extra_registration:
-    complete: Thank you for creating a child development training account. You can now start the first module.
-    name:
-      heading: About you
-      body: We're asking for your details so we can personalise your training certificates.
-      button: Continue
-    setting:
-      heading: About your setting
+  registration:
+    edit_setting_type:
+      heading: Your setting type
       body: |
-        Your training progress won't be shared with anyone without your permission.
+        {:.govuk-hint}
+          Search for the type of setting or organisation you work in, for example childminder or nursery.
+          
+        {:.govuk-hint}
+          If you work in more than one early years setting, enter the one where you work most often.
 
         {:.govuk-hint}
-        If you work in multiple settings, choose the one where you work most often.
-      button: Complete
-
-  setting:
+          Your training progress won't be shared with anyone without your permission.
+      button: Save
+      link_to_setting_type_other: I cannot find my setting or organisation
+    names:
+      edit:
+        heading: About you
+        body: We're asking for your details so we can personalise your training certificates.
+        button: Continue
+    setting_types:
+      edit:
+        heading: What setting type do you work in?
+        body: |
+          {:.govuk-hint}
+            Search for the type of setting or organisation you work in, for example childminder or nursery.
+            
+          {:.govuk-hint}
+            If you work in more than one early years setting, enter the one where you work most often.
+  
+          {:.govuk-hint}
+            Your training progress won't be shared with anyone without your permission.
+        button: Continue
+        link_to_setting_type_other: I cannot find my setting or organisation
+        autocomplete-not-found: No setting found.
+      update:
+        complete: Thank you for creating a child development training account. You can now start the first module.
+    setting_type_others:
+      edit:
+        heading: Where do you work?
+        body: Enter the type of setting or organisation where you work.
+        button: Continue
+    local_authorities: 
+      edit:
+        heading: What local authority area do you work in?
+        body: |
+          {:.govuk-hint}
+            This could be your county council, district council or London borough.
+        button: Continue
+        multiple_local_authorities: I work across more than one local authority
+        autocomplete-not-found: No local authority found.
+      update:
+        complete: Thank you for creating a child development training account. You can now start the first module.
+    role_types:
+      edit:
+        heading: Which of the following best describes your role?
+        body: |
+          Your role
+        button: Continue
+        link_to_role_type_other: I would describe my role in another way.
+      update:
+        complete: Thank you for creating a child development training account. You can now start the first module.
+    role_type_others:
+      edit:
+        heading: What is your role?
+        body: Enter your job title.
+        button: Continue
+      update:
+        complete: Thank you for creating a child development training account. You can now start the first module.
+  setting_type:
     heading: Change your setting's information
 
   password:
@@ -174,22 +235,21 @@ en:
       impact on your practice. It is not aimed to provide a pass or fail.
 
       ## Before you start
-
       This test has 10 multiple choice questions.
 
       You must answer all of the questions.
 
-      You must complete this test in one sitting. If you exit part way through
-      the test, your progress will not be saved.
+      You can pause and restart the test as much as you like. If you exit part way through, your progress will be saved.
 
       You can review your total score for the test at the end.
+      
+      To receive a certificate of achievement for this module, you need to receive an overall score of at least %{passmark}%.
 
-      To receive a certificate of achievement for this module, you need to
-      receive an overall score of at least %{passmark}%.
+      If you do not score %{passmark}%, you will be able to see which questions you got wrong. You can repeat the test to improve your score as many times as you want.
+      
+      Your score may be shared anonymously with the Child Development Training team to help DfE measure the impact of this training.
 
-      If you do not score %{passmark}%, you will be able to see which questions
-      you got wrong. You can repeat the test to improve your score as many times
-      as you want to.
+      Scores are not shared with any other third parties or organisations.
 
   confidence_intro:
     heading: Reflect on your learning
@@ -225,6 +285,10 @@ en:
       Your progress is automatically saved as you move through the module.
       You can sign out or close the browser at any time without losing your progress.
       When you next sign in, you can restart from where you left off.
+
+      ## Videos and mobile data usage 
+
+      This module contains videos. Connect to wifi before starting the module to watch the videos without using any mobile data. If you are not able or prefer not to play the videos, you can use the full transcripts provided.
 
   icons_page:
     heading: Before you start
@@ -373,10 +437,6 @@ en:
     devise/unlocks:
       new: Resend unlock instructions
       show: Resend unlock instructions
-    extra_registrations:
-      edit:
-        name: About you
-        setting: About your setting
     settings:
       show:
         # FIXME: routing
