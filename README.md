@@ -118,12 +118,16 @@ These commands can be used to debug problems:
 
 ## Using Custom Tasks
 
-- `rails db:bot` creates a user account for automated testing in the `staging` environment
-- `rails db:backfill_terms_and_conditions`
-- `rails db:calculate_completion_time`
-- `rails db:display_whats_new`
-- `rails db:seed:interim_users`
-- `rails post:content`
+- `rake eyfs:bot`            # Generate secure bot user
+- `rake eyfs:plug_content`   # Add page view events for injected module items
+- `rake eyfs:user_progress`  # Recalculate module completion time
+- `rake eyfs:whats_new`      # Enable the post login 'What's new' page
+
+
+Trigger a task on a deployed application in either the `ey-recovery-content` or `ey-recovery-staging` spaces, not `production`, using `bin/cf-task`.
+
+- `./bin/cf-task pr-123 eyfs:bot`
+- `./bin/cf-task dev eyfs:whats_new[email1@example.com,email2@example.com]`
 
 ---
 
