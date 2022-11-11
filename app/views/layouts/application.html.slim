@@ -4,6 +4,7 @@ html.govuk-template lang='en'
     = tag.meta content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type'
     title= html_title(@module_item || @user_form)
     = render 'layouts/analytics_header'
+    = render 'layouts/hotjar_tracking'
     = tag.meta content: 'width=device-width,initial-scale=1', name: 'viewport'
     = tag.meta name: 'robots', content: 'noindex,nofollow'
     = tag.meta property: 'og:image', content: asset_path('images/govuk-opengraph-image.png')
