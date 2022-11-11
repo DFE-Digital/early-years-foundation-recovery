@@ -6,46 +6,78 @@ en:
       subheading: Change your cookie settings
       legend: Do you want to accept analytics cookies?
       flash: |
-        You’ve set your cookie preferences. [Go back to Child development training](%{path}).
+        You’ve set your cookie preferences. [Go back to Early years child development training](%{path}).
       content: |
-        Cookies are small files saved on your phone, tablet or computer when you 
+        Cookies are small files saved on your phone, tablet or computer when you
         visit a website.
 
-        We use cookies to make this site work and collect information about how 
+        We use cookies to make this site work and collect information about how
         you use our service.
 
         ## Essential cookies
 
-        Essential cookies keep your information secure while you use Help for 
-        early years providers. We do not need to ask permission to use them.
+        Essential cookies keep your information secure while you use Early years child development training. We do not need to ask permission to use them.
 
         | Name                                      | Purpose                                                                        | Expires                   |
         | ------------------------------------------| ------------------------------------------------------------------------------ | ------------------------- |
-        | _early_years_foundation_recovery_session  | Stores session information                                                     | Expires when you log out  |
+        | _early_years_foundation_recovery_session  | Stores your session information                                                     | Expires when you log out  |
         | ahoy_visit                                | Tracks where you are in the module and allows you to pause and restart modules | 3 hours                   |
-        | ahoy_visitor                              | Tracks your progress through the training module                               | 2 years                   |
+        | ahoy_visitor                              | Tracks your progress through the training modules                               | 2 years                   |
         | remember_user_token                       | Stores whether you clicked the remember me checkbox when you signed in         | 48 hours                  |
         | track_analytics                           | Saves your cookie consent settings                                             | 6 months                  |
 
         ## Analytics cookies (optional)
-        
-        With your permission, we use Google Analytics software to collect anonymised data about how you use Child development training. This information helps us to improve our service.
+
+        With your permission, we use Google Analytics and Hotjar software to collect anonymised data about how you use Early years child development training. This information helps us to improve our service.
 
         Google is not allowed to use or share our analytics data with anyone.
 
         Google Analytics stores anonymised information about:
 
-        - how you got to Child development training
-        - the pages you visit on Child development training and how long you spend on them
-        - any errors you see while using Child development training
+        - how you got to Early years child development training
+        - the pages you visit on Early years child development training and how long you spend on them
+        - any errors you see while using Early years child development training
 
         Google Analytics sets the following cookies:
 
-        | Name                                       | Purpose                                                                        | Expires                   |
-        | ------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------- |
-        | _ga_L17YMGD11W                             | Used to persist session state                                                  | 2 years                   |
-        | _ga                                        | Used to distinguish users                                                      | 2 years                   |
-        | _gid                                       | Used to distinguish users                                                      | 24 hours                  |
-        | _ga_WRRWDTSGBP                             | Used to distinguish users                                                      | 2 years                   |
-        | _ga_76JLPNZBCP                             | Used to distinguish users                                                      | 18 months                 |
+        | Name                                      | Purpose                                                                        | Expires                   |
+        | ------------------------------------------| ------------------------------------------------------------------------------ | ------------------------- |
+        | _ga_L17YMGD11W                            | Generates statistics about how you use the website                                                  | 2 years                   |
+        | _ga                                       | Helps count how many people visit this site by tracking if you’ve visited before                                                      | 2 years                   |
+        | _gid                                      | Helps count how many people visit this site by tracking if you’ve visited before                                                      | 24 hours                  |
+        | _ga_WRRWDTSGBP                            | Generates statistics about how you use the website                                                      | 2 years                   |
+        | _ga_76JLPNZBCP                            | Generates statistics about how you use the website                                                      | 18 months                 |
 
+        Hotjar sets the following cookies:
+
+        ### Relating to you
+
+        | Name      | Purpose | 	Expires
+        | ----------- | ----------- | ----------- |
+        | _hjSessionUser_3169682	| Helps count how many people visit this site by tracking if you’ve visited before	| 365 days
+        | _hjid	| Registers a unique ID to generate statistics about how you use the website	| 365 days
+        | _hjFirstSeen	| Identifies your first session	| Per session
+        | _hjUserAttributesHash	| Holds information about your visit so your information can be kept up to date	| Per session
+        | _hjCachedUserAttributes	| Stores user attributes which are sent whenever your visit is not in the sample	| Per session
+        | _hjViewportId	| Stores information about the screen you use to visit the website, such as size and dimensions	| Per session
+
+        ### Relating to your session
+
+        | Name      | Purpose | 	Expires
+        | ----------- | ----------- | ----------- |
+        | _hjSession_3169682	| Holds information about your current session. Makes sure that subsequent requests inside the session window are attributed to your session	| 30 minutes
+        | _hjSessionTooLarge	| Causes Hotjar to stop collecting data if a session becomes too large	| Per session
+        | _hjSessionRejected	| Applied in extremely rare situations to prevent severe performance issues	| Per session
+        | _hjSessionResumed	| Set when your session or recording is reconnected to Hotjar servers after a break in connection	| Per session
+        | _hjLocalStorageTest	| Used to check if the Hotjar tracking script can use browser storage on your device	| Per session
+        | _hjIncludedInPageviewSample	| Lets Hotjar know whether you are included in data sampling	| 30 minutes
+        | _hjIncludedInSessionSample	| Lets Hotjar know whether you are included in data sampling	| 30 minutes
+        | _hjAbsoluteSessionInProgress	| Used to detect the first page you look at during a session | 30 minutes
+        | _hjTLDTest	| Used to determine where cookies will be stored. After this check, the cookie is removed	| Per session
+
+        ### Relating to recordings
+
+        | Name      | Purpose | 	Expires
+        | ----------- | ----------- | ----------- |
+        | _hjRecordingEnabled	| Tells Hotjar if you are already in a recording in a particular session	| Per session
+        | _hjRecordingLastActivity	| Gets updated when a visitor recording starts and when you perform an action that Hotjar records	| Per session
