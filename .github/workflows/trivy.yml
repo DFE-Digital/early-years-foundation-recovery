@@ -30,7 +30,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
       -
         name: Login to Github Container Registry
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
@@ -66,7 +66,7 @@ jobs:
             ${{ env.REGISTRY }}:${{ github.sha }}
       -
         name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@0.7.0
+        uses: aquasecurity/trivy-action@0.8.0
         with:
           image-ref: ${{ env.REGISTRY }}:${{ github.sha }}
           format: table
