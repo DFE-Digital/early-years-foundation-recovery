@@ -29,28 +29,74 @@ describe 'ContentHelper#translate_markdown', type: :helper do
   end
 
   describe 'custom govspeak' do
-    describe '$YT' do
+    describe 'YouTube' do
       let(:input) { '$YT[Test title](foo)$ENDYT' }
 
-      it 'embeds YouTube content' do
+      it 'embeds video' do
         expect(html).to include 'title="Test title"'
-        expect(html).to include 'src="https://www.youtube.com/embed/foo?enablejsapi=1&amp;origin=https%3A%2F%2Frecovery.app"'
+        expect(html).to include 'src="https://www.youtube.com/embed/foo?enablejsapi=1&amp;origin=recovery.app"'
       end
     end
 
-    describe '$INFO' do
+    describe 'Vimeo' do
+      let(:input) { '$VM[Test title](foo)$ENDVM' }
+
+      it 'embeds video' do
+        expect(html).to include 'title="Test title"'
+        expect(html).to include 'src="https://player.vimeo.com/video/foo?enablejsapi=1&amp;origin=recovery.app"'
+      end
+    end
+
+    describe 'In your setting prompt' do
       let(:input) do
-        <<~BANG
+        <<~INFO
           $INFO
           - one
           - two
           - three
           $INFO
-        BANG
+        INFO
       end
 
-      it 'renders a tip' do
+      it 'uses the info icon' do
+        expect(html).to include '<i aria-describedby="info icon" class="fa-2x fa-solid fa-info">'
         expect(html).to include '<h2 class="govuk-heading-m">In your setting</h2>'
+        expect(html).to include '<li>one</li>'
+      end
+    end
+
+    describe 'Reflection point prompt' do
+      let(:input) do
+        <<~BRAIN
+          $BRAIN
+          - one
+          - two
+          - three
+          $BRAIN
+        BRAIN
+      end
+
+      it 'uses the brain icon' do
+        expect(html).to include '<i aria-describedby="brain icon" class="fa-2x fa-solid fa-brain">'
+        expect(html).to include '<h2 class="govuk-heading-m">Reflection point</h2>'
+        expect(html).to include '<li>one</li>'
+      end
+    end
+
+    describe 'Further reading prompt' do
+      let(:input) do
+        <<~BOOK
+          $BOOK
+          - one
+          - two
+          - three
+          $BOOK
+        BOOK
+      end
+
+      it 'uses the book icon' do
+        expect(html).to include '<i aria-describedby="book icon" class="fa-2x fa-solid fa-book">'
+        expect(html).to include '<h2 class="govuk-heading-m">Further reading</h2>'
         expect(html).to include '<li>one</li>'
       end
     end

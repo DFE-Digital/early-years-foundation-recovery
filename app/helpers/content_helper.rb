@@ -7,36 +7,34 @@ module ContentHelper
   end
 
   # Date format guidelines: "1 June 2002"
-  # @param modules [Array<TrainingModule>]
   # @return [String]
-  def completed_modules_table(modules)
+  def completed_modules_table
+    mods = current_user.course.completed_modules
     header = ['Module name', 'Date completed', 'Actions']
-    rows = modules.map do |mod, timestamp|
+    rows = mods.map do |mod, timestamp|
       [
         govuk_link_to(mod.title, training_module_path(mod)),
         timestamp.to_date.strftime('%-d %B %Y'),
-        if mod.certificate_page
-          govuk_link_to('View certificate', training_module_content_page_path(mod, mod.certificate_page))
-        end,
+        govuk_link_to('View certificate', training_module_content_page_path(mod, mod.certificate_page)),
       ]
     end
-    govuk_table(rows: [header, *rows], caption: 'Completed modules', first_cell_is_header: true)
+
+    govuk_table(rows: [header, *rows], caption: 'Completed modules')
   end
 
-  # @param text [String] Tag content
-  # @param tag [Symbol] HTML element (default h1)
-  # @return [String, nil]
-  def govuk_heading(text, tag: :h1, size: 'm')
-    return if text.blank?
-
-    content_tag(tag, class: "govuk-heading-#{size}") { text }
+  # @param mod [TrainingModule]
+  # @return [String]
+  def training_module_image(mod)
+    image_tag image_path(mod.thumbnail), class: 'full-width-img', width: 200, alt: '', title: ''
   end
 
   # @param icon [String, Symbol] Fontawesome icon name
   # @param size [Integer] Icon scale factor
   # @return [String]
   def icon(icon, size: 2, **)
-    content_tag(:i, nil, class: "fa-solid fa-#{size}x fa-#{icon} icon")
+    content_tag :i, nil,
+                class: "fa-solid fa-#{size}x fa-#{icon} icon",
+                'aria-describedby': "#{icon} icon"
   end
 
   # @return [String]

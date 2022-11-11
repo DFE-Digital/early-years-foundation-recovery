@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'about-training', to: 'training_modules#index', as: :course_overview
 
   get '/404', to: 'errors#not_found', via: :all
-  # get '/422', to: 'errors#unacceptable', via: :all
+  get '/422', to: 'errors#unprocessable_entity', via: :all
   get '/500', to: 'errors#internal_server_error', via: :all
   get 'users/timeout', to: 'errors#timeout'
 
@@ -19,21 +19,21 @@ Rails.application.routes.draw do
   end
   
   devise_for :users, controllers: { sessions: 'users/sessions', confirmations: 'confirmations', passwords: 'passwords', registrations: 'registrations' }, path_names: { sign_in: 'sign-in', sign_out: 'sign-out', sign_up: 'sign-up' }
-  resources :extra_registrations, only: %i[index edit update], path: 'extra-registrations'
+
+  namespace :registration do
+    resource :name, only: %i[edit update]
+    resource :setting_type, only: %i[edit update], path: 'setting-type'
+    resource :setting_type_other, only: %i[edit update], path: 'setting-type-other'
+    resource :local_authority, only: %i[edit update], path: 'local-authority'
+    resource :role_type, only: %i[edit update], path: 'role-type'
+    resource :role_type_other, only: %i[edit update], path: 'role-type-other'
+  end
 
   resource :user, controller: :user, path: 'my-account', only: %i[show] do
-    get 'edit-name'
     get 'edit-email'
-    get 'edit-ofsted-number'
     get 'edit-password'
-    get 'edit-postcode'
-    get 'edit-setting-type'
-    patch 'update-name'
     patch 'update-email'
-    patch 'update-ofsted-number'
     patch 'update-password'
-    patch 'update-postcode'
-    patch 'update-setting-type'
     get 'check-email-confirmation'
     get 'check-email-password-reset'
     resource :notes, path: 'learning-log', only: %i[show create update]
@@ -43,11 +43,6 @@ Rails.application.routes.draw do
     resources :content_pages, only: %i[index show], path: 'content-pages'
     resources :questionnaires, only: %i[show update]
     resources :assessment_results, only: %i[show new], path: 'assessment-result'
-
-    # TODO: retire aliases after accessibility audit
-    get 'confidence-check/:id' => 'questionnaires#show'
-    get 'summative-assessments/:id' => 'questionnaires#show'
-    get 'formative-assessments/:id' => 'questionnaires#show'
   end
 
   get '/:id', to: 'static#show', as: :static

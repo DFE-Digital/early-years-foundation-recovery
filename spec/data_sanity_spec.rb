@@ -7,6 +7,14 @@ RSpec.describe 'Module content' do
     it 'has none missing' do
       module_names.map do |mod_name|
         expect(mod_name).to be_publishable
+
+        case mod_name
+        when 'bravo', 'charlie'
+          # TODO: update demo modules
+          puts "skipping type check for #{mod_name}"
+        else
+          expect(mod_name).to have_all_types
+        end
       end
     end
 

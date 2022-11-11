@@ -1,0 +1,65 @@
+@startuml
+hide stereotype
+
+<style>
+  .f {
+    BackgroundColor Pink
+  }
+  .s {
+    BackgroundColor LightGreen
+  }
+  .i {
+    BackgroundColor SkyBlue
+    FontStyle italic
+  }
+  .b {
+    BackgroundColor LightSlateGray
+    FontStyle italic
+  }
+}
+</style>
+
+' Legend colours need to be updated manually
+legend
+|<back:LightGreen>Composition</back>|
+|<back:SkyBlue>Application</back>|
+|<back:LightSlateGrey>Database</back>|
+|<back:Pink>Service</back>|
+endlegend
+
+
+rectangle "Early Years Recovery Docker" {
+  rectangle "docker-compose.dev.yml" <<s>> {
+    node "RAILS_ENV=development" as dev <<i>>
+    database "early_years_foundation_recovery_development" <<b>>
+    artifact Pa11y <<f>>
+    artifact Yard <<f>>
+  }
+
+  rectangle "docker-compose.test.yml" <<s>> {
+    node "RAILS_ENV=test" as test <<i>>
+    database "early_years_foundation_recovery_test" <<b>>
+  }
+
+  rectangle "docker-compose.qa.yml" <<s>> {
+    node "RAILS_ENV=production" as qa <<i>>
+    database "early_years_foundation_recovery_production" <<b>>
+    artifact Firefox <<f>>
+    artifact Chrome <<f>>
+  }
+
+}
+
+' straight horizontal/vertical connecting lines
+skinparam linetype ortho
+
+dev --> early_years_foundation_recovery_development
+test --> early_years_foundation_recovery_test
+qa --> early_years_foundation_recovery_production
+
+Pa11y --> dev
+
+Firefox <-- qa
+Chrome <-- qa
+
+@enduml

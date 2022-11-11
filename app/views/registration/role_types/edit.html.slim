@@ -1,0 +1,13 @@
+= govuk_back_link href: edit_registration_local_authority_path
+
+.govuk-grid-row
+  .govuk-grid-column-two-thirds-from-desktop
+    = form_for @user_form, url: registration_role_type_path, method: :patch do |f|
+      = f.govuk_error_summary
+      = f.govuk_fieldset legend: { text: t('.heading') }, aria: { required: true } do
+        p.govuk_body
+          = translate_markdown(t('.body'))
+        = f.govuk_collection_radio_buttons :role_type, @user_form.role_types, :name, :name, legend: { text: 'Role type', class: 'govuk-visually-hidden' }
+        p.govuk_body
+          = govuk_link_to t('.link_to_role_type_other'), edit_registration_role_type_other_path
+      = f.govuk_submit t('.button')
