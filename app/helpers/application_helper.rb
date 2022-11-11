@@ -3,12 +3,7 @@ module ApplicationHelper
   def navigation
     govuk_header(classes: 'noprint') do |header|
       header.navigation_item(text: 'Home', href: root_path)
-      header.custom_logo do
-        image = image_tag('crest.png', alt: 'Department for Education homepage', class: 'govuk-header__logotype-crown-fallback-image')
-        dfe = "<span class='govuk-header__logotype-text'>Department for Education | </span>"
-        service_name = "<span class='govuk-header__product-name'>Early years child development training</span>"
-        "#{image} #{dfe}#{service_name}".html_safe
-      end
+      header.custom_logo { custom_logo }
       if user_signed_in?
         header.navigation_item(text: 'My modules', href: my_modules_path)
         header.navigation_item(text: 'Learning log', href: user_notes_path) if current_user.course_started?
@@ -18,6 +13,15 @@ module ApplicationHelper
         header.navigation_item(text: 'Sign in', href: new_user_session_path)
       end
     end
+  end
+
+  # @return [String]
+  def custom_logo
+    image = image_tag('crest.png', alt: 'Department for Education homepage', class: 'govuk-header__logotype-crown-fallback-image')
+    dfe = content_tag(:span, 'Department for Education | ', class: 'govuk-header__logotype-text')
+    service_name = content_tag(:span, 'Early years child development training', class: 'govuk-header__product-name')
+
+    "#{image} #{dfe}#{service_name}".html_safe
   end
 
   # @return [String]
