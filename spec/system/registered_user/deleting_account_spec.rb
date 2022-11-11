@@ -15,15 +15,15 @@ RSpec.describe 'Account deletion' do
     end
 
     it 'can continue with correct password' do
-      fill_in 'Enter your current password', with: user.password
+      fill_in 'Your password', with: user.password
       click_on 'Continue'
       expect(page).to have_current_path '/my-account/account-deletion/confirm-delete-account'
     end
 
     it 'cannot continue with incorrect password' do
-      fill_in 'Enter your current password', with: user.password
+      fill_in 'Your password', with: 'IncorrectPassword'
       click_on 'Continue'
-      expect(page).to have_content ''
+      expect(page).to have_content 'There is a problem'
     end
 
     it 'has option to abort' do
@@ -54,7 +54,6 @@ RSpec.describe 'Account deletion' do
     
     it 'redacts information' do
       click_on 'Close my account'
-      binding.pry
       expect(User.first.first_name).to eq 'Redacted'
       expect(User.first.last_name).to eq 'User'
       expect(User.first.email).to have_text 'redacted_user'
