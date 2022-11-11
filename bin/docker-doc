@@ -2,17 +2,12 @@
 # ------------------------------------------------------------------------------
 set -e
 
-if [[ ! -z "$MSYSTEM" ]]; then
-  echo "You are running Windows!"
-  PREFIX="winpty"
-else
-  PREFIX=""
-fi
+# Regenerate diagrams
+./bin/docker-rails erd
+./bin/docker-uml -svg
 
-$PREFIX docker-compose \
+docker-compose \
   -f docker-compose.yml \
   -f docker-compose.dev.yml \
   --project-name recovery \
-  run \
-  --rm app \
-  yarn "$@"
+  up doc

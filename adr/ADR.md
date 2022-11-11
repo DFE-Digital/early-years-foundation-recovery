@@ -2,7 +2,7 @@
 
 This log lists the architectural decisions for EYFS Recovery
 
-<!-- adrlog -- Regenerate the content by using "adr-log -i". You can install it via "npm install -g adr-log" -->
+<!-- adrlog -->
 
 * [ADR-0000](0000-template.md) - Template
 * [ADR-0001](0001-web-framework.md) - Primary development language and framework
@@ -23,9 +23,8 @@ This log lists the architectural decisions for EYFS Recovery
 
 For new ADRs, please use [0000-template.md](0000-template.md) as basis.
 
-If using the ```adr-log``` tool ([here](https://adr.github.io/adr-log/)) then run ```adr-log -i README.md``` to update this TOC after adding a record or run `./bin/docker-adr`.
+Run `./bin/docker-adr` after adding or updating records to update this TOC using [adr-log](https://adr.github.io/adr-log/)
 
 More information on MADR is available at <https://adr.github.io/madr/>.
-General information about architectural decision records is available at <https://adr.github.io/>.
 
-<!-- markdownlint-disable-file MD013 -->
+General information about architectural decision records is available at <https://adr.github.io/>.

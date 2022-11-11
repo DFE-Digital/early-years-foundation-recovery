@@ -26,6 +26,19 @@ services:
     volumes:
       - db_dev:/var/lib/postgresql/data
 
+  doc:
+    container_name: recovery_doc
+    image: recovery:dev
+    command: yard server
+    healthcheck:
+      test: curl --fail http://localhost:8808 || exit 1
+    volumes:
+      - .:/srv
+    ports:
+      - 8808:8808
+    networks:
+      - recovery
+
   pa11y:
     container_name: recovery_pa11y
     build:
