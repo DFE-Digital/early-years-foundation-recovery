@@ -5,14 +5,8 @@ RSpec.describe 'Sign up', type: :system do
     visit '/users/sign-up'
   end
 
-  
-
   context 'when user does not exist' do
     let(:user) { create(:user) }
-
-    it 'has service name' do
-      expect(page).to have_text('Create an Early years child development training account')
-    end
 
     it 'must accept terms and conditions' do
       fill_in 'Email address', with: user.email

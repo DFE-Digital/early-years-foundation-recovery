@@ -74,6 +74,7 @@ module ContentHelper
     govuk_tag(text: t(status, scope: 'module_indicator'), colour: colour)
   end
 
+  # @return [String]
   def service_name
     Rails.configuration.service_name
   end
