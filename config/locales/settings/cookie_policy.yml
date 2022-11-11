@@ -3,6 +3,10 @@ en:
   settings:
     cookie:
       heading: Cookies
+      subheading: Change your cookie settings
+      legend: Do you want to accept analytics cookies?
+      flash: |
+        You’ve set your cookie preferences. [Go back to Child development training](%{path}).
       content: |
         Cookies are small files saved on your phone, tablet or computer when you
         visit a website.
@@ -36,14 +40,11 @@ en:
 
         Google Analytics sets the following cookies:
 
-        | Name                                      | Purpose                                                                        | Expires                   |
-        | ------------------------------------------| ------------------------------------------------------------------------------ | ------------------------- |
-        | _ga_L17YMGD11W                            | Used to persist session state                                                  | 2 years                   |
-        | _ga                                       | Used to distinguish users                                                      | 2 years                   |
-        | _gid                                      | Used to distinguish users                                                      | 24 hours                   |
-        | _ga_WRRWDTSGBP                            | Used to distinguish users                                                      | 2 years                    |
-        | _ga_76JLPNZBCP                            | Used to distinguish users                                                      | 18 months                    |
-
-      change_cookies_header: Change your cookie settings
-      change_cookies_question: Do you want to accept analytics cookies?
-      preferences_saved_html: You’ve set your cookie preferences. <a class='govuk-link' href='%{return_url}'>Go back to Early years child development training.</a>
+        | Name                                       | Purpose                                                                        | Expires                   |
+        | ------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------- |
+        | _ga_L17YMGD11W                             | Used to persist session state                                                  | 2 years                   |
+        | _ga                                        | Used to distinguish users                                                      | 2 years                   |
+        | _gid                                       | Used to distinguish users                                                      | 24 hours                  |
+        | _ga_WRRWDTSGBP                             | Used to distinguish users                                                      | 2 years                   |
+        | _ga_76JLPNZBCP                             | Used to distinguish users                                                      | 18 months                 |
+        
