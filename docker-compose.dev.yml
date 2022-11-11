@@ -8,6 +8,7 @@ services:
     command: foreman start -f Procfile.dev
     healthcheck:
       test: curl --fail http://localhost:3000/health || exit 1
+    restart: on-failure
     environment:
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
       - RAILS_ENV=development
@@ -15,7 +16,7 @@ services:
       - RAILS_SERVE_STATIC_FILES=true
       - TIMEOUT_MINUTES=360
       - TRAINING_MODULES
-      - BOT
+      - BOT_TOKEN
     volumes:
       - .:/srv
     tty: true
@@ -25,15 +26,31 @@ services:
     volumes:
       - db_dev:/var/lib/postgresql/data
 
+  doc:
+    container_name: recovery_doc
+    image: recovery:dev
+    command: yard server
+    healthcheck:
+      test: curl --fail http://localhost:8808 || exit 1
+    volumes:
+      - .:/srv
+    ports:
+      - 8808:8808
+    networks:
+      - recovery
+
   pa11y:
     container_name: recovery_pa11y
     build:
       context: .
-      dockerfile: pa11y.Dockerfile
+      target: pa11y
     image: recovery:pa11y
     environment:
       - DOMAIN=app:3000
-      - BOT
+      - BOT_TOKEN
+    depends_on:
+      app:
+        condition: service_healthy
     networks:
       - recovery
     volumes:

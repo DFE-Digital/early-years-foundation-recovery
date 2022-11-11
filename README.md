@@ -2,36 +2,16 @@
 
 [![Continuous Integration][ci-badge]][ci-workflow]
 
+This is a Rails 7 application using the [DfE template][rails-template].
+
+Optionally create `.env` to override or set default variables like `DATABASE_URL`.
+
 ## Getting Started
 
-1. Clone the repository
-
-  This is a Rails 7 application using the [DfE template][rails-template].
-
-2. Install git-secrets
-
-  This will help to prevent unintentional commits of access keys.
-
-  - `brew install git-secrets`
-  - `cd /path/to/my/repo`
-  - `git secrets --install`
-  - `git secrets --register-aws`
-
-Find advanced settings and other installation options at the [git-secrets project][git-secrets].
-
+1. Clone the [repository][app-repo]
+2. Install [git-secrets](#git-secrets)
 3. Obtain the master keys
-
-  Optionally create `.env` to override or set default variables like `DATABASE_URL`.
-
-4. Install the frontend dependencies
-
-  - `yarn install; bin/rails assets:precompile`
-  - `bin/docker-yarn` if using [Docker][docker]
-
-5. Start the server
-
-  - `bin/dev` *(requires a running database server)*
-  - `bin/docker-dev` if using [Docker][docker]
+4. Start the server
 
 ## Useful Links
 
@@ -50,6 +30,17 @@ of the deployed environments, you can get the encryption keys from another devel
 
 Once you have the keys, run `rails credentials:edit --environment <env>`.
 Full instructions can be found by running `rails credentials:help`
+
+## Git Secrets
+
+This will help to prevent unintentional commits of access keys.
+
+- `brew install git-secrets`
+- `cd /path/to/my/repo`
+- `git secrets --install`
+- `git secrets --register-aws`
+
+Find advanced settings and other installation options at the [git-secrets project][git-secrets].
 
 ---
 
@@ -80,7 +71,8 @@ Use `bin/qa` to run the test framework under `/ui` against a given URL.
 These tests have additional dependencies:
 
 - `brew install chromedriver geckodriver`
-- `xattr -d com.apple.quarantine /usr/local/bin/chromedriver`
+- `xattr -d com.apple.quarantine /usr/local/bin/chromedriver` on Intel
+- `xattr -d com.apple.quarantine /opt/homebrew/bin/chromedriver` on ARM
 
 ## Using Docker
 
@@ -97,19 +89,21 @@ These commands help maintain your containerised workspace:
     generated inside containers are created by *root*
 - `bin/docker-down` stop any active services
 - `bin/docker-prune` purge project containers, volumes and images
-- `bin/docker-yarn` warm the cache of frontend dependencies
 
 The commands run common tasks inside containers:
 
 - `bin/docker-adr` rebuilds the architecture decision records table of contents
 - `bin/docker-dev` starts `Procfile.dev`, containerised equivalent of `bin/dev`,
-    using the `docker-compose.dev.yml` override.
+    using the `docker-compose.dev.yml` override
     Additionally, it will install bundle and yarn dependencies.
+- `bin/docker-rails erd` generate an Entity Relationship Diagram
 - `bin/docker-rails db:seed` populates the containerised postgres database
 - `bin/docker-rails console` drops into a running development environment or starts one,
     containerised equivalent of `bin/rails console`
 - `bin/docker-rspec -f doc` runs the test suite with optional arguments, containerised
     equivalent of `bin/rspec`
+- `bin/docker-doc` runs a YARD documentation server
+- `bin/docker-uml` exports UML diagrams as default PNGs
 - `bin/docker-qa` runs the browser tests against a running production application,
     a containerised equivalent of `bin/qa`
 - `bin/docker-pa11y` runs WCAG checks against a generated `sitemap.xml`
@@ -192,8 +186,13 @@ WIP: proposed Github workflow that does not require `docker-compose`.
 An automated accessibility audit can be run against a development server running
 in Docker using `./bin/docker-pa11y`. The test uses [pa11y-ci](https://github.com/pa11y/pa11y-ci)
 and a dynamic `sitemap.xml` file to ensure the project meets [WCAG2AA](https://www.w3.org/WAI/WCAG2AA-Conformance) standards.
-A secure HTTP header is used to provide access to pages that require authentication.
-The secret `$BOT` environment variable defines the account to seed.
+A secure HTTP header `BOT` is used to provide access to pages that require authentication.
+The secret `$BOT_TOKEN` environment variable defines the account to seed.
+
+```
+curl -i -L -H "BOT: ${BOT_TOKEN}" http://localhost:3000/my-account
+```
+
 `docker-pa11y` accepts an optional argument to test external sites.
 
 ---
@@ -238,10 +237,11 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
 ## Content
 
-Content designers are using the docker development environment.
+Content designers are also using the docker development environment.
+
 You can demo this environment locally using the account `completed@example.com:StrongPassword`.
 When there are significant changes to content structure a soft restart the server may be necessary `./bin/docker-rails restart`.
-Styling changes show render automatically.
+CSS styling changes will appear automatically without needing to restart.
 
 ### YAML
 
@@ -256,6 +256,7 @@ Styling changes show render automatically.
 
 ---
 
+[app-repo]: https://github.com/DFE-Digital/early-years-foundation-recovery
 [confluence]: https://dfedigital.atlassian.net/wiki/spaces/ER/overview
 [production]: https://eyfs-covid-recovery.london.cloudapps.digital
 [staging]: https://ey-recovery-staging.london.cloudapps.digital

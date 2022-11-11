@@ -1,0 +1,16 @@
+- name: Childminder
+  group: childminder
+- name: Childminder assistant
+  group: childminder
+- name: Owner or directory
+  group: other
+- name: Manager or team leader
+  group: other
+- name: Practitioner
+  group: other
+- name: Trainee
+  group: other
+- name: Student or studying
+  group: other
+- name: Trainer or lecturer
+  group: other

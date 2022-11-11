@@ -1,0 +1,97 @@
+@startuml
+' custom themes
+' !theme sketchy-outline
+
+' make <<style>> invisible
+' hide stereotype
+
+
+<style>
+  .app {
+    BackgroundColor LightBlue
+  }
+  .platform {
+    BackgroundColor DarkSlateGray
+    FontColor White
+  }
+  .space {
+    BackgroundColor LightGreen
+  }
+  .i {
+    BackgroundColor SkyBlue
+    FontStyle italic
+  }
+  .b {
+    BackgroundColor LightSlateGray
+    FontStyle italic
+  }
+}
+</style>
+
+' Legend colours need to be updated manually
+legend
+|<back:DarkSlateGray><color:White>Platform|
+|<back:LightGreen>Environments|
+|<back:LightBlue>Application|
+|<back:SkyBlue>Server|
+|<back:LightSlateGrey>Backend Services|
+endlegend
+
+
+
+rectangle "Early Years Recovery Deployment" {
+  rectangle "Application" as app <<app>> {
+    node "Ruby on Rails" as rails
+    database "Postgres DB" as postgres <<b>>
+  }
+
+  rectangle "Prototype" as prototype <<app>> {
+    node "Node JS"
+  }
+
+  ' rectangle "Gov.uk Notify" as notify <<b>>
+
+  rectangle "Deployment Environments" {
+
+    rectangle "Railway" <<platform>> {
+      artifact "eye-recovery.railway.app" as UR <<i>>
+    }
+
+    rectangle "GPaaS" as cf <<platform>> {
+      rectangle "ey-recovery" as prod <<space>> {
+        artifact "child-development-training.education.gov.uk" as v1 <<i>>
+      }
+
+      rectangle "ey-recovery-staging" as preprod <<space>> {
+        artifact "ey-recovery-staging.london.cloudapps.digital" as rc1 <<i>>
+        artifact "ey-recovery-dev.london.cloudapps.digital" as main <<i>>
+      }
+
+      ' artifact or node? or device?
+      rectangle "ey-recovery-content" as feature <<space>> {
+        artifact "ey-recovery-pr-123.london.cloudapps.digital" as 123 <<i>>
+        artifact "ey-recovery-pr-124.london.cloudapps.digital" as 124 <<i>>
+        artifact "ey-recovery-pr-125.london.cloudapps.digital" as 125 <<i>>
+      }
+    }
+  }
+}
+
+
+note right of rails
+Rails v7.0.4, Ruby 3.1.0
+endnote
+note bottom of main: main
+note bottom of 123: ER-456-new-feature
+note bottom of rc1: rc0.0.1
+note bottom of v1: v0.0.1
+
+
+rails --> postgres
+prototype --> UR: User research
+app --> main: Bleeding edge
+app --> 123: Feature review
+app --> rc1: Pre-production candidate
+app --> v1: Production release
+
+@enduml
