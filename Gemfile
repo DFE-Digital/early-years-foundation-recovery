@@ -93,6 +93,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'brakeman'
   gem 'pry-doc'
   gem 'rails-erd'
   gem 'redcarpet' # code syntax in Yardoc
