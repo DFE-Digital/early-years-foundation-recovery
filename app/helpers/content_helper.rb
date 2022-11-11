@@ -73,4 +73,8 @@ module ContentHelper
   def progress_indicator(status, colour)
     govuk_tag(text: t(status, scope: 'module_indicator'), colour: colour)
   end
+
+  def service_name
+    Rails.configuration.service_name
+  end
 end

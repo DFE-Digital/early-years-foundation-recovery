@@ -3,7 +3,7 @@
 - content_for :devise_form do
   = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
     = f.govuk_error_summary
-    = f.govuk_fieldset legend: { text: 'Create an Early years child development training account' } do
+    = f.govuk_fieldset legend: { text: "Create an #{service_name} account" } do
       p.govuk-body
         | Create an account to access training courses.
 
