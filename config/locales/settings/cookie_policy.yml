@@ -3,6 +3,10 @@ en:
   settings:
     cookie:
       heading: Cookies
+      subheading: Change your cookie settings
+      legend: Do you want to accept analytics cookies?
+      flash: |
+        You’ve set your cookie preferences. [Go back to Child development training](%{path}).
       content: |
         Cookies are small files saved on your phone, tablet or computer when you
         visit a website.
@@ -77,7 +81,4 @@ en:
         | ----------- | ----------- | ----------- |
         | _hjRecordingEnabled	| Tells Hotjar if you are already in a recording in a particular session.	| Per session
         | _hjRecordingLastActivity	| Gets updated when a visitor recording starts and when you perform an action that Hotjar records.	| Per session
-
-      change_cookies_header: Change your cookie settings
-      change_cookies_question: Do you want to accept analytics cookies?
-      preferences_saved_html: You’ve set your cookie preferences. <a class='govuk-link' href='%{return_url}'>Go back to Early years child development training.</a>
+        
