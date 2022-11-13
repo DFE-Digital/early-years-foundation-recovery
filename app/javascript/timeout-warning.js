@@ -90,9 +90,6 @@ TimeoutWarning.prototype.countIdleTime = function () {
   function resetIdleTime () {
     // As user has interacted with the page, reset idle time
     clearTimeout(idleTime)
-    console.log('Timer started')
-    console.log(milliSecondsBeforeTimeOut)
-    console.log('Timer started')
     // Start new idle time
     idleTime = setTimeout(this.openDialog.bind(this), milliSecondsBeforeTimeOut)
 
@@ -165,7 +162,7 @@ TimeoutWarning.prototype.startUiCountdown = function () {
 
     // Below string will get read out by screen readers every time the timeout refreshes (every 15 secs. See below).
     // Please add additional information in the modal body content or in below extraText which will get announced to AT the first time the time out opens
-    var text = 'For security reasons you will be signed out of the service in ' + minutesText + secondsText + '.'
+    var text = 'For security reasons you will be signed out of the service in <strong>' + minutesText + secondsText + '</strong>.'
     var atText = 'For security reasons you will be signed out of the service in ' + atMinutesText
     if (atSecondsText) {
       if (minutesLeft > 0) {
@@ -175,7 +172,7 @@ TimeoutWarning.prototype.startUiCountdown = function () {
     } else {
       atText += '.'
     }
-    var extraText = ' We do this to keep your information secure.'
+    var extraText = ''
 
     if (timerExpired) {
       // TO DO - client/server interaction
@@ -418,39 +415,6 @@ TimeoutWarning.prototype.numberToWords = function () {
   return words.reverse().join(' ')
 }
 
-// function nodeListForEach (nodes, callback) {
-//   if (window.NodeList.prototype.forEach) {
-//     return nodes.forEach(callback)
-//   }
-//   for (var i = 0; i < nodes.length; i++) {
-//     callback.call(window, nodes[i], i, nodes)
-//   }
-// }
-
-
-// TimeoutWarning.prototype.pollForSessionTimeout = function() {
-//   // let app = this;
-//   let request = new XMLHttpRequest();
-//   request.onload = function (event) {
-//     var status = event.target.status;
-//     var response = event.target.response;
-    
-//     // if the remaining valid time for the current user session is less than or equals to 0 seconds.
-//     // if (status === 200 && (response <= 0)) {
-//     //   window.location.href = '/users/sign-out';
-//     // }
-//   };
-//   request.open('GET', '/check_session_timeout', true);
-//   request.responseType = 'json';
-//   request.send();
-
-//   request.onreadystatechange = function() {
-//       if (request.readyState == XMLHttpRequest.DONE) {
-//           this.timeUserLastInteractedOnServer = request.response
-//       }
-//   }
-  
-// }
 TimeoutWarning.prototype.pollForSessionTimeout = function() {
   axios.get('/check_session_timeout')
     .then((response) => {
@@ -464,8 +428,7 @@ TimeoutWarning.prototype.pollForSessionTimeout = function() {
 
 TimeoutWarning.prototype.resetSessionTimeout = function() {
   axios.get('/extend_session')
-    .then((response))
-    .catch(error => console.log(error));
+    .catch(error => console.log(error))
 }
 
 TimeoutWarning.prototype.serverResponse = function(responseServer) {
@@ -477,10 +440,4 @@ TimeoutWarning.prototype.serverResponsePoll = function(responseServer) {
   this.timeUserLastInteractedOnServerTimout = setTimeout(this.pollForSessionTimeout(), 200);
 }
 
-
-//  var $timeoutWarnings = document.querySelectorAll('[data-module="govuk-timeout-warning"]')
-//   nodeListForEach($timeoutWarnings, function ($timeoutWarning) {
-//     new TimeoutWarning($timeoutWarning).init()
-//   });
-
-  export default TimeoutWarning;
+export default TimeoutWarning;

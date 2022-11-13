@@ -1,5 +1,5 @@
 class SessionExtendController < Devise::SessionsController
-  before_action :authenticate_registered_user!, only: [:check_session_timeout, :render_timeout]
+  before_action :authenticate_registered_user!, only: [:extend_session]
   
   def extend_session
     response.headers["Etag"] = "" # clear etags to prevent caching
