@@ -23,8 +23,8 @@ RSpec.describe Users::SettingTypeForm do
 
       form.save
       expect(user.setting_type).to eq('Department for Education')
-      expect(user.local_authority).to eq(nil)
-      expect(user.role_type).to eq(nil)
+      expect(user.local_authority).to eq('Not applicable')
+      expect(user.role_type).to eq('Not applicable')
     end
     # rubocop:enable Rails/SaveBang
   end
