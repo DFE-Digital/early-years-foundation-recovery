@@ -17,11 +17,11 @@ module ApplicationHelper
 
   # @return [String]
   def custom_logo
-    image = image_tag('crest.png', alt: 'Department for Education homepage', class: 'govuk-header__logotype-crown-fallback-image')
-    dfe = content_tag(:span, 'Department for Education | ', class: 'govuk-header__logotype-text')
-    service_name = content_tag(:span, 'Early years child development training', class: 'govuk-header__product-name')
-
-    "#{image} #{dfe}#{service_name}".html_safe
+    [
+      image_tag('crest.png', alt: 'Department for Education homepage', class: 'govuk-header__logotype-crown-fallback-image'),
+      content_tag(:span, 'Department for Education | ', class: 'govuk-header__logotype-text'),
+      content_tag(:span, 'Early years child development training', class: 'govuk-header__product-name'),
+    ].join.html_safe
   end
 
   # @return [String]
