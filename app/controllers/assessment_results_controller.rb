@@ -20,7 +20,7 @@ private
   end
 
   def track_summative_assessment_pass?
-    @assessment.successful_attempt? && assessment_pass_untracked?
+    @assessment.attempted? && @assessment.passed? && assessment_pass_untracked?
   end
 
   def assessment_pass_untracked?
