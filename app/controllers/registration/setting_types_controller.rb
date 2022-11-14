@@ -10,7 +10,7 @@ class Registration::SettingTypesController < Registration::BaseController
       if @user_form.local_authority_next?
         redirect_to edit_registration_local_authority_path
       else
-        complete_registration
+        complete_journey
       end
     else
       render :edit, status: :unprocessable_entity

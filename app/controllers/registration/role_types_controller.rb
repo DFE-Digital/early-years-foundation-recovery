@@ -10,7 +10,7 @@ class Registration::RoleTypesController < Registration::BaseController
 
     if @user_form.save
       if current_user.registration_complete?
-        redirect_to user_path, notice: 'Role is updated'
+        redirect_to user_path, notice: t('.complete_update')
       else
         complete_registration
       end

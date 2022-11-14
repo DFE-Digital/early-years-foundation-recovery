@@ -3,11 +3,11 @@ class Registration::BaseController < ApplicationController
 
 private
 
-  def next_action
+  def complete_journey
     if current_user.registration_complete?
-      user_path
+      redirect_to user_path, notice: t('.complete_update')
     else
-      yield
+      complete_registration
     end
   end
 
@@ -16,9 +16,9 @@ private
     current_user.update! registration_complete: true
     if current_user.display_whats_new?
       current_user.update! display_whats_new: false
-      redirect_to static_path('whats-new'), notice: t('.complete')
+      redirect_to static_path('whats-new'), notice: t('.complete_registration')
     else
-      redirect_to my_modules_path, notice: t('.complete')
+      redirect_to my_modules_path, notice: t('.complete_registration')
     end
   end
 
