@@ -82,7 +82,7 @@ en:
         body: We're asking for your details so we can personalise your training certificates.
         button: Continue
       update:
-        complete_update: You have updated your details successfully
+        complete_update: You have updated your details
     setting_types:
       edit:
         heading: What setting type do you work in?
@@ -100,7 +100,8 @@ en:
         autocomplete-not-found: No setting found.
       update:
         complete_registration: Thank you for creating a child development training account. You can now start the first module.
-        complete_update: You have updated your details successfully
+        update_registration: Thank you for updating your child development training account. You can now continue.
+        complete_update: You have updated your details
     setting_type_others:
       edit:
         heading: Where do you work?
@@ -108,7 +109,8 @@ en:
         button: Continue
       update:
         complete_registration: Thank you for creating a child development training account. You can now start the first module.
-        complete_update: You have updated your details successfully
+        update_registration: Thank you for updating your child development training account. You can now continue.
+        complete_update: You have updated your details
     local_authorities: 
       edit:
         heading: What local authority area do you work in?
@@ -120,7 +122,8 @@ en:
         autocomplete-not-found: No local authority found.
       update:
         complete_registration: Thank you for creating a child development training account. You can now start the first module.
-        complete_update: You have updated your details successfully
+        update_registration: Thank you for updating your child development training account. You can now continue.
+        complete_update: You have updated your details
     role_types:
       edit:
         heading: Which of the following best describes your role?
@@ -130,7 +133,8 @@ en:
         link_to_role_type_other: I would describe my role in another way.
       update:
         complete_registration: Thank you for creating a child development training account. You can now start the first module.
-        complete_update: You have updated your details successfully
+        update_registration: Thank you for updating your child development training account. You can now continue.
+        complete_update: You have updated your details
     role_type_others:
       edit:
         heading: What is your role?
@@ -138,7 +142,8 @@ en:
         button: Continue
       update:
         complete_registration: Thank you for creating a child development training account. You can now start the first module.
-        complete_update: You have updated your details successfully
+        update_registration: Thank you for updating your child development training account. You can now continue.
+        complete_update: You have updated your details
   setting_type:
     heading: Change your setting's information
 
