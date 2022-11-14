@@ -36,6 +36,8 @@ module EarlyYearsFoundationRecovery
     config.training_modules = ENV.fetch('TRAINING_MODULES', 'training-modules')
     config.unlock_in_minutes = ENV.fetch('UNLOCK_IN_MINUTES', '120').to_i
     config.user_timeout_minutes = ENV.fetch('TIMEOUT_MINUTES', '15').to_i
+    config.user_timeout_idle_minutes = ENV.fetch('TIMEOUT_IDLE_MINUTES', '5').to_f
+    config.user_timeout_grace_minutes = ENV.fetch('TIMEOUT_GRACE_MINUTES', '5').to_f
 
     config.middleware.use Grover::Middleware
     config.active_record.yaml_column_permitted_classes = [Symbol]

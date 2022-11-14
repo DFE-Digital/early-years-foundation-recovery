@@ -1,8 +1,8 @@
 class ErrorsController < ApplicationController
   before_action :log_error
 
+  # @see TimeoutHelper
   def timeout
-    @user_timeout_minutes = Rails.configuration.user_timeout_minutes
   end
 
   # 404 error

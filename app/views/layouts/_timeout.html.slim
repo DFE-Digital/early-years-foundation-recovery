@@ -1,0 +1,30 @@
+/[if lt IE 8]
+  script[src="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.5.0/dialog-polyfill.js"]
+
+.govuk-timeout-warning-fallback
+  p You're about to be signed out
+  p We do this to keep your information secure.
+
+dialog#js-timeout-warning.govuk-timeout-warning.dialog data-module='govuk-timeout-warning' data-user-status=timeout_active data-minutes-idle-timeout=timeout_idle data-minutes-modal-visible=timeout_grace data-url-redirect='/users/sign-out' role='dialog' aria-live='polite' aria-labelledby='dialog-title' aria-describedby='at-timer'
+
+  h1#dialog-title.govuk-heading-l You're about to be signed out
+
+  .govuk-body
+    .timer aria-hidden='true' aria-relevant='additions'
+    #at-timer.at-timer.govuk-visually-hidden role='status'
+
+  p.govuk-body Your progress has been saved
+
+  button.govuk-button.dialog-button.js-dialog-close data-module='govuk-button'
+    | Stay signed in
+
+  button.govuk-button.govuk-button--secondary.js-dialog-cancel data-module='govuk-button'
+    | Sign out now
+
+- if Rails.env.development? || ENV['WORKSPACE'].eql?('content')
+  pre.debug_dump
+    ul
+      li timeout enabled: #{timeout_active}
+      li timeout after: #{timeout_duration} minutes
+      li timeout warning after: #{timeout_idle} minutes
+      li timeout countdown for: #{timeout_grace} minutes

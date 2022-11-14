@@ -6,8 +6,9 @@ import TimeoutWarning from "./timeout-warning";
 import "./controllers";
 
 import { initAll } from "govuk-frontend";
-import 'govuk-frontend/govuk/vendor/polyfills/Function/prototype/bind'
-import 'govuk-frontend/govuk/vendor/polyfills/Element/prototype/classList'
+
+import "govuk-frontend/govuk/vendor/polyfills/Function/prototype/bind";
+import "govuk-frontend/govuk/vendor/polyfills/Element/prototype/classList";
 
 function nodeListForEach (nodes, callback) {
   if (window.NodeList.prototype.forEach) {
@@ -25,7 +26,12 @@ Govuk Accordion component suffers from lag without the turbo listener
 */
 document.addEventListener("turbo:load", function() {
   initAll();
- var $timeoutWarnings = document.querySelectorAll('[data-module="govuk-timeout-warning"]')
+
+  /*
+  timeout functionality
+  */
+  var $timeoutWarnings = document.querySelectorAll('[data-module="govuk-timeout-warning"]')
+
   nodeListForEach($timeoutWarnings, function ($timeoutWarning) {
     new TimeoutWarning($timeoutWarning).init()
   });
