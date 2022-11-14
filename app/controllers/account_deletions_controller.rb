@@ -9,6 +9,7 @@ class AccountDeletionsController < ApplicationController
     if user.valid_password?(user_password_params[:current_password])
       redirect_to confirm_delete_account_user_account_deletion_path
     else
+      user.errors.add(:current_password, :confirmation_invalid, message: 'Enter a valid password')
       render :edit, status: :unprocessable_entity
     end
   end

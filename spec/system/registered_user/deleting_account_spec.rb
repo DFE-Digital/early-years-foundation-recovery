@@ -15,15 +15,16 @@ RSpec.describe 'Account deletion' do
     end
 
     it 'can continue with correct password' do
-      fill_in 'Your password', with: user.password
+      fill_in 'For security, enter your password', with: user.password
       click_on 'Continue'
       expect(page).to have_current_path '/my-account/account-deletion/confirm-delete-account'
     end
 
     it 'cannot continue with incorrect password' do
-      fill_in 'Your password', with: 'IncorrectPassword'
+      fill_in 'For security, enter your password', with: 'IncorrectPassword'
       click_on 'Continue'
-      expect(page).to have_content 'There is a problem'
+      expect(page).to have_content('There is a problem')
+        .and have_content('Enter a valid password')
     end
 
     it 'has option to abort' do
@@ -54,12 +55,13 @@ RSpec.describe 'Account deletion' do
 
     it 'redacts information' do
       click_on 'Close my account'
-      expect(User.first.first_name).to eq 'Redacted'
-      expect(User.first.last_name).to eq 'User'
-      expect(User.first.email).to have_text 'redacted_user'
-      expect(User.first.notes.first.body).to eq nil
-      expect(User.first.valid_password?('redacteduser')).to eq true
-      expect(User.first.ofsted_number).to eq ''
+      user.reload
+      expect(user.first_name).to eq 'Redacted'
+      expect(user.last_name).to eq 'User'
+      expect(user.email).to have_text 'redacted_user'
+      expect(user.notes.first.body).to eq nil
+      expect(user.valid_password?('redacteduser')).to eq true
+      expect(user.ofsted_number).to eq nil
     end
   end
 end
