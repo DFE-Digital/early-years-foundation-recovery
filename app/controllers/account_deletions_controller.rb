@@ -34,8 +34,8 @@ private
 
   def redact_user_info
     user.skip_reconfirmation!
-    user.update!(first_name: 'Redacted', last_name: 'User', account_deleted_at: Time.zone.now, 
-      email: "redacted_user#{user.id}@example.com", password: "redacteduser", ofsted_number: nil)
+    user.update!(first_name: 'Redacted', last_name: 'User', account_deleted_at: Time.zone.now,
+                 email: "redacted_user#{user.id}@example.com", password: 'redacteduser', ofsted_number: nil)
     user.notes.update_all(body: nil)
   end
 end

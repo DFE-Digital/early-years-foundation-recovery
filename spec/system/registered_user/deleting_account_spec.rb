@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Account deletion' do
   include_context 'with user'
-  
+
   it 'has button to close account' do
     visit '/my-account'
     click_on 'Request to close account'
@@ -34,24 +34,24 @@ RSpec.describe 'Account deletion' do
 
   context 'when on confirmation page' do
     let!(:note) { create(:note) }
-    
+
     before do
       user.notes.push(note)
       user.save!
       visit '/my-account/account-deletion/confirm-delete-account'
     end
-    
+
     it 'has option to abort' do
-      click_on 'Cancel and go back to my account'  
+      click_on 'Cancel and go back to my account'
       expect(page).to have_current_path '/my-account'
     end
-    
+
     it 'can close account' do
       click_on 'Close my account'
-      
+
       expect(page).to have_text 'Account closed'
     end
-    
+
     it 'redacts information' do
       click_on 'Close my account'
       expect(User.first.first_name).to eq 'Redacted'
