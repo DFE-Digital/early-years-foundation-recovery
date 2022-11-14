@@ -76,24 +76,13 @@ en:
   date_completed: "Date completed: %{date}"
 
   registration:
-    edit_setting_type:
-      heading: Your setting type
-      body: |
-        {:.govuk-hint}
-          Search for the type of setting or organisation you work in, for example childminder or nursery.
-          
-        {:.govuk-hint}
-          If you work in more than one early years setting, enter the one where you work most often.
-
-        {:.govuk-hint}
-          Your training progress won't be shared with anyone without your permission.
-      button: Save
-      link_to_setting_type_other: I cannot find my setting or organisation
     names:
       edit:
         heading: About you
         body: We're asking for your details so we can personalise your training certificates.
         button: Continue
+      update:
+        complete_update: You have updated your details
     setting_types:
       edit:
         heading: What setting type do you work in?
@@ -110,14 +99,18 @@ en:
         link_to_setting_type_other: I cannot find my setting or organisation
         autocomplete-not-found: No setting found.
       update:
-        complete: Thank you for creating a child development training account. You can now start the first module.
+        complete_registration: Thank you for creating a child development training account. You can now start the first module.
+        update_registration: Thank you for updating your child development training account. You can now continue.
+        complete_update: You have updated your details
     setting_type_others:
       edit:
         heading: Where do you work?
         body: Enter the type of setting or organisation where you work.
         button: Continue
       update:
-        complete: Thank you for creating a child development training account. You can now start the first module.
+        complete_registration: Thank you for creating a child development training account. You can now start the first module.
+        update_registration: Thank you for updating your child development training account. You can now continue.
+        complete_update: You have updated your details
     local_authorities: 
       edit:
         heading: What local authority area do you work in?
@@ -128,7 +121,9 @@ en:
         multiple_local_authorities: I work across more than one local authority
         autocomplete-not-found: No local authority found.
       update:
-        complete: Thank you for creating a child development training account. You can now start the first module.
+        complete_registration: Thank you for creating a child development training account. You can now start the first module.
+        update_registration: Thank you for updating your child development training account. You can now continue.
+        complete_update: You have updated your details
     role_types:
       edit:
         heading: Which of the following best describes your role?
@@ -137,14 +132,18 @@ en:
         button: Continue
         link_to_role_type_other: I would describe my role in another way.
       update:
-        complete: Thank you for creating a child development training account. You can now start the first module.
+        complete_registration: Thank you for creating a child development training account. You can now start the first module.
+        update_registration: Thank you for updating your child development training account. You can now continue.
+        complete_update: You have updated your details
     role_type_others:
       edit:
         heading: What is your role?
         body: Enter your job title.
         button: Continue
       update:
-        complete: Thank you for creating a child development training account. You can now start the first module.
+        complete_registration: Thank you for creating a child development training account. You can now start the first module.
+        update_registration: Thank you for updating your child development training account. You can now continue.
+        complete_update: You have updated your details
   setting_type:
     heading: Change your setting's information
 
