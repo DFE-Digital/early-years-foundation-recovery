@@ -19,11 +19,6 @@ FactoryBot.define do
       terms_and_conditions_agreed_at { Date.new(2000, 0o1, 0o1) }
     end
 
-    trait :completed do
-      registered
-      ofsted_number { 'EY123456' }
-    end
-
     trait :name do
       first_name { Faker::Name.first_name }
       last_name { Faker::Name.last_name }

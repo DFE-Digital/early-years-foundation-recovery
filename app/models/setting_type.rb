@@ -1,4 +1,14 @@
 class SettingType < YamlBase
+  class Other
+    def local_authority_next?
+      true
+    end
+
+    def role_type_next?
+      true
+    end
+  end
+
   set_filename 'setting-type'
 
   def self.valid_setting_types

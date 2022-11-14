@@ -2,6 +2,17 @@
 en:
   static:
     new_registration:
-      heading: Please update your registration
+      heading: Update your registration details
       content: |
-        We've updated our registration process.
+        You need to update your registration details to access the Early Years Child Development Training course.
+
+        We've changed the information we are asking for you to give to register for an account.
+        Our <a class='govuk-link' href='/privacy-policy'>privacy policy</a> explains how we will use this information.
+
+        We are no longer collecting the Ofsted number or postcode for your setting. If you previously gave this information, we have deleted it from our records.
+
+        We will now ask you to tell us:
+        
+          * the type of setting you work in - we have added more options for you to choose from
+          * your local authority
+          * your job role 
