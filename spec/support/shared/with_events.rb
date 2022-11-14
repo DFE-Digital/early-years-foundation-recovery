@@ -1,7 +1,7 @@
 RSpec.shared_context 'with events' do
-  let(:user) { create(:user, :completed) }
-  let(:user1) { create(:user, :completed) }
-  let(:user2) { create(:user, :completed) }
+  let(:user) { create(:user, :registered) }
+  let(:user1) { create(:user, :registered) }
+  let(:user2) { create(:user, :registered) }
 
   let(:events) do
     Ahoy::Event.where(user_id: user.id).where_properties(training_module_id: module_name)
