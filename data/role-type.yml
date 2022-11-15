@@ -2,7 +2,7 @@
   group: childminder
 - name: Childminder assistant
   group: childminder
-- name: Owner or directory
+- name: Owner or director
   group: other
 - name: Manager or team leader
   group: other
