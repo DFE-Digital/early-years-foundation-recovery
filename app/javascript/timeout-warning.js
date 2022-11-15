@@ -1,5 +1,16 @@
-// import '../../vendor/polyfills/Function/prototype/bind'
-// import '../../vendor/polyfills/Element/prototype/classList'
+/**
+ * 
+ * Plugin has been in test by alphagov documentation and code links below
+ * 
+ * Github repo
+ * https://github.com/hannalaakso/accessible-timeout-warning
+ * 
+ * Documentation here
+ * https://github.com/alphagov/govuk-design-system-backlog/issues/104
+ * 
+ * 
+ */
+
 import axios from 'axios';
 
 function TimeoutWarning ($module) {
