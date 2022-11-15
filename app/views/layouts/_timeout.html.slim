@@ -17,9 +17,9 @@ dialog#js-timeout-warning.govuk-timeout-warning.dialog data-module='govuk-timeou
   div
     button.govuk-button.dialog-button.js-dialog-close  data-module='govuk-button'
       | Stay signed in
-  div class="govuk-!-margin-top-5"
-    a.js-dialog-cancel data-module="govuk-button" href="#"
-      | Sign out now
+
+  p class="govuk-!-margin-top-5"
+    = govuk_link_to 'Sign out now', '#', class: 'js-dialog-cancel', 'data-module':'govuk-button'
 
 - if Rails.env.development? || ENV['WORKSPACE'].eql?('content')
   pre.debug_dump
