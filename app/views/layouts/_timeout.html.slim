@@ -14,12 +14,12 @@ dialog#js-timeout-warning.govuk-timeout-warning.dialog data-module='govuk-timeou
     #at-timer.at-timer.govuk-visually-hidden role='status'
 
   p.govuk-body Your progress has been saved
-
-  button.govuk-button.dialog-button.js-dialog-close data-module='govuk-button'
-    | Stay signed in
-
-  button.govuk-button.govuk-button--secondary.js-dialog-cancel data-module='govuk-button'
-    | Sign out now
+  div
+    button.govuk-button.dialog-button.js-dialog-close  data-module='govuk-button'
+      | Stay signed in
+  div class="govuk-!-margin-top-5"
+    a.js-dialog-cancel data-module="govuk-button" href="#"
+      | Sign out now
 
 - if Rails.env.development? || ENV['WORKSPACE'].eql?('content')
   pre.debug_dump

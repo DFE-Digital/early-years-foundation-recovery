@@ -40,7 +40,7 @@ TimeoutWarning.prototype.init = function () {
   if(this.userLoggedIn == 'false') {
     return
   }
-  //this.pollForSessionTimeout();
+
   // Start watching for idleness
   this.countIdleTime()
 
@@ -90,9 +90,7 @@ TimeoutWarning.prototype.countIdleTime = function () {
   function resetIdleTime () {
     // As user has interacted with the page, reset idle time
     clearTimeout(idleTime)
-    console.log('Timer started')
-    console.log(milliSecondsBeforeTimeOut)
-    console.log('Timer started')
+
     // Start new idle time
     idleTime = setTimeout(this.openDialog.bind(this), milliSecondsBeforeTimeOut)
 
@@ -262,7 +260,7 @@ TimeoutWarning.prototype.isDialogOpen = function () {
 }
 
 TimeoutWarning.prototype.closeDialog = function () {
-  console.log(this.isDialogOpen());
+
   if (this.isDialogOpen()) {
     document.querySelector('body').classList.remove(this.overLayClass)
     this.$module.close()
@@ -270,7 +268,6 @@ TimeoutWarning.prototype.closeDialog = function () {
     this.removeInertFromPageContent()
 
     this.clearTimers()
-    this.pollForSessionTimeout()
     this.resetSessionTimeout()
     this.pollForSessionTimeout()
   }
@@ -418,44 +415,10 @@ TimeoutWarning.prototype.numberToWords = function () {
   return words.reverse().join(' ')
 }
 
-// function nodeListForEach (nodes, callback) {
-//   if (window.NodeList.prototype.forEach) {
-//     return nodes.forEach(callback)
-//   }
-//   for (var i = 0; i < nodes.length; i++) {
-//     callback.call(window, nodes[i], i, nodes)
-//   }
-// }
-
-
-// TimeoutWarning.prototype.pollForSessionTimeout = function() {
-//   // let app = this;
-//   let request = new XMLHttpRequest();
-//   request.onload = function (event) {
-//     var status = event.target.status;
-//     var response = event.target.response;
-    
-//     // if the remaining valid time for the current user session is less than or equals to 0 seconds.
-//     // if (status === 200 && (response <= 0)) {
-//     //   window.location.href = '/users/sign-out';
-//     // }
-//   };
-//   request.open('GET', '/check_session_timeout', true);
-//   request.responseType = 'json';
-//   request.send();
-
-//   request.onreadystatechange = function() {
-//       if (request.readyState == XMLHttpRequest.DONE) {
-//           this.timeUserLastInteractedOnServer = request.response
-//       }
-//   }
-  
-// }
 TimeoutWarning.prototype.pollForSessionTimeout = function() {
   axios.get('/check_session_timeout')
     .then((response) => {
       if(response.data){
-        console.log(response.data);
         window.localStorage.setItem('timeUserLastInteractedWithPage', new Date())
       }
     })
@@ -477,10 +440,4 @@ TimeoutWarning.prototype.serverResponsePoll = function(responseServer) {
   this.timeUserLastInteractedOnServerTimout = setTimeout(this.pollForSessionTimeout(), 200);
 }
 
-
-//  var $timeoutWarnings = document.querySelectorAll('[data-module="govuk-timeout-warning"]')
-//   nodeListForEach($timeoutWarnings, function ($timeoutWarning) {
-//     new TimeoutWarning($timeoutWarning).init()
-//   });
-
-  export default TimeoutWarning;
+export default TimeoutWarning;
