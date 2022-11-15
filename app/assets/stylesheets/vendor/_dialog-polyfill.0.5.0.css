@@ -1,3 +1,9 @@
+
+/**
+* Original pollyfill css
+* https: //github.com/hannalaakso/accessible-timeout-warning/blob/master/src/govuk/components/timeout-warning/vendor/_dialog-polyfill.0.5.0.css
+**/
+
 dialog {
   position: absolute;
   left: 0; right: 0;

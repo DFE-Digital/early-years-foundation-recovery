@@ -8,6 +8,8 @@
  * Documentation here
  * https://github.com/alphagov/govuk-design-system-backlog/issues/104
  * 
+ * Component which this has been copied and updated from 
+ * https://github.com/hannalaakso/accessible-timeout-warning/tree/master/src/govuk/components/timeout-warning
  * 
  */
 
