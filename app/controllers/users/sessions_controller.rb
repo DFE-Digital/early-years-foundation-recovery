@@ -5,7 +5,7 @@ protected
 
   def after_sign_in_path_for(resource)
     if resource.registration_complete?
-      if resource.display_whats_new
+      if resource.display_whats_new?
         resource.display_whats_new = false
         resource.save!
         static_path('whats-new')
@@ -13,7 +13,7 @@ protected
         my_modules_path
       end
     elsif resource.private_beta_registration_complete?
-      static_path('new_registration')
+      static_path('new-registration')
     else
       edit_registration_name_path
     end
