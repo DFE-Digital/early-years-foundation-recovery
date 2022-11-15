@@ -2,8 +2,7 @@ class ErrorsController < ApplicationController
   before_action :log_error
 
   # @see TimeoutHelper
-  def timeout
-  end
+  def timeout; end
 
   # 404 error
   def not_found
