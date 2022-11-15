@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 # Take down all project services.
 # ------------------------------------------------------------------------------
@@ -9,5 +9,5 @@ for env in dev test qa; do
     -f docker-compose.yml \
     -f docker-compose.$env.yml \
     --project-name recovery \
-    down
+    down --remove-orphans
 done

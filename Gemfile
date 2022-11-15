@@ -1,19 +1,19 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.0'
+ruby '3.1.2'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '>= 7.0.3.1'
+gem 'rails', '>= 7.0.4'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 1.1'
+gem 'pg'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '~> 5.6'
+gem 'puma'
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'importmap-rails'
@@ -39,20 +39,20 @@ gem 'bootsnap', require: false
 gem 'devise'
 
 # HTML abstraction markup language
-gem 'slim-rails', '~> 3.4', '>= 3.4.0'
+gem 'slim-rails'
 
 # Create models from static data such as hashes or YAML
 gem 'active_hash'
 
 # TODO: add ey-recovery to https://github.com/DFE-Digital/govuk-components
-gem 'govuk-components', '>= 3.0.3'
+gem 'govuk-components'
 gem 'govuk_design_system_formbuilder'
 
 # Markdown support
-gem 'govspeak', '~> 6.8', '>= 6.8.2'
-gem 'sassc', '~> 2.4' # govspeak assets
+gem 'govspeak'
+gem 'sassc' # govspeak assets
 
-gem 'govuk_notify_rails', '~> 2.2', '>= 2.2.0'
+gem 'govuk_notify_rails'
 
 # Sentry -Monitor errors
 gem 'sentry-rails'
@@ -65,17 +65,17 @@ gem 'uk_postcode'
 gem 'dibber'
 
 # Track users
-gem 'ahoy_matey', '~> 4.0'
+gem 'ahoy_matey'
 
 # PDF generator middleware
-gem 'grover', '~> 1.1'
+gem 'grover'
 
 # Pa11y accessibility testing
 gem 'sitemap_generator'
 
 group :development, :test do
   # Use fake data for specs
-  gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
+  gem 'dotenv-rails'
   gem 'faker'
   gem 'foreman'
   gem 'pry-byebug'
@@ -93,6 +93,9 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'brakeman'
+  gem 'pry-doc'
+  gem 'rails-erd'
   gem 'redcarpet' # code syntax in Yardoc
   gem 'web-console'
   gem 'yard-junk'

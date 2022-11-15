@@ -1,11 +1,15 @@
 ---
+# Pa11y-CI automated accessibility audit
+#
+# - automatically runs when new code is merged into main and deployed
+# - a manually trigger run tests release candidate in pre-production by default
 # ------------------------------------------------------------------------------
 name: Check WCAG Standards
 
 on:
   workflow_run:
     workflows:
-      - Deploy Staging App
+      - Deploy Development App
     branches:
       - main
     types:
@@ -20,30 +24,33 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    environment: staging
     env:
-      BOT: ${{ secrets.BOT_TOKEN }}
-      DOMAIN: ey-recovery-${{ inputs.workspace }}.london.cloudapps.digital
+      BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+      DOMAIN: ey-recovery-${{ inputs.workspace || 'dev' }}.london.cloudapps.digital
     steps:
       -
         name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       -
-        name: Use Node.js 18
+        name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
+          cache: npm
       -
         name: Install Chrome
         uses: browser-actions/setup-chrome@latest
       -
         name: Install pa11y-ci
+        env:
+          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: 'true'
         run: |
           npm install --global --unsafe-perm puppeteer pa11y-ci
           mkdir /tmp/pa11y
-          sed -i "s/foo/${BOT}/g" .pa11yci
+          sed -i "s/token/${BOT_TOKEN}/g" .pa11yci
       -
         name: Audit
+        env:
+          PUPPETEER_EXECUTABLE_PATH: /opt/hostedtoolcache/chromium/latest/x64/chrome
         run: |
-          echo "Testing: https://${DOMAIN}/sitemap.xml"
           pa11y-ci --sitemap https://${DOMAIN}/sitemap.xml

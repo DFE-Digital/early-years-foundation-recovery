@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Authentication', type: :request do
   describe 'viewing authenticate_user! controller action' do
-    let(:action_path) { edit_extra_registration_path(ExtraRegistrationsController::STEPS.first) }
+    let(:action_path) { edit_registration_name_path }
 
     context 'with User not signed in' do
       it 'redirects to sign in page' do
@@ -85,14 +85,13 @@ RSpec.describe 'Authentication', type: :request do
     context 'with partially registered User' do
       before { sign_in create(:user, :confirmed) }
 
-      it 'redirects to extra registration' do
+      it 'redirects to finish registration' do
         get action_path
-        expect(response).to redirect_to(extra_registrations_path)
+        expect(response).to redirect_to(edit_registration_name_path)
       end
 
       it 'displays message to complete registration' do
         get action_path
-        follow_redirect!
         follow_redirect!
         expect(response.body).to include('Please complete registration')
       end

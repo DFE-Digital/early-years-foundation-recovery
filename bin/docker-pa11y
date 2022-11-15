@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 # Check accessibility of running dev container against latest sitemap
 # or an external site
@@ -13,4 +13,4 @@ docker-compose \
   -f docker-compose.yml \
   -f docker-compose.dev.yml \
   --project-name recovery \
-  run pa11y $1
+  up pa11y $1

@@ -50,6 +50,32 @@ RSpec.shared_context 'with content' do
     module_names.index_with { |mod_name| course_content[mod_name].keys }.to_h
   end
 
+  let(:module_types) do
+    module_names.index_with do |mod_name|
+      course_content[mod_name].map { |_page, meta| meta['type'] }
+    end
+  end
+
+  let(:essential_types) do
+    %w[
+      interruption_page
+      icons_page
+      module_intro
+      sub_module_intro
+      text_page
+      formative_questionnaire
+      video_page
+      summary_intro
+      assessment_intro
+      summative_questionnaire
+      assessment_results
+      confidence_intro
+      confidence_questionnaire
+      thankyou
+      certificate
+    ]
+  end
+
   # {
   #   alpha => [
   #     what-to-expect,

@@ -18,6 +18,7 @@ production:
   DOMAIN: child-development-training.education.gov.uk
   GOVUK_WEBSITE_ROOT: child-development-training
   TRACKING_ID: GTM-NFZ88TP  # Live data
+  HOTJAR_SITE_ID: 3169682
 
 # ey-recovery-staging
 staging:
@@ -40,3 +41,4 @@ content:
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
+  HOTJAR_SITE_ID: 3169682 # to be removed before merging

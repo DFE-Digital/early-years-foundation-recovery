@@ -21,8 +21,8 @@ module ApplicationHelper
         { key: { text: 'Rails version' }, value: { text: Rails.version } },
         { key: { text: 'Ruby version' }, value: { text: RUBY_VERSION } },
         { key: {
-          text: 'GOV.UK Frontend',
-        },
+            text: 'GOV.UK Frontend',
+          },
           value: {
             text: JSON
               .parse(File.read(Rails.root.join('package.json')))
