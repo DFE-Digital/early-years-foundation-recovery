@@ -129,6 +129,8 @@ Trigger a task on a deployed application in either the `ey-recovery-content` or 
 - `./bin/cf-task pr-123 eyfs:bot`
 - `./bin/cf-task dev eyfs:whats_new[email1@example.com,email2@example.com]`
 
+Refer to this script for the steps necessary to ssh in and run a task manually.
+
 ---
 
 ## Deployment Pipeline
