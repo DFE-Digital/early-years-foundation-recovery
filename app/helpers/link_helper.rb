@@ -1,61 +1,54 @@
 module LinkHelper
-  # @param questionnaire [Questionnaire]
-  # @return [String]
-  def link_to_next_question(questionnaire)
-    if questionnaire.submitted? && !questionnaire.confidence?
-      link_to_next_module_item(questionnaire.module_item)
-    else
-      submit_tag questionnaire.next_button_text, class: 'govuk-button'
-    end
-  end
-
-  # @return [String] next content page or course overview
+  # @return [String] next content page (ends on certificate)
   # @param item [ModuleItem]
-  def link_to_next_module_item(item, link_args = { class: 'govuk-button' })
-    mod = item.training_module
-    if item.next_item
-      link_to item.next_button_text, training_module_content_page_path(mod, item.next_item), link_args
-    else
-      link_to 'Finish', course_overview_path, link_args
-    end
+  def link_to_next_module_item(item)
+    text = item.next_button_text
+    path = training_module_content_page_path(item.training_module, item.next_item)
+
+    govuk_button_link_to text, path, aria: { label: 'Go to the next page' }
   end
 
   # @return [String] previous content page or module overview
   # @param item [ModuleItem]
-  def link_to_previous_module_item(item, link_args = { class: 'govuk-button govuk-button--secondary' })
-    mod = item.training_module
+  def link_to_previous_module_item(item)
     path =
       if item.previous_item
-        training_module_content_page_path(mod, item.previous_item)
+        training_module_content_page_path(item.training_module, item.previous_item)
       else
-        training_module_path(mod)
+        training_module_path(item.training_module)
       end
-    link_to 'Previous', path, link_args
+
+    govuk_button_link_to 'Previous', path,
+                         class: 'govuk-button--secondary',
+                         aria: { label: 'Go to the previous page' }
   end
 
   # @param state [Symbol]
-  # @param mod [TrainingModule]
   # @param item [ModuleItem]
   #
   # @return [String] not_started / started / failed / completed
-  def link_to_action(state, mod, item)
+  # def link_to_action(state, mod, item)
+  def link_to_action(state, item)
     text = t(state, scope: 'module_call_to_action')
     path =
       if state.eql?(:failed)
-        new_training_module_assessment_result_path(mod)
+        new_training_module_assessment_result_path(item.training_module)
       else
-        training_module_content_page_path(mod, item)
+        training_module_content_page_path(item.training_module, item)
       end
-    govuk_link_to text, path, class: 'govuk-button'
+
+    govuk_button_link_to text, path
   end
 
+  # Bottom of my-modules card component
+  #
   # @param mod [TrainingModule]
   # @return [String, nil]
   def link_to_retake_or_results(mod)
     return unless assessment_progress(mod).attempted?
 
     if assessment_progress(mod).failed?
-      govuk_link_to 'Retake end of module test', new_training_module_assessment_result_path(mod)
+      govuk_link_to 'Retake end of module test', new_training_module_assessment_result_path(mod), no_visited_state: true, class: 'card-link--retake'
     else
       govuk_link_to 'View previous test result', training_module_assessment_result_path(mod, mod.assessment_results_page)
     end

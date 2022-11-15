@@ -4,7 +4,7 @@ class NotesController < ApplicationController
 
   # GET /my-account/learning-log
   def show
-    @training_modules = TrainingModule.active.where(name: current_user.module_time_to_completion.keys)
+    @training_modules = TrainingModule.published.where(name: current_user.module_time_to_completion.keys)
   end
 
   # POST /my-account/learning-log

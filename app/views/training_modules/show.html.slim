@@ -1,3 +1,6 @@
+- content_for(:head) do 
+  = tag.meta name: 'turbo-visit-control', content: 'reload'
+
 = govuk_back_link href: my_modules_path
 
 .light-grey-box
@@ -6,8 +9,8 @@
       h1.govuk-heading-l= @training_module.title
       p.govuk-caption-m= @training_module.description
 
-      - @module_progress.call_to_action do |state, (mod, page)|
-        = link_to_action(state, mod, page)
+      - @module_progress.call_to_action do |state, page|
+        = link_to_action(state, page)
 
 = govuk_tag(text: "#{@training_module.topic_count} topics", colour: 'green')
 '

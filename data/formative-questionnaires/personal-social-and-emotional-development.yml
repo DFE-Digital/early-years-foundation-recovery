@@ -6,7 +6,9 @@ personal-social-and-emotional-development:
       1_age_conversation:
         multi_select: false
         body: |
-          True or false? At around 3 years old most children can have a conversation
+          True or false? 
+          
+          At around 3 years old most children can have a conversation
           using 2 to 3 sentences at a time.
         assessment_summary: |
           By 3 years old most children can have a conversation using 2 to 3 sentences at a time.
@@ -68,13 +70,15 @@ personal-social-and-emotional-development:
       1_choose_friends:
         multi_select: false
         body: |
-          True or false? Around the age of 5, a child will begin to choose their friends based upon characteristics they would like for themselves.
+          True or false? 
+          
+          Around the age of 5, a child will begin to choose their friends based upon characteristics they would like for themselves.
         assessment_summary: |
-          At age 5 children will want to please others and are able to take part in activities and tasks that involve cooperation and direction.
+          At age 5 children will want to please others and are able to take part in activities and tasks that involve co-operation and direction.
           
           They will be choosing their own friends and will see characteristics in friends that they would like for themselves.
         assessment_fail_summary: |
-          At age 5 children will want to please others and are able to take part in activities and tasks that involve cooperation and direction. 
+          At age 5 children will want to please others and are able to take part in activities and tasks that involve co-operation and direction. 
           
           They will be choosing their own friends and will see characteristics in friends that they would like for themselves.
         answers:
@@ -153,6 +157,7 @@ personal-social-and-emotional-development:
         multi_select: false
         body: |
           Read the scenario and answer the question:
+
           Benjamin likes to dress up in a wide variety of role play clothes, including
           items his friends think should be worn by girls.
 
@@ -191,7 +196,9 @@ personal-social-and-emotional-development:
       1_stereotypes:
         multi_select: false
         body: |
-          True or false? Children are born with preformed stereotypical and biased views.
+          True or false? 
+          
+          Children are born with preformed stereotypical and biased views.
         assessment_summary: |
           Children are not born with preformed views of others around them.
           Children will notice difference and can easily develop misconceptions,
@@ -215,11 +222,11 @@ personal-social-and-emotional-development:
           What is the term used to describe the potential impact aspects of their
           environment such as noise, light, or crowds can have on children?
         assessment_summary: |
-          ‘Overstimulation’ is the term used to describe the potential impact aspects of the environment such as noise, light, or crowds can have on children. When children become overstimulated, their responses may be interpreted as challenging or unwanted behaviour.
+          ‘Overstimulation’ is the term used to describe the potential impact aspects of the environment such as noise, light, or crowds can have on children. When children become overstimulated, they may respond by behaving in a way that you may find challenging.
 
           In your setting, children will benefit from a designated quiet area that they know they can retreat to if things become too much. A knowledge of children’s interests can also be helpful here, as they can be used as a distraction.
         assessment_fail_summary: |
-          ‘Overstimulation’ is the term used to describe the potential impact aspects of the environment such as noise, light, or crowds can have on children. When children become overstimulated, their responses may be interpreted as challenging or unwanted behaviour.
+          ‘Overstimulation’ is the term used to describe the potential impact aspects of the environment such as noise, light, or crowds can have on children. When children become overstimulated, they may respond by behaving in a way that you may find challenging.
 
           In your setting, children will benefit from a designated quiet area that they know they can retreat to if things become too much. A knowledge of children’s interests can also be helpful here, as they can be used as a distraction.
         answers:
@@ -373,7 +380,9 @@ personal-social-and-emotional-development:
       1_recognise_feelings:
         multi_select: false
         body: |
-          True or false? Children who recognise their feelings and grow up in a
+          True or false? 
+          
+          Children who recognise their feelings and grow up in a
           loving environment are more likely to be skilled at self-expression.
         assessment_summary: |
           Children who recognise their feelings are more likely to be skilled at self-expression.
@@ -399,7 +408,9 @@ personal-social-and-emotional-development:
       1_self-regulate:
         multi_select: false
         body: |
-          True or false? Being able to self-regulate helps to increase resilience and improve the ability to cope with stress.
+          True or false? 
+          
+          Being able to self-regulate helps to increase resilience and improve the ability to cope with stress.
         assessment_summary: |
           Being able to self-regulate supports the development of increased resilience and improves the ability to cope with stress. 
           
@@ -420,7 +431,9 @@ personal-social-and-emotional-development:
       1_time_management:
         multi_select: false
         body: |
-          True or false? Developing children’s understanding of time management
+          True or false?
+          
+          Developing children’s understanding of time management
           will help to build their executive function skills.
         assessment_summary: |
           Using strategies to encourage children’s understanding of time and
@@ -457,12 +470,12 @@ personal-social-and-emotional-development:
           Children can become overwhelmed and will struggle with challenges experienced as part of their daily lives if they are not effectively supported to understand and regulate their feelings. Developing self-regulation requires guidance and support.
           
           As children begin to recognise and name their feelings, they will also
-          need your support to learn to regulate them. This support can be referred to as co-regulation, meaning when you work in cooperation with others to develop skills.
+          need your support to learn to regulate them. This support can be referred to as co-regulation, meaning when you work in co-operation with others to develop skills.
         assessment_fail_summary: |
           Children can become overwhelmed and will struggle with challenges experienced as part of their daily lives if they are not effectively supported to understand and regulate their feelings. Developing self-regulation requires guidance and support.
           
           As children begin to recognise and name their feelings, they will also
-          need your support to learn to regulate them. This support can be referred to as co-regulation, meaning when you work in cooperation with others to develop skills.
+          need your support to learn to regulate them. This support can be referred to as co-regulation, meaning when you work in co-operation with others to develop skills.
         answers:
           1: They can become overwhelmed
           2: They can become more physically active

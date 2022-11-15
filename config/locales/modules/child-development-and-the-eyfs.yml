@@ -78,7 +78,7 @@ en:
 
           - how understanding child development benefits the child, practitioner and wider support network
           - the potential impact of limited child development knowledge
-          - how improved child development knowledge supports outstanding practice including:
+          - how improved child development knowledge supports practice including:
             - scaffolding learning
             - understanding behaviour
             - effective holistic support
@@ -151,10 +151,10 @@ en:
 
           <div class='blockquote-container'>
             <blockquote class='quote'>
-              <p>Intent is what you want pupils to learn: your curriculum thinking and high-level planning.</p>
+              <p>Intent is simply what you want pupils to learn: your curriculum thinking and high-level planning.</p>
               <p>Implementation is the teaching activities you choose to teach your curriculum.</p>
               <p>Impact is when that curriculum content is learned.</p>
-              <cite><a href='https://educationinspection.blog.gov.uk/2021/12/08/curriculum-keeping-it-simple/'>Ofsted, 2021</a></cite>
+              <cite> 'Curriculum: keeping it simple', Ofsted, 2021 </cite>
             </blockquote>
           </div>
 
@@ -207,14 +207,6 @@ en:
           The foundations of parent and carer partnerships are built on trust. Demonstrating your knowledge of child development will give parents and carers confidence in your ability to care for their child. Confident parents and carers will be keen to share information and strategies with you. This will benefit both you and the child.
 
           It is crucial that you are able to have honest dialogue with parents and carers to ensure they fully appreciate their child's needs. This includes when additional support is needed and how support can be given at home to enable their child to flourish.
-
-          ##Effective multi agency working
-
-          Your knowledge of child development will help you to identify where a child is not making progress and requires further support.
-
-          You will be able to use this knowledge to implement policies and procedures and ensure that children are referred to the support needed and at the earliest point possible.
-
-          Your knowledge of child development will help you to accurately fill out the required reports. This means the child will be offered appropriate support.
 
           ##A consistent approach
 
@@ -296,7 +288,7 @@ en:
 
       1-1-1-5:
         notes: true
-        heading: How improved child development knowledge supports outstanding practice - scaffolding learning
+        heading: How improved child development knowledge supports practice - scaffolding learning
         body: |
           ![A baby stacking the sections of a rainbow model on top of each other.](/assets/1-1-1-5-1354999787.jpg)
 
@@ -345,11 +337,11 @@ en:
           $BRAIN
 
       1-1-1-6:
-        heading: How improved child development knowledge supports outstanding practice - understanding behaviour
+        heading: How improved child development knowledge supports practice - understanding behaviour
         body: |
           ![Three young children playing with an outdoor water toy.](/assets/1-1-1-6-904506400.jpg)
 
-          Children can display challenging behaviour for a broad variety of reasons including:
+          Children can display behaviour you find challenging for a broad variety of reasons including:
 
           - being hungry
           - feeling unwell
@@ -357,7 +349,7 @@ en:
           - learning difficulties or disabilities
           - not knowing the unspoken rules of friendly, respectful behaviour
 
-          The learning environment can also offer potential triggers for unwanted behaviour. Your knowledge of child development will help you to avoid, minimise and resolve such incidents.
+          The learning environment can also offer potential triggers. Your knowledge of child development will help you to avoid, minimise and resolve such incidents.
 
           ##Communication issues
 
@@ -378,7 +370,7 @@ en:
 
       1-1-1-7:
         notes: true
-        heading: How improved child development knowledge supports outstanding practice - effective holistic support
+        heading: How improved child development knowledge supports practice - effective holistic support
         body: |
           ![Two young children crawling through large tubes as part of an obstacle course.](/assets/1-1-1-7-480953105.jpg)
 
@@ -386,7 +378,6 @@ en:
 
           For example, for a child to actively engage in an obstacle course they will need to be able to:
 
-          - understand and remember instructions
           - actively listen and process information
           - understand key physical movement names
           - develop balance, co-ordination and spatial awareness
@@ -403,7 +394,7 @@ en:
 
           ##Using children's interests
 
-          You can use a child’s interests to encourage them to engage in areas that they may otherwise avoid. For example a child may dislike number, colour and shape, but will quickly become immersed in a dinosaur hunt that requires problem solving involving the same concepts. You can combine your knowledge of the individual child and your understanding of their developmental stage to help them thrive.
+          You can use a child’s interests to encourage them to engage in areas that they may otherwise avoid. For example a child may disengage when it comes to number, colour and shape, but will quickly become immersed in a dinosaur hunt that requires problem solving involving the same concepts. You can combine your knowledge of the individual child and your understanding of their developmental stage to help them thrive.
 
           Some children may not yet have developed particular interests, for example as a result of limited resources at home. You will need to ensure children can explore a wide variety of resources and experiences to support them to express their likes and dislikes.
 
@@ -524,7 +515,7 @@ en:
 
           Limited opportunities to interact with others, particularly those unfamiliar to children, may have impacted on children’s confidence. Children may now have increased anxieties and concerns surrounding cleanliness, illness and safety, resulting in difficulties engaging and concentrating. They may have experienced an increase in stressful situations such as financial difficulties.
 
-          Staying at home means children may have lost opportunities to experience social etiquette, for example in restaurants. They may also have had limited opportunities to learn, rehearse and develop social skills such as turn taking and sharing.
+          Staying at home means children may have lost opportunities to experience social etiquette, for example in shops and restaurants. They may also have had limited opportunities to learn, rehearse and develop social skills such as turn taking and sharing.
 
       1-1-2-4b:
         # question
@@ -706,7 +697,8 @@ en:
 
           $INFO
 
-          The communication and language module of this training (coming soon) will consider the stages of development, the practitioner’s role and effective practice in further detail.
+          The communication and language module of this training considers the stages of development, the practitioner’s role and effective practice in further detail.
+        notes: true
 
       1-1-2-10b:
         # question
@@ -763,7 +755,7 @@ en:
 
           ## Recognising and celebrating strengths and accomplishments
 
-          You should recognise and celebrate children's through praise. Even where the accomplishment might be small, it is essential that the child feels recognised for their achievement.
+          You should recognise and celebrate children through praise. Even where the accomplishment might be small, it is essential that the child feels recognised for their achievement.
 
           This recognition will help them to develop:
 
@@ -889,7 +881,7 @@ en:
 
           ##A welcoming environment that provokes thought and imagination
 
-          An environment that is bright, colourful and contains familiar items from home will be appealing and will offer children a sense of comfort. Having a set routine will support children to feel secure and settle into learning without being worried about what might happen next. As always, it is important that children’s individual needs are taken into consideration. For example where children may become overwhelmed by vivid decoration, calmer more neutral areas will be needed.
+          An environment that is bright, engaging and contains familiar items from home will be appealing and will offer children a sense of comfort. Having a set routine will support children to feel secure and settle into learning without being worried about what might happen next. As always, it is important that children’s individual needs are taken into consideration. For example where children may become overwhelmed by vivid decoration, calmer more neutral areas will be needed.
 
           ##Resources, activities and experiences that celebrate individuality
 
@@ -905,7 +897,7 @@ en:
 
           Outdoor environments often give children a greater opportunity to develop gross motor skills. In your setting, you could give children the option to participate in obstacle courses and access equipment such as bikes, balls, trampolines, slides or climbing apparatus.
 
-          Not all children have access to outdoor space on a regular basis at home and so you should maximise opportunities to encourage physical exercise within the setting.
+          Not all children have access to outdoor space on a regular basis at home and so you should maximise opportunities to encourage physical exercise within the setting. If you work in a smaller setting with limited outdoor space, you can do this by taking childen to a local park, playground or community group.  
 
           ##A balance of familiar and new
 
@@ -1038,6 +1030,7 @@ en:
           - hearing correct pronunciation
           - increased eye contact
           - modelled behaviour such as use of tone, volume and speed
+          - hearing new vocabulary
 
           ##Boundaries and expectations
 
@@ -1113,7 +1106,7 @@ en:
 
           ###Equality of opportunity
 
-          Every child is entitled to access to a full and an unedited curriculum that celebrates their abilities and nurtures their individual development.
+          Every child is entitled to access a full and varied curriculum that celebrates their abilities and nurtures their individual development.
 
           The EYFS requires practitioners to work in partnership with parents to ensure that every child receives an inclusive curriculum that is free of discriminatory practice and supports success for all.
 
@@ -1199,6 +1192,8 @@ en:
           Supporting material is available on the [Foundation Years website](https://foundationyears.org.uk/).
 
           See [guidance to provide support](https://www.gov.uk/government/publications/progress-check-at-age-2) when completing the early years foundation stage (EYFS) progress check at age 2.
+
+          Ofsted's blog ['Curriculum: keeping it simple'](https://educationinspection.blog.gov.uk/2021/12/08/curriculum-keeping-it-simple/) explains how inspectors assess the quality of a school's curriculum. 
 
           $BOOK
 

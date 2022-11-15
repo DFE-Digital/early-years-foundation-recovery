@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 # @see https://github.com/SeleniumHQ/docker-selenium
 #
@@ -7,13 +7,17 @@
 #
 # @example
 #
-#   $ BROWSER=standalone_firefox BASE_URL=https://app:3000 ./bin/docker-qa
-#   $ BASE_URL=https://ey-recovery.london.cloudapps.digital ./bin/docker-qa
+#   $ TYPE=firefox BASE_URL=https://app:3000 ./bin/docker-qa
+#   $ BASE_URL=https://ey-recovery.london.cloudapps.digital USER_PASSWORD=secret ./bin/docker-qa
 #
 # ------------------------------------------------------------------------------
 set -e
 
-BROWSER=${BROWSER-'standalone_chrome'} \
+TYPE=${TYPE-"chrome"}
+
+BASE_URL=${BASE_URL-"https://app:3000"} \
+BROWSER=${BROWSER-"standalone_$TYPE"} \
+DRIVER=${DRIVER-"$TYPE:4444"} \
   docker-compose \
     -f docker-compose.yml \
     -f docker-compose.qa.yml \

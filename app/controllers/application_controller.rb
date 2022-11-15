@@ -1,39 +1,17 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_analytics_tracking_id
+  before_action :set_analytics_tracking_id, :set_hotjar_site_id
 
   default_form_builder(EarlyYearsRecoveryFormBuilder)
 
-  # Record user event
-  #
-  # @param key [String]
-  # @param data [Hash]
-  #
-  # @return [Boolean]
-  def track(key, **data)
-    properties = {
-      path: request.fullpath,     # user perspective
-      **request.path_parameters,  # developer perspective
-      **data,
-    }
-    ahoy.track(key, properties)
-  end
-
-  # Check if a specific user event has already been logged
-  #
-  # @param key [String]
-  # @param params [Hash]
-  #
-  # @return [Boolean]
-  def untracked?(key, **params)
-    Ahoy::Event.where(user_id: current_user, name: key).where_properties(**params).empty?
-  end
+  include Tracking
+  include Auditing
 
   def authenticate_registered_user!
     authenticate_user! unless user_signed_in?
     return true if current_user.registration_complete?
 
-    redirect_to extra_registrations_path, notice: 'Please complete registration'
+    redirect_to edit_registration_name_path, notice: 'Please complete registration'
   end
 
   def configure_permitted_parameters
@@ -50,5 +28,27 @@ class ApplicationController < ActionController::Base
 
   def set_analytics_tracking_id
     @tracking_id = Rails.configuration.google_analytics_tracking_id
+  end
+
+  def set_hotjar_site_id
+    @hotjar_id = Rails.configuration.hotjar_site_id
+  end
+
+private
+
+  # @see Auditing
+  # @return [User]
+  def current_user
+    return bot if bot?
+
+    super
+  end
+
+  # @see Auditing
+  # @return [Boolean]
+  def user_signed_in?
+    return true if bot?
+
+    super
   end
 end
