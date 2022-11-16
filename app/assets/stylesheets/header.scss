@@ -11,7 +11,7 @@ $accent: #347ca9;
   }
 
   &__content {
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 769px) {
       margin-left: auto;
     }
     width: auto;
@@ -34,7 +34,7 @@ $accent: #347ca9;
     }
 
     & a:link {
-      color: white;
+      color: govuk-colour('white');
     }
 
     .govuk-header__link:visited {
