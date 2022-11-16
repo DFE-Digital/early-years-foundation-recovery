@@ -33,6 +33,10 @@ $accent: #347ca9;
       text-decoration: none;
     }
 
+    & a:link {
+      color: white;
+    }
+
     .govuk-header__link:visited {
       color: govuk-colour('white');
 
