@@ -11,13 +11,25 @@ Rails.application.routes.draw do
 
   resources :settings, controller: :settings, only: %i[show create]
 
-  devise_scope :user do
-    get   '/check_session_timeout'  => 'session_timeout#check_session_timeout'
-    get   '/session_timeout'        => 'session_timeout#render_timeout'
-    get   '/extend_session'         => 'session_extend#extend_session'
-  end
+  devise_for :users,
+             controllers: {
+               sessions: 'users/sessions',
+               confirmations: 'confirmations',
+               passwords: 'passwords',
+               registrations: 'registrations',
+             },
+             path_names: {
+               sign_in: 'sign-in',
+               sign_out: 'sign-out',
+               sign_up: 'sign-up',
+             }
 
-  devise_for :users, controllers: { sessions: 'users/sessions', confirmations: 'confirmations', passwords: 'passwords', registrations: 'registrations' }, path_names: { sign_in: 'sign-in', sign_out: 'sign-out', sign_up: 'sign-up' }
+  # @see TimeoutWarning js component
+  # @note these path names are required
+  devise_scope :user do
+    get 'check_session_timeout', to: 'timeout#check'
+    get 'extend_session', to: 'timeout#extend'
+  end
 
   namespace :registration do
     resource :name, only: %i[edit update]

@@ -217,6 +217,10 @@ en:
     note: Add to your learning log
     test: Check your understanding
 
+  timeout:
+    heading: You're about to be signed out
+    body: Your progress has been saved.
+
   summary_intro:
     heading: Summary and next steps
     body: |

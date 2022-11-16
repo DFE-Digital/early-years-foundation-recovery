@@ -1,30 +1,33 @@
-/[if lt IE 8]
+- if Rails.env.development? || ENV['WORKSPACE'].eql?('content')
+  pre.debug_dump
+    p Warning: opening a browser inspector may impact this popup
+    ul
+      li timeout enabled: #{timeout_active}
+      li timeout after: #{timeout_duration} minutes (default 25)
+      li timeout warning: #{timeout_warning} minutes (default 5)
+      li timer start value: #{timeout_timer} in seconds
+
+    ul
+      li= link_to 'Timed out page (WARNING: this ends the session)', users_timeout_path
+      li= link_to 'Countdown timer', check_session_timeout_path
+      li= link_to 'Extend timer', extend_session_path
+
+/[if lt IE 10]
   script[src="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.5.0/dialog-polyfill.js"]
 
 .govuk-timeout-warning-fallback
-  p You're about to be signed out
-  p We do this to keep your information secure.
+  h1.govuk-heading-l= t('timeout.heading')
 
-dialog#js-timeout-warning.govuk-timeout-warning.dialog data-module='govuk-timeout-warning' data-user-status=timeout_active data-minutes-idle-timeout=timeout_idle data-minutes-modal-visible=timeout_grace data-url-redirect="#{users_timeout_path}" role='dialog' aria-live='polite' aria-labelledby='dialog-title' aria-describedby='at-timer'
 
-  h1#dialog-title.govuk-heading-l You're about to be signed out
+dialog#js-timeout-warning.govuk-timeout-warning.dialog data-module='govuk-timeout-warning' data-user-status=timeout_active data-minutes-idle-timeout=timeout_warning data-minutes-modal-visible=timeout_warning data-url-redirect=users_timeout_path role='dialog' aria-live='polite' aria-labelledby='dialog-title' aria-describedby='at-timer'
 
-  .govuk-body
-    .timer aria-hidden='true' aria-relevant='additions'
-    #at-timer.at-timer.govuk-visually-hidden role='status'
+  h1#dialog-title.govuk-heading-l= t('timeout.heading')
 
-  p.govuk-body Your progress has been saved
-  div
-    button.govuk-button.dialog-button.js-dialog-close  data-module='govuk-button'
-      | Stay signed in
+  .timer aria-hidden='true' aria-relevant='additions'
+  #at-timer.at-timer.govuk-visually-hidden role='status'
 
-  p class="govuk-!-margin-top-5"
-    = govuk_link_to 'Sign out now', '#', class: 'js-dialog-cancel', 'data-module':'govuk-button'
+  p.govuk-body= t('timeout.body')
 
-- if Rails.env.development? || ENV['WORKSPACE'].eql?('content')
-  pre.debug_dump
-    ul
-      li timeout enabled: #{timeout_active}
-      li timeout after: #{timeout_duration} minutes
-      li timeout warning after: #{timeout_idle} minutes
-      li timeout countdown for: #{timeout_grace} minutes
+  button.govuk-button.dialog-button.js-dialog-close data-module='govuk-button' Stay signed in
+
+  = govuk_link_to 'Sign out now', '#', class: 'govuk-!-margin-top-5 js-dialog-cancel'

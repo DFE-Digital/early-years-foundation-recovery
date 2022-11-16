@@ -35,9 +35,8 @@ module EarlyYearsFoundationRecovery
     config.hotjar_site_id = ENV.fetch('HOTJAR_SITE_ID', '#HOTJAR_SITE_ID_env_var_missing')
     config.training_modules = ENV.fetch('TRAINING_MODULES', 'training-modules')
     config.unlock_in_minutes = ENV.fetch('UNLOCK_IN_MINUTES', '120').to_i
-    config.user_timeout_minutes = ENV.fetch('TIMEOUT_MINUTES', '15').to_i
-    config.user_timeout_idle_minutes = ENV.fetch('TIMEOUT_IDLE_MINUTES', '5').to_f
-    config.user_timeout_grace_minutes = ENV.fetch('TIMEOUT_GRACE_MINUTES', '5').to_f
+    config.user_timeout_minutes = ENV.fetch('TIMEOUT_MINUTES', '25').to_i
+    config.user_timeout_warning_minutes = ENV.fetch('TIMEOUT_WARNING_MINUTES', '5').to_i
 
     config.middleware.use Grover::Middleware
     config.active_record.yaml_column_permitted_classes = [Symbol]

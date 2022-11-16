@@ -260,6 +260,15 @@ CSS styling changes will appear automatically without needing to restart.
 - [developer guide](https://docs.publishing.service.gov.uk/repos/govspeak.html)
 
 
+## User experience
+
+Session timeout functionality:
+
+- default timeout period is 25 minutes
+- default timeout warning appears after 5 minutes
+- screen readers announce every time the timeout refreshes every 15 secs
+
+
 ---
 
 [app-repo]: https://github.com/DFE-Digital/early-years-foundation-recovery

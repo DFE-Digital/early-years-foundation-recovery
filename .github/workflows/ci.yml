@@ -23,6 +23,8 @@ env:
   DATABASE_URL: postgres://postgres:password@localhost:5432/test
   DOMAIN: recovery.app
   TRAINING_MODULES: demo-modules
+  TIMEOUT_MINUTES: 3
+  TIMEOUT_WARNING_MINUTES: 1
   BOT_TOKEN: bot_token
 
 jobs:
