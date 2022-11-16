@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 # Check accessibility of running dev container against latest sitemap
 # or an external site

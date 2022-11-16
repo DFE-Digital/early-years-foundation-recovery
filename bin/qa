@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 # Run the QA framework against a given URL:
 # The QA framework is expected to run against a production environment
