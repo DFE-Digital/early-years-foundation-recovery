@@ -20,7 +20,7 @@ module ApplicationHelper
     [
       image_tag('crest.png', alt: 'Department for Education homepage', class: 'govuk-header__logotype-crown-fallback-image'),
       content_tag(:span, 'Department for Education | ', class: 'govuk-header__logotype-text'),
-      content_tag(:span, 'Early years child development training', class: 'govuk-header__product-name'),
+      content_tag(:span, service_name, class: 'govuk-header__product-name'),
     ].join.html_safe
   end
 
@@ -61,11 +61,10 @@ module ApplicationHelper
 
   # @return [String]
   def html_title(module_item)
-    site_title = 'Child development training'
     module_title = module_item&.parent&.title
     title = t(params.permit('controller', 'action', 'id').values.join('.'), scope: 'html_title', default: module_item&.model&.heading)
     [
-      site_title,
+      service_name,
       module_title,
       title,
     ].compact.join(' : ')

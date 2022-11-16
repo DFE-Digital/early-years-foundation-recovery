@@ -1,4 +1,4 @@
-# Child development training
+# Early years child development training
 
 [![Continuous Integration][ci-badge]][ci-workflow]
 
