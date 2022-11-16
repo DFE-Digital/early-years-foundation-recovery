@@ -186,7 +186,7 @@ TimeoutWarning.prototype.startUiCountdown = function () {
     } else {
       atText += '.'
     }
-    var extraText = ' We do this to keep your information secure.'
+    var extraText = '' // leaving this empty as we dont need it
 
     if (timerExpired) {
       // TO DO - client/server interaction
