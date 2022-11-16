@@ -176,7 +176,7 @@ TimeoutWarning.prototype.startUiCountdown = function () {
 
     // Below string will get read out by screen readers every time the timeout refreshes (every 15 secs. See below).
     // Please add additional information in the modal body content or in below extraText which will get announced to AT the first time the time out opens
-    var text = 'For security reasons you will be signed out of the service in ' + minutesText + secondsText + '.'
+    var text = 'For security reasons you will be signed out of the service in <strong>' + minutesText + secondsText + '</strong>.'
     var atText = 'For security reasons you will be signed out of the service in ' + atMinutesText
     if (atSecondsText) {
       if (minutesLeft > 0) {
