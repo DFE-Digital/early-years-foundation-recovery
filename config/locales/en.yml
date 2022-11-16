@@ -26,11 +26,11 @@ en:
             terms_and_conditions_agreed_at:
               blank: You must accept the terms and conditions and privacy policy to create an account.
             setting_type_id:
-              blank: Enter the setting type you work in. 
+              blank: Enter the setting type you work in.
               inclusion: Enter the setting type you work in.
             setting_type_other:
-              blank: Enter the setting type you work in. 
-            role_type: 
+              blank: Enter the setting type you work in.
+            role_type:
               blank: Select your role.
             role_type_other:
               blank: Enter your job title.
@@ -89,18 +89,18 @@ en:
         body: |
           {:.govuk-hint}
             Search for the type of setting or organisation you work in, for example childminder or nursery.
-            
+
           {:.govuk-hint}
             If you work in more than one early years setting, enter the one where you work most often.
-  
+
           {:.govuk-hint}
             Your training progress won't be shared with anyone without your permission.
         button: Continue
         link_to_setting_type_other: I cannot find my setting or organisation
         autocomplete-not-found: No setting found.
       update:
-        complete_registration: Thank you for creating a child development training account. You can now start the first module.
-        update_registration: Thank you for updating your child development training account. You can now continue.
+        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        update_registration: Thank you for updating your Early years child development training account. You can now continue.
         complete_update: You have updated your details
     setting_type_others:
       edit:
@@ -108,8 +108,8 @@ en:
         body: Enter the type of setting or organisation where you work.
         button: Continue
       update:
-        complete_registration: Thank you for creating a child development training account. You can now start the first module.
-        update_registration: Thank you for updating your child development training account. You can now continue.
+        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        update_registration: Thank you for updating your Early years child development training account. You can now continue.
         complete_update: You have updated your details
     local_authorities: 
       edit:
@@ -121,8 +121,8 @@ en:
         multiple_local_authorities: I work across more than one local authority
         autocomplete-not-found: No local authority found.
       update:
-        complete_registration: Thank you for creating a child development training account. You can now start the first module.
-        update_registration: Thank you for updating your child development training account. You can now continue.
+        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        update_registration: Thank you for updating your Early years child development training account. You can now continue.
         complete_update: You have updated your details
     role_types:
       edit:
@@ -132,8 +132,8 @@ en:
         button: Continue
         link_to_role_type_other: I would describe my role in another way.
       update:
-        complete_registration: Thank you for creating a child development training account. You can now start the first module.
-        update_registration: Thank you for updating your child development training account. You can now continue.
+        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        update_registration: Thank you for updating your Early years child development training account. You can now continue.
         complete_update: You have updated your details
     role_type_others:
       edit:
@@ -141,8 +141,8 @@ en:
         body: Enter your job title.
         button: Continue
       update:
-        complete_registration: Thank you for creating a child development training account. You can now start the first module.
-        update_registration: Thank you for updating your child development training account. You can now continue.
+        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        update_registration: Thank you for updating your Early years child development training account. You can now continue.
         complete_update: You have updated your details
   setting_type:
     heading: Change your setting's information
@@ -243,12 +243,12 @@ en:
       You can pause and restart the test as much as you like. If you exit part way through, your progress will be saved.
 
       You can review your total score for the test at the end.
-      
+
       To receive a certificate of achievement for this module, you need to receive an overall score of at least %{passmark}%.
 
       If you do not score %{passmark}%, you will be able to see which questions you got wrong. You can repeat the test to improve your score as many times as you want.
-      
-      Your score may be shared anonymously with the Child Development Training team to help DfE measure the impact of this training.
+
+      Your score may be shared anonymously with the Early years child development training team to help DfE measure the impact of this training.
 
       Scores are not shared with any other third parties or organisations.
 
@@ -287,7 +287,7 @@ en:
       You can sign out or close the browser at any time without losing your progress.
       When you next sign in, you can restart from where you left off.
 
-      ## Videos and mobile data usage 
+      ## Videos and mobile data usage
 
       This module contains videos. Connect to wifi before starting the module to watch the videos without using any mobile data. If you are not able or prefer not to play the videos, you can use the full transcripts provided.
 
@@ -393,7 +393,7 @@ en:
   notice:
     email_changed: |
       We have sent an email to your new email address with a link to click to confirm the change.
-      
+
       If you have not received the email after a few minutes, please check your spam folder.
 
   # Browser and bookmarks ------------------------------------------------------
@@ -429,7 +429,7 @@ en:
       new: Reset password
       edit: Choose a new password
     registrations:
-      new: Create a child development training account
+      new: Create an Early years child development training account
       edit: Change your password
     confirmations:
       new: Resend your confirmation

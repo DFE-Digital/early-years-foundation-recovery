@@ -37,6 +37,8 @@ module EarlyYearsFoundationRecovery
     config.unlock_in_minutes = ENV.fetch('UNLOCK_IN_MINUTES', '120').to_i
     config.user_timeout_minutes = ENV.fetch('TIMEOUT_MINUTES', '15').to_i
 
+    config.service_name = 'Early years child development training'
+
     config.middleware.use Grover::Middleware
     config.active_record.yaml_column_permitted_classes = [Symbol]
     config.action_view.sanitized_allowed_tags = ALLOWED_TAGS
