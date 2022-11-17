@@ -23,11 +23,12 @@ dialog#js-timeout-warning.govuk-timeout-warning.dialog data-module='govuk-timeou
 
   h1#dialog-title.govuk-heading-l= t('timeout.heading')
 
-  .timer aria-hidden='true' aria-relevant='additions'
-  #at-timer.at-timer.govuk-visually-hidden role='status'
+  .timer class="govuk-!-static-margin-bottom-5" aria-hidden='true' aria-relevant='additions'
+  #at-timer.at-timer.govuk-visually-hidden role='status' class="govuk-!-static-margin-bottom-5"
 
   p.govuk-body= t('timeout.body')
-
-  button.govuk-button.dialog-button.js-dialog-close data-module='govuk-button' Stay signed in
-
-  = govuk_link_to 'Sign out now', '#', class: 'govuk-!-margin-top-5 js-dialog-cancel'
+  
+  div class="govuk-!-static-margin-bottom-5"
+    button.govuk-button.dialog-button.js-dialog-close data-module='govuk-button' Stay signed in
+  div 
+    = govuk_link_to 'Sign out now', '#', class: 'govuk-!-margin-top-5 js-dialog-cancel'
