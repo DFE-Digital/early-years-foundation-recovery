@@ -1,8 +1,9 @@
 module ApplicationHelper
   # @return [String]
   def navigation
-    govuk_header(service_name: service_name, classes: 'noprint') do |header|
+    govuk_header(classes: 'noprint') do |header|
       header.navigation_item(text: 'Home', href: root_path)
+      header.custom_logo { custom_logo }
       if user_signed_in?
         header.navigation_item(text: 'My modules', href: my_modules_path)
         header.navigation_item(text: 'Learning log', href: user_notes_path) if current_user.course_started?
@@ -12,6 +13,15 @@ module ApplicationHelper
         header.navigation_item(text: 'Sign in', href: new_user_session_path)
       end
     end
+  end
+
+  # @return [String]
+  def custom_logo
+    [
+      image_tag('crest.png', alt: 'Department for Education homepage', class: 'govuk-header__logotype-crown-fallback-image'),
+      content_tag(:span, 'Department for Education | ', class: 'govuk-header__logotype-text'),
+      content_tag(:span, service_name, class: 'govuk-header__product-name'),
+    ].join.html_safe
   end
 
   # @return [String]
