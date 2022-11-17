@@ -219,7 +219,7 @@ en:
 
   timeout:
     heading: You're about to be signed out
-    body: Your progress has been saved.
+    body: Your progress through the training has been saved. Other changes made to your account or learning log will not be saved.
 
   summary_intro:
     heading: Summary and next steps
