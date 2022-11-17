@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#
+# Requires postgresql-client
+# ------------------------------------------------------------------------------
+set -e
+
+if [[ $1 =~ ^pr ]]
+then
+  cf target -s ey-recovery-content
+else
+  cf target -s ey-recovery-staging
+fi
+
+
+cf conduit "ey-recovery-$1-db" -- pg_dump --file "./tmp/ey-recovery-$1-db.sql" --no-acl --no-owner
