@@ -5,3 +5,4 @@ paas_web_app_start_command = "bundle exec rails db:prepare db:seed && bundle exe
 # Production like values
 paas_postgres_service_plan = "small-ha-13"
 paas_web_app_memory = 512
+paas_web_app_start_timeout = 3600
