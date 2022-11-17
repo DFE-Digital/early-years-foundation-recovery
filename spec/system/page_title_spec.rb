@@ -5,8 +5,8 @@ RSpec.describe 'Page' do
     it { expect(root_path).to have_page_title 'Home page' }
     it { expect(new_user_session_path).to have_page_title 'Sign in' }
     it { expect(new_user_password_path).to have_page_title 'Reset password' }
-    it { expect(cancel_user_registration_path).to have_page_title 'Create a child development training account' }
-    it { expect(new_user_registration_path).to have_page_title 'Create a child development training account' }
+    it { expect(cancel_user_registration_path).to have_page_title 'Create an Early years child development training account' }
+    it { expect(new_user_registration_path).to have_page_title 'Create an Early years child development training account' }
 
     it { expect(setting_path('cookie-policy')).to have_page_title 'Cookie policy' }
 
@@ -15,6 +15,7 @@ RSpec.describe 'Page' do
     it { expect(static_path('privacy-policy')).to have_page_title 'Privacy policy' }
     it { expect(static_path('terms-and-conditions')).to have_page_title 'Terms and conditions' }
     it { expect(static_path('whats-new')).to have_page_title "What's new" }
+    it { expect(static_path('new-registration')).to have_page_title 'Update your registration details' }
 
     context 'and is confirmed' do
       let(:user) { create(:user, :confirmed) }

@@ -7,7 +7,11 @@ class Registration::NamesController < Registration::BaseController
     @user_form = Users::NameForm.new(user_params.merge(user: current_user))
 
     if @user_form.save
-      redirect_to(next_action { edit_registration_setting_type_path })
+      if current_user.registration_complete?
+        redirect_to user_path, notice: t('.complete_update')
+      else
+        redirect_to edit_registration_setting_type_path
+      end
     else
       render :edit, status: :unprocessable_entity
     end

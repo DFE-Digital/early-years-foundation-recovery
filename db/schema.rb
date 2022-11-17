@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_03_162127) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_10_104509) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -115,8 +115,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_03_162127) do
     t.string "first_name"
     t.string "last_name"
     t.boolean "private_beta_registration_complete", default: false
-    t.string "postcode"
-    t.string "ofsted_number"
     t.integer "failed_attempts", default: 0, null: false
     t.datetime "locked_at", precision: nil
     t.string "unlock_token"
@@ -124,6 +122,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_03_162127) do
     t.string "setting_type_other"
     t.jsonb "module_time_to_completion", default: {}, null: false
     t.datetime "terms_and_conditions_agreed_at"
+    t.datetime "account_deleted_at"
     t.boolean "display_whats_new", default: false
     t.string "local_authority"
     t.string "role_type"

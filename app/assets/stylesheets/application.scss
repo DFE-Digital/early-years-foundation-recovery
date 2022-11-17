@@ -11,6 +11,19 @@ $govuk-new-link-styles: true;
 @import "./quote";
 @import "./icons";
 @import "./autocomplete";
+@import "./header";
+
+* {
+  font-family: 
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen-Sans,
+    Ubuntu,
+    Cantarell,
+    'Helvetica Neue',
+    sans-serif !important;
+}
 
 /*
 Internal
@@ -24,6 +37,9 @@ pre.code-tip {
 
 .debug_dump {
   background: beige;
+  &, * {
+    font-family: monospace !important;
+  }
 }
 // --------------------------------------------
 
@@ -111,4 +127,8 @@ ul > li > ul > li {
     @include govuk-link-common;
     @include govuk-link-style-default;
   }
+}
+
+.govuk-footer__copyright-logo {
+  display: none;
 }

@@ -10,7 +10,12 @@ module Users
     end
 
     def setting_type
-      SettingType.find setting_type_id
+      case setting_type_id
+      when 'other'
+        SettingType::Other.new
+      else
+        SettingType.find setting_type_id
+      end
     end
     delegate :local_authority_next?, :role_type_next?, to: :setting_type
 
