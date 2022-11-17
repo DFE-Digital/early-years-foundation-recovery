@@ -58,6 +58,6 @@ RSpec.describe 'Confirmed users completing registration' do
 
     click_button 'Continue'
 
-    expect(page).to have_text('Thank you for creating a child development training account. You can now start the first module.')
+    expect(page).to have_text('Thank you for creating an Early years child development training account. You can now start the first module.')
   end
 end

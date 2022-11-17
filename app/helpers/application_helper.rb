@@ -1,7 +1,7 @@
 module ApplicationHelper
   # @return [String]
   def navigation
-    govuk_header(service_name: 'Child development training', classes: 'noprint') do |header|
+    govuk_header(service_name: service_name, classes: 'noprint') do |header|
       header.navigation_item(text: 'Home', href: root_path)
       if user_signed_in?
         header.navigation_item(text: 'My modules', href: my_modules_path)
@@ -51,11 +51,10 @@ module ApplicationHelper
 
   # @return [String]
   def html_title(module_item)
-    site_title = 'Child development training'
     module_title = module_item&.parent&.title
     title = t(params.permit('controller', 'action', 'id').values.join('.'), scope: 'html_title', default: module_item&.model&.heading)
     [
-      site_title,
+      service_name,
       module_title,
       title,
     ].compact.join(' : ')

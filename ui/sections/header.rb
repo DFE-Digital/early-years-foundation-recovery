@@ -2,7 +2,7 @@
 
 module Sections
   class Header < SitePrism::Section
-    element :title_link, '.govuk-header__link govuk-header__link--service-name', text: 'GOV.UK Child development training'
+    element :title_link, '.govuk-header__link govuk-header__link--service-name', text: 'GOV.UK Early years child development training'
     element :logo, '.govuk-header__logotype-text', text: 'GOV.UK'
     element :home, "a[href='/']", text: 'Home'
     element :training_module, "a[href='/modules']", text: 'Training Modules'
