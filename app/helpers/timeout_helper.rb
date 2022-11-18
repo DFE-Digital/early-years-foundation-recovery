@@ -9,6 +9,11 @@ module TimeoutHelper
     Rails.configuration.user_timeout_warning_minutes
   end
 
+  # @return [Integer] minutes modal should appears for (default 5)
+  def timeout_modal
+    Rails.configuration.user_timeout_modal_visible
+  end
+
   # @return [String] "true" or "false"
   def timeout_active
     current_user.present?.to_s

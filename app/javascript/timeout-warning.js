@@ -440,7 +440,7 @@ TimeoutWarning.prototype.pollForSessionTimeout = function() {
 
 TimeoutWarning.prototype.resetSessionTimeout = function() {
   axios.get('/extend_session')
-    .then((response))
+    .then((response) => {})
     .catch(error => console.log(error));
 }
 

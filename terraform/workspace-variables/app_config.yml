@@ -39,6 +39,7 @@ content:
   # TRAINING_MODULES: demo-modules
   TIMEOUT_MINUTES: 3
   TIMEOUT_WARNING_MINUTES: 1
+  TIMEOUT_MODAL_VISIBLE: 1
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
