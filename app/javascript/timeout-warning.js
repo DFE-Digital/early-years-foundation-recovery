@@ -128,7 +128,7 @@ TimeoutWarning.prototype.openDialog = function () {
     this.saveLastFocusedEl()
     this.makePageContentInert()
     this.$module.showModal()
-
+    this.$module.focus()
     this.startUiCountdown()
 
     // if (window.history.pushState) {
