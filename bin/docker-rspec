@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # ------------------------------------------------------------------------------
 # If the working directory is not mounted as a volume, then the test environment
 # RAILS_MASTER_KEY variable must be passed in.

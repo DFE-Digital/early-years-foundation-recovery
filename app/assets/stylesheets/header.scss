@@ -1,0 +1,70 @@
+$dfe-blue: #003a69;
+$accent: #347ca9;
+
+.govuk-header {
+  background-color: $dfe-blue;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 10px solid $accent;
+  }
+
+  &__content {
+    @media screen and (min-width: 769px) {
+      margin-left: auto;
+    }
+    width: auto;
+    display: flex;
+  }
+
+  &__logo {
+    width: auto;
+    display: flex;
+  }
+
+  &__navigation-item--active {
+    color: govuk-colour('white');
+    text-decoration: underline solid 3px govuk-colour('white');
+    text-underline-offset: 1.6px;
+
+    &:focus, &:active {
+      color: govuk-colour('black');
+      text-decoration: none;
+    }
+
+    & a:link {
+      color: govuk-colour('white');
+    }
+
+    .govuk-header__link:visited {
+      color: govuk-colour('white');
+
+      &:focus, &:active {
+        color: govuk-colour('black');
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__link--homepage:focus {
+    box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+  }
+
+  &__product-name, &__logotype-text {
+    line-height: 2.5rem !important;
+    font-size: 1.2rem;
+  }
+
+
+  &__logotype {
+    padding-right: 10px;
+
+    &-crown-fallback-image{
+      height: 45px;
+      width: 45px;
+      padding-right: 10px;
+    }
+  }
+}
+

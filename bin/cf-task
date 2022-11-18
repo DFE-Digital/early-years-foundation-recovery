@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+#
+# $1 = env      # pr-123, dev, staging
+# $2 = task     # db:seed
+# $3 = params   # csv1,csv2,csv3
+#
+# Example:
+#
+# - $ ./bin/cf-task dev sitemap:refresh:no_ping
+#
+# ------------------------------------------------------------------------------
+set -e
+
+if [[ $1 =~ ^pr ]]
+then
+  cf target -s ey-recovery-content
+else
+  cf target -s ey-recovery-staging
+fi
+
+cf ssh "ey-recovery-$1" -c "\
+. .profile; \
+cd /srv; \
+rake $2 $3
+"
