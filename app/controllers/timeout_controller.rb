@@ -1,6 +1,11 @@
 class TimeoutController < Devise::SessionsController
   prepend_before_action :skip_timeout, only: %i[check]
 
+  # @see TimeoutHelper
+  def timeout_user
+    sign_out current_user
+  end
+
   # @note clear etags to prevent caching
   def check
     response.headers['Etag'] = ''
