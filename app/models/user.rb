@@ -10,8 +10,32 @@ class User < ApplicationRecord
   has_many :events, class_name: 'Ahoy::Event'
   has_many :notes
 
-  scope :registered, -> { where(registration_complete: true) }
-  scope :not_registered, -> { where(registration_complete: nil) }
+  # TODO: use scope with email alert
+  # created an account within public beta but still not using service
+  scope :registration_incomplete, -> { where(registration_complete: false) }
+
+  # completed registration within public beta (may include private beta users)
+  scope :registration_complete, -> { where(registration_complete: true) }
+
+  # @note
+  #   The default for :registration_complete was originally nil,
+  #   when the registration journey was revised,
+  #   the existing :registration_complete boolean was renamed,
+  #   and the default changed to false
+  #
+  scope :registered_since_private_beta, -> { where(private_beta_registration_complete: false) }
+
+  # completed registration in both private and public beta
+  scope :reregistered, -> { where(private_beta_registration_complete: true, registration_complete: true) }
+
+  # only registered to completion within private beta
+  scope :private_beta_only_registration_complete, -> { where(private_beta_registration_complete: true, registration_complete: false) }
+
+  # registered within private beta but never completed
+  scope :private_beta_only_registration_incomplete, -> { where(private_beta_registration_complete: nil) }
+
+  # new users only
+  scope :public_beta_only_registration_complete, -> { registered_since_private_beta.registration_complete }
 
   validates :first_name, :last_name, :setting_type_id,
             presence: true,

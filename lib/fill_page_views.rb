@@ -34,7 +34,7 @@ class FillPageViews
           if progress.visited?(item)
             next
           else
-            tracker.track('page_view', {
+            tracker.track('module_content_page', {
               skipped: true,
               id: item.name,
               action: 'show',
