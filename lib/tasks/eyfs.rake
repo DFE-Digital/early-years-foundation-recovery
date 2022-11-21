@@ -16,6 +16,8 @@ namespace :eyfs do
         setting_type_id: 'childminder_independent',
         local_authority: 'Lewisham',
         role_type: 'childminder',
+        registration_complete: true,
+        display_whats_new: false,
       )
     end
   end
