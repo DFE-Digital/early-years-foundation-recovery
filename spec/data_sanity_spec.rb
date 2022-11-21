@@ -1,47 +1,98 @@
 require 'rails_helper'
 
-RSpec.describe 'Page content (locales/modules)' do
+RSpec.describe 'Module content' do
   describe 'pages' do
-    include_context 'with questions'
-    # List module items that are missing content
-    #
-    xit 'matches module content (data/modules)' do
-      module_names.map do |mod_name|
-        module_content = course_content[mod_name].keys
-        page_content = I18n.t(mod_name, scope: 'modules').keys.map(&:to_s)
+    include_context 'with content'
 
-        expect(module_content.count).to eql page_content.count
-        # Include these assertions to identify the missing page name
-        expect(module_content.difference(page_content)).to be_empty
-        expect(page_content.difference(module_content)).to be_empty
+    it 'has none missing' do
+      module_names.map do |mod_name|
+        expect(mod_name).to be_publishable
+
+        case mod_name
+        when 'bravo', 'charlie'
+          # TODO: update demo modules
+          puts "skipping type check for #{mod_name}"
+        else
+          expect(mod_name).to have_all_types
+        end
+      end
+    end
+
+    it 'has essential attributes' do
+      module_names.map do |mod_name|
+        I18n.t(mod_name, scope: 'modules').each do |page, attributes|
+          case course_content[mod_name][page.to_s]['type']
+          when /text/
+            expect(attributes).to include :heading, :body
+          when /video/
+            expect(attributes).to include :heading, :body, :video
+          when /thankyou/
+            expect(attributes).to include :form
+          when /interruption|icons|assessment|confidence|questionnaire/
+            expect(attributes).to be_nil
+          end
+        end
       end
     end
   end
 
   describe 'formative' do
-    include_context 'with questions'
+    include_context 'with content'
 
     let(:data_dir) { 'data/formative-questionnaires' }
     let(:type) { 'formative_questionnaire' }
 
-    specify { expect(FormativeQuestionnaire.count).to be 80 }
+    specify do
+      expect(questions['alpha'].count).to be 3
+      expect(questions['bravo']).to be_nil
+      expect(questions['charlie']).to be_nil
+
+      expect(questions['child-development-and-the-eyfs'].count).to be 17
+      expect(questions['brain-development-and-how-children-learn'].count).to be 22
+      expect(questions['personal-social-and-emotional-development'].count).to be 19
+      expect(questions['module-4'].count).to be 19
+
+      expect(questions_total).to be 80
+    end
   end
 
   describe 'summative' do
-    include_context 'with questions'
+    include_context 'with content'
 
     let(:data_dir) { 'data/summative-questionnaires' }
     let(:type) { 'summative_questionnaire' }
 
-    specify { expect(SummativeQuestionnaire.count).to be 46 }
+    specify do
+      expect(questions['alpha'].count).to be 4
+      expect(questions['bravo'].count).to be 2
+      expect(questions['charlie']).to be_nil
+
+      expect(questions['child-development-and-the-eyfs'].count).to be 10
+      expect(questions['brain-development-and-how-children-learn'].count).to be 10
+      expect(questions['personal-social-and-emotional-development'].count).to be 10
+      expect(questions['module-4'].count).to be 10
+
+      expect(questions_total).to be 46
+    end
   end
 
   describe 'confidence' do
-    include_context 'with questions'
+    include_context 'with content'
 
     let(:data_dir) { 'data/confidence-questionnaires' }
     let(:type) { 'confidence_questionnaire' }
 
-    specify { expect(ConfidenceQuestionnaire.count).to be 24 }
+    specify do
+      expect(questions['alpha'].count).to be 3
+      expect(questions['bravo']).to be_nil
+      expect(questions['charlie']).to be_nil
+
+      expect(questions['child-development-and-the-eyfs'].count).to be 5
+      expect(questions['brain-development-and-how-children-learn'].count).to be 4
+      expect(questions['personal-social-and-emotional-development'].count).to be 6
+      expect(questions['module-4'].count).to be 6
+
+      expect(questions_total).to be 24
+    end
   end
 end

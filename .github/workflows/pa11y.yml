@@ -1,29 +1,58 @@
 ---
+# Pa11y-CI automated accessibility audit
+#
+# - automatically runs when new code is merged into main and deployed
+# - a manually trigger run tests release candidate in pre-production by default
 # ------------------------------------------------------------------------------
-name: Run Pa11y
+name: Check WCAG Standards
 
 on:
+  workflow_run:
+    workflows:
+      - Deploy Development App
+    branches:
+      - main
+    types:
+      - completed
   workflow_dispatch:
-  push:
-    tags:
-      - rc*
-
-env: 
-  BASE_URL: https://ey-recovery-staging.london.cloudapps.digital
+    inputs:
+      workspace:
+        description: Deployment workspace to test against (staging, dev, pr-xxx)
+        type: string
+        default: staging
 
 jobs:
-  pa11y:
+  test:
     runs-on: ubuntu-latest
+    env:
+      BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+      DOMAIN: ey-recovery-${{ inputs.workspace || 'dev' }}.london.cloudapps.digital
     steps:
       -
-        uses: actions/checkout@v2
+        name: Checkout Code
+        uses: actions/checkout@v3
       -
-        name: Use Node.js 12.x
-        uses: actions/setup-node@v1
+        name: Setup Node
+        uses: actions/setup-node@v3
         with:
-          node-version: 12.x
+          node-version: 18.x
+          cache: npm
       -
-        name: Run pa11y
+        name: Install Chrome
+        uses: browser-actions/setup-chrome@latest
+      -
+        name: Install pa11y-ci
+        env:
+          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: 'true'
         run: |
-          npm install -g pa11y
-          pa11y $BASE_URL
+          npm install --global --unsafe-perm puppeteer pa11y-ci
+          mkdir /tmp/pa11y
+          sed -i "s/token/${BOT_TOKEN}/g" .pa11yci
+      -
+        name: Audit
+        env:
+          PUPPETEER_EXECUTABLE_PATH: /opt/hostedtoolcache/chromium/latest/x64/chrome
+        run: pa11y-ci --sitemap https://${DOMAIN}/sitemap.xml > report.txt
+      -
+        name: Report
+        run: cat report.txt && ((`cat report.txt | grep sign-in | wc -l`<2)) || exit 1

@@ -29,6 +29,8 @@ class Questionnaire < OpenStruct
 
   validate :check_answers
 
+  delegate :type, to: :module_item
+
   # @return [ModuleItem]
   def module_item
     @module_item ||= ModuleItem.find_by(training_module: training_module, name: name)
@@ -90,18 +92,18 @@ class Questionnaire < OpenStruct
   end
 
   # @return [Boolean]
+  def first_assessment?
+    module_item.parent.summative_questions.first.eql?(module_item)
+  end
+
+  # @return [Boolean]
   def last_assessment?
-    module_item.parent.last_assessment_page.eql?(module_item)
+    module_item.parent.summative_questions.last.eql?(module_item)
   end
 
   # @return [Boolean]
   def first_confidence?
-    module_item.parent.first_confidence_page.eql?(module_item)
-  end
-
-  # @return [Boolean]
-  def first_assessment?
-    module_item.parent.first_assessment_page.eql?(module_item)
+    module_item.parent.confidence_questions.first.eql?(module_item)
   end
 
   # @return [String]

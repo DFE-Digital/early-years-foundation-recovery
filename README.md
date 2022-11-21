@@ -1,37 +1,17 @@
-# Child development training
+# Early years child development training
 
 [![Continuous Integration][ci-badge]][ci-workflow]
 
+This is a Rails 7 application using the [DfE template][rails-template].
+
+Optionally create `.env` to override or set default variables like `DATABASE_URL`.
+
 ## Getting Started
 
-1. Clone the repository
-
-  This is a Rails 7 application using the [DfE template][rails-template].
-
-2. Install git-secrets
-
-  This will help to prevent unintentional commits of access keys.
-
-  - `brew install git-secrets`
-  - `cd /path/to/my/repo`
-  - `git secrets --install`
-  - `git secrets --register-aws`
-
-Find advanced settings and other installation options at the [git-secrets project][git-secrets].
-
+1. Clone the [repository][app-repo]
+2. Install [git-secrets](#git-secrets)
 3. Obtain the master keys
-
-  Optionally create `.env` to override or set default variables like `DATABASE_URL`.
-
-4. Install the frontend dependencies
-
-  - `yarn install; bin/rails assets:precompile`
-  - `bin/docker-yarn` if using [Docker][docker]
-
-5. Start the server
-
-  - `bin/dev` *(requires a running database server)*
-  - `bin/docker-dev` if using [Docker][docker]
+4. Start the server
 
 ## Useful Links
 
@@ -50,6 +30,17 @@ of the deployed environments, you can get the encryption keys from another devel
 
 Once you have the keys, run `rails credentials:edit --environment <env>`.
 Full instructions can be found by running `rails credentials:help`
+
+## Git Secrets
+
+This will help to prevent unintentional commits of access keys.
+
+- `brew install git-secrets`
+- `cd /path/to/my/repo`
+- `git secrets --install`
+- `git secrets --register-aws`
+
+Find advanced settings and other installation options at the [git-secrets project][git-secrets].
 
 ---
 
@@ -80,7 +71,8 @@ Use `bin/qa` to run the test framework under `/ui` against a given URL.
 These tests have additional dependencies:
 
 - `brew install chromedriver geckodriver`
-- `xattr -d com.apple.quarantine /usr/local/bin/chromedriver`
+- `xattr -d com.apple.quarantine /usr/local/bin/chromedriver` on Intel
+- `xattr -d com.apple.quarantine /opt/homebrew/bin/chromedriver` on ARM
 
 ## Using Docker
 
@@ -97,20 +89,24 @@ These commands help maintain your containerised workspace:
     generated inside containers are created by *root*
 - `bin/docker-down` stop any active services
 - `bin/docker-prune` purge project containers, volumes and images
-- `bin/docker-yarn` warm the cache of frontend dependencies
 
 The commands run common tasks inside containers:
 
+- `bin/docker-adr` rebuilds the architecture decision records table of contents
 - `bin/docker-dev` starts `Procfile.dev`, containerised equivalent of `bin/dev`,
-    using the `docker-compose.dev.yml` override.
+    using the `docker-compose.dev.yml` override
     Additionally, it will install bundle and yarn dependencies.
+- `bin/docker-rails erd` generate an Entity Relationship Diagram
 - `bin/docker-rails db:seed` populates the containerised postgres database
 - `bin/docker-rails console` drops into a running development environment or starts one,
     containerised equivalent of `bin/rails console`
 - `bin/docker-rspec -f doc` runs the test suite with optional arguments, containerised
     equivalent of `bin/rspec`
+- `bin/docker-doc` runs a YARD documentation server
+- `bin/docker-uml` exports UML diagrams as default PNGs
 - `bin/docker-qa` runs the browser tests against a running production application,
     a containerised equivalent of `bin/qa`
+- `bin/docker-pa11y` runs WCAG checks against a generated `sitemap.xml`
 
 These commands can be used to debug problems:
 
@@ -120,6 +116,20 @@ These commands can be used to debug problems:
     can help identify why the application is not running in either the `dev`, `test`, or `qa` contexts
 - `BASE_URL=https://app:3000 docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery up app` debug the UAT tests
 
+## Using Custom Tasks
+
+- `rake eyfs:bot`            # Generate secure bot user
+- `rake eyfs:plug_content`   # Add page view events for injected module items
+- `rake eyfs:user_progress`  # Recalculate module completion time
+- `rake eyfs:whats_new`      # Enable the post login 'What's new' page
+
+
+Trigger a task on a deployed application in either the `ey-recovery-content` or `ey-recovery-staging` spaces, not `production`, using `bin/cf-task`.
+
+- `./bin/cf-task pr-123 eyfs:bot`
+- `./bin/cf-task dev eyfs:whats_new[email1@example.com,email2@example.com]`
+
+Refer to this script for the steps necessary to ssh in and run a task manually.
 
 ---
 
@@ -147,8 +157,8 @@ This facilitates team members demoing content and functionality, so registration
 [Staging][staging] is deployed automatically when a candidate tag is pushed.
 
 - `git checkout <ref/branch>`
-- `git tag rc0.0.x`
-- `git push origin rc0.0.x`
+- `git tag --force rc0.0.x`
+- `git push --force origin rc0.0.x`
 
 A tag can also be created and a deployment run from this [workflow][staging-workflow].
 We intend to use [semantic versioning](https://semver.org/).
@@ -175,6 +185,21 @@ To run a self-signed certificate must first be generated.
 4. `BASE_URL=https://app:3000 ./bin/docker-qa` (test against the seeded application)
 
 WIP: proposed Github workflow that does not require `docker-compose`.
+
+
+## Accessibility Standards
+
+An automated accessibility audit can be run against a development server running
+in Docker using `./bin/docker-pa11y`. The test uses [pa11y-ci](https://github.com/pa11y/pa11y-ci)
+and a dynamic `sitemap.xml` file to ensure the project meets [WCAG2AA](https://www.w3.org/WAI/WCAG2AA-Conformance) standards.
+A secure HTTP header `BOT` is used to provide access to pages that require authentication.
+The secret `$BOT_TOKEN` environment variable defines the account to seed.
+
+```
+curl -i -L -H "BOT: ${BOT_TOKEN}" http://localhost:3000/my-account
+```
+
+`docker-pa11y` accepts an optional argument to test external sites.
 
 ---
 
@@ -218,12 +243,11 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
 ## Content
 
-Content designers are using the docker development environment.
-You can demo this environment locally using `completed@example.com:password`.
-When the are significant changes to content structure or styling it may be necessary to either:
+Content designers are also using the docker development environment.
 
-- `bin/docker-dev-restart` restart the server
-- `bin/docker-rails assets:precompile` rebuild the assets
+You can demo this environment locally using the account `completed@example.com:StrongPassword`.
+When there are significant changes to content structure a soft restart the server may be necessary `./bin/docker-rails restart`.
+CSS styling changes will appear automatically without needing to restart.
 
 ### YAML
 
@@ -238,6 +262,7 @@ When the are significant changes to content structure or styling it may be neces
 
 ---
 
+[app-repo]: https://github.com/DFE-Digital/early-years-foundation-recovery
 [confluence]: https://dfedigital.atlassian.net/wiki/spaces/ER/overview
 [production]: https://eyfs-covid-recovery.london.cloudapps.digital
 [staging]: https://ey-recovery-staging.london.cloudapps.digital

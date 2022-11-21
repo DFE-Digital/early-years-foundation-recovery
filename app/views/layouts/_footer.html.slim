@@ -1,8 +1,24 @@
-.govuk-footer__section.govuk-grid-column-two-thirds
-  ul.govuk-footer__list.govuk-footer__list--columns-2
-    li.govuk-footer__list-item= link_to "Accessibility statement", static_path('accessibility-statement'), class: "govuk-footer__link"
-    li.govuk-footer__list-item= link_to "Cookies", setting_path('cookie-policy'), class: "govuk-footer__link"
-    li.govuk-footer__list-item= link_to "Privacy policy", static_path('privacy-policy'), class: "govuk-footer__link"
-    li.govuk-footer__list-item= link_to "Terms and conditions", static_path('terms-and-conditions'), class: "govuk-footer__link"
-    li.govuk-footer__list-item= link_to "Contact",  Rails.application.credentials.contact_us, class: "govuk-footer__link", target: "_blank"
-    li.govuk-footer__list-item= link_to "Feedback", Rails.configuration.feedback_url, class: "govuk-footer__link",  target: "_blank"
+= govuk_footer classes: 'noprint' do |footer|
+  - footer.navigation do
+    .govuk-footer__section.govuk-grid-column-two-thirds
+      ul.govuk-footer__list.govuk-footer__list--columns-3
+        li.govuk-footer__list-item
+          = govuk_link_to 'Accessibility statement', static_path('accessibility-statement'), class: 'govuk-footer__link'
+
+        li.govuk-footer__list-item
+          = govuk_link_to 'Cookies', setting_path('cookie-policy'), class: 'govuk-footer__link'
+
+        li.govuk-footer__list-item
+          = govuk_link_to 'Privacy policy', static_path('privacy-policy'), class: 'govuk-footer__link'
+
+        li.govuk-footer__list-item
+          = govuk_link_to 'Terms and conditions', static_path('terms-and-conditions'), class: 'govuk-footer__link'
+
+        li.govuk-footer__list-item
+          = govuk_link_to 'Contact', Rails.application.credentials.contact_us, class: 'govuk-footer__link', target: '_blank'
+
+        li.govuk-footer__list-item
+          = govuk_link_to 'Feedback', Rails.configuration.feedback_url, class: 'govuk-footer__link',  target: '_blank'
+
+        li.govuk-footer__list-item
+          = govuk_link_to 'Sitemap', static_path('sitemap'), class: 'govuk-footer__link'

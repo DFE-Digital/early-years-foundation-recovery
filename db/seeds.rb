@@ -3,4 +3,4 @@ Seeder = Dibber::Seeder
 
 Seeder.seed(:user, name_method: :email)
 
-puts Seeder.report # rubocop:disable Rails/Output
+Rails.logger.debug Seeder.report

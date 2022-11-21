@@ -3,18 +3,24 @@ class TrainingModulesController < ApplicationController
 
   def index
     track('course_overview_page')
-    @published_modules = TrainingModule.where(draft: nil)
+    @published_modules = TrainingModule.published
   end
 
   def show
     track('module_overview_page')
     @training_module = TrainingModule.find_by(name: params[:id])
-    @module_progress = ModuleOverviewDecorator.new(helpers.module_progress(@training_module))
-    @assessment_progress = helpers.assessment_progress(@training_module)
-    module_item
-    # Render verbose summary of module activity for the current user
-    # /modules/alpha?debug=y
-    render partial: 'wip' if params[:debug] # && Rails.env.development?
+
+    if @training_module.nil? || @training_module.draft?
+      redirect_to my_modules_path
+    else
+      @module_progress = ModuleOverviewDecorator.new(helpers.module_progress(@training_module))
+      @assessment_progress = helpers.assessment_progress(@training_module)
+
+      # OPTIMIZE: instantiation of module_item
+      module_item
+
+      render partial: 'progress' if params[:debug] && Rails.env.development?
+    end
   end
 
 protected

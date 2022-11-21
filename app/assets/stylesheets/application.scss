@@ -1,12 +1,29 @@
+$govuk-new-link-styles: true;
+
 @import "govuk-frontend/govuk/all";
 @import "./govspeak";
 @import "./card";
 @import "./prompt";
+@import "./video";
 @import "./question";
 @import "./interruption";
 @import "./print-link";
 @import "./quote";
 @import "./icons";
+@import "./autocomplete";
+@import "./header";
+
+* {
+  font-family: 
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen-Sans,
+    Ubuntu,
+    Cantarell,
+    'Helvetica Neue',
+    sans-serif !important;
+}
 
 /*
 Internal
@@ -20,6 +37,9 @@ pre.code-tip {
 
 .debug_dump {
   background: beige;
+  &, * {
+    font-family: monospace !important;
+  }
 }
 // --------------------------------------------
 
@@ -55,6 +75,11 @@ pre.code-tip {
   width: 100%;
 }
 
+abbr {
+  cursor: help;
+  text-decoration: none;
+}
+
 .accordion-section-left-column {
   display: inline-block;
   max-width: calc(100% - 142px);
@@ -63,22 +88,6 @@ pre.code-tip {
 // nested bullets (level 2) to be unfilled circles
 ul > li > ul > li {
   list-style-type: circle;
-}
-.embed-container {
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-  max-width: 100%;
-  .iframe,
-  .object,
-  .embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
 }
 
 .remove-borders {
@@ -104,11 +113,22 @@ ul > li > ul > li {
   border: 0.5px solid;
   border-color: #b1b4b6;
   padding: 20px;
-  width: 600px;
+  max-width: 600px;
   margin-bottom: 40px;
 }
 
 .form-container {
   padding: 30px;
   background: #f3f2f1;
+}
+
+.gem-c-govspeak {
+  a {
+    @include govuk-link-common;
+    @include govuk-link-style-default;
+  }
+}
+
+.govuk-footer__copyright-logo {
+  display: none;
 }

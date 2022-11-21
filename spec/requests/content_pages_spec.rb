@@ -48,14 +48,16 @@ RSpec.describe 'ContentPages', type: :request do
   end
 
   describe 'GET /modules/:training_module_id/content-pages/1-3-4' do
+    before do
+      get training_module_content_page_path(:alpha, '1-3-4')
+    end
+
     context 'when module is not completed' do
       it 'shows not completed' do
-        get training_module_content_page_path(:alpha, '1-3-4')
         expect(response.body).to include('You have not yet completed the module.')
       end
 
       it 'does not have the users name' do
-        get training_module_content_page_path(:alpha, '1-3-4')
         expect(response.body).not_to include(user.first_name)
         expect(response.body).not_to include(user.last_name)
       end
@@ -64,15 +66,14 @@ RSpec.describe 'ContentPages', type: :request do
     context 'when module is completed' do
       before do
         view_whole_module(alpha)
+        get training_module_content_page_path(:alpha, '1-3-4')
       end
 
       it 'shows completed' do
-        get training_module_content_page_path(:alpha, '1-3-4')
         expect(response.body).to include('Congratulations! You have now completed this module.')
       end
 
-      it 'has the users name' do
-        get training_module_content_page_path(:alpha, '1-3-4')
+      it "has the user's name" do
         expect(response.body).to include(user.first_name)
         expect(response.body).to include(user.last_name)
       end

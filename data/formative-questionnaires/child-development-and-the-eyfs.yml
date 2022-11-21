@@ -4,7 +4,7 @@ child-development-and-the-eyfs:
     questions:
       1_self_efficacy:
         multi_select: false
-        label: |
+        body: |
           Self-efficacy is a measure of which of the following?
         assessment_summary: |
           Self-efficacy is the measure of whether a child feels they can succeed.
@@ -28,7 +28,7 @@ child-development-and-the-eyfs:
     questions:
       1_curriculum_planning:
         multi_select: false
-        label: |
+        body: |
           When planning your curriculum, what is implementation?
         assessment_summary: |
           Implementation is the activities you choose to teach your curriculum.
@@ -54,7 +54,7 @@ child-development-and-the-eyfs:
     questions:
       1_learning_environment:
         multi_select: false
-        label: |
+        body: |
           True or false?
 
           When the learning environment and activities are too challenging, a child may become frustrated and disengaged.
@@ -74,16 +74,16 @@ child-development-and-the-eyfs:
     questions:
       1_behavioural_triggers:
         multi_select: true
-        label: |
-          Which of the following aspects of the learning environment can trigger challenging behaviour? (Select all answers that apply)
+        body: |
+          Which of the following aspects of the learning environment can trigger behaviour that practitioners may find challenging? (Select all answers that apply)
         assessment_summary: |
-          Children can display challenging and unwanted behaviour if:
+          Children can display behaviour you may find challenging if:
 
           - instructions, activities and experiences are not tailored to their communication level or other needs
           - they are not challenged by their environment, or feel a task is too difficult
           - they experience inconsistency regarding boundaries, routines and key people
         assessment_fail_summary: |
-          Children can display challenging and unwanted behaviour if:
+          Children can display behaviour you may find challenging if:
 
           - instructions, activities and experiences are not tailored to their communication level or other needs
           - they are not challenged by their environment, or feel a task is too difficult
@@ -102,7 +102,7 @@ child-development-and-the-eyfs:
     questions:
       1_numbers_activity:
         multi_select: false
-        label: |
+        body: |
           Read the scenario and answer the question.
 
           Fatima does not enjoy learning about numbers.
@@ -130,7 +130,7 @@ child-development-and-the-eyfs:
     questions:
       1_social_interactions:
         multi_select: false
-        label: |
+        body: |
           During the pandemic, some children may have had a smaller variety of social interactions.
           This may have reduced their opportunities to do which of the following?
         assessment_summary: |
@@ -151,7 +151,7 @@ child-development-and-the-eyfs:
     questions:
       1_emotional_maturity:
         multi_select: False
-        label: |
+        body: |
           True or false?
 
           Some children may have become more emotionally mature as a result of the pandemic.
@@ -173,7 +173,7 @@ child-development-and-the-eyfs:
     questions:
       1_pandemic_positive:
         multi_select: true
-        label: |
+        body: |
           Doing which of the following could have had a positive impact on children's physical development during the pandemic? (Select all answers that apply)
         assessment_summary: |
           Some children with access to outside space and opportunities to go out may have spent more of their day outside.
@@ -200,7 +200,7 @@ child-development-and-the-eyfs:
     questions:
       1_communication_skills:
         multi_select: true
-        label: "Having effective communication skills can help children to do which of the following? (Select all answers that apply)"
+        body: "Having effective communication skills can help children to do which of the following? (Select all answers that apply)"
         assessment_summary: |
           Effective communication skills will support children to:
 
@@ -208,7 +208,7 @@ child-development-and-the-eyfs:
           - feel valued and important
           - express their individual needs and preferences
 
-          They can also help children to increase their resilience and self efficacy, and to create and maintain relationships.
+          They can also help children to increase their resilience and self-efficacy, and to create and maintain relationships.
         assessment_fail_summary: |
           Effective communication skills will support children to:
 
@@ -216,7 +216,7 @@ child-development-and-the-eyfs:
           - feel valued and important
           - express their individual needs and preferences
 
-          They can also help children to increase their resilience and self efficacy, and to create and maintain relationships.
+          They can also help children to increase their resilience and self-efficacy, and to create and maintain relationships.
         answers:
           1: Sleep better
           2: Express their individual needs and preferences
@@ -231,7 +231,7 @@ child-development-and-the-eyfs:
       questions:
         1_mimic_interractions:
           multi_select: False
-          label: |
+          body: |
             True or false?
 
             If a child observes a positive interaction between you and their parent or carer, they may mimic the interaction they have observed.
@@ -254,7 +254,7 @@ child-development-and-the-eyfs:
     questions:
       1_giving_responsibility:
         multi_select: false
-        label: |
+        body: |
           True or false?
 
           Giving children responsibility will help to increase their resilience.
@@ -274,7 +274,7 @@ child-development-and-the-eyfs:
     questions:
       1_motor_skills:
         multi_select: false
-        label: |
+        body: |
           Which of the following can help children to develop their gross motor skills?
         assessment_summary: |
           Having access to outdoor environments and activities often gives children greater opportunity to develop gross motor skills. In your setting, you could give children the option to participate in obstacle courses and access equipment such as bikes, balls, trampolines, slides or climbing apparatus.
@@ -292,7 +292,7 @@ child-development-and-the-eyfs:
     questions:
       1_changing_routine:
         multi_select: false
-        label: |
+        body: |
           True or false?
 
           Regularly changing the routine in your setting will help children to feel more confident in their learning.
@@ -312,7 +312,7 @@ child-development-and-the-eyfs:
     questions:
       1_motor_skills:
         multi_select: true
-        label: "Which of the following are benefits of child led play? (Select all answers that apply)"
+        body: "Which of the following are benefits of child led play? (Select all answers that apply)"
         assessment_summary: |
           Child led play can help children to increase their:
 
@@ -353,7 +353,7 @@ child-development-and-the-eyfs:
     questions:
       1_adult_led_activities:
         multi_select: false
-        label: |
+        body: |
           True or false?
 
           Children will not be enthusiastic about adult led activities as they do not incorporate their interests and preferences.
@@ -375,7 +375,7 @@ child-development-and-the-eyfs:
     questions:
       1_EYFS_benefits:
         multi_select: true
-        label: |
+        body: |
           Which of the following are benefits of successfully implementing the EYFS? (Select all answers that apply)
         assessment_summary: |
           Effective implementation of the EYFS framework will:
@@ -407,7 +407,7 @@ child-development-and-the-eyfs:
     questions:
       1_learning_check:
         multi_select: false
-        label: |
+        body: |
           The 2 year old progress check is an example of which type of assessment?
         assessment_summary: |
           The 2 year old progress check is a form of summative assessment.

@@ -3,7 +3,9 @@ en:
   modules:
     personal-social-and-emotional-development:
       what-to-expect:
+        # preamble
       before-you-start:
+        # preamble
       intro:
         heading: Supporting children’s personal, social and emotional development
         body: |
@@ -45,15 +47,15 @@ en:
       3-1-1:
         heading: The stages of children’s personal, social and emotional development
         body: |
-          ![A childminder with a baby and a toddler.](/assets/3-1-1-1309696379.jpg)          
-          
+          ![A childminder with a baby and a toddler.](/assets/3-1-1-1309696379.jpg)
+
           Furthering your knowledge of children’s personal, social, and emotional development will reinforce your understanding of how these skills can help them develop in other areas. For example, children who are able to successfully develop confidence and positive self-worth will approach tasks with higher self-efficacy than children who lack those skills. In turn, this will help to improve their physical, language and communication skills.
 
           Your role as a practitioner is to help children become self-aware, confident communicators, who are curious to try new things and able to build positive relationships with others.
 
           Development Matters (2021) shows us the skills children will be learning and working towards. Over the next few pages we will take a closer look at the expected milestones for personal, social and emotional development between birth and the age of 5.
 
-          As always, it is important to remember that while we will discuss the expected milestones of development, every child will develop at their own rate. No child should be considered as low ability in comparison to these milestones. Some children may require additional support to reduce gaps in learning that have occurred during the COVID-19 pandemic, and every child should be supported to achieve their full potential.
+          As always, it is important to remember that while we will discuss the expected milestones of development, children will develop at different rates. No child should be considered as low ability in comparison to these milestones. Some children may require additional support to reduce gaps in learning that have occurred during the COVID-19 pandemic, and every child should be supported to achieve their full potential.
 
           This topic includes:
 
@@ -88,7 +90,7 @@ en:
 
           ##0 to 12 months
 
-          In the first 12 months of life, you will notice that babies will remain shy or nervous with strangers and will still cry when their familiar parent or carer leaves. They will already have favourite things, for example they may show you a favourite book to read together. This is a great opportunity to engage in conversation and take an interest in things that are important to them.
+          In the first 12 months of life, you will notice that babies will remain unsure of strangers and will still cry when their familiar parent or carer leaves. They will already have favourite things, for example they may show you a favourite book to read together. This is a great opportunity to engage in conversation and take an interest in things that are important to them.
 
           In your setting, it’s important to look out for attempts to communicate. These may include simple gestures, such as shaking their head for no or waving goodbye, or verbal communication, such as making sounds with different tones. Acknowledging and responding to these communication attempts will support babies to feel valued and important and will encourage further communication development as they try to copy the words that you say.
 
@@ -100,14 +102,14 @@ en:
               <cite>Development Matters, 2021</cite>
             </blockquote>
           </div>
-          
+
           ##12 to 18 months
-          
-          Between 12 and 18 months, children will dislike sharing and will be happier playing alone. They will have a sense that items belong to them and may fight with others if they are expected to share. 
-          
+
+          Between 12 and 18 months, children will dislike sharing and will be happier playing alone. They will have a sense that items belong to them and may fight with others if they are expected to share.
+
           In your setting, you should notice and talk about children's feelings when appropriate. For example: "I can see you want to play with the little dinosaur. Zara can have a turn and then it will be your turn again Ava." You can also model useful phrases such as "Can I have a turn?" or "My turn next."
-          
-          Children of this age will want to do things independently but will not always have the ability to do so. They may also become easily frustrated. At this age, children will be happy to separate for short periods and will enjoy being able to copy adult behaviours like cooking and driving. 
+
+          Children of this age will want to do things independently but will not always have the ability to do so. They may also become easily frustrated. At this age, children will be happy to separate for short periods and will enjoy being able to copy adult behaviours like cooking and driving.
 
           <div class='blockquote-container'>
             <blockquote class='quote'>
@@ -115,13 +117,13 @@ en:
               <cite>Development Matters, 2021</cite>
             </blockquote>
           </div>
-          
+
           ##18 to 24 months
 
           At between 18 and 24 months old, children may still be afraid of strangers, which will leave them clinging to familiar caregivers in new situations. They will show affection to familiar people and be happy to explore alone if a parent or carer is nearby.
-          
+
           Communication will now include pointing to things they want and things they find interesting.
-          
+
           Children’s frustrations may be shown through shaking their head and using the word no. You should maintain sensible routines and boundaries for children during these testing times. Negative or harsh responses can cause children to feel unduly anxious and emotionally vulnerable. You can encourage children to talk about their feelings by asking "do you feel sad?"
 
           <div class='blockquote-container'>
@@ -171,13 +173,13 @@ en:
           - role play
           - games where the children match facial expressions with feelings
           - feelings flashcards
-          
+
           Children of this age will have a better understanding of the concept of ‘mine’ or ‘theirs’ and will be able to take turns in activities. You can provide activities that require sharing of resources or taking turns to promote problem solving and co-operation.
-          
-          Children will now find it easier to separate from their parent or carer, but may still struggle with major changes to their routine. They will be becoming more independent with skills such as dressing and undressing and enjoy playing make believe. In your setting, providing opportunities and materials for purposeful role play will give children the chance to explore their wide range of feelings. 
-          
-          By 3 years old, most children will be able to have a conversation using 2 to 3 sentences at a time. However, each child’s developmental levels will be dependent on the influences they have experienced up to that point. For example, if children are coming into a childcare setting for the first time, their current level of understanding will have been shaped in the home environment. Children will have been dependent on their early social experiences and environments to support their understanding. 
-          
+
+          Children will now find it easier to separate from their parent or carer, but may still struggle with major changes to their routine. They will be becoming more independent with skills such as dressing and undressing and enjoy playing make believe. In your setting, providing opportunities and materials for purposeful role play will give children the chance to explore their wide range of feelings.
+
+          By 3 years old, most children will be able to have a conversation using 2 to 3 sentences at a time. However, each child’s developmental levels will be dependent on the influences they have experienced up to that point. For example, if children are coming into a childcare setting for the first time, their current level of understanding will have been shaped in the home environment. Children will have been dependent on their early social experiences and environments to support their understanding.
+
           <div class='blockquote-container'>
             <blockquote class='quote'>
               <p>Around the age of 2, does the child start to see themselves as a separate person? For example, do they decide what to play with, what to eat, what to wear? Between the ages of 2 and 3, does the child start to enjoy the company of other children and want to play with them?</p>
@@ -199,14 +201,19 @@ en:
 
           $BRAIN
 
+      3-1-1-3b:
+        # question
+      3-1-1-3c:
+        # question
+
       3-1-1-4a:
         notes: true
         heading: "Social and emotional development: 4 years old"
         body: |
           ![Two four year olds sat on the floor doing a painting activity. They are looking at each other and the child on the left is smiling.](/assets/3-1-1-4a-653274692.jpg)
-          
-          At around 4 years old, children would rather play with others than alone. They will be making friendships and forming bonds with their peers. At this age, children’s co-operation skills will be improving and they will be more aware of the feelings of others. In your setting you should take opportunities to encourage both child led and adult led activities. 
-          
+
+          At around 4 years old, children would rather play with others than alone. They will be making friendships and forming bonds with their peers. At this age, children’s co-operation skills will be improving and they will be more aware of the feelings of others. In your setting you should take opportunities to encourage both child led and adult led activities.
+
           Children’s play will also be more creative, with an increase in purposeful imaginative play. For example, you will likely see them using role play to act out significant figures in their lives. Providing child led opportunities to explore and express their thoughts and feelings will help children to navigate relationships.
 
           Some children will now talk more about what they like and what they are interested in and will have more of their own opinions and beliefs. You should support children to explore these in a child led way, and give adult led opportunities to discuss them.
@@ -216,7 +223,7 @@ en:
           Around this age, children will be more aware of the world around them. You should encourage their curiosity by:
 
           - providing a wide variety of books, materials and experiences, covering topics such as cultures, religions, how things work and the natural world
-          - planning trips and visits to the setting
+          - planning trips and visitors to the setting
           - offering open ended materials that can be used in multiple ways, such as sand and arts and crafts equipment
 
           $BRAIN
@@ -233,14 +240,16 @@ en:
 
           $BRAIN
 
+      3-1-1-4b:
+        # question
 
       3-1-1-5a:
         notes: true
         heading: Stages of social and emotional development
         body: |
           ![A group of children listening to a practitioner tell them about a globe.](/assets/3-1-1-5a-506475616.jpg)
-          
-          By 5 years old, children will be more likely to follow rules, but will still move between periods of co-operation and periods of demanding behaviour. You should create opportunities to encourage children to explore and understand their feelings to help them to further develop their resilience. 
+
+          By 5 years old, children will be more likely to follow rules, but will still move between periods of co-operation and periods of demanding behaviour. You should create opportunities to encourage children to explore and understand their feelings to help them to further develop their resilience.
 
           You can do this by:
 
@@ -249,7 +258,7 @@ en:
           - giving children responsibility
           - supporting children to understand that their actions have consequences
 
-          At this age, children will want to please others and will be able to take part in activities and tasks that involve cooperation and direction. They will be choosing their own friends and will see characteristics in friends that they would like for themselves.
+          At this age, children will want to please others and will be able to take part in activities and tasks that involve co-operation and direction. They will be choosing their own friends and will see characteristics in friends that they would like for themselves.
 
           Children of this age will also be able to distinguish between what is real and imaginary, and will show concern and sympathy for others.
 
@@ -259,7 +268,7 @@ en:
 
           Reflect on what you have read about the social and emotional development of children aged 5.
 
-          Think of a child around the age of 5 in your care (where applicable).
+          Think of a child coming up to the age of 5 in your care (where applicable).
 
           Consider the following questions:
 
@@ -270,6 +279,8 @@ en:
 
           $BRAIN
 
+      3-1-1-5b:
+        # question
 
       3-1-2:
         heading: Supporting skill development
@@ -499,6 +510,10 @@ en:
 
           $INFO
 
+      3-1-2-2b:
+        # question
+      3-1-2-2c:
+        # question
 
       3-1-2-3a:
         notes: true
@@ -544,13 +559,17 @@ en:
 
           $BRAIN
 
+      3-1-2-3b:
+        # question
+      3-1-2-3c:
+        # question
 
       3-1-3:
         heading: How social and emotional skills affect behaviour
         body: |
-          When children are not able to understand and process their feelings and thoughts they can become frustrated. This can then display itself as unwanted or challenging behaviour.
+          When children are not able to understand and process their feelings and thoughts they can become frustrated. This can then display itself as behaviour that practitioners and carers may find challenging.
 
-          This can become even more difficult if children also do not have the language skills needed to be able to communicate their needs and feelings successfully.
+          This can become even more difficult if children also do not have the skills needed to be able to communicate their needs and feelings successfully.
 
           A lack of communication skills could be a result of:
 
@@ -571,7 +590,7 @@ en:
         body: |
           ![A young child sat playing on the floor, supported by a practitioner.](/assets/3-1-3-1a-817588588.jpg)
 
-          If you think about the things that influence your behaviour, it won’t be very different for children. What can be more difficult for children is the ability to understand what they are feeling. The frustration, confusion and worries associated with this can be displayed as challenging or unwanted behaviour.
+          If you think about the things that influence your behaviour, it won’t be very different for children. What can be more difficult for children is the ability to understand what they are feeling. The frustration, confusion and worries associated with this can be shown through a child's behaviour.
 
           It is essential that you identify the cause of such behaviour to enable you to support children’s development.
 
@@ -587,11 +606,11 @@ en:
 
           We have previously looked at Maslow’s hierarchy of needs, which identifies the importance of meeting a child’s physiological and safety needs.
 
-          It is important to ensure you are meeting these needs to avoid potentially challenging behaviour that can occur if a child is tired, hungry, cold or worried.
+          It is important to ensure you are meeting these needs. This will help to avoid children becoming tired, hungry, cold or worried, which could lead to them displaying behaviour you may find challenging.
 
           ##Overstimulation or understimulation
 
-          When children become overstimulated by things in their environment, like noise, light, or crowds, their responses may be interpreted as challenging or unwanted behaviour.
+          It can be evident in a child's behaviour if they have become overstimulated by things in their environment, like noise, light, or crowds.
 
           When children become overstimulated they might:
 
@@ -601,19 +620,19 @@ en:
 
           In your setting, children will benefit from a designated quiet area that they know they can retreat to if things become too much. A knowledge of children’s interests can also be helpful here, as they can be used as a distraction.
 
-          Children who are understimulated will become bored and try to entertain themselves in other ways, which may present as challenging or unwanted behaviour. Using your knowledge of child development and of the individual child, you can tailor your setting to engage and challenge each child.
+          Children who are understimulated may become disengaged and try to entertain themselves in other ways, possibly through behaviour that you find challenging. Using your knowledge of child development and of the individual child, you can tailor your setting to engage and challenge each child.
 
           ##The impact of the COVID-19 pandemic
 
-          During the COVID-19 pandemic, many children will have experienced inconsistent routines, boundaries and unpredictability. For some children, this has resulted in increased worries and anxiety. These experiences may lead to challenging behaviour in a number of ways. Children who struggle to conform to new expectations, such as daily routines, may become angry or frustrated as they struggle to understand the need for change.
+          During the COVID-19 pandemic, many children will have experienced inconsistent routines, boundaries and unpredictability. For some children, this has resulted in increased worries and anxiety. Children who struggle to adapt to new expectations, such as daily routines, may become angry or frustrated as they struggle to understand the need for change.
 
-          Children who are anxious and worried may struggle to settle, concentrate or engage, which may present itself as challenging behaviour. They will need reassurance, additional explanation and repetition to support the adjustment.
+          Children who are anxious and worried may struggle to settle, concentrate or engage. They will need reassurance, additional explanation and repetition to support the adjustment.
 
           Working in partnership with parents and carers will support you to further understand the children’s experiences and will enable you to incorporate familiar items and routines where possible.
 
           ##Development challenges
 
-          If a task or experience is too difficult, children may present challenging behaviour to prevent others finding out that they do not understand. If children do attempt the task, they may become frustrated or upset when they are not able to understand or complete it.
+          If a task or experience is too difficult, children may display behaviour that you find challenging to prevent others finding out that they do not understand. If children do attempt the task, they may become frustrated or upset when they are not able to understand or complete it.
 
           $INFO
 
@@ -630,12 +649,12 @@ en:
           ##Changes in daily routines
 
           ![A young child meeting their new sibling.](/assets/3-1-3-1a-1305634049.jpg)
-          
-          A lack of routine can leave children feeling unsafe as they struggle to manage the unpredictability. Children who feel insecure or worried may express their feelings through challenging or unwanted behaviour. This is even more likely if the child does not have the appropriate communication skills to share their concerns verbally. 
-          
-          Expecting a child to conform to a new routine with little warning or explanation will also impact on their behaviour. If the child has not experienced routine at home, or if the new routine is vastly different, the child may resist the change. This resistance may present itself as challenging or unwanted behaviour. 
-          
-          A transition will create a change in routine. Moving house, welcoming a new baby or a divorce will all potentially leave children feeling unsettled. Being excited, nervous or worried can all present as challenging or unwanted behaviour. 
+
+          A lack of routine can leave children feeling unsafe as they struggle to manage the unpredictability. Children who feel insecure or worried may express their feelings through behaviour you find challenging. This is even more likely if the child does not have the appropriate communication skills to share their concerns verbally.
+
+          Expecting a child to conform to a new routine with little warning or explanation will also impact on their behaviour. If the child has not experienced routine at home, or if the new routine is vastly different, the child may resist the change.
+
+          A transition will create a change in routine. Moving house, welcoming a new baby or a divorce will all potentially leave children feeling unsettled. Being excited, nervous or worried can be presented in a variety of behaviours, including some which you may find challenging.
 
           $INFO
 
@@ -651,8 +670,13 @@ en:
 
           They will benefit from hearing from other children who have already experienced a similar transition that they are willing to share.
 
-
           $INFO
+
+      3-1-2-3b:
+        # question
+
+      3-1-3-1b:
+        # question
 
       3-1-3-2:
         notes: true
@@ -664,15 +688,15 @@ en:
 
           ##Consistent expectations and boundaries
 
-          If we have high expectations of children’s behaviour, our everyday routines and behaviours will instill the same expectations in the children. Within your setting, many of these expectations and boundaries will be set by the policies and procedures in place.
+          A consistent routine with clear boundaries can encourage and support children’s behaviour. Within your setting, many of these expectations and boundaries will be set by the policies and procedures in place.
 
           In addition to this, you will need to be a good role model and have realistic expectations in relation to the child’s level of understanding and stage of development.
 
-          It is also important to remember that children who meet our expectations still require continual recognition. If a child only gets acknowledgement when they are behaving in a challenging manner, they will continue to behave in this way to receive our attention.
+          It is also important to remember that children who meet our expectations still require continual recognition. If a child only gets acknowledgement when they are behaving in a way adults find challenging, they may continue to behave in this way to receive our attention.
 
           Having high expectations will also result in consistent boundaries. When children know how adults will respond to them, they will tailor their behaviour to receive the response they like the most. Taking the opportunity to recognise and praise appropriate behaviour will encourage children to repeat this behaviour. Setting simple stage appropriate rules, and reinforcing expectations like having kind hands or not running indoors, can be the start of teaching children to meet expectations.
 
-          If we have low or inconsistent expectations, children will become confused or frustrated. This can then result in challenging or unwanted behaviour.
+          If we have low or inconsistent expectations, children may become confused or frustrated. This can then result in behaviour practitioners may find challenging.
 
           The challenge may come when different significant individuals in the child’s life have different expectations. In your setting, policies, procedures and staff development will create and support a consistent environment. Encouraging positive relationships with parents and carers can help build consistency.
 
@@ -682,13 +706,13 @@ en:
 
           For example, if a child understands that their actions have hurt their friend, or broken something, this may help to deter them from repeating those actions.
 
-          Consequences can be another deterrent for children – for example, having to sit out of an activity for 5 minutes, or not being able to play with the toy they have fought over.
+          Consequences can be another deterrent for children – for example, supporting the child to manage their emotions by removing them from the situation and staying with them. At the right time, when the child is calmer, you can explain a more acceptable way to behave.
 
           $BRAIN
 
           Reflect on what you have read about supporting positive behaviour.
 
-          Think about a time where you managed an incident of unwanted behaviour.
+          Think about a time where you supported a child displaying behaviour you found challenging.
 
           Consider the following questions:
 
@@ -701,25 +725,29 @@ en:
           $BRAIN
 
       3-1-3-3a:
-        heading: Strategies for shaping and guiding behaviour
+        heading: Strategies for promoting positive behaviour choices
         body: |
           ![Two children talking to a practitioner in a nursery setting.](/assets/3-1-3-3a-1346504181.jpg)
 
           ##Between the ages of 18 to 36 months
 
-          At this age, you will need to use redirection strategies to shape and guide a child’s behaviour. For example, instead of telling a child "don’t shout", you could say "can we talk quietly please? Your friends are sleeping". This is because asking the child not to shout does not guide them to the behaviour you are looking for, or explain why you need them to behave differently.
+          At this age, you will need to use redirection strategies to promote positive behaviour choices. For example, instead of telling a child "don’t shout", you could say "can we talk quietly please? Your friends are sleeping". This is because asking the child not to shout does not guide them to the behaviour you are looking for, or explain why you need them to behave differently.
 
           This redirection strategy can apply to all aspects of behaviour. If children are arguing over toys, find a substitute or agree a time period before swapping. If a child is using equipment in a dangerous way, explain that they could hurt themselves and show them how to use it safely.
 
           ##Between 3.5 to 5 years
 
-          At this age, children need clear rules and directions.
+          At this age, children need clear boundaries and directions.
 
-          Avoid overcomplicating instructions, as this may lead to confusion and frustration which results in unwanted behaviour. When children need to make a good decision, offer limited choices.
+          Avoid overcomplicating instructions, as this may lead to confusion and frustration. When children need to make a good decision, offer limited choices.
 
-          Children of this age will continue to need quiet time, both to avoid overstimulation and to offer opportunities for them to reflect on situations and work through their feelings. Sending children to a quiet spot for a set amount of time is also a good response to unwanted behaviour.
+          Children will continue to need quiet time. This will help them to avoid overstimulation and also offer opportunities for them to reflect on situations and work through their feelings with a supportive, trusted adult.
 
           Appropriate praise when a child is behaving in the way you want will boost their confidence and remind them that they are meeting your expectations.
+
+      3-1-3-3b:
+        # question
+
       3-2:
         heading: Building secure relationships
         body: |
@@ -772,7 +800,7 @@ en:
           - cognitive issues could also occur if babies experienced prolonged separation in the first four years of life
           - babies and young children would experience anxiety if separated from their most significant attachment
 
-          Bowlby identified 3 stage of separation anxiety.
+          Bowlby identified 3 stages of separation anxiety.
 
           In the first stage, protest, children may scream, kick, show anger and try to escape.
 
@@ -821,7 +849,7 @@ en:
 
           ##Insecure avoidant attachment
 
-          This attachment style typically forms in the first 18 months of life. Individuals in this category did not learn that the adult’s role was to care for them. This could have been as a result of trauma or emotionless care. A significant role model may have unintentionally taught the child that it is not good to be emotional. The caring style will have been very practical. The child will develop self-reliance and conclude that other people are not able to help them.
+          This attachment style typically forms in the first 18 months of life. Children in this category did not learn that the adult’s role was to care for them. This could have been as a result of trauma or emotionless care. A significant role model may have unintentionally taught the child that it is not good to be emotional. The caring style will have been very practical. The child will develop self-reliance and conclude that other people are not able to help them.
 
           Children who have experienced this early attachment style will most likely:
 
@@ -831,10 +859,10 @@ en:
           - struggle to connect with others
 
           ##Insecure ambivalent attachment
-          ![An anxious-looking young child, holding on to an adult's hand but looking behind them.](/assets/3-2-1-3a-1305634049.jpg)    
+          ![An anxious-looking young child, holding on to an adult's hand but looking behind them.](/assets/3-2-1-3a-1305634049.jpg)
 
-          This type of attachment is also known as anxious attachment. Children develop this attachment style when they cannot predict the response they will receive from an adult. This may be as a result of inconsistent care, resulting in unpredictability and a lack of trust. The significant adult role in the child’s life may have easily swung between kindness and reward and punishment, with no sense of reason for the child. 
-          
+          This type of attachment is also known as anxious attachment. Children develop this attachment style when they cannot predict the response they will receive from an adult. This may be as a result of inconsistent care, resulting in unpredictability and a lack of trust. The significant adult role in the child’s life may have easily swung between kindness and reward and punishment, with no sense of reason for the child.
+
           Children who have experienced this type of attachment may:
 
           - continuously seek approval
@@ -870,6 +898,15 @@ en:
           - try to take on the parental role and act as the caregiver to their parent or carer and others
           - refuse to engage in work
           - try to create chaotic environments
+
+      3-2-1-3b:
+        # question
+      3-2-1-3c:
+        # question
+      3-2-1-3d:
+        # question
+      3-2-1-3e:
+        # question
       3-2-1-4:
         heading: The practitioner's role
         body: |
@@ -891,7 +928,7 @@ en:
 
           ##Timely support
 
-          If you have had to put consequences in place as a result of challenging behaviour, be sure that relatively quickly afterwards the child knows that you are still there to support them. Where children have not been used to set expectations, consequences can be very unsettling and may impact on any progress made.
+          If you have had to take action as a result of behaviour that you have found challenging, be sure that the child knows you are still there to support them. Where children have not been used to set expectations, consequences can be very unsettling and may impact on any progress made.
 
           $INFO
 
@@ -1036,6 +1073,10 @@ en:
           ##COVID-19
 
           During the pandemic, the way that children were dropped off and picked up changed. This may have impacted on your opportunities to meet children and parents before they start in your setting. For example, parents or carers may not have given information on a form that would naturally have come up during a settling in visit in your setting. In turn, this will have impacted on what we know about our children and their parents or carers.
+
+      3-2-2-2b:
+        # question
+
       3-2-2-3:
         notes: true
         heading: Supporting secure relationships
@@ -1062,7 +1103,7 @@ en:
           - want to share their success
           - look for comfort when they are tired
           - are able to wait without becoming anxious
-          - are responsive to discipline
+          - demonstrate positive behaviour choices
           - know they are valued
 
           $BRAIN
@@ -1093,6 +1134,7 @@ en:
           - the impact of early relationship experiences
           - supporting self-expression
           - holistic development: the impact of social and emotional key skills
+
       3-2-3-1:
         heading: The impact of early relationship experiences
         body: |
@@ -1130,7 +1172,7 @@ en:
 
           As well as this, you should identify spontaneous opportunities for children to explore feelings. For example, when dealing with conflict between children, it is important to encourage each child involved to consider how the others may feel. Other spontaneous opportunities may include when a friend hurts themselves, or celebrating a child’s achievement, no matter how small.
 
-          Children who understand the feelings of anger, disappointment or frustration are more likely to work to avoid or process them without the need for impulsive behaviour.
+          Children who understand the feelings of anger, disappointment or frustration are more likely to be able to process them without the need for impulsive behaviour.
 
           Children who recognise their feelings are also likely to be more skilled at self-expression.
 
@@ -1153,6 +1195,10 @@ en:
           - be motivated to ask questions
           - explore their feelings
           - choose items that express their individuality
+
+      3-2-3-2b:
+        # question
+
       3-2-3-3:
         heading: "Holistic development: the impact of social and emotional key skills"
         body: |
@@ -1167,6 +1213,7 @@ en:
           A child with high self-efficacy will approach tasks and experiences feeling that they can succeed. This makes them more likely to try challenging tasks which will help them to continually develop.
 
           A child with strong self-worth will feel valued and important, and will be more likely to engage in conversations and group activities, further promoting their development.
+
       3-3:
         heading: "Supporting self-regulation"
         body: |
@@ -1208,14 +1255,14 @@ en:
           Executive function refers to the skills we need to achieve things, like those that support organisation and planning, focussing attention and retaining information.
 
           ## Self-regulation
-          Self-regulation refers to the skills we need to keep our emotions and behaviour stable so that we can achieve things, such as persevering in challenging situations, ignoring distractions and thinking before acting.
+          Self-regulation is our ability to adapt, adjust and control our emotions, actions and thoughts. This helps us to achieve things such as persevering in challenging situations, ignoring distractions and thinking before acting.
 
           ## Developing self-regulation and executive function skills
           Children are not born with executive function skills or the ability to self-regulate. They need to learn, develop and practice these skills.
 
           The environment, experiences and opportunities that children are exposed to will influence the level of executive function and self-regulation skills they acquire and develop.
 
-          As with other areas of development, children will all develop at their own rate.
+          As with other areas of development, children will all develop at different rates.
 
           Usually, the skills needed to self-regulate start to develop as a toddler.
 
@@ -1264,6 +1311,10 @@ en:
           ##Behavioural consequences
 
           Children with limited executive function may lack the flexibility to accommodate changes in plans, activities and rules, which in turn may result in frustration. They may give up in the middle of activities, or forget the task directions during an activity. Frustrations may lead to outbursts, which for some children may become physical.
+
+      3-3-1-3b:
+        # question
+
       3-3-2:
         heading: Strategies for supporting executive function and self-regulation
         body: |
@@ -1281,7 +1332,7 @@ en:
 
           Developing self-regulation requires guidance and support. As children begin to recognise and name their feelings, they will also need your support to learn to regulate them.
 
-          This support can be referred to as co-regulation, meaning when you work in co-operation with others to develop skills. 
+          This support can be referred to as co-regulation, meaning when you work in co-operation with others to develop skills.
 
           If children are not effectively supported to understand and regulate their feelings, they can become overwhelmed and struggle with the challenges they experience as part of their daily lives.
 
@@ -1289,11 +1340,11 @@ en:
 
           ##Spontaneous activity
 
-          In your practice, you will constantly be observing children to support their learning and development. 
-          
-          When spontaneous opportunities for learning self-regulation skills arise, such as conflict over a toy, you will need to provide the appropriate support. In this example, you may need to consider whether you should step in straight away to help the children understand how to manage the conflict, or whether you should observe for longer to see if they can resolve the situation for themselves. 
-          
-          This will also help you to plan activities to further support the children’s understanding. 
+          In your practice, you will constantly be observing children to support their learning and development.
+
+          When spontaneous opportunities for learning self-regulation skills arise, such as conflict over a toy, you will need to provide the appropriate support. In this example, you may need to consider whether you should step in straight away to help the children understand how to manage the conflict, or whether you should observe for longer to see if they can resolve the situation for themselves.
+
+          This will also help you to plan activities to further support the children’s understanding.
 
           Adult led planned activities and experiences can be opportunities to ensure that:
 
@@ -1360,6 +1411,12 @@ en:
           ##Initiating tasks
 
           It is important to teach children to take action. If children are always led, they will not have the opportunity to consider how to start a task or idea for themselves. Ensure that children have frequent opportunity to explore freely, with child led activities to encourage their ability to initiate and carry out activities independently. This will result in improved planning and organisation skills and a greater sense of achievement, supporting improved self-efficacy.
+
+      3-3-2-2b:
+        # question
+      3-3-2-2c:
+        # question
+
       3-3-2-3:
         heading: Supporting self-regulation
         body: |
@@ -1414,7 +1471,7 @@ en:
 
           Language is a socially acceptable way of expressing ourselves. When children do not have these language skills, or are frustrated because they can not make themselves understood, it may make it more difficult for them to regulate their responses to challenging situations.
 
-          Usually as children’s language skills develop, episodes of challenging behaviour decrease. Their growing understanding of receptive language, which is their understanding of written and spoken language, improves their ability to understand situations from another perspective. The development of their expressive language, which is their ability to express themselves through speech and other appropriate forms of communication, helps them to share their needs.
+          Usually as children's language skills develop, they way in which they display certain behaviour changes. Their growing understanding of receptive language, which is their understanding of written and spoken language, improves their ability to understand situations from another perspective. The development of their expressive language, which is their ability to express themselves through speech and other appropriate forms of communication, helps them to share their needs.
 
           Research shows that children with higher levels of expressive language develop self-regulation faster.
       3-4:
@@ -1444,7 +1501,7 @@ en:
 
           The remaining modules within this course will support you to further develop your understanding and practice. Make sure you sign up to receive email updates when new modules become available.
 
-          ##Further activities
+          ## Further activities
 
           Read about an [activity to help children learn to name emotions](https://help-for-early-years-providers.education.gov.uk/personal-social-and-emotional-development/emotions/#naming-emotions).
 
@@ -1464,5 +1521,49 @@ en:
 
           $BOOK
 
+
+      3-4-2:
+        # assessment intro
+      3-4-2-1:
+        # question
+      3-4-2-2:
+        # question
+      3-4-2-3:
+        # question
+      3-4-2-4:
+        # question
+      3-4-2-5:
+        # question
+      3-4-2-6:
+        # question
+      3-4-2-7:
+        # question
+      3-4-2-8:
+        # question
+      3-4-2-9:
+        # question
+      3-4-2-10:
+        # question
+      3-4-2-11:
+        # results
+
+
+      3-4-3:
+        # confidence intro
+      3-4-3-1:
+        # question
+      3-4-3-2:
+        # question
+      3-4-3-3:
+        # question
+      3-4-3-4:
+        # question
+      3-4-3-5:
+        # question
+      3-4-3-6:
+        # question
       3-4-3-7:
-        url: "https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxUQ0ZUNURIUUc1OVZLSjdNUUs5TU9TR1YwRCQlQCN0PWcu"
+        form: yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxUQ0ZUNURIUUc1OVZLSjdNUUs5TU9TR1YwRCQlQCN0PWcu
+
+      3-4-4:
+        # certificate

@@ -5,13 +5,17 @@ RSpec.describe 'Page' do
     it { expect(root_path).to have_page_title 'Home page' }
     it { expect(new_user_session_path).to have_page_title 'Sign in' }
     it { expect(new_user_password_path).to have_page_title 'Reset password' }
-    it { expect(cancel_user_registration_path).to have_page_title 'Create a child development training account' }
-    it { expect(new_user_registration_path).to have_page_title 'Create a child development training account' }
+    it { expect(cancel_user_registration_path).to have_page_title 'Create an Early years child development training account' }
+    it { expect(new_user_registration_path).to have_page_title 'Create an Early years child development training account' }
 
-    it { expect(static_path(id: 'accessibility-statement')).to have_page_title 'Accessibility statement' }
-    it { expect(static_path(id: 'other-problems-signing-in')).to have_page_title 'Other problems signing in' }
-    it { expect(static_path(id: 'privacy-policy')).to have_page_title 'Privacy policy' }
-    it { expect(static_path(id: 'terms-and-conditions')).to have_page_title 'Terms and conditions' }
+    it { expect(setting_path('cookie-policy')).to have_page_title 'Cookie policy' }
+
+    it { expect(static_path('accessibility-statement')).to have_page_title 'Accessibility statement' }
+    it { expect(static_path('other-problems-signing-in')).to have_page_title 'Other problems signing in' }
+    it { expect(static_path('privacy-policy')).to have_page_title 'Privacy policy' }
+    it { expect(static_path('terms-and-conditions')).to have_page_title 'Terms and conditions' }
+    it { expect(static_path('whats-new')).to have_page_title "What's new" }
+    it { expect(static_path('new-registration')).to have_page_title 'Update your registration details' }
 
     context 'and is confirmed' do
       let(:user) { create(:user, :confirmed) }
@@ -59,16 +63,15 @@ RSpec.describe 'Page' do
     it { expect(edit_user_registration_path).to have_page_title('Change your password') }
     it { expect(new_user_confirmation_path).to have_page_title('Resend your confirmation') }
 
-    it { expect(extra_registrations_path).to have_page_title 'About you' }
-    it { expect(edit_extra_registration_path(:name)).to have_page_title('About you') }
-    it { expect(edit_extra_registration_path(:setting)).to have_page_title('About your setting') }
+    it { expect(edit_registration_name_path).to have_page_title 'About you' }
+    it { expect(edit_registration_setting_type_path).to have_page_title('What setting type do you work in?') }
+    it { expect(edit_registration_setting_type_other_path).to have_page_title('Where do you work?') }
+    it { expect(edit_registration_local_authority_path).to have_page_title('What local authority area do you work in?') }
+    it { expect(edit_registration_role_type_path).to have_page_title('Which of the following best describes your role?') }
+    it { expect(edit_registration_role_type_other_path).to have_page_title('What is your role?') }
 
-    it { expect(edit_name_user_path).to have_page_title('Change name') }
     it { expect(edit_email_user_path).to have_page_title('Change email address') }
     it { expect(edit_password_user_path).to have_page_title('Change password') }
-    it { expect(edit_postcode_user_path).to have_page_title("Change your setting's postcode information") }
-    it { expect(edit_ofsted_number_user_path).to have_page_title("Change your setting's Ofsted number") }
-    it { expect(edit_setting_type_user_path).to have_page_title('Change your setting type') }
 
     it { expect(check_email_confirmation_user_path).to have_page_title('Check email confirmation') }
     it { expect(check_email_password_reset_user_path).to have_page_title('Check email password reset') }
@@ -96,7 +99,7 @@ RSpec.describe 'Page' do
         ['1-3-2-2',           'First Training Module : 1-3-2-2'],
         ['1-3-2-3',           'First Training Module : 1-3-2-3'],
         ['1-3-2-4',           'First Training Module : 1-3-2-4'],
-        ['1-3-2-5',           'First Training Module : 1-3-2-5'],
+        ['1-3-2-5',           'First Training Module : Assessment results'],
         ['1-3-3',             'First Training Module : Reflect on your learning'],
         ['1-3-3-1',           'First Training Module : 1-3-3-1'],
         ['1-3-3-2',           'First Training Module : 1-3-3-2'],

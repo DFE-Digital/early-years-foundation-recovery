@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 # https://support.apple.com/en-gb/guide/keychain-access
 # ------------------------------------------------------------------------------
