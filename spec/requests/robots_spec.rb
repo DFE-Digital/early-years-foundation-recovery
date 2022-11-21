@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Web crawlers' do
   context 'when not in production environment' do
-    it 'displays meta tag' do
-      visit '/'
-      expect(page.body).to include('noindex,nofollow')
+    it 'robots.txt exists' do
+      get '/robots.txt'
+      expect(response).to have_http_status(:success)
     end
   end
 
@@ -13,9 +13,9 @@ RSpec.describe 'Web crawlers' do
       ENV['WORKSPACE'] = 'production'
     end
 
-    it 'does not display meta tag' do
-      visit '/'
-      expect(page.body).not_to include('noindex,nofollow')
+    it 'robots.txt does not exist' do
+      get '/robots.txt'
+      expect(response).to have_http_status(:not_found)
     end
   end
 end
