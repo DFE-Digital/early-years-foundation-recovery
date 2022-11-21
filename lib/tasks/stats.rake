@@ -1,5 +1,6 @@
 # https://tableconvert.com/csv-to-markdown
 #
+# :nocov:
 require 'csv'
 
 module Reporting
@@ -70,7 +71,10 @@ module Reporting
         # NB: will not be present for legacy users
         module_start: module_start_event(mod),
         module_complete: module_complete_event(mod),
-        confidence_check: confidence_check_complete_event(mod),
+        # confidence
+        confidence_check_start: confidence_check_start_event(mod),
+        confidence_check_complete: confidence_check_complete_event(mod),
+        # summative
         pass_assessment: pass_summative_assessment_complete_event(mod),
         fail_assessment: fail_summative_assessment_complete_event(mod),
       }
@@ -146,6 +150,19 @@ module Reporting
     Ahoy::Event.where(name: 'confidence_check_complete').where_properties(training_module_id: mod.name).count
   end
 
+  # @see QuestionnairesController#track_events
+  # ----------------------------------------------------------------------------
+
+  # Number of 'confidence_check_start' events
+  def confidence_check_start_event(mod)
+    Ahoy::Event.where(name: 'confidence_check_start').where_properties(training_module_id: mod.name).count
+  end
+
+  # Number of 'summative_assessment_start' events
+  def summative_assessment_start_event(mod)
+    Ahoy::Event.where(name: 'summative_assessment_start').where_properties(training_module_id: mod.name).count
+  end
+
   # @see AssessmentResultsController#track_events
   # ----------------------------------------------------------------------------
 
@@ -160,18 +177,21 @@ module Reporting
   end
 end
 
-namespace :report do
-  include Reporting
+namespace :eyfs do
+  namespace :report do
+    include Reporting
 
-  desc 'print stats to console [YAML]'
-  task stats: :environment do
-    puts users.to_yaml
-    puts modules.to_yaml
-  end
+    desc 'print stats to console [YAML]'
+    task stats: :environment do
+      puts users.to_yaml
+      puts modules.to_yaml
+    end
 
-  desc 'export stats to file [CSV]'
-  task export: :environment do
-    export_users
-    export_modules
+    desc 'export stats to file [CSV]'
+    task export: :environment do
+      export_users
+      export_modules
+    end
   end
 end
+# :nocov:
