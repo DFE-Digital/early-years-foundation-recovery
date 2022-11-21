@@ -37,7 +37,7 @@ module EarlyYearsFoundationRecovery
     config.unlock_in_minutes = ENV.fetch('UNLOCK_IN_MINUTES', '120').to_i
     config.user_timeout_minutes = ENV.fetch('TIMEOUT_MINUTES', '25').to_i
     # user_timeout_warning_minutes and user_timeout_modal_visible value combined must be lower than user_timeout_minutes
-    config.user_timeout_warning_minutes = ENV.fetch('TIMEOUT_WARNING_MINUTES', '15').to_i
+    config.user_timeout_warning_minutes = ENV.fetch('TIMEOUT_WARNING_MINUTES', '20').to_i
     config.user_timeout_modal_visible = ENV.fetch('TIMEOUT_MODAL_VISIBLE', '5').to_i
     config.service_name = 'Early years child development training'
     config.middleware.use Grover::Middleware

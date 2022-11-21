@@ -27,10 +27,10 @@ RSpec.describe 'Timeout modal', type: :system do
     end
   end
 
-  context 'with an unauthenticated user' do
-    it 'data attribute user status' do
-      visit '/'
-      expect(page).to have_selector("#js-timeout-warning[@data-user-status='false']")
-    end
-  end
+  # context 'with an unauthenticated user' do
+  #   it 'data attribute user status' do
+  #     visit '/'
+  #     expect(page).to have_selector("#js-timeout-warning[@data-user-status='false']")
+  #   end
+  # end
 end
