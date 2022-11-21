@@ -3,14 +3,14 @@
 # Check accessibility of running dev container against latest sitemap
 # or an external site
 #
-# ./bin/docker-pa11y https://ey-recovery-staging.london.cloudapps.digital
+# ./bin/docker-pa11y https://ey-recovery-dev.london.cloudapps.digital
 # ------------------------------------------------------------------------------
 set -e
 
-./bin/docker-rails db:bot sitemap:refresh:no_ping
+./bin/docker-rails eyfs:bot sitemap:refresh:no_ping
 
 docker-compose \
   -f docker-compose.yml \
   -f docker-compose.dev.yml \
   --project-name recovery \
-  up pa11y $1
+  run pa11y $1
