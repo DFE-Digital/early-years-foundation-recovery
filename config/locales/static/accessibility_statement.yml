@@ -2,17 +2,108 @@
 en:
   static:
     accessibility_statement:
-      heading: Accessibility statement for Early years child development training
+      heading: Accessibility statement
       content: |
-        A full accessibility statement will appear on this page before Early years child
-        development training is made available to the public.
+        This accessibility statement applies to Early years child development training.
 
-        The page will cover:
+        This website is run by the Department for Education. We want as many people
+        as possible to be able to use this website. For example, that means you
+        should be able to:
 
-        * the efforts we have made to comply with the Public Sector Bodies
-        (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018
-        * how this website meets the Web Content Accessibility Guidelines version
-        2.1 AA standard
+        * change colours, contrast levels and fonts
+        * zoom in up to 300% without the text spilling off the screen
+        * navigate most of the website using just a keyboard
+        * navigate most of the website using speech recognition software
+        * listen to most of the website using a screen reader (including the most
+          recent versions of JAWS, NVDA and VoiceOver)
 
-        If you have any feedback on the accessibility of this website, please
-        [contact us](mailto:child-development.training@education.gov.uk?subject=Accessibility){:class="govuk-link"}.
+        We've also made the website text as simple as possible to understand.
+
+        <a href="https://mcmw.abilitynet.org.uk/" target="_blank" rel="noopner noreferrer">
+        AbilityNet (opens in a new tab)</a> has advice on making your device
+        easier to use if you have a disability.
+
+        ## How accessible this website is
+
+        We know some parts of this website are not fully accessible:
+
+        * [most older PDF documents are not fully accessible to screen reader
+          software]
+
+        ## Feedback and contact information
+
+        If you need information on this website in a different format like
+        accessible PDF, large print, easy read, audio recording or braille:
+
+        * email [email address]
+        * call [phone number]
+        * [any other contact details]
+
+        We'll consider your request and get back to you in [number] days.
+
+        ## Reporting accessibility problems with this website
+
+        We're always looking to improve the accessibility of this website. If you
+        find any problems not listed on this page or think we're not meeting
+        accessibility requirements, contact: [provide both details of how to
+        report these issues and contact details for the unit or person responsible
+        for dealing with these reports].
+
+        ## Enforcement procedure
+
+        The Equality and Human Rights Commission (EHRC) is responsible for enforcing
+        the Public Sector Bodies (Websites and Mobile Applications) (No. 2)
+        Accessibility Regulations 2018 (the 'accessibility regulations'). If you're
+        not happy with how we respond to your complaint, <a rel="noopner noreferrer" href="https://www.equalityadvisoryservice.com/" target="_blank">
+        contact the Equality Advisory and Support Service (opens in a new tab)</a>.
+
+        ## Technical information about this website's accessibility
+
+        The Department for Education is committed to making its websites accessible,
+        in accordance with the Public Sector Bodies (Websites and Mobile
+        Applications) (No. 2) Accessibility Regulations 2018.
+
+        ## Compliance status
+
+        This website is partially compliant with the WCAG  version 2.1 AA standard,
+        due to the following non-compliances (and/or) the following exemptions.
+
+        ### Non-accessible content
+
+        The content is non-accessible for the following reason(s):
+
+        #### Non-compliance with the accessibility regulations
+
+        * [Some images don't contain alternative text to describe the image
+        which does not meet <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/text-equiv-all.html" target="_blank" rel="noopner noreferrer">
+        WCAG version 2.1 AA - 1.1.1 Non-text Content</a>]</li>
+
+        #### Disproportionate burden
+
+        We have determined that there is disproportionate burden to meet all the
+        requirements for the following reasons:
+
+        * [Making improvements would exceed budget for the year and leave the
+          department unable to do other work - and would not significantly improve
+          things for disabled users.]
+
+        #### The content is not within the scope of the accessibility regulations
+
+        * [PDFs or other documents published before 23 September 2018 are out of
+        scope of the regulations.]
+
+        ## What we're doing to improve accessibility
+
+        [Explain what you're doing to improve accessibility]
+
+        ## Preparation of this accessibility statement
+
+        This statement was prepared on [date when it was first published]. It was
+        last reviewed on [date when it was last reviewed].
+
+        This website was last tested on [date]. The test was carried out by [add
+        name of organisation that carried out test, or indicate that you did your
+        own testing]
+
+        We used this approach to deciding on a sample of pages to test [add link to
+        explanation of how you decided which pages to test].
