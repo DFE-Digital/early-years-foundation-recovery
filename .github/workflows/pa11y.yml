@@ -52,5 +52,7 @@ jobs:
         name: Audit
         env:
           PUPPETEER_EXECUTABLE_PATH: /opt/hostedtoolcache/chromium/latest/x64/chrome
-        run: |
-          pa11y-ci --sitemap https://${DOMAIN}/sitemap.xml
+        run: pa11y-ci --sitemap https://${DOMAIN}/sitemap.xml > report.txt
+      -
+        name: Report
+        run: cat report.txt && ((`cat report.txt | grep sign-in | wc -l`<2)) || exit 1
