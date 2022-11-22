@@ -362,7 +362,7 @@ module-4:
         assessment_summary: |
           Creative and imaginative activities often result in more spontaneous conversation. It can help children to discuss personal information such as their families or their interests. These conversations can help children learn how to take turns when talking.
 
-          When you carry out these activities with children individually you can also create an opportunity for children to talk about their feelings on a 1 to 1 basis.
+          When you carry out these activities with children individually you can also create an opportunity for children to talk about their feelings on a one to one basis.
 
         assessment_fail_summary: |
           Creative and imaginative activities often result in more spontaneous conversation. It can help children to discuss personal information such as their families or their interests. These conversations can help children learn how to take turns when talking.
@@ -372,7 +372,7 @@ module-4:
           1: "Increased opportunities for spontaneous conversation"
           2: "Helping children to discuss personal information"
           3: "Teaching children to take turns when talking"
-          4: "Supporting children to understand and express their feelings on a 1 to 1 basis"
+          4: "Supporting children to understand and express their feelings on a one to one basis"
         correct_answers:
           - 1
           - 2
