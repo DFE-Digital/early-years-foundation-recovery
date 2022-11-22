@@ -12,12 +12,19 @@ pre.debug_dump
       li #{item.name} / #{item.type}
   hr
 
-
-ol#progress.govuk-list.govuk-list--spaced
+ol#progress.govuk-list
   - bar.milestones.map do |item|
-    li
-      = progress_ball(*bar.icon(item))
+    li.progress-bar
+      span class='fa-stack fa-2x'
+        / i class="fa-solid fa-circle-check fa-stack-1x green"
+        / i class="fa-solid fa-circle fa-stack-1x" style='color: white'
+        = progress_ball('circle', :solid, :white, '')
+        = progress_ball(*bar.icon(item))
+      
+      - unless bar.milestones.first == item
+        div class="line line--#{bar.icon(item)[2]}"
+      - else
+        div class="line line--white"
 
-      h3 class='govuk-!-text-align-right'= item.model.heading
-
-
+      p class='govuk-body govuk-!-font-size-16'= item.model.heading
+      

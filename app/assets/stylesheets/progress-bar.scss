@@ -1,0 +1,41 @@
+#progress {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+}
+
+.progress-bar {
+  & > span.fa-stack {
+    z-index: 1;
+    width: 100%;
+
+    .svg-inline--fa {
+      height: 36px;
+    }
+  }
+  
+  & > p {
+    text-align: center;
+  }
+}
+
+.line {
+  width: 100%;
+  height: 0px;
+  position: relative;
+  top: -40px;
+  right: 54%;
+  z-index: 0;
+
+  &--green {
+    border: 2px solid govuk-colour("green");
+  }
+
+  &--grey {
+    border: 2px solid govuk-colour("dark-grey");
+  }
+
+  &--white {
+    border: 2px solid govuk-colour("white");
+  }
+}
