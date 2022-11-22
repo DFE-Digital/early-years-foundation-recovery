@@ -1,4 +1,4 @@
-- if Rails.env.development? || ENV['WORKSPACE'].eql?('content')
+- if Rails.application.debug?
   pre.debug_dump
     p Warning: opening a browser inspector may impact this popup
     ul
