@@ -155,7 +155,7 @@ module-4:
       1_social_emotional_relationships:
         multi_select: false
         body: |
-          Which theorist believed that social and emotional relationships are not important for children’s language development?
+          Which theorist did not believe that social and emotional relationships were important for children's language development?
         assessment_summary: |
           Piaget did not think that social and emotional relationships were important.
           Instead he believed that children need to understand a word before they can use it.
@@ -360,10 +360,14 @@ module-4:
         body: |
           Which of the following are benefits of creative and imaginative activities? (Select all answers that apply)
         assessment_summary: |
-          Creative and imaginative activities often result in more spontaneous conversation. It can help children to discuss personal information such as their families or their interests. When you carry out these activities with children individually you can also create an opportunity for children to talk about their feelings on a 1 to 1 basis.
+          Creative and imaginative activities often result in more spontaneous conversation. It can help children to discuss personal information such as their families or their interests. These conversations can help children learn how to take turns when talking.
+
+          When you carry out these activities with children individually you can also create an opportunity for children to talk about their feelings on a 1 to 1 basis.
 
         assessment_fail_summary: |
-          Creative and imaginative activities often result in more spontaneous conversation. It can help children to discuss personal information such as their families or their interests. When you carry out these activities with children individually you can also create an opportunity for children to talk about their feelings on a 1 to 1 basis.
+          Creative and imaginative activities often result in more spontaneous conversation. It can help children to discuss personal information such as their families or their interests. These conversations can help children learn how to take turns when talking.
+
+          When you carry out these activities with children individually you can also create an opportunity for children to talk about their feelings on a 1 to 1 basis.
         answers:
           1: "Increased opportunities for spontaneous conversation"
           2: "Helping children to discuss personal information"
