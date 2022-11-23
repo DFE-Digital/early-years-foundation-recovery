@@ -783,7 +783,7 @@ __metadata:
     "@hotwired/turbo-rails": ^7.2.4
     accessible-autocomplete: ^2.0.4
     esbuild: ^0.15.13
-    govuk-frontend: ^4.3.1
+    govuk-frontend: ^4.4.0
     puppeteer: ^19.2.2
     sass: ^1.56.1
   languageName: unknown
@@ -910,10 +910,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"govuk-frontend@npm:^4.3.1":
-  version: 4.3.1
-  resolution: "govuk-frontend@npm:4.3.1"
-  checksum: ea2d658f666481ffcac8c5ba2433f1cfe5087c281b8db1157567628f1db094734c64eb0879f57f87e75944adb06459487e735a4cd184a960de6ab1249f75b6d3
+"govuk-frontend@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "govuk-frontend@npm:4.4.0"
+  checksum: 284877e1e6cfcf48baaed3c4dff705c3c409dcde29209afd0266998ed78b4b8c192a646b1c9719a598e1f4a652ab6c4074a18faf0de783531dd1dd5f7bed9459
   languageName: node
   linkType: hard
 
