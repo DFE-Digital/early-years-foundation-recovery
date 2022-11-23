@@ -455,7 +455,7 @@ brain-development-and-how-children-learn:
       1_relationships_observe_experience:
         multi_select: true
         body: |
-          Which of these relationships will a child observe and experience in your setting? (Select all answers that apply)
+          Which of these relationships could a child observe and experience in their setting? (Select all answers that apply)
         assessment_summary: |
           Practitioner to practitioner, practitioner to parent, and child to child interaction will be influential when children are learning about positive relationships.
 
