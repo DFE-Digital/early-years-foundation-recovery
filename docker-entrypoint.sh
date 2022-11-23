@@ -18,9 +18,9 @@ then
   rm -f tmp/pids/server.pid
 fi
 
-if [ !${WORKSPACE}=='production']
+if [ ${WORKSPACE} != "production" ]
 then
-  echo 'User-agent: *\nDisallow /' >> public/robots.txt
+  mv public/robots-file.txt public/robots.txt
 fi
 
 if [ -z ${DATABASE_URL} ]
