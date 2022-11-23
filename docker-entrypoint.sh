@@ -16,11 +16,13 @@ then
   fi
 
   rm -f tmp/pids/server.pid
-fi
-
-if [ ${WORKSPACE} != "production" ]
-then
-  mv public/robots-file.txt public/robots.txt
+else
+  if [ ${WORKSPACE} = "production" ]
+  then
+    mv public/robots-allow-crawlers.txt public/robots.txt
+  else
+    mv public/robots-block-crawlers.txt public/robots.txt
+  fi
 fi
 
 if [ -z ${DATABASE_URL} ]
