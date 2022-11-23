@@ -9,7 +9,7 @@ RSpec.describe 'Selecting cookie options' do
     end
 
     it 'display cookie banner' do
-      expect(page).to have_content('Cookies on Child development training')
+      expect(page).to have_content('Cookies on Early years child development training')
     end
 
     context 'when cookie banner is displayed' do
@@ -22,13 +22,13 @@ RSpec.describe 'Selecting cookie options' do
       it 'visitor can click to accept analytics cookies' do
         click_on 'Accept analytics cookies'
         expect(track_analytics_cookie).to eq 'true'
-        expect(page).not_to have_content('Cookies on Child development training')
+        expect(page).not_to have_content('Cookies on Early years child development training')
       end
 
       it 'visitor can click to reject analytics cookies' do
         click_on 'Reject analytics cookies'
         expect(track_analytics_cookie).to eq 'false'
-        expect(page).not_to have_content('Cookies on Child development training')
+        expect(page).not_to have_content('Cookies on Early years child development training')
       end
     end
   end

@@ -1,5 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/sh
 # ------------------------------------------------------------------------------
 set -e
 
-bundle exec rubocop --auto-gen-config --no-auto-gen-timestamp
+cf ssh ey-recovery -c "\
+. .profile; \
+cd /srv; \
+rake report:stats \
+"

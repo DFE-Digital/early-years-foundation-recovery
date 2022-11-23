@@ -65,6 +65,8 @@ class SummativeAssessmentProgress
     user.user_assessments.where(assessments_type: 'summative_assessment', module: mod.name).any?
   end
 
+  # @see AssessmentResultsController#new
+  #
   # @return [Integer]
   def archive_attempt
     answers.update_all(archived: true)
