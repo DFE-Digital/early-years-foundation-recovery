@@ -30,10 +30,6 @@ Rails.application.configure do
   # Raise exceptions instead of rendering exception templates.
   config.action_dispatch.show_exceptions = false
 
-  config.action_dispatch.default_headers = {
-    'X-Robots-Tag' => 'none',
-  }
-
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false
 

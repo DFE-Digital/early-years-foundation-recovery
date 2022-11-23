@@ -18,6 +18,11 @@ then
   rm -f tmp/pids/server.pid
 fi
 
+if [ !${ENV['WORKSPACE']}=='production']
+then
+  echo 'User-agent: *\nDisallow /' >> public/robots.txt
+fi
+
 if [ -z ${DATABASE_URL} ]
 then
   echo "DATABASE_URL is not defined and cannot be prepared"
