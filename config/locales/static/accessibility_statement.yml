@@ -27,13 +27,13 @@ en:
 
         We know some parts of this website are not fully accessible:
 
-        * If you disable javascript in your browser, the alert to tell you that you will soon be signed out due to inactivity may not appear as we intended it to
-        * Our sitemap includes only the pages that do not need you to be signed in - this is because once you have started a module, you will need to work through each page in order
+        * if you disable javascript in your browser, the alert to tell you that you will soon be signed out due to inactivity may not appear as accessibly as the version displayed when you have javascript enabled
+        * our sitemap includes only the pages that do not need you to be signed in - this is because once you have started a module, you will need to work through each page in order
 
         ## Feedback and contact information
 
         If you need information on this website in a different format like
-        accessible PDF, large print, easy read, audio recording or braille, email <a href="mailto:child-development.training@education.gov.uk"
+        accessible PDF, large print, easy read, audio recording or braille, email <a href="mailto:child-development.training@education.gov.uk">child-development.training@education.gov.uk</a>.
 
         We'll consider your request and get back to you in 10 days.
 
@@ -41,9 +41,7 @@ en:
 
         We're always looking to improve the accessibility of this website. If you
         find any problems not listed on this page or think we're not meeting
-        accessibility requirements, contact: [provide both details of how to
-        report these issues and contact details for the unit or person responsible
-        for dealing with these reports].
+        accessibility requirements, email <a href="mailto:child-development.training@education.gov.uk">child-development.training@education.gov.uk</a>.
 
         ## Enforcement procedure
 
@@ -59,12 +57,10 @@ en:
         in accordance with the Public Sector Bodies (Websites and Mobile
         Applications) (No. 2) Accessibility Regulations 2018.
 
-        <!-- FIXME: Do we need this bit? Or can we use the stuff from the compliant version?? -->
-
         ## Compliance status
 
         This website is partially compliant with the WCAG version 2.1 AA standard,
-        due to the following non-compliances (and/or) the following exemptions.
+        due to the following non-compliances.
 
         ### Non-accessible content
 
@@ -72,36 +68,17 @@ en:
 
         #### Non-compliance with the accessibility regulations
 
-        * [Some images don't contain alternative text to describe the image
-        which does not meet <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/text-equiv-all.html" target="_blank" rel="noopner noreferrer">
-        WCAG version 2.1 AA - 1.1.1 Non-text Content</a>]</li>
-
-        #### Disproportionate burden
-
-        We have determined that there is disproportionate burden to meet all the
-        requirements for the following reasons:
-
-        * [Making improvements would exceed budget for the year and leave the
-          department unable to do other work - and would not significantly improve
-          things for disabled users.]
-
-        #### The content is not within the scope of the accessibility regulations
-
-        * [PDFs or other documents published before 23 September 2018 are out of
-        scope of the regulations.]
+        Our sitemap includes only the pages that do not need you to be signed in. This is because once you have started a module, you will need to work through each page in order. This is the same for all users. This does not meet <a href="https://www.w3.org/WAI/WCAG21/Understanding/multiple-ways" target="_blank" rel="noopener noreferrer">
+        WCAG version 2.1 AA - 2.4.5 Multiple ways (opens in new tab)</a>.
 
         ## What we're doing to improve accessibility
 
-        [Explain what you're doing to improve accessibility]
+        We are continually monitoring how users access and move around the service, including the navigation in each module.
 
         ## Preparation of this accessibility statement
 
-        This statement was prepared on [date when it was first published]. It was
-        last reviewed on [date when it was last reviewed].
+        This statement was prepared on 24 November 2022.
 
-        This website was last tested on [date]. The test was carried out by [add
-        name of organisation that carried out test, or indicate that you did your
-        own testing]
+        This website was last tested on 22 November 2022. The test was carried out by members of the team, following an accessibility audit by <a href="https://www.shawtrust.org.uk/" target="_blank" rel="noopener noreferrer">Shaw Trust (opens in new tab)</a>.
 
-        We used this approach to deciding on a sample of pages to test [add link to
-        explanation of how you decided which pages to test].
+        For our accessibility audit, Shaw Trust completed automated testing of the service and manual testing of pages representing each type of content or functionality.
