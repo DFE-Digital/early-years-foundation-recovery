@@ -18,7 +18,7 @@ then
   rm -f tmp/pids/server.pid
 fi
 
-if [ !${ENV['WORKSPACE']}=='production']
+if [ !${WORKSPACE}=='production']
 then
   echo 'User-agent: *\nDisallow /' >> public/robots.txt
 fi
