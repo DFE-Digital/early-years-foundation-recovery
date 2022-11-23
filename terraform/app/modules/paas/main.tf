@@ -31,10 +31,10 @@ resource "cloudfoundry_app" "web_app" {
   instances                  = var.web_app_instances     # default: 1
   memory                     = var.web_app_memory        # default: 512
   disk_quota                 = var.web_app_disk_quota    # default: 2GB
+  strategy                   = var.web_app_deployment_strategy
   health_check_type          = "http"
   health_check_http_endpoint = "/health"
   stopped                    = false
-  strategy                   = "blue-green-v2"
   timeout                    = 300
   docker_image               = var.app_docker_image
   space                      = data.cloudfoundry_space.space.id
