@@ -28,6 +28,12 @@ namespace :eyfs do
     FillPageViews.new.call
   end
 
+  desc 'Transfer yaml to contentful'
+  task upload: :environment do
+    require 'upload'
+    Upload.new.call
+  end
+
   # @example
   #
   #   $ rake eyfs:whats_new

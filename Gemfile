@@ -124,3 +124,7 @@ group :ui do
   gem 'selenium-webdriver'
   gem 'site_prism'
 end
+
+gem "contentful_model"
+gem "contentful"
+gem "contentful-management"

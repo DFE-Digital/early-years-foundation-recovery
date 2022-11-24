@@ -43,5 +43,10 @@ module EarlyYearsFoundationRecovery
     config.middleware.use Grover::Middleware
     config.active_record.yaml_column_permitted_classes = [Symbol]
     config.action_view.sanitized_allowed_tags = ALLOWED_TAGS
+
+    config.access_token = ENV.fetch('CONTENTFUL_DELIVERY_ACCESS_TOKEN', '#CONTENTFUL_DELIVERY_ACCESS_TOKEN_env_var_missing')
+    config.preview_access_token = ENV.fetch('CONTENTFUL_PREVIEW_ACCESS_TOKEN', '#CONTENTFUL_PREVIEW_ACCESS_TOKEN_env_var_missing') 
+    config.management_token = ENV.fetch('CONTENTFUL_MANAGEMENT_ACCESS_TOKEN', '#CONTENTFUL_MANAGEMENT_ACCESS_TOKEN_env_var_missing') 
+    config.space = ENV.fetch('CONTENTFUL_SPACE', '#CONTENTFUL_SPACE_env_var_missing')
   end
 end

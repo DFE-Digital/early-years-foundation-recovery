@@ -50,6 +50,16 @@ Rails.application.routes.draw do
     resource :notes, path: 'learning-log', only: %i[show create update]
   end
 
+  authenticated :user, lambda {|u| u.previewer? } do
+    scope module: 'training' do
+      resources :modules, only: %i[show] do
+        resources :content_pages, only: %i[index show], path: 'content-pages'
+        resources :questionnaires, only: %i[show update]
+        resources :assessment_results, only: %i[show new], path: 'assessment-result'
+      end
+    end
+  end
+
   resources :modules, only: %i[show], as: :training_modules, controller: :training_modules do
     resources :content_pages, only: %i[index show], path: 'content-pages'
     resources :questionnaires, only: %i[show update]
