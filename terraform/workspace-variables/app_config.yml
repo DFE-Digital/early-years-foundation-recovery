@@ -43,4 +43,3 @@ content:
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
-  HOTJAR_SITE_ID: 3169682 # to be removed before merging
