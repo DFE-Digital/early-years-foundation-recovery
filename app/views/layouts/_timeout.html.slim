@@ -1,0 +1,35 @@
+- if Rails.env.development? || ENV['WORKSPACE'].eql?('content')
+  pre.debug_dump
+    p Warning: opening a browser inspector may impact this popup
+    ul
+      li timeout enabled: #{timeout_active}
+      li timeout after: #{timeout_duration} minutes (default 60)
+      li timeout warning: #{timeout_warning} minutes (default 5)
+      li timeout modal visible for: #{timeout_modal} minutes (default 5)
+      / li timer start value: #{timeout_timer} in seconds
+
+    ul
+      li= link_to 'Timed out page (WARNING: this ends the session)', users_timeout_path
+      li= link_to 'Countdown timer', check_session_timeout_path
+      li= link_to 'Extend timer', extend_session_path
+
+/[if lt IE 10]
+  script[src="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.5.0/dialog-polyfill.js"]
+
+.govuk-timeout-warning-fallback
+  h1.govuk-heading-l= t('timeout.heading')
+
+
+dialog#js-timeout-warning.govuk-timeout-warning.dialog data-module='govuk-timeout-warning' tabindex=0 data-user-status=timeout_active data-minutes-idle-timeout=timeout_warning data-minutes-modal-visible=timeout_modal data-url-redirect=users_timeout_path role='dialog' aria-live='polite' aria-labelledby='dialog-title' aria-describedby='at-timer'
+
+  h1#dialog-title.govuk-heading-l= t('timeout.heading')
+
+  .timer class="govuk-!-static-margin-bottom-5" aria-hidden='true' aria-relevant='additions'
+  #at-timer.at-timer.govuk-visually-hidden role='status' class="govuk-!-static-margin-bottom-5"
+
+  p.govuk-body= t('timeout.body')
+  
+  div class="govuk-!-static-margin-bottom-5"
+    button.govuk-button.dialog-button.js-dialog-close data-module='govuk-button' Stay signed in
+  div 
+    = govuk_link_to 'Sign out now', '#', class: 'govuk-!-margin-top-5 js-dialog-cancel'

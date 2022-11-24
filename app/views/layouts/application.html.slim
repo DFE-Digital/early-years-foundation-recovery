@@ -18,12 +18,14 @@ html.govuk-template lang='en'
     = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
     = javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true
     = yield(:head)
+
   body.govuk-template__body.govuk-body
     script
       | document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
     
     = render 'layouts/analytics_body'
     = render 'layouts/cookie_banner'
+    = render 'layouts/timeout'
     
     = govuk_skip_link
 

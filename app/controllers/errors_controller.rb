@@ -1,10 +1,6 @@
 class ErrorsController < ApplicationController
   before_action :log_error
 
-  def timeout
-    @user_timeout_minutes = Rails.configuration.user_timeout_minutes
-  end
-
   # 404 error
   def not_found
     render status: :not_found

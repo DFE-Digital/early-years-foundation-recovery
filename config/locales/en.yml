@@ -211,6 +211,10 @@ en:
     note: Add to your learning log
     test: Check your understanding
 
+  timeout:
+    heading: You're about to be signed out
+    body: Your progress through the training has been saved. Other changes made to your account or learning log will not be saved.
+
   summary_intro:
     heading: Summary and next steps
     body: |
@@ -415,8 +419,8 @@ en:
       check_email_password_reset: Check email password reset
     training_modules:
       index: About training
-    errors:
-      timeout: User timeout
+    timeout:
+      timeout_user: User timeout
     users/sessions:
       new: Sign in
     passwords:
