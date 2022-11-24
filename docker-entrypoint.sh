@@ -27,7 +27,7 @@ fi
 
 if [ ${WORKSPACE} == "content" ]
 then
-  rm public/robots.txt
+  rm -f public/robots.txt
 fi
 
 exec bundle exec "$@"
