@@ -32,7 +32,6 @@ module "paas" {
   web_app_instances       = var.paas_web_app_instances
   web_app_memory          = var.paas_web_app_memory
   web_app_start_command   = var.paas_web_app_start_command
-  web_app_start_command   = var.paas_web_app_start_command
 
   s3_bucket               = var.paas_s3_bucket
 }
