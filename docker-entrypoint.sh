@@ -25,7 +25,7 @@ else
   bundle exec rails db:prepare
 fi
 
-if [ ${WORKSPACE} == "content" ]
+if [ ${WORKSPACE} = "content" ]
 then
   rm -f public/robots.txt
 fi
