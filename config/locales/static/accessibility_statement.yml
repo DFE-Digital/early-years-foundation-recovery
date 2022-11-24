@@ -27,7 +27,7 @@ en:
 
         We know some parts of this website are not fully accessible:
 
-        * if you disable javascript in your browser, the alert to tell you that you will soon be signed out due to inactivity is not fully accessible
+        * if you disable JavaScript in your browser, the alert to tell you that you will soon be signed out due to inactivity does not appear
         * our sitemap includes only the pages that do not need you to be signed in - this is because once you have started a module, you will need to work through each page in order
 
         ## Feedback and contact information
@@ -68,10 +68,14 @@ en:
 
         #### Non-compliance with the accessibility regulations
 
-        Some pages cannot be found through more than one type of navigation. This does not meet <a href="https://www.w3.org/WAI/WCAG21/Understanding/multiple-ways" target="_blank" rel="noopener noreferrer">
+        1. Some pages cannot be found through more than one type of navigation. This does not meet <a href="https://www.w3.org/WAI/WCAG21/Understanding/multiple-ways" target="_blank" rel="noopener noreferrer">
         WCAG version 2.1 AA - 2.4.5 Multiple ways (opens in new tab)</a>.
 
+        2. The alert to tell you that you will soon be signed out due to inactivity needs JavaScript to appear. If JavaScript is turned off, the alert does not appear. This does not meet <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/time-limits-required-behaviors.html" target="_blank" rel="noopener noreferrer">WCAG version 2.1 A - 2.2.1 Timing Adjustable (opens in new tab)</a>.
+
         ## What we're doing to improve accessibility
+
+        We have asked <a href="https://www.shawtrust.org.uk/" target="_blank" rel="noopener noreferrer">Shaw Trust (opens in new tab)</a> to complete a further acccessibility audit.
 
         We are continually monitoring how users access and move around the website, including the navigation in each module.
 
