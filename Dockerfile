@@ -12,9 +12,31 @@ RUN apk add --no-cache --no-progress build-base less curl tzdata gcompat \
     "ssl_client>=1.34.1-r5" \
     "zlib>=1.2.12-r0"
 
-RUN apk add --no-cache --no-progress \
-    --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing \
-    s3fs-fuse
+# RUN apk add --no-cache --no-progress \
+#     --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing \
+#     s3fs-fuse
+
+# https://github.com/efrecon/docker-s3fs-client/blob/master/Dockerfile
+RUN apk --no-cache add \
+    ca-certificates \
+    build-base \
+    git \
+    alpine-sdk \
+    libcurl \
+    automake \
+    autoconf \
+    libxml2-dev \
+    libressl-dev \
+    mailcap \
+    fuse-dev \
+    curl-dev && \
+    git clone https://github.com/s3fs-fuse/s3fs-fuse.git && \
+    cd s3fs-fuse && \
+    git checkout tags/v1.91 && \
+    ./autogen.sh && \
+    ./configure --prefix=/usr && \
+    make -j && \
+    make install
 
 # ------------------------------------------------------------------------------
 # Dependencies
