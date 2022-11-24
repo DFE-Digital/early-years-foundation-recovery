@@ -6,7 +6,7 @@ html.govuk-template lang='en'
     = render 'layouts/analytics_header'
     = render 'layouts/hotjar_tracking'
     = tag.meta content: 'width=device-width,initial-scale=1', name: 'viewport'
-    = tag.meta name: 'robots', content: 'noindex,nofollow'
+    = tag.meta name: 'robots', content: 'noindex,nofollow' unless ENV['WORKSPACE'].eql?('production')
     = tag.meta property: 'og:image', content: asset_path('images/govuk-opengraph-image.png')
     = csrf_meta_tags
     = favicon_link_tag asset_path('images/favicon.ico')
@@ -18,12 +18,14 @@ html.govuk-template lang='en'
     = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
     = javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true
     = yield(:head)
+
   body.govuk-template__body.govuk-body
     script
       | document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
     
     = render 'layouts/analytics_body'
     = render 'layouts/cookie_banner'
+    = render 'layouts/timeout'
     
     = govuk_skip_link
 

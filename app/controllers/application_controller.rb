@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_analytics_tracking_id, :set_hotjar_site_id
 
+  helper_method :timeout_timer
+
   default_form_builder(EarlyYearsRecoveryFormBuilder)
 
   include Tracking
@@ -32,6 +34,13 @@ class ApplicationController < ActionController::Base
 
   def set_hotjar_site_id
     @hotjar_id = Rails.configuration.hotjar_site_id
+  end
+
+  def timeout_timer
+    timeout_controller = TimeoutController.new
+    timeout_controller.request = request
+    timeout_controller.response = response
+    timeout_controller.send(:ttl_to_timeout)
   end
 
 private
