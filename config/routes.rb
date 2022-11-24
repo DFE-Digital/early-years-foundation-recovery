@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   get '/422', to: 'errors#unprocessable_entity', via: :all
   get '/500', to: 'errors#internal_server_error', via: :all
   get 'users/timeout', to: 'errors#timeout'
-  # get '/robots.txt', to: 'robots_txts#show'
 
   resources :settings, controller: :settings, only: %i[show create]
 

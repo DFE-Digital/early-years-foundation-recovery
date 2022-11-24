@@ -16,13 +16,6 @@ then
   fi
 
   rm -f tmp/pids/server.pid
-else
-  if [ ${WORKSPACE} = "production" ]
-  then
-    mv public/robots-allow-crawlers.txt public/robots.txt
-  else
-    mv public/robots-block-crawlers.txt public/robots.txt
-  fi
 fi
 
 if [ -z ${DATABASE_URL} ]
@@ -30,6 +23,11 @@ then
   echo "DATABASE_URL is not defined and cannot be prepared"
 else
   bundle exec rails db:prepare
+fi
+
+if [ ${WORKSPACE} == "content" ]
+then
+  rm public/robots.txt
 fi
 
 exec bundle exec "$@"

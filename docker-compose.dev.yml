@@ -12,6 +12,7 @@ services:
     environment:
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
       - RAILS_ENV=development
+      - WORKSPACE=local
       - DOMAIN=app:3000
       - RAILS_SERVE_STATIC_FILES=true
       - TIMEOUT_MINUTES=360
