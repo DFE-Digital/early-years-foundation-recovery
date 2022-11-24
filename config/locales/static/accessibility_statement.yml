@@ -27,7 +27,7 @@ en:
 
         We know some parts of this website are not fully accessible:
 
-        * if you disable javascript in your browser, the alert to tell you that you will soon be signed out due to inactivity may not appear as accessibly as the version displayed when you have javascript enabled
+        * if you disable javascript in your browser, the alert to tell you that you will soon be signed out due to inactivity is not fully accessible
         * our sitemap includes only the pages that do not need you to be signed in - this is because once you have started a module, you will need to work through each page in order
 
         ## Feedback and contact information
@@ -68,12 +68,12 @@ en:
 
         #### Non-compliance with the accessibility regulations
 
-        Our sitemap includes only the pages that do not need you to be signed in. This is because once you have started a module, you will need to work through each page in order. This is the same for all users. This does not meet <a href="https://www.w3.org/WAI/WCAG21/Understanding/multiple-ways" target="_blank" rel="noopener noreferrer">
+        Some pages cannot be found through more than one type of navigation. This does not meet <a href="https://www.w3.org/WAI/WCAG21/Understanding/multiple-ways" target="_blank" rel="noopener noreferrer">
         WCAG version 2.1 AA - 2.4.5 Multiple ways (opens in new tab)</a>.
 
         ## What we're doing to improve accessibility
 
-        We are continually monitoring how users access and move around the service, including the navigation in each module.
+        We are continually monitoring how users access and move around the website, including the navigation in each module.
 
         ## Preparation of this accessibility statement
 
@@ -81,4 +81,4 @@ en:
 
         This website was last tested on 22 November 2022. The test was carried out by members of the team, following an accessibility audit by <a href="https://www.shawtrust.org.uk/" target="_blank" rel="noopener noreferrer">Shaw Trust (opens in new tab)</a>.
 
-        For our accessibility audit, Shaw Trust completed automated testing of the service and manual testing of pages representing each type of content or functionality.
+        For our accessibility audit, Shaw Trust completed automated testing of the website and manual testing of pages representing each type of content or functionality.
