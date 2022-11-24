@@ -43,7 +43,8 @@ Rails.application.configure do
     'X-XSS-Protection' => '0',
     'X-Frame-Options' => 'SAMEORIGIN',
     'X-Content-Type-Options' => 'nosniff',
-  }
+    'X-Robots-Tag' => ('none' unless ENV['WORKSPACE'] == 'production'),
+  }.compact
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
