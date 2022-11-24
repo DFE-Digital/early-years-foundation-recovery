@@ -43,9 +43,6 @@ resource "cloudfoundry_app" "web_app" {
     for_each = local.app_service_bindings
     content {
       service_instance = service_binding.value
-      # params_json      = <<JSON
-      #   { "read_only": true }
-      # JSON
     }
   }
 
@@ -69,4 +66,10 @@ resource "cloudfoundry_service_instance" "postgres_instance" {
   timeouts {
     create = var.postgres_create_timeout
   }
+}
+
+resource cloudfoundry_service_instance s3 {
+  name         = "${var.app_environment}-s3"
+  space        = data.cloudfoundry_space.space.id
+  service_plan = data.cloudfoundry_service.s3.service_plans["default"]
 }

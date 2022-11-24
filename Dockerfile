@@ -12,6 +12,10 @@ RUN apk add --no-cache --no-progress build-base less curl tzdata gcompat \
     "ssl_client>=1.34.1-r5" \
     "zlib>=1.2.12-r0"
 
+RUN apk add --no-cache --no-progress \
+    --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing \
+    s3fs-fuse
+
 # ------------------------------------------------------------------------------
 # Dependencies
 # ------------------------------------------------------------------------------

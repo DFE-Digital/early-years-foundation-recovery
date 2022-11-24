@@ -101,6 +101,8 @@ jobs:
           TF_VAR_paas_app_hostname: ${{ env.PR_NUMBER }}
           TF_VAR_paas_app_env_secrets: ${{ toJson(secrets) }}
           TF_VAR_paas_app_envs: ${{ toJson(env) }}
+          # interim solution for persisted logs
+          TF_VAR_s3_bucket_name: test-logs
         run: |
           cd terraform/app
           terraform init \

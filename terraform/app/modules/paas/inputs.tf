@@ -76,7 +76,7 @@ variable "web_app_stopped" {
 
 variable "web_app_deployment_strategy" {
   type    = string
-  default = "blue-green-v3"
+  default = "blue-green"
 }
 
 
@@ -105,4 +105,12 @@ variable "postgres_json_params" {
     ]
   }
   type = map(any)
+}
+
+# S3
+# ------------------------------------------------------------------------------
+
+variable "s3_bucket" {
+  description = "AWS bucket name"
+  type        = string
 }
