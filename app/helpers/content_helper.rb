@@ -42,7 +42,7 @@ module ContentHelper
   # @return [String]
   def progress_ball(icon, style, colour, label)
     content_tag :i, nil,
-                class: "fa-#{style} fa-stack-1x fa-#{icon} #{colour}",
+                class: "fa-#{style} fa-stack-2x fa-#{icon} #{colour}",
                 aria: { label: label }
   end
 
