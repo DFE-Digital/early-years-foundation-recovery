@@ -1,4 +1,4 @@
-# Child development training
+# Early years child development training
 
 [![Continuous Integration][ci-badge]][ci-workflow]
 
@@ -258,6 +258,15 @@ CSS styling changes will appear automatically without needing to restart.
 - [live preview](https://govspeak-preview.publishing.service.gov.uk)
 - [designer guide](https://govspeak-preview.publishing.service.gov.uk/guide)
 - [developer guide](https://docs.publishing.service.gov.uk/repos/govspeak.html)
+
+
+## User experience
+
+Session timeout functionality:
+
+- default timeout period is 25 minutes
+- default timeout warning appears after 5 minutes
+- screen readers announce every time the timeout refreshes every 15 secs
 
 
 ---

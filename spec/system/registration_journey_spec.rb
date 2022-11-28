@@ -31,7 +31,7 @@ RSpec.describe 'Following registration journey' do
         click_on 'create a new account', visible: :hidden
 
         expect(page).to have_current_path(new_user_registration_path, ignore_query: true)
-        expect(page).to have_text('Create a child development training account')
+        expect(page).to have_text('Create an Early years child development training account')
       end
     end
 
