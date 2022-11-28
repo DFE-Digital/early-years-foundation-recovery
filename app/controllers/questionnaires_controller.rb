@@ -4,6 +4,8 @@ class QuestionnairesController < ApplicationController
 
   def show
     questionnaire_taker.prepare
+
+    @module_progress_bar = ModuleProgressBarDecorator.new(helpers.module_progress(training_module))
   end
 
   def update
@@ -24,6 +26,10 @@ protected
 
   def module_item
     @module_item ||= questionnaire.module_item
+  end
+
+  def training_module
+    module_item.parent
   end
 
   def questionnaire

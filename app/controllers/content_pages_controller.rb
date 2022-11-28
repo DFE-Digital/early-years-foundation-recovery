@@ -13,6 +13,8 @@ class ContentPagesController < ApplicationController
     @module_progress = ModuleOverviewDecorator.new(helpers.module_progress(training_module))
     @model = module_item.model
 
+    @module_progress_bar = ModuleProgressBarDecorator.new(helpers.module_progress(training_module))
+
     if @model.is_a?(Questionnaire)
       redirect_to training_module_questionnaire_path(training_module_name, module_item)
     elsif module_item.assessment_results?

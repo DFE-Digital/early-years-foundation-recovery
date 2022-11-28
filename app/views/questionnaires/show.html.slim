@@ -1,5 +1,7 @@
 = render 'questionnaire_debug'
 
+= render 'shared/progress_bar', bar: @module_progress_bar
+
 = page_number(**@questionnaire.pagination)
 
 .gem-c-govspeak
