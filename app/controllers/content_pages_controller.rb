@@ -1,8 +1,8 @@
 class ContentPagesController < ApplicationController
-  before_action :authenticate_registered_user!
-  before_action :clear_flash
+  before_action :authenticate_registered_user!, :clear_flash
+  before_action :show_progress_bar, only: :show
+  before_action :track_events, only: :show
   helper_method :module_item, :training_module, :note
-  after_action :track_events, only: :show
 
   def index
     first_module_item = ModuleItem.find_by(training_module: training_module_name)
@@ -12,8 +12,6 @@ class ContentPagesController < ApplicationController
   def show
     @module_progress = ModuleOverviewDecorator.new(helpers.module_progress(training_module))
     @model = module_item.model
-
-    @module_progress_bar = ModuleProgressBarDecorator.new(helpers.module_progress(training_module))
 
     if @model.is_a?(Questionnaire)
       redirect_to training_module_questionnaire_path(training_module_name, module_item)
@@ -25,6 +23,10 @@ class ContentPagesController < ApplicationController
   end
 
 private
+
+  def show_progress_bar
+    @module_progress_bar = ModuleProgressBarDecorator.new(helpers.module_progress(training_module))
+  end
 
   def module_item
     @module_item ||= ModuleItem.find_by!(training_module: training_module_name, name: module_params[:id])
