@@ -1,6 +1,6 @@
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
-    ol#progress.govuk-list
+    ol.progress-bar--container.govuk-list
       - bar.milestones.map do |item|
         li.progress-bar
           span.fa-stack.fa-1x
@@ -8,6 +8,4 @@
             = progress_ball(*bar.icon(item))
           - unless bar.milestones.first == item
             div class="line line--#{bar.icon(item)[2]}"
-          - else
-            .line.line--white
-          p.govuk-body= item.model.heading
+          p.govuk-body.progress--heading= item.model.heading

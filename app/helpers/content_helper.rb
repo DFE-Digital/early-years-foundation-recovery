@@ -51,8 +51,8 @@ module ContentHelper
   # @param right_colour [String]
   # @return [String]
   def progress_line(percentage, left_colour, right_colour)
-    content_tag :div, nil, class: "line line--slice", 
-                style: "border-image-source: linear-gradient(to right, #{left_colour}, #{left_colour} #{percentage}%, #{right_colour} #{percentage}%, #{right_colour});"
+    content_tag :div, nil, class: 'line line--slice',
+                           style: "border-image-source: linear-gradient(to right, #{left_colour}, #{left_colour} #{percentage}%, #{right_colour} #{percentage}%, #{right_colour});"
   end
 
   # @return [String]
