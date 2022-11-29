@@ -9,7 +9,7 @@ We use 9 swim lanes on the [Jira][jira] board.
 **2. Development**
 
 - active local development
-- push to remote (branch must contain ticket number `ER-123`)
+- push to remote; the branch name must start with a ticket number, for example `ER-xxx`
 - mark PR as `draft` and summarise deliverable
 - associate to release candidate milestone
 
@@ -66,8 +66,9 @@ We use 9 swim lanes on the [Jira][jira] board.
 
 ## Definition of Ready
 
-- story is estimated
-- acceptance criteria defined
+- description is clear and unambiguous
+- acceptance criteria are present and understood
+- ticket is estimated to be deliverable within a single sprint
 
 ## Definition of Done
 
