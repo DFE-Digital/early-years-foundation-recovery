@@ -10,6 +10,7 @@ $govuk-new-link-styles: true;
 @import "./print-link";
 @import "./quote";
 @import "./icons";
+@import "./modal";
 @import "./autocomplete";
 @import "./header";
 
@@ -24,6 +25,7 @@ $govuk-new-link-styles: true;
     'Helvetica Neue',
     sans-serif !important;
 }
+
 
 /*
 Internal
@@ -127,6 +129,12 @@ ul > li > ul > li {
     @include govuk-link-common;
     @include govuk-link-style-default;
   }
+}
+
+#js-timeout-warning:focus {
+  outline: 3px solid #ffdd00;
+  outline-offset: 0;
+  box-shadow: inset 0 0 0 2px;
 }
 
 .govuk-footer__copyright-logo {
