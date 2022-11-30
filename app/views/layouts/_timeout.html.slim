@@ -1,11 +1,11 @@
-- if Rails.env.development? || ENV['WORKSPACE'].eql?('content')
+- if Rails.application.debug?
   pre.debug_dump
     p Warning: opening a browser inspector may impact this popup
     ul
       li timeout enabled: #{timeout_active}
-      li timeout after: #{timeout_duration} minutes (default 60)
-      li timeout warning: #{timeout_warning} minutes (default 5)
-      li timeout modal visible for: #{timeout_modal} minutes (default 5)
+      li timeout after: #{timeout_duration} minutes
+      li timeout warning: #{timeout_warning} minutes
+      li timeout modal visible for: #{timeout_modal} minutes
       / li timer start value: #{timeout_timer} in seconds
 
     ul
