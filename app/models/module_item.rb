@@ -223,6 +223,11 @@ class ModuleItem < YamlBase
   end
 
   # @return [Boolean]
+  def interruption_page?
+    type.eql?('interruption_page')
+  end
+
+  # @return [Boolean]
   def assessment_intro?
     type.eql?('assessment_intro')
   end

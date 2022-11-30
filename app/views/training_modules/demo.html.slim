@@ -12,15 +12,14 @@ pre.debug_dump
       li #{item.name} / #{item.type}
   hr
 
-ol#progress.govuk-list
-  - bar.milestones.map do |item|
-    li.progress-bar
-      span.fa-stack.fa-1x
-        = progress_ball('circle', :solid, :white, '')
-        = progress_ball(*bar.icon(item))
-      - unless bar.milestones.first == item
-        div class="line line--#{bar.icon(item)[2]}"
-      - else
-        .line.line--white
-      p.govuk-body= item.model.heading
+.govuk-grid-row
+  ol.progress-bar--container.govuk-list
+    - bar.milestones.map do |item|
+      li.progress-bar
+        span.fa-stack.fa-1x
+          = progress_ball('circle', :solid, :white, '')
+          = progress_ball(*bar.icon(item))
+        - unless bar.milestones.first == item
+          div class="line line--#{bar.icon(item)[2]}"
+        p.govuk-body.progress--heading= item.model.heading
       

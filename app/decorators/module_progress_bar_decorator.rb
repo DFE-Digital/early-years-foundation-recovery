@@ -1,6 +1,6 @@
 class ModuleProgressBarDecorator < DelegateClass(ModuleProgress)
   MILESTONES = %w[
-    module_intro
+    interruption_page
     sub_module_intro
     summary_intro
   ].freeze
@@ -33,8 +33,8 @@ private
 
   # @return [Boolean]
   def milestone_completed?(item)
-    if item.module_intro?
-      visited?(item)
+    if item.interruption_page?
+      visited?(item.parent.intro_page)
     elsif item.summary_intro?
       visited?(item.parent.certificate_page)
     elsif item.submodule_intro?
@@ -44,7 +44,7 @@ private
 
   # @return [Boolean]
   def milestone_started?(item)
-    if item.module_intro? || item.summary_intro?
+    if item.interruption_page? || item.summary_intro?
       visited?(item)
     elsif item.submodule_intro?
       visited?(item.next_item)
