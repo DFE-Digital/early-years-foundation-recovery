@@ -1,10 +1,13 @@
 .govuk-grid-row
-  ol.progress-bar--container.govuk-list
-    - bar.milestones.map do |item|
+  ol.progress-bar--container.govuk-list role="progressbar"
+    - bar.milestones.each_with_index.map do |item, index|
       li.progress-bar
-        span.fa-stack.fa-1x
-          = progress_ball('circle', :solid, :white, '')
-          = progress_ball(*bar.icon(item))
+        = progress_ball(*bar.icon(item))
         - unless bar.milestones.first == item
           div class="line line--#{bar.icon(item)[2]}"
-        p.govuk-body.progress--heading= item.model.heading
+        p.govuk-body.progress--heading
+          span.govuk-visually-hidden = "Step #{index+1}: "
+          - if bar.milestones.first == item
+            | Module introduction
+          - else
+            = item.model.heading

@@ -10,6 +10,9 @@ class TrainingModulesController < ApplicationController
     track('module_overview_page')
     @training_module = TrainingModule.find_by(name: params[:id])
 
+    # used for debug
+    @module_progress_bar = ModuleProgressBarDecorator.new(helpers.module_progress(@training_module))
+
     if @training_module.nil? || @training_module.draft?
       redirect_to my_modules_path
     else
@@ -22,8 +25,7 @@ class TrainingModulesController < ApplicationController
       render partial: 'progress' if params[:debug] && Rails.env.development?
 
       if params[:demo] && (ENV['WORKSPACE'].eql?('content') || Rails.env.development?)
-        module_progress_bar = ModuleProgressBarDecorator.new(helpers.module_progress(@training_module))
-        render :demo, locals: { bar: module_progress_bar }
+        render :demo, locals: { bar: @module_progress_bar }
       end
     end
   end

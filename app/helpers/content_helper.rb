@@ -39,11 +39,14 @@ module ContentHelper
 
   # @param icon [String, Symbol] Fontawesome icon name
   # @param style [String, Symbol] Icon weight
+  # @param colour [String, Symbol] Icon colour
+  # @param label [String, Symbol] Aria label
   # @return [String]
   def progress_ball(icon, style, colour, label)
-    content_tag :i, nil,
-                class: "fa-#{style} fa-stack-2x fa-#{icon} #{colour}",
-                aria: { label: label }
+    content_tag :span, nil, class: 'fa-stack fa-1x', aria: { label: label } do
+      content_tag(:i, nil, class: 'fa-solid fa-stack-2x fa-circle white') +
+        content_tag(:i, nil, class: "fa-#{style} fa-stack-2x fa-#{icon} #{colour}")
+    end
   end
 
   # @param percentage [Integer] of line in left colour
