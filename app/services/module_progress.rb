@@ -20,7 +20,7 @@ class ModuleProgress
   # Name of last page viewed in module
   # @return [String]
   def milestone
-    page = training_module_events.last
+    page = module_page_events.last
     page.properties['id'] if page.present?
   end
 
@@ -160,9 +160,14 @@ private
     user.events.where_properties(training_module_id: mod.name)
   end
 
+  # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
+  def module_page_events
+    training_module_events.where(name: 'module_content_page')
+  end
+
   # @param key [String] module_start, module_complete
   # @return [Ahoy::Event]
-  def key_event(key)
-    training_module_events.where(name: key).first
-  end
+  # def key_event(key)
+  #   training_module_events.where(name: key).first
+  # end
 end

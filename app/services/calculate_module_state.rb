@@ -11,7 +11,6 @@ class CalculateModuleState
     module_names.each do |training_module|
       current_value = user.module_time_to_completion[training_module]
 
-      # do nothing - because time_to_completion has been calculated already
       next if current_value.to_i.positive?
 
       updated_value = new_time(training_module)
@@ -43,7 +42,7 @@ private
   end
 
   def module_names
-    TrainingModule.all.reject(&:draft?).map(&:name)
+    TrainingModule.published.map(&:name)
   end
 
   def mod_event(training_module, event_name)

@@ -1,3 +1,7 @@
+#
+# Calculate a user's time to complete a module using the difference in time
+# between when they first viewed the first and last pages.
+#
 class BackfillModuleState < CalculateModuleState
 private
 
@@ -11,15 +15,18 @@ private
     FINAL_PAGE_NAMES.keys
   end
 
-  def mod_event(training_module, event_name, page_name)
-    user.events.where(name: event_name).where_properties(training_module_id: training_module, id: page_name).first
+  def mod_event(training_module, page_name)
+    user.events
+      .where(name: 'module_content_page')
+      .where_properties(training_module_id: training_module, id: page_name)
+      .first
   end
 
   def mod_complete(training_module)
-    mod_event(training_module, 'module_content_page', FINAL_PAGE_NAMES[training_module])
+    mod_event(training_module, FINAL_PAGE_NAMES[training_module])
   end
 
   def mod_start(training_module)
-    mod_event(training_module, 'module_content_page', 'intro')
+    mod_event(training_module, 'intro')
   end
 end

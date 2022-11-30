@@ -65,7 +65,7 @@ RSpec.shared_context 'with progress' do
 
   # @return [true] create a fake event log item
   def view_module_page_event(module_name, page_name)
-    tracker.track('page_view', {
+    tracker.track('module_content_page', {
       id: page_name,
       action: 'show',
       controller: 'content_pages',
