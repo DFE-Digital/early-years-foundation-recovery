@@ -19,6 +19,11 @@ class CommonPage < ContentPage
     false
   end
 
+  # @return [false]
+  def notes
+    false
+  end
+
 private
 
   # @return [Hash<Symbol>]

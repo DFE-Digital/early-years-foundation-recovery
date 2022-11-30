@@ -1,4 +1,19 @@
 ---
+editor@example.com:
+  editor: true
+  password: <%= ENV.fetch('USER_PASSWORD', 'StrongPassword') %>
+  confirmed_at: <%= 1.minute.ago %>
+  terms_and_conditions_agreed_at: <%= 1.minute.ago %>
+  registration_complete: true
+  # mandatory if "registration_complete"
+  first_name: Demo
+  last_name: User
+  setting_type_id: <%= SettingType.first.id %>
+  setting_type: <%= SettingType.first.name %>
+  role_type: <%= RoleType.first.name %>
+  # optional
+  local_authority: local authority
+  
 registered@example.com:
   password: <%= ENV.fetch('USER_PASSWORD', 'StrongPassword') %>
   terms_and_conditions_agreed_at: <%= 1.minute.ago %>

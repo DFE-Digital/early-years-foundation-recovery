@@ -1,0 +1,4 @@
+- if Rails.env.development?
+  pre.debug_dump
+    = @model.module_item.debug_summary
+
