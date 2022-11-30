@@ -27,25 +27,25 @@ rake db:analytics:users
 ahoy_events table:
 
 ```ruby
-rake db:ahoy_events:users
+rake db:analytics:ahoy_events
 ```
 
 user_assessments table:
 
 ```ruby
-rake db:user_assessments:users
+rake db:analytics:user_assessments
 ```
 
 user_answers table:
 
 ```ruby
-rake db:user_answers:users
+rake db:analytics:user_answers
 ```
 
 ahoy_visits table:
 
 ```ruby
-rake db:ahoy_visits:users
+rake db:analytics:ahoy_visits
 ```
 
 
