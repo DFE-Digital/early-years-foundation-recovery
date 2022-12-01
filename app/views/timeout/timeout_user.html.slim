@@ -1,4 +1,4 @@
 h1 For your security, we signed you out
 
-p= "You have not done anything for #{@user_timeout_minutes} minutes."
+p= "You have not done anything for #{timeout_warning} minutes."
 p= link_to 'Sign in', new_user_session_path, class: 'govuk-button'

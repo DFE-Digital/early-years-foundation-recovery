@@ -7,11 +7,29 @@ Rails.application.routes.draw do
   get '/404', to: 'errors#not_found', via: :all
   get '/422', to: 'errors#unprocessable_entity', via: :all
   get '/500', to: 'errors#internal_server_error', via: :all
-  get 'users/timeout', to: 'errors#timeout'
 
   resources :settings, controller: :settings, only: %i[show create]
 
-  devise_for :users, controllers: { sessions: 'users/sessions', confirmations: 'confirmations', passwords: 'passwords', registrations: 'registrations' }, path_names: { sign_in: 'sign-in', sign_out: 'sign-out', sign_up: 'sign-up' }
+  devise_for :users,
+             controllers: {
+               sessions: 'users/sessions',
+               confirmations: 'confirmations',
+               passwords: 'passwords',
+               registrations: 'registrations',
+             },
+             path_names: {
+               sign_in: 'sign-in',
+               sign_out: 'sign-out',
+               sign_up: 'sign-up',
+             }
+
+  # @see TimeoutWarning js component
+  # @note these path names are required
+  devise_scope :user do
+    get 'check_session_timeout', to: 'timeout#check'
+    get 'extend_session', to: 'timeout#extend'
+    get 'users/timeout', to: 'timeout#timeout_user'
+  end
 
   namespace :registration do
     resource :name, only: %i[edit update]

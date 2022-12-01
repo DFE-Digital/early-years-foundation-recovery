@@ -35,10 +35,23 @@ module EarlyYearsFoundationRecovery
     config.hotjar_site_id = ENV.fetch('HOTJAR_SITE_ID', '#HOTJAR_SITE_ID_env_var_missing')
     config.training_modules = ENV.fetch('TRAINING_MODULES', 'training-modules')
     config.unlock_in_minutes = ENV.fetch('UNLOCK_IN_MINUTES', '120').to_i
-    config.user_timeout_minutes = ENV.fetch('TIMEOUT_MINUTES', '15').to_i
-
+    config.user_timeout_minutes = ENV.fetch('TIMEOUT_MINUTES', '25').to_i
+    # user_timeout_warning_minutes and user_timeout_modal_visible value combined must be lower than user_timeout_minutes
+    config.user_timeout_warning_minutes = ENV.fetch('TIMEOUT_WARNING_MINUTES', '20').to_i
+    config.user_timeout_modal_visible = ENV.fetch('TIMEOUT_MODAL_VISIBLE', '5').to_i
+    config.service_name = 'Early years child development training'
     config.middleware.use Grover::Middleware
     config.active_record.yaml_column_permitted_classes = [Symbol]
     config.action_view.sanitized_allowed_tags = ALLOWED_TAGS
+
+    # @return [Boolean]
+    def live?
+      ENV['WORKSPACE'].eql?('production')
+    end
+
+    # @return [Boolean]
+    def debug?
+      Rails.env.development? || ENV['WORKSPACE'].eql?('content')
+    end
   end
 end

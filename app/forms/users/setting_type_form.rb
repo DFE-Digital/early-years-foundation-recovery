@@ -19,8 +19,8 @@ module Users
           setting_type_id: setting_type_id,
           setting_type: object.name,
         }
-        update_attributes[:local_authority] = nil unless setting_type.local_authority_next?
-        update_attributes[:role_type] = nil unless setting_type.role_type_next?
+        update_attributes[:local_authority] = 'Not applicable' unless setting_type.local_authority_next?
+        update_attributes[:role_type] = 'Not applicable' unless setting_type.role_type_next?
         user.update(update_attributes)
         user.save(validate: false)
       end

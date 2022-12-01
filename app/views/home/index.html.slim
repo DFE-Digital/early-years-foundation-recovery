@@ -1,4 +1,4 @@
-- if Rails.env.development?
+- if Rails.application.debug?
   pre.debug_dump
     = configuration_summary_list
 
@@ -7,8 +7,7 @@
     .light-grey-box
       .govuk-grid-row
         .govuk-grid-column-two-thirds
-          h1.govuk-heading-l
-            | Child development training for early years providers
+          h1.govuk-heading-l #{service_name}
           p.govuk-body
             | This free, online training provides an overview of child development
             |  and gives practical advice for supporting the development of children
@@ -32,7 +31,7 @@
     h2.govuk-heading-m About this training course
     p.govuk-body class='govuk-!-padding-bottom-4'
       | Each training module on this site covers an important area of child development and has
-      |  been written by early years experts, working with the Department for Education and Ofsted.
+      |  been written by early years experts, working with the Department for Education.
     h2.govuk-heading-m Why should I take this training?
     p.govuk-body This training:
     ul.govuk-list.govuk-list--bullet

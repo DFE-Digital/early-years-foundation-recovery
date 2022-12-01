@@ -26,11 +26,11 @@ en:
             terms_and_conditions_agreed_at:
               blank: You must accept the terms and conditions and privacy policy to create an account.
             setting_type_id:
-              blank: Enter the setting type you work in. 
+              blank: Enter the setting type you work in.
               inclusion: Enter the setting type you work in.
             setting_type_other:
-              blank: Enter the setting type you work in. 
-            role_type: 
+              blank: Enter the setting type you work in.
+            role_type:
               blank: Select your role.
             role_type_other:
               blank: Enter your job title.
@@ -76,47 +76,42 @@ en:
   date_completed: "Date completed: %{date}"
 
   registration:
-    edit_setting_type:
-      heading: Your setting type
-      body: |
-        {:.govuk-hint}
-          Search for the type of setting or organisation you work in, for example childminder or nursery.
-          
-        {:.govuk-hint}
-          If you work in more than one early years setting, enter the one where you work most often.
-
-        {:.govuk-hint}
-          Your training progress won't be shared with anyone without your permission.
-      button: Save
-      link_to_setting_type_other: I cannot find my setting or organisation
     names:
       edit:
         heading: About you
         body: We're asking for your details so we can personalise your training certificates.
         button: Continue
+      update:
+        complete_update: You have updated your details
     setting_types:
       edit:
         heading: What setting type do you work in?
         body: |
           {:.govuk-hint}
             Search for the type of setting or organisation you work in, for example childminder or nursery.
-            
+
           {:.govuk-hint}
             If you work in more than one early years setting, enter the one where you work most often.
-  
+
           {:.govuk-hint}
             Your training progress won't be shared with anyone without your permission.
         button: Continue
         link_to_setting_type_other: I cannot find my setting or organisation
         autocomplete-not-found: No setting found.
       update:
-        complete: Thank you for creating a child development training account. You can now start the first module.
+        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        update_registration: Thank you for updating your Early years child development training account. You can now continue.
+        complete_update: You have updated your details
     setting_type_others:
       edit:
         heading: Where do you work?
         body: Enter the type of setting or organisation where you work.
         button: Continue
-    local_authorities: 
+      update:
+        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        update_registration: Thank you for updating your Early years child development training account. You can now continue.
+        complete_update: You have updated your details
+    local_authorities:
       edit:
         heading: What local authority area do you work in?
         body: |
@@ -126,7 +121,9 @@ en:
         multiple_local_authorities: I work across more than one local authority
         autocomplete-not-found: No local authority found.
       update:
-        complete: Thank you for creating a child development training account. You can now start the first module.
+        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        update_registration: Thank you for updating your Early years child development training account. You can now continue.
+        complete_update: You have updated your details
     role_types:
       edit:
         heading: Which of the following best describes your role?
@@ -135,14 +132,18 @@ en:
         button: Continue
         link_to_role_type_other: I would describe my role in another way.
       update:
-        complete: Thank you for creating a child development training account. You can now start the first module.
+        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        update_registration: Thank you for updating your Early years child development training account. You can now continue.
+        complete_update: You have updated your details
     role_type_others:
       edit:
         heading: What is your role?
         body: Enter your job title.
         button: Continue
       update:
-        complete: Thank you for creating a child development training account. You can now start the first module.
+        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        update_registration: Thank you for updating your Early years child development training account. You can now continue.
+        complete_update: You have updated your details
   setting_type:
     heading: Change your setting's information
 
@@ -165,49 +166,43 @@ en:
 
   experts:
     heading: The experts
-    summary: This training course has been created by 3 early years experts.
+    summary: This training course has been created by early years experts.
     body: |
-      ### Debbie Parry
+      The experts who have worked with the Department for Education on this training have significant experience in early years education.
 
-      Debbie Parry has over 20 years of experience in education and training.
-      She spent several years working as an early years practitioner in private day nurseries,
-      before going on to use her knowledge and experience to teach the practitioners
-      of the future in college environments.
+      Their experience includes:
 
-      Debbie has supported a wide range of practitioners including childminders,
-      apprentices and nursery staff. Most recently, she has been designing and delivering
-      bespoke training packages for those working in the early years sector.
+      - working as early years practitioners
+      - working as nursery managers
+      - working in SEND residential environments
+      - teaching early years courses in college environments
+      - supporting a wide range of practitioners including childminders, apprentices and nursery staff
 
-      Debbie's qualifications include:
+      Their qualifications in early years practice include:
 
-      - BTEC National Diploma in Early Childhood Studies
-      - NCFE CACHE Level 2 Certificate in Understanding Behaviour that Challenges
-      - NCFE CACHE Level 2 Certificate in Understanding Autism
-      - Diploma in Teaching in the Lifelong Learning Sector (DTLLS)
-
-      ### Melissa Tharm
-
-      Melissa Tharm worked in SEND residential environments for a number of years.
-      She now brings her experience and knowledge to designing and delivering
-      outstanding training programmes to professionals in the health, care and education sectors.
-
-      Melissa's qualifications include:
-
+      - Foundation Degree in Early Childhood Studies
       - Certificate in Education (CertEd)
+      - BTEC National Diploma in EY Studies
+
+      Their qualifications in early years management include:
+
+      - CMI Level 5 Diploma Leadership and Management
+      - CMI Level 3 Certificate in Principles of Management and Leadership
+      - NCFE Level 2 Certificate in Equality and Diversity
+      - NCFE Level 2 Certificate in Counselling Skills
+      - Safeguarding and Prevent
+      - Licence to Observe
+      - D32/D33 Assessor Qualification
+
+      Their additional qualifications include:
+
+      - Diploma in Teaching in the Lifelong Learning Sector (DTLLS)
       - GNVQ Advanced Health and Social Care
+      - NCFE CACHE Level 2 Certificate in Understanding Behaviour that Challenges
       - NCFE CACHE Level 2 Certificate in Understanding Autism
       - Makaton Stage 8
 
-      ### Catherine Mcelroy
 
-      Catherine Mcelroy has over 20 years of experience working in private day nurseries with children under 5.
-      She has spent the last 10 years as a nursery manager, ensuring that
-      children and their families experience excellent care that is fun and exciting.
-
-      Catherine's qualifications include:
-
-      - BTEC National Diploma in Early Childhood Studies
-      - Foundation Degree in Early Childhood Studies
 
   prompt:
     info: In your setting
@@ -215,6 +210,10 @@ en:
     brain: Reflection point
     note: Add to your learning log
     test: Check your understanding
+
+  timeout:
+    heading: You're about to be signed out
+    body: Your progress through the training has been saved. Other changes made to your account or learning log will not be saved.
 
   summary_intro:
     heading: Summary and next steps
@@ -242,12 +241,12 @@ en:
       You can pause and restart the test as much as you like. If you exit part way through, your progress will be saved.
 
       You can review your total score for the test at the end.
-      
+
       To receive a certificate of achievement for this module, you need to receive an overall score of at least %{passmark}%.
 
       If you do not score %{passmark}%, you will be able to see which questions you got wrong. You can repeat the test to improve your score as many times as you want.
-      
-      Your score may be shared anonymously with the Child Development Training team to help DfE measure the impact of this training.
+
+      Your score may be shared anonymously with the Early years child development training team to help DfE measure the impact of this training.
 
       Scores are not shared with any other third parties or organisations.
 
@@ -286,7 +285,7 @@ en:
       You can sign out or close the browser at any time without losing your progress.
       When you next sign in, you can restart from where you left off.
 
-      ## Videos and mobile data usage 
+      ## Videos and mobile data usage
 
       This module contains videos. Connect to wifi before starting the module to watch the videos without using any mobile data. If you are not able or prefer not to play the videos, you can use the full transcripts provided.
 
@@ -426,7 +425,7 @@ en:
   notice:
     email_changed: |
       We have sent an email to your new email address with a link to click to confirm the change.
-      
+
       If you have not received the email after a few minutes, please check your spam folder.
 
   # Browser and bookmarks ------------------------------------------------------
@@ -454,15 +453,15 @@ en:
       check_email_password_reset: Check email password reset
     training_modules:
       index: About training
-    errors:
-      timeout: User timeout
+    timeout:
+      timeout_user: User timeout
     users/sessions:
       new: Sign in
     passwords:
       new: Reset password
       edit: Choose a new password
     registrations:
-      new: Create a child development training account
+      new: Create an Early years child development training account
       edit: Change your password
     confirmations:
       new: Resend your confirmation
@@ -484,3 +483,4 @@ en:
         terms-and-conditions: Terms and conditions
         whats-new: What's new
         sitemap: Sitemap
+        new-registration: Update your registration details
