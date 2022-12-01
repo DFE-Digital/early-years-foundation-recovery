@@ -1,6 +1,8 @@
 # Early years child development training
 
-[![Continuous Integration][ci-badge]][ci-workflow]
+[![ci][ci-badge]][ci-workflow]
+[![brakeman][brakeman-badge]][brakeman-workflow]
+[![pa11y][pa11y-badge]][pa11y-workflow]
 
 This is a Rails 7 application using the [DfE template][rails-template].
 
@@ -116,7 +118,9 @@ These commands can be used to debug problems:
     can help identify why the application is not running in either the `dev`, `test`, or `qa` contexts
 - `BASE_URL=https://app:3000 docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery up app` debug the UAT tests
 
-## Using Custom Tasks
+## Using Rake
+
+Custom tasks are namespaced under `eyfs`, list them using `rake --tasks eyfs`.
 
 - `rake eyfs:bot`            # Generate secure bot user
 - `rake eyfs:plug_content`   # Add page view events for injected module items
@@ -180,11 +184,10 @@ A production-like application is available as a composed Docker service for loca
 To run a self-signed certificate must first be generated.
 
 1. `./bin/docker-certs` (Mac users can trust the certificate in [Keychain Access](https://support.apple.com/en-gb/guide/keychain-access))
-2. `./bin/docker-qa` (this will build and bring up the application)
+2. `./bin/docker-qa` (this will build and bring up the application with a clean database)
 3. `docker exec -it recovery_prod rails db:seed` (seed the prerequisite user accounts)
-4. `BASE_URL=https://app:3000 ./bin/docker-qa` (test against the seeded application)
-
-WIP: proposed Github workflow that does not require `docker-compose`.
+4. `./bin/docker-qa` (retest)
+4. `BASE_URL=https://deployment ./bin/docker-qa` (alternative test against another server)
 
 
 ## Accessibility Standards
@@ -272,20 +275,33 @@ Session timeout functionality:
 ---
 
 [app-repo]: https://github.com/DFE-Digital/early-years-foundation-recovery
-[confluence]: https://dfedigital.atlassian.net/wiki/spaces/ER/overview
-[production]: https://eyfs-covid-recovery.london.cloudapps.digital
-[staging]: https://ey-recovery-staging.london.cloudapps.digital
-[development]: https://ey-recovery-dev.london.cloudapps.digital
 [prototype-repo]: https://github.com/DFE-Digital/ey-recovery-prototype
-[prototype-app]: https://eye-recovery.herokuapp.com
-[interim-prototype-app]: https://child-development-training-prototype.london.cloudapps.digital
 [rails-template]: https://github.com/DFE-Digital/rails-template
-[ci-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml/badge.svg
-[ci-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml
-[production-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/production.yml
-[staging-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/staging.yml
 [ghcr]: https://github.com/dfe-digital/early-years-foundation-recovery/pkgs/container/early-years-foundation-recovery
+[confluence]: https://dfedigital.atlassian.net/wiki/spaces/ER/overview
 [notify]: https://www.notifications.service.gov.uk
 [figma]: https://www.figma.com/file/FGW1NJJwnYRqoZ2DV0l5wW/Training-content?node-id=1%3A19
 [docker]: https://www.docker.com
 [git-secrets]: https://github.com/awslabs/git-secrets
+
+<!-- Deployments -->
+
+[prototype-app]: https://eye-recovery.herokuapp.com
+[interim-prototype-app]: https://child-development-training-prototype.london.cloudapps.digital
+[production]: https://eyfs-covid-recovery.london.cloudapps.digital
+[staging]: https://ey-recovery-staging.london.cloudapps.digital
+[development]: https://ey-recovery-dev.london.cloudapps.digital
+
+<!-- GH workflows -->
+
+[brakeman-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/brakeman.yml
+[pa11y-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/pa11y.yml
+[ci-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml
+[production-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/production.yml
+[staging-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/staging.yml
+
+<!-- GH workflow badges -->
+
+[brakeman-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/brakeman.yml/badge.svg
+[pa11y-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/pa11y.yml/badge.svg
+[ci-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml/badge.svg

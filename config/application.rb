@@ -43,5 +43,15 @@ module EarlyYearsFoundationRecovery
     config.middleware.use Grover::Middleware
     config.active_record.yaml_column_permitted_classes = [Symbol]
     config.action_view.sanitized_allowed_tags = ALLOWED_TAGS
+
+    # @return [Boolean]
+    def live?
+      ENV['WORKSPACE'].eql?('production')
+    end
+
+    # @return [Boolean]
+    def debug?
+      Rails.env.development? || ENV['WORKSPACE'].eql?('content')
+    end
   end
 end
