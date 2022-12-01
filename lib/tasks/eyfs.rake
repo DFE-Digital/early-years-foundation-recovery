@@ -59,6 +59,7 @@ namespace :eyfs do
 
   desc 'Recalculate module completion time'
   task user_progress: :environment do
+    require 'backfill_module_state'
     number_updated = 0
     total_records = 0
 
@@ -74,5 +75,24 @@ namespace :eyfs do
     end
 
     puts "Updated #{number_updated} of #{total_records} records"
+  end
+
+  desc 'Create missing module start/complete events'
+  task user_events: :environment do
+    require 'backfill_module_events'
+
+    check = proc {
+      User.all.count do |user|
+        user.events.where(name: 'module_start').count != user.module_time_to_completion.keys.count
+      end
+    }
+
+    puts check.call
+
+    User.all.each do |user|
+      BackfillModuleEvents.new(user: user).call
+    end
+
+    puts check.call
   end
 end
