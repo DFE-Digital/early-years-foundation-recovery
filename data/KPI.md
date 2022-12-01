@@ -4,13 +4,15 @@
 
 The [Ahoy](https://github.com/ankane/ahoy) gem records user transactions with MVC controllers in two tables.
 
-> `Ahoy::Tracker.new(controller: self)`
+```ruby
+Ahoy::Tracker.new(controller: self)
+```
 
 ## Data overview
 
 ### Events
 
-Example event data from the `ahoy_events` table.
+Example event data from the `ahoy_events` table. Properties can hold additional metadata.
 
 | Column     | Data                        | Type        |
 | ---        | ---                         | ---         |
@@ -21,6 +23,19 @@ Example event data from the `ahoy_events` table.
 | properties | `{"extensible": "data"}`    | JSON        |
 | time       | `2022-06-10 07:58:09.15539` | Timestamp   |
 
+Events in production may have these additional properties:
+
+- `seed: true` to recreate completion of the first module for interim product users
+
+```ruby
+Ahoy::Event.where(name: 'module_content_page').where_properties(seed: true).count
+#=> 8680
+```
+
+- `skipped: true` to preserve a user's progress when new module content pages are injected ([FillPageViews](../../FillPageViews)).
+  This will be necessary until content versioning is implemented.
+
+- `cloned: true` where named events such as `module_start` are created for users who have already started the module.
 
 #### Event Dictionary
 
@@ -100,3 +115,33 @@ Example event data from the `ahoy_visits` table.
 | [x]  | Confidence check complete     | `ContentPagesController`                   | `confidence_check_complete`     | `/modules/{alpha}/questionnaires/{path}`     |
 | [x]  | User note created             | `NotesController`                          | `user_note_created`             | `/my-account/learning-log`                   |
 | [x]  | User note updated             | `NotesController`                          | `user_note_updated`             | `/my-account/learning-log`                   |
+
+
+## Metrics
+
+Events can be used to track user activity and when KPIs are met.
+
+Particular states, such as `module_time_to_completion` or a user's **"ttc"** key-value object, are inferred from this and persisted to the user record.
+
+```ruby
+  {
+    "child-development-and-the-eyfs"=>602207,
+    "brain-development-and-how-children-learn"=>54321,
+    "personal-social-and-emotional-development"=>4229847
+  }
+```
+
+1. The number of `module_start` events for a user should NEVER exceed the number of published modules.
+2. The number of `module_start` events for a user should match the number of keys in their **ttc**.
+3. The presence of a key in the **ttc** with a value of zero denotes the module has been started.
+4. The number of `module_complete` events for a user should match the number of values greater than zero in their **ttc**.
+5. Positive integer values in the **ttc** record the difference in seconds between the start and completion events.
+6. No user should have a value of nil in their **ttc**.
+
+```ruby
+User.all.select { |u| u.module_time_to_completion.has_value?(nil) }
+```
+
+## Dashboard
+
+WIP
