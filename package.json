@@ -15,7 +15,7 @@
     "axios": "^1.2.0",
     "esbuild": "^0.15.15",
     "govuk-frontend": "^4.4.0",
-    "puppeteer": "^19.2.2",
+    "puppeteer": "^19.3.0",
     "sass": "^1.56.1"
   }
 }
