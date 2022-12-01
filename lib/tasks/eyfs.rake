@@ -98,20 +98,8 @@ namespace :eyfs do
 
   desc 'Confirm events align with user state'
   task confirm_events: :environment do
-    valid =
-      User.all.all? do |user|
-        user.module_time_to_completion.all? do |training_module, ttc|
-          if ttc.nil?
-            false # rerun BackfillModuleState
-          elsif ttc.zero?
-            user.events.where(name: 'module_start').where_properties(training_module_id: training_module).count.eql?(1)
-          elsif ttc.positive?
-            %w[module_start module_complete].all? do |named_event|
-              user.events.where(name: named_event).where_properties(training_module_id: training_module).count.eql?(1)
-            end
-          end
-        end
-      end
+    require 'check_module_events'
+    valid = CheckModuleEvents.new.call
     puts valid ? 'Start/Complete events are present' : 'Oops'
   end
 end

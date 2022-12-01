@@ -167,7 +167,7 @@ private
 
   # @param key [String] module_start, module_complete
   # @return [Ahoy::Event]
-  # def key_event(key)
-  #   training_module_events.where(name: key).first
-  # end
+  def key_event(key)
+    training_module_events.where(name: key).first
+  end
 end
