@@ -7,4 +7,5 @@
 data/*.md
 uml/*.md
 adr/*.md
+RELEASE.md
 LICENSE

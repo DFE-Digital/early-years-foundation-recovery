@@ -6,7 +6,7 @@ module-4:
         multi_select: false
         body: |
           True or false?
-          
+
           Babies understand expressive language before receptive language.
         assessment_summary: |
           Babies will understand what they hear (receptive language) before they are able to express themselves (expressive language).
@@ -72,10 +72,10 @@ module-4:
           You should model the correct use of language.
 
           For example, a child may say “I drawed a picture for you”. Your response could be “that’s right, you have drawn a picture for me”.
-          
+
           This will provide opportunity for the child to learn by imitation.
         assessment_fail_summary: |
-          You should model the correct use of language. 
+          You should model the correct use of language.
           For example, a child may say “I drawed a picture for you”. Your response could be “that’s right, you have drawn a picture for me”.
           This will provide opportunity for the child to learn by imitation.
         answers:
@@ -91,8 +91,8 @@ module-4:
       1_sustained_shared_thinking:
         multi_select: false
         body: |
-          True or false? 
-          
+          True or false?
+
           Sustained shared thinking can extend children's vocabulary.
         assessment_summary: |
           You can support language development by encouraging children to:
@@ -125,8 +125,8 @@ module-4:
       1_skinner_theory:
         multi_select: false
         body: |
-          True or false? 
-          
+          True or false?
+
           The main principles of Skinner’s theory were imitation, reinforcement and conditioning.
         assessment_summary: |
           Skinner’s theory had 3 principles which were imitation, reinforcement and conditioning.
@@ -155,14 +155,16 @@ module-4:
       1_social_emotional_relationships:
         multi_select: false
         body: |
-          Which theorist believed that social and emotional relationships are not important for children’s language development? (Select one answer)
+          Which theorist did not believe that social and emotional relationships were important for children's language development?
         assessment_summary: |
           Piaget did not think that social and emotional relationships were important.
           Instead he believed that children need to understand a word before they can use it.
+
           In contrast, Bruner and Skinner thought that interactions with others were crucial to support language development.
         assessment_fail_summary: |
           Piaget did not think that social and emotional relationships were important.
           Instead he believed that children need to understand a word before they can use it.
+
           In contrast, Bruner and Skinner thought that interactions with others were crucial to support language development.
         answers:
           1: Bruner
@@ -177,16 +179,16 @@ module-4:
       1_chomsky_theory:
         multi_select: false
         body: |
-          True or false? 
-          
+          True or false?
+
           Chomsky believes that children learn language instinctively.
         assessment_summary: |
           Chomsky suggests that all children have the instinct and ability to develop their language skills, regardless of how and where they grow up. It is important to remember that this may not always be the case for all children.
-          
+
           Children will all develop at their own individual pace. You will also need to take into account contributing factors, such as learning difficulties.
         assessment_fail_summary: |
           Chomsky suggests that all children have the instinct and ability to develop their language skills, regardless of how and where they grow up. It is important to remember that this may not always be the case for all children.
-          
+
           Children will all develop at their own individual pace. You will also need to take into account contributing factors, such as learning difficulties.
         answers:
           1: "True"
@@ -199,8 +201,8 @@ module-4:
       1_income_language_development:
         multi_select: false
         body: |
-          True or false? 
-          
+          True or false?
+
           Higher household income will always result in better language development.
         assessment_summary: |
           Higher household income might give children access to more resources and outings.
@@ -269,14 +271,14 @@ module-4:
           4: Socio-economic factors
         correct_answers:
           - 3
-  
+
   4-2-1-5b:
     questions:
       1_addressing_concerns:
         multi_select: false
         body: |
-          True or false? 
-          
+          True or false?
+
           Although important, addressing concerns around a child's language skills could cause parents and carers to worry.
         assessment_summary: |
           Information from parents and carers will support you to identify children’s language needs. However, it is important to address the subject with sensitivity to avoid causing any unnecessary worry.
@@ -358,17 +360,21 @@ module-4:
         body: |
           Which of the following are benefits of creative and imaginative activities? (Select all answers that apply)
         assessment_summary: |
-          Creative and imaginative activities often result in more spontaneous conversation. It can help children to discuss personal information such as their families or their interests. When you carry out these activities with children individually you can also create an opportunity for children to talk about their feelings on a 1 to 1 basis.
+          Creative and imaginative activities often result in more spontaneous conversation. It can help children to discuss personal information such as their families or their interests. These conversations can help children learn how to take turns when talking.
+
+          When you carry out these activities with children individually you can also create an opportunity for children to talk about their feelings on a one to one basis.
 
         assessment_fail_summary: |
-          Creative and imaginative activities often result in more spontaneous conversation. It can help children to discuss personal information such as their families or their interests. When you carry out these activities with children individually you can also create an opportunity for children to talk about their feelings on a 1 to 1 basis.
+          Creative and imaginative activities often result in more spontaneous conversation. It can help children to discuss personal information such as their families or their interests. These conversations can help children learn how to take turns when talking.
+
+          When you carry out these activities with children individually you can also create an opportunity for children to talk about their feelings on a one to one basis.
         answers:
           1: "Increased opportunities for spontaneous conversation"
           2: "Helping children to discuss personal information"
           3: "Teaching children to take turns when talking"
-          4: "Supporting children to understand and express their feelings on a 1 to 1 basis"
+          4: "Supporting children to understand and express their feelings on a one to one basis"
         correct_answers:
-          - 1 
+          - 1
           - 2
           - 3
           - 4
