@@ -21,12 +21,6 @@ class TrainingModulesController < ApplicationController
 
       # OPTIMIZE: instantiation of module_item
       module_item
-
-      render partial: 'progress' if params[:debug] && Rails.application.debug?
-
-      if params[:demo] && (ENV['WORKSPACE'].eql?('content') || Rails.application.debug?)
-        render :demo, locals: { bar: @module_progress_bar }
-      end
     end
   end
 
