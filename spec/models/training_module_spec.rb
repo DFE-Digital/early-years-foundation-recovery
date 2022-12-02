@@ -47,23 +47,32 @@ RSpec.describe TrainingModule, type: :model do
   # sequence ---------------------------------
 
   describe '#interruption_page' do
+    subject(:module_item) { training_module.interruption_page }
+
     it 'is the first page' do
-      expect(training_module.interruption_page.id).to be 1
-      expect(training_module.interruption_page.name).to eql 'what-to-expect'
+      expect(module_item.id).to be 1
+      expect(module_item.name).to eql 'what-to-expect'
+      expect(module_item.type).to eql 'interruption_page'
     end
   end
 
   describe '#icons_page' do
+    subject(:module_item) { training_module.icons_page }
+
     it 'is the second page' do
-      expect(training_module.icons_page.id).to be 2
-      expect(training_module.icons_page.name).to eql 'before-you-start'
+      expect(module_item.id).to be 2
+      expect(module_item.name).to eql 'before-you-start'
+      expect(module_item.type).to eql 'icons_page'
     end
   end
 
   describe '#intro_page' do
+    subject(:module_item) { training_module.intro_page }
+
     it 'is the third page' do
-      expect(training_module.intro_page.id).to be 3
-      expect(training_module.intro_page.name).to eql 'intro'
+      expect(module_item.id).to be 3
+      expect(module_item.name).to eql 'intro'
+      expect(module_item.type).to eql 'module_intro'
     end
   end
 
@@ -71,9 +80,21 @@ RSpec.describe TrainingModule, type: :model do
   # end
 
   describe '#first_content_page' do
+    subject(:module_item) { training_module.first_content_page }
+
     it 'is the fifth page' do
-      expect(training_module.first_content_page.id).to be 5
-      expect(training_module.first_content_page.name).to eql '1-1-1'
+      expect(module_item.id).to be 5
+      expect(module_item.name).to eql '1-1-1'
+    end
+  end
+
+  describe '#last_page' do
+    subject(:module_item) { training_module.last_page }
+
+    it 'is the page before the certificate' do
+      expect(module_item.id).to be 27
+      expect(module_item.name).to eql '1-3-3-4'
+      expect(module_item.type).to eql 'thankyou'
     end
   end
 end

@@ -39,11 +39,10 @@ class TrainingModule < YamlBase
     @module_items ||= ModuleItem.where(training_module: name).to_a
   end
 
-  # @return [Array<ModuleItem>]
-  # excludes certificate page
-  def module_course_items
+  # @return [Array<ModuleItem>] excludes certificate page
+  def pages
     excluded_page_types = %w[certificate]
-    @module_course_items ||= ModuleItem.where(training_module: name).where.not(type: excluded_page_types).to_a
+    @pages ||= ModuleItem.where(training_module: name).where.not(type: excluded_page_types).to_a
   end
 
   # @example
@@ -153,14 +152,14 @@ class TrainingModule < YamlBase
     module_items_by_type('thankyou').first
   end
 
-  # @return [ModuleItem]
+  # @return [ModuleItem] the last module item
   def certificate_page
     module_items_by_type('certificate').first
   end
 
   # @return [ModuleItem]
   def last_page
-    module_course_items.last
+    pages.last
   end
 
   def tab_label

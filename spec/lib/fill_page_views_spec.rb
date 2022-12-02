@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'fill_page_views'
 
-RSpec.describe FillPageViews do
+RSpec.describe FillPageViews, type: :system do
   subject(:service) { described_class.new }
 
   include_context 'with progress'

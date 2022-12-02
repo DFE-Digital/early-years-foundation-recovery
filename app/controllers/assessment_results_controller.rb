@@ -1,6 +1,7 @@
 class AssessmentResultsController < ApplicationController
   before_action :authenticate_registered_user!
   before_action :clear_flash
+
   after_action :track_events, only: :show
 
   def new
@@ -19,20 +20,21 @@ private
     @training_module ||= TrainingModule.find_by(name: params[:training_module_id])
   end
 
-  def track_summative_assessment_pass?
-    @assessment.attempted? && @assessment.passed? && assessment_pass_untracked?
-  end
-
+  # @return [Boolean] pass not yet recorded
   def assessment_pass_untracked?
-    untracked?('summative_assessment_complete', training_module_id: params[:training_module_id], success: true)
+    untracked?('summative_assessment_complete',
+               training_module_id: params[:training_module_id],
+               success: true)
   end
 
+  # Record the attempt result unless already passed
+  # @return [Ahoy::Event, nil]
   def track_events
-    if track_summative_assessment_pass?
-      track('summative_assessment_complete',
-            success: @assessment.passed?,
-            type: 'summative_assessment',
-            score: @assessment.score)
-    end
+    return unless @assessment.attempted? && assessment_pass_untracked?
+
+    track('summative_assessment_complete',
+          type: 'summative_assessment',
+          score: @assessment.score,
+          success: @assessment.passed?)
   end
 end

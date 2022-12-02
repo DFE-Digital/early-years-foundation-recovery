@@ -1,3 +1,11 @@
+#
+# This function returns true if the ttc of a user and their event history
+# are in sync and either can be used to query module progress.
+#
+# TODO: `rake eyfs:report:stats` results should be aligned if this returns true
+#       Delete this once production data has been rectified
+#
+# :nocov:
 class CheckModuleEvents
   # @return [Boolean]
   def call
@@ -18,3 +26,4 @@ class CheckModuleEvents
     end
   end
 end
+# :nocov:

@@ -7,22 +7,6 @@ RSpec.shared_context 'with progress' do
   let(:charlie) { TrainingModule.find_by(name: 'charlie') }
   let(:delta) { TrainingModule.find_by(name: 'delta') }
 
-  # OPTIMIZE: Consider adding specific keys for:
-  # confidence_check_complete
-  # confidence_check_start
-  # module_content_page
-  # questionnaire_answer
-  # summative_assessment_complete
-  # summative_assessment_start
-
-  def module_start(mod)
-    tracker.track('module_start', training_module_id: mod.name)
-  end
-
-  def module_complete(mod)
-    tracker.track('module_complete', training_module_id: mod.name)
-  end
-
   # Visit every page in the module
   #
   def view_whole_module(mod)
@@ -65,11 +49,14 @@ RSpec.shared_context 'with progress' do
 
   # @return [true] create a fake event log item
   def view_module_page_event(module_name, page_name)
+    item = ModuleItem.find_by(training_module: module_name, name: page_name)
+
     tracker.track('module_content_page', {
       id: page_name,
       action: 'show',
       controller: 'content_pages',
       training_module_id: module_name,
+      type: item.type,
     })
   end
 
@@ -109,10 +96,9 @@ RSpec.shared_context 'with progress' do
   end
 
   def complete_module(mod)
-    visit "/modules/#{mod.name}/content-pages/intro"
-    view_pages_before(mod, 'assessment_results')
-    travel_to 5.minutes.from_now
-    visit "/modules/#{mod.name}/content-pages/#{mod.last_page.name}"
+    view_pages_before(mod, 'thankyou')                                # 'module_content_page'
+    travel_to 5.minutes.from_now                                      # 300s ttc
+    visit "/modules/#{mod.name}/content-pages/#{mod.last_page.name}"  # 'module_complete'
   end
 
 private
@@ -120,12 +106,15 @@ private
   # Visit every page before the given instance of the given page type
   #
   def view_pages_before(mod, type, count = 1)
+    visit "/modules/#{mod.name}/content-pages/intro"                  # 'module_start'
+
     counter = 0
     mod.module_items.map do |item|
       view_module_page_event(mod.name, item.name)
-      counter += 1 if item.type == type
-      break if counter == count
+      counter += 1 if item.type.eql?(type)
+      break if counter.eql?(count)
     end
+
     CalculateModuleState.new(user: user).call
   end
 end

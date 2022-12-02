@@ -81,13 +81,23 @@ RSpec.describe 'Event log' do
       end
     end
 
-    context 'when answering final question' do
+    context 'when answering final question correctly' do
       before do
         complete_summative_assessment_correct
       end
 
-      it 'tracks completion' do
-        expect(events.where(name: 'summative_assessment_complete').where_properties(score: 100).size).to eq 1
+      it 'tracks successful attempt' do
+        expect(events.where(name: 'summative_assessment_complete').where_properties(score: 100, success: true).size).to eq 1
+      end
+    end
+
+    context 'when answering final question incorrectly' do
+      before do
+        complete_summative_assessment_incorrect
+      end
+
+      it 'tracks failed attempt' do
+        expect(events.where(name: 'summative_assessment_complete').where_properties(score: 0, success: false).size).to eq 1
       end
     end
   end
@@ -107,9 +117,9 @@ RSpec.describe 'Event log' do
 
   describe 'complete first module' do
     before do
-      visit '/modules/alpha/content-pages/intro'
-      view_pages_before(alpha, 'assessment_results')
-      visit 'modules/alpha/content-pages/1-3-2-5'
+      visit '/modules/alpha/content-pages/intro'  # record dependent event of 'module_start'
+      view_pages_before(alpha, 'certificate')     # visit all but last page
+      visit 'modules/alpha/content-pages/1-3-4'   # visit last page (certificate)
     end
 
     it 'tracks completion' do

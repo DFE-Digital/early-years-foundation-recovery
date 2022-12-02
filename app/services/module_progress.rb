@@ -30,11 +30,6 @@ class ModuleProgress
     visited.last
   end
 
-  # @return [ModuleItem]
-  def final_content_page
-    mod.module_course_items.last
-  end
-
   # Last visited module item with fallback to first item
   # @return [ModuleItem]
   def resume_page
@@ -49,7 +44,7 @@ class ModuleProgress
     if unvisited.none?
       false
     # elsif key_event('module_complete') && unvisited.any?
-    elsif module_item_events(final_content_page.name).first && unvisited.any?
+    elsif visited?(mod.thankyou_page) && unvisited.any? # seen last content page but has gaps
       true
     elsif gaps?
       true
@@ -57,25 +52,21 @@ class ModuleProgress
   end
 
   # @see CourseProgress
-  # @return [Boolean]
+  # @return [Boolean] true if every page is visited (certificate excluded)
   def completed?
-    all?(mod.module_course_items)
+    all?(mod.pages)
   end
 
+  # TODO: refactor once every user has a "module_complete" event
+  #
   # Completed date for module
   # @return [DateTime, nil]
   def completed_at
-    certificate_achieved_at || last_page_completed_at
-  end
-
-  # @return [DateTime, nil]
-  def certificate_achieved_at
-    key_event('module_complete')&.time
-  end
-
-  # @return [DateTime, nil]
-  def last_page_completed_at
-    module_item_events(final_content_page.name).first&.time
+    page_name = mod.pages.last.name
+    page_event = module_item_events(page_name).first
+    named_event = key_event('module_complete')
+    event = named_event || page_event
+    event&.time
   end
 
   # @see CourseProgress
@@ -138,7 +129,7 @@ private
 
   # @return [Array<ModuleItem>]
   def unvisited
-    mod.module_course_items.reject { |item| visited?(item) }
+    mod.pages.reject { |item| visited?(item) }
   end
 
   # @param method [Symbol]

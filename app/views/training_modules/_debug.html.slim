@@ -7,8 +7,8 @@
       li topics: #{@training_module.topic_count}
       li milestone: #{@module_progress.milestone}
       li resume page: #{@module_progress.resume_page&.name}
-      li last page: #{@training_module.module_items.last.name}
-      li last course page: #{@training_module.module_course_items.last.name}
+      li last page: #{@training_module.last_page.name}
+      li certificate: #{@training_module.certificate_page.name}
 
     hr
     h4 Submodule

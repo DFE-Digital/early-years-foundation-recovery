@@ -6,17 +6,6 @@ RSpec.describe CourseProgress, type: :system do
   include_context 'with progress'
   include_context 'with user'
 
-  describe '#milestone' do
-    it 'returns the name of the last viewed page' do
-      view_module_page_event('alpha', '1-1')
-      view_module_page_event('alpha', '1-2-4')
-      expect(course.milestone('alpha')).to eq '1-2-4'
-
-      view_module_page_event('alpha', '1-1-3')
-      expect(course.milestone('alpha')).to eq '1-1-3'
-    end
-  end
-
   describe '#course_completed?' do
     it 'is false for new users' do
       expect(course.course_completed?).to be false
@@ -108,10 +97,11 @@ RSpec.describe CourseProgress, type: :system do
       travel_to Time.zone.parse('2022-06-30') do
         complete_module(bravo)
         expect(course.completed_modules.count).to be 1
+
         ((_mod, completion_time)) = course.completed_modules
+
         expect(completion_time).to be_an ActiveSupport::TimeWithZone
-        # TBD database is returning actual time and not time set above
-        # expect(completion_time.to_s).to eq '2022-06-30 00:00:00 UTC'
+        expect(completion_time.to_s).to eq '2022-06-30 00:00:00 UTC'
       end
     end
   end
