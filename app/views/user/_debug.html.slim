@@ -1,4 +1,4 @@
-- if Rails.env.development?
+- if Rails.application.debug?
   pre.debug_dump
     h2 Visits
     = render @user.visits
