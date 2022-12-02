@@ -36,7 +36,7 @@ development:
 # ey-recovery-content
 content:
   <<: *defaults
-  GCS_BUCKET_NAME = 'dfetest2/dfetest1'
+  GCS_BUCKET_NAME = 'pr-review'
   # TRAINING_MODULES: demo-modules
   # TIMEOUT_MINUTES: 60
   # TIMEOUT_WARNING_MINUTES: 25
