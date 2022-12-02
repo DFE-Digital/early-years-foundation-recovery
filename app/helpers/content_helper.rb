@@ -44,8 +44,11 @@ module ContentHelper
   # @return [String]
   def progress_ball(icon, style, colour, label)
     content_tag :span, nil, class: 'fa-stack fa-1x', aria: { label: label } do
-      content_tag(:i, nil, class: 'fa-solid fa-stack-2x fa-circle white') +
-        content_tag(:i, nil, class: "fa-#{style} fa-stack-2x fa-#{icon} #{colour}")
+      concat(content_tag(:i, nil, class: 'fa-solid fa-stack-2x fa-circle'))
+      concat(content_tag(:i, nil, class: "fa-#{style} fa-stack-2x fa-#{icon} #{colour}"))
+      if label == 'started'
+        concat(content_tag(:i, nil, class: 'small-circle fa-solid fa-stack-2x fa-circle'))
+      end
     end
   end
 

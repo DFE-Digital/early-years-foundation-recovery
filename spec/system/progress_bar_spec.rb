@@ -57,14 +57,12 @@ RSpec.describe 'Progress bar' do
         visit 'modules/alpha/content-pages/1-1'
       end
 
-      it 'shows first circle ticked, second circle with a grey border' do
-        expect(page).to have_css 'li.progress-bar:nth-child(1) .fa-circle-check.green'
-        expect(page).to have_css 'li.progress-bar:nth-child(2) .fa-circle.grey'
+      it 'shows a circle with a green border' do
+        expect(page).to have_css 'li.progress-bar:nth-child(2) .fa-circle.green'
       end
 
-      it 'shows regular first section heading, bold section section heading' do
-        expect(page).to have_css 'li.progress-bar:nth-child(1) .progress--heading.govuk-\!-font-weight-bold'
-        expect(page).not_to have_css 'li.progress-bar:nth-child(2) .progress--heading.govuk-\!-font-weight-bold'
+      it 'shows a bold section heading' do
+        expect(page).to have_css 'li.progress-bar:nth-child(2) .progress--heading.govuk-\!-font-weight-bold'
       end
     end
 

@@ -23,7 +23,7 @@ class ModuleProgressBarDecorator < DelegateClass(ModuleProgress)
     if milestone_completed?(item)
       ['circle-check', :solid, :green, 'completed']
     elsif milestone_started?(item)
-      ['circle', :regular, :green, 'started']
+      ['circle', :solid, :green, 'started']
     else
       ['circle', :regular, :grey, 'not started']
     end
@@ -44,10 +44,6 @@ private
 
   # @return [Boolean]
   def milestone_started?(item)
-    if item.interruption_page? || item.summary_intro?
-      visited?(item)
-    elsif item.submodule_intro?
-      visited?(item.next_item)
-    end
+    visited?(item)
   end
 end

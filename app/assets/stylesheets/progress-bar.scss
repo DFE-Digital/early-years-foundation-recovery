@@ -35,9 +35,17 @@
       background-color: transparent;
       padding: 0 !important;
       height: 26px;
+
+      &.small-circle {
+        height: 15px;
+      }
       
       @include govuk-media-query($from: tablet) {
         height: 36px;
+
+        &.small-circle {
+          height: 20px;
+        }
       }
 
       &.grey {

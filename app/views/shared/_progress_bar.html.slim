@@ -1,6 +1,6 @@
 .govuk-grid-row
   ol.progress-bar--container.govuk-list role="progressbar"
-    - array_of_colours = bar.milestones.map {|i| bar.icon(i)[2]}
+    - array_of_colours = bar.milestones.map {|item| bar.icon(item)[2]}
     - last_green = array_of_colours.rindex(:green)
 
     - bar.milestones.each_with_index.map do |item, index|
