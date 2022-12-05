@@ -10,7 +10,10 @@ services:
       - RAILS_ENV=test
       - DOMAIN=recovery.app
       - TRAINING_MODULES=demo-modules
-      - BOT=bot_token
+      - TIMEOUT_MINUTES=3
+      - TIMEOUT_WARNING_MINUTES=1
+      - TIMEOUT_MODAL_VISIBLE=1
+      - BOT_TOKEN=bot_token
     tty: true
     stdin_open: true
 

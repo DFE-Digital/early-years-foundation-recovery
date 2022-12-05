@@ -1,9 +1,11 @@
---title "Child development training"
+--title "Early years child development training"
 --plugin junk
 --protected
 --private
 --markup markdown
 -
-adr/*.md
 data/*.md
+uml/*.md
+adr/*.md
+RELEASE.md
 LICENSE

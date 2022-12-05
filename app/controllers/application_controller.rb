@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_analytics_tracking_id
+  before_action :set_analytics_tracking_id, :set_hotjar_site_id
+
+  helper_method :timeout_timer
 
   default_form_builder(EarlyYearsRecoveryFormBuilder)
 
@@ -11,7 +13,7 @@ class ApplicationController < ActionController::Base
     authenticate_user! unless user_signed_in?
     return true if current_user.registration_complete?
 
-    redirect_to extra_registrations_path, notice: 'Please complete registration'
+    redirect_to edit_registration_name_path, notice: 'Please complete registration'
   end
 
   def configure_permitted_parameters
@@ -28,6 +30,17 @@ class ApplicationController < ActionController::Base
 
   def set_analytics_tracking_id
     @tracking_id = Rails.configuration.google_analytics_tracking_id
+  end
+
+  def set_hotjar_site_id
+    @hotjar_id = Rails.configuration.hotjar_site_id
+  end
+
+  def timeout_timer
+    timeout_controller = TimeoutController.new
+    timeout_controller.request = request
+    timeout_controller.response = response
+    timeout_controller.send(:ttl_to_timeout)
   end
 
 private

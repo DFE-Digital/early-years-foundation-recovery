@@ -50,7 +50,7 @@ brain-development-and-how-children-learn:
       1_ability_tasks:
         multi_select: false
         label: |
-          Which of the following will impact upon a child's ability to carry out tasks?
+          Which of the following will negatively impact upon a child's ability to carry out tasks?
         assessment_summary:
         assessment_fail_summary: |
           Prolonged exposure to negative influences such as social isolation,
@@ -150,7 +150,7 @@ brain-development-and-how-children-learn:
       1_negatively_impact_development_delay:
         multi_select: true
         label: |
-          Which of the following could negatively impact on cognitive delay?
+          Which of the following could cause cognitive delay?
           (Select all answers that apply)
         assessment_summary:
         assessment_fail_summary: |

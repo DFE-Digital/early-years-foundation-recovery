@@ -4,13 +4,13 @@ module-4:
     content:
     questions:
       1_babies_babbling:
-        multi_select: false 
+        multi_select: false
         label: |
           At what age would you expect babies to begin babbling?
-        assessment_summary: 
+        assessment_summary:
         assessment_fail_summary: |
-          At around 6 to 8 months most babies enter the babbling stage. This is where a baby will begin to make sounds such as ba-ba, da-da, ma-ma. This is the way that babies will learn, rehearse and develop future language skills. 
-          
+          At around 6 to 8 months most babies enter the babbling stage. This is where a baby will begin to make sounds such as ba-ba, da-da, ma-ma. This is the way that babies will learn, rehearse and develop future language skills.
+
           You might want to revisit the section on [the pre-linguistic stage: sounds and noises before talking](/modules/module-4/content-pages/4-1-1-1a).
         answers:
           1: "3 to 6 months"
@@ -18,7 +18,7 @@ module-4:
           3: "11 to 12 months"
           4: "13 to 15 months"
         correct_answers:
-        - 2  
+        - 2
 
   4-4-1-2:
     content:
@@ -26,11 +26,11 @@ module-4:
       1_last_stage:
         multi_select: false
         label: |
-          Which of the following is the last stage of language development before a child can speak fluently? 
-        assessment_summary: 
+          Which of the following is the last stage of language development before a child can speak fluently?
+        assessment_summary:
         assessment_fail_summary: |
           The telegraphic stage is the last stage of language development before a child can speak fluently. This stage normally begins from around 2 years onwards.
-          This is where children can put together more meaningful sentences. Sentences will still not be complete, and connecting or descriptive words will be missing. An example of telegraphic speech could be “cat drink milk”. 
+          This is where children can put together more meaningful sentences. Sentences will still not be complete, and connecting or descriptive words will be missing. An example of telegraphic speech could be “cat drink milk”.
 
           You might want to revisit the section on [the linguistic stage: meaningful sentences](/modules/module-4/content-pages/4-1-1-1).
 
@@ -48,13 +48,13 @@ module-4:
       1_imitation_reinforcement_conditioning:
         multi_select: true
         label: |
-          Which of the following are one of the 3 principles of Skinner's "behaviourism" theory? 
-        assessment_summary: 
+          Which of the following are the 3 principles of Skinner's "behaviourism" theory?
+        assessment_summary:
         assessment_fail_summary: |
           Skinner’s “behaviourism” theory has 3 principles:
 
-          - imitation - where a child has the opportunity to observe and copy behaviour 
-          - reinforcement - where a child receives a positive or negative response to their behaviour 
+          - imitation - where a child has the opportunity to observe and copy behaviour
+          - reinforcement - where a child receives a positive or negative response to their behaviour
           - conditioning - where a child’s learning is shaped by their experiences
 
           You might want to revisit the section on [theories of language development: Skinner](/modules/module-4/content-pages/4-1-2-1).
@@ -67,15 +67,15 @@ module-4:
         - 1
         - 3
         - 4
-  
+
   4-4-1-4:
     content:
     questions:
       1_socioeconomic_factors:
         multi_select: false
         label: |
-          Which of the following is a socio-economic factor that could affect language development? 
-        assessment_summary: 
+          Which of the following is a socio-economic factor that could affect language development?
+        assessment_summary:
         assessment_fail_summary: |
           Some parents or carers who have experienced negative or limited learning opportunities may not see the importance of supporting their child’s learning and development. For example if they do not appreciate the value of books and reading, they may not provide these opportunities for their child.
 
@@ -95,10 +95,10 @@ module-4:
         multi_select: false
         label: |
           What is the term used to describe identifying and supporting a difficulty quickly?
-        assessment_summary: 
+        assessment_summary:
         assessment_fail_summary: |
           Early intervention is when you identify a difficulty as soon as possible and use appropriate activities to support development.
-          
+
           You might want to revisit the section on [early intervention for speech, language and communication needs](/modules/module-4/content-pages/4-2-1-2).
 
         answers:
@@ -108,7 +108,7 @@ module-4:
           4: "Practitioner support"
         correct_answers:
         - 3
- 
+
   4-4-1-6:
     content:
     questions:
@@ -117,9 +117,9 @@ module-4:
         label: |
           Limited communication will impact on a child’s ability to self-regulate because they will experience what?
 
-        assessment_summary: 
+        assessment_summary:
         assessment_fail_summary: |
-          If a child lacks the communication skills to express their needs it could result in frustration. If children become frustrated it can be shown as negative behaviour.
+          If a child lacks the communication skills to express their needs, they may become frustrated. This can then lead to behaviour that you may find challenging.
 
           You might want to revisit the section on [how language development impacts on self-regulation](/modules/module-4/content-pages/4-2-2-1).
 
@@ -130,7 +130,7 @@ module-4:
           4: "Friendship"
         correct_answers:
         - 2
-  
+
   4-4-1-7:
     content:
     questions:
@@ -139,10 +139,10 @@ module-4:
         label: |
           Observations and assessments should not be what?
 
-        assessment_summary: 
+        assessment_summary:
         assessment_fail_summary: |
           Observations and the recording of them should not be time consuming or take you away from interacting with the children.
-          
+
           You might want to revisit the section on [observation, assessment and planning](/modules/module-4/content-pages/4-2-1-5a).
         answers:
           1: "Used in planning"
@@ -156,13 +156,13 @@ module-4:
     content:
     questions:
       1_self_talk:
-        multi_select: false 
+        multi_select: false
         label: |
           Self talk and parallel talk are both types of which strategy?
-        assessment_summary: 
+        assessment_summary:
         assessment_fail_summary: |
-          Self talk and parallel talk are both ways that you can model language for children. This is where you add commentary to tasks and actions to make sure that children hear a wide variety of vocabulary 
-          
+          Self talk and parallel talk are both ways that you can model language for children. This is where you add commentary to tasks and actions to make sure that children hear a wide variety of vocabulary
+
           You might want to revisit the section on [strategies to help children develop language and communication skills](/modules/module-4/content-pages/4-3-1-2a).
         answers:
           1: "Self-regulation"
@@ -176,13 +176,13 @@ module-4:
     content:
     questions:
       1_successful_environment:
-        multi_select: false 
+        multi_select: false
         label: |
-          A successful environment will promote which of the following?
-        assessment_summary: 
+          A language rich environment will promote which of the following?
+        assessment_summary:
         assessment_fail_summary: |
-          A successful environment will promote interactions with others. You should also consider how areas and activities in the environment promote discussion and curiosity, leading to investigation.
-          
+          A language rich environment will promote interactions with others. You should also consider how areas and activities in the environment promote discussion and curiosity, leading to investigation.
+
           You might want to revisit the section on [the physical environment](/modules/module-4/content-pages/4-3-2-1a).
         answers:
           1: "An emphasis on child led activity"
@@ -196,14 +196,14 @@ module-4:
     content:
     questions:
       1_positive_partnerships:
-        multi_select: false 
+        multi_select: false
         label: |
           Positive partnerships with parents and carers will build a sense of security for children. This will support them to communicate with what?
 
-        assessment_summary: 
+        assessment_summary:
         assessment_fail_summary: |
           Parents and carers are the most knowledgeable person regarding their child and they will be able to share lots of information to support you. Finding out about experiences, siblings and interests will help you to plan to meet their language needs. The information you learn will support you to build a sense of security, which will result in more confidence when communicating.
-          
+
           You might want to revisit the section on [strategies for working with parents and carers](/modules/module-4/content-pages/4-3-3-1).
         answers:
           1: "Confidence"

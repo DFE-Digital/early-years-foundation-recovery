@@ -19,7 +19,7 @@ class CourseProgress
 
   # @return [Array<TrainingModule>] three unavailable or draft modules
   def upcoming_modules
-    by_state(:upcoming).reject { |mod| available?(mod) }.take(3)
+    by_state(:upcoming).reject { |mod| available?(mod) }
   end
 
   # Completed modules are modules for which every module item has been viewed

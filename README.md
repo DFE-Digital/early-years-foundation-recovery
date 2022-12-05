@@ -1,37 +1,19 @@
-# Child development training
+# Early years child development training
 
-[![Continuous Integration][ci-badge]][ci-workflow]
+[![ci][ci-badge]][ci-workflow]
+[![brakeman][brakeman-badge]][brakeman-workflow]
+[![pa11y][pa11y-badge]][pa11y-workflow]
+
+This is a Rails 7 application using the [DfE template][rails-template].
+
+Optionally create `.env` to override or set default variables like `DATABASE_URL`.
 
 ## Getting Started
 
-1. Clone the repository
-
-  This is a Rails 7 application using the [DfE template][rails-template].
-
-2. Install git-secrets
-
-  This will help to prevent unintentional commits of access keys.
-
-  - `brew install git-secrets`
-  - `cd /path/to/my/repo`
-  - `git secrets --install`
-  - `git secrets --register-aws`
-
-Find advanced settings and other installation options at the [git-secrets project][git-secrets].
-
+1. Clone the [repository][app-repo]
+2. Install [git-secrets](#git-secrets)
 3. Obtain the master keys
-
-  Optionally create `.env` to override or set default variables like `DATABASE_URL`.
-
-4. Install the frontend dependencies
-
-  - `yarn install; bin/rails assets:precompile`
-  - `bin/docker-yarn` if using [Docker][docker]
-
-5. Start the server
-
-  - `bin/dev` *(requires a running database server)*
-  - `bin/docker-dev` if using [Docker][docker]
+4. Start the server
 
 ## Useful Links
 
@@ -50,6 +32,17 @@ of the deployed environments, you can get the encryption keys from another devel
 
 Once you have the keys, run `rails credentials:edit --environment <env>`.
 Full instructions can be found by running `rails credentials:help`
+
+## Git Secrets
+
+This will help to prevent unintentional commits of access keys.
+
+- `brew install git-secrets`
+- `cd /path/to/my/repo`
+- `git secrets --install`
+- `git secrets --register-aws`
+
+Find advanced settings and other installation options at the [git-secrets project][git-secrets].
 
 ---
 
@@ -80,7 +73,8 @@ Use `bin/qa` to run the test framework under `/ui` against a given URL.
 These tests have additional dependencies:
 
 - `brew install chromedriver geckodriver`
-- `xattr -d com.apple.quarantine /usr/local/bin/chromedriver`
+- `xattr -d com.apple.quarantine /usr/local/bin/chromedriver` on Intel
+- `xattr -d com.apple.quarantine /opt/homebrew/bin/chromedriver` on ARM
 
 ## Using Docker
 
@@ -97,19 +91,21 @@ These commands help maintain your containerised workspace:
     generated inside containers are created by *root*
 - `bin/docker-down` stop any active services
 - `bin/docker-prune` purge project containers, volumes and images
-- `bin/docker-yarn` warm the cache of frontend dependencies
 
 The commands run common tasks inside containers:
 
 - `bin/docker-adr` rebuilds the architecture decision records table of contents
 - `bin/docker-dev` starts `Procfile.dev`, containerised equivalent of `bin/dev`,
-    using the `docker-compose.dev.yml` override.
+    using the `docker-compose.dev.yml` override
     Additionally, it will install bundle and yarn dependencies.
+- `bin/docker-rails erd` generate an Entity Relationship Diagram
 - `bin/docker-rails db:seed` populates the containerised postgres database
 - `bin/docker-rails console` drops into a running development environment or starts one,
     containerised equivalent of `bin/rails console`
 - `bin/docker-rspec -f doc` runs the test suite with optional arguments, containerised
     equivalent of `bin/rspec`
+- `bin/docker-doc` runs a YARD documentation server
+- `bin/docker-uml` exports UML diagrams as default PNGs
 - `bin/docker-qa` runs the browser tests against a running production application,
     a containerised equivalent of `bin/qa`
 - `bin/docker-pa11y` runs WCAG checks against a generated `sitemap.xml`
@@ -122,14 +118,22 @@ These commands can be used to debug problems:
     can help identify why the application is not running in either the `dev`, `test`, or `qa` contexts
 - `BASE_URL=https://app:3000 docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery up app` debug the UAT tests
 
-## Using Custom Tasks
+## Using Rake
 
-- `rails db:bot` creates a user account for automated testing in the `staging` environment
-- `rails db:backfill_terms_and_conditions`
-- `rails db:calculate_completion_time`
-- `rails db:display_whats_new`
-- `rails db:seed:interim_users`
-- `rails post:content`
+Custom tasks are namespaced under `eyfs`, list them using `rake --tasks eyfs`.
+
+- `rake eyfs:bot`            # Generate secure bot user
+- `rake eyfs:plug_content`   # Add page view events for injected module items
+- `rake eyfs:user_progress`  # Recalculate module completion time
+- `rake eyfs:whats_new`      # Enable the post login 'What's new' page
+
+
+Trigger a task on a deployed application in either the `ey-recovery-content` or `ey-recovery-staging` spaces, not `production`, using `bin/cf-task`.
+
+- `./bin/cf-task pr-123 eyfs:bot`
+- `./bin/cf-task dev eyfs:whats_new[email1@example.com,email2@example.com]`
+
+Refer to this script for the steps necessary to ssh in and run a task manually.
 
 ---
 
@@ -180,11 +184,10 @@ A production-like application is available as a composed Docker service for loca
 To run a self-signed certificate must first be generated.
 
 1. `./bin/docker-certs` (Mac users can trust the certificate in [Keychain Access](https://support.apple.com/en-gb/guide/keychain-access))
-2. `./bin/docker-qa` (this will build and bring up the application)
+2. `./bin/docker-qa` (this will build and bring up the application with a clean database)
 3. `docker exec -it recovery_prod rails db:seed` (seed the prerequisite user accounts)
-4. `BASE_URL=https://app:3000 ./bin/docker-qa` (test against the seeded application)
-
-WIP: proposed Github workflow that does not require `docker-compose`.
+4. `./bin/docker-qa` (retest)
+4. `BASE_URL=https://deployment ./bin/docker-qa` (alternative test against another server)
 
 
 ## Accessibility Standards
@@ -192,8 +195,13 @@ WIP: proposed Github workflow that does not require `docker-compose`.
 An automated accessibility audit can be run against a development server running
 in Docker using `./bin/docker-pa11y`. The test uses [pa11y-ci](https://github.com/pa11y/pa11y-ci)
 and a dynamic `sitemap.xml` file to ensure the project meets [WCAG2AA](https://www.w3.org/WAI/WCAG2AA-Conformance) standards.
-A secure HTTP header is used to provide access to pages that require authentication.
-The secret `$BOT` environment variable defines the account to seed.
+A secure HTTP header `BOT` is used to provide access to pages that require authentication.
+The secret `$BOT_TOKEN` environment variable defines the account to seed.
+
+```
+curl -i -L -H "BOT: ${BOT_TOKEN}" http://localhost:3000/my-account
+```
+
 `docker-pa11y` accepts an optional argument to test external sites.
 
 ---
@@ -238,10 +246,11 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
 ## Content
 
-Content designers are using the docker development environment.
+Content designers are also using the docker development environment.
+
 You can demo this environment locally using the account `completed@example.com:StrongPassword`.
 When there are significant changes to content structure a soft restart the server may be necessary `./bin/docker-rails restart`.
-Styling changes show render automatically.
+CSS styling changes will appear automatically without needing to restart.
 
 ### YAML
 
@@ -254,22 +263,45 @@ Styling changes show render automatically.
 - [developer guide](https://docs.publishing.service.gov.uk/repos/govspeak.html)
 
 
+## User experience
+
+Session timeout functionality:
+
+- default timeout period is 25 minutes
+- default timeout warning appears after 5 minutes
+- screen readers announce every time the timeout refreshes every 15 secs
+
+
 ---
 
-[confluence]: https://dfedigital.atlassian.net/wiki/spaces/ER/overview
-[production]: https://eyfs-covid-recovery.london.cloudapps.digital
-[staging]: https://ey-recovery-staging.london.cloudapps.digital
-[development]: https://ey-recovery-dev.london.cloudapps.digital
+[app-repo]: https://github.com/DFE-Digital/early-years-foundation-recovery
 [prototype-repo]: https://github.com/DFE-Digital/ey-recovery-prototype
-[prototype-app]: https://eye-recovery.herokuapp.com
-[interim-prototype-app]: https://child-development-training-prototype.london.cloudapps.digital
 [rails-template]: https://github.com/DFE-Digital/rails-template
-[ci-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml/badge.svg
-[ci-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml
-[production-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/production.yml
-[staging-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/staging.yml
 [ghcr]: https://github.com/dfe-digital/early-years-foundation-recovery/pkgs/container/early-years-foundation-recovery
+[confluence]: https://dfedigital.atlassian.net/wiki/spaces/ER/overview
 [notify]: https://www.notifications.service.gov.uk
 [figma]: https://www.figma.com/file/FGW1NJJwnYRqoZ2DV0l5wW/Training-content?node-id=1%3A19
 [docker]: https://www.docker.com
 [git-secrets]: https://github.com/awslabs/git-secrets
+
+<!-- Deployments -->
+
+[prototype-app]: https://eye-recovery.herokuapp.com
+[interim-prototype-app]: https://child-development-training-prototype.london.cloudapps.digital
+[production]: https://eyfs-covid-recovery.london.cloudapps.digital
+[staging]: https://ey-recovery-staging.london.cloudapps.digital
+[development]: https://ey-recovery-dev.london.cloudapps.digital
+
+<!-- GH workflows -->
+
+[brakeman-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/brakeman.yml
+[pa11y-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/pa11y.yml
+[ci-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml
+[production-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/production.yml
+[staging-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/staging.yml
+
+<!-- GH workflow badges -->
+
+[brakeman-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/brakeman.yml/badge.svg
+[pa11y-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/pa11y.yml/badge.svg
+[ci-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml/badge.svg

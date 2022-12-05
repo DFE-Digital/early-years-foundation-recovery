@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CourseProgress do
+RSpec.describe CourseProgress, type: :system do
   subject(:course) { described_class.new(user: user) }
 
   include_context 'with progress'

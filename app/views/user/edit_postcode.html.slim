@@ -1,9 +1,0 @@
-.govuk-grid-row
-  .govuk-grid-column-two-thirds-from-desktop
-    = form_for @user, url: { action: 'update_postcode' } do |form|
-      = form.govuk_error_summary
-      = form.govuk_fieldset legend: { text: t('setting.heading') } do
-        = form.govuk_text_field :postcode, autofocus: true
-        = form.govuk_submit t('links.save')
-
-        p= govuk_link_to 'Cancel', user_path

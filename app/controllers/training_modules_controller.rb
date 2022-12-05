@@ -19,7 +19,7 @@ class TrainingModulesController < ApplicationController
       # OPTIMIZE: instantiation of module_item
       module_item
 
-      render partial: 'progress' if params[:debug] && Rails.env.development?
+      render partial: 'progress' if params[:debug] && Rails.application.debug?
     end
   end
 

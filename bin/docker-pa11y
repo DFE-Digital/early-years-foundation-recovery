@@ -1,13 +1,13 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 # Check accessibility of running dev container against latest sitemap
 # or an external site
 #
-# ./bin/docker-pa11y https://ey-recovery-staging.london.cloudapps.digital
+# ./bin/docker-pa11y https://ey-recovery-dev.london.cloudapps.digital
 # ------------------------------------------------------------------------------
 set -e
 
-./bin/docker-rails db:bot sitemap:refresh:no_ping
+./bin/docker-rails eyfs:bot sitemap:refresh:no_ping
 
 docker-compose \
   -f docker-compose.yml \

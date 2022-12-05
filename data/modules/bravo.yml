@@ -47,6 +47,8 @@ bravo:
 
   # Assessment
   # ----------------------------------------------------------------------------
+  1-2-2-1a:
+    type: assessment_intro
   1-2-2-2:
     type: summative_questionnaire
   1-2-2-3:
@@ -55,3 +57,5 @@ bravo:
     type: assessment_results
   1-2-3:
     type: certificate
+
+

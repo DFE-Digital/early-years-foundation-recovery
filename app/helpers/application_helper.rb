@@ -1,8 +1,9 @@
 module ApplicationHelper
   # @return [String]
   def navigation
-    govuk_header(service_name: 'Child development training', classes: 'noprint') do |header|
+    govuk_header(classes: 'noprint') do |header|
       header.navigation_item(text: 'Home', href: root_path)
+      header.custom_logo { custom_logo }
       if user_signed_in?
         header.navigation_item(text: 'My modules', href: my_modules_path)
         header.navigation_item(text: 'Learning log', href: user_notes_path) if current_user.course_started?
@@ -15,14 +16,23 @@ module ApplicationHelper
   end
 
   # @return [String]
+  def custom_logo
+    [
+      image_tag('crest.png', alt: 'Department for Education homepage', class: 'govuk-header__logotype-crown-fallback-image'),
+      content_tag(:span, 'Department for Education | ', class: 'govuk-header__logotype-text'),
+      content_tag(:span, service_name, class: 'govuk-header__product-name'),
+    ].join.html_safe
+  end
+
+  # @return [String]
   def configuration_summary_list
     govuk_summary_list(
       rows: [
         { key: { text: 'Rails version' }, value: { text: Rails.version } },
         { key: { text: 'Ruby version' }, value: { text: RUBY_VERSION } },
         { key: {
-          text: 'GOV.UK Frontend',
-        },
+            text: 'GOV.UK Frontend',
+          },
           value: {
             text: JSON
               .parse(File.read(Rails.root.join('package.json')))
@@ -51,11 +61,10 @@ module ApplicationHelper
 
   # @return [String]
   def html_title(module_item)
-    site_title = 'Child development training'
     module_title = module_item&.parent&.title
     title = t(params.permit('controller', 'action', 'id').values.join('.'), scope: 'html_title', default: module_item&.model&.heading)
     [
-      site_title,
+      service_name,
       module_title,
       title,
     ].compact.join(' : ')
