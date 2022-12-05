@@ -1,5 +1,7 @@
 require 'training/module'
 require 'training/page'
+require 'training/question'
+require 'training/confidence'
 
 ContentfulRails.configure do |config|
   config.authenticate_webhooks = true # false here would allow the webhooks to process without basic auth
@@ -15,7 +17,9 @@ ContentfulRails.configure do |config|
   config.contentful_options = { 
     entry_mapping: {
       'module' => Training::Module,
-      'page' => Training::Page
+      'page' => Training::Page,
+      'question' => Training::Question,
+      'confidence' => Training::Confidence
     }
   }
 end

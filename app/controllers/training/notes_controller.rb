@@ -9,7 +9,7 @@ class Training::NotesController < ApplicationController
 
   # POST /my-account/learning-log
   def create
-    @note = Note.new(note_params.except(:page_id))
+    @note = Note.new(note_params.except(:module_item_id))
 
     if @note.save
       # track('user_note_created', **tracking_properties)
@@ -23,7 +23,7 @@ class Training::NotesController < ApplicationController
   def update
     @note = current_user.notes.where(training_module: note_params[:training_module], name: note_params[:name]).first
 
-    if @note.update(note_params.except(:page_id))
+    if @note.update(note_params.except(:module_item_id))
       # track('user_note_updated', **tracking_properties)
       redirect_to training_module_content_page_path(module_item.training_module, module_item.next_item.slug)
     else # no validations, so this branch is not expected to be used
@@ -36,15 +36,15 @@ class Training::NotesController < ApplicationController
 private
 
   def module_item
-    @module_item = Training::Page.find_by(slug: note_params[:page_id]).load.first
+    @module_item = Training::Page.find_by(id: note_params[:module_item_id]).load.first
   end
 
   def tracking_properties
-    note_params.except(:body, :page_id, :user).merge(length: note_params[:body].length)
+    note_params.except(:body, :module_item_id, :user).merge(length: note_params[:body].length)
   end
 
   # Only allow a list of trusted parameters through.
   def note_params
-    params.require(:note).permit(:title, :body, :training_module, :name, :page_id).with_defaults(user: current_user)
+    params.require(:note).permit(:title, :body, :training_module, :name, :module_item_id).with_defaults(user: current_user)
   end
 end
