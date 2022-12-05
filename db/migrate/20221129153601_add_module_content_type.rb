@@ -34,7 +34,7 @@ class AddModuleContentType < ActiveRecord::Migration[7.0]
       ct.field('multi select', :boolean)
       ct.display_field = 'body'
     end
-    
+
     create_content_type('answer') do |ct|
       ct.field('body', :text)
       ct.field('correct', :boolean)
@@ -49,6 +49,5 @@ class AddModuleContentType < ActiveRecord::Migration[7.0]
     end
   end
 
-  def down
-  end
+  def down; end
 end

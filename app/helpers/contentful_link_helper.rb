@@ -33,13 +33,11 @@ module ContentfulLinkHelper
     path =
       if state.eql?(:failed)
         new_training_module_assessment_result_path(item.training_module)
+      elsif item&.parent
+        module_content_page_path(item.parent.slug, item.slug)
+      # content_page_path(item.id)
       else
-        if item&.parent
-          module_content_page_path(item.parent.slug, item.slug)
-          #content_page_path(item.id)
-        else
-          '#content-page-missing'
-        end
+        '#content-page-missing'
       end
 
     govuk_button_link_to text, path

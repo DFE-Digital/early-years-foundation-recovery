@@ -5,7 +5,7 @@ module Training
     has_many :pages, class_name: 'Training::Page'
 
     def module_course_items
-      pages 
+      pages
     end
 
     def call_to_action

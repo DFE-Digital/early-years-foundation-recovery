@@ -1,7 +1,7 @@
 class Training::Page < ContentfulModel::Base
   self.content_type_id = 'page'
 
-  belongs_to_many :modules, class_name: "Training::Module"
+  belongs_to_many :modules, class_name: 'Training::Module'
 
   def parent
     modules.first
@@ -10,7 +10,7 @@ class Training::Page < ContentfulModel::Base
   def training_module
     parent.slug
   end
-  
+
   def type
     component
   end
@@ -33,30 +33,30 @@ class Training::Page < ContentfulModel::Base
 
   def previous_item
     current_index = parent.pages.rindex(self)
-    puts "current index is #{current_index.to_s}"
+    Rails.logger.debug "current index is #{current_index}"
 
     return if current_index.zero?
-    
+
     parent.pages[current_index - 1]
   end
 
   def next_item
     current_index = parent.pages.rindex(self)
-    puts "current index is #{current_index.to_s}"
-    parent.pages[current_index + 1] 
+    Rails.logger.debug "current index is #{current_index}"
+    parent.pages[current_index + 1]
   end
-  
+
   # collections -------------------------
 
   # @return [Array<Training::Page>] pages of a specific type
   def self.where_type(training_module, type)
-    self.find_by(module_id: training_module, component: type).load
+    find_by(module_id: training_module, component: type).load
   end
 
   # @return [Array<Training::Page>] pages within a given module's submodule
   def self.where_submodule(training_module, submodule_name)
     pattern = %r"\A(\d+\W){1}#{submodule_name}(?=(\D|$))"
-    self.find_by(module_id: training_module).load.select { |m| m.slug =~ pattern }
+    find_by(module_id: training_module).load.select { |m| m.slug =~ pattern }
   end
 
   # Start with two number then non-word character pairs (e.g. 2-4- or 13.4.)
@@ -72,7 +72,6 @@ class Training::Page < ContentfulModel::Base
   def current_submodule_topic_items
     self.class.where_submodule_topic(training_module, submodule_name, topic_name).to_a
   end
-
 
   # position ---------------------------------
 
@@ -218,7 +217,7 @@ class Training::Page < ContentfulModel::Base
     SUMMARY
   end
 
-  private
+private
 
   # @return [Array<Training::Page>] pages in the same module
   def current_module_items

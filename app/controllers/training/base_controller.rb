@@ -1,2 +1,2 @@
-class Training::BaseController < ApplicationController 
+class Training::BaseController < ApplicationController
 end

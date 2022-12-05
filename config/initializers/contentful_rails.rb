@@ -14,12 +14,12 @@ ContentfulRails.configure do |config|
   config.space = ENV['CONTENTFUL_SPACE']
   config.environment = 'master'
   config.eager_load_entry_mapping = false
-  config.contentful_options = { 
+  config.contentful_options = {
     entry_mapping: {
       'module' => Training::Module,
       'page' => Training::Page,
       'question' => Training::Question,
-      'confidence' => Training::Confidence
-    }
+      'confidence' => Training::Confidence,
+    },
   }
 end

@@ -40,7 +40,7 @@ Rails.application.routes.draw do
     resource :role_type_other, only: %i[edit update], path: 'role-type-other'
   end
 
-  authenticated :user, lambda {|u| u.editor? } do
+  authenticated :user, ->(u) { u.editor? } do
     scope module: 'training' do
       resource :user, controller: :user, path: 'my-account', only: %i[show] do
         resource :notes, path: 'learning-log', only: %i[show create update]
