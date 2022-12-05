@@ -14,3 +14,15 @@
             | Module introduction
           - else
             = item.model.heading
+
+.govuk-grid-row
+  ol.progress-bar--container.govuk-list role="progressbar"
+
+    - bar.progress_bar_info.map do |item|
+      li.progress-bar
+        = progress_ball(*item[:content_helper_values])
+        - unless item[:first]
+          div class=item[:class]
+        p.govuk-body.progress--heading class="#{'govuk-!-font-weight-bold' if item[:bold] }"
+          span.govuk-visually-hidden = item[:position]
+          = item[:heading]

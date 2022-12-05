@@ -5,10 +5,40 @@ class ModuleProgressBarDecorator < DelegateClass(ModuleProgress)
     summary_intro
   ].freeze
 
+  # def furthest_submodule?(item)
+  #
+  # end
+
+  # @return [Hash]
+  def progress_bar_info
+    milestones.each_with_index.map do |item, index|
+      position = "Step #{index + 1}: "
+      heading = milestones.first.eql?(item) ? 'Module introduction' : item.model.heading
+      first = milestones.first.eql?(item)
+      style = "line line--#{icon(item)[2]}" unless milestones.first.eql?(item)
+      bold = milestones.map { |i| icon(i)[2] }.rindex(:green) == index
+      # bold = furthest_submodule?(item)
+      content_helper_values = icon(item)
+
+      {
+        index: index,
+        heading: heading,
+        class: style,
+        first: first,
+        bold: bold,
+        position: position,
+        content_helper_values: content_helper_values,
+      }
+    end
+  end
+
+  # public for debugging
   # @return [Array<ModuleItem>]
   def milestones
     MILESTONES.flat_map { |type| mod.module_items_by_type(type) }
   end
+
+private
 
   # @return [String] Percentage complete
   def value
@@ -28,8 +58,6 @@ class ModuleProgressBarDecorator < DelegateClass(ModuleProgress)
       ['circle', :regular, :grey, 'not started']
     end
   end
-
-private
 
   # @return [Boolean]
   def milestone_completed?(item)
