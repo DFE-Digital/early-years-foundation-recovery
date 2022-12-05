@@ -131,6 +131,9 @@ en:
 
           If a baby is held upright or so their feet are touching a surface, they raise and lower their feet in a walking motion. This is the beginning of leg muscle development and movement skills. This reflex will disappear by 2 to 3 months old. If this reflex is not present at birth it can cause neurological concerns.
 
+      5-1-1-2b:
+        # question
+
       5-1-1-3a:
         heading: |
           Stages of physical development: 0 to 6 months
@@ -219,6 +222,9 @@ en:
 
           $INFO
 
+      5-1-1-3b:
+        # question
+
       5-1-1-4a:
         heading: |
           Stages of physical development: 7 to 12 months
@@ -262,6 +268,9 @@ en:
           - move to music
 
           $INFO
+
+      5-1-1-4b:
+        # question
 
       5-1-1-5a:
         heading: |
@@ -316,6 +325,9 @@ en:
           When children are confident on their feet they will enjoy pushing and pulling toys such as trucks, pushchairs and trolleys.
 
           $INFO
+
+      5-1-1-5b:
+        # question
 
       5-1-1-6:
         heading: |
@@ -434,6 +446,9 @@ en:
 
           $BRAIN
 
+      5-1-1-7b:
+        # question
+
       5-1-2:
         heading: |
           Physical development theories
@@ -484,6 +499,9 @@ en:
           The observation checkpoints in Development Matters are a useful tool to support your observation and assessment of the children in your care.
 
           $INFO
+
+      5-1-2-1b:
+        # question
 
       5-1-2-2:
         notes: true
@@ -610,6 +628,9 @@ en:
 
           $BRAIN
 
+      5-1-3-1b:
+        # question
+
       5-1-3-2a:
         notes: true
         heading: |
@@ -673,6 +694,9 @@ en:
           - What actions could you take if you suspected a child was not receiving a fully balanced diet?
 
           $BRAIN
+
+      5-1-3-2b:
+        # question
 
       5-1-3-3a:
         heading: |
@@ -803,6 +827,9 @@ en:
 
           $BRAIN
 
+      5-2-1-1b:
+        # question
+
       5-2-1-2:
         heading: |
           Behaviour and independence
@@ -872,6 +899,9 @@ en:
           - What cognitive and language benefits have you noticed for children taking part in physical activities or experiences?
 
           $BRAIN
+
+      5-2-1-3b:
+        # question
 
       5-2-2:
         heading: |
@@ -960,6 +990,9 @@ en:
           Children will have had limited or no access to dentist appointments. If this has been combined with poor nutrition or oral care, they may have developed cavities and be experiencing discomfort. This can then impact on children’s sleep and eating habits, leading to a lack of energy and concentration. This can leave children reluctant to take part in physical activities.
 
           You will need to consider each child’s experience of the pandemic when planning your curriculum and activities. This will ensure that you have an accurate starting point from which to plan.
+
+      5-2-2-2b:
+        # question
 
       5-3:
         heading: |
@@ -1074,6 +1107,9 @@ en:
           Children should be able to access outdoor space in all weathers. You will need to plan for this within your daily routine. For babies, this may be an opportunity for a walk in the pushchair or having tummy time on a mat in a shady area. As children become mobile this can include push along toys and equipment to navigate. You should encourage and take part in physical activity with enthusiasm, as children will be influenced by your approach.
 
           You can also take an enthusiastic approach to spontaneous opportunities like impromptu movement to music or accepting children’s invitations to take part in creative activities. Children will then see that you value the importance of fine and gross motor movement. This will in turn motivate them to carry out similar activities.
+
+      5-3-1-2b:
+        # question
 
       5-3-2:
         heading: |
@@ -1253,6 +1289,12 @@ en:
 
           $BRAIN
 
+      5-3-2-5b:
+        # question
+
+      5-3-2-5c:
+        # question
+
       5-3-2-6a:
         notes: true
         heading: |
@@ -1291,6 +1333,8 @@ en:
 
           $BRAIN
 
+      5-3-2-6b:
+        # question
 
       5-3-3:
         heading: |
@@ -1440,6 +1484,12 @@ en:
           - where applicable include ideas for supporting children at home
 
           You will learn about observation, assessment and planning in more detail in a future module.
+
+      5-3-3-4b:
+        # question
+
+      5-3-3-4c:
+        # question
 
       5-4:
         # summary intro

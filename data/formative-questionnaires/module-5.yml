@@ -7,9 +7,9 @@ module-5:
         body: |
           Which of the newborn reflexes work together together to enable a baby to successfully feed?
         assessment_summary: |
-          The rooting reflex works together with the sucking reflex to enable the baby to feed. The rooting reflex helps the baby to locate the nipple or teat. The sucking reflex supports successful feeding. 
+          The rooting reflex works together with the sucking reflex to enable the baby to feed. The rooting reflex helps the baby to locate the nipple or teat. The sucking reflex supports successful feeding.
         assessment_fail_summary: |
-          The rooting reflex works together with the sucking reflex to enable the baby to feed. The rooting reflex helps the baby to locate the nipple or teat. The sucking reflex supports successful feeding. 
+          The rooting reflex works together with the sucking reflex to enable the baby to feed. The rooting reflex helps the baby to locate the nipple or teat. The sucking reflex supports successful feeding.
         answers:
           1: "Moro and startle"
           2: "Rooting and sucking"
@@ -23,9 +23,9 @@ module-5:
       1_gross_motor_activity:
         multi_select: false
         body: |
-          Which of the following will gross motor activity help to promote? 
+          Which of the following will gross motor activity help to promote?
         assessment_summary: |
-          Activities and opportunities that promote gross motor skills will help to develop: 
+          Activities and opportunities that promote gross motor skills will help to develop:
 
           - spatial awareness
           - core strength
@@ -36,7 +36,7 @@ module-5:
 
           Early gross motor development will also promote a healthy lifestyle in later life. It is important to plan a curriculum and environment that promotes gross motor activities.
         assessment_fail_summary: |
-          Activities and opportunities that promote gross motor skills will help to develop: 
+          Activities and opportunities that promote gross motor skills will help to develop:
 
           - spatial awareness
           - core strength
@@ -80,12 +80,12 @@ module-5:
         body: |
           How many minutes of activity should a child aged 13 to 24 months complete every day?
         assessment_summary: |
-          At this age children should be active for at least 180 minutes per day. 
-          
+          At this age children should be active for at least 180 minutes per day.
+
           Their activities should include both indoor and outdoor play. This can include light activity such as standing and moving around, and more energetic activity such as running, jumping and climbing.
         assessment_fail_summary: |
-          At this age children should be active for at least 180 minutes per day. 
-          
+          At this age children should be active for at least 180 minutes per day.
+
           Their activities should include both indoor and outdoor play. This can include light activity such as standing and moving around, and more energetic activity such as running, jumping and climbing.
         answers:
           1: "240"
@@ -102,13 +102,13 @@ module-5:
         body: |
           How many minutes of moderate to vigorous exercise should children aged 48 months have in a day?
         assessment_summary: |
-          Children of this age should be active for at least 180 minutes per day. At least 60 minutes of this should be moderate to vigorous activity. 
-          
-          Children should experience opportunities to be active in both indoor and outdoor areas. In your setting you should plan a wide variety of activities to encourage movement throughout the day. 
+          Children of this age should be active for at least 180 minutes per day. At least 60 minutes of this should be moderate to vigorous activity.
+
+          Children should experience opportunities to be active in both indoor and outdoor areas. In your setting you should plan a wide variety of activities to encourage movement throughout the day.
         assessment_fail_summary: |
-          Children of this age should be active for at least 180 minutes per day. At least 60 minutes of this should be moderate to vigorous activity. 
-          
-          Children should experience opportunities to be active in both indoor and outdoor areas. In your setting you should plan a wide variety of activities to encourage movement throughout the day. 
+          Children of this age should be active for at least 180 minutes per day. At least 60 minutes of this should be moderate to vigorous activity.
+
+          Children should experience opportunities to be active in both indoor and outdoor areas. In your setting you should plan a wide variety of activities to encourage movement throughout the day.
         answers:
           1: "30"
           2: "60"
@@ -160,13 +160,13 @@ module-5:
         body: |
           How many calories do toddlers and pre school aged children need in a day?
         assessment_summary: |
-          A toddler or pre school aged child needs around 1000 to 1800 calories in a day. These calories should come from a wide range of foods that contain a healthy balance from all food groups. 
-          
-          You should teach good habits around healthy eating to children of this age so they continue to eat well throughout their life. 
+          A toddler or pre school aged child needs around 1000 to 1800 calories in a day. These calories should come from a wide range of foods that contain a healthy balance from all food groups.
+
+          You should teach good habits around healthy eating to children of this age so they continue to eat well throughout their life.
         assessment_fail_summary: |
-          A toddler or pre school aged child needs around 1000 to 1800 calories in a day. These calories should come from a wide range of foods that contain a healthy balance from all food groups. 
-          
-          You should teach good habits around healthy eating to children of this age so they continue to eat well throughout their life. 
+          A toddler or pre school aged child needs around 1000 to 1800 calories in a day. These calories should come from a wide range of foods that contain a healthy balance from all food groups.
+
+          You should teach good habits around healthy eating to children of this age so they continue to eat well throughout their life.
         answers:
           1: "800 to 900"
           2: "1000 to 1800"
@@ -182,9 +182,9 @@ module-5:
         body: |
           Which of these factors would not help a practitioner to increase a child’s engagement and motivation in a physical activity?
         assessment_summary: |
-          Using the same activity for every child would not increase engagement. You should consider children's previous experiences, individual starting points and any additional needs when planning physical activity. This will help you to create an inclusive curriculum. 
+          Using the same activity for every child would not increase engagement. You should consider children's previous experiences, individual starting points and any additional needs when planning physical activity. This will help you to create an inclusive curriculum.
         assessment_fail_summary: |
-          Using the same activity for every child would not increase engagement. You should consider children's previous experiences, individual starting points and any additional needs when planning physical activity. This will help you to create an inclusive curriculum. 
+          Using the same activity for every child would not increase engagement. You should consider children's previous experiences, individual starting points and any additional needs when planning physical activity. This will help you to create an inclusive curriculum.
         answers:
           1: "Observation and assessment of the child's ability"
           2: "Adapting activities to cater for all children"
@@ -198,27 +198,27 @@ module-5:
       1_engagement:
         multi_select: false
         body: |
-          True or false? 
-          
+          True or false?
+
           Physical development improves cognitive function.
         assessment_summary: |
-          Increased movement will result in improved messages and increased blood flow in the brain. This will enhance skills which are vital for a child's development, including: 
+          Increased movement will result in improved messages and increased blood flow in the brain. This will enhance skills which are vital for a child's development, including:
 
-          - concentration 
+          - concentration
           - memory
           - thinking
-          - cognitive skills 
-          
-          Activities with movement will also help children to hear and rehearse new language. You should plan a curriculum and environment with lots of opportunities for children to move and use their fine motor skills. 
+          - cognitive skills
+
+          Activities with movement will also help children to hear and rehearse new language. You should plan a curriculum and environment with lots of opportunities for children to move and use their fine motor skills.
         assessment_fail_summary: |
-          Increased movement will result in improved messages and increased blood flow in the brain. This will enhance skills which are vital for a child's development, including: 
+          Increased movement will result in improved messages and increased blood flow in the brain. This will enhance skills which are vital for a child's development, including:
 
-          - concentration 
+          - concentration
           - memory
           - thinking
-          - cognitive skills 
-          
-          Activities with movement will also help children to hear and rehearse new language. You should plan a curriculum and environment with lots of opportunities for children to move and use their fine motor skills. 
+          - cognitive skills
+
+          Activities with movement will also help children to hear and rehearse new language. You should plan a curriculum and environment with lots of opportunities for children to move and use their fine motor skills.
         answers:
           1: "True"
           2: "False"
@@ -230,17 +230,17 @@ module-5:
       1_freedom:
         multi_select: false
         body: |
-          True or false? 
-          
+          True or false?
+
           Freedom to explore can improve children’s strength.
         assessment_summary: |
-          If children were able to experience an outdoor environment with no time constraints, they may have benefitted from freedom to explore or learn new skills. For example, they could have learned how to forward roll or take part in racing activities. Extended time to practice will have improved their strength, agility, balance and confidence. 
+          If children were able to experience an outdoor environment with no time constraints, they may have benefitted from freedom to explore or learn new skills. For example, they could have learned how to forward roll or take part in racing activities. Extended time to practice will have improved their strength, agility, balance and confidence.
 
-          You should plan your curriculum to include time for children to explore and test new skills. 
+          You should plan your curriculum to include time for children to explore and test new skills.
         assessment_fail_summary: |
-          If children were able to experience an outdoor environment with no time constraints, they may have benefitted from freedom to explore or learn new skills. For example, they could have learned how to forward roll or take part in racing activities. Extended time to practice will have improved their strength, agility, balance and confidence. 
+          If children were able to experience an outdoor environment with no time constraints, they may have benefitted from freedom to explore or learn new skills. For example, they could have learned how to forward roll or take part in racing activities. Extended time to practice will have improved their strength, agility, balance and confidence.
 
-          You should plan your curriculum to include time for children to explore and test new skills. 
+          You should plan your curriculum to include time for children to explore and test new skills.
         answers:
           1: "True"
           2: "False"
@@ -254,21 +254,21 @@ module-5:
         body: |
           Which of the following will promote physical literacy with children? Choose all that apply.
         assessment_summary: |
-          Physical literacy is the confidence, motivation and skill levels needed to take part in physical activities. You can promote physical literacy by: 
-          
+          Physical literacy is the confidence, motivation and skill levels needed to take part in physical activities. You can promote physical literacy by:
+
           - providing a wealth of activities that support children’s physical skills
-          - making physical activity part of a regular routine 
-          - being a good role model 
-          - offering lots of praise and encouragement for engagement in physical activities 
-          - introducing and reinforcing language relating to movement and physical skills 
+          - making physical activity part of a regular routine
+          - being a good role model
+          - offering lots of praise and encouragement for engagement in physical activities
+          - introducing and reinforcing language relating to movement and physical skills
         assessment_fail_summary: |
-          Physical literacy is the confidence, motivation and skill levels needed to take part in physical activities. You can promote physical literacy by: 
-          
+          Physical literacy is the confidence, motivation and skill levels needed to take part in physical activities. You can promote physical literacy by:
+
           - providing a wealth of activities that support children’s physical skills
-          - making physical activity part of a regular routine 
-          - being a good role model 
-          - offering lots of praise and encouragement for engagement in physical activities 
-          - introducing and reinforcing language relating to movement and physical skills 
+          - making physical activity part of a regular routine
+          - being a good role model
+          - offering lots of praise and encouragement for engagement in physical activities
+          - introducing and reinforcing language relating to movement and physical skills
         answers:
           1: "Encouraging children’s physical confidence "
           2: "Being a good role model "
@@ -288,12 +288,12 @@ module-5:
           Which of the following is most effective for supporting children’s physical development?
         assessment_summary: |
           It is important that you use your knowledge of a child’s current level of development and their expected level of development to plan an environment that includes adult and child led activities.
-          
-          You should also plan your environment to ensure that children have access to resources that encourage unplanned opportunities. 
+
+          You should also plan your environment to ensure that children have access to resources that encourage unplanned opportunities.
         assessment_fail_summary: |
           It is important that you use your knowledge of a child’s current level of development and their expected level of development to plan an environment that includes adult and child led activities.
-          
-          You should also plan your environment to ensure that children have access to resources that encourage unplanned opportunities. 
+
+          You should also plan your environment to ensure that children have access to resources that encourage unplanned opportunities.
         answers:
           1: "Child led activity "
           2: "Adult led activity "
@@ -309,18 +309,18 @@ module-5:
         body: |
           What could be the impact of children growing up in risk averse households?
         assessment_summary: |
-          If children have grown up in a risk averse household they may not have been encouraged to participate in anything their parents and carers considered risky. 
+          If children have grown up in a risk averse household they may not have been encouraged to participate in anything their parents and carers considered risky.
 
-          These experiences will affect how children approach activities and their current level of skill and knowledge. You should use your knowledge of each child, along with your setting’s risk assessment procedure when planning activities. 
-          
-          Activities in your setting should be stage appropriate and encourage challenge while keeping children safe and making them aware of the potential risks involved. 
+          These experiences will affect how children approach activities and their current level of skill and knowledge. You should use your knowledge of each child, along with your setting’s risk assessment procedure when planning activities.
+
+          Activities in your setting should be stage appropriate and encourage challenge while keeping children safe and making them aware of the potential risks involved.
 
         assessment_fail_summary: |
-          If children have grown up in a risk averse household they may not have been encouraged to participate in anything their parents and carers considered risky. 
+          If children have grown up in a risk averse household they may not have been encouraged to participate in anything their parents and carers considered risky.
 
-          These experiences will affect how children approach activities and their current level of skill and knowledge. You should use your knowledge of each child, along with your setting’s risk assessment procedure when planning activities. 
-          
-          Activities in your setting should be stage appropriate and encourage challenge while keeping children safe and making them aware of the potential risks involved. 
+          These experiences will affect how children approach activities and their current level of skill and knowledge. You should use your knowledge of each child, along with your setting’s risk assessment procedure when planning activities.
+
+          Activities in your setting should be stage appropriate and encourage challenge while keeping children safe and making them aware of the potential risks involved.
         answers:
           1: "Excessive challenge "
           2: "Limited language development"
@@ -336,13 +336,13 @@ module-5:
         body: |
           Which of the following vitamins are boosted by outdoor learning?
         assessment_summary: |
-          Spending time in sunlight can support children’s overall mood and the exposure to vitamin D supports the development of strong and healthy bones and teeth. 
-          
-          Children naturally become even more curious when they are outside which will result in spontaneous learning opportunities. Your planning should include lots of opportunities for children to access the outdoors in all seasons. 
+          Spending time in sunlight can support children’s overall mood and the exposure to vitamin D supports the development of strong and healthy bones and teeth.
+
+          Children naturally become even more curious when they are outside which will result in spontaneous learning opportunities. Your planning should include lots of opportunities for children to access the outdoors in all seasons.
         assessment_fail_summary: |
-          Spending time in sunlight can support children’s overall mood and the exposure to vitamin D supports the development of strong and healthy bones and teeth. 
-          
-          Children naturally become even more curious when they are outside which will result in spontaneous learning opportunities. Your planning should include lots of opportunities for children to access the outdoors in all seasons. 
+          Spending time in sunlight can support children’s overall mood and the exposure to vitamin D supports the development of strong and healthy bones and teeth.
+
+          Children naturally become even more curious when they are outside which will result in spontaneous learning opportunities. Your planning should include lots of opportunities for children to access the outdoors in all seasons.
         answers:
           1: "Vitamin A"
           2: "Vitamin B"
@@ -358,12 +358,12 @@ module-5:
         body: |
           Which C best describes the type of experiences a child should have to promote physical development?
         assessment_summary: |
-          If children receive consistent experiences at home and in your setting, they are more likely to adopt healthy lifestyles in later life. 
-          
+          If children receive consistent experiences at home and in your setting, they are more likely to adopt healthy lifestyles in later life.
+
           You can support parents, carers and children by sharing your knowledge and practice to encourage similar practices at home.
         assessment_fail_summary: |
-          If children receive consistent experiences at home and in your setting, they are more likely to adopt healthy lifestyles in later life. 
-          
+          If children receive consistent experiences at home and in your setting, they are more likely to adopt healthy lifestyles in later life.
+
           You can support parents, carers and children by sharing your knowledge and practice to encourage similar practices at home.
         answers:
           1: "Cautious"
@@ -380,20 +380,20 @@ module-5:
         body: |
           Which of the following can be affected by a child’s oral health? (choose all that apply)
         assessment_summary: |
-          Poor oral health can impact on all areas of a child’s development as a result of pain and missed learning opportunities. 
-          
-          You should share the importance of good oral health with children, parents and carers to positively support development. 
+          Poor oral health can impact on all areas of a child’s development as a result of pain and missed learning opportunities.
+
+          You should share the importance of good oral health with children, parents and carers to positively support development.
         assessment_fail_summary: |
-          Poor oral health can impact on all areas of a child’s development as a result of pain and missed learning opportunities. 
-          
-          You should share the importance of good oral health with children, parents and carers to positively support development. 
+          Poor oral health can impact on all areas of a child’s development as a result of pain and missed learning opportunities.
+
+          You should share the importance of good oral health with children, parents and carers to positively support development.
         answers:
           1: "Sleep patterns"
           2: "Eating patterns"
           3: "Learning opportunities"
           4: "Relationships"
         correct_answers:
-          - 1 
+          - 1
           - 2
           - 3
           - 4
