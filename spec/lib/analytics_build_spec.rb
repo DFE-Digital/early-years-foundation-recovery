@@ -15,6 +15,8 @@ RSpec.describe AnalyticsBuild do
   let(:user1) { create(:user, :registered) }
 
   before do
+    WebMock.disable_net_connect!
+    stub_request(:post, "https://oauth2.googleapis.com/token").to_return(status: 200, body: "{}", headers: {"Content-Type":"application/json"})
     Dir.mkdir directory unless File.exist?(directory)
     create_event(user, 'module_content_page', Time.zone.local(2000, 0o1, 0o2), 'brain-development-and-how-children-learn', 'intro')
     create_event(user1, 'module_content_page', Time.zone.local(2000, 0o1, 0o1), 'child-development-and-the-eyfs', 'intro')
@@ -24,6 +26,7 @@ RSpec.describe AnalyticsBuild do
 
   after do
     FileUtils.rm_rf('analytics_files')
+    WebMock.allow_net_connect!
   end
 
   it 'create csv file ahoy visits' do

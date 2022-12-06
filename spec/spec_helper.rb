@@ -13,6 +13,8 @@
 # it.
 
 require 'simplecov'
+require 'webmock/rspec'
+WebMock.allow_net_connect! # remove this once we update all test with stubs
 SimpleCov.minimum_coverage 93
 SimpleCov.start 'rails'
 
