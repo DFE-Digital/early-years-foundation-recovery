@@ -1256,7 +1256,7 @@ en:
           $BRAIN
 
 
-      5-3-2-4:
+      5-3-2-4a:
         notes: true
         heading: |
           Managing risk
@@ -1290,21 +1290,13 @@ en:
 
           $BRAIN
 
+      5-3-2-4b:
+        # question
+
+      5-3-2-4c:
+        # question
 
       5-3-2-5a:
-        notes: true
-        heading: |
-          DELETED - content moved to 5-3-2-3
-        body: |
-          DELETED, page to be removed
-
-      5-3-2-5b:
-        # question
-
-      5-3-2-5c:
-        # question
-
-      5-3-2-6a:
         notes: true
         heading: |
           The outdoor environment
@@ -1338,7 +1330,7 @@ en:
 
           $BRAIN
 
-      5-3-2-6b:
+      5-3-2-5b:
         # question
 
       5-3-3:

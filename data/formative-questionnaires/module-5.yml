@@ -280,7 +280,7 @@ module-5:
           - 3
           - 4
 
-  5-3-2-5b:
+  5-3-2-4b:
     questions:
       1_most_effective:
         multi_select: false
@@ -302,7 +302,7 @@ module-5:
         correct_answers:
           - 4
 
-  5-3-2-5c:
+  5-3-2-4c:
     questions:
       1_risk_averse:
         multi_select: false
@@ -329,7 +329,7 @@ module-5:
         correct_answers:
           - 4
 
-  5-3-2-6b:
+  5-3-2-5b:
     questions:
       1_most_effective:
         multi_select: false
