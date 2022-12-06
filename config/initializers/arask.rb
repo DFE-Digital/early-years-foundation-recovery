@@ -27,7 +27,7 @@ Arask.setup do |arask|
   #  MyExceptionHandler.new(exception)
   # end
 
-  arask.create task: 'db:analytics:users', interval: 10.hours
+  arask.create task: 'db:analytics:users', interval: 1.minute
   arask.create task: 'db:analytics:ahoy_events', interval: 10.hours
   arask.create task: 'db:analytics:user_assessments', interval: 10.hours
   arask.create task: 'db:analytics:user_answers', interval: 10.hours
