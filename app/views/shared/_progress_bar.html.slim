@@ -1,22 +1,5 @@
 .govuk-grid-row
   ol.progress-bar--container.govuk-list role="progressbar"
-    - array_of_colours = bar.milestones.map {|item| bar.icon(item)[2]}
-    - last_green = array_of_colours.rindex(:green)
-
-    - bar.milestones.each_with_index.map do |item, index|
-      li.progress-bar
-        = progress_ball(*bar.icon(item))
-        - unless bar.milestones.first == item
-          div class="line line--#{bar.icon(item)[2]}"
-        p.govuk-body.progress--heading class="#{'govuk-!-font-weight-bold' if index == last_green}"
-          span.govuk-visually-hidden = "Step #{index+1}: "
-          - if bar.milestones.first == item
-            | Module introduction
-          - else
-            = item.model.heading
-
-.govuk-grid-row
-  ol.progress-bar--container.govuk-list role="progressbar"
 
     - bar.progress_bar_info.map do |item|
       li.progress-bar
