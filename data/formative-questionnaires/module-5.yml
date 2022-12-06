@@ -5,7 +5,7 @@ module-5:
       1_newborn_reflexes:
         multi_select: false
         body: |
-          Which of the newborn reflexes work together together to enable a baby to successfully feed?
+          Which of the newborn reflexes work together to enable a baby to successfully feed?
         assessment_summary: |
           The rooting reflex works together with the sucking reflex to enable the baby to feed. The rooting reflex helps the baby to locate the nipple or teat. The sucking reflex supports successful feeding.
         assessment_fail_summary: |
@@ -188,7 +188,7 @@ module-5:
         answers:
           1: "Observation and assessment of the child's ability"
           2: "Adapting activities to cater for all children"
-          3: "1 to 1 support"
+          3: "One to one support"
           4: "Using the same activity for every child"
         correct_answers:
           - 4

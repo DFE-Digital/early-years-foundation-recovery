@@ -4,23 +4,23 @@ module-5:
     content:
     questions:
       1_fundamental_motor_skills:
-        multi_select: false 
+        multi_select: false
         label: |
           Which 3 skill sets are fundamental motor skills ?
-        assessment_summary: 
+        assessment_summary:
         assessment_fail_summary: |
-          Fundamental motor skills are divided into three different skill sets: manipulation, locomotor and stability. 
+          Fundamental motor skills are divided into three different skill sets: manipulation, locomotor and stability.
 
-          Manipulation skills support us to control objects, locomotor skills  include running, galloping,hopping, skipping,dodging, leaping, twisting and dodging. Stability skills are those 
+          Manipulation skills support us to control objects, locomotor skills  include running, galloping,hopping, skipping,dodging, leaping, twisting and dodging. Stability skills are those
 
-          needed to control our body and include stopping,, stretching,, landing, twisting and,climbing 
-          
+          needed to control our body and include stopping,, stretching,, landing, twisting and,climbing
+
           You might want to revisit the section on [fundamental motor skills](/modules/module-5/content-pages/5-1-1-1).
         answers:
-          1: "standing, rolling and hopping"
-          2: "throwing, catching and bouncing"
-          3: "resting, stretching and balancing"
-          4: "manipulation, locomotor and stability"
+          1: "Standing, rolling and hopping"
+          2: "Throwing, catching and bouncing"
+          3: "Resting, stretching and balancing"
+          4: "Manipulation, locomotor and stability"
         correct_answers:
         - 4
 
@@ -31,21 +31,21 @@ module-5:
         multi_select: false
         label: |
           Which of the following physical actions would you expect a child aged between 7 and 12 months to be able to achieve?
-        assessment_summary: 
+        assessment_summary:
         assessment_fail_summary: |
           During this period, with the correct support, gross motor skills will develop to include:
 
           - sitting without support
-          - beginning to crawl 
-          - standing while holding onto something 
+          - beginning to crawl
+          - standing while holding onto something
 
           You might want to revisit the section on [stages of physical development: 7 to 12 months](/modules/module-5/content-pages/5-1-1-4a).
 
         answers:
-          1: "jump on the spot with both feet on the floor"
-          2: "climb onto a chair"
-          3: "sit unsupported"
-          4: "roll a large ball using hands and arms"
+          1: "Jump on the spot with both feet on the floor"
+          2: "Climb onto a chair"
+          3: "Sit unsupported"
+          4: "Roll a large ball using hands and arms"
         correct_answers:
         - 3
 
@@ -56,9 +56,9 @@ module-5:
         multi_select: true
         label: |
           At what age do children show an increased desire to be independent?
-        assessment_summary: 
+        assessment_summary:
         assessment_fail_summary: |
-          Between 25 and 36 months children will be showing an increased desire to be independent. This is a perfect opportunity to encourage skills whilst dressing and undressing, during mealtimes and with self care such as washing hands and toileting. 
+          Between 25 and 36 months children will be showing an increased desire to be independent. This is a perfect opportunity to encourage skills whilst dressing and undressing, during mealtimes and with self care such as washing hands and toileting.
 
           You might want to revisit the section on [stages of physical development: 25 to 36 months](/modules/module-5/content-pages/5-1-1-6).
         answers:
@@ -68,19 +68,19 @@ module-5:
           4: "37 to 48 months"
         correct_answers:
         - 3
-  
+
   5-4-1-4:
     content:
     questions:
       1_gesell:
         multi_select: false
         label: |
-          Which of the following was not a key principle of Gesell’s research? 
-        assessment_summary: 
+          Which of the following was not a key principle of Gesell’s research?
+        assessment_summary:
         assessment_fail_summary: |
           Gesell did not think that stimulation was essential but suggested that internal factors such as the growth of the child’s nervous system underpinned a child’s development regardless of the interactions they experienced.
-          
-          Criticisms of Gesell’s work and more recent research shows us that children benefit most when we have a clear understanding of their developmental level and use the interactions of others to support this. 
+
+          Criticisms of Gesell’s work and more recent research shows us that children benefit most when we have a clear understanding of their developmental level and use the interactions of others to support this.
 
           You might want to revisit the section on [theories of physical development](/modules/module-4/content-pages/5-1-2).
         answers:
@@ -98,12 +98,12 @@ module-5:
         multi_select: false
         label: |
           Which of the following is a document detailing healthy eating guidance?
-        assessment_summary: 
+        assessment_summary:
         assessment_fail_summary: |
           The Eatwell Guide, published by the NHS, shows how much of what we eat overall should come from each food group to achieve a healthy, balanced diet.
 
           Children will need to eat a balance of all the food groups to support and promote physical development. More information can be found on the example menus, linked to in the further reading section of this module. You can use these example menus to offer healthy, balanced and nutritious meals for children.
-          
+
           You might want to revisit the section on [nutrition](/modules/module-5/content-pages/5-1-3-2a).
 
         answers:
@@ -113,7 +113,7 @@ module-5:
           4: "Healthy Lifestyles Guide"
         correct_answers:
         - 2
- 
+
   5-4-1-6:
     content:
     questions:
@@ -122,11 +122,11 @@ module-5:
         label: |
           Which of the following can be reduced significantly when children take part in regular physical activity?
 
-        assessment_summary: 
+        assessment_summary:
         assessment_fail_summary: |
-          Being active can positively support children’s mental health. Being able to practice and master a skill, for example throwing and catching a ball with control, can help to build a child’s confidence. This will help to reduce the likelihood of children experiencing anxiety and depression. 
-          
-          You will need to make sure that children can access activities that are achievable with appropriate challenge and support. If a child is not able to make progress, even small steps, they will not feel this sense of achievement. It is important that you know about each child’s starting point with physical skills to ensure that you can plan a suitable environment and activities. 
+          Being active can positively support children’s mental health. Being able to practice and master a skill, for example throwing and catching a ball with control, can help to build a child’s confidence. This will help to reduce the likelihood of children experiencing anxiety and depression.
+
+          You will need to make sure that children can access activities that are achievable with appropriate challenge and support. If a child is not able to make progress, even small steps, they will not feel this sense of achievement. It is important that you know about each child’s starting point with physical skills to ensure that you can plan a suitable environment and activities.
 
           You might want to revisit the section on activity in the [outdoor environment](/modules/module-5/content-pages/5-3-2-6a).
 
@@ -137,7 +137,7 @@ module-5:
           4: "Anxiety and depression"
         correct_answers:
         - 4
-  
+
   5-4-1-7:
     content:
     questions:
@@ -146,12 +146,12 @@ module-5:
         label: |
           Which of the following might be affected by a child’s limited physical skills?
 
-        assessment_summary: 
+        assessment_summary:
         assessment_fail_summary: |
-          A lack of independence as a result of limited physical skills or additional needs may impact upon a child’s feeling of self worth. This will impact on the child’s self efficacy and they will become more reluctant to try as they become overwhelmed by the thought that they cannot succeed. They will then become more and more dependent on others to meet their needs. 
-          
+          A lack of independence as a result of limited physical skills or additional needs may impact upon a child’s feeling of self-worth. This will impact on the child’s self efficacy and they will become more reluctant to try as they become overwhelmed by the thought that they cannot succeed. They will then become more and more dependent on others to meet their needs.
+
           It is important that children are empowered to be ambitious for themselves. You will need to adapt your planning to set children small tasks that result in lots of praise and achievement.
-          
+
           You might want to revisit the section on the [holistic impact of physical skills](/modules/module-5/content-pages/5-2-1).
         answers:
           1: "Self-worth"
@@ -165,10 +165,10 @@ module-5:
     content:
     questions:
       1_practitioners-role:
-        multi_select: false 
+        multi_select: false
         label: |
           Which of the following best describes your role in children’s physical development?
-        assessment_summary: 
+        assessment_summary:
         assessment_fail_summary: |
           You will need to plan an active curriculum to ensure that children’s fine and gross motor skills are promoted. Being an enthusiastic role model will support children’s enthusiasm and motivation to be physically active.
 
@@ -185,15 +185,15 @@ module-5:
     content:
     questions:
       1_positive_environment:
-        multi_select: true 
+        multi_select: true
         label: |
           Which of the following are significantly improved when children have regular access to an outdoor space?
-          
+
           Choose all that apply.
-        assessment_summary: 
+        assessment_summary:
         assessment_fail_summary: |
-          Research shows us that children who regularly access outdoor environments have improved strength, agility and coordination as the freedom to run, climb and swing uses different movements, muscles and control to those needed for indoor movement. 
-          
+          Research shows us that children who regularly access outdoor environments have improved strength, agility and coordination as the freedom to run, climb and swing uses different movements, muscles and control to those needed for indoor movement.
+
           Children who have opportunities to test and develop new movement skills also develop greater self confidence.
 
           You might want to revisit the section on [the outdoor environment](/modules/module-5/content-pages/5-3-2-6a).
@@ -204,7 +204,7 @@ module-5:
           4: "Co-ordination"
         correct_answers:
         - 1
-        - 2
+        - 3
         - 4
 
   5-4-1-10:
@@ -214,15 +214,15 @@ module-5:
         multi_select: true
         label: |
           Which of the following may affect a child’s physical experiences outside of the setting?
-          
+
           Choose all that apply.
 
-        assessment_summary: 
+        assessment_summary:
         assessment_fail_summary: |
-          Children’s experiences of physical activity outside of the setting will vary greatly and there are many factors which may influence this including parents having limited time or understanding of expected development. 
-          
+          Children’s experiences of physical activity outside of the setting will vary greatly and there are many factors which may influence this including parents having limited time or understanding of expected development.
+
           You will need to be aware of children’s previous experiences to ensure that you can plan from children’s starting points.
-          
+
           You might want to revisit the section on [positive partnerships](/modules/module-5/content-pages/5-3-3).
         answers:
           1: "Parents and carers with limited time"
