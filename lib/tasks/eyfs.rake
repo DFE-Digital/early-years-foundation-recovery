@@ -43,7 +43,7 @@ namespace :eyfs do
       if args.present?
         User.where(email: args.to_a)
       else
-        User.registered
+        User.registration_complete
       end
 
     users.map do |user|
@@ -63,7 +63,7 @@ namespace :eyfs do
     number_updated = 0
     total_records = 0
 
-    User.registered.map do |user|
+    User.registration_complete.map do |user|
       original = user.module_time_to_completion
       BackfillModuleState.new(user: user).call
       updated = user.reload.module_time_to_completion

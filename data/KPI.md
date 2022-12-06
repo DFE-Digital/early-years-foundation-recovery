@@ -86,35 +86,36 @@ Example event data from the `ahoy_visits` table.
 
 ## Transactions
 
+TODO: Brett to help update table below following registration journey changes. Strike-through deprectaed events
 
-| Done | Feature                       | Controllers                                | Key                             | Path                                         |
-| :--- | :---                          | :---                                       | :---                            | :---                                         |
-| [x]  | Homepage                      | `HomeController`                           | `home_page`                     | `/`                                          |
-| [x]  | Monitoring progress           | `LearningController`                       | `learning_page`                 | `/my-modules`                                |
-| [x]  | Course overview               | `TrainingModulesController`                | `course_overview_page`          | `/modules`                                   |
-| [x]  | Module overview               | `TrainingModulesController`                | `module_overview_page`          | `/modules/{alpha}`                           |
-| [x]  | Module content                | `ContentPagesController`                   | `module_content_page`           | `/modules/{alpha}/content-pages/{1}`         |
-| [x]  | Static page content           | `StaticController`                         | `static_page`                   | `/example-page`                              |
-| [x]  | Account completion            | `Registration::RoleType{Other}sController` | `user_registration`             | `/registration/role-type`                    |
-| [x]  | User profile                  | `UserController`                           | `profile_page`                  | `/my-account`                                |
-| [x]  | User name change              | `UserController`                           | `user_name_change`              | `/my-account/update-name`                    |
-| [x]  | User email change             | `UserController`                           | `user_email_change`             | `/my-account/update-email`                   |
-| [x]  | User password change          | `UserController`                           | `user_password_change`          | `/my-account/update-password`                |
-| [x]  | User postcode change          | `UserController`                           | `user_postcode_change`          | `/my-account/update-postcode`                |
-| [x]  | User ofsted change            | `UserController`                           | `user_ofsted_change`            | `/my-account/update-ofsted-number`           |
-| [x]  | Email address taken           | `RegistrationsController`                  | `email_address_taken`           | `/users/sign-up`                             |
-| [x]  | User inactivity logout        | `ErrorsController`                         | `error_page`                    | `/timeout`                                   |
-| [x]  | 404 Error                     | `ErrorsController`                         | `error_page`                    | `/404`                                       |
-| [x]  | 500 Error                     | `ErrorsController`                         | `error_page`                    | `/500`                                       |
-| [x]  | Module start                  | `ContentPagesController`                   | `module_start`                  | `/modules/{alpha}/content-pages/{intro}`     |
-| [x]  | Module complete               | `TrainingModulesController`                | `module_complete`               | `/modules/{alpha}/certificate`               |
-| [x]  | Questionnaire answered        | `QuestionnairesController`                 | `questionnaire_answer`          | `/modules/{alpha}/questionnaires/{path}`     |
-| [x]  | Summative assessment start    | `QuestionnairesController`                 | `summative_assessment_start`    | `/modules/{alpha}/questionnaires/{path}`     |
-| [x]  | Summative assessment complete | `AssessmentResultsController`              | `summative_assessment_complete` | `/modules/{alpha}/assessment-results/{path}` |
-| [x]  | Confidence check start        | `QuestionnairesController`                 | `confidence_check_start`        | `/modules/{alpha}/questionnaires/{path}`     |
-| [x]  | Confidence check complete     | `ContentPagesController`                   | `confidence_check_complete`     | `/modules/{alpha}/questionnaires/{path}`     |
-| [x]  | User note created             | `NotesController`                          | `user_note_created`             | `/my-account/learning-log`                   |
-| [x]  | User note updated             | `NotesController`                          | `user_note_updated`             | `/my-account/learning-log`                   |
+| Done | Feature                       | Key                             | Controllers                       | Path                                         |
+| :--- | :---                          | :---                            | :---                              | :---                                         |
+| [x]  | Homepage                      | `home_page`                     | `HomeController`                  | `/`                                          |
+| [x]  | Monitoring progress           | `learning_page`                 | `LearningController`              | `/my-modules`                                |
+| [x]  | Course overview               | `course_overview_page`          | `TrainingModulesController`       | `/modules`                                   |
+| [x]  | Module overview               | `module_overview_page`          | `TrainingModulesController`       | `/modules/{alpha}`                           |
+| [x]  | Module content                | `module_content_page`           | `ContentPagesController`          | `/modules/{alpha}/content-pages/{1}`         |
+| [x]  | Static page content           | `static_page`                   | `StaticController`                | `/example-page`                              |
+| [x]  | Account completion            | `user_registration`             | `Registration::<Attrs>Controller` | `/registration/{attr}`                       |
+| [x]  | User profile                  | `profile_page`                  | `UserController`                  | `/my-account`                                |
+| [x]  | User name change              | `user_name_change`              | `UserController`                  | `/my-account/update-name`                    |
+| [x]  | User email change             | `user_email_change`             | `UserController`                  | `/my-account/update-email`                   |
+| [x]  | User password change          | `user_password_change`          | `UserController`                  | `/my-account/update-password`                |
+| [x]  | User postcode change          | `user_postcode_change`          | `UserController`                  | `/my-account/update-postcode`                |
+| [x]  | User ofsted change            | `user_ofsted_change`            | `UserController`                  | `/my-account/update-ofsted-number`           |
+| [x]  | Email address taken           | `email_address_taken`           | `RegistrationsController`         | `/users/sign-up`                             |
+| [x]  | User inactivity logout        | `error_page`                    | `ErrorsController`                | `/timeout`                                   |
+| [x]  | 404 Error                     | `error_page`                    | `ErrorsController`                | `/404`                                       |
+| [x]  | 500 Error                     | `error_page`                    | `ErrorsController`                | `/500`                                       |
+| [x]  | Module start                  | `module_start`                  | `ContentPagesController`          | `/modules/{alpha}/content-pages/intro`       |
+| [x]  | Module complete               | `module_complete`               | `TrainingModulesController`       | `/modules/{alpha}/certificate`               |
+| [x]  | Questionnaire answered        | `questionnaire_answer`          | `QuestionnairesController`        | `/modules/{alpha}/questionnaires/{path}`     |
+| [x]  | Summative assessment start    | `summative_assessment_start`    | `QuestionnairesController`        | `/modules/{alpha}/questionnaires/{path}`     |
+| [x]  | Summative assessment complete | `summative_assessment_complete` | `AssessmentResultsController`     | `/modules/{alpha}/assessment-results/{path}` |
+| [x]  | Confidence check start        | `confidence_check_start`        | `QuestionnairesController`        | `/modules/{alpha}/questionnaires/{path}`     |
+| [x]  | Confidence check complete     | `confidence_check_complete`     | `ContentPagesController`          | `/modules/{alpha}/questionnaires/{path}`     |
+| [x]  | User note created             | `user_note_created`             | `NotesController`                 | `/my-account/learning-log`                   |
+| [x]  | User note updated             | `user_note_updated`             | `NotesController`                 | `/my-account/learning-log`                   |
 
 
 ## Metrics
@@ -125,9 +126,9 @@ Particular states, such as `module_time_to_completion` or a user's **"ttc"** key
 
 ```ruby
   {
-    "child-development-and-the-eyfs"=>602207,
-    "brain-development-and-how-children-learn"=>54321,
-    "personal-social-and-emotional-development"=>4229847
+    "child-development-and-the-eyfs" => 602207,
+    "brain-development-and-how-children-learn" => 54321,
+    "personal-social-and-emotional-development" => 4229847
   }
 ```
 

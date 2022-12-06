@@ -44,11 +44,30 @@ module Reporting
 
   def users
     {
-      registered: registered,
-      not_registered: not_registered,
+      # registration scopes
+      registration_complete: registration_complete,
+      registration_incomplete: registration_incomplete,
+      reregistered: reregistered,
+      registered_since_private_beta: registered_since_private_beta,
+      private_beta_only_registration_incomplete: private_beta_only_registration_incomplete,
+      private_beta_only_registration_complete: private_beta_only_registration_complete,
+
+      # all
       total: total,
+
       started_learning: started_learning,
       not_started_learning: not_started_learning,
+
+      user_defined_roles: user_defined_roles,
+
+      # devise
+      locked_out: locked_out,
+      confirmed: confirmed,
+      unconfirmed: unconfirmed,
+
+      # events
+      private_beta_registration_events: private_beta_registration_events,
+      public_beta_registration_events: public_beta_registration_events,
     }
   end
 
@@ -84,16 +103,99 @@ module Reporting
   # @see User#registration_complete
   # ----------------------------------------------------------------------------
 
-  def registered
-    User.registered.count
+  def registration_complete
+    User.registration_complete.count
   end
 
-  def not_registered
-    User.not_registered.count
+  def registration_incomplete
+    User.registration_incomplete.count
+  end
+
+  def reregistered
+    User.reregistered.count
+  end
+
+  def registered_since_private_beta
+    User.registered_since_private_beta.count
+  end
+
+  def private_beta_only_registration_complete
+    User.private_beta_only_registration_complete.count
+  end
+
+  def private_beta_only_registration_incomplete
+    User.private_beta_only_registration_incomplete.count
   end
 
   def total
     User.all.count
+  end
+
+  def confirmed
+    User.where.not(confirmed_at: nil).count
+  end
+
+  def unconfirmed
+    User.where(confirmed_at: nil).count
+  end
+
+  def locked_out
+    User.where.not(locked_at: nil).count
+  end
+
+  def user_defined_roles
+    Ahoy::Event.where(name: 'user_registration').where_properties(controller: 'registration/role_type_others').map { |e| e.user.role_type_other }.uniq.count
+  end
+
+  # Brett McHargue
+  #
+  # default for registration complete was originally nil, when new journey came in,
+  # the existing registration complete boolean was renamed and the default changed to false,
+  # the new registration complete boolean (using the same name as the old one) was created from the start with a default of false
+  # We don’t update the ‘private_beta_registration_complete’ value, so whatever value they are now is the value they were at the transition time
+  #
+  #
+
+  # - 1142 have created an account and completed registration
+  # User.where(registration_complete: true).count                                                     => 1142
+
+  # - 1494 were registered at the time of the change
+  # User.where(private_beta_registration_complete: true).count                                        => 1494
+
+  # - 227 created accounts did not complete registration
+  # User.where(private_beta_registration_complete: nil).count                                         => 227
+
+  # - 845 have created an account since the new journey began
+  # User.where(private_beta_registration_complete: false).count                                       => 845
+
+  # - 1424 have created an account without registering
+  # User.where(registration_complete: false).count                                                    => 1424
+
+  # - 367 who completed the old registration have also completed the new registration
+  # User.where(private_beta_registration_complete: true, registration_complete: true).count           => 367
+
+  # - 297 who did not complete the old registration (or created an account after the new reg journey started) have also not completed the new registration
+  # User.where(private_beta_registration_complete: [nil, false], registration_complete: false).count  => 297
+
+  # - 775 of the same segment as above have completed the new registration journey
+  # User.where(private_beta_registration_complete: [nil, false], registration_complete: true).count   => 775
+
+  # User.where(registration_complete: nil).count                                                      => 0
+  # User.where(private_beta_registration_complete: true, registration_complete: false).count          => 1127
+
+  def private_beta_registration_events
+    Ahoy::Event.where(name: 'user_registration').where_properties(controller: 'extra_registrations').count
+  end
+
+  def public_beta_registration_events
+    controllers = %w[
+      registration/role_types
+      registration/role_type_others
+      registration/local_authorities
+      registration/setting_types
+    ]
+
+    controllers.map { |c| Ahoy::Event.where(name: 'user_registration').where_properties(controller: c).count }.reduce(&:+)
   end
 
   #
@@ -104,27 +206,27 @@ module Reporting
 
   # Number of registered users who have not started learning
   def not_started_learning
-    User.registered.map { |u| u.module_time_to_completion.keys }.count(&:empty?)
+    User.registration_complete.map { |u| u.module_time_to_completion.keys }.count(&:empty?)
   end
 
   # Number of registered users who have started learning
   def started_learning
-    User.registered.map { |u| u.module_time_to_completion.keys }.count(&:present?)
+    User.registration_complete.map { |u| u.module_time_to_completion.keys }.count(&:present?)
   end
 
   # Number of users not started
   def not_started(mod)
-    User.registered.map { |u| u.module_time_to_completion[mod.name] }.count(&:nil?)
+    User.registration_complete.map { |u| u.module_time_to_completion[mod.name] }.count(&:nil?)
   end
 
   # Number of users in progress
   def in_progress(mod)
-    User.registered.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:zero?)
+    User.registration_complete.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:zero?)
   end
 
   # Number of users completed
   def completed(mod)
-    User.registered.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:positive?)
+    User.registration_complete.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:positive?)
   end
 
   # Number of users (total)

@@ -96,17 +96,19 @@ RSpec.shared_context 'with progress' do
   end
 
   def complete_module(mod)
-    view_pages_before(mod, 'thankyou')                                # 'module_content_page'
-    travel_to 5.minutes.from_now                                      # 300s ttc
-    visit "/modules/#{mod.name}/content-pages/#{mod.last_page.name}"  # 'module_complete'
+    # Create 'module_content_page' events
+    view_pages_before(mod, 'thankyou')
+    # Resultsa in a 300s ttc
+    travel_to 5.minutes.from_now
+    # Visit thankyou page to create 'module_complete' event
+    visit "/modules/#{mod.name}/content-pages/#{mod.last_page.name}"
   end
 
 private
 
-  # Visit every page before the given instance of the given page type
-  #
+  # Visit every page before the nth instance of the given type
   def view_pages_before(mod, type, count = 1)
-    visit "/modules/#{mod.name}/content-pages/intro"                  # 'module_start'
+    visit "/modules/#{mod.name}/content-pages/intro" # 'module_start'
 
     counter = 0
     mod.module_items.map do |item|
@@ -114,7 +116,5 @@ private
       counter += 1 if item.type.eql?(type)
       break if counter.eql?(count)
     end
-
-    CalculateModuleState.new(user: user).call
   end
 end
