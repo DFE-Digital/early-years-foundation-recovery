@@ -5,7 +5,7 @@
       li.progress-bar
         = progress_ball(*item[:content_helper_values])
         - unless item[:first]
-          div class=item[:class]
+          div class = item[:class]
         p.govuk-body.progress--heading class="#{'govuk-!-font-weight-bold' if item[:bold] }"
           span.govuk-visually-hidden = item[:position]
           = item[:heading]

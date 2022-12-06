@@ -10,18 +10,17 @@ class ModuleProgressBarDecorator < DelegateClass(ModuleProgress)
   # end
 
   # @return [Hash]
+  # @return [<Hash, Integer>]
   def progress_bar_info
     milestones.each_with_index.map do |item, index|
       position = "Step #{index + 1}: "
       heading = milestones.first.eql?(item) ? 'Module introduction' : item.model.heading
       first = milestones.first.eql?(item)
       style = "line line--#{icon(item)[2]}" unless milestones.first.eql?(item)
-      bold = milestones.map { |i| icon(i)[2] }.rindex(:green) == index
-      # bold = furthest_submodule?(item)
+      bold = section_name(furthest_page).eql?(section_name(item))
       content_helper_values = icon(item)
 
       {
-        index: index,
         heading: heading,
         class: style,
         first: first,
@@ -39,6 +38,25 @@ class ModuleProgressBarDecorator < DelegateClass(ModuleProgress)
   end
 
 private
+
+  # @return [String]
+  def section_name(module_item)
+    if module_item.nil?
+      nil
+    elsif %w[interruption_page icons_page module_intro].include?(module_item)
+      'introduction'
+    elsif %w[assessment_intro
+             summative_questionnaire
+             assessment_results
+             confidence_intro
+             confidence_questionnaire
+             thankyou
+             certificate].include?(module_item)
+      'summary'
+    else
+      module_item.submodule_name
+    end
+  end
 
   # @return [String] Percentage complete
   def value

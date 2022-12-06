@@ -8,12 +8,6 @@ RSpec.describe ModuleProgressBarDecorator do
 
   include_context 'with progress'
 
-  describe 'indexes' do
-    let(:indexes) { decorator.progress_bar_info.map { |hash| hash[:index] } }
-
-    specify { expect(indexes).to eq [0, 1, 2, 3] }
-  end
-
   describe 'headings' do
     let(:headings) { decorator.progress_bar_info.map { |hash| hash[:heading] } }
 
