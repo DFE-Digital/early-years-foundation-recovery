@@ -65,7 +65,7 @@ class AnalyticsBuild
 
   # Create a local copy of the csv file
   # @return [void]
-  def create
+  def create!
     @result_set.in_batches(of: 5000) do |results|
       build(results)
     end
@@ -83,21 +83,21 @@ class AnalyticsBuild
   # @param key [String|Array|Hash]
   # @return [String]
   def self.transform_json_key(key)
-     key.to_s.tr('-', '_')
+    key.to_s.tr('-', '_')
   end
 
-  # Create a sql query from json object keys 
+  # Create a sql query from json object keys
   # @param column_name [String]
   # @param json_column [Object]
   # @return [String]
   def self.build_json_sql(column_name, json_column)
-      sql_array = []
-      json_column.keys.map do |key|
-        key_name = AnalyticsBuild::change_id(column_name, key)
-        sql_array.push("COALESCE(#{column_name}->>'#{key}', 'null') AS #{AnalyticsBuild::transform_json_key(key_name)},")
-      end
+    sql_array = []
+    json_column.keys.map do |key|
+      key_name = AnalyticsBuild.change_id(column_name, key)
+      sql_array.push("COALESCE(#{column_name}->>'#{key}', 'null') AS #{AnalyticsBuild.transform_json_key(key_name)},")
+    end
 
-      sql_array.join()
+    sql_array.join
   end
 
   # Avoid conflict with table id we rename any id the in json object key
@@ -106,9 +106,9 @@ class AnalyticsBuild
   # @return [String]
   def self.change_id(column_name, key)
     if key == 'id'
-      return "#{column_name}_#{key}"
+      "#{column_name}_#{key}"
     else
-      return key
+      key
     end
   end
 end

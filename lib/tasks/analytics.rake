@@ -16,8 +16,6 @@ namespace :db do
 
       sql = 'SELECT id, module_time_to_completion as json_column, (SELECT COUNT(*) FROM jsonb_object_keys(module_time_to_completion)) nbr_keys FROM public.users order by nbr_keys desc limit 1'
       user_json = ActiveRecord::Base.connection.execute(sql)
-      puts user_json
-      puts AnalyticsBuild.build_json_sql('module_time_to_completion', JSON.parse(user_json.first['json_column']))
       users_all = User.select(" id,
                                 TO_CHAR(created_at, 'YYYY-MM-DD') AS registered_at,
                                 COALESCE(NULLIF(setting_type, 'other'), COALESCE(setting_type_other, 'null')) AS user_setting,
@@ -27,14 +25,14 @@ namespace :db do
                                 COALESCE(module_time_to_completion->>'module-4', 'null') AS module_4_time,
                                 #{AnalyticsBuild.build_json_sql('module_time_to_completion', JSON.parse(user_json.first['json_column']))}
                                 module_time_to_completion").all
-                                
+
       users = AnalyticsBuild.new(bucket_name: ENV['GCS_BUCKET_NAME'],
                                  folder_path: 'userdata',
                                  result_set: users_all, file_name: 'users')
 
-      #users.create if Rails.env.development?
-      users.delete_files
-      users.upload
+      users.create! if Rails.env.test?
+      users.delete_files if Rails.env.production? || Rails.env.development?
+      users.upload if Rails.env.production? || Rails.env.development?
     end
 
     desc 'ahoy_events table'
@@ -53,9 +51,9 @@ namespace :db do
                                   result_set: events_results,
                                   file_name: 'ahoy_events')
 
-      # events.create if Rails.env.development?
-      events.delete_files
-      events.upload
+      events.create! if Rails.env.test?
+      events.delete_files if Rails.env.production? || Rails.env.development?
+      events.upload if Rails.env.production? || Rails.env.development?
     end
 
     desc 'user_assessments table'
@@ -66,23 +64,22 @@ namespace :db do
                                        result_set: user_assessments,
                                        file_name: 'user_assessments')
 
-      #assessments.create if Rails.env.development?
-      assessments.delete_files
-      assessments.upload
+      assessments.create! if Rails.env.test?
+      assessments.delete_files if Rails.env.production? || Rails.env.development?
+      assessments.upload if Rails.env.production? || Rails.env.development?
     end
 
     desc 'user_answers table'
     task user_answers: :environment do
-      # user_answers = UserAnswer.select("substring(column1 from '(([0-9]+.*)*[0-9]+)'), *").all
       user_answers = UserAnswer.all
       answers = AnalyticsBuild.new(bucket_name: ENV['GCS_BUCKET_NAME'],
                                    folder_path: 'useranswers',
                                    result_set: user_answers,
                                    file_name: 'user_answers')
 
-      # answers.create if Rails.env.development?
-      answers.delete_files
-      answers.upload
+      answers.create! if Rails.env.test?
+      answers.delete_files if Rails.env.production? || Rails.env.development?
+      answers.upload if Rails.env.production? || Rails.env.development?
     end
 
     desc 'ahoy_visits table'
@@ -92,9 +89,9 @@ namespace :db do
                                       folder_path: 'visitsdata',
                                       result_set: ahoy_visits,
                                       file_name: 'ahoy_visits')
-      # ahoy_visit.create if Rails.env.development?
-      ahoy_visit.delete_files
-      ahoy_visit.upload
+      ahoy_visit.create! if Rails.env.test?
+      ahoy_visit.delete_files if Rails.env.production?
+      ahoy_visit.upload if Rails.env.production?
     end
   end
 end

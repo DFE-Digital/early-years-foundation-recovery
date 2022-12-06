@@ -4,7 +4,7 @@ class CloudStorage
   require 'google/cloud/storage'
 
   def gcs
-    project_id = ENV['GOOGLE_CLOUD_PROJECT_ID']
-    @gcs ||= Google::Cloud::Storage.new project: project_id, credentials: JSON.parse(ENV['GOOGLE_CLOUD_STORAGE'])
+    google_credentials = JSON.parse(ENV['GOOGLE_CLOUD_STORAGE'])
+    @gcs ||= Google::Cloud::Storage.new project: google_credentials['project_id'], credentials: google_credentials
   end
 end
