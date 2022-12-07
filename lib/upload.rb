@@ -4,8 +4,8 @@ class Upload
   attr_reader :client, :space, :token, :environment
 
   def initialize
-    @space = Rails.configuration.space
-    @token = Rails.configuration.management_token
+    @space = Rails.application.credentials.dig(:contentful, :space)
+    @token = Rails.application.credentials.dig(:contentful, :management_access_token)
     @environment = 'master'
     @client = Contentful::Management::Client.new(token)
   end
@@ -14,19 +14,19 @@ class Upload
     log client.configuration
     log "space: #{space}"
 
-    ct_module = client.content_types(space, 'master').find('module')
+    ct_module = client.content_types(space, environment).find('module')
     ct_module.activate
 
-    ct_page = client.content_types(space, 'master').find('page')
+    ct_page = client.content_types(space, environment).find('page')
     ct_page.activate
 
-    ct_question = client.content_types(space, 'master').find('question')
+    ct_question = client.content_types(space, environment).find('question')
     ct_question.activate
 
-    ct_answer = client.content_types(space, 'master').find('answer')
+    ct_answer = client.content_types(space, environment).find('answer')
     ct_answer.activate
 
-    ct_confidence = client.content_types(space, 'master').find('confidence')
+    ct_confidence = client.content_types(space, environment).find('confidence')
     ct_confidence.activate
 
     TrainingModule.all.each do |tm|
