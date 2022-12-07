@@ -177,6 +177,21 @@ We intend to use [semantic versioning](https://semver.org/).
 
 A tag can also be created and a deployment run from this [workflow][production-workflow].
 
+## Monitoring
+
+[Sentry][sentry] is used to monitor production environments
+
+`$ brew install getsentry/tools/sentry-cli`
+
+`$ sentry-cli projects list --org early-years-foundation-reform`
+
+    +---------+--------------+-------------------------------+--------------+
+    | ID      | Slug         | Team                          | Name         |
+    +---------+--------------+-------------------------------+--------------+
+    | 6274627 | eyf-reform   | early-years-foundation-reform | Rails        |
+    | 6274651 | eyf-recovery | early-years-foundation-reform | eyf-recovery |
+    +---------+--------------+-------------------------------+--------------+
+
 ## Quality Assurance
 
 The UI/UA test suite can be run against any site.
@@ -283,6 +298,7 @@ Session timeout functionality:
 [figma]: https://www.figma.com/file/FGW1NJJwnYRqoZ2DV0l5wW/Training-content?node-id=1%3A19
 [docker]: https://www.docker.com
 [git-secrets]: https://github.com/awslabs/git-secrets
+[sentry]: https://sentry.io/organizations/early-years-foundation-reform
 
 <!-- Deployments -->
 

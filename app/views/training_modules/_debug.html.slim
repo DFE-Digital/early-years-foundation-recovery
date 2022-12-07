@@ -6,6 +6,7 @@
       li duration: #{@training_module.duration}
       li submodules: #{@training_module.submodule_count}
       li topics: #{@training_module.topic_count}
+      li questions: #{@training_module.questionnaires.count}
       li milestone: #{@module_progress.milestone}
       li resume page: #{@module_progress.resume_page&.name}
       li last page: #{@training_module.module_items.last.name}
