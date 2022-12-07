@@ -90,6 +90,10 @@ private
 
   # @return [Boolean]
   def milestone_started?(item)
-    visited?(item)
+    if item.submodule_intro? || item.summary_intro?
+      visited?(item.next_item)
+    else
+      visited?(item)
+    end
   end
 end
