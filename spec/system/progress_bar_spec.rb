@@ -5,7 +5,7 @@ RSpec.describe 'Progress bar' do
   include_context 'with progress'
 
   context 'when on intro section' do
-    describe 'first page' do
+    describe 'interruption page' do
       before do
         visit 'modules/alpha/content-pages/what-to-expect'
       end
@@ -19,7 +19,7 @@ RSpec.describe 'Progress bar' do
       end
     end
 
-    describe 'second page' do
+    describe 'before you start page' do
       before do
         visit 'modules/alpha/content-pages/what-to-expect'
         visit 'modules/alpha/content-pages/before-you-start'
@@ -34,7 +34,7 @@ RSpec.describe 'Progress bar' do
       end
     end
 
-    describe 'final page' do
+    describe 'module intro page' do
       before do
         start_module(alpha)
         visit 'modules/alpha/content-pages/intro'
@@ -51,14 +51,14 @@ RSpec.describe 'Progress bar' do
   end
 
   context 'when on first submodule' do
-    describe 'intro page' do
+    describe 'submodule intro page' do
       before do
         start_first_submodule(alpha)
         visit 'modules/alpha/content-pages/1-1'
       end
 
-      it 'shows a circle with a green border' do
-        expect(page).to have_css 'li.progress-bar:nth-child(2) .fa-circle.green'
+      it 'shows a circle with a grey border' do
+        expect(page).to have_css 'li.progress-bar:nth-child(2) .fa-circle.grey'
       end
 
       it 'shows a bold section heading' do

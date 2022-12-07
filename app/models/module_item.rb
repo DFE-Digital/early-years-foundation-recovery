@@ -326,7 +326,7 @@ class ModuleItem < YamlBase
   end
 
   # @return [Boolean]
-  def progress_ball?
+  def progress_node?
     icons_page? || module_intro? || submodule_intro? || summary_intro? || assessment_intro?
   end
 

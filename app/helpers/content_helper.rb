@@ -42,7 +42,7 @@ module ContentHelper
   # @param colour [String, Symbol] Icon colour
   # @param label [String, Symbol] Aria label
   # @return [String]
-  def progress_ball(icon, style, colour, label)
+  def progress_node(icon, style, colour, label)
     content_tag :span, nil, class: 'fa-stack fa-1x', aria: { label: label } do
       # white background
       concat(content_tag(:i, nil, class: 'fa-solid fa-stack-2x fa-circle')) unless label == 'started'

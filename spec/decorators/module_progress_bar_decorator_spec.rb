@@ -9,7 +9,7 @@ RSpec.describe ModuleProgressBarDecorator do
   include_context 'with progress'
 
   describe 'headings' do
-    let(:headings) { decorator.progress_bar_info.map { |hash| hash[:heading] } }
+    let(:headings) { decorator.progress_bar_attributes.map { |hash| hash[:heading] } }
 
     specify do
       expect(headings).to eq ['Module introduction', 'The first submodule', 'The second submodule', 'Summary and next steps']
@@ -17,19 +17,19 @@ RSpec.describe ModuleProgressBarDecorator do
   end
 
   describe 'firsts' do
-    let(:firsts) { decorator.progress_bar_info.map { |hash| hash[:first] } }
+    let(:firsts) { decorator.progress_bar_attributes.map { |hash| hash[:first] } }
 
     specify { expect(firsts).to eq [true, false, false, false] }
   end
 
   describe 'positions' do
-    let(:positions) { decorator.progress_bar_info.map { |hash| hash[:position] } }
+    let(:positions) { decorator.progress_bar_attributes.map { |hash| hash[:position] } }
 
     specify { expect(positions).to eq ['Step 1: ', 'Step 2: ', 'Step 3: ', 'Step 4: '] }
   end
 
   describe 'line styling' do
-    let(:classes) { decorator.progress_bar_info.map { |hash| hash[:class] } }
+    let(:classes) { decorator.progress_bar_attributes.map { |hash| hash[:class] } }
 
     context 'when on module intro section' do
       it 'all lines are grey' do
@@ -88,7 +88,7 @@ RSpec.describe ModuleProgressBarDecorator do
   end
 
   describe 'bold headings' do
-    let(:bolds) { decorator.progress_bar_info.map { |hash| hash[:bold] } }
+    let(:bolds) { decorator.progress_bar_attributes.map { |hash| hash[:bold] } }
 
     context 'when on module intro section' do
       it 'first heading is bold' do
@@ -120,30 +120,24 @@ RSpec.describe ModuleProgressBarDecorator do
   end
 
   describe 'status of progress nodes' do
-    let(:content_helper_values) { decorator.progress_bar_info.map { |hash| hash[:content_helper_values] } }
+    let(:content_helper_values) { decorator.progress_bar_attributes.map { |hash| hash[:content_helper_values] } }
+
+    let(:not_started) { { icon_type: 'circle', style: :regular, colour: :grey, status: 'not started' } }
+    let(:started) { { icon_type: 'circle', style: :solid, colour: :green, status: 'started' } }
+    let(:completed) { { icon_type: 'circle-check', style: :solid, colour: :green, status: 'completed' } }
 
     context 'when on module introduction section' do
       context 'when on interruption page and icons page' do
         it 'first node is started and last three are not started' do
           view_pages_before(alpha, 'interruption_page')
-          expect(content_helper_values).to eq [
-            ['circle', :solid, :green, 'started'],
-            ['circle', :regular, :grey, 'not started'],
-            ['circle', :regular, :grey, 'not started'],
-            ['circle', :regular, :grey, 'not started'],
-          ]
+          expect(content_helper_values).to eq [started, not_started, not_started, not_started]
         end
       end
 
       context 'when on module intro page' do
         it 'first node is completed and last three are not started' do
           start_module(alpha)
-          expect(content_helper_values).to eq [
-            ['circle-check', :solid, :green, 'completed'],
-            ['circle', :regular, :grey, 'not started'],
-            ['circle', :regular, :grey, 'not started'],
-            ['circle', :regular, :grey, 'not started'],
-          ]
+          expect(content_helper_values).to eq [completed, not_started, not_started, not_started]
         end
       end
     end
@@ -152,36 +146,21 @@ RSpec.describe ModuleProgressBarDecorator do
       context 'when on submodule_intro page' do
         it 'previous node is completed next nodes are not started' do
           start_first_submodule(alpha)
-          expect(content_helper_values).to eq [
-            ['circle-check', :solid, :green, 'completed'],
-            ['circle', :regular, :grey, 'not started'],
-            ['circle', :regular, :grey, 'not started'],
-            ['circle', :regular, :grey, 'not started'],
-          ]
+          expect(content_helper_values).to eq [completed, not_started, not_started, not_started]
         end
       end
 
       context 'when on first content page' do
         it 'previous node is completed, this node is started and next nodes are not started' do
           start_first_topic(alpha)
-          expect(content_helper_values).to eq [
-            ['circle-check', :solid, :green, 'completed'],
-            ['circle', :solid, :green, 'started'],
-            ['circle', :regular, :grey, 'not started'],
-            ['circle', :regular, :grey, 'not started'],
-          ]
+          expect(content_helper_values).to eq [completed, started, not_started, not_started]
         end
       end
 
       context 'when on last content page' do
         it 'previous and current nodes are completed, next nodes are not started' do
           view_pages_before_formative_questionnaire(alpha)
-          expect(content_helper_values).to eq [
-            ['circle-check', :solid, :green, 'completed'],
-            ['circle-check', :solid, :green, 'completed'],
-            ['circle', :regular, :grey, 'not started'],
-            ['circle', :regular, :grey, 'not started'],
-          ]
+          expect(content_helper_values).to eq [completed, completed, not_started, not_started]
         end
       end
     end
@@ -190,36 +169,21 @@ RSpec.describe ModuleProgressBarDecorator do
       context 'when on summary_intro page' do
         it 'previous nodes are completed, this node is not started' do
           view_summary_intro(alpha)
-          expect(content_helper_values).to eq [
-            ['circle-check', :solid, :green, 'completed'],
-            ['circle-check', :solid, :green, 'completed'],
-            ['circle-check', :solid, :green, 'completed'],
-            ['circle', :regular, :grey, 'not started'],
-          ]
+          expect(content_helper_values).to eq [completed, completed, completed, not_started]
         end
       end
 
       context 'when on summative assessment or confidence check' do
         it 'previous nodes are completed, this node is started' do
           start_summative_assessment(alpha)
-          expect(content_helper_values).to eq [
-            ['circle-check', :solid, :green, 'completed'],
-            ['circle-check', :solid, :green, 'completed'],
-            ['circle-check', :solid, :green, 'completed'],
-            ['circle', :solid, :green, 'started'],
-          ]
+          expect(content_helper_values).to eq [completed, completed, completed, started]
         end
       end
 
       context 'when on certificate page' do
         it 'all nodes are completed' do
           view_certificate_page(alpha)
-          expect(content_helper_values).to eq [
-            ['circle-check', :solid, :green, 'completed'],
-            ['circle-check', :solid, :green, 'completed'],
-            ['circle-check', :solid, :green, 'completed'],
-            ['circle-check', :solid, :green, 'completed'],
-          ]
+          expect(content_helper_values).to eq [completed, completed, completed, completed]
         end
       end
     end
