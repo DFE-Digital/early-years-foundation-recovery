@@ -64,13 +64,13 @@ jobs:
           node-version: 18.x
           cache: npm
       -
-        name: Compile assets
-        run: bundle exec rails assets:precompile
-      -
         name: Prepare test database
-        run: bin/rails db:prepare
+        run: bundle exec rails db:prepare
         env:
           NOTIFY_API_KEY: foo
+      -
+        name: Compile assets
+        run: bundle exec rails assets:precompile
       -
         name: Run test suite
         run: bundle exec rspec
