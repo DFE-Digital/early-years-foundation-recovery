@@ -12,8 +12,6 @@ RSpec.describe 'Sign in', type: :system do
       fill_in 'Email address', with: user.email
       fill_in 'Password', with: 'StrongPassword123'
       click_button 'Sign in'
-
-      expect(page).to have_text('Signed in successfully')
     end
 
     it 'warns when credentials are invalid' do
@@ -41,8 +39,7 @@ RSpec.describe 'Sign in', type: :system do
       fill_in 'Password', with: 'StrongPassword123'
       click_button 'Sign in'
 
-      expect(page).to have_text('Signed in successfully')
-        .and have_text('About you') # extra registration
+      expect(page).to have_text('About you') # extra registration
     end
 
     it 'locks account after 6 incorrect password attempts' do
