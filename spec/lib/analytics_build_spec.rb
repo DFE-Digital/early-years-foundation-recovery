@@ -11,12 +11,23 @@ RSpec.describe AnalyticsBuild do
   include_context 'with user answer'
 
   let(:directory) { 'analytics_files' }
+  let(:users_assessments) { UserAssessment.all }
+  let(:upload_users_assessments) { described_class.new(bucket_name: 'tests', folder_path: 'userassessments', result_set: users_assessments, file_name: 'user_assessments') }
   let(:user) { create(:user, :registered) }
   let(:user1) { create(:user, :registered) }
 
   before do
     WebMock.disable_net_connect!
-    stub_request(:post, "https://oauth2.googleapis.com/token").to_return(status: 200, body: "{}", headers: {"Content-Type":"application/json"})
+    stub_request(:post, 'https://oauth2.googleapis.com/token').to_return(status: 200, body: '{}', headers: { "Content-Type": 'application/json' })
+    # stub request matching anything after name parameter
+    #  example: "https://storage.googleapis.com/upload/storage/v1/b/tests/o?name=userassessments/user_assessments2022-12-07T17:23:20Z.csv&uploadType=resumable"
+    # stub_request(:post, /https:\/\/storage.googleapis.com\/upload\/storage\/v1\/b\/tests\/o\?name(.+)/).to_return(status: 200, body: "", headers: {})
+    # stub_request(:put, "http://nil-uri-given/").to_return(status: 200, body: "", headers: {})
+    stub_request(:any, /https:\/\/storage.googleapis.com\/(.+)/).to_return(->(request) do { body: request.body } end)
+    # need to investigate this as storage.googleapis.com must return a uri to put file content when streaming data, so need to match that rather than "http://nil-uri-given/"
+    # but for now its not the response were testing its the sql and active record payload
+    # if code or database changes we should get an error here.
+    stub_request(:put, 'http://nil-uri-given/').to_return(status: 200, body: '', headers: { "Content-Type": 'application/json' })
     Dir.mkdir directory unless File.exist?(directory)
     create_event(user, 'module_content_page', Time.zone.local(2000, 0o1, 0o2), 'brain-development-and-how-children-learn', 'intro')
     create_event(user1, 'module_content_page', Time.zone.local(2000, 0o1, 0o1), 'child-development-and-the-eyfs', 'intro')
@@ -57,5 +68,22 @@ RSpec.describe AnalyticsBuild do
     Rake::Task['db:analytics:user_answers'].invoke
     files = Dir["#{directory}/user_answers*.csv"]
     expect(files.length).to be > 0
+  end
+
+  it 'transform dash to underscore' do
+    expect(described_class.transform_json_key('tests-json-string')).to match('tests_json_string')
+  end
+
+  it 'change json properties id to avoid conflict with primary keys' do
+    expect(described_class.change_id('test_key', 'id')).to match('test_key_id')
+  end
+
+  it 'build sql for jsonb fields in database' do
+    json_column = { "module-4": 570_627, "child-development-and-the-eyfs": 421_725 }
+    expect(described_class.build_json_sql('module_time_to_completion', json_column)).to match("COALESCE(module_time_to_completion->>'module-4', 'null') AS module_4,COALESCE(module_time_to_completion->>'child-development-and-the-eyfs', 'null') AS child_development_and_the_eyfs,")
+  end
+
+  it 'upload users assessments' do
+    expect(upload_users_assessments.upload).to match(nil)
   end
 end
