@@ -19,32 +19,11 @@ RSpec.describe TrainingModule, type: :model do
     expect(training_module.attributes.keys).to eq(%i[title thumbnail short_description description objective criteria duration summative_threshold name id])
   end
 
-  # predicates ---------------------------------
-
-  # describe '#draft?' do
-  # end
-
-  # collections -------------------------
-
-  # describe '#questionnaires' do
-  # end
-
-  # describe '#module_items' do
-  # end
-
-  # describe '#module_items_by_type' do
-  # end
-
-  # describe '#module_items_by_submodule' do
-  # end
-
-  # describe '#items_by_submodule' do
-  # end
-
-  # describe '#items_by_topic' do
-  # end
-
-  # sequence ---------------------------------
+  describe '#draft?' do
+    it 'is false if published' do
+      expect(training_module.draft?).to be false
+    end
+  end
 
   describe '#interruption_page' do
     subject(:module_item) { training_module.interruption_page }
@@ -76,15 +55,42 @@ RSpec.describe TrainingModule, type: :model do
     end
   end
 
-  # describe '#first_submodule_intro_page' do
-  # end
-
   describe '#first_content_page' do
     subject(:module_item) { training_module.first_content_page }
 
     it 'is the fifth page' do
       expect(module_item.id).to be 5
       expect(module_item.name).to eql '1-1-1'
+    end
+  end
+
+  describe '#summary_intro_page' do
+    subject(:module_item) { training_module.summary_intro_page }
+
+    it 'is the 15th page' do
+      expect(module_item.id).to be 15
+      expect(module_item.name).to eql '1-3'
+      expect(module_item.type).to eql 'summary_intro'
+    end
+  end
+
+  describe '#assessment_results_page' do
+    subject(:module_item) { training_module.assessment_results_page }
+
+    it 'is the 22nd page' do
+      expect(module_item.id).to be 22
+      expect(module_item.name).to eql '1-3-2-5'
+      expect(module_item.type).to eql 'assessment_results'
+    end
+  end
+
+  describe '#confidence_intro_page' do
+    subject(:module_item) { training_module.confidence_intro_page }
+
+    it 'is the 23rd page' do
+      expect(module_item.id).to be 23
+      expect(module_item.name).to eql '1-3-3'
+      expect(module_item.type).to eql 'confidence_intro'
     end
   end
 

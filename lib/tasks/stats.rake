@@ -147,42 +147,6 @@ module Reporting
     Ahoy::Event.where(name: 'user_registration').where_properties(controller: 'registration/role_type_others').map { |e| e.user.role_type_other }.uniq.count
   end
 
-  # Brett McHargue
-  #
-  # default for registration complete was originally nil, when new journey came in,
-  # the existing registration complete boolean was renamed and the default changed to false,
-  # the new registration complete boolean (using the same name as the old one) was created from the start with a default of false
-  # We don’t update the ‘private_beta_registration_complete’ value, so whatever value they are now is the value they were at the transition time
-  #
-  #
-
-  # - 1142 have created an account and completed registration
-  # User.where(registration_complete: true).count                                                     => 1142
-
-  # - 1494 were registered at the time of the change
-  # User.where(private_beta_registration_complete: true).count                                        => 1494
-
-  # - 227 created accounts did not complete registration
-  # User.where(private_beta_registration_complete: nil).count                                         => 227
-
-  # - 845 have created an account since the new journey began
-  # User.where(private_beta_registration_complete: false).count                                       => 845
-
-  # - 1424 have created an account without registering
-  # User.where(registration_complete: false).count                                                    => 1424
-
-  # - 367 who completed the old registration have also completed the new registration
-  # User.where(private_beta_registration_complete: true, registration_complete: true).count           => 367
-
-  # - 297 who did not complete the old registration (or created an account after the new reg journey started) have also not completed the new registration
-  # User.where(private_beta_registration_complete: [nil, false], registration_complete: false).count  => 297
-
-  # - 775 of the same segment as above have completed the new registration journey
-  # User.where(private_beta_registration_complete: [nil, false], registration_complete: true).count   => 775
-
-  # User.where(registration_complete: nil).count                                                      => 0
-  # User.where(private_beta_registration_complete: true, registration_complete: false).count          => 1127
-
   def private_beta_registration_events
     Ahoy::Event.where(name: 'user_registration').where_properties(controller: 'extra_registrations').count
   end

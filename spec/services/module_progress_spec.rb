@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ModuleProgress, type: :system do
+RSpec.describe ModuleProgress do
   subject(:progress) { described_class.new(user: user, mod: alpha) }
 
   let(:alpha) { TrainingModule.find_by(name: :alpha) }

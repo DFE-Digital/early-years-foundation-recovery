@@ -1,10 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe CourseProgress, type: :system do
+RSpec.describe CourseProgress do
   subject(:course) { described_class.new(user: user) }
 
   include_context 'with progress'
-  include_context 'with user'
 
   describe '#course_completed?' do
     it 'is false for new users' do
@@ -12,11 +11,7 @@ RSpec.describe CourseProgress, type: :system do
     end
 
     it 'is true once all published module pages are viewed' do
-      %i[alpha bravo charlie].map do |mod_name|
-        TrainingModule.find_by(name: mod_name).module_items.map do |item|
-          view_module_page_event(mod_name.to_s, item.name)
-        end
-      end
+      TrainingModule.published.map { |mod| complete_module(mod) }
 
       expect(course.course_completed?).to be true
     end
@@ -40,7 +35,7 @@ RSpec.describe CourseProgress, type: :system do
       ]
 
       # complete the first module
-      expect { view_whole_module(alpha) }
+      expect { complete_module(alpha) }
       .to change { course.current_modules.count }
       .from(2).to(1)
     end
@@ -55,7 +50,7 @@ RSpec.describe CourseProgress, type: :system do
       .from(1).to(0)
 
       # complete the first module
-      expect { view_whole_module(alpha) }
+      expect { complete_module(alpha) }
       .to change { course.available_modules.count }
       .from(0).to(1)
 
@@ -65,7 +60,7 @@ RSpec.describe CourseProgress, type: :system do
       .from(1).to(0)
 
       # complete the second module
-      expect { view_whole_module(bravo) }
+      expect { complete_module(bravo) }
       .to change { course.available_modules.count }
       .from(0).to(1)
 
@@ -95,13 +90,13 @@ RSpec.describe CourseProgress, type: :system do
     #   "AuthError: Error: Your system clock must be accurate to within 30 seconds"
     it 'returns the completion date' do
       travel_to Time.zone.parse('2022-06-30') do
-        complete_module(bravo)
+        complete_module(bravo, 30) # advances 30 mins
         expect(course.completed_modules.count).to be 1
 
         ((_mod, completion_time)) = course.completed_modules
 
         expect(completion_time).to be_an ActiveSupport::TimeWithZone
-        expect(completion_time.to_s).to eq '2022-06-30 00:00:00 UTC'
+        expect(completion_time.to_s).to eq '2022-06-30 00:30:00 UTC'
       end
     end
   end

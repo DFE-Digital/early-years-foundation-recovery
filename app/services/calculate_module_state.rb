@@ -1,4 +1,6 @@
-# User's time taken to complete a module - calculated in seconds
+# User's time taken to complete a module
+#
+# Delta of :module_start and :module_complete event times calculated in seconds
 #
 class CalculateModuleState
   attr_reader :user
