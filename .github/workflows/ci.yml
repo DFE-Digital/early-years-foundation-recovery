@@ -64,8 +64,11 @@ jobs:
           node-version: 18.x
           cache: npm
       -
+        name: Report schema version
+        run: bin/rails db:version
+      -
         name: Compile assets
-        run: bundle exec rails assets:precompile
+        run: bin/rails assets:precompile
       -
         name: Prepare test database
         run: bin/rails db:prepare
