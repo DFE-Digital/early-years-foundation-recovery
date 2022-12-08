@@ -1,17 +1,3 @@
 - if Rails.application.debug?
   pre.debug_dump
     = @model.module_item.debug_summary
-
-    br
-    = '---'
-    br
-    = 'Progress bar'
-    - @module_progress_bar.progress_bar_attributes.each_with_index.map do |attributes, index|
-      p= "Node #{index+1}:"
-      ul
-        li= "Heading: #{attributes[:heading]}"
-        li= "Class: #{attributes[:class]}"
-        li= "First: #{attributes[:first]}"
-        li= "Bold: #{attributes[:bold]}"
-        li= "Properties: #{attributes[:content_helper_values].values}"
-    br

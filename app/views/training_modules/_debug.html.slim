@@ -23,10 +23,3 @@
     ul
       - @training_module.items_by_topic.map do |(sub_name, topic_name), items|
         li #{sub_name}.#{topic_name}: #{@module_progress.status(items)}
-
-    hr
-    h4 Milestones
-    ul
-      - @module_progress_bar.milestones.map do |item|
-        li #{item.name} / #{item.type}
-    hr

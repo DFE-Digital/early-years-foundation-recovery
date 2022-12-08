@@ -1,11 +1,15 @@
 .govuk-grid-row
-  ol.progress-bar--container.govuk-list role="progressbar"
-
-    - bar.progress_bar_attributes.map do |attributes|
+  ol.progress-bar--container.govuk-list role='progressbar'
+    - bar.nodes.map do |node|
       li.progress-bar
-        = progress_node(*attributes[:content_helper_values].values)
-        - unless attributes[:first]
-          div class = attributes[:class]
-        p.govuk-body.progress--heading class="#{'govuk-!-font-weight-bold' if attributes[:bold]}"
-          span.govuk-visually-hidden = attributes[:position]
-          = attributes[:heading]
+        = progress_node(*node[:icon].values)
+
+        div class=node[:line_style]
+
+        p.govuk-body.progress--heading class=node[:heading_style]
+          span.govuk-visually-hidden= node[:position]
+          = node[:heading]
+
+- if Rails.application.debug?
+  pre.debug_dump
+    = bar.debug_summary
