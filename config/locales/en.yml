@@ -341,8 +341,9 @@ en:
 
   delete_account:
     body: |
-      You can begin the process of closing your account.
-      You need to check a few things before your account is closed.
+      If you do not want to use your Early years child development training account anymore, you can ask us to close your account.
+      
+      You will no longer be able to access the training modules. Any certificates you have earned will be permanently deleted.
     button: Request to close account
   confirm_delete_account:
     heading: Confirm you want to close your account
@@ -358,11 +359,19 @@ en:
       - your postcode, if you provided it when you registered
       - any notes you have written in your learning log 
 
-      We will keep some anonymous information about your role, your local authority and your usage of the training modules. 
-      This is to help us improve the training. None of this information will be personally identifiable to you.
+      We will keep some anonymous information about:
+      
+      - your role
+      - your local authority
+      - your usage of the training modules
+      - why you closed your account
+      
+      This is to help us improve the training. None of this information will be 
+      personally identifiable to you.
 
       You may still receive emails while we are processing your account closure. 
-      After your personal information is deleted, you will not receive any further emails from Early years child development training. 
+      After your personal information is deleted, you will not receive any further
+      emails from Early years child development training. 
 
     confirm: Close my account
     cancel: Cancel and go back to my account

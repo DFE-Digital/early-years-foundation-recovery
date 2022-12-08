@@ -34,7 +34,7 @@
         - row.value { @user.role }
 
     h2.govuk-heading-m Closing your account 
-    p.govuk-body= t('delete_account.body')
+    = translate_markdown(t('delete_account.body'))
     = govuk_button_link_to t('delete_account.button'), edit_user_account_deletion_path
 
 = render 'debug'

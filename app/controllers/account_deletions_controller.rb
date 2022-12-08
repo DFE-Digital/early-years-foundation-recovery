@@ -7,7 +7,7 @@ class AccountDeletionsController < ApplicationController
 
   def update
     if user.valid_password?(user_password_params[:current_password])
-      redirect_to confirm_delete_account_user_account_deletion_path
+      redirect_to survey_user_account_deletion_path
     else
       user.errors.add(:current_password, :confirmation_invalid, message: 'Enter a valid password')
       render :edit, status: :unprocessable_entity
@@ -19,6 +19,10 @@ class AccountDeletionsController < ApplicationController
     redact_user_info
     sign_out user
     redirect_to static_path('account-deleted')
+  end
+
+  def survey
+
   end
 
   def confirm_delete_account; end
@@ -36,7 +40,7 @@ private
   def redact_user_info
     user.skip_reconfirmation!
     user.update!(first_name: 'Redacted', last_name: 'User', account_deleted_at: Time.zone.now,
-                 email: "redacted_user#{user.id}@example.com", password: 'redacteduser', ofsted_number: nil)
+                 email: "redacted_user#{user.id}@example.com", password: 'redacteduser')
     user.notes.update_all(body: nil)
   end
 end
