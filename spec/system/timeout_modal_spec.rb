@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Timeout modal' do
+RSpec.describe 'Timeout modal', type: :system do
   context 'with an authenticated user' do
     include_context 'with user'
 

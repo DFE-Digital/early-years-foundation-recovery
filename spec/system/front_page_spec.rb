@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Front page' do
+RSpec.describe 'Front page', type: :system do
   context 'with an authenticated user' do
     include_context 'with user'
 

@@ -43,7 +43,7 @@ namespace :eyfs do
       if args.present?
         User.where(email: args.to_a)
       else
-        User.registration_complete
+        User.registered
       end
 
     users.map do |user|
@@ -59,11 +59,10 @@ namespace :eyfs do
 
   desc 'Recalculate module completion time'
   task user_progress: :environment do
-    require 'backfill_module_state'
     number_updated = 0
     total_records = 0
 
-    User.registration_complete.map do |user|
+    User.registered.map do |user|
       original = user.module_time_to_completion
       BackfillModuleState.new(user: user).call
       updated = user.reload.module_time_to_completion
@@ -75,31 +74,5 @@ namespace :eyfs do
     end
 
     puts "Updated #{number_updated} of #{total_records} records"
-  end
-
-  desc 'Create missing module start/complete events'
-  task user_events: :environment do
-    require 'backfill_module_events'
-
-    check = proc {
-      User.all.count do |user|
-        user.events.where(name: 'module_start').count != user.module_time_to_completion.keys.count
-      end
-    }
-
-    puts check.call
-
-    User.all.each do |user|
-      BackfillModuleEvents.new(user: user).call
-    end
-
-    puts check.call
-  end
-
-  desc 'Confirm events align with user state'
-  task confirm_events: :environment do
-    require 'check_module_events'
-    valid = CheckModuleEvents.new.call
-    puts valid ? 'Start/Complete events are present' : 'Oops'
   end
 end

@@ -76,16 +76,24 @@ private
     end
   end
 
-  # @return [Ahoy::Event] Show action
   def track_events
-    if track_confidence_start?
+    if questionnaire.first_confidence? && confidence_untracked?
       track('confidence_check_start')
-    elsif track_assessment_start?
+    end
+
+    if questionnaire.first_assessment? && summative_untracked?
       track('summative_assessment_start')
     end
   end
 
-  # @return [Ahoy::Event] Update action
+  def summative_untracked?
+    untracked?('summative_assessment_start', training_module_id: params[:training_module_id])
+  end
+
+  def confidence_untracked?
+    untracked?('confidence_check_start', training_module_id: params[:training_module_id])
+  end
+
   def track_questionnaire_answer
     key = questionnaire.questions.keys.first
 
@@ -93,29 +101,5 @@ private
           type: questionnaire.assessments_type,
           success: questionnaire.result_for(key),
           answer: questionnaire.answer_for(key))
-  end
-
-  # Check current item type for matching named event ---------------------------
-
-  # @return [Boolean]
-  def track_confidence_start?
-    questionnaire.first_confidence? && confidence_start_untracked?
-  end
-
-  # @return [Boolean]
-  def track_assessment_start?
-    questionnaire.first_assessment? && summative_start_untracked?
-  end
-
-  # Check unique event is not already present ----------------------------------
-
-  # @return [Boolean]
-  def summative_start_untracked?
-    untracked?('summative_assessment_start', training_module_id: params[:training_module_id])
-  end
-
-  # @return [Boolean]
-  def confidence_start_untracked?
-    untracked?('confidence_check_start', training_module_id: params[:training_module_id])
   end
 end

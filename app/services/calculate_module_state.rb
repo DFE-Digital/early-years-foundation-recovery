@@ -1,6 +1,4 @@
-# User's time taken to complete a module
-#
-# Delta of :module_start and :module_complete event times calculated in seconds
+# User's time taken to complete a module - calculated in seconds
 #
 class CalculateModuleState
   attr_reader :user
@@ -13,6 +11,7 @@ class CalculateModuleState
     module_names.each do |training_module|
       current_value = user.module_time_to_completion[training_module]
 
+      # do nothing - because time_to_completion has been calculated already
       next if current_value.to_i.positive?
 
       updated_value = new_time(training_module)
@@ -44,7 +43,7 @@ private
   end
 
   def module_names
-    TrainingModule.published.map(&:name)
+    TrainingModule.all.reject(&:draft?).map(&:name)
   end
 
   def mod_event(training_module, event_name)
