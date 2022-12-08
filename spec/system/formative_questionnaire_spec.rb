@@ -4,7 +4,7 @@ RSpec.describe 'Formative questionnaire' do
   include_context 'with progress'
 
   before do
-    view_pages_upto_formative_question(alpha)
+    view_pages_before_formative_questionnaire(alpha)
   end
 
   include_context 'with user'

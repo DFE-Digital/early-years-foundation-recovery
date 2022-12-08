@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Govspeak' do
+RSpec.describe 'Govspeak', type: :system do
   include_context 'with user'
 
   context 'with module intro' do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Sign in' do
+RSpec.describe 'Sign in', type: :system do
   before do
     visit '/users/sign-in'
   end

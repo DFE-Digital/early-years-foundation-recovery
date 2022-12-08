@@ -24,15 +24,26 @@ RSpec.describe ModuleOverviewDecorator do
     end
 
     context 'when the module has begun' do
+      # NB: user has gone back, so last visited page is not the furthest
       before do
-        start_second_submodule(bravo)
-        view_module_page_event('bravo', 'intro') # visit previous page
+        %w[
+          what-to-expect
+          before-you-start
+          intro
+          1-1
+          1-1-1
+          1-1-2
+          1-1-2-1
+          1-1-2
+        ].map do |page|
+          view_module_page_event('bravo', page)
+        end
       end
 
       it 'goes to the furthest page' do
-        expect(user.events.count).to be 10
+        expect(user.events.count).to be 8
         expect(output[:state]).to be :started
-        expect(output[:page]).to eql '1-2'
+        expect(output[:page]).to eql '1-1-2-1'
       end
     end
 
@@ -49,11 +60,11 @@ RSpec.describe ModuleOverviewDecorator do
 
     context 'when the module has been completed' do
       before do
-        complete_module(bravo)
+        view_whole_module(bravo)
       end
 
       it 'goes to the certificate' do
-        expect(user.events.count).to be 18
+        expect(user.events.count).to be 16
         expect(output[:state]).to be :completed
         expect(output[:page]).to eql '1-2-3'
       end
