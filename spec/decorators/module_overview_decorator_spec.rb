@@ -19,7 +19,7 @@ RSpec.describe ModuleOverviewDecorator do
       it 'goes to the prompt page' do
         expect(user.events.count).to be_zero
         expect(output[:state]).to be :not_started
-        expect(output[:page]).to eql 'what-to-expect'
+        expect(output[:page]).to eq 'what-to-expect'
       end
     end
 
@@ -32,7 +32,7 @@ RSpec.describe ModuleOverviewDecorator do
       it 'goes to the furthest page' do
         expect(user.events.count).to be 10
         expect(output[:state]).to be :started
-        expect(output[:page]).to eql '1-2'
+        expect(output[:page]).to eq '1-2'
       end
     end
 
@@ -43,7 +43,7 @@ RSpec.describe ModuleOverviewDecorator do
 
       it 'retakes the assessment' do
         expect(output[:state]).to be :failed
-        expect(output[:page]).to eql '1-2-2-1a'
+        expect(output[:page]).to eq '1-3-2'
       end
     end
 
@@ -53,9 +53,9 @@ RSpec.describe ModuleOverviewDecorator do
       end
 
       it 'goes to the certificate' do
-        expect(user.events.count).to be 18
+        expect(user.events.count).to be 26
         expect(output[:state]).to be :completed
-        expect(output[:page]).to eql '1-2-3'
+        expect(output[:page]).to eq '1-3-4'
       end
     end
   end

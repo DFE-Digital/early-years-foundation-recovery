@@ -104,27 +104,27 @@ module Reporting
 
   # Number of registered users who have not started learning
   def not_started_learning
-    User.registered.map { |u| u.module_time_to_completion.keys }.count(&:empty?)
+    User.registration_complete.map { |u| u.module_time_to_completion.keys }.count(&:empty?)
   end
 
   # Number of registered users who have started learning
   def started_learning
-    User.registered.map { |u| u.module_time_to_completion.keys }.count(&:present?)
+    User.registration_complete.map { |u| u.module_time_to_completion.keys }.count(&:present?)
   end
 
   # Number of users not started
   def not_started(mod)
-    User.registered.map { |u| u.module_time_to_completion[mod.name] }.count(&:nil?)
+    User.registration_complete.map { |u| u.module_time_to_completion[mod.name] }.count(&:nil?)
   end
 
   # Number of users in progress
   def in_progress(mod)
-    User.registered.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:zero?)
+    User.registration_complete.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:zero?)
   end
 
   # Number of users completed
   def completed(mod)
-    User.registered.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:positive?)
+    User.registration_complete.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:positive?)
   end
 
   # Number of users (total)

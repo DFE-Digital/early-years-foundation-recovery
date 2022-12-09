@@ -34,5 +34,4 @@ RSpec.describe 'Certificate' do
       expect(page).to have_text user.last_name
     end
   end
-
 end

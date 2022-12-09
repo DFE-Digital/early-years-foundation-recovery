@@ -11,13 +11,13 @@ RSpec.describe 'Session timeout warning', type: :request do
       # lag may have lowered the counter when the assertion is made
       it 'reports seconds before timeout' do
         expect(response).to have_http_status(:success)
-        expect(response.body).to eq('180' || '179')
+        expect(response.body).to eq('1500' || '1499') # ~25*60
       end
 
       it 'decreases over time' do
         travel_to 1.minute.from_now
         get check_session_timeout_path
-        expect(response.body).to eq '120'
+        expect(response.body).to eq('1440' || '1439')
       end
     end
 
@@ -42,7 +42,7 @@ RSpec.describe 'Session timeout warning', type: :request do
 
       it 'extends current session' do
         expect(response).to have_http_status(:success)
-        expect(response.body).to eq '180'
+        expect(response.body).to eq '1500' # ~25*60
       end
     end
 

@@ -58,7 +58,7 @@ private
   end
 
   def training_modules
-    TrainingModule.where(draft: nil)
+    TrainingModule.published
   end
 
   def log(message)
