@@ -14,30 +14,41 @@ class BackfillModuleEvents < BackfillModuleState
     user.module_time_to_completion.each do |training_module, ttc|
       if ttc.zero?
         clone_event training_module, 'module_start'
-        log "User [#{user.id}] start event created for #{training_module}"
       elsif ttc.positive?
         clone_event training_module, 'module_start'
         clone_event training_module, 'module_complete'
-        log "User [#{user.id}] start and complete events created for #{training_module}"
       end
     end
   end
 
 private
 
-  # @return [Boolean] guard against duplication
   def clone_event(training_module, event_name)
-    return false if named_event(training_module, event_name)
+    if named_event(training_module, event_name)
+      log "User [#{user.id}] #{event_name} event already present for #{training_module}"
+      return
+    end
 
-    cloned_event =
-      case event_name
-      when 'module_start'    then mod_start(training_module).dup
-      when 'module_complete' then mod_complete(training_module).dup
-      end
+    cloned_event = event_to_clone(training_module, event_name)
+
+    unless cloned_event
+      log "User [#{user.id}] #{event_name} event for #{training_module} cannot be cloned"
+      return
+    end
 
     cloned_event.name = event_name
     cloned_event.properties[:clone] = true
     cloned_event.save!
+
+    log "User [#{user.id}] #{event_name} event created for #{training_module}"
+  end
+
+  # @return [Ahoy::Event, nil]
+  def event_to_clone(training_module, event_name)
+    case event_name
+    when 'module_start'    then mod_start(training_module).dup
+    when 'module_complete' then mod_complete(training_module).dup
+    end
   end
 
   # @return [Ahoy::Event, nil]
