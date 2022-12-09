@@ -44,9 +44,17 @@ module Reporting
 
   def users
     {
-      registered: registered,
-      not_registered: not_registered,
+      # registration scopes
+      registration_complete: registration_complete,
+      registration_incomplete: registration_incomplete,
+      reregistered: reregistered,
+      registered_since_private_beta: registered_since_private_beta,
+      private_beta_only_registration_incomplete: private_beta_only_registration_incomplete,
+      private_beta_only_registration_complete: private_beta_only_registration_complete,
+
+      # all
       total: total,
+
       started_learning: started_learning,
       not_started_learning: not_started_learning,
     }
@@ -84,12 +92,28 @@ module Reporting
   # @see User#registration_complete
   # ----------------------------------------------------------------------------
 
-  def registered
-    User.registered.count
+  def registration_complete
+    User.registration_complete.count
   end
 
-  def not_registered
-    User.not_registered.count
+  def registration_incomplete
+    User.registration_incomplete.count
+  end
+
+  def reregistered
+    User.reregistered.count
+  end
+
+  def registered_since_private_beta
+    User.registered_since_private_beta.count
+  end
+
+  def private_beta_only_registration_complete
+    User.private_beta_only_registration_complete.count
+  end
+
+  def private_beta_only_registration_incomplete
+    User.private_beta_only_registration_incomplete.count
   end
 
   def total
