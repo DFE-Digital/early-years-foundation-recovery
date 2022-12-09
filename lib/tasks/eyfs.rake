@@ -76,32 +76,4 @@ namespace :eyfs do
 
     puts "Updated #{number_updated} of #{total_records} records"
   end
-
-  desc 'Create missing module start/complete events'
-  task user_events: :environment do
-    require 'backfill_module_events'
-
-    pre_count = User.all.count do |user|
-      user.events.where(name: 'module_start').count != user.module_time_to_completion.keys.count
-    end
-
-    puts "#{pre_count} users have a missing 'module_start' event"
-
-    User.all.each do |user|
-      BackfillModuleEvents.new(user: user).call
-    end
-
-    post_count = User.all.count do |user|
-      user.events.where(name: 'module_start').count != user.module_time_to_completion.keys.count
-    end
-
-    puts "#{post_count} users have a missing 'module_start' event"
-  end
-
-  desc 'Confirm events align with user state'
-  task confirm_events: :environment do
-    require 'check_module_events'
-    valid = CheckModuleEvents.new.call
-    puts valid ? 'Start/Complete events are present' : 'Oops'
-  end
 end
