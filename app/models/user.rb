@@ -37,6 +37,10 @@ class User < ApplicationRecord
   # new users only
   scope :public_beta_only_registration_complete, -> { registered_since_private_beta.registration_complete }
 
+  scope :confirmed, -> { where.not(confirmed_at: nil) }
+  scope :unconfirmed, -> { where(confirmed_at: nil) }
+  scope :locked_out, -> { where.not(locked_at: nil) }
+
   validates :first_name, :last_name, :setting_type_id,
             presence: true,
             if: proc { |u| u.registration_complete }

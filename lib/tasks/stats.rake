@@ -6,38 +6,12 @@ require 'csv'
 module Reporting
   # ----------------------------------------------------------------------------
 
-  #
-  # | registered | not_registered | total | started_learning | not_started_learning |
-  # |------------|----------------|-------|------------------|----------------------|
-  # | 1          | 0              | 3     | 0                | 1                    |
-  #
   def export_users
     export('user_status', users.keys, [users.values])
   end
 
-  #
-  # | id | name                                      | title                                                              | not_started | in_progress | completed | engagement | module_start | module_complete | confidence_check | pass_assessment | fail_assessment |
-  # |----|-------------------------------------------|--------------------------------------------------------------------|-------------|-------------|-----------|------------|--------------|-----------------|------------------|-----------------|-----------------|
-  # | 1  | child-development-and-the-eyfs            | Understanding child development and the EYFS                       | 1           | 0           | 0         | 0          | 0            | 0               | 0                | 0               | 0               |
-  # | 2  | brain-development-and-how-children-learn  | Brain development and how children learn                           | 1           | 0           | 0         | 0          | 0            | 0               | 0                | 0               | 0               |
-  # | 3  | personal-social-and-emotional-development | "Supporting children’s personal, social and emotional development" | 1           | 0           | 0         | 0          | 0            | 0               | 0                | 0               | 0               |
-  # | 4  | module-4                                  | Supporting language development in the early years                 | 1           | 0           | 0         | 0          | 0            | 0               | 0                | 0               | 0               |
-  #
   def export_modules
     export('module_status', modules.first.keys, modules.map(&:values))
-  end
-
-  def export(file_name, headers, rows)
-    file_path = Rails.root.join("tmp/#{file_name}.csv")
-
-    file_data = CSV.generate(headers: true) do |csv|
-      csv << headers
-      rows.each { |row| csv << row }
-    end
-
-    File.write(file_path, file_data)
-    File.chmod(0o777, file_path)
-    puts "#{file_path} created"
   end
 
   # ----------------------------------------------------------------------------
@@ -45,23 +19,36 @@ module Reporting
   def users
     {
       # registration scopes
-      registration_complete: registration_complete,
-      registration_incomplete: registration_incomplete,
-      reregistered: reregistered,
-      registered_since_private_beta: registered_since_private_beta,
-      private_beta_only_registration_incomplete: private_beta_only_registration_incomplete,
-      private_beta_only_registration_complete: private_beta_only_registration_complete,
+      registration_complete: User.registration_complete.count,
+      registration_incomplete: User.registration_incomplete.count,
+      reregistered: User.reregistered.count,
+      registered_since_private_beta: User.registered_since_private_beta.count,
+      private_beta_only_registration_incomplete: User.private_beta_only_registration_incomplete.count,
+      private_beta_only_registration_complete: User.private_beta_only_registration_complete.count,
+
+      # registration events
+      registration_events: Ahoy::Event.user_registration.count,
+      private_beta_registration_events: Ahoy::Event.private_beta_registration.count,
+      public_beta_registration_events: Ahoy::Event.public_beta_registration.count,
 
       # all
-      total: total,
+      total: User.all.count,
 
+      # devise
+      locked_out: User.locked_out.count,
+      confirmed: User.confirmed.count,
+      unconfirmed: User.unconfirmed.count,
+
+      # user input
+      user_defined_roles: User.all.collect(&:role_type_other).uniq.count,
+
+      # course engagement
       started_learning: started_learning,
       not_started_learning: not_started_learning,
     }
   end
 
   def modules
-    # TrainingModule.active.map do |mod|
     TrainingModule.published.map do |mod|
       {
         id: mod.id,
@@ -75,49 +62,35 @@ module Reporting
         completed: completed(mod),
         engagement: engagement(mod),
 
-        # Ahoy::Events
         # NB: will not be present for legacy users
-        module_start: module_start_event(mod),
-        module_complete: module_complete_event(mod),
+        module_start: Ahoy::Event.module_start.where_module(mod.name).count,
+        module_complete: Ahoy::Event.module_complete.where_module(mod.name).count,
+
         # confidence
-        confidence_check_start: confidence_check_start_event(mod),
-        confidence_check_complete: confidence_check_complete_event(mod),
+        confidence_check_start: Ahoy::Event.confidence_check_start.where_module(mod.name).count,
+        confidence_check_complete: Ahoy::Event.confidence_check_complete.where_module(mod.name).count,
+
         # summative
-        pass_assessment: pass_summative_assessment_complete_event(mod),
-        fail_assessment: fail_summative_assessment_complete_event(mod),
+        start_assessment: Ahoy::Event.summative_assessment_start.where_module(mod.name).count,
+        pass_assessment: Ahoy::Event.summative_assessment_pass(mod.name).count,
+        fail_assessment: Ahoy::Event.summative_assessment_fail(mod.name).count,
       }
     end
   end
 
-  # @see User#registration_complete
-  # ----------------------------------------------------------------------------
+private
 
-  def registration_complete
-    User.registration_complete.count
-  end
+  def export(file_name, headers, rows)
+    file_path = Rails.root.join("tmp/#{file_name}.csv")
 
-  def registration_incomplete
-    User.registration_incomplete.count
-  end
+    file_data = CSV.generate(headers: true) do |csv|
+      csv << headers
+      rows.each { |row| csv << row }
+    end
 
-  def reregistered
-    User.reregistered.count
-  end
-
-  def registered_since_private_beta
-    User.registered_since_private_beta.count
-  end
-
-  def private_beta_only_registration_complete
-    User.private_beta_only_registration_complete.count
-  end
-
-  def private_beta_only_registration_incomplete
-    User.private_beta_only_registration_incomplete.count
-  end
-
-  def total
-    User.all.count
+    File.write(file_path, file_data)
+    File.chmod(0o777, file_path)
+    puts "#{file_path} created"
   end
 
   #
@@ -155,51 +128,8 @@ module Reporting
   def engagement(mod)
     in_progress(mod) + completed(mod)
   end
-
-  # @see ContentPagesController#track_events
-  # ----------------------------------------------------------------------------
-
-  # Number of 'module_start' events
-  def module_start_event(mod)
-    Ahoy::Event.where(name: 'module_start').where_properties(training_module_id: mod.name).count
-  end
-
-  # Number of 'module_complete' events
-  def module_complete_event(mod)
-    Ahoy::Event.where(name: 'module_complete').where_properties(training_module_id: mod.name).count
-  end
-
-  # Number of 'confidence_check_complete' events
-  def confidence_check_complete_event(mod)
-    Ahoy::Event.where(name: 'confidence_check_complete').where_properties(training_module_id: mod.name).count
-  end
-
-  # @see QuestionnairesController#track_events
-  # ----------------------------------------------------------------------------
-
-  # Number of 'confidence_check_start' events
-  def confidence_check_start_event(mod)
-    Ahoy::Event.where(name: 'confidence_check_start').where_properties(training_module_id: mod.name).count
-  end
-
-  # Number of 'summative_assessment_start' events
-  def summative_assessment_start_event(mod)
-    Ahoy::Event.where(name: 'summative_assessment_start').where_properties(training_module_id: mod.name).count
-  end
-
-  # @see AssessmentResultsController#track_events
-  # ----------------------------------------------------------------------------
-
-  # Number of PASS 'summative_assessment_complete' events
-  def pass_summative_assessment_complete_event(mod)
-    Ahoy::Event.where(name: 'summative_assessment_complete').where_properties(training_module_id: mod.name, success: true).count
-  end
-
-  # Number of FAIL 'summative_assessment_complete' events
-  def fail_summative_assessment_complete_event(mod)
-    Ahoy::Event.where(name: 'summative_assessment_complete').where_properties(training_module_id: mod.name, success: false).count
-  end
 end
+# :nocov:
 
 namespace :eyfs do
   namespace :report do
@@ -218,4 +148,3 @@ namespace :eyfs do
     end
   end
 end
-# :nocov:
