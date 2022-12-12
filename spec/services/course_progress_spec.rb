@@ -90,7 +90,7 @@ RSpec.describe CourseProgress do
     #   "AuthError: Error: Your system clock must be accurate to within 30 seconds"
     it 'returns the completion date' do
       travel_to Time.zone.parse('2022-06-30') do
-        complete_module(bravo, 30) # advances 30 mins
+        complete_module(bravo, 30.minutes)
         expect(course.completed_modules.count).to be 1
 
         ((_mod, completion_time)) = course.completed_modules

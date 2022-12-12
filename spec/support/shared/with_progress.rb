@@ -40,10 +40,10 @@ RSpec.shared_context 'with progress' do
   end
 
   # @param mod [TrainingModule]
-  # @param mins [Integer]
-  def complete_module(mod, mins = nil)
+  # @param duration [ActiveSupport::Duration]
+  def complete_module(mod, duration = nil)
     view_pages_upto(mod, 'certificate')
-    travel_to mins.minutes.from_now unless mins.nil?
+    travel_to duration.from_now unless duration.nil?
     module_complete_event(mod)
   end
 

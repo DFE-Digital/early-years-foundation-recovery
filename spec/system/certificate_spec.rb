@@ -9,7 +9,11 @@ RSpec.describe 'Certificate' do
       visit '/modules/alpha/content-pages/1-3-4'
     end
 
-    it 'shows not completed' do
+    it 'does not show completion date' do
+      expect(page).not_to have_text 'Date completed:'
+    end
+
+    it 'shows as not completed' do
       expect(page).to have_text 'You have not yet completed the module.'
     end
 
@@ -21,12 +25,18 @@ RSpec.describe 'Certificate' do
 
   context 'when module is completed' do
     before do
-      complete_module(alpha)
-      visit '/modules/alpha/content-pages/1-3-4'
+      travel_to Time.zone.parse('2022-06-30') do
+        complete_module(alpha)
+        visit '/modules/alpha/content-pages/1-3-4'
+      end
     end
 
-    it 'shows completed' do
+    it 'shows as completed' do
       expect(page).to have_text 'Congratulations! You have now completed this module.'
+    end
+
+    it 'shows completion date' do
+      expect(page).to have_text 'Date completed: 30 June 2022'
     end
 
     it 'includes their name' do
