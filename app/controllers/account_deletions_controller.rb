@@ -5,9 +5,13 @@ class AccountDeletionsController < ApplicationController
     user
   end
 
+  def edit_reason
+    user
+  end
+
   def update
     if user.valid_password?(user_password_params[:current_password])
-      redirect_to survey_user_account_deletion_path
+      redirect_to edit_reason_user_account_deletion_path
     else
       user.errors.add(:current_password, :confirmation_invalid, message: 'Enter a valid password')
       render :edit, status: :unprocessable_entity
@@ -21,13 +25,22 @@ class AccountDeletionsController < ApplicationController
     redirect_to static_path('account-deleted')
   end
 
-  def survey
-
+  def update_reason
+    if user.update(user_params)
+      redirect_to confirm_delete_account_user_account_deletion_path
+    else
+      user.errors.add(:deleted_reason, :reason_invalid, message: 'You need to select a reason for closing your account')
+      render :update_reason, status: :unprocessable_entity
+    end
   end
 
   def confirm_delete_account; end
 
 private
+
+  def user_params
+    params.require(:user).permit(:deleted_reason, :deleted_reason_other)
+  end
 
   def user_password_params
     params.require(:user).permit(:current_password)

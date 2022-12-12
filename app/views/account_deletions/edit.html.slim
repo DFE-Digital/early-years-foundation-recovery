@@ -5,7 +5,11 @@
     = form_with model: @user, url: user_account_deletion_path do |f|
       = f.govuk_error_summary
       = f.govuk_fieldset legend: { text: 'Enter your password' } do
-        = f.govuk_password_field :current_password, autofocus: true, aria: { required: true }, label: { text: 'For security, enter your password.'}, hint: { text: 'Your password' } do 
+        = f.govuk_password_field :current_password,
+          autofocus: true,
+          aria: { required: true },
+          label: { text: 'For security, enter your password.'},
+          hint: { text: 'Your password' } do 
           p= govuk_details(summary_text: 'Problems signing in') do
             p.govuk-heading-s= 'I have forgotten my password'
             = "If you have forgotten your password you can "
