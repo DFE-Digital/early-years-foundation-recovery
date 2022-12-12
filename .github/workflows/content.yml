@@ -121,3 +121,16 @@ jobs:
         with:
           message: https://ey-recovery-${{ env.PR_NUMBER }}.london.cloudapps.digital
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+      # -
+      #   name: Tag release in Sentry.io
+      #   env:
+      #     SENTRY_CLI_VERSION: '2.2.0'
+      #     SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_TOKEN }}
+      #     SENTRY_ORG: early-years-foundation-reform
+      #     SENTRY_PROJECT: eyf-recovery
+      #     SENTRY_LOG_LEVEL: debug # info
+      #   run: |
+      #     curl -sL https://sentry.io/get-cli/ | bash
+      #     sentry-cli releases new ${{ env.PR_NUMBER }}
+      #     sentry-cli releases set-commits ${{ env.PR_NUMBER }} --auto
+      #     sentry-cli releases finalize ${{ env.PR_NUMBER }}
