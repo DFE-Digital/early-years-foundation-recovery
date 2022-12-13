@@ -16,6 +16,6 @@
     "esbuild": "^0.15.16",
     "govuk-frontend": "^4.4.0",
     "puppeteer": "^19.3.0",
-    "sass": "^1.56.1"
+    "sass": "^1.56.2"
   }
 }
