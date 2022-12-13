@@ -24,6 +24,10 @@ module-5:
   5-1-1-3a:
     type: text_page
   5-1-1-3b:
+    type: text_page
+  5-1-1-3c:
+    type: text_page
+  5-1-1-3d:
     type: formative_questionnaire
   5-1-1-4a:
     type: text_page
