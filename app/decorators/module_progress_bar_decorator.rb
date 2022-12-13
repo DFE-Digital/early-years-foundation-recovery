@@ -12,13 +12,16 @@ class ModuleProgressBarDecorator < DelegateClass(ModuleProgress)
     node_items.each.with_index(1).map do |node_item, position|
       icon = node_icon_params(node_item)
       line_style = "line line--#{icon[:colour]}" unless node_item.eql?(node_items.first)
+      total_sections = node_items.count
+      status = node_icon_params(node_item)[:status]
 
       {
         heading: node_heading(node_item),
         heading_style: node_heading_style(node_item),
         icon: icon,
         line_style: line_style,
-        position: "Step #{position}",
+        position_text: "Section #{position} of #{total_sections}: ",
+        status_text: "is #{status}",
       }
     end
   end

@@ -1,4 +1,4 @@
-.progress-bar--container {
+.progress-bar {
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
@@ -8,7 +8,7 @@
     gap: 10px;
   }
 
-  .progress-bar {
+  .progress-bar--item {
     &:first-child .progress--heading {
       margin-top: 2.5px;
 
@@ -23,6 +23,10 @@
   
       @include govuk-media-query($from: tablet) {
         font-size: 16px;
+      }
+
+      &:focus {
+        @include govuk-focused-text;
       }
     }
 
