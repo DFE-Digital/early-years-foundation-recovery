@@ -9,19 +9,20 @@
 class ModuleProgressBarDecorator < DelegateClass(ModuleProgress)
   # @return [Array<Hash{Symbol => String,Boolean,Hash}>]
   def nodes
-    node_items.each.with_index(1).map do |node_item, position|
+    node_items.each.with_index(1).map do |node_item, _position|
       icon = node_icon_params(node_item)
       line_style = "line line--#{icon[:colour]}" unless node_item.eql?(node_items.first)
-      total_sections = node_items.count
-      status = node_icon_params(node_item)[:status]
+      # total_sections = node_items.count
+      # status = node_icon_params(node_item)[:status]
 
       {
         heading: node_heading(node_item),
         heading_style: node_heading_style(node_item),
         icon: icon,
         line_style: line_style,
-        position_text: "Section #{position} of #{total_sections}: ",
-        status_text: "is #{status}",
+        # commented out as unused for now but may be added back in later
+        # position_text: "Section #{position} of #{total_sections}: ",
+        # status_text: "is #{status}",
       }
     end
   end
@@ -50,10 +51,12 @@ class ModuleProgressBarDecorator < DelegateClass(ModuleProgress)
   # @return [String] sentence describing furthest section visited on progress bar for screen readers
   def furthest_section
     node_items.each.with_index(1) do |item, position|
+      next unless furthest_page
+
       if node_name(furthest_page) == node_name(item)
         title = node_heading(item)
         total_sections = node_items.count
-        return "The furthest section you have visited is #{position} of #{total_sections}: #{title}"
+        return "You have reached section #{position} of #{total_sections}: #{title}"
       end
     end
   end

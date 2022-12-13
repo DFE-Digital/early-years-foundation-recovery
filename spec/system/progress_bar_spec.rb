@@ -11,11 +11,11 @@ RSpec.describe 'Progress bar' do
       end
 
       it 'shows a circle with a green border' do
-        expect(page).to have_css 'li.progress-bar:nth-child(1) .fa-circle.green'
+        expect(page).to have_css 'li.progress-bar--item:nth-child(1) .fa-circle.green'
       end
 
       it 'shows a bold section heading' do
-        expect(page).to have_css 'li.progress-bar:nth-child(1) .progress--heading.govuk-\!-font-weight-bold'
+        expect(page).to have_css 'li.progress-bar--item:nth-child(1) .progress--heading.govuk-\!-font-weight-bold'
       end
     end
 
@@ -26,11 +26,11 @@ RSpec.describe 'Progress bar' do
       end
 
       it 'shows a circle with a green border' do
-        expect(page).to have_css 'li.progress-bar:nth-child(1) .fa-circle.green'
+        expect(page).to have_css 'li.progress-bar--item:nth-child(1) .fa-circle.green'
       end
 
       it 'shows a bold section heading' do
-        expect(page).to have_css 'li.progress-bar:nth-child(1) .progress--heading.govuk-\!-font-weight-bold'
+        expect(page).to have_css 'li.progress-bar--item:nth-child(1) .progress--heading.govuk-\!-font-weight-bold'
       end
     end
 
@@ -41,11 +41,11 @@ RSpec.describe 'Progress bar' do
       end
 
       it 'shows a green circle with a tick' do
-        expect(page).to have_selector 'li.progress-bar:nth-child(1) .fa-circle-check.green'
+        expect(page).to have_selector 'li.progress-bar--item:nth-child(1) .fa-circle-check.green'
       end
 
       it 'shows a bold section heading' do
-        expect(page).to have_css 'li.progress-bar:nth-child(1) .progress--heading.govuk-\!-font-weight-bold'
+        expect(page).to have_css 'li.progress-bar--item:nth-child(1) .progress--heading.govuk-\!-font-weight-bold'
       end
     end
   end
@@ -58,11 +58,11 @@ RSpec.describe 'Progress bar' do
       end
 
       it 'shows a circle with a grey border' do
-        expect(page).to have_css 'li.progress-bar:nth-child(2) .fa-circle.grey'
+        expect(page).to have_css 'li.progress-bar--item:nth-child(2) .fa-circle.grey'
       end
 
       it 'shows a bold section heading' do
-        expect(page).to have_css 'li.progress-bar:nth-child(2) .progress--heading.govuk-\!-font-weight-bold'
+        expect(page).to have_css 'li.progress-bar--item:nth-child(2) .progress--heading.govuk-\!-font-weight-bold'
       end
     end
 
@@ -73,11 +73,11 @@ RSpec.describe 'Progress bar' do
       end
 
       it 'shows a circle with a green border' do
-        expect(page).to have_css 'li.progress-bar:nth-child(2) .fa-circle.green'
+        expect(page).to have_css 'li.progress-bar--item:nth-child(2) .fa-circle.green'
       end
 
       it 'shows a bold section heading' do
-        expect(page).to have_css 'li.progress-bar:nth-child(2) .progress--heading.govuk-\!-font-weight-bold'
+        expect(page).to have_css 'li.progress-bar--item:nth-child(2) .progress--heading.govuk-\!-font-weight-bold'
       end
     end
 
@@ -88,11 +88,11 @@ RSpec.describe 'Progress bar' do
       end
 
       it 'shows a green circle with a tick' do
-        expect(page).to have_css 'li.progress-bar:nth-child(2) .fa-circle-check.green'
+        expect(page).to have_css 'li.progress-bar--item:nth-child(2) .fa-circle-check.green'
       end
 
       it 'shows a bold section heading' do
-        expect(page).to have_css 'li.progress-bar:nth-child(2) .progress--heading.govuk-\!-font-weight-bold'
+        expect(page).to have_css 'li.progress-bar--item:nth-child(2) .progress--heading.govuk-\!-font-weight-bold'
       end
     end
   end

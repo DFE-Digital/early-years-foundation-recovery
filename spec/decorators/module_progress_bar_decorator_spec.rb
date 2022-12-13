@@ -12,13 +12,13 @@ RSpec.describe ModuleProgressBarDecorator do
   include_context 'with progress'
 
   describe '#nodes' do
-    describe ':position' do
-      let(:key) { :position }
+    # describe ':position' do
+    #   let(:key) { :position_text }
 
-      it 'counts the number of steps for screenreaders' do
-        expect(attribute).to eq ['Step 1', 'Step 2', 'Step 3', 'Step 4']
-      end
-    end
+    #   it 'counts the number of steps for screenreaders' do
+    #     expect(attribute).to eq ['Section 1 of 4: ', 'Section 2 of 4: ', 'Section 3 of 4: ', 'Section 4 of 4: ']
+    #   end
+    # end
 
     describe ':heading' do
       let(:key) { :heading }
@@ -192,6 +192,36 @@ RSpec.describe ModuleProgressBarDecorator do
             expect(attribute).to eq [completed, completed, completed, completed]
           end
         end
+      end
+    end
+  end
+
+  describe '#furthest_section' do
+    context 'when on module introduction section' do
+      it 'displays the submodule heading' do
+        view_pages_before(alpha, 'interruption_page')
+        expect(decorator.furthest_section).to eq 'You have reached section 1 of 4: Module introduction'
+      end
+    end
+
+    context 'when on first subodule section' do
+      it 'displays the submodule heading' do
+        start_first_submodule(alpha)
+        expect(decorator.furthest_section).to eq 'You have reached section 2 of 4: The first submodule'
+      end
+    end
+
+    context 'when on second submodule section' do
+      it 'displays the submodule heading' do
+        start_second_submodule(alpha)
+        expect(decorator.furthest_section).to eq 'You have reached section 3 of 4: The second submodule'
+      end
+    end
+
+    context 'when on final submodule' do
+      it 'displays the submodule heading' do
+        view_summary_intro(alpha)
+        expect(decorator.furthest_section).to eq 'You have reached section 4 of 4: Summary and next steps'
       end
     end
   end

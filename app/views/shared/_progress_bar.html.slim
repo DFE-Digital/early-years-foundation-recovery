@@ -6,10 +6,8 @@
 
         div class=node[:line_style]
 
-        p.govuk-body.progress--heading class=node[:heading_style] tabindex=0
-          span.govuk-visually-hidden= node[:position_text]
+        p.govuk-body.progress--heading class=node[:heading_style]
           = node[:heading]
-          span.govuk-visually-hidden= node[:status_text]
 
 - if Rails.application.debug?
   pre.debug_dump
