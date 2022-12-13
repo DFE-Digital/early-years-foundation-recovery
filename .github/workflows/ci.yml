@@ -27,7 +27,6 @@ env:
   TIMEOUT_WARNING_MINUTES: 1
   TIMEOUT_MODAL_VISIBLE: 1
   BOT_TOKEN: bot_token
-  GOOGLE_CLOUD_STORAGE: ${{ secrets.GOOGLE_CLOUD_STORAGE }}
 
 jobs:
   test:
