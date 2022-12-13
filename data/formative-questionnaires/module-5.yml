@@ -18,7 +18,7 @@ module-5:
         correct_answers:
           - 2
 
-  5-1-1-3b:
+  5-1-1-3d:
     questions:
       1_gross_motor_activity:
         multi_select: false
