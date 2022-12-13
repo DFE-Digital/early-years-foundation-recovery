@@ -6,10 +6,21 @@ require 'csv'
 module Reporting
   # ----------------------------------------------------------------------------
 
+  # | registration_complete | registration_incomplete | reregistered | registered_since_private_beta | private_beta_only_registration_incomplete | private_beta_only_registration_complete | registration_events | private_beta_registration_events | public_beta_registration_events | total | locked_out | confirmed | unconfirmed | user_defined_roles | started_learning | not_started_learning |
+  # |-----------------------|-------------------------|--------------|-------------------------------|-------------------------------------------|-----------------------------------------|---------------------|----------------------------------|---------------------------------|-------|------------|-----------|-------------|--------------------|------------------|----------------------|
+  # | 1623                  | 1440                    | 411          | 1337                          | 229                                       | 1086                                    | 3127                | 1504                             | 1623                            | 3063  | 1          | 2930      | 133         | 78                 | 2072             | 991                  |
+  #
   def export_users
     export('user_status', users.keys, [users.values])
   end
 
+  # | id | not_started | started | in_progress | completed | module_start | module_complete | confidence_check_start | confidence_check_complete | start_assessment | pass_assessment | fail_assessment |
+  # |----|-------------|---------|-------------|-----------|--------------|-----------------|------------------------|---------------------------|------------------|-----------------|-----------------|
+  # | 1  | 992         | 2071    | 862         | 1209      | 2071         | 1209            | 776                    | 832                       | 799              | 623             | 171             |
+  # | 2  | 2175        | 888     | 194         | 694       | 888          | 694             | 465                    | 480                       | 477              | 232             | 246             |
+  # | 3  | 2525        | 538     | 82          | 456       | 538          | 456             | 316                    | 332                       | 318              | 108             | 211             |
+  # | 4  | 2773        | 290     | 49          | 241       | 290          | 241             | 240                    | 240                       | 242              | 200             | 41              |
+  #
   def export_modules
     export('module_status', modules.first.keys, modules.map(&:values))
   end
@@ -55,14 +66,13 @@ module Reporting
         name: mod.name,
         title: mod.title,
 
-        # User#module_time_to_completion
-        # NB: will be present for legacy users (backfill rake task)
+        # module_time_to_completion
         not_started: not_started(mod),
+        started: started(mod),
         in_progress: in_progress(mod),
         completed: completed(mod),
-        engagement: engagement(mod),
 
-        # NB: will not be present for legacy users
+        # module
         module_start: Ahoy::Event.module_start.where_module(mod.name).count,
         module_complete: Ahoy::Event.module_complete.where_module(mod.name).count,
 
@@ -99,33 +109,33 @@ private
   # @see User#module_time_to_completion
   # ----------------------------------------------------------------------------
 
-  # Number of registered users who have not started learning
+  # Number of users who have not started learning
   def not_started_learning
-    User.registration_complete.map { |u| u.module_time_to_completion.keys }.count(&:empty?)
+    User.all.map { |u| u.module_time_to_completion.keys }.count(&:empty?)
   end
 
-  # Number of registered users who have started learning
+  # Number of users who have started learning
   def started_learning
-    User.registration_complete.map { |u| u.module_time_to_completion.keys }.count(&:present?)
+    User.all.map { |u| u.module_time_to_completion.keys }.count(&:present?)
   end
 
   # Number of users not started
   def not_started(mod)
-    User.registration_complete.map { |u| u.module_time_to_completion[mod.name] }.count(&:nil?)
+    User.all.map { |u| u.module_time_to_completion[mod.name] }.count(&:nil?)
   end
 
   # Number of users in progress
   def in_progress(mod)
-    User.registration_complete.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:zero?)
+    User.all.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:zero?)
   end
 
   # Number of users completed
   def completed(mod)
-    User.registration_complete.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:positive?)
+    User.all.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:positive?)
   end
 
-  # Number of users (total)
-  def engagement(mod)
+  # Number of users started
+  def started(mod)
     in_progress(mod) + completed(mod)
   end
 end

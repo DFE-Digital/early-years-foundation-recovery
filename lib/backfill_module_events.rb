@@ -38,7 +38,8 @@ private
 
     cloned_event.name = event_name
     cloned_event.properties[:clone] = true
-    cloned_event.save!
+    # ActiveRecord::RecordInvalid: Validation failed: Visit must exist
+    cloned_event.save!(validate: false)
 
     log "User [#{user.id}] #{event_name} event created for #{training_module}"
   end
