@@ -29,9 +29,9 @@ class TrainingModule < YamlBase
 
   # @return [Array<Questionnaire>]
   def questionnaires
-    Questionnaire.find_by!(training_module: name)
-  rescue ActiveHash::RecordNotFound
-    []
+    module_items
+      .select { |item| item.type.include?('questionnaire') }
+      .map { |item| Questionnaire.find_by!(training_module: name, name: item.name) }
   end
 
   # @return [Array<ModuleItem>]
