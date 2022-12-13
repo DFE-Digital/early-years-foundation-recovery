@@ -39,7 +39,7 @@ namespace :db do
     task ahoy_events: :environment do
       sql = 'SELECT id, properties as json_column, (SELECT COUNT(*) FROM jsonb_object_keys(properties)) nbr_keys FROM public.ahoy_events order by nbr_keys desc limit 1'
       event_json = ActiveRecord::Base.connection.execute(sql)
-      events_names_list = ['summative_assessment_start', 'confidence_check_complete', 'confidence_check_start','module_complete', 'user_note_updated', 'user_note_created', 'user_name_change', 'summative_assessment_complete', 'user_registration', 'questionnaire_answer']
+      events_names_list = %w[summative_assessment_start confidence_check_complete confidence_check_start module_complete user_note_updated user_note_created user_name_change summative_assessment_complete user_registration questionnaire_answer]
       events_results = Ahoy::Event.select(" id, visit_id,
                                             user_id,
                                             COALESCE(name, 'null') as name,
