@@ -95,28 +95,27 @@ private
   # @return [Hash{Symbol => String,Symbol}]
   def node_icon_params(node_item)
     if node_completed?(node_item)
-      icon_type = 'circle-check'
-      style = :solid
-      colour = :green
-      status = 'completed'
+      {
+        icon_type: 'circle-check',
+        style: :solid,
+        colour: :green,
+        status: 'completed',
+      }
     elsif node_started?(node_item)
-      icon_type = 'circle'
-      style = :solid
-      colour = :green
-      status = 'started'
+      {
+        icon_type: 'circle',
+        style: :solid,
+        colour: :green,
+        status: 'started',
+      }
     else
-      icon_type = 'circle'
-      style = :regular
-      colour = :grey
-      status = 'not started'
+      {
+        icon_type: 'circle',
+        style: :regular,
+        colour: :grey,
+        status: 'not started',
+      }
     end
-
-    {
-      icon_type: icon_type,
-      style: style,
-      colour: colour,
-      status: status,
-    }
   end
 
   # @return [Boolean]
