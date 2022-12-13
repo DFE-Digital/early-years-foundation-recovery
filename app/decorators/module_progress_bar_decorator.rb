@@ -47,6 +47,17 @@ class ModuleProgressBarDecorator < DelegateClass(ModuleProgress)
     }.join
   end
 
+  # @return [String] sentence describing furthest section visited on progress bar for screen readers
+  def furthest_section
+    node_items.each.with_index(1) do |item, position|
+      if node_name(furthest_page) == node_name(item)
+        title = node_heading(item)
+        total_sections = node_items.count
+        return "The furthest section you have visited is #{position} of #{total_sections}: #{title}"
+      end
+    end
+  end
+
 private
 
   # @return [Array<String>] ModuleItem types that define node divisions

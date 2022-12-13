@@ -1,5 +1,5 @@
 .govuk-grid-row
-  ol.progress-bar--container.govuk-list role='progressbar'
+  ol.progress-bar.govuk-list role='progressbar' tabindex=0 aria-label=bar.furthest_section
     - bar.nodes.map do |node|
       li.progress-bar--item
         = progress_node(*node[:icon].values)

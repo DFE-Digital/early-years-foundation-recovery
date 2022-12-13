@@ -8,6 +8,10 @@
     gap: 10px;
   }
 
+  &:focus {
+    @include govuk-focused-text;
+  }
+
   .progress-bar--item {
     &:first-child .progress--heading {
       margin-top: 2.5px;
