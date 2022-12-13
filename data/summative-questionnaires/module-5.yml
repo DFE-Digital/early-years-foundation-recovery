@@ -6,7 +6,7 @@ module-5:
       1_fundamental_motor_skills:
         multi_select: false
         label: |
-          Which 3 skill sets are fundamental motor skills ?
+          Which 3 skill sets are fundamental motor skills?
         assessment_summary:
         assessment_fail_summary: |
           Fundamental motor skills are divided into three different skill sets: manipulation, locomotor and stability.
