@@ -125,7 +125,6 @@ RSpec.describe ModuleProgressBarDecorator do
       end
     end
 
-    # OPTIMIZE: improve doc format
     describe ':icon' do
       let(:key) { :icon }
 
@@ -133,16 +132,16 @@ RSpec.describe ModuleProgressBarDecorator do
       let(:started) { { icon_type: 'circle', style: :solid, colour: :green, status: 'started' } }
       let(:completed) { { icon_type: 'circle-check', style: :solid, colour: :green, status: 'completed' } }
 
-      context 'when in module introduction section' do
-        context 'and on interruption page and icons page' do
-          it 'first node has green tick and last three have a grey circle' do
+      context 'when on module introduction section' do
+        context 'and on first two pages' do
+          it 'first node has green circle and next nodes have a grey circle' do
             view_pages_before(alpha, 'interruption_page')
             expect(attribute).to eq [started, not_started, not_started, not_started]
           end
         end
 
-        context 'and on module intro page' do
-          it 'first node has green tick and last three have grey circle' do
+        context 'when on last page' do
+          it 'first node has green tick and next nodes have grey circle' do
             start_module(alpha)
             expect(attribute).to eq [completed, not_started, not_started, not_started]
           end
@@ -150,21 +149,21 @@ RSpec.describe ModuleProgressBarDecorator do
       end
 
       context 'when in submodule section' do
-        context 'and on submodule_intro page' do
-          it 'previous node has green tick, next nodes have grey circle' do
+        context 'and on first page' do
+          it 'previous nodes have green tick, this and next nodes have grey circle' do
             start_first_submodule(alpha)
             expect(attribute).to eq [completed, not_started, not_started, not_started]
           end
         end
 
-        context 'and on first content page' do
-          it 'previous node has green tick, this node has green circle and next nodes have grey circle' do
+        context 'and on neither first nor last page' do
+          it 'previous nodes have green tick, this node has green circle and next nodes have grey circle' do
             start_first_topic(alpha)
             expect(attribute).to eq [completed, started, not_started, not_started]
           end
         end
 
-        context 'and on last content page' do
+        context 'and on last page' do
           it 'previous and current nodes have green tick, next nodes have grey circle' do
             view_pages_before_formative_questionnaire(alpha)
             expect(attribute).to eq [completed, completed, not_started, not_started]
@@ -173,21 +172,21 @@ RSpec.describe ModuleProgressBarDecorator do
       end
 
       context 'when in summary section' do
-        context 'and on summary_intro page' do
-          it 'previous nodes have green tick, this node has grey circle' do
+        context 'and on first page' do
+          it 'previous nodes have green tick, last node has grey circle' do
             view_summary_intro(alpha)
             expect(attribute).to eq [completed, completed, completed, not_started]
           end
         end
 
-        context 'and on summative assessment or confidence check' do
-          it 'previous nodes have green tick, this node has green circle' do
+        context 'and on neither first nor last page' do
+          it 'previous nodes have green tick, last node has green circle' do
             start_summative_assessment(alpha)
             expect(attribute).to eq [completed, completed, completed, started]
           end
         end
 
-        context 'and on certificate page' do
+        context 'and on last page' do
           it 'all nodes have green tick' do
             view_certificate_page(alpha)
             expect(attribute).to eq [completed, completed, completed, completed]

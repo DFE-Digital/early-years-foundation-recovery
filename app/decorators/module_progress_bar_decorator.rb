@@ -87,8 +87,6 @@ private
     "#{(super * 100).to_i}%"
   end
 
-  # # OPTIMIZE: refactor to reduce method size (we need 3 objects to match the states, how else can this be written?)
-  #
   # @see ContentHelper#progress_node
   #
   # @param node_item [ModuleItem]
