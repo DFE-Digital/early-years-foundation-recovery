@@ -4,6 +4,9 @@ module Training
 
     has_many :pages, class_name: 'Training::Page'
 
+    attr_reader :name
+    alias_method :slug, :name
+
     def module_course_items
       pages
     end

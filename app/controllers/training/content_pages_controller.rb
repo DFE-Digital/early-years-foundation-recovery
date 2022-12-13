@@ -1,21 +1,29 @@
 class Training::ContentPagesController < Training::BaseController
-  helper_method :module_item, :training_module, :note
+  include Tracking
+  
+  before_action :authenticate_registered_user!, :clear_flash
+  helper_method :model, :training_module, :note, :module_item
+  after_action :track_events, only: :show
 
   def show
-    @model = Training::Page.find_by(module_id: page_params[:module_id], slug: page_params[:id]).load.first
-    @module_item = @model
-
-    render_page
+    render model.component
+  rescue ActionView::MissingTemplate
+    render 'text_page'
   end
 
 private
 
+  def model
+    @model ||= Training::Page.find_by(module_id: page_params[:module_id], slug: page_params[:id]).load.first
+  end
+  alias_method :module_item, :model
+  
   def page_params
     params.permit(:module_id, :id)
   end
 
   def training_module
-    module_item.parent
+    model.parent
   end
 
   def note
@@ -24,11 +32,5 @@ private
 
   def training_module_name
     @training_module_name ||= page_params[:module_id]
-  end
-
-  def render_page
-    render @model.component
-  rescue ActionView::MissingTemplate
-    render 'text_page'
   end
 end

@@ -3,6 +3,10 @@ class Training::Page < ContentfulModel::Base
 
   belongs_to_many :modules, class_name: 'Training::Module'
 
+  def self.where(training_module:, slug: nil)
+    find_by(module_id: training_module, slug: slug)
+  end
+
   def parent
     modules.first
   end
@@ -15,6 +19,7 @@ class Training::Page < ContentfulModel::Base
     component
   end
 
+  # @return [self]
   def model
     self
   end
@@ -31,9 +36,12 @@ class Training::Page < ContentfulModel::Base
     notes
   end
 
+  def name
+    slug
+  end
+
   def previous_item
     current_index = parent.pages.rindex(self)
-    Rails.logger.debug "current index is #{current_index}"
 
     return if current_index.zero?
 
@@ -42,7 +50,6 @@ class Training::Page < ContentfulModel::Base
 
   def next_item
     current_index = parent.pages.rindex(self)
-    Rails.logger.debug "current index is #{current_index}"
     parent.pages[current_index + 1]
   end
 
