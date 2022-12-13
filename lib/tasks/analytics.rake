@@ -26,7 +26,7 @@ namespace :db do
                                 #{AnalyticsBuild.build_json_sql('module_time_to_completion', JSON.parse(user_json.first['json_column']))}
                                 module_time_to_completion").all
 
-      users = AnalyticsBuild.new(bucket_name: ENV['GCS_BUCKET_NAME'],
+      users = AnalyticsBuild.new(bucket_name: ENV.fetch('GCS_BUCKET_NAME', Rails.application.credentials.gcs_bucket_name),
                                  folder_path: 'userdata',
                                  result_set: users_all, file_name: 'users')
 
@@ -39,14 +39,14 @@ namespace :db do
     task ahoy_events: :environment do
       sql = 'SELECT id, properties as json_column, (SELECT COUNT(*) FROM jsonb_object_keys(properties)) nbr_keys FROM public.ahoy_events order by nbr_keys desc limit 1'
       event_json = ActiveRecord::Base.connection.execute(sql)
-
+      events_names_list = ['summative_assessment_start', 'confidence_check_complete', 'confidence_check_start','module_complete', 'user_note_updated', 'user_note_created', 'user_name_change', 'summative_assessment_complete', 'user_registration', 'questionnaire_answer']
       events_results = Ahoy::Event.select(" id, visit_id,
                                             user_id,
                                             COALESCE(name, 'null') as name,
                                             TO_CHAR(time, 'YYYY-MM-DD HH:MM:SS') as event_time,
                                             #{AnalyticsBuild.build_json_sql('properties', JSON.parse(event_json.first['json_column']))}
-                                            properties").all
-      events = AnalyticsBuild.new(bucket_name: ENV['GCS_BUCKET_NAME'],
+                                            properties").where(name: events_names_list)
+      events = AnalyticsBuild.new(bucket_name: ENV.fetch('GCS_BUCKET_NAME', Rails.application.credentials.gcs_bucket_name),
                                   folder_path: 'eventsdata',
                                   result_set: events_results,
                                   file_name: 'ahoy_events')
@@ -59,7 +59,7 @@ namespace :db do
     desc 'user_assessments table'
     task user_assessments: :environment do
       user_assessments = UserAssessment.all
-      assessments = AnalyticsBuild.new(bucket_name: ENV['GCS_BUCKET_NAME'],
+      assessments = AnalyticsBuild.new(bucket_name: ENV.fetch('GCS_BUCKET_NAME', Rails.application.credentials.gcs_bucket_name),
                                        folder_path: 'userassessments',
                                        result_set: user_assessments,
                                        file_name: 'user_assessments')
@@ -72,7 +72,7 @@ namespace :db do
     desc 'user_answers table'
     task user_answers: :environment do
       user_answers = UserAnswer.all
-      answers = AnalyticsBuild.new(bucket_name: ENV['GCS_BUCKET_NAME'],
+      answers = AnalyticsBuild.new(bucket_name: ENV.fetch('GCS_BUCKET_NAME', Rails.application.credentials.gcs_bucket_name),
                                    folder_path: 'useranswers',
                                    result_set: user_answers,
                                    file_name: 'user_answers')
@@ -85,13 +85,13 @@ namespace :db do
     desc 'ahoy_visits table'
     task ahoy_visits: :environment do
       ahoy_visits = Ahoy::Visit.all
-      ahoy_visit = AnalyticsBuild.new(bucket_name: ENV['GCS_BUCKET_NAME'],
+      ahoy_visit = AnalyticsBuild.new(bucket_name: ENV.fetch('GCS_BUCKET_NAME', Rails.application.credentials.gcs_bucket_name),
                                       folder_path: 'visitsdata',
                                       result_set: ahoy_visits,
                                       file_name: 'ahoy_visits')
       ahoy_visit.create! if Rails.env.test?
-      ahoy_visit.delete_files if Rails.env.production?
-      ahoy_visit.upload if Rails.env.production?
+      ahoy_visit.delete_files if Rails.env.production? || Rails.env.development?
+      ahoy_visit.upload if Rails.env.production? || Rails.env.development?
     end
   end
 end
