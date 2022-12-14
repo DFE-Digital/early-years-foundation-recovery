@@ -377,9 +377,12 @@ en:
     cancel: Cancel and go back to my account
   account_deleted:
     heading: Account closed
-    body:
-      - You have successfully closed your account and all associated data.
-      - You have also been logged out.
+    body: |
+      We have received your request to close your account.
+
+      Your data will be deleted within 10 working days.
+
+      You have been logged out.
     survey_url: '#'
 
   assessment_results:
