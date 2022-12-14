@@ -26,10 +26,11 @@ Arask.setup do |arask|
   # arask.on_exception do |exception, arask_job|
   #  MyExceptionHandler.new(exception)
   # end
-
-  arask.create! task: 'db:analytics:users', interval: 1.minute
-  arask.create! task: 'db:analytics:ahoy_events', interval: 10.hours
-  arask.create! task: 'db:analytics:user_assessments', interval: 10.hours
-  arask.create! task: 'db:analytics:user_answers', interval: 10.hours
-  arask.create! task: 'db:analytics:ahoy_visits', interval: 10.hours
+  # rubocop:disable Rails/SaveBang
+  arask.create task: 'db:analytics:users', interval: 1.minute
+  arask.create task: 'db:analytics:ahoy_events', interval: 10.hours
+  arask.create task: 'db:analytics:user_assessments', interval: 10.hours
+  arask.create task: 'db:analytics:user_answers', interval: 10.hours
+  arask.create task: 'db:analytics:ahoy_visits', interval: 10.hours
+  # rubocop:enable Rails/SaveBang
 end
