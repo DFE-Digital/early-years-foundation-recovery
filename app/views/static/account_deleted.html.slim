@@ -2,9 +2,6 @@
   .govuk-grid-column-two-thirds-from-desktop
     h1 = t("account_deleted.heading")
 
-    - t("account_deleted.body").each do |paragraph|
-      p.govuk_body= paragraph
+    = translate_markdown(t("account_closed.body"))
 
-    p= govuk_link_to 'Exit survey', t("account_deleted.survey_url")
-
-    p= govuk_link_to 'Go to training home', root_path
+    p= govuk_link_to 'Go to Early years child development training home', root_path
