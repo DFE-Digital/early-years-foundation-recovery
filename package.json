@@ -12,10 +12,10 @@
     "@hotwired/stimulus": "^3.1.1",
     "@hotwired/turbo-rails": "^7.2.4",
     "accessible-autocomplete": "^2.0.4",
-    "axios": "^1.2.0",
+    "axios": "^1.2.1",
     "esbuild": "^0.15.16",
     "govuk-frontend": "^4.4.0",
     "puppeteer": "^19.3.0",
-    "sass": "^1.56.1"
+    "sass": "^1.56.2"
   }
 }
