@@ -10,7 +10,7 @@
         = f.govuk_radio_button :deleted_reason, 'too many emails', label: { text: 'You sent me too many emails' }
         = f.govuk_radio_button :deleted_reason, 'other', label: { text: 'Another reason' } do
           = f.govuk_text_field :deleted_reason_other,
-            label: { text: 'Tell us why you want to close your account' }
+            label: { text: 'Tell us why you want to close your account.' }
         = f.govuk_radio_divider
         = f.govuk_radio_button :deleted_reason, 'prefer not to say', label: { text: 'Prefer not to say' }
       = f.govuk_submit 'Continue'

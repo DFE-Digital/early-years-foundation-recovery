@@ -128,7 +128,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_08_104510) do
     t.string "role_type_other"
     t.string "setting_type_id"
     t.boolean "registration_complete", default: false
-    t.datetime "account_deleted_at"
+    t.datetime "account_deleted_at", precision: nil
     t.string "deleted_reason"
     t.string "deleted_reason_other"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

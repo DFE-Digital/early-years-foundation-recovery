@@ -1,7 +1,9 @@
 class AddAccountDeletedFieldsToUsers < ActiveRecord::Migration[7.0]
   def change
-    add_column :users, :account_deleted_at, :datetime
-    add_column :users, :deleted_reason, :string
-    add_column :users, :deleted_reason_other, :string
+    change_table :users, bulk: true do |t|
+      t.datetime :account_deleted_at
+      t.string :deleted_reason
+      t.string :deleted_reason_other
+    end
   end
 end
