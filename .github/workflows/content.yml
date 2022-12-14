@@ -95,7 +95,6 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          GOOGLE_CLOUD_STORAGE: ${{ secrets.GCS_CREDENTIALS }}
           TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
           TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
           TF_VAR_paas_app_docker_image: ${{ env.REGISTRY }}:${{ github.event.pull_request.head.sha }}
