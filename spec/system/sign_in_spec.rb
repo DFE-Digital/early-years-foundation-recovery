@@ -35,7 +35,7 @@ RSpec.describe 'Sign in', type: :system do
 
       it 'displays a warning' do
         expect(page).to have_text('Warning')
-          .and have_text('Enter a valid email address and password. Your account will be locked after 5 unsuccessful attempts. We will email you instructions to unlock your account.')  
+          .and have_text('Enter a valid email address and password. Your account will be locked after 5 unsuccessful attempts. We will email you instructions to unlock your account.')
       end
     end
   end
