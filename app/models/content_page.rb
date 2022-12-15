@@ -32,7 +32,7 @@ class ContentPage
   # @return [Boolean]
   def page_numbers?
     case module_item.type
-    when /intro|thankyou/ then false
+    when /intro|recap|thankyou/ then false
     else
       true
     end
