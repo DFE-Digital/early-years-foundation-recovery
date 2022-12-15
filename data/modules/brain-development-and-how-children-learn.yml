@@ -155,7 +155,7 @@ brain-development-and-how-children-learn:
   2-3:
     type: summary_intro
   2-3-1:
-    type: sub_module_intro
+    type: recap_page
 
   # ----------------------------------------------------------------------------
   # End of module test
