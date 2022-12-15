@@ -1,6 +1,5 @@
 class AssessmentResultsController < ApplicationController
-  before_action :authenticate_registered_user!
-  before_action :clear_flash
+  before_action :authenticate_registered_user!, :clear_flash, :show_progress_bar
   after_action :track_events, only: :show
 
   def new
@@ -14,6 +13,10 @@ class AssessmentResultsController < ApplicationController
   end
 
 private
+
+  def show_progress_bar
+    @module_progress_bar = ModuleProgressBarDecorator.new(helpers.module_progress(training_module))
+  end
 
   def training_module
     @training_module ||= TrainingModule.find_by(name: params[:training_module_id])

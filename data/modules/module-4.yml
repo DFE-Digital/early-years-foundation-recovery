@@ -164,7 +164,7 @@ module-4:
   4-4:
     type: summary_intro
   4-4-0: # NB: order
-    type: sub_module_intro
+    type: recap_page
 
   # ----------------------------------------------------------------------------
   # summative assessment

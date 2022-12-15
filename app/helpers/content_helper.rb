@@ -34,7 +34,33 @@ module ContentHelper
   def icon(icon, size: 2, **)
     content_tag :i, nil,
                 class: "fa-solid fa-#{size}x fa-#{icon} icon",
-                'aria-describedby': "#{icon} icon"
+                aria: { label: "#{icon} icon" }
+  end
+
+  # @param icon [String, Symbol] Fontawesome icon name
+  # @param style [String, Symbol] Icon weight
+  # @param colour [String, Symbol] Icon colour
+  # @param label [String, Symbol] Aria label
+  # @return [String]
+  def progress_node(icon, style, colour, label)
+    content_tag :span, nil, class: 'fa-stack fa-1x', aria: { label: label } do
+      # white background
+      concat(content_tag(:i, nil, class: 'fa-solid fa-stack-2x fa-circle')) unless label == 'started'
+
+      concat(content_tag(:i, nil, class: "fa-#{style} fa-stack-2x fa-#{icon} #{colour}"))
+
+      # white circle overlay to adjust previous circle's thickness
+      concat(content_tag(:i, nil, class: 'small-circle fa-solid fa-stack-2x fa-circle')) if label == 'started'
+    end
+  end
+
+  # @param percentage [Integer] of line in left colour
+  # @param left_colour [String]
+  # @param right_colour [String]
+  # @return [String]
+  def progress_line(percentage, left_colour, right_colour)
+    content_tag :div, nil, class: 'line line--slice',
+                           style: "border-image-source: linear-gradient(to right, #{left_colour}, #{left_colour} #{percentage}%, #{right_colour} #{percentage}%, #{right_colour});"
   end
 
   # @return [String]

@@ -2,7 +2,7 @@
 child-development-and-the-eyfs:
   duration: 1.5
   title: Understanding child development and the EYFS
-  thumbnail: 1-thumb-1355279156.jpg
+  thumbnail: 1-thumb-780x519-1355279156.jpg
   short_description : |
 
   description: |
@@ -20,7 +20,7 @@ brain-development-and-how-children-learn:
   depends_on: child-development-and-the-eyfs
   duration: 2
   title: Brain development and how children learn
-  thumbnail: 2-thumb-1203132106.jpg
+  thumbnail: 2-thumb-780x519-1203132106.jpg
   short_description: |
     This module explores how a child's brain develops and how to consider factors affecting brain development when planning for your setting. You can start it once you have completed module 1.
   description: |
@@ -38,7 +38,7 @@ personal-social-and-emotional-development:
   depends_on: brain-development-and-how-children-learn
   duration: 2
   title: Supporting children’s personal, social and emotional development
-  thumbnail: 3-thumb-1159321535.jpg
+  thumbnail: 3-thumb-780x519-1159321535.jpg
   short_description: |
     This module explores how you can best support children to develop, learn and rehearse their key personal, social and emotional skills. You can start it once you have completed modules 1 and 2.
   description: |
@@ -58,7 +58,7 @@ module-4:
   depends_on: personal-social-and-emotional-development
   duration: 2
   title: Supporting language development in the early years
-  thumbnail: 4-thumb-157720194.jpg
+  thumbnail: 4-thumb-780x519-157720194.jpg
   short_description: |
     This module explores how children develop their speech, language and communication skills. It also explains your role in helping children to learn, practise and use a wide range of language with confidence. You can start it once you have completed modules 1, 2 and 3.
   description: |

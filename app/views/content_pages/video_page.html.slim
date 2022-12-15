@@ -1,5 +1,7 @@
 = render 'debug'
 
+= render 'shared/progress_bar', bar: @module_progress_bar
+
 - content_for :content_page do
   = page_number(**@model.pagination)
 

@@ -12,7 +12,8 @@ $govuk-new-link-styles: true;
 @import "./icons";
 @import "./modal";
 @import "./autocomplete";
-@import "./header";
+@import "./progress-bar.scss";
+@import "./header.scss";
 
 * {
   font-family: 

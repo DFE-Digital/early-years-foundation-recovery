@@ -1,4 +1,6 @@
 .noprint
+  = render 'shared/progress_bar', bar: @module_progress_bar
+
   h1 Get your certificate 
 
   - if @module_progress.completed?
