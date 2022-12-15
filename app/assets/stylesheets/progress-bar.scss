@@ -1,0 +1,96 @@
+.progress-bar {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 5px;
+  
+  @include govuk-media-query($from: tablet) {
+    gap: 10px;
+  }
+
+  &:focus {
+    @include govuk-focused-text;
+  }
+
+  .progress-bar--item {
+    &:first-child .progress--heading {
+      margin-top: 2.5px;
+
+      @include govuk-media-query($from: tablet) {
+        margin-top: 4px;
+      }
+    }
+
+    .progress--heading {
+      text-align: center;
+      font-size: 12px;
+  
+      @include govuk-media-query($from: tablet) {
+        font-size: 16px;
+      }
+
+      &:focus {
+        @include govuk-focused-text;
+      }
+    }
+
+    span.fa-stack {
+      z-index: 1;
+      width: 100%;
+    }
+    
+    .svg-inline--fa {
+      background-color: transparent;
+      padding: 0 !important;
+      height: 26px;
+
+      &.small-circle {
+        height: 15px;
+      }
+      
+      @include govuk-media-query($from: tablet) {
+        height: 36px;
+
+        &.small-circle {
+          height: 20px;
+        }
+      }
+
+      &.grey {
+        color: govuk-colour("mid-grey");
+      }
+
+      &.green {
+        color: govuk-colour("green");
+      }
+    }
+  
+    .line {
+      width: 100%;
+      height: 0px;
+      position: relative;
+      bottom: 17.25px;
+      right: 54%;
+      z-index: 0;
+      border-width: 2.5px;
+      border-top-style: solid;
+    
+      @include govuk-media-query($from: tablet) {
+        bottom: 21px;
+        border-width: 4px;
+      }
+  
+      &--green {
+        border-color: govuk-colour("green");
+      }
+    
+      &--grey {
+        border-color: govuk-colour("mid-grey");
+      }
+    
+      &--slice {
+        border-image-slice: 1;
+      }
+    }
+  }
+}
