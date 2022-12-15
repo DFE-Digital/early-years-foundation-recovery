@@ -1,0 +1,22 @@
+= render 'question_debug'
+
+= page_number(**question.pagination)
+
+.govuk-grid-row 
+  .govuk-grid-column-two-thirds-from-desktop
+    = form_with model: question, url: training_module_questionnaire_path(question.module_id, question), method: :patch do |f|
+      = render partial: question.to_partial_path, locals: { f: f }, object: question, as: :question
+      - if question.formative? && question.answered?
+        = render 'assessment_banner', question: question
+
+      hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
+
+      .govuk-grid-row
+        .govuk-grid-column-one-half
+          = link_to_previous_module_item question.module_item
+
+        .govuk-grid-column-one-half class='govuk-!-text-align-right'
+          - if question.submitted? && !question.confidence?
+            = link_to_next_module_item question.module_item
+          - else
+            = f.govuk_submit question.next_button_text

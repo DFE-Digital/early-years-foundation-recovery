@@ -12,7 +12,7 @@ class Training::NotesController < ApplicationController
     @note = Note.new(note_params.except(:module_item_id))
 
     if @note.save
-      # track('user_note_created', **tracking_properties)
+      track('user_note_created', **tracking_properties)
       redirect_to module_content_page_path(module_item.training_module, module_item.next_item.slug)
     else # not validations, so branch is not expected to be used
       render "content_pages/#{module_item.component}", local: { note: @note }
@@ -24,7 +24,7 @@ class Training::NotesController < ApplicationController
     @note = current_user.notes.where(training_module: note_params[:training_module], name: note_params[:name]).first
 
     if @note.update(note_params.except(:module_item_id))
-      # track('user_note_updated', **tracking_properties)
+      track('user_note_updated', **tracking_properties)
       redirect_to training_module_content_page_path(module_item.training_module, module_item.next_item.slug)
     else # no validations, so this branch is not expected to be used
       render "content_pages/#{module_item.type}", local: { note: @note }

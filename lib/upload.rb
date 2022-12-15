@@ -66,7 +66,7 @@ class Upload
           id: questionnaire_name,
           slug: q.name,
           module_id: q.training_module,
-          component: 'formative',
+          component: 'formative_assessment',
           body: question[:body],
           multi_select: question[:multi_select],
           assessment_summary: question[:assessment_summary],
@@ -84,7 +84,7 @@ class Upload
           id: questionnaire_name,
           slug: q.name,
           module_id: q.training_module,
-          component: 'summative',
+          component: 'summative_assessment',
           body: question[:label],
           multi_select: question[:multi_select],
           assessment_summary: question[:assessment_summary],
@@ -100,6 +100,7 @@ class Upload
           id: questionnaire_name,
           slug: q.name,
           module_id: q.training_module,
+          component: 'confidence_check'
         )
       end
 

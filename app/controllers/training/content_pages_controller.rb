@@ -1,14 +1,20 @@
 class Training::ContentPagesController < Training::BaseController
-  include Tracking
-  
   before_action :authenticate_registered_user!, :clear_flash
   helper_method :model, :training_module, :note, :module_item
   after_action :track_events, only: :show
 
   def show
-    render model.component
-  rescue ActionView::MissingTemplate
-    render 'text_page'
+    if model.component == 'formative_questionnaire'
+      redirect_to training_module_questionnaire_path(training_module_name, module_item.slug)
+    elsif model.assessment_results?
+      redirect_to training_module_assessment_result_path(training_module_name, module_item)
+    else
+      begin
+        render model.component
+      rescue ActionView::MissingTemplate
+        render 'text_page'
+      end
+    end
   end
 
 private

@@ -47,8 +47,8 @@ Rails.application.routes.draw do
       end
       resources :modules, only: %i[show] do
         resources :content_pages, only: %i[show], path: 'content-pages'
-        resources :questionnaires, only: %i[show update]
-        resources :assessment_results, only: %i[show new], path: 'assessment-result'
+        resources :questions, only: %i[show update], path: 'questionnaires'
+        #resources :assessment_results, only: %i[show new], path: 'assessment-result'
       end
     end
   end

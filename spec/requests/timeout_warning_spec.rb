@@ -43,7 +43,7 @@ RSpec.describe 'Session timeout warning', type: :request do
       # lag may have lowered the counter when the assertion is made
       it 'extends current session' do
         expect(response).to have_http_status(:success)
-        expect(response.body).to eq('180' || '179')
+        expect(response.body).to eq('180')
       end
     end
 

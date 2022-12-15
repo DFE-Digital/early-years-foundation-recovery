@@ -86,9 +86,9 @@ RSpec.describe Training::Page, type: :model do
   # position ---------------------------------
 
   describe '#position_within_topic' do
-    let!(:topic_item_one) { Training::Page.where(training_module: module_id, slug: '1-1-1').first }
-    let!(:topic_item_two) { Training::Page.where(training_module: module_id, slug: '1-1-1-1').first }
-    let!(:topic_item_three) { Training::Page.where(training_module: module_id, slug: '1-1-1-2').first }
+    let!(:topic_item_one) { described_class.where(training_module: module_id, slug: '1-1-1').first }
+    let!(:topic_item_two) { described_class.where(training_module: module_id, slug: '1-1-1-1').first }
+    let!(:topic_item_three) { described_class.where(training_module: module_id, slug: '1-1-1-2').first }
 
     it 'returns the position of the item within the topic' do
       expect(topic_item_one.position_within_topic).to eq(0)
@@ -109,4 +109,47 @@ RSpec.describe Training::Page, type: :model do
       expect(last_item.position_within_module).to eq(Training::Module.find_by(slug: module_id).first.pages.count - 1)
     end
   end
+
+  # common page ------------------------------
+
+  subject(:common_page) do
+    described_class.find_by(module_id: module_id, component: :confidence_intro, slug: '1-3-2').first
+  end
+
+  it '#heading' do
+    expect(common_page.heading).to eq 'Reflect on your learning'
+  end
+
+  it '#body' do
+    expect(common_page.body).to include 'To help DfE to measure our impact'
+  end
+  
+  # content page -----------------------------
+
+  subject(:content_page) do
+    described_class.find_by(module_id: module_id, component: :text_page, slug: '1-1-1').first
+  end
+
+  it '#heading' do
+    expect(content_page.heading).to eq 'The importance of understanding child development'
+  end
+
+  it '#body' do
+    expect(content_page.body).to include 'Understanding how children develop will help you to plan and implement an early years curriculum that promotes inclusion and progress for all.'
+  end
+
+  it '#notes?' do
+    expect(content_page).not_to be_notes
+  end
+
+  it '#page_numbers?' do
+    expect(content_page).to be_page_numbers
+  end
+
+  # pagination -------------------------------
+
+  it '#pagination' do
+    expect(content_page.pagination).to eq({current: 1, total: 29})
+  end
+
 end

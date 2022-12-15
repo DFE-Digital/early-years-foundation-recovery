@@ -4,7 +4,7 @@ class Training::ModulesController < Training::BaseController
   end
 
   def show
-    # track('module_overview_page')
+    track('module_overview_page')
     @training_module = Training::Module.find_by(slug: params[:id]).load.first
 
     @module_progress = ModuleOverviewDecorator.new(helpers.module_progress(@training_module))

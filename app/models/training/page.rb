@@ -3,8 +3,15 @@ class Training::Page < ContentfulModel::Base
 
   belongs_to_many :modules, class_name: 'Training::Module'
 
+  attr_reader :type
+  alias_method :component, :type
+
   def self.where(training_module:, slug: nil)
     find_by(module_id: training_module, slug: slug)
+  end
+
+  def self.where_type(training_module, component)
+    find_by(module_id: training_module, component: component)
   end
 
   def parent
@@ -13,10 +20,6 @@ class Training::Page < ContentfulModel::Base
 
   def training_module
     parent.slug
-  end
-
-  def type
-    component
   end
 
   # @return [self]
@@ -28,12 +31,12 @@ class Training::Page < ContentfulModel::Base
     self
   end
 
-  def page_numbers?
-    false
-  end
-
   def notes?
     notes
+  end
+
+  def is_question?
+    component in %w[ formative summative confidence ]
   end
 
   def name
@@ -192,6 +195,20 @@ class Training::Page < ContentfulModel::Base
   def page_name
     matches = slug.match(ModuleItem::PAGE_PATTERN)
     matches ? matches[:page] : 0
+  end
+
+  # @return [Boolean]
+  def page_numbers?
+    case component
+    when /intro|thankyou/ then false
+    else
+      true
+    end
+  end
+
+  # @return [Hash{Symbol => nil, Integer}]
+  def pagination
+    { current: position_within_submodule, total: number_within_submodule }
   end
 
   # @return [String]
