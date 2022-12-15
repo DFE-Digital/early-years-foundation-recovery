@@ -25,9 +25,10 @@ class ContentPage
   end
 
   # @return [Boolean]
-  def notes?
+  def notes
     translate(:notes).present?
   end
+  alias_method :notes?, :notes
 
   # @return [Boolean]
   def page_numbers?

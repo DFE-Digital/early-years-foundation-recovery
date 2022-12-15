@@ -1,19 +1,19 @@
-module LinkHelper
+module ContentfulLinkHelper
   # @return [String] next content page (ends on certificate)
   # @param item [ModuleItem]
-  def link_to_next_module_item(item)
+  def ct_link_to_next_module_item(item)
     text = item.next_button_text
-    path = training_module_content_page_path(item.training_module, item.next_item)
+    path = module_content_page_path(item.training_module, item.next_item.slug)
 
     govuk_button_link_to text, path, aria: { label: 'Go to the next page' }
   end
 
   # @return [String] previous content page or module overview
   # @param item [ModuleItem]
-  def link_to_previous_module_item(item)
+  def ct_link_to_previous_module_item(item)
     path =
       if item.previous_item
-        training_module_content_page_path(item.training_module, item.previous_item)
+        module_content_page_path(item.training_module, item.previous_item.slug)
       else
         training_module_path(item.training_module)
       end
@@ -28,19 +28,7 @@ module LinkHelper
   #
   # @return [String] not_started / started / failed / completed
   # def link_to_action(state, mod, item)
-  def link_to_action(state, item)
-    text = t(state, scope: 'module_call_to_action')
-    path =
-      if state.eql?(:failed)
-        new_training_module_assessment_result_path(item.training_module)
-      else
-        training_module_content_page_path(item.training_module, item)
-      end
-
-    govuk_button_link_to text, path
-  end
-
-  def contentful_link_to_action(state, item)
+  def ct_link_to_action(state, item)
     text = t(state, scope: 'module_call_to_action')
     path =
       if state.eql?(:failed)
@@ -59,7 +47,7 @@ module LinkHelper
   #
   # @param mod [TrainingModule]
   # @return [String, nil]
-  def link_to_retake_or_results(mod)
+  def ct_link_to_retake_or_results(mod)
     return unless assessment_progress(mod).attempted?
 
     if assessment_progress(mod).failed?

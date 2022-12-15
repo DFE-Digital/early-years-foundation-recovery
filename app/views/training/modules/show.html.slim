@@ -1,0 +1,13 @@
+- content_for(:head) do 
+  = tag.meta name: 'turbo-visit-control', content: 'reload'
+
+= govuk_back_link href: my_modules_path
+
+.light-grey-box
+  .govuk-grid-row
+    .govuk-grid-column-full
+      h1.govuk-heading-l= @training_module.title
+      p.govuk-caption-m= @training_module.description
+
+      - @module_progress.call_to_action do |state, page|
+        = contentful_link_to_action(state, page)

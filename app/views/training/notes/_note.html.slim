@@ -1,0 +1,16 @@
+div id="#{dom_id note}"
+  h3.govuk-heading-m= note.logged_at
+
+  p
+    <strong>Page:</strong>
+    =< govuk_link_to(note.title, training_module_content_page_path(note.training_module, note.name))
+
+  .log-entry
+    - if note.body.present?
+      h4.govuk-heading-m You wrote:
+
+      p.govuk_body
+        = simple_format(note.body)
+    - else 
+      p.govuk_body aria-label="You have not made any notes for #{note.title}"
+        | You have not made any notes on this page yet.
