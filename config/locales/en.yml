@@ -383,7 +383,6 @@ en:
       Your data will be deleted within 10 working days.
 
       You have been logged out.
-    survey_url: '#'
 
   assessment_results:
     heading: Assessment results

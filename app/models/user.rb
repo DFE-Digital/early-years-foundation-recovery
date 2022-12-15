@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :timeoutable, :trackable, :recoverable and :omniauthable
+  attr_accessor :context
+
   devise :database_authenticatable, :registerable, :recoverable,
          :validatable, :rememberable, :confirmable, :lockable, :timeoutable
 
@@ -20,6 +22,8 @@ class User < ApplicationRecord
   validates :setting_type_id,
             inclusion: { in: SettingType.valid_setting_types },
             if: proc { |u| u.registration_complete }
+  validates :deleted_reason, presence: true, if: -> { context == :account_deletion }
+  validates :deleted_reason_other, presence: true, if: proc { |u| u.deleted_reason == 'other' }
 
   validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
 

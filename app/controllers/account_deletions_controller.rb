@@ -26,11 +26,18 @@ class AccountDeletionsController < ApplicationController
   end
 
   def update_reason
+    user.context = :account_deletion
+
     if user.update(user_params)
       redirect_to confirm_delete_account_user_account_deletion_path
     else
-      user.errors.add(:deleted_reason, :reason_invalid, message: 'You need to select a reason for closing your account')
-      render :update_reason, status: :unprocessable_entity
+      user.errors.clear
+      if user_params[:deleted_reason] == 'other'
+        user.errors.add :deleted_reason, :blank, message: 'Enter a reason why you want to close your account'
+      else
+        user.errors.add :deleted_reason, :blank, message: 'Select a reason for closing your account'
+      end
+      render :edit_reason, status: :unprocessable_entity
     end
   end
 

@@ -1,6 +1,7 @@
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
     = form_with model: @user, url: update_reason_user_account_deletion_path  do |f|
+      = f.govuk_error_summary
       = f.govuk_radio_buttons_fieldset(:deleted_reason,
         legend: { text: 'Tell us why you want to close your account' },
         hint: { text: 'Knowing why you want to close your account will help us improve the training for everyone.' }) do
@@ -9,8 +10,7 @@
         = f.govuk_radio_button :deleted_reason, 'no longer in early years', label: { text: 'I no longer work in early years' }
         = f.govuk_radio_button :deleted_reason, 'too many emails', label: { text: 'You sent me too many emails' }
         = f.govuk_radio_button :deleted_reason, 'other', label: { text: 'Another reason' } do
-          = f.govuk_text_field :deleted_reason_other,
-            label: { text: 'Tell us why you want to close your account.' }
+          = f.govuk_text_field :deleted_reason_other, label: { text: 'Tell us why you want to close your account.' }
         = f.govuk_radio_divider
         = f.govuk_radio_button :deleted_reason, 'prefer not to say', label: { text: 'Prefer not to say' }
       = f.govuk_submit 'Continue'

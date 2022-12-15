@@ -47,7 +47,7 @@ RSpec.describe 'Account deletion' do
 
       it 'cannot progress to confirmation page' do
         expect(page).to have_content('There is a problem')
-          .and have_content('You need to select a reason for closing your account')
+          .and have_content('Select a reason for closing your account')
       end
     end
 
@@ -84,7 +84,6 @@ RSpec.describe 'Account deletion' do
 
           it 'cannot progress to confirmation page' do
             expect(page).to have_content('There is a problem')
-              .and have_content('You need to select a reason for closing your account')
               .and have_content('Enter a reason why you want to close your account')
           end
         end
