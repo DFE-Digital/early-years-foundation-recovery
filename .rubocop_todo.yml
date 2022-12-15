@@ -28,3 +28,4 @@ Rails/SaveBang:
   Exclude:
     - 'app/controllers/registrations_controller.rb'
     - 'config/sitemap.rb'
+    - 'config/initializers/arask.rb'

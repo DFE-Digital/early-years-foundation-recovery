@@ -19,6 +19,7 @@ production:
   GOVUK_WEBSITE_ROOT: child-development-training
   TRACKING_ID: GTM-NFZ88TP  # Live data
   HOTJAR_SITE_ID: 3169682
+  GCS_BUCKET_NAME: eyfs-data-dashboard-live
 
 # ey-recovery-staging
 staging:
@@ -26,17 +27,18 @@ staging:
   DOMAIN: ey-recovery-staging.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-staging
   TRACKING_ID: GTM-W6W95FD  # Test data
+  GCS_BUCKET_NAME: staging_approval
 
 # ey-recovery-dev
 development:
   <<: *defaults
   DOMAIN: ey-recovery-dev.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-dev
-
+  GCS_BUCKET_NAME: eyfs-data-dashboard-development
 # ey-recovery-content
 content:
   <<: *defaults
-  GCS_BUCKET_NAME: 'pr-review'
+  GCS_BUCKET_NAME: pr-review
   # TRAINING_MODULES: demo-modules
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital

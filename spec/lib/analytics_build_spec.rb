@@ -19,14 +19,18 @@ RSpec.describe AnalyticsBuild do
   before do
     WebMock.disable_net_connect!
     stub_request(:post, 'https://oauth2.googleapis.com/token').to_return(status: 200, body: '{}', headers: { "Content-Type": 'application/json' })
+
     # stub request matching anything after name parameter
     #  example: "https://storage.googleapis.com/upload/storage/v1/b/tests/o?name=userassessments/user_assessments2022-12-07T17:23:20Z.csv&uploadType=resumable"
     # stub_request(:post, /https:\/\/storage.googleapis.com\/upload\/storage\/v1\/b\/tests\/o\?name(.+)/).to_return(status: 200, body: "", headers: {})
     # stub_request(:put, "http://nil-uri-given/").to_return(status: 200, body: "", headers: {})
+
     stub_request(:any, /https:\/\/storage.googleapis.com\/(.+)/).to_return(->(request) do { body: request.body } end)
+
     # need to investigate this as storage.googleapis.com must return a uri to put file content when streaming data, so need to match that rather than "http://nil-uri-given/"
     # but for now its not the response were testing its the sql and active record payload
     # if code or database changes, we should get an error here.
+
     stub_request(:put, 'http://nil-uri-given/').to_return(status: 200, body: '', headers: { "Content-Type": 'application/json' })
     Dir.mkdir directory unless File.exist?(directory)
     create_event(user, 'summative_assessment_start', Time.zone.local(2000, 0o1, 0o2), 'brain-development-and-how-children-learn', 'intro')
@@ -85,5 +89,24 @@ RSpec.describe AnalyticsBuild do
 
   it 'upload users assessments' do
     expect(upload_users_assessments.upload).to match(nil)
+  end
+
+  it 'delete users assessments files' do
+    body_response_bucket_files = {
+      "kind": 'storage#objects',
+      "items": [
+        {
+          "kind": 'storage#object',
+          "id": 'tests/userassessments/userassessments2022-12-15T03:41:44Z.csv/1671075705464312',
+          "selfLink": 'https://www.googleapis.com/storage/v1/b/tests/o/userassessments%2Fuserassessments2022-12-15T03:41:44Z.csv',
+          "mediaLink": 'https://storage.googleapis.com/download/storage/v1/b/tests/o/userassessments%2Fuserassessments2022-12-15T03:41:44Z.csv?generation=1671075705464312&alt=media',
+          "name": 'userassessments/userassessments2022-12-15T03:41:44Z.csv',
+          "bucket": 'tests',
+        },
+      ],
+    }
+
+    stub_request(:get, 'https://storage.googleapis.com/storage/v1/b/tests/o?prefix=userassessments').to_return(status: 200, body: body_response_bucket_files.to_json, headers: { "Content-Type": 'application/json' })
+    expect(upload_users_assessments.delete_files).to match(Array)
   end
 end

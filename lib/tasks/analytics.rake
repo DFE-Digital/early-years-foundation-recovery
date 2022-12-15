@@ -26,13 +26,14 @@ namespace :db do
                                 #{AnalyticsBuild.build_json_sql('module_time_to_completion', JSON.parse(user_json.first['json_column']))}
                                 module_time_to_completion").all
 
-      users = AnalyticsBuild.new(bucket_name: ENV.fetch('GCS_BUCKET_NAME', Rails.application.credentials.gcs_bucket_name),
+      users = AnalyticsBuild.new(bucket_name: ENV['GCS_BUCKET_NAME'],
                                  folder_path: 'userdata',
                                  result_set: users_all, file_name: 'users')
 
       users.create! if Rails.env.test?
       users.delete_files if Rails.env.production? || Rails.env.development?
       users.upload if Rails.env.production? || Rails.env.development?
+      Rake::Task['db:analytics:users'].reenable # need to reset rake task before it can be run again.
     end
 
     desc 'ahoy_events table'
@@ -46,7 +47,7 @@ namespace :db do
                                             TO_CHAR(time, 'YYYY-MM-DD HH:MM:SS') as event_time,
                                             #{AnalyticsBuild.build_json_sql('properties', JSON.parse(event_json.first['json_column']))}
                                             properties").where(name: events_names_list)
-      events = AnalyticsBuild.new(bucket_name: ENV.fetch('GCS_BUCKET_NAME', Rails.application.credentials.gcs_bucket_name),
+      events = AnalyticsBuild.new(bucket_name: ENV['GCS_BUCKET_NAME'],
                                   folder_path: 'eventsdata',
                                   result_set: events_results,
                                   file_name: 'ahoy_events')
@@ -54,12 +55,13 @@ namespace :db do
       events.create! if Rails.env.test?
       events.delete_files if Rails.env.production? || Rails.env.development?
       events.upload if Rails.env.production? || Rails.env.development?
+      Rake::Task['db:analytics:ahoy_events'].reenable # need to reset rake task before it can be run again.
     end
 
     desc 'user_assessments table'
     task user_assessments: :environment do
       user_assessments = UserAssessment.all
-      assessments = AnalyticsBuild.new(bucket_name: ENV.fetch('GCS_BUCKET_NAME', Rails.application.credentials.gcs_bucket_name),
+      assessments = AnalyticsBuild.new(bucket_name: ENV['GCS_BUCKET_NAME'],
                                        folder_path: 'userassessments',
                                        result_set: user_assessments,
                                        file_name: 'user_assessments')
@@ -67,12 +69,13 @@ namespace :db do
       assessments.create! if Rails.env.test?
       assessments.delete_files if Rails.env.production? || Rails.env.development?
       assessments.upload if Rails.env.production? || Rails.env.development?
+      Rake::Task['db:analytics:user_assessments'].reenable # need to reset rake task before it can be run again.
     end
 
     desc 'user_answers table'
     task user_answers: :environment do
       user_answers = UserAnswer.all
-      answers = AnalyticsBuild.new(bucket_name: ENV.fetch('GCS_BUCKET_NAME', Rails.application.credentials.gcs_bucket_name),
+      answers = AnalyticsBuild.new(bucket_name: ENV['GCS_BUCKET_NAME'],
                                    folder_path: 'useranswers',
                                    result_set: user_answers,
                                    file_name: 'user_answers')
@@ -80,18 +83,20 @@ namespace :db do
       answers.create! if Rails.env.test?
       answers.delete_files if Rails.env.production? || Rails.env.development?
       answers.upload if Rails.env.production? || Rails.env.development?
+      Rake::Task['db:analytics:user_answers'].reenable # need to reset rake task before it can be run again.
     end
 
     desc 'ahoy_visits table'
     task ahoy_visits: :environment do
       ahoy_visits = Ahoy::Visit.all
-      ahoy_visit = AnalyticsBuild.new(bucket_name: ENV.fetch('GCS_BUCKET_NAME', Rails.application.credentials.gcs_bucket_name),
+      ahoy_visit = AnalyticsBuild.new(bucket_name: ENV['GCS_BUCKET_NAME'],
                                       folder_path: 'visitsdata',
                                       result_set: ahoy_visits,
                                       file_name: 'ahoy_visits')
       ahoy_visit.create! if Rails.env.test?
       ahoy_visit.delete_files if Rails.env.production? || Rails.env.development?
       ahoy_visit.upload if Rails.env.production? || Rails.env.development?
+      Rake::Task['db:analytics:ahoy_visits'].reenable # need to reset rake task before it can be run again.
     end
   end
 end
