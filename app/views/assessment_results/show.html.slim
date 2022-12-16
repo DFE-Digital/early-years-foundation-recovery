@@ -1,5 +1,7 @@
 .govuk-grid-row
   .govuk-grid-column-full
+    = render 'shared/progress_bar', bar: @module_progress_bar
+
     h1.govuk-heading-l
       = t(:heading, scope: :assessment_results)
 

@@ -11,7 +11,7 @@ $accent: #347ca9;
   }
 
   &__content {
-    @media screen and (min-width: 769px) {
+    @include govuk-media-query($from: desktop) {
       margin-left: auto;
     }
     width: auto;

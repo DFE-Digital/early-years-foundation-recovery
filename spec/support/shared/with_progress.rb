@@ -47,6 +47,10 @@ RSpec.shared_context 'with progress' do
     view_pages_before(mod, 'sub_module_intro', 2)
   end
 
+  def view_summary_intro(mod)
+    view_pages_before(mod, 'summary_intro')
+  end
+
   def start_confidence_check(mod)
     view_pages_before(mod, 'confidence_questionnaire')
   end
@@ -61,6 +65,10 @@ RSpec.shared_context 'with progress' do
 
   def view_pages_before_formative_questionnaire(mod)
     view_pages_before(mod, 'formative_questionnaire')
+  end
+
+  def view_certificate_page(mod)
+    view_pages_before(mod, 'certificate')
   end
 
   # @return [true] create a fake event log item
