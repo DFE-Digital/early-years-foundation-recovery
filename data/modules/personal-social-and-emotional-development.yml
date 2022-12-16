@@ -167,7 +167,7 @@ personal-social-and-emotional-development:
   3-4:
     type: summary_intro
   3-4-1:
-    type: sub_module_intro
+    type: recap_page
 
   # ----------------------------------------------------------------------------
   # End of module test

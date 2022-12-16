@@ -1,0 +1,14 @@
+.govuk-grid-row
+  ol.progress-bar.govuk-list role='progressbar' tabindex=0 aria-label=bar.furthest_section
+    - bar.nodes.map do |node|
+      li.progress-bar--item
+        = progress_node(*node[:icon].values)
+
+        div class=node[:line_style]
+
+        p.govuk-body.progress--heading class=node[:heading_style]
+          = node[:heading]
+
+- if Rails.application.debug?
+  pre.debug_dump
+    = bar.debug_summary

@@ -17,6 +17,11 @@ class ModuleProgress
   #   @return [SummativeAssessmentProgress]
   attr_reader :user, :mod, :summative_assessment
 
+  # @return [Float] Module completion
+  def value
+    visited.size.to_f / mod.module_items.size
+  end
+
   # Name of last page viewed in module
   # @return [String]
   def milestone

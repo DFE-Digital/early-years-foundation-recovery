@@ -4,6 +4,7 @@ pre.debug_dump
   br
   | Questions=
   = @training_module.questionnaires.count
+  br
 
   - @training_module.module_items.each.with_index(1) do |item, pos|
     - if current_user.events.where_properties(training_module_id: @training_module.name, id: item.name).any?
