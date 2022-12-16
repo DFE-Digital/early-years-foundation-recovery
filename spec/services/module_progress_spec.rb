@@ -9,17 +9,25 @@ RSpec.describe ModuleProgress do
 
   describe '#started?' do
     it 'is true once the module intro is viewed' do
-      expect(progress.started?).to be false
-      view_module_page_event('alpha', 'intro')
-      expect(progress.started?).to be true
+      expect { start_module(alpha) }.to change(progress, :started?)
+    end
+  end
+
+  describe '#visited?' do
+    it 'is true once a page is viewed' do
+      expect { view_module_page_event('alpha', 'intro') }.to change { progress.visited?(alpha.intro_page) }
     end
   end
 
   describe '#completed?' do
     it 'is true once every page is viewed (certificate excluded)' do
-      expect(progress.completed?).to be false
-      complete_module(alpha)
-      expect(progress.completed?).to be true
+      expect { view_pages_upto_thankyou(alpha) }.to change(progress, :completed?)
+    end
+  end
+
+  describe '#certified?' do
+    it 'is true once every page is viewed (certificate included)' do
+      expect { view_pages_upto_certificate(alpha) }.to change(progress, :certified?)
     end
   end
 
@@ -37,7 +45,8 @@ RSpec.describe ModuleProgress do
       end
     end
 
-    context 'when the named event is not present' do
+    # Redundant once ER-543 ensures this event is always present
+    xcontext 'when the named event is not present' do
       before do
         create_event(user, 'module_content_page', Time.zone.local(2026, 12, 31), 'alpha', '1-3-3-4')
       end

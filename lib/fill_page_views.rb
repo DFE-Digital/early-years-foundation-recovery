@@ -10,10 +10,17 @@ class FillPageViews
         next
       end
 
-      tracker = Ahoy::Tracker.new(user: user, controller: 'content_pages')
+      tracker = event_tracker(user)
 
       training_modules.each do |mod|
         progress = ModuleProgress.new(user: user, mod: mod)
+
+        # next_progress = ModuleProgress.new(user: user, mod: mod.next_module)
+
+        # if next_progress.started? && !progress.certified?
+        #   log "user [#{user.id}] module [#{mod.id}] certificate skipped before [#{next_progress.mod.id}] started"
+        #   track(mod, mod.certificate_page)
+        # end
 
         unless progress.furthest_page
           log "user [#{user.id}] module [#{mod.id}] - not started"
@@ -34,14 +41,7 @@ class FillPageViews
           if progress.visited?(item)
             next
           else
-            tracker.track('module_content_page', {
-              skipped: true,
-              id: item.name,
-              action: 'show',
-              controller: 'content_pages',
-              training_module_id: mod.name,
-            })
-
+            track(tracker, mod, item)
             skipped += 1
           end
         end
@@ -52,6 +52,21 @@ class FillPageViews
   end
 
 private
+
+  def track(tracker, mod, item)
+    tracker.track('module_content_page', {
+      skipped: true,
+      id: item.name,
+      type: item.type,
+      action: 'show',
+      controller: 'content_pages',
+      training_module_id: mod.name,
+    })
+  end
+
+  def event_tracker(user)
+    Ahoy::Tracker.new(user: user, controller: 'content_pages')
+  end
 
   def users
     User.order(:id).all

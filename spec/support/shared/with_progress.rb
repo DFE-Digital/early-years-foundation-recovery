@@ -43,14 +43,18 @@ RSpec.shared_context 'with progress' do
     view_pages_upto(mod, 'formative_questionnaire')
   end
 
-  def view_certificate_page(mod)
+  def view_pages_upto_thankyou(mod)
+    view_pages_upto(mod, 'thankyou_page')
+  end
+
+  def view_pages_upto_certificate(mod)
     view_pages_upto(mod, 'certificate')
   end
 
   # @param mod [TrainingModule]
   # @param duration [ActiveSupport::Duration]
   def complete_module(mod, duration = nil)
-    view_pages_upto(mod, 'certificate')
+    view_pages_upto_certificate(mod)
     travel_to duration.from_now unless duration.nil?
     module_complete_event(mod)
   end

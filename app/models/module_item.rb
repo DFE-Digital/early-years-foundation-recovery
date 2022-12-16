@@ -325,11 +325,6 @@ class ModuleItem < YamlBase
     end
   end
 
-  # @return [Boolean]
-  def progress_node?
-    icons_page? || module_intro? || submodule_intro? || summary_intro? || assessment_intro?
-  end
-
 private
 
   # @return [Array<ModuleItem>] module items in the same module

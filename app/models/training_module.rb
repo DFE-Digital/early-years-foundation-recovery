@@ -8,6 +8,11 @@ class TrainingModule < YamlBase
     raw_data.map { |name, values| values.merge(name: name) }
   end
 
+  # @return [TrainingModule]
+  def next_module
+    self.class.find_by(id: id + 1)
+  end
+
   # @return [Integer]
   def topic_count
     items_by_topic.count
@@ -162,17 +167,18 @@ class TrainingModule < YamlBase
     module_items_by_type('thankyou').first
   end
 
+  # FIXME: this is the thankyou_page
+  # @return [ModuleItem]
+  def last_page
+    pages.last
+  end
+
   # @return [ModuleItem] the last module item
   def certificate_page
     module_items_by_type('certificate').first
   end
 
   # decorations -------------------------
-
-  # @return [ModuleItem]
-  def last_page
-    pages.last
-  end
 
   def tab_label
     ['Module', id].join(' ')

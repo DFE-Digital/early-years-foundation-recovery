@@ -56,25 +56,12 @@ class ModuleProgress
     end
   end
 
-  # TODO: bypass #all? if a :module_complete event exists
-  #
-  # @see CourseProgress
-  # @return [Boolean] true if every page is visited (certificate excluded)
-  def completed?
-    all?(mod.pages) # key_event('module_complete').present?
+  # @return [DateTime, nil] Completed date for module
+  def completed_at
+    key_event('module_complete')&.time
   end
 
-  # TODO: refactor once every user has a "module_complete" event
-  #
-  # Completed date for module
-  # @return [DateTime, nil]
-  def completed_at
-    page_name = mod.pages.last.name
-    page_event = module_item_events(page_name).first
-    named_event = key_event('module_complete')
-    event = named_event || page_event
-    event&.time
-  end
+  # Predicates -----------------------------------------------------------------
 
   # @see CourseProgress
   # @return [Boolean] module pages have been viewed (past interruption)
@@ -85,6 +72,19 @@ class ModuleProgress
   # @return [Boolean] view event logged for page
   def visited?(page)
     module_item_events(page.name).present?
+  end
+
+  # @see CourseProgress
+  # @return [Boolean] if every page is visited (certificate excluded)
+  def completed?
+    return true if key_event('module_complete').present?
+
+    all?(mod.pages)
+  end
+
+  # @return [Boolean] if every page is visited (certificate included)
+  def certified?
+    completed? && visited?(mod.certificate_page)
   end
 
 protected

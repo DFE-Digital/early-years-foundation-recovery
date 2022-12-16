@@ -19,6 +19,14 @@ RSpec.describe TrainingModule, type: :model do
     expect(training_module.attributes.keys).to eq(%i[title thumbnail short_description description objective criteria duration summative_threshold name id])
   end
 
+  describe '#next_module' do
+    it 'returns the next module' do
+      expect(training_module.id).to eq 1
+      expect(training_module.next_module.id).to eq 2
+      expect(training_module.next_module.name).to eq 'bravo'
+    end
+  end
+
   describe '#draft?' do
     it 'is false if published' do
       expect(training_module.draft?).to be false

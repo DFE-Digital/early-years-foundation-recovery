@@ -91,4 +91,18 @@ RSpec.describe FillPageViews do
       expect(Ahoy::Event.count).to be 30
     end
   end
+
+  # TODO: finish this
+  xcontext 'with skipped certificate' do
+    before do
+      view_pages_upto_thankyou(alpha)
+      start_module(bravo)
+    end
+
+    # FIXME: the certificate is the exception to the accoridion logic of preventing advancing links
+    # Is someone able to not view their certificate and still progress to the next module?
+    it 'catch skipped certs' do
+      expect { service.call }.to output(/user \[\d+\] module \[\d+\] certificate skipped/).to_stdout_from_any_process
+    end
+  end
 end

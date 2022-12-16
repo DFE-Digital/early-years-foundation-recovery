@@ -180,7 +180,7 @@ RSpec.describe ModuleProgressBarDecorator do
 
         context 'and on last page' do
           it 'all nodes have green tick' do
-            view_certificate_page(alpha)
+            view_pages_upto_certificate(alpha)
             expect(attribute).to eq [completed, completed, completed, completed]
           end
         end
