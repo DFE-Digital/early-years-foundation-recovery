@@ -10,6 +10,9 @@ class TrainingModulesController < ApplicationController
     track('module_overview_page')
     @training_module = TrainingModule.find_by(name: params[:id])
 
+    # used for debug
+    @module_progress_bar = ModuleProgressBarDecorator.new(helpers.module_progress(@training_module))
+
     if @training_module.nil? || @training_module.draft?
       redirect_to my_modules_path
     else

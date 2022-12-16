@@ -1,6 +1,6 @@
 class QuestionnairesController < ApplicationController
-  before_action :authenticate_registered_user!, :module_item
-  after_action :track_events, only: :show
+  before_action :authenticate_registered_user!, :module_item, :show_progress_bar
+  before_action :track_events, only: :show
 
   def show
     questionnaire_taker.prepare
@@ -22,8 +22,16 @@ class QuestionnairesController < ApplicationController
 
 protected
 
+  def show_progress_bar
+    @module_progress_bar = ModuleProgressBarDecorator.new(helpers.module_progress(training_module))
+  end
+
   def module_item
     @module_item ||= questionnaire.module_item
+  end
+
+  def training_module
+    module_item.parent
   end
 
   def questionnaire
