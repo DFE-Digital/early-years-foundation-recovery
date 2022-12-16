@@ -33,7 +33,7 @@ class AccountDeletionsController < ApplicationController
     else
       user.errors.clear
       if user_params[:deleted_reason] == 'other'
-        user.errors.add :deleted_reason, :blank, message: 'Enter a reason why you want to close your account'
+        user.errors.add :deleted_reason_other, :blank, message: 'Enter a reason why you want to close your account'
       else
         user.errors.add :deleted_reason, :blank, message: 'Select a reason for closing your account'
       end

@@ -1,5 +1,7 @@
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
+    = govuk_back_link(href: user_path)
+
     = form_with model: @user, url: update_reason_user_account_deletion_path  do |f|
       = f.govuk_error_summary
       = f.govuk_radio_buttons_fieldset(:deleted_reason,

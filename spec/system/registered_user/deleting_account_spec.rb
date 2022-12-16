@@ -54,13 +54,14 @@ RSpec.describe 'Account deletion' do
     context 'and radio button is selected' do
       before do
         choose reason
-        fill_in text_box, with: reason
+        fill_in text_box, with: reason_other
         click_on 'Continue'
       end
 
       context 'and it is not "Another reason"' do
-        let(:text_box) { '' }
         let(:reason) { 'I did not find the training useful' }
+        let(:text_box) { nil }
+        let(:reason_other) { nil }
 
         it 'can progress to confirmation page' do
           expect(page).to have_current_path '/my-account/account-deletion/confirm-delete-account'
@@ -80,7 +81,7 @@ RSpec.describe 'Account deletion' do
         end
 
         context 'and text box is blank' do
-          let(:reason_other) { '' }
+          let(:reason_other) { nil }
 
           it 'cannot progress to confirmation page' do
             expect(page).to have_content('There is a problem')
