@@ -23,16 +23,13 @@ class Upload
     ct_question = client.content_types(space, environment).find('question')
     ct_question.activate
 
-    ct_answer = client.content_types(space, environment).find('answer')
-    ct_answer.activate
-
     ct_confidence = client.content_types(space, environment).find('confidence')
     ct_confidence.activate
 
     TrainingModule.all.each do |tm|
       log "creating #{tm.name}"
 
-      module_entry = ct_module.entries.create!(
+      module_entry = ct_module.entries.create(
         title: tm.title,
         id: tm.id,
         slug: tm.name,
@@ -55,14 +52,10 @@ class Upload
       end
 
       module_entry.pages = pages
-      module_entry.save!
 
       formative_questions = FormativeQuestionnaire.where(training_module: tm.name).map do |q|
         questionnaire_name, question = q.questions.first
-        answers = question[:answers].map do |answer_id, answer_text|
-          ct_answer.entries.create(body: answer_text, correct: question[:correct_answers].include?(answer_id))
-        end
-        ct_question.entries.create!(
+        ct_question.entries.create(
           id: questionnaire_name,
           slug: q.name,
           module_id: q.training_module,
@@ -71,16 +64,14 @@ class Upload
           multi_select: question[:multi_select],
           assessment_summary: question[:assessment_summary],
           assessment_fail_summary: question[:assessment_fail_summary],
-          answers: answers,
+          answers: question[:answers],
+          correct_answers: question[:correct_answers],
         )
       end
 
       summative_questions = SummativeQuestionnaire.where(training_module: tm.name).map do |q|
         questionnaire_name, question = q.questions.first
-        answers = question[:answers].map do |answer_id, answer_text|
-          ct_answer.entries.create(body: answer_text, correct: question[:correct_answers].include?(answer_id))
-        end
-        ct_question.entries.create!(
+        ct_question.entries.create(
           id: questionnaire_name,
           slug: q.name,
           module_id: q.training_module,
@@ -89,18 +80,21 @@ class Upload
           multi_select: question[:multi_select],
           assessment_summary: question[:assessment_summary],
           assessment_fail_summary: question[:assessment_fail_summary],
-          answers: answers,
+          answers: question[:answers],
+          correct_answers: question[:correct_answers],
         )
       end
 
       confidence = ConfidenceQuestionnaire.where(training_module: tm.name).map do |q|
         questionnaire_name, question = q.questions.first
-        ct_confidence.entries.create!(
+        ct_confidence.entries.create(
           body: question[:label],
           id: questionnaire_name,
           slug: q.name,
           module_id: q.training_module,
-          component: 'confidence_check'
+          component: 'confidence_check',
+          answers: { 1 => 'Strongly agree', 2 => 'Agree', 3 => 'Neither agree nor disagree', 4 => 'Disagree', 5 => 'Strongly disagree', },
+          correct_answers: [1,2,3,4,5],
         )
       end
 
