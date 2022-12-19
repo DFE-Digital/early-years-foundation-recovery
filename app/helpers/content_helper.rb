@@ -104,4 +104,13 @@ module ContentHelper
   def service_name
     Rails.configuration.service_name
   end
+
+  def back_to_module_overview_button
+    if params[:controller].eql?('content_pages')
+      govuk_back_link(
+        href: training_module_path(params[:training_module_id]),
+        text: "Back to Module #{training_module.id} overview",
+      )
+    end
+  end
 end
