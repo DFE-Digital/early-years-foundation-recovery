@@ -9,6 +9,7 @@ RSpec.describe 'Whats new page' do
     context "and 'whats new' page has not been viewed" do
       it "visits what's new page after sign in" do
         expect(page).to have_current_path '/whats-new'
+        expect(page).to have_content "What's new in the training"
       end
     end
 

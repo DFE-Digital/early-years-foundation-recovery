@@ -34,7 +34,6 @@ SitemapGenerator::Sitemap.create do
     other-problems-signing-in
     privacy-policy
     terms-and-conditions
-    whats-new
     sitemap
   ].each do |path|
     add static_path(path)
@@ -51,6 +50,8 @@ SitemapGenerator::Sitemap.create do
   add users_timeout_path
 
   add course_overview_path
+
+  add whats_new_path
 
   # devise
   add new_user_unlock_path

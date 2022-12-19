@@ -8,7 +8,7 @@ protected
       if resource.display_whats_new?
         resource.display_whats_new = false
         resource.save!
-        static_path('whats-new')
+        redirect_to whats_new_path
       else
         my_modules_path
       end

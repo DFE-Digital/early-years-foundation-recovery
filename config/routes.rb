@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'health', to: 'home#show'
   get 'my-modules', to: 'learning#show'
   get 'about-training', to: 'training_modules#index', as: :course_overview
+  get 'whats-new', to: 'whats_new#show'
 
   get '/404', to: 'errors#not_found', via: :all
   get '/422', to: 'errors#unprocessable_entity', via: :all
