@@ -4,6 +4,11 @@ module TimeoutHelper
     Rails.configuration.user_timeout_minutes
   end
 
+  # @return [Time] minutes until timeout modal appears (default 5)
+  def timeout_time
+    Time.zone.now.advance(minutes: timeout_duration).to_fs(:time)
+  end
+
   # @return [Integer] minutes until timeout modal appears (default 5)
   def timeout_warning
     Rails.configuration.user_timeout_warning_minutes
