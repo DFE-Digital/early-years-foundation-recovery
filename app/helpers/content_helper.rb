@@ -94,9 +94,16 @@ module ContentHelper
   end
 
   # @param status [String, Symbol]
-  # @param colour [String]
   # @return [String]
-  def progress_indicator(status, colour)
+  def progress_indicator(status)
+    case status
+    when :completed
+      colour = nil
+    when :not_started
+      colour = 'grey'
+    when :started
+      colour = 'yellow'
+    end
     govuk_tag(text: t(status, scope: 'module_indicator'), colour: colour)
   end
 

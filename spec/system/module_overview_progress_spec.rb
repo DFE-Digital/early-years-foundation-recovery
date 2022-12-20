@@ -63,7 +63,7 @@ RSpec.describe 'Module overview page progress' do
     end
 
     it 'resumes from the last visited page' do
-      expect(page).to have_link('Resume training', href: '/modules/alpha/content-pages/intro')
+      expect(page).to have_link('Resume module', href: '/modules/alpha/content-pages/intro')
     end
   end
 
@@ -87,7 +87,7 @@ RSpec.describe 'Module overview page progress' do
     end
 
     it 'resumes from the last visited page' do
-      expect(page).to have_link('Resume training', href: '/modules/alpha/content-pages/1-1')
+      expect(page).to have_link('Resume module', href: '/modules/alpha/content-pages/1-1')
     end
   end
 
@@ -118,7 +118,7 @@ RSpec.describe 'Module overview page progress' do
     end
 
     it 'resumes from the last visited page' do
-      expect(page).to have_link 'Resume training', href: '/modules/alpha/content-pages/1-1-1'
+      expect(page).to have_link 'Resume module', href: '/modules/alpha/content-pages/1-1-1'
     end
   end
 
@@ -139,7 +139,7 @@ RSpec.describe 'Module overview page progress' do
     end
 
     it 'resumes from the last visited page' do
-      expect(page).to have_link 'Resume training', href: '/modules/alpha/content-pages/1-1-4'
+      expect(page).to have_link 'Resume module', href: '/modules/alpha/content-pages/1-1-4'
     end
   end
 

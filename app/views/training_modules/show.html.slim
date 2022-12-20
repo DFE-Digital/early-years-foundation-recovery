@@ -1,20 +1,20 @@
 - content_for(:head) do 
   = tag.meta name: 'turbo-visit-control', content: 'reload'
 
-= govuk_back_link href: my_modules_path
+= govuk_back_link text: 'Back to My modules', href: my_modules_path
 
 .light-grey-box
   .govuk-grid-row
     .govuk-grid-column-full
-      h1.govuk-heading-l= @training_module.title
+      h1.govuk-heading-l= "Module #{@training_module.id}: #{@training_module.title}"
       p.govuk-caption-m= @training_module.description
 
       - @module_progress.call_to_action do |state, page|
         = link_to_action(state, page)
 
-= govuk_tag(text: "#{@training_module.topic_count} topics", colour: 'green')
-'
-= govuk_tag(text: "#{@training_module.duration} hours", colour: 'green')
+h2.govuk-heading-m Your module progress
+p.govuk-body You can continue your learning, look at your module progress, or revisit pages of the training.
+h3.govuk-heading-s Module topics
 
 .govuk-grid-row class='govuk-!-padding-top-6'
   .govuk-grid-column-full
@@ -28,7 +28,7 @@
                   span.accordion-section-left-column
                     = current_heading
                   .float-right
-                    = progress_indicator(status, 'purple')
+                    = progress_indicator(status)
 
               .govuk-accordion__section-summary.govuk-body id="summary-#{num}"
                 - if previous_heading
@@ -45,6 +45,6 @@
                         = topic_heading
 
                     .float-right
-                      = progress_indicator(status, 'blue')
+                      = progress_indicator(status)
 
 = render 'debug'

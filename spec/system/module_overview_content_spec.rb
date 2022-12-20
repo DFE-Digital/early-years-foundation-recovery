@@ -8,8 +8,12 @@ RSpec.describe 'Module overview' do
     visit '/modules/alpha'
   end
 
-  it 'has the module name' do
-    expect(page).to have_content('First Training Module')
+  it 'has back button' do
+    expect(page).to have_link('Back to My modules', href: '/my-modules')
+  end
+
+  it 'has the module number and name' do
+    expect(page).to have_content('Module 1: First Training Module')
   end
 
   it 'has the module description' do
@@ -17,15 +21,7 @@ RSpec.describe 'Module overview' do
   end
 
   it 'has a call to action button to start the module' do
-    expect(page).to have_link('Start')
-  end
-
-  it 'has the number of topics available in the module' do
-    expect(page).to have_content('9 topics')
-  end
-
-  it 'has the time taken to complete the module' do
-    expect(page).to have_content('3 hours')
+    expect(page).to have_link('Start module')
   end
 
   it 'has the submodule names' do
