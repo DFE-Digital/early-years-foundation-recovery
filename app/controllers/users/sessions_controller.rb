@@ -4,6 +4,7 @@ class Users::SessionsController < Devise::SessionsController
 protected
 
   def after_sign_in_path_for(resource)
+    cookies[:timeout_aria_hidden] = false
     if resource.registration_complete?
       if resource.display_whats_new?
         resource.display_whats_new = false

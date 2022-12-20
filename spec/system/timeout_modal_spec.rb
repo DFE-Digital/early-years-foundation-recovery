@@ -4,10 +4,6 @@ RSpec.describe 'Timeout modal', type: :system do
   context 'with an authenticated user' do
     include_context 'with user'
 
-    before do
-      visit '/my-modules'
-    end
-
     context 'and javascript enabled ' do
       it 'data attribute user status' do
         expect(page).to have_selector("#js-timeout-warning[@data-user-status='true']")
@@ -29,8 +25,21 @@ RSpec.describe 'Timeout modal', type: :system do
     end
 
     context 'and javascript disabled', js: false do
-      it 'does displays a static message on the page' do
+      it 'displays a timeout message' do
         expect(page).to have_content 'For security, you’ll be signed out after 3 minutes of activity.'
+      end
+
+      context 'when on first page after login' do
+        it 'has aria-hidden attribute' do
+          expect(page).to have_selector '.govuk-inset-text[aria-hidden="false"]'
+        end
+      end
+
+      context 'when not on first page after login' do
+        it 'doesnt have aria-hidden attribute' do
+          visit '/my-modules'
+          expect(page).to have_selector '.govuk-inset-text[aria-hidden="true"]'
+        end
       end
     end
   end
@@ -47,7 +56,7 @@ RSpec.describe 'Timeout modal', type: :system do
     end
 
     context 'and javascript disabled' do
-      it 'does not display the message', js: false do
+      it 'does not display a timeout message', js: false do
         expect(page).not_to have_content 'For security, you’ll be signed out after 3 minutes of activity.'
       end
     end
