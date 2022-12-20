@@ -1,6 +1,7 @@
 class AssessmentResultsController < ApplicationController
   before_action :authenticate_registered_user!, :clear_flash, :show_progress_bar
   after_action :track_events, only: :show
+  helper_method :training_module
 
   def new
     helpers.assessment_progress(training_module).archive_attempt

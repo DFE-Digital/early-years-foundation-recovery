@@ -106,7 +106,7 @@ module ContentHelper
   end
 
   def back_to_module_overview_button
-    if params[:controller].eql?('content_pages')
+    if %w[content_pages questionnaires assessment_results].include?(params[:controller])
       govuk_back_link(
         href: training_module_path(params[:training_module_id]),
         text: "Back to Module #{training_module.id} overview",
