@@ -26,7 +26,7 @@ RSpec.describe 'Timeout modal', type: :system do
 
     context 'and javascript disabled', js: false do
       it 'displays a timeout message' do
-        expect(page).to have_content 'For security, you’ll be signed out after 3 minutes of activity.'
+        expect(page).to have_content 'For security, you’ll be signed out after 3 minutes of inactivity.'
       end
 
       context 'when on first page after login' do
@@ -57,7 +57,7 @@ RSpec.describe 'Timeout modal', type: :system do
 
     context 'and javascript disabled' do
       it 'does not display a timeout message', js: false do
-        expect(page).not_to have_content 'For security, you’ll be signed out after 3 minutes of activity.'
+        expect(page).not_to have_content 'For security, you’ll be signed out after 3 minutes of inactivity.'
       end
     end
   end

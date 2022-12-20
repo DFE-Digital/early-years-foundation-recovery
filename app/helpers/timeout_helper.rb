@@ -4,9 +4,19 @@ module TimeoutHelper
     Rails.configuration.user_timeout_minutes
   end
 
-  # @return [Time] minutes until timeout modal appears (default 5)
+  # @return [Time] when user will be logged out
   def timeout_time
     Time.zone.now.advance(minutes: timeout_duration).to_fs(:time)
+  end
+
+  # @param [Boolean] value to set timeout_aria_hidden cookie as
+  def set_aria_hidden_cookie(input)
+    cookies[:timeout_aria_hidden] = input
+  end
+  
+  # @return [Boolean] value of timeout_aria_hidden cookie
+  def get_aria_hidden_cookie
+    cookies[:timeout_aria_hidden]
   end
 
   # @return [Integer] minutes until timeout modal appears (default 5)
