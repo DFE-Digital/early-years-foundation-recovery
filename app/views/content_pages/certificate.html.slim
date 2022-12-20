@@ -41,9 +41,8 @@ h3 Certified by the Department for Education
     = image_tag('department-for-education-certificate.png', width: '220', alt: '', title: '')
 
 .noprint
-  = print_button
-
-  p.govuk-body
+  .govuk-button-group
+    = print_button
     = govuk_link_to 'Download certificate', training_module_content_page_path(training_module, training_module.certificate_page, format: :pdf), aria: { describedby: 'pdf-details' }
 
   p#pdf-details.govuk-body
