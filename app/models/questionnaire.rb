@@ -26,6 +26,7 @@ class Questionnaire < OpenStruct
 
   include ActiveModel::Validations
   include TranslateFromLocale
+  include ContentfulWrapper
 
   validate :check_answers
 
@@ -65,7 +66,13 @@ class Questionnaire < OpenStruct
   # @return [Array<Question>]
   def question_list
     questions.map do |name, attrs|
-      Question.new(attrs.merge(questionnaire: self, name: name))
+      Question.new(attrs.merge(questionnaire: self, name: name)).tap do |question|
+        if contentful?
+          question.body = question_decorator.body
+          question.answers = question_decorator.answers
+          question.correct_answers = question_decorator.correct_answers
+        end
+      end
     end
   end
 

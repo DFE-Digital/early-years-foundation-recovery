@@ -6,6 +6,7 @@ class ContentPage
   include ActiveModel::Validations
   include ActiveModel::Model
   include TranslateFromLocale
+  include ContentfulWrapper
 
   attr_accessor :id, :name, :type, :training_module
 
@@ -16,17 +17,17 @@ class ContentPage
 
   # @return [String]
   def heading
-    translate(:heading)
+    contentful? ? page_decorator.heading : translate(:heading)
   end
 
   # @return [String]
   def body
-    translate(:body)
+    contentful? ? page_decorator.body : translate(:body)
   end
 
   # @return [Boolean]
   def notes?
-    translate(:notes).present?
+    contentful? ? !!page_decorator.notes : translate(:notes).present?
   end
 
   # @return [Boolean]

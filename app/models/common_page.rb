@@ -6,12 +6,12 @@
 class CommonPage < ContentPage
   # @return [String]
   def heading
-    I18n.t('heading', scope: type)
+    contentful? ? page_decorator.heading : I18n.t('heading', scope: type)
   end
 
   # @return [String]
   def body
-    I18n.t('body', scope: type, **locals)
+    contentful? ? page_decorator.body : I18n.t('body', scope: type, **locals)
   end
 
   # @return [false]

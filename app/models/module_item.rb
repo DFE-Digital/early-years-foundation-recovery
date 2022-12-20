@@ -98,6 +98,9 @@ class ModuleItem < YamlBase
       ---
       submodule items count: #{number_within_submodule}
       topic items count: #{number_within_topic}
+
+      ---
+      is using contentful: #{model.contentful?}
     SUMMARY
   end
 
