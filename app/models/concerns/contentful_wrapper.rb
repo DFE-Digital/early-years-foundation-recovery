@@ -1,5 +1,5 @@
 module ContentfulWrapper
-  CMS_CONTENT = %r{alpha}
+  CMS_CONTENT = %r{alpha|child-development-and-the-eyfs}
 
   def contentful?
     training_module.match?(CMS_CONTENT)
