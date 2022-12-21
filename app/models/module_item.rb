@@ -142,6 +142,11 @@ class ModuleItem < YamlBase
     matches[:submodule] if matches
   end
 
+  # @return [String] 'intro' if submodule name is nil, otherwise submodule_name
+  def section_name
+    submodule_name || 'intro'
+  end
+
   # @return [String, nil] 3rd digit if present: 1-1-[1]-1
   def topic_name
     matches = name.match(TOPIC_PATTERN)

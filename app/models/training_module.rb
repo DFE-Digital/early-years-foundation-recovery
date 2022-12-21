@@ -62,6 +62,10 @@ class TrainingModule < YamlBase
     @items_by_submodule ||= module_items.group_by(&:submodule_name).except(nil)
   end
 
+  def all_items_by_submodule
+    @all_items_by_submodule ||= module_items.group_by(&:section_name)
+  end
+
   # @example
   #   {
   #     ["1", "1"] => [1-1-1-1a, 1-1-1-1b],

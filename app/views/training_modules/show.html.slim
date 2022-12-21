@@ -16,6 +16,33 @@ h2.govuk-heading-m Your module progress
 p.govuk-body You can continue your learning, look at your module progress, or revisit pages of the training.
 h3.govuk-heading-s Module topics
 
+/ -------------------------------------
+.govuk-grid-row
+  .govuk-grid-column-full
+    hr.govuk-section-break.govuk-section-break--m.govuk-section-break--visible
+    .module-overview--container
+      - @module_progress.foo.each do |heading, subheading, position, icon, topics|
+        .progress-bar
+          span.icon class=icon
+            span.number = position
+          - unless position == 1
+            .line
+
+        .module-section--content
+          h4.govuk-heading-s= heading
+          p.govuk-body= subheading
+          .module-section--container
+            / - topics.each do |mod, topic_heading, next_item, status|
+              span.module-section--item
+                - if next_item
+                  = govuk_link_to topic_heading, training_module_content_page_path(mod, next_item)
+                - else
+                  = topic_heading
+              span = progress_indicator(status)
+          hr.govuk-section-break.govuk-section-break--m.govuk-section-break--visible
+
+/ -------------------------------------
+
 .govuk-grid-row class='govuk-!-padding-top-6'
   .govuk-grid-column-full
       .govuk-accordion data-module='govuk-accordion'

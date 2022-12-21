@@ -1,0 +1,60 @@
+$icon-diameter: 36px;
+$progress-bar-container-width: 81px;
+
+.govuk-grid-column-full > .govuk-section-break {
+  margin-left: $progress-bar-container-width;
+}
+
+.module-overview--container {
+  display: grid;
+  grid-template-columns: $progress-bar-container-width auto;
+  
+  .icon {
+    border-radius: 50%;
+    width: $icon-diameter;
+    height: $icon-diameter;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    z-index: 2;
+  
+    &.completed {
+      background-color: govuk-colour('black');
+      color: govuk-colour('white');
+    }
+    
+    &.started {
+      background-color: govuk-colour('white');
+      color: govuk-color('black');
+      outline: 4px solid govuk-colour('black');
+      outline-offset: -4px;
+    }
+    
+    &.not_started {
+      background-color: govuk-colour('white');
+      color: govuk-color('black');
+      outline: 1px solid govuk-colour('mid-grey');
+      outline-offset: -1px;
+    }
+  }
+  
+  .line {
+    height: 100%;
+    border-left: 1px solid govuk-colour('mid-grey');
+    top: calc(-100% + ($icon-diameter + 1px)/2);
+    position: relative;
+    z-index: 1;
+    right: 7.5px + ($icon-diameter + 1px)/2;
+    
+    @include govuk-media-query($from: tablet) {
+      right: 10px + ($icon-diameter + 1px)/2;
+    }
+  }
+
+  .module-section--container {
+    display: grid;
+    grid-template-columns: auto 139px;
+    gap: 5px;
+  }
+}

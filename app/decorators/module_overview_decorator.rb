@@ -28,6 +28,28 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
     end
   end
 
+  # -----------------------------
+
+  # @return [Array<String, Symbol, Array>]
+  def foo
+    position = 0
+    mod.all_items_by_submodule.map do |num, items|
+      intro = items.first
+      heading = num.eql?('intro') ? 'Module introduction' : intro.model.heading
+      subheading = num.eql?('intro') ? 'The first section of this module includes:' : 'This section of this module includes:'
+      icon = status(items)
+      [
+        heading,                              # submodule intro heading
+        subheading,                           # subheading
+        position += 1,                        # position
+        icon,                                 # icon style
+        # topics(submodule: num, items: items), # Array(String, Symbol)
+      ]
+    end
+  end
+
+  # -----------------------------
+
   # Check every item has been visited (public for debugging)
   #
   # @return [Symbol]
