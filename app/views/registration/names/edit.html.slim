@@ -8,5 +8,6 @@
         = f.govuk_text_field :first_name, aria: { required: true }
         = f.govuk_text_field :last_name, aria: { required: true }
 
-      p= f.govuk_submit t('.button')
-      p= govuk_link_to t('cancel'), root_path
+      .govuk-button-group
+        = f.govuk_submit t('.button')
+        = govuk_link_to t('cancel'), root_path
