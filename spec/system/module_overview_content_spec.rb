@@ -24,6 +24,13 @@ RSpec.describe 'Module overview' do
     expect(page).to have_link('Start module')
   end
 
+  it 'has the intro name and pages' do
+    expect(page).to have_content('Module introduction')
+    expect(page).to have_content('What to expect during the training')
+    expect(page).to have_content('Before you start')
+    expect(page).to have_content('Introduction: brain development and how children learn')
+  end
+
   it 'has the submodule names' do
     expect(page).to have_content('The first submodule')
     expect(page).to have_content('The second submodule')
@@ -39,10 +46,5 @@ RSpec.describe 'Module overview' do
       .and have_content('Recap')
       .and have_content('End of module test')
       .and have_content('Reflect on your learning')
-  end
-
-  it 'has message telling user to complete previous submodule' do
-    expect(page).to have_content('The first submodule must be completed before you begin this section')
-      .and have_content('The second submodule must be completed before you begin this section')
   end
 end

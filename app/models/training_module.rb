@@ -62,6 +62,14 @@ class TrainingModule < YamlBase
     @items_by_submodule ||= module_items.group_by(&:submodule_name).except(nil)
   end
 
+  # @example
+  #   {
+  #     "intro" => [what-to-expect, before-you-start],
+  #     "1" => [1-1-1, 1-1-2],
+  #     "2" => [1-2-1, 1-2-2],
+  #   }
+  #
+  # @return [{String=>Array<ModuleItem>}]
   def all_items_by_submodule
     @all_items_by_submodule ||= module_items.group_by(&:section_name)
   end

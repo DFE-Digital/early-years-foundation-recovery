@@ -55,5 +55,9 @@ $progress-bar-container-width: 81px;
     display: grid;
     grid-template-columns: auto 139px;
     gap: 5px;
+    
+    .progress-indicator {
+      margin-left: auto;
+    }
   }
 }
