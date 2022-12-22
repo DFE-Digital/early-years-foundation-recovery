@@ -7,7 +7,6 @@
       li timeout warning: #{timeout_warning} minutes
       li timeout modal visible for: #{timeout_modal} minutes
       li timeout at: #{timeout_time}
-      li timeout aria-hidden: #{cookies[:timeout_aria_hidden]}
       / li timer start value: #{timeout_timer} in seconds
 
     ul
@@ -20,11 +19,7 @@
 
 - if user_signed_in?
   .govuk-timeout-warning-fallback
-    .govuk-inset-text aria-hidden=get_aria_hidden_cookie
-      = translate_markdown(t('timeout.noscript', 
-        timeout_duration: timeout_duration, 
-        sign_out_time: timeout_time))
-- set_aria_hidden_cookie(true)
+    .govuk-inset-text= translate_markdown(t('timeout.noscript', timeout_duration: timeout_duration, sign_out_time: timeout_time))
 
 dialog#js-timeout-warning.govuk-timeout-warning.dialog data-module='govuk-timeout-warning' tabindex=0 data-user-status=timeout_active data-minutes-idle-timeout=timeout_warning data-minutes-modal-visible=timeout_modal data-url-redirect=users_timeout_path role='dialog' aria-live='polite' aria-labelledby='dialog-title' aria-describedby='at-timer'
 
