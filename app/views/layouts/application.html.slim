@@ -35,6 +35,8 @@ html.govuk-template lang='en'
         = t('phase_banner_html', feedback_link: govuk_link_to('feedback', Rails.configuration.feedback_url, target: :_blank))
 
       = render 'layouts/timeout'
+      
+      = back_to_module_overview_button
 
       main#main-content.govuk-main-wrapper
         - flash.each do |variant, message|
