@@ -42,7 +42,6 @@ $progress-bar-container-width: 81px;
   .line {
     height: 100%;
     border-left: 1px solid govuk-colour('mid-grey');
-    top: calc(-100% + ($icon-diameter + 1px)/2);
     position: relative;
     z-index: 1;
     right: 7.5px + ($icon-diameter + 1px)/2;

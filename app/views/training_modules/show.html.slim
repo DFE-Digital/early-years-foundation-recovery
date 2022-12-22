@@ -25,20 +25,21 @@ h3.govuk-heading-s Module topics
         .progress-bar
           span.icon class=icon
             span.number = position
-          - unless position == 1
+          - unless position == @module_progress.foo.size
             .line
 
         .module-section--content
           h4.govuk-heading-s= heading
           p.govuk-body= subheading
           .module-section--container
-            / - topics.each do |mod, topic_heading, next_item, status|
-              span.module-section--item
-                - if next_item
-                  = govuk_link_to topic_heading, training_module_content_page_path(mod, next_item)
-                - else
-                  = topic_heading
-              span = progress_indicator(status)
+            - unless position == 1
+              - topics.each do |mod, topic_heading, next_item, status|
+                span.module-section--item
+                  - if next_item
+                    = govuk_link_to topic_heading, training_module_content_page_path(mod, next_item)
+                  - else
+                    = topic_heading
+                span = progress_indicator(status)
           hr.govuk-section-break.govuk-section-break--m.govuk-section-break--visible
 
 / -------------------------------------

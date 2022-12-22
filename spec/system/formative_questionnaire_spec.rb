@@ -12,7 +12,7 @@ RSpec.describe 'Formative questionnaire' do
   context 'when a user has visited each page up to and including a formative assessment' do
     it 'call to action resumes the assessment at the furthest visited page' do
       visit '/modules/alpha'
-      click_on 'Resume training'
+      click_on 'Resume module'
       expect(page).to have_current_path '/modules/alpha/questionnaires/1-1-4', ignore_query: true
     end
   end

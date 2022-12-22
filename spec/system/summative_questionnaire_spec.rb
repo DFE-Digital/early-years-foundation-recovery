@@ -21,7 +21,7 @@ RSpec.describe 'Summative questionnaire' do
   context 'when a user has reached the assessment' do
     it 'can resume from the module overview page' do
       visit '/modules/alpha'
-      click_on 'Resume training'
+      click_on 'Resume module'
       expect(page).to have_current_path(first_question_path, ignore_query: true)
     end
   end

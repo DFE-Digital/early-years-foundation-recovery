@@ -96,7 +96,7 @@ RSpec.describe 'Event log' do
     before do
       view_pages_before_formative_questionnaire(alpha)
       visit '/modules/alpha'
-      click_on 'Resume training'
+      click_on 'Resume module'
       complete_formative_assessment_correct
     end
 

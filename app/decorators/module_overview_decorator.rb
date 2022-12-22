@@ -38,12 +38,13 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
       heading = num.eql?('intro') ? 'Module introduction' : intro.model.heading
       subheading = num.eql?('intro') ? 'The first section of this module includes:' : 'This section of this module includes:'
       icon = status(items)
+      topics = num.eql?('intro') ? nil : topics(submodule: num, items: items)
       [
         heading,                              # submodule intro heading
         subheading,                           # subheading
         position += 1,                        # position
         icon,                                 # icon style
-        # topics(submodule: num, items: items), # Array(String, Symbol)
+        topics,                               # Array(String, Symbol)
       ]
     end
   end
@@ -70,6 +71,27 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
   end
 
 private
+
+  # def module_introduction_content
+  #   [
+  #     'alpha',
+  #     'what-to-expect',
+  #     nil,
+  #     :completed,
+  #   ],
+  #   [
+  #     'alpha',
+  #     'what-to-expect',
+  #     nil,
+  #     :completed,
+  #   ],
+  #   [
+  #     'alpha',
+  #     'what-to-expect',
+  #     nil,
+  #     :completed,
+  #   ]
+  # end
 
   # exclude intro or subpages
   #
