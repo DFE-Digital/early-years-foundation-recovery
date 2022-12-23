@@ -8,7 +8,7 @@ Data dashboard gives a visual interpretation of the events within this applicati
 
 [Rake tasks](#rake-tasks)
 
-[Create a new task](#add-a-new-rake-task)
+[Build csv files on local machine](#build-csv-files-on-local-machine)
 
 
 ## Overview
@@ -48,54 +48,25 @@ ahoy_visits table:
 rake db:analytics:ahoy_visits
 ```
 
+## Build csv files on local machine
 
-
-## Add a new rake task:
-
-Open **lib/tasks/analytics.rake** 
-
-Copy and paste the code bellow just above the last **end** statement within **lib/tasks/analytics.rake**
+Start by creating a folder in the root of the project called **analytics_files** and then 
+do the following for all the rake tasks, ie, ahoy_visits rake task comment out the below code
 
 ```ruby
-    desc 'user_assessments table'
-    task user_assessments: :environment do
-      user_assessments = UserAssessment.all
-      build_csv = AnalyticsBuild.new(bucket_name: 'GCP_Storage_bucket_name', folder_path: 'folder_path_on_GCP_Storage_bucket', result_set: table_var, file_name: 'name_of_the_new_files')
-      build_csv.create if Rails.env.development?
-      build_csv.delete_files if Rails.env.production?
-      build_csv.upload if Rails.env.production?
-
-    end
+# ahoy_visit.create! if Rails.env.test?
+# ahoy_visit.delete_files if Rails.env.production? || Rails.env.development?
+# ahoy_visit.upload if Rails.env.production? || Rails.env.development?
 ```
 
-Description of the new task
+and uncomment the code below
 
 ```ruby
-desc 'Add table name and some description if necessary'
+ahoy_visit.create!
 ```
 
-Task command, recommended approach might be to add table name in the tasks
+and then run code below this should populate analytics_files with csv file / files.
 
 ```ruby
-task table_name: :environment do
-end
+rake db:analytics:ahoy_visits
 ```
-
-For the actual task we first need to pull all the data from the table. Create a new sql for the new table 
-
-*NOTE:* we are using sql to pull data out json object from within a jsonb field in the database if table has one.
-
-```ruby
-sql = "SELECT id, name_of_jsonb_column as json_column, (SELECT COUNT(*) FROM jsonb_object_keys(name_of_jsonb_column)) nbr_keys FROM public.table_name order by nbr_keys desc limit 1"
-```
-
-
-```ruby
-table_var = Table.all
-```
-
-```ruby
-build_csv = AnalyticsBuild.new(bucket_name: 'GCP_Storage_bucket_name', folder_path: 'folder_path_on_GCP_Storage_bucket', result_set: table_var, file_name: 'name_of_the_new_files')
-```
-
-
