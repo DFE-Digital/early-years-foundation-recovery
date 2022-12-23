@@ -2,16 +2,16 @@
 child-development-and-the-eyfs:
   duration: 1.5
   title: Understanding child development and the EYFS
-  thumbnail: 1-thumb-1355279156.jpg
+  thumbnail: 1-thumb-780x519-1355279156.jpg
   short_description : |
 
   description: |
-    As an early years practitioner, understanding child development and the early years foundation stage (EYFS) will enable you to meet the needs of all the children in your care. 
+    As an early years practitioner, understanding child development and the early years foundation stage (EYFS) will enable you to meet the needs of all the children in your care.
   objective: |
     This module will encourage you to reflect on why knowledge of child development is important, and help you to effectively implement the EYFS. It also considers the impact of the coronavirus (COVID-19) pandemic on children and their development.
   criteria: |
     - the importance of early childhood education and care, including how to implement strategies to provide a positive approach in your setting
-    - the importance of child development knowledge and the various factors that impact on children’s development 
+    - the importance of child development knowledge and the various factors that impact on children’s development
     - how you can effectively deliver the EYFS
     - the impact of the COVID-19 pandemic on children's development
   summative_threshold: 70
@@ -20,7 +20,7 @@ brain-development-and-how-children-learn:
   depends_on: child-development-and-the-eyfs
   duration: 2
   title: Brain development and how children learn
-  thumbnail: 2-thumb-1203132106.jpg
+  thumbnail: 2-thumb-780x519-1203132106.jpg
   short_description: |
     This module explores how a child's brain develops and how to consider factors affecting brain development when planning for your setting. You can start it once you have completed module 1.
   description: |
@@ -38,14 +38,14 @@ personal-social-and-emotional-development:
   depends_on: brain-development-and-how-children-learn
   duration: 2
   title: Supporting children’s personal, social and emotional development
-  thumbnail: 3-thumb-1159321535.jpg
+  thumbnail: 3-thumb-780x519-1159321535.jpg
   short_description: |
     This module explores how you can best support children to develop, learn and rehearse their key personal, social and emotional skills. You can start it once you have completed modules 1 and 2.
   description: |
     Personal, social and emotional skills play a central role in helping children to understand and regulate their emotions and behaviour, build positive relationships, and navigate the social world around them.
   objective: |
     This module explores how you can best support children to learn, develop and rehearse their key personal, social and emotional skills in your everyday practice.
-    
+
     It will help you to consider how the development of these skills impact on a child’s overall development.
   criteria: |
     - the stages of children’s personal, social and emotional development
@@ -58,9 +58,9 @@ module-4:
   depends_on: personal-social-and-emotional-development
   duration: 2
   title: Supporting language development in the early years
-  thumbnail: 4-thumb-157720194.jpg
+  thumbnail: 4-thumb-780x519-157720194.jpg
   short_description: |
-    This module explores how children develop their speech, language and communication skills. It also explains your role in helping children to learn, practise and use a wide range of language with confidence. You can start it once you have completed modules 1, 2 and 3. 
+    This module explores how children develop their speech, language and communication skills. It also explains your role in helping children to learn, practise and use a wide range of language with confidence. You can start it once you have completed modules 1, 2 and 3.
   description: |
     Children’s speech, language and communication skills affect the way they behave, learn, and interact with the world. As an early years practitioner, you will play a central role in helping children to learn, practise and use a wide range of language with confidence.
   objective: |
@@ -76,18 +76,18 @@ module-5:
   depends_on: personal-social-and-emotional-development
   duration: 2
   title: Physical development
-  thumbnail: 
+  thumbnail:
   short_description: |
-    This module explores how children develop physical skills. It also discusses how to consider their impact on learning, development and behaviour when planning for your setting. 
+    This module explores how children develop physical skills. It also discusses how to consider their impact on learning, development and behaviour when planning for your setting.
   description: |
-    Physical activity is central to children’s all-round development. It  helps them to master control of their body and build healthy habits. As an early years practitioner, you will help children develop the fine and gross motor skills they need for independence.  
+    Physical activity is central to children’s all-round development. It  helps them to master control of their body and build healthy habits. As an early years practitioner, you will help children develop the fine and gross motor skills they need for independence.
   objective: |
     This module will explore how your planning, curriculum and environment can help children learn, develop and refine their physical skills.
   criteria: |
     - the different stages and theories of children’s physical development
-    - potential factors that can affect physical development 
+    - potential factors that can affect physical development
     - how physical skills impact on learning, development and behaviour
-    - the importance of the curriculum, environment and relationships for promoting physical development 
+    - the importance of the curriculum, environment and relationships for promoting physical development
   summative_threshold: 70
   draft: true
 
@@ -95,14 +95,14 @@ module-6:
   depends_on: personal-social-and-emotional-development
   duration: 2
   title: Encouraging holistic development
-  thumbnail: 
+  thumbnail:
   short_description: |
     This module explores what holistic development is and why it’s important for children. It also discusses how you can consider its impact on learning, development and behaviour when planning for your setting.
-  description: 
-    
-  objective: 
-    
-  criteria: 
+  description:
+
+  objective:
+
+  criteria:
 
   summative_threshold: 70
   draft: true
@@ -111,14 +111,14 @@ module-7:
   depends_on: personal-social-and-emotional-development
   duration: 2
   title: Mathematics
-  thumbnail: 
+  thumbnail:
   short_description: |
     This module explores how you can teach mathematics in combination with other areas of the early years foundation stage (EYFS). It also considers how you can help children to develop their understanding of number in your setting.
-  description: 
-    
-  objective: 
-    
-  criteria: 
+  description:
+
+  objective:
+
+  criteria:
 
   summative_threshold: 70
   draft: true
@@ -127,14 +127,14 @@ module-8:
   depends_on: personal-social-and-emotional-development
   duration: 2
   title: Planning inclusive learning
-  thumbnail: 
+  thumbnail:
   short_description: |
     This module explores strategies to create a diverse and inclusive curriculum and learning environment for all children in your care.
-  description: 
-    
-  objective: 
-    
-  criteria: 
+  description:
+
+  objective:
+
+  criteria:
 
   summative_threshold: 70
   draft: true
@@ -143,14 +143,14 @@ module-9:
   depends_on: personal-social-and-emotional-development
   duration: 2
   title: Effective observation and assessment
-  thumbnail: 
+  thumbnail:
   short_description: |
     This module explores different types of observation and assessment, including when and how to use these effectively. It also considers how to ensure that observation does not disrupt children’s learning.
-  description: 
-    
-  objective: 
-    
-  criteria: 
+  description:
+
+  objective:
+
+  criteria:
 
   summative_threshold: 70
   draft: true
@@ -159,14 +159,14 @@ module-10:
   depends_on: personal-social-and-emotional-development
   duration: 2
   title: Supporting individual needs
-  thumbnail: 
+  thumbnail:
   short_description: |
     This module explores the importance of identifying children’s individual starting points and needs. It also considers how your knowledge of each child can help you support them to reach their full potential.
-  description: 
-    
-  objective: 
-    
-  criteria:  
+  description:
+
+  objective:
+
+  criteria:
 
   summative_threshold: 70
   draft: true

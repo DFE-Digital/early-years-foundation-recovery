@@ -30,10 +30,10 @@ p.govuk-body Some modules also have short videos to enhance your understanding.
       div class='light-grey-box govuk-!-margin-bottom-4'
         h2.govuk-heading-m Ready to get started?
         p.govuk-body Enrol on this course and begin the first module. You will need to sign in or create an account before starting a module.
-        = govuk_button_link_to 'Create an account', new_user_registration_path, class: 'govuk-!-margin-bottom-4'
-        '
-        ' or
-        = govuk_link_to 'sign in', new_user_session_path
+        .govuk-button-group
+          = govuk_button_link_to 'Create an account', new_user_registration_path
+          .white-space-pre-wrap= ' or '
+          = govuk_link_to 'sign in', new_user_session_path
 
 .govuk-grid-row
   .govuk-grid-column-full

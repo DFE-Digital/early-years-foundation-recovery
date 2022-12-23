@@ -48,7 +48,7 @@
       .light-grey-box
         h2.govuk-heading-m Return to your training
         p Sign in to continue learning, see your progress and download certificates.
-        = govuk_button_link_to 'Sign in', new_user_session_path, class: 'govuk-!-margin-bottom-4'
-        '
-        ' or
-        = govuk_link_to 'create an account', new_user_registration_path
+        .govuk-button-group
+          = govuk_button_link_to 'Sign in', new_user_session_path
+          .white-space-pre-wrap= ' or '
+          = govuk_link_to 'create an account', new_user_registration_path

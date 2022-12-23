@@ -6,6 +6,7 @@
       li timeout after: #{timeout_duration} minutes
       li timeout warning: #{timeout_warning} minutes
       li timeout modal visible for: #{timeout_modal} minutes
+      li timeout at: #{timeout_time}
       / li timer start value: #{timeout_timer} in seconds
 
     ul
@@ -16,9 +17,9 @@
 /[if lt IE 10]
   script[src="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.5.0/dialog-polyfill.js"]
 
-.govuk-timeout-warning-fallback
-  h1.govuk-heading-l= t('timeout.heading')
-
+- if user_signed_in?
+  .govuk-timeout-warning-fallback
+    .govuk-inset-text= translate_markdown(t('timeout.noscript', timeout_duration: timeout_duration, sign_out_time: timeout_time))
 
 dialog#js-timeout-warning.govuk-timeout-warning.dialog data-module='govuk-timeout-warning' tabindex=0 data-user-status=timeout_active data-minutes-idle-timeout=timeout_warning data-minutes-modal-visible=timeout_modal data-url-redirect=users_timeout_path role='dialog' aria-live='polite' aria-labelledby='dialog-title' aria-describedby='at-timer'
 
