@@ -217,7 +217,7 @@ en:
     noscript: |
       For security, you'll be signed out at %{sign_out_time}.
 
-      To stay signed in, continue through the training or refresh the app.
+      To stay signed in, continue through the training or refresh the page.
 
   summary_intro:
     heading: Summary and next steps
