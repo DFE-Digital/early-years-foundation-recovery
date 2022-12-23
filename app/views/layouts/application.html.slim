@@ -25,7 +25,6 @@ html.govuk-template lang='en'
     
     = render 'layouts/analytics_body'
     = render 'layouts/cookie_banner'
-    = render 'layouts/timeout'
     
     = govuk_skip_link
 
@@ -35,6 +34,8 @@ html.govuk-template lang='en'
       = govuk_phase_banner(tag: { text: 'Beta' }, classes: 'noprint') do
         = t('phase_banner_html', feedback_link: govuk_link_to('feedback', Rails.configuration.feedback_url, target: :_blank))
 
+      = render 'layouts/timeout'
+      
       = back_to_module_overview_button
 
       main#main-content.govuk-main-wrapper
