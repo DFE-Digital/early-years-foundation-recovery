@@ -33,20 +33,20 @@ namespace :db do
       users.create! if Rails.env.test?
       users.delete_files if Rails.env.production? || Rails.env.development?
       users.upload if Rails.env.production? || Rails.env.development?
-      Rake::Task['db:analytics:users'].reenable # need to reset rake task before it can be run again.
+      # uncomment this code to create csv file on local machine
+      # users.create!
     end
 
     desc 'ahoy_events table'
     task ahoy_events: :environment do
       sql = 'SELECT id, properties as json_column, (SELECT COUNT(*) FROM jsonb_object_keys(properties)) nbr_keys FROM public.ahoy_events order by nbr_keys desc limit 1'
       event_json = ActiveRecord::Base.connection.execute(sql)
-      events_names_list = %w[summative_assessment_start confidence_check_complete confidence_check_start module_complete user_note_updated user_note_created user_name_change summative_assessment_complete user_registration questionnaire_answer]
       events_results = Ahoy::Event.select(" id, visit_id,
                                             user_id,
                                             COALESCE(name, 'null') as name,
                                             TO_CHAR(time, 'YYYY-MM-DD HH:MM:SS') as event_time,
                                             #{AnalyticsBuild.build_json_sql('properties', JSON.parse(event_json.first['json_column']))}
-                                            properties").where(name: events_names_list)
+                                            properties").where.not(name: 'module_content_page')
       events = AnalyticsBuild.new(bucket_name: ENV['GCS_BUCKET_NAME'],
                                   folder_path: 'eventsdata',
                                   result_set: events_results,
@@ -55,7 +55,8 @@ namespace :db do
       events.create! if Rails.env.test?
       events.delete_files if Rails.env.production? || Rails.env.development?
       events.upload if Rails.env.production? || Rails.env.development?
-      Rake::Task['db:analytics:ahoy_events'].reenable # need to reset rake task before it can be run again.
+      # uncomment this code to create csv file on local machine
+      # events.create!
     end
 
     desc 'user_assessments table'
@@ -69,7 +70,8 @@ namespace :db do
       assessments.create! if Rails.env.test?
       assessments.delete_files if Rails.env.production? || Rails.env.development?
       assessments.upload if Rails.env.production? || Rails.env.development?
-      Rake::Task['db:analytics:user_assessments'].reenable # need to reset rake task before it can be run again.
+      # uncomment this code to create csv file on local machine
+      # assessments.create!
     end
 
     desc 'user_answers table'
@@ -83,12 +85,13 @@ namespace :db do
       answers.create! if Rails.env.test?
       answers.delete_files if Rails.env.production? || Rails.env.development?
       answers.upload if Rails.env.production? || Rails.env.development?
-      Rake::Task['db:analytics:user_answers'].reenable # need to reset rake task before it can be run again.
+      # uncomment this code to create csv file on local machine
+      # answers.create!
     end
 
     desc 'ahoy_visits table'
     task ahoy_visits: :environment do
-      ahoy_visits = Ahoy::Visit.all
+      ahoy_visits = Ahoy::Visit.select("*, TO_CHAR(started_at, 'YYYY-MM-DD HH:MM:SS') AS formated_started_at").all
       ahoy_visit = AnalyticsBuild.new(bucket_name: ENV['GCS_BUCKET_NAME'],
                                       folder_path: 'visitsdata',
                                       result_set: ahoy_visits,
@@ -96,7 +99,9 @@ namespace :db do
       ahoy_visit.create! if Rails.env.test?
       ahoy_visit.delete_files if Rails.env.production? || Rails.env.development?
       ahoy_visit.upload if Rails.env.production? || Rails.env.development?
-      Rake::Task['db:analytics:ahoy_visits'].reenable # need to reset rake task before it can be run again.
+
+      # uncomment this code to create csv file on local machine
+      # ahoy_visit.create!
     end
   end
 end

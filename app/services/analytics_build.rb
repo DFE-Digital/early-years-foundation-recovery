@@ -1,9 +1,4 @@
 class AnalyticsBuild
-  require 'csv'
-  require 'google/cloud/storage'
-
-  attr_accessor :bucket_name, :folder_path, :result_set, :file_name, :gcs
-
   # @param bucket_name [String] Google bucket name
   # @param folder_path [String] Google bucket folder path
   # @param result_set [ActiveRecord] Active record result set

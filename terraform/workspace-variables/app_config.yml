@@ -27,7 +27,7 @@ staging:
   DOMAIN: ey-recovery-staging.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-staging
   TRACKING_ID: GTM-W6W95FD  # Test data
-  GCS_BUCKET_NAME: staging_approval
+  GCS_BUCKET_NAME: eyfs-data-dashboard-staging
 
 # ey-recovery-dev
 development:
@@ -38,7 +38,7 @@ development:
 # ey-recovery-content
 content:
   <<: *defaults
-  GCS_BUCKET_NAME: pr-review
+  GCS_BUCKET_NAME: eyfs-data-dashboard-pr-review
   # TRAINING_MODULES: demo-modules
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
