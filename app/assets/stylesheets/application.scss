@@ -12,7 +12,8 @@ $govuk-new-link-styles: true;
 @import "./icons";
 @import "./modal";
 @import "./autocomplete";
-@import "./header";
+@import "./progress-bar.scss";
+@import "./header.scss";
 
 * {
   font-family: 
@@ -139,4 +140,8 @@ ul > li > ul > li {
 
 .govuk-footer__copyright-logo {
   display: none;
+}
+
+.white-space-pre-wrap {
+  white-space: pre-wrap;
 }
