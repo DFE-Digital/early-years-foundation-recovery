@@ -120,21 +120,21 @@ module-5:
       1_holistic_impact:
         multi_select: false
         label: |
-          Which of the following can be reduced significantly when children take part in regular physical activity?
+          Which of the following can be improved significantly when children take part in regular physical activity?
 
         assessment_summary:
         assessment_fail_summary: |
-          Being active can positively support children’s mental health. Being able to practice and master a skill, for example throwing and catching a ball with control, can help to build a child’s confidence. This will help to reduce the likelihood of children experiencing anxiety and depression.
+          Being active can positively support children’s mental health. Being able to practice and master a skill, for example throwing and catching a ball with control, can help to build a child’s confidence.
 
           You will need to make sure that children can access activities that are achievable with appropriate challenge and support. If a child is not able to make progress, even small steps, they will not feel this sense of achievement. It is important that you know about each child’s starting point with physical skills to ensure that you can plan a suitable environment and activities.
 
-          You might want to revisit the section on activity in the [outdoor environment](/modules/module-5/content-pages/5-3-2-6a).
+          You might want to revisit the section on [health and wellbeing](/modules/module-5/content-pages/5-2-1-1a).
 
         answers:
           1: "Hunger"
-          2: "Sleep"
+          2: "Toileting"
           3: "Illness"
-          4: "Anxiety and depression"
+          4: "Mental health"
         correct_answers:
         - 4
 
@@ -165,9 +165,9 @@ module-5:
     content:
     questions:
       1_practitioners-role:
-        multi_select: false
+        multi_select: true
         label: |
-          Which of the following best describes your role in children’s physical development?
+          Which of the following describes your role in children’s physical development? (Select all answers that apply)
         assessment_summary:
         assessment_fail_summary: |
           You will need to plan an active curriculum to ensure that children’s fine and gross motor skills are promoted. Being an enthusiastic role model will support children’s enthusiasm and motivation to be physically active.
@@ -180,6 +180,8 @@ module-5:
           4: "Balanced and inclusive"
         correct_answers:
         - 2
+        - 3
+        - 4
 
   5-4-1-9:
     content:

@@ -53,10 +53,8 @@ module-5:
     type: text_page
   5-1-3:
     type: text_page         # submodule 1 / topic 3
-  5-1-3-1a:
+  5-1-3-1:
     type: text_page
-  5-1-3-1b:
-    type: formative_questionnaire
   5-1-3-2a:
     type: text_page
   5-1-3-2b:

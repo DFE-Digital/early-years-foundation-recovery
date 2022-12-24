@@ -393,11 +393,12 @@ en:
 
           At this age, most children will be able to:
 
-          - cut using scissors
           - turn pages of a book one at a time
           - show a preferred hand when carrying out tasks
           - paint dots, lines and circular strokes with control
           - use larger fastenings on clothes like chunky buttons and zips
+          - attempt to use scissors
+
 
           $INFO
 
@@ -410,7 +411,7 @@ en:
           - cutting activities
           - puzzles
           - train and car tracks
-          - imaginative play with gross motor activities, such as We're Going on a Bear Hunt
+          - imaginative play with gross motor activities
           - action songs
           - role play using clothes with fasteners
 
@@ -599,7 +600,7 @@ en:
           - Nutrition
           - Additional needs
 
-      5-1-3-1a:
+      5-1-3-1:
         notes: true
         heading: |
           Socio-economic factors
@@ -661,9 +662,6 @@ en:
 
           $BRAIN
 
-      5-1-3-1b:
-        # question
-
       5-1-3-2a:
         notes: true
         heading: |
@@ -711,7 +709,7 @@ en:
 
           Children with a poor diet may also have difficulty concentrating. This will impact on their ability to follow instructions and complete physical activities. Children may experience tummy troubles such as constipation as a result of a lack of fibre. In extreme cases this can cause discomfort, distract them from learning, or lead to time away from the setting.
 
-          What a child eats and drinks will impact on their oral health. It is important that children do not have large amounts of sugary food. In your setting, you should offer water instead of fruit juice and fizzy pop. You should limit snacking, and when you do offer snacks, you should only offer healthy choices. This will limit the amount of acid in children’s mouths. If children consume acidic food and drinks over a prolonged period it can erode the tooth enamel. This in turn can lead to a higher risk of decay and cavities.
+          What a child eats and drinks will impact on their oral health. It is important that children do not have large amounts of sugary food. In your setting, you should offer water instead of fruit juice and fizzy pop. When you offer snacks, you should offer healthy choices. This will limit the amount of acid in children’s mouths. If children consume acidic food and drinks over a prolonged period it can erode the tooth enamel. This in turn can lead to a higher risk of decay and cavities.
 
           A series of menus have been created to support you and your setting to offer healthy, balanced and nutritious meals for children. The guidance ensures that children are offered food and drink that meets current dietary recommendations and the EYFS welfare requirements. You can find details in the further reading section at the end of this module.
 
@@ -817,7 +815,7 @@ en:
           - improved co-ordination
           - improved strength
 
-          As well as the physical benefits, being active can also have a positive impact on children’s mental health. Practising and mastering a skill, like throwing and catching a ball with control, can help to build a child’s confidence. This will help to reduce the likelihood of children experiencing anxiety and depression.
+          As well as the physical benefits, being active can also have a positive impact on children’s mental health. Practising and mastering a skill, like throwing and catching a ball with control, can help to build a child’s confidence.
 
           You will need to make sure that all children have access to a wide range of activities regardless of their gender, individual needs and previous experiences.
 
@@ -1060,9 +1058,19 @@ en:
         body: |
           ![Practicing balancing at soft play](/assets/5-3-1-1-926268510.jpg)
 
-          It is essential that you plan a curriculum and environment that encourages children to move and develop physical skills. Child led activities allow children to use their gross and fine motor skills. Children are also more likely to carry out tasks that they feel confident with or are more interested in. However, without effective planning they will miss out on opportunities for you to encourage them in more difficult or unfamiliar situations.
+          It is essential that you plan a curriculum and environment that encourages children to move and develop physical skills. NHS guidelines say that:
 
-          Gathering information when a child starts in your setting, and continuing to observe them, will help you identify the child’s current level of development. You will be able to combine this information with your understanding of the expected stage of development for their age. With this knowledge, you can plan an effective curriculum to support each child to be ambitious in a safe and challenging environment.
+          - babies should be encouraged to be active throughout the day in a variety of ways, including crawling and tummy time
+          - children aged 1 to 2 should be physically active for at least 180 minutes every day
+          - children aged 3 to 4 should spend at least 180 minutes every day being physically active, and at least 60 minutes of this should be moderate-to-vigorous activity
+
+          You can find the NHS physical activity guidelines for children under 5 years in the further reading section at the end of this module.
+
+          ##Balancing child and adult led physical activities
+
+          Child led activities allow children to use their gross and fine motor skills. Children are also more likely to carry out tasks that they feel confident with or are more interested in. However, without effective planning they will miss out on opportunities for you to encourage them in more difficult or unfamiliar situations.
+
+          Gathering information when a child starts in your setting, and continuing to observe them, will help you identify the child’s current level of physical development. You will be able to combine this information with your understanding of the expected stage of development for their age. With this knowledge, you can plan an effective curriculum to support each child to be ambitious in a safe and challenging environment.
 
           You can use also use children’s interests to support their physical development. For example, a child may be reluctant to go outside for activities to support their gross motor skills or take part in creative activities that may support their fine motor skills. If you know that the child enjoys learning about animals or insects you could plan animal related creative activities to encourage them to take part.
 
@@ -1205,8 +1213,11 @@ en:
           - role play clothes with a variety of fasteners
           - materials for construction activities, such as making craft models or building with wooden blocks
           - puzzles
-          modelling materials, such as clay, plasticine and dough
+          - modelling materials, such as clay, plasticine and dough
           - water, sand and messy play materials, such as gloop and foam
+          - items to thread, such as beads or pasta shapes
+
+          Children must always be supervised when taking part in these activities.
 
           $INFO
 
@@ -1338,7 +1349,7 @@ en:
 
           Research shows us that children who regularly access outdoor environments have improved strength, agility and coordination. This is because running, climbing and swinging use different movements, muscles and control to those needed for indoor movement. Children who develop new movement skills also develop greater self confidence as they learn to make it to the top of the slide or successfully negotiate an obstacle course.
 
-          There are many holistic benefits to regular access to outdoor environments. Spending time in sunlight can support children’s overall mood and the exposure to vitamin D supports the development of strong and healthy bones and teeth. Children naturally become even more curious when they are outside which will result in spontaneous learning opportunities.
+          There are many holistic benefits to regular access to outdoor environments. Children naturally become even more curious when they are outside which will result in spontaneous learning opportunities. Spending time in daylight can support children’s overall mood and the exposure to vitamin D supports the development of strong and healthy bones and teeth. You should follow the NHS guidance on sun safety, which is linked to in the further reading section.
 
           Outdoor environments create opportunities for social interaction and communication as children work together to negotiate equipment, take turns and solve problems. Examples of outdoor activities and their benefits include:
 
@@ -1393,7 +1404,7 @@ en:
           - parents and carers with limited time
           - parents and carers with previous negative experience of physical activity
           - a lack of understanding of the benefits of physical activities
-          - limited finances and resources such as books or items to handle
+          - limited finances and resources
           - limited understanding of expected development
 
 
@@ -1403,7 +1414,7 @@ en:
 
           Sharing examples of the activities that their children carry out in the setting will support parents’ and carers’ understanding of appropriate activities to aid their child’s development. You can also share photos of the children carrying out physical activities, either by text message, dedicated app, printed out on daily diaries or in the child’s learning journey folder. This will give parents examples that they can use at home and will also be a conversation point for children to share their experiences.
 
-          Where possible you can share resources for children to take home. This could include the resources needed to carry out a threading activity or story sacks that involve movement such as “We’re Going on a Bear Hunt”. It is also important to include a wide range of activities that require minimal or no equipment. This could be a list of songs currently being sung or inspiration to put music on and dance together.
+          Where possible you can share resources for children to take home. This could include the resources needed to carry out a threading activity or story sacks that involve movement. It is also important to include a wide range of activities that require minimal or no equipment. This could be a list of songs currently being sung or inspiration to put music on and dance together.
 
           You could send children home with a challenge such as a treasure hunt sheet or craft activity to be completed. This will encourage parents to become involved in both their child’s learning and their physical development.
 
@@ -1549,9 +1560,11 @@ en:
 
           Read the Ofsted article about [fundamental motor skills and physical education](https://schoolsweek.co.uk/ofsteds-guide-to-raising-the-quality-of-pe-%ef%bf%bc/).
 
+          The NHS has published [physical activity guidelines for children under 5 years](https://www.nhs.uk/live-well/exercise/exercise-guidelines/physical-activity-guidelines-children-under-five-years/), with examples of physical activity for each age group.
+
           The [NHS Eatwell Guide](https://www.nhs.uk/live-well/eat-well/food-guidelines-and-food-labels/the-eatwell-guide/) has information about food groups and healthy eating.
 
-          Advice from the NHS on [what to feed young children](https://www.nhs.uk/conditions/baby/weaning-and-feeding/what-to-feed-young-children/).
+          Advice from the NHS on [weaning and feeding](https://www.nhs.uk/conditions/baby/weaning-and-feeding/).
 
           [Example menus and useful guidance for early years settings](https://www.gov.uk/government/publications/example-menus-for-early-years-settings-in-england). The guidance ensures that children are offered food and drink that meets current dietary recommendations and the EYFS welfare requirements.
 
@@ -1560,6 +1573,10 @@ en:
           Advice on [helping to prevent tooth decay in children under 5](https://www.gov.uk/government/publications/health-matters-child-dental-health/health-matters-child-dental-health) from Public Health England.
 
           Find out about [promoting oral health as part of the EYFS](https://help-for-early-years-providers.education.gov.uk/safeguarding-and-welfare/oral-health) on the Department for Education's Help for early years providers website.
+
+          Read NHS advice about [how to stop a child from choking](https://www.nhs.uk/conditions/baby/first-aid-and-safety/first-aid/how-to-stop-a-child-from-choking/).
+
+          See NHS guidance on [sunscreen and sun safety](https://www.nhs.uk/live-well/seasonal-health/sunscreen-and-sun-safety/).
 
           $BOOK
 
