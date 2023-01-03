@@ -51,7 +51,7 @@ rake db:analytics:ahoy_visits
 
 ## Build csv files on local machine
 
-1. Create a folder called 'analytics_tasks' in the root of the directory.
+1. Create a folder called 'analytics_files' in the root of the directory.
 
 2. Within each task in the `analytics.rake` file, comment out the equivalent 
 three lines. In the ahoy_visit task, they look like this:
