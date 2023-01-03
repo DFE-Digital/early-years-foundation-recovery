@@ -16,18 +16,18 @@ class ContentPage
   delegate :pagination, to: :module_item
 
   # @return [String]
-  def heading
-    contentful? ? page_decorator.heading : translate(:heading)
+  def heading(remote: true)
+    contentful? && remote ? page_decorator.heading : translate(:heading)
   end
 
   # @return [String]
-  def body
-    contentful? ? page_decorator.body : translate(:body)
+  def body(remote: true)
+    contentful? && remote ? page_decorator.body : translate(:body)
   end
 
   # @return [Boolean]
-  def notes?
-    contentful? ? !!page_decorator.notes : translate(:notes).present?
+  def notes?(remote: true)
+    contentful? && remote ? !!page_decorator.notes : translate(:notes).present?
   end
 
   # @return [Boolean]

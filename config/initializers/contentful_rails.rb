@@ -1,4 +1,4 @@
-#require 'training/module'
+require 'training/module'
 require 'training/page'
 require 'training/question'
 require 'training/confidence'
@@ -13,14 +13,14 @@ ContentfulRails.configure do |config|
   config.access_token = Rails.application.credentials.dig(:contentful, :delivery_access_token) # Required
   config.space = Rails.application.credentials.dig(:contentful, :space) # Required
   config.preview_access_token = Rails.application.credentials.dig(:contentful, :preview_access_token) # Optional - required if you want to use the preview API
-  # config.management_token = Rails.application.credentials.dig(:contentful, :management_token) # Optional - required if you want to update or create content
+  config.management_token = Rails.application.credentials.dig(:contentful, :management_access_token) # Optional - required if you want to update or create content
   config.default_locale = 'en-US' # Optional - defaults to 'en-US'
   config.eager_load_entry_mapping = false
   config.contentful_options = {
     delivery_api: { timeout_connect: 2, timeout_read: 6, timeout_write: 20 },
     management_api: { timeout_connect: 3, timeout_read: 100, timeout_write: 200 },
     entry_mapping: {
-#      'module' => Training::Module,
+      'module' => Training::Module,
       'page' => Training::Page,
       'question' => Training::Question,
       'confidence' => Training::Confidence,

@@ -45,12 +45,12 @@ class Questionnaire < OpenStruct
   end
 
   # @return [String] plain text content
-  def heading
+  def heading(remote: true)
     translate(:heading) || name
   end
 
   # @return [String] unparsed govspeak content
-  def body
+  def body(remote: true)
     translate(:body)
   end
 
@@ -59,6 +59,10 @@ class Questionnaire < OpenStruct
     return module_item.pagination if formative?
 
     { current: page_number, total: total_questions }
+  end
+
+  def notes?(remote: true)
+    false
   end
 
   # OPTIMIZE: There is only ever one question

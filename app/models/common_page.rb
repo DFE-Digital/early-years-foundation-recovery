@@ -5,13 +5,13 @@
 #
 class CommonPage < ContentPage
   # @return [String]
-  def heading
-    contentful? ? page_decorator.heading : I18n.t('heading', scope: type)
+  def heading(remote: true)
+    contentful? && remote ? page_decorator.heading : I18n.t('heading', scope: type)
   end
 
   # @return [String]
-  def body
-    contentful? ? page_decorator.body : I18n.t('body', scope: type, **locals)
+  def body(remote: true)
+    contentful? && remote ? page_decorator.body : I18n.t('body', scope: type, **locals)
   end
 
   # @return [false]

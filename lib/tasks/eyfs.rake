@@ -75,4 +75,10 @@ namespace :eyfs do
 
     puts "Updated #{number_updated} of #{total_records} records"
   end
+
+  desc 'Upload'
+  task :upload, [:module] => :environment do |_task, args|
+    require 'upload'
+    Upload.new(module_id: args[:module]).call
+  end
 end
