@@ -152,4 +152,11 @@ RSpec.describe 'Summative questionnaire' do
       expect(page).to have_link 'revisit topic'
     end
   end
+
+  context 'when on a questionnaire page' do
+    specify do
+      visit 'modules/alpha/content-pages/1-1'
+      expect(page).to have_link 'Back to Module 1 overview', href: '/modules/alpha'
+    end
+  end
 end

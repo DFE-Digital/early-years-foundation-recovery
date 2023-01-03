@@ -1,6 +1,7 @@
 class QuestionnairesController < ApplicationController
   before_action :authenticate_registered_user!, :module_item, :show_progress_bar
   before_action :track_events, only: :show
+  helper_method :training_module
 
   def show
     questionnaire_taker.prepare
