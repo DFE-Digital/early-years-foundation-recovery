@@ -34,7 +34,7 @@ namespace :db do
       users.create! if Rails.env.test?
       users.delete_files if Rails.env.production? || Rails.env.development?
       users.upload if Rails.env.production? || Rails.env.development?
-      
+
       # uncomment this line to create csv file on local machine
       # users.create!
     end
@@ -58,7 +58,7 @@ namespace :db do
       events.create! if Rails.env.test?
       events.delete_files if Rails.env.production? || Rails.env.development?
       events.upload if Rails.env.production? || Rails.env.development?
-      
+
       # uncomment this line to create csv file on local machine
       # events.create!
     end
@@ -75,7 +75,7 @@ namespace :db do
       assessments.create! if Rails.env.test?
       assessments.delete_files if Rails.env.production? || Rails.env.development?
       assessments.upload if Rails.env.production? || Rails.env.development?
-      
+
       # uncomment this line to create csv file on local machine
       # assessments.create!
     end
@@ -92,7 +92,7 @@ namespace :db do
       answers.create! if Rails.env.test?
       answers.delete_files if Rails.env.production? || Rails.env.development?
       answers.upload if Rails.env.production? || Rails.env.development?
-      
+
       # uncomment this line to create csv file on local machine
       # answers.create!
     end
