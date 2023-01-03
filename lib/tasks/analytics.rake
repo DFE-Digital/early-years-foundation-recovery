@@ -30,10 +30,12 @@ namespace :db do
                                  folder_path: 'userdata',
                                  result_set: users_all, file_name: 'users')
 
+      # comment out the following 3 lines to create csv on local machine
       users.create! if Rails.env.test?
       users.delete_files if Rails.env.production? || Rails.env.development?
       users.upload if Rails.env.production? || Rails.env.development?
-      # uncomment this code to create csv file on local machine
+      
+      # uncomment this line to create csv file on local machine
       # users.create!
     end
 
@@ -52,10 +54,12 @@ namespace :db do
                                   result_set: events_results,
                                   file_name: 'ahoy_events')
 
+      # comment out the following 3 lines to create csv on local machine
       events.create! if Rails.env.test?
       events.delete_files if Rails.env.production? || Rails.env.development?
       events.upload if Rails.env.production? || Rails.env.development?
-      # uncomment this code to create csv file on local machine
+      
+      # uncomment this line to create csv file on local machine
       # events.create!
     end
 
@@ -67,10 +71,12 @@ namespace :db do
                                        result_set: user_assessments,
                                        file_name: 'user_assessments')
 
+      # comment out the following 3 lines to create csv on local machine
       assessments.create! if Rails.env.test?
       assessments.delete_files if Rails.env.production? || Rails.env.development?
       assessments.upload if Rails.env.production? || Rails.env.development?
-      # uncomment this code to create csv file on local machine
+      
+      # uncomment this line to create csv file on local machine
       # assessments.create!
     end
 
@@ -82,10 +88,12 @@ namespace :db do
                                    result_set: user_answers,
                                    file_name: 'user_answers')
 
+      # comment out the following 3 lines to create csv on local machine
       answers.create! if Rails.env.test?
       answers.delete_files if Rails.env.production? || Rails.env.development?
       answers.upload if Rails.env.production? || Rails.env.development?
-      # uncomment this code to create csv file on local machine
+      
+      # uncomment this line to create csv file on local machine
       # answers.create!
     end
 
@@ -96,11 +104,13 @@ namespace :db do
                                       folder_path: 'visitsdata',
                                       result_set: ahoy_visits,
                                       file_name: 'ahoy_visits')
+
+      # comment out the following 3 lines to create csv on local machine
       ahoy_visit.create! if Rails.env.test?
       ahoy_visit.delete_files if Rails.env.production? || Rails.env.development?
       ahoy_visit.upload if Rails.env.production? || Rails.env.development?
 
-      # uncomment this code to create csv file on local machine
+      # uncomment this line to create csv file on local machine
       # ahoy_visit.create!
     end
   end
