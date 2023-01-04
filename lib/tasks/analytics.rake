@@ -2,6 +2,10 @@
 # Upload csv files to Google storage from DB
 namespace :db do
   namespace :analytics do
+    # perform all the below tasks
+    desc 'All'
+    task all: %i[users ahoy_events user_assessments user_answers ahoy_visits]
+
     desc 'Users table'
     task users: :environment do
       # due to the nature of the dynamic json objects stored in the column  we need to get the largest column data and run through
@@ -17,7 +21,7 @@ namespace :db do
       sql = 'SELECT id, module_time_to_completion as json_column, (SELECT COUNT(*) FROM jsonb_object_keys(module_time_to_completion)) nbr_keys FROM public.users order by nbr_keys desc limit 1'
       user_json = ActiveRecord::Base.connection.execute(sql)
       users_all = User.select(" id,
-                                TO_CHAR(created_at, 'YYYY-MM-DD') AS registered_at,
+                                COALESCE(TO_CHAR(confirmed_at, 'YYYY-MM-DD'), 'null') AS registered_at,
                                 COALESCE(NULLIF(setting_type, 'other'), COALESCE(setting_type_other, 'null')) AS user_setting,
                                 COALESCE(module_time_to_completion->>'child-development-and-the-eyfs', 'null') AS module_1_time,
                                 COALESCE(module_time_to_completion->>'brain-development-and-how-children-learn', 'null') AS module_2_time,
@@ -31,12 +35,12 @@ namespace :db do
                                  result_set: users_all, file_name: 'users')
 
       # comment out the following 3 lines to create csv on local machine
-      users.create! if Rails.env.test?
-      users.delete_files if Rails.env.production? || Rails.env.development?
-      users.upload if Rails.env.production? || Rails.env.development?
+      # users.create! if Rails.env.test?
+      # users.delete_files if Rails.env.production? || Rails.env.development?
+      # users.upload if Rails.env.production? || Rails.env.development?
 
       # uncomment this line to create csv file on local machine
-      # users.create!
+      users.create!
     end
 
     desc 'ahoy_events table'
@@ -55,12 +59,12 @@ namespace :db do
                                   file_name: 'ahoy_events')
 
       # comment out the following 3 lines to create csv on local machine
-      events.create! if Rails.env.test?
-      events.delete_files if Rails.env.production? || Rails.env.development?
-      events.upload if Rails.env.production? || Rails.env.development?
+      # events.create! if Rails.env.test?
+      # events.delete_files if Rails.env.production? || Rails.env.development?
+      # events.upload if Rails.env.production? || Rails.env.development?
 
       # uncomment this line to create csv file on local machine
-      # events.create!
+      events.create!
     end
 
     desc 'user_assessments table'
@@ -72,12 +76,12 @@ namespace :db do
                                        file_name: 'user_assessments')
 
       # comment out the following 3 lines to create csv on local machine
-      assessments.create! if Rails.env.test?
-      assessments.delete_files if Rails.env.production? || Rails.env.development?
-      assessments.upload if Rails.env.production? || Rails.env.development?
+      # assessments.create! if Rails.env.test?
+      # assessments.delete_files if Rails.env.production? || Rails.env.development?
+      # assessments.upload if Rails.env.production? || Rails.env.development?
 
       # uncomment this line to create csv file on local machine
-      # assessments.create!
+      assessments.create!
     end
 
     desc 'user_answers table'
@@ -89,12 +93,12 @@ namespace :db do
                                    file_name: 'user_answers')
 
       # comment out the following 3 lines to create csv on local machine
-      answers.create! if Rails.env.test?
-      answers.delete_files if Rails.env.production? || Rails.env.development?
-      answers.upload if Rails.env.production? || Rails.env.development?
+      # answers.create! if Rails.env.test?
+      # answers.delete_files if Rails.env.production? || Rails.env.development?
+      # answers.upload if Rails.env.production? || Rails.env.development?
 
       # uncomment this line to create csv file on local machine
-      # answers.create!
+      answers.create!
     end
 
     desc 'ahoy_visits table'
@@ -106,12 +110,12 @@ namespace :db do
                                       file_name: 'ahoy_visits')
 
       # comment out the following 3 lines to create csv on local machine
-      ahoy_visit.create! if Rails.env.test?
-      ahoy_visit.delete_files if Rails.env.production? || Rails.env.development?
-      ahoy_visit.upload if Rails.env.production? || Rails.env.development?
+      # ahoy_visit.create! if Rails.env.test?
+      # ahoy_visit.delete_files if Rails.env.production? || Rails.env.development?
+      # ahoy_visit.upload if Rails.env.production? || Rails.env.development?
 
       # uncomment this line to create csv file on local machine
-      # ahoy_visit.create!
+      ahoy_visit.create!
     end
   end
 end

@@ -49,6 +49,11 @@ ahoy_visits table:
 rake db:analytics:ahoy_visits
 ```
 
+Perform all the above tasks:
+```ruby
+rake db:analytics:all
+```
+
 ## Build csv files on local machine
 
 1. Create a folder called 'analytics_files' in the root of the directory.
