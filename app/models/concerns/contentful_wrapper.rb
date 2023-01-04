@@ -1,8 +1,8 @@
 module ContentfulWrapper
-  CMS_CONTENT = %r{alpha|child-development-and-the-eyfs}
+  CMS_CONTENT = ContentfulRails.configuration.contentful_options[:modules]
 
   def contentful?
-    training_module.match?(CMS_CONTENT)
+    training_module.match?(Regexp.union(CMS_CONTENT))
   end
 
   def page_decorator

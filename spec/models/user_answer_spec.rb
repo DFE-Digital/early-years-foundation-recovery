@@ -9,13 +9,17 @@ RSpec.describe UserAnswer, type: :model do
   end
 
   context 'CMS Content' do
+    before do
+      ENV['CONTENTFUL_MODULES'] = 'alpha'
+    end
+
     let(:questionnaire) do
       Questionnaire.find_by!(name: '1-1-4', training_module: 'alpha') # original YAML sourced questionnaire
     end
 
     it 'is associated with a questionnaire' do
       expect(user_answer.questionnaire).to be_a(Training::Question)
-      expect(user_answer.questionnaire.questions.keys).to eql [:alpha_question_one]
+      expect(user_answer.questionnaire.questions.slug).to eql '1-1-4'
     end
   end
 
