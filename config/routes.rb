@@ -48,7 +48,8 @@ Rails.application.routes.draw do
     get 'check-email-confirmation'
     get 'check-email-password-reset'
     resource :notes, path: 'learning-log', only: %i[show create update]
-    resource :account_deletion, path: 'account-deletion', only: %i[edit update] do
+    resource :account_deletion, path: 'close', only: %i[new update show] do
+      get 'reset-password'
       get 'edit-reason'
       patch 'update-reason'
       get 'confirm-delete-account'

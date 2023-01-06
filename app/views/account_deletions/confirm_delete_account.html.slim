@@ -5,5 +5,6 @@
     h1.govuk-heading-l= t('confirm_delete_account.heading')
     p.govuk-body= translate_markdown(t('confirm_delete_account.body'))
 
-    = govuk_button_to t('confirm_delete_account.confirm'), 'delete_account', warning: true
-    = govuk_link_to t('confirm_delete_account.cancel'), user_path
+    .govuk-button-group
+      = govuk_button_to t('confirm_delete_account.confirm'), delete_account_user_account_deletion_path, warning: true
+      = govuk_link_to t('confirm_delete_account.cancel'), user_path

@@ -6,13 +6,13 @@ RSpec.describe 'Account deletion' do
   context 'when on my account page' do
     it 'has button to close account' do
       visit '/my-account'
-      expect(page).to have_link 'Request to close account', href: '/my-account/account-deletion/edit'
+      expect(page).to have_link 'Request to close account', href: '/my-account/close/new'
     end
   end
 
   context 'when on enter password screen' do
     before do
-      visit '/my-account/account-deletion/edit'
+      visit '/my-account/close/new'
       fill_in 'For security, enter your password', with: password
       click_on 'Continue'
     end
@@ -21,7 +21,7 @@ RSpec.describe 'Account deletion' do
       let(:password) { user.password }
 
       it 'can progress to reason page' do
-        expect(page).to have_current_path '/my-account/account-deletion/edit-reason'
+        expect(page).to have_current_path '/my-account/close/edit-reason'
       end
     end
 
@@ -37,7 +37,7 @@ RSpec.describe 'Account deletion' do
 
   context 'when on reason page' do
     before do
-      visit '/my-account/account-deletion/edit-reason'
+      visit '/my-account/close/edit-reason'
     end
 
     context 'and no radio button is selected' do
@@ -64,7 +64,7 @@ RSpec.describe 'Account deletion' do
         let(:reason_other) { nil }
 
         it 'can progress to confirmation page' do
-          expect(page).to have_current_path '/my-account/account-deletion/confirm-delete-account'
+          expect(page).to have_current_path '/my-account/close/confirm-delete-account'
         end
       end
 
@@ -76,7 +76,7 @@ RSpec.describe 'Account deletion' do
           let(:reason_other) { 'Reason' }
 
           it 'can progress to confirmation page' do
-            expect(page).to have_current_path '/my-account/account-deletion/confirm-delete-account'
+            expect(page).to have_current_path '/my-account/close/confirm-delete-account'
           end
         end
 
@@ -98,7 +98,7 @@ RSpec.describe 'Account deletion' do
     before do
       user.notes.push(note)
       user.save!
-      visit '/my-account/account-deletion/confirm-delete-account'
+      visit '/my-account/close/confirm-delete-account'
     end
 
     it 'has option to abort' do
