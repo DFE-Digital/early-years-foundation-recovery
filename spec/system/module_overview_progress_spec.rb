@@ -111,7 +111,7 @@ RSpec.describe 'Module overview page progress' do
         expect(page).to have_content 'complete'
       end
     end
-    
+
     it 'the second topic cannot be clicked' do
       within '#section-content-2 .module-section--container .module-section--item:nth-child(3)' do
         expect(page).not_to have_link('1-1-1', href: '/modules/alpha/content-pages/1-1-1')
@@ -123,7 +123,6 @@ RSpec.describe 'Module overview page progress' do
         expect(page).to have_content 'not started'
       end
     end
-
 
     it 'resumes from the last visited page' do
       expect(page).to have_link 'Resume module', href: '/modules/alpha/content-pages/1-1-1'

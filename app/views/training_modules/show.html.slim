@@ -21,58 +21,25 @@ h3.govuk-heading-s Module topics
   .govuk-grid-column-full
     hr.govuk-section-break.govuk-section-break--m.govuk-section-break--visible
     .module-overview--container
-      - @module_progress.foo.each do |heading, subheading, position, icon, topics|
+      - @module_progress.sections.each do |heading, position, icon, topics|
         .progress-bar
           span.icon class=icon
             span.number = position
-          - unless position == @module_progress.foo.size
+          - unless position == @module_progress.sections.size
             .line
 
         .module-section--content id="section-content-#{position}"
           h4.govuk-heading-s= heading
-          p.govuk-body= subheading
+          p.govuk-body= 'This section of this module includes:'
           .module-section--container
-            - unless position == 1
-              - topics.each do |mod, topic_heading, next_item, status|
-                span.module-section--item
-                  - if next_item
-                    = govuk_link_to topic_heading, training_module_content_page_path(mod, next_item)
-                  - else
-                    = topic_heading
-                span = progress_indicator(status)
+            - topics.each do |mod, topic_heading, next_item, status|
+              / - binding.pry
+              span.module-section--item
+                - if next_item
+                  = govuk_link_to topic_heading, training_module_content_page_path(mod, next_item)
+                - else
+                  = topic_heading
+              span = progress_indicator(status)
           hr.govuk-section-break.govuk-section-break--m.govuk-section-break--visible
-
-/ -------------------------------------
-
-/ .govuk-grid-row class='govuk-!-padding-top-6'
-/   .govuk-grid-column-full
-/       .govuk-accordion data-module='govuk-accordion'
-/         - @module_progress.topics_by_submodule.each do |num, current_heading, previous_heading, status, topics|
-
-/           .govuk-accordion__section id="section-#{num}"
-/             .govuk-accordion__section-header
-/               h2.govuk-accordion__section-heading
-/                 span.govuk-accordion__section-button aria-controls="section-button-#{num}" aria-expanded='false' id="section-button-#{num}"
-/                   span.accordion-section-left-column
-/                     = current_heading
-/                   .float-right
-/                     = progress_indicator(status)
-
-/               .govuk-accordion__section-summary.govuk-body id="summary-#{num}"
-/                 - if previous_heading
-/                   | #{previous_heading} must be completed before you begin this section
-
-/             .govuk-accordion__section-content aria-labelledby="section-content-#{num}" id="section-content-#{num}"
-/               ul.govuk-list
-/                 - topics.each do |mod, topic_heading, next_item, status|
-/                   li
-/                     span.accordion-section-left-column
-/                       - if next_item
-/                         = govuk_link_to topic_heading, training_module_content_page_path(mod, next_item)
-/                       - else
-/                         = topic_heading
-
-/                     .float-right
-/                       = progress_indicator(status)
 
 = render 'debug'
