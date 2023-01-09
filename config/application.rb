@@ -29,6 +29,7 @@ module EarlyYearsFoundationRecovery
       g.test_framework :rspec
     end
 
+    config.arask_interval = ENV.fetch('ARASK_INTERVAL_MINUTES', '30').to_i
     config.bot_token = ENV['BOT_TOKEN']
     config.feedback_url = ENV.fetch('FEEDBACK_URL', '#FEEDBACK_URL_env_var_missing')
     config.google_analytics_tracking_id = ENV.fetch('TRACKING_ID', '#TRACKING_ID_env_var_missing')

@@ -26,9 +26,9 @@ Arask.setup do |arask|
   # arask.on_exception do |exception, arask_job|
   #  MyExceptionHandler.new(exception)
   # end
-  arask.create script: 'AnalyticsTasks.users', interval: 30.minutes
-  arask.create script: 'AnalyticsTasks.ahoy_events', interval: 30.minutes
-  arask.create script: 'AnalyticsTasks.user_assessments', interval: 30.minutes
-  arask.create script: 'AnalyticsTasks.user_answers', interval: 30.minutes
-  arask.create script: 'AnalyticsTasks.ahoy_visits', interval: 30.minutes
+  arask.create script: 'AnalyticsTasks.users', interval: Rails.configuration.arask_interval
+  arask.create script: 'AnalyticsTasks.ahoy_events', interval: Rails.configuration.arask_interval
+  arask.create script: 'AnalyticsTasks.user_assessments', interval: Rails.configuration.arask_interval
+  arask.create script: 'AnalyticsTasks.user_answers', interval: Rails.configuration.arask_interval
+  arask.create script: 'AnalyticsTasks.ahoy_visits', interval: Rails.configuration.arask_interval
 end
