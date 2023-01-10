@@ -22,7 +22,7 @@ class CalculateModuleState
         user.save!
       end
     end
-    # might need to reload to get latest change
+
     user.module_time_to_completion
   end
 
