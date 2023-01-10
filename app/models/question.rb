@@ -70,7 +70,7 @@ class Question < OpenStruct
   #
   # @return [Array<Array>]
   def fields
-    answers.map { |key, value| [key, value, select?(key)] }
+    answers.map { |key, value| [key.to_s.to_i, value, select?(key.to_s.to_i)] }
   end
 
 private
