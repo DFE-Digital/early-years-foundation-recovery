@@ -10,10 +10,10 @@ module ContentfulWrapper
   end
 
   def question_decorator
-    if confidence?
-      @question_decorator ||= Training::Confidence.find_by(module_id: training_module, slug: name).first
-    else
-      @question_decorator ||= Training::Question.find_by(module_id: training_module, slug: name).first
-    end
+    @question_decorator ||= if confidence?
+                              Training::Confidence.find_by(module_id: training_module, slug: name).first
+                            else
+                              Training::Question.find_by(module_id: training_module, slug: name).first
+                            end
   end
 end

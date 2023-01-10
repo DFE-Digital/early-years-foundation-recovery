@@ -6,11 +6,11 @@ class UserAnswer < ApplicationRecord
 
   # @return [Questionnaire]
   def questionnaire
-    if contentful?
-      @questionnaire ||= Training::Question.find_by(module_id: self.module, slug: name).first
-    else
-      @questionnaire ||= Questionnaire.find_by!(training_module: self.module, name: name)
-    end
+    @questionnaire ||= if contentful?
+                         Training::Question.find_by(module_id: self.module, slug: name).first
+                       else
+                         Questionnaire.find_by!(training_module: self.module, name: name)
+                       end
   end
 
   serialize :answer, Array

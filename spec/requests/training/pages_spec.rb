@@ -20,5 +20,4 @@ RSpec.describe 'Pages', type: :request do
       expect(response).to redirect_to(training_module_content_page_path(:alpha, page_id))
     end
   end
-
 end

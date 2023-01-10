@@ -125,4 +125,4 @@ group :ui do
   gem 'site_prism'
 end
 
-gem "contentful_rails", "~> 0.5.0"
+gem 'contentful_rails', '~> 0.5.0'

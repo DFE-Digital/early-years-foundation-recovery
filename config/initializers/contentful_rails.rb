@@ -17,8 +17,8 @@ ContentfulRails.configure do |config|
   config.default_locale = 'en-US' # Optional - defaults to 'en-US'
   config.eager_load_entry_mapping = false
   config.contentful_options = {
-    modules: ENV.fetch('CONTENTFUL_MODULES', 'child-development-and-the-eyfs').split(','),
-    new_modules: ENV.fetch('NEW_CONTENTFUL_MODULES', 'module-6').split(','),
+    modules: ENV.fetch('CONTENTFUL_MODULES', 'child-development-and-the-eyfs'),
+    new_modules: ENV.fetch('NEW_CONTENTFUL_MODULES', 'module-6'),
     delivery_api: { timeout_connect: 2, timeout_read: 6, timeout_write: 20 },
     management_api: { timeout_connect: 3, timeout_read: 100, timeout_write: 200 },
     entry_mapping: {

@@ -60,7 +60,7 @@ Rails.application.config.content_security_policy do |policy|
                      *GOVUK_DOMAINS,
                      *GOOGLE_ANALYTICS_DOMAINS, # Tracking pixels
                      *OPTIMIZE_DOMAINS,
-                     "images.ctfassets.net",
+                     'images.ctfassets.net',
                      :data # Base64 encoded images
   policy.object_src  :none
   policy.script_src  :self,

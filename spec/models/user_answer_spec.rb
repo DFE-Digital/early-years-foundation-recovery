@@ -10,7 +10,7 @@ RSpec.describe UserAnswer, type: :model do
 
   context 'CMS Content' do
     before do
-      ENV['CONTENTFUL_MODULES'] = 'alpha'
+      allow(user_answer.questionnaire).to receive(:contentful?).and_return(true)
     end
 
     let(:questionnaire) do
@@ -18,8 +18,9 @@ RSpec.describe UserAnswer, type: :model do
     end
 
     it 'is associated with a questionnaire' do
-      expect(user_answer.questionnaire).to be_a(Training::Question)
-      expect(user_answer.questionnaire.questions.slug).to eql '1-1-4'
+      expect(user_answer.questionnaire).to be_a(Questionnaire) # Still YAML
+      expect(user_answer.questionnaire.questions.keys).to eql [:alpha_question_one] # keys are the same (unused in Contentful)
+      expect(user_answer.questionnaire.question_list.first.body).to match(/body in contentful/)
     end
   end
 
