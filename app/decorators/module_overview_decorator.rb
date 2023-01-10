@@ -46,7 +46,6 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
 
 private
 
-
   # exclude intro or subpages
   #
   # @return [Array<String, Symbol, Array>]
@@ -54,8 +53,14 @@ private
   # @param submodule [String]
   # @param items [Array<ModuleItems]
   def topics(submodule:, items:)
-    items[1..].select(&:topic?).map do |topic|
-      section_content(submodule: submodule, topic_item: topic)
+    if submodule.nil?
+      items.select.map do |topic|
+        section_content(submodule: submodule, topic_item: topic)
+      end
+    else
+      items[1..].select(&:topic?).map do |topic|
+        section_content(submodule: submodule, topic_item: topic)
+      end
     end
   end
 
@@ -64,7 +69,11 @@ private
   #
   # @return [Array<Array>]
   def section_content(submodule:, topic_item:)
-    topic_status = status(topic_item.current_submodule_topic_items)
+    topic_status = if submodule.nil?
+                     status([topic_item])
+                   else
+                     status(topic_item.current_submodule_topic_items)
+                   end
 
     # providing the next page name enables the hyperlink
     if clickable?(topic_item: topic_item, submodule: submodule)
@@ -93,6 +102,8 @@ private
   #
   # @return [Boolean]
   def clickable?(submodule:, topic_item:)
+    return all?([topic_item]) if submodule.nil?
+
     submodule_intro = mod.module_items_by_submodule(submodule).first
     return false unless visited?(submodule_intro)
 

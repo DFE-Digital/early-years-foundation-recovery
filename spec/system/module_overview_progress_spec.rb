@@ -23,7 +23,7 @@ RSpec.describe 'Module overview page progress' do
         expect(page).not_to have_link('1-1-1')
       end
 
-      within '#section-content-4 .govuk-list' do
+      within '#section-content-4' do
         expect(page).to have_content 'not started', count: 4
         expect(page).not_to have_link 'Recap'
         expect(page).not_to have_link 'End of module test'

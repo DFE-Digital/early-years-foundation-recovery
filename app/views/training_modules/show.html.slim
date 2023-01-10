@@ -39,7 +39,7 @@ h3.govuk-heading-s Module topics
                   = govuk_link_to topic_heading, training_module_content_page_path(mod, next_item)
                 - else
                   = topic_heading
-              span = progress_indicator(status)
+              span.progress-indicator = progress_indicator(status)
           hr.govuk-section-break.govuk-section-break--m.govuk-section-break--visible
 
 = render 'debug'
