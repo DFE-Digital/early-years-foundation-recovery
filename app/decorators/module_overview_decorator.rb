@@ -108,8 +108,8 @@ private
     #   all?(current_topic_items) && all?(previous_submodule_items)
     if current_topic
       all?(current_topic_items)
-    # else
-    #   all?([subsection_item])
+      # else
+      #   all?([subsection_item])
     end
   end
 

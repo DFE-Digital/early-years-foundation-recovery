@@ -129,6 +129,25 @@ RSpec.describe 'Module overview page progress' do
     end
   end
 
+  context "when some but not all of a topic's pages has been viewed" do
+    before do
+      view_pages_before(alpha, 'text_page', 3)
+      visit '/modules/alpha'
+    end
+
+    it 'the progress indicator is "in progress"' do
+      within '#section-content-2 .module-section--container .progress-indicator:nth-child(6)' do
+        expect(page).to have_content 'in progress'
+      end
+    end
+
+    it 'the topic is not a link' do
+      within '#section-content-2 .module-section--container .module-section--item:nth-child(5)' do
+        expect(page).not_to have_link('1-1-3', href: '/modules/alpha/content-pages/1-1-1')
+      end
+    end
+  end
+
   context 'when the last page of the first submodule is reached' do
     before do
       view_pages_before_formative_questionnaire(alpha)
