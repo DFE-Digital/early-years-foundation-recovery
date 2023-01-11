@@ -5,7 +5,7 @@ $progress-bar-container-width: 81px;
   margin-left: $progress-bar-container-width;
 }
 
-.module-overview--container {
+.module-overview--section {
   display: grid;
   grid-template-columns: $progress-bar-container-width auto;
   
