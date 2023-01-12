@@ -8,7 +8,7 @@ RSpec.describe UserAnswer, type: :model do
            questionnaire_id: questionnaire.id)
   end
 
-  context 'CMS Content' do
+  context 'with CMS Content' do
     before do
       allow(user_answer.questionnaire).to receive(:contentful?).and_return(true)
     end
@@ -24,7 +24,7 @@ RSpec.describe UserAnswer, type: :model do
     end
   end
 
-  context 'Original YAML Content' do
+  context 'with Original YAML Content' do
     let(:questionnaire) do
       Questionnaire.find_by!(name: '1-2-2-2', training_module: 'bravo') # original YAML sourced questionnaire
     end

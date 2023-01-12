@@ -46,12 +46,12 @@ class Questionnaire < OpenStruct
 
   # @return [String] plain text content
   def heading(remote: true)
-    translate(:heading) || name
+    contentful? && remote ? page_decorator.heading : (translate(:heading) || name)
   end
 
   # @return [String] unparsed govspeak content
   def body(remote: true)
-    translate(:body)
+    contentful? && remote ? page_decorator.body : translate(:body)
   end
 
   # @return [Hash{Symbol => nil, Integer}]
@@ -62,7 +62,7 @@ class Questionnaire < OpenStruct
   end
 
   def notes?(remote: true)
-    false
+    contentful? && remote ? page_decorator.notes : false
   end
 
   # OPTIMIZE: There is only ever one question
