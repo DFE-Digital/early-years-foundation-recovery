@@ -124,3 +124,5 @@ group :ui do
   gem 'selenium-webdriver'
   gem 'site_prism'
 end
+
+gem "contentful_rails", "~> 0.5.0"
