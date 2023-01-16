@@ -17,12 +17,11 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
   def sections
     mod.items_by_submodule.each.with_index(1).map do |(num, items), position|
       intro = items.first
-      heading = num.nil? ? 'Module introduction' : intro.model.heading
       {
-        heading: heading,                                       # submodule intro heading
-        position: position,                                     # position
-        icon: status(items),                                    # icon style
-        subsections: subsections(submodule: num, items: items), # Array(String, Symbol)
+        heading: num.nil? ? 'Module introduction' : intro.model.heading,
+        position: position,
+        icon: status(items),
+        subsections: subsections(submodule: num, items: items),
       }
     end
   end
@@ -83,12 +82,12 @@ private
       furthest_topic_page_name = subsection_item if subsection_item.confidence_intro?
     end
 
-    [
-      subsection_item.training_module,   # TrainingModule [mod]
-      subsection_item.model.heading,     # String (content page heading) [subsection_heading]
-      furthest_topic_page_name,          # String/nil (module_item name) [next_item]
-      subsection_status,                 # Symbol (all items viewed) [status]
-    ]
+    {
+      module: subsection_item.training_module,
+      heading: subsection_item.model.heading,
+      next_item: furthest_topic_page_name,
+      status: subsection_status,
+    }
   end
 
   # @param submodule [String]
@@ -104,8 +103,6 @@ private
     current_topic = find_topic(subsection_item.topic_name, submodule)
     current_topic_items = current_topic.values.first.to_a
 
-    # if current_topic && previous_submodule
-    #   all?(current_topic_items) && all?(previous_submodule_items)
     if current_topic
       all?(current_topic_items)
       # else

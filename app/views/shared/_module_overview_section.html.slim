@@ -1,0 +1,19 @@
+section.module-overview--section
+  .progress-bar
+    span.icon class=section[:icon]
+      span.number = section[:position]
+    - unless section[:position] == @module_progress.sections.size
+      .line
+
+  .module-section--content id="section-content-#{section[:position]}"
+    h4.govuk-heading-s= section[:heading]
+    p.govuk-body= 'This section of this module includes:'
+    .module-section--container
+      - section[:subsections].each do |subsection|
+        span.module-section--item
+          - if subsection[:next_item]
+            = govuk_link_to subsection[:heading], training_module_content_page_path(subsection[:module], subsection[:next_item])
+          - else
+            = subsection[:heading]
+        span.progress-indicator = progress_indicator(subsection[:status])
+    hr.govuk-section-break.govuk-section-break--m.govuk-section-break--visible
