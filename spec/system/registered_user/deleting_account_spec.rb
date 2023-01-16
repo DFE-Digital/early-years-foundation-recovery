@@ -10,7 +10,7 @@ RSpec.describe 'Account deletion' do
     end
   end
 
-  context 'when on enter password screen' do
+  context 'when on password confirmation page' do
     before do
       visit '/my-account/close/new'
       fill_in 'For security, enter your password', with: password
@@ -20,7 +20,7 @@ RSpec.describe 'Account deletion' do
     context 'and correct password is entered' do
       let(:password) { user.password }
 
-      it 'can progress to reason page' do
+      it 'can progress to next page' do
         expect(page).to have_current_path '/my-account/close/edit-reason'
       end
     end
@@ -28,7 +28,7 @@ RSpec.describe 'Account deletion' do
     context 'and incorrect password is entered' do
       let(:password) { 'IncorrectPassword' }
 
-      it 'can progress to reason page' do
+      it 'cannot progress to next page' do
         expect(page).to have_content('There is a problem')
           .and have_content('Enter a valid password')
       end
