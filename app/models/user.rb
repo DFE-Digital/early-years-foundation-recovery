@@ -57,7 +57,7 @@ class User < ApplicationRecord
   end
 
   def send_account_deleted_notification
-    send_devise_notification(:account_deleted)
+    send_devise_notification(:account_closed)
   end
 
   # @return [String]
