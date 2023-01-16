@@ -64,7 +64,7 @@ RSpec.describe 'Account deletion' do
         let(:reason_other) { nil }
 
         it 'can progress to confirmation page' do
-          expect(page).to have_current_path '/my-account/close/confirm-delete-account'
+          expect(page).to have_current_path '/my-account/close/confirm-close-account'
         end
       end
 
@@ -76,7 +76,7 @@ RSpec.describe 'Account deletion' do
           let(:reason_other) { 'Reason' }
 
           it 'can progress to confirmation page' do
-            expect(page).to have_current_path '/my-account/close/confirm-delete-account'
+            expect(page).to have_current_path '/my-account/close/confirm-close-account'
           end
         end
 
@@ -98,7 +98,7 @@ RSpec.describe 'Account deletion' do
     before do
       user.notes.push(note)
       user.save!
-      visit '/my-account/close/confirm-delete-account'
+      visit '/my-account/close/confirm-close-account'
     end
 
     it 'has option to abort' do

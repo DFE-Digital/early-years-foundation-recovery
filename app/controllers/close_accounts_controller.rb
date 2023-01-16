@@ -1,4 +1,4 @@
-class AccountDeletionsController < ApplicationController
+class CloseAccountsController < ApplicationController
   before_action :authenticate_registered_user!, except: :show
 
   def show; end
@@ -9,7 +9,7 @@ class AccountDeletionsController < ApplicationController
 
   def update
     if current_user.valid_password?(user_password_params[:current_password])
-      redirect_to edit_reason_user_account_deletion_path
+      redirect_to edit_reason_user_close_account_path
     else
       current_user.errors.add(:current_password, :confirmation_invalid, message: 'Enter a valid password')
       render :new, status: :unprocessable_entity
@@ -25,7 +25,7 @@ class AccountDeletionsController < ApplicationController
     current_user.send_account_deleted_notification
     redact_user_info
     sign_out current_user
-    redirect_to user_account_deletion_path
+    redirect_to user_close_account_path
   end
 
   def edit_reason
@@ -33,10 +33,10 @@ class AccountDeletionsController < ApplicationController
   end
 
   def update_reason
-    current_user.context = :account_deletion
+    current_user.context = :close_account
 
     if current_user.update(user_params)
-      redirect_to confirm_delete_account_user_account_deletion_path
+      redirect_to confirm_close_account_user_close_account_path
     else
       current_user.errors.clear
       if user_params[:deleted_reason] == 'other'
@@ -48,7 +48,7 @@ class AccountDeletionsController < ApplicationController
     end
   end
 
-  def confirm_delete_account; end
+  def confirm_close_account; end
 
 private
 

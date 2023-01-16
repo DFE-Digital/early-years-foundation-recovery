@@ -2,7 +2,7 @@
   .govuk-grid-column-two-thirds-from-desktop
     = govuk_back_link(href: user_path)
 
-    = form_with model: current_user, url: update_reason_user_account_deletion_path  do |f|
+    = form_with model: current_user, url: update_reason_user_close_account_path  do |f|
       = f.govuk_error_summary
       = f.govuk_radio_buttons_fieldset(:deleted_reason,
         legend: { text: 'Tell us why you want to close your account' },

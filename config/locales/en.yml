@@ -349,7 +349,7 @@ en:
       
       You will no longer be able to access the training modules. Any certificates you have earned will be permanently deleted.
     button: Request to close account
-  confirm_delete_account:
+  confirm_close_account:
     heading: Confirm you want to close your account
     body: |
       After you close your account you will no longer be able to access the training modules.
