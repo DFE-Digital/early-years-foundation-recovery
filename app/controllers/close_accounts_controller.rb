@@ -39,10 +39,10 @@ class CloseAccountsController < ApplicationController
       redirect_to confirm_close_account_user_close_account_path
     else
       current_user.errors.clear
-      if user_params[:deleted_reason] == 'other'
-        current_user.errors.add :deleted_reason_other, :blank, message: 'Enter a reason why you want to close your account'
+      if user_params[:closed_reason] == 'other'
+        current_user.errors.add :closed_reason_other, :blank, message: 'Enter a reason why you want to close your account'
       else
-        current_user.errors.add :deleted_reason, :blank, message: 'Select a reason for closing your account'
+        current_user.errors.add :closed_reason, :blank, message: 'Select a reason for closing your account'
       end
       render :edit_reason, status: :unprocessable_entity
     end
@@ -53,7 +53,7 @@ class CloseAccountsController < ApplicationController
 private
 
   def user_params
-    params.require(:user).permit(:deleted_reason, :deleted_reason_other)
+    params.require(:user).permit(:closed_reason, :closed_reason_other)
   end
 
   def user_password_params
@@ -64,7 +64,7 @@ private
     current_user.skip_reconfirmation!
     current_user.update!(first_name: 'Redacted',
                          last_name: 'User',
-                         account_deleted_at: Time.zone.now,
+                         account_closed_at: Time.zone.now,
                          email: "redacted_user#{current_user.id}@example.com",
                          password: 'redacteduser')
     current_user.notes.update_all(body: nil)
