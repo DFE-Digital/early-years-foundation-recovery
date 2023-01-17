@@ -28,7 +28,7 @@
         - row.value { @user.setting_name }
       - other_details.row do |row|
         - row.key { 'Local authority' }
-        - row.value { @user.local_authority }
+        - row.value { @user.local_authority.nil? ? 'Multiple' : @user.local_authority }
       - other_details.row do |row|
         - row.key { 'Role' }
         - row.value { @user.role }
