@@ -34,7 +34,9 @@ module-5:
           - co-ordination
           - agility
 
-          Early gross motor development will also promote a healthy lifestyle in later life. It is important to plan a curriculum and environment that promotes gross motor activities.
+          Gross motor skills also support weaning, as NHS advice is to only start weaning when a baby can stay in a sitting position and hold their head steady.
+
+          Early gross motor development will promote a healthy lifestyle in later life. It is important to plan an environment and curriculum that promotes gross motor activities.
         assessment_fail_summary: |
           Activities and opportunities that promote gross motor skills will help to develop:
 
@@ -45,7 +47,9 @@ module-5:
           - co-ordination
           - agility
 
-          Early gross motor development will also promote a healthy lifestyle in later life. It is important to plan an environment and curriculum that promotes gross motor activities.
+          Gross motor skills also support weaning, as NHS advice is to only start weaning when a baby can stay in a sitting position and hold their head steady.
+
+          Early gross motor development will promote a healthy lifestyle in later life. It is important to plan an environment and curriculum that promotes gross motor activities.
 
         answers:
           1: "Weaning"
@@ -53,6 +57,7 @@ module-5:
           3: "Reflexes"
           4: "Grasp"
         correct_answers:
+          - 1
           - 2
 
   5-1-1-6b:
