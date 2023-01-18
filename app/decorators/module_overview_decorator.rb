@@ -16,9 +16,8 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
   # @return [Array<Hash{Symbol => String, Symbol, Array}>]
   def sections
     mod.items_by_submodule.each.with_index(1).map do |(num, items), position|
-      intro = items.first
       {
-        heading: num.nil? ? 'Module introduction' : intro.model.heading,
+        heading: num.nil? ? 'Module introduction' : items.first.model.heading,
         position: position,
         icon: status(items),
         subsections: subsections(submodule: num, items: items),
@@ -83,7 +82,7 @@ private
     end
 
     {
-      module: subsection_item.training_module,
+      mod: subsection_item.training_module,
       heading: subsection_item.model.heading,
       next_item: furthest_topic_page_name,
       status: subsection_status,
