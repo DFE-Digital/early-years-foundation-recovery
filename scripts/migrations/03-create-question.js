@@ -2,11 +2,11 @@ module.exports = function(migration) {
 	const question = migration
     .createContentType("question", {
       name: "Question",
-      displayField: 'slug'
+      displayField: 'name'
     })
 
-  const slug = question.createField('slug', {
-    name: 'Slug',
+  const name = question.createField('name', {
+    name: 'Name',
     type: 'Symbol'
   })
 
@@ -25,13 +25,28 @@ module.exports = function(migration) {
     type: 'Text'
   })
   
-  const module_id = question.createField('module_id', {
-    name: 'Module ID',
+  const assessments_type = question.createField('assessmentsType', {
+    name: 'Assessments type',
+    type: 'Symbol'
+  })
+  
+  const training_module = question.createField('trainingModule', {
+    name: 'Training module',
     type: 'Symbol'
   })
 
   const answers = question.createField('answers', {
     name: 'Answers',
     type: 'Object'
+  })
+
+  const page_numbers = question.createField('pageNumbers', {
+    name: 'Page numbers',
+    type: 'Integer'
+  })
+  
+  const total_questions = question.createField('totalQuestions', {
+    name: 'Total questions',
+    type: 'Integer'
   })
 }

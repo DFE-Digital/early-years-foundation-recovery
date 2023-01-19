@@ -1,9 +1,8 @@
 module.exports = function(migration) {
 	const trainingModule = migration
-    .createContentType("trainingModule", {
-      name: "Training Module",
-      description: "Department for Education Child Development Training Module",
-      displayField: 'title'
+	    .createContentType("trainingModule", {
+	      name: "Training Module",
+	      displayField: 'title'
     })
 
   const title = trainingModule.createField('title', {
@@ -21,8 +20,8 @@ module.exports = function(migration) {
     }
   })
 
-  const slug = trainingModule.createField('slug', {
-    name: 'Slug',
+  const name = trainingModule.createField('name', {
+	  name: 'Name',
     type: 'Symbol'
   })
 
@@ -42,6 +41,16 @@ module.exports = function(migration) {
     type: 'Text'
   })
 
+  const objective = trainingModule.createField('objective', {
+    name: 'Objective',
+    type: 'Text'
+  })
+
+  const criteria = trainingModule.createField('criteria', {
+    name: 'Criteria',
+    type: 'Text'
+  })
+
   const duration = trainingModule.createField('duration', {
     name: 'Duration',
     type: 'Number'
@@ -53,7 +62,7 @@ module.exports = function(migration) {
   })
 
   const pages = trainingModule.createField('pages', {
-    name: 'Content pages for this course module',
+    name: 'Pages',
     type: 'Array',
     items: {
       type: 'Link',
@@ -62,38 +71,7 @@ module.exports = function(migration) {
           linkContentType: [
             'page',
             'question',
-            'video'
-          ]
-        }
-      ],
-      linkType: 'Entry'
-    }
-  })
-
-  const summative_assessment = trainingModule.createField('summativeAssessment', {
-    name: 'Summative assessment',
-    type: 'Array',
-    items: {
-      type: 'Link',
-      validations: [
-        {
-          linkContentType: [
-            'question'
-          ]
-        }
-      ],
-      linkType: 'Entry'
-    }
-  })
-  
-  const confidence_assessment = trainingModule.createField('confidenceAssessment', {
-    name: 'Confidence assessment',
-    type: 'Array',
-    items: {
-      type: 'Link',
-      validations: [
-        {
-          linkContentType: [
+            'video',
             'confidence'
           ]
         }

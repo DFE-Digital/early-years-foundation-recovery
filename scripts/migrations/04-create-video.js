@@ -2,16 +2,21 @@ module.exports = function(migration) {
 	const video = migration
     .createContentType("video", {
       name: "Video",
-      displayField: 'slug'
+      displayField: 'name'
     })
 
-  const slug = video.createField('slug', {
-    name: 'Slug',
+  const name = video.createField('name', {
+    name: 'Name',
     type: 'Symbol'
   })
 
+  const title = video.createField('title', {
+    name: 'Title',
+    type: 'Text'
+  })
+  
   const transcript = video.createField('transcript', {
-    name: 'transcript',
+    name: 'Transcript',
     type: 'Text'
   })
   
@@ -20,6 +25,11 @@ module.exports = function(migration) {
     type: 'Symbol'
   })
 
+  const training_module = video.createField('trainingModule', {
+    name: 'Training module',
+    type: 'Symbol'
+  })
+  
   const video_provider = video.createField('videoProvider', {
     name: 'Video Provider',
     type: 'Symbol',
