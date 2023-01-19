@@ -4,6 +4,11 @@ module.exports = function(migration) {
       name: "Question",
       displayField: 'name'
     })
+  
+  const training_module = question.createField('trainingModule', {
+    name: 'Training module',
+    type: 'Symbol'
+  })
 
   const name = question.createField('name', {
     name: 'Name',
@@ -30,18 +35,13 @@ module.exports = function(migration) {
     type: 'Symbol'
   })
   
-  const training_module = question.createField('trainingModule', {
-    name: 'Training module',
-    type: 'Symbol'
-  })
-
   const answers = question.createField('answers', {
     name: 'Answers',
     type: 'Object'
   })
 
-  const page_numbers = question.createField('pageNumbers', {
-    name: 'Page numbers',
+  const page_numbers = question.createField('pageNumber', {
+    name: 'Page number',
     type: 'Integer'
   })
   

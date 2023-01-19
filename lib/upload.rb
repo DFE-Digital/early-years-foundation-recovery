@@ -22,7 +22,6 @@ class Upload
     ct_module = client.content_types(space, environment).find('trainingModule')
     ct_page = client.content_types(space, environment).find('page')
     ct_question = client.content_types(space, environment).find('question')
-    ct_confidence = client.content_types(space, environment).find('confidence')
     ct_video = client.content_types(space, environment).find('video')
 
     tm = TrainingModule.find_by(name: module_id)
@@ -43,7 +42,6 @@ class Upload
       log "module entry #{module_entry.title}"
 
       pages = tm.module_items.map do |item|
-        puts item.type
         case item.type
         when /video_page/
           entry = item.model
@@ -65,25 +63,25 @@ class Upload
             body: question[:body],
             assessmentSucceed: question[:assessment_summary],
             assessmentFail: question[:assessment_fail_summary],
-            assessmentsType: item.type,
+            assessmentsType: question[:assessments_type],
             answers: answers,
-            pageNumbers: item.model.page_numbers,
-            totalQuestions: item.model.total_questions
+            pageNumber: questionnaire.page_number,
+            totalQuestions: questionnaire.total_questions
           )
         when /confidence_questionnaire/
           questionnaire = ConfidenceQuestionnaire.where(training_module: tm.name, name: item.name).first
           questionnaire_name, question = questionnaire[:questions].first
           answers = question[:answers].map{|key,value| {key => [value, question[:correct_answers].include?(key)]} }
-          ct_confidence.entries.create(
+          ct_question.entries.create(
             name: questionnaire.name,
             trainingModule: questionnaire.training_module,
             body: question[:body],
             assessmentSucceed: question[:assessment_summary],
             assessmentFail: question[:assessment_fail_summary],
-            assessmentsType: item.type,
+            assessmentsType: question[:assessments_type],
             answers: answers,
-            pageNumbers: item.model.page_numbers,
-            totalQuestions: item.model.total_questions
+            pageNumber: questionnaire.page_number,
+            totalQuestions: questionnaire.total_questions
           )
         when /summative_questionnaire/
           questionnaire = SummativeQuestionnaire.where(training_module: tm.name, name: item.name).first
@@ -95,10 +93,10 @@ class Upload
             body: question[:body],
             assessmentSucceed: question[:assessment_summary],
             assessmentFail: question[:assessment_fail_summary],
-            assessmentsType: item.type,
+            assessmentsType: question[:assessments_type],
             answers: answers,
-            pageNumbers: item.model.page_numbers,
-            totalQuestions: item.model.total_questions
+            pageNumber: questionnaire.page_number,
+            totalQuestions: questionnaire.total_questions
           )
         else 
           ct_page.entries.create(
@@ -107,7 +105,7 @@ class Upload
             trainingModule: tm.name,
             pageType: item.type,
             body: item.model&.body,
-            notes: item.model&.notes?,
+            notes: item.model&.notes?
           )
         end
       end

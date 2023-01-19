@@ -3,6 +3,11 @@ module.exports = function(migration) {
 	      name: "Page",
 	      displayField: 'name'
 	    })
+  
+  const training_module = page.createField('trainingModule', {
+    name: 'Training module',
+    type: 'Symbol'
+  })
 
   const name = page.createField('name', {
     name: 'Name',
@@ -17,11 +22,6 @@ module.exports = function(migration) {
   const body = page.createField('body', {
     name: 'Body',
     type: 'Text'
-  })
-  
-  const training_module = page.createField('trainingModule', {
-    name: 'Training module',
-    type: 'Symbol'
   })
   
   const page_type = page.createField('pageType', {
