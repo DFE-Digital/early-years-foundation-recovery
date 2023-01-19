@@ -40,7 +40,7 @@ class CloseAccountsController < ApplicationController
     else
       current_user.errors.clear
       if user_params[:closed_reason] == 'other'
-        current_user.errors.add :closed_reason_other, :blank, message: 'Enter a reason why you want to close your account'
+        current_user.errors.add :closed_reason_custom, :blank, message: 'Enter a reason why you want to close your account'
       else
         current_user.errors.add :closed_reason, :blank, message: 'Select a reason for closing your account'
       end
@@ -53,7 +53,7 @@ class CloseAccountsController < ApplicationController
 private
 
   def user_params
-    params.require(:user).permit(:closed_reason, :closed_reason_other)
+    params.require(:user).permit(:closed_reason, :closed_reason_custom)
   end
 
   def user_password_params

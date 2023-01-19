@@ -23,7 +23,7 @@ class User < ApplicationRecord
             inclusion: { in: SettingType.valid_setting_types },
             if: proc { |u| u.registration_complete }
   validates :closed_reason, presence: true, if: -> { context == :close_account }
-  validates :closed_reason_other, presence: true, if: proc { |u| u.closed_reason == 'other' }
+  validates :closed_reason_custom, presence: true, if: proc { |u| u.closed_reason == 'other' }
 
   validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
 
