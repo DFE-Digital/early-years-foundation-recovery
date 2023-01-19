@@ -56,7 +56,7 @@ module.exports = function(migration) {
     type: 'Number'
   })
 
-  const summative_threshold = trainingModule.createField('summative_thresh', {
+  const summative_threshold = trainingModule.createField('summative_threshold', {
     name: 'Summative threshold',
     type: 'Number'
   })
@@ -71,8 +71,7 @@ module.exports = function(migration) {
           linkContentType: [
             'page',
             'question',
-            'video',
-            'confidence'
+            'video'
           ]
         }
       ],

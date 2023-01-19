@@ -4,6 +4,11 @@ module.exports = function(migration) {
       name: "Video",
       displayField: 'name'
     })
+  
+  const training_module = video.createField('trainingModule', {
+    name: 'Training module',
+    type: 'Symbol'
+  })
 
   const name = video.createField('name', {
     name: 'Name',
@@ -25,11 +30,6 @@ module.exports = function(migration) {
     type: 'Symbol'
   })
 
-  const training_module = video.createField('trainingModule', {
-    name: 'Training module',
-    type: 'Symbol'
-  })
-  
   const video_provider = video.createField('videoProvider', {
     name: 'Video Provider',
     type: 'Symbol',
