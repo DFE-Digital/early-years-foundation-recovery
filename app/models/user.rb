@@ -56,7 +56,7 @@ class User < ApplicationRecord
     send_devise_notification(:email_taken)
   end
 
-  def send_account_deleted_notification
+  def send_account_closed_notification
     send_devise_notification(:account_closed)
   end
 

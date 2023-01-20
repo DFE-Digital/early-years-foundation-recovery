@@ -128,7 +128,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_17_091239) do
     t.string "role_type_other"
     t.string "setting_type_id"
     t.boolean "registration_complete", default: false
-    t.datetime "account_closed_at", precision: nil
+    t.datetime "closed_at", precision: nil
     t.string "closed_reason"
     t.string "closed_reason_custom"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

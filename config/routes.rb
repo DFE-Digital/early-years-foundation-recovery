@@ -52,8 +52,8 @@ Rails.application.routes.draw do
       get 'reset-password'
       get 'edit-reason'
       patch 'update-reason'
-      get 'confirm-close-account'
-      post 'delete_account'
+      get 'confirm'
+      post 'close_account'
     end
   end
 

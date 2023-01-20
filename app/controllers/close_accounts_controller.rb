@@ -21,8 +21,8 @@ class CloseAccountsController < ApplicationController
     redirect_to new_user_password_path
   end
 
-  def delete_account
-    current_user.send_account_deleted_notification
+  def close_account
+    current_user.send_account_closed_notification
     redact_user_info
     sign_out current_user
     redirect_to user_close_account_path
@@ -36,7 +36,7 @@ class CloseAccountsController < ApplicationController
     current_user.context = :close_account
 
     if current_user.update(user_params)
-      redirect_to confirm_close_account_user_close_account_path
+      redirect_to confirm_user_close_account_path
     else
       current_user.errors.clear
       if user_params[:closed_reason] == 'other'
@@ -48,7 +48,7 @@ class CloseAccountsController < ApplicationController
     end
   end
 
-  def confirm_close_account; end
+  def confirm; end
 
 private
 
@@ -64,7 +64,7 @@ private
     current_user.skip_reconfirmation!
     current_user.update!(first_name: 'Redacted',
                          last_name: 'User',
-                         account_closed_at: Time.zone.now,
+                         closed_at: Time.zone.now,
                          email: "redacted_user#{current_user.id}@example.com",
                          password: 'redacteduser')
     current_user.notes.update_all(body: nil)
