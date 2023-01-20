@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   root 'home#index'
   get 'health', to: 'home#show'
+  get 'audit', to: 'home#audit'
   get 'my-modules', to: 'learning#show'
-  get 'about-training', to: 'training_modules#index', as: :course_overview
+  get 'about-training', to: 'training/modules#index', as: :course_overview
 
   get '/404', to: 'errors#not_found', via: :all
   get '/422', to: 'errors#unprocessable_entity', via: :all
@@ -50,19 +51,11 @@ Rails.application.routes.draw do
     resource :notes, path: 'learning-log', only: %i[show create update]
   end
 
-  constraints(ENV.fetch('CONTENTFUL', false) == true) do
-    scope module: 'training' do
-      resources :modules, only: %i[show], as: :training_modules do
-        resources :pages, only: %i[index show], path: 'content-pages'
-        resources :questionnaires, only: %i[show update]
-      end
+  scope module: 'training' do
+    resources :modules, only: %i[index show], as: :training_modules do
+      resources :pages, only: %i[index show], path: 'content-pages'
+      resources :questionnaires, only: %i[show update]
     end
-  end
-
-  resources :modules, only: %i[show], as: :training_modules, controller: :training_modules do
-    resources :content_pages, only: %i[index show], path: 'content-pages'
-    resources :questionnaires, only: %i[show update]
-    resources :assessment_results, only: %i[show new], path: 'assessment-result'
   end
 
   if Rails.env.development?

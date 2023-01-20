@@ -3,7 +3,7 @@ module LinkHelper
   # @param item [ModuleItem]
   def link_to_next_module_item(item)
     text = item.next_button_text
-    path = training_module_content_page_path(item.training_module, item.next_item)
+    path = training_module_page_path(item.training_module, item.next_item)
 
     govuk_button_link_to text, path, aria: { label: 'Go to the next page' }
   end
@@ -13,7 +13,7 @@ module LinkHelper
   def link_to_previous_module_item(item)
     path =
       if item.previous_item
-        training_module_content_page_path(item.training_module, item.previous_item)
+        training_module_page_path(item.training_module, item.previous_item)
       else
         training_module_path(item.training_module)
       end
@@ -34,7 +34,7 @@ module LinkHelper
       if state.eql?(:failed)
         new_training_module_assessment_result_path(item.training_module)
       else
-        training_module_content_page_path(item.training_module, item)
+        training_module_page_path(item.training_module, item)
       end
 
     govuk_button_link_to text, path

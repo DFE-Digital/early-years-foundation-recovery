@@ -60,4 +60,16 @@ private
 
     super
   end
+
+  # @see LearningController#show
+  # @return [true]
+  def enable_cms_preview!
+    ContentfulModel.use_preview_api = true
+  end
+
+  # @see Training::ModulesController#index
+  # @return [false]
+  def disable_cms_preview!
+    ContentfulModel.use_preview_api = false
+  end
 end

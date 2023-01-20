@@ -1,9 +1,18 @@
 class Content < ContentfulModel::Base
     
+  # METHODS TO DEPRECATE --------------------------------------
   # @return [self]
-  def model = self
-  def module_item = self
+  def module_item
+    self
+  end
 
+  # @return [self]
+  def model
+    self
+  end
+  # ----------------------------------------------------------
+
+  # @return [Training::Module]
   def parent
     Training::Module.find_by(name: training_module).first
   end
@@ -28,10 +37,12 @@ class Content < ContentfulModel::Base
     page_type && page_type.eql?('summary_intro')
   end
 
+  # @return [Boolean]
   def notes?
     notes
   end
 
+  # @return [Boolean]
   def is_question?
     page_type in %w[ formative summative confidence ]
   end

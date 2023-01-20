@@ -12,10 +12,19 @@ module Training
       self.pages.select{|page| page.type.eql?(type) }
     end
 
+    # METHODS TO DEPRECATE --------------------------------------
     def module_course_items
       pages
     end
     alias_method :module_items, :module_course_items
+    # ----------------------------------------------------------
+
+    # predicates ---------------------------------
+
+    # @return [Boolean]
+    def draft?
+      !entry.published?
+    end
 
     # sequence ---------------------------------
 
@@ -35,7 +44,7 @@ module Training
     end
     
     # Viewing this page determines if the module is "started"
-    # @return [Training::Page] page 5
+    # @return [Training::Page]
     def first_content_page
       module_items_by_type('sub_module_intro').first.next_item
     end
@@ -100,24 +109,31 @@ module Training
       Training::Page.where_type(name, type)
     end
 
-    # @return [Array<ModuleItem>]
+    # @return [Array<Training::Page>]
     def formative_questions
       module_items_by_type('formative_questionnaire')
     end
 
-    # @return [Array<ModuleItem>]
+    # @return [Array<Training::Page>]
     def summative_questions
       module_items_by_type('summative_questionnaire')
     end
 
-    # @return [Array<ModuleItem>]
+    # @return [Array<Training::Page>]
     def confidence_questions
       module_items_by_type('confidence_questionnaire')
     end
 
-    # @return [Array<ModuleItem>]
+    # @return [Array<Training::Page>]
     def video_pages
       module_items_by_type('video_page')
+    end
+
+  private
+
+    def entry
+      # @entry ||= refetch_management_entry
+      @entry ||= to_management
     end
   end
 end

@@ -277,6 +277,11 @@ CSS styling changes will appear automatically without needing to restart.
 - [designer guide](https://govspeak-preview.publishing.service.gov.uk/guide)
 - [developer guide](https://docs.publishing.service.gov.uk/repos/govspeak.html)
 
+### Contentful
+
+- [EY Recovery Service](https://app.contentful.com/spaces/dvmeh832nmjc)
+- [API Keys](https://app.contentful.com/spaces/dvmeh832nmjc/api/keys/) can be granted access to specific environments or aliases.
+- [Environments](https://app.contentful.com/spaces/dvmeh832nmjc/settings/environments) are accessed via aliases called `master` (production), `staging` and `test`. Demo content is used in `RAILS_ENV=development|test`
 
 ## User experience
 

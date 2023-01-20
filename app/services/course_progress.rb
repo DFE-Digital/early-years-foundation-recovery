@@ -49,7 +49,7 @@ class CourseProgress
       <<~SUMMARY
         title: #{mod.title}
         name: #{mod.name}
-        draft: #{!mod.draft.nil?}
+        draft: #{mod.draft?}
         started: #{started?(mod)}
         completed: #{completed?(mod)}
         available: #{available?(mod)}
@@ -90,10 +90,10 @@ private
     !started?(mod) && !completed?(mod)
   end
 
-  # @param mod [TrainingModule]
+  # @param mod [Training::Module]
   # @return [Boolean] true unless a mandatory prerequisite module must be finished
   def available?(mod)
-    dependent = TrainingModule.find_by(name: mod.depends_on)
+    dependent = Training::Module.find_by(name: mod.depends_on).first
     dependent ? completed?(dependent) : true
   end
 
@@ -114,9 +114,9 @@ private
     training_modules.reject(&:draft?)
   end
 
-  # @return [Array<TrainingModule>] all training modules
+  # @return [Array<Training::Module>] all training modules
   def training_modules
-    @training_modules ||= TrainingModule.all
+    @training_modules ||= Training::Module.all.load!
   end
 
   # @return [ModuleProgress]
