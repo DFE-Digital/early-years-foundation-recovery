@@ -77,6 +77,7 @@ RSpec.describe NotifyMailer, type: :mailer do
       it 'send email to user to confirm account has been closed' do
         mail = described_class.account_closed(user)
         expect(mail.to).to contain_exactly(user.email)
+        expect(mail.bcc).to contain_exactly('child-development.training@education.gov.uk')
         expect(mail.subject).to eq 'Account closed'
       end
     end
