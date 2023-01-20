@@ -13,13 +13,13 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
     end
   end
 
-  # @return [Hash{Symbol => String, Symbol, Array}]
+  # @return [Hash{Symbol => Mixed}]
   def sections
     mod.items_by_submodule.each.with_index(1).map do |(num, items), position|
       {
         heading: num.nil? ? 'Module introduction' : items.first.model.heading,
         position: position,
-        line_class: position == mod.items_by_submodule.size ? '' : 'line',
+        display_line: position != mod.items_by_submodule.size,
         icon: status(items),
         subsections: subsections(submodule: num, items: items),
       }
