@@ -2,12 +2,11 @@ section.module-overview--section
   .progress-bar
     span.icon class=icon
       span.number = position
-    - unless position == @module_progress.sections.size
-      .line
+    div class='#{line_class}'
 
   .module-section--content id="section-content-#{position}"
     h4.govuk-heading-s= heading
-    p.govuk-body= 'This section of this module includes:'
+    p.govuk-body This section of this module includes:
     .module-section--container
       - subsections.each do |subsection|
         = render 'shared/module_overview_subsection', **subsection

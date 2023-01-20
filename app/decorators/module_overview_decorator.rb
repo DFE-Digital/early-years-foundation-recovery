@@ -13,12 +13,13 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
     end
   end
 
-  # @return [Array<Hash{Symbol => String, Symbol, Array}>]
+  # @return [Hash{Symbol => String, Symbol, Array}]
   def sections
     mod.items_by_submodule.each.with_index(1).map do |(num, items), position|
       {
         heading: num.nil? ? 'Module introduction' : items.first.model.heading,
         position: position,
+        line_class: position == mod.items_by_submodule.size ? '' : 'line',
         icon: status(items),
         subsections: subsections(submodule: num, items: items),
       }
@@ -47,11 +48,11 @@ private
   # @return [Array<String, Symbol, Array>]
   #
   # @param submodule [String]
-  # @param items [Array<ModuleItems]
+  # @param items [Array<ModuleItems>]
   def subsections(submodule:, items:)
-    updated_items = submodule.nil? ? items : items.drop(1)
+    items_without_submodule_intro = submodule.nil? ? items : items.drop(1)
 
-    updated_items.select(&:topic?).map do |subsection|
+    items_without_submodule_intro.select(&:topic?).map do |subsection|
       section_content(submodule: submodule, subsection_item: subsection)
     end
   end
@@ -102,11 +103,7 @@ private
     current_topic = find_topic(subsection_item.topic_name, submodule)
     current_topic_items = current_topic.values.first.to_a
 
-    if current_topic
-      all?(current_topic_items)
-      # else
-      #   all?([subsection_item])
-    end
+    all?(current_topic_items) if current_topic
   end
 
   # @param current_top_num [String]
