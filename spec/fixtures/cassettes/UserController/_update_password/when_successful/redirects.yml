@@ -6,14 +6,14 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"template_id":"f77e1eba-3fa8-45ae-9cec-a4cc54633395","personalisation":{"email_subject":"Password
-        changed","name":"Roland Roberts"},"email_address":"doloris@example.org"}'
+        changed","name":"Johnson Cole"},"email_address":"darius_von@example.com"}'
     headers:
       User-Agent:
       - NOTIFY-API-RUBY-CLIENT/5.4.0
       Content-Type:
       - application/json
       Authorization:
-      - Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxNWY1MzhkOS1hYTYzLTQyYzEtODc1Zi1kNzhjNDBiMGIyYjMiLCJpYXQiOjE2NzQ0NzA5OTJ9.03NE5kQX3on9grW1zzBS3rhp7NCACgcmBvtkq5vSd7U
+      - Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxNWY1MzhkOS1hYTYzLTQyYzEtODc1Zi1kNzhjNDBiMGIyYjMiLCJpYXQiOjE2NzQ0ODAxNTZ9.0ULznH07mdfzuifc9u4PbiQBg9rmO6D5gL7aSrWGhp0
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -30,7 +30,7 @@ http_interactions:
       Connection:
       - keep-alive
       Date:
-      - Mon, 23 Jan 2023 10:49:52 GMT
+      - Mon, 23 Jan 2023 13:22:36 GMT
       Access-Control-Allow-Headers:
       - Content-Type,Authorization
       Access-Control-Allow-Methods:
@@ -42,19 +42,19 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       X-B3-Spanid:
-      - 1b255e0d2a5f5ea0
+      - 42dade1503e4762f
       X-B3-Traceid:
-      - '098db41f0fc477901b255e0d2a5f5ea0'
+      - 631c1ede2a95463b42dade1503e4762f
       X-Vcap-Request-Id:
-      - bed6536b-f0c4-42c3-69dd-48a20329fb8e
+      - 21074e2b-4e45-4dd1-6ed9-e44d7c6f6b67
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 096e5ecae9d1cd03edf8411ad106b092.cloudfront.net (CloudFront)
+      - 1.1 1a6cd18714da9809fa8cb07ad66fd4f6.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
       - LHR50-P3
       X-Amz-Cf-Id:
-      - OzBSN3GlobSljTlywW2j9DisswTLbZ2_KhsxXgyri3_S-p14v9CAJA==
+      - D5p3B3TjR6iPdaZ3-Djx81s2-Cni3XohKGGxqLUevuvzMqfV5jJKtg==
     body:
       encoding: UTF-8
       string: '{"content":{"body":"#The password for your Early Years Child Development
@@ -64,8 +64,8 @@ http_interactions:
         child-development.training@education.gov.uk for further help or to give us
         feedback.","from_email":"early.years.child.development.training@notifications.service.gov.uk","subject":"The
         password for your Early Years Child Development Training account has been
-        changed"},"id":"e74afd52-2e75-4fdf-9146-bf48626e3e1f","reference":null,"scheduled_for":null,"template":{"id":"f77e1eba-3fa8-45ae-9cec-a4cc54633395","uri":"https://api.notifications.service.gov.uk/services/15f538d9-aa63-42c1-875f-d78c40b0b2b3/templates/f77e1eba-3fa8-45ae-9cec-a4cc54633395","version":7},"uri":"https://api.notifications.service.gov.uk/v2/notifications/e74afd52-2e75-4fdf-9146-bf48626e3e1f"}
+        changed"},"id":"63b1803a-8205-44f0-adcb-58bf058bc944","reference":null,"scheduled_for":null,"template":{"id":"f77e1eba-3fa8-45ae-9cec-a4cc54633395","uri":"https://api.notifications.service.gov.uk/services/15f538d9-aa63-42c1-875f-d78c40b0b2b3/templates/f77e1eba-3fa8-45ae-9cec-a4cc54633395","version":7},"uri":"https://api.notifications.service.gov.uk/v2/notifications/63b1803a-8205-44f0-adcb-58bf058bc944"}
 
         '
-  recorded_at: Mon, 23 Jan 2023 10:49:52 GMT
+  recorded_at: Mon, 23 Jan 2023 13:22:36 GMT
 recorded_with: VCR 6.1.0

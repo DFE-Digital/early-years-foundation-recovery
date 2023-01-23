@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Page' do
+RSpec.describe 'Page', :vcr do
   context 'when user is not authenticated' do
     it { expect(root_path).to have_page_title 'Home page' }
     it { expect(new_user_session_path).to have_page_title 'Sign in' }

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Formative questionnaire' do
+RSpec.describe 'Formative questionnaire', :vcr do
   include_context 'with progress'
 
   before do

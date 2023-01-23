@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Summative questionnaire' do
+RSpec.describe 'Summative questionnaire', :vcr do
   include_context 'with progress'
   include_context 'with user'
 

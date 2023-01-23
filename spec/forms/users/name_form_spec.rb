@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Users::NameForm do
+RSpec.describe Users::NameForm, :vcr do
   let(:name_form) { described_class.new(user: create(:user)) }
 
   specify 'first name must be present' do

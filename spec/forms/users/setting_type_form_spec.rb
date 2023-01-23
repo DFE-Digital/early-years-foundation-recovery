@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Users::SettingTypeForm do
+RSpec.describe Users::SettingTypeForm, :vcr do
   subject(:setting_type_form) { described_class.new(user: create(:user)) }
 
   describe 'setting type' do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Confidence check' do
+RSpec.describe 'Confidence check', :vcr do
   include_context 'with progress'
   include_context 'with user'
 

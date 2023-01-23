@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Users::LocalAuthorityForm do
+RSpec.describe Users::LocalAuthorityForm, :vcr do
   let(:user) { create(:user) }
   let(:local_authority_form) { described_class.new(user: user) }
 

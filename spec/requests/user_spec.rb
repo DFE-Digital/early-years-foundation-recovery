@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'User', type: :request do
+RSpec.describe 'User', :vcr, type: :request do
   describe 'Registered user, signed in' do
     subject(:user) { create :user, :registered }
 

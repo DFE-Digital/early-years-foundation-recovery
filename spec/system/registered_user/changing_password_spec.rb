@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Registered user changing password', type: :system do
+RSpec.describe 'Registered user changing password', :vcr, type: :system do
   subject(:user) { create :user, :registered, created_at: 1.month.ago }
 
   let(:password) { 'StrongPassword123' }

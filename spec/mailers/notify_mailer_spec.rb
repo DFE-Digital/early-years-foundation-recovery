@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe NotifyMailer, type: :mailer do
+RSpec.describe NotifyMailer, :vcr, type: :mailer do
   let(:user) { create(:user) }
   let(:mailbox) { User.new(email: 'child-development.training@education.gov.uk') }
 

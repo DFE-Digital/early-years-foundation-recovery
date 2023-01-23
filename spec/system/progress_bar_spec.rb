@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Progress bar' do
+RSpec.describe 'Progress bar', :vcr do
   include_context 'with user'
   include_context 'with progress'
 

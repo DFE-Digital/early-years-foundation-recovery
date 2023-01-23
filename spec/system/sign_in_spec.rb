@@ -60,7 +60,7 @@ RSpec.describe 'Sign in' do
         end
       end
 
-      it 'locks account' do
+      it 'locks account', :vcr do
         user.reload
         expect(user.failed_attempts).to eq 5
         expect(user.access_locked?).to be true

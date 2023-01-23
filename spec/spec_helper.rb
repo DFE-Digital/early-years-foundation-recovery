@@ -29,7 +29,7 @@ VCR.configure do |config|
   config.configure_rspec_metadata!
   config.default_cassette_options = {
     record: vcr_mode,
-    match_requests_on: %i[method uri body],
+    match_requests_on: %i[method uri]
   }
 end
 

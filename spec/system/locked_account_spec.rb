@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'User has locked account' do
+RSpec.describe 'User has locked account', :vcr do
   let(:user) { create :user, :confirmed }
   let!(:token) { user.lock_access! }
 

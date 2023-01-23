@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Content page' do
+RSpec.describe 'Content page', :vcr do
   include_context 'with progress'
   include_context 'with user'
 

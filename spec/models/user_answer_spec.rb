@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe UserAnswer, type: :model do
+RSpec.describe UserAnswer, :vcr, type: :model do
   subject(:user_answer) do
     create(:user_answer,
            name: questionnaire.name,

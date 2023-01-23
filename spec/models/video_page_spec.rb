@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe VideoPage, type: :model do
+RSpec.describe VideoPage, :vcr, type: :model do
   subject(:video_page) do
     described_class.new(training_module: mod_name, type: :video_page, name: page_name)
   end

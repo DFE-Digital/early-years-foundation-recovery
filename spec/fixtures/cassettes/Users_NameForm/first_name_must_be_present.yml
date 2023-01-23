@@ -1,0 +1,70 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.notifications.service.gov.uk/v2/notifications/email
+    body:
+      encoding: UTF-8
+      string: '{"template_id":"d6ab2e3b-923e-429e-abd2-cfe7be0e9193","personalisation":{"confirmation_url":"http://localhost/users/confirmation?confirmation_token=J3Fpzakx1UqmmECr8XBw"},"email_address":"erich.johnston@example.com"}'
+    headers:
+      User-Agent:
+      - NOTIFY-API-RUBY-CLIENT/5.4.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxNWY1MzhkOS1hYTYzLTQyYzEtODc1Zi1kNzhjNDBiMGIyYjMiLCJpYXQiOjE2NzQ0ODAxNjB9.grHhVZPKSW2X0zg_tCyHo4AbU-kWlNk8xaoTdPRQcSQ
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1048'
+      Connection:
+      - keep-alive
+      Date:
+      - Mon, 23 Jan 2023 13:22:41 GMT
+      Access-Control-Allow-Headers:
+      - Content-Type,Authorization
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - gunicorn
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-B3-Spanid:
+      - 5924fb115d879706
+      X-B3-Traceid:
+      - 565feacb5227bc6f5924fb115d879706
+      X-Vcap-Request-Id:
+      - d90ad523-0461-43c8-6f93-581385600274
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 4ae6e5888b43b4133973ba1aadad8194.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - LHR50-P3
+      X-Amz-Cf-Id:
+      - rRZxSiUSkaWnzy95Et0oPqOZmFZZInK2-IxHg2MB3FbXRKOZ4rs66g==
+    body:
+      encoding: UTF-8
+      string: '{"content":{"body":"# Activate your Early Years Child Development Training
+        account \r\n\r\nThank you for creating an Early Years Child Development Training
+        account. \r\n\r\nPlease use the account activation link to confirm your email
+        address: http://localhost/users/confirmation?confirmation_token=J3Fpzakx1UqmmECr8XBw\r\n\r\nIf
+        you did not ask to set up an account, please ignore this email.\r\n\r\nContact
+        child-development.training@education.gov.uk for further help or to give us
+        feedback.","from_email":"early.years.child.development.training@notifications.service.gov.uk","subject":"Activate
+        your Early Years Child Development Training account"},"id":"6fee3deb-a4ac-4c59-875c-62b7a2441e77","reference":null,"scheduled_for":null,"template":{"id":"d6ab2e3b-923e-429e-abd2-cfe7be0e9193","uri":"https://api.notifications.service.gov.uk/services/15f538d9-aa63-42c1-875f-d78c40b0b2b3/templates/d6ab2e3b-923e-429e-abd2-cfe7be0e9193","version":6},"uri":"https://api.notifications.service.gov.uk/v2/notifications/6fee3deb-a4ac-4c59-875c-62b7a2441e77"}
+
+        '
+  recorded_at: Mon, 23 Jan 2023 13:22:41 GMT
+recorded_with: VCR 6.1.0

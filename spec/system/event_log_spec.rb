@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Event log' do
+RSpec.describe 'Event log', :vcr do
   include_context 'with events'
   include_context 'with progress'
   include_context 'with user'

@@ -1,0 +1,71 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.notifications.service.gov.uk/v2/notifications/email
+    body:
+      encoding: UTF-8
+      string: '{"template_id":"857dc6d0-7179-48bf-8079-916fedb43528","personalisation":{"name":"","email":"louella@example.com","reset_password_url":"http://localhost/users/password/new"},"email_address":"louella@example.com"}'
+    headers:
+      User-Agent:
+      - NOTIFY-API-RUBY-CLIENT/5.4.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxNWY1MzhkOS1hYTYzLTQyYzEtODc1Zi1kNzhjNDBiMGIyYjMiLCJpYXQiOjE2NzQ0ODEzMTh9.mmh6rjEqVshe0nfs11AIS0RkGHRAWlsZXzJXMohdlSo
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1177'
+      Connection:
+      - keep-alive
+      Date:
+      - Mon, 23 Jan 2023 13:41:58 GMT
+      Access-Control-Allow-Headers:
+      - Content-Type,Authorization
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - gunicorn
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-B3-Spanid:
+      - 1d1efd8eff941acc
+      X-B3-Traceid:
+      - 6ef7fe99641e9d091d1efd8eff941acc
+      X-Vcap-Request-Id:
+      - 54c820ac-52ee-446e-7c01-0a825eb81441
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 17d60a367e7e38c01f5a3242a9a3e784.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - LHR50-P3
+      X-Amz-Cf-Id:
+      - Ep3jg2MT9rZIUIV8SFjYnt1JkY-SmANEAUDgleB_UlHIjxek3EuZ0w==
+    body:
+      encoding: UTF-8
+      string: '{"content":{"body":"#New registration attempt for an Early Years Child
+        Development Training account\r\n\r\nWe noticed that someone attempted to create
+        an Early Years Child Development Training account using this email address.
+        \r\n\r\nThere is already an account for this email address. \r\n\r\nIf you
+        cannot access your account, you can follow this link to reset your password:  http://localhost/users/password/new.
+        \r\n\r\nIf you did not attempt to make a new account, you do not need to do
+        anything. \r\n\r\nContact child-development.training@education.gov.uk for
+        further help or to give us feedback.","from_email":"early.years.child.development.training@notifications.service.gov.uk","subject":"New
+        registration attempt for an Early Years Child Development Training account"},"id":"df8fd187-7453-49b3-a8bc-2c23a73a194d","reference":null,"scheduled_for":null,"template":{"id":"857dc6d0-7179-48bf-8079-916fedb43528","uri":"https://api.notifications.service.gov.uk/services/15f538d9-aa63-42c1-875f-d78c40b0b2b3/templates/857dc6d0-7179-48bf-8079-916fedb43528","version":6},"uri":"https://api.notifications.service.gov.uk/v2/notifications/df8fd187-7453-49b3-a8bc-2c23a73a194d"}
+
+        '
+  recorded_at: Mon, 23 Jan 2023 13:41:58 GMT
+recorded_with: VCR 6.1.0

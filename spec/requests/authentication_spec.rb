@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Authentication', type: :request do
+RSpec.describe 'Authentication', :vcr, type: :request do
   describe 'viewing authenticate_user! controller action' do
     let(:action_path) { edit_registration_name_path }
 

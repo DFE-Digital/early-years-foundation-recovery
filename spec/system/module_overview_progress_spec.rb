@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Module overview page progress' do
+RSpec.describe 'Module overview page progress', :vcr do
   include_context 'with progress'
   include_context 'with user'
 

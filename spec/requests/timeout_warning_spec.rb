@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Session timeout warning', type: :request do
+RSpec.describe 'Session timeout warning', :vcr, type: :request do
   describe '#check' do
     context 'with an active session' do
       before do

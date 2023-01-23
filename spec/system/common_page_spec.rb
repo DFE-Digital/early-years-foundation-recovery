@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Common page' do
+RSpec.describe 'Common page', :vcr do
   include_context 'with user'
 
   before { visit(common_page) }

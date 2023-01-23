@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'ContentHelper', type: :helper do
+describe 'ContentHelper', :vcr, type: :helper do
   describe '#translate_markdown' do
     subject(:html) { helper.translate_markdown(input) }
 

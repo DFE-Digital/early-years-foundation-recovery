@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Automated bot', type: :request do
+RSpec.describe 'Automated bot', :vcr, type: :request do
   let(:bot_email) { 'bot_token@example.com' }
 
   before do

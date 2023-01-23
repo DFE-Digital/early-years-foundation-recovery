@@ -1,0 +1,70 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.notifications.service.gov.uk/v2/notifications/email
+    body:
+      encoding: UTF-8
+      string: '{"template_id":"ad77aab8-d903-4f77-b074-a16c2658ca79","personalisation":{"name":"","edit_password_url":"http://localhost/users/password/edit?reset_password_token=Xye-5xt6-zB6cNhB1zJL"},"email_address":"josette.hudson@example.com"}'
+    headers:
+      User-Agent:
+      - NOTIFY-API-RUBY-CLIENT/5.4.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxNWY1MzhkOS1hYTYzLTQyYzEtODc1Zi1kNzhjNDBiMGIyYjMiLCJpYXQiOjE2NzQ0ODA2MTh9.PpwWOP7EbcEU57chI8oA7g0jQttBnZT_uYqHl0hCI2U
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1139'
+      Connection:
+      - keep-alive
+      Date:
+      - Mon, 23 Jan 2023 13:30:18 GMT
+      Access-Control-Allow-Headers:
+      - Content-Type,Authorization
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - gunicorn
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-B3-Spanid:
+      - 3c0d59d2029442db
+      X-B3-Traceid:
+      - 76f1cbb75df1f2883c0d59d2029442db
+      X-Vcap-Request-Id:
+      - 0154b806-c86f-47f3-7c3f-9d310d65f0f3
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 04bb33465149b34afca4988622dca584.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - LHR50-P3
+      X-Amz-Cf-Id:
+      - rktshPZ-QzlxlI0wQ5o9-1vI7NxcbMlr4gkqKSyannCEgB2l8v8SbQ==
+    body:
+      encoding: UTF-8
+      string: '{"content":{"body":"#Reset the password for your Early Years Child
+        Development Training account \r\n\r\nWe''ve received a request to reset the
+        password for your Early Years Child Development Training account.\r\n\r\nTo
+        create a new password, please follow this link: http://localhost/users/password/edit?reset_password_token=Xye-5xt6-zB6cNhB1zJL\r\n\r\nIf
+        you did not ask to reset your password, please delete this email. Your account
+        and personal information are safe.\r\n\r\nContact child-development.training@education.gov.uk
+        for further help or to give us feedback.","from_email":"early.years.child.development.training@notifications.service.gov.uk","subject":"Reset
+        the password for your Early Years Child Development Training account"},"id":"7a7b16f1-2554-4154-b6d1-b81e97ee02f2","reference":null,"scheduled_for":null,"template":{"id":"ad77aab8-d903-4f77-b074-a16c2658ca79","uri":"https://api.notifications.service.gov.uk/services/15f538d9-aa63-42c1-875f-d78c40b0b2b3/templates/ad77aab8-d903-4f77-b074-a16c2658ca79","version":11},"uri":"https://api.notifications.service.gov.uk/v2/notifications/7a7b16f1-2554-4154-b6d1-b81e97ee02f2"}
+
+        '
+  recorded_at: Mon, 23 Jan 2023 13:30:18 GMT
+recorded_with: VCR 6.1.0

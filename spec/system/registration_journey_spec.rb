@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Following registration journey' do
+RSpec.describe 'Following registration journey', :vcr do
   let(:user) { create :user }
 
   context 'when on the check your email page' do

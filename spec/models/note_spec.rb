@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Note, type: :model do
+RSpec.describe Note, :vcr, type: :model do
   let(:note) { create :note, body: 'This is the body' }
 
   it 'is valid' do
