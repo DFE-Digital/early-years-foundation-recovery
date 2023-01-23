@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Video page' do
+RSpec.describe 'Video page', :vcr do
   include_context 'with progress'
   include_context 'with user'
 

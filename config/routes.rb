@@ -65,5 +65,10 @@ Rails.application.routes.draw do
     resources :assessment_results, only: %i[show new], path: 'assessment-result'
   end
 
+  if Rails.env.development?
+    require 'mr_video'
+    mount MrVideo::Engine => '/mr_video'
+  end
+
   get '/:id', to: 'static#show', as: :static
 end

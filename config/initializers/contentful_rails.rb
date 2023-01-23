@@ -1,7 +1,6 @@
 require 'training/module'
 require 'training/page'
 require 'training/question'
-require 'training/confidence'
 require 'training/video'
 
 ContentfulRails.configure do |config|
@@ -24,7 +23,6 @@ ContentfulRails.configure do |config|
       'module' => Training::Module,
       'page' => Training::Page,
       'question' => Training::Question,
-      'confidence' => Training::Confidence,
       'video' => Training::Video
     },
   }

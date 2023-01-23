@@ -5,5 +5,7 @@ namespace :contentful do
   task upload: :environment do
     require 'upload'
     Upload.call('alpha')
+    Upload.call('bravo')
+    Upload.call('charlie')
   end
 end

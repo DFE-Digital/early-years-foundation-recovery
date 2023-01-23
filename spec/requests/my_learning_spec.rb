@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'My modules', type: :request do
+RSpec.describe 'My modules', :vcr, type: :request do
   describe 'GET /my-modules' do
     before do
       sign_in create(:user, :registered)

@@ -61,6 +61,11 @@ module.exports = function(migration) {
     type: 'Number'
   })
 
+  const position = trainingModule.createField('position', {
+    name: 'Position',
+    type: 'Number'
+  })
+
   const pages = trainingModule.createField('pages', {
     name: 'Pages',
     type: 'Array',

@@ -37,7 +37,8 @@ class Upload
         duration: tm.duration,
         summative_threshold: tm.summative_threshold,
         objective: tm.objective,
-        criteria: tm.criteria
+        criteria: tm.criteria,
+        position: tm.id
       )
       log "module entry #{module_entry.title}"
 
@@ -47,6 +48,8 @@ class Upload
           entry = item.model
           ct_video.entries.create(
             name: item.name,
+            heading: item.model.heading,
+            body: item.model.body,
             trainingModule: tm.name,
             transcript: entry.transcript,
             title: entry.translate(:video)[:title],
@@ -63,7 +66,7 @@ class Upload
             body: question[:body],
             assessmentSucceed: question[:assessment_summary],
             assessmentFail: question[:assessment_fail_summary],
-            assessmentsType: question[:assessments_type],
+            assessmentsType: questionnaire[:assessments_type],
             answers: answers,
             pageNumber: questionnaire.page_number,
             totalQuestions: questionnaire.total_questions
@@ -78,7 +81,7 @@ class Upload
             body: question[:body],
             assessmentSucceed: question[:assessment_summary],
             assessmentFail: question[:assessment_fail_summary],
-            assessmentsType: question[:assessments_type],
+            assessmentsType: questionnaire[:assessments_type],
             answers: answers,
             pageNumber: questionnaire.page_number,
             totalQuestions: questionnaire.total_questions
@@ -93,7 +96,7 @@ class Upload
             body: question[:body],
             assessmentSucceed: question[:assessment_summary],
             assessmentFail: question[:assessment_fail_summary],
-            assessmentsType: question[:assessments_type],
+            assessmentsType: questionnaire[:assessments_type],
             answers: answers,
             pageNumber: questionnaire.page_number,
             totalQuestions: questionnaire.total_questions
