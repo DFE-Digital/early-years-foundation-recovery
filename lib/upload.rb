@@ -38,7 +38,7 @@ class Upload
         summative_threshold: tm.summative_threshold,
         objective: tm.objective,
         criteria: tm.criteria,
-        position: tm.id
+        position: tm.id,
       )
       log "module entry #{module_entry.title}"
 
@@ -54,12 +54,12 @@ class Upload
             transcript: entry.transcript,
             title: entry.translate(:video)[:title],
             videoId: entry.translate(:video)[:id].to_s,
-            videoProvider: entry.translate(:video)[:provider]
+            videoProvider: entry.translate(:video)[:provider],
           )
         when /formative_questionnaire/
           questionnaire = FormativeQuestionnaire.where(training_module: tm.name, name: item.name).first
           questionnaire_name, question = questionnaire[:questions].first
-          answers = question[:answers].map{|key,value| {key => [value, question[:correct_answers].include?(key)]} }
+          answers = question[:answers].map { |key, value| { key => [value, question[:correct_answers].include?(key)] } }
           ct_question.entries.create(
             name: questionnaire.name,
             trainingModule: questionnaire.training_module,
@@ -69,12 +69,12 @@ class Upload
             assessmentsType: questionnaire[:assessments_type],
             answers: answers,
             pageNumber: questionnaire.page_number,
-            totalQuestions: questionnaire.total_questions
+            totalQuestions: questionnaire.total_questions,
           )
         when /confidence_questionnaire/
           questionnaire = ConfidenceQuestionnaire.where(training_module: tm.name, name: item.name).first
           questionnaire_name, question = questionnaire[:questions].first
-          answers = question[:answers].map{|key,value| {key => [value, question[:correct_answers].include?(key)]} }
+          answers = question[:answers].map { |key, value| { key => [value, question[:correct_answers].include?(key)] } }
           ct_question.entries.create(
             name: questionnaire.name,
             trainingModule: questionnaire.training_module,
@@ -84,12 +84,12 @@ class Upload
             assessmentsType: questionnaire[:assessments_type],
             answers: answers,
             pageNumber: questionnaire.page_number,
-            totalQuestions: questionnaire.total_questions
+            totalQuestions: questionnaire.total_questions,
           )
         when /summative_questionnaire/
           questionnaire = SummativeQuestionnaire.where(training_module: tm.name, name: item.name).first
           questionnaire_name, question = questionnaire[:questions].first
-          answers = question[:answers].map{|key,value| {key => [value, question[:correct_answers].include?(key)]} }
+          answers = question[:answers].map { |key, value| { key => [value, question[:correct_answers].include?(key)] } }
           ct_question.entries.create(
             name: questionnaire.name,
             trainingModule: questionnaire.training_module,
@@ -99,16 +99,16 @@ class Upload
             assessmentsType: questionnaire[:assessments_type],
             answers: answers,
             pageNumber: questionnaire.page_number,
-            totalQuestions: questionnaire.total_questions
+            totalQuestions: questionnaire.total_questions,
           )
-        else 
+        else
           ct_page.entries.create(
             name: item.name,
             heading: item.model&.heading,
             trainingModule: tm.name,
             pageType: item.type,
             body: item.model&.body,
-            notes: item.model&.notes?
+            notes: item.model&.notes?,
           )
         end
       end

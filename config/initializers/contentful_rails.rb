@@ -17,7 +17,6 @@ ContentfulRails.configure do |config|
   # config.enable_preview_domain =
   # config.preview_domain =
 
-
   # Tokens
   config.access_token         = Rails.application.config.contentful_delivery_access_token
   config.preview_access_token = Rails.application.config.contentful_preview_access_token
@@ -31,7 +30,7 @@ ContentfulRails.configure do |config|
       'training_module' => Training::Module,
       'page' => Training::Page,
       'question' => Training::Question,
-      'video' => Training::Video
+      'video' => Training::Video,
     },
   }
 end

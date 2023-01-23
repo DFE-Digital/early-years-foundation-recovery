@@ -48,8 +48,11 @@ class CourseProgress
     training_modules.map do |mod|
       <<~SUMMARY
         title: #{mod.title}
+        position: #{mod.position}
         name: #{mod.name}
         draft: #{mod.draft?}
+        published: #{mod.published?}
+        published_at: #{mod.published_at}
         started: #{started?(mod)}
         completed: #{completed?(mod)}
         available: #{available?(mod)}
@@ -116,7 +119,7 @@ private
 
   # @return [Array<Training::Module>] all training modules
   def training_modules
-    @training_modules ||= Training::Module.all.load!
+    @training_modules ||= Training::Module.all.order(:position).load!
   end
 
   # @return [ModuleProgress]

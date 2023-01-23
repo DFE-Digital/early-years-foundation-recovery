@@ -1,5 +1,4 @@
 class Content < ContentfulModel::Base
-    
   # METHODS TO DEPRECATE --------------------------------------
   # @return [self]
   def module_item
@@ -16,7 +15,7 @@ class Content < ContentfulModel::Base
   def parent
     Training::Module.find_by(name: training_module).first
   end
-    
+
   # @return [Boolean]
   def assessment_results?
     page_type && page_type.eql?('assessment_results')
@@ -44,7 +43,7 @@ class Content < ContentfulModel::Base
 
   # @return [Boolean]
   def is_question?
-    page_type in %w[ formative summative confidence ]
+    page_type in %w[formative summative confidence]
   end
 
   def previous_item

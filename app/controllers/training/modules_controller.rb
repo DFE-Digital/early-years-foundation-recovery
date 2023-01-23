@@ -44,11 +44,11 @@ protected
     @assessment ||= helpers.assessment_progress(mod)
   end
 
-#   def module_item
-#     @module_item ||= ModuleItem.find_by(training_module: training_module_name, name: params[:id]) || ModuleItem.find_by(training_module: params[:id])
-#   end
+  #   def module_item
+  #     @module_item ||= ModuleItem.find_by(training_module: training_module_name, name: params[:id]) || ModuleItem.find_by(training_module: params[:id])
+  #   end
 
-#   def training_module_name
-#     @training_module_name ||= params[:training_module_id]
-#   end
+  #   def training_module_name
+  #     @training_module_name ||= params[:training_module_id]
+  #   end
 end

@@ -20,7 +20,7 @@ class Training::PagesController < Training::BaseController
     end
   end
 
-  private
+private
 
   def render_page
     render module_item.page_type
@@ -47,7 +47,7 @@ class Training::PagesController < Training::BaseController
   def video
     Training::Video.find_by(name: params[:id], trainingModule: params[:training_module_id]).first
   end
-  
+
   def track_events
     track('module_content_page')
 
