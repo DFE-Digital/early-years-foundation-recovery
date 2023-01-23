@@ -17,7 +17,6 @@ on:
       - Dockerfile
       - terraform
 
-
 jobs:
   test:
     name: Test and lint code
@@ -69,8 +68,6 @@ jobs:
       -
         name: Prepare test database
         run: bin/rails db:prepare
-        # env:
-        #   GOVUK_NOTIFY_API_KEY: foo
       -
         name: Run test suite
         run: bundle exec rspec
