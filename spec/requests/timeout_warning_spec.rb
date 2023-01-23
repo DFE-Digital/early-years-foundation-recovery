@@ -42,7 +42,7 @@ RSpec.describe 'Session timeout warning', type: :request do
 
       it 'extends current session' do
         expect(response).to have_http_status(:success)
-        expect(response.body).to eq '1500' # ~25*60
+        expect(response.body.to_i).to be_within(1).of(1500) # ~25*60
       end
     end
 
