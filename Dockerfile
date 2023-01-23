@@ -98,7 +98,7 @@ CMD ["bundle", "exec", "rails", "server"]
 # ------------------------------------------------------------------------------
 FROM app as dev
 
-RUN apk add --no-cache --no-progress npm graphviz
+RUN apk add --no-cache --no-progress postgresql-client npm graphviz
 RUN npm install --global adr-log
 
 RUN bundle config unset without

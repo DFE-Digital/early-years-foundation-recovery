@@ -45,14 +45,39 @@ en:
       1-2-2-1:
         heading: text_page
         body: page 3 of sub 2 (topic 2 page 2)
-      # --------------------------------------
-      1-2-2-1a:
-        # assessment intro
-      1-2-2-2:
-        # question
-      1-2-2-3:
-        # question
-      1-2-2-4:
-        # results
       1-2-3:
+        # question
+
+      # --------------------------------------
+      1-3:
+        # summary intro
+
+      1-3-1:
+        heading: Recap
+        body: |
+          - recap of what you have learnt
+          - followup activities
+          - further reading links
+
+      1-3-2:
+        # assessment intro
+      1-3-2-1:
+        # question
+      1-3-2-2:
+        # question
+      1-3-2-3:
+        # results
+
+      1-3-3:
+        # confidence intro
+      1-3-3-1:
+        # question
+      1-3-3-2:
+        # question
+      1-3-3-3:
+        # question
+      1-3-3-4:
+        form: xxxxx
+
+      1-3-4:
         # certificate
