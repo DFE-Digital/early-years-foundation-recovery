@@ -17,22 +17,21 @@ on:
       - Dockerfile
       - terraform
 
-env:
-  RAILS_ENV: test
-  RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-  DATABASE_URL: postgres://postgres:password@localhost:5432/test
-  DOMAIN: recovery.app
-  TRAINING_MODULES: demo-modules
-  TIMEOUT_MINUTES: 3
-  TIMEOUT_WARNING_MINUTES: 1
-  TIMEOUT_MODAL_VISIBLE: 1
-  BOT_TOKEN: bot_token
-
 jobs:
   test:
     name: Test and lint code
     runs-on: ubuntu-latest
     environment: test
+    env:
+      RAILS_ENV: test
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      DATABASE_URL: postgres://postgres:password@localhost:5432/test
+      DOMAIN: recovery.app
+      TRAINING_MODULES: demo-modules
+      TIMEOUT_MINUTES: 3
+      TIMEOUT_WARNING_MINUTES: 1
+      TIMEOUT_MODAL_VISIBLE: 1
+      BOT_TOKEN: bot_token
 
     services:
       postgres:
@@ -69,8 +68,6 @@ jobs:
       -
         name: Prepare test database
         run: bin/rails db:prepare
-        # env:
-        #   NOTIFY_API_KEY: foo
       -
         name: Run test suite
         run: bundle exec rspec
