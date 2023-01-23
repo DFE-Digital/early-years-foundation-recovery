@@ -1,6 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe 'ContentPages', type: :request do
+RSpec.describe 'ContentPages', :vcr, type: :request do
+  include_context 'with progress'
+
   before do
     sign_in create(:user, :registered)
   end

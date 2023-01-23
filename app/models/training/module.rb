@@ -34,10 +34,6 @@ module Training
       icons_page.next_item
     end
     
-    def call_to_action
-      yield(:not_started, pages.first)
-    end
-
     # Viewing this page determines if the module is "started"
     # @return [Training::Page] page 5
     def first_content_page
@@ -123,7 +119,5 @@ module Training
     def video_pages
       module_items_by_type('video_page')
     end
-
-
   end
 end

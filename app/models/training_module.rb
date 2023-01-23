@@ -9,6 +9,9 @@ class TrainingModule < YamlBase
   end
 
   # @return [Integer]
+  def position = id
+
+  # @return [Integer]
   def topic_count
     items_by_topic.count
   end

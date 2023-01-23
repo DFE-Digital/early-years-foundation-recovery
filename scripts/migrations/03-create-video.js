@@ -20,6 +20,16 @@ module.exports = function(migration) {
     type: 'Text'
   })
   
+  const heading = video.createField('heading', {
+    name: 'Heading',
+    type: 'Text'
+  })
+
+  const body = video.createField('body', {
+    name: 'Body',
+    type: 'Text'
+  })
+  
   const transcript = video.createField('transcript', {
     name: 'Transcript',
     type: 'Text'
