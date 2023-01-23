@@ -100,6 +100,7 @@ group :development do
   gem 'redcarpet' # code syntax in Yardoc
   gem 'web-console'
   gem 'yard-junk'
+  gem 'mr_video'
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 

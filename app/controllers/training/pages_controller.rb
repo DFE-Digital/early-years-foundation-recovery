@@ -47,7 +47,7 @@ private
   def video
     Training::Video.find_by(name: params[:id], trainingModule: params[:training_module_id]).first
   end
-
+  
   def track_events
     track('module_content_page')
 

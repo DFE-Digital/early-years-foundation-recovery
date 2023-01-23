@@ -50,7 +50,7 @@ module Training
     def intro_page
       icons_page.next_item
     end
-
+    
     # Viewing this page determines if the module is "started"
     # @return [Training::Page]
     def first_content_page

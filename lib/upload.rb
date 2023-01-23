@@ -38,7 +38,7 @@ class Upload
         summative_threshold: tm.summative_threshold,
         objective: tm.objective,
         criteria: tm.criteria,
-        position: tm.id,
+        position: tm.id
       )
       log "module entry #{module_entry.title}"
 

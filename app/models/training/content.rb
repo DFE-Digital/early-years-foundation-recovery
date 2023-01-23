@@ -1,22 +1,41 @@
 class Content < ContentfulModel::Base
-  # METHODS TO DEPRECATE --------------------------------------
+    
   # @return [self]
-  def module_item
-    self
-  end
+  def model = self
+  def module_item = self
 
-  # @return [self]
-  def model
-    self
-  end
-  # ----------------------------------------------------------
-
-  # @return [Training::Module]
   def parent
     Training::Module.find_by(name: training_module).first
   end
+    
+  # @return [Boolean]
+  def assessment_results?
+    page_type && page_type.eql?('assessment_results')
+  end
 
-  # @return [Training::Page]
+  # @return [Boolean]
+  def interruption_page?
+    page_type && page_type.eql?('interruption_page')
+  end
+
+  # @return [Boolean]
+  def submodule_intro?
+    page_type && page_type.eql?('sub_module_intro')
+  end
+
+  # @return [Boolean]
+  def summary_intro?
+    page_type && page_type.eql?('summary_intro')
+  end
+
+  def notes?
+    notes
+  end
+
+  def is_question?
+    page_type in %w[ formative summative confidence ]
+  end
+
   def previous_item
     current_index = parent.pages.rindex(self)
 
@@ -104,33 +123,6 @@ class Content < ContentfulModel::Base
     else
       'Next'
     end
-  end
-
-  # predicates ---------------------------------
-
-  # @return [Boolean]
-  def interruption_page?
-    page_type && page_type.eql?('interruption_page')
-  end
-
-  # @return [Boolean]
-  def submodule_intro?
-    page_type && page_type.eql?('sub_module_intro')
-  end
-
-  # @return [Boolean]
-  def summary_intro?
-    page_type && page_type.eql?('summary_intro')
-  end
-
-  # @return [Boolean]
-  def notes?
-    notes
-  end
-
-  # @return [Boolean]
-  def is_question?
-    page_type in %w[formative summative confidence]
   end
 
   # @return [Boolean]

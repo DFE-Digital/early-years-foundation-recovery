@@ -30,7 +30,7 @@ ContentfulRails.configure do |config|
       'training_module' => Training::Module,
       'page' => Training::Page,
       'question' => Training::Question,
-      'video' => Training::Video,
+      'video' => Training::Video
     },
   }
 end

@@ -84,5 +84,10 @@ Rails.application.routes.draw do
     mount MrVideo::Engine => '/mr_video'
   end
 
+  if Rails.env.development?
+    require 'mr_video'
+    mount MrVideo::Engine => '/mr_video'
+  end
+
   get '/:id', to: 'static#show', as: :static
 end
