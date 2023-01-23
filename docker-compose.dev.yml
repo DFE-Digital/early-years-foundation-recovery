@@ -15,6 +15,10 @@ services:
       - PGHOST=db
       - PGDATABASE
       - EDITOR=vi
+      - PGUSER=postgres
+      - PGPASSWORD=password
+      - PGHOST=db
+      - PGDATABASE
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
       - RAILS_ENV=development
       - DOMAIN=app:3000
