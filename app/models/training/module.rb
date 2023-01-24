@@ -10,6 +10,7 @@ module Training
     def module_course_items
       pages
     end
+
     def module_items
       pages
     end
@@ -140,6 +141,5 @@ module Training
     def video_pages
       module_items_by_type('video_page')
     end
-
   end
 end

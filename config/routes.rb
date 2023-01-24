@@ -55,7 +55,6 @@ Rails.application.routes.draw do
   # CMS  -----------------------------------------------------------------------
   constraints !Rails.application.cms? do # NB: enabled if false
     scope module: 'training' do
-
       resources :modules, only: %i[show], as: :training_modules do
         resources :pages, only: %i[index show], path: 'content-pages'
         resources :questionnaires, only: %i[show update]

@@ -70,11 +70,11 @@ class User < ApplicationRecord
 
   # @return [CourseProgress, ContentfulCourseProgress] course activity query interface
   def course
-    if Rails.application.cms?
-      @course ||= ContentfulCourseProgress.new(user: self)
-    else
-      @course ||= CourseProgress.new(user: self)
-    end
+    @course ||= if Rails.application.cms?
+                  ContentfulCourseProgress.new(user: self)
+                else
+                  CourseProgress.new(user: self)
+                end
   end
 
   def course_started?
