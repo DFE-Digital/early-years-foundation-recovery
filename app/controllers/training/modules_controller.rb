@@ -1,10 +1,9 @@
 class Training::ModulesController < Training::BaseController
   before_action :authenticate_registered_user!, only: :show
-  before_action :disable_cms_preview!, only: :index
 
   def index
     track('course_overview_page')
-    @mods = Training::Module.all.load!
+    @mods = Training::Module.all.load!.reject(&:draft?)
   end
 
   def show

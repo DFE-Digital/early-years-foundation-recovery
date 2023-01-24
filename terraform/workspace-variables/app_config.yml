@@ -37,6 +37,7 @@ development:
 # ey-recovery-content
 content:
   <<: *defaults
+  CONTENTFUL: true
   # CONTENTFUL_ENVIRONMENT: test
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital

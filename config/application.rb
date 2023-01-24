@@ -61,6 +61,12 @@ module EarlyYearsFoundationRecovery
     end
 
     # @return [Boolean]
+    def cms?
+      ENV['CONTENTFUL'].present?
+    end
+
+    # @see Training::BaseController
+    # @return [Boolean]
     def preview?
       Rails.env.development? || ENV['WORKSPACE'].eql?('staging')
     end

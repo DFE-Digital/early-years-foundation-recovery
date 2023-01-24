@@ -10,21 +10,28 @@ module Training
     def module_course_items
       pages
     end
-    alias_method :module_items, :module_course_items
+    def module_items
+      pages
+    end
     # METHODS TO DEPRECATE --------------------------------------
-
-    # predicates ---------------------------------
 
     # @return [Boolean]
     def draft?
-      !published?
+      pages.none?
     end
-
-    # @return [Boolean]
-    delegate :published?, to: :entry
 
     # @return [Datetime]
     delegate :published_at, to: :entry
+
+    # NB: Adds additional call to Management API
+    #
+    # @see ContentfulCourseProgress#debug_summary
+    # @return [Contentful::Management::Entry]
+    def entry
+      @entry ||= to_management
+    rescue NoMethodError
+      @entry = refetch_management_entry
+    end
 
     # content pages ---------------------------------
 
@@ -94,6 +101,7 @@ module Training
       tab_label.parameterize
     end
 
+    # @see also accordion on training/modules#index
     # @return [String]
     def card_title
       coming_soon = 'Coming soon - ' if draft?
@@ -133,11 +141,5 @@ module Training
       module_items_by_type('video_page')
     end
 
-  private
-
-    def entry
-      # @entry ||= refetch_management_entry
-      @entry ||= to_management
-    end
   end
 end
