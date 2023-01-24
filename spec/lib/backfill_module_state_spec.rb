@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'backfill_module_state'
 
 RSpec.describe BackfillModuleState do
   include_context 'with events'

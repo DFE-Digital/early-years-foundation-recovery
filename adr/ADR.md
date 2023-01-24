@@ -18,6 +18,7 @@ This log lists the architectural decisions for EYFS Recovery
 * [ADR-0011](0011-event-tracking.md) - Event Tracking
 * [ADR-0012](0012-accessibility-standards.md) - Use Pa11y CI to ensure WCAG standards
 * [ADR-0013](0013-sensitive-data-encryption.md) - Use Active Record Encryption to protect sensitive data
+* [ADR-0014](0014-hotjar.md) - Use Hotjar for tracking user journeys
 
 <!-- adrlogstop -->
 

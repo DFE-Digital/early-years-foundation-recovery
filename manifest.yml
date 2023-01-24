@@ -8,7 +8,8 @@
 #
 applications:
 -
-  name: eyfs_recovery_wip
-  # docker_image:
+  name: eyfs_recovery_test
+  docker:
+    image: ghcr.io/dfe-digital/early-years-foundation-recovery:latest
   health_check_type: http
   health_check_http_endpoint: /health
