@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Sign up', type: :system do
+RSpec.describe 'Sign up' do
   before do
     visit '/users/sign-up'
   end

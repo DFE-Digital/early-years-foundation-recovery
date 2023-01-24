@@ -7,14 +7,7 @@ RSpec.describe 'Module content' do
     it 'has none missing' do
       module_names.map do |mod_name|
         expect(mod_name).to be_publishable
-
-        case mod_name
-        when 'bravo', 'charlie'
-          # TODO: update demo modules
-          puts "skipping type check for #{mod_name}"
-        else
-          expect(mod_name).to have_all_types
-        end
+        expect(mod_name).to have_all_types
       end
     end
 
@@ -44,15 +37,15 @@ RSpec.describe 'Module content' do
 
     specify do
       expect(questions['alpha'].count).to be 3
-      expect(questions['bravo']).to be_nil
-      expect(questions['charlie']).to be_nil
+      expect(questions['bravo'].count).to be 1
+      expect(questions['charlie'].count).to be 1
 
       expect(questions['child-development-and-the-eyfs'].count).to be 17
       expect(questions['brain-development-and-how-children-learn'].count).to be 22
       expect(questions['personal-social-and-emotional-development'].count).to be 19
       expect(questions['module-4'].count).to be 19
 
-      expect(questions_total).to be 80
+      expect(questions_total).to be 82
     end
   end
 
@@ -65,14 +58,14 @@ RSpec.describe 'Module content' do
     specify do
       expect(questions['alpha'].count).to be 4
       expect(questions['bravo'].count).to be 2
-      expect(questions['charlie']).to be_nil
+      expect(questions['charlie'].count).to be 2
 
       expect(questions['child-development-and-the-eyfs'].count).to be 10
       expect(questions['brain-development-and-how-children-learn'].count).to be 10
       expect(questions['personal-social-and-emotional-development'].count).to be 10
       expect(questions['module-4'].count).to be 10
 
-      expect(questions_total).to be 46
+      expect(questions_total).to be 48
     end
   end
 
@@ -84,15 +77,15 @@ RSpec.describe 'Module content' do
 
     specify do
       expect(questions['alpha'].count).to be 3
-      expect(questions['bravo']).to be_nil
-      expect(questions['charlie']).to be_nil
+      expect(questions['bravo'].count).to be 3
+      expect(questions['charlie'].count).to be 3
 
       expect(questions['child-development-and-the-eyfs'].count).to be 5
       expect(questions['brain-development-and-how-children-learn'].count).to be 4
       expect(questions['personal-social-and-emotional-development'].count).to be 6
       expect(questions['module-4'].count).to be 6
 
-      expect(questions_total).to be 24
+      expect(questions_total).to be 30
     end
   end
 end

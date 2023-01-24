@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Learning activity', type: :system do
+RSpec.describe 'Learning activity' do
   include_context 'with user'
 
   before do
