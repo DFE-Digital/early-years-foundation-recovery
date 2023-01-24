@@ -19,31 +19,20 @@ RSpec.describe ModuleOverviewDecorator do
       it 'goes to the prompt page' do
         expect(user.events.count).to be_zero
         expect(output[:state]).to be :not_started
-        expect(output[:page]).to eql 'what-to-expect'
+        expect(output[:page]).to eq 'what-to-expect'
       end
     end
 
     context 'when the module has begun' do
-      # NB: user has gone back, so last visited page is not the furthest
       before do
-        %w[
-          what-to-expect
-          before-you-start
-          intro
-          1-1
-          1-1-1
-          1-1-2
-          1-1-2-1
-          1-1-2
-        ].map do |page|
-          view_module_page_event('bravo', page)
-        end
+        start_second_submodule(bravo)
+        view_module_page_event('bravo', 'intro') # visit previous page
       end
 
       it 'goes to the furthest page' do
-        expect(user.events.count).to be 8
+        expect(user.events.count).to be 10
         expect(output[:state]).to be :started
-        expect(output[:page]).to eql '1-1-2-1'
+        expect(output[:page]).to eq '1-2'
       end
     end
 
@@ -54,19 +43,19 @@ RSpec.describe ModuleOverviewDecorator do
 
       it 'retakes the assessment' do
         expect(output[:state]).to be :failed
-        expect(output[:page]).to eql '1-2-2-1a'
+        expect(output[:page]).to eq '1-3-2'
       end
     end
 
     context 'when the module has been completed' do
       before do
-        view_whole_module(bravo)
+        complete_module(bravo)
       end
 
       it 'goes to the certificate' do
-        expect(user.events.count).to be 16
+        expect(user.events.count).to be 26
         expect(output[:state]).to be :completed
-        expect(output[:page]).to eql '1-2-3'
+        expect(output[:page]).to eq '1-3-4'
       end
     end
   end

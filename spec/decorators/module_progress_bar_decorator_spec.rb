@@ -31,7 +31,7 @@ RSpec.describe ModuleProgressBarDecorator do
 
       context 'when the first node introduction is reached' do
         it 'emboldens the first node heading' do
-          view_pages_before(alpha, 'interruption_page')
+          view_pages_upto(alpha, 'interruption_page')
           expect(attribute).to eq [style, nil, nil, nil]
         end
       end
@@ -63,7 +63,7 @@ RSpec.describe ModuleProgressBarDecorator do
 
       context 'when learning has not started' do
         it 'all lines are grey' do
-          view_pages_before(alpha, 'interruption_page')
+          view_pages_upto(alpha, 'interruption_page')
           expect(attribute).to eq [nil, grey, grey, grey]
         end
       end
@@ -94,7 +94,7 @@ RSpec.describe ModuleProgressBarDecorator do
 
         context 'and content has been viewed' do
           it 'second line becomes green' do
-            view_pages_before(alpha, 'text_page', 5)
+            view_pages_upto(alpha, 'text_page', 5)
             expect(attribute).to eq [nil, green, green, grey]
           end
         end
@@ -127,7 +127,7 @@ RSpec.describe ModuleProgressBarDecorator do
       context 'when on module introduction section' do
         context 'and on first two pages' do
           it 'first node has green circle and next nodes have a grey circle' do
-            view_pages_before(alpha, 'interruption_page')
+            view_pages_upto(alpha, 'interruption_page')
             expect(attribute).to eq [started, not_started, not_started, not_started]
           end
         end
@@ -157,7 +157,7 @@ RSpec.describe ModuleProgressBarDecorator do
 
         context 'and on last page' do
           it 'previous and current nodes have green tick, next nodes have grey circle' do
-            view_pages_before_formative_questionnaire(alpha)
+            view_pages_upto_formative_question(alpha)
             expect(attribute).to eq [completed, completed, not_started, not_started]
           end
         end
@@ -191,7 +191,7 @@ RSpec.describe ModuleProgressBarDecorator do
   describe '#furthest_section' do
     context 'when on module introduction section' do
       specify do
-        view_pages_before(alpha, 'interruption_page')
+        view_pages_upto(alpha, 'interruption_page')
         expect(decorator.furthest_section).to eq 'You have reached section 1 of 4: Module introduction'
       end
     end
