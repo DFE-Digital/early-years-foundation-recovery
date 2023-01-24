@@ -1,6 +1,5 @@
 # Seed data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-Seeder = Dibber::Seeder
 
-Seeder.seed(:user, name_method: :email)
+Dibber::Seeder.seed(:user, name_method: :email) unless Rails.env.test?
 
-Rails.logger.debug Seeder.report
+Rails.logger.debug Dibber::Seeder.report
