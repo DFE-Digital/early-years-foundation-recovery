@@ -55,6 +55,8 @@ jobs:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
+        with:
+          version: v0.9.1
       -
         name: Login to Github Container Registry
         uses: docker/login-action@v2
@@ -97,7 +99,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
           TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
-          TF_VAR_paas_app_docker_image: ${{ env.REGISTRY }}:${{ github.event.pull_request.head.sha }}
+          TF_VAR_paas_app_docker_image: ${{ env.REGISTRY }}:${{ env.PR_NUMBER }}
           TF_VAR_paas_app_hostname: ${{ env.PR_NUMBER }}
           TF_VAR_paas_app_env_secrets: ${{ toJson(secrets) }}
           TF_VAR_paas_app_envs: ${{ toJson(env) }}
