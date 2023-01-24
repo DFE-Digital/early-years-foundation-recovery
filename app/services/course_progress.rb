@@ -22,6 +22,9 @@ class CourseProgress
     by_state(:upcoming).reject { |mod| available?(mod) }
   end
 
+  # NB: ModuleProgress#completed? and ModuleProgress#completed_at must align
+  #
+  #
   # Completed modules are modules for which every module item has been viewed
   # completed_at comes from a specific named event
   # @return [Array<Array>] Tabular data of completed training module
@@ -29,13 +32,6 @@ class CourseProgress
     by_state(:completed).map do |mod|
       [mod, module_progress(mod).completed_at]
     end
-  end
-
-  # @param module_id [String] training module name
-  # @return [String] name of last page viewed in module
-  def milestone(module_id)
-    page = training_module_events(module_id).last
-    page.properties['id'] if page.present?
   end
 
   # @return [Boolean]
@@ -53,9 +49,9 @@ class CourseProgress
         started: #{started?(mod)}
         completed: #{completed?(mod)}
         available: #{available?(mod)}
-        last: #{mod.module_items.last.name unless mod.draft?}
-        last_course_module_item: #{mod.module_course_items.last.name unless mod.draft?}
-        milestone: #{milestone(mod.name)}
+        last_page: #{mod.last_page.name unless mod.draft?}
+        certificate: #{mod.certificate_page.name unless mod.draft?}
+        milestone: #{module_progress(mod).milestone}
       SUMMARY
     end
   end

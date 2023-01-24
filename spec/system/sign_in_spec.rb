@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Sign in', type: :system do
+RSpec.describe 'Sign in' do
   let(:email_address) { user.email }
   let(:password) { 'StrongPassword123' }
 

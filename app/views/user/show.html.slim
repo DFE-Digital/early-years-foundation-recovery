@@ -7,11 +7,11 @@
     = govuk_summary_list do |your_details|
       - your_details.row do |row|
         - row.key { 'Name' }
-        - row.value { @user.name }
+        - row.value(text: @user.name, classes: ['data-hj-suppress'])
         - row.action(text: t('links.change'), href: edit_registration_name_path, visually_hidden_text: 'name', html_attributes: { id: :edit_name_registration })
       - your_details.row do |row|
         - row.key { 'Email' }
-        - row.value { @user.email }
+        - row.value(text:@user.email, classes: ['data-hj-suppress'])
         - row.action(text: t('links.change'), href: edit_email_user_path, visually_hidden_text: 'email', html_attributes: { id: :edit_email_user })
       - your_details.row do |row|
         - row.key { 'Password' }
@@ -25,13 +25,13 @@
         - row.action(text: t('links.change'), href: edit_registration_setting_type_path, visually_hidden_text: 'setting_type', html_attributes: { id: :edit_setting_type_registration })
       - other_details.row do |row|
         - row.key { 'Setting type' }
-        - row.value { @user.setting_name }
+        - row.value(text: @user.setting_name, classes: ['data-hj-suppress'])
       - other_details.row do |row|
         - row.key { 'Local authority' }
-        - row.value { @user.local_authority }
+        - row.value(text: @user.local_authority, classes: ['data-hj-suppress'])
       - other_details.row do |row|
         - row.key { 'Role' }
-        - row.value { @user.role }
+        - row.value(text: @user.role, classes: ['data-hj-suppress'])
 
     h2.govuk-heading-m Closing your account 
     = translate_markdown(t('close_account.body'))

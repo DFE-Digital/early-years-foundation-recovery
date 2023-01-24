@@ -76,7 +76,7 @@ variable "web_app_stopped" {
 
 variable "web_app_deployment_strategy" {
   type    = string
-  default = "blue-green-v3"
+  default = "blue-green"
 }
 
 

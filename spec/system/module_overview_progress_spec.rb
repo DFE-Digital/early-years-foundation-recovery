@@ -124,7 +124,7 @@ RSpec.describe 'Module overview page progress' do
 
   context 'when the last page of the first submodule is reached' do
     before do
-      view_pages_before_formative_questionnaire(alpha)
+      view_pages_upto_formative_question(alpha)
       visit '/modules/alpha'
     end
 
@@ -162,7 +162,7 @@ RSpec.describe 'Module overview page progress' do
 
   context 'when the whole module is complete' do
     before do
-      view_whole_module(alpha)
+      complete_module(alpha)
       visit '/modules/alpha'
     end
 

@@ -16,7 +16,7 @@ RSpec.describe 'Assessment results page' do
 
   context 'when on a content page in the second module' do
     before do
-      visit 'modules/bravo/assessment-result/1-2-2-4'
+      visit 'modules/bravo/assessment-result/1-2-2-1'
     end
 
     specify do
