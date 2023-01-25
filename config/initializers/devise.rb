@@ -238,7 +238,7 @@ Devise.setup do |config|
   # one (and only one) @ exists in the given string and that the domain only
   # contains numbers, letters and full stops. This is mainly
   # to give user feedback and not to assert the e-mail validity.
-  config.email_regexp = /\A[^@\s]+@[A-Za-z0-9.]+\z/
+  config.email_regexp = URI::MailTo::EMAIL_REGEXP
 
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
