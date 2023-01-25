@@ -23,7 +23,7 @@ class CloseAccountsController < ApplicationController
 
   def close_account
     current_user.send_account_closed_notification
-    redact_user_info
+    current_user.redact!
     sign_out current_user
     redirect_to user_close_account_path
   end
@@ -58,15 +58,5 @@ private
 
   def user_password_params
     params.require(:user).permit(:current_password)
-  end
-
-  def redact_user_info
-    current_user.skip_reconfirmation!
-    current_user.update!(first_name: 'Redacted',
-                         last_name: 'User',
-                         closed_at: Time.zone.now,
-                         email: "redacted_user#{current_user.id}@example.com",
-                         password: 'redacteduser')
-    current_user.notes.update_all(body: nil)
   end
 end

@@ -147,6 +147,17 @@ class User < ApplicationRecord
     !!private_beta_registration_complete
   end
 
+  def redact!
+    skip_reconfirmation!
+    update!(first_name: 'Redacted',
+            last_name: 'User',
+            email: "redacted_user#{id}@example.com",
+            closed_at: Time.zone.now,
+            password: 'redacteduser')
+
+    notes.update_all(body: nil)
+  end
+
 private
 
   def setting
