@@ -332,6 +332,53 @@ class ModuleItem < YamlBase
     icons_page? || module_intro? || submodule_intro? || summary_intro? || assessment_intro?
   end
 
+  # CMS START -------------------------
+
+  # Attribute conversion to Contentful format
+  #
+  # @return [Hash] Common content params
+  def cms_shared_params
+    {
+      name: name,
+      training_module: training_module,
+      heading: model.heading,
+      body: model.body,
+      submodule: submodule_name.to_i,
+      topic: topic_name.to_i,
+    }
+  end
+
+  # @return [Hash] Video Contentful Model params
+  def cms_video_params
+    cms_shared_params.merge(
+      transcript: model.transcript,
+      title: model.translate(:video)[:title],
+      video_id: model.translate(:video)[:id].to_s,
+      video_provider: model.translate(:video)[:provider], # TODO: set `vimeo` as default in CMS model
+    )
+  end
+
+  # @return [Hash] Page Contentful Model params
+  def cms_page_params
+    cms_shared_params.merge(
+      notes: model&.notes?,
+      page_type: type,
+    )
+  end
+
+  # @return [Hash] Question Contentful Model params
+  def cms_question_params
+    cms_shared_params.merge(questionnaire.cms_params)
+  end
+
+  # @see Upload
+  # @return [Questionnaire]
+  def questionnaire
+    Questionnaire.find_by!(name: name, training_module: training_module)
+  end
+
+# CMS END -------------------------
+
 private
 
   # @return [Array<ModuleItem>] module items in the same module

@@ -196,4 +196,21 @@ class TrainingModule < YamlBase
   def card_anchor
     "#module-#{id}-#{title.downcase.parameterize}"
   end
+
+  # Attribute conversion to Contentful format
+  #
+  # @return [Hash] Training Module Contentful Model params
+  def cms_module_params
+    {
+      title: title,
+      name: name,
+      short_description: short_description,
+      description: description,
+      duration: duration,
+      summative_threshold: summative_threshold,
+      objective: objective,
+      criteria: criteria,
+      position: id,
+    }
+  end
 end

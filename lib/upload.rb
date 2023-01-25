@@ -1,133 +1,108 @@
+require 'contentful/management'
+
+#
+# Populate Contentful using YAML content
+#
 class Upload
-  require 'contentful/management'
+  extend Dry::Initializer
 
-  def self.call(module_id)
-    new(module_id: module_id).call
-  end
+  option :config, default: proc { ContentfulRails.configuration }
+  option :client, default: proc { Contentful::Management::Client.new(config.management_token) }
 
-  attr_reader :module_id, :space, :token, :environment, :client
+  # @return [String]
+  def call(mod_name:)
+    # log "space: #{config.space}"
+    # log "env: #{config.environment}"
 
-  def initialize(module_id:)
-    @module_id = module_id
-    @space = ContentfulRails.configuration.space
-    @token = ContentfulRails.configuration.management_token
-    @environment = ContentfulRails.configuration.environment
-    @client = Contentful::Management::Client.new(token)
-  end
+    mod = find_mod(mod_name)
 
-  def call
-    log client.configuration
-    log "space: #{space}"
-
-    ct_module = client.content_types(space, environment).find('trainingModule')
-    ct_page = client.content_types(space, environment).find('page')
-    ct_question = client.content_types(space, environment).find('question')
-    ct_video = client.content_types(space, environment).find('video')
-
-    tm = TrainingModule.find_by(name: module_id)
-
-    if tm.present?
-      log "creating #{tm.name}"
-
-      module_entry = ct_module.entries.create(
-        title: tm.title,
-        name: tm.name,
-        short_description: tm.short_description,
-        description: tm.description,
-        duration: tm.duration,
-        summative_threshold: tm.summative_threshold,
-        objective: tm.objective,
-        criteria: tm.criteria,
-        position: tm.id,
-      )
-      log "module entry #{module_entry.title}"
-
-      pages = tm.module_items.map do |item|
-        case item.type
-        when /video_page/
-          entry = item.model
-          ct_video.entries.create(
-            name: item.name,
-            heading: item.model.heading,
-            body: item.model.body,
-            trainingModule: tm.name,
-            transcript: entry.transcript,
-            title: entry.translate(:video)[:title],
-            videoId: entry.translate(:video)[:id].to_s,
-            videoProvider: entry.translate(:video)[:provider],
-          )
-        when /formative_questionnaire/
-          questionnaire = FormativeQuestionnaire.where(training_module: tm.name, name: item.name).first
-          questionnaire_name, question = questionnaire[:questions].first
-          answers = question[:answers].map { |key, value| { key => [value, question[:correct_answers].include?(key)] } }
-          ct_question.entries.create(
-            name: questionnaire.name,
-            trainingModule: questionnaire.training_module,
-            body: question[:body],
-            assessmentSucceed: question[:assessment_summary],
-            assessmentFail: question[:assessment_fail_summary],
-            assessmentsType: questionnaire[:assessments_type],
-            answers: answers,
-            pageNumber: questionnaire.page_number,
-            totalQuestions: questionnaire.total_questions,
-          )
-        when /confidence_questionnaire/
-          questionnaire = ConfidenceQuestionnaire.where(training_module: tm.name, name: item.name).first
-          questionnaire_name, question = questionnaire[:questions].first
-          answers = question[:answers].map { |key, value| { key => [value, question[:correct_answers].include?(key)] } }
-          ct_question.entries.create(
-            name: questionnaire.name,
-            trainingModule: questionnaire.training_module,
-            body: question[:body],
-            assessmentSucceed: question[:assessment_summary],
-            assessmentFail: question[:assessment_fail_summary],
-            assessmentsType: questionnaire[:assessments_type],
-            answers: answers,
-            pageNumber: questionnaire.page_number,
-            totalQuestions: questionnaire.total_questions,
-          )
-        when /summative_questionnaire/
-          questionnaire = SummativeQuestionnaire.where(training_module: tm.name, name: item.name).first
-          questionnaire_name, question = questionnaire[:questions].first
-          answers = question[:answers].map { |key, value| { key => [value, question[:correct_answers].include?(key)] } }
-          ct_question.entries.create(
-            name: questionnaire.name,
-            trainingModule: questionnaire.training_module,
-            body: question[:body],
-            assessmentSucceed: question[:assessment_summary],
-            assessmentFail: question[:assessment_fail_summary],
-            assessmentsType: questionnaire[:assessments_type],
-            answers: answers,
-            pageNumber: questionnaire.page_number,
-            totalQuestions: questionnaire.total_questions,
-          )
-        else
-          ct_page.entries.create(
-            name: item.name,
-            heading: item.model&.heading,
-            trainingModule: tm.name,
-            pageType: item.type,
-            body: item.model&.body,
-            notes: item.model&.notes?,
-          )
-        end
-      end
-      module_entry.pages = pages
-      module_entry.save
-
-      log "finish #{tm.name}"
-    else
-      log("#{tm.name} not found")
+    if mod.blank?
+      log "Module '#{mod_name}' was not found"
+      return
     end
+
+    log "#{mod.name} ----------------------------------------------------------"
+
+    mod_entry = create_training_module(mod.cms_module_params)
+
+    mod_entry.pages =
+      mod.module_items.map do |item|
+        child_entry = create_entry(item)
+        child_entry.publish # TODO: current video fails due to provider not being read correctly
+        log_entry(child_entry)
+        child_entry
+      end
+
+    mod_entry.publish if mod_entry.save
+
+    log_entry(mod_entry)
   end
 
 private
 
+  # @param message [String]
+  # @return [String]
   def log(message)
     if ENV['RAILS_LOG_TO_STDOUT'].present?
       Rails.logger.info(message)
     else
       puts message
     end
+  end
+
+  # @param entry [Contentful::Management::DynamicEntry]
+  # @return [String]
+  def log_entry(entry)
+    log "'#{entry.sys[:contentType].id}' entry '#{entry.name}' published @ '#{entry.published_at&.strftime('%F %T')}'"
+  end
+
+  # YAML -----------------------------------------------------------------------
+
+  # @param name [String]
+  # @return [TrainingModule]
+  def find_mod(name)
+    TrainingModule.find_by(name: name)
+  end
+
+  # CONTENTFUL -----------------------------------------------------------------
+
+  # ModuleItem has 3 methods "cms_<model>_params" which return CMS ready attrbiutes
+  #
+  # @param [ModuleItem]
+  # @return [Contentful::Management::DynamicEntry]
+  def create_entry(item)
+    case item.type
+    when /video/
+      create_video(item.cms_video_params)
+    when /question/
+      create_question(item.cms_question_params)
+    else
+      create_page(item.cms_page_params)
+    end
+  end
+
+  # @return [Contentful::Management::DynamicEntry[trainingModule]]
+  def create_training_module(params)
+    factory.find('trainingModule').entries.create(params)
+  end
+
+  # @return [Contentful::Management::DynamicEntry[page]]
+  def create_page(params)
+    factory.find('page').entries.create(params)
+  end
+
+  # @return [Contentful::Management::DynamicEntry[video]]
+  def create_video(params)
+    factory.find('video').entries.create(params)
+  end
+
+  # @return [Contentful::Management::DynamicEntry[question]]
+  def create_question(params)
+    factory.find('question').entries.create(params)
+  end
+
+  # @return [Contentful::Management::ClientContentTypeMethodsFactory]
+  def factory
+    @factory ||= client.content_types(config.space, config.environment)
   end
 end
