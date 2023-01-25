@@ -6,26 +6,89 @@ require 'csv'
 module Reporting
   # ----------------------------------------------------------------------------
 
-  #
-  # | registered | not_registered | total | started_learning | not_started_learning |
-  # |------------|----------------|-------|------------------|----------------------|
-  # | 1          | 0              | 3     | 0                | 1                    |
+  # | registration_complete | registration_incomplete | reregistered | registered_since_private_beta | private_beta_only_registration_incomplete | private_beta_only_registration_complete | registration_events | private_beta_registration_events | public_beta_registration_events | total | locked_out | confirmed | unconfirmed | user_defined_roles | started_learning | not_started_learning |
+  # |-----------------------|-------------------------|--------------|-------------------------------|-------------------------------------------|-----------------------------------------|---------------------|----------------------------------|---------------------------------|-------|------------|-----------|-------------|--------------------|------------------|----------------------|
+  # | 1623                  | 1440                    | 411          | 1337                          | 229                                       | 1086                                    | 3127                | 1504                             | 1623                            | 3063  | 1          | 2930      | 133         | 78                 | 2072             | 991                  |
   #
   def export_users
     export('user_status', users.keys, [users.values])
   end
 
-  #
-  # | id | name                                      | title                                                              | not_started | in_progress | completed | engagement | module_start | module_complete | confidence_check | pass_assessment | fail_assessment |
-  # |----|-------------------------------------------|--------------------------------------------------------------------|-------------|-------------|-----------|------------|--------------|-----------------|------------------|-----------------|-----------------|
-  # | 1  | child-development-and-the-eyfs            | Understanding child development and the EYFS                       | 1           | 0           | 0         | 0          | 0            | 0               | 0                | 0               | 0               |
-  # | 2  | brain-development-and-how-children-learn  | Brain development and how children learn                           | 1           | 0           | 0         | 0          | 0            | 0               | 0                | 0               | 0               |
-  # | 3  | personal-social-and-emotional-development | "Supporting children’s personal, social and emotional development" | 1           | 0           | 0         | 0          | 0            | 0               | 0                | 0               | 0               |
-  # | 4  | module-4                                  | Supporting language development in the early years                 | 1           | 0           | 0         | 0          | 0            | 0               | 0                | 0               | 0               |
+  # | id | not_started | started | in_progress | completed | module_start | module_complete | confidence_check_start | confidence_check_complete | start_assessment | pass_assessment | fail_assessment |
+  # |----|-------------|---------|-------------|-----------|--------------|-----------------|------------------------|---------------------------|------------------|-----------------|-----------------|
+  # | 1  | 992         | 2071    | 862         | 1209      | 2071         | 1209            | 776                    | 832                       | 799              | 623             | 171             |
+  # | 2  | 2175        | 888     | 194         | 694       | 888          | 694             | 465                    | 480                       | 477              | 232             | 246             |
+  # | 3  | 2525        | 538     | 82          | 456       | 538          | 456             | 316                    | 332                       | 318              | 108             | 211             |
+  # | 4  | 2773        | 290     | 49          | 241       | 290          | 241             | 240                    | 240                       | 242              | 200             | 41              |
   #
   def export_modules
     export('module_status', modules.first.keys, modules.map(&:values))
   end
+
+  # ----------------------------------------------------------------------------
+
+  def users
+    {
+      # registration scopes
+      registration_complete: User.registration_complete.count,
+      registration_incomplete: User.registration_incomplete.count,
+      reregistered: User.reregistered.count,
+      registered_since_private_beta: User.registered_since_private_beta.count,
+      private_beta_only_registration_incomplete: User.private_beta_only_registration_incomplete.count,
+      private_beta_only_registration_complete: User.private_beta_only_registration_complete.count,
+
+      # registration events
+      registration_events: Ahoy::Event.user_registration.count,
+      private_beta_registration_events: Ahoy::Event.private_beta_registration.count,
+      public_beta_registration_events: Ahoy::Event.public_beta_registration.count,
+
+      # all
+      total: User.all.count,
+
+      # devise
+      locked_out: User.locked_out.count,
+      confirmed: User.confirmed.count,
+      unconfirmed: User.unconfirmed.count,
+
+      # user input
+      user_defined_roles: User.all.collect(&:role_type_other).uniq.count,
+
+      # course engagement
+      started_learning: started_learning,
+      not_started_learning: not_started_learning,
+    }
+  end
+
+  def modules
+    TrainingModule.published.map do |mod|
+      {
+        id: mod.id,
+        name: mod.name,
+        title: mod.title,
+
+        # module_time_to_completion
+        not_started: not_started(mod),
+        started: started(mod),
+        in_progress: in_progress(mod),
+        completed: completed(mod),
+
+        # module
+        module_start: Ahoy::Event.module_start.where_module(mod.name).count,
+        module_complete: Ahoy::Event.module_complete.where_module(mod.name).count,
+
+        # confidence
+        confidence_check_start: Ahoy::Event.confidence_check_start.where_module(mod.name).count,
+        confidence_check_complete: Ahoy::Event.confidence_check_complete.where_module(mod.name).count,
+
+        # summative
+        start_assessment: Ahoy::Event.summative_assessment_start.where_module(mod.name).count,
+        pass_assessment: Ahoy::Event.summative_assessment_pass(mod.name).count,
+        fail_assessment: Ahoy::Event.summative_assessment_fail(mod.name).count,
+      }
+    end
+  end
+
+private
 
   def export(file_name, headers, rows)
     file_path = Rails.root.join("tmp/#{file_name}.csv")
@@ -40,142 +103,43 @@ module Reporting
     puts "#{file_path} created"
   end
 
-  # ----------------------------------------------------------------------------
-
-  def users
-    {
-      registered: registered,
-      not_registered: not_registered,
-      total: total,
-      started_learning: started_learning,
-      not_started_learning: not_started_learning,
-    }
-  end
-
-  def modules
-    # TrainingModule.active.map do |mod|
-    TrainingModule.published.map do |mod|
-      {
-        id: mod.id,
-        name: mod.name,
-        title: mod.title,
-
-        # User#module_time_to_completion
-        # NB: will be present for legacy users (backfill rake task)
-        not_started: not_started(mod),
-        in_progress: in_progress(mod),
-        completed: completed(mod),
-        engagement: engagement(mod),
-
-        # Ahoy::Events
-        # NB: will not be present for legacy users
-        module_start: module_start_event(mod),
-        module_complete: module_complete_event(mod),
-        # confidence
-        confidence_check_start: confidence_check_start_event(mod),
-        confidence_check_complete: confidence_check_complete_event(mod),
-        # summative
-        pass_assessment: pass_summative_assessment_complete_event(mod),
-        fail_assessment: fail_summative_assessment_complete_event(mod),
-      }
-    end
-  end
-
-  # @see User#registration_complete
-  # ----------------------------------------------------------------------------
-
-  def registered
-    User.registered.count
-  end
-
-  def not_registered
-    User.not_registered.count
-  end
-
-  def total
-    User.all.count
-  end
-
   #
   # @see ContentPagesController#track_events
   # @see ApplicationHelper#calculate_module_state
   # @see User#module_time_to_completion
   # ----------------------------------------------------------------------------
 
-  # Number of registered users who have not started learning
+  # Number of users who have not started learning
   def not_started_learning
-    User.registered.map { |u| u.module_time_to_completion.keys }.count(&:empty?)
+    User.all.map { |u| u.module_time_to_completion.keys }.count(&:empty?)
   end
 
-  # Number of registered users who have started learning
+  # Number of users who have started learning
   def started_learning
-    User.registered.map { |u| u.module_time_to_completion.keys }.count(&:present?)
+    User.all.map { |u| u.module_time_to_completion.keys }.count(&:present?)
   end
 
   # Number of users not started
   def not_started(mod)
-    User.registered.map { |u| u.module_time_to_completion[mod.name] }.count(&:nil?)
+    User.all.map { |u| u.module_time_to_completion[mod.name] }.count(&:nil?)
   end
 
   # Number of users in progress
   def in_progress(mod)
-    User.registered.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:zero?)
+    User.all.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:zero?)
   end
 
   # Number of users completed
   def completed(mod)
-    User.registered.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:positive?)
+    User.all.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:positive?)
   end
 
-  # Number of users (total)
-  def engagement(mod)
+  # Number of users started
+  def started(mod)
     in_progress(mod) + completed(mod)
   end
-
-  # @see ContentPagesController#track_events
-  # ----------------------------------------------------------------------------
-
-  # Number of 'module_start' events
-  def module_start_event(mod)
-    Ahoy::Event.where(name: 'module_start').where_properties(training_module_id: mod.name).count
-  end
-
-  # Number of 'module_complete' events
-  def module_complete_event(mod)
-    Ahoy::Event.where(name: 'module_complete').where_properties(training_module_id: mod.name).count
-  end
-
-  # Number of 'confidence_check_complete' events
-  def confidence_check_complete_event(mod)
-    Ahoy::Event.where(name: 'confidence_check_complete').where_properties(training_module_id: mod.name).count
-  end
-
-  # @see QuestionnairesController#track_events
-  # ----------------------------------------------------------------------------
-
-  # Number of 'confidence_check_start' events
-  def confidence_check_start_event(mod)
-    Ahoy::Event.where(name: 'confidence_check_start').where_properties(training_module_id: mod.name).count
-  end
-
-  # Number of 'summative_assessment_start' events
-  def summative_assessment_start_event(mod)
-    Ahoy::Event.where(name: 'summative_assessment_start').where_properties(training_module_id: mod.name).count
-  end
-
-  # @see AssessmentResultsController#track_events
-  # ----------------------------------------------------------------------------
-
-  # Number of PASS 'summative_assessment_complete' events
-  def pass_summative_assessment_complete_event(mod)
-    Ahoy::Event.where(name: 'summative_assessment_complete').where_properties(training_module_id: mod.name, success: true).count
-  end
-
-  # Number of FAIL 'summative_assessment_complete' events
-  def fail_summative_assessment_complete_event(mod)
-    Ahoy::Event.where(name: 'summative_assessment_complete').where_properties(training_module_id: mod.name, success: false).count
-  end
 end
+# :nocov:
 
 namespace :eyfs do
   namespace :report do
@@ -194,4 +158,3 @@ namespace :eyfs do
     end
   end
 end
-# :nocov:
