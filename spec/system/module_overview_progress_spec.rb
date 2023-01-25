@@ -131,7 +131,7 @@ RSpec.describe 'Module overview page progress' do
 
   context "when some but not all of a topic's pages has been viewed" do
     before do
-      view_pages_before(alpha, 'text_page', 3)
+      view_pages_upto(alpha, 'text_page', 3)
       visit '/modules/alpha'
     end
 
