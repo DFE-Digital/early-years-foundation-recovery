@@ -233,11 +233,7 @@ Devise.setup do |config|
   # ==> Configuration for :validatable
   # Range for password length.
   config.password_length = 10..128
-
-  # Email regex used to validate email formats. It asserts that
-  # one (and only one) @ exists in the given string and that the domain only
-  # contains numbers, letters and full stops. This is mainly
-  # to give user feedback and not to assert the e-mail validity.
+  
   config.email_regexp = URI::MailTo::EMAIL_REGEXP
 
   # ==> Configuration for :timeoutable
