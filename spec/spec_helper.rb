@@ -17,21 +17,24 @@ SimpleCov.minimum_coverage 93
 SimpleCov.start 'rails'
 
 require 'pry'
-require 'vcr'
 
-VCR.configure do |config|
-  vcr_mode = /rec/i.match?(ENV['VCR_MODE']) ? :all : :once
-  # to record cassettes use env var VCR_MODE
-  # VCR_MODE=rec bin/rspec
-  config.cassette_library_dir = 'spec/fixtures/cassettes'
-  config.hook_into :webmock
-  config.ignore_localhost = true
-  config.configure_rspec_metadata!
-  config.default_cassette_options = {
-    record: vcr_mode,
-    match_requests_on: %i[method uri]
-  }
-end
+
+# Removing for now - TODO create a ticket once specs all pass and contentful models are settled
+# require 'vcr'
+
+# VCR.configure do |config|
+#   vcr_mode = ENV['VCR_MODE'] =~ /rec/i ? :all : :once
+#   # to record cassettes use env var VCR_MODE
+#   # VCR_MODE=rec bin/rspec
+#   config.cassette_library_dir = "spec/fixtures/cassettes"
+#   config.hook_into :webmock
+#   config.ignore_localhost = true
+#   config.configure_rspec_metadata!
+#   config.default_cassette_options = {
+#     record: vcr_mode,
+#     match_requests_on: %i[method uri]
+#   }
+# end
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|

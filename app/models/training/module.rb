@@ -6,9 +6,26 @@ module Training
 
     has_many :pages, class_name: 'Training::Page'
 
-    # METHODS TO DEPRECATE --------------------------------------
-    def module_course_items
+    # @param type [String] text_page, video_page...
+    # @return [Array<Training::Page> or <Training::Question> or <Training::Video>]
+    # assumption: pages are ordered by page name
+    def module_items_by_type(page_type)
+      Training::Page.params('fields.pageType' => page_type, 'fields.trainingModule' => name).order('name').load
+    end
+
+    # TODO rework to use submodule name attributes on pages
+    # @param submodule_name [Integer, String]
+    # @return [Array<ModuleItem>]
+    def module_items_by_submodule(submodule_name)
+      ModuleItem.where_submodule(name, submodule_name)
+    end
+
+    def module_items
       pages
+    end
+
+    def module_course_items
+      pages.reject{|page| page.page_type == 'certificate' }
     end
 
     def module_items
@@ -140,6 +157,45 @@ module Training
     # @return [Array<Training::Video>]
     def video_pages
       module_items_by_type('video_page')
+    end
+
+    # @return [Integer]
+    def topic_count
+      items_by_topic.count
+    end
+  
+    # @return [Integer]
+    def submodule_count
+      items_by_submodule.count
+    end
+
+    # @return [Boolean]
+    def draft?
+      pages.none?
+    end
+  
+    # @example
+    #   {
+    #     "1" => [1-1-1, 1-1-2],
+    #     "2" => [1-2-1, 1-2-2],
+    #   }
+    #
+    # @return [{String=>Array<ModuleItem>}]
+    def items_by_submodule
+      @items_by_submodule ||= module_items.group_by(&:submodule_name).except(nil)
+    end
+
+    # @example
+    #   {
+    #     ["1", "1"] => [1-1-1-1a, 1-1-1-1b],
+    #     ["1", "2"] => [1-1-2-1, 1-1-2-2],
+    #   }
+    #
+    # @return [{Array<String>=>Array<ModuleItem>}]
+    def items_by_topic
+      @items_by_topic ||= module_items.group_by { |m|
+        [m.submodule_name, m.topic_name] if m.topic_name
+      }.except(nil)
     end
   end
 end

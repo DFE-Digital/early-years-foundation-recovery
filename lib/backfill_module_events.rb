@@ -63,8 +63,6 @@ private
   def log(message)
     if ENV['RAILS_LOG_TO_STDOUT'].present?
       Rails.logger.info(message)
-    else
-      puts message
     end
   end
 end

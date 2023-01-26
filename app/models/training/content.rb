@@ -242,4 +242,9 @@ class Content < ContentfulModel::Base
   def current_submodule_items
     self.class.where_submodule(training_module, submodule_name).to_a
   end
+    
+  # @return [Boolean]
+  def topic?
+    page_name.to_i.zero?
+  end
 end
