@@ -6,18 +6,35 @@ module Training
 
     has_many :pages, class_name: 'Training::Page'
 
-    # @param type [String] text_page, video_page...
-    # @return [Array<Training::Page> or <Training::Question> or <Training::Video>]
-    def module_items_by_type(type)
-      self.pages.select{|page| page.type.eql?(type) }
-    end
-
+    # METHODS TO DEPRECATE --------------------------------------
     def module_course_items
       pages
     end
-    alias_method :module_items, :module_course_items
 
-    # sequence ---------------------------------
+    def module_items
+      pages
+    end
+    # METHODS TO DEPRECATE --------------------------------------
+
+    # @return [Boolean]
+    def draft?
+      pages.none?
+    end
+
+    # @return [Datetime]
+    delegate :published_at, to: :entry
+
+    # NB: Adds additional call to Management API
+    #
+    # @see ContentfulCourseProgress#debug_summary
+    # @return [Contentful::Management::Entry]
+    def entry
+      @entry ||= to_management
+    rescue NoMethodError
+      @entry = refetch_management_entry
+    end
+
+    # content pages ---------------------------------
 
     # @return [page] page 1
     def interruption_page
@@ -33,9 +50,9 @@ module Training
     def intro_page
       icons_page.next_item
     end
-    
+
     # Viewing this page determines if the module is "started"
-    # @return [Training::Page] page 5
+    # @return [Training::Page]
     def first_content_page
       module_items_by_type('sub_module_intro').first.next_item
     end
@@ -75,47 +92,52 @@ module Training
       module_course_items.last
     end
 
+    # view decorators ---------------------------------
+
     def tab_label
-      ['Module', id].join(' ')
+      ['Module', position].join(' ')
     end
 
     def tab_anchor
       tab_label.parameterize
     end
 
+    # @see also accordion on training/modules#index
     # @return [String]
     def card_title
       coming_soon = 'Coming soon - ' if draft?
-      "#{coming_soon}Module #{id}: #{title}"
+      "#{coming_soon}Module #{position}: #{title}"
     end
 
     # @return [String]
     def card_anchor
       "#module-#{id}-#{title.downcase.parameterize}"
     end
-  
+
+    # collections ---------------------------------
+
     # @param type [String] text_page, video_page...
-    # @return [Array<Training::Page>]
+    # @return [Array<Training::Page, Training::Question, Training::Video>]
     def module_items_by_type(type)
       Training::Page.where_type(name, type)
     end
 
-    # @return [Array<ModuleItem>]
+    # @return [Array<Training::Question>]
     def formative_questions
       module_items_by_type('formative_questionnaire')
     end
 
-    # @return [Array<ModuleItem>]
+    # @return [Array<Training::Question>]
     def summative_questions
       module_items_by_type('summative_questionnaire')
     end
 
-    # @return [Array<ModuleItem>]
+    # @return [Array<Training::Question>]
     def confidence_questions
       module_items_by_type('confidence_questionnaire')
     end
 
-    # @return [Array<ModuleItem>]
+    # @return [Array<Training::Video>]
     def video_pages
       module_items_by_type('video_page')
     end

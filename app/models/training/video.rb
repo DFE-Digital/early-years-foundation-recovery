@@ -3,9 +3,9 @@ require_relative 'content'
 class Training::Video < Content
   self.content_type_id = 'video'
 
-  def page_type = 'video_page' 
+  def page_type = 'video_page'
   def video_title = title
-  
+
   # @return [nil, String]
   def video_url
     return unless video_id
@@ -13,7 +13,7 @@ class Training::Video < Content
     %(#{video_site}/#{video_id}?enablejsapi=1&amp;origin=#{ENV['DOMAIN']})
   end
 
-  private
+private
 
   def video_site
     if vimeo?
@@ -32,5 +32,4 @@ class Training::Video < Content
   def youtube?
     video_provider.casecmp?('youtube')
   end
-
 end

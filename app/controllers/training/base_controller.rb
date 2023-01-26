@@ -1,3 +1,5 @@
 class Training::BaseController < ApplicationController
-  before_action { ContentfulModel.use_preview_api = true }
+  before_action do
+    ContentfulModel.use_preview_api = Rails.application.preview?
+  end
 end

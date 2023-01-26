@@ -14,6 +14,7 @@ services:
       - PGPASSWORD=password
       - PGHOST=db
       - PGDATABASE
+      - EDITOR=vi
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
       - RAILS_ENV=development
       - DOMAIN=app:3000
@@ -22,6 +23,12 @@ services:
       - TIMEOUT_WARNING_MINUTES
       - TRAINING_MODULES
       - BOT_TOKEN
+      - CONTENTFUL
+      - CONTENTFUL_SPACE
+      - CONTENTFUL_ENVIRONMENT
+      - CONTENTFUL_MANAGEMENT_TOKEN
+      - CONTENTFUL_DELIVERY_TOKEN
+      - CONTENTFUL_PREVIEW_TOKEN
     volumes:
       - .:/srv
     tty: true

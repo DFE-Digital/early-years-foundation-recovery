@@ -4,26 +4,33 @@ require 'training/question'
 require 'training/video'
 
 ContentfulRails.configure do |config|
+  config.space          = Rails.application.config.contentful_space
+  config.environment    = Rails.application.config.contentful_environment
+  config.default_locale = 'en-US' # Optional - defaults to 'en-US'
+
+  # Webhooks
   # config.authenticate_webhooks = true # false here would allow the webhooks to process without basic auth
   # config.webhooks_username = 'ey_recovery'
   # config.webhooks_password = 'ey_recovery'
-  config.enable_preview_domain = true
-  config.preview_domain = ENV.fetch('GOVUK_APP_DOMAIN', 'preview').split('.').first
-  config.environment = ENV.fetch('CONTENTFUL_ENVIRONMENT', Rails.application.credentials.dig(:contentful, :environment))
-  config.access_token = ENV.fetch('CONTENTFUL_ACCESS_TOKEN', Rails.application.credentials.dig(:contentful, :delivery_access_token)) # Required
-  config.space = ENV.fetch('CONTENTFUL_SPACE', Rails.application.credentials.dig(:contentful, :space)) # Required
-  config.preview_access_token = ENV.fetch('CONTENTFUL_PREVIEW_ACCESS_TOKEN', Rails.application.credentials.dig(:contentful, :preview_access_token)) # Optional - required if you want to use the preview API
-  config.management_token = ENV.fetch('CONTENTFUL_MANAGEMENT_TOKEN', Rails.application.credentials.dig(:contentful, :management_access_token)) # Optional - required if you want to update or create content
-  config.default_locale = 'en-US' # Optional - defaults to 'en-US'
+
+  # Preview is enabled for local development and staging
+  # config.enable_preview_domain =
+  # config.preview_domain =
+
+  # Tokens
+  config.access_token         = Rails.application.config.contentful_delivery_access_token
+  config.preview_access_token = Rails.application.config.contentful_preview_access_token
+  config.management_token     = Rails.application.config.contentful_management_access_token
+
   config.eager_load_entry_mapping = false
   config.contentful_options = {
     delivery_api: { timeout_connect: 2, timeout_read: 6, timeout_write: 20 },
     management_api: { timeout_connect: 3, timeout_read: 100, timeout_write: 200 },
     entry_mapping: {
-      'module' => Training::Module,
+      'training_module' => Training::Module,
       'page' => Training::Page,
       'question' => Training::Question,
-      'video' => Training::Video
+      'video' => Training::Video,
     },
   }
 end
