@@ -158,6 +158,14 @@ class User < ApplicationRecord
     notes.update_all(body: nil)
   end
 
+  def local_authority_text
+    if local_authority.nil? || local_authority.eql?('local authority')
+      'Multiple'
+    else
+      local_authority
+    end
+  end
+
 private
 
   def setting
