@@ -21,6 +21,6 @@ ContentfulRails.configure do |config|
   config.contentful_options = {
     delivery_api: { timeout_connect: 2, timeout_read: 6, timeout_write: 20 },
     management_api: { timeout_connect: 3, timeout_read: 100, timeout_write: 200 },
-    entry_mapping: { },
+    entry_mapping: {},
   }
 end
