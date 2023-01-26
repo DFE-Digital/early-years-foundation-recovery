@@ -98,7 +98,7 @@ RSpec.describe 'Event log' do
     before do
       view_pages_upto_formative_question(alpha)
       visit '/modules/alpha'
-      click_on 'Resume training'
+      click_on 'Resume module'
 
       choose 'Correct answer 1'
       4.times { click_on 'Next' }
