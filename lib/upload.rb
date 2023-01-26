@@ -27,7 +27,7 @@ class Upload
 
     mod_entry.pages =
       mod.module_items.map do |item|
-        child_entry = create_entry(item)
+        child_entry = create_entry(mod_entry, item)
         child_entry.publish # TODO: current video fails due to provider not being read correctly
         log_entry(child_entry)
         child_entry
@@ -68,16 +68,17 @@ private
 
   # ModuleItem has 3 methods "cms_<model>_params" which return CMS ready attrbiutes
   #
-  # @param [ModuleItem]
+  # @param mod_entry [Contentful::Management::DynamicEntry[trainingModule]]
+  # @param item [ModuleItem]
   # @return [Contentful::Management::DynamicEntry]
-  def create_entry(item)
+  def create_entry(mod_entry, item)
     case item.type
     when /video/
-      create_video(item.cms_video_params)
+      create_video item.cms_video_params.merge(training_module: mod_entry)
     when /question/
-      create_question(item.cms_question_params)
+      create_question item.cms_question_params.merge(training_module: mod_entry)
     else
-      create_page(item.cms_page_params)
+      create_page item.cms_page_params.merge(training_module: mod_entry)
     end
   end
 

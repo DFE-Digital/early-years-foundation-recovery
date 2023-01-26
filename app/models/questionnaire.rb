@@ -176,6 +176,8 @@ class Questionnaire < OpenStruct
       assessment_fail: question[:assessment_fail_summary],
       assessments_type: assessments_type,
       answers: answers,
+
+      # pagination
       page_number: page_number,
       total_questions: total_questions,
     }

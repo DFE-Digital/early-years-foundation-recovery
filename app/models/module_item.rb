@@ -340,7 +340,7 @@ class ModuleItem < YamlBase
   def cms_shared_params
     {
       name: name,
-      training_module: training_module,
+      # training_module: training_module, # instead a linked entry is created during upload Contentful::Management::DynamicEntry[trainingModule]
       heading: model.heading,
       body: model.body,
       submodule: submodule_name.to_i,
