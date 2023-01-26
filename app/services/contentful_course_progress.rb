@@ -7,17 +7,17 @@ class ContentfulCourseProgress
 
   attr_reader :user
 
-  # @return [Array<TrainingModule>] training modules that have been started
+  # @return [Array<Training::Module>] training modules that have been started
   def current_modules
     by_state(:active)
   end
 
-  # @return [Array<TrainingModule>] published training modules with no incomplete dependency
+  # @return [Array<Training::Module>] published training modules with no incomplete dependency
   def available_modules
     by_state(:upcoming).select { |mod| available?(mod) && !mod.draft? }
   end
 
-  # @return [Array<TrainingModule>] three unavailable or draft modules
+  # @return [Array<Training::Module>] three unavailable or draft modules
   def upcoming_modules
     by_state(:upcoming).reject { |mod| available?(mod) }
   end
@@ -64,7 +64,7 @@ class ContentfulCourseProgress
 
 private
 
-  # @param mod [TrainingModule]
+  # @param mod [Training::Module]
   # @return [Boolean] module content has been viewed
   def started?(mod)
     return false if mod.draft?
@@ -72,7 +72,7 @@ private
     module_progress(mod).started?
   end
 
-  # @param mod [TrainingModule]
+  # @param mod [Training::Module]
   # @return [Boolean]
   def completed?(mod)
     return false if mod.draft?
@@ -80,13 +80,13 @@ private
     module_progress(mod).completed?
   end
 
-  # @param mod [TrainingModule]
+  # @param mod [Training::Module]
   # @return [Boolean]
   def active?(mod)
     started?(mod) && !completed?(mod)
   end
 
-  # @param mod [TrainingModule]
+  # @param mod [Training::Module]
   # @return [Boolean]
   def upcoming?(mod)
     !started?(mod) && !completed?(mod)
@@ -111,7 +111,7 @@ private
     end
   end
 
-  # @return [Array<TrainingModule>] training modules with finalised content
+  # @return [Array<Training::Module>] training modules with finalised content
   def published_modules
     training_modules.reject(&:draft?)
   end

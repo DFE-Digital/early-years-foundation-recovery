@@ -1,6 +1,6 @@
 # User's course progress and module state
 #
-class ContentfulCourseProgress
+class CourseProgress
   def initialize(user:)
     @user = user
   end
