@@ -1,50 +1,26 @@
 - content_for(:head) do 
   = tag.meta name: 'turbo-visit-control', content: 'reload'
 
-= govuk_back_link href: my_modules_path
+= govuk_back_link text: 'Back to My modules', href: my_modules_path
 
 .light-grey-box
   .govuk-grid-row
     .govuk-grid-column-full
-      h1.govuk-heading-l= @training_module.title
+      h1.govuk-heading-l= "Module #{@training_module.id}: #{@training_module.title}"
       p.govuk-caption-m= @training_module.description
 
       - @module_progress.call_to_action do |state, page|
         = link_to_action(state, page)
 
-= govuk_tag(text: "#{@training_module.topic_count} topics", colour: 'green')
-'
-= govuk_tag(text: "#{@training_module.duration} hours", colour: 'green')
+h2.govuk-heading-m Your module progress
+p.govuk-body You can continue your learning, look at your module progress, or revisit pages of the training.
+h3.govuk-heading-s Module contents
 
-.govuk-grid-row class='govuk-!-padding-top-6'
+.govuk-grid-row
   .govuk-grid-column-full
-      .govuk-accordion data-module='govuk-accordion'
-        - @module_progress.topics_by_submodule.each do |num, current_heading, previous_heading, status, topics|
-
-          .govuk-accordion__section id="section-#{num}"
-            .govuk-accordion__section-header
-              h2.govuk-accordion__section-heading
-                span.govuk-accordion__section-button aria-controls="section-button-#{num}" aria-expanded='false' id="section-button-#{num}"
-                  span.accordion-section-left-column
-                    = current_heading
-                  .float-right
-                    = progress_indicator(status, 'purple')
-
-              .govuk-accordion__section-summary.govuk-body id="summary-#{num}"
-                - if previous_heading
-                  | #{previous_heading} must be completed before you begin this section
-
-            .govuk-accordion__section-content aria-labelledby="section-content-#{num}" id="section-content-#{num}"
-              ul.govuk-list
-                - topics.each do |mod, topic_heading, next_item, status|
-                  li
-                    span.accordion-section-left-column
-                      - if next_item
-                        = govuk_link_to topic_heading, training_module_content_page_path(mod, next_item)
-                      - else
-                        = topic_heading
-
-                    .float-right
-                      = progress_indicator(status, 'blue')
+    hr.govuk-section-break.govuk-section-break--m.govuk-section-break--visible.module-overview-section-break
+    
+    - @module_progress.sections.each do |section|
+      = render 'shared/module_overview_section', **section
 
 = render 'debug'
