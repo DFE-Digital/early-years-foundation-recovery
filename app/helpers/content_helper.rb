@@ -94,23 +94,21 @@ module ContentHelper
   end
 
   # @param status [String, Symbol]
-  # @param colour [String]
   # @return [String]
-  def progress_indicator(status, colour)
+  def progress_indicator(status)
+    case status
+    when :completed
+      colour = nil
+    when :not_started
+      colour = 'grey'
+    when :started
+      colour = 'yellow'
+    end
     govuk_tag(text: t(status, scope: 'module_indicator'), colour: colour)
   end
 
   # @return [String]
   def service_name
     Rails.configuration.service_name
-  end
-
-  def back_to_module_overview_button
-    if %w[content_pages questionnaires assessment_results].include?(params[:controller])
-      govuk_back_link(
-        href: training_module_path(params[:training_module_id]),
-        text: "Back to Module #{training_module.id} overview",
-      )
-    end
   end
 end

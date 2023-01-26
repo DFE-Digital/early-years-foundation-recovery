@@ -161,8 +161,8 @@ en:
   module_call_to_action:
     completed: View certificate
     failed: Retake test
-    started: Resume training
-    not_started: Start
+    started: Resume module
+    not_started: Start module
 
   experts:
     heading: The experts

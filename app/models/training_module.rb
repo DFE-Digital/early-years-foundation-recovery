@@ -52,13 +52,14 @@ class TrainingModule < YamlBase
 
   # @example
   #   {
+  #     "nil" => [what-to-expect, before-you-start],
   #     "1" => [1-1-1, 1-1-2],
   #     "2" => [1-2-1, 1-2-2],
   #   }
   #
   # @return [{String=>Array<ModuleItem>}]
   def items_by_submodule
-    @items_by_submodule ||= module_items.group_by(&:submodule_name).except(nil)
+    @items_by_submodule ||= module_items.group_by(&:submodule_name)
   end
 
   # @example

@@ -53,4 +53,13 @@ module LinkHelper
       govuk_link_to 'View previous test result', training_module_assessment_result_path(mod, mod.assessment_results_page)
     end
   end
+
+  def back_to_module_overview_button
+    if %w[content_pages questionnaires assessment_results].include?(params[:controller])
+      govuk_back_link(
+        href: training_module_path(params[:training_module_id]),
+        text: "Back to Module #{training_module.id} overview",
+      )
+    end
+  end
 end
