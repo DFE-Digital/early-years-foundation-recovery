@@ -56,4 +56,18 @@ RSpec.describe User, type: :model do
       expect(user.course.completed_modules).to be_an Array
     end
   end
+
+  describe '#redact!' do
+    subject(:user) { create(:user, :registered) }
+
+    it 'redacts personal information' do
+      user.redact!
+
+      expect(user.first_name).to eq 'Redacted'
+      expect(user.last_name).to eq 'User'
+      expect(user.email).to eq "redacted_user#{user.id}@example.com"
+      expect(user.valid_password?('redacteduser')).to eq true
+      expect(user.closed_at).to be_within(30).of(Time.zone.now)
+    end
+  end
 end

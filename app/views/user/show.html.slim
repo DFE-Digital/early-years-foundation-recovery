@@ -33,4 +33,8 @@
         - row.key { 'Role' }
         - row.value(text: @user.role, classes: ['data-hj-suppress'])
 
+    h2.govuk-heading-m Closing your account 
+    = translate_markdown(t('close_account.body'))
+    = govuk_button_link_to t('close_account.button'), new_user_close_account_path
+
 = render 'debug'

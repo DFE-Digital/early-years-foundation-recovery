@@ -76,6 +76,12 @@ SitemapGenerator::Sitemap.create do
   add edit_registration_role_type_path
   add edit_registration_role_type_other_path
 
+  # close account
+  add edit_reason_user_close_account_path
+  add confirm_user_close_account_path
+  add new_user_close_account_path
+  add user_close_account_path
+
   # learning
   add my_modules_path
   add user_notes_path
