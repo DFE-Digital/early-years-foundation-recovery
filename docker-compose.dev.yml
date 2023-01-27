@@ -10,29 +10,25 @@ services:
       test: curl --fail http://localhost:3000/health || exit 1
     restart: on-failure
     environment:
-      - PGUSER=postgres
-      - PGPASSWORD=password
-      - PGHOST=db
-      - PGDATABASE
-      - EDITOR=vi
-      - PGUSER=postgres
-      - PGPASSWORD=password
-      - PGHOST=db
-      - PGDATABASE
+      - BOT_TOKEN
+      - CONTENTFUL
+      - CONTENTFUL_DELIVERY_TOKEN
+      - CONTENTFUL_ENVIRONMENT
+      - CONTENTFUL_MANAGEMENT_TOKEN
+      - CONTENTFUL_PREVIEW_TOKEN
+      - CONTENTFUL_SPACE
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
-      - RAILS_ENV=development
       - DOMAIN=app:3000
+      - EDITOR=vi
+      - PGDATABASE
+      - PGHOST=db
+      - PGPASSWORD=password
+      - PGUSER=postgres
+      - RAILS_ENV=development
       - RAILS_SERVE_STATIC_FILES=true
       - TIMEOUT_MINUTES
       - TIMEOUT_WARNING_MINUTES
       - TRAINING_MODULES
-      - BOT_TOKEN
-      - CONTENTFUL
-      - CONTENTFUL_SPACE
-      - CONTENTFUL_ENVIRONMENT
-      - CONTENTFUL_MANAGEMENT_TOKEN
-      - CONTENTFUL_DELIVERY_TOKEN
-      - CONTENTFUL_PREVIEW_TOKEN
     volumes:
       - .:/srv
     tty: true

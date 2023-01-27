@@ -94,13 +94,11 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'brakeman'
-  gem 'mr_video'
   gem 'pry-doc'
   gem 'rails-erd'
   gem 'redcarpet' # code syntax in Yardoc
   gem 'web-console'
   gem 'yard-junk'
-  gem 'mr_video'
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
