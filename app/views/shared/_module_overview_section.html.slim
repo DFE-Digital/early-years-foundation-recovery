@@ -1,0 +1,14 @@
+section.module-overview--section
+  .progress-bar
+    span.icon class=icon
+      span.number = position
+    - if display_line
+      .line
+
+  .module-section--content id="section-content-#{position}"
+    h4.govuk-heading-s= heading
+    p.govuk-body This section of this module includes:
+    .module-section--container
+      - subsections.each do |subsection|
+        = render 'shared/module_overview_subsection', **subsection
+    hr.govuk-section-break.govuk-section-break--m.govuk-section-break--visible

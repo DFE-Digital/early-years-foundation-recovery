@@ -75,3 +75,4 @@ jobs:
       -
         name: Run rubocop
         run: bundle exec rubocop
+        

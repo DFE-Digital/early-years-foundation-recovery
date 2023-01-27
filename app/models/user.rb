@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :timeoutable, :trackable, :recoverable and :omniauthable
+  attr_accessor :context
+
   devise :database_authenticatable, :registerable, :recoverable,
          :validatable, :rememberable, :confirmable, :lockable, :timeoutable
 
@@ -48,6 +50,8 @@ class User < ApplicationRecord
   validates :setting_type_id,
             inclusion: { in: SettingType.valid_setting_types },
             if: proc { |u| u.registration_complete }
+  validates :closed_reason, presence: true, if: -> { context == :close_account }
+  validates :closed_reason_custom, presence: true, if: proc { |u| u.closed_reason == 'other' }
 
   validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
 
@@ -78,6 +82,10 @@ class User < ApplicationRecord
   # send email to registered user if attempt is made to create account with registered email
   def send_email_taken_notification
     send_devise_notification(:email_taken)
+  end
+
+  def send_account_closed_notification
+    send_devise_notification(:account_closed)
   end
 
   # @return [String]
@@ -137,6 +145,25 @@ class User < ApplicationRecord
 
   def private_beta_registration_complete?
     !!private_beta_registration_complete
+  end
+
+  def redact!
+    skip_reconfirmation!
+    update!(first_name: 'Redacted',
+            last_name: 'User',
+            email: "redacted_user#{id}@example.com",
+            closed_at: Time.zone.now,
+            password: 'redacteduser')
+
+    notes.update_all(body: nil)
+  end
+
+  def local_authority_text
+    if local_authority.nil? || local_authority.eql?('local authority')
+      'Multiple'
+    else
+      local_authority
+    end
   end
 
 private
