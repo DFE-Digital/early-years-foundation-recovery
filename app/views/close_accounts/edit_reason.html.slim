@@ -1,0 +1,18 @@
+.govuk-grid-row
+  .govuk-grid-column-two-thirds-from-desktop
+    = govuk_back_link(href: user_path)
+
+    = form_with model: current_user, url: update_reason_user_close_account_path  do |f|
+      = f.govuk_error_summary
+      = f.govuk_radio_buttons_fieldset(:closed_reason,
+        legend: { text: 'Tell us why you want to close your account' },
+        hint: { text: 'Knowing why you want to close your account will help us improve the training for everyone.' }) do
+        = f.govuk_radio_button :closed_reason, 'not useful', label: { text: 'I did not find the training useful' }, link_errors: true
+        = f.govuk_radio_button :closed_reason, 'no time', label: { text: 'I did not have time to do the training' }
+        = f.govuk_radio_button :closed_reason, 'no longer in early years', label: { text: 'I no longer work in early years' }
+        = f.govuk_radio_button :closed_reason, 'too many emails', label: { text: 'You sent me too many emails' }
+        = f.govuk_radio_button :closed_reason, 'other', label: { text: 'Another reason' } do
+          = f.govuk_text_field :closed_reason_custom, label: { text: 'Tell us why you want to close your account.' }
+        = f.govuk_radio_divider
+        = f.govuk_radio_button :closed_reason, 'prefer not to say', label: { text: 'Prefer not to say' }
+      = f.govuk_submit 'Continue'

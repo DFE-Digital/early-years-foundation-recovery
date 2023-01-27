@@ -233,7 +233,7 @@ Devise.setup do |config|
   # ==> Configuration for :validatable
   # Range for password length.
   config.password_length = 10..128
-  
+
   config.email_regexp = URI::MailTo::EMAIL_REGEXP
 
   # ==> Configuration for :timeoutable

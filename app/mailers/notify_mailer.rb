@@ -1,4 +1,5 @@
 class NotifyMailer < GovukNotifyRails::Mailer
+  ACCOUNT_CLOSED_TEMPLATE_ID = '0a4754ee-6175-444c-98a1-ebef0b14e7f7'.freeze
   ACTIVATION_TEMPLATE_ID = 'd6ab2e3b-923e-429e-abd2-cfe7be0e9193'.freeze
   EMAIL_CHANGED_TEMPLATE_ID = 'c1228884-6621-4a1e-9606-b219bedb677f'.freeze
   EMAIL_CONFIRMATION_TEMPLATE_ID = 'a2412831-e253-4df4-a8f1-19332eed4cef'.freeze
@@ -14,6 +15,16 @@ class NotifyMailer < GovukNotifyRails::Mailer
   #
   #   en.notify_mailer.test_email.subject
   #
+
+  def account_closed(record)
+    set_template(ACCOUNT_CLOSED_TEMPLATE_ID)
+
+    set_personalisation(
+      name: record.name,
+      email: record.email,
+    )
+    mail(to: record.email, bcc: 'child-development.training@education.gov.uk')
+  end
 
   def activation_instructions(record, token, _opts = {})
     set_template(ACTIVATION_TEMPLATE_ID)
