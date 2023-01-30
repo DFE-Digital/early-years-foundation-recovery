@@ -4,6 +4,8 @@ RSpec.describe TrainingModulesController, type: :controller do
   # Using a controller spec as need to access session to test timeout
   describe 'user timeout' do
     before do
+      skip if Rails.application.cms?
+
       sign_in create(:user, :registered)
     end
 

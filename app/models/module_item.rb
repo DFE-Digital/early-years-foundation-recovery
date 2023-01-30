@@ -340,7 +340,7 @@ class ModuleItem < YamlBase
   def cms_shared_params
     {
       name: name,
-      # training_module: training_module, # instead a linked entry is created during upload Contentful::Management::DynamicEntry[trainingModule]
+      page_type: type,
       heading: model.heading,
       body: model.body,
       submodule: submodule_name.to_i,
@@ -354,16 +354,13 @@ class ModuleItem < YamlBase
       transcript: model.transcript,
       title: model.translate(:video)[:title],
       video_id: model.translate(:video)[:id].to_s,
-      video_provider: model.translate(:video)[:provider], # TODO: set `vimeo` as default in CMS model
+      video_provider: model.translate(:video)[:provider],
     )
   end
 
   # @return [Hash] Page Contentful Model params
   def cms_page_params
-    cms_shared_params.merge(
-      notes: model&.notes?,
-      page_type: type,
-    )
+    cms_shared_params.merge(notes: model&.notes?)
   end
 
   # @return [Hash] Question Contentful Model params

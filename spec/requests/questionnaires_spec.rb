@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Questionnaires', :vcr, type: :request do
+RSpec.describe 'Questionnaires', type: :request do
   let(:user) { create(:user, :registered) }
   let(:questionnaire_data) { module_item.model }
   let(:module_item) do

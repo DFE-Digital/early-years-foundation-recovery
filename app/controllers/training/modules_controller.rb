@@ -3,7 +3,7 @@ class Training::ModulesController < Training::BaseController
 
   def index
     track('course_overview_page')
-    @mods = Training::Module.all.load!.reject(&:draft?)
+    @mods = Training::Module.ordered.reject(&:draft?)
   end
 
   def show
@@ -12,14 +12,9 @@ class Training::ModulesController < Training::BaseController
     if mod.nil?
       redirect_to my_modules_path
     else
-      @mod = mod
-      # used for debug
       @module_progress_bar  = ModuleProgressBarDecorator.new(progress)
-      @module_progress      = ModuleOverviewDecorator.new(progress)
+      @module_progress      = ContentfulModuleOverviewDecorator.new(progress)
       @assessment_progress  = assessment
-
-      # OPTIMIZE: instantiation of module_item
-      # module_item
 
       render partial: 'progress' if debug?
     end
@@ -32,22 +27,14 @@ protected
   end
 
   def mod
-    @mod ||= Training::Module.find_by(name: params[:id]).first
+    @mod ||= Training::Module.by_name(params[:id])
   end
 
   def progress
-    @progress ||= helpers.module_progress(mod)
+    @progress ||= helpers.cms_module_progress(mod)
   end
 
   def assessment
     @assessment ||= helpers.assessment_progress(mod)
   end
-
-  #   def module_item
-  #     @module_item ||= ModuleItem.find_by(training_module: training_module_name, name: params[:id]) || ModuleItem.find_by(training_module: params[:id])
-  #   end
-
-  #   def training_module_name
-  #     @training_module_name ||= params[:training_module_id]
-  #   end
 end

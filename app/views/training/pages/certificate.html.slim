@@ -23,14 +23,14 @@ h3 Certificate of achievement
 - else
   h1 Your name will appear here
 
-h2= training_module.title
+h2= mod.title
 
 - if @module_progress.completed?
   p= t('date_completed', date: @module_progress.module_completed_at)
 
 p This module has covered:
 
-= translate_markdown(training_module.criteria)
+= translate_markdown(mod.criteria)
 
 p class='govuk-!-margin-top-7'
 
@@ -43,7 +43,7 @@ h3 Certified by the Department for Education
 .noprint
   .govuk-button-group
     = print_button
-    = govuk_link_to 'Download certificate', training_module_content_page_path(training_module.name, training_module.certificate_page, format: :pdf), aria: { describedby: 'pdf-details' }
+    = govuk_link_to 'Download certificate', training_module_content_page_path(mod.name, mod.certificate_page, format: :pdf), aria: { describedby: 'pdf-details' }
 
   p#pdf-details.govuk-body
     span aria-label='file type'

@@ -1,11 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe 'ContentPages', type: :request do
+RSpec.describe 'Training::PagesController', :cms, type: :request do
   include_context 'with progress'
 
   before do
-    skip if Rails.application.cms?
-
     sign_in user
   end
 
@@ -14,37 +12,29 @@ RSpec.describe 'ContentPages', type: :request do
       get training_module_content_pages_path(:alpha)
     end
 
-    let(:module_item) do
-      ModuleItem.where(training_module: :alpha).first
-    end
-
-    it 'redirects to first item' do
-      expect(response).to redirect_to(training_module_content_page_path(:alpha, module_item))
+    it 'redirects to first page' do
+      expect(response).to redirect_to(training_module_content_page_path(:alpha, 'what-to-expect'))
     end
   end
 
   describe 'GET /modules/:training_module_id/content-pages/:id' do
     before do
-      get training_module_content_page_path(:alpha, module_item)
+      get training_module_content_page_path(:alpha, page_name)
     end
 
-    context 'when module item is a text content page' do
-      let(:module_item) do
-        ModuleItem.where(training_module: :alpha, type: :text_page).first
-      end
+    context 'when content is a text page' do
+      let(:page_name) { 'what-to-expect' }
 
       it 'renders a template successfully' do
         expect(response).to have_http_status(:success)
       end
     end
 
-    context 'when module item is a question' do
-      let(:module_item) do
-        ModuleItem.where(training_module: :alpha, type: :formative_questionnaire).first
-      end
+    context 'when content is a question' do
+      let(:page_name) { '1-1-4' }
 
       it 'redirects to questionnaire controller' do
-        expect(response).to redirect_to(training_module_questionnaire_path(:alpha, module_item.model))
+        expect(response).to redirect_to training_module_questionnaire_path(:alpha, page_name)
       end
     end
   end

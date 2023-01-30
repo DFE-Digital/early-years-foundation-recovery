@@ -23,6 +23,6 @@
         = link_to_previous_module_item @questionnaire.module_item
 
         - if @questionnaire.submitted? && !@questionnaire.confidence?
-          = link_to_next_module_item @questionnaire.module_item
+          = cms_link_to_next_module_item @questionnaire.module_item
         - else
           = f.govuk_submit @questionnaire.next_button_text

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Learning log', :vcr, type: :request do
+RSpec.describe 'Learning log', type: :request do
   let(:registered_user) { create :user, :registered }
   let(:note_params) do
     {

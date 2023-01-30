@@ -27,7 +27,6 @@ module LinkHelper
   # @param item [ModuleItem]
   #
   # @return [String] not_started / started / failed / completed
-  # def link_to_action(state, mod, item)
   def link_to_action(state, item)
     text = t(state, scope: 'module_call_to_action')
     path =
@@ -52,5 +51,47 @@ module LinkHelper
     else
       govuk_link_to 'View previous test result', training_module_assessment_result_path(mod, mod.assessment_results_page)
     end
+  end
+
+  # CMS ------------------------------------------------------------------------
+
+  # @param state [Symbol]
+  # @param content [Module::Content]
+  #
+  # @return [String] not_started / started / failed / completed
+  def cms_link_to_action(state, content)
+    text = t(state, scope: 'module_call_to_action')
+    path =
+      if state.eql?(:failed)
+        new_training_module_assessment_result_path(content.parent.name)
+      else
+        training_module_page_path(content.parent.name, content.name)
+      end
+
+    govuk_button_link_to text, path
+  end
+
+  # @param content [Module::Content]
+  # @return [String] next content page (ends on certificate)
+  def cms_link_to_next_module_item(content)
+    text = content.next_button_text
+    path = training_module_page_path(content.parent.name, content.next_item)
+
+    govuk_button_link_to text, path, aria: { label: 'Go to the next page' }
+  end
+
+  # @param content [Module::Content]
+  # @return [String] previous content page or module overview
+  def cms_link_to_previous_module_item(content)
+    path =
+      if content.previous_item
+        training_module_page_path(content.parent.name, content.previous_item)
+      else
+        training_module_path(content.parent.name)
+      end
+
+    govuk_button_link_to 'Previous', path,
+                         class: 'govuk-button--secondary',
+                         aria: { label: 'Go to the previous page' }
   end
 end

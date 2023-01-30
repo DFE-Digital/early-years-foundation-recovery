@@ -7,6 +7,22 @@ module.exports = function(migration) {
     displayField: 'name'
   })
 
+  /* Fields ----------------------------------------------------------------- */
+
+  // displayField
+  question.createField('name', {
+    name: 'Name',
+    type: 'Symbol',
+    required: true
+  })
+
+  // type
+  question.createField('page_type', {
+    name: 'Page type',
+    type: 'Symbol',
+    required: true
+  })
+
   question.createField('training_module', {
     name: 'Training module',
     type: 'Link',
@@ -28,11 +44,6 @@ module.exports = function(migration) {
   question.createField('topic', {
     name: 'Topic',
     type: 'Integer'
-  })
-
-  question.createField('name', {
-    name: 'Name',
-    type: 'Symbol'
   })
 
   question.createField('body', {

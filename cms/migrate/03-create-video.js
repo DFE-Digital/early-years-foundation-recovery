@@ -8,6 +8,22 @@ module.exports = function(migration) {
     description: 'formerly YAML module_item (with video)'
   })
 
+  /* Fields ----------------------------------------------------------------- */
+
+  // displayField
+  video.createField('name', {
+    name: 'Name',
+    type: 'Symbol',
+    required: true
+  })
+
+  // type
+  video.createField('page_type', {
+    name: 'Page type',
+    type: 'Symbol',
+    required: true
+  })
+
   video.createField('training_module', {
     name: 'Training module',
     type: 'Link',
@@ -33,11 +49,6 @@ module.exports = function(migration) {
     required: true
   })
 
-  video.createField('name', {
-    name: 'Name',
-    type: 'Symbol',
-    required: true
-  })
 
   video.createField('title', {
     name: 'Title',

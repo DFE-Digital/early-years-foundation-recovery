@@ -14,6 +14,8 @@ services:
       - TIMEOUT_WARNING_MINUTES=1
       - TIMEOUT_MODAL_VISIBLE=1
       - BOT_TOKEN=bot_token
+      - CONTENTFUL=
+      # - CONTENTFUL=y
     tty: true
     stdin_open: true
 

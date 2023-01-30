@@ -7,17 +7,17 @@ class ContentfulCourseProgress
 
   attr_reader :user
 
-  # @return [Array<TrainingModule>] training modules that have been started
+  # @return [Array<Training::Module>] training modules that have been started
   def current_modules
     by_state(:active)
   end
 
-  # @return [Array<TrainingModule>] published training modules with no incomplete dependency
+  # @return [Array<Training::Module>] training modules with no incomplete dependency
   def available_modules
     by_state(:upcoming).select { |mod| available?(mod) && !mod.draft? }
   end
 
-  # @return [Array<TrainingModule>] three unavailable or draft modules
+  # @return [Array<Training::Module>] unavailable or draft modules
   def upcoming_modules
     by_state(:upcoming).reject { |mod| available?(mod) }
   end
@@ -64,7 +64,7 @@ class ContentfulCourseProgress
 
 private
 
-  # @param mod [TrainingModule]
+  # @param mod [Training::Module]
   # @return [Boolean] module content has been viewed
   def started?(mod)
     return false if mod.draft?
@@ -72,7 +72,7 @@ private
     module_progress(mod).started?
   end
 
-  # @param mod [TrainingModule]
+  # @param mod [Training::Module]
   # @return [Boolean]
   def completed?(mod)
     return false if mod.draft?
@@ -80,13 +80,13 @@ private
     module_progress(mod).completed?
   end
 
-  # @param mod [TrainingModule]
+  # @param mod [Training::Module]
   # @return [Boolean]
   def active?(mod)
     started?(mod) && !completed?(mod)
   end
 
-  # @param mod [TrainingModule]
+  # @param mod [Training::Module]
   # @return [Boolean]
   def upcoming?(mod)
     !started?(mod) && !completed?(mod)
@@ -95,12 +95,11 @@ private
   # @param mod [Training::Module]
   # @return [Boolean] true unless a mandatory prerequisite module must be finished
   def available?(mod)
-    dependent = Training::Module.find_by(name: mod.depends_on).first
-    dependent ? completed?(dependent) : true
+    mod.depends_on.present? ? completed?(mod.depends_on) : true
   end
 
   # @param state [Symbol, String] :active, :upcoming or :completed
-  # @return [Array<TrainingModule>] training modules by state
+  # @return [Array<Training::Module>] training modules by state
   def by_state(state)
     case state.to_sym
     when :active    then training_modules.select { |mod| active?(mod) }
@@ -116,14 +115,14 @@ private
     training_modules.reject(&:draft?)
   end
 
-  # @return [Array<Training::Module>] all training modules
+  # @return [Array<Training::Module>]
   def training_modules
-    @training_modules ||= Training::Module.all.order(:position).load!
+    @training_modules ||= Training::Module.ordered
   end
 
-  # @return [ModuleProgress]
+  # @return [ContentfulModuleProgress]
   def module_progress(mod)
-    ModuleProgress.new(user: user, mod: mod)
+    ContentfulModuleProgress.new(user: user, mod: mod)
   end
 
   # @param module_id [String] training module name

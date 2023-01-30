@@ -7,6 +7,9 @@ module.exports = function(migration) {
     displayField: 'title'
   })
 
+  /* Fields ----------------------------------------------------------------- */
+
+  // displayField
   trainingModule.createField('title', {
     name: 'Title',
     type: 'Symbol',
@@ -31,6 +34,12 @@ module.exports = function(migration) {
     ]
   })
 
+  trainingModule.createField('image', {
+    name: 'Image',
+    type: 'Link',
+    linkType: 'Asset'
+  })
+
   trainingModule.createField('name', {
 	  name: 'Name',
     type: 'Symbol',
@@ -39,12 +48,6 @@ module.exports = function(migration) {
         unique: true
       }
     ]
-  })
-
-  trainingModule.createField('thumbnail', {
-    name: 'Thumbnail image',
-    type: 'Link',
-    linkType: 'Asset'
   })
 
   trainingModule.createField('short_description', {
@@ -74,7 +77,7 @@ module.exports = function(migration) {
 
   trainingModule.createField('summative_threshold', {
     name: 'Summative threshold',
-    type: 'Number'
+    type: 'Integer'
   })
 
   trainingModule.createField('position', {
@@ -103,10 +106,10 @@ module.exports = function(migration) {
 
   /* Interface --------------------------------------------------------------
   https://www.contentful.com/developers/docs/extensibility/app-framework/editor-interfaces/
-  */
 
   trainingModule.changeFieldControl('pages', 'builtin', 'entryLinksEditor', {
     helpText: 'Define module content and order here',
   })
 
+  */
 }

@@ -10,7 +10,7 @@
       p.govuk-caption-m= @mod.description
 
       - @module_progress.call_to_action do |state, page|
-        = link_to_action(state, page)
+        = cms_link_to_action(state, page)
 
 p FIXME: @mod.topic_count
 /= govuk_tag(text: "#{@mod.topic_count} topics", colour: 'green')

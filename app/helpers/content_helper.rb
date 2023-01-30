@@ -22,10 +22,11 @@ module ContentHelper
     govuk_table(rows: [header, *rows], caption: 'Completed modules')
   end
 
-  # @param mod [TrainingModule]
+  # @param mod [TrainingModule, Training::Module]
   # @return [String]
   def training_module_image(mod)
-    image_tag image_path(mod.thumbnail), class: 'full-width-img', width: 200, alt: '', title: ''
+    image_url = Rails.application.cms? ? mod.thumbnail_url : image_path(mod.thumbnail)
+    image_tag image_url, class: 'full-width-img', width: 200, alt: '', title: ''
   end
 
   # @param icon [String, Symbol] Fontawesome icon name

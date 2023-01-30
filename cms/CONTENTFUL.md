@@ -12,7 +12,7 @@
 Contentful tasks are namespaced under `eyfs:cms`, list them using `rake --tasks eyfs:cms`.
 
 - `rake eyfs:cms:migrate`  # Run migration files in `./cms/migrate`
-- `rake eyfs:cms:upload`   # Populate Contentful entries using YAML
+- `rake eyfs:cms:seed`     # Populate Contentful entries using YAML
 
 
 ## Migrations
@@ -43,7 +43,7 @@ ResourceLink (requires allowedResources)
 
 Local
 
-- **Page**: `http://localhost:3000/modules/{entry.fields.module_id}/content-pages/{entry.fields.name}`
-- **Question**: `http://localhost:3000/modules/{entry.fields.module_id}/questionnaires/{entry.fields.name}`
-- **Video**: `http://localhost:3000/modules/{entry.fields.module_id}/content-pages/{entry.fields.name}`
+- **Page**: `http://localhost:3000/modules/{entry.linkedBy.fields.name}/content-pages/{entry.fields.name}`
+- **Question**: `http://localhost:3000/modules/{entry.linkedBy.fields.name}/questionnaires/{entry.fields.name}`
+- **Video**: `http://localhost:3000/modules/{entry.linkedBy.fields.name}/content-pages/{entry.fields.name}`
 - **Training Module**: `http://localhost:3000/modules/{entry.fields.name}`

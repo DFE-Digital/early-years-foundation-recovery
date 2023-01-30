@@ -27,8 +27,9 @@ class Upload
 
     mod_entry.pages =
       mod.module_items.map do |item|
-        child_entry = create_entry(mod_entry, item)
-        child_entry.publish # TODO: current video fails due to provider not being read correctly
+        child_entry = create_entry(item)
+        child_entry.training_module = mod_entry
+        child_entry.publish if child_entry.save
         log_entry(child_entry)
         child_entry
       end
@@ -53,7 +54,10 @@ private
   # @param entry [Contentful::Management::DynamicEntry]
   # @return [String]
   def log_entry(entry)
-    log "'#{entry.sys[:contentType].id}' entry '#{entry.name}' published @ '#{entry.published_at&.strftime('%F %T')}'"
+    type = entry.sys[:contentType].id
+    timestamp = entry.published_at&.strftime('%F %T')
+
+    log "'#{type}' entry '#{entry.name}' published @ '#{timestamp}'"
   end
 
   # YAML -----------------------------------------------------------------------
@@ -68,17 +72,16 @@ private
 
   # ModuleItem has 3 methods "cms_<model>_params" which return CMS ready attrbiutes
   #
-  # @param mod_entry [Contentful::Management::DynamicEntry[trainingModule]]
   # @param item [ModuleItem]
   # @return [Contentful::Management::DynamicEntry]
-  def create_entry(mod_entry, item)
+  def create_entry(item)
     case item.type
     when /video/
-      create_video item.cms_video_params.merge(training_module: mod_entry)
+      create_video item.cms_video_params
     when /question/
-      create_question item.cms_question_params.merge(training_module: mod_entry)
+      create_question item.cms_question_params
     else
-      create_page item.cms_page_params.merge(training_module: mod_entry)
+      create_page item.cms_page_params
     end
   end
 

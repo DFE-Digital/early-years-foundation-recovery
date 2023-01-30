@@ -77,6 +77,7 @@ gem 'grover'
 gem 'sitemap_generator'
 
 # DRY-RB
+gem 'dry-core'
 gem 'dry-initializer'
 gem 'dry-types'
 
@@ -120,8 +121,6 @@ group :test do
   gem 'rspec-rails'
   gem 'show_me_the_cookies'
   gem 'simplecov'
-  gem 'vcr'
-  gem 'webmock'
 end
 
 # NB:

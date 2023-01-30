@@ -15,16 +15,8 @@ services:
       - RAILS_ENV=development
       - DOMAIN=app:3000
       - RAILS_SERVE_STATIC_FILES=true
-      - TIMEOUT_MINUTES
-      - TIMEOUT_WARNING_MINUTES
-      - TRAINING_MODULES
-      - BOT_TOKEN
-      - CONTENTFUL
-      - CONTENTFUL_SPACE
-      - CONTENTFUL_ENVIRONMENT
-      - CONTENTFUL_MANAGEMENT_TOKEN
-      - CONTENTFUL_DELIVERY_TOKEN
-      - CONTENTFUL_PREVIEW_TOKEN
+      # - CONTENTFUL=
+      - CONTENTFUL=y
     volumes:
       - .:/srv
     tty: true

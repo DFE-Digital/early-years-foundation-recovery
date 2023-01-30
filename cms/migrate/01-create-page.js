@@ -78,11 +78,12 @@ module.exports = function(migration) {
 
   /* Interface --------------------------------------------------------------
   https://www.contentful.com/developers/docs/extensibility/app-framework/editor-interfaces/
-  */
 
   page.changeFieldControl('notes', 'builtin', 'boolean', {
     helpText: 'Use Learning Log to take notes?',
     trueLabel: 'enable',
     falseLabel: 'disable'
   })
+  */
+
 }
