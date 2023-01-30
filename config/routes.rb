@@ -57,6 +57,12 @@ Rails.application.routes.draw do
     end
   end
 
+  constraints(ENV.fetch('CONTENTFUL', false) == true) do
+    scope module: 'contentful' do
+      resources :static, only: %i[show], as: :static_pages, path: ''
+    end
+  end
+
   resources :modules, only: %i[show], as: :training_modules, controller: :training_modules do
     resources :content_pages, only: %i[index show], path: 'content-pages'
     resources :questionnaires, only: %i[show update]

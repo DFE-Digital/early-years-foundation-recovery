@@ -1,3 +1,5 @@
+require 'contentful/static'
+
 ContentfulRails.configure do |config|
   config.space          = Rails.application.config.contentful_space
   config.environment    = Rails.application.config.contentful_environment
@@ -21,6 +23,8 @@ ContentfulRails.configure do |config|
   config.contentful_options = {
     delivery_api: { timeout_connect: 2, timeout_read: 6, timeout_write: 20 },
     management_api: { timeout_connect: 3, timeout_read: 100, timeout_write: 200 },
-    entry_mapping: {},
+    entry_mapping: {
+      'static' => Contentful::Static,
+    },
   }
 end

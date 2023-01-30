@@ -47,6 +47,12 @@ GOOGLE_STATIC_DOMAINS = %w[
   script.hotjar.com
 ].freeze
 
+CONTENTFUL_DOMAINS = %w[
+  *.ctfassets.net
+].freeze
+
+
+
 Rails.application.config.content_security_policy do |policy|
   policy.default_src :self,
                      :https,
@@ -63,6 +69,7 @@ Rails.application.config.content_security_policy do |policy|
                      *GOVUK_DOMAINS,
                      *GOOGLE_ANALYTICS_DOMAINS, # Tracking pixels
                      *OPTIMIZE_DOMAINS,
+                     *CONTENTFUL_DOMAINS,
                      :data # Base64 encoded images
   policy.object_src  :none
   policy.script_src  :self,
