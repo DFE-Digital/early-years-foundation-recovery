@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Sign up', type: :system do
+RSpec.describe 'Sign up' do
   before do
     visit '/users/sign-up'
   end
@@ -16,6 +16,40 @@ RSpec.describe 'Sign up', type: :system do
 
       expect(page).to have_text('There is a problem')
         .and have_text('You must accept the terms and conditions and privacy policy to create an account.')
+    end
+
+    context 'when entering email address' do
+      before do
+        fill_in 'Email address', with: email
+        fill_in 'Create password', with: user.password
+        fill_in 'Confirm password', with: user.password
+        check 'I confirm that I accept the terms and conditions and privacy policy.'
+        click_on 'Continue'
+      end
+
+      describe 'with one dot in domain' do
+        let(:email) { 'hello@example.com' }
+
+        it 'is valid' do
+          expect(page).to have_content 'Check your email'
+        end
+      end
+
+      describe 'with two dots in domain' do
+        let(:email) { 'hello@example.co.uk' }
+
+        it 'is valid' do
+          expect(page).to have_content 'Check your email'
+        end
+      end
+
+      describe 'with comma in domain' do
+        let(:email) { 'hello@example,com' }
+
+        it 'is invalid' do
+          expect(page).to have_content 'There is a problem'
+        end
+      end
     end
   end
 

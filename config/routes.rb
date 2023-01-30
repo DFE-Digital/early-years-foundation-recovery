@@ -50,6 +50,13 @@ Rails.application.routes.draw do
     get 'check-email-confirmation'
     get 'check-email-password-reset'
     resource :notes, path: 'learning-log', only: %i[show create update]
+    resource :close_account, path: 'close', only: %i[new update show] do
+      get 'reset-password'
+      get 'edit-reason'
+      patch 'update-reason'
+      get 'confirm'
+      post 'close_account'
+    end
   end
 
   # CMS  -----------------------------------------------------------------------

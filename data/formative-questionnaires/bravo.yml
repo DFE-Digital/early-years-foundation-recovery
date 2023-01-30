@@ -1,0 +1,18 @@
+---
+bravo:
+  1-2-3:
+    questions:
+      bravo_question_one:
+        multi_select: false
+        body: |
+          Question One - Select from following
+        # label:
+        assessment_summary: |
+          You selected the correct answers
+        assessment_fail_summary: |
+          You did not select the correct answers
+        answers:
+          1: Correct answer 1
+          2: Wrong answer 1
+        correct_answers: 
+          - 1
