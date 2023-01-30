@@ -31,7 +31,6 @@ class NotifyMailer < GovukNotifyRails::Mailer
     set_template(ACCOUNT_CLOSED_INTERNAL_TEMPLATE_ID)
 
     set_personalisation(
-      name: record.name,
       email: record.email,
       user_email_address: user_email_address,
     )
