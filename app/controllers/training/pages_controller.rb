@@ -1,5 +1,4 @@
 class Training::PagesController < Training::BaseController
-
   # TODO: retire these helpers
   helper_method :module_item, :training_module, :note
 

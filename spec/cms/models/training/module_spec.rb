@@ -3,10 +3,14 @@ require 'rails_helper'
 RSpec.describe Training::Module, :cms, type: :model do
   subject(:mod) { described_class.by_name(:alpha) }
 
+  before do
+    skip 'WIP' unless Rails.application.cms?
+  end
+
   describe '.by_name' do
     it 'does not load linked entries' do
-      # binding.pry
       mod.content # tests cache loading
+
       expect(mod.pages).to be_empty
     end
   end
@@ -14,7 +18,7 @@ RSpec.describe Training::Module, :cms, type: :model do
   describe 'attributes' do
     it '#title' do
       mod.content # tests cache loading
-      # binding.pry
+
       expect(mod.title).to eq 'First Training Module (cms)'
     end
   end

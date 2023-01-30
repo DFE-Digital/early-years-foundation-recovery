@@ -54,7 +54,7 @@ module Training
     #
     # @return [String, nil]
     def thumbnail_url
-      return '//external-image-resource-placeholder' unless fields[:image].present?
+      return '//external-image-resource-placeholder' if fields[:image].blank?
 
       ContentfulModel::Asset.find(fields[:image].id).url
     end
@@ -77,7 +77,7 @@ module Training
         Rails.logger.info("fetching #{entry_id}")
         puts("fetching #{entry_id}")
 
-        fetch_or_store(entry_id) do
+        fetch_or_store(entry_id) do # Could use entry cache_key or version with timestamp
           Rails.logger.info("storing #{entry_id}")
           puts("storing #{entry_id}")
 
@@ -91,7 +91,7 @@ module Training
     end
 
     # API call gets memoized
-    #
+    # @private
     # @return [Training::Page, Training::Question, Training::Video] content sought by likelihood (Page more numerous than Video)
     def child_by_id(id)
       Training::Page.by_id(id) || Training::Question.by_id(id) || Training::Video.by_id(id)
@@ -102,6 +102,13 @@ module Training
     # @return [Training::Page, Training::Video, Training::Question]
     def page_by_id(id)
       content.find { |page| page.id.eql?(id) }
+    end
+
+    # Selects from ordered array
+    #
+    # @return [Training::Page, Training::Video, Training::Question]
+    def page_by_name(name)
+      content.find { |page| page.name.eql?(name) }
     end
 
     # state ---------------------------------
@@ -203,11 +210,6 @@ module Training
     def certificate_page
       # pages_by_type('certificate').first
       content.find(&:certificate?)
-    end
-
-    # @return [Training::Page]
-    def last_page
-      content.last
     end
 
     # collections ---------------------------------

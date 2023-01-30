@@ -74,7 +74,7 @@ private
 
   # @return [Array<Module::Content>]
   def node_items
-    NODE_TYPES.flat_map { |type| mod.content.select{ |page| page.page_type.eql?(type) } }
+    NODE_TYPES.flat_map { |type| mod.content.select { |page| page.page_type.eql?(type) } }
   end
 
   # @return [String]

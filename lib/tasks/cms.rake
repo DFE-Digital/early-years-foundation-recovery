@@ -36,9 +36,9 @@ namespace :eyfs do
       mod_names.each { |mod| uploader.call(mod_name: mod) }
     end
 
-    desc 'Upload asset files to Contentful'
-    task upload: :environment do
-      binding.pry
-    end
+    # desc 'Upload asset files to Contentful'
+    # task upload: :environment do
+    #   binding.pry
+    # end
   end
 end

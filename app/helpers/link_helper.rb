@@ -104,5 +104,4 @@ module LinkHelper
                          class: 'govuk-button--secondary',
                          aria: { label: 'Go to the previous page' }
   end
-
 end

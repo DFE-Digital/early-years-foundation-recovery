@@ -25,7 +25,7 @@ class ContentfulModuleProgress
   # Name of last page viewed in module
   # @return [String]
   def milestone
-    page = training_module_events.last
+    page = module_page_events.last
     page.properties['id'] if page.present?
   end
 
@@ -33,11 +33,6 @@ class ContentfulModuleProgress
   # @return [Training::Content]
   def furthest_page
     visited.last
-  end
-
-  # @return [String]
-  def final_content_page
-    mod.last_page.name
   end
 
   # Last visited module item with fallback to first item
@@ -54,33 +49,31 @@ class ContentfulModuleProgress
     if unvisited.none?
       false
     # elsif key_event('module_complete') && unvisited.any?
-    elsif module_item_events(final_content_page).first && unvisited.any?
+    elsif visited?(mod.thankyou_page) && unvisited.any? # seen last content page but has gaps
       true
     elsif gaps?
       true
     end
   end
 
+  # TODO: bypass #all? if a :module_complete event exists
+  #
   # @see ContentfulCourseProgress
-  # @return [Boolean]
+  # @return [Boolean] true if every page is visited (certificate excluded)
   def completed?
-    all?(mod.content)
+    all?(mod.content) # key_event('module_complete').present?
   end
 
+  # TODO: refactor once every user has a "module_complete" event
+  #
   # Completed date for module
   # @return [DateTime, nil]
   def completed_at
-    certificate_achieved_at || last_page_completed_at
-  end
-
-  # @return [DateTime, nil]
-  def certificate_achieved_at
-    key_event('module_complete')&.time
-  end
-
-  # @return [DateTime, nil]
-  def last_page_completed_at
-    module_item_events(final_content_page).first&.time
+    page_name = mod.thankyou_page.name
+    page_event = module_item_events(page_name).first
+    named_event = key_event('module_complete')
+    event = named_event || page_event
+    event&.time
   end
 
   # @see ContentfulCourseProgress
@@ -154,7 +147,7 @@ private
     items.send(method) { |item| module_item_events(item.name).present? }
   end
 
-  # @param item_id [String] module item name
+  # @param item_id [String] content slug
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
   def module_item_events(item_id)
     user.events.where_properties(training_module_id: mod.name, id: item_id)
@@ -163,6 +156,11 @@ private
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
   def training_module_events
     user.events.where_properties(training_module_id: mod.name)
+  end
+
+  # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
+  def module_page_events
+    training_module_events.where(name: 'module_content_page')
   end
 
   # @param key [String] module_start, module_complete
