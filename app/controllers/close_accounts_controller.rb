@@ -23,6 +23,7 @@ class CloseAccountsController < ApplicationController
 
   def close_account
     current_user.send_account_closed_notification
+    User.new(email: @internal_mailbox).send_account_closed_internal_notification(current_user.email)
     current_user.redact!
     sign_out current_user
     redirect_to user_close_account_path

@@ -39,6 +39,7 @@ module EarlyYearsFoundationRecovery
     # user_timeout_warning_minutes and user_timeout_modal_visible value combined must be lower than user_timeout_minutes
     config.user_timeout_warning_minutes = ENV.fetch('TIMEOUT_WARNING_MINUTES', '20').to_i
     config.user_timeout_modal_visible = ENV.fetch('TIMEOUT_MODAL_VISIBLE', '5').to_i
+    config.internal_mailbox = ENV.fetch('INTERNAL_MAILBOX', 'child-development.training@education.gov.uk')
     config.service_name = 'Early years child development training'
     config.middleware.use Grover::Middleware
     config.active_record.yaml_column_permitted_classes = [Symbol]
