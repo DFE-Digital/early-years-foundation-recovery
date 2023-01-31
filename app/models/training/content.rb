@@ -221,7 +221,6 @@ module Training
       page_type.eql?('certificate')
     end
 
-
     # @return [Boolean]
     def page_numbers?
       case page_type

@@ -1,10 +1,18 @@
 require 'rails_helper'
 
-RSpec.describe 'Video page', :vcr do
-  include_context 'with progress'
-  include_context 'with user'
+RSpec.describe 'Video page' do
+
+  if Rails.application.cms?
+    include_context 'with cms progress'
+  else
+    include_context 'with progress'
+  end
+
+  # include_context 'with user' # disable login until post login page doesn't stall
 
   before do
+    create(:user, :registered) if Rails.application.cms? # remove and use 'with user'
+
     visit '/modules/alpha/content-pages/1-2-1-2'
   end
 
