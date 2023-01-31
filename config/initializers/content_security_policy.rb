@@ -51,8 +51,6 @@ CONTENTFUL_DOMAINS = %w[
   *.ctfassets.net
 ].freeze
 
-
-
 Rails.application.config.content_security_policy do |policy|
   policy.default_src :self,
                      :https,

@@ -1,5 +1,5 @@
 module.exports = function(migration) {
-	const staticPage = migration.createContentType("static", {
+  const staticPage = migration.createContentType("static", {
     name: "Static",
     displayField: 'name',
   })

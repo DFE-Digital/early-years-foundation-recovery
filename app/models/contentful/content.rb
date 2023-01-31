@@ -1,3 +1,1 @@
-class Content < ContentfulModel::Base
-
-end
+class Content < ContentfulModel::Base; end
