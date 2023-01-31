@@ -85,7 +85,7 @@ module LinkHelper
   # @return [String] next content page (ends on certificate)
   def cms_link_to_next_module_item(content)
     text = content.next_button_text
-    path = training_module_page_path(content.parent.name, content.next_item)
+    path = training_module_page_path(content.parent.name, content.next_item.name)
 
     govuk_button_link_to text, path, aria: { label: 'Go to the next page' }
   end
@@ -95,7 +95,7 @@ module LinkHelper
   def cms_link_to_previous_module_item(content)
     path =
       if content.previous_item
-        training_module_page_path(content.parent.name, content.previous_item)
+        training_module_page_path(content.parent.name, content.previous_item.name)
       else
         training_module_path(content.parent.name)
       end

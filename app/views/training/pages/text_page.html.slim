@@ -3,9 +3,9 @@
 = render 'shared/progress_bar', bar: @module_progress_bar
 
 - content_for :content_page do
-  = page_number(**@model.pagination) if @model.page_numbers?
+  = page_number(**content.pagination) if content.page_numbers?
 
-  h1= @model.heading
-  .gem-c-govspeak= translate_markdown(@model.body)
+  h1= content.heading
+  .gem-c-govspeak= translate_markdown(content.body)
 
 = render 'content_wrap'

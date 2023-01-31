@@ -7,16 +7,6 @@ module Training
       'video'
     end
 
-    # # @return [Training::Video]
-    # def self.by_id(id)
-    #   load_children(0).find(id)
-    # end
-
-    # # @return [Training::Video]
-    # def self.by_name(name)
-    #   load_children(0).find_by(name: name).first
-    # end
-
     def page_type = 'video_page'
     def video_title = title
 

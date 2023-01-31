@@ -13,58 +13,22 @@ module Training
     def model
       self
     end
+    # METHODS TO DEPRECATE --------------------------------------
 
-    # @return [Training::?]
+    # @return [Training::Content]
     def self.by_id(id)
       load_children(0).find(id)
     end
 
-    # # @return [Training::?]
-    # def self.by_name(mod_name: mod_name, page_name: page_name)
-    #   load_children(0).find_by(name: page_name, training_module: { name: mod_name }).first
-    # end
-
-    # # @param mod_name [String]
-    # # @param page_type [String]
-    # # @return [Array<Training::Content, ...>]
-    # def self.where_type(mod_name, page_type)
-    #   load_children(0).find_by(training_module: { name: mod_name }, page_type: page_type).order(:name).load
-    # end
-
-    # # @param mod_name [String]
-    # # @param submodule [Integer]
-    # # @return [Array<Training::Content, ...>]
-    # def self.where_submodule(mod_name, submodule)
-    #   load_children(0).find_by(training_module: { name: mod_name }, submodule: submodule).order(:name).load
-    # end
-
-    # # @param mod_name [String]
-    # # @param submodule [Integer]
-    # # @param topic [Integer]
-    # # @return [Array<Training::Content, ...>]
-    # def self.where_submodule_topic(mod_name, submodule, topic)
-    #   load_children(0).find_by(training_module: { name: mod_name }, submodule: submodule, topic: topic).order(:name).load
-    # end
-
-    # METHODS TO DEPRECATE --------------------------------------
-
-    # linear progression ----------------------------------------------------------
-
-    # backwards compatibility
-    # @return [String]
-    # def training_module
-    #   parent.name
-    # end
-
     # @return [Training::Module]
     def parent
-      # @parent ||= Training::Module.by_id(fields[:training_module].id)
-
       entry_id = fields[:training_module].id
 
-      Rails.logger.info("fetching #{entry_id}")
+      puts("FETCH #{entry_id}")
+
       fetch_or_store(entry_id) do
-        Rails.logger.info("storing #{entry_id}")
+        puts("STORE #{entry_id}")
+
         Training::Module.by_id(entry_id)
       end
     end
@@ -200,7 +164,7 @@ module Training
 
     # @return [Boolean]
     def is_question?
-      page_type.match?(/formative summative confidence/)
+      page_type.match?(/formative|summative|confidence/)
     end
 
     # @return [Boolean]
@@ -238,6 +202,11 @@ module Training
     end
 
     # @return [Boolean]
+    def icons_page?
+      page_type.eql?('icons_page')
+    end
+
+    # @return [Boolean]
     def assessment_results?
       page_type.eql?('assessment_results')
     end
@@ -252,25 +221,6 @@ module Training
       page_type.eql?('certificate')
     end
 
-    # names ---------------------------------
-
-    # # @return [String, nil] 2nd digit if present: 1-[1]-1-1
-    # def submodule_name
-    #   matches = name.match(ModuleItem::SUBMODULE_PATTERN)
-    #   matches[:submodule] if matches
-    # end
-
-    # # @return [String, nil] 3rd digit if present: 1-1-[1]-1
-    # def topic_name
-    #   matches = name.match(ModuleItem::TOPIC_PATTERN)
-    #   matches[:topic] if matches
-    # end
-
-    # # @return [String, nil] 4th digit (and optional suffix) if present: 1-1-1-[1a]
-    # def page_name
-    #   matches = name.match(ModuleItem::PAGE_PATTERN)
-    #   matches ? matches[:page] : 0
-    # end
 
     # @return [Boolean]
     def page_numbers?
@@ -289,11 +239,10 @@ module Training
     # @return [String]
     def debug_summary
       <<~SUMMARY
-        id: #{id}
-        name: #{parent.name}
+        cms id: #{id}
+        module name: #{parent.name}
         path: #{name}
         page type: #{page_type}
-        module_item: #{module_item}
 
         ---
         previous: #{previous_item&.name}

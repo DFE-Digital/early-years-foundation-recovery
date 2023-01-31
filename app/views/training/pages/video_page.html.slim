@@ -14,6 +14,7 @@
 
     - if @model.video_url
       = render 'govspeak/video', title: @model.video_title, url: @model.video_url
+
     - else
       p.govuk-body class='govuk-!-text-align-centre'
         | [Video to be added]

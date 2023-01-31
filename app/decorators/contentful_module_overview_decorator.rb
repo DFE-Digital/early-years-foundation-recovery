@@ -1,5 +1,5 @@
 class ContentfulModuleOverviewDecorator < DelegateClass(ContentfulModuleProgress)
-  # @yield [Symbol, ModuleItem] state locales key and target page
+  # @yield [Symbol, Module::Content] state locales key and target page
   def call_to_action
     if completed?
       yield(:completed, mod.certificate_page)
@@ -15,19 +15,20 @@ class ContentfulModuleOverviewDecorator < DelegateClass(ContentfulModuleProgress
 
   # @return [Hash{Symbol => Mixed}]
   def sections
-    mod.items_by_submodule.each.with_index(1).map do |(num, items), position|
+    submodules.each.with_index(1).map do |(submodule, content_items), position|
       {
-        heading: num.nil? ? 'Module introduction' : items.first.model.heading,
+        heading: submodule.zero? ? 'Module introduction' : content_items.first.heading,
         position: position,
-        display_line: position != mod.items_by_submodule.size,
-        icon: status(items),
-        subsections: subsections(submodule: num, items: items),
+        display_line: position != mod.submodule_count,
+        icon: status(content_items),
+        subsections: subsections(submodule: submodule, items: content_items),
       }
     end
   end
 
   # Check every item has been visited (public for debugging)
   #
+  # @param items [Array<Module::Content>]
   # @return [Symbol]
   def status(items)
     if all?(items)
@@ -45,16 +46,18 @@ private
 
   # exclude intro or subpages
   #
-  # @return [Array<String, Symbol, Array>]
+  # @param submodule [Integer]
+  # @param items [Array<Module::Content>]
   #
-  # @param submodule [String]
-  # @param items [Array<ModuleItems>]
+  # @return [Array<String, Symbol, Array>]
   def subsections(submodule:, items:)
-    items_without_submodule_intro = submodule.nil? ? items : items.drop(1)
+    # items_without_submodule_intro = submodule.zero? ? items : items.drop(1)
 
-    items_without_submodule_intro.select(&:topic?).map do |subsection|
-      section_content(submodule: submodule, subsection_item: subsection)
-    end
+    # items_without_submodule_intro.select(&:topic?).map do |subsection|
+    #   section_content(submodule: submodule, subsection_item: subsection)
+    # end
+
+    []
   end
 
   # @param submodule [String]
@@ -62,7 +65,7 @@ private
   #
   # @return [Array<Array>]
   def section_content(submodule:, subsection_item:)
-    subsection_status = if submodule.nil?
+    subsection_status = if submodule.zero?
                           status([subsection_item])
                         else
                           status(subsection_item.current_submodule_topic_items)
@@ -83,7 +86,7 @@ private
     end
 
     {
-      mod: subsection_item.training_module,
+      mod: subsection_item.parent,
       heading: subsection_item.model.heading,
       next_item: furthest_topic_page_name,
       status: subsection_status,
@@ -106,13 +109,18 @@ private
     all?(current_topic_items) if current_topic
   end
 
-  # @param current_top_num [String]
-  # @param current_sub_num [String]
+  # @param topic_num [String]
+  # @param submodule_num [String]
   #
   # @return [Array<Array>] [1,2] [item, item, item]
   def find_topic(topic_num, submodule_num)
     mod.items_by_topic.select do |(match_sub_num, match_topic_num), _items|
       match_sub_num.eql?(submodule_num) && match_topic_num.eql?(topic_num)
     end
+  end
+
+  # @return [Hash]
+  def submodules
+    mod.content_by_submodule
   end
 end

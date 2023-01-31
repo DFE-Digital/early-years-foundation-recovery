@@ -3,22 +3,22 @@ class Training::PagesController < Training::BaseController
   helper_method :module_item, :training_module, :note
 
   # TODO: replace with these helpers
-  helper_method :mod
+  helper_method :mod, :content
 
   def index
     redirect_to training_module_content_page_path(mod_name, 'what-to-expect')
   end
 
   def show
-    if question
-      redirect_to training_module_questionnaire_path(mod_name, question.name)
+    if content.is_question?
+      redirect_to training_module_questionnaire_path(mod_name, content.name)
     elsif module_item.assessment_results?
-      redirect_to training_module_assessment_result_path(mod_name, module_item.name)
+      redirect_to training_module_assessment_result_path(mod_name, content.name)
     else
       @module_progress = ContentfulModuleOverviewDecorator.new(progress)
       @module_progress_bar = ContentfulModuleProgressBarDecorator.new(progress)
 
-      @module_item = @model = module_item
+      @model = content # TODO: deprecate this instance variable
 
       render_page
     end
@@ -26,11 +26,26 @@ class Training::PagesController < Training::BaseController
 
 private
 
+  # TODO: deprecate these ------------------------------------------------------
+
+  def training_module
+    mod
+  end
+
+  def module_item
+    @module_item ||= content
+  end
+
   # ----------------------------------------------------------------------------
 
-  # @return [String] for redirect
+  # @return [String]
   def mod_name
     params[:training_module_id]
+  end
+
+  # @return [String]
+  def content_slug
+    params[:id]
   end
 
   # @return [Training::Module] shallow
@@ -38,17 +53,9 @@ private
     @mod ||= Training::Module.by_name(mod_name)
   end
 
-  def training_module
-    mod
-  end
-
-  # @return [Training::Page, Training::Video]
-  def module_item
-    @module_item ||= page || video
-  end
-
-  def content_page
-    module_item
+  # @return [Training::Content]
+  def content
+    @content ||= mod.page_by_name(content_slug)
   end
 
   # ----------------------------------------------------------------------------
@@ -96,25 +103,5 @@ private
     return false if untracked?('module_start', training_module_id: mod_name)
 
     untracked?('module_complete', training_module_id: mod_name)
-  end
-
-  # ----------------------------------------------------------------------------
-
-  # @return [Training::Question]
-  def question
-    Training::Question.load_children(0).find_by(name: params[:id], training_module: { name: mod_name }).first
-    # Training::Question.by_name(mod_name: mod_name, page_name: page_name)
-  end
-
-  # @return [Training::Page]
-  def page
-    Training::Page.load_children(0).find_by(name: params[:id], training_module: { name: mod_name }).first
-    # Training::Page.by_name(mod_name: mod_name, page_name: page_name)
-  end
-
-  # @return [Training::Video]
-  def video
-    Training::Video.load_children(0).find_by(name: params[:id], training_module: { name: mod_name }).first
-    # Training::Video.by_name(mod_name: mod_name, page_name: page_name)
   end
 end

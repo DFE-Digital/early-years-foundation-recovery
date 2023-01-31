@@ -1,5 +1,5 @@
 class Training::ModulesController < Training::BaseController
-  before_action :authenticate_registered_user!, only: :show
+  # before_action :authenticate_registered_user!, only: :show
 
   def index
     track('course_overview_page')
@@ -14,7 +14,7 @@ class Training::ModulesController < Training::BaseController
     else
       @module_progress_bar  = ModuleProgressBarDecorator.new(progress)
       @module_progress      = ContentfulModuleOverviewDecorator.new(progress)
-      @assessment_progress  = assessment
+      # @assessment_progress  = assessment
 
       render partial: 'progress' if debug?
     end
@@ -34,7 +34,7 @@ protected
     @progress ||= helpers.cms_module_progress(mod)
   end
 
-  def assessment
-    @assessment ||= helpers.assessment_progress(mod)
-  end
+  # def assessment
+  #   @assessment ||= helpers.assessment_progress(mod)
+  # end
 end

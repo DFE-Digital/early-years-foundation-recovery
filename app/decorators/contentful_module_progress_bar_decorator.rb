@@ -38,7 +38,7 @@ class ContentfulModuleProgressBarDecorator < DelegateClass(ContentfulModuleProgr
 
     node_items.map { |node_item|
       <<~NODE
-        #{node_item.name}: #{node_item.type}
+        #{node_item.name}: #{node_item.page_type}
       NODE
     }.join
   end
@@ -79,7 +79,7 @@ private
 
   # @return [String]
   def node_heading(node_item)
-    node_items.first.eql?(node_item) ? 'Module introduction' : node_item.model.heading
+    node_items.first.eql?(node_item) ? 'Module introduction' : node_item.heading
   end
 
   # @return [nil, String] style the furthest node's heading
@@ -91,7 +91,7 @@ private
 
   # @return [String] 'start', '1', '2', etc.
   def node_name(node_item)
-    FIRST_NODE_TYPES.include?(node_item.type) ? 'start' : node_item.submodule_name
+    FIRST_NODE_TYPES.include?(node_item.page_type) ? 'start' : node_item.submodule.to_s
   end
 
   # @return [String] Percentage complete

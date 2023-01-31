@@ -1,0 +1,25 @@
+- if Rails.application.debug?
+  pre.debug_dump
+    hr
+    h4 Module
+    ul
+      li duration: #{@mod.duration}
+      li submodules: #{@mod.submodule_count}
+      li topics: #{@mod.topic_count}
+      li questions: #{@mod.questions.count}
+      li milestone: #{@module_progress.milestone}
+      li resume page: #{@module_progress.resume_page&.name}
+      li last page: #{@mod.content.last.name}
+      li certificate: #{@mod.certificate_page.name}
+
+    hr
+    h4 Submodule
+    ul
+      - @mod.content_by_submodule.map do |sub_num, items|
+        li #{sub_num}: #{@module_progress.status(items)}
+
+    hr
+    h4 Topic
+    ul
+      - @mod.content_by_topic.map do |(sub_num, topic_num), items|
+        li #{sub_num}.#{topic_num}: #{@module_progress.status(items)}
