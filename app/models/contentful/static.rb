@@ -1,4 +1,4 @@
-require_relative 'content'
+# require_relative 'content'
 
 module Contentful
   class Static < ContentfulModel::Base
