@@ -291,7 +291,14 @@ en:
 
       ## Videos and mobile data usage
 
-      This module contains videos. Connect to wifi before starting the module to watch the videos without using any mobile data. If you are not able or prefer not to play the videos, you can use the full transcripts provided.
+      This module contains videos. Connect to wifi before starting the module to
+      watch the videos without using any mobile data. If you are not able or prefer
+      not to play the videos, you can use the full transcripts provided.
+
+      ## Free wifi, internet and data resources
+      
+      Our [free wifi, internet and data resources](/wifi-and-data) may help if you have limited or
+      no access to the internet.
 
   icons_page:
     heading: Before you start
@@ -498,4 +505,4 @@ en:
         sitemap: Sitemap
         terms-and-conditions: Terms and conditions
         whats-new: What's new
-        wifi: Free internet, wifi and data resources
+        wifi-and-data: Free internet, wifi and data resources
