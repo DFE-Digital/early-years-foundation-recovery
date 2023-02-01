@@ -2,10 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'Module overview page progress' do
   include_context 'with progress'
-  include_context 'with user'
+  include_context 'with user' unless Rails.application.cms? # disable login until post login page doesn't stall
 
   context 'when the module has not been started' do
     before do
+      create(:user, :registered) if Rails.application.cms? # remove and use 'with user'
+
       visit '/modules/alpha'
     end
 

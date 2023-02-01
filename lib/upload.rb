@@ -11,8 +11,8 @@ class Upload
 
   # @return [String]
   def call(mod_name:)
-    # log "space: #{config.space}"
-    # log "env: #{config.environment}"
+    log "space: #{config.space}"
+    log "env: #{config.environment}"
 
     mod = find_mod(mod_name)
 
@@ -28,7 +28,27 @@ class Upload
     mod_entry.pages =
       mod.module_items.map do |item|
         child_entry = create_entry(item)
+
+        # Media upload if found in body copy
+        image = item.model.body&.match(IMG_REGEXP) # MatchData
+
+        if image
+          asset = process_image(*image.captures)
+          asset.publish if asset.save
+
+          # wait for publishing to generate image_url for asset
+          until asset.image_url.present?
+            sleep(1)
+            asset.publish
+          end
+
+          # "//images.ctfassets.net/dvmeh832nmjc/6etSgfjBK2UveguU2mZp4z/7f74406a62500bb14337a458a0e00a66/_assets_1-532263705.jpg"
+          child_entry.body = item.model.body.gsub(image[:filename], asset.image_url)
+        end
+
+        # parent
         child_entry.training_module = mod_entry
+
         child_entry.publish if child_entry.save
         log_entry(child_entry)
         child_entry
@@ -108,5 +128,33 @@ private
   # @return [Contentful::Management::ClientContentTypeMethodsFactory]
   def factory
     @factory ||= client.content_types(config.space, config.environment)
+  end
+
+  # Asset Management -----------------------------------------------------------
+
+  IMG_REGEXP = /!\[(?<title>[^\]]*)\]\((?<filename>.*?)\s*("(?:.*[^"])")?\s*\)/
+  IMG_HOST = 'https://ey-recovery-dev.london.cloudapps.digital'
+
+  # @param title [String]
+  # @param filename [String]
+  # @return [Contentful::Management::Asset]
+  def process_image(title, filename)
+    file  = create_file(filename)
+    asset = create_asset(title: title, description: filename, file: file)
+    asset.process_file
+  end
+
+  # @return [Contentful::Management::File]
+  def create_file(filename)
+    file = Contentful::Management::File.new
+    file.content_type = 'image/jpeg'
+    file.file_name = filename
+    file.properties[:upload] = ApplicationController.helpers.image_url(filename, host: IMG_HOST)
+    file
+  end
+
+  # @return [Contentful::Management::Asset]
+  def create_asset(params)
+    client.assets(config.space, config.environment).create(params)
   end
 end

@@ -2,13 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Video page' do
 
-  if Rails.application.cms?
-    include_context 'with cms progress'
-  else
-    include_context 'with progress'
-  end
+  include_context 'with progress'
 
-  # include_context 'with user' # disable login until post login page doesn't stall
+  include_context 'with user' unless Rails.application.cms? # disable login until post login page doesn't stall
 
   before do
     create(:user, :registered) if Rails.application.cms? # remove and use 'with user'

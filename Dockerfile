@@ -9,6 +9,7 @@ RUN apk add --no-cache --no-progress build-base less curl tzdata gcompat \
     "libretls>=3.3.4-r3" \
     "ncurses-libs>=6.3_p20211120-r1" \
     "nodejs>=16.16.0-r0" \
+    "pkgconf>=1.9.4-r0" \
     "ssl_client>=1.34.1-r5" \
     "zlib>=1.2.12-r0"
 

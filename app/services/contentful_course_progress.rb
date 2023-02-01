@@ -1,11 +1,9 @@
 # User's course progress and module state
 #
 class ContentfulCourseProgress
-  def initialize(user:)
-    @user = user
-  end
+  extend Dry::Initializer
 
-  attr_reader :user
+  option :user, required: true
 
   # @return [Array<Training::Module>] training modules that have been started
   def current_modules

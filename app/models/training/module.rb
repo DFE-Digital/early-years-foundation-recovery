@@ -51,6 +51,8 @@ module Training
     #
     # @return [Array<Training::Page, Training::Video, Training::Question>]
     def content
+      return [] if draft?
+
       fields[:pages].map do |child_link|
         entry_id = child_link.id
 

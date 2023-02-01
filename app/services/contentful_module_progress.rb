@@ -1,21 +1,20 @@
 # User's module progress and submodule/topic state
 #
 class ContentfulModuleProgress
+  extend Dry::Initializer
+
   # @param user [User]
   # @param mod [Training::Module]
-  def initialize(user:, mod:)
-    @user = user
-    @mod = mod
-    @summative_assessment = SummativeAssessmentProgress.new(user: user, mod: mod)
-  end
 
   # @!attribute [r] user
   #   @return [User]
+  option :user, required: true
   # @!attribute [r] mod
   #   @return [Training::Module]
+  option :mod, required: true
   # @!attribute [r] summative_assessment
   #   @return [SummativeAssessmentProgress]
-  attr_reader :user, :mod, :summative_assessment
+  option :summative_assessment, default: proc { SummativeAssessmentProgress.new(user: user, mod: mod) }
 
   # @return [Float] Module completion
   def value

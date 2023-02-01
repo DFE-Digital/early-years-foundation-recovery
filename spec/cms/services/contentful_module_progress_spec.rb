@@ -3,11 +3,7 @@ require 'rails_helper'
 RSpec.describe ContentfulModuleProgress, :cms do
   subject(:progress) { described_class.new(user: user, mod: alpha) }
 
-  include_context 'with cms progress'
-
-  before do
-    skip 'WIP' unless Rails.application.cms?
-  end
+  include_context 'with progress'
 
   describe '#started?' do
     it 'is true once the module intro is viewed' do
