@@ -76,7 +76,7 @@ module-4:
           This will provide opportunity for the child to learn by imitation.
         assessment_fail_summary: |
           You should model the correct use of language.
-          For example, a child may say “I drawed a picture for you”. Your response could be “that’s right, you a picture for me”.
+          For example, a child may say “I drawed a picture for you”. Your response could be “that’s right, you drew a picture for me”.
           This will provide opportunity for the child to learn by imitation.
         answers:
           1: Tell them they are wrong and ask them to try again
