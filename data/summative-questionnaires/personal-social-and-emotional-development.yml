@@ -222,16 +222,13 @@ personal-social-and-emotional-development:
       1_visual-reminders:
         multi_select: false
         label: |
-          True or false? Visual reminders will positively support children to develop
+          True or false? Quiet activities will positively support children to develop
           their self-regulation skills.
         assessment_summary:
         assessment_fail_summary: |
-          Visual reminders can help children to develop their self-regulation skills.
-          For example, a child may call out every time they have a thought as they
-          struggle to control the impulse to share the information.
-          A visual reminder to put up their hand and wait, or write their thought
-          down until a more appropriate moment, will help the child to remember the
-          appropriate behaviour for the situation.
+          All children need opportunities to access quieter areas and take time to rest and process their thoughts. This is even more important for children who are still developing their skills or having difficulting self-regulating.
+
+          Encourage children to think of the quiet area as a calming, safe space. Older children will become aware that they can move to this space, and eventually work towards moving there before their behaviour becomes uncontrolled.
 
           You might want to revisit the section on [supporting self-regulation](/modules/personal-social-and-emotional-development/content-pages/3-3-2-3).
         answers:
