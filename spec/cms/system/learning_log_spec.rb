@@ -4,6 +4,10 @@ RSpec.describe 'Learning log', :cms, type: :system do
   include_context 'with user'
   include_context 'with progress'
 
+  before do
+    skip 'WIP' unless Rails.application.cms?
+  end
+
   describe 'navigation menu' do
     context 'when training has not started' do
       before do
