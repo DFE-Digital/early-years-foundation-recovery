@@ -4,7 +4,7 @@ RSpec.describe 'Static page', type: :request do
   specify { expect('/accessibility-statement').to be_successful }
 
   specify { expect('/cookie-policy').to be_successful }
-  
+
   specify { expect('/new-registration').to be_successful }
 
   specify { expect('/other-problems-signing-in').to be_successful }
