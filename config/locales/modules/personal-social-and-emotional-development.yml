@@ -872,6 +872,9 @@ en:
           We will now look at each of these attachment styles in more detail.
 
       3-2-1-3a:
+        # question
+
+      3-2-1-3b:
         heading: Secure attachment
         body: |
           ![A smiling young child holding onto a climbing frame in a playground. An adult is holding them and helping them with the activity.](/assets/3-2-1-3a-1284279233.jpg)
@@ -887,8 +890,9 @@ en:
             - greater resilience
             - the ability to build strong social relationships
             - learning and developing with ease
-
-      3-2-1-3b:
+      3-2-1-3c:
+        # question
+      3-2-1-3d:
         heading: Insecure avoidant attachment
         body: |
           During the strange situation experiment, other babies showed no signs of being distressed when their mother left the room. They acted in the same kind of way towards the stranger as they did towards their mother. When their mother returned, they did not go over to her to seek comfort. In fact, they tended to avoid, ignore or move away from her.
@@ -903,8 +907,7 @@ en:
             - be anxious that others are not able to keep them safe
             - feel rejected
             - struggle to connect with others
-
-      3-2-1-3c:
+      3-2-1-3e:
         heading: Insecure ambivalent attachment
         body: |
           ![An anxious-looking young child, holding on to an adult's hand but looking behind them.](/assets/3-2-1-3a-1305634049.jpg)
@@ -931,7 +934,7 @@ en:
             - be constantly focused on the negative and try to avoid tasks
             - demand the practitioner's attention
             - have poor concentration
-      3-2-1-3d:
+      3-2-1-3f:
         heading: Disorganised controlling attachment
         body: |
           After Ainsworth’s strange situation experiment, further research by Main and Solomon identified a fourth attachment style. This was called disorganised controlling attachment.
@@ -954,10 +957,6 @@ en:
             - try to take on the parental role and act as the caregiver to their parent or carer and others
             - refuse to engage in work
             - try to create chaotic environments
-      3-2-1-3e:
-        # question
-      3-2-1-3f:
-        # question
       3-2-1-3g:
         # question
       3-2-1-3h:
