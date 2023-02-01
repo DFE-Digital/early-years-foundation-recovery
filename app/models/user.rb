@@ -88,6 +88,10 @@ class User < ApplicationRecord
     send_devise_notification(:account_closed)
   end
 
+  def send_account_closed_internal_notification(user_account_email)
+    send_devise_notification(:account_closed_internal, user_account_email)
+  end
+
   # @return [String]
   def name
     [first_name, last_name].compact.join(' ')
