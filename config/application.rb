@@ -30,6 +30,7 @@ module EarlyYearsFoundationRecovery
     end
 
     config.service_name = 'Early years child development training'
+    config.internal_mailbox = ENV.fetch('INTERNAL_MAILBOX', 'child-development.training@education.gov.uk')
     config.middleware.use Grover::Middleware
     config.active_record.yaml_column_permitted_classes = [Symbol]
     config.action_view.sanitized_allowed_tags = ALLOWED_TAGS
