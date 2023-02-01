@@ -133,7 +133,7 @@ private
   # Asset Management -----------------------------------------------------------
 
   IMG_REGEXP = /!\[(?<title>[^\]]*)\]\((?<filename>.*?)\s*("(?:.*[^"])")?\s*\)/
-  IMG_HOST = 'https://ey-recovery-dev.london.cloudapps.digital'
+  IMG_HOST = 'https://ey-recovery-dev.london.cloudapps.digital'.freeze
 
   # @param title [String]
   # @param filename [String]

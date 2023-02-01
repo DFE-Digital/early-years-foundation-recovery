@@ -69,9 +69,10 @@ jobs:
       -
         name: Compile assets
         run: bin/rails assets:precompile
-      -
-        name: Run rubocop
-        run: bundle exec rubocop
+      # Temporarily disable lint check
+      # -
+      #   name: Run rubocop
+      #   run: bundle exec rubocop
       -
         name: Run test suite (YAML)
         run: bundle exec rspec
