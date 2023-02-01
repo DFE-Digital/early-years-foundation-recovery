@@ -1,7 +1,7 @@
 require_relative 'content'
 
 module Contentful
-  class Static < Content
+  class Static < ContentfulModel::Base
     self.content_type_id = 'static'
   end
 end

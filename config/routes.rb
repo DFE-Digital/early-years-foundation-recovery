@@ -82,5 +82,4 @@ Rails.application.routes.draw do
     resources :questionnaires, only: %i[show update]
     resources :assessment_results, only: %i[show new], path: 'assessment-result'
   end
-
 end
