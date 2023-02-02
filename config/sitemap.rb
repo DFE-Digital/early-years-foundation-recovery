@@ -31,11 +31,13 @@ SitemapGenerator::Sitemap.create do
   # static
   %w[
     accessibility-statement
+    new-registration
     other-problems-signing-in
     privacy-policy
     terms-and-conditions
-    whats-new
     sitemap
+    whats-new
+    wifi-and-data
   ].each do |path|
     add static_path(path)
   end
