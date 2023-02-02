@@ -11,19 +11,19 @@ RSpec.describe 'Module overview page progress' do
 
     it 'all the indicators are "not started"' do
       within '#section-content-1' do
-        expect(page).to have_content 'not started', count: 3
-      end
-
-      within '#section-content-2' do
         expect(page).to have_content 'not started', count: 4
       end
 
-      within '#section-content-2' do
+      within '#section-content-1' do
         expect(page).to have_content('1-1-1').and have_content('not started')
         expect(page).not_to have_link('1-1-1')
       end
 
-      within '#section-content-4' do
+      within '#section-content-2' do
+        expect(page).to have_content 'not started', count: 1
+      end
+
+      within '#section-content-3' do
         expect(page).to have_content 'not started', count: 4
         expect(page).not_to have_link 'Recap'
         expect(page).not_to have_link 'End of module test'
@@ -37,7 +37,7 @@ RSpec.describe 'Module overview page progress' do
     end
 
     it 'shows the end of module test has not been attempted' do
-      within '#section-content-4' do
+      within '#section-content-3' do
         expect(page).not_to have_content('in progress')
         expect(page).not_to have_content('completed')
       end
@@ -55,13 +55,7 @@ RSpec.describe 'Module overview page progress' do
     end
 
     it 'resumes from the last visited page' do
-      expect(page).to have_link('Resume module', href: '/modules/alpha/content-pages/intro')
-    end
-
-    it 'all the indicators are "completed"' do
-      within '#section-content-1' do
-        expect(page).to have_content 'completed', count: 3
-      end
+      expect(page).to have_link('Resume module', href: '/modules/alpha/content-pages/1-1')
     end
   end
 
@@ -72,19 +66,19 @@ RSpec.describe 'Module overview page progress' do
     end
 
     it 'the submodule indicator is "not started"' do
-      within '#section-content-2' do
+      within '#section-content-1' do
         expect(page).to have_content 'not started'
       end
     end
 
     it 'the first topic cannot be clicked' do
-      within '#section-content-2 .module-section--container .module-section--item:nth-child(1)' do
+      within '#section-content-1 .module-section--container .module-section--item:nth-child(1)' do
         expect(page).not_to have_link('1-1-1', href: '/modules/alpha/content-pages/1-1-1')
       end
     end
 
     it 'the first topic indicator is "not started"' do
-      within '#section-content-2 .module-section--container .progress-indicator:nth-child(2)' do
+      within '#section-content-1 .module-section--container .progress-indicator:nth-child(2)' do
         expect(page).to have_content 'not started'
       end
     end
@@ -101,25 +95,25 @@ RSpec.describe 'Module overview page progress' do
     end
 
     it 'the first topic can be clicked' do
-      within '#section-content-2 .module-section--container .module-section--item:nth-child(1)' do
+      within '#section-content-1 .module-section--container .module-section--item:nth-child(1)' do
         expect(page).to have_link('1-1-1', href: '/modules/alpha/content-pages/1-1-1')
       end
     end
 
     it 'the first topic indicator is "complete"' do
-      within '#section-content-2 .module-section--container .progress-indicator:nth-child(2)' do
+      within '#section-content-1 .module-section--container .progress-indicator:nth-child(2)' do
         expect(page).to have_content 'complete'
       end
     end
 
     it 'the second topic cannot be clicked' do
-      within '#section-content-2 .module-section--container .module-section--item:nth-child(3)' do
+      within '#section-content-1 .module-section--container .module-section--item:nth-child(3)' do
         expect(page).not_to have_link('1-1-1', href: '/modules/alpha/content-pages/1-1-1')
       end
     end
 
     it 'the second topic indicator is "not started"' do
-      within '#section-content-2 .module-section--container .progress-indicator:nth-child(4)' do
+      within '#section-content-1 .module-section--container .progress-indicator:nth-child(4)' do
         expect(page).to have_content 'not started'
       end
     end
@@ -136,13 +130,13 @@ RSpec.describe 'Module overview page progress' do
     end
 
     it 'the progress indicator is "in progress"' do
-      within '#section-content-2 .module-section--container .progress-indicator:nth-child(6)' do
+      within '#section-content-1 .module-section--container .progress-indicator:nth-child(6)' do
         expect(page).to have_content 'in progress'
       end
     end
 
     it 'the topic is not a link' do
-      within '#section-content-2 .module-section--container .module-section--item:nth-child(5)' do
+      within '#section-content-1 .module-section--container .module-section--item:nth-child(5)' do
         expect(page).not_to have_link('1-1-3', href: '/modules/alpha/content-pages/1-1-1')
       end
     end
@@ -155,7 +149,7 @@ RSpec.describe 'Module overview page progress' do
     end
 
     it 'all the indicators in the submodule are "complete"' do
-      within '#section-content-2' do
+      within '#section-content-1' do
         expect(page).to have_content 'complete', count: 4
       end
     end

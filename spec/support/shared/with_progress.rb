@@ -8,7 +8,7 @@ RSpec.shared_context 'with progress' do
   let(:delta) { TrainingModule.find_by(name: 'delta') }
 
   def start_module(mod)
-    view_pages_upto(mod, 'module_intro')
+    view_pages_upto(mod, 'sub_module_intro')
   end
 
   def start_first_submodule(mod)

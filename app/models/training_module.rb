@@ -52,14 +52,13 @@ class TrainingModule < YamlBase
 
   # @example
   #   {
-  #     "nil" => [what-to-expect, before-you-start],
   #     "1" => [1-1-1, 1-1-2],
   #     "2" => [1-2-1, 1-2-2],
   #   }
   #
   # @return [{String=>Array<ModuleItem>}]
   def items_by_submodule
-    @items_by_submodule ||= module_items.group_by(&:submodule_name)
+    @items_by_submodule ||= module_items.group_by(&:submodule_name).except(nil)
   end
 
   # @example
@@ -109,28 +108,16 @@ class TrainingModule < YamlBase
 
   # sequence ---------------------------------
 
-  # @return [ModuleItem] page 1
+  # @return [ModuleItem]
   def interruption_page
     module_items.first
     # module_items_by_type('interruption_page').first
   end
 
-  # @return [ModuleItem] page 2
-  def icons_page
-    interruption_page.next_item
-    # module_items_by_type('icons_page').first
-  end
-
-  # @return [ModuleItem] page 3
-  def intro_page
-    icons_page.next_item
-    # module_items_by_type('module_intro').first
-  end
-
   # Viewing this page determines if the module is "started"
-  # @return [ModuleItem] page 5
+  # @return [ModuleItem]
   def first_content_page
-    module_items_by_type('sub_module_intro').first.next_item
+    module_items_by_type('sub_module_intro').first
   end
 
   # @return [ModuleItem]
