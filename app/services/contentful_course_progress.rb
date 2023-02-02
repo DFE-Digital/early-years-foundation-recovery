@@ -40,16 +40,16 @@ class ContentfulCourseProgress
   # @return [Array<String>]
   def debug_summary
     training_modules.map do |mod|
+        # published at: #{mod.published_at}
       <<~SUMMARY
         title: #{mod.title}
         position: #{mod.position}
         name: #{mod.name}
         draft: #{mod.draft?}
-        published_at: #{mod.published_at}
         started: #{started?(mod)}
         completed: #{completed?(mod)}
         available: #{available?(mod)}
-        last: #{mod.module_items.last.name unless mod.draft?}
+        last: #{mod.thankyou_page.name unless mod.draft?}
         certificate: #{mod.certificate_page.name unless mod.draft?}
         milestone: #{module_progress(mod).milestone}
       SUMMARY

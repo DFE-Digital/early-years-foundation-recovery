@@ -7,6 +7,10 @@ RSpec.describe ModuleProgress do
 
   include_context 'with progress'
 
+  before do
+    skip 'WIP' if Rails.application.cms?
+  end
+
   describe '#started?' do
     it 'is true once the module intro is viewed' do
       expect(progress.started?).to be false

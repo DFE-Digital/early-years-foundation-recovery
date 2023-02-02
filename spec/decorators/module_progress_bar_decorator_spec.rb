@@ -3,13 +3,15 @@ require 'rails_helper'
 RSpec.describe ModuleProgressBarDecorator do
   subject(:decorator) { described_class.new(progress) }
 
-  let(:alpha) { TrainingModule.find_by(name: :alpha) }
-  let(:progress) { ModuleProgress.new(user: user, mod: alpha) }
+  include_context 'with progress'
 
+  let(:progress) { ModuleProgress.new(user: user, mod: alpha) }
   let(:key) { :heading }
   let(:attribute) { decorator.nodes.map { |node| node[key] } }
 
-  include_context 'with progress'
+  before do
+    skip 'WIP' if Rails.application.cms?
+  end
 
   describe '#nodes' do
     describe ':heading' do

@@ -20,17 +20,11 @@ module Training
       load_children(0).find(id)
     end
 
-    # @return [Training::Module]
+    # @return [Training::Module, nil]
     def parent
-      entry_id = fields[:training_module].id
+      return unless fields[:training_module]
 
-      puts("FETCH #{entry_id}")
-
-      fetch_or_store(entry_id) do
-        puts("STORE #{entry_id}")
-
-        Training::Module.by_id(entry_id)
-      end
+      fetch_or_store(fields[:training_module].id) { Training::Module.by_id(fields[:training_module].id) }
     end
 
     # @return [Training::Page, Training::Video, Training::Question, nil]

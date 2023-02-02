@@ -45,24 +45,12 @@ module Training
       self.class.by_id(fields[:depends_on].id) if fields[:depends_on]
     end
 
-    # pages is an empty array in a shallow lookup
-    # this method enforces order
-    # TODO: remove debugging prints
-    #
-    # @return [Array<Training::Page, Training::Video, Training::Question>]
+    # @return [Array<Training::Page, Training::Video, Training::Question>] source of truth for content order
     def content
       return [] if draft?
 
       fields[:pages].map do |child_link|
-        entry_id = child_link.id
-
-        puts("FETCH #{entry_id}")
-
-        fetch_or_store(entry_id) do
-          puts("STORE #{entry_id}")
-
-          child_by_id(entry_id)
-        end
+        fetch_or_store(child_link.id) { child_by_id(child_link.id) }
       end
     end
 
@@ -111,7 +99,7 @@ module Training
     # @return [Datetime]
     delegate :published_at, to: :entry
 
-    # NB: Adds additional call to Management API
+    # NB: Adds additional call to Management API (per-dev tokens may need to bestow access to the active env)
     #
     # @see ContentfulCourseProgress#debug_summary
     # @return [Contentful::Management::Entry]
@@ -123,32 +111,23 @@ module Training
 
     # content pages ---------------------------------
 
-    # [
-    #   "interruption_page",
-    #   "icons_page",
-    #   "module_intro",
-    #   "sub_module_intro",
-    #   "text_page",
-    #   ...
-    # ]
-
     # Viewing this page determines if the module is "started"
     # @return [Training::Page]
     def first_content_page
       text_pages.first
     end
 
-    # @return [page] page 1
+    # @return [Training::Page] page 1
     def interruption_page
       content.find(&:interruption_page?)
     end
 
-    # @return [page] page 2
+    # @return [Training::Page] page 2
     def icons_page
       content.find(&:icons_page?)
     end
 
-    # @return [page] page 3
+    # @return [Training::Page] page 3
     def intro_page
       content.find(&:module_intro?)
     end
@@ -185,6 +164,17 @@ module Training
 
     # collections ---------------------------------
 
+    # @return [Array<Training::Page>]
+    def text_pages
+      content.select(&:text_page?)
+    end
+
+    # @return [Array<Training::Video>]
+    def video_pages
+      content.select(&:video_page?)
+    end
+
+    # @return [Array<Training::Question>]
     def questions
       content.select(&:is_question?)
     end
@@ -204,18 +194,9 @@ module Training
       content.select(&:confidence_question?)
     end
 
-    # @return [Array<Training::Video>]
-    def video_pages
-      content.select(&:video_page?)
-    end
-
-    # @return [Array<Training::Page>]
-    def text_pages
-      content.select(&:text_page?)
-    end
-
     # view decorators ---------------------------------
 
+    # @return [String]
     def tab_label
       ['Module', position].join(' ')
     end
@@ -233,7 +214,7 @@ module Training
 
     # @return [String]
     def card_anchor
-      "#module-#{id}-#{title.downcase.parameterize}"
+      "#module-#{position}-#{title.downcase.parameterize}"
     end
 
   private
