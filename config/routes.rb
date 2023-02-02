@@ -67,7 +67,8 @@ Rails.application.routes.draw do
     terms-and-conditions|
     sitemap|
     settings/cookies|
-    whats-new
+    whats-new|
+    wifi-and-data
   }x
   get '/:id', to: 'static#show', id: static_regexp, as: :static
 
