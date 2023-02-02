@@ -8,6 +8,7 @@
     outline: 5px solid rgba(11,12,12,0.1);
     box-shadow: 0 2px 2px rgb(11 12 12 / 40%);
     float: left;
+    width: 99px;
     @include govuk-responsive-margin(6, 'right');
     
     &:focus {

@@ -9,6 +9,8 @@ RSpec.describe 'Static page', type: :request do
 
   specify { expect('/users/timeout').to be_successful }
 
+  specify { expect('/promotional-materials').to be_successful }
+
   context 'with errors' do
     specify do
       get '/404'
