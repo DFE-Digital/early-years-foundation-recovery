@@ -7,8 +7,10 @@ module Training
       'video'
     end
 
-    def page_type = 'video_page'
-    def video_title = title
+    # @return [String]
+    def video_title
+      title
+    end
 
     # @return [nil, String]
     def video_url
@@ -19,6 +21,7 @@ module Training
 
   private
 
+    # @return [String]
     def video_site
       if vimeo?
         'https://player.vimeo.com/video'
