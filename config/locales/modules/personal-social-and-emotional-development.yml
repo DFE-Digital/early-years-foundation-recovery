@@ -1381,6 +1381,14 @@ en:
 
           $BRAIN
 
+      3-3-2-1video:
+        heading: Self-regulation
+        body: |
+          This video explains how you can help support children with managing their feelings and how they regulate their behaviour.
+        video:
+          id:
+          title: Self-regulation
+          provider: vimeo
 
       3-3-2-2a:
         heading: Activities to support executive function development

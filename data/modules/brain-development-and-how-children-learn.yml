@@ -92,6 +92,8 @@ brain-development-and-how-children-learn:
     type: text_page
   2-2-2-1a:
     type: text_page
+  2-2-2-1video:
+    type: video_page
   2-2-2-1b:
     type: formative_questionnaire
   2-2-2-2:

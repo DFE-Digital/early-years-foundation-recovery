@@ -68,7 +68,6 @@ en:
               <li>meaningful sentences</li>
               <li>fluent speech</li>
 
-
       4-1-1-1a:
         heading: |
           The pre-linguistic stage: sounds and noises before talking
@@ -118,6 +117,16 @@ en:
           - leaving gaps after your comments or questions to encourage their understanding of how to interact with others
 
           $INFO
+
+      4-1-1-1video:
+        heading: |
+          Supporting a baby's language development
+        body: |
+          This video gives some practical tips to support a baby's language development in your setting in order for them to learn, rehearse and develop future language skills.
+        video:
+          id:
+          title: Supporting a baby's language development
+          provider: vimeo
 
       4-1-1-1b:
         notes: true
@@ -430,6 +439,15 @@ en:
           - How do you make sure you're aware of individual children's starting points and take these into account when planning?
 
           $BRAIN
+      4-1-1-4video:
+        heading: |
+          Examples of language development
+        body: |
+          This video gives some examples of what speech sounds like and how it develops at different ages.
+        video:
+          id:
+          title: Examples of language development
+          provider: vimeo
 
       4-1-1-4b:
         # question
@@ -590,7 +608,15 @@ en:
           - opportunities for children to interact with others
 
           $INFO
-
+      4-1-2-4video:
+        heading: |
+          How practitioners apply theory to their practice
+        body: |
+          This video explains how practitioners could apply theory to their practice and the impact that can have.
+        video:
+          id:
+          title: How practitioners apply theory to their practice
+          provider: vimeo
       4-1-2-4b:
         # question
       4-1-2-4c:
@@ -1498,6 +1524,15 @@ en:
 
           $INFO
 
+      4-3-2-1video:
+        heading: A successful environment
+        body: |
+          This video explains how a successful environment can create lots of opportunities for interaction and for children to hear and use language skills.
+        video:
+          id:
+          title: A successful environment
+          provider: vimeo
+
       4-3-2-1b:
         # question
 
@@ -1761,6 +1796,15 @@ en:
           - How could you extend or improve on these strategies?
 
           $BRAIN
+
+      4-3-3-1video:
+        heading: Working with parents
+        body: |
+          This video explains how settings have successfully worked with parents and carers to support the home learning environment.
+        video:
+          id:
+          title: Working with parents
+          provider: vimeo
 
       4-3-3-1b:
         # question

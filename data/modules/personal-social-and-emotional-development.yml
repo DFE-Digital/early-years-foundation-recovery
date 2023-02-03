@@ -125,7 +125,7 @@ personal-social-and-emotional-development:
   3-2-3-2b:
     type: formative_questionnaire
   3-2-3-3:
-    type: text_page 
+    type: text_page
 
   # ----------------------------------------------------------------------------
   # Submodule 3
@@ -149,6 +149,8 @@ personal-social-and-emotional-development:
     type: text_page
   3-3-2-1:
     type: text_page
+  3-3-2-1video:
+    type: video_page
   3-3-2-2a:
     type: text_page
   3-3-2-2b:
@@ -216,7 +218,7 @@ personal-social-and-emotional-development:
     type: confidence_questionnaire
   3-4-3-6:
     type: confidence_questionnaire
-  
+
   3-4-3-7:
     type: thankyou
   3-4-4:
