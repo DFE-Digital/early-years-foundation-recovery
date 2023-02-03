@@ -61,7 +61,7 @@ module EarlyYearsFoundationRecovery
       ENV['WORKSPACE'].eql?('production')
     end
 
-    # @return [Boolean]
+    # @return [Boolean] true if Contentful is used for training content
     def cms?
       ENV['CONTENTFUL'].present?
     end

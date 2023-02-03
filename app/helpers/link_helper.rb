@@ -54,12 +54,14 @@ module LinkHelper
   end
 
   # @return [String]
-  def back_to_module_overview_button
+  def back_link
     if %w[training/pages content_pages questionnaires assessment_results].include?(params[:controller])
       govuk_back_link(
         href: training_module_path(params[:training_module_id]),
         text: "Back to Module #{training_module.position} overview",
       )
+    elsif params[:controller].eql?('contentful/static')
+      govuk_back_link href: url_for(:back)
     end
   end
 

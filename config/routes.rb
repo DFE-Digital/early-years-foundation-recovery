@@ -68,6 +68,11 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  scope module: 'contentful' do
+    resources :static, only: %i[show], as: :static_pages, path: ''
+  end
+
   # CMS  -----------------------------------------------------------------------
 
   # YAML -----------------------------------------------------------------------
@@ -77,7 +82,21 @@ Rails.application.routes.draw do
     resources :questionnaires, only: %i[show update]
     resources :assessment_results, only: %i[show new], path: 'assessment-result'
   end
-  # YAML -----------------------------------------------------------------------
 
-  get '/:id', to: 'static#show', as: :static
+  # to be removed and below used when migrating to contentful
+  static_regexp = %r{
+    accessibility-statement|
+    cookie-policy|
+    new-registration|
+    other-problems-signing-in|
+    privacy-policy|
+    terms-and-conditions|
+    sitemap|
+    settings/cookies|
+    whats-new|
+    wifi-and-data
+  }x
+  get '/:id', to: 'static#show', id: static_regexp, as: :static
+
+  # YAML -----------------------------------------------------------------------
 end
