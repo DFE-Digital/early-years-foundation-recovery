@@ -47,32 +47,17 @@ class ContentfulModuleProgress
   def skipped?
     if unvisited.none?
       false
-    # elsif key_event('module_complete') && unvisited.any?
-    elsif visited?(mod.thankyou_page) && unvisited.any? # seen last content page but has gaps
+    elsif completed? && unvisited.any? # seen last content page but has gaps
       true
     elsif gaps?
       true
     end
   end
 
-  # TODO: bypass #all? if a :module_complete event exists
-  #
   # @see ContentfulCourseProgress
-  # @return [Boolean] true if every page is visited (certificate excluded)
+  # @return [Boolean]
   def completed?
-    all?(mod.content) # key_event('module_complete').present?
-  end
-
-  # TODO: refactor once every user has a "module_complete" event
-  #
-  # Completed date for module
-  # @return [DateTime, nil]
-  def completed_at
-    page_name = mod.thankyou_page.name
-    page_event = module_item_events(page_name).first
-    named_event = key_event('module_complete')
-    event = named_event || page_event
-    event&.time
+    key_event('module_complete').present?
   end
 
   # @see ContentfulCourseProgress
@@ -84,6 +69,12 @@ class ContentfulModuleProgress
   # @return [Boolean] view event logged for page
   def visited?(page)
     module_item_events(page.name).present?
+  end
+
+  # Completed date for module
+  # @return [DateTime, nil]
+  def completed_at
+    key_event('module_complete')&.time
   end
 
 protected
