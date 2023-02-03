@@ -63,6 +63,11 @@ module EarlyYearsFoundationRecovery
     end
 
     # @return [Boolean]
+    def preview?
+      Rails.env.development? || ENV['WORKSPACE'].eql?('staging')
+    end
+
+    # @return [Boolean]
     def debug?
       Rails.env.development? || ENV['WORKSPACE'].eql?('content')
     end

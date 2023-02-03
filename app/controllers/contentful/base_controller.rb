@@ -1,1 +1,5 @@
-class Contentful::BaseController < ApplicationController; end
+class Contentful::BaseController < ApplicationController
+  before_action do
+    ContentfulModel.use_preview_api = Rails.application.preview?
+  end
+end

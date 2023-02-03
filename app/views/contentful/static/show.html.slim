@@ -2,8 +2,8 @@
   .govuk-grid-column-two-thirds-from-desktop
 
     h1= @model.heading
-    p= @model.subheading
     - if @model.subheading
-      .govuk-section-break.govuk-section-break--visible.govuk-section-break--m
+      p= @model.subheading
+      hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--m
 
     = translate_markdown(@model.body)

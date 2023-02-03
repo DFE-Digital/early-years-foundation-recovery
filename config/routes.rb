@@ -72,7 +72,7 @@ Rails.application.routes.draw do
   }x
   get '/:id', to: 'static#show', id: static_regexp, as: :static
 
-  constraints(ENV.fetch('CONTENTFUL', false) == true) do
+  constraints !Rails.application.cms? do
     scope module: 'contentful' do
       resources :static, only: %i[show], as: :static_pages, path: ''
     end
