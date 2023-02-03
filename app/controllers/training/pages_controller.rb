@@ -1,4 +1,4 @@
-class Training::PagesController < Training::BaseController
+class Training::PagesController < Contentful::BaseController
   # TODO: retire these helpers
   helper_method :module_item, :training_module, :note
 

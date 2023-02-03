@@ -30,25 +30,12 @@ RSpec.describe ContentfulModuleProgress, :cms do
 
     let(:completed_at) { progress.completed_at.to_s }
 
-    context 'when the named event is present' do
-      before do
-        create_event(user, 'module_complete', Time.zone.local(2025, 0o1, 0o1), 'alpha')
-        create_event(user, 'module_content_page', Time.zone.local(2026, 12, 31), 'alpha', '1-3-3-4')
-      end
-
-      it 'uses module_complete time' do
-        expect(completed_at).to eq '2025-01-01 00:00:00 UTC'
-      end
+    before do
+      create_event(user, 'module_complete', Time.zone.local(2025, 0o1, 0o1), 'alpha')
     end
 
-    context 'when the named event is not present' do
-      before do
-        create_event(user, 'module_content_page', Time.zone.local(2026, 12, 31), 'alpha', '1-3-3-4')
-      end
-
-      it 'uses final page view time' do
-        expect(completed_at).to eq '2026-12-31 00:00:00 UTC'
-      end
+    it 'uses module_complete time' do
+      expect(completed_at).to eq '2025-01-01 00:00:00 UTC'
     end
   end
 

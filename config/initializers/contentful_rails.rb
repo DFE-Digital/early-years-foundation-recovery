@@ -1,3 +1,4 @@
+require 'training/content'
 require 'training/module'
 require 'training/page'
 require 'training/question'

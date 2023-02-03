@@ -19,30 +19,27 @@ Contentful tasks are namespaced under `eyfs:cms`, list them using `rake --tasks 
 
 <https://github.com/contentful/contentful-migration/blob/master/README.md#reference-documentation>
 
-1. define child models (Page, Question, Video)
-2. define parent model (Training Module) - which links to children
-
-
-Symbol (Short text)
-Text (Long text)
-Integer
-Number
-Date
-Boolean
-Object
-Location
-RichText
-Array (requires items)
-Link (requires linkType)
-ResourceLink (requires allowedResources)
+- Symbol (Short text)
+- Text (Long text)
+- Integer
+- Number
+- Date
+- Boolean
+- Object
+- Location
+- RichText
+- Array (requires items)
+- Link (requires linkType)
+- ResourceLink (requires allowedResources)
 
 
 ## Preview
 
 [Preview](https://app.contentful.com/spaces/dvmeh832nmjc/settings/content_preview)
 
-Local
+**Local**
 
+- **Static Page**: `http://localhost:3000/{entry.fields.name}`
 - **Page**: `http://localhost:3000/modules/{entry.linkedBy.fields.name}/content-pages/{entry.fields.name}`
 - **Question**: `http://localhost:3000/modules/{entry.linkedBy.fields.name}/questionnaires/{entry.fields.name}`
 - **Video**: `http://localhost:3000/modules/{entry.linkedBy.fields.name}/content-pages/{entry.fields.name}`

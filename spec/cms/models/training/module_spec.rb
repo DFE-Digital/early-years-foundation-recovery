@@ -9,17 +9,13 @@ RSpec.describe Training::Module, :cms, type: :model do
 
   describe '.by_name' do
     it 'does not load linked entries' do
-      mod.content # tests cache loading
-
       expect(mod.pages).to be_empty
     end
   end
 
   describe 'attributes' do
     it '#title' do
-      mod.content # tests cache loading
-
-      expect(mod.title).to eq 'First Training Module (cms)'
+      expect(mod.title).to eq 'First Training Module'
     end
   end
 
@@ -27,8 +23,6 @@ RSpec.describe Training::Module, :cms, type: :model do
     let(:attributes) { TrainingModule.first.cms_module_params }
 
     it 'migrates fields' do
-      mod.content # tests cache loading
-
       expect(attributes.keys.sort).to eql(%i[
         criteria
         description

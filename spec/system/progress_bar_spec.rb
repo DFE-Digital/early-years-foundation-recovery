@@ -1,14 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Progress bar' do
-  include_context 'with user' unless Rails.application.cms? # disable login until post login page doesn't stall
+  include_context 'with user'
   include_context 'with progress'
 
   context 'when on intro section' do
     describe 'interruption page' do
       before do
-        create(:user, :registered) if Rails.application.cms? # remove and use 'with user'
-
         visit 'modules/alpha/content-pages/what-to-expect'
       end
 

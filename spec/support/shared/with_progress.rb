@@ -1,9 +1,7 @@
 RSpec.shared_context 'with progress' do
-
+  let(:user) { create(:user, :registered) }
+  let(:tracker) { Ahoy::Tracker.new(user: user, controller: 'content_pages') }
   if Rails.application.cms?
-
-    let(:user) { create(:user, :registered) }
-    let(:tracker) { Ahoy::Tracker.new(user: user, controller: 'content_pages') }
 
     let(:alpha) { Training::Module.by_name(:alpha) }
     let(:bravo) { Training::Module.by_name(:bravo) }
@@ -99,7 +97,7 @@ RSpec.shared_context 'with progress' do
       })
     end
 
-  private
+      private
 
     def calculate_ttc
       CalculateModuleState.new(user: user).call
@@ -119,9 +117,6 @@ RSpec.shared_context 'with progress' do
     end
 
   else # ===================================================================================================
-
-    let(:user) { create(:user, :registered) }
-    let(:tracker) { Ahoy::Tracker.new(user: user, controller: 'content_pages') }
 
     let(:alpha) { TrainingModule.find_by(name: 'alpha') }
     let(:bravo) { TrainingModule.find_by(name: 'bravo') }
@@ -205,7 +200,7 @@ RSpec.shared_context 'with progress' do
       })
     end
 
-  private
+      private
 
     def calculate_ttc
       CalculateModuleState.new(user: user).call
@@ -224,5 +219,4 @@ RSpec.shared_context 'with progress' do
     end
 
   end
-
 end

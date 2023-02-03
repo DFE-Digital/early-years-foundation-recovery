@@ -1,4 +1,4 @@
-class Training::ModulesController < Training::BaseController
+class Training::ModulesController < Contentful::BaseController
   # before_action :authenticate_registered_user!, only: :show
 
   def index

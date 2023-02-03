@@ -17,12 +17,13 @@ module.exports = function(migration) {
     required: true
   })
 
-  // type
+  /* type is implicit
   video.createField('page_type', {
     name: 'Page type',
     type: 'Symbol',
     required: true
   })
+  */
 
   video.createField('training_module', {
     name: 'Training module',

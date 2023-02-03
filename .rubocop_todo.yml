@@ -6,6 +6,25 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
+# Offense count: 1
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: AllowForAlignment.
+Layout/CommentIndentation:
+  Exclude:
+    - 'app/services/contentful_course_progress.rb'
+
+# Offense count: 1
+Lint/MixedRegexpCaptureTypes:
+  Exclude:
+    - 'lib/upload.rb'
+
+# Offense count: 2
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: AllowUnusedKeywordArguments, IgnoreEmptyMethods, IgnoreNotImplementedMethods.
+Lint/UnusedMethodArgument:
+  Exclude:
+    - 'app/decorators/contentful_module_overview_decorator.rb'
+
 # Offense count: 2
 # Configuration parameters: Database, Include.
 # SupportedDatabases: mysql, postgresql
@@ -20,14 +39,6 @@ Rails/BulkChangeTable:
 Rails/CreateTableWithTimestamps:
   Exclude:
     - 'db/migrate/20220419121105_create_ahoy_visits_and_events.rb'
-
-# Offense count: 2
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: Include.
-# Include: app/**/*.rb, config/**/*.rb, db/**/*.rb, lib/**/*.rb
-Rails/Output:
-  Exclude:
-    - 'app/models/training/module.rb'
 
 # Offense count: 2
 # This cop supports unsafe autocorrection (--autocorrect-all).

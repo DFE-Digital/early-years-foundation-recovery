@@ -1,12 +1,13 @@
-# USE memcache
-
-require_relative 'content'
-
 module Training
   class Module < Content
     # @return [String]
     def self.content_type_id
       'trainingModule'
+    end
+
+    # TODO: deprecate
+    def module_items
+      content
     end
 
     # has_many :pages, class_name: 'Training::Page'

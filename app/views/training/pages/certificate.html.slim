@@ -26,7 +26,7 @@ h3 Certificate of achievement
 h2= mod.title
 
 - if @module_progress.completed?
-  p= t('date_completed', date: @module_progress.module_completed_at)
+  p= t('date_completed', date: @module_progress.completed_at)
 
 p This module has covered:
 
@@ -43,7 +43,7 @@ h3 Certified by the Department for Education
 .noprint
   .govuk-button-group
     = print_button
-    = govuk_link_to 'Download certificate', training_module_content_page_path(mod.name, mod.certificate_page, format: :pdf), aria: { describedby: 'pdf-details' }
+    = govuk_link_to 'Download certificate', training_module_content_page_path(mod.name, mod.certificate_page.name, format: :pdf), aria: { describedby: 'pdf-details' }
 
   p#pdf-details.govuk-body
     span aria-label='file type'

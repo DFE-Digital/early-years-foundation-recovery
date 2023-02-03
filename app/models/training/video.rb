@@ -1,10 +1,13 @@
-require_relative 'content'
-
 module Training
   class Video < Content
     # @return [String]
     def self.content_type_id
       'video'
+    end
+
+    # @return [String] implicit type
+    def page_type
+      'video_page'
     end
 
     # @return [String]

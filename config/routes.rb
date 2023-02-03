@@ -59,12 +59,24 @@ Rails.application.routes.draw do
     end
   end
 
-  # YAML -----------------------------------------------------------------------
+  # COURSE ---------------------------------------------------------------------
+
+  constraints !Rails.application.cms? do # NB: enabled if false
+    scope module: 'training' do
+      resources :modules, only: %i[show], as: :training_modules do
+        resources :pages, only: %i[index show], path: 'content-pages'
+        resources :questionnaires, only: %i[show update]
+      end
+    end
+  end
+
   resources :modules, only: %i[show], as: :training_modules, controller: :training_modules do
     resources :content_pages, only: %i[index show], path: 'content-pages'
     resources :questionnaires, only: %i[show update]
     resources :assessment_results, only: %i[show new], path: 'assessment-result'
   end
+
+  # STATIC ---------------------------------------------------------------------
 
   # to be removed and below used when migrating to contentful
   static_regexp = %r{
@@ -80,20 +92,8 @@ Rails.application.routes.draw do
     wifi-and-data
   }x
   get '/:id', to: 'static#show', id: static_regexp, as: :static
-  # YAML -----------------------------------------------------------------------
-
-  # CMS  -----------------------------------------------------------------------
-  constraints !Rails.application.cms? do # NB: enabled if false
-    scope module: 'training' do
-      resources :modules, only: %i[show], as: :training_modules do
-        resources :pages, only: %i[index show], path: 'content-pages'
-        resources :questionnaires, only: %i[show update]
-      end
-    end
-  end
 
   scope module: 'contentful' do
     resources :static, only: %i[show], as: :static_pages, path: ''
   end
-  # CMS  -----------------------------------------------------------------------
 end

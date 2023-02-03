@@ -1,5 +1,3 @@
-require_relative 'content'
-
 module Training
   class Question < Content
     # @return [String]

@@ -22,7 +22,7 @@ services:
       - DOMAIN=app:3000
       - RAILS_SERVE_STATIC_FILES=true
       # - CONTENTFUL=
-      - CONTENTFUL=y
+      - CONTENTFUL=true
     volumes:
       - .:/srv
     tty: true

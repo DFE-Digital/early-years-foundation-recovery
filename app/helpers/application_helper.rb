@@ -52,8 +52,7 @@ module ApplicationHelper
   # @param mod [Training::Module]
   # @return [ContentfulModuleProgress]
   def cms_module_progress(mod)
-    # ContentfulModuleProgress.new(user: current_user, mod: mod)
-    ContentfulModuleProgress.new(user: User.first, mod: mod) # NB: work on transition to Contentful without requiting authentication
+    ContentfulModuleProgress.new(user: current_user, mod: mod)
   end
 
   # @param mod [TrainingModule]

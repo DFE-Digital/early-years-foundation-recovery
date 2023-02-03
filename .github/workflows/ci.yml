@@ -69,14 +69,13 @@ jobs:
       -
         name: Compile assets
         run: bin/rails assets:precompile
-      # Temporarily disable lint check
-      # -
-      #   name: Run rubocop
-      #   run: bundle exec rubocop
+      -
+        name: Run rubocop
+        run: bundle exec rubocop
       -
         name: Run test suite (YAML)
         run: bundle exec rspec
-      -
+      - # Test dedicated Contentful services, decorators and CMS powered content
         name: Run test suite (CMS)
         env:
           CONTENTFUL: true

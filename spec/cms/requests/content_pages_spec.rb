@@ -2,8 +2,6 @@ require 'rails_helper'
 
 RSpec.describe 'ContentPages', :cms, type: :request do
   before do
-    skip 'WIP' unless Rails.application.cms?
-
     sign_in create(:user, :registered)
   end
 
