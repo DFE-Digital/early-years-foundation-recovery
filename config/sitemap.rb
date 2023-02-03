@@ -42,6 +42,8 @@ SitemapGenerator::Sitemap.create do
     add static_path(path)
   end
 
+  add static_page_path('promotional-materials')
+
   # settings
   add setting_path('cookie-policy')
 
