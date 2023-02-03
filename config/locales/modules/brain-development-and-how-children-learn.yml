@@ -784,6 +784,16 @@ en:
 
           In more recent years, ZPD has also become known as the zone of potential development.
 
+      2-2-2-2video:
+        heading: |
+          Supporting children to learn and develop new skills
+        body: |
+          This video explains gives some practical tips to support a babies language development in your setting in order for them to learn, rehearse and develop future language skills.
+        video:
+          id: 795566849
+          title: Supporting children to learn and develop new skills
+          provider: vimeo
+
       2-2-2-3:
         heading: |
           Theories of how children learn: Skinner
