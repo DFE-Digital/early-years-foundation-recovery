@@ -11,13 +11,15 @@ RSpec.describe 'Static page', type: :request do
 
   specify { expect('/privacy-policy').to be_successful }
 
+  specify { expect('/promotional-materials').to be_successful }
+
   specify { expect('/terms-and-conditions').to be_successful }
 
   specify { expect('/users/timeout').to be_successful }
 
-  specify { expect('/wifi-and-data').to be_successful }
-
   specify { expect('/whats-new').to be_successful }
+
+  specify { expect('/wifi-and-data').to be_successful }
 
   context 'with errors' do
     specify do
