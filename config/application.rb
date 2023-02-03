@@ -45,9 +45,26 @@ module EarlyYearsFoundationRecovery
     config.active_record.yaml_column_permitted_classes = [Symbol]
     config.action_view.sanitized_allowed_tags = ALLOWED_TAGS
 
+    # Contentful
+    config.contentful_space                   = ENV.fetch('CONTENTFUL_SPACE', credentials.dig(:contentful, :space))
+    config.contentful_delivery_access_token   = ENV.fetch('CONTENTFUL_DELIVERY_TOKEN', credentials.dig(:contentful, :delivery_access_token))
+    config.contentful_preview_access_token    = ENV.fetch('CONTENTFUL_PREVIEW_TOKEN', credentials.dig(:contentful, :preview_access_token))
+    config.contentful_management_access_token = ENV.fetch('CONTENTFUL_MANAGEMENT_TOKEN', credentials.dig(:contentful, :management_access_token))
+    config.contentful_environment             = ENV.fetch('CONTENTFUL_ENVIRONMENT', credentials.dig(:contentful, :environment))
+
     # @return [Boolean]
     def live?
       ENV['WORKSPACE'].eql?('production')
+    end
+
+    # @return [Boolean]
+    def cms?
+      ENV['CONTENTFUL'].present?
+    end
+
+    # @return [Boolean]
+    def preview?
+      Rails.env.development? || ENV['WORKSPACE'].eql?('staging')
     end
 
     # @return [Boolean]

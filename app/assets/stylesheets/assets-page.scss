@@ -1,0 +1,29 @@
+.resources-container {
+  section {
+    display: inline-block;
+    padding-bottom: 60px;
+    width: 100%;
+  }
+  .thumbnail--image {
+    outline: 5px solid rgba(11,12,12,0.1);
+    box-shadow: 0 2px 2px rgb(11 12 12 / 40%);
+    float: left;
+    width: 99px;
+    @include govuk-responsive-margin(6, 'right');
+    
+    &:focus {
+      @include govuk-focused-text;
+    }
+  }
+
+  h3 {
+    display: inline;
+    font-size: 24px;
+    font-weight: 300;
+  }
+  
+  .details {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+}
