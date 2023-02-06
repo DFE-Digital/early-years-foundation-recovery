@@ -2,7 +2,7 @@
   - footer.navigation do
     .govuk-footer__section.govuk-grid-column-two-thirds
       ul.govuk-footer__list.govuk-footer__list--columns-3
-        - Contentful::Static.find_by(addToFooter: true).load.each do |page|
+        - footer_static_pages.each do |page|
           li.govuk-footer__list-item
             = govuk_link_to page.heading, static_page_path(page.name), class: 'govuk-footer__link'
 

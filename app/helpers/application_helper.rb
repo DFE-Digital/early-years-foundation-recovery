@@ -74,4 +74,8 @@ module ApplicationHelper
   def calculate_module_state
     CalculateModuleState.new(user: current_user).call
   end
+
+  def footer_static_pages
+    Contentful::Static.find_by(addToFooter: true).load
+  end
 end
