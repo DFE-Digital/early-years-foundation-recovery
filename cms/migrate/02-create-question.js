@@ -38,17 +38,27 @@ module.exports = function(migration) {
 
   question.createField('submodule', {
     name: 'Submodule',
-    type: 'Integer'
+    type: 'Integer',
+    required: true
   })
 
   question.createField('topic', {
     name: 'Topic',
-    type: 'Integer'
+    type: 'Integer',
+    required: true
   })
 
+  question.createField('heading', {
+    name: 'Heading',
+    type: 'Text',
+    required: true
+  })
+
+  /* UNUSED */
   question.createField('body', {
     name: 'Body',
-    type: 'Text'
+    type: 'Text',
+    required: true
   })
   
   question.createField('assessment_succeed', {

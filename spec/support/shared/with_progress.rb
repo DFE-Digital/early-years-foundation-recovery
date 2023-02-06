@@ -1,8 +1,9 @@
 RSpec.shared_context 'with progress' do
   let(:user) { create(:user, :registered) }
   let(:tracker) { Ahoy::Tracker.new(user: user, controller: 'content_pages') }
-  if Rails.application.cms?
 
+  # Contentful ===================================================================================================
+  if Rails.application.cms?
     let(:alpha) { Training::Module.by_name(:alpha) }
     let(:bravo) { Training::Module.by_name(:bravo) }
     let(:charlie) { Training::Module.by_name(:charlie) }

@@ -101,7 +101,7 @@ private
 
   # @see ContentHelper#progress_node
   #
-  # @param node_item [ModuleItem]
+  # @param node_item [Module::Content]
   # @return [Hash{Symbol => String,Symbol}]
   def node_icon_params(node_item)
     if node_completed?(node_item)

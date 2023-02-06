@@ -19,14 +19,28 @@ module Training
       load_children(0).order(:position).load!.to_a
     end
 
-    # @return [Training::Module]
+    # cached queries ---------------------------------
+    #
+    # TODO: use webhooks to expire cached result
+    # TODO: rely solely on application caching (currently only enabled in production)
+    #
+    #   def clear_cache_for(item_id)
+    #     cache_key = timestamp_cache_key(item_id)
+    #     Rails.cache.delete(cache_key)
+    #   end
+
+    # @return [Training::Module] cached result
     def self.by_id(id)
-      load_children(0).find(id)
+      fetch_or_store(id) do
+        load_children(0).find(id)
+      end
     end
 
-    # @return [Training::Module]
+    # @return [Training::Module] cached result
     def self.by_name(name)
-      load_children(0).find_by(name: name).first
+      fetch_or_store(name.to_s) do
+        load_children(0).find_by(name: name.to_s).first
+      end
     end
 
     # entry references ---------------------------------
@@ -34,19 +48,23 @@ module Training
     # @example
     #   mod.thumbnail => "//images.ctfassets.net/dvmeh832nmjc/6ICCjd5b2gVc1jMHwgQHpH/a074dbf76e101efcca35dac2e1de6638/1-1-1-1-869488712.jpg"
     #
-    # @return [String, nil]
+    # @return [String, nil] cached result
     def thumbnail_url
       return '//external-image-resource-placeholder' if fields[:image].blank?
 
-      ContentfulModel::Asset.find(fields[:image].id).url
+      fetch_or_store(fields[:image].id) do
+        ContentfulModel::Asset.find(fields[:image].id).url
+      end
     end
 
-    # @return [Training::Module, nil]
+    # @return [Training::Module, nil] cached result
     def depends_on
       self.class.by_id(fields[:depends_on].id) if fields[:depends_on]
     end
 
-    # @return [Array<Training::Page, Training::Video, Training::Question>] source of truth for content order
+    # source of truth for content order
+    #
+    # @return [Array<Training::Page, Training::Video, Training::Question>] cached result
     def content
       return [] if draft?
 
@@ -60,10 +78,11 @@ module Training
       content.group_by(&:submodule)
     end
 
-    def content_by_topic
+    # @return [Hash{ Array<Integer> => Array<Module::Content> }]
+    def content_by_submodule_topic
       content.group_by { |page|
-        [page.submodule, page.topic] unless page.topic.zero? # or nil? if we remove default to 0
-      }.except(0)
+        [page.submodule, page.topic] unless page.topic.zero?
+      }.except(nil)
     end
 
     # @return [Integer]

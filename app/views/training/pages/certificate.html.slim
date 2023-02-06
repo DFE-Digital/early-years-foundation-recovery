@@ -18,7 +18,7 @@
 h3 Certificate of achievement
 
 - if @module_progress.completed?
-  h1= current_user.name
+  h1.data-hj-suppress= current_user.name
   p has completed the following module:
 - else
   h1 Your name will appear here
@@ -26,7 +26,7 @@ h3 Certificate of achievement
 h2= mod.title
 
 - if @module_progress.completed?
-  p= t('date_completed', date: @module_progress.completed_at)
+  p= t('date_completed', date: certificate_date(@module_progress.completed_at))
 
 p This module has covered:
 

@@ -15,7 +15,7 @@ class ContentfulModuleOverviewDecorator < DelegateClass(ContentfulModuleProgress
 
   # @return [Hash{Symbol => Mixed}]
   def sections
-    submodules.each.with_index(1).map do |(submodule, content_items), position|
+    mod.content_by_submodule.each.with_index(1).map do |(submodule, content_items), position|
       {
         heading: submodule.zero? ? 'Module introduction' : content_items.first.heading,
         position: position,
@@ -51,17 +51,29 @@ private
   #
   # @return [Array<String, Symbol, Array>]
   def subsections(submodule:, items:)
+
+    # binding.pry
+
+
+    items_without_submodule_intro = submodule.zero? ? items : items.drop(1)
+
+    # @see content_by_submodule and content_by_topic
+    topics = items_without_submodule_intro.select { |page| page.topic.positive? }
+
+    topics.map do |content_page|
+      section_content(submodule: submodule, subsection_item: content_page)
+    end
+
+
     # items_without_submodule_intro = submodule.zero? ? items : items.drop(1)
 
     # items_without_submodule_intro.select(&:topic?).map do |subsection|
     #   section_content(submodule: submodule, subsection_item: subsection)
     # end
-
-    []
   end
 
-  # @param submodule [String]
-  # @param subsection_item [ModuleItem]
+  # @param submodule [Integer]
+  # @param subsection_item [Module::Content]
   #
   # @return [Array<Array>]
   def section_content(submodule:, subsection_item:)
@@ -93,34 +105,32 @@ private
     }
   end
 
-  # @param submodule [String]
-  # @param subsection_item [ModuleItem]
+  # @param submodule [Integer]
+  # @param subsection_item [Module::Content]
   #
   # @return [Boolean]
   def clickable?(submodule:, subsection_item:)
-    return all?([subsection_item]) if submodule.nil?
+    # intros are being removed
+    # return all?([subsection_item]) if submodule.zero?
 
-    submodule_intro = mod.module_items_by_submodule(submodule).first
+    submodule_intro = fetch_submodule(submodule).first
     return false unless visited?(submodule_intro)
 
-    current_topic = find_topic(subsection_item.topic_name, submodule)
-    current_topic_items = current_topic.values.first.to_a
-
-    all?(current_topic_items) if current_topic
+    current_topic_items = fetch_submodule_topic(submodule, subsection_item.topic)
+    all?(current_topic_items)
   end
 
-  # @param topic_num [String]
-  # @param submodule_num [String]
-  #
-  # @return [Array<Array>] [1,2] [item, item, item]
-  def find_topic(topic_num, submodule_num)
-    mod.items_by_topic.select do |(match_sub_num, match_topic_num), _items|
-      match_sub_num.eql?(submodule_num) && match_topic_num.eql?(topic_num)
-    end
+
+  # @param submodule [Integer]
+  # @return [Array<Training::Content>]
+  def fetch_submodule(submodule)
+    mod.content_by_submodule.fetch(submodule)
   end
 
-  # @return [Hash]
-  def submodules
-    mod.content_by_submodule
+  # @param submodule [Integer]
+  # @param topic [Integer]
+  # @return [Array<Training::Content>]
+  def fetch_submodule_topic(submodule, topic)
+    mod.content_by_submodule_topic.fetch([submodule, topic])
   end
 end

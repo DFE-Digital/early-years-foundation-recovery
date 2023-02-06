@@ -20,11 +20,11 @@ module Training
       load_children(0).find(id)
     end
 
-    # @return [Training::Module, nil]
+    # @return [Training::Module, nil] cached
     def parent
       return unless fields[:training_module]
 
-      fetch_or_store(fields[:training_module].id) { Training::Module.by_id(fields[:training_module].id) }
+      Training::Module.by_id(fields[:training_module].id)
     end
 
     # @return [Training::Page, Training::Video, Training::Question, nil]
