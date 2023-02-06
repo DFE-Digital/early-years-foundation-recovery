@@ -132,7 +132,7 @@ RSpec.describe ModuleProgressBarDecorator do
         end
 
         context 'and on last page' do
-          it 'urrent node has green tick, next nodes have grey circle' do
+          it 'current node has green tick, next nodes have grey circle' do
             view_pages_upto_formative_question(alpha)
             expect(attribute).to eq [completed, not_started, not_started]
           end
