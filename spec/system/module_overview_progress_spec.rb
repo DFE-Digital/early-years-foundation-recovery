@@ -12,10 +12,7 @@ RSpec.describe 'Module overview page progress' do
     it 'all the indicators are "not started"' do
       within '#section-content-1' do
         expect(page).to have_content 'not started', count: 4
-      end
-
-      within '#section-content-1' do
-        expect(page).to have_content('1-1-1').and have_content('not started')
+        expect(page).to have_content('1-1-1')
         expect(page).not_to have_link('1-1-1')
       end
 
@@ -61,7 +58,7 @@ RSpec.describe 'Module overview page progress' do
 
   context 'when the first submodule intro is reached' do
     before do
-      start_first_submodule(alpha)
+      start_module(alpha)
       visit '/modules/alpha'
     end
 

@@ -38,7 +38,7 @@ class ModuleProgress
   # Last visited module item with fallback to first item
   # @return [ModuleItem]
   def resume_page
-    unvisited.first&.previous_item || mod.module_items.reject(&:interruption_page?).first
+    unvisited.first&.previous_item || mod.first_content_page
   end
 
   # Identify new content that has not been seen and would effect module state

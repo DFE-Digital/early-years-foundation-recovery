@@ -30,7 +30,7 @@ RSpec.describe ModuleProgressBarDecorator do
 
       context 'when a submodule node introduction is reached' do
         it 'emboldens submodule 1 once viewed' do
-          start_first_submodule(alpha)
+          start_module(alpha)
           expect(attribute).to eq [style, nil, nil]
         end
 
@@ -63,7 +63,7 @@ RSpec.describe ModuleProgressBarDecorator do
       context 'when in the first submodule' do
         context 'and on the intro' do
           it 'all lines are grey' do
-            start_first_submodule(alpha)
+            start_module(alpha)
             expect(attribute).to eq [nil, grey, grey]
           end
         end
@@ -118,21 +118,21 @@ RSpec.describe ModuleProgressBarDecorator do
 
       context 'when in submodule section' do
         context 'and on first page' do
-          it 'previous nodes have green tick, this and next nodes have grey circle' do
-            start_first_submodule(alpha)
+          it 'the first node has a green circle and next nodes have grey circles' do
+            start_module(alpha)
             expect(attribute).to eq [started, not_started, not_started]
           end
         end
 
         context 'and on neither first nor last page' do
-          it 'previous nodes have green tick, this node has green circle and next nodes have grey circle' do
+          it 'this node has green circle and next nodes have grey circle' do
             start_first_topic(alpha)
             expect(attribute).to eq [started, not_started, not_started]
           end
         end
 
         context 'and on last page' do
-          it 'previous and current nodes have green tick, next nodes have grey circle' do
+          it 'urrent node has green tick, next nodes have grey circle' do
             view_pages_upto_formative_question(alpha)
             expect(attribute).to eq [completed, not_started, not_started]
           end
@@ -141,7 +141,7 @@ RSpec.describe ModuleProgressBarDecorator do
 
       context 'when in summary section' do
         context 'and on first page' do
-          it 'previous nodes have green tick, last node has green circle' do
+          it 'first two nodes have green tick, last node has green circle' do
             view_summary_intro(alpha)
             expect(attribute).to eq [completed, completed, started]
           end
@@ -167,7 +167,7 @@ RSpec.describe ModuleProgressBarDecorator do
   describe '#furthest_section' do
     context 'when on first subodule section' do
       specify do
-        start_first_submodule(alpha)
+        start_module(alpha)
         expect(decorator.furthest_section).to eq 'You have reached section 1 of 3: The first submodule'
       end
     end

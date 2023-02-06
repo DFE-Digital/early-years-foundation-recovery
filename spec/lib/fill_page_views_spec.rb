@@ -7,7 +7,7 @@ RSpec.describe FillPageViews do
   include_context 'with progress'
   context 'without skipped pages' do
     before do
-      start_first_submodule(alpha)
+      start_module(alpha)
     end
 
     it 'has no effect' do

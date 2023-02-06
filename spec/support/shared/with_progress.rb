@@ -11,10 +11,6 @@ RSpec.shared_context 'with progress' do
     view_pages_upto(mod, 'sub_module_intro')
   end
 
-  def start_first_submodule(mod)
-    view_pages_upto(mod, 'sub_module_intro')
-  end
-
   def start_first_topic(mod)
     view_pages_upto(mod, 'text_page')
   end
@@ -39,8 +35,8 @@ RSpec.shared_context 'with progress' do
     create(:user_assessment, user_id: user.id, module: mod.name)
   end
 
-  def view_pages_upto_formative_question(mod)
-    view_pages_upto(mod, 'formative_questionnaire')
+  def view_pages_upto_formative_question(mod, count = 1)
+    view_pages_upto(mod, 'formative_questionnaire', count)
   end
 
   def view_certificate_page(mod)
