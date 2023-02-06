@@ -6,7 +6,7 @@ RSpec.describe 'Content page' do
 
   context 'when on a content page in the first module' do
     before do
-      start_first_submodule(alpha)
+      start_module(alpha)
       visit 'modules/alpha/content-pages/1-1'
     end
 
@@ -17,7 +17,7 @@ RSpec.describe 'Content page' do
 
   context 'when on a content page in the second module' do
     before do
-      start_first_submodule(bravo)
+      start_module(bravo)
       visit 'modules/bravo/content-pages/1-1'
     end
 

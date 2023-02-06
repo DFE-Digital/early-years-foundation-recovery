@@ -17,10 +17,6 @@
 alpha:
   what-to-expect:
     type: interruption_page
-  before-you-start:
-    type: icons_page
-  intro:
-    type: module_intro
 
   # ----------------------------------------------------------------------------
   # Submodule 1
