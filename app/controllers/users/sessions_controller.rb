@@ -8,12 +8,12 @@ protected
       if resource.display_whats_new?
         resource.display_whats_new = false
         resource.save!
-        static_path('whats-new')
+        static_page_path('whats-new')
       else
         my_modules_path
       end
     elsif resource.private_beta_registration_complete?
-      static_path('new-registration')
+      static_page_path('new-registration')
     else
       edit_registration_name_path
     end

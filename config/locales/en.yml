@@ -496,7 +496,7 @@ en:
         # FIXME: routing
         cookie_policy: Cookie policy
         cookie-policy: Cookie policy
-    static:
+    contentful/static:
       show:
         accessibility-statement: Accessibility statement
         new-registration: Update your registration details

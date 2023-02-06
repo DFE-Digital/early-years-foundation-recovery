@@ -14,7 +14,7 @@
       = f.govuk_check_boxes_fieldset :terms_and_conditions_agreed_at,
         legend: { class: 'govuk-visually-hidden', text: 'Terms and conditions'}, classes: 'light-grey-box' do
         p.govuk-body
-          | To use this service, you must accept the #{govuk_link_to 'terms and conditions', static_path('terms-and-conditions')} and #{govuk_link_to 'privacy policy', static_path('privacy-policy')}.
+          | To use this service, you must accept the #{govuk_link_to 'terms and conditions', static_page_path('terms-and-conditions')} and #{govuk_link_to 'privacy policy', static_page_path('privacy-policy')}.
         = f.terms_and_conditions_check_box
 
     = f.govuk_submit 'Continue'

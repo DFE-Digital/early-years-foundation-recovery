@@ -57,21 +57,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # to be removed and below used when migrating to contentful
-  static_regexp = %r{
-    accessibility-statement|
-    cookie-policy|
-    new-registration|
-    other-problems-signing-in|
-    privacy-policy|
-    terms-and-conditions|
-    sitemap|
-    settings/cookies|
-    whats-new|
-    wifi-and-data
-  }x
-  get '/:id', to: 'static#show', id: static_regexp, as: :static
-
   constraints !Rails.application.cms? do
     scope module: 'contentful' do
       resources :static, only: %i[show], as: :static_pages, path: ''

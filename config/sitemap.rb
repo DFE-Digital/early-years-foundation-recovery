@@ -39,7 +39,7 @@ SitemapGenerator::Sitemap.create do
     whats-new
     wifi-and-data
   ].each do |path|
-    add static_path(path)
+    add static_page_path(path)
   end
 
   add static_page_path('promotional-materials')

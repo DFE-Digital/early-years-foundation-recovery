@@ -12,12 +12,12 @@ RSpec.describe Users::SessionsController, type: :controller do
   it 'redirects to whats new for registered user with flag turned on' do
     user = create :user, :registered, display_whats_new: true
     post :create, params: { user: { email: user.email, password: 'StrongPassword123' } }
-    expect(response).to redirect_to(static_path('whats-new'))
+    expect(response).to redirect_to(static_page_path('whats-new'))
   end
 
   it 'redirects to new registration if previously registered' do
     user = create :user, :registered, registration_complete: false, private_beta_registration_complete: true
     post :create, params: { user: { email: user.email, password: 'StrongPassword123' } }
-    expect(response).to redirect_to(static_path('new-registration'))
+    expect(response).to redirect_to(static_page_path('new-registration'))
   end
 end
