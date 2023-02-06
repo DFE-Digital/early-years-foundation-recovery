@@ -34,8 +34,6 @@ module-4:
     type: text_page
   4-1-1-4a:
     type: text_page
-  4-1-1-4video:
-    type: video_page
   4-1-1-4b:
     type: formative_questionnaire
   4-1-1-4c:

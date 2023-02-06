@@ -439,15 +439,6 @@ en:
           - How do you make sure you're aware of individual children's starting points and take these into account when planning?
 
           $BRAIN
-      4-1-1-4video:
-        heading: |
-          Examples of language development
-        body: |
-          This video gives some examples of what speech sounds like and how it develops at different ages.
-        video:
-          id:
-          title: Examples of language development
-          provider: vimeo
 
       4-1-1-4b:
         # question
