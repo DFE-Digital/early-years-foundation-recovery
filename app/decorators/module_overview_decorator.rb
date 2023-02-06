@@ -106,8 +106,8 @@ private
     all?(current_topic_items) if current_topic
   end
 
-  # @param current_top_num [String]
-  # @param current_sub_num [String]
+  # @param topic_num [String]
+  # @param submodule_num [String]
   #
   # @return [Array<Array>] [1,2] [item, item, item]
   def find_topic(topic_num, submodule_num)
