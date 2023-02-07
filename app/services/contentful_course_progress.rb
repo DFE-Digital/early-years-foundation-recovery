@@ -40,7 +40,7 @@ class ContentfulCourseProgress
   # @return [Array<String>]
   def debug_summary
     training_modules.map do |mod|
-        # published at: #{mod.published_at}
+      # published at: #{mod.published_at}
       <<~SUMMARY
         title: #{mod.title}
         position: #{mod.position}

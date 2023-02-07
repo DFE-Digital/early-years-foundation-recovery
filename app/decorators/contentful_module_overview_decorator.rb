@@ -44,9 +44,11 @@ class ContentfulModuleOverviewDecorator < DelegateClass(ContentfulModuleProgress
 
   # @return [String]
   def debug_summary
-    <<~NODE
-    TODO: simplify views move overview debugging here
-    NODE
+    mod.content_by_submodule_topic.map { |(submodule, topic), items|
+      <<~NODE
+      #{submodule}.#{topic}: #{status(items)}
+      NODE
+    }.join
   end
 
 private
@@ -62,7 +64,7 @@ private
       if submodule.zero?
         items
       else
-        items.drop(1).reject { |page| page.topic_page_name? }
+        items.drop(1).reject(&:topic_page_name?)
       end
 
     topics.map do |content_page|

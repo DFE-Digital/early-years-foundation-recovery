@@ -46,7 +46,7 @@ RSpec.shared_context 'with progress' do
     end
 
     # @param mod [Training::Module]
-    def view_pages_upto_formative_question(mod, count=1)
+    def view_pages_upto_formative_question(mod, count = 1)
       view_pages_upto(mod, 'formative_questionnaire', count)
     end
 
@@ -149,7 +149,7 @@ RSpec.shared_context 'with progress' do
       create(:user_assessment, user_id: user.id, module: mod.name)
     end
 
-    def view_pages_upto_formative_question(mod, count=1)
+    def view_pages_upto_formative_question(mod, count = 1)
       view_pages_upto(mod, 'formative_questionnaire', count)
     end
 

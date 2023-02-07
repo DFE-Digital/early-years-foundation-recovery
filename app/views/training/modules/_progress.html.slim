@@ -1,12 +1,19 @@
 pre.debug_dump
-  | Module=
-  = @mod.name
+  strong Module
   br
-  | Questions=
-  = @mod.questionnaires.count
+  = @mod.name
+  '
+  = @mod.id
+  br
   br
 
-  - @mod.module_items.each.with_index(1) do |item, pos|
+  strong Questions
+  br
+  = @mod.questions.count
+  br
+  br
+
+  - @mod.content.each.with_index(1) do |item, pos|
     - if current_user.events.where_properties(training_module_id: @mod.name, id: item.name).any?
       | [x]
     - else
@@ -17,13 +24,11 @@ pre.debug_dump
     strong
       |  #{item.name}
       '
-    - if item.topic_name
-      em
-        | (submodule #{item.submodule_name} / topic #{item.topic_name}.#{item.page_name})
-    - elsif item.submodule_name
-      em
-        | (submodule #{item.submodule_name})
+    em
+      | (submodule #{item.submodule} / topic #{item.topic})
 
     '
     = page_number(**item.pagination)
+    '
+    = "- [#{item.page_type}]"
     br

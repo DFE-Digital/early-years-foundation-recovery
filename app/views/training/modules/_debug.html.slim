@@ -13,13 +13,5 @@
       li certificate: #{@mod.certificate_page.name}
 
     hr
-    h4 Submodule
-    ul
-      - @mod.content_by_submodule.map do |sub_num, items|
-        li #{sub_num}: #{@module_progress.status(items)}
-
-    hr
-    h4 Topic
-    ul
-      - @mod.content_by_submodule_topic.map do |(sub_num, topic_num), items|
-        li #{sub_num}.#{topic_num}: #{@module_progress.status(items)}
+    h4 Progress
+    = @module_progress.debug_summary
