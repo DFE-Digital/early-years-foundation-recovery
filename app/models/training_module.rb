@@ -40,7 +40,7 @@ class TrainingModule < YamlBase
   # @return [Array<Questionnaire>]
   def questionnaires
     module_items
-      .select { |item| item.type.include?('questionnaire') }
+      .select { |item| item.type.include?('question') }
       .map { |item| Questionnaire.find_by!(training_module: name, name: item.name) }
   end
 
@@ -197,6 +197,12 @@ class TrainingModule < YamlBase
   # @return [String]
   def card_anchor
     "#module-#{id}-#{title.downcase.parameterize}"
+  end
+
+  # CMS migration --------------------------------------------------------------
+
+  def content
+    module_items
   end
 
   # Attribute conversion to Contentful format

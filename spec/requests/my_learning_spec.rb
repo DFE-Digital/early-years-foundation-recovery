@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe 'My modules', type: :request do
   describe 'GET /my-modules' do
     before do
-      skip 'WIP' if Rails.application.cms?
-
       sign_in create(:user, :registered)
     end
 

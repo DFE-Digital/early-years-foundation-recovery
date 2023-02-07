@@ -101,7 +101,6 @@ RSpec.describe 'Authentication', type: :request do
 
     context 'with registered User' do
       before do
-        skip 'WIP' if Rails.application.cms?
         sign_in create(:user, :registered)
       end
 

@@ -87,7 +87,7 @@ module Training
 
     # @return [Integer]
     def topic_count
-      content_by_topic.count
+      content_by_submodule_topic.count
     end
 
     # @return [Integer]
@@ -107,6 +107,13 @@ module Training
     # @return [Training::Page, Training::Video, Training::Question]
     def page_by_name(name)
       content.find { |page| page.name.eql?(name) }
+    end
+
+    # Selects from ordered array
+    #
+    # @return [Array<Training::Page, Training::Video, Training::Question>]
+    def page_by_type(type)
+      content.select { |page| page.page_type.eql?(type) }
     end
 
     # state ---------------------------------

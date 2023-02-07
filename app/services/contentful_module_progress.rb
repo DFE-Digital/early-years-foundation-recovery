@@ -66,6 +66,7 @@ class ContentfulModuleProgress
     visited?(mod.intro_page)
   end
 
+  # @param page [Training::Module]
   # @return [Boolean] view event logged for page
   def visited?(page)
     module_item_events(page.name).present?

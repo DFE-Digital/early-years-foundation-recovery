@@ -1,5 +1,5 @@
 class Training::ModulesController < Contentful::BaseController
-  # before_action :authenticate_registered_user!, only: :show
+  before_action :authenticate_registered_user!, only: :show
 
   def index
     track('course_overview_page')

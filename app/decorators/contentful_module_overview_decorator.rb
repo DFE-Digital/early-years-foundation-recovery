@@ -42,6 +42,13 @@ class ContentfulModuleOverviewDecorator < DelegateClass(ContentfulModuleProgress
     end
   end
 
+  # @return [String]
+  def debug_summary
+    <<~NODE
+    TODO: simplify views move overview debugging here
+    NODE
+  end
+
 private
 
   # exclude intro or subpages
@@ -51,25 +58,16 @@ private
   #
   # @return [Array<String, Symbol, Array>]
   def subsections(submodule:, items:)
-
-    # binding.pry
-
-
-    items_without_submodule_intro = submodule.zero? ? items : items.drop(1)
-
-    # @see content_by_submodule and content_by_topic
-    topics = items_without_submodule_intro.select { |page| page.topic.positive? }
+    topics =
+      if submodule.zero?
+        items
+      else
+        items.drop(1).reject { |page| page.topic_page_name? }
+      end
 
     topics.map do |content_page|
       section_content(submodule: submodule, subsection_item: content_page)
     end
-
-
-    # items_without_submodule_intro = submodule.zero? ? items : items.drop(1)
-
-    # items_without_submodule_intro.select(&:topic?).map do |subsection|
-    #   section_content(submodule: submodule, subsection_item: subsection)
-    # end
   end
 
   # @param submodule [Integer]
@@ -85,7 +83,7 @@ private
 
     # providing the next page name enables the hyperlink
     if clickable?(subsection_item: subsection_item, submodule: submodule)
-      furthest_topic_page_name = subsection_status.eql?(:started) ? resume_page : subsection_item
+      furthest_topic_page_name = subsection_status.eql?(:started) ? resume_page.name : subsection_item.name
     end
 
     # SummativeAssessmentProgress conditional pass
@@ -94,12 +92,12 @@ private
       furthest_topic_page_name = nil if subsection_item.confidence_intro?
     elsif successful_attempt?
       subsection_status = :completed if subsection_item.assessment_intro?
-      furthest_topic_page_name = subsection_item if subsection_item.confidence_intro?
+      furthest_topic_page_name = subsection_item.name if subsection_item.confidence_intro?
     end
 
     {
-      mod: subsection_item.parent,
-      heading: subsection_item.model.heading,
+      mod: subsection_item.parent.name,
+      heading: subsection_item.heading,
       next_item: furthest_topic_page_name,
       status: subsection_status,
     }
@@ -110,8 +108,7 @@ private
   #
   # @return [Boolean]
   def clickable?(submodule:, subsection_item:)
-    # intros are being removed
-    # return all?([subsection_item]) if submodule.zero?
+    return all?([subsection_item]) if submodule.zero?
 
     submodule_intro = fetch_submodule(submodule).first
     return false unless visited?(submodule_intro)
@@ -119,7 +116,6 @@ private
     current_topic_items = fetch_submodule_topic(submodule, subsection_item.topic)
     all?(current_topic_items)
   end
-
 
   # @param submodule [Integer]
   # @return [Array<Training::Content>]

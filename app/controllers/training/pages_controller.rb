@@ -1,9 +1,10 @@
 class Training::PagesController < Contentful::BaseController
-  # TODO: retire these helpers
-  helper_method :module_item, :training_module, :note
+  before_action :authenticate_registered_user!
+  before_action :track_events, only: :show
+  helper_method :mod, :content, :note
 
-  # TODO: replace with these helpers
-  helper_method :mod, :content
+  # TODO: retire these helpers
+  helper_method :module_item, :training_module
 
   def index
     redirect_to training_module_content_page_path(mod_name, 'what-to-expect')
@@ -60,6 +61,10 @@ private
 
   # ----------------------------------------------------------------------------
 
+  def note
+    @note ||= current_user.notes.where(training_module: mod_name, name: content_slug).first_or_initialize(title: content.heading)
+  end
+
   def progress
     @progress ||= helpers.cms_module_progress(mod)
   end
@@ -95,7 +100,7 @@ private
 
   # @return [Boolean]
   def track_confidence_check_complete?
-    helpers.module_progress(module_item.parent).completed? && untracked?('confidence_check_complete', training_module_id: mod_name)
+    helpers.cms_module_progress(module_item.parent).completed? && untracked?('confidence_check_complete', training_module_id: mod_name)
   end
 
   # @return [Boolean]

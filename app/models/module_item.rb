@@ -374,6 +374,10 @@ class ModuleItem < YamlBase
     Questionnaire.find_by!(name: name, training_module: training_module)
   end
 
+  def page_type
+    type
+  end
+
 # CMS END -------------------------
 
 private

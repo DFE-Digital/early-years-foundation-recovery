@@ -13,6 +13,12 @@ module Training
     def model
       self
     end
+
+    # @return [Boolean]
+    def topic_page_name?
+      name.match? %r"\A(?<prefix>\d+\W){3}(?<page>\d+\D*)$"
+    end
+
     # METHODS TO DEPRECATE --------------------------------------
 
     # @return [Training::Content]
@@ -158,7 +164,7 @@ module Training
 
     # @return [Boolean]
     def is_question?
-      page_type.match?(/formative|summative|confidence/)
+      page_type.match?(/question/)
     end
 
     # @return [Boolean]
