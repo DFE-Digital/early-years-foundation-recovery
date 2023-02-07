@@ -37,7 +37,7 @@ class ContentfulModuleProgress
   # Last visited module item with fallback to first item
   # @return [Training::Content]
   def resume_page
-    unvisited.first&.previous_item || mod.icons_page
+    unvisited.first&.previous_item || mod.first_content_page
   end
 
   # Identify new content that has not been seen and would effect module state
@@ -61,9 +61,9 @@ class ContentfulModuleProgress
   end
 
   # @see ContentfulCourseProgress
-  # @return [Boolean] module pages have been viewed (past interruption)
+  # @return [Boolean]
   def started?
-    visited?(mod.intro_page)
+    key_event('module_start').present?
   end
 
   # @param page [Training::Module]

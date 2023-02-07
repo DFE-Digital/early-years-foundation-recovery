@@ -75,7 +75,7 @@ module Training
 
     # @return [Hash{ Integer=>Array<Module::Content> }]
     def content_by_submodule
-      content.group_by(&:submodule)
+      content.group_by(&:submodule).except(0)
     end
 
     # @return [Hash{ Array<Integer> => Array<Module::Content> }]
@@ -144,19 +144,9 @@ module Training
       text_pages.first
     end
 
-    # @return [Training::Page] page 1
+    # @return [Training::Page]
     def interruption_page
       content.find(&:interruption_page?)
-    end
-
-    # @return [Training::Page] page 2
-    def icons_page
-      content.find(&:icons_page?)
-    end
-
-    # @return [Training::Page] page 3
-    def intro_page
-      content.find(&:module_intro?)
     end
 
     # @return [Training::Page]

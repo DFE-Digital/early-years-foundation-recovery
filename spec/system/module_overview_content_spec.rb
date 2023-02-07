@@ -25,16 +25,9 @@ RSpec.describe 'Module overview' do
   end
 
   it 'has the section headings' do
-    expect(page).to have_content('Module introduction')
-      .and have_content('The first submodule')
+    expect(page).to have_content('The first submodule')
       .and have_content('The second submodule')
       .and have_content('Summary and next steps')
-  end
-
-  it 'has the intro subheadings' do
-    expect(page).to have_content('What to expect during the training')
-      .and have_content('Before you start')
-      .and have_content('Govspeak Reference Page')
   end
 
   it 'has the topic names' do

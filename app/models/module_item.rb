@@ -21,7 +21,6 @@ class ModuleItem < YamlBase
   MODELS = {
     # common
     interruption_page: CommonPage,
-    icons_page: CommonPage,
     summary_intro: CommonPage,
     assessment_intro: CommonPage,
     assessment_results: CommonPage,
@@ -29,7 +28,6 @@ class ModuleItem < YamlBase
     thankyou: CommonPage,
     certificate: CommonPage,
     # content
-    module_intro: ContentPage,
     sub_module_intro: ContentPage,
     text_page: ContentPage,
     recap_page: ContentPage,
@@ -190,16 +188,6 @@ class ModuleItem < YamlBase
   end
 
   # @return [Boolean]
-  def icons_page?
-    type.eql?('icons_page')
-  end
-
-  # @return [Boolean]
-  def module_intro?
-    type.eql?('module_intro')
-  end
-
-  # @return [Boolean]
   def submodule_intro?
     type.eql?('sub_module_intro')
   end
@@ -271,13 +259,9 @@ class ModuleItem < YamlBase
 
   # counters ---------------------------------
 
-  # @return [Integer] number of submodule items 1-[1]-1-1, (excluding intro)
+  # @return [Integer] number of submodule items 1-[1]-1-1
   def number_within_submodule
-    if module_intro?
-      0
-    else
-      current_submodule_items.count - 1
-    end
+    current_submodule_items.count - 1
   end
 
   # @return [Integer] number of topic items 1-1-[1]-1
@@ -329,7 +313,7 @@ class ModuleItem < YamlBase
 
   # @return [Boolean]
   def progress_node?
-    icons_page? || module_intro? || submodule_intro? || summary_intro? || assessment_intro?
+    submodule_intro? || summary_intro? || assessment_intro?
   end
 
   # CMS START -------------------------

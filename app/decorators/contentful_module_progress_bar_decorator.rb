@@ -9,12 +9,12 @@
 class ContentfulModuleProgressBarDecorator < DelegateClass(ContentfulModuleProgress)
   # @return [Array<Hash{Symbol => String,Boolean,Hash}>]
   def nodes
-    node_items.each.with_index(1).map do |node_item|
+    node_items.map do |node_item|
       icon = node_icon_params(node_item)
-      line_style = "line line--#{icon[:colour]}" unless node_item.eql?(node_items.first)
+      line_style = "line line--#{icon[:colour]}" unless first?(node_item)
 
       {
-        heading: node_heading(node_item),
+        heading: node_item.heading,
         heading_style: node_heading_style(node_item),
         icon: icon,
         line_style: line_style,
@@ -42,54 +42,27 @@ class ContentfulModuleProgressBarDecorator < DelegateClass(ContentfulModuleProgr
 
   # @return [String] sentence describing furthest section visited on progress bar for screen readers
   def furthest_section
-    node_items.each.with_index(1) do |item, position|
+    node_items.each.with_index(1) do |node_item, position|
       next unless furthest_page
 
-      if node_name(furthest_page) == node_name(item)
-        title = node_heading(item)
-        total_sections = node_items.count
-        return "You have reached section #{position} of #{total_sections}: #{title}"
+      if furthest?(node_item)
+        return "You have reached section #{position} of #{node_items.count}: #{node_item.heading}"
       end
     end
   end
 
 private
 
-  # @return [Array<String>] page types that define node divisions
-  NODE_TYPES = %w[
-    interruption_page
-    sub_module_intro
-    summary_intro
-  ].freeze
-
-  # @return [Array<String>] page types that form the contents of the first node
-  FIRST_NODE_TYPES = %w[
-    interruption_page
-    icons_page
-    module_intro
-  ].freeze
-
   # @return [Array<Module::Content>]
   def node_items
-    # NODE_TYPES.flat_map { |type| mod.content.select { |page| page.page_type.eql?(type) } }
-    NODE_TYPES.flat_map { |type| mod.page_by_type(type) }
-  end
-
-  # @return [String]
-  def node_heading(node_item)
-    node_items.first.eql?(node_item) ? 'Module introduction' : node_item.heading
+    %w[sub_module_intro summary_intro].flat_map { |type| mod.page_by_type(type) }
   end
 
   # @return [nil, String] style the furthest node's heading
   def node_heading_style(node_item)
     return unless furthest_page
 
-    'govuk-!-font-weight-bold' if node_name(furthest_page) == node_name(node_item)
-  end
-
-  # @return [String] 'start', '1', '2', etc.
-  def node_name(node_item)
-    FIRST_NODE_TYPES.include?(node_item.page_type) ? 'start' : node_item.submodule.to_s
+    'govuk-!-font-weight-bold' if furthest?(node_item)
   end
 
   # @return [String] Percentage complete
@@ -109,7 +82,7 @@ private
         colour: :green,
         status: 'completed',
       }
-    elsif node_started?(node_item)
+    elsif visited?(node_item)
       {
         icon_type: 'circle',
         style: :solid,
@@ -128,9 +101,7 @@ private
 
   # @return [Boolean]
   def node_completed?(node_item)
-    if node_item.interruption_page?
-      visited? node_item.parent.intro_page
-    elsif node_item.summary_intro?
+    if node_item.summary_intro?
       visited? node_item.parent.certificate_page
     elsif node_item.submodule_intro?
       all? node_item.current_submodule_items
@@ -138,11 +109,12 @@ private
   end
 
   # @return [Boolean]
-  def node_started?(node_item)
-    if node_item.submodule_intro? || node_item.summary_intro?
-      visited? node_item.next_item
-    else
-      visited? node_item
-    end
+  def first?(node_item)
+    node_items.first.eql? node_item
+  end
+
+  # @return [Boolean]
+  def furthest?(node_item)
+    furthest_page.submodule.eql? node_item.submodule
   end
 end

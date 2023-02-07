@@ -17,7 +17,7 @@ class ContentfulModuleOverviewDecorator < DelegateClass(ContentfulModuleProgress
   def sections
     mod.content_by_submodule.each.with_index(1).map do |(submodule, content_items), position|
       {
-        heading: submodule.zero? ? 'Module introduction' : content_items.first.heading,
+        heading: content_items.first.heading,
         position: position,
         display_line: position != mod.submodule_count,
         icon: status(content_items),

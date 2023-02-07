@@ -10,9 +10,9 @@ RSpec.describe ContentfulModuleProgress, :cms do
   include_context 'with progress'
 
   describe '#started?' do
-    it 'is true once the module intro is viewed' do
+    it 'is true once the first submodule is viewed' do
       expect(progress.started?).to be false
-      view_module_page_event('alpha', 'intro')
+      start_module(alpha)
       expect(progress.started?).to be true
     end
   end
@@ -54,8 +54,6 @@ RSpec.describe ContentfulModuleProgress, :cms do
     it 'returns the furthest visited module item' do
       %w[
         what-to-expect
-        before-you-start
-        intro
         1-1
         1-1-1
         1-1-2

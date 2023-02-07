@@ -95,7 +95,7 @@ private
 
   # @return [Boolean]
   def track_module_start?
-    module_item.module_intro? && untracked?('module_start', training_module_id: mod_name)
+    module_item.submodule_intro? && untracked?('module_start', training_module_id: mod_name)
   end
 
   # @return [Boolean]
