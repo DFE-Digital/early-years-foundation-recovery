@@ -601,12 +601,12 @@ en:
           $INFO
       4-1-2-4video:
         heading: |
-          How practitioners apply theory to their practice
+          Theories of language development
         body: |
           This video explains how you could apply theory to your practice and the impact that can have.
         video:
           id: 796316164
-          title: How practitioners apply theory to their practice
+          title: Theories of language development
           provider: vimeo
       4-1-2-4b:
         # question
@@ -1515,12 +1515,12 @@ en:
           $INFO
 
       4-3-2-1video:
-        heading: A successful environment
+        heading: Creating an environment that encourages language development
         body: |
           This video explains how a successful environment can create lots of opportunities for interaction and for children to hear and use language skills.
         video:
           id: 795676593
-          title: A successful environment
+          title: Creating an environment that encourages language development
           provider: vimeo
 
       4-3-2-1b:
@@ -1788,12 +1788,12 @@ en:
           $BRAIN
 
       4-3-3-1video:
-        heading: Working with parents
+        heading: Working with parents to support children's language development at home
         body: |
           This video explains how settings have successfully worked with parents and carers to support the home learning environment.
         video:
           id: 796323329
-          title: Working with parents
+          title: Working with parents to support children's language development at home
           provider: vimeo
 
       4-3-3-1b:
