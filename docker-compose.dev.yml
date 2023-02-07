@@ -21,8 +21,6 @@ services:
       - RAILS_ENV=development
       - DOMAIN=app:3000
       - RAILS_SERVE_STATIC_FILES=true
-      # - CONTENTFUL=
-      - CONTENTFUL=true
     volumes:
       - .:/srv
     tty: true

@@ -24,16 +24,7 @@ class ContentfulModuleProgressBarDecorator < DelegateClass(ContentfulModuleProgr
 
   # @return [String]
   def debug_summary
-    nodes.map { |node|
-      <<~NODE
-        ---
-        #{node[:position]}
-        heading: #{node[:heading]}
-        heading_style: #{node[:heading_style]}
-        line_style: #{node[:line_style]}
-        icon: #{node[:icon].values}
-      NODE
-    }.join + node_items.map { |node_item|
+    node_items.map { |node_item|
       <<~NODE
         #{node_item.name}: #{node_item.page_type}
       NODE

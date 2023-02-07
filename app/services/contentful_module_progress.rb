@@ -8,10 +8,10 @@ class ContentfulModuleProgress
 
   # @!attribute [r] user
   #   @return [User]
-  option :user, required: true
+  option :user, Types.Instance(User), required: true
   # @!attribute [r] mod
   #   @return [Training::Module]
-  option :mod, required: true
+  option :mod, Types.Instance(Training::Module), required: true
   # @!attribute [r] summative_assessment
   #   @return [SummativeAssessmentProgress]
   option :summative_assessment, default: proc { SummativeAssessmentProgress.new(user: user, mod: mod) }
