@@ -17,7 +17,7 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
   def sections
     mod.items_by_submodule.each.with_index(1).map do |(num, items), position|
       {
-        heading: num.nil? ? 'Module introduction' : items.first.model.heading,
+        heading: items.first.model.heading,
         position: position,
         display_line: position != mod.items_by_submodule.size,
         icon: status(items),
@@ -106,8 +106,8 @@ private
     all?(current_topic_items) if current_topic
   end
 
-  # @param current_top_num [String]
-  # @param current_sub_num [String]
+  # @param topic_num [String]
+  # @param submodule_num [String]
   #
   # @return [Array<Array>] [1,2] [item, item, item]
   def find_topic(topic_num, submodule_num)

@@ -21,7 +21,7 @@ RSpec.describe 'Module content' do
             expect(attributes).to include :heading, :body, :video
           when /thankyou/
             expect(attributes).to include :form
-          when /interruption|icons|assessment|confidence|questionnaire/
+          when /interruption|assessment|confidence|questionnaire/
             expect(attributes).to be_nil
           end
         end
