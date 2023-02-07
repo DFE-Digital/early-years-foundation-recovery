@@ -46,7 +46,7 @@ class ContentfulModuleOverviewDecorator < DelegateClass(ContentfulModuleProgress
   def debug_summary
     mod.content_by_submodule_topic.map { |(submodule, topic), items|
       <<~NODE
-      #{submodule}.#{topic}: #{status(items)}
+        #{submodule}.#{topic}: #{status(items)}
       NODE
     }.join
   end
