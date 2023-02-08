@@ -87,14 +87,20 @@ personal-social-and-emotional-development:
   3-2-1-2:
     type: text_page
   3-2-1-3a:
-    type: text_page
-  3-2-1-3b:
     type: formative_questionnaire
+  3-2-1-3b:
+    type: text_page
   3-2-1-3c:
     type: formative_questionnaire
   3-2-1-3d:
-    type: formative_questionnaire
+    type: text_page
   3-2-1-3e:
+    type: text_page
+  3-2-1-3f:
+    type: text_page
+  3-2-1-3g:
+    type: formative_questionnaire
+  3-2-1-3h:
     type: formative_questionnaire
   3-2-1-4:
     type: text_page
