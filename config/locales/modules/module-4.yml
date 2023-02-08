@@ -40,7 +40,6 @@ en:
               <li>meaningful sentences</li>
               <li>fluent speech</li>
 
-
       4-1-1-1a:
         heading: |
           The pre-linguistic stage: sounds and noises before talking
@@ -90,6 +89,16 @@ en:
           - leaving gaps after your comments or questions to encourage their understanding of how to interact with others
 
           $INFO
+
+      4-1-1-1video:
+        heading: |
+          Supporting a baby's language development
+        body: |
+          This video provides some practical tips about how to support a baby's language development in order for them to learn, rehearse and develop their future language skills.
+        video:
+          id: 796293701
+          title: Supporting a baby's language development
+          provider: vimeo
 
       4-1-1-1b:
         notes: true
@@ -562,7 +571,15 @@ en:
           - opportunities for children to interact with others
 
           $INFO
-
+      4-1-2-4video:
+        heading: |
+          Theories of language development
+        body: |
+          This video explains different theories of language development and how you can apply them to your practice. It also discusses the importance of the adult's role in children's language and communication development.
+        video:
+          id: 796316164
+          title: Theories of language development
+          provider: vimeo
       4-1-2-4b:
         # question
       4-1-2-4c:
@@ -589,7 +606,6 @@ en:
       4-1-3-1:
         heading: Socio-economic factors
         body: |
-
           Each child will have a different experience of care outside of your setting.
 
           Children's experiences at home impact on their early language development and future attainment.
@@ -1470,6 +1486,15 @@ en:
 
           $INFO
 
+      4-3-2-1video:
+        heading: Creating an environment that encourages language development
+        body: |
+          This video explains how a well planned learning environment and language rich practice will provide opportunites for children to hear and use language across all areas of learning.
+        video:
+          id: 795676593
+          title: Creating an environment that encourages language development
+          provider: vimeo
+
       4-3-2-1b:
         # question
 
@@ -1733,6 +1758,15 @@ en:
           - How could you extend or improve on these strategies?
 
           $BRAIN
+
+      4-3-3-1video:
+        heading: Working with parents to support children's language development at home
+        body: |
+          This video explains the importance of working with parents and carers to share information and suggestions about how they can support their child's language development at home. It also provides examples of how settings have successfully worked with parents and carers to support the home learning environment.
+        video:
+          id: 796323329
+          title: Working with parents to support children's language development at home
+          provider: vimeo
 
       4-3-3-1b:
         # question

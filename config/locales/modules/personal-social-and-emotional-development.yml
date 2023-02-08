@@ -695,7 +695,7 @@ en:
           - What do you think triggered the behaviour?
           - How did you respond to the behaviour?
           - How did you use your setting's behaviour management policy and principles to guide your response?
-          - How did you help the child to understand and reflect on the consequences of their actions?
+          - How did you help the child to understand and reflect on the impact of their actions?
           - How effective do you think your response was and why?
 
           $BRAIN
@@ -1412,6 +1412,14 @@ en:
 
           $BRAIN
 
+      3-3-2-1video:
+        heading: Supporting children to regulate their emotions
+        body: |
+          This video explains how you can support children to understand their emotions and develop their self-regulation.
+        video:
+          id: 796281144
+          title: Supporting children to regulate their emotions
+          provider: vimeo
 
       3-3-2-2a:
         heading: Activities to support executive function development

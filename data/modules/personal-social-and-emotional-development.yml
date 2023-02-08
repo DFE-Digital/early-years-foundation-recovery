@@ -151,6 +151,8 @@ personal-social-and-emotional-development:
     type: text_page
   3-3-2-1:
     type: text_page
+  3-3-2-1video:
+    type: video_page
   3-3-2-2a:
     type: text_page
   3-3-2-2b:
