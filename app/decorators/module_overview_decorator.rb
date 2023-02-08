@@ -17,7 +17,7 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
   def sections
     mod.items_by_submodule.each.with_index(1).map do |(num, items), position|
       {
-        heading: num.nil? ? 'Module introduction' : items.first.model.heading,
+        heading: items.first.model.heading,
         position: position,
         display_line: position != mod.items_by_submodule.size,
         icon: status(items),

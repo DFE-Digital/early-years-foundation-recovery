@@ -37,7 +37,7 @@ RSpec.describe 'Event log' do
 
   describe 'first module page' do
     before do
-      visit '/modules/alpha/content-pages/before-you-start'
+      visit '/modules/alpha/content-pages/what-to-expect'
       click_on 'Next'
     end
 
@@ -120,7 +120,7 @@ RSpec.describe 'Event log' do
 
     it 'tracks start and completion' do
       expect(events.where(name: 'module_start').size).to be 1
-      expect(events.where(name: 'module_content_page').size).to be 28
+      expect(events.where(name: 'module_content_page').size).to be 26
       expect(events.where(name: 'module_complete').size).to eq 1
     end
   end
