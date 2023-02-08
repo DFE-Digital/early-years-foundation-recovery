@@ -1357,6 +1357,14 @@ en:
 
           $BRAIN
 
+      3-3-2-1video:
+        heading: Supporting children to regulate their emotions
+        body: |
+          This video explains how you can support children to understand their emotions and develop their self-regulation.
+        video:
+          id: 796281144
+          title: Supporting children to regulate their emotions
+          provider: vimeo
 
       3-3-2-2a:
         heading: Activities to support executive function development

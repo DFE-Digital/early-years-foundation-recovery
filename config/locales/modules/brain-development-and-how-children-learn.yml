@@ -753,6 +753,16 @@ en:
           - challenging them to reach their full potential
           $INFO
 
+      2-2-2-1video:
+        heading: |
+          Maslow's hierarchy of needs
+        body: |
+          This video explains the different stages within psychologist Maslow's hierarchy of needs in relation to child development.
+        video:
+          id: 796655516
+          title: Maslow's hierarchy of needs
+          provider: vimeo
+
       2-2-2-1b:
         # question
 
@@ -769,6 +779,16 @@ en:
           Vygotsky referred to this period as the zone of proximal development (ZPD). This is where children’s learning is supported by another individual who has a greater understanding than them. As the child becomes more confident and competent in this area the support is weaned away as the skill joins the first stage of learning and therefore becomes one the child can develop alone.
 
           In more recent years, ZPD has also become known as the zone of potential development.
+
+      2-2-2-2video:
+        heading: |
+          Supporting children to learn and develop new skills
+        body: |
+          This video explains and demonstrates how adults, as the more knowledgable other, can support children's learning and development of new skills.
+        video:
+          id: 795566849
+          title: Supporting children to learn and develop new skills
+          provider: vimeo
 
       2-2-2-3:
         heading: |
