@@ -5,11 +5,6 @@ en:
     bravo:
       what-to-expect:
         # preamble
-      before-you-start:
-        # preamble
-      intro:
-        heading: module_intro
-        body: intro
       # --------------------------------------
       1-1:
         heading: sub_module_intro

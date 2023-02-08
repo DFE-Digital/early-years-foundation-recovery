@@ -11,11 +11,13 @@ RSpec.describe 'Page' do
     it { expect(setting_path('cookie-policy')).to have_page_title 'Cookie policy' }
 
     it { expect(static_path('accessibility-statement')).to have_page_title 'Accessibility statement' }
+    it { expect(static_path('new-registration')).to have_page_title 'Update your registration details' }
     it { expect(static_path('other-problems-signing-in')).to have_page_title 'Other problems signing in' }
     it { expect(static_path('privacy-policy')).to have_page_title 'Privacy policy' }
+    it { expect(static_path('sitemap')).to have_page_title 'Sitemap' }
     it { expect(static_path('terms-and-conditions')).to have_page_title 'Terms and conditions' }
     it { expect(static_path('whats-new')).to have_page_title "What's new" }
-    it { expect(static_path('new-registration')).to have_page_title 'Update your registration details' }
+    it { expect(static_path('wifi-and-data')).to have_page_title 'Free internet, wifi and data resources' }
 
     context 'and is confirmed' do
       let(:user) { create(:user, :confirmed) }
@@ -79,8 +81,6 @@ RSpec.describe 'Page' do
     context 'and viewing module content' do
       [
         ['what-to-expect',    'First Training Module : What to expect during the training'],
-        ['before-you-start',  'First Training Module : Before you start'],
-        ['intro',             'First Training Module : Introduction'],
         ['1-1',               'First Training Module : The first submodule'],
         ['1-1-1',             'First Training Module : 1-1-1'],
         ['1-1-2',             'First Training Module : 1-1-2'],

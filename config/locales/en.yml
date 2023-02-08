@@ -291,10 +291,21 @@ en:
 
       ## Videos and mobile data usage
 
-      This module contains videos. Connect to wifi before starting the module to watch the videos without using any mobile data. If you are not able or prefer not to play the videos, you can use the full transcripts provided.
+      This module contains videos. Connect to wifi before starting the module to
+      watch the videos without using any mobile data. If you are not able or prefer
+      not to play the videos, you can use the full transcripts provided.
 
-  icons_page:
-    heading: Before you start
+      ## Free wifi, internet and data resources
+      
+      Our [free wifi, internet and data resources](/wifi-and-data) may help if you have limited or
+      no access to the internet.
+
+      ## Learning check
+      
+      You’ll see the question mark icon next to quiz questions throughout the module.
+      These questions are to check you understand what you have learned.
+      You will be able to see if you get these questions right or wrong.
+      Your scores are not recorded and they do not count towards the certificate of achievement.
 
   check_email_confirmation:
     heading: Check your email
@@ -498,3 +509,4 @@ en:
         sitemap: Sitemap
         terms-and-conditions: Terms and conditions
         whats-new: What's new
+        wifi-and-data: Free internet, wifi and data resources

@@ -72,6 +72,8 @@ jobs:
       -
         name: Run test suite
         run: bundle exec rspec
+        env:
+          CONTENTFUL: true
       -
         name: Run rubocop
         run: bundle exec rubocop

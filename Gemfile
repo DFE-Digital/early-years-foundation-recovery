@@ -73,6 +73,9 @@ gem 'grover'
 # Pa11y accessibility testing
 gem 'sitemap_generator'
 
+# Contentful
+gem 'contentful_rails', '~> 0.5.0'
+
 group :development, :test do
   # Use fake data for specs
   gem 'dotenv-rails'

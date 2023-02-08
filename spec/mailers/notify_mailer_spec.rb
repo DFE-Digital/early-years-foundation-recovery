@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe NotifyMailer, type: :mailer do
   let(:user) { create(:user) }
+  let(:mailbox) { User.new(email: 'child-development.training@education.gov.uk') }
 
   describe 'email confirmation / account activation' do
     context 'when signing up' do
@@ -77,8 +78,12 @@ RSpec.describe NotifyMailer, type: :mailer do
       it 'send email to user to confirm account has been closed' do
         mail = described_class.account_closed(user)
         expect(mail.to).to contain_exactly(user.email)
-        expect(mail.bcc).to contain_exactly('child-development.training@education.gov.uk')
         expect(mail.subject).to eq 'Account closed'
+      end
+
+      it 'send email to internal mailbox' do
+        mail = described_class.account_closed_internal(mailbox, user)
+        expect(mail.to).to contain_exactly(mailbox.email)
       end
     end
   end

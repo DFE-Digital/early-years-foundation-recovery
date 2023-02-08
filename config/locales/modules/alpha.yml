@@ -5,10 +5,8 @@ en:
     alpha:
       what-to-expect:
         # preamble
-      before-you-start:
-        # preamble
-      intro:
-        heading: Govspeak Reference Page
+      1-1:
+        heading: The first submodule
         body: |
           ## Default Tags
           ---
@@ -91,9 +89,6 @@ en:
 
           %Warning: Govspeak test%
       # --------------------------------------
-      1-1:
-        heading: The first submodule
-        body: Sub-module intro body
       1-1-1:
         heading: 1-1-1
         body: |
