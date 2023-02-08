@@ -1,11 +1,3 @@
-#
-# Progress nodes are started when:
-#   - interruption page in intro node is viewed
-#   - first content page in submodule node is viewed
-#   - recap page in module summary node is viewed
-#
-# Headings are bold when page is within section
-#
 class ModuleProgressBarDecorator < DelegateClass(ModuleProgress)
   # @return [Array<Hash{Symbol => String,Boolean,Hash}>]
   def nodes
