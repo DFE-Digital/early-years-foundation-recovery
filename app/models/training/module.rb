@@ -22,7 +22,6 @@ module Training
     # cached queries ---------------------------------
     #
     # TODO: use webhooks to expire cached result
-    # TODO: rely solely on application caching (currently only enabled in production)
     #
     #   def clear_cache_for(item_id)
     #     cache_key = timestamp_cache_key(item_id)
@@ -118,27 +117,30 @@ module Training
 
     # state ---------------------------------
 
+    # This approach is inline with Contenful's conventions.
+    # In staging draft modules should appear as published.
+    # The content team will select all pages and change them from draft to published, thereby changing the status on production.
+    #
     # @return [Boolean]
     def draft?
       fields.fetch(:pages, []).none?
     end
 
-    # @return [Datetime]
-    delegate :published_at, to: :entry
+    # # @return [Datetime]
+    # delegate :published_at, to: :entry
 
-    # NB: Adds additional call to Management API (per-dev tokens may need to bestow access to the active env)
-    #
-    # @see ContentfulCourseProgress#debug_summary
-    # @return [Contentful::Management::Entry]
-    def entry
-      @entry ||= to_management
-    rescue NoMethodError
-      @entry = refetch_management_entry
-    end
+    # # NB: Adds additional call to Management API (per-dev tokens may need to bestow access to the active env)
+    # #
+    # # @see ContentfulCourseProgress#debug_summary
+    # # @return [Contentful::Management::Entry]
+    # def entry
+    #   @entry ||= to_management
+    # rescue NoMethodError
+    #   @entry = refetch_management_entry
+    # end
 
     # content pages ---------------------------------
 
-    # Viewing this page determines if the module is "started"
     # @return [Training::Page]
     def first_content_page
       text_pages.first

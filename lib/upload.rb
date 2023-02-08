@@ -1,3 +1,4 @@
+# :nocov:
 require 'contentful/management'
 
 #
@@ -158,3 +159,4 @@ private
     client.assets(config.space, config.environment).create(params)
   end
 end
+# :nocov:

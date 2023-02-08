@@ -3,9 +3,6 @@
 class ContentfulModuleProgress
   extend Dry::Initializer
 
-  # @param user [User]
-  # @param mod [Training::Module]
-
   # @!attribute [r] user
   #   @return [User]
   option :user, Types.Instance(User), required: true

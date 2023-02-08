@@ -1,20 +1,6 @@
 # Contentful
 
-**The `demo` should be check for accuracy before relying on test results. Confirm that `depends_on` is set, all content is published.**
-
-```
-YAML
-
-Finished in 2 minutes 50.8 seconds (files took 3.33 seconds to load)
-551 examples, 0 failures, 10 pending
-
----
-
-CMS
-
-Finished in 2 minutes 58.2 seconds (files took 3.29 seconds to load)
-551 examples, 13 failures, 48 pending
-```
+**NB: The `demo` environment should be check for accuracy before relying on test results. Confirm that `depends_on` is set, all content is published.**
 
 - [EY Recovery Service](https://app.contentful.com/spaces/dvmeh832nmjc)
 - [API Keys](https://app.contentful.com/spaces/dvmeh832nmjc/api/keys/) can be granted access to specific environments or aliases.
@@ -43,14 +29,16 @@ Contentful tasks are namespaced under `eyfs:cms`, list them using `rake --tasks 
 - Object
 - Location
 - RichText
-- Array (requires items)
-- Link (requires linkType)
+- Array (requires items) `pages`
+- Link (requires linkType) `depends_on`, `image` and `training_module`
 - ResourceLink (requires allowedResources)
 
 
 ## Preview
 
-[Preview](https://app.contentful.com/spaces/dvmeh832nmjc/settings/content_preview)
+We will use 3 [preview](https://app.contentful.com/spaces/dvmeh832nmjc/settings/content_preview) buttons.
+
+For developer use:
 
 **Local**
 
@@ -59,3 +47,9 @@ Contentful tasks are namespaced under `eyfs:cms`, list them using `rake --tasks 
 - **Question**: `http://localhost:3000/modules/{entry.linkedBy.fields.name}/questionnaires/{entry.fields.name}`
 - **Video**: `http://localhost:3000/modules/{entry.linkedBy.fields.name}/content-pages/{entry.fields.name}`
 - **Training Module**: `http://localhost:3000/modules/{entry.fields.name}`
+
+**Development** WIP
+
+For content author use:
+
+**Staging** WIP

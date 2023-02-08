@@ -270,7 +270,6 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.2)
     minitest (5.17.0)
-    mr_video (1.2.0)
     msgpack (1.6.0)
     multi_json (1.15.0)
     net-imap (0.3.4)
@@ -552,7 +551,6 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   launchy
-  mr_video
   pg
   pry-byebug
   pry-doc
