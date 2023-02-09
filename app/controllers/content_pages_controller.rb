@@ -79,7 +79,7 @@ private
 
   # @return [Boolean]
   def track_module_start?
-    module_item.module_intro? && module_start_untracked?
+    module_item.submodule_intro? && module_start_untracked?
   end
 
   # @return [Boolean]
