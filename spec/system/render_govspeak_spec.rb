@@ -4,7 +4,7 @@ RSpec.describe 'Govspeak' do
   include_context 'with user'
 
   context 'with module intro' do
-    let(:path) { '/modules/alpha/content-pages/intro' }
+    let(:path) { '/modules/alpha/content-pages/1-1' }
 
     it_behaves_like 'a Govspeak page'
   end
