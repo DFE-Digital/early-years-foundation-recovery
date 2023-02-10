@@ -6,8 +6,8 @@ personal-social-and-emotional-development:
       1_age_conversation:
         multi_select: false
         body: |
-          True or false? 
-          
+          True or false?
+
           At around 3 years old most children can have a conversation
           using 2 to 3 sentences at a time.
         assessment_summary: |
@@ -31,7 +31,7 @@ personal-social-and-emotional-development:
           Yusuf and Noah are playing together outside when Noah trips and bumps his knee, which causes him to cry. Yusuf is quick to try to comfort Noah and looks for help from an adult.
 
           Later, Yusuf recreates the situation with dolls and uses the opportunity to express his worries about the accident.
-          
+
           At around what age would you expect to start seeing Yusuf’s behaviour?
         assessment_summary: |
           At around 3 years old children will be showing more affection for friends and will visibly show concern when their friends are upset.
@@ -70,16 +70,16 @@ personal-social-and-emotional-development:
       1_choose_friends:
         multi_select: false
         body: |
-          True or false? 
-          
+          True or false?
+
           Around the age of 5, a child will begin to choose their friends based upon characteristics they would like for themselves.
         assessment_summary: |
           At age 5 children will want to please others and are able to take part in activities and tasks that involve co-operation and direction.
-          
+
           They will be choosing their own friends and will see characteristics in friends that they would like for themselves.
         assessment_fail_summary: |
-          At age 5 children will want to please others and are able to take part in activities and tasks that involve co-operation and direction. 
-          
+          At age 5 children will want to please others and are able to take part in activities and tasks that involve co-operation and direction.
+
           They will be choosing their own friends and will see characteristics in friends that they would like for themselves.
         answers:
           1: "True"
@@ -132,7 +132,7 @@ personal-social-and-emotional-development:
           It will also help children to:
 
           - develop independence
-          - understand the concepts of actions and consequences
+          - understand that their actions impact them and those around them
           - develop their language skills by engaging in conversations and discussing their choices
         assessment_fail_summary: |
           Frequent use of choice encourages self-worth, as being involved in choices
@@ -140,7 +140,7 @@ personal-social-and-emotional-development:
           It will also help children to:
 
           - develop independence
-          - understand the concepts of actions and consequences
+          - understand that their actions impact them and those around them
           - develop their language skills by engaging in conversations and discussing their choices
         answers:
           1: It will confuse children
@@ -164,28 +164,26 @@ personal-social-and-emotional-development:
           When Benjamin chooses dresses and heeled shoes, his friends laugh and make
           jokes and often choose not to play with him.
 
-          What should you do?
+          What should you do in response to the children's behaviour?
         assessment_summary: |
-          You should intervene, as this is an opportunity for you to support children’s understanding of accepting individuality. Initially this intervention could be a spontaneous discussion where the children involved are encouraged to share their thoughts and feelings.
+          You should intervene, to support Benjamin's choices and sensitively challenge the other children's responses. This is an opportunity for you to support children's understanding of accepting individuality. Initially this intervention could be a spontaneous discussion where the children involved are encouraged to share their thoughts and feelings.
 
           Planned activities could also include:
 
           - use of puppets or structured role play to encourage expression of feelings and thoughts
           - shared stories relating to unkind actions and the resulting feelings
         assessment_fail_summary: |
-          You should intervene, as this is an opportunity for you to support children’s understanding of accepting individuality. Initially this intervention could be a spontaneous discussion where the children involved are encouraged to share their thoughts and feelings.
+          You should intervene, to support Benjamin's choices and sensitively challenge the other children's responses. This is an opportunity for you to support children's understanding of accepting individuality. Initially this intervention could be a spontaneous discussion where the children involved are encouraged to share their thoughts and feelings.
 
           Planned activities could also include:
 
           - use of puppets or structured role play to encourage expression of feelings and thoughts
           - shared stories relating to unkind actions and the resulting feelings
 
-          You should not wait to see how Benjamin reacts, as this may lead to difficulties and confusion for him around managing feelings and building positive relationships.
-
-          You also should not stop Benjamin from playing with the items, as all children should have the freedom to play with whatever they choose without fear of being teased.
+          You should not stop Benjamin from playing with the items, as all children should be supported to explore a range of toys and objects without fear of being teased.
         answers:
-          1: Wait to see how Benjamin reacts
-          2: Intervene
+          1: Let the children work it out between themselves
+          2: Sensitively intervene and talk to the children
           3: Stop Benjamin from playing with the items to prevent him from being teased
         correct_answers:
           - 2
@@ -196,8 +194,8 @@ personal-social-and-emotional-development:
       1_stereotypes:
         multi_select: false
         body: |
-          True or false? 
-          
+          True or false?
+
           Children are born with preformed stereotypical and biased views.
         assessment_summary: |
           Children are not born with preformed views of others around them.
@@ -265,7 +263,7 @@ personal-social-and-emotional-development:
         correct_answers:
           - 3
 
-  3-2-1-3b:
+  3-2-1-3a:
     content:
     questions:
       1_ainsworth:
@@ -298,7 +296,7 @@ personal-social-and-emotional-development:
         correct_answers:
           - 2
 
-  3-2-1-3d:
+  3-2-1-3g:
     content:
     questions:
       1_unpredictable_responses:
@@ -314,25 +312,25 @@ personal-social-and-emotional-development:
         correct_answers:
           - 1
 
-  3-2-1-3e:
+  3-2-1-3h:
     content:
     questions:
       1_josh_attachment:
         multi_select: false
         body: |
-          Read the scenario and answer the question: 
-          
-          Josh prefers to carry out tasks and activities alone and has not established any strong friendships within the group. Josh is reluctant to carry out adult led activity and often tells adults he can not complete tasks before he has attempted them. 
-          
+          Read the scenario and answer the question:
+
+          Josh prefers to carry out tasks and activities alone and has not established any strong friendships within the group. Josh is reluctant to carry out adult led activity and often tells adults he can not complete tasks before he has attempted them.
+
           Which type of attachment has Josh most likely experienced?
         assessment_summary: |
-          Josh’s behaviour suggests that he may have experienced a disorganised controlling attachment style. 
-        
+          Josh’s behaviour suggests that he may have experienced a disorganised controlling attachment style.
+
           Children with disorganised controlling attachment prefer to be alone, have low self-esteem and are more prone to stress.
-        
+
         assessment_fail_summary: |
-          Josh’s behaviour suggests that he may have experienced a disorganised controlling attachment style. 
-        
+          Josh’s behaviour suggests that he may have experienced a disorganised controlling attachment style.
+
           Children with disorganised controlling attachment prefer to be alone, have low self-esteem and are more prone to stress.
         answers:
           1: Insecure ambivalent attachment
@@ -353,18 +351,18 @@ personal-social-and-emotional-development:
         assessment_summary: |
           Communication, negative experiences and busy lifestyles can all be barriers
           to building effective partnerships with parents and carers.
-          
+
           For example, English may be a second language for the child’s family,
           or parents and carers may lack confidence with communication and understanding.
-          
+
           You may need to take time to make sure you can provide information in their first language.
         assessment_fail_summary: |
           Communication, negative experiences and busy lifestyles can all be barriers
           to effective parent partnerships.
-          
+
           For example, English may be a second language for the child’s family,
           or parents and carers may lack confidence with communication and understanding.
-          
+
           You may need to take time to make sure you can provide information in their first language.
         answers:
           1: Happiness
@@ -380,19 +378,19 @@ personal-social-and-emotional-development:
       1_recognise_feelings:
         multi_select: false
         body: |
-          True or false? 
-          
+          True or false?
+
           Children who recognise their feelings and grow up in a
           loving environment are more likely to be skilled at self-expression.
         assessment_summary: |
           Children who recognise their feelings are more likely to be skilled at self-expression.
-          
+
           Children who do not grow up in an environment full of love, respect and
           compassion are more likely to struggle with self expression and experience mental
           health difficulties in later life.
         assessment_fail_summary: |
           Children who recognise their feelings are more likely to be skilled at self-expression.
-          
+
           Children who do not grow up in an environment full of love, respect and
           compassion are more likely to struggle with self expression and experience mental
           health difficulties in later life.
@@ -408,16 +406,16 @@ personal-social-and-emotional-development:
       1_self-regulate:
         multi_select: false
         body: |
-          True or false? 
-          
+          True or false?
+
           Being able to self-regulate helps to increase resilience and improve the ability to cope with stress.
         assessment_summary: |
-          Being able to self-regulate supports the development of increased resilience and improves the ability to cope with stress. 
-          
+          Being able to self-regulate supports the development of increased resilience and improves the ability to cope with stress.
+
           Good self-regulation skills will also promote positive mental health and well being, encourage healthy brain development and reduce the likelihood of medical issues like heart disease and obesity.
         assessment_fail_summary: |
-          Being able to self-regulate supports the development of increased resilience and improves the ability to cope with stress. 
-          
+          Being able to self-regulate supports the development of increased resilience and improves the ability to cope with stress.
+
           Good self-regulation skills will also promote positive mental health and well being, encourage healthy brain development and reduce the likelihood of medical issues like heart disease and obesity.
         answers:
           1: "True"
@@ -432,7 +430,7 @@ personal-social-and-emotional-development:
         multi_select: false
         body: |
           True or false?
-          
+
           Developing children’s understanding of time management
           will help to build their executive function skills.
         assessment_summary: |
@@ -468,12 +466,12 @@ personal-social-and-emotional-development:
           and regulate their feelings?
         assessment_summary: |
           Children can become overwhelmed and will struggle with challenges experienced as part of their daily lives if they are not effectively supported to understand and regulate their feelings. Developing self-regulation requires guidance and support.
-          
+
           As children begin to recognise and name their feelings, they will also
           need your support to learn to regulate them. This support can be referred to as co-regulation, meaning when you work in co-operation with others to develop skills.
         assessment_fail_summary: |
           Children can become overwhelmed and will struggle with challenges experienced as part of their daily lives if they are not effectively supported to understand and regulate their feelings. Developing self-regulation requires guidance and support.
-          
+
           As children begin to recognise and name their feelings, they will also
           need your support to learn to regulate them. This support can be referred to as co-regulation, meaning when you work in co-operation with others to develop skills.
         answers:

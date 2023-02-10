@@ -81,8 +81,6 @@ RSpec.describe 'Page' do
     context 'and viewing module content' do
       [
         ['what-to-expect',    'First Training Module : What to expect during the training'],
-        ['before-you-start',  'First Training Module : Before you start'],
-        ['intro',             'First Training Module : Introduction'],
         ['1-1',               'First Training Module : The first submodule'],
         ['1-1-1',             'First Training Module : 1-1-1'],
         ['1-1-2',             'First Training Module : 1-1-2'],
