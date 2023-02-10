@@ -7,6 +7,9 @@
             = govuk_link_to page.heading, static_page_path(page.name), class: 'govuk-footer__link'
 
         li.govuk-footer__list-item
+          = govuk_link_to 'Cookies', '/settings/cookie-policy', class: 'govuk-footer__link'
+
+        li.govuk-footer__list-item
           = govuk_link_to 'Contact', Rails.application.credentials.contact_us, class: 'govuk-footer__link', target: '_blank'
 
         li.govuk-footer__list-item

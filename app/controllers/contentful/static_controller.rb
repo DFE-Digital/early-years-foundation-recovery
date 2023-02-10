@@ -5,7 +5,7 @@ class Contentful::StaticController < Contentful::BaseController
     if @model.present?
       track('static_page')
     else
-      render 'errors/not_found'
+      render 'errors/not_found', status: :not_found
     end
   end
 end

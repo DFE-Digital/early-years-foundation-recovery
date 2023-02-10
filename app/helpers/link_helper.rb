@@ -55,12 +55,12 @@ module LinkHelper
   end
 
   def back_link
-    if %w[content_pages questionnaires assessment_results].include?(params[:controller])
+    if %w[content_pages questionnaires assessment_results].include? params[:controller]
       govuk_back_link(
         href: training_module_path(params[:training_module_id]),
         text: "Back to Module #{training_module.id} overview",
       )
-    elsif params[:controller].eql?('contentful/static')
+    elsif %w[contentful/static settings].include? params[:controller]
       govuk_back_link href: url_for(:back)
     end
   end

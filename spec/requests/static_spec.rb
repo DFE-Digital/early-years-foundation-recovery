@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Static page', type: :request do
   specify { expect('/accessibility-statement').to be_successful }
 
-  specify { expect('/cookie-policy').to be_successful }
+  specify { expect('/settings/cookie-policy').to be_successful }
 
   specify { expect('/new-registration').to be_successful }
 
@@ -24,6 +24,11 @@ RSpec.describe 'Static page', type: :request do
   context 'with errors' do
     specify do
       get '/404'
+      expect(response).to have_http_status(:not_found)
+    end
+
+    specify do
+      get '/foo'
       expect(response).to have_http_status(:not_found)
     end
 
