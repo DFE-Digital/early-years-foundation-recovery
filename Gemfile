@@ -76,6 +76,11 @@ gem 'sitemap_generator'
 # Contentful
 gem 'contentful_rails', '~> 0.5.0'
 
+# Dry-rb
+gem 'dry-core'
+gem 'dry-initializer'
+gem 'dry-types'
+
 group :development, :test do
   # Use fake data for specs
   gem 'dotenv-rails'

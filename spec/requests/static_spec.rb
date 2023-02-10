@@ -13,6 +13,8 @@ RSpec.describe 'Static page', type: :request do
 
   specify { expect('/promotional-materials').to be_successful }
 
+  specify { expect('/sitemap').to be_successful }
+
   specify { expect('/terms-and-conditions').to be_successful }
 
   specify { expect('/users/timeout').to be_successful }
