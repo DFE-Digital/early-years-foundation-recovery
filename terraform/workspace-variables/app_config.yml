@@ -33,12 +33,13 @@ development:
   <<: *defaults
   DOMAIN: ey-recovery-dev.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-dev
+  CONTENTFUL: true
   CONTENTFUL_ENVIRONMENT: test
 
 # ey-recovery-content
 content:
   <<: *defaults
-  # CONTENTFUL: true
+  CONTENTFUL: true
   CONTENTFUL_ENVIRONMENT: test
   TRAINING_MODULES: demo-modules
   # @see .github/workflows/content.yml
