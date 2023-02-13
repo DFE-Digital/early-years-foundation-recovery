@@ -2,12 +2,11 @@
 #
 namespace :eyfs do
   namespace :cms do
-    # ./bin/docker-rails 'eyfs:cms:seed'
+    # ./bin/docker-rails 'eyfs:cms:seed_static'
     desc 'Populate Contentful from YAML'
-    task seed: :environment do
-      require 'upload'
-      uploader = Upload.new
-      uploader.call(type: 'static')
+    task seed_static: :environment do
+      require 'upload_static'
+      UploadStatic.new.call(type: 'static')
     end
   end
 end

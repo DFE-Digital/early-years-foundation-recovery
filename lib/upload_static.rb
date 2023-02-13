@@ -4,7 +4,7 @@ require 'contentful/management'
 #
 # Populate Contentful using YAML content
 #
-class Upload
+class UploadStatic
   extend Dry::Initializer
 
   option :config, default: proc { ContentfulRails.configuration }
@@ -29,7 +29,6 @@ class Upload
         body: page_info[:content],
       })
 
-      static_page.save!
       log_entry(static_page)
     end
   end
@@ -50,7 +49,7 @@ private
   # @return [String]
   def log_entry(entry)
     type = entry.sys[:contentType].id
-    timestamp = entry.published_at&.strftime('%F %T')
+    timestamp = entry.sys[:createdAt]&.strftime('%F %T')
 
     log "'#{type}' entry '#{entry.name}' published @ '#{timestamp}'"
   end

@@ -76,6 +76,6 @@ module ApplicationHelper
   end
 
   def footer_static_pages
-    Contentful::Static.find_by(addToFooter: true).load
+    Contentful::Static.find_by(footer: true).load
   end
 end
