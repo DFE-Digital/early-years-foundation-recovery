@@ -1,333 +1,153 @@
 ---
-- name: Cambridgeshire County Council
-- name: Cumbria County Council
-- name: Derbyshire County Council
-- name: Devon County Council
-- name: East Sussex County Council
-- name: Essex County Council
-- name: Gloucestershire County Council
-- name: Hampshire County Council
-- name: Hertfordshire County Council
-- name: Kent County Council
-- name: Lancashire County Council
-- name: Leicestershire County Council
-- name: Lincolnshire County Council
-- name: Norfolk County Council
-- name: North Yorkshire County Council
-- name: Nottinghamshire County Council
-- name: Oxfordshire County Council
-- name: Somerset County Council
-- name: Staffordshire County Council
-- name: Suffolk County Council
-- name: Surrey County Council
-- name: Warwickshire County Council
-- name: West Sussex County Council
-- name: Worcestershire County Council
-- name: Adur District Council
-- name: Allerdale District Council
-- name: Amber Valley Borough Council
-- name: Arun District Council
-- name: Ashfield District Council
-- name: Ashford Borough Council
-- name: Babergh District Council
-- name: Barrow-in-Furness Borough Council
-- name: Basildon Borough Council
-- name: Basingstoke & Deane Borough Council
-- name: Bassetlaw District Council
-- name: Blaby District Council
-- name: Bolsover District Council
-- name: Boston Borough Council
-- name: Braintree District Council
-- name: Breckland District Council
-- name: Brentwood Borough Council
-- name: Broadland District Council
-- name: Bromsgrove District Council
-- name: Broxbourne Borough Council
-- name: Broxtowe Borough Council
-- name: Burnley Borough Council
-- name: Cambridge City Council
-- name: Cannock Chase District Council
-- name: Canterbury City Council
-- name: Carlisle City Council
-- name: Castle Point District Council
-- name: Charnwood Borough Council
-- name: Chelmsford City Council
-- name: Cheltenham Borough Council
-- name: Cherwell District Council
-- name: Chesterfield Borough Council
-- name: Chichester District Council
-- name: Chorley Borough Council
-- name: Colchester Borough Council
-- name: Copeland Borough Council
-- name: Cotswold District Council
-- name: Craven District Council
-- name: Crawley Borough Council
-- name: Dacorum Borough Council
-- name: Dartford Borough Council
-- name: Derbyshire Dales District Council
-- name: Dover District Council
-- name: East Cambridgeshire District Council
-- name: East Devon District Council
-- name: East Hampshire District Council
-- name: East Hertfordshire District Council
-- name: East Lindsey District Council
-- name: East Staffordshire Borough Council
-- name: East Suffolk Council
-- name: Eastbourne Borough Council
-- name: Eastleigh Borough Council
-- name: Eden District Council
-- name: Elmbridge Borough Council
-- name: Epping Forest District Council
-- name: Epsom & Ewell Borough Council
-- name: Erewash Borough Council
-- name: Exeter City Council
-- name: Fareham Borough Council
-- name: Fenland District Council
-- name: Folkestone and Hythe District Council
-- name: Forest of Dean District Council
-- name: Fylde Borough Council
-- name: Gedling Borough Council
-- name: Gloucester City Council
-- name: Gosport Borough Council
-- name: Gravesham Borough Council
-- name: Great Yarmouth Borough Council
-- name: Guildford Borough Council
-- name: Hambleton District Council
-- name: Harborough District Council
-- name: Harlow District Council
-- name: Harrogate Borough Council
-- name: Hart District Council
-- name: Hastings Borough Council
-- name: Havant Borough Council
-- name: Hertsmere Borough Council
-- name: High Peak Borough Council
-- name: Hinckley and Bosworth Borough Council
-- name: Horsham District Council
-- name: Huntingdonshire District Council
-- name: Hyndburn Borough Council
-- name: Ipswich Borough Council
-- name: Kings Lynn & West Norfolk Borough Council
-- name: Lancaster City Council
-- name: Lewes District Council
-- name: Lichfield City Council
-- name: Lincoln City Council
-- name: Maidstone Borough Council
-- name: Maldon District Council
-- name: Malvern Hills District Council
-- name: Mansfield District Council
-- name: Melton Borough Council
-- name: Mendip District Council
-- name: Mid Devon District Council
-- name: Mid Suffolk District Council
-- name: Mid Sussex District Council
-- name: Mole Valley District Council
-- name: North Devon District Council
-- name: North East Derbyshire District Council
-- name: North Hertfordshire District Council
-- name: North Kesteven District Council
-- name: North Norfolk District Council
-- name: North West Leicestershire District Council
-- name: North Warwickshire Borough Council
-- name: New Forest District Council
-- name: Newark & Sherwood District Council
-- name: Newcastle-Under-Lyme Borough Council
-- name: Norwich City Council
-- name: Nuneaton & Bedworth Borough Council
-- name: Oadby & Wigston Borough Council
-- name: Oxford City Council
-- name: Pendle Borough Council
-- name: Preston City Council
-- name: Redditch Borough Council
-- name: Reigate & Banstead Borough Council
-- name: Ribble Valley Borough Council
-- name: Richmondshire District Council
-- name: Rochford District Council
-- name: Rossendale Borough Council
-- name: Rother District Council
-- name: Rugby Borough Council
-- name: Runnymede Borough Council
-- name: Rushcliffe Borough Council
-- name: Rushmoor Borough Council
-- name: Ryedale District Council
-- name: Somerset West and Taunton Council
-- name: South Cambridgeshire District Council
-- name: South Derbyshire District Council
-- name: South Hams District Council
-- name: South Holland District Council
-- name: South Kesteven District Council
-- name: South Lakeland District Council
-- name: South Norfolk District Council
-- name: South Oxfordshire District Council
-- name: South Ribble Borough Council
-- name: South Somerset District Council
-- name: South Staffordshire District Council
-- name: Scarborough Borough Council
-- name: Sedgemoor District Council
-- name: Selby District Council
-- name: Sevenoaks District Council
-- name: Spelthorne Borough Council
-- name: St Albans City Council
-- name: Stafford Borough Council
-- name: Staffordshire Moorlands District Council
-- name: Stevenage Borough Council
-- name: Stratford on Avon District Council
-- name: Stroud District Council
-- name: Surrey Heath Borough Council
-- name: Swale Borough Council
-- name: Tamworth Borough Council
-- name: Tandridge District Council
-- name: Teignbridge District Council
-- name: Tendring District Council
-- name: Test Valley Borough Council
-- name: Tewkesbury Borough Council
-- name: Thanet District Council
-- name: Three Rivers District Council
-- name: Tonbridge & Malling Borough Council
-- name: Torridge District Council
-- name: Tunbridge Wells Borough Council
-- name: Uttlesford District Council
-- name: Vale of White Horse District Council
-- name: Warwick District Council
-- name: Watford Borough Council
-- name: Waverley Borough Council
-- name: Wealden District Council
-- name: Welwyn Hatfield Borough Council
-- name: West Devon District Council
-- name: West Lancashire District Council
-- name: West Lindsey District Council
-- name: West Oxfordshire District Council
-- name: West Suffolk Council
-- name: Winchester City Council
-- name: Woking Borough Council
-- name: Worcester City Council
-- name: Worthing Borough Council
-- name: Wychavon District Council
-- name: Wyre Borough Council
-- name: Wyre Forest District Council
 - name: Barking and Dagenham
 - name: Barnet
+- name: Barnsley
+- name: Bath and North East Somerset
+- name: Bedford
 - name: Bexley
+- name: Birmingham
+- name: Blackburn with Darwen
+- name: Blackpool
+- name: Bolton
+- name: Bournemouth, Christchurch and Poole
+- name: Bracknell Forest
+- name: Bradford
 - name: Brent
+- name: Brighton and Hove
+- name: Bristol, City of
 - name: Bromley
+- name: Buckinghamshire
+- name: Bury
+- name: Calderdale
+- name: Cambridgeshire
 - name: Camden
+- name: Central Bedfordshire
+- name: Cheshire East
+- name: Cheshire West and Chester
+- name: City of London
+- name: Cornwall
+- name: County Durham
+- name: Coventry
 - name: Croydon
+- name: Cumbria
+- name: Darlington
+- name: Derby
+- name: Derbyshire
+- name: Devon
+- name: Doncaster
+- name: Dorset
+- name: Dudley
 - name: Ealing
+- name: East Riding of Yorkshire
+- name: East Sussex
 - name: Enfield
+- name: Essex
+- name: Gateshead
+- name: Gloucestershire
 - name: Greenwich
 - name: Hackney
+- name: Halton
 - name: Hammersmith and Fulham
+- name: Hampshire
 - name: Haringey
 - name: Harrow
+- name: Hartlepool
 - name: Havering
+- name: Herefordshire, County of
+- name: Hertfordshire
 - name: Hillingdon
 - name: Hounslow
+- name: Isle of Wight
+- name: Isles of Scilly
 - name: Islington
 - name: Kensington and Chelsea
+- name: Kent
+- name: Kingston upon Hull, City of
 - name: Kingston upon Thames
+- name: Kirklees
+- name: Knowsley
 - name: Lambeth
+- name: Lancashire
+- name: Leeds
+- name: Leicester
+- name: Leicestershire
 - name: Lewisham
+- name: Lincolnshire
+- name: Liverpool
+- name: Luton
+- name: Manchester
+- name: Medway
 - name: Merton
+- name: Middlesbrough
+- name: Milton Keynes
+- name: Newcastle upon Tyne
 - name: Newham
+- name: Norfolk
+- name: North East Lincolnshire
+- name: North Lincolnshire
+- name: North Northamptonshire
+- name: North Somerset
+- name: North Tyneside
+- name: North Yorkshire
+- name: Northumberland
+- name: Nottingham
+- name: Nottinghamshire
+- name: Oldham
+- name: Oxfordshire
+- name: Peterborough
+- name: Plymouth
+- name: Portsmouth
+- name: Reading
 - name: Redbridge
+- name: Redcar and Cleveland
 - name: Richmond upon Thames
+- name: Rochdale
+- name: Rotherham
+- name: Rutland
+- name: Salford
+- name: Sandwell
+- name: Sefton
+- name: Sheffield
+- name: Shropshire
+- name: Slough
+- name: Solihull
+- name: Somerset
+- name: South Gloucestershire
+- name: South Tyneside
+- name: Southampton
+- name: Southend-on-Sea
 - name: Southwark
+- name: St. Helens
+- name: Staffordshire
+- name: Stockport
+- name: Stockton-on-Tees
+- name: Stoke-on-Trent
+- name: Suffolk
+- name: Sunderland
+- name: Surrey
 - name: Sutton
+- name: Swindon
+- name: Tameside
+- name: Telford and Wrekin
+- name: Thurrock
+- name: Torbay
 - name: Tower Hamlets
+- name: Trafford
+- name: Wakefield
+- name: Walsall
 - name: Waltham Forest
 - name: Wandsworth
+- name: Warrington
+- name: Warwickshire
+- name: West Berkshire
+- name: West Northamptonshire
+- name: West Sussex
 - name: Westminster
-- name: Barnsley Borough Council
-- name: Birmingham City Council
-- name: Bolton Borough Council
-- name: Bradford City Council
-- name: Bury Borough Council
-- name: Calderdale Borough Council
-- name: Coventry City Council
-- name: Doncaster Borough Council
-- name: Dudley Borough Council
-- name: Gateshead Borough Council
-- name: Kirklees Borough Council
-- name: Knowsley Borough Council
-- name: Leeds City Council
-- name: Liverpool City Council
-- name: Manchester City Council
-- name: North Tyneside Borough Council
-- name: Newcastle Upon Tyne City Council
-- name: Oldham Borough Council
-- name: Rochdale Borough Council
-- name: Rotherham Borough Council
-- name: SouthTyneside Borough Council
-- name: Salford City Council
-- name: Sandwell Borough Council
-- name: Sefton Borough Council
-- name: Sheffield City Council
-- name: Solihull Borough Council
-- name: St Helens Borough Council
-- name: Stockport Borough Council
-- name: Sunderland City Council
-- name: Tameside Borough Council
-- name: Trafford Borough Council
-- name: Wakefield City Council
-- name: Walsall Borough Council
-- name: Wigan Borough Council
-- name: Wirral Borough Council
-- name: Wolverhampton City Council
-- name: Bath and North East Somerset Council
-- name: Bedford Borough Council
-- name: Blackburn with Darwen Borough Council
-- name: Blackpool Council
-- name: Bournemouth, Christchurch and Poole Council
-- name: Bracknell Forest Borough Council
-- name: Brighton and Hove City Council
-- name: Bristol City Council
-- name: Buckinghamshire Council
-- name: Central Bedfordshire Council
-- name: Cheshire East Council
-- name: Cheshire West and Chester Council
-- name: Cornwall Council
-- name: Durham County Council
-- name: Darlington Borough Council
-- name: Derby City Council
-- name: Dorset Council
-- name: East Riding of Yorkshire Council
-- name: Halton Borough Council
-- name: Hartlepool Borough Council
-- name: Herefordshire Council
-- name: Isle of Wight Council
-- name: Hull City Council
-- name: Leicester City Council
-- name: Luton Borough Council
-- name: Medway Council
-- name: Middlesbrough Borough Council
-- name: Milton Keynes Council
-- name: North East Lincolnshire Council
-- name: North Lincolnshire Council
-- name: North Northamptonshire Council
-- name: North Somerset Council
-- name: Northumberland County Council
-- name: Nottingham City Council
-- name: Peterborough City Council
-- name: Plymouth City Council
-- name: Portsmouth City Council
-- name: Reading Borough Council
-- name: Redcar and Cleveland Borough Council
-- name: Rutland County Council
-- name: Shropshire Council
-- name: Slough Borough Council
-- name: Southampton City Council
-- name: Southend-on-Sea Borough Council
-- name: South Gloucestershire Council
-- name: Stockton-on-Tees Borough Council
-- name: Stoke-on-Trent City Council
-- name: Swindon Borough Council
-- name: Telford and Wrekin Borough Council
-- name: Thurrock Council
-- name: Torbay Council
-- name: Warrington Borough Council
-- name: West Berkshire Council
-- name: West Northamptonshire Council
-- name: Wiltshire Council
-- name: Windsor and Maidenhead Borough Council
-- name: Wokingham Borough Council
-- name: City of York Council
-- name: City of London
+- name: Wigan
+- name: Wiltshire
+- name: Windsor and Maidenhead
+- name: Wirral
+- name: Wokingham
+- name: Wolverhampton
+- name: Worcestershire
+- name: York

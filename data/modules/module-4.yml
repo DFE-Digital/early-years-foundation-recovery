@@ -14,6 +14,8 @@ module-4:
     type: text_page         # submodule 1 / topic 1
   4-1-1-1a:
     type: text_page
+  4-1-1-1video:
+    type: video_page
   4-1-1-1b:
     type: text_page
   4-1-1-1c:
@@ -43,6 +45,8 @@ module-4:
     type: text_page
   4-1-2-4a:
     type: text_page
+  4-1-2-4video:
+    type: video_page
   4-1-2-4b:
     type: formative_questionnaire
   4-1-2-4c:
@@ -95,7 +99,7 @@ module-4:
     type: text_page         # submodule 2 / topic 2
   4-2-2-1:
     type: text_page
-  4-2-2-1b: 
+  4-2-2-1b:
     type: formative_questionnaire
   4-2-2-2:
     type: text_page
@@ -133,6 +137,8 @@ module-4:
     type: text_page
   4-3-2-1a:
     type: text_page
+  4-3-2-1video:
+    type: video_page
   4-3-2-1b:
     type: formative_questionnaire
   4-3-2-2a:
@@ -148,6 +154,8 @@ module-4:
     type: text_page
   4-3-3-1a:
     type: text_page
+  4-3-3-1video:
+    type: video_page
   4-3-3-1b:
     type: formative_questionnaire
   4-3-3-2:
@@ -195,21 +203,21 @@ module-4:
 # Confidence check
 # ----------------------------------------------------------------------------
 
-  4-4-2: 
+  4-4-2:
     type: confidence_intro
-  4-4-2-1: 
+  4-4-2-1:
     type: confidence_questionnaire
-  4-4-2-2: 
+  4-4-2-2:
     type: confidence_questionnaire
-  4-4-2-3: 
+  4-4-2-3:
     type: confidence_questionnaire
-  4-4-2-4: 
+  4-4-2-4:
     type: confidence_questionnaire
-  4-4-2-5: 
+  4-4-2-5:
     type: confidence_questionnaire
-  4-4-2-6: 
+  4-4-2-6:
     type: confidence_questionnaire
-  4-4-2-7: 
+  4-4-2-7:
     type: thankyou
-  4-4-3: 
+  4-4-3:
     type: certificate

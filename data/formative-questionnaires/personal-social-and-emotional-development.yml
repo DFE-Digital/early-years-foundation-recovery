@@ -132,7 +132,7 @@ personal-social-and-emotional-development:
           It will also help children to:
 
           - develop independence
-          - understand the concepts of actions and consequences
+          - understand that their actions impact them and those around them
           - develop their language skills by engaging in conversations and discussing their choices
         assessment_fail_summary: |
           Frequent use of choice encourages self-worth, as being involved in choices
@@ -140,7 +140,7 @@ personal-social-and-emotional-development:
           It will also help children to:
 
           - develop independence
-          - understand the concepts of actions and consequences
+          - understand that their actions impact them and those around them
           - develop their language skills by engaging in conversations and discussing their choices
         answers:
           1: It will confuse children
@@ -263,7 +263,7 @@ personal-social-and-emotional-development:
         correct_answers:
           - 3
 
-  3-2-1-3b:
+  3-2-1-3a:
     content:
     questions:
       1_ainsworth:
@@ -296,7 +296,7 @@ personal-social-and-emotional-development:
         correct_answers:
           - 2
 
-  3-2-1-3d:
+  3-2-1-3g:
     content:
     questions:
       1_unpredictable_responses:
@@ -312,7 +312,7 @@ personal-social-and-emotional-development:
         correct_answers:
           - 1
 
-  3-2-1-3e:
+  3-2-1-3h:
     content:
     questions:
       1_josh_attachment:
