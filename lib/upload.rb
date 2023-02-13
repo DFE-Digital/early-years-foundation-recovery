@@ -30,6 +30,8 @@ class Upload
       mod.module_items.map do |item|
         child_entry = create_entry(item)
 
+=begin FIXME: > 1-1-1-3: ![Adults and children holding hands.](/assets/1-1-1-3-1127324447.jpg) stalls as Contentful struggles to process this specific file.
+
         # Media upload if found in body copy
         image = item.model.body&.match(IMG_REGEXP) # MatchData
 
@@ -46,6 +48,8 @@ class Upload
           # "//images.ctfassets.net/dvmeh832nmjc/6etSgfjBK2UveguU2mZp4z/7f74406a62500bb14337a458a0e00a66/_assets_1-532263705.jpg"
           child_entry.body = item.model.body.gsub(image[:filename], asset.image_url)
         end
+
+=end
 
         # parent
         child_entry.training_module = mod_entry

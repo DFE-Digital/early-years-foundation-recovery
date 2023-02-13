@@ -33,3 +33,9 @@ Rails/SaveBang:
   Exclude:
     - 'app/controllers/registrations_controller.rb'
     - 'config/sitemap.rb'
+
+# Offense count: 1
+# This cop supports safe autocorrection (--autocorrect).
+Style/BlockComments:
+  Exclude:
+    - 'lib/upload.rb'
