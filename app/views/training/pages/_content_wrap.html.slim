@@ -1,0 +1,8 @@
+.govuk-grid-row
+  .govuk-grid-column-two-thirds-from-desktop
+    = yield :content_page
+
+    - if @module_item.notes?
+      = render partial: 'notes/form'
+    - else
+      = render partial: 'course_pages_footer'

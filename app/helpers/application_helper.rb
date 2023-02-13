@@ -49,6 +49,12 @@ module ApplicationHelper
     SummativeAssessmentProgress.new(user: current_user, mod: mod)
   end
 
+  # @param mod [Training::Module]
+  # @return [ContentfulModuleProgress]
+  def cms_module_progress(mod)
+    ContentfulModuleProgress.new(user: current_user, mod: mod)
+  end
+
   # @param mod [TrainingModule]
   # @return [ModuleProgress]
   def module_progress(mod)

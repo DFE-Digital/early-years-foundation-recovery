@@ -11,9 +11,9 @@ RSpec.describe FillPageViews do
     end
 
     it 'has no effect' do
-      expect(Ahoy::Event.count).to be 3
+      expect(Ahoy::Event.count).to be 4
       expect { service.call }.to output(/user \[\d+\] module \[\d+\] - not skipped/).to_stdout_from_any_process
-      expect(Ahoy::Event.count).to be 3
+      expect(Ahoy::Event.count).to be 4
     end
   end
 

@@ -96,6 +96,7 @@ SitemapGenerator::Sitemap.create do
   # Representative content
   add training_module_content_page_path(mod, mod.interruption_page)
   add training_module_content_page_path(mod, mod.first_content_page)
+  # add training_module_content_page_path(mod, mod.text_pages.first) # for CMS
   add training_module_content_page_path(mod, mod.video_pages.first)
   add training_module_content_page_path(mod, mod.formative_questions.first)
   add training_module_content_page_path(mod, mod.summary_intro_page)

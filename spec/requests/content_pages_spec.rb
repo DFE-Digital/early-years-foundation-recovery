@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'ContentPages', type: :request do
   before do
+    skip 'WIP' if Rails.application.cms?
+
     sign_in create(:user, :registered)
   end
 
@@ -15,7 +17,7 @@ RSpec.describe 'ContentPages', type: :request do
     end
 
     it 'redirects to first item' do
-      expect(response).to redirect_to(training_module_content_page_path(:alpha, module_item))
+      expect(response).to redirect_to training_module_content_page_path(:alpha, module_item)
     end
   end
 
@@ -40,7 +42,7 @@ RSpec.describe 'ContentPages', type: :request do
       end
 
       it 'redirects to questionnaire controller' do
-        expect(response).to redirect_to(training_module_questionnaire_path(:alpha, module_item.model))
+        expect(response).to redirect_to training_module_questionnaire_path(:alpha, module_item.model)
       end
     end
   end

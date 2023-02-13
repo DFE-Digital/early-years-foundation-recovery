@@ -9,6 +9,11 @@ class TrainingModule < YamlBase
   end
 
   # @return [Integer]
+  def position
+    id
+  end
+
+  # @return [Integer]
   def topic_count
     items_by_topic.count
   end
@@ -35,7 +40,7 @@ class TrainingModule < YamlBase
   # @return [Array<Questionnaire>]
   def questionnaires
     module_items
-      .select { |item| item.type.include?('questionnaire') }
+      .select { |item| item.type.include?('question') }
       .map { |item| Questionnaire.find_by!(training_module: name, name: item.name) }
   end
 
@@ -179,5 +184,28 @@ class TrainingModule < YamlBase
   # @return [String]
   def card_anchor
     "#module-#{id}-#{title.downcase.parameterize}"
+  end
+
+  # CMS migration --------------------------------------------------------------
+
+  def content
+    module_items
+  end
+
+  # Attribute conversion to Contentful format
+  #
+  # @return [Hash] Training Module Contentful Model params
+  def cms_module_params
+    {
+      title: title,
+      name: name,
+      short_description: short_description,
+      description: description,
+      duration: duration,
+      summative_threshold: summative_threshold,
+      objective: objective,
+      criteria: criteria,
+      position: id,
+    }
   end
 end

@@ -11,7 +11,7 @@ defaults: &defaults
   FEEDBACK_URL: https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxUMk01Qlc1R0dKRUQ0WEpPUUFYVzdWRllXUCQlQCN0PWcu
   GOVUK_APP_DOMAIN: london.cloudapps.digital
   GROVER_NO_SANDBOX: true
-  CONTENTFUL: true
+  EDITOR: vi
 
 # ey-recovery
 production:
@@ -33,13 +33,15 @@ development:
   <<: *defaults
   DOMAIN: ey-recovery-dev.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-dev
+  CONTENTFUL: true
   CONTENTFUL_ENVIRONMENT: test
 
 # ey-recovery-content
 content:
   <<: *defaults
-  # TRAINING_MODULES: demo-modules
-  # CONTENTFUL_ENVIRONMENT: test
+  CONTENTFUL: true
+  CONTENTFUL_ENVIRONMENT: genuine
+  TRAINING_MODULES: demo-modules
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx

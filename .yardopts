@@ -4,6 +4,7 @@
 --private
 --markup markdown
 -
+cms/*.md
 data/*.md
 uml/*.md
 adr/*.md
