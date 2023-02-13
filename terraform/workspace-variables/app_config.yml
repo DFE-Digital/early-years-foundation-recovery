@@ -38,7 +38,7 @@ development:
 # ey-recovery-content
 content:
   <<: *defaults
-  CONTENTFUL: true
+  # CONTENTFUL: true
   CONTENTFUL_ENVIRONMENT: test
   TRAINING_MODULES: demo-modules
   # @see .github/workflows/content.yml

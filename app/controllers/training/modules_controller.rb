@@ -1,6 +1,8 @@
 class Training::ModulesController < Contentful::BaseController
   before_action :authenticate_registered_user!, only: :show
 
+  # helper_method :mod # TODO: replace use of instance variables with helper methods throughout
+
   def index
     track('course_overview_page')
     @mods = Training::Module.ordered.reject(&:draft?)
@@ -23,7 +25,7 @@ class Training::ModulesController < Contentful::BaseController
 protected
 
   def debug?
-    (params[:debug] && Rails.application.debug?) || mod.draft?
+    params[:debug] && Rails.application.debug?
   end
 
   def mod

@@ -13,9 +13,9 @@ module ContentHelper
     header = ['Module name', 'Date completed', 'Actions']
     rows = mods.map do |mod, timestamp|
       [
-        govuk_link_to(mod.title, training_module_path(mod)),
+        govuk_link_to(mod.title, training_module_path(mod.name)),
         timestamp.to_date.strftime('%-d %B %Y'),
-        govuk_link_to('View certificate', training_module_content_page_path(mod, mod.certificate_page)),
+        govuk_link_to('View certificate', training_module_content_page_path(mod.name, mod.certificate_page.name)),
       ]
     end
 
