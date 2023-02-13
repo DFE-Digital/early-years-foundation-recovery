@@ -108,9 +108,13 @@ class User < ApplicationRecord
     timestamp.to_date&.to_formatted_s(:rfc822)
   end
 
-  # @return [CourseProgress] course activity query interface
+  # @return [CourseProgress, ContentfulCourseProgress] course activity query interface
   def course
-    @course ||= CourseProgress.new(user: self)
+    @course ||= if Rails.application.cms?
+                  ContentfulCourseProgress.new(user: self)
+                else
+                  CourseProgress.new(user: self)
+                end
   end
 
   def course_started?
@@ -126,7 +130,7 @@ class User < ApplicationRecord
   end
 
   def childminder?
-    setting_type_id == 'other' ? false : (setting.role_type == 'childminder')
+    setting_type_id == 'other' ? false : setting.role_type.eql?('childminder')
   end
 
   def role_type_required?

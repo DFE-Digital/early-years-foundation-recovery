@@ -160,6 +160,29 @@ class Questionnaire < OpenStruct
     SUMMARY
   end
 
+  # answers:
+  #   [
+  #     { 1 => ['Correct answer 1', true] },
+  #     { 2 => ['Wrong answer 1', false] },
+  #   ]
+  # @return [Hash] Question Contentful Model params
+  def cms_params
+    _name, question = questions.first
+    answers = question[:answers].map { |key, value| { key => [value, question[:correct_answers].include?(key)] } }
+
+    {
+      body: body,
+      assessment_succeed: question[:assessment_summary],
+      assessment_fail: question[:assessment_fail_summary],
+      assessments_type: assessments_type,
+      answers: answers,
+
+      # pagination
+      page_number: page_number,
+      total_questions: total_questions,
+    }
+  end
+
 private
 
   # Validations are not used in any logic currently

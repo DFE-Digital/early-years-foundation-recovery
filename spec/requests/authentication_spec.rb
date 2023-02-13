@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+# TODO: refactor so let=user is the variable and the before block is defined once
+#
 RSpec.describe 'Authentication', type: :request do
   describe 'viewing authenticate_user! controller action' do
     let(:action_path) { edit_registration_name_path }
@@ -32,7 +34,7 @@ RSpec.describe 'Authentication', type: :request do
       end
     end
 
-    context 'with partially registered User' do
+    context 'with partially registered user' do
       before { sign_in create(:user, :confirmed) }
 
       it 'renders page' do
@@ -98,7 +100,9 @@ RSpec.describe 'Authentication', type: :request do
     end
 
     context 'with registered User' do
-      before { sign_in create(:user, :registered) }
+      before do
+        sign_in create(:user, :registered)
+      end
 
       it 'renders page' do
         get action_path

@@ -10,6 +10,9 @@ services:
       test: curl --fail http://localhost:3000/health || exit 1
     restart: on-failure
     environment:
+      # rails credentials
+      - EDITOR=vi
+      # psql client
       - PGUSER=postgres
       - PGPASSWORD=password
       - PGHOST=db
@@ -18,10 +21,6 @@ services:
       - RAILS_ENV=development
       - DOMAIN=app:3000
       - RAILS_SERVE_STATIC_FILES=true
-      - TIMEOUT_MINUTES
-      - TIMEOUT_WARNING_MINUTES
-      - TRAINING_MODULES
-      - BOT_TOKEN
     volumes:
       - .:/srv
     tty: true

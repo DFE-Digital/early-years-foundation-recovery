@@ -456,11 +456,26 @@ en:
 
   # Browser and bookmarks ------------------------------------------------------
   html_title:
+
+    # YAML
+    training_modules:
+      index: About training
     content_pages:
       show:
         what-to-expect: What to expect during the training
         before-you-start: Before you start
         intro: Introduction
+
+    # Contentful
+    training/modules:
+      index: About training
+    training/pages:
+      show:
+        what-to-expect: What to expect during the training
+        before-you-start: Before you start
+        intro: Introduction
+
+    # --------------------------------------------------------------------------
     home:
       index: Home page
     learning:
@@ -477,8 +492,7 @@ en:
       edit_setting_type: Change your setting type
       check_email_confirmation: Check email confirmation
       check_email_password_reset: Check email password reset
-    training_modules:
-      index: About training
+
     timeout:
       timeout_user: User timeout
     users/sessions:

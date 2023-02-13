@@ -20,7 +20,7 @@ private
     request.headers['BOT']
   end
 
-  # @see lib/tasks/bot.rake
+  # @see lib/tasks/efys.rake
   # @return [String]
   def bot_email
     "#{Rails.configuration.bot_token}@example.com"

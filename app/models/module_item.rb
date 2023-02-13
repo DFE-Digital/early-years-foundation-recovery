@@ -96,6 +96,8 @@ class ModuleItem < YamlBase
       ---
       submodule items count: #{number_within_submodule}
       topic items count: #{number_within_topic}
+
+      ---
     SUMMARY
   end
 
@@ -313,6 +315,54 @@ class ModuleItem < YamlBase
   def progress_node?
     submodule_intro? || summary_intro? || assessment_intro?
   end
+
+  # CMS START -------------------------
+
+  # Attribute conversion to Contentful format
+  #
+  # @return [Hash] Common content params
+  def cms_shared_params
+    {
+      name: name,
+      page_type: type,
+      heading: model.heading,
+      body: model.body,
+      submodule: submodule_name.to_i,
+      topic: topic_name.to_i,
+    }
+  end
+
+  # @return [Hash] Video Contentful Model params
+  def cms_video_params
+    cms_shared_params.merge(
+      transcript: model.transcript,
+      title: model.translate(:video)[:title],
+      video_id: model.translate(:video)[:id].to_s,
+      video_provider: model.translate(:video)[:provider],
+    )
+  end
+
+  # @return [Hash] Page Contentful Model params
+  def cms_page_params
+    cms_shared_params.merge(notes: model&.notes?)
+  end
+
+  # @return [Hash] Question Contentful Model params
+  def cms_question_params
+    cms_shared_params.merge(questionnaire.cms_params)
+  end
+
+  # @see Upload
+  # @return [Questionnaire]
+  def questionnaire
+    Questionnaire.find_by!(name: name, training_module: training_module)
+  end
+
+  def page_type
+    type
+  end
+
+# CMS END -------------------------
 
 private
 

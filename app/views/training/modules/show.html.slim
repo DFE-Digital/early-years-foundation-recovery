@@ -1,0 +1,26 @@
+- content_for(:head) do
+  = tag.meta name: 'turbo-visit-control', content: 'reload'
+
+= govuk_back_link text: 'Back to My modules', href: my_modules_path
+
+.light-grey-box
+  .govuk-grid-row
+    .govuk-grid-column-full
+      h1.govuk-heading-l= @mod.card_title
+      p.govuk-caption-m= translate_markdown(@mod.description)
+
+      - @module_progress.call_to_action do |state, page|
+        = cms_link_to_action(state, page)
+
+h2.govuk-heading-m Your module progress
+p.govuk-body You can continue your learning, look at your module progress, or revisit pages of the training.
+h3.govuk-heading-s Module contents
+
+.govuk-grid-row
+  .govuk-grid-column-full
+    hr.govuk-section-break.govuk-section-break--m.govuk-section-break--visible.module-overview-section-break
+
+    - @module_progress.sections.each do |section|
+      = render 'shared/module_overview_section', **section
+
+= render 'debug'
