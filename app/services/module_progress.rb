@@ -38,7 +38,7 @@ class ModuleProgress
   # Last visited module item with fallback to first item
   # @return [ModuleItem]
   def resume_page
-    unvisited.first&.previous_item || mod.icons_page
+    unvisited.first&.previous_item || mod.first_content_page
   end
 
   # Identify new content that has not been seen and would effect module state
@@ -79,7 +79,7 @@ class ModuleProgress
   # @see CourseProgress
   # @return [Boolean] module pages have been viewed (past interruption)
   def started?
-    visited?(mod.intro_page)
+    visited?(mod.first_content_page)
   end
 
   # @return [Boolean] view event logged for page

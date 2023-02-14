@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :timeoutable, :trackable, :recoverable and :omniauthable
+  attr_accessor :context
+
   devise :database_authenticatable, :registerable, :recoverable,
          :validatable, :rememberable, :confirmable, :lockable, :timeoutable
 
@@ -48,6 +50,8 @@ class User < ApplicationRecord
   validates :setting_type_id,
             inclusion: { in: SettingType.valid_setting_types },
             if: proc { |u| u.registration_complete }
+  validates :closed_reason, presence: true, if: -> { context == :close_account }
+  validates :closed_reason_custom, presence: true, if: proc { |u| u.closed_reason == 'other' }
 
   validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
 
@@ -80,6 +84,14 @@ class User < ApplicationRecord
     send_devise_notification(:email_taken)
   end
 
+  def send_account_closed_notification
+    send_devise_notification(:account_closed)
+  end
+
+  def send_account_closed_internal_notification(user_account_email)
+    send_devise_notification(:account_closed_internal, user_account_email)
+  end
+
   # @return [String]
   def name
     [first_name, last_name].compact.join(' ')
@@ -96,9 +108,13 @@ class User < ApplicationRecord
     timestamp.to_date&.to_formatted_s(:rfc822)
   end
 
-  # @return [CourseProgress] course activity query interface
+  # @return [CourseProgress, ContentfulCourseProgress] course activity query interface
   def course
-    @course ||= CourseProgress.new(user: self)
+    @course ||= if Rails.application.cms?
+                  ContentfulCourseProgress.new(user: self)
+                else
+                  CourseProgress.new(user: self)
+                end
   end
 
   def course_started?
@@ -114,7 +130,7 @@ class User < ApplicationRecord
   end
 
   def childminder?
-    setting_type_id == 'other' ? false : (setting.role_type == 'childminder')
+    setting_type_id == 'other' ? false : setting.role_type.eql?('childminder')
   end
 
   def role_type_required?
@@ -137,6 +153,17 @@ class User < ApplicationRecord
 
   def private_beta_registration_complete?
     !!private_beta_registration_complete
+  end
+
+  def redact!
+    skip_reconfirmation!
+    update!(first_name: 'Redacted',
+            last_name: 'User',
+            email: "redacted_user#{id}@example.com",
+            closed_at: Time.zone.now,
+            password: 'redacteduser')
+
+    notes.update_all(body: nil)
   end
 
   def local_authority_text

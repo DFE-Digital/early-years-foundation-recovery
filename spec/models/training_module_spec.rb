@@ -35,40 +35,20 @@ RSpec.describe TrainingModule, type: :model do
     end
   end
 
-  describe '#icons_page' do
-    subject(:module_item) { training_module.icons_page }
-
-    it 'is the second page' do
-      expect(module_item.id).to be 2
-      expect(module_item.name).to eql 'before-you-start'
-      expect(module_item.type).to eql 'icons_page'
-    end
-  end
-
-  describe '#intro_page' do
-    subject(:module_item) { training_module.intro_page }
-
-    it 'is the third page' do
-      expect(module_item.id).to be 3
-      expect(module_item.name).to eql 'intro'
-      expect(module_item.type).to eql 'module_intro'
-    end
-  end
-
   describe '#first_content_page' do
     subject(:module_item) { training_module.first_content_page }
 
-    it 'is the fifth page' do
-      expect(module_item.id).to be 5
-      expect(module_item.name).to eql '1-1-1'
+    it 'is first content page' do
+      expect(module_item.id).to be 2
+      expect(module_item.name).to eql '1-1'
     end
   end
 
   describe '#summary_intro_page' do
     subject(:module_item) { training_module.summary_intro_page }
 
-    it 'is the 15th page' do
-      expect(module_item.id).to be 15
+    it 'is the 13th page' do
+      expect(module_item.id).to be 13
       expect(module_item.name).to eql '1-3'
       expect(module_item.type).to eql 'summary_intro'
     end
@@ -77,8 +57,8 @@ RSpec.describe TrainingModule, type: :model do
   describe '#assessment_results_page' do
     subject(:module_item) { training_module.assessment_results_page }
 
-    it 'is the 22nd page' do
-      expect(module_item.id).to be 22
+    it 'is the 20th page' do
+      expect(module_item.id).to be 20
       expect(module_item.name).to eql '1-3-2-5'
       expect(module_item.type).to eql 'assessment_results'
     end
@@ -87,8 +67,8 @@ RSpec.describe TrainingModule, type: :model do
   describe '#confidence_intro_page' do
     subject(:module_item) { training_module.confidence_intro_page }
 
-    it 'is the 23rd page' do
-      expect(module_item.id).to be 23
+    it 'is the 21st page' do
+      expect(module_item.id).to be 21
       expect(module_item.name).to eql '1-3-3'
       expect(module_item.type).to eql 'confidence_intro'
     end
@@ -98,7 +78,7 @@ RSpec.describe TrainingModule, type: :model do
     subject(:module_item) { training_module.last_page }
 
     it 'is the page before the certificate' do
-      expect(module_item.id).to be 27
+      expect(module_item.id).to be 25
       expect(module_item.name).to eql '1-3-3-4'
       expect(module_item.type).to eql 'thankyou'
     end

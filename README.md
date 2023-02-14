@@ -277,7 +277,6 @@ CSS styling changes will appear automatically without needing to restart.
 - [designer guide](https://govspeak-preview.publishing.service.gov.uk/guide)
 - [developer guide](https://docs.publishing.service.gov.uk/repos/govspeak.html)
 
-
 ## User experience
 
 Session timeout functionality:

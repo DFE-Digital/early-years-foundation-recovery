@@ -21,7 +21,6 @@ class ModuleItem < YamlBase
   MODELS = {
     # common
     interruption_page: CommonPage,
-    icons_page: CommonPage,
     summary_intro: CommonPage,
     assessment_intro: CommonPage,
     assessment_results: CommonPage,
@@ -29,7 +28,6 @@ class ModuleItem < YamlBase
     thankyou: CommonPage,
     certificate: CommonPage,
     # content
-    module_intro: ContentPage,
     sub_module_intro: ContentPage,
     text_page: ContentPage,
     recap_page: ContentPage,
@@ -98,6 +96,8 @@ class ModuleItem < YamlBase
       ---
       submodule items count: #{number_within_submodule}
       topic items count: #{number_within_topic}
+
+      ---
     SUMMARY
   end
 
@@ -188,16 +188,6 @@ class ModuleItem < YamlBase
   end
 
   # @return [Boolean]
-  def icons_page?
-    type.eql?('icons_page')
-  end
-
-  # @return [Boolean]
-  def module_intro?
-    type.eql?('module_intro')
-  end
-
-  # @return [Boolean]
   def submodule_intro?
     type.eql?('sub_module_intro')
   end
@@ -269,13 +259,9 @@ class ModuleItem < YamlBase
 
   # counters ---------------------------------
 
-  # @return [Integer] number of submodule items 1-[1]-1-1, (excluding intro)
+  # @return [Integer] number of submodule items 1-[1]-1-1
   def number_within_submodule
-    if module_intro?
-      0
-    else
-      current_submodule_items.count - 1
-    end
+    current_submodule_items.count - 1
   end
 
   # @return [Integer] number of topic items 1-1-[1]-1
@@ -327,8 +313,56 @@ class ModuleItem < YamlBase
 
   # @return [Boolean]
   def progress_node?
-    icons_page? || module_intro? || submodule_intro? || summary_intro? || assessment_intro?
+    submodule_intro? || summary_intro? || assessment_intro?
   end
+
+  # CMS START -------------------------
+
+  # Attribute conversion to Contentful format
+  #
+  # @return [Hash] Common content params
+  def cms_shared_params
+    {
+      name: name,
+      page_type: type,
+      heading: model.heading,
+      body: model.body,
+      submodule: submodule_name.to_i,
+      topic: topic_name.to_i,
+    }
+  end
+
+  # @return [Hash] Video Contentful Model params
+  def cms_video_params
+    cms_shared_params.merge(
+      transcript: model.transcript,
+      title: model.translate(:video)[:title],
+      video_id: model.translate(:video)[:id].to_s,
+      video_provider: model.translate(:video)[:provider],
+    )
+  end
+
+  # @return [Hash] Page Contentful Model params
+  def cms_page_params
+    cms_shared_params.merge(notes: model&.notes?)
+  end
+
+  # @return [Hash] Question Contentful Model params
+  def cms_question_params
+    cms_shared_params.merge(questionnaire.cms_params)
+  end
+
+  # @see Upload
+  # @return [Questionnaire]
+  def questionnaire
+    Questionnaire.find_by!(name: name, training_module: training_module)
+  end
+
+  def page_type
+    type
+  end
+
+# CMS END -------------------------
 
 private
 
