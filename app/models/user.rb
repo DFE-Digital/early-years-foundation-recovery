@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :timeoutable, :trackable, :recoverable and :omniauthable
+  attr_accessor :context
+
   devise :database_authenticatable, :registerable, :recoverable,
          :validatable, :rememberable, :confirmable, :lockable, :timeoutable
 
@@ -10,8 +12,36 @@ class User < ApplicationRecord
   has_many :events, class_name: 'Ahoy::Event'
   has_many :notes
 
-  scope :registered, -> { where(registration_complete: true) }
-  scope :not_registered, -> { where(registration_complete: nil) }
+  # TODO: use scope with email alert
+  # created an account within public beta but still not using service
+  scope :registration_incomplete, -> { where(registration_complete: false) }
+
+  # completed registration within public beta (may include private beta users)
+  scope :registration_complete, -> { where(registration_complete: true) }
+
+  # @note
+  #   The default for :registration_complete was originally nil,
+  #   when the registration journey was revised,
+  #   the existing :registration_complete boolean was renamed,
+  #   and the default changed to false
+  #
+  scope :registered_since_private_beta, -> { where(private_beta_registration_complete: false) }
+
+  # completed registration in both private and public beta
+  scope :reregistered, -> { where(private_beta_registration_complete: true, registration_complete: true) }
+
+  # only registered to completion within private beta
+  scope :private_beta_only_registration_complete, -> { where(private_beta_registration_complete: true, registration_complete: false) }
+
+  # registered within private beta but never completed
+  scope :private_beta_only_registration_incomplete, -> { where(private_beta_registration_complete: nil) }
+
+  # new users only
+  scope :public_beta_only_registration_complete, -> { registered_since_private_beta.registration_complete }
+
+  scope :confirmed, -> { where.not(confirmed_at: nil) }
+  scope :unconfirmed, -> { where(confirmed_at: nil) }
+  scope :locked_out, -> { where.not(locked_at: nil) }
 
   validates :first_name, :last_name, :setting_type_id,
             presence: true,
@@ -20,6 +50,8 @@ class User < ApplicationRecord
   validates :setting_type_id,
             inclusion: { in: SettingType.valid_setting_types },
             if: proc { |u| u.registration_complete }
+  validates :closed_reason, presence: true, if: -> { context == :close_account }
+  validates :closed_reason_custom, presence: true, if: proc { |u| u.closed_reason == 'other' }
 
   validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
 
@@ -52,6 +84,14 @@ class User < ApplicationRecord
     send_devise_notification(:email_taken)
   end
 
+  def send_account_closed_notification
+    send_devise_notification(:account_closed)
+  end
+
+  def send_account_closed_internal_notification(user_account_email)
+    send_devise_notification(:account_closed_internal, user_account_email)
+  end
+
   # @return [String]
   def name
     [first_name, last_name].compact.join(' ')
@@ -68,9 +108,13 @@ class User < ApplicationRecord
     timestamp.to_date&.to_formatted_s(:rfc822)
   end
 
-  # @return [CourseProgress] course activity query interface
+  # @return [CourseProgress, ContentfulCourseProgress] course activity query interface
   def course
-    @course ||= CourseProgress.new(user: self)
+    @course ||= if Rails.application.cms?
+                  ContentfulCourseProgress.new(user: self)
+                else
+                  CourseProgress.new(user: self)
+                end
   end
 
   def course_started?
@@ -86,7 +130,7 @@ class User < ApplicationRecord
   end
 
   def childminder?
-    setting_type_id == 'other' ? false : (setting.role_type == 'childminder')
+    setting_type_id == 'other' ? false : setting.role_type.eql?('childminder')
   end
 
   def role_type_required?
@@ -109,6 +153,25 @@ class User < ApplicationRecord
 
   def private_beta_registration_complete?
     !!private_beta_registration_complete
+  end
+
+  def redact!
+    skip_reconfirmation!
+    update!(first_name: 'Redacted',
+            last_name: 'User',
+            email: "redacted_user#{id}@example.com",
+            closed_at: Time.zone.now,
+            password: 'redacteduser')
+
+    notes.update_all(body: nil)
+  end
+
+  def local_authority_text
+    if local_authority.nil? || local_authority.eql?('local authority')
+      'Multiple'
+    else
+      local_authority
+    end
   end
 
 private

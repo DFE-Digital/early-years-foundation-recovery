@@ -161,8 +161,8 @@ en:
   module_call_to_action:
     completed: View certificate
     failed: Retake test
-    started: Resume training
-    not_started: Start
+    started: Resume module
+    not_started: Start module
 
   experts:
     heading: The experts
@@ -214,6 +214,10 @@ en:
   timeout:
     heading: You're about to be signed out
     body: Your progress through the training has been saved. Other changes made to your account or learning log will not be saved.
+    noscript: |
+      For security, you'll be signed out at %{sign_out_time}.
+
+      To stay signed in, continue through the training or refresh the page.
 
   summary_intro:
     heading: Summary and next steps
@@ -287,10 +291,21 @@ en:
 
       ## Videos and mobile data usage
 
-      This module contains videos. Connect to wifi before starting the module to watch the videos without using any mobile data. If you are not able or prefer not to play the videos, you can use the full transcripts provided.
+      This module contains videos. Connect to wifi before starting the module to
+      watch the videos without using any mobile data. If you are not able or prefer
+      not to play the videos, you can use the full transcripts provided.
 
-  icons_page:
-    heading: Before you start
+      ## Free wifi, internet and data resources
+      
+      Our [free wifi, internet and data resources](/wifi-and-data) may help if you have limited or
+      no access to the internet.
+
+      ## Learning check
+      
+      You’ll see the question mark icon next to quiz questions throughout the module.
+      These questions are to check you understand what you have learned.
+      You will be able to see if you get these questions right or wrong.
+      Your scores are not recorded and they do not count towards the certificate of achievement.
 
   check_email_confirmation:
     heading: Check your email
@@ -338,6 +353,51 @@ en:
       title: I have a different problem
       text: For other problems with creating your account or signing in, please
       link_text: contact us
+
+  close_account:
+    body: |
+      If you do not want to use your Early years child development training account anymore, you can ask us to close your account.
+      
+      You will no longer be able to access the training modules. Any certificates you have earned will be permanently deleted.
+    button: Request to close account
+    confirm:
+      heading: Confirm you want to close your account
+      body: |
+        After you close your account you will no longer be able to access the training modules.
+        
+        Any certificates you have earned will be permanently deleted.
+        
+        We will delete your personal information within 10 working days. The personal information we will delete includes:
+        
+        - your name
+        - your email address
+        - your postcode, if you provided it when you registered
+        - any notes you have written in your learning log 
+
+        We will keep some anonymous information about:
+        
+        - your role
+        - your local authority
+        - your usage of the training modules
+        - why you closed your account
+        
+        This is to help us improve the training. None of this information will be 
+        personally identifiable to you.
+
+        You may still receive emails while we are processing your account closure. 
+        After your personal information is deleted, you will not receive any further
+        emails from Early years child development training. 
+
+      confirm_button: Close my account
+      cancel_button: Cancel and go back to my account
+    closed:
+      heading: Account closed
+      body: |
+        We have received your request to close your account.
+
+        Your data will be deleted within 10 working days.
+
+        You have been logged out.
 
   assessment_results:
     heading: Assessment results
@@ -396,11 +456,26 @@ en:
 
   # Browser and bookmarks ------------------------------------------------------
   html_title:
+
+    # YAML
+    training_modules:
+      index: About training
     content_pages:
       show:
         what-to-expect: What to expect during the training
         before-you-start: Before you start
         intro: Introduction
+
+    # Contentful
+    training/modules:
+      index: About training
+    training/pages:
+      show:
+        what-to-expect: What to expect during the training
+        before-you-start: Before you start
+        intro: Introduction
+
+    # --------------------------------------------------------------------------
     home:
       index: Home page
     learning:
@@ -417,8 +492,7 @@ en:
       edit_setting_type: Change your setting type
       check_email_confirmation: Check email confirmation
       check_email_password_reset: Check email password reset
-    training_modules:
-      index: About training
+
     timeout:
       timeout_user: User timeout
     users/sessions:
@@ -442,10 +516,11 @@ en:
         cookie-policy: Cookie policy
     static:
       show:
-        privacy-policy: Privacy policy
         accessibility-statement: Accessibility statement
+        new-registration: Update your registration details
         other-problems-signing-in: Other problems signing in
+        privacy-policy: Privacy policy
+        sitemap: Sitemap
         terms-and-conditions: Terms and conditions
         whats-new: What's new
-        sitemap: Sitemap
-        new-registration: Update your registration details
+        wifi-and-data: Free internet, wifi and data resources

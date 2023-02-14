@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Sign in', type: :system do
+RSpec.describe 'Sign in' do
   let(:email_address) { user.email }
   let(:password) { 'StrongPassword123' }
 
@@ -49,10 +49,10 @@ RSpec.describe 'Sign in', type: :system do
       end
     end
 
-    context 'and makes 6 incorrect password attempts' do
+    context 'and makes 5 incorrect password attempts' do
       let(:password) { 'IncorrectPassword' }
 
-      5.times do
+      4.times do # 4 additional times, 5 in total
         before do
           fill_in 'Email address', with: email_address
           fill_in 'Password', with: password
@@ -62,7 +62,7 @@ RSpec.describe 'Sign in', type: :system do
 
       it 'locks account' do
         user.reload
-        expect(user.failed_attempts).to eq 6
+        expect(user.failed_attempts).to eq 5
         expect(user.access_locked?).to be true
         expect(page).to have_text('Warning')
           .and have_text('Enter a valid email address and password. Your account will be locked after 5 unsuccessful attempts. We will email you instructions to unlock your account.')

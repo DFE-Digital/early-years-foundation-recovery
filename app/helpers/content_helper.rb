@@ -13,19 +13,20 @@ module ContentHelper
     header = ['Module name', 'Date completed', 'Actions']
     rows = mods.map do |mod, timestamp|
       [
-        govuk_link_to(mod.title, training_module_path(mod)),
+        govuk_link_to(mod.title, training_module_path(mod.name)),
         timestamp.to_date.strftime('%-d %B %Y'),
-        govuk_link_to('View certificate', training_module_content_page_path(mod, mod.certificate_page)),
+        govuk_link_to('View certificate', training_module_content_page_path(mod.name, mod.certificate_page.name)),
       ]
     end
 
     govuk_table(rows: [header, *rows], caption: 'Completed modules')
   end
 
-  # @param mod [TrainingModule]
+  # @param mod [TrainingModule, Training::Module]
   # @return [String]
   def training_module_image(mod)
-    image_tag image_path(mod.thumbnail), class: 'full-width-img', width: 200, alt: '', title: ''
+    image_url = Rails.application.cms? ? mod.thumbnail_url : image_path(mod.thumbnail)
+    image_tag image_url, class: 'full-width-img', width: 200, alt: '', title: ''
   end
 
   # @param icon [String, Symbol] Fontawesome icon name
@@ -77,7 +78,7 @@ module ContentHelper
   def page_number(current:, total:)
     return if current.blank?
 
-    content_tag :span, class: 'govuk-caption-l' do
+    content_tag :span, class: 'govuk-caption-l data-hj-allow' do
       t('page_number', current: current, total: total)
     end
   end
@@ -94,9 +95,15 @@ module ContentHelper
   end
 
   # @param status [String, Symbol]
-  # @param colour [String]
   # @return [String]
-  def progress_indicator(status, colour)
+  def progress_indicator(status)
+    colour =
+      case status
+      when :completed then nil
+      when :not_started then 'grey'
+      when :started then 'yellow'
+      end
+
     govuk_tag(text: t(status, scope: 'module_indicator'), colour: colour)
   end
 

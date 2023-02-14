@@ -1,6 +1,7 @@
 class AssessmentResultsController < ApplicationController
   before_action :authenticate_registered_user!, :clear_flash, :show_progress_bar
   after_action :track_events, only: :show
+  helper_method :training_module
 
   def new
     helpers.assessment_progress(training_module).archive_attempt
@@ -22,20 +23,21 @@ private
     @training_module ||= TrainingModule.find_by(name: params[:training_module_id])
   end
 
-  def track_summative_assessment_complete?
-    @assessment.attempted? && assessment_untracked?
+  # @return [Boolean] pass not yet recorded
+  def assessment_pass_untracked?
+    untracked?('summative_assessment_complete',
+               training_module_id: params[:training_module_id],
+               success: true)
   end
 
-  def assessment_untracked?
-    untracked?('summative_assessment_complete', training_module_id: params[:training_module_id])
-  end
-
+  # Record the attempt result unless already passed
+  # @return [Ahoy::Event, nil]
   def track_events
-    if track_summative_assessment_complete?
-      track('summative_assessment_complete',
-            success: @assessment.passed?,
-            type: 'summative_assessment',
-            score: @assessment.score)
-    end
+    return unless @assessment.attempted? && assessment_pass_untracked?
+
+    track('summative_assessment_complete',
+          type: 'summative_assessment',
+          score: @assessment.score,
+          success: @assessment.passed?)
   end
 end

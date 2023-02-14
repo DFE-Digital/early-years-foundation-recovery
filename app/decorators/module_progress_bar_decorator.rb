@@ -1,11 +1,3 @@
-#
-# Progress nodes are started when:
-#   - interruption page in intro node is viewed
-#   - first content page in submodule node is viewed
-#   - recap page in module summary node is viewed
-#
-# Headings are bold when page is within section
-#
 class ModuleProgressBarDecorator < DelegateClass(ModuleProgress)
   # @return [Array<Hash{Symbol => String,Boolean,Hash}>]
   def nodes
@@ -60,16 +52,8 @@ private
 
   # @return [Array<String>] ModuleItem types that define node divisions
   NODE_TYPES = %w[
-    interruption_page
     sub_module_intro
     summary_intro
-  ].freeze
-
-  # @return [Array<String>] ModuleItem types that form the contents of the first node
-  FIRST_NODE_TYPES = %w[
-    interruption_page
-    icons_page
-    module_intro
   ].freeze
 
   # @return [Array<ModuleItem>]
@@ -79,7 +63,7 @@ private
 
   # @return [String]
   def node_heading(node_item)
-    node_items.first.eql?(node_item) ? 'Module introduction' : node_item.model.heading
+    node_item.model.heading
   end
 
   # @return [nil, String] style the furthest node's heading
@@ -91,7 +75,7 @@ private
 
   # @return [String] 'start', '1', '2', etc.
   def node_name(node_item)
-    FIRST_NODE_TYPES.include?(node_item.type) ? 'start' : node_item.submodule_name
+    node_item.submodule_name
   end
 
   # @return [String] Percentage complete
@@ -130,9 +114,7 @@ private
 
   # @return [Boolean]
   def node_completed?(node_item)
-    if node_item.interruption_page?
-      visited? node_item.parent.intro_page
-    elsif node_item.summary_intro?
+    if node_item.summary_intro?
       visited? node_item.parent.certificate_page
     elsif node_item.submodule_intro?
       all? node_item.current_submodule_items
@@ -141,10 +123,6 @@ private
 
   # @return [Boolean]
   def node_started?(node_item)
-    if node_item.submodule_intro? || node_item.summary_intro?
-      visited? node_item.next_item
-    else
-      visited? node_item
-    end
+    visited? node_item
   end
 end

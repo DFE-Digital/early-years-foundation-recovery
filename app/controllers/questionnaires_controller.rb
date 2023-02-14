@@ -1,6 +1,7 @@
 class QuestionnairesController < ApplicationController
   before_action :authenticate_registered_user!, :module_item, :show_progress_bar
   before_action :track_events, only: :show
+  helper_method :training_module
 
   def show
     questionnaire_taker.prepare
@@ -84,24 +85,16 @@ private
     end
   end
 
+  # @return [Ahoy::Event] Show action
   def track_events
-    if questionnaire.first_confidence? && confidence_untracked?
+    if track_confidence_start?
       track('confidence_check_start')
-    end
-
-    if questionnaire.first_assessment? && summative_untracked?
+    elsif track_assessment_start?
       track('summative_assessment_start')
     end
   end
 
-  def summative_untracked?
-    untracked?('summative_assessment_start', training_module_id: params[:training_module_id])
-  end
-
-  def confidence_untracked?
-    untracked?('confidence_check_start', training_module_id: params[:training_module_id])
-  end
-
+  # @return [Ahoy::Event] Update action
   def track_questionnaire_answer
     key = questionnaire.questions.keys.first
 
@@ -109,5 +102,29 @@ private
           type: questionnaire.assessments_type,
           success: questionnaire.result_for(key),
           answer: questionnaire.answer_for(key))
+  end
+
+  # Check current item type for matching named event ---------------------------
+
+  # @return [Boolean]
+  def track_confidence_start?
+    questionnaire.first_confidence? && confidence_start_untracked?
+  end
+
+  # @return [Boolean]
+  def track_assessment_start?
+    questionnaire.first_assessment? && summative_start_untracked?
+  end
+
+  # Check unique event is not already present ----------------------------------
+
+  # @return [Boolean]
+  def summative_start_untracked?
+    untracked?('summative_assessment_start', training_module_id: params[:training_module_id])
+  end
+
+  # @return [Boolean]
+  def confidence_start_untracked?
+    untracked?('confidence_check_start', training_module_id: params[:training_module_id])
   end
 end

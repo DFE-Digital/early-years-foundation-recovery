@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Learning activity', type: :system do
+RSpec.describe 'Learning activity' do
   include_context 'with user'
 
   before do
@@ -69,7 +69,7 @@ RSpec.describe 'Learning activity', type: :system do
 
   context 'when a user has started the first mandatory module' do
     before do
-      visit '/modules/alpha/content-pages/intro'
+      visit '/modules/alpha/content-pages/1-1'
       visit '/my-modules'
     end
 

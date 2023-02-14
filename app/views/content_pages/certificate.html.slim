@@ -18,7 +18,7 @@
 h3 Certificate of achievement
 
 - if @module_progress.completed?
-  h1= current_user.name
+  h1.data-hj-suppress= current_user.name
   p has completed the following module:
 - else
   h1 Your name will appear here
@@ -26,7 +26,7 @@ h3 Certificate of achievement
 h2= training_module.title
 
 - if @module_progress.completed?
-  p= t('date_completed', date: @module_progress.module_completed_at)
+  p= t('date_completed', date: certificate_date(@module_progress.completed_at))
 
 p This module has covered:
 
@@ -41,9 +41,8 @@ h3 Certified by the Department for Education
     = image_tag('department-for-education-certificate.png', width: '220', alt: '', title: '')
 
 .noprint
-  = print_button
-
-  p.govuk-body
+  .govuk-button-group
+    = print_button
     = govuk_link_to 'Download certificate', training_module_content_page_path(training_module, training_module.certificate_page, format: :pdf), aria: { describedby: 'pdf-details' }
 
   p#pdf-details.govuk-body
@@ -57,5 +56,4 @@ h3 Certified by the Department for Education
 
   hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
 
-  div class='govuk-!-text-align-right'
-    = govuk_button_link_to 'Go to My modules', my_modules_path
+  = govuk_button_link_to 'Go to My modules', my_modules_path
