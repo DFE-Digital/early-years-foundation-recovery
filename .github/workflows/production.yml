@@ -114,3 +114,7 @@ jobs:
         name: Map production DNS route
         run: |
           cf map-route ey-recovery education.gov.uk --hostname child-development-training
+      -
+        name: Bind production syslog drain
+        run: |
+          cf bind-service ey-recovery ey-recovery-prod-logs
