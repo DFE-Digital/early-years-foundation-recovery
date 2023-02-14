@@ -40,8 +40,8 @@ development:
 content:
   <<: *defaults
   CONTENTFUL: true
-  CONTENTFUL_ENVIRONMENT: genuine
-  TRAINING_MODULES: demo-modules
+  CONTENTFUL_ENVIRONMENT: genuine-with-5
+  # TRAINING_MODULES: demo-modules
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
