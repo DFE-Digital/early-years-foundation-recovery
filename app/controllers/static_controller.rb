@@ -1,24 +1,15 @@
-class StaticController < ApplicationController
+class StaticController < Contentful::BaseController
   def show
-    if template_valid?
-      track('static_page')
-      render template
+    if model.present?
+      track 'static_page'
     else
-      render 'errors/not_found'
+      render 'errors/not_found', status: :not_found
     end
   end
 
 private
 
-  def template_valid?
-    template_exists?(template, lookup_context.prefixes)
-  end
-
-  def template
-    page_params[:id].underscore
-  end
-
-  def page_params
-    params.permit(:id)
+  def model
+    @model = Contentful::Static.find_by(name: params[:id]).first
   end
 end

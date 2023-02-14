@@ -81,11 +81,6 @@ gem 'dry-core'
 gem 'dry-initializer'
 gem 'dry-types'
 
-# Dry-rb
-gem 'dry-core'
-gem 'dry-initializer'
-gem 'dry-types'
-
 group :development, :test do
   # Use fake data for specs
   gem 'dotenv-rails'
