@@ -2,10 +2,6 @@
 module-5:
   what-to-expect:
     type: interruption_page
-  before-you-start:
-    type: icons_page
-  intro:
-    type: module_intro
 
   # ----------------------------------------------------------------------------
   # Submodule 1
@@ -133,7 +129,7 @@ module-5:
   5-4:
     type: summary_intro
   5-4-0: # NB: order
-    type: sub_module_intro
+    type: recap_page
 
   # ----------------------------------------------------------------------------
   # summative assessment
