@@ -27,6 +27,7 @@ class UploadStatic
         name: slug.to_s.dasherize,
         heading: page_info[:heading],
         body: page_info[:content],
+        html_title: page_info[:heading],
       })
 
       log_entry(static_page)

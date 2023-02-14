@@ -66,12 +66,23 @@ module ApplicationHelper
   end
 
   # @return [String]
-  def html_title(module_item)
-    module_title = module_item&.parent&.title
-    title = t(params.permit('controller', 'action', 'id').values.join('.'), scope: 'html_title', default: module_item&.model&.heading)
+  def html_title(item)
+    if item.instance_of?(Contentful::Static)
+      title = item.html_title
+    else
+      module_title = item&.parent&.title
+      title = t(params.permit('controller', 'action', 'id').values.join('.'), scope: 'html_title', default: item&.model&.heading)
+    end
     [
       service_name,
       module_title,
+      title,
+    ].compact.join(' : ')
+  end
+
+  def cms_html_title(title)
+    [
+      service_name,
       title,
     ].compact.join(' : ')
   end

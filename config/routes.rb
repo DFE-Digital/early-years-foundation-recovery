@@ -60,12 +60,10 @@ Rails.application.routes.draw do
   end
 
   # COURSE ---------------------------------------------------------------------
-    
+
   constraints !Rails.application.cms? do # NB: enabled if false
-    scope module: 'contentful' do
-      resources :static, only: %i[show], as: :static_pages, path: ''
-    end
-    
+    resources :static, only: %i[show], as: :static_pages, path: ''
+
     scope module: 'training' do
       resources :modules, only: %i[show], as: :training_modules do
         resources :pages, only: %i[index show], path: 'content-pages'
