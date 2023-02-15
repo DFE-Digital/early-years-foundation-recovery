@@ -174,6 +174,11 @@ class User < ApplicationRecord
     end
   end
 
+  def reset 
+    user_answers.destroy_all
+    events.destroy_all
+  end
+
 private
 
   def setting

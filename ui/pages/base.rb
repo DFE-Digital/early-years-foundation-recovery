@@ -8,5 +8,9 @@ module Pages
 
     section :header, Sections::Header, 'header.govuk-header'
     section :footer, Sections::Footer, 'footer.govuk-footer'
+
+    def ui
+      Ui.new
+    end
   end
 end

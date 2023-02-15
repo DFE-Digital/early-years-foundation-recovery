@@ -189,41 +189,39 @@ module Pages
     element :weight_bearing_activities_radio_button, '.govuk-radios__label', text: 'Weight bearing activities'
     element :twelve_to_eighteen_months_radio_button, '.govuk-radios__label', text: '12 to 18 months'
 
+    def delay = 2
+
     def complete_module_one
-      sleep(5)
+      sleep(delay * 2.5)
       start_button_module_one.click
-      sleep(10)
-      # resume_training_button.click
       next_button.click
-      sleep(2)
-      # [x] 1st:  what-to-expect
+      sleep(delay)
+      # [_] 1st:  what-to-expect
       next_button.click
-      sleep(2)
-      # [x] 2nd:  before-you-start
+      sleep(delay)
+      # [_] 2nd:  before-you-start
       next_button.click
-      sleep(2)
-      # [x] 3rd:  intro
-      next_button.click
-      sleep(2)
-      next_button.click
-      sleep(2)
+      sleep(delay)
       # [_] 4th:  1-1 (submodule 1) Page 0 of 29
-      save_and_continue_button.click
-      sleep(2)
-      a_childs_belief_that_they_can_succeed_radio_button.click
-      sleep(2)
-      # [_] 5th:  1-1-1 (submodule 1 / topic 1.0) Page 1 of 29
-      next_button_1.click
-      sleep(2)
       next_button.click
-      sleep(2)
+      next_button.click
+      next_button.click
+      save_and_continue_button.click
+      sleep(delay)
+      a_childs_belief_that_they_can_succeed_radio_button.click
+      sleep(delay)
+      # [_] 5th:  1-1-1 (submodule 1 / topic 1.0) Page 1 of 29
+      next_button.click
+      sleep(delay)
+      next_button.click
+      sleep(delay)
       # [_] 6th:  1-1-1-1 (submodule 1 / topic 1.1) Page 2 of 29
       save_and_continue_button.click
-      sleep(2)
+      sleep(delay)
       the_teaching_activities_you_choose_radio_button.click
       # [_] 7th:  1-1-1-1b (submodule 1 / topic 1.1b) Page 3 of 29
-      next_button_1.click
-      sleep(2)
+      next_button.click
+      sleep(delay)
       next_button.click
       sleep(2)
       save_and_continue_button.click
@@ -232,7 +230,7 @@ module Pages
       sleep(2)
       true_radio_button.click
       sleep(2)
-      next_button_1.click
+      next_button.click
       sleep(2)
       next_button.click
       sleep(2)
