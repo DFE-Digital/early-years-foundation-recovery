@@ -1,9 +1,9 @@
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
 
-    h1.govuk-heading-l= @model.heading
-    - if @model.subheading
-      p.govuk-body= @model.subheading
+    h1.govuk-heading-l= model.heading
+    - if model.subheading
+      p.govuk-body= model.subheading
       hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--m
 
-    .gem-c-govspeak= translate_markdown(@model.body)
+    .gem-c-govspeak= translate_markdown(model.body)

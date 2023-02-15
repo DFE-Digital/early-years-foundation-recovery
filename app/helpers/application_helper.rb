@@ -91,8 +91,4 @@ module ApplicationHelper
   def calculate_module_state
     CalculateModuleState.new(user: current_user).call
   end
-
-  def footer_static_pages
-    Static.find_by(footer: true).load
-  end
 end

@@ -3,7 +3,7 @@ html.govuk-template lang='en'
   head
     = tag.meta content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type'
 
-    title= html_title(@cms_title || @module_item || @user_form)
+    title= html_title(@cms_static || @module_item || @user_form)
     = render 'layouts/analytics_header'
     = render 'layouts/hotjar_tracking'
     = tag.meta content: 'width=device-width,initial-scale=1', name: 'viewport'

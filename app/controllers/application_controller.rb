@@ -2,12 +2,14 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_analytics_tracking_id, :set_hotjar_site_id, :set_internal_mailbox_email_address
 
-  helper_method :timeout_timer
+  helper_method :timeout_timer, :footer_static_pages
 
   default_form_builder(EarlyYearsRecoveryFormBuilder)
 
   include Tracking
   include Auditing
+
+  extend Dry::Core::Cache
 
   def authenticate_registered_user!
     authenticate_user! unless user_signed_in?
@@ -45,6 +47,10 @@ class ApplicationController < ActionController::Base
     timeout_controller.request = request
     timeout_controller.response = response
     timeout_controller.send(:ttl_to_timeout)
+  end
+
+  def footer_static_pages
+    fetch_or_store { Static.find_by(footer: true).load }
   end
 
 private
