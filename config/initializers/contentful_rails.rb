@@ -3,7 +3,7 @@ require 'training/module'
 require 'training/page'
 require 'training/question'
 require 'training/video'
-require 'contentful/static'
+require 'static'
 
 ContentfulRails.configure do |config|
   config.space            = Rails.application.config.contentful_space
@@ -31,7 +31,7 @@ ContentfulRails.configure do |config|
     delivery_api: { timeout_connect: 2, timeout_read: 6, timeout_write: 20 },
     management_api: { timeout_connect: 3, timeout_read: 100, timeout_write: 200 },
     entry_mapping: {
-      'static' => Contentful::Static,
+      'static' => Static,
       'trainingModule' => Training::Module,
       'page' => Training::Page,
       'question' => Training::Question,

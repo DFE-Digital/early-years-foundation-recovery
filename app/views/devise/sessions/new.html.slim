@@ -25,7 +25,7 @@
         - if devise_mapping.confirmable? && controller_name != 'confirmations'
           = govuk_link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name)
         br
-        = govuk_link_to 'Other problems signing in', static_page_path('other-problems-signing-in')
+        = govuk_link_to 'Other problems signing in', static_path('other-problems-signing-in')
       = f.govuk_submit 'Sign in'
       / TODO: confirm whether the remember me functionality should be added back in
       / = f.govuk_check_box :remember_me, 1, 0, multiple: false, link_errors: true, label: { text: t('password.remember_me') }

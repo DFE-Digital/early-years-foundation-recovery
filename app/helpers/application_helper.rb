@@ -67,7 +67,7 @@ module ApplicationHelper
 
   # @return [String]
   def html_title(item)
-    if item.instance_of?(Contentful::Static)
+    if item.instance_of?(Static)
       title = item.html_title
     else
       module_title = item&.parent&.title
@@ -93,6 +93,6 @@ module ApplicationHelper
   end
 
   def footer_static_pages
-    Contentful::Static.find_by(footer: true).load
+    Static.find_by(footer: true).load
   end
 end

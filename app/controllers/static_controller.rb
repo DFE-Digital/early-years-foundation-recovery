@@ -11,6 +11,6 @@ class StaticController < Contentful::BaseController
 private
 
   def model
-    @model = Contentful::Static.find_by(name: params[:id]).first
+    @model = Static.find_by(name: params[:id]).first
   end
 end

@@ -4,7 +4,7 @@
       ul.govuk-footer__list.govuk-footer__list--columns-3
         - footer_static_pages.each do |page|
           li.govuk-footer__list-item
-            = govuk_link_to page.heading, static_page_path(page.name), class: 'govuk-footer__link'
+            = govuk_link_to page.heading, static_path(page.name), class: 'govuk-footer__link'
 
         li.govuk-footer__list-item
           = govuk_link_to 'Cookies', '/settings/cookie-policy', class: 'govuk-footer__link'
@@ -14,4 +14,3 @@
 
         li.govuk-footer__list-item
           = govuk_link_to 'Feedback', Rails.configuration.feedback_url, class: 'govuk-footer__link',  target: '_blank'
-
