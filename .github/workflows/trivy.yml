@@ -37,7 +37,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       -
         name: Build and push Docker image (dependencies)
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           target: deps
           context: .
@@ -51,7 +51,7 @@ jobs:
             ${{ env.REGISTRY }}:deps
       -
         name: Build and push Docker image (application)
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           target: app
           context: .
@@ -66,7 +66,7 @@ jobs:
             ${{ env.REGISTRY }}:${{ github.sha }}
       -
         name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@0.9.0
+        uses: aquasecurity/trivy-action@0.9.1
         with:
           image-ref: ${{ env.REGISTRY }}:${{ github.sha }}
           format: table
