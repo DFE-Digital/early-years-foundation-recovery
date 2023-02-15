@@ -817,7 +817,7 @@ __metadata:
     accessible-autocomplete: ^2.0.4
     axios: ^1.3.3
     esbuild: ^0.17.4
-    govuk-frontend: ^4.4.0
+    govuk-frontend: ^4.5.0
     puppeteer: ^19.5.2
     sass: ^1.58.0
   languageName: unknown
@@ -965,10 +965,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"govuk-frontend@npm:^4.4.0":
-  version: 4.4.0
-  resolution: "govuk-frontend@npm:4.4.0"
-  checksum: 284877e1e6cfcf48baaed3c4dff705c3c409dcde29209afd0266998ed78b4b8c192a646b1c9719a598e1f4a652ab6c4074a18faf0de783531dd1dd5f7bed9459
+"govuk-frontend@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "govuk-frontend@npm:4.5.0"
+  checksum: 7a999ffb49c2f32f9dc3b0b743b698f8385d39cd0213d8aea1d7f2dfcc9f035f597030faac34659e8981d3c4a596379e99f5ea8c4d088cf486340eeaafdc800d
   languageName: node
   linkType: hard
 
