@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
   end
 
   def footer_static_pages
-    fetch_or_store { Static.find_by(footer: true).load }
+    fetch_or_store { Static.find_by(footer: true).order(:heading).load }
   end
 
 private
