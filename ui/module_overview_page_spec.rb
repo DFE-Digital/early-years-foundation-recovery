@@ -4,13 +4,13 @@ describe 'Complete modules' do
   include_context 'with user'
 
   before do
-    ui.my_learning.load
+    ui.my_modules.load
   end
 
   describe 'Child Development and the EYFS' do
     let(:module_name) { 'child-development-and-the-eyfs' }
     it 'has a happy path' do
-      overview = ui.my_learning.start_child_development_training
+      overview = ui.my_modules.start_child_development_training
       expect(overview).to be_displayed(module_name: module_name)
 
       what_to_expect = overview.start_module(module_name)
@@ -178,8 +178,8 @@ describe 'Complete modules' do
 
   describe 'Module One  ' do
     it ' Complete all page is displayed Get certificate' do
-      expect(ui.my_learning).to be_displayed
-      ui.my_learning.module_one_link.click
+      expect(ui.my_modules).to be_displayed
+      ui.my_modules.module_one_link.click
       ui.modules.complete_module_one
       ui.modules.complete_module_one_test
       # ui.modules.complete_module_one_confidence_check
@@ -195,7 +195,7 @@ describe 'Complete modules' do
 
     describe 'Module two ' do
       it 'Complete all page is displayed get certificate' do
-        ui.my_learning.module_two_link.click
+        ui.my_modules.module_two_link.click
         ui.modules.complete_module_two_upto_qs_twenty
         # expect(ui.modules.your_details_success_background.style('background-color')).to eq('background-color' => 'rgb(0, 112, 60)')
         ui.modules.complete_module_two_upto_qs_twenty_one
@@ -217,7 +217,7 @@ describe 'Complete modules' do
 
       describe 'Module three ' do
         it 'Complete all page is displayed get certificate' do
-          ui.my_learning.module_three_link.click
+          ui.my_modules.module_three_link.click
           sleep(30)
           ui.modules.complete_module_three
           ui.modules.complete_module_three_test

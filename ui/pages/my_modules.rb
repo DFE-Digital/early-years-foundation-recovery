@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 module Pages
-  class MyLearning < Base
+  class MyModules < Base
     set_url '/my-modules'
-    # set_url '/my-learning'
 
     element :heading, 'h1', text: 'My modules'
     element :available_module_title, 'h2', text: 'Available modules'
