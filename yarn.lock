@@ -377,14 +377,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "axios@npm:1.2.1"
+"axios@npm:^1.3.3":
+  version: 1.3.3
+  resolution: "axios@npm:1.3.3"
   dependencies:
     follow-redirects: ^1.15.0
     form-data: ^4.0.0
     proxy-from-env: ^1.1.0
-  checksum: c4dc4e119064c9aed09a3de309bedb797a139a6fb372223aafe3e0c10a7d4a14e4d3e9c9d309467fadb9d2b490b891ee3df96ef5b55716bb971910466ff9f0c5
+  checksum: b734a4bc348e2fa27150a7d4289d783fa405feb3f79f8daf28fd05813a12c8525ae9d3854aafe7ba041b005a4a751a0ba3b923331ceed41296ae14c7e54e2f26
   languageName: node
   linkType: hard
 
@@ -815,9 +815,9 @@ __metadata:
     "@hotwired/stimulus": ^3.2.1
     "@hotwired/turbo-rails": ^7.2.4
     accessible-autocomplete: ^2.0.4
-    axios: ^1.2.1
+    axios: ^1.3.3
     esbuild: ^0.17.4
-    govuk-frontend: ^4.4.0
+    govuk-frontend: ^4.5.0
     puppeteer: ^19.5.2
     sass: ^1.58.0
   languageName: unknown
@@ -965,10 +965,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"govuk-frontend@npm:^4.4.0":
-  version: 4.4.0
-  resolution: "govuk-frontend@npm:4.4.0"
-  checksum: 284877e1e6cfcf48baaed3c4dff705c3c409dcde29209afd0266998ed78b4b8c192a646b1c9719a598e1f4a652ab6c4074a18faf0de783531dd1dd5f7bed9459
+"govuk-frontend@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "govuk-frontend@npm:4.5.0"
+  checksum: 7a999ffb49c2f32f9dc3b0b743b698f8385d39cd0213d8aea1d7f2dfcc9f035f597030faac34659e8981d3c4a596379e99f5ea8c4d088cf486340eeaafdc800d
   languageName: node
   linkType: hard
 
