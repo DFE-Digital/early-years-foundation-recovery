@@ -8,8 +8,13 @@ module Pages
     element :password_field, '#user-password-field'
     element :password_confirmation_field, '#user-password-confirmation-field'
     element :continue_button, 'button.govuk-button', text: 'Continue'
-    element :error_summary_title, '#error-summary-title', text: 'There is a problem'
+    element :error_summary_title, '.govuk-error-summary__title', text: 'There is a problem'
     element :terms_and_conditions_check_box, '.govuk-checkboxes__label', text: 'I confirm that I accept the terms and conditions and privacy policy.'
+
+    load_validation { has_email_field? }
+    load_validation { has_password_field? }
+    load_validation { has_terms_and_conditions_check_box? }
+    load_validation { has_continue_button? }
 
     # Authenticate using email and password
     #
