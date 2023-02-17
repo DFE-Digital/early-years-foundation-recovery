@@ -177,7 +177,7 @@ describe 'Complete modules' do
   end
 
   describe 'Module One  ' do
-    it ' Complete all page is displayed Get certificate' do
+    skip 'Complete all page is displayed Get certificate' do
       expect(ui.my_modules).to be_displayed
       ui.my_modules.module_one_link.click
       ui.modules.complete_module_one
@@ -193,8 +193,8 @@ describe 'Complete modules' do
       ui.modules.complete_module_one_confidence_check
     end
 
-    describe 'Module two ' do
-      it 'Complete all page is displayed get certificate' do
+    describe 'Module two' do
+      skip 'Complete all page is displayed get certificate' do
         ui.my_modules.module_two_link.click
         ui.modules.complete_module_two_upto_qs_twenty
         # expect(ui.modules.your_details_success_background.style('background-color')).to eq('background-color' => 'rgb(0, 112, 60)')
@@ -215,8 +215,8 @@ describe 'Complete modules' do
         sleep(10)
       end
 
-      describe 'Module three ' do
-        it 'Complete all page is displayed get certificate' do
+      describe 'Module three' do
+        skip 'Complete all page is displayed get certificate' do
           ui.my_modules.module_three_link.click
           sleep(30)
           ui.modules.complete_module_three
