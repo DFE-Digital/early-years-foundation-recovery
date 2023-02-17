@@ -74,7 +74,7 @@ module EarlyYearsFoundationRecovery
 
     # @return [Boolean]
     def debug?
-      Rails.env.development? || ENV['WORKSPACE'].eql?('content')
+      ENV['WORKSPACE'].eql?('content')
     end
   end
 end

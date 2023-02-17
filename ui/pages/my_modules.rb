@@ -17,6 +17,7 @@ module Pages
     
     def start_child_development_training
       module_one_link.click
+      sleep(2)
       ui.module_overview
     end
   end

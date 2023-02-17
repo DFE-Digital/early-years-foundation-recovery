@@ -7,7 +7,13 @@ module Pages
     def next_page(notes: false, question: false)
       save_and_continue_button.click
       sleep(2)
-      ui.question_page
+      if notes
+        ui.content_page_with_notes
+      elsif question
+        ui.question_page
+      else
+        ui.content_page
+      end
     end
   end
 end
