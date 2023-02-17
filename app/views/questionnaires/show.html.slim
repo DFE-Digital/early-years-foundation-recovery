@@ -2,7 +2,7 @@
 
 = render 'shared/progress_bar', bar: @module_progress_bar
 
-= page_number(**@questionnaire.pagination)
+
 
 .gem-c-govspeak
   = translate_markdown(@questionnaire.body)
@@ -11,6 +11,8 @@
   .govuk-grid-column-two-thirds-from-desktop
     -# TODO: refactor required (questionnaire->question)
     = form_with model: @questionnaire, url: training_module_questionnaire_path(@questionnaire.training_module, @questionnaire), method: :patch do |f|
+      = f.govuk_error_summary
+      = page_number(**@questionnaire.pagination)
       - @questionnaire.question_list.each do |question|
         = render partial: question.to_partial_path, locals: { f: f }, object: question, as: :question
 
