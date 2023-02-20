@@ -6,7 +6,7 @@ module Pages
 
     def start_module(module_name)
       start_button_module_one.click
-      ui.content_page(module_name: module_name, page_name: 'what-to-expect')
+      ui.content_page
     end
   end
 end

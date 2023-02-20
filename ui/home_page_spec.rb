@@ -15,8 +15,7 @@ describe 'home page' do
   describe 'footer' do
     it 'links to Terms and conditions' do
       ui.home.footer.terms_and_conditions.click
-      expect(ui.terms_and_conditions).to be_displayed
-      expect(ui.terms_and_conditions).to have_heading
+      expect(ui.static_page).to be_displayed(page_name: 'terms-and-conditions')
     end
 
     it 'links to Cookies' do
@@ -27,8 +26,7 @@ describe 'home page' do
 
     it 'links to Privacy policy' do
       ui.home.footer.privacy_policy.click
-      expect(ui.privacy_policy).to be_displayed
-      expect(ui.privacy_policy).to have_heading
+      expect(ui.static_page).to be_displayed(page_name: 'privacy-policy')
     end
 
     it 'clicking Learn more and enrol links to About this training course' do

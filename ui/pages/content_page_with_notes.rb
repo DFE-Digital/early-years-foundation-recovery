@@ -5,6 +5,7 @@ module Pages
     element :save_and_continue_button, 'input[type="submit"]'
 
     def next_page(notes: false, question: false)
+      wait_until_save_and_continue_button_visible
       save_and_continue_button.click
       sleep(2)
       if notes

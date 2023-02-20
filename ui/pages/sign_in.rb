@@ -20,9 +20,12 @@ module Pages
       email ||= 'completed@example.com'
       password ||= ENV.fetch('USER_PASSWORD', 'StrongPassword')
 
+      wait_until_email_field_visible
+
       email_field.set(email)
       password_field.set(password)
       sign_in_button.click
+      sleep(2)
     end
 
     def with_blank_email_and_password(email = nil, password = nil)
@@ -31,9 +34,12 @@ module Pages
       email ||= ''
       password ||= ENV.fetch('USER_PASSWORD', 'StrongPassword')
 
+      wait_until_email_field_visible
+      
       email_field.set(email)
       password_field.set(password)
       sign_in_button.click
+      sleep(2)
     end
 
     def with_invalid_email_and_password(email = nil, password = nil)
@@ -42,9 +48,12 @@ module Pages
       email ||= 'completedexample.com'
       password ||= ENV.fetch('USER_PASSWORD', 'Strongassword')
 
+      wait_until_email_field_visible
+
       email_field.set(email)
       password_field.set(password)
       sign_in_button.click
+      sleep(2)
     end
   end
 end
