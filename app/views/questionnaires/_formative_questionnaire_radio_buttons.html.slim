@@ -1,12 +1,12 @@
 h1.govuk-heading-l Learning check
 
-.prompt.gem-c-govspeak
+.prompt
   .govuk-grid-row
     .govuk-grid-column-one-quarter 
       = icon(:question)
 
     .govuk-grid-column-three-quarters
-      h2 class='govuk-heading-m govuk-!-margin-bottom-4' Check your understanding
+      h2.govuk-heading-m Check your understanding
 
       = f.govuk_radio_buttons_fieldset question.name, legend: { text: translate_markdown(question.label), hidden: question.legend_hidden? } do
         = translate_markdown(question.body)
