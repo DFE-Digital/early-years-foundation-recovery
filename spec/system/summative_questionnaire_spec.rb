@@ -163,7 +163,7 @@ RSpec.describe 'Summative questionnaire' do
   context 'when no answer is selected' do
     it 'displays error message' do
       visit 'modules/alpha/questionnaires/1-3-2-1'
-      click_on 'Next'
+      click_on 'Save and continue'
       expect(page).to have_content 'Please select an answer'
     end
   end
