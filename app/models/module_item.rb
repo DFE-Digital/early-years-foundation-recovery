@@ -362,7 +362,7 @@ class ModuleItem < YamlBase
     type
   end
 
-# CMS END -------------------------
+  # CMS END -------------------------
 
 private
 
