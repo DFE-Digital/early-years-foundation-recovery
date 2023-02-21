@@ -177,8 +177,6 @@ module-5:
   5-4-2-5:
     type: confidence_questionnaire
   5-4-2-6:
-    type: confidence_questionnaire
-  5-4-2-7:
     type: thankyou
   5-4-3:
     type: certificate
