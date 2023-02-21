@@ -67,6 +67,8 @@ module Training
     def content
       return [] if draft?
 
+      Sentry.capture_message("Module #{position} has content")
+
       fields[:pages].map do |child_link|
         fetch_or_store(child_link.id) { child_by_id(child_link.id) }
       end
@@ -123,7 +125,11 @@ module Training
     #
     # @return [Boolean]
     def draft?
+      Sentry.capture_message("Module #{position} checked to see if it was 'draft?'")
+
       fields.fetch(:pages, []).none?
+
+      # TODO: if pages are present run an integrity check to confirm they meet requirements
     end
 
     # # @return [Datetime]

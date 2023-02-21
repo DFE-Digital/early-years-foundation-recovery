@@ -34,7 +34,7 @@ private
   end
 
   def module_item
-    @module_item ||= content
+    content
   end
 
   # ----------------------------------------------------------------------------
