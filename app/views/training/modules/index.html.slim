@@ -40,7 +40,8 @@ p.govuk-body Some modules also have short videos to enhance your understanding.
     = govuk_accordion do |accordion|
       - @mods.map do |mod|
         - accordion.section(heading_text: mod.card_title, summary_text: mod.objective) do
-          p.govuk-body= mod.description
+          = translate_markdown(mod.description)
+          
           h2.govuk-heading-m What you&rsquo;ll learn 
           p.govuk-body This module covers:
           .gem-c-govspeak= translate_markdown(mod.criteria)
