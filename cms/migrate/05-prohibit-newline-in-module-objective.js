@@ -3,7 +3,7 @@ module.exports = function(migration) {
 
   trainingModule.editField('objective', {
     validations: [
-      { prohibitRegexp: '\n' }
+      { 'prohibitRegexp': { 'pattern': '\\n'} }
     ]
   })
 }
