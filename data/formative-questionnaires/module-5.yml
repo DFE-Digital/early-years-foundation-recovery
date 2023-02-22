@@ -21,7 +21,7 @@ module-5:
   5-1-1-5b:
     questions:
       1_gross_motor_activity:
-        multi_select: false
+        multi_select: true
         body: |
           Which of the following will gross motor activity help to promote?
         assessment_summary: |
@@ -169,14 +169,14 @@ module-5:
         body: |
           Which of these factors would not help a practitioner to increase a child’s engagement and motivation in a physical activity?
         assessment_summary: |
-          Using the same activity for every child would not increase engagement. You should consider children's previous experiences, individual starting points and any additional needs when planning physical activity. This will help you to create an inclusive curriculum.
+          Using the same activity for every child, regardless of their individual starting points or needs, would not increase engagement. You should consider children's previous experiences, individual starting points and any additional needs when planning physical activity. This will help you to create an inclusive curriculum.
         assessment_fail_summary: |
-          Using the same activity for every child would not increase engagement. You should consider children's previous experiences, individual starting points and any additional needs when planning physical activity. This will help you to create an inclusive curriculum.
+          Using the same activity for every child, regardless of their individual starting points or needs, would not increase engagement. You should consider children's previous experiences, individual starting points and any additional needs when planning physical activity. This will help you to create an inclusive curriculum.
         answers:
           1: "Observation and assessment of the child's ability"
-          2: "Adapting activities to cater for all children"
+          2: "Adapting activities to cater for every child's individual starting point"
           3: "One to one support"
-          4: "Using the same activity for every child"
+          4: "Using the same activity for every child, regardless of their individual starting points or needs"
         correct_answers:
           - 4
 
