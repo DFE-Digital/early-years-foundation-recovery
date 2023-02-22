@@ -39,10 +39,11 @@ p.govuk-body Some modules also have short videos to enhance your understanding.
   .govuk-grid-column-full
     = govuk_accordion do |accordion|
       - @published_modules.map do |mod|
-        - accordion.section(heading_text: "Module #{mod.id}: #{mod.title}", summary_text: mod.description) do
-          .gem-c-govspeak= translate_markdown(mod.objective)
-          h2 What you&rsquo;ll learn 
-          p.govuk_body This module will cover:
+        - accordion.section(heading_text: "Module #{mod.id}: #{mod.title}", summary_text: mod.objective) do
+          = translate_markdown(mod.description)
+          
+          h2.govuk-heading-m What you&rsquo;ll learn 
+          p.govuk-body This module covers:
           .gem-c-govspeak= translate_markdown(mod.criteria)
 
       - accordion.section(heading_text: t('experts.heading'), summary_text: t('experts.summary')) do
