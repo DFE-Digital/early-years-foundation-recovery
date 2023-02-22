@@ -90,7 +90,6 @@ jobs:
           TF_VAR_paas_app_docker_image: ${{ env.REGISTRY }}:${{ inputs.version || github.ref_name }}
           TF_VAR_paas_app_env_secrets: ${{ toJson(secrets) }}
           TF_VAR_paas_app_envs: ${{ toJson(env) }}
-          TF_VAR_paas_web_app_instances: 3
         run: |
           cd terraform/app
           terraform init \
