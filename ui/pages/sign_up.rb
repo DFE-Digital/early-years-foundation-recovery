@@ -28,7 +28,11 @@ module Pages
       email_field.set(email)
       password_field.set(password)
       password_confirmation_field.set(password)
+
+      wait_until_terms_and_conditions_check_box_visible
       terms_and_conditions_check_box.click
+
+      wait_until_continue_button_visible
       continue_button.click
     end
 

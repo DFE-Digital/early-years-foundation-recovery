@@ -12,8 +12,8 @@ class Ui
   #
   # @param [String] method_name name
   # @return [Pages] A page instance
-  def method_missing(method_name, *attrs)
-    pages[method_name] ||= get_constantized_instance_name(method_name).new(*attrs)
+  def method_missing(method_name)
+    pages[method_name] ||= get_constantized_instance_name(method_name).new
   end
 
   # Required respond to missing method when using method_missing

@@ -5,7 +5,7 @@ module LinkHelper
     text = item.next_button_text
     path = training_module_page_path(item.training_module, item.next_item)
 
-    govuk_button_link_to text, path, aria: { label: 'Go to the next page' }
+    govuk_button_link_to text, path, id: 'next_action', aria: { label: 'Go to the next page' }
   end
 
   # @return [String] previous content page or module overview
@@ -36,7 +36,7 @@ module LinkHelper
         training_module_page_path(item.training_module, item)
       end
 
-    govuk_button_link_to text, path
+    govuk_button_link_to text, path, id: 'module_call_to_action'
   end
 
   # Bottom of my-modules card component

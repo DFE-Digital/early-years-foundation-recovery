@@ -1,12 +1,13 @@
 module Pages
   class ModuleOverview < Base
-    set_url "/modules{/module_name}"
+    set_url '/modules{/module_name}'
 
-    element :start_button_module_one, "a[href='/modules/child-development-and-the-eyfs/content-pages/what-to-expect']"
+    element :call_to_action, id: 'module_call_to_action'
 
-    def start_module(module_name)
-      start_button_module_one.click
-      ui.content_page
+    def start_module
+      wait_until_call_to_action_visible
+      call_to_action.click
+      ContentPage.new
     end
   end
 end

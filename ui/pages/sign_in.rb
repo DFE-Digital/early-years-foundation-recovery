@@ -35,7 +35,7 @@ module Pages
       password ||= ENV.fetch('USER_PASSWORD', 'StrongPassword')
 
       wait_until_email_field_visible
-      
+
       email_field.set(email)
       password_field.set(password)
       sign_in_button.click
