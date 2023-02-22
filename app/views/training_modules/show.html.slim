@@ -7,7 +7,10 @@
   .govuk-grid-row
     .govuk-grid-column-full
       h1.govuk-heading-l= "Module #{@training_module.id}: #{@training_module.title}"
-      p.govuk-caption-m= translate_markdown(@training_module.description)
+      = translate_markdown(@training_module.description)
+
+      p.govuk-body This module covers:
+      =translate_markdown(@training_module.criteria)
 
       - @module_progress.call_to_action do |state, page|
         = link_to_action(state, page)

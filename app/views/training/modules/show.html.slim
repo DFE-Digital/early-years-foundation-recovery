@@ -7,7 +7,10 @@
   .govuk-grid-row
     .govuk-grid-column-full
       h1.govuk-heading-l= @mod.card_title
-      p.govuk-caption-m= translate_markdown(@mod.description)
+      = translate_markdown(@mod.description)
+
+      p.govuk-body This module covers:
+      =translate_markdown(@mod.criteria)
 
       - @module_progress.call_to_action do |state, page|
         = cms_link_to_action(state, page)
