@@ -136,8 +136,7 @@ describe 'Walk through' do
       c324 = c323.confidence_answer_with('Strongly agree')
       c325 = c324.confidence_answer_with('Strongly agree')
       thankyou = c325.finish_confidence_answer_with('Strongly agree', module_name: module_name, page_name: '1-3-2-6')
-
-      certificate_page = thankyou.finish_module(module_name: module_name, page_name: '1-3-3')
+      thankyou.finish_module(module_name: module_name, page_name: '1-3-3')
     end
   end
 end
