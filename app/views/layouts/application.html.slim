@@ -23,7 +23,7 @@ html.govuk-template lang='en'
   body.govuk-template__body.govuk-body
     script
       | document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
-    
+
     = render 'layouts/analytics_body'
     = render 'layouts/cookie_banner'
     
@@ -35,6 +35,7 @@ html.govuk-template lang='en'
       = govuk_phase_banner(tag: { text: 'Beta' }, classes: 'noprint') do
         = t('phase_banner_html', feedback_link: govuk_link_to('feedback', Rails.configuration.feedback_url, target: :_blank))
 
+      .noprint = render 'layouts/environment_information'
       .noprint = render 'layouts/timeout'
       
       .noprint = back_link
