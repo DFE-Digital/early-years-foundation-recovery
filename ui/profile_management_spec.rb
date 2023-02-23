@@ -9,6 +9,8 @@ describe 'Profile management' do
 
   describe 'Your details' do
     it 'edit first name' do
+      ui.my_account.wait_until_edit_name_visible
+
       expect(ui.my_account).to be_displayed
       ui.my_account.edit_name.click
       expect(ui.edit_name).to be_displayed
@@ -19,6 +21,8 @@ describe 'Profile management' do
     end
 
     it 'edit email' do
+      ui.my_account.wait_until_edit_email_visible
+
       expect(ui.my_account).to be_displayed
       ui.my_account.edit_email.click
       sleep(2)

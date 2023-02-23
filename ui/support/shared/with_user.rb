@@ -7,6 +7,7 @@ RSpec.shared_context 'with user' do
     ui.home.load
     ui.home.header.sign_in.click
     ui.sign_in.with_email_and_password
+    ui.home.header.wait_until_sign_out_visible
   end
 
   # Capybara.current_session.driver.quit
