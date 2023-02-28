@@ -80,13 +80,6 @@ module ApplicationHelper
     ].compact.join(' : ')
   end
 
-  def cms_html_title(title)
-    [
-      service_name,
-      title,
-    ].compact.join(' : ')
-  end
-
   # @return [String]
   def calculate_module_state
     CalculateModuleState.new(user: current_user).call
