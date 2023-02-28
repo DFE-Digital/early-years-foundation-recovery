@@ -3,7 +3,10 @@ alpha:
   title: First Training Module
   thumbnail: introduction_to_supporting_physical_development
   short_description: first module description
-  description: first module description
+  description: |
+    first module description
+
+    paragraph two
   objective: first module objective
   criteria: |
     - first thing
@@ -17,7 +20,10 @@ bravo:
   title: Second Training Module
   thumbnail: introduction_to_supporting_physical_development
   short_description: second module description
-  description: second module description
+  description: |
+    second module description
+
+    paragraph two
   objective: second module objective
   criteria: |
     - first thing
@@ -32,7 +38,10 @@ charlie:
   title: Third Training Module
   thumbnail: introduction_to_supporting_physical_development
   short_description: third module description
-  description: third module description
+  description: |
+    third module description
+
+    paragraph two
   objective: third module objective
   criteria: |
     - first thing
@@ -47,7 +56,10 @@ delta:
   title: Fourth Training Module
   thumbnail: introduction_to_supporting_physical_development
   short_description: This module is unpublished and therefore not clickable
-  description: This module is unpublished and therefore not clickable
+  description: |
+    This module is unpublished and therefore not clickable
+
+    paragraph two
   objective: fourth module objective
   criteria: |
     - first thing
