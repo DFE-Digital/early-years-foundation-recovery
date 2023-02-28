@@ -49,6 +49,11 @@ Rails.application.routes.draw do
     patch 'update-password'
     get 'check-email-confirmation'
     get 'check-email-password-reset'
+    constraints(-> {Rails.application.cms? }) do # NB: enabled if false
+      scope module: 'contentful' do
+        resource :notes, path: 'learning-log', only: %i[show create update]
+      end
+    end
     resource :notes, path: 'learning-log', only: %i[show create update]
     resource :close_account, path: 'close', only: %i[new update show] do
       get 'reset-password'
@@ -61,7 +66,7 @@ Rails.application.routes.draw do
 
   # COURSE ---------------------------------------------------------------------
 
-  constraints !Rails.application.cms? do # NB: enabled if false
+  constraints(-> { Rails.application.cms? }) do
     scope module: 'training' do
       resources :modules, only: %i[show], as: :training_modules do
         resources :pages, only: %i[index show], path: 'content-pages'
