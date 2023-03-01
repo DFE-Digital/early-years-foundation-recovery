@@ -122,3 +122,4 @@ jobs:
         name: Bind production autoscaler 
         run: |
           cf bind-service ey-recovery scale-ey-recovery
+          cf attach-autoscaling-policy ey-recovery policy.json
