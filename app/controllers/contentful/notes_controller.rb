@@ -5,7 +5,7 @@ class Contentful::NotesController < Contentful::BaseController
   # GET /my-account/learning-log
   def show
     @training_modules = Training::Module.ordered.reject(&:draft?)
-      .select{|mod| current_user.module_time_to_completion.keys.include?(mod.name)}
+      .select { |mod| current_user.module_time_to_completion.key?(mod.name) }
   end
 
   # POST /my-account/learning-log

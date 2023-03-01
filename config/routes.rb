@@ -49,7 +49,7 @@ Rails.application.routes.draw do
     patch 'update-password'
     get 'check-email-confirmation'
     get 'check-email-password-reset'
-    constraints(-> {Rails.application.cms? }) do # NB: enabled if false
+    constraints(-> { Rails.application.cms? }) do
       scope module: 'contentful' do
         resource :notes, path: 'learning-log', only: %i[show create update]
       end
