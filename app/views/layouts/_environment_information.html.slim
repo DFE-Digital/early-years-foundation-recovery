@@ -1,5 +1,0 @@
-- if Rails.application.cms? && (Rails.application.preview? || Rails.application.debug?)
-    pre.debug_dump
-      = Rails.application.preview? ? 'Preview access ' : 'Delivery access '
-      |[#{Rails.configuration.contentful_space}]
-      |[#{Rails.configuration.contentful_environment}]

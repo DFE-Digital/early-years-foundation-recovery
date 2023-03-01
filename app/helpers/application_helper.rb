@@ -39,6 +39,10 @@ module ApplicationHelper
               .dig('dependencies', 'govuk-frontend')
               .tr('^', ''),
           } },
+        { key: { text: 'Contentful' }, value: { text: Rails.application.cms? ? 'Yes' : 'No' } },
+        { key: { text: '--Access' }, value: { text: Rails.application.preview? ? 'Preview access' : 'Delivery access' } },
+        { key: { text: '--Space' }, value: { text: Rails.configuration.contentful_space } },
+        { key: { text: '--Environment' }, value: { text: Rails.configuration.contentful_environment } },
       ],
     )
   end
