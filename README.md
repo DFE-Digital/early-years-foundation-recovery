@@ -177,6 +177,50 @@ We intend to use [semantic versioning](https://semver.org/).
 
 A tag can also be created and a deployment run from this [workflow][production-workflow].
 
+## Autoscaling
+
+Auto scaling policy is 
+```
+Scale up when CPU > 85%
+Scale down when CPU < 30%
+```
+
+Created with the following commands:
+
+1) Install autoscaling plugin:
+```
+cf install-plugin -r CF-Community app-autoscaler-plugin
+```
+2) Create an autoscaler service:
+
+```
+cf create-service autoscaler autoscaler-free-plan scale-ey-recovery
+```
+
+3) Bind the autoscaler service to the app:
+
+```
+cf bind-service ey-recovery scale-ey-recovery
+```
+
+Policy is found in `policy.json`
+
+4) Attach the autoscaling policy to the app:
+
+```
+cf attach-autoscaling-policy ey-recovery policy.json
+```
+
+5) Observe the app scaling automatically:
+
+```
+cf autoscaling-history ey-recovery
+```
+
+For further information see [Managing apps - autoscaling]: https://docs.cloud.service.gov.uk/managing_apps.html#autoscaling
+
+The link includes additional examples for policies e.g. adding a schedule to scale at certain times or days of the month
+
 ## Monitoring
 
 [Sentry][sentry] is used to monitor production environments
