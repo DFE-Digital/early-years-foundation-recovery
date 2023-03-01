@@ -118,3 +118,8 @@ jobs:
         name: Bind production syslog drain
         run: |
           cf bind-service ey-recovery ey-recovery-prod-logs
+      -
+        name: Bind production autoscaler 
+        run: |
+          cf bind-service ey-recovery scale-ey-recovery
+          cf attach-autoscaling-policy ey-recovery policy.json
