@@ -155,8 +155,16 @@ RSpec.describe 'Summative questionnaire' do
 
   context 'when on a questionnaire page' do
     specify do
-      visit 'modules/alpha/content-pages/1-1'
+      visit 'modules/alpha/questionnaires/1-3-2-1'
       expect(page).to have_link 'Back to Module 1 overview', href: '/modules/alpha'
+    end
+  end
+
+  context 'when no answer is selected' do
+    it 'displays error message' do
+      visit 'modules/alpha/questionnaires/1-3-2-1'
+      click_on 'Save and continue'
+      expect(page).to have_content 'Please select an answer'
     end
   end
 end
