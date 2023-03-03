@@ -77,6 +77,18 @@ variable "paas_web_app_start_timeout" {
   type    = number
 }
 
+
+# ------------------------------------------------------------------------------
+# Background Jobs
+
+variable "paas_worker_app_start_command" {
+  default = "bundle exec que"
+}
+
+variable "paas_worker_app_memory" {
+  default = 512
+}
+
 # ------------------------------------------------------------------------------
 # Database
 

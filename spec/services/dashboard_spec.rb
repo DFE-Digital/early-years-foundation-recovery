@@ -1,0 +1,35 @@
+require 'rails_helper'
+
+RSpec.describe Dashboard do
+  subject(:service) { described_class.new(path: path) }
+
+  let(:path) { Rails.root.join('tmp/dashboard-test') }
+
+  before do
+    create(:user, :registered, id: 123, local_authority: 'Watford Borough Council')
+    service.call
+  end
+
+  # /srv/tmp/12-31-2000-09-59/eventsdata/ahoy_events.csv
+  after do
+    FileUtils.rm_rf(path)
+  end
+
+  describe '#call' do
+    let(:data_files) { Dir.glob path.join('*/*/*.csv') }
+
+    it 'exports 5 database tables' do
+      expect(data_files.count).to be 5
+    end
+
+    it 'exports data in CSV format' do
+      user_file = data_files.find { |f| f.match?('users.csv') }
+      user_data = File.read(user_file).split("\n").last
+      expect(user_data).to include '123,Watford Borough Council,'
+    end
+
+    it 'only uploads on demand' do
+      expect { service.call(upload: true) }.to raise_error(StandardError, /Authorization failed/)
+    end
+  end
+end

@@ -20,6 +20,7 @@ production:
   GOVUK_WEBSITE_ROOT: child-development-training
   TRACKING_ID: GTM-NFZ88TP  # Live data
   HOTJAR_SITE_ID: 3169682
+  GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-live
 
 # ey-recovery-staging
 staging:
@@ -27,14 +28,17 @@ staging:
   DOMAIN: ey-recovery-staging.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-staging
   TRACKING_ID: GTM-W6W95FD  # Test data
+  GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-staging
 
 # ey-recovery-dev
 development:
   <<: *defaults
   DOMAIN: ey-recovery-dev.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-dev
+  TRAINING_MODULES: demo-modules
   CONTENTFUL: true
   CONTENTFUL_ENVIRONMENT: test
+  GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-development
 
 # ey-recovery-content
 content:
@@ -42,6 +46,8 @@ content:
   # CONTENTFUL: true
   # CONTENTFUL_ENVIRONMENT: genuine
   # TRAINING_MODULES: demo-modules
+  GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-development
+  DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # Every 5 mins
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
