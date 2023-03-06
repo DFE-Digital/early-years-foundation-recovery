@@ -5,6 +5,7 @@ defaults: &defaults
   RAILS_SERVE_STATIC_FILES: true
   RAILS_LOG_TO_STDOUT: true
   RAILS_MAX_THREADS: 5
+  WEB_CONCURRENCY: 2
   RAILS_ENV: production
   NODE_ENV: production
   DATABASE_URL: postgres://postgres@localhost:5432/db
@@ -17,6 +18,7 @@ defaults: &defaults
 production:
   <<: *defaults
   DOMAIN: child-development-training.education.gov.uk
+  WEB_CONCURRENCY: 8
   GOVUK_WEBSITE_ROOT: child-development-training
   TRACKING_ID: GTM-NFZ88TP  # Live data
   HOTJAR_SITE_ID: 3169682
@@ -24,9 +26,12 @@ production:
 # ey-recovery-staging
 staging:
   <<: *defaults
+  WEB_CONCURRENCY: 4
   DOMAIN: ey-recovery-staging.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-staging
   TRACKING_ID: GTM-W6W95FD  # Test data
+  CONTENTFUL: true
+  CONTENTFUL_ENVIRONMENT: genuine-with-5 # Defaults to "master" without override
 
 # ey-recovery-dev
 development:
@@ -34,12 +39,12 @@ development:
   DOMAIN: ey-recovery-dev.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-dev
   CONTENTFUL: true
-  CONTENTFUL_ENVIRONMENT: test
+  CONTENTFUL_ENVIRONMENT: genuine-with-5 # Override would be "test/demo" normally
 
 # ey-recovery-content
 content:
   <<: *defaults
-  # CONTENTFUL: true
+  CONTENTFUL: true
   CONTENTFUL_ENVIRONMENT: genuine-with-5
   # TRAINING_MODULES: demo-modules
   # @see .github/workflows/content.yml
