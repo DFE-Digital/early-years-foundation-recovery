@@ -45,7 +45,7 @@ plugin :tmp_restart
 app_details = "[#{ENV['CF_INSTANCE_INDEX']}] #{ENV['DOMAIN']}"
 
 on_worker_boot do
-  Sentry.capture_message "EYFS booting worker #{app_details}"
+  Sentry.capture_message "EYFS booting #{app_details}"
 end
 
 on_restart do
