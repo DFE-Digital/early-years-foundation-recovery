@@ -15,6 +15,8 @@ locals {
   app_config_file = file("${path.module}/../workspace-variables/${var.paas_app_config_file}")
   app_config      = yamldecode(local.app_config_file)[var.paas_app_environment]
 
+  enable_worker = var.paas_app_environment == "content" ? false : true
+
   # Combine environment variables in order of precedence
   app_envs = merge(
     local.app_config,           # Workspace variables
