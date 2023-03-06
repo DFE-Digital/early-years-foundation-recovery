@@ -36,6 +36,7 @@ resource "cloudfoundry_app" "web_app" {
   health_check_http_endpoint = "/health"
   stopped                    = false
   timeout                    = 300
+  health-check-invocation-timeout: 10
   docker_image               = var.app_docker_image
   space                      = data.cloudfoundry_space.space.id
 
