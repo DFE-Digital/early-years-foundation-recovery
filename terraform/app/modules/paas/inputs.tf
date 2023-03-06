@@ -87,6 +87,11 @@ variable "worker_app_memory" {
   default = 512
 }
 
+variable "worker_app_start_command" {
+  type        = string
+  description = "Background job command"
+}
+
 
 # DB
 # ------------------------------------------------------------------------------
