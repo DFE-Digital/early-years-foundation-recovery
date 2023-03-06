@@ -72,7 +72,7 @@ resource "cloudfoundry_service_instance" "postgres_instance" {
 }
 
 resource "cloudfoundry_app" "worker_app" {
-  # count             = var.environment == "content" ? 0 : 1 # Uncomment before merge to main
+  count             = var.environment == "content" ? 0 : 1
   environment       = var.web_app_env
   name              = "${var.web_app_name}-worker"
   command           = var.worker_app_start_command # default: que
