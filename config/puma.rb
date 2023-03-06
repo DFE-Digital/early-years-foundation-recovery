@@ -30,7 +30,7 @@ pidfile ENV.fetch('PIDFILE') { 'tmp/pids/server.pid' }
 # Workers do not work on JRuby or Windows (both of which do not support
 # processes).
 #
-# workers ENV.fetch("WEB_CONCURRENCY") { 2 }
+workers ENV.fetch('WEB_CONCURRENCY', 2)
 
 # Use the `preload_app!` method when specifying a `workers` number.
 # This directive tells Puma to first boot the application and load code
@@ -41,3 +41,24 @@ pidfile ENV.fetch('PIDFILE') { 'tmp/pids/server.pid' }
 
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
+
+app_details = "[#{ENV['CF_INSTANCE_INDEX']}] #{ENV['DOMAIN']}"
+
+on_worker_boot do
+  Sentry.capture_message "EYFS booting #{app_details}"
+end
+
+on_restart do
+  Sentry.capture_message "EYFS restarting #{app_details}"
+end
+
+raise_exception_on_sigterm do
+  Sentry.capture_message "EYFS terminating #{app_details}"
+end
+
+lowlevel_error_handler do |error|
+  Sentry.capture_message(error.message)
+  FileUtils.touch Rails.root.join('tmp/restart.txt')
+
+  [500, {}, ["Contact #{Rails.application.config.internal_mailbox} for support\n"]]
+end
