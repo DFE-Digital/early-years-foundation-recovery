@@ -16,6 +16,8 @@ then
   fi
 
   rm -f tmp/pids/server.pid
+else
+  bundle exec rails assets:precompile
 fi
 
 if [ -z ${DATABASE_URL} ]
