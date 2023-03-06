@@ -11,7 +11,7 @@ class Training::QuestionnairesController < Contentful::BaseController
 
   def update
     if unanswered?
-      flash[:error] = 'Please select an answer'
+      questionnaire.errors.add(questionnaire.questions.each_key.first.to_sym, :confirmation_invalid, message: 'Please select an answer')
       render :show, status: :unprocessable_entity
     else
       populate_and_persist
