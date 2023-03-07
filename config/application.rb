@@ -43,7 +43,7 @@ module EarlyYearsFoundationRecovery
     config.active_storage.queues.analysis = :default
     config.active_storage.queues.purge = :default
 
-    config.google_cloud_bucket = ENV['GOOGLE_CLOUD_BUCKET']
+    config.google_cloud_bucket = ENV.fetch('GOOGLE_CLOUD_BUCKET', '#GOOGLE_CLOUD_BUCKET_env_var_missing')
     config.dashboard_update_interval = ENV.fetch('DASHBOARD_UPDATE_INTERVAL', '0 12 * * *') # Noon daily
 
     config.bot_token = ENV['BOT_TOKEN']

@@ -10,7 +10,6 @@ RSpec.describe Dashboard do
     service.call
   end
 
-  # /srv/tmp/12-31-2000-09-59/eventsdata/ahoy_events.csv
   after do
     FileUtils.rm_rf(path)
   end
