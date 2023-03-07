@@ -20,7 +20,7 @@ class User < ApplicationRecord
   def self.to_csv
     module_headings =
       if Rails.application.cms?
-        Training::Module.ordered.map { |mod| "module_#{mod.position}_time" }
+        Training::Module.ordered.reject(&:draft?).map { |mod| "module_#{mod.position}_time" }
       else
         TrainingModule.published.map { |mod| "module_#{mod.id}_time" }
       end
