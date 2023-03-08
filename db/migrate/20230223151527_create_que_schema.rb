@@ -1,4 +1,4 @@
-class CreateQueSchema < ActiveRecord::Migration[6.0]
+class CreateQueSchema < ActiveRecord::Migration[7.0]
   def up
     # Whenever you use Que in a migration, always specify the version you're
     # migrating to. If you're unsure what the current version is, check the
