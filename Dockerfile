@@ -111,6 +111,8 @@ RUN bundle install --no-binstubs --retry=10 --jobs=4
 # ------------------------------------------------------------------------------
 FROM app as test
 
+RUN apk add --no-cache --no-progress postgresql-client
+
 RUN bundle config unset without
 RUN bundle config set without development ui
 RUN bundle install --no-binstubs --retry=10 --jobs=4
