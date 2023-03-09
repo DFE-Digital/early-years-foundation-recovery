@@ -23,6 +23,9 @@ module Training
 
     # @return [Training::Content]
     def self.by_id(id)
+      # return load_children(0).find(id) if Rails.application.live?
+      # fetch_or_store(id) { load_children(0).find(id) }
+
       load_children(0).find(id)
     end
 
