@@ -59,7 +59,7 @@ variable "paas_app_hostname" {
 }
 
 variable "paas_web_app_start_command" {
-  default = "bundle exec rails db:prepare && bundle exec rails server -b 0.0.0.0"
+  default = "bundle exec rails db:prepare assets:precompile && bundle exec rails server -b 0.0.0.0"
 }
 
 variable "paas_web_app_instances" {
@@ -75,6 +75,18 @@ variable "paas_web_app_memory" {
 variable "paas_web_app_start_timeout" {
   default = 360
   type    = number
+}
+
+
+# ------------------------------------------------------------------------------
+# Background Jobs
+
+variable "paas_worker_app_start_command" {
+  default = "bundle exec que"
+}
+
+variable "paas_worker_app_memory" {
+  default = 512
 }
 
 # ------------------------------------------------------------------------------

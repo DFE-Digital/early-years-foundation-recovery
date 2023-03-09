@@ -16,13 +16,32 @@ services:
       - PGUSER=postgres
       - PGPASSWORD=password
       - PGHOST=db
-      - PGDATABASE
+      - PGDATABASE=early_years_foundation_recovery_development
+      # app config
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
       - RAILS_ENV=development
       - DOMAIN=app:3000
       - RAILS_SERVE_STATIC_FILES=true
     volumes:
       - .:/srv
+    tty: true
+    stdin_open: true
+
+  worker:
+    container_name: recovery_worker
+    image: recovery:dev
+    command: bundle exec que
+    environment:
+      - RAILS_ENV=development
+      - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
+      - DASHBOARD_UPDATE_INTERVAL
+      - GOOGLE_CLOUD_BUCKET
+    depends_on:
+      - db
+    volumes:
+      - .:/srv
+    networks:
+      - recovery
     tty: true
     stdin_open: true
 
