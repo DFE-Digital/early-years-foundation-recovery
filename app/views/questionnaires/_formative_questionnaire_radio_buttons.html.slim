@@ -1,21 +1,20 @@
 h1.govuk-heading-l Learning check
 
-= f.govuk_radio_buttons_fieldset question.name, legend: { text: translate_markdown(question.label), hidden: question.legend_hidden? } do
-  .prompt.gem-c-govspeak
-    .govuk-grid-row
-      .govuk-grid-column-one-quarter 
-        = icon(:question)
+.prompt
+  .govuk-grid-row
+    .govuk-grid-column-one-quarter 
+      = icon(:question)
 
-      .govuk-grid-column-three-quarters
-        h2.govuk-heading-m Check your understanding
+    .govuk-grid-column-three-quarters
+      h2.govuk-heading-m Check your understanding
 
-        div class='govuk-!-margin-4'
-          = translate_markdown(question.body)
+      = f.govuk_radio_buttons_fieldset question.name, legend: { text: translate_markdown(question.label), hidden: question.legend_hidden? } do
+        = translate_markdown(question.body)
 
-          - question.fields.each do |id, label, checked|
-            = f.govuk_radio_button question.name,
-              id,
-              label: { text: label },
-              link_errors: true,
-              checked: checked,
-              disabled: question.disabled?
+        - question.fields.each do |id, label, checked|
+          = f.govuk_radio_button question.name,
+            id,
+            label: { text: label },
+            link_errors: true,
+            checked: checked,
+            disabled: question.disabled?

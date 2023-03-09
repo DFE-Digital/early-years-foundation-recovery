@@ -55,7 +55,7 @@ module LinkHelper
 
   # @return [String]
   def back_link
-    if %w[training/pages content_pages questionnaires assessment_results].include?(params[:controller])
+    if %w[training/pages training/questionnaires content_pages questionnaires assessment_results].include?(params[:controller])
       govuk_back_link(
         href: training_module_path(params[:training_module_id]),
         text: "Back to Module #{training_module.position} overview",

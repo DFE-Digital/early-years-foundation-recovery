@@ -19,6 +19,7 @@ services:
       - GOVUK_APP_DOMAIN
       - GOVUK_WEBSITE_ROOT
       - GROVER_NO_SANDBOX=true
+      - WEB_CONCURRENCY=0
     depends_on:
       - db
     ports:

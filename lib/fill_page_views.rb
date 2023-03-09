@@ -2,9 +2,11 @@
 #
 # Loop over active users and modules and inject page view events for skipped pages
 #
+#
+# NB: Not yet CMS compatible
 class FillPageViews
   def call
-    users.each do |user|
+    users.find_each(batch_size: 1_000) do |user|
       unless user.registration_complete
         log "user [#{user.id}]"
         next

@@ -76,6 +76,12 @@ gem 'grover'
 # Pa11y accessibility testing
 gem 'sitemap_generator'
 
+# Data dashboard feed
+gem 'google-cloud-storage'
+
+# Background Jobs
+gem 'que-scheduler'
+
 # DRY-RB
 gem 'dry-core'
 gem 'dry-initializer'

@@ -29,6 +29,10 @@ $prompt-hue: govuk-colour("turquoise");
   .govuk-grid-column-three-quarters {
     padding: govuk-spacing(3) govuk-spacing(0);
     
+    @media (max-width: 40em) {
+      padding-left: govuk-spacing(3);
+    }
+
     @media(min-width: 40em) and (max-width: 61.5em) {
       padding-left: govuk-spacing(7);
     }
