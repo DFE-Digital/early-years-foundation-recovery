@@ -5,6 +5,10 @@ RSpec.describe CourseProgress do
 
   include_context 'with progress'
 
+  before do
+    skip 'WIP' if Rails.application.cms?
+  end
+
   describe '#course_completed?' do
     it 'is false for new users' do
       expect(course.course_completed?).to be false

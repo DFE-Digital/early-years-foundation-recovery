@@ -10,7 +10,7 @@ class ContentPagesController < ApplicationController
   end
 
   def show
-    @module_progress = ModuleOverviewDecorator.new(helpers.module_progress(training_module))
+    @module_progress = helpers.module_progress(training_module)
     @model = module_item.model
 
     if @model.is_a?(Questionnaire)
@@ -79,7 +79,7 @@ private
 
   # @return [Boolean]
   def track_module_start?
-    module_item.module_intro? && module_start_untracked?
+    module_item.submodule_intro? && module_start_untracked?
   end
 
   # @return [Boolean]

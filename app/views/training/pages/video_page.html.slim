@@ -1,0 +1,31 @@
+= render 'debug'
+
+= render 'shared/progress_bar', bar: @module_progress_bar
+
+- content_for :content_page do
+  = page_number(**@model.pagination)
+
+  h1= @model.heading
+  .gem-c-govspeak= translate_markdown(@model.body)
+
+  .govspeak-embed-container.light-grey-background
+    h2.govuk-heading-m class='govuk-!-margin-top-2'
+      | Video: #{@model.video_title}
+
+    - if @model.video_url
+      = render 'govspeak/video', title: @model.video_title, url: @model.video_url
+
+    - else
+      p.govuk-body class='govuk-!-text-align-centre'
+        | [Video to be added]
+
+    details.govuk-details class='govuk-!-margin-top-6' data-module='govuk-details'
+      summary.govuk-details__summary
+        span.govuk-details__summary-text
+          | Transcript
+      .govuk-details__text.white-background
+        h2.gov-uk-heading-m class='govuk-!-margin-top-2'
+          | Transcript
+        .gem-c-govspeak= translate_markdown(@model.transcript)
+
+= render 'content_wrap_full_width'

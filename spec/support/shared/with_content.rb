@@ -59,8 +59,6 @@ RSpec.shared_context 'with content' do
   let(:essential_types) do
     %w[
       interruption_page
-      icons_page
-      module_intro
       sub_module_intro
       text_page
       formative_questionnaire

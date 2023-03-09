@@ -3,6 +3,7 @@
 #
 name: Continuous Integration
 on:
+  merge_group:
   pull_request:
     paths-ignore:
       - '**/*.md'
@@ -39,7 +40,12 @@ jobs:
           POSTGRES_PASSWORD: password
         ports:
           - 5432:5432
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
 
     steps:
       -
@@ -70,8 +76,13 @@ jobs:
         name: Compile assets
         run: bin/rails assets:precompile
       -
-        name: Run test suite
-        run: bundle exec rspec
-      -
         name: Run rubocop
         run: bundle exec rubocop
+      -
+        name: Run test suite (YAML)
+        run: bundle exec rspec
+      - # Test dedicated Contentful services, decorators and CMS powered content
+        name: Run test suite (CMS)
+        env:
+          CONTENTFUL: true
+        run: bundle exec rspec

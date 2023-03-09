@@ -18,7 +18,7 @@ RSpec.describe 'Learning log' do
 
   context 'when training starts' do
     before do
-      start_first_submodule(alpha)
+      start_module(alpha)
       visit '/'
     end
 

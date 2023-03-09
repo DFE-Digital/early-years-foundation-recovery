@@ -31,14 +31,18 @@ SitemapGenerator::Sitemap.create do
   # static
   %w[
     accessibility-statement
+    new-registration
     other-problems-signing-in
     privacy-policy
     terms-and-conditions
-    whats-new
     sitemap
+    whats-new
+    wifi-and-data
   ].each do |path|
     add static_path(path)
   end
+
+  add static_page_path('promotional-materials')
 
   # settings
   add setting_path('cookie-policy')
@@ -76,6 +80,12 @@ SitemapGenerator::Sitemap.create do
   add edit_registration_role_type_path
   add edit_registration_role_type_other_path
 
+  # close account
+  add edit_reason_user_close_account_path
+  add confirm_user_close_account_path
+  add new_user_close_account_path
+  add user_close_account_path
+
   # learning
   add my_modules_path
   add user_notes_path
@@ -85,9 +95,8 @@ SitemapGenerator::Sitemap.create do
 
   # Representative content
   add training_module_content_page_path(mod, mod.interruption_page)
-  add training_module_content_page_path(mod, mod.icons_page)
-  add training_module_content_page_path(mod, mod.intro_page)
   add training_module_content_page_path(mod, mod.first_content_page)
+  # add training_module_content_page_path(mod, mod.text_pages.first) # for CMS
   add training_module_content_page_path(mod, mod.video_pages.first)
   add training_module_content_page_path(mod, mod.formative_questions.first)
   add training_module_content_page_path(mod, mod.summary_intro_page)

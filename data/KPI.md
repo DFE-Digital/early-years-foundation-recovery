@@ -86,8 +86,6 @@ Example event data from the `ahoy_visits` table.
 
 ## Transactions
 
-TODO: Brett to help update table below following registration journey changes. Strike-through deprectaed events
-
 | Done | Feature                       | Key                             | Controllers                       | Path                                         |
 | :--- | :---                          | :---                            | :---                              | :---                                         |
 | [x]  | Homepage                      | `home_page`                     | `HomeController`                  | `/`                                          |
@@ -142,7 +140,3 @@ Particular states, such as `module_time_to_completion` or a user's **"ttc"** key
 ```ruby
 User.all.select { |u| u.module_time_to_completion.has_value?(nil) }
 ```
-
-## Dashboard
-
-WIP

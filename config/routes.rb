@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   root 'home#index'
   get 'health', to: 'home#show'
-  get 'my-modules', to: 'learning#show'
-  get 'about-training', to: 'training_modules#index', as: :course_overview
+  get 'audit', to: 'home#audit'
+
+  get 'my-modules', to: 'learning#show' # @see User#course
+  get 'about-training', to: (Rails.application.cms? ? 'training/modules#index' : 'training_modules#index'), as: :course_overview
 
   get '/404', to: 'errors#not_found', via: :all
   get '/422', to: 'errors#unprocessable_entity', via: :all
@@ -48,6 +50,24 @@ Rails.application.routes.draw do
     get 'check-email-confirmation'
     get 'check-email-password-reset'
     resource :notes, path: 'learning-log', only: %i[show create update]
+    resource :close_account, path: 'close', only: %i[new update show] do
+      get 'reset-password'
+      get 'edit-reason'
+      patch 'update-reason'
+      get 'confirm'
+      post 'close_account'
+    end
+  end
+
+  # COURSE ---------------------------------------------------------------------
+
+  constraints !Rails.application.cms? do # NB: enabled if false
+    scope module: 'training' do
+      resources :modules, only: %i[show], as: :training_modules do
+        resources :pages, only: %i[index show], path: 'content-pages'
+        resources :questionnaires, only: %i[show update]
+      end
+    end
   end
 
   resources :modules, only: %i[show], as: :training_modules, controller: :training_modules do
@@ -56,5 +76,24 @@ Rails.application.routes.draw do
     resources :assessment_results, only: %i[show new], path: 'assessment-result'
   end
 
-  get '/:id', to: 'static#show', as: :static
+  # STATIC ---------------------------------------------------------------------
+
+  # to be removed and below used when migrating to contentful
+  static_regexp = %r{
+    accessibility-statement|
+    cookie-policy|
+    new-registration|
+    other-problems-signing-in|
+    privacy-policy|
+    terms-and-conditions|
+    sitemap|
+    settings/cookies|
+    whats-new|
+    wifi-and-data
+  }x
+  get '/:id', to: 'static#show', id: static_regexp, as: :static
+
+  scope module: 'contentful' do
+    resources :static, only: %i[show], as: :static_pages, path: ''
+  end
 end

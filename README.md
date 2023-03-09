@@ -27,10 +27,13 @@ Optionally create `.env` to override or set default variables like `DATABASE_URL
 
 ## Rails Credentials
 
-We use rails credentials to manage secrets. If you need to modify secrets for one
-of the deployed environments, you can get the encryption keys from another developer on the team.
+We use rails credentials to manage secrets; obtain the encryption keys from the dev team.
 
-Once you have the keys, run `rails credentials:edit --environment <env>`.
+To edit, use either:
+
+- `EDITOR=vi rails credentials:edit --environment <env>`.
+- `./bin/docker-rails credentials:edit --environment <env>`
+
 Full instructions can be found by running `rails credentials:help`
 
 ## Git Secrets
@@ -122,10 +125,10 @@ These commands can be used to debug problems:
 
 Custom tasks are namespaced under `eyfs`, list them using `rake --tasks eyfs`.
 
-- `rake eyfs:bot`            # Generate secure bot user
-- `rake eyfs:plug_content`   # Add page view events for injected module items
-- `rake eyfs:user_progress`  # Recalculate module completion time
-- `rake eyfs:whats_new`      # Enable the post login 'What's new' page
+- `rake eyfs:bot`                   # Generate secure bot user
+- `rake eyfs:jobs:plug_content`     # Que job to insert page view events for injected module items
+- `rake eyfs:user_progress`         # Recalculate module completion time
+- `rake eyfs:whats_new`             # Enable the post login 'What's new' page
 
 
 Trigger a task on a deployed application in either the `ey-recovery-content` or `ey-recovery-staging` spaces, not `production`, using `bin/cf-task`.
@@ -176,6 +179,50 @@ We intend to use [semantic versioning](https://semver.org/).
 - `git push origin v0.0.x`
 
 A tag can also be created and a deployment run from this [workflow][production-workflow].
+
+## Autoscaling
+
+Auto scaling policy is 
+```
+Scale up when CPU > 85%
+Scale down when CPU < 30%
+```
+
+Created with the following commands:
+
+1) Install autoscaling plugin:
+```
+cf install-plugin -r CF-Community app-autoscaler-plugin
+```
+2) Create an autoscaler service:
+
+```
+cf create-service autoscaler autoscaler-free-plan scale-ey-recovery
+```
+
+3) Bind the autoscaler service to the app:
+
+```
+cf bind-service ey-recovery scale-ey-recovery
+```
+
+Policy is found in `policy.json`
+
+4) Attach the autoscaling policy to the app:
+
+```
+cf attach-autoscaling-policy ey-recovery policy.json
+```
+
+5) Observe the app scaling automatically:
+
+```
+cf autoscaling-history ey-recovery
+```
+
+For further information see [Managing apps - autoscaling]: https://docs.cloud.service.gov.uk/managing_apps.html#autoscaling
+
+The link includes additional examples for policies e.g. adding a schedule to scale at certain times or days of the month
 
 ## Monitoring
 
@@ -277,6 +324,40 @@ CSS styling changes will appear automatically without needing to restart.
 - [designer guide](https://govspeak-preview.publishing.service.gov.uk/guide)
 - [developer guide](https://docs.publishing.service.gov.uk/repos/govspeak.html)
 
+---
+
+## Service Dashboard
+
+Key performance metrics are surfaced in a [Looker Studio](https://lookerstudio.google.com/navigation/reporting) dashboard and refreshed daily.
+User [service accounts](https://cloud.google.com/iam/docs/service-accounts) can authenticate using the [Google Cloud SDK](https://cloud.google.com/sdk/docs/install).
+
+
+**Storage and Reporting**
+
+- [Cloud Storage](https://console.cloud.google.com/storage/browser?project=eyfsdashboard)
+- [Development Dashboard](https://lookerstudio.google.com/reporting/4d48f463-022b-4fb8-9262-26c22f6b2e8d)
+- [Development Bucket](https://console.cloud.google.com/storage/browser/eyfs-data-dashboard-development)
+- [Staging Dashboard](https://lookerstudio.google.com/reporting/8f550461-c4e7-4c9f-b597-6f27669ff14c)
+- [Staging Bucket](https://console.cloud.google.com/storage/browser/eyfs-data-dashboard-staging)
+- [Production Dashboard](https://lookerstudio.google.com/reporting/095cfc94-d1d2-4a32-a2ba-d5899c3ecea5)
+- [Production Bucket](https://console.cloud.google.com/storage/browser/eyfs-data-dashboard-live)
+
+**Downloading exported data**
+
+- `gcloud auth login`
+- `gcloud config set project eyfsdashboard`
+- `gsutil ls` (list buckets)
+- `gsutil -m cp -r "gs://eyfs-data-dashboard-live/eventsdata" "gs://eyfs-data-dashboard-live/useranswers" .` (export folders recursively)
+
+
+**Cloning production data**
+
+- Export production database as plaintext dump: `$ cf conduit --space ey-recovery ey-recovery-db -- pg_dump --file "./tmp/ey-recovery-db-<DATE>.sql" --no-acl --no-owner -Z 9`
+- Clone exported live data to an existing empty local development database: `$ docker exec -it recovery_dev psql prod_clone < ./tmp/ey-recovery-db-<DATE>.sql`
+- Optional: Restart dev server pointing to the `prod_clone` database
+
+
+---
 
 ## User experience
 
@@ -290,9 +371,9 @@ Session timeout functionality:
 
 ## Hotjar
 
-This project uses Hotjar for user insight. Hotjar records user journeys and 
-automatically redacts certain user information on recordings. All personally 
-identifiable information should be redacted. In order to override the default 
+This project uses Hotjar for user insight. Hotjar records user journeys and
+automatically redacts certain user information on recordings. All personally
+identifiable information should be redacted. In order to override the default
 settings the following classes can be added:
 - `data-hj-suppress` to redact additional user information
 - `data-hj-allow` to allow data that is automatically redacted

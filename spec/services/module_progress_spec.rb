@@ -7,10 +7,14 @@ RSpec.describe ModuleProgress do
 
   include_context 'with progress'
 
+  before do
+    skip 'WIP' if Rails.application.cms?
+  end
+
   describe '#started?' do
-    it 'is true once the module intro is viewed' do
+    it 'is true once the first sub module is viewed' do
       expect(progress.started?).to be false
-      view_module_page_event('alpha', 'intro')
+      view_module_page_event('alpha', '1-1')
       expect(progress.started?).to be true
     end
   end
@@ -63,8 +67,6 @@ RSpec.describe ModuleProgress do
     it 'returns the furthest visited module item' do
       %w[
         what-to-expect
-        before-you-start
-        intro
         1-1
         1-1-1
         1-1-2

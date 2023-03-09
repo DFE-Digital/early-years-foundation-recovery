@@ -1,4 +1,6 @@
 class UserAnswer < ApplicationRecord
+  include ToCsv
+
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   belongs_to :user
