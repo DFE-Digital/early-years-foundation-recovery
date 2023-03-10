@@ -44,8 +44,8 @@ development:
 # ey-recovery-content
 content:
   <<: *defaults
-  CONTENTFUL: true
-  CONTENTFUL_ENVIRONMENT: genuine-with-5
+  # CONTENTFUL: true
+  # CONTENTFUL_ENVIRONMENT: genuine-with-5
   # TRAINING_MODULES: demo-modules
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
