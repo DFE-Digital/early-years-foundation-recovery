@@ -40,5 +40,18 @@ namespace :eyfs do
     # task upload: :environment do
     #   binding.pry
     # end
+
+    # @example
+    #
+    #   $ rake 'eyfs:cms:validate'
+    #
+    desc 'Validate CMS content'
+    task validate: :environment do
+      result =
+        Training::Module.ordered.all? do |mod|
+          ContentfulDataIntegrity.new(module_name: mod.name)
+        end
+      puts result ? 'valid' : 'invalid'
+    end
   end
 end

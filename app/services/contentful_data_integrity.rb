@@ -1,102 +1,108 @@
-# return a boolean to tell us whether the training modules in Contentful all have the
-# correct characterisitics
-
+# Validate whether a module's content meets minimum functional requirements
+#
 class ContentfulDataIntegrity
   extend Dry::Initializer
-  # extend Dry::Core::Cache
 
-  option :environment, default: proc { 'demo' }
-  option :training_module, default: proc { 'alpha' }
-  # option :cached, default: proc { true }
+  option :module_name, Types::String.enum(*Training::Module.ordered.map(&:name))
+
+  VALIDATIONS = {
+    # position and type
+    first?: 'First page is not interruption page',
+    second?: 'Second page is not submodule intro',
+    penultimate?: 'Penultimate page is not thank you',
+    last?: 'Last page is not certificate',
+
+    # presence and volume
+    video?: 'Missing video pages',
+    results?: 'Missing assessment results page',
+    assessment?: 'Not enough assessment questions',
+
+    # structure of submodule/topic
+    submodules?: 'Submodules are not consecutive incrementing from 1',
+    topics?: 'Topics are not consecutive incrementing from 1',
+  }.freeze
 
   def valid?
-    raise 'Module does not exist' if find_module_by_name.nil?
-
-    {
-      has_video_page?: 'Does not contain video page',
-      has_assessment_results?: 'Does not have assessments results page',
-      first_page_is_interruption?: 'First page is not interruption page',
-      second_page_is_sub_module_intro?: 'Second page is not submodule intro',
-      penultimate_page_is_thankyou?: 'Penultimate page is not thank you',
-      last_page_is_certificate?: 'Last page is not certificate',
-      has_ten_summative_questions?: 'Does not have ten summative questions',
-      consecutive_submodules_start_at_one?: "Submodules aren't consecutive or don't start with 1",
-      consecutive_topics_start_at_one?: "Topics aren't consecutive or don't start with 1",
-    }.each do |method, message|
-      unless send(method)
-        Rails.logger.debug message
-        return false
-      end
+    VALIDATIONS.all? do |method, message|
+      result = send(method)
+      log(message) unless result
+      result
     end
-
-    true
   end
 
   # ------------------- Correct page order ---------------------
 
-  # @param input [Array] integers
+  # @param numbers [Array<Integer>]
   # @return [Boolean]
-  def consecutive_nums_start_at_one?(input)
-    input.each_cons(2).all? { |a, b| b == a + 1 } && input.first == 1
+  def consecutive_integers_from_one?(numbers)
+    numbers.first.eql?(1) && numbers.each_cons(2).all? { |a, b| b == a + 1 }
   end
 
   # @return [Boolean]
-  def consecutive_submodules_start_at_one?
-    submodule_nums = find_module_by_name.content_by_submodule.keys
-    consecutive_nums_start_at_one?(submodule_nums)
+  def submodules?
+    consecutive_integers_from_one? mod.content_by_submodule.keys
   end
 
   # @return [Boolean]
-  def consecutive_topics_start_at_one?
-    topic_nums = find_module_by_name.content_by_submodule_topic.keys.group_by(&:first)
-
-    topic_nums.each do |_submodule_num, submod_topic_num|
-      return false unless consecutive_nums_start_at_one?(submod_topic_num.map(&:second))
+  def topics?
+    mod.content_by_submodule_topic.keys.group_by(&:first).all? do |_, sub_topics|
+      consecutive_integers_from_one? sub_topics.map(&:last)
     end
-
-    true
   end
 
-  def find_module_by_name
-    # caching twice if used like this
-    #
-    # fetch_or_store(training_module) do
-    #   Training::Module.by_name(training_module)
-    # end
-
-    Training::Module.by_name(training_module)
+  def mod
+    @mod ||= Training::Module.by_name(module_name)
   end
 
 private
 
+  # @return [String]
+  def log(message)
+    if ENV['RAILS_LOG_TO_STDOUT'].present?
+      Rails.logger.info(message)
+    else
+      puts message
+    end
+  end
+
   # ------------------- Required page types ---------------------
 
-  def has_video_page?
-    find_module_by_name.content.any?(Training::Video)
+  def page_by_type_position(type:, position: nil)
+    return mod.content.map(&:page_type).any?(type) unless position
+
+    mod.content[position].page_type.eql?(type)
+  rescue NoMethodError
+    false
   end
 
-  def has_assessment_results?
-    find_module_by_name.content.map(&:page_type).any?('assessment_results')
+  def video?
+    page_by_type_position(type: 'video_page')
   end
 
-  def first_page_is_interruption?
-    find_module_by_name.content.first.page_type.eql?('interruption_page')
+  def results?
+    page_by_type_position(type: 'assessment_results')
   end
 
-  def second_page_is_sub_module_intro?
-    find_module_by_name.content[1].page_type.eql?('sub_module_intro')
+  def first?
+    page_by_type_position(type: 'interruption_page', position: 0)
   end
 
-  def penultimate_page_is_thankyou?
-    find_module_by_name.content[-2].page_type.eql?('thankyou')
+  def second?
+    page_by_type_position(type: 'sub_module_intro', position: 1)
   end
 
-  def last_page_is_certificate?
-    find_module_by_name.content.last.page_type.eql?('certificate')
+  def penultimate?
+    page_by_type_position(type: 'thankyou', position: -2)
   end
 
-  def has_ten_summative_questions?
-    find_module_by_name.page_by_type('summative_questionnaire').count.eql? 10
+  def last?
+    page_by_type_position(type: 'certificate', position: -1)
+  end
+
+  def assessment?
+    return true if ContentfulRails.configuration.environment.eql?('test')
+
+    mod.page_by_type('summative_questionnaire').count.eql? 10
   end
 
   # ------------------- Also to add? ---------------------
