@@ -8,7 +8,7 @@ require 'contentful/static'
 ContentfulRails.configure do |config|
   config.space            = Rails.application.config.contentful_space
   config.environment      = Rails.application.config.contentful_environment
-  config.perform_caching  = Rails.application.live?
+  config.perform_caching  = Rails.env.production?
   config.default_locale   = 'en-US' # Optional - defaults to 'en-US'
 
   # Webhooks
@@ -28,8 +28,17 @@ ContentfulRails.configure do |config|
   config.eager_load_entry_mapping = false
 
   config.contentful_options = {
+    logger: (Rails.logger if Rails.env.development?),
+
+    # Prevent recursion
+    max_include_resolution_depth: 1,
+    reuse_entries: true,
+
+    # Timeout settings
+    preview_api: { timeout_connect: 2, timeout_read: 6, timeout_write: 20 },
     delivery_api: { timeout_connect: 2, timeout_read: 6, timeout_write: 20 },
     management_api: { timeout_connect: 3, timeout_read: 100, timeout_write: 200 },
+
     entry_mapping: {
       'static' => Contentful::Static,
       'trainingModule' => Training::Module,
