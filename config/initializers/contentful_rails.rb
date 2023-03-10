@@ -28,7 +28,7 @@ ContentfulRails.configure do |config|
   config.eager_load_entry_mapping = false
 
   config.contentful_options = {
-    logger: (Rails.logger if Rails.env.development?),
+    logger: Rails.logger,
 
     # Prevent recursion
     max_include_resolution_depth: 1,
