@@ -90,9 +90,9 @@ module Training
         end
       else
         # @content ||=
-          fields[:pages].map do |child_link|
-            child_by_id(child_link.id)
-          end
+        fields[:pages].map do |child_link|
+          child_by_id(child_link.id)
+        end
       end
     end
 
