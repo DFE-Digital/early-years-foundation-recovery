@@ -76,21 +76,10 @@ module Training
     def content
       return [] if draft?
 
-      # fields[:pages].map do |child_link|
-      #   if self.class.cache?
-      #     fetch_or_store(child_link.id) { child_by_id(child_link.id) }
-      #   else
-      #     child_by_id(child_link.id)
-      #   end
-      # end
-
-      if self.class.cache? # RAILS_ENV=test
-        fields[:pages].map do |child_link|
+      fields[:pages].map do |child_link|
+        if self.class.cache?
           fetch_or_store(child_link.id) { child_by_id(child_link.id) }
-        end
-      else
-        # @content ||=
-        fields[:pages].map do |child_link|
+        else
           child_by_id(child_link.id)
         end
       end

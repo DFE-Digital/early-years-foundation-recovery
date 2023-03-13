@@ -1,5 +1,5 @@
 class Contentful::BaseController < ApplicationController
-  before_action do
-    ContentfulModel.use_preview_api = Rails.application.preview?
-  end
+  # before_action do
+  #   ContentfulRails.configuration.enable_preview_domain = Rails.application.preview?
+  # end
 end
