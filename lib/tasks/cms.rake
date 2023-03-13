@@ -41,17 +41,21 @@ namespace :eyfs do
     #   binding.pry
     # end
 
-    # @example
+    # @see .env
+    #   CONTENTFUL_ENVIRONMENT=foo
     #
-    #   $ rake 'eyfs:cms:validate'
-    #
+    # ./bin/docker-rails 'eyfs:cms:validate[alpha,bravo]'
     desc 'Validate CMS content'
-    task validate: :environment do
-      result =
-        Training::Module.ordered.all? do |mod|
-          ContentfulDataIntegrity.new(module_name: mod.name)
-        end
-      puts result ? 'valid' : 'invalid'
+    task :validate, [:mod_names] => :environment do |_task, args|
+      all_mods = Training::Module.ordered.map(&:name)
+
+      args.with_defaults(mod_names: all_mods)
+
+      mod_names = args[:mod_names].split(',').flatten
+
+      mod_names.map do |mod|
+        ContentfulDataIntegrity.new(module_name: mod).call
+      end
     end
   end
 end

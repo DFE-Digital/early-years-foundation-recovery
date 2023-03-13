@@ -5,56 +5,151 @@ class ContentfulDataIntegrity
 
   option :module_name, Types::String.enum(*Training::Module.ordered.map(&:name))
 
-  VALIDATIONS = {
+  MODULE_VALIDATIONS = {
+    # presence and volume
+    thumbnail?: 'Missing thumbnail',
+  }.freeze
+
+  CONTENT_VALIDATIONS = {
     # position and type
-    first?: 'First page is not interruption page',
-    second?: 'Second page is not submodule intro',
-    penultimate?: 'Penultimate page is not thank you',
-    last?: 'Last page is not certificate',
+    first?: 'First page is wrong type',             # interruption_page
+    second?: 'Second page is wrong type',           # sub_module_intro
+    penultimate?: 'Penultimate page is wrong type', # thankyou
+    last?: 'Last page is wrong type',               # certificate
 
     # presence and volume
     video?: 'Missing video pages',
     results?: 'Missing assessment results page',
-    assessment?: 'Not enough assessment questions',
+    assessment?: 'Insufficient assessment questions',
 
     # structure of submodule/topic
-    submodules?: 'Submodules are not consecutive incrementing from 1',
-    topics?: 'Topics are not consecutive incrementing from 1',
+    submodules?: 'Submodules are not consecutive',
+    topics?: 'Topics are not consecutive',
+
+    parent?: 'Pages have wrong parent',
   }.freeze
 
-  def valid?
-    VALIDATIONS.all? do |method, message|
-      result = send(method)
-      log(message) unless result
-      result
-    end
+  # ------------------- COMBINED ---------------------
+
+  # Validate modules with content
+  #
+  #
+  def call
+    log '---'
+    log 'ENV: ' + ContentfulRails.configuration.environment
+    log 'API: ' + (ContentfulRails.configuration.enable_preview_domain ? 'preview' : 'delivery')
+    log "#{module_name.upcase}: " + (valid? ? 'pass' : 'fail')
   end
 
-  # ------------------- Correct page order ---------------------
+  # @return [Boolean] Validate modules with content
+  def valid?
+    (module_results + content_results).all?
+  end
 
-  # @param numbers [Array<Integer>]
+  # ------------------- MODULE ---------------------
+
   # @return [Boolean]
-  def consecutive_integers_from_one?(numbers)
-    numbers.first.eql?(1) && numbers.each_cons(2).all? { |a, b| b == a + 1 }
+  def thumbnail?
+    mod.fields[:image].present?
+  end
+
+  # ------------------- CONTENT ---------------------
+
+  # @return [Boolean]
+  def video?
+    page_by_type_position(type: 'video_page')
+  end
+
+  # @return [Boolean]
+  def results?
+    page_by_type_position(type: 'assessment_results')
+  end
+
+  # @return [Boolean]
+  def first?
+    page_by_type_position(type: 'interruption_page', position: 0)
+  end
+
+  # @return [Boolean]
+  def second?
+    page_by_type_position(type: 'sub_module_intro', position: 1)
+  end
+
+  # @return [Boolean]
+  def penultimate?
+    page_by_type_position(type: 'thankyou', position: -2)
+  end
+
+  # @return [Boolean]
+  def last?
+    page_by_type_position(type: 'certificate', position: -1)
+  end
+
+  # @return [Boolean]
+  def assessment?
+    return true if ContentfulRails.configuration.environment.eql?('test')
+
+    mod.page_by_type('summative_questionnaire').count.eql? 10
+  end
+
+  # @return [Boolean]
+  def parent?
+    mod.content.all? { |entry| entry.parent.name.eql?(mod.name) }
   end
 
   # @return [Boolean]
   def submodules?
-    consecutive_integers_from_one? mod.content_by_submodule.keys
+    consecutive_integers? sections.keys
   end
 
   # @return [Boolean]
   def topics?
-    mod.content_by_submodule_topic.keys.group_by(&:first).all? do |_, sub_topics|
-      consecutive_integers_from_one? sub_topics.map(&:last)
+    sections.all? do |_, sub_topics|
+      sub_topics.map(&:last).map { |topics| consecutive_integers? Array(topics) }
     end
+  end
+
+  # ------------------- PRIVATE ---------------------
+private
+
+  # @return [Hash{Integer=>Array<Integer>}] submodule => submodule topics
+  def sections
+    mod.content.group_by { |page| [page.submodule, page.topic] }.keys.group_by(&:first)
   end
 
   def mod
     @mod ||= Training::Module.by_name(module_name)
   end
 
-private
+  # ------------------- Correct page order ---------------------
+
+  # @param numbers [Array<Integer>]
+  # @return [Boolean] 0, 1, 2, 3, 4...
+  def consecutive_integers?(numbers)
+    numbers.first.zero? && numbers.each_cons(2).all? { |a, b| (a + 1).eql?(b) }
+  end
+
+  # @return [Array<Boolean>]
+  def module_results
+    validate MODULE_VALIDATIONS
+  end
+
+  # @return [Array<Boolean>]
+  def content_results
+    return [true] if mod.content.none? # mod.draft? (self-referential)
+
+    validate CONTENT_VALIDATIONS
+  end
+
+  # @return [Array<Boolean>]
+  def validate(validations)
+    validations.to_enum.with_index.map do |(method, message), index|
+      result = send(method)
+      log 'ISSUES:' if index.zero? && !result
+      log "  - #{message}" unless result
+      result
+    end
+  end
 
   # @return [String]
   def log(message)
@@ -65,44 +160,12 @@ private
     end
   end
 
-  # ------------------- Required page types ---------------------
-
   def page_by_type_position(type:, position: nil)
     return mod.content.map(&:page_type).any?(type) unless position
 
     mod.content[position].page_type.eql?(type)
   rescue NoMethodError
     false
-  end
-
-  def video?
-    page_by_type_position(type: 'video_page')
-  end
-
-  def results?
-    page_by_type_position(type: 'assessment_results')
-  end
-
-  def first?
-    page_by_type_position(type: 'interruption_page', position: 0)
-  end
-
-  def second?
-    page_by_type_position(type: 'sub_module_intro', position: 1)
-  end
-
-  def penultimate?
-    page_by_type_position(type: 'thankyou', position: -2)
-  end
-
-  def last?
-    page_by_type_position(type: 'certificate', position: -1)
-  end
-
-  def assessment?
-    return true if ContentfulRails.configuration.environment.eql?('test')
-
-    mod.page_by_type('summative_questionnaire').count.eql? 10
   end
 
   # ------------------- Also to add? ---------------------
@@ -112,13 +175,6 @@ private
 
   # depends on values are present for modules 2-10
   # order of the modules
-
-  # pages have a parent value
-
-  # training_module needs to have a thumbnail
-  # should be validated on the contentful model
-
-  # configurable to check both APIs?
 
   # does every question have a json object on it that looks right
   # JSON checker could be a different class
