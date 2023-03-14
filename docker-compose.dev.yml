@@ -22,8 +22,6 @@ services:
       - RAILS_ENV=development
       - DOMAIN=app:3000
       - RAILS_SERVE_STATIC_FILES=true
-      # cms preview
-      - GOVUK_WEBSITE_ROOT=localhost
     volumes:
       - .:/srv
     tty: true

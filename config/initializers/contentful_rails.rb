@@ -5,15 +5,8 @@ require 'training/question'
 require 'training/video'
 require 'contentful/static'
 
-# module ContentfulRails
-#   module Preview
-#     def check_preview_domain
-#       # no-op
-#     end
-#   end
-# end
-
-# binding.pry
+# Preview enabled for local development and staging
+ContentfulModel.use_preview_api = Rails.application.preview?
 
 ContentfulRails.configure do |config|
   config.space            = Rails.application.config.contentful_space
@@ -25,13 +18,6 @@ ContentfulRails.configure do |config|
   config.authenticate_webhooks = true
   config.webhooks_username = 'ey_recovery'
   config.webhooks_password = 'ey_recovery'
-
-  # Preview
-  config.enable_preview_domain = Rails.application.preview?
-  # config.preview_domain = 'ey-recovery-staging'
-  config.preview_domain = ENV['GOVUK_WEBSITE_ROOT']
-  # config.preview_username =
-  # config.preview_password =
 
   # Tokens
   config.access_token         = Rails.application.config.contentful_delivery_access_token
