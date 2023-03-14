@@ -47,7 +47,7 @@ namespace :eyfs do
     # ./bin/docker-rails 'eyfs:cms:validate[alpha,bravo]'
     desc 'Validate CMS content'
     task :validate, [:mod_names] => :environment do |_task, args|
-      ENV['CONTENTFUL_VALIDATION'] = 'y' # enable caching
+      ENV['CONTENTFUL_CACHE'] = 'y'
 
       args.with_defaults(mod_names: Training::Module.ordered.map(&:name))
 
