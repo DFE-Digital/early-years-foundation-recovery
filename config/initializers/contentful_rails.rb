@@ -8,16 +8,16 @@ require 'static'
 ContentfulRails.configure do |config|
   config.space            = Rails.application.config.contentful_space
   config.environment      = Rails.application.config.contentful_environment
-  config.perform_caching  = Rails.application.live?
-  config.default_locale   = 'en-US' # Optional - defaults to 'en-US'
+  config.perform_caching  = Rails.env.production?
+  config.default_locale   = 'en-US'
 
   # Webhooks
-  # config.authenticate_webhooks = true # false here would allow the webhooks to process without basic auth
-  # config.webhooks_username = 'ey_recovery'
-  # config.webhooks_password = 'ey_recovery'
+  config.authenticate_webhooks = true
+  config.webhooks_username = 'ey_recovery'
+  config.webhooks_password = 'ey_recovery'
 
-  # Preview is enabled for local development and staging
-  # config.enable_preview_domain =
+  # Preview enabled for local development and staging
+  config.enable_preview_domain = Rails.application.preview?
   # config.preview_domain =
 
   # Tokens
@@ -28,8 +28,17 @@ ContentfulRails.configure do |config|
   config.eager_load_entry_mapping = false
 
   config.contentful_options = {
+    logger: Rails.logger,
+
+    # Prevent recursion
+    max_include_resolution_depth: 1,
+    reuse_entries: true,
+
+    # Timeout settings
+    preview_api: { timeout_connect: 2, timeout_read: 6, timeout_write: 20 },
     delivery_api: { timeout_connect: 2, timeout_read: 6, timeout_write: 20 },
     management_api: { timeout_connect: 3, timeout_read: 100, timeout_write: 200 },
+
     entry_mapping: {
       'static' => Static,
       'trainingModule' => Training::Module,
