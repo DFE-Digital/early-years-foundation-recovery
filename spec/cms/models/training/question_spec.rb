@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Training::Question, :cms, type: :model do
+  subject(:question) { described_class.find_by(name: '1-1-4').load.first }
+
   let(:alpha) { Training::Module.by_name(:alpha) }
-  subject(:question) { described_class.find_by(name: '1-1-4').load.first}
 
   before do
     skip 'WIP' unless Rails.application.cms?
@@ -11,13 +12,13 @@ RSpec.describe Training::Question, :cms, type: :model do
   describe 'attributes' do
     it '#options' do
       expect(question.options.count).to eq(2)
-      expect(question.options.first).to eq(OpenStruct.new(id: "1", label: 'Correct answer 1', correct?: true))
+      expect(question.options.first).to eq(OpenStruct.new(id: '1', label: 'Correct answer 1', correct?: true))
     end
 
     it '#correct_answers' do
-      expect(question.correct_answers).to eq(["1"])
+      expect(question.correct_answers).to eq(%w[1])
     end
-    
+
     describe 'contentful attributes' do
       it '#page_type' do
         expect(question.page_type).to eq 'formative_questionnaire'
@@ -30,7 +31,7 @@ RSpec.describe Training::Question, :cms, type: :model do
       it '#submodule' do
         expect(question.submodule).to eq 1
       end
-      
+
       it '#page_number' do
         expect(question.page_number).to eq 1
       end

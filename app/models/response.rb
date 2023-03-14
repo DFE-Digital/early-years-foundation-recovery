@@ -1,7 +1,7 @@
 class Response < ApplicationRecord
   belongs_to :user
 
-  validates_presence_of :answer
+  validates :answer, presence: true
 
   delegate :pagination, :body, :parent, :correct_answer, to: :question
 
@@ -14,7 +14,10 @@ class Response < ApplicationRecord
   end
 
   def options
-    question.options.map{|option| option.disabled=responded?;option}
+    question.options.map do |option|
+      option.disabled = responded?
+      option
+    end
   end
 
   def responded?
@@ -48,11 +51,10 @@ class Response < ApplicationRecord
   def first_assessment?
     false
   end
-  
+
   # @return [String]
   def to_partial_path
     fields = multi_select? ? :check_boxes : :radio_buttons
     "responses/#{page_type}_#{fields}"
   end
-
 end

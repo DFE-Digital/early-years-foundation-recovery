@@ -10,13 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_24_151527) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_07_154556) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "citext"
-  enable_extension "fuzzystrmatch"
-  enable_extension "pgcrypto"
   enable_extension "plpgsql"
-  enable_extension "uuid-ossp"
 
   create_table "ahoy_events", force: :cascade do |t|
     t.bigint "visit_id"

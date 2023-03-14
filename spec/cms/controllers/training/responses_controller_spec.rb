@@ -11,24 +11,24 @@ RSpec.describe Training::ResponsesController, type: :controller do
     expect(response).to have_http_status(:success)
   end
 
-  context '#update' do
+  describe '#update' do
     let(:page) { { training_module_id: 'alpha', id: '1-1-4' } }
 
     it 'with correct answer' do
-      page_params = page.merge(response: { answer: "1" } )
-      patch :update, params: page_params 
+      page_params = page.merge(response: { answer: '1' })
+      patch :update, params: page_params
       expect(response).to have_http_status(:success)
     end
 
     it 'with incorrect answer' do
-      page_params = page.merge(response: { answer: "2" } )
-      patch :update, params: page_params 
+      page_params = page.merge(response: { answer: '2' })
+      patch :update, params: page_params
       expect(response).to have_http_status(:success)
     end
 
     it 'with blank answer' do
-      page_params = page.merge(response: { answer: nil } )
-      patch :update, params: page_params 
+      page_params = page.merge(response: { answer: nil })
+      patch :update, params: page_params
       expect(response).to have_http_status(:unprocessable_entity)
     end
   end

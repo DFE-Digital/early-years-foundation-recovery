@@ -4,8 +4,7 @@ module Training
     # before_action :track_events, only: :show
     helper_method :training_module, :current_user_response, :content
 
-    def show
-    end
+    def show; end
 
     def update
       if current_user_response.update(answer: user_answer)
@@ -32,7 +31,7 @@ module Training
     def current_user_response
       @current_user_response ||= current_user.responses.find_or_initialize_by(
         question_name: content_slug,
-        training_module: mod_name
+        training_module: mod_name,
       )
     end
 
