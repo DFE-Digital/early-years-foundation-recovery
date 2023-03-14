@@ -4,7 +4,7 @@ module Training
 
     # @return [Boolean]
     def self.cache?
-      Rails.env.test?
+      Types::Params::Bool[ENV.fetch('CONTENTFUL_VALIDATION', false)] || Rails.env.test?
     end
 
     # METHODS TO DEPRECATE --------------------------------------

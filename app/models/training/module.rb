@@ -84,18 +84,6 @@ module Training
         end
       end
     end
-    # @return [Array, Enumerator::Lazy<Training::Page, Training::Video, Training::Question>] cached result
-    # def content
-    #   return [] if draft?
-
-    #   fields[:pages].to_enum.lazy do |child_link|
-    #     if self.class.cache?
-    #       fetch_or_store(child_link.id) { child_by_id(child_link.id) }
-    #     else
-    #       child_by_id(child_link.id)
-    #     end
-    #   end
-    # end
 
     # @return [Hash{ Integer=>Array<Module::Content> }]
     def content_by_submodule

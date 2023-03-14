@@ -1,11 +1,5 @@
 # Validate whether a module's content meets minimum functional requirements
 #
-# TODO:
-#   - depends on values are present for modules 2-10
-#   - order of the modules
-#   - does every question have a json object on it that looks right
-#   - JSON checker could be a different class
-#
 class ContentfulDataIntegrity
   extend Dry::Initializer
 
@@ -15,14 +9,15 @@ class ContentfulDataIntegrity
   #
   # @return [Hash{Symbol=>String}] valid as upcoming module
   MODULE_VALIDATIONS = {
-    thumbnail: 'Missing thumbnail',
+    criteria: 'Missing criteria',
+    dependent: 'Missing dependent',
     description: 'Missing description',
-    # summary: 'Missing short description',
-    # objective: 'Missing objective',
-    # threshold: 'Missing threshold',
-    # position: 'Missing position',
-    # duration: 'Missing duration',
-    # criteria: 'Missing criteria',
+    duration: 'Missing duration',
+    objective: 'Missing objective',
+    position: 'Missing position',
+    summary: 'Missing short description',
+    threshold: 'Missing threshold',
+    thumbnail: 'Missing thumbnail',
   }.freeze
 
   # @return [Hash{Symbol=>String}] valid as released module
@@ -68,6 +63,43 @@ class ContentfulDataIntegrity
   # @return [Boolean]
   def description?
     mod.fields[:description].present?
+  end
+
+  # @return [Boolean]
+  def summary?
+    mod.fields[:short_description].present?
+  end
+
+  # @return [Boolean]
+  def objective?
+    mod.fields[:objective].present?
+  end
+
+  # @return [Boolean]
+  def threshold?
+    mod.fields[:summative_threshold].present?
+  end
+
+  # @return [Boolean]
+  def position?
+    mod.fields[:position].present?
+  end
+
+  # @return [Boolean]
+  def duration?
+    mod.fields[:duration].present?
+  end
+
+  # @return [Boolean]
+  def criteria?
+    mod.fields[:criteria].present?
+  end
+
+  # @return [Boolean]
+  def dependent?
+    return true if mod.fields[:position].eql?(1)
+
+    mod.fields[:depends_on].present?
   end
 
   # ------------------- CONTENT ---------------------

@@ -28,12 +28,11 @@ RSpec.describe ContentfulDataIntegrity do
       specify { expect(service.valid?).to be true }
     end
 
-    # TODO: 5th demo module that is invalid
-    # context 'when invalid' do
-    #   let(:mod) { 'echo' }
+    context 'when invalid' do
+      let(:mod) { 'delta' }
 
-    #   specify { expect(service.valid?).to be false }
-    # end
+      specify { expect(service.valid?).to be false } # duration should be missing
+    end
   end
 
   describe '#consecutive_integers?' do
