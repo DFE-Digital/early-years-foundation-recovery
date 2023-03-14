@@ -2,6 +2,11 @@ module Training
   class Content < ContentfulModel::Base
     extend Dry::Core::Cache
 
+    # @return [Boolean]
+    def self.cache?
+      Rails.env.test?
+    end
+
     # METHODS TO DEPRECATE --------------------------------------
 
     # @return [self]
@@ -21,6 +26,7 @@ module Training
 
     # METHODS TO DEPRECATE --------------------------------------
 
+    # NB: do not apply additional caching here
     # @return [Training::Content]
     def self.by_id(id)
       load_children(0).find(id)
