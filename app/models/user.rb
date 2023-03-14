@@ -43,6 +43,7 @@ class User < ApplicationRecord
 
   has_many :user_answers
   has_many :user_assessments
+  has_many :responses
   has_many :visits, class_name: 'Ahoy::Visit'
   has_many :events, class_name: 'Ahoy::Event'
   has_many :notes

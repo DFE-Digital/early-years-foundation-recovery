@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
 
   include Tracking
   include Auditing
-  include Contentfully
 
   def authenticate_registered_user!
     authenticate_user! unless user_signed_in?

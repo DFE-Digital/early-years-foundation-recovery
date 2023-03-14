@@ -70,7 +70,7 @@ Rails.application.routes.draw do
     scope module: 'training' do
       resources :modules, only: %i[show], as: :training_modules do
         resources :pages, only: %i[index show], path: 'content-pages'
-        resources :questionnaires, only: %i[show update]
+        resources :responses, only: %i[show update], path: 'questionnaires'
       end
     end
   end

@@ -131,6 +131,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_151527) do
     t.check_constraint "jsonb_typeof(value) = 'object'::text", name: "valid_value"
   end
 
+  create_table "responses", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "training_module"
+    t.string "question_name"
+    t.jsonb "answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_responses_on_user_id"
+  end
+
   create_table "user_answers", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "questionnaire_id", null: false
@@ -203,6 +213,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_151527) do
 
   add_foreign_key "notes", "users"
   add_foreign_key "que_scheduler_audit_enqueued", "que_scheduler_audit", column: "scheduler_job_id", primary_key: "scheduler_job_id", name: "que_scheduler_audit_enqueued_scheduler_job_id_fkey"
+  add_foreign_key "responses", "users"
   add_foreign_key "user_answers", "user_assessments"
   add_foreign_key "user_answers", "users"
   add_foreign_key "user_assessments", "users"

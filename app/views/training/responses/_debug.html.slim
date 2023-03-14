@@ -1,0 +1,16 @@
+- if Rails.application.debug?
+  pre.debug_dump
+    = flash.inspect 
+    hr
+    = current_user_response.inspect
+    hr
+    = current_user_response.responded?
+    hr
+    = current_user_response.options
+    hr
+    = current_user_response.errors.full_messages
+    hr
+    = content.pagination 
+    hr
+    = content.body
+
