@@ -1,43 +1,55 @@
 # Validate whether a module's content meets minimum functional requirements
 #
+# TODO:
+#   - depends on values are present for modules 2-10
+#   - order of the modules
+#   - does every question have a json object on it that looks right
+#   - JSON checker could be a different class
+#
 class ContentfulDataIntegrity
   extend Dry::Initializer
 
   option :module_name, Types::String.enum(*Training::Module.ordered.map(&:name))
 
+  # NB: Able to be validated in the CMS editor
+  #
+  # @return [Hash{Symbol=>String}] valid as upcoming module
   MODULE_VALIDATIONS = {
-    # presence and volume
-    thumbnail?: 'Missing thumbnail',
+    thumbnail: 'Missing thumbnail',
+    description: 'Missing description',
+    # summary: 'Missing short description',
+    # objective: 'Missing objective',
+    # threshold: 'Missing threshold',
+    # position: 'Missing position',
+    # duration: 'Missing duration',
+    # criteria: 'Missing criteria',
   }.freeze
 
+  # @return [Hash{Symbol=>String}] valid as released module
   CONTENT_VALIDATIONS = {
     # position and type
-    first?: 'First page is wrong type',             # interruption_page
-    second?: 'Second page is wrong type',           # sub_module_intro
-    penultimate?: 'Penultimate page is wrong type', # thankyou
-    last?: 'Last page is wrong type',               # certificate
+    first: 'First page is wrong type',             # interruption_page
+    second: 'Second page is wrong type',           # sub_module_intro
+    penultimate: 'Penultimate page is wrong type', # thankyou
+    last: 'Last page is wrong type',               # certificate
 
     # presence and volume
-    video?: 'Missing video pages',
-    results?: 'Missing assessment results page',
-    assessment?: 'Insufficient assessment questions',
+    video: 'Missing video pages',
+    results: 'Missing assessment results page',
+    assessment: 'Insufficient assessment questions',
 
     # structure of submodule/topic
-    submodules?: 'Submodules are not consecutive',
-    topics?: 'Topics are not consecutive',
+    submodules: 'Submodules are not consecutive',
+    topics: 'Topics are not consecutive',
 
-    parent?: 'Pages have wrong parent',
+    parent: 'Pages have wrong parent',
   }.freeze
 
-  # ------------------- COMBINED ---------------------
-
-  # Validate modules with content
-  #
-  #
+  # @return [nil]
   def call
     log '---'
-    log 'ENV: ' + ContentfulRails.configuration.environment
-    log 'API: ' + (ContentfulRails.configuration.enable_preview_domain ? 'preview' : 'delivery')
+    log "ENV: #{ContentfulRails.configuration.environment}"
+    log "API: #{ContentfulModel.use_preview_api ? 'preview' : 'delivery'}"
     log "#{module_name.upcase}: " + (valid? ? 'pass' : 'fail')
   end
 
@@ -51,6 +63,11 @@ class ContentfulDataIntegrity
   # @return [Boolean]
   def thumbnail?
     mod.fields[:image].present?
+  end
+
+  # @return [Boolean]
+  def description?
+    mod.fields[:description].present?
   end
 
   # ------------------- CONTENT ---------------------
@@ -109,19 +126,10 @@ class ContentfulDataIntegrity
     end
   end
 
-  # ------------------- PRIVATE ---------------------
-private
-
-  # @return [Hash{Integer=>Array<Integer>}] submodule => submodule topics
-  def sections
-    mod.content.group_by { |page| [page.submodule, page.topic] }.keys.group_by(&:first)
-  end
-
+  # @return [Training::Module]
   def mod
     @mod ||= Training::Module.by_name(module_name)
   end
-
-  # ------------------- Correct page order ---------------------
 
   # @param numbers [Array<Integer>]
   # @return [Boolean] 0, 1, 2, 3, 4...
@@ -129,12 +137,19 @@ private
     numbers.first.zero? && numbers.each_cons(2).all? { |a, b| (a + 1).eql?(b) }
   end
 
-  # @return [Array<Boolean>]
+private
+
+  # @return [Hash{Integer=>Array<Integer>}] submodule => submodule topics
+  def sections
+    mod.content.group_by { |page| [page.submodule, page.topic] }.keys.group_by(&:first)
+  end
+
+  # @return [Array<Boolean>] validate module attributes
   def module_results
     validate MODULE_VALIDATIONS
   end
 
-  # @return [Array<Boolean>]
+  # @return [Array<Boolean>] validate module content attributes
   def content_results
     return [true] if mod.content.none? # mod.draft? (self-referential)
 
@@ -144,7 +159,7 @@ private
   # @return [Array<Boolean>]
   def validate(validations)
     validations.to_enum.with_index.map do |(method, message), index|
-      result = send(method)
+      result = send "#{method}?"
       log 'ISSUES:' if index.zero? && !result
       log "  - #{message}" unless result
       result
@@ -167,15 +182,4 @@ private
   rescue NoMethodError
     false
   end
-
-  # ------------------- Also to add? ---------------------
-
-  # demo content tallies are met (this shouldn’t be necessary for genuine content)
-  # count how many things we're expecting - in the data sanity check
-
-  # depends on values are present for modules 2-10
-  # order of the modules
-
-  # does every question have a json object on it that looks right
-  # JSON checker could be a different class
 end

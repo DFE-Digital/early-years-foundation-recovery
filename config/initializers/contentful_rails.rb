@@ -5,6 +5,9 @@ require 'training/question'
 require 'training/video'
 require 'contentful/static'
 
+# Preview enabled for local development and staging
+ContentfulModel.use_preview_api = Rails.application.preview?
+
 ContentfulRails.configure do |config|
   config.space            = Rails.application.config.contentful_space
   config.environment      = Rails.application.config.contentful_environment
@@ -15,10 +18,6 @@ ContentfulRails.configure do |config|
   config.authenticate_webhooks = true
   config.webhooks_username = 'ey_recovery'
   config.webhooks_password = 'ey_recovery'
-
-  # Preview enabled for local development and staging
-  config.enable_preview_domain = Rails.application.preview?
-  # config.preview_domain =
 
   # Tokens
   config.access_token         = Rails.application.config.contentful_delivery_access_token
