@@ -47,9 +47,7 @@ development:
 # ey-recovery-content
 content:
   <<: *defaults
-  # CONTENTFUL: true
-  # CONTENTFUL_ENVIRONMENT: genuine-with-5
-  # TRAINING_MODULES: demo-modules
+  CONTENTFUL: false
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
