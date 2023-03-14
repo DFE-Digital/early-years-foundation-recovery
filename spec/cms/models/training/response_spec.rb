@@ -19,7 +19,7 @@ RSpec.describe Response, :cms, type: :model do
   end
 
   describe 'with correct answer' do
-    let(:answer) { %w[1] }
+    let(:answer) { '1' }
 
     it 'banner title for successful assessment' do
       expect(response.banner_title).to eq("That's right")
@@ -31,7 +31,7 @@ RSpec.describe Response, :cms, type: :model do
   end
 
   describe 'with incorrect answer' do
-    let(:answer) { %w[2] }
+    let(:answer) { '2' }
 
     it 'banner title for failing assessment' do
       expect(response.banner_title).to eq("That's not quite right")

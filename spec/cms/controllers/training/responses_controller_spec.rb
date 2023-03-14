@@ -17,13 +17,13 @@ RSpec.describe Training::ResponsesController, type: :controller do
     it 'with correct answer' do
       page_params = page.merge(response: { answer: '1' })
       patch :update, params: page_params
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(:redirect)
     end
 
     it 'with incorrect answer' do
       page_params = page.merge(response: { answer: '2' })
       patch :update, params: page_params
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(:redirect)
     end
 
     it 'with blank answer' do

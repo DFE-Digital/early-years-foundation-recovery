@@ -3,7 +3,7 @@ class Response < ApplicationRecord
 
   validates :answer, presence: true
 
-  delegate :pagination, :body, :parent, :correct_answer, to: :question
+  delegate :pagination, :body, :parent, :correct_answer, :page_type, to: :question
 
   def mod
     @mod ||= Training::Module.by_name(training_module)
@@ -54,7 +54,10 @@ class Response < ApplicationRecord
 
   # @return [String]
   def to_partial_path
-    fields = multi_select? ? :check_boxes : :radio_buttons
-    "responses/#{page_type}_#{fields}"
+    if correct_answer.count > 1
+      "responses/#{page_type}_check_boxes"
+    else
+      "responses/#{page_type}_radio_buttons"
+    end
   end
 end

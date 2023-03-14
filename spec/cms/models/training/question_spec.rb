@@ -15,8 +15,8 @@ RSpec.describe Training::Question, :cms, type: :model do
       expect(question.options.first).to eq(OpenStruct.new(id: '1', label: 'Correct answer 1', correct?: true))
     end
 
-    it '#correct_answers' do
-      expect(question.correct_answers).to eq(%w[1])
+    it '#correct_answer' do
+      expect(question.correct_answer).to eq('1')
     end
 
     describe 'contentful attributes' do
