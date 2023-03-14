@@ -5,9 +5,6 @@ require 'training/question'
 require 'training/video'
 require 'contentful/static'
 
-# Preview enabled for local development and staging
-ContentfulModel.use_preview_api = Rails.application.preview?
-
 ContentfulRails.configure do |config|
   config.space            = Rails.application.config.contentful_space
   config.environment      = Rails.application.config.contentful_environment
@@ -23,6 +20,9 @@ ContentfulRails.configure do |config|
   config.access_token         = Rails.application.config.contentful_delivery_access_token
   config.preview_access_token = Rails.application.config.contentful_preview_access_token
   config.management_token     = Rails.application.config.contentful_management_access_token
+
+  # Preview
+  config.enable_preview_domain = Rails.application.preview?
 
   config.eager_load_entry_mapping = false
 
