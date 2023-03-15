@@ -12,9 +12,9 @@ ContentfulRails.configure do |config|
   config.default_locale   = 'en-US'
 
   # Webhooks
-  config.authenticate_webhooks = true
-  config.webhooks_username = 'ey_recovery'
-  config.webhooks_password = 'ey_recovery'
+  # config.authenticate_webhooks = true
+  # config.webhooks_username = 'ey_recovery'
+  # config.webhooks_password = 'ey_recovery'
 
   # Tokens
   config.access_token         = Rails.application.config.contentful_delivery_access_token
@@ -22,6 +22,7 @@ ContentfulRails.configure do |config|
   config.management_token     = Rails.application.config.contentful_management_access_token
 
   # Preview
+  # This successfully renders draft content and logs hits to preview.contentful.com
   config.enable_preview_domain = Rails.application.preview?
 
   config.eager_load_entry_mapping = false

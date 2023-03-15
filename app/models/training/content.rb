@@ -7,6 +7,11 @@ module Training
       Types::Params::Bool[ENV.fetch('CONTENTFUL_CACHE', false)] || Rails.env.test?
     end
 
+    # @return []
+    def self.reset_cache!
+      instance_variable_set(:@__cache__, Concurrent::Map.new) unless cache.empty?
+    end
+
     # METHODS TO DEPRECATE --------------------------------------
 
     # @return [self]

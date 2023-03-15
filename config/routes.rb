@@ -59,9 +59,7 @@ Rails.application.routes.draw do
     end
   end
 
-  # COURSE ---------------------------------------------------------------------
-
-  constraints !Rails.application.cms? do # NB: enabled if false
+  constraints proc { Rails.application.cms? } do
     scope module: 'training' do
       resources :modules, only: %i[show], as: :training_modules do
         resources :pages, only: %i[index show], path: 'content-pages'
@@ -75,8 +73,6 @@ Rails.application.routes.draw do
     resources :questionnaires, only: %i[show update]
     resources :assessment_results, only: %i[show new], path: 'assessment-result'
   end
-
-  # STATIC ---------------------------------------------------------------------
 
   # to be removed and below used when migrating to contentful
   static_regexp = %r{
@@ -94,6 +90,11 @@ Rails.application.routes.draw do
   get '/:id', to: 'static#show', id: static_regexp, as: :static
 
   scope module: 'contentful' do
+    post '/webhooks', to: 'base#webhooks'
     resources :static, only: %i[show], as: :static_pages, path: ''
   end
+
+  # /contentful/webhooks          - the URL for contentful to post back to
+  # /contentful/webhooks/debug    - a development-only URL to check you have mounted the engine properly
+  # mount ContentfulRails::Engine => '/contentful'
 end

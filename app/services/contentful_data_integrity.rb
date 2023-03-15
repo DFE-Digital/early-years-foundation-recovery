@@ -43,8 +43,8 @@ class ContentfulDataIntegrity
   # @return [nil]
   def call
     log '---'
-    log "ENV: #{ContentfulRails.configuration.environment}"
-    log "API: #{ContentfulModel.use_preview_api ? 'preview' : 'delivery'}"
+    log "ENV: #{env}"
+    log "API: #{api}"
     log "#{module_name.upcase}: " + (valid? ? 'pass' : 'fail')
   end
 
@@ -136,7 +136,7 @@ class ContentfulDataIntegrity
 
   # @return [Boolean]
   def assessment?
-    return true if ContentfulRails.configuration.environment.eql?('test')
+    return true if demo?
 
     mod.page_by_type('summative_questionnaire').count.eql? 10
   end
@@ -170,6 +170,22 @@ class ContentfulDataIntegrity
   end
 
 private
+
+  # @return [Boolean]
+  def demo?
+    ContentfulRails.configuration.environment.eql?('test')
+  end
+
+  # @return [String]
+  def api
+    ContentfulModel.use_preview_api ? 'preview' : 'delivery'
+    # ContentfulRails.configuration.enable_preview_domain ? 'preview' : 'delivery'
+  end
+
+  # @return [String]
+  def env
+    ContentfulRails.configuration.environment
+  end
 
   # @return [Hash{Integer=>Array<Integer>}] submodule => submodule topics
   def sections

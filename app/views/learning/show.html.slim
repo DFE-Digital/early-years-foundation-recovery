@@ -1,8 +1,10 @@
 - if Rails.application.debug?
   pre.debug_dump
-    | CMS
+    | CMS Config
     br
     | API: #{ContentfulModel.use_preview_api ? 'preview' : 'delivery'}
+    br
+    | CACHE: #{Training::Module.cache?}
 
 h1.govuk-heading-l My modules
 

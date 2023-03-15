@@ -31,7 +31,7 @@ RSpec.describe ContentfulDataIntegrity do
     context 'when invalid' do
       let(:mod) { 'delta' }
 
-      specify { expect(service.valid?).to be false } # duration should be missing
+      specify { expect(service.valid?).to be false } # something should be missing e.g. duration
     end
   end
 

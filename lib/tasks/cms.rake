@@ -49,6 +49,9 @@ namespace :eyfs do
     task :validate, [:mod_names] => :environment do |_task, args|
       ENV['CONTENTFUL_CACHE'] = 'y'
 
+      # Oddly this is needed even though ContentfulRails is also configured
+      ContentfulModel.use_preview_api = Rails.application.preview?
+
       args.with_defaults(mod_names: Training::Module.ordered.map(&:name))
 
       args[:mod_names].split(',').flatten.each do |mod|
