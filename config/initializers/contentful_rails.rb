@@ -8,7 +8,8 @@ require 'contentful/static'
 ContentfulRails.configure do |config|
   config.space            = Rails.application.config.contentful_space
   config.environment      = Rails.application.config.contentful_environment
-  config.perform_caching  = Rails.env.production?
+  # config.perform_caching  = Rails.env.production?
+  config.perform_caching  = false
   config.default_locale   = 'en-US'
 
   # Webhooks
