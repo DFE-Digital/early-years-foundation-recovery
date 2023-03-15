@@ -82,10 +82,11 @@ module EarlyYearsFoundationRecovery
       Types::Params::Bool[ENV.fetch('DASHBOARD_UPDATE', true)]
     end
 
-    # @see Training::BaseController
+    # @see ContentfulRails.configuration
     # @return [Boolean]
     def preview?
-      Rails.env.development? || ENV['WORKSPACE'].eql?('staging')
+      # Rails.env.development? || ENV['WORKSPACE'].eql?('staging')
+      true # revert before merging
     end
 
     # @return [Boolean]

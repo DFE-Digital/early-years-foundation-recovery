@@ -49,7 +49,6 @@ private
   # @return [String]
   def api
     ContentfulModel.use_preview_api ? 'preview' : 'delivery'
-    # ContentfulRails.configuration.enable_preview_domain ? 'preview' : 'delivery'
   end
 
   # @return [String]
