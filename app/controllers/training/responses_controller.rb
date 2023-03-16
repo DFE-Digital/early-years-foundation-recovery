@@ -8,7 +8,7 @@ module Training
 
     def update
       if current_user_response.update(answer: user_answer)
-        redirect_to training_module_response_path(mod_name, content_slug)
+        redirect
       else
         render :show, status: :unprocessable_entity
       end
@@ -17,7 +17,11 @@ module Training
   protected
 
     def user_answer
-      response_params[:answer]
+      if Array(response_params[:answer]).count > 1
+        response_params[:answer].compact_blank
+      else
+        response_params[:answer]
+      end
     end
 
     def show_progress_bar
@@ -36,7 +40,21 @@ module Training
     end
 
     def response_params
-      params.require(:response).permit(:answer)
+      params.require(:response).permit!
+    end
+
+  private
+
+    def redirect
+      if current_user_response.assess?
+        ContentfulAssessmentProgress.new(user: current_user, mod: mod).save!
+      end
+
+      if content.formative?
+        redirect_to training_module_response_path(mod_name, content_slug)
+      else # content.confidence? || content.summative?
+        redirect_to training_module_page_path(mod_name, content.next_item.name)
+      end
     end
   end
 end

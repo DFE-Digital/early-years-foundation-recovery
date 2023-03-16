@@ -3,7 +3,7 @@ class Response < ApplicationRecord
 
   validates :answer, presence: true
 
-  delegate :pagination, :body, :parent, :correct_answer, :page_type, to: :question
+  delegate :pagination, :body, :parent, :correct_answer, :assessments_type, :formative?, :summative?, :last_assessment?, to: :question
 
   def mod
     @mod ||= Training::Module.by_name(training_module)
@@ -36,28 +36,20 @@ class Response < ApplicationRecord
     correct? ? question.assessment_succeed : question.assessment_fail
   end
 
-  def formative?
-    true
+  def show_assessment?
+    formative? && responded?
   end
 
-  def confidence?
-    false
-  end
-
-  def first_confidence?
-    false
-  end
-
-  def first_assessment?
-    false
+  def assess?
+    summative? && last_assessment?
   end
 
   # @return [String]
   def to_partial_path
-    if correct_answer.count > 1
-      "responses/#{page_type}_check_boxes"
+    if Array(correct_answer).count > 1
+      "training/responses/check_boxes"
     else
-      "responses/#{page_type}_radio_buttons"
+      "training/responses/radio_buttons"
     end
   end
 end

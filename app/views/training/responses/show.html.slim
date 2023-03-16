@@ -10,7 +10,7 @@
     = form_with model: current_user_response, url: training_module_response_path(content.parent.name, content.name), method: :patch do |f|
       = render partial: current_user_response.to_partial_path, locals: { f: f }, object: current_user_response, as: :question
 
-      = render 'assessment_banner', question: content if current_user_response.responded?
+      = render 'assessment_banner', question: content if current_user_response.show_assessment?
 
       hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
 
