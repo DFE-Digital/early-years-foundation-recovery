@@ -86,7 +86,10 @@ module EarlyYearsFoundationRecovery
     # @return [Boolean]
     def preview?
       # Rails.env.development? || ENV['WORKSPACE'].eql?('staging')
-      true # revert before merging
+
+      # revert before merging
+      # Types::Params::Bool[ENV.fetch('CONTENTFUL_PREVIEW', true)]
+      ENV['CONTENTFUL_PREVIEW'].present?
     end
 
     # @return [Boolean]

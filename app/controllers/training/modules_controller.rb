@@ -11,7 +11,7 @@ class Training::ModulesController < Contentful::BaseController
   def show
     track('module_overview_page')
 
-    if mod.nil?
+    if redirect?
       redirect_to my_modules_path
     else
       @module_progress_bar  = ModuleProgressBarDecorator.new(progress)
@@ -24,10 +24,17 @@ class Training::ModulesController < Contentful::BaseController
 
 protected
 
-  def debug?
-    params[:debug] && Rails.application.debug?
+  # @return [Boolean]
+  def redirect?
+    mod.nil? || (!Rails.application.preview? && mod.draft?)
   end
 
+  # @return [Boolean]
+  def debug?
+    params[:debug].present? && Rails.application.debug?
+  end
+
+  # @return [Training::Module]
   def mod
     @mod ||= Training::Module.by_name(params[:id])
   end

@@ -52,6 +52,7 @@ content:
   DASHBOARD_UPDATE: false
   # CONTENTFUL: false
   CONTENTFUL_CACHE: true
+  CONTENTFUL_PREVIEW: true
   CONTENTFUL_ENVIRONMENT: test
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital

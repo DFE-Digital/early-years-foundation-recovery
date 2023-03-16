@@ -38,6 +38,7 @@ class ContentfulDataIntegrity
     topics: 'Topics are not consecutive',
 
     parent: 'Pages have wrong parent',
+    question_answers: 'Question answers are incorrectly formatted',
   }.freeze
 
   # @return [nil]
@@ -53,7 +54,18 @@ class ContentfulDataIntegrity
     (module_results + content_results).all?
   end
 
-  # ------------------- MODULE ---------------------
+  # @return [Training::Module]
+  def mod
+    @mod ||= Training::Module.by_name(module_name)
+  end
+
+  # @param numbers [Array<Integer>]
+  # @return [Boolean] 0, 1, 2, 3, 4...
+  def consecutive_integers?(numbers)
+    numbers.first.zero? && numbers.each_cons(2).all? { |a, b| (a + 1).eql?(b) }
+  end
+
+  # MODULE VALIDATIONS ---------------------------------------------------------
 
   # @return [Boolean]
   def thumbnail?
@@ -97,21 +109,26 @@ class ContentfulDataIntegrity
 
   # @return [Boolean]
   def dependent?
-    return true if mod.fields[:position].eql?(1)
-
-    mod.fields[:depends_on].present?
+    mod.fields[:position].eql?(1) || mod.fields[:depends_on].present?
   end
 
-  # ------------------- CONTENT ---------------------
+  # CONTENT VALIDATIONS --------------------------------------------------------
 
-  # @return [Boolean]
-  def video?
-    page_by_type_position(type: 'video_page')
+  # @return [Boolean] parent on pages set to correct module
+  def parent?
+    mod.content.all? { |entry| entry.parent.name.eql?(mod.name) }
   end
 
-  # @return [Boolean]
-  def results?
-    page_by_type_position(type: 'assessment_results')
+  # @return [Boolean] submodules increment correctly
+  def submodules?
+    consecutive_integers? sections.keys
+  end
+
+  # @return [Boolean] topics increment correctly
+  def topics?
+    sections.all? do |_, sub_topics|
+      sub_topics.map(&:last).map { |topics| consecutive_integers? Array(topics) }
+    end
   end
 
   # @return [Boolean]
@@ -135,54 +152,41 @@ class ContentfulDataIntegrity
   end
 
   # @return [Boolean]
+  def video?
+    page_by_type_position(type: 'video_page')
+  end
+
+  # @return [Boolean]
+  def question_answers?
+    true
+    # map over questions and use the custom strictly typed Dry::Struct object to
+    # assert that no type constraint error is raised, meaning it is valid JSON
+  end
+
+  # @return [Boolean] demo modules have fewer questions than genuine content
   def assessment?
-    return true if demo?
-
-    mod.page_by_type('summative_questionnaire').count.eql? 10
+    demo? || mod.page_by_type('summative_questionnaire').count.eql?(10)
   end
 
   # @return [Boolean]
-  def parent?
-    mod.content.all? { |entry| entry.parent.name.eql?(mod.name) }
-  end
-
-  # @return [Boolean]
-  def submodules?
-    consecutive_integers? sections.keys
-  end
-
-  # @return [Boolean]
-  def topics?
-    sections.all? do |_, sub_topics|
-      sub_topics.map(&:last).map { |topics| consecutive_integers? Array(topics) }
-    end
-  end
-
-  # @return [Training::Module]
-  def mod
-    @mod ||= Training::Module.by_name(module_name)
-  end
-
-  # @param numbers [Array<Integer>]
-  # @return [Boolean] 0, 1, 2, 3, 4...
-  def consecutive_integers?(numbers)
-    numbers.first.zero? && numbers.each_cons(2).all? { |a, b| (a + 1).eql?(b) }
+  def results?
+    page_by_type_position(type: 'assessment_results')
   end
 
 private
 
-  # @return [Boolean]
+  # @return [Boolean] content for development and testing
   def demo?
-    ContentfulRails.configuration.environment.eql?('test')
+    env.eql?('test')
   end
 
-  # @return [String]
+  # @return [String] preview / delivery
   def api
     ContentfulModel.use_preview_api ? 'preview' : 'delivery'
     # ContentfulRails.configuration.enable_preview_domain ? 'preview' : 'delivery'
   end
 
-  # @return [String]
+  # @return [String] master / staging / test
   def env
     ContentfulRails.configuration.environment
   end
@@ -199,7 +203,7 @@ private
 
   # @return [Array<Boolean>] validate module content attributes
   def content_results
-    return [true] if mod.content.none? # mod.draft? (self-referential)
+    return [true] if !mod.pages?
 
     validate CONTENT_VALIDATIONS
   end

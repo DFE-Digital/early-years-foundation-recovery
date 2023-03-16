@@ -93,8 +93,4 @@ Rails.application.routes.draw do
     post '/webhooks', to: 'base#webhooks'
     resources :static, only: %i[show], as: :static_pages, path: ''
   end
-
-  # /contentful/webhooks          - the URL for contentful to post back to
-  # /contentful/webhooks/debug    - a development-only URL to check you have mounted the engine properly
-  # mount ContentfulRails::Engine => '/contentful'
 end

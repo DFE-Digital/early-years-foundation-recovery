@@ -5,17 +5,14 @@ require 'training/question'
 require 'training/video'
 require 'contentful/static'
 
+# Without this the value is nil and defaults to delivery API
+ContentfulModel.use_preview_api = Rails.application.preview?
+
 ContentfulRails.configure do |config|
   config.space            = Rails.application.config.contentful_space
   config.environment      = Rails.application.config.contentful_environment
-  # config.perform_caching  = Rails.env.production?
-  config.perform_caching  = false
+  config.perform_caching  = Rails.env.production?
   config.default_locale   = 'en-US'
-
-  # Webhooks
-  # config.authenticate_webhooks = true
-  # config.webhooks_username = 'ey_recovery'
-  # config.webhooks_password = 'ey_recovery'
 
   # Tokens
   config.access_token         = Rails.application.config.contentful_delivery_access_token

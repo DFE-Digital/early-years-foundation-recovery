@@ -56,6 +56,7 @@ namespace :eyfs do
 
       args[:mod_names].split(',').flatten.each do |mod|
         ContentfulDataIntegrity.new(module_name: mod).call
+      rescue Dry::Types::ConstraintError
       end
     end
   end

@@ -1,0 +1,9 @@
+- if Rails.application.debug? && Rails.application.cms?
+  pre.debug_dump
+    | CMS Config
+    br
+    | ENV: #{ContentfulRails.configuration.environment}
+    br
+    | API: #{ContentfulModel.use_preview_api ? 'preview' : 'delivery'}
+    br
+    | CACHE: #{Training::Module.cache?}

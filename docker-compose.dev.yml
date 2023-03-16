@@ -23,6 +23,7 @@ services:
       - DOMAIN=app:3000
       - RAILS_SERVE_STATIC_FILES=true
       # overrides
+      - TIMEOUT_MINUTES
       - SENTRY_TOKEN
       - CONTENTFUL_CACHE
     volumes:

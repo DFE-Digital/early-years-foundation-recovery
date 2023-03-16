@@ -1,5 +1,17 @@
 module Training
   class Module < Content
+    extend Dry::Core::Cache
+
+    # @return [Boolean] on for tests unless enabled explicitly
+    def self.cache?
+      Types::Params::Bool[ENV.fetch('CONTENTFUL_CACHE', false)] || Rails.env.test?
+    end
+
+    # @return []
+    def self.reset_cache!
+      instance_variable_set(:@__cache__, Concurrent::Map.new) unless cache.empty?
+    end
+
     # @return [String]
     def self.content_type_id
       'trainingModule'
@@ -23,14 +35,11 @@ module Training
       end
     end
 
-    # cached queries ---------------------------------
-    #
     # TODO: use webhooks to expire cached result
-    #
-    #   def clear_cache_for(item_id)
-    #     cache_key = timestamp_cache_key(item_id)
-    #     Rails.cache.delete(cache_key)
-    #   end
+    # def clear_cache_for(item_id)
+    #   cache_key = timestamp_cache_key(item_id)
+    #   Rails.cache.delete(cache_key)
+    # end
 
     # @return [Training::Module] cached result
     def self.by_id(id)
@@ -74,9 +83,7 @@ module Training
     #
     # @return [Array<Training::Page, Training::Video, Training::Question>] cached result
     def content
-      return [] if draft?
-
-      fields[:pages].map do |child_link|
+      Array(fields[:pages]).map do |child_link|
         if self.class.cache?
           fetch_or_store(child_link.id) { child_by_id(child_link.id) }
         else
@@ -130,13 +137,14 @@ module Training
 
     # state ---------------------------------
 
-    # This approach is inline with Contenful's conventions.
-    # In staging draft modules should appear as published.
-    # The content team will select all pages and change them from draft to published, thereby changing the status on production.
-    #
-    # @return [Boolean]
+    # @return [Boolean] incomplete content will not be deemed 'available'
     def draft?
-      fields.fetch(:pages, []).none? # || ContentIntegrityCheck
+      !ContentfulDataIntegrity.new(module_name: name).valid?
+    end
+
+    # @return [Boolean]
+    def pages?
+      Array(fields[:pages]).any?
     end
 
     # # @return [Datetime]
