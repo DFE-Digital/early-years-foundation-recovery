@@ -48,7 +48,9 @@ RSpec.describe SummativeAssessmentProgress do
     context 'with all answers correct' do
       let(:correct_answer_count) { 4 }
 
-      specify { expect(assessment).to be_passed }
+      specify { 
+        expect(assessment).to be_passed
+      }
     end
 
     context 'with insufficient answers correct' do

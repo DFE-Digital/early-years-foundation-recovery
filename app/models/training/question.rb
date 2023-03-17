@@ -7,7 +7,7 @@ module Training
 
     def options
       answers.map do |option|
-        OpenStruct.new(id: option.keys[0].to_s, label: option.values[0][0], correct?: option.values[0][1])
+        OpenStruct.new(id: option.keys[0].to_s.to_i, label: option.values[0][0], correct?: option.values[0][1])
       end
     end
 

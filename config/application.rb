@@ -76,7 +76,7 @@ module EarlyYearsFoundationRecovery
 
     # @return [Boolean] true if Contentful is used for training content
     def cms?
-      Types::Params::Bool[ENV.fetch('CONTENTFUL', true)]
+      Types::Params::Bool[ENV.fetch('CONTENTFUL', false)]
     end
 
     # @return [Boolean] Upload to CSV files to the dashboard
