@@ -46,10 +46,10 @@ class Response < ApplicationRecord
 
   # @return [String]
   def to_partial_path
-    if Array(correct_answer).count > 1
-      "training/responses/check_boxes"
+    if Array(correct_answer).size > 1
+      'training/responses/check_boxes'
     else
-      "training/responses/radio_buttons"
+      'training/responses/radio_buttons'
     end
   end
 end

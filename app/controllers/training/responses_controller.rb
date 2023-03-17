@@ -17,7 +17,7 @@ module Training
   protected
 
     def user_answer
-      if Array(response_params[:answer]).count > 1
+      if Array(response_params[:answer]).size > 1
         response_params[:answer].compact_blank
       else
         response_params[:answer]

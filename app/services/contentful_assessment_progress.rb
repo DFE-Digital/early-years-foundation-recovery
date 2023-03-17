@@ -55,7 +55,7 @@ private
 
   # @return
   def correct_responses
-    user.responses.select{|response| response.assessments_type.eql?('summative_assessment') && response.correct?}
+    user.responses.select { |response| response.assessments_type.eql?('summative_assessment') && response.correct? }
   end
 
   # @return
