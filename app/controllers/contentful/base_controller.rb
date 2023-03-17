@@ -2,6 +2,9 @@ class Contentful::BaseController < ApplicationController
   # TODO: secure webhook endpoints!!!
   skip_before_action :verify_authenticity_token, only: %i[release change]
 
+  before_action do
+    ContentfulModel.use_preview_api = Rails.application.preview?
+  end
 
   # POST production / delivery
   # https://ey-recovery.london.cloudapps.digital/release (currently set to dev)
@@ -99,7 +102,7 @@ class Contentful::BaseController < ApplicationController
   #    - publish history
   #
   # POST staging / preview
-  # Create, Save, Autosave, Archive, Unarchive, Delete (content types and entries)
+  # Entry events: Save, Autosave, Archive, Unarchive, Delete
   # https://ey-recovery-staging.london.cloudapps.digital/change
   def change
     Release.create!(
