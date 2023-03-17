@@ -203,7 +203,7 @@ private
 
   # @return [Array<Boolean>] validate module content attributes
   def content_results
-    return [true] if !mod.pages?
+    return [true] unless mod.pages?
 
     validate CONTENT_VALIDATIONS
   end

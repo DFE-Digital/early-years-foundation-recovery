@@ -26,7 +26,7 @@ protected
 
   # @return [Boolean]
   def redirect?
-    mod.nil? || (!Rails.application.preview? && mod.draft?)
+    mod.nil? || (!Rails.application.preview? && mod.draft?) || (Rails.application.preview? && !mod.pages?)
   end
 
   # @return [Boolean]

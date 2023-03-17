@@ -25,7 +25,6 @@ production:
   HOTJAR_SITE_ID: 3169682
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-live
   CONTENTFUL: false
-  # CONTENTFUL_CACHE: true
 
 # ey-recovery-staging
 staging:
@@ -44,14 +43,12 @@ development:
   TRAINING_MODULES: demo-modules
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-development
   DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # every 5 mins (default: daily at noon)
-  CONTENTFUL_CACHE: true
 
 # ey-recovery-content
 content:
   <<: *defaults
   DASHBOARD_UPDATE: false
   # CONTENTFUL: false
-  CONTENTFUL_CACHE: true
   CONTENTFUL_PREVIEW: true
   CONTENTFUL_ENVIRONMENT: test
   # @see .github/workflows/content.yml

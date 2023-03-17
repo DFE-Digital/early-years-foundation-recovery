@@ -82,14 +82,18 @@ module EarlyYearsFoundationRecovery
       Types::Params::Bool[ENV.fetch('DASHBOARD_UPDATE', true)]
     end
 
-    # @see ContentfulRails.configuration
+    # @see ContentfulRails.configuration.enable_preview_domain
+    # @see ContentfulModel.use_preview_api
+    #
     # @return [Boolean]
     def preview?
-      # Rails.env.development? || ENV['WORKSPACE'].eql?('staging')
-
-      # revert before merging
-      # Types::Params::Bool[ENV.fetch('CONTENTFUL_PREVIEW', true)]
-      ENV['CONTENTFUL_PREVIEW'].present?
+      if Rails.env.test?
+        false
+      elsif Rails.env.development? || ENV['WORKSPACE'].eql?('staging') || ENV['CONTENTFUL_PREVIEW'].present?
+        true
+      else
+        false
+      end
     end
 
     # @return [Boolean]

@@ -1,15 +1,28 @@
 module Training
-  class Module < Content
+  class Module < ContentfulModel::Base
+    # has_many :pages, class_name: 'Training::Page'
+    # has_many :questions, class_name: 'Training::Question'
+    # has_many :videos, class_name: 'Training::Video'
+
     extend Dry::Core::Cache
 
-    # @return [Boolean] on for tests unless enabled explicitly
-    def self.cache?
-      Types::Params::Bool[ENV.fetch('CONTENTFUL_CACHE', false)] || Rails.env.test?
+    # @param key [String] entry id / collection
+    # @return [String] timestamped cache key
+    def self.to_key(key)
+      "#{key}-#{cache_key}"
     end
 
-    # @return []
-    def self.reset_cache!
-      instance_variable_set(:@__cache__, Concurrent::Map.new) unless cache.empty?
+    # @return [String] default "initial"
+    def self.cache_key
+      cache.get_or_default('cache_key', 'initial')
+    end
+
+    # memoise latest release timestamp
+    #
+    # @see HomeController#index
+    # @return [String] old key
+    def self.reset_cache_key!
+      cache.get_and_set('cache_key', Release.cache_key || cache_key)
     end
 
     # @return [String]
@@ -17,46 +30,45 @@ module Training
       'trainingModule'
     end
 
-    # TODO: deprecate
-    def module_items
-      content
-    end
-
-    # has_many :pages, class_name: 'Training::Page'
-    # has_many :questions, class_name: 'Training::Question'
-    # has_many :videos, class_name: 'Training::Video'
-
     # @return [Array<Training::Module>]
     def self.ordered
-      return load_children(0).order(:position).load!.to_a unless cache?
-
-      fetch_or_store(__method__) do
+      fetch_or_store to_key(__method__) do
         load_children(0).order(:position).load!.to_a
       end
     end
 
-    # TODO: use webhooks to expire cached result
-    # def clear_cache_for(item_id)
-    #   cache_key = timestamp_cache_key(item_id)
-    #   Rails.cache.delete(cache_key)
-    # end
-
     # @return [Training::Module] cached result
     def self.by_id(id)
-      return load_children(0).find(id) unless cache?
-
-      fetch_or_store(id) do
+      fetch_or_store to_key(id) do
         load_children(0).find(id)
       end
     end
 
     # @return [Training::Module] cached result
     def self.by_name(name)
-      return load_children(0).find_by(name: name.to_s).first unless cache?
-
-      fetch_or_store(name.to_s) do
+      fetch_or_store to_key(name) do
         load_children(0).find_by(name: name.to_s).first
       end
+    end
+
+    # METHODS TO DEPRECATE --------------------------------------
+    def module_items
+      content
+    end
+    # METHODS TO DEPRECATE --------------------------------------
+
+    # @return [String]
+    def debug_summary
+      <<~SUMMARY
+        cms id: #{id}
+        path: #{name}
+        duration: #{duration}
+        submodules: #{submodule_count}
+        topics: #{topic_count}
+        questions: #{questions.count}
+        last page: #{content.last.name}
+        certificate: #{certificate_page.name}
+      SUMMARY
     end
 
     # entry references ---------------------------------
@@ -67,9 +79,8 @@ module Training
     # @return [String, nil] cached result
     def thumbnail_url
       return '//external-image-resource-placeholder' if fields[:image].blank?
-      return ContentfulModel::Asset.find(fields[:image].id).url unless self.class.cache?
 
-      fetch_or_store(fields[:image].id) do
+      fetch_or_store self.class.to_key(fields[:image].id) do
         ContentfulModel::Asset.find(fields[:image].id).url
       end
     end
@@ -84,9 +95,7 @@ module Training
     # @return [Array<Training::Page, Training::Video, Training::Question>] cached result
     def content
       Array(fields[:pages]).map do |child_link|
-        if self.class.cache?
-          fetch_or_store(child_link.id) { child_by_id(child_link.id) }
-        else
+        fetch_or_store self.class.to_key(child_link.id) do
           child_by_id(child_link.id)
         end
       end
@@ -139,7 +148,7 @@ module Training
 
     # @return [Boolean] incomplete content will not be deemed 'available'
     def draft?
-      !ContentfulDataIntegrity.new(module_name: name).valid?
+      @draft ||= !ContentfulDataIntegrity.new(module_name: name).valid?
     end
 
     # @return [Boolean]

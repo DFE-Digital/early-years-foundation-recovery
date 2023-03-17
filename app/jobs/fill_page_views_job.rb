@@ -8,7 +8,7 @@ class FillPageViewsJob < Que::Job
 
   def run(*)
     require 'fill_page_views'
-    refresh!
+    Training::Module.cache.clear
     log 'FillPageViewsJob: Running'
     FillPageViews.new.call
   end
@@ -20,14 +20,6 @@ class FillPageViewsJob < Que::Job
   end
 
 private
-
-  def refresh!
-    if Training::Module.cache?
-      Training::Module.reset_cache!
-    else
-      log 'CACHING DISABLED'
-    end
-  end
 
   # @return [String]
   def log(message)

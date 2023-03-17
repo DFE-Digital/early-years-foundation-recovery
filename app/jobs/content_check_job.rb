@@ -3,7 +3,7 @@
 class ContentCheckJob < Que::Job
   # @return [Boolean]
   def run(*)
-    refresh!
+    Training::Module.cache.clear
     log "ContentCheckJob: Running in '#{env}' via '#{api}'"
     valid?
   end
@@ -15,14 +15,6 @@ class ContentCheckJob < Que::Job
   end
 
 private
-
-  def refresh!
-    if Training::Module.cache?
-      Training::Module.reset_cache!
-    else
-      log 'CACHING DISABLED'
-    end
-  end
 
   # @return [Boolean] are all modules valid
   def valid?

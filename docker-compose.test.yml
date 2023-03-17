@@ -12,6 +12,7 @@ services:
       - TRAINING_MODULES=demo-modules
       - BOT_TOKEN=bot_token
       - CONTENTFUL_ENVIRONMENT=test
+      - TIMEOUT_MINUTES=25
     tty: true
     stdin_open: true
 

@@ -90,7 +90,8 @@ Rails.application.routes.draw do
   get '/:id', to: 'static#show', id: static_regexp, as: :static
 
   scope module: 'contentful' do
-    post '/webhooks', to: 'base#webhooks'
+    post '/change', to: 'base#change'
+    post '/release', to: 'base#release'
     resources :static, only: %i[show], as: :static_pages, path: ''
   end
 end
