@@ -15,6 +15,7 @@ services:
       - GOVUK_APP_DOMAIN=recovery.eyfs.dfe.gov.uk
       - GOVUK_WEBSITE_ROOT=www
       # overrides
+      - WORKSPACE
       - USER_PASSWORD
       - TIMEOUT_MINUTES
       - CONTENTFUL_ENVIRONMENT

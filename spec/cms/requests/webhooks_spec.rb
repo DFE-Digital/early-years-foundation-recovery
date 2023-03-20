@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Webhooks', :cms, type: :request do
+  before do
+    skip 'WIP' unless Rails.application.cms?
+  end
+
   describe 'POST /release' do
     it 'persists the latest release event' do
       expect(Release.count).to be 0

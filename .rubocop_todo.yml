@@ -45,7 +45,7 @@ Rails/Output:
     - 'app/services/contentful_data_integrity.rb'
     - 'app/services/dashboard.rb'
 
-# Offense count: 3
+# Offense count: 2
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: AllowImplicitReturn, AllowedReceivers.
 Rails/SaveBang:

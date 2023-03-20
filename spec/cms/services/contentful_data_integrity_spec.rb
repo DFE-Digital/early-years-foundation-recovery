@@ -1,8 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe ContentfulDataIntegrity do
+RSpec.describe ContentfulDataIntegrity, :cms do
   subject(:service) do
     described_class.new(module_name: mod)
+  end
+
+  before do
+    skip 'WIP' unless Rails.application.cms?
   end
 
   context 'when module is not found' do

@@ -76,5 +76,5 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # Ensures functions required for background jobs are present
-  config.active_record.schema_format = :sql
+  # config.active_record.schema_format = :sql
 end

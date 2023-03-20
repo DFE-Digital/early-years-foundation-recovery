@@ -17,11 +17,13 @@ module Training
       cache.get_or_default('cache_key', 'initial')
     end
 
-    # memoise latest release timestamp
+    # memoise latest release timestamp & prevent cache overload
+    # (increase as CMS entries/assets grow)
     #
     # @see HomeController#index
     # @return [String] old key
     def self.reset_cache_key!
+      cache.clear if cache.size > 2_000
       cache.get_and_set('cache_key', Release.cache_key || cache_key)
     end
 
@@ -30,10 +32,10 @@ module Training
       'trainingModule'
     end
 
-    # @return [Array<Training::Module>]
+    # @return [Array<Training::Module>] minimum requirement "name"
     def self.ordered
       fetch_or_store to_key(__method__) do
-        load_children(0).order(:position).load!.to_a
+        load_children(0).order(:position).load!.to_a.select(&:named?)
       end
     end
 
@@ -146,9 +148,15 @@ module Training
 
     # state ---------------------------------
 
+    # @see ContentfulCourseProgress
     # @return [Boolean] incomplete content will not be deemed 'available'
     def draft?
       @draft ||= !ContentfulDataIntegrity.new(module_name: name).valid?
+    end
+
+    # @return [Boolean]
+    def named?
+      name.present?
     end
 
     # @return [Boolean]

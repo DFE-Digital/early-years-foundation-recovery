@@ -20,7 +20,6 @@ ContentfulRails.configure do |config|
   config.management_token     = Rails.application.config.contentful_management_access_token
 
   # Preview
-  # This successfully renders draft content and logs hits to preview.contentful.com
   config.enable_preview_domain = Rails.application.preview?
 
   config.eager_load_entry_mapping = false
