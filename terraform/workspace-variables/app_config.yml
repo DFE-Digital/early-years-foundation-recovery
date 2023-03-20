@@ -47,6 +47,7 @@ development:
 # ey-recovery-content
 content:
   <<: *defaults
+  DASHBOARD_UPDATE: false
   CONTENTFUL: false
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital

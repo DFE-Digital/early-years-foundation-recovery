@@ -11,6 +11,13 @@ Lint/MixedRegexpCaptureTypes:
   Exclude:
     - 'lib/upload.rb'
 
+# Offense count: 3
+# Configuration parameters: Prefixes, AllowedPatterns.
+# Prefixes: when, with, without
+RSpec/ContextWording:
+  Exclude:
+    - 'spec/services/contentful_data_integrity_spec.rb'
+
 # Offense count: 2
 # Configuration parameters: Database, Include.
 # SupportedDatabases: mysql, postgresql
@@ -26,14 +33,16 @@ Rails/CreateTableWithTimestamps:
   Exclude:
     - 'db/migrate/20220419121105_create_ahoy_visits_and_events.rb'
 
-# Offense count: 3
+# Offense count: 5
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: Include.
 # Include: app/**/*.rb, config/**/*.rb, db/**/*.rb, lib/**/*.rb
 Rails/Output:
   Exclude:
+    - 'app/jobs/content_check_job.rb'
     - 'app/jobs/dashboard_job.rb'
     - 'app/jobs/fill_page_views_job.rb'
+    - 'app/services/contentful_data_integrity.rb'
     - 'app/services/dashboard.rb'
 
 # Offense count: 2
