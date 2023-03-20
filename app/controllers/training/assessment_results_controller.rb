@@ -5,7 +5,7 @@ module Training
     after_action :track_events, only: :show
     helper_method :training_module
 
-    def new 
+    def new
       helpers.cms_assessment_progress(mod).archive
       redirect_to training_module_page_path(mod_name, mod.assessment_intro_page.name)
     end
@@ -28,8 +28,8 @@ module Training
     # @return [Boolean] pass not yet recorded
     def assessment_pass_untracked?
       untracked?('summative_assessment_complete',
-                training_module_id: params[:training_module_id],
-                success: true)
+                 training_module_id: params[:training_module_id],
+                 success: true)
     end
 
     # Record the attempt result unless already passed

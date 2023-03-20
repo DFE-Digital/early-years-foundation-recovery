@@ -38,13 +38,13 @@ RSpec.describe Training::ResponsesController, type: :controller do
       let(:page) { { training_module_id: 'alpha', id: '1-2-1-1' } }
 
       it 'with correct answer' do
-        page_params = page.merge(response: { answer: [1,3] })
+        page_params = page.merge(response: { answer: [1, 3] })
         patch :update, params: page_params
         expect(response).to have_http_status(:redirect)
       end
 
       it 'with incorrect answer' do
-        page_params = page.merge(response: { answer: [1,2] })
+        page_params = page.merge(response: { answer: [1, 2] })
         patch :update, params: page_params
         expect(response).to have_http_status(:redirect)
       end

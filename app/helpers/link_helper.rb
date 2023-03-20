@@ -122,7 +122,7 @@ module LinkHelper
                          class: 'govuk-button--secondary',
                          aria: { label: 'Go to the previous page' }
   end
-  
+
   # Bottom of my-modules card component
   #
   # @param mod [TrainingModule]
@@ -136,5 +136,4 @@ module LinkHelper
       govuk_link_to 'View previous test result', training_module_assessment_result_path(mod.name, mod.assessment_results_page)
     end
   end
-
 end

@@ -35,7 +35,7 @@ describe 'ContentHelper', type: :helper do
 
         it 'embeds video' do
           expect(html).to include 'title="Test title"'
-          expect(html).to include 'src="https://www.youtube.com/embed/foo?enablejsapi=1&amp;origin="'
+          expect(html).to include 'src="https://www.youtube.com/embed/foo?enablejsapi=1&amp;origin=recovery.app"'
         end
       end
 
@@ -44,7 +44,7 @@ describe 'ContentHelper', type: :helper do
 
         it 'embeds video' do
           expect(html).to include 'title="Test title"'
-          expect(html).to include 'src="https://player.vimeo.com/video/foo?enablejsapi=1&amp;origin="'
+          expect(html).to include 'src="https://player.vimeo.com/video/foo?enablejsapi=1&amp;origin=recovery.app"'
         end
       end
 
