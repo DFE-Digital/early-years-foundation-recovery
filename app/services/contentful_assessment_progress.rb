@@ -20,6 +20,11 @@ class ContentfulAssessmentProgress
     )
   end
 
+  # @return [Array<Response]
+  def incorrect_responses
+    summative_responses.reject(&:correct?)
+  end
+
   # @see ContentHelper#results_banner
   #
   # @return [Hash]
@@ -44,6 +49,11 @@ class ContentfulAssessmentProgress
     !passed?
   end
 
+  # @return [Boolean] CTA failed_attempt state
+  def attempted?
+    user.user_assessments.where(assessments_type: 'summative_assessment', module: mod.name).any?
+  end
+
   # @return [Float] percentage of correct responses
   def score
     (correct_responses.count.to_f / questions.count) * 100
@@ -51,16 +61,22 @@ class ContentfulAssessmentProgress
     0.0
   end
 
-private
-
-  # @return
-  def correct_responses
-    user.responses.select { |response| response.assessments_type.eql?('summative_assessment') && response.correct? }
+  def archive
+    summative_responses.each do |response|
+      response.update!(archive: true)
+    end
   end
 
-  # @return
-  def responses
-    user.responses.summative_for(mod)
+private
+
+  # @return [Array<Response>]
+  def summative_responses
+    user.responses.select { |response| response.assessments_type.eql?('summative_assessment') }
+  end
+
+  # @return [Array<Response]
+  def correct_responses
+    summative_responses.select(&:correct?)
   end
 
   # @return

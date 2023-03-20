@@ -12,24 +12,48 @@ RSpec.describe Training::ResponsesController, type: :controller do
   end
 
   describe '#update' do
-    let(:page) { { training_module_id: 'alpha', id: '1-1-4' } }
+    context 'with single response' do
+      let(:page) { { training_module_id: 'alpha', id: '1-1-4' } }
 
-    it 'with correct answer' do
-      page_params = page.merge(response: { answer: '1' })
-      patch :update, params: page_params
-      expect(response).to have_http_status(:redirect)
+      it 'with correct answer' do
+        page_params = page.merge(response: { answer: 1 })
+        patch :update, params: page_params
+        expect(response).to have_http_status(:redirect)
+      end
+
+      it 'with incorrect answer' do
+        page_params = page.merge(response: { answer: 2 })
+        patch :update, params: page_params
+        expect(response).to have_http_status(:redirect)
+      end
+
+      it 'with blank answer' do
+        page_params = page.merge(response: { answer: nil })
+        patch :update, params: page_params
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
     end
 
-    it 'with incorrect answer' do
-      page_params = page.merge(response: { answer: '2' })
-      patch :update, params: page_params
-      expect(response).to have_http_status(:redirect)
-    end
+    context 'with multiple response' do
+      let(:page) { { training_module_id: 'alpha', id: '1-2-1-1' } }
 
-    it 'with blank answer' do
-      page_params = page.merge(response: { answer: nil })
-      patch :update, params: page_params
-      expect(response).to have_http_status(:unprocessable_entity)
+      it 'with correct answer' do
+        page_params = page.merge(response: { answer: [1,3] })
+        patch :update, params: page_params
+        expect(response).to have_http_status(:redirect)
+      end
+
+      it 'with incorrect answer' do
+        page_params = page.merge(response: { answer: [1,2] })
+        patch :update, params: page_params
+        expect(response).to have_http_status(:redirect)
+      end
+
+      it 'with blank answer' do
+        page_params = page.merge(response: { answer: nil })
+        patch :update, params: page_params
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
     end
   end
 end

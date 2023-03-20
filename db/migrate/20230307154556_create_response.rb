@@ -5,6 +5,7 @@ class CreateResponse < ActiveRecord::Migration[7.0]
       t.string :training_module
       t.string :question_name
       t.jsonb :answer
+      t.boolean :archive
       t.timestamps
     end
   end

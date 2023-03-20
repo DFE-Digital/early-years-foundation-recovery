@@ -18,9 +18,9 @@ module Training
 
     def user_answer
       if Array(response_params[:answer]).size > 1
-        response_params[:answer].compact_blank
+        response_params[:answer].compact_blank.map(&:to_i)
       else
-        response_params[:answer]
+        response_params[:answer].to_i
       end
     end
 

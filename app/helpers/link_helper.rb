@@ -23,6 +23,21 @@ module LinkHelper
                          aria: { label: 'Go to the previous page' }
   end
 
+  # @return [String] previous content page or module overview
+  # @param item [ModuleItem]
+  def cms_link_to_previous_module_item(item)
+    path =
+      if item.previous_item
+        training_module_page_path(mod_name, item.previous_item.name)
+      else
+        training_module_path(mod_name)
+      end
+
+    govuk_button_link_to 'Previous', path,
+                         class: 'govuk-button--secondary',
+                         aria: { label: 'Go to the previous page' }
+  end
+
   # @param state [Symbol]
   # @param item [ModuleItem]
   #
@@ -107,4 +122,19 @@ module LinkHelper
                          class: 'govuk-button--secondary',
                          aria: { label: 'Go to the previous page' }
   end
+  
+  # Bottom of my-modules card component
+  #
+  # @param mod [TrainingModule]
+  # @return [String, nil]
+  def cms_link_to_retake_or_results(mod)
+    return unless cms_assessment_progress(mod).attempted?
+
+    if cms_assessment_progress(mod).failed?
+      govuk_link_to 'Retake end of module test', new_training_module_assessment_result_path(mod.name), no_visited_state: true, class: 'card-link--retake'
+    else
+      govuk_link_to 'View previous test result', training_module_assessment_result_path(mod.name, mod.assessment_results_page)
+    end
+  end
+
 end
