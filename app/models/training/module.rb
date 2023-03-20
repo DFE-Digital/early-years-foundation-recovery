@@ -16,7 +16,11 @@ module Training
 
     # @return [Array<Training::Module>]
     def self.ordered
-      load_children(0).order(:position).load!.to_a
+      return load_children(0).order(:position).load!.to_a unless cache?
+
+      fetch_or_store(__method__) do
+        load_children(0).order(:position).load!.to_a
+      end
     end
 
     # cached queries ---------------------------------
@@ -30,6 +34,8 @@ module Training
 
     # @return [Training::Module] cached result
     def self.by_id(id)
+      return load_children(0).find(id) unless cache?
+
       fetch_or_store(id) do
         load_children(0).find(id)
       end
@@ -37,6 +43,8 @@ module Training
 
     # @return [Training::Module] cached result
     def self.by_name(name)
+      return load_children(0).find_by(name: name.to_s).first unless cache?
+
       fetch_or_store(name.to_s) do
         load_children(0).find_by(name: name.to_s).first
       end
@@ -50,6 +58,7 @@ module Training
     # @return [String, nil] cached result
     def thumbnail_url
       return '//external-image-resource-placeholder' if fields[:image].blank?
+      return ContentfulModel::Asset.find(fields[:image].id).url unless self.class.cache?
 
       fetch_or_store(fields[:image].id) do
         ContentfulModel::Asset.find(fields[:image].id).url
@@ -61,14 +70,18 @@ module Training
       self.class.by_id(fields[:depends_on].id) if fields[:depends_on]
     end
 
-    # source of truth for content order
+    # Most expensive method: source of truth for content order
     #
     # @return [Array<Training::Page, Training::Video, Training::Question>] cached result
     def content
       return [] if draft?
 
       fields[:pages].map do |child_link|
-        fetch_or_store(child_link.id) { child_by_id(child_link.id) }
+        if self.class.cache?
+          fetch_or_store(child_link.id) { child_by_id(child_link.id) }
+        else
+          child_by_id(child_link.id)
+        end
       end
     end
 
@@ -123,7 +136,7 @@ module Training
     #
     # @return [Boolean]
     def draft?
-      fields.fetch(:pages, []).none?
+      fields.fetch(:pages, []).none? # || ContentIntegrityCheck
     end
 
     # # @return [Datetime]

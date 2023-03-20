@@ -74,12 +74,12 @@ module EarlyYearsFoundationRecovery
 
     # @return [Boolean] true if Contentful is used for training content
     def cms?
-      ENV['CONTENTFUL'].present?
+      Types::Params::Bool[ENV.fetch('CONTENTFUL', true)]
     end
 
     # @return [Boolean] Upload to CSV files to the dashboard
     def dashboard?
-      ENV['DASHBOARD_UPDATE'].present? || live?
+      Types::Params::Bool[ENV.fetch('DASHBOARD_UPDATE', true)]
     end
 
     # @see Training::BaseController

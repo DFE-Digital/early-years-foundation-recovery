@@ -42,6 +42,15 @@ namespace :eyfs do
     task :dashboard, [:upload] => :environment do |_task, upload: false|
       DashboardJob.enqueue(upload: upload.present?)
     end
+
+    # # @example
+    # #
+    # #   $ rake 'eyfs:jobs:content[alpha]'
+    # #
+    # desc 'Contentful post-publish webhook'
+    # task content: :environment do |_task, mod:|
+    #   ContentCheckJob.enqueue(mod: mod)
+    # end
   end
 
   # @example
