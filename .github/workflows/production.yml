@@ -122,4 +122,5 @@ jobs:
         name: Bind production autoscaler 
         run: |
           cf bind-service ey-recovery scale-ey-recovery
+          cf install-plugin -f -r CF-Community app-autoscaler-plugin 
           cf attach-autoscaling-policy ey-recovery policy.json
