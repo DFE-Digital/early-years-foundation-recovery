@@ -120,6 +120,17 @@ en:
           The brain will also get rid of old unused neurone pathways.
           It’s important for children to experience a wide variety of opportunities so that their neurones develop.
 
+      2-1-1-2video:
+        heading: |
+          Brain development before birth
+        body: |
+          This video explains the stages of brain development from conception to birth. Please note: This video is optional to watch. It contains sensitive information about pregnancy that may cause distress.
+        video:
+          id: 807903195
+          title: Brain development before birth
+          provider: vimeo
+
+
       2-1-1-2b:
         # question
 

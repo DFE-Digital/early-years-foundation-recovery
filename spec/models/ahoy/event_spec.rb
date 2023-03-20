@@ -3,6 +3,26 @@ require 'rails_helper'
 RSpec.describe Ahoy::Event, type: :model do
   subject(:events) { described_class }
 
+  describe '.to_csv' do
+    before do
+      described_class.new(
+        id: 1,
+        user_id: 1,
+        visit: Ahoy::Visit.new(id: 2),
+        name: 'module_start',
+        properties: { foo: 'bar' },
+        time: Time.zone.local(2023, 0o1, 12, 10, 15, 59),
+      ).save!
+    end
+
+    it 'exports formatted attributes as CSV' do
+      expect(described_class.to_csv).to eq <<~CSV
+        id,visit_id,user_id,name,properties,time
+        1,2,1,module_start,"{""foo""=>""bar""}",2023-01-12 10:15:59
+      CSV
+    end
+  end
+
   describe '.summative_assessment_pass' do
     it 'returns successful completion events' do
       create(:event, name: 'summative_assessment_complete', properties: { training_module_id: 'alpha', success: true })

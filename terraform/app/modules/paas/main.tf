@@ -71,3 +71,24 @@ resource "cloudfoundry_service_instance" "postgres_instance" {
     create = var.postgres_create_timeout
   }
 }
+
+resource "cloudfoundry_app" "worker_app" {
+  count             = local.enable_worker ? 1 : 0
+  environment       = var.web_app_env
+  name              = "${var.web_app_name}-worker"
+  command           = var.worker_app_start_command # default: que
+  memory            = var.worker_app_memory        # default: 512
+  health_check_type = "process"
+  instances         = 1
+  disk_quota        = var.web_app_disk_quota
+  strategy          = var.web_app_deployment_strategy
+  docker_image      = var.app_docker_image
+  space             = data.cloudfoundry_space.space.id
+
+  dynamic "service_binding" {
+    for_each = local.app_service_bindings
+    content {
+      service_instance = service_binding.value
+    }
+  }
+}

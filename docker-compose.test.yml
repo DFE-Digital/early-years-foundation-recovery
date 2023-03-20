@@ -11,6 +11,7 @@ services:
       - DOMAIN=recovery.app
       - TRAINING_MODULES=demo-modules
       - BOT_TOKEN=bot_token
+      - CONTENTFUL_ENVIRONMENT=test
     tty: true
     stdin_open: true
 
