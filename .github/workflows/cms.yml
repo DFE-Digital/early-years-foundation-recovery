@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       alias:
-        description: Contentful alias to target (default: master)
+        description: Contentful alias to target (master)
         type: string
         default: staging # master
 
