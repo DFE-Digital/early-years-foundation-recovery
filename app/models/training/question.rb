@@ -35,5 +35,11 @@ module Training
     def last_assessment?
       parent.summative_questions.last.eql?(self)
     end
+
+    def multi_select?
+      return false if confidence?
+
+      Array(correct_answer).size > 1
+    end
   end
 end

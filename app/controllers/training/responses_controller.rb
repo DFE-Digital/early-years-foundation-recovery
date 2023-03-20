@@ -1,6 +1,6 @@
 module Training
   class ResponsesController < Contentful::BaseController
-    before_action :authenticate_registered_user!, :show_progress_bar
+    before_action :authenticate_registered_user!, :show_progress_bar, :module_item
     # before_action :track_events, only: :show
     helper_method :training_module, :current_user_response, :content
 
@@ -17,10 +17,12 @@ module Training
   protected
 
     def user_answer
-      if Array(response_params[:answer]).size > 1
-        response_params[:answer].compact_blank.map(&:to_i)
+      answer = response_params[:answer]
+
+      if Array(answer).size > 1
+        answer.compact_blank.map(&:to_i)
       else
-        response_params[:answer].to_i
+        answer.present? ? answer.to_i : ''
       end
     end
 
@@ -41,6 +43,10 @@ module Training
 
     def response_params
       params.require(:response).permit!
+    end
+
+    def module_item
+      @module_item ||= content
     end
 
   private

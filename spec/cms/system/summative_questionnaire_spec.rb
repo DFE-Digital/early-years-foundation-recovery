@@ -7,7 +7,7 @@ RSpec.describe 'Summative questionnaire' do
   let(:first_question_path) { '/modules/alpha/questionnaires/1-3-2-1' }
 
   before do
-    skip 'WIP' if Rails.application.cms?
+    skip 'WIP' unless Rails.application.cms?
     start_summative_assessment(alpha)
   end
 

@@ -23,21 +23,6 @@ module LinkHelper
                          aria: { label: 'Go to the previous page' }
   end
 
-  # @return [String] previous content page or module overview
-  # @param item [ModuleItem]
-  def cms_link_to_previous_module_item(item)
-    path =
-      if item.previous_item
-        training_module_page_path(mod_name, item.previous_item.name)
-      else
-        training_module_path(mod_name)
-      end
-
-    govuk_button_link_to 'Previous', path,
-                         class: 'govuk-button--secondary',
-                         aria: { label: 'Go to the previous page' }
-  end
-
   # @param state [Symbol]
   # @param item [ModuleItem]
   #
