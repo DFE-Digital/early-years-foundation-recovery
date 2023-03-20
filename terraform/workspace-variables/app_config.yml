@@ -13,6 +13,7 @@ defaults: &defaults
   GOVUK_APP_DOMAIN: london.cloudapps.digital
   GROVER_NO_SANDBOX: true
   EDITOR: vi
+  CONTENTFUL_ENVIRONMENT: staging # master unless overridden
 
 # ey-recovery
 production:
@@ -23,6 +24,7 @@ production:
   TRACKING_ID: GTM-NFZ88TP  # Live data
   HOTJAR_SITE_ID: 3169682
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-live
+  CONTENTFUL: false
 
 # ey-recovery-staging
 staging:
@@ -32,9 +34,6 @@ staging:
   GOVUK_WEBSITE_ROOT: ey-recovery-staging
   TRACKING_ID: GTM-W6W95FD  # Test data
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-staging
-  DASHBOARD_UPDATE: true # Daily at noon
-  CONTENTFUL: true
-  CONTENTFUL_ENVIRONMENT: genuine-with-5 # Defaults to "master" without override
 
 # ey-recovery-dev
 development:
@@ -43,17 +42,13 @@ development:
   GOVUK_WEBSITE_ROOT: ey-recovery-dev
   TRAINING_MODULES: demo-modules
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-development
-  DASHBOARD_UPDATE: true
-  DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # Every 5 mins
-  CONTENTFUL: true
-  CONTENTFUL_ENVIRONMENT: genuine-with-5 # Override would be "test/demo" normally
+  DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # every 5 mins (default: daily at noon)
 
 # ey-recovery-content
 content:
   <<: *defaults
-  CONTENTFUL: true
-  CONTENTFUL_ENVIRONMENT: genuine-with-5
-  # TRAINING_MODULES: demo-modules
+  DASHBOARD_UPDATE: false
+  CONTENTFUL: false
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
