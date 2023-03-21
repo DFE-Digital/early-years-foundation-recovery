@@ -1,9 +1,10 @@
+# :nocov:
 require 'contentful/management'
 
 #
-# Populate Contentful using YAML content
+# Populate Contentful 'static' entries
 #
-class UploadStatic
+class SeedStaticPageEntries
   extend Dry::Initializer
 
   option :config, default: proc { ContentfulRails.configuration }
@@ -14,7 +15,7 @@ class UploadStatic
     log "space: #{config.space}"
     log "env: #{config.environment}"
 
-    I18n.t('pages').each do |slug, fields|
+    I18n.t('pages').map do |slug, fields|
       entry = create_static_page(name: slug.to_s.dasherize, **fields)
       entry.publish if entry.save
       log_entry(entry)
@@ -52,3 +53,4 @@ private
     @factory ||= client.content_types(config.space, config.environment)
   end
 end
+# :nocov:

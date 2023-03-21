@@ -21,11 +21,10 @@ namespace :eyfs do
     end
 
     # ./bin/docker-rails 'eyfs:cms:seed[alpha,bravo]'
-    desc 'Populate Contentful from YAML'
+    desc 'Seed course content from YAML'
     task :seed, [:mod_names] => :environment do |_task, args|
-      # TODO: rename function
-      require 'upload'
-      uploader = Upload.new
+      require 'seed_course_entries'
+      uploader = SeedCourseEntries.new
 
       all_mods = TrainingModule.all.map(&:name)
 
@@ -37,10 +36,10 @@ namespace :eyfs do
     end
 
     # ./bin/docker-rails 'eyfs:cms:seed_static'
-    desc 'Populate static pages from YAML'
+    desc 'Seed static pages from YAML'
     task seed_static: :environment do
-      require 'upload_static'
-      UploadStatic.new.call
+      require 'seed_static_page_entries'
+      SeedStaticPageEntries.new.call
     end
 
     # desc 'Upload asset files to Contentful'
