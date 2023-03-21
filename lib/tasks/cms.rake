@@ -40,7 +40,7 @@ namespace :eyfs do
     desc 'Populate static pages from YAML'
     task seed_static: :environment do
       require 'upload_static'
-      UploadStatic.new.call(type: 'static')
+      UploadStatic.new.call
     end
 
     # desc 'Upload asset files to Contentful'

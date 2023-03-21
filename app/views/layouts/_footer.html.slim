@@ -2,7 +2,7 @@
   - footer.navigation do
     .govuk-footer__section.govuk-grid-column-two-thirds
       ul.govuk-footer__list.govuk-footer__list--columns-3
-        - footer_static_pages.each do |page|
+        - ::Page.footer.each do |page|
           li.govuk-footer__list-item
             = govuk_link_to page.heading, static_path(page.name), class: 'govuk-footer__link'
 

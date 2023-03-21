@@ -1,4 +1,3 @@
-# :nocov:
 require 'contentful/management'
 
 #
@@ -11,30 +10,27 @@ class UploadStatic
   option :client, default: proc { Contentful::Management::Client.new(config.management_token) }
 
   # @return [String]
-  def call(type:)
+  def call(*)
     log "space: #{config.space}"
     log "env: #{config.environment}"
 
-    unless type.eql?('static')
-      log "'#{type}' was not found"
-      return
-    end
-
-    log "#{type} ----------------------------------------------------------"
-
-    I18n.t('static').map do |slug, page_info|
-      static_page = create_static_page({
-        name: slug.to_s.dasherize,
-        heading: page_info[:heading],
-        body: page_info[:content],
-        html_title: page_info[:heading],
-      })
-
-      log_entry(static_page)
+    I18n.t('pages').each do |slug, fields|
+      entry = create_static_page(name: slug.to_s.dasherize, **fields)
+      entry.publish if entry.save
+      log_entry(entry)
     end
   end
 
 private
+
+  # @param entry [Contentful::Management::DynamicEntry]
+  # @return [String]
+  def log_entry(entry)
+    type = entry.sys[:contentType].id
+    timestamp = entry.published_at&.strftime('%F %T')
+
+    log "'#{type}' entry '#{entry.name}' published @ '#{timestamp}'"
+  end
 
   # @param message [String]
   # @return [String]
@@ -46,16 +42,7 @@ private
     end
   end
 
-  # @param entry [Contentful::Management::DynamicEntry]
-  # @return [String]
-  def log_entry(entry)
-    type = entry.sys[:contentType].id
-    timestamp = entry.sys[:createdAt]&.strftime('%F %T')
-
-    log "'#{type}' entry '#{entry.name}' published @ '#{timestamp}'"
-  end
-
-  # @return [Contentful::Management::DynamicEntry[trainingModule]]
+  # @return [Contentful::Management::DynamicEntry[static]]
   def create_static_page(params)
     factory.find('static').entries.create(params)
   end
@@ -65,4 +52,3 @@ private
     @factory ||= client.content_types(config.space, config.environment)
   end
 end
-# :nocov:

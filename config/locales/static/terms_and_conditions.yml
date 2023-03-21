@@ -1,9 +1,9 @@
 ---
 en:
-  static:
+  pages:
     terms_and_conditions:
       heading: Terms and conditions
-      content: |
+      body: |
         This page and any pages it links to explains Early years child development training’s terms of use. You must agree to these to use Early years child development training.
 
         ##Who we are

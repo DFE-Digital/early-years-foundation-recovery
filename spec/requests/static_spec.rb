@@ -1,6 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe 'Static page', type: :request do
+#
+# Backend agnostic
+#
+RSpec.describe 'Static page', :cms, type: :request do
   specify { expect('/accessibility-statement').to be_successful }
 
   specify { expect('/settings/cookie-policy').to be_successful }

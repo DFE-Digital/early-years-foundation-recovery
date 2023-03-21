@@ -1,10 +1,9 @@
-class StaticController < Contentful::BaseController
-  helper_method :model
-
+# YAML pages
+class StaticController < ApplicationController
   def show
-    if model.present?
-      @cms_static = model
-      track 'static_page'
+    if template_valid?
+      track('static_page')
+      render "pages/#{template}"
     else
       render 'errors/not_found', status: :not_found
     end
@@ -12,7 +11,15 @@ class StaticController < Contentful::BaseController
 
 private
 
-  def model
-    Static.find_by(name: params[:id]).first
+  def template_valid?
+    template_exists?(template, :pages)
+  end
+
+  def template
+    page_params[:id].underscore
+  end
+
+  def page_params
+    params.permit(:id)
   end
 end

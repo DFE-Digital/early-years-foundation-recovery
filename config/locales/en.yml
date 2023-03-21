@@ -456,26 +456,6 @@ en:
 
   # Browser and bookmarks ------------------------------------------------------
   html_title:
-
-    # YAML
-    training_modules:
-      index: About training
-    content_pages:
-      show:
-        what-to-expect: What to expect during the training
-        before-you-start: Before you start
-        intro: Introduction
-
-    # Contentful
-    training/modules:
-      index: About training
-    training/pages:
-      show:
-        what-to-expect: What to expect during the training
-        before-you-start: Before you start
-        intro: Introduction
-
-    # --------------------------------------------------------------------------
     home:
       index: Home page
     learning:
@@ -492,7 +472,6 @@ en:
       edit_setting_type: Change your setting type
       check_email_confirmation: Check email confirmation
       check_email_password_reset: Check email password reset
-
     timeout:
       timeout_user: User timeout
     users/sessions:
@@ -509,12 +488,22 @@ en:
     devise/unlocks:
       new: Resend unlock instructions
       show: Resend unlock instructions
+
+    # --------------------------------------------------------------------------
+    # YAML titles
+    training_modules:
+      index: About training
+    content_pages:
+      show:
+        what-to-expect: What to expect during the training
+        before-you-start: Before you start
+        intro: Introduction
     settings:
       show:
         # FIXME: routing
         cookie_policy: Cookie policy
         cookie-policy: Cookie policy
-    contentful/static:
+    pages:
       show:
         accessibility-statement: Accessibility statement
         new-registration: Update your registration details
@@ -524,3 +513,12 @@ en:
         terms-and-conditions: Terms and conditions
         whats-new: What's new
         wifi-and-data: Free internet, wifi and data resources
+        promotional-materials: Promotional materials
+
+    # --------------------------------------------------------------------------
+    # CMS titles
+    training/modules:
+      index: About training
+    training/pages:
+      show:
+        what-to-expect: What to expect during the training
