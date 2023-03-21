@@ -47,5 +47,20 @@ namespace :eyfs do
     # task upload: :environment do
     #   binding.pry
     # end
+
+    # @see .env
+    #   CONTENTFUL_ENVIRONMENT=demo
+    #
+    # ./bin/docker-rails 'eyfs:cms:validate[alpha,bravo]'
+    desc 'Validate CMS content'
+    task :validate, [:mod_names] => :environment do |_task, args|
+      ENV['CONTENTFUL_CACHE'] = 'y'
+
+      args.with_defaults(mod_names: Training::Module.ordered.map(&:name))
+
+      args[:mod_names].split(',').flatten.each do |mod|
+        ContentfulDataIntegrity.new(module_name: mod).call
+      end
+    end
   end
 end
