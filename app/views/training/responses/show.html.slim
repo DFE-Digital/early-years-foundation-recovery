@@ -19,5 +19,5 @@
         - if current_user_response.responded?
           = cms_link_to_next_module_item(content)
         - else
-          = f.govuk_submit 'Next'
+          = f.govuk_submit current_user_response.next_button_text
         = render partial: 'debug'

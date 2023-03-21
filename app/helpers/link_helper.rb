@@ -58,7 +58,7 @@ module LinkHelper
   # @return [String, nil]
   def back_link
     case params[:controller]
-    when 'training/pages', 'training/questionnaires', 'content_pages', 'questionnaires', 'assessment_results'
+    when 'training/pages', 'training/responses', 'training/questionnaires', 'training/assessment_results', 'content_pages', 'questionnaires', 'assessment_results'
       govuk_back_link href: training_module_path(training_module.name),
                       text: "Back to Module #{training_module.position} overview"
     when 'settings', 'pages'

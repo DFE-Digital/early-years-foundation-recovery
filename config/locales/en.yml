@@ -39,6 +39,10 @@ en:
   activerecord:
     errors:
       models:
+        response:
+          attributes:
+            answer:
+              blank: Please select an answer.
         user:
           attributes:
             current_password:

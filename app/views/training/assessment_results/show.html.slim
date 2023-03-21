@@ -14,9 +14,9 @@
         = render partial: incorrect_response.to_partial_path, locals: { f: f }, object: incorrect_response, as: :question
 
         .govuk-inset-text.gem-c-govspeak
-          p= t('.incorrect', answers: incorrect_response.submitted_answers_values.to_sentence)
+          p= t('.incorrect', answers: incorrect_response.user_response.to_sentence)
 
-          = translate_markdown(incorrect_response.assessment_fail_summary)
+          = translate_markdown(incorrect_response.assessment_fail)
 
       = f.govuk_submit disabled: true, class: 'govuk-visually-hidden'
 

@@ -12,11 +12,11 @@ RSpec.describe Training::Question, :cms, type: :model do
   describe 'attributes' do
     it '#options' do
       expect(question.options.count).to eq(2)
-      expect(question.options.first).to eq(OpenStruct.new(id: '1', label: 'Correct answer 1', correct?: true))
+      expect(question.options.first).to eq(OpenStruct.new(id: 1, label: 'Correct answer 1', correct?: true))
     end
 
     it '#correct_answer' do
-      expect(question.correct_answer).to eq('1')
+      expect(question.correct_answer).to eq(1)
     end
 
     describe 'contentful attributes' do

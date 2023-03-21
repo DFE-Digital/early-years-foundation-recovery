@@ -32,6 +32,10 @@ module Training
       parent.confidence_questions.first.eql?(self)
     end
 
+    def first_assessment?
+      parent.summative_questions.first.eql?(self)
+    end
+
     def last_assessment?
       parent.summative_questions.last.eql?(self)
     end
@@ -41,5 +45,15 @@ module Training
 
       Array(correct_answer).size > 1
     end
+    
+    # @return [String]
+    def next_button_text
+      if summative?
+        last_assessment? ? 'Finish test' : 'Save and continue'
+      else
+        'Next'
+      end
+    end
+
   end
 end

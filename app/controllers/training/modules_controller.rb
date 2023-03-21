@@ -14,7 +14,7 @@ class Training::ModulesController < Contentful::BaseController
     if mod.nil?
       redirect_to my_modules_path
     else
-      @module_progress_bar  = ModuleProgressBarDecorator.new(progress)
+      @module_progress_bar  = ContentfulModuleProgressBarDecorator.new(progress)
       @module_progress      = ContentfulModuleOverviewDecorator.new(progress)
       @assessment_progress  = assessment
 

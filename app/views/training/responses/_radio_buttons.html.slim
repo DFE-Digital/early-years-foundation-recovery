@@ -13,6 +13,7 @@ h1.govuk-heading-l Learning check
         div class='govuk-!-margin-4'
           = translate_markdown(question.body)
           = f.govuk_radio_buttons_fieldset :answer, legend: { text: content.name, hidden: true } do
+            = f.hidden_field :answer
             - question.options.each do |option|
               = f.govuk_radio_button :answer,
                 option.id,

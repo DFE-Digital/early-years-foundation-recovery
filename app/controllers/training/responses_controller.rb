@@ -1,7 +1,7 @@
 module Training
   class ResponsesController < Contentful::BaseController
     before_action :authenticate_registered_user!, :show_progress_bar, :module_item
-    # before_action :track_events, only: :show
+    before_action :track_events, only: :show
     helper_method :training_module, :current_user_response, :content
 
     def show; end
@@ -18,8 +18,8 @@ module Training
 
     def user_answer
       answer = response_params[:answer]
-
-      if Array(answer).size > 1
+      
+      if answer.kind_of?(Array)
         answer.compact_blank.map(&:to_i)
       else
         answer.present? ? answer.to_i : ''
@@ -61,6 +61,47 @@ module Training
       else # content.confidence? || content.summative?
         redirect_to training_module_page_path(mod_name, content.next_item.name)
       end
+    end
+    
+    # @return [Ahoy::Event] Show action
+    def track_events
+      if track_confidence_start?
+        track('confidence_check_start')
+      elsif track_assessment_start?
+        track('summative_assessment_start')
+      end
+    end
+
+    # @return [Ahoy::Event] Update action
+    def track_questionnaire_answer
+      track('questionnaire_answer',
+            type: current_user_response.assessments_type,
+            success: current_user_response.correct?,
+            answer: current_user_response.answer)
+    end
+
+    # Check current item type for matching named event ---------------------------
+
+    # @return [Boolean]
+    def track_confidence_start?
+      current_user_response.first_confidence? && confidence_start_untracked?
+    end
+
+    # @return [Boolean]
+    def track_assessment_start?
+      current_user_response.first_assessment? && summative_start_untracked?
+    end
+
+    # Check unique event is not already present ----------------------------------
+
+    # @return [Boolean]
+    def summative_start_untracked?
+      untracked?('summative_assessment_start', training_module_id: params[:training_module_id])
+    end
+
+    # @return [Boolean]
+    def confidence_start_untracked?
+      untracked?('confidence_check_start', training_module_id: params[:training_module_id])
     end
   end
 end
