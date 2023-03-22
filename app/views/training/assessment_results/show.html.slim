@@ -8,17 +8,16 @@
     .gem-c-govspeak
       -# t(:body, scope: :assessment_results) if @assessment.failed?
       = results_banner(**@assessment.result)
-    = form_with url: '', method: :patch do |f|
-
-      - @assessment.incorrect_responses.each do |incorrect_response|
-        = render partial: incorrect_response.to_partial_path, locals: { f: f }, object: incorrect_response, as: :question
+    - @assessment.incorrect_responses.each do |incorrect_response|
+      = form_with model: incorrect_response, url: training_module_response_path(content.parent.name, content.name), method: :patch do |f|
+        = render partial: incorrect_response, locals: { f: f }, object: incorrect_response, as: :question
 
         .govuk-inset-text.gem-c-govspeak
           p= t('.incorrect', answers: incorrect_response.user_response.to_sentence)
 
           = translate_markdown(incorrect_response.assessment_fail)
 
-      = f.govuk_submit disabled: true, class: 'govuk-visually-hidden'
+        = f.govuk_submit disabled: true, class: 'govuk-visually-hidden'
 
 
 hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'

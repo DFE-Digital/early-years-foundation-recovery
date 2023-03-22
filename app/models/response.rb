@@ -4,9 +4,11 @@ class Response < ApplicationRecord
   validates :answer, presence: true
 
   delegate :pagination,
-    :body, :parent, :correct_answer, :assessments_type, :assessment_fail,
-    :formative?, :summative?, :confidence?, :first_confidence?, :first_assessment?, :last_assessment?,
-    :next_button_text, to: :question
+           :body, :parent, :correct_answer, :assessments_type, :assessment_fail,
+           :formative?, :summative?, :confidence?, :first_confidence?, :first_assessment?, :last_assessment?,
+           :next_button_text, to: :question
+
+  scope :unarchived, -> { where(archive: false) }
 
   def mod
     @mod ||= Training::Module.by_name(training_module)
@@ -17,6 +19,8 @@ class Response < ApplicationRecord
   end
 
   def options
+    return question.options if confidence?
+
     question.options.map do |option|
       option.disabled = responded?
       option
@@ -52,17 +56,16 @@ class Response < ApplicationRecord
   # @return [String]
   def to_partial_path
     return 'training/responses/radio_buttons' if confidence?
-    
+
     if Array(correct_answer).size > 1
       'training/responses/check_boxes'
     else
       'training/responses/radio_buttons'
     end
   end
-  
+
   # @return [Array<String>]
   def user_response
-    options.select{|option| Array(answer).include?(option.id)}.map(&:label)
+    options.select { |option| Array(answer).include?(option.id) }.map(&:label)
   end
-
 end

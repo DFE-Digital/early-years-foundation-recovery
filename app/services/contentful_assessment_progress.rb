@@ -20,11 +20,6 @@ class ContentfulAssessmentProgress
     )
   end
 
-  # @return [Array<Response]
-  def incorrect_responses
-    summative_responses.reject(&:correct?)
-  end
-
   # @see ContentHelper#results_banner
   #
   # @return [Hash]
@@ -67,11 +62,16 @@ class ContentfulAssessmentProgress
     end
   end
 
+  # @return [Array<Response]
+  def incorrect_responses
+    summative_responses.reject(&:correct?)
+  end
+
 private
 
   # @return [Array<Response>]
   def summative_responses
-    user.responses.select { |response| response.assessments_type.eql?('summative_assessment') }
+    user.responses.unarchived.where(training_module: mod.name).select { |response| response.assessments_type.eql?('summative_assessment') }
   end
 
   # @return [Array<Response]

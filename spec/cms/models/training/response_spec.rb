@@ -16,7 +16,7 @@ RSpec.describe Response, :cms, type: :model do
 
       it 'is invalid' do
         expect(radio_button_response).to be_invalid
-        expect(radio_button_response.errors.full_messages).to eq ["Answer Please select an answer."]
+        expect(radio_button_response.errors.full_messages).to eq ['Answer Please select an answer.']
       end
     end
 
@@ -51,7 +51,7 @@ RSpec.describe Response, :cms, type: :model do
 
       it 'is invalid' do
         expect(check_box_response).to be_invalid
-        expect(check_box_response.errors.full_messages).to eq ["Answer Please select an answer."]
+        expect(check_box_response.errors.full_messages).to eq ['Answer Please select an answer.']
       end
     end
 

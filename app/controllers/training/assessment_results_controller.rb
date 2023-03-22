@@ -1,9 +1,8 @@
 module Training
   class AssessmentResultsController < Contentful::BaseController
-    include Contentfully
     before_action :authenticate_registered_user!, :show_progress_bar
     after_action :track_events, only: :show
-    helper_method :training_module
+    helper_method :training_module, :mod, :content
 
     def new
       helpers.cms_assessment_progress(mod).archive

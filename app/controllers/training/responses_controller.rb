@@ -18,8 +18,8 @@ module Training
 
     def user_answer
       answer = response_params[:answer]
-      
-      if answer.kind_of?(Array)
+
+      if answer.is_a?(Array)
         answer.compact_blank.map(&:to_i)
       else
         answer.present? ? answer.to_i : ''
@@ -38,6 +38,7 @@ module Training
       @current_user_response ||= current_user.responses.find_or_initialize_by(
         question_name: content_slug,
         training_module: mod_name,
+        archive: false,
       )
     end
 
@@ -62,7 +63,7 @@ module Training
         redirect_to training_module_page_path(mod_name, content.next_item.name)
       end
     end
-    
+
     # @return [Ahoy::Event] Show action
     def track_events
       if track_confidence_start?

@@ -45,7 +45,7 @@ module Training
 
       Array(correct_answer).size > 1
     end
-    
+
     # @return [String]
     def next_button_text
       if summative?
@@ -54,6 +54,5 @@ module Training
         'Next'
       end
     end
-
   end
 end
