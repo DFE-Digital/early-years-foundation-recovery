@@ -474,6 +474,7 @@ CREATE TABLE public.responses (
     training_module character varying,
     question_name character varying,
     answer jsonb,
+    archive boolean DEFAULT false,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
