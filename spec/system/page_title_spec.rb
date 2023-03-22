@@ -17,7 +17,6 @@ RSpec.describe 'Page' do
     it { expect(static_path('promotional-materials')).to have_page_title 'Promotional materials' }
     it { expect(static_path('sitemap')).to have_page_title 'Sitemap' }
     it { expect(static_path('terms-and-conditions')).to have_page_title 'Terms and conditions' }
-    it { expect(static_path('whats-new')).to have_page_title "What's new" }
     it { expect(static_path('wifi-and-data')).to have_page_title 'Free internet, wifi and data resources' }
 
     context 'and is confirmed' do
@@ -78,6 +77,8 @@ RSpec.describe 'Page' do
 
     it { expect(check_email_confirmation_user_path).to have_page_title('Check email confirmation') }
     it { expect(check_email_password_reset_user_path).to have_page_title('Check email password reset') }
+
+    it { expect(static_path('whats-new')).to have_page_title "What's new" }
 
     context 'and viewing module content' do
       [

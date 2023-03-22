@@ -4,27 +4,34 @@ require 'rails_helper'
 # Backend agnostic
 #
 RSpec.describe 'Static page', :cms, type: :request do
-  specify { expect('/accessibility-statement').to be_successful }
+  context 'when public' do
+    specify { expect('/accessibility-statement').to be_successful }
 
-  specify { expect('/settings/cookie-policy').to be_successful }
+    specify { expect('/settings/cookie-policy').to be_successful }
 
-  specify { expect('/new-registration').to be_successful }
+    specify { expect('/new-registration').to be_successful }
 
-  specify { expect('/other-problems-signing-in').to be_successful }
+    specify { expect('/other-problems-signing-in').to be_successful }
 
-  specify { expect('/privacy-policy').to be_successful }
+    specify { expect('/privacy-policy').to be_successful }
 
-  specify { expect('/promotional-materials').to be_successful }
+    specify { expect('/promotional-materials').to be_successful }
 
-  specify { expect('/sitemap').to be_successful }
+    specify { expect('/sitemap').to be_successful }
 
-  specify { expect('/terms-and-conditions').to be_successful }
+    specify { expect('/terms-and-conditions').to be_successful }
 
-  specify { expect('/users/timeout').to be_successful }
+    specify { expect('/users/timeout').to be_successful }
 
-  specify { expect('/whats-new').to be_successful }
+    specify { expect('/wifi-and-data').to be_successful }
+  end
 
-  specify { expect('/wifi-and-data').to be_successful }
+  context 'when authentication is required' do
+    specify do
+      get '/whats-new'
+      expect(response).to have_http_status(:redirect)
+    end
+  end
 
   context 'with errors' do
     specify do

@@ -5,8 +5,6 @@
     h1= t('.heading')
 
     ul
-      /li
-        = govuk_link_to 'This Sitemap', static_path('sitemap')
       li
         = govuk_link_to 'Accessibility statement', static_path('accessibility-statement')
       li
@@ -21,6 +19,3 @@
         = govuk_link_to 'Free internet, wifi and data resources', static_path('wifi-and-data')
       li
         = govuk_link_to 'Create an Early years child development training account', new_user_registration_path
-      /li
-        = govuk_link_to 'Problems signing in', static_path('other-problems-signing-in')
-

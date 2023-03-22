@@ -1,5 +1,7 @@
 # YAML pages
 class StaticController < ApplicationController
+  before_action :authenticate_registered_user!, if: :restricted?
+
   def show
     if template_valid?
       track('static_page')
@@ -10,6 +12,11 @@ class StaticController < ApplicationController
   end
 
 private
+
+  # @return [Boolean]
+  def restricted?
+    %w[whats-new].include? page_params[:id]
+  end
 
   def template_valid?
     template_exists?(template, :pages)
