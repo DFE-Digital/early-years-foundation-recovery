@@ -16,12 +16,13 @@ class Training::ModulesController < Contentful::BaseController
 
     if mod.nil?
       redirect_to my_modules_path
-    else
-      render partial: 'progress' if debug?
+    elsif debug?
+      render partial: 'progress'
     end
   end
 
 protected
+
   # index -------------------
 
   def mods
