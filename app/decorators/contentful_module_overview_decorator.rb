@@ -26,12 +26,13 @@ class ContentfulModuleOverviewDecorator < DelegateClass(ContentfulModuleProgress
     end
   end
 
-  # Check every item has been visited (public for debugging)
+  # Check every item has been visited (public for debugging).
+  # Presence of 'module_complete' bypasses individual checks.
   #
   # @param items [Array<Module::Content>]
   # @return [Symbol]
   def status(items)
-    if all?(items)
+    if completed? || all?(items)
       :completed
     elsif any?(items)
       :started
