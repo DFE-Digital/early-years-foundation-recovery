@@ -10,6 +10,7 @@ module Training
       if current_user_response.update(answer: user_answer)
         redirect
       else
+        track_questionnaire_answer
         render :show, status: :unprocessable_entity
       end
     end

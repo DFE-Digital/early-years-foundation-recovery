@@ -1,6 +1,5 @@
+= render partial: 'debug'
 = render 'shared/progress_bar', bar: @module_progress_bar
-
-= page_number(**content.pagination)
 
 .gem-c-govspeak
   = translate_markdown(content.body)
@@ -8,16 +7,16 @@
 .govuk-grid-row 
   .govuk-grid-column-two-thirds-from-desktop
     = form_with model: current_user_response, url: training_module_response_path(content.parent.name, content.name), method: :patch do |f|
+      = f.govuk_error_summary
+      = page_number(**content.pagination)
       = render partial: current_user_response.to_partial_path, locals: { f: f }, object: current_user_response, as: :question
-
       = render 'assessment_banner', question: content if current_user_response.show_assessment?
 
       hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
 
       .govuk-button-group
         = cms_link_to_previous_module_item(content)
-        - if current_user_response.responded? && !current_user_response.confidence?
+        - if current_user_response.can_respond?
           = cms_link_to_next_module_item(content)
         - else
           = f.govuk_submit current_user_response.next_button_text
-        = render partial: 'debug'

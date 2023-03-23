@@ -27,6 +27,12 @@ class Response < ApplicationRecord
     end
   end
 
+  def can_respond?
+    return true if confidence?
+
+    !responded?
+  end
+
   def responded?
     answer.present?
   end
