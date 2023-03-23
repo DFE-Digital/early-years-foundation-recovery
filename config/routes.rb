@@ -61,7 +61,7 @@ Rails.application.routes.draw do
 
   # COURSE ---------------------------------------------------------------------
 
-  constraints !Rails.application.cms? do # NB: enabled if false
+  constraints proc { Rails.application.cms? } do
     scope module: 'training' do
       resources :modules, only: %i[show], as: :training_modules do
         resources :pages, only: %i[index show], path: 'content-pages'

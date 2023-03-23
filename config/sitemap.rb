@@ -25,10 +25,9 @@ SitemapGenerator::Sitemap.compress = false
 # NB: `app._routes.named_routes.helper_names`
 #
 SitemapGenerator::Sitemap.create do
-  # public pages
-  # ------------------------------------------
+  # TODO: test dynamic page content like question feedback
 
-  # static
+  # non-course pages
   %w[
     accessibility-statement
     new-registration
@@ -39,10 +38,9 @@ SitemapGenerator::Sitemap.create do
     whats-new
     wifi-and-data
   ].each do |path|
+    # promotional-materials
     add static_path(path)
   end
-
-  add static_page_path('promotional-materials')
 
   # settings
   add setting_path('cookie-policy')
@@ -90,33 +88,34 @@ SitemapGenerator::Sitemap.create do
   add my_modules_path
   add user_notes_path
 
-  mod = TrainingModule.published.first
-  add training_module_path(mod)
-
   # Representative content
-  add training_module_content_page_path(mod, mod.interruption_page)
-  add training_module_content_page_path(mod, mod.first_content_page)
+  mod = Rails.application.cms? ? Training::Module.ordered.first : TrainingModule.published.first
+  add training_module_path(mod.name)
+  add training_module_content_page_path(mod.name, mod.interruption_page.name)
+  add training_module_content_page_path(mod.name, mod.first_content_page.name)
   # add training_module_content_page_path(mod, mod.text_pages.first) # for CMS
-  add training_module_content_page_path(mod, mod.video_pages.first)
-  add training_module_content_page_path(mod, mod.formative_questions.first)
-  add training_module_content_page_path(mod, mod.summary_intro_page)
-  add training_module_content_page_path(mod, mod.assessment_intro_page)
-  add training_module_content_page_path(mod, mod.summative_questions.first)
-  add training_module_content_page_path(mod, mod.assessment_results_page)
-  add training_module_content_page_path(mod, mod.confidence_intro_page)
-  add training_module_content_page_path(mod, mod.confidence_questions.first)
-  add training_module_content_page_path(mod, mod.thankyou_page)
-  add training_module_content_page_path(mod, mod.certificate_page)
-  # TODO: test dynamic page content like question feedback
+  add training_module_content_page_path(mod.name, mod.video_pages.first.name)
+  add training_module_content_page_path(mod.name, mod.summary_intro_page.name)
+  add training_module_content_page_path(mod.name, mod.assessment_intro_page.name)
+  add training_module_content_page_path(mod.name, mod.confidence_intro_page.name)
+  add training_module_content_page_path(mod.name, mod.thankyou_page.name)
+  add training_module_content_page_path(mod.name, mod.certificate_page.name)
+  add training_module_questionnaire_path(mod.name, mod.formative_questions.first.name)
+  add training_module_questionnaire_path(mod.name, mod.summative_questions.first.name)
+  add training_module_questionnaire_path(mod.name, mod.confidence_questions.first.name)
+  add training_module_assessment_result_path(mod.name, mod.assessment_results_page.name)
 
   # All content
-  # mod.module_items.each do |item|
-  #   add training_module_content_page_path(mod, item)
-  # end
-
-  # TrainingModule.published.each do |mod|
-  #   mod.module_items.each do |item|
-  #     add training_module_content_page_path(mod, item)
+  # mods = Rails.application.cms? ? Training::Module.ordered : TrainingModule.published
+  # mods.each do |mod|
+  #   mod.module_items.each do |page|
+  #     if page.is_question?
+  #       add training_module_questionnaire_path(mod.name, page.name)
+  #     elsif page.assessment_results?
+  #       add training_module_assessment_result_path(mod.name, page.name)
+  #     else
+  #       add training_module_content_page_path(mod.name, page.name)
+  #     end
   #   end
   # end
 end
