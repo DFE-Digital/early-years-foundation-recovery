@@ -77,20 +77,30 @@ private
 
   # ----------------------------------------------------------------------------
 
+  # - create 'module_content_page' for every page view
+  # - create 'module_start' once the intro is viewed
+  # - create 'module_complete' once the certificate is viewed
+  # - create 'confidence_check_complete' once the last question is submitted
+  #
+  # - recalculate the user's progress state as a module is started/completed
+  #
   def track_events
-    track('module_content_page')
+    track('module_content_page', type: module_item.page_type)
 
     if track_module_start?
       track('module_start')
       helpers.calculate_module_state
-    end
-
-    if module_item.assessment_results? && module_complete_untracked?
+    elsif track_confidence_check_complete?
+      track('confidence_check_complete')
+    elsif track_module_complete?
       track('module_complete')
       helpers.calculate_module_state
     end
+  end
 
-    track('confidence_check_complete') if track_confidence_check_complete?
+  # @return [Boolean]
+  def track_module_complete?
+    module_item.certificate? && module_complete_untracked?
   end
 
   # @return [Boolean]
@@ -100,7 +110,7 @@ private
 
   # @return [Boolean]
   def track_confidence_check_complete?
-    helpers.cms_module_progress(module_item.parent).completed? && untracked?('confidence_check_complete', training_module_id: mod_name)
+    module_item.thankyou? && untracked?('confidence_check_complete', training_module_id: mod_name)
   end
 
   # @return [Boolean]

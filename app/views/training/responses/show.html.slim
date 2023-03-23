@@ -17,6 +17,6 @@
       .govuk-button-group
         = cms_link_to_previous_module_item(content)
         - if current_user_response.can_respond?
-          = cms_link_to_next_module_item(content)
-        - else
           = f.govuk_submit current_user_response.next_button_text
+        - else
+          = cms_link_to_next_module_item(content)
