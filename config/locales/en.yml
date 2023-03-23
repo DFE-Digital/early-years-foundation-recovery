@@ -509,7 +509,7 @@ en:
         privacy-policy: Privacy policy
         sitemap: Sitemap
         terms-and-conditions: Terms and conditions
-        whats-new: What's new
+        whats-new: What's new in the training
         wifi-and-data: Free internet, wifi and data resources
         promotional-materials: Promotional materials
 
@@ -520,14 +520,3 @@ en:
     training/pages:
       show:
         what-to-expect: What to expect during the training
-    pages:
-      show:
-        accessibility-statement: Accessibility statement
-        new-registration: Update your registration details
-        other-problems-signing-in: Other problems signing in
-        privacy-policy: Privacy policy
-        sitemap: Sitemap
-        terms-and-conditions: Terms and conditions
-        whats-new: What's new
-        wifi-and-data: Free internet, wifi and data resources
-        promotional-materials: Promotional materials

@@ -19,9 +19,10 @@ private
     %w[whats-new].include? page_params[:id]
   end
 
+  # TODO: deprecate @module_item required for #html_title
   # @return [::Page]
   def page
-    @page ||= ::Page.find_by(name: page_params[:id]).first
+    @page ||= @module_item = ::Page.find_by(name: page_params[:id]).first
   end
 
   def page_params

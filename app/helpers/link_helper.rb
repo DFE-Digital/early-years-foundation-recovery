@@ -53,14 +53,15 @@ module LinkHelper
     end
   end
 
-  # @return [String]
+  # OPTIMIZE: use this helper for all back link logic and consistent location
+  #
+  # @return [String, nil]
   def back_link
-    if %w[training/pages training/questionnaires content_pages questionnaires assessment_results].include?(params[:controller])
-      govuk_back_link(
-        href: training_module_path(params[:training_module_id]),
-        text: "Back to Module #{training_module.position} overview",
-      )
-    elsif %w[contentful/static settings].include? params[:controller]
+    case params[:controller]
+    when 'training/pages', 'training/questionnaires', 'content_pages', 'questionnaires', 'assessment_results'
+      govuk_back_link href: training_module_path(training_module.name),
+                      text: "Back to Module #{training_module.position} overview"
+    when 'settings', 'pages'
       govuk_back_link href: url_for(:back)
     end
   end

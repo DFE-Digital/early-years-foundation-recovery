@@ -73,16 +73,11 @@ module ApplicationHelper
     module_title = page.parent.title if page.respond_to?(:parent)
     # ::Training::Page, ::Page vs ::ModuleItem
     default = page.model.heading if page
-
     # I18n
     custom = params.permit('controller', 'action', 'id').values.join('.')
     page_title = t(custom, scope: 'html_title', default: default)
 
-    [
-      service_name,
-      module_title,
-      page_title,
-    ].compact.join(' : ')
+    [service_name, module_title, page_title].compact.join(' : ')
   end
 
   # @return [String]
