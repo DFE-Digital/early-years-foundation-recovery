@@ -2,7 +2,7 @@ div id="#{dom_id note}"
   h3.govuk-heading-m= note.logged_at
 
   p
-    <strong>Page:</strong>
+    strong Page:
     =< govuk_link_to(note.title, training_module_content_page_path(note.training_module, note.name))
 
   .log-entry
