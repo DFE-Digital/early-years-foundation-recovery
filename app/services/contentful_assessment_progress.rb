@@ -71,7 +71,7 @@ private
 
   # @return [Array<Response>]
   def summative_responses
-    user.responses.unarchived.where(training_module: mod.name).select { |response| response.assessments_type.eql?('summative_assessment') }
+    user.responses.unarchived.where(training_module: mod.name).select(&:summative?)
   end
 
   # @return [Array<Response]
