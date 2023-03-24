@@ -67,8 +67,6 @@ module EarlyYearsFoundationRecovery
     config.contentful_management_access_token = ENV.fetch('CONTENTFUL_MANAGEMENT_TOKEN', credentials.dig(:contentful, :management_access_token)) # TODO: use service account management token
     config.contentful_environment             = ENV.fetch('CONTENTFUL_ENVIRONMENT', credentials.dig(:contentful, :environment))
 
-    config.active_record.schema_format = :sql
-
     # @return [Boolean]
     def live?
       ENV['WORKSPACE'].eql?('production')
@@ -76,7 +74,7 @@ module EarlyYearsFoundationRecovery
 
     # @return [Boolean] true if Contentful is used for training content
     def cms?
-      Types::Params::Bool[ENV.fetch('CONTENTFUL', false)]
+      Types::Params::Bool[ENV.fetch('CONTENTFUL', true)]
     end
 
     # @return [Boolean] Upload to CSV files to the dashboard
