@@ -33,12 +33,12 @@ SitemapGenerator::Sitemap.create do
     new-registration
     other-problems-signing-in
     privacy-policy
-    terms-and-conditions
+    promotional-materials
     sitemap
+    terms-and-conditions
     whats-new
     wifi-and-data
   ].each do |path|
-    # promotional-materials
     add static_path(path)
   end
 
