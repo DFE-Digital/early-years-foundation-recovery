@@ -1,6 +1,6 @@
 ---
 en:
-  static:
+  pages:
     sitemap:
       heading: Sitemap
-      # content: 
+      # body:

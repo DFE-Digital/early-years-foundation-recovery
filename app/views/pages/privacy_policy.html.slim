@@ -1,8 +1,8 @@
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
     = govuk_back_link href: url_for(:back)
-    
+
     h1= t('.heading')
 
-    .content.gem-c-govspeak
-      = translate_markdown t('.content')
+    .content
+      = translate_markdown t('.body', contact_us: Rails.application.credentials.contact_us)

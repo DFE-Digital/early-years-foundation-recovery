@@ -9,14 +9,7 @@
 # Offense count: 1
 Lint/MixedRegexpCaptureTypes:
   Exclude:
-    - 'lib/upload.rb'
-
-# Offense count: 3
-# Configuration parameters: Prefixes, AllowedPatterns.
-# Prefixes: when, with, without
-RSpec/ContextWording:
-  Exclude:
-    - 'spec/services/contentful_data_integrity_spec.rb'
+    - 'lib/seed_course_entries.rb'
 
 # Offense count: 2
 # Configuration parameters: Database, Include.
@@ -52,9 +45,3 @@ Rails/SaveBang:
   Exclude:
     - 'app/controllers/registrations_controller.rb'
     - 'config/sitemap.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-Style/BlockComments:
-  Exclude:
-    - 'lib/upload.rb'

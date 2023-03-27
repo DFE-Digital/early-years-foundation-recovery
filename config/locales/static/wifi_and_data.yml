@@ -1,8 +1,8 @@
 en:
-  static:
+  pages:
     wifi_and_data:
       heading: Free internet, wifi and data resources
-      content: |
+      body: |
         The Early years child development training will use mobile data when your
         device is not connected to the internet or wifi. The videos in the training
         will use a larger amount of data than a text page. We recommend that you
