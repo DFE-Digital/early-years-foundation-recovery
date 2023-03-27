@@ -3,7 +3,7 @@ require 'training/module'
 require 'training/page'
 require 'training/question'
 require 'training/video'
-require 'contentful/static'
+require 'page'
 
 # Preview enabled for local development and staging
 ContentfulModel.use_preview_api = Rails.application.preview?
@@ -39,7 +39,7 @@ ContentfulRails.configure do |config|
     management_api: { timeout_connect: 3, timeout_read: 100, timeout_write: 200 },
 
     entry_mapping: {
-      'static' => Contentful::Static,
+      'static' => Page,
       'trainingModule' => Training::Module,
       'page' => Training::Page,
       'question' => Training::Question,

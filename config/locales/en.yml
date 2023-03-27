@@ -456,26 +456,6 @@ en:
 
   # Browser and bookmarks ------------------------------------------------------
   html_title:
-
-    # YAML
-    training_modules:
-      index: About training
-    content_pages:
-      show:
-        what-to-expect: What to expect during the training
-        before-you-start: Before you start
-        intro: Introduction
-
-    # Contentful
-    training/modules:
-      index: About training
-    training/pages:
-      show:
-        what-to-expect: What to expect during the training
-        before-you-start: Before you start
-        intro: Introduction
-
-    # --------------------------------------------------------------------------
     home:
       index: Home page
     learning:
@@ -492,7 +472,6 @@ en:
       edit_setting_type: Change your setting type
       check_email_confirmation: Check email confirmation
       check_email_password_reset: Check email password reset
-
     timeout:
       timeout_user: User timeout
     users/sessions:
@@ -514,6 +493,14 @@ en:
         # FIXME: routing
         cookie_policy: Cookie policy
         cookie-policy: Cookie policy
+
+    # --------------------------------------------------------------------------
+    # YAML titles
+    training_modules:
+      index: About training
+    content_pages:
+      show:
+        what-to-expect: What to expect during the training
     static:
       show:
         accessibility-statement: Accessibility statement
@@ -522,5 +509,14 @@ en:
         privacy-policy: Privacy policy
         sitemap: Sitemap
         terms-and-conditions: Terms and conditions
-        whats-new: What's new
+        whats-new: What's new in the training
         wifi-and-data: Free internet, wifi and data resources
+        promotional-materials: Promotional materials
+
+    # --------------------------------------------------------------------------
+    # CMS titles
+    training/modules:
+      index: About training
+    training/pages:
+      show:
+        what-to-expect: What to expect during the training

@@ -1,0 +1,11 @@
+= render 'debug'
+
+.govuk-grid-row
+  .govuk-grid-column-two-thirds-from-desktop
+
+    h1.govuk-heading-l= page.heading
+    - if page.subheading
+      p.govuk-body= page.subheading
+      hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--m
+
+    .gem-c-govspeak= translate_markdown(page.body)
