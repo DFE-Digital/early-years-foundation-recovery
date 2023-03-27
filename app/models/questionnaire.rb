@@ -162,24 +162,28 @@ class Questionnaire < OpenStruct
 
   # answers:
   #   [
-  #     { 1 => ['Correct answer 1', true] },
-  #     { 2 => ['Wrong answer 1', false] },
+  #     ["Correct answer 1", true],
+  #     ["Wrong answer 1"],
   #   ]
   # @return [Hash] Question Contentful Model params
   def cms_params
     _name, question = questions.first
-    answers = question[:answers].map { |key, value| { key => [value, question[:correct_answers].include?(key)] } }
+
+    answers =
+      unless confidence?
+        question[:answers].map do |key, label|
+          correct = question[:correct_answers].include?(key) || nil
+          [label, correct].compact
+        end
+      end
 
     {
-      body: body,
+      body: question[:body],
       assessment_succeed: question[:assessment_summary],
       assessment_fail: question[:assessment_fail_summary],
       assessments_type: assessments_type,
       answers: answers,
-
-      # pagination
       page_number: page_number,
-      total_questions: total_questions,
     }
   end
 

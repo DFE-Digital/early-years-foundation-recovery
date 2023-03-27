@@ -142,6 +142,11 @@ class ContentfulDataIntegrity
   end
 
   # @return [Boolean]
+  def question_answers?
+    mod.questions.all? { |question| question.answer.valid? }
+  end
+
+  # @return [Boolean]
   def parent?
     mod.content.all? { |entry| entry.parent.name.eql?(mod.name) }
   end

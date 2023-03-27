@@ -23,6 +23,14 @@ module.exports = function(migration) {
     required: true
   })
 
+  // can be derived from "page_type"
+  // summative or confidence (formative to be deprecated)
+  question.createField('assessments_type', {
+    name: 'Assessment type',
+    type: 'Symbol',
+    required: true
+  })
+
   question.createField('training_module', {
     name: 'Training module',
     type: 'Link',
@@ -54,11 +62,9 @@ module.exports = function(migration) {
     required: true
   })
 
-  /* UNUSED */
   question.createField('body', {
     name: 'Body',
-    type: 'Text',
-    required: true
+    type: 'Text'
   })
   
   question.createField('assessment_succeed', {
@@ -71,26 +77,8 @@ module.exports = function(migration) {
     type: 'Text'
   })
   
-  // summative or confidence (formative to be deprecated)
-  question.createField('assessments_type', {
-    name: 'Assessment type',
-    type: 'Symbol'
-  })
-  
   question.createField('answers', {
     name: 'Answers',
     type: 'Object'
-  })
-
-  // Pagination
-  question.createField('page_number', {
-    name: 'Page number',
-    type: 'Integer'
-  })
-  
-  // Pagination
-  question.createField('total_questions', {
-    name: 'Total questions',
-    type: 'Integer'
   })
 }
