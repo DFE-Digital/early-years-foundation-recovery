@@ -14,7 +14,6 @@ defaults: &defaults
   GROVER_NO_SANDBOX: true
   EDITOR: vi
   CONTENTFUL_ENVIRONMENT: staging # master unless overridden
-  CONTENTFUL: false
 
 # ey-recovery
 production:
@@ -25,6 +24,7 @@ production:
   TRACKING_ID: GTM-NFZ88TP  # Live data
   HOTJAR_SITE_ID: 3169682
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-live
+  CONTENTFUL: false
 
 # ey-recovery-staging
 staging:
@@ -43,13 +43,12 @@ development:
   TRAINING_MODULES: demo-modules
   # CONTENTFUL_ENVIRONMENT: test # reinstate for pa11y
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-development
-  DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # every 5 mins (default: daily at noon)
+  # DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # every 5 mins (default: daily at noon)
 
 # ey-recovery-content
 content:
   <<: *defaults
   DASHBOARD_UPDATE: false
-  # CONTENTFUL: false
   CONTENTFUL_PREVIEW: true
   CONTENTFUL_ENVIRONMENT: test
   # @see .github/workflows/content.yml

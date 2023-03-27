@@ -156,11 +156,22 @@ class ContentfulDataIntegrity
     page_by_type_position(type: 'video_page')
   end
 
+  # map over questions and use the custom strictly typed Dry::Struct object to
+  # assert that no type constraint error is raised, meaning it is valid JSON
+  #
+  # @example
+  #
+  #   [
+  #     ["Strongly agree", true],
+  #     ["Agree", true],
+  #     ["Neither agree nor disagree", true],
+  #     ["Disagree", true],
+  #     ["Strongly disagree", true]
+  #   ]
+  #
   # @return [Boolean]
   def question_answers?
-    true
-    # map over questions and use the custom strictly typed Dry::Struct object to
-    # assert that no type constraint error is raised, meaning it is valid JSON
+    mod.questions.all? { |question| ::Answer.new(json: question.answers).valid? }
   end
 
   # @return [Boolean] demo modules have fewer questions than genuine content
