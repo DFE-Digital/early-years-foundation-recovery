@@ -11,13 +11,17 @@ class ContentfulAssessmentProgress
   option :mod, Types.Instance(Training::Module), required: true
 
   def save!
-    UserAssessment.create!(
+    assess = UserAssessment.create!(
       user_id: user.id,
       score: score.to_i,
       status: status,
       module: mod.name,
       assessments_type: 'summative_assessment',
     )
+
+    if responses.all?(&:persisted?) && assess.persisted?
+      responses.update_all(user_assessment_id: assess.id)
+    end
   end
 
   # @see ContentHelper#results_banner

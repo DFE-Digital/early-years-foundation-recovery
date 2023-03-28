@@ -139,6 +139,15 @@ module Training
       fields.fetch(:pages, []).none? # || ContentIntegrityCheck
     end
 
+    # Checks for user if module has been started
+    # @return [Boolean]
+    def started?(user: nil)
+      return false if user.blank?
+
+      # if time spent has been recorded for a module, then it is started
+      user.module_time_to_completion.key?(name)
+    end
+
     # # @return [Datetime]
     # delegate :published_at, to: :entry
 
