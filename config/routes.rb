@@ -67,10 +67,8 @@ Rails.application.routes.draw do
       end
     end
 
-    scope module: 'contentful' do
-      post '/change', to: 'base#change'
-      post '/release', to: 'base#release'
-    end
+    post '/change', to: 'hook#change'
+    post '/release', to: 'hook#release'
   end
 
   resources :modules, only: %i[show], as: :training_modules, controller: :training_modules do
@@ -78,8 +76,6 @@ Rails.application.routes.draw do
     resources :questionnaires, only: %i[show update]
     resources :assessment_results, only: %i[show new], path: 'assessment-result'
   end
-
-  # STATIC PAGES ---------------------------------------------------------------
 
   if Rails.application.cms?
     resources :pages, only: %i[show], path: '/', as: :static

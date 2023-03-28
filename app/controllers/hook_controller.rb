@@ -1,4 +1,5 @@
-class Contentful::BaseController < ApplicationController
+# CMS webooks
+class HookController < ApplicationController
   # TODO: secure webhook endpoints!!!
   skip_before_action :verify_authenticity_token, only: %i[release change]
 

@@ -1,4 +1,4 @@
-class Training::ModulesController < Contentful::BaseController
+class Training::ModulesController < ApplicationController
   before_action :authenticate_registered_user!, only: :show
 
   # helper_method :mod # TODO: replace use of instance variables with helper methods throughout
