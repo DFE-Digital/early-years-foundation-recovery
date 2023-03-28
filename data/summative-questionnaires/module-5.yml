@@ -55,7 +55,7 @@ module-5:
       1_independent:
         multi_select: true
         label: |
-          At what age do children show an increased desire to be independent?
+          At what age do children tend to show an increased desire to be independent?
         assessment_summary:
         assessment_fail_summary: |
           Between 25 and 36 months children will be showing an increased desire to be independent. This is a perfect opportunity to encourage skills whilst dressing and undressing, during mealtimes and with self care such as washing hands and toileting.
@@ -194,7 +194,7 @@ module-5:
           Choose all that apply.
         assessment_summary:
         assessment_fail_summary: |
-          Research shows us that children who regularly access outdoor environments have improved strength, agility and coordination as the freedom to run, climb and swing uses different movements, muscles and control to those needed for indoor movement.
+          Research shows us that children who regularly access outdoor environments have improved strength, agility and coordination. This is because running, climbing and swinging use different movements, muscles and control to those needed for indoor movement.
 
           Children who have opportunities to test and develop new movement skills also develop greater self confidence.
 
