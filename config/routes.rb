@@ -66,6 +66,11 @@ Rails.application.routes.draw do
         resources :questionnaires, only: %i[show update]
       end
     end
+
+    scope module: 'contentful' do
+      post '/change', to: 'base#change'
+      post '/release', to: 'base#release'
+    end
   end
 
   resources :modules, only: %i[show], as: :training_modules, controller: :training_modules do
@@ -74,24 +79,11 @@ Rails.application.routes.draw do
     resources :assessment_results, only: %i[show new], path: 'assessment-result'
   end
 
-  # to be removed and below used when migrating to contentful
-  static_regexp = %r{
-    accessibility-statement|
-    cookie-policy|
-    new-registration|
-    other-problems-signing-in|
-    privacy-policy|
-    terms-and-conditions|
-    sitemap|
-    settings/cookies|
-    whats-new|
-    wifi-and-data
-  }x
-  get '/:id', to: 'static#show', id: static_regexp, as: :static
+  # STATIC PAGES ---------------------------------------------------------------
 
-  scope module: 'contentful' do
-    post '/change', to: 'base#change'
-    post '/release', to: 'base#release'
-    resources :static, only: %i[show], as: :static_pages, path: ''
+  if Rails.application.cms?
+    resources :pages, only: %i[show], path: '/', as: :static
+  else
+    get '/:id', to: 'static#show', as: :static
   end
 end
