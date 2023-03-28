@@ -7,7 +7,6 @@
 .govuk-grid-row 
   .govuk-grid-column-two-thirds-from-desktop
     = form_with model: current_user_response, url: training_module_response_path(content.parent.name, content.name), method: :patch do |f|
-      = f.govuk_error_summary
       = page_number(**content.pagination)
       = render partial: current_user_response.to_partial_path, locals: { f: f }, object: current_user_response, as: :question
       = render 'assessment_banner', question: content if current_user_response.show_assessment?
