@@ -3,10 +3,14 @@ en:
   pages:
     promotional_materials:
       heading: Promotional materials for local authorities
-      subheading: |
-        Use our printable poster, templates and social media materials to promote the Early years child development training to practitioners in your area.
-        You can download these by clicking on each of the links below.
       body: |
+        <p class='govuk-body'>
+          Use our printable poster, templates and social media materials to promote the Early years child development training to practitioners in your area.
+          You can download these by clicking on each of the links below.
+        </p>
+
+        <hr class='govuk-section-break govuk-section-break--visible govuk-section-break--m' />
+
         <div class='resources-container'>
           <h2>Poster</h2>
           <section>

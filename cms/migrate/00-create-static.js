@@ -25,15 +25,19 @@ module.exports = function(migration) {
     type: 'Symbol',
     required: true,
   })
-  
-  staticPage.createField('subheading', {
-    name: 'Subheading',
-    type: 'Text',
-  })
-  
+
   staticPage.createField('body', {
     name: 'Body',
     type: 'Text',
     required: true,
+  })
+
+  staticPage.createField('footer', {
+    name: 'Add to footer',
+    type: 'Boolean',
+    required: true,
+    defaultValue: {
+      'en-US': false
+    }
   })
 }
