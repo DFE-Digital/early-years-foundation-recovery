@@ -19,8 +19,8 @@ class ContentfulAssessmentProgress
       assessments_type: 'summative_assessment',
     )
 
-    if responses.all?(&:persisted?) && assess.persisted?
-      responses.update_all(user_assessment_id: assess.id)
+    if summative_responses.all?(&:persisted?) && assess.persisted?
+      summative_responses.update_all(user_assessment_id: assess.id)
     end
   end
 
