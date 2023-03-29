@@ -475,6 +475,7 @@ CREATE TABLE public.responses (
     question_name character varying,
     answer jsonb,
     archive boolean DEFAULT false,
+    user_assessment_id bigint,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -853,6 +854,13 @@ CREATE INDEX index_notes_on_user_id ON public.notes USING btree (user_id);
 
 
 --
+-- Name: index_responses_on_user_assessment_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_responses_on_user_assessment_id ON public.responses USING btree (user_assessment_id);
+
+
+--
 -- Name: index_responses_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -986,6 +994,13 @@ CREATE UNIQUE INDEX que_scheduler_job_in_que_jobs_unique_index ON public.que_job
 
 
 --
+-- Name: user_question; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX user_question ON public.responses USING btree (user_id, training_module, question_name);
+
+
+--
 -- Name: que_jobs que_job_notify; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -1020,6 +1035,14 @@ ALTER TABLE ONLY public.responses
 
 ALTER TABLE ONLY public.notes
     ADD CONSTRAINT fk_rails_7f2323ad43 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: responses fk_rails_9bf18408da; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.responses
+    ADD CONSTRAINT fk_rails_9bf18408da FOREIGN KEY (user_assessment_id) REFERENCES public.user_assessments(id);
 
 
 --

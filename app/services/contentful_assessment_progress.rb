@@ -20,7 +20,9 @@ class ContentfulAssessmentProgress
     )
 
     if summative_responses.all?(&:persisted?) && assess.persisted?
-      summative_responses.update_all(user_assessment_id: assess.id)
+      summative_responses.each do |response|
+        response.update(user_assessment_id: assess.id)
+      end
     end
   end
 
