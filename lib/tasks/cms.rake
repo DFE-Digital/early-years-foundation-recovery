@@ -61,5 +61,11 @@ namespace :eyfs do
         ContentfulDataIntegrity.new(module_name: mod).call
       end
     end
+    
+    # ./bin/docker-rails 'eyfs:cms:responses'
+    desc 'Move user answers to responses'
+    task user_responses: :environment do |_task, args|
+      MoveUserAnswerData.new.call
+    end
   end
 end
