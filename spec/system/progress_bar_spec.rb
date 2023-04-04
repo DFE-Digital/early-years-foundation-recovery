@@ -105,4 +105,19 @@ RSpec.describe 'Progress bar' do
       end
     end
   end
+
+  context 'with just a completion event' do
+    describe 'the whole progress bar' do
+      before do
+        module_complete_event(alpha)
+        visit 'modules/alpha/content-pages/1-1'
+      end
+
+      it 'shows all nodes are ticked' do
+        expect(page).to have_css 'li.progress-bar--item:nth-child(1) .fa-circle-check.green'
+        expect(page).to have_css 'li.progress-bar--item:nth-child(2) .fa-circle-check.green'
+        expect(page).to have_css 'li.progress-bar--item:nth-child(3) .fa-circle-check.green'
+      end
+    end
+  end
 end
