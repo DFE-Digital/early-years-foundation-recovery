@@ -50,7 +50,7 @@ content:
   <<: *defaults
   DASHBOARD_UPDATE: false
   CONTENTFUL_PREVIEW: true
-  CONTENTFUL_ENVIRONMENT: test
+  # CONTENTFUL_ENVIRONMENT: test
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
