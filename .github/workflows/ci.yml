@@ -81,13 +81,11 @@ jobs:
       -
         name: Run test suite (YAML)
         run: bundle exec rspec
+        env:
+          CONTENTFUL: false
       - # Test demo module content prior to suite
         name: Validate content (CMS)
-        env:
-          CONTENTFUL: true
         run: bundle exec rails eyfs:cms:validate
       - # Test dedicated Contentful services, decorators and CMS powered content
         name: Run test suite (CMS)
-        env:
-          CONTENTFUL: true
         run: bundle exec rspec

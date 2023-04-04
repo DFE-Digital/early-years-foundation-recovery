@@ -30,7 +30,7 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
   #
   # @return [Symbol]
   def status(items)
-    if all?(items)
+    if completed? || all?(items)
       :completed
     elsif any?(items)
       :started

@@ -1,8 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe ContentfulDataIntegrity do
+RSpec.describe ContentfulDataIntegrity, :cms do
   subject(:service) do
     described_class.new(module_name: mod)
+  end
+
+  before do
+    skip 'WIP' unless Rails.application.cms?
   end
 
   context 'when module is not found' do
@@ -31,7 +35,7 @@ RSpec.describe ContentfulDataIntegrity do
     context 'when invalid' do
       let(:mod) { 'delta' }
 
-      specify { expect(service.valid?).to be false } # duration should be missing
+      specify { expect(service.valid?).to be false } # something should be missing e.g. duration
     end
   end
 

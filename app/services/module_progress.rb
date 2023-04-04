@@ -56,12 +56,10 @@ class ModuleProgress
     end
   end
 
-  # TODO: bypass #all? if a :module_complete event exists
-  #
   # @see CourseProgress
   # @return [Boolean] true if every page is visited (certificate excluded)
   def completed?
-    all?(mod.pages) # key_event('module_complete').present?
+    key_event('module_complete').present?
   end
 
   # TODO: refactor once every user has a "module_complete" event

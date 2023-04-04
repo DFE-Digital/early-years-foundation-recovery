@@ -5,7 +5,7 @@ require 'training/question'
 require 'training/video'
 require 'page'
 
-# Preview enabled for local development and staging
+# Without this the value is nil and defaults to delivery API
 ContentfulModel.use_preview_api = Rails.application.preview?
 
 ContentfulRails.configure do |config|
@@ -14,15 +14,13 @@ ContentfulRails.configure do |config|
   config.perform_caching  = Rails.env.production?
   config.default_locale   = 'en-US'
 
-  # Webhooks
-  config.authenticate_webhooks = true
-  config.webhooks_username = 'ey_recovery'
-  config.webhooks_password = 'ey_recovery'
-
   # Tokens
   config.access_token         = Rails.application.config.contentful_delivery_access_token
   config.preview_access_token = Rails.application.config.contentful_preview_access_token
   config.management_token     = Rails.application.config.contentful_management_access_token
+
+  # Preview
+  config.enable_preview_domain = Rails.application.preview?
 
   config.eager_load_entry_mapping = false
 

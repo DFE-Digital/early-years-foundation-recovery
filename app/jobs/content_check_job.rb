@@ -1,19 +1,47 @@
 # ContentCheckJob.enqueue
 #
 class ContentCheckJob < Que::Job
-  def run(mod:)
-    log "Running ContentCheckJob: mod=#{mod}"
-
-    ContentfulDataIntegrity.new(training_module: mod).valid?
+  # @return [Boolean]
+  def run(*)
+    Training::Module.cache.clear
+    log "ContentCheckJob: Running in '#{env}' via '#{api}'"
+    valid?
   end
 
   def handle_error(error)
-    message = "ContentCheckJob Failed: #{error.message}"
+    message = "ContentCheckJob: Failed with '#{error.message}'"
     log(message)
-    Sentry.capture_message(message) if Rails.application.live?
+    Sentry.capture_message(message)
   end
 
 private
+
+  # @return [Boolean] are all modules valid
+  def valid?
+    Training::Module.ordered.all? do |mod|
+      check = ContentfulDataIntegrity.new(module_name: mod.name)
+      check.call # print results
+      log Training::Module.cache.size # should be larger than 0
+
+      unless check.valid?
+        message = "ContentCheckJob: #{mod.name} in '#{env}' via '#{api}' is not valid"
+        log(message)
+        Sentry.capture_message(message)
+      end
+
+      check.valid?
+    end
+  end
+
+  # @return [String]
+  def env
+    ContentfulRails.configuration.environment
+  end
+
+  # @return [String]
+  def api
+    ContentfulModel.use_preview_api ? 'preview' : 'delivery'
+  end
 
   # @return [String]
   def log(message)

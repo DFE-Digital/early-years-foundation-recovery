@@ -314,6 +314,18 @@ You can demo this environment locally using the account `completed@example.com:S
 When there are significant changes to content structure a soft restart the server may be necessary `./bin/docker-rails restart`.
 CSS styling changes will appear automatically without needing to restart.
 
+
+### CMS
+
+Refresh cache in instances and workers
+
+- `cf restart ey-recovery-dev --strategy rolling`
+
+- `cf ssh ey-recovery-dev-worker`
+- rails eyfs:jobs:plug_content
+
+- Validation: `$ ./bin/docker-rails 'eyfs:cms:validate'`
+
 ### YAML
 
 - [guide](https://www.commonwl.org/user_guide/yaml)
