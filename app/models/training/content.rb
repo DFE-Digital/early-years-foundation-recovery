@@ -1,12 +1,5 @@
 module Training
   class Content < ContentfulModel::Base
-    extend Dry::Core::Cache
-
-    # @return [Boolean] on for tests unless enabled explicitly
-    def self.cache?
-      Types::Params::Bool[ENV.fetch('CONTENTFUL_CACHE', false)] || Rails.env.test?
-    end
-
     # METHODS TO DEPRECATE --------------------------------------
 
     # @return [self]

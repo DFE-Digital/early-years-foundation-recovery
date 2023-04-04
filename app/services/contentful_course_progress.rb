@@ -49,8 +49,8 @@ class ContentfulCourseProgress
         started: #{started?(mod)}
         completed: #{completed?(mod)}
         available: #{available?(mod)}
-        last: #{mod.thankyou_page.name unless mod.draft?}
-        certificate: #{mod.certificate_page.name unless mod.draft?}
+        last: #{mod.thankyou_page&.name unless mod.draft?}
+        certificate: #{mod.certificate_page&.name unless mod.draft?}
         milestone: #{module_progress(mod).milestone}
       SUMMARY
     end
