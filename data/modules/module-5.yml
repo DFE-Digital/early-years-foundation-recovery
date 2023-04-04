@@ -11,6 +11,8 @@ module-5:
     type: sub_module_intro  # submodule 1
   5-1-1:
     type: text_page         # submodule 1 / topic 1
+  5-1-1-1a:
+    type: text_page
   5-1-1-1:
     type: text_page
   5-1-1-2a:
