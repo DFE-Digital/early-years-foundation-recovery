@@ -46,7 +46,12 @@ en:
         body: |
           The EYFS identifies physical development as a prime area of learning and development.
 
-          "Physical activity is vital in children’s all-round development, enabling them to pursue happy, healthy and active lives." - EYFS
+          <div class='blockquote-container'>
+            <blockquote class='quote'>
+              <p>Physical activity is vital in children’s all-round development, enabling them to pursue happy, healthy and active lives.</p>
+              <cite>Statutory framework for the early years foundation stage, 2021</cite>
+            </blockquote>
+          </div>
 
           Physical activity plays a vital role in children’s all-round development. It will support them to:
 
@@ -628,7 +633,12 @@ en:
 
           The financial situation in a household can have an effect on children’s experiences but you should not assume that it does. It is important to avoid assumptions and to try to engage with parents or carers and children to understand their individual needs.
 
-          “Every child deserves the best possible start in life and the support that enables them to fulfil their potential. Children develop quickly in the early years and a child’s experiences between birth and age five have a major impact on their future life chances. A secure, safe, and happy childhood is important in its own right. Good parenting and high quality early learning together provide the foundation children need to make the most of their abilities and talents as they grow up. EYFS 2021”
+          <div class='blockquote-container'>
+            <blockquote class='quote'>
+              <p>Every child deserves the best possible start in life and the support that enables them to fulfil their potential. Children develop quickly in the early years and a child’s experiences between birth and age five have a major impact on their future life chances. A secure, safe, and happy childhood is important in its own right. Good parenting and high quality early learning together provide the foundation children need to make the most of their abilities and talents as they grow up. </p>
+              <cite>Statutory framework for the early years foundation stage, 2021</cite>
+            </blockquote>
+          </div>
 
           ##Access to activities and resources
 
