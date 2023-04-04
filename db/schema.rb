@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_24_151527) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_16_130014) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "fuzzystrmatch"
@@ -129,6 +129,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_151527) do
   create_table "que_values", primary_key: "key", id: :text, force: :cascade do |t|
     t.jsonb "value", default: {}, null: false
     t.check_constraint "jsonb_typeof(value) = 'object'::text", name: "valid_value"
+  end
+
+  create_table "releases", force: :cascade do |t|
+    t.string "name", null: false
+    t.jsonb "properties", default: {}, null: false
+    t.datetime "time", null: false
+    t.index ["name", "time"], name: "index_releases_on_name_and_time"
+    t.index ["properties"], name: "index_releases_on_properties", opclass: :jsonb_path_ops, using: :gin
   end
 
   create_table "user_answers", force: :cascade do |t|

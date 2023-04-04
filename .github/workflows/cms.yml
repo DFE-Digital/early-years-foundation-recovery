@@ -1,0 +1,43 @@
+---
+# ------------------------------------------------------------------------------
+#
+name: CMS validate course
+on:
+  workflow_dispatch:
+    inputs:
+      alias:
+        description: Contentful alias to target (master)
+        type: string
+        default: staging # master
+
+jobs:
+  test:
+    name: Preflight
+    runs-on: ubuntu-latest
+    environment: test
+    env:
+      CONTENTFUL_ENVIRONMENT: ${{ inputs.alias }})
+      # https://github.com/DFE-Digital/early-years-foundation-recovery/settings/secrets/dependabot
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+    steps:
+      -
+        name: Checkout Code
+        uses: actions/checkout@v3
+      -
+        name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.3
+          bundler-cache: true
+      -
+        name: Install Rubygems
+        run: bundle install --jobs 20 --retry 3
+      -
+        name: Validate draft
+        run: bundle exec rails eyfs:cms:validate
+        env:
+          CONTENTFUL_PREVIEW: true
+      -
+        name: Validate published
+        run: bundle exec rails eyfs:cms:validate

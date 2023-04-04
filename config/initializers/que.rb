@@ -4,6 +4,8 @@ Que::Scheduler.configure do |config|
   }
 end
 
+# Que.logger = QUE_LOGGER
+
 # https://github.com/que-rb/que/tree/master/docs#error-notifications
 # Que.error_notifier = proc do |error, job|
 # Do whatever you want with the error object or job row here. Note that the

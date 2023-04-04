@@ -1,4 +1,4 @@
-class Training::ModulesController < Contentful::BaseController
+class Training::ModulesController < ApplicationController
   before_action :authenticate_registered_user!, only: :show
 
   helper_method :mod,
@@ -14,7 +14,7 @@ class Training::ModulesController < Contentful::BaseController
   def show
     track('module_overview_page')
 
-    if mod.nil?
+    if redirect?
       redirect_to my_modules_path
     elsif debug?
       render partial: 'progress'
@@ -22,6 +22,16 @@ class Training::ModulesController < Contentful::BaseController
   end
 
 protected
+
+  # @return [Boolean]
+  def redirect?
+    mod.nil? || (!Rails.application.preview? && mod.draft?) || (Rails.application.preview? && !mod.pages?)
+  end
+
+  # @return [Boolean]
+  def debug?
+    params[:debug].present? && Rails.application.debug?
+  end
 
   # index -------------------
 
@@ -39,6 +49,7 @@ protected
     ModuleProgressBarDecorator.new(progress)
   end
 
+  # @return [Training::Module]
   def mod
     Training::Module.by_name(params[:id])
   end
@@ -49,9 +60,5 @@ protected
 
   def assessment_progress
     helpers.assessment_progress(mod)
-  end
-
-  def debug?
-    params[:debug] && Rails.application.debug?
   end
 end
