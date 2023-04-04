@@ -3,4 +3,6 @@ en:
   pages:
     sitemap:
       heading: Sitemap
-      # body:
+      body: |
+        tbc
+

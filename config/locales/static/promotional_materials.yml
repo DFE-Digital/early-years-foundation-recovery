@@ -2,6 +2,104 @@
 en:
   pages:
     promotional_materials:
-      heading: tbc
+      heading: Promotional materials for local authorities
       body: |
-        tbc
+        <p class='govuk-body'>
+          Use our printable poster, templates and social media materials to promote the Early years child development training to practitioners in your area.
+          You can download these by clicking on each of the links below.
+        </p>
+
+        <hr class='govuk-section-break govuk-section-break--visible govuk-section-break--m' />
+
+        <div class='resources-container'>
+          <h2>Poster</h2>
+          <section>
+            <a class='govuk-link' href='//images.ctfassets.net/dvmeh832nmjc/7i8HQOBGTNrFMIn9uTsZ8v/3812b74e5172565f4b3ce66eedf0a5a1/early_years_child_development_training_poster.png' download>
+              <img class='thumbnail--image' src='//images.ctfassets.net/dvmeh832nmjc/7i8HQOBGTNrFMIn9uTsZ8v/3812b74e5172565f4b3ce66eedf0a5a1/early_years_child_development_training_poster.png' alt='Promotional poster thumbnail'>
+              <h3>Promotional poster for early years settings</h3>
+            </a>
+            <div class='details'>PNG, 120kB</div>
+          </section>
+
+          <h2>Social media materials</h2>
+          <section>
+            <a class='govuk-link' href='//assets.ctfassets.net/dvmeh832nmjc/1jlJQ5vG3vriUdPJz3Jfpj/2298cdd9c364184b7e171fcc1629a153/Early_years_child_development_training_-_Social_media_post_text__.docx' download>
+              <img class='thumbnail--image' src='//images.ctfassets.net/dvmeh832nmjc/4AYuNIK4PSI5tOjtVsDqVC/6e5423e6dfcf62eaaa16ef1a254d463c/Social_media_post_text_thumbnail.png' alt='Social media post text thumbnail'>
+              <h3>Social media post text</h3>
+            </a>
+            <div class='details'>DOCX, 6.9kB</div>
+          </section>
+
+          <section>
+            <a class='govuk-link' href='//assets.ctfassets.net/dvmeh832nmjc/2Lc3fAXwja2sejbk25K16i/931b8b3544d42da2bfc7496b150a3f7f/Early_years_child_development_training_-_Social_media_post_text__.txt' download>
+              <img class='thumbnail--image' src='//images.ctfassets.net/dvmeh832nmjc/4AYuNIK4PSI5tOjtVsDqVC/6e5423e6dfcf62eaaa16ef1a254d463c/Social_media_post_text_thumbnail.png' alt='Social media post text thumbnail'>
+              <h3>Social media post text</h3>
+            </a>
+            <div class='details'>TXT, 870B</div>
+          </section>
+
+          <section>
+            <a class='govuk-link' href='//images.ctfassets.net/dvmeh832nmjc/2EChnRSwRMFDjqYT8xC45y/71ac57aa1ab88921196d59ee9fc513a3/early_years_child_development_training_social_image.png' download>
+              <img class='thumbnail--image' src='//images.ctfassets.net/dvmeh832nmjc/2EChnRSwRMFDjqYT8xC45y/71ac57aa1ab88921196d59ee9fc513a3/early_years_child_development_training_social_image.png' alt='Social media graphic thumbnail'>
+              <h3>Social media graphic</h3>
+            </a>
+            <div class='details'>PNG, 390kB</div>
+          </section>
+
+          <section>
+            <a class='govuk-link' href='//downloads.ctfassets.net/dvmeh832nmjc/3hDFqWDZWrNlWSeOEgebwv/a822d64cdae6c9dfe7371ee63ffa5238/LOGO_MG_6456.png?w=10' download>
+              <img class='thumbnail--image' src='//downloads.ctfassets.net/dvmeh832nmjc/3hDFqWDZWrNlWSeOEgebwv/a822d64cdae6c9dfe7371ee63ffa5238/LOGO_MG_6456.png?w=10' alt='Children playing with toys in a water tray'>
+              <h3>Branded image for social media - Image 1</h3>
+            </a>
+            <div class='details'>PNG, 31MB</div>
+          </section>
+
+          <section>
+            <a class='govuk-link' href='//downloads.ctfassets.net/dvmeh832nmjc/IyrUucjh8JfYrTD3gm86r/5efd7bf67524c1245320a76822dd67bc/LOGO_MG_6834.png' download>
+              <img class='thumbnail--image' src='//downloads.ctfassets.net/dvmeh832nmjc/IyrUucjh8JfYrTD3gm86r/5efd7bf67524c1245320a76822dd67bc/LOGO_MG_6834.png?w=300' alt='A child reaching up to balance a toy brick on top of a tall tower'>
+              <h3>Branded image for social media - Image 2</h3>
+            </a>
+            <div class='details'>PNG, 34MB</div>
+          </section>
+
+          <section>
+            <a class='govuk-link' href='//downloads.ctfassets.net/dvmeh832nmjc/4sEf3rC0sZ0h0unnOZuYvj/fdefcc2428741fbd0d87e9e959d0af57/LOGO_MG_7598.png' download>
+              <img class='thumbnail--image' src='//downloads.ctfassets.net/dvmeh832nmjc/4sEf3rC0sZ0h0unnOZuYvj/fdefcc2428741fbd0d87e9e959d0af57/LOGO_MG_7598.png?w=300' alt='A circle of children copy a practitioner who is showing them how to do hand motions along to a nursery rhyme'>
+              <h3>Branded image for social media - Image 3</h3>
+            </a>
+            <div class='details'>PNG, 33MB</div>
+          </section>
+
+          <section>
+            <a class='govuk-link' href='//downloads.ctfassets.net/dvmeh832nmjc/6gyFHcWEU9FayktTesCaRU/410c1f2b58495288562cb6646bae9ed3/LOGO_MG_8341.png' download>
+              <img class='thumbnail--image' src='//downloads.ctfassets.net/dvmeh832nmjc/6gyFHcWEU9FayktTesCaRU/410c1f2b58495288562cb6646bae9ed3/LOGO_MG_8341.png?w=300' alt='A practitioner helps three children complete a giant alphabet jigsaw puzzle'>
+              <h3>Branded image for social media - Image 4</h3>
+            </a>
+            <div class='details'>PNG, 35MB</div>
+          </section>
+
+          <section>
+            <a class='govuk-link' href='//images.ctfassets.net/dvmeh832nmjc/2PZjIektOQRfqfkC03CF65/460d5815a35e2b1fc7677e9fb6b7f684/LOGO.jpg' download>
+              <img class='thumbnail--image' src='//images.ctfassets.net/dvmeh832nmjc/2PZjIektOQRfqfkC03CF65/460d5815a35e2b1fc7677e9fb6b7f684/LOGO.jpg?w=300' alt='Babies holding colourful plastic building blocks'>
+              <h3>Branded image for social media - Image 5</h3>
+            </a>
+            <div class='details'>JPG, 1MB</div>
+          </section>
+
+          <h2>Example communications</h2>
+          <section>
+            <a class='govuk-link' href='//assets.ctfassets.net/dvmeh832nmjc/7he8k5NyWHqaZT0GMFQEO/a5a5ca67f2c35339ef8292d50477f83b/Early_years_child_development_training_-_Promotional_text_for_.docx'>
+              <img class='thumbnail--image' src='//images.ctfassets.net/dvmeh832nmjc/5wRtEAXrwwMEyMfLWBe0wQ/b494ad33cdad7c2cd5cc49c484f92f6b/Promotional_text_thumbnail.png' alt='Promotional text for websites thumbnail'>
+              <h3>Promotional text for websites and newsletters</h3>
+            </a>
+            <div class='details'>DOCX, 7.4kB</div>
+          </section>
+
+          <section>
+            <a class='govuk-link' href='//assets.ctfassets.net/dvmeh832nmjc/4pTBXtelUNEAc8bodOm7pz/b117314de15163f3fc4076a9ad850554/Early_years_child_development_training_-_Promotional_text_for_.txt'>
+              <img class='thumbnail--image' src='//images.ctfassets.net/dvmeh832nmjc/5wRtEAXrwwMEyMfLWBe0wQ/b494ad33cdad7c2cd5cc49c484f92f6b/Promotional_text_thumbnail.png' alt='Promotional text for websites thumbnail'>
+              <h3>Promotional text for websites and newsletters</h3>
+            </a>
+            <div class='details'>TXT, 1kB</div>
+          </section>
+        </div>
