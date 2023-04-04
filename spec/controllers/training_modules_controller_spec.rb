@@ -18,7 +18,6 @@ RSpec.describe TrainingModulesController, type: :controller do
       let(:timeout) { Rails.configuration.user_timeout_minutes.minutes + 1.second }
 
       it 'redirects to timeout error' do
-        skip 'fix for github'
         get :index, session: { 'warden.user.user.session' => { 'last_request_at' => timeout.ago } }
         expect(response).to redirect_to(users_timeout_path)
       end
