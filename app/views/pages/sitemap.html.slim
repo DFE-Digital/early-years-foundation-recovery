@@ -5,14 +5,10 @@
     h1= t('.heading')
 
     ul
-      /li
-        = govuk_link_to 'This Sitemap', static_path('sitemap')
       li
         = govuk_link_to 'Accessibility statement', static_path('accessibility-statement')
       li
         = govuk_link_to 'About this training course', course_overview_path
-      li
-        = govuk_link_to "What's new", static_path('whats-new')
       li
         = govuk_link_to 'Privacy policy', static_path('privacy-policy')
       li
@@ -21,13 +17,5 @@
         = govuk_link_to 'Terms and conditions', static_path('terms-and-conditions')
       li
         = govuk_link_to 'Free internet, wifi and data resources', static_path('wifi-and-data')
-      /li
-        = govuk_link_to 'Problems signing in', static_path('other-problems-signing-in')
-
-    ul
       li
-        = govuk_link_to 'My account', user_path
-      li
-        = govuk_link_to 'My modules', my_modules_path
-      li
-        = govuk_link_to 'Learning log', user_notes_path
+        = govuk_link_to 'Create an Early years child development training account', new_user_registration_path

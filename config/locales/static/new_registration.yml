@@ -1,9 +1,9 @@
 ---
 en:
-  static:
+  pages:
     new_registration:
       heading: Update your registration details
-      content: |
+      body: |
         You need to update your registration details to access the Early Years Child Development Training course.
 
         We've changed the information we are asking for you to give to register for an account.

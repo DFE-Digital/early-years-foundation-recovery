@@ -49,7 +49,7 @@ development:
 content:
   <<: *defaults
   DASHBOARD_UPDATE: false
-  CONTENTFUL: false
+  CONTENTFUL: true
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
