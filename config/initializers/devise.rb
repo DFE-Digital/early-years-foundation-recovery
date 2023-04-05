@@ -9,7 +9,8 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 
-class TimeoutFailureApp < Devise::FailureApp
+class CustomFailureApp < Devise::FailureApp
+  # @see TimeoutController#timeout_user
   def redirect
     store_location!
     message = warden.message || warden_options[:message]
@@ -24,7 +25,7 @@ protected
 
   # Patched to pass {unlock_in} to 'en.devise.failure.locked'
   #
-  # @return [String] the i18n message
+  # @return [String]
   def i18n_message(default = nil)
     message = warden_message || default || :unauthenticated
 
@@ -313,7 +314,7 @@ Devise.setup do |config|
   # change the failure app, you can configure them inside the config.warden block.
   #
   config.warden do |manager|
-    manager.failure_app = TimeoutFailureApp
+    manager.failure_app = CustomFailureApp
     #   manager.intercept_401 = false
     #   manager.default_strategies(scope: :user).unshift :some_external_strategy
   end

@@ -48,13 +48,15 @@ development:
 # ey-recovery-content
 content:
   <<: *defaults
+  # jobs
   DASHBOARD_UPDATE: false
+  # cms
   CONTENTFUL_PREVIEW: true
   CONTENTFUL_ENVIRONMENT: test
-  # modal debugging
+  # session expiration
   TIMEOUT_MINUTES: 1
-  TIMEOUT_WARNING_MINUTES: 0.5
   TIMEOUT_MODAL_VISIBLE: 0.5
+  TIMEOUT_WARNING_MINUTES: 0.5
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
