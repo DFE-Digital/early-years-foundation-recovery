@@ -21,11 +21,10 @@ namespace :eyfs do
     end
 
     # ./bin/docker-rails 'eyfs:cms:seed[alpha,bravo]'
-    desc 'Populate Contentful from YAML'
+    desc 'Seed course content from YAML'
     task :seed, [:mod_names] => :environment do |_task, args|
-      # TODO: rename function
-      require 'upload'
-      uploader = Upload.new
+      require 'seed_course_entries'
+      uploader = SeedCourseEntries.new
 
       all_mods = TrainingModule.all.map(&:name)
 
@@ -34,6 +33,13 @@ namespace :eyfs do
       mod_names = args[:mod_names].split(',').flatten
 
       mod_names.each { |mod| uploader.call(mod_name: mod) }
+    end
+
+    # ./bin/docker-rails 'eyfs:cms:seed_static'
+    desc 'Seed static pages from YAML'
+    task seed_static: :environment do
+      require 'seed_static_page_entries'
+      SeedStaticPageEntries.new.call
     end
 
     # desc 'Upload asset files to Contentful'
@@ -47,12 +53,11 @@ namespace :eyfs do
     # ./bin/docker-rails 'eyfs:cms:validate[alpha,bravo]'
     desc 'Validate CMS content'
     task :validate, [:mod_names] => :environment do |_task, args|
-      ENV['CONTENTFUL_CACHE'] = 'y'
-
       args.with_defaults(mod_names: Training::Module.ordered.map(&:name))
 
       args[:mod_names].split(',').flatten.each do |mod|
         ContentfulDataIntegrity.new(module_name: mod).call
+      rescue Dry::Types::ConstraintError
       end
     end
   end

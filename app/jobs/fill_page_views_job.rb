@@ -8,13 +8,13 @@ class FillPageViewsJob < Que::Job
 
   def run(*)
     require 'fill_page_views'
-    log 'Running FillPageViewsJob:'
-
+    Training::Module.cache.clear
+    log 'FillPageViewsJob: Running'
     FillPageViews.new.call
   end
 
   def handle_error(error)
-    message = "FillPageViewsJob Failed: #{error.message}"
+    message = "FillPageViewsJob: Failed with '#{error.message}'"
     log(message)
     Sentry.capture_message(message) if Rails.application.live?
   end

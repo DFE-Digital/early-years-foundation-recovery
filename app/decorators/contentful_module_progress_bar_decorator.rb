@@ -66,7 +66,7 @@ private
   # @param node_item [Module::Content]
   # @return [Hash{Symbol => String,Symbol}]
   def node_icon_params(node_item)
-    if node_completed?(node_item)
+    if completed? || node_completed?(node_item)
       {
         icon_type: 'circle-check',
         style: :solid,

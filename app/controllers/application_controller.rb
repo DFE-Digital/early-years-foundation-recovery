@@ -1,6 +1,9 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_analytics_tracking_id, :set_hotjar_site_id, :set_internal_mailbox_email_address
+  before_action :set_analytics_tracking_id,
+                :set_hotjar_site_id,
+                :set_internal_mailbox_email_address,
+                :prepare_cms
 
   helper_method :timeout_timer
 
@@ -26,6 +29,15 @@ class ApplicationController < ActionController::Base
   def clear_flash
     flash[:alert] = nil
     flash[:error] = nil
+  end
+
+  # @return [Symbol]
+  def prepare_cms
+    # ensure correct API for each request
+    ContentfulModel.use_preview_api = Rails.application.preview?
+    # memoise the latest release timestamp
+    Training::Module.reset_cache_key!
+    :done
   end
 
   def set_analytics_tracking_id

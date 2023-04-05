@@ -9,11 +9,7 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 
-# Turbo doesn't work with devise by default.
-# Keep tabs on https://github.com/heartcombo/devise/issues/5446 for a possible fix
-# Fix from https://gorails.com/episodes/devise-hotwire-turbo
-
-class CustomFailureApp < Devise::FailureApp
+class TimeoutFailureApp < Devise::FailureApp
   def redirect
     store_location!
     message = warden.message || warden_options[:message]
@@ -21,43 +17,6 @@ class CustomFailureApp < Devise::FailureApp
       redirect_to users_timeout_path
     else
       super
-    end
-  end
-
-  def respond
-    if request_format == :turbo_stream
-      redirect
-    else
-      super
-    end
-  end
-
-  def skip_format?
-    %w[html turbo_stream */*].include? request_format.to_s
-  end
-
-protected
-
-  # Add `Devise.unlock_in` to locales
-  #
-  # @return [String] the i18n message
-  def i18n_message(default = nil)
-    message = warden_message || default || :unauthenticated
-
-    if message.is_a?(Symbol)
-      options = {}
-      options[:resource_name] = scope
-      options[:scope] = 'devise.failure'
-      options[:unlock_in] = scope_class.unlock_in / 3600
-      options[:default] = [message]
-      auth_keys = scope_class.authentication_keys
-      keys = (auth_keys.respond_to?(:keys) ? auth_keys.keys : auth_keys).map { |key| scope_class.human_attribute_name(key) }
-      options[:authentication_keys] = keys.join(I18n.translate(:"support.array.words_connector"))
-      options = i18n_options(options)
-
-      I18n.t(:"#{scope}.#{message}", **options)
-    else
-      message.to_s
     end
   end
 end
@@ -72,7 +31,7 @@ Devise.setup do |config|
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
-  config.parent_controller = 'TurboDeviseController'
+  # config.parent_controller = 'DeviseController'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -314,7 +273,7 @@ Devise.setup do |config|
   # should add them to the navigational formats lists.
   #
   # The "*/*" below is required to match Internet Explorer requests.
-  config.navigational_formats = ['*/*', :html, :turbo_stream]
+  config.navigational_formats = ['*/*', :html]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :get
@@ -329,7 +288,7 @@ Devise.setup do |config|
   # change the failure app, you can configure them inside the config.warden block.
   #
   config.warden do |manager|
-    manager.failure_app = CustomFailureApp
+    manager.failure_app = TimeoutFailureApp
     #   manager.intercept_401 = false
     #   manager.default_strategies(scope: :user).unshift :some_external_strategy
   end
@@ -360,4 +319,7 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+
+  config.responder.error_status = :unprocessable_entity
+  config.responder.redirect_status = :see_other
 end

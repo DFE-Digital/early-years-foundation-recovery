@@ -22,6 +22,9 @@ services:
       - RAILS_ENV=development
       - DOMAIN=app:3000
       - RAILS_SERVE_STATIC_FILES=true
+      # overrides
+      - TIMEOUT_MINUTES
+      - SENTRY_TOKEN
     volumes:
       - .:/srv
     tty: true
@@ -34,6 +37,9 @@ services:
     environment:
       - RAILS_ENV=development
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
+      - DASHBOARD_UPDATE=false
+      # overrides
+      - SENTRY_TOKEN
       - DASHBOARD_UPDATE_INTERVAL
       - GOOGLE_CLOUD_BUCKET
     depends_on:

@@ -17,6 +17,62 @@ SET row_security = off;
 
 
 --
+-- Name: citext; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION citext; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION citext IS 'data type for case-insensitive character strings';
+
+
+--
+-- Name: fuzzystrmatch; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS fuzzystrmatch WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION fuzzystrmatch; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION fuzzystrmatch IS 'determine similarities and distance between strings';
+
+
+--
+-- Name: pgcrypto; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pgcrypto; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
+
+
+--
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
+
+
+--
 -- Name: que_validate_tags(jsonb); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -472,6 +528,37 @@ WITH (fillfactor='90');
 
 
 --
+-- Name: releases; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.releases (
+    id bigint NOT NULL,
+    name character varying NOT NULL,
+    properties jsonb DEFAULT '{}'::jsonb NOT NULL,
+    "time" timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: releases_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.releases_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: releases_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.releases_id_seq OWNED BY public.releases.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -644,6 +731,13 @@ ALTER TABLE ONLY public.que_jobs ALTER COLUMN id SET DEFAULT nextval('public.que
 
 
 --
+-- Name: releases id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.releases ALTER COLUMN id SET DEFAULT nextval('public.releases_id_seq'::regclass);
+
+
+--
 -- Name: user_answers id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -729,6 +823,14 @@ ALTER TABLE ONLY public.que_values
 
 
 --
+-- Name: releases releases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.releases
+    ADD CONSTRAINT releases_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -807,6 +909,20 @@ CREATE UNIQUE INDEX index_ahoy_visits_on_visit_token ON public.ahoy_visits USING
 --
 
 CREATE INDEX index_notes_on_user_id ON public.notes USING btree (user_id);
+
+
+--
+-- Name: index_releases_on_name_and_time; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_releases_on_name_and_time ON public.releases USING btree (name, "time");
+
+
+--
+-- Name: index_releases_on_properties; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_releases_on_properties ON public.releases USING gin (properties jsonb_path_ops);
 
 
 --
@@ -1025,6 +1141,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20221110104509'),
 ('20230117091239'),
 ('20230223151527'),
-('20230224151527');
+('20230224151527'),
+('20230316130014');
 
 

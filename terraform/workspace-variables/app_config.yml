@@ -41,14 +41,16 @@ development:
   DOMAIN: ey-recovery-dev.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-dev
   TRAINING_MODULES: demo-modules
+  # CONTENTFUL_ENVIRONMENT: test # reinstate for pa11y
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-development
-  DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # every 5 mins (default: daily at noon)
+  # DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # every 5 mins (default: daily at noon)
 
 # ey-recovery-content
 content:
   <<: *defaults
   DASHBOARD_UPDATE: false
-  CONTENTFUL: false
+  CONTENTFUL_PREVIEW: true
+  # CONTENTFUL_ENVIRONMENT: test
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
