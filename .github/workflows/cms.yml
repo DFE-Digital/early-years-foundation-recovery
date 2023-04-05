@@ -6,19 +6,19 @@ on:
   workflow_dispatch:
     inputs:
       alias:
-        description: Contentful alias to target (master)
+        description: Contentful alias to target (master, staging, test)
         type: string
-        default: staging # master
+        default: master
 
 jobs:
   test:
-    name: Preflight
+    name: Content 2i
     runs-on: ubuntu-latest
     environment: test
     env:
-      CONTENTFUL_ENVIRONMENT: ${{ inputs.alias }})
-      # https://github.com/DFE-Digital/early-years-foundation-recovery/settings/secrets/dependabot
+      RAILS_ENV: test
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      CONTENTFUL_ENVIRONMENT: ${{ inputs.alias }}
 
     steps:
       -
@@ -34,10 +34,10 @@ jobs:
         name: Install Rubygems
         run: bundle install --jobs 20 --retry 3
       -
-        name: Validate draft
-        run: bundle exec rails eyfs:cms:validate
+        name: Validate draft (pre-release)
         env:
-          CONTENTFUL_PREVIEW: true
+          CONTENTFUL_PREVIEW: 'on'
+        run: bundle exec rails eyfs:cms:validate
       -
-        name: Validate published
+        name: Validate published (post-release)
         run: bundle exec rails eyfs:cms:validate
