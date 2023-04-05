@@ -13,5 +13,3 @@ applications:
     image: ghcr.io/dfe-digital/early-years-foundation-recovery:latest
   health_check_type: http
   health_check_http_endpoint: /health
-  timeout: 300
-  health-check-invocation-timeout: 10
