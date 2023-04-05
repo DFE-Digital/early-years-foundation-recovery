@@ -11,15 +11,15 @@
 
 class CustomFailureApp < Devise::FailureApp
   # @see TimeoutController#timeout_user
-  def redirect
-    store_location!
-    message = warden.message || warden_options[:message]
-    if message == :timeout
-      redirect_to users_timeout_path
-    else
-      super
-    end
-  end
+  # def redirect
+  #   store_location!
+  #   message = warden.message || warden_options[:message]
+  #   if message == :timeout
+  #     redirect_to users_timeout_path
+  #   else
+  #     super
+  #   end
+  # end
 
 protected
 
