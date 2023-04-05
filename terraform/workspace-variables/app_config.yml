@@ -50,10 +50,11 @@ content:
   <<: *defaults
   DASHBOARD_UPDATE: false
   CONTENTFUL_PREVIEW: true
+  CONTENTFUL_ENVIRONMENT: test
   # modal debugging
   TIMEOUT_MINUTES: 1
   TIMEOUT_WARNING_MINUTES: 0.5
-  CONTENTFUL_ENVIRONMENT: test
+  TIMEOUT_MODAL_VISIBLE: 0.5
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
