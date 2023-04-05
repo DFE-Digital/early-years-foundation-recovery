@@ -3,7 +3,13 @@ module ContentHelper
   # @param markdown [String]
   # @return [String]
   def translate_markdown(markdown)
-    raw Govspeak::Document.to_html(markdown, sanitize: false)
+    if markdown.is_a?(String)
+      raw Govspeak::Document.to_html(markdown, sanitize: false)
+    else
+      message = 'DEBUGGING: flash message was not a string'
+      Sentry.capture_message(message)
+      message
+    end
   end
 
   # Date format guidelines: "1 June 2002"
