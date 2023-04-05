@@ -9,14 +9,41 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 
-class TimeoutFailureApp < Devise::FailureApp
+class CustomFailureApp < Devise::FailureApp
+  # @see TimeoutController#timeout_user
   def redirect
     store_location!
     message = warden.message || warden_options[:message]
     if message == :timeout
+      # NB: redirection closes session without JS and negates a flash message
       redirect_to users_timeout_path
     else
       super
+    end
+  end
+
+protected
+
+  # Patched to pass {unlock_in} to 'en.devise.failure.locked'
+  #
+  # @return [String]
+  def i18n_message(default = nil)
+    message = warden_message || default || :unauthenticated
+
+    if message.is_a?(Symbol)
+      options = {}
+      options[:resource_name] = scope
+      options[:scope] = 'devise.failure'
+      options[:unlock_in] = Devise.unlock_in.in_hours.to_i
+      options[:default] = [message]
+      auth_keys = scope_class.authentication_keys
+      keys = (auth_keys.respond_to?(:keys) ? auth_keys.keys : auth_keys).map { |key| scope_class.human_attribute_name(key) }
+      options[:authentication_keys] = keys.join(I18n.translate(:"support.array.words_connector"))
+      options = i18n_options(options)
+
+      I18n.t(:"#{scope}.#{message}", **options)
+    else
+      message.to_s
     end
   end
 end
@@ -288,7 +315,7 @@ Devise.setup do |config|
   # change the failure app, you can configure them inside the config.warden block.
   #
   config.warden do |manager|
-    manager.failure_app = TimeoutFailureApp
+    manager.failure_app = CustomFailureApp
     #   manager.intercept_401 = false
     #   manager.default_strategies(scope: :user).unshift :some_external_strategy
   end
