@@ -43,20 +43,18 @@ development:
   TRAINING_MODULES: demo-modules
   # CONTENTFUL_ENVIRONMENT: test # reinstate for pa11y
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-development
-  # DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # every 5 mins (default: daily at noon)
 
 # ey-recovery-content
 content:
   <<: *defaults
   # jobs
   DASHBOARD_UPDATE: false
+  # DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # every 5 mins (default: daily at noon)
+
   # cms
   CONTENTFUL_PREVIEW: true
-  CONTENTFUL_ENVIRONMENT: test
-  # session expiration
-  TIMEOUT_MINUTES: 3
-  TIMEOUT_MODAL_VISIBLE: 1
-  TIMEOUT_WARNING_MINUTES: 1
+  # CONTENTFUL_ENVIRONMENT: test
+
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
