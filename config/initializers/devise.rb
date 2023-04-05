@@ -20,18 +20,6 @@ class TimeoutFailureApp < Devise::FailureApp
     end
   end
 
-  def respond
-    if request_format == :turbo_stream
-      redirect
-    else
-      super
-    end
-  end
-
-  def skip_format?
-    %w[html turbo_stream */*].include? request_format.to_s
-  end
-
 protected
 
   # Patched to pass {unlock_in} to 'en.devise.failure.locked'
