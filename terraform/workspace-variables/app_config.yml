@@ -55,6 +55,11 @@ content:
   CONTENTFUL_PREVIEW: true
   # CONTENTFUL_ENVIRONMENT: test
 
+  # timeout
+  TIMEOUT_MINUTES: 3
+  TIMEOUT_MODAL_VISIBLE: 1
+  TIMEOUT_WARNING_MINUTES: 1
+
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
