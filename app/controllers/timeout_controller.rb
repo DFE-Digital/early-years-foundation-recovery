@@ -3,7 +3,9 @@ class TimeoutController < Devise::SessionsController
 
   # @see TimeoutHelper
   def timeout_user
-    sign_out current_user
+    # disabled to test outcome of an expired session on site access
+    # a 500 error was observed to block even public pages when not called
+    # sign_out current_user
   end
 
   # @note clear etags to prevent caching
