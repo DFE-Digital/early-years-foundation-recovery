@@ -85,6 +85,7 @@ gem 'que-scheduler'
 # DRY-RB
 gem 'dry-core'
 gem 'dry-initializer'
+gem 'dry-struct'
 gem 'dry-types'
 
 group :development, :test do

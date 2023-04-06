@@ -1,9 +1,9 @@
 ---
 en:
-  static:
+  pages:
     accessibility_statement:
       heading: Accessibility statement
-      content: |
+      body: |
         This accessibility statement applies to Early years child development training.
 
         This website is run by the Department for Education. We want as many people

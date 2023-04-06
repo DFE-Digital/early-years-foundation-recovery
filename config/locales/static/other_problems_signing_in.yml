@@ -1,9 +1,9 @@
 ---
 en:
-  static:
+  pages:
     other_problems_signing_in:
       heading: Other problems signing in
-      content: |
+      body: |
         If you have forgotten your password, you can [reset it](%{reset_password}){:class="govuk-link"}.
 
         For any other problems signing in, please [contact us](%{contact_us}){:target="_blank"}{:class="govuk-link"}.

@@ -1,9 +1,9 @@
 ---
 en:
-  static:
+  pages:
     whats_new:
       heading: What's new in the training
-      content: |
+      body: |
         <div class="govuk-inset-text">
           We’ve added a few things since you were last here. 
         </div>

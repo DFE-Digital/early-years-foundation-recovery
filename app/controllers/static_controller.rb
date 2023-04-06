@@ -1,17 +1,25 @@
+# YAML pages
 class StaticController < ApplicationController
+  before_action :authenticate_registered_user!, if: :restricted?
+
   def show
     if template_valid?
       track('static_page')
-      render template
+      render "pages/#{template}"
     else
-      render 'errors/not_found'
+      render 'errors/not_found', status: :not_found
     end
   end
 
 private
 
+  # @return [Boolean]
+  def restricted?
+    %w[whats-new].include? page_params[:id]
+  end
+
   def template_valid?
-    template_exists?(template, lookup_context.prefixes)
+    template_exists?(template, :pages)
   end
 
   def template

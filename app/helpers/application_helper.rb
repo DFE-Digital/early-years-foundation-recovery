@@ -61,19 +61,23 @@ module ApplicationHelper
     ModuleProgress.new(user: current_user, mod: mod)
   end
 
+  # @return [Boolean]
   def track_analytics?
     cookies[:track_analytics] == 'true'
   end
 
+  # @param page [nil, ::ModuleItem, ::Training::Page, ::Page]
   # @return [String]
-  def html_title(module_item)
-    module_title = module_item&.parent&.title
-    title = t(params.permit('controller', 'action', 'id').values.join('.'), scope: 'html_title', default: module_item&.model&.heading)
-    [
-      service_name,
-      module_title,
-      title,
-    ].compact.join(' : ')
+  def html_title(page)
+    # ::ModuleItem or ::Training::Page
+    module_title = page.parent.title if page.respond_to?(:parent)
+    # ::Training::Page, ::Page vs ::ModuleItem
+    default = page.model.heading if page
+    # I18n
+    custom = params.permit('controller', 'action', 'id').values.join('.')
+    page_title = t(custom, scope: 'html_title', default: default)
+
+    [service_name, module_title, page_title].compact.join(' : ')
   end
 
   # @return [String]

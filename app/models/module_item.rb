@@ -188,6 +188,11 @@ class ModuleItem < YamlBase
   end
 
   # @return [Boolean]
+  def is_question?
+    type.match?(/question/)
+  end
+
+  # @return [Boolean]
   def submodule_intro?
     type.eql?('sub_module_intro')
   end

@@ -7,6 +7,12 @@ RSpec.describe Training::Module, :cms, type: :model do
     skip 'WIP' unless Rails.application.cms?
   end
 
+  describe '.cache_key' do
+    it 'has a default' do
+      expect(described_class.cache_key).to eql 'initial'
+    end
+  end
+
   describe '.by_name' do
     it 'does not load linked entries' do
       expect(mod.pages).to be_empty

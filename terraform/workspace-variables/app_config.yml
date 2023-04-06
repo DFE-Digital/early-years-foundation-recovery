@@ -19,7 +19,6 @@ defaults: &defaults
 production:
   <<: *defaults
   DOMAIN: child-development-training.education.gov.uk
-  WEB_CONCURRENCY: 8
   GOVUK_WEBSITE_ROOT: child-development-training
   TRACKING_ID: GTM-NFZ88TP  # Live data
   HOTJAR_SITE_ID: 3169682
@@ -29,7 +28,6 @@ production:
 # ey-recovery-staging
 staging:
   <<: *defaults
-  WEB_CONCURRENCY: 4
   DOMAIN: ey-recovery-staging.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-staging
   TRACKING_ID: GTM-W6W95FD  # Test data
@@ -41,14 +39,22 @@ development:
   DOMAIN: ey-recovery-dev.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-dev
   TRAINING_MODULES: demo-modules
+  # cms
+  # CONTENTFUL_ENVIRONMENT: test # reinstate for pa11y
+  # jobs
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-development
-  DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # every 5 mins (default: daily at noon)
 
 # ey-recovery-content
 content:
   <<: *defaults
+  # jobs
   DASHBOARD_UPDATE: false
-  CONTENTFUL: false
+  # DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # every 5 mins (default: daily at noon)
+
+  # cms
+  CONTENTFUL_PREVIEW: true
+  # CONTENTFUL_ENVIRONMENT: test
+
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
