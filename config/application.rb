@@ -73,12 +73,12 @@ module EarlyYearsFoundationRecovery
     end
 
     # @return [Boolean]
-    def staging?
+    def candidate?
       ENV['WORKSPACE'].eql?('staging')
     end
 
     # @return [Boolean]
-    def dev?
+    def main?
       ENV['WORKSPACE'].eql?('development')
     end
 
@@ -107,7 +107,7 @@ module EarlyYearsFoundationRecovery
     def preview?
       if Rails.env.test? && ENV['CONTENTFUL_PREVIEW'].blank?
         false
-      elsif Rails.env.development? || staging? || ENV['CONTENTFUL_PREVIEW'].present?
+      elsif Rails.env.development? || candidate? || ENV['CONTENTFUL_PREVIEW'].present?
         true
       else
         false
