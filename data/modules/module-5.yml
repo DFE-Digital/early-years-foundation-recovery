@@ -43,11 +43,7 @@ module-5:
     type: formative_questionnaire
   5-1-2:
     type: text_page         # submodule 1 / topic 2
-  5-1-2-1a:
-    type: text_page
-  5-1-2-1b:
-    type: formative_questionnaire
-  5-1-2-2:
+  5-1-2-1:
     type: text_page
   5-1-3:
     type: text_page         # submodule 1 / topic 3
