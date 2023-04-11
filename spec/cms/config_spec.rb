@@ -24,6 +24,6 @@ RSpec.describe 'Contentful configuration', :cms do
     expect(config.contentful_space).to be_present
     expect(config.contentful_delivery_access_token).to be_present
     expect(config.contentful_preview_access_token).to be_present
-    expect(config.contentful_management_access_token).to be_present
+    expect(config.contentful_management_access_token).not_to be_present # user specific
   end
 end
