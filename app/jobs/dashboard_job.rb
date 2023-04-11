@@ -12,7 +12,7 @@ class DashboardJob < Que::Job
   def run(upload: Rails.application.dashboard?)
     log "DashboardJob: Running upload=#{upload}"
 
-    Dashboard.new(path: build_dir).call(upload: upload)
+    Dashboard.new(path: build_dir).call(upload: upload, clean: true)
   end
 
   def handle_error(error)
