@@ -43,6 +43,7 @@ class User < ApplicationRecord
 
   has_many :user_answers
   has_many :user_assessments
+  has_many :responses
   has_many :visits, class_name: 'Ahoy::Visit'
   has_many :events, class_name: 'Ahoy::Event'
   has_many :notes
@@ -102,6 +103,11 @@ class User < ApplicationRecord
     end
 
     super
+  end
+
+  # @return [Array<Training::Modules>]
+  def active_modules
+    Training::Module.ordered.reject(&:draft?).select { |mod| module_time_to_completion.key?(mod.name) }
   end
 
   # @see Devise::Confirmable

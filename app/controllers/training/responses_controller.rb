@@ -1,5 +1,7 @@
 module Training
-  class ResponsesController < Contentful::BaseController
+  class ResponsesController < ApplicationController
+    # include Contentfully
+
     before_action :authenticate_registered_user!, :show_progress_bar, :module_item
     before_action :track_events, only: :show
     helper_method :training_module, :current_user_response, :content

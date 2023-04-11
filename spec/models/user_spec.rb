@@ -139,4 +139,15 @@ RSpec.describe User, type: :model do
       expect(user.closed_at).to be_within(30).of(Time.zone.now)
     end
   end
+
+
+  describe '#active_modules' do
+    before do
+      skip 'WIP' unless Rails.application.cms?
+    end
+
+    it 'filters by user progress state' do
+      binding.pry
+    end
+  end
 end

@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe 'Summative questionnaire' do
+RSpec.describe 'Summative assessment', :cms, type: :system do
   include_context 'with progress'
   include_context 'with user'
 
   let(:first_question_path) { '/modules/alpha/questionnaires/1-3-2-1' }
 
   before do
-    skip 'WIP' if Rails.application.cms?
+    skip 'WIP' unless Rails.application.cms?
     start_summative_assessment(alpha)
   end
 

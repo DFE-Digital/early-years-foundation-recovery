@@ -1,4 +1,4 @@
-class Training::ModulesController < Contentful::BaseController
+class Training::ModulesController < ApplicationController
   before_action :authenticate_registered_user!, only: :show
 
   # helper_method :mod # TODO: replace use of instance variables with helper methods throughout
@@ -14,9 +14,9 @@ class Training::ModulesController < Contentful::BaseController
     if mod.nil?
       redirect_to my_modules_path
     else
-      @module_progress_bar  = ModuleProgressBarDecorator.new(progress)
+      @module_progress_bar  = ContentfulModuleProgressBarDecorator.new(progress)
       @module_progress      = ContentfulModuleOverviewDecorator.new(progress)
-      # @assessment_progress  = assessment
+      @assessment_progress  = assessment
 
       render partial: 'progress' if debug?
     end
@@ -36,7 +36,7 @@ protected
     @progress ||= helpers.cms_module_progress(mod)
   end
 
-  # def assessment
-  #   @assessment ||= helpers.assessment_progress(mod)
-  # end
+  def assessment
+    @assessment ||= helpers.cms_assessment_progress(mod)
+  end
 end

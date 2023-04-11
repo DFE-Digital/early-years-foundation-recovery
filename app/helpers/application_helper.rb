@@ -39,6 +39,10 @@ module ApplicationHelper
               .dig('dependencies', 'govuk-frontend')
               .tr('^', ''),
           } },
+        { key: { text: 'Contentful' }, value: { text: Rails.application.cms? ? 'Yes' : 'No' } },
+        { key: { text: '--Access' }, value: { text: Rails.application.preview? ? 'Preview access' : 'Delivery access' } },
+        { key: { text: '--Space' }, value: { text: Rails.configuration.contentful_space } },
+        { key: { text: '--Environment' }, value: { text: Rails.configuration.contentful_environment } },
       ],
     )
   end
@@ -47,6 +51,12 @@ module ApplicationHelper
   # @return [SummativeAssessmentProgress]
   def assessment_progress(mod)
     SummativeAssessmentProgress.new(user: current_user, mod: mod)
+  end
+
+  # @param mod [Training::Module]
+  # @return [ContentfulAssessmentProgress]
+  def cms_assessment_progress(mod)
+    ContentfulAssessmentProgress.new(user: current_user, mod: mod)
   end
 
   # @param mod [Training::Module]
