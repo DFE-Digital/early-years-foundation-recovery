@@ -30,7 +30,7 @@ module-5:
       1_7_to_12_months:
         multi_select: false
         label: |
-          Which of the following physical actions would you expect a child aged between 7 and 12 months to be able to achieve?
+          Which of the following physical actions would you expect a baby aged between 7 and 12 months to be able to achieve?
         assessment_summary:
         assessment_fail_summary: |
           During this period, with the correct support, gross motor skills will develop to include:

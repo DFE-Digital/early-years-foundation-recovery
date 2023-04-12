@@ -122,41 +122,23 @@ module-5:
         correct_answers:
           - 2
 
-  5-1-2-1b:
-    questions:
-      1_moderate_vigorous:
-        multi_select: false
-        body: |
-          According to Gesell’s critics, which area of child development did his theories leave out?
-        assessment_summary: |
-          Fellow psychologists, like Piaget, criticised Gesell’s theory. They argued that he did not take a child’s emotional development into consideration. They also disagreed with Gesell’s belief that the environment or interacting with others were not important for children’s development.
-        assessment_fail_summary: |
-          Fellow psychologists, like Piaget, criticised Gesell’s theory. They argued that he did not take a child’s emotional development into consideration. They also disagreed with Gesell’s belief that the environment or interacting with others were not important for children’s development.
-        answers:
-          1: "emotional"
-          2: "social"
-          3: "physical"
-          4: "intellectual"
-        correct_answers:
-          - 1
-
   5-1-3-2b:
     questions:
       1_calories:
         multi_select: false
         body: |
-          How many calories do toddlers and pre school aged children need in a day?
+          How many calories do children aged between 1 and 4 years old need in a day?
         assessment_summary: |
-          A toddler or pre school aged child needs around 1000 to 1800 calories in a day. These calories should come from a wide range of foods that contain a healthy balance from all food groups.
+          A child aged between 1 and 4 years old needs between 700 and 1400 calories in a day. These calories should come from a wide range of foods that contain a healthy balance from all food groups.
 
           You should teach good habits around healthy eating to children of this age so they continue to eat well throughout their life.
         assessment_fail_summary: |
-          A toddler or pre school aged child needs around 1000 to 1800 calories in a day. These calories should come from a wide range of foods that contain a healthy balance from all food groups.
+          A child aged between 1 and 4 years old needs between 700 and 1400 calories in a day. These calories should come from a wide range of foods that contain a healthy balance from all food groups.
 
           You should teach good habits around healthy eating to children of this age so they continue to eat well throughout their life.
         answers:
           1: "800 to 900"
-          2: "1000 to 1800"
+          2: "700 to 1400"
           3: "1800 to 2000"
           4: "2000 to 2500"
         correct_answers:
@@ -221,11 +203,11 @@ module-5:
 
           Freedom to explore can improve children’s strength.
         assessment_summary: |
-          If children were able to experience an outdoor environment with no time constraints, they may have benefitted from freedom to explore or learn new skills. For example, they could have learned how to forward roll or take part in racing activities. Extended time to practice will have improved their strength, agility, balance and confidence.
+          If children were able to experience different outdoor and indoor environments with no time constraints, they may have benefitted from freedom to explore or learn new skills. For example, they could have learned how to forward roll or take part in racing activities. Extended time to practice will have improved their strength, agility, balance and confidence.
 
           You should plan your curriculum to include time for children to explore and test new skills.
         assessment_fail_summary: |
-          If children were able to experience an outdoor environment with no time constraints, they may have benefitted from freedom to explore or learn new skills. For example, they could have learned how to forward roll or take part in racing activities. Extended time to practice will have improved their strength, agility, balance and confidence.
+          If children were able to experience different outdoor and indoor environments with no time constraints, they may have benefitted from freedom to explore or learn new skills. For example, they could have learned how to forward roll or take part in racing activities. Extended time to practice will have improved their strength, agility, balance and confidence.
 
           You should plan your curriculum to include time for children to explore and test new skills.
         answers:
@@ -274,16 +256,16 @@ module-5:
         body: |
           Which of the following is most effective for supporting children’s physical development?
         assessment_summary: |
-          It is important that you use your knowledge of a child’s current level of development and their expected level of development to plan an environment that includes adult and child led activities.
+          It is important that you plan a curriculum and environment that includes adult and child led activities. You should then use your knowledge of each child’s current level of development and their expected level of development to plan how to support their individual progress.
 
-          You should also plan your environment to ensure that children have access to resources that encourage unplanned opportunities.
+          You should also set up your environment to ensure that children have access to resources that encourage unplanned opportunities and spontaneous play.
         assessment_fail_summary: |
-          It is important that you use your knowledge of a child’s current level of development and their expected level of development to plan an environment that includes adult and child led activities.
+          It is important that you plan a curriculum and environment that includes adult and child led activities. You should then use your knowledge of each child’s current level of development and their expected level of development to plan how to support their individual progress.
 
-          You should also plan your environment to ensure that children have access to resources that encourage unplanned opportunities.
+          You should also set up your environment to ensure that children have access to resources that encourage unplanned opportunities and spontaneous play.
         answers:
-          1: "Child led activity "
-          2: "Adult led activity "
+          1: "Child led activity"
+          2: "Adult led activity"
           3: "Unplanned opportunities"
           4: "A combination of child led, adult led and unplanned opportunities"
         correct_answers:
