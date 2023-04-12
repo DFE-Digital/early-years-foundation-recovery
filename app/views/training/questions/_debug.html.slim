@@ -1,6 +1,10 @@
 - if Rails.application.debug?
   pre.debug_dump
     hr
+    | Page Type: #{content.page_type}
+    hr
+    | Class: #{ENV['DISABLE_USER_ANSWER'].present? ? 'Response' : 'UserAnswer'}
+    hr
     | Question Options:
     - (content.answers || content.class::CONFIDENCE_OPTIONS).map do |option|
       br
@@ -16,4 +20,3 @@
       = option.to_h
     hr
     | Pagination: #{content.pagination}
-

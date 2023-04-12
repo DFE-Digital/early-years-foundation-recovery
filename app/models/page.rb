@@ -1,5 +1,10 @@
 class Page < ContentfulModel::Base
-  extend Dry::Core::Cache
+  extend ::Caching
+
+  # @return [Concurrent::Map] single shared in-memory cache
+  def self.cache
+    Training::Module.cache
+  end
 
   # @return [String]
   def self.content_type_id
@@ -7,21 +12,21 @@ class Page < ContentfulModel::Base
   end
 
   # @param name [String]
-  # @return [?]
+  # @return [Page]
   def self.by_name(name)
-    fetch_or_store(name) do
+    fetch_or_store to_key(name) do
       load_children(0).find_by(name: name.to_s).first
     end
   end
 
-  # @return [?]
+  # @return [Contentful::Array<Page>]
   def self.footer
-    fetch_or_store(__method__) do
+    fetch_or_store to_key(__method__) do
       load_children(0).find_by(footer: true).order(:heading).load
     end
   end
 
-  # Deprecate
+  # @deprecated Not required for CMS
   def model
     self
   end

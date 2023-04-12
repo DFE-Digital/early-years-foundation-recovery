@@ -34,7 +34,7 @@ RSpec.describe 'Module overview' do
     expect(page).to have_content('1-1-1')
       .and have_content('1-1-2')
       .and have_content('1-1-3')
-      .and have_content('1-1-4')
+      .and have_content(Rails.application.cms? ? 'Question One - Select from following' : '1-1-4') # Genuine content does not position Question as a topic intro
       .and have_content('1-2-1')
       .and have_content('Recap')
       .and have_content('End of module test')

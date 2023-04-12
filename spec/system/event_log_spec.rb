@@ -94,7 +94,7 @@ RSpec.describe 'Event log' do
     end
   end
 
-  describe 'formative assessment' do
+  describe 'formative question' do
     before do
       view_pages_upto_formative_question(alpha)
       visit '/modules/alpha'

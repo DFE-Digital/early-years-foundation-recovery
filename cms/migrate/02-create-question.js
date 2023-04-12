@@ -1,10 +1,9 @@
 module.exports = function(migration) {
 
-  migration.deleteContentType('question')
-
   const question = migration.createContentType('question', {
     name: 'Question',
-    displayField: 'name'
+    displayField: 'name',
+    description: 'Formative, Summative or Confidence'
   })
 
   /* Fields ----------------------------------------------------------------- */
@@ -19,16 +18,6 @@ module.exports = function(migration) {
   // type
   question.createField('page_type', {
     name: 'Page type',
-    type: 'Symbol',
-    required: true
-  })
-
-  /*
-    can be derived from "page_type"
-    TO BE DEPRECATED
-  */
-  question.createField('assessments_type', {
-    name: 'Assessment type',
     type: 'Symbol',
     required: true
   })
@@ -58,28 +47,19 @@ module.exports = function(migration) {
     required: true
   })
 
-  /*
-    duplicate of name
-    TO BE DEPRECATED
-  */
-  question.createField('heading', {
-    name: 'Heading',
+  question.createField('body', {
+    name: 'Body',
     type: 'Text',
     required: true
   })
-
-  question.createField('body', {
-    name: 'Body',
+  
+  question.createField('success_message', {
+    name: 'Success message',
     type: 'Text'
   })
   
-  question.createField('assessment_succeed', {
-    name: 'Assessment succeeds summary text',
-    type: 'Text'
-  })
-  
-  question.createField('assessment_fail', {
-    name: 'Assessment fails summary text',
+  question.createField('failure_message', {
+    name: 'Failure message',
     type: 'Text'
   })
   
@@ -87,4 +67,14 @@ module.exports = function(migration) {
     name: 'Answers',
     type: 'Object'
   })
+
+
+  /* Interface --------------------------------------------------------------
+  https://www.contentful.com/developers/docs/extensibility/app-framework/editor-interfaces/
+  */
+
+  question.changeFieldControl('answers', 'builtin', 'objectEditor', {
+    helpText: 'An array of arrays: add true for correct options',
+  })
+
 }

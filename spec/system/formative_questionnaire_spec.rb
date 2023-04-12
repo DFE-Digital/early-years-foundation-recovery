@@ -39,7 +39,6 @@ RSpec.describe 'Formative questionnaire' do
 
     it 'is not able to be retaken' do
       visit '/modules/alpha/questionnaires/1-1-4'
-
       expect(page).to have_selector('.govuk-radios__input:disabled')
     end
   end

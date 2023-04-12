@@ -1,10 +1,9 @@
 module.exports = function(migration) {
 
-  migration.deleteContentType('trainingModule')
-
   const trainingModule = migration.createContentType('trainingModule', {
     name: 'Training Module',
-    displayField: 'title'
+    displayField: 'title',
+    description: 'Top-level Model'
   })
 
   /* Fields ----------------------------------------------------------------- */
@@ -60,9 +59,13 @@ module.exports = function(migration) {
     type: 'Text'
   })
 
+  // markdown not permitted
   trainingModule.createField('objective', {
     name: 'Objective',
-    type: 'Text'
+    type: 'Text',
+    validations: [
+      { 'prohibitRegexp': { 'pattern': '\\n'} }
+    ]
   })
 
   trainingModule.createField('criteria', {
@@ -103,13 +106,12 @@ module.exports = function(migration) {
     }
   })
 
-
   /* Interface --------------------------------------------------------------
   https://www.contentful.com/developers/docs/extensibility/app-framework/editor-interfaces/
+  */
 
   trainingModule.changeFieldControl('pages', 'builtin', 'entryLinksEditor', {
     helpText: 'Define module content and order here',
   })
 
-  */
 }

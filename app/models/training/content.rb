@@ -19,6 +19,18 @@ module Training
 
     # METHODS TO DEPRECATE --------------------------------------
 
+    # @return [Datetime]
+    delegate :published_at, to: :entry
+    # .in_time_zone("Central Time (US & Canada)")
+
+    # @see Training::Content#debug_summary
+    # @return [Contentful::Management::Entry]
+    def entry
+      @entry ||= to_management
+    rescue NoMethodError, Errno::ECONNREFUSED
+      @entry = refetch_management_entry
+    end
+
     # NB: do not apply additional caching here
     # @return [Training::Content]
     def self.by_id(id)
@@ -240,6 +252,7 @@ module Training
         cms id: #{id}
         module name: #{parent.name}
         path: #{name}
+        published at: #{published_at}
         page type: #{page_type}
 
         ---

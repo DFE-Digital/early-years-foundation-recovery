@@ -140,14 +140,21 @@ RSpec.describe User, type: :model do
     end
   end
 
-
   describe '#active_modules' do
+    subject(:user) do
+      create(:user,
+             module_time_to_completion: {
+               alpha: 4,
+               bravo: 2,
+             })
+    end
+
     before do
       skip 'WIP' unless Rails.application.cms?
     end
 
     it 'filters by user progress state' do
-      binding.pry
+      expect(user.active_modules.map(&:name)).to eq %w[alpha bravo]
     end
   end
 end

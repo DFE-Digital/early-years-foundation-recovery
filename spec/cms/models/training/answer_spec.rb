@@ -68,5 +68,13 @@ RSpec.describe Training::Answer, :cms, type: :model do
 
       specify { expect(answer).not_to be_valid }
     end
+
+    context 'when a label is blank' do
+      let(:json) do
+        [%w[True], ['', true]]
+      end
+
+      specify { expect(answer).not_to be_valid }
+    end
   end
 end

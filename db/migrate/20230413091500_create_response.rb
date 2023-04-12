@@ -5,7 +5,8 @@ class CreateResponse < ActiveRecord::Migration[7.0]
       t.string :training_module, null: false
       t.string :question_name, null: false
       t.jsonb :answers, default: []
-      t.boolean :archive, default: false
+      t.boolean :archived, default: false
+      t.boolean :correct
       t.references :user_assessment, null: true, foreign_key: true
       t.index %i[user_id training_module question_name], name: 'user_question'
       t.timestamps

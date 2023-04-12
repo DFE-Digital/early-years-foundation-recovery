@@ -3,6 +3,6 @@ FactoryBot.define do
     user
     training_module { 'alpha' }
     question_name { '1-1-4' }
-    answer { (1..4).sample }
+    answers { [(1..5).to_a.sample] }
   end
 end

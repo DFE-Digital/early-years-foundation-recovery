@@ -10,45 +10,47 @@ class Training::NotesController < ApplicationController
 
   # POST /my-account/learning-log
   def create
+    # TODO: deprecate these instance variables
     @model = content
 
     if note.save
-      track('user_note_created', **tracking_properties)
-      redirect_to training_module_content_page_path(content.parent.name, content.next_item.name)
-    else # not validations, so branch is not expected to be used
-      render "content_pages/#{content.page_type}", local: { note: note }
+      track('user_note_created', cms: true, **tracking_properties)
+      redirect_to next_page_path
+    else
+      render_current_page
     end
   end
 
   # PATCH/PUT /my-account/learning-log
   def update
+    # TODO: deprecate these instance variables
     @model = content
 
     if note.update(note_params.except(:module_item_id))
-      track('user_note_updated', **tracking_properties)
-      redirect_to training_module_content_page_path(content.parent.name, content.next_item.name)
-    else # no validations, so this branch is not expected to be used
-      render "content_pages/#{content.page_type}", local: { note: note }
+      track('user_note_updated', cms: true, **tracking_properties)
+      redirect_to next_page_path
+    else
+      render_current_page
     end
   end
 
 private
 
-  # common -------------------------------------
+  # -------------------------------------
 
-  # @return [Training::Module] shallow
+  # @return [Training::Module]
   def mod
     Training::Module.by_name(mod_name)
   end
 
-  # @return [Training::Content]
+  # @return [Training::Page]
   def content
-    mod.page_by_name(content_slug)
+    mod.page_by_name(content_name)
   end
 
-  # note specific -------------------------------------
+  #  -------------------------------------
 
-  def content_slug
+  def content_name
     note_params[:name]
   end
 
@@ -56,21 +58,30 @@ private
     note_params[:training_module]
   end
 
-  def training_module_id
-    mod_name
+  def next_page_path
+    training_module_content_page_path(mod.name, content.next_item.name)
+  end
+
+  # defensive
+  def render_current_page
+    render "training/pages/#{content.page_type}", local: { note: note }
   end
 
   def note
-    current_user.notes.where(training_module: mod_name, name: content_slug).first ||
-    Note.new(note_params.except(:module_item_id))
+    existing_note || Note.new(note_params.except(:module_item_id))
+  end
+
+  def existing_note
+    current_user.notes.find_by(training_module: mod.name, name: content.name)
   end
 
   def tracking_properties
     note_params.except(:body, :module_item_id, :user).merge(length: note_params[:body].length)
   end
 
-  # Only allow a list of trusted parameters through.
   def note_params
-    params.require(:note).permit(:title, :body, :training_module, :name, :module_item_id).with_defaults(user: current_user)
+    params.require(:note)
+      .permit(:title, :body, :training_module, :name, :module_item_id)
+      .with_defaults(user: current_user)
   end
 end

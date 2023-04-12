@@ -92,7 +92,7 @@ module EarlyYearsFoundationRecovery
     def preview?
       if Rails.env.test? && ENV['CONTENTFUL_PREVIEW'].blank?
         false
-      elsif Rails.env.development? || ENV['WORKSPACE'].eql?('staging') || ENV['CONTENTFUL_PREVIEW'].present?
+      elsif ENV['WORKSPACE'].eql?('staging') || ENV['CONTENTFUL_PREVIEW'].present?
         true
       else
         false
@@ -101,6 +101,8 @@ module EarlyYearsFoundationRecovery
 
     # @return [Boolean]
     def debug?
+      return false if Rails.env.test?
+
       Rails.env.development? || ENV['WORKSPACE'].eql?('content') || cms?
     end
   end

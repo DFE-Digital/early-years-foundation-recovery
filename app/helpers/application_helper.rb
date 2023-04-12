@@ -24,27 +24,19 @@ module ApplicationHelper
     ].join.html_safe
   end
 
+  CONFIG_SUMMARY = [
+    ['Rails version', Rails.version],
+    ['Ruby version', RUBY_VERSION],
+    ['GOV.UK Frontend', JSON.parse(File.read(Rails.root.join('package.json'))).dig('dependencies', 'govuk-frontend').tr('^', '')],
+  ].freeze
+
   # @return [String]
   def configuration_summary_list
-    govuk_summary_list(
-      rows: [
-        { key: { text: 'Rails version' }, value: { text: Rails.version } },
-        { key: { text: 'Ruby version' }, value: { text: RUBY_VERSION } },
-        { key: {
-            text: 'GOV.UK Frontend',
-          },
-          value: {
-            text: JSON
-              .parse(File.read(Rails.root.join('package.json')))
-              .dig('dependencies', 'govuk-frontend')
-              .tr('^', ''),
-          } },
-        { key: { text: 'Contentful' }, value: { text: Rails.application.cms? ? 'Yes' : 'No' } },
-        { key: { text: 'API' }, value: { text: Rails.application.preview? ? 'Preview API' : 'Delivery API' } },
-        { key: { text: 'Space' }, value: { text: Rails.configuration.contentful_space } },
-        { key: { text: 'Environment' }, value: { text: Rails.configuration.contentful_environment } },
-      ],
-    )
+    rows =
+      CONFIG_SUMMARY.map do |key, value|
+        { key: { text: key }, value: { text: value } }
+      end
+    govuk_summary_list(rows: rows)
   end
 
   # @note deprecate
@@ -83,8 +75,16 @@ module ApplicationHelper
   def html_title(page)
     # ::ModuleItem or ::Training::Page
     module_title = page.parent.title if page.respond_to?(:parent)
-    # ::Training::Page, ::Page vs ::ModuleItem
-    default = page.model.heading if page
+    default =
+      if page.is_a?(::ModuleItem)
+        page.model.heading
+      elsif page.is_a?(::Training::Question)
+        page.name
+      elsif page.present?
+        # ::Training::Page/Video, ::Page
+        page.heading
+      end
+
     # I18n
     custom = params.permit('controller', 'action', 'id').values.join('.')
     page_title = t(custom, scope: 'html_title', default: default)

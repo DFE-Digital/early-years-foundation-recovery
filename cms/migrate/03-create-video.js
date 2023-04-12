@@ -1,11 +1,9 @@
 module.exports = function(migration) {
 
-  migration.deleteContentType('video')
-
 	const video = migration.createContentType('video', {
     name: 'Video',
     displayField: 'name',
-    description: 'formerly YAML module_item (with video)'
+    description: 'Video Content'
   })
 
   /* Fields ----------------------------------------------------------------- */
@@ -16,14 +14,6 @@ module.exports = function(migration) {
     type: 'Symbol',
     required: true
   })
-
-  /* type is implicit
-  video.createField('page_type', {
-    name: 'Page type',
-    type: 'Symbol',
-    required: true
-  })
-  */
 
   video.createField('training_module', {
     name: 'Training module',

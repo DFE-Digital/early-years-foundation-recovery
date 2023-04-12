@@ -71,8 +71,9 @@ Rails.application.routes.draw do
     scope module: 'training' do
       resources :modules, only: %i[show], as: :training_modules do
         resources :pages, only: %i[index show], path: 'content-pages'
-        resources :responses, only: %i[show update], path: 'questionnaires'
-        resources :assessment_results, only: %i[show new], path: 'assessment-result'
+        resources :questions, only: %i[show], path: 'questionnaires'
+        resources :responses, only: %i[update]
+        resources :assessments, only: %i[show new], path: 'assessment-result'
       end
     end
 

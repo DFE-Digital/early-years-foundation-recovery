@@ -41,9 +41,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable,
          :validatable, :rememberable, :confirmable, :lockable, :timeoutable
 
-  has_many :user_answers
-  has_many :user_assessments
   has_many :responses
+  has_many :user_answers
+
+  has_many :user_assessments
   has_many :visits, class_name: 'Ahoy::Visit'
   has_many :events, class_name: 'Ahoy::Event'
   has_many :notes
@@ -103,6 +104,27 @@ class User < ApplicationRecord
     end
 
     super
+  end
+
+  # @see ResponsesController#response_params
+  # @param content [Training::Question]
+  # @return [UserAnswer, Response]
+  def response_for(content)
+    if ENV['DISABLE_USER_ANSWER'].present?
+      responses.find_or_initialize_by(
+        question_name: content.name,
+        training_module: content.parent.name,
+        # archived: false,
+      )
+    else
+      user_answers.find_or_initialize_by(
+        assessments_type: content.assessments_type,
+        module: content.parent.name,
+        name: content.name,
+        questionnaire_id: 0, # N/A can't be null
+        question: content.body,
+      )
+    end
   end
 
   # @return [Array<Training::Modules>]

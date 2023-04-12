@@ -1,8 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Response, :cms, type: :model do
-  let(:radio_button_response) { user.responses.create(training_module: 'alpha', question_name: '1-1-4', answer: answer) }
-  let(:check_box_response) { user.responses.create(training_module: 'alpha', question_name: '1-2-1-1', answer: answer) }
+  subject(:response) do
+    user.responses.create(
+      training_module: 'alpha',
+      question_name: question_name,
+      answers: answers,
+    )
+  end
 
   let(:user) { create :user, :registered }
 
@@ -10,72 +15,92 @@ RSpec.describe Response, :cms, type: :model do
     skip 'WIP' unless Rails.application.cms?
   end
 
-  context 'with radio button' do
-    describe 'with no answer' do
-      let(:answer) { nil }
+  context 'with radio buttons' do
+    let(:question_name) { '1-1-4' }
+
+    describe 'and no answer' do
+      let(:answers) { nil }
 
       it 'is invalid' do
-        expect(radio_button_response).to be_invalid
-        expect(radio_button_response.errors.full_messages).to eq ['Answer Please select an answer.']
+        expect(response).to be_invalid
+        expect(response.errors.full_messages).to eq ['Answers Please select an answer.']
       end
     end
 
-    describe 'with correct answer' do
-      let(:answer) { 1 }
+    describe 'and correct answer' do
+      let(:answers) { [1] }
 
-      it 'banner title for successful assessment' do
-        expect(radio_button_response.banner_title).to eq("That's right")
+      it '#correct?' do
+        expect(response).to be_correct
       end
 
-      it 'successful assessment summary' do
-        expect(radio_button_response.summary).to match(/You selected the correct answers/)
+      it '#banner_title' do
+        expect(response.banner_title).to eq "That's right"
+      end
+
+      it '#summary' do
+        expect(response.summary).to match(/You selected the correct answers/)
       end
     end
 
-    describe 'with incorrect answer' do
-      let(:answer) { 2 }
+    describe 'and incorrect answer' do
+      let(:answers) { [2] }
 
-      it 'banner title for failing assessment' do
-        expect(radio_button_response.banner_title).to eq("That's not quite right")
+      it '#correct?' do
+        expect(response).not_to be_correct
       end
 
-      it 'failure assessment summary' do
-        expect(radio_button_response.summary).to match(/You did not select the correct answers/)
+      it '#banner_title' do
+        expect(response.banner_title).to eq "That's not quite right"
+      end
+
+      it '#summary' do
+        expect(response.summary).to match(/You did not select the correct answers/)
       end
     end
   end
 
-  context 'with check box' do
-    describe 'with no answer' do
-      let(:answer) { nil }
+  context 'with check boxes' do
+    let(:question_name) { '1-2-1-1' }
+
+    describe 'and no answer' do
+      let(:answers) { nil }
 
       it 'is invalid' do
-        expect(check_box_response).to be_invalid
-        expect(check_box_response.errors.full_messages).to eq ['Answer Please select an answer.']
+        expect(response).to be_invalid
+        expect(response.errors.full_messages).to eq ['Answers Please select an answer.']
       end
     end
 
-    describe 'with correct answer' do
-      let(:answer) { [1, 3] }
+    describe 'and correct answer' do
+      let(:answers) { [1, 3] }
 
-      it 'banner title for successful assessment' do
-        expect(check_box_response.banner_title).to eq("That's right")
+      it '#correct?' do
+        expect(response).to be_correct
       end
 
-      it 'successful assessment summary' do
-        expect(check_box_response.summary).to match(/You selected the correct answers/)
+      it '#banner_title' do
+        expect(response.banner_title).to eq "That's right"
+      end
+
+      it '#summary' do
+        expect(response.summary).to match(/You selected the correct answers/)
       end
     end
 
-    describe 'with incorrect answer' do
-      let(:answer) { [2] }
+    describe 'and incorrect answer' do
+      let(:answers) { [2] }
 
-      it 'banner title for failing assessment' do
-        expect(check_box_response.banner_title).to eq("That's not quite right")
+      it '#correct?' do
+        expect(response).not_to be_correct
       end
 
-      it 'failure assessment summary' do
-        expect(check_box_response.summary).to match(/You did not select the correct answers/)
+      it '#banner_title' do
+        expect(response.banner_title).to eq "That's not quite right"
+      end
+
+      it '#summary' do
+        expect(response.summary).to match(/You did not select the correct answers/)
       end
     end
   end

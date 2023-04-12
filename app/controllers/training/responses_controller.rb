@@ -1,54 +1,30 @@
 module Training
   class ResponsesController < ApplicationController
     before_action :authenticate_registered_user!
-    before_action :track_events, only: :show
 
-    helper_method :current_user_response,
-                  :content,
-                  :progress_bar
+    helper_method :content,
+                  :progress_bar,
+                  :current_user_response
 
-    # TODO: retire these helpers
-    helper_method :module_item, :training_module
-
-
-    # questions_controller
-    def show
-    end
-
-    # responses_controller
     def update
-      if current_user_response.update(answers: user_answers)
-        track_questionnaire_answer
+      if save_response!
+        track_question_answer
         redirect
       else
-        render :show, status: :unprocessable_entity
+        render 'training/questions/show', status: :unprocessable_entity
       end
     end
 
   protected
 
-
-    # TODO: deprecate these ------------------------------------------------------
-
-    def training_module
-      mod
-    end
-
-    def module_item
-      @module_item ||= content
-    end
-
-
-    # common content methods ----------------------------------------------------------------------------
-
-    # @return [Training::Module] shallow
+    # @return [Training::Module]
     def mod
       Training::Module.by_name(mod_name)
     end
 
-    # @return [Training::Content]
+    # @return [Training::Question]
     def content
-      mod.page_by_name(content_slug)
+      mod.page_by_name(content_name)
     end
 
     def progress
@@ -60,7 +36,7 @@ module Training
     end
 
     # @return [String]
-    def content_slug
+    def content_name
       params[:id]
     end
 
@@ -69,82 +45,65 @@ module Training
       params[:training_module_id]
     end
 
-    # response specific ----------------------------------------------------------------------------
+    # @return [UserAnswer, Response]
+    def current_user_response
+      @current_user_response ||= current_user.response_for(content)
+    end
+
+  private
+
+    # @note migrate from user_answer to response
+    # @see User#response_for
+    def response_params
+      if ENV['DISABLE_USER_ANSWER'].present?
+        params.require(:response).permit!
+      else
+        params.require(:user_answer).permit!
+      end
+    end
+
+    # @see User#response_for
+    # @note migrate from user_answer to response
+    # @return [Boolean]
+    def save_response!
+      if ENV['DISABLE_USER_ANSWER'].present?
+        current_user_response.update(
+          answers: user_answers,
+          correct: content.correct_answers.eql?(user_answers),
+          # cms_id: content.id,
+        )
+      else
+        current_user_response.update(
+          answer: user_answers,
+          correct: content.correct_answers.eql?(user_answers),
+        )
+      end
+    end
 
     # @return [Array<Integer>]
     def user_answers
       Array(response_params[:answers]).compact_blank.map(&:to_i)
     end
 
-    def question_name
-      content.name
-    end
-
-    def current_user_response
-      current_user.responses.find_or_initialize_by(
-        question_name: content_slug,
-        training_module: mod_name,
-        archive: false,
-      )
-    end
-
-    def response_params
-      params.require(:response).permit!
-    end
-
-  private
-
     def redirect
-      if current_user_response.assess?
+      if content.summative_question? && content.last_assessment?
         ContentfulAssessmentProgress.new(user: current_user, mod: mod).save!
       end
 
       if content.formative_question?
-        redirect_to training_module_response_path(mod_name, content_slug)
+        redirect_to training_module_question_path(mod.name, content.name)
       else
-        redirect_to training_module_page_path(mod_name, content.next_item.name)
-      end
-    end
-
-    # @return [Ahoy::Event] Show action
-    def track_events
-      if track_confidence_start?
-        track('confidence_check_start')
-      elsif track_assessment_start?
-        track('summative_assessment_start')
+        redirect_to training_module_page_path(mod.name, content.next_item.name)
       end
     end
 
     # @return [Ahoy::Event] Update action
-    def track_questionnaire_answer
+    def track_question_answer
       track('questionnaire_answer',
-            type: current_user_response.assessments_type,
+            cms: true,
+            type: content.assessments_type,
             success: current_user_response.correct?,
             answers: current_user_response.answers)
-    end
-
-    # Check current item type for matching named event ---------------------------
-
-    # @return [Boolean]
-    def track_confidence_start?
-      current_user_response.first_confidence? && confidence_start_untracked?
-    end
-
-    # @return [Boolean]
-    def track_assessment_start?
-      current_user_response.first_assessment? && summative_start_untracked?
-    end
-
-    # Check unique event is not already present ----------------------------------
-
-    # @return [Boolean]
-    def summative_start_untracked?
-      untracked?('summative_assessment_start', training_module_id: params[:training_module_id])
-    end
-
-    # @return [Boolean]
-    def confidence_start_untracked?
-      untracked?('confidence_check_start', training_module_id: params[:training_module_id])
     end
   end
 end

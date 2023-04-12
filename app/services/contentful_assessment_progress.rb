@@ -11,17 +11,11 @@ class ContentfulAssessmentProgress
   option :mod, Types.Instance(Training::Module), required: true
 
   def save!
-    assess = UserAssessment.create!(
-      user_id: user.id,
-      score: score.to_i,
-      status: status,
-      module: mod.name,
-      assessments_type: 'summative_assessment',
-    )
+    user_assessment = create_user_assessment
 
-    if summative_responses.all?(&:persisted?) && assess.persisted?
-      summative_responses.each do |response|
-        response.update(user_assessment_id: assess.id)
+    if assessment_responses.all?(&:persisted?) && user_assessment.persisted?
+      assessment_responses.each do |response|
+        response.update(user_assessment_id: user_assessment.id)
       end
     end
   end
@@ -60,27 +54,47 @@ class ContentfulAssessmentProgress
     0.0
   end
 
-  # @return [?]
+  # @return [Array<UserAnswer, Response>]
   def archive
-    summative_responses.each do |response|
-      response.update!(archive: true)
+    assessment_responses.each do |response|
+      response.update!(archived: true)
     end
   end
 
   # @return [Array<Response>]
   def incorrect_responses
-    summative_responses.reject(&:correct?)
+    assessment_responses.reject(&:correct?)
   end
 
 private
 
-  # @return [Array<Response>]
-  def summative_responses
-    user.responses.unarchived.where(training_module: mod.name).select(&:summative?)
+  # @return [Array<Response>, Array<UserAnswers>]
+  def assessment_responses
+    if ENV['DISABLE_USER_ANSWER'].present?
+      user.responses
+        .unarchived.where(training_module: mod.name)
+        .select { |response| response.question.summative_question? }
+    else
+      user.user_answers
+        .not_archived.where(module: mod.name)
+        .select { |response| response.question.summative_question? }
+    end
   end
 
+  # @note #correct? uses answers validate against question
   # @return [Array<Response>]
   def correct_responses
-    summative_responses.select(&:correct?)
+    assessment_responses.select(&:correct?)
+  end
+
+  # @return [UserAssessment]
+  def create_user_assessment
+    UserAssessment.create!(
+      user_id: user.id,
+      score: score.to_i,
+      status: status,
+      module: mod.name,
+      assessments_type: 'summative_assessment',
+    )
   end
 end

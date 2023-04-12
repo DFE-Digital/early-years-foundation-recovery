@@ -1,3 +1,6 @@
+- if Rails.application.cms?
+  = render 'learning/cms_debug'
+
 - if Rails.application.debug?
   pre.debug_dump
     = configuration_summary_list

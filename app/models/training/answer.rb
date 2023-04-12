@@ -25,6 +25,13 @@ module Training
       gteq?(correct_options, 2)
     end
 
+    # case-insensitive regexp search
+    # @param text [String]
+    # @return [Boolean]
+    def contains?(text)
+      options.any? { |option| option.label.match?(%r{#{text}}i) }
+    end
+
     # @return [Array<Integer>]
     def correct_answers
       correct_options.map(&:id)
@@ -61,7 +68,7 @@ module Training
 
     class Option < Dry::Struct
       attribute :id, Types::Strict::Integer
-      attribute :label, Types::Strict::String.constrained(min_size: 3)
+      attribute :label, Types::Strict::String.constrained(filled: true)
       attribute :correct, Types::Params::Bool.fallback(false)
       attribute :disabled, Types::Params::Bool.default(false)
       attribute :checked, Types::Params::Bool.default(false)

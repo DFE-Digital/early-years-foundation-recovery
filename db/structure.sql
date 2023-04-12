@@ -509,10 +509,12 @@ ALTER SEQUENCE public.releases_id_seq OWNED BY public.releases.id;
 CREATE TABLE public.responses (
     id bigint NOT NULL,
     user_id bigint NOT NULL,
-    training_module character varying,
-    question_name character varying,
-    answer jsonb,
-    archive boolean DEFAULT false,
+    training_module character varying NOT NULL,
+    question_name character varying NOT NULL,
+    answers jsonb DEFAULT '[]'::jsonb,
+    archived boolean DEFAULT false,
+    correct boolean,
+    user_assessment_id bigint,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -650,7 +652,6 @@ CREATE TABLE public.users (
     setting_type_other character varying,
     module_time_to_completion jsonb DEFAULT '{}'::jsonb NOT NULL,
     terms_and_conditions_agreed_at timestamp(6) without time zone,
-    account_deleted_at timestamp(6) without time zone,
     display_whats_new boolean DEFAULT false,
     local_authority character varying,
     role_type character varying,
@@ -921,6 +922,13 @@ CREATE INDEX index_releases_on_properties ON public.releases USING gin (properti
 
 
 --
+-- Name: index_responses_on_user_assessment_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_responses_on_user_assessment_id ON public.responses USING btree (user_assessment_id);
+
+
+--
 -- Name: index_responses_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1054,6 +1062,13 @@ CREATE UNIQUE INDEX que_scheduler_job_in_que_jobs_unique_index ON public.que_job
 
 
 --
+-- Name: user_question; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX user_question ON public.responses USING btree (user_id, training_module, question_name);
+
+
+--
 -- Name: que_jobs que_job_notify; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -1088,6 +1103,14 @@ ALTER TABLE ONLY public.responses
 
 ALTER TABLE ONLY public.notes
     ADD CONSTRAINT fk_rails_7f2323ad43 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: responses fk_rails_9bf18408da; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.responses
+    ADD CONSTRAINT fk_rails_9bf18408da FOREIGN KEY (user_assessment_id) REFERENCES public.user_assessments(id);
 
 
 --
@@ -1152,7 +1175,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230117091239'),
 ('20230223151527'),
 ('20230224151527'),
-('20230307154556'),
-('20230316130014');
+('20230316130014'),
+('20230413091500');
 
 

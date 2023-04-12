@@ -1,14 +1,9 @@
-/*
-https://github.com/contentful/contentful-migration/blob/master/README.md#reference-documentation
-*/
 module.exports = function(migration) {
-
-  migration.deleteContentType('page')
 
 	const page = migration.createContentType('page', {
     name: 'Page',
     displayField: 'name',
-    description: 'formerly YAML module_item'
+    description: 'Textual Content'
   })
 
   /* Fields ----------------------------------------------------------------- */
@@ -65,8 +60,6 @@ module.exports = function(migration) {
     required: true
   })
 
-  // page.deleteField('notes')
-
   page.createField('notes', {
     name: 'Notes',
     type: 'Boolean',
@@ -78,12 +71,12 @@ module.exports = function(migration) {
 
   /* Interface --------------------------------------------------------------
   https://www.contentful.com/developers/docs/extensibility/app-framework/editor-interfaces/
+  */
 
   page.changeFieldControl('notes', 'builtin', 'boolean', {
     helpText: 'Use Learning Log to take notes?',
     trueLabel: 'enable',
     falseLabel: 'disable'
   })
-  */
 
 }

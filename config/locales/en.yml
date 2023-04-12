@@ -41,6 +41,10 @@ en:
       models:
         response:
           attributes:
+            answers:
+              blank: Please select an answer.
+        user_answer:
+          attributes:
             answer:
               blank: Please select an answer.
         user:
@@ -404,10 +408,8 @@ en:
         You have been logged out.
 
   training:
-    assessment_results:
+    assessments:
       heading: Assessment results
-      # body: |
-      #   **Wrong** answers are shown below
       show:
         incorrect: You answered %{answers}. That's not quite right.
         pass:
@@ -432,8 +434,8 @@ en:
 
   assessment_results:
     heading: Assessment results
-    # body: |
-    #   **Wrong** answers are shown below
+    body: |
+      **Wrong** answers are shown below
     show:
       incorrect: You answered %{answers}. That's not quite right.
       pass:
@@ -542,7 +544,7 @@ en:
         terms-and-conditions: Terms and conditions
         whats-new: What's new in the training
         wifi-and-data: Free internet, wifi and data resources
-        promotional-materials: Promotional materials
+        promotional-materials: Promotional materials for local authorities
 
     # --------------------------------------------------------------------------
     # CMS titles

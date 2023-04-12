@@ -177,11 +177,15 @@ class Questionnaire < OpenStruct
         end
       end
 
+    # summative and confidence use label, formative uses body
+    query = question[:label] || question[:body]
+    query.gsub! "True or false?\n\n", Types::EMPTY_STRING
+    query.gsub! '(Select all answers that apply)', Types::EMPTY_STRING
+
     {
-      body: question[:body],
-      assessment_succeed: question[:assessment_summary],
-      assessment_fail: question[:assessment_fail_summary],
-      assessments_type: assessments_type,
+      body: query,
+      success_message: question[:assessment_summary],
+      failure_message: question[:assessment_fail_summary],
       answers: answers,
     }
   end

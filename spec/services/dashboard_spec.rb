@@ -18,7 +18,7 @@ RSpec.describe Dashboard do
     let(:data_files) { Dir.glob path.join('*/*/*.csv') }
 
     it 'exports 5 database tables' do
-      expect(data_files.count).to be 5
+      expect(data_files.count).to be 6
     end
 
     it 'exports data in CSV format' do

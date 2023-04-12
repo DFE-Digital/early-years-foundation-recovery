@@ -8,11 +8,11 @@ class Training::ModulesController < ApplicationController
                 :mods
 
   def index
-    track('course_overview_page')
+    track('course_overview_page', cms: true)
   end
 
   def show
-    track('module_overview_page')
+    track('module_overview_page', cms: true)
 
     if redirect?
       redirect_to my_modules_path
@@ -50,9 +50,19 @@ protected
     ContentfulModuleProgressBarDecorator.new(progress)
   end
 
+  # @return [String]
+  def mod_name
+    params[:id]
+  end
+
+  # @return [nil]
+  def content_name
+    # no op
+  end
+
   # @return [Training::Module]
   def mod
-    Training::Module.by_name(params[:id])
+    Training::Module.by_name(mod_name)
   end
 
   def progress
