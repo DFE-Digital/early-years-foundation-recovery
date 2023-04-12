@@ -72,22 +72,22 @@ module-5:
   5-4-1-4:
     content:
     questions:
-      1_gesell:
+      1_vygotsky:
         multi_select: false
         label: |
-          Which of the following was not a key principle of Gesell’s research?
+          Which of the following was not a key principle of Vygotsky’s research?
         assessment_summary:
         assessment_fail_summary: |
-          Gesell did not think that stimulation was essential but suggested that internal factors such as the growth of the child’s nervous system underpinned a child’s development regardless of the interactions they experienced.
+          Vygotsky’s zone of proximal development (ZPD) theory states that children have 2 stages of development.
 
-          Criticisms of Gesell’s work and more recent research shows us that children benefit most when we have a clear understanding of their developmental level and use the interactions of others to support this.
+          The first stage is the skills and knowledge they can develop by themselves. The second stage is the learning that can take place with the support of a more experienced individual. Vygotsky believed this learning support could come from other children, and not just adults, as long as the other child was more knowledgeable. He also stressed the importance of play for developing skills and learning new concepts.
 
-          You might want to revisit the section on [theories of physical development](/modules/module-4/content-pages/5-1-2).
+          You might want to revisit the section on [theories of physical development](/modules/module-4/content-pages/5-1-2-1).
         answers:
-          1: "All children travel through a set of predictable milestones but do so at their own pace "
-          2: "The pace of a child's development is determined by their internal physical and mental development"
-          3: "Any delays that were experienced are as a result of hereditary factors"
-          4: "Children’s development is heavily influenced  by the interaction of others "
+          1: "Children can develop skills by themselves"
+          2: "Children can learn from other more knowledgeable children"
+          3: "Play is important for learning new concepts"
+          4: "Children can only learn from adults"
         correct_answers:
         - 4
 
