@@ -128,22 +128,6 @@ module-5:
 module-6:
   depends_on: personal-social-and-emotional-development
   duration: 2
-  title: Encouraging holistic development
-  thumbnail:
-  short_description: |
-    This module explores what holistic development is and why it's important for children. It also discusses how you can consider its impact on learning, development and behaviour when planning for your setting.
-  description:
-
-  objective:
-
-  criteria:
-
-  summative_threshold: 70
-  draft: true
-
-module-7:
-  depends_on: personal-social-and-emotional-development
-  duration: 2
   title: Mathematics
   thumbnail:
   short_description: |
@@ -157,13 +141,13 @@ module-7:
   summative_threshold: 70
   draft: true
 
-module-8:
+module-7:
   depends_on: personal-social-and-emotional-development
   duration: 2
-  title: Planning inclusive learning
+  title: Holistic and inclusive learning
   thumbnail:
   short_description: |
-    This module explores strategies to create a diverse and inclusive curriculum and learning environment for all children in your care.
+    This module explores what holistic development is and why it's important for children. It also explores strategies to create a diverse and inclusive curriculum and learning environment for all children in your care.
   description:
 
   objective:
@@ -173,7 +157,7 @@ module-8:
   summative_threshold: 70
   draft: true
 
-module-9:
+module-8:
   depends_on: personal-social-and-emotional-development
   duration: 2
   title: Effective observation and assessment
@@ -189,7 +173,7 @@ module-9:
   summative_threshold: 70
   draft: true
 
-module-10:
+module-9:
   depends_on: personal-social-and-emotional-development
   duration: 2
   title: Supporting individual needs
