@@ -11,7 +11,7 @@ services:
       - DOMAIN=recovery.app
       - TRAINING_MODULES=demo-modules
       - BOT_TOKEN=bot_token
-      - CONTENTFUL_ENVIRONMENT=test
+      - CONTENTFUL_ENVIRONMENT=peter
       - TIMEOUT_MINUTES=25
     tty: true
     stdin_open: true

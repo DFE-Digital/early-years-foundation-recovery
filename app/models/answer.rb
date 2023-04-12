@@ -1,14 +1,4 @@
-#
-# Brett this might be a way to go.
-#
 class Answer < Dry::Struct
-  # Using Hash objects could work thusly, but would be more complex for the content team
-  #
-  # attribute :options, Types::Array do
-  #   attribute :answer, Types::Strict::String
-  #   attribute :correct, Types::Params::Bool
-  # end
-
   class Option < Dry::Struct
     attribute :position, Types::Strict::Integer                           # additional build params could be used
     attribute :answer, Types::Strict::String.constrained(min_size: 3)     # checking minimum length is possible

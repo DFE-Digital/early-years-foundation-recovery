@@ -39,26 +39,38 @@ module ApplicationHelper
               .dig('dependencies', 'govuk-frontend')
               .tr('^', ''),
           } },
+        { key: { text: 'Contentful' }, value: { text: Rails.application.cms? ? 'Yes' : 'No' } },
+        { key: { text: 'API' }, value: { text: Rails.application.preview? ? 'Preview API' : 'Delivery API' } },
+        { key: { text: 'Space' }, value: { text: Rails.configuration.contentful_space } },
+        { key: { text: 'Environment' }, value: { text: Rails.configuration.contentful_environment } },
       ],
     )
   end
 
+  # @note deprecate
   # @param mod [TrainingModule]
   # @return [SummativeAssessmentProgress]
   def assessment_progress(mod)
     SummativeAssessmentProgress.new(user: current_user, mod: mod)
   end
 
-  # @param mod [Training::Module]
-  # @return [ContentfulModuleProgress]
-  def cms_module_progress(mod)
-    ContentfulModuleProgress.new(user: current_user, mod: mod)
-  end
-
+  # @note deprecate
   # @param mod [TrainingModule]
   # @return [ModuleProgress]
   def module_progress(mod)
     ModuleProgress.new(user: current_user, mod: mod)
+  end
+
+  # @param mod [Training::Module]
+  # @return [ContentfulAssessmentProgress]
+  def cms_assessment_progress(mod)
+    ContentfulAssessmentProgress.new(user: current_user, mod: mod)
+  end
+
+  # @param mod [Training::Module]
+  # @return [ContentfulModuleProgress]
+  def cms_module_progress(mod)
+    ContentfulModuleProgress.new(user: current_user, mod: mod)
   end
 
   # @return [Boolean]

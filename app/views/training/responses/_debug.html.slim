@@ -1,0 +1,19 @@
+- if Rails.application.debug?
+  pre.debug_dump
+    hr
+    | Question Options:
+    - (content.answers || content.class::CONFIDENCE_OPTIONS).map do |option|
+      br
+      = option
+    hr
+    | Multiple choice: #{content.multi_select?}
+    hr
+    | Responded: #{current_user_response.responded?}
+    hr
+    | Response Options:
+    - current_user_response.options.map do |option|
+      br
+      = option.to_h
+    hr
+    | Pagination: #{content.pagination}
+

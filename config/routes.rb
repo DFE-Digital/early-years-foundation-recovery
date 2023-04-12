@@ -42,28 +42,37 @@ Rails.application.routes.draw do
     resource :role_type_other, only: %i[edit update], path: 'role-type-other'
   end
 
-  resource :user, controller: :user, path: 'my-account', only: %i[show] do
+  resource :user, controller: :user, only: %i[show], path: 'my-account' do
     get 'edit-email'
     get 'edit-password'
     patch 'update-email'
     patch 'update-password'
     get 'check-email-confirmation'
     get 'check-email-password-reset'
-    resource :notes, path: 'learning-log', only: %i[show create update]
-    resource :close_account, path: 'close', only: %i[new update show] do
+
+    resource :close_account, only: %i[new update show], path: 'close' do
       get 'reset-password'
       get 'edit-reason'
       patch 'update-reason'
       get 'confirm'
       post 'close_account'
     end
+
+    constraints proc { Rails.application.cms? } do
+      scope module: 'training' do
+        resource :notes, path: 'learning-log', only: %i[show create update]
+      end
+    end
+
+    resource :notes, only: %i[show create update], path: 'learning-log'
   end
 
   constraints proc { Rails.application.cms? } do
     scope module: 'training' do
       resources :modules, only: %i[show], as: :training_modules do
         resources :pages, only: %i[index show], path: 'content-pages'
-        resources :questionnaires, only: %i[show update]
+        resources :responses, only: %i[show update], path: 'questionnaires'
+        resources :assessment_results, only: %i[show new], path: 'assessment-result'
       end
     end
 

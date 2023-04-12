@@ -171,8 +171,7 @@ class ContentfulDataIntegrity
   #
   # @return [Boolean]
   def question_answers?
-    # mod.questions.all? { |question| ::Answer.new(json: question.answers).valid? }
-    true # WIP being continued in another PR
+    mod.questions.all? { |question| question.answer.valid? }
   end
 
   # @return [Boolean] demo modules have fewer questions than genuine content

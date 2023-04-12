@@ -35,6 +35,7 @@ protected
 
   # index -------------------
 
+  # @return [Array<Training::Module>]
   def mods
     Training::Module.ordered.reject(&:draft?)
   end
@@ -46,7 +47,7 @@ protected
   end
 
   def progress_bar
-    ModuleProgressBarDecorator.new(progress)
+    ContentfulModuleProgressBarDecorator.new(progress)
   end
 
   # @return [Training::Module]
@@ -59,6 +60,6 @@ protected
   end
 
   def assessment_progress
-    helpers.assessment_progress(mod)
+    helpers.cms_assessment_progress(mod)
   end
 end

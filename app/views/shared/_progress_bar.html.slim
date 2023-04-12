@@ -1,6 +1,6 @@
 .govuk-grid-row
-  ol.progress-bar.govuk-list role='progressbar' tabindex=0 aria-label=bar.furthest_section
-    - bar.nodes.map do |node|
+  ol.progress-bar.govuk-list role='progressbar' tabindex=0 aria-label=progress_bar.furthest_section
+    - progress_bar.nodes.map do |node|
       li.progress-bar--item
         = progress_node(*node[:icon].values)
 
@@ -11,4 +11,4 @@
 
 - if Rails.application.debug?
   pre.debug_dump
-    = bar.debug_summary
+    = progress_bar.debug_summary

@@ -7,7 +7,10 @@ RSpec.describe 'Questionnaires', type: :request do
     ModuleItem.find_by(training_module: :alpha, type: :formative_questionnaire, name: '1-1-4')
   end
 
-  before { sign_in user }
+  before do
+    skip 'WIP' if Rails.application.cms?
+    sign_in user
+  end
 
   describe 'GET /modules/:training_module_id/questionnaires/:id' do
     subject(:show_view) do

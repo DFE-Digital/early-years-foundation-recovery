@@ -1,0 +1,14 @@
+= f.govuk_check_boxes_fieldset question.question_name do
+  = f.govuk_error_summary
+
+  = translate_markdown(question.body)
+
+  = f.govuk_check_boxes_fieldset :answers, legend: { text: content.name, hidden: true } do
+    = f.hidden_field :answers
+    - question.options.each do |option|
+      = f.govuk_check_box :answers,
+        option.id,
+        label: { text: option.label },
+        link_errors: true,
+        disabled: option.disabled?,
+        checked: option.checked?
