@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
                 :set_internal_mailbox_email_address,
                 :prepare_cms
 
-  helper_method :timeout_timer
+  helper_method :timeout_timer,
+                :debug?
 
   default_form_builder(EarlyYearsRecoveryFormBuilder)
 
@@ -50,6 +51,11 @@ class ApplicationController < ActionController::Base
 
   def set_internal_mailbox_email_address
     @internal_mailbox = Rails.configuration.internal_mailbox
+  end
+
+  # @return [Boolean] do not run accessibility tests with debug panels visible
+  def debug?
+    Rails.application.debug? && !bot?
   end
 
   def timeout_timer
