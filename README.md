@@ -1,4 +1,4 @@
-# Early years child development training
+# Early years child development training!
 
 [![ci][ci-badge]][ci-workflow]
 [![brakeman][brakeman-badge]][brakeman-workflow]
