@@ -1,4 +1,4 @@
-- if Rails.application.debug?
+- if debug?
   pre.debug_dump
     hr
     | Class: #{ENV['DISABLE_USER_ANSWER'].present? ? 'Response' : 'UserAnswer'}

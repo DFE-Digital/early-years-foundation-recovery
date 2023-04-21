@@ -5,7 +5,7 @@ defaults: &defaults
   RAILS_SERVE_STATIC_FILES: true
   RAILS_LOG_TO_STDOUT: true
   RAILS_MAX_THREADS: 5
-  WEB_CONCURRENCY: 2
+  WEB_CONCURRENCY: 2 # NB: values greater than 2 impact caching
   RAILS_ENV: production
   NODE_ENV: production
   DATABASE_URL: postgres://postgres@localhost:5432/db

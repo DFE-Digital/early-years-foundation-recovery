@@ -9,6 +9,6 @@
         p.govuk-body.progress--heading class=node[:heading_style]
           = node[:heading]
 
-- if Rails.application.debug?
+- if debug?
   pre.debug_dump
     = progress_bar.debug_summary
