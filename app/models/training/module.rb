@@ -42,7 +42,7 @@ module Training
       <<~SUMMARY
         cms id: #{id}
         path: #{name}
-        published at: #{published_at.strftime('%d-%m-%Y %H:%M')}
+        published at: #{published_at.strftime('%d-%m-%Y %H:%M') if Rails.env.development?}
         duration: #{duration}
         submodules: #{submodule_count}
         topics: #{topic_count}
