@@ -42,7 +42,7 @@ module Training
       <<~SUMMARY
         cms id: #{id}
         path: #{name}
-        published at: #{published_at.strftime('%d-%m-%Y %H:%M') if Rails.env.development?}
+        published at: #{published_at}
         duration: #{duration}
         submodules: #{submodule_count}
         topics: #{topic_count}
@@ -143,10 +143,16 @@ module Training
       Array(fields[:pages]).any?
     end
 
-    # @return [Datetime]
-    delegate :published_at, to: :entry
+    # @return [String, nil]
+    def published_at
+      return unless Rails.env.development?
 
-    # @see Training::Module#debug_summary, ContentfulCourseProgress#debug_summary
+      entry.published_at.in_time_zone(ENV['TZ']).strftime('%d-%m-%Y %H:%M')
+    end
+
+    # @see Training::Module#debug_summary
+    # @see ContentfulCourseProgress#debug_summary
+    #
     # @return [Contentful::Management::Entry]
     def entry
       @entry ||= to_management

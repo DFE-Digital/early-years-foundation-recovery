@@ -19,9 +19,12 @@ module Training
 
     # METHODS TO DEPRECATE --------------------------------------
 
-    # @return [Datetime]
-    delegate :published_at, to: :entry
-    # .in_time_zone("Central Time (US & Canada)")
+    # @return [String, nil]
+    def published_at
+      return unless Rails.env.development?
+
+      entry.published_at.in_time_zone(ENV['TZ']).strftime('%d-%m-%Y %H:%M')
+    end
 
     # @see Training::Content#debug_summary
     # @return [Contentful::Management::Entry]
@@ -77,11 +80,7 @@ module Training
     #
     # @return [Integer] (zero index)
     def position_within_module
-      # if parent.instance_variable_set?(:@children)
-      # content.index(self) # all children loaded
-      # else
       parent.fields[:pages].rindex { |child_link| child_link.id.eql?(id) }
-      # end
     end
 
     # Needs full entries to be loaded

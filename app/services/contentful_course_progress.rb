@@ -42,7 +42,7 @@ class ContentfulCourseProgress
     training_modules.map do |mod|
       <<~SUMMARY
         title: #{mod.title}
-        published at: #{mod.published_at.strftime('%d-%m-%Y %H:%M') if Rails.env.development?}
+        published at: #{mod.published_at}
         position: #{mod.position}
         name: #{mod.name}
         draft: #{mod.draft?}
