@@ -2,6 +2,7 @@
 # ------------------------------------------------------------------------------
 # Terraform workspaces align to Cloud Foundry spaces
 defaults: &defaults
+  TZ: Europe/London
   RAILS_SERVE_STATIC_FILES: true
   RAILS_LOG_TO_STDOUT: true
   RAILS_MAX_THREADS: 5
