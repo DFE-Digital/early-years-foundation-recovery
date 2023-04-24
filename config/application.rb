@@ -24,7 +24,8 @@ module EarlyYearsFoundationRecovery
     #
     # config.eager_load_paths << Rails.root.join("extras")
 
-    config.time_zone = ENV['TZ']
+    # config.time_zone = ENV['TZ']
+    config.time_zone = 'London'
 
     config.generators do |g|
       g.test_framework :rspec
