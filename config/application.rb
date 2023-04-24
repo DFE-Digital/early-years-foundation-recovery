@@ -118,9 +118,7 @@ module EarlyYearsFoundationRecovery
 
     # @return [Boolean]
     def debug?
-      return false if Rails.env.test?
-
-      Rails.env.development? || review? || cms?
+      Rails.env.development? || review?
     end
   end
 end
