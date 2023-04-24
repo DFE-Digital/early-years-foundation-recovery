@@ -181,6 +181,7 @@ class Questionnaire < OpenStruct
     query = question[:label] || question[:body]
     query.gsub! "True or false?\n\n", Types::EMPTY_STRING
     query.gsub! '(Select all answers that apply)', Types::EMPTY_STRING
+    query.strip!
 
     {
       body: query,

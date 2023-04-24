@@ -66,17 +66,12 @@ module Training
     # @note migrate from user_answer to response
     # @return [Boolean]
     def save_response!
+      correct_answers = content.confidence_question? ? true : content.correct_answers.eql?(user_answers)
+
       if ENV['DISABLE_USER_ANSWER'].present?
-        current_user_response.update(
-          answers: user_answers,
-          correct: content.correct_answers.eql?(user_answers),
-          # cms_id: content.id,
-        )
+        current_user_response.update(answers: user_answers, correct: correct_answers)
       else
-        current_user_response.update(
-          answer: user_answers,
-          correct: content.correct_answers.eql?(user_answers),
-        )
+        current_user_response.update(answer: user_answers, correct: correct_answers)
       end
     end
 
