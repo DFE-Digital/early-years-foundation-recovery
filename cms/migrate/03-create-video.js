@@ -17,6 +17,7 @@ module.exports = function(migration) {
 
   video.createField('training_module', {
     name: 'Training module',
+    required: true,
     type: 'Link',
     linkType: 'Entry',
     validations: [
@@ -43,27 +44,32 @@ module.exports = function(migration) {
 
   video.createField('title', {
     name: 'Title',
-    type: 'Text'
+    type: 'Text',
+    required: true
   })
   
   video.createField('heading', {
     name: 'Heading',
-    type: 'Text'
+    type: 'Text',
+    required: true
   })
 
   video.createField('body', {
     name: 'Body',
-    type: 'Text'
+    type: 'Text',
+    required: true
   })
   
   video.createField('transcript', {
     name: 'Transcript',
-    type: 'Text'
+    type: 'Text',
+    required: true
   })
   
   video.createField('video_id', {
     name: 'Video ID',
-    type: 'Symbol'
+    type: 'Symbol',
+    required: true
   })
 
   video.createField('video_provider', {

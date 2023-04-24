@@ -25,6 +25,7 @@ module.exports = function(migration) {
   // parent
   page.createField('training_module', {
     name: 'Training module',
+    required: true,
     type: 'Link',
     linkType: 'Entry',
     validations: [

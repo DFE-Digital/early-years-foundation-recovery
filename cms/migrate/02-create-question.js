@@ -24,6 +24,7 @@ module.exports = function(migration) {
 
   question.createField('training_module', {
     name: 'Training module',
+    required: true,
     type: 'Link',
     linkType: 'Entry',
     validations: [
@@ -55,17 +56,19 @@ module.exports = function(migration) {
   
   question.createField('success_message', {
     name: 'Success message',
-    type: 'Text'
+    type: 'Text',
+    required: true
   })
   
   question.createField('failure_message', {
     name: 'Failure message',
-    type: 'Text'
+    type: 'Text',
+    required: true
   })
   
   question.createField('answers', {
     name: 'Answers',
-    type: 'Object'
+    type: 'Object',
   })
 
 

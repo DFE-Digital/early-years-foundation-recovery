@@ -36,12 +36,14 @@ module.exports = function(migration) {
   trainingModule.createField('image', {
     name: 'Image',
     type: 'Link',
-    linkType: 'Asset'
+    linkType: 'Asset',
+    required: true
   })
 
   trainingModule.createField('name', {
 	  name: 'Name',
     type: 'Symbol',
+    required: true,
     validations: [
       {
         unique: true
@@ -51,18 +53,21 @@ module.exports = function(migration) {
 
   trainingModule.createField('short_description', {
     name: 'Short description',
-    type: 'Text'
+    type: 'Text',
+    required: true
   })
 
   trainingModule.createField('description', {
     name: 'Description',
-    type: 'Text'
+    type: 'Text',
+    required: true
   })
 
   // markdown not permitted
   trainingModule.createField('objective', {
     name: 'Objective',
     type: 'Text',
+    required: true,
     validations: [
       { 'prohibitRegexp': { 'pattern': '\\n'} }
     ]
@@ -70,22 +75,26 @@ module.exports = function(migration) {
 
   trainingModule.createField('criteria', {
     name: 'Criteria',
-    type: 'Text'
+    type: 'Text',
+    required: true
   })
 
   trainingModule.createField('duration', {
     name: 'Duration',
-    type: 'Number'
+    type: 'Number',
+    required: true
   })
 
   trainingModule.createField('summative_threshold', {
     name: 'Summative threshold',
-    type: 'Integer'
+    type: 'Integer',
+    required: true
   })
 
   trainingModule.createField('position', {
     name: 'Position',
-    type: 'Integer'
+    type: 'Integer',
+    required: true
   })
 
   trainingModule.createField('pages', {
