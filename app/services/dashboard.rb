@@ -19,9 +19,15 @@ class Dashboard
     { model: 'UserAssessment',  folder: 'userassessments',  file: 'user_assessments'  },
   ].freeze
 
+  # @return [String] 30-06-2022-09-30
+  TIMESTAMP_PATTERN = '[0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]'.freeze
+
   # @param upload [Boolean] default: false
+  # @param clean [Boolean] default: false
   # @return [String]
-  def call(upload: false)
+  def call(upload: false, clean: false)
+    purge if clean
+
     export models_to_csv
 
     if upload
@@ -51,6 +57,15 @@ private
       file_path = dir_path.join("#{source[:file]}.csv")
 
       [file_data, dir_path, file_path]
+    end
+  end
+
+  # @return [nil]
+  def purge
+    Dir.chdir(path) do
+      Dir.glob(TIMESTAMP_PATTERN) do |old|
+        FileUtils.rm_rf(old, secure: true)
+      end
     end
   end
 
