@@ -24,7 +24,8 @@ module EarlyYearsFoundationRecovery
     #
     # config.eager_load_paths << Rails.root.join("extras")
 
-    config.time_zone = ENV.fetch('TZ', 'Europe/London')
+    # causes log colting error when deploying a review app in GPaaS
+    # config.time_zone = ENV.fetch('TZ', 'Europe/London')
 
     config.generators do |g|
       g.test_framework :rspec
