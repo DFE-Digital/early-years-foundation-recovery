@@ -9,6 +9,7 @@ class User < ApplicationRecord
     role_type
     registration_complete
     private_beta_registration_complete
+    registration_complete_any
     registered_at
   ].freeze
 
@@ -199,9 +200,14 @@ class User < ApplicationRecord
     !!private_beta_registration_complete
   end
 
+  # @return [Boolean]
+  def registration_complete_any
+    !!private_beta_registration_complete || !!registration_complete
+  end
+
   # @return [Datetime]
   def registered_at
-    events.where(name: 'user_registration').last&.time # :first returns private_beta
+    events.where(name: 'user_registration').first&.time # :first returns private_beta or public_beta if that is the only one
   end
 
   # @return [Array<Integer, nil>]
