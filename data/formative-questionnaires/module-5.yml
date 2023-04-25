@@ -23,7 +23,7 @@ module-5:
       1_gross_motor_activity:
         multi_select: true
         body: |
-          Which of the following will gross motor activity help to promote?
+          Which of the following will gross motor activity help to develop?
         assessment_summary: |
           Activities and opportunities that promote gross motor skills will help to develop:
 
@@ -34,7 +34,7 @@ module-5:
           - co-ordination
           - agility
 
-          Gross motor skills also support weaning, as NHS advice is to only start weaning when a baby can stay in a sitting position and hold their head steady.
+          Gross motor skills, together with fine motor skills also support weaning, as NHS advice is to only start weaning when a baby can stay in a sitting position and hold their head steady.
 
           Early gross motor development will promote a healthy lifestyle in later life. It is important to plan an environment and curriculum that promotes gross motor activities.
         assessment_fail_summary: |
@@ -47,12 +47,12 @@ module-5:
           - co-ordination
           - agility
 
-          Gross motor skills also support weaning, as NHS advice is to only start weaning when a baby can stay in a sitting position and hold their head steady.
+          Gross motor skills, together with fine motor skills also support weaning, as NHS advice is to only start weaning when a baby can stay in a sitting position and hold their head steady.
 
           Early gross motor development will promote a healthy lifestyle in later life. It is important to plan an environment and curriculum that promotes gross motor activities.
 
         answers:
-          1: "Weaning"
+          1: "Core strength"
           2: "Spatial awareness"
           3: "Reflexes"
           4: "Grasp"
