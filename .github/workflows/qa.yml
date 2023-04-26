@@ -13,12 +13,13 @@ on:
 
   pull_request:
   merge_group:
+  # deployment_status:
 
-  # workflow_run:
-  #   workflows:
-  #     - Deploy Content App
-  #   types:
-  #     - completed
+  workflow_run:
+    workflows:
+      - Deploy Content App
+    types:
+      - completed
 
 env:
   BASE_URL: https://ey-recovery-pr-${{ inputs.ref || github.event.number }}.london.cloudapps.digital
@@ -28,9 +29,9 @@ jobs:
   test:
     name: QA checks
     # trigger by deployment
-    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     # trigger by label
-    if: contains(github.event.pull_request.labels.*.name, 'deployed')
+    # if: contains(github.event.pull_request.labels.*.name, 'deployed')
     runs-on: ubuntu-latest
 
     # https://docs.github.com/en/actions/using-containerized-services/about-service-containers
@@ -63,9 +64,9 @@ jobs:
         name: Use Chrome
         env:
           BROWSER: standalone_chrome
-        run: bin/rspec --default-path ui
+        run: bundle exec rspec --default-path ui
       -
         name: Use Firefox
         env:
           BROWSER: standalone_firefox
-        run: bin/rspec --default-path ui
+        run: bundle exec rspec --default-path ui

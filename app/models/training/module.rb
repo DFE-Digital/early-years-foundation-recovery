@@ -263,6 +263,11 @@ module Training
       "#module-#{position}-#{title.downcase.parameterize}"
     end
 
+    # @return [Array<Array>] AST for automated module completion
+    def schema
+      content.map(&:schema)
+    end
+
   private
 
     # @return [Training::Page, Training::Question, Training::Video] content sought by likelihood (Page more numerous than Video)

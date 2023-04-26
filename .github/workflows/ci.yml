@@ -68,7 +68,7 @@ jobs:
           cache: npm
       -
         name: Prepare test database
-        run: bin/rails db:prepare
+        run: bin/rails db:create db:migrate
       -
         name: Report schema version
         run: bin/rails db:version

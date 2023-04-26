@@ -7,49 +7,56 @@ module Drivers
       register_headless
     end
 
+    # @return [Selenium::WebDriver::Chrome::Options]
+    def self.driver_options(headless: false)
+      options = if !headless
+                  []
+                else
+                  %w[
+                    headless
+                    disable-extensions
+                    disable-gpu
+                    no-sandbox
+                    window-size=1280,800
+                  ]
+                end
+
+      Selenium::WebDriver::Options.chrome(
+        accept_insecure_certs: true,
+        'goog:chromeOptions': options,
+      )
+    end
+
     # @return [Capybara]
     def self.register
-      capabilities = Selenium::WebDriver::Remote::Capabilities.chrome
-      capabilities['acceptInsecureCerts'] = true
-
       Capybara.register_driver :chrome do |app|
-        Capybara::Selenium::Driver.new(app, browser: :chrome, capabilities: capabilities)
+        Capybara::Selenium::Driver.new(
+          app,
+          browser: :chrome,
+          options: driver_options,
+        )
       end
     end
 
     # @return [Capybara]
     def self.register_headless
-      # https://chromedriver.chromium.org/capabilities
-      capabilities = Selenium::WebDriver::Remote::Capabilities.chrome
-      capabilities['acceptInsecureCerts'] = true
-      # https://peter.sh/experiments/chromium-command-line-switches
-      capabilities['goog:chromeOptions'] = {
-        args: %w[
-          headless
-          disable-extensions
-          disable-gpu
-          no-sandbox
-          window-size=1280,800
-        ],
-      }
-
       Capybara.register_driver :headless_chrome do |app|
-        Capybara::Selenium::Driver.new(app, browser: :chrome, capabilities: capabilities)
+        Capybara::Selenium::Driver.new(
+          app,
+          browser: :chrome,
+          options: driver_options(headless: true),
+        )
       end
     end
 
     # @return [Capybara]
     def self.register_remote
-      capabilities = Selenium::WebDriver::Remote::Capabilities.chrome
-      capabilities['acceptInsecureCerts'] = true
-      driver = ENV.fetch('DRIVER', 'localhost:4441')
-
       Capybara.register_driver :standalone_chrome do |app|
         Capybara::Selenium::Driver.new(
           app,
           browser: :remote,
-          url: "http://#{driver}/wd/hub",
-          capabilities: capabilities,
+          url: "http://#{ENV.fetch('DRIVER', 'localhost:4441')}/wd/hub",
+          options: driver_options,
         )
       end
     end

@@ -6,4 +6,8 @@ docker-compose \
   -f docker-compose.yml \
   -f docker-compose.qa.yml \
   --project-name recovery \
-  up app
+  up --detach app
+
+docker exec -it recovery_prod rails db:seed
+
+docker attach recovery_prod

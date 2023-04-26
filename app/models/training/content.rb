@@ -140,7 +140,7 @@ module Training
 
     # @return [Boolean]
     def notes?
-      notes
+      text_page? && notes
     end
 
     # intro types ---------------------------------
