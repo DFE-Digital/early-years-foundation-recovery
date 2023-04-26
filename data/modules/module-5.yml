@@ -9,6 +9,20 @@ module-5:
 
   5-1:
     type: sub_module_intro  # submodule 1
+  5-1-1a:
+    type: text_page         # submodule 1 / topic 1a
+  5-1-1a-1:
+    type: text_page
+  5-1-1a-2:
+    type: text_page
+  5-1-1a-3:
+    type: text_page
+  5-1-1a-4:
+    type: text_page
+  5-1-1a-5:
+    type: text_page
+  5-1-1a-6:
+    type: text_page
   5-1-1:
     type: text_page         # submodule 1 / topic 1
   5-1-1-1a:
@@ -89,7 +103,9 @@ module-5:
     type: formative_questionnaire
   5-3-2:
     type: text_page         # submodule 3 / topic 2
-  5-3-2-1:
+  5-3-2-1a:
+    type: text_page
+  5-3-2-1b:
     type: text_page
   5-3-2-2:
     type: text_page
