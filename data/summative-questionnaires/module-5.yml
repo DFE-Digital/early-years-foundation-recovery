@@ -3,19 +3,17 @@ module-5:
   5-4-1-1:
     content:
     questions:
-      1_fundamental_motor_skills:
+      1_fundamental_movement_skills:
         multi_select: false
         label: |
-          Which 3 skill sets are fundamental motor skills?
+          Which 3 skill sets are fundamental movement skills?
         assessment_summary:
         assessment_fail_summary: |
-          Fundamental motor skills are divided into three different skill sets: manipulation, locomotor and stability.
+          Fundamental movement skills are divided into three different skill sets: manipulation, locomotor and stability.
 
-          Manipulation skills support us to control objects, locomotor skills  include running, galloping,hopping, skipping,dodging, leaping, twisting and dodging. Stability skills are those
+          Manipulation skills support us to control objects. Locomotor skills include running, galloping,hopping, skipping, dodging, leaping, twisting and dodging. Stability skills are those needed to control our body and include stopping, stretching, landing, twisting and climbing.
 
-          needed to control our body and include stopping,, stretching,, landing, twisting and,climbing
-
-          You might want to revisit the section on [fundamental motor skills](/modules/module-5/content-pages/5-1-1-1).
+          You might want to revisit the section on [fundamental movement skills](/modules/module-5/content-pages/5-1-1-1).
         answers:
           1: "Standing, rolling and hopping"
           2: "Throwing, catching and bouncing"
