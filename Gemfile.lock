@@ -337,13 +337,13 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.14.2-aarch64-linux)
+    nokogiri (1.14.3-aarch64-linux)
       racc (~> 1.4)
-    nokogiri (1.14.2-arm64-darwin)
+    nokogiri (1.14.3-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.14.2-x86_64-darwin)
+    nokogiri (1.14.3-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.14.2-x86_64-linux)
+    nokogiri (1.14.3-x86_64-linux)
       racc (~> 1.4)
     notifications-ruby-client (5.4.0)
       jwt (>= 1.5, < 3)
@@ -547,6 +547,8 @@ GEM
     temple (0.8.2)
     thor (1.2.1)
     tilt (2.0.11)
+    time (0.2.2)
+      date
     timeout (0.3.2)
     trailblazer-option (0.1.2)
     turbo-rails (1.4.0)
@@ -564,6 +566,7 @@ GEM
     unicorn (6.1.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
+    uri (0.12.1)
     view_component (2.74.1)
       activesupport (>= 5.0.0, < 8.0)
       concurrent-ruby (~> 1.0)
@@ -655,9 +658,11 @@ DEPENDENCIES
   slim-rails
   sprockets-rails
   stimulus-rails
+  time (>= 0.2.2)
   turbo-rails
   tzinfo-data
   uk_postcode
+  uri (>= 0.12.1)
   web-console
   yard-junk
 

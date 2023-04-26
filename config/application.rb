@@ -22,8 +22,9 @@ module EarlyYearsFoundationRecovery
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.time_zone = ENV.fetch('TZ', 'Europe/London')
 
     config.generators do |g|
       g.test_framework :rspec
@@ -72,6 +73,21 @@ module EarlyYearsFoundationRecovery
       ENV['WORKSPACE'].eql?('production')
     end
 
+    # @return [Boolean]
+    def candidate?
+      ENV['WORKSPACE'].eql?('staging')
+    end
+
+    # @return [Boolean]
+    def main?
+      ENV['WORKSPACE'].eql?('development')
+    end
+
+    # @return [Boolean]
+    def review?
+      ENV['WORKSPACE'].eql?('content')
+    end
+
     # @return [Boolean] true if Contentful is used for training content
     def cms?
       Types::Params::Bool[ENV.fetch('CONTENTFUL', true)]
@@ -92,7 +108,7 @@ module EarlyYearsFoundationRecovery
     def preview?
       if Rails.env.test? && ENV['CONTENTFUL_PREVIEW'].blank?
         false
-      elsif Rails.env.development? || ENV['WORKSPACE'].eql?('staging') || ENV['CONTENTFUL_PREVIEW'].present?
+      elsif Rails.env.development? || candidate? || ENV['CONTENTFUL_PREVIEW'].present?
         true
       else
         false
@@ -101,7 +117,7 @@ module EarlyYearsFoundationRecovery
 
     # @return [Boolean]
     def debug?
-      false # Rails.env.development? || ENV['WORKSPACE'].eql?('content') || cms?
+      false # Rails.env.development? || review? || cms?
     end
   end
 end
