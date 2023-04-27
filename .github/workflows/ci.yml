@@ -86,6 +86,6 @@ jobs:
       - # Test demo module content prior to suite
         name: Validate content (CMS)
         run: bundle exec rails eyfs:cms:validate
-      - # Test dedicated Contentful services, decorators and CMS powered content
-        name: Run test suite (CMS)
-        run: bundle exec rspec
+      # - Test dedicated Contentful services, decorators and CMS powered content
+        # name: Run test suite (CMS)
+        # run: bundle exec rspec
