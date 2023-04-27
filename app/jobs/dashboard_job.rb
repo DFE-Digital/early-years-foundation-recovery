@@ -10,13 +10,13 @@ class DashboardJob < Que::Job
 
   # @param upload [Boolean] defaults to true in production or if $DASHBOARD_UPDATE exists
   def run(upload: Rails.application.dashboard?)
-    log "Running DashboardJob: upload=#{upload}"
+    log "DashboardJob: Running upload=#{upload}"
 
-    Dashboard.new(path: build_dir).call(upload: upload)
+    Dashboard.new(path: build_dir).call(upload: upload, clean: true)
   end
 
   def handle_error(error)
-    message = "DashboardJob Failed: #{error.message}"
+    message = "DashboardJob: Failed with '#{error.message}'"
     log(message)
     Sentry.capture_message(message) if Rails.application.live?
   end

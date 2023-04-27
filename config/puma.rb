@@ -37,7 +37,7 @@ workers ENV.fetch('WEB_CONCURRENCY', 2)
 # before forking the application. This takes advantage of Copy On Write
 # process behavior so workers use less memory.
 #
-# preload_app!
+preload_app!
 
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
@@ -58,7 +58,7 @@ end
 
 lowlevel_error_handler do |error|
   Sentry.capture_message(error.message)
-  FileUtils.touch Rails.root.join('tmp/restart.txt')
+  # FileUtils.touch Rails.root.join('tmp/restart.txt')
 
-  [500, {}, ["Contact #{Rails.application.config.internal_mailbox} for support\n"]]
+  # [500, {}, ["Contact #{Rails.application.config.internal_mailbox} for support\n"]]
 end

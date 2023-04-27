@@ -1,0 +1,43 @@
+---
+# ------------------------------------------------------------------------------
+#
+name: CMS validate course
+on:
+  workflow_dispatch:
+    inputs:
+      alias:
+        description: Contentful alias to target (master, staging, test)
+        type: string
+        default: master
+
+jobs:
+  test:
+    name: Content 2i
+    runs-on: ubuntu-latest
+    environment: test
+    env:
+      RAILS_ENV: test
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      CONTENTFUL_ENVIRONMENT: ${{ inputs.alias }}
+
+    steps:
+      -
+        name: Checkout Code
+        uses: actions/checkout@v3
+      -
+        name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.3
+          bundler-cache: true
+      -
+        name: Install Rubygems
+        run: bundle install --jobs 20 --retry 3
+      -
+        name: Validate draft (pre-release)
+        env:
+          CONTENTFUL_PREVIEW: 'on'
+        run: bundle exec rails eyfs:cms:validate
+      -
+        name: Validate published (post-release)
+        run: bundle exec rails eyfs:cms:validate

@@ -2,9 +2,10 @@
 require 'contentful/management'
 
 #
-# Populate Contentful using YAML content
+# Populate Contentful 'page', 'video', 'question' and 'trainingModule' entries
+# Extract and upload image assets from markdown
 #
-class Upload
+class SeedCourseEntries
   extend Dry::Initializer
 
   option :config, default: proc { ContentfulRails.configuration }
@@ -30,26 +31,25 @@ class Upload
       mod.module_items.map do |item|
         child_entry = create_entry(item)
 
-=begin FIXME: > 1-1-1-3: ![Adults and children holding hands.](/assets/1-1-1-3-1127324447.jpg) stalls as Contentful struggles to process this specific file.
-
-        # Media upload if found in body copy
-        image = item.model.body&.match(IMG_REGEXP) # MatchData
-
-        if image
-          asset = process_image(*image.captures)
-          asset.publish if asset.save
-
-          # wait for publishing to generate image_url for asset
-          until asset.image_url.present?
-            sleep(1)
-            asset.publish
-          end
-
-          # "//images.ctfassets.net/dvmeh832nmjc/6etSgfjBK2UveguU2mZp4z/7f74406a62500bb14337a458a0e00a66/_assets_1-532263705.jpg"
-          child_entry.body = item.model.body.gsub(image[:filename], asset.image_url)
-        end
-
-=end
+        # FIXME: > 1-1-1-3: ![Adults and children holding hands.](/assets/1-1-1-3-1127324447.jpg) stalls as Contentful struggles to process this specific file.
+        #
+        #         # Media upload if found in body copy
+        #         image = item.model.body&.match(IMG_REGEXP) # MatchData
+        #
+        #         if image
+        #           asset = process_image(*image.captures)
+        #           asset.publish if asset.save
+        #
+        #           # wait for publishing to generate image_url for asset
+        #           until asset.image_url.present?
+        #             sleep(1)
+        #             asset.publish
+        #           end
+        #
+        #           # "//images.ctfassets.net/dvmeh832nmjc/6etSgfjBK2UveguU2mZp4z/7f74406a62500bb14337a458a0e00a66/_assets_1-532263705.jpg"
+        #           child_entry.body = item.model.body.gsub(image[:filename], asset.image_url)
+        #         end
+        #
 
         # parent
         child_entry.training_module = mod_entry

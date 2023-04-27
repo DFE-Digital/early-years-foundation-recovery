@@ -1,4 +1,4 @@
-class Training::PagesController < Contentful::BaseController
+class Training::PagesController < ApplicationController
   before_action :authenticate_registered_user!
   before_action :track_events, only: :show
   helper_method :mod, :content, :note

@@ -37,7 +37,7 @@ RSpec.describe ModuleProgress do
       end
 
       it 'uses module_complete time' do
-        expect(progress.completed_at.to_s).to eq '2025-01-01 00:00:00 UTC'
+        expect(progress.completed_at.to_s).to eq '2025-01-01 00:00:00 +0000'
       end
     end
 
@@ -47,7 +47,7 @@ RSpec.describe ModuleProgress do
       end
 
       it 'uses final page view time' do
-        expect(progress.completed_at.to_s).to eq '2026-12-31 00:00:00 UTC'
+        expect(progress.completed_at.to_s).to eq '2026-12-31 00:00:00 +0000'
       end
     end
   end

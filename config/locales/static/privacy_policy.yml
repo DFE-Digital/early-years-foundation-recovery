@@ -1,9 +1,9 @@
 ---
 en:
-  static:
+  pages:
     privacy_policy:
       heading: Privacy policy
-      content: |
+      body: |
         ## Who we are
 
         This work is being carried out by the Department for Education (DfE) Data Digital & Technology directorate. For data protection legislation, the DfE is the data controller for the personal data processed as part of the Early years child development training course.

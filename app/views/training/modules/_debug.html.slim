@@ -1,17 +1,9 @@
-- if Rails.application.debug?
+- if debug?
   pre.debug_dump
     hr
     h4 Module
-    ul
-      li duration: #{@mod.duration}
-      li submodules: #{@mod.submodule_count}
-      li topics: #{@mod.topic_count}
-      li questions: #{@mod.questions.count}
-      li milestone: #{@module_progress.milestone}
-      li resume page: #{@module_progress.resume_page&.name}
-      li last page: #{@mod.content.last.name}
-      li certificate: #{@mod.certificate_page.name}
+    = mod.debug_summary
 
     hr
     h4 Progress
-    = @module_progress.debug_summary
+    = module_progress.debug_summary

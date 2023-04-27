@@ -35,7 +35,7 @@ RSpec.describe ContentfulModuleProgress, :cms do
     end
 
     it 'uses module_complete time' do
-      expect(completed_at).to eq '2025-01-01 00:00:00 UTC'
+      expect(completed_at).to eq '2025-01-01 00:00:00 +0000'
     end
   end
 

@@ -1,20 +1,20 @@
 pre.debug_dump
   strong Module
   br
-  = @mod.name
+  = mod.name
   '
-  = @mod.id
+  = mod.id
   br
   br
 
   strong Questions
   br
-  = @mod.questions.count
+  = mod.questions.count
   br
   br
 
-  - @mod.content.each.with_index(1) do |item, pos|
-    - if current_user.events.where_properties(training_module_id: @mod.name, id: item.name).any?
+  - mod.content.each.with_index(1) do |item, pos|
+    - if current_user.events.where_properties(training_module_id: mod.name, id: item.name).any?
       | [x]
     - else
       | [_]

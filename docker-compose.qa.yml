@@ -14,8 +14,12 @@ services:
       - DOMAIN=https://localhost:3000
       - GOVUK_APP_DOMAIN=recovery.eyfs.dfe.gov.uk
       - GOVUK_WEBSITE_ROOT=www
+      # overrides
+      - WORKSPACE
       - USER_PASSWORD
       - TIMEOUT_MINUTES
+      - CONTENTFUL_ENVIRONMENT
+      - CONTENTFUL_PREVIEW
     volumes:
       # NB: or ensure RAILS_MASTER_KEY=<production master key> is in .env
       - ./config/credentials/production.key:/srv/config/credentials/production.key

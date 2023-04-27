@@ -1,21 +1,18 @@
-.govuk-width-container
-  .govuk-grid-row class='govuk-!-margin-bottom-7'
-    .govuk-grid-column-two-thirds-from-desktop
-      = govuk_back_link href: url_for(:back)
+.govuk-grid-row class='govuk-!-margin-bottom-7'
+  .govuk-grid-column-two-thirds-from-desktop
+    h1.govuk-heading-l= t('settings.cookie.heading')
 
-      h1= t('settings.cookie.heading')
+    .content.gem-c-govspeak
+      = translate_markdown t('settings.cookie.content')
 
-      .content.gem-c-govspeak
-        = translate_markdown t('settings.cookie.content')
+    h2.govuk-heading-l= t('settings.cookie.subheading')
 
-      h2.govuk-heading-l= t('settings.cookie.subheading')
+    = form_with url: settings_path, method: :post, local: true do |f|
+      = f.hidden_field :request_path, value: request.path
+      = f.hidden_field :settings_updated, value: 'true'
 
-      = form_with url: settings_path, method: :post, local: true do |f|
-        = f.hidden_field :request_path, value: request.path
-        = f.hidden_field :settings_updated, value: 'true'
+      = f.govuk_radio_buttons_fieldset(:checked, legend: { size: 'm', text: t('settings.cookie.legend') }, inline: true ) do
+        = f.govuk_radio_button :track_analytics, 'true', label: { text: 'Yes' }, checked: track_analytics?
+        = f.govuk_radio_button :track_analytics, 'false', label: { text: 'No' }, checked: !track_analytics?
 
-        = f.govuk_radio_buttons_fieldset(:checked, legend: { size: 'm', text: t('settings.cookie.legend') }, inline: true ) do
-          = f.govuk_radio_button :track_analytics, 'true', label: { text: 'Yes' }, checked: track_analytics?
-          = f.govuk_radio_button :track_analytics, 'false', label: { text: 'No' }, checked: !track_analytics?
-
-        = f.govuk_submit 'Save cookie settings'
+      = f.govuk_submit 'Save cookie settings'

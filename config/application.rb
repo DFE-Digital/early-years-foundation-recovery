@@ -22,8 +22,9 @@ module EarlyYearsFoundationRecovery
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.time_zone = ENV.fetch('TZ', 'Europe/London')
 
     config.generators do |g|
       g.test_framework :rspec
@@ -72,6 +73,21 @@ module EarlyYearsFoundationRecovery
       ENV['WORKSPACE'].eql?('production')
     end
 
+    # @return [Boolean]
+    def candidate?
+      ENV['WORKSPACE'].eql?('staging')
+    end
+
+    # @return [Boolean]
+    def main?
+      ENV['WORKSPACE'].eql?('development')
+    end
+
+    # @return [Boolean]
+    def review?
+      ENV['WORKSPACE'].eql?('content')
+    end
+
     # @return [Boolean] true if Contentful is used for training content
     def cms?
       Types::Params::Bool[ENV.fetch('CONTENTFUL', true)]
@@ -82,15 +98,26 @@ module EarlyYearsFoundationRecovery
       Types::Params::Bool[ENV.fetch('DASHBOARD_UPDATE', true)]
     end
 
-    # @see Training::BaseController
+    # CI workflow uses DELIVERY
+    # CMS workflow uses PREVIEW then DELIVERY
+    #
+    # @see ContentfulRails.configuration.enable_preview_domain
+    # @see ContentfulModel.use_preview_api
+    #
     # @return [Boolean]
     def preview?
-      Rails.env.development? || ENV['WORKSPACE'].eql?('staging')
+      if Rails.env.test? && ENV['CONTENTFUL_PREVIEW'].blank?
+        false
+      elsif Rails.env.development? || candidate? || ENV['CONTENTFUL_PREVIEW'].present?
+        true
+      else
+        false
+      end
     end
 
     # @return [Boolean]
     def debug?
-      Rails.env.development? || ENV['WORKSPACE'].eql?('content')
+      Rails.env.development? || review? || cms?
     end
   end
 end

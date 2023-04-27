@@ -1,6 +1,6 @@
 # NB: still plumbed into YAML and ActiveHash
 #
-class Training::QuestionnairesController < Contentful::BaseController
+class Training::QuestionnairesController < ApplicationController
   before_action :authenticate_registered_user!, :module_item, :show_progress_bar
   before_action :track_events, only: :show
   helper_method :training_module
