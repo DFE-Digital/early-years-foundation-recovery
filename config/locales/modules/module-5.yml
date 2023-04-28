@@ -17,7 +17,7 @@ en:
           - theories and approaches relating to physical development
           - factors affecting physical development
 
-          This module does not cover factors such as the impact of special educational needs and disabilities (SEND) on physical development. This will be covered in a future module.
+          This module does not cover factors such as special educational needs and disabilities (SEND) in relation to physical development. This will be covered in a future module.
 
       5-1-1a:
         heading: |
@@ -251,6 +251,27 @@ en:
           - How could you support the child to develop or improve on these?
 
           $BRAIN
+
+      5-1-1a-7video:
+        heading: |
+          Development of gross motor skills
+        body: |
+          This video explains how a child's gross motor skills develop. Watch how children move through typical stages of movement across a variety of settings.
+        video:
+          id:
+          title: Supporting a baby's language development
+          provider: vimeo
+
+
+      5-1-1a-8video:
+        heading: |
+          Development of fine motor skills
+        body: |
+          This video explains how a child's fine motor skills develop. Watch how children move through typical stages of movement across a variety of settings.
+        video:
+          id:
+          title: Supporting a baby's language development
+          provider: vimeo
 
 
       5-1-1:
@@ -683,7 +704,6 @@ en:
           If a child is having difficulty grasping and controlling a pencil or paintbrush you can use a tracing sheet to encourage them to take part in drawing or painting activities. For example, if a child likes insects such as butterflies you can place greaseproof paper of a picture for them to draw over the top. This is likely to increase their confidence and they might even want to add colour or pattern to the finished item.
 
           ##Making movement fun
-
 
           You can encourage children to take part in music and movement, active stories or ball games such as throwing their ball to a person wearing red. This will engage children in an activity that lets them practice skills without the worry that they cannot achieve.
 
@@ -1240,7 +1260,7 @@ en:
 
           ##Increased screen time
 
-          Children may have spent longer sitting still, watching TV or using computers and tablets. A sedentary lifestyle, which involves sitting still or lying down for extended periods, can negatively impact a child’s health in many ways. For example, research suggests that children who do little to no physical activity eat more snacks during the day than those who are active.
+          Children may have spent longer sitting still, watching TV or using computers and tablets. A sedentary lifestyle, which involves sitting still or lying down for extended periods, can negatively impact a child’s health.
 
           A sedentary lifestyle can also:
 
@@ -1341,6 +1361,15 @@ en:
 
           $BRAIN
 
+      5-3-1-1video:
+        heading: |
+          Planning a curriculum that supports physical development
+        body: |
+          This video explains how practitioners plan a curriculum around the physical development needs of the children in their setting.
+        video:
+          id:
+          title: Planning a curriculum that supports physical development
+          provider: vimeo
 
       5-3-1-2a:
         heading: |
@@ -1512,6 +1541,16 @@ en:
 
           $BRAIN
 
+      5-3-2-1video:
+        heading: |
+          Activities to support physical development
+        body: |
+          This video explains the range of activities that can be provided to help develop physical skills.
+        video:
+          id:
+          title: Planning a curriculum that supports physical development
+          provider: vimeo
+
       5-3-2-2:
         heading: |
           Meeting individual needs
@@ -1574,6 +1613,16 @@ en:
           - Is there anything you could do to build or improve upon these strategies?
 
           $BRAIN
+
+      5-3-2-3video:
+        heading: |
+          Creating an environment that supports physical development
+        body: |
+          This video explains how practitioners create an environment that promotes and supports opportunities to develop children’s fine and gross motor skills.
+        video:
+          id:
+          title: Creating an environment that supports physical development
+          provider: vimeo
 
 
       5-3-2-4a:
@@ -1734,6 +1783,16 @@ en:
           You could send children home with a challenge such as a treasure hunt sheet or craft activity to be completed. This will encourage parents to become involved in both their child’s learning and their physical development.
 
           You can share information about local opportunities for physical activity with parents and carers. These could include organised social walks, woodland trails, parent and toddler groups, swimming clubs, gymnastic activities and bike parks. It is important to include a wide range of costs in your suggestions, including those that are free.
+
+      5-3-3-1video:
+        heading: |
+          Working with parents to support and encourage physical development
+        body: |
+          This video explains how successful parent partnerships can help in supporting children’s physical development.
+        video:
+          id:
+          title: Working with parents to support and encourage physical development
+          provider: vimeo
 
       5-3-3-2:
         heading: |

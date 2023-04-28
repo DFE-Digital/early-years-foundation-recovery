@@ -23,6 +23,10 @@ module-5:
     type: text_page
   5-1-1a-6:
     type: text_page
+  5-1-1a-7video:
+    type: video_page
+  5-1-1a-8video:
+    type: video_page
   5-1-1:
     type: text_page         # submodule 1 / topic 1
   5-1-1-2a:
@@ -93,6 +97,8 @@ module-5:
     type: text_page         # submodule 3 / topic 1
   5-3-1-1:
     type: text_page
+  5-3-1-1video:
+    type: video_page
   5-3-1-2a:
     type: text_page
   5-3-1-2b:
@@ -103,10 +109,14 @@ module-5:
     type: text_page
   5-3-2-1b:
     type: text_page
+  5-3-2-1video:
+    type: video_page
   5-3-2-2:
     type: text_page
   5-3-2-3:
     type: text_page
+  5-3-2-3video:
+    type: video_page
   5-3-2-4a:
     type: text_page
   5-3-2-4b:
@@ -121,6 +131,8 @@ module-5:
     type: text_page         # submodule 3 / topic 3
   5-3-3-1:
     type: text_page
+  5-3-3-1video:
+    type: video_page
   5-3-3-2:
     type: text_page
   5-3-3-3:
