@@ -6,4 +6,6 @@ docker-compose \
   -f docker-compose.yml \
   -f docker-compose.dev.yml \
   --project-name recovery \
-  up app
+  up --detach app
+
+docker attach recovery_dev

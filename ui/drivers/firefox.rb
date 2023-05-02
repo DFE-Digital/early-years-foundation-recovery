@@ -9,9 +9,7 @@ module Drivers
 
     # @return [Selenium::WebDriver::Firefox::Options]
     def self.driver_options(headless: false)
-      options = if !headless
-                  []
-                else
+      options = if headless
                   %w[
                     -headless
                     disable-extensions
@@ -19,6 +17,8 @@ module Drivers
                     no-sandbox
                     window-size=1280,80
                   ]
+                else
+                  []
                 end
 
       Selenium::WebDriver::Options.firefox(

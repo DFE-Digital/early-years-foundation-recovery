@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+#
+# Generate self-signed certificates before running using:
+#   $ ./bin/docker-certs
+#
 # ------------------------------------------------------------------------------
 set -e
 
@@ -8,6 +12,6 @@ docker-compose \
   --project-name recovery \
   up --detach app
 
-docker exec -it recovery_prod rails db:seed
+./bin/docker-prod-reset
 
 docker attach recovery_prod
