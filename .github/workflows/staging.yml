@@ -86,7 +86,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           TF_VAR_paas_cf_user: ${{ secrets.CLOUD_FOUNDRY_USERNAME }}
           TF_VAR_paas_cf_password: ${{ secrets.CLOUD_FOUNDRY_PASSWORD }}
-          TF_VAR_paas_app_docker_image: ${{ env.REGISTRY }}:${{ inputs.ref || github.ref_name }}
+          TF_VAR_paas_app_docker_image: ${{ env.REGISTRY }}:${{ inputs.candidate || github.ref_name }}
           TF_VAR_paas_app_hostname: staging
           TF_VAR_paas_app_env_secrets: ${{ toJson(secrets) }}
           TF_VAR_paas_app_envs: ${{ toJson(env) }}

@@ -162,24 +162,32 @@ class Questionnaire < OpenStruct
 
   # answers:
   #   [
-  #     { 1 => ['Correct answer 1', true] },
-  #     { 2 => ['Wrong answer 1', false] },
+  #     ["Correct answer 1", true],
+  #     ["Wrong answer 1"],
   #   ]
   # @return [Hash] Question Contentful Model params
   def cms_params
     _name, question = questions.first
-    answers = question[:answers].map { |key, value| { key => [value, question[:correct_answers].include?(key)] } }
+
+    answers =
+      unless confidence?
+        question[:answers].map do |key, label|
+          correct = question[:correct_answers].include?(key) || nil
+          [label, correct].compact
+        end
+      end
+
+    # summative and confidence use label, formative uses body
+    query = question[:label] || question[:body]
+    query.gsub! "True or false?\n\n", Types::EMPTY_STRING
+    query.gsub! '(Select all answers that apply)', Types::EMPTY_STRING
+    query.strip!
 
     {
-      body: body,
-      assessment_succeed: question[:assessment_summary],
-      assessment_fail: question[:assessment_fail_summary],
-      assessments_type: assessments_type,
+      body: query,
+      success_message: question[:assessment_summary],
+      failure_message: question[:assessment_fail_summary],
       answers: answers,
-
-      # pagination
-      page_number: page_number,
-      total_questions: total_questions,
     }
   end
 

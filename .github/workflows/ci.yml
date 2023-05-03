@@ -78,14 +78,19 @@ jobs:
       -
         name: Run rubocop
         run: bundle exec rubocop
-      -
+      - # Test non-CMS functionality
         name: Run test suite (YAML)
         run: bundle exec rspec
         env:
           CONTENTFUL: false
-      - # Test demo module content prior to suite
+      - # Test 'demo' content prior to suite
         name: Validate content (CMS)
         run: bundle exec rails eyfs:cms:validate
-      # - Test dedicated Contentful services, decorators and CMS powered content
-        # name: Run test suite (CMS)
-        # run: bundle exec rspec
+      - # Test CMS functionality
+        name: Run test suite (CMS)
+        run: bundle exec rspec
+      - # Re-test CMS question response data migration feature
+        name: Run test suite (CMS)
+        run: bundle exec rspec
+        env:
+          DISABLE_USER_ANSWER: true

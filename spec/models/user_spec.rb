@@ -139,4 +139,22 @@ RSpec.describe User, type: :model do
       expect(user.closed_at).to be_within(30).of(Time.zone.now)
     end
   end
+
+  describe '#active_modules' do
+    subject(:user) do
+      create(:user,
+             module_time_to_completion: {
+               alpha: 4,
+               bravo: 2,
+             })
+    end
+
+    before do
+      skip 'WIP' unless Rails.application.cms?
+    end
+
+    it 'filters by user progress state' do
+      expect(user.active_modules.map(&:name)).to eq %w[alpha bravo]
+    end
+  end
 end

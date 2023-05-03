@@ -1,10 +1,9 @@
 module.exports = function(migration) {
 
-  migration.deleteContentType('question')
-
   const question = migration.createContentType('question', {
     name: 'Question',
-    displayField: 'name'
+    displayField: 'name',
+    description: 'Formative, Summative or Confidence'
   })
 
   /* Fields ----------------------------------------------------------------- */
@@ -25,6 +24,7 @@ module.exports = function(migration) {
 
   question.createField('training_module', {
     name: 'Training module',
+    required: true,
     type: 'Link',
     linkType: 'Entry',
     validations: [
@@ -48,49 +48,36 @@ module.exports = function(migration) {
     required: true
   })
 
-  question.createField('heading', {
-    name: 'Heading',
-    type: 'Text',
-    required: true
-  })
-
-  /* UNUSED */
   question.createField('body', {
     name: 'Body',
     type: 'Text',
     required: true
   })
   
-  question.createField('assessment_succeed', {
-    name: 'Assessment succeeds summary text',
-    type: 'Text'
+  question.createField('success_message', {
+    name: 'Success message',
+    type: 'Text',
+    required: true
   })
   
-  question.createField('assessment_fail', {
-    name: 'Assessment fails summary text',
-    type: 'Text'
-  })
-  
-  // summative or confidence (formative to be deprecated)
-  question.createField('assessments_type', {
-    name: 'Assessment type',
-    type: 'Symbol'
+  question.createField('failure_message', {
+    name: 'Failure message',
+    type: 'Text',
+    required: true
   })
   
   question.createField('answers', {
     name: 'Answers',
-    type: 'Object'
+    type: 'Object',
   })
 
-  // Pagination
-  question.createField('page_number', {
-    name: 'Page number',
-    type: 'Integer'
+
+  /* Interface --------------------------------------------------------------
+  https://www.contentful.com/developers/docs/extensibility/app-framework/editor-interfaces/
+  */
+
+  question.changeFieldControl('answers', 'builtin', 'objectEditor', {
+    helpText: 'An array of arrays: add true for correct options',
   })
-  
-  // Pagination
-  question.createField('total_questions', {
-    name: 'Total questions',
-    type: 'Integer'
-  })
+
 }

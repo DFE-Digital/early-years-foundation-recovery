@@ -3,7 +3,7 @@
     = govuk_back_link(href: edit_reason_user_close_account_path)
 
     h1.govuk-heading-l= t('close_account.confirm.heading')
-    p.govuk-body= translate_markdown(t('close_account.confirm.body'))
+    = translate_markdown(t('close_account.confirm.body'))
 
     .govuk-button-group
       = govuk_button_to t('close_account.confirm.confirm_button'), close_account_user_close_account_path, warning: true

@@ -25,6 +25,14 @@ RSpec.describe Training::Module, :cms, type: :model do
     end
   end
 
+  describe '#answers_with' do
+    it 'case-insensitive search of Question JSON field' do
+      expect(mod.answers_with('NOR')).to eq %w[1-3-3-1 1-3-3-2 1-3-3-3] # confidence questions
+      expect(mod.answers_with('foo')).to eq []
+      expect(mod.answers_with('Wrong\s.+ 3')).to eq %w[1-3-2-4]
+    end
+  end
+
   describe 'YAML conversion' do
     let(:attributes) { TrainingModule.first.cms_module_params }
 
