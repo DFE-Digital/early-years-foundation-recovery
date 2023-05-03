@@ -240,7 +240,11 @@ class User < ApplicationRecord
 
   # @return [Array<Integer, nil>]
   def module_ttc
-    TrainingModule.published.map(&:name).map { |mod| module_time_to_completion[mod] }
+    if Rails.application.cms?
+      Training::Module.ordered.reject(&:draft?).map(&:name).map { |mod| module_time_to_completion[mod] }
+    else
+      TrainingModule.published.map(&:name).map { |mod| module_time_to_completion[mod] }
+    end
   end
 
   def redact!
