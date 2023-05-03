@@ -222,7 +222,18 @@ en:
 
           If a child’s proprioception system does not fully develop it may impact on their desire or ability to take part in physical activity such as sports. It can also affect their independence as it can cause difficulties with the movements needed to fasten clothes, use cutlery or put on clothes.
 
-          Proprioceptive activities, which are weight bearing activities like walking, crawling and running, can help to calm sensory overload and support children to focus. All children benefit from movement breaks, but they are especially important for those who have difficulty with impulse control and emotional response.
+          Proprioceptive activities can help to calm sensory overload and support children to focus. All children benefit from movement breaks, but they are especially important for those who have difficulty with impulse control and emotional response.
+
+          $INFO
+
+          Your curriculum should provide opportunities that help children develop awareness of how their bodies move through activities such as:
+          - weight bearing activities like walking, crawling and running
+          - movement activities like running, jumping or dancing
+          - resistance activities such as pulling or pushing
+          - picking up, lifting and carrying objects
+          - activities that involve different levels of pressure, such as mark making or painting
+
+          $INFO
 
       5-1-1a-6:
         heading: |
@@ -268,8 +279,8 @@ en:
         body: |
           This video explains how a child's gross motor skills develop. Watch how children move through typical stages of movement across a variety of settings.
         video:
-          id:
-          title: Supporting a baby's language development
+          id: 823400265
+          title: Development of gross motor skills
           provider: vimeo
 
 
@@ -279,8 +290,8 @@ en:
         body: |
           This video explains how a child's fine motor skills develop. Watch how children move through typical stages of movement across a variety of settings.
         video:
-          id:
-          title: Supporting a baby's language development
+          id: 823405211
+          title: Development of fine motor skills
           provider: vimeo
 
 
@@ -1373,16 +1384,6 @@ en:
 
           $BRAIN
 
-      5-3-1-1video:
-        heading: |
-          Planning a curriculum that supports physical development
-        body: |
-          This video explains how practitioners plan a curriculum around the physical development needs of the children in their setting.
-        video:
-          id:
-          title: Planning a curriculum that supports physical development
-          provider: vimeo
-
       5-3-1-2a:
         heading: |
           An enthusiastic approach
@@ -1559,8 +1560,8 @@ en:
         body: |
           This video explains the range of activities that can be provided to help develop physical skills.
         video:
-          id:
-          title: Planning a curriculum that supports physical development
+          id: 823390252
+          title: Activities to support physical development
           provider: vimeo
 
       5-3-2-2:
@@ -1609,7 +1610,7 @@ en:
 
           You have learned about the importance of a culturally diverse environment in previous modules and this is just as important with physical development.
 
-          Being able to handle items that may be unfamiliar to them such as chopsticks, bongo drums or a Sari will support their understanding of the diverse world they live in while also testing their fine and gross motor skills.
+          Being able to handle items that may be unfamiliar to them such as chopsticks, bongo drums or a sari will support their understanding of the diverse world they live in while also testing their fine and gross motor skills.
 
           $BRAIN
 
@@ -1632,7 +1633,7 @@ en:
         body: |
           This video explains how practitioners create an environment that promotes and supports opportunities to develop children’s fine and gross motor skills.
         video:
-          id:
+          id: 823388001
           title: Creating an environment that supports physical development
           provider: vimeo
 
@@ -1804,7 +1805,7 @@ en:
         body: |
           This video explains how successful parent partnerships can help in supporting children’s physical development.
         video:
-          id:
+          id: 823385500
           title: Working with parents to support and encourage physical development
           provider: vimeo
 
