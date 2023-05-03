@@ -14,6 +14,7 @@ RSpec.describe 'Training Module Completion', :cms, type: :system do
   end
 
   before do
+    skip 'WIP' unless Rails.application.cms?
     visit "/modules/#{mod.name}"
     click_on 'Start module'
   end

@@ -68,13 +68,13 @@ jobs:
           cache: npm
       -
         name: Prepare test database
-        run: bin/rails db:create db:migrate
+        run: bundle exec rails db:create db:migrate
       -
         name: Report schema version
-        run: bin/rails db:version
+        run: bundle exec rails db:version
       -
         name: Compile assets
-        run: bin/rails assets:precompile
+        run: bundle exec rails assets:precompile
       -
         name: Run rubocop
         run: bundle exec rubocop
