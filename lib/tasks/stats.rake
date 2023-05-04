@@ -56,6 +56,9 @@ module Reporting
       # course engagement
       started_learning: started_learning,
       not_started_learning: not_started_learning,
+      with_notes: get_users_with_notes_count,
+      with_notes_percentage: (get_users_with_notes_count.to_f / User.all.count.to_f * 100).round(2),
+
     }
   end
 
@@ -87,6 +90,9 @@ module Reporting
       }
     end
   end
+
+
+  
 
 private
 
@@ -138,6 +144,15 @@ private
   def started(mod)
     in_progress(mod) + completed(mod)
   end
+
+  def get_users_with_notes_count
+    return User.joins(:notes).distinct.count
+  end
+  
+
+
+
+  
 end
 # :nocov:
 
@@ -156,5 +171,6 @@ namespace :eyfs do
       export_users
       export_modules
     end
+    
   end
 end
