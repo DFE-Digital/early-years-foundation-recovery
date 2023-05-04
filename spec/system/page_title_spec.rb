@@ -14,7 +14,7 @@ RSpec.describe 'Page' do
     it { expect(static_path('new-registration')).to have_page_title 'Update your registration details' }
     it { expect(static_path('other-problems-signing-in')).to have_page_title 'Other problems signing in' }
     it { expect(static_path('privacy-policy')).to have_page_title 'Privacy policy' }
-    it { expect(static_path('promotional-materials')).to have_page_title 'Promotional materials' }
+    it { expect(static_path('promotional-materials')).to have_page_title 'Promotional materials for local authorities' }
     it { expect(static_path('sitemap')).to have_page_title 'Sitemap' }
     it { expect(static_path('terms-and-conditions')).to have_page_title 'Terms and conditions' }
     it { expect(static_path('wifi-and-data')).to have_page_title 'Free internet, wifi and data resources' }

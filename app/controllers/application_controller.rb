@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  around_action :set_time_zone
+
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_analytics_tracking_id,
                 :set_hotjar_site_id,
@@ -66,6 +68,10 @@ class ApplicationController < ActionController::Base
   end
 
 private
+
+  def set_time_zone(&block)
+    Time.use_zone(ENV['TZ'], &block)
+  end
 
   # @see Auditing
   # @return [User]

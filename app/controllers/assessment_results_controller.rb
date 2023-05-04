@@ -1,7 +1,8 @@
 class AssessmentResultsController < ApplicationController
-  before_action :authenticate_registered_user!, :clear_flash, :show_progress_bar
+  before_action :authenticate_registered_user!, :clear_flash, :progress_bar
   after_action :track_events, only: :show
-  helper_method :training_module
+
+  helper_method :training_module, :progress_bar
 
   def new
     helpers.assessment_progress(training_module).archive_attempt
@@ -15,7 +16,7 @@ class AssessmentResultsController < ApplicationController
 
 private
 
-  def show_progress_bar
+  def progress_bar
     @module_progress_bar = ModuleProgressBarDecorator.new(helpers.module_progress(training_module))
   end
 

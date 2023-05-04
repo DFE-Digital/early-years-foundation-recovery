@@ -9,8 +9,8 @@ alpha:
     questions:
       alpha_confidence_question_two:
         label: Question Two - Select from 1 to 5
-        body: |
-          %Warning: Govspeak test%
+        # body: |
+        #   %Warning: Govspeak test%
 
   1-3-3-3:
     questions:

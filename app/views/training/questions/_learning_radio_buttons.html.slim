@@ -1,0 +1,19 @@
+h1.govuk-heading-l Learning check
+
+= f.govuk_error_summary
+
+.prompt.gem-c-govspeak
+  .govuk-grid-row
+    .govuk-grid-column-one-quarter
+      = icon(:question)
+
+    .govuk-grid-column-three-quarters
+      h2.govuk-heading-m Check your understanding
+
+      div class='govuk-!-margin-4'
+        = translate_markdown(content.legend)
+
+        = f.govuk_radio_buttons_fieldset :answers, legend: { text: translate_markdown(content.legend), hidden: true } do
+          = f.hidden_field :answers
+          - response.options.each do |option|
+            = f.question_radio_button(option)

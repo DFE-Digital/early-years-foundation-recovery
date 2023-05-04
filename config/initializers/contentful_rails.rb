@@ -1,3 +1,4 @@
+require 'caching'
 require 'training/content'
 require 'training/module'
 require 'training/page'

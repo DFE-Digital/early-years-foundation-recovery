@@ -16,9 +16,9 @@ en:
         heading: video_page
         body: page 2 of sub 1 (topic 2)
         video:
-          id:
-          title:
-          provider:
+          id: XnP6jaK7ZAY
+          title: Youtube Video Title
+          provider: youtube
       1-1-2-1:
         heading: text_page
         body: page 3 of sub 1 (topic 2 page 2)
@@ -34,9 +34,9 @@ en:
         heading: video_page
         body: page 2 of sub 2 (topic 2)
         video:
-          id:
-          title:
-          provider:
+          id: XnP6jaK7ZAY
+          title: Youtube Video Title
+          provider: youtube
       1-2-2-1:
         heading: text_page
         body: page 3 of sub 2 (topic 2 page 2)

@@ -1,19 +1,19 @@
 = render 'debug'
 
-= render 'shared/progress_bar', bar: @module_progress_bar
+= render 'shared/progress_bar'
 
 - content_for :content_page do
-  = page_number(**@model.pagination)
+  = page_number(**content.pagination)
 
-  h1= @model.heading
-  .gem-c-govspeak= translate_markdown(@model.body)
+  h1= content.heading
+  .gem-c-govspeak= translate_markdown(content.body)
 
   .govspeak-embed-container.light-grey-background
     h2.govuk-heading-m class='govuk-!-margin-top-2'
-      | Video: #{@model.video_title}
+      | Video: #{content.video_title}
 
-    - if @model.video_url
-      = render 'govspeak/video', title: @model.video_title, url: @model.video_url
+    - if content.video_url
+      = render 'govspeak/video', title: content.video_title, url: content.video_url
 
     - else
       p.govuk-body class='govuk-!-text-align-centre'
@@ -26,6 +26,6 @@
       .govuk-details__text.white-background
         h2.gov-uk-heading-m class='govuk-!-margin-top-2'
           | Transcript
-        .gem-c-govspeak= translate_markdown(@model.transcript)
+        .gem-c-govspeak= translate_markdown(content.transcript)
 
 = render 'content_wrap_full_width'

@@ -24,6 +24,7 @@ module EarlyYearsFoundationRecovery
     #
     # config.eager_load_paths << Rails.root.join("extras")
 
+    # causes log colting error when deploying a review app in GPaaS
     # config.time_zone = ENV.fetch('TZ', 'Europe/London')
 
     config.generators do |g|
@@ -108,7 +109,7 @@ module EarlyYearsFoundationRecovery
     def preview?
       if Rails.env.test? && ENV['CONTENTFUL_PREVIEW'].blank?
         false
-      elsif Rails.env.development? || candidate? || ENV['CONTENTFUL_PREVIEW'].present?
+      elsif candidate? || ENV['CONTENTFUL_PREVIEW'].present?
         true
       else
         false
@@ -117,7 +118,7 @@ module EarlyYearsFoundationRecovery
 
     # @return [Boolean]
     def debug?
-      false # Rails.env.development? || review? || cms?
+      false # Rails.env.development? || review?
     end
   end
 end

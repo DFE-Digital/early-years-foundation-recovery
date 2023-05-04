@@ -22,8 +22,6 @@ RSpec.describe 'Event log' do
 
     context 'when all questions are answered' do
       before do
-        skip 'WIP - CMS compatible version of SummativeAssessmentProgress service required' if Rails.application.cms?
-
         3.times do
           choose 'Strongly agree'
           click_on 'Next'
@@ -96,7 +94,7 @@ RSpec.describe 'Event log' do
     end
   end
 
-  describe 'formative assessment' do
+  describe 'formative question' do
     before do
       view_pages_upto_formative_question(alpha)
       visit '/modules/alpha'
