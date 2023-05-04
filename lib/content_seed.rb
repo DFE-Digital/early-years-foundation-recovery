@@ -37,7 +37,7 @@ private
     )
   end
 
-  # @param content [Training::Question]
+  # @param question [Training::Question]
   # @return [UserAnswer]
   def create_answer(question)
     UserAnswer.create(
