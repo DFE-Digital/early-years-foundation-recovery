@@ -10,6 +10,11 @@ RSpec.describe ContentTestSchema, :cms do
     YAML.load_file(Rails.root.join("spec/support/ast/#{fixture}.yml"))
   end
 
+  before do
+    skip 'WIP' unless Rails.application.cms?
+    skip 'WIP' if ENV['DISABLE_USER_ANSWER'].present?
+  end
+
   context 'when pass is true' do
     let(:fixture) { 'alpha-pass' }
 
