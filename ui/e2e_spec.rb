@@ -12,6 +12,8 @@ RSpec.describe 'E2E' do
   end
 
   before do
+    skip 'WIP' unless ENV['E2E']
+
     click_on 'Module 1: Understanding child development and the EYFS'
     click_on 'Start module'
   end

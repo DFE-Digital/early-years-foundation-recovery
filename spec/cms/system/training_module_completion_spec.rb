@@ -15,6 +15,8 @@ RSpec.describe 'Training Module Completion', :cms, type: :system do
 
   before do
     skip 'WIP' unless Rails.application.cms?
+    skip 'WIP' if ENV['DISABLE_USER_ANSWER'].present?
+
     visit "/modules/#{mod.name}"
     click_on 'Start module'
   end
