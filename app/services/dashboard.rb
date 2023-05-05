@@ -16,6 +16,7 @@ class Dashboard
     { model: 'Ahoy::Visit',     folder: 'visitsdata',       file: 'ahoy_visits'       },
     { model: 'User',            folder: 'userdata',         file: 'users'             },
     { model: 'UserAnswer',      folder: 'useranswers',      file: 'user_answers'      },
+    { model: 'Response',        folder: 'useranswers',      file: 'responses'         },
     { model: 'UserAssessment',  folder: 'userassessments',  file: 'user_assessments'  },
   ].freeze
 
