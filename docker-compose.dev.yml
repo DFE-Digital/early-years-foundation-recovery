@@ -51,10 +51,6 @@ services:
     tty: true
     stdin_open: true
 
-  db:
-    volumes:
-      - db_dev:/var/lib/postgresql/data
-
   doc:
     container_name: recovery_doc
     image: recovery:dev
@@ -86,6 +82,3 @@ services:
       - ./tmp/pa11y:/tmp/pa11y
     tty: true
     stdin_open: true
-
-volumes:
-  db_dev:

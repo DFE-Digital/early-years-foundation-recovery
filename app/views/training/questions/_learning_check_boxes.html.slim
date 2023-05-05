@@ -1,0 +1,18 @@
+h1.govuk-heading-l Learning check
+
+= f.govuk_error_summary
+
+.prompt.gem-c-govspeak
+  .govuk-grid-row
+    .govuk-grid-column-one-quarter
+      = icon(:question)
+
+    .govuk-grid-column-three-quarters
+      h2.govuk-heading-m Check your understanding
+
+      div class='govuk-!-margin-4'
+        = translate_markdown(content.legend)
+
+        = f.govuk_check_boxes_fieldset :answers, legend: { text: translate_markdown(content.legend), hidden: true } do
+          - response.options.each do |option|
+            = f.question_check_box(option)

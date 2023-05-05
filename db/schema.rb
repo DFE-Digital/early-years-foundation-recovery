@@ -10,13 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_16_130014) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_13_091500) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "citext"
-  enable_extension "fuzzystrmatch"
-  enable_extension "pgcrypto"
   enable_extension "plpgsql"
-  enable_extension "uuid-ossp"
 
   create_table "ahoy_events", force: :cascade do |t|
     t.bigint "visit_id"
@@ -139,6 +135,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_16_130014) do
     t.index ["properties"], name: "index_releases_on_properties", opclass: :jsonb_path_ops, using: :gin
   end
 
+  create_table "responses", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "training_module", null: false
+    t.string "question_name", null: false
+    t.jsonb "answers", default: []
+    t.boolean "archived", default: false
+    t.boolean "correct"
+    t.bigint "user_assessment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_assessment_id"], name: "index_responses_on_user_assessment_id"
+    t.index ["user_id", "training_module", "question_name"], name: "user_question"
+    t.index ["user_id"], name: "index_responses_on_user_id"
+  end
+
   create_table "user_answers", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "questionnaire_id", null: false
@@ -211,6 +222,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_16_130014) do
 
   add_foreign_key "notes", "users"
   add_foreign_key "que_scheduler_audit_enqueued", "que_scheduler_audit", column: "scheduler_job_id", primary_key: "scheduler_job_id", name: "que_scheduler_audit_enqueued_scheduler_job_id_fkey"
+  add_foreign_key "responses", "user_assessments"
+  add_foreign_key "responses", "users"
   add_foreign_key "user_answers", "user_assessments"
   add_foreign_key "user_answers", "users"
   add_foreign_key "user_assessments", "users"
