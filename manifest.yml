@@ -1,15 +1,62 @@
----
-# ------------------------------------------------------------------------------
+#
+# https://docs.cloudfoundry.org/devguide/deploy-apps/manifest-attributes.html
 # https://docs.cloud.service.gov.uk/deploying_apps.html#deploying-public-apps
 #
-# $ cf push --help
-# $ cf stop eyfs_recovery_wip
+# $ cf target -s content
+# $ cf create-service postgres small-13 ey-recovery-test-db
+# $ cf push --var rails_master_key=`cat config/credentials/production.key` --strategy rolling
+# $ cf stop ey-recovery-test
 #
-#
+# ------------------------------------------------------------------------------
+---
 applications:
--
-  name: eyfs_recovery_test
-  docker:
-    image: ghcr.io/dfe-digital/early-years-foundation-recovery:latest
-  health_check_type: http
-  health_check_http_endpoint: /health
+  - # app
+    name: ey-recovery-test
+    type: web
+    memory: 512M
+    disk_quota: 2G
+    instances: 1
+
+    health_check_type: http
+    health_check_http_endpoint: /health
+
+    command: |
+      bundle exec rails db:create db:migrate db:seed assets:precompile; \
+      bundle exec rails server -b 0.0.0.0
+
+    docker:
+      image: ghcr.io/dfe-digital/early-years-foundation-recovery:rc0.6.2
+
+    routes:
+      - route: ey-recovery-test.london.cloudapps.digital
+
+    services:
+      - ey-recovery-test-db
+
+    env:
+      DASHBOARD_UPDATE: false
+      CONTENTFUL_PREVIEW: true
+      GROVER_NO_SANDBOX: true
+      RAILS_LOG_TO_STDOUT: true
+      RAILS_SERVE_STATIC_FILES: true
+
+      EDITOR: vi
+      RAILS_MASTER_KEY: ((rails_master_key))
+
+      DATABASE_URL: 'postgres://postgres@localhost:5432/db'
+      GOVUK_WEBSITE_ROOT: ey-recovery-test
+      GOVUK_APP_DOMAIN: london.cloudapps.digital
+      DOMAIN: ey-recovery-test.london.cloudapps.digital
+
+      NODE_ENV: production
+      RAILS_ENV: production
+      CONTENTFUL_ENVIRONMENT: staging
+
+      RAILS_MAX_THREADS: 5
+      WEB_CONCURRENCY: 2
+
+  # - # jobs
+  #   name: ey-recovery-test-worker
+  #   type: worker
+  #   command: bundle exec que
+  #   no-route: true
