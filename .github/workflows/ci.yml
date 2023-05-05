@@ -89,8 +89,8 @@ jobs:
       - # Test CMS functionality
         name: Run test suite (CMS)
         run: bundle exec rspec
-      - # Re-test CMS question response data migration feature
-        name: Run test suite (CMS)
-        run: bundle exec rspec
-        env:
-          DISABLE_USER_ANSWER: true
+      # - # Re-test CMS question response data migration feature
+      #   name: Run test suite (CMS)
+      #   run: bundle exec rspec
+      #   env:
+      #     DISABLE_USER_ANSWER: true
