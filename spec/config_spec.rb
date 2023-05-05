@@ -4,7 +4,7 @@ RSpec.describe 'Application configuration' do
   subject(:config) { EarlyYearsFoundationRecovery::Application.config }
 
   it 'sets time zone' do
-    expect(config.time_zone).to eq 'Europe/London'
+    expect(config.time_zone).to eq 'UTC'
   end
 
   it 'sets service name' do

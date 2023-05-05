@@ -1,0 +1,6 @@
+= f.govuk_radio_buttons_fieldset :answers, legend: { text: translate_markdown(response.legend) } do
+  = f.govuk_error_summary
+
+  = f.hidden_field :answers
+  - response.options.each do |option|
+    = f.question_radio_button(option)

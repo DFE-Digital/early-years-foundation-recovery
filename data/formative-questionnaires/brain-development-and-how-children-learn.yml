@@ -227,7 +227,9 @@ brain-development-and-how-children-learn:
       1_managed_risk:
         multi_select: false
         body: |
-          True or false? Experiencing managed risk and challenge will increase myelination of neurons and support the development of new skills.
+          True or false?
+
+          Experiencing managed risk and challenge will increase myelination of neurons and support the development of new skills.
         assessment_summary: |
           When children try new things and challenge themselves this promotes myelination of neurons. This improves the speed at which the message travels in the brain, and so improves the skill.
         assessment_fail_summary: |
@@ -480,7 +482,9 @@ brain-development-and-how-children-learn:
       1_test_understanding_relationships:
         multi_select: false
         body: |
-          True or false? Children need opportunities to test their understanding of the relationships they have experienced.
+          True or false?
+
+          Children need opportunities to test their understanding of the relationships they have experienced.
         assessment_summary: |
           Following high quality adult interaction, children will then benefit from opportunities to test their understanding of the relationships they have experienced.
         assessment_fail_summary: |

@@ -117,11 +117,11 @@ RSpec.describe User, type: :model do
 
     it 'exports formatted attributes as CSV' do
       expect(described_class.to_csv).to eq <<~CSV
-        id,local_authority,setting_type,role_type,registration_complete,private_beta_registration_complete,registered_at,module_1_time,module_2_time,module_3_time
-        1,Watford Borough Council,,Childminder,true,true,,4,2,0
-        2,Leeds City Council,,Trainer or lecturer,true,false,,1,0,
-        3,City of London,,Childminder,true,false,2023-01-12 10:15:59,3,,
-        4,,,,false,false,,,,
+        id,local_authority,setting_type,role_type,registration_complete,private_beta_registration_complete,registration_complete_any,registered_at,module_1_time,module_2_time,module_3_time
+        1,Watford Borough Council,,Childminder,true,true,true,,4,2,0
+        2,Leeds City Council,,Trainer or lecturer,true,false,true,,1,0,
+        3,City of London,,Childminder,true,false,true,2023-01-12 10:15:59,3,,
+        4,,,,false,false,false,,,,
       CSV
     end
   end
@@ -137,6 +137,24 @@ RSpec.describe User, type: :model do
       expect(user.email).to eq "redacted_user#{user.id}@example.com"
       expect(user.valid_password?('redacteduser')).to eq true
       expect(user.closed_at).to be_within(30).of(Time.zone.now)
+    end
+  end
+
+  describe '#active_modules' do
+    subject(:user) do
+      create(:user,
+             module_time_to_completion: {
+               alpha: 4,
+               bravo: 2,
+             })
+    end
+
+    before do
+      skip 'WIP' unless Rails.application.cms?
+    end
+
+    it 'filters by user progress state' do
+      expect(user.active_modules.map(&:name)).to eq %w[alpha bravo]
     end
   end
 end
