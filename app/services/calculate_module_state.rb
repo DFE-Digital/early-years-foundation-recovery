@@ -43,8 +43,13 @@ private
     end
   end
 
+  # @return [Array<String>]
   def module_names
-    TrainingModule.published.map(&:name)
+    if Rails.application.cms?
+      Training::Module.ordered.reject(&:draft?).map(&:name)
+    else
+      TrainingModule.published.map(&:name)
+    end
   end
 
   def mod_event(training_module, event_name)

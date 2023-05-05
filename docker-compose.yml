@@ -36,14 +36,14 @@ services:
     healthcheck:
       test: pg_isready
     volumes:
-      - db_prod:/var/lib/postgresql/data
+      - db:/var/lib/postgresql/data
     ports:
       - 5432:5432
     networks:
       - recovery
 
 volumes:
-  db_prod:
+  db:
 
 networks:
   recovery:

@@ -1,9 +1,9 @@
 .noprint
-  = render 'shared/progress_bar', bar: @module_progress_bar
+  = render 'shared/progress_bar'
 
   h1 Get your certificate 
 
-  - if @module_progress.completed?
+  - if module_progress.completed?
     p Congratulations! You have now completed this module.
   - else
     p You have not yet completed the module.
@@ -17,7 +17,7 @@
 
 h3 Certificate of achievement
 
-- if @module_progress.completed?
+- if module_progress.completed?
   h1.data-hj-suppress= current_user.name
   p has completed the following module:
 - else
@@ -25,8 +25,8 @@ h3 Certificate of achievement
 
 h2= mod.title
 
-- if @module_progress.completed?
-  p= t('date_completed', date: certificate_date(@module_progress.completed_at))
+- if module_progress.completed?
+  p= t('date_completed', date: certificate_date(module_progress.completed_at))
 
 p This module has covered:
 

@@ -1,10 +1,9 @@
 module.exports = function(migration) {
 
-  migration.deleteContentType('trainingModule')
-
   const trainingModule = migration.createContentType('trainingModule', {
     name: 'Training Module',
-    displayField: 'title'
+    displayField: 'title',
+    description: 'Top-level Model'
   })
 
   /* Fields ----------------------------------------------------------------- */
@@ -37,12 +36,14 @@ module.exports = function(migration) {
   trainingModule.createField('image', {
     name: 'Image',
     type: 'Link',
-    linkType: 'Asset'
+    linkType: 'Asset',
+    required: true
   })
 
   trainingModule.createField('name', {
 	  name: 'Name',
     type: 'Symbol',
+    required: true,
     validations: [
       {
         unique: true
@@ -52,37 +53,48 @@ module.exports = function(migration) {
 
   trainingModule.createField('short_description', {
     name: 'Short description',
-    type: 'Text'
+    type: 'Text',
+    required: true
   })
 
   trainingModule.createField('description', {
     name: 'Description',
-    type: 'Text'
+    type: 'Text',
+    required: true
   })
 
+  // markdown not permitted
   trainingModule.createField('objective', {
     name: 'Objective',
-    type: 'Text'
+    type: 'Text',
+    required: true,
+    validations: [
+      { 'prohibitRegexp': { 'pattern': '\\n'} }
+    ]
   })
 
   trainingModule.createField('criteria', {
     name: 'Criteria',
-    type: 'Text'
+    type: 'Text',
+    required: true
   })
 
   trainingModule.createField('duration', {
     name: 'Duration',
-    type: 'Number'
+    type: 'Number',
+    required: true
   })
 
   trainingModule.createField('summative_threshold', {
     name: 'Summative threshold',
-    type: 'Integer'
+    type: 'Integer',
+    required: true
   })
 
   trainingModule.createField('position', {
     name: 'Position',
-    type: 'Integer'
+    type: 'Integer',
+    required: true
   })
 
   trainingModule.createField('pages', {
@@ -103,13 +115,12 @@ module.exports = function(migration) {
     }
   })
 
-
   /* Interface --------------------------------------------------------------
   https://www.contentful.com/developers/docs/extensibility/app-framework/editor-interfaces/
+  */
 
   trainingModule.changeFieldControl('pages', 'builtin', 'entryLinksEditor', {
     helpText: 'Define module content and order here',
   })
 
-  */
 }
