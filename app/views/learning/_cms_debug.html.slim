@@ -1,19 +1,14 @@
 - if debug? && Rails.application.cms?
   pre.debug_dump
     h4 Deployment
-
     | instance: #{ENV['CF_INSTANCE_INDEX']}
-
     h4 Contentful
-
     | env: #{ContentfulRails.configuration.environment}
     br
     | API (ContentfulModel): #{ContentfulModel.use_preview_api ? 'preview' : 'delivery'}
     br
     | API (ContentfulRails): #{ContentfulRails.configuration.enable_preview_domain ? 'preview' : 'delivery'}
-
     hr
-
     h4 Cache
     | key: #{Training::Module.cache_key}
     br

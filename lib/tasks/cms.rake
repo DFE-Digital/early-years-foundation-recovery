@@ -2,6 +2,20 @@
 #
 namespace :eyfs do
   namespace :cms do
+    # Support for Regexp
+    #
+    # ./bin/docker-rails 'eyfs:cms:search[practi(c|s)e]'
+    #
+    desc 'Query question answer labels'
+    task :search, [:text] => :environment do |_task, args|
+      Training::Module.ordered.map do |mod|
+        puts ''
+        puts mod.name
+        puts '================='
+        puts mod.answers_with(args[:text])
+      end
+    end
+
     desc 'Define Contentful entry models'
     task migrate: :environment do
       migrations = Dir[Rails.root.join('cms/migrate/*')]

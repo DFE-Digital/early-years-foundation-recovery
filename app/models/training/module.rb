@@ -4,28 +4,12 @@ module Training
     # has_many :questions, class_name: 'Training::Question'
     # has_many :videos, class_name: 'Training::Video'
 
-    extend Dry::Core::Cache
-
-    # @param key [String] entry id / collection
-    # @return [String] timestamped cache key
-    def self.to_key(key)
-      "#{key}-#{cache_key}"
+    # @deprecated Not required for CMS
+    def module_items
+      content
     end
 
-    # @return [String] default "initial"
-    def self.cache_key
-      cache.get_or_default('cache_key', 'initial')
-    end
-
-    # memoise latest release timestamp & prevent cache overload
-    # (increase as CMS entries/assets grow)
-    #
-    # @see HomeController#index
-    # @return [String] old key
-    def self.reset_cache_key!
-      cache.clear if cache.size > 2_000
-      cache.get_and_set('cache_key', Release.cache_key || cache_key)
-    end
+    extend ::Caching
 
     # @return [String]
     def self.content_type_id
@@ -53,17 +37,12 @@ module Training
       end
     end
 
-    # METHODS TO DEPRECATE --------------------------------------
-    def module_items
-      content
-    end
-    # METHODS TO DEPRECATE --------------------------------------
-
     # @return [String]
     def debug_summary
       <<~SUMMARY
         cms id: #{id}
         path: #{name}
+        published at: #{published_at}
         duration: #{duration}
         submodules: #{submodule_count}
         topics: #{topic_count}
@@ -164,18 +143,22 @@ module Training
       Array(fields[:pages]).any?
     end
 
-    # # @return [Datetime]
-    # delegate :published_at, to: :entry
+    # @return [String, nil]
+    def published_at
+      return unless Rails.env.development?
 
-    # # NB: Adds additional call to Management API (per-dev tokens may need to bestow access to the active env)
-    # #
-    # # @see ContentfulCourseProgress#debug_summary
-    # # @return [Contentful::Management::Entry]
-    # def entry
-    #   @entry ||= to_management
-    # rescue NoMethodError
-    #   @entry = refetch_management_entry
-    # end
+      entry.published_at.in_time_zone(ENV['TZ']).strftime('%d-%m-%Y %H:%M')
+    end
+
+    # @see Training::Module#debug_summary
+    # @see ContentfulCourseProgress#debug_summary
+    #
+    # @return [Contentful::Management::Entry]
+    def entry
+      @entry ||= to_management
+    rescue NoMethodError
+      @entry = refetch_management_entry
+    end
 
     # content pages ---------------------------------
 
@@ -249,6 +232,12 @@ module Training
     # @return [Array<Training::Question>]
     def confidence_questions
       content.select(&:confidence_question?)
+    end
+
+    # @param text [String]
+    # @return [Array<String>]
+    def answers_with(text)
+      questions.select { |q| q.answer.contains?(text) }.map(&:name)
     end
 
     # view decorators ---------------------------------

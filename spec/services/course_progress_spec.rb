@@ -100,7 +100,7 @@ RSpec.describe CourseProgress do
         ((_mod, completion_time)) = course.completed_modules
 
         expect(completion_time).to be_an ActiveSupport::TimeWithZone
-        expect(completion_time.to_s).to eq '2022-06-30 00:30:00 +0100'
+        expect(completion_time.to_s).to eq '2022-06-30 00:30:00 UTC'
       end
     end
   end

@@ -156,23 +156,9 @@ class ContentfulDataIntegrity
     page_by_type_position(type: 'video_page')
   end
 
-  # map over questions and use the custom strictly typed Dry::Struct object to
-  # assert that no type constraint error is raised, meaning it is valid JSON
-  #
-  # @example
-  #
-  #   [
-  #     ["Strongly agree", true],
-  #     ["Agree", true],
-  #     ["Neither agree nor disagree", true],
-  #     ["Disagree", true],
-  #     ["Strongly disagree", true]
-  #   ]
-  #
   # @return [Boolean]
   def question_answers?
-    # mod.questions.all? { |question| ::Answer.new(json: question.answers).valid? }
-    true # WIP being continued in another PR
+    mod.questions.all? { |question| question.answer.valid? }
   end
 
   # @return [Boolean] demo modules have fewer questions than genuine content
@@ -195,7 +181,6 @@ private
   # @return [String] preview / delivery
   def api
     ContentfulModel.use_preview_api ? 'preview' : 'delivery'
-    # ContentfulRails.configuration.enable_preview_domain ? 'preview' : 'delivery'
   end
 
   # @return [String] master / staging / test

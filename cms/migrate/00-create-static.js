@@ -1,10 +1,30 @@
+/*
+https://github.com/contentful/contentful-migration/blob/master/README.md#reference-documentation
+
 module.exports = function(migration) {
 
-  migration.deleteContentType('static')
+  const trainingModule = migration.editContentType('trainingModule')
+
+  trainingModule.editField('objective', {
+    validations: [
+      { 'prohibitRegexp': { 'pattern': '\\n'} }
+    ]
+  })
+
+  const page = migration.editContentType('page')
+
+  page.deleteField('notes')
+
+  migration.deleteContentType('question')
+}
+
+*/
+module.exports = function(migration) {
 
   const staticPage = migration.createContentType('static', {
     name: 'Static',
     displayField: 'name',
+    description: 'Stand alone pages'
   })
 
   /* Fields ----------------------------------------------------------------- */
@@ -40,4 +60,9 @@ module.exports = function(migration) {
       'en-US': false
     }
   })
+
+  staticPage.changeFieldControl('name', 'builtin', 'slugEditor', {
+    helpText: 'Unique page slug',
+  })
+
 }

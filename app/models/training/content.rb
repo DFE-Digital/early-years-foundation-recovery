@@ -19,6 +19,21 @@ module Training
 
     # METHODS TO DEPRECATE --------------------------------------
 
+    # @return [String, nil]
+    def published_at
+      return unless Rails.env.development?
+
+      entry.published_at.in_time_zone(ENV['TZ']).strftime('%d-%m-%Y %H:%M')
+    end
+
+    # @see Training::Content#debug_summary
+    # @return [Contentful::Management::Entry]
+    def entry
+      @entry ||= to_management
+    rescue NoMethodError, Errno::ECONNREFUSED
+      @entry = refetch_management_entry
+    end
+
     # NB: do not apply additional caching here
     # @return [Training::Content]
     def self.by_id(id)
@@ -65,11 +80,7 @@ module Training
     #
     # @return [Integer] (zero index)
     def position_within_module
-      # if parent.instance_variable_set?(:@children)
-      # content.index(self) # all children loaded
-      # else
       parent.fields[:pages].rindex { |child_link| child_link.id.eql?(id) }
-      # end
     end
 
     # Needs full entries to be loaded
@@ -240,6 +251,7 @@ module Training
         cms id: #{id}
         module name: #{parent.name}
         path: #{name}
+        published at: #{published_at}
         page type: #{page_type}
 
         ---

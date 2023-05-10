@@ -60,7 +60,7 @@ module Reporting
   end
 
   def modules
-    TrainingModule.published.map do |mod|
+    mods.map do |mod|
       {
         id: mod.id,
         name: mod.name,
@@ -72,6 +72,7 @@ module Reporting
         in_progress: in_progress(mod),
         completed: completed(mod),
 
+        true_false: true_false_count(mod),
         # module
         module_start: Ahoy::Event.module_start.where_module(mod.name).count,
         module_complete: Ahoy::Event.module_complete.where_module(mod.name).count,
@@ -103,6 +104,19 @@ private
     puts "#{file_path} created"
   end
 
+  def mods
+    if Rails.application.cms?
+      Training::Module.ordered
+    else
+      TrainingModule.published
+    end
+  end
+
+  def true_false_count(mod)
+    return 'N/A' unless Rails.application.cms?
+
+    mod.questions.count(&:true_false?)
+  end
   #
   # @see ContentPagesController#track_events
   # @see ApplicationHelper#calculate_module_state

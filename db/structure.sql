@@ -17,62 +17,6 @@ SET row_security = off;
 
 
 --
--- Name: citext; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;
-
-
---
--- Name: EXTENSION citext; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION citext IS 'data type for case-insensitive character strings';
-
-
---
--- Name: fuzzystrmatch; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS fuzzystrmatch WITH SCHEMA public;
-
-
---
--- Name: EXTENSION fuzzystrmatch; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION fuzzystrmatch IS 'determine similarities and distance between strings';
-
-
---
--- Name: pgcrypto; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
-
-
---
--- Name: EXTENSION pgcrypto; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
-
-
---
--- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
-
-
---
--- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
-
-
---
 -- Name: que_validate_tags(jsonb); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -559,6 +503,43 @@ ALTER SEQUENCE public.releases_id_seq OWNED BY public.releases.id;
 
 
 --
+-- Name: responses; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.responses (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    training_module character varying NOT NULL,
+    question_name character varying NOT NULL,
+    answers jsonb DEFAULT '[]'::jsonb,
+    archived boolean DEFAULT false,
+    correct boolean,
+    user_assessment_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: responses_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.responses_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: responses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.responses_id_seq OWNED BY public.responses.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -738,6 +719,13 @@ ALTER TABLE ONLY public.releases ALTER COLUMN id SET DEFAULT nextval('public.rel
 
 
 --
+-- Name: responses id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.responses ALTER COLUMN id SET DEFAULT nextval('public.responses_id_seq'::regclass);
+
+
+--
 -- Name: user_answers id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -828,6 +816,14 @@ ALTER TABLE ONLY public.que_values
 
 ALTER TABLE ONLY public.releases
     ADD CONSTRAINT releases_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: responses responses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.responses
+    ADD CONSTRAINT responses_pkey PRIMARY KEY (id);
 
 
 --
@@ -923,6 +919,20 @@ CREATE INDEX index_releases_on_name_and_time ON public.releases USING btree (nam
 --
 
 CREATE INDEX index_releases_on_properties ON public.releases USING gin (properties jsonb_path_ops);
+
+
+--
+-- Name: index_responses_on_user_assessment_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_responses_on_user_assessment_id ON public.responses USING btree (user_assessment_id);
+
+
+--
+-- Name: index_responses_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_responses_on_user_id ON public.responses USING btree (user_id);
 
 
 --
@@ -1052,6 +1062,13 @@ CREATE UNIQUE INDEX que_scheduler_job_in_que_jobs_unique_index ON public.que_job
 
 
 --
+-- Name: user_question; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX user_question ON public.responses USING btree (user_id, training_module, question_name);
+
+
+--
 -- Name: que_jobs que_job_notify; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -1073,11 +1090,27 @@ CREATE TRIGGER que_state_notify AFTER INSERT OR DELETE OR UPDATE ON public.que_j
 
 
 --
+-- Name: responses fk_rails_2bd9a0753e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.responses
+    ADD CONSTRAINT fk_rails_2bd9a0753e FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
 -- Name: notes fk_rails_7f2323ad43; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.notes
     ADD CONSTRAINT fk_rails_7f2323ad43 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: responses fk_rails_9bf18408da; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.responses
+    ADD CONSTRAINT fk_rails_9bf18408da FOREIGN KEY (user_assessment_id) REFERENCES public.user_assessments(id);
 
 
 --
@@ -1142,6 +1175,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230117091239'),
 ('20230223151527'),
 ('20230224151527'),
-('20230316130014');
+('20230316130014'),
+('20230413091500');
 
 
