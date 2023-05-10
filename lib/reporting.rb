@@ -62,11 +62,6 @@ module Reporting
     }
   end
 
-  # @return [Integer] Number of users who have added at least one note
-  def self.get_users_with_notes_count
-    User.joins(:notes).distinct.count
-  end
-
   def modules
     mods.map do |mod|
       {
@@ -98,6 +93,11 @@ module Reporting
   end
 
 private
+
+  # @return [Integer] Number of users who have added at least one note
+  def get_users_with_notes_count
+    User.joins(:notes).distinct.count
+  end
 
   def export(file_name, headers, rows)
     file_path = Rails.root.join("tmp/#{file_name}.csv")
