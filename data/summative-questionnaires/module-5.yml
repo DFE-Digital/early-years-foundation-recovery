@@ -142,20 +142,16 @@ module-5:
       1_limited_physical:
         multi_select: false
         label: |
-          Which of the following might be affected by a child’s limited physical skills?
+          True or false, a child’s physical development can affect their self-efficacy?
 
         assessment_summary:
         assessment_fail_summary: |
-          A lack of independence as a result of limited physical skills or additional needs may impact upon a child’s feeling of self-worth. This will impact on the child’s self efficacy and they will become more reluctant to try as they become overwhelmed by the thought that they cannot succeed. They will then become more and more dependent on others to meet their needs.
-
-          It is important that children are empowered to be ambitious for themselves. You will need to adapt your planning to set children small tasks that result in lots of praise and achievement.
+          A child’s ability to access and use toys, feed themselves and participate in activities will affect their confidence. Where children have confidence in their physical ability, they are more likely to have high self-efficacy. This means they will tackle situations believing that they can succeed. Children with high self-efficacy and resilience are more likely to take part and persevere in activities and environments that they find challenging.
 
           You might want to revisit the section on the [holistic impact of physical skills](/modules/module-5/content-pages/5-2-1).
         answers:
-          1: "Self-worth"
-          2: "Sight"
-          3: "Appetite"
-          4: "Hearing"
+          1: "True"
+          2: "False"
         correct_answers:
         - 1
 
@@ -187,14 +183,14 @@ module-5:
       1_positive_environment:
         multi_select: true
         label: |
-          Which of the following are significantly improved when children have regular access to an outdoor space?
+          Which of the following may be improved when children have regular access to an outdoor space?
 
           Choose all that apply.
         assessment_summary:
         assessment_fail_summary: |
-          Research shows us that children who regularly access outdoor environments have improved strength, agility and coordination. This is because running, climbing and swinging use different movements, muscles and control to those needed for indoor movement.
+          Children who regularly access outdoor environments are likely to have improved strength, agility and co-ordination. This is because running, climbing and swinging use different movements, muscles and control to those needed for indoor movement.
 
-          Children who have opportunities to test and develop new movement skills also develop greater self confidence.
+          Children who have opportunities to test and develop new movement skills may also develop greater self confidence.
 
           You might want to revisit the section on [the outdoor environment](/modules/module-5/content-pages/5-3-2-5a).
         answers:
