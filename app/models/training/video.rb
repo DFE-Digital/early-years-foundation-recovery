@@ -22,6 +22,11 @@ module Training
       %(#{video_site}/#{video_id}?enablejsapi=1&amp;origin=#{ENV['DOMAIN']})
     end
 
+    # @return [Array<String, Hash>]
+    def schema
+      [name, page_type, heading, Types::EMPTY_HASH]
+    end
+
   private
 
     # @return [String]
