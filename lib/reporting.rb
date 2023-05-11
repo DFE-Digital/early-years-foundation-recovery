@@ -56,8 +56,8 @@ module Reporting
       not_started_learning: not_started_learning,
 
       # Number of distinct users who have at least one note
-      with_notes: get_users_with_notes_count,
-      with_notes_percentage: (get_users_with_notes_count.to_f / User.all.count * 100).round(2),
+      with_notes: User.has_notes,
+      with_notes_percentage: (User.has_notes.to_f / User.all.count * 100).round(2),
 
     }
   end
@@ -93,11 +93,6 @@ module Reporting
   end
 
 private
-
-  # @return [Integer] Number of users who have added at least one note, given the note body is not empty
-  def get_users_with_notes_count
-    User.joins(:notes).distinct.count { |user| user.notes.any? { |note| !note.body.strip.empty? } }
-  end
 
   def export(file_name, headers, rows)
     file_path = Rails.root.join("tmp/#{file_name}.csv")

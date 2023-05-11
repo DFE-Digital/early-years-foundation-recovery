@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :user do
-    email { Faker::Internet.safe_email }
+    email { Faker::Internet.email }
     password { 'StrongPassword123' }
     terms_and_conditions_agreed_at { Date.new(2000, 0o1, 0o1) }
 
