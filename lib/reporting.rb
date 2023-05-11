@@ -94,9 +94,9 @@ module Reporting
 
 private
 
-  # @return [Integer] Number of users who have added at least one note
+  # @return [Integer] Number of users who have added at least one note, given the note body is not empty
   def get_users_with_notes_count
-    User.joins(:notes).distinct.count
+    User.joins(:notes).distinct.count { |user| user.notes.any? { |note| !note.body.strip.empty? } }
   end
 
   def export(file_name, headers, rows)

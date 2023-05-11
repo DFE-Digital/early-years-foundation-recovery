@@ -26,6 +26,14 @@ RSpec.describe Reporting do
     user2.notes.create(body: 'test note body')
   end
 
+  let(:blank_note) do
+    user1.notes.create(body: '')
+  end
+
+  let(:whitespace_note) do
+    user1.notes.create(body: " \n \n \n")
+  end
+
   describe '.users' do
     context 'when 0 users or notes exist' do
       it 'notes count is 0 and percentage is NaN' do
@@ -37,6 +45,16 @@ RSpec.describe Reporting do
     context 'when there are users but no notes' do
       it 'notes count is 0 and percentage is 0' do
         expect(user1.email).to eq('test1@example.com')
+        expect(reporting.users[:with_notes]).to eq(0)
+        expect(reporting.users[:with_notes_percentage]).to eq(0)
+      end
+    end
+
+    context 'when there is a saved note but the body is empty' do
+      it 'the note is not counted' do
+        expect(user1.email).to eq('test1@example.com')
+        expect(blank_note.body).to eq('')
+        expect(whitespace_note.body).to eq(" \n \n \n")
         expect(reporting.users[:with_notes]).to eq(0)
         expect(reporting.users[:with_notes_percentage]).to eq(0)
       end
