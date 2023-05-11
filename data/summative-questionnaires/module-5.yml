@@ -158,24 +158,29 @@ module-5:
   5-4-1-8:
     content:
     questions:
-      1_practitioners-role:
+      1_freedom:
         multi_select: true
-        label: |
-          Which of the following describes your role in children’s physical development? (Select all answers that apply)
+        body: |
+          Which of the following will promote physical literacy with children? Choose all that apply.
         assessment_summary:
         assessment_fail_summary: |
-          You will need to plan an active curriculum to ensure that children’s fine and gross motor skills are promoted. Being an enthusiastic role model will support children’s enthusiasm and motivation to be physically active.
+          Physical literacy is the confidence, motivation and skill levels needed to take part in physical activities. You can promote physical literacy by:
 
-          You might want to revisit the section on [the practitioner's role](/modules/module-5/content-pages/5-3-1).
+          - providing a wealth of activities that support children’s physical skills
+          - making physical activity part of a regular routine
+          - being a good role model
+          - offering lots of praise and encouragement for engagement in physical activities
+          - introducing and reinforcing language relating to movement and physical skills
         answers:
-          1: "Cautious and considerate"
-          2: "Active and enthusiastic"
-          3: "Informed and involved"
-          4: "Balanced and inclusive"
+          1: "Encouraging children’s physical confidence"
+          2: "Being a good role model"
+          3: "Ensuring the routine includes regular opportunities for physical activity"
+          4: "Introducing vocabulary relating to physical activity"
         correct_answers:
-        - 2
-        - 3
-        - 4
+          - 1
+          - 2
+          - 3
+          - 4
 
   5-4-1-9:
     content:

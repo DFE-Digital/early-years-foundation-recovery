@@ -221,23 +221,11 @@ module-5:
       1_freedom:
         multi_select: true
         body: |
-          Which of the following will promote physical literacy with children? Choose all that apply.
+          New question requested from Debbie
         assessment_summary: |
-          Physical literacy is the confidence, motivation and skill levels needed to take part in physical activities. You can promote physical literacy by:
-
-          - providing a wealth of activities that support children’s physical skills
-          - making physical activity part of a regular routine
-          - being a good role model
-          - offering lots of praise and encouragement for engagement in physical activities
-          - introducing and reinforcing language relating to movement and physical skills
+          Answer summary
         assessment_fail_summary: |
-          Physical literacy is the confidence, motivation and skill levels needed to take part in physical activities. You can promote physical literacy by:
-
-          - providing a wealth of activities that support children’s physical skills
-          - making physical activity part of a regular routine
-          - being a good role model
-          - offering lots of praise and encouragement for engagement in physical activities
-          - introducing and reinforcing language relating to movement and physical skills
+          Answer summary
         answers:
           1: "Encouraging children’s physical confidence "
           2: "Being a good role model "
