@@ -1,6 +1,6 @@
 # CMS webooks
 class HookController < ApplicationController
-  # TODO: secure webhook endpoints!!!
+  before_action :authenticate_hook!
   skip_before_action :verify_authenticity_token, only: %i[release change]
 
   # POST production / delivery
@@ -115,6 +115,10 @@ class HookController < ApplicationController
   end
 
 private
+
+  def authenticate_hook!
+    render json: { status: 'invalid secure header' }, status: :unauthorized unless bot_token?
+  end
 
   # @return [Hash]
   def payload
