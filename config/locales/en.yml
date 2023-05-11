@@ -26,11 +26,11 @@ en:
             terms_and_conditions_agreed_at:
               blank: You must accept the terms and conditions and privacy policy to create an account.
             setting_type_id:
-              blank: Enter the setting type you work in. 
+              blank: Enter the setting type you work in.
               inclusion: Enter the setting type you work in.
             setting_type_other:
-              blank: Enter the setting type you work in. 
-            role_type: 
+              blank: Enter the setting type you work in.
+            role_type:
               blank: Select your role.
             role_type_other:
               blank: Enter your job title.
@@ -39,6 +39,14 @@ en:
   activerecord:
     errors:
       models:
+        response:
+          attributes:
+            answers:
+              blank: Please select an answer.
+        user_answer:
+          attributes:
+            answer:
+              blank: Please select an answer.
         user:
           attributes:
             current_password:
@@ -89,18 +97,18 @@ en:
         body: |
           {:.govuk-hint}
             Search for the type of setting or organisation you work in, for example childminder or nursery.
-            
+
           {:.govuk-hint}
             If you work in more than one early years setting, enter the one where you work most often.
-  
+
           {:.govuk-hint}
             Your training progress won't be shared with anyone without your permission.
         button: Continue
         link_to_setting_type_other: I cannot find my setting or organisation
         autocomplete-not-found: No setting found.
       update:
-        complete_registration: Thank you for creating a child development training account. You can now start the first module.
-        update_registration: Thank you for updating your child development training account. You can now continue.
+        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        update_registration: Thank you for updating your Early years child development training account. You can now continue.
         complete_update: You have updated your details
     setting_type_others:
       edit:
@@ -108,10 +116,10 @@ en:
         body: Enter the type of setting or organisation where you work.
         button: Continue
       update:
-        complete_registration: Thank you for creating a child development training account. You can now start the first module.
-        update_registration: Thank you for updating your child development training account. You can now continue.
+        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        update_registration: Thank you for updating your Early years child development training account. You can now continue.
         complete_update: You have updated your details
-    local_authorities: 
+    local_authorities:
       edit:
         heading: What local authority area do you work in?
         body: |
@@ -121,8 +129,8 @@ en:
         multiple_local_authorities: I work across more than one local authority
         autocomplete-not-found: No local authority found.
       update:
-        complete_registration: Thank you for creating a child development training account. You can now start the first module.
-        update_registration: Thank you for updating your child development training account. You can now continue.
+        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        update_registration: Thank you for updating your Early years child development training account. You can now continue.
         complete_update: You have updated your details
     role_types:
       edit:
@@ -132,8 +140,8 @@ en:
         button: Continue
         link_to_role_type_other: I would describe my role in another way.
       update:
-        complete_registration: Thank you for creating a child development training account. You can now start the first module.
-        update_registration: Thank you for updating your child development training account. You can now continue.
+        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        update_registration: Thank you for updating your Early years child development training account. You can now continue.
         complete_update: You have updated your details
     role_type_others:
       edit:
@@ -141,8 +149,8 @@ en:
         body: Enter your job title.
         button: Continue
       update:
-        complete_registration: Thank you for creating a child development training account. You can now start the first module.
-        update_registration: Thank you for updating your child development training account. You can now continue.
+        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        update_registration: Thank you for updating your Early years child development training account. You can now continue.
         complete_update: You have updated your details
   setting_type:
     heading: Change your setting's information
@@ -161,54 +169,48 @@ en:
   module_call_to_action:
     completed: View certificate
     failed: Retake test
-    started: Resume training
-    not_started: Start
+    started: Resume module
+    not_started: Start module
 
   experts:
     heading: The experts
-    summary: This training course has been created by 3 early years experts.
+    summary: This training course has been created by early years experts.
     body: |
-      ### Debbie Parry
+      The experts who have worked with the Department for Education on this training have significant experience in early years education.
 
-      Debbie Parry has over 20 years of experience in education and training.
-      She spent several years working as an early years practitioner in private day nurseries,
-      before going on to use her knowledge and experience to teach the practitioners
-      of the future in college environments.
+      Their experience includes:
 
-      Debbie has supported a wide range of practitioners including childminders,
-      apprentices and nursery staff. Most recently, she has been designing and delivering
-      bespoke training packages for those working in the early years sector.
+      - working as early years practitioners
+      - working as nursery managers
+      - working in SEND residential environments
+      - teaching early years courses in college environments
+      - supporting a wide range of practitioners including childminders, apprentices and nursery staff
 
-      Debbie's qualifications include:
+      Their qualifications in early years practice include:
 
-      - BTEC National Diploma in Early Childhood Studies
-      - NCFE CACHE Level 2 Certificate in Understanding Behaviour that Challenges
-      - NCFE CACHE Level 2 Certificate in Understanding Autism
-      - Diploma in Teaching in the Lifelong Learning Sector (DTLLS)
-
-      ### Melissa Tharm
-
-      Melissa Tharm worked in SEND residential environments for a number of years.
-      She now brings her experience and knowledge to designing and delivering
-      outstanding training programmes to professionals in the health, care and education sectors.
-
-      Melissa's qualifications include:
-
+      - Foundation Degree in Early Childhood Studies
       - Certificate in Education (CertEd)
+      - BTEC National Diploma in EY Studies
+
+      Their qualifications in early years management include:
+
+      - CMI Level 5 Diploma Leadership and Management
+      - CMI Level 3 Certificate in Principles of Management and Leadership
+      - NCFE Level 2 Certificate in Equality and Diversity
+      - NCFE Level 2 Certificate in Counselling Skills
+      - Safeguarding and Prevent
+      - Licence to Observe
+      - D32/D33 Assessor Qualification
+
+      Their additional qualifications include:
+
+      - Diploma in Teaching in the Lifelong Learning Sector (DTLLS)
       - GNVQ Advanced Health and Social Care
+      - NCFE CACHE Level 2 Certificate in Understanding Behaviour that Challenges
       - NCFE CACHE Level 2 Certificate in Understanding Autism
       - Makaton Stage 8
 
-      ### Catherine Mcelroy
 
-      Catherine Mcelroy has over 20 years of experience working in private day nurseries with children under 5.
-      She has spent the last 10 years as a nursery manager, ensuring that
-      children and their families experience excellent care that is fun and exciting.
-
-      Catherine's qualifications include:
-
-      - BTEC National Diploma in Early Childhood Studies
-      - Foundation Degree in Early Childhood Studies
 
   prompt:
     info: In your setting
@@ -216,6 +218,14 @@ en:
     brain: Reflection point
     note: Add to your learning log
     test: Check your understanding
+
+  timeout:
+    heading: You're about to be signed out
+    body: Your progress through the training has been saved. Other changes made to your account or learning log will not be saved.
+    noscript: |
+      For security, you'll be signed out at %{sign_out_time}.
+
+      To stay signed in, continue through the training or refresh the page.
 
   summary_intro:
     heading: Summary and next steps
@@ -243,12 +253,12 @@ en:
       You can pause and restart the test as much as you like. If you exit part way through, your progress will be saved.
 
       You can review your total score for the test at the end.
-      
+
       To receive a certificate of achievement for this module, you need to receive an overall score of at least %{passmark}%.
 
       If you do not score %{passmark}%, you will be able to see which questions you got wrong. You can repeat the test to improve your score as many times as you want.
-      
-      Your score may be shared anonymously with the Child Development Training team to help DfE measure the impact of this training.
+
+      Your score may be shared anonymously with the Early years child development training team to help DfE measure the impact of this training.
 
       Scores are not shared with any other third parties or organisations.
 
@@ -287,12 +297,23 @@ en:
       You can sign out or close the browser at any time without losing your progress.
       When you next sign in, you can restart from where you left off.
 
-      ## Videos and mobile data usage 
+      ## Videos and mobile data usage
 
-      This module contains videos. Connect to wifi before starting the module to watch the videos without using any mobile data. If you are not able or prefer not to play the videos, you can use the full transcripts provided.
+      This module contains videos. Connect to wifi before starting the module to
+      watch the videos without using any mobile data. If you are not able or prefer
+      not to play the videos, you can use the full transcripts provided.
 
-  icons_page:
-    heading: Before you start
+      ## Free wifi, internet and data resources
+      
+      Our [free wifi, internet and data resources](/wifi-and-data) may help if you have limited or
+      no access to the internet.
+
+      ## Learning check
+      
+      You’ll see the question mark icon next to quiz questions throughout the module.
+      These questions are to check you understand what you have learned.
+      You will be able to see if you get these questions right or wrong.
+      Your scores are not recorded and they do not count towards the certificate of achievement.
 
   check_email_confirmation:
     heading: Check your email
@@ -341,10 +362,80 @@ en:
       text: For other problems with creating your account or signing in, please
       link_text: contact us
 
+  close_account:
+    body: |
+      If you do not want to use your Early years child development training account anymore, you can ask us to close your account.
+      
+      You will no longer be able to access the training modules. Any certificates you have earned will be permanently deleted.
+    button: Request to close account
+    confirm:
+      heading: Confirm you want to close your account
+      body: |
+        After you close your account you will no longer be able to access the training modules.
+        
+        Any certificates you have earned will be permanently deleted.
+        
+        We will delete your personal information within 10 working days. The personal information we will delete includes:
+        
+        - your name
+        - your email address
+        - your postcode, if you provided it when you registered
+        - any notes you have written in your learning log 
+
+        We will keep some anonymous information about:
+        
+        - your role
+        - your local authority
+        - your usage of the training modules
+        - why you closed your account
+        
+        This is to help us improve the training. None of this information will be 
+        personally identifiable to you.
+
+        You may still receive emails while we are processing your account closure. 
+        After your personal information is deleted, you will not receive any further
+        emails from Early years child development training. 
+
+      confirm_button: Close my account
+      cancel_button: Cancel and go back to my account
+    closed:
+      heading: Account closed
+      body: |
+        We have received your request to close your account.
+
+        Your data will be deleted within 10 working days.
+
+        You have been logged out.
+
+  training:
+    assessments:
+      heading: Assessment results
+      show:
+        incorrect: You answered %{answers}. That's not quite right.
+        pass:
+          heading: Congratulations
+          text: |
+            ## **You scored %{score}%**
+
+            Congratulations - you have scored highly enough to receive a certificate of achievement for this module.
+        fail:
+          heading: Revisit the module
+          text: |
+            ## **You scored %{score}%**
+
+
+            Unfortunately you have not scored highly enough to receive a certificate.
+
+
+            You can see the questions you answered incorrectly.
+
+
+            You may wish to revisit some of the learning before taking the test again.
+
   assessment_results:
     heading: Assessment results
-    # body: |
-    #   **Wrong** answers are shown below
+    body: |
+      **Wrong** answers are shown below
     show:
       incorrect: You answered %{answers}. That's not quite right.
       pass:
@@ -393,16 +484,11 @@ en:
   notice:
     email_changed: |
       We have sent an email to your new email address with a link to click to confirm the change.
-      
+
       If you have not received the email after a few minutes, please check your spam folder.
 
   # Browser and bookmarks ------------------------------------------------------
   html_title:
-    content_pages:
-      show:
-        what-to-expect: What to expect during the training
-        before-you-start: Before you start
-        intro: Introduction
     home:
       index: Home page
     learning:
@@ -419,17 +505,15 @@ en:
       edit_setting_type: Change your setting type
       check_email_confirmation: Check email confirmation
       check_email_password_reset: Check email password reset
-    training_modules:
-      index: About training
-    errors:
-      timeout: User timeout
+    timeout:
+      timeout_user: User timeout
     users/sessions:
       new: Sign in
     passwords:
       new: Reset password
       edit: Choose a new password
     registrations:
-      new: Create a child development training account
+      new: Create an Early years child development training account
       edit: Change your password
     confirmations:
       new: Resend your confirmation
@@ -442,12 +526,30 @@ en:
         # FIXME: routing
         cookie_policy: Cookie policy
         cookie-policy: Cookie policy
+
+    # --------------------------------------------------------------------------
+    # YAML titles
+    training_modules:
+      index: About training
+    content_pages:
+      show:
+        what-to-expect: What to expect during the training
     static:
       show:
-        privacy-policy: Privacy policy
         accessibility-statement: Accessibility statement
-        other-problems-signing-in: Other problems signing in
-        terms-and-conditions: Terms and conditions
-        whats-new: What's new
-        sitemap: Sitemap
         new-registration: Update your registration details
+        other-problems-signing-in: Other problems signing in
+        privacy-policy: Privacy policy
+        sitemap: Sitemap
+        terms-and-conditions: Terms and conditions
+        whats-new: What's new in the training
+        wifi-and-data: Free internet, wifi and data resources
+        promotional-materials: Promotional materials for local authorities
+
+    # --------------------------------------------------------------------------
+    # CMS titles
+    training/modules:
+      index: About training
+    training/pages:
+      show:
+        what-to-expect: What to expect during the training

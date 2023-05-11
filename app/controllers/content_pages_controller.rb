@@ -1,8 +1,8 @@
 class ContentPagesController < ApplicationController
-  before_action :authenticate_registered_user!
-  before_action :clear_flash
-  helper_method :module_item, :training_module, :note
-  after_action :track_events, only: :show
+  before_action :authenticate_registered_user!, :clear_flash
+  before_action :progress_bar, only: :show
+  before_action :track_events, only: :show
+  helper_method :module_item, :training_module, :note, :progress_bar
 
   def index
     first_module_item = ModuleItem.find_by(training_module: training_module_name)
@@ -10,7 +10,7 @@ class ContentPagesController < ApplicationController
   end
 
   def show
-    @module_progress = ModuleOverviewDecorator.new(helpers.module_progress(training_module))
+    @module_progress = helpers.module_progress(training_module)
     @model = module_item.model
 
     if @model.is_a?(Questionnaire)
@@ -23,6 +23,10 @@ class ContentPagesController < ApplicationController
   end
 
 private
+
+  def progress_bar
+    @module_progress_bar = ModuleProgressBarDecorator.new(helpers.module_progress(training_module))
+  end
 
   def module_item
     @module_item ||= ModuleItem.find_by!(training_module: training_module_name, name: module_params[:id])
@@ -50,35 +54,60 @@ private
     params.permit(:training_module_id, :id)
   end
 
+  # - create 'module_content_page' for every page view
+  # - create 'module_start' once the intro is viewed
+  # - create 'module_complete' once the certificate is viewed
+  # - create 'confidence_check_complete' once the last question is submitted
+  #
+  # - recalculate the user's progress state as a module is started/completed
+  #
   def track_events
-    track('module_content_page')
+    track('module_content_page', type: module_item.type)
 
     if track_module_start?
       track('module_start')
       helpers.calculate_module_state
-    end
-
-    if module_item.assessment_results? && module_complete_untracked?
+    elsif track_confidence_check_complete?
+      track('confidence_check_complete')
+    elsif track_module_complete?
       track('module_complete')
       helpers.calculate_module_state
     end
-
-    track('confidence_check_complete') if track_confidence_check_complete?
   end
+
+  # Check current item type for matching named event ---------------------------
 
   # @return [Boolean]
   def track_module_start?
-    module_item.module_intro? && untracked?('module_start', training_module_id: training_module_name)
+    module_item.submodule_intro? && module_start_untracked?
+  end
+
+  # @return [Boolean]
+  def track_module_complete?
+    module_item.certificate? && module_complete_untracked?
   end
 
   # @return [Boolean]
   def track_confidence_check_complete?
-    helpers.module_progress(module_item.parent).completed? && untracked?('confidence_check_complete', training_module_id: training_module_name)
+    module_item.thankyou? && confidence_complete_untracked?
   end
 
-  def module_complete_untracked?
-    return false if untracked?('module_start', training_module_id: training_module.name)
+  # Check unique event is not already present ----------------------------------
 
-    untracked?('module_complete', training_module_id: training_module.name)
+  # @return [Boolean]
+  def confidence_complete_untracked?
+    untracked?('confidence_check_complete', training_module_id: training_module_name)
+  end
+
+  # @return [Boolean]
+  def module_complete_untracked?
+    return false if module_start_untracked?
+
+    untracked?('module_complete', training_module_id: training_module_name)
+  end
+
+  # @return [Boolean]
+  def module_start_untracked?
+    untracked?('module_start', training_module_id: training_module_name)
   end
 end

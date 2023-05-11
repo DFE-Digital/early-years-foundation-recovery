@@ -8,8 +8,12 @@ RSpec.describe 'Module overview' do
     visit '/modules/alpha'
   end
 
-  it 'has the module name' do
-    expect(page).to have_content('First Training Module')
+  it 'has back button' do
+    expect(page).to have_link('Back to My modules', href: '/my-modules')
+  end
+
+  it 'has the module number and name' do
+    expect(page).to have_content('Module 1: First Training Module')
   end
 
   it 'has the module description' do
@@ -17,36 +21,23 @@ RSpec.describe 'Module overview' do
   end
 
   it 'has a call to action button to start the module' do
-    expect(page).to have_link('Start')
+    expect(page).to have_link('Start module')
   end
 
-  it 'has the number of topics available in the module' do
-    expect(page).to have_content('9 topics')
-  end
-
-  it 'has the time taken to complete the module' do
-    expect(page).to have_content('3 hours')
-  end
-
-  it 'has the submodule names' do
+  it 'has the section headings' do
     expect(page).to have_content('The first submodule')
-    expect(page).to have_content('The second submodule')
-    expect(page).to have_content('Summary and next steps')
+      .and have_content('The second submodule')
+      .and have_content('Summary and next steps')
   end
 
   it 'has the topic names' do
     expect(page).to have_content('1-1-1')
       .and have_content('1-1-2')
       .and have_content('1-1-3')
-      .and have_content('1-1-4')
+      .and have_content(Rails.application.cms? ? 'Question One - Select from following' : '1-1-4') # Genuine content does not position Question as a topic intro
       .and have_content('1-2-1')
       .and have_content('Recap')
       .and have_content('End of module test')
       .and have_content('Reflect on your learning')
-  end
-
-  it 'has message telling user to complete previous submodule' do
-    expect(page).to have_content('The first submodule must be completed before you begin this section')
-      .and have_content('The second submodule must be completed before you begin this section')
   end
 end

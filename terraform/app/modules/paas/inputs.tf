@@ -55,7 +55,6 @@ variable "web_app_disk_quota" {
   type        = number
   description = "Application disk quota"
   default     = 2048
-  # default     = 3072
 }
 
 variable "web_app_start_command" {
@@ -76,11 +75,25 @@ variable "web_app_stopped" {
 
 variable "web_app_deployment_strategy" {
   type    = string
-  default = "blue-green-v2"
+  default = "blue-green"
+}
+
+# WORKER
+# ------------------------------------------------------------------------------
+
+variable "worker_app_memory" {
+  type    = number
+  description = "Worker memory"
+  default = 512
+}
+
+variable "worker_app_start_command" {
+  type        = string
+  description = "Background job command"
 }
 
 
-# DB (deployment time 5m9s)
+# DB
 # ------------------------------------------------------------------------------
 
 variable "postgres_create_timeout" {

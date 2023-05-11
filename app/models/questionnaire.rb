@@ -160,6 +160,37 @@ class Questionnaire < OpenStruct
     SUMMARY
   end
 
+  # answers:
+  #   [
+  #     ["Correct answer 1", true],
+  #     ["Wrong answer 1"],
+  #   ]
+  # @return [Hash] Question Contentful Model params
+  def cms_params
+    _name, question = questions.first
+
+    answers =
+      unless confidence?
+        question[:answers].map do |key, label|
+          correct = question[:correct_answers].include?(key) || nil
+          [label, correct].compact
+        end
+      end
+
+    # summative and confidence use label, formative uses body
+    query = question[:label] || question[:body]
+    query.gsub! "True or false?\n\n", Types::EMPTY_STRING
+    query.gsub! '(Select all answers that apply)', Types::EMPTY_STRING
+    query.strip!
+
+    {
+      body: query,
+      success_message: question[:assessment_summary],
+      failure_message: question[:assessment_fail_summary],
+      answers: answers,
+    }
+  end
+
 private
 
   # Validations are not used in any logic currently

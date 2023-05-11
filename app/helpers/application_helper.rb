@@ -1,8 +1,9 @@
 module ApplicationHelper
   # @return [String]
   def navigation
-    govuk_header(service_name: 'Child development training', classes: 'noprint') do |header|
+    govuk_header(classes: 'noprint') do |header|
       header.navigation_item(text: 'Home', href: root_path)
+      header.custom_logo { custom_logo }
       if user_signed_in?
         header.navigation_item(text: 'My modules', href: my_modules_path)
         header.navigation_item(text: 'Learning log', href: user_notes_path) if current_user.course_started?
@@ -15,50 +16,80 @@ module ApplicationHelper
   end
 
   # @return [String]
-  def configuration_summary_list
-    govuk_summary_list(
-      rows: [
-        { key: { text: 'Rails version' }, value: { text: Rails.version } },
-        { key: { text: 'Ruby version' }, value: { text: RUBY_VERSION } },
-        { key: {
-            text: 'GOV.UK Frontend',
-          },
-          value: {
-            text: JSON
-              .parse(File.read(Rails.root.join('package.json')))
-              .dig('dependencies', 'govuk-frontend')
-              .tr('^', ''),
-          } },
-      ],
-    )
+  def custom_logo
+    [
+      image_tag('crest.png', alt: 'Department for Education homepage', class: 'govuk-header__logotype-crown-fallback-image'),
+      content_tag(:span, 'Department for Education | ', class: 'govuk-header__logotype-text'),
+      content_tag(:span, service_name, class: 'govuk-header__product-name'),
+    ].join.html_safe
   end
 
+  CONFIG_SUMMARY = [
+    ['Rails version', Rails.version],
+    ['Ruby version', RUBY_VERSION],
+    ['GOV.UK Frontend', JSON.parse(File.read(Rails.root.join('package.json'))).dig('dependencies', 'govuk-frontend').tr('^', '')],
+  ].freeze
+
+  # @return [String]
+  def configuration_summary_list
+    rows =
+      CONFIG_SUMMARY.map do |key, value|
+        { key: { text: key }, value: { text: value } }
+      end
+    govuk_summary_list(rows: rows)
+  end
+
+  # @note deprecate
   # @param mod [TrainingModule]
   # @return [SummativeAssessmentProgress]
   def assessment_progress(mod)
     SummativeAssessmentProgress.new(user: current_user, mod: mod)
   end
 
+  # @note deprecate
   # @param mod [TrainingModule]
   # @return [ModuleProgress]
   def module_progress(mod)
     ModuleProgress.new(user: current_user, mod: mod)
   end
 
+  # @param mod [Training::Module]
+  # @return [ContentfulAssessmentProgress]
+  def cms_assessment_progress(mod)
+    ContentfulAssessmentProgress.new(user: current_user, mod: mod)
+  end
+
+  # @param mod [Training::Module]
+  # @return [ContentfulModuleProgress]
+  def cms_module_progress(mod)
+    ContentfulModuleProgress.new(user: current_user, mod: mod)
+  end
+
+  # @return [Boolean]
   def track_analytics?
     cookies[:track_analytics] == 'true'
   end
 
+  # @param page [nil, ::ModuleItem, ::Training::Page, ::Page]
   # @return [String]
-  def html_title(module_item)
-    site_title = 'Child development training'
-    module_title = module_item&.parent&.title
-    title = t(params.permit('controller', 'action', 'id').values.join('.'), scope: 'html_title', default: module_item&.model&.heading)
-    [
-      site_title,
-      module_title,
-      title,
-    ].compact.join(' : ')
+  def html_title(page)
+    # ::ModuleItem or ::Training::Page
+    module_title = page.parent.title if page.respond_to?(:parent)
+    default =
+      if page.is_a?(::ModuleItem)
+        page.model.heading
+      elsif page.is_a?(::Training::Question)
+        page.name
+      elsif page.present?
+        # ::Training::Page/Video, ::Page
+        page.heading
+      end
+
+    # I18n
+    custom = params.permit('controller', 'action', 'id').values.join('.')
+    page_title = t(custom, scope: 'html_title', default: default)
+
+    [service_name, module_title, page_title].compact.join(' : ')
   end
 
   # @return [String]

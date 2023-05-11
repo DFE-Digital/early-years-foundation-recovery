@@ -7,42 +7,20 @@ RSpec.describe SummativeAssessmentProgress do
   let(:correct_answer_count) { 0 }
 
   before do
+    skip 'WIP' if Rails.application.cms?
+
     correct_answer_count.times do
       user.user_answers.create!(
         assessments_type: 'summative_assessment',
         module: 'alpha',
         questionnaire_id: questionnaire.id,
-        correct: true,
+        answer: [1_000],  # CMS migration introduces a presence validation
+        correct: true,    # <- is all that is required for this spec
       )
     end
   end
 
   include_context 'with progress'
-
-  # describe '#wrong_answers_feedback' do
-  #   it 'does something' do
-  #   end
-  # end
-
-  # describe '#attempted?' do
-  #   it 'does something' do
-  #   end
-  # end
-
-  # describe '#result' do
-  #   it 'does something' do
-  #   end
-  # end
-
-  # describe '#archive_attempt' do
-  #   it 'does something' do
-  #   end
-  # end
-
-  # describe '#status' do
-  #   it 'does something' do
-  #   end
-  # end
 
   describe '#passed?' do
     context 'with all answers correct' do

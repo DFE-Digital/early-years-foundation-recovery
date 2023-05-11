@@ -25,8 +25,9 @@ brain-development-and-how-children-learn:
       1_myelin_neurones:
         multi_select: false
         label: |
-          True or false? When myelin coats the neurones, it decreases the speed that
-          electrical impulses can travel.
+          True or false?
+
+          When myelin coats the neurones, it decreases the speed that electrical impulses can travel.
         assessment_summary:
         assessment_fail_summary: |
           The myelination process coats the neurones in a fatty substance called myelin
@@ -102,8 +103,9 @@ brain-development-and-how-children-learn:
       1_learn_effectively:
         multi_select: false
         label: |
-          True or false? Children learn most effectively in an environment
-          that offers a balance of both child and adult led activity.
+          True or false?
+
+          Children learn most effectively in an environment that offers a balance of both child and adult led activity.
         assessment_summary:
         assessment_fail_summary: |
           A positive learning environment includes a balance of both adult and child led experiences.
@@ -150,7 +152,7 @@ brain-development-and-how-children-learn:
       1_negatively_impact_development_delay:
         multi_select: true
         label: |
-          Which of the following could negatively impact on cognitive delay?
+          Which of the following could cause cognitive delay?
           (Select all answers that apply)
         assessment_summary:
         assessment_fail_summary: |

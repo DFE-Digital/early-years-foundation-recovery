@@ -2,11 +2,6 @@
 brain-development-and-how-children-learn:
   what-to-expect:
     type: interruption_page
-  before-you-start:
-    type: icons_page
-  intro:
-    type: module_intro
-
 
   # ----------------------------------------------------------------------------
   # Submodule 1
@@ -23,6 +18,8 @@ brain-development-and-how-children-learn:
     type: formative_questionnaire
   2-1-1-2a:
     type: text_page
+  2-1-1-2video:
+    type: video_page
   2-1-1-2b:
     type: formative_questionnaire
   2-1-1-3a:
@@ -45,8 +42,6 @@ brain-development-and-how-children-learn:
   2-1-2-1c:
     type: formative_questionnaire
   2-1-2-2:
-    type: text_page
-  2-1-2-3a:
     type: text_page
   2-1-2-3b:
     type: formative_questionnaire
@@ -94,10 +89,14 @@ brain-development-and-how-children-learn:
     type: text_page
   2-2-2-1a:
     type: text_page
+  2-2-2-1video:
+    type: video_page
   2-2-2-1b:
     type: formative_questionnaire
   2-2-2-2:
     type: text_page
+  2-2-2-2video:
+    type: video_page
   2-2-2-3:
     type: text_page
   2-2-2-4a:
@@ -155,7 +154,7 @@ brain-development-and-how-children-learn:
   2-3:
     type: summary_intro
   2-3-1:
-    type: sub_module_intro
+    type: recap_page
 
   # ----------------------------------------------------------------------------
   # End of module test

@@ -5,12 +5,15 @@ defaults: &defaults
   RAILS_SERVE_STATIC_FILES: true
   RAILS_LOG_TO_STDOUT: true
   RAILS_MAX_THREADS: 5
+  WEB_CONCURRENCY: 2 # NB: values greater than 2 impact caching
   RAILS_ENV: production
   NODE_ENV: production
   DATABASE_URL: postgres://postgres@localhost:5432/db
   FEEDBACK_URL: https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-Qjm3BfYzDVIhkQadsLBtTxUMk01Qlc1R0dKRUQ0WEpPUUFYVzdWRllXUCQlQCN0PWcu
   GOVUK_APP_DOMAIN: london.cloudapps.digital
   GROVER_NO_SANDBOX: true
+  EDITOR: vi
+  CONTENTFUL_ENVIRONMENT: staging # master unless overridden
 
 # ey-recovery
 production:
@@ -19,6 +22,8 @@ production:
   GOVUK_WEBSITE_ROOT: child-development-training
   TRACKING_ID: GTM-NFZ88TP  # Live data
   HOTJAR_SITE_ID: 3169682
+  GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-live
+  CONTENTFUL: false
 
 # ey-recovery-staging
 staging:
@@ -26,19 +31,28 @@ staging:
   DOMAIN: ey-recovery-staging.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-staging
   TRACKING_ID: GTM-W6W95FD  # Test data
+  GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-staging
 
 # ey-recovery-dev
 development:
   <<: *defaults
   DOMAIN: ey-recovery-dev.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-dev
+  TRAINING_MODULES: demo-modules
+  # cms
+  # CONTENTFUL_ENVIRONMENT: test # reinstate for pa11y
+  # jobs
+  GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-development
 
 # ey-recovery-content
 content:
   <<: *defaults
-  # TRAINING_MODULES: demo-modules
-  TIMEOUT_MINUTES: 60
+  # jobs
+  DASHBOARD_UPDATE: false
+  # DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # every 5 mins (default: daily at noon)
+  # cms
+  CONTENTFUL_PREVIEW: true
+  # CONTENTFUL_ENVIRONMENT: test
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
-  HOTJAR_SITE_ID: 3169682 # to be removed before merging

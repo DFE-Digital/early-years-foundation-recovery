@@ -10,7 +10,25 @@ $govuk-new-link-styles: true;
 @import "./print-link";
 @import "./quote";
 @import "./icons";
+@import "./modal";
 @import "./autocomplete";
+@import "./progress-bar.scss";
+@import "./header.scss";
+@import './module-overview.scss';
+@import "./assets-page.scss";
+
+* {
+  font-family: 
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen-Sans,
+    Ubuntu,
+    Cantarell,
+    'Helvetica Neue',
+    sans-serif !important;
+}
+
 
 /*
 Internal
@@ -24,6 +42,9 @@ pre.code-tip {
 
 .debug_dump {
   background: beige;
+  &, * {
+    font-family: monospace !important;
+  }
 }
 // --------------------------------------------
 
@@ -97,7 +118,7 @@ ul > li > ul > li {
   border: 0.5px solid;
   border-color: #b1b4b6;
   padding: 20px;
-  width: 600px;
+  max-width: 600px;
   margin-bottom: 40px;
 }
 
@@ -111,4 +132,18 @@ ul > li > ul > li {
     @include govuk-link-common;
     @include govuk-link-style-default;
   }
+}
+
+#js-timeout-warning:focus {
+  outline: 3px solid #ffdd00;
+  outline-offset: 0;
+  box-shadow: inset 0 0 0 2px;
+}
+
+.govuk-footer__copyright-logo {
+  display: none;
+}
+
+.white-space-pre-wrap {
+  white-space: pre-wrap;
 }

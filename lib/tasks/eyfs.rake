@@ -1,6 +1,7 @@
 # rake --tasks eyfs
 #
 namespace :eyfs do
+  # curl -H "BOT: #{ENV['BOT_TOKEN']}" http://localhost:3000/audit
   desc 'Generate secure bot user'
   task bot: :environment do
     bot_token = ENV.fetch('BOT_TOKEN', SecureRandom.hex(12))
@@ -16,14 +17,31 @@ namespace :eyfs do
         setting_type_id: 'childminder_independent',
         local_authority: 'Lewisham',
         role_type: 'childminder',
+        registration_complete: true,
+        display_whats_new: false,
       )
     end
   end
 
-  desc 'Add page view events for injected module items'
-  task plug_content: :environment do
-    require 'fill_page_views'
-    FillPageViews.new.call
+  namespace :jobs do
+    # NB: Not yet CMS compatible
+    desc 'Add page view events for injected module items'
+    task plug_content: :environment do
+      FillPageViewsJob.enqueue
+    end
+
+    # Queueing a dashboard job via Rake inverts the default and will not
+    #   upload files to Looker Studio unless explicitly requested.
+    #
+    # @example
+    #
+    #   $ rake 'eyfs:jobs:dashboard[upload]'
+    #   $ rake eyfs:jobs:dashboard
+    #
+    desc 'Update dashboard data sources (optional upload)'
+    task :dashboard, [:upload] => :environment do |_task, upload: false|
+      DashboardJob.enqueue(upload: upload.present?)
+    end
   end
 
   # @example
@@ -41,7 +59,7 @@ namespace :eyfs do
       if args.present?
         User.where(email: args.to_a)
       else
-        User.registered
+        User.registration_complete
       end
 
     users.map do |user|
@@ -55,22 +73,49 @@ namespace :eyfs do
     puts "Updated #{number_updated} of #{total_records} records"
   end
 
-  desc 'Recalculate module completion time'
-  task user_progress: :environment do
-    number_updated = 0
-    total_records = 0
+  # desc 'Recalculate module completion time'
+  # task user_progress: :environment do
+  #   require 'backfill_module_state'
+  #   number_updated = 0
+  #   total_records = 0
 
-    User.registered.map do |user|
-      original = user.module_time_to_completion
-      BackfillModuleState.new(user: user).call
-      updated = user.reload.module_time_to_completion
+  #   User.registration_complete.map do |user|
+  #     original = user.module_time_to_completion
+  #     BackfillModuleState.new(user: user).call
+  #     updated = user.reload.module_time_to_completion
 
-      puts "User id: #{user.id} - #{updated}"
+  #     puts "User id: #{user.id} - #{updated}"
 
-      number_updated += 1 if original != updated
-      total_records += 1
-    end
+  #     number_updated += 1 if original != updated
+  #     total_records += 1
+  #   end
 
-    puts "Updated #{number_updated} of #{total_records} records"
-  end
+  #   puts "Updated #{number_updated} of #{total_records} records"
+  # end
+
+  # desc 'Create missing module start/complete events'
+  # task user_events: :environment do
+  #   require 'backfill_module_events'
+
+  #   check = proc {
+  #     User.all.count do |user|
+  #       user.events.where(name: 'module_start').count != user.module_time_to_completion.keys.count
+  #     end
+  #   }
+
+  #   puts check.call
+
+  #   User.all.each do |user|
+  #     BackfillModuleEvents.new(user: user).call
+  #   end
+
+  #   puts check.call
+  # end
+
+  # desc 'Confirm events align with user state'
+  # task confirm_events: :environment do
+  #   require 'check_module_events'
+  #   valid = CheckModuleEvents.new.call
+  #   puts valid ? 'Start/Complete events are present' : 'Oops'
+  # end
 end

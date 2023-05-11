@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------
 # Base - AMD64 & ARM64 compatible
 # ------------------------------------------------------------------------------
-FROM ruby:3.1.2-alpine as base
+FROM ruby:3.1.3-alpine as base
 
 RUN apk add --no-cache --no-progress build-base less curl tzdata gcompat \
     "busybox>=1.34.1-r5" \
@@ -9,8 +9,11 @@ RUN apk add --no-cache --no-progress build-base less curl tzdata gcompat \
     "libretls>=3.3.4-r3" \
     "ncurses-libs>=6.3_p20211120-r1" \
     "nodejs>=16.16.0-r0" \
+    "pkgconf>=1.9.4-r0" \
     "ssl_client>=1.34.1-r5" \
     "zlib>=1.2.12-r0"
+
+ENV TZ Europe/London
 
 # ------------------------------------------------------------------------------
 # Dependencies
@@ -98,8 +101,8 @@ CMD ["bundle", "exec", "rails", "server"]
 # ------------------------------------------------------------------------------
 FROM app as dev
 
-RUN apk add --no-cache --no-progress npm graphviz
-RUN npm install --global adr-log
+RUN apk add --no-cache --no-progress postgresql-client npm graphviz
+RUN npm install --global adr-log contentful-cli
 
 RUN bundle config unset without
 RUN bundle config set without test ui
@@ -109,6 +112,8 @@ RUN bundle install --no-binstubs --retry=10 --jobs=4
 # Test Stage - ./bin/docker-rspec
 # ------------------------------------------------------------------------------
 FROM app as test
+
+RUN apk add --no-cache --no-progress postgresql-client
 
 RUN bundle config unset without
 RUN bundle config set without development ui

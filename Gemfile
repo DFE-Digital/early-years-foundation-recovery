@@ -1,10 +1,14 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.2'
+ruby '3.1.3'
+
+# Trivy vulnerability warnings:
+gem 'time', '>= 0.2.2' # https://avd.aquasec.com/nvd/cve-2023-28756
+gem 'uri', '>= 0.12.1' # https://avd.aquasec.com/nvd/cve-2023-28755
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '>= 7.0.4'
+gem 'rails'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
@@ -41,6 +45,9 @@ gem 'devise'
 # HTML abstraction markup language
 gem 'slim-rails'
 
+# Headless CMS
+gem 'contentful_rails'
+
 # Create models from static data such as hashes or YAML
 gem 'active_hash'
 
@@ -72,6 +79,18 @@ gem 'grover'
 
 # Pa11y accessibility testing
 gem 'sitemap_generator'
+
+# Data dashboard feed
+gem 'google-cloud-storage'
+
+# Background Jobs
+gem 'que-scheduler'
+
+# DRY-RB
+gem 'dry-core'
+gem 'dry-initializer'
+gem 'dry-struct'
+gem 'dry-types'
 
 group :development, :test do
   # Use fake data for specs

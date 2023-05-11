@@ -9,38 +9,24 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 
-# Turbo doesn't work with devise by default.
-# Keep tabs on https://github.com/heartcombo/devise/issues/5446 for a possible fix
-# Fix from https://gorails.com/episodes/devise-hotwire-turbo
-
 class CustomFailureApp < Devise::FailureApp
+  # @see TimeoutController#timeout_user
   def redirect
     store_location!
     message = warden.message || warden_options[:message]
     if message == :timeout
+      # NB: redirection closes session without JS and negates a flash message
       redirect_to users_timeout_path
     else
       super
     end
   end
 
-  def respond
-    if request_format == :turbo_stream
-      redirect
-    else
-      super
-    end
-  end
-
-  def skip_format?
-    %w[html turbo_stream */*].include? request_format.to_s
-  end
-
 protected
 
-  # Add `Devise.unlock_in` to locales
+  # Patched to pass {unlock_in} to 'en.devise.failure.locked'
   #
-  # @return [String] the i18n message
+  # @return [String]
   def i18n_message(default = nil)
     message = warden_message || default || :unauthenticated
 
@@ -48,7 +34,7 @@ protected
       options = {}
       options[:resource_name] = scope
       options[:scope] = 'devise.failure'
-      options[:unlock_in] = scope_class.unlock_in / 3600
+      options[:unlock_in] = Devise.unlock_in.in_hours.to_i
       options[:default] = [message]
       auth_keys = scope_class.authentication_keys
       keys = (auth_keys.respond_to?(:keys) ? auth_keys.keys : auth_keys).map { |key| scope_class.human_attribute_name(key) }
@@ -72,7 +58,7 @@ Devise.setup do |config|
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
-  config.parent_controller = 'TurboDeviseController'
+  # config.parent_controller = 'DeviseController'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -234,10 +220,7 @@ Devise.setup do |config|
   # Range for password length.
   config.password_length = 10..128
 
-  # Email regex used to validate email formats. It simply asserts that
-  # one (and only one) @ exists in the given string. This is mainly
-  # to give user feedback and not to assert the e-mail validity.
-  config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  config.email_regexp = URI::MailTo::EMAIL_REGEXP
 
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
@@ -262,7 +245,7 @@ Devise.setup do |config|
 
   # Number of authentication tries before locking an account if lock_strategy
   # is failed attempts.
-  config.maximum_attempts = 6
+  config.maximum_attempts = 5
 
   # Time interval to unlock the account if :time is enabled as unlock_strategy.
   config.unlock_in = Rails.configuration.unlock_in_minutes.minutes
@@ -317,7 +300,7 @@ Devise.setup do |config|
   # should add them to the navigational formats lists.
   #
   # The "*/*" below is required to match Internet Explorer requests.
-  config.navigational_formats = ['*/*', :html, :turbo_stream]
+  config.navigational_formats = ['*/*', :html]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :get
@@ -363,4 +346,7 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+
+  config.responder.error_status = :unprocessable_entity
+  config.responder.redirect_status = :see_other
 end

@@ -10,21 +10,46 @@ services:
       test: curl --fail http://localhost:3000/health || exit 1
     restart: on-failure
     environment:
+      # rails credentials
+      - EDITOR=vi
+      # psql client
+      - PGUSER=postgres
+      - PGPASSWORD=password
+      - PGHOST=db
+      - PGDATABASE=early_years_foundation_recovery_development
+      # app config
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
       - RAILS_ENV=development
       - DOMAIN=app:3000
       - RAILS_SERVE_STATIC_FILES=true
-      - TIMEOUT_MINUTES=360
-      - TRAINING_MODULES
-      - BOT_TOKEN
+      # overrides
+      - TIMEOUT_MINUTES
+      - SENTRY_TOKEN
     volumes:
       - .:/srv
     tty: true
     stdin_open: true
 
-  db:
+  worker:
+    container_name: recovery_worker
+    image: recovery:dev
+    command: bundle exec que
+    environment:
+      - RAILS_ENV=development
+      - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
+      - DASHBOARD_UPDATE=false
+      # overrides
+      - SENTRY_TOKEN
+      - DASHBOARD_UPDATE_INTERVAL
+      - GOOGLE_CLOUD_BUCKET
+    depends_on:
+      - db
     volumes:
-      - db_dev:/var/lib/postgresql/data
+      - .:/srv
+    networks:
+      - recovery
+    tty: true
+    stdin_open: true
 
   doc:
     container_name: recovery_doc
@@ -57,6 +82,3 @@ services:
       - ./tmp/pa11y:/tmp/pa11y
     tty: true
     stdin_open: true
-
-volumes:
-  db_dev:

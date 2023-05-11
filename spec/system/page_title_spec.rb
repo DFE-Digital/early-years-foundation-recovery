@@ -5,17 +5,19 @@ RSpec.describe 'Page' do
     it { expect(root_path).to have_page_title 'Home page' }
     it { expect(new_user_session_path).to have_page_title 'Sign in' }
     it { expect(new_user_password_path).to have_page_title 'Reset password' }
-    it { expect(cancel_user_registration_path).to have_page_title 'Create a child development training account' }
-    it { expect(new_user_registration_path).to have_page_title 'Create a child development training account' }
+    it { expect(cancel_user_registration_path).to have_page_title 'Create an Early years child development training account' }
+    it { expect(new_user_registration_path).to have_page_title 'Create an Early years child development training account' }
 
     it { expect(setting_path('cookie-policy')).to have_page_title 'Cookie policy' }
 
     it { expect(static_path('accessibility-statement')).to have_page_title 'Accessibility statement' }
+    it { expect(static_path('new-registration')).to have_page_title 'Update your registration details' }
     it { expect(static_path('other-problems-signing-in')).to have_page_title 'Other problems signing in' }
     it { expect(static_path('privacy-policy')).to have_page_title 'Privacy policy' }
+    it { expect(static_path('promotional-materials')).to have_page_title 'Promotional materials for local authorities' }
+    it { expect(static_path('sitemap')).to have_page_title 'Sitemap' }
     it { expect(static_path('terms-and-conditions')).to have_page_title 'Terms and conditions' }
-    it { expect(static_path('whats-new')).to have_page_title "What's new" }
-    it { expect(static_path('new-registration')).to have_page_title 'Update your registration details' }
+    it { expect(static_path('wifi-and-data')).to have_page_title 'Free internet, wifi and data resources' }
 
     context 'and is confirmed' do
       let(:user) { create(:user, :confirmed) }
@@ -76,11 +78,11 @@ RSpec.describe 'Page' do
     it { expect(check_email_confirmation_user_path).to have_page_title('Check email confirmation') }
     it { expect(check_email_password_reset_user_path).to have_page_title('Check email password reset') }
 
+    it { expect(static_path('whats-new')).to have_page_title "What's new in the training" }
+
     context 'and viewing module content' do
       [
         ['what-to-expect',    'First Training Module : What to expect during the training'],
-        ['before-you-start',  'First Training Module : Before you start'],
-        ['intro',             'First Training Module : Introduction'],
         ['1-1',               'First Training Module : The first submodule'],
         ['1-1-1',             'First Training Module : 1-1-1'],
         ['1-1-2',             'First Training Module : 1-1-2'],

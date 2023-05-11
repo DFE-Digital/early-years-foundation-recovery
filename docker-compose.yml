@@ -19,6 +19,7 @@ services:
       - GOVUK_APP_DOMAIN
       - GOVUK_WEBSITE_ROOT
       - GROVER_NO_SANDBOX=true
+      - WEB_CONCURRENCY=0
     depends_on:
       - db
     ports:
@@ -35,14 +36,14 @@ services:
     healthcheck:
       test: pg_isready
     volumes:
-      - db_prod:/var/lib/postgresql/data
+      - db:/var/lib/postgresql/data
     ports:
       - 5432:5432
     networks:
       - recovery
 
 volumes:
-  db_prod:
+  db:
 
 networks:
   recovery:

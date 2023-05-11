@@ -1,64 +1,81 @@
 require 'rails_helper'
 
 RSpec.describe CalculateModuleState do
-  subject(:completion_time) { described_class.new(user: user) }
+  subject(:service) { described_class.new(user: user) }
+
+  let(:day_1) { Time.zone.local(2000, 0o1, 0o1) } # start alpha
+  let(:day_2) { Time.zone.local(2000, 0o1, 0o2) } # start bravo
+  let(:day_3) { Time.zone.local(2000, 0o1, 0o3) } # complete alpha
+  let(:day_5) { Time.zone.local(2000, 0o1, 0o5) } # complete bravo
 
   include_context 'with events'
 
-  let(:alpha_start_and_complete) do
-    create_event(user, 'module_start', Time.zone.local(2000, 0o1, 0o1), 'alpha')
-    create_event(user, 'module_complete', Time.zone.local(2000, 0o1, 0o3), 'alpha')
-  end
-
-  let(:bravo_start_and_complete) do
-    create_event(user, 'module_start', Time.zone.local(2000, 0o1, 0o2), 'bravo')
-    create_event(user, 'module_complete', Time.zone.local(2000, 0o1, 0o5), 'bravo')
-  end
-
-  let(:charlie_start) do
-    create_event(user, 'module_start', Time.zone.local(2000, 0o1, 0o4), 'charlie')
-  end
-
-  describe '#update_time' do
-    context 'when no modules have been taken'
-    it 'returns empty hash' do
-      completion_time.call
-      expect(user1.module_time_to_completion).to eq({})
-    end
-  end
-
-  context 'when alpha has been completed' do
-    before do
-      alpha_start_and_complete
+  describe '#call' do
+    context 'when there is no module activity' do
+      it 'records no module state' do
+        expect(service.call).to eq({})
+      end
     end
 
-    it 'returns hash containing time to complete alpha' do
-      completion_time.call
-      expect(user.module_time_to_completion).to eq('alpha' => 172_800)
-    end
-
-    context 'when bravo has been completed' do
+    context 'when there are "in progress" modules and no named events' do
       before do
-        alpha_start_and_complete
-        bravo_start_and_complete
+        user.update!(module_time_to_completion: { alpha: 0 })
       end
 
-      it 'returns hash containing time to complete alpha and bravo' do
-        ttc = completion_time.call
-        expect(ttc).to eq('alpha' => 172_800, 'bravo' => 259_200)
+      # @see BackfillModuleState
+      it 'fails to calculate duration' do
+        expect(service.call).to eq('alpha' => nil)
       end
     end
 
-    context 'when charlie has been started' do
+    context 'when there are "completed" modules and no named events' do
       before do
-        alpha_start_and_complete
-        bravo_start_and_complete
-        charlie_start
+        user.update!(module_time_to_completion: { alpha: 999 })
       end
 
-      it 'returns hash containing time to complete alpha and bravo, charlie as a zero' do
-        completion_time.call
-        expect(user.module_time_to_completion).to eq('alpha' => 172_800, 'bravo' => 259_200, 'charlie' => 0)
+      it 'does not update duration' do
+        expect(service.call).to eq('alpha' => 999)
+      end
+    end
+
+    context 'when a module is started' do
+      before do
+        create_event(user, 'module_start', day_1, 'alpha')
+      end
+
+      it 'records a value of zero' do
+        expect(service.call).to eq('alpha' => 0)
+      end
+    end
+
+    context 'when a module is completed' do
+      before do
+        create_event(user, 'module_start', day_1, 'alpha')
+        create_event(user, 'module_complete', day_3, 'alpha')
+      end
+
+      it 'records a value greater than zero' do
+        expect(service.call).to eq('alpha' => 172_800)
+      end
+
+      context 'and the next module is started' do
+        before do
+          create_event(user, 'module_start', day_2, 'bravo')
+        end
+
+        it 'appends the module to the state object' do
+          expect(service.call).to eq('alpha' => 172_800, 'bravo' => 0)
+        end
+
+        context 'and then completed' do
+          before do
+            create_event(user, 'module_complete', day_5, 'bravo')
+          end
+
+          it 'calculates the delta between named events in seconds' do
+            expect(service.call).to eq('alpha' => 172_800, 'bravo' => 259_200)
+          end
+        end
       end
     end
   end

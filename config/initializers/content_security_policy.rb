@@ -25,6 +25,7 @@ GOOGLE_ANALYTICS_DOMAINS = %w[
   stats.g.doubleclick.net
   www.googletagmanager.com
   *.hotjar.com
+  *.hotjar.io
   *.ytimg.com
   www.youtube.com
   www.youtube-nocookie.com
@@ -42,6 +43,12 @@ OPTIMIZE_DOMAINS = %w[
 GOOGLE_STATIC_DOMAINS = %w[
   fonts.gstatic.com
   www.gstatic.com
+  static.hotjar.com
+  script.hotjar.com
+].freeze
+
+CONTENTFUL_DOMAINS = %w[
+  *.ctfassets.net
 ].freeze
 
 Rails.application.config.content_security_policy do |policy|
@@ -60,6 +67,7 @@ Rails.application.config.content_security_policy do |policy|
                      *GOVUK_DOMAINS,
                      *GOOGLE_ANALYTICS_DOMAINS, # Tracking pixels
                      *OPTIMIZE_DOMAINS,
+                     *CONTENTFUL_DOMAINS,
                      :data # Base64 encoded images
   policy.object_src  :none
   policy.script_src  :self,

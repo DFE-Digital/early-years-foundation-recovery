@@ -1,21 +1,29 @@
-- @training_module.module_items.each.with_index(1) do |item, pos|
-  - if current_user.events.where_properties(training_module_id: @training_module.name, id: item.name).any?
-    | [x]
-  - else
-    | [_]
-  '
-  | #{pos.ordinalize}:
-  '
-  strong
-    |  #{item.name}
-    '
-  - if item.topic_name
-    em
-      | (submodule #{item.submodule_name} / topic #{item.topic_name}.#{item.page_name})
-  - elsif item.submodule_name
-    em
-      | (submodule #{item.submodule_name})
-
-  '
-  = page_number(**item.pagination)
+pre.debug_dump
+  | Module=
+  = @training_module.name
   br
+  | Questions=
+  = @training_module.questionnaires.count
+  br
+
+  - @training_module.module_items.each.with_index(1) do |item, pos|
+    - if current_user.events.where_properties(training_module_id: @training_module.name, id: item.name).any?
+      | [x]
+    - else
+      | [_]
+    '
+    | #{pos.ordinalize}:
+    '
+    strong
+      |  #{item.name}
+      '
+    - if item.topic_name
+      em
+        | (submodule #{item.submodule_name} / topic #{item.topic_name}.#{item.page_name})
+    - elsif item.submodule_name
+      em
+        | (submodule #{item.submodule_name})
+
+    '
+    = page_number(**item.pagination)
+    br

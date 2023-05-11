@@ -3,6 +3,7 @@
 #
 name: Continuous Integration
 on:
+  merge_group:
   pull_request:
     paths-ignore:
       - '**/*.md'
@@ -17,19 +18,19 @@ on:
       - Dockerfile
       - terraform
 
-env:
-  RAILS_ENV: test
-  RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-  DATABASE_URL: postgres://postgres:password@localhost:5432/test
-  DOMAIN: recovery.app
-  TRAINING_MODULES: demo-modules
-  BOT_TOKEN: bot_token
-
 jobs:
   test:
     name: Test and lint code
     runs-on: ubuntu-latest
     environment: test
+    env:
+      RAILS_ENV: test
+      # https://github.com/DFE-Digital/early-years-foundation-recovery/settings/secrets/dependabot
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      DATABASE_URL: postgres://postgres:password@localhost:5432/test
+      DOMAIN: recovery.app
+      TRAINING_MODULES: demo-modules
+      BOT_TOKEN: bot_token
 
     services:
       postgres:
@@ -39,7 +40,12 @@ jobs:
           POSTGRES_PASSWORD: password
         ports:
           - 5432:5432
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
 
     steps:
       -
@@ -49,7 +55,7 @@ jobs:
         name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.1.2
+          ruby-version: 3.1.3
           bundler-cache: true
       -
         name: Install Rubygems
@@ -61,16 +67,30 @@ jobs:
           node-version: 18.x
           cache: npm
       -
-        name: Compile assets
-        run: bundle exec rails assets:precompile
-      -
         name: Prepare test database
         run: bin/rails db:prepare
-        env:
-          NOTIFY_API_KEY: foo
       -
-        name: Run test suite
-        run: bundle exec rspec
+        name: Report schema version
+        run: bin/rails db:version
+      -
+        name: Compile assets
+        run: bin/rails assets:precompile
       -
         name: Run rubocop
         run: bundle exec rubocop
+      - # Test non-CMS functionality
+        name: Run test suite (YAML)
+        run: bundle exec rspec
+        env:
+          CONTENTFUL: false
+      - # Test 'demo' content prior to suite
+        name: Validate content (CMS)
+        run: bundle exec rails eyfs:cms:validate
+      - # Test CMS functionality
+        name: Run test suite (CMS)
+        run: bundle exec rspec
+      - # Re-test CMS question response data migration feature
+        name: Run test suite (CMS)
+        run: bundle exec rspec
+        env:
+          DISABLE_USER_ANSWER: true

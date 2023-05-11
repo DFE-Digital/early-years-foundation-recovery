@@ -2,9 +2,11 @@
 #
 # Loop over active users and modules and inject page view events for skipped pages
 #
+#
+# NB: Not yet CMS compatible
 class FillPageViews
   def call
-    users.each do |user|
+    users.find_each(batch_size: 1_000) do |user|
       unless user.registration_complete
         log "user [#{user.id}]"
         next
@@ -34,7 +36,7 @@ class FillPageViews
           if progress.visited?(item)
             next
           else
-            tracker.track('page_view', {
+            tracker.track('module_content_page', {
               skipped: true,
               id: item.name,
               action: 'show',
@@ -58,7 +60,7 @@ private
   end
 
   def training_modules
-    TrainingModule.where(draft: nil)
+    TrainingModule.published
   end
 
   def log(message)

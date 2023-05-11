@@ -1,0 +1,6 @@
+span.module-section--item
+  - if next_item
+    = govuk_link_to heading, training_module_content_page_path(mod, next_item)
+  - else
+    = heading
+span.progress-indicator= progress_indicator(status)

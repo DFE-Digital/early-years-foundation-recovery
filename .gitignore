@@ -69,3 +69,6 @@ spec/examples.txt
 # Infrastructure
 uml/*.*
 !uml/*.puml
+
+# Contentful
+errors-*.log

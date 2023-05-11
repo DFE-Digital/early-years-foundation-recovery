@@ -45,4 +45,20 @@ RSpec.describe Questionnaire, type: :model do
       end
     end
   end
+
+  describe '#cms_params' do
+    it 'does something' do
+      expect(questionnaire.cms_params).to eq({
+        body: 'Question Three - Select from following',
+        success_message: "You selected the correct answers\n\nWell done!\n",
+        failure_message: "You did not select the correct answers\n",
+        answers: [
+          ['Correct answer 1', true],
+          ['Wrong answer 1'],
+          ['Correct answer 2', true],
+          ['Wrong answer 2'],
+        ],
+      })
+    end
+  end
 end

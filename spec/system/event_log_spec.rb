@@ -20,18 +20,7 @@ RSpec.describe 'Event log' do
       end
     end
 
-    context 'when answering the first question' do
-      before do
-        choose 'Strongly agree'
-        click_on 'Next'
-      end
-
-      it 'tracks question answer' do
-        expect(events.where(name: 'questionnaire_answer').where_properties(success: true, type: 'confidence_check').size).to eq 1
-      end
-    end
-
-    context 'when answering the final question' do
+    context 'when all questions are answered' do
       before do
         3.times do
           choose 'Strongly agree'
@@ -39,7 +28,8 @@ RSpec.describe 'Event log' do
         end
       end
 
-      it 'tracks completion' do
+      it 'tracks answers and completion' do
+        expect(events.where(name: 'questionnaire_answer').where_properties(type: 'confidence_check').size).to eq 3
         expect(events.where(name: 'confidence_check_complete').size).to eq 1
       end
     end
@@ -47,7 +37,7 @@ RSpec.describe 'Event log' do
 
   describe 'first module page' do
     before do
-      visit '/modules/alpha/content-pages/before-you-start'
+      visit '/modules/alpha/content-pages/what-to-expect'
       click_on 'Next'
     end
 
@@ -69,51 +59,68 @@ RSpec.describe 'Event log' do
       end
     end
 
-    context 'when answering first question' do
+    context 'when all questions are answered correctly' do
       before do
-        check 'Correct answer 1'
-        check 'Correct answer 2'
-        click_on 'Save and continue'
+        3.times do
+          check 'Correct answer 1'
+          check 'Correct answer 2'
+          click_on 'Save and continue'
+        end
+        choose 'Correct answer 1'
+        click_on 'Finish test'
       end
 
-      it 'tracks question answered' do
-        expect(events.where(name: 'questionnaire_answer').where_properties(type: 'summative_assessment').size).to eq 1
+      it 'tracks answers and successful attempt' do
+        expect(events.where(name: 'questionnaire_answer').where_properties(success: true, type: 'summative_assessment').size).to eq 4
+        expect(events.where(name: 'summative_assessment_complete').where_properties(score: 100, success: true).size).to eq 1
       end
     end
 
-    context 'when answering final question' do
+    context 'when all questions are answered incorrectly' do
       before do
-        complete_summative_assessment_correct
+        3.times do
+          check 'Wrong answer 1'
+          check 'Wrong answer 2'
+          click_on 'Save and continue'
+        end
+        choose 'Wrong answer 1'
+        click_on 'Finish test'
       end
 
-      it 'tracks completion' do
-        expect(events.where(name: 'summative_assessment_complete').where_properties(score: 100).size).to eq 1
+      it 'tracks answers and failed attempt' do
+        expect(events.where(name: 'questionnaire_answer').where_properties(success: false, type: 'summative_assessment').size).to eq 4
+        expect(events.where(name: 'summative_assessment_complete').where_properties(score: 0, success: false).size).to eq 1
       end
     end
   end
 
-  describe 'formative assessment' do
+  describe 'formative question' do
     before do
-      view_pages_before_formative_questionnaire(alpha)
+      view_pages_upto_formative_question(alpha)
       visit '/modules/alpha'
-      click_on 'Resume training'
-      complete_formative_assessment_correct
+      click_on 'Resume module'
+
+      choose 'Correct answer 1'
+      4.times { click_on 'Next' }
+
+      check 'Correct answer 1'
+      check 'Correct answer 2'
+      click_on 'Next'
     end
 
-    it 'tracks completion' do
+    it 'tracks answers' do
       expect(events.where(name: 'questionnaire_answer').where_properties(success: true, type: 'formative_assessment').size).to eq 2
     end
   end
 
-  describe 'complete first module' do
+  describe 'visiting every page' do
     before do
-      visit '/modules/alpha/content-pages/intro'
-      view_pages_before(alpha, 'assessment_results')
-      travel_to 5.minutes.from_now
-      visit 'modules/alpha/content-pages/1-3-2-5'
+      alpha.module_items.each { |item| visit "/modules/alpha/content-pages/#{item.name}" }
     end
 
-    it 'tracks completion' do
+    it 'tracks start and completion' do
+      expect(events.where(name: 'module_start').size).to be 1
+      expect(events.where(name: 'module_content_page').size).to be 26
       expect(events.where(name: 'module_complete').size).to eq 1
     end
   end

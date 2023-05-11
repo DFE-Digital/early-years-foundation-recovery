@@ -1,6 +1,8 @@
-# Child development training
+# Early years child development training
 
-[![Continuous Integration][ci-badge]][ci-workflow]
+[![ci][ci-badge]][ci-workflow]
+[![brakeman][brakeman-badge]][brakeman-workflow]
+[![pa11y][pa11y-badge]][pa11y-workflow]
 
 This is a Rails 7 application using the [DfE template][rails-template].
 
@@ -25,10 +27,13 @@ Optionally create `.env` to override or set default variables like `DATABASE_URL
 
 ## Rails Credentials
 
-We use rails credentials to manage secrets. If you need to modify secrets for one
-of the deployed environments, you can get the encryption keys from another developer on the team.
+We use rails credentials to manage secrets; obtain the encryption keys from the dev team.
 
-Once you have the keys, run `rails credentials:edit --environment <env>`.
+To edit, use either:
+
+- `EDITOR=vi rails credentials:edit --environment <env>`.
+- `./bin/docker-rails credentials:edit --environment <env>`
+
 Full instructions can be found by running `rails credentials:help`
 
 ## Git Secrets
@@ -116,12 +121,14 @@ These commands can be used to debug problems:
     can help identify why the application is not running in either the `dev`, `test`, or `qa` contexts
 - `BASE_URL=https://app:3000 docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery up app` debug the UAT tests
 
-## Using Custom Tasks
+## Using Rake
 
-- `rake eyfs:bot`            # Generate secure bot user
-- `rake eyfs:plug_content`   # Add page view events for injected module items
-- `rake eyfs:user_progress`  # Recalculate module completion time
-- `rake eyfs:whats_new`      # Enable the post login 'What's new' page
+Custom tasks are namespaced under `eyfs`, list them using `rake --tasks eyfs`.
+
+- `rake eyfs:bot`                   # Generate secure bot user
+- `rake eyfs:jobs:plug_content`     # Que job to insert page view events for injected module items
+- `rake eyfs:user_progress`         # Recalculate module completion time
+- `rake eyfs:whats_new`             # Enable the post login 'What's new' page
 
 
 Trigger a task on a deployed application in either the `ey-recovery-content` or `ey-recovery-staging` spaces, not `production`, using `bin/cf-task`.
@@ -173,6 +180,65 @@ We intend to use [semantic versioning](https://semver.org/).
 
 A tag can also be created and a deployment run from this [workflow][production-workflow].
 
+## Autoscaling
+
+Auto scaling policy is 
+```
+Scale up when CPU > 85%
+Scale down when CPU < 30%
+```
+
+Created with the following commands:
+
+1) Install autoscaling plugin:
+```
+cf install-plugin -r CF-Community app-autoscaler-plugin
+```
+2) Create an autoscaler service:
+
+```
+cf create-service autoscaler autoscaler-free-plan scale-ey-recovery
+```
+
+3) Bind the autoscaler service to the app:
+
+```
+cf bind-service ey-recovery scale-ey-recovery
+```
+
+Policy is found in `policy.json`
+
+4) Attach the autoscaling policy to the app:
+
+```
+cf attach-autoscaling-policy ey-recovery policy.json
+```
+
+5) Observe the app scaling automatically:
+
+```
+cf autoscaling-history ey-recovery
+```
+
+For further information see [Managing apps - autoscaling]: https://docs.cloud.service.gov.uk/managing_apps.html#autoscaling
+
+The link includes additional examples for policies e.g. adding a schedule to scale at certain times or days of the month
+
+## Monitoring
+
+[Sentry][sentry] is used to monitor production environments
+
+`$ brew install getsentry/tools/sentry-cli`
+
+`$ sentry-cli projects list --org early-years-foundation-reform`
+
+    +---------+--------------+-------------------------------+--------------+
+    | ID      | Slug         | Team                          | Name         |
+    +---------+--------------+-------------------------------+--------------+
+    | 6274627 | eyf-reform   | early-years-foundation-reform | Rails        |
+    | 6274651 | eyf-recovery | early-years-foundation-reform | eyf-recovery |
+    +---------+--------------+-------------------------------+--------------+
+
 ## Quality Assurance
 
 The UI/UA test suite can be run against any site.
@@ -180,11 +246,10 @@ A production-like application is available as a composed Docker service for loca
 To run a self-signed certificate must first be generated.
 
 1. `./bin/docker-certs` (Mac users can trust the certificate in [Keychain Access](https://support.apple.com/en-gb/guide/keychain-access))
-2. `./bin/docker-qa` (this will build and bring up the application)
+2. `./bin/docker-qa` (this will build and bring up the application with a clean database)
 3. `docker exec -it recovery_prod rails db:seed` (seed the prerequisite user accounts)
-4. `BASE_URL=https://app:3000 ./bin/docker-qa` (test against the seeded application)
-
-WIP: proposed Github workflow that does not require `docker-compose`.
+4. `./bin/docker-qa` (retest)
+4. `BASE_URL=https://deployment ./bin/docker-qa` (alternative test against another server)
 
 
 ## Accessibility Standards
@@ -249,6 +314,18 @@ You can demo this environment locally using the account `completed@example.com:S
 When there are significant changes to content structure a soft restart the server may be necessary `./bin/docker-rails restart`.
 CSS styling changes will appear automatically without needing to restart.
 
+
+### CMS
+
+Refresh cache in instances and workers
+
+- `cf restart ey-recovery-dev --strategy rolling`
+
+- `cf ssh ey-recovery-dev-worker`
+- rails eyfs:jobs:plug_content
+
+- Validation: `$ ./bin/docker-rails 'eyfs:cms:validate'`
+
 ### YAML
 
 - [guide](https://www.commonwl.org/user_guide/yaml)
@@ -259,24 +336,91 @@ CSS styling changes will appear automatically without needing to restart.
 - [designer guide](https://govspeak-preview.publishing.service.gov.uk/guide)
 - [developer guide](https://docs.publishing.service.gov.uk/repos/govspeak.html)
 
+---
+
+## Service Dashboard
+
+Key performance metrics are surfaced in a [Looker Studio](https://lookerstudio.google.com/navigation/reporting) dashboard and refreshed daily.
+User [service accounts](https://cloud.google.com/iam/docs/service-accounts) can authenticate using the [Google Cloud SDK](https://cloud.google.com/sdk/docs/install).
+
+
+**Storage and Reporting**
+
+- [Cloud Storage](https://console.cloud.google.com/storage/browser?project=eyfsdashboard)
+- [Development Dashboard](https://lookerstudio.google.com/reporting/4d48f463-022b-4fb8-9262-26c22f6b2e8d)
+- [Development Bucket](https://console.cloud.google.com/storage/browser/eyfs-data-dashboard-development)
+- [Staging Dashboard](https://lookerstudio.google.com/reporting/8f550461-c4e7-4c9f-b597-6f27669ff14c)
+- [Staging Bucket](https://console.cloud.google.com/storage/browser/eyfs-data-dashboard-staging)
+- [Production Dashboard](https://lookerstudio.google.com/reporting/095cfc94-d1d2-4a32-a2ba-d5899c3ecea5)
+- [Production Bucket](https://console.cloud.google.com/storage/browser/eyfs-data-dashboard-live)
+
+**Downloading exported data**
+
+- `gcloud auth login`
+- `gcloud config set project eyfsdashboard`
+- `gsutil ls` (list buckets)
+- `gsutil -m cp -r "gs://eyfs-data-dashboard-live/eventsdata" "gs://eyfs-data-dashboard-live/useranswers" .` (export folders recursively)
+
+
+**Cloning production data**
+
+- Export production database as plaintext dump: `$ cf conduit --space ey-recovery ey-recovery-db -- pg_dump --file "./tmp/ey-recovery-db-<DATE>.sql" --no-acl --no-owner -Z 9`
+- Clone exported live data to an existing empty local development database: `$ docker exec -it recovery_dev psql prod_clone < ./tmp/ey-recovery-db-<DATE>.sql`
+- Optional: Restart dev server pointing to the `prod_clone` database
+
+
+---
+
+## User experience
+
+Session timeout functionality:
+
+- default timeout period is 25 minutes
+- default timeout warning appears after 5 minutes
+- screen readers announce every time the timeout refreshes every 15 secs
+
+---
+
+## Hotjar
+
+This project uses Hotjar for user insight. Hotjar records user journeys and
+automatically redacts certain user information on recordings. All personally
+identifiable information should be redacted. In order to override the default
+settings the following classes can be added:
+- `data-hj-suppress` to redact additional user information
+- `data-hj-allow` to allow data that is automatically redacted
 
 ---
 
 [app-repo]: https://github.com/DFE-Digital/early-years-foundation-recovery
-[confluence]: https://dfedigital.atlassian.net/wiki/spaces/ER/overview
-[production]: https://eyfs-covid-recovery.london.cloudapps.digital
-[staging]: https://ey-recovery-staging.london.cloudapps.digital
-[development]: https://ey-recovery-dev.london.cloudapps.digital
 [prototype-repo]: https://github.com/DFE-Digital/ey-recovery-prototype
-[prototype-app]: https://eye-recovery.herokuapp.com
-[interim-prototype-app]: https://child-development-training-prototype.london.cloudapps.digital
 [rails-template]: https://github.com/DFE-Digital/rails-template
-[ci-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml/badge.svg
-[ci-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml
-[production-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/production.yml
-[staging-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/staging.yml
 [ghcr]: https://github.com/dfe-digital/early-years-foundation-recovery/pkgs/container/early-years-foundation-recovery
+[confluence]: https://dfedigital.atlassian.net/wiki/spaces/ER/overview
 [notify]: https://www.notifications.service.gov.uk
 [figma]: https://www.figma.com/file/FGW1NJJwnYRqoZ2DV0l5wW/Training-content?node-id=1%3A19
 [docker]: https://www.docker.com
 [git-secrets]: https://github.com/awslabs/git-secrets
+[sentry]: https://sentry.io/organizations/early-years-foundation-reform
+
+<!-- Deployments -->
+
+[prototype-app]: https://eye-recovery.herokuapp.com
+[interim-prototype-app]: https://child-development-training-prototype.london.cloudapps.digital
+[production]: https://eyfs-covid-recovery.london.cloudapps.digital
+[staging]: https://ey-recovery-staging.london.cloudapps.digital
+[development]: https://ey-recovery-dev.london.cloudapps.digital
+
+<!-- GH workflows -->
+
+[brakeman-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/brakeman.yml
+[pa11y-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/pa11y.yml
+[ci-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml
+[production-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/production.yml
+[staging-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/staging.yml
+
+<!-- GH workflow badges -->
+
+[brakeman-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/brakeman.yml/badge.svg
+[pa11y-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/pa11y.yml/badge.svg
+[ci-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml/badge.svg

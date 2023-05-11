@@ -2,7 +2,7 @@ terraform {
   required_providers {
     cloudfoundry = {
       source  = "cloudfoundry-community/cloudfoundry"
-      version = ">= 0.14.5"
+      version = ">= 0.50.0"
     }
   }
 }
@@ -31,11 +31,12 @@ resource "cloudfoundry_app" "web_app" {
   instances                  = var.web_app_instances     # default: 1
   memory                     = var.web_app_memory        # default: 512
   disk_quota                 = var.web_app_disk_quota    # default: 2GB
+  strategy                   = var.web_app_deployment_strategy
   health_check_type          = "http"
   health_check_http_endpoint = "/health"
   stopped                    = false
-  strategy                   = "blue-green-v2"
   timeout                    = 300
+  health_check_invocation_timeout = 10
   docker_image               = var.app_docker_image
   space                      = data.cloudfoundry_space.space.id
 
@@ -68,5 +69,26 @@ resource "cloudfoundry_service_instance" "postgres_instance" {
 
   timeouts {
     create = var.postgres_create_timeout
+  }
+}
+
+resource "cloudfoundry_app" "worker_app" {
+  count             = local.enable_worker ? 1 : 0
+  environment       = var.web_app_env
+  name              = "${var.web_app_name}-worker"
+  command           = var.worker_app_start_command # default: que
+  memory            = var.worker_app_memory        # default: 512
+  health_check_type = "process"
+  instances         = 1
+  disk_quota        = var.web_app_disk_quota
+  strategy          = var.web_app_deployment_strategy
+  docker_image      = var.app_docker_image
+  space             = data.cloudfoundry_space.space.id
+
+  dynamic "service_binding" {
+    for_each = local.app_service_bindings
+    content {
+      service_instance = service_binding.value
+    }
   }
 }

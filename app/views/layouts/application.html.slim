@@ -2,11 +2,12 @@ doctype html
 html.govuk-template lang='en'
   head
     = tag.meta content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type'
+
     title= html_title(@module_item || @user_form)
     = render 'layouts/analytics_header'
     = render 'layouts/hotjar_tracking'
     = tag.meta content: 'width=device-width,initial-scale=1', name: 'viewport'
-    = tag.meta name: 'robots', content: 'noindex,nofollow'
+    = tag.meta name: 'robots', content: 'noindex,nofollow' unless Rails.application.live?
     = tag.meta property: 'og:image', content: asset_path('images/govuk-opengraph-image.png')
     = csrf_meta_tags
     = favicon_link_tag asset_path('images/favicon.ico')
@@ -18,10 +19,11 @@ html.govuk-template lang='en'
     = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
     = javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true
     = yield(:head)
+
   body.govuk-template__body.govuk-body
     script
       | document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
-    
+
     = render 'layouts/analytics_body'
     = render 'layouts/cookie_banner'
     
@@ -32,6 +34,10 @@ html.govuk-template lang='en'
     .govuk-width-container
       = govuk_phase_banner(tag: { text: 'Beta' }, classes: 'noprint') do
         = t('phase_banner_html', feedback_link: govuk_link_to('feedback', Rails.configuration.feedback_url, target: :_blank))
+
+      .noprint = render 'layouts/timeout'
+      
+      .noprint = back_link
 
       main#main-content.govuk-main-wrapper
         - flash.each do |variant, message|

@@ -5,12 +5,6 @@ en:
     charlie:
       what-to-expect:
         # preamble
-      before-you-start:
-        # preamble
-      intro:
-        heading: module_intro
-        body: intro
-
       1-1:
         heading: sub_module_intro
         body: 3rd module, page 1-1
@@ -29,5 +23,39 @@ en:
           title: Youtube Video Title
           provider: youtube
 
-      1-1-4:
+
+      1-2-3:
+        # question
+
+      # --------------------------------------
+      1-3:
+        # summary intro
+
+      1-3-1:
+        heading: Recap
+        body: |
+          - recap of what you have learnt
+          - followup activities
+          - further reading links
+
+      1-3-2:
+        # assessment intro
+      1-3-2-1:
+        # question
+      1-3-2-2:
+        # question
+      1-3-2-3:
+        # results
+
+      1-3-3:
+        # confidence intro
+      1-3-3-1:
+        # question
+      1-3-3-2:
+        # question
+      1-3-3-3:
+        # question
+      1-3-3-4:
+        form: xxxxx
+      1-3-4:
         # certificate
