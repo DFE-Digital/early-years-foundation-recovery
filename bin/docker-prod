@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+#
+# Generate self-signed certificates before running using:
+#   $ ./bin/docker-certs
+#
 # ------------------------------------------------------------------------------
 set -e
 
@@ -6,4 +10,8 @@ docker-compose \
   -f docker-compose.yml \
   -f docker-compose.qa.yml \
   --project-name recovery \
-  up app
+  up --detach app
+
+./bin/docker-prod-reset
+
+docker attach recovery_prod

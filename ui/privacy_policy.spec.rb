@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe 'Privacy Page', er_137: true do
+describe 'Privacy Page' do
   include_context 'as guest'
 
   before do
