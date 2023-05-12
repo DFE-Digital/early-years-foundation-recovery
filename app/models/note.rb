@@ -8,7 +8,7 @@ class Note < ApplicationRecord
   end
 
   # @return [Boolean] true if the note is empty
-  def body_is_empty 
-    self.body.strip.empty?
+  def body_is_empty
+    body.strip.empty?
   end
 end
