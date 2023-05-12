@@ -21,7 +21,7 @@ module Training
 
     # @return [String, nil]
     def published_at
-      return unless Rails.env.development?
+      return unless Rails.env.development? && ENV['CONTENTFUL_MANAGEMENT_TOKEN'].present?
 
       entry.published_at.in_time_zone(ENV['TZ']).strftime('%d-%m-%Y %H:%M')
     end
@@ -140,7 +140,7 @@ module Training
 
     # @return [Boolean]
     def notes?
-      notes
+      text_page? && notes
     end
 
     # intro types ---------------------------------

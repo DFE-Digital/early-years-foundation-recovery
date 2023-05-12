@@ -78,7 +78,7 @@ jobs:
             ${{ env.REGISTRY }}:${{ inputs.ref || github.ref_name }}
           tags: |
             ${{ env.REGISTRY }}:${{ github.sha }}
-            ${{ env.REGISTRY }}:${{ inputs.ref || github.ref_name }}
+            ${{ env.REGISTRY }}:${{ inputs.candidate || github.ref_name }}
       -
         name: Deploy Release Candidate
         env:

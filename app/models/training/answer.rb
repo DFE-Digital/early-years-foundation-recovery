@@ -37,6 +37,16 @@ module Training
       correct_options.map(&:id)
     end
 
+    # @return [Array<Integer>]
+    def incorrect_answers
+      incorrect_options.map(&:id)
+    end
+
+    # @return [Hash{Symbol => Array<Integer>}]
+    def schema
+      { correct: correct_answers, incorrect: incorrect_answers }
+    end
+
     # @param disabled [Boolean]
     # @param checked [Array<Integer>]
     # @return [Array<Training::Answer::Option>]
@@ -57,6 +67,11 @@ module Training
     # @return [Array<Training::Answer::Option>]
     def correct_options
       options.select(&:correct)
+    end
+
+    # @return [Array<Training::Answer::Option>]
+    def incorrect_options
+      options.reject(&:correct)
     end
 
     # @param collection [Array]
