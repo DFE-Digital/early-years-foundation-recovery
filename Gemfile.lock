@@ -269,7 +269,7 @@ GEM
       rails (>= 6)
       rouge
       sprockets (>= 3)
-    grover (1.1.4)
+    grover (1.1.5)
       combine_pdf (~> 1.0)
       nokogiri (~> 1.0)
     hashie (5.0.0)
