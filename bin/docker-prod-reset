@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#
+# ------------------------------------------------------------------------------
+set -e
+
+docker exec \
+  -it \
+  -e DISABLE_DATABASE_ENVIRONMENT_CHECK=1 \
+  recovery_prod \
+  rails db:seed:replant

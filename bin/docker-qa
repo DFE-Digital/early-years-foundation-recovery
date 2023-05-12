@@ -2,12 +2,9 @@
 #
 # @see https://github.com/SeleniumHQ/docker-selenium
 #
-# Generate self-signed certificates before running using:
-#   $ ./bin/docker-certs
-#
 # @example
-#
-#   $ TYPE=firefox BASE_URL=https://app:3000 ./bin/docker-qa
+#   $ ./bin/docker-prod
+#   $ TYPE=firefox ./bin/docker-qa
 #   $ BASE_URL=https://ey-recovery.london.cloudapps.digital USER_PASSWORD=secret ./bin/docker-qa
 #
 # ------------------------------------------------------------------------------
@@ -23,7 +20,7 @@ DRIVER=${DRIVER-"$TYPE:4444"} \
     -f docker-compose.qa.yml \
     --project-name recovery \
     run \
-    --volume="$PWD/ui:/srv/spec" \
+    --volume="$PWD/ui:/srv/ui" \
     --name recovery_qa \
     --rm qa \
-    rspec "$@"
+    rspec --default-path ui "$@"

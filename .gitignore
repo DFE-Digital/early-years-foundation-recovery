@@ -62,6 +62,7 @@ localhost.key
 # Terraform
 **/.terraform/*
 **/.terraform*
+terraform/app/tokens
 
 # RSpec
 spec/examples.txt
