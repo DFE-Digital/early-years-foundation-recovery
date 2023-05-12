@@ -1,36 +1,35 @@
----
-# ------------------------------------------------------------------------------
-# TODO: Run once the review app is deployed
 #
+# Run UI integration specs after accessibility tests
+#
+---
 name: QA Framework
 on:
   workflow_dispatch:
     inputs:
       workspace:
-        description: PR number to test against (pr-xxx)
+        description: Deployment workspace to test against (dev, pr-xxx)
         type: string
-        required: true
+        default: dev
 
-  pull_request:
-  merge_group:
+  # pull_request:
+  # merge_group:
+  # deployment_status:
 
-  # workflow_run:
-  #   workflows:
-  #     - Deploy Content App
-  #   types:
-  #     - completed
+  workflow_run:
+    workflows:
+      - Check WCAG Standards
+    branches:
+      - main
+    types:
+      - completed
 
 env:
-  BASE_URL: https://ey-recovery-pr-${{ inputs.ref || github.event.number }}.london.cloudapps.digital
+  BASE_URL: ey-recovery-${{ inputs.workspace || 'dev' }}.london.cloudapps.digital
   USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
 
 jobs:
   test:
     name: QA checks
-    # trigger by deployment
-    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    # trigger by label
-    if: contains(github.event.pull_request.labels.*.name, 'deployed')
     runs-on: ubuntu-latest
 
     # https://docs.github.com/en/actions/using-containerized-services/about-service-containers
@@ -63,9 +62,9 @@ jobs:
         name: Use Chrome
         env:
           BROWSER: standalone_chrome
-        run: bin/rspec --default-path ui
+        run: bundle exec rspec --default-path ui
       -
         name: Use Firefox
         env:
           BROWSER: standalone_firefox
-        run: bin/rspec --default-path ui
+        run: bundle exec rspec --default-path ui

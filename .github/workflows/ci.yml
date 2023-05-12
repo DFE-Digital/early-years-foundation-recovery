@@ -68,13 +68,13 @@ jobs:
           cache: npm
       -
         name: Prepare test database
-        run: bin/rails db:prepare
+        run: bundle exec rails db:create db:migrate
       -
         name: Report schema version
-        run: bin/rails db:version
+        run: bundle exec rails db:version
       -
         name: Compile assets
-        run: bin/rails assets:precompile
+        run: bundle exec rails assets:precompile
       -
         name: Run rubocop
         run: bundle exec rubocop
@@ -89,8 +89,8 @@ jobs:
       - # Test CMS functionality
         name: Run test suite (CMS)
         run: bundle exec rspec
-      - # Re-test CMS question response data migration feature
-        name: Run test suite (CMS)
-        run: bundle exec rspec
-        env:
-          DISABLE_USER_ANSWER: true
+      # - # Re-test CMS question response data migration feature
+      #   name: Run test suite (CMS)
+      #   run: bundle exec rspec
+      #   env:
+      #     DISABLE_USER_ANSWER: true

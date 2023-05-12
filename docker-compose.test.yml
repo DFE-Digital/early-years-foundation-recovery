@@ -10,6 +10,8 @@ services:
       - RAILS_ENV=test
       - DOMAIN=recovery.app
       - TRAINING_MODULES=demo-modules
+      - CONTENTFUL_ENVIRONMENT=test
+      - CONTENTFUL_MANAGEMENT_TOKEN=
       - BOT_TOKEN=bot_token
       - TIMEOUT_MINUTES=25
     tty: true
