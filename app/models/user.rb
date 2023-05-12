@@ -83,8 +83,8 @@ class User < ApplicationRecord
   scope :unconfirmed, -> { where(confirmed_at: nil) }
   scope :locked_out, -> { where.not(locked_at: nil) }
 
-  # @return [Integer] Number of users who have added at least one note, given the note body is not empty
-  scope :has_notes, -> { joins(:notes).distinct.count { |user| user.notes.any? { |note| !note.body_is_empty } } }
+  # Users who have added at least one note, given the note body is present
+  scope :has_notes, -> { joins(:notes).distinct.select { |user| user.notes.any?(&:present?) } }
 
   validates :first_name, :last_name, :setting_type_id,
             presence: true,
