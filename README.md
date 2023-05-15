@@ -3,6 +3,7 @@
 [![ci][ci-badge]][ci-workflow]
 [![brakeman][brakeman-badge]][brakeman-workflow]
 [![pa11y][pa11y-badge]][pa11y-workflow]
+[![qa][qa-badge]][qa-workflow]
 
 This is a Rails 7 application using the [DfE template][rails-template].
 
@@ -419,9 +420,11 @@ settings the following classes can be added:
 [ci-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml
 [production-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/production.yml
 [staging-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/staging.yml
+[qa-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/qa.yml
 
 <!-- GH workflow badges -->
 
 [brakeman-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/brakeman.yml/badge.svg
 [pa11y-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/pa11y.yml/badge.svg
 [ci-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml/badge.svg
+[qa-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/qa.yml/badge.svg

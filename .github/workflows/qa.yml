@@ -24,7 +24,7 @@ on:
       - completed
 
 env:
-  BASE_URL: ey-recovery-${{ inputs.workspace || 'dev' }}.london.cloudapps.digital
+  BASE_URL: https://ey-recovery-${{ inputs.workspace || 'dev' }}.london.cloudapps.digital
   USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
 
 jobs:

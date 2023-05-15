@@ -3,7 +3,7 @@
 class ContentfulDataIntegrity
   extend Dry::Initializer
 
-  option :module_name, Types::String.enum(*Training::Module.ordered.map(&:name))
+  option :module_name, Types::String
 
   # NB: Able to be validated in the CMS editor
   #
