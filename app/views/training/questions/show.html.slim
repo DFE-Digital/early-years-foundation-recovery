@@ -19,4 +19,5 @@
         - if content.confidence_question? || !current_user_response.responded?
           = f.govuk_submit content.next_button_text
         - else
+          = f.govuk_submit 'Responded', class: 'govuk-visually-hidden', disabled: true
           = cms_link_to_next_module_item(content)
