@@ -7,8 +7,7 @@ class Note < ApplicationRecord
     created_at.to_date.strftime('%-d %B %Y')
   end
 
-  # @return [Boolean] true if the note is empty
-  def present?
+  def filled?
     !body.strip.empty?
   end
 end

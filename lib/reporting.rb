@@ -55,9 +55,9 @@ module Reporting
       started_learning: started_learning,
       not_started_learning: not_started_learning,
 
-      # Number of distinct users who have at least one note
-      with_notes: User.has_notes.count,
-      with_notes_percentage: (User.has_notes.count.to_f / User.all.count * 100).round(2),
+      # Users who have a least 1 note
+      with_notes: User.with_notes.count,
+      with_notes_percentage: (User.with_notes.count.to_f / User.all.count * 100).round(2),
 
     }
   end
