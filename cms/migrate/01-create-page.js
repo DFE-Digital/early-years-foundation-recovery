@@ -40,13 +40,19 @@ module.exports = function(migration) {
   page.createField('submodule', {
     name: 'Submodule',
     type: 'Integer',
-    required: true
+    required: true,
+    validations: [
+      { 'range': { 'min': 1 } }
+    ]
   })
 
   page.createField('topic', {
     name: 'Topic',
     type: 'Integer',
-    required: true
+    required: true,
+    validations: [
+      { 'range': { 'min': 1 } }
+    ]
   })
 
   page.createField('heading', {

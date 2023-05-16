@@ -53,3 +53,8 @@ For developer use:
 For content author use:
 
 **Staging** WIP
+
+## Validations
+
+https://www.contentful.com/developers/docs/references/content-management-api/#/reference/content-types/content-type
+https://contentful.com/help/available-validations/

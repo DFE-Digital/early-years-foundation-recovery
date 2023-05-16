@@ -39,13 +39,19 @@ module.exports = function(migration) {
   question.createField('submodule', {
     name: 'Submodule',
     type: 'Integer',
-    required: true
+    required: true,
+    validations: [
+      { 'range': { 'min': 1 } }
+    ]
   })
 
   question.createField('topic', {
     name: 'Topic',
     type: 'Integer',
-    required: true
+    required: true,
+    validations: [
+      { 'range': { 'min': 1 } }
+    ]
   })
 
   question.createField('body', {

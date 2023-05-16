@@ -32,13 +32,19 @@ module.exports = function(migration) {
   video.createField('submodule', {
     name: 'Submodule',
     type: 'Integer',
-    required: true
+    required: true,
+    validations: [
+      { 'range': { 'min': 1 } }
+    ]
   })
 
   video.createField('topic', {
     name: 'Topic',
     type: 'Integer',
-    required: true
+    required: true,
+    validations: [
+      { 'range': { 'min': 1 } }
+    ]
   })
 
 

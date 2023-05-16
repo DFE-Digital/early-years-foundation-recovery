@@ -82,19 +82,28 @@ module.exports = function(migration) {
   trainingModule.createField('duration', {
     name: 'Duration',
     type: 'Number',
-    required: true
+    required: true,
+    validations: [
+      { 'range': { 'min': 0.5, 'max': 3 } }
+    ]
   })
 
   trainingModule.createField('summative_threshold', {
     name: 'Summative threshold',
     type: 'Integer',
-    required: true
+    required: true,
+    validations: [
+      { 'range': { 'min': 1, 'max': 100 } }
+    ]
   })
 
   trainingModule.createField('position', {
     name: 'Position',
     type: 'Integer',
-    required: true
+    required: true,
+    validations: [
+      { 'range': { 'min': 1 } }
+    ]
   })
 
   trainingModule.createField('pages', {
