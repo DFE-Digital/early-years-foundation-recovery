@@ -31,25 +31,26 @@ class SeedCourseEntries
       mod.module_items.map do |item|
         child_entry = create_entry(item)
 
-        # FIXME: > 1-1-1-3: ![Adults and children holding hands.](/assets/1-1-1-3-1127324447.jpg) stalls as Contentful struggles to process this specific file.
-        #
-        #         # Media upload if found in body copy
-        #         image = item.model.body&.match(IMG_REGEXP) # MatchData
-        #
-        #         if image
-        #           asset = process_image(*image.captures)
-        #           asset.publish if asset.save
-        #
-        #           # wait for publishing to generate image_url for asset
-        #           until asset.image_url.present?
-        #             sleep(1)
-        #             asset.publish
-        #           end
-        #
-        #           # "//images.ctfassets.net/dvmeh832nmjc/6etSgfjBK2UveguU2mZp4z/7f74406a62500bb14337a458a0e00a66/_assets_1-532263705.jpg"
-        #           child_entry.body = item.model.body.gsub(image[:filename], asset.image_url)
-        #         end
-        #
+        # Media upload if found in body copy
+
+        scan_for_images(item.model.body).each do |image|
+          asset = process_image(*image.captures)
+          if asset.save
+            log "Waiting for image upload: #{image[:filename]} for #{item.model.name}"
+            10.times do |i|
+              next if asset.image_url.present?
+              sleep 1
+              asset.publish
+            end
+            if asset.image_url.present?
+              child_entry.body = item.model.body.gsub(image[:filename], asset.image_url)
+              log "Uploaded image: #{image[:filename]} for #{item.model.name} -> #{asset.image_url}"
+            else
+              child_entry.body = item.model.body.gsub(image[:filename], '#tbd')
+              log "Incomplete image: #{image[:filename]} for #{item.model.name}"
+            end
+          end
+        end
 
         # parent
         child_entry.training_module = mod_entry
@@ -65,6 +66,12 @@ class SeedCourseEntries
   end
 
 private
+
+  # @param body  [String]
+  # return [Array<MatchData>]
+  def scan_for_images(body)
+    body&.to_enum(:scan, IMG_REGEXP)&.map { Regexp.last_match }.to_a # Array of MatchData
+  end
 
   # @param message [String]
   # @return [String]
