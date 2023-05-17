@@ -51,7 +51,7 @@ module-5:
     content:
     questions:
       1_independent:
-        multi_select: true
+        multi_select: false
         label: |
           At what age do children tend to show an increased desire to be independent?
         assessment_summary:
@@ -160,7 +160,7 @@ module-5:
     questions:
       1_freedom:
         multi_select: true
-        body: |
+        label: |
           Which of the following will promote physical literacy with children? Choose all that apply.
         assessment_summary:
         assessment_fail_summary: |
