@@ -18,6 +18,7 @@ class Dashboard
     { model: 'UserAnswer',      folder: 'useranswers',      file: 'user_answers'      },
     { model: 'Response',        folder: 'useranswers',      file: 'responses'         },
     { model: 'UserAssessment',  folder: 'userassessments',  file: 'user_assessments'  },
+    { model: 'LocalAuthorityUser',  folder: 'localauthorities',  file: 'local_authority_users'  },
   ].freeze
 
   # @return [String] 30-06-2022-09-30
