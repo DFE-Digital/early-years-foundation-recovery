@@ -19,7 +19,27 @@ module.exports = function(migration) {
   page.createField('page_type', {
     name: 'Page type',
     type: 'Symbol',
-    required: true
+    required: true,
+    validations: [
+      {
+        in: [
+         'interruption_page',
+         'sub_module_intro',
+         'text_page',
+         'video_page',
+         // 'formative_questionnaire',
+         'summary_intro',
+         'recap_page',
+         'assessment_intro',
+         // 'summative_questionnaire',
+         'assessment_results',
+         'confidence_intro',
+         // 'confidence_questionnaire',
+         'thankyou',
+         'certificate'
+        ]
+      }
+    ]
   })
 
   // parent
