@@ -40,8 +40,13 @@ module.exports = function(migration) {
     name: 'Submodule',
     type: 'Integer',
     required: true,
+    defaultValue: {
+      'en-US': 1,
+    },
     validations: [
-      { 'range': { 'min': 1 } }
+      {
+        range: { min: 1 }
+      }
     ]
   })
 
@@ -49,8 +54,13 @@ module.exports = function(migration) {
     name: 'Topic',
     type: 'Integer',
     required: true,
+    defaultValue: {
+      'en-US': 1,
+    },
     validations: [
-      { 'range': { 'min': 1 } }
+      {
+        range: { min: 1 }
+      }
     ]
   })
 

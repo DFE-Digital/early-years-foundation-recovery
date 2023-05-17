@@ -69,7 +69,9 @@ module.exports = function(migration) {
     type: 'Text',
     required: true,
     validations: [
-      { 'prohibitRegexp': { 'pattern': '\\n'} }
+      {
+        prohibitRegexp: { pattern: '\\n' }
+      }
     ]
   })
 
@@ -83,8 +85,13 @@ module.exports = function(migration) {
     name: 'Duration',
     type: 'Number',
     required: true,
+    defaultValue: {
+      'en-US': 1,
+    },
     validations: [
-      { 'range': { 'min': 0.5, 'max': 3 } }
+      {
+        range: { min: 0.5, max: 3 }
+      }
     ]
   })
 
@@ -92,8 +99,13 @@ module.exports = function(migration) {
     name: 'Summative threshold',
     type: 'Integer',
     required: true,
+    defaultValue: {
+      'en-US': 70,
+    },
     validations: [
-      { 'range': { 'min': 1, 'max': 100 } }
+      {
+        range: { min: 1, max: 100 }
+      }
     ]
   })
 
@@ -102,7 +114,9 @@ module.exports = function(migration) {
     type: 'Integer',
     required: true,
     validations: [
-      { 'range': { 'min': 1 } }
+      {
+        range: { min: 1 }
+      }
     ]
   })
 
