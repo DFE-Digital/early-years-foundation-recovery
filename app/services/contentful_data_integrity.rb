@@ -69,7 +69,7 @@ class ContentfulDataIntegrity
 
   # @return [Boolean]
   def thumbnail?
-    mod.fields[:image].present?
+    mod.image.present?
   end
 
   # @return [Boolean]
