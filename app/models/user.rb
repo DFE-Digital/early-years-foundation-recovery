@@ -98,6 +98,7 @@ class User < ApplicationRecord
 
   validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
 
+  # @return [Boolean]
   def has_notes?
     notes.any?(&:filled?)
   end

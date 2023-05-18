@@ -1,6 +1,7 @@
 class LocalAuthorityUser
   include ToCsv
 
+  # @return [Array<Hash>]
   def self.group_by_local_authority
     post_public_beta = User.where(created_at: Time.zone.local(2023, 2, 9, 15, 0, 0)..Time.zone.now).where.not(local_authority: nil)
     all_users = post_public_beta.group(:local_authority).count
@@ -8,6 +9,7 @@ class LocalAuthorityUser
     [all_users, registration_complete]
   end
 
+  # @return [String]
   def self.to_csv
     all_users, registration_complete = group_by_local_authority
     CSV.generate do |csv|
