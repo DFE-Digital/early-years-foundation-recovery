@@ -20,23 +20,22 @@ module.exports = function(migration) {
     name: 'Page type',
     type: 'Symbol',
     required: true,
+    defaultValue: {
+      'en-US': 'text_page',
+    },
     validations: [
       {
         in: [
+         'text_page',
          'interruption_page',
          'sub_module_intro',
-         'text_page',
-         'video_page',
-         // 'formative_questionnaire',
          'summary_intro',
-         'recap_page',
          'assessment_intro',
-         // 'summative_questionnaire',
-         'assessment_results',
          'confidence_intro',
-         // 'confidence_questionnaire',
-         'thankyou',
+         'assessment_results',
+         'recap_page',
          'certificate'
+         'thankyou',
         ]
       }
     ]
