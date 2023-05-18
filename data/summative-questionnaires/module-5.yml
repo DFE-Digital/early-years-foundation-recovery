@@ -116,9 +116,11 @@ module-5:
     content:
     questions:
       1_holistic_impact:
-        multi_select: false
+        multi_select: true
         label: |
-          Which of the following can be improved significantly when children take part in regular physical activity?
+          Which of the following are benefits of regular physical activity?
+
+          Choose all that apply.
 
         assessment_summary:
         assessment_fail_summary: |
@@ -129,12 +131,13 @@ module-5:
           You might want to revisit the section on [health and wellbeing](/modules/module-5/content-pages/5-2-1-1a).
 
         answers:
-          1: "Hunger"
-          2: "Toileting"
-          3: "Illness"
-          4: "Mental health"
+          1: "Improved mental health"
+          2: "Increased hunger"
+          3: "Improved balance"
+          4: "Disrupted toileting"
         correct_answers:
-        - 4
+        - 1
+        - 3
 
   5-4-1-7:
     content:
