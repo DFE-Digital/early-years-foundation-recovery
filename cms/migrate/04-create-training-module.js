@@ -138,9 +138,7 @@ module.exports = function(migration) {
     }
   })
 
-  /* Interface --------------------------------------------------------------
-  https://www.contentful.com/developers/docs/extensibility/app-framework/editor-interfaces/
-  */
+  /* Interface -------------------------------------------------------------- */
 
   trainingModule.changeFieldControl('pages', 'builtin', 'entryLinksEditor', {
     helpText: 'Define module content and order here',

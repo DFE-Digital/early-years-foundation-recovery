@@ -5,6 +5,7 @@ ADR:
 documentation:
 - README.md
 - data/*.md
+- cms/*.md
 
 terraform:
 - terraform/**/*
@@ -18,6 +19,7 @@ content:
 - config/locales/modules/**/*.yml
 - config/locales/static/*.yml
 - data/**/*.yml
+- cms/migrate/*.js
 
 pipeline:
 - .github/**/*.yml

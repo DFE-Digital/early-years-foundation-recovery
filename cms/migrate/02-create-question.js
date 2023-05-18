@@ -100,9 +100,7 @@ module.exports = function(migration) {
   })
 
 
-  /* Interface --------------------------------------------------------------
-  https://www.contentful.com/developers/docs/extensibility/app-framework/editor-interfaces/
-  */
+  /* Interface -------------------------------------------------------------- */
 
   question.changeFieldControl('answers', 'builtin', 'objectEditor', {
     helpText: 'An array of arrays: add true for correct options',

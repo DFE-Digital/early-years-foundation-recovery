@@ -105,9 +105,7 @@ module.exports = function(migration) {
     }
   })
 
-  /* Interface --------------------------------------------------------------
-  https://www.contentful.com/developers/docs/extensibility/app-framework/editor-interfaces/
-  */
+  /* Interface -------------------------------------------------------------- */
 
   page.changeFieldControl('notes', 'builtin', 'boolean', {
     helpText: 'Use Learning Log to take notes?',

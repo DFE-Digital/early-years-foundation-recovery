@@ -13,8 +13,9 @@
 
 Contentful tasks are namespaced under `eyfs:cms`, list them using `rake --tasks eyfs:cms`.
 
-- `rake eyfs:cms:migrate`  # Run migration files in `./cms/migrate`
-- `rake eyfs:cms:seed`     # Populate Contentful entries using YAML
+1. Run migration files `rake eyfs:cms:migrate` (from `./cms/migrate`)
+2. Populate Contentful entries using YAML `rake eyfs:cms:seed`
+3. Validate course content `rake eyfs:cms:validate`
 
 ## Migrations
 
@@ -56,5 +57,9 @@ For content author use:
 
 ## Validations
 
-https://www.contentful.com/developers/docs/references/content-management-api/#/reference/content-types/content-type
-https://contentful.com/help/available-validations/
+- https://www.contentful.com/developers/docs/references/content-management-api/#/reference/content-types/content-type
+- https://contentful.com/help/available-validations/
+
+## Interface
+
+- https://www.contentful.com/developers/docs/extensibility/app-framework/editor-interfaces/
