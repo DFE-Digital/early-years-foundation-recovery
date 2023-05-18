@@ -221,19 +221,32 @@ module-5:
       1_freedom:
         multi_select: true
         body: |
-          New question requested from Debbie
+          Which of the following will show an enthusiastic approach to physical development?
+
+          Choose all that apply.
         assessment_summary: |
-          Answer summary
+          Children should be able to access outdoor space in all weathers and you will need to plan for this within your daily routine.
+
+          You can use role play activities to help children to prepare for medical appointments such as going to see a doctor or dentist. This will make children familiar with what will happen at their appointment and reduce any unnecessary worry.
+
+          Children will look to you to help them understand when and how to wash their hands and complete toileting routines independently. Washing your hands with children is a positive way to show them the crucial steps involved.
+
+          It can be useful to plan cooking activities to support with physical development but the most important part is how you approach the delivery of the activity. Encouraging them with enthusiasm to help with food preparation will support them to make healthy choices and will promote independence for the future.
         assessment_fail_summary: |
-          Answer summary
+          Children should be able to access outdoor space in all weathers and you will need to plan for this within your daily routine.
+
+          You can use role play activities to help children to prepare for medical appointments such as going to see a doctor or dentist. This will make children familiar with what will happen at their appointment and reduce any unnecessary worry.
+
+          Children will also look to you to help them understand when and how to wash their hands and complete toileting routines independently. Washing your hands with children is a positive way to show them the crucial steps involved.
+
+          It can be useful to plan cooking activities to support with physical development but the most important part is how you approach the delivery of the activity. Encouraging them with enthusiasm to help with food preparation will support them to make healthy choices and will promote independence for the future.
         answers:
-          1: "Encouraging children’s physical confidence "
-          2: "Being a good role model "
-          3: "Ensuring the routine includes regular opportunities for physical activity "
-          4: "Introducing vocabulary relating to physical activity"
+          1: "Using role play"
+          2: "Planning cooking activities"
+          3: "Using outdoor areas in all weathers"
+          4: "Demonstrating good personal hygiene"
         correct_answers:
           - 1
-          - 2
           - 3
           - 4
 
