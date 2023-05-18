@@ -71,7 +71,7 @@ module-5:
     content:
     questions:
       1_checkpoints:
-        multi_select: false
+        multi_select: true
         label: |
           Which of the following can the observation 'checkpoints' in Development Matters support you to identify?
         assessment_summary:
