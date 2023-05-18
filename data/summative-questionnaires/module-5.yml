@@ -74,6 +74,8 @@ module-5:
         multi_select: true
         label: |
           Which of the following can the observation 'checkpoints' in Development Matters support you to identify?
+
+          Choose all that apply.
         assessment_summary:
         assessment_fail_summary: |
           Observation checkpoints can help you to reflect and understand what children are doing well and where they may need more support which can help you to understand their individual starting points.
@@ -171,7 +173,9 @@ module-5:
       1_freedom:
         multi_select: true
         label: |
-          Which of the following will promote physical literacy with children? Choose all that apply.
+          Which of the following will promote physical literacy with children?
+
+          Choose all that apply.
         assessment_summary:
         assessment_fail_summary: |
           Physical literacy is the confidence, motivation and skill levels needed to take part in physical activities. You can promote physical literacy by:

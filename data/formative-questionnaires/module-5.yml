@@ -24,6 +24,8 @@ module-5:
         multi_select: true
         body: |
           Which of the following will gross motor activity help to develop?
+
+          Choose all that apply.
         assessment_summary: |
           Activities and opportunities that promote gross motor skills will help to develop:
 
