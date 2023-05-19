@@ -34,8 +34,8 @@ module.exports = function(migration) {
          'confidence_intro',
          'assessment_results',
          'recap_page',
-         'certificate'
-         'thankyou',
+         'certificate',
+         'thankyou'
         ]
       }
     ]
