@@ -120,5 +120,10 @@ module EarlyYearsFoundationRecovery
     def debug?
       Rails.env.development? || review?
     end
+
+    # @return [ActiveSupport::TimeWithZone] public beta launch date and time
+    def public_beta_launch_date
+      Time.zone.local(2023, 2, 9, 15, 0, 0)
+    end
   end
 end
