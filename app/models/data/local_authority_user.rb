@@ -1,9 +1,13 @@
-class LocalAuthorityUser
+class Data::LocalAuthorityUser
   include ToCsv
 
+  def self.to_csv
+    new.generate_csv
+  end
+
   # @return [String]
-  def to_csv
-    all_users, registration_complete = get_local_auth_data
+  def generate_csv
+    all_users, registration_complete = retrieve_local_auth_data
     CSV.generate do |csv|
       csv << ['Local Authority', 'Total Users', 'Registration Completed']
       all_users.each do |local_authority, count|
@@ -22,7 +26,7 @@ private
   end
 
   # @return [Array<Hash>]
-  def get_local_auth_data
+  def retrieve_local_auth_data
     all_users = count_by_local_authority(filter_users)
     registration_complete = count_by_local_authority(User.registration_complete)
     [all_users, registration_complete]
