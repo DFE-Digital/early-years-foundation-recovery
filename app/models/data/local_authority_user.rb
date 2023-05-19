@@ -7,11 +7,10 @@ class Data::LocalAuthorityUser
 
   # @return [String]
   def generate_csv
-    all_users, registration_complete = retrieve_local_auth_data
     CSV.generate do |csv|
       csv << ['Local Authority', 'Total Users', 'Registration Completed']
-      all_users.each do |local_authority, count|
-        complete_count = registration_complete[local_authority].to_i
+      all_users_count.each do |local_authority, count|
+        complete_count = registration_complete_count[local_authority].to_i
         csv << [local_authority, count, complete_count]
       end
     end
@@ -20,16 +19,19 @@ class Data::LocalAuthorityUser
 private
 
   # @param users [ActiveRecord::Relation]
-  # @return [Hash] Hash of local authorities and their corresponding counts
+  # @return [Hash{Symbol=>Integer}]
   def count_by_local_authority(users)
     users.group(:local_authority).count
   end
 
-  # @return [Array<Hash>]
-  def retrieve_local_auth_data
-    all_users = count_by_local_authority(filter_users)
-    registration_complete = count_by_local_authority(User.registration_complete)
-    [all_users, registration_complete]
+  # @return [Hash{Symbol=>Integer}]
+  def all_users_count
+    count_by_local_authority(filter_users)
+  end
+
+  # @return [Hash{Symbol=>Integer}]
+  def registration_complete_count
+    count_by_local_authority(User.registration_complete)
   end
 
   # @return [ActiveRecord::Relation] Users created after public beta launch with non-nil LAs
