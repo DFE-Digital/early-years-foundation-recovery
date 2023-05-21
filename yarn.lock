@@ -244,9 +244,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@puppeteer/browsers@npm:1.1.0":
-  version: 1.1.0
-  resolution: "@puppeteer/browsers@npm:1.1.0"
+"@puppeteer/browsers@npm:1.3.0":
+  version: 1.3.0
+  resolution: "@puppeteer/browsers@npm:1.3.0"
   dependencies:
     debug: 4.3.4
     extract-zip: 2.0.1
@@ -264,7 +264,7 @@ __metadata:
       optional: true
   bin:
     browsers: lib/cjs/main-cli.js
-  checksum: 9f7497e5d38552a912444ed41fee0ce7fa2ebb33bbdd89f900e5dc103b01baf9a2d5aed568e7604c20574c90b1447714d8f409c980a32130d6498cf913e519bd
+  checksum: b966546abc56d23e1546a8139a5c10137e7b67c4a7403947518bab27a47a0d8f8a0b30c12108f04014a08e345f7e5d899b174dab3605d46774bd0245295c8789
   languageName: node
   linkType: hard
 
@@ -575,14 +575,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromium-bidi@npm:0.4.7":
-  version: 0.4.7
-  resolution: "chromium-bidi@npm:0.4.7"
+"chromium-bidi@npm:0.4.9":
+  version: 0.4.9
+  resolution: "chromium-bidi@npm:0.4.9"
   dependencies:
     mitt: 3.0.0
   peerDependencies:
     devtools-protocol: "*"
-  checksum: eec7581e2eddd2c95014c6edc5aae0b036c79bbeadee05166436b16139b6932c902c5ce21d95ed919a592f58d3a47c5469dc5f3de2a300700b2748ab119ad65e
+  checksum: cb2eea787282634718d1877bc63f00e8be33ce49369852b6e95dfe97a097f051445c8e374617d6433f8c9b578ec2d2d86a9889c152c7a850596cdae9342f81ad
   languageName: node
   linkType: hard
 
@@ -896,7 +896,7 @@ __metadata:
     axios: ^1.4.0
     esbuild: ^0.17.18
     govuk-frontend: ^4.6.0
-    puppeteer: ^20.1.2
+    puppeteer: ^20.2.1
     sass: ^1.62.1
   languageName: unknown
   linkType: soft
@@ -1652,12 +1652,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"puppeteer-core@npm:20.1.2":
-  version: 20.1.2
-  resolution: "puppeteer-core@npm:20.1.2"
+"puppeteer-core@npm:20.2.1":
+  version: 20.2.1
+  resolution: "puppeteer-core@npm:20.2.1"
   dependencies:
-    "@puppeteer/browsers": 1.1.0
-    chromium-bidi: 0.4.7
+    "@puppeteer/browsers": 1.3.0
+    chromium-bidi: 0.4.9
     cross-fetch: 3.1.5
     debug: 4.3.4
     devtools-protocol: 0.0.1120988
@@ -1667,18 +1667,18 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: c9570721d54dadbd55138b94bc199dfccd9da6f6d7a0a58f0a7d0792af9099470f114b34274f73396001bdb6ca70f7db5b8aa186a3164b557f50328a47b6aa27
+  checksum: f427c645fbc011fda985772837afc2a97f3ba37dc732d46c65ff6da3635c3a2d289771d6f4b2075749b253776adcb41d5aab1c0e3962076747ca0b8f93bf4064
   languageName: node
   linkType: hard
 
-"puppeteer@npm:^20.1.2":
-  version: 20.1.2
-  resolution: "puppeteer@npm:20.1.2"
+"puppeteer@npm:^20.2.1":
+  version: 20.2.1
+  resolution: "puppeteer@npm:20.2.1"
   dependencies:
-    "@puppeteer/browsers": 1.1.0
+    "@puppeteer/browsers": 1.3.0
     cosmiconfig: 8.1.3
-    puppeteer-core: 20.1.2
-  checksum: b2b9afe422cfb745fccc5805e10c32fda6644dbc123755dac126731d88fcfec26937f0ddfce0a90068477ef25d362bcaebbc33e0504881aa360f223987f43f25
+    puppeteer-core: 20.2.1
+  checksum: 64b4447b936d49e2b9d60bd9beeea1016879d59797b1319eac1f88d2dd7cfef7604fa2f42b6a73f12a0f636bc99317c4d050df4324219974fba3f5537e8c8340
   languageName: node
   linkType: hard
 
