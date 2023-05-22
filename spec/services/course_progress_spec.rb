@@ -47,26 +47,24 @@ RSpec.describe CourseProgress do
 
   describe '#available_modules' do
     it 'returns a list of modules that can be started' do
-      expect(course.available_modules.map(&:name)).to eq %w[alpha]
-      # start the first module with a dependent
+      expect(course.available_modules.map(&:name)).to eq %w[alpha bravo charlie]
+      # start the first module
       expect { start_module(alpha) }
       .to change { course.available_modules.count }
-      .from(1).to(0)
+      .from(3).to(2)
 
       # complete the first module
       expect { complete_module(alpha) }
-      .to change { course.available_modules.count }
-      .from(0).to(1)
+      .to_not change { course.available_modules.count }
 
-      # start the second module with a dependent
+      # start the second module
       expect { start_module(bravo) }
       .to change { course.available_modules.count }
-      .from(1).to(0)
+      .from(2).to(1)
 
       # complete the second module
       expect { complete_module(bravo) }
-      .to change { course.available_modules.count }
-      .from(0).to(1)
+      .to_not change { course.available_modules.count }
 
       expect(course.available_modules.map(&:name)).to eq %w[charlie]
     end
@@ -75,10 +73,7 @@ RSpec.describe CourseProgress do
   describe '#upcoming_modules' do
     it 'includes draft modules' do
       expect(course.upcoming_modules.map(&:name)).to include 'delta'
-    end
-
-    it 'is restricted to a maximum of 3' do
-      expect(course.upcoming_modules.count).to be 3
+      expect(course.upcoming_modules.count).to be 1
     end
 
     it 'does not contain available modules' do
