@@ -76,7 +76,6 @@ module-5:
           1: "Palmar"
           2: "Pincer"
           3: "Reflex"
-          4: "Standing"
         correct_answers:
           - 2
 
