@@ -7,6 +7,7 @@ require 'seed_course_entries'
 #
 class SeedImages < SeedCourseEntries
   # @return [String]
+  # rubocop:disable Rails/SaveBang
   def call(mod_name:)
     log "space: #{config.space}"
     log "env: #{config.environment}"
@@ -23,7 +24,7 @@ class SeedImages < SeedCourseEntries
     mod.module_items.map do |item|
       # Media upload if found in body copy
       match_data_array = scan_for_images(item.model.body)
-      
+
       while match_data_array.any?
         match_data = match_data_array.first
         asset = process_image(*match_data.captures)
@@ -37,4 +38,5 @@ class SeedImages < SeedCourseEntries
       end
     end
   end
+  # rubocop:enable Rails/SaveBang
 end

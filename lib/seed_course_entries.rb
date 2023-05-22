@@ -12,6 +12,7 @@ class SeedCourseEntries
   option :client, default: proc { Contentful::Management::Client.new(config.management_token) }
 
   # @return [String]
+  # rubocop:disable Rails/SaveBang
   def call(mod_name:)
     log "space: #{config.space}"
     log "env: #{config.environment}"
@@ -34,7 +35,7 @@ class SeedCourseEntries
         # Media upload if found in body copy
 
         match_data_array = scan_for_images(item.model.body)
-       
+
         while match_data_array.any?
           match_data = match_data_array.first
           asset = process_image(*match_data.captures)
@@ -60,6 +61,7 @@ class SeedCourseEntries
 
     log_entry(mod_entry)
   end
+  # rubocop:enable Rails/SaveBang
 
 private
 
