@@ -10,8 +10,8 @@ module Data
     def generate_csv
       CSV.generate do |csv|
         csv << ['Local Authority', 'Total Users', 'Registration Completed']
-        all_users_count.each do |local_authority, count|
-          complete_count = registration_complete_count[local_authority].to_i
+        public_beta_user_count.each do |local_authority, count|
+          complete_count = active_user_count[local_authority].to_i
           csv << [local_authority, count, complete_count]
         end
       end
@@ -26,18 +26,18 @@ module Data
     end
 
     # @return [Hash{Symbol=>Integer}]
-    def all_users_count
-      count_by_local_authority(filter_users)
+    def active_user_count
+      count_by_local_authority(User.since_public_beta.registration_complete)
     end
 
     # @return [Hash{Symbol=>Integer}]
-    def registration_complete_count
-      count_by_local_authority(User.registration_complete)
+    def public_beta_user_count
+      count_by_local_authority(public_beta_users)
     end
 
-    # @return [ActiveRecord::Relation<User>] Users created after public beta launch with non-nil local authorities
-    def filter_users
-      User.public_beta.local_authority_present
+    # @return [ActiveRecord::Relation<User>]
+    def public_beta_users
+      User.since_public_beta.with_local_authority
     end
   end
 end
