@@ -56,10 +56,15 @@ namespace :eyfs do
       SeedStaticPageEntries.new.call
     end
 
-    # desc 'Upload asset files to Contentful'
-    # task upload: :environment do
-    #   binding.pry
-    # end
+    desc 'Upload asset files to Contentful'
+    task seed_images: :environment do |_task, args|
+      require 'seed_images'
+      uploader = SeedImages.new
+      all_mods = TrainingModule.all.map(&:name)
+      args.with_defaults(mod_names: all_mods)
+      mod_names = args[:mod_names].split(',').flatten
+      mod_names.each { |mod| uploader.call(mod_name: mod) }
+    end
 
     # @see .env
     #   CONTENTFUL_ENVIRONMENT=demo

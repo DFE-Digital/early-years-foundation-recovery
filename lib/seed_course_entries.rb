@@ -33,22 +33,18 @@ class SeedCourseEntries
 
         # Media upload if found in body copy
 
-        scan_for_images(item.model.body).each do |image|
-          asset = process_image(*image.captures)
-          if asset.save
-            log "Waiting for image upload: #{image[:filename]} for #{item.model.name}"
-            10.times do |i|
-              next if asset.image_url.present?
-              sleep 1
-              asset.publish
-            end
-            if asset.image_url.present?
-              child_entry.body = item.model.body.gsub(image[:filename], asset.image_url)
-              log "Uploaded image: #{image[:filename]} for #{item.model.name} -> #{asset.image_url}"
-            else
-              child_entry.body = item.model.body.gsub(image[:filename], '#tbd')
-              log "Incomplete image: #{image[:filename]} for #{item.model.name}"
-            end
+        match_data_array = scan_for_images(item.model.body)
+       
+        while match_data_array.any?
+          match_data = match_data_array.first
+          asset = process_image(*match_data.captures)
+          asset.publish
+          if asset.image_url.present?
+            log "Image: #{match_data[:filename]} for #{item.model.name} succeeded"
+            child_entry.body = item.model.body.gsub(match_data[:filename], asset.image_url)
+            match_data_array.shift
+          else
+            asset.destroy
           end
         end
 
