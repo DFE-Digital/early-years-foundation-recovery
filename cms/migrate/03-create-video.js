@@ -38,7 +38,7 @@ module.exports = function(migration) {
     },
     validations: [
       {
-        range: { min: 1 }
+        range: { min: 0 }
       }
     ]
   })
@@ -52,7 +52,7 @@ module.exports = function(migration) {
     },
     validations: [
       {
-        range: { min: 1 }
+        range: { min: 0 }
       }
     ]
   })
