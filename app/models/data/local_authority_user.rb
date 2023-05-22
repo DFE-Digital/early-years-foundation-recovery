@@ -9,10 +9,9 @@ module Data
     # @return [String]
     def generate_csv
       CSV.generate do |csv|
-        csv << ['Local Authority', 'Total Users', 'Registration Completed']
-        public_beta_user_count.each do |local_authority, count|
-          complete_count = active_user_count[local_authority].to_i
-          csv << [local_authority, count, complete_count]
+        csv << ['Local Authority', 'Users']
+        count_by_local_authority.each do |local_authority, count|
+          csv << [local_authority, count]
         end
       end
     end
@@ -21,18 +20,8 @@ module Data
 
     # @param users [ActiveRecord::Relation<User>]
     # @return [Hash{Symbol=>Integer}]
-    def count_by_local_authority(users)
-      users.group(:local_authority).count
-    end
-
-    # @return [Hash{Symbol=>Integer}]
-    def active_user_count
-      count_by_local_authority(User.since_public_beta.registration_complete)
-    end
-
-    # @return [Hash{Symbol=>Integer}]
-    def public_beta_user_count
-      count_by_local_authority(public_beta_users)
+    def count_by_local_authority
+      public_beta_users.group(:local_authority).count
     end
 
     # @return [ActiveRecord::Relation<User>]
