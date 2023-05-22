@@ -82,7 +82,7 @@ class User < ApplicationRecord
   scope :confirmed, -> { where.not(confirmed_at: nil) }
   scope :unconfirmed, -> { where(confirmed_at: nil) }
   scope :locked_out, -> { where.not(locked_at: nil) }
-  scope :since_public_beta, -> { where(created_at: EarlyYearsFoundationRecovery::Application.public_beta_launch_date..Time.zone.now) }
+  scope :since_public_beta, -> { where(created_at: Rails.application.public_beta_launch_date..Time.zone.now) }
   scope :with_local_authority, -> { where.not(local_authority: nil) }
   scope :with_notes, -> { joins(:notes).distinct.select(&:has_notes?) }
 
