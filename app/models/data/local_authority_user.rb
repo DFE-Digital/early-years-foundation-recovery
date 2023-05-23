@@ -18,7 +18,6 @@ module Data
 
   private
 
-    # @param users [ActiveRecord::Relation]
     # @return [Hash{Symbol=>Integer}]
     def count_by_local_authority
       public_beta_users.group(:local_authority).count
