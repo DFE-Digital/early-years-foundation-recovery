@@ -2,15 +2,15 @@ module ApplicationHelper
   # @return [String]
   def navigation
     govuk_header(classes: 'noprint') do |header|
-      header.navigation_item(text: 'Home', href: root_path)
-      header.custom_logo { custom_logo }
+      header.with_navigation_item(text: 'Home', href: root_path)
+      header.with_custom_logo { custom_logo }
       if user_signed_in?
-        header.navigation_item(text: 'My modules', href: my_modules_path)
-        header.navigation_item(text: 'Learning log', href: user_notes_path) if current_user.course_started?
-        header.navigation_item(text: 'My account', href: user_path)
-        header.navigation_item(text: 'Sign out', href: destroy_user_session_path, options: { data: { turbo_method: :get } })
+        header.with_navigation_item(text: 'My modules', href: my_modules_path)
+        header.with_navigation_item(text: 'Learning log', href: user_notes_path) if current_user.course_started?
+        header.with_navigation_item(text: 'My account', href: user_path)
+        header.with_navigation_item(text: 'Sign out', href: destroy_user_session_path, options: { data: { turbo_method: :get } })
       else
-        header.navigation_item(text: 'Sign in', href: new_user_session_path)
+        header.with_navigation_item(text: 'Sign in', href: new_user_session_path)
       end
     end
   end
