@@ -322,28 +322,6 @@ module-5:
         correct_answers:
           - 4
 
-  5-3-3-4b:
-    questions:
-      1_most_effective:
-        multi_select: false
-        body: |
-          Which C best describes the type of experiences a child should have to promote physical development?
-        assessment_summary: |
-          If children receive consistent experiences at home and in your setting, they are more likely to adopt healthy lifestyles in later life.
-
-          You can support parents, carers and children by sharing your knowledge and practice to encourage similar practices at home.
-        assessment_fail_summary: |
-          If children receive consistent experiences at home and in your setting, they are more likely to adopt healthy lifestyles in later life.
-
-          You can support parents, carers and children by sharing your knowledge and practice to encourage similar practices at home.
-        answers:
-          1: "Cautious"
-          2: "Carefree"
-          3: "Consistent"
-          4: "Calming"
-        correct_answers:
-          - 3
-
   5-3-3-4c:
     questions:
       1_most_effective:
