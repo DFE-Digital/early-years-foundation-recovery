@@ -90,7 +90,7 @@ class ContentfulDataIntegrity
 
   # @return [Boolean]
   def thumbnail?
-    mod.image.present?
+    mod.fields[:image].present? && ContentfulModel::Asset.find(mod.fields[:image].id).present?
   end
 
   # @return [Boolean]
