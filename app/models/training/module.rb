@@ -130,7 +130,7 @@ module Training
     # @see ContentfulCourseProgress
     # @return [Boolean] incomplete content will not be deemed 'available'
     def draft?
-      @draft ||= !ContentfulDataIntegrity.new(module_name: name).valid?
+      @draft ||= !data.valid?
     end
 
     # @return [Boolean]
@@ -266,6 +266,11 @@ module Training
     # @return [Array<Array>] AST for automated module completion
     def schema
       content.map(&:schema)
+    end
+
+    # @return [ContentfulDataIntegrity]
+    def data
+      @data ||= ContentfulDataIntegrity.new(module_name: name)
     end
 
   private

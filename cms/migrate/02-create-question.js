@@ -19,7 +19,19 @@ module.exports = function(migration) {
   question.createField('page_type', {
     name: 'Page type',
     type: 'Symbol',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 'formative_questionnaire',
+    },
+    validations: [
+      {
+        in: [
+         'formative_questionnaire',
+         'summative_questionnaire',
+         'confidence_questionnaire',
+        ]
+      }
+    ]
   })
 
   question.createField('training_module', {
@@ -39,13 +51,29 @@ module.exports = function(migration) {
   question.createField('submodule', {
     name: 'Submodule',
     type: 'Integer',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 1,
+    },
+    validations: [
+      {
+        range: { min: 0 }
+      }
+    ]
   })
 
   question.createField('topic', {
     name: 'Topic',
     type: 'Integer',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 1,
+    },
+    validations: [
+      {
+        range: { min: 0 }
+      }
+    ]
   })
 
   question.createField('body', {
@@ -72,9 +100,7 @@ module.exports = function(migration) {
   })
 
 
-  /* Interface --------------------------------------------------------------
-  https://www.contentful.com/developers/docs/extensibility/app-framework/editor-interfaces/
-  */
+  /* Interface -------------------------------------------------------------- */
 
   question.changeFieldControl('answers', 'builtin', 'objectEditor', {
     helpText: 'An array of arrays: add true for correct options',

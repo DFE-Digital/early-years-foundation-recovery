@@ -63,13 +63,17 @@ module.exports = function(migration) {
     required: true
   })
 
-  // markdown not permitted
   trainingModule.createField('objective', {
     name: 'Objective',
     type: 'Text',
     required: true,
     validations: [
-      { 'prohibitRegexp': { 'pattern': '\\n'} }
+      {
+        prohibitRegexp: {
+          pattern: '\\n' ,
+          message: 'Markdown is not permitted'
+        }
+      }
     ]
   })
 
@@ -82,19 +86,40 @@ module.exports = function(migration) {
   trainingModule.createField('duration', {
     name: 'Duration',
     type: 'Number',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 1,
+    },
+    validations: [
+      {
+        range: { min: 0.5, max: 3 }
+      }
+    ]
   })
 
   trainingModule.createField('summative_threshold', {
     name: 'Summative threshold',
     type: 'Integer',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 70,
+    },
+    validations: [
+      {
+        range: { min: 1, max: 100 }
+      }
+    ]
   })
 
   trainingModule.createField('position', {
     name: 'Position',
     type: 'Integer',
-    required: true
+    required: true,
+    validations: [
+      {
+        range: { min: 1 }
+      }
+    ]
   })
 
   trainingModule.createField('pages', {
@@ -115,9 +140,7 @@ module.exports = function(migration) {
     }
   })
 
-  /* Interface --------------------------------------------------------------
-  https://www.contentful.com/developers/docs/extensibility/app-framework/editor-interfaces/
-  */
+  /* Interface -------------------------------------------------------------- */
 
   trainingModule.changeFieldControl('pages', 'builtin', 'entryLinksEditor', {
     helpText: 'Define module content and order here',
