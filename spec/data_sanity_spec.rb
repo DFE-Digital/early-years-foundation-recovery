@@ -48,9 +48,9 @@ RSpec.describe 'Module content' do
       expect(questions['brain-development-and-how-children-learn'].count).to be 22
       expect(questions['personal-social-and-emotional-development'].count).to be 19
       expect(questions['module-4'].count).to be 19
-      expect(questions['module-5'].count).to be 16
+      expect(questions['module-5'].count).to be 13
 
-      expect(questions_total).to be 98
+      expect(questions_total).to be 95
     end
   end
 
