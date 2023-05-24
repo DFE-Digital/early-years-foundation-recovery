@@ -8,66 +8,66 @@ module-5:
   # ----------------------------------------------------------------------------
 
   5-1:
-    type: sub_module_intro  # submodule 1
-  5-1-1a:
-    type: text_page         # submodule 1 / topic 1a
-  5-1-1a-1:
-    type: text_page
-  5-1-1a-2:
-    type: text_page
-  5-1-1a-3:
-    type: text_page
-  5-1-1a-4:
-    type: text_page
-  5-1-1a-5:
-    type: text_page
-  5-1-1a-6:
-    type: text_page
-  5-1-1a-7video:
-    type: video_page
-  5-1-1a-8video:
-    type: video_page
+    type: sub_module_intro # submodule 1
   5-1-1:
-    type: text_page         # submodule 1 / topic 1
-  5-1-1-2a:
+    type: text_page # submodule 1 / topic 1
+  5-1-1-1:
     type: text_page
-  5-1-1-2b:
-    type: formative_questionnaire
+  5-1-1-2:
+    type: text_page
   5-1-1-3:
     type: text_page
   5-1-1-4:
     type: text_page
-  5-1-1-5a:
+  5-1-1-5:
     type: text_page
-  5-1-1-5b:
-    type: formative_questionnaire
-  5-1-1-6a:
+  5-1-1-6:
     type: text_page
-  5-1-1-6b:
-    type: formative_questionnaire
-  5-1-1-7a:
-    type: text_page
-  5-1-1-7b:
-    type: formative_questionnaire
-  5-1-1-8:
-    type: text_page
-  5-1-1-9a:
-    type: text_page
-  5-1-1-9b:
-    type: formative_questionnaire
+  5-1-1-7video:
+    type: video_page
+  5-1-1-8video:
+   type: video_page
   5-1-2:
-    type: text_page         # submodule 1 / topic 2
-  5-1-2-1:
+    type: text_page # submodule 1 / topic 2
+  5-1-2-2a:
     type: text_page
+  5-1-2-2b:
+    type: formative_questionnaire
+  5-1-2-3:
+    type: text_page
+  5-1-2-4:
+    type: text_page
+  5-1-2-5a:
+    type: text_page
+  5-1-2-5b:
+    type: formative_questionnaire
+  5-1-2-6a:
+    type: text_page
+  5-1-2-6b:
+    type: formative_questionnaire
+  5-1-2-7a:
+    type: text_page
+  5-1-2-7b:
+    type: formative_questionnaire
+  5-1-2-8:
+    type: text_page
+  5-1-2-9a:
+    type: text_page
+  5-1-2-9b:
+    type: formative_questionnaire
   5-1-3:
-    type: text_page         # submodule 1 / topic 3
+    type: text_page # submodule 1 / topic 3
   5-1-3-1:
     type: text_page
-  5-1-3-2a:
+  5-1-4:
+    type: text_page # submodule 1 / topic 4
+  5-1-4-1:
     type: text_page
-  5-1-3-2b:
+  5-1-4-2a:
+    type: text_page
+  5-1-4-2b:
     type: formative_questionnaire
-  5-1-3-3a:
+  5-1-4-3a:
     type: text_page
   5-2:
     type: sub_module_intro  # submodule 2
@@ -99,8 +99,6 @@ module-5:
     type: text_page
   5-3-1-2a:
     type: text_page
-  5-3-1-2b:
-    type: formative_questionnaire
   5-3-2:
     type: text_page         # submodule 3 / topic 2
   5-3-2-1a:
@@ -137,8 +135,6 @@ module-5:
     type: text_page
   5-3-3-4a:
     type: text_page
-  5-3-3-4b:
-    type: formative_questionnaire
   5-3-3-4c:
     type: formative_questionnaire
 

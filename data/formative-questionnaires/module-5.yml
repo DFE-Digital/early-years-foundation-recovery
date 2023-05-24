@@ -1,6 +1,6 @@
 ---
 module-5:
-  5-1-1-2b:
+  5-1-2-2b:
     questions:
       1_newborn_reflexes:
         multi_select: false
@@ -18,7 +18,7 @@ module-5:
         correct_answers:
           - 2
 
-  5-1-1-5b:
+  5-1-2-5b:
     questions:
       1_gross_motor_activity:
         multi_select: true
@@ -62,7 +62,7 @@ module-5:
           - 1
           - 2
 
-  5-1-1-6b:
+  5-1-2-6b:
     questions:
       1_grasp:
         multi_select: false
@@ -79,7 +79,7 @@ module-5:
         correct_answers:
           - 2
 
-  5-1-1-7b:
+  5-1-2-7b:
     questions:
       1_activity_minutes:
         multi_select: false
@@ -101,7 +101,7 @@ module-5:
         correct_answers:
           - 2
 
-  5-1-1-9b:
+  5-1-2-9b:
     questions:
       1_moderate_vigorous:
         multi_select: false
@@ -123,7 +123,7 @@ module-5:
         correct_answers:
           - 2
 
-  5-1-3-2b:
+  5-1-4-2b:
     questions:
       1_calories:
         multi_select: false
@@ -216,40 +216,6 @@ module-5:
           2: "False"
         correct_answers:
           - 1
-
-  5-3-1-2b:
-    questions:
-      1_freedom:
-        multi_select: true
-        body: |
-          Which of the following will show an enthusiastic approach to physical development?
-
-          Choose all that apply.
-        assessment_summary: |
-          Children should be able to access outdoor space in all weathers and you will need to plan for this within your daily routine.
-
-          You can use role play activities to help children to prepare for medical appointments such as going to see a doctor or dentist. This will make children familiar with what will happen at their appointment and reduce any unnecessary worry.
-
-          Children will look to you to help them understand when and how to wash their hands and complete toileting routines independently. Washing your hands with children is a positive way to show them the crucial steps involved.
-
-          It can be useful to plan cooking activities to support with physical development but the most important part is how you approach the delivery of the activity. Encouraging them with enthusiasm to help with food preparation will support them to make healthy choices and will promote independence for the future.
-        assessment_fail_summary: |
-          Children should be able to access outdoor space in all weathers and you will need to plan for this within your daily routine.
-
-          You can use role play activities to help children to prepare for medical appointments such as going to see a doctor or dentist. This will make children familiar with what will happen at their appointment and reduce any unnecessary worry.
-
-          Children will also look to you to help them understand when and how to wash their hands and complete toileting routines independently. Washing your hands with children is a positive way to show them the crucial steps involved.
-
-          It can be useful to plan cooking activities to support with physical development but the most important part is how you approach the delivery of the activity. Encouraging them with enthusiasm to help with food preparation will support them to make healthy choices and will promote independence for the future.
-        answers:
-          1: "Using role play"
-          2: "Planning cooking activities"
-          3: "Using outdoor areas in all weathers"
-          4: "Demonstrating good personal hygiene"
-        correct_answers:
-          - 1
-          - 3
-          - 4
 
   5-3-2-4b:
     questions:
