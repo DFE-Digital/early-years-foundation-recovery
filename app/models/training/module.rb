@@ -270,7 +270,7 @@ module Training
 
     # @return [ContentfulDataIntegrity]
     def data
-      ContentfulDataIntegrity.new(module_name: name)
+      @data ||= ContentfulDataIntegrity.new(module_name: name)
     end
 
   private

@@ -60,7 +60,7 @@ class ContentfulDataIntegrity
 
   # @return [Boolean] Validate modules with content
   def valid?
-    (module_results + content_results).all?
+    (module_results + content_results).all? && mod.pages?
   end
 
   # @return [Training::Module]
@@ -77,12 +77,12 @@ class ContentfulDataIntegrity
   # Decorators ---------------------------------------------------------
 
   # @return [Boolean]
-  def tooltip?
-    (Rails.application.debug? || Rails.application.candidate?) && !mod.data.valid?
+  def debug?
+    (Rails.application.debug? || Rails.application.candidate?) && !valid?
   end
 
   # @return [Array<String>]
-  def tooltips
+  def errors
     validations.select { |method, message| message unless send("#{method}?") }.values
   end
 
@@ -195,9 +195,10 @@ class ContentfulDataIntegrity
     page_by_type_position(type: 'formative_questionnaire')
   end
 
+  # 'Brain development and how children learn' has fewest
   # @return [Boolean] demo modules have fewer questions than genuine content
   def confidence?
-    demo? || mod.page_by_type('confidence_questionnaire').count.eql?(10)
+    demo? || mod.page_by_type('confidence_questionnaire').count >= 4
   end
 
   # @return [Boolean] demo modules have fewer questions than genuine content
