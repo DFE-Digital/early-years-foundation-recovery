@@ -63,14 +63,16 @@ module.exports = function(migration) {
     required: true
   })
 
-  // markdown not permitted
   trainingModule.createField('objective', {
     name: 'Objective',
     type: 'Text',
     required: true,
     validations: [
       {
-        prohibitRegexp: { pattern: '\\n' }
+        prohibitRegexp: {
+          pattern: '\\n' ,
+          message: 'Markdown is not permitted'
+        }
       }
     ]
   })
