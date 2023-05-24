@@ -3,6 +3,7 @@
 [![ci][ci-badge]][ci-workflow]
 [![brakeman][brakeman-badge]][brakeman-workflow]
 [![pa11y][pa11y-badge]][pa11y-workflow]
+[![qa][qa-badge]][qa-workflow]
 
 This is a Rails 7 application using the [DfE template][rails-template].
 
@@ -109,6 +110,7 @@ The commands run common tasks inside containers:
     equivalent of `bin/rspec`
 - `bin/docker-doc` runs a YARD documentation server
 - `bin/docker-uml` exports UML diagrams as default PNGs
+- `bin/docker-prod` starts rails in production under `https`
 - `bin/docker-qa` runs the browser tests against a running production application,
     a containerised equivalent of `bin/qa`
 - `bin/docker-pa11y` runs WCAG checks against a generated `sitemap.xml`
@@ -247,7 +249,7 @@ To run a self-signed certificate must first be generated.
 
 1. `./bin/docker-certs` (Mac users can trust the certificate in [Keychain Access](https://support.apple.com/en-gb/guide/keychain-access))
 2. `./bin/docker-qa` (this will build and bring up the application with a clean database)
-3. `docker exec -it recovery_prod rails db:seed` (seed the prerequisite user accounts)
+3. `./bin/docker-prod-reset` (clean and reseed the prerequisite user accounts)
 4. `./bin/docker-qa` (retest)
 4. `BASE_URL=https://deployment ./bin/docker-qa` (alternative test against another server)
 
@@ -418,9 +420,11 @@ settings the following classes can be added:
 [ci-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml
 [production-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/production.yml
 [staging-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/staging.yml
+[qa-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/qa.yml
 
 <!-- GH workflow badges -->
 
 [brakeman-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/brakeman.yml/badge.svg
 [pa11y-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/pa11y.yml/badge.svg
 [ci-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml/badge.svg
+[qa-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/qa.yml/badge.svg

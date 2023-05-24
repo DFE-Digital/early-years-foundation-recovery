@@ -145,9 +145,9 @@ module Training
 
     # @return [String, nil]
     def published_at
-      return unless Rails.env.development?
+      return unless Rails.env.development? && ENV['CONTENTFUL_MANAGEMENT_TOKEN'].present?
 
-      entry.published_at.in_time_zone(ENV['TZ']).strftime('%d-%m-%Y %H:%M')
+      entry.published_at&.in_time_zone(ENV['TZ'])&.strftime('%d-%m-%Y %H:%M')
     end
 
     # @see Training::Module#debug_summary
@@ -261,6 +261,11 @@ module Training
     # @return [String]
     def card_anchor
       "#module-#{position}-#{title.downcase.parameterize}"
+    end
+
+    # @return [Array<Array>] AST for automated module completion
+    def schema
+      content.map(&:schema)
     end
 
   private

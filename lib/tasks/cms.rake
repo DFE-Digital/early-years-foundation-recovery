@@ -74,5 +74,16 @@ namespace :eyfs do
       rescue Dry::Types::ConstraintError
       end
     end
+
+    desc 'Export happy E2E AST'
+    task export: :environment do
+      require 'content_test_schema'
+      Training::Module.ordered.each do |mod|
+        file_path = Rails.root.join("spec/support/ast/#{mod.name}.yml")
+        file_data = ContentTestSchema.new(mod: mod).call.to_yaml
+
+        File.write(file_path, file_data)
+      end
+    end
   end
 end

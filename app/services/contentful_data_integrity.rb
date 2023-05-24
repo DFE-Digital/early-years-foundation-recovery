@@ -3,7 +3,7 @@
 class ContentfulDataIntegrity
   extend Dry::Initializer
 
-  option :module_name, Types::String.enum(*Training::Module.ordered.map(&:name))
+  option :module_name, Types::String
 
   # NB: Able to be validated in the CMS editor
   #
@@ -62,7 +62,7 @@ class ContentfulDataIntegrity
   # @param numbers [Array<Integer>]
   # @return [Boolean] 0, 1, 2, 3, 4...
   def consecutive_integers?(numbers)
-    numbers.first.zero? && numbers.each_cons(2).all? { |a, b| (a + 1).eql?(b) }
+    numbers.any? && numbers.first.zero? && numbers.each_cons(2).all? { |a, b| (a + 1).eql?(b) }
   end
 
   # MODULE VALIDATIONS ---------------------------------------------------------
