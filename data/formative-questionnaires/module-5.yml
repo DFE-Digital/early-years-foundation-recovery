@@ -271,7 +271,7 @@ module-5:
       1_most_effective:
         multi_select: false
         body: |
-          Which of the following vitamins are boosted by outdoor learning?
+          Which of the following vitamins is boosted by outdoor learning?
         assessment_summary: |
           Spending time in sunlight can support children’s overall mood and the exposure to vitamin D supports the development of strong and healthy bones and teeth.
 
