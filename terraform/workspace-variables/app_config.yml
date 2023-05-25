@@ -32,6 +32,7 @@ staging:
   GOVUK_WEBSITE_ROOT: ey-recovery-staging
   TRACKING_ID: GTM-W6W95FD  # Test data
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-staging
+  CONTENTFUL: false
 
 # ey-recovery-dev
 development:
@@ -43,6 +44,7 @@ development:
   # CONTENTFUL_ENVIRONMENT: test # reinstate for pa11y
   # jobs
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-development
+  CONTENTFUL: false
 
 # ey-recovery-content
 content:
@@ -51,6 +53,7 @@ content:
   DASHBOARD_UPDATE: false
   # DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # every 5 mins (default: daily at noon)
   # cms
+  CONTENTFUL: false # disabled for module 5 YAML release
   CONTENTFUL_PREVIEW: true
   # CONTENTFUL_ENVIRONMENT: test
   # @see .github/workflows/content.yml
