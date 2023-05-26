@@ -30,6 +30,10 @@ RSpec.describe Reporting do
     user1.notes.create(body: '')
   end
 
+  let(:nil_note) do
+    user1.notes.create(body: nil)
+  end
+
   let(:whitespace_note) do
     user1.notes.create(body: " \n \n \n")
   end
@@ -55,6 +59,15 @@ RSpec.describe Reporting do
         expect(user1.email).to eq('test1@example.com')
         expect(blank_note.body).to eq('')
         expect(whitespace_note.body).to eq(" \n \n \n")
+        expect(reporting.users[:with_notes]).to eq(0)
+        expect(reporting.users[:with_notes_percentage]).to eq(0)
+      end
+    end
+
+    context 'when there is a saved note but the body is nil' do
+      it 'the note is not counted' do
+        expect(user1.email).to eq('test1@example.com')
+        expect(nil_note.body).to eq(nil)
         expect(reporting.users[:with_notes]).to eq(0)
         expect(reporting.users[:with_notes_percentage]).to eq(0)
       end
