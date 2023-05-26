@@ -27,6 +27,7 @@ class SeedCourseEntries
     log "#{mod.name} ----------------------------------------------------------"
 
     mod_entry = create_training_module(mod.cms_module_params)
+    create_thumbnail(mod, mod_entry)
 
     mod_entry.pages =
       mod.module_items.map do |item|
@@ -166,6 +167,17 @@ private
   # @return [Contentful::Management::Asset]
   def create_asset(params)
     client.assets(config.space, config.environment).create(params)
+  end
+
+  # @return [Contentful::Management::Asset]
+  def create_thumbnail(mod, mod_entry)
+    process_image(mod.title, mod.thumbnail).tap do |asset|
+      asset.publish
+      if asset.image_url.present?
+        log "Thumbnail: #{mod.thumbnail} for #{mod.name} succeeded"
+      end
+      mod_entry.image = asset
+    end
   end
 end
 # :nocov:
