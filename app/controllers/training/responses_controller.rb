@@ -81,9 +81,7 @@ module Training
     end
 
     def redirect
-      if content.summative_question? && content.last_assessment?
-        ContentfulAssessmentProgress.new(user: current_user, mod: mod).save!
-      end
+      helpers.cms_assessment_progress(mod).complete! if content.last_assessment?
 
       if content.formative_question?
         redirect_to training_module_question_path(mod.name, content.name)

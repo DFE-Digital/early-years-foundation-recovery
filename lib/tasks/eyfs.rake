@@ -73,12 +73,14 @@ namespace :eyfs do
     puts "Updated #{number_updated} of #{total_records} records"
   end
 
-  desc 'Seed first genuine module state'
+  desc 'Fake completed course'
   task state: :environment do |_task, _args|
     require 'content_seed'
 
-    user    = User.find_by(email: 'completed@example.com')
-    mod     = Training::Module.by_name('child-development-and-the-eyfs')
-    ContentSeed.new(mod: mod, user: user).call
+    user = User.find_by(email: 'completed@example.com')
+
+    Training::Module.ordered.reject(&:draft?).each do |mod|
+      ContentSeed.new(mod: mod, user: user).call
+    end
   end
 end
