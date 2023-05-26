@@ -23,7 +23,7 @@ module Training
     def published_at
       return unless Rails.env.development? && ENV['CONTENTFUL_MANAGEMENT_TOKEN'].present?
 
-      entry.published_at.in_time_zone(ENV['TZ']).strftime('%d-%m-%Y %H:%M')
+      entry.published_at&.in_time_zone(ENV['TZ'])&.strftime('%d-%m-%Y %H:%M')
     end
 
     # @see Training::Content#debug_summary

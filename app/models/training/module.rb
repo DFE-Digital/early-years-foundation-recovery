@@ -130,7 +130,7 @@ module Training
     # @see ContentfulCourseProgress
     # @return [Boolean] incomplete content will not be deemed 'available'
     def draft?
-      @draft ||= !ContentfulDataIntegrity.new(module_name: name).valid?
+      @draft ||= !data.valid?
     end
 
     # @return [Boolean]
@@ -147,7 +147,7 @@ module Training
     def published_at
       return unless Rails.env.development? && ENV['CONTENTFUL_MANAGEMENT_TOKEN'].present?
 
-      entry.published_at.in_time_zone(ENV['TZ']).strftime('%d-%m-%Y %H:%M')
+      entry.published_at&.in_time_zone(ENV['TZ'])&.strftime('%d-%m-%Y %H:%M')
     end
 
     # @see Training::Module#debug_summary
@@ -266,6 +266,11 @@ module Training
     # @return [Array<Array>] AST for automated module completion
     def schema
       content.map(&:schema)
+    end
+
+    # @return [ContentfulDataIntegrity]
+    def data
+      @data ||= ContentfulDataIntegrity.new(module_name: name)
     end
 
   private

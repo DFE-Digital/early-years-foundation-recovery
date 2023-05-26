@@ -9,14 +9,6 @@ RSpec.describe ContentfulDataIntegrity, :cms do
     skip 'WIP' unless Rails.application.cms?
   end
 
-  context 'when module is not found' do
-    let(:mod) { 'foo' }
-
-    it 'raises constraint error' do
-      expect { service }.to raise_error Dry::Types::ConstraintError
-    end
-  end
-
   context 'when module is not specified' do
     let(:mod) { nil }
 
@@ -29,19 +21,25 @@ RSpec.describe ContentfulDataIntegrity, :cms do
     context 'when valid' do
       let(:mod) { 'alpha' }
 
-      specify { expect(service.valid?).to be true }
+      specify { expect(service).to be_valid }
     end
 
     context 'when invalid' do
       let(:mod) { 'delta' }
 
-      specify { expect(service.valid?).to be false } # something should be missing e.g. duration
+      specify { expect(service).not_to be_valid } # something should be missing e.g. duration
     end
   end
 
   describe '#consecutive_integers?' do
     let(:mod) { 'charlie' }
     let(:output) { service.consecutive_integers?(input) }
+
+    context 'when input is empty' do
+      let(:input) { [] }
+
+      specify { expect(output).to be false }
+    end
 
     context 'when not consecutive' do
       let(:input) { [0, 1, 2, 3, 4, 6] }

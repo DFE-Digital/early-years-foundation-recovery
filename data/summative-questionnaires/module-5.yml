@@ -1,0 +1,253 @@
+---
+module-5:
+  5-4-1-1:
+    content:
+    questions:
+      1_fundamental_movement_skills:
+        multi_select: false
+        label: |
+          Which 3 skill sets are fundamental movement skills?
+        assessment_summary:
+        assessment_fail_summary: |
+          Fundamental movement skills are divided into three different skill sets: manipulation, locomotor and stability.
+
+          Manipulation skills support us to control objects. Locomotor skills include running, galloping,hopping, skipping, dodging, leaping, twisting and dodging. Stability skills are those needed to control our body and include stopping, stretching, landing, twisting and climbing.
+
+          You might want to revisit the section on [fundamental movement skills](/modules/module-5/content-pages/5-1-1-3).
+        answers:
+          1: "Standing, rolling and hopping"
+          2: "Throwing, catching and bouncing"
+          3: "Resting, stretching and balancing"
+          4: "Manipulation, locomotor and stability"
+        correct_answers:
+        - 4
+
+  5-4-1-2:
+    content:
+    questions:
+      1_7_to_12_months:
+        multi_select: false
+        label: |
+          Which of the following physical actions would you expect a baby aged between 7 and 12 months to be able to achieve?
+        assessment_summary:
+        assessment_fail_summary: |
+          During this period, with the correct support, gross motor skills will develop to include:
+
+          - sitting without support
+          - beginning to crawl
+          - standing while holding onto something
+
+          You might want to revisit the section on [stages of physical development: 7 to 12 months](/modules/module-5/content-pages/5-1-2-6a).
+
+        answers:
+          1: "Jump on the spot with both feet on the floor"
+          2: "Climb onto a chair"
+          3: "Sit unsupported"
+          4: "Roll a large ball using hands and arms"
+        correct_answers:
+        - 3
+
+  5-4-1-3:
+    content:
+    questions:
+      1_independent:
+        multi_select: false
+        label: |
+          At what age do children tend to show an increased desire to be independent?
+        assessment_summary:
+        assessment_fail_summary: |
+          Between 25 and 36 months children will be showing an increased desire to be independent. This is a perfect opportunity to encourage skills whilst dressing and undressing, during mealtimes and with self care such as washing hands and toileting.
+
+          You might want to revisit the section on [stages of physical development: 25 to 36 months](/modules/module-5/content-pages/5-1-2-8).
+        answers:
+          1: "7 to 12 months"
+          2: "13 to 24 months"
+          3: "25 to 36 months"
+          4: "37 to 48 months"
+        correct_answers:
+        - 3
+
+  5-4-1-4:
+    content:
+    questions:
+      1_checkpoints:
+        multi_select: true
+        label: |
+          Which of the following can the observation 'checkpoints' in Development Matters support you to identify?
+
+          Choose all that apply.
+        assessment_summary:
+        assessment_fail_summary: |
+          Observation checkpoints can help you to reflect and understand what children are doing well and where they may need more support which can help you to understand their individual starting points.
+
+          Although observation checkpoints can help you to identify where further support is required, they may not determine whether or not a child will secure learning before the end of their early years education.
+
+          You might want to revisit the section on [theories of physical development](/modules/module-5/content-pages/5-1-3).
+        answers:
+          1: "Individual starting points"
+          2: "What children already do well"
+          3: "What learning children will definitely secure at the end of their early years education"
+          4: "Where a more knowledgeable other might be helpful"
+        correct_answers:
+        - 1
+        - 2
+        - 4
+
+  5-4-1-5:
+    content:
+    questions:
+      1_eatwell:
+        multi_select: false
+        label: |
+          Which of the following is a document detailing healthy eating guidance?
+        assessment_summary:
+        assessment_fail_summary: |
+          The Eatwell Guide, published by the NHS, shows how much of what we eat overall should come from each food group to achieve a healthy, balanced diet.
+
+          Children will need to eat a balance of all the food groups to support and promote physical development. More information can be found on the example menus, linked to in the further reading section of this module. You can use these example menus to offer healthy, balanced and nutritious meals for children.
+
+          You might want to revisit the section on [nutrition](/modules/module-5/content-pages/5-1-4-2a).
+
+        answers:
+          1: "Nutrients Guide"
+          2: "Eatwell Guide"
+          3: "Food Group Guide"
+          4: "Healthy Lifestyles Guide"
+        correct_answers:
+        - 2
+
+  5-4-1-6:
+    content:
+    questions:
+      1_holistic_impact:
+        multi_select: true
+        label: |
+          Which of the following can be improved significantly when children take part in regular physical activity?
+
+          Choose all that apply.
+
+        assessment_summary:
+        assessment_fail_summary: |
+          Regular physical activity can positively support children’s brain health, mobility and vocabulary. Practising a skill, for example throwing and catching a ball with control, can help to build a child’s mobility and confidence whilst introducing new language.
+
+          While children’s sense of smell can be supported during physical activity, for example experiencing new smells in the garden area, it may not significantly improve as a result of physical activity alone.
+
+          You will need to make sure that children can access physical activities that are achievable with appropriate challenge and support. If a child is not able to make progress, even small steps, they will not feel the sense of achievement needed to persevere.
+
+          It is important that you know about each child’s starting point with physical skills to ensure that you can plan a suitable environment and activities. 
+
+          You might want to revisit the section on [health and wellbeing](/modules/module-5/content-pages/5-2-1-1a).
+
+        answers:
+          1: "Vocabulary"
+          2: "Sense of smell"
+          3: "Mobility"
+          4: "Brain health"
+        correct_answers:
+        - 1
+        - 3
+        - 4
+
+  5-4-1-7:
+    content:
+    questions:
+      1_limited_physical:
+        multi_select: false
+        label: |
+          True or false, a child’s physical development can affect their self-efficacy?
+
+        assessment_summary:
+        assessment_fail_summary: |
+          A child’s ability to access and use toys, feed themselves and participate in activities will affect their confidence. Where children have confidence in their physical ability, they are more likely to have high self-efficacy. This means they will tackle situations believing that they can succeed. Children with high self-efficacy and resilience are more likely to take part and persevere in activities and environments that they find challenging.
+
+          You might want to revisit the section on the [holistic impact of physical skills](/modules/module-5/content-pages/5-2-1).
+        answers:
+          1: "True"
+          2: "False"
+        correct_answers:
+        - 1
+
+  5-4-1-8:
+    content:
+    questions:
+      1_freedom:
+        multi_select: true
+        label: |
+          Which of the following will promote physical literacy with children?
+
+          Choose all that apply.
+        assessment_summary:
+        assessment_fail_summary: |
+          Physical literacy is the confidence, motivation and skill levels needed to take part in physical activities. You can promote physical literacy by:
+
+          - providing a wealth of activities that support children’s physical skills
+          - making physical activity part of a regular routine
+          - being a good role model
+          - offering lots of praise and encouragement for engagement in physical activities
+          - introducing and reinforcing language relating to movement and physical skills
+
+          You might want to revisit the section on [your role in supporting children’s physical development](/modules/module-5/content-pages/5-3-1).
+        answers:
+          1: "Encouraging children’s physical confidence"
+          2: "Being a good role model"
+          3: "Ensuring the routine includes regular opportunities for physical activity"
+          4: "Introducing vocabulary relating to physical activity"
+        correct_answers:
+          - 1
+          - 2
+          - 3
+          - 4
+
+  5-4-1-9:
+    content:
+    questions:
+      1_positive_environment:
+        multi_select: true
+        label: |
+          Which of the following may be improved when children have regular access to an outdoor space?
+
+          Choose all that apply.
+        assessment_summary:
+        assessment_fail_summary: |
+          Children who regularly access outdoor environments are likely to have improved strength, agility and co-ordination. This is because running, climbing and swinging use different movements, muscles and control to those needed for indoor movement.
+
+          Children who have opportunities to test and develop new movement skills may also develop greater self confidence.
+
+          You might want to revisit the section on [the outdoor environment](/modules/module-5/content-pages/5-3-2-5a).
+        answers:
+          1: "Strength"
+          2: "Hunger"
+          3: "Agility"
+          4: "Co-ordination"
+        correct_answers:
+        - 1
+        - 3
+        - 4
+
+  5-4-1-10:
+    content:
+    questions:
+      1_positive_partnerships:
+        multi_select: true
+        label: |
+          Which of the following may affect a child’s physical experiences outside of the setting?
+
+          Choose all that apply.
+
+        assessment_summary:
+        assessment_fail_summary: |
+          Children’s experiences of physical activity outside of the setting will vary greatly and there are many factors which may influence this including parents having limited time or understanding of expected development.
+
+          You will need to be aware of children’s previous experiences to ensure that you can plan from children’s starting points.
+
+          Bad weather can sometimes limit children’s outdoor activity, but with the exception of lightning and bad storms there are safe ways to enjoy outdoor activity in most weather conditions.
+
+          You might want to revisit the section on [positive partnerships](/modules/module-5/content-pages/5-3-3) and [the outdoor environment](/modules/module-5/content-pages/5-3-2-5a).
+        answers:
+          1: "Parents and carers with limited time"
+          2: "Older siblings"
+          3: "Limited understanding of expected development"
+          4: "Bad weather"
+        correct_answers:
+        - 1
+        - 3

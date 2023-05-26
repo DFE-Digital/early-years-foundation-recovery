@@ -82,6 +82,9 @@ class User < ApplicationRecord
   scope :confirmed, -> { where.not(confirmed_at: nil) }
   scope :unconfirmed, -> { where(confirmed_at: nil) }
   scope :locked_out, -> { where.not(locked_at: nil) }
+  scope :since_public_beta, -> { where(created_at: Rails.application.public_beta_launch_date..Time.zone.now) }
+  scope :with_local_authority, -> { where.not(local_authority: nil) }
+  scope :with_notes, -> { joins(:notes).distinct.select(&:has_notes?) }
 
   # Users who have added at least one note
   scope :with_notes, -> { joins(:notes).distinct.select(&:has_notes?) }
@@ -98,6 +101,7 @@ class User < ApplicationRecord
 
   validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
 
+  # @return [Boolean]
   def has_notes?
     notes.any?(&:filled?)
   end
@@ -125,12 +129,14 @@ class User < ApplicationRecord
         # archived: false,
       )
     else
+      questionnaire = Questionnaire.find_by!(name: content.name, training_module: content.parent.name)
+
       user_answers.find_or_initialize_by(
         assessments_type: content.assessments_type,
         module: content.parent.name,
         name: content.name,
-        questionnaire_id: 0, # N/A can't be null
-        question: content.body,
+        questionnaire_id: questionnaire.id,
+        question: questionnaire.questions.keys.first,
       )
     end
   end
