@@ -82,23 +82,36 @@ module.exports = function(migration) {
     required: true
   })
   
+  /*
+    Success and failure messages
+    =============================
+    formative: customise both
+    summative: customise failure only (success unused)
+    confidence: both use default
+  */
+
   question.createField('success_message', {
     name: 'Success message',
     type: 'Text',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 'Thank you',
+    }
   })
   
   question.createField('failure_message', {
     name: 'Failure message',
     type: 'Text',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 'Thank you',
+    }
   })
   
   question.createField('answers', {
     name: 'Answers',
     type: 'Object',
   })
-
 
   /* Interface -------------------------------------------------------------- */
 
