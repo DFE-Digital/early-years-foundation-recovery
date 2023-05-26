@@ -126,12 +126,14 @@ class User < ApplicationRecord
         # archived: false,
       )
     else
+      questionnaire = Questionnaire.find_by!(name: content.name, training_module: content.parent.name)
+
       user_answers.find_or_initialize_by(
         assessments_type: content.assessments_type,
         module: content.parent.name,
         name: content.name,
-        questionnaire_id: 0, # N/A can't be null
-        question: content.body,
+        questionnaire_id: questionnaire.id,
+        question: questionnaire.questions.keys.first,
       )
     end
   end
