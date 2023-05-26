@@ -1,0 +1,171 @@
+#
+# @see ContentTestSchema
+#
+---
+- :path: /modules/alpha/content-pages/what-to-expect
+  :text: What to expect during the training
+  :inputs:
+    - - :click_on
+      - Next
+- :path: /modules/alpha/content-pages/1-1
+  :text: The first submodule
+  :inputs:
+    - - :click_on
+      - Next
+- :path: /modules/alpha/content-pages/1-1-1
+  :text: 1-1-1
+  :inputs:
+    - - :click_on
+      - Next
+- :path: /modules/alpha/content-pages/1-1-2
+  :text: 1-1-2
+  :inputs:
+    - - :click_on
+      - Next
+- :path: /modules/alpha/content-pages/1-1-3
+  :text: 1-1-3
+  :inputs:
+    - - :click_on
+      - Next
+- :path: /modules/alpha/content-pages/1-1-3-1
+  :text: 1-1-3-1
+  :inputs:
+    - - :make_note
+      - note-body-field
+      - hello world
+    - - :click_on
+      - Save and continue
+- :path: /modules/alpha/questionnaires/1-1-4
+  :text: Question One - Select from following
+  :inputs:
+    - - :choose
+      - user-answer-answers-1-field
+    - - :click_on
+      - Next
+    - - :click_on
+      - Next
+- :path: /modules/alpha/content-pages/1-2
+  :text: The second submodule
+  :inputs:
+    - - :click_on
+      - Next
+- :path: /modules/alpha/content-pages/1-2-1
+  :text: 1-2-1
+  :inputs:
+    - - :click_on
+      - Next
+- :path: /modules/alpha/questionnaires/1-2-1-1
+  :text: Question Two - Select from following
+  :inputs:
+    - - :check
+      - user-answer-answers-1-field
+    - - :check
+      - user-answer-answers-3-field
+    - - :click_on
+      - Next
+    - - :click_on
+      - Next
+- :path: /modules/alpha/content-pages/1-2-1-2
+  :text: 1-2-1-2
+  :inputs:
+    - - :click_on
+      - Next
+- :path: /modules/alpha/questionnaires/1-2-1-3
+  :text: Question Three - Select from following
+  :inputs:
+    - - :check
+      - user-answer-answers-1-field
+    - - :check
+      - user-answer-answers-3-field
+    - - :click_on
+      - Next
+    - - :click_on
+      - Next
+- :path: /modules/alpha/content-pages/1-3
+  :text: Summary and next steps
+  :inputs:
+    - - :click_on
+      - Next
+- :path: /modules/alpha/content-pages/1-3-1
+  :text: Recap
+  :inputs:
+    - - :click_on
+      - Next
+- :path: /modules/alpha/content-pages/1-3-2
+  :text: End of module test
+  :inputs:
+    - - :click_on
+      - Start test
+- :path: /modules/alpha/questionnaires/1-3-2-1
+  :text: Question One - Select from following
+  :inputs:
+    - - :check
+      - user-answer-answers-1-field
+    - - :check
+      - user-answer-answers-3-field
+    - - :click_on
+      - Save and continue
+- :path: /modules/alpha/questionnaires/1-3-2-2
+  :text: Question Two - Select from following
+  :inputs:
+    - - :check
+      - user-answer-answers-2-field
+    - - :check
+      - user-answer-answers-3-field
+    - - :click_on
+      - Save and continue
+- :path: /modules/alpha/questionnaires/1-3-2-3
+  :text: Question Three - Select from following
+  :inputs:
+    - - :check
+      - user-answer-answers-3-field
+    - - :check
+      - user-answer-answers-4-field
+    - - :click_on
+      - Save and continue
+- :path: /modules/alpha/questionnaires/1-3-2-4
+  :text: Question Four - Select from following
+  :inputs:
+    - - :choose
+      - user-answer-answers-3-field
+    - - :click_on
+      - Finish test
+- :path: /modules/alpha/assessment-result/1-3-2-5
+  :text: Assessment results
+  :inputs:
+    - - :click_on
+      - Next
+- :path: /modules/alpha/content-pages/1-3-3
+  :text: Reflect on your learning
+  :inputs:
+    - - :click_on
+      - Next
+- :path: /modules/alpha/questionnaires/1-3-3-1
+  :text: Question One - Select from 1 to 5
+  :inputs:
+    - - :choose
+      - user-answer-answers-5-field
+    - - :click_on
+      - Next
+- :path: /modules/alpha/questionnaires/1-3-3-2
+  :text: Question Two - Select from 1 to 5
+  :inputs:
+    - - :choose
+      - user-answer-answers-5-field
+    - - :click_on
+      - Next
+- :path: /modules/alpha/questionnaires/1-3-3-3
+  :text: Question Three - Select from 1 to 5
+  :inputs:
+    - - :choose
+      - user-answer-answers-5-field
+    - - :click_on
+      - Next
+- :path: /modules/alpha/content-pages/1-3-3-4
+  :text: Thank you
+  :inputs:
+    - - :click_on
+      - Finish
+- :path: /modules/alpha/content-pages/1-3-4
+  :text: Congratulations!
+  :inputs: []

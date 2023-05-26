@@ -19,7 +19,26 @@ module.exports = function(migration) {
   page.createField('page_type', {
     name: 'Page type',
     type: 'Symbol',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 'text_page',
+    },
+    validations: [
+      {
+        in: [
+         'text_page',
+         'interruption_page',
+         'sub_module_intro',
+         'summary_intro',
+         'assessment_intro',
+         'confidence_intro',
+         'assessment_results',
+         'recap_page',
+         'certificate',
+         'thankyou'
+        ]
+      }
+    ]
   })
 
   // parent
@@ -40,13 +59,29 @@ module.exports = function(migration) {
   page.createField('submodule', {
     name: 'Submodule',
     type: 'Integer',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 1,
+    },
+    validations: [
+      {
+        range: { min: 0 }
+      }
+    ]
   })
 
   page.createField('topic', {
     name: 'Topic',
     type: 'Integer',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 1,
+    },
+    validations: [
+      {
+        range: { min: 0 }
+      }
+    ]
   })
 
   page.createField('heading', {
@@ -70,9 +105,7 @@ module.exports = function(migration) {
     }
   })
 
-  /* Interface --------------------------------------------------------------
-  https://www.contentful.com/developers/docs/extensibility/app-framework/editor-interfaces/
-  */
+  /* Interface -------------------------------------------------------------- */
 
   page.changeFieldControl('notes', 'builtin', 'boolean', {
     helpText: 'Use Learning Log to take notes?',

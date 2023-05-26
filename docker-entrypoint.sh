@@ -22,7 +22,7 @@ if [ -z ${DATABASE_URL} ]
 then
   echo "DATABASE_URL is not defined and cannot be prepared"
 else
-  bundle exec rails db:prepare
+  bundle exec rails db:create db:migrate
 fi
 
 exec bundle exec "$@"

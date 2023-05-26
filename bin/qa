@@ -4,13 +4,12 @@
 # The QA framework is expected to run against a production environment
 # defaults to using 'chrome' and using 'https'
 #
-# This script instead points to a local development server
-#
 # @example
-#   BROWSER=firefox BASE_URL=https://localhost:3000 ./bin/qa
+#   $ ./bin/docker-prod
+#   $ BROWSER=firefox ./bin/qa
 #
 # ------------------------------------------------------------------------------
 set -e
 
-BASE_URL=${BASE_URL-'http://localhost:3000'} \
+BASE_URL=${BASE_URL-'https://localhost:3000'} \
   bundle exec rspec --default-path ui "$@"
