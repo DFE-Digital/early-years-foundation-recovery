@@ -23,6 +23,8 @@ class Dashboard
     { model: 'Data::SummativeQuiz', folder: 'summativequiz', file: 'high_fail_questions', method: :high_fail_questions_csv },
     { model: 'Data::SummativeQuiz', folder: 'summativequiz', file: 'setting_pass_rate', method: :setting_pass_percentage_csv },
     { model: 'Data::SummativeQuiz', folder: 'summativequiz', file: 'role_pass_rate', method: :role_pass_percentage_csv },
+    { model: 'Data::SummativeQuiz', folder: 'summativequiz', file: 'total_users_not_passing_per_module', method: :total_users_not_passing_per_module_csv },
+    { model: 'Data::SummativeQuiz', folder: 'summativequiz', file: 'resit_attempts_per_user', method: :resit_attempts_per_user_csv },
   ].freeze
 
   # @return [String] 30-06-2022-09-30

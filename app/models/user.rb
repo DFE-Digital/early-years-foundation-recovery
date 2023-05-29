@@ -85,6 +85,7 @@ class User < ApplicationRecord
   scope :since_public_beta, -> { where(created_at: Rails.application.public_beta_launch_date..Time.zone.now) }
   scope :with_local_authority, -> { where.not(local_authority: nil) }
   scope :with_notes, -> { joins(:notes).distinct.select(&:has_notes?) }
+  scope :with_assessments, -> { joins(:user_assessments) }
 
   validates :first_name, :last_name, :setting_type_id,
             presence: true,
