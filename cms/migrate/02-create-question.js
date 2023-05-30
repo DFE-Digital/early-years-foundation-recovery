@@ -1,10 +1,9 @@
 module.exports = function(migration) {
 
-  migration.deleteContentType('question')
-
   const question = migration.createContentType('question', {
     name: 'Question',
-    displayField: 'name'
+    displayField: 'name',
+    description: 'Formative, Summative or Confidence'
   })
 
   /* Fields ----------------------------------------------------------------- */
@@ -20,11 +19,24 @@ module.exports = function(migration) {
   question.createField('page_type', {
     name: 'Page type',
     type: 'Symbol',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 'formative_questionnaire',
+    },
+    validations: [
+      {
+        in: [
+         'formative_questionnaire',
+         'summative_questionnaire',
+         'confidence_questionnaire',
+        ]
+      }
+    ]
   })
 
   question.createField('training_module', {
     name: 'Training module',
+    required: true,
     type: 'Link',
     linkType: 'Entry',
     validations: [
@@ -39,58 +51,72 @@ module.exports = function(migration) {
   question.createField('submodule', {
     name: 'Submodule',
     type: 'Integer',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 1,
+    },
+    validations: [
+      {
+        range: { min: 0 }
+      }
+    ]
   })
 
   question.createField('topic', {
     name: 'Topic',
     type: 'Integer',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 1,
+    },
+    validations: [
+      {
+        range: { min: 0 }
+      }
+    ]
   })
 
-  question.createField('heading', {
-    name: 'Heading',
-    type: 'Text',
-    required: true
-  })
-
-  /* UNUSED */
   question.createField('body', {
     name: 'Body',
     type: 'Text',
     required: true
   })
   
-  question.createField('assessment_succeed', {
-    name: 'Assessment succeeds summary text',
-    type: 'Text'
+  /*
+    Success and failure messages
+    =============================
+    formative: customise both
+    summative: customise failure only (success unused)
+    confidence: both use default
+  */
+
+  question.createField('success_message', {
+    name: 'Success message',
+    type: 'Text',
+    required: true,
+    defaultValue: {
+      'en-US': 'Thank you',
+    }
   })
   
-  question.createField('assessment_fail', {
-    name: 'Assessment fails summary text',
-    type: 'Text'
-  })
-  
-  // summative or confidence (formative to be deprecated)
-  question.createField('assessments_type', {
-    name: 'Assessment type',
-    type: 'Symbol'
+  question.createField('failure_message', {
+    name: 'Failure message',
+    type: 'Text',
+    required: true,
+    defaultValue: {
+      'en-US': 'Thank you',
+    }
   })
   
   question.createField('answers', {
     name: 'Answers',
-    type: 'Object'
+    type: 'Object',
   })
 
-  // Pagination
-  question.createField('page_number', {
-    name: 'Page number',
-    type: 'Integer'
+  /* Interface -------------------------------------------------------------- */
+
+  question.changeFieldControl('answers', 'builtin', 'objectEditor', {
+    helpText: 'An array of arrays: add true for correct options',
   })
-  
-  // Pagination
-  question.createField('total_questions', {
-    name: 'Total questions',
-    type: 'Integer'
-  })
+
 }

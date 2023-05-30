@@ -150,7 +150,7 @@ child-development-and-the-eyfs:
   1-1-2-4b:
     questions:
       1_emotional_maturity:
-        multi_select: False
+        multi_select: false
         body: |
           True or false?
 

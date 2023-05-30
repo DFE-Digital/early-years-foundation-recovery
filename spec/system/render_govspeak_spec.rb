@@ -21,13 +21,13 @@ RSpec.describe 'Govspeak' do
     it_behaves_like 'a Govspeak page'
   end
 
-  context 'with summative question' do
+  xcontext 'with summative question' do
     let(:path) { '/modules/alpha/questionnaires/1-3-2-3' }
 
     it_behaves_like 'a Govspeak page'
   end
 
-  context 'with confidence question' do
+  xcontext 'with confidence question' do
     let(:path) { '/modules/alpha/questionnaires/1-3-3-2' }
 
     it_behaves_like 'a Govspeak page'

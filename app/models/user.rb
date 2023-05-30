@@ -9,6 +9,7 @@ class User < ApplicationRecord
     role_type
     registration_complete
     private_beta_registration_complete
+    registration_complete_any
     registered_at
   ].freeze
 
@@ -41,7 +42,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable,
          :validatable, :rememberable, :confirmable, :lockable, :timeoutable
 
+  has_many :responses
   has_many :user_answers
+
   has_many :user_assessments
   has_many :visits, class_name: 'Ahoy::Visit'
   has_many :events, class_name: 'Ahoy::Event'
@@ -79,6 +82,9 @@ class User < ApplicationRecord
   scope :confirmed, -> { where.not(confirmed_at: nil) }
   scope :unconfirmed, -> { where(confirmed_at: nil) }
   scope :locked_out, -> { where.not(locked_at: nil) }
+  scope :since_public_beta, -> { where(created_at: Rails.application.public_beta_launch_date..Time.zone.now) }
+  scope :with_local_authority, -> { where.not(local_authority: nil) }
+  scope :with_notes, -> { joins(:notes).distinct.select(&:has_notes?) }
 
   validates :first_name, :last_name, :setting_type_id,
             presence: true,
@@ -92,6 +98,11 @@ class User < ApplicationRecord
 
   validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
 
+  # @return [Boolean]
+  def has_notes?
+    notes.any?(&:filled?)
+  end
+
   # @see Devise database_authenticatable
   # @param params [Hash]
   # @return [Boolean]
@@ -102,6 +113,34 @@ class User < ApplicationRecord
     end
 
     super
+  end
+
+  # @see ResponsesController#response_params
+  # @param content [Training::Question]
+  # @return [UserAnswer, Response]
+  def response_for(content)
+    if ENV['DISABLE_USER_ANSWER'].present?
+      responses.find_or_initialize_by(
+        question_name: content.name,
+        training_module: content.parent.name,
+        # archived: false,
+      )
+    else
+      questionnaire = Questionnaire.find_by!(name: content.name, training_module: content.parent.name)
+
+      user_answers.find_or_initialize_by(
+        assessments_type: content.assessments_type,
+        module: content.parent.name,
+        name: content.name,
+        questionnaire_id: questionnaire.id,
+        question: questionnaire.questions.keys.first,
+      )
+    end
+  end
+
+  # @return [Array<Training::Modules>]
+  def active_modules
+    Training::Module.ordered.reject(&:draft?).select { |mod| module_time_to_completion.key?(mod.name) }
   end
 
   # @see Devise::Confirmable
@@ -199,14 +238,23 @@ class User < ApplicationRecord
     !!private_beta_registration_complete
   end
 
+  # @return [Boolean]
+  def registration_complete_any
+    !!private_beta_registration_complete || !!registration_complete
+  end
+
   # @return [Datetime]
   def registered_at
-    events.where(name: 'user_registration').last&.time # :first returns private_beta
+    events.where(name: 'user_registration').first&.time # :first returns private_beta or public_beta if that is the only one
   end
 
   # @return [Array<Integer, nil>]
   def module_ttc
-    TrainingModule.published.map(&:name).map { |mod| module_time_to_completion[mod] }
+    if Rails.application.cms?
+      Training::Module.ordered.reject(&:draft?).map(&:name).map { |mod| module_time_to_completion[mod] }
+    else
+      TrainingModule.published.map(&:name).map { |mod| module_time_to_completion[mod] }
+    end
   end
 
   def redact!

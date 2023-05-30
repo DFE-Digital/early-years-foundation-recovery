@@ -2,12 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'Formative questionnaire' do
   include_context 'with progress'
+  include_context 'with user'
 
   before do
     view_pages_upto_formative_question(alpha)
   end
-
-  include_context 'with user'
 
   context 'when a user has visited each page up to and including a formative assessment' do
     it 'call to action resumes the assessment at the furthest visited page' do
@@ -40,7 +39,6 @@ RSpec.describe 'Formative questionnaire' do
 
     it 'is not able to be retaken' do
       visit '/modules/alpha/questionnaires/1-1-4'
-
       expect(page).to have_selector('.govuk-radios__input:disabled')
     end
   end

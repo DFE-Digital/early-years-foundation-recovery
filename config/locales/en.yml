@@ -39,6 +39,14 @@ en:
   activerecord:
     errors:
       models:
+        response:
+          attributes:
+            answers:
+              blank: Please select an answer.
+        user_answer:
+          attributes:
+            answer:
+              blank: Please select an answer.
         user:
           attributes:
             current_password:
@@ -399,10 +407,35 @@ en:
 
         You have been logged out.
 
+  training:
+    assessments:
+      heading: Assessment results
+      show:
+        incorrect: You answered %{answers}. That's not quite right.
+        pass:
+          heading: Congratulations
+          text: |
+            ## **You scored %{score}%**
+
+            Congratulations - you have scored highly enough to receive a certificate of achievement for this module.
+        fail:
+          heading: Revisit the module
+          text: |
+            ## **You scored %{score}%**
+
+
+            Unfortunately you have not scored highly enough to receive a certificate.
+
+
+            You can see the questions you answered incorrectly.
+
+
+            You may wish to revisit some of the learning before taking the test again.
+
   assessment_results:
     heading: Assessment results
-    # body: |
-    #   **Wrong** answers are shown below
+    body: |
+      **Wrong** answers are shown below
     show:
       incorrect: You answered %{answers}. That's not quite right.
       pass:
@@ -511,7 +544,7 @@ en:
         terms-and-conditions: Terms and conditions
         whats-new: What's new in the training
         wifi-and-data: Free internet, wifi and data resources
-        promotional-materials: Promotional materials
+        promotional-materials: Promotional materials for local authorities
 
     # --------------------------------------------------------------------------
     # CMS titles

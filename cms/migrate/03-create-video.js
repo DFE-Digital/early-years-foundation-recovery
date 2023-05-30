@@ -1,11 +1,9 @@
 module.exports = function(migration) {
 
-  migration.deleteContentType('video')
-
 	const video = migration.createContentType('video', {
     name: 'Video',
     displayField: 'name',
-    description: 'formerly YAML module_item (with video)'
+    description: 'Video Content'
   })
 
   /* Fields ----------------------------------------------------------------- */
@@ -17,16 +15,9 @@ module.exports = function(migration) {
     required: true
   })
 
-  /* type is implicit
-  video.createField('page_type', {
-    name: 'Page type',
-    type: 'Symbol',
-    required: true
-  })
-  */
-
   video.createField('training_module', {
     name: 'Training module',
+    required: true,
     type: 'Link',
     linkType: 'Entry',
     validations: [
@@ -41,39 +32,60 @@ module.exports = function(migration) {
   video.createField('submodule', {
     name: 'Submodule',
     type: 'Integer',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 1,
+    },
+    validations: [
+      {
+        range: { min: 0 }
+      }
+    ]
   })
 
   video.createField('topic', {
     name: 'Topic',
     type: 'Integer',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 1,
+    },
+    validations: [
+      {
+        range: { min: 0 }
+      }
+    ]
   })
 
 
   video.createField('title', {
     name: 'Title',
-    type: 'Text'
+    type: 'Text',
+    required: true
   })
   
   video.createField('heading', {
     name: 'Heading',
-    type: 'Text'
+    type: 'Text',
+    required: true
   })
 
   video.createField('body', {
     name: 'Body',
-    type: 'Text'
+    type: 'Text',
+    required: true
   })
   
   video.createField('transcript', {
     name: 'Transcript',
-    type: 'Text'
+    type: 'Text',
+    required: true
   })
   
   video.createField('video_id', {
     name: 'Video ID',
-    type: 'Symbol'
+    type: 'Symbol',
+    required: true
   })
 
   video.createField('video_provider', {

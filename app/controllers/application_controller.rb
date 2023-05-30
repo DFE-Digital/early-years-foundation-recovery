@@ -1,11 +1,14 @@
 class ApplicationController < ActionController::Base
+  around_action :set_time_zone
+
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_analytics_tracking_id,
                 :set_hotjar_site_id,
                 :set_internal_mailbox_email_address,
                 :prepare_cms
 
-  helper_method :timeout_timer
+  helper_method :timeout_timer,
+                :debug?
 
   default_form_builder(EarlyYearsRecoveryFormBuilder)
 
@@ -52,6 +55,11 @@ class ApplicationController < ActionController::Base
     @internal_mailbox = Rails.configuration.internal_mailbox
   end
 
+  # @return [Boolean] do not run accessibility tests with debug panels visible
+  def debug?
+    Rails.application.debug? && !bot?
+  end
+
   def timeout_timer
     timeout_controller = TimeoutController.new
     timeout_controller.request = request
@@ -60,6 +68,10 @@ class ApplicationController < ActionController::Base
   end
 
 private
+
+  def set_time_zone(&block)
+    Time.use_zone(ENV['TZ'], &block)
+  end
 
   # @see Auditing
   # @return [User]

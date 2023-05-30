@@ -3,42 +3,51 @@
 class ContentfulDataIntegrity
   extend Dry::Initializer
 
-  option :module_name, Types::String.enum(*Training::Module.ordered.map(&:name))
+  option :module_name, Types::String
 
   # NB: Able to be validated in the CMS editor
   #
   # @return [Hash{Symbol=>String}] valid as upcoming module
   MODULE_VALIDATIONS = {
     criteria: 'Missing criteria',
-    dependent: 'Missing dependent',
+    dependent: 'Missing dependent module',
     description: 'Missing description',
     duration: 'Missing duration',
     objective: 'Missing objective',
     position: 'Missing position',
     summary: 'Missing short description',
-    threshold: 'Missing threshold',
-    thumbnail: 'Missing thumbnail',
+    threshold: 'Missing assessment threshold percentage',
+    thumbnail: 'Missing thumbnail image',
   }.freeze
 
   # @return [Hash{Symbol=>String}] valid as released module
   CONTENT_VALIDATIONS = {
-    # position and type
-    first: 'First page is wrong type',             # interruption_page
-    second: 'Second page is wrong type',           # sub_module_intro
-    penultimate: 'Penultimate page is wrong type', # thankyou
-    last: 'Last page is wrong type',               # certificate
-
-    # presence and volume
+    # type
+    text: 'Missing text pages',
     video: 'Missing video pages',
+    formative: 'Missing formative questions',
+    assessment_intro: 'Missing assessment intro page',
+    confidence_intro: 'Missing confidence intro page',
+    recap: 'Missing recap page',
+    summary_intro: 'Missing summary intro page',
     results: 'Missing assessment results page',
-    assessment: 'Insufficient assessment questions',
+
+    # type and postition
+    interruption: 'First page is wrong type',
+    submodule: 'Second page is wrong type',
+    thankyou: 'Penultimate page is wrong type',
+    certificate: 'Last page is wrong type',
+
+    # type and frequency
+    summative: 'Insufficient summative questions',
+    confidence: 'Insufficient confidence checks',
 
     # structure of submodule/topic
     submodules: 'Submodules are not consecutive',
     topics: 'Topics are not consecutive',
 
     parent: 'Pages have wrong parent',
-    question_answers: 'Question answers are incorrectly formatted',
+    question_answers: 'Question answers are incorrectly formatted', # TODO: which question?
   }.freeze
 
   # @return [nil]
@@ -51,25 +60,40 @@ class ContentfulDataIntegrity
 
   # @return [Boolean] Validate modules with content
   def valid?
-    (module_results + content_results).all?
+    (module_results + content_results).all? && mod.pages?
   end
 
   # @return [Training::Module]
   def mod
-    @mod ||= Training::Module.by_name(module_name)
+    Training::Module.by_name(module_name)
   end
 
   # @param numbers [Array<Integer>]
   # @return [Boolean] 0, 1, 2, 3, 4...
   def consecutive_integers?(numbers)
-    numbers.first.zero? && numbers.each_cons(2).all? { |a, b| (a + 1).eql?(b) }
+    numbers.any? && numbers.first.zero? && numbers.each_cons(2).all? { |a, b| (a + 1).eql?(b) }
+  end
+
+  # Decorators ---------------------------------------------------------
+
+  # @return [Boolean]
+  def debug?
+    (Rails.application.debug? || Rails.application.candidate?) && !valid?
+  end
+
+  # @return [Array<String>]
+  def errors
+    validations.select { |method, message| message unless send("#{method}?") }.values
   end
 
   # MODULE VALIDATIONS ---------------------------------------------------------
 
+  # @note The asset could be deleted or unpublished.
   # @return [Boolean]
   def thumbnail?
     mod.fields[:image].present?
+    # Unreliable response times prevent this additional check:
+    # && ContentfulModel::Asset.find(mod.fields[:image].id).present?
   end
 
   # @return [Boolean]
@@ -131,24 +155,29 @@ class ContentfulDataIntegrity
     end
   end
 
-  # @return [Boolean]
-  def first?
+  # @return [Boolean] first page
+  def interruption?
     page_by_type_position(type: 'interruption_page', position: 0)
   end
 
-  # @return [Boolean]
-  def second?
+  # @return [Boolean] second page
+  def submodule?
     page_by_type_position(type: 'sub_module_intro', position: 1)
   end
 
-  # @return [Boolean]
-  def penultimate?
+  # @return [Boolean] penultimate page
+  def thankyou?
     page_by_type_position(type: 'thankyou', position: -2)
   end
 
-  # @return [Boolean]
-  def last?
+  # @return [Boolean] last page
+  def certificate?
     page_by_type_position(type: 'certificate', position: -1)
+  end
+
+  # @return [Boolean]
+  def text?
+    page_by_type_position(type: 'text_page')
   end
 
   # @return [Boolean]
@@ -156,28 +185,45 @@ class ContentfulDataIntegrity
     page_by_type_position(type: 'video_page')
   end
 
-  # map over questions and use the custom strictly typed Dry::Struct object to
-  # assert that no type constraint error is raised, meaning it is valid JSON
-  #
-  # @example
-  #
-  #   [
-  #     ["Strongly agree", true],
-  #     ["Agree", true],
-  #     ["Neither agree nor disagree", true],
-  #     ["Disagree", true],
-  #     ["Strongly disagree", true]
-  #   ]
-  #
   # @return [Boolean]
   def question_answers?
-    # mod.questions.all? { |question| ::Answer.new(json: question.answers).valid? }
-    true # WIP being continued in another PR
+    mod.questions.all? { |question| question.answer.valid? }
+  end
+
+  # @return [Boolean]
+  def formative?
+    page_by_type_position(type: 'formative_questionnaire')
+  end
+
+  # 'Brain development and how children learn' has fewest
+  # @return [Boolean] demo modules have fewer questions than genuine content
+  def confidence?
+    demo? || mod.page_by_type('confidence_questionnaire').count >= 4
   end
 
   # @return [Boolean] demo modules have fewer questions than genuine content
-  def assessment?
+  def summative?
     demo? || mod.page_by_type('summative_questionnaire').count.eql?(10)
+  end
+
+  # @return [Boolean]
+  def recap?
+    page_by_type_position(type: 'recap_page')
+  end
+
+  # @return [Boolean]
+  def summary_intro?
+    page_by_type_position(type: 'summary_intro')
+  end
+
+  # @return [Boolean]
+  def assessment_intro?
+    page_by_type_position(type: 'assessment_intro')
+  end
+
+  # @return [Boolean]
+  def confidence_intro?
+    page_by_type_position(type: 'confidence_intro')
   end
 
   # @return [Boolean]
@@ -187,6 +233,11 @@ class ContentfulDataIntegrity
 
 private
 
+  # @return [Hash{Symbol=>String}]
+  def validations
+    MODULE_VALIDATIONS.merge(CONTENT_VALIDATIONS)
+  end
+
   # @return [Boolean] content for development and testing
   def demo?
     env.eql?('test')
@@ -195,7 +246,6 @@ private
   # @return [String] preview / delivery
   def api
     ContentfulModel.use_preview_api ? 'preview' : 'delivery'
-    # ContentfulRails.configuration.enable_preview_domain ? 'preview' : 'delivery'
   end
 
   # @return [String] master / staging / test

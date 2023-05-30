@@ -5,7 +5,7 @@ defaults: &defaults
   RAILS_SERVE_STATIC_FILES: true
   RAILS_LOG_TO_STDOUT: true
   RAILS_MAX_THREADS: 5
-  WEB_CONCURRENCY: 2
+  WEB_CONCURRENCY: 2 # NB: values greater than 2 impact caching
   RAILS_ENV: production
   NODE_ENV: production
   DATABASE_URL: postgres://postgres@localhost:5432/db
@@ -50,11 +50,10 @@ content:
   # jobs
   DASHBOARD_UPDATE: false
   # DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # every 5 mins (default: daily at noon)
-
   # cms
+  CONTENTFUL: false # disabled for module 5 YAML release
   CONTENTFUL_PREVIEW: true
   # CONTENTFUL_ENVIRONMENT: test
-
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx

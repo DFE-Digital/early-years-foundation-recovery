@@ -8,11 +8,11 @@ class Training::ModulesController < ApplicationController
                 :mods
 
   def index
-    track('course_overview_page')
+    track('course_overview_page', cms: true)
   end
 
   def show
-    track('module_overview_page')
+    track('module_overview_page', cms: true)
 
     if redirect?
       redirect_to my_modules_path
@@ -25,7 +25,21 @@ protected
 
   # @return [Boolean]
   def redirect?
-    mod.nil? || (!Rails.application.preview? && mod.draft?) || (Rails.application.preview? && !mod.pages?)
+    mod.nil? || unreleased? || wip?
+  end
+
+  # When authoring a new module the overview page will not be accessible until
+  # the module has some content. This will generate an application error unless
+  # the module content passes the data integrity check.
+  #
+  # @return [Boolean]
+  def wip?
+    Rails.application.preview? && !mod.pages?
+  end
+
+  # @return [Boolean]
+  def unreleased?
+    !Rails.application.preview? && mod.draft?
   end
 
   # @return [Boolean]
@@ -35,6 +49,7 @@ protected
 
   # index -------------------
 
+  # @return [Array<Training::Module>]
   def mods
     Training::Module.ordered
   end
@@ -46,12 +61,22 @@ protected
   end
 
   def progress_bar
-    ModuleProgressBarDecorator.new(progress)
+    ContentfulModuleProgressBarDecorator.new(progress)
+  end
+
+  # @return [String]
+  def mod_name
+    params[:id]
+  end
+
+  # @return [nil]
+  def content_name
+    # no op
   end
 
   # @return [Training::Module]
   def mod
-    Training::Module.by_name(params[:id])
+    Training::Module.by_name(mod_name)
   end
 
   def progress
@@ -59,6 +84,6 @@ protected
   end
 
   def assessment_progress
-    helpers.assessment_progress(mod)
+    helpers.cms_assessment_progress(mod)
   end
 end

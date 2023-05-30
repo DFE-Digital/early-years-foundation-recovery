@@ -2,6 +2,20 @@
 #
 namespace :eyfs do
   namespace :cms do
+    # Support for Regexp
+    #
+    # ./bin/docker-rails 'eyfs:cms:search[practi(c|s)e]'
+    #
+    desc 'Query question answer labels'
+    task :search, [:text] => :environment do |_task, args|
+      Training::Module.ordered.map do |mod|
+        puts ''
+        puts mod.name
+        puts '================='
+        puts mod.answers_with(args[:text])
+      end
+    end
+
     desc 'Define Contentful entry models'
     task migrate: :environment do
       migrations = Dir[Rails.root.join('cms/migrate/*')]
@@ -58,6 +72,17 @@ namespace :eyfs do
       args[:mod_names].split(',').flatten.each do |mod|
         ContentfulDataIntegrity.new(module_name: mod).call
       rescue Dry::Types::ConstraintError
+      end
+    end
+
+    desc 'Export happy E2E AST'
+    task export: :environment do
+      require 'content_test_schema'
+      Training::Module.ordered.each do |mod|
+        file_path = Rails.root.join("spec/support/ast/#{mod.name}.yml")
+        file_data = ContentTestSchema.new(mod: mod).call.to_yaml
+
+        File.write(file_path, file_data)
       end
     end
   end

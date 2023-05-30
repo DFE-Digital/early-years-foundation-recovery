@@ -10,8 +10,8 @@ class ContentfulModuleProgress
   #   @return [Training::Module]
   option :mod, Types.Instance(Training::Module), required: true
   # @!attribute [r] summative_assessment
-  #   @return [SummativeAssessmentProgress]
-  option :summative_assessment, default: proc { SummativeAssessmentProgress.new(user: user, mod: mod) }
+  #   @return [ContentfulAssessmentProgress]
+  option :summative_assessment, default: proc { ContentfulAssessmentProgress.new(user: user, mod: mod) }
 
   # @return [Float] Module completion
   def value

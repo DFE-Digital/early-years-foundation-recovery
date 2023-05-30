@@ -1,14 +1,9 @@
-/*
-https://github.com/contentful/contentful-migration/blob/master/README.md#reference-documentation
-*/
 module.exports = function(migration) {
-
-  migration.deleteContentType('page')
 
 	const page = migration.createContentType('page', {
     name: 'Page',
     displayField: 'name',
-    description: 'formerly YAML module_item'
+    description: 'Textual Content'
   })
 
   /* Fields ----------------------------------------------------------------- */
@@ -24,12 +19,32 @@ module.exports = function(migration) {
   page.createField('page_type', {
     name: 'Page type',
     type: 'Symbol',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 'text_page',
+    },
+    validations: [
+      {
+        in: [
+         'text_page',
+         'interruption_page',
+         'sub_module_intro',
+         'summary_intro',
+         'assessment_intro',
+         'confidence_intro',
+         'assessment_results',
+         'recap_page',
+         'certificate',
+         'thankyou'
+        ]
+      }
+    ]
   })
 
   // parent
   page.createField('training_module', {
     name: 'Training module',
+    required: true,
     type: 'Link',
     linkType: 'Entry',
     validations: [
@@ -44,13 +59,29 @@ module.exports = function(migration) {
   page.createField('submodule', {
     name: 'Submodule',
     type: 'Integer',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 1,
+    },
+    validations: [
+      {
+        range: { min: 0 }
+      }
+    ]
   })
 
   page.createField('topic', {
     name: 'Topic',
     type: 'Integer',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 1,
+    },
+    validations: [
+      {
+        range: { min: 0 }
+      }
+    ]
   })
 
   page.createField('heading', {
@@ -65,8 +96,6 @@ module.exports = function(migration) {
     required: true
   })
 
-  // page.deleteField('notes')
-
   page.createField('notes', {
     name: 'Notes',
     type: 'Boolean',
@@ -76,14 +105,12 @@ module.exports = function(migration) {
     }
   })
 
-  /* Interface --------------------------------------------------------------
-  https://www.contentful.com/developers/docs/extensibility/app-framework/editor-interfaces/
+  /* Interface -------------------------------------------------------------- */
 
   page.changeFieldControl('notes', 'builtin', 'boolean', {
     helpText: 'Use Learning Log to take notes?',
     trueLabel: 'enable',
     falseLabel: 'disable'
   })
-  */
 
 }

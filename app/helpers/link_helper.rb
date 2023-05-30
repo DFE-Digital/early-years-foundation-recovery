@@ -5,7 +5,7 @@ module LinkHelper
     text = item.next_button_text
     path = training_module_page_path(item.training_module, item.next_item)
 
-    govuk_button_link_to text, path, aria: { label: 'Go to the next page' }
+    govuk_button_link_to text, path, id: 'next-action', aria: { label: 'Go to the next page' }
   end
 
   # @return [String] previous content page or module overview
@@ -36,7 +36,7 @@ module LinkHelper
         training_module_page_path(item.training_module, item)
       end
 
-    govuk_button_link_to text, path
+    govuk_button_link_to text, path, id: 'module_call_to_action'
   end
 
   # Bottom of my-modules card component
@@ -58,7 +58,12 @@ module LinkHelper
   # @return [String, nil]
   def back_link
     case params[:controller]
-    when 'training/pages', 'training/questionnaires', 'content_pages', 'questionnaires', 'assessment_results'
+    # CMS
+    when 'training/pages', 'training/questions', 'training/assessments'
+      govuk_back_link href: training_module_path(mod.name),
+                      text: "Back to Module #{mod.position} overview"
+    # YAML
+    when 'content_pages', 'questionnaires', 'assessment_results'
       govuk_back_link href: training_module_path(training_module.name),
                       text: "Back to Module #{training_module.position} overview"
     when 'settings', 'pages'
@@ -81,7 +86,7 @@ module LinkHelper
         training_module_page_path(content.parent.name, content.name)
       end
 
-    govuk_button_link_to text, path
+    govuk_button_link_to text, path, id: 'module-call-to-action'
   end
 
   # @param content [Module::Content]
@@ -90,7 +95,7 @@ module LinkHelper
     text = content.next_button_text
     path = training_module_page_path(content.parent.name, content.next_item.name)
 
-    govuk_button_link_to text, path, aria: { label: 'Go to the next page' }
+    govuk_button_link_to text, path, id: 'next-action', aria: { label: 'Go to the next page' }
   end
 
   # @param content [Module::Content]
@@ -106,5 +111,19 @@ module LinkHelper
     govuk_button_link_to 'Previous', path,
                          class: 'govuk-button--secondary',
                          aria: { label: 'Go to the previous page' }
+  end
+
+  # Bottom of my-modules card component
+  #
+  # @param mod [TrainingModule]
+  # @return [String, nil]
+  def cms_link_to_retake_or_results(mod)
+    return unless cms_assessment_progress(mod).attempted?
+
+    if cms_assessment_progress(mod).failed?
+      govuk_link_to 'Retake end of module test', new_training_module_assessment_result_path(mod.name), no_visited_state: true, class: 'card-link--retake'
+    else
+      govuk_link_to 'View previous test result', training_module_assessment_result_path(mod.name, mod.assessment_results_page)
+    end
   end
 end
