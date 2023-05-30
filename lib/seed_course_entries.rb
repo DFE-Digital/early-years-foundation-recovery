@@ -1,9 +1,10 @@
 # :nocov:
+# @see https://github.com/contentful/contentful-management.rb
 require 'contentful/management'
 
 #
 # Populate Contentful 'page', 'video', 'question' and 'trainingModule' entries
-# Extract and upload image assets from markdown
+# Replace image file paths with CMS remote URLs in page body
 #
 class SeedCourseEntries
   extend Dry::Initializer
@@ -11,6 +12,19 @@ class SeedCourseEntries
   option :config, default: proc { ContentfulRails.configuration }
   option :client, default: proc { Contentful::Management::Client.new(config.management_token) }
 
+  # @return [Array<String>]
+  def upload_images
+    log "#{image_files.count} assets -------------------------------------------"
+
+    image_files.map do |file_path|
+      remote_path = "/assets/#{file_path.split('/').last}"
+      asset = create_asset(remote_path, remote_path)
+      asset.publish if asset.save
+      log_asset(asset)
+    end
+  end
+
+  # @param mod_name [String]
   # @return [String]
   def call(mod_name:)
     log "space: #{config.space}"
@@ -27,33 +41,17 @@ class SeedCourseEntries
 
     mod_entry = create_training_module(mod.cms_module_params)
 
+    thumbnail = find_asset("/assets/#{mod.thumbnail}")
+    thumbnail.title = mod.title
+    thumbnail.save
+
+    mod_entry.image = thumbnail
+
     mod_entry.pages =
       mod.module_items.map do |item|
         child_entry = create_entry(item)
-
-        # FIXME: > 1-1-1-3: ![Adults and children holding hands.](/assets/1-1-1-3-1127324447.jpg) stalls as Contentful struggles to process this specific file.
-        #
-        #         # Media upload if found in body copy
-        #         image = item.model.body&.match(IMG_REGEXP) # MatchData
-        #
-        #         if image
-        #           asset = process_image(*image.captures)
-        #           asset.publish if asset.save
-        #
-        #           # wait for publishing to generate image_url for asset
-        #           until asset.image_url.present?
-        #             sleep(1)
-        #             asset.publish
-        #           end
-        #
-        #           # "//images.ctfassets.net/dvmeh832nmjc/6etSgfjBK2UveguU2mZp4z/7f74406a62500bb14337a458a0e00a66/_assets_1-532263705.jpg"
-        #           child_entry.body = item.model.body.gsub(image[:filename], asset.image_url)
-        #         end
-        #
-
-        # parent
+        child_entry.body = replace_images(child_entry.body) if item.text_page?
         child_entry.training_module = mod_entry
-
         child_entry.publish if child_entry.save
         log_entry(child_entry)
         child_entry
@@ -66,6 +64,28 @@ class SeedCourseEntries
 
 private
 
+  # @param body [String]
+  # @return [String]
+  def replace_images(body)
+    images = body.to_enum(:scan, IMG_REGEXP).map { Regexp.last_match }.map(&:captures)
+
+    images.each do |description, file_path|
+      asset = find_asset(file_path)
+
+      if asset.image_url.present?
+        asset.title = description
+        asset.save
+
+        body.gsub!(file_path, asset.image_url)
+        log "'#{file_path}' -> '#{asset.image_url}'"
+      else
+        log "'#{file_path}' skipped"
+      end
+    end
+
+    body
+  end
+
   # @param message [String]
   # @return [String]
   def log(message)
@@ -74,6 +94,14 @@ private
     else
       puts message
     end
+  end
+
+  # @param asset [Contentful::Management::Asset]
+  # @return [String]
+  def log_asset(asset)
+    timestamp = asset.published_at&.strftime('%F %T')
+
+    log "'#{asset.description}' published @ '#{timestamp}'"
   end
 
   # @param entry [Contentful::Management::DynamicEntry]
@@ -110,29 +138,33 @@ private
     end
   end
 
+  # @param params [Hash]
   # @return [Contentful::Management::DynamicEntry[trainingModule]]
   def create_training_module(params)
-    factory.find('trainingModule').entries.create(params)
+    content_types.find('trainingModule').entries.create(params)
   end
 
+  # @param params [Hash]
   # @return [Contentful::Management::DynamicEntry[page]]
   def create_page(params)
-    factory.find('page').entries.create(params)
+    content_types.find('page').entries.create(params)
   end
 
+  # @param params [Hash]
   # @return [Contentful::Management::DynamicEntry[video]]
   def create_video(params)
-    factory.find('video').entries.create(params)
+    content_types.find('video').entries.create(params)
   end
 
+  # @param params [Hash]
   # @return [Contentful::Management::DynamicEntry[question]]
   def create_question(params)
-    factory.find('question').entries.create(params)
+    content_types.find('question').entries.create(params)
   end
 
   # @return [Contentful::Management::ClientContentTypeMethodsFactory]
-  def factory
-    @factory ||= client.content_types(config.space, config.environment)
+  def content_types
+    @content_types ||= client.content_types(config.space, config.environment)
   end
 
   # Asset Management -----------------------------------------------------------
@@ -143,12 +175,13 @@ private
   # @param title [String]
   # @param filename [String]
   # @return [Contentful::Management::Asset]
-  def process_image(title, filename)
+  def create_asset(title, filename)
     file  = create_file(filename)
-    asset = create_asset(title: title, description: filename, file: file)
+    asset = assets.create(title: title, description: filename, file: file)
     asset.process_file
   end
 
+  # @param filename [String]
   # @return [Contentful::Management::File]
   def create_file(filename)
     file = Contentful::Management::File.new
@@ -158,9 +191,20 @@ private
     file
   end
 
+  # @param description [String]
   # @return [Contentful::Management::Asset]
-  def create_asset(params)
-    client.assets(config.space, config.environment).create(params)
+  def find_asset(description)
+    assets.all(limit: image_files.size).find { |asset| asset.description.eql?(description) }
+  end
+
+  # @return [Contentful::Management::ClientAssetMethodsFactory]
+  def assets
+    @assets ||= client.assets(config.space, config.environment)
+  end
+
+  # @return [Array<String>] ~200
+  def image_files
+    Dir[Rails.root.join('app/assets/images/*')]
   end
 end
 # :nocov:
