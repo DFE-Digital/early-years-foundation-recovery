@@ -36,7 +36,7 @@ protected
   # index -------------------
 
   def mods
-    Training::Module.ordered.reject(&:draft?)
+    Training::Module.ordered
   end
 
   # show -------------------

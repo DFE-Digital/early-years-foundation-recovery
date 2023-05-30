@@ -12,8 +12,8 @@ p.govuk-body
 
 p.govuk-body
   |
-    The course has 9 modules.
-    #{mods.count} modules are currently available.
+    The course has #{mods.count} modules.
+    #{mods.reject(&:draft?).count} modules are currently available.
     You must complete the available modules in order.
 
 p.govuk-body Each module should take between 1 and 2 hours to complete.
@@ -48,7 +48,7 @@ p.govuk-body Some modules also have short videos to enhance your understanding.
 .govuk-grid-row
   .govuk-grid-column-full
     = govuk_accordion do |accordion|
-      - mods.map do |mod|
+      - mods.reject(&:draft?).map do |mod|
         - accordion.section(heading_text: mod.card_title, summary_text: mod.objective) do
           = translate_markdown mod.description
 
