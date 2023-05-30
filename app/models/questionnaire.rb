@@ -185,7 +185,7 @@ class Questionnaire < OpenStruct
 
     {
       body: query,
-      success_message: question[:assessment_summary],
+      success_message: question[:assessment_summary] || 'N/A',
       failure_message: question[:assessment_fail_summary],
       answers: answers,
     }
