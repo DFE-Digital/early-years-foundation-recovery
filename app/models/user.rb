@@ -85,6 +85,8 @@ class User < ApplicationRecord
   scope :since_public_beta, -> { where(created_at: Rails.application.public_beta_launch_date..Time.zone.now) }
   scope :with_local_authority, -> { where.not(local_authority: nil) }
   scope :with_notes, -> { joins(:notes).distinct.select(&:has_notes?) }
+  scope :closed, -> { where.not(closed_at: nil) }
+  scope :not_closed, -> { where(closed_at: nil) }
 
   validates :first_name, :last_name, :setting_type_id,
             presence: true,
@@ -265,7 +267,7 @@ class User < ApplicationRecord
             closed_at: Time.zone.now,
             password: 'redacteduser')
 
-    notes.update_all(body: nil)
+    notes.destroy_all
   end
 
   def local_authority_text

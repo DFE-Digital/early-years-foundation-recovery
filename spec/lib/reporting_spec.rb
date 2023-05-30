@@ -14,6 +14,10 @@ RSpec.describe Reporting do
     create(:user, :registered, email: 'test2@example.com')
   end
 
+  let(:closed_user) do
+    create(:user, :registered, email: 'closed@example.com', closed_at: Time.zone.now, closed_reason: 'test')
+  end
+
   let(:user1_note1) do
     user1.notes.create(body: 'test note body')
   end
@@ -110,6 +114,17 @@ RSpec.describe Reporting do
         expect(user1.notes.count).to eq(1)
         expect(user2.notes.count).to eq(1)
         expect(reporting.users[:with_notes]).to eq(2)
+        expect(reporting.users[:with_notes_percentage]).to eq(100.0)
+      end
+    end
+
+    context 'when a user is closed' do
+      it 'does not count the closed user in the total' do
+        expect(user1_note1.body).to eq('test note body')
+        expect(closed_user.email).to eq('closed@example.com')
+        expect(user1.notes.count).to eq(1)
+        expect(closed_user.notes.count).to eq(0)
+        expect(reporting.users[:with_notes]).to eq(1)
         expect(reporting.users[:with_notes_percentage]).to eq(100.0)
       end
     end

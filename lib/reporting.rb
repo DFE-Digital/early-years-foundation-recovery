@@ -56,8 +56,8 @@ module Reporting
       not_started_learning: not_started_learning,
 
       # Users who have a least 1 note
-      with_notes: User.with_notes.count,
-      with_notes_percentage: (User.with_notes.count.to_f / User.all.count * 100).round(2),
+      with_notes: User.not_closed.with_notes.count.to_i,
+      with_notes_percentage: ((User.not_closed.with_notes.count.to_f / User.not_closed.count) * 100).round(2),
 
     }
   end
