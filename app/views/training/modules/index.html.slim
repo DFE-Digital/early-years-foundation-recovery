@@ -1,4 +1,4 @@
-- content_for(:head) do 
+- content_for(:head) do
   = tag.meta name: 'turbo-visit-control', content: 'reload'
 
 = govuk_back_link href: root_path
@@ -12,9 +12,9 @@ p.govuk-body
 
 p.govuk-body
   |
-    The course has 10 modules.
-    #{mods.count} modules are currently available.
-    You must complete the available modules in order.
+    The course has #{mods.count} modules.
+    #{mods.reject(&:draft?).count} modules are currently available.
+    You must complete modules 1 to 3 in order.
 
 p.govuk-body Each module should take between 1 and 2 hours to complete.
 
@@ -25,12 +25,12 @@ p.govuk-body
   ul.govuk-list.govuk-list--bullet
     li opportunities to reflect on your learning and practice
     li a learning log to make notes on your reflections
-    li practical tips and ideas to use in your setting 
+    li practical tips and ideas to use in your setting
     li learning check questions to test your understanding
     li an end of module test
     li the opportunity to download a personalised certificate of completion
 
-p.govuk-body Some modules also have short videos to enhance your understanding. 
+p.govuk-body Some modules also have short videos to enhance your understanding.
 - unless current_user
   .govuk-grid-row
     .govuk-grid-column-two-thirds
@@ -48,11 +48,11 @@ p.govuk-body Some modules also have short videos to enhance your understanding.
 .govuk-grid-row
   .govuk-grid-column-full
     = govuk_accordion do |accordion|
-      - mods.map do |mod|
+      - mods.reject(&:draft?).map do |mod|
         - accordion.section(heading_text: mod.card_title, summary_text: mod.objective) do
           = translate_markdown mod.description
-          
-          h2.govuk-heading-m What you&rsquo;ll learn 
+
+          h2.govuk-heading-m What you&rsquo;ll learn
           p.govuk-body This module covers:
           .gem-c-govspeak= translate_markdown mod.criteria
 

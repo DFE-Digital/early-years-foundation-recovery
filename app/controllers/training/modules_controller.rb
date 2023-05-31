@@ -51,7 +51,7 @@ protected
 
   # @return [Array<Training::Module>]
   def mods
-    Training::Module.ordered.reject(&:draft?)
+    Training::Module.ordered
   end
 
   # show -------------------
