@@ -28,6 +28,10 @@ FactoryBot.define do
       setting_type_id { SettingType.all.sample.id }
     end
 
+    trait :agency_setting do
+      setting_type { 'Childminder as part of an agency' }
+    end
+
     trait :setting_type_with_role_type do
       setting_type_id { SettingType.where(role_type: %w[childminder other]).sample.id }
     end

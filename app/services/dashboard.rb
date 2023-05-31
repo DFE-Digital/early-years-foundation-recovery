@@ -60,11 +60,11 @@ private
   # @return [Array<Array>] database table exports
   def models_to_csv
     DATA_SOURCES.map do |source|
-      if source[:method]
-        file_data = source[:model].constantize.send(source[:method])
-      else
-      file_data = source[:model].constantize.to_csv
-      end
+      file_data = if source[:method]
+                    source[:model].constantize.send(source[:method])
+                  else
+                    source[:model].constantize.to_csv
+                  end
       dir_path  = output.join(source[:folder])
       file_path = dir_path.join("#{source[:file]}.csv")
 
