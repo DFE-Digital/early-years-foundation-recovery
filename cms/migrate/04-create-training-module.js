@@ -70,7 +70,7 @@ module.exports = function(migration) {
     validations: [
       {
         prohibitRegexp: {
-          pattern: '\\n' ,
+          pattern: '\\n',
           message: 'Markdown is not permitted'
         }
       }
