@@ -14,10 +14,6 @@ RSpec.describe Reporting do
     create(:user, :registered, email: 'test2@example.com')
   end
 
-  let(:closed_user) do
-    create(:user, :registered, email: 'closed@example.com', closed_at: Time.zone.now, closed_reason: 'test')
-  end
-
   let(:user1_note1) do
     user1.notes.create(body: 'test note body')
   end
@@ -30,50 +26,41 @@ RSpec.describe Reporting do
     user2.notes.create(body: 'test note body')
   end
 
-  let(:blank_note) do
-    user1.notes.create(body: '')
-  end
-
-  let(:nil_note) do
-    user1.notes.create(body: nil)
-  end
-
-  let(:whitespace_note) do
-    user1.notes.create(body: " \n \n \n")
-  end
-
   describe '.users' do
     context 'when 0 users or notes exist' do
-      it 'notes count is 0 and percentage is NaN' do
+      it 'with_notes is 0 and percentage is NaN' do
         expect(reporting.users[:with_notes]).to eq(0)
         expect(reporting.users[:with_notes_percentage].nan?).to eq(true)
       end
     end
 
     context 'when there are users but no notes' do
-      it 'notes count is 0 and percentage is 0' do
+      it 'with_notes count and percentage and without_notes count is 1 (100%)' do
         expect(user1.email).to eq('test1@example.com')
         expect(reporting.users[:with_notes]).to eq(0)
         expect(reporting.users[:with_notes_percentage]).to eq(0)
+        expect(reporting.users[:without_notes]).to eq(1)
+        expect(reporting.users[:without_notes_percentage]).to eq(100.0)
       end
     end
 
     context 'when there is a saved note but the body is empty' do
+      let(:blank_note) do
+        user1.notes.create(body: '')
+      end
+
+      let(:whitespace_note) do
+        user1.notes.create(body: " \n \n \n")
+      end
+
       it 'the note is not counted' do
         expect(user1.email).to eq('test1@example.com')
         expect(blank_note.body).to eq('')
         expect(whitespace_note.body).to eq(" \n \n \n")
         expect(reporting.users[:with_notes]).to eq(0)
         expect(reporting.users[:with_notes_percentage]).to eq(0)
-      end
-    end
-
-    context 'when there is a saved note but the body is nil' do
-      it 'the note is not counted' do
-        expect(user1.email).to eq('test1@example.com')
-        expect(nil_note.body).to eq(nil)
-        expect(reporting.users[:with_notes]).to eq(0)
-        expect(reporting.users[:with_notes_percentage]).to eq(0)
+        expect(reporting.users[:without_notes]).to eq(1)
+        expect(reporting.users[:without_notes_percentage]).to eq(100.0)
       end
     end
 
@@ -83,6 +70,8 @@ RSpec.describe Reporting do
         expect(user1.notes.count).to eq(1)
         expect(reporting.users[:with_notes]).to eq(1)
         expect(reporting.users[:with_notes_percentage]).to eq(100.0)
+        expect(reporting.users[:without_notes]).to eq(0)
+        expect(reporting.users[:without_notes_percentage]).to eq(0)
       end
     end
 
@@ -93,17 +82,21 @@ RSpec.describe Reporting do
         expect(user1.notes.count).to eq(2)
         expect(reporting.users[:with_notes]).to eq(1)
         expect(reporting.users[:with_notes_percentage]).to eq(100.0)
+        expect(reporting.users[:without_notes]).to eq(0)
+        expect(reporting.users[:without_notes_percentage]).to eq(0)
       end
     end
 
     context 'when 1 user has notes and 1 has none' do
-      it 'notes count is 1 and percentage is 50' do
+      it 'with_notes is 1, without notes is 1 and percentage is 50' do
         expect(user1_note1.body).to eq('test note body')
         expect(user2.email).to eq('test2@example.com')
         expect(user1.notes.count).to eq(1)
         expect(user2.notes.count).to eq(0)
         expect(reporting.users[:with_notes]).to eq(1)
         expect(reporting.users[:with_notes_percentage]).to eq(50.0)
+        expect(reporting.users[:without_notes]).to eq(1)
+        expect(reporting.users[:without_notes_percentage]).to eq(50.0)
       end
     end
 
@@ -115,17 +108,22 @@ RSpec.describe Reporting do
         expect(user2.notes.count).to eq(1)
         expect(reporting.users[:with_notes]).to eq(2)
         expect(reporting.users[:with_notes_percentage]).to eq(100.0)
+        expect(reporting.users[:without_notes]).to eq(0)
+        expect(reporting.users[:without_notes_percentage]).to eq(0)
       end
     end
 
     context 'when a user is closed' do
-      it 'does not count the closed user in the total' do
+      it 'their notes are deleted' do
         expect(user1_note1.body).to eq('test note body')
-        expect(closed_user.email).to eq('closed@example.com')
+        expect(user1.email).to eq('test1@example.com')
         expect(user1.notes.count).to eq(1)
-        expect(closed_user.notes.count).to eq(0)
-        expect(reporting.users[:with_notes]).to eq(1)
-        expect(reporting.users[:with_notes_percentage]).to eq(100.0)
+        user1.redact!
+        expect(user1.first_name).to eq('Redacted')
+        expect(reporting.users[:with_notes]).to eq(0)
+        expect(reporting.users[:with_notes_percentage]).to be_nan
+        expect(reporting.users[:without_notes]).to eq(0)
+        expect(reporting.users[:without_notes_percentage]).to be_nan
       end
     end
   end

@@ -9,6 +9,6 @@ class Note < ApplicationRecord
 
   # @return [Boolean]
   def filled?
-    body.to_s.strip != ''
+    !body.strip.empty?
   end
 end

@@ -85,6 +85,8 @@ class User < ApplicationRecord
   scope :since_public_beta, -> { where(created_at: Rails.application.public_beta_launch_date..Time.zone.now) }
   scope :with_local_authority, -> { where.not(local_authority: nil) }
   scope :with_notes, -> { joins(:notes).distinct.select(&:has_notes?) }
+  scope :without_notes, -> { where.not(id: with_notes) }
+
   scope :closed, -> { where.not(closed_at: nil) }
   scope :not_closed, -> { where(closed_at: nil) }
 
