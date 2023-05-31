@@ -51,9 +51,9 @@ content:
   DASHBOARD_UPDATE: false
   # DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # every 5 mins (default: daily at noon)
   # cms
-  CONTENTFUL_PREVIEW: true
+  # CONTENTFUL_PREVIEW: true
   # CONTENTFUL: false
-  # CONTENTFUL_ENVIRONMENT: test
+  CONTENTFUL_ENVIRONMENT: images
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
