@@ -3,36 +3,37 @@ module Data
       include ToCsv
 
             def self.average_pass_scores_csv
-
-              CSV.generate(headers: true) do |csv|
-                csv << ['Module', 'Average Pass Score']
+              headers = ['Module', 'Average Pass Score']
+              data = average_pass_scores.map { |module_name, average_score| [module_name, average_score] }
             
-                average_pass_scores.each do |module_name, average_score|
-                  csv << [module_name, average_score]
-                end
-              end
+              generate_csv(headers, data)
             end
 
             def self.high_fail_questions_csv
-            
+            headers = ['Module', 'Question', 'Failure Rate (%)']
+            data = high_fail_questions.map { |(module_name, question_name), fail_rate| [module_name, question_name, fail_rate] }
+            generate_csv(headers, data)
+            end
+
+            def self.setting_pass_percentage_csv            
               CSV.generate do |csv|
-                csv << ['Question', 'Failure Rate (%)']
-            
-                high_fail_questions.each do |question_id, fail_rate|
-                  csv << [question_id, fail_rate]
+                csv << ['Setting Type', 'Pass Percentage', 'Pass Count', 'Fail Percentage', 'Fail Count']
+                setting_pass_percentage.each do |setting_type, percentages|
+                  csv << [setting_type, percentages[:pass], percentages[:pass_count], percentages[:fail], percentages[:fail_count]]
                 end
               end
             end
 
-            def self.setting_pass_percentage_csv
+            def self.role_pass_percentage_csv
             
               CSV.generate do |csv|
-                csv << ['Setting Type', 'Pass Percentage', 'Fail Percentage']
-                setting_pass_percentage.each do |setting_type, percentages|
-                  csv << [setting_type, percentages[:pass], percentages[:fail]]
-                end
+              csv << ['Role', 'Pass Percentage', 'Pass Count', 'Fail Percentage', 'Fail Count']
+              role_pass_percentage.each do |role, percentages|
+                csv << [role, percentages[:pass], percentages[:pass_count], percentages[:fail], percentages[:fail_count]]
               end
             end
+            end
+
             
 
             def self.total_users_not_passing_per_module_csv
@@ -44,20 +45,29 @@ module Data
                 end
               end
             end
-
-            # TODO: create generic method for csv generation
-
-            # TODO: should private methods not be self.
             
-            
- 
-
             def self.resit_attempts_per_user_csv
-              CSV.generate do |csv|
-                csv << ['User ID', 'Resit Attempts']
+              resit_attempts = resit_attempts_per_user
+              user_roles = User.pluck(:id, :role_type).to_h
             
-                resit_attempts_per_user.each do |user_id, resit_attempts|
-                  csv << [user_id, resit_attempts]
+              CSV.generate do |csv|
+                csv << ['Module', 'User ID', 'Role Type', 'Resit Attempts']
+            
+                resit_attempts.each do |module_name, user_attempts|
+                  user_attempts.each do |user_id, attempts|
+                    role_type = user_roles[user_id]
+                    csv << [module_name, user_id, role_type, attempts]
+                  end
+                end
+              end
+            end
+
+            def self.generate_csv(headers, data)
+              CSV.generate do |csv|
+                csv << headers
+            
+                data.each do |row|
+                  csv << row
                 end
               end
             end
@@ -67,25 +77,23 @@ module Data
           end
 
           def self.high_fail_questions
-            question_attempts = UserAnswer.summative.group(:name).count
-            question_failures = UserAnswer.summative.where(correct: false).group(:name).count
-          
+            question_attempts = UserAnswer.summative.group(:module, :name).count
+            question_failures = UserAnswer.summative.where(correct: false).group(:module, :name).count
             total_questions = question_attempts.keys.size.to_f
+
+            average_fail_rate = percentage(question_failures.values.sum, total_questions)
           
             high_fail_questions = {}
           
-            average_fail_rate = (question_failures.values.sum / total_questions) * 100
-          
-            question_failures.each do |question_id, fail_count|
-              total_count = question_attempts[question_id].to_f
-              fail_rate = percentage(fail_count, total_count)
+            question_failures.each do |(module_name, question_name), fail_count|
+              total_count = question_attempts[[module_name, question_name]].to_f
+              fail_rate = percentage(fail_count.to_f, total_count)
           
               if fail_rate > average_fail_rate
-                high_fail_questions[question_id] = fail_rate.round(2)
+                high_fail_questions[[module_name, question_name]] = fail_rate
               end
             end
-          
-            {average: average_fail_rate.round(2)}.merge(high_fail_questions)
+            {average: average_fail_rate}.merge(high_fail_questions)
           end
 
           def self.setting_pass_percentage
@@ -108,20 +116,27 @@ module Data
                       .where(attribute => user_assessments.key(count))
                       .count
 
-              pass_percentage = (pass_count.to_f / count) * 100
+              pass_percentage = percentage(pass_count, count)
               fail_percentage = 100 - pass_percentage
 
-              { pass: pass_percentage, fail: fail_percentage }
+              { pass: pass_percentage, pass_count: pass_count, fail: fail_percentage, fail_count: count - pass_count }
               end
 
               pass_fail_percentages
         end
+        
 
 
           def self.resit_attempts_per_user
-          user_assessments = UserAssessment.summative.group(:user_id).count
-          resits = user_assessments.select { |user, count| count > 1 }
-          resit_attempts = resits.transform_values { |count| count - 1 }
+          user_assessments = UserAssessment.summative.group(:module, :user_id).count
+          resit_attempts_per_module = Hash.new { |h, k| h[k] = {} }
+
+          user_assessments.each do |(module_name, user_id), count|
+            if count > 1
+              resit_attempts_per_module[module_name][user_id] = count - 1
+            end
+          end
+          resit_attempts_per_module
           end
 
           def self.none_passing_users    
@@ -148,7 +163,7 @@ module Data
     private
 
     def self.percentage(count, total)
-      (count.to_f / total) * 100
+      ((count.to_f / total) * 100).round(2)
     end
 
     def self.summative_passes
