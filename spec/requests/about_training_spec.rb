@@ -1,11 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe 'TrainingModules', type: :request do
+RSpec.describe 'About training', type: :request do
   describe 'GET /about-training' do
-    let(:published_modules) { TrainingModule.published }
-
     before do
-      sign_in create(:user, :registered)
       get course_overview_path
     end
 
@@ -15,6 +12,11 @@ RSpec.describe 'TrainingModules', type: :request do
 
     it 'omits draft modules' do
       expect(response.body).not_to include('delta')
+    end
+
+    it 'counts course modules' do
+      expect(response.body).to include('The course has 4 modules.')
+      expect(response.body).to include('3 modules are currently available.')
     end
   end
 end
