@@ -38,31 +38,36 @@ class SeedCourseEntries
     end
 
     log "#{mod.name} ----------------------------------------------------------"
-
     mod_entry = create_training_module(mod.cms_module_params)
 
+    # Link thumbnail image
     thumbnail = find_asset("/assets/#{mod.thumbnail}")
     thumbnail.title = mod.title
-    thumbnail.save
+    mod_entry.image = thumbnail.save
 
-    mod_entry.image = thumbnail
-
-    mod_entry.pages =
-      mod.module_items.map do |item|
-        child_entry = create_entry(item)
-        child_entry.body = replace_images(child_entry.body) if item.text_page?
-        child_entry.training_module = mod_entry
-        child_entry.publish if child_entry.save
-        log_entry(child_entry)
-        child_entry
-      end
+    # Link content
+    mod_entry.pages = create_children(mod_entry, mod.module_items)
+    log "#{mod_entry.pages.count} entries linked ------------------------------------------------"
 
     mod_entry.publish if mod_entry.save
-
     log_entry(mod_entry)
   end
 
 private
+
+  # @param mod_entry [Contentful::Management::DynamicEntry[trainingModule]]
+  # @param items [Array<ModuleItem>]
+  # @return [Array<Contentful::Management::DynamicEntry>]
+  def create_children(mod_entry, items)
+    items.map do |item|
+      child_entry = create_entry(item)
+      child_entry.body = replace_images(child_entry.body) if item.text_page?
+      child_entry.training_module = mod_entry
+      child_entry.publish if child_entry.save
+      log_entry(child_entry)
+      child_entry
+    end
+  end
 
   # @param body [String]
   # @return [String]
