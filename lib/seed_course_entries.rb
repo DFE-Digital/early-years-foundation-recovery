@@ -69,17 +69,17 @@ private
   def replace_images(body)
     images = body.scan(IMG_REGEXP)
 
-    images.each do |description, file_path|
-      asset = find_asset(file_path)
+    images.each do |title, filename|
+      asset = find_asset(filename)
 
       if asset.image_url.present?
-        asset.title = description
+        asset.title = title
         asset.save
 
-        body.gsub!(file_path, asset.image_url)
-        log "'#{file_path}' -> '#{asset.image_url}'"
+        body.gsub!(filename, asset.image_url)
+        log "'#{filename}' -> '#{asset.image_url}'"
       else
-        log "'#{file_path}' skipped"
+        log "'#{filename}' skipped"
       end
     end
 
