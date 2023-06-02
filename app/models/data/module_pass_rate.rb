@@ -1,0 +1,26 @@
+module Data 
+    class ModulePassRate
+        
+            include Percentage
+
+            def self.to_csv
+                headers = ['Module', 'Average Pass Percentage', 'Pass Count', 'Average Fail Percentage', 'Fail Count', 'Month']
+                data = new.module_pass_percentages_by_month.map do |module_name, percentages|
+                    [module_name, percentages[:pass], percentages[:pass_count], percentages[:fail], percentages[:fail_count], percentages[:month]]
+                    end
+                    CSV.generate do |csv|
+                        csv << headers
+                
+                        data.each do |row|
+                          csv << row
+                        end
+                      end
+            end
+    
+    
+
+            def module_pass_percentages_by_month
+                SummativeQuiz.attribute_pass_percentage(:module, :month)
+            end
+        end
+end

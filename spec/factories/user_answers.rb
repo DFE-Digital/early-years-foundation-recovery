@@ -4,6 +4,10 @@ FactoryBot.define do
     question { Faker::Lorem.word }
     answer { [Faker::Lorem.word] }
 
+    trait :questionnaire do
+      questionnaire_id { 0 }
+    end
+
     trait :correct do
       correct { true }
     end

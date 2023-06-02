@@ -19,12 +19,12 @@ class Dashboard
     { model: 'Response',        folder: 'useranswers',      file: 'responses'         },
     { model: 'UserAssessment',  folder: 'userassessments',  file: 'user_assessments'  },
     { model: 'Data::LocalAuthorityUser', folder: 'localauthorities', file: 'local_authority_users' },
-    { model: 'Data::SummativeQuiz', folder: 'summativequiz', file: 'average_pass_scores', method: :average_pass_scores_csv },
-    { model: 'Data::SummativeQuiz', folder: 'summativequiz', file: 'high_fail_questions', method: :high_fail_questions_csv },
-    { model: 'Data::SummativeQuiz', folder: 'summativequiz', file: 'setting_pass_rate', method: :setting_pass_percentage_csv },
-    { model: 'Data::SummativeQuiz', folder: 'summativequiz', file: 'role_pass_rate', method: :role_pass_percentage_csv },
-    { model: 'Data::SummativeQuiz', folder: 'summativequiz', file: 'total_users_not_passing_per_module', method: :total_users_not_passing_per_module_csv },
-    { model: 'Data::SummativeQuiz', folder: 'summativequiz', file: 'resit_attempts_per_user', method: :resit_attempts_per_user_csv },
+    { model: 'Data::AveragePassScores', folder: 'summativequiz', file: 'average_pass_scores'},
+    { model: 'Data::HighFailQuestions', folder: 'summativequiz', file: 'high_fail_questions'},
+    { model: 'Data::SettingPassRate', folder: 'summativequiz', file: 'setting_pass_rate'},
+    { model: 'Data::RolePassRate', folder: 'summativequiz', file: 'role_pass_rate'},
+    { model: 'Data::UsersNotPassing', folder: 'summativequiz', file: 'users_not_passing_per_module'},
+    { model: 'Data::ResitsPerUser', folder: 'summativequiz', file: 'resits_per_user'},
   ].freeze
 
   # @return [String] 30-06-2022-09-30
@@ -60,11 +60,7 @@ private
   # @return [Array<Array>] database table exports
   def models_to_csv
     DATA_SOURCES.map do |source|
-      file_data = if source[:method]
-                    source[:model].constantize.send(source[:method])
-                  else
-                    source[:model].constantize.to_csv
-                  end
+      file_data = source[:model].constantize.to_csv
       dir_path  = output.join(source[:folder])
       file_path = dir_path.join("#{source[:file]}.csv")
 

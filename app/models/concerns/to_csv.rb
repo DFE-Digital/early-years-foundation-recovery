@@ -18,6 +18,7 @@ module ToCsv
     end
   end
 
+
   included do
     # Timestamps in the format "2023-01-11 12:52:22"
     # @return [Hash] coerce attributes prior to export
@@ -30,6 +31,7 @@ module ToCsv
     end
 
   private
+    
 
     # @return [Hash] default to database fields
     def data_attributes
