@@ -10,6 +10,7 @@ class SeedCourseEntries
   extend Dry::Initializer
 
   option :config, default: proc { ContentfulRails.configuration }
+  # @see https://app.contentful.com/account/profile/cma_tokens
   option :client, default: proc { Contentful::Management::Client.new(config.management_token) }
 
   # @return [Array<String>]
