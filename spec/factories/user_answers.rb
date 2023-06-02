@@ -12,10 +12,6 @@ FactoryBot.define do
       correct { false }
     end
 
-    trait :formative do
-      assessments_type { 'formative_assessment' }
-    end
-
     trait :summative do
       assessments_type { 'summative_assessment' }
     end

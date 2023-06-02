@@ -9,8 +9,6 @@ RSpec.describe Data::SummativeQuiz do
   let(:assessment_pass_2) { create(:user_assessment, :passed, user_id: user_2.id, score: 80, module: 'module_1') }
   let(:assessment_fail_2) { create(:user_assessment, :failed, user_id: user_2.id, score: 0, module: 'module_1') }
 
-  let(:formative_assessment) { create(:user_assessment, user_id: user_1.id, assessments_type: 'formative_assessment') }
-
   describe '.average_pass_scores_csv' do
     context 'when summative assessments exist with a passed status' do
       it 'generates csv with average pass score for each module' do
@@ -32,11 +30,12 @@ RSpec.describe Data::SummativeQuiz do
 
   describe '.high_fail_questions_csv' do
     context 'when summative assessments exist' do
-      let(:answer_correct_1) { create(:user_answer, :correct, :summative, module: 'module_1', name: 'q1', questionnaire_id: 0) }
-      let(:answer_correct_2) { create(:user_answer, :correct, :summative, module: 'module_2', name: 'q1', questionnaire_id: 0) }
-      let(:answer_incorrect_1) { create(:user_answer, :incorrect, :summative, module: 'module_1', name: 'q2', questionnaire_id: 0) }
-      let(:answer_incorrect_2) { create(:user_answer, :incorrect, :summative, module: 'module_1', name: 'q2', questionnaire_id: 0) }
-      let(:formative_answer) { create(:user_answer, :correct, :formative, questionnaire_id: 0) }
+        let(:module_1) { create(:module_item)}
+        let(:module_2) { create(:module_item)}
+      let(:answer_correct_1) { create(:user_answer, :correct, :summative, module: module_1, name: 'q1') }
+      let(:answer_correct_2) { create(:user_answer, :correct, :summative, module: module_2, name: 'q1') }
+      let(:answer_incorrect_1) { create(:user_answer, :incorrect, :summative, module: 'module_1', name: 'q2') }
+      let(:answer_incorrect_2) { create(:user_answer, :incorrect, :summative, module: 'module_1', name: 'q2') }
 
       it 'returns any questions with a fail rate higher than the average' do
         expect(user_1.registration_complete).to eq(true)
