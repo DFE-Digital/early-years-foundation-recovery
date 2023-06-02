@@ -17,9 +17,9 @@ class CourseProgress
     by_state(:upcoming).select { |mod| available?(mod) && !mod.draft? }
   end
 
-  # @return [Array<TrainingModule>] three unavailable or draft modules
+  # @return [Array<TrainingModule>] unavailable or draft modules
   def upcoming_modules
-    by_state(:upcoming).reject { |mod| available?(mod) }
+    by_state(:upcoming).select { |mod| !available?(mod) || mod.draft? }
   end
 
   # NB: ModuleProgress#completed? and ModuleProgress#completed_at must align

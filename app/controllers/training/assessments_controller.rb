@@ -9,7 +9,7 @@ module Training
                   :assessment_progress
 
     def new
-      helpers.cms_assessment_progress(mod).archive
+      helpers.cms_assessment_progress(mod).archive!
       redirect_to training_module_page_path(mod.name, mod.assessment_intro_page.name)
     end
 
