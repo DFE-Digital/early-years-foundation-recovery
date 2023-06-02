@@ -73,6 +73,7 @@ namespace :eyfs do
     puts "Updated #{number_updated} of #{total_records} records"
   end
 
+  # FIXME: not suitable for running on a deployment outside a worker job
   desc 'Fake completed course'
   task state: :environment do |_task, _args|
     require 'content_seed'
