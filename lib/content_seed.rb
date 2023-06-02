@@ -46,7 +46,7 @@ private
       question: question.body,
       answer: question.answer.correct_answers,
       correct: true,
-      archived: false,
+      archived: true,
       module: mod.name,
       name: question.name,
       assessments_type: question.assessments_type,

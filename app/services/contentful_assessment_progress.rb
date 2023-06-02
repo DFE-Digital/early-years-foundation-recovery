@@ -10,14 +10,18 @@ class ContentfulAssessmentProgress
   #   @return [Training::Module]
   option :mod, Types.Instance(Training::Module), required: true
 
-  def save!
-    user_assessment = create_user_assessment
+  # @see Training::ResponsesController#redirect
+  #
+  # @return [Array<UserAnswer, Response>]
+  def complete!
+    update_responses(user_assessment_id: user_assessment.id)
+  end
 
-    if assessment_responses.all?(&:persisted?) && user_assessment.persisted?
-      assessment_responses.each do |response|
-        response.update(user_assessment_id: user_assessment.id)
-      end
-    end
+  # @see Training::AssessmentsController#new
+  #
+  # @return [Array<UserAnswer, Response>]
+  def archive!
+    update_responses(archived: true)
   end
 
   # @see ContentHelper#results_banner
@@ -54,13 +58,6 @@ class ContentfulAssessmentProgress
     0.0
   end
 
-  # @return [Array<UserAnswer, Response>]
-  def archive
-    assessment_responses.each do |response|
-      response.update!(archived: true)
-    end
-  end
-
   # @return [Array<Response>]
   def incorrect_responses
     assessment_responses.reject(&:correct?)
@@ -81,6 +78,11 @@ private
     end
   end
 
+  # @return [Array<UserAnswer, Response>]
+  def update_responses(params)
+    assessment_responses.each { |response| response.update!(params) }
+  end
+
   # @note #correct? uses answers validate against question
   # @return [Array<Response>]
   def correct_responses
@@ -88,8 +90,8 @@ private
   end
 
   # @return [UserAssessment]
-  def create_user_assessment
-    UserAssessment.create!(
+  def user_assessment
+    @user_assessment ||= UserAssessment.create!(
       user_id: user.id,
       score: score.to_i,
       status: status,
