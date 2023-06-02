@@ -67,7 +67,7 @@ private
   # @param body [String]
   # @return [String]
   def replace_images(body)
-    images = body.to_enum(:scan, IMG_REGEXP).map { Regexp.last_match }.map(&:captures)
+    images = body.scan(IMG_REGEXP)
 
     images.each do |description, file_path|
       asset = find_asset(file_path)
