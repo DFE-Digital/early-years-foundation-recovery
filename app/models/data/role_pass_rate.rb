@@ -1,25 +1,19 @@
 module Data
-    class RolePassRate
-
-      include Percentage
+  class RolePassRate
+    include ToCsv
+    include Percentage
 
     def self.to_csv
-        headers = ['Setting', 'Average Pass Percentage', 'Pass Count', 'Average Fail Percentage', 'Fail Count']
-        data = new.role_pass_percentage.map do |setting_type, percentages|
-          [setting_type, percentages[:pass], percentages[:pass_count], percentages[:fail], percentages[:fail_count]]
-        end
-        CSV.generate do |csv|
-          csv << headers
-  
-          data.each do |row|
-            csv << row
-          end
-        end
-        format_csv(csv)
+      headers = ['Role', 'Average Pass Percentage', 'Pass Count', 'Average Fail Percentage', 'Fail Count']
+      data = role_pass_percentage.map do |role_type, percentages|
+        [role_type, percentages[:pass], percentages[:pass_count], percentages[:fail], percentages[:fail_count]]
       end
-    def role_pass_percentage
-        SummativeQuiz.attribute_pass_percentage(:role_type)
+      format_percentages(data)
+      generate_csv(headers, data)
     end
 
-end
+    def self.role_pass_percentage
+      SummativeQuiz.attribute_pass_percentage(:role_type)
+    end
+  end
 end

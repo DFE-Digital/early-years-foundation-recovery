@@ -16,8 +16,16 @@ module ToCsv
         dashboard.find_each(batch_size: 1_000) { |record| csv << record.dashboard_attributes.values }
       end
     end
-  end
 
+    def generate_csv(headers, data)
+      CSV.generate do |csv|
+        csv << headers
+        data.each do |row|
+          csv << row
+        end
+      end
+    end
+  end
 
   included do
     # Timestamps in the format "2023-01-11 12:52:22"
@@ -31,7 +39,6 @@ module ToCsv
     end
 
   private
-    
 
     # @return [Hash] default to database fields
     def data_attributes

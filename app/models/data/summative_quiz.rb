@@ -1,14 +1,7 @@
 module Data
   class SummativeQuiz
-    
+    include Percentage
     class << self
-      include Percentage
-
-  
-
-  
-
-
       def attribute_pass_percentage(attribute)
         grouped_assessments = user_summative_assessments.group(attribute).count
 
@@ -24,6 +17,7 @@ module Data
       end
 
     private
+
       def user_summative_assessments
         User.with_assessments.merge(UserAssessment.summative)
       end
@@ -31,7 +25,6 @@ module Data
       def user_passed_assessments
         User.with_assessments.merge(UserAssessment.summative.passes)
       end
-
     end
   end
 end

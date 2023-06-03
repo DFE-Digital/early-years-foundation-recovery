@@ -19,12 +19,12 @@ class Dashboard
     { model: 'Response',        folder: 'useranswers',      file: 'responses'         },
     { model: 'UserAssessment',  folder: 'userassessments',  file: 'user_assessments'  },
     { model: 'Data::LocalAuthorityUser', folder: 'localauthorities', file: 'local_authority_users' },
-    { model: 'Data::AveragePassScores', folder: 'summativequiz', file: 'average_pass_scores'},
-    { model: 'Data::HighFailQuestions', folder: 'summativequiz', file: 'high_fail_questions'},
-    { model: 'Data::SettingPassRate', folder: 'summativequiz', file: 'setting_pass_rate'},
-    { model: 'Data::RolePassRate', folder: 'summativequiz', file: 'role_pass_rate'},
-    { model: 'Data::UsersNotPassing', folder: 'summativequiz', file: 'users_not_passing_per_module'},
-    { model: 'Data::ResitsPerUser', folder: 'summativequiz', file: 'resits_per_user'},
+    { model: 'Data::AveragePassScores', folder: 'summativequiz', file: 'average_pass_scores' },
+    { model: 'Data::HighFailQuestions', folder: 'summativequiz', file: 'high_fail_questions' },
+    { model: 'Data::SettingPassRate', folder: 'summativequiz', file: 'setting_pass_rate' },
+    { model: 'Data::RolePassRate', folder: 'summativequiz', file: 'role_pass_rate' },
+    { model: 'Data::UsersNotPassing', folder: 'summativequiz', file: 'users_not_passing_per_module' },
+    { model: 'Data::ResitsPerUser', folder: 'summativequiz', file: 'resits_per_user' },
   ].freeze
 
   # @return [String] 30-06-2022-09-30
