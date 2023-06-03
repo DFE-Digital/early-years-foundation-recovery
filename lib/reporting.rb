@@ -59,10 +59,10 @@ module Reporting
       not_started_learning: not_started_learning,
 
       # Active users who have a least 1 note
-      with_notes: User.not_closed.with_notes.count,
+      with_notes: with_notes_count,
       with_notes_percentage: with_notes_percentage,
 
-      without_notes: User.not_closed.without_notes.count,
+      without_notes: without_notes_count,
       without_notes_percentage: 100 - with_notes_percentage,
 
     }
@@ -121,8 +121,20 @@ private
     end
   end
 
+  def calculate_percentage(numerator, denominator)
+    ((numerator.to_f / denominator) * 100).round(2)
+  end
+
   def with_notes_percentage
-    ((User.not_closed.with_notes.count.to_f / User.not_closed.count) * 100).round(2)
+    calculate_percentage(with_notes_count, User.not_closed.count)
+  end
+
+  def with_notes_count
+    User.not_closed.with_notes.count
+  end
+
+  def without_notes_count
+    User.not_closed.without_notes.count
   end
 
   def true_false_count(mod)
