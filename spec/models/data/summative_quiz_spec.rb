@@ -11,7 +11,7 @@ RSpec.describe Data::SummativeQuiz do
 
   describe '.attribute_pass_percentage' do
     context 'when summative assessments exist' do
-      it 'generates csv with average pass and fail percentage for each attribute type' do
+      it 'generates a hash with average pass and fail percentage for each attribute type' do
         expect(assessment_pass_1.score).to eq('100')
         expect(assessment_fail_1.score).to eq('0')
         expect(assessment_pass_2.score).to eq('80')
