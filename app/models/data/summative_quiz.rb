@@ -2,6 +2,8 @@ module Data
   class SummativeQuiz
     include Percentage
     class << self
+      # @param attribute [Symbol]
+      # @return [Hash{Symbol => Hash{Symbol => Numeric}}]
       def attribute_pass_percentage(attribute)
         grouped_assessments = user_summative_assessments.group(attribute).count
 
@@ -18,10 +20,12 @@ module Data
 
     private
 
+      # @return [ActiveRecord::Relation]
       def user_summative_assessments
         User.with_assessments.merge(UserAssessment.summative)
       end
 
+      # @return [ActiveRecord::Relation]
       def user_passed_assessments
         User.with_assessments.merge(UserAssessment.summative.passes)
       end

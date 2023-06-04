@@ -25,6 +25,7 @@ class Dashboard
     { model: 'Data::RolePassRate', folder: 'summativequiz', file: 'role_pass_rate' },
     { model: 'Data::UsersNotPassing', folder: 'summativequiz', file: 'users_not_passing_per_module' },
     { model: 'Data::ResitsPerUser', folder: 'summativequiz', file: 'resits_per_user' },
+    { model: 'Data::ModulesPerMonth', folder: 'summativequiz', file: 'modules_per_month' },
   ].freeze
 
   # @return [String] 30-06-2022-09-30

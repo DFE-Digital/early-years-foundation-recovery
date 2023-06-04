@@ -3,6 +3,7 @@ module Data
     include ToCsv
     include Percentage
 
+    # @return [String]
     def self.to_csv
       headers = ['Role', 'Average Pass Percentage', 'Pass Count', 'Average Fail Percentage', 'Fail Count']
       data = role_pass_percentage.map do |role_type, percentages|
@@ -12,6 +13,7 @@ module Data
       generate_csv(headers, data)
     end
 
+    # @return [Hash{Symbol => Hash{Symbol => Float, Integer}}]
     def self.role_pass_percentage
       SummativeQuiz.attribute_pass_percentage(:role_type)
     end

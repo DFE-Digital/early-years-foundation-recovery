@@ -3,6 +3,7 @@ module Data
     include ToCsv
     include Percentage
 
+    # @return [String]
     def self.to_csv
       headers = ['Module', 'Total Users Not Passing']
       data = total_users_not_passing_per_module.map { |module_name, total_users| [module_name, total_users] }
@@ -10,6 +11,7 @@ module Data
       generate_csv(headers, data)
     end
 
+    # @return [Hash{String => Integer}]
     def self.total_users_not_passing_per_module
       UserAssessment.summative
         .group(:module, :user_id)

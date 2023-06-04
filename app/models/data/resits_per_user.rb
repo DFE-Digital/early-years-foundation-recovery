@@ -3,6 +3,7 @@ module Data
     include ToCsv
     include Percentage
 
+    # @return [String]
     def self.to_csv
       user_roles = User.pluck(:id, :role_type).to_h
       headers = ['Module', 'User ID', 'Role', 'Resit Attempts']
@@ -16,6 +17,7 @@ module Data
       generate_csv(headers, data)
     end
 
+    # @return [Hash{Symbol => Hash{Integer => Integer}}]
     def self.resit_attempts_per_user
       UserAssessment.summative
         .group(:module, :user_id)

@@ -2,6 +2,7 @@ module Data
   class LocalAuthorityUser
     include ToCsv
 
+    # @return [String]
     def self.to_csv
       new.generate_csv
     end

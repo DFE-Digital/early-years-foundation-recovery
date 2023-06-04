@@ -3,6 +3,7 @@ module Data
     include ToCsv
     include Percentage
 
+    # @return [String]
     def self.to_csv
       headers = ['Module', 'Question', 'Failure Rate Percentage']
       data = high_fail_questions.map { |(module_name, question_name), fail_rate| [module_name, question_name, fail_rate] }
@@ -10,6 +11,7 @@ module Data
       generate_csv(headers, data)
     end
 
+    # @return [Hash{Symbol => Float, Array<Array<String, String>> => Float}]
     def self.high_fail_questions
       question_attempts = UserAnswer.summative.group(:module, :name).count
       question_failures = UserAnswer.summative.where(correct: false).group(:module, :name).count
