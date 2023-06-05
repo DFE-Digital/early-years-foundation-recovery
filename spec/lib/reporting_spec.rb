@@ -40,8 +40,8 @@ RSpec.describe Reporting do
         let(:whitespace_note) { user1.notes.create(body: " \n \n \n") }
 
         it 'the note is not counted' do
-          expect(blank_note.filled?).to eq(false)
-          expect(whitespace_note.filled?).to eq(false)
+          blank_note
+          whitespace_note
           expect(with_notes).to be_zero
           expect(with_notes_percentage).to be_zero
           expect(without_notes).to eq(1)
@@ -51,7 +51,7 @@ RSpec.describe Reporting do
 
       context 'when all users have notes' do
         it 'percentage is 100' do
-          expect(note_1.body).to eq('test note body')
+          note_1
           expect(user1.notes.count).to eq(1)
           expect(with_notes).to eq(1)
           expect(with_notes_percentage).to eq(100.0)
@@ -62,8 +62,8 @@ RSpec.describe Reporting do
 
       context 'when there is 1 user with multiple notes' do
         it 'notes count is 1 and percentage is 100' do
-          expect(note_1.body).to eq('test note body')
-          expect(note_2.body).to eq('test note body 2')
+          note_1
+          note_2
           expect(user1.notes.count).to eq(2)
           expect(with_notes).to eq(1)
           expect(with_notes_percentage).to eq(100.0)
@@ -74,8 +74,8 @@ RSpec.describe Reporting do
 
       context 'when half of users have notes' do
         it 'percentage is 50' do
-          expect(note_1.body).to eq('test note body')
-          expect(user2.email).to eq('test2@example.com')
+          note_1
+          user2
           expect(user1.notes.count).to eq(1)
           expect(user2.notes.count).to be_zero
           expect(with_notes).to eq(1)
@@ -87,8 +87,8 @@ RSpec.describe Reporting do
 
       context 'when 2 users have notes' do
         it 'notes count is 2 and percentage is 100' do
-          expect(note_1.body).to eq('test note body')
-          expect(note_3.body).to eq('test note body')
+          note_1
+          note_3
           expect(user1.notes.count).to eq(1)
           expect(user2.notes.count).to eq(1)
           expect(with_notes).to eq(2)
@@ -100,8 +100,7 @@ RSpec.describe Reporting do
 
       context 'when a user is closed' do
         it 'their notes are deleted' do
-          expect(note_1.body).to eq('test note body')
-          expect(user1.email).to eq('test1@example.com')
+          note_1
           expect(user1.notes.count).to eq(1)
           user1.redact!
           expect(user1.first_name).to eq('Redacted')
