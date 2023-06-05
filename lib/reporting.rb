@@ -121,18 +121,24 @@ private
     end
   end
 
+  # @param numerator [Numeric]
+  # @param denominator [Numeric]
+  # @return [Float]
   def calculate_percentage(numerator, denominator)
     ((numerator.to_f / denominator) * 100).round(2)
   end
 
+  # @return [Float]
   def with_notes_percentage
     calculate_percentage(with_notes_count, User.not_closed.count)
   end
 
+  # @return [Integer]
   def with_notes_count
     User.not_closed.with_notes.count
   end
 
+  # @return [Integer]
   def without_notes_count
     User.not_closed.without_notes.count
   end
