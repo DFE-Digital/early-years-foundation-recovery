@@ -1,31 +1,26 @@
-# User's course progress and module state
+# User's course progress and module state used on the 'My modules' page
 #
 class ContentfulCourseProgress
   extend Dry::Initializer
 
   option :user, required: true
 
-  # @return [Array<Training::Module>] training modules that have been started
+  # @return [Array<Training::Module>] 'Modules in progress' section
   def current_modules
     by_state(:active)
   end
 
-  # @return [Array<Training::Module>] training modules with no incomplete dependency
+  # @return [Array<Training::Module>] 'Available modules' section
   def available_modules
     by_state(:upcoming).select { |mod| available?(mod) && !mod.draft? }
   end
 
-  # @return [Array<Training::Module>] unavailable or draft modules
+  # @return [Array<Training::Module>] 'Future modules in this course' section
   def upcoming_modules
-    by_state(:upcoming).reject { |mod| available?(mod) }
+    by_state(:upcoming).select { |mod| !available?(mod) || mod.draft? }
   end
 
-  # NB: ModuleProgress#completed? and ModuleProgress#completed_at must align
-  #
-  #
-  # Completed modules are modules for which every module item has been viewed
-  # completed_at comes from a specific named event
-  # @return [Array<Array>] Tabular data of completed training module
+  # @return [Array<Array>] 'Completed modules' section
   def completed_modules
     by_state(:completed).map do |mod|
       [mod, module_progress(mod).completed_at]
