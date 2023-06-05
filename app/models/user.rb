@@ -124,7 +124,7 @@ class User < ApplicationRecord
       responses.find_or_initialize_by(
         question_name: content.name,
         training_module: content.parent.name,
-        # archived: false,
+        archived: false,
       )
     else
       questionnaire = Questionnaire.find_by!(name: content.name, training_module: content.parent.name)
@@ -135,6 +135,7 @@ class User < ApplicationRecord
         name: content.name,
         questionnaire_id: questionnaire.id,
         question: questionnaire.questions.keys.first,
+        archived: nil,
       )
     end
   end

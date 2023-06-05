@@ -4,6 +4,7 @@ class TrainingModulesController < ApplicationController
   def index
     track('course_overview_page')
     @published_modules = TrainingModule.published
+    @all_modules = TrainingModule.all
   end
 
   def show
