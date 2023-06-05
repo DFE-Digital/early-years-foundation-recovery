@@ -20,10 +20,10 @@ module ToCsv
     # @param headers [Array<String>]
     # @param data [Array<Array<String>>]
     # @return [String]
-    def generate_csv(headers, data)
+    def generate_csv
       CSV.generate do |csv|
-        csv << headers
-        data.each do |row|
+        csv << column_names
+        dashboard.each do |row|
           csv << row
         end
       end

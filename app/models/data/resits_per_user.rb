@@ -3,10 +3,12 @@ module Data
     include ToCsv
     include Percentage
 
-    # @return [String]
-    def self.to_csv
+    def self.column_names
+      ['Module', 'User ID', 'Role', 'Resit Attempts']
+    end
+
+    def self.dashboard
       user_roles = User.pluck(:id, :role_type).to_h
-      headers = ['Module', 'User ID', 'Role', 'Resit Attempts']
       data = resit_attempts_per_user.flat_map do |module_name, user_attempts|
         user_attempts.map do |user_id, attempts|
           role_type = user_roles[user_id]
@@ -14,7 +16,11 @@ module Data
         end
       end
       format_percentages(data)
-      generate_csv(headers, data)
+    end
+
+    # @return [String]
+    def self.to_csv
+      generate_csv
     end
 
     # @return [Hash{Symbol => Hash{Integer => Integer}}]

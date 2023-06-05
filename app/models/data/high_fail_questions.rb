@@ -3,12 +3,20 @@ module Data
     include ToCsv
     include Percentage
 
-    # @return [String]
-    def self.to_csv
-      headers = ['Module', 'Question', 'Failure Rate Percentage']
+    # @return [Array<String>]
+    def self.column_names
+      ['Module', 'Question', 'Failure Rate Percentage']
+    end
+
+    # @return [Array<Array<String>>]
+    def self.dashboard
       data = high_fail_questions.map { |(module_name, question_name), fail_rate| [module_name, question_name, fail_rate] }
       format_percentages(data)
-      generate_csv(headers, data)
+    end
+
+    # @return [String]
+    def self.to_csv
+      generate_csv
     end
 
     # @return [Hash{Symbol => Float, Array<Array<String, String>> => Float}]

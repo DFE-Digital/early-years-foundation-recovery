@@ -3,9 +3,11 @@ module Data
     include ToCsv
     include Percentage
 
-    # @return [String]
-    def self.to_csv
-      headers = ['Month', 'Module', 'Pass Percentage', 'Pass Count', 'Fail Percentage', 'Fail Count']
+    def self.column_names
+      ['Month', 'Module', 'Pass Percentage', 'Pass Count', 'Fail Percentage', 'Fail Count']
+    end
+
+    def self.dashboard
       data = modules_by_month.flat_map do |month, module_data|
         module_data.map do |module_name, assessments|
           pass_count = assessments.count(&:passed?)
@@ -19,7 +21,11 @@ module Data
         end
       end
       format_percentages(data)
-      generate_csv(headers, data)
+    end
+
+    # @return [String]
+    def self.to_csv
+      generate_csv
     end
 
     # @return [Hash{String => Hash{String => Array<UserAssessment>}}]
