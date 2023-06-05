@@ -26,8 +26,11 @@ RSpec.describe Reporting do
       end
 
       context 'when there are users but no notes' do
+        before do
+          user1
+        end
+
         it 'with_notes count and percentage are 0 and without notes is 100%' do
-          expect(user1.notes.count).to be_zero
           expect(with_notes).to eq(0)
           expect(with_notes_percentage).to be_zero
           expect(without_notes).to eq(1)
@@ -39,9 +42,12 @@ RSpec.describe Reporting do
         let(:blank_note) { user1.notes.create(body: '') }
         let(:whitespace_note) { user1.notes.create(body: " \n \n \n") }
 
-        it 'the note is not counted' do
+        before do
           blank_note
           whitespace_note
+        end
+
+        it 'the note is not counted' do
           expect(with_notes).to be_zero
           expect(with_notes_percentage).to be_zero
           expect(without_notes).to eq(1)
@@ -50,8 +56,11 @@ RSpec.describe Reporting do
       end
 
       context 'when all users have notes' do
-        it 'percentage is 100' do
+        before do
           note_1
+        end
+
+        it 'percentage is 100' do
           expect(user1.notes.count).to eq(1)
           expect(with_notes).to eq(1)
           expect(with_notes_percentage).to eq(100.0)
@@ -61,10 +70,12 @@ RSpec.describe Reporting do
       end
 
       context 'when there is 1 user with multiple notes' do
-        it 'notes count is 1 and percentage is 100' do
+        before do
           note_1
           note_2
-          expect(user1.notes.count).to eq(2)
+        end
+
+        it 'notes count is 1 and percentage is 100' do
           expect(with_notes).to eq(1)
           expect(with_notes_percentage).to eq(100.0)
           expect(without_notes).to be_zero
@@ -73,11 +84,12 @@ RSpec.describe Reporting do
       end
 
       context 'when half of users have notes' do
-        it 'percentage is 50' do
+        before do
           note_1
           user2
-          expect(user1.notes.count).to eq(1)
-          expect(user2.notes.count).to be_zero
+        end
+
+        it 'percentage is 50' do
           expect(with_notes).to eq(1)
           expect(with_notes_percentage).to eq(50.0)
           expect(without_notes).to eq(1)
@@ -86,11 +98,12 @@ RSpec.describe Reporting do
       end
 
       context 'when 2 users have notes' do
-        it 'notes count is 2 and percentage is 100' do
+        before do
           note_1
           note_3
-          expect(user1.notes.count).to eq(1)
-          expect(user2.notes.count).to eq(1)
+        end
+
+        it 'notes count is 2 and percentage is 100' do
           expect(with_notes).to eq(2)
           expect(with_notes_percentage).to eq(100.0)
           expect(without_notes).to be_zero
@@ -99,9 +112,11 @@ RSpec.describe Reporting do
       end
 
       context 'when a user is closed' do
-        it 'their notes are deleted' do
+        before do
           note_1
-          expect(user1.notes.count).to eq(1)
+        end
+
+        it 'their notes are deleted' do
           user1.redact!
           expect(user1.first_name).to eq('Redacted')
           expect(with_notes).to be_zero
