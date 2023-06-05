@@ -29,7 +29,7 @@ RSpec.describe 'Summative assessment', :cms, type: :system do
 
   context 'when on a summative question page' do
     before do
-      visit 'modules/alpha/questionnaires/1-3-2-1'
+      visit first_question_path
     end
 
     specify do
@@ -120,6 +120,8 @@ RSpec.describe 'Summative assessment', :cms, type: :system do
       end
 
       it 'is not able to be retaken' do
+        expect(page).not_to have_link 'Retake test'
+
         visit first_question_path
 
         expect(page).to have_selector '.govuk-checkboxes__input:disabled'
@@ -162,9 +164,10 @@ RSpec.describe 'Summative assessment', :cms, type: :system do
       end
 
       it 'can be retaken' do
-        visit first_question_path
+        click_on 'Retake test'
+        click_on 'Start test'
 
-        expect(page).to have_selector '.govuk-checkboxes__input'
+        expect(page).not_to have_selector '.govuk-checkboxes__input:disabled'
       end
 
       it 'links back to content' do
