@@ -17,8 +17,6 @@ module ToCsv
       end
     end
 
-    # @param headers [Array<String>]
-    # @param data [Array<Array<String>>]
     # @return [String]
     def generate_csv
       CSV.generate do |csv|
