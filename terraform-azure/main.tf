@@ -5,7 +5,7 @@ provider "azurerm" {
 locals {
   # Common tags to be assigned to all resources
   common_tags = {
-    "Environment"      = "dev"
+    "Environment"      = var.default_environment
     "Parent Business"  = "Children’s Care"
     "Portfolio"        = "Newly Onboarded"
     "Product"          = "EY Recovery"
@@ -15,11 +15,12 @@ locals {
   }
 }
 
+# Create Resource Group
 resource "azurerm_resource_group" "rg" {
-  name     = var.resource_group_name
-  location = "westeurope"
+  name     = "${var.resource_name_prefix}-rg"
+  location = var.default_azure_region
 
   tags = merge(local.common_tags, {
-    "Location" = "West Europe"
+    "Region" = var.default_azure_region
   })
 }
