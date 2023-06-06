@@ -12,7 +12,12 @@ module.exports = function(migration) {
   question.createField('name', {
     name: 'Name',
     type: 'Symbol',
-    required: true
+    required: true,
+    validations: [
+      {
+        prohibitRegexp: { pattern: '\.|\s|[A-Z]' }
+      }
+    ]
   })
 
   // type
