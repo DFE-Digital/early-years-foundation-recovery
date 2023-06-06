@@ -14,13 +14,13 @@ RSpec.describe Note, type: :model do
   end
 
   context 'when the body has content' do
-    it 'filled is true' do
+    specify 'filled is true' do
       expect(note).to be_filled
     end
   end
 
   context 'when the body is blank' do
-    it 'filled is false' do
+    specify 'filled is false' do
       expect(blank_note).not_to be_filled
       expect(whitespace_note).not_to be_filled
     end
