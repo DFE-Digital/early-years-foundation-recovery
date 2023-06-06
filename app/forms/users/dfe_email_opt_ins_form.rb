@@ -1,5 +1,5 @@
 module Users
-    class DfeEmailPreferenceForm
+    class DfeEmailOptInsForm < BaseForm
         attr_accessor :dfe_email_opt_in
 
         validates :dfe_email_opt_in, presence: true
@@ -10,5 +10,5 @@ module Users
 
         def save
                 user.update!(
-                    dfe_email_opt_in: dfe_email_opt_in,
+                    dfe_email_opt_in: dfe_email_opt_in)
         end

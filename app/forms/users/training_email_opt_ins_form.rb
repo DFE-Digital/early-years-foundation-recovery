@@ -1,5 +1,5 @@
 module Users
-    class TrainingEmailPreferenceForm
+    class TrainingEmailOptInsForm < BaseForm
         attr_accessor :training_email_opt_in
 
         validates :training_email_opt_in, presence: true
@@ -10,7 +10,7 @@ module Users
 
         def save
                 user.update!(
-                    training_email_opt_in: training_email_opt_in,
+                    training_email_opt_in: training_email_opt_in)
         end
     end
 end
