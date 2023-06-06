@@ -51,9 +51,8 @@ namespace :eyfs do
 
     desc 'Upload asset files to Contentful'
     task seed_images: :environment do
-      require 'seed_course_entries'
-      uploader = SeedCourseEntries.new
-      uploader.upload_images
+      require 'seed_images'
+      SeedImages.new.call
     end
 
     # ./bin/docker-rails 'eyfs:cms:seed_static'
