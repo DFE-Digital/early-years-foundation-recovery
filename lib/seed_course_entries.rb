@@ -19,16 +19,9 @@ class SeedCourseEntries < SeedContentful
     end
 
     log "#{mod.name} ----------------------------------------------------------"
+
     mod_entry = create_training_module(mod.cms_module_params)
-
-    # Link thumbnail image
-    if mod.thumbnail
-      thumbnail = find_asset("/assets/#{mod.thumbnail}")
-      thumbnail.title = mod.title
-      mod_entry.image = thumbnail.save
-    end
-
-    # Link content
+    mod_entry.image = update_image(mod.title, mod.thumbnail)
     mod_entry.pages = create_children(mod_entry, mod.module_items)
     log "#{mod_entry.pages.count} entries linked ------------------------------------------------"
 
@@ -111,6 +104,17 @@ private
 
   # @return [Regexp]
   IMG_REGEXP = /!\[(?<title>[^\]]*)\]\((?<filename>.*?)\s*("(?:.*[^"])")?\s*\)/
+
+  # @param title [String]
+  # @param filename [String, nil]
+  # @return [Contentful::Management::Asset, nil]
+  def update_image(title, filename)
+    return unless filename
+
+    thumbnail = find_asset("/assets/#{filename}")
+    thumbnail.title = title
+    thumbnail.publish if thumbnail.save
+  end
 
   # @note Ensure all images are first seeded and published
   # @see SeedImages
