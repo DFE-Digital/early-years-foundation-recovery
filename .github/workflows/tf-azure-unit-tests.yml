@@ -7,7 +7,7 @@ on:
     types:
       - labeled
       - synchronize
-      - 
+
 defaults:
   run:
     working-directory: ./terraform-azure

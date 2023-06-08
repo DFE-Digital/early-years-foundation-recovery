@@ -44,11 +44,11 @@ resource "random_string" "resource_code" {
 }
 
 resource "azurerm_storage_account" "tfstate" {
-  name                     = "eyrecoverytfstate${random_string.resource_code.result}st"
-  resource_group_name      = azurerm_resource_group.tfstate.name
-  location                 = var.default_azure_region
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
+  name                            = "eyrecoverytfstate${random_string.resource_code.result}st"
+  resource_group_name             = azurerm_resource_group.tfstate.name
+  location                        = var.default_azure_region
+  account_tier                    = "Standard"
+  account_replication_type        = "LRS"
   allow_nested_items_to_be_public = false
 
   tags = merge(local.common_tags, {
