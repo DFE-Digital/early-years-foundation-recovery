@@ -15,7 +15,7 @@ module.exports = function(migration) {
     required: true,
     validations: [
       {
-        prohibitRegexp: { pattern: '\.|\s|[A-Z]' }
+        prohibitRegexp: { pattern: '\\.|\\s|[A-Z]' }
       }
     ]
   })
