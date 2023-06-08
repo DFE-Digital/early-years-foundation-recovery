@@ -49,17 +49,18 @@ namespace :eyfs do
       mod_names.each { |mod| uploader.call(mod_name: mod) }
     end
 
+    desc 'Upload asset files to Contentful'
+    task seed_images: :environment do
+      require 'seed_images'
+      SeedImages.new.call
+    end
+
     # ./bin/docker-rails 'eyfs:cms:seed_static'
     desc 'Seed static pages from YAML'
     task seed_static: :environment do
       require 'seed_static_page_entries'
       SeedStaticPageEntries.new.call
     end
-
-    # desc 'Upload asset files to Contentful'
-    # task upload: :environment do
-    #   binding.pry
-    # end
 
     # @see .env
     #   CONTENTFUL_ENVIRONMENT=demo
