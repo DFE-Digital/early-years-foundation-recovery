@@ -18,11 +18,6 @@ module Data
       format_percentages(data)
     end
 
-    # @return [String]
-    def self.to_csv
-      generate_csv
-    end
-
     # @return [Hash{Symbol => Hash{Integer => Integer}}]
     def self.resit_attempts_per_user
       UserAssessment.summative

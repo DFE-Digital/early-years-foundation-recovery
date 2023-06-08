@@ -12,11 +12,6 @@ module Data
       format_percentages(data)
     end
 
-    # @return [String]
-    def self.to_csv
-      generate_csv
-    end
-
     # @return [Hash{String => Integer}]
     def self.total_users_not_passing_per_module
       UserAssessment.summative

@@ -14,11 +14,6 @@ module Data
       format_percentages(data)
     end
 
-    # @return [String]
-    def self.to_csv
-      generate_csv
-    end
-
     # @return [Hash{Symbol => Float, Array<Array<String, String>> => Float}]
     def self.high_fail_questions
       question_attempts = UserAnswer.summative.group(:module, :name).count

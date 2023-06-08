@@ -23,11 +23,6 @@ module Data
       format_percentages(data)
     end
 
-    # @return [String]
-    def self.to_csv
-      generate_csv
-    end
-
     # @return [Hash{String => Hash{String => Array<UserAssessment>}}]
     def self.modules_by_month
       UserAssessment.summative.group_by { |assessment| assessment.created_at.strftime('%B %Y') }

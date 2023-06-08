@@ -13,16 +13,13 @@ module ToCsv
       CSV.generate(headers: true) do |csv|
         csv << column_names
 
-        dashboard.find_each(batch_size: 1_000) { |record| csv << record.dashboard_attributes.values }
-      end
-    end
-
-    # @return [String]
-    def generate_csv
-      CSV.generate do |csv|
-        csv << column_names
-        dashboard.each do |row|
-          csv << row
+        # Primitive Ruby objects
+        # Array could contain raw values, or Hashes accessed via record.values
+        if dashboard.is_a?(Array)
+          dashboard.each { |record| csv << record }
+        # ActiveRecord collection of models
+        else
+          dashboard.find_each(batch_size: 1_000) { |record| csv << record.dashboard_attributes.values }
         end
       end
     end
