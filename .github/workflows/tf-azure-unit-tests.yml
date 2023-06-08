@@ -10,6 +10,7 @@ on:
 
 jobs:
   terraform-unit-tests:
+    name: 'Run Tests'
     if: contains(github.event.pull_request.labels.*.name, 'terraform')
     runs-on: ubuntu-latest
 
@@ -22,24 +23,24 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
 
-    # Change to terraform directory
-    - name: Change Terraform Directory
-      run: cd terraform-azure
-
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
+      working-directory: ./terraform-azure
       run: terraform init -backend=false
 
     # Validate terraform files
     - name: Terraform Validate
+      working-directory: ./terraform-azure
       run: terraform validate
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
+      working-directory: ./terraform-azure
       run: terraform fmt -check -recursive
 
     # Perform a security scan of the terraform code using checkov
     - name: Run Checkov action
+      working-directory: ./terraform-azure
       id: checkov
       uses: bridgecrewio/checkov-action@master
       with:
