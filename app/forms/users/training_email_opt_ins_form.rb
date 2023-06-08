@@ -9,8 +9,10 @@ module Users
         end
 
         def save
+            if valid?
                 user.update!(
                     training_email_opt_in: training_email_opt_in)
+            end
         end
     end
 end

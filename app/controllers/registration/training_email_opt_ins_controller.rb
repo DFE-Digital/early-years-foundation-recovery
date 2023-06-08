@@ -1,5 +1,10 @@
 class Registration::TrainingEmailOptInsController < Registration::BaseController
 
+  @options = [
+    OpenStruct.new(id: true, name: 'oui'),
+    OpenStruct.new(id: false, name: 'non')
+  ]
+
   def edit
     @user_form = Users::TrainingEmailOptInsForm.new(user: current_user, training_email_opt_in: current_user.training_email_opt_in)
   end
@@ -8,11 +13,7 @@ class Registration::TrainingEmailOptInsController < Registration::BaseController
     @user_form = Users::TrainingEmailOptInsForm.new(user_params.merge(user: current_user))
 
     if @user_form.save
-      if current_user.registration_complete?
         redirect_to edit_registration_dfe_email_opt_in_path
-      else
-        redirect_to edit_registration_setting_type_path
-      end
     else
       render :edit, status: :unprocessable_entity
     end

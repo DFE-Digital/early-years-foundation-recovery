@@ -10,7 +10,7 @@ class Registration::DfeEmailOptInsController < Registration::BaseController
       if current_user.registration_complete?
         redirect_to user_path, notice: t('.complete_update')
       else
-        redirect_to edit_registration_setting_type_path
+        complete_registration
       end
     else
       render :edit, status: :unprocessable_entity

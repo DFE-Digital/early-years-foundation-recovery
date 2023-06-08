@@ -9,6 +9,12 @@ module Users
         end
 
         def save
+            if valid?
                 user.update!(
                     dfe_email_opt_in: dfe_email_opt_in)
+            end
         end
+    end
+end
+
+

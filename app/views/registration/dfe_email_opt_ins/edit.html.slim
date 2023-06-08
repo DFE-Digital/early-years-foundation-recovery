@@ -1,12 +1,14 @@
-= govuk_back_link href: edit_registration_setting_type_path
+= govuk_back_link= govuk_back_link href: edit_registration_training_email_opt_in_path
 .govuk-grid-row
-  .govuk-grid-column-two-thirds-from-desktop
+  .govuk-grid-column-full
     = form_for @user_form, url: registration_dfe_email_opt_in_path, method: :patch do |f|
-      = f.govuk_error_summary
-      = f.govuk_fieldset legend: { text: t('.heading') }, aria: { required: true } do
-        = translate_markdown(t('.body'))
-        .govuk-radios__item
-          = f.govuk_radio_button :def_email_opt_in, true, label: { text: 'Receive emails' }, aria: { label: 'Receive emails' }
-        .govuk-radios__item
-          = f.govuk_radio_button :def_email_opt_in, false, label: { text: 'Do not receive emails' }, aria: { label: 'Do not receive emails' }
+      = f.govuk_error_summary link_text: 'error stuff here'
+      = f.govuk_collection_radio_buttons :dfe_email_opt_in,
+      [OpenStruct.new(id: true, name: t('.opt_in')),OpenStruct.new(id: false, name: t('.opt_out'))],
+      :id,
+      :name,
+      legend: { text: t('.heading') },
+      hint: { text: translate_markdown(t('.body')) }
+
+      div class='govuk-!-margin-top-4'
       = f.govuk_submit t('.button')
