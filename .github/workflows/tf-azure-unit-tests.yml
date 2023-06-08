@@ -7,6 +7,10 @@ on:
     types:
       - labeled
       - synchronize
+      - 
+defaults:
+  run:
+    working-directory: ./terraform-azure
 
 jobs:
   terraform-unit-tests:
@@ -25,22 +29,18 @@ jobs:
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
-      working-directory: ./terraform-azure
       run: terraform init -backend=false
 
     # Validate terraform files
     - name: Terraform Validate
-      working-directory: ./terraform-azure
       run: terraform validate
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
-      working-directory: ./terraform-azure
       run: terraform fmt -check -recursive
 
     # Perform a security scan of the terraform code using checkov
     - name: Run Checkov action
-      working-directory: ./terraform-azure
       id: checkov
       uses: bridgecrewio/checkov-action@master
       with:
