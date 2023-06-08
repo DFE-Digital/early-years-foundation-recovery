@@ -140,7 +140,6 @@ class User < ApplicationRecord
 
       # module exclusive to CMS
       rescue ActiveHash::RecordNotFound
-
         user_answers.find_or_initialize_by(
           assessments_type: content.assessments_type,
           module: content.parent.name,

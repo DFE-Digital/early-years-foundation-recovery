@@ -108,7 +108,11 @@ module.exports = function(migration) {
 
   /* Interface -------------------------------------------------------------- */
 
-  video.changeFieldControl('title', 'builtin', 'singleLine', {
+  video.changeFieldControl('heading', 'builtin', 'multipleLine', {
+    helpText: 'foo',
+  })
+
+  video.changeFieldControl('title', 'builtin', 'multipleLine', {
     helpText: 'Video title is often identical to heading',
   })
 
