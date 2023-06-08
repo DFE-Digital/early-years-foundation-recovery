@@ -2,14 +2,16 @@ name: 'Terraform Unit Tests'
 
 on:
   pull_request:
-    branches: [ main ]
-  types:
-    - labeled
+    branches:
+      - main
+    types:
+      - labeled
+      - synchronize
 
 jobs:
   terraform-unit-tests:
     name: 'Terraform Unit Tests'
-    if: ${{ github.event.label.name == 'terraform' }}
+    if: contains(github.event.pull_request.labels.*.name, 'terraform')
     runs-on: ubuntu-latest
 
     steps:
