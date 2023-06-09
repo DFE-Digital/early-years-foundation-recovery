@@ -32,8 +32,17 @@ FactoryBot.define do
       setting_type_id { SettingType.where(role_type: %w[childminder other]).sample.id }
     end
 
+    trait :role_type do
+      role_type { RoleType.first.name }
+    end
+
     trait :display_whats_new do
       display_whats_new { true }
+    end
+
+    trait :email_opt_in do
+      training_email_opt_in { true }
+      dfe_email_opt_in { true }
     end
   end
 end

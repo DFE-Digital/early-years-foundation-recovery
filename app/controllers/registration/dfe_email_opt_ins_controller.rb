@@ -1,10 +1,10 @@
 class Registration::DfeEmailOptInsController < Registration::BaseController
   def edit
-    @user_form = Users::DfeEmailOptInsForm.new(user: current_user, dfe_email_opt_in: current_user.dfe_email_opt_in)
+    @user_form = Users::DfeEmailOptInForm.new(user: current_user, dfe_email_opt_in: current_user.dfe_email_opt_in)
   end
 
   def update
-    @user_form = Users::DfeEmailOptInsForm.new(user_params.merge(user: current_user))
+    @user_form = Users::DfeEmailOptInForm.new(user_params.merge(user: current_user))
 
     if @user_form.save
       if current_user.registration_complete?

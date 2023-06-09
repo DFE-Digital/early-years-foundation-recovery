@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Registration::RoleTypeOthersController, type: :controller do
+RSpec.describe Registration::DfeEmailOptInsController, type: :controller do
   context 'when not signed in' do
     describe 'GET #edit' do
       it 'redirects' do
@@ -18,12 +18,15 @@ RSpec.describe Registration::RoleTypeOthersController, type: :controller do
   end
 
   context 'when confirmed user signed in' do
-    let(:confirmed_user) { create :user, :confirmed, :name, :setting_type }
+    let(:confirmed_user) { create :user, :confirmed, :name, :email_opt_in, :setting_type, :role_type }
 
     before { sign_in confirmed_user }
 
     describe 'GET #edit' do
       it 'succeeds' do
+        puts confirmed_user
+        puts confirmed_user.role_type
+
         get :edit
         expect(response).to have_http_status(:success)
       end
@@ -31,10 +34,10 @@ RSpec.describe Registration::RoleTypeOthersController, type: :controller do
 
     describe 'POST #update' do
       it 'succeeds' do
-        post :update, params: { user: { role_type_other: 'User defined role type' } }
-        expect(response).to redirect_to edit_registration_training_email_opt_in_path
-        expect(confirmed_user.reload.role_type_other).to eq 'User defined role type'
-        expect(confirmed_user.reload.role_type).to eq 'other'
+        post :update, params: { user: { dfe_email_opt_in: 'true' } }
+        expect(confirmed_user.reload.dfe_email_opt_in).to eq true
+        expect(response).to redirect_to my_modules_path
+        expect(confirmed_user.reload).to be_registration_complete
       end
     end
   end
