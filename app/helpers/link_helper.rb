@@ -92,8 +92,13 @@ module LinkHelper
   # @param content [Module::Content]
   # @return [String] next content page (ends on certificate)
   def cms_link_to_next_module_item(content)
-    text = content.next_button_text
-    path = training_module_page_path(content.parent.name, content.next_item.name)
+    if content.next_item.nil? && Rails.application.preview?
+      text = 'Next page has not been created'
+      path = training_module_page_path(content.parent.name, content.name)
+    else
+      text = content.next_button_text
+      path = training_module_page_path(content.parent.name, content.next_item.name)
+    end
 
     govuk_button_link_to text, path, id: 'next-action', aria: { label: 'Go to the next page' }
   end
