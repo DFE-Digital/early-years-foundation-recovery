@@ -63,16 +63,14 @@ module.exports = function(migration) {
     required: true
   })
 
+  // markdown not permitted
   trainingModule.createField('objective', {
     name: 'Objective',
     type: 'Text',
     required: true,
     validations: [
       {
-        prohibitRegexp: {
-          pattern: '\\n',
-          message: 'Markdown is not permitted'
-        }
+        prohibitRegexp: { pattern: '\\n' }
       }
     ]
   })
@@ -142,7 +140,7 @@ module.exports = function(migration) {
 
   /* Interface -------------------------------------------------------------- */
 
-  trainingModule.changeFieldControl('pages', 'builtin', 'entryLinksEditor', {
+  trainingModule.changeFieldControl('pages', 'builtin', 'entryCardsEditor', {
     helpText: 'Define module content and order here',
   })
 
