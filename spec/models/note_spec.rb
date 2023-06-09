@@ -14,9 +14,7 @@ RSpec.describe Note, type: :model do
   end
 
   context 'when the body has content' do
-    specify 'filled is true' do
-      expect(note).to be_filled
-    end
+    specify { expect(note).to be_filled }
   end
 
   context 'when the body is blank' do
