@@ -12,7 +12,12 @@ module.exports = function(migration) {
   question.createField('name', {
     name: 'Name',
     type: 'Symbol',
-    required: true
+    required: true,
+    validations: [
+      {
+        prohibitRegexp: { pattern: '\\.|\\s|[A-Z]' }
+      }
+    ]
   })
 
   // type
@@ -114,6 +119,10 @@ module.exports = function(migration) {
   })
 
   /* Interface -------------------------------------------------------------- */
+
+  question.changeFieldControl('body', 'builtin', 'multipleLine')
+  question.changeFieldControl('success_message', 'builtin', 'multipleLine')
+  question.changeFieldControl('failure_message', 'builtin', 'multipleLine')
 
   question.changeFieldControl('answers', 'builtin', 'objectEditor', {
     helpText: 'An array of arrays: add true for correct options',

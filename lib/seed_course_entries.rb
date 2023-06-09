@@ -75,10 +75,8 @@ private
   # @return [Contentful::Management::DynamicEntry]
   def create_entry(item)
     case item.type
-    when /video/
-      create_video item.cms_video_params
-    when /question/
-      create_question item.cms_question_params
+    when /video/    then create_video item.cms_video_params
+    when /question/ then create_question item.cms_question_params
     else
       create_page item.cms_page_params
     end
