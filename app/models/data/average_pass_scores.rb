@@ -17,6 +17,7 @@ module Data
       generate_csv
     end
 
+    # TODO: Upcoming changes to UserAssessment will make this type coercion unnecessary
     # @return [ActiveRecord::Result]
     def self.average_pass_scores
       UserAssessment.summative.passes.group(:module).average('CAST(score AS float)')
