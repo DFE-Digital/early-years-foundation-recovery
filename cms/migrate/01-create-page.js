@@ -12,7 +12,12 @@ module.exports = function(migration) {
   page.createField('name', {
     name: 'Name',
     type: 'Symbol',
-    required: true
+    required: true,
+    validations: [
+      {
+        prohibitRegexp: { pattern: '\\.|\\s|[A-Z]' }
+      }
+    ]
   })
 
   // type
@@ -87,13 +92,19 @@ module.exports = function(migration) {
   page.createField('heading', {
     name: 'Heading',
     type: 'Text',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 'page heading',
+    },
   })
 
   page.createField('body', {
     name: 'Body',
     type: 'Text',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 'page body',
+    },
   })
 
   page.createField('notes', {
@@ -106,6 +117,8 @@ module.exports = function(migration) {
   })
 
   /* Interface -------------------------------------------------------------- */
+
+  page.changeFieldControl('heading', 'builtin', 'multipleLine')
 
   page.changeFieldControl('notes', 'builtin', 'boolean', {
     helpText: 'Use Learning Log to take notes?',
