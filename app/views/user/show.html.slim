@@ -33,6 +33,20 @@
         - row.key { 'Role' }
         - row.value(text: @user.role, classes: ['data-hj-suppress'])
 
+    = govuk_summary_list do |email_preferences|
+      - email_preferences.row do |row|
+        - row.key { t('.your_email_preferences_html') }
+        - row.value { nil }
+      - email_preferences.row do |row|
+        - row.key { 'Email updates about this training course' }
+        - row.value(text: @user.training_email_opt_in ? t('.training_emails_true') : t('.training_emails_false'), classes: ['data-hj-suppress'])
+        - row.action(text: t('links.change'), href: edit_registration_training_email_opt_in_path, visually_hidden_text: 'training_email_opt_in', html_attributes: { id: :edit_training_email_opt_in_registration })
+      - email_preferences.row do |row|
+        - row.key { 'Email updates about early years' }
+        - row.value(text: @user.dfe_email_opt_in ? t('.dfe_emails_true') : t('.dfe_emails_false'), classes: ['data-hj-suppress'])
+        - row.action(text: t('links.change'), href: edit_registration_dfe_email_opt_in_path, visually_hidden_text: 'dfe_email_opt_in', html_attributes: { id: :edit_dfe_email_opt_in_registration })
+
+
     h2.govuk-heading-m Closing your account 
     = translate_markdown(t('close_account.body'))
     = govuk_button_link_to t('close_account.button'), new_user_close_account_path

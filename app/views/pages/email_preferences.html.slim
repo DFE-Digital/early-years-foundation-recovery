@@ -1,0 +1,11 @@
+.govuk-grid-row
+  .govuk-grid-column-two-thirds-from-desktop
+
+
+    h1= t('.heading')
+
+    .content.gem-c-govspeak
+    div class='govuk-!-margin-bottom-8'
+      = translate_markdown t('.body')
+
+    = govuk_button_link_to t('.button'), edit_registration_training_email_opt_in_path

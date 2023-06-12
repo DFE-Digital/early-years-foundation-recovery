@@ -2,6 +2,12 @@ en:
   user:
     show:
       your_setting_details_html: <h2 class='govuk-heading-m'>Your setting details</h2>
+      your_email_preferences_html: <h2 class='govuk-heading-m'>Your email preferences</h2>
+      training_emails_true: You have chosen to receive emails about this training course.
+      training_emails_false: You have chosen not to receive emails about this training course.
+      dfe_emails_true: You have chosen to receive early years email updates.
+      dfe_emails_false: You have chosen not to receive early years email updates.
+
   activemodel:
     errors:
       models:

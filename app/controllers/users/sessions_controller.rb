@@ -9,6 +9,8 @@ protected
         resource.display_whats_new = false
         resource.save!
         static_path('whats-new')
+      elsif resource.training_email_opt_in.nil? || resource.dfe_email_opt_in.nil?
+        email_preferences_path
       else
         my_modules_path
       end

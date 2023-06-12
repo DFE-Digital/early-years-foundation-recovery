@@ -1,5 +1,5 @@
 RSpec.shared_context 'with user' do
-  let(:user) { create(:user, :registered) }
+  let(:user) { create(:user, :registered, :email_opt_in) }
 
   before do
     visit '/users/sign-in'
