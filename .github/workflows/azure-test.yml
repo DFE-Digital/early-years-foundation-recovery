@@ -1,4 +1,4 @@
-name: 'Azure Test
+name: 'Azure Test'
 
 on:
   pull_request:
