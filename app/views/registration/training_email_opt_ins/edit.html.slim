@@ -2,7 +2,7 @@
 .govuk-grid-row
   .govuk-grid-column-full
     = form_for @user_form, url: registration_training_email_opt_in_path, method: :patch do |f|
-      = f.govuk_error_summary link_text: 'error stuff here'
+      = f.govuk_error_summary
       = f.govuk_collection_radio_buttons :training_email_opt_in,
       [OpenStruct.new(id: true, name: t('.opt_in')),OpenStruct.new(id: false, name: t('.opt_out'))],
       :id,
