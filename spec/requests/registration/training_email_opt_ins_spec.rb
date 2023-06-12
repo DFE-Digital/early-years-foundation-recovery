@@ -19,7 +19,7 @@ RSpec.describe 'Registration training email opt in', type: :request do
       patch registration_training_email_opt_in_path, params: { user: user_params }
     end
 
-    context 'Adds training email opt in true' do
+    context 'when training email opt in true in user params' do
       let(:user_params) do
         {
           training_email_opt_in: true,

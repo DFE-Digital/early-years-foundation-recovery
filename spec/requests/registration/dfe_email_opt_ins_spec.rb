@@ -19,7 +19,7 @@ RSpec.describe 'Registration dfe email opt in', type: :request do
       patch registration_dfe_email_opt_in_path, params: { user: user_params }
     end
 
-    context 'Adds dfe email opt in true' do
+    context 'when dfe email opt in true in user params' do
       let(:user_params) do
         {
           dfe_email_opt_in: true,
