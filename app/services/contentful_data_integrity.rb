@@ -17,7 +17,7 @@ class ContentfulDataIntegrity
     position: 'Missing position',
     summary: 'Missing short description',
     threshold: 'Missing assessment threshold percentage',
-    # thumbnail: 'Missing thumbnail image',
+    thumbnail: 'Missing thumbnail image',
   }.freeze
 
   # @return [Hash{Symbol=>String}] valid as released module
@@ -88,13 +88,13 @@ class ContentfulDataIntegrity
 
   # MODULE VALIDATIONS ---------------------------------------------------------
 
-  # # @note The asset could be deleted or unpublished.
-  # # @return [Boolean]
-  # def thumbnail?
-  #   mod.fields[:image].present?
-  #   # Unreliable response times prevent this additional check:
-  #   # && ContentfulModel::Asset.find(mod.fields[:image].id).present?
-  # end
+  # @note The asset could be deleted or unpublished.
+  # @return [Boolean]
+  def thumbnail?
+    mod.fields[:image].present?
+    # Unreliable response times prevent this additional check:
+    # && ContentfulModel::Asset.find(mod.fields[:image].id).present?
+  end
 
   # @return [Boolean]
   def description?

@@ -12,7 +12,12 @@ module.exports = function(migration) {
   video.createField('name', {
     name: 'Name',
     type: 'Symbol',
-    required: true
+    required: true,
+    validations: [
+      {
+        prohibitRegexp: { pattern: '\\.|\\s|[A-Z]' }
+      }
+    ]
   })
 
   video.createField('training_module', {
@@ -57,13 +62,6 @@ module.exports = function(migration) {
     ]
   })
 
-
-  video.createField('title', {
-    name: 'Title',
-    type: 'Text',
-    required: true
-  })
-  
   video.createField('heading', {
     name: 'Heading',
     type: 'Text',
@@ -75,7 +73,13 @@ module.exports = function(migration) {
     type: 'Text',
     required: true
   })
-  
+
+  video.createField('title', {
+    name: 'Title',
+    type: 'Text',
+    required: true
+  })
+
   video.createField('transcript', {
     name: 'Transcript',
     type: 'Text',
@@ -101,4 +105,15 @@ module.exports = function(migration) {
       }
     ]
   })
+
+  /* Interface -------------------------------------------------------------- */
+
+  video.changeFieldControl('heading', 'builtin', 'multipleLine', {
+    helpText: 'foo',
+  })
+
+  video.changeFieldControl('title', 'builtin', 'multipleLine', {
+    helpText: 'Video title is often identical to heading',
+  })
+
 }

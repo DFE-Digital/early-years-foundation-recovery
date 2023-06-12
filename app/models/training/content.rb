@@ -71,9 +71,9 @@ module Training
     end
 
     # private
-    # @return [String] Contentful Link ID
+    # @return [String, nil] Contentful Link ID
     def next_item_id
-      parent.fields[:pages][position_within_module + 1].id
+      parent.fields[:pages][position_within_module + 1]&.id
     end
 
     # Can be found without loading all content

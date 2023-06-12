@@ -140,7 +140,7 @@ module.exports = function(migration) {
 
   /* Interface -------------------------------------------------------------- */
 
-  trainingModule.changeFieldControl('pages', 'builtin', 'entryLinksEditor', {
+  trainingModule.changeFieldControl('pages', 'builtin', 'entryCardsEditor', {
     helpText: 'Define module content and order here',
   })
 
