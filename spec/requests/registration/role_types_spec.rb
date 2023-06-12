@@ -30,9 +30,9 @@ RSpec.describe 'Registration role type', type: :request do
         expect { update_user }.to change { user.reload.role_type }.to(user_params[:role_type])
       end
 
-      it 'redirects to my modules' do
+      it 'redirects to my training email preference' do
         update_user
-        expect(response).to redirect_to(my_modules_path)
+        expect(response).to redirect_to(edit_registration_training_email_opt_in_path)
       end
     end
   end
