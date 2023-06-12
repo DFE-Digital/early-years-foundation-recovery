@@ -6,7 +6,7 @@ RSpec.describe Training::ModulesController, :cms, type: :controller do
     before do
       skip 'WIP' unless Rails.application.cms?
 
-      sign_in create(:user, :registered)
+      sign_in create(:user, :registered, :email_opt_in)
     end
 
     it 'allows user to access target page' do
