@@ -1477,7 +1477,7 @@ en:
           - The outdoor environment
 
       5-3-2-1a:
-        notes: true
+        notes: false
         heading: |
           Your curriculum and adult led activity
         body: |
