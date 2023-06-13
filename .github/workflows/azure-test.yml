@@ -33,12 +33,12 @@ jobs:
 
     steps:
       # Login to Azure CLI
-      - name: Azure CLI login
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+      # - name: Azure CLI login
+      #   uses: azure/login@v1
+      #   with:
+      #     client-id: ${{ secrets.AZURE_CLIENT_ID }}
+      #     subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      #     tenant-id: ${{ secrets.AZURE_TENANT_ID }}
 
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
@@ -116,12 +116,12 @@ jobs:
 
     steps:
       # Login to Azure CLI
-      - name: Azure CLI login
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+      # - name: Azure CLI login
+      #   uses: azure/login@v1
+      #   with:
+      #     client-id: ${{ secrets.AZURE_CLIENT_ID }}
+      #     subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      #     tenant-id: ${{ secrets.AZURE_TENANT_ID }}
 
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
