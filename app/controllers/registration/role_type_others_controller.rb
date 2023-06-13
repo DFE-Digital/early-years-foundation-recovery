@@ -7,7 +7,7 @@ class Registration::RoleTypeOthersController < Registration::BaseController
     @user_form = Users::RoleTypeOtherForm.new(user_params.merge(user: current_user))
 
     if @user_form.save
-      redirect_to edit_registration_training_email_opt_in_path
+      redirect_to edit_registration_training_emails_path
     else
       render :edit, status: :unprocessable_entity
     end

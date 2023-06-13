@@ -41,8 +41,8 @@ FactoryBot.define do
     end
 
     trait :email_opt_in do
-      training_email_opt_in { true }
-      dfe_email_opt_in { true }
+      training_emails { true }
+      early_years_emails { true }
     end
   end
 end

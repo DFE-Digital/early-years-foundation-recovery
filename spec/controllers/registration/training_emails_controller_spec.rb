@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Registration::DfeEmailOptInsController, type: :controller do
+RSpec.describe Registration::TrainingEmailsController, type: :controller do
   context 'when not signed in' do
     describe 'GET #edit' do
       it 'redirects' do
@@ -18,15 +18,12 @@ RSpec.describe Registration::DfeEmailOptInsController, type: :controller do
   end
 
   context 'when confirmed user signed in' do
-    let(:confirmed_user) { create :user, :confirmed, :name, :email_opt_in, :setting_type, :role_type }
+    let(:confirmed_user) { create :user, :confirmed, :name, :email_opt_in }
 
     before { sign_in confirmed_user }
 
     describe 'GET #edit' do
       it 'succeeds' do
-        puts confirmed_user
-        puts confirmed_user.role_type
-
         get :edit
         expect(response).to have_http_status(:success)
       end
@@ -34,10 +31,9 @@ RSpec.describe Registration::DfeEmailOptInsController, type: :controller do
 
     describe 'POST #update' do
       it 'succeeds' do
-        post :update, params: { user: { dfe_email_opt_in: 'true' } }
-        expect(confirmed_user.reload.dfe_email_opt_in).to eq true
-        expect(response).to redirect_to my_modules_path
-        expect(confirmed_user.reload).to be_registration_complete
+        post :update, params: { user: { training_emails: 'true' } }
+        expect(response).to redirect_to edit_registration_early_years_emails_path
+        expect(confirmed_user.reload.training_emails).to eq true
       end
     end
   end

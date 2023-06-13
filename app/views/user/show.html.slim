@@ -39,12 +39,12 @@
         - row.value { nil }
       - email_preferences.row do |row|
         - row.key { 'Email updates about this training course' }
-        - row.value(text: @user.training_email_opt_in ? t('.training_emails_true') : t('.training_emails_false'), classes: ['data-hj-suppress'])
-        - row.action(text: t('links.change'), href: edit_registration_training_email_opt_in_path, visually_hidden_text: 'training_email_opt_in', html_attributes: { id: :edit_training_email_opt_in_registration })
+        - row.value(text: @user.training_emails ? t('.training_emails_true') : t('.training_emails_false'), classes: ['data-hj-suppress'])
+        - row.action(text: t('links.change'), href: edit_registration_training_emails_path, visually_hidden_text: 'training_emails', html_attributes: { id: :edit_training_emails_registration })
       - email_preferences.row do |row|
         - row.key { 'Email updates about early years' }
-        - row.value(text: @user.dfe_email_opt_in ? t('.dfe_emails_true') : t('.dfe_emails_false'), classes: ['data-hj-suppress'])
-        - row.action(text: t('links.change'), href: edit_registration_dfe_email_opt_in_path, visually_hidden_text: 'dfe_email_opt_in', html_attributes: { id: :edit_dfe_email_opt_in_registration })
+        - row.value(text: @user.early_years_emails ? t('.early_years_emails_true') : t('.early_years_emails_false'), classes: ['data-hj-suppress'])
+        - row.action(text: t('links.change'), href: edit_registration_early_years_emails_path, visually_hidden_text: 'early_years_emails', html_attributes: { id: :edit_early_years_emails_registration })
 
 
     h2.govuk-heading-m Closing your account 
