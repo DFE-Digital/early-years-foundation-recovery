@@ -22,6 +22,5 @@ resource "azurerm_resource_group" "rg" {
   location = var.default_azure_region
 
   tags = merge(local.common_tags, {
-    "Region" = var.default_azure_region
   })
 }
