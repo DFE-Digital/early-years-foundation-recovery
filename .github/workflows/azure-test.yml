@@ -23,9 +23,6 @@ jobs:
     name: 'Terraform Plan'
     runs-on: ubuntu-latest
     environment: development
-    env:
-      TF_VAR_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      TF_VAR_tenant_id: ${{ secrets.AZURE_TENANT_ID }}
     outputs:
       tfplanExitCode: ${{ steps.tf-plan.outputs.exitcode }}
 
@@ -50,7 +47,9 @@ jobs:
 
       # Initialise a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
-        run: terraform init
+        run: terraform init \
+                -backend-config="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" \
+                -backend-config="tenant_id=${{ secrets.AZURE_TENANT_ID }}"
 
       # Checks that all Terraform configuration files adhere to a canonical format
       # Will fail the build if not
@@ -110,9 +109,6 @@ jobs:
     if: needs.terraform-plan.outputs.tfplanExitCode == 2
     runs-on: ubuntu-latest
     environment: development
-    env:
-      TF_VAR_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      TF_VAR_tenant_id: ${{ secrets.AZURE_TENANT_ID }}
     needs: [terraform-plan]
 
     steps:
@@ -134,7 +130,9 @@ jobs:
 
       # Initialise a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
-        run: terraform init
+        run: terraform init \
+          -backend-config="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" \
+          -backend-config="tenant_id=${{ secrets.AZURE_TENANT_ID }}"
 
       # Download saved plan from artifacts
       - name: Download Terraform Plan
