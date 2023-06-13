@@ -17,6 +17,11 @@ defaults:
 permissions:
   id-token: write
   contents: read
+  
+env:
+  ARM_CLIENT_ID: "${{ secrets.AZURE_CLIENT_ID }}"
+  ARM_SUBSCRIPTION_ID: "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+  ARM_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
 
 jobs:
   terraform-plan:
@@ -48,8 +53,6 @@ jobs:
       # Initialise a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
         run: terraform init
-        env:
-          TF_CLI_ARGS_init: '-backend-config="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" -backend-config="tenant_id=${{ secrets.AZURE_TENANT_ID }}"'
 
       # Checks that all Terraform configuration files adhere to a canonical format
       # Will fail the build if not
@@ -131,8 +134,6 @@ jobs:
       # Initialise a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
         run: terraform init
-        env:
-          TF_CLI_ARGS_init: '-backend-config="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" -backend-config="tenant_id=${{ secrets.AZURE_TENANT_ID }}"'
 
       # Download saved plan from artifacts
       - name: Download Terraform Plan
