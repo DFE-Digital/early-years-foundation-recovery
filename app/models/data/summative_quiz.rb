@@ -14,7 +14,7 @@ module Data
           pass_percentage = calculate_percentage(pass_count, count)
           fail_percentage = 100 - pass_percentage
 
-          { pass: pass_percentage, pass_count: pass_count, fail: fail_percentage, fail_count: count - pass_count }
+          { pass_percentage: pass_percentage, pass_count: pass_count, fail_percentage: fail_percentage, fail_count: count - pass_count }
         end
       end
 

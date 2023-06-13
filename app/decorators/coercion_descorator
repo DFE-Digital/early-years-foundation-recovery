@@ -1,0 +1,21 @@
+class CoercionDecorator
+    extend Dry::Initializer
+
+    param :input, Types::Strict:Hash, required: true
+
+    def call
+        input.each do |key, value|
+            input[key] = format_datetime(value) if value.is_a?(Time)
+            input[key] = format_percentage(value) if key.to_s.ends_with('percentage')
+        end
+    end
+
+    private
+    def format_percentage(element)
+        "#{element.round(2)}%"
+    end
+
+    def format_datetime(element)
+        element.strftime('%Y-%m-%d %H:%M:%S')
+    end
+end
