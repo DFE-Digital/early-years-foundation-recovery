@@ -54,8 +54,7 @@ RSpec.describe CourseProgress do
       .from(3).to(2)
 
       # complete the first module
-      expect { complete_module(alpha) }
-      .to_not change { course.available_modules.count }
+      expect { complete_module(alpha) }.not_to(change { course.available_modules.count })
 
       # start the second module
       expect { start_module(bravo) }
@@ -63,8 +62,7 @@ RSpec.describe CourseProgress do
       .from(2).to(1)
 
       # complete the second module
-      expect { complete_module(bravo) }
-      .to_not change { course.available_modules.count }
+      expect { complete_module(bravo) }.not_to(change { course.available_modules.count })
 
       expect(course.available_modules.map(&:name)).to eq %w[charlie]
     end
