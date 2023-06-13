@@ -65,9 +65,9 @@ Contentful tasks are namespaced under `eyfs:cms`, list them using `rake --tasks 
 
 We will use 3 [preview](https://app.contentful.com/spaces/dvmeh832nmjc/settings/content_preview) buttons.
 
-For developer use:
-
 **Local**
+
+Used by developers when editing module content, usually demo content.
 
 - **Static Page**: `http://localhost:3000/{entry.fields.name}`
 - **Page**: `http://localhost:3000/modules/{entry.linkedBy.fields.name}/content-pages/{entry.fields.name}`
@@ -75,11 +75,47 @@ For developer use:
 - **Video**: `http://localhost:3000/modules/{entry.linkedBy.fields.name}/content-pages/{entry.fields.name}`
 - **Training Module**: `http://localhost:3000/modules/{entry.fields.name}`
 
-**Development** WIP
+**Development**
 
-For content author use:
+Used by developers when editing demo module content.
 
-**Staging** WIP
+As above replace `http://localhost:3000` with `https://ey-recovery-dev.london.cloudapps.digital`
+
+**Staging**
+
+Used by content editors when editing genuine module content.
+
+As above replace `http://localhost:3000` with `https://ey-recovery-staging.london.cloudapps.digital`
+
+
+## Webhooks
+
+**Common settings**
+
+- Filters: `sys.environment.sys.id` equals `master`
+- Headers: Secret `BOT`
+- Content type: `application/vnd.contentful.management.v1+json`
+- Content length: enabled
+- Payload: default
+
+**1. Preview**
+
+- Name: `Edited content for Staging (preview)`
+- URL: `POST` to `https://ey-recovery-staging.london.cloudapps.digital/change`
+- Content events triggers: `Autosave` of `Entry` or `Asset`
+
+**2. Release**
+
+- Name: `Published content for Production (delivery)`
+- URL: `POST` to `https://ey-recovery.london.cloudapps.digital/release`
+- Other API events: `Release` action `Execute`
+
+**3. Standalone Publishing**
+
+- Name: `Publish standalone immediately`
+- URL: `POST` to `https://ey-recovery.london.cloudapps.digital/change`
+- Content events triggers: `Publish` of `Entry` if `static`
+- Filters: `sys.environment.sys.id` equals `master` and `sys.contentType.sys.id` equals `static`
 
 ## Validations
 

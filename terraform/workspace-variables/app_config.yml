@@ -13,7 +13,6 @@ defaults: &defaults
   GOVUK_APP_DOMAIN: london.cloudapps.digital
   GROVER_NO_SANDBOX: true
   EDITOR: vi
-  CONTENTFUL_ENVIRONMENT: staging # master unless overridden
 
 # ey-recovery
 production:
@@ -32,6 +31,7 @@ staging:
   GOVUK_WEBSITE_ROOT: ey-recovery-staging
   TRACKING_ID: GTM-W6W95FD  # Test data
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-staging
+  CONTENTFUL: false
 
 # ey-recovery-dev
 development:
@@ -40,9 +40,10 @@ development:
   GOVUK_WEBSITE_ROOT: ey-recovery-dev
   TRAINING_MODULES: demo-modules
   # cms
-  # CONTENTFUL_ENVIRONMENT: test # reinstate for pa11y
+  CONTENTFUL_ENVIRONMENT: test
   # jobs
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-development
+  CONTENTFUL: false
 
 # ey-recovery-content
 content:
@@ -51,9 +52,9 @@ content:
   DASHBOARD_UPDATE: false
   # DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # every 5 mins (default: daily at noon)
   # cms
-  # CONTENTFUL_PREVIEW: true
   # CONTENTFUL: false
-  CONTENTFUL_ENVIRONMENT: jack
+  # CONTENTFUL_PREVIEW: true
+  # CONTENTFUL_ENVIRONMENT: test
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
