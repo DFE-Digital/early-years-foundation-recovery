@@ -1,10 +1,10 @@
 class Registration::EarlyYearsEmailsController < Registration::BaseController
   def edit
-    @user_form = Users::DfeEmailsForm.new(user: current_user, early_years_emails: current_user.early_years_emails)
+    @user_form = Users::EarlyYearsEmailsForm.new(user: current_user, early_years_emails: current_user.early_years_emails)
   end
 
   def update
-    @user_form = Users::DfeEmailsForm.new(user_params.merge(user: current_user))
+    @user_form = Users::EarlyYearsEmailsForm.new(user_params.merge(user: current_user))
 
     if @user_form.save
       if current_user.registration_complete?
