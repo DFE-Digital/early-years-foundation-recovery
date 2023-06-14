@@ -109,7 +109,7 @@ module.exports = function(migration) {
   /* Interface -------------------------------------------------------------- */
 
   video.changeFieldControl('heading', 'builtin', 'multipleLine', {
-    helpText: 'foo',
+    helpText: 'h1',
   })
 
   video.changeFieldControl('title', 'builtin', 'multipleLine', {

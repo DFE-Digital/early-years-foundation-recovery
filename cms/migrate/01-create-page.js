@@ -92,19 +92,13 @@ module.exports = function(migration) {
   page.createField('heading', {
     name: 'Heading',
     type: 'Text',
-    required: true,
-    defaultValue: {
-      'en-US': 'page heading',
-    },
+    required: true
   })
 
   page.createField('body', {
     name: 'Body',
     type: 'Text',
-    required: true,
-    defaultValue: {
-      'en-US': 'page body',
-    },
+    required: true
   })
 
   page.createField('notes', {

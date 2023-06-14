@@ -20,15 +20,13 @@ module.exports = function(migration) {
     ]
   })
 
-  trainingModule.createField('depends_on', {
-    name: 'Depends on',
-    type: 'Link',
-    linkType: 'Entry',
+  trainingModule.createField('name', {
+    name: 'Name',
+    type: 'Symbol',
+    required: true,
     validations: [
       {
-        linkContentType: [
-          'trainingModule'
-        ]
+        unique: true
       }
     ]
   })
@@ -40,13 +38,15 @@ module.exports = function(migration) {
     required: true
   })
 
-  trainingModule.createField('name', {
-	  name: 'Name',
-    type: 'Symbol',
-    required: true,
+  trainingModule.createField('depends_on', {
+    name: 'Depends on',
+    type: 'Link',
+    linkType: 'Entry',
     validations: [
       {
-        unique: true
+        linkContentType: [
+          'trainingModule'
+        ]
       }
     ]
   })
@@ -63,6 +63,12 @@ module.exports = function(migration) {
     required: true
   })
 
+  trainingModule.createField('criteria', {
+    name: 'Criteria',
+    type: 'Text',
+    required: true
+  })
+
   // markdown not permitted
   trainingModule.createField('objective', {
     name: 'Objective',
@@ -73,12 +79,6 @@ module.exports = function(migration) {
         prohibitRegexp: { pattern: '\\n' }
       }
     ]
-  })
-
-  trainingModule.createField('criteria', {
-    name: 'Criteria',
-    type: 'Text',
-    required: true
   })
 
   trainingModule.createField('duration', {
@@ -139,6 +139,8 @@ module.exports = function(migration) {
   })
 
   /* Interface -------------------------------------------------------------- */
+
+  trainingModule.changeFieldControl('objective', 'builtin', 'multipleLine')
 
   trainingModule.changeFieldControl('pages', 'builtin', 'entryCardsEditor', {
     helpText: 'Define module content and order here',
