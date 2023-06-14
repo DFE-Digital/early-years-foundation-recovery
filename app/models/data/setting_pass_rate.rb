@@ -7,10 +7,11 @@ module Data
       ['Setting', 'Average Pass Percentage', 'Pass Count', 'Average Fail Percentage', 'Fail Count']
     end
 
-    # @return [?] 
+    # @return [Hash{Symbol => Mixed}] 
     def self.dashboard
       SummativeQuiz.attribute_pass_percentage(:setting_type).map do |setting_type, percentages|
-        percentage[:type] = setting_type
+        percentages[:type] = setting_type
+        percentages
       end
     end
 

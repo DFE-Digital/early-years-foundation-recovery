@@ -3,13 +3,20 @@ require 'rails_helper'
 RSpec.describe Data::SettingPassRate do
   let(:user_1) { create(:user, :registered, :agency_setting) }
   let(:user_2) { create(:user, :registered, :agency_setting) }
+
   let(:headers) do
     ['Setting', 'Average Pass Percentage', 'Pass Count', 'Average Fail Percentage', 'Fail Count']
   end
 
   let(:rows) do
     [
-      ['Childminder as part of an agency', 66.67, 2, 33.33, 1]
+        {
+            fail_count: 1,
+            fail_percentage:33.33333333333334,
+            pass_count: 2,
+            pass_percentage: 66.66666666666666,
+            type: "Childminder as part of an agency"
+        }
     ]
   end
 
@@ -19,5 +26,5 @@ RSpec.describe Data::SettingPassRate do
     create(:user_assessment, :passed, user_id: user_2.id, score: 80, module: 'module_1')
   end
 
-  it_behaves_like('a data export model', headers, rows)
+  it_behaves_like 'a data export model'
 end
