@@ -9,6 +9,7 @@ documentation:
 
 terraform:
 - terraform/**/*
+- terraform-azure/**/*
 
 frontend:
 - app/assets/images/*
