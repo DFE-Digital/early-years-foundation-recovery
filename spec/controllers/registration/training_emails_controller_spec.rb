@@ -18,7 +18,7 @@ RSpec.describe Registration::TrainingEmailsController, type: :controller do
   end
 
   context 'when confirmed user signed in' do
-    let(:confirmed_user) { create :user, :confirmed, :name, :receive_emails }
+    let(:confirmed_user) { create :user, :confirmed, :name, :emails_opt_in }
 
     before { sign_in confirmed_user }
 

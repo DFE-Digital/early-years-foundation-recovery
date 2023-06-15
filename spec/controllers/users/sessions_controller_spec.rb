@@ -4,7 +4,7 @@ RSpec.describe Users::SessionsController, type: :controller do
   before { request.env['devise.mapping'] = Devise.mappings[:user] }
 
   it 'redirects to my modules for registered user' do
-    user = create :user, :registered, :receive_emails
+    user = create :user, :registered, :emails_opt_in
     post :create, params: { user: { email: user.email, password: 'StrongPassword123' } }
     expect(response).to redirect_to(my_modules_path)
   end
