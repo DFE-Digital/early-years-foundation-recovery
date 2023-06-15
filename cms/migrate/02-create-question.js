@@ -123,7 +123,7 @@ module.exports = function(migration) {
 
   /* linked entries */
 
-  page.changeFieldControl('training_module', 'builtin', 'entryLinkEditor', {
+  question.changeFieldControl('training_module', 'builtin', 'entryLinkEditor', {
     helpText: 'Select the module the page belongs to from "Add existing content".',
   })
 
