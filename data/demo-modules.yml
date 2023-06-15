@@ -1,7 +1,7 @@
 ---
 alpha:
   title: First Training Module
-  thumbnail: introduction_to_supporting_physical_development
+  thumbnail: introduction_to_supporting_physical_development.jpg
   short_description: first module description
   description: |
     first module description
@@ -18,7 +18,7 @@ alpha:
 
 bravo:
   title: Second Training Module
-  thumbnail: introduction_to_supporting_physical_development
+  thumbnail: introduction_to_supporting_physical_development.jpg
   short_description: second module description
   description: |
     second module description
@@ -36,7 +36,7 @@ bravo:
 
 charlie:
   title: Third Training Module
-  thumbnail: introduction_to_supporting_physical_development
+  thumbnail: introduction_to_supporting_physical_development.jpg
   short_description: third module description
   description: |
     third module description
@@ -54,7 +54,7 @@ charlie:
 
 delta:
   title: Fourth Training Module
-  thumbnail: introduction_to_supporting_physical_development
+  thumbnail: introduction_to_supporting_physical_development.jpg
   short_description: This module is unpublished and therefore not clickable
   description: |
     This module is unpublished and therefore not clickable
