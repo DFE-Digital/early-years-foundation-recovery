@@ -20,7 +20,7 @@ production:
   <<: *defaults
   DOMAIN: child-development-training.education.gov.uk
   GOVUK_WEBSITE_ROOT: child-development-training
-  TRACKING_ID: GTM-NFZ88TP  # Live data
+  TRACKING_ID: GTM-NFZ88TP # Live data
   HOTJAR_SITE_ID: 3169682
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-live
   CONTENTFUL: false
@@ -30,7 +30,7 @@ staging:
   <<: *defaults
   DOMAIN: ey-recovery-staging.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-staging
-  TRACKING_ID: GTM-W6W95FD  # Test data
+  TRACKING_ID: GTM-W6W95FD # Test data
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-staging
 
 # ey-recovery-dev
@@ -53,7 +53,7 @@ content:
   # cms
   # CONTENTFUL_PREVIEW: true
   # CONTENTFUL: false
-  CONTENTFUL_ENVIRONMENT: jack
+  CONTENTFUL_ENVIRONMENT: staging
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
