@@ -49,6 +49,5 @@ FactoryBot.define do
       training_emails { false }
       early_years_emails { false }
     end
-    
   end
 end
