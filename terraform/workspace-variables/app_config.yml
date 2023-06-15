@@ -53,7 +53,7 @@ content:
   # cms
   # CONTENTFUL_PREVIEW: true
   CONTENTFUL: false
-  CONTENTFUL_ENVIRONMENT: staging
+  CONTENTFUL_ENVIRONMENT: jack
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
