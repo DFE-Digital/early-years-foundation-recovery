@@ -31,19 +31,23 @@ staging:
   GOVUK_WEBSITE_ROOT: ey-recovery-staging
   TRACKING_ID: GTM-W6W95FD  # Test data
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-staging
+  # cms
   CONTENTFUL: false
+  CONTENTFUL_ENVIRONMENT: staging
+  CONTENTFUL_PREVIEW: true
 
 # ey-recovery-dev
 development:
   <<: *defaults
   DOMAIN: ey-recovery-dev.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-dev
+  # yaml
   TRAINING_MODULES: demo-modules
   # cms
   CONTENTFUL_ENVIRONMENT: test
+  CONTENTFUL_PREVIEW: true
   # jobs
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-development
-  CONTENTFUL: false
 
 # ey-recovery-content
 content:
@@ -52,9 +56,8 @@ content:
   DASHBOARD_UPDATE: false
   # DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # every 5 mins (default: daily at noon)
   # cms
-  # CONTENTFUL: false
-  # CONTENTFUL_PREVIEW: true
-  # CONTENTFUL_ENVIRONMENT: test
+  CONTENTFUL_ENVIRONMENT: test
+  #
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
   # GOVUK_WEBSITE_ROOT: xxx
