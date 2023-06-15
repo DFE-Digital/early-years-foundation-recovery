@@ -1,5 +1,5 @@
 RSpec.shared_context 'with progress' do
-  let(:user) { create(:user, :registered, :email_opt_in) }
+  let(:user) { create(:user, :registered, :receive_emails) }
   let(:tracker) { Ahoy::Tracker.new(user: user, controller: 'content_pages') }
 
   # Contentful ===================================================================================================

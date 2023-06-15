@@ -40,7 +40,7 @@ FactoryBot.define do
       display_whats_new { true }
     end
 
-    trait :email_opt_in do
+    trait :receive_emails do
       training_emails { true }
       early_years_emails { true }
     end

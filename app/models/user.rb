@@ -248,6 +248,11 @@ class User < ApplicationRecord
   end
 
   # @return [Boolean]
+  def email_preferences_complete?
+    training_emails && early_years_emails
+  end
+
+  # @return [Boolean]
   def private_beta_registration_complete?
     !!private_beta_registration_complete
   end
