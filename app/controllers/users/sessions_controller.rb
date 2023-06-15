@@ -9,7 +9,7 @@ protected
         resource.display_whats_new = false
         resource.save!
         static_path('whats-new')
-      elsif !resource.email_preferences_complete?
+      elsif resource.email_preferences_complete?
         email_preferences_path
       else
         my_modules_path
