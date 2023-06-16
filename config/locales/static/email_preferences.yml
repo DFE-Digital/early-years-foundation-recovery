@@ -3,5 +3,8 @@ en:
   pages:
     email_preferences:
       heading: Update your email preferences
-      body: Tell us which emails you would like to receive from us.
-      button: Continue
+      body: |
+        <div class='govuk-!-margin-bottom-8'>
+          Tell us which emails you would like to receive from us.
+        </div>
+        <a class='govuk-button' href='registration/training-emails/edit'>Continue</a>

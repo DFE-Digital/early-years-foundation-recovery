@@ -16,7 +16,7 @@ private
   # TODO: potential for CMS entry to control this
   # @return [Boolean]
   def restricted?
-    %w[whats-new].include? page_params[:id]
+    %w[whats-new email-preferences].include? page_params[:id]
   end
 
   # TODO: deprecate @module_item required for #html_title
