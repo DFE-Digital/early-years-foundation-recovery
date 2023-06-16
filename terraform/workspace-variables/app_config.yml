@@ -32,7 +32,7 @@ staging:
   TRACKING_ID: GTM-W6W95FD  # Test data
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-staging
   # cms
-  CONTENTFUL: false
+  # CONTENTFUL: false
   CONTENTFUL_ENVIRONMENT: staging
   CONTENTFUL_PREVIEW: true
 
