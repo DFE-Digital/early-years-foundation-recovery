@@ -19,7 +19,7 @@ RSpec.describe Users::SessionsController, type: :controller do
     it 'redirects to update email preferences' do
       user = create :user, :registered
       post :create, params: { user: { email: user.email, password: 'StrongPassword123' } }
-      expect(response).to redirect_to("/email-preferences")
+      expect(response).to redirect_to('/email-preferences')
     end
   end
 
