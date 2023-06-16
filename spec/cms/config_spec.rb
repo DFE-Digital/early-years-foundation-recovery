@@ -8,7 +8,7 @@ RSpec.describe 'Contentful configuration', :cms do
   end
 
   it 'tests against CMS content' do
-    expect(Rails.application.cms?).to be true
+    expect(Rails.application).to be_cms
   end
 
   it 'tests against demo content' do
@@ -17,7 +17,7 @@ RSpec.describe 'Contentful configuration', :cms do
   end
 
   it 'tests against published content' do
-    expect(Rails.application.preview?).to be false
+    expect(Rails.application).not_to be_preview
   end
 
   it 'authenticates using credentials' do

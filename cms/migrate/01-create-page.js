@@ -92,19 +92,13 @@ module.exports = function(migration) {
   page.createField('heading', {
     name: 'Heading',
     type: 'Text',
-    required: true,
-    defaultValue: {
-      'en-US': 'page heading',
-    },
+    required: true
   })
 
   page.createField('body', {
     name: 'Body',
     type: 'Text',
-    required: true,
-    defaultValue: {
-      'en-US': 'page body',
-    },
+    required: true
   })
 
   page.createField('notes', {
@@ -118,7 +112,35 @@ module.exports = function(migration) {
 
   /* Interface -------------------------------------------------------------- */
 
-  page.changeFieldControl('heading', 'builtin', 'multipleLine')
+  /* linked entries */
+
+  page.changeFieldControl('training_module', 'builtin', 'entryLinkEditor', {
+    helpText: 'Select the module the page belongs to from "Add existing content".',
+  })
+
+  /* text */
+
+  page.changeFieldControl('heading', 'builtin', 'multipleLine', {
+    helpText: 'Page heading, h1.',
+  })
+
+  /* markdown */
+
+  page.changeFieldControl('body', 'builtin', 'markdown', {
+    helpText: 'All page content including sub-headings, bullet points and images.',
+  })
+
+  /* number */
+
+  page.changeFieldControl('submodule', 'builtin', 'numberEditor', {
+    helpText: 'Select the sub-module number the page belongs to, the second number of the page name.'
+  })
+
+  page.changeFieldControl('topic', 'builtin', 'numberEditor', {
+    helpText: 'Select the topic number the page belongs to, the third number in the page name.'
+  })
+
+  /* toggle */
 
   page.changeFieldControl('notes', 'builtin', 'boolean', {
     helpText: 'Use Learning Log to take notes?',
