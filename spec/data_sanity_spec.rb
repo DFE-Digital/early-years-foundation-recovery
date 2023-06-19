@@ -40,9 +40,9 @@ RSpec.describe 'Module content' do
     let(:type) { 'formative_questionnaire' }
 
     specify do
-      expect(questions['alpha'].count).to be 3
-      expect(questions['bravo'].count).to be 1
-      expect(questions['charlie'].count).to be 1
+      expect(questions['alpha'].count).to be 5
+      expect(questions['bravo'].count).to be 5
+      expect(questions['charlie'].count).to be 5
 
       expect(questions['child-development-and-the-eyfs'].count).to be 17
       expect(questions['brain-development-and-how-children-learn'].count).to be 22
@@ -61,9 +61,9 @@ RSpec.describe 'Module content' do
     let(:type) { 'summative_questionnaire' }
 
     specify do
-      expect(questions['alpha'].count).to be 4
-      expect(questions['bravo'].count).to be 2
-      expect(questions['charlie'].count).to be 2
+      expect(questions['alpha'].count).to be 10
+      expect(questions['bravo'].count).to be 10
+      expect(questions['charlie'].count).to be 10
 
       expect(questions['child-development-and-the-eyfs'].count).to be 10
       expect(questions['brain-development-and-how-children-learn'].count).to be 10
@@ -71,7 +71,7 @@ RSpec.describe 'Module content' do
       expect(questions['module-4'].count).to be 10
       expect(questions['module-5'].count).to be 10
 
-      expect(questions_total).to be 58
+      expect(questions_total).to be 80
     end
   end
 
@@ -82,9 +82,9 @@ RSpec.describe 'Module content' do
     let(:type) { 'confidence_questionnaire' }
 
     specify do
-      expect(questions['alpha'].count).to be 3
-      expect(questions['bravo'].count).to be 3
-      expect(questions['charlie'].count).to be 3
+      expect(questions['alpha'].count).to be 4
+      expect(questions['bravo'].count).to be 4
+      expect(questions['charlie'].count).to be 4
 
       expect(questions['child-development-and-the-eyfs'].count).to be 5
       expect(questions['brain-development-and-how-children-learn'].count).to be 4
@@ -92,7 +92,7 @@ RSpec.describe 'Module content' do
       expect(questions['module-4'].count).to be 6
       expect(questions['module-5'].count).to be 5
 
-      expect(questions_total).to be 35
+      expect(questions_total).to be 38
     end
   end
 end

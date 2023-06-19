@@ -157,32 +157,32 @@ class ContentfulDataIntegrity
 
   # @return [Boolean] first page
   def interruption?
-    page_by_type_position(type: 'interruption_page', position: 0)
+    page_found?(type: 'interruption_page', position: 0)
   end
 
   # @return [Boolean] second page
   def submodule?
-    page_by_type_position(type: 'sub_module_intro', position: 1)
+    page_found?(type: 'sub_module_intro', position: 1)
   end
 
   # @return [Boolean] penultimate page
   def thankyou?
-    page_by_type_position(type: 'thankyou', position: -2)
+    page_found?(type: 'thankyou', position: -2)
   end
 
   # @return [Boolean] last page
   def certificate?
-    page_by_type_position(type: 'certificate', position: -1)
+    page_found?(type: 'certificate', position: -1)
   end
 
   # @return [Boolean]
   def text?
-    page_by_type_position(type: 'text_page')
+    page_found?(type: 'text_page')
   end
 
   # @return [Boolean]
   def video?
-    page_by_type_position(type: 'video_page')
+    page_found?(type: 'video_page')
   end
 
   # @return [Boolean]
@@ -192,43 +192,43 @@ class ContentfulDataIntegrity
 
   # @return [Boolean]
   def formative?
-    page_by_type_position(type: 'formative_questionnaire')
+    page_found?(type: 'formative_questionnaire')
   end
 
   # 'Brain development and how children learn' has fewest
-  # @return [Boolean] demo modules have fewer questions than genuine content
+  # @return [Boolean]
   def confidence?
-    demo? || mod.page_by_type('confidence_questionnaire').count >= 4
+    mod.page_by_type('confidence_questionnaire').count >= 4
   end
 
-  # @return [Boolean] demo modules have fewer questions than genuine content
+  # @return [Boolean]
   def summative?
-    demo? || mod.page_by_type('summative_questionnaire').count.eql?(10)
+    mod.page_by_type('summative_questionnaire').count.eql?(10)
   end
 
   # @return [Boolean]
   def recap?
-    page_by_type_position(type: 'recap_page')
+    page_found?(type: 'recap_page')
   end
 
   # @return [Boolean]
   def summary_intro?
-    page_by_type_position(type: 'summary_intro')
+    page_found?(type: 'summary_intro')
   end
 
   # @return [Boolean]
   def assessment_intro?
-    page_by_type_position(type: 'assessment_intro')
+    page_found?(type: 'assessment_intro')
   end
 
   # @return [Boolean]
   def confidence_intro?
-    page_by_type_position(type: 'confidence_intro')
+    page_found?(type: 'confidence_intro')
   end
 
   # @return [Boolean]
   def results?
-    page_by_type_position(type: 'assessment_results')
+    page_found?(type: 'assessment_results')
   end
 
 private
@@ -289,7 +289,10 @@ private
     end
   end
 
-  def page_by_type_position(type:, position: nil)
+  # @param type [String]
+  # @param position [Integer]
+  # @return [Boolean]
+  def page_found?(type:, position: nil)
     return mod.content.map(&:page_type).any?(type) unless position
 
     mod.content[position].page_type.eql?(type)

@@ -16,3 +16,8 @@ alpha:
     questions:
       alpha_confidence_question_three:
         label: Question Three - Select from 1 to 5
+
+  1-3-3-3:
+    questions:
+      alpha_confidence_question_four:
+        label: Question Three - Select from 1 to 5
