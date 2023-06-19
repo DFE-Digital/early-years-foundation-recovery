@@ -1,66 +1,61 @@
 ---
 alpha:
-  title: First Training Module
-  thumbnail: introduction_to_supporting_physical_development.jpg
-  short_description: first module description
+  title: Contentful CMS
+  thumbnail: ecosystem_thumbnail.jpg
+  short_description: How 'Child development training' uses a content management system
   description: |
-    first module description
+    Contentful is the Department for Education's approved Content Management System.
 
-    paragraph two
-  objective: first module objective
+  objective: Understand the ecosystem and moving parts
   criteria: |
     - first thing
     - second thing
     - third thing
     - final thing
-  duration: 3
+  duration: 0.5
   summative_threshold: 70
 
 bravo:
-  title: Second Training Module
-  thumbnail: introduction_to_supporting_physical_development.jpg
-  short_description: second module description
+  title: Authoring a training module
+  thumbnail: writing_thumbnail.jpg
+  short_description: How to create new course content
   description: |
     second module description
 
     paragraph two
-  objective: second module objective
+  objective: Building a module in the CMS
   criteria: |
     - first thing
     - second thing
     - third thing
     - final thing
   depends_on: # alpha
-  duration: 3
-  summative_threshold: 70
+  duration: 1
+  summative_threshold: 100
 
 charlie:
-  title: Third Training Module
-  thumbnail: introduction_to_supporting_physical_development.jpg
-  short_description: third module description
+  title: Release workflow
+  thumbnail: release_thumbnail.jpg
+  short_description: How to publish new modules and content changes
   description: |
-    third module description
-
-    paragraph two
-  objective: third module objective
+    Our content release strategy employs....
+  objective: Releasing changes to the public
   criteria: |
-    - first thing
-    - second thing
-    - third thing
-    - final thing
+    - Difference between stand-alone pages and modules
+    - Webhooks
+    -
   depends_on: # bravo
-  duration: 3
-  summative_threshold: 70
+  duration: 1
+  summative_threshold: 100
+
 
 delta:
-  title: Fourth Training Module
+  title: An example of a upcoming module
   thumbnail: introduction_to_supporting_physical_development.jpg
   short_description: This module is unpublished and therefore not clickable
   description: |
     This module is unpublished and therefore not clickable
-
-    paragraph two
-  objective: fourth module objective
+  objective: work in progress
   criteria: |
     - first thing
     - second thing
