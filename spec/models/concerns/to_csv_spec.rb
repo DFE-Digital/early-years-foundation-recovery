@@ -41,5 +41,32 @@ RSpec.describe ToCsv do
         expect(klass.to_csv).to eq("\n")
       end
     end
+
+    context 'when given column names and long, complex hash data' do
+      subject(:klass) do
+        Class.new do
+          include ToCsv
+          def self.column_names
+            ['Custom Column 1', 'Custom Column Percentage', 'Custom Column 2', 'Custom Column 3']
+        end
+        def self.dashboard
+          {
+            'Custom Column 1' => ['data_1', 'data_2'],
+            'Custom Column percentage' => [0.5, 0.5],
+            'Custom Column 2' => ['data_3', 'data_4'],
+            'Custom Column 3' => ['data_5', 'data_6']
+          }
+        end
+      end
+
+      end
+
+      it 'returns a csv string' do
+        expect(klass.to_csv).to eq("Custom Column 1,Custom Column Percentage,Custom Column 2,Custom Column 3\ndata_1,0.5%,data_3,data_5\ndata_2,0.5%,data_4,data_6\n")
+      end
+
+    end
+
+
   end
 end
