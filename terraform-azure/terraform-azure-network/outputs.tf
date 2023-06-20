@@ -3,12 +3,12 @@ output "vnet_id" {
   value       = azurerm_virtual_network.vnet.id
 }
 
-output "db_subnet_id" {
-  description = "ID of the delegated Subnet for the Database"
-  value       = azurerm_subnet.db_snet.id
+output "psqlfs_subnet_id" {
+  description = "ID of the delegated Subnet for the Database Server"
+  value       = azurerm_subnet.psqlfs_snet.id
 }
 
-output "db_dns_zone_id" {
-  description = "ID of the Private DNS Zone for the Database"
-  value       = azurerm_private_dns_zone.db_dnsz.id
+output "psqlfs_dns_zone_id" {
+  description = "ID of the Private DNS Zone for the Database Server"
+  value       = azurerm_private_dns_zone.psqlfs_dnsz.id
 }
