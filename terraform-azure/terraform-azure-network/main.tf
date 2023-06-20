@@ -32,7 +32,7 @@ resource "azurerm_private_dns_zone" "db_dnsz" {
 
 # Link the Private DNS Zone to the Virtual Network
 resource "azurerm_private_dns_zone_virtual_network_link" "db_dnsz_vnetl" {
-  name                  = "${var.resource_name_prefix}-db-dnszl"
+  name                  = "${var.resource_name_prefix}-db-dnsz-vnetl"
   private_dns_zone_name = azurerm_private_dns_zone.db_dnsz.name
   virtual_network_id    = azurerm_virtual_network.vnet.id
   resource_group_name   = var.resource_group
