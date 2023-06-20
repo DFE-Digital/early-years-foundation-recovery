@@ -24,3 +24,12 @@ resource "azurerm_resource_group" "rg" {
   tags = merge(local.common_tags, {
   })
 }
+
+# Create Network related resources
+module "network" {
+  source = "./terraform-azure-network"
+
+  location             = var.default_azure_region
+  resource_group       = azurerm_resource_group.rg.name
+  resource_name_prefix = var.resource_name_prefix
+}
