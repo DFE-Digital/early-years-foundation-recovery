@@ -22,7 +22,6 @@ module Caching
   # memoise latest release timestamp & prevent cache overload
   # (increase as CMS entries/assets grow)
   #
-  # @see HomeController#index
   # @return [String] old key
   def reset_cache_key!
     cache.clear if cache.size > 2_000

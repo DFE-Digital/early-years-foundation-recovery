@@ -10,7 +10,7 @@ class ContentfulDataIntegrity
   # @return [Hash{Symbol=>String}] valid as upcoming module
   MODULE_VALIDATIONS = {
     criteria: 'Missing criteria',
-    dependent: 'Missing dependent module',
+    # dependent: 'Missing dependent module',
     description: 'Missing description',
     duration: 'Missing duration',
     objective: 'Missing objective',
@@ -131,10 +131,10 @@ class ContentfulDataIntegrity
     mod.fields[:criteria].present?
   end
 
-  # @return [Boolean]
-  def dependent?
-    mod.fields[:position].eql?(1) || mod.fields[:depends_on].present?
-  end
+  # # @return [Boolean]
+  # def dependent?
+  #   mod.fields[:position].eql?(1) || mod.fields[:depends_on].present?
+  # end
 
   # CONTENT VALIDATIONS --------------------------------------------------------
 

@@ -12,7 +12,12 @@ module.exports = function(migration) {
   question.createField('name', {
     name: 'Name',
     type: 'Symbol',
-    required: true
+    required: true,
+    validations: [
+      {
+        prohibitRegexp: { pattern: '\\.|\\s|[A-Z]' }
+      }
+    ]
   })
 
   // type
@@ -115,8 +120,41 @@ module.exports = function(migration) {
 
   /* Interface -------------------------------------------------------------- */
 
+
+  /* linked entries */
+
+  question.changeFieldControl('training_module', 'builtin', 'entryLinkEditor', {
+    helpText: 'Select the module the page belongs to from "Add existing content".',
+  })
+
+  /* JSON */
+
   question.changeFieldControl('answers', 'builtin', 'objectEditor', {
-    helpText: 'An array of arrays: add true for correct options',
+    helpText: '[["Wrong answer"],["Correct answer", true]]',
+  })
+
+  /* text */
+
+  question.changeFieldControl('body', 'builtin', 'multipleLine', {
+    helpText: 'Insert question.'
+  })
+
+  question.changeFieldControl('success_message', 'builtin', 'multipleLine', {
+    helpText: 'Displayed after "That’s right" if the user selects the correct answer.'
+  })
+
+  question.changeFieldControl('failure_message', 'builtin', 'multipleLine', {
+    helpText: 'Displayed after "That’s not quite right" if the user selects the wrong answer.'
+  })
+
+  /* number */
+
+  question.changeFieldControl('submodule', 'builtin', 'numberEditor', {
+    helpText: 'Select the sub-module number the page belongs to, the second number of the page name.'
+  })
+
+  question.changeFieldControl('topic', 'builtin', 'numberEditor', {
+    helpText: 'Select the topic number the page belongs to, the third number in the page name.'
   })
 
 }

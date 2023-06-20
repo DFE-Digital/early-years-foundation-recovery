@@ -20,15 +20,13 @@ module.exports = function(migration) {
     ]
   })
 
-  trainingModule.createField('depends_on', {
-    name: 'Depends on',
-    type: 'Link',
-    linkType: 'Entry',
+  trainingModule.createField('name', {
+    name: 'Name',
+    type: 'Symbol',
+    required: true,
     validations: [
       {
-        linkContentType: [
-          'trainingModule'
-        ]
+        unique: true
       }
     ]
   })
@@ -40,13 +38,15 @@ module.exports = function(migration) {
     required: true
   })
 
-  trainingModule.createField('name', {
-	  name: 'Name',
-    type: 'Symbol',
-    required: true,
+  trainingModule.createField('depends_on', {
+    name: 'Depends on',
+    type: 'Link',
+    linkType: 'Entry',
     validations: [
       {
-        unique: true
+        linkContentType: [
+          'trainingModule'
+        ]
       }
     ]
   })
@@ -63,24 +63,22 @@ module.exports = function(migration) {
     required: true
   })
 
+  trainingModule.createField('criteria', {
+    name: 'Criteria',
+    type: 'Text',
+    required: true
+  })
+
+  // markdown not permitted
   trainingModule.createField('objective', {
     name: 'Objective',
     type: 'Text',
     required: true,
     validations: [
       {
-        prohibitRegexp: {
-          pattern: '\\n',
-          message: 'Markdown is not permitted'
-        }
+        prohibitRegexp: { pattern: '\\n' }
       }
     ]
-  })
-
-  trainingModule.createField('criteria', {
-    name: 'Criteria',
-    type: 'Text',
-    required: true
   })
 
   trainingModule.createField('duration', {
@@ -88,7 +86,7 @@ module.exports = function(migration) {
     type: 'Number',
     required: true,
     defaultValue: {
-      'en-US': 1,
+      'en-US': 2,
     },
     validations: [
       {
@@ -117,7 +115,7 @@ module.exports = function(migration) {
     required: true,
     validations: [
       {
-        range: { min: 1 }
+        range: { min: 1, max: 9 }
       }
     ]
   })
@@ -142,8 +140,56 @@ module.exports = function(migration) {
 
   /* Interface -------------------------------------------------------------- */
 
-  trainingModule.changeFieldControl('pages', 'builtin', 'entryLinksEditor', {
-    helpText: 'Define module content and order here',
+  trainingModule.changeFieldControl('title', 'builtin', 'singleLine', {
+    helpText: 'Title of module'
+  })
+
+  /* markdown */
+
+  trainingModule.changeFieldControl('description', 'builtin', 'markdown', {
+    helpText: 'A lead in sentence about the content. Followed by "On completion of this module you will be able to:" then add bullet points.'
+  })
+
+  trainingModule.changeFieldControl('criteria', 'builtin', 'markdown', {
+    helpText: 'Bullet points which follow on from the sentence "This module covers:".'
+  })
+
+  trainingModule.changeFieldControl('short_description', 'builtin', 'markdown', {
+    helpText: 'Title of module'
+  })
+
+  /* text */
+
+  trainingModule.changeFieldControl('objective', 'builtin', 'multipleLine', {
+    helpText: 'One or two sentence that describes what the module is about. Usual starts with "This module explores..."'
+  })
+
+  /* number */
+
+  trainingModule.changeFieldControl('duration', 'builtin', 'numberEditor', {
+    helpText: 'Select number of hours to complete the module.'
+  })
+
+  trainingModule.changeFieldControl('position', 'builtin', 'numberEditor', {
+    helpText: 'Order of the module.'
+  })
+
+  trainingModule.changeFieldControl('summative_threshold', 'builtin', 'numberEditor', {
+    helpText: 'Percentage required to pass assessment.'
+  })
+
+  /* linked entries */
+
+  trainingModule.changeFieldControl('depends_on', 'builtin', 'entryLinkEditor', {
+    helpText: 'Leave blank if you don’t have to have completed a previous module to start this module.',
+  })
+
+  trainingModule.changeFieldControl('image', 'builtin', 'assetLinkEditor', {
+    helpText: 'Select thumbnail image.',
+  })
+
+  trainingModule.changeFieldControl('pages', 'builtin', 'entryCardsEditor', {
+    helpText: 'Define module content and order here.',
   })
 
 }
