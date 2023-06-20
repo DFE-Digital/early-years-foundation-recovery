@@ -1,21 +1,28 @@
 module Data
   class ResitsPerUser
     include ToCsv
-    include Percentage
 
+    # @return [Array<String>]
     def self.column_names
       ['Module', 'User ID', 'Role', 'Resit Attempts']
     end
 
+    # @return [Hash{Symbol => Mixed}]
     def self.dashboard
       user_roles = User.pluck(:id, :role_type).to_h
-      data = resit_attempts_per_user.flat_map do |module_name, user_attempts|
-        user_attempts.map do |user_id, attempts|
+      data = Hash.new { |hash, key| hash[key] = [] }
+
+      resit_attempts_per_user.each do |module_name, user_attempts|
+        user_attempts.each do |user_id, attempts|
           role_type = user_roles[user_id]
-          [module_name, user_id, role_type, attempts]
+          data[:module_name] << module_name
+          data[:user_id] << user_id
+          data[:role_type] << role_type
+          data[:resit_attempts] << attempts
         end
       end
-      format_percentages(data)
+
+      data
     end
 
     # @return [Hash{Symbol => Hash{Integer => Integer}}]

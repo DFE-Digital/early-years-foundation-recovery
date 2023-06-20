@@ -10,14 +10,20 @@ RSpec.describe Data::RolePassRate do
 
   let(:rows) do
     [
-      ['childminder', 66.67, 2, 33.33, 1],
+      {
+        fail_count: 1,
+        fail_percentage: 33.33333333333334,
+        pass_count: 2,
+        pass_percentage: 66.66666666666666,
+        type: 'childminder',
+      },
     ]
   end
 
   before do
-    let(:assessment_pass_1) { create(:user_assessment, :passed, user_id: user_1.id, score: 100, module: 'module_1') }
-    let(:assessment_fail_1) { create(:user_assessment, :failed, user_id: user_1.id, score: 0, module: 'module_1') }
-    let(:assessment_pass_2) { create(:user_assessment, :passed, user_id: user_2.id, score: 80, module: 'module_1') }
+    create(:user_assessment, :passed, user_id: user_1.id, score: 100, module: 'module_1')
+    create(:user_assessment, :failed, user_id: user_1.id, score: 0, module: 'module_1')
+    create(:user_assessment, :passed, user_id: user_2.id, score: 80, module: 'module_1')
   end
 
   it_behaves_like('a data export model')

@@ -3,29 +3,30 @@ module Data
     include ToCsv
 
     # @return [String]
-    def self.to_csv
-      new.generate_csv
+    def self.column_names
+      ['Local Authority', 'Users']
     end
 
-    # @return [String]
-    def generate_csv
-      CSV.generate do |csv|
-        csv << ['Local Authority', 'Users']
-        count_by_local_authority.each do |local_authority, count|
-          csv << [local_authority, count]
-        end
+    # @return [Hash{Symbol => Mixed}]
+    def self.dashboard
+      data = {
+        local_authority: [],
+        users: [],
+      }
+      count_by_local_authority.each do |local_authority, count|
+        data[:local_authority] << local_authority
+        data[:users] << count
       end
+      data
     end
-
-  private
 
     # @return [Hash{Symbol=>Integer}]
-    def count_by_local_authority
+    def self.count_by_local_authority
       public_beta_users.group(:local_authority).count
     end
 
     # @return [ActiveRecord::Relation<User>]
-    def public_beta_users
+    def self.public_beta_users
       User.since_public_beta.with_local_authority
     end
   end

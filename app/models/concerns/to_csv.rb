@@ -1,11 +1,7 @@
 require 'csv'
 
-
-
 module ToCsv
   extend ActiveSupport::Concern
-
-
 
   class_methods do
     def dashboard
@@ -18,21 +14,20 @@ module ToCsv
 
     # @return [String]
     def to_csv
-      puts "dashboard #{dashboard}"
-      decorator = CoercionDecorator.new(dashboard)
-      formatted = decorator.call
+      formatted = CoercionDecorator.new(dashboard).call
       CSV.generate(headers: true) do |csv|
         csv << column_names
-        if dashboard.is_a?(Array)
+
+        case dashboard
+        when Array
           formatted.each { |record| csv << record }
-        elsif dashboard.is_a?(Hash)
+        when Hash
           rows = formatted.values.transpose
           rows.each { |row| csv << row }
         else
           dashboard.find_each(batch_size: 1_000) { |record| csv << record.dashboard_attributes.values }
+        end
       end
-
-    end
     end
   end
 
@@ -40,10 +35,11 @@ module ToCsv
     # Timestamps in the format "2023-01-11 12:52:22"
     # @return [Hash] coerce attributes prior to export
     def dashboard_attributes
-      params = data_attributes.dup
+      data_attributes.dup
     end
 
   private
+
     def data_attributes
       attributes
     end

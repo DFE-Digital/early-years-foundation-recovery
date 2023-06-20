@@ -8,10 +8,19 @@ module Data
       ['Module', 'Question', 'Failure Rate Percentage']
     end
 
-    # @return [Array<Array<String>>]
+    # @return [Hash{Symbol => Mixed}]
     def self.dashboard
-      data = high_fail_questions.map { |(module_name, question_name), fail_rate| [module_name, question_name, fail_rate] }
-      format_percentages(data)
+      data = {
+        module_name: [],
+        question_name: [],
+        fail_rate_percentage: [],
+      }
+      high_fail_questions.each do |(module_name, question_name), fail_rate|
+        data[:module_name] << module_name
+        data[:question_name] << question_name
+        data[:fail_rate_percentage] << fail_rate
+      end
+      data
     end
 
     # @return [Hash{Symbol => Float, Array<Array<String, String>> => Float}]

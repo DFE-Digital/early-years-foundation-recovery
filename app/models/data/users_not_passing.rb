@@ -1,15 +1,23 @@
 module Data
   class UsersNotPassing
     include ToCsv
-    include Percentage
 
+    # @return [Array<String>]
     def self.column_names
       ['Module', 'Total Users Not Passing']
     end
 
+    # @return [Hash{Symbol => Array}]
     def self.dashboard
-      data = total_users_not_passing_per_module.map { |module_name, total_users| [module_name, total_users] }
-      format_percentages(data)
+      data = {
+        module_name: [],
+        count: [],
+      }
+      total_users_not_passing_per_module.map do |module_name, count|
+        data[:module_name] << module_name
+        data[:count] << count
+      end
+      data
     end
 
     # @return [Hash{String => Integer}]

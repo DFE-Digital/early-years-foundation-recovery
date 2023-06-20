@@ -18,7 +18,7 @@ RSpec.describe Ahoy::Event, type: :model do
     it 'exports formatted attributes as CSV' do
       expect(described_class.to_csv).to eq <<~CSV
         id,visit_id,user_id,name,properties,time
-        1,2,1,module_start,"{""foo""=>""bar""}",2023-01-12 10:15:59
+        1,2,1,module_start,"{""foo""=>""bar""}",2023-01-12 10:15:59 UTC
       CSV
     end
   end

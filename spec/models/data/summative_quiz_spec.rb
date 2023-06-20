@@ -16,8 +16,8 @@ RSpec.describe Data::SummativeQuiz do
         expect(assessment_fail_1.score).to eq('0')
         expect(assessment_pass_2.score).to eq('80')
         expect(assessment_fail_2.score).to eq('0')
-        expect(described_class.attribute_pass_percentage(:role_type)).to eq({ 'childminder' => { pass: 50.0, pass_count: 2, fail: 50.0, fail_count: 2 } })
-        expect(described_class.attribute_pass_percentage(:setting_type)).to eq({ 'Childminder as part of an agency' => { pass: 50.0, pass_count: 2, fail: 50.0, fail_count: 2 } })
+        expect(described_class.attribute_pass_percentage(:role_type)).to eq({ 'childminder' => { fail_count: 2, fail_percentage: 50.0, pass_count: 2, pass_percentage: 50.0 } })
+        expect(described_class.attribute_pass_percentage(:setting_type)).to eq({ 'Childminder as part of an agency' => { fail_count: 2, fail_percentage: 50.0, pass_count: 2, pass_percentage: 50.0 } })
       end
     end
   end
