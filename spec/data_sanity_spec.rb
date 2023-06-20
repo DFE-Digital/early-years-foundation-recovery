@@ -48,8 +48,9 @@ RSpec.describe 'Module content' do
       expect(questions['brain-development-and-how-children-learn'].count).to be 22
       expect(questions['personal-social-and-emotional-development'].count).to be 19
       expect(questions['module-4'].count).to be 19
+      expect(questions['module-5'].count).to be 13
 
-      expect(questions_total).to be 82
+      expect(questions_total).to be 95
     end
   end
 
@@ -68,8 +69,9 @@ RSpec.describe 'Module content' do
       expect(questions['brain-development-and-how-children-learn'].count).to be 10
       expect(questions['personal-social-and-emotional-development'].count).to be 10
       expect(questions['module-4'].count).to be 10
+      expect(questions['module-5'].count).to be 10
 
-      expect(questions_total).to be 48
+      expect(questions_total).to be 58
     end
   end
 
@@ -88,8 +90,9 @@ RSpec.describe 'Module content' do
       expect(questions['brain-development-and-how-children-learn'].count).to be 4
       expect(questions['personal-social-and-emotional-development'].count).to be 6
       expect(questions['module-4'].count).to be 6
+      expect(questions['module-5'].count).to be 5
 
-      expect(questions_total).to be 30
+      expect(questions_total).to be 35
     end
   end
 end

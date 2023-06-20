@@ -5,22 +5,13 @@ module Training
       'question'
     end
 
-    # @return [Array<Array>]
-    CONFIDENCE_OPTIONS = [
-      ['Strongly agree', true],
-      ['Agree', true],
-      ['Neither agree nor disagree', true],
-      ['Disagree', true],
-      ['Strongly disagree', true],
-    ].freeze
-
     # @see Answer
     delegate :options, :correct_answers, to: :answer
 
-    # @raise [Dry::Struct::Error] if JSON is invalid
+    # @raise [Dry::Struct::Error]
     # @return [Training::Answer]
     def answer
-      @answer ||= Answer.new(json: confidence_question? ? CONFIDENCE_OPTIONS : fields[:answers])
+      @answer ||= Answer.new(json: json)
     end
 
     # @return [Hash{Symbol => nil, Integer}]
@@ -111,6 +102,31 @@ module Training
       else
         'Next'
       end
+    end
+
+  private
+
+    # @return [Array<Array>]
+    CONFIDENCE_OPTIONS = [
+      ['Strongly agree', true],
+      ['Agree', true],
+      ['Neither agree nor disagree', true],
+      ['Disagree', true],
+      ['Strongly disagree', true],
+    ].freeze
+
+    # @note Default values are not available to Contentful JSON fields
+    # @return [Array<Array>]
+    DRAFT_OPTIONS = [
+      ['Wrong answer'],
+      ['Correct answer', true],
+    ].freeze
+
+    # @return [Array<Array>]
+    def json
+      return CONFIDENCE_OPTIONS if confidence_question?
+
+      fields[:answers] || DRAFT_OPTIONS
     end
   end
 end

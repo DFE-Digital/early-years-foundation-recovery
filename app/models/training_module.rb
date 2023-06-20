@@ -203,7 +203,7 @@ class TrainingModule < YamlBase
       description: description,
       duration: duration,
       summative_threshold: summative_threshold,
-      objective: objective,
+      objective: objective&.strip,
       criteria: criteria,
       position: id,
     }

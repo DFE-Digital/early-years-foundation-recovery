@@ -12,14 +12,31 @@ module.exports = function(migration) {
   question.createField('name', {
     name: 'Name',
     type: 'Symbol',
-    required: true
+    required: true,
+    validations: [
+      {
+        prohibitRegexp: { pattern: '\\.|\\s|[A-Z]' }
+      }
+    ]
   })
 
   // type
   question.createField('page_type', {
     name: 'Page type',
     type: 'Symbol',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 'formative_questionnaire',
+    },
+    validations: [
+      {
+        in: [
+         'formative_questionnaire',
+         'summative_questionnaire',
+         'confidence_questionnaire',
+        ]
+      }
+    ]
   })
 
   question.createField('training_module', {
@@ -39,13 +56,29 @@ module.exports = function(migration) {
   question.createField('submodule', {
     name: 'Submodule',
     type: 'Integer',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 1,
+    },
+    validations: [
+      {
+        range: { min: 0 }
+      }
+    ]
   })
 
   question.createField('topic', {
     name: 'Topic',
     type: 'Integer',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 1,
+    },
+    validations: [
+      {
+        range: { min: 0 }
+      }
+    ]
   })
 
   question.createField('body', {
@@ -54,16 +87,30 @@ module.exports = function(migration) {
     required: true
   })
   
+  /*
+    Success and failure messages
+    =============================
+    formative: customise both
+    summative: customise failure only (success unused)
+    confidence: both use default
+  */
+
   question.createField('success_message', {
     name: 'Success message',
     type: 'Text',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 'Thank you',
+    }
   })
   
   question.createField('failure_message', {
     name: 'Failure message',
     type: 'Text',
-    required: true
+    required: true,
+    defaultValue: {
+      'en-US': 'Thank you',
+    }
   })
   
   question.createField('answers', {
@@ -71,13 +118,43 @@ module.exports = function(migration) {
     type: 'Object',
   })
 
+  /* Interface -------------------------------------------------------------- */
 
-  /* Interface --------------------------------------------------------------
-  https://www.contentful.com/developers/docs/extensibility/app-framework/editor-interfaces/
-  */
+
+  /* linked entries */
+
+  question.changeFieldControl('training_module', 'builtin', 'entryLinkEditor', {
+    helpText: 'Select the module the page belongs to from "Add existing content".',
+  })
+
+  /* JSON */
 
   question.changeFieldControl('answers', 'builtin', 'objectEditor', {
-    helpText: 'An array of arrays: add true for correct options',
+    helpText: '[["Wrong answer"],["Correct answer", true]]',
+  })
+
+  /* text */
+
+  question.changeFieldControl('body', 'builtin', 'multipleLine', {
+    helpText: 'Insert question.'
+  })
+
+  question.changeFieldControl('success_message', 'builtin', 'multipleLine', {
+    helpText: 'Displayed after "That’s right" if the user selects the correct answer.'
+  })
+
+  question.changeFieldControl('failure_message', 'builtin', 'multipleLine', {
+    helpText: 'Displayed after "That’s not quite right" if the user selects the wrong answer.'
+  })
+
+  /* number */
+
+  question.changeFieldControl('submodule', 'builtin', 'numberEditor', {
+    helpText: 'Select the sub-module number the page belongs to, the second number of the page name.'
+  })
+
+  question.changeFieldControl('topic', 'builtin', 'numberEditor', {
+    helpText: 'Select the topic number the page belongs to, the third number in the page name.'
   })
 
 }

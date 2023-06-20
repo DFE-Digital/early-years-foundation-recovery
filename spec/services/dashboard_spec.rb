@@ -17,12 +17,12 @@ RSpec.describe Dashboard do
   describe '#call' do
     let(:data_files) { Dir.glob path.join('*/*/*.csv') }
 
-    it 'exports 5 database tables' do
-      expect(data_files.count).to be 6
+    it 'exports 7 database tables' do
+      expect(data_files.count).to be 7
     end
 
     it 'exports data in CSV format' do
-      user_file = data_files.find { |f| f.match?('users.csv') }
+      user_file = data_files.find { |f| f.match?('/users.csv') }
       user_data = File.read(user_file).split("\n").last
       expect(user_data).to include '123,Watford Borough Council,'
     end

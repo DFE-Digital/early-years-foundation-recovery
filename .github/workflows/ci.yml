@@ -17,6 +17,7 @@ on:
       - docker-compose.*
       - Dockerfile
       - terraform
+      - terraform-azure
 
 jobs:
   test:
@@ -78,18 +79,20 @@ jobs:
       -
         name: Run rubocop
         run: bundle exec rubocop
-      - # Test non-CMS functionality
+      -
         name: Run test suite (YAML)
         run: bundle exec rspec
         env:
           CONTENTFUL: false
-      - # Test 'demo' content prior to suite
+      -
         name: Validate content (CMS)
         run: bundle exec rails eyfs:cms:validate
-      - # Test CMS functionality
+      -
         name: Run test suite (CMS)
         run: bundle exec rspec
-      # - # Re-test CMS question response data migration feature
+
+      # Re-test CMS question response data migration feature
+      # -
       #   name: Run test suite (CMS)
       #   run: bundle exec rspec
       #   env:

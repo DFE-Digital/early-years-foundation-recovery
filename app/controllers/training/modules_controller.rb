@@ -25,7 +25,21 @@ protected
 
   # @return [Boolean]
   def redirect?
-    mod.nil? || (!Rails.application.preview? && mod.draft?) || (Rails.application.preview? && !mod.pages?)
+    mod.nil? || unreleased? || wip?
+  end
+
+  # When authoring a new module the overview page will not be accessible until
+  # the module has some content. This will generate an application error unless
+  # the module content passes the data integrity check.
+  #
+  # @return [Boolean]
+  def wip?
+    Rails.application.preview? && !mod.pages?
+  end
+
+  # @return [Boolean]
+  def unreleased?
+    !Rails.application.preview? && mod.draft?
   end
 
   # @return [Boolean]
@@ -37,7 +51,7 @@ protected
 
   # @return [Array<Training::Module>]
   def mods
-    Training::Module.ordered.reject(&:draft?)
+    Training::Module.ordered
   end
 
   # show -------------------

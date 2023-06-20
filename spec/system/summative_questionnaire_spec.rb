@@ -62,6 +62,8 @@ RSpec.describe 'Summative questionnaire' do
     end
 
     it 'is not able to be retaken' do
+      expect(page).not_to have_link 'Retake test'
+
       visit first_question_path
 
       expect(page).to have_selector '.govuk-checkboxes__input:disabled'
@@ -144,9 +146,10 @@ RSpec.describe 'Summative questionnaire' do
     end
 
     it 'can be retaken' do
-      visit first_question_path
+      click_on 'Retake test'
+      click_on 'Start test'
 
-      expect(page).to have_selector '.govuk-checkboxes__input'
+      expect(page).not_to have_selector '.govuk-checkboxes__input:disabled'
     end
 
     it 'links back to content' do
