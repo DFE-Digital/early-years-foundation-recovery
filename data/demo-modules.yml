@@ -1,60 +1,65 @@
 ---
 alpha:
-  title: Contentful CMS
-  thumbnail: ecosystem_thumbnail.jpg
+  title: Content overview
+  thumbnail: eycdt_opengraph.png
   short_description: How 'Child development training' uses a content management system
   description: |
     Contentful is the Department for Education's approved Content Management System.
 
+    This module gives you a high level overview and introduces some technical terminology.
   objective: Understand the ecosystem and moving parts
   criteria: |
-    - first thing
-    - second thing
-    - third thing
-    - final thing
+    - What is an content environment?
+    - What is a content model?
   duration: 0.5
   summative_threshold: 70
 
 bravo:
-  title: Authoring a training module
-  thumbnail: writing_thumbnail.jpg
+  title: Author and edit content
+  thumbnail: eycdt_opengraph.png
   short_description: How to create new course content
   description: |
-    second module description
+    Using Contentful's web interace to author and edit a training module.
 
-    paragraph two
+    This module discusses a training module's structure and it's various page types.
+
+    Creating pages using markdown, questions with answers, and adding video.
   objective: Building a module in the CMS
   criteria: |
-    - first thing
-    - second thing
-    - third thing
-    - final thing
+    - Where to begin?
+    - What is best practice?
+    - How to use custom markdown?
+    - How to add images?
+    - How to include video content?
+    - How to preview?
+    - How to peer review?
   depends_on: # alpha
   duration: 1
   summative_threshold: 100
 
 charlie:
-  title: Release workflow
-  thumbnail: release_thumbnail.jpg
+  title: Publish content
+  thumbnail: eycdt_opengraph.png
   short_description: How to publish new modules and content changes
   description: |
-    Our content release strategy employs....
+    Our content release workflow uses the Contentful Launch web application.
+
+    This module will teach you how to publish content to the public.
   objective: Releasing changes to the public
   criteria: |
-    - Difference between stand-alone pages and modules
-    - Webhooks
-    -
+    - What is content caching?
+    - What is a webhook?
+    - What is the difference between stand-alone pages and modules?
   depends_on: # bravo
   duration: 1
   summative_threshold: 100
 
-
 delta:
   title: An example of a upcoming module
   thumbnail: introduction_to_supporting_physical_development.jpg
-  short_description: This module is unpublished and therefore not clickable
+  short_description: This module is not ready for release and is therefore not available
   description: |
-    This module is unpublished and therefore not clickable
+    work in progress
   objective: work in progress
   criteria: |
     - first thing

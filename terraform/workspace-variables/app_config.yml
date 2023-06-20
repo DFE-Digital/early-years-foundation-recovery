@@ -53,10 +53,13 @@ development:
 # ey-recovery-content
 content:
   <<: *defaults
+  # yaml
+  TRAINING_MODULES: demo-modules
   # jobs
   DASHBOARD_UPDATE: false
   # DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # every 5 mins (default: daily at noon)
   # cms
+  CONTENTFUL: false
   CONTENTFUL_ENVIRONMENT: test
   #
   # @see .github/workflows/content.yml
