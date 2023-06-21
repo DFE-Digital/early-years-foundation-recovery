@@ -12,11 +12,10 @@ RSpec.describe Data::ModulesPerMonth do
       fail_count: [1, 1, 0],
       fail_percentage: [50.0, 100.0, 0.0],
       month: ['January 2023', 'February 2023', 'March 2023'],
-      module_name: ['module_1', 'module_1', 'module_1'],
+      module_name: %w[module_1 module_1 module_1],
       pass_count: [1, 0, 1],
       pass_percentage: [50.0, 0.0, 100.0],
     }
-
   end
 
   before do

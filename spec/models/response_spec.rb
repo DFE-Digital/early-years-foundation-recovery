@@ -12,7 +12,6 @@ RSpec.describe Response, type: :model do
       [response]
     end
 
-
     it_behaves_like('a data export model')
   end
 end
