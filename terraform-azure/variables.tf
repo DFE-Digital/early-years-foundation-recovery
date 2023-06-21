@@ -39,3 +39,9 @@ variable "psqlfs_password" {
   description = "Password of the Database Server"
   type        = string
 }
+
+variable "psqlfs_geo_redundant_backup" {
+  default     = false
+  description = "Geo-redundant backup storage enabled"
+  type        = bool
+}

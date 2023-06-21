@@ -22,6 +22,8 @@ resource "azurerm_subnet" "psqlfs_snet" {
       actions = ["Microsoft.Network/virtualNetworks/subnets/join/action"]
     }
   }
+
+  #checkov:skip=CKV2_AZURE_31:NSG not required
 }
 
 # Create a Private DNS Zone for Database Server
