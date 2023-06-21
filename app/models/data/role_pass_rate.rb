@@ -8,11 +8,13 @@ module Data
     end
 
     # @return [Hash{Symbol => Mixed}]
-    def self.dashboard
-      SummativeQuiz.attribute_pass_percentage(:role_type).map do |role_type, percentages|
-        percentages[:type] = role_type
-        percentages
+     def self.dashboard
+      data = SummativeQuiz.attribute_pass_percentage(:role_type).map do |role_type, percentages|
+        [role_type] + percentages.values
       end
+      keys = [ :type, :pass_percentage, :pass_count, :fail_percentage, :fail_count]
+      keys.zip(data.transpose).to_h.transform_values(&:flatten)
     end
+
   end
 end

@@ -7,17 +7,16 @@ module Data
       ['Module', 'User ID', 'Role', 'Resit Attempts']
     end
 
-    # @return [Hash{Symbol => Mixed}]
+    # @return [Hash{Symbol => Array}]
     def self.dashboard
       user_roles = User.pluck(:id, :role_type).to_h
       data = Hash.new { |hash, key| hash[key] = [] }
 
       resit_attempts_per_user.each do |module_name, user_attempts|
         user_attempts.each do |user_id, attempts|
-          role_type = user_roles[user_id]
           data[:module_name] << module_name
           data[:user_id] << user_id
-          data[:role_type] << role_type
+          data[:role_type] << user_roles[user_id]
           data[:resit_attempts] << attempts
         end
       end

@@ -8,13 +8,9 @@ module Data
       ['Module', 'Question', 'Failure Rate Percentage']
     end
 
-    # @return [Hash{Symbol => Mixed}]
+    # @return [Hash{Symbol => Array}]
     def self.dashboard
-      data = {
-        module_name: [],
-        question_name: [],
-        fail_rate_percentage: [],
-      }
+      data = Hash.new { |hash, key| hash[key] = [] }
       high_fail_questions.each do |(module_name, question_name), fail_rate|
         data[:module_name] << module_name
         data[:question_name] << question_name

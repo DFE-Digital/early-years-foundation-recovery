@@ -9,10 +9,7 @@ module Data
 
     # @return [Hash{Symbol => Array}]
     def self.dashboard
-      data = {
-        module_name: [],
-        count: [],
-      }
+      data = Hash.new { |hash, key| hash[key] = [] }
       total_users_not_passing_per_module.map do |module_name, count|
         data[:module_name] << module_name
         data[:count] << count

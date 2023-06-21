@@ -9,15 +9,13 @@ RSpec.describe Data::SettingPassRate do
   end
 
   let(:rows) do
-    [
       {
-        fail_count: 1,
-        fail_percentage: 33.33333333333334,
-        pass_count: 2,
-        pass_percentage: 66.66666666666666,
-        type: 'Childminder as part of an agency',
-      },
-    ]
+        fail_count: [1],
+        fail_percentage: [33.33333333333334],
+        pass_count: [2],
+        pass_percentage: [66.66666666666666],
+        type: ['Childminder as part of an agency'],
+      }
   end
 
   before do
