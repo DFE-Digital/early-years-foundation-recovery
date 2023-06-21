@@ -7,7 +7,7 @@ module Data
       ['Month', 'Module', 'Pass Percentage', 'Pass Count', 'Fail Percentage', 'Fail Count']
     end
 
-    # @return [Hash{Symbol => Mixed}]
+    # @return [Hash{Symbol => Array}]
     def self.dashboard
       modules_by_month.each_with_object(Hash.new { |h, k| h[k] = [] }) do |(month, module_data), result|
         module_data.each do |module_name, assessments|

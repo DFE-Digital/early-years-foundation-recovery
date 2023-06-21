@@ -7,7 +7,7 @@ module Data
       ['Local Authority', 'Users']
     end
 
-    # @return [Array<Array>]
+    # @return [Hash{Symbol => Array}]
     def self.dashboard
       data = data_hash
       count_by_local_authority.each do |authority, count|

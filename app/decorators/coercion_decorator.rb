@@ -1,6 +1,8 @@
 class CoercionDecorator
   extend Dry::Initializer
 
+  param :input
+
   class << self
     def call(input)
       input.each do |key, value|

@@ -7,7 +7,7 @@ module Data
       ['Role', 'Average Pass Percentage', 'Pass Count', 'Average Fail Percentage', 'Fail Count']
     end
 
-    # @return [Hash{Symbol => Mixed}]
+    # @return [Hash{Symbol => Array}]
     def self.dashboard
       result = data_hash
       data = SummativeQuiz.attribute_pass_percentage(:role_type).map do |role_type, percentages|

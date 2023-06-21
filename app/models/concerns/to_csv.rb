@@ -19,6 +19,8 @@ module ToCsv
         csv << column_names
 
         case dashboard
+        when Array
+          formatted.each { |row| csv << row }
         when ActiveRecord::Relation
           dashboard.find_each(batch_size: 1_000) { |record| csv << record.dashboard_attributes.values }
         else
