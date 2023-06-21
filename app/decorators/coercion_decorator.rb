@@ -32,5 +32,4 @@ private
   def format_datetime(element)
     element.strftime('%Y-%m-%d %H:%M:%S')
   end
-
 end

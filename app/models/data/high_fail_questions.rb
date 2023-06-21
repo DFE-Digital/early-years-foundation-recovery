@@ -30,7 +30,7 @@ module Data
 
       question_failures.each do |(module_name, question_name), fail_count|
         total_count = question_attempts[[module_name, question_name]]
-        fail_rate = fail_count/total_count
+        fail_rate = fail_count / total_count
 
         if fail_rate > average_fail_rate
           high_fail_questions[[module_name, question_name]] = fail_rate.to_f

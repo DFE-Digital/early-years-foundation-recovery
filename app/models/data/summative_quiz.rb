@@ -1,6 +1,5 @@
 module Data
   class SummativeQuiz
-
     class << self
       # @param attribute [Symbol]
       # @return [Hash{Symbol => Hash{Symbol => Numeric}}]
@@ -11,7 +10,7 @@ module Data
           pass_count = user_passed_assessments
           .where(attribute => grouped_assessments.key(count)).count
 
-          pass_percentage = pass_count/count.to_f
+          pass_percentage = pass_count / count.to_f
           fail_percentage = 1 - pass_percentage
 
           { pass_percentage: pass_percentage, pass_count: pass_count, fail_percentage: fail_percentage, fail_count: count - pass_count }
