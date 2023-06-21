@@ -42,7 +42,7 @@ RSpec.describe ToCsv do
       end
     end
 
-    context 'when given column names and long, complex hash data' do
+    context 'when given column names and hash data' do
       subject(:klass) do
         Class.new do
           include ToCsv
@@ -62,7 +62,7 @@ RSpec.describe ToCsv do
       end
 
       it 'returns a csv string' do
-        expect(klass.to_csv).to eq("Custom Column 1,Custom Column Percentage,Custom Column 2,Custom Column 3\ndata_1,0.5%,data_3,data_5\ndata_2,0.5%,data_4,data_6\n")
+        expect(klass.to_csv).to eq("Custom Column 1,Custom Column Percentage,Custom Column 2,Custom Column 3\ndata_1,50.0%,data_3,data_5\ndata_2,50.0%,data_4,data_6\n")
       end
     end
   end
