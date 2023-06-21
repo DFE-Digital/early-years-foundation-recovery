@@ -9,7 +9,7 @@ module Data
 
     # @return [Array<Array>]
     def self.dashboard
-      data = Hash.new { |hash, key| hash[key] = [] }
+      data = data_hash
       count_by_local_authority.each do |authority, count|
         data[:local_authority] << authority
         data[:users] << count

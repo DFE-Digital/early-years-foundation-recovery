@@ -9,7 +9,7 @@ module Data
 
     # @return [Hash{Symbol => Array}]
     def self.dashboard
-      data = Hash.new { |hash, key| hash[key] = [] }
+      data = data_hash
       high_fail_questions.each do |(module_name, question_name), fail_rate|
         data[:module_name] << module_name
         data[:question_name] << question_name
