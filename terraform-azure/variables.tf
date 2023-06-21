@@ -1,11 +1,11 @@
-variable "default_azure_region" {
+variable "azure_region" {
   default     = "westeurope"
   description = "Name of the Azure region to deploy resources"
   type        = string
 }
 
-variable "default_environment" {
-  default     = "dev"
+variable "environment" {
+  default     = "development"
   description = "Environment to deploy resources"
   type        = string
 }
