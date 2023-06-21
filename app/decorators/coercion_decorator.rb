@@ -26,10 +26,11 @@ class CoercionDecorator
 private
 
   def format_percentage(element)
-    "#{element.round(2)}%"
+    "#{(element * 100).round(2)}%"
   end
 
   def format_datetime(element)
     element.strftime('%Y-%m-%d %H:%M:%S')
   end
+
 end

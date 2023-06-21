@@ -1,7 +1,6 @@
 module Data
   class ModulesPerMonth
     include ToCsv
-    include Percentage
 
     # @return [Array<String>]
     def self.column_names
@@ -16,8 +15,8 @@ module Data
           total_count = assessments.size
           fail_count = total_count - pass_count
 
-          pass_percentage = calculate_percentage(pass_count, total_count)
-          fail_percentage = 100 - pass_percentage
+          pass_percentage = pass_count/total_count.to_f
+          fail_percentage = 1 - pass_percentage
 
           result[:month] << month
           result[:module_name] << module_name

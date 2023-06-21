@@ -1,7 +1,6 @@
 module Data
   class HighFailQuestions
     include ToCsv
-    include Percentage
 
     # @return [Array<String>]
     def self.column_names
@@ -25,16 +24,16 @@ module Data
       question_failures = UserAnswer.summative.where(correct: false).group(:module, :name).count
       total_attempts = question_attempts.values.sum
 
-      average_fail_rate = calculate_percentage(question_failures.values.sum, total_attempts)
+      average_fail_rate = question_failures.values.sum / total_attempts.to_f
 
       high_fail_questions = {}
 
       question_failures.each do |(module_name, question_name), fail_count|
         total_count = question_attempts[[module_name, question_name]]
-        fail_rate = calculate_percentage(fail_count, total_count)
+        fail_rate = fail_count/total_count
 
         if fail_rate > average_fail_rate
-          high_fail_questions[[module_name, question_name]] = fail_rate
+          high_fail_questions[[module_name, question_name]] = fail_rate.to_f
         end
       end
 

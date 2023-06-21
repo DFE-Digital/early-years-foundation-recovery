@@ -11,9 +11,9 @@ RSpec.describe Data::RolePassRate do
   let(:rows) do
     {
       fail_count: [1],
-      fail_percentage: [33.33333333333334],
+      fail_percentage: [0.33333333333333337],
       pass_count: [2],
-      pass_percentage: [66.66666666666666],
+      pass_percentage: [0.6666666666666666],
       type: %w[childminder],
     }
   end
