@@ -17,6 +17,8 @@ resource "azurerm_postgresql_flexible_server" "psqlfs" {
   sku_name                     = var.psqlfs_sku
   backup_retention_days        = 7
   geo_redundant_backup_enabled = var.psqlfs_geo_redundant_backup
+
+  #checkov:skip=CKV_AZURE_136:Geo-redundant backup is configurable depending on environment
 }
 
 # Allow PostgreSQL extensions
