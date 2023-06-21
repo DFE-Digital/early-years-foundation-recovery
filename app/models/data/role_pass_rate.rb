@@ -14,12 +14,12 @@ module Data
         pass_percentage: [],
         pass_count: [],
         fail_percentage: [],
-        fail_count: []
+        fail_count: [],
       }
       data = SummativeQuiz.attribute_pass_percentage(:role_type).map do |role_type, percentages|
         [role_type] + percentages.values
       end
-      if !data.empty?
+      unless data.empty?
         result[:type] = data.transpose[0]
         result[:pass_percentage] = data.transpose[1]
         result[:pass_count] = data.transpose[2]
