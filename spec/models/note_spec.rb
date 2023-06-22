@@ -17,10 +17,8 @@ RSpec.describe Note, type: :model do
     specify { expect(note).to be_filled }
   end
 
-  context 'when the body is blank' do
-    specify 'filled is false' do
-      expect(blank_note).not_to be_filled
-      expect(whitespace_note).not_to be_filled
-    end
+  context 'when the body has no content' do
+    specify { expect(blank_note).not_to be_filled }
+    specify { expect(whitespace_note).not_to be_filled }
   end
 end
