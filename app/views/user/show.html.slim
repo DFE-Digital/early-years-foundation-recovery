@@ -5,33 +5,33 @@
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     = govuk_summary_list do |your_details|
-      - your_details.row do |row|
-        - row.key { 'Name' }
-        - row.value(text: @user.name, classes: ['data-hj-suppress'])
-        - row.action(text: t('links.change'), href: edit_registration_name_path, visually_hidden_text: 'name', html_attributes: { id: :edit_name_registration })
-      - your_details.row do |row|
-        - row.key { 'Email' }
-        - row.value(text:@user.email, classes: ['data-hj-suppress'])
-        - row.action(text: t('links.change'), href: edit_email_user_path, visually_hidden_text: 'email', html_attributes: { id: :edit_email_user })
-      - your_details.row do |row|
-        - row.key { 'Password' }
-        - row.value { t('password.last_changed', date: @user.password_last_changed) }
-        - row.action(text: t('links.change'), href: edit_password_user_path, visually_hidden_text: 'password', html_attributes: { id: :edit_password_user })
+      - your_details.with_row do |row|
+        - row.with_key { 'Name' }
+        - row.with_value(text: @user.name, classes: ['data-hj-suppress'])
+        - row.with_action(text: t('links.change'), href: edit_registration_name_path, visually_hidden_text: 'name', html_attributes: { id: :edit_name_registration })
+      - your_details.with_row do |row|
+        - row.with_key { 'Email' }
+        - row.with_value(text:@user.email, classes: ['data-hj-suppress'])
+        - row.with_action(text: t('links.change'), href: edit_email_user_path, visually_hidden_text: 'email', html_attributes: { id: :edit_email_user })
+      - your_details.with_row do |row|
+        - row.with_key { 'Password' }
+        - row.with_value { t('password.last_changed', date: @user.password_last_changed) }
+        - row.with_action(text: t('links.change'), href: edit_password_user_path, visually_hidden_text: 'password', html_attributes: { id: :edit_password_user })
 
     = govuk_summary_list do |other_details|
-      - other_details.row do |row|
-        - row.key { t('.your_setting_details_html') }
-        - row.value { nil }
-        - row.action(text: t('links.change'), href: edit_registration_setting_type_path, visually_hidden_text: 'setting_type', html_attributes: { id: :edit_setting_type_registration })
-      - other_details.row do |row|
-        - row.key { 'Setting type' }
-        - row.value(text: @user.setting_name, classes: ['data-hj-suppress'])
-      - other_details.row do |row|
-        - row.key { 'Local authority' }
-        - row.value(text: @user.local_authority_text, classes: ['data-hj-suppress'])
-      - other_details.row do |row|
-        - row.key { 'Role' }
-        - row.value(text: @user.role, classes: ['data-hj-suppress'])
+      - other_details.with_row do |row|
+        - row.with_key { t('.your_setting_details_html') }
+        - row.with_value { nil }
+        - row.with_action(text: t('links.change'), href: edit_registration_setting_type_path, visually_hidden_text: 'setting_type', html_attributes: { id: :edit_setting_type_registration })
+      - other_details.with_row do |row|
+        - row.with_key { 'Setting type' }
+        - row.with_value(text: @user.setting_name, classes: ['data-hj-suppress'])
+      - other_details.with_row do |row|
+        - row.with_key { 'Local authority' }
+        - row.with_value(text: @user.local_authority_text, classes: ['data-hj-suppress'])
+      - other_details.with_row do |row|
+        - row.with_key { 'Role' }
+        - row.with_value(text: @user.role, classes: ['data-hj-suppress'])
 
     = govuk_summary_list do |email_preferences|
       - email_preferences.row do |row|

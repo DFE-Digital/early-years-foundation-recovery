@@ -4,9 +4,9 @@ on:
   pull_request:
     branches:
       - main
-    types:
-      - labeled
-      - synchronize
+    paths:
+      - 'terraform-azure/**'
+      - '!terraform-azure/**.md'
 
 defaults:
   run:
@@ -15,7 +15,6 @@ defaults:
 jobs:
   terraform-unit-tests:
     name: 'Run Tests'
-    if: contains(github.event.pull_request.labels.*.name, 'terraform')
     runs-on: ubuntu-latest
 
     steps:
