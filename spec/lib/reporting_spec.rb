@@ -37,10 +37,9 @@ RSpec.describe Reporting do
       end
 
       context 'when there is a saved note but the body is empty' do
-
         before do
-          user1.notes.create(body: '')
-          user1.notes.create(body: " \n \n \n")
+          user1.notes.create!(body: '')
+          user1.notes.create!(body: " \n \n \n")
         end
 
         it 'the note is not counted' do
@@ -68,7 +67,7 @@ RSpec.describe Reporting do
       context 'when there is 1 user with multiple notes' do
         before do
           note_1
-          user1.notes.create(body: 'test note body 2')
+          user1.notes.create!(body: 'test note body 2')
         end
 
         it 'notes count is 1 and percentage is 100' do
@@ -96,7 +95,7 @@ RSpec.describe Reporting do
       context 'when 2 users have notes' do
         before do
           note_1
-          user2.notes.create(body: 'test note body')
+          user2.notes.create!(body: 'test note body')
         end
 
         it 'notes count is 2 and percentage is 100' do
