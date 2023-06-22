@@ -12,7 +12,10 @@ RSpec.describe ToCsv do
           end
 
           def self.dashboard
-            [%w[data_1 data_2], %w[data_3 data_4]]
+            {
+              'Custom Column 1' => %w[data_1 data_3],
+              'Custom Column 2' => %w[data_2 data_4],
+            }
           end
         end
       end

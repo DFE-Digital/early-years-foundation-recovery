@@ -14,7 +14,7 @@ module ToCsv
 
     # @return [String]
     def to_csv
-      formatted = CoercionDecorator.call(dashboard)
+      formatted = CoercionDecorator.new.call(dashboard)
       CSV.generate(headers: true) do |csv|
         csv << column_names
 
