@@ -22,7 +22,7 @@ resource "azurerm_postgresql_flexible_server" "psqlfs" {
 }
 
 # Allow PostgreSQL extensions
-resource "azurerm_postgresql_flexible_server_configuration" "example" {
+resource "azurerm_postgresql_flexible_server_configuration" "psqlfs_config" {
   name      = "azure.extensions"
   server_id = azurerm_postgresql_flexible_server.psqlfs.id
   value     = "CITEXT,FUZZYSTRMATCH,PGCRYPTO,PLPGSQL,UUID-OSSP"
