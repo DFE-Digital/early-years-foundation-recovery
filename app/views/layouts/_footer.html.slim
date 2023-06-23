@@ -1,5 +1,5 @@
 = govuk_footer classes: 'noprint' do |footer|
-  - footer.navigation do
+  - footer.with_navigation do
     .govuk-footer__section.govuk-grid-column-two-thirds
       ul.govuk-footer__list.govuk-footer__list--columns-3
         - ::Page.footer.each do |page|
@@ -13,4 +13,4 @@
           = govuk_link_to 'Contact', Rails.application.credentials.contact_us, class: 'govuk-footer__link', target: '_blank'
 
         li.govuk-footer__list-item
-          = govuk_link_to 'Feedback', Rails.configuration.feedback_url, class: 'govuk-footer__link',  target: '_blank'
+          = govuk_link_to 'Feedback', Rails.configuration.feedback_url, class: 'govuk-footer__link', target: '_blank'
