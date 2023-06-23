@@ -10,10 +10,13 @@ module Data
     # TODO: Upcoming changes to UserAssessment will make this type coercion unnecessary
     # @return [Hash{Symbol => Array}]
     def self.dashboard
-      data = data_hash
+      data = []
       UserAssessment.summative.passes.group(:module).average('CAST(score AS float)').to_a.each do |module_name, score|
-        data[:module_name] << module_name
-        data[:pass_score] << score
+        row = {
+          module_name: module_name,
+          pass_score: score
+        }
+        data << row
       end
       data
     end

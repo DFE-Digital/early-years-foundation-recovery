@@ -9,10 +9,13 @@ module Data
 
     # @return [Hash{Symbol => Array}]
     def self.dashboard
-      data = data_hash
+      data = []
       count_by_local_authority.each do |authority, count|
-        data[:local_authority] << authority
-        data[:users] << count
+        row = {
+          local_authority: authority,
+          users: count
+        }
+        data << row
       end
       data
     end

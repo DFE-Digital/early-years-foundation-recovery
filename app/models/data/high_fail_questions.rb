@@ -9,11 +9,14 @@ module Data
 
     # @return [Hash{Symbol => Array}]
     def self.dashboard
-      data = data_hash
+      data = []
       high_fail_questions.each do |(module_name, question_name), fail_rate|
-        data[:module_name] << module_name
-        data[:question_name] << question_name
-        data[:fail_rate_percentage] << fail_rate
+        row = {
+          module_name: module_name,
+          question_name: question_name,
+          fail_rate_percentage: fail_rate
+        }
+        data << row
       end
       data
     end

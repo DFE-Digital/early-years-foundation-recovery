@@ -14,21 +14,24 @@ module ToCsv
 
     # @return [String]
     def to_csv
-      formatted = CoercionDecorator.new.call(dashboard)
       CSV.generate(headers: true) do |csv|
         csv << column_names
 
         case dashboard
         when Array
-          formatted.each { |row| csv << row }
+          formatted = CoercionDecorator.new(dashboard).call
+          formatted.each { |row| csv << row.values }
         when ActiveRecord::Relation
-          dashboard.find_each(batch_size: 1_000) { |record| csv << record.dashboard_attributes.values }
-        else
-          rows = formatted.values.transpose
-          rows.each { |row| csv << row }
+          batch_size = 1000
+          formatted_batch = CoercionDecorator.new(dashboard).call
+          dashboard.find_each(batch_size: batch_size) do |record|
+            formatted_batch << record.dashboard_attributes
+              formatted_batch.each { |row| csv << row }
+              formatted_batch = []
+          end
         end
-      end
     end
+  end
 
     # @return [Hash{Symbol => Array}] Structure used for the coercion of values for dashboard
     def data_hash

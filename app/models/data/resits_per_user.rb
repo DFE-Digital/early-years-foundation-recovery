@@ -10,14 +10,17 @@ module Data
     # @return [Hash{Symbol => Array}]
     def self.dashboard
       user_roles = User.pluck(:id, :role_type).to_h
-      data = data_hash
+      data = []
 
       resit_attempts_per_user.each do |module_name, user_attempts|
         user_attempts.each do |user_id, attempts|
-          data[:module_name] << module_name
-          data[:user_id] << user_id
-          data[:role_type] << user_roles[user_id]
-          data[:resit_attempts] << attempts
+          row = {
+            module_name: module_name,
+            user_id: user_id,
+            role_type: user_roles[user_id],
+            resit_attempts: attempts
+          }
+          data << row
         end
       end
       data

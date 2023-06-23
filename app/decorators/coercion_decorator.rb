@@ -1,28 +1,29 @@
 class CoercionDecorator
-  def call(input)
-    @call ||= format_input(input)
+  extend Dry::Initializer
+
+  param :input
+
+  def call
+    format_input
   end
 
-private
-
-  def format_input(input)
+  def format_input
     if input.is_a?(ActiveRecord::Relation)
-      input
-    else
-      input.each do |key, value|
-        input[key] = if value.is_a?(Array)
-                       value.map { |element| format_value(key, element) }
-                     else
-                       format_value(key, value)
-                     end
+      @input = input.to_a.map(&:attributes)
+    end
+    input.each do |row|
+      row.each do |key, value|
+        row[key] = format_value(key, value)
       end
     end
+    input
+
   end
 
-  def format_value(key, value)
+    def format_value(key, value)
     if value.is_a?(Time)
       format_datetime(value)
-    elsif key.to_s.ends_with?('percentage')
+    elsif key.to_s.include?('percentage')
       format_percentage(value)
     else
       value
@@ -36,4 +37,5 @@ private
   def format_datetime(element)
     element.strftime('%Y-%m-%d %H:%M:%S')
   end
+
 end

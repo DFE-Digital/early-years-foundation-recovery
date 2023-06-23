@@ -9,17 +9,23 @@ module Data
 
     # @return [Hash{Symbol => Array}]
     def self.dashboard
-      result = data_hash
-      data = SummativeQuiz.attribute_pass_percentage(:setting_type).map do |setting_type, percentages|
-        [setting_type] + percentages.values
+      result = []
+
+      SummativeQuiz.attribute_pass_percentage(:setting_type).each do |setting_type, percentages|
+        pass_percentage = percentages[:pass_percentage]
+        pass_count = percentages[:pass_count]
+        fail_percentage = percentages[:fail_percentage]
+        fail_count = percentages[:fail_count]
+    
+        result << {
+          setting_type: setting_type,
+          pass_percentage: pass_percentage,
+          pass_count: pass_count,
+          fail_percentage: fail_percentage,
+          fail_count: fail_count
+        }
       end
-      unless data.empty?
-        result[:type] = data.transpose[0]
-        result[:pass_percentage] = data.transpose[1]
-        result[:pass_count] = data.transpose[2]
-        result[:fail_percentage] = data.transpose[3]
-        result[:fail_count] = data.transpose[4]
-      end
+    
       result
     end
   end
