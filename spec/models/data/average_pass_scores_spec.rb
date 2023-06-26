@@ -8,10 +8,12 @@ RSpec.describe Data::AveragePassScores do
   end
 
   let(:rows) do
-    {
-      module_name: %w[module_1],
-      pass_score: [100.0],
-    }
+    [
+      {
+        module_name: 'module_1',
+        pass_score: 100.0
+      }
+    ]
   end
 
   before do

@@ -8,12 +8,14 @@ RSpec.describe Data::ResitsPerUser do
   end
 
   let(:rows) do
-    {
-      module_name: %w[module_1],
-      user_id: [user_1.id],
-      role_type: %w[childminder],
-      resit_attempts: [1],
-    }
+    [
+      {
+        module_name: 'module_1',
+        user_id: user_1.id,
+        role_type: 'childminder',
+        resit_attempts: 1
+      }
+    ]
   end
 
   before do

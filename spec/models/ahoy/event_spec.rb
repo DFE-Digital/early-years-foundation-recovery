@@ -4,6 +4,7 @@ RSpec.describe Ahoy::Event, type: :model do
   subject(:events) { described_class }
 
   describe '.to_csv' do
+    let(:coercion_decorator) { CoercionDecorator.new }
     before do
       described_class.new(
         id: 1,
@@ -16,9 +17,9 @@ RSpec.describe Ahoy::Event, type: :model do
     end
 
     it 'exports formatted attributes as CSV' do
-      expect(described_class.to_csv).to eq <<~CSV
+      expect(described_class.to_csv(coercion_decorator)).to eq <<~CSV
         id,visit_id,user_id,name,properties,time
-        1,2,1,module_start,"{""foo""=>""bar""}",2023-01-12 10:15:59 UTC
+        1,2,1,module_start,"{""foo""=>""bar""}",2023-01-12 10:15:59
       CSV
     end
   end

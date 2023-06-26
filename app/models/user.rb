@@ -18,7 +18,7 @@ class User < ApplicationRecord
   # @overload to_csv
   # @see ToCsv.to_csv
   #   @return [String]
-  def self.to_csv
+  def self.to_csv(coercion_decorator)
     module_headings =
       if Rails.application.cms?
         Training::Module.ordered.reject(&:draft?).map { |mod| "module_#{mod.position}_time" }
@@ -28,9 +28,12 @@ class User < ApplicationRecord
 
     CSV.generate(headers: true) do |csv|
       csv << (DASHBOARD_ATTRS + module_headings)
-
+      formatted_batch = coercion_decorator.call(dashboard.limit(1000))
       dashboard.find_each(batch_size: 1_000) do |record|
-        csv << (record.dashboard_attributes.values + record.module_ttc)
+        formatted = formatted_batch.find { |formatted_row| formatted_row["id"] == record.id }
+        formatted["registration_complete_any"] = record.registration_complete_any
+        formatted["registered_at"] = record.registered_at
+        csv << (formatted.values_at(*record.dashboard_attributes.keys) + record.module_ttc)
       end
     end
   end

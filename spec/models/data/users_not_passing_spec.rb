@@ -9,10 +9,12 @@ RSpec.describe Data::UsersNotPassing do
   end
 
   let(:rows) do
-    {
-      module_name: %w[module_1],
-      count: [1],
-    }
+    [
+      {
+        module_name: 'module_1',
+        count: 1
+      }
+    ]
   end
 
   before do

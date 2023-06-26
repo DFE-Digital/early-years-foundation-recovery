@@ -8,14 +8,32 @@ RSpec.describe Data::ModulesPerMonth do
     ['Month', 'Module', 'Pass Percentage', 'Pass Count', 'Fail Percentage', 'Fail Count']
   end
   let(:rows) do
-    {
-      fail_count: [1, 1, 0],
-      fail_percentage: [0.5, 1.0, 0.0],
-      month: ['January 2023', 'February 2023', 'March 2023'],
-      module_name: %w[module_1 module_1 module_1],
-      pass_count: [1, 0, 1],
-      pass_percentage: [0.5, 0.0, 1.0],
-    }
+    [
+      {
+        month: 'January 2023',
+        module_name: 'module_1',
+        pass_percentage: 0.5,
+        pass_count: 1,
+        fail_percentage: 0.5,
+        fail_count: 1
+      },
+      {
+        month: 'February 2023',
+        module_name: 'module_1',
+        pass_percentage: 0.0,
+        pass_count: 0,
+        fail_percentage: 1.0,
+        fail_count: 1
+      },
+      {
+        month: 'March 2023',
+        module_name: 'module_1',
+        pass_percentage: 1.0,
+        pass_count: 1,
+        fail_percentage: 0.0,
+        fail_count: 0
+      }
+    ]
   end
 
   before do

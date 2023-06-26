@@ -6,11 +6,18 @@ RSpec.describe Data::HighFailQuestions do
   end
 
   let(:rows) do
-    {
-      module_name: [:average, 'module_1'],
-      question_name: [nil, 'q2'],
-      fail_rate_percentage: [0.5, 1.0],
-    }
+    [
+      {
+        module_name: :average,
+        question_name: nil,
+        fail_rate_percentage: 0.5
+      },
+      {
+        module_name: 'module_1',
+        question_name: 'q2',
+        fail_rate_percentage: 1.0
+      }
+    ]
   end
 
   before do

@@ -20,7 +20,6 @@ RSpec.describe CoercionDecorator do
         date: Time.zone.local(2023, 1, 3),
         array: 3,
       }
-    
     ]
     end
 
@@ -90,9 +89,9 @@ RSpec.describe CoercionDecorator do
         formatted_active_record
     end
 
-    specify { expect(described_class.new(input).call).to eq(formatted_output) }
+    specify { expect(described_class.new.call(input)).to eq(formatted_output) }
 
 
-    specify { expect(described_class.new(User.all).call).to eq(formatted_active_record) }
+    specify { expect(described_class.new.call(User.all)).to eq(formatted_active_record) }
   end
 end

@@ -13,22 +13,21 @@ module ToCsv
     # end
 
     # @return [String]
-    def to_csv
+    def to_csv(coercion_decorator)
       CSV.generate(headers: true) do |csv|
         csv << column_names
-
         case dashboard
         when Array
-          formatted = CoercionDecorator.new(dashboard).call
+          formatted = coercion_decorator.call(dashboard)
           formatted.each { |row| csv << row.values }
         when ActiveRecord::Relation
           batch_size = 1000
-          formatted_batch = CoercionDecorator.new(dashboard).call
-          dashboard.find_each(batch_size: batch_size) do |record|
-            formatted_batch << record.dashboard_attributes
-              formatted_batch.each { |row| csv << row }
-              formatted_batch = []
-          end
+          formatted_batch = coercion_decorator.call(dashboard.limit(batch_size))
+
+            dashboard.find_each(batch_size: 1_000) do |record|
+              formatted = formatted_batch.find { |formatted_row| formatted_row["id"] == record.id }
+              csv << (formatted.values_at(*record.dashboard_attributes.keys))
+            end
         end
     end
   end

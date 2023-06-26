@@ -28,7 +28,7 @@ module Data
     end
 
     def self.dashboard
-      {
+      [{
         registration_complete: User.registration_complete.count,
         registration_incomplete: User.registration_incomplete.count,
         reregistered: User.reregistered.count,
@@ -49,7 +49,7 @@ module Data
         with_notes_percentage: with_notes_percentage,
         without_notes: without_notes_count,
         without_notes_percentage: 1 - with_notes_percentage,
-      }
+      }]
     end
 
     # @return [Float]
