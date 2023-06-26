@@ -17,11 +17,11 @@ RSpec.configure do |config|
 
     start = Time.current
     begin
-      $stdout.reopen(File.new("/dev/null", "w"))
+      $stdout.reopen(File.new('/dev/null', 'w'))
 
-      require "rake"
+      require 'rake'
       Rails.application.load_tasks
-      Rake::Task["assets:precompile"].invoke
+      Rake::Task['assets:precompile'].invoke
     ensure
       $stdout.reopen(original_stdout)
       $stdout.puts "Finished in #{(Time.current - start).round(2)} seconds"
