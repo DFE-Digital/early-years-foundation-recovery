@@ -127,6 +127,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'cuprite'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'show_me_the_cookies'
