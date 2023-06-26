@@ -50,7 +50,7 @@ RSpec.describe 'Module content' do
       expect(questions['module-4'].count).to be 19
       expect(questions['module-5'].count).to be 13
 
-      expect(questions_total).to be 95
+      expect(questions_total).to be 105
     end
   end
 

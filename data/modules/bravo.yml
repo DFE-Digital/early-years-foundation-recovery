@@ -10,16 +10,25 @@ bravo:
   1-1:
     type: sub_module_intro
 
-  # Topic 1
-  # ----------------------------------------------------------------------------
   1-1-1:
-    type: text_page
-
-  # Topic 2
-  # ----------------------------------------------------------------------------
+    type: video_page # VIDEO
   1-1-2:
-    type: video_page
-  1-1-2-1:
+    type: text_page
+  1-1-3:
+    type: text_page
+  1-1-4:
+    type: text_page
+  1-1-5:
+    type: text_page
+  1-1-6:
+    type: text_page
+  1-1-7:
+    type: text_page
+  1-1-8:
+    type: text_page
+  1-1-9:
+    type: text_page
+  1-1-10:
     type: text_page
 
   # ----------------------------------------------------------------------------
@@ -29,18 +38,37 @@ bravo:
   1-2:
     type: sub_module_intro
 
-  # Topic 3
-  # ----------------------------------------------------------------------------
   1-2-1:
     type: text_page
+  1-2-1-1:
+    type: text_page
+  1-2-1-2:
+    type: text_page
+  1-2-1-3:
+    type: text_page
+  1-2-1-4:
+    type: text_page
+  1-2-1-5:
+    type: text_page
 
-  # Topic 4
-  # ----------------------------------------------------------------------------
   1-2-2:
-    type: video_page
+    type: text_page
   1-2-2-1:
     type: text_page
+  1-2-2-2:
+    type: text_page
+
   1-2-3:
+    type: text_page
+  1-2-3-1:
+    type: formative_questionnaire
+  1-2-3-2:
+    type: formative_questionnaire
+  1-2-3-3:
+    type: formative_questionnaire
+  1-2-3-4:
+    type: formative_questionnaire
+  1-2-3-5:
     type: formative_questionnaire
 
   # ----------------------------------------------------------------------------
@@ -63,6 +91,22 @@ bravo:
   1-3-2-2:
     type: summative_questionnaire
   1-3-2-3:
+    type: summative_questionnaire
+  1-3-2-4:
+    type: summative_questionnaire
+  1-3-2-5:
+    type: summative_questionnaire
+  1-3-2-6:
+    type: summative_questionnaire
+  1-3-2-7:
+    type: summative_questionnaire
+  1-3-2-8:
+    type: summative_questionnaire
+  1-3-2-9:
+    type: summative_questionnaire
+  1-3-2-10:
+    type: summative_questionnaire
+  1-3-2-11:
     type: assessment_results
 
   # ----------------------------------------------------------------------------
@@ -78,6 +122,8 @@ bravo:
   1-3-3-3:
     type: confidence_questionnaire
   1-3-3-4:
+    type: confidence_questionnaire
+  1-3-3-5:
     type: thankyou
   1-3-4:
     type: certificate

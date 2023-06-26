@@ -9,7 +9,7 @@ RSpec.describe UserAnswer, type: :model do
   end
 
   let(:questionnaire) do
-    Questionnaire.find_by!(name: '1-1-4', training_module: 'alpha')
+    Questionnaire.find_by!(name: '1-2-1-1', training_module: 'alpha')
   end
 
   it 'is associated with a questionnaire' do

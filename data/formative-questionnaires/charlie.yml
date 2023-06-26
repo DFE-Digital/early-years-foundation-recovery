@@ -1,6 +1,6 @@
 ---
 charlie:
-  1-2-3:
+  1-2-1:
     questions:
       charlie_question_one:
         multi_select: false
@@ -14,5 +14,86 @@ charlie:
         answers:
           1: Correct answer 1
           2: Wrong answer 1
-        correct_answers: 
+        correct_answers:
           - 1
+
+  1-2-2:
+    questions:
+      charlie_question_two:
+        multi_select: true
+        body: |
+          Question Two - Select from following
+        assessment_summary: |
+          You selected the correct answers
+        assessment_fail_summary: |
+          You did not select the correct answers
+        answers:
+          1: Correct answer 1
+          2: Wrong answer
+          3: Correct answer 2
+        correct_answers:
+          - 1
+          - 3
+
+  1-2-3:
+    questions:
+      charlie_question_three:
+        multi_select: true
+        body: |
+          Question Three - Select from following
+        assessment_summary: |
+          You selected the correct answers
+
+          Well done!
+        assessment_fail_summary: |
+          You did not select the correct answers
+        answers:
+          1: Correct answer 1
+          2: Wrong answer 1
+          3: Correct answer 2
+          4: Wrong answer 2
+        correct_answers:
+          - 1
+          - 3
+
+  1-2-4:
+    questions:
+      charlie_question_four:
+        multi_select: true
+        body: |
+          Question Three - Select from following
+        assessment_summary: |
+          You selected the correct answers
+
+          Well done!
+        assessment_fail_summary: |
+          You did not select the correct answers
+        answers:
+          1: Correct answer 1
+          2: Wrong answer 1
+          3: Correct answer 2
+          4: Wrong answer 2
+        correct_answers:
+          - 1
+          - 3
+
+  1-2-5:
+    questions:
+      charlie_question_five:
+        multi_select: true
+        body: |
+          Question Three - Select from following
+        assessment_summary: |
+          You selected the correct answers
+
+          Well done!
+        assessment_fail_summary: |
+          You did not select the correct answers
+        answers:
+          1: Correct answer 1
+          2: Wrong answer 1
+          3: Correct answer 2
+          4: Wrong answer 2
+        correct_answers:
+          - 1
+          - 3

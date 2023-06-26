@@ -71,15 +71,6 @@ module Training
       [name, page_type, body, answer.schema]
     end
 
-    # Demo content currently positions questions as topics which genuine content does not.
-    # As a result, for example, questions appear in the module overview page.
-    # For this reason Question#heading is required within the test suite.
-    #
-    # @return [String]
-    def heading
-      body
-    end
-
     # @return [String]
     def legend
       if multi_select?

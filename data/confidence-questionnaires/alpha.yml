@@ -3,21 +3,19 @@ alpha:
   1-3-3-1:
     questions:
       alpha_confidence_question_one:
-        label: Question One - Select from 1 to 5
+        label: How confident are you about...
 
   1-3-3-2:
     questions:
       alpha_confidence_question_two:
-        label: Question Two - Select from 1 to 5
-        # body: |
-        #   %Warning: Govspeak test%
+        label: How confident are you about...
 
   1-3-3-3:
     questions:
       alpha_confidence_question_three:
-        label: Question Three - Select from 1 to 5
+        label: How confident are you about...
 
-  1-3-3-3:
+  1-3-3-4:
     questions:
       alpha_confidence_question_four:
-        label: Question Three - Select from 1 to 5
+        label: How confident are you about...

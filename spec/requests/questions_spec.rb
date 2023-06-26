@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe 'Questionnaires', type: :request do
+RSpec.describe 'Questions', type: :request do
   let(:user) { create(:user, :registered) }
   let(:questionnaire_data) { module_item.model }
   let(:module_item) do
-    ModuleItem.find_by(training_module: :alpha, type: :formative_questionnaire, name: '1-1-4')
+    ModuleItem.find_by(training_module: :alpha, type: :formative_questionnaire, name: '1-2-1-1')
   end
 
   before do
@@ -31,7 +31,7 @@ RSpec.describe 'Questionnaires', type: :request do
 
     context 'when correct (radio buttons)' do
       let(:answers) do
-        { alpha_question_one: 'Correct answer 1' }
+        { alpha_question_one: 'All of the above' }
       end
 
       it 'saves the answer' do
@@ -41,7 +41,7 @@ RSpec.describe 'Questionnaires', type: :request do
 
     context 'when correct (check boxes)' do
       let(:module_item) do
-        ModuleItem.find_by(training_module: :alpha, type: :formative_questionnaire, name: '1-2-1-1')
+        ModuleItem.find_by(training_module: :alpha, type: :formative_questionnaire, name: '1-2-1-2')
       end
 
       let(:answers) do
@@ -55,7 +55,7 @@ RSpec.describe 'Questionnaires', type: :request do
 
     context 'when incorrect' do
       let(:answers) do
-        { alpha_question_one: 'Wrong answer 1' }
+        { alpha_question_one: 'Published' }
       end
 
       it 'saves the answer' do

@@ -5,55 +5,219 @@ en:
     bravo:
       what-to-expect:
         # preamble
+
       # --------------------------------------
       1-1:
-        heading: sub_module_intro
-        body: first sub intro
+        heading: Which environment do I use?
+        body: |
+          Content changes should be made in `master` which is a special environment alias in Contentful.
+          The `master` alias points to content in another environment, currently called `production`.
+
+          `master` > `production`
+
+          The `master` environment has access to all settings, where as others are limited:
+
+          <screenshot>
+
+          The `master` environment also includes a version history of content entry edits:
+
+          <screenshot>
       1-1-1:
-        heading: text_page
-        body: page 1 of sub 1 (topic 1)
-      1-1-2:
-        heading: video_page
-        body: page 2 of sub 1 (topic 2)
+        heading: Web app or Compose?
+        body: |
+          The CMS has a dedicated application for editing content called Compose.
+
+          Pros & Cons
         video:
-          id: XnP6jaK7ZAY
-          title: Youtube Video Title
-          provider: youtube
-      1-1-2-1:
-        heading: text_page
-        body: page 3 of sub 1 (topic 2 page 2)
+          id: 807903195
+          title: Stuff
+          provider: vimeo
+      1-1-2:
+        heading: How to preview
+        body: |
+          Once a change to content has been made in `master` and autosaved, which happens after a second of inactivity,
+          a webhook is triggered that alerts the `staging` application of new content.
+
+          In the web app, on the right-hand side, is a preview button with one of three options.
+
+          Change your preview button to `staging` if you haven't already done so, and the "preview" button
+          will take yo to the current page as found in the `staging` deployment. You will need to be logged in to see this.
+
+          The other options are `dev` and `local` which target the `dev` deployment and websites running on a developer's machine
+          respectively.
+
+      1-1-3:
+        heading: Why is there a delay?
+        body: |
+          As covered in the first module, our application is currently using in meomry caching to reduce latency.
+
+          This may be changed in future iterations but the use of caching speeds up page loading.
+          The first time content is loaded after an autosave will be slower whilst linked content is recached.
+
+      1-1-4:
+        heading:
+        body:
+      1-1-5:
+        heading:
+        body:
+      1-1-6:
+        heading:
+        body:
+      1-1-7:
+        heading:
+        body:
+      1-1-8:
+        heading:
+        body:
+      1-1-9:
+        heading:
+        body:
+      1-1-10:
+        heading:
+        body:
 
       # --------------------------------------
       1-2:
-        heading: sub_module_intro
-        body: second sub intro
+        heading: How to edit
+        body: |
+          - govspeak
+          - validation
+
       1-2-1:
-        heading: text_page
-        body: page 1 of sub 2 (topic 1)
+        heading: Markdown and Govspeak
+        body: |
+          This section covers the topic of markdown specifically Govspeak and our
+          customised service specific elements
+      1-2-1-1:
+        heading: What is it?
+        body: |
+          Our service uses a governmental version of markdown which has additional short-hand
+          for creating visual elements within our course pages.
+
+          <https://govspeak-preview.publishing.service.gov.uk/guide>
+
+      1-2-1-2:
+        heading: Info
+        body: |
+          `$INFO`
+
+          Tempor non non id nulla tempor eiusmod sit excepteur culpa duis commodo
+          adipisicing labore sunt eu officia nisi quis eu elit pariatur sint enim
+          laboris duis in tempor labore exercitation duis ea nulla eiusmod deserunt est.
+
+          **Usage:**
+
+          <pre class="code-tip">
+          &#36;INFO
+          This is a ??
+          &#36;INFO
+          </pre>
+          $INFO
+
+      1-2-1-3:
+        heading: Brain
+        body: |
+          `$BRAIN`
+
+          Tempor non non id nulla tempor eiusmod sit excepteur culpa duis commodo
+          adipisicing labore sunt eu officia nisi quis eu elit pariatur sint enim
+          laboris duis in tempor labore exercitation duis ea nulla eiusmod deserunt est.
+
+          **Usage:**
+
+          <pre class="code-tip">
+          &#36;BRAIN
+          This is a reflection point
+          &#36;BRAIN
+          </pre>
+          $BRAIN
+
+      1-2-1-4:
+        heading: Book
+        body: |
+          `$BOOK`
+
+          Tempor non non id nulla tempor eiusmod sit excepteur culpa duis commodo
+          adipisicing labore sunt eu officia nisi quis eu elit pariatur sint enim
+          laboris duis in tempor labore exercitation duis ea nulla eiusmod deserunt est.
+
+          **Usage:**
+
+          <pre class="code-tip">
+          &#36;BOOK
+          This is a ??
+          &#36;BOOK
+          </pre>
+
+      1-2-1-5:
+        heading: Enbedded video
+        body: |
+          Video content could be embedded in pages at anypoint using these custom tags, but
+          this is optional and instead we use a dedicated video page type that also supports video
+          transcripts.
+
+          `$VM[Vimeo Title Example](743243040)$ENDVM`
+
+          **Usage:**
+
+          <pre class="code-tip">
+          &#36;VM[Optional Video Title](Vimeo Video ID)&#36;ENDVM
+          </pre>
+
+          `$YT[Youtube Video Title](EpjSlCJtPLo)$ENDYT`
+
+          **Usage:**
+
+          <pre class="code-tip">
+          &#36;YT[Optional Video Title](Youtube Video ID)&#36;ENDYT
+          </pre>
+
       1-2-2:
-        heading: video_page
-        body: page 2 of sub 2 (topic 2)
-        video:
-          id: XnP6jaK7ZAY
-          title: Youtube Video Title
-          provider: youtube
+        heading: Content validation
+        body: |
+          Modules require specific pages in a certain order for the service to work correctly.
+
       1-2-2-1:
-        heading: text_page
-        body: page 3 of sub 2 (topic 2 page 2)
+        heading: Application feedback
+        body: |
+          In `staging` a module overview page will render a box if the module being created
+          is found to have not satisfied minimum requirements.
+
+          If the Contentful web app validations for each model are not met, the overview page
+          may not be able to render, and the error triage box may not be visible.
+
+          The overview page is similar to `/modules/module-x`
+
+      1-2-2-2:
+        heading: Course wide content status
+        body: |
+          A course video automated validation report can be gathered against both published and draft
+          versions of modules by running a Github action.
+
       1-2-3:
+        heading: Questions follow
+        body: |
+          foo
+      1-2-3-1:
+        # question
+      1-2-3-2:
+        # question
+      1-2-3-3:
+        # question
+      1-2-3-4:
+        # question
+      1-2-3-5:
         # question
 
       # --------------------------------------
       1-3:
         # summary intro
-
       1-3-1:
         heading: Recap
         body: |
           - recap of what you have learnt
           - followup activities
           - further reading links
-
       1-3-2:
         # assessment intro
       1-3-2-1:
@@ -61,6 +225,22 @@ en:
       1-3-2-2:
         # question
       1-3-2-3:
+        # question
+      1-3-2-4:
+        # question
+      1-3-2-5:
+        # question
+      1-3-2-6:
+        # question
+      1-3-2-7:
+        # question
+      1-3-2-8:
+        # question
+      1-3-2-9:
+        # question
+      1-3-2-10:
+        # question
+      1-3-2-11:
         # results
 
       1-3-3:
@@ -72,6 +252,8 @@ en:
       1-3-3-3:
         # question
       1-3-3-4:
+        # question
+      1-3-3-5:
         form: xxxxx
 
       1-3-4:

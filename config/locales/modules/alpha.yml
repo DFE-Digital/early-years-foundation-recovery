@@ -6,141 +6,123 @@ en:
       what-to-expect:
         # preamble
       1-1:
-        heading: The first submodule
+        heading: Glossary of terms
         body: |
-          ## Default Tags
-          ---
 
-          <https://govspeak-preview.publishing.service.gov.uk/guide>
+          Information for onboarding content editors:
 
-          ## Custom Tags
-          ---
+          - `CMS`: Content Management System.
+          - `ERD`: Entity Relationship Diagram. (tbc in UML)
+          - `Space`: The Early Years Recovery content, team management, release schedule, mock data for application test, all exist within a space.
+          - `Alias`: Content in environments is accessed using aliases. The target an alias points to can be changed. We have access to three aliases.
+          - `Environment`: Content exists within an environment. We have access to four environments.
+          - `Content model`: The entities used to author entries. Used to define attributes, validations and control the editor interface. For example `Training Module`, `Question`
+          - `Content`: Instances of a content model. Used to create entries.
+          - `Master content`: The alias used by the public facing website which links to an environment. The environments this can point to can be named, cloned and destroyed by the content team.
+          - `Staging content`: An alias linking to an environment that can be used for testing, demoing. A potential use for this is when significant changes are made to models and code together.
+          - `Test content`: The alias used by the developer integration pipeline which links to the demo environment.
+          - `Demo content`: The environment linked to by the test alias containing a simplified abstraction of course content.
+          - `Integrity check`: An automated checklist to determine whether module content meets minimum standards.
+          - `Release`: A scheduled action that publishes a collection of content entries.
+          - `Launch`: The Contentful product that allows content editors to orchestrate a release.
+          - `Webhook`: A method of communication used by the CMS to alert a deployed environment that content has changed.
+          - `Cache`: An automatic snapshot of course content used to speed up pages in the browser.
+          - `Production deployment`: The public facing application using the current code and published content.
+          - `Staging deployment`: The latest code release candidate accessing draft content.
+          - `Development deployment`: The latest code accessing demo content. (currently standing in for production)
+          - `Review deployment`: A temporary deployment that can use either the Delivery or Preview APIs, demo or genuine content.
+          - `API`: Application Programming Interface.
+          - `Delivery API`: The mechanism that returns published content.
+          - `Preview API`: The mechanism that returns both published and draft content.
 
-          $VM[Vimeo Title Example](743243040)$ENDVM
-
-          **Usage:**
-
-          <pre class="code-tip">
-          &#36;VM[Optional Video Title](Vimeo Video ID)&#36;ENDVM
-          </pre>
-
-          $YT[Youtube Video Title](EpjSlCJtPLo)$ENDYT
-
-          **Usage:**
-
-          <pre class="code-tip">
-          &#36;YT[Optional Video Title](Youtube Video ID)&#36;ENDYT
-          </pre>
-
-          $INFO
-
-          Tempor non non id nulla tempor eiusmod sit excepteur culpa duis commodo
-          adipisicing labore sunt eu officia nisi quis eu elit pariatur sint enim
-          laboris duis in tempor labore exercitation duis ea nulla eiusmod deserunt est.
-
-          Tempor non non id nulla tempor eiusmod sit excepteur culpa duis commodo
-          adipisicing labore sunt eu officia nisi quis eu elit pariatur sint enim
-          laboris duis in tempor labore exercitation duis ea nulla eiusmod deserunt est.
-
-
-          **Usage:**
-
-          <pre class="code-tip">
-          &#36;INFO
-          Add your Govspeak markup here
-          &#36;INFO
-          </pre>
-          $INFO
-
-          $BRAIN
-
-          Tempor non non id nulla tempor eiusmod sit excepteur culpa duis commodo
-          adipisicing labore sunt eu officia nisi quis eu elit pariatur sint enim
-          laboris duis in tempor labore exercitation duis ea nulla eiusmod deserunt est.
-
-          **Usage:**
-
-          <pre class="code-tip">
-          &#36;BRAIN
-          Add your Govspeak markup here
-          &#36;BRAIN
-          </pre>
-          $BRAIN
-
-          $BOOK
-
-          Tempor non non id nulla tempor eiusmod sit excepteur culpa duis commodo
-          adipisicing labore sunt eu officia nisi quis eu elit pariatur sint enim
-          laboris duis in tempor labore exercitation duis ea nulla eiusmod deserunt est.
-
-          **Usage:**
-
-          <pre class="code-tip">
-          &#36;BOOK
-          Add your Govspeak markup here
-          &#36;BOOK
-          </pre>
-          $BOOK
-
-
-
-          ## Rspec
-          ---
-
-          %Warning: Govspeak test%
-      # --------------------------------------
       1-1-1:
-        heading: 1-1-1
+        heading: bar
         body: |
-          ## subheading
-
-          ^Govspeak Callout Test^
+          foo
+        video:
+          id: 807903195
+          title: Stuff
+          provider: vimeo
       1-1-2:
-        heading: 1-1-2
-        body: second topic, only page
+        heading: bar
+        body: |
+          foo
       1-1-3:
-        heading: 1-1-3
-        body: third topic, first page
-      1-1-3-1:
-        heading: 1-1-3-1
-        body: third topic, second page
-        notes: true
-
+        heading: bar
+        body: |
+          foo
       1-1-4:
-        # question
+        heading: bar
+        body: |
+          foo
+      1-1-5:
+        heading: bar
+        body: |
+          foo
+      1-1-6:
+        heading: bar
+        body: |
+          foo
+      1-1-7:
+        heading: bar
+        body: |
+          foo
+      1-1-8:
+        heading: bar
+        body: |
+          foo
+      1-1-9:
+        heading: bar
+        body: |
+          foo
+      1-1-10:
+        heading: bar
+        body: |
+          foo
 
       # --------------------------------------
       1-2:
-        heading: The second submodule
-        body: Second sub module intro
+        heading: sub intro
+        body: |
+          foo
       1-2-1:
-        heading: 1-2-1
-        body: First page in second submodule
+        heading: topic intro
+        body: |
+          foo
       1-2-1-1:
         # question
       1-2-1-2:
-        heading: 1-2-1-2
-        body: |
-          In this video an early years expert explains...
-
-          %Warning: Govspeak test%
-        video:
-          id: 743243040
-          title: Vimeo Video Title
-          provider: vimeo
+        # question
       1-2-1-3:
+        # question
+      1-2-1-4:
+        # question
+      1-2-1-5:
         # question
 
       # --------------------------------------
       1-3:
         # summary intro
-
       1-3-1:
         heading: Recap
         body: |
-          - recap of what you have learnt
-          - followup activities
-          - further reading links
+          ## What we have covered
+
+          - What is a content management system?
+          - What is a content environment?
+          - What is a content model?
+
+          ## Followup activities
+
+          - Request Contentful account access
+          - Create management API key if a developer
+          - Create an account on the staging application
+
+          ## Further reading
+
+          - <link>
+          - <link>
+          - <link>
 
       1-3-2:
         # assessment intro
@@ -153,6 +135,18 @@ en:
       1-3-2-4:
         # question
       1-3-2-5:
+        # question
+      1-3-2-6:
+        # question
+      1-3-2-7:
+        # question
+      1-3-2-8:
+        # question
+      1-3-2-9:
+        # question
+      1-3-2-10:
+        # question
+      1-3-2-11:
         # results
 
       1-3-3:
@@ -164,6 +158,8 @@ en:
       1-3-3-3:
         # question
       1-3-3-4:
+        # question
+      1-3-3-5:
         form: xxxxx
 
       1-3-4:

@@ -9,7 +9,8 @@ alpha:
     This module gives you a high level overview and introduces some technical terminology.
   objective: Understand the ecosystem and moving parts
   criteria: |
-    - What is an content environment?
+    - What is a content management system?
+    - What is a content environment?
     - What is a content model?
   duration: 0.5
   summative_threshold: 70

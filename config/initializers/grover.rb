@@ -1,3 +1,5 @@
+require 'grover'
+
 Grover.configure do |config|
   config.options = {
     executable_path: '/usr/bin/chromium-browser',

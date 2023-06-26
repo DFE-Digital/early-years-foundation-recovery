@@ -106,7 +106,7 @@ As above replace `http://localhost:3000` with `https://ey-recovery-staging.londo
 **1. Preview**
 
 - Name: `Autosave content for Staging (preview)`
-- Filters: `sys.environment.sys.id` equals `staging`
+- Filters: `sys.environment.sys.id` equals `master`
 - URL: `POST` to `https://ey-recovery-staging.london.cloudapps.digital/change`
 - Content events triggers: `Autosave` of `Entry` or `Asset`
 - Other API events: N/A
