@@ -18,9 +18,16 @@ permissions:
   contents: read
 
 env:
-  ARM_CLIENT_ID: "${{ secrets.AZURE_CLIENT_ID }}"
-  ARM_SUBSCRIPTION_ID: "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
-  ARM_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  TF_VAR_environment: ${{ vars.TF_VAR_ENVIRONMENT }}
+  TF_VAR_resource_name_prefix: ${{ vars.TF_VAR_RESOURCE_PREFIX }}
+  TF_VAR_psqlfs_sku: ${{ vars.TF_VAR_PSQLFS_SKU }}
+  TF_VAR_psqlfs_storage: ${{ vars.TF_VAR_PSQLFS_STORAGE }}
+  TF_VAR_psqlfs_username: ${{ secrets.TF_VAR_PSQLFS_USERNAME }}
+  TF_VAR_psqlfs_password: ${{ secrets.TF_VAR_PSQLFS_PASSWORD }}
+  TF_VAR_psqlfs_geo_redundant_backup: ${{ vars.TF_VAR_PSQLFS_GEO_REDUNDANT_BACKUP}}
 
 jobs:
   terraform-plan:

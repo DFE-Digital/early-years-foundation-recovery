@@ -1,14 +1,14 @@
 - if cookies[:track_analytics].nil?
 
   = govuk_cookie_banner do |cb|
-    - cb.message(heading_text: "Cookies on #{service_name}") do |m|
-      - m.action do
+    - cb.with_message(heading_text: "Cookies on #{service_name}") do |m|
+      - m.with_action do
         = govuk_button_to 'Accept analytics cookies', settings_path, params: { track_analytics: 'true', request_path: request.path }
 
-      - m.action do
+      - m.with_action do
         = govuk_button_to 'Reject analytics cookies', settings_path, params: { track_analytics: 'false', request_path: request.path }
 
-      - m.action do
+      - m.with_action do
         = govuk_link_to 'Read the cookie policy', setting_path('cookie-policy')
 
 

@@ -4,7 +4,7 @@ p.govuk_body View your notes from all your modules here. You can also use the li
 
 = govuk_tabs(title: 'Module notes') do |c|
   - @training_modules.each do |mod|
-    - c.tab(label: mod.tab_label) do
+    - c.with_tab(label: mod.tab_label) do
 
       h2.govuk-heading-m Notes for #{mod.tab_label}: #{mod.title}
 
