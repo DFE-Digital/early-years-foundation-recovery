@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe ToCsv do
   describe '.to_csv' do
     let(:coercion_decorator) { CoercionDecorator.new }
+
     context 'when given headers and data' do
       subject(:klass) do
         Class.new do
@@ -21,7 +22,7 @@ RSpec.describe ToCsv do
               {
                 custom_column_1: 'data_3',
                 custom_column_2: 'data_4',
-              }
+              },
             ]
           end
         end
@@ -73,12 +74,9 @@ RSpec.describe ToCsv do
                 custom_column_percentage: 0.5,
                 custom_column_2: 'data_4',
                 custom_column_3: 'data_6',
-              }
+              },
             ]
           end
-
-          
-          
         end
       end
 

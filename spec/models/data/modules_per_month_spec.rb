@@ -15,7 +15,7 @@ RSpec.describe Data::ModulesPerMonth do
         pass_percentage: 0.5,
         pass_count: 1,
         fail_percentage: 0.5,
-        fail_count: 1
+        fail_count: 1,
       },
       {
         month: 'February 2023',
@@ -23,7 +23,7 @@ RSpec.describe Data::ModulesPerMonth do
         pass_percentage: 0.0,
         pass_count: 0,
         fail_percentage: 1.0,
-        fail_count: 1
+        fail_count: 1,
       },
       {
         month: 'March 2023',
@@ -31,8 +31,8 @@ RSpec.describe Data::ModulesPerMonth do
         pass_percentage: 1.0,
         pass_count: 1,
         fail_percentage: 0.0,
-        fail_count: 0
-      }
+        fail_count: 0,
+      },
     ]
   end
 

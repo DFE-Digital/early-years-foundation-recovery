@@ -13,7 +13,7 @@ module Data
       total_users_not_passing_per_module.map do |module_name, count|
         row = {
           module_name: module_name,
-          count: count
+          count: count,
         }
         data << row
       end

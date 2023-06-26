@@ -77,6 +77,7 @@ RSpec.describe User, type: :model do
 
   describe '.to_csv' do
     let(:coercion_decorator) { CoercionDecorator.new }
+
     before do
       described_class.delete_all
 

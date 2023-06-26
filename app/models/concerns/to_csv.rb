@@ -24,13 +24,13 @@ module ToCsv
           batch_size = 1000
           formatted_batch = coercion_decorator.call(dashboard.limit(batch_size))
 
-            dashboard.find_each(batch_size: 1_000) do |record|
-              formatted = formatted_batch.find { |formatted_row| formatted_row["id"] == record.id }
-              csv << (formatted.values_at(*record.dashboard_attributes.keys))
-            end
+          dashboard.find_each(batch_size: 1_000) do |record|
+            formatted = formatted_batch.find { |formatted_row| formatted_row['id'] == record.id }
+            csv << (formatted.values_at(*record.dashboard_attributes.keys))
+          end
         end
+      end
     end
-  end
 
     # @return [Hash{Symbol => Array}] Structure used for the coercion of values for dashboard
     def data_hash

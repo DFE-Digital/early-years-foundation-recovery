@@ -18,7 +18,7 @@ module Data
             module_name: module_name,
             user_id: user_id,
             role_type: user_roles[user_id],
-            resit_attempts: attempts
+            resit_attempts: attempts,
           }
           data << row
         end

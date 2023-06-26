@@ -12,8 +12,8 @@ RSpec.describe Data::UsersNotPassing do
     [
       {
         module_name: 'module_1',
-        count: 1
-      }
+        count: 1,
+      },
     ]
   end
 

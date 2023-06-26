@@ -15,17 +15,17 @@ module Data
           pass_count = assessments.count(&:passed?)
           total_count = assessments.size
           fail_count = total_count - pass_count
-    
+
           pass_percentage = pass_count / total_count.to_f
           fail_percentage = 1 - pass_percentage
-    
+
           row = {
             month: month,
             module_name: module_name,
             pass_percentage: pass_percentage,
             pass_count: pass_count,
             fail_percentage: fail_percentage,
-            fail_count: fail_count
+            fail_count: fail_count,
           }
           data << row
         end

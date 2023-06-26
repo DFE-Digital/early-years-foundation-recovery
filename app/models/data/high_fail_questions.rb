@@ -14,7 +14,7 @@ module Data
         row = {
           module_name: module_name,
           question_name: question_name,
-          fail_rate_percentage: fail_rate
+          fail_rate_percentage: fail_rate,
         }
         data << row
       end

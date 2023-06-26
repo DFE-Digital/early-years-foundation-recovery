@@ -14,7 +14,7 @@ module Data
       UserAssessment.summative.passes.group(:module).average('CAST(score AS float)').to_a.each do |module_name, score|
         row = {
           module_name: module_name,
-          pass_score: score
+          pass_score: score,
         }
         data << row
       end

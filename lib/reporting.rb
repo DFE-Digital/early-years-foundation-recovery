@@ -55,9 +55,11 @@ module Reporting
       started_learning: started_learning,
       not_started_learning: not_started_learning,
 
-      # Users who have a least 1 note
-      with_notes: User.with_notes.count,
-      with_notes_percentage: (User.with_notes.count.to_f / User.all.count * 100).round(2),
+      # Active users who have a least 1 note
+      with_notes: with_notes_count,
+      with_notes_percentage: with_notes_percentage,
+      without_notes: without_notes_count,
+      without_notes_percentage: 1 - with_notes_percentage,
 
     }
   end
@@ -125,6 +127,21 @@ private
   # @see ApplicationHelper#calculate_module_state
   # @see User#module_time_to_completion
   # ----------------------------------------------------------------------------
+
+  # @return [Float]
+  def with_notes_percentage
+    with_notes_count.to_f / User.not_closed.count
+  end
+
+  # @return [Integer]
+  def with_notes_count
+    User.not_closed.with_notes.count
+  end
+
+  # @return [Integer]
+  def without_notes_count
+    User.not_closed.without_notes.count
+  end
 
   # Number of users who have not started learning
   def not_started_learning

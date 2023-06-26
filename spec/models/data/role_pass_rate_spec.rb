@@ -15,8 +15,8 @@ RSpec.describe Data::RolePassRate do
         pass_percentage: 0.6666666666666666,
         pass_count: 2,
         fail_percentage: 0.33333333333333337,
-        fail_count: 1
-      }
+        fail_count: 1,
+      },
     ]
   end
 

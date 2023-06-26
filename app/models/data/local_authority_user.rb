@@ -13,7 +13,7 @@ module Data
       count_by_local_authority.each do |authority, count|
         row = {
           local_authority: authority,
-          users: count
+          users: count,
         }
         data << row
       end

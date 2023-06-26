@@ -10,13 +10,13 @@ RSpec.describe Data::HighFailQuestions do
       {
         module_name: :average,
         question_name: nil,
-        fail_rate_percentage: 0.5
+        fail_rate_percentage: 0.5,
       },
       {
         module_name: 'module_1',
         question_name: 'q2',
-        fail_rate_percentage: 1.0
-      }
+        fail_rate_percentage: 1.0,
+      },
     ]
   end
 

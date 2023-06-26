@@ -13,8 +13,8 @@ RSpec.describe Data::ResitsPerUser do
         module_name: 'module_1',
         user_id: user_1.id,
         role_type: 'childminder',
-        resit_attempts: 1
-      }
+        resit_attempts: 1,
+      },
     ]
   end
 

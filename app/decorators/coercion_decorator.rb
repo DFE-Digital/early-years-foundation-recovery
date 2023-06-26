@@ -20,10 +20,9 @@ class CoercionDecorator
       end
     end
     input
-
   end
 
-    def format_value(key, value)
+  def format_value(key, value)
     if value.is_a?(Time)
       format_datetime(value)
     elsif key.to_s.include?('percentage')
@@ -40,5 +39,4 @@ class CoercionDecorator
   def format_datetime(element)
     element.strftime('%Y-%m-%d %H:%M:%S')
   end
-
 end

@@ -11,8 +11,8 @@ RSpec.describe Data::AveragePassScores do
     [
       {
         module_name: 'module_1',
-        pass_score: 100.0
-      }
+        pass_score: 100.0,
+      },
     ]
   end
 
