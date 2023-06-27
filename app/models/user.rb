@@ -29,7 +29,7 @@ class User < ApplicationRecord
     CSV.generate(headers: true) do |csv|
       csv << (DASHBOARD_ATTRS + module_headings)
       unformatted = dashboard.find_each(batch_size: 1000).map do |record|
-        attributes = record.dashboard_attributes.dup
+        attributes = record.data_attributes.dup
         module_headings.each_with_index do |heading, index|
           attributes[heading] = record.module_ttc[index]
         end
@@ -300,14 +300,15 @@ class User < ApplicationRecord
     end
   end
 
+  def data_attributes
+    DASHBOARD_ATTRS.map { |field| { field => send(field) } }.reduce(&:merge)
+  end
+
 private
 
   # @overload data_attributes
   # @see ToCsv#data_attributes
   #   @return [Hash] override
-  def data_attributes
-    DASHBOARD_ATTRS.map { |field| { field => send(field) } }.reduce(&:merge)
-  end
 
   # @return [SettingType, nil]
   def setting

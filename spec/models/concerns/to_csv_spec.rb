@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe ToCsv do
   describe '.to_csv' do
-
     context 'when given headers and data' do
       subject(:klass) do
         Class.new do

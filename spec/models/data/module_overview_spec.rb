@@ -25,9 +25,9 @@ RSpec.describe Data::ModuleOverview do
       {
         module_name: 'alpha',
         total_users: 3,
-        not_started: 2,
-        started: 1,
-        in_progress: 1,
+        not_started: 0,
+        started: 3,
+        in_progress: 3,
         completed: 0,
         true_false: Rails.application.cms? ? 0 : 'N/A',
         module_start: 0,
@@ -41,9 +41,9 @@ RSpec.describe Data::ModuleOverview do
       {
         module_name: 'bravo',
         total_users: 3,
-        not_started: 2,
-        started: 1,
-        in_progress: 1,
+        not_started: 0,
+        started: 3,
+        in_progress: 3,
         completed: 0,
         true_false: Rails.application.cms? ? 0 : 'N/A',
         module_start: 0,
@@ -57,9 +57,9 @@ RSpec.describe Data::ModuleOverview do
       {
         module_name: 'charlie',
         total_users: 3,
-        not_started: 2,
-        started: 1,
-        in_progress: 1,
+        not_started: 0,
+        started: 3,
+        in_progress: 3,
         completed: 0,
         true_false: Rails.application.cms? ? 0 : 'N/A',
         module_start: 0,
@@ -74,9 +74,9 @@ RSpec.describe Data::ModuleOverview do
   end
 
   before do
-    create(:user, :registered, module_time_to_completion: { 'alpha' => 0 })
-    create(:user, :registered, module_time_to_completion: { 'bravo' => 0 })
-    create(:user, :registered, module_time_to_completion: { 'charlie' => 0 })
+    create(:user, :registered, module_time_to_completion: { 'alpha' => 0, 'bravo' => 0, 'charlie' => 0 })
+    create(:user, :registered, module_time_to_completion: { 'alpha' => 0, 'bravo' => 0, 'charlie' => 0 })
+    create(:user, :registered, module_time_to_completion: { 'alpha' => 0, 'bravo' => 0, 'charlie' => 0 })
   end
 
   it_behaves_like('a data export model')

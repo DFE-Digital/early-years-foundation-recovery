@@ -17,22 +17,19 @@ module ToCsv
       CSV.generate(headers: true) do |csv|
         csv << column_names
 
-        unformatted = 
-          if self.dashboard.is_a? Array
-            self.dashboard
+        unformatted =
+          if dashboard.is_a? Array
+            dashboard
           else
-            self.dashboard.find_each(batch_size: batch_size).map(&:dashboard_attributes)
+            dashboard.find_each(batch_size: batch_size).map(&:dashboard_attributes)
           end
         formatted = CoercionDecorator.new(unformatted).call
         formatted.each { |row| csv << row.values }
       end
     end
-
-    
   end
 
   included do
-
     # @return [Hash] default to database fields
     def dashboard_attributes
       attributes

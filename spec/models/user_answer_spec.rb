@@ -19,7 +19,7 @@ RSpec.describe UserAnswer, type: :model do
 
   describe '.to_csv' do
     before do
-      5.times {create(:user_answer, :questionnaire, :summative)}
+      create_list(:user_answer, 5, :questionnaire, :summative)
     end
 
     specify do

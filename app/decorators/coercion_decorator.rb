@@ -1,7 +1,6 @@
 class CoercionDecorator
   extend Dry::Initializer
 
-
   param :input, type: Types::Strict::Array.of(Types::Strict::Hash)
 
   def call

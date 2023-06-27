@@ -4,7 +4,6 @@ RSpec.describe Ahoy::Event, type: :model do
   subject(:events) { described_class }
 
   describe '.to_csv' do
-
     before do
       described_class.new(
         id: 1,
