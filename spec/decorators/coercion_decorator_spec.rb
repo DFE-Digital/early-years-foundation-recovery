@@ -86,5 +86,11 @@ RSpec.describe CoercionDecorator do
         expect(formatted_users.first['created_at']).to eq('2023-01-01 00:00:00')
       end
     end
+
+    context 'when input is not an array of hashes or an active record collection' do
+      it 'raises a type error' do
+        expect { described_class.new.call('some string') }.to raise_error(Dry::Types::ConstraintError)
+      end
+    end
   end
 end

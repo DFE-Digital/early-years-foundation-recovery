@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe ToCsv do
   describe '.to_csv' do
-    let(:coercion_decorator) { CoercionDecorator.new }
 
     context 'when given headers and data' do
       subject(:klass) do
@@ -29,7 +28,7 @@ RSpec.describe ToCsv do
       end
 
       it 'returns a csv string' do
-        expect(klass.to_csv(coercion_decorator)).to eq("Custom Column 1,Custom Column 2\ndata_1,data_2\ndata_3,data_4\n")
+        expect(klass.to_csv).to eq("Custom Column 1,Custom Column 2\ndata_1,data_2\ndata_3,data_4\n")
       end
     end
 
@@ -49,7 +48,7 @@ RSpec.describe ToCsv do
       end
 
       it 'returns an empty csv string' do
-        expect(klass.to_csv(coercion_decorator)).to eq("\n")
+        expect(klass.to_csv).to eq("\n")
       end
     end
 
@@ -81,7 +80,7 @@ RSpec.describe ToCsv do
       end
 
       it 'returns a csv string' do
-        expect(klass.to_csv(coercion_decorator)).to eq("Custom Column 1,Custom Column Percentage,Custom Column 2,Custom Column 3\ndata_1,50.0%,data_3,data_5\ndata_2,50.0%,data_4,data_6\n")
+        expect(klass.to_csv).to eq("Custom Column 1,Custom Column Percentage,Custom Column 2,Custom Column 3\ndata_1,50.0%,data_3,data_5\ndata_2,50.0%,data_4,data_6\n")
       end
     end
   end

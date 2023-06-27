@@ -62,9 +62,8 @@ private
 
   # @return [Array<Array>] database table exports
   def models_to_csv
-    decorator = CoercionDecorator.new
     DATA_SOURCES.map do |source|
-      file_data = source[:model].constantize.to_csv(decorator)
+      file_data = source[:model].constantize.to_csv
       dir_path  = output.join(source[:folder])
       file_path = dir_path.join("#{source[:file]}.csv")
 

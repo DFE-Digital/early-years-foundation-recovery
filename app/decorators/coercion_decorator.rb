@@ -1,17 +1,13 @@
 class CoercionDecorator
   extend Dry::Initializer
 
-  param :input, default: proc { [] }
 
-  def call(input)
-    @input = input
-    format_input
-  end
+  param :input, type: Types::Strict::Array.of(Types::Strict::Hash)
 
-  def format_input
-    if input.is_a?(ActiveRecord::Relation)
-      @input = input.to_a.map(&:attributes)
-    end
+  def call
+    # if input.is_a?(ActiveRecord::Relation)
+    #   @input = input.to_a.map(&:attributes)
+    # end
     input.each do |row|
       row.each do |key, value|
         row[key] = format_value(key, value)
