@@ -8,12 +8,12 @@ RSpec.describe Data::LocalAuthorityUser do
   let(:rows) do
     [
       {
-        local_authority: 'LA3',
-        users: 1,
-      },
-      {
         local_authority: 'LA1',
         users: 2,
+      },
+      {
+        local_authority: 'LA3',
+        users: 1,
       },
     ]
   end
@@ -25,4 +25,10 @@ RSpec.describe Data::LocalAuthorityUser do
   end
 
   it_behaves_like('a data export model')
+
+  describe 'a data export model' do
+    it 'returns the expected dashboard data' do
+      expect(described_class.dashboard).to include(*rows)
+    end
+  end
 end

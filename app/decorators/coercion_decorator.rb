@@ -1,8 +1,6 @@
 class CoercionDecorator
   extend Dry::Initializer
 
-  # decorator_type = Dry.Types.Constructor(Array).constrained(type: Hash) | Dry.Types.Instance(ActiveRecord::Relation)
-
   param :input, default: proc { [] }
 
   def call(input)
