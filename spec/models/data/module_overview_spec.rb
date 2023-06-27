@@ -73,6 +73,5 @@ RSpec.describe Data::ModuleOverview do
     ]
   end
 
-
   it_behaves_like('a data export model')
 end
