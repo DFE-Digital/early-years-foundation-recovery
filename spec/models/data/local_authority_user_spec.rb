@@ -24,11 +24,13 @@ RSpec.describe Data::LocalAuthorityUser do
     create(:user, :registered, local_authority: 'LA3', created_at: Time.zone.now)
   end
 
-  it_behaves_like('a data export model')
-
-  describe 'a data export model' do
+  context 'when there are rows and headers' do
     it 'returns the expected dashboard data' do
       expect(described_class.dashboard).to include(*rows)
+    end
+
+    it 'returns the expected column_names' do
+      expect(described_class.column_names).to eq(headers)
     end
   end
 end
