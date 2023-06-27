@@ -29,7 +29,7 @@ RSpec.describe Data::ModuleOverview do
         started: 0,
         in_progress: 0,
         completed: 0,
-        true_false: 0,
+        true_false: 'N/A',
         module_start: 0,
         module_complete: 0,
         confidence_check_start: 0,
@@ -45,7 +45,7 @@ RSpec.describe Data::ModuleOverview do
         started: 0,
         in_progress: 0,
         completed: 0,
-        true_false: 0,
+        true_false: 'N/A',
         module_start: 0,
         module_complete: 0,
         confidence_check_start: 0,
@@ -61,7 +61,7 @@ RSpec.describe Data::ModuleOverview do
         started: 0,
         in_progress: 0,
         completed: 0,
-        true_false: 0,
+        true_false: 'N/A',
         module_start: 0,
         module_complete: 0,
         confidence_check_start: 0,
@@ -72,6 +72,7 @@ RSpec.describe Data::ModuleOverview do
       },
     ]
   end
+
 
   it_behaves_like('a data export model')
 end
