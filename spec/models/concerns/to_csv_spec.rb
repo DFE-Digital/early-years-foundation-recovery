@@ -82,5 +82,30 @@ RSpec.describe ToCsv do
         expect(klass.to_csv).to eq("Custom Column 1,Custom Column Percentage,Custom Column 2,Custom Column 3\ndata_1,50.0%,data_3,data_5\ndata_2,50.0%,data_4,data_6\n")
       end
     end
+
+    context 'when using a custom batch size' do
+      subject(:klass) do
+        Class.new do
+          include ToCsv
+          def self.column_names
+            ['Custom Column 1', 'Custom Column Percentage', 'Custom Column 2']
+          end
+
+          def self.dashboard
+            [
+              {
+                custom_column_1: 'data_1',
+                custom_column_percentage: 0.5,
+                custom_column_2: 'data_3',
+              },
+            ]
+          end
+        end
+      end
+
+      it 'returns a csv string' do
+        expect(klass.to_csv(batch_size: 1)).to eq("Custom Column 1,Custom Column Percentage,Custom Column 2\ndata_1,50.0%,data_3\n")
+      end
+    end
   end
 end

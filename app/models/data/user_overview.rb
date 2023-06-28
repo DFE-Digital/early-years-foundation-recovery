@@ -2,6 +2,7 @@ module Data
   class UserOverview
     include ToCsv
 
+    # @return [Array<String>]
     def self.column_names
       [
         'Registration Complete',
@@ -27,6 +28,7 @@ module Data
       ]
     end
 
+    # @return [Array<Hash{Symbol => Mixed}>]
     def self.dashboard
       [{
         registration_complete: User.registration_complete.count,

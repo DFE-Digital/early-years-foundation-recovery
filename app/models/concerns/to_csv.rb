@@ -13,16 +13,12 @@ module ToCsv
     # end
 
     # @return [String]
+    # @param batch_size [Integer]
     def to_csv(batch_size: 1_000)
       CSV.generate(headers: true) do |csv|
         csv << column_names
 
-        unformatted =
-          if dashboard.is_a? Array
-            dashboard
-          else
-            dashboard.find_each(batch_size: batch_size).map(&:dashboard_attributes)
-          end
+        unformatted = dashboard.is_a?(Array) ? dashboard : dashboard.find_each(batch_size: batch_size).map(&:dashboard_attributes)
         formatted = CoercionDecorator.new(unformatted).call
         formatted.each { |row| csv << row.values }
       end

@@ -7,7 +7,7 @@ module Data
       ['Month', 'Module', 'Pass Percentage', 'Pass Count', 'Fail Percentage', 'Fail Count']
     end
 
-    # @return [Hash{Symbol => Array}]
+    # @return [Array<Hash{Symbol => Mixed}>]
     def self.dashboard
       data = []
       modules_by_month.each do |month, module_data|

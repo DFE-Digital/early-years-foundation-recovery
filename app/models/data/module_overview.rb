@@ -2,6 +2,7 @@ module Data
   class ModuleOverview
     include ToCsv
 
+    # @return [Array<String>]
     def self.column_names
       [
         'Module Name',
@@ -21,6 +22,7 @@ module Data
       ]
     end
 
+    # @return [Array<Hash{Symbol => Mixed}>]
     def self.dashboard
       data = []
       mods.map do |mod|

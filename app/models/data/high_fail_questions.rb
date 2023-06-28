@@ -7,7 +7,7 @@ module Data
       ['Module', 'Question', 'Failure Rate Percentage']
     end
 
-    # @return [Hash{Symbol => Array}]
+    # @return [Array<Hash{Symbol => Mixed}>]
     def self.dashboard
       data = []
       high_fail_questions.each do |(module_name, question_name), fail_rate|

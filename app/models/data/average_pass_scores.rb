@@ -8,7 +8,7 @@ module Data
     end
 
     # TODO: Upcoming changes to UserAssessment will make this type coercion unnecessary
-    # @return [Hash{Symbol => Array}]
+    # @return [Array<Hash{Symbol => Mixed}>]
     def self.dashboard
       data = []
       UserAssessment.summative.passes.group(:module).average('CAST(score AS float)').to_a.each do |module_name, score|

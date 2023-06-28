@@ -7,7 +7,7 @@ module Data
       ['Module', 'User ID', 'Role', 'Resit Attempts']
     end
 
-    # @return [Hash{Symbol => Array}]
+    # @return [Array<Hash{Symbol => Mixed}>]
     def self.dashboard
       user_roles = User.pluck(:id, :role_type).to_h
       data = []

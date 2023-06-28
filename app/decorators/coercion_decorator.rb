@@ -3,18 +3,17 @@ class CoercionDecorator
 
   param :input, type: Types::Strict::Array.of(Types::Strict::Hash)
 
+  # @return [Array<Hash>]
   def call
-    # if input.is_a?(ActiveRecord::Relation)
-    #   @input = input.to_a.map(&:attributes)
-    # end
-    input.each do |row|
-      row.each do |key, value|
-        row[key] = format_value(key, value)
-      end
-    end
+    input.each { |row| row.each { |key, value| row[key] = format_value(key, value) } }
     input
   end
 
+private
+
+  # @param key [Symbol]
+  # @param value [Mixed]
+  # @return [Mixed]
   def format_value(key, value)
     if value.is_a?(Time)
       format_datetime(value)
@@ -25,10 +24,14 @@ class CoercionDecorator
     end
   end
 
+  # @param element [Numeric]
+  # @return [String]
   def format_percentage(element)
     "#{(element * 100).round(2)}%"
   end
 
+  # @param element [Time]
+  # @return [String]
   def format_datetime(element)
     element.strftime('%Y-%m-%d %H:%M:%S')
   end

@@ -7,7 +7,7 @@ module Data
       ['Module', 'Total Users Not Passing']
     end
 
-    # @return [Hash{Symbol => Array}]
+    # @return [Array<Hash{Symbol => Mixed}>]
     def self.dashboard
       data = []
       total_users_not_passing_per_module.map do |module_name, count|
