@@ -27,7 +27,14 @@ env:
   TF_VAR_psqlfs_storage: ${{ vars.TF_VAR_PSQLFS_STORAGE }}
   TF_VAR_psqlfs_username: ${{ secrets.TF_VAR_PSQLFS_USERNAME }}
   TF_VAR_psqlfs_password: ${{ secrets.TF_VAR_PSQLFS_PASSWORD }}
-  TF_VAR_psqlfs_geo_redundant_backup: ${{ vars.TF_VAR_PSQLFS_GEO_REDUNDANT_BACKUP}}
+  TF_VAR_psqlfs_geo_redundant_backup: ${{ vars.TF_VAR_PSQLFS_GEO_REDUNDANT_BACKUP }}
+  TF_VAR_asp_sku: ${{ vars.TF_VAR_ASP_SKU }}
+  TF_VAR_webapp_database_url : ${{ secrets.TF_VAR_WEBAPP_DATABASE_URL }}
+  TF_VAR_webapp_docker_registry_url: https://ghcr.io
+  TF_VAR_webapp_docker_registry_username: ${{ github.repository_owner }}
+  TF_VAR_webapp_docker_registry_password: ${{ secrets.GITHUB_TOKEN }}
+  TF_VAR_webapp_docker_image_url : ghcr.io/dfe-digital/early-years-foundation-recovery
+  TF_VAR_webapp_docker_image_tag : latest
 
 jobs:
   terraform-plan:
