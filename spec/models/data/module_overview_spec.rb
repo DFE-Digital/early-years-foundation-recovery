@@ -36,7 +36,7 @@ RSpec.describe Data::ModuleOverview do
         confidence_check_complete: 0,
         start_assessment: 0,
         pass_assessment: 0,
-        fail_assessment: 0
+        fail_assessment: 0,
       },
       {
         module_name: 'bravo',
@@ -52,7 +52,7 @@ RSpec.describe Data::ModuleOverview do
         confidence_check_complete: 0,
         start_assessment: 0,
         pass_assessment: 0,
-        fail_assessment: 0
+        fail_assessment: 0,
       },
       {
         module_name: 'charlie',
@@ -68,30 +68,31 @@ RSpec.describe Data::ModuleOverview do
         confidence_check_complete: 0,
         start_assessment: 0,
         pass_assessment: 0,
-        fail_assessment: 0
-      }
+        fail_assessment: 0,
+      },
     ]
-  
-    rows << {
-      module_name: 'delta',
-      total_users: 3,
-      not_started: 3,
-      started: 0,
-      in_progress: 0,
-      completed: 0,
-      true_false: Rails.application.cms? ? 0 : 'N/A',
-      module_start: 0,
-      module_complete: 0,
-      confidence_check_start: 0,
-      confidence_check_complete: 0,
-      start_assessment: 0,
-      pass_assessment: 0,
-      fail_assessment: 0
-    } if Rails.application.cms?
-  
+
+    if Rails.application.cms?
+      rows << {
+        module_name: 'delta',
+        total_users: 3,
+        not_started: 3,
+        started: 0,
+        in_progress: 0,
+        completed: 0,
+        true_false: Rails.application.cms? ? 0 : 'N/A',
+        module_start: 0,
+        module_complete: 0,
+        confidence_check_start: 0,
+        confidence_check_complete: 0,
+        start_assessment: 0,
+        pass_assessment: 0,
+        fail_assessment: 0,
+      }
+    end
+
     rows
   end
-  
 
   before do
     create(:user, :registered, module_time_to_completion: { 'alpha' => 0, 'bravo' => 0, 'charlie' => 0 })
