@@ -1,6 +1,5 @@
 module Data
   class SummativeQuiz
-    
     class << self
       # @param attribute [Symbol]
       # @return [Hash{Symbol => Hash{Symbol => Numeric}}]
