@@ -24,9 +24,6 @@ RSpec.describe Registration::EarlyYearsEmailsController, type: :controller do
 
     describe 'GET #edit' do
       it 'succeeds' do
-        puts confirmed_user
-        puts confirmed_user.role_type
-
         get :edit
         expect(response).to have_http_status(:success)
       end

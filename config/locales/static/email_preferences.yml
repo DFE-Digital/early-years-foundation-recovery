@@ -4,7 +4,7 @@ en:
     email_preferences:
       heading: Update your email preferences
       body: |
-        <div class='govuk-!-margin-bottom-8'>
+        {:.govuk-!-margin-bottom-8}
           Tell us which emails you would like to receive from us.
-        </div>
-        <a class='govuk-button' href='registration/training-emails/edit'>Continue</a>
+
+        [Continue](/registration/training-emails/edit){:class="govuk-button"}
