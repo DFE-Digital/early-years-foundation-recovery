@@ -10,7 +10,6 @@ p.govuk-body
   |
     The course has #{@all_modules.count} modules.
     #{@published_modules.count} modules are currently available.
-    You must complete modules 1 to 3 in order.
 
 p.govuk-body Each module should take between 1 and 2 hours to complete.
 p.govuk-body You can pause and restart the training as much as you like.
@@ -29,7 +28,7 @@ p.govuk-body Some modules also have short videos to enhance your understanding.
     .govuk-grid-column-two-thirds
       div class='light-grey-box govuk-!-margin-bottom-4'
         h2.govuk-heading-m Ready to get started?
-        p.govuk-body Enrol on this course and begin the first module. You will need to sign in or create an account before starting a module.
+        p.govuk-body Enrol on this course and begin your first module. You will need to sign in or create an account before starting a module.
         .govuk-button-group
           = govuk_button_link_to 'Create an account', new_user_registration_path
           .white-space-pre-wrap= ' or '
