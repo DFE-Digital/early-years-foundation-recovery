@@ -62,4 +62,42 @@ RSpec.describe Training::Question, :cms, type: :model do
   it '#assessments_type' do
     expect(question.assessments_type).to eq 'formative_assessment'
   end
+
+  describe '#legend' do
+    context 'when one option is correct' do
+      specify do
+        expect(question.legend).to end_with '(Select one answer)'
+      end
+    end
+
+    context 'when the question is a confidence check' do
+      subject(:question) do
+        Training::Module.by_name('alpha').page_by_name('1-3-3-3')
+      end
+
+      specify do
+        expect(question.legend).to end_with '(Select one answer)'
+      end
+    end
+
+    context 'when multiple options are correct' do
+      subject(:question) do
+        Training::Module.by_name('alpha').page_by_name('1-3-2-1')
+      end
+
+      specify do
+        expect(question.legend).to end_with '(Select all answers that apply)'
+      end
+    end
+
+    context 'when the question is framed as true or false' do
+      subject(:question) do
+        Training::Module.by_name('bravo').page_by_name('1-2-3')
+      end
+
+      specify do
+        expect(question.legend).to start_with 'True or false?'
+      end
+    end
+  end
 end
