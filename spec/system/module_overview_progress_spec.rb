@@ -11,9 +11,8 @@ RSpec.describe 'Module overview page progress' do
 
     it 'all the indicators are "not started"' do
       within '#section-content-1' do
-        expect(page).to have_content 'not started', count: 4
-        expect(page).to have_content('1-1-1')
-        expect(page).not_to have_link('1-1-1')
+        expect(page).to have_content 'not started', count: 10
+        expect(page).not_to have_link(href: '/modules/alpha/content-pages/1-1-1')
       end
 
       within '#section-content-2' do
@@ -70,7 +69,7 @@ RSpec.describe 'Module overview page progress' do
 
     it 'the first topic cannot be clicked' do
       within '#section-content-1 .module-section--container .module-section--item:nth-child(1)' do
-        expect(page).not_to have_link('1-1-1', href: '/modules/alpha/content-pages/1-1-1')
+        expect(page).not_to have_link(href: '/modules/alpha/content-pages/1-1-1')
       end
     end
 
@@ -93,7 +92,7 @@ RSpec.describe 'Module overview page progress' do
 
     it 'the first topic can be clicked' do
       within '#section-content-1 .module-section--container .module-section--item:nth-child(1)' do
-        expect(page).to have_link('1-1-1', href: '/modules/alpha/content-pages/1-1-1')
+        expect(page).to have_link(href: '/modules/alpha/content-pages/1-1-1')
       end
     end
 
@@ -105,7 +104,7 @@ RSpec.describe 'Module overview page progress' do
 
     it 'the second topic cannot be clicked' do
       within '#section-content-1 .module-section--container .module-section--item:nth-child(3)' do
-        expect(page).not_to have_link('1-1-1', href: '/modules/alpha/content-pages/1-1-1')
+        expect(page).not_to have_link(href: '/modules/alpha/content-pages/1-1-1')
       end
     end
 
@@ -134,7 +133,7 @@ RSpec.describe 'Module overview page progress' do
 
     it 'the topic is not a link' do
       within '#section-content-1 .module-section--container .module-section--item:nth-child(5)' do
-        expect(page).not_to have_link('1-1-3', href: '/modules/alpha/content-pages/1-1-1')
+        expect(page).not_to have_link(href: '/modules/alpha/content-pages/1-1-1')
       end
     end
   end
@@ -147,12 +146,12 @@ RSpec.describe 'Module overview page progress' do
 
     it 'all the indicators in the submodule are "complete"' do
       within '#section-content-1' do
-        expect(page).to have_content 'complete', count: 4
+        expect(page).to have_content 'complete', count: 10
       end
     end
 
     it 'resumes from the last visited page' do
-      expect(page).to have_link 'Resume module', href: '/modules/alpha/content-pages/1-1-4'
+      expect(page).to have_link 'Resume module', href: '/modules/alpha/content-pages/1-2-1-1'
     end
   end
 
@@ -162,13 +161,7 @@ RSpec.describe 'Module overview page progress' do
 
       start_summative_assessment(alpha)
       visit '/modules/alpha/questionnaires/1-3-2-1'
-      3.times do
-        check 'Wrong answer 1'
-        check 'Wrong answer 2'
-        click_on 'Save and continue'
-      end
-      choose 'Wrong answer 1'
-      click_on 'Finish test'
+      take_assessment(correct: 6)
       visit '/modules/alpha'
     end
 
@@ -192,7 +185,7 @@ RSpec.describe 'Module overview page progress' do
 
     it 'all the indicators are "complete"' do
       within '#section-content-1' do
-        expect(page).to have_content 'complete', count: 4
+        expect(page).to have_content 'complete', count: 10
       end
 
       within '#section-content-2' do

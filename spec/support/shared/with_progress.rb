@@ -115,6 +115,90 @@ RSpec.shared_context 'with progress' do
 
   else # ===================================================================================================
 
+    # Can be extended into ContentTestSchema
+    # for CMS backed assessment we can use the AST schema
+    let(:incorrect_options) do
+      alpha.summative_questions.map do |item|
+        question = item.questionnaire.questions.values.first
+        answers = question[:answers]
+        incorrect_answers = answers.keys - question[:correct_answers]
+        answers.slice(*incorrect_answers).values
+      end
+    end
+
+    let(:correct_options) do
+      alpha.summative_questions.map do |item|
+        question = item.questionnaire.questions.values.first
+        answers, correct_answers = question.slice(:answers, :correct_answers).values
+        answers.slice(*correct_answers).values
+      end
+    end
+
+    # number of correct answers out of 10
+    def take_assessment(correct:)
+      if correct.eql?(10)
+        correct_options.each.with_index(1) do |options, position|
+          options.each do |option|
+            options.one? ? choose(option) : check(option)
+          end
+
+          if position.eql?(10)
+            click_on 'Finish test'
+          else
+            click_on 'Save and continue'
+          end
+        end
+
+      elsif correct.eql?(0)
+        incorrect_options.each.with_index(1) do |options, position|
+          current_correct = correct_options[position - 1]
+
+          options.each do |option|
+            current_correct.one? ? choose(option) : check(option)
+          end
+
+          if position.eql?(10)
+            click_on 'Finish test'
+          else
+            click_on 'Save and continue'
+          end
+        end
+
+      else
+
+        # upto correct number
+        correct_options.each.with_index(1) do |options, position|
+          if position > correct
+            next
+          else
+            options.each do |option|
+              options.one? ? choose(option) : check(option)
+            end
+
+            click_on 'Save and continue'
+          end
+        end
+
+        incorrect_options[correct..].each.with_index(correct + 1) do |options, position|
+          current_correct = correct_options[position - 1]
+
+          options.each do |option|
+            current_correct.one? ? choose(option) : check(option)
+          end
+
+          if position.eql?(10)
+            click_on 'Finish test'
+          else
+            click_on 'Save and continue'
+          end
+        end
+
+      end
+    end
+
+    # ===================================================================================================
+
+
     let(:alpha) { TrainingModule.find_by(name: 'alpha') }
     let(:bravo) { TrainingModule.find_by(name: 'bravo') }
     let(:charlie) { TrainingModule.find_by(name: 'charlie') }

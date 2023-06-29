@@ -27,7 +27,7 @@ RSpec.describe 'Common page' do
   end
 
   describe 'thank you' do
-    subject(:common_page) { '/modules/alpha/content-pages/1-3-3-4' }
+    subject(:common_page) { '/modules/alpha/content-pages/1-3-3-5' }
 
     it 'uses generic content' do
       expect(page).to have_content 'Thank you'

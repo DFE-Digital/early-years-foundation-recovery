@@ -39,14 +39,14 @@ en:
         heading: bar
         body: |
           foo
-        video:
-          id: 807903195
-          title: Stuff
-          provider: vimeo
       1-1-2:
         heading: bar
         body: |
           foo
+        video:
+          id: 807903195
+          title: Stuff
+          provider: vimeo
       1-1-3:
         heading: bar
         body: |

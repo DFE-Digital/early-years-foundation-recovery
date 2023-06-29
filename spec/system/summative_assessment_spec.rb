@@ -6,27 +6,6 @@ RSpec.describe 'Summative assessment' do
 
   let(:first_question_path) { '/modules/alpha/questionnaires/1-3-2-1' }
 
-  # TODO: extract to `with_progress`
-  # ----------------------------
-  # For CMS backed assessment we can use the AST schema
-  let(:incorrect_options) do
-    alpha.summative_questions.map do |item|
-      question = item.questionnaire.questions.values.first
-      answers = question[:answers]
-      incorrect_answers = answers.keys - question[:correct_answers]
-      answers.slice(*incorrect_answers).values
-    end
-  end
-
-  let(:correct_options) do
-    alpha.summative_questions.map do |item|
-      question = item.questionnaire.questions.values.first
-      answers, correct_answers = question.slice(:answers, :correct_answers).values
-      answers.slice(*correct_answers).values
-    end
-  end
-  # ----------------------------
-
   before do
     skip 'WIP' if Rails.application.cms?
     start_summative_assessment(alpha)
@@ -52,18 +31,20 @@ RSpec.describe 'Summative assessment' do
     before do
       visit first_question_path
 
-      # TODO: extract to `with_progress`
-      correct_options.each.with_index(1) do |options, position|
-        options.each do |option|
-          options.one? ? choose(option) : check(option)
-        end
+      # # TODO: extract to `with_progress`
+      # correct_options.each.with_index(1) do |options, position|
+      #   options.each do |option|
+      #     options.one? ? choose(option) : check(option)
+      #   end
 
-        if position.eql?(10)
-          click_on 'Finish test'
-        else
-          click_on 'Save and continue'
-        end
-      end
+      #   if position.eql?(10)
+      #     click_on 'Finish test'
+      #   else
+      #     click_on 'Save and continue'
+      #   end
+      # end
+
+      take_assessment(correct: 10)
     end
 
     it 'displays the correct score as a percentage' do
@@ -101,35 +82,7 @@ RSpec.describe 'Summative assessment' do
   context 'when the threshold is passed' do
     before do
       visit first_question_path
-
-      # TODO: extract to `with_progress`
-      correct_options.each.with_index(1) do |options, position|
-        # skip questions 8 to 10
-        if position > 7
-          next
-        else
-          options.each do |option|
-            options.one? ? choose(option) : check(option)
-          end
-
-          click_on 'Save and continue'
-        end
-      end
-
-      # fail questions 8 to 10
-      incorrect_options[7..].each.with_index(8) do |options, position|
-        correct = correct_options[position - 1]
-
-        options.each do |option|
-          correct.one? ? choose(option) : check(option)
-        end
-
-        if position.eql?(10)
-          click_on 'Finish test'
-        else
-          click_on 'Save and continue'
-        end
-      end
+      take_assessment(correct: 7)
     end
 
     it 'displays the score as a whole number percentage' do
@@ -160,21 +113,7 @@ RSpec.describe 'Summative assessment' do
   context 'when failed' do
     before do
       visit first_question_path
-
-      # TODO: extract to `with_progress`
-      incorrect_options.each.with_index(1) do |options, position|
-        correct = correct_options[position - 1]
-
-        options.each do |option|
-          correct.one? ? choose(option) : check(option)
-        end
-
-        if position.eql?(10)
-          click_on 'Finish test'
-        else
-          click_on 'Save and continue'
-        end
-      end
+      take_assessment(correct: 0)
     end
 
     it 'displays the correct score as a percentage' do
