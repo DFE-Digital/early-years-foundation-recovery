@@ -28,16 +28,7 @@ class User < ApplicationRecord
 
     CSV.generate(headers: true) do |csv|
       csv << (DASHBOARD_ATTRS + module_headings)
-      unformatted = dashboard.find_each(batch_size: 1000).map do |record|
-        attributes = record.data_attributes.dup
-        # binding.pry
-        attributes.merge(record.module_time_to_completion)
-        # module_headings.each_with_index do |heading, index|
-
-        #   attributes[heading] = record.module_ttc[index]
-        # end
-        # attributes
-      end
+      unformatted = dashboard.find_each(batch_size: 1000).map(&:dashboard_attributes)
       formatted = CoercionDecorator.new(unformatted).call
       formatted.each { |row| csv << row.values }
     end
@@ -277,11 +268,10 @@ class User < ApplicationRecord
 
   # @return [Array<Integer, nil>]
   def module_ttc
-    
     if Rails.application.cms?
-      Training::Module.ordered.reject(&:draft?).map(&:name).map { |mod| module_time_to_completion[mod] }
+      Training::Module.ordered.reject(&:draft?).map(&:name).index_with { |mod| module_time_to_completion[mod] }
     else
-      TrainingModule.published.map(&:name).map { |mod| module_time_to_completion[mod] }
+      TrainingModule.published.map(&:name).index_with { |mod| module_time_to_completion[mod] }
     end
   end
 
@@ -304,15 +294,18 @@ class User < ApplicationRecord
     end
   end
 
-  def data_attributes
-    DASHBOARD_ATTRS.map { |field| { field => send(field) } }.reduce(&:merge)
+  # @see ToCsv#dashboard_attributes
+  # @return [Hash] override
+  def dashboard_attributes
+    data_attributes.dup.merge(module_ttc)
   end
 
 private
 
-  # @overload data_attributes
-  # @see ToCsv#data_attributes
-  #   @return [Hash] override
+  #   @return [Hash]
+  def data_attributes
+    DASHBOARD_ATTRS.map { |field| { field => send(field) } }.reduce(&:merge)
+  end
 
   # @return [SettingType, nil]
   def setting
