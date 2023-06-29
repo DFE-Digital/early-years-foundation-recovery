@@ -72,10 +72,12 @@ module Data
         User.not_closed.without_notes.count
       end
 
+      # @return [Integer]
       def started_learning
         User.all.map { |u| u.module_time_to_completion.keys }.count(&:present?)
       end
 
+      # @return [Integer]
       def not_started_learning
         User.all.map { |u| u.module_time_to_completion.keys }.count(&:empty?)
       end

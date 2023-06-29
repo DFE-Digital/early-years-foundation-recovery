@@ -10,24 +10,9 @@ module Data
 
       # @return [Array<Hash{Symbol => Mixed}>]
       def dashboard
-        result = []
-
-        SummativeQuiz.attribute_pass_percentage(:setting_type).each do |setting_type, percentages|
-          pass_percentage = percentages[:pass_percentage]
-          pass_count = percentages[:pass_count]
-          fail_percentage = percentages[:fail_percentage]
-          fail_count = percentages[:fail_count]
-
-          result << {
-            setting_type: setting_type,
-            pass_percentage: pass_percentage,
-            pass_count: pass_count,
-            fail_percentage: fail_percentage,
-            fail_count: fail_count,
-          }
+        SummativeQuiz.attribute_pass_percentage(:setting_type).map do |setting_type, percentages|
+          percentages.merge(setting_type: setting_type)
         end
-
-        result
       end
   end
   end

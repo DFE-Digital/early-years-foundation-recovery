@@ -199,7 +199,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_133651) do
     t.string "last_name"
     t.boolean "private_beta_registration_complete", default: false
     t.integer "failed_attempts", default: 0, null: false
-    t.datetime "locked_at", precision: nil
+    t.datetime "locked_at"
     t.string "unlock_token"
     t.string "setting_type"
     t.string "setting_type_other"
@@ -211,7 +211,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_133651) do
     t.string "role_type_other"
     t.string "setting_type_id"
     t.boolean "registration_complete", default: false
-    t.datetime "closed_at", precision: nil
+    t.datetime "closed_at"
     t.string "closed_reason"
     t.string "closed_reason_custom"
     t.boolean "training_emails"

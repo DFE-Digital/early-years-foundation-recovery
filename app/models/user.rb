@@ -30,10 +30,13 @@ class User < ApplicationRecord
       csv << (DASHBOARD_ATTRS + module_headings)
       unformatted = dashboard.find_each(batch_size: 1000).map do |record|
         attributes = record.data_attributes.dup
-        module_headings.each_with_index do |heading, index|
-          attributes[heading] = record.module_ttc[index]
-        end
-        attributes
+        # binding.pry
+        attributes.merge(record.module_time_to_completion)
+        # module_headings.each_with_index do |heading, index|
+
+        #   attributes[heading] = record.module_ttc[index]
+        # end
+        # attributes
       end
       formatted = CoercionDecorator.new(unformatted).call
       formatted.each { |row| csv << row.values }
@@ -274,6 +277,7 @@ class User < ApplicationRecord
 
   # @return [Array<Integer, nil>]
   def module_ttc
+    
     if Rails.application.cms?
       Training::Module.ordered.reject(&:draft?).map(&:name).map { |mod| module_time_to_completion[mod] }
     else

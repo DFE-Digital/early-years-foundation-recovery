@@ -10,15 +10,12 @@ module Data
 
       # @return [Array<Hash{Symbol => Mixed}>]
       def dashboard
-        data = []
         total_users_not_passing_per_module.map do |module_name, count|
-          row = {
+          {
             module_name: module_name,
-            count: count,
+            count: count
           }
-          data << row
         end
-        data
       end
 
   private
