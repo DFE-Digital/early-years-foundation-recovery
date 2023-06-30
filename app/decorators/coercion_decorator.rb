@@ -5,8 +5,7 @@ class CoercionDecorator
 
   # @return [Array<Hash>]
   def call
-    input.each { |row| row.each { |key, value| row[key] = format_value(key, value) } }
-    input
+    input.each { |row| row.map { |key, value| row[key] = format_value(key, value) } }
   end
 
 private
@@ -15,7 +14,7 @@ private
   # @param value [Mixed]
   # @return [Mixed]
   def format_value(key, value)
-    if value.is_a?(Time)
+    if value.is_a?(Time) || value.is_a?(DateTime)
       format_datetime(value)
     elsif key.to_s.include?('percentage')
       format_percentage(value)
@@ -26,13 +25,13 @@ private
 
   # @param element [Numeric]
   # @return [String]
-  def format_percentage(element)
-    "#{(element * 100).round(2)}%"
+  def format_percentage(value)
+    "#{(value * 100).round(2)}%"
   end
 
   # @param element [Time]
   # @return [String]
-  def format_datetime(element)
-    element.strftime('%Y-%m-%d %H:%M:%S')
+  def format_datetime(value)
+    value.strftime('%Y-%m-%d %H:%M:%S')
   end
 end

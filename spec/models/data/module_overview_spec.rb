@@ -45,7 +45,7 @@ RSpec.describe Data::ModuleOverview do
         started: 3,
         in_progress: 3,
         completed: 0,
-        true_false: Rails.application.cms? ? 0 : 'N/A',
+        true_false: Rails.application.cms? ? 1 : 'N/A',
         module_start: 0,
         module_complete: 0,
         confidence_check_start: 0,

@@ -3,14 +3,17 @@ require 'csv'
 module ToCsv
   extend ActiveSupport::Concern
 
+  # Required interface:
+  #
+  # self.dashboard: Returns the data to be exported as a csv.
+  # It should return an array of hashes, where each hash represents a row of data.
+  #
+  # self.column_names: Returns an array of strings representing the column names to be used as headers in the CSV file.
+
   class_methods do
     def dashboard
       all
     end
-
-    # def column_names
-
-    # end
 
     # @return [String]
     # @param batch_size [Integer]

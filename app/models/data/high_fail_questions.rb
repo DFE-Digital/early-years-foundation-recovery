@@ -24,12 +24,23 @@ module Data
 
   private
 
-      # @return [Hash{Symbol => Float, Array<Array<String, String>> => Float}]
-      def high_fail_questions
-        question_attempts = UserAnswer.summative.group(:module, :name).count
-        question_failures = UserAnswer.summative.where(correct: false).group(:module, :name).count
-        total_attempts = question_attempts.values.sum
+      # @return [Hash{Array<String, String> => Integer}]
+      def question_attempts
+        UserAnswer.summative.group(:module, :name).count
+      end
 
+      # @return [Hash{Array<String, String> => Integer}]
+      def question_failures
+        UserAnswer.summative.where(correct: false).group(:module, :name).count
+      end
+
+      # @return [Integer]
+      def total_attempts
+        question_attempts.values.sum
+      end
+
+      # @return [Hash{Symbol => Mixed}]
+      def high_fail_questions
         average_fail_rate = question_failures.values.sum / total_attempts.to_f
 
         high_fail_questions = {}
