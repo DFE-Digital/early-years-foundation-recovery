@@ -10,16 +10,13 @@ module Data
 
       # @return [Array<Hash{Symbol => Mixed}>]
       def dashboard
-        data = []
-        high_fail_questions.each do |(module_name, question_name), fail_rate|
-          row = {
+        high_fail_questions.map do |(module_name, question_name), fail_rate|
+          {
             module_name: module_name,
             question_name: question_name,
             fail_rate_percentage: fail_rate,
           }
-          data << row
         end
-        data
       end
 
   private

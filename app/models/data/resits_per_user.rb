@@ -10,24 +10,24 @@ module Data
 
       # @return [Array<Hash{Symbol => Mixed}>]
       def dashboard
-        user_roles = User.pluck(:id, :role_type).to_h
-        data = []
-
-        resit_attempts_per_user.each do |module_name, user_attempts|
-          user_attempts.each do |user_id, attempts|
-            row = {
+        resit_attempts_per_user.flat_map do |module_name, user_attempts|
+          user_attempts.map do |user_id, attempts|
+            {
               module_name: module_name,
               user_id: user_id,
               role_type: user_roles[user_id],
               resit_attempts: attempts,
             }
-            data << row
           end
         end
-        data
       end
 
   private
+
+      # @return [Hash{Integer => String}]
+      def user_roles
+        User.pluck(:id, :role_type).to_h
+      end
 
       # @return [Hash{Symbol => Hash{Integer => Integer}}]
       def resit_attempts_per_user

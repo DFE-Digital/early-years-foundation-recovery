@@ -25,9 +25,8 @@ module Data
 
       # @return [Array<Hash{Symbol => Mixed}>]
       def dashboard
-        data = []
         mods.map do |mod|
-          row = {
+          {
             module_name: mod.name,
             total_users: User.count,
             not_started: not_started(mod),
@@ -43,9 +42,7 @@ module Data
             pass_assessment: Ahoy::Event.summative_assessment_pass(mod.name).count,
             fail_assessment: Ahoy::Event.summative_assessment_fail(mod.name).count,
           }
-          data << row
         end
-        data
       end
 
   private

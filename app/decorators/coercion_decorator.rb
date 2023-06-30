@@ -23,13 +23,13 @@ private
     end
   end
 
-  # @param element [Numeric]
+  # @param value [Numeric]
   # @return [String]
   def format_percentage(value)
     "#{(value * 100).round(2)}%"
   end
 
-  # @param element [Time]
+  # @param value [Time, DateTime]
   # @return [String]
   def format_datetime(value)
     value.strftime('%Y-%m-%d %H:%M:%S')

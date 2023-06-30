@@ -3,16 +3,21 @@ require 'csv'
 module ToCsv
   extend ActiveSupport::Concern
 
-  # Required interface:
-  #
-  # self.dashboard: Returns the data to be exported as a csv.
-  # It should return an array of hashes, where each hash represents a row of data.
-  #
-  # self.column_names: Returns an array of strings representing the column names to be used as headers in the CSV file.
-
   class_methods do
+    # Returns an array of strings representing the column names for the data export
+    # @return [Array<String>]
+    def column_names
+      super
+    rescue NoMethodError
+      raise NoMethodError, 'ToCsv.to_csv a column names method must be defined for bespoke data export models to serve as csv column headers'
+    end
+
+    # Returns an array of hashes representing the rows of data to be exported or an ActiveRecord::Relation
+    # @return [ActiveRecord::Relation, Array<Hash{Symbol => Mixed}>]
     def dashboard
       all
+    rescue NoMethodError
+      raise NoMethodError, 'ToCsv.to_csv a dashboard method must be defined for bespoke data export models to serve as csv data'
     end
 
     # @return [String]

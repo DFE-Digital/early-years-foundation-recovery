@@ -10,15 +10,12 @@ module Data
 
       # @return [Array<Hash{Symbol => Mixed}>]
       def dashboard
-        data = []
         count_by_local_authority.map do |authority, count|
-          row = {
+          {
             local_authority: authority,
             users: count,
           }
-          data << row
         end
-        data
       end
 
   private
