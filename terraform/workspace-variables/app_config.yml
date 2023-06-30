@@ -50,6 +50,7 @@ development:
 # ey-recovery-content
 content:
   <<: *defaults
+  CONTENTFUL: false
   # jobs
   DASHBOARD_UPDATE: false
   # DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # every 5 mins (default: daily at noon)
