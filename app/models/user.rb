@@ -266,7 +266,7 @@ class User < ApplicationRecord
     events.where(name: 'user_registration').first&.time # :first returns private_beta or public_beta if that is the only one
   end
 
-  # @return [Array<Integer, nil>]
+  # @return [Hash{Symbol => Integer}]
   def module_ttc
     if Rails.application.cms?
       Training::Module.ordered.reject(&:draft?).map(&:name).index_with { |mod| module_time_to_completion[mod] }
