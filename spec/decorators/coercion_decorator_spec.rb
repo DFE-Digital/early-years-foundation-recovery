@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe CoercionDecorator do
   describe '.call' do
-
     context 'when input is an array of hashes' do
       let(:input) do
         [{
