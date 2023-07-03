@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Registration::RoleTypesController, type: :controller do
+RSpec.describe Registration::TrainingEmailsController, type: :controller do
   context 'when not signed in' do
     describe 'GET #edit' do
       it 'redirects' do
@@ -18,7 +18,7 @@ RSpec.describe Registration::RoleTypesController, type: :controller do
   end
 
   context 'when confirmed user signed in' do
-    let(:confirmed_user) { create :user, :confirmed, :name, :setting_type }
+    let(:confirmed_user) { create :user, :confirmed, :name, :emails_opt_in }
 
     before { sign_in confirmed_user }
 
@@ -31,9 +31,9 @@ RSpec.describe Registration::RoleTypesController, type: :controller do
 
     describe 'POST #update' do
       it 'succeeds' do
-        post :update, params: { user: { role_type: 'Manager' } }
-        expect(response).to redirect_to edit_registration_training_emails_path
-        expect(confirmed_user.reload.role_type).to eq 'Manager'
+        post :update, params: { user: { training_emails: 'true' } }
+        expect(response).to redirect_to edit_registration_early_years_emails_path
+        expect(confirmed_user.reload.training_emails).to eq true
       end
     end
   end

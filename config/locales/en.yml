@@ -1,8 +1,13 @@
 en:
   user:
     show:
-      your_setting_details_html:
-        <h2 class='govuk-heading-m'>Your setting details</h2>
+      your_setting_details_html: <h2 class='govuk-heading-m'>Your setting details</h2>
+      your_email_preferences_html: <h2 class='govuk-heading-m'>Your email preferences</h2>
+      training_emails_true: You have chosen to receive emails about this training course.
+      training_emails_false: You have chosen not to receive emails about this training course.
+      early_years_emails_true: You have chosen to receive early years email updates.
+      early_years_emails_false: You have chosen not to receive early years email updates.
+
   activemodel:
     errors:
       models:
@@ -36,6 +41,10 @@ en:
               blank: Enter your job title.
             local_authority:
               blank: Enter the local authority of the setting or organisation you work in most of the time.
+            training_emails:
+              blank: Choose an option.
+            early_years_emails:
+              blank: Choose an option.
   activerecord:
     errors:
       models:
@@ -81,7 +90,7 @@ en:
     error: Error
     important: Success
     notice: Success
-  date_completed: "Date completed: %{date}"
+  date_completed: 'Date completed: %{date}'
 
   registration:
     names:
@@ -152,6 +161,32 @@ en:
         complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
         update_registration: Thank you for updating your Early years child development training account. You can now continue.
         complete_update: You have updated your details
+    training_emails:
+      edit:
+        heading: 'Do you want to get email updates about this training course?'
+        body: |
+          {:.govuk-hint}
+            Turn on email updates to find out about new modules and features in this training course.
+        opt_in: 'Send me email updates about this training course'
+        opt_out: 'Do not send me email updates about this training course'
+        button: Continue
+      update:
+        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        update_registration: Thank you for updating your Early years child development training account. You can now continue.
+        complete_update: You have updated your details
+    early_years_emails:
+      edit:
+        heading: 'Do you want to get early years email updates from the Department for Education?'
+        body: |
+          {:.govuk-hint}
+            Turn on email updates to get news about the early years foundation stage (EYFS) and other early years information from the Department for Education.
+        opt_in: 'Send me early years email updates'
+        opt_out: 'Do not send me early years email updates'
+        button: Continue
+      update:
+        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        update_registration: Thank you for updating your Early years child development training account. You can now continue.
+        complete_update: You have updated your details
   setting_type:
     heading: Change your setting's information
 
@@ -209,8 +244,6 @@ en:
       - NCFE CACHE Level 2 Certificate in Understanding Behaviour that Challenges
       - NCFE CACHE Level 2 Certificate in Understanding Autism
       - Makaton Stage 8
-
-
 
   prompt:
     info: In your setting
@@ -304,12 +337,12 @@ en:
       not to play the videos, you can use the full transcripts provided.
 
       ## Free wifi, internet and data resources
-      
+
       Our [free wifi, internet and data resources](/wifi-and-data) may help if you have limited or
       no access to the internet.
 
       ## Learning check
-      
+
       You’ll see the question mark icon next to quiz questions throughout the module.
       These questions are to check you understand what you have learned.
       You will be able to see if you get these questions right or wrong.
@@ -365,36 +398,36 @@ en:
   close_account:
     body: |
       If you do not want to use your Early years child development training account anymore, you can ask us to close your account.
-      
+
       You will no longer be able to access the training modules. Any certificates you have earned will be permanently deleted.
     button: Request to close account
     confirm:
       heading: Confirm you want to close your account
       body: |
         After you close your account you will no longer be able to access the training modules.
-        
+
         Any certificates you have earned will be permanently deleted.
-        
+
         We will delete your personal information within 10 working days. The personal information we will delete includes:
-        
+
         - your name
         - your email address
         - your postcode, if you provided it when you registered
         - any notes you have written in your learning log 
 
         We will keep some anonymous information about:
-        
+
         - your role
         - your local authority
         - your usage of the training modules
         - why you closed your account
-        
+
         This is to help us improve the training. None of this information will be 
         personally identifiable to you.
 
         You may still receive emails while we are processing your account closure. 
         After your personal information is deleted, you will not receive any further
-        emails from Early years child development training. 
+        emails from Early years child development training.
 
       confirm_button: Close my account
       cancel_button: Cancel and go back to my account
@@ -457,7 +490,6 @@ en:
 
 
           You may wish to revisit some of the learning before taking the test again.
-
 
   # Form Builder ---------------------------------------------------------------
   helpers:
