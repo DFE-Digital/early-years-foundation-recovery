@@ -112,6 +112,8 @@ private
   # @return [Boolean]
   def clickable?(submodule:, subsection_item:)
     return all?([subsection_item]) if submodule.zero?
+    
+    return false if subsection_item.topic.zero?
 
     submodule_intro = fetch_submodule(submodule).first
     return false unless visited?(submodule_intro)
