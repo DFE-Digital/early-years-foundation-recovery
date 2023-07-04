@@ -40,6 +40,8 @@ Rails.application.routes.draw do
     resource :local_authority, only: %i[edit update], path: 'local-authority'
     resource :role_type, only: %i[edit update], path: 'role-type'
     resource :role_type_other, only: %i[edit update], path: 'role-type-other'
+    resource :training_emails, only: %i[edit update], path: 'training-emails'
+    resource :early_years_emails, only: %i[edit update], path: 'early-years-emails'
   end
 
   resource :user, controller: :user, only: %i[show], path: 'my-account' do

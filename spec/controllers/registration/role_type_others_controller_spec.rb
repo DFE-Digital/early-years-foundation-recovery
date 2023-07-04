@@ -32,10 +32,9 @@ RSpec.describe Registration::RoleTypeOthersController, type: :controller do
     describe 'POST #update' do
       it 'succeeds' do
         post :update, params: { user: { role_type_other: 'User defined role type' } }
-        expect(response).to redirect_to my_modules_path
-        expect(confirmed_user.reload).to be_registration_complete
-        expect(confirmed_user.role_type_other).to eq 'User defined role type'
-        expect(confirmed_user.role_type).to eq 'other'
+        expect(response).to redirect_to edit_registration_training_emails_path
+        expect(confirmed_user.reload.role_type_other).to eq 'User defined role type'
+        expect(confirmed_user.reload.role_type).to eq 'other'
       end
     end
   end

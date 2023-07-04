@@ -37,6 +37,7 @@ SitemapGenerator::Sitemap.create do
     sitemap
     terms-and-conditions
     whats-new
+    email-preferences
     wifi-and-data
   ].each do |path|
     add static_path(path)
