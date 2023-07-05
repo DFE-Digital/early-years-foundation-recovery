@@ -15,7 +15,7 @@ private
 
   # @return [Boolean]
   def restricted?
-    %w[whats-new].include? page_params[:id]
+    %w[whats-new email-preferences].include? page_params[:id]
   end
 
   def template_valid?
