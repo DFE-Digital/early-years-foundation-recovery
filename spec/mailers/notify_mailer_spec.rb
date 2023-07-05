@@ -87,4 +87,18 @@ RSpec.describe NotifyMailer, type: :mailer do
       end
     end
   end
+  let(:training_email_opt_in) { create(:user, training_emails: true) }
+  let(:training_email_opt_out) { create(:user, training_emails: false) }
+  let(:recipient_selector) { Class.new { extend RecipientSelector } }
+
+  describe 'training email opt in' do
+    context 'when user not completed registration and not opted out of emails' do
+      it 'sends email to user to remind them to complete registration' do
+        described_class.complete_registration("jack.coggin@education.gov.uk")
+        mail = described_class.complete_registration(user)
+        expect(mail.to).to contain_exactly(user.email)
+        expect(mail.subject).to eq 'Complete registration'
+      end
+    end
+  end
 end

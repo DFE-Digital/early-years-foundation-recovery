@@ -1,6 +1,7 @@
 Que::Scheduler.configure do |config|
   config.schedule = {
     DashboardJob: { cron: Rails.application.config.dashboard_update_interval },
+    MailJob: { cron: Rails.application.config.mail_job_interval },
   }
 end
 

@@ -86,6 +86,10 @@ class User < ApplicationRecord
   scope :with_local_authority, -> { where.not(local_authority: nil) }
   scope :with_notes, -> { joins(:notes).distinct.select(&:has_notes?) }
 
+  scope :training_email_recipients, -> { where.not(training_emails: false) }
+  scope :early_years_email_recipients, -> { where.not(early_years_emails: false) }
+
+
   validates :first_name, :last_name, :setting_type_id,
             presence: true,
             if: proc { |u| u.registration_complete }
