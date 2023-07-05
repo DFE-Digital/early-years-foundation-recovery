@@ -28,26 +28,9 @@ variable "webapp_subnet_id" {
   type        = string
 }
 
-variable "webapp_database_url" {
-  description = "URL to the database"
-  type        = string
-  sensitive   = true
-}
-
-variable "webapp_docker_registry_url" {
-  description = "URL to the Docker Registry"
-  type        = string
-}
-
-variable "webapp_docker_registry_username" {
-  description = "Username for the Docker Registry"
-  type        = string
-}
-
-variable "webapp_docker_registry_password" {
-  description = "Password the Docker Registry"
-  type        = string
-  sensitive   = true
+variable "webapp_app_settings" {
+  description = "App Settings are exposed as environment variables"
+  type        = map(string)
 }
 
 variable "webapp_docker_image_url" {

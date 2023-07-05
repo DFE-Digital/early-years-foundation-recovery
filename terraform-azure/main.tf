@@ -61,22 +61,24 @@ module "database" {
 }
 
 # Create Web Application resources
-# TODO: App configuration settings (env variables) below should be a map/dictionary
 module "webapp" {
   source = "./terraform-azure-web"
 
-  asp_sku                         = var.asp_sku
-  location                        = var.azure_region
-  resource_group                  = azurerm_resource_group.rg.name
-  resource_name_prefix            = var.resource_name_prefix
-  webapp_subnet_id                = module.network.webapp_subnet_id
-  webapp_name                     = "eyrecovery-dev"
-  webapp_database_url             = var.webapp_database_url
-  webapp_docker_registry_url      = var.webapp_docker_registry_url
-  webapp_docker_registry_username = var.webapp_docker_registry_username
-  webapp_docker_registry_password = var.webapp_docker_registry_password
-  webapp_docker_image_url         = var.webapp_docker_image_url
-  webapp_docker_image_tag         = var.webapp_docker_image_tag
-  webapp_startup_command          = "bundle exec rails db:prepare assets:precompile sitemap:refresh:no_ping && bundle exec rails server -b 0.0.0.0"
-  depends_on                      = [module.network, module.database]
+  asp_sku              = var.asp_sku
+  location             = var.azure_region
+  resource_group       = azurerm_resource_group.rg.name
+  resource_name_prefix = var.resource_name_prefix
+  webapp_subnet_id     = module.network.webapp_subnet_id
+  webapp_name          = "eyrecovery-dev"
+  webapp_app_settings = {
+    "DATABASE_URL"                        = var.webapp_database_url
+    "DOCKER_REGISTRY_SERVER_URL"          = var.webapp_docker_registry_url
+    "DOCKER_REGISTRY_SERVER_USERNAME"     = var.webapp_docker_registry_username
+    "DOCKER_REGISTRY_SERVER_PASSWORD"     = var.webapp_docker_registry_password
+    "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
+  }
+  webapp_docker_image_url = var.webapp_docker_image_url
+  webapp_docker_image_tag = var.webapp_docker_image_tag
+  webapp_startup_command  = "bundle exec rails db:prepare assets:precompile sitemap:refresh:no_ping && bundle exec rails server -b 0.0.0.0"
+  depends_on              = [module.network, module.database]
 }

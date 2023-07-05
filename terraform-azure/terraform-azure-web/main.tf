@@ -12,20 +12,13 @@ resource "azurerm_service_plan" "asp" {
 }
 
 # Create Web Application
-# TODO: app_settings should be passed in as a dictionary/map
 resource "azurerm_linux_web_app" "webapp" {
   name                = var.webapp_name
   location            = var.location
   resource_group_name = var.resource_group
   service_plan_id     = azurerm_service_plan.asp.id
   https_only          = true
-  app_settings = {
-    DATABASE_URL                        = var.webapp_database_url
-    DOCKER_REGISTRY_SERVER_URL          = var.webapp_docker_registry_url
-    DOCKER_REGISTRY_SERVER_USERNAME     = var.webapp_docker_registry_username
-    DOCKER_REGISTRY_SERVER_PASSWORD     = var.webapp_docker_registry_password
-    WEBSITES_ENABLE_APP_SERVICE_STORAGE = "false"
-  }
+  app_settings        = var.webapp_app_settings
 
   site_config {
     app_command_line       = var.webapp_startup_command
