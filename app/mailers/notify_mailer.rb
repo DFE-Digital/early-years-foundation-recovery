@@ -8,6 +8,9 @@ class NotifyMailer < GovukNotifyRails::Mailer
   PASSWORD_CHANGED_TEMPLATE_ID = 'f77e1eba-3fa8-45ae-9cec-a4cc54633395'.freeze
   RESET_PASSWORD_TEMPLATE_ID = 'ad77aab8-d903-4f77-b074-a16c2658ca79'.freeze
   UNLOCK_TEMPLATE_ID = 'e18e8419-cfcc-4fcb-abdb-84f932f3cf55'.freeze
+  COMPLETE_REGISTRATION_TEMPLATE_ID = 'b960eb6a-d183-484b-ac3b-93ae01b3cee1'.freeze
+  START_TRAINING_TEMPLATE_ID = 'b3c2e4ff-da06-4672-8941-b2f50d37eadc'.freeze
+
 
   include Devise::Controllers::UrlHelpers
 
@@ -106,4 +109,21 @@ class NotifyMailer < GovukNotifyRails::Mailer
     )
     mail(to: record.email)
   end
+
+  def complete_registration(record)
+    set_template(COMPLETE_REGISTRATION_TEMPLATE_ID)
+    set_personalisation(
+      url: root_url,
+    )
+    mail(to: record.email)
+  end
+
+  def start_training(record)
+    set_template(START_TRAINING_TEMPLATE_ID)
+    set_personalisation(
+      url: root_url,
+    )
+    mail(to: record.email)
+  end
+    
 end
