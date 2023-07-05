@@ -9,6 +9,8 @@ resource "azurerm_service_plan" "asp" {
   lifecycle {
     ignore_changes = [tags]
   }
+
+  #checkov:skip=CKV_AZURE_212:Argument not available
 }
 
 # Create Web Application
@@ -22,6 +24,7 @@ resource "azurerm_linux_web_app" "webapp" {
 
   site_config {
     app_command_line       = var.webapp_startup_command
+    http2_enabled          = true
     vnet_route_all_enabled = true
 
     application_stack {
@@ -33,6 +36,13 @@ resource "azurerm_linux_web_app" "webapp" {
   lifecycle {
     ignore_changes = [tags]
   }
+
+  #checkov:skip=CKV_AZURE_13:App uses built-in authentication
+  #checkov:skip=CKV_AZURE_88:Using Docker
+  #checkov:skip=CKV_AZURE_17:Argument not available
+  #checkov:skip=CKV_AZURE_78:Disabled by default in Terraform version used
+  #checkov:skip=CKV_AZURE_16:Using VNET Integration
+  #checkov:skip=CKV_AZURE_71:Using VNET Integration
 }
 
 # Integrate Web Application into Virtual Network
