@@ -4,7 +4,6 @@ RSpec.describe Data::UserOverview do
   let!(:user_1) { create(:user, :registered, module_time_to_completion: { alpha: 1, bravo: 1, charlie: 0 }) }
   let!(:user_2) { create(:user, :registered, module_time_to_completion: { alpha: 2, bravo: 3, charlie: 1 }) }
   let!(:user_3) { create(:user, :registered, module_time_to_completion: { alpha: 2, bravo: 0, charlie: 1 }) }
-  let!(:user_4) { create(:user, :registered, module_time_to_completion: { alpha: 2, charlie: 1, bravo: 3 }) }
 
   let(:headers) do
     [
@@ -63,6 +62,7 @@ RSpec.describe Data::UserOverview do
     create(:note, user: user_1)
     create(:note, user: user_2)
     create(:note, user: user_3)
+    create(:user, :registered, module_time_to_completion: { alpha: 2, charlie: 1, bravo: 3 })
   end
 
   it_behaves_like('a data export model')

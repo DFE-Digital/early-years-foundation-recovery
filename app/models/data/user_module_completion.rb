@@ -27,7 +27,7 @@ module Data
 
       # @return [Integer]
       def module_count(module_name)
-        User.all.select { |user| user.module_time_to_completion.key?(module_name) && user.module_time_to_completion[module_name].positive? }.count
+        User.all.count { |user| user.module_time_to_completion.key?(module_name) && user.module_time_to_completion[module_name].positive? }
       end
     end
   end

@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Data::UserModuleCompletion do
-  let!(:user_1) { create(:user, :registered, :agency_setting, role_type: 'childminder', module_time_to_completion: { alpha: 1 }) }
-  let!(:user_2) { create(:user, :registered, :agency_setting, role_type: 'childminder', module_time_to_completion: { alpha: 0 }) }
-  let!(:user_3) { create(:user, :registered, :agency_setting, role_type: 'childminder', module_time_to_completion: {}) }
-
   let(:headers) do
     ['alpha Percentage', 'alpha Count', 'bravo Percentage', 'bravo Count', 'charlie Percentage', 'charlie Count']
   end
@@ -20,6 +16,12 @@ RSpec.describe Data::UserModuleCompletion do
         charlie_percentage: 0.0,
       },
     ]
+  end
+
+  before do
+    create(:user, :registered, :agency_setting, role_type: 'childminder', module_time_to_completion: { alpha: 1 })
+    create(:user, :registered, :agency_setting, role_type: 'childminder', module_time_to_completion: { alpha: 0 })
+    create(:user, :registered, :agency_setting, role_type: 'childminder', module_time_to_completion: {})
   end
 
   it_behaves_like('a data export model')

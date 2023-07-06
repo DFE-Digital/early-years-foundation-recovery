@@ -47,7 +47,7 @@ module Data
 
       # @return [Date]
       def current_quarter
-        Date.today.beginning_of_quarter
+        Time.zone.today.beginning_of_quarter
       end
 
       # @return [Date]
@@ -58,7 +58,7 @@ module Data
       # @return [Integer]
       def quarterly_returning_users
         previous_quarter_visits = Ahoy::Visit.where(started_at: previous_quarter..current_quarter)
-        current_quarter_visits = Ahoy::Visit.where(started_at: current_quarter..Date.today)
+        current_quarter_visits = Ahoy::Visit.where(started_at: current_quarter..Time.zone.today)
         returning_users = previous_quarter_visits.where(user_id: current_quarter_visits.pluck(:user_id))
         returning_users.distinct.count(:user_id)
       end

@@ -86,7 +86,7 @@ module Data
 
       # @return [Integer]
       def following_linear_sequence
-        User.all.count { |user| user.following_linear_sequence? }
+        User.all.count(&:following_linear_sequence?)
       end
   end
   end
