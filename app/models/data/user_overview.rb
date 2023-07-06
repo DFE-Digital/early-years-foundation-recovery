@@ -22,6 +22,7 @@ module Data
           'User Defined Roles',
           'Started Learning',
           'Not Started Learning',
+          'Following Linear Sequence',
           'With Notes',
           'With Notes Percentage',
           'Without Notes',
@@ -48,6 +49,7 @@ module Data
           user_defined_roles: User.all.collect(&:role_type_other).uniq.count,
           started_learning: started_learning,
           not_started_learning: not_started_learning,
+          following_linear_sequence: following_linear_sequence,
           with_notes: with_notes_count,
           with_notes_percentage: with_notes_percentage,
           without_notes: without_notes_count,
@@ -59,7 +61,7 @@ module Data
 
       # @return [Float]
       def with_notes_percentage
-        with_notes_count / User.count
+        with_notes_count / User.count.to_f
       end
 
       # @return [Integer]
@@ -80,6 +82,11 @@ module Data
       # @return [Integer]
       def not_started_learning
         User.all.map { |u| u.module_time_to_completion.keys }.count(&:empty?)
+      end
+
+      # @return [Integer]
+      def following_linear_sequence
+        User.all.count { |user| user.following_linear_sequence? }
       end
   end
   end
