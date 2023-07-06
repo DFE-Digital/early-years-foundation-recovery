@@ -16,4 +16,14 @@ RSpec.describe UserAnswer, type: :model do
     expect(user_answer.questionnaire).to be_a(Questionnaire)
     expect(user_answer.questionnaire.questions.keys).to eql [:alpha_question_one]
   end
+
+  describe '.to_csv' do
+    before do
+      create_list(:user_answer, 5, :questionnaire, :summative)
+    end
+
+    specify do
+      expect(described_class.to_csv(batch_size: 2).split("\n").count).to eq(6)
+    end
+  end
 end
