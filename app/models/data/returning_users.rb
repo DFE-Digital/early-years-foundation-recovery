@@ -52,7 +52,7 @@ module Data
 
       # @return [Date]
       def previous_quarter
-        (current_quarter - 1.day).beginning_of_quarter
+        current_quarter - 3.months
       end
 
       # @return [Integer]

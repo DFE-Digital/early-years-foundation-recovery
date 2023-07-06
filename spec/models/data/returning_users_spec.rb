@@ -20,13 +20,12 @@ RSpec.describe Data::ReturningUsers do
 
   before do
     Ahoy::Visit.create!(id: 1, user_id: user_1.id, started_at: Time.zone.now)
+    Ahoy::Visit.create!(id: 9, user_id: user_1.id, started_at: 1.day.ago)
     Ahoy::Visit.create!(id: 2, user_id: user_1.id, started_at: 1.week.ago)
     Ahoy::Visit.create!(id: 3, user_id: user_1.id, started_at: 2.weeks.ago)
     Ahoy::Visit.create!(id: 4, user_id: user_1.id, started_at: 1.month.ago)
     Ahoy::Visit.create!(id: 5, user_id: user_1.id, started_at: 2.months.ago)
-    Ahoy::Visit.create!(id: 6, user_id: user_1.id, started_at: 4.months.ago)
-    Ahoy::Visit.create!(id: 7, user_id: user_1.id, started_at: 13.weeks.ago)
-    Ahoy::Visit.create!(id: 8, user_id: user_1.id, started_at: 10.weeks.ago)
+    Ahoy::Visit.create!(id: 8, user_id: user_1.id, started_at: 3.months.ago.beginning_of_quarter)
   end
 
   it_behaves_like('a data export model')
