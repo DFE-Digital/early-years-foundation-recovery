@@ -4,35 +4,38 @@ module ToCsv
   extend ActiveSupport::Concern
 
   class_methods do
+    # Returns an array of strings representing the column names for the data export
+    # @return [Array<String>]
+    def column_names
+      super
+    rescue NoMethodError
+      raise NoMethodError, 'ToCsv.to_csv a column names method must be defined for bespoke data export models to serve as csv column headers'
+    end
+
+    # Returns an array of hashes representing the rows of data to be exported or an ActiveRecord::Relation
+    # @return [ActiveRecord::Relation, Array<Hash{Symbol => Mixed}>]
     def dashboard
       all
+    rescue NoMethodError
+      raise NoMethodError, 'ToCsv.to_csv a dashboard method must be defined for bespoke data export models to serve as csv data'
     end
 
     # @return [String]
-    def to_csv
+    # @param batch_size [Integer]
+    def to_csv(batch_size: 1_000)
       CSV.generate(headers: true) do |csv|
         csv << column_names
 
-        dashboard.find_each(batch_size: 1_000) { |record| csv << record.dashboard_attributes.values }
+        unformatted = dashboard.is_a?(Array) ? dashboard : dashboard.find_each(batch_size: batch_size).map(&:dashboard_attributes)
+        formatted = CoercionDecorator.new(unformatted).call
+        formatted.each { |row| csv << row.values }
       end
     end
   end
 
   included do
-    # Timestamps in the format "2023-01-11 12:52:22"
-    # @return [Hash] coerce attributes prior to export
-    def dashboard_attributes
-      params = data_attributes.dup
-
-      params.each do |key, value|
-        params[key] = value.strftime('%Y-%m-%d %H:%M:%S') if value.is_a?(Time)
-      end
-    end
-
-  private
-
     # @return [Hash] default to database fields
-    def data_attributes
+    def dashboard_attributes
       attributes
     end
   end
