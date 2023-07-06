@@ -33,6 +33,16 @@ resource "azurerm_linux_web_app" "webapp" {
     }
   }
 
+  logs {
+    detailed_error_messages = true
+
+    application_logs {
+      file_system_level = "Verbose"
+    }
+
+    #TODO: Configure Blob Storage
+  }
+
   lifecycle {
     ignore_changes = [tags]
   }
