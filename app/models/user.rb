@@ -316,6 +316,11 @@ class User < ApplicationRecord
     data_attributes.dup.merge(module_ttc)
   end
 
+  # @return [Boolean]
+  def module_completed?(module_name)
+    module_time_to_completion[module_name].present? && module_time_to_completion[module_name].positive?
+  end
+
 private
 
   #   @return [Hash]
@@ -331,10 +336,5 @@ private
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
   def password_changed_events
     events.where(name: 'user_password_change')
-  end
-
-  # @return [Boolean]
-  def module_completed?(module_name)
-    module_time_to_completion[module_name].present? && module_time_to_completion[module_name].positive?
   end
 end
