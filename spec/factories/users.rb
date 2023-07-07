@@ -46,12 +46,10 @@ FactoryBot.define do
 
     trait :emails_opt_in do
       training_emails { true }
-      early_years_emails { true }
     end
 
     trait :emails_opt_out do
       training_emails { false }
-      early_years_emails { false }
     end
   end
 end

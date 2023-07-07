@@ -253,7 +253,7 @@ class User < ApplicationRecord
 
   # @return [Boolean]
   def email_preferences_complete?
-    !training_emails.nil? && !early_years_emails.nil?
+    !training_emails.nil?
   end
 
   # @return [Boolean]

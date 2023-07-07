@@ -5,8 +5,6 @@ en:
       your_email_preferences_html: <h2 class='govuk-heading-m'>Your email preferences</h2>
       training_emails_true: You have chosen to receive emails about this training course.
       training_emails_false: You have chosen not to receive emails about this training course.
-      early_years_emails_true: You have chosen to receive early years email updates.
-      early_years_emails_false: You have chosen not to receive early years email updates.
 
   activemodel:
     errors:
@@ -42,8 +40,6 @@ en:
             local_authority:
               blank: Enter the local authority of the setting or organisation you work in most of the time.
             training_emails:
-              blank: Choose an option.
-            early_years_emails:
               blank: Choose an option.
   activerecord:
     errors:

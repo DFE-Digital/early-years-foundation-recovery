@@ -69,17 +69,6 @@ RSpec.describe 'Confirmed users completing registration' do
 
     click_button 'Continue'
 
-    expect(page).to have_text('Do you want to get early years email updates from the Department for Education?')
-
-    click_button 'Continue'
-
-    expect(page).to have_text('There is a problem')
-      .and have_text('Choose an option.')
-
-    choose 'Send me early years email updates'
-
-    click_button 'Continue'
-
     expect(page).to have_text('Thank you for creating an Early years child development training account. You can now start the first module.')
   end
 end

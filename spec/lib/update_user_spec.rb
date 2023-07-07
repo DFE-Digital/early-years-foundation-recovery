@@ -19,9 +19,7 @@ RSpec.describe UpdateUser do
         email_2 = 'test2@example.com'
         update_user.email_preferences_unsubscribe([email_1, email_2])
         expect(User.find_by(email: email_1).training_emails).to eq(false)
-        expect(User.find_by(email: email_1).early_years_emails).to eq(false)
         expect(User.find_by(email: email_2).training_emails).to eq(false)
-        expect(User.find_by(email: email_2).early_years_emails).to eq(false)
       end
     end
 
@@ -37,7 +35,6 @@ RSpec.describe UpdateUser do
         email_3 = 'test3@example.com'
         update_user.email_preferences_unsubscribe([email_3])
         expect(User.find_by(email: email_3).training_emails).to eq(true)
-        expect(User.find_by(email: email_3).early_years_emails).to eq(true)
       end
     end
   end
