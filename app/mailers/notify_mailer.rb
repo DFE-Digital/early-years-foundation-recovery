@@ -11,7 +11,6 @@ class NotifyMailer < GovukNotifyRails::Mailer
   COMPLETE_REGISTRATION_TEMPLATE_ID = 'b960eb6a-d183-484b-ac3b-93ae01b3cee1'.freeze
   START_TRAINING_TEMPLATE_ID = 'b3c2e4ff-da06-4672-8941-b2f50d37eadc'.freeze
 
-
   include Devise::Controllers::UrlHelpers
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -125,5 +124,4 @@ class NotifyMailer < GovukNotifyRails::Mailer
     )
     mail(to: record.email)
   end
-    
 end

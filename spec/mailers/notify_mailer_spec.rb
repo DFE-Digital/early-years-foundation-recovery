@@ -87,37 +87,10 @@ RSpec.describe NotifyMailer, type: :mailer do
       end
     end
   end
-  let!(:training_email_opt_in) { create(:user, :confirmed, training_emails: true, confirmed_at: DateTime.new(2021, 1, 1)) }
-
-
-  let!(:training_email_opt_out) { create(:user, :confirmed, training_emails: false) }
-  today = Date.today
-  let!(:training_4_weeks_user) { create(:user, :confirmed, confirmed_at: 4.weeks.ago, email: "weeks.4@test.com", training_emails: true) }
-  let!(:registed_user) { create(:user, :registered, email: 'test@test.com') }
-  let!(:recipient_selector) { Class.new { extend RecipientSelector } }
-  let!(:started_user) { create(:user, :registered, email: 'started_user@test.com', module_time_to_completion: { "alpha": 0 }) }
-
-  # confirmed_at 1 day ago
-  # let!(:training_email_opt_in) { create(:user, :confirmed, training_emails: true, confirmed_at: DateTime.now - 1.day) }
-  # confirmed_at 4 weeks ago
-  # let!(:training_email_opt_in) { create(:user, :confirmed, training_emails: true, confirmed_at: DateTime.now - 4.weeks) }
-
 
   describe 'training email opt in' do
     context 'when user not completed registration and not opted out of emails' do
       it 'sends email to user to remind them to complete registration' do
-        puts "complete_registration_recipients"
-        recipients = recipient_selector.complete_registration_recipients
-
-        recipients.each do |recipient|
-          puts "1 day ago #{1.day.ago}"
-          puts "4 weeks ago #{4.weeks.ago}"
-          puts "email:"
-          puts recipient.email
-          puts "confirmed_at:"
-          puts recipient.confirmed_at
-        end
-        described_class.complete_registration("jack.coggin@education.gov.uk")
         mail = described_class.complete_registration(user)
         expect(mail.to).to contain_exactly(user.email)
         expect(mail.subject).to eq 'Complete registration'
@@ -126,18 +99,10 @@ RSpec.describe NotifyMailer, type: :mailer do
 
     context 'when user completed registration and not started training' do
       it 'sends email to user to remind them to start' do
-        puts "start_training_recipients"
-        recipients = recipient_selector.start_training_recipients
-        
-        recipients.each do |recipient|
-          puts recipient.email
-        end
-        # described_class.complete_registration("jack.coggin@education.gov.uk")
-        # mail = described_class.complete_registration(user)
-        # expect(mail.to).to contain_exactly(user.email)
-        # expect(mail.subject).to eq 'Complete registration'
+        mail = described_class.start_training(user)
+        expect(mail.to).to contain_exactly(user.email)
+        expect(mail.subject).to eq 'Start training'
       end
     end
   end
-
 end
