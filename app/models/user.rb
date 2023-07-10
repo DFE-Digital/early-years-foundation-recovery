@@ -82,6 +82,7 @@ class User < ApplicationRecord
   scope :unconfirmed, -> { where(confirmed_at: nil) }
   scope :locked_out, -> { where.not(locked_at: nil) }
   scope :since_public_beta, -> { where(created_at: Rails.application.public_beta_launch_date..Time.zone.now) }
+  scope :month_old, -> { where(confirmed_at: 4.weeks.ago.beginning_of_day..4.weeks.ago.end_of_day) }
   scope :with_local_authority, -> { where.not(local_authority: nil) }
   scope :with_notes, -> { joins(:notes).distinct.select(&:has_notes?) }
   scope :without_notes, -> { where.not(id: with_notes) }
@@ -92,7 +93,6 @@ class User < ApplicationRecord
 
   scope :training_email_recipients, -> { where.not(training_emails: false) }
   scope :early_years_email_recipients, -> { where.not(early_years_emails: false) }
-
 
   validates :first_name, :last_name, :setting_type_id,
             presence: true,
