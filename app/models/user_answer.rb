@@ -22,6 +22,8 @@ class UserAnswer < ApplicationRecord
   # @see Training::ResponsesController
   scope :cms_response, -> { where(questionnaire_id: 0) }
 
+  scope :summative, -> { where(assessments_type: 'summative_assessment') }
+
   validates :answer, presence: true
 
   # @return [String]
