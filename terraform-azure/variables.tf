@@ -84,3 +84,69 @@ variable "webapp_docker_image_tag" {
   description = "Tag for the Docker Image"
   type        = string
 }
+
+variable "webapp_config_bot_token" {
+  type      = string
+  sensitive = true
+}
+
+variable "webapp_config_contentful_environment" {
+  type = string
+}
+
+variable "webapp_config_contentful_preview" {
+  type = string
+}
+
+variable "webapp_config_domain" {
+  type = string
+}
+
+variable "webapp_config_editor" {
+  type = string
+}
+
+variable "webapp_config_feedback_url" {
+  type = string
+}
+
+variable "webapp_config_grover_no_sandbox" {
+  type = bool
+}
+
+variable "webapp_config_google_cloud_bucket" {
+  type = string
+}
+
+variable "webapp_config_node_env" {
+  type = string
+}
+
+variable "webapp_config_rails_env" {
+  type = string
+}
+
+variable "webapp_config_rails_log_to_stdout" {
+  type = string
+}
+
+variable "webapp_config_rails_master_key" {
+  type      = string
+  sensitive = true
+}
+
+variable "webapp_config_rails_max_threads" {
+  type = string
+}
+
+variable "webapp_config_rails_serve_static_files" {
+  type = bool
+}
+
+variable "webapp_config_training_modules" {
+  type = string
+}
+
+variable "webapp_config_web_concurrency" {
+  type = string
+}
