@@ -92,7 +92,7 @@ class User < ApplicationRecord
   scope :with_assessments, -> { joins(:user_assessments) }
 
   scope :training_email_recipients, -> { where.not(training_emails: false) }
-  scope :early_years_email_recipients, -> { where.not(early_years_emails: false) }
+  scope :early_years_email_recipients, -> { where(early_years_emails: true) }
 
   validates :first_name, :last_name, :setting_type_id,
             presence: true,
