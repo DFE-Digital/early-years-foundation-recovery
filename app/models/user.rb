@@ -161,6 +161,17 @@ class User < ApplicationRecord
     Training::Module.ordered.reject(&:draft?).select { |mod| module_time_to_completion.key?(mod.name) }
   end
 
+  # @return [Boolean]
+  def following_linear_sequence?
+    modules_ordered = Training::Module.ordered.reject(&:draft?)
+    modules_ordered.each_cons(2) do |current_module, next_module|
+      # check that previous module has been completed before next module is started
+      return false if module_completed?(current_module.name) && !module_completed?(next_module.name)
+    end
+    user_modules_ordered = modules_ordered.select { |mod| module_time_to_completion.key?(mod.name) }
+    user_modules_ordered.map(&:name) == module_time_to_completion.keys
+  end
+
   # @see Devise::Confirmable
   # send_confirmation_instructions
   def send_confirmation_instructions
@@ -303,6 +314,11 @@ class User < ApplicationRecord
   # @return [Hash] override
   def dashboard_attributes
     data_attributes.dup.merge(module_ttc)
+  end
+
+  # @return [Boolean]
+  def module_completed?(module_name)
+    module_time_to_completion[module_name].present? && module_time_to_completion[module_name].positive?
   end
 
 private
