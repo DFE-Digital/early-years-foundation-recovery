@@ -14,6 +14,11 @@ module Training
       @answer ||= Answer.new(json: json)
     end
 
+    # @return [Integer]
+    def correct_answer_count
+      answer.correct_answers.count
+    end
+
     # @return [Hash{Symbol => nil, Integer}]
     def pagination
       return super if formative_question?
@@ -83,7 +88,7 @@ module Training
     # @return [String]
     def legend
       if multi_select?
-        "#{body} (Select all answers that apply)"
+        "#{body} (Select #{correct_answer_count} answers)"
       elsif true_false?
         <<~LEGEND
           True or false?

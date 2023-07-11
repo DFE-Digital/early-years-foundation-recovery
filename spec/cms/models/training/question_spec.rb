@@ -86,7 +86,7 @@ RSpec.describe Training::Question, :cms, type: :model do
       end
 
       specify do
-        expect(question.legend).to end_with '(Select all answers that apply)'
+        expect(question.legend).to end_with '(Select 2 answers)'
       end
     end
 
