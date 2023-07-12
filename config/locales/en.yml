@@ -41,6 +41,8 @@ en:
               blank: Enter the local authority of the setting or organisation you work in most of the time.
             training_emails:
               blank: Choose an option.
+            early_years_emails:
+              blank: Choose an option.
   activerecord:
     errors:
       models:

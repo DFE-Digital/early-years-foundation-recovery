@@ -19,17 +19,19 @@ production:
   <<: *defaults
   DOMAIN: child-development-training.education.gov.uk
   GOVUK_WEBSITE_ROOT: child-development-training
-  TRACKING_ID: GTM-NFZ88TP  # Live data
+  TRACKING_ID: GTM-NFZ88TP # Live data
   HOTJAR_SITE_ID: 3169682
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-live
+  # EARLY_YEARS_EMAILS: true
 
 # ey-recovery-staging
 staging:
   <<: *defaults
   DOMAIN: ey-recovery-staging.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-staging
-  TRACKING_ID: GTM-W6W95FD  # Test data
+  TRACKING_ID: GTM-W6W95FD # Test data
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-staging
+  # EARLY_YEARS_EMAILS: true
   # cms
   CONTENTFUL_ENVIRONMENT: staging
   CONTENTFUL_PREVIEW: true
@@ -41,6 +43,7 @@ development:
   GOVUK_WEBSITE_ROOT: ey-recovery-dev
   # yaml
   TRAINING_MODULES: demo-modules
+  # EARLY_YEARS_EMAILS: true
   # cms
   CONTENTFUL_ENVIRONMENT: test
   CONTENTFUL_PREVIEW: true
