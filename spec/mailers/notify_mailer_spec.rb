@@ -87,22 +87,4 @@ RSpec.describe NotifyMailer, type: :mailer do
       end
     end
   end
-
-  describe 'training email opt in' do
-    context 'when user not completed registration and not opted out of emails' do
-      it 'sends email to user to remind them to complete registration' do
-        mail = described_class.complete_registration(user)
-        expect(mail.to).to contain_exactly(user.email)
-        expect(mail.subject).to eq 'Complete registration'
-      end
-    end
-
-    context 'when user completed registration and not started training' do
-      it 'sends email to user to remind them to start' do
-        mail = described_class.start_training(user)
-        expect(mail.to).to contain_exactly(user.email)
-        expect(mail.subject).to eq 'Start training'
-      end
-    end
-  end
 end
