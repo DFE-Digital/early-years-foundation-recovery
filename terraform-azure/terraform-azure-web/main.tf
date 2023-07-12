@@ -23,9 +23,11 @@ resource "azurerm_linux_web_app" "webapp" {
   app_settings        = var.webapp_app_settings
 
   site_config {
-    app_command_line       = var.webapp_startup_command
-    http2_enabled          = true
-    vnet_route_all_enabled = true
+    app_command_line                  = var.webapp_startup_command
+    health_check_path                 = var.webapp_health_check_path
+    health_check_eviction_time_in_min = var.health_check_eviction_time_in_min
+    http2_enabled                     = true
+    vnet_route_all_enabled            = true
 
     application_stack {
       docker_image     = var.webapp_docker_image_url

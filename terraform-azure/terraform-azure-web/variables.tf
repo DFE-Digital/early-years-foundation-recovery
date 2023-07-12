@@ -47,3 +47,14 @@ variable "webapp_startup_command" {
   description = "Startup command to pass into the Web Application"
   type        = string
 }
+
+variable "webapp_health_check_path" {
+  description = "Path to health check endpoint"
+  type        = string
+}
+
+variable "health_check_eviction_time_in_min" {
+  default     = 10
+  description = "Minutes before considering an instance unhealthy"
+  type        = number
+}

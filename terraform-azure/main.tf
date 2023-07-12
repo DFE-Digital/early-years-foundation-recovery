@@ -77,7 +77,7 @@ module "webapp" {
     "DOCKER_REGISTRY_SERVER_PASSWORD"     = var.webapp_docker_registry_password
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
     "GOVUK_APP_DOMAIN"                    = "london.cloudapps.digital" #TODO: Remove this dependency post-migration to Azure
-    "GOVUK_WEBSITE_ROOT"                  = "ey-recovery-dev" #TODO: Remove this dependency post-migration to Azure
+    "GOVUK_WEBSITE_ROOT"                  = "ey-recovery-dev"          #TODO: Remove this dependency post-migration to Azure
     "BOT_TOKEN"                           = var.webapp_config_bot_token
     "CONTENTFUL_ENVIRONMENT"              = var.webapp_config_contentful_environment
     "CONTENTFUL_PREVIEW"                  = var.webapp_config_contentful_preview
@@ -95,8 +95,9 @@ module "webapp" {
     "TRAINING_MODULES"                    = var.webapp_config_training_modules
     "WEB_CONCURRENCY"                     = var.webapp_config_web_concurrency
   }
-  webapp_docker_image_url = var.webapp_docker_image_url
-  webapp_docker_image_tag = var.webapp_docker_image_tag
-  webapp_startup_command  = "bundle exec rails db:prepare assets:precompile sitemap:refresh:no_ping && bundle exec rails server -b 0.0.0.0"
-  depends_on              = [module.network, module.database]
+  webapp_docker_image_url  = var.webapp_docker_image_url
+  webapp_docker_image_tag  = var.webapp_docker_image_tag
+  webapp_startup_command   = ""
+  webapp_health_check_path = "/health"
+  depends_on               = [module.network, module.database]
 }
