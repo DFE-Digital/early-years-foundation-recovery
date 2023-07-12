@@ -7,9 +7,7 @@ class Registration::TrainingEmailsController < Registration::BaseController
     @user_form = Users::TrainingEmailsForm.new(user_params.merge(user: current_user))
 
     if @user_form.save
-      if ENV['EARLY_YEARS_EMAILS']
-        redirect_to edit_registration_early_years_emails_path
-      elsif current_user.registration_complete?
+      if current_user.registration_complete?
         redirect_to my_modules_path, notice: t('.complete_update')
       else
         complete_registration

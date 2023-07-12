@@ -32,11 +32,7 @@ RSpec.describe 'Registration training email opt in', type: :request do
 
       it 'redirects to my training email preference' do
         update_user
-        if ENV['EARLY_YEARS_EMAILS']
-          expect(response).to redirect_to(edit_registration_early_years_emails_path)
-        else
-          expect(response).to redirect_to(my_modules_path)
-        end
+        expect(response).to redirect_to(my_modules_path)
       end
     end
   end
