@@ -7,10 +7,14 @@ class Registration::TrainingEmailsController < Registration::BaseController
     @user_form = Users::TrainingEmailsForm.new(user_params.merge(user: current_user))
 
     if @user_form.save
-      if current_user.registration_complete?
-        redirect_to my_modules_path, notice: t('.complete_update')
+      if ENV['EARLY_YEARS_EMAILS']
+        redirect_to edit_registration_early_years_emails_path
       else
-        complete_registration
+        if current_user.registration_complete?
+          redirect_to my_modules_path, notice: t('.complete_update')
+        else
+          complete_registration
+        end
       end
     else
       render :edit, status: :unprocessable_entity

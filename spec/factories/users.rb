@@ -50,6 +50,9 @@ FactoryBot.define do
 
     trait :emails_opt_out do
       training_emails { false }
+      if ENV['EARLY_YEARS_EMAILS']
+        early_years_emails { false }
+      end
     end
   end
 end

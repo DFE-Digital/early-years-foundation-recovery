@@ -32,7 +32,11 @@ RSpec.describe Registration::TrainingEmailsController, type: :controller do
     describe 'POST #update' do
       it 'succeeds' do
         post :update, params: { user: { training_emails: 'true' } }
-        expect(response).to redirect_to my_modules_path
+        if ENV['EARLY_YEARS_EMAILS']
+          expect(response).to redirect_to edit_registration_early_years_emails_path
+        else
+          expect(response).to redirect_to my_modules_path
+        end
         expect(confirmed_user.reload.training_emails).to eq true
       end
     end
