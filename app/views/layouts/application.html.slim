@@ -32,13 +32,12 @@ html.govuk-template lang='en'
     = navigation
 
     .govuk-width-container
-      = govuk_phase_banner(tag: { text: 'Beta' }, classes: 'noprint') do
+      = govuk_phase_banner(tag: { text: content_for?(:hide_back_link) ? "true" : "false" }, classes: 'noprint') do
         = t('phase_banner_html', feedback_link: govuk_link_to('feedback', Rails.configuration.feedback_url, target: :_blank))
 
       .noprint = render 'layouts/timeout'
       
-      - if content_for?(:hide_back_link)
-        .noprint = back_link
+      .noprint = back_link
 
       main#main-content.govuk-main-wrapper
         - flash.each do |variant, message|
