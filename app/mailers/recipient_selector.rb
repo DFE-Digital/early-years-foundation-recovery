@@ -1,5 +1,5 @@
 module RecipientSelector
-  def complete_registration_recipients    
+  def complete_registration_recipients
     User.training_email_recipients.month_old.registration_incomplete
   end
 
