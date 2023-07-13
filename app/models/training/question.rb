@@ -91,7 +91,7 @@ module Training
           #{body}
         LEGEND
       else
-        body
+        "#{body} (Select one answer)"
       end
     end
 

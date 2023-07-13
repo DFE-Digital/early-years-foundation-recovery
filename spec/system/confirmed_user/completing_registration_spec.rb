@@ -5,7 +5,7 @@ RSpec.describe 'Confirmed users completing registration' do
 
   let(:user) { create :user, :confirmed }
 
-  it 'requires name and a setting type and a complete' do
+  it 'requires name and a setting type and email preferences and a complete' do
     expect(page).to have_text('About you')
     click_button 'Continue'
 
@@ -57,6 +57,21 @@ RSpec.describe 'Confirmed users completing registration' do
     fill_in 'Enter your job title.', with: 'user defined job title'
 
     click_button 'Continue'
+
+    if Rails.configuration.feature_email_prefs
+
+      expect(page).to have_text('Do you want to get email updates about this training course?')
+
+      click_button 'Continue'
+
+      expect(page).to have_text('There is a problem')
+        .and have_text('Choose an option.')
+
+      choose 'Send me email updates about this training course'
+
+      click_button 'Continue'
+
+    end
 
     expect(page).to have_text('Thank you for creating an Early years child development training account. You can now start the first module.')
   end

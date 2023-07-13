@@ -30,7 +30,7 @@ bravo:
     - second thing
     - third thing
     - final thing
-  depends_on: alpha
+  depends_on: # alpha
   duration: 3
   summative_threshold: 70
 
@@ -48,7 +48,7 @@ charlie:
     - second thing
     - third thing
     - final thing
-  depends_on: bravo
+  depends_on: # bravo
   duration: 3
   summative_threshold: 70
 
@@ -66,5 +66,5 @@ delta:
     - second thing
     - third thing
     - final thing
-  depends_on: bravo
+  depends_on: # bravo
   draft: true

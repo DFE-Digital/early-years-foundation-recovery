@@ -3,5 +3,21 @@ FactoryBot.define do
     user
     question { Faker::Lorem.word }
     answer { [Faker::Lorem.word] }
+
+    trait :questionnaire do
+      questionnaire_id { 0 }
+    end
+
+    trait :correct do
+      correct { true }
+    end
+
+    trait :incorrect do
+      correct { false }
+    end
+
+    trait :summative do
+      assessments_type { 'summative_assessment' }
+    end
   end
 end

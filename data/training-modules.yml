@@ -24,14 +24,16 @@ child-development-and-the-eyfs:
   summative_threshold: 70
 
 brain-development-and-how-children-learn:
-  depends_on: child-development-and-the-eyfs
+  depends_on: # child-development-and-the-eyfs
   duration: 2
   title: Brain development and how children learn
   thumbnail: 2-thumb-780x519-1203132106.jpg
   short_description: |
-    This module explores how a child's brain develops and how to consider factors affecting brain development when planning for your setting. You can start it once you have completed module 1.
+    This module explores how a child's brain develops and how to consider factors affecting brain development when planning for your setting.
+    You can start it once you have completed module 1.
   description: |
-    The rapid changes that happen in the brain in a child's first years lay critical foundations for later childhood and adult life. As an early years practitioner, you can play a significant role in encouraging and supporting children’s brain development.
+    The rapid changes that happen in the brain in a child's first years lay critical foundations for later childhood and adult life.
+    As an early years practitioner, you can play a significant role in encouraging and supporting children’s brain development.
 
     On completion of this module, you will be able to:
 
@@ -49,12 +51,13 @@ brain-development-and-how-children-learn:
   summative_threshold: 70
 
 personal-social-and-emotional-development:
-  depends_on: brain-development-and-how-children-learn
+  depends_on: # brain-development-and-how-children-learn
   duration: 2
   title: Supporting children’s personal, social and emotional development
   thumbnail: 3-thumb-780x519-1159321535.jpg
   short_description: |
-    This module explores how you can best support children to develop, learn and rehearse their key personal, social and emotional skills. You can start it once you have completed modules 1 and 2.
+    This module explores how you can best support children to develop, learn and rehearse their key personal, social and emotional skills.
+    You can start it once you have completed modules 1 and 2.
   description: |
     Personal, social and emotional skills play a central role in helping children to understand and regulate their emotions and behaviour, build positive relationships, and navigate the social world around them.
 
@@ -73,12 +76,14 @@ personal-social-and-emotional-development:
   summative_threshold: 70
 
 module-4:
-  depends_on: personal-social-and-emotional-development
+  depends_on: # personal-social-and-emotional-development
   duration: 2
   title: Supporting language development in the early years
   thumbnail: 4-thumb-780x519-157720194.jpg
   short_description: |
-    This module explores how children develop their speech, language and communication skills. It also explains your role in helping children to learn, practise and use a wide range of language with confidence. You can start it once you have completed modules 1, 2 and 3.
+    This module explores how children develop their speech, language and communication skills.
+    It also explains your role in helping children to learn, practise and use a wide range of language with confidence.
+    You can start it once you have completed modules 1, 2 and 3.
   description: |
     Children’s speech, language and communication skills affect the way they behave, learn, and interact with the world. As an early years practitioner, you will play a central role in helping children to learn, practise and use a wide range of language with confidence.
 
@@ -99,14 +104,18 @@ module-4:
   summative_threshold: 70
 
 module-5:
-  depends_on: personal-social-and-emotional-development
+  depends_on: # personal-social-and-emotional-development
   duration: 2
   title: Supporting physical development in the early years
   thumbnail: 5-thumb-916426036.jpg
   short_description: |
-    This module explores how children develop physical skills. It also discusses how to consider their impact on learning, development and behaviour when planning for your setting.
+    This module explores how children develop physical skills.
+    It also discusses how to consider their impact on learning, development and behaviour when planning for your setting.
   description: |
-    Physical development is central to children’s all-round development. This is why it is one of the three prime areas of learning in the early years foundation stage (EYFS). Physical activity helps children to master control of their body and build healthy habits. As an early years practitioner, you will help children develop the physical, fine and gross motor skills they need to thrive.
+    Physical development is central to children’s all-round development.
+    This is why it is one of the three prime areas of learning in the early years foundation stage (EYFS).
+    Physical activity helps children to master control of their body and build healthy habits.
+    As an early years practitioner, you will help children develop the physical, fine and gross motor skills they need to thrive.
   objective: |
     This module will explore how your planning, curriculum and environment can help children learn, develop and refine their physical skills.
   criteria: |
@@ -118,65 +127,57 @@ module-5:
 
 
 module-6:
-  depends_on: personal-social-and-emotional-development
+  depends_on: # personal-social-and-emotional-development
   duration: 2
   title: Mathematics
   thumbnail:
   short_description: |
-    This module explores how you can teach mathematics in combination with other areas of the early years foundation stage (EYFS). It also considers how you can help children to develop their understanding of number in your setting.
+    This module explores how you can teach mathematics in combination with other areas of the early years foundation stage (EYFS).
+    It also considers how you can help children to develop their understanding of number in your setting.
   description:
-
   objective:
-
   criteria:
-
   summative_threshold: 70
   draft: true
 
 module-7:
-  depends_on: personal-social-and-emotional-development
+  depends_on: # personal-social-and-emotional-development
   duration: 2
   title: Effective curriculum and practice
   thumbnail:
   short_description: |
-    This module considers how to plan and deliver an ambitious curriculum for the children in your setting. It also explores how an holistic approach can support all children to thrive.
+    This module considers how to plan and deliver an ambitious curriculum for the children in your setting.
+    It also explores how an holistic approach can support all children to thrive.
   description:
-
   objective:
-
   criteria:
-
   summative_threshold: 70
   draft: true
 
 module-8:
-  depends_on: personal-social-and-emotional-development
+  depends_on: # personal-social-and-emotional-development
   duration: 2
   title: Effective observation and assessment
   thumbnail:
   short_description: |
-    This module explores different types of observation and assessment, including when and how to use these effectively. It also considers how to ensure that observation does not disrupt children’s learning.
+    This module explores different types of observation and assessment, including when and how to use these effectively.
+    It also considers how to ensure that observation does not disrupt children’s learning.
   description:
-
   objective:
-
   criteria:
-
   summative_threshold: 70
   draft: true
 
 module-9:
-  depends_on: personal-social-and-emotional-development
+  depends_on: # personal-social-and-emotional-development
   duration: 2
   title: Supporting individual needs
   thumbnail:
   short_description: |
-    This module explores the importance of identifying children’s individual starting points and needs. It also considers how your knowledge of each child can help you support them to reach their full potential.
+    This module explores the importance of identifying children’s individual starting points and needs.
+    It also considers how your knowledge of each child can help you support them to reach their full potential.
   description:
-
   objective:
-
   criteria:
-
   summative_threshold: 70
   draft: true

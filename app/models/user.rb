@@ -28,10 +28,9 @@ class User < ApplicationRecord
 
     CSV.generate(headers: true) do |csv|
       csv << (DASHBOARD_ATTRS + module_headings)
-
-      dashboard.find_each(batch_size: 1_000) do |record|
-        csv << (record.dashboard_attributes.values + record.module_ttc)
-      end
+      unformatted = dashboard.find_each(batch_size: 1000).map(&:dashboard_attributes)
+      formatted = CoercionDecorator.new(unformatted).call
+      formatted.each { |row| csv << row.values }
     end
   end
 
@@ -89,6 +88,7 @@ class User < ApplicationRecord
 
   scope :closed, -> { where.not(closed_at: nil) }
   scope :not_closed, -> { where(closed_at: nil) }
+  scope :with_assessments, -> { joins(:user_assessments) }
 
   validates :first_name, :last_name, :setting_type_id,
             presence: true,
@@ -159,6 +159,17 @@ class User < ApplicationRecord
   # @return [Array<Training::Modules>]
   def active_modules
     Training::Module.ordered.reject(&:draft?).select { |mod| module_time_to_completion.key?(mod.name) }
+  end
+
+  # @return [Boolean]
+  def following_linear_sequence?
+    modules_ordered = Training::Module.ordered.reject(&:draft?)
+    modules_ordered.each_cons(2) do |current_module, next_module|
+      # check that previous module has been completed before next module is started
+      return false if module_completed?(current_module.name) && !module_completed?(next_module.name)
+    end
+    user_modules_ordered = modules_ordered.select { |mod| module_time_to_completion.key?(mod.name) }
+    user_modules_ordered.map(&:name) == module_time_to_completion.keys
   end
 
   # @see Devise::Confirmable
@@ -252,6 +263,13 @@ class User < ApplicationRecord
   end
 
   # @return [Boolean]
+  def email_preferences_complete?
+    return true unless Rails.configuration.feature_email_prefs
+
+    !training_emails.nil?
+  end
+
+  # @return [Boolean]
   def private_beta_registration_complete?
     !!private_beta_registration_complete
   end
@@ -266,12 +284,12 @@ class User < ApplicationRecord
     events.where(name: 'user_registration').first&.time # :first returns private_beta or public_beta if that is the only one
   end
 
-  # @return [Array<Integer, nil>]
+  # @return [Hash{Symbol => Integer}]
   def module_ttc
     if Rails.application.cms?
-      Training::Module.ordered.reject(&:draft?).map(&:name).map { |mod| module_time_to_completion[mod] }
+      Training::Module.ordered.reject(&:draft?).map(&:name).index_with { |mod| module_time_to_completion[mod] }
     else
-      TrainingModule.published.map(&:name).map { |mod| module_time_to_completion[mod] }
+      TrainingModule.published.map(&:name).index_with { |mod| module_time_to_completion[mod] }
     end
   end
 
@@ -294,11 +312,20 @@ class User < ApplicationRecord
     end
   end
 
+  # @see ToCsv#dashboard_attributes
+  # @return [Hash] override
+  def dashboard_attributes
+    data_attributes.dup.merge(module_ttc)
+  end
+
+  # @return [Boolean]
+  def module_completed?(module_name)
+    module_time_to_completion[module_name].present? && module_time_to_completion[module_name].positive?
+  end
+
 private
 
-  # @overload data_attributes
-  # @see ToCsv#data_attributes
-  #   @return [Hash] override
+  #   @return [Hash]
   def data_attributes
     DASHBOARD_ATTRS.map { |field| { field => send(field) } }.reduce(&:merge)
   end
