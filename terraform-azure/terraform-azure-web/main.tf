@@ -40,9 +40,14 @@ resource "azurerm_linux_web_app" "webapp" {
 
   logs {
     detailed_error_messages = true
+    failed_request_tracing = true
 
     application_logs {
       file_system_level = "Verbose"
+    }
+
+    http_logs {
+      #TODO: Configure Blob Storage HTTP
     }
 
     #TODO: Configure Blob Storage
@@ -77,6 +82,21 @@ resource "azurerm_linux_web_app_slot" "webapp_slot" {
       docker_image     = var.webapp_docker_image_url
       docker_image_tag = var.webapp_docker_image_tag
     }
+  }
+
+  logs {
+    detailed_error_messages = true
+    failed_request_tracing = true
+
+    application_logs {
+      file_system_level = "Verbose"
+    }
+
+    http_logs {
+      #TODO: Configure Blob Storage HTTP
+    }
+
+    #TODO: Configure Blob Storage
   }
 
   lifecycle {
