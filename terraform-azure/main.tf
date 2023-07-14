@@ -69,7 +69,7 @@ module "webapp" {
   resource_group       = azurerm_resource_group.rg.name
   resource_name_prefix = var.resource_name_prefix
   webapp_subnet_id     = module.network.webapp_subnet_id
-  webapp_name          = "eyrecovery-dev"
+  webapp_name          = var.webapp_name
   webapp_app_settings = {
     "DATABASE_URL"                        = var.webapp_database_url
     "DOCKER_REGISTRY_SERVER_URL"          = var.webapp_docker_registry_url

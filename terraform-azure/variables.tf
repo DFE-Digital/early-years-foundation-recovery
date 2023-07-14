@@ -52,8 +52,13 @@ variable "asp_sku" {
   type        = string
 }
 
+variable "webapp_name" {
+  description = "Name for the Web Application"
+  type        = string
+}
+
 variable "webapp_database_url" {
-  description = "URL to the database"
+  description = "URL to the Database"
   type        = string
   sensitive   = true
 }

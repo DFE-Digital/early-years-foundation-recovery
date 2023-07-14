@@ -82,5 +82,5 @@ jobs:
       - name: Deploy Container
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          app-name: ${{ vars.WEBAPP_NAME }}
           images: '${{ env.IMAGE_URL }}:${{ github.sha }}'
