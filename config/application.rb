@@ -46,7 +46,7 @@ module EarlyYearsFoundationRecovery
     config.active_storage.queues.purge = :default
 
     config.google_cloud_bucket = ENV.fetch('GOOGLE_CLOUD_BUCKET', '#GOOGLE_CLOUD_BUCKET_env_var_missing')
-    config.dashboard_update_interval = ENV.fetch('DASHBOARD_UPDATE_INTERVAL', '0 12 * * *') # Noon daily
+    config.dashboard_update_interval = ENV.fetch('DASHBOARD_UPDATE_INTERVAL', '0 0 * * *') # Midnight daily
 
     config.feature_email_prefs = ENV.fetch('FEATURE_EMAIL_PREFS', false)
     config.bot_token = ENV['BOT_TOKEN']
