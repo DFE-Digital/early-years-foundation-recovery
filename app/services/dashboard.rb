@@ -28,8 +28,9 @@ class Dashboard
     { model: 'Data::ModulesPerMonth', folder: 'summativequiz', file: 'modules_per_month' },
     { model: 'Data::UserOverview', folder: 'userdata', file: 'user_overview' },
     { model: 'Data::ModuleOverview', folder: 'moduledata', file: 'module_overview' },
-    { model: 'Data::UserModuleCompletion', folder: 'userdata', file: 'user_module_completition' },
-    { model: 'Data::ReturningUsers', folder: 'userdata', file: 'returning_users' },
+    { model: 'Data::UserModuleCompletion', folder: 'nonlinear', file: 'user_module_completion' },
+    { model: 'Data::UserModuleCompletionCount', folder: 'nonlinear', file: 'user_module_completions_count' },
+    { model: 'Data::ReturningUsers', folder: 'nonlinear', file: 'returning_users' },
   ].freeze
 
   # @return [String] 30-06-2022-09-30
