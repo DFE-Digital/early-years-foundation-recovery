@@ -227,6 +227,11 @@ class User < ApplicationRecord
     !module_time_to_completion.empty?
   end
 
+  # @return [Integer]
+  def modules_completed_count
+    module_time_to_completion.values.count(&:positive?)
+  end
+
   # @return [String]
   def setting_name
     setting_type_id == 'other' ? setting_type_other : setting_type
@@ -264,7 +269,9 @@ class User < ApplicationRecord
 
   # @return [Boolean]
   def email_preferences_complete?
-    !training_emails.nil? && !early_years_emails.nil?
+    return true unless Rails.configuration.feature_email_prefs
+
+    !training_emails.nil?
   end
 
   # @return [Boolean]

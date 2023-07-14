@@ -8,7 +8,7 @@ class Registration::EarlyYearsEmailsController < Registration::BaseController
 
     if @user_form.save
       if current_user.registration_complete?
-        redirect_to user_path, notice: t('.complete_update')
+        redirect_to my_modules_path, notice: t('.complete_update')
       else
         complete_registration
       end

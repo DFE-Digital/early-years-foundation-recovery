@@ -58,27 +58,20 @@ RSpec.describe 'Confirmed users completing registration' do
 
     click_button 'Continue'
 
-    expect(page).to have_text('Do you want to get email updates about this training course?')
+    if Rails.configuration.feature_email_prefs
 
-    click_button 'Continue'
+      expect(page).to have_text('Do you want to get email updates about this training course?')
 
-    expect(page).to have_text('There is a problem')
-      .and have_text('Choose an option.')
+      click_button 'Continue'
 
-    choose 'Send me email updates about this training course'
+      expect(page).to have_text('There is a problem')
+        .and have_text('Choose an option.')
 
-    click_button 'Continue'
+      choose 'Send me email updates about this training course'
 
-    expect(page).to have_text('Do you want to get early years email updates from the Department for Education?')
+      click_button 'Continue'
 
-    click_button 'Continue'
-
-    expect(page).to have_text('There is a problem')
-      .and have_text('Choose an option.')
-
-    choose 'Send me early years email updates'
-
-    click_button 'Continue'
+    end
 
     expect(page).to have_text('Thank you for creating an Early years child development training account. You can now start the first module.')
   end
