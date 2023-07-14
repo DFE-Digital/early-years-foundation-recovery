@@ -23,7 +23,6 @@ resource "azurerm_linux_web_app" "webapp" {
   app_settings        = var.webapp_app_settings
 
   site_config {
-    app_command_line                  = var.webapp_startup_command
     health_check_path                 = var.webapp_health_check_path
     health_check_eviction_time_in_min = var.health_check_eviction_time_in_min
     http2_enabled                     = true
@@ -33,6 +32,10 @@ resource "azurerm_linux_web_app" "webapp" {
       docker_image     = var.webapp_docker_image_url
       docker_image_tag = var.webapp_docker_image_tag
     }
+  }
+
+  sticky_settings {
+    app_setting_names = keys(var.webapp_app_settings)
   }
 
   logs {
@@ -57,8 +60,39 @@ resource "azurerm_linux_web_app" "webapp" {
   #checkov:skip=CKV_AZURE_71:Using VNET Integration
 }
 
+# Create Web Application Deployment Slot
+resource "azurerm_linux_web_app_slot" "webapp_slot" {
+  name           = "green"
+  app_service_id = azurerm_linux_web_app.webapp.id
+  https_only     = true
+  app_settings   = var.webapp_app_settings
+
+  site_config {
+    health_check_path                 = var.webapp_health_check_path
+    health_check_eviction_time_in_min = var.health_check_eviction_time_in_min
+    http2_enabled                     = true
+    vnet_route_all_enabled            = true
+
+    application_stack {
+      docker_image     = var.webapp_docker_image_url
+      docker_image_tag = var.webapp_docker_image_tag
+    }
+  }
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
+}
+
 # Integrate Web Application into Virtual Network
 resource "azurerm_app_service_virtual_network_swift_connection" "webapp_vnet" {
+  app_service_id = azurerm_linux_web_app.webapp.id
+  subnet_id      = var.webapp_subnet_id
+}
+
+# Integrate Web Application Deployment Slot into Virtual Network
+resource "azurerm_app_service_slot_virtual_network_swift_connection" "webapp_slot_vnet" {
+  slot_name      = azurerm_linux_web_app_slot.webapp_slot.name
   app_service_id = azurerm_linux_web_app.webapp.id
   subnet_id      = var.webapp_subnet_id
 }

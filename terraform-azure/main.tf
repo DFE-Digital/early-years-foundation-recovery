@@ -97,7 +97,6 @@ module "webapp" {
   }
   webapp_docker_image_url  = var.webapp_docker_image_url
   webapp_docker_image_tag  = var.webapp_docker_image_tag
-  webapp_startup_command   = ""
   webapp_health_check_path = "/health"
   depends_on               = [module.network, module.database]
 }

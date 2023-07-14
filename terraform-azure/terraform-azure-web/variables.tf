@@ -43,11 +43,6 @@ variable "webapp_docker_image_tag" {
   type        = string
 }
 
-variable "webapp_startup_command" {
-  description = "Startup command to pass into the Web Application"
-  type        = string
-}
-
 variable "webapp_health_check_path" {
   description = "Path to health check endpoint"
   type        = string
