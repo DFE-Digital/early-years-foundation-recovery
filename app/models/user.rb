@@ -227,6 +227,11 @@ class User < ApplicationRecord
     !module_time_to_completion.empty?
   end
 
+  # @return [Integer]
+  def modules_completed_count
+    module_time_to_completion.values.count(&:positive?)
+  end
+
   # @return [String]
   def setting_name
     setting_type_id == 'other' ? setting_type_other : setting_type
