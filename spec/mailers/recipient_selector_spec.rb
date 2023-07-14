@@ -36,4 +36,72 @@ RSpec.describe RecipientSelector do
       end
     end
   end
+
+  describe '.continue_training_recipients' do
+    let!(:user_1) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
+    let!(:user_2) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
+    let!(:user_3) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
+
+    before do
+        create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1 })
+        create(:user, :registered, confirmed_at: 8.weeks.ago, module_time_to_completion: { "alpha": 2 })
+
+        Ahoy::Visit.new(
+            id: 1,
+            visitor_token: '123',
+            visitor_token: '123',
+            user_id: user_1.id,
+            started_at: 4.weeks.ago
+        ).save!
+
+        Ahoy::Visit.new(
+            id: 2,
+            visitor_token: '234',
+            visitor_token: '234',
+            user_id: user_1.id,
+            started_at: 2.weeks.ago
+        ).save!
+
+        Ahoy::Visit.new(
+            id: 3,
+            visitor_token: '345',
+            visitor_token: '345',
+            user_id: user_2.id,
+            started_at: 4.weeks.ago
+        ).save!
+
+        Ahoy::Visit.new(
+            id: 4,
+            visitor_token: '456',
+            visitor_token: '456',
+            user_id: user_3.id,
+            started_at: 4.weeks.ago
+        ).save!
+
+    end
+
+    context 'when users are a month old and have completed registration and started training but not completed training' do
+        it 'returns the users but no others' do
+            expect(recipient_selector.continue_training_recipients).to contain_exactly(user_2, user_3)
+        end
+    end
+  end
+
+  describe '.new_module_recipients' do
+    let!(:user_1) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1, "bravo": 1, "charlie": 1 }) }
+    let!(:user_2) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1, "bravo": 1, "charlie": 1 }) }
+    let!(:user_3) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1, "bravo": 1, "charlie": 1 }) }
+    before do
+      # create(:training_module)
+      create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1})
+      create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1, "bravo": 1, "charlie": 0 })
+      
+    end
+
+    context 'when a user has completed all available modules and a new module is available' do
+      it 'returns the users but no others' do
+        expect(recipient_selector.new_module_recipients).to contain_exactly(user_1, user_2, user_3)
+      end
+    end
+  end
 end

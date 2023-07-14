@@ -86,6 +86,7 @@ class User < ApplicationRecord
   scope :with_local_authority, -> { where.not(local_authority: nil) }
   scope :with_notes, -> { joins(:notes).distinct.select(&:has_notes?) }
   scope :not_started_training, -> { reject(&:course_started?) }
+  scope :course_in_progress, -> { select(&:course_in_progress?) }
 
   scope :training_email_recipients, -> { where(training_emails: [true, nil]) }
   scope :early_years_email_recipients, -> { where(early_years_emails: true) }
@@ -230,6 +231,11 @@ class User < ApplicationRecord
   # @return [Boolean]
   def course_started?
     !module_time_to_completion.empty?
+  end
+
+  # @return [Boolean]
+  def course_in_progress?
+    course_started? && !module_time_to_completion.values.all?(&:positive?)
   end
 
   # @return [String]
