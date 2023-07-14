@@ -40,7 +40,7 @@ resource "azurerm_linux_web_app" "webapp" {
 
   logs {
     detailed_error_messages = true
-    failed_request_tracing = true
+    failed_request_tracing  = true
 
     application_logs {
       file_system_level = "Verbose"
@@ -86,7 +86,7 @@ resource "azurerm_linux_web_app_slot" "webapp_slot" {
 
   logs {
     detailed_error_messages = true
-    failed_request_tracing = true
+    failed_request_tracing  = true
 
     application_logs {
       file_system_level = "Verbose"
