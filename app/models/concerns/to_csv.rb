@@ -3,25 +3,26 @@ require 'csv'
 module ToCsv
   extend ActiveSupport::Concern
 
+  class ExportError < StandardError
+  end
+
   class_methods do
-    # Returns an array of strings representing the column names for the data export
-    # @return [Array<String>]
+    # @return [Array<String>] table headers
     def column_names
       super
     rescue NoMethodError
-      raise NoMethodError, 'ToCsv.to_csv a column names method must be defined for bespoke data export models to serve as csv column headers'
+      raise ExportError, "#{name}.column_names is required for bespoke models"
     end
 
-    # Returns an array of hashes representing the rows of data to be exported or an ActiveRecord::Relation
-    # @return [ActiveRecord::Relation, Array<Hash{Symbol => Mixed}>]
+    # @return [ActiveRecord::Relation, Array<Hash{Symbol => Mixed}>] table rows
     def dashboard
       all
     rescue NoMethodError
-      raise NoMethodError, 'ToCsv.to_csv a dashboard method must be defined for bespoke data export models to serve as csv data'
+      raise ExportError, "#{name}.dashboard is required for bespoke models"
     end
 
-    # @return [String]
     # @param batch_size [Integer]
+    # @return [String]
     def to_csv(batch_size: 1_000)
       CSV.generate(headers: true) do |csv|
         csv << column_names
@@ -34,7 +35,7 @@ module ToCsv
   end
 
   included do
-    # @return [Hash] default to database fields
+    # @return [Hash] row cells
     def dashboard_attributes
       attributes
     end
