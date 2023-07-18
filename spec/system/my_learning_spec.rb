@@ -23,33 +23,35 @@ RSpec.describe 'Learning activity' do
     end
 
     describe 'Available modules' do
-      it 'shows only the first mandatory module' do
+      it 'shows all published modules' do
         within '#available' do
           expect(page).to have_text 'Available modules'
           expect(page).to have_text 'First Training Module'
+          expect(page).to have_text 'Second Training Module'
+          expect(page).to have_text 'Third Training Module'
 
-          expect(page).not_to have_text 'Second Training Module'
-          expect(page).not_to have_text 'Third Training Module'
           expect(page).not_to have_text 'Fourth Training Module'
         end
       end
     end
 
     describe 'Future modules' do
-      it 'shows other modules including drafts' do
+      it 'shows unpublished modules' do
         within '#upcoming' do
           expect(page).to have_text 'Future modules in this course'
           expect(page).not_to have_text 'First Training Module'
+          expect(page).not_to have_text 'Second Training Module'
+          expect(page).not_to have_text 'Third Training Module'
 
-          within '#bravo' do
-            expect(page).to have_text 'Second Training Module'
-            expect(page).to have_link 'View more information about this module', href: '/about-training#module-2-second-training-module'
-          end
+          # within '#bravo' do
+          #   expect(page).to have_text 'Second Training Module'
+          #   expect(page).to have_link 'View more information about this module', href: '/about-training#module-2-second-training-module'
+          # end
 
-          within '#charlie' do
-            expect(page).to have_text 'Third Training Module'
-            expect(page).to have_link 'View more information about this module', href: '/about-training#module-3-third-training-module'
-          end
+          # within '#charlie' do
+          #   expect(page).to have_text 'Third Training Module'
+          #   expect(page).to have_link 'View more information about this module', href: '/about-training#module-3-third-training-module'
+          # end
 
           # unpublished draft module
           within '#delta' do
