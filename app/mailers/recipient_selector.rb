@@ -13,23 +13,6 @@ module RecipientSelector
     User.course_in_progress.select { |user| old_visits.pluck(:user_id).include?(user.id) }
   end
 
-  # SPEC:
-  # describe '.new_module_recipients' do
-  #   let!(:user_1) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1, "bravo": 1, "charlie": 1 }) }
-  #   let!(:user_2) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1, "bravo": 1, "charlie": 1 }) }
-  #   let!(:user_3) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1, "bravo": 1, "charlie": 1 }) }
-  #   before do
-  #     create(:module_item)
-  #     create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1})
-  #     create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1, "bravo": 1, "charlie": 0 })
-  #   end
-
-  #   context 'when a user has completed all available modules and a new module is available' do
-  #     it 'returns the users but no others' do
-  #       expect(recipient_selector.new_module_recipients).to contain_exactly(user_1, user_2, user_3)
-  #     end
-  #   end
-
   def new_module_recipients
     new_module = Training::Module.ordered.reject(&:draft?).find { |module_item| module_item.published_at >= 1.day.ago.beginning_of_day }
     return [] unless new_module
