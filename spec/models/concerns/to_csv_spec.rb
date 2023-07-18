@@ -31,6 +31,18 @@ RSpec.describe ToCsv do
       end
     end
 
+    context 'when .column_names or .dashboard are undefined' do
+      subject(:klass) do
+        Class.new do
+          include ToCsv
+        end
+      end
+
+      specify do
+        expect { klass.to_csv }.to raise_error ToCsv::ExportError
+      end
+    end
+
     context 'when given empty headers and data' do
       subject(:klass) do
         Class.new do
