@@ -1,5 +1,5 @@
 FactoryBot.define do
-    factory :training_module do
-      name { 'delta' }
-    end
+  factory :training_module do
+    name { 'delta' }
   end
+end

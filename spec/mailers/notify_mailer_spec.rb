@@ -104,5 +104,21 @@ RSpec.describe NotifyMailer, type: :mailer do
         expect(mail.subject).to eq 'Start training'
       end
     end
+
+    context 'when user started training and not completed training' do
+      it 'sends email to user to remind them to complete training' do
+        mail = described_class.continue_training(user, Training::Module.first)
+        expect(mail.to).to contain_exactly(user.email)
+        expect(mail.subject).to eq 'Continue training'
+      end
+    end
+
+    context 'when user has completed all available modules and a new module is released' do
+      it 'sends email to user to inform them of new module' do
+        mail = described_class.new_module(user, Training::Module.first)
+        expect(mail.to).to contain_exactly(user.email)
+        expect(mail.subject).to eq 'New module'
+      end
+    end
   end
 end
