@@ -18,12 +18,12 @@ module RecipientSelector
 
   # @param new_module [Training::Module]
   # @return [Array<User>]
-  def new_module_recipients(new_module)
+  def new_module_recipients
+    return [] if new_module.nil?
+
     all_modules = Training::Module.ordered.reject { |module_item| module_item == new_module || module_item.draft? }
     User.all.select do |user|
-      all_modules.map(&:name).all? do |module_name|
-        user.module_completed?(module_name)
-      end
+      all_modules.all? { |module_item| user.module_completed?(module_item.name) }
     end
   end
 
@@ -38,6 +38,6 @@ private
   # @return [Training::Module]
   def module_in_progress(user)
     mod_name = user.module_time_to_completion.find { |_k, v| v.zero? }.first
-    Training::Module.find_by(name: mod_name).first
+    Training::Module.find_by(name: mod_name)
   end
 end

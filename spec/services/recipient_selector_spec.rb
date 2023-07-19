@@ -88,13 +88,14 @@ RSpec.describe RecipientSelector do
     let!(:user_3) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1, "bravo": 1, "charlie": 1 }) }
 
     before do
+      travel_to Time.zone.local(2023, 6, 30, 12, 0, 0)
       create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1 })
       create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1, "bravo": 1, "charlie": 0 })
     end
 
-    context 'when a user has completed all available modules' do
+    context 'when a user has completed all available modules and a new module is available' do
       it 'returns the users' do
-        expect(recipient_selector.new_module_recipients(Training::Module.find_by(name: 'bravo'))).to contain_exactly(user_1, user_2, user_3)
+        expect(recipient_selector.new_module_recipients).to contain_exactly(user_1, user_2, user_3)
       end
     end
   end

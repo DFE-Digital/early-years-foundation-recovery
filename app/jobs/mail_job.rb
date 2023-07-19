@@ -2,6 +2,7 @@ class MailJob < Que::Job
   include RecipientSelector
 
   def run
+    log 'MailJob: Running'
     complete_registration_recipients.each do |recipient|
       NotifyMailer.complete_registration(recipient)
     end
@@ -14,10 +15,8 @@ class MailJob < Que::Job
       NotifyMailer.continue_training(recipient, module_in_progress(recipient))
     end
 
-    if new_module.present?
-      new_module_recipients(new_module).each do |recipient|
-        NotifyMailer.new_module(recipient, new_module)
-      end
+    new_module_recipients.each do |recipient|
+      NotifyMailer.new_module(recipient, new_module)
     end
   end
 end
