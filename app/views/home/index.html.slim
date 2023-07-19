@@ -33,20 +33,24 @@
 
 .govuk-grid-row
   .govuk-grid-column-one-half
-    h2.govuk-heading-m About this training course
-    p.govuk-body class='govuk-!-padding-bottom-4'
-      | Each training module on this site covers an important area of child development and has
-      |  been written by early years experts, working with the Department for Education.
-    h2.govuk-heading-m Why should I take this training?
-    p.govuk-body This training:
-    ul.govuk-list.govuk-list--bullet
-      li is free for childminders and nurseries
-      li combines theory with practical tips and ideas to use in your setting
-      li includes opportunities to reflect on your practice
-      li reinforces your understanding through learning check questions and tests
-      li links to additional resources
-      li offers the opportunity to download certificates of completion
-      li has been developed by expert practitioners
+    / home.about
+      ## About this training course
+
+      Each training module on this site covers an important area of child development and has been written by early years experts, working with the Department for Education.
+
+      ## Why should I take this training?
+
+      This training:
+
+      - is free for childminders and nurseries
+      - combines theory with practical tips and ideas to use in your setting
+      - includes opportunities to reflect on your practice
+      - reinforces your understanding through learning check questions and tests
+      - links to additional resources
+      - offers the opportunity to download certificates of completion
+      - has been developed by expert practitioners
+    .gem-c-govspeak
+      = translate_markdown Page::Resource.by_name('home.about').body
 
   - unless current_user
     .govuk-grid-column-one-half
