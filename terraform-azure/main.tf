@@ -84,5 +84,6 @@ module "webapp-worker" {
   webapp_docker_registry_username = var.webapp_docker_registry_username
   webapp_docker_registry_password = var.webapp_docker_registry_password
   webapp_health_check_path        = "/health"
+  webapp_startup_command          = "bash -c \"bundle exec que\""
   depends_on                      = [module.network, module.database]
 }

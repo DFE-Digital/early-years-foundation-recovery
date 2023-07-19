@@ -75,3 +75,9 @@ variable "webapp_public_access" {
   description = "Enable public access to the Web Application"
   type        = bool
 }
+
+variable "webapp_startup_command" {
+  default     = null
+  description = "Startup command to pass into the Web Application"
+  type        = string
+}
