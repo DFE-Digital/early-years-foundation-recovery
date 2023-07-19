@@ -94,6 +94,7 @@ module "webapp" {
     "RAILS_SERVE_STATIC_FILES"            = var.webapp_config_rails_serve_static_files
     "TRAINING_MODULES"                    = var.webapp_config_training_modules
     "WEB_CONCURRENCY"                     = var.webapp_config_web_concurrency
+    "WEBSITES_CONTAINER_START_TIME_LIMIT" = 1800
   }
   webapp_docker_image_url  = var.webapp_docker_image_url
   webapp_docker_image_tag  = var.webapp_docker_image_tag
