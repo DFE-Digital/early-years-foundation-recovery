@@ -31,7 +31,7 @@ resource "azurerm_linux_web_app" "webapp" {
     vnet_route_all_enabled            = true
 
     application_stack {
-      docker_image_name        = "${var.webapp_docker_image_url}:${var.webapp_docker_image_tag}"
+      docker_image_name        = "${var.webapp_docker_image}:${var.webapp_docker_image_tag}"
       docker_registry_url      = var.webapp_docker_registry_url
       docker_registry_username = var.webapp_docker_registry_username
       docker_registry_password = var.webapp_docker_registry_password
@@ -86,7 +86,7 @@ resource "azurerm_linux_web_app_slot" "webapp_slot" {
     vnet_route_all_enabled            = true
 
     application_stack {
-      docker_image_name        = "${var.webapp_docker_image_url}:${var.webapp_docker_image_tag}"
+      docker_image_name        = "${var.webapp_docker_image}:${var.webapp_docker_image_tag}"
       docker_registry_url      = var.webapp_docker_registry_url
       docker_registry_username = var.webapp_docker_registry_username
       docker_registry_password = var.webapp_docker_registry_password

@@ -49,8 +49,8 @@ variable "webapp_docker_registry_password" {
   sensitive   = true
 }
 
-variable "webapp_docker_image_url" {
-  description = "URL to the Docker Image"
+variable "webapp_docker_image" {
+  description = "Docker Image to deploy"
   type        = string
 }
 
