@@ -15,12 +15,14 @@ resource "azurerm_service_plan" "asp" {
 
 # Create Web Application
 resource "azurerm_linux_web_app" "webapp" {
-  name                = var.webapp_name
-  location            = var.location
-  resource_group_name = var.resource_group
-  service_plan_id     = azurerm_service_plan.asp.id
-  https_only          = true
-  app_settings        = var.webapp_app_settings
+  name                          = var.webapp_name
+  location                      = var.location
+  resource_group_name           = var.resource_group
+  service_plan_id               = azurerm_service_plan.asp.id
+  https_only                    = true
+  public_network_access_enabled = var.webapp_public_access
+  virtual_network_subnet_id     = var.webapp_subnet_id
+  app_settings                  = var.webapp_app_settings
 
   site_config {
     health_check_path                 = var.webapp_health_check_path
@@ -29,8 +31,10 @@ resource "azurerm_linux_web_app" "webapp" {
     vnet_route_all_enabled            = true
 
     application_stack {
-      docker_image     = var.webapp_docker_image_url
-      docker_image_tag = var.webapp_docker_image_tag
+      docker_image_name        = "${var.webapp_docker_image_url}:${var.webapp_docker_image_tag}"
+      docker_registry_url      = var.webapp_docker_registry_url
+      docker_registry_username = var.webapp_docker_registry_username
+      docker_registry_password = var.webapp_docker_registry_password
     }
   }
 
@@ -68,10 +72,12 @@ resource "azurerm_linux_web_app" "webapp" {
 
 # Create Web Application Deployment Slot
 resource "azurerm_linux_web_app_slot" "webapp_slot" {
-  name           = "green"
-  app_service_id = azurerm_linux_web_app.webapp.id
-  https_only     = true
-  app_settings   = var.webapp_app_settings
+  name                          = "green"
+  app_service_id                = azurerm_linux_web_app.webapp.id
+  https_only                    = true
+  public_network_access_enabled = var.webapp_public_access
+  virtual_network_subnet_id     = var.webapp_subnet_id
+  app_settings                  = var.webapp_app_settings
 
   site_config {
     health_check_path                 = var.webapp_health_check_path
@@ -80,8 +86,10 @@ resource "azurerm_linux_web_app_slot" "webapp_slot" {
     vnet_route_all_enabled            = true
 
     application_stack {
-      docker_image     = var.webapp_docker_image_url
-      docker_image_tag = var.webapp_docker_image_tag
+      docker_image_name        = "${var.webapp_docker_image_url}:${var.webapp_docker_image_tag}"
+      docker_registry_url      = var.webapp_docker_registry_url
+      docker_registry_username = var.webapp_docker_registry_username
+      docker_registry_password = var.webapp_docker_registry_password
     }
   }
 
@@ -106,19 +114,6 @@ resource "azurerm_linux_web_app_slot" "webapp_slot" {
   }
 }
 
-# Integrate Web Application into Virtual Network
-resource "azurerm_app_service_virtual_network_swift_connection" "webapp_vnet" {
-  app_service_id = azurerm_linux_web_app.webapp.id
-  subnet_id      = var.webapp_subnet_id
-}
-
-# Integrate Web Application Deployment Slot into Virtual Network
-resource "azurerm_app_service_slot_virtual_network_swift_connection" "webapp_slot_vnet" {
-  slot_name      = azurerm_linux_web_app_slot.webapp_slot.name
-  app_service_id = azurerm_linux_web_app.webapp.id
-  subnet_id      = var.webapp_subnet_id
-}
-
 # Create Log Analytics
 resource "azurerm_log_analytics_workspace" "webapp_logs" {
   name                = "${var.resource_name_prefix}-log"
@@ -137,16 +132,16 @@ resource "azurerm_monitor_diagnostic_setting" "webapp_logs_monitor" {
   target_resource_id         = azurerm_linux_web_app.webapp.id
   log_analytics_workspace_id = azurerm_log_analytics_workspace.webapp_logs.id
 
-  log {
+  enabled_log {
     category = "AppServiceConsoleLogs"
   }
 
-  log {
+  enabled_log {
     category = "AppServicePlatformLogs"
   }
 
   lifecycle {
-    ignore_changes = [log, metric]
+    ignore_changes = [metric]
   }
 }
 
@@ -155,15 +150,15 @@ resource "azurerm_monitor_diagnostic_setting" "webapp_slot_logs_monitor" {
   target_resource_id         = azurerm_linux_web_app_slot.webapp_slot.id
   log_analytics_workspace_id = azurerm_log_analytics_workspace.webapp_logs.id
 
-  log {
+  enabled_log {
     category = "AppServiceConsoleLogs"
   }
 
-  log {
+  enabled_log {
     category = "AppServicePlatformLogs"
   }
 
   lifecycle {
-    ignore_changes = [log, metric]
+    ignore_changes = [metric]
   }
 }

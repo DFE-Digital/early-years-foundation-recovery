@@ -33,6 +33,22 @@ variable "webapp_app_settings" {
   type        = map(string)
 }
 
+variable "webapp_docker_registry_url" {
+  description = "URL to the Docker Registry"
+  type        = string
+}
+
+variable "webapp_docker_registry_username" {
+  description = "Username for the Docker Registry"
+  type        = string
+}
+
+variable "webapp_docker_registry_password" {
+  description = "Password the Docker Registry"
+  type        = string
+  sensitive   = true
+}
+
 variable "webapp_docker_image_url" {
   description = "URL to the Docker Image"
   type        = string
@@ -52,4 +68,10 @@ variable "webapp_health_check_eviction_time_in_min" {
   default     = 10
   description = "Minutes before considering an instance unhealthy"
   type        = number
+}
+
+variable "webapp_public_access" {
+  default     = true
+  description = "Enable public access to the Web Application"
+  type        = bool
 }

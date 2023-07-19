@@ -8,26 +8,12 @@ provider "azurerm" {
   }
 }
 
-locals {
-  # Common tags to be assigned to all resources
-  common_tags = {
-    "Environment"      = var.environment
-    "Parent Business"  = "Children’s Care"
-    "Portfolio"        = "Newly Onboarded"
-    "Product"          = "EY Recovery"
-    "Service"          = "Newly Onboarded"
-    "Service Line"     = "Newly Onboarded"
-    "Service Offering" = "EY Recovery"
-  }
-}
-
 # Create Resource Group
 resource "azurerm_resource_group" "rg" {
   name     = "${var.resource_name_prefix}-rg"
   location = var.azure_region
 
-  tags = merge(local.common_tags, {
-  })
+  tags = local.common_tags
 
   lifecycle {
     ignore_changes = [tags]
@@ -64,40 +50,39 @@ module "database" {
 module "webapp" {
   source = "./terraform-azure-web"
 
-  asp_sku              = var.asp_sku
-  location             = var.azure_region
-  resource_group       = azurerm_resource_group.rg.name
-  resource_name_prefix = var.resource_name_prefix
-  webapp_subnet_id     = module.network.webapp_subnet_id
-  webapp_name          = var.webapp_name
-  webapp_app_settings = {
-    "DATABASE_URL"                        = var.webapp_database_url
-    "DOCKER_REGISTRY_SERVER_URL"          = var.webapp_docker_registry_url
-    "DOCKER_REGISTRY_SERVER_USERNAME"     = var.webapp_docker_registry_username
-    "DOCKER_REGISTRY_SERVER_PASSWORD"     = var.webapp_docker_registry_password
-    "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
-    "GOVUK_APP_DOMAIN"                    = "london.cloudapps.digital" #TODO: Remove this dependency post-migration to Azure
-    "GOVUK_WEBSITE_ROOT"                  = "ey-recovery-dev"          #TODO: Remove this dependency post-migration to Azure
-    "BOT_TOKEN"                           = var.webapp_config_bot_token
-    "CONTENTFUL_ENVIRONMENT"              = var.webapp_config_contentful_environment
-    "CONTENTFUL_PREVIEW"                  = var.webapp_config_contentful_preview
-    "DOMAIN"                              = var.webapp_config_domain
-    "EDITOR"                              = var.webapp_config_editor
-    "FEEDBACK_URL"                        = var.webapp_config_feedback_url
-    "GROVER_NO_SANDBOX"                   = var.webapp_config_grover_no_sandbox
-    "GOOGLE_CLOUD_BUCKET"                 = var.webapp_config_google_cloud_bucket
-    "NODE_ENV"                            = var.webapp_config_node_env
-    "RAILS_ENV"                           = var.webapp_config_rails_env
-    "RAILS_LOG_TO_STDOUT"                 = var.webapp_config_rails_log_to_stdout
-    "RAILS_MASTER_KEY"                    = var.webapp_config_rails_master_key
-    "RAILS_MAX_THREADS"                   = var.webapp_config_rails_max_threads
-    "RAILS_SERVE_STATIC_FILES"            = var.webapp_config_rails_serve_static_files
-    "TRAINING_MODULES"                    = var.webapp_config_training_modules
-    "WEB_CONCURRENCY"                     = var.webapp_config_web_concurrency
-    "WEBSITES_CONTAINER_START_TIME_LIMIT" = 1800
-  }
-  webapp_docker_image_url  = var.webapp_docker_image_url
-  webapp_docker_image_tag  = var.webapp_docker_image_tag
-  webapp_health_check_path = "/health"
-  depends_on               = [module.network, module.database]
+  asp_sku                         = var.asp_sku
+  location                        = var.azure_region
+  resource_group                  = azurerm_resource_group.rg.name
+  resource_name_prefix            = var.resource_name_prefix
+  webapp_subnet_id                = module.network.webapp_subnet_id
+  webapp_name                     = var.webapp_name
+  webapp_app_settings             = local.webapp_app_settings
+  webapp_docker_image_url         = var.webapp_docker_image_url
+  webapp_docker_image_tag         = var.webapp_docker_image_tag
+  webapp_docker_registry_url      = var.webapp_docker_registry_url
+  webapp_docker_registry_username = var.webapp_docker_registry_username
+  webapp_docker_registry_password = var.webapp_docker_registry_password
+  webapp_health_check_path        = "/health"
+  depends_on                      = [module.network, module.database]
+}
+
+# Create Web Application Background Worker resources
+module "webapp-worker" {
+  source = "./terraform-azure-web"
+
+  asp_sku                         = var.asp_sku
+  location                        = var.azure_region
+  resource_group                  = azurerm_resource_group.rg.name
+  resource_name_prefix            = "${var.resource_name_prefix}-worker"
+  webapp_subnet_id                = module.network.webapp_worker_subnet_id
+  webapp_name                     = "${var.webapp_name}-worker"
+  webapp_public_access            = false
+  webapp_app_settings             = merge({ "APP_COMMAND_LINE" = "bundle exec que" }, local.webapp_app_settings)
+  webapp_docker_image_url         = var.webapp_docker_image_url
+  webapp_docker_image_tag         = var.webapp_docker_image_tag
+  webapp_docker_registry_url      = var.webapp_docker_registry_url
+  webapp_docker_registry_username = var.webapp_docker_registry_username
+  webapp_docker_registry_password = var.webapp_docker_registry_password
+  webapp_health_check_path        = "/health"
+  depends_on                      = [module.network, module.database]
 }
