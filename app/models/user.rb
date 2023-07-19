@@ -236,6 +236,10 @@ class User < ApplicationRecord
   # @return [Boolean]
   def course_in_progress?
     course_started? && !module_time_to_completion.values.all?(&:positive?)
+
+  # @return [Integer]
+  def modules_completed_count
+    module_time_to_completion.values.count(&:positive?)
   end
 
   # @return [String]
@@ -306,6 +310,8 @@ class User < ApplicationRecord
 
   def redact!
     skip_reconfirmation!
+    skip_email_changed_notification!
+    skip_password_change_notification!
     update!(first_name: 'Redacted',
             last_name: 'User',
             email: "redacted_user#{id}@example.com",

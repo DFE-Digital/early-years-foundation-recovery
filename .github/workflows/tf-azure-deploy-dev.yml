@@ -27,7 +27,31 @@ env:
   TF_VAR_psqlfs_storage: ${{ vars.TF_VAR_PSQLFS_STORAGE }}
   TF_VAR_psqlfs_username: ${{ secrets.TF_VAR_PSQLFS_USERNAME }}
   TF_VAR_psqlfs_password: ${{ secrets.TF_VAR_PSQLFS_PASSWORD }}
-  TF_VAR_psqlfs_geo_redundant_backup: ${{ vars.TF_VAR_PSQLFS_GEO_REDUNDANT_BACKUP}}
+  TF_VAR_psqlfs_geo_redundant_backup: ${{ vars.TF_VAR_PSQLFS_GEO_REDUNDANT_BACKUP }}
+  TF_VAR_asp_sku: ${{ vars.TF_VAR_ASP_SKU }}
+  TF_VAR_webapp_name: ${{ vars.WEBAPP_NAME }}
+  TF_VAR_webapp_database_url: ${{ secrets.TF_VAR_WEBAPP_DATABASE_URL }}
+  TF_VAR_webapp_docker_registry_url: https://ghcr.io
+  TF_VAR_webapp_docker_registry_username: ${{ github.repository_owner }}
+  TF_VAR_webapp_docker_registry_password: ${{ secrets.GITHUB_TOKEN }}
+  TF_VAR_webapp_docker_image_url: ghcr.io/dfe-digital/early-years-foundation-recovery
+  TF_VAR_webapp_docker_image_tag: latest
+  TF_VAR_webapp_config_bot_token: ${{ secrets.TF_VAR_WEBAPP_CONFIG_BOT_TOKEN }}
+  TF_VAR_webapp_config_contentful_environment: ${{ vars.TF_VAR_WEBAPP_CONFIG_CONTENTFUL_ENVIRONMENT }}
+  TF_VAR_webapp_config_contentful_preview: ${{ vars.TF_VAR_WEBAPP_CONFIG_CONTENTFUL_PREVIEW }}
+  TF_VAR_webapp_config_domain: ${{ vars.TF_VAR_WEBAPP_CONFIG_DOMAIN }}
+  TF_VAR_webapp_config_editor: ${{ vars.TF_VAR_WEBAPP_CONFIG_EDITOR }}
+  TF_VAR_webapp_config_feedback_url: ${{ vars.TF_VAR_WEBAPP_CONFIG_FEEDBACK_URL }}
+  TF_VAR_webapp_config_grover_no_sandbox: ${{ vars.TF_VAR_WEBAPP_CONFIG_GROVER_NO_SANDBOX }}
+  TF_VAR_webapp_config_google_cloud_bucket: ${{ vars.TF_VAR_WEBAPP_CONFIG_GOOGLE_CLOUD_BUCKET }}
+  TF_VAR_webapp_config_node_env: ${{ vars.TF_VAR_WEBAPP_CONFIG_NODE_ENV }}
+  TF_VAR_webapp_config_rails_env: ${{ vars.TF_VAR_WEBAPP_CONFIG_RAILS_ENV }}
+  TF_VAR_webapp_config_rails_log_to_stdout: ${{ vars.TF_VAR_WEBAPP_CONFIG_RAILS_LOG_TO_STDOUT }}
+  TF_VAR_webapp_config_rails_master_key: ${{ secrets.TF_VAR_WEBAPP_CONFIG_RAILS_MASTER_KEY }}
+  TF_VAR_webapp_config_rails_max_threads: ${{ vars.TF_VAR_WEBAPP_CONFIG_RAILS_MAX_THREADS }}
+  TF_VAR_webapp_config_rails_serve_static_files: ${{ vars.TF_VAR_WEBAPP_CONFIG_RAILS_SERVE_STATIC_FILES }}
+  TF_VAR_webapp_config_training_modules: ${{ vars.TF_VAR_WEBAPP_CONFIG_TRAINING_MODULES }}
+  TF_VAR_webapp_config_web_concurrency: ${{ vars.TF_VAR_WEBAPP_CONFIG_WEB_CONCURRENCY }}
 
 jobs:
   terraform-plan:

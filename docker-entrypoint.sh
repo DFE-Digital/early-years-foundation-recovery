@@ -25,4 +25,6 @@ else
   bundle exec rails db:create db:migrate
 fi
 
+bundle exec rails db:prepare assets:precompile
+
 exec bundle exec "$@"

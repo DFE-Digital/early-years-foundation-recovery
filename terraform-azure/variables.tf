@@ -29,7 +29,7 @@ variable "psqlfs_storage" {
 }
 
 variable "psqlfs_username" {
-  default     = "psqladmin"
+  default     = "psqladminDexter"
   description = "Username of the Database Server"
   type        = string
 }
@@ -44,4 +44,114 @@ variable "psqlfs_geo_redundant_backup" {
   default     = false
   description = "Geo-redundant backup storage enabled"
   type        = bool
+}
+
+variable "asp_sku" {
+  default     = "S1"
+  description = "SKU name for the App Service Plan"
+  type        = string
+}
+
+variable "webapp_name" {
+  description = "Name for the Web Application"
+  type        = string
+}
+
+variable "webapp_database_url" {
+  description = "URL to the Database"
+  type        = string
+  sensitive   = true
+}
+
+variable "webapp_docker_registry_url" {
+  description = "URL to the Docker Registry"
+  type        = string
+}
+
+variable "webapp_docker_registry_username" {
+  description = "Username for the Docker Registry"
+  type        = string
+}
+
+variable "webapp_docker_registry_password" {
+  description = "Password the Docker Registry"
+  type        = string
+  sensitive   = true
+}
+
+variable "webapp_docker_image_url" {
+  description = "URL to the Docker Image"
+  type        = string
+}
+
+variable "webapp_docker_image_tag" {
+  default     = "latest"
+  description = "Tag for the Docker Image"
+  type        = string
+}
+
+variable "webapp_config_bot_token" {
+  type      = string
+  sensitive = true
+}
+
+variable "webapp_config_contentful_environment" {
+  type = string
+}
+
+variable "webapp_config_contentful_preview" {
+  type = string
+}
+
+variable "webapp_config_domain" {
+  type = string
+}
+
+variable "webapp_config_editor" {
+  type = string
+}
+
+variable "webapp_config_feedback_url" {
+  type = string
+}
+
+variable "webapp_config_grover_no_sandbox" {
+  type = bool
+}
+
+variable "webapp_config_google_cloud_bucket" {
+  type = string
+}
+
+variable "webapp_config_node_env" {
+  type = string
+}
+
+variable "webapp_config_rails_env" {
+  type = string
+}
+
+variable "webapp_config_rails_log_to_stdout" {
+  type = string
+}
+
+variable "webapp_config_rails_master_key" {
+  type      = string
+  sensitive = true
+}
+
+variable "webapp_config_rails_max_threads" {
+  type = string
+}
+
+variable "webapp_config_rails_serve_static_files" {
+  type = bool
+}
+
+variable "webapp_config_training_modules" {
+  type = string
+}
+
+variable "webapp_config_web_concurrency" {
+  type = string
 }
