@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------
 # Base - AMD64 & ARM64 compatible
 # ------------------------------------------------------------------------------
-FROM ruby:3.1.3-alpine as base
+FROM ruby:3.2.2-alpine as base
 
 RUN apk add --no-cache --no-progress build-base less curl tzdata gcompat \
     "busybox>=1.34.1-r5" \

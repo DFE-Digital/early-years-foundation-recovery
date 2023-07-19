@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.3'
+ruby '3.2.2'
 
 # Trivy vulnerability warnings:
 gem 'time', '>= 0.2.2' # https://avd.aquasec.com/nvd/cve-2023-28756
