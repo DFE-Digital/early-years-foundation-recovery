@@ -269,8 +269,6 @@ class User < ApplicationRecord
 
   # @return [Boolean]
   def email_preferences_complete?
-    return true unless Rails.configuration.feature_email_prefs
-
     !training_emails.nil?
   end
 
