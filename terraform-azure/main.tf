@@ -57,7 +57,7 @@ module "webapp" {
   webapp_subnet_id                = module.network.webapp_subnet_id
   webapp_name                     = var.webapp_name
   webapp_app_settings             = local.webapp_app_settings
-  webapp_docker_image         = var.webapp_docker_image
+  webapp_docker_image             = var.webapp_docker_image
   webapp_docker_image_tag         = var.webapp_docker_image_tag
   webapp_docker_registry_url      = var.webapp_docker_registry_url
   webapp_docker_registry_username = var.webapp_docker_registry_username
@@ -78,7 +78,7 @@ module "webapp-worker" {
   webapp_name                     = "${var.webapp_name}-worker"
   webapp_public_access            = false
   webapp_app_settings             = merge({ "APP_COMMAND_LINE" = "bundle exec que" }, local.webapp_app_settings)
-  webapp_docker_image         = var.webapp_docker_image
+  webapp_docker_image             = var.webapp_docker_image
   webapp_docker_image_tag         = var.webapp_docker_image_tag
   webapp_docker_registry_url      = var.webapp_docker_registry_url
   webapp_docker_registry_username = var.webapp_docker_registry_username
