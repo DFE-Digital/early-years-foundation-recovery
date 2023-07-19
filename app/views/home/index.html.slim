@@ -11,10 +11,8 @@
       .govuk-grid-row
         .govuk-grid-column-two-thirds
           h1.govuk-heading-l #{service_name}
-          p.govuk-body
-            | This free, online training provides an overview of child development
-            |  and gives practical advice for supporting the development of children
-            |  in your early years setting.
+
+          = translate_markdown Page::Resource.by_name('home.hero').body
 
           = govuk_button_link_to course_overview_path, class: 'govuk-button--start govuk-!-margin-bottom-4' do
             - if @user
