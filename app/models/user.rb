@@ -13,23 +13,24 @@ class User < ApplicationRecord
     registered_at
   ].freeze
 
+  def self.csv_headers
+    if Rails.application.cms?
+      Training::Module.ordered.reject(&:draft?).map { |mod| "module_#{mod.position}_time" }
+    else
+      TrainingModule.published.map { |mod| "module_#{mod.id}_time" }
+    end
+  end
+
   # Collate published module state and profile data in CSV format
   #
   # @overload to_csv
   # @see ToCsv.to_csv
   #   @return [String]
   def self.to_csv
-    module_headings =
-      if Rails.application.cms?
-        Training::Module.ordered.reject(&:draft?).map { |mod| "module_#{mod.position}_time" }
-      else
-        TrainingModule.published.map { |mod| "module_#{mod.id}_time" }
-      end
-
     CSV.generate(headers: true) do |csv|
-      csv << (DASHBOARD_ATTRS + module_headings)
+      csv << (DASHBOARD_ATTRS + csv_headers)
       unformatted = dashboard.find_each(batch_size: 1000).map(&:dashboard_attributes)
-      formatted = CoercionDecorator.new(unformatted).call
+      formatted = unformatted.each_slice(1000) { |unformatted_slice| CoercionDecorator.new(unformatted_slice).call }
       formatted.each { |row| csv << row.values }
     end
   end
