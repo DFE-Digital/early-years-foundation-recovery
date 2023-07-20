@@ -249,7 +249,6 @@ class User < ApplicationRecord
 
   # @return [Boolean]
   def role_type_required?
-    puts "role type required? #{setting_type_id}"
     return false unless setting_type_id
     return false unless registration_complete?
     return true if setting_type_id == 'other'
