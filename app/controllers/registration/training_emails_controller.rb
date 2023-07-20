@@ -1,13 +1,13 @@
 class Registration::TrainingEmailsController < Registration::BaseController
   def edit
     @user_form = Users::TrainingEmailsForm.new(user: current_user, training_emails: current_user.training_emails)
-    if current_user.role_type_applicable?
-      @back_link_href = edit_registration_role_type_path
-    elsif current_user.local_authority_setting?
-      @back_link_href = edit_registration_local_authority_path
-    else
-      @back_link_href = edit_registration_setting_type_path
-    end
+    @back_link_href = if current_user.role_type_applicable?
+                        edit_registration_role_type_path
+                      elsif current_user.local_authority_setting?
+                        edit_registration_local_authority_path
+                      else
+                        edit_registration_setting_type_path
+                      end
   end
 
   def update
