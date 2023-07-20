@@ -10,11 +10,12 @@
     .light-grey-box
       .govuk-grid-row
         .govuk-grid-column-two-thirds
-          h1.govuk-heading-l #{service_name}
           / home.hero
-            This free, online training provides an overview of child development and gives practical advice for supporting the development of children in your early years setting.
-          = translate_markdown Page::Resource.by_name('home.hero').body
+            # %{service_name}
+            {: .govuk-heading-l}
 
+            This free, online training provides an overview of child development and gives practical advice for supporting the development of children in your early years setting.
+          = content_resource 'home.hero', service_name: service_name
 
           = govuk_button_link_to course_overview_path, class: 'govuk-button--start govuk-!-margin-bottom-4' do
             - if @user
@@ -29,16 +30,18 @@
         .govuk-grid-column-one-third
           / home.thumb
             ![A practitioner smiling as they do an activity with children in an early years setting](//images.ctfassets.net/dvmeh832nmjc/2VRBZCHJYLeKx0a2CIcJzE/687fb0d28c71104820cd42f131d7dfe2/_assets_thumb-1161068272-320x240.jpg?w=300){:class="full-width-img"}
-          = translate_markdown Page::Resource.by_name('home.thumb').body
+          = content_resource 'home.thumb'
 
 .govuk-grid-row
   .govuk-grid-column-one-half
     / home.about
       ## About this training course
+      {: .govuk-heading-m}
 
       Each training module on this site covers an important area of child development and has been written by early years experts, working with the Department for Education.
 
       ## Why should I take this training?
+      {: .govuk-heading-m}
 
       This training:
 
@@ -49,14 +52,18 @@
       - links to additional resources
       - offers the opportunity to download certificates of completion
       - has been developed by expert practitioners
-    .gem-c-govspeak
-      = translate_markdown Page::Resource.by_name('home.about').body
+    = content_resource 'home.about'
 
   - unless current_user
     .govuk-grid-column-one-half
       .light-grey-box
-        h2.govuk-heading-m Return to your training
-        p Sign in to continue learning, see your progress and download certificates.
+        / home.login
+          ## Return to your training
+          {: .govuk-heading-m}
+
+          Sign in to continue learning, see your progress and download certificates.
+        = content_resource 'home.login'
+
         .govuk-button-group
           = govuk_button_link_to 'Sign in', new_user_session_path
           .white-space-pre-wrap= ' or '
