@@ -535,6 +535,8 @@ en:
       edit_setting_type: Change your setting type
       check_email_confirmation: Check email confirmation
       check_email_password_reset: Check email password reset
+      edit_training_emails: Change email preferences
+
     timeout:
       timeout_user: User timeout
     users/sessions:
