@@ -48,7 +48,7 @@ variable "webapp_health_check_path" {
   type        = string
 }
 
-variable "health_check_eviction_time_in_min" {
+variable "webapp_health_check_eviction_time_in_min" {
   default     = 10
   description = "Minutes before considering an instance unhealthy"
   type        = number
