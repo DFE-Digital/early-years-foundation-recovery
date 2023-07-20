@@ -20,6 +20,10 @@ class UserController < ApplicationController
     user
   end
 
+  def edit_training_emails
+    user
+  end
+
   def update_name
     if user.update(user_params)
       track('user_name_change', success: true)
@@ -54,6 +58,16 @@ class UserController < ApplicationController
     end
   end
 
+  def update_training_emails
+    if user.update(user_params)
+      track('user_training_emails_change', success: true)
+      redirect_to user_path, notice: 'Your email preferences have been saved.'
+    else
+      track('user_training_emails_change', success: false)
+      render :edit_training_emails, status: :unprocessable_entity
+    end
+  end
+
   def check_email_confirmation
     return unless params[:ref]
 
@@ -69,7 +83,7 @@ private
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :postcode, :ofsted_number, :email, :setting_type, :setting_type_other)
+    params.require(:user).permit(:first_name, :last_name, :postcode, :ofsted_number, :email, :setting_type, :setting_type_other, :training_emails)
   end
 
   def user_password_params

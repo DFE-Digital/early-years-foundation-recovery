@@ -9,8 +9,10 @@ class Registration::SettingTypesController < Registration::BaseController
     if @user_form.save
       if @user_form.local_authority_next?
         redirect_to edit_registration_local_authority_path
+      elsif current_user.registration_complete?
+        redirect_to user_path, notice: t('.complete_update')
       else
-        complete_journey
+        redirect_to edit_registration_training_emails_path
       end
     else
       render :edit, status: :unprocessable_entity
