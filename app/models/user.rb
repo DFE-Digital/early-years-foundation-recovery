@@ -249,6 +249,7 @@ class User < ApplicationRecord
 
   # @return [Boolean]
   def role_type_required?
+    puts "role type required? #{setting_type_id}"
     return false unless setting_type_id
     return false unless registration_complete?
     return true if setting_type_id == 'other'
@@ -269,6 +270,10 @@ class User < ApplicationRecord
 
   def local_authority_setting?
     setting_type_id == 'local_authority'
+  end
+
+  def role_type_applicable?
+    role_type != 'Not applicable'
   end
 
   # @return [Boolean]
