@@ -114,7 +114,7 @@ en:
         link_to_setting_type_other: I cannot find my setting or organisation
         autocomplete-not-found: No setting found.
       update:
-        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        complete_registration: Thank you for creating an Early years child development training account. You can now start your first module.
         update_registration: Thank you for updating your Early years child development training account. You can now continue.
         complete_update: You have updated your details
     setting_type_others:
@@ -123,7 +123,7 @@ en:
         body: Enter the type of setting or organisation where you work.
         button: Continue
       update:
-        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        complete_registration: Thank you for creating an Early years child development training account. You can now start your first module.
         update_registration: Thank you for updating your Early years child development training account. You can now continue.
         complete_update: You have updated your details
     local_authorities:
@@ -136,7 +136,7 @@ en:
         multiple_local_authorities: I work across more than one local authority
         autocomplete-not-found: No local authority found.
       update:
-        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        complete_registration: Thank you for creating an Early years child development training account. You can now start your first module.
         update_registration: Thank you for updating your Early years child development training account. You can now continue.
         complete_update: You have updated your details
     role_types:
@@ -147,7 +147,7 @@ en:
         button: Continue
         link_to_role_type_other: I would describe my role in another way.
       update:
-        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        complete_registration: Thank you for creating an Early years child development training account. You can now start your first module.
         update_registration: Thank you for updating your Early years child development training account. You can now continue.
         complete_update: You have updated your details
     role_type_others:
@@ -156,7 +156,7 @@ en:
         body: Enter your job title.
         button: Continue
       update:
-        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        complete_registration: Thank you for creating an Early years child development training account. You can now start your first module.
         update_registration: Thank you for updating your Early years child development training account. You can now continue.
         complete_update: You have updated your details
     training_emails:
@@ -169,7 +169,7 @@ en:
         opt_out: 'Do not send me email updates about this training course'
         button: Continue
       update:
-        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        complete_registration: Thank you for creating an Early years child development training account. You can now start your first module.
         update_registration: Thank you for updating your Early years child development training account. You can now continue.
         complete_update: You have updated your details
     early_years_emails:
@@ -182,7 +182,7 @@ en:
         opt_out: 'Do not send me early years email updates'
         button: Continue
       update:
-        complete_registration: Thank you for creating an Early years child development training account. You can now start the first module.
+        complete_registration: Thank you for creating an Early years child development training account. You can now start your first module.
         update_registration: Thank you for updating your Early years child development training account. You can now continue.
         complete_update: You have updated your details
   setting_type:
