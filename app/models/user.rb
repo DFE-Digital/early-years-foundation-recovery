@@ -267,6 +267,10 @@ class User < ApplicationRecord
     end
   end
 
+  def local_authority_setting?
+    setting_type_id == 'local_authority'
+  end
+
   # @return [Boolean]
   def email_preferences_complete?
     !training_emails.nil?
