@@ -29,9 +29,10 @@ class User < ApplicationRecord
   def self.to_csv
     CSV.generate(headers: true) do |csv|
       csv << (DASHBOARD_ATTRS + csv_headers)
-      unformatted = dashboard.find_each(batch_size: 1000).map(&:dashboard_attributes)
-      formatted = unformatted.each_slice(1000) { |unformatted_slice| CoercionDecorator.new(unformatted_slice).call }
-      formatted.each { |row| csv << row.values }
+      dashboard.find_each(batch_size: 1000).map do |user|
+        rows = CoercionDecorator.new([user.dashboard_attributes.to_hash]).call
+        rows.each { |row| csv << row.values }
+      end
     end
   end
 
