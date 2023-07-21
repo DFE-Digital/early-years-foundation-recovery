@@ -24,7 +24,7 @@ resource "azurerm_linux_web_app" "webapp" {
 
   site_config {
     health_check_path                 = var.webapp_health_check_path
-    health_check_eviction_time_in_min = var.health_check_eviction_time_in_min
+    health_check_eviction_time_in_min = var.webapp_health_check_eviction_time_in_min
     http2_enabled                     = true
     vnet_route_all_enabled            = true
 
@@ -43,14 +43,15 @@ resource "azurerm_linux_web_app" "webapp" {
     failed_request_tracing  = true
 
     application_logs {
-      file_system_level = "Verbose"
+      file_system_level = "Warning"
     }
 
     http_logs {
-      #TODO: Configure Blob Storage HTTP
+      file_system {
+        retention_in_days = 1
+        retention_in_mb   = 25
+      }
     }
-
-    #TODO: Configure Blob Storage
   }
 
   lifecycle {
@@ -74,7 +75,7 @@ resource "azurerm_linux_web_app_slot" "webapp_slot" {
 
   site_config {
     health_check_path                 = var.webapp_health_check_path
-    health_check_eviction_time_in_min = var.health_check_eviction_time_in_min
+    health_check_eviction_time_in_min = var.webapp_health_check_eviction_time_in_min
     http2_enabled                     = true
     vnet_route_all_enabled            = true
 
@@ -89,14 +90,15 @@ resource "azurerm_linux_web_app_slot" "webapp_slot" {
     failed_request_tracing  = true
 
     application_logs {
-      file_system_level = "Verbose"
+      file_system_level = "Warning"
     }
 
     http_logs {
-      #TODO: Configure Blob Storage HTTP
+      file_system {
+        retention_in_days = 1
+        retention_in_mb   = 25
+      }
     }
-
-    #TODO: Configure Blob Storage
   }
 
   lifecycle {
@@ -115,4 +117,53 @@ resource "azurerm_app_service_slot_virtual_network_swift_connection" "webapp_slo
   slot_name      = azurerm_linux_web_app_slot.webapp_slot.name
   app_service_id = azurerm_linux_web_app.webapp.id
   subnet_id      = var.webapp_subnet_id
+}
+
+# Create Log Analytics
+resource "azurerm_log_analytics_workspace" "webapp_logs" {
+  name                = "${var.resource_name_prefix}-log"
+  location            = var.location
+  resource_group_name = var.resource_group
+  sku                 = "PerGB2018"
+  retention_in_days   = 30
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
+}
+
+resource "azurerm_monitor_diagnostic_setting" "webapp_logs_monitor" {
+  name                       = "${var.resource_name_prefix}-mon"
+  target_resource_id         = azurerm_linux_web_app.webapp.id
+  log_analytics_workspace_id = azurerm_log_analytics_workspace.webapp_logs.id
+
+  log {
+    category = "AppServiceConsoleLogs"
+  }
+
+  log {
+    category = "AppServicePlatformLogs"
+  }
+
+  lifecycle {
+    ignore_changes = [log, metric]
+  }
+}
+
+resource "azurerm_monitor_diagnostic_setting" "webapp_slot_logs_monitor" {
+  name                       = "${var.resource_name_prefix}-green-mon"
+  target_resource_id         = azurerm_linux_web_app_slot.webapp_slot.id
+  log_analytics_workspace_id = azurerm_log_analytics_workspace.webapp_logs.id
+
+  log {
+    category = "AppServiceConsoleLogs"
+  }
+
+  log {
+    category = "AppServicePlatformLogs"
+  }
+
+  lifecycle {
+    ignore_changes = [log, metric]
+  }
 }
