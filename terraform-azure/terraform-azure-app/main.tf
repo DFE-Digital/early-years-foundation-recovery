@@ -24,6 +24,8 @@ resource "azurerm_container_group" "app_worker" {
   }
 
   subnet_ids = [var.app_worker_subnet_id]
+
+  #checkov:skip=CKV2_AZURE_28:Using VNet - Managed Identity not applicable
 }
 
 # Create Log Analytics
