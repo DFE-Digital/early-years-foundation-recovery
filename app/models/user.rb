@@ -237,6 +237,7 @@ class User < ApplicationRecord
   # @return [Boolean]
   def course_in_progress?
     course_started? && !module_time_to_completion.values.all?(&:positive?)
+  end
 
   # @return [Integer]
   def modules_completed_count
@@ -278,10 +279,12 @@ class User < ApplicationRecord
     end
   end
 
+  # @return [Boolean]
   def local_authority_setting?
     setting_type_id == 'local_authority'
   end
 
+  # @return [Boolean]
   def role_type_applicable?
     role_type != 'Not applicable'
   end
