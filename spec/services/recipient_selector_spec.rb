@@ -81,22 +81,4 @@ RSpec.describe RecipientSelector do
       end
     end
   end
-
-  describe '.new_module_recipients' do
-    let!(:user_1) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1, "bravo": 1, "charlie": 1 }) }
-    let!(:user_2) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1, "bravo": 1, "charlie": 1 }) }
-    let!(:user_3) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1, "bravo": 1, "charlie": 1 }) }
-
-    before do
-      travel_to Time.zone.local(2023, 6, 30, 12, 0, 0)
-      create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1 })
-      create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1, "bravo": 1, "charlie": 0 })
-    end
-
-    context 'when a user has completed all available modules and a new module is available' do
-      it 'returns the users' do
-        expect(recipient_selector.new_module_recipients).to contain_exactly(user_1, user_2, user_3)
-      end
-    end
-  end
 end

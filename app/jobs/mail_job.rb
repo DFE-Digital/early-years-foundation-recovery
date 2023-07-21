@@ -14,9 +14,5 @@ class MailJob < Que::Job
     continue_training_recipients.each do |recipient|
       NotifyMailer.continue_training(recipient, module_in_progress(recipient))
     end
-
-    new_module_recipients.each do |recipient|
-      NotifyMailer.new_module(recipient, new_module)
-    end
   end
 end

@@ -145,7 +145,7 @@ module Training
 
     # @return [String, nil]
     def published_at
-      return if ENV['CONTENTFUL_MANAGEMENT_TOKEN'].blank?
+      return unless Rails.env.development? && ENV['CONTENTFUL_MANAGEMENT_TOKEN'].present?
 
       entry.published_at&.in_time_zone(ENV['TZ'])&.strftime('%d-%m-%Y %H:%M')
     end

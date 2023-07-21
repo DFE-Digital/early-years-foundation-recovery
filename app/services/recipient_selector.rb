@@ -16,23 +16,7 @@ module RecipientSelector
     User.course_in_progress.select { |user| old_visits.pluck(:user_id).include?(user.id) }
   end
 
-  # @param new_module [Training::Module]
-  # @return [Array<User>]
-  def new_module_recipients
-    return [] if new_module.nil?
-
-    all_modules = Training::Module.ordered.reject { |module_item| module_item == new_module || module_item.draft? }
-    User.all.select do |user|
-      all_modules.all? { |module_item| user.module_completed?(module_item.name) }
-    end
-  end
-
 private
-
-  # @return [Training::Module, nil]
-  def new_module
-    Training::Module.ordered.reject(&:draft?).find { |module_item| module_item.published_at >= 1.day.ago.beginning_of_day }
-  end
 
   # @param user [User]
   # @return [Training::Module]
