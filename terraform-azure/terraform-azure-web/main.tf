@@ -15,14 +15,13 @@ resource "azurerm_service_plan" "asp" {
 
 # Create Web Application
 resource "azurerm_linux_web_app" "webapp" {
-  name                          = var.webapp_name
-  location                      = var.location
-  resource_group_name           = var.resource_group
-  service_plan_id               = azurerm_service_plan.asp.id
-  https_only                    = true
-  public_network_access_enabled = var.webapp_public_access
-  virtual_network_subnet_id     = var.webapp_subnet_id
-  app_settings                  = var.webapp_app_settings
+  name                      = var.webapp_name
+  location                  = var.location
+  resource_group_name       = var.resource_group
+  service_plan_id           = azurerm_service_plan.asp.id
+  https_only                = true
+  virtual_network_subnet_id = var.webapp_subnet_id
+  app_settings              = var.webapp_app_settings
 
   site_config {
     app_command_line                  = var.webapp_startup_command
@@ -34,8 +33,6 @@ resource "azurerm_linux_web_app" "webapp" {
     application_stack {
       docker_image_name        = "${var.webapp_docker_image}:${var.webapp_docker_image_tag}"
       docker_registry_url      = var.webapp_docker_registry_url
-      docker_registry_username = var.webapp_docker_registry_username
-      docker_registry_password = var.webapp_docker_registry_password
     }
   }
 
@@ -73,12 +70,11 @@ resource "azurerm_linux_web_app" "webapp" {
 
 # Create Web Application Deployment Slot
 resource "azurerm_linux_web_app_slot" "webapp_slot" {
-  name                          = "green"
-  app_service_id                = azurerm_linux_web_app.webapp.id
-  https_only                    = true
-  public_network_access_enabled = var.webapp_public_access
-  virtual_network_subnet_id     = var.webapp_subnet_id
-  app_settings                  = var.webapp_app_settings
+  name                      = "green"
+  app_service_id            = azurerm_linux_web_app.webapp.id
+  https_only                = true
+  virtual_network_subnet_id = var.webapp_subnet_id
+  app_settings              = var.webapp_app_settings
 
   site_config {
     app_command_line                  = var.webapp_startup_command
@@ -90,8 +86,6 @@ resource "azurerm_linux_web_app_slot" "webapp_slot" {
     application_stack {
       docker_image_name        = "${var.webapp_docker_image}:${var.webapp_docker_image_tag}"
       docker_registry_url      = var.webapp_docker_registry_url
-      docker_registry_username = var.webapp_docker_registry_username
-      docker_registry_password = var.webapp_docker_registry_password
     }
   }
 

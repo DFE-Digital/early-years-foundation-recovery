@@ -68,17 +68,6 @@ variable "webapp_docker_registry_url" {
   type        = string
 }
 
-variable "webapp_docker_registry_username" {
-  description = "Username for the Docker Registry"
-  type        = string
-}
-
-variable "webapp_docker_registry_password" {
-  description = "Password the Docker Registry"
-  type        = string
-  sensitive   = true
-}
-
 variable "webapp_docker_image" {
   description = "Docker Image to deploy"
   type        = string

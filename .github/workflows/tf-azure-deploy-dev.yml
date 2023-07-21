@@ -32,8 +32,6 @@ env:
   TF_VAR_webapp_name: ${{ vars.WEBAPP_NAME }}
   TF_VAR_webapp_database_url: ${{ secrets.TF_VAR_WEBAPP_DATABASE_URL }}
   TF_VAR_webapp_docker_registry_url: https://ghcr.io
-  TF_VAR_webapp_docker_registry_username: ${{ github.repository_owner }}
-  TF_VAR_webapp_docker_registry_password: ${{ secrets.GITHUB_TOKEN }}
   TF_VAR_webapp_docker_image: dfe-digital/early-years-foundation-recovery
   TF_VAR_webapp_docker_image_tag: latest
   TF_VAR_webapp_config_bot_token: ${{ secrets.TF_VAR_WEBAPP_CONFIG_BOT_TOKEN }}

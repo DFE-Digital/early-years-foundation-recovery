@@ -72,19 +72,19 @@ resource "azurerm_subnet" "webapp_snet" {
   #checkov:skip=CKV2_AZURE_31:NSG not required
 }
 
-# Create Subnet for Web Application Background Worker
-resource "azurerm_subnet" "webapp_worker_snet" {
-  name                 = "${var.resource_name_prefix}-webapp-worker-snet"
+# Create Subnet for Background Worker App
+resource "azurerm_subnet" "app_worker_snet" {
+  name                 = "${var.resource_name_prefix}-app-worker-snet"
   virtual_network_name = azurerm_virtual_network.vnet.name
   resource_group_name  = var.resource_group
-  address_prefixes     = ["172.1.2.0/26"]
+  address_prefixes     = ["172.1.2.0/24"]
   service_endpoints    = ["Microsoft.Storage"]
 
   delegation {
-    name = "${var.resource_name_prefix}-webapp-worker-dn"
+    name = "${var.resource_name_prefix}-app-worker-dn"
 
     service_delegation {
-      name    = "Microsoft.Web/serverFarms"
+      name    = "Microsoft.ContainerInstance/containerGroups"
       actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
     }
   }
