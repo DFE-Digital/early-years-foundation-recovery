@@ -28,7 +28,7 @@ env:
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-  IMAGE_URL: ghcr.io/dfe-digital/early-years-foundation-recovery
+  DOCKER_IMAGE: dfe-digital/early-years-foundation-recovery
 
 jobs:
   build-and-deploy:
@@ -73,14 +73,23 @@ jobs:
             BUILDKIT_INLINE_CACHE=1
             SHA=${{ github.sha }}
           cache-from: |
-            ${{ env.IMAGE_URL }}:${{ github.sha }}
+            ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
           tags: |
-            ${{ env.IMAGE_URL }}:${{ github.sha }}
-            ${{ env.IMAGE_URL }}:latest
+            ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+            ${{ env.DOCKER_IMAGE }}:latest
 
-      # Deploy container
-      - name: Deploy Container
+      # Deploy Web Application
+      - name: Deploy to Azure App Services
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ vars.WEBAPP_NAME }}
-          images: '${{ env.IMAGE_URL }}:${{ github.sha }}'
+          images: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+
+      # Deploy Background Worker
+      - name: Deploy to Azure Container Instances
+        uses: azure/aci-deploy@v1
+        with:
+          resource-group: ${{ secrets.AZURE_RESOURCE_GROUP }}
+          image: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+          name: eyrecovery-worker
+          location: 'west europe'
