@@ -1,6 +1,6 @@
 # https://github.com/ruby-i18n/i18n/wiki/Fallbacks
 require 'i18n/backend/fallbacks'
-I18n::Backend::Simple.send(:include, I18n::Backend::Fallbacks)
+I18n::Backend::Simple.include I18n::Backend::Fallbacks
 
 # https://github.com/ruby-i18n/i18n/wiki/Backend
 module I18n::Backend::Content
@@ -11,12 +11,7 @@ module I18n::Backend::Content
   end
 end
 
-I18n::Backend::Simple.send(:include, I18n::Backend::Content)
-
-# I18n.backend.translations[:en].keys
-
-
-
+I18n::Backend::Simple.include I18n::Backend::Content
 
 # > A blockquote with a title
 # {:title="The blockquote title"}

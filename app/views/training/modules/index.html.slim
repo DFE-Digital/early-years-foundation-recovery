@@ -45,14 +45,22 @@
 
 .govuk-grid-row
   .govuk-grid-column-full
+
+    - # TODO: move accordion into a content helper
+
     = govuk_accordion do |accordion|
       - mods.reject(&:draft?).map do |mod|
         - accordion.with_section(heading_text: mod.card_title, summary_text: mod.objective) do
-          = translate_markdown mod.description
+          / about.summary
+            %{description}
 
-          h2.govuk-heading-m What you&rsquo;ll learn
-          p.govuk-body This module covers:
-          .gem-c-govspeak= translate_markdown mod.criteria
+            ## What you'll learn
+            {: .govuk-heading-m}
+
+            This module covers:
+
+            %{criteria}
+          = content_resource 'about.summary', description: mod.description, criteria: mod.criteria
 
       - accordion.with_section(heading_text: t('experts.heading'), summary_text: t('experts.summary')) do
-          .gem-c-govspeak= translate_markdown t('experts.body')
+        = content_resource 'experts.body'
