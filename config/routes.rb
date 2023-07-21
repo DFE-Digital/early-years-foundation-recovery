@@ -51,6 +51,8 @@ Rails.application.routes.draw do
     patch 'update-password'
     get 'check-email-confirmation'
     get 'check-email-password-reset'
+    get 'edit-training-emails'
+    patch 'update-training-emails'
 
     resource :close_account, only: %i[new update show], path: 'close' do
       get 'reset-password'

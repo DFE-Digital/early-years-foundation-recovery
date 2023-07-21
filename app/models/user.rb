@@ -268,10 +268,16 @@ class User < ApplicationRecord
     end
   end
 
+  def local_authority_setting?
+    setting_type_id == 'local_authority'
+  end
+
+  def role_type_applicable?
+    role_type != 'Not applicable'
+  end
+
   # @return [Boolean]
   def email_preferences_complete?
-    return true unless Rails.configuration.feature_email_prefs
-
     !training_emails.nil?
   end
 

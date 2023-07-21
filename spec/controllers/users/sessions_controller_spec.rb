@@ -16,14 +16,10 @@ RSpec.describe Users::SessionsController, type: :controller do
   end
 
   context 'when user email preferences are nil' do
-    it 'redirects to update email preferences if feature flag is turned on' do
+    it 'redirects to update email preferences' do
       user = create :user, :registered
       post :create, params: { user: { email: user.email, password: 'StrongPassword123' } }
-      if Rails.configuration.feature_email_prefs
-        expect(response).to redirect_to('/email-preferences')
-      else
-        expect(response).to redirect_to(my_modules_path)
-      end
+      expect(response).to redirect_to('/email-preferences')
     end
   end
 

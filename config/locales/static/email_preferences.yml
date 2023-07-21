@@ -4,7 +4,4 @@ en:
     email_preferences:
       heading: Update your email preferences
       body: |
-        {:.govuk-!-margin-bottom-8}
-          Tell us which emails you would like to receive from us.
-
         [Continue](/registration/training-emails/edit){:class="govuk-button"}
