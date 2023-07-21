@@ -9,12 +9,10 @@ class Registration::RoleTypesController < Registration::BaseController
     @user_form = Users::RoleTypeForm.new(user_params.merge(user: current_user))
 
     if @user_form.save
-      if Rails.configuration.feature_email_prefs
-        redirect_to edit_registration_training_emails_path
-      elsif current_user.registration_complete?
-        redirect_to my_modules_path, notice: t('.complete_update')
+      if current_user.registration_complete?
+        redirect_to user_path, notice: t('.complete_update')
       else
-        complete_registration
+        redirect_to edit_registration_training_emails_path
       end
     else
       render :edit, status: :unprocessable_entity

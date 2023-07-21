@@ -49,7 +49,7 @@ module EarlyYearsFoundationRecovery
     config.dashboard_update_interval = ENV.fetch('DASHBOARD_UPDATE_INTERVAL', '0 12 * * *') # Noon daily
     config.mail_job_interval = ENV.fetch('MAIL_JOB_INTERVAL', '0 12 * * *') # Noon daily
 
-    config.feature_email_prefs = ENV.fetch('FEATURE_EMAIL_PREFS', false)
+    config.feature_email_prefs = ENV.fetch('FEATURE_EMAIL_PREFS', true)
     config.bot_token = ENV['BOT_TOKEN']
     config.feedback_url = ENV.fetch('FEEDBACK_URL', '#FEEDBACK_URL_env_var_missing')
     config.google_analytics_tracking_id = ENV.fetch('TRACKING_ID', '#TRACKING_ID_env_var_missing')

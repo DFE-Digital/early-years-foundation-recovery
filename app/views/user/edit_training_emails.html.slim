@@ -1,0 +1,15 @@
+.govuk-grid-row
+  .govuk-grid-column-full
+    = form_for @user, url: { action: 'update_training_emails' } do |f|
+      = f.govuk_error_summary
+      = f.govuk_collection_radio_buttons :training_emails,
+      [OpenStruct.new(id: true, name: t('registration.training_emails.edit.opt_in')),OpenStruct.new(id: false, name: t('registration.training_emails.edit.opt_out'))],
+      :id,
+      :name,
+      legend: { text: t('registration.training_emails.edit.heading') },
+      hint: { text: translate_markdown(t('registration.training_emails.edit.body')) }
+
+      div class='govuk-!-margin-top-4'
+      .govuk-button-group
+        = f.govuk_submit t('links.save')
+        = govuk_link_to 'Cancel', user_path

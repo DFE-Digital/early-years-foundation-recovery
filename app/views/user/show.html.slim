@@ -40,7 +40,7 @@
       - email_preferences.with_row do |row|
         - row.with_key { 'Email updates about this training course' }
         - row.with_value(text: @user.training_emails ? t('.training_emails_true') : t('.training_emails_false'), classes: ['data-hj-suppress'])
-        - row.with_action(text: t('links.change'), href: edit_registration_training_emails_path, visually_hidden_text: 'training_emails', html_attributes: { id: :edit_training_emails_registration })
+        - row.with_action(text: t('links.change'), href: edit_training_emails_user_path, visually_hidden_text: 'training_emails', html_attributes: { id: :edit_training_emails_user })
 
 
     h2.govuk-heading-m Closing your account 
