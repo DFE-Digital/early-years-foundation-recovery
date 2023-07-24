@@ -28,7 +28,7 @@ env:
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-  DOCKER_IMAGE: dfe-digital/early-years-foundation-recovery
+  DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
 
 jobs:
   build-and-deploy:
