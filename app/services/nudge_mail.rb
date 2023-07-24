@@ -1,4 +1,11 @@
-module RecipientSelector
+class NudgeMail
+  # @return [void]
+  def call
+    complete_registration_recipients.each { |recipient| NotifyMailer.complete_registration(recipient) }
+    start_training_recipients.each { |recipient| NotifyMailer.start_training(recipient) }
+    continue_training_recipients.each { |recipient| NotifyMailer.continue_training(recipient, module_in_progress(recipient)) }
+  end
+
   # @return [ActiveRecord::Relation]
   def complete_registration_recipients
     User.training_email_recipients.month_old.registration_incomplete
@@ -22,6 +29,6 @@ private
   # @return [Training::Module]
   def module_in_progress(user)
     mod_name = user.module_time_to_completion.find { |_k, v| v.zero? }.first
-    Training::Module.find_by(name: mod_name)
+    TrainingModule.find_by(name: mod_name)
   end
 end

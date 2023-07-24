@@ -20,8 +20,6 @@ class HookController < ApplicationController
     # TODO: consider que-locks if webhooks are to trigger the worker
     #
     # FillPageViewsJob.enqueue
-    # jw
-    # other stuff managment api give us - record as much as possible. Versions, who, created, updated, published, etc
 
     render json: { status: 'content release received' }, status: :ok
   end

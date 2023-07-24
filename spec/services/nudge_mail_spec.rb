@@ -1,26 +1,29 @@
 require 'rails_helper'
 
-RSpec.describe RecipientSelector do
-  subject(:recipient_selector) { Class.new { extend RecipientSelector } }
+RSpec.describe NudgeMail do
+  subject(:nudge_mail) { described_class.new }
 
-  describe '.complete_registration_recipients' do
+  context 'when users are a month old but have not completed registration' do
     let!(:user_1) { create(:user, confirmed_at: 4.weeks.ago) }
     let!(:user_2) { create(:user, confirmed_at: 4.weeks.ago) }
     let!(:user_3) { create(:user, confirmed_at: 4.weeks.ago) }
+    let(:notify_mailer) { class_double(NotifyMailer).as_stubbed_const }
 
     before do
       create(:user, :registered, confirmed_at: 1.month.ago)
       create(:user, confirmed_at: 2.months.ago)
+      allow(NotifyMailer).to receive(:complete_registration)
     end
 
-    context 'when users are a month old but have not completed registration' do
-      it 'returns the users but no others' do
-        expect(recipient_selector.complete_registration_recipients).to contain_exactly(user_1, user_2, user_3)
-      end
+    it 'The notify mailer is called with the correct users' do
+      nudge_mail.call
+      expect(NotifyMailer).to have_received(:complete_registration).with(user_1).once
+      expect(NotifyMailer).to have_received(:complete_registration).with(user_2).once
+      expect(NotifyMailer).to have_received(:complete_registration).with(user_3).once
     end
   end
 
-  describe '.start_training_recipients' do
+  context 'when users are a month old and have completed registration but not started training' do
     let!(:user_1) { create(:user, :registered, confirmed_at: 4.weeks.ago) }
     let!(:user_2) { create(:user, :registered, confirmed_at: 4.weeks.ago) }
     let!(:user_3) { create(:user, :registered, confirmed_at: 4.weeks.ago) }
@@ -28,16 +31,18 @@ RSpec.describe RecipientSelector do
     before do
       create(:user, :registered, confirmed_at: 2.months.ago)
       create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 })
+      allow(NotifyMailer).to receive(:start_training)
     end
 
-    context 'when users are a month old and have completed registration but not started training' do
-      it 'returns the users but no others' do
-        expect(recipient_selector.start_training_recipients).to contain_exactly(user_1, user_2, user_3)
-      end
+    it 'The notify mailer is called with the correct users' do
+      nudge_mail.call
+      expect(NotifyMailer).to have_received(:start_training).with(user_1).once
+      expect(NotifyMailer).to have_received(:start_training).with(user_2).once
+      expect(NotifyMailer).to have_received(:start_training).with(user_3).once
     end
   end
 
-  describe '.continue_training_recipients' do
+  context 'when users are a month old and have completed registration and started training but not completed training' do
     let!(:user_1) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
     let!(:user_2) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
     let!(:user_3) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
@@ -73,12 +78,14 @@ RSpec.describe RecipientSelector do
         user_id: user_3.id,
         started_at: 4.weeks.ago,
       ).save!
+
+      allow(NotifyMailer).to receive(:continue_training)
     end
 
-    context 'when users are a month old and have completed registration and started training but not completed training' do
-      it 'returns the users but no others' do
-        expect(recipient_selector.continue_training_recipients).to contain_exactly(user_2, user_3)
-      end
+    it 'The notify mailer is called with the correct users' do
+      nudge_mail.call
+      expect(NotifyMailer).to have_received(:continue_training).with(user_2, TrainingModule.find_by(name: 'alpha')).once
+      expect(NotifyMailer).to have_received(:continue_training).with(user_3, TrainingModule.find_by(name: 'alpha')).once
     end
   end
 end
