@@ -33,8 +33,13 @@ variable "webapp_app_settings" {
   type        = map(string)
 }
 
-variable "webapp_docker_image_url" {
-  description = "URL to the Docker Image"
+variable "webapp_docker_registry_url" {
+  description = "URL to the Docker Registry"
+  type        = string
+}
+
+variable "webapp_docker_image" {
+  description = "Docker Image to deploy"
   type        = string
 }
 
@@ -44,12 +49,19 @@ variable "webapp_docker_image_tag" {
 }
 
 variable "webapp_health_check_path" {
+  default     = null
   description = "Path to health check endpoint"
   type        = string
 }
 
 variable "webapp_health_check_eviction_time_in_min" {
-  default     = 10
+  default     = null
   description = "Minutes before considering an instance unhealthy"
   type        = number
+}
+
+variable "webapp_startup_command" {
+  default     = null
+  description = "Startup command to pass into the Web Application"
+  type        = string
 }
