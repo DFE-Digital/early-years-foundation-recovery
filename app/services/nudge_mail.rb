@@ -6,6 +6,8 @@ class NudgeMail
     continue_training_recipients.each { |recipient| NotifyMailer.continue_training(recipient, module_in_progress(recipient)) }
   end
 
+private
+
   # @return [ActiveRecord::Relation]
   def complete_registration_recipients
     User.training_email_recipients.month_old.registration_incomplete
@@ -22,8 +24,6 @@ class NudgeMail
     old_visits = Ahoy::Visit.month_old.reject { |visit| recent_visits.pluck(:user_id).include?(visit.user_id) }
     User.course_in_progress.select { |user| old_visits.pluck(:user_id).include?(user.id) }
   end
-
-private
 
   # @param user [User]
   # @return [Training::Module]
