@@ -2,7 +2,6 @@ module Data
   class TrainingEmailRecipients
     include ToCsv
     class << self
-
       # @return [Array<String>]
       def column_names
         %w[Email]
@@ -10,11 +9,13 @@ module Data
 
       # @return [Array<Hash{Symbol => Mixed}>]
       def dashboard
-        User.training_email_recipients.map do |user|
-          {
+        result = []
+        User.training_email_recipients.find_each(batch_size: 1000) do |user|
+          result << {
             email: user.email,
           }
         end
+        result
       end
 
       # @return [void]
