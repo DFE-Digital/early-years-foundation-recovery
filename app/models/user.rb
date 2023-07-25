@@ -87,6 +87,7 @@ class User < ApplicationRecord
   scope :with_local_authority, -> { where.not(local_authority: nil) }
   scope :with_notes, -> { joins(:notes).distinct.select(&:has_notes?) }
   scope :without_notes, -> { where.not(id: with_notes) }
+  scope :training_email_recipients, -> { where(training_emails: [true, nil]) }
 
   scope :closed, -> { where.not(closed_at: nil) }
   scope :not_closed, -> { where(closed_at: nil) }
