@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Module content' do
   before do
-    skip 'WIP' if Rails.application.cms?
+    skip 'DEPRECATED' if Rails.application.cms?
   end
 
   describe 'pages' do

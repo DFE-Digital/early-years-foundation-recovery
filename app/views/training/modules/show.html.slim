@@ -11,29 +11,11 @@
   .govuk-grid-row
     .govuk-grid-column-full
       - # TODO: move module overview hero to content helper
-
-      / module.overview.summary
-        # %{title}
-        {: .govuk-heading-l}
-
-        %{description}
-
-        This module covers:
-
-        %{criteria}
       = content_resource 'module.overview.summary', title: mod.card_title, description: mod.description, criteria: mod.criteria
 
       - module_progress.call_to_action do |state, page|
         = cms_link_to_action(state, page)
 
-/ module.overview.progress
-  ## Your module progress
-  {: .govuk-heading-m}
-
-  You can continue your learning, look at your module progress, or revisit pages of the training.
-
-  ### Module contents
-  {: .govuk-heading-s}
 = content_resource 'module.overview.progress'
 
 

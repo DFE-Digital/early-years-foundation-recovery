@@ -70,6 +70,8 @@ We will use 3 [preview](https://app.contentful.com/spaces/dvmeh832nmjc/settings/
 
 Used by developers when editing module content, usually demo content.
 
+- **Page Resource**
+  `http://localhost:3000/snippets/{entry.fields.name}`
 - **Static Page**
   `http://localhost:3000/{entry.fields.name}`
 - **Page**
@@ -143,6 +145,18 @@ As above replace `http://localhost:3000` with `https://ey-recovery-staging.londo
 ## Interface
 
 - https://www.contentful.com/developers/docs/extensibility/app-framework/editor-interfaces/
+
+
+## Markup
+
+<https://kramdown.gettalong.org/quickref.html#html-elements>
+
+```markdown
+  > A blockquote with a title
+  {:title="The blockquote title"}
+  {: #myid .class1 .class2}
+```
+
 
 ## Terminology
 

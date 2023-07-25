@@ -7,7 +7,7 @@ RSpec.describe SummativeAssessmentProgress do
   let(:correct_answer_count) { 0 }
 
   before do
-    skip 'WIP' if Rails.application.cms?
+    skip 'DEPRECATED' if Rails.application.cms?
 
     correct_answer_count.times do
       user.user_answers.create!(

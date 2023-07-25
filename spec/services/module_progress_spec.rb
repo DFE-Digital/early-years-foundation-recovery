@@ -8,7 +8,7 @@ RSpec.describe ModuleProgress do
   include_context 'with progress'
 
   before do
-    skip 'WIP' if Rails.application.cms?
+    skip 'DEPRECATED' if Rails.application.cms?
   end
 
   describe '#started?' do

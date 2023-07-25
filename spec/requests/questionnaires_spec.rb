@@ -8,7 +8,7 @@ RSpec.describe 'Questionnaires', type: :request do
   end
 
   before do
-    skip 'WIP' if Rails.application.cms?
+    skip 'DEPRECATED' if Rails.application.cms?
     sign_in user
   end
 

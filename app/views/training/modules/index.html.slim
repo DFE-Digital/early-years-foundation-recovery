@@ -3,39 +3,12 @@
 
 = govuk_back_link href: root_path
 
-/ about.course
-  # About this training course
-  {: govuk-heading-l}
-
-  This training course will give you a thorough understanding of the most important aspects of child development in the early years.
-
-  The course has %{all_modules} modules.
-  %{published_modules} modules are currently available.
-
-  Each module should take between 1 and 2 hours to complete.
-
-  You can pause and restart the training as much as you like.
-
-  Each module includes:
-
-  - opportunities to reflect on your learning and practice
-  - a learning log to make notes on your reflections
-  - practical tips and ideas to use in your setting
-  - learning check questions to test your understanding
-  - an end of module test
-  - the opportunity to download a personalised certificate of completion
-
-  Some modules also have short videos to enhance your understanding.
 = content_resource 'about.course', all_modules: mods.count, published_modules: mods.reject(&:draft?).count
 
 - unless current_user
   .govuk-grid-row
     .govuk-grid-column-two-thirds
       div class='light-grey-box govuk-!-margin-bottom-4'
-        / about.enrol
-          ## Ready to get started?
-
-          Enrol on this course and begin your first module. You will need to sign in or create an account before starting a module.
         = content_resource 'about.enrol'
 
         .govuk-button-group
@@ -47,19 +20,9 @@
   .govuk-grid-column-full
 
     - # TODO: move accordion into a content helper
-
     = govuk_accordion do |accordion|
       - mods.reject(&:draft?).map do |mod|
         - accordion.with_section(heading_text: mod.card_title, summary_text: mod.objective) do
-          / about.summary
-            %{description}
-
-            ## What you'll learn
-            {: .govuk-heading-m}
-
-            This module covers:
-
-            %{criteria}
           = content_resource 'about.summary', description: mod.description, criteria: mod.criteria
 
       - accordion.with_section(heading_text: t('experts.heading'), summary_text: t('experts.summary')) do

@@ -1,6 +1,6 @@
 module.exports = function(migration) {
 
-  const staticPage = migration.createContentType('resource', {
+  const resource = migration.createContentType('resource', {
     name: 'Resource',
     displayField: 'name',
     description: 'microcopy snippet'
@@ -9,20 +9,32 @@ module.exports = function(migration) {
   /* Fields ----------------------------------------------------------------- */
 
   // displayField
-  staticPage.createField('name', {
+  resource.createField('name', {
     name: 'Name',
     type: 'Symbol',
     required: true,
     validations: [
       { 'unique': true },
-      { 'regexp' : { 'pattern': '^[a-z\\.]*$'}}
+      { 'regexp' : { 'pattern': '^[a-z\\._/-]*$'}}
     ]
   })
 
-  staticPage.createField('body', {
+  resource.createField('body', {
     name: 'Body',
     type: 'Text',
     required: true,
+  })
+
+  /* Interface -------------------------------------------------------------- */
+
+  resource.changeFieldControl('title', 'builtin', 'singleLine', {
+    helpText: 'Unique I18n locale key in the format: "this_foo.that_bar.baz"'
+  })
+
+  /* markdown */
+
+  resource.changeFieldControl('body', 'builtin', 'markdown', {
+    helpText: 'Plain text or markdown supported. Styling, variables and pre-built markup are supported.'
   })
 
 }

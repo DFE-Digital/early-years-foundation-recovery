@@ -33,22 +33,21 @@ private
 
   # @return [Array<Hash>]
   def locales
-    hashkeys(data).map do |name, body|
+    to_params(data).map do |name, body|
       { name: name.join('.'), body: body }
     end
   end
 
   # @return [Hash]
   def data
-    # I18n.backend.translations[:en]                      # all
     YAML.load_file('config/locales/en.yml')['en'] # custom only
   end
 
   # @return [Array<Array>]
-  def hashkeys(data, keys = [], result = [])
+  def to_params(data, keys = [], result = [])
     if data.is_a?(Hash)
       data.each do |key, value|
-        hashkeys(value, keys + [key], result)
+        to_params(value, keys + [key], result)
       end
     else
       result << [keys]
