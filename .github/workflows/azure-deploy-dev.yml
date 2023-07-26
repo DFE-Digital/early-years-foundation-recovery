@@ -87,9 +87,20 @@ jobs:
 
       # Deploy Background Worker
       - name: Deploy to Azure Container Instances
-        uses: azure/aci-deploy@v1
+        if: ${{ vars.ENVIRONMENT == 'development' }}
+        uses: azure/CLI@v1
         with:
-          resource-group: ${{ secrets.AZURE_RESOURCE_GROUP }}
-          image: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
-          name: eyrecovery-worker
-          location: 'west europe'
+          azcliversion: 2.50.0
+          inlineScript: |
+            az container create --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+              --name eyrecovery-worker \
+              --image ${{ env.DOCKER_IMAGE }}:${{ github.sha }} \
+              --cpu 1 \
+              --memory 2 \
+              --command-line "bundle exec que" \
+              --restart-policy OnFailure \
+              --log-analytics-workspace ${{ secrets.AZURE_LOG_ANALYTICS_WORKSPACE }} \
+              --vnet ${{ secrets.AZURE_VNET }} \
+              --subnet ${{ secrets.AZURE_WORKER_APP_SUBNET }} \
+              --ip-address Private \
+              --environment-variables RAILS_ENV=${{ vars.WEBAPP_CONFIG_RAILS_ENV }} RAILS_MASTER_KEY=${{ secrets.WEBAPP_CONFIG_RAILS_MASTER_KEY }} RAILS_LOG_TO_STDOUT=${{ vars.WEBAPP_CONFIG_RAILS_LOG_TO_STDOUT }} GOOGLE_CLOUD_BUCKET=${{ vars.WEBAPP_CONFIG_GOOGLE_CLOUD_BUCKET }} DATABASE_URL=${{ secrets.WEBAPP_DATABASE_URL }} GOVUK_APP_DOMAIN=localhost GOVUK_WEBSITE_ROOT=www

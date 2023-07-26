@@ -10,7 +10,7 @@ locals {
     "Service Offering" = "EY Recovery"
   }
 
-  # Web App Configuration
+  # Web Application Configuration
   webapp_app_settings = {
     "DATABASE_URL"                        = var.webapp_database_url
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
@@ -33,5 +33,16 @@ locals {
     "TRAINING_MODULES"                    = var.webapp_config_training_modules
     "WEB_CONCURRENCY"                     = var.webapp_config_web_concurrency
     "WEBSITES_CONTAINER_START_TIME_LIMIT" = 1800
+  }
+
+  # Background Worker Application Configuration
+  app_worker_environment_variables = {
+    "DATABASE_URL"                        = var.webapp_database_url
+    "GOVUK_APP_DOMAIN"                    = "london.cloudapps.digital" #TODO: Remove this dependency post-migration to Azure
+    "GOVUK_WEBSITE_ROOT"                  = "ey-recovery-dev"          #TODO: Remove this dependency post-migration to Azure
+    "GOOGLE_CLOUD_BUCKET"                 = var.webapp_config_google_cloud_bucket
+    "RAILS_ENV"                           = var.webapp_config_rails_env
+    "RAILS_LOG_TO_STDOUT"                 = var.webapp_config_rails_log_to_stdout
+    "RAILS_MASTER_KEY"                    = var.webapp_config_rails_master_key
   }
 }

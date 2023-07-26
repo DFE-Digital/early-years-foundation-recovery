@@ -73,9 +73,9 @@ module "app-worker" {
   resource_group                   = azurerm_resource_group.rg.name
   resource_name_prefix             = "${var.resource_name_prefix}-worker"
   app_worker_subnet_id             = module.network.app_worker_subnet_id
-  app_worker_name                  = "${var.webapp_name}-worker"
+  app_worker_name                  = "eyrecovery-worker"
   container_name                   = "eyrecovery-worker"
-  app_worker_environment_variables = local.webapp_app_settings
+  app_worker_environment_variables = local.app_worker_environment_variables
   app_worker_docker_image          = var.webapp_docker_image
   app_worker_docker_image_tag      = var.webapp_docker_image_tag
   app_worker_docker_registry       = "ghcr.io"
