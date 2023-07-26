@@ -40,13 +40,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Login to Azure using OIDC
-      - name: Login to Azure CLI
-        uses: azure/login@v1
+      # Create and boot Docker image builder
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          version: v0.9.1
 
       # Login to the container registry
       - name: Login to Github Container Registry
@@ -55,12 +53,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-      # Create and boot Docker image builder
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-        with:
-          version: v0.9.1
 
       # Build and push image
       - name: Build and push Docker Image
@@ -78,6 +70,14 @@ jobs:
             ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
             ${{ env.DOCKER_IMAGE }}:latest
 
+      # Login to Azure using OIDC
+      - name: Login to Azure CLI
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
       # Deploy Web Application
       - name: Deploy to Azure App Services
         uses: azure/webapps-deploy@v2
@@ -87,9 +87,19 @@ jobs:
 
       # Deploy Background Worker
       - name: Deploy to Azure Container Instances
-        uses: azure/aci-deploy@v1
+        uses: azure/CLI@v1
         with:
-          resource-group: ${{ secrets.AZURE_RESOURCE_GROUP }}
-          image: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
-          name: eyrecovery-worker
-          location: 'west europe'
+          azcliversion: 2.50.0
+          inlineScript: |
+            az container create --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+              --name eyrecovery-worker \
+              --image ${{ env.DOCKER_IMAGE }}:${{ github.sha }} \
+              --cpu 1 \
+              --memory 2 \
+              --command-line "bundle exec que" \
+              --restart-policy OnFailure \
+              --log-analytics-workspace ${{ secrets.AZURE_LOG_ANALYTICS_WORKSPACE }} \
+              --vnet ${{ secrets.AZURE_VNET }} \
+              --subnet ${{ secrets.AZURE_WORKER_APP_SUBNET }} \
+              --ip-address Private \
+              --environment-variables RAILS_ENV=${{ vars.WEBAPP_CONFIG_RAILS_ENV }} RAILS_MASTER_KEY=${{ secrets.WEBAPP_CONFIG_RAILS_MASTER_KEY }} RAILS_LOG_TO_STDOUT=${{ vars.WEBAPP_CONFIG_RAILS_LOG_TO_STDOUT }} GOOGLE_CLOUD_BUCKET=${{ vars.WEBAPP_CONFIG_GOOGLE_CLOUD_BUCKET }} DATABASE_URL=${{ secrets.WEBAPP_DATABASE_URL }} GOVUK_APP_DOMAIN=localhost GOVUK_WEBSITE_ROOT=www

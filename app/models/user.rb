@@ -93,6 +93,7 @@ class User < ApplicationRecord
   scope :training_email_recipients, -> { where(training_emails: [true, nil]) }
   scope :early_years_email_recipients, -> { where(early_years_emails: true) }
   scope :without_notes, -> { where.not(id: with_notes) }
+  scope :training_email_recipients, -> { where(training_emails: [true, nil]) }
 
   scope :closed, -> { where.not(closed_at: nil) }
   scope :not_closed, -> { where(closed_at: nil) }
