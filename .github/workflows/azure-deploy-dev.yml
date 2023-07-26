@@ -87,7 +87,6 @@ jobs:
 
       # Deploy Background Worker
       - name: Deploy to Azure Container Instances
-        if: ${{ vars.ENVIRONMENT == 'development' }}
         uses: azure/CLI@v1
         with:
           azcliversion: 2.50.0
