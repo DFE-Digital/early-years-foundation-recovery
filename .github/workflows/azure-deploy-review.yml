@@ -1,10 +1,10 @@
-name: 'App Deploy [Azure - DEV]'
+name: 'App Deploy [Azure - REVIEW]'
 
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
+  pull_request:
+    types:
+      - labeled
+      - synchronize
     paths-ignore:
       - '**/*.md'
       - .docker*
@@ -15,8 +15,9 @@ on:
       - .yardopts
       - bin/*
       - docker-compose.*
-      - terraform/**
-      - terraform-azure/**
+      - Dockerfile
+      - terraform
+      - terraform-azure
       - uml/*
 
 # Permissions for OIDC authentication
@@ -29,9 +30,11 @@ env:
   ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
   DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
+  PR_NUMBER: pr-${{ github.event.number }}
 
 jobs:
   build-and-deploy:
+    if: contains(github.event.pull_request.labels.*.name, 'deployed')
     runs-on: ubuntu-latest
     environment: development
 
@@ -39,6 +42,8 @@ jobs:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout Code
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       # Create and boot Docker image builder
       - name: Set up Docker Buildx
@@ -55,7 +60,18 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       # Build and push image
-      - name: Build and push Docker Image
+      - name: Build and push dependencies
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          build-args: BUILDKIT_INLINE_CACHE=1
+          cache-from: |
+            ${{ env.REGISTRY }}:deps
+          push: true
+          tags: ${{ env.REGISTRY }}:deps
+          target: deps
+
+      - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           target: app
@@ -63,12 +79,14 @@ jobs:
           push: true
           build-args: |
             BUILDKIT_INLINE_CACHE=1
-            SHA=${{ github.sha }}
+            SHA=${{ github.event.pull_request.head.sha }}
           cache-from: |
-            ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+            ${{ env.REGISTRY }}:${{ github.event.pull_request.head.sha }}
+            ${{ env.REGISTRY }}:${{ env.PR_NUMBER }}
+            ${{ env.REGISTRY }}:latest
           tags: |
-            ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
-            ${{ env.DOCKER_IMAGE }}:latest
+            ${{ env.REGISTRY }}:${{ github.event.pull_request.head.sha }}
+            ${{ env.REGISTRY }}:${{ env.PR_NUMBER }}
 
       # Login to Azure using OIDC
       - name: Login to Azure CLI
@@ -80,26 +98,19 @@ jobs:
 
       # Deploy Web Application
       - name: Deploy to Azure App Services
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: ${{ vars.WEBAPP_NAME }}
-          images: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
-
-      # Deploy Background Worker
-      - name: Deploy to Azure Container Instances
         uses: azure/CLI@v1
         with:
           azcliversion: 2.50.0
           inlineScript: |
-            az container create --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-              --name ${{ vars.WORKERAPP_NAME }} \
-              --image ${{ env.DOCKER_IMAGE }}:${{ github.sha }} \
-              --cpu 1 \
-              --memory 2 \
-              --command-line "bundle exec que" \
-              --restart-policy OnFailure \
-              --log-analytics-workspace ${{ secrets.AZURE_LOG_ANALYTICS_WORKSPACE }} \
-              --vnet ${{ secrets.AZURE_VNET }} \
-              --subnet ${{ secrets.AZURE_WORKER_APP_SUBNET }} \
-              --ip-address Private \
-              --environment-variables RAILS_ENV=${{ vars.WEBAPP_CONFIG_RAILS_ENV }} RAILS_MASTER_KEY=${{ secrets.WEBAPP_CONFIG_RAILS_MASTER_KEY }} RAILS_LOG_TO_STDOUT=${{ vars.WEBAPP_CONFIG_RAILS_LOG_TO_STDOUT }} GOOGLE_CLOUD_BUCKET=${{ vars.WEBAPP_CONFIG_GOOGLE_CLOUD_BUCKET }} DATABASE_URL=${{ secrets.WEBAPP_DATABASE_URL }} GOVUK_APP_DOMAIN=localhost GOVUK_WEBSITE_ROOT=www
+            az webapp deployment slot create --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+              --name ${{ vars.REVIEWAPP_NAME }} \
+              --slot ${{ env.PR_NUMBER }} \
+              --configuration-source ${{ vars.REVIEWAPP_NAME } \
+              --deployment-container-image-name ${{ env.DOCKER_IMAGE }}:${{ env.PR_NUMBER }}
+
+      # Add URL to Pull Request
+      - name: Comment URL to PR
+        uses: mshick/add-pr-comment@v2
+        with:
+          message: https://${{ vars.REVIEWAPP_NAME }}-${{ env.PR_NUMBER }}.azurewebsites.net
+          repo-token: ${{ secrets.GITHUB_TOKEN }}

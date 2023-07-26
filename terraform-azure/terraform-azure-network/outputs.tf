@@ -22,3 +22,8 @@ output "app_worker_subnet_id" {
   description = "ID of the delegated Subnet for the Background Worker"
   value       = azurerm_subnet.app_worker_snet.id
 }
+
+output "reviewapp_subnet_id" {
+  description = "ID of the delegated Subnet for the Review Application"
+  value       = azurerm_subnet.reviewapp_snet == [] ? null : azurerm_subnet.reviewapp_snet[0].id
+}
