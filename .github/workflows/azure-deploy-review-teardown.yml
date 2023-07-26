@@ -32,7 +32,7 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       # Destroy Web Application
-      - name: Deploy to Azure App Services
+      - name: Destroy Azure Web Application
         uses: azure/CLI@v1
         with:
           azcliversion: 2.50.0

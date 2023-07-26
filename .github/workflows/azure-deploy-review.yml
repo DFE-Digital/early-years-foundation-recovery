@@ -107,6 +107,10 @@ jobs:
               --slot ${{ env.PR_NUMBER }} \
               --configuration-source ${{ vars.REVIEWAPP_NAME } \
               --deployment-container-image-name ${{ env.DOCKER_IMAGE }}:${{ env.PR_NUMBER }}
+            az webapp config appsettings set --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+              --name ${{ vars.REVIEWAPP_NAME }} \
+              --slot ${{ env.PR_NUMBER }} \
+              --slot-settings DOMAIN="https://${{ vars.REVIEWAPP_NAME }}-${{ env.PR_NUMBER }}.azurewebsites.net"
 
       # Add URL to Pull Request
       - name: Comment URL to PR
