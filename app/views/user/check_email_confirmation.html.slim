@@ -2,19 +2,14 @@
   .govuk-grid-column-two-thirds-from-desktop
     = govuk_back_link href: url_for(:back)
 
-    - # TODO: remove variable assignment from view layer!
-
-    / on second visit to users/confirmation/new, email is not available so display generic page
-    - user = @user.nil? ? :user : @user
-
     = content_resource 'emails.confirmation.intro'
 
-    - unless user.nil?
-      = content_resource 'emails.confirmation.recipient', recipient: user.email
+    - if @user
+      = content_resource 'emails.confirmation.recipient', recipient: @user.email
 
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
     = govuk_details summary_text: t('emails.confirmation.summary') do
-      = content_resource 'emails.not_received', link: new_confirmation_path(user)
-      = content_resource 'emails.no_access', link: new_registration_path(user)
+      = content_resource 'emails.not_received', link: new_confirmation_path(:user)
+      = content_resource 'emails.no_access', link: new_registration_path(:user)
       = content_resource 'emails.different', link: Rails.application.credentials.contact_us
