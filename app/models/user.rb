@@ -119,6 +119,9 @@ class User < ApplicationRecord
         question_name: content.name,
         training_module: content.parent.name,
         archived: false,
+        assessments_type: content.assessments_type,
+        schema: content.schema,
+        answer: content.answer.json,
       )
     else
       user_answers.find_or_initialize_by(
