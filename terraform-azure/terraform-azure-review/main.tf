@@ -20,7 +20,7 @@ resource "azurerm_linux_web_app" "review-app" {
   resource_group_name       = var.resource_group
   service_plan_id           = azurerm_service_plan.asp.id
   https_only                = true
-  virtual_network_subnet_id = var.webapp_subnet_id
+  virtual_network_subnet_id = azurerm_subnet.reviewapp_snet.id
   app_settings              = var.webapp_app_settings
 
   site_config {
@@ -66,4 +66,24 @@ resource "azurerm_linux_web_app" "review-app" {
   #checkov:skip=CKV_AZURE_78:Disabled by default in Terraform version used
   #checkov:skip=CKV_AZURE_16:Using VNET Integration
   #checkov:skip=CKV_AZURE_71:Using VNET Integration
+}
+
+# Create Subnet for Review Application
+resource "azurerm_subnet" "reviewapp_snet" {
+  name                 = "${var.resource_name_prefix}-reviewapp-snet"
+  virtual_network_name = var.webapp_vnet_name
+  resource_group_name  = var.resource_group
+  address_prefixes     = ["172.1.3.0/26"]
+  service_endpoints    = ["Microsoft.Storage"]
+
+  delegation {
+    name = "${var.resource_name_prefix}-reviewapp-dn"
+
+    service_delegation {
+      name    = "Microsoft.Web/serverFarms"
+      actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
+    }
+  }
+
+  #checkov:skip=CKV2_AZURE_31:NSG not required
 }

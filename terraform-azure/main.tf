@@ -85,21 +85,22 @@ module "app-worker" {
 }
 
 # Create Review Application resources
-module "review-apps" {
-  source = "./terraform-azure-review"
-  count  = var.environment == "development" ? 1 : 0
-
-  asp_sku                                  = "P1v2"
-  location                                 = var.azure_region
-  resource_group                           = azurerm_resource_group.rg.name
-  resource_name_prefix                     = "${var.resource_name_prefix}-review"
-  webapp_subnet_id                         = module.network.reviewapp_subnet_id
-  webapp_name                              = var.reviewapp_name
-  webapp_app_settings                      = local.reviewapp_app_settings
-  webapp_docker_image                      = var.webapp_docker_image
-  webapp_docker_image_tag                  = var.webapp_docker_image_tag
-  webapp_docker_registry_url               = var.webapp_docker_registry_url
-  webapp_health_check_path                 = "/health"
-  webapp_health_check_eviction_time_in_min = 10
-  depends_on                               = [module.network, module.database]
-}
+#module "review-apps" {
+#  source = "./terraform-azure-review"
+#  # Review Applications are only deployed to the Development subscription
+#  count  = var.environment == "development" ? 1 : 0
+#
+#  asp_sku                                  = "P1v2"
+#  location                                 = var.azure_region
+#  resource_group                           = azurerm_resource_group.rg.name
+#  resource_name_prefix                     = "${var.resource_name_prefix}-review"
+#  webapp_vnet_name                         = module.network.vnet_name
+#  webapp_name                              = var.reviewapp_name
+#  webapp_app_settings                      = local.reviewapp_app_settings
+#  webapp_docker_image                      = var.webapp_docker_image
+#  webapp_docker_image_tag                  = var.webapp_docker_image_tag
+#  webapp_docker_registry_url               = var.webapp_docker_registry_url
+#  webapp_health_check_path                 = "/health"
+#  webapp_health_check_eviction_time_in_min = 10
+#  depends_on                               = [module.network, module.database]
+#}

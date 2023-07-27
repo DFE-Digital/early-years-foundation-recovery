@@ -3,6 +3,11 @@ output "vnet_id" {
   value       = azurerm_virtual_network.vnet.id
 }
 
+output "vnet_name" {
+  description = "Name of the Virtual Network"
+  value       = azurerm_virtual_network.vnet.name
+}
+
 output "psqlfs_subnet_id" {
   description = "ID of the delegated Subnet for the Database Server"
   value       = azurerm_subnet.psqlfs_snet.id
@@ -21,9 +26,4 @@ output "webapp_subnet_id" {
 output "app_worker_subnet_id" {
   description = "ID of the delegated Subnet for the Background Worker"
   value       = azurerm_subnet.app_worker_snet.id
-}
-
-output "reviewapp_subnet_id" {
-  description = "ID of the delegated Subnet for the Review Application"
-  value       = azurerm_subnet.reviewapp_snet == [] ? null : azurerm_subnet.reviewapp_snet[0].id
 }
