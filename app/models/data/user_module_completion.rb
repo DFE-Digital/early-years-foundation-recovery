@@ -5,26 +5,27 @@ module Data
     class << self
       # @return [Array<String>]
       def column_names
-        headers = []
-        Training::Module.ordered.reject(&:draft?).each do |mod|
-          headers << "#{mod.name} Percentage"
-          headers << "#{mod.name} Count"
-        end
-        headers
+        %w[
+          Module
+          Count
+          Percentage
+        ]
       end
 
-      # @return [Array<Hash{Symbol => Mixed}>]
+      # @return [Array<Hash{Symbol => Numeric}>]
       def dashboard
-        module_hash = {}
         Training::Module.ordered.reject(&:draft?).map do |mod|
-          module_hash["#{mod.name}_percentage".to_sym] = module_count(mod.name) / User.count.to_f
-          module_hash["#{mod.name}_count".to_sym] = module_count(mod.name)
+          {
+            module_name: mod.name,
+            completed_count: module_count(mod.name),
+            completed_percentage: (module_count(mod.name) / User.count.to_f),
+          }
         end
-        [module_hash]
       end
 
     private
 
+      # @param module_name [String]
       # @return [Integer]
       def module_count(module_name)
         User.all.count { |user| user.module_completed?(module_name) }

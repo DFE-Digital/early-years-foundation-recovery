@@ -1,16 +1,17 @@
 class CoercionDecorator
-  extend Dry::Initializer
-
-  param :input, type: Types::Strict::Array.of(Types::Strict::Hash)
-
-  # @return [Array<Hash>]
-  def call
-    input.to_enum.each do |row|
-      row.map { |key, value| row[key] = format_value(key, value) }
-    end
+  # @param input [Hash, Array<Hash>]
+  # @yield [Hash]
+  def call(input)
+    Array.wrap(input).to_enum.each { |row| yield coerce(row) }
   end
 
 private
+
+  # @param row [Hash]
+  # @return [Hash]
+  def coerce(row)
+    row.each { |key, value| row[key] = format_value(key, value) }
+  end
 
   # @param key [Symbol]
   # @param value [Mixed]
@@ -18,7 +19,7 @@ private
   def format_value(key, value)
     if value.is_a?(Time) || value.is_a?(DateTime)
       format_datetime(value)
-    elsif key.to_s.include?('percentage')
+    elsif key.to_s.ends_with?('percentage')
       format_percentage(value)
     else
       value

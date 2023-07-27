@@ -14,6 +14,6 @@ module Data
           percentages.merge(setting_type: setting_type)
         end
       end
-  end
+    end
   end
 end

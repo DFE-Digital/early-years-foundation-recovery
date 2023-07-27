@@ -14,6 +14,6 @@ module Data
           percentages.merge(role_type: role_type)
         end
       end
-  end
+    end
   end
 end

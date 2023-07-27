@@ -13,27 +13,16 @@ class User < ApplicationRecord
     registered_at
   ].freeze
 
-  def self.csv_headers
-    if Rails.application.cms?
-      Training::Module.ordered.reject(&:draft?).map { |mod| "module_#{mod.position}_time" }
-    else
-      TrainingModule.published.map { |mod| "module_#{mod.id}_time" }
-    end
-  end
-
-  # Collate published module state and profile data in CSV format
-  #
-  # @overload to_csv
-  # @see ToCsv.to_csv
-  #   @return [String]
-  def self.to_csv
-    CSV.generate(headers: true) do |csv|
-      csv << (DASHBOARD_ATTRS + csv_headers)
-      dashboard.find_each(batch_size: 1000) do |user|
-        formatted = CoercionDecorator.new([user.dashboard_attributes.to_hash]).call
-        formatted.each { |row| csv << row.values }
+  # @return [Array<String>]
+  def self.dashboard_headers
+    csv_headers =
+      if Rails.application.cms?
+        Training::Module.ordered.reject(&:draft?).map { |mod| "module_#{mod.position}_time" }
+      else
+        TrainingModule.published.map { |mod| "module_#{mod.id}_time" }
       end
-    end
+
+    DASHBOARD_ATTRS + csv_headers
   end
 
   # Include default devise modules. Others available are:
@@ -219,6 +208,12 @@ class User < ApplicationRecord
     !module_time_to_completion.empty?
   end
 
+  # @param module_name [String]
+  # @return [Boolean]
+  def module_completed?(module_name)
+    module_time_to_completion[module_name]&.positive?
+  end
+
   # @return [Integer]
   def modules_completed_count
     module_time_to_completion.values.count(&:positive?)
@@ -317,20 +312,15 @@ class User < ApplicationRecord
     end
   end
 
-  # @see ToCsv#dashboard_attributes
+  # @see ToCsv#dashboard_row
   # @return [Hash] override
-  def dashboard_attributes
+  def dashboard_row
     data_attributes.dup.merge(module_ttc)
-  end
-
-  # @return [Boolean]
-  def module_completed?(module_name)
-    module_time_to_completion[module_name].present? && module_time_to_completion[module_name].positive?
   end
 
 private
 
-  #   @return [Hash]
+  # @return [Hash]
   def data_attributes
     DASHBOARD_ATTRS.map { |field| { field => send(field) } }.reduce(&:merge)
   end
