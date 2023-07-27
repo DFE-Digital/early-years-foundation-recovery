@@ -30,6 +30,8 @@ env:
   TF_VAR_psqlfs_geo_redundant_backup: ${{ vars.PSQLFS_GEO_REDUNDANT_BACKUP }}
   TF_VAR_asp_sku: ${{ vars.ASP_SKU }}
   TF_VAR_webapp_name: ${{ vars.WEBAPP_NAME }}
+  TF_VAR_workerapp_name: ${{ vars.WORKERAPP_NAME }}
+  TF_VAR_reviewapp_name: ${{ vars.REVIEWAPP_NAME }}
   TF_VAR_webapp_database_url: ${{ secrets.WEBAPP_DATABASE_URL }}
   TF_VAR_webapp_docker_registry_url: https://ghcr.io
   TF_VAR_webapp_docker_image: dfe-digital/early-years-foundation-recovery

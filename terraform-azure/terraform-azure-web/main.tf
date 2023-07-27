@@ -136,6 +136,10 @@ resource "azurerm_monitor_diagnostic_setting" "webapp_logs_monitor" {
     category = "AppServicePlatformLogs"
   }
 
+  timeouts {
+    read = "30m"
+  }
+
   lifecycle {
     ignore_changes = [metric]
   }
@@ -152,6 +156,10 @@ resource "azurerm_monitor_diagnostic_setting" "webapp_slot_logs_monitor" {
 
   enabled_log {
     category = "AppServicePlatformLogs"
+  }
+
+  timeouts {
+    read = "30m"
   }
 
   lifecycle {

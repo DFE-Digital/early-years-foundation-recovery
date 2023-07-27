@@ -1,3 +1,8 @@
+variable "environment" {
+  description = "Environment to deploy resources"
+  type        = string
+}
+
 variable "location" {
   description = "Name of the Azure region to deploy resources"
   type        = string
