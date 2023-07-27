@@ -105,7 +105,7 @@ jobs:
             az webapp deployment slot create --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.REVIEWAPP_NAME }} \
               --slot ${{ env.PR_NUMBER }} \
-              --configuration-source ${{ vars.REVIEWAPP_NAME } \
+              --configuration-source ${{ vars.REVIEWAPP_NAME }} \
               --deployment-container-image-name ${{ env.DOCKER_IMAGE }}:${{ env.PR_NUMBER }}
             az webapp config appsettings set --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.REVIEWAPP_NAME }} \
