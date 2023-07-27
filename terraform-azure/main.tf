@@ -88,7 +88,7 @@ module "app-worker" {
 module "review-apps" {
   source = "./terraform-azure-review"
   # Review Applications are only deployed to the Development subscription
-  count  = var.environment == "development" ? 1 : 0
+  count = var.environment == "development" ? 1 : 0
 
   asp_sku                                  = "P1v2"
   location                                 = var.azure_region
