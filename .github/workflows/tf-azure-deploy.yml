@@ -1,4 +1,4 @@
-name: 'Terraform Deploy [Azure - DEV]'
+name: 'Terraform Deploy [Azure]'
 
 on:
   workflow_dispatch:
