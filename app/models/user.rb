@@ -84,6 +84,7 @@ class User < ApplicationRecord
   scope :unconfirmed, -> { where(confirmed_at: nil) }
   scope :locked_out, -> { where.not(locked_at: nil) }
   scope :since_public_beta, -> { where(created_at: Rails.application.public_beta_launch_date..Time.zone.now) }
+
   scope :with_local_authority, -> { where.not(local_authority: nil) }
   scope :with_notes, -> { joins(:notes).distinct.select(&:has_notes?) }
   scope :without_notes, -> { where.not(id: with_notes) }
@@ -161,17 +162,6 @@ class User < ApplicationRecord
   # @return [Array<Training::Modules>]
   def active_modules
     Training::Module.ordered.reject(&:draft?).select { |mod| module_time_to_completion.key?(mod.name) }
-  end
-
-  # @return [Boolean]
-  def following_linear_sequence?
-    modules_ordered = Training::Module.ordered.reject(&:draft?)
-    modules_ordered.each_cons(2) do |current_module, next_module|
-      # check that previous module has been completed before next module is started
-      return false if module_completed?(current_module.name) && !module_completed?(next_module.name)
-    end
-    user_modules_ordered = modules_ordered.select { |mod| module_time_to_completion.key?(mod.name) }
-    user_modules_ordered.map(&:name) == module_time_to_completion.keys
   end
 
   # @see Devise::Confirmable

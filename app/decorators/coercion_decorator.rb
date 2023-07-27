@@ -5,7 +5,9 @@ class CoercionDecorator
 
   # @return [Array<Hash>]
   def call
-    input.each { |row| row.map { |key, value| row[key] = format_value(key, value) } }
+    input.to_enum.each do |row|
+      row.map { |key, value| row[key] = format_value(key, value) }
+    end
   end
 
 private

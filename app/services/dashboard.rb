@@ -13,8 +13,8 @@ class Dashboard
   # @return [Array<Hash{ Symbol => String }>]
   DATA_SOURCES = [
     { model: 'Ahoy::Event',                     folder: 'eventsdata',       file: 'ahoy_events'                   },
-    { model: 'Ahoy::Visit',                     folder: 'visitsdata',       file: 'ahoy_visits'                   },
-    { model: 'User',                            folder: 'userdata',         file: 'users'                         },
+    { model: 'Ahoy::Visit',                     folder: 'visitsdata',       file: 'ahoy_visits'                   }, # FIXME: add scope? - 380k kills process
+    { model: 'User',                            folder: 'userdata',         file: 'users'                         }, # FIXME: coercion? - 30k kills process
     { model: 'UserAnswer',                      folder: 'useranswers',      file: 'user_answers'                  },
     { model: 'Response',                        folder: 'useranswers',      file: 'responses'                     },
     { model: 'UserAssessment',                  folder: 'userassessments',  file: 'user_assessments'              },
@@ -24,10 +24,11 @@ class Dashboard
     { model: 'Data::SettingPassRate',           folder: 'summativequiz',    file: 'setting_pass_rate'             },
     { model: 'Data::RolePassRate',              folder: 'summativequiz',    file: 'role_pass_rate'                },
     { model: 'Data::UsersNotPassing',           folder: 'summativequiz',    file: 'users_not_passing_per_module'  },
-    { model: 'Data::ResitsPerUser',             folder: 'summativequiz',    file: 'resits_per_user'               },
+    { model: 'Data::ResitsPerUser',             folder: 'summativequiz',    file: 'resits_per_user'               }, # OPTIMIZE: ~20 min runtime
     { model: 'Data::ModulesPerMonth',           folder: 'summativequiz',    file: 'modules_per_month'             },
-    { model: 'Data::UserOverview',              folder: 'userdata',         file: 'user_overview'                 },
-    { model: 'Data::ModuleOverview',            folder: 'moduledata',       file: 'module_overview'               },
+    { model: 'Data::UserOverview',              folder: 'overview',         file: 'user_overview'                 },
+    { model: 'Data::ModuleOverview',            folder: 'overview',         file: 'module_overview'               },
+    { model: 'Data::UserModuleOrder',           folder: 'nonlinear',        file: 'user_module_order'             },
     { model: 'Data::UserModuleCompletion',      folder: 'nonlinear',        file: 'user_module_completion'        },
     { model: 'Data::UserModuleCompletionCount', folder: 'nonlinear',        file: 'user_module_completions_count' },
     { model: 'Data::ReturningUsers',            folder: 'nonlinear',        file: 'returning_users'               },

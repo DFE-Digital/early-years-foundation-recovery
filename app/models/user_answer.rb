@@ -24,6 +24,8 @@ class UserAnswer < ApplicationRecord
 
   scope :summative, -> { where(assessments_type: 'summative_assessment') }
 
+  scope :dashboard, -> { where(assessments_type: 'confidence_check') }
+
   validates :answer, presence: true
 
   # @return [String]
