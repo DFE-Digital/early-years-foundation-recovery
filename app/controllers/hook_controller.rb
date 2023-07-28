@@ -20,9 +20,14 @@ class HookController < ApplicationController
     # TODO: consider que-locks if webhooks are to trigger the worker
     #
     # FillPageViewsJob.enqueue
-    # jw
-    # other stuff managment api give us - record as much as possible. Versions, who, created, updated, published, etc
 
+    existing_modules = TrainingModuleRecord.pluck(:module_id)
+    new_modules = Training::Module.ordered.reject { |mod| existing_modules.include?(mod.id) }.reject(&:draft?)
+
+    new_modules.each do |mod|
+
+      TrainingModuleRecord.create(name: mod.name)
+    end
     render json: { status: 'content release received' }, status: :ok
   end
 
