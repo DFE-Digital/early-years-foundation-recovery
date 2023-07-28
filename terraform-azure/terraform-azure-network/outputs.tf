@@ -17,3 +17,8 @@ output "webapp_subnet_id" {
   description = "ID of the delegated Subnet for the Web Application"
   value       = azurerm_subnet.webapp_snet.id
 }
+
+output "app_worker_subnet_id" {
+  description = "ID of the delegated Subnet for the Background Worker"
+  value       = azurerm_subnet.app_worker_snet.id
+}
