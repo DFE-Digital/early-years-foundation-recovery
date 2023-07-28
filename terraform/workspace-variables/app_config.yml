@@ -45,7 +45,7 @@ development:
   TRAINING_MODULES: demo-modules
   # EARLY_YEARS_EMAILS: true
   # cms
-  CONTENTFUL_ENVIRONMENT: sandbox
+  CONTENTFUL_ENVIRONMENT: test
   CONTENTFUL_PREVIEW: true
   # jobs
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-development
