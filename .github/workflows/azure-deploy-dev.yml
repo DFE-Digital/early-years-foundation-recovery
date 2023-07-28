@@ -92,7 +92,7 @@ jobs:
           azcliversion: 2.50.0
           inlineScript: |
             az container create --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-              --name eyrecovery-worker \
+              --name ${{ vars.WORKERAPP_NAME }} \
               --image ${{ env.DOCKER_IMAGE }}:${{ github.sha }} \
               --cpu 1 \
               --memory 2 \
