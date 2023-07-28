@@ -16,6 +16,8 @@ class HookController < ApplicationController
       properties: payload,
     )
 
+    check_new_modules
+
     # Potentially useful but is a LONG running task and concurrent runs must be avoided
     # TODO: consider que-locks if webhooks are to trigger the worker
     #
@@ -59,8 +61,10 @@ private
     existing_modules = TrainingModuleRecord.pluck(:module_id)
     new_modules = Training::Module.ordered.reject { |mod| existing_modules.include?(mod.id) }.reject(&:draft?)
     new_modules.each do |mod|
-      mail_service.new_module(mod)
-      TrainingModuleRecord.create!(module_id: mod.id, name: mod.name)
+      unless TrainingModuleRecord.pluck(:name).include?(mod.name)
+        mail_service.new_module(mod)
+        TrainingModuleRecord.create!(module_id: mod.position, name: mod.name)
+      end
     end
   end
 end
