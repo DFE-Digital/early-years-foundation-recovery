@@ -27,7 +27,7 @@ module.exports = function(migration) {
 
   /* Interface -------------------------------------------------------------- */
 
-  resource.changeFieldControl('title', 'builtin', 'singleLine', {
+  resource.changeFieldControl('name', 'builtin', 'singleLine', {
     helpText: 'Unique I18n locale key in the format: "this_foo.that_bar.baz"'
   })
 
