@@ -36,16 +36,11 @@ class ApplicationController < ActionController::Base
 
   # @return [Symbol]
   def prepare_cms
-    puts 'PREPARE CMS'
     # ensure correct API for each request
     ContentfulModel.use_preview_api = Rails.application.preview?
-    # existing_module = Training::Module.ordered
-    
 
     # memoise the latest release timestamp
     Training::Module.reset_cache_key!
-
-
 
     :done
   end

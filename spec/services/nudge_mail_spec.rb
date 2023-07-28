@@ -88,4 +88,23 @@ RSpec.describe NudgeMail do
       expect(NotifyMailer).to have_received(:continue_training).with(user_3, TrainingModule.find_by(name: 'alpha')).once
     end
   end
+
+  context 'when users have completed all available modules and a new module is released' do
+    let!(:user_1) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1, "beta": 1 }) }
+    let!(:user_2) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1, "beta": 1 }) }
+    let!(:user_3) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1, "beta": 0 }) }
+
+    before do
+      TrainingModuleRecord.create!(module_id: 1, name: 'alpha').save!
+      TrainingModuleRecord.create!(module_id: 2, name: 'beta').save!
+      allow(NotifyMailer).to receive(:new_module)
+    end
+
+    it 'The notify mailer is called with the correct users' do
+      nudge_mail.new_module(TrainingModule.find_by(name: 'charlie'))
+      expect(NotifyMailer).to have_received(:new_module).with(user_1, TrainingModule.find_by(name: 'charlie')).once
+      expect(NotifyMailer).to have_received(:new_module).with(user_2, TrainingModule.find_by(name: 'charlie')).once
+      expect(NotifyMailer).not_to have_received(:new_module).with(user_3, TrainingModule.find_by(name: 'charlie'))
+    end
+  end
 end

@@ -6,6 +6,12 @@ class NudgeMail
     continue_training_recipients.each { |recipient| NotifyMailer.continue_training(recipient, module_in_progress(recipient)) }
   end
 
+  # @param mod [TrainingModule]
+  # @return [void]
+  def new_module(mod)
+    completed_available_modules.each { |recipient| NotifyMailer.new_module(recipient, mod) }
+  end
+
 private
 
   # @return [ActiveRecord::Relation]
@@ -30,5 +36,13 @@ private
   def module_in_progress(user)
     mod_name = user.module_time_to_completion.find { |_k, v| v.zero? }.first
     TrainingModule.find_by(name: mod_name)
+  end
+
+  # @return [Array<User>]
+  def completed_available_modules
+    available_modules = TrainingModuleRecord.pluck(:name)
+    User.training_email_recipients.select do |user|
+      available_modules.all? { |mod| user.module_completed?(mod) }
+    end
   end
 end

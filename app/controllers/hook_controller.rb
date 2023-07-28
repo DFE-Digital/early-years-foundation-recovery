@@ -20,14 +20,6 @@ class HookController < ApplicationController
     # TODO: consider que-locks if webhooks are to trigger the worker
     #
     # FillPageViewsJob.enqueue
-
-    existing_modules = TrainingModuleRecord.pluck(:module_id)
-    new_modules = Training::Module.ordered.reject { |mod| existing_modules.include?(mod.id) }.reject(&:draft?)
-
-    new_modules.each do |mod|
-
-      TrainingModuleRecord.create(name: mod.name)
-    end
     render json: { status: 'content release received' }, status: :ok
   end
 
@@ -59,5 +51,16 @@ private
   # @return [Hash]
   def payload
     @payload ||= JSON.parse(request.body.read)
+  end
+
+  # @return [void]
+  def check_new_modules
+    mail_service = NudgeMail.new
+    existing_modules = TrainingModuleRecord.pluck(:module_id)
+    new_modules = Training::Module.ordered.reject { |mod| existing_modules.include?(mod.id) }.reject(&:draft?)
+    new_modules.each do |mod|
+      mail_service.new_module(mod)
+      TrainingModuleRecord.create!(module_id: mod.id, name: mod.name)
+    end
   end
 end
