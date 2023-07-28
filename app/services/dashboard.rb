@@ -13,8 +13,8 @@ class Dashboard
   # @return [Array<Hash{ Symbol => String }>]
   DATA_SOURCES = [
     { model: 'Ahoy::Event',                     folder: 'eventsdata',       file: 'ahoy_events'                   },
-    { model: 'Ahoy::Visit',                     folder: 'visitsdata',       file: 'ahoy_visits'                   }, # FIXME: add scope? - 380k kills process
-    { model: 'User',                            folder: 'userdata',         file: 'users'                         }, # FIXME: coercion? - 30k kills process
+    { model: 'Ahoy::Visit',                     folder: 'visitsdata',       file: 'ahoy_visits'                   }, # OPTIMIZE: add scope
+    { model: 'User',                            folder: 'userdata',         file: 'users'                         },
     { model: 'UserAnswer',                      folder: 'useranswers',      file: 'user_answers'                  },
     { model: 'Response',                        folder: 'useranswers',      file: 'responses'                     },
     { model: 'UserAssessment',                  folder: 'userassessments',  file: 'user_assessments'              },
