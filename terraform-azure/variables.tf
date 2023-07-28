@@ -29,15 +29,15 @@ variable "psqlfs_storage" {
 }
 
 variable "psqlfs_username" {
-  default     = "psqladminDexter"
   description = "Username of the Database Server"
   type        = string
+  sensitive   = true
 }
 
 variable "psqlfs_password" {
-  default     = "psqlp@55w0rd"
   description = "Password of the Database Server"
   type        = string
+  sensitive   = true
 }
 
 variable "psqlfs_geo_redundant_backup" {
@@ -57,6 +57,16 @@ variable "webapp_name" {
   type        = string
 }
 
+variable "workerapp_name" {
+  description = "Name for the Background Worker Application"
+  type        = string
+}
+
+variable "reviewapp_name" {
+  description = "Name for the Review Application"
+  type        = string
+}
+
 variable "webapp_database_url" {
   description = "URL to the Database"
   type        = string
@@ -68,19 +78,8 @@ variable "webapp_docker_registry_url" {
   type        = string
 }
 
-variable "webapp_docker_registry_username" {
-  description = "Username for the Docker Registry"
-  type        = string
-}
-
-variable "webapp_docker_registry_password" {
-  description = "Password the Docker Registry"
-  type        = string
-  sensitive   = true
-}
-
-variable "webapp_docker_image_url" {
-  description = "URL to the Docker Image"
+variable "webapp_docker_image" {
+  description = "Docker Image to deploy"
   type        = string
 }
 

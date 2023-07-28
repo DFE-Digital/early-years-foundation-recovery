@@ -36,11 +36,13 @@ variable "psqlfs_storage" {
 variable "psqlfs_username" {
   description = "Username of the Database Server"
   type        = string
+  sensitive   = true
 }
 
 variable "psqlfs_password" {
   description = "Password of the Database Server"
   type        = string
+  sensitive   = true
 }
 
 variable "psqlfs_geo_redundant_backup" {

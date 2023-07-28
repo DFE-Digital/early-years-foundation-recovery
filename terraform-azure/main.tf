@@ -8,26 +8,12 @@ provider "azurerm" {
   }
 }
 
-locals {
-  # Common tags to be assigned to all resources
-  common_tags = {
-    "Environment"      = var.environment
-    "Parent Business"  = "Children’s Care"
-    "Portfolio"        = "Newly Onboarded"
-    "Product"          = "EY Recovery"
-    "Service"          = "Newly Onboarded"
-    "Service Line"     = "Newly Onboarded"
-    "Service Offering" = "EY Recovery"
-  }
-}
-
 # Create Resource Group
 resource "azurerm_resource_group" "rg" {
   name     = "${var.resource_name_prefix}-rg"
   location = var.azure_region
 
-  tags = merge(local.common_tags, {
-  })
+  tags = local.common_tags
 
   lifecycle {
     ignore_changes = [tags]
@@ -38,6 +24,7 @@ resource "azurerm_resource_group" "rg" {
 module "network" {
   source = "./terraform-azure-network"
 
+  environment          = var.environment
   location             = var.azure_region
   resource_group       = azurerm_resource_group.rg.name
   resource_name_prefix = var.resource_name_prefix
@@ -64,40 +51,56 @@ module "database" {
 module "webapp" {
   source = "./terraform-azure-web"
 
-  asp_sku              = var.asp_sku
-  location             = var.azure_region
-  resource_group       = azurerm_resource_group.rg.name
-  resource_name_prefix = var.resource_name_prefix
-  webapp_subnet_id     = module.network.webapp_subnet_id
-  webapp_name          = var.webapp_name
-  webapp_app_settings = {
-    "DATABASE_URL"                        = var.webapp_database_url
-    "DOCKER_REGISTRY_SERVER_URL"          = var.webapp_docker_registry_url
-    "DOCKER_REGISTRY_SERVER_USERNAME"     = var.webapp_docker_registry_username
-    "DOCKER_REGISTRY_SERVER_PASSWORD"     = var.webapp_docker_registry_password
-    "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
-    "GOVUK_APP_DOMAIN"                    = "london.cloudapps.digital" #TODO: Remove this dependency post-migration to Azure
-    "GOVUK_WEBSITE_ROOT"                  = "ey-recovery-dev"          #TODO: Remove this dependency post-migration to Azure
-    "BOT_TOKEN"                           = var.webapp_config_bot_token
-    "CONTENTFUL_ENVIRONMENT"              = var.webapp_config_contentful_environment
-    "CONTENTFUL_PREVIEW"                  = var.webapp_config_contentful_preview
-    "DOMAIN"                              = var.webapp_config_domain
-    "EDITOR"                              = var.webapp_config_editor
-    "FEEDBACK_URL"                        = var.webapp_config_feedback_url
-    "GROVER_NO_SANDBOX"                   = var.webapp_config_grover_no_sandbox
-    "GOOGLE_CLOUD_BUCKET"                 = var.webapp_config_google_cloud_bucket
-    "NODE_ENV"                            = var.webapp_config_node_env
-    "RAILS_ENV"                           = var.webapp_config_rails_env
-    "RAILS_LOG_TO_STDOUT"                 = var.webapp_config_rails_log_to_stdout
-    "RAILS_MASTER_KEY"                    = var.webapp_config_rails_master_key
-    "RAILS_MAX_THREADS"                   = var.webapp_config_rails_max_threads
-    "RAILS_SERVE_STATIC_FILES"            = var.webapp_config_rails_serve_static_files
-    "TRAINING_MODULES"                    = var.webapp_config_training_modules
-    "WEB_CONCURRENCY"                     = var.webapp_config_web_concurrency
-    "WEBSITES_CONTAINER_START_TIME_LIMIT" = 1800
-  }
-  webapp_docker_image_url  = var.webapp_docker_image_url
-  webapp_docker_image_tag  = var.webapp_docker_image_tag
-  webapp_health_check_path = "/health"
-  depends_on               = [module.network, module.database]
+  asp_sku                                  = var.asp_sku
+  location                                 = var.azure_region
+  resource_group                           = azurerm_resource_group.rg.name
+  resource_name_prefix                     = var.resource_name_prefix
+  webapp_subnet_id                         = module.network.webapp_subnet_id
+  webapp_name                              = var.webapp_name
+  webapp_app_settings                      = local.webapp_app_settings
+  webapp_docker_image                      = var.webapp_docker_image
+  webapp_docker_image_tag                  = var.webapp_docker_image_tag
+  webapp_docker_registry_url               = var.webapp_docker_registry_url
+  webapp_health_check_path                 = "/health"
+  webapp_health_check_eviction_time_in_min = 10
+  depends_on                               = [module.network, module.database]
+}
+
+## Create Background Worker Application resources
+module "app-worker" {
+  source = "./terraform-azure-app"
+
+  location                         = var.azure_region
+  resource_group                   = azurerm_resource_group.rg.name
+  resource_name_prefix             = "${var.resource_name_prefix}-worker"
+  app_worker_subnet_id             = module.network.app_worker_subnet_id
+  app_worker_name                  = var.workerapp_name
+  container_name                   = var.workerapp_name
+  app_worker_environment_variables = local.app_worker_environment_variables
+  app_worker_docker_image          = var.webapp_docker_image
+  app_worker_docker_image_tag      = var.webapp_docker_image_tag
+  app_worker_docker_registry       = "ghcr.io"
+  app_worker_startup_command       = ["bundle", "exec", "que"]
+  depends_on                       = [module.network, module.database]
+}
+
+# Create Review Application resources
+module "review-apps" {
+  source = "./terraform-azure-review"
+  # Review Applications are only deployed to the Development subscription
+  count = var.environment == "development" ? 1 : 0
+
+  asp_sku                                  = "P1v2"
+  location                                 = var.azure_region
+  resource_group                           = azurerm_resource_group.rg.name
+  resource_name_prefix                     = "${var.resource_name_prefix}-review"
+  webapp_vnet_name                         = module.network.vnet_name
+  webapp_name                              = var.reviewapp_name
+  webapp_app_settings                      = local.reviewapp_app_settings
+  webapp_docker_image                      = var.webapp_docker_image
+  webapp_docker_image_tag                  = var.webapp_docker_image_tag
+  webapp_docker_registry_url               = var.webapp_docker_registry_url
+  webapp_health_check_path                 = "/health"
+  webapp_health_check_eviction_time_in_min = 10
+  depends_on                               = [module.network, module.database]
 }
