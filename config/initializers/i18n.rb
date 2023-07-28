@@ -7,7 +7,7 @@
 # @see https://github.com/ruby-i18n/i18n/wiki/Backend
 module I18n::Backend::Content
   # @return [String, nil]
-  def lookup(locale, key, scope = [], seperator = nil)
+  def lookup(locale, key, scope=[], options={})
     original = super
     resource_name = scope ? Array(scope).push(key).join('.') : key
     find_resource(resource_name)&.body || original

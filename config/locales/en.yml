@@ -193,11 +193,11 @@ en:
     hardness: Your password must contain at least %{length} characters.
     remember_me: Remember me
 
-  # module_indicator:
-  #   completed: completed
-  #   started: in progress
-  #   not_started: not started
-  #   failed: retake test
+  module_indicator:
+    completed: completed
+    started: in progress
+    not_started: not started
+    failed: retake test
 
   module_call_to_action:
     completed: View certificate
@@ -458,6 +458,9 @@ en:
         ofsted_number: Your setting's Ofsted number, if you have one
     hint:
       user:
+        # email:
+        # email_html:
+
         postcode: |
           If you work in multiple settings, choose the one where you work most often.
         ofsted_number: |
