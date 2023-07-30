@@ -13,7 +13,7 @@
     "@hotwired/turbo-rails": "^7.3.0",
     "accessible-autocomplete": "^2.0.4",
     "axios": "^1.4.0",
-    "esbuild": "^0.18.6",
+    "esbuild": "^0.18.17",
     "govuk-frontend": "^4.6.0",
     "puppeteer": "^20.7.2",
     "sass": "^1.63.6"
