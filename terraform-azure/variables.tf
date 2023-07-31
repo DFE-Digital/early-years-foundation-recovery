@@ -57,6 +57,16 @@ variable "webapp_name" {
   type        = string
 }
 
+variable "workerapp_name" {
+  description = "Name for the Background Worker Application"
+  type        = string
+}
+
+variable "reviewapp_name" {
+  description = "Name for the Review Application"
+  type        = string
+}
+
 variable "webapp_database_url" {
   description = "URL to the Database"
   type        = string
