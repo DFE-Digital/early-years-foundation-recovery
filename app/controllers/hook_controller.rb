@@ -40,6 +40,7 @@ class HookController < ApplicationController
     )
 
     ContentCheckJob.enqueue
+    check_new_modules
 
     render json: { status: 'content change received' }, status: :ok
   end

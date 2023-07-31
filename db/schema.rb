@@ -145,9 +145,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_27_102149) do
     t.bigint "user_assessment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.jsonb "schema"
-    t.jsonb "answer_text"
-    t.string "assessments_type"
     t.index ["user_assessment_id"], name: "index_responses_on_user_assessment_id"
     t.index ["user_id", "training_module", "question_name"], name: "user_question"
     t.index ["user_id"], name: "index_responses_on_user_id"
@@ -158,7 +155,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_27_102149) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_training_module_records_on_name", unique: true
   end
 
   create_table "user_answers", force: :cascade do |t|
