@@ -5,35 +5,30 @@ module Data
     class << self
       # @return [Array<String>]
       def column_names
-        (1..module_count).map do |count|
-          "#{count} Module#{count > 1 ? 's' : ''} Count"
-        end
+        module_count.map { |count| "#{count} Completed" }
       end
 
-      # @return [Array<Hash{Symbol => Mixed}>]
+      # @return [Array<Hash>]
       def dashboard
-        module_hash = {}
-        (1..module_count).each do |count|
-          module_hash[dashboard_key(count)] = module_completed_count(count)
-        end
-        [module_hash]
+        [user_count]
       end
 
     private
 
-      # @return [Integer]
+      # @return [Hash {Symbol => Integer}]
+      def user_count
+        module_count.map { |count| [count.to_s.to_sym, completed_count(count)] }.to_h
+      end
+
+      # @return [Array<Integer>]
       def module_count
-        Training::Module.ordered.count { |element| !element.draft? }
+        (1..Training::Module.ordered.reject(&:draft?).last.position).to_a
       end
 
-      # @return [Symbol]
-      def dashboard_key(count)
-        "#{count} Module#{count > 1 ? 's' : ''} Count".to_sym
-      end
-
+      # @param count [Integer]
       # @return [Integer]
-      def module_completed_count(module_count)
-        User.all.count { |user| user.modules_completed_count == module_count }
+      def completed_count(count)
+        User.all.count { |user| user.modules_completed.eql?(count) }
       end
     end
   end

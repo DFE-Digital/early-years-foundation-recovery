@@ -12,6 +12,11 @@ Lint/MixedRegexpCaptureTypes:
     - 'lib/seed_course_entries.rb'
 
 # Offense count: 1
+Lint/ShadowedException:
+  Exclude:
+    - 'app/models/concerns/to_csv.rb'
+
+# Offense count: 1
 # Configuration parameters: AllowComments, AllowNil.
 Lint/SuppressedException:
   Exclude:
@@ -33,7 +38,7 @@ Rails/CreateTableWithTimestamps:
     - 'db/migrate/20220419121105_create_ahoy_visits_and_events.rb'
     - 'db/migrate/20230316130014_create_releases.rb'
 
-# Offense count: 5
+# Offense count: 6
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: Include.
 # Include: app/**/*.rb, config/**/*.rb, db/**/*.rb, lib/**/*.rb
@@ -42,6 +47,7 @@ Rails/Output:
     - 'app/jobs/content_check_job.rb'
     - 'app/jobs/dashboard_job.rb'
     - 'app/jobs/fill_page_views_job.rb'
+    - 'app/models/concerns/to_csv.rb'
     - 'app/services/contentful_data_integrity.rb'
     - 'app/services/dashboard.rb'
 

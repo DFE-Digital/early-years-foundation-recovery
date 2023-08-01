@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Data::UserOverview do
-  let!(:user_1) { create(:user, :registered, module_time_to_completion: { alpha: 1, bravo: 1, charlie: 0 }) }
-  let!(:user_2) { create(:user, :registered, module_time_to_completion: { alpha: 2, bravo: 3, charlie: 1 }) }
-  let!(:user_3) { create(:user, :registered, module_time_to_completion: { alpha: 2, bravo: 0, charlie: 1 }) }
-
   let(:headers) do
     [
       'Registration Complete',
@@ -23,13 +19,13 @@ RSpec.describe Data::UserOverview do
       'User Defined Roles',
       'Started Learning',
       'Not Started Learning',
-      'Following Linear Sequence',
       'With Notes',
       'With Notes Percentage',
       'Without Notes',
       'Without Notes Percentage',
     ]
   end
+
   let(:rows) do
     [
       {
@@ -49,7 +45,6 @@ RSpec.describe Data::UserOverview do
         user_defined_roles: 1,
         started_learning: 4,
         not_started_learning: 0,
-        following_linear_sequence: 2,
         with_notes: 3,
         with_notes_percentage: 0.75,
         without_notes: 1,
@@ -58,12 +53,24 @@ RSpec.describe Data::UserOverview do
     ]
   end
 
-  before do
-    create(:note, user: user_1)
-    create(:note, user: user_2)
-    create(:note, user: user_3)
-    create(:user, :registered, module_time_to_completion: { alpha: 2, charlie: 1, bravo: 3 })
+  let(:user_1) do
+    create :user, :registered, module_time_to_completion: { alpha: 1, bravo: 1, charlie: 0 }
   end
 
-  it_behaves_like('a data export model')
+  let(:user_2) do
+    create :user, :registered, module_time_to_completion: { alpha: 2, bravo: 3, charlie: 1 }
+  end
+
+  let(:user_3) do
+    create :user, :registered, module_time_to_completion: { alpha: 2, bravo: 0, charlie: 1 }
+  end
+
+  before do
+    create :note, user: user_1
+    create :note, user: user_2
+    create :note, user: user_3
+    create :user, :registered, module_time_to_completion: { alpha: 2, charlie: 1, bravo: 3 }
+  end
+
+  it_behaves_like 'a data export model'
 end

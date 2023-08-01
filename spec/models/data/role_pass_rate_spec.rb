@@ -1,11 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Data::RolePassRate do
-  let(:user_1) { create(:user, :registered, role_type: 'childminder') }
-  let(:user_2) { create(:user, :registered, role_type: 'childminder') }
-
   let(:headers) do
-    ['Role', 'Average Pass Percentage', 'Pass Count', 'Average Fail Percentage', 'Fail Count']
+    [
+      'Role',
+      'Pass Percentage',
+      'Pass Count',
+      'Fail Percentage',
+      'Fail Count',
+    ]
   end
 
   let(:rows) do
@@ -20,11 +23,14 @@ RSpec.describe Data::RolePassRate do
     ]
   end
 
+  let(:user_1) { create(:user, :registered, role_type: 'childminder') }
+  let(:user_2) { create(:user, :registered, role_type: 'childminder') }
+
   before do
     create(:user_assessment, :passed, user_id: user_1.id, score: 100, module: 'module_1')
     create(:user_assessment, :failed, user_id: user_1.id, score: 0, module: 'module_1')
     create(:user_assessment, :passed, user_id: user_2.id, score: 80, module: 'module_1')
   end
 
-  it_behaves_like('a data export model')
+  it_behaves_like 'a data export model'
 end

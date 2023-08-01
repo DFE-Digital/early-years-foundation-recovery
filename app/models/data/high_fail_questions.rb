@@ -5,7 +5,11 @@ module Data
     class << self
       # @return [Array<String>]
       def column_names
-        ['Module', 'Question', 'Failure Rate Percentage']
+        [
+          'Module',
+          'Question',
+          'Failure Rate Percentage',
+        ]
       end
 
       # @return [Array<Hash{Symbol => Mixed}>]
