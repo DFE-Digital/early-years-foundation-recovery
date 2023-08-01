@@ -12,7 +12,7 @@ module Data
       def dashboard
         grouped_assessments.flat_map do |month, module_data|
           module_data.flat_map do |module_name, assessments|
-            row_builder(assessments).merge({ module_name: module_name, month: month })
+            { month: month, module_name: module_name }.merge(row_builder(assessments))
           end
         end
       end

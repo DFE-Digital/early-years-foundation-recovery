@@ -11,7 +11,7 @@ module Data
       # @return [Array<Hash{Symbol => Mixed}>]
       def dashboard
         SummativeQuiz.attribute_pass_percentage(:setting_type).map do |setting_type, percentages|
-          percentages.merge(setting_type: setting_type)
+          { setting_type: setting_type }.merge(percentages)
         end
       end
   end

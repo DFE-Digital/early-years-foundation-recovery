@@ -11,7 +11,7 @@ module Data
       # @return [Array<Hash{Symbol => Mixed}>]
       def dashboard
         SummativeQuiz.attribute_pass_percentage(:role_type).map do |role_type, percentages|
-          percentages.merge(role_type: role_type)
+          { role_type: role_type }.merge(percentages)
         end
       end
   end

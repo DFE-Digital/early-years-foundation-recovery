@@ -28,7 +28,7 @@ module Data
         mods.map do |mod|
           {
             module_name: mod.name,
-            total_users: User.count,
+            total_users: User.registration_complete.count,
             not_started: not_started(mod),
             started: started(mod),
             in_progress: in_progress(mod),
