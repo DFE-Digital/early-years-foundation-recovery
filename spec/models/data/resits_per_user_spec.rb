@@ -2,7 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Data::ResitsPerUser do
   let(:headers) do
-    ['Module', 'User ID', 'Role', 'Resit Attempts']
+    [
+      'Module',
+      'User ID',
+      'Role',
+      'Resit Attempts',
+    ]
   end
 
   let(:rows) do

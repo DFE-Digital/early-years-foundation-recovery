@@ -1,17 +1,11 @@
 class CoercionDecorator
-  # @param input [Hash, Array<Hash>]
-  # @yield [Hash]
+  # @param input [Hash]
+  # @return [Hash]
   def call(input)
-    Array.wrap(input).to_enum.each { |row| yield reformat(row) }
+    input.each { |key, value| input[key] = format_value(key, value) }
   end
 
 private
-
-  # @param row [Hash]
-  # @return [Hash]
-  def reformat(row)
-    row.each { |key, value| row[key] = format_value(key, value) }
-  end
 
   # @param key [Symbol]
   # @param value [Mixed]

@@ -5,7 +5,10 @@ module Data
     class << self
       # @return [Array<String>]
       def column_names
-        ['Module', 'Average Pass Score']
+        [
+          'Module',
+          'Average Pass Score',
+        ]
       end
 
       # TODO: Upcoming changes to UserAssessment will make this type coercion unnecessary

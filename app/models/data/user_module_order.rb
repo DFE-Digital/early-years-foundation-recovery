@@ -30,7 +30,7 @@ module Data
 
       # @return [Hash{String => Integer}]
       def content_order
-        mods.map { |m| { m.name => m.position } }.reduce(&:merge)
+        mods.map { |m| [m.name, m.position] }.to_h
       end
 
       # users that started a new module since we permitted jumping around

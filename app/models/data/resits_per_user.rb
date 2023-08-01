@@ -1,13 +1,16 @@
 module Data
-  # 26-07-23
-  # 50k assessments > 20 min runtime
   class ResitsPerUser
     include ToCsv
 
     class << self
       # @return [Array<String>]
       def column_names
-        ['Module', 'User ID', 'Role', 'Resit Attempts']
+        [
+          'Module',
+          'User ID',
+          'Role',
+          'Resit Attempts',
+        ]
       end
 
       # @return [Array<Hash{Symbol => String,Integer}>]

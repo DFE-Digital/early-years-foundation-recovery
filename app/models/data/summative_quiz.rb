@@ -1,32 +1,31 @@
 module Data
   class SummativeQuiz
     class << self
-      # @param attribute [Symbol]
-      # @return [Hash{Symbol => Hash{Symbol => Numeric}}]
-      def attribute_pass_percentage(attribute)
-        grouped_assessments = user_summative_assessments.group(attribute).count
+      # @param user_attribute [Symbol]
+      # @return [Hash{Symbol => Hash}]
+      def pass_rate(user_attribute)
+        attribute_value_count = User.with_assessments.group(user_attribute).count
 
-        grouped_assessments.transform_values do |count|
-          pass_count = user_passed_assessments
-          .where(attribute => grouped_assessments.key(count)).count
-
-          pass_percentage = pass_count / count.to_f
-          fail_percentage = 1 - pass_percentage
-
-          { pass_percentage: pass_percentage, pass_count: pass_count, fail_percentage: fail_percentage, fail_count: count - pass_count }
+        attribute_value_count.transform_values do |total|
+          value = attribute_value_count.key(total)
+          pass = User.with_passing_assessments.where(user_attribute => value).count
+          pass_fail(total: total, pass: pass)
         end
       end
 
-    private
+      # @param total [Integer]
+      # @param pass [Integer]
+      # @return [Hash]
+      def pass_fail(total:, pass:)
+        pass_proportion = pass / total.to_f
+        fail_proportion = 1 - pass_proportion
 
-      # @return [ActiveRecord::Relation]
-      def user_summative_assessments
-        User.with_assessments.merge(UserAssessment.summative)
-      end
-
-      # @return [ActiveRecord::Relation]
-      def user_passed_assessments
-        User.with_assessments.merge(UserAssessment.summative.passes)
+        {
+          pass_percentage: pass_proportion,
+          pass_count: pass,
+          fail_percentage: fail_proportion,
+          fail_count: total - pass,
+        }
       end
     end
   end

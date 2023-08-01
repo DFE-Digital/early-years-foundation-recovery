@@ -25,18 +25,20 @@ module ToCsv
     # @return [String]
     def to_csv(batch_size: 1_000)
       puts "Starting #{name}.to_csv"
+      decorator = CoercionDecorator.new
 
       CSV.generate(headers: true) do |csv|
         csv << dashboard_headers
 
-        dashboard_rows =
-          if dashboard.is_a?(Array)
-            dashboard
-          else
-            dashboard.find_each(batch_size: batch_size).map(&:dashboard_row)
+        if dashboard.is_a?(Array)
+          dashboard.to_enum.each do |record|
+            csv << decorator.call(record).values
           end
-
-        CoercionDecorator.new.call(dashboard_rows) { |row| csv << row.values }
+        else
+          dashboard.find_each(batch_size: batch_size) do |record|
+            csv << decorator.call(record.dashboard_row).values
+          end
+        end
       end
     end
   end

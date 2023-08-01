@@ -117,7 +117,7 @@ RSpec.describe User, type: :model do
 
     it 'exports formatted attributes as CSV' do
       expect(described_class.to_csv(batch_size: 2)).to eq <<~CSV
-        id,local_authority,setting_type,role_type,registration_complete,private_beta_registration_complete,registration_complete_any,registered_at,module_1_time,module_2_time,module_3_time
+        id,local_authority,setting_type,role_type,registration_complete,private_beta_registration_complete,registration_complete_any?,registered_at,module_1_time,module_2_time,module_3_time
         1,Watford Borough Council,,Childminder,true,true,true,,4,2,0
         2,Leeds City Council,,Trainer or lecturer,true,false,true,,1,0,
         3,City of London,,Childminder,true,false,true,2023-01-12 10:15:59,3,,

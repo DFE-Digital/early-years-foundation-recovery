@@ -9,20 +9,20 @@ class User < ApplicationRecord
     role_type
     registration_complete
     private_beta_registration_complete
-    registration_complete_any
+    registration_complete_any?
     registered_at
   ].freeze
 
   # @return [Array<String>]
   def self.dashboard_headers
-    csv_headers =
+    module_times =
       if Rails.application.cms?
         Training::Module.ordered.reject(&:draft?).map { |mod| "module_#{mod.position}_time" }
       else
         TrainingModule.published.map { |mod| "module_#{mod.id}_time" }
       end
 
-    DASHBOARD_ATTRS + csv_headers
+    DASHBOARD_ATTRS + module_times
   end
 
   # Include default devise modules. Others available are:
@@ -39,8 +39,6 @@ class User < ApplicationRecord
   has_many :visits, class_name: 'Ahoy::Visit'
   has_many :events, class_name: 'Ahoy::Event'
   has_many :notes
-
-  # scope :dashboard, -> { where.not(closed_at: nil) }
 
   # TODO: use scope with email alert
   # created an account within public beta but still not using service
@@ -81,6 +79,9 @@ class User < ApplicationRecord
   scope :closed, -> { where.not(closed_at: nil) }
   scope :not_closed, -> { where(closed_at: nil) }
   scope :with_assessments, -> { joins(:user_assessments) }
+  scope :with_passing_assessments, -> { with_assessments.merge(UserAssessment.passes) }
+
+  scope :dashboard, -> { not_closed }
 
   validates :first_name, :last_name, :setting_type_id,
             presence: true,
@@ -215,7 +216,7 @@ class User < ApplicationRecord
   end
 
   # @return [Integer]
-  def modules_completed_count
+  def modules_completed
     module_time_to_completion.values.count(&:positive?)
   end
 
@@ -254,10 +255,12 @@ class User < ApplicationRecord
     end
   end
 
+  # @return [Boolean]
   def local_authority_setting?
     setting_type_id == 'local_authority'
   end
 
+  # @return [Boolean]
   def role_type_applicable?
     role_type != 'Not applicable'
   end
@@ -273,8 +276,8 @@ class User < ApplicationRecord
   end
 
   # @return [Boolean]
-  def registration_complete_any
-    !!private_beta_registration_complete || !!registration_complete
+  def registration_complete_any?
+    private_beta_registration_complete? || !!registration_complete
   end
 
   # @return [Datetime]

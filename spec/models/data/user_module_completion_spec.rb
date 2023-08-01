@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Data::UserModuleCompletion do
   let(:headers) do
-    %w[
-      Module
-      Count
-      Percentage
+    [
+      'Module Name',
+      'Completed Count',
+      'Completed Percentage',
     ]
   end
 
