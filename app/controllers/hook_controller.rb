@@ -58,10 +58,10 @@ private
   # @return [void]
   def check_new_modules
     mail_service = NudgeMail.new
-    existing_modules = TrainingModuleRecord.pluck(:module_id)
-    new_modules = Training::Module.ordered.reject { |mod| existing_modules.include?(mod.id) }.reject(&:draft?)
+    existing_modules = TrainingModuleRecord.all
+    new_modules = Training::Module.ordered.reject { |mod| existing_modules.pluck(:name).include?(mod.name) }.reject(&:draft?)
     new_modules.each do |mod|
-      unless TrainingModuleRecord.pluck(:name).include?(mod.name)
+      unless TrainingModuleRecord.pluck(:module_id).include?(mod.position)
         mail_service.new_module(mod)
         TrainingModuleRecord.create!(module_id: mod.position, name: mod.name)
       end
