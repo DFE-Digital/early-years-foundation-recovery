@@ -25,7 +25,7 @@ module Data
 
       # @return [Hash{Symbol => Integer}]
       def local_authority_count
-        public_beta_users.group(:local_authority).count
+        public_beta_users.group(:local_authority).count(:id)
       end
 
       # @return [User::ActiveRecord_Relation]

@@ -11,12 +11,12 @@ RSpec.describe Data::LocalAuthorityUser do
   let(:rows) do
     [
       {
-        local_authority: 'LA3',
-        users: 1,
-      },
-      {
         local_authority: 'LA1',
         users: 2,
+      },
+      {
+        local_authority: 'LA3',
+        users: 1,
       },
     ]
   end
