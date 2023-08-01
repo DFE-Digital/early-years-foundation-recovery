@@ -13,7 +13,7 @@ module Data
 
       # @return [Array<Hash>]
       def dashboard
-        local_authority_count.map do |authority, count|
+        authorities.map do |authority, count|
           {
             local_authority: authority,
             users: count,
@@ -24,8 +24,8 @@ module Data
     private
 
       # @return [Hash{Symbol => Integer}]
-      def local_authority_count
-        public_beta_users.group(:local_authority).count(:id)
+      def authorities
+        public_beta_users.group(:local_authority).order(:local_authority).count
       end
 
       # @return [User::ActiveRecord_Relation]
