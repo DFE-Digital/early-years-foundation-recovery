@@ -105,7 +105,7 @@ As above replace `http://localhost:3000` with `https://ey-recovery-staging.londo
 - Content length: enabled
 - Payload: default
 
-**1. Preview**
+**1. Preview (all content)**
 
 - Name: `Autosave content for Staging (preview)`
 - Filters: `sys.environment.sys.id` equals `staging`
@@ -113,7 +113,7 @@ As above replace `http://localhost:3000` with `https://ey-recovery-staging.londo
 - Content events triggers: `Autosave` of `Entry` or `Asset`
 - Other API events: N/A
 
-**2. Release**
+**2. Release (training)**
 
 - Name: `Release content for Production (delivery)`
 - Filters: `sys.environment.sys.id` equals `master`
@@ -121,10 +121,10 @@ As above replace `http://localhost:3000` with `https://ey-recovery-staging.londo
 - Content events triggers: N/A
 - Other API events: `Release` action `Execute`
 
-**3. Stand-alone Page Publishing**
+**3. Publish (non-training)**
 
 - Name: `Publish stand-alone pages for Production (delivery)`
-- Filters: `sys.environment.sys.id` equals `master` and `sys.contentType.sys.id` equals `static`
+- Filters: `sys.environment.sys.id` equals `master` and `sys.contentType.sys.id` in `static` or `resource`
 - URL: `POST` to `https://ey-recovery.london.cloudapps.digital/change`
 - Content events triggers: `Publish` of `Entry` if `static`
 - Other API events: N/A
