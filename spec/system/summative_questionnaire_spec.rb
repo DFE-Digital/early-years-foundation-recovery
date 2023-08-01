@@ -7,7 +7,7 @@ RSpec.describe 'Summative questionnaire' do
   let(:first_question_path) { '/modules/alpha/questionnaires/1-3-2-1' }
 
   before do
-    skip 'DEPRECATED' if Rails.application.cms?
+    skip 'YAML ONLY' if Rails.application.cms?
     start_summative_assessment(alpha)
   end
 

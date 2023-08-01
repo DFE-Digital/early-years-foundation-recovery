@@ -9,7 +9,7 @@ RSpec.describe ModuleOverviewDecorator do
   include_context 'with progress'
 
   before do
-    skip 'DEPRECATED' if Rails.application.cms?
+    skip 'YAML ONLY' if Rails.application.cms?
   end
 
   describe '#call_to_action' do

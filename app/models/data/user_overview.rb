@@ -22,7 +22,6 @@ module Data
           'User Defined Roles',
           'Started Learning',
           'Not Started Learning',
-          'Following Linear Sequence',
           'With Notes',
           'With Notes Percentage',
           'Without Notes',
@@ -49,7 +48,6 @@ module Data
           user_defined_roles: User.all.collect(&:role_type_other).uniq.count,
           started_learning: started_learning,
           not_started_learning: not_started_learning,
-          following_linear_sequence: following_linear_sequence,
           with_notes: with_notes_count,
           with_notes_percentage: with_notes_percentage,
           without_notes: without_notes_count,
@@ -57,7 +55,7 @@ module Data
         }]
       end
 
-  private
+    private
 
       # @return [Float]
       def with_notes_percentage
@@ -74,20 +72,16 @@ module Data
         User.not_closed.without_notes.count
       end
 
+      # @note Ahoy::Event.module_start.distinct.count(:user_id)
       # @return [Integer]
       def started_learning
-        User.all.map { |u| u.module_time_to_completion.keys }.count(&:present?)
+        User.all.count { |u| !u.module_time_to_completion.empty? }
       end
 
       # @return [Integer]
       def not_started_learning
-        User.all.map { |u| u.module_time_to_completion.keys }.count(&:empty?)
+        User.all.count { |u| u.module_time_to_completion.empty? }
       end
-
-      # @return [Integer]
-      def following_linear_sequence
-        User.all.count(&:following_linear_sequence?)
-      end
-  end
+    end
   end
 end

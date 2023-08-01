@@ -9,7 +9,7 @@ RSpec.describe ContentfulModuleOverviewDecorator do
   include_context 'with progress'
 
   before do
-    skip 'WIP' unless Rails.application.cms?
+    skip 'CMS ONLY' unless Rails.application.cms?
   end
 
   describe '#call_to_action' do

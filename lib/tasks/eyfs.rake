@@ -84,4 +84,15 @@ namespace :eyfs do
       ContentSeed.new(mod: mod, user: user).call
     end
   end
+
+  namespace :dashboard do
+    desc 'Summarise the dashboard datasets'
+    task summary: :environment do |_task, _args|
+      Dashboard::DATA_SOURCES.map do |source|
+        name = source[:model]
+        records = name.constantize.dashboard.count
+        puts "#{name}: #{records}"
+      end
+    end
+  end
 end

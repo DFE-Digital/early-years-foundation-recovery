@@ -2,7 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Data::HighFailQuestions do
   let(:headers) do
-    ['Module', 'Question', 'Failure Rate Percentage']
+    [
+      'Module',
+      'Question',
+      'Failure Rate Percentage',
+    ]
   end
 
   let(:rows) do
@@ -27,5 +31,5 @@ RSpec.describe Data::HighFailQuestions do
     create(:user_answer, :incorrect, :questionnaire, :summative, module: 'module_1', name: 'q2')
   end
 
-  it_behaves_like('a data export model')
+  it_behaves_like 'a data export model'
 end

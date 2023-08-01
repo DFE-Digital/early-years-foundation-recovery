@@ -10,7 +10,7 @@ RSpec.describe ModuleProgressBarDecorator do
   let(:attribute) { decorator.nodes.map { |node| node[key] } }
 
   before do
-    skip 'DEPRECATED' if Rails.application.cms?
+    skip 'YAML ONLY' if Rails.application.cms?
   end
 
   describe '#nodes' do
