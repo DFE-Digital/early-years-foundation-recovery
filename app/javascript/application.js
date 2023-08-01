@@ -1,11 +1,12 @@
 import "@hotwired/turbo-rails";
 import "@fortawesome/fontawesome-free/js/all";
+import './dfefrontend';
 
 import TimeoutWarning from "./timeout-warning";
 
 import "./controllers";
 
-import { initAll } from "govuk-frontend";
+/* import { initAll } from "govuk-frontend";
 
 import "govuk-frontend/govuk/vendor/polyfills/Function/prototype/bind";
 import "govuk-frontend/govuk/vendor/polyfills/Element/prototype/classList";
@@ -19,7 +20,7 @@ function nodeListForEach (nodes, callback) {
   }
 }
 
-
+*/
 
 /*
 Govuk Accordion component suffers from lag without the turbo listener
