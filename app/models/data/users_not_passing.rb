@@ -5,7 +5,10 @@ module Data
     class << self
       # @return [Array<String>]
       def column_names
-        ['Module', 'Total Users Not Passing']
+        [
+          'Module',
+          'Total Users Not Passing',
+        ]
       end
 
       # @return [Array<Hash{Symbol => Mixed}>]
@@ -18,7 +21,7 @@ module Data
         end
       end
 
-  private
+    private
 
       # @return [Hash{String => Integer}]
       def total_users_not_passing_per_module
@@ -29,6 +32,6 @@ module Data
           .group_by { |(module_name, _), _| module_name }
           .transform_values(&:size)
       end
-  end
+    end
   end
 end

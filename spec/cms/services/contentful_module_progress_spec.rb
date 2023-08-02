@@ -4,7 +4,7 @@ RSpec.describe ContentfulModuleProgress, :cms do
   subject(:progress) { described_class.new(user: user, mod: alpha) }
 
   before do
-    skip 'WIP' unless Rails.application.cms?
+    skip 'CMS ONLY' unless Rails.application.cms?
   end
 
   include_context 'with progress'

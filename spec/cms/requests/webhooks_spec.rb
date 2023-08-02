@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Webhooks', :cms, type: :request do
   before do
-    skip 'WIP' unless Rails.application.cms?
+    skip 'CMS ONLY' unless Rails.application.cms?
   end
 
   let(:headers) do

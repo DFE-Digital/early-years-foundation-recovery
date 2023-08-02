@@ -10,7 +10,7 @@ RSpec.describe Training::Question, :cms, type: :model do
   end
 
   before do
-    skip 'WIP' unless Rails.application.cms?
+    skip 'CMS ONLY' unless Rails.application.cms?
   end
 
   describe 'CMS fields' do

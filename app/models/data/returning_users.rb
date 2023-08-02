@@ -1,6 +1,7 @@
 module Data
   class ReturningUsers
     include ToCsv
+
     class << self
       # @return [Array<String>]
       def column_names

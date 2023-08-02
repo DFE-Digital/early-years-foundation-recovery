@@ -12,7 +12,7 @@ RSpec.describe Response, :cms, type: :model do
   let(:user) { create :user, :registered }
 
   before do
-    skip 'WIP' unless Rails.application.cms?
+    skip 'CMS ONLY' unless Rails.application.cms?
   end
 
   context 'with radio buttons' do

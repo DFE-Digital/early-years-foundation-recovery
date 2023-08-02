@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'ContentPages', type: :request do
   before do
-    skip 'WIP' if Rails.application.cms?
+    skip 'YAML ONLY' if Rails.application.cms?
 
     sign_in create(:user, :registered)
   end

@@ -15,6 +15,8 @@ RSpec.describe Data::ReturningUsers do
     ]
   end
 
+  let(:user) { create :user, :registered }
+
   before do
     Ahoy::Visit.create!(id: 1, user_id: 1, started_at: Time.zone.today.last_week)
     Ahoy::Visit.create!(id: 2, user_id: 1, started_at: Time.zone.today.last_week)
@@ -24,5 +26,5 @@ RSpec.describe Data::ReturningUsers do
     Ahoy::Visit.create!(id: 6, user_id: 1, started_at: Time.zone.today.beginning_of_quarter)
   end
 
-  it_behaves_like('a data export model')
+  it_behaves_like 'a data export model'
 end

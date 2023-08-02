@@ -95,10 +95,10 @@ RSpec.describe Data::ModuleOverview do
   end
 
   before do
-    create(:user, :registered, module_time_to_completion: { 'alpha' => 0, 'bravo' => 0, 'charlie' => 0 })
-    create(:user, :registered, module_time_to_completion: { 'alpha' => 0, 'bravo' => 0, 'charlie' => 0 })
-    create(:user, :registered, module_time_to_completion: { 'alpha' => 0, 'bravo' => 0, 'charlie' => 0 })
+    create :user, :registered, module_time_to_completion: { alpha: 0, bravo: 0, charlie: 0 }
+    create :user, :registered, module_time_to_completion: { alpha: 0, bravo: 0, charlie: 0 }
+    create :user, :registered, module_time_to_completion: { alpha: 0, bravo: 0, charlie: 0 }
   end
 
-  it_behaves_like('a data export model')
+  it_behaves_like 'a data export model'
 end
