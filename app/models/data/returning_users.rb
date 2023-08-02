@@ -11,34 +11,37 @@ module Data
       def dashboard
         [
           {
-            weekly_returning_users: weekly_returning_users,
-            monthly_returning_users: monthly_returning_users,
-            quarterly_returning_users: quarterly_returning_users,
+            weekly_returning_users: weekly,
+            monthly_returning_users: monthly,
+            quarterly_returning_users: quarterly,
           },
         ]
       end
 
     private
 
+      # @param previous [Range]
+      # @param current [Range]
       # @return [Integer]
-      def weekly_returning_users
-        current_week_visits = Ahoy::Visit.where(started_at: Time.zone.today.last_week.beginning_of_week..Time.zone.today.last_week.end_of_week)
-        returning_users = current_week_visits.group(:user_id).having('count(user_id) > 1').count
-        returning_users.count
+      def count(time_range)
+        visits = Ahoy::Visit.where(started_at: time_range)
+        visits.group(:user_id).having('count(user_id) > 1').count.size
       end
 
       # @return [Integer]
-      def monthly_returning_users
-        current_month_visits = Ahoy::Visit.where(started_at: Time.zone.today.last_month.beginning_of_month..Time.zone.today.last_month.end_of_month)
-        returning_users = current_month_visits.group(:user_id).having('count(user_id) > 1').count
-        returning_users.count
+      def weekly
+        count(Time.zone.today.last_week.beginning_of_week..Time.zone.today.last_week.end_of_week)
       end
 
       # @return [Integer]
-      def quarterly_returning_users
-        current_quarter_visits = Ahoy::Visit.where(started_at: Time.zone.today.beginning_of_quarter..Time.zone.today)
-        returning_users = current_quarter_visits.group(:user_id).having('count(user_id) > 1').count
-        returning_users.count
+      def monthly
+        count(Time.zone.today.last_month.beginning_of_month..Time.zone.today.last_month.end_of_month)
+      end
+
+      # @return [Integer]
+      def quarterly
+        current = Time.zone.today.beginning_of_quarter
+        count(current..Time.zone.now)
       end
     end
   end
