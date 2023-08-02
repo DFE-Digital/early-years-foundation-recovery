@@ -1,11 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Data::SettingPassRate do
-  let(:user_1) { create(:user, :registered, :agency_setting) }
-  let(:user_2) { create(:user, :registered, :agency_setting) }
-
   let(:headers) do
-    ['Setting', 'Average Pass Percentage', 'Pass Count', 'Average Fail Percentage', 'Fail Count']
+    [
+      'Setting',
+      'Pass Percentage',
+      'Pass Count',
+      'Fail Percentage',
+      'Fail Count',
+    ]
   end
 
   let(:rows) do
@@ -19,6 +22,9 @@ RSpec.describe Data::SettingPassRate do
       },
     ]
   end
+
+  let(:user_1) { create(:user, :registered, :agency_setting) }
+  let(:user_2) { create(:user, :registered, :agency_setting) }
 
   before do
     create(:user_assessment, :passed, user_id: user_1.id, score: 100, module: 'module_1')

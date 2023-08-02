@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'ContentPages', :cms, type: :request do
   before do
     sign_in create(:user, :registered)
-    skip 'WIP' unless Rails.application.cms?
+    skip 'CMS ONLY' unless Rails.application.cms?
   end
 
   describe 'GET /modules/:training_module_id/content-pages' do

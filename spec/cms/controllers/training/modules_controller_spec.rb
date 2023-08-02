@@ -4,7 +4,7 @@ RSpec.describe Training::ModulesController, :cms, type: :controller do
   # Using a controller spec as need to access session to test timeout
   describe 'user timeout' do
     before do
-      skip 'WIP' unless Rails.application.cms?
+      skip 'CMS ONLY' unless Rails.application.cms?
 
       sign_in create(:user, :registered, :emails_opt_in)
     end

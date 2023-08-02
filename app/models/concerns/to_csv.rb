@@ -3,39 +3,49 @@ require 'csv'
 module ToCsv
   extend ActiveSupport::Concern
 
+  class ExportError < StandardError
+  end
+
   class_methods do
-    # Returns an array of strings representing the column names for the data export
     # @return [Array<String>]
-    def column_names
-      super
-    rescue NoMethodError
-      raise NoMethodError, 'ToCsv.to_csv a column names method must be defined for bespoke data export models to serve as csv column headers'
+    def dashboard_headers
+      column_names
+    rescue NoMethodError, NameError
+      raise ExportError, "#{name}.dashboard_headers is required for bespoke models"
     end
 
-    # Returns an array of hashes representing the rows of data to be exported or an ActiveRecord::Relation
     # @return [ActiveRecord::Relation, Array<Hash{Symbol => Mixed}>]
     def dashboard
       all
     rescue NoMethodError
-      raise NoMethodError, 'ToCsv.to_csv a dashboard method must be defined for bespoke data export models to serve as csv data'
+      raise ExportError, "#{name}.dashboard is required for bespoke models"
     end
 
-    # @return [String]
     # @param batch_size [Integer]
+    # @return [String]
     def to_csv(batch_size: 1_000)
-      CSV.generate(headers: true) do |csv|
-        csv << column_names
+      puts "Starting #{name}.to_csv"
+      decorator = CoercionDecorator.new
 
-        unformatted = dashboard.is_a?(Array) ? dashboard : dashboard.find_each(batch_size: batch_size).map(&:dashboard_attributes)
-        formatted = CoercionDecorator.new(unformatted).call
-        formatted.each { |row| csv << row.values }
+      CSV.generate(headers: true) do |csv|
+        csv << dashboard_headers
+
+        if dashboard.is_a?(Array)
+          dashboard.to_enum.each do |record|
+            csv << decorator.call(record).values
+          end
+        else
+          dashboard.find_each(batch_size: batch_size) do |record|
+            csv << decorator.call(record.dashboard_row).values
+          end
+        end
       end
     end
   end
 
   included do
-    # @return [Hash] default to database fields
-    def dashboard_attributes
+    # @return [Hash]
+    def dashboard_row
       attributes
     end
   end

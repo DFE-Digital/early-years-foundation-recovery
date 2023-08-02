@@ -5,7 +5,11 @@ module Data
     class << self
       # @return [Array<String>]
       def column_names
-        ['Module', 'Question', 'Failure Rate Percentage']
+        [
+          'Module',
+          'Question',
+          'Failure Rate Percentage',
+        ]
       end
 
       # @return [Array<Hash{Symbol => Mixed}>]
@@ -46,7 +50,7 @@ module Data
           total_count = question_attempts[[module_name, question_name]]
           fail_rate = fail_count / total_count
 
-          if fail_rate > average_fail_rate
+          if fail_rate >= average_fail_rate
             high_fail_questions[[module_name, question_name]] = fail_rate.to_f
           end
         end

@@ -6,7 +6,7 @@ RSpec.describe ContentfulAssessmentProgress do
   include_context 'with progress'
 
   before do
-    skip 'WIP' unless Rails.application.cms?
+    skip 'CMS ONLY' unless Rails.application.cms?
 
     questions.each do |question_name, answers|
       if ENV['DISABLE_USER_ANSWER'].present?

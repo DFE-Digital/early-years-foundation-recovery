@@ -10,7 +10,7 @@ RSpec.describe ContentfulModuleProgressBarDecorator do
   let(:attribute) { decorator.nodes.map { |node| node[key] } }
 
   before do
-    skip 'WIP' unless Rails.application.cms?
+    skip 'CMS ONLY' unless Rails.application.cms?
   end
 
   describe '#nodes' do
