@@ -112,7 +112,7 @@ module EarlyYearsFoundationRecovery
 
     # @return [Boolean]
     def debug?
-      Rails.env.development? || review?
+      Rails.env.development?
     end
 
     # @return [ActiveSupport::TimeWithZone]
