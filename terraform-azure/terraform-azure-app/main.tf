@@ -14,6 +14,11 @@ resource "azurerm_container_group" "app_worker" {
     memory                = "2.0"
     environment_variables = var.app_worker_environment_variables
     commands              = var.app_worker_startup_command
+
+    ports {
+      port     = 80
+      protocol = "TCP"
+    }
   }
 
   diagnostics {

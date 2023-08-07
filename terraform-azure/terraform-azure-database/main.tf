@@ -18,6 +18,14 @@ resource "azurerm_postgresql_flexible_server" "psqlfs" {
   backup_retention_days        = 7
   geo_redundant_backup_enabled = var.psqlfs_geo_redundant_backup
 
+  dynamic "high_availability" {
+    for_each = var.psqlfs_ha_enabled ? [1] : []
+    content {
+      mode                      = "SameZone"
+      standby_availability_zone = "1"
+    }
+  }
+
   lifecycle {
     ignore_changes = [tags]
   }
