@@ -214,7 +214,6 @@ class User < ApplicationRecord
     !module_time_to_completion.empty?
   end
 
-
   # @return [Boolean]
   def course_in_progress?
     course_started? && !module_time_to_completion.values.all?(&:positive?)
