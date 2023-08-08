@@ -236,10 +236,10 @@ GEM
       nokogiri (~> 1.12)
       rinku (~> 2.0)
       sanitize (~> 6)
-    govuk-components (4.0.0)
+    govuk-components (4.1.0)
       html-attributes-utils (~> 1.0.0, >= 1.0.0)
       pagy (~> 6.0)
-      view_component (~> 3.0.0)
+      view_component (~> 3.3.0)
     govuk_app_config (8.0.2)
       logstasher (~> 2.1)
       plek (>= 4, < 6)
@@ -272,7 +272,7 @@ GEM
       combine_pdf (~> 1.0)
       nokogiri (~> 1.0)
     hashie (5.0.0)
-    html-attributes-utils (1.0.0)
+    html-attributes-utils (1.0.2)
       activesupport (>= 6.1.4.4)
     htmlentities (4.3.4)
     http (4.4.1)
@@ -322,7 +322,8 @@ GEM
     memoist (0.16.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
-    minitest (5.18.1)
+    mini_portile2 (2.8.4)
+    minitest (5.19.0)
     msgpack (1.6.0)
     multi_json (1.15.0)
     net-imap (0.3.6)
@@ -335,6 +336,9 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
+    nokogiri (1.15.3)
+      mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
     nokogiri (1.15.3-aarch64-linux)
       racc (~> 1.4)
     nokogiri (1.15.3-arm64-darwin)
@@ -562,7 +566,7 @@ GEM
     unf_ext (0.0.8.2)
     unicode-display_width (2.4.2)
     uri (0.12.2)
-    view_component (3.0.0)
+    view_component (3.3.0)
       activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
@@ -593,6 +597,7 @@ PLATFORMS
   arm64-darwin-20
   arm64-darwin-21
   arm64-darwin-22
+  ruby
   x86_64-darwin-19
   x86_64-darwin-20
   x86_64-darwin-21
