@@ -1,23 +1,23 @@
 - content_for(:head) do
   = tag.meta name: 'turbo-visit-control', content: 'reload'
 
-= govuk_back_link text: 'Back to My modules', href: my_modules_path
-
 = render 'editor_tools'
 
 = render 'learning/cms_debug'
 
-.light-grey-box
-  .govuk-grid-row
-    .govuk-grid-column-full
+- content_for :hero do 
+  = govuk_back_link text: 'Back to My modules', href: my_modules_path
+
+  div class='govuk-grid-row govuk-!-padding-top-9 govuk-!-padding-bottom-0'
+    .govuk-grid-column-three-quarters
       h1.govuk-heading-l= mod.card_title
       = translate_markdown mod.description
 
-      p.govuk-body This module covers:
-      = translate_markdown mod.criteria
+p.govuk-body This module covers:
+= translate_markdown mod.criteria
 
-      - module_progress.call_to_action do |state, page|
-        = cms_link_to_action(state, page)
+- module_progress.call_to_action do |state, page|
+  = cms_link_to_action(state, page)
 
 h2.govuk-heading-m
   | Your module progress

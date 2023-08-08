@@ -16,7 +16,7 @@ RSpec.describe 'Whats new page' do
       let(:user) { create :user, :registered, :display_whats_new }
 
       it "does not visit what's new page after sign in" do
-        click_on 'Sign out'
+        click_on 'sign-out-desktop'
 
         visit '/users/sign-in'
         fill_in 'Email address', with: user.email

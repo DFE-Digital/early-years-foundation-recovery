@@ -121,7 +121,9 @@ module EarlyYearsFoundationRecovery
 
     # @return [Boolean]
     def debug?
-      Rails.env.development? || ENV['DEBUG'].present?
+      return ENV['DEBUG'] if ENV['DEBUG'].present?
+
+      Rails.env.development?
     end
 
     # @return [ActiveSupport::TimeWithZone]
