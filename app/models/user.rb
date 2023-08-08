@@ -218,6 +218,7 @@ class User < ApplicationRecord
   # @return [Boolean]
   def course_in_progress?
     course_started? && !module_time_to_completion.values.all?(&:positive?)
+  end
 
   # @param module_name [String]
   # @return [Boolean]
