@@ -87,11 +87,11 @@ RSpec.describe NudgeMail do
 
     it 'The notify mailer is called with the correct users' do
       nudge_mail.call
-      expect(NotifyMailer).to have_received(:continue_training).with(user_2, TrainingModule.find_by(name: 'alpha')).once
-      expect(NotifyMailer).to have_received(:continue_training).with(user_3, TrainingModule.find_by(name: 'alpha')).once
-      expect(NotifyMailer).not_to have_received(:continue_training).with(user_1, TrainingModule.find_by(name: 'alpha'))
-      expect(NotifyMailer).not_to have_received(:continue_training).with(user_4, TrainingModule.find_by(name: 'alpha'))
-      expect(NotifyMailer).not_to have_received(:continue_training).with(user_5, TrainingModule.find_by(name: 'alpha'))
+      expect(NotifyMailer).to have_received(:continue_training).with(user_2, Training::Module.by_name('alpha')).once
+      expect(NotifyMailer).to have_received(:continue_training).with(user_3, Training::Module.by_name('alpha')).once
+      expect(NotifyMailer).not_to have_received(:continue_training).with(user_1, Training::Module.by_name('alpha'))
+      expect(NotifyMailer).not_to have_received(:continue_training).with(user_4, Training::Module.by_name('alpha'))
+      expect(NotifyMailer).not_to have_received(:continue_training).with(user_5, Training::Module.by_name('alpha'))
     end
   end
 end

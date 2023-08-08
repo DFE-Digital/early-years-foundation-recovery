@@ -84,7 +84,7 @@ class User < ApplicationRecord
   scope :unconfirmed, -> { where(confirmed_at: nil) }
   scope :locked_out, -> { where.not(locked_at: nil) }
   scope :since_public_beta, -> { where(created_at: Rails.application.public_beta_launch_date..Time.zone.now) }
-  scope :month_old, -> { where(confirmed_at: 4.weeks.ago.beginning_of_day..4.weeks.ago.end_of_day) }
+  scope :month_old_confirmation, -> { where(confirmed_at: 4.weeks.ago.beginning_of_day..4.weeks.ago.end_of_day) }
   scope :with_local_authority, -> { where.not(local_authority: nil) }
   scope :with_notes, -> { joins(:notes).distinct.select(&:has_notes?) }
   scope :not_started_training, -> { reject(&:course_started?) }
@@ -350,6 +350,11 @@ class User < ApplicationRecord
   # @return [Boolean]
   def module_completed?(module_name)
     module_time_to_completion[module_name].present? && module_time_to_completion[module_name].positive?
+  end
+
+  # @return [Training::Module]
+  def modules_in_progress
+    module_time_to_completion.select { |_k, v| v.zero? }.keys.map { |mod_name| Training::Module.by_name(mod_name) }
   end
 
 private

@@ -10,12 +10,12 @@ private
 
   # @return [ActiveRecord::Relation]
   def complete_registration_recipients
-    User.training_email_recipients.month_old.registration_incomplete
+    User.training_email_recipients.month_old_confirmation.registration_incomplete
   end
 
   # @return [ActiveRecord::Relation]
   def start_training_recipients
-    User.training_email_recipients.month_old.registration_complete.not_started_training
+    User.training_email_recipients.month_old_confirmation.registration_complete.not_started_training
   end
 
   # @return [Array<User>]
@@ -28,7 +28,6 @@ private
   # @param user [User]
   # @return [Training::Module]
   def module_in_progress(user)
-    mod_name = user.module_time_to_completion.find { |_k, v| v.zero? }.first
-    TrainingModule.find_by(name: mod_name)
+    user.modules_in_progress.first
   end
 end
