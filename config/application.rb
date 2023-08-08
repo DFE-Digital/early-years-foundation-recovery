@@ -121,7 +121,7 @@ module EarlyYearsFoundationRecovery
 
     # @return [Boolean]
     def debug?
-      return ENV['DEBUG'] if ENV['DEBUG'].present?
+      return ENV['DEBUG'] == 'true' if ENV['DEBUG'].present?
 
       Rails.env.development?
     end
