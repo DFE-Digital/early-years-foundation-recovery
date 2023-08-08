@@ -16,7 +16,7 @@ RSpec.describe 'Application configuration' do
   end
 
   it 'exports dashboard statistics daily at midnight' do
-    expect(config.dashboard_update_interval).to eq '0 12 * * *'
+    expect(config.dashboard_update_interval).to eq '0 0 * * *'
   end
 
   describe 'time out' do
