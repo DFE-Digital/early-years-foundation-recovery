@@ -24,6 +24,7 @@ resource "azurerm_resource_group" "rg" {
 module "network" {
   source = "./terraform-azure-network"
 
+  environment          = var.environment
   location             = var.azure_region
   resource_group       = azurerm_resource_group.rg.name
   resource_name_prefix = var.resource_name_prefix
@@ -43,6 +44,7 @@ module "database" {
   psqlfs_username             = var.psqlfs_username
   psqlfs_password             = var.psqlfs_password
   psqlfs_geo_redundant_backup = var.psqlfs_geo_redundant_backup
+  psqlfs_ha_enabled           = var.psqlfs_ha_enabled
   depends_on                  = [module.network]
 }
 
@@ -51,6 +53,7 @@ module "webapp" {
   source = "./terraform-azure-web"
 
   asp_sku                                  = var.asp_sku
+  webapp_worker_count                      = var.webapp_worker_count
   location                                 = var.azure_region
   resource_group                           = azurerm_resource_group.rg.name
   resource_name_prefix                     = var.resource_name_prefix
@@ -73,12 +76,33 @@ module "app-worker" {
   resource_group                   = azurerm_resource_group.rg.name
   resource_name_prefix             = "${var.resource_name_prefix}-worker"
   app_worker_subnet_id             = module.network.app_worker_subnet_id
-  app_worker_name                  = "eyrecovery-worker"
-  container_name                   = "eyrecovery-worker"
+  app_worker_name                  = var.workerapp_name
+  container_name                   = var.workerapp_name
   app_worker_environment_variables = local.app_worker_environment_variables
   app_worker_docker_image          = var.webapp_docker_image
   app_worker_docker_image_tag      = var.webapp_docker_image_tag
   app_worker_docker_registry       = "ghcr.io"
   app_worker_startup_command       = ["bundle", "exec", "que"]
   depends_on                       = [module.network, module.database]
+}
+
+# Create Review Application resources
+module "review-apps" {
+  source = "./terraform-azure-review"
+  # Review Applications are only deployed to the Development subscription
+  count = var.environment == "development" ? 1 : 0
+
+  asp_sku                                  = "P1v2"
+  location                                 = var.azure_region
+  resource_group                           = azurerm_resource_group.rg.name
+  resource_name_prefix                     = "${var.resource_name_prefix}-review"
+  webapp_vnet_name                         = module.network.vnet_name
+  webapp_name                              = var.reviewapp_name
+  webapp_app_settings                      = local.reviewapp_app_settings
+  webapp_docker_image                      = var.webapp_docker_image
+  webapp_docker_image_tag                  = var.webapp_docker_image_tag
+  webapp_docker_registry_url               = var.webapp_docker_registry_url
+  webapp_health_check_path                 = "/health"
+  webapp_health_check_eviction_time_in_min = 10
+  depends_on                               = [module.network, module.database]
 }

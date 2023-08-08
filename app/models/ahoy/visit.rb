@@ -7,4 +7,5 @@ class Ahoy::Visit < ApplicationRecord
   belongs_to :user, optional: true
 
   scope :month_old, -> { where(started_at: 4.weeks.ago.beginning_of_day..4.weeks.ago.end_of_day) }
+  scope :dashboard, -> { where.not(referrer: nil) }
 end

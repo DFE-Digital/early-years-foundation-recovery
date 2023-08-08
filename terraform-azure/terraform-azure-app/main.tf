@@ -3,7 +3,7 @@ resource "azurerm_container_group" "app_worker" {
   name                = var.app_worker_name
   location            = var.location
   resource_group_name = var.resource_group
-  ip_address_type     = "None"
+  ip_address_type     = "Private"
   os_type             = "Linux"
   restart_policy      = "OnFailure"
 
@@ -14,6 +14,11 @@ resource "azurerm_container_group" "app_worker" {
     memory                = "2.0"
     environment_variables = var.app_worker_environment_variables
     commands              = var.app_worker_startup_command
+
+    ports {
+      port     = 80
+      protocol = "TCP"
+    }
   }
 
   diagnostics {
@@ -24,6 +29,10 @@ resource "azurerm_container_group" "app_worker" {
   }
 
   subnet_ids = [var.app_worker_subnet_id]
+
+  lifecycle {
+    ignore_changes = [container, tags]
+  }
 
   #checkov:skip=CKV2_AZURE_28:Using VNet
 }

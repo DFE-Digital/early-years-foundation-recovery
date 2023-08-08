@@ -42,7 +42,13 @@ variable "psqlfs_password" {
 
 variable "psqlfs_geo_redundant_backup" {
   default     = false
-  description = "Geo-redundant backup storage enabled"
+  description = "Geo-redundant backup storage enabled for the Database Server"
+  type        = bool
+}
+
+variable "psqlfs_ha_enabled" {
+  default     = false
+  description = "Enable high availability for the Database Server"
   type        = bool
 }
 
@@ -52,8 +58,24 @@ variable "asp_sku" {
   type        = string
 }
 
+variable "webapp_worker_count" {
+  default     = 1
+  description = "Number of Workers for the App Service Plan"
+  type        = string
+}
+
 variable "webapp_name" {
   description = "Name for the Web Application"
+  type        = string
+}
+
+variable "workerapp_name" {
+  description = "Name for the Background Worker Application"
+  type        = string
+}
+
+variable "reviewapp_name" {
+  description = "Name for the Review Application"
   type        = string
 }
 

@@ -4,7 +4,7 @@ RSpec.describe 'Contentful configuration', :cms do
   subject(:config) { EarlyYearsFoundationRecovery::Application.config }
 
   before do
-    skip 'WIP' unless Rails.application.cms?
+    skip 'CMS ONLY' unless Rails.application.cms?
   end
 
   it 'tests against CMS content' do

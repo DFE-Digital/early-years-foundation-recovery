@@ -49,3 +49,8 @@ variable "psqlfs_geo_redundant_backup" {
   description = "Geo-redundant backup storage enabled"
   type        = bool
 }
+
+variable "psqlfs_ha_enabled" {
+  description = "Enable high availability"
+  type        = bool
+}

@@ -129,5 +129,10 @@ module EarlyYearsFoundationRecovery
     def public_beta_launch_date
       Time.zone.local(2023, 2, 9, 15, 0, 0)
     end
+
+    # @return [ActiveSupport::TimeWithZone]
+    def non_linear_launch_date
+      Time.zone.local(2023, 7, 10, 15, 43, 0)
+    end
   end
 end

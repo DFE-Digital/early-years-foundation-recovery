@@ -18,18 +18,13 @@ variable "asp_sku" {
   type        = string
 }
 
-variable "webapp_worker_count" {
-  description = "Number of Workers for the App Service Plan"
-  type        = string
-}
-
 variable "webapp_name" {
   description = "Name for the Web Application"
   type        = string
 }
 
-variable "webapp_subnet_id" {
-  description = "ID of the delegated Subnet for the Web Application"
+variable "webapp_vnet_name" {
+  description = "Name of the Virtual Network to integrate into the Web Application"
   type        = string
 }
 

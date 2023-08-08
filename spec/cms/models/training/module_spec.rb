@@ -4,7 +4,7 @@ RSpec.describe Training::Module, :cms, type: :model do
   subject(:mod) { described_class.by_name(:alpha) }
 
   before do
-    skip 'WIP' unless Rails.application.cms?
+    skip 'CMS ONLY' unless Rails.application.cms?
   end
 
   describe '.cache_key' do

@@ -19,5 +19,9 @@ FactoryBot.define do
     trait :summative do
       assessments_type { 'summative_assessment' }
     end
+
+    trait :confidence do
+      assessments_type { 'confidence_check' }
+    end
   end
 end

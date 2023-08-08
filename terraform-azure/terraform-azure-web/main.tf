@@ -5,6 +5,7 @@ resource "azurerm_service_plan" "asp" {
   resource_group_name = var.resource_group
   os_type             = "Linux"
   sku_name            = var.asp_sku
+  worker_count        = var.webapp_worker_count
 
   lifecycle {
     ignore_changes = [tags]
@@ -136,6 +137,10 @@ resource "azurerm_monitor_diagnostic_setting" "webapp_logs_monitor" {
     category = "AppServicePlatformLogs"
   }
 
+  timeouts {
+    read = "30m"
+  }
+
   lifecycle {
     ignore_changes = [metric]
   }
@@ -152,6 +157,10 @@ resource "azurerm_monitor_diagnostic_setting" "webapp_slot_logs_monitor" {
 
   enabled_log {
     category = "AppServicePlatformLogs"
+  }
+
+  timeouts {
+    read = "30m"
   }
 
   lifecycle {
