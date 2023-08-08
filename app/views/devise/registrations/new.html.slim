@@ -5,7 +5,7 @@
     = f.govuk_error_summary
     = f.govuk_fieldset legend: { text: "Create an #{service_name} account" } do
       p.govuk-body
-        | Create an account to access training courses.
+        | Create an account to access the training course.
 
       = f.govuk_email_field :email, autofocus: true, autocomplete: 'email', label: { text: t('helpers.label.user.email') }, hint: { text: "We'll send you an email with an account activation link." }
       = f.govuk_password_field :password, label: { text: 'Create password' }, hint: { text: t('password.hardness', length: @minimum_password_length) }, aria: { required: true }

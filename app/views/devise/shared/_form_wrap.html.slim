@@ -2,5 +2,6 @@
   .govuk-grid-column-two-thirds-from-desktop
     = yield :devise_form
   - if content_for?(:devise_sidebar) 
-    .govuk-grid-column-one-third-from-desktop.app-sidebar
-      = yield :devise_sidebar
+    .govuk-grid-column-one-third-from-desktop
+      .light-grey-box
+        = yield :devise_sidebar

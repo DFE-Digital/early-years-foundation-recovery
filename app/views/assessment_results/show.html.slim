@@ -1,5 +1,5 @@
 .govuk-grid-row
-  .govuk-grid-column-full
+  .govuk-grid-column-three-quarters
     = render 'shared/progress_bar', bar: @module_progress_bar
 
     h1.govuk-heading-l
@@ -7,7 +7,8 @@
 
     .gem-c-govspeak
       -# t(:body, scope: :assessment_results) if @assessment.failed?
-      = results_banner(**@assessment.result)
+      .govuk-grid-column-three-quarters
+        = results_banner(**@assessment.result)
 
     = form_with url: '', method: :patch do |f|
 

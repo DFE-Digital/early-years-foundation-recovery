@@ -45,8 +45,10 @@ html.govuk-template lang='en'
 
     .govuk-width-container
       main#main-content.govuk-main-wrapper
-        - flash.each do |variant, message|
-          = govuk_notification_banner title_text: t("banners.#{variant}"), text: translate_markdown(message), success: %w[important notice].include?(variant), classes: "govuk-notification-banner--#{variant}"
+        .govuk-grid-row
+          .govuk-grid-column-two-thirds
+            - flash.each do |variant, message|
+              = govuk_notification_banner title_text: t("banners.#{variant}"), text: translate_markdown(message), success: %w[important notice].include?(variant), classes: "govuk-notification-banner--#{variant}"
         = yield
 
     = render 'layouts/footer'
