@@ -7,8 +7,8 @@ import "./controllers";
 
 import { initAll } from "govuk-frontend";
 
-import "govuk-frontend/govuk/vendor/polyfills/Function/prototype/bind";
-import "govuk-frontend/govuk/vendor/polyfills/Element/prototype/classList";
+// import "govuk-frontend/govuk/vendor/polyfills/Function/prototype/bind";
+// import "govuk-frontend/govuk/vendor/polyfills/Element/prototype/classList";
 
 function nodeListForEach (nodes, callback) {
   if (window.NodeList.prototype.forEach) {
