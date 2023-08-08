@@ -11,7 +11,7 @@ RSpec.describe ContentTestSchema, :cms do
   end
 
   before do
-    skip 'WIP' unless Rails.application.cms?
+    skip 'CMS ONLY' unless Rails.application.cms?
     skip 'WIP' if ENV['DISABLE_USER_ANSWER'].present?
   end
 

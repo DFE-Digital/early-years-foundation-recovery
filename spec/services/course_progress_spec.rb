@@ -6,7 +6,7 @@ RSpec.describe CourseProgress do
   include_context 'with progress'
 
   before do
-    skip 'WIP' if Rails.application.cms?
+    skip 'YAML ONLY' if Rails.application.cms?
   end
 
   describe '#course_completed?' do

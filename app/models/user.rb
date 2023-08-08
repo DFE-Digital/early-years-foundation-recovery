@@ -9,31 +9,20 @@ class User < ApplicationRecord
     role_type
     registration_complete
     private_beta_registration_complete
-    registration_complete_any
+    registration_complete_any?
     registered_at
   ].freeze
 
-  def self.csv_headers
-    if Rails.application.cms?
-      Training::Module.ordered.reject(&:draft?).map { |mod| "module_#{mod.position}_time" }
-    else
-      TrainingModule.published.map { |mod| "module_#{mod.id}_time" }
-    end
-  end
-
-  # Collate published module state and profile data in CSV format
-  #
-  # @overload to_csv
-  # @see ToCsv.to_csv
-  #   @return [String]
-  def self.to_csv
-    CSV.generate(headers: true) do |csv|
-      csv << (DASHBOARD_ATTRS + csv_headers)
-      dashboard.find_each(batch_size: 1000) do |user|
-        formatted = CoercionDecorator.new([user.dashboard_attributes.to_hash]).call
-        formatted.each { |row| csv << row.values }
+  # @return [Array<String>]
+  def self.dashboard_headers
+    module_times =
+      if Rails.application.cms?
+        Training::Module.ordered.reject(&:draft?).map { |mod| "module_#{mod.position}_time" }
+      else
+        TrainingModule.published.map { |mod| "module_#{mod.id}_time" }
       end
-    end
+
+    DASHBOARD_ATTRS + module_times
   end
 
   # Include default devise modules. Others available are:
@@ -50,8 +39,6 @@ class User < ApplicationRecord
   has_many :visits, class_name: 'Ahoy::Visit'
   has_many :events, class_name: 'Ahoy::Event'
   has_many :notes
-
-  # scope :dashboard, -> { where.not(closed_at: nil) }
 
   # TODO: use scope with email alert
   # created an account within public beta but still not using service
@@ -84,7 +71,7 @@ class User < ApplicationRecord
   scope :unconfirmed, -> { where(confirmed_at: nil) }
   scope :locked_out, -> { where.not(locked_at: nil) }
   scope :since_public_beta, -> { where(created_at: Rails.application.public_beta_launch_date..Time.zone.now) }
-  scope :month_old, -> { where(confirmed_at: 4.weeks.ago.beginning_of_day..4.weeks.ago.end_of_day) }
+  scope :month_old_confirmation, -> { where(confirmed_at: 4.weeks.ago.beginning_of_day..4.weeks.ago.end_of_day) }
   scope :with_local_authority, -> { where.not(local_authority: nil) }
   scope :with_notes, -> { joins(:notes).distinct.select(&:has_notes?) }
   scope :not_started_training, -> { reject(&:course_started?) }
@@ -97,6 +84,9 @@ class User < ApplicationRecord
   scope :closed, -> { where.not(closed_at: nil) }
   scope :not_closed, -> { where(closed_at: nil) }
   scope :with_assessments, -> { joins(:user_assessments) }
+  scope :with_passing_assessments, -> { with_assessments.merge(UserAssessment.passes) }
+
+  scope :dashboard, -> { not_closed }
 
   validates :first_name, :last_name, :setting_type_id,
             presence: true,
@@ -169,17 +159,6 @@ class User < ApplicationRecord
     Training::Module.ordered.reject(&:draft?).select { |mod| module_time_to_completion.key?(mod.name) }
   end
 
-  # @return [Boolean]
-  def following_linear_sequence?
-    modules_ordered = Training::Module.ordered.reject(&:draft?)
-    modules_ordered.each_cons(2) do |current_module, next_module|
-      # check that previous module has been completed before next module is started
-      return false if module_completed?(current_module.name) && !module_completed?(next_module.name)
-    end
-    user_modules_ordered = modules_ordered.select { |mod| module_time_to_completion.key?(mod.name) }
-    user_modules_ordered.map(&:name) == module_time_to_completion.keys
-  end
-
   # @see Devise::Confirmable
   # send_confirmation_instructions
   def send_confirmation_instructions
@@ -235,13 +214,20 @@ class User < ApplicationRecord
     !module_time_to_completion.empty?
   end
 
+
   # @return [Boolean]
   def course_in_progress?
     course_started? && !module_time_to_completion.values.all?(&:positive?)
   end
 
+  # @param module_name [String]
+  # @return [Boolean]
+  def module_completed?(module_name)
+    module_time_to_completion[module_name]&.positive?
+  end
+
   # @return [Integer]
-  def modules_completed_count
+  def modules_completed
     module_time_to_completion.values.count(&:positive?)
   end
 
@@ -301,8 +287,8 @@ class User < ApplicationRecord
   end
 
   # @return [Boolean]
-  def registration_complete_any
-    !!private_beta_registration_complete || !!registration_complete
+  def registration_complete_any?
+    private_beta_registration_complete? || !!registration_complete
   end
 
   # @return [Datetime]
@@ -340,20 +326,21 @@ class User < ApplicationRecord
     end
   end
 
-  # @see ToCsv#dashboard_attributes
+  # @see ToCsv#dashboard_row
   # @return [Hash] override
-  def dashboard_attributes
+  def dashboard_row
     data_attributes.dup.merge(module_ttc)
   end
 
-  # @return [Boolean]
-  def module_completed?(module_name)
-    module_time_to_completion[module_name].present? && module_time_to_completion[module_name].positive?
+  # @return [Training::Module]
+  def modules_in_progress
+    course_progress = CourseProgress.new(user: self)
+    course_progress.current_modules
   end
 
 private
 
-  #   @return [Hash]
+  # @return [Hash]
   def data_attributes
     DASHBOARD_ATTRS.map { |field| { field => send(field) } }.reduce(&:merge)
   end

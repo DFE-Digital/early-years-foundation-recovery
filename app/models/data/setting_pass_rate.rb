@@ -5,15 +5,21 @@ module Data
     class << self
       # @return [Array<String>]
       def column_names
-        ['Setting', 'Average Pass Percentage', 'Pass Count', 'Average Fail Percentage', 'Fail Count']
+        [
+          'Setting',
+          'Pass Percentage',
+          'Pass Count',
+          'Fail Percentage',
+          'Fail Count',
+        ]
       end
 
       # @return [Array<Hash{Symbol => Mixed}>]
       def dashboard
-        SummativeQuiz.attribute_pass_percentage(:setting_type).map do |setting_type, percentages|
-          percentages.merge(setting_type: setting_type)
+        SummativeQuiz.pass_rate(:setting_type).map do |setting_type, percentages|
+          { setting_type: setting_type, **percentages }
         end
       end
-  end
+    end
   end
 end

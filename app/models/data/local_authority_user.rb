@@ -5,12 +5,15 @@ module Data
     class << self
       # @return [String]
       def column_names
-        ['Local Authority', 'Users']
+        [
+          'Local Authority',
+          'Users',
+        ]
       end
 
-      # @return [Array<Hash{Symbol => Mixed}>]
+      # @return [Array<Hash>]
       def dashboard
-        count_by_local_authority.map do |authority, count|
+        authorities.map do |authority, count|
           {
             local_authority: authority,
             users: count,
@@ -18,17 +21,17 @@ module Data
         end
       end
 
-  private
+    private
 
-      # @return [Hash{Symbol=>Integer}]
-      def count_by_local_authority
-        public_beta_users.group(:local_authority).count
+      # @return [Hash{Symbol => Integer}]
+      def authorities
+        public_beta_users.group(:local_authority).order(:local_authority).count
       end
 
-      # @return [ActiveRecord::Relation<User>]
+      # @return [User::ActiveRecord_Relation]
       def public_beta_users
         User.since_public_beta.with_local_authority
       end
-  end
+    end
   end
 end
