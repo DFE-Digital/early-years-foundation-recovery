@@ -7,11 +7,11 @@ RSpec.describe NudgeMail do
     let!(:user_1) { create(:user, confirmed_at: 4.weeks.ago) }
     let!(:user_2) { create(:user, confirmed_at: 4.weeks.ago) }
     let!(:user_3) { create(:user, confirmed_at: 4.weeks.ago) }
+    let!(:user_4) { create(:user, :registered, confirmed_at: 1.month.ago) }
+    let!(:user_5) { create(:user, confirmed_at: 2.months.ago) }
     let(:notify_mailer) { class_double(NotifyMailer).as_stubbed_const }
 
     before do
-      create(:user, :registered, confirmed_at: 1.month.ago)
-      create(:user, confirmed_at: 2.months.ago)
       allow(NotifyMailer).to receive(:complete_registration)
     end
 
@@ -20,6 +20,8 @@ RSpec.describe NudgeMail do
       expect(NotifyMailer).to have_received(:complete_registration).with(user_1).once
       expect(NotifyMailer).to have_received(:complete_registration).with(user_2).once
       expect(NotifyMailer).to have_received(:complete_registration).with(user_3).once
+      expect(NotifyMailer).not_to have_received(:complete_registration).with(user_4)
+      expect(NotifyMailer).not_to have_received(:complete_registration).with(user_5)
     end
   end
 
@@ -27,10 +29,10 @@ RSpec.describe NudgeMail do
     let!(:user_1) { create(:user, :registered, confirmed_at: 4.weeks.ago) }
     let!(:user_2) { create(:user, :registered, confirmed_at: 4.weeks.ago) }
     let!(:user_3) { create(:user, :registered, confirmed_at: 4.weeks.ago) }
+    let!(:user_4) { create(:user, :registered, confirmed_at: 2.months.ago) }
+    let!(:user_5) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
 
     before do
-      create(:user, :registered, confirmed_at: 2.months.ago)
-      create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 })
       allow(NotifyMailer).to receive(:start_training)
     end
 
@@ -39,6 +41,8 @@ RSpec.describe NudgeMail do
       expect(NotifyMailer).to have_received(:start_training).with(user_1).once
       expect(NotifyMailer).to have_received(:start_training).with(user_2).once
       expect(NotifyMailer).to have_received(:start_training).with(user_3).once
+      expect(NotifyMailer).not_to have_received(:start_training).with(user_4)
+      expect(NotifyMailer).not_to have_received(:start_training).with(user_5)
     end
   end
 
@@ -46,11 +50,10 @@ RSpec.describe NudgeMail do
     let!(:user_1) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
     let!(:user_2) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
     let!(:user_3) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
+    let!(:user_4) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1 }) }
+    let!(:user_5) { create(:user, :registered, confirmed_at: 8.weeks.ago, module_time_to_completion: { "alpha": 2 }) }
 
     before do
-      create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1 })
-      create(:user, :registered, confirmed_at: 8.weeks.ago, module_time_to_completion: { "alpha": 2 })
-
       Ahoy::Visit.new(
         id: 1,
         visitor_token: '123',
@@ -86,6 +89,9 @@ RSpec.describe NudgeMail do
       nudge_mail.call
       expect(NotifyMailer).to have_received(:continue_training).with(user_2, TrainingModule.find_by(name: 'alpha')).once
       expect(NotifyMailer).to have_received(:continue_training).with(user_3, TrainingModule.find_by(name: 'alpha')).once
+      expect(NotifyMailer).not_to have_received(:continue_training).with(user_1, TrainingModule.find_by(name: 'alpha'))
+      expect(NotifyMailer).not_to have_received(:continue_training).with(user_4, TrainingModule.find_by(name: 'alpha'))
+      expect(NotifyMailer).not_to have_received(:continue_training).with(user_5, TrainingModule.find_by(name: 'alpha'))
     end
   end
 end
