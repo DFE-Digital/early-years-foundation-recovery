@@ -352,11 +352,6 @@ class User < ApplicationRecord
     module_time_to_completion[module_name].present? && module_time_to_completion[module_name].positive?
   end
 
-  # @return [Training::Module]
-  def modules_in_progress
-    module_time_to_completion.select { |_k, v| v.zero? }.keys.map { |mod_name| Training::Module.by_name(mod_name) }
-  end
-
 private
 
   #   @return [Hash]

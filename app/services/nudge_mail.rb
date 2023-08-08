@@ -28,6 +28,7 @@ private
   # @param user [User]
   # @return [Training::Module]
   def module_in_progress(user)
-    user.modules_in_progress.first
+    course_progress = CourseProgress.new(user: user)
+    course_progress.current_modules.first
   end
 end

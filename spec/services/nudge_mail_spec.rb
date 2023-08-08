@@ -47,6 +47,7 @@ RSpec.describe NudgeMail do
   end
 
   context 'when users are a month old and have completed registration and started training but not completed training' do
+    include_context 'with progress'
     let!(:user_1) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
     let!(:user_2) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
     let!(:user_3) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
@@ -54,6 +55,14 @@ RSpec.describe NudgeMail do
     let!(:user_5) { create(:user, :registered, confirmed_at: 8.weeks.ago, module_time_to_completion: { "alpha": 2 }) }
 
     before do
+      course_progress = instance_double(CourseProgress)
+      allow(CourseProgress).to receive(:new).with(user: user_1).and_return(course_progress)
+      allow(course_progress).to receive(:current_modules).and_return([Training::Module.by_name('alpha')])
+      allow(CourseProgress).to receive(:new).with(user: user_2).and_return(course_progress)
+      allow(course_progress).to receive(:current_modules).and_return([Training::Module.by_name('alpha')])
+      allow(CourseProgress).to receive(:new).with(user: user_3).and_return(course_progress)
+      allow(course_progress).to receive(:current_modules).and_return([Training::Module.by_name('alpha')])
+
       Ahoy::Visit.new(
         id: 1,
         visitor_token: '123',
