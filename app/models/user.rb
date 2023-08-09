@@ -333,8 +333,7 @@ class User < ApplicationRecord
 
   # @return [Training::Module]
   def modules_in_progress
-    course_progress = CourseProgress.new(user: self)
-    course_progress.current_modules
+    course.current_modules
   end
 
 private

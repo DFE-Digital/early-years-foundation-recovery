@@ -55,13 +55,13 @@ RSpec.describe NudgeMail do
     let!(:user_5) { create(:user, :registered, confirmed_at: 8.weeks.ago, module_time_to_completion: { "alpha": 2 }) }
 
     before do
-      course_progress = instance_double(CourseProgress)
-      allow(CourseProgress).to receive(:new).with(user: user_1).and_return(course_progress)
-      allow(course_progress).to receive(:current_modules).and_return([Training::Module.by_name('alpha')])
-      allow(CourseProgress).to receive(:new).with(user: user_2).and_return(course_progress)
-      allow(course_progress).to receive(:current_modules).and_return([Training::Module.by_name('alpha')])
-      allow(CourseProgress).to receive(:new).with(user: user_3).and_return(course_progress)
-      allow(course_progress).to receive(:current_modules).and_return([Training::Module.by_name('alpha')])
+      users = [user_1, user_2, user_3]
+      users.each do |user|
+        course_progress = Rails.application.cms? ? instance_double(ContentfulCourseProgress) : instance_double(CourseProgress)
+        allow(CourseProgress).to receive(:new).with(user: user).and_return(course_progress)
+        allow(ContentfulCourseProgress).to receive(:new).with(user: user).and_return(course_progress)
+        allow(course_progress).to receive(:current_modules).and_return([Training::Module.by_name('alpha')])
+      end
 
       Ahoy::Visit.new(
         id: 1,
