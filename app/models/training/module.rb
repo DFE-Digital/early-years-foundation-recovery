@@ -126,6 +126,8 @@ module Training
     # @see CourseProgress
     # @return [Boolean] incomplete content will not be deemed 'available'
     def draft?
+      return false if Rails.application.preview?
+
       @draft ||= !data.valid?
     end
 
