@@ -2,10 +2,14 @@
 
 = render 'shared/progress_bar'
 
-- content_for :content_page do
-  = page_number(**content.pagination) if content.page_numbers?
+.govuk-grid-row
+  .govuk-grid-column-two-thirds-from-desktop
+    = page_number(**content.pagination) if content.page_numbers?
 
-  h1= content.heading
-  .gem-c-govspeak= translate_markdown(content.body)
-
-= render 'content_wrap'
+    h1= content.heading
+    .gem-c-govspeak= translate_markdown(content.body)
+    
+    - if content.notes?
+      = render partial: 'notes/form'
+    - else
+      = render partial: 'course_pages_footer'

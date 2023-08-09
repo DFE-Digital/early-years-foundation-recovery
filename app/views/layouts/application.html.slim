@@ -31,7 +31,19 @@ html.govuk-template lang='en'
 
     = navigation
 
-    .dfe-content-page--header
+    - if content_for?(:hero)
+      .dfe-content-page--header
+        .dfe-width-container
+          = govuk_phase_banner(tag: { text: 'Beta' }, classes: 'noprint') do
+            = t('phase_banner_html', feedback_link: govuk_link_to('feedback', Rails.configuration.feedback_url, target: :_blank))
+
+          .noprint = render 'layouts/timeout'
+          
+          - if request.path != '/email-preferences'
+            .noprint = back_link
+
+          = yield :hero
+    - else
       .dfe-width-container
         = govuk_phase_banner(tag: { text: 'Beta' }, classes: 'noprint') do
           = t('phase_banner_html', feedback_link: govuk_link_to('feedback', Rails.configuration.feedback_url, target: :_blank))
@@ -40,8 +52,6 @@ html.govuk-template lang='en'
         
         - if request.path != '/email-preferences'
           .noprint = back_link
-
-        = yield :hero
 
     .govuk-width-container
       main#main-content.govuk-main-wrapper

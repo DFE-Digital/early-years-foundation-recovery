@@ -2,30 +2,31 @@
 
 = render 'shared/progress_bar'
 
-- content_for :content_page do
-  = page_number(**content.pagination)
+.govuk-grid-row
+  .govuk-grid-column-full
+    = page_number(**content.pagination)
 
-  h1= content.heading
-  .gem-c-govspeak= translate_markdown(content.body)
+    h1= content.heading
+    .gem-c-govspeak= translate_markdown(content.body)
 
-  .govspeak-embed-container.light-grey-background
-    h2.govuk-heading-m class='govuk-!-margin-top-2'
-      | Video: #{content.video_title}
+    .govspeak-embed-container.light-grey-background
+      h2.govuk-heading-m class='govuk-!-margin-top-2'
+        | Video: #{content.video_title}
 
-    - if content.video_url
-      = render 'govspeak/video', title: content.video_title, url: content.video_url
+      - if content.video_url
+        = render 'govspeak/video', title: content.video_title, url: content.video_url
 
-    - else
-      p.govuk-body class='govuk-!-text-align-centre'
-        | [Video to be added]
-
-    details.govuk-details class='govuk-!-margin-top-6' data-module='govuk-details'
-      summary.govuk-details__summary
-        span.govuk-details__summary-text
-          | Transcript
-      .govuk-details__text.white-background
-        h2.gov-uk-heading-m class='govuk-!-margin-top-2'
-          | Transcript
-        .gem-c-govspeak= translate_markdown(content.transcript)
-
-= render 'content_wrap_full_width'
+      - else
+        p.govuk-body class='govuk-!-text-align-centre'
+          | [Video to be added]
+          
+      details.govuk-details class='govuk-!-margin-top-6' data-module='govuk-details'
+        summary.govuk-details__summary
+          span.govuk-details__summary-text
+            | Transcript
+        .govuk-details__text.white-background
+          h2.gov-uk-heading-m class='govuk-!-margin-top-2'
+            | Transcript
+          .gem-c-govspeak= translate_markdown(content.transcript)
+      
+= render partial: 'course_pages_footer'
