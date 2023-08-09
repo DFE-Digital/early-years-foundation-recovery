@@ -111,4 +111,13 @@ module ContentHelper
   def service_name
     Rails.configuration.service_name
   end
+
+  # @param key [String]
+  # @param args [Hash]
+  # @return [String]
+  def content_resource(key, **args)
+    content_tag :div, class: 'gem-c-govspeak' do
+      translate_markdown t(key, **args)
+    end
+  end
 end

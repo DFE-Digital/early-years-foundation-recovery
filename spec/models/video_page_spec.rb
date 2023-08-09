@@ -5,6 +5,10 @@ RSpec.describe VideoPage, type: :model do
     described_class.new(training_module: mod_name, type: :video_page, name: page_name)
   end
 
+  before do
+    skip 'DEPRECATED' if Rails.application.cms?
+  end
+
   let(:mod_name) { 'alpha' }
   let(:page_name) { '1-2-1-2' }
 

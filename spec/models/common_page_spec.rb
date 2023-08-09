@@ -5,6 +5,10 @@ RSpec.describe CommonPage, type: :model do
     described_class.new(training_module: 'alpha', type: :confidence_intro, name: '1-3-3')
   end
 
+  before do
+    skip 'DEPRECATED' if Rails.application.cms?
+  end
+
   it '#heading' do
     expect(common_page.heading).to eq 'Reflect on your learning'
   end
