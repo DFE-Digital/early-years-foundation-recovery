@@ -1,7 +1,13 @@
 class MailJob < Que::Job
-  self.exclusive_execution_lock = true
+  
   def run
-    log 'MailJob: Running'
+    return if queued?
     NudgeMail.new.call
+  end
+
+  private
+
+  def queued?
+    Que.job_stats.any? { |job| job[:job_class] == 'MailJob' && job[:count] > 1 }
   end
 end

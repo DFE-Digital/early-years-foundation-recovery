@@ -84,7 +84,6 @@ gem 'sitemap_generator'
 gem 'google-cloud-storage'
 
 # Background Jobs
-gem 'que-locks'
 gem 'que-scheduler'
 
 # DRY-RB
