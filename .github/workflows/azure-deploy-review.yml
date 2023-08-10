@@ -23,6 +23,8 @@ on:
 # Permissions for OIDC authentication
 permissions:
   id-token: write
+  contents: write
+  packages: write
 
 env:
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
