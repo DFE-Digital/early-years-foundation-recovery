@@ -1,6 +1,24 @@
 require 'rails_helper'
 
 describe 'ContentHelper', type: :helper do
+  describe '#content_resource' do
+    subject(:html) do
+      helper.content_resource('emails.not_received', link: 'foo')
+    end
+
+    it 'wraps content in govspeak element' do
+      expect(html).to include '<div class="gem-c-govspeak">'
+    end
+
+    it 'applies Kramdown styling' do
+      expect(html).to include '<p class="govuk-heading-s">I haven’t received the email</p>'
+    end
+
+    it 'interpolates variables' do
+      expect(html).to include '<a href="foo">Send me another email</a>'
+    end
+  end
+
   describe '#translate_markdown' do
     subject(:html) { helper.translate_markdown(input) }
 

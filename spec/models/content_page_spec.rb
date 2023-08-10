@@ -5,6 +5,10 @@ RSpec.describe ContentPage, type: :model do
     described_class.new(training_module: 'alpha', type: :text_page, name: '1-1-1')
   end
 
+  before do
+    skip 'DEPRECATED' if Rails.application.cms?
+  end
+
   it '#heading' do
     expect(content_page.heading).to eq '1-1-1'
   end

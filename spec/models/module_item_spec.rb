@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe ModuleItem, type: :model do
+  before do
+    skip 'DEPRECATED' if Rails.application.cms?
+  end
+
   let(:yaml_data) { data_from_file('modules/alpha.yml') }
   let(:module_item) { described_class.where(training_module: :alpha).first }
 

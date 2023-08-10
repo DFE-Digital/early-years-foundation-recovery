@@ -62,6 +62,13 @@ namespace :eyfs do
       SeedStaticPageEntries.new.call
     end
 
+    # ./bin/docker-rails 'eyfs:cms:seed_snippets'
+    desc 'Seed microcopy resources from YAML'
+    task seed_snippets: :environment do
+      require 'seed_snippets'
+      SeedSnippets.new.call
+    end
+
     # @see .env
     #   CONTENTFUL_ENVIRONMENT=demo
     #

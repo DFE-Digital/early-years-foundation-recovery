@@ -26,7 +26,6 @@ defaults:
 # Permissions for OIDC authentication
 permissions:
   id-token: write
-  contents: read
 
 env:
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
@@ -39,7 +38,9 @@ env:
   TF_VAR_psqlfs_username: ${{ secrets.PSQLFS_USERNAME }}
   TF_VAR_psqlfs_password: ${{ secrets.PSQLFS_PASSWORD }}
   TF_VAR_psqlfs_geo_redundant_backup: ${{ vars.PSQLFS_GEO_REDUNDANT_BACKUP }}
+  TF_VAR_psqlfs_ha_enabled: ${{ vars.PSQLFS_HA_ENABLED }}
   TF_VAR_asp_sku: ${{ vars.ASP_SKU }}
+  TF_VAR_webapp_worker_count: ${{ vars.WEBAPP_WORKER_COUNT }}
   TF_VAR_webapp_name: ${{ vars.WEBAPP_NAME }}
   TF_VAR_workerapp_name: ${{ vars.WORKERAPP_NAME }}
   TF_VAR_reviewapp_name: ${{ vars.REVIEWAPP_NAME }}

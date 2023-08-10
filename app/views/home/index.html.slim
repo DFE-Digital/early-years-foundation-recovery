@@ -10,11 +10,7 @@
     .light-grey-box
       .govuk-grid-row
         .govuk-grid-column-two-thirds
-          h1.govuk-heading-l #{service_name}
-          p.govuk-body
-            | This free, online training provides an overview of child development
-            |  and gives practical advice for supporting the development of children
-            |  in your early years setting.
+          = content_resource 'home.hero', service_name: service_name
 
           = govuk_button_link_to course_overview_path, class: 'govuk-button--start govuk-!-margin-bottom-4' do
             - if @user
@@ -27,30 +23,17 @@
               path fill='currentColor' d='M0 0h13l20 20-20 20H0l20-20z'
 
         .govuk-grid-column-one-third
-          img.full-width-img src='/assets/thumb-1161068272-320x240.jpg' alt='A practitioner smiling as they do an activity with children in an early years setting' width=300
+          = content_resource 'home.thumb'
 
 .govuk-grid-row
   .govuk-grid-column-one-half
-    h2.govuk-heading-m About this training course
-    p.govuk-body class='govuk-!-padding-bottom-4'
-      | Each training module on this site covers an important area of child development and has
-      |  been written by early years experts, working with the Department for Education.
-    h2.govuk-heading-m Why should I take this training?
-    p.govuk-body This training:
-    ul.govuk-list.govuk-list--bullet
-      li is free for childminders and nurseries
-      li combines theory with practical tips and ideas to use in your setting
-      li includes opportunities to reflect on your practice
-      li reinforces your understanding through learning check questions and tests
-      li links to additional resources
-      li offers the opportunity to download certificates of completion
-      li has been developed by expert practitioners
+    = content_resource 'home.about'
 
   - unless current_user
     .govuk-grid-column-one-half
       .light-grey-box
-        h2.govuk-heading-m Return to your training
-        p Sign in to continue learning, see your progress and download certificates.
+        = content_resource 'home.login'
+
         .govuk-button-group
           = govuk_button_link_to 'Sign in', new_user_session_path
           .white-space-pre-wrap= ' or '

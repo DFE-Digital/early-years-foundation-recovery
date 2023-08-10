@@ -10,21 +10,14 @@
 .light-grey-box
   .govuk-grid-row
     .govuk-grid-column-full
-      h1.govuk-heading-l= mod.card_title
-      = translate_markdown mod.description
-
-      p.govuk-body This module covers:
-      = translate_markdown mod.criteria
+      - # TODO: move module overview hero to content helper
+      = content_resource 'module.overview.summary', title: mod.card_title, description: mod.description, criteria: mod.criteria
 
       - module_progress.call_to_action do |state, page|
         = cms_link_to_action(state, page)
 
-h2.govuk-heading-m
-  | Your module progress
-p.govuk-body
-  | You can continue your learning, look at your module progress, or revisit pages of the training.
-h3.govuk-heading-s
-  | Module contents
+= content_resource 'module.overview.progress'
+
 
 .govuk-grid-row
   .govuk-grid-column-full
