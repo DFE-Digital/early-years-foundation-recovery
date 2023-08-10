@@ -7,6 +7,7 @@ class MailJob < Que::Job
 
 private
 
+  # @return [Boolean]
   def queued?
     Que.job_stats.any? { |job| job[:job_class] == 'MailJob' && job[:count] > 1 }
   end
