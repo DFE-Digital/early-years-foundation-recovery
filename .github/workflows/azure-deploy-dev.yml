@@ -19,6 +19,10 @@ on:
       - terraform-azure/**
       - uml/*
 
+# Permissions for OIDC authentication
+permissions:
+  id-token: write
+
 env:
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
