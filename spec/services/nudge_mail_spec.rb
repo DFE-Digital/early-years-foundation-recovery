@@ -109,8 +109,8 @@ RSpec.describe NudgeMail do
     let!(:user_3) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1, "beta": 0 }) }
 
     before do
-      TrainingModuleRecord.create!(module_id: 1, name: 'alpha').save!
-      TrainingModuleRecord.create!(module_id: 2, name: 'beta').save!
+      TrainingModuleRecord.create!(module_position: 1, name: 'alpha').save!
+      TrainingModuleRecord.create!(module_position: 2, name: 'beta').save!
       allow(NotifyMailer).to receive(:new_module)
     end
 
