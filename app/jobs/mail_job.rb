@@ -1,14 +1,8 @@
 class MailJob < Que::Job
+  include SchedulerHelper
   def run
-    return if queued?
+    return if job_queued?
 
     NudgeMail.new.call
-  end
-
-private
-
-  # @return [Boolean]
-  def queued?
-    Que.job_stats.any? { |job| job[:job_class] == 'MailJob' && job[:count] > 1 }
   end
 end
