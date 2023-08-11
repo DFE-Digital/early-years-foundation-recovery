@@ -1,23 +1,20 @@
-name: 'App Deploy [Azure - DEV]'
+name: 'App Deploy [Azure - STAGE]'
 
 on:
   workflow_dispatch:
+    inputs:
+      candidate:
+        description: 'Create release candidate version ("rcx.x.x")'
+        type: string
+        required: true
+      ref:
+        description: 'Git ref or branch to deploy'
+        type: string
+        required: true
+        default: main
   push:
-    branches:
-      - main
-    paths-ignore:
-      - '**/*.md'
-      - .docker*
-      - .env.example
-      - .gitignore
-      - .pa11yci
-      - .tool-versions
-      - .yardopts
-      - bin/*
-      - docker-compose.*
-      - terraform/**
-      - terraform-azure/**
-      - uml/*
+    tags:
+      - rc*
 
 # Permissions for OIDC authentication
 permissions:
@@ -34,12 +31,22 @@ env:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment: development
+    environment: staging
 
     steps:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout Code
         uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.ref || github.ref_name }}
+
+      # Tag the branch with the release candidate version
+      - name: Tag Candidate
+        if: ${{ inputs.candidate }}
+        run: |
+          git tag --force ${{ inputs.candidate }}
+          git push --force origin refs/tags/${{ inputs.candidate }}
+          echo "HEAD=$(git rev-parse ${{ inputs.candidate }})" >> $GITHUB_ENV
 
       # Create and boot Docker image builder
       - name: Set up Docker Buildx
@@ -67,9 +74,10 @@ jobs:
             SHA=${{ github.sha }}
           cache-from: |
             ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+            ${{ env.DOCKER_IMAGE }}:${{ inputs.ref || github.ref_name }}
           tags: |
             ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
-            ${{ env.DOCKER_IMAGE }}:latest
+            ${{ env.DOCKER_IMAGE }}:${{ inputs.candidate || github.ref_name }}
 
       # Login to Azure using OIDC
       - name: Login to Azure CLI
@@ -84,7 +92,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ vars.WEBAPP_NAME }}
-          images: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+          images: ${{ env.DOCKER_IMAGE }}:${{ inputs.candidate || github.ref_name }}
 
       # Deploy Background Worker
       - name: Deploy to Azure Container Instances
@@ -94,7 +102,7 @@ jobs:
           inlineScript: |
             az container create --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.WORKERAPP_NAME }} \
-              --image ${{ env.DOCKER_IMAGE }}:${{ github.sha }} \
+              --image ${{ env.DOCKER_IMAGE }}:${{ inputs.candidate || github.ref_name }} \
               --cpu 1 \
               --memory 2 \
               --command-line "bundle exec que" \

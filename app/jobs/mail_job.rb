@@ -1,6 +1,8 @@
 class MailJob < Que::Job
+  include SchedulerHelper
   def run
-    log 'MailJob: Running'
+    return if job_queued?
+
     NudgeMail.new.call
   end
 end

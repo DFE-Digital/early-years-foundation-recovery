@@ -15,7 +15,7 @@ RSpec.describe NudgeMail do
       allow(NotifyMailer).to receive(:complete_registration)
     end
 
-    it 'The notify mailer is called with the correct users' do
+    it 'emails the correct users' do
       nudge_mail.call
       expect(NotifyMailer).to have_received(:complete_registration).with(user_1).once
       expect(NotifyMailer).to have_received(:complete_registration).with(user_2).once
@@ -36,7 +36,7 @@ RSpec.describe NudgeMail do
       allow(NotifyMailer).to receive(:start_training)
     end
 
-    it 'The notify mailer is called with the correct users' do
+    it 'emails the correct users' do
       nudge_mail.call
       expect(NotifyMailer).to have_received(:start_training).with(user_1).once
       expect(NotifyMailer).to have_received(:start_training).with(user_2).once
@@ -47,7 +47,6 @@ RSpec.describe NudgeMail do
   end
 
   context 'when users are a month old and have completed registration and started training but not completed training' do
-    include_context 'with progress'
     let!(:user_1) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
     let!(:user_2) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
     let!(:user_3) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
@@ -55,13 +54,13 @@ RSpec.describe NudgeMail do
     let!(:user_5) { create(:user, :registered, confirmed_at: 8.weeks.ago, module_time_to_completion: { "alpha": 2 }) }
 
     before do
-      course_progress = instance_double(CourseProgress)
-      allow(CourseProgress).to receive(:new).with(user: user_1).and_return(course_progress)
-      allow(course_progress).to receive(:current_modules).and_return([Training::Module.by_name('alpha')])
-      allow(CourseProgress).to receive(:new).with(user: user_2).and_return(course_progress)
-      allow(course_progress).to receive(:current_modules).and_return([Training::Module.by_name('alpha')])
-      allow(CourseProgress).to receive(:new).with(user: user_3).and_return(course_progress)
-      allow(course_progress).to receive(:current_modules).and_return([Training::Module.by_name('alpha')])
+      users = [user_1, user_2, user_3]
+      users.each do |user|
+        course_progress = Rails.application.cms? ? instance_double(ContentfulCourseProgress) : instance_double(CourseProgress)
+        allow(CourseProgress).to receive(:new).with(user: user).and_return(course_progress)
+        allow(ContentfulCourseProgress).to receive(:new).with(user: user).and_return(course_progress)
+        allow(course_progress).to receive(:current_modules).and_return([Training::Module.by_name('alpha')])
+      end
 
       Ahoy::Visit.new(
         id: 1,
@@ -94,7 +93,7 @@ RSpec.describe NudgeMail do
       allow(NotifyMailer).to receive(:continue_training)
     end
 
-    it 'The notify mailer is called with the correct users' do
+    it 'emails the correct users' do
       nudge_mail.call
       expect(NotifyMailer).to have_received(:continue_training).with(user_2, Training::Module.by_name('alpha')).once
       expect(NotifyMailer).to have_received(:continue_training).with(user_3, Training::Module.by_name('alpha')).once

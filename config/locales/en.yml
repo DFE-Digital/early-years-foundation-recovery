@@ -78,7 +78,7 @@ en:
               blank: You must accept the terms and conditions and privacy policy to create an account.
             ofsted_number:
               invalid: This Ofsted number is not recognised.
-  phase_banner_html: This is a new service, your %{feedback_link} will help us improve it.
+  phase_banner: This is a new service, your %{link} will help us improve it.
   page_number: Page %{current} of %{total}
   links:
     change: Change
@@ -112,7 +112,7 @@ en:
             Your training progress won't be shared with anyone without your permission.
         button: Continue
         link_to_setting_type_other: I cannot find my setting or organisation
-        autocomplete-not-found: No setting found.
+        autocomplete_not_found: No setting found.
       update:
         complete_registration: Thank you for creating an Early years child development training account. You can now start your first module.
         update_registration: Thank you for updating your Early years child development training account. You can now continue.
@@ -134,7 +134,7 @@ en:
             This could be your county council, district council or London borough.
         button: Continue
         multiple_local_authorities: I work across more than one local authority
-        autocomplete-not-found: No local authority found.
+        autocomplete_not_found: No local authority found.
       update:
         complete_registration: Thank you for creating an Early years child development training account. You can now start your first module.
         update_registration: Thank you for updating your Early years child development training account. You can now continue.
@@ -346,53 +346,6 @@ en:
       You will be able to see if you get these questions right or wrong.
       Your scores are not recorded and they do not count towards the certificate of achievement.
 
-  check_email_confirmation:
-    heading: Check your email
-    body:
-      0: |
-        We will check if a training account has been created using the email address
-        you entered. If it has, you will receive an email shortly with instructions
-        for how to verify your email address.
-      1: |
-        We sent the email to:
-      2: |
-        To continue setting up your training account you must click the link in the email.
-        If you have not received the email after a few minutes, please check your spam folder.
-    summary_text: Problems with the activation email?
-    not_received:
-      title: I haven’t received the email
-      text: |
-        Please wait a few minutes for the email to arrive.
-        If it doesn’t appear in your inbox, please check your spam or junk email folder.
-        If you still cannot see the email, we can send it again.
-      link_text: Send me another email
-    no_access_to_email:
-      title: I don’t have access to the email address I used to register
-      text: You can set up your account using a different email address.
-      link_text: create a new account
-    diff_problem:
-      title: I have a different problem
-      text: For other problems with creating your account or signing in, please
-      link_text: contact us
-
-  check_email_password_reset:
-    heading: Check your email
-    body:
-      - We have sent you an email with instructions for how to reset your password.
-      - If you have not received the email after a few minutes, please check your spam folder.
-    summary_text: Problems with the email?
-    not_received:
-      title: I haven’t received the email
-      text: |
-        Please wait a few minutes for the email to arrive.
-        If it doesn’t appear in your inbox, please check your spam or junk email folder.
-        If you still cannot see the email, we can send it again.
-      link_text: Send me another email
-    diff_problem:
-      title: I have a different problem
-      text: For other problems with creating your account or signing in, please
-      link_text: contact us
-
   close_account:
     body: |
       If you do not want to use your Early years child development training account anymore, you can ask us to close your account.
@@ -505,6 +458,9 @@ en:
         ofsted_number: Your setting's Ofsted number, if you have one
     hint:
       user:
+        # email:
+        # email_html:
+
         postcode: |
           If you work in multiple settings, choose the one where you work most often.
         ofsted_number: |
@@ -585,3 +541,236 @@ en:
     training/pages:
       show:
         what-to-expect: What to expect during the training
+
+
+  # CMS microcopy
+  home:
+    hero: |
+      # %{service_name}
+      {: .govuk-heading-l}
+
+      This free, online training provides an overview of child development and gives practical advice for supporting the development of children in your early years setting.
+    thumb: |
+      ![A practitioner smiling as they do an activity with children in an early years setting](//images.ctfassets.net/dvmeh832nmjc/2VRBZCHJYLeKx0a2CIcJzE/687fb0d28c71104820cd42f131d7dfe2/_assets_thumb-1161068272-320x240.jpg?w=300){:class="full-width-img"}
+    about: |
+      ## About this training course
+      {: .govuk-heading-m}
+
+      Each training module on this site covers an important area of child development and has been written by early years experts, working with the Department for Education.
+
+      ## Why should I take this training?
+      {: .govuk-heading-m}
+
+      This training:
+
+      - is free for childminders and nurseries
+      - combines theory with practical tips and ideas to use in your setting
+      - includes opportunities to reflect on your practice
+      - reinforces your understanding through learning check questions and tests
+      - links to additional resources
+      - offers the opportunity to download certificates of completion
+      - has been developed by expert practitioners
+    login: |
+      ## Return to your training
+      {: .govuk-heading-m}
+
+      Sign in to continue learning, see your progress and download certificates.
+
+  about:
+    enrol: |
+      ## Ready to get started?
+
+      Enrol on this course and begin your first module.
+      You will need to sign in or create an account before starting a module.
+    course: |
+      # About this training course
+      {: govuk-heading-l}
+
+      This training course will give you a thorough understanding of the most important aspects of child development in the early years.
+
+      The course has %{all_modules} modules.
+      %{published_modules} modules are currently available.
+
+      Each module should take between 1 and 2 hours to complete.
+
+      You can pause and restart the training as much as you like.
+
+      Each module includes:
+
+      - opportunities to reflect on your learning and practice
+      - a learning log to make notes on your reflections
+      - practical tips and ideas to use in your setting
+      - learning check questions to test your understanding
+      - an end of module test
+      - the opportunity to download a personalised certificate of completion
+
+      Some modules also have short videos to enhance your understanding.
+    summary: |
+      %{description}
+
+      ## What you'll learn
+      {: .govuk-heading-m}
+
+      This module covers:
+
+      %{criteria}
+
+  cookie_policy:
+    legend : Do you want to accept analytics cookies?
+    flash: You’ve set your cookie preferences. [Go back to Early years child development training](%{path}).
+    body: |
+      # Cookies
+      {: .govuk-heading-l}
+
+      Cookies are small files saved on your phone, tablet or computer when you
+      visit a website.
+
+      We use cookies to make this site work and collect information about how
+      you use our service.
+
+      ## Essential cookies
+
+      Essential cookies keep your information secure while you use Early years child development training. We do not need to ask permission to use them.
+
+      | Name                                      | Purpose                                                                        | Expires                   |
+      | ------------------------------------------| ------------------------------------------------------------------------------ | ------------------------- |
+      | _early_years_foundation_recovery_session  | Stores your session information                                                     | Expires when you log out  |
+      | ahoy_visit                                | Tracks where you are in the module and allows you to pause and restart modules | 3 hours                   |
+      | ahoy_visitor                              | Tracks your progress through the training modules                               | 2 years                   |
+      | remember_user_token                       | Stores whether you clicked the remember me checkbox when you signed in         | 48 hours                  |
+      | track_analytics                           | Saves your cookie consent settings                                             | 6 months                  |
+
+      ## Analytics cookies (optional)
+
+      With your permission, we use Google Analytics and Hotjar software to collect anonymised data about how you use Early years child development training. This information helps us to improve our service.
+
+      Google is not allowed to use or share our analytics data with anyone.
+
+      Google Analytics stores anonymised information about:
+
+      - how you got to Early years child development training
+      - the pages you visit on Early years child development training and how long you spend on them
+      - any errors you see while using Early years child development training
+
+      Google Analytics sets the following cookies:
+
+      | Name                                      | Purpose                                                                        | Expires                   |
+      | ------------------------------------------| ------------------------------------------------------------------------------ | ------------------------- |
+      | _ga_L17YMGD11W                            | Generates statistics about how you use the website                                                  | 2 years                   |
+      | _ga                                       | Helps count how many people visit this site by tracking if you’ve visited before                                                      | 2 years                   |
+      | _gid                                      | Helps count how many people visit this site by tracking if you’ve visited before                                                      | 24 hours                  |
+      | _ga_WRRWDTSGBP                            | Generates statistics about how you use the website                                                      | 2 years                   |
+      | _ga_76JLPNZBCP                            | Generates statistics about how you use the website                                                      | 18 months                 |
+
+      Hotjar sets the following cookies:
+
+      ### Relating to you
+
+      | Name      | Purpose |   Expires
+      | ----------- | ----------- | ----------- |
+      | _hjSessionUser_3169682  | Helps count how many people visit this site by tracking if you’ve visited before  | 365 days
+      | _hjid | Registers a unique ID to generate statistics about how you use the website  | 365 days
+      | _hjFirstSeen  | Identifies your first session | Per session
+      | _hjUserAttributesHash | Holds information about your visit so your information can be kept up to date | Per session
+      | _hjCachedUserAttributes | Stores user attributes which are sent whenever your visit is not in the sample  | Per session
+      | _hjViewportId | Stores information about the screen you use to visit the website, such as size and dimensions | Per session
+
+      ### Relating to your session
+
+      | Name      | Purpose |   Expires
+      | ----------- | ----------- | ----------- |
+      | _hjSession_3169682  | Holds information about your current session. Makes sure that subsequent requests inside the session window are attributed to your session  | 30 minutes
+      | _hjSessionTooLarge  | Causes Hotjar to stop collecting data if a session becomes too large  | Per session
+      | _hjSessionRejected  | Applied in extremely rare situations to prevent severe performance issues | Per session
+      | _hjSessionResumed | Set when your session or recording is reconnected to Hotjar servers after a break in connection | Per session
+      | _hjLocalStorageTest | Used to check if the Hotjar tracking script can use browser storage on your device  | Per session
+      | _hjIncludedInPageviewSample | Lets Hotjar know whether you are included in data sampling  | 30 minutes
+      | _hjIncludedInSessionSample  | Lets Hotjar know whether you are included in data sampling  | 30 minutes
+      | _hjAbsoluteSessionInProgress  | Used to detect the first page you look at during a session | 30 minutes
+      | _hjTLDTest  | Used to determine where cookies will be stored. After this check, the cookie is removed | Per session
+
+      ### Relating to recordings
+
+      | Name      | Purpose |   Expires
+      | ----------- | ----------- | ----------- |
+      | _hjRecordingEnabled | Tells Hotjar if you are already in a recording in a particular session  | Per session
+      | _hjRecordingLastActivity  | Gets updated when a visitor recording starts and when you perform an action that Hotjar records | Per session
+
+      ## Change your cookie settings
+      {: .govuk-heading-l}
+
+  module:
+    overview:
+      summary: |
+        # %{title}
+        {: .govuk-heading-l}
+
+        %{description}
+
+        This module covers:
+
+        %{criteria}
+
+      progress: |
+        ## Your module progress
+        {: .govuk-heading-m}
+
+        You can continue your learning, look at your module progress, or revisit pages of the training.
+
+        ### Module contents
+        {: .govuk-heading-s}
+
+  notes:
+    intro: |
+      # Your learning log
+      {: .govuk-heading-l}
+
+      View your notes from all your modules here.
+      You can also use the links provided to revisit a specific topic.
+
+  emails:
+    confirmation:
+      summary: Problems with the activation email?
+      intro: |
+        # Check your email
+        {: .govuk-heading-l}
+
+        We will check if a training account has been created using the email address you entered.
+        If it has, you will receive an email shortly with instructions for how to verify your email address.
+      recipient: |
+        We sent the email to:
+
+        %{recipient}
+        {: .govuk-!-font-weight-bold}
+
+        To continue setting up your training account you must click the link in the email.
+        If you have not received the email after a few minutes, please check your spam folder.
+    password_reset: |
+      # Check your email
+      {: .govuk-heading-l}
+
+      We have sent you an email with instructions for how to reset your password.
+
+      If you have not received the email after a few minutes, please check your spam folder.
+    summary: Problems with the email?
+    not_received: |
+      I haven’t received the email
+      {: .govuk-heading-s}
+
+      Please wait a few minutes for the email to arrive.
+      If it doesn’t appear in your inbox, please check your spam or junk email folder.
+      If you still cannot see the email, we can send it again.
+
+      [Send me another email](%{link})
+    no_access: |
+      I don’t have access to the email address I used to register
+      {: .govuk-heading-s}
+
+      You can set up your account using a different email address.
+
+      Please [create a new account](%{link})
+    different: |
+      I have a different problem
+      {: .govuk-heading-s}
+
+      For other problems with creating your account or signing in, please [contact us](%{link}){:target="_blank"}{:class="govuk-link"}.

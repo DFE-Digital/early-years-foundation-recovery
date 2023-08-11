@@ -25,17 +25,17 @@ module Users
 
     # @return [String]
     def heading
-      I18n.translate('.heading', scope: i18n_scope)
+      I18n.translate('heading', scope: i18n_scope)
     end
 
     # @return [String]
     def body
-      I18n.translate('.body', scope: i18n_scope)
+      I18n.translate('body', scope: i18n_scope)
     end
 
     # @return [String]
     def button
-      I18n.translate('.button', scope: i18n_scope)
+      I18n.translate('button', scope: i18n_scope)
     end
 
     # @return [Array<Symbol>]

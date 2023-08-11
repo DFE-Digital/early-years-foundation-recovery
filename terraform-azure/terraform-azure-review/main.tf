@@ -36,10 +36,6 @@ resource "azurerm_linux_web_app" "review-app" {
     }
   }
 
-  sticky_settings {
-    app_setting_names = keys(var.webapp_app_settings)
-  }
-
   logs {
     detailed_error_messages = true
     failed_request_tracing  = true

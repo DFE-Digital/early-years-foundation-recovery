@@ -5,6 +5,7 @@ require 'training/page'
 require 'training/question'
 require 'training/video'
 require 'page'
+require 'page/resource'
 
 # Without this the value is nil and defaults to delivery API
 ContentfulModel.use_preview_api = Rails.application.preview?
@@ -39,6 +40,7 @@ ContentfulRails.configure do |config|
 
     entry_mapping: {
       'static' => Page,
+      'resource' => Page::Resource,
       'trainingModule' => Training::Module,
       'page' => Training::Page,
       'question' => Training::Question,
