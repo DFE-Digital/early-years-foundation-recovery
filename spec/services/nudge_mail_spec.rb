@@ -15,7 +15,7 @@ RSpec.describe NudgeMail do
       allow(NotifyMailer).to receive(:complete_registration)
     end
 
-    it 'The notify mailer is called with the correct users' do
+    it 'emails the correct users' do
       nudge_mail.call
       expect(NotifyMailer).to have_received(:complete_registration).with(user_1).once
       expect(NotifyMailer).to have_received(:complete_registration).with(user_2).once
@@ -36,7 +36,7 @@ RSpec.describe NudgeMail do
       allow(NotifyMailer).to receive(:start_training)
     end
 
-    it 'The notify mailer is called with the correct users' do
+    it 'emails the correct users' do
       nudge_mail.call
       expect(NotifyMailer).to have_received(:start_training).with(user_1).once
       expect(NotifyMailer).to have_received(:start_training).with(user_2).once
@@ -47,7 +47,6 @@ RSpec.describe NudgeMail do
   end
 
   context 'when users are a month old and have completed registration and started training but not completed training' do
-    include_context 'with progress'
     let!(:user_1) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
     let!(:user_2) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
     let!(:user_3) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
@@ -94,7 +93,7 @@ RSpec.describe NudgeMail do
       allow(NotifyMailer).to receive(:continue_training)
     end
 
-    it 'The notify mailer is called with the correct users' do
+    it 'emails the correct users' do
       nudge_mail.call
       expect(NotifyMailer).to have_received(:continue_training).with(user_2, Training::Module.by_name('alpha')).once
       expect(NotifyMailer).to have_received(:continue_training).with(user_3, Training::Module.by_name('alpha')).once

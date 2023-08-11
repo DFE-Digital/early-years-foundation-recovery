@@ -3,7 +3,7 @@ class NudgeMail
   def call
     complete_registration_recipients.each { |recipient| NotifyMailer.complete_registration(recipient) }
     start_training_recipients.each { |recipient| NotifyMailer.start_training(recipient) }
-    continue_training_recipients.each { |recipient| NotifyMailer.continue_training(recipient, module_in_progress(recipient)) }
+    continue_training_recipients.each { |recipient| NotifyMailer.continue_training(recipient, recipient.course.current_modules.first) }
   end
 
 private
@@ -23,11 +23,5 @@ private
     recent_visits = Ahoy::Visit.where(started_at: 4.weeks.ago.end_of_day..Time.zone.now)
     old_visits = Ahoy::Visit.month_old.reject { |visit| recent_visits.pluck(:user_id).include?(visit.user_id) }
     User.course_in_progress.select { |user| old_visits.pluck(:user_id).include?(user.id) }
-  end
-
-  # @param user [User]
-  # @return [Training::Module]
-  def module_in_progress(user)
-    user.modules_in_progress.first
   end
 end

@@ -331,11 +331,6 @@ class User < ApplicationRecord
     data_attributes.dup.merge(module_ttc)
   end
 
-  # @return [Training::Module]
-  def modules_in_progress
-    course.current_modules
-  end
-
 private
 
   # @return [Hash]
