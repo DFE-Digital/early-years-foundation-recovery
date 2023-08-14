@@ -8,9 +8,9 @@ RSpec.describe Data::ReturningUsers do
   let(:rows) do
     [
       {
-        weekly_returning_users: 1,
-        monthly_returning_users: 1,
-        quarterly_returning_users: 1,
+        weekly: 1,
+        monthly: 1,
+        quarterly: 1,
       },
     ]
   end

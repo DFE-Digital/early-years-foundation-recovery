@@ -5,24 +5,25 @@ module Data
     class << self
       # @return [Array<String>]
       def column_names
-        ['Weekly Returning Users', 'Monthly Returning Users', 'Quarterly Returning Users']
+        ['Weekly Returning Users',
+          'Monthly Returning Users',
+          'Quarterly Returning Users']
       end
 
       # @return [Array<Hash{Symbol => Mixed}>]
       def dashboard
         [
           {
-            weekly_returning_users: weekly,
-            monthly_returning_users: monthly,
-            quarterly_returning_users: quarterly,
+            weekly: weekly,
+            monthly: monthly,
+            quarterly: quarterly,
           },
         ]
       end
 
     private
 
-      # @param previous [Range]
-      # @param current [Range]
+      # @Param [Range<Time>] time_range
       # @return [Integer]
       def count(time_range)
         visits = Ahoy::Visit.where(started_at: time_range)
@@ -41,8 +42,7 @@ module Data
 
       # @return [Integer]
       def quarterly
-        current = Time.zone.today.beginning_of_quarter
-        count(current..Time.zone.now)
+        count(Time.zone.today.beginning_of_quarter..Time.zone.now)
       end
     end
   end
