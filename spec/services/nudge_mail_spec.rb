@@ -16,7 +16,7 @@ RSpec.describe NudgeMail do
     end
 
     it 'emails the correct users' do
-      nudge_mail.call
+      nudge_mail.complete_registration
       expect(NotifyMailer).to have_received(:complete_registration).with(user_1).once
       expect(NotifyMailer).to have_received(:complete_registration).with(user_2).once
       expect(NotifyMailer).to have_received(:complete_registration).with(user_3).once
@@ -37,7 +37,7 @@ RSpec.describe NudgeMail do
     end
 
     it 'emails the correct users' do
-      nudge_mail.call
+      nudge_mail.start_training
       expect(NotifyMailer).to have_received(:start_training).with(user_1).once
       expect(NotifyMailer).to have_received(:start_training).with(user_2).once
       expect(NotifyMailer).to have_received(:start_training).with(user_3).once
@@ -94,7 +94,7 @@ RSpec.describe NudgeMail do
     end
 
     it 'emails the correct users' do
-      nudge_mail.call
+      nudge_mail.continue_training
       expect(NotifyMailer).to have_received(:continue_training).with(user_2, Training::Module.by_name('alpha')).once
       expect(NotifyMailer).to have_received(:continue_training).with(user_3, Training::Module.by_name('alpha')).once
       expect(NotifyMailer).not_to have_received(:continue_training).with(user_1, Training::Module.by_name('alpha'))

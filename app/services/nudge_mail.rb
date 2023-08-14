@@ -1,8 +1,16 @@
 class NudgeMail
   # @return [void]
-  def call
+  def complete_registration
     complete_registration_recipients.each { |recipient| NotifyMailer.complete_registration(recipient) }
+  end
+
+  # @return [void]
+  def start_training
     start_training_recipients.each { |recipient| NotifyMailer.start_training(recipient) }
+  end
+
+  # @return [void]
+  def continue_training
     continue_training_recipients.each { |recipient| NotifyMailer.continue_training(recipient, recipient.course.current_modules.first) }
   end
 
@@ -33,7 +41,7 @@ private
 
   # @return [Array<User>]
   def completed_available_modules
-    available_modules = TrainingModuleRecord.pluck(:name)
+    available_modules = PreviouslyPublishedModule.pluck(:name)
     User.training_email_recipients.select do |user|
       available_modules.all? { |mod| user.module_completed?(mod) }
     end

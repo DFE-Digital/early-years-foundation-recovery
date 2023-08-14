@@ -16,7 +16,9 @@ class HookController < ApplicationController
       properties: payload,
     )
 
-    check_new_modules
+    # TODO: WHAT IF THIS TAKES A LONG TIME? ENQUEUE IT? OR HAVE IT AS A SCHEDULED JOB?
+    # check_new_modules
+    NewModuleMailJob.enqueue
 
     # Potentially useful but is a LONG running task and concurrent runs must be avoided
     # TODO: consider que-locks if webhooks are to trigger the worker
@@ -53,17 +55,5 @@ private
   # @return [Hash]
   def payload
     @payload ||= JSON.parse(request.body.read)
-  end
-
-  # @return [void]
-  def check_new_modules
-    new_modules = Training::Module.reject(&:draft?).select(&:new_module?)
-    return if new_modules.empty?
-
-    mail_service = NudgeMail.new
-    new_modules.each do |mod|
-      mail_service.new_module(mod)
-      TrainingModuleRecord.create!(module_position: mod.position, name: mod.name)
-    end
   end
 end
