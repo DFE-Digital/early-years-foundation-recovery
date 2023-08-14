@@ -111,7 +111,7 @@ jobs:
             az webapp vnet-integration add --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.REVIEWAPP_NAME }} \
               --slot ${{ env.PR_NUMBER }} \
-              --subnet AZURE_REVIEW_APP_SUBNET \
+              --subnet ${{ AZURE_REVIEW_APP_SUBNET }} \
               --vnet ${{ secrets.AZURE_VNET }}
             az webapp config appsettings set --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.REVIEWAPP_NAME }} \
