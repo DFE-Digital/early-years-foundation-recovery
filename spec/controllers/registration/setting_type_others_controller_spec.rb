@@ -17,10 +17,10 @@ RSpec.describe Registration::SettingTypeOthersController, type: :controller do
     end
   end
 
-  context 'when confirmed user signed in' do
-    let(:confirmed_user) { create :user, :confirmed, :name }
+  context 'when signed in' do
+    let(:user) { create :user, :named }
 
-    before { sign_in confirmed_user }
+    before { sign_in user }
 
     describe 'GET #edit' do
       it 'succeeds' do
@@ -33,8 +33,8 @@ RSpec.describe Registration::SettingTypeOthersController, type: :controller do
       it 'succeeds' do
         post :update, params: { user: { setting_type_other: 'User defined setting type' } }
         expect(response).to redirect_to edit_registration_local_authority_path
-        expect(confirmed_user.reload.setting_type_other).to eq 'User defined setting type'
-        expect(confirmed_user.reload.setting_type_id).to eq 'other'
+        expect(user.reload.setting_type_other).to eq 'User defined setting type'
+        expect(user.reload.setting_type_id).to eq 'other'
       end
     end
   end

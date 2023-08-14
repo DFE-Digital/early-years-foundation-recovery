@@ -8,51 +8,43 @@ FactoryBot.define do
       confirmed_at { 1.minute.ago }
     end
 
-    trait :registered do
+    trait :named do
       confirmed
-      registration_complete { true }
-      first_name { Faker::Name.first_name }
-      last_name { Faker::Name.last_name }
-      setting_type_id { SettingType.all.sample.id }
-      role_type { RoleType.first.name }
-      local_authority { LocalAuthority.first.name }
-      terms_and_conditions_agreed_at { Date.new(2000, 0o1, 0o1) }
-    end
-
-    trait :name do
       first_name { Faker::Name.first_name }
       last_name { Faker::Name.last_name }
     end
 
-    trait :setting_type do
-      setting_type_id { SettingType.all.sample.id }
-    end
-
-    trait :agency_setting do
-      setting_type { 'Childminder as part of an agency' }
-    end
-
-    trait :setting_type_with_role_type do
-      setting_type_id { SettingType.where(role_type: %w[childminder other]).sample.id }
-    end
-
-    trait :role_type do
-      role_type { RoleType.first.name }
-    end
-
-    trait :display_whats_new do
-      display_whats_new { true }
-    end
-
-    trait :emails_opt_in do
+    trait :registered do
+      named
+      setting_type_id { 'other' }
+      setting_type { nil }
+      setting_type_other { 'DfE' }
+      role_type { 'other' }
+      role_type_other { 'Developer' }
+      # local_authority { '' }
       training_emails { true }
+      early_years_emails { false }
+      registration_complete { true }
     end
 
-    trait :emails_opt_out do
-      training_emails { false }
-      if ENV['EARLY_YEARS_EMAILS']
-        early_years_emails { false }
-      end
+    # Personas -----------------------------------------------------------------
+
+    trait :agency_childminder do
+      registered
+      setting_type_id { 'childminder_agency' }
+      setting_type { 'Childminder as part of an agency' } # Why are we persisting the titles?
+      setting_type_other { nil }
+      role_type { 'Childminder' }
+      role_type_other { nil }
+    end
+
+    trait :independent_childminder do
+      registered
+      setting_type_id { 'childminder_independent' }
+      setting_type { 'Independent childminder' }
+      setting_type_other { nil }
+      role_type { 'Childminder' }
+      role_type_other { nil }
     end
   end
 end

@@ -7,11 +7,6 @@
 # versions of RuboCop, may require this file to be generated again.
 
 # Offense count: 1
-Lint/MixedRegexpCaptureTypes:
-  Exclude:
-    - 'lib/seed_course_entries.rb'
-
-# Offense count: 1
 Lint/ShadowedException:
   Exclude:
     - 'app/models/concerns/to_csv.rb'
@@ -48,16 +43,18 @@ Rails/Output:
     - 'app/jobs/dashboard_job.rb'
     - 'app/jobs/fill_page_views_job.rb'
     - 'app/models/concerns/to_csv.rb'
-    - 'app/services/contentful_data_integrity.rb'
+    - 'app/services/content_integrity.rb'
     - 'app/services/dashboard.rb'
 
-# Offense count: 7
+# Offense count: 10
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: AllowImplicitReturn, AllowedReceivers.
 Rails/SaveBang:
   Exclude:
     - 'app/controllers/registrations_controller.rb'
     - 'app/controllers/training/responses_controller.rb'
+    - 'app/forms/users/setting_type_form.rb'
     - 'config/sitemap.rb'
     - 'lib/content_seed.rb'
     - 'lib/seed_images.rb'
+    - 'spec/forms/users/setting_type_form_spec.rb'

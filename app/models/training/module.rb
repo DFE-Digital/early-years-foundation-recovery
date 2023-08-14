@@ -1,14 +1,5 @@
 module Training
   class Module < ContentfulModel::Base
-    # has_many :pages, class_name: 'Training::Page'
-    # has_many :questions, class_name: 'Training::Question'
-    # has_many :videos, class_name: 'Training::Video'
-
-    # @deprecated Not required for CMS
-    def module_items
-      content
-    end
-
     extend ::Caching
 
     # @return [String]
@@ -18,8 +9,8 @@ module Training
 
     # @return [Array<Training::Module>] minimum requirement "name"
     def self.ordered
-      fetch_or_store to_key(__method__) do
-        load_children(0).order(:position).load!.to_a.select(&:named?)
+      fetch_or_store to_key("#{name}.__method__") do
+        load_children(0).order(:position).load.to_a.select(&:named?)
       end
     end
 
@@ -127,7 +118,7 @@ module Training
 
     # state ---------------------------------
 
-    # @see ContentfulCourseProgress
+    # @see CourseProgress
     # @return [Boolean] incomplete content will not be deemed 'available'
     def draft?
       @draft ||= !data.valid?
@@ -151,7 +142,7 @@ module Training
     end
 
     # @see Training::Module#debug_summary
-    # @see ContentfulCourseProgress#debug_summary
+    # @see CourseProgress#debug_summary
     #
     # @return [Contentful::Management::Entry]
     def entry
@@ -268,9 +259,9 @@ module Training
       content.map(&:schema)
     end
 
-    # @return [ContentfulDataIntegrity]
+    # @return [ContentIntegrity]
     def data
-      @data ||= ContentfulDataIntegrity.new(module_name: name)
+      @data ||= ContentIntegrity.new(module_name: name)
     end
 
   private

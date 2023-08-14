@@ -45,19 +45,13 @@ module Data
         end
       end
 
-  private
+    private
 
       def mods
-        if Rails.application.cms?
-          Training::Module.ordered
-        else
-          TrainingModule.published
-        end
+        Training::Module.ordered
       end
 
       def true_false_count(mod)
-        return 'N/A' unless Rails.application.cms?
-
         mod.questions.count(&:true_false?)
       end
 
@@ -76,6 +70,6 @@ module Data
       def started(mod)
         in_progress(mod) + completed(mod)
       end
-  end
+    end
   end
 end

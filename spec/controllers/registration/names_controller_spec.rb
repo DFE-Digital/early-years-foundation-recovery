@@ -17,10 +17,10 @@ RSpec.describe Registration::NamesController, type: :controller do
     end
   end
 
-  context 'when confirmed user signed in' do
-    let(:confirmed_user) { create :user, :confirmed }
+  context 'when signed in' do
+    let(:user) { create :user, :confirmed }
 
-    before { sign_in confirmed_user }
+    before { sign_in user }
 
     describe 'GET #edit' do
       it 'succeeds' do

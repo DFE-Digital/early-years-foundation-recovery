@@ -80,6 +80,12 @@ module Training
       body
     end
 
+    # @see ApplicationHelper#html_title
+    # @return [String]
+    def title
+      name
+    end
+
     # @return [String]
     def legend
       if multi_select?

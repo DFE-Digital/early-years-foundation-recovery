@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Registration name', type: :request do
+RSpec.describe 'Registration names', type: :request do
   subject(:user) { create(:user, :confirmed) }
 
   before do
@@ -33,7 +33,7 @@ RSpec.describe 'Registration name', type: :request do
 
       it 'redirects to setting type' do
         update_user
-        expect(response).to redirect_to(edit_registration_setting_type_path)
+        expect(response).to redirect_to edit_registration_setting_type_path
       end
     end
   end

@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  # subject(:user) { build(:user, :registered, **params) }
+
   it 'is valid after registration' do
     expect(build(:user, :registered)).to be_valid
   end
@@ -28,18 +30,36 @@ RSpec.describe User, type: :model do
   end
 
   describe '#role_type' do
-    context 'with childminder and other require a role type' do
-      SettingType.role_type_required.each do |setting_type|
-        it 'must be present' do
-          expect(build(:user, :registered, setting_type_id: setting_type.id, role_type: nil)).not_to be_valid
-        end
+    subject(:user) do
+      build(:user, :registered, setting_type_id: setting, role_type: nil)
+    end
+
+    context 'when setting is other' do
+      let(:setting) { 'other' }
+
+      it 'role must be present' do
+        expect(user).not_to be_valid
       end
     end
 
-    context 'with none' do
-      SettingType.none.each do |setting|
-        it 'is not required' do
-          user = build(:user, :registered, setting_type_id: setting.id, role_type: nil)
+    context 'when setting is childminder' do
+      let(:setting) { 'childminder' }
+
+      it 'role must be present' do
+        expect(user).not_to be_valid
+      end
+    end
+
+    %w[
+      training_provider
+      central_government
+      department_for_education
+      local_authority
+    ].each do |setting|
+      context "when setting is #{setting}" do
+        let(:setting) { setting }
+
+        it 'role is not required' do
           expect(user).to be_valid
         end
       end
@@ -118,9 +138,9 @@ RSpec.describe User, type: :model do
     it 'exports formatted attributes as CSV' do
       expect(described_class.to_csv(batch_size: 2)).to eq <<~CSV
         id,local_authority,setting_type,role_type,registration_complete,private_beta_registration_complete,registration_complete_any?,registered_at,module_1_time,module_2_time,module_3_time
-        1,Watford Borough Council,,Childminder,true,true,true,,4,2,0
+        1,Watford Borough Council,,other,true,true,true,,4,2,0
         2,Leeds City Council,,Trainer or lecturer,true,false,true,,1,0,
-        3,City of London,,Childminder,true,false,true,2023-01-12 10:15:59,3,,
+        3,City of London,,other,true,false,true,2023-01-12 10:15:59,3,,
         4,,,,false,false,false,,,,
       CSV
     end
@@ -147,10 +167,6 @@ RSpec.describe User, type: :model do
                alpha: 4,
                bravo: 2,
              })
-    end
-
-    before do
-      skip 'CMS ONLY' unless Rails.application.cms?
     end
 
     it 'filters by user progress state' do

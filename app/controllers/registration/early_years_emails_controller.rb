@@ -1,14 +1,12 @@
 class Registration::EarlyYearsEmailsController < Registration::BaseController
-  def edit
-    @user_form = Users::EarlyYearsEmailsForm.new(user: current_user, early_years_emails: current_user.early_years_emails)
-  end
+  def edit; end
 
   def update
-    @user_form = Users::EarlyYearsEmailsForm.new(user_params.merge(user: current_user))
+    form.early_years_emails = user_params[:early_years_emails]
 
-    if @user_form.save
+    if form.save
       if current_user.registration_complete?
-        redirect_to user_path, notice: t('.complete_update')
+        redirect_to user_path, notice: t(:details_updated)
       else
         complete_registration
       end
@@ -21,5 +19,10 @@ private
 
   def user_params
     params.require(:user).permit(:early_years_emails)
+  end
+
+  # @return [Users::EarlyYearsEmailsForm]
+  def form
+    @form ||= Users::EarlyYearsEmailsForm.new(user: current_user, early_years_emails: current_user.early_years_emails)
   end
 end

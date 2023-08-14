@@ -1,3 +1,6 @@
+- content_for :page_title do
+  = html_title t('timeout.title')
+
 h1 For your security, we signed you out
 
 p= "You have not done anything for #{timeout_warning} minutes."

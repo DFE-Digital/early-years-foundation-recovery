@@ -21,6 +21,6 @@ module Data
           }
         end
       end
-  end
+    end
   end
 end

@@ -1,3 +1,6 @@
+- content_for :page_title do
+  = html_title mod.title, content.heading
+
 .noprint
   = render 'shared/progress_bar'
 
@@ -43,7 +46,7 @@ h3 Certified by the Department for Education
 .noprint
   .govuk-button-group
     = print_button
-    = govuk_link_to 'Download certificate', training_module_content_page_path(mod.name, mod.certificate_page.name, format: :pdf), aria: { describedby: 'pdf-details' }
+    = govuk_link_to 'Download certificate', training_module_page_path(mod.name, mod.certificate_page.name, format: :pdf), aria: { describedby: 'pdf-details' }
 
   p#pdf-details.govuk-body
     span aria-label='file type'

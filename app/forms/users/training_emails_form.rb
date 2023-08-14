@@ -4,16 +4,16 @@ module Users
 
     validates :training_emails, presence: true
 
+    # @return [String]
     def name
       'training_emails'
     end
 
+    # @return [Boolean]
     def save
-      if valid?
-        user.update!(
-          training_emails: training_emails,
-        )
-      end
+      return false unless valid?
+
+      user.update!(training_emails: training_emails)
     end
   end
 end

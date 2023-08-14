@@ -1,3 +1,6 @@
+- content_for :page_title do
+  = html_title t(:title, scope: :account_confirm)
+
 - if url_for(:back).include?(check_email_confirmation_user_path)
   a.govuk-back-link href=url_for(:back) Back
 

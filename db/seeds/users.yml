@@ -16,9 +16,9 @@ completed@example.com:
   # mandatory if "registration_complete"
   first_name: Demo
   last_name: User
-  setting_type_id: <%= SettingType.first.id %>
-  setting_type: <%= SettingType.first.name %>
-  role_type: <%= RoleType.first.name %>
+  setting_type_id: childminder_agency
+  setting_type: Childminder as part of an agency
+  role_type: Childminder
   # optional
   local_authority: local authority
 
@@ -30,7 +30,7 @@ private-beta-completed@example.com:
   # mandatory if "registration_complete"
   first_name: Private beta Demo
   last_name: DemoUser
-  setting_type: 'school'
+  setting_type: school
   # optional
 
 whats-new-private-beta-completed@example.com:
@@ -42,5 +42,5 @@ whats-new-private-beta-completed@example.com:
   # mandatory if "registration_complete"
   first_name: Private beta Demo
   last_name: DemoUser
-  setting_type: 'school'
+  setting_type: school
   # optional

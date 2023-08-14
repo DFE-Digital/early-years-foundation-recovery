@@ -16,11 +16,6 @@ class HookController < ApplicationController
       properties: payload,
     )
 
-    # Potentially useful but is a LONG running task and concurrent runs must be avoided
-    # TODO: consider que-locks if webhooks are to trigger the worker
-    #
-    # FillPageViewsJob.enqueue
-
     render json: { status: 'content release received' }, status: :ok
   end
 

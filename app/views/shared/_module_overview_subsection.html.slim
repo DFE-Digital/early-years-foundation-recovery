@@ -1,6 +1,6 @@
 span.module-section--item
-  - if next_item
-    = govuk_link_to heading, training_module_content_page_path(mod, next_item)
+  - if next_page_name
+    = govuk_link_to heading, training_module_page_path(mod_name, next_page_name)
   - else
     = heading
 span.progress-indicator= progress_indicator(status)

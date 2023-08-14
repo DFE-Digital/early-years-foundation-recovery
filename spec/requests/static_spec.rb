@@ -1,8 +1,5 @@
 require 'rails_helper'
 
-#
-# Backend agnostic
-#
 RSpec.describe 'Static page', :cms, type: :request do
   context 'when public' do
     specify { expect('/accessibility-statement').to be_successful }

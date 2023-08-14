@@ -5,17 +5,13 @@ RSpec.describe CourseProgress do
 
   include_context 'with progress'
 
-  before do
-    skip 'YAML ONLY' if Rails.application.cms?
-  end
-
   describe '#course_completed?' do
     it 'is false for new users' do
       expect(course.course_completed?).to be false
     end
 
     it 'is true once all published module pages are viewed' do
-      TrainingModule.published.map { |mod| complete_module(mod) }
+      published_mods.map { |mod| complete_module(mod) }
 
       expect(course.course_completed?).to be true
     end

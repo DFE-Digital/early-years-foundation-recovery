@@ -13,16 +13,14 @@ class User < ApplicationRecord
     registered_at
   ].freeze
 
+  # @return [Array<Training::Module>]
+  def self.course_modules
+    Training::Module.ordered.reject(&:draft?)
+  end
+
   # @return [Array<String>]
   def self.dashboard_headers
-    module_times =
-      if Rails.application.cms?
-        Training::Module.ordered.reject(&:draft?).map { |mod| "module_#{mod.position}_time" }
-      else
-        TrainingModule.published.map { |mod| "module_#{mod.id}_time" }
-      end
-
-    DASHBOARD_ATTRS + module_times
+    DASHBOARD_ATTRS + course_modules.map { |mod| "module_#{mod.position}_time" }
   end
 
   # Include default devise modules. Others available are:
@@ -67,10 +65,11 @@ class User < ApplicationRecord
   # new users only
   scope :public_beta_only_registration_complete, -> { registered_since_private_beta.registration_complete }
 
+  scope :since_public_beta, -> { where(created_at: Rails.application.public_beta_launch_date..Time.zone.now) }
+
   scope :confirmed, -> { where.not(confirmed_at: nil) }
   scope :unconfirmed, -> { where(confirmed_at: nil) }
   scope :locked_out, -> { where.not(locked_at: nil) }
-  scope :since_public_beta, -> { where(created_at: Rails.application.public_beta_launch_date..Time.zone.now) }
 
   scope :with_local_authority, -> { where.not(local_authority: nil) }
   scope :with_notes, -> { joins(:notes).distinct.select(&:has_notes?) }
@@ -78,6 +77,9 @@ class User < ApplicationRecord
 
   scope :closed, -> { where.not(closed_at: nil) }
   scope :not_closed, -> { where(closed_at: nil) }
+  validates :closed_reason, presence: true, if: -> { context == :close_account }
+  validates :closed_reason_custom, presence: true, if: proc { |u| u.closed_reason == 'other' }
+
   scope :with_assessments, -> { joins(:user_assessments) }
   scope :with_passing_assessments, -> { with_assessments.merge(UserAssessment.passes) }
 
@@ -85,13 +87,11 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, :setting_type_id,
             presence: true,
-            if: proc { |u| u.registration_complete }
+            if: proc { |u| u.registration_complete? }
   validates :role_type, presence: true, if: proc { |u| u.role_type_required? }
   validates :setting_type_id,
-            inclusion: { in: SettingType.valid_setting_types },
-            if: proc { |u| u.registration_complete }
-  validates :closed_reason, presence: true, if: -> { context == :close_account }
-  validates :closed_reason_custom, presence: true, if: proc { |u| u.closed_reason == 'other' }
+            inclusion: { in: Trainee::Setting.valid_types },
+            if: proc { |u| u.registration_complete? }
 
   validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
 
@@ -123,35 +123,22 @@ class User < ApplicationRecord
         archived: false,
       )
     else
-      begin
-        questionnaire = Questionnaire.find_by!(name: content.name, training_module: content.parent.name)
-
-        user_answers.find_or_initialize_by(
-          assessments_type: content.assessments_type,
-          module: content.parent.name,
-          name: content.name,
-          questionnaire_id: questionnaire.id,
-          question: questionnaire.questions.keys.first,
-          archived: nil,
-        )
-
-      # module exclusive to CMS
-      rescue ActiveHash::RecordNotFound
-        user_answers.find_or_initialize_by(
-          assessments_type: content.assessments_type,
-          module: content.parent.name,
-          name: content.name,
-          questionnaire_id: 0,
-          question: 'N/A for CMS only questions',
-          archived: nil,
-        )
-      end
+      user_answers.find_or_initialize_by(
+        assessments_type: content.assessments_type,
+        module: content.parent.name,
+        name: content.name,
+        questionnaire_id: 0,
+        question: 'N/A for CMS only questions',
+        archived: nil,
+      )
     end
   end
 
-  # @return [Array<Training::Modules>]
+  # @return [Array<Training::Module>]
   def active_modules
-    Training::Module.ordered.reject(&:draft?).select { |mod| module_time_to_completion.key?(mod.name) }
+    self.class.course_modules.select do |mod|
+      module_time_to_completion.key?(mod.name)
+    end
   end
 
   # @see Devise::Confirmable
@@ -175,6 +162,7 @@ class User < ApplicationRecord
     send_devise_notification(:account_closed)
   end
 
+  # TODO: refactor this internal user mailer logic
   def send_account_closed_internal_notification(user_account_email)
     send_devise_notification(:account_closed_internal, user_account_email)
   end
@@ -195,13 +183,9 @@ class User < ApplicationRecord
     timestamp.to_date&.to_formatted_s(:rfc822)
   end
 
-  # @return [CourseProgress, ContentfulCourseProgress] course activity query interface
+  # @return [CourseProgress] course activity query interface
   def course
-    @course ||= if Rails.application.cms?
-                  ContentfulCourseProgress.new(user: self)
-                else
-                  CourseProgress.new(user: self)
-                end
+    @course ||= CourseProgress.new(user: self)
   end
 
   # @return [Boolean]
@@ -221,53 +205,66 @@ class User < ApplicationRecord
   end
 
   # @return [String]
-  def setting_name
-    setting_type_id == 'other' ? setting_type_other : setting_type
+  def authority_name
+    (local_authority.presence || 'Multiple')
   end
 
-  # @return [Boolean]
-  def role
-    role_type == 'other' ? role_type_other : role_type
+  # @return [String]
+  def setting_name
+    setting_other? ? setting_type_other : setting.title
+  end
+
+  # @return [String]
+  def role_name
+    role_other? ? role_type_other : role_type
   end
 
   # @return [Boolean]
   def childminder?
-    setting_type_id == 'other' ? false : setting.role_type.eql?('childminder')
+    setting_other? ? false : setting.role_type.eql?('childminder')
   end
 
   # @return [Boolean]
   def role_type_required?
     return false unless setting_type_id
     return false unless registration_complete?
-    return true if setting_type_id == 'other'
-    return false unless SettingType.valid_setting_types.include?(setting_type_id)
-    return true if new_setting_type_role_required?
-
-    setting.role_type != 'none'
+    return true if setting_other?
+    return false unless setting_valid?
+    return true if select_new_role?
   end
 
   # @return [Boolean]
-  def new_setting_type_role_required?
-    if setting_type_id_changed?
-      SettingType.find(setting_type_id_change[1]).role_type != 'none'
-    else
-      false
-    end
+  def setting_valid?
+    Trainee::Setting.valid_types.include?(setting_type_id)
   end
 
   # @return [Boolean]
-  def local_authority_setting?
+  def select_new_role?
+    return false unless setting_type_id_changed?
+
+    new_value = setting_type_id_change[1]
+
+    Trainee::Setting.by_name(new_value).has_role?
+  end
+
+  # @return [Boolean]
+  def setting_local_authority?
     setting_type_id == 'local_authority'
   end
 
   # @return [Boolean]
-  def role_type_applicable?
-    role_type != 'Not applicable'
+  def setting_other?
+    setting_type_id == 'other'
   end
 
   # @return [Boolean]
-  def email_preferences_complete?
-    !training_emails.nil?
+  def role_other?
+    role_type == 'other'
+  end
+
+  # @return [Boolean]
+  def role_applicable?
+    role_type != 'Not applicable'
   end
 
   # @return [Boolean]
@@ -285,12 +282,22 @@ class User < ApplicationRecord
     events.where(name: 'user_registration').first&.time # :first returns private_beta or public_beta if that is the only one
   end
 
+  # @return [Trainee::Setting, nil]
+  def setting
+    return unless setting_type_id
+
+    Trainee::Setting.by_name(setting_type_id)
+  end
+
+  # @return [Boolean]
+  def email_preferences_complete?
+    !training_emails.nil?
+  end
+
   # @return [Hash{Symbol => Integer}]
   def module_ttc
-    if Rails.application.cms?
-      Training::Module.ordered.reject(&:draft?).map(&:name).index_with { |mod| module_time_to_completion[mod] }
-    else
-      TrainingModule.published.map(&:name).index_with { |mod| module_time_to_completion[mod] }
+    self.class.course_modules.map(&:name).index_with do |mod|
+      module_time_to_completion[mod]
     end
   end
 
@@ -307,14 +314,6 @@ class User < ApplicationRecord
     notes.destroy_all
   end
 
-  def local_authority_text
-    if local_authority.nil? || local_authority.eql?('local authority')
-      'Multiple'
-    else
-      local_authority
-    end
-  end
-
   # @see ToCsv#dashboard_row
   # @return [Hash] override
   def dashboard_row
@@ -326,11 +325,6 @@ private
   # @return [Hash]
   def data_attributes
     DASHBOARD_ATTRS.map { |field| { field => send(field) } }.reduce(&:merge)
-  end
-
-  # @return [SettingType, nil]
-  def setting
-    @setting ||= SettingType.find(setting_type_id) if setting_type_id
   end
 
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]

@@ -11,7 +11,7 @@ RSpec.describe Dashboard do
   end
 
   after do
-    FileUtils.rm_rf(path, verbose: true, secure: true)
+    FileUtils.rm_rf(path, secure: true)
   end
 
   describe '#call' do
