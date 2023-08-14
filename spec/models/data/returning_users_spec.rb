@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Data::ReturningUsers do
   let(:headers) do
-    ['Weekly Returning Users', 'Monthly Returning Users', 'Quarterly Returning Users']
+    ['Weekly Returning Users',
+     'Monthly Returning Users',
+     'Quarterly Returning Users']
   end
 
   let(:rows) do

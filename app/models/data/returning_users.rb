@@ -6,8 +6,8 @@ module Data
       # @return [Array<String>]
       def column_names
         ['Weekly Returning Users',
-          'Monthly Returning Users',
-          'Quarterly Returning Users']
+         'Monthly Returning Users',
+         'Quarterly Returning Users']
       end
 
       # @return [Array<Hash{Symbol => Mixed}>]
