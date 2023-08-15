@@ -44,6 +44,6 @@ resource "azurerm_postgresql_flexible_server_configuration" "psqlfs_config" {
 resource "azurerm_postgresql_flexible_server_database" "psqldb" {
   name      = "${var.resource_name_prefix}-${random_pet.name.id}-psqldb"
   server_id = azurerm_postgresql_flexible_server.psqlfs.id
-  collation = "en_US.UTF8"
-  charset   = "UTF8"
+  collation = "en_US.utf8"
+  charset   = "utf8"
 }

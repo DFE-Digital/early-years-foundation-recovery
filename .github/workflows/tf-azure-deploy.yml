@@ -165,7 +165,12 @@ jobs:
 
       # Initialise a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
-        run: terraform init
+        run: >
+          terraform init
+          -backend-config="resource_group_name=${{ secrets.TERRAFORM_STATE_RESOURCE_GROUP }}"
+          -backend-config="storage_account_name=${{ secrets.TERRAFORM_STATE_STORAGE_ACCOUNT_NAME }}"
+          -backend-config="container_name=${{ secrets.TERRAFORM_STATE_STORAGE_CONTAINER_NAME }}"
+          -backend-config="key=${{ secrets.TERRAFORM_STATE_KEY }}"
 
       # Download saved plan from artifacts
       - name: Download Terraform Plan
