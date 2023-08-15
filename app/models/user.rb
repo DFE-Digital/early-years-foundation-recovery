@@ -120,9 +120,7 @@ class User < ApplicationRecord
         training_module: content.parent.name,
         archived: false,
         assessments_type: content.assessments_type,
-      ).tap do |response|
-        response.update(schema: content.schema, answer_text: content.answer.json.to_json)
-      end
+      )
     else
       user_answers.find_or_initialize_by(
         assessments_type: content.assessments_type,

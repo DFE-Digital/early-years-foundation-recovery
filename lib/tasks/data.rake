@@ -25,7 +25,7 @@ namespace :data do
         correct: user_answer.correct,
         assessments_type: user_answer.assessments_type,
         schema: user_answer.question.schema,
-        answer_text: user_answer.question.answer.json.to_json,
+        answer_text: user_answer.question.answer,
         user_assessment_id: user_answer.user_assessment_id,
       )
       response.save!(validate: false)
