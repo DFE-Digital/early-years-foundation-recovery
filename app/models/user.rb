@@ -6,21 +6,19 @@ class User < ApplicationRecord
     id
     local_authority
     setting_type
+    setting_type_other
     role_type
+    role_type_other
     registration_complete
     private_beta_registration_complete
     registration_complete_any?
     registered_at
+    terms_and_conditions_agreed_at
   ].freeze
-
-  # @return [Array<Training::Module>]
-  def self.course_modules
-    Training::Module.ordered.reject(&:draft?)
-  end
 
   # @return [Array<String>]
   def self.dashboard_headers
-    DASHBOARD_ATTRS + course_modules.map { |mod| "module_#{mod.position}_time" }
+    DASHBOARD_ATTRS + Training::Module.live.map { |mod| "module_#{mod.position}_time" }
   end
 
   # Include default devise modules. Others available are:
@@ -136,7 +134,7 @@ class User < ApplicationRecord
 
   # @return [Array<Training::Module>]
   def active_modules
-    self.class.course_modules.select do |mod|
+    Training::Module.live.select do |mod|
       module_time_to_completion.key?(mod.name)
     end
   end
@@ -296,7 +294,7 @@ class User < ApplicationRecord
 
   # @return [Hash{Symbol => Integer}]
   def module_ttc
-    self.class.course_modules.map(&:name).index_with do |mod|
+    Training::Module.live.map(&:name).index_with do |mod|
       module_time_to_completion[mod]
     end
   end

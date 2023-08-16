@@ -7,6 +7,11 @@ module Training
       'trainingModule'
     end
 
+    # @return [Array<Training::Module>]
+    def self.live
+      ordered.reject(&:draft?)
+    end
+
     # @return [Array<Training::Module>] minimum requirement "name"
     def self.ordered
       fetch_or_store to_key("#{name}.__method__") do
