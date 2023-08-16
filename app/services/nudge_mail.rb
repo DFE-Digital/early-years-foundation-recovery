@@ -11,7 +11,10 @@ class NudgeMail
 
   # @return [void]
   def continue_training
-    continue_training_recipients.each { |recipient| NotifyMailer.continue_training(recipient, recipient.course.current_modules.first) }
+    continue_training_recipients.each do |recipient|
+      progress = recipient.course
+      NotifyMailer.continue_training(recipient, progress.current_modules.first)
+    end
   end
 
   # @param mod [TrainingModule]
@@ -22,12 +25,12 @@ class NudgeMail
 
 private
 
-  # @return [ActiveRecord::Relation]
+  # @return [User::ActiveRecord_Relation]
   def complete_registration_recipients
     User.training_email_recipients.month_old_confirmation.registration_incomplete
   end
 
-  # @return [ActiveRecord::Relation]
+  # @return [Array<User>]
   def start_training_recipients
     User.training_email_recipients.month_old_confirmation.registration_complete.not_started_training
   end

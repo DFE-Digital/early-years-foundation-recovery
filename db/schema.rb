@@ -67,6 +67,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_27_102149) do
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
+  create_table "previously_published_modules", force: :cascade do |t|
+    t.integer "module_position", null: false
+    t.string "name", null: false
+    t.datetime "first_published_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["module_position"], name: "index_previously_published_modules_on_module_position", unique: true
+    t.index ["name"], name: "index_previously_published_modules_on_name", unique: true
+  end
+
   create_table "que_jobs", comment: "7", force: :cascade do |t|
     t.integer "priority", limit: 2, default: 100, null: false
     t.timestamptz "run_at", default: -> { "now()" }, null: false
@@ -148,14 +158,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_27_102149) do
     t.index ["user_assessment_id"], name: "index_responses_on_user_assessment_id"
     t.index ["user_id", "training_module", "question_name"], name: "user_question"
     t.index ["user_id"], name: "index_responses_on_user_id"
-  end
-
-  create_table "training_module_records", force: :cascade do |t|
-    t.integer "module_position", null: false
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_training_module_records_on_name", unique: true
   end
 
   create_table "user_answers", force: :cascade do |t|

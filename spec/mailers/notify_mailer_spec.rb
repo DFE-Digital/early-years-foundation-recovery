@@ -88,7 +88,7 @@ RSpec.describe NotifyMailer, type: :mailer do
     end
   end
 
-  describe 'training email opt in' do
+  describe 'users without email preferences' do
     context 'when user not completed registration and not opted out of emails' do
       it 'sends email to user to remind them to complete registration' do
         mail = described_class.complete_registration(user)

@@ -20,7 +20,7 @@ private
 
   def new_module
     latest_published = Training::Module.ordered.reject(&:draft?).last
-    if latest_published == TrainingModuleRecord.ordered.last.module_position
+    if latest_published.position == PreviouslyPublishedModule.ordered.last.module_position
       nil
     else
       Training::Module.ordered.reject(&:draft?).last

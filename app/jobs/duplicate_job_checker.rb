@@ -15,6 +15,5 @@ private
   def log_duplicate
     Rails.logger.info("DuplicateJobChecker: Duplicate #{self.class.name} job queued - skipping")
     Sentry.capture_message("DuplicateJobChecker: Duplicate #{self.class.name} job queued - skipping") if Rails.application.live?
-    puts "DuplicateJobChecker: Duplicate #{self.class.name} job queued - skipping"
   end
 end
