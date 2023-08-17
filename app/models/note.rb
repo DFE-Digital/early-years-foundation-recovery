@@ -9,6 +9,6 @@ class Note < ApplicationRecord
 
   # @return [Boolean]
   def filled?
-    !body.strip.empty?
+    body.present? && !body.strip.empty?
   end
 end

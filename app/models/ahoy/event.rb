@@ -29,6 +29,9 @@ class Ahoy::Event < ApplicationRecord
                                      user_registration.where("properties -> 'controller' ?| array[:values]", values: controllers)
                                    }
 
+  scope :since_non_linear, -> { where(time: Rails.application.non_linear_launch_date..Time.zone.now) }
+  # scope :since_cms, -> { where(time: Rails.application.cms_launch_date..Time.zone.now) }
+
   # @see ContentPagesController#track_events
   # ----------------------------------------------------------------------------
   scope :page_view, -> { where(name: 'module_content_page') }

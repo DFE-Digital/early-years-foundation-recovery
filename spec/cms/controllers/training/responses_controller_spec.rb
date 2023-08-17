@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Training::ResponsesController, type: :controller do
   before do
-    skip 'WIP' unless Rails.application.cms?
+    skip 'CMS ONLY' unless Rails.application.cms?
     sign_in create(:user, :registered)
 
     if ENV['DISABLE_USER_ANSWER'].present?
