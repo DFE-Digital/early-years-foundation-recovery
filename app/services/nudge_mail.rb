@@ -37,7 +37,7 @@ private
 
   # @return [Array<User>]
   def continue_training_recipients
-    recent_visits = Ahoy::Visit.where(started_at: 4.weeks.ago.end_of_day..Time.zone.now)
+    recent_visits = Ahoy::Visit.last_4_weeks
     old_visits = Ahoy::Visit.month_old.reject { |visit| recent_visits.pluck(:user_id).include?(visit.user_id) }
     User.course_in_progress.select { |user| old_visits.pluck(:user_id).include?(user.id) }
   end

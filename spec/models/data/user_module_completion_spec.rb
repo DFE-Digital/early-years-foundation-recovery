@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Data::UserModuleCompletion do
+  include_context 'with progress'
   let(:headers) do
     [
       'Module Name',
@@ -14,7 +15,7 @@ RSpec.describe Data::UserModuleCompletion do
       {
         module_name: 'alpha',
         completed_count: 1,
-        completed_percentage: 0.3333333333333333,
+        completed_percentage: 0.5,
       },
       {
         module_name: 'bravo',
@@ -31,8 +32,8 @@ RSpec.describe Data::UserModuleCompletion do
 
   before do
     create :user, :registered
-    create :user, :registered, module_time_to_completion: { alpha: 0 }
-    create :user, :registered, module_time_to_completion: { alpha: 1 }
+    complete_module(Training::Module.by_name('alpha'))
+    start_module(Training::Module.by_name('bravo'))
   end
 
   it_behaves_like 'a data export model'

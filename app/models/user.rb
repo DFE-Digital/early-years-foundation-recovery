@@ -216,13 +216,13 @@ class User < ApplicationRecord
 
   # @return [Boolean]
   def course_in_progress?
-    course_started? && !module_time_to_completion.values.all?(&:positive?)
+    course.current_modules.present?
   end
 
   # @param module_name [String]
   # @return [Boolean]
   def module_completed?(module_name)
-    module_time_to_completion[module_name]&.positive?
+    course.completed?(Training::Module.by_name(module_name))
   end
 
   # @return [Integer]

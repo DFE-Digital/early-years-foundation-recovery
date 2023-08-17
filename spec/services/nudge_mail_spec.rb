@@ -56,7 +56,15 @@ RSpec.describe NudgeMail do
     let!(:user_3) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1 }) }
 
     before do
-      user.update!(module_time_to_completion: { "alpha": 0 }, confirmed_at: 4.weeks.ago)
+      user.update!(confirmed_at: 4.weeks.ago)
+
+      Ahoy::Visit.new(
+        id: 9,
+        visitor_token: '345',
+        user_id: user.id,
+        started_at: 4.weeks.ago,
+      ).save!
+
       Ahoy::Visit.new(
         id: 7,
         visitor_token: '123',
@@ -71,12 +79,6 @@ RSpec.describe NudgeMail do
         started_at: 2.weeks.ago,
       ).save!
 
-      Ahoy::Visit.new(
-        id: 9,
-        visitor_token: '345',
-        user_id: user.id,
-        started_at: 4.weeks.ago,
-      ).save!
       travel_to 4.weeks.ago
       start_module(alpha)
       travel_back
@@ -98,13 +100,13 @@ RSpec.describe NudgeMail do
 
   context 'when users have completed all available modules and a new module is released' do
     include_context 'with progress'
-    let!(:user_2) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1, "beta": 0 }) }
+    let!(:user_2) { create(:user, :registered, confirmed_at: 4.weeks.ago) }
 
     before do
       complete_module(alpha)
       complete_module(bravo)
-      user.update!(module_time_to_completion: { "alpha": 1, "beta": 1 }, confirmed_at: 4.weeks.ago)
       PreviouslyPublishedModule.create!(module_position: 1, name: 'alpha', first_published_at: Time.zone.now).save!
+      PreviouslyPublishedModule.create!(module_position: 2, name: 'bravo', first_published_at: Time.zone.now).save!
 
       allow(NotifyMailer).to receive(:new_module)
     end

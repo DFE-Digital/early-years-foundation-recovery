@@ -16,8 +16,6 @@ class HookController < ApplicationController
       properties: payload,
     )
 
-    # TODO: WHAT IF THIS TAKES A LONG TIME? ENQUEUE IT? OR HAVE IT AS A SCHEDULED JOB?
-    # check_new_modules
     NewModuleMailJob.enqueue
 
     # Potentially useful but is a LONG running task and concurrent runs must be avoided

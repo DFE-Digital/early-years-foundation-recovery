@@ -1,6 +1,5 @@
-class StartTrainingMailJob < DuplicateJobChecker
+class StartTrainingMailJob < ScheduledJob
   def run
-    Rails.logger.info('StartTrainingMailJob running')
     NudgeMail.new.start_training
   end
 end

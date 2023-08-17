@@ -32,6 +32,14 @@ class ContentfulCourseProgress
     published_modules.all? { |mod| completed?(mod) }
   end
 
+  # @param mod [Training::Module]
+  # @return [Boolean]
+  def completed?(mod)
+    return false if mod.draft?
+
+    module_progress(mod).completed?
+  end
+
   # @return [Array<String>]
   def debug_summary
     training_modules.map do |mod|
@@ -59,14 +67,6 @@ private
     return false if mod.draft?
 
     module_progress(mod).started?
-  end
-
-  # @param mod [Training::Module]
-  # @return [Boolean]
-  def completed?(mod)
-    return false if mod.draft?
-
-    module_progress(mod).completed?
   end
 
   # @param mod [Training::Module]

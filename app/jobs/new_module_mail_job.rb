@@ -1,8 +1,7 @@
-class NewModuleMailJob < DuplicateJobChecker
+class NewModuleMailJob < ScheduledJob
   def run
     return if new_module.nil?
 
-    Rails.logger.info('NewModuleMailJob running')
     notify_users(new_module)
     create_published_record(new_module)
   end
