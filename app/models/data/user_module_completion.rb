@@ -19,7 +19,7 @@ module Data
           {
             module_name: mod.name,
             completed_count: completed_count,
-            completed_percentage: (completed_count / User.count.to_f),
+            completed_percentage: (completed_count / User.registration_complete.count.to_f),
           }
         end
       end

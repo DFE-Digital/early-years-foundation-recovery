@@ -20,6 +20,7 @@ RSpec.describe Data::UserModuleCompletionCount do
   end
 
   before do
+    create :user, :confirmed
     create :user, :registered, module_time_to_completion: { alpha: 1 }
     create :user, :registered, module_time_to_completion: { alpha: 1, charlie: 1 }
     create :user, :registered, module_time_to_completion: { alpha: 0 }
