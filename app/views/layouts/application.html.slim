@@ -33,7 +33,7 @@ html.govuk-template lang='en'
 
     .govuk-width-container
       = govuk_phase_banner(tag: { text: 'Beta' }, classes: 'noprint') do
-        = t('phase_banner_html', feedback_link: govuk_link_to('feedback', Rails.configuration.feedback_url, target: :_blank))
+        == t 'phase_banner', link: govuk_link_to('feedback', Rails.configuration.feedback_url, target: :_blank)
 
       .noprint = render 'layouts/timeout'
       

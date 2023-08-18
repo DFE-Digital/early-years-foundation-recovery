@@ -83,6 +83,10 @@ Rails.application.routes.draw do
 
     post '/change', to: 'hook#change'
     post '/release', to: 'hook#release'
+
+    constraints proc { Rails.application.preview? } do
+      resources :snippets, id: /[^\/]+/, only: %i[show]
+    end
   end
 
   resources :modules, only: %i[show], as: :training_modules, controller: :training_modules do

@@ -1,6 +1,17 @@
-name: 'Terraform Deploy [Azure - DEV]'
+name: 'Terraform Deploy [Azure]'
 
 on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Azure deployment environment'
+        required: true
+        default: 'development'
+        type: choice
+        options:
+          - development
+          - staging
+          - production
   push:
     branches:
       - main
@@ -15,7 +26,7 @@ defaults:
 # Permissions for OIDC authentication
 permissions:
   id-token: write
-  contents: read
+  contents: write
 
 env:
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
@@ -28,7 +39,9 @@ env:
   TF_VAR_psqlfs_username: ${{ secrets.PSQLFS_USERNAME }}
   TF_VAR_psqlfs_password: ${{ secrets.PSQLFS_PASSWORD }}
   TF_VAR_psqlfs_geo_redundant_backup: ${{ vars.PSQLFS_GEO_REDUNDANT_BACKUP }}
+  TF_VAR_psqlfs_ha_enabled: ${{ vars.PSQLFS_HA_ENABLED }}
   TF_VAR_asp_sku: ${{ vars.ASP_SKU }}
+  TF_VAR_webapp_worker_count: ${{ vars.WEBAPP_WORKER_COUNT }}
   TF_VAR_webapp_name: ${{ vars.WEBAPP_NAME }}
   TF_VAR_workerapp_name: ${{ vars.WORKERAPP_NAME }}
   TF_VAR_reviewapp_name: ${{ vars.REVIEWAPP_NAME }}
@@ -57,7 +70,7 @@ jobs:
   terraform-plan:
     name: 'Terraform Plan'
     runs-on: ubuntu-latest
-    environment: development
+    environment: ${{ inputs.environment }}
     outputs:
       tfplanExitCode: ${{ steps.tf-plan.outputs.exitcode }}
 
@@ -74,7 +87,12 @@ jobs:
 
       # Initialise a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
-        run: terraform init
+        run: >
+          terraform init
+          -backend-config="resource_group_name=${{ secrets.TERRAFORM_STATE_RESOURCE_GROUP }}"
+          -backend-config="storage_account_name=${{ secrets.TERRAFORM_STATE_STORAGE_ACCOUNT_NAME }}"
+          -backend-config="container_name=${{ secrets.TERRAFORM_STATE_STORAGE_CONTAINER_NAME }}"
+          -backend-config="key=${{ secrets.TERRAFORM_STATE_KEY }}"
 
       # Checks that all Terraform configuration files adhere to a canonical format
       # Will fail the build if not
@@ -133,7 +151,7 @@ jobs:
     name: 'Terraform Apply'
     if: needs.terraform-plan.outputs.tfplanExitCode == 2
     runs-on: ubuntu-latest
-    environment: development
+    environment: ${{ inputs.environment }}
     needs: [terraform-plan]
 
     steps:
@@ -147,7 +165,12 @@ jobs:
 
       # Initialise a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
-        run: terraform init
+        run: >
+          terraform init
+          -backend-config="resource_group_name=${{ secrets.TERRAFORM_STATE_RESOURCE_GROUP }}"
+          -backend-config="storage_account_name=${{ secrets.TERRAFORM_STATE_STORAGE_ACCOUNT_NAME }}"
+          -backend-config="container_name=${{ secrets.TERRAFORM_STATE_STORAGE_CONTAINER_NAME }}"
+          -backend-config="key=${{ secrets.TERRAFORM_STATE_KEY }}"
 
       # Download saved plan from artifacts
       - name: Download Terraform Plan

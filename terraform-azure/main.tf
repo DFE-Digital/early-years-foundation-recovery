@@ -44,6 +44,7 @@ module "database" {
   psqlfs_username             = var.psqlfs_username
   psqlfs_password             = var.psqlfs_password
   psqlfs_geo_redundant_backup = var.psqlfs_geo_redundant_backup
+  psqlfs_ha_enabled           = var.psqlfs_ha_enabled
   depends_on                  = [module.network]
 }
 
@@ -52,6 +53,7 @@ module "webapp" {
   source = "./terraform-azure-web"
 
   asp_sku                                  = var.asp_sku
+  webapp_worker_count                      = var.webapp_worker_count
   location                                 = var.azure_region
   resource_group                           = azurerm_resource_group.rg.name
   resource_name_prefix                     = var.resource_name_prefix

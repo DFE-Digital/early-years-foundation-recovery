@@ -12,7 +12,7 @@ class SettingsController < ApplicationController
     set_analytics_preference
 
     if settings_params[:settings_updated].present?
-      flash[:notice] = t(:flash, path: root_path, scope: 'settings.cookie')
+      flash[:notice] = t(:flash, scope: 'cookie_policy', path: root_path)
     end
 
     redirect_to request_path
