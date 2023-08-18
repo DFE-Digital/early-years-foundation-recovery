@@ -62,15 +62,15 @@ module Data
       end
 
       def not_started(mod)
-        User.all.map { |u| u.module_time_to_completion[mod.name] }.count(&:nil?)
+        User.not_closed.registration_complete.all.map { |u| u.module_time_to_completion[mod.name] }.count(&:nil?)
       end
 
       def in_progress(mod)
-        User.all.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:zero?)
+        User.not_closed.all.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:zero?)
       end
 
       def completed(mod)
-        User.all.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:positive?)
+        User.not_closed.all.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:positive?)
       end
 
       def started(mod)
