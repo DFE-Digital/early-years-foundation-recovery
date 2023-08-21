@@ -1,3 +1,6 @@
+- content_for :page_title do
+  = html_title t(:title, scope: :account_register)
+
 = govuk_link_to 'Back', root_path, class: 'govuk-back-link'
 
 - content_for :devise_form do
@@ -8,7 +11,7 @@
         | Create an account to access training courses.
 
       = f.govuk_email_field :email, autofocus: true, autocomplete: 'email', label: { text: t('helpers.label.user.email') }, hint: { text: "We'll send you an email with an account activation link." }
-      = f.govuk_password_field :password, label: { text: 'Create password' }, hint: { text: t('password.hardness', length: @minimum_password_length) }, aria: { required: true }
+      = f.govuk_password_field :password, label: { text: 'Create password' }, hint: { text: password_complexity }, aria: { required: true }
       = f.govuk_password_field :password_confirmation, aria: { required: true }
 
       = f.govuk_check_boxes_fieldset :terms_and_conditions_agreed_at,
@@ -17,6 +20,6 @@
           | To use this service, you must accept the #{govuk_link_to 'terms and conditions', static_path('terms-and-conditions')} and #{govuk_link_to 'privacy policy', static_path('privacy-policy')}.
         = f.terms_and_conditions_check_box
 
-    = f.govuk_submit 'Continue'
+    = f.govuk_submit t('links.continue')
 
 = render 'devise/shared/form_wrap'

@@ -1,11 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe 'Registration role type other', type: :request do
-  subject(:user) { create(:user, :confirmed, :name, :setting_type) }
-
-  before do
-    sign_in user
+RSpec.describe 'Registration custom roles', type: :request do
+  subject(:user) do
+    create :user, :named,
+           setting_type_id: Trainee::Setting.all.sample.name
   end
+
+  before { sign_in user }
 
   describe 'GET /registration/role_type_other/edit' do
     it 'returns http success' do
@@ -16,23 +17,27 @@ RSpec.describe 'Registration role type other', type: :request do
 
   describe 'PATCH /registration/role_type_other' do
     let(:update_user) do
-      patch registration_role_type_other_path, params: { user: user_params }
+      patch registration_role_type_other_path, params: {
+        user: {
+          role_type_other: role,
+        },
+      }
     end
 
-    context 'and adds role type other' do
-      let(:user_params) do
-        {
-          role_type_other: 'A user defined role type',
-        }
+    context 'with custom role' do
+      let(:role) { 'user defined role' }
+
+      it 'updates role_type_other' do
+        expect { update_user }.to change { user.reload.role_type_other }.to(role)
       end
 
-      it 'Updates user defined role type' do
-        expect { update_user }.to change { user.reload.role_type_other }.to(user_params[:role_type_other])
+      it 'updates role_type' do
+        expect { update_user }.to change { user.reload.role_type }.to('other')
       end
 
       it 'redirects to my training email preference' do
         update_user
-        expect(response).to redirect_to(edit_registration_training_emails_path)
+        expect(response).to redirect_to edit_registration_training_emails_path
       end
     end
   end

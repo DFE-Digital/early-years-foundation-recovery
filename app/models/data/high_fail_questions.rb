@@ -23,7 +23,7 @@ module Data
         end
       end
 
-  private
+    private
 
       # @return [Hash{Array<String, String> => Integer}]
       def question_attempts
@@ -57,6 +57,6 @@ module Data
 
         { average: average_fail_rate }.merge(high_fail_questions)
       end
-  end
+    end
   end
 end

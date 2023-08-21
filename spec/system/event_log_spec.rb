@@ -115,7 +115,7 @@ RSpec.describe 'Event log' do
 
   describe 'visiting every page' do
     before do
-      alpha.module_items.each { |item| visit "/modules/alpha/content-pages/#{item.name}" }
+      alpha.content.each { |item| visit "/modules/alpha/content-pages/#{item.name}" }
     end
 
     it 'tracks start and completion' do

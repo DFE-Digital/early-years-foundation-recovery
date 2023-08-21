@@ -4,28 +4,18 @@ class UserController < ApplicationController
 
   def show
     track('profile_page')
-    user
   end
 
-  def edit_name
-    user
-  end
+  def edit_name; end
 
-  def edit_password
-    @minimum_password_length = User.password_length.first
-    user
-  end
+  def edit_password; end
 
-  def edit_email
-    user
-  end
+  def edit_email; end
 
-  def edit_training_emails
-    user
-  end
+  def edit_training_emails; end
 
   def update_name
-    if user.update(user_params)
+    if current_user.update(user_params)
       track('user_name_change', success: true)
       redirect_to user_path, notice: 'You have saved your details'
     else
@@ -36,11 +26,9 @@ class UserController < ApplicationController
 
   # @see config/initializers/devise.rb
   def update_password
-    @minimum_password_length = User.password_length.first
-
-    if user.update_with_password(user_password_params)
+    if current_user.update_with_password(user_password_params)
       track('user_password_change', success: true)
-      bypass_sign_in(user)
+      bypass_sign_in(current_user)
       redirect_to user_path, notice: 'Your new password has been saved.'
     else
       track('user_password_change', success: false)
@@ -49,7 +37,7 @@ class UserController < ApplicationController
   end
 
   def update_email
-    if user.update(user_params)
+    if current_user.update(user_params)
       track('user_email_change', success: true)
       redirect_to user_path, notice: t('notice.email_changed')
     else
@@ -59,7 +47,7 @@ class UserController < ApplicationController
   end
 
   def update_training_emails
-    if user.update(user_params)
+    if current_user.update(user_params)
       track('user_training_emails_change', success: true)
       redirect_to user_path, notice: 'Your email preferences have been saved.'
     else
@@ -78,9 +66,9 @@ class UserController < ApplicationController
 
 private
 
-  def user
-    @user ||= current_user
-  end
+  # def user
+  #   @user ||= current_user
+  # end
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :postcode, :ofsted_number, :email, :setting_type, :setting_type_other, :training_emails)

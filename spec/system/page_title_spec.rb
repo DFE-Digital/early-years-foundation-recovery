@@ -60,7 +60,7 @@ RSpec.describe 'Page' do
     it { expect(my_modules_path).to have_page_title('My modules') }
     it { expect(course_overview_path).to have_page_title('About training') }
     it { expect(users_timeout_path).to have_page_title('User timeout') }
-    it { expect(setting_path(id: :cookie_policy)).to have_page_title('Cookie policy') }
+    it { expect(setting_path('cookie-policy')).to have_page_title('Cookie policy') }
 
     it { expect(edit_user_registration_path).to have_page_title('Change your password') }
     it { expect(new_user_confirmation_path).to have_page_title('Resend your confirmation') }
@@ -73,7 +73,7 @@ RSpec.describe 'Page' do
     it { expect(edit_registration_role_type_other_path).to have_page_title('What is your role?') }
 
     it { expect(edit_email_user_path).to have_page_title('Change email address') }
-    it { expect(edit_password_user_path).to have_page_title('Change password') }
+    it { expect(edit_password_user_path).to have_page_title('Change your password') }
 
     it { expect(check_email_confirmation_user_path).to have_page_title('Check email confirmation') }
     it { expect(check_email_password_reset_user_path).to have_page_title('Check email password reset') }
@@ -111,7 +111,7 @@ RSpec.describe 'Page' do
       ].each do |page, title|
         describe "/modules/alpha/content-pages/#{page}" do
           let(:path) do
-            training_module_content_page_path(training_module_id: alpha.name, id: page)
+            training_module_page_path(training_module_id: alpha.name, id: page)
           end
 
           it { expect(path).to have_page_title(title) }

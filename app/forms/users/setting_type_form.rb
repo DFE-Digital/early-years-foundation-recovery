@@ -1,30 +1,28 @@
 module Users
   class SettingTypeForm < BaseForm
-    attr_accessor :setting_type_id
-
     validates :setting_type_id, presence: true
 
     validates :setting_type_id,
-              inclusion: { in: SettingType.all.map(&:id).push('other') }
+              inclusion: { in: Trainee::Setting.valid_types }
 
+    # @return [String]
     def name
       'setting_types'
     end
 
-    # rubocop:disable Rails/SaveBang
+    # @return [Boolean]
     def save
-      if valid?
-        object = SettingType.find(setting_type_id)
-        update_attributes = {
-          setting_type_id: setting_type_id,
-          setting_type: object.name,
-        }
-        update_attributes[:local_authority] = 'Not applicable' unless setting_type.local_authority_next?
-        update_attributes[:role_type] = 'Not applicable' unless setting_type.role_type_next?
-        user.update(update_attributes)
-        user.save(validate: false)
-      end
+      return false unless valid?
+
+      user.update(setting.form_params)
+      user.save(validate: false)
     end
-    # rubocop:enable Rails/SaveBang
+
+  private
+
+    # @return [Trainee::Setting]
+    def setting
+      Trainee::Setting.by_name(setting_type_id)
+    end
   end
 end

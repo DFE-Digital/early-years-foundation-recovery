@@ -1,13 +1,24 @@
+= render 'user/debug'
+
+- content_for :page_title do
+  = html_title t(:heading, scope: :register_setting)
+
 = govuk_back_link href: edit_registration_name_path
 
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
-    = form_for @user_form, url: registration_setting_type_path, method: :patch do |f|
+
+    = form_for form, url: registration_setting_type_path, method: :patch do |f|
       = f.govuk_error_summary
-      = f.govuk_fieldset legend: { text: t('.heading') }, aria: { required: true } do
+
+      = f.govuk_fieldset legend: { text: t(:heading, scope: :register_setting) }, aria: { required: true } do
+
+        = translate_markdown t(:body, scope: :register_setting)
+
+        = f.select_trainee_setting
+
         p.govuk_body
-          = translate_markdown(t('.body'))
-        = f.govuk_collection_select :setting_type_id, SettingType.all, :id, :name, options: { include_blank: true }, label: { text: 'Setting type', class: 'govuk-visually-hidden' }, data: { controller: 'autocomplete', 'autocomplete-message-value': t('.autocomplete_not_found') }, aria: { label: 'registration setting type'}, form_group: { classes: ['data-hj-suppress'] }
-        p.govuk_body
-          = govuk_link_to t('.link_to_setting_type_other'), edit_registration_setting_type_other_path
-      = f.govuk_submit t('.button')
+          = govuk_link_to t(:other_link, scope: :register_setting), edit_registration_setting_type_other_path
+
+      = f.govuk_submit t('links.continue')
+

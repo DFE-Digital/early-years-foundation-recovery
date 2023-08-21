@@ -34,32 +34,19 @@ namespace :eyfs do
       end
     end
 
-    # ./bin/docker-rails 'eyfs:cms:seed[alpha,bravo]'
-    desc 'Seed course content from YAML'
-    task :seed, [:mod_names] => :environment do |_task, args|
-      require 'seed_course_entries'
-      uploader = SeedCourseEntries.new
-
-      all_mods = TrainingModule.all.map(&:name)
-
-      args.with_defaults(mod_names: all_mods)
-
-      mod_names = args[:mod_names].split(',').flatten
-
-      mod_names.each { |mod| uploader.call(mod_name: mod) }
-    end
-
     desc 'Upload asset files to Contentful'
     task seed_images: :environment do
       require 'seed_images'
       SeedImages.new.call
     end
 
-    # ./bin/docker-rails 'eyfs:cms:seed_static'
-    desc 'Seed static pages from YAML'
-    task seed_static: :environment do
-      require 'seed_static_page_entries'
-      SeedStaticPageEntries.new.call
+    # TODO: formalise user/learner/trainee terminology
+    #
+    # ./bin/docker-rails 'eyfs:cms:seed_learner_settings'
+    desc 'Seed learner settings from YAML'
+    task seed_learner_settings: :environment do
+      require 'seed_learner_settings'
+      SeedUserSettings.new.call
     end
 
     # ./bin/docker-rails 'eyfs:cms:seed_snippets'

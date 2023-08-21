@@ -17,10 +17,10 @@ RSpec.describe Registration::TrainingEmailsController, type: :controller do
     end
   end
 
-  context 'when confirmed user signed in' do
-    let(:confirmed_user) { create :user, :confirmed, :name, :setting_type, :role_type, :emails_opt_in }
+  context 'when signed in' do
+    let(:user) { create :user, :registered }
 
-    before { sign_in confirmed_user }
+    before { sign_in user }
 
     describe 'GET #edit' do
       it 'succeeds' do
@@ -33,7 +33,7 @@ RSpec.describe Registration::TrainingEmailsController, type: :controller do
       it 'succeeds' do
         post :update, params: { user: { training_emails: 'true' } }
         expect(response).to redirect_to my_modules_path
-        expect(confirmed_user.reload.training_emails).to eq true
+        expect(user.reload.training_emails).to be true
       end
     end
   end

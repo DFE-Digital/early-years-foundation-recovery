@@ -4,13 +4,9 @@ RSpec.describe ModuleOverviewDecorator do
   subject(:decorator) { described_class.new(progress) }
 
   let(:progress) { ModuleProgress.new(user: user, mod: bravo) }
-  let(:bravo) { TrainingModule.find_by(name: :bravo) }
+  let(:bravo) { Training::Module.by_name('bravo') }
 
   include_context 'with progress'
-
-  before do
-    skip 'YAML ONLY' if Rails.application.cms?
-  end
 
   describe '#call_to_action' do
     let(:output) do
