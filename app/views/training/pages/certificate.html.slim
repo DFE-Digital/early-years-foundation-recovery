@@ -1,23 +1,19 @@
 - content_for :page_title do
   = html_title mod.title, content.heading
 
-.noprint
-  = render 'shared/progress_bar'
+- content_for :hero do 
+  .noprint
+    h1 Get your certificate 
 
-  h1 Get your certificate 
+    - if module_progress.completed?
+      p Congratulations! You have now completed this module.
+    - else
+      p You have not yet completed the module.
 
-  - if module_progress.completed?
-    p Congratulations! You have now completed this module.
-  - else
-    p You have not yet completed the module.
-
-  p.govuk_body
-    | If the name on your certificate is not what you expect, you can update it in
-    =< govuk_link_to 'My account', user_path
-    | .
-
-  hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
-
+    p.govuk_body
+      | If the name on your certificate is not what you expect, you can update it in
+      =< govuk_link_to 'My account', user_path
+      | .
 h3 Certificate of achievement
 
 - if module_progress.completed?
