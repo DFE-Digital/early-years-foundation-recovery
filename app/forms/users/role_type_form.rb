@@ -4,24 +4,25 @@ module Users
 
     validates :role_type, presence: true
 
+    # @return [String]
     def name
       'role_types'
     end
 
+    # @return [Array<Trainee::Role>]
     def role_types
       if user.childminder?
-        RoleType.where(group: :childminder)
+        Trainee::Role.by_group('childminder')
       else
-        RoleType.where(group: :other)
+        Trainee::Role.by_group('other')
       end
     end
 
+    # @return [Boolean]
     def save
-      if valid?
-        user.update!(
-          role_type: role_type,
-        )
-      end
+      return false unless valid?
+
+      user.update!(role_type: role_type, role_type_other: nil)
     end
   end
 end

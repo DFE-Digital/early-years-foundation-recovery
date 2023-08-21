@@ -78,6 +78,8 @@ SitemapGenerator::Sitemap.create do
   add edit_registration_local_authority_path
   add edit_registration_role_type_path
   add edit_registration_role_type_other_path
+  # TODO: missing paths
+  # add edit_registration_training_email_path
 
   # close account
   add edit_reason_user_close_account_path
@@ -90,32 +92,32 @@ SitemapGenerator::Sitemap.create do
   add user_notes_path
 
   # Representative content
-  mod = Rails.application.cms? ? Training::Module.ordered.first : TrainingModule.published.first
+  mod = Training::Module.ordered.first
   add training_module_path(mod.name)
-  add training_module_content_page_path(mod.name, mod.interruption_page.name)
-  add training_module_content_page_path(mod.name, mod.first_content_page.name)
-  # add training_module_content_page_path(mod, mod.text_pages.first) # for CMS
-  add training_module_content_page_path(mod.name, mod.video_pages.first.name)
-  add training_module_content_page_path(mod.name, mod.summary_intro_page.name)
-  add training_module_content_page_path(mod.name, mod.assessment_intro_page.name)
-  add training_module_content_page_path(mod.name, mod.confidence_intro_page.name)
-  add training_module_content_page_path(mod.name, mod.thankyou_page.name)
-  add training_module_content_page_path(mod.name, mod.certificate_page.name)
-  add training_module_questionnaire_path(mod.name, mod.formative_questions.first.name)
-  add training_module_questionnaire_path(mod.name, mod.summative_questions.first.name)
-  add training_module_questionnaire_path(mod.name, mod.confidence_questions.first.name)
-  add training_module_assessment_result_path(mod.name, mod.assessment_results_page.name)
+  add training_module_page_path(mod.name, mod.interruption_page.name)
+  add training_module_page_path(mod.name, mod.first_content_page.name)
+  add training_module_page_path(mod.name, mod.text_pages.first.name)
+  add training_module_page_path(mod.name, mod.video_pages.first.name)
+  add training_module_page_path(mod.name, mod.summary_intro_page.name)
+  add training_module_page_path(mod.name, mod.assessment_intro_page.name)
+  add training_module_page_path(mod.name, mod.confidence_intro_page.name)
+  add training_module_page_path(mod.name, mod.thankyou_page.name)
+  add training_module_page_path(mod.name, mod.certificate_page.name)
+  add training_module_question_path(mod.name, mod.formative_questions.first.name)
+  add training_module_question_path(mod.name, mod.summative_questions.first.name)
+  add training_module_question_path(mod.name, mod.confidence_questions.first.name)
+  add training_module_assessment_path(mod.name, mod.assessment_results_page.name)
 
   # All content
-  # mods = Rails.application.cms? ? Training::Module.ordered : TrainingModule.published
+  # mods = Training::Module.ordered
   # mods.each do |mod|
-  #   mod.module_items.each do |page|
+  #   mod.content.each do |page|
   #     if page.is_question?
-  #       add training_module_questionnaire_path(mod.name, page.name)
+  #       add training_module_question_path(mod.name, page.name)
   #     elsif page.assessment_results?
-  #       add training_module_assessment_result_path(mod.name, page.name)
+  #       add training_module_assessment_path(mod.name, page.name)
   #     else
-  #       add training_module_content_page_path(mod.name, page.name)
+  #       add training_module_page_path(mod.name, page.name)
   #     end
   #   end
   # end

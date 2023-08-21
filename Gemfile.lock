@@ -46,8 +46,6 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    active_hash (3.1.1)
-      activesupport (>= 5.0.0)
     activejob (7.0.6)
       activesupport (= 7.0.6)
       globalid (>= 0.3.6)
@@ -755,7 +753,6 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uber (0.1.0)
-    uk_postcode (2.1.8)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8.2)
@@ -799,7 +796,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  active_hash
   ahoy_matey
   better_errors
   binding_of_caller
@@ -856,7 +852,6 @@ DEPENDENCIES
   time (>= 0.2.2)
   turbo-rails
   tzinfo-data
-  uk_postcode
   uri (>= 0.12.1)
   web-console
   yard-junk

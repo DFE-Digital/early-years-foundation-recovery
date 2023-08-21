@@ -138,11 +138,12 @@ private
     Google::Cloud::Storage.new(credentials: credentials, project: credentials['project_id'])
   end
 
-  # @return [String]
+  # @param message [String]
+  # @return [String, nil]
   def log(message)
     if ENV['RAILS_LOG_TO_STDOUT'].present?
       Rails.logger.info(message)
-    else
+    elsif ENV['VERBOSE'].present?
       puts message
     end
   end

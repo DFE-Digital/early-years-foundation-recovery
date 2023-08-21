@@ -2,7 +2,6 @@ class HomeController < ApplicationController
   before_action :authenticate_registered_user!, only: %i[audit]
 
   def index
-    @user = current_user
     track('home_page')
   end
 

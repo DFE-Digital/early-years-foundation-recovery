@@ -22,9 +22,6 @@ services:
       - RAILS_ENV=development
       - DOMAIN=app:3000
       - RAILS_SERVE_STATIC_FILES=true
-      # overrides
-      - TIMEOUT_MINUTES
-      - SENTRY_TOKEN
     volumes:
       - .:/srv
     tty: true

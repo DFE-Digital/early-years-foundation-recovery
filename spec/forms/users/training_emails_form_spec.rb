@@ -1,13 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe Users::TrainingEmailsForm do
-  subject(:training_email_form) { described_class.new(user: create(:user)) }
+  subject(:form) { described_class.new(user: user) }
 
-  describe 'training email choice' do
-    it 'must be present' do
-      training_email_form.training_emails = nil
-      training_email_form.validate
-      expect(training_email_form.errors[:training_emails].first).to eq 'Choose an option.'
+  let(:user) { create(:user) }
+
+  describe '#validate' do
+    let(:errors) { form.errors[:training_emails] }
+
+    before do
+      form.training_emails = input
+      form.validate
+    end
+
+    context 'without input' do
+      let(:input) { '' }
+
+      specify { expect(errors).to be_present }
+    end
+
+    context 'with input' do
+      let(:input) { 'foo' }
+
+      specify { expect(errors).not_to be_present }
     end
   end
 end

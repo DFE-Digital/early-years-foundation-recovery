@@ -2,6 +2,9 @@
 
 = render 'shared/progress_bar'
 
+- content_for :page_title do
+  = html_title mod.title, content.heading
+
 - content_for :content_page do
   = page_number(**content.pagination)
 

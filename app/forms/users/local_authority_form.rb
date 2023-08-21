@@ -4,16 +4,16 @@ module Users
 
     validates :local_authority, presence: true
 
+    # @return [String]
     def name
       'local_authorities'
     end
 
+    # @return [Boolean]
     def save
-      if valid?
-        user.update!(
-          local_authority: local_authority,
-        )
-      end
+      return false unless valid?
+
+      user.update!(local_authority: local_authority)
     end
   end
 end

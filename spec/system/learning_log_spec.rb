@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Learning log' do
+RSpec.describe 'Learning log', type: :system do
   include_context 'with user'
   include_context 'with progress'
 

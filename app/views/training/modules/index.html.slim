@@ -1,5 +1,8 @@
-- content_for(:head) do
+- content_for :head do
   = tag.meta name: 'turbo-visit-control', content: 'reload'
+
+- content_for :page_title do
+  = html_title t('about.title')
 
 = govuk_back_link href: root_path
 

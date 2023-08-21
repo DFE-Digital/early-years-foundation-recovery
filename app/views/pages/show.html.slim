@@ -1,8 +1,13 @@
 = render 'debug'
 
+- content_for :page_title do
+  = html_title page.title
+
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
 
-    h1.govuk-heading-l= page.heading
+    h1.govuk-heading-l
+      = page.heading
 
-    .gem-c-govspeak= translate_markdown(page.body)
+    .gem-c-govspeak
+      = translate_markdown(page.body)

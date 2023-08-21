@@ -1,16 +1,14 @@
 class Registration::SettingTypesController < Registration::BaseController
-  def edit
-    @user_form = Users::SettingTypeForm.new(user: current_user, setting_type_id: current_user.setting_type_id)
-  end
+  def edit; end
 
   def update
-    @user_form = Users::SettingTypeForm.new(user_params.merge(user: current_user))
+    form.setting_type_id = user_params[:setting_type_id]
 
-    if @user_form.save
-      if @user_form.local_authority_next?
+    if form.save
+      if form.setting_type.local_authority?
         redirect_to edit_registration_local_authority_path
       elsif current_user.registration_complete?
-        redirect_to user_path, notice: t('.complete_update')
+        redirect_to user_path, notice: t(:details_updated)
       else
         redirect_to edit_registration_training_emails_path
       end
@@ -23,5 +21,10 @@ private
 
   def user_params
     params.require(:user).permit(:setting_type_id)
+  end
+
+  # @return [Users::SettingTypeForm]
+  def form
+    @form ||= Users::SettingTypeForm.new(user: current_user, setting_type_id: current_user.setting_type_id)
   end
 end
