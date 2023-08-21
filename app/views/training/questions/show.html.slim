@@ -1,22 +1,18 @@
 - content_for :page_title do
   = html_title content.parent.title, content.name
 
-= render 'training/questions/debug'
-= render 'shared/progress_bar'
+- content_for :hero do 
+  = render 'training/questions/debug'
+  = page_number(**content.pagination)
+  = render 'shared/progress_bar'
 
 .govuk-grid-row 
   .govuk-grid-column-two-thirds-from-desktop
     = form_with model: current_user_response, url: training_module_response_path(content.parent.name, content.name), method: :patch do |f|
-
-      = page_number(**content.pagination)
-
       = render partial: content.to_partial_path, locals: { f: f }, object: current_user_response, as: :response
-
       - if content.formative_question? && current_user_response.responded?
         = render 'assessment_banner'
-
       hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
-
       .govuk-button-group
         = link_to_previous(content)
         - if content.confidence_question? || !current_user_response.responded?
