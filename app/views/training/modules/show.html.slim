@@ -10,19 +10,20 @@
 
 = render 'learning/cms_debug'
 
-.light-grey-box
-  .govuk-grid-row
+- content_for :hero do 
+  = govuk_back_link text: 'Back to My modules', href: my_modules_path
+  
+  div class='govuk-grid-row govuk-!-padding-top-9 govuk-!-padding-bottom-0'
     .govuk-grid-column-three-quarters-from-desktop
-      - # TODO: move module overview hero to content helper
-      = content_resource 'module.overview.summary', title: mod.card_title, description: mod.description, criteria: mod.criteria
+      = content_resource 'module.overview.summary', title: mod.card_title, description: mod.description
 
-      - module_progress.call_to_action do |state, page|
-        = link_to_action(state, page)
+= content_resource 'module.overview.criteria', criteria: mod.criteria
+
+hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
 .govuk-grid-row
   .govuk-grid-column-three-quarters-from-desktop
     = content_resource 'module.overview.progress'
-
 
 .govuk-grid-row
   .govuk-grid-column-three-quarters-from-desktop
@@ -30,5 +31,8 @@
 
     - module_progress.sections.each do |section|
       = render 'shared/module_overview_section', **section
+
+- module_progress.call_to_action do |state, page|
+  = cms_link_to_action(state, page)
 
 = render 'debug'

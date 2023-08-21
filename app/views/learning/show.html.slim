@@ -3,9 +3,11 @@
 
 = render 'cms_debug'
 
-.govuk-grid-row
-  .govuk-grid-column-full
-      h1.govuk-heading-l My modules
+- content_for :hero do 
+  div class='govuk-grid-row govuk-!-padding-top-9 govuk-!-padding-bottom-0'
+    .govuk-grid-column-three-quarters
+      h1 class='govuk-heading-xl govuk-!-margin-bottom-4'
+        | My modules
       p You can complete the Early years child development training in any order. However, to support your understanding of the training, you may find it helpful to complete the modules in order.
 
 hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l

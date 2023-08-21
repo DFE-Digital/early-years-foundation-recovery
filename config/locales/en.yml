@@ -580,6 +580,7 @@ en:
 
       **What you'll learn**
 
+    criteria: |
       This module covers:
 
       %{criteria}
@@ -678,6 +679,7 @@ en:
 
         %{description}
 
+      criteria: |
         This module covers:
 
         %{criteria}

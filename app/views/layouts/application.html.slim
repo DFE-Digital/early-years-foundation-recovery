@@ -33,15 +33,9 @@ html.govuk-template lang='en'
 
     = navigation
 
+    = render 'layouts/hero'
+    
     .govuk-width-container
-      = govuk_phase_banner(tag: { text: 'Beta' }, classes: 'noprint') do
-        == t 'phase_banner', link: govuk_link_to('feedback', Rails.configuration.feedback_url, target: :_blank)
-
-      .noprint = render 'layouts/timeout'
-      
-      - if request.path != '/email-preferences'
-        .noprint = back_link
-
       main#main-content.govuk-main-wrapper
         - flash.each do |variant, message|
           = govuk_notification_banner title_text: t("banners.#{variant}"), text: translate_markdown(message), success: %w[important notice].include?(variant), classes: "govuk-notification-banner--#{variant}"

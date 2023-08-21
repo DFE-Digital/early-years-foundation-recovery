@@ -1,0 +1,21 @@
+- if content_for? :hero
+  div class='dfe-content-page--header govuk-!-padding-bottom-4'
+    .dfe-width-container
+      = govuk_phase_banner(tag: { text: 'Beta' }, classes: 'noprint') do
+        == t 'phase_banner', link: govuk_link_to('feedback', Rails.configuration.feedback_url, target: :_blank)
+
+      .noprint = render 'layouts/timeout'
+
+      - if request.path != '/email-preferences'
+        .noprint = back_link
+
+      = yield :hero
+- else 
+  .dfe-width-container
+    = govuk_phase_banner(tag: { text: 'Beta' }, classes: 'noprint') do
+      == t 'phase_banner', link: govuk_link_to('feedback', Rails.configuration.feedback_url, target: :_blank)
+
+    .noprint = render 'layouts/timeout'
+
+    - if request.path != '/email-preferences'
+      .noprint = back_link
