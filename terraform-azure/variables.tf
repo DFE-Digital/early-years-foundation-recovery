@@ -16,6 +16,46 @@ variable "resource_name_prefix" {
   type        = string
 }
 
+variable "kv_certificate_authority_username" {
+  description = "Username for the Certificate provider"
+  type        = string
+}
+
+variable "kv_certificate_authority_password" {
+  description = "Password the Certificate provider"
+  type        = string
+}
+
+variable "kv_certificate_authority_admin_email" {
+  description = "Email Address of the Certificate Authority Admin"
+  type        = string
+}
+
+variable "kv_certificate_authority_admin_first_name" {
+  description = "First Name of the Certificate Authority Admin"
+  type        = string
+}
+
+variable "kv_certificate_authority_admin_last_name" {
+  description = "Last Name of the Certificate Authority Admin"
+  type        = string
+}
+
+variable "kv_certificate_authority_admin_phone_no" {
+  description = "Phone No. of the Certificate Authority Admin"
+  type        = string
+}
+
+variable "kv_certificate_label" {
+  description = "Label for the Certificate"
+  type        = string
+}
+
+variable "kv_certificate_subject" {
+  description = "Subject of the Certificate"
+  type        = string
+}
+
 variable "psqlfs_sku" {
   default     = "B_Standard_B1ms"
   description = "SKU name for the Database Server"
