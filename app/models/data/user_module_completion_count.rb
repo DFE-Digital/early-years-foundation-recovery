@@ -28,7 +28,7 @@ module Data
       # @param count [Integer]
       # @return [Integer]
       def completed_count(count)
-        User.all.count { |user| user.modules_completed.eql?(count) }
+        User.registration_complete.count { |user| user.modules_completed.eql?(count) }
       end
     end
   end

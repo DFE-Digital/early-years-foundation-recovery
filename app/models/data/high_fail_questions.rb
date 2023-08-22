@@ -50,7 +50,7 @@ module Data
           total_count = question_attempts[[module_name, question_name]]
           fail_rate = fail_count / total_count
 
-          if fail_rate > average_fail_rate
+          if fail_rate >= average_fail_rate
             high_fail_questions[[module_name, question_name]] = fail_rate.to_f
           end
         end

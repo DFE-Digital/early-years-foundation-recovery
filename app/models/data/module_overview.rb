@@ -28,7 +28,7 @@ module Data
         mods.map do |mod|
           {
             module_name: mod.name,
-            total_users: User.count,
+            total_users: User.not_closed.registration_complete.count,
             not_started: not_started(mod),
             started: started(mod),
             in_progress: in_progress(mod),
@@ -56,15 +56,15 @@ module Data
       end
 
       def not_started(mod)
-        User.all.map { |u| u.module_time_to_completion[mod.name] }.count(&:nil?)
+        User.not_closed.registration_complete.all.map { |u| u.module_time_to_completion[mod.name] }.count(&:nil?)
       end
 
       def in_progress(mod)
-        User.all.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:zero?)
+        User.not_closed.all.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:zero?)
       end
 
       def completed(mod)
-        User.all.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:positive?)
+        User.not_closed.all.map { |u| u.module_time_to_completion[mod.name] }.compact.count(&:positive?)
       end
 
       def started(mod)

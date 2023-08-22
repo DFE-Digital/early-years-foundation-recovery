@@ -5,12 +5,9 @@ module Data
     class << self
       # @return [Array<String>]
       def column_names
-        [
-          'Weekly Returning Users',
-          'Monthly Returning Users',
-          'Bimonthly Returning Users',
-          'Quarterly Returning Users',
-        ]
+        ['Weekly Returning Users',
+         'Monthly Returning Users',
+         'Quarterly Returning Users']
       end
 
       # @return [Array<Hash{Symbol => Mixed}>]
@@ -19,7 +16,6 @@ module Data
           {
             weekly: weekly,
             monthly: monthly,
-            bimonthly: bimonthly,
             quarterly: quarterly,
           },
         ]
@@ -27,36 +23,26 @@ module Data
 
     private
 
-      # @param previous [Range]
-      # @param current [Range]
+      # @param [Range<Time>] time_range
       # @return [Integer]
-      def count(previous:, current:)
-        previous_visits = Ahoy::Visit.where(started_at: previous)
-        current_visits = Ahoy::Visit.where(started_at: current)
-
-        previous_visits.where(user_id: current_visits.pluck(:user_id)).distinct.count(:user_id)
+      def visits_count(time_range)
+        visits = Ahoy::Visit.where(started_at: time_range)
+        visits.group(:user_id).having('count(user_id) > 1').count.size
       end
 
       # @return [Integer]
       def weekly
-        count(previous: 2.weeks.ago..1.week.ago, current: 1.week.ago..Time.zone.now)
+        visits_count(Time.zone.today.last_week.beginning_of_week..Time.zone.today.last_week.end_of_week)
       end
 
       # @return [Integer]
       def monthly
-        count(previous: 2.months.ago..1.month.ago, current: 1.month.ago..Time.zone.now)
-      end
-
-      # @return [Integer]
-      def bimonthly
-        count(previous: 4.months.ago..2.months.ago, current: 2.months.ago..Time.zone.now)
+        visits_count(Time.zone.today.last_month.beginning_of_month..Time.zone.today.last_month.end_of_month)
       end
 
       # @return [Integer]
       def quarterly
-        current = Time.zone.today.beginning_of_quarter
-        previous = current - 3.months
-        count(previous: previous..current, current: current..Time.zone.today)
+        visits_count(Time.zone.today.beginning_of_quarter..Time.zone.now)
       end
     end
   end
