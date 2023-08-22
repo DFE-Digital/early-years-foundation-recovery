@@ -1,5 +1,4 @@
-# DashboardJob.enqueue
-#
+# :nocov:
 class DashboardJob < ApplicationJob
   # Jobs will default to priority 100 and run immediately
   # a lower number is more important
@@ -24,3 +23,4 @@ private
     Rails.root.join('tmp')
   end
 end
+# :nocov:

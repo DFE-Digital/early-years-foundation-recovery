@@ -6,6 +6,7 @@ require 'training/question'
 require 'training/video'
 require 'page'
 require 'page/resource'
+require 'trainee/setting'
 
 # Without this the value is nil and defaults to delivery API
 ContentfulModel.use_preview_api = Rails.application.preview?
@@ -39,6 +40,7 @@ ContentfulRails.configure do |config|
     management_api: { timeout_connect: 3, timeout_read: 100, timeout_write: 200 },
 
     entry_mapping: {
+      'userSetting' => Trainee::Setting,
       'static' => Page,
       'resource' => Page::Resource,
       'trainingModule' => Training::Module,

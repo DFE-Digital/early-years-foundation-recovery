@@ -4,10 +4,10 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_analytics_tracking_id,
                 :set_hotjar_site_id,
-                :set_internal_mailbox_email_address,
                 :prepare_cms
 
-  helper_method :timeout_timer,
+  helper_method :current_user,
+                :timeout_timer,
                 :debug?
 
   default_form_builder(EarlyYearsRecoveryFormBuilder)
@@ -51,10 +51,6 @@ class ApplicationController < ActionController::Base
 
   def set_hotjar_site_id
     @hotjar_id = Rails.configuration.hotjar_site_id
-  end
-
-  def set_internal_mailbox_email_address
-    @internal_mailbox = Rails.configuration.internal_mailbox
   end
 
   # @return [Boolean] do not run accessibility tests with debug panels visible

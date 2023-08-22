@@ -1,7 +1,10 @@
+# childminder ------------------------------------------------------------------
 - name: Childminder
   group: childminder
 - name: Childminder assistant
   group: childminder
+
+# other ------------------------------------------------------------------------
 - name: Owner or director
   group: other
 - name: Manager or team leader

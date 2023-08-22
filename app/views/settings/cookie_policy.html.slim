@@ -1,3 +1,6 @@
+- content_for :page_title do
+  = html_title t(:title, scope: :cookie_policy)
+
 .govuk-grid-row class='govuk-!-margin-bottom-7'
   .govuk-grid-column-two-thirds-from-desktop
     = content_resource 'cookie_policy.body'

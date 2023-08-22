@@ -22,7 +22,6 @@ production:
   TRACKING_ID: GTM-NFZ88TP # Live data
   HOTJAR_SITE_ID: 3169682
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-live
-  # EARLY_YEARS_EMAILS: true
 
 # ey-recovery-staging
 staging:
@@ -31,7 +30,6 @@ staging:
   GOVUK_WEBSITE_ROOT: ey-recovery-staging
   TRACKING_ID: GTM-W6W95FD # Test data
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-staging
-  # EARLY_YEARS_EMAILS: true
   # cms
   CONTENTFUL_ENVIRONMENT: staging
   CONTENTFUL_PREVIEW: true
@@ -41,9 +39,6 @@ development:
   <<: *defaults
   DOMAIN: ey-recovery-dev.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-dev
-  # yaml
-  TRAINING_MODULES: demo-modules
-  # EARLY_YEARS_EMAILS: true
   # cms
   CONTENTFUL_ENVIRONMENT: test
   CONTENTFUL_PREVIEW: true

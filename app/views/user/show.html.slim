@@ -1,3 +1,8 @@
+= render 'debug'
+
+- content_for :page_title do
+  = html_title t('my_account.title')
+
 .govuk-grid-row
   .govuk-grid-column-full
     h1.govuk-heading-l Manage your account
@@ -7,44 +12,40 @@
     = govuk_summary_list do |your_details|
       - your_details.with_row do |row|
         - row.with_key { 'Name' }
-        - row.with_value(text: @user.name, classes: ['data-hj-suppress'])
+        - row.with_value(text: current_user.name, classes: ['data-hj-suppress'])
         - row.with_action(text: t('links.change'), href: edit_registration_name_path, visually_hidden_text: 'name', html_attributes: { id: :edit_name_registration })
       - your_details.with_row do |row|
         - row.with_key { 'Email' }
-        - row.with_value(text:@user.email, classes: ['data-hj-suppress'])
+        - row.with_value(text:current_user.email, classes: ['data-hj-suppress'])
         - row.with_action(text: t('links.change'), href: edit_email_user_path, visually_hidden_text: 'email', html_attributes: { id: :edit_email_user })
       - your_details.with_row do |row|
         - row.with_key { 'Password' }
-        - row.with_value { t('password.last_changed', date: @user.password_last_changed) }
+        - row.with_value { t('my_account.password_changed', date: current_user.password_last_changed) }
         - row.with_action(text: t('links.change'), href: edit_password_user_path, visually_hidden_text: 'password', html_attributes: { id: :edit_password_user })
 
     = govuk_summary_list do |other_details|
       - other_details.with_row do |row|
-        - row.with_key { t('.your_setting_details_html') }
+        - row.with_key { raw t('my_account.setting_details') }
         - row.with_value { nil }
         - row.with_action(text: t('links.change'), href: edit_registration_setting_type_path, visually_hidden_text: 'setting_type', html_attributes: { id: :edit_setting_type_registration })
       - other_details.with_row do |row|
         - row.with_key { 'Setting type' }
-        - row.with_value(text: @user.setting_name, classes: ['data-hj-suppress'])
+        - row.with_value(text: current_user.setting_name, classes: ['data-hj-suppress'])
       - other_details.with_row do |row|
         - row.with_key { 'Local authority' }
-        - row.with_value(text: @user.local_authority_text, classes: ['data-hj-suppress'])
+        - row.with_value(text: current_user.authority_name, classes: ['data-hj-suppress'])
       - other_details.with_row do |row|
         - row.with_key { 'Role' }
-        - row.with_value(text: @user.role, classes: ['data-hj-suppress'])
+        - row.with_value(text: current_user.role_name, classes: ['data-hj-suppress'])
 
     = govuk_summary_list do |email_preferences|
       - email_preferences.with_row do |row|
-        - row.with_key { t('.your_email_preferences_html') }
+        - row.with_key { raw t('my_account.email_preferences') }
         - row.with_value { nil }
       - email_preferences.with_row do |row|
         - row.with_key { 'Email updates about this training course' }
         - row.with_value(text: @user.training_emails.nil? || @user.training_emails ? t('.training_emails_true') : t('.training_emails_false'), classes: ['data-hj-suppress'])
         - row.with_action(text: t('links.change'), href: edit_training_emails_user_path, visually_hidden_text: 'training_emails', html_attributes: { id: :edit_training_emails_user })
 
-
-    h2.govuk-heading-m Closing your account 
-    = translate_markdown(t('close_account.body'))
-    = govuk_button_link_to t('close_account.button'), new_user_close_account_path
-
-/= render 'debug'
+    = content_resource 'my_account.closing.information'
+    = govuk_button_link_to t('my_account.closing.button'), new_user_close_account_path

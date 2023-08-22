@@ -1,3 +1,6 @@
+- content_for :page_title do
+  = html_title content.parent.title, content.name
+
 = render 'training/questions/debug'
 = render 'shared/progress_bar'
 
@@ -15,9 +18,9 @@
       hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
 
       .govuk-button-group
-        = cms_link_to_previous_module_item(content)
+        = link_to_previous(content)
         - if content.confidence_question? || !current_user_response.responded?
           = f.govuk_submit content.next_button_text
         - else
           = f.govuk_submit 'Responded', class: 'govuk-visually-hidden', disabled: true
-          = cms_link_to_next_module_item(content)
+          = link_to_next(content)

@@ -49,7 +49,6 @@ module EarlyYearsFoundationRecovery
     config.dashboard_update_interval = ENV.fetch('DASHBOARD_UPDATE_INTERVAL', '0 0 * * *') # Midnight daily
     config.mail_job_interval = ENV.fetch('MAIL_JOB_INTERVAL', '0 12 * * *') # Noon daily
 
-    config.feature_email_prefs = ENV.fetch('FEATURE_EMAIL_PREFS', true)
     config.bot_token = ENV['BOT_TOKEN']
     config.feedback_url = ENV.fetch('FEEDBACK_URL', '#FEEDBACK_URL_env_var_missing')
     config.google_analytics_tracking_id = ENV.fetch('TRACKING_ID', '#TRACKING_ID_env_var_missing')
@@ -60,9 +59,6 @@ module EarlyYearsFoundationRecovery
     # user_timeout_warning_minutes and user_timeout_modal_visible value combined must be lower than user_timeout_minutes
     config.user_timeout_warning_minutes = ENV.fetch('TIMEOUT_WARNING_MINUTES', '20').to_i
     config.user_timeout_modal_visible = ENV.fetch('TIMEOUT_MODAL_VISIBLE', '5').to_i
-
-    # YAML
-    config.training_modules = ENV.fetch('TRAINING_MODULES', 'training-modules')
 
     # Contentful
     config.contentful_space                   = ENV.fetch('CONTENTFUL_SPACE', credentials.dig(:contentful, :space))
@@ -89,11 +85,6 @@ module EarlyYearsFoundationRecovery
     # @return [Boolean]
     def review?
       ENV['WORKSPACE'].eql?('content')
-    end
-
-    # @return [Boolean] true if Contentful is used for training content
-    def cms?
-      Types::Params::Bool[ENV.fetch('CONTENTFUL', true)]
     end
 
     # @return [Boolean] Upload to CSV files to the dashboard

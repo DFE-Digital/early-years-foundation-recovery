@@ -158,8 +158,6 @@ RSpec.describe 'Module overview page progress' do
 
   context 'when the summative assessment is failed' do
     before do
-      skip 'WIP - CMS compatible version of SummativeAssessmentProgress service required' if Rails.application.cms?
-
       start_summative_assessment(alpha)
       visit '/modules/alpha/questionnaires/1-3-2-1'
       3.times do

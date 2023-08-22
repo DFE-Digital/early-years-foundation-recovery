@@ -31,6 +31,7 @@ RSpec.describe Data::UserModuleCompletion do
   end
 
   before do
+    create :user, :confirmed
     create :user, :registered
     complete_module(Training::Module.by_name('alpha'))
     start_module(Training::Module.by_name('bravo'))

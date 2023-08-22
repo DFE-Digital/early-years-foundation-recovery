@@ -4,4 +4,4 @@
     h3.govuk-heading-m
       = govuk_link_to mod.card_title, training_module_path(mod.name), no_visited_state: true, class: 'card-link--header'
     - if current
-      = Rails.application.cms? ? cms_link_to_retake_or_results(mod) : link_to_retake_or_results(mod)
+      = link_to_retake_or_results(mod)

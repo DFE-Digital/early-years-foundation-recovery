@@ -1,13 +1,20 @@
+= render 'user/debug'
+
+- content_for :page_title do
+  = html_title t(:heading, scope: :register_name)
+
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
-    = form_for @user_form, url: registration_name_path, method: :patch do |f|
+    = form_for form, url: registration_name_path, method: :patch do |f|
       = f.govuk_error_summary
-      = f.govuk_fieldset legend: { text: t('.heading') } do
-        p.govuk_body
-          = t('.body')
+
+      = f.govuk_fieldset legend: { text: t(:heading, scope: :register_name) } do
+
+        = translate_markdown t(:body, scope: :register_name)
+
         = f.govuk_text_field :first_name, aria: { required: true }
         = f.govuk_text_field :last_name, aria: { required: true }
 
       .govuk-button-group
-        = f.govuk_submit t('.button')
+        = f.govuk_submit t('links.continue')
         = govuk_link_to t('cancel'), root_path

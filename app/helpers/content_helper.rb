@@ -15,18 +15,17 @@ module ContentHelper
       [
         govuk_link_to(mod.title, training_module_path(mod.name)),
         timestamp.to_date.strftime('%-d %B %Y'),
-        govuk_link_to('View certificate', training_module_content_page_path(mod.name, mod.certificate_page.name)),
+        govuk_link_to('View certificate', training_module_page_path(mod.name, mod.certificate_page.name)),
       ]
     end
 
     govuk_table(rows: [header, *rows], caption: 'Completed modules')
   end
 
-  # @param mod [TrainingModule, Training::Module]
+  # @param mod [Training::Module]
   # @return [String]
   def training_module_image(mod)
-    image_url = Rails.application.cms? ? mod.thumbnail_url : image_path(mod.thumbnail)
-    image_tag image_url, class: 'full-width-img', width: 200, alt: '', title: ''
+    image_tag mod.thumbnail_url, class: 'full-width-img', width: 200, alt: '', title: ''
   end
 
   # @param icon [String, Symbol] Fontawesome icon name
@@ -119,5 +118,22 @@ module ContentHelper
     content_tag :div, class: 'gem-c-govspeak' do
       translate_markdown t(key, **args)
     end
+  end
+
+  # @yield [Array]
+  def opt_in_out(type)
+    yield [
+      [
+        OpenStruct.new(id: true, name: t(:opt_in, scope: type)),
+        OpenStruct.new(id: false, name: t(:opt_out, scope: type)),
+      ],
+      t(:heading, scope: type),
+      translate_markdown(t(:body, scope: type)),
+    ]
+  end
+
+  # @yield [String]
+  def password_complexity
+    t(:password_complexity, length: User.password_length.first)
   end
 end

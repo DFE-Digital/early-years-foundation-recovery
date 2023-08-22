@@ -1,33 +1,26 @@
-# User's course progress and module state
+# User's course progress and module state used on the 'My modules' page
 #
 class CourseProgress
-  def initialize(user:)
-    @user = user
-  end
+  extend Dry::Initializer
 
-  attr_reader :user
+  option :user, required: true
 
-  # @return [Array<TrainingModule>] training modules that have been started
+  # @return [Array<Training::Module>] 'Modules in progress' section
   def current_modules
     by_state(:active)
   end
 
-  # @return [Array<TrainingModule>] published training modules with no incomplete dependency
+  # @return [Array<Training::Module>] 'Available modules' section
   def available_modules
     by_state(:upcoming).select { |mod| available?(mod) && !mod.draft? }
   end
 
-  # @return [Array<TrainingModule>] unavailable or draft modules
+  # @return [Array<Training::Module>] 'Future modules in this course' section
   def upcoming_modules
     by_state(:upcoming).select { |mod| !available?(mod) || mod.draft? }
   end
 
-  # NB: ModuleProgress#completed? and ModuleProgress#completed_at must align
-  #
-  #
-  # Completed modules are modules for which every module item has been viewed
-  # completed_at comes from a specific named event
-  # @return [Array<Array>] Tabular data of completed training module
+  # @return [Array<Array>] 'Completed modules' section
   def completed_modules
     by_state(:completed).map do |mod|
       [mod, module_progress(mod).completed_at]
@@ -52,13 +45,15 @@ class CourseProgress
     training_modules.map do |mod|
       <<~SUMMARY
         title: #{mod.title}
+        published at: #{mod.published_at}
+        position: #{mod.position}
         name: #{mod.name}
-        draft: #{!mod.draft.nil?}
+        draft: #{mod.draft?}
         started: #{started?(mod)}
         completed: #{completed?(mod)}
         available: #{available?(mod)}
-        last_page: #{mod.last_page.name unless mod.draft?}
-        certificate: #{mod.certificate_page.name unless mod.draft?}
+        last: #{mod.thankyou_page&.name unless mod.draft?}
+        certificate: #{mod.certificate_page&.name unless mod.draft?}
         milestone: #{module_progress(mod).milestone}
       SUMMARY
     end
@@ -66,7 +61,7 @@ class CourseProgress
 
 private
 
-  # @param mod [TrainingModule]
+  # @param mod [Training::Module]
   # @return [Boolean] module content has been viewed
   def started?(mod)
     return false if mod.draft?
@@ -74,27 +69,34 @@ private
     module_progress(mod).started?
   end
 
-  # @param mod [TrainingModule]
+  # @param mod [Training::Module]
+  # @return [Boolean]
+  def completed?(mod)
+    return false if mod.draft?
+
+    module_progress(mod).completed?
+  end
+
+  # @param mod [Training::Module]
   # @return [Boolean]
   def active?(mod)
     started?(mod) && !completed?(mod)
   end
 
-  # @param mod [TrainingModule]
+  # @param mod [Training::Module]
   # @return [Boolean]
   def upcoming?(mod)
     !started?(mod) && !completed?(mod)
   end
 
-  # @param mod [TrainingModule]
+  # @param mod [Training::Module]
   # @return [Boolean] true unless a mandatory prerequisite module must be finished
   def available?(mod)
-    dependent = TrainingModule.find_by(name: mod.depends_on)
-    dependent ? completed?(dependent) : true
+    mod.depends_on.present? ? completed?(mod.depends_on) : true
   end
 
   # @param state [Symbol, String] :active, :upcoming or :completed
-  # @return [Array<TrainingModule>] training modules by state
+  # @return [Array<Training::Module>] training modules by state
   def by_state(state)
     case state.to_sym
     when :active    then training_modules.select { |mod| active?(mod) }
@@ -105,14 +107,14 @@ private
     end
   end
 
-  # @return [Array<TrainingModule>] training modules with finalised content
+  # @return [Array<Training::Module>] training modules with finalised content
   def published_modules
     training_modules.reject(&:draft?)
   end
 
-  # @return [Array<TrainingModule>] all training modules
+  # @return [Array<Training::Module>]
   def training_modules
-    @training_modules ||= TrainingModule.all
+    @training_modules ||= Training::Module.ordered
   end
 
   # @return [ModuleProgress]

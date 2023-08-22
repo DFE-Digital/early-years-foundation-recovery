@@ -1,5 +1,5 @@
 require 'simplecov'
-SimpleCov.minimum_coverage 70 # 93 - TODO: raise coverage limit - lowered whilst converting to CMS
+SimpleCov.minimum_coverage 91
 SimpleCov.start 'rails'
 
 require 'pry'
