@@ -10,13 +10,13 @@ class HookController < ApplicationController
   #     - Release (execute)
   #
   def release
-    Release.create!(
+    new_release = Release.create!(
       name: payload.dig('sys', 'id'),
       time: payload.dig('sys', 'completedAt'),
       properties: payload,
     )
 
-    NewModuleMailJob.enqueue
+    NewModuleMailJob.enqueue(new_release.id)
 
     # Potentially useful but is a LONG running task and concurrent runs must be avoided
     # TODO: consider que-locks if webhooks are to trigger the worker

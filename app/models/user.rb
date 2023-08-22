@@ -86,6 +86,11 @@ class User < ApplicationRecord
   scope :with_assessments, -> { joins(:user_assessments) }
   scope :with_passing_assessments, -> { with_assessments.merge(UserAssessment.passes) }
 
+  scope :start_training_recipients, -> { training_email_recipients.month_old_confirmation.registration_complete.not_started_training }
+  scope :complete_registration_recipients, -> { training_email_recipients.month_old_confirmation.registration_incomplete }
+  scope :continue_training_recipients, -> { training_email_recipients.select(&:continue_training_recipient?) }
+  scope :completed_available_modules, -> { training_email_recipients.select(&:completed_available_modules?) }
+
   scope :dashboard, -> { not_closed }
 
   validates :first_name, :last_name, :setting_type_id,
@@ -216,6 +221,7 @@ class User < ApplicationRecord
 
   # @return [Boolean]
   def course_in_progress?
+    # course_started? && !module_time_to_completion.values.all?(&:positive?)
     course.current_modules.present?
   end
 
@@ -329,6 +335,21 @@ class User < ApplicationRecord
   # @return [Hash] override
   def dashboard_row
     data_attributes.dup.merge(module_ttc)
+  end
+
+  # @return [Boolean]
+  def completed_available_modules?
+    available_modules = ModuleRelease.pluck(:name)
+    available_modules.all? { |mod| module_completed?(mod) }
+  end
+
+  # @return [Boolean]
+  def continue_training_recipient?
+    return unless course_in_progress?
+
+    recent_visits = Ahoy::Visit.last_4_weeks
+    old_visits = Ahoy::Visit.month_old.reject { |visit| recent_visits.pluck(:user_id).include?(visit.user_id) }
+    old_visits.pluck(:user_id).include?(id)
   end
 
 private

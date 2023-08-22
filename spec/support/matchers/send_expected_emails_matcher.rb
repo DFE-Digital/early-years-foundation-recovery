@@ -1,9 +1,9 @@
-RSpec::Matchers.define :send_expected_emails do |mailer:, mailer_method:, expected_users:, excluded_users:|
+RSpec::Matchers.define :send_expected_emails do |mailer_method:, expected_users:, excluded_users:|
   match do |_something|
     @expected_users = expected_users
     @excluded_users = excluded_users
-    expected_users.all? { |user| expect(mailer).to have_received(mailer_method).with(user, any_args).once } &&
-      excluded_users.all? { |user| expect(mailer).not_to have_received(mailer_method).with(user) }
+    expected_users.all? { |user| expect(NotifyMailer).to have_received(mailer_method).with(user, any_args).once } &&
+      excluded_users.all? { |user| expect(NotifyMailer).not_to have_received(mailer_method).with(user) }
   end
 
   failure_message do

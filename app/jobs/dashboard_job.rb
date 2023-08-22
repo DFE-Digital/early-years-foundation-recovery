@@ -1,6 +1,6 @@
 # DashboardJob.enqueue
 #
-class DashboardJob < ScheduledJob
+class DashboardJob < ApplicationJob
   # Jobs will default to priority 100 and run immediately
   # a lower number is more important
   #
@@ -10,9 +10,11 @@ class DashboardJob < ScheduledJob
 
   # @param upload [Boolean] defaults to true in production or if $DASHBOARD_UPDATE exists
   def run(upload: Rails.application.dashboard?)
-    log "DashboardJob: Running upload=#{upload}"
+    super do
+      log "DashboardJob: Running upload=#{upload}"
 
-    Dashboard.new(path: build_dir).call(upload: upload, clean: true)
+      Dashboard.new(path: build_dir).call(upload: upload, clean: true)
+    end
   end
 
 private
