@@ -6,7 +6,7 @@ RSpec.describe CompleteRegistrationMailJob do
     let!(:user_2) { create(:user, confirmed_at: 4.weeks.ago) }
     let!(:user_3) { create(:user, confirmed_at: 4.weeks.ago) }
     let!(:user_4) { create(:user, :registered, confirmed_at: 1.month.ago) }
-    #TODO: uncomment this before merging
+    # TODO: uncomment this before merging
     # let!(:user_5) { create(:user, confirmed_at: 2.months.ago) }
 
     before do

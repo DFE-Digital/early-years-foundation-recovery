@@ -88,7 +88,7 @@ class User < ApplicationRecord
 
   scope :start_training_recipients, -> { training_email_recipients.month_old_confirmation.registration_complete.not_started_training }
   # scope :complete_registration_recipients, -> { training_email_recipients.month_old_confirmation.registration_incomplete }
-  #TODO: change back to the above scope before merging
+  # TODO: change back to the above scope before merging
   scope :complete_registration_recipients, -> { training_email_recipients.registration_incomplete }
   scope :continue_training_recipients, -> { training_email_recipients.select(&:continue_training_recipient?) }
   scope :completed_available_modules, -> { training_email_recipients.select(&:completed_available_modules?) }
