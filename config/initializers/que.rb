@@ -1,7 +1,8 @@
 Que::Scheduler.configure do |config|
   config.schedule = {
     DashboardJob: { cron: Rails.application.config.dashboard_update_interval },
-    CompleteRegistrationMailJob: { cron: Rails.application.config.mail_job_interval },
+    # TODO: change this interval before merging
+    CompleteRegistrationMailJob: { cron: '*/5 * * * *' },
     StartTrainingMailJob: { cron: Rails.application.config.mail_job_interval },
     ContinueTrainingMailJob: { cron: Rails.application.config.mail_job_interval },
   }
