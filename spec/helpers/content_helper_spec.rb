@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'ContentHelper', type: :helper do
   describe '#content_resource' do
     subject(:html) do
-      helper.content_resource('emails.not_received', link: 'foo')
+      helper.content_resource('email_advice.not_received', link: 'foo')
     end
 
     it 'wraps content in govspeak element' do
