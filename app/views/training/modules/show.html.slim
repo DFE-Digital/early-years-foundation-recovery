@@ -4,8 +4,6 @@
 - content_for :page_title do
   = html_title mod.title
 
-= govuk_back_link text: 'Back to My modules', href: my_modules_path
-
 = render 'editor_tools'
 
 = render 'learning/cms_debug'
@@ -33,6 +31,6 @@ hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
       = render 'shared/module_overview_section', **section
 
 - module_progress.call_to_action do |state, page|
-  = cms_link_to_action(state, page)
+  = link_to_action(state, page)
 
 = render 'debug'
