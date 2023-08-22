@@ -48,7 +48,7 @@ SitemapGenerator::Sitemap.create do
 
   # errors
   add '/404'
-  add '/422'
+  # add '/422'
   add '/500'
 
   add users_timeout_path
