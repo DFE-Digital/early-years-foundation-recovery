@@ -578,8 +578,7 @@ en:
     summary: |
       %{description}
 
-      ## What you'll learn
-      {: .govuk-heading-m}
+      **What you'll learn**
 
       This module covers:
 
