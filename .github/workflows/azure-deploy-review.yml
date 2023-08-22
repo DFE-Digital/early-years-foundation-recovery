@@ -108,6 +108,11 @@ jobs:
               --slot ${{ env.PR_NUMBER }} \
               --configuration-source ${{ vars.REVIEWAPP_NAME }} \
               --deployment-container-image-name ${{ env.DOCKER_IMAGE }}:${{ env.PR_NUMBER }}
+            az webapp vnet-integration add --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+              --name ${{ vars.REVIEWAPP_NAME }} \
+              --slot ${{ env.PR_NUMBER }} \
+              --subnet ${{ secrets.AZURE_REVIEW_APP_SUBNET }} \
+              --vnet ${{ secrets.AZURE_VNET }}
             az webapp config appsettings set --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.REVIEWAPP_NAME }} \
               --slot ${{ env.PR_NUMBER }} \
