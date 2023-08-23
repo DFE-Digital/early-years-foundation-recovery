@@ -32,14 +32,6 @@ class CourseProgress
     published_modules.all? { |mod| completed?(mod) }
   end
 
-  # @param mod [TrainingModule]
-  # @return [Boolean]
-  def completed?(mod)
-    return false if mod.draft?
-
-    module_progress(mod).completed?
-  end
-
   # @return [Array<String>]
   def debug_summary
     training_modules.map do |mod|
