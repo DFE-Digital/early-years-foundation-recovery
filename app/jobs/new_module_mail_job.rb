@@ -25,8 +25,16 @@ private
     User.completed_available_modules.each { |recipient| NotifyMailer.new_module(recipient, mod) }
   end
 
+  # @return [void]
+  def populate_module_releases
+    Training::Module.ordered.reject(&:draft?).each do |mod|
+        ModuleRelease.create!(release_id: Release.last.id, module_position: mod.position, name: mod.name, first_published_at: Release.last.time)
+    end
+  end
+
   # @return [Training::Module, nil]
   def new_module
+    populate_module_releases if ModuleRelease.count.zero?
     latest_published = Training::Module.ordered.reject(&:draft?).last
     if latest_published.position == ModuleRelease.ordered.last.module_position
       nil
