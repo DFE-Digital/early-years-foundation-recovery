@@ -7,11 +7,13 @@ class ApplicationJob < Que::Job
   def run(*_args)
     start_time = Time.zone.now
     log "#{self.class.name} running"
-    if duplicate_job_queued?
-      raise DuplicateJobError, "#{self.class.name} already queued"
-    elsif block_given?
-      yield
-    end
+    # TODO: add duplicate check back before merging
+    # if duplicate_job_queued?
+    #   raise DuplicateJobError, "#{self.class.name} already queued"
+    # elsif block_given?
+    #   yield
+    # end
+    yield if block_given?
 
     log "#{self.class.name} finished in #{(Time.zone.now - start_time).round(2)} seconds"
   end
