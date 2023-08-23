@@ -27,3 +27,8 @@ output "app_worker_subnet_id" {
   description = "ID of the delegated Subnet for the Background Worker"
   value       = azurerm_subnet.app_worker_snet.id
 }
+
+output "kv_certificate_thumbprint" {
+  description = "SSL certificate thumbprint"
+  value       = azurerm_key_vault_certificate.kv_cert[0].thumbprint
+}

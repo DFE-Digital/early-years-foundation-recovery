@@ -68,6 +68,7 @@ module "database" {
 module "webapp" {
   source = "./terraform-azure-web"
 
+  environment                              = var.environment
   asp_sku                                  = var.asp_sku
   webapp_worker_count                      = var.webapp_worker_count
   location                                 = var.azure_region
@@ -81,6 +82,8 @@ module "webapp" {
   webapp_docker_registry_url               = var.webapp_docker_registry_url
   webapp_health_check_path                 = "/health"
   webapp_health_check_eviction_time_in_min = 10
+  webapp_custom_domain_cert_thumbprint     = module.network.kv_certificate_thumbprint
+  webapp_custom_domain_name                = var.webapp_custom_domain_name
   depends_on                               = [module.network, module.database]
 }
 

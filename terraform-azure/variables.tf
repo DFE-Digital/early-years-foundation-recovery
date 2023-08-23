@@ -19,31 +19,37 @@ variable "resource_name_prefix" {
 variable "kv_certificate_authority_username" {
   description = "Username for the Certificate provider"
   type        = string
+  sensitive = true
 }
 
 variable "kv_certificate_authority_password" {
   description = "Password the Certificate provider"
   type        = string
+  sensitive = true
 }
 
 variable "kv_certificate_authority_admin_email" {
   description = "Email Address of the Certificate Authority Admin"
   type        = string
+  sensitive = true
 }
 
 variable "kv_certificate_authority_admin_first_name" {
   description = "First Name of the Certificate Authority Admin"
   type        = string
+  sensitive = true
 }
 
 variable "kv_certificate_authority_admin_last_name" {
   description = "Last Name of the Certificate Authority Admin"
   type        = string
+  sensitive = true
 }
 
 variable "kv_certificate_authority_admin_phone_no" {
   description = "Phone No. of the Certificate Authority Admin"
   type        = string
+  sensitive = true
 }
 
 variable "kv_certificate_label" {
@@ -139,6 +145,11 @@ variable "webapp_docker_image_tag" {
   default     = "latest"
   description = "Tag for the Docker Image"
   type        = string
+}
+
+variable "webapp_custom_domain_name" {
+  description = "Custom domain hostname"
+  type = string
 }
 
 variable "webapp_config_bot_token" {

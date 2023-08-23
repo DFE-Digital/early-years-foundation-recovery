@@ -186,6 +186,7 @@ resource "azurerm_key_vault" "kv" {
 }
 
 resource "azurerm_key_vault_certificate_issuer" "kv_ca" {
+  # Key Vault only deployed to the Test and Production subscription
   count = var.environment != "development" ? 1 : 0
 
   name          = var.kv_certificate_authority_label
@@ -203,6 +204,7 @@ resource "azurerm_key_vault_certificate_issuer" "kv_ca" {
 }
 
 resource "azurerm_key_vault_certificate" "kv_cert" {
+  # Key Vault only deployed to the Test and Production subscription
   count = var.environment != "development" ? 1 : 0
 
   name         = var.kv_certificate_label

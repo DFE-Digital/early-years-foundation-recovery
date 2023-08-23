@@ -167,3 +167,15 @@ resource "azurerm_monitor_diagnostic_setting" "webapp_slot_logs_monitor" {
     ignore_changes = [metric]
   }
 }
+
+# Create Custom Domain Name
+resource "azurerm_app_service_custom_hostname_binding" "webapp_custom_domain" {
+  # Custom hostname only deployed to the Test and Production subscription
+  count = var.environment != "development" ? 1 : 0
+
+  resource_group_name = var.resource_group
+  hostname            = var.webapp_custom_domain_name
+  app_service_name    = azurerm_linux_web_app.webapp.name
+  ssl_state           = "SniEnabled"
+  thumbprint          = var.webapp_custom_domain_cert_thumbprint
+}

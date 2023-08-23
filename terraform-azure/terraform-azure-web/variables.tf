@@ -1,3 +1,8 @@
+variable "environment" {
+  description = "Environment to deploy resources"
+  type        = string
+}
+
 variable "location" {
   description = "Name of the Azure region to deploy resources"
   type        = string
@@ -68,5 +73,15 @@ variable "webapp_health_check_eviction_time_in_min" {
 variable "webapp_startup_command" {
   default     = null
   description = "Startup command to pass into the Web Application"
+  type        = string
+}
+
+variable "webapp_custom_domain_name" {
+  description = "Custom domain hostname"
+  type        = string
+}
+
+variable "webapp_custom_domain_cert_thumbprint" {
+  description = "SSL certificate thumbprint"
   type        = string
 }
