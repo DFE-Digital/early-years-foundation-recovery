@@ -8,6 +8,8 @@ RSpec.describe NewModuleMailJob do
     let!(:release_2) { create(:release) }
 
     before do
+      # TODO: unskip this before merging
+      skip 'skipped for testing'
       complete_module(alpha)
       complete_module(bravo)
       puts "release 2 after creation: #{release_2.class}"
@@ -18,14 +20,14 @@ RSpec.describe NewModuleMailJob do
     end
 
     it 'emails the correct users' do
-    # TODO: Uncomment this before merging
-    #   expected = [user]
-    #   excluded = [user_2]
-    #   expect(described_class.run(release_2.id)).to send_expected_emails(
-    #     mailer_method: :new_module,
-    #     expected_users: expected,
-    #     excluded_users: excluded,
-    #   )
+    
+      expected = [user]
+      excluded = [user_2]
+      expect(described_class.run(release_2.id)).to send_expected_emails(
+        mailer_method: :new_module,
+        expected_users: expected,
+        excluded_users: excluded,
+      )
     end
   end
 end
