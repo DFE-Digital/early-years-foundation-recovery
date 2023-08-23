@@ -38,7 +38,9 @@ private
     # TODO: Add .reject(&:draft?) check back before merging
     latest_published = Training::Module.ordered.last
     # TODO: Remove ModuleRelease.count.zero? check below, before merging
-    if ModuleRelease.count.zero? || latest_published.position == ModuleRelease.ordered.last.module_position
+    if ModuleRelease.count.zero? 
+        latest_published
+    elsif latest_published.position == ModuleRelease.ordered.last.module_position
       nil
     else
       latest_published
