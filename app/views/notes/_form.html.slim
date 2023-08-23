@@ -1,36 +1,38 @@
 
 = form_with(model: note, url: user_notes_path) do |form|
-  .prompt
-    .govuk-grid-row 
-      .govuk-grid-column-one-quarter 
-        = icon(:pencil)
-      .govuk-grid-column-three-quarters
-        div class='govuk-!-margin-bottom-4'
-          h2.govuk-heading-m Add to your learning log
+  .govuk-grid-row 
+    .govuk-grid-column-two-thirds-from-desktop
+      .prompt
+        .govuk-grid-row 
+          .govuk-grid-column-one-quarter 
+            = icon(:pencil)
+          .govuk-grid-column-three-quarters
+            div class='govuk-!-margin-bottom-4'
+              h2.govuk-heading-m Add to your learning log
           
-          - if note.errors.any?
-            div style='color: red'
-              h2= "#{pluralize(note.errors.count, 'error')} prohibited this note from being saved:"
-              ul
-                - note.errors.each do |error|
-                  li= error.full_message
-          = form.govuk_text_area :body,
-            rows: 5,
-            form_group: { classes: 'small-screen-padding-right' },
-            label: { text: "Use this space to make notes on the reflection point. Do not enter any personal or sensitive information like children's names." } do 
-            p.govuk_body
-              | All your notes will be added to your personal
-              =< govuk_link_to 'learning log', user_notes_path(anchor: content.parent.tab_anchor)
-              | .
-            p.govuk-body
-              | Your notes
-          = form.hidden_field :module_item_id, value: content.id
-          = form.hidden_field :title
-          = form.hidden_field :training_module
-          = form.hidden_field :name
-          
-  hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
+            - if note.errors.any?
+              div style='color: red'
+                h2= "#{pluralize(note.errors.count, 'error')} prohibited this note from being saved:"
+                ul
+                  - note.errors.each do |error|
+                    li= error.full_message
+            = form.govuk_text_area :body,
+              rows: 5,
+              form_group: { classes: 'small-screen-padding-right' },
+              label: { text: "Use this space to make notes on the reflection point. Do not enter any personal or sensitive information like children's names." } do 
+              p.govuk_body
+                | All your notes will be added to your personal
+                =< govuk_link_to 'learning log', user_notes_path(anchor: content.parent.tab_anchor)
+                | .
+              p.govuk-body
+                | Your notes
+            = form.hidden_field :module_item_id, value: content.id
+            = form.hidden_field :title
+            = form.hidden_field :training_module
+            = form.hidden_field :name
+  .govuk-grid-column-full-width            
+    hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
 
-  .govuk-button-group
-    = link_to_previous(content)
-    = form.submit 'Save and continue', class: 'govuk-button', id: 'next-action'
+    .govuk-button-group
+      = link_to_previous(content)
+      = form.submit 'Save and continue', class: 'govuk-button', id: 'next-action'
