@@ -23,6 +23,7 @@ private
     Que.job_stats.any? { |job| job[:job_class] == self.class.name && job[:count] > 1 }
   end
 
+  # @param error [Error]
   # @return [void]
   def handle_error(error)
     message = "#{self.class.name} failed with '#{error.message}'"
