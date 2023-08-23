@@ -116,7 +116,6 @@ ul>li>ul>li {
 
 .white-background {
   background-color: govuk-colour("white");
-  ;
   border-left: none !important;
   padding: govuk-spacing(4);
 }
@@ -281,10 +280,6 @@ $accent: #347ca9;
   .gem-c-feedback__prompt-link {
     min-width: 10px;
   }
-}
-
-.BGstrip-grey {
-  background-color: #f3f2f1;
 }
 
 .width-auto {
