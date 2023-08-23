@@ -28,7 +28,12 @@ output "app_worker_subnet_id" {
   value       = azurerm_subnet.app_worker_snet.id
 }
 
-output "kv_certificate_thumbprint" {
-  description = "SSL certificate thumbprint"
-  value       = azurerm_key_vault_certificate.kv_cert[0].thumbprint
+output "kv_id" {
+  description = "ID of the Key Vault"
+  value       = azurerm_key_vault.kv[0].id
+}
+
+output "kv_cert_secret_id" {
+  description = "SSL certificate Secret ID"
+  value       = azurerm_key_vault_certificate.kv_cert[0].secret_id
 }

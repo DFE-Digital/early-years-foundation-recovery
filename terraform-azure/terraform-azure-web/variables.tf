@@ -81,7 +81,17 @@ variable "webapp_custom_domain_name" {
   type        = string
 }
 
-variable "webapp_custom_domain_cert_thumbprint" {
-  description = "SSL certificate thumbprint"
+variable "webapp_custom_domain_cert_secret_label" {
+  description = "Label for the Certificate"
+  type        = string
+}
+
+variable "kv_id" {
+  description = "ID of the Key Vault"
+  type        = string
+}
+
+variable "kv_cert_secret_id" {
+  description = "SSL certificate Secret ID"
   type        = string
 }

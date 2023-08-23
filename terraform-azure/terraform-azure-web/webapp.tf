@@ -176,6 +176,51 @@ resource "azurerm_app_service_custom_hostname_binding" "webapp_custom_domain" {
   resource_group_name = var.resource_group
   hostname            = var.webapp_custom_domain_name
   app_service_name    = azurerm_linux_web_app.webapp.name
+
+  lifecycle {
+    ignore_changes = [ssl_state, thumbprint]
+  }
+}
+
+data "azurerm_client_config" "az_config" {}
+
+data "azuread_service_principal" "microsoft_webapp" {
+  # application_id: https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-certificate?tabs=apex#authorize-app-service-to-read-from-the-vault
+  application_id = "abfa0a7c-a6b6-4736-8310-5855508787cd"
+}
+
+resource "azurerm_key_vault_access_policy" "webapp_kv_ap" {
+  # Custom hostname only deployed to the Test and Production subscription
+  count = var.environment != "development" ? 1 : 0
+
+  key_vault_id = var.kv_id
+  tenant_id    = data.azurerm_client_config.az_config.tenant_id
+  object_id    = data.azuread_service_principal.microsoft_webapp.object_id
+
+  secret_permissions = [
+    "Get"
+  ]
+
+  certificate_permissions = [
+    "Get"
+  ]
+}
+
+resource "azurerm_app_service_certificate" "webapp_custom_domain_cert" {
+  # Custom hostname only deployed to the Test and Production subscription
+  count = var.environment != "development" ? 1 : 0
+
+  name                = var.webapp_custom_domain_cert_secret_label
+  resource_group_name = var.resource_group
+  location            = var.location
+  key_vault_secret_id = var.kv_cert_secret_id
+}
+
+resource "azurerm_app_service_certificate_binding" "webapp_custom_domain_cert_bind" {
+  # Custom hostname only deployed to the Test and Production subscription
+  count = var.environment != "development" ? 1 : 0
+
+  hostname_binding_id = azurerm_app_service_custom_hostname_binding.webapp_custom_domain[0].id
+  certificate_id      = azurerm_app_service_certificate.webapp_custom_domain_cert[0].id
   ssl_state           = "SniEnabled"
-  thumbprint          = var.webapp_custom_domain_cert_thumbprint
 }
