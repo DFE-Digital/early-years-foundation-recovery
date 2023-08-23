@@ -28,7 +28,7 @@ private
   # @return [void]
   def populate_module_releases
     Training::Module.ordered.reject(&:draft?).each do |mod|
-        ModuleRelease.create!(release_id: Release.last.id, module_position: mod.position, name: mod.name, first_published_at: Release.last.time)
+      ModuleRelease.create!(release_id: Release.last.id, module_position: mod.position, name: mod.name, first_published_at: Release.last.time)
     end
   end
 
