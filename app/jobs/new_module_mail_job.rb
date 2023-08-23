@@ -35,7 +35,8 @@ private
   # @return [Training::Module, nil]
   def new_module
     # populate_module_releases if ModuleRelease.count.zero?
-    latest_published = Training::Module.ordered.reject(&:draft?).last
+    # TODO: Add .reject(&:draft?) check back before merging
+    latest_published = Training::Module.ordered.last
     # TODO: Remove ModuleRelease.count.zero? check below, before merging
     if ModuleRelease.count.zero? || latest_published.position == ModuleRelease.ordered.last.module_position
       nil
