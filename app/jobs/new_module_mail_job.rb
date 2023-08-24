@@ -30,7 +30,7 @@ private
 
   # @return [Training::Module, nil]
   def new_module
-    Training::Module.live.last
+    Training::Module.live.first
     # TODO: uncomment before merging
     # populate_module_releases if ModuleRelease.count.zero?
     # latest_published = Training::Module.live.last
