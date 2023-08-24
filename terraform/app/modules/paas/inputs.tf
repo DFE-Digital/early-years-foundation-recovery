@@ -54,7 +54,7 @@ variable "web_app_memory" {
 variable "web_app_disk_quota" {
   type        = number
   description = "Application disk quota"
-  default     = 4096
+  default     = 2048 
 }
 
 variable "web_app_start_command" {
