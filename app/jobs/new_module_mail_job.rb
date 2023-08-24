@@ -35,7 +35,6 @@ private
     # TODO: uncomment before merging
     # populate_module_releases if ModuleRelease.count.zero?
     # latest_published = Training::Module.live.last
-    
     # if latest_published.position == ModuleRelease.ordered.last.module_position
     #   nil
     # else
