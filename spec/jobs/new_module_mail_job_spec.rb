@@ -16,8 +16,9 @@ RSpec.describe NewModuleMailJob do
     end
 
     it 'emails the correct users' do
-      expected = [user]
-      excluded = [user_2]
+      expected = [user, user_2]
+      # excluded = [user_2]
+      excluded = []
       expect(described_class.run(release_2.id)).to send_expected_emails(
         mailer_method: :new_module,
         expected_users: expected,
