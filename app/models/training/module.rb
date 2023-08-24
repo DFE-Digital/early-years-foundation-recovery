@@ -1,6 +1,5 @@
 module Training
   class Module < ContentfulModel::Base
-
     validates_presence_of :name
 
     extend ::Caching
