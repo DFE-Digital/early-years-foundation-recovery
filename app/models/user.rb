@@ -206,14 +206,13 @@ class User < ApplicationRecord
 
   # @return [Boolean]
   def course_in_progress?
-    # course_started? && !module_time_to_completion.values.all?(&:positive?)
-    course.current_modules.present?
+    course_started? && !module_time_to_completion.values.all?(&:positive?)
   end
 
   # @param module_name [String]
   # @return [Boolean]
   def module_completed?(module_name)
-    course.completed?(Training::Module.by_name(module_name))
+    module_time_to_completion.key?(module_name) && module_time_to_completion[module_name].positive?
   end
 
   # @return [Integer]
@@ -340,7 +339,7 @@ class User < ApplicationRecord
   # @return [Boolean]
   def completed_available_modules?
     available_modules = ModuleRelease.pluck(:name)
-    available_modules.all? { |mod| module_completed?(mod) }
+    available_modules.all? { |mod_name| module_completed?(mod_name) }
   end
 
   # @return [Boolean]

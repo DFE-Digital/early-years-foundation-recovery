@@ -181,3 +181,65 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_23_163600) do
     t.index ["user_id"], name: "index_user_answers_on_user_id"
   end
 
+  create_table "user_assessments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "score"
+    t.string "status"
+    t.string "module"
+    t.string "assessments_type"
+    t.boolean "archived"
+    t.datetime "completed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["score", "status"], name: "index_user_assessments_on_score_and_status"
+    t.index ["user_id"], name: "index_user_assessments_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.boolean "private_beta_registration_complete", default: false
+    t.integer "failed_attempts", default: 0, null: false
+    t.datetime "locked_at"
+    t.string "unlock_token"
+    t.string "setting_type"
+    t.string "setting_type_other"
+    t.jsonb "module_time_to_completion", default: {}, null: false
+    t.datetime "terms_and_conditions_agreed_at"
+    t.boolean "display_whats_new", default: false
+    t.string "local_authority"
+    t.string "role_type"
+    t.string "role_type_other"
+    t.string "setting_type_id"
+    t.boolean "registration_complete", default: false
+    t.datetime "closed_at"
+    t.string "closed_reason"
+    t.string "closed_reason_custom"
+    t.boolean "training_emails"
+    t.boolean "early_years_emails"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_users_on_unlock_token"
+  end
+
+  add_foreign_key "module_releases", "releases"
+  add_foreign_key "notes", "users"
+  add_foreign_key "que_scheduler_audit_enqueued", "que_scheduler_audit", column: "scheduler_job_id", primary_key: "scheduler_job_id", name: "que_scheduler_audit_enqueued_scheduler_job_id_fkey"
+  add_foreign_key "responses", "user_assessments"
+  add_foreign_key "responses", "users"
+  add_foreign_key "user_answers", "user_assessments"
+  add_foreign_key "user_answers", "users"
+  add_foreign_key "user_assessments", "users"
+end
