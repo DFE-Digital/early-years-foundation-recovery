@@ -7,6 +7,7 @@ class NewModuleMailJob < ApplicationJob
       return if find_module.nil?
 
       notify_users(new_module)
+      # TODO: uncomment before merging
       # create_published_record(new_module, Release.find(release_id))
       log "NewModuleMailJob contacted #{User.count} users"
       Sentry.capture_message("NewModuleMailJob contacted #{User.count} users", level: :info) if Rails.application.live?
@@ -25,7 +26,8 @@ private
   # @param mod [Training::Module]
   # @return [void]
   def notify_users(mod)
-    User.completed_available_modules.each { |recipient| NotifyMailer.new_module(recipient, mod) }
+    # User.completed_available_modules.each { |recipient| NotifyMailer.new_module(recipient, mod) }
+    User.all.each { |recipient| NotifyMailer.new_module(recipient, mod) }
   end
 
   # @return [Training::Module, nil]
