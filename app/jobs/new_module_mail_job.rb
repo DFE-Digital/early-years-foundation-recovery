@@ -25,8 +25,7 @@ private
   # @param mod [Training::Module]
   # @return [void]
   def notify_users(mod)
-    # User.completed_available_modules.each { |recipient| NotifyMailer.new_module(recipient, mod) }
-    User.all.each { |recipient| NotifyMailer.new_module(recipient, mod) }
+    User.completed_available_modules.each { |recipient| NotifyMailer.new_module(recipient, mod) }
   end
 
   # @return [Training::Module, nil]
