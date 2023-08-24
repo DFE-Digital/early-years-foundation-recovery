@@ -1,22 +1,18 @@
 .govuk-notification-banner {
-  &__content {
-    & > * {
-      max-width: none;
-    }
-  }
 
-  &--error, &--alert {
+  &--error,
+  &--alert {
     border-color: $govuk-error-colour;
     background-color: $govuk-error-colour;
   }
-  
+
   p {
     margin-top: 0;
   }
 }
 
-.govuk-radios__input:disabled + .govuk-radios__label,
-.govuk-checkboxes__input:disabled + .govuk-checkboxes__label {
+.govuk-radios__input:disabled+.govuk-radios__label,
+.govuk-checkboxes__input:disabled+.govuk-checkboxes__label {
   opacity: 1.0;
   color: $govuk-secondary-text-colour;
 }
