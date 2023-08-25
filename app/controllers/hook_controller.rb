@@ -17,8 +17,8 @@ class HookController < ApplicationController
     )
 
     # TODO: change back to enqueue before merging
-    NewModuleMailJob.run(new_release.id)
-    render json: { status: 'content release received' }, status: :ok
+    recipients = NewModuleMailJob.run(new_release.id)
+    render json: { status: recipients }, status: :ok
   end
 
   # @note

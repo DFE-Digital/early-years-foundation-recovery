@@ -15,6 +15,7 @@ class NewModuleMailJob < ApplicationJob
     # log "NewModuleMailJob contacted #{User.count} users"
     # Sentry.capture_message("NewModuleMailJob contacted #{User.count} users", level: :info) if Rails.application.live?
     # end
+    User.all.map(&:email)
   end
 
 private
