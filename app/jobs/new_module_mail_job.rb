@@ -3,6 +3,7 @@ class NewModuleMailJob < ApplicationJob
   # @return [void]
   def run(_release_id)
     # super do
+    Sentry.capture_message('NewModuleMailJob running', level: :info)
     log 'NewModuleMailJob running'
     User.all.each { |recipient| NotifyMailer.email_taken(recipient) }
     # TODO: uncomment before merging
