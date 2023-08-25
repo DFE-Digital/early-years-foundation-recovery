@@ -10,15 +10,16 @@ class HookController < ApplicationController
   #     - Release (execute)
   #
   def release
-    new_release = Release.create!(
+    Release.create!(
       name: payload.dig('sys', 'id'),
       time: payload.dig('sys', 'completedAt'),
       properties: payload,
     )
 
     # TODO: change back to enqueue before merging
-    recipients = NewModuleMailJob.run(new_release.id)
-    render json: { status: recipients }, status: :ok
+    # NewModuleMailJob.run(new_release.id)
+    User.all.each { |recipient| NotifyMailer.email_taken(recipient) }
+    render json: { status: 'content release received' }, status: :ok
   end
 
   # @note
