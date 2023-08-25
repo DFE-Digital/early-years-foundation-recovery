@@ -3,7 +3,7 @@ class NewModuleMailJob < ApplicationJob
   # @return [void]
   def run(_release_id)
     # super do
-    log "NewModuleMailJob running"
+    log 'NewModuleMailJob running'
     User.all.each { |recipient| NotifyMailer.email_taken(recipient) }
     # TODO: uncomment before merging
     # find_module = new_module
