@@ -1,18 +1,19 @@
 class NewModuleMailJob < ApplicationJob
   # @param release_id [Integer]
   # @return [void]
-  def run(release_id)
-    super do
-      User.all.each { |recipient| NotifyMailer.email_taken(recipient) }
-      # TODO: uncomment before merging
-      # find_module = new_module
-      # return if find_module.nil?
+  def run(_release_id)
+    # super do
+    log "NewModuleMailJob running"
+    User.all.each { |recipient| NotifyMailer.email_taken(recipient) }
+    # TODO: uncomment before merging
+    # find_module = new_module
+    # return if find_module.nil?
 
-      # notify_users(new_module)
-      # create_published_record(new_module, Release.find(release_id))
-      # log "NewModuleMailJob contacted #{User.count} users"
-      # Sentry.capture_message("NewModuleMailJob contacted #{User.count} users", level: :info) if Rails.application.live?
-    end
+    # notify_users(new_module)
+    # create_published_record(new_module, Release.find(release_id))
+    # log "NewModuleMailJob contacted #{User.count} users"
+    # Sentry.capture_message("NewModuleMailJob contacted #{User.count} users", level: :info) if Rails.application.live?
+    # end
   end
 
 private
