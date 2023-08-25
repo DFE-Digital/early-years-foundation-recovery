@@ -10,7 +10,6 @@ class NewModuleMailJob < ApplicationJob
       # return if find_module.nil?
 
       # notify_users(new_module)
-      
       # create_published_record(new_module, Release.find(release_id))
       # log "NewModuleMailJob contacted #{User.count} users"
       # Sentry.capture_message("NewModuleMailJob contacted #{User.count} users", level: :info) if Rails.application.live?
