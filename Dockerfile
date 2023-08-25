@@ -93,8 +93,7 @@ COPY --from=deps /build/node_modules ${APP_HOME}/node_modules
 RUN SECRET_KEY_BASE=x \
     GOVUK_APP_DOMAIN=x \
     GOVUK_WEBSITE_ROOT=x \
-    bundle exec rails assets:precompile; \
-    rm -r /root/.cache/ms-playwright
+    bundle exec rails assets:precompile
 
 COPY ./docker-entrypoint.sh /
 
