@@ -3,8 +3,6 @@ class NewModuleMailJob < ApplicationJob
   # @return [void]
   def run(release_id)
     super do
-      some_module = Training::Module.live.first
-      # User.all.each { |recipient| NotifyMailer.new_module(recipient, some_module) }
       User.all.each { |recipient| NotifyMailer.email_taken(recipient) }
       # TODO: uncomment before merging
       # find_module = new_module
