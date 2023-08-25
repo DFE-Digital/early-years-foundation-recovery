@@ -31,6 +31,8 @@ module Registration
 
     # @return [String]
     def back_link
+      return '/email-preferences' if request.referer&.include?('/email-preferences')
+
       if current_user.role_applicable?
         edit_registration_role_type_path
       elsif current_user.setting_local_authority?
