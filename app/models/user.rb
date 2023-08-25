@@ -173,13 +173,25 @@ class User < ApplicationRecord
     send_devise_notification(:account_closed)
   end
 
-  def send_new_module_notification(mod)
-    send_devise_notification(:new_module, mod)
-  end
-
   # TODO: refactor this internal user mailer logic
   def send_account_closed_internal_notification(user_account_email)
     send_devise_notification(:account_closed_internal, user_account_email)
+  end
+
+  def send_complete_registration_notification
+    send_devise_notification(:complete_registration)
+  end
+
+  def send_start_training_notification
+    send_devise_notification(:start_training)
+  end
+
+  def send_continue_training_notification(mod)
+    send_devise_notification(:continue_training, mod)
+  end
+
+  def send_new_module_notification(mod)
+    send_devise_notification(:new_module, mod)
   end
 
   # @return [String]
@@ -211,6 +223,10 @@ class User < ApplicationRecord
   # @return [Boolean]
   def course_in_progress?
     course_started? && !module_time_to_completion.values.all?(&:positive?)
+  end
+
+  def courses_in_progress
+    module_time_to_completion.select { |_k, v| v.positive? }.keys
   end
 
   # @param module_name [String]

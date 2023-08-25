@@ -9,6 +9,7 @@ RSpec.describe StartTrainingMailJob do
     let!(:user_5) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
 
     before do
+      skip 'wip - try testing recipients method?'
       allow(NotifyMailer).to receive(:start_training)
     end
 

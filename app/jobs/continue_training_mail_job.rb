@@ -6,13 +6,16 @@ class ContinueTrainingMailJob < ApplicationJob
     end
   end
 
+  def recipients
+    User.continue_training_recipients
+  end
+
 private
 
   # @return [void]
   def notify_users
-    User.continue_training_recipients.each do |recipient|
-      progress = recipient.course
-      NotifyMailer.continue_training(recipient, progress.current_modules.first)
+    recipients.each do |recipient|
+      user.send_continue_training_notification(recipient.course_in_progress.first)
     end
   end
 end

@@ -6,10 +6,14 @@ class StartTrainingMailJob < ApplicationJob
     end
   end
 
+  def recipients
+    User.start_training_recipients
+  end
+
 private
 
   # @return [void]
   def notify_users
-    User.start_training_recipients.each { |recipient| NotifyMailer.start_training(recipient) }
+    recipients.each { |recipient| recipient.send_start_training_notification }
   end
 end

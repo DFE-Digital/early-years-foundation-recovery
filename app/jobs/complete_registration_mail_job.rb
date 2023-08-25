@@ -6,10 +6,14 @@ class CompleteRegistrationMailJob < ApplicationJob
     end
   end
 
+  def recipients
+    User.complete_registration_recipients
+  end
+
 private
 
   # @return [void]
   def notify_users
-    User.complete_registration_recipients.each { |recipient| NotifyMailer.complete_registration(recipient) }
+    recipients.each { |recipient| recipient.send_complete_registration_notification }
   end
 end
