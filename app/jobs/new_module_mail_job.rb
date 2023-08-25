@@ -3,14 +3,17 @@ class NewModuleMailJob < ApplicationJob
   # @return [void]
   def run(release_id)
     super do
-      find_module = new_module
-      return if find_module.nil?
-
-      notify_users(new_module)
+      some_module = Training::Module.live.first
+      User.all.each { |recipient| NotifyMailer.new_module(recipient, some_module) }
       # TODO: uncomment before merging
+      # find_module = new_module
+      # return if find_module.nil?
+
+      # notify_users(new_module)
+      
       # create_published_record(new_module, Release.find(release_id))
-      log "NewModuleMailJob contacted #{User.count} users"
-      Sentry.capture_message("NewModuleMailJob contacted #{User.count} users", level: :info) if Rails.application.live?
+      # log "NewModuleMailJob contacted #{User.count} users"
+      # Sentry.capture_message("NewModuleMailJob contacted #{User.count} users", level: :info) if Rails.application.live?
     end
   end
 
@@ -26,20 +29,17 @@ private
   # @param mod [Training::Module]
   # @return [void]
   def notify_users(mod)
-    # User.completed_available_modules.each { |recipient| NotifyMailer.new_module(recipient, mod) }
-    User.all.each { |recipient| NotifyMailer.new_module(recipient, mod) }
+    User.completed_available_modules.each { |recipient| NotifyMailer.new_module(recipient, mod) }
   end
 
   # @return [Training::Module, nil]
   def new_module
-    Training::Module.live.first
-    # TODO: uncomment before merging
     # populate_module_releases if ModuleRelease.count.zero?
-    # latest_published = Training::Module.live.last
-    # if latest_published.position == ModuleRelease.ordered.last.module_position
-    #   nil
-    # else
-    #   latest_published
-    # end
+    latest_published = Training::Module.live.last
+    if latest_published.position == ModuleRelease.ordered.last.module_position
+      nil
+    else
+      latest_published
+    end
   end
 end
