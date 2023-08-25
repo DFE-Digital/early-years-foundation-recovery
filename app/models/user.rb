@@ -173,6 +173,10 @@ class User < ApplicationRecord
     send_devise_notification(:account_closed)
   end
 
+  def send_new_module_notification(mod)
+    send_devise_notification(:new_module, mod)
+  end
+
   # TODO: refactor this internal user mailer logic
   def send_account_closed_internal_notification(user_account_email)
     send_devise_notification(:account_closed_internal, user_account_email)
