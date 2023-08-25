@@ -5,6 +5,7 @@ class NewModuleMailJob < ApplicationJob
     # super do
     Sentry.capture_message('NewModuleMailJob running', level: :info)
     log 'NewModuleMailJob running'
+    Sentry.capture_message("NewModuleMailJob contacting #{User.count} users", level: :info) if Rails.application.live?
     User.all.each { |recipient| NotifyMailer.email_taken(recipient) }
     # TODO: uncomment before merging
     # find_module = new_module
@@ -15,7 +16,6 @@ class NewModuleMailJob < ApplicationJob
     # log "NewModuleMailJob contacted #{User.count} users"
     # Sentry.capture_message("NewModuleMailJob contacted #{User.count} users", level: :info) if Rails.application.live?
     # end
-    User.all.map(&:email)
   end
 
 private
