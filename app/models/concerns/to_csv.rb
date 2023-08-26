@@ -24,7 +24,7 @@ module ToCsv
     # @param batch_size [Integer]
     # @return [String]
     def to_csv(batch_size: 1_000)
-      puts "Starting #{name}.to_csv"
+      puts "Starting #{name}.to_csv" if ENV['VERBOSE'].present?
       decorator = CoercionDecorator.new
 
       CSV.generate(headers: true) do |csv|

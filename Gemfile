@@ -48,9 +48,6 @@ gem 'slim-rails'
 # Headless CMS
 gem 'contentful_rails'
 
-# Create models from static data such as hashes or YAML
-gem 'active_hash'
-
 # TODO: add ey-recovery to https://github.com/DFE-Digital/govuk-components
 gem 'govuk-components'
 gem 'govuk_design_system_formbuilder'
@@ -64,9 +61,6 @@ gem 'govuk_notify_rails'
 # Sentry -Monitor errors
 gem 'sentry-rails'
 gem 'sentry-ruby'
-
-# Validate and normalise user postcodes
-gem 'uk_postcode'
 
 # Manage seeds
 gem 'dibber'

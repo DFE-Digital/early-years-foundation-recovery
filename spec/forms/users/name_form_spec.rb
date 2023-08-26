@@ -1,17 +1,38 @@
 require 'rails_helper'
 
 RSpec.describe Users::NameForm do
-  let(:name_form) { described_class.new(user: create(:user)) }
+  subject(:form) { described_class.new(user: user) }
 
-  specify 'first name must be present' do
-    name_form.first_name = ''
-    name_form.validate
-    expect(name_form.errors[:first_name].first).to eq('Enter a first name.')
-  end
+  let(:user) { create(:user) }
 
-  specify 'surname must be present' do
-    name_form.last_name = ''
-    name_form.validate
-    expect(name_form.errors[:last_name].first).to eq('Enter a surname.')
+  describe '#validate' do
+    let(:first_name_errors) { form.errors[:first_name] }
+    let(:last_name_errors) { form.errors[:last_name] }
+
+    before do
+      form.first_name = first_name
+      form.last_name = last_name
+      form.validate
+    end
+
+    context 'without input' do
+      let(:first_name) { '' }
+      let(:last_name) { '' }
+
+      specify do
+        expect(first_name_errors).to be_present
+        expect(last_name_errors).to be_present
+      end
+    end
+
+    context 'with input' do
+      let(:first_name) { 'foo' }
+      let(:last_name) { 'bar' }
+
+      specify do
+        expect(first_name_errors).not_to be_present
+        expect(last_name_errors).not_to be_present
+      end
+    end
   end
 end

@@ -1,6 +1,9 @@
 class Training::NotesController < ApplicationController
   before_action :authenticate_registered_user!
-  helper_method :note
+  helper_method :note,
+                :content
+
+  include Learning
 
   # GET /my-account/learning-log
   def show
@@ -10,9 +13,6 @@ class Training::NotesController < ApplicationController
 
   # POST /my-account/learning-log
   def create
-    # TODO: deprecate these instance variables
-    @model = content
-
     if note.save
       track('user_note_created', cms: true, **tracking_properties)
       redirect_to next_page_path
@@ -23,9 +23,6 @@ class Training::NotesController < ApplicationController
 
   # PATCH/PUT /my-account/learning-log
   def update
-    # TODO: deprecate these instance variables
-    @model = content
-
     if note.update(note_params.except(:module_item_id))
       track('user_note_updated', cms: true, **tracking_properties)
       redirect_to next_page_path
@@ -36,30 +33,18 @@ class Training::NotesController < ApplicationController
 
 private
 
-  # -------------------------------------
-
-  # @return [Training::Module]
-  def mod
-    Training::Module.by_name(mod_name)
-  end
-
-  # @return [Training::Page]
-  def content
-    mod.page_by_name(content_name)
-  end
-
-  #  -------------------------------------
-
+  # @see Learning
   def content_name
     note_params[:name]
   end
 
+  # @see Learning
   def mod_name
     note_params[:training_module]
   end
 
   def next_page_path
-    training_module_content_page_path(mod.name, content.next_item.name)
+    training_module_page_path(mod.name, content.next_item.name)
   end
 
   # defensive

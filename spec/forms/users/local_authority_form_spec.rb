@@ -1,12 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe Users::LocalAuthorityForm do
-  let(:user) { create(:user) }
-  let(:local_authority_form) { described_class.new(user: user) }
+  subject(:form) { described_class.new(user: user) }
 
-  specify 'page heading, body and button translated correctly' do
-    expect(local_authority_form.heading).to eq('What local authority area do you work in?')
-    expect(local_authority_form.body).to match(/county council, district council or London borough/)
-    expect(local_authority_form.button).to eq('Continue')
+  let(:user) { create(:user) }
+
+  describe '#validate' do
+    let(:errors) { form.errors[:local_authority] }
+
+    before do
+      form.local_authority = input
+      form.validate
+    end
+
+    context 'without input' do
+      let(:input) { '' }
+
+      specify { expect(errors).to be_present }
+    end
+
+    context 'with valid input' do
+      let(:input) { 'preschool' }
+
+      specify { expect(errors).not_to be_present }
+    end
   end
 end

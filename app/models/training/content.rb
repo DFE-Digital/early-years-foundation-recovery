@@ -1,23 +1,9 @@
 module Training
   class Content < ContentfulModel::Base
-    # METHODS TO DEPRECATE --------------------------------------
-
-    # @return [self]
-    def module_item
-      self
-    end
-
-    # @return [self]
-    def model
-      self
-    end
-
     # @return [Boolean]
     def topic_page_name?
       name.match? %r"\A(?<prefix>\d+\W){3}(?<page>\d+\D*)$"
     end
-
-    # METHODS TO DEPRECATE --------------------------------------
 
     # @return [String, nil]
     def published_at
@@ -122,6 +108,12 @@ module Training
     end
 
     # decorators ---------------------------------
+
+    # @see ApplicationHelper#html_title
+    # @return [String]
+    def title
+      heading
+    end
 
     # @return [String]
     def next_button_text

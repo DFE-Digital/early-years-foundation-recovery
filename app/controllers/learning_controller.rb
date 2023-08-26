@@ -6,6 +6,5 @@ class LearningController < ApplicationController
   # GET /my-modules
   def show
     track('learning_page')
-    @user = current_user
   end
 end

@@ -23,7 +23,7 @@ module Data
         end
       end
 
-  private
+    private
 
       # @return [Hash{Array<String, String> => Integer}]
       def question_attempts
@@ -50,13 +50,13 @@ module Data
           total_count = question_attempts[[module_name, question_name]]
           fail_rate = fail_count / total_count
 
-          if fail_rate > average_fail_rate
+          if fail_rate >= average_fail_rate
             high_fail_questions[[module_name, question_name]] = fail_rate.to_f
           end
         end
 
         { average: average_fail_rate }.merge(high_fail_questions)
       end
-  end
+    end
   end
 end

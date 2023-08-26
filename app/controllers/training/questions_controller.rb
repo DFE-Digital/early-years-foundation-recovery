@@ -8,49 +8,9 @@ module Training
                   :progress_bar,
                   :current_user_response
 
-    def show
-      # TODO: deprecate these instance variables
-      @module_item = content
-    end
+    include Learning
 
-  protected
-
-    # common content methods ----------------------------------------------------------------------------
-
-    # @return [Training::Module] shallow
-    def mod
-      Training::Module.by_name(mod_name)
-    end
-
-    # @return [Training::Question]
-    def content
-      mod.page_by_name(content_name)
-    end
-
-    def progress
-      helpers.cms_module_progress(mod)
-    end
-
-    def progress_bar
-      ContentfulModuleProgressBarDecorator.new(progress)
-    end
-
-    # @return [String]
-    def content_name
-      params[:id]
-    end
-
-    # @return [String]
-    def mod_name
-      params[:training_module_id]
-    end
-
-    # response specific ----------------------------------------------------------------------------
-
-    # @return [UserAnswer, Response]
-    def current_user_response
-      current_user.response_for(content)
-    end
+    def show; end
 
   private
 

@@ -1,3 +1,6 @@
+- content_for :page_title do
+  = html_title t('close_account.confirm.heading')
+
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
     = govuk_back_link(href: edit_reason_user_close_account_path)

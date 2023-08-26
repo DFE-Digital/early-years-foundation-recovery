@@ -1,30 +1,52 @@
 require 'rails_helper'
 
 RSpec.describe Users::SettingTypeForm do
-  subject(:setting_type_form) { described_class.new(user: create(:user)) }
+  subject(:form) { described_class.new(user: user) }
 
-  describe 'setting type' do
-    it 'must be present' do
-      setting_type_form.setting_type_id = nil
-      setting_type_form.validate
-      expect(setting_type_form.errors[:setting_type_id].first).to eq 'Enter the setting type you work in.'
+  describe '#validate' do
+    let(:user) { create(:user) }
+    let(:errors) { form.errors[:setting_type_id] }
+
+    before do
+      form.setting_type_id = input
+      form.validate
     end
 
-    it 'must be in list' do
-      setting_type_form.setting_type_id = 'wrong'
-      setting_type_form.validate
-      expect(setting_type_form.errors[:setting_type_id].first).to eq 'Enter the setting type you work in.'
+    context 'without input' do
+      let(:input) { '' }
+
+      specify { expect(errors).to be_present }
     end
 
-    # rubocop:disable Rails/SaveBang
-    it 'must maintain consistency with existing users' do
-      user = create(:user, :registered, setting_type_id: 'childminder_independent', local_authority: 'Cambridgeshire County Council', role_type: 'Childminder')
-      form = described_class.new(user: user, setting_type_id: 'department_for_education')
+    context 'with invalid input' do
+      let(:input) { 'university' }
+
+      specify { expect(errors).to be_present }
+    end
+
+    context 'with valid input' do
+      let(:input) { 'preschool' }
+
+      specify { expect(errors).not_to be_present }
+    end
+  end
+
+  describe '#save' do
+    let(:user) do
+      create :user, :independent_childminder,
+             local_authority: 'Cambridgeshire County Council'
+    end
+
+    before do
+      form.setting_type_id = 'department_for_education'
       form.save
-      expect(user.setting_type).to eq('Department for Education')
-      expect(user.local_authority).to eq('Not applicable')
-      expect(user.role_type).to eq('Not applicable')
     end
-    # rubocop:enable Rails/SaveBang
+
+    it 'updates user details' do
+      expect(user.setting_type_id).to eq 'department_for_education'
+      expect(user.setting_type).to eq 'Department for Education'
+      expect(user.local_authority).to eq 'Not applicable'
+      expect(user.role_type).to eq 'Not applicable'
+    end
   end
 end

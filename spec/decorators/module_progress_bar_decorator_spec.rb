@@ -9,10 +9,6 @@ RSpec.describe ModuleProgressBarDecorator do
   let(:key) { :heading }
   let(:attribute) { decorator.nodes.map { |node| node[key] } }
 
-  before do
-    skip 'YAML ONLY' if Rails.application.cms?
-  end
-
   describe '#nodes' do
     describe ':heading' do
       let(:key) { :heading }

@@ -1,36 +1,38 @@
 require 'rails_helper'
 
-RSpec.describe 'Whats new page' do
+RSpec.describe 'New stuff page' do
   include_context 'with user'
 
-  context 'when existing user' do
-    let(:user) { create :user, :registered, :display_whats_new }
+  context 'when the feature is disabled' do
+    it 'does not redirect' do
+      expect(page).not_to have_current_path '/whats-new'
+      expect(page).to have_current_path '/my-modules'
+    end
+  end
 
-    context "and 'whats new' page has not been viewed" do
-      it "visits what's new page after sign in" do
-        expect(page).to have_current_path '/whats-new'
-      end
+  context 'when enabled' do
+    let(:user) do
+      create :user, :registered, display_whats_new: true
     end
 
-    context "and 'whats new' page has been viewed" do
-      let(:user) { create :user, :registered, :display_whats_new }
+    it 'appears after login' do
+      expect(page).to have_current_path '/whats-new'
+    end
 
-      it "does not visit what's new page after sign in" do
+    describe 'with subsequent logins' do
+      before do
         click_on 'Sign out'
 
         visit '/users/sign-in'
         fill_in 'Email address', with: user.email
         fill_in 'Password', with: user.password
         click_button 'Sign in'
-
-        expect(page).not_to have_current_path '/whats-new'
       end
-    end
-  end
 
-  context 'when new user is created' do
-    it "does not visit what's new page" do
-      expect(page).not_to have_current_path '/whats-new'
+      it 'does not appear' do
+        expect(page).not_to have_current_path '/whats-new'
+        expect(page).to have_current_path '/my-modules'
+      end
     end
   end
 end

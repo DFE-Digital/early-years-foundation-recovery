@@ -1,6 +1,6 @@
 class SnippetsController < ApplicationController
   def show
-    if Rails.application.preview?
+    if Rails.application.preview? || Rails.env.test?
       render html: resource, layout: true
     else
       render 'errors/not_found'

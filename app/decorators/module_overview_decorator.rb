@@ -1,10 +1,10 @@
 class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
-  # @yield [Symbol, ModuleItem] state locales key and target page
+  # @yield [Symbol, Module::Content] state locales key and target page
   def call_to_action
     if completed?
       yield(:completed, mod.certificate_page)
     elsif failed_attempt?
-      # via AssessmentResultsController#new to archive attempt
+      # via AssessmentsController#new to archive attempt
       yield(:failed, mod.assessment_intro_page)
     elsif started?
       yield(:started, resume_page)
@@ -15,19 +15,21 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
 
   # @return [Hash{Symbol => Mixed}]
   def sections
-    mod.items_by_submodule.each.with_index(1).map do |(num, items), position|
+    mod.content_by_submodule.each.with_index(1).map do |(submodule, content_items), position|
       {
-        heading: items.first.model.heading,
+        heading: content_items.first.heading,
         position: position,
-        display_line: position != mod.items_by_submodule.size,
-        icon: status(items),
-        subsections: subsections(submodule: num, items: items),
+        display_line: position != mod.submodule_count,
+        icon: status(content_items),
+        subsections: subsections(submodule: submodule, items: content_items),
       }
     end
   end
 
-  # Check every item has been visited (public for debugging)
+  # Check every item has been visited (public for debugging).
+  # Presence of 'module_complete' bypasses individual checks.
   #
+  # @param items [Array<Module::Content>]
   # @return [Symbol]
   def status(items)
     if completed? || all?(items)
@@ -41,28 +43,42 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
     end
   end
 
+  # @return [String]
+  def debug_summary
+    mod.content_by_submodule_topic.map { |(submodule, topic), items|
+      <<~NODE
+        #{submodule}.#{topic}: #{status(items)}
+      NODE
+    }.join
+  end
+
 private
 
   # exclude intro or subpages
   #
-  # @return [Array<String, Symbol, Array>]
+  # @param submodule [Integer]
+  # @param items [Array<Module::Content>]
   #
-  # @param submodule [String]
-  # @param items [Array<ModuleItems>]
+  # @return [Array<String, Symbol, Array>]
   def subsections(submodule:, items:)
-    items_without_submodule_intro = submodule.nil? ? items : items.drop(1)
+    topics =
+      if submodule.zero?
+        items
+      else
+        items.drop(1).reject(&:topic_page_name?)
+      end
 
-    items_without_submodule_intro.select(&:topic?).map do |subsection|
-      section_content(submodule: submodule, subsection_item: subsection)
+    topics.map do |content_page|
+      section_content(submodule: submodule, subsection_item: content_page)
     end
   end
 
-  # @param submodule [String]
-  # @param subsection_item [ModuleItem]
+  # @param submodule [Integer]
+  # @param subsection_item [Module::Content]
   #
   # @return [Array<Array>]
   def section_content(submodule:, subsection_item:)
-    subsection_status = if submodule.nil?
+    subsection_status = if submodule.zero?
                           status([subsection_item])
                         else
                           status(subsection_item.current_submodule_topic_items)
@@ -70,49 +86,50 @@ private
 
     # providing the next page name enables the hyperlink
     if clickable?(subsection_item: subsection_item, submodule: submodule)
-      furthest_topic_page_name = subsection_status.eql?(:started) ? resume_page : subsection_item
+      furthest_topic_page = subsection_status.eql?(:started) ? resume_page : subsection_item
     end
 
     # SummativeAssessmentProgress conditional pass
     if failed_attempt?
       subsection_status = :failed if subsection_item.assessment_intro?
-      furthest_topic_page_name = nil if subsection_item.confidence_intro?
+      furthest_topic_page = nil if subsection_item.confidence_intro?
     elsif successful_attempt?
       subsection_status = :completed if subsection_item.assessment_intro?
-      furthest_topic_page_name = subsection_item if subsection_item.confidence_intro?
+      furthest_topic_page = subsection_item if subsection_item.confidence_intro?
     end
 
     {
-      mod: subsection_item.training_module,
-      heading: subsection_item.model.heading,
-      next_item: furthest_topic_page_name,
+      mod_name: subsection_item.parent.name,
+      heading: subsection_item.heading,
+      next_page_name: furthest_topic_page&.name,
       status: subsection_status,
     }
   end
 
-  # @param submodule [String]
-  # @param subsection_item [ModuleItem]
+  # @param submodule [Integer]
+  # @param subsection_item [Module::Content]
   #
   # @return [Boolean]
   def clickable?(submodule:, subsection_item:)
-    return all?([subsection_item]) if submodule.nil?
+    return all?([subsection_item]) if submodule.zero?
 
-    submodule_intro = mod.module_items_by_submodule(submodule).first
+    submodule_intro = fetch_submodule(submodule).first
     return false unless visited?(submodule_intro)
 
-    current_topic = find_topic(subsection_item.topic_name, submodule)
-    current_topic_items = current_topic.values.first.to_a
-
-    all?(current_topic_items) if current_topic
+    current_topic_items = fetch_submodule_topic(submodule, subsection_item.topic)
+    all?(current_topic_items)
   end
 
-  # @param topic_num [String]
-  # @param submodule_num [String]
-  #
-  # @return [Array<Array>] [1,2] [item, item, item]
-  def find_topic(topic_num, submodule_num)
-    mod.items_by_topic.select do |(match_sub_num, match_topic_num), _items|
-      match_sub_num.eql?(submodule_num) && match_topic_num.eql?(topic_num)
-    end
+  # @param submodule [Integer]
+  # @return [Array<Training::Content>]
+  def fetch_submodule(submodule)
+    mod.content_by_submodule.fetch(submodule)
+  end
+
+  # @param submodule [Integer]
+  # @param topic [Integer]
+  # @return [Array<Training::Content>]
+  def fetch_submodule_topic(submodule, topic)
+    mod.content_by_submodule_topic.fetch([submodule, topic])
   end
 end

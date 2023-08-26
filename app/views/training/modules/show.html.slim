@@ -1,5 +1,8 @@
-- content_for(:head) do
+- content_for :head do
   = tag.meta name: 'turbo-visit-control', content: 'reload'
+
+- content_for :page_title do
+  = html_title mod.title
 
 = govuk_back_link text: 'Back to My modules', href: my_modules_path
 
@@ -14,7 +17,7 @@
       = content_resource 'module.overview.summary', title: mod.card_title, description: mod.description, criteria: mod.criteria
 
       - module_progress.call_to_action do |state, page|
-        = cms_link_to_action(state, page)
+        = link_to_action(state, page)
 
 = content_resource 'module.overview.progress'
 

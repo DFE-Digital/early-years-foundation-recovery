@@ -72,7 +72,6 @@ env:
   TF_VAR_webapp_config_rails_master_key: ${{ secrets.WEBAPP_CONFIG_RAILS_MASTER_KEY }}
   TF_VAR_webapp_config_rails_max_threads: ${{ vars.WEBAPP_CONFIG_RAILS_MAX_THREADS }}
   TF_VAR_webapp_config_rails_serve_static_files: ${{ vars.WEBAPP_CONFIG_RAILS_SERVE_STATIC_FILES }}
-  TF_VAR_webapp_config_training_modules: ${{ vars.WEBAPP_CONFIG_TRAINING_MODULES }}
   TF_VAR_webapp_config_web_concurrency: ${{ vars.WEBAPP_CONFIG_WEB_CONCURRENCY }}
 
 jobs:

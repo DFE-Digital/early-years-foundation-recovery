@@ -23,8 +23,8 @@ RSpec.describe Data::SettingPassRate do
     ]
   end
 
-  let(:user_1) { create(:user, :registered, :agency_setting) }
-  let(:user_2) { create(:user, :registered, :agency_setting) }
+  let(:user_1) { create(:user, :agency_childminder) }
+  let(:user_2) { create(:user, :agency_childminder) }
 
   before do
     create(:user_assessment, :passed, user_id: user_1.id, score: 100, module: 'module_1')
