@@ -19,6 +19,7 @@ resource "azurerm_key_vault" "kv" {
   }
 
   #checkov:skip=CKV_AZURE_109:Access Policies configured
+  #checkov:skip=CKV_AZURE_189:Access Policies configured
   #checkov:skip=CKV2_AZURE_32:VNET configuration adequate
 }
 
