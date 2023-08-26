@@ -35,6 +35,39 @@ resource "azurerm_linux_web_app" "webapp" {
       docker_image_name   = "${var.webapp_docker_image}:${var.webapp_docker_image_tag}"
       docker_registry_url = var.webapp_docker_registry_url
     }
+
+    dynamic "ip_restriction" {
+      # Deploy App Gateway rules only to the Test and Production subscription
+      for_each = var.environment != "development" ? [1] : []
+      content {
+        name                      = "Allow app gateway"
+        action                    = "Allow"
+        priority                  = 300
+        virtual_network_subnet_id = var.agw_subnet_id
+      }
+    }
+
+    dynamic "ip_restriction" {
+      # Deploy App Gateway rules only to the Test and Production subscription
+      for_each = var.environment != "development" ? [1] : []
+      content {
+        name       = "Allow health check"
+        action     = "Allow"
+        priority   = 400
+        ip_address = "127.0.0.1/0"
+      }
+    }
+
+    dynamic "ip_restriction" {
+      # Deploy App Gateway rules only to the Test and Production subscription
+      for_each = var.environment != "development" ? [1] : []
+      content {
+        name       = "Deny public"
+        action     = "Deny"
+        priority   = 500
+        ip_address = "0.0.0.0/0"
+      }
+    }
   }
 
   sticky_settings {
@@ -118,6 +151,7 @@ resource "azurerm_log_analytics_workspace" "webapp_logs" {
   resource_group_name = var.resource_group
   sku                 = "PerGB2018"
   retention_in_days   = 30
+  daily_quota_gb      = 1
 
   lifecycle {
     ignore_changes = [tags]
@@ -125,7 +159,7 @@ resource "azurerm_log_analytics_workspace" "webapp_logs" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "webapp_logs_monitor" {
-  name                       = "${var.resource_name_prefix}-mon"
+  name                       = "${var.resource_name_prefix}-webapp-mon"
   target_resource_id         = azurerm_linux_web_app.webapp.id
   log_analytics_workspace_id = azurerm_log_analytics_workspace.webapp_logs.id
 
@@ -147,7 +181,7 @@ resource "azurerm_monitor_diagnostic_setting" "webapp_logs_monitor" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "webapp_slot_logs_monitor" {
-  name                       = "${var.resource_name_prefix}-green-mon"
+  name                       = "${var.resource_name_prefix}-webapp-green-mon"
   target_resource_id         = azurerm_linux_web_app_slot.webapp_slot.id
   log_analytics_workspace_id = azurerm_log_analytics_workspace.webapp_logs.id
 
@@ -193,17 +227,11 @@ resource "azurerm_key_vault_access_policy" "webapp_kv_ap" {
   # Custom hostname only deployed to the Test and Production subscription
   count = var.environment != "development" ? 1 : 0
 
-  key_vault_id = var.kv_id
-  tenant_id    = data.azurerm_client_config.az_config.tenant_id
-  object_id    = data.azuread_service_principal.microsoft_webapp.object_id
-
-  secret_permissions = [
-    "Get"
-  ]
-
-  certificate_permissions = [
-    "Get"
-  ]
+  key_vault_id            = var.kv_id
+  tenant_id               = data.azurerm_client_config.az_config.tenant_id
+  object_id               = data.azuread_service_principal.microsoft_webapp.object_id
+  secret_permissions      = ["Get"]
+  certificate_permissions = ["Get"]
 }
 
 resource "azurerm_app_service_certificate" "webapp_custom_domain_cert" {
