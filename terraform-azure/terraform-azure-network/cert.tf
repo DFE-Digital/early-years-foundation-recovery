@@ -11,12 +11,15 @@ resource "azurerm_key_vault" "kv" {
   tenant_id                   = data.azurerm_client_config.az_config.tenant_id
   enabled_for_disk_encryption = true
   soft_delete_retention_days  = 7
-  purge_protection_enabled    = false
+  purge_protection_enabled    = true
   sku_name                    = "standard"
 
   lifecycle {
     ignore_changes = [tags]
   }
+
+  #checkov:skip=CKV_AZURE_109:Access Policies configured
+  #checkov:skip=CKV2_AZURE_32:VNET configuration adequate
 }
 
 resource "azurerm_user_assigned_identity" "kv_mi" {

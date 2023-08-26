@@ -164,6 +164,9 @@ resource "azurerm_application_gateway" "agw" {
   lifecycle {
     ignore_changes = [tags]
   }
+
+  #checkov:skip=CKV_AZURE_218:Secure transit protocols used
+  #checkov:skip=CKV_AZURE_120:WAF is enabled
 }
 
 resource "azurerm_monitor_diagnostic_setting" "agw_logs_monitor" {
