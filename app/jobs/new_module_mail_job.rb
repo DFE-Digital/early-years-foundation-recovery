@@ -4,6 +4,7 @@ class NewModuleMailJob < MailJob
   def run(release_id)
     super do
       return if ModuleRelease.count.zero?
+
       find_module = new_module
       return if find_module.nil?
 
