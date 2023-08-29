@@ -6,7 +6,7 @@ class MailJob < ApplicationJob
     message = "#{self.class.name} contacted #{recipients.count} users"
     Sentry.capture_message(message, level: :info) if Rails.application.live?
     log(message)
-  rescue NoMethodError, NameError
-    raise MailJobError, "#{self.class.name}.recipients is required for this mail job"
+  rescue NoMethodError
+    raise MailJobError, "#{self.class.name}.recipients is required for this mail job: #{e}"
   end
 end

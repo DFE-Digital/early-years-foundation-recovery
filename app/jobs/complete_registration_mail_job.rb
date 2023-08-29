@@ -14,6 +14,6 @@ private
 
   # @return [void]
   def notify_users
-    recipients.each { |recipient| recipient.send_complete_registration_notification }
+    recipients.each(&:send_complete_registration_notification)
   end
 end

@@ -18,7 +18,7 @@ RSpec.describe NewModuleMailJob do
     end
 
     it 'emails the correct users' do
-      message = "NewModuleMailJob contacted 1 users"
+      message = 'NewModuleMailJob contacted 1 users'
       expect { described_class.run(release_2.id) }.to output(message).to_stdout
     end
   end

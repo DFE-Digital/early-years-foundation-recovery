@@ -4,14 +4,11 @@ class NewModuleMailJob < MailJob
   def run(release_id)
     super do
       # populate_module_releases(release_id) if ModuleRelease.count.zero?
-      puts "starting"
       find_module = new_module
       return if find_module.nil?
 
       notify_users(new_module)
       create_published_record(new_module, Release.find(release_id))
-      puts "finished"
-      puts "contacted #{recipients.count} users"
       log_mail_job
     end
   end
@@ -46,12 +43,11 @@ private
 
   # @return [Training::Module, nil]
   def new_module
-    # latest_published = Training::Module.live.last
-    # if latest_published.position == ModuleRelease.ordered.last.module_position
-    #   nil
-    # else
-    #   latest_published
-    # end
-    Training::Module.live.last
+    latest_published = Training::Module.live.last
+    if latest_published.position == ModuleRelease.ordered.last.module_position
+      nil
+    else
+      latest_published
+    end
   end
 end
