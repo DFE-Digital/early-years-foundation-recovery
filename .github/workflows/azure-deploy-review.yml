@@ -116,7 +116,8 @@ jobs:
             az webapp config appsettings set --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.REVIEWAPP_NAME }} \
               --slot ${{ env.PR_NUMBER }} \
-              --slot-settings DOMAIN="https://${{ vars.REVIEWAPP_NAME }}-${{ env.PR_NUMBER }}.azurewebsites.net"
+              --slot-settings DOMAIN="https://${{ vars.REVIEWAPP_NAME }}-${{ env.PR_NUMBER }}.azurewebsites.net" \
+              --output none
 
       # Add URL to Pull Request
       - name: Comment URL to PR
