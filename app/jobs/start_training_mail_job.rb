@@ -1,8 +1,9 @@
-class StartTrainingMailJob < ApplicationJob
+class StartTrainingMailJob < MailJob
   # @return [void]
   def run
     super do
       notify_users
+      log_mail_job
     end
   end
 

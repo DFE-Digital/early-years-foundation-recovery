@@ -8,8 +8,8 @@ class NewModuleMailJob < MailJob
       return if find_module.nil?
 
       notify_users(new_module)
-      create_published_record(new_module, Release.find(release_id))
       log_mail_job
+      create_published_record(new_module, Release.find(release_id))
     end
   end
 

@@ -1,8 +1,9 @@
-class ContinueTrainingMailJob < ApplicationJob
+class ContinueTrainingMailJob < MailJob
   # @return [void]
   def run
     super do
       notify_users
+      log_mail_job
     end
   end
 
@@ -15,7 +16,7 @@ private
   # @return [void]
   def notify_users
     recipients.each do |recipient|
-      user.send_continue_training_notification(recipient.course_in_progress.first)
+      recipient.send_continue_training_notification(recipient.courses_in_progress.first)
     end
   end
 end

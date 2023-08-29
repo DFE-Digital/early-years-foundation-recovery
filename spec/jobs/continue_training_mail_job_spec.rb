@@ -5,11 +5,10 @@ RSpec.describe ContinueTrainingMailJob do
     include_context 'with progress'
 
     let!(:user_2) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
-    let!(:user_3) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1 }) }
 
     before do
-      skip 'wip - try testing recipients method?'
       user.update!(confirmed_at: 4.weeks.ago)
+      create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1 })
 
       Ahoy::Visit.new(
         id: 9,
@@ -36,17 +35,13 @@ RSpec.describe ContinueTrainingMailJob do
       start_module(alpha)
       travel_back
 
-      allow(NotifyMailer).to receive(:continue_training)
+      mail_message = instance_double(Mail::Message, deliver: nil)
+      allow(NotifyMailer).to receive(:continue_training).and_return(mail_message)
     end
 
     it 'emails the correct users' do
-      expected = [user]
-      excluded = [user_2, user_3]
-      expect(described_class.run).to send_expected_emails(
-        mailer_method: :continue_training,
-        expected_users: expected,
-        excluded_users: excluded,
-      )
+      message = 'ContinueTrainingMailJob - users contacted: 1'
+      expect { described_class.run }.to output(/#{message}/).to_stdout
     end
   end
 end

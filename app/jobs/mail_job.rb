@@ -3,7 +3,7 @@ class MailJob < ApplicationJob
   end
 
   def log_mail_job
-    message = "#{self.class.name} contacted #{recipients.count} users"
+    message = "#{self.class.name} - users contacted: #{recipients.count}"
     Sentry.capture_message(message, level: :info) if Rails.application.live?
     log(message)
   rescue NoMethodError

@@ -1,8 +1,9 @@
-class CompleteRegistrationMailJob < ApplicationJob
+class CompleteRegistrationMailJob < MailJob
   # @return [void]
   def run
     super do
       notify_users
+      log_mail_job
     end
   end
 
