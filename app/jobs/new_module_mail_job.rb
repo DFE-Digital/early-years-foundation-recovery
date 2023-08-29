@@ -3,7 +3,7 @@ class NewModuleMailJob < MailJob
   # @return [void]
   def run(release_id)
     super do
-      # populate_module_releases(release_id) if ModuleRelease.count.zero?
+      return if ModuleRelease.count.zero?
       find_module = new_module
       return if find_module.nil?
 
