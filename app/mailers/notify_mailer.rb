@@ -130,8 +130,8 @@ class NotifyMailer < GovukNotifyRails::Mailer
   def continue_training(record, mod)
     set_template(CONTINUE_TRAINING_TEMPLATE_ID)
     set_personalisation(
-      module_number: mod.position,
-      module_name: mod.name,
+      mod_number: mod.position,
+      mod_name: mod.name,
       url: root_url,
     )
     mail(to: record.email)
