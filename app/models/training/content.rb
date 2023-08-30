@@ -1,9 +1,28 @@
 module Training
   class Content < ContentfulModel::Base
-    # @return [Boolean]
-    def topic_page_name?
-      name.match? %r"\A(?<prefix>\d+\W){3}(?<page>\d+\D*)$"
+
+    # @return [false]
+    def divider?
+      false
     end
+
+    alias_method :submodule?, :divider?
+    alias_method :topic?, :divider?
+
+    # # @return [false]
+    # def submodule?
+    #   false
+    # end
+
+    # # @return [false]
+    # def topic?
+    #   false
+    # end
+
+    # # @return [Boolean]
+    # def topic_page_name?
+    #   name.match? %r"\A(?<prefix>\d+\W){3}(?<page>\d+\D*)$"
+    # end
 
     # @return [String, nil]
     def published_at
@@ -20,8 +39,7 @@ module Training
       @entry = refetch_management_entry
     end
 
-    # NB: do not apply additional caching here
-    # @return [Training::Content]
+    # @return [Training::Page, Training::Video, Training::Question]
     def self.by_id(id)
       find(id)
     end
@@ -31,6 +49,20 @@ module Training
       return if interruption_page?
 
       @parent ||= Training::Module.by_content_id(id)
+    end
+
+    # @return [Integer]
+    def submodule
+      parent.content_by_submodule.find { |_submodule, values| values.include?(self) }.first
+    end
+
+    # @return [Integer]
+    def topic
+      # parent.content_by_submodule_topic.find { |(_submodule, _topic), values| values.include?(self) }.first.first
+
+      grouped_content = parent.content_by_submodule_topic
+      (submodule, topic), values = grouped_content.find { |_, values| values.include?(self) }
+      topic
     end
 
     # @return [nil, Training::Page, Training::Video, Training::Question]

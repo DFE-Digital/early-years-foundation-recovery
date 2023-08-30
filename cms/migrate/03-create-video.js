@@ -20,6 +20,7 @@ module.exports = function(migration) {
     ]
   })
 
+/*
   video.createField('training_module', {
     name: 'Training module',
     required: true,
@@ -61,6 +62,7 @@ module.exports = function(migration) {
       }
     ]
   })
+*/
 
   video.createField('heading', {
     name: 'Heading',

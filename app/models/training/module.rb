@@ -12,7 +12,8 @@ module Training
     # @return [Array<Training::Module>]
     def self.ordered
       fetch_or_store to_key("#{name}.__method__") do
-        load_children(0).order(:position).load.to_a.select(&:named?)
+        # load_children(0).order(:position).load.to_a.select(&:named?)
+        order(:position).load.to_a.select(&:named?)
       end
     end
 
@@ -25,7 +26,8 @@ module Training
     # @return [Training::Module]
     def self.by_id(id)
       fetch_or_store to_key(id) do
-        load_children(0).find(id)
+        # load_children(0).find(id)
+        find(id)
       end
     end
 
@@ -33,7 +35,8 @@ module Training
     # @return [Training::Module]
     def self.by_name(name)
       fetch_or_store to_key(name) do
-        load_children(0).find_by(name: name.to_s).first
+        # load_children(0).find_by(name: name.to_s).first
+        find_by(name: name.to_s).first
       end
     end
 
@@ -72,15 +75,23 @@ module Training
       end
     end
 
-    # Most expensive method: source of truth for content order
+    # TODO: move children under Module to match
     #
-    # @return [Array<Training::Page, Training::Video, Training::Question>] cached result
+    # @return [Array<Training::Page, Training::Video, Training::Question>]
     def content
-      Array(fields[:pages]).map do |child_link|
-        fetch_or_store self.class.to_key(child_link.id) do
-          child_by_id(child_link.id)
-        end
-      end
+      # Array(fields[:pages]).map do |child_link|
+      #   fetch_or_store self.class.to_key(child_link.id) do
+      #     child_by_id(child_link.id)
+      #   end
+      # end
+# binding.pry
+
+      pages.reject(&:divider?)
+    end
+
+    # @return [Array<Training::Module::Section>]
+    def dividers
+      pages.select(&:divider?)
     end
 
     # @return [Training::Page]
@@ -88,26 +99,51 @@ module Training
       page_by_type('sub_module_intro').first
     end
 
-    # @return [Hash{ Integer=>Array<Module::Content> }]
+    # @return [Hash{ Integer => Array<Training::Page, Training::Video, Training::Question> }]
     def content_by_submodule
-      content.group_by(&:submodule).except(0)
+      # content.group_by(&:submodule).except(0)
+
+      # Using type
+      pages.reject(&:interruption_page?).reject(&:divider?).slice_before(&:submodule_intro?).each.with_index(1).to_h.invert
+
+
+      # Using divider
+      # pages.reject(&:interruption_page?).slice_before(&:submodule?).each.with_index(1).to_h.invert
+      # then .reject(&:divider?)
+
+      # see module overview decorator sections
+      # pages.slice_before(&:submodule?).each.with_index(1).to_h.invert.transform_values { }
+
+      # pages.slice_before(&:submodule?).each.with_index(1).map do |entries, index|
+      #   [index, entries.reject(&:divider?)]
+      # end.to_h
+
+      # pages.slice(&:submodule?).each.with_index(1).map do |content, submodule|
+      # end
     end
 
-    # @return [Hash{ Array<Integer> => Array<Module::Content> }]
+    # @return [Hash{ Array<Integer> => Array<Training::Page, Training::Video, Training::Question> }]
     def content_by_submodule_topic
-      content.group_by { |page|
-        [page.submodule, page.topic] unless page.topic.zero?
-      }.except(nil)
+      # content.group_by { |page|
+      #   [page.submodule, page.topic] unless page.topic.zero?
+      # }.except(nil)
+
+      binding.pry
+
+      # Using divider
+      pages.reject(&:interruption_page?).slice_before(&:topic?).each.with_index(1).to_h.invert
     end
 
     # @return [Integer]
     def topic_count
-      content_by_submodule_topic.count
+      # content_by_submodule_topic.count
+      dividers.count(&:topic?)
     end
 
     # @return [Integer]
     def submodule_count
-      content_by_submodule.count
+      # content_by_submodule.count
+      dividers.count(&:submodule?)
     end
 
     # Selects from ordered array
@@ -133,6 +169,8 @@ module Training
 
     # state ---------------------------------
 
+    # TODO: consider terminology and replace #draft? with #invalid?
+    #
     # @see CourseProgress
     # @return [Boolean] incomplete content will not be deemed 'available'
     def draft?

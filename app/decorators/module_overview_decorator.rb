@@ -54,6 +54,10 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
 
 private
 
+  #
+  # TODO: move sections out of decorator or reuse Training::Module#content_by_submodule
+
+
   # exclude intro or subpages
   #
   # @param submodule [Integer]
@@ -65,7 +69,7 @@ private
       if submodule.zero?
         items
       else
-        items.drop(1).reject(&:topic_page_name?)
+        items.drop(1).reject(&:topic_page_name?) # removed topic_page_name?
       end
 
     topics.map do |content_page|
@@ -123,6 +127,7 @@ private
   # @param submodule [Integer]
   # @return [Array<Training::Content>]
   def fetch_submodule(submodule)
+    # content_by_submodule needs to continue returning a Hash
     mod.content_by_submodule.fetch(submodule)
   end
 

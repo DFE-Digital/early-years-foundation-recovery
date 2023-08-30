@@ -46,6 +46,7 @@ module.exports = function(migration) {
     ]
   })
 
+/*
   // parent
   page.createField('training_module', {
     name: 'Training module',
@@ -88,6 +89,7 @@ module.exports = function(migration) {
       }
     ]
   })
+*/
 
   page.createField('heading', {
     name: 'Heading',

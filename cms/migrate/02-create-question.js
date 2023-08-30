@@ -39,6 +39,7 @@ module.exports = function(migration) {
     ]
   })
 
+/*
   question.createField('training_module', {
     name: 'Training module',
     required: true,
@@ -80,6 +81,7 @@ module.exports = function(migration) {
       }
     ]
   })
+*/
 
   question.createField('body', {
     name: 'Body',
