@@ -38,7 +38,7 @@ module "network" {
   kv_certificate_authority_name             = "GlobalSign"
   kv_certificate_authority_username         = var.kv_certificate_authority_username
   kv_certificate_authority_password         = var.kv_certificate_authority_password
-  kv_certificate_authority_admin_email      = var.kv_certificate_authority_admin_email
+  kv_certificate_authority_admin_email      = var.admin_email_address
   kv_certificate_authority_admin_first_name = var.kv_certificate_authority_admin_first_name
   kv_certificate_authority_admin_last_name  = var.kv_certificate_authority_admin_last_name
   kv_certificate_authority_admin_phone_no   = var.kv_certificate_authority_admin_phone_no
@@ -69,11 +69,12 @@ module "webapp" {
   source = "./terraform-azure-web"
 
   environment                              = var.environment
-  asp_sku                                  = var.asp_sku
-  webapp_worker_count                      = var.webapp_worker_count
   location                                 = var.azure_region
   resource_group                           = azurerm_resource_group.rg.name
   resource_name_prefix                     = var.resource_name_prefix
+  asp_sku                                  = var.asp_sku
+  webapp_admin_email_address               = var.admin_email_address
+  webapp_worker_count                      = var.webapp_worker_count
   webapp_subnet_id                         = module.network.webapp_subnet_id
   webapp_name                              = var.webapp_name
   webapp_app_settings                      = local.webapp_app_settings
@@ -117,10 +118,10 @@ module "review-apps" {
   # Review Applications are only deployed to the Development subscription
   count = var.environment == "development" ? 1 : 0
 
-  asp_sku                                  = "P1v2"
   location                                 = var.azure_region
   resource_group                           = azurerm_resource_group.rg.name
   resource_name_prefix                     = "${var.resource_name_prefix}-review"
+  asp_sku                                  = "P1v2"
   webapp_vnet_name                         = module.network.vnet_name
   webapp_name                              = var.reviewapp_name
   webapp_app_settings                      = local.reviewapp_app_settings
