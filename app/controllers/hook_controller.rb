@@ -19,7 +19,7 @@ class HookController < ApplicationController
     # TODO: change back to enqueue before merging
     # NewModuleMailJob.run(new_release.id)
     # TODO: uncomment NewModuleMailJob when QA is complete
-    CompleteRegistrationMailJob.run
+    StartTrainingMailJob.run
     render json: { status: 'content release received' }, status: :ok
   end
 
