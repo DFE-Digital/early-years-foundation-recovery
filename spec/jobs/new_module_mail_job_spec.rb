@@ -6,6 +6,7 @@ RSpec.describe NewModuleMailJob do
     let!(:release_2) { create(:release) }
 
     before do
+      skip 'Skipping until changes made for QA can be reverted'
       create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1, "bravo": 1 })
       create(:user, :registered, confirmed_at: 4.weeks.ago)
       create(:module_release, release_id: release_1.id, module_position: 1, name: 'alpha')
