@@ -94,7 +94,7 @@ class User < ApplicationRecord
   # scope :completed_available_modules, -> { training_email_recipients.select(&:completed_available_modules?) }
   scope :start_training_recipients, -> { training_email_recipients.registration_complete.not_started_training }
   scope :complete_registration_recipients, -> { training_email_recipients.registration_incomplete }
-  scope :continue_training_recipients, -> { training_email_recipients.select(&:module_in_progress?) }
+  scope :continue_training_recipients, -> { training_email_recipients.select(&:course_in_progress?) }
   scope :completed_available_modules, -> { training_email_recipients.select(&:completed_available_modules?) }
 
   scope :dashboard, -> { not_closed }
