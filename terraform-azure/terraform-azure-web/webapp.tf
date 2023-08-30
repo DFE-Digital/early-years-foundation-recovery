@@ -313,6 +313,10 @@ resource "azurerm_monitor_autoscale_setting" "asp_as" {
       custom_emails                         = [var.webapp_admin_email_address]
     }
   }
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 # Create Custom Domain Name
