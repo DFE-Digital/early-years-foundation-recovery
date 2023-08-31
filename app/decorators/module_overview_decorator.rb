@@ -127,7 +127,6 @@ private
   # @param submodule [Integer]
   # @return [Array<Training::Content>]
   def fetch_submodule(submodule)
-    # content_by_submodule needs to continue returning a Hash
     mod.content_by_submodule.fetch(submodule)
   end
 

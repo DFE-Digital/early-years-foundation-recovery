@@ -39,50 +39,6 @@ module.exports = function(migration) {
     ]
   })
 
-/*
-  question.createField('training_module', {
-    name: 'Training module',
-    required: true,
-    type: 'Link',
-    linkType: 'Entry',
-    validations: [
-      {
-        linkContentType: [
-          'trainingModule'
-        ]
-      }
-    ]
-  })
-
-  question.createField('submodule', {
-    name: 'Submodule',
-    type: 'Integer',
-    required: true,
-    defaultValue: {
-      'en-US': 1,
-    },
-    validations: [
-      {
-        range: { min: 0 }
-      }
-    ]
-  })
-
-  question.createField('topic', {
-    name: 'Topic',
-    type: 'Integer',
-    required: true,
-    defaultValue: {
-      'en-US': 1,
-    },
-    validations: [
-      {
-        range: { min: 0 }
-      }
-    ]
-  })
-*/
-
   question.createField('body', {
     name: 'Body',
     type: 'Text',

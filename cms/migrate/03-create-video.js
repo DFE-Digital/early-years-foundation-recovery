@@ -20,50 +20,6 @@ module.exports = function(migration) {
     ]
   })
 
-/*
-  video.createField('training_module', {
-    name: 'Training module',
-    required: true,
-    type: 'Link',
-    linkType: 'Entry',
-    validations: [
-      {
-        linkContentType: [
-          'trainingModule'
-        ]
-      }
-    ]
-  })
-
-  video.createField('submodule', {
-    name: 'Submodule',
-    type: 'Integer',
-    required: true,
-    defaultValue: {
-      'en-US': 1,
-    },
-    validations: [
-      {
-        range: { min: 0 }
-      }
-    ]
-  })
-
-  video.createField('topic', {
-    name: 'Topic',
-    type: 'Integer',
-    required: true,
-    defaultValue: {
-      'en-US': 1,
-    },
-    validations: [
-      {
-        range: { min: 0 }
-      }
-    ]
-  })
-*/
-
   video.createField('heading', {
     name: 'Heading',
     type: 'Text',

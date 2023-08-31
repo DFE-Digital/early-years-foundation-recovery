@@ -1,24 +1,6 @@
 module Training
   class Content < ContentfulModel::Base
 
-    # @return [false]
-    def divider?
-      false
-    end
-
-    alias_method :submodule?, :divider?
-    alias_method :topic?, :divider?
-
-    # # @return [false]
-    # def submodule?
-    #   false
-    # end
-
-    # # @return [false]
-    # def topic?
-    #   false
-    # end
-
     # # @return [Boolean]
     # def topic_page_name?
     #   name.match? %r"\A(?<prefix>\d+\W){3}(?<page>\d+\D*)$"
@@ -171,18 +153,23 @@ module Training
     # intro types ---------------------------------
 
     # @return [Boolean]
+    def module_intro?
+      page_type.eql?('module_intro')
+    end
+
+    # @return [Boolean]
     def submodule_intro?
       page_type.eql?('sub_module_intro')
     end
 
     # @return [Boolean]
-    def summary_intro?
-      page_type.eql?('summary_intro')
+    def topic_intro?
+      page_type.eql?('topic_intro')
     end
 
     # @return [Boolean]
-    def module_intro?
-      page_type.eql?('module_intro')
+    def summary_intro?
+      page_type.eql?('summary_intro')
     end
 
     # @return [Boolean]

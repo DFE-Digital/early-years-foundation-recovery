@@ -46,51 +46,6 @@ module.exports = function(migration) {
     ]
   })
 
-/*
-  // parent
-  page.createField('training_module', {
-    name: 'Training module',
-    required: true,
-    type: 'Link',
-    linkType: 'Entry',
-    validations: [
-      {
-        linkContentType: [
-          'trainingModule'
-        ]
-      }
-    ]
-  })
-
-  page.createField('submodule', {
-    name: 'Submodule',
-    type: 'Integer',
-    required: true,
-    defaultValue: {
-      'en-US': 1,
-    },
-    validations: [
-      {
-        range: { min: 0 }
-      }
-    ]
-  })
-
-  page.createField('topic', {
-    name: 'Topic',
-    type: 'Integer',
-    required: true,
-    defaultValue: {
-      'en-US': 1,
-    },
-    validations: [
-      {
-        range: { min: 0 }
-      }
-    ]
-  })
-*/
-
   page.createField('heading', {
     name: 'Heading',
     type: 'Text',

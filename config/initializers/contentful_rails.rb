@@ -44,7 +44,6 @@ ContentfulRails.configure do |config|
       'static' => Page,
       'resource' => Page::Resource,
       'trainingModule' => Training::Module,
-      # 'divider' => Training::Module::Section,
       'page' => Training::Page,
       'question' => Training::Question,
       'video' => Training::Video,

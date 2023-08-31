@@ -84,15 +84,14 @@ module Training
       #     child_by_id(child_link.id)
       #   end
       # end
-# binding.pry
 
-      pages.reject(&:divider?)
+      pages
     end
 
     # @return [Array<Training::Module::Section>]
-    def dividers
-      pages.select(&:divider?)
-    end
+    # def dividers
+    #   pages.select(&:divider?)
+    # end
 
     # @return [Training::Page]
     def content_start
@@ -103,8 +102,14 @@ module Training
     def content_by_submodule
       # content.group_by(&:submodule).except(0)
 
+      binding.pry
+
+      # pages.reject(&:interruption_page?).group_by(&:submodule_intro?)
+
       # Using type
-      pages.reject(&:interruption_page?).reject(&:divider?).slice_before(&:submodule_intro?).each.with_index(1).to_h.invert
+      # pages.reject(&:interruption_page?).reject(&:divider?).slice_before(&:submodule_intro?).each.with_index(1).to_h.invert
+      # pages.reject(&:interruption_page?).slice_before(&:submodule_intro?).each.with_index(1).to_h.invert
+      section_by(:submodule_intro?)
 
 
       # Using divider
@@ -131,19 +136,30 @@ module Training
       binding.pry
 
       # Using divider
-      pages.reject(&:interruption_page?).slice_before(&:topic?).each.with_index(1).to_h.invert
+      pages.reject(&:interruption_page?).slice_before(&:submodule_intro?).each.with_index(1).to_h.invert
+
+
+
+      # {
+      #   [1,1] => [pages]
+      #   [1,2] => [pages]
+      #   [1,3] => [pages]
+      #   [2,1] => [pages]
+      #   [2,2] => [pages]
+      # }
+
+
+      # section_by(:topic_intro?)
     end
 
     # @return [Integer]
     def topic_count
-      # content_by_submodule_topic.count
-      dividers.count(&:topic?)
+      content_by_submodule_topic.count
     end
 
     # @return [Integer]
     def submodule_count
-      # content_by_submodule.count
-      dividers.count(&:submodule?)
+      content_by_submodule.count
     end
 
     # Selects from ordered array
@@ -204,7 +220,7 @@ module Training
       @entry = refetch_management_entry
     end
 
-    # content pages ---------------------------------
+    # single entry -------------------------------------------------------------
 
     # @return [Training::Page]
     def first_content_page
@@ -246,7 +262,7 @@ module Training
       content.find(&:certificate?)
     end
 
-    # collections ---------------------------------
+    # many entries -------------------------------------------------------------
 
     # @return [Array<Training::Page>]
     def text_pages
@@ -323,5 +339,12 @@ module Training
     def child_by_id(id)
       Training::Page.by_id(id) || Training::Question.by_id(id) || Training::Video.by_id(id)
     end
+
+    # @param predicate [Symbol]
+    # @return [Hash{ Integer => Array }]
+    def section_by(predicate)
+      pages.reject(&:interruption_page?).slice_before(&:submodule_intro?).each.with_index(1).to_h.invert
+    end
+
   end
 end
