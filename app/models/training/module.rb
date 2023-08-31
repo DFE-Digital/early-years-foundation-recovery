@@ -34,10 +34,10 @@ module Training
     end
 
     # @return [Boolean]
-    def self.new_module?
-      # check the position as well as the name to handle duplicated mods in the test cms env
-      TrainingModuleRecord.pluck(:name).include?(name) && !TrainingModuleRecord.pluck(:module_position).include?(position)
-    end
+    # def self.new_module?
+    #   # check the position as well as the name to handle duplicated mods in the test cms env
+    #   TrainingModuleRecord.pluck(:name).include?(name) && !TrainingModuleRecord.pluck(:module_position).include?(position)
+    # end
 
     # @return [String]
     def debug_summary

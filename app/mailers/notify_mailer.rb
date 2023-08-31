@@ -111,6 +111,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
     mail(to: record.email)
   end
 
+  # @param [User] record
   def complete_registration(record)
     set_template(COMPLETE_REGISTRATION_TEMPLATE_ID)
     set_personalisation(
@@ -119,6 +120,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
     mail(to: record.email)
   end
 
+  # @param [User] record
   def start_training(record)
     set_template(START_TRAINING_TEMPLATE_ID)
     set_personalisation(
@@ -127,6 +129,8 @@ class NotifyMailer < GovukNotifyRails::Mailer
     mail(to: record.email)
   end
 
+  # @param [User] record
+  # @param [Training::Module] mod
   def continue_training(record, mod)
     set_template(CONTINUE_TRAINING_TEMPLATE_ID)
     set_personalisation(
@@ -137,6 +141,8 @@ class NotifyMailer < GovukNotifyRails::Mailer
     mail(to: record.email)
   end
 
+  # @param [User] record
+  # @param [Training::Module] mod
   def new_module(record, mod)
     set_template(NEW_MODULE_TEMPLATE_ID)
     set_personalisation(

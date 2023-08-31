@@ -3,14 +3,13 @@ class NewModuleMailJob < MailJob
   # @return [void]
   def run(release_id)
     super do
-      return if ModuleRelease.count.zero?
+      return unless ModuleRelease.exists?
 
-      find_module = new_module
-      return if find_module.nil?
+      return unless new_module_published?
 
-      notify_users(new_module)
+      notify_users
       log_mail_job
-      create_published_record(new_module, Release.find(release_id))
+      create_published_record(latest_module, Release.find(release_id))
     end
   end
 
@@ -21,10 +20,19 @@ class NewModuleMailJob < MailJob
 
 private
 
-  # @param mod [Training::Module]
+  # @return [Training::Module]
+  def latest_module
+    Training::Module.live.last
+  end
+
+  # @return [Boolean]
+  def new_module_published?
+    ModuleRelease.ordered.last.module_position != Training::Module.live.last.position
+  end
+
   # @return [void]
-  def notify_users(mod)
-    recipients.each { |recipient| recipient.send_new_module_notification(mod) }
+  def notify_users
+    recipients.each { |recipient| recipient.send_new_module_notification(latest_module) }
   end
 
   # @param mod [Training::Module]
@@ -39,16 +47,6 @@ private
   def populate_module_releases(release_id)
     Training::Module.live.each do |mod|
       create_published_record(mod, Release.find(release_id))
-    end
-  end
-
-  # @return [Training::Module, nil]
-  def new_module
-    latest_published = Training::Module.live.last
-    if latest_published.position == ModuleRelease.ordered.last.module_position
-      nil
-    else
-      latest_published
     end
   end
 end

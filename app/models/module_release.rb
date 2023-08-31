@@ -4,8 +4,5 @@ class ModuleRelease < ApplicationRecord
 
   belongs_to :release
 
-  # @return [ActiveRecord::Relation<ModuleRelease>]
-  def self.ordered
-    order(:module_position)
-  end
+  scope :ordered, -> { order(:module_position) }
 end

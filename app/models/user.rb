@@ -184,10 +184,12 @@ class User < ApplicationRecord
     send_devise_notification(:start_training)
   end
 
+  # @param mod [Training::Module]
   def send_continue_training_notification(mod)
     send_devise_notification(:continue_training, mod)
   end
 
+  # @param mod [Training::Module]
   def send_new_module_notification(mod)
     send_devise_notification(:new_module, mod)
   end
@@ -362,7 +364,7 @@ class User < ApplicationRecord
 
   # @return [Boolean]
   def continue_training_recipient?
-    return unless course_in_progress?
+    return false unless course_in_progress?
 
     recent_visits = Ahoy::Visit.last_4_weeks
     old_visits = Ahoy::Visit.month_old.reject { |visit| recent_visits.pluck(:user_id).include?(visit.user_id) }
