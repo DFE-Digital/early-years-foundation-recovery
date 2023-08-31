@@ -17,7 +17,7 @@
       = results_banner(**assessment.result)
 
     - assessment.incorrect_responses.each do |incorrect_response|
-      = form_with model: incorrect_response, url: training_module_response_path(content.parent.name, content.name), method: :patch do |f|
+      = form_with model: incorrect_response, url: training_module_response_path(mod.name, content.name), method: :patch do |f|
         = render partial: incorrect_response.to_partial_path, locals: { f: f }, object: incorrect_response, as: :response
 
         .govuk-inset-text.gem-c-govspeak
@@ -31,12 +31,12 @@
 hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
 
 .govuk-button-group
-  = link_to_previous(content)
+  = link_to_previous
 
   - if assessment.passed?
-    = link_to_next(content)
+    = link_to_next
 
   - else
     = govuk_button_link_to 'Go to My modules', my_modules_path, class: 'govuk-button--secondary'
 
-    = govuk_button_link_to 'Retake test', new_training_module_assessment_path(content.parent.name)
+    = govuk_button_link_to 'Retake test', new_training_module_assessment_path(mod.name)

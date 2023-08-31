@@ -54,6 +54,7 @@ content:
   # cms
   #TODO: Change back to test before merging
   CONTENTFUL_ENVIRONMENT: test
+  # CONTENTFUL_ENVIRONMENT: production-backup-15-06-23
   #
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
