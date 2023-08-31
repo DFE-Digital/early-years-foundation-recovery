@@ -1,5 +1,7 @@
 module Training
   class Module < ContentfulModel::Base
+    validates_presence_of :name
+
     extend ::Caching
 
     # @return [String]
@@ -8,29 +10,37 @@ module Training
     end
 
     # @return [Array<Training::Module>]
-    def self.live
-      ordered.reject(&:draft?)
-    end
-
-    # @return [Array<Training::Module>] minimum requirement "name"
     def self.ordered
       fetch_or_store to_key("#{name}.__method__") do
         load_children(0).order(:position).load.to_a.select(&:named?)
       end
     end
 
-    # @return [Training::Module] cached result
+    # @return [Array<Training::Module>]
+    def self.live
+      ordered.reject(&:draft?)
+    end
+
+    # @param id [String]
+    # @return [Training::Module]
     def self.by_id(id)
       fetch_or_store to_key(id) do
         load_children(0).find(id)
       end
     end
 
-    # @return [Training::Module] cached result
+    # @param name [String]
+    # @return [Training::Module]
     def self.by_name(name)
       fetch_or_store to_key(name) do
         load_children(0).find_by(name: name.to_s).first
       end
+    end
+
+    # @param id [String]
+    # @return [Training::Module]
+    def self.by_content_id(id)
+      ordered.find { |mod| mod.content.find { |content| content.id.eql?(id) } }
     end
 
     # @return [String]
@@ -62,11 +72,6 @@ module Training
       end
     end
 
-    # @return [Training::Module, nil] cached result
-    def depends_on
-      self.class.by_id(fields[:depends_on].id) if fields[:depends_on]
-    end
-
     # Most expensive method: source of truth for content order
     #
     # @return [Array<Training::Page, Training::Video, Training::Question>] cached result
@@ -76,6 +81,11 @@ module Training
           child_by_id(child_link.id)
         end
       end
+    end
+
+    # @return [Training::Page]
+    def content_start
+      page_by_type('sub_module_intro').first
     end
 
     # @return [Hash{ Integer=>Array<Module::Content> }]
