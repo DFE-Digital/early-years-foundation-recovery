@@ -8,7 +8,6 @@ RSpec.describe ContinueTrainingMailJob do
 
     before do
       user.update!(confirmed_at: 4.weeks.ago)
-      create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1 })
 
       Ahoy::Visit.new(
         id: 9,

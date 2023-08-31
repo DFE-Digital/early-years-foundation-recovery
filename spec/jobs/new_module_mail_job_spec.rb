@@ -2,11 +2,15 @@ require 'rails_helper'
 
 RSpec.describe NewModuleMailJob do
   context 'when users have completed all available modules and a new module is released' do
+    include_context 'with progress'
     let!(:release_1) { create(:release) }
     let!(:release_2) { create(:release) }
 
     before do
-      create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1, "bravo": 1 })
+      create(:user, :registered, confirmed_at: 4.weeks.ago)
+      complete_module(alpha, 1.minute)
+      complete_module(bravo, 1.minute)
+
       create(:user, :registered, confirmed_at: 4.weeks.ago)
       create(:module_release, release_id: release_1.id, module_position: 1, name: 'alpha')
       create(:module_release, release_id: release_1.id, module_position: 2, name: 'bravo')
