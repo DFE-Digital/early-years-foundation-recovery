@@ -229,7 +229,7 @@ class User < ApplicationRecord
   end
 
   def courses_in_progress
-    module_time_to_completion.select { |_k, v| v.positive? }.keys
+    module_time_to_completion.select { |_k, v| v.zero? }.keys
   end
 
   # @param module_name [String]
