@@ -7,7 +7,6 @@ RSpec.describe ContinueTrainingMailJob do
     let!(:user_2) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
 
     before do
-      skip 'Skipping until changes made for QA can be reverted'
       user.update!(confirmed_at: 4.weeks.ago)
       create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 1 })
 

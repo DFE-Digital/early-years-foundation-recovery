@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe CompleteRegistrationMailJob do
   context 'when users have confirmed a month ago but have not completed registration' do
     before do
-      skip 'Skipping until changes made for QA can be reverted'
       create(:user, confirmed_at: 4.weeks.ago)
       create(:user, confirmed_at: 4.weeks.ago)
       create(:user, confirmed_at: 4.weeks.ago)

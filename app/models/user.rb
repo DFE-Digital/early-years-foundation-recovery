@@ -87,14 +87,9 @@ class User < ApplicationRecord
   scope :with_assessments, -> { joins(:user_assessments) }
   scope :with_passing_assessments, -> { with_assessments.merge(UserAssessment.passes) }
 
-  # TODO: uncomment when QA is complete
-  # scope :start_training_recipients, -> { training_email_recipients.month_old_confirmation.registration_complete.not_started_training }
-  # scope :complete_registration_recipients, -> { training_email_recipients.month_old_confirmation.registration_incomplete }
-  # scope :continue_training_recipients, -> { training_email_recipients.select(&:continue_training_recipient?) }
-  # scope :completed_available_modules, -> { training_email_recipients.select(&:completed_available_modules?) }
-  scope :start_training_recipients, -> { training_email_recipients.registration_complete.not_started_training }
-  scope :complete_registration_recipients, -> { training_email_recipients.registration_incomplete }
-  scope :continue_training_recipients, -> { training_email_recipients.select(&:course_in_progress?) }
+  scope :start_training_recipients, -> { training_email_recipients.month_old_confirmation.registration_complete.not_started_training }
+  scope :complete_registration_recipients, -> { training_email_recipients.month_old_confirmation.registration_incomplete }
+  scope :continue_training_recipients, -> { training_email_recipients.select(&:continue_training_recipient?) }
   scope :completed_available_modules, -> { training_email_recipients.select(&:completed_available_modules?) }
 
   scope :dashboard, -> { not_closed }

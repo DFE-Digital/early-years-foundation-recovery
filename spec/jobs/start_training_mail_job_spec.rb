@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe StartTrainingMailJob do
   context 'when users have confirmed a month ago and have completed registration but not started training' do
     before do
-      skip 'Skipping until changes made for QA can be reverted'
       create(:user, :registered, confirmed_at: 4.weeks.ago)
       create(:user, :registered, confirmed_at: 4.weeks.ago)
       create(:user, :registered, confirmed_at: 4.weeks.ago)
