@@ -16,7 +16,7 @@ private
   # @return [void]
   def notify_users
     recipients.each do |recipient|
-      recipient.send_continue_training_notification(Training::Module.by_name(recipient.courses_in_progress.first))
+      recipient.send_continue_training_notification(Training::Module.live.by_name(recipient.courses_in_progress.first))
     end
   end
 end
