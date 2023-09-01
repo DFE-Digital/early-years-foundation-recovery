@@ -22,16 +22,6 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
       match_variable          = "RequestCookieNames"
       selector                = var.webapp_session_cookie_name
       selector_match_operator = "Equals"
-
-      excluded_rule_set {
-        type    = "OWASP"
-        version = "3.2"
-
-        rule_group {
-          rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
-          excluded_rules  = [942440]
-        }
-      }
     }
   }
 
