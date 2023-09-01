@@ -72,7 +72,7 @@ private
     subsection_status = if submodule.zero?
                           status([subsection_item])
                         else
-                          status(subsection_item.current_submodule_topic_items)
+                          status(subsection_item.subsection_content)
                         end
 
     # providing the next page name enables the hyperlink

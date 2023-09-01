@@ -1,4 +1,21 @@
-module Pagination
+module Pagination # Progress / section / navigation
+
+  # BOOLEAN --------------------------------------------------------------------
+
+  # @return [Boolean]
+  def content?
+    !submodule_intro?
+  end
+
+  # @return [Boolean]
+  def section?
+    submodule_intro? || summary_intro?
+  end
+
+  # @return [Boolean]
+  def subsection?
+    topic_intro? || recap_page? || assessment_intro? || confidence_intro? || certificate?
+  end
 
   # @return [Boolean]
   def page_numbers?
@@ -8,6 +25,8 @@ module Pagination
       true
     end
   end
+
+  # BOOLEAN --------------------------------------------------------------------
 
   # @return [Hash{Symbol => nil, Integer}]
   def pagination
@@ -38,45 +57,60 @@ module Pagination
     parent.pages[position_within_module + 1]&.id
   end
 
-  # @return [Integer] (zero index)
-  def position_within_module
-    parent.pages.rindex { |entry| entry.id.eql?(id) }
-  end
-
-  # @return [Integer] (zero index)
-  def position_within_submodule
-    current_submodule_items.index(self)
-  end
-
-  # @return [Integer] (zero index)
-  def position_within_topic
-    current_submodule_topic_items.index(self)
-  end
-
   # @return [Array<Training::Page, Training::Video, Training::Question>]
-  def current_submodule_items
+  def section_content
     parent.content_by_submodule.fetch(submodule)
   end
 
   # TODO: duplicated in overview decroator #fetch_submodule_topic
   #
   # @return [Array<Training::Page, Training::Video, Training::Question>]
-  def current_submodule_topic_items
+  def subsection_content
     parent.content_by_submodule_topic.fetch([submodule, topic])
   end
 
-  # @return [Integer]
-  def number_within_submodule
-    if module_intro?
-      0
-    else
-      current_submodule_items.count - 1
-    end
+  # INTEGER --------------------------------------------------------------------
+
+  # @return [nil, Integer]
+  def submodule
+    return if interruption_page?
+
+    submodule, _entries = parent.content_by_submodule.find { |_, values| values.include?(self) }
+    submodule
+  end
+
+  # @return [nil, Integer]
+  def topic
+    return if interruption_page?
+
+    (_submodule, topic), _entries = parent.content_by_submodule_topic.find { |_, values| values.include?(self) }
+    topic
+  end
+
+  # @return [Integer] (zero index)
+  def position_within_module  # position
+    parent.pages.rindex(self)
+  end
+
+  # @return [Integer] (zero index)
+  def position_within_submodule # section_position
+    section_content.index(self)
+  end
+
+  # @return [Integer] (zero index)
+  def position_within_topic # subsection_position
+    subsection_content.index(self)
   end
 
   # @return [Integer]
-  def number_within_topic
-    current_submodule_topic_items.count
+  def number_within_submodule # section_size
+    return 0 if module_intro?
+
+    section_content.count(&:content?)
   end
 
+  # @return [Integer]
+  def number_within_topic # subsection_size
+    subsection_content.count
+  end
 end

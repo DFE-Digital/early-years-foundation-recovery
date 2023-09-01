@@ -95,7 +95,7 @@ private
     if node_item.summary_intro?
       visited? node_item.parent.certificate_page
     elsif node_item.submodule_intro?
-      all? node_item.current_submodule_items
+      all? node_item.section_content
     end
   end
 

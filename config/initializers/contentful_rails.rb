@@ -1,5 +1,7 @@
+require 'management'
 require 'caching'
 require 'pagination'
+require 'content_types'
 
 require 'training/content'
 require 'training/module'
