@@ -39,7 +39,7 @@ module Training
       correct_answers = content.confidence_question? ? true : content.correct_answers.eql?(user_answers)
 
       if ENV['DISABLE_USER_ANSWER'].present?
-        current_user_response.update(answers: user_answers, correct: correct_answers)
+        current_user_response.update(answers: user_answers, correct: correct_answers, schema: content.schema)
       else
         current_user_response.update(answer: user_answers, correct: correct_answers)
       end
