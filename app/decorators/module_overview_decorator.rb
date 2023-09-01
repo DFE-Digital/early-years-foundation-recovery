@@ -54,25 +54,12 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
 
 private
 
-  #
-  # TODO: move sections out of decorator or reuse Training::Module#content_by_submodule
-
-
-  # exclude intro or subpages
-  #
   # @param submodule [Integer]
   # @param items [Array<Module::Content>]
   #
   # @return [Array<String, Symbol, Array>]
   def subsections(submodule:, items:)
-    topics =
-      if submodule.zero?
-        items
-      else
-        items.drop(1).reject(&:topic_page_name?) # removed topic_page_name?
-      end
-
-    topics.map do |content_page|
+    items.select(&:subsection?).map do |content_page|
       section_content(submodule: submodule, subsection_item: content_page)
     end
   end

@@ -34,6 +34,7 @@ module.exports = function(migration) {
          'text_page',
          'interruption_page',
          'sub_module_intro',
+         'topic_intro',
          'summary_intro',
          'assessment_intro',
          'confidence_intro',

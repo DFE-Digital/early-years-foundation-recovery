@@ -12,7 +12,6 @@ module Training
     # @return [Array<Training::Module>]
     def self.ordered
       fetch_or_store to_key("#{name}.__method__") do
-        # load_children(0).order(:position).load.to_a.select(&:named?)
         order(:position).load.to_a.select(&:named?)
       end
     end
@@ -26,7 +25,6 @@ module Training
     # @return [Training::Module]
     def self.by_id(id)
       fetch_or_store to_key(id) do
-        # load_children(0).find(id)
         find(id)
       end
     end
@@ -35,7 +33,6 @@ module Training
     # @return [Training::Module]
     def self.by_name(name)
       fetch_or_store to_key(name) do
-        # load_children(0).find_by(name: name.to_s).first
         find_by(name: name.to_s).first
       end
     end
@@ -75,81 +72,27 @@ module Training
       end
     end
 
-    # TODO: move children under Module to match
-    #
     # @return [Array<Training::Page, Training::Video, Training::Question>]
     def content
-      # Array(fields[:pages]).map do |child_link|
-      #   fetch_or_store self.class.to_key(child_link.id) do
-      #     child_by_id(child_link.id)
-      #   end
-      # end
-
-      pages
+      pages.reject(&:interruption_page?)
     end
 
-    # @return [Array<Training::Module::Section>]
-    # def dividers
-    #   pages.select(&:divider?)
-    # end
-
-    # @return [Training::Page]
-    def content_start
-      page_by_type('sub_module_intro').first
-    end
+    # SECTIONS -----------------------------------------------------------------
 
     # @return [Hash{ Integer => Array<Training::Page, Training::Video, Training::Question> }]
     def content_by_submodule
-      # content.group_by(&:submodule).except(0)
-
-      binding.pry
-
-      # pages.reject(&:interruption_page?).group_by(&:submodule_intro?)
-
-      # Using type
-      # pages.reject(&:interruption_page?).reject(&:divider?).slice_before(&:submodule_intro?).each.with_index(1).to_h.invert
-      # pages.reject(&:interruption_page?).slice_before(&:submodule_intro?).each.with_index(1).to_h.invert
-      section_by(:submodule_intro?)
-
-
-      # Using divider
-      # pages.reject(&:interruption_page?).slice_before(&:submodule?).each.with_index(1).to_h.invert
-      # then .reject(&:divider?)
-
-      # see module overview decorator sections
-      # pages.slice_before(&:submodule?).each.with_index(1).to_h.invert.transform_values { }
-
-      # pages.slice_before(&:submodule?).each.with_index(1).map do |entries, index|
-      #   [index, entries.reject(&:divider?)]
-      # end.to_h
-
-      # pages.slice(&:submodule?).each.with_index(1).map do |content, submodule|
-      # end
+      content.slice_before(&:section?).each.with_index(1).to_h.invert
     end
 
     # @return [Hash{ Array<Integer> => Array<Training::Page, Training::Video, Training::Question> }]
     def content_by_submodule_topic
-      # content.group_by { |page|
-      #   [page.submodule, page.topic] unless page.topic.zero?
-      # }.except(nil)
+      sections = content.slice_before(&:section?).each.with_index(1).map do |section_entries, submodule_num|
+        section_entries.slice_before(&:subsection?).each.with_index(1).map do |subsection_entries, topic_num|
+          { [submodule_num, topic_num] => subsection_entries }
+        end
+      end
 
-      binding.pry
-
-      # Using divider
-      pages.reject(&:interruption_page?).slice_before(&:submodule_intro?).each.with_index(1).to_h.invert
-
-
-
-      # {
-      #   [1,1] => [pages]
-      #   [1,2] => [pages]
-      #   [1,3] => [pages]
-      #   [2,1] => [pages]
-      #   [2,2] => [pages]
-      # }
-
-
-      # section_by(:topic_intro?)
+      sections.flatten.reduce(&:merge)
     end
 
     # @return [Integer]
@@ -166,24 +109,24 @@ module Training
     #
     # @return [Training::Page, Training::Video, Training::Question]
     def page_by_id(id)
-      content.find { |page| page.id.eql?(id) }
+      pages.find { |page| page.id.eql?(id) }
     end
 
     # Selects from ordered array
     #
     # @return [Training::Page, Training::Video, Training::Question]
     def page_by_name(name)
-      content.find { |page| page.name.eql?(name) }
+      pages.find { |page| page.name.eql?(name) }
     end
 
     # Selects from ordered array
     #
     # @return [Array<Training::Page, Training::Video, Training::Question>]
     def page_by_type(type)
-      content.select { |page| page.page_type.eql?(type) }
+      pages.select { |page| page.page_type.eql?(type) }
     end
 
-    # state ---------------------------------
+    # STATE --------------------------------------------------------------------
 
     # TODO: consider terminology and replace #draft? with #invalid?
     #
@@ -220,16 +163,21 @@ module Training
       @entry = refetch_management_entry
     end
 
-    # single entry -------------------------------------------------------------
+    # SINGLE ENTRY -------------------------------------------------------------
+
+    # @return [Training::Page]
+    def content_start
+      page_by_type('sub_module_intro').first
+    end
 
     # @return [Training::Page]
     def first_content_page
-      text_pages.first
+      page_by_type('topic_intro').first
     end
 
     # @return [Training::Page]
     def interruption_page
-      content.find(&:interruption_page?)
+      pages.find(&:interruption_page?)
     end
 
     # @return [Training::Page]
@@ -262,7 +210,7 @@ module Training
       content.find(&:certificate?)
     end
 
-    # many entries -------------------------------------------------------------
+    # MANY ENTRIES -------------------------------------------------------------
 
     # @return [Array<Training::Page>]
     def text_pages
@@ -300,7 +248,7 @@ module Training
       questions.select { |q| q.answer.contains?(text) }.map(&:name)
     end
 
-    # view decorators ---------------------------------
+    # DECORATORS ---------------------------------------------------------------
 
     # @return [String]
     def tab_label
@@ -325,26 +273,12 @@ module Training
 
     # @return [Array<Array>] AST for automated module completion
     def schema
-      content.map(&:schema)
+      pages.map(&:schema)
     end
 
     # @return [ContentIntegrity]
     def data
       @data ||= ContentIntegrity.new(module_name: name)
     end
-
-  private
-
-    # @return [Training::Page, Training::Question, Training::Video] content sought by likelihood (Page more numerous than Video)
-    def child_by_id(id)
-      Training::Page.by_id(id) || Training::Question.by_id(id) || Training::Video.by_id(id)
-    end
-
-    # @param predicate [Symbol]
-    # @return [Hash{ Integer => Array }]
-    def section_by(predicate)
-      pages.reject(&:interruption_page?).slice_before(&:submodule_intro?).each.with_index(1).to_h.invert
-    end
-
   end
 end

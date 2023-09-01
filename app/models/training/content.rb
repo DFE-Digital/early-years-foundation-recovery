@@ -1,11 +1,5 @@
 module Training
   class Content < ContentfulModel::Base
-
-    # # @return [Boolean]
-    # def topic_page_name?
-    #   name.match? %r"\A(?<prefix>\d+\W){3}(?<page>\d+\D*)$"
-    # end
-
     # @return [String, nil]
     def published_at
       return unless Rails.env.development? && ENV['CONTENTFUL_MANAGEMENT_TOKEN'].present?
@@ -33,18 +27,50 @@ module Training
       @parent ||= Training::Module.by_content_id(id)
     end
 
-    # @return [Integer]
-    def submodule
-      parent.content_by_submodule.find { |_submodule, values| values.include?(self) }.first
+    # SECTIONS -----------------------------------------------------------------
+
+    # @return [Boolean]
+    def section?
+      submodule_intro? || summary_intro?
     end
 
-    # @return [Integer]
-    def topic
-      # parent.content_by_submodule_topic.find { |(_submodule, _topic), values| values.include?(self) }.first.first
+    # @return [Boolean]
+    def subsection?
+      topic_intro? || recap_page? || assessment_intro? || confidence_intro? || certificate?
+    end
 
-      grouped_content = parent.content_by_submodule_topic
-      (submodule, topic), values = grouped_content.find { |_, values| values.include?(self) }
+    # @return [nil, Integer]
+    def submodule
+      return if interruption_page?
+
+      submodule, _entries = parent.content_by_submodule.find { |_, values| values.include?(self) }
+      submodule
+    end
+
+    # @return [nil, Integer]
+    def topic
+      return if interruption_page?
+
+      (_submodule, topic), _entries = parent.content_by_submodule_topic.find { |_, values| values.include?(self) }
       topic
+    end
+
+    # PAGINATION ---------------------------------------------------------------
+
+    # MOVE to models/training/concerns/pagination
+
+    # @return [Boolean]
+    def page_numbers?
+      case page_type
+      when /intro|thankyou/ then false
+      else
+        true
+      end
+    end
+
+    # @return [Hash{Symbol => nil, Integer}]
+    def pagination
+      { current: position_within_submodule, total: number_within_submodule }
     end
 
     # @return [nil, Training::Page, Training::Video, Training::Question]
@@ -61,27 +87,21 @@ module Training
       parent.page_by_id(next_item_id) || self
     end
 
-    # private
-    # @return [String] Contentful Link ID
+    # @return [String]
     def previous_item_id
-      parent.fields[:pages][position_within_module - 1].id
+      parent.pages[position_within_module - 1].id
     end
 
-    # private
-    # @return [String, nil] Contentful Link ID
+    # @return [String, nil]
     def next_item_id
-      parent.fields[:pages][position_within_module + 1]&.id
+      parent.pages[position_within_module + 1]&.id
     end
 
-    # Can be found without loading all content
-    #
     # @return [Integer] (zero index)
     def position_within_module
-      parent.fields[:pages].rindex { |child_link| child_link.id.eql?(id) }
+      parent.pages.rindex { |entry| entry.id.eql?(id) }
     end
 
-    # Needs full entries to be loaded
-    #
     # @return [Integer] (zero index)
     def position_within_submodule
       current_submodule_items.index(self)
@@ -92,19 +112,19 @@ module Training
       current_submodule_topic_items.index(self)
     end
 
-    # @return [Array<Training::Page, Training::Video, Training::Question>] content in the same submodule
+    # @return [Array<Training::Page, Training::Video, Training::Question>]
     def current_submodule_items
-      parent.content.select { |page| page.submodule.eql?(submodule) }
+      parent.content_by_submodule.fetch(submodule)
     end
 
-    # @return [Array<Training::Page, Training::Video, Training::Question>] content in the same submodule and topic
+    # TODO: duplicated in overview decroator #fetch_submodule_topic
+    #
+    # @return [Array<Training::Page, Training::Video, Training::Question>]
     def current_submodule_topic_items
-      current_submodule_items.select { |page| page.topic.eql?(topic) }
+      parent.content_by_submodule_topic.fetch([submodule, topic])
     end
 
-    # counters ---------------------------------
-
-    # @return [Integer] number of submodule items 1-[1]-1-1, (excluding intro)
+    # @return [Integer]
     def number_within_submodule
       if module_intro?
         0
@@ -113,12 +133,12 @@ module Training
       end
     end
 
-    # @return [Integer] number of topic items 1-1-[1]-1
+    # @return [Integer]
     def number_within_topic
       current_submodule_topic_items.count
     end
 
-    # decorators ---------------------------------
+    # DECORATORS ---------------------------------------------------------------
 
     # @see ApplicationHelper#html_title
     # @return [String]
@@ -224,8 +244,8 @@ module Training
     end
 
     # @return [Boolean]
-    def icons_page?
-      page_type.eql?('icons_page')
+    def recap_page?
+      page_type.eql?('recap_page')
     end
 
     # @return [Boolean]
@@ -241,20 +261,6 @@ module Training
     # @return [Boolean]
     def certificate?
       page_type.eql?('certificate')
-    end
-
-    # @return [Boolean]
-    def page_numbers?
-      case page_type
-      when /intro|thankyou/ then false
-      else
-        true
-      end
-    end
-
-    # @return [Hash{Symbol => nil, Integer}]
-    def pagination
-      { current: position_within_submodule, total: number_within_submodule }
     end
 
     # @return [String]
