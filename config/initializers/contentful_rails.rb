@@ -1,4 +1,6 @@
 require 'caching'
+require 'pagination'
+
 require 'training/content'
 require 'training/module'
 require 'training/page'
