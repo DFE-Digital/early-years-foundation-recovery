@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe NewModuleMailJob do
   context 'when users have completed all available modules and a new module is released' do
     include_context 'with progress'
-    let!(:release_1) { create(:release) }
-    let!(:release_2) { create(:release) }
+    let(:release_1) { create(:release) }
+    let(:release_2) { create(:release) }
 
     before do
       create(:user, :registered, confirmed_at: 4.weeks.ago)
