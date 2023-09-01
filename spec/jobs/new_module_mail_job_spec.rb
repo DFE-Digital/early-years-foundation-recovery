@@ -2,9 +2,13 @@ require 'rails_helper'
 
 RSpec.describe NewModuleMailJob do
   context 'when users have completed all available modules and a new module is released' do
+    subject(:job) { described_class.run(release_2.id) }
+
     include_context 'with progress'
+
     let(:release_1) { create(:release) }
     let(:release_2) { create(:release) }
+    let(:message) { 'NewModuleMailJob - users contacted: 1' }
 
     before do
       create(:user, :registered, confirmed_at: 4.weeks.ago)
@@ -18,9 +22,6 @@ RSpec.describe NewModuleMailJob do
       allow(NotifyMailer).to receive(:new_module).and_return(mail_message)
     end
 
-    it 'emails the correct users' do
-      message = 'NewModuleMailJob - users contacted: 1'
-      expect { described_class.run(release_2.id) }.to output(/#{message}/).to_stdout
-    end
+    it_behaves_like 'a mail job'
   end
 end

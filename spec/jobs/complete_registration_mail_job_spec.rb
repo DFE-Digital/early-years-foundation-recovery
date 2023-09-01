@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe CompleteRegistrationMailJob do
   context 'when users have confirmed a month ago but have not completed registration' do
+    subject(:job) { described_class.run }
+
+    let(:message) { 'CompleteRegistrationMailJob - users contacted: 3' }
+
     before do
       create(:user, confirmed_at: 4.weeks.ago)
       create(:user, confirmed_at: 4.weeks.ago)
@@ -12,9 +16,6 @@ RSpec.describe CompleteRegistrationMailJob do
       allow(NotifyMailer).to receive(:complete_registration).and_return(mail_message)
     end
 
-    it 'emails the correct users' do
-      message = 'CompleteRegistrationMailJob - users contacted: 3'
-      expect { described_class.run }.to output(/#{message}/).to_stdout
-    end
+    it_behaves_like 'a mail job'
   end
 end

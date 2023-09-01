@@ -2,8 +2,11 @@ require 'rails_helper'
 
 RSpec.describe ContinueTrainingMailJob do
   context 'when users have confirmed a month ago and have completed registration and started training but not completed training' do
+    subject(:job) { described_class.run }
+
     include_context 'with progress'
 
+    let(:message) { 'ContinueTrainingMailJob - users contacted: 1' }
     let!(:user_2) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
 
     before do
@@ -38,9 +41,6 @@ RSpec.describe ContinueTrainingMailJob do
       allow(NotifyMailer).to receive(:continue_training).and_return(mail_message)
     end
 
-    it 'emails the correct users' do
-      message = 'ContinueTrainingMailJob - users contacted: 1'
-      expect { described_class.run }.to output(/#{message}/).to_stdout
-    end
+    it_behaves_like 'a mail job'
   end
 end
