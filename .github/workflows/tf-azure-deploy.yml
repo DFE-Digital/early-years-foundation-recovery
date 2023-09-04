@@ -32,47 +32,8 @@ env:
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-  TF_VAR_environment: ${{ vars.ENVIRONMENT }}
-  TF_VAR_resource_name_prefix: ${{ vars.RESOURCE_PREFIX }}
-  TF_VAR_admin_email_address: ${{ vars.ADMIN_EMAIL_ADDRESS }}
-  TF_VAR_kv_certificate_authority_username: ${{ secrets.CERTIFICATE_AUTHORITY_USERNAME }}
-  TF_VAR_kv_certificate_authority_password: ${{ secrets.CERTIFICATE_AUTHORITY_PASSWORD }}
-  TF_VAR_kv_certificate_authority_admin_first_name: ${{ secrets.CERTIFICATE_AUTHORITY_ADMIN_FIRST_NAME }}
-  TF_VAR_kv_certificate_authority_admin_last_name: ${{ secrets.CERTIFICATE_AUTHORITY_ADMIN_LAST_NAME }}
-  TF_VAR_kv_certificate_authority_admin_phone_no: ${{ secrets.CERTIFICATE_AUTHORITY_ADMIN_PHONE_NO }}
-  TF_VAR_kv_certificate_label: ${{ vars.CERTIFICATE_LABEL }}
-  TF_VAR_kv_certificate_subject: ${{ vars.CERTIFICATE_SUBJECT }}
-  TF_VAR_psqlfs_sku: ${{ vars.PSQLFS_SKU }}
-  TF_VAR_psqlfs_storage: ${{ vars.PSQLFS_STORAGE }}
-  TF_VAR_psqlfs_username: ${{ secrets.PSQLFS_USERNAME }}
-  TF_VAR_psqlfs_password: ${{ secrets.PSQLFS_PASSWORD }}
-  TF_VAR_psqlfs_geo_redundant_backup: ${{ vars.PSQLFS_GEO_REDUNDANT_BACKUP }}
-  TF_VAR_psqlfs_ha_enabled: ${{ vars.PSQLFS_HA_ENABLED }}
-  TF_VAR_asp_sku: ${{ vars.ASP_SKU }}
-  TF_VAR_webapp_worker_count: ${{ vars.WEBAPP_WORKER_COUNT }}
-  TF_VAR_webapp_name: ${{ vars.WEBAPP_NAME }}
-  TF_VAR_workerapp_name: ${{ vars.WORKERAPP_NAME }}
-  TF_VAR_reviewapp_name: ${{ vars.REVIEWAPP_NAME }}
-  TF_VAR_webapp_database_url: ${{ secrets.WEBAPP_DATABASE_URL }}
-  TF_VAR_webapp_docker_registry_url: https://ghcr.io
-  TF_VAR_webapp_docker_image: dfe-digital/early-years-foundation-recovery
-  TF_VAR_webapp_docker_image_tag: latest
-  TF_VAR_custom_domain_name: ${{ vars.CUSTOM_DOMAIN }}
-  TF_VAR_webapp_config_bot_token: ${{ secrets.WEBAPP_CONFIG_BOT_TOKEN }}
-  TF_VAR_webapp_config_contentful_environment: ${{ vars.WEBAPP_CONFIG_CONTENTFUL_ENVIRONMENT }}
-  TF_VAR_webapp_config_contentful_preview: ${{ vars.WEBAPP_CONFIG_CONTENTFUL_PREVIEW }}
-  TF_VAR_webapp_config_domain: ${{ vars.WEBAPP_CONFIG_DOMAIN }}
-  TF_VAR_webapp_config_editor: ${{ vars.WEBAPP_CONFIG_EDITOR }}
-  TF_VAR_webapp_config_feedback_url: ${{ vars.WEBAPP_CONFIG_FEEDBACK_URL }}
-  TF_VAR_webapp_config_grover_no_sandbox: ${{ vars.WEBAPP_CONFIG_GROVER_NO_SANDBOX }}
-  TF_VAR_webapp_config_google_cloud_bucket: ${{ vars.WEBAPP_CONFIG_GOOGLE_CLOUD_BUCKET }}
-  TF_VAR_webapp_config_node_env: ${{ vars.WEBAPP_CONFIG_NODE_ENV }}
-  TF_VAR_webapp_config_rails_env: ${{ vars.WEBAPP_CONFIG_RAILS_ENV }}
-  TF_VAR_webapp_config_rails_log_to_stdout: ${{ vars.WEBAPP_CONFIG_RAILS_LOG_TO_STDOUT }}
-  TF_VAR_webapp_config_rails_master_key: ${{ secrets.WEBAPP_CONFIG_RAILS_MASTER_KEY }}
-  TF_VAR_webapp_config_rails_max_threads: ${{ vars.WEBAPP_CONFIG_RAILS_MAX_THREADS }}
-  TF_VAR_webapp_config_rails_serve_static_files: ${{ vars.WEBAPP_CONFIG_RAILS_SERVE_STATIC_FILES }}
-  TF_VAR_webapp_config_web_concurrency: ${{ vars.WEBAPP_CONFIG_WEB_CONCURRENCY }}
+  WEB_SECRETS: ${{ toJSON(secrets) }}
+  WEB_VARS: ${{ toJSON(vars) }
 
 jobs:
   terraform-plan:
@@ -106,6 +67,12 @@ jobs:
       # Will fail the build if not
       - name: Terraform Format
         run: terraform fmt -check
+
+      # Generates Terraform variable files
+      - name: Terraform Variables
+        run: |
+          printf '%s\n' "$WEB_SECRETS" > web-secrets.auto.tfvars.json
+          printf '%s\n' "$WEB_VARS" > web-vars.auto.tfvars.json
 
       # Generates an execution plan for Terraform
       # An exit code of 0 indicated no changes, 1 a terraform failure, 2 there are pending changes.
@@ -179,6 +146,12 @@ jobs:
           -backend-config="storage_account_name=${{ secrets.TERRAFORM_STATE_STORAGE_ACCOUNT_NAME }}"
           -backend-config="container_name=${{ secrets.TERRAFORM_STATE_STORAGE_CONTAINER_NAME }}"
           -backend-config="key=${{ secrets.TERRAFORM_STATE_KEY }}"
+
+      # Generates Terraform variable files
+      - name: Terraform Variables
+        run: |
+          printf '%s\n' "$WEB_SECRETS" > web-secrets.auto.tfvars.json
+          printf '%s\n' "$WEB_VARS" > web-vars.auto.tfvars.json
 
       # Download saved plan from artifacts
       - name: Download Terraform Plan

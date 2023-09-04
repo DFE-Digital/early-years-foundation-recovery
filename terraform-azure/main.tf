@@ -82,7 +82,7 @@ module "webapp" {
   webapp_docker_image_tag                  = var.webapp_docker_image_tag
   webapp_docker_registry_url               = var.webapp_docker_registry_url
   webapp_session_cookie_name               = "_early_years_foundation_recovery_session"
-  webapp_custom_domain_name                = var.webapp_custom_domain_name
+  webapp_custom_domain_name                = var.custom_domain_name
   webapp_custom_domain_cert_secret_label   = var.kv_certificate_label
   webapp_health_check_path                 = "/health"
   webapp_health_check_eviction_time_in_min = 10
