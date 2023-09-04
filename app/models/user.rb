@@ -87,10 +87,11 @@ class User < ApplicationRecord
   scope :with_assessments, -> { joins(:user_assessments) }
   scope :with_passing_assessments, -> { with_assessments.merge(UserAssessment.passes) }
 
-  scope :start_training_recipients, -> { training_email_recipients.month_old_confirmation.registration_complete.not_started_training }
-  scope :complete_registration_recipients, -> { training_email_recipients.month_old_confirmation.registration_incomplete }
-  scope :continue_training_recipients, -> { training_email_recipients.select(&:continue_training_recipient?) }
-  scope :completed_available_modules, -> { training_email_recipients.select(&:completed_available_modules?) }
+  # Worth reverting to composing in Job? (at class level where they are now accessible for export)
+  scope :start_training_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_complete.not_started_training }
+  scope :complete_registration_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_incomplete }
+  scope :continue_training_recipients, -> { order(:id).training_email_recipients.select(&:continue_training_recipient?) }
+  scope :completed_available_modules, -> { order(:id).training_email_recipients.select(&:completed_available_modules?) }
 
   scope :dashboard, -> { not_closed }
 
@@ -225,7 +226,8 @@ class User < ApplicationRecord
     course_started? && !module_time_to_completion.values.all?(&:positive?)
   end
 
-  def courses_in_progress
+  # @return [Array<String>]
+  def modules_in_progress
     module_time_to_completion.select { |_k, v| v.zero? }.keys
   end
 

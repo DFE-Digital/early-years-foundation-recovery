@@ -59,7 +59,7 @@ module Data
           complete_registration_mail_recipients: User.complete_registration_recipients.count,
           start_training_mail_recipients: User.start_training_recipients.count,
           continue_training_mail_recipients: User.continue_training_recipients.count,
-          new_module_mail_recipients: User.completed_available_modules.count,
+          new_module_mail_recipients: NewModuleMailJob.recipients.count,
         }]
       end
 

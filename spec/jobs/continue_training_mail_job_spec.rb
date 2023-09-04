@@ -1,46 +1,45 @@
 require 'rails_helper'
 
 RSpec.describe ContinueTrainingMailJob do
-  context 'when users have confirmed a month ago and have completed registration and started training but not completed training' do
-    subject(:job) { described_class.run }
+  include_context 'with progress' # why if this is event powered
 
-    include_context 'with progress'
+  let(:template) { :continue_training }
 
-    let(:message) { 'ContinueTrainingMailJob - users contacted: 1' }
-    let!(:user_2) { create(:user, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { "alpha": 0 }) }
+  let(:user) { create(:user, :registered, confirmed_at: 4.weeks.ago) }
 
-    before do
-      user.update!(confirmed_at: 4.weeks.ago)
-
-      Ahoy::Visit.new(
-        id: 9,
-        visitor_token: '345',
-        user_id: user.id,
-        started_at: 4.weeks.ago,
-      ).save!
-
-      Ahoy::Visit.new(
-        id: 7,
-        visitor_token: '123',
-        user_id: user_2.id,
-        started_at: 4.weeks.ago,
-      ).save!
-
-      Ahoy::Visit.new(
-        id: 8,
-        visitor_token: '234',
-        user_id: user_2.id,
-        started_at: 2.weeks.ago,
-      ).save!
-
-      travel_to 4.weeks.ago
-      start_module(alpha)
-      travel_back
-
-      mail_message = instance_double(Mail::Message, deliver: nil)
-      allow(NotifyMailer).to receive(:continue_training).and_return(mail_message)
-    end
-
-    it_behaves_like 'a mail job'
+  let(:user_2) do
+    create :user, :registered,
+           confirmed_at: 4.weeks.ago,
+           module_time_to_completion: { alpha: 0 }
+    # module_time_to_completion: { alpha: 0, bravo: 100 }
   end
+
+  let(:included) { [user] }
+  let(:excluded) { [user_2] }
+
+  before do
+    create :visit,
+           id: 9,
+           visitor_token: '345',
+           user_id: user.id,
+           started_at: 4.weeks.ago
+
+    create :visit,
+           id: 7,
+           visitor_token: '123',
+           user_id: user_2.id,
+           started_at: 4.weeks.ago
+
+    create :visit,
+           id: 8,
+           visitor_token: '234',
+           user_id: user_2.id,
+           started_at: 2.weeks.ago
+
+    travel_to 4.weeks.ago
+    start_module(alpha)
+    travel_back
+  end
+
+  it_behaves_like 'an email prompt', nil, Training::Module.by_name(:alpha)
 end

@@ -75,6 +75,7 @@ RSpec.describe Data::UserOverview do
 
   let(:release_1) { create(:release) }
 
+  # This is a mix of things and perhaps could be annotated
   before do
     create(:module_release, release_id: release_1.id, module_position: 1, name: 'alpha')
     create(:module_release, release_id: release_1.id, module_position: 2, name: 'bravo')

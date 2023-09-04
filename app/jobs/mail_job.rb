@@ -1,12 +1,15 @@
 class MailJob < ApplicationJob
-  class MailJobError < StandardError
+  class Error < StandardError
   end
 
-  def log_mail_job
-    message = "#{self.class.name} - users contacted: #{recipients.count}"
-    Sentry.capture_message(message, level: :info) if Rails.application.live?
-    log(message)
-  rescue NoMethodError
-    raise MailJobError, "#{self.class.name}.recipients is required for this mail job: #{e}"
+  # @raise [MailJob::Error]
+  def self.recipients
+    raise Error, "#{name}.recipients is not defined"
+  end
+
+  def run(*)
+    super
+
+    log("#{self.class.name}: #{self.class.recipients.count} recipients")
   end
 end

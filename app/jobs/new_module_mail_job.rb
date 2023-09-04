@@ -1,21 +1,22 @@
 class NewModuleMailJob < MailJob
-  # @param release_id [Integer]
-  # @return [void]
-  def run(release_id)
-    super do
-      return unless ModuleRelease.exists?
-
-      return unless new_module_published?
-
-      notify_users
-      log_mail_job
-      create_published_record(latest_module, Release.find(release_id))
-    end
+  # @return [Array<User>]
+  def self.recipients
+    User.completed_available_modules
   end
 
-  # @return [Array<User>]
-  def recipients
-    User.completed_available_modules
+  # @param release_id [Integer]
+  def run(release_id)
+    super do
+      return unless new_module_published?
+
+      self.class.recipients.each do |recipient|
+        recipient.send_new_module_notification(latest_module)
+      end
+
+      newest_release = Release.find(release_id)
+
+      record_module_release(latest_module, newest_release)
+    end
   end
 
 private
@@ -27,26 +28,31 @@ private
 
   # @return [Boolean]
   def new_module_published?
-    ModuleRelease.ordered.last.module_position != Training::Module.live.last.position
-  end
+    return false unless ModuleRelease.exists?
 
-  # @return [void]
-  def notify_users
-    recipients.each { |recipient| recipient.send_new_module_notification(latest_module) }
+    ModuleRelease.ordered.last.module_position < latest_module.position
   end
 
   # @param mod [Training::Module]
   # @param release [Release]
   # @return [ModuleRelease]
-  def create_published_record(mod, release)
-    ModuleRelease.create!(release_id: release.id, module_position: mod.position, name: mod.name, first_published_at: release.time)
+  def record_module_release(mod, release)
+    ModuleRelease.create!(
+      release_id: release.id,
+      module_position: mod.position,
+      name: mod.name,
+      first_published_at: release.time,
+    )
   end
 
+  # really should be a task or manual action
+  # WRONG - will associate earlier modules with a release that never published them and at a wrong time
+  #
   # @param release_id [Integer]
   # @return [void]
-  def populate_module_releases(release_id)
-    Training::Module.live.each do |mod|
-      create_published_record(mod, Release.find(release_id))
-    end
-  end
+  # def populate_module_releases(release_id)
+  #   Training::Module.live.each do |mod|
+  #     create_published_record(mod, Release.find(release_id))
+  #   end
+  # end
 end
