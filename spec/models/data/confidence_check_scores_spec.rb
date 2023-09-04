@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Data::ConfidenceCheckScores do
-  let(:headers) do 
-    [
-      'Module',
-      'Question',
-      'Response',
-      'Count', 
+  let(:headers) do
+    %w[
+      Module
+      Question
+      Answers
+      Count
     ]
   end
 
@@ -15,22 +15,22 @@ RSpec.describe Data::ConfidenceCheckScores do
       {
         module_name: 'module_1',
         question_name: 'q1',
-        response: 'response_1',
+        answers: [1],
         count: 1,
       },
       {
         module_name: 'module_1',
         question_name: 'q2',
-        response: 'response_2',
+        answers: [2],
         count: 2,
-      }
+      },
     ]
   end
 
-  before do 
-    create(:response, :confidence_check, module: 'module_1', question_name: 'q1', response: 'response_1') 
-    create(:response, :confidence_check, module: 'module_1', question_name: 'q2', response: 'response_2') 
-    create(:response, :confidence_check, module: 'module_1', question_name: 'q2', response: 'response_2') 
+  before do
+    create(:response, :confidence_check, training_module: 'module_1', question_name: 'q1', answers: [1])
+    create(:response, :confidence_check, training_module: 'module_1', question_name: 'q2', answers: [2])
+    create(:response, :confidence_check, training_module: 'module_1', question_name: 'q2', answers: [2])
   end
 
   it_behaves_like 'a data export model'

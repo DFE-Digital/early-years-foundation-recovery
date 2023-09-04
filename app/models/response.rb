@@ -9,7 +9,8 @@ class Response < ApplicationRecord
   validates :answers, presence: true
 
   scope :unarchived, -> { where(archived: false) }
-  scope :summative, -> { where("schema->>1 = ?", "summative_questionnaire") }
+  scope :summative, -> { where('schema->>1 = ?', 'summative_questionnaire') }
+  scope :confidence_check, -> { where('schema->>1 = ?', 'confidence_check') }
 
   delegate :to_partial_path, :legend, to: :question
 
