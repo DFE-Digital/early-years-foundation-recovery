@@ -1,9 +1,4 @@
 class ContinueTrainingMailJob < MailJob
-  # @return [Array<User>]
-  def self.recipients
-    User.continue_training_recipients
-  end
-
   def run
     super do
       self.class.recipients.each do |recipient|

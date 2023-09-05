@@ -88,10 +88,10 @@ class User < ApplicationRecord
   scope :with_passing_assessments, -> { with_assessments.merge(UserAssessment.passes) }
 
   # Worth reverting to composing in Job? (at class level where they are now accessible for export)
-  scope :start_training_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_complete.not_started_training }
-  scope :complete_registration_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_incomplete }
-  scope :continue_training_recipients, -> { order(:id).training_email_recipients.select(&:continue_training_recipient?) }
-  scope :completed_available_modules, -> { order(:id).training_email_recipients.select(&:completed_available_modules?) }
+  scope :start_training_mail_job_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_complete.not_started_training }
+  scope :complete_registration_mail_job_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_incomplete }
+  scope :continue_training_mail_job_recipients, -> { order(:id).training_email_recipients.select(&:continue_training_recipient?) }
+  scope :new_module_mail_job_recipients, -> { order(:id).training_email_recipients.select(&:completed_available_modules?) }
 
   scope :dashboard, -> { not_closed }
 

@@ -24,5 +24,6 @@ RSpec.describe NewModuleMailJob do
     complete_module(bravo, 1.minute)
   end
 
+  # 1 user receives the :new_module email template informing them of the new module: charlie
   it_behaves_like 'an email prompt', 2, Training::Module.by_name(:charlie)
 end

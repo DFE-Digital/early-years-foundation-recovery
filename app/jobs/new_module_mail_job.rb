@@ -1,9 +1,4 @@
 class NewModuleMailJob < MailJob
-  # @return [Array<User>]
-  def self.recipients
-    User.completed_available_modules
-  end
-
   # @param release_id [Integer]
   def run(release_id)
     super do

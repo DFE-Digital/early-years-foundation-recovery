@@ -2,9 +2,10 @@ class MailJob < ApplicationJob
   class Error < StandardError
   end
 
-  # @raise [MailJob::Error]
+  # @return [Array<User>]
   def self.recipients
-    raise Error, "#{name}.recipients is not defined"
+    scope_name = "#{name.underscore}_recipients"
+    User.send(scope_name)
   end
 
   def run(*)

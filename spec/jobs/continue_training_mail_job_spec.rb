@@ -11,7 +11,6 @@ RSpec.describe ContinueTrainingMailJob do
     create :user, :registered,
            confirmed_at: 4.weeks.ago,
            module_time_to_completion: { alpha: 0 }
-    # module_time_to_completion: { alpha: 0, bravo: 100 }
   end
 
   let(:included) { [user] }
@@ -41,5 +40,6 @@ RSpec.describe ContinueTrainingMailJob do
     travel_back
   end
 
+  # 1 user receives the :continue_training email template
   it_behaves_like 'an email prompt', nil, Training::Module.by_name(:alpha)
 end
