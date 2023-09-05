@@ -71,7 +71,7 @@ jobs:
         shell: bash
         env:
           WEB_SECRETS: ${{ toJSON(secrets) }}
-          WEB_VARS: ${{ toJSON(vars) }
+          WEB_VARS: ${{ toJSON(vars) }}
         run: |
           printf '%s\n' "${WEB_SECRETS,,}" > web-secrets.auto.tfvars.json
           printf '%s\n' "${WEB_VARS,,}" > web-vars.auto.tfvars.json
@@ -154,7 +154,7 @@ jobs:
         shell: bash
         env:
           WEB_SECRETS: ${{ toJSON(secrets) }}
-          WEB_VARS: ${{ toJSON(vars) }
+          WEB_VARS: ${{ toJSON(vars) }}
         run: |
           printf '%s\n' "${WEB_SECRETS,,}" > web-secrets.auto.tfvars.json
           printf '%s\n' "${WEB_VARS,,}" > web-vars.auto.tfvars.json
