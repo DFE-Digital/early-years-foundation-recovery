@@ -17,7 +17,7 @@
       = content_resource 'module.overview.summary', title: mod.card_title, description: mod.description, criteria: mod.criteria
 
       - module_progress.call_to_action do |state, page|
-        = link_to_action(state, page)
+        = link_to_action(state, mod, page)
 
 = content_resource 'module.overview.progress'
 

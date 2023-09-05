@@ -45,7 +45,6 @@ class ContentIntegrity
     submodules: 'Submodules are not consecutive',
     topics: 'Topics are not consecutive',
 
-    parent: 'Pages have wrong parent',
     question_answers: 'Question answers are incorrectly formatted', # TODO: which question?
   }.freeze
 
@@ -131,11 +130,6 @@ class ContentIntegrity
   end
 
   # CONTENT VALIDATIONS --------------------------------------------------------
-
-  # @return [Boolean] parent on pages set to correct module
-  def parent?
-    mod.content.all? { |entry| entry.parent.name.eql?(mod.name) }
-  end
 
   # @return [Boolean] submodules increment correctly
   def submodules?
