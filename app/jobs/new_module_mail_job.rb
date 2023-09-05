@@ -39,15 +39,4 @@ private
       first_published_at: release.time,
     )
   end
-
-  # really should be a task or manual action
-  # WRONG - will associate earlier modules with a release that never published them and at a wrong time
-  #
-  # @param release_id [Integer]
-  # @return [void]
-  # def populate_module_releases(release_id)
-  #   Training::Module.live.each do |mod|
-  #     create_published_record(mod, Release.find(release_id))
-  #   end
-  # end
 end
