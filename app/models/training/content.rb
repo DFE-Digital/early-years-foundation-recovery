@@ -23,28 +23,31 @@ module Training
     # NB: do not apply additional caching here
     # @return [Training::Content]
     def self.by_id(id)
-      find(id)
+      load_children(0).find(id)
     end
 
-    # @return [nil, Training::Module]
+    # @return [Training::Module, nil] cached
     def parent
-      return if interruption_page?
+      return unless fields[:training_module]
 
-      @parent ||= Training::Module.by_content_id(id)
+      Training::Module.by_id(fields[:training_module].id)
     end
 
-    # @return [nil, Training::Page, Training::Video, Training::Question]
+    # @return [Training::Page, Training::Video, Training::Question, nil]
     def previous_item
-      return if interruption_page?
+      return if first?
 
       parent.page_by_id(previous_item_id)
     end
 
-    # @note Whilst being authored, reload if the next page is yet to be created
-    #
-    # @return [Training::Page, Training::Video, Training::Question]
+    # @return [Boolean]
+    def first?
+      position_within_module.zero?
+    end
+
+    # @return [Training::Page, Training::Video, Training::Question, nil]
     def next_item
-      parent.page_by_id(next_item_id) || self
+      parent.page_by_id(next_item_id)
     end
 
     # private
@@ -78,12 +81,12 @@ module Training
       current_submodule_topic_items.index(self)
     end
 
-    # @return [Array<Training::Page, Training::Video, Training::Question>] content in the same submodule
+    # @return [Array<Training::Content, ....>] content in the same submodule
     def current_submodule_items
       parent.content.select { |page| page.submodule.eql?(submodule) }
     end
 
-    # @return [Array<Training::Page, Training::Video, Training::Question>] content in the same submodule and topic
+    # @return [Array<Training::Content, ....>] content in the same submodule and topic
     def current_submodule_topic_items
       current_submodule_items.select { |page| page.topic.eql?(topic) }
     end
@@ -114,11 +117,7 @@ module Training
 
     # @return [String]
     def next_button_text
-      if interruption_page?
-        'Next'
-      elsif next_item.eql?(self) && (Rails.application.preview? || Rails.env.test?)
-        'Next page has not been created'
-      elsif next_item.assessment_results?
+      if next_item.assessment_results?
         'Finish test'
       elsif next_item.summative_question? && !summative_question?
         'Start test'
@@ -241,8 +240,7 @@ module Training
     # @return [String]
     def debug_summary
       <<~SUMMARY
-        uid: #{id}
-        module uid: #{parent.id}
+        cms id: #{id}
         module name: #{parent.name}
         path: #{name}
         published at: #{published_at}

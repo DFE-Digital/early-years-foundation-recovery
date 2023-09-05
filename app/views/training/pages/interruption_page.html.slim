@@ -1,7 +1,9 @@
+= render 'debug'
+
 - content_for :page_title do
   = html_title mod.title, content.heading
 
-- content_for :page_content do
+- content_for :content_page do
   .govuk-grid-column-full.interrupt-panel
     h1.govuk-heading-l= content.heading
     .gem-c-govspeak= translate_markdown(content.body)
