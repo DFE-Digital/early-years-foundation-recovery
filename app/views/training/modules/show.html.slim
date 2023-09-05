@@ -12,18 +12,20 @@
 
 .light-grey-box
   .govuk-grid-row
-    .govuk-grid-column-full
+    .govuk-grid-column-three-quarters-from-desktop
       - # TODO: move module overview hero to content helper
       = content_resource 'module.overview.summary', title: mod.card_title, description: mod.description, criteria: mod.criteria
 
       - module_progress.call_to_action do |state, page|
         = link_to_action(state, page)
 
-= content_resource 'module.overview.progress'
+.govuk-grid-row
+  .govuk-grid-column-three-quarters-from-desktop
+    = content_resource 'module.overview.progress'
 
 
 .govuk-grid-row
-  .govuk-grid-column-full
+  .govuk-grid-column-three-quarters-from-desktop
     hr.govuk-section-break.govuk-section-break--m.govuk-section-break--visible.module-overview-section-break
 
     - module_progress.sections.each do |section|
