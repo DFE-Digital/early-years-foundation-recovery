@@ -4,7 +4,7 @@ RSpec.describe NewModuleMailJob do
   include_context 'with progress'
 
   let(:template) { :new_module }
-  
+
   let(:included) { [user] }
 
   let(:excluded) do
