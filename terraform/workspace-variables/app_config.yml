@@ -52,7 +52,6 @@ content:
   DASHBOARD_UPDATE: false
   # DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # every 5 mins (default: daily at noon)
   # cms
-  #TODO: Change back to test before merging
   CONTENTFUL_ENVIRONMENT: test
   # CONTENTFUL_ENVIRONMENT: production-backup-15-06-23
   #
