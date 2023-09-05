@@ -56,9 +56,9 @@ module Data
           with_notes_percentage: with_notes_percentage,
           without_notes: without_notes_count,
           without_notes_percentage: 1 - with_notes_percentage,
-          complete_registration_mail_recipients: User.complete_registration_recipients.count,
-          start_training_mail_recipients: User.start_training_recipients.count,
-          continue_training_mail_recipients: User.continue_training_recipients.count,
+          complete_registration_mail_recipients: CompleteRegistrationMailJob.recipients.count,
+          start_training_mail_recipients: StartTrainingMailJob.recipients.count,
+          continue_training_mail_recipients: ContinueTrainingMailJob.recipients.count,
           new_module_mail_recipients: NewModuleMailJob.recipients.count,
         }]
       end
