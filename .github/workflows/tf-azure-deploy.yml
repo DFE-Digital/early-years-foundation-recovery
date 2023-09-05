@@ -32,8 +32,6 @@ env:
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-  WEB_SECRETS: ${{ toJSON(secrets) }}
-  WEB_VARS: ${{ toJSON(vars) }
 
 jobs:
   terraform-plan:
@@ -70,9 +68,13 @@ jobs:
 
       # Generates Terraform variable files
       - name: Terraform Variables
+        shell: bash
+        env:
+          WEB_SECRETS: ${{ toJSON(secrets) }}
+          WEB_VARS: ${{ toJSON(vars) }
         run: |
-          printf '%s\n' "$WEB_SECRETS" > web-secrets.auto.tfvars.json
-          printf '%s\n' "$WEB_VARS" > web-vars.auto.tfvars.json
+          printf '%s\n' "${WEB_SECRETS,,}" > web-secrets.auto.tfvars.json
+          printf '%s\n' "${WEB_VARS,,}" > web-vars.auto.tfvars.json
 
       # Generates an execution plan for Terraform
       # An exit code of 0 indicated no changes, 1 a terraform failure, 2 there are pending changes.
@@ -149,9 +151,13 @@ jobs:
 
       # Generates Terraform variable files
       - name: Terraform Variables
+        shell: bash
+        env:
+          WEB_SECRETS: ${{ toJSON(secrets) }}
+          WEB_VARS: ${{ toJSON(vars) }
         run: |
-          printf '%s\n' "$WEB_SECRETS" > web-secrets.auto.tfvars.json
-          printf '%s\n' "$WEB_VARS" > web-vars.auto.tfvars.json
+          printf '%s\n' "${WEB_SECRETS,,}" > web-secrets.auto.tfvars.json
+          printf '%s\n' "${WEB_VARS,,}" > web-vars.auto.tfvars.json
 
       # Download saved plan from artifacts
       - name: Download Terraform Plan

@@ -210,10 +210,6 @@ variable "webapp_config_rails_serve_static_files" {
   type = bool
 }
 
-variable "webapp_config_training_modules" {
-  type = string
-}
-
 variable "webapp_config_web_concurrency" {
   type = string
 }
