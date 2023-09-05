@@ -1,5 +1,5 @@
 locals {
-  # Common tags to be assigned resources
+  # Common tags to be assigned to resources
   common_tags = {
     "Environment"      = var.environment
     "Parent Business"  = "Children’s Care"
