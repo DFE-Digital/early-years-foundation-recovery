@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe CompleteRegistrationMailJob do
   let(:template) { :complete_registration }
 
+  # Must have confirmed email 4 weeks ago and not have completed registration
   let(:included) do
     create_list :user, 3, confirmed_at: 4.weeks.ago
   end

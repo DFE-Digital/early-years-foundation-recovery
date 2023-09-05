@@ -75,16 +75,20 @@ RSpec.describe Data::UserOverview do
 
   let(:release_1) { create(:release) }
 
-  # This is a mix of things and perhaps could be annotated
   before do
+    # create records for the previously released modules completed by the `new_module_mail_recipients`
     create(:module_release, release_id: release_1.id, module_position: 1, name: 'alpha')
     create(:module_release, release_id: release_1.id, module_position: 2, name: 'bravo')
     create(:module_release, release_id: release_1.id, module_position: 3, name: 'charlie')
+    # create notes for the `with_notes` and `without_notes` users
     create(:note, user: user_1)
     create(:note, user: user_2)
     create(:note, user: user_3)
+    # A user who has completed all available modules and will receive the new module mail
     create(:user, :registered, module_time_to_completion: { alpha: 2, charlie: 1, bravo: 3 })
+    # A user who confirmed their email 4 weeks ago will receive the complete registration mail
     create(:user, :confirmed, confirmed_at: 4.weeks.ago)
+    # A registered user who will receive the start training mail
     create(:user, :registered, confirmed_at: 4.weeks.ago)
   end
 

@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe StartTrainingMailJob do
   let(:template) { :start_training }
 
+  # Must have confirmed email 4 weeks ago, completed registration and not have started training
   let(:included) do
     create_list :user, 3, :registered, confirmed_at: 4.weeks.ago
   end
