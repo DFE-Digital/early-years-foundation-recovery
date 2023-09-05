@@ -6,6 +6,8 @@
 
 = govuk_back_link href: root_path
 
+= render 'learning/cms_debug'
+
 = content_resource 'about.course', all_modules: mods.count, published_modules: mods.reject(&:draft?).count
 
 - unless current_user
