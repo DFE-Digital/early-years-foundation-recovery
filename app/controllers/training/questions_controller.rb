@@ -1,7 +1,5 @@
 module Training
   class QuestionsController < ApplicationController
-    include Learning
-
     before_action :authenticate_registered_user!
     before_action :track_events, only: :show
 
@@ -10,24 +8,19 @@ module Training
                   :progress_bar,
                   :current_user_response
 
+    include Learning
+
     def show; end
 
   private
 
-    # @see Tracking
     # @return [Ahoy::Event] Show action
     def track_events
       if track_confidence_start?
-        track('confidence_check_start')
+        track('confidence_check_start', cms: true)
       elsif track_assessment_start?
-        track('summative_assessment_start')
+        track('summative_assessment_start', cms: true)
       end
-    end
-
-    # @see Tracking
-    # @return [Hash]
-    def tracking_properties
-      { uid: content.id, mod_uid: mod.id }
     end
 
     # Check current item type for matching named event ---------------------------

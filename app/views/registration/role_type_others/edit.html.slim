@@ -1,7 +1,7 @@
 = render 'user/debug'
 
 - content_for :page_title do
-  = html_title t('register_custom_role.heading')
+  = html_title t(:heading, scope: :register_custom_role)
 
 = govuk_back_link href: edit_registration_role_type_path
 
@@ -10,7 +10,7 @@
     = form_for form, url: registration_role_type_other_path, method: :patch do |f|
       = f.govuk_error_summary
 
-      = f.govuk_fieldset legend: { text: t('register_custom_role.heading') } do
-        = f.govuk_text_field :role_type_other, label: { text: t('register_custom_role.body') }, aria: { required: true }
+      = f.govuk_fieldset legend: { text: t(:heading, scope: :register_custom_role) } do
+        = f.govuk_text_field :role_type_other, label: { text: t(:body, scope: :register_custom_role) }, aria: { required: true }
 
       = f.govuk_submit t('links.continue')
