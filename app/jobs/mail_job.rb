@@ -1,6 +1,4 @@
 class MailJob < ApplicationJob
-  class Error < StandardError
-  end
 
   # @return [Array<User>]
   def self.recipients
