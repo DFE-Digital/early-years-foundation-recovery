@@ -1,6 +1,4 @@
 class Training::PagesController < ApplicationController
-  include Learning
-
   before_action :authenticate_registered_user!
   before_action :track_events, only: :show
 
@@ -49,23 +47,17 @@ private
   # - recalculate the user's progress state as a module is started/completed
   #
   def track_events
-    track('module_content_page')
+    track('module_content_page', type: content.page_type, cms: true)
 
     if track_module_start?
-      track('module_start')
+      track('module_start', cms: true)
       helpers.calculate_module_state
     elsif track_confidence_check_complete?
-      track('confidence_check_complete')
+      track('confidence_check_complete', cms: true)
     elsif track_module_complete?
-      track('module_complete')
+      track('module_complete', cms: true)
       helpers.calculate_module_state
     end
-  end
-
-  # @see Tracking
-  # @return [Hash]
-  def tracking_properties
-    { type: content.page_type, uid: content.id, mod_uid: mod.id }
   end
 
   # @return [Boolean]

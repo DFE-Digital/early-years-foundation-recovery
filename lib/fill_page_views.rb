@@ -35,8 +35,7 @@ class FillPageViews
             next
           else
             tracker.track('module_content_page', {
-              uid: content.id,
-              mod_uid: mod.id,
+              cms: true,
               skipped: true,
               id: content.name,
               action: 'show',
