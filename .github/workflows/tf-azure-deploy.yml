@@ -66,15 +66,17 @@ jobs:
       - name: Terraform Format
         run: terraform fmt -check
 
-      # Generates Terraform variable files
-      - name: Terraform Variables
+      # Generates Terraform input variables
+      - name: Generate Terraform Variables
         shell: bash
         env:
           WEB_SECRETS: ${{ toJSON(secrets) }}
           WEB_VARS: ${{ toJSON(vars) }}
         run: |
-          printf '%s\n' "${WEB_SECRETS,,}" > web-secrets.auto.tfvars.json
-          printf '%s\n' "${WEB_VARS,,}" > web-vars.auto.tfvars.json
+          printf '%s\n' "$WEB_SECRETS" > tmp-secrets.json
+          printf '%s\n' "$WEB_VARS" > tmp-vars.json
+          jq 'with_entries(.key |= ascii_downcase)' tmp-secrets.json > web-secrets.auto.tfvars.json
+          jq 'with_entries(.key |= ascii_downcase)' tmp-vars.json > web-vars.auto.tfvars.json
 
       # Generates an execution plan for Terraform
       # An exit code of 0 indicated no changes, 1 a terraform failure, 2 there are pending changes.
@@ -82,7 +84,7 @@ jobs:
         id: tf-plan
         run: |
           export exitcode=0
-          terraform plan -detailed-exitcode -no-color -out tfplan || export exitcode=$?
+          terraform plan -detailed-exitcode -no-color -compact-warnings -out tfplan || export exitcode=$?
           
           echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
           
@@ -149,15 +151,17 @@ jobs:
           -backend-config="container_name=${{ secrets.TERRAFORM_STATE_STORAGE_CONTAINER_NAME }}"
           -backend-config="key=${{ secrets.TERRAFORM_STATE_KEY }}"
 
-      # Generates Terraform variable files
-      - name: Terraform Variables
+      # Generates Terraform input variables
+      - name: Generate Terraform Variables
         shell: bash
         env:
           WEB_SECRETS: ${{ toJSON(secrets) }}
           WEB_VARS: ${{ toJSON(vars) }}
         run: |
-          printf '%s\n' "${WEB_SECRETS,,}" > web-secrets.auto.tfvars.json
-          printf '%s\n' "${WEB_VARS,,}" > web-vars.auto.tfvars.json
+          printf '%s\n' "$WEB_SECRETS" > tmp-secrets.json
+          printf '%s\n' "$WEB_VARS" > tmp-vars.json
+          jq 'with_entries(.key |= ascii_downcase)' tmp-secrets.json > web-secrets.auto.tfvars.json
+          jq 'with_entries(.key |= ascii_downcase)' tmp-vars.json > web-vars.auto.tfvars.json
 
       # Download saved plan from artifacts
       - name: Download Terraform Plan
@@ -168,4 +172,4 @@ jobs:
 
       # Terraform Apply
       - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan/tfplan
+        run: terraform apply -compact-warnings -auto-approve tfplan/tfplan
