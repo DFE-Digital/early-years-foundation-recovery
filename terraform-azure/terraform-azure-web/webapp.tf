@@ -202,6 +202,123 @@ resource "azurerm_monitor_diagnostic_setting" "webapp_slot_logs_monitor" {
   }
 }
 
+# Configure Web App Autoscaling
+resource "azurerm_monitor_autoscale_setting" "asp_as" {
+  # Autoscaling rules only deployed to the Test and Production subscription
+  count = var.environment != "development" ? 1 : 0
+
+  name                = "${var.resource_name_prefix}-asp-as"
+  location            = var.location
+  resource_group_name = var.resource_group
+  target_resource_id  = azurerm_service_plan.asp.id
+
+  profile {
+    name = "Autoscaling conditions"
+
+    capacity {
+      default = 2
+      minimum = 2
+      maximum = 5
+    }
+
+    rule {
+      metric_trigger {
+        metric_name        = "CpuPercentage"
+        metric_namespace   = "microsoft.web/serverfarms"
+        metric_resource_id = azurerm_service_plan.asp.id
+        statistic          = "Average"
+        operator           = "GreaterThan"
+        threshold          = 75
+        time_aggregation   = "Average"
+        time_grain         = "PT1M"
+        time_window        = "PT10M"
+      }
+
+      scale_action {
+        direction = "Increase"
+        type      = "ChangeCount"
+        value     = "1"
+        cooldown  = "PT5M"
+      }
+    }
+
+    rule {
+      metric_trigger {
+        metric_name        = "CpuPercentage"
+        metric_namespace   = "microsoft.web/serverfarms"
+        metric_resource_id = azurerm_service_plan.asp.id
+        statistic          = "Average"
+        operator           = "LessThan"
+        threshold          = 20
+        time_aggregation   = "Average"
+        time_grain         = "PT1M"
+        time_window        = "PT10M"
+      }
+
+      scale_action {
+        direction = "Decrease"
+        type      = "ChangeCount"
+        value     = "1"
+        cooldown  = "PT5M"
+      }
+    }
+
+    rule {
+      metric_trigger {
+        metric_name        = "MemoryPercentage"
+        metric_namespace   = "microsoft.web/serverfarms"
+        metric_resource_id = azurerm_service_plan.asp.id
+        statistic          = "Average"
+        operator           = "GreaterThan"
+        threshold          = 70
+        time_aggregation   = "Average"
+        time_grain         = "PT1M"
+        time_window        = "PT10M"
+      }
+
+      scale_action {
+        direction = "Increase"
+        type      = "ChangeCount"
+        value     = "1"
+        cooldown  = "PT5M"
+      }
+    }
+
+    rule {
+      metric_trigger {
+        metric_name        = "MemoryPercentage"
+        metric_namespace   = "microsoft.web/serverfarms"
+        metric_resource_id = azurerm_service_plan.asp.id
+        statistic          = "Average"
+        operator           = "LessThan"
+        threshold          = 50
+        time_aggregation   = "Average"
+        time_grain         = "PT1M"
+        time_window        = "PT10M"
+      }
+
+      scale_action {
+        direction = "Decrease"
+        type      = "ChangeCount"
+        value     = "1"
+        cooldown  = "PT5M"
+      }
+    }
+  }
+
+  notification {
+    email {
+      send_to_subscription_administrator    = true
+      send_to_subscription_co_administrator = true
+      custom_emails                         = [var.webapp_admin_email_address]
+    }
+  }
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
+}
+
 # Create Custom Domain Name
 resource "azurerm_app_service_custom_hostname_binding" "webapp_custom_domain" {
   # Custom hostname only deployed to the Test and Production subscription
