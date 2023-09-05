@@ -14,6 +14,5 @@ RSpec.describe CompleteRegistrationMailJob do
     ]
   end
 
-  # 1 user receives the :complete_registration email template
   it_behaves_like 'an email prompt'
 end

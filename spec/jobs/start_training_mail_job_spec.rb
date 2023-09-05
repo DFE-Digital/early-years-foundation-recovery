@@ -14,6 +14,5 @@ RSpec.describe StartTrainingMailJob do
     ]
   end
 
-  # 1 user receives the :start_training email template
   it_behaves_like 'an email prompt'
 end

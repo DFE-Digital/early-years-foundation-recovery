@@ -11,8 +11,6 @@ RSpec.describe NewModuleMailJob do
     create_list :user, 2, :registered, confirmed_at: 4.weeks.ago
   end
 
-  # module_release == a publication
-
   before do
     create(:release, id: 1)
     create(:module_release, release_id: 1, module_position: 1, name: 'alpha')
@@ -24,6 +22,5 @@ RSpec.describe NewModuleMailJob do
     complete_module(bravo, 1.minute)
   end
 
-  # 1 user receives the :new_module email template informing them of the new module: charlie
   it_behaves_like 'an email prompt', 2, Training::Module.by_name(:charlie)
 end

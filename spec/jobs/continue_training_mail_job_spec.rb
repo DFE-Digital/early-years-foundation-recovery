@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ContinueTrainingMailJob do
-  include_context 'with progress' # why if this is event powered
+  include_context 'with progress'
 
   let(:template) { :continue_training }
 
@@ -40,6 +40,5 @@ RSpec.describe ContinueTrainingMailJob do
     travel_back
   end
 
-  # 1 user receives the :continue_training email template
   it_behaves_like 'an email prompt', nil, Training::Module.by_name(:alpha)
 end
