@@ -749,3 +749,7 @@ iframe {
 .dfe-button--previous:focus {
   background-color: $color_dfe-blue;
 }
+
+.interrupt-panel p+h2 {
+  padding-top: 0;
+}
