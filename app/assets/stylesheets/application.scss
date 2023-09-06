@@ -155,7 +155,7 @@ ul>li>ul>li {
 
 .dfe-width-container {
   margin: 0 auto;
-  max-width: 960px !important;
+  max-width: $govuk-page-width !important;
 }
 
 $dfe-blue: #003a69;
