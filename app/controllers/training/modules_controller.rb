@@ -1,7 +1,5 @@
 module Training
   class ModulesController < ApplicationController
-    include Learning
-
     before_action :authenticate_registered_user!, only: :show
 
     helper_method :mod,
@@ -9,12 +7,14 @@ module Training
                   :module_progress,
                   :mods
 
+    include Learning
+
     def index
       track('course_overview_page', cms: true)
     end
 
     def show
-      track('module_overview_page', mod_uid: mod.id)
+      track('module_overview_page', cms: true)
 
       if redirect?
         redirect_to my_modules_path
