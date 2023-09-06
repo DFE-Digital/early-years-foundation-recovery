@@ -1,6 +1,6 @@
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
-    = yield :page_content
+    = yield :content_page
 
     - if content.notes?
       = render partial: 'notes/form'

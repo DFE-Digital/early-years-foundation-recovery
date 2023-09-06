@@ -13,38 +13,43 @@ module LinkHelper
   end
 
   # @param state [Symbol]
-  # @param mod [Training::Module]
   # @param content [Training::Content]
   #
   # @return [String] not_started / started / failed / completed
-  def link_to_action(state, mod, content)
+  def link_to_action(state, content)
     text = t(state, scope: 'module_call_to_action')
     path =
       if state.eql?(:failed)
-        new_training_module_assessment_path(mod.name)
+        new_training_module_assessment_path(content.parent.name)
       else
-        training_module_page_path(mod.name, content.name)
+        training_module_page_path(content.parent.name, content.name)
       end
 
     govuk_button_link_to text, path, id: 'module-call-to-action'
   end
 
+  # @param content [Training::Content]
   # @return [String] next page (ends on certificate)
-  def link_to_next
-    page = content.interruption_page? ? mod.content_start : content.next_item
+  def link_to_next(content)
+    if content.next_item.nil? && (Rails.application.preview? || Rails.env.test?)
+      text = 'Next page has not been created'
+      path = training_module_page_path(content.parent.name, content.name)
+    else
+      text = content.next_button_text
+      path = training_module_page_path(content.parent.name, content.next_item.name)
+    end
 
-    govuk_button_link_to content.next_button_text, training_module_page_path(mod.name, page.name),
-                         id: 'next-action',
-                         aria: { label: 'Go to the next page' }
+    govuk_button_link_to text, path, id: 'next-action', aria: { label: 'Go to the next page' }
   end
 
+  # @param content [Training::Content]
   # @return [String] previous page or module overview
-  def link_to_previous
+  def link_to_previous(content)
     path =
-      if content.interruption_page?
-        training_module_path(mod.name)
+      if content.previous_item
+        training_module_page_path(content.parent.name, content.previous_item.name)
       else
-        training_module_page_path(mod.name, content.previous_item.name)
+        training_module_path(content.parent.name)
       end
 
     govuk_button_link_to 'Previous', path,

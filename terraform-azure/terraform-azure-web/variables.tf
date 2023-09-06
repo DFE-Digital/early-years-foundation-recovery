@@ -23,6 +23,12 @@ variable "asp_sku" {
   type        = string
 }
 
+variable "webapp_admin_email_address" {
+  description = "Email Address of the Admin"
+  type        = string
+  sensitive   = true
+}
+
 variable "webapp_worker_count" {
   description = "Number of Workers for the App Service Plan"
   type        = string

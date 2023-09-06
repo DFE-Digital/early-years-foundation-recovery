@@ -1,3 +1,6 @@
+variable "oidc_request_token" {}
+variable "oidc_request_url" {}
+
 variable "azure_region" {
   default     = "westeurope"
   description = "Name of the Azure region to deploy resources"
@@ -16,6 +19,12 @@ variable "resource_name_prefix" {
   type        = string
 }
 
+variable "admin_email_address" {
+  description = "Email Address of the Admin"
+  type        = string
+  sensitive   = true
+}
+
 variable "kv_certificate_authority_username" {
   description = "Username for the Certificate provider"
   type        = string
@@ -24,12 +33,6 @@ variable "kv_certificate_authority_username" {
 
 variable "kv_certificate_authority_password" {
   description = "Password the Certificate provider"
-  type        = string
-  sensitive   = true
-}
-
-variable "kv_certificate_authority_admin_email" {
-  description = "Email Address of the Certificate Authority Admin"
   type        = string
   sensitive   = true
 }
@@ -147,7 +150,7 @@ variable "webapp_docker_image_tag" {
   type        = string
 }
 
-variable "webapp_custom_domain_name" {
+variable "custom_domain_name" {
   description = "Custom domain hostname"
   type        = string
 }
@@ -208,10 +211,6 @@ variable "webapp_config_rails_max_threads" {
 
 variable "webapp_config_rails_serve_static_files" {
   type = bool
-}
-
-variable "webapp_config_training_modules" {
-  type = string
 }
 
 variable "webapp_config_web_concurrency" {

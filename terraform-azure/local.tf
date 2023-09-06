@@ -1,5 +1,5 @@
 locals {
-  # Common tags to be assigned resources
+  # Common tags to be assigned to resources
   common_tags = {
     "Environment"      = var.environment
     "Parent Business"  = "Children’s Care"
@@ -12,6 +12,7 @@ locals {
 
   # Web Application Configuration
   webapp_app_settings = {
+    "ENVIRONMENT"                         = var.environment
     "DATABASE_URL"                        = var.webapp_database_url
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
     "GOVUK_APP_DOMAIN"                    = "london.cloudapps.digital" #TODO: Remove this dependency post-migration to Azure
@@ -47,6 +48,7 @@ locals {
 
   # Review Application Configuration
   reviewapp_app_settings = {
+    "ENVIRONMENT"                         = var.environment
     "DATABASE_URL"                        = var.webapp_database_url
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
     "GOVUK_APP_DOMAIN"                    = "london.cloudapps.digital" #TODO: Remove this dependency post-migration to Azure
