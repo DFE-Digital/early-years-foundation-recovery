@@ -65,7 +65,7 @@ namespace :eyfs do
       args.with_defaults(mod_names: Training::Module.ordered.map(&:name))
 
       args[:mod_names].split(',').flatten.each do |mod|
-        ContentfulDataIntegrity.new(module_name: mod).call
+        ContentIntegrity.new(module_name: mod).call
       rescue Dry::Types::ConstraintError
       end
     end
