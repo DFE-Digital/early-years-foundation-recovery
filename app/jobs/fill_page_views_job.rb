@@ -1,5 +1,5 @@
 # :nocov:
-class FillPageViewsJob < Que::Job
+class FillPageViewsJob < ApplicationJob
   self.queue = 'default'
   self.priority = 1
   # self.run_at = proc { 1.minute.from_now }
@@ -10,24 +10,6 @@ class FillPageViewsJob < Que::Job
     Training::Module.cache.clear
     log "#{self.class.name}: Running"
     FillPageViews.new.call
-  end
-
-  def handle_error(error)
-    message = "#{self.class.name}: Failed with '#{error.message}'"
-    log(message)
-    Sentry.capture_message(message) if Rails.application.live?
-  end
-
-private
-
-  # @param message [String]
-  # @return [String, nil]
-  def log(message)
-    if ENV['RAILS_LOG_TO_STDOUT'].present?
-      Rails.logger.info(message)
-    elsif ENV['VERBOSE'].present?
-      puts message
-    end
   end
 end
 # :nocov:

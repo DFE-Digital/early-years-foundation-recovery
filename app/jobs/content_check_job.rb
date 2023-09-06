@@ -1,16 +1,10 @@
 # :nocov:
-class ContentCheckJob < Que::Job
+class ContentCheckJob < ApplicationJob
   # @return [Boolean]
   def run(*)
     Training::Module.cache.clear
     log "#{self.class.name}: Running in '#{env}' via '#{api}'"
     valid?
-  end
-
-  def handle_error(error)
-    message = "#{self.class.name}: Failed with '#{error.message}'"
-    log(message)
-    Sentry.capture_message(message)
   end
 
 private
@@ -23,9 +17,7 @@ private
       log Training::Module.cache.size # should be larger than 0
 
       unless check.valid?
-        message = "ContentCheckJob: #{mod.name} in '#{env}' via '#{api}' is not valid"
-        log(message)
-        Sentry.capture_message(message)
+        log "ContentCheckJob: #{mod.name} in '#{env}' via '#{api}' is not valid"
       end
 
       check.valid?
@@ -40,16 +32,6 @@ private
   # @return [String]
   def api
     ContentfulModel.use_preview_api ? 'preview' : 'delivery'
-  end
-
-  # @param message [String]
-  # @return [String, nil]
-  def log(message)
-    if ENV['RAILS_LOG_TO_STDOUT'].present?
-      Rails.logger.info(message)
-    elsif ENV['VERBOSE'].present?
-      puts message
-    end
   end
 end
 # :nocov:

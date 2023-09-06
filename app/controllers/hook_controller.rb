@@ -10,12 +10,13 @@ class HookController < ApplicationController
   #     - Release (execute)
   #
   def release
-    Release.create!(
+    new_release = Release.create!(
       name: payload.dig('sys', 'id'),
       time: payload.dig('sys', 'completedAt'),
       properties: payload,
     )
 
+    NewModuleMailJob.enqueue(new_release.id)
     render json: { status: 'content release received' }, status: :ok
   end
 
