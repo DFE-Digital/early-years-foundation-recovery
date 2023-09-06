@@ -34,9 +34,9 @@ env:
   ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
   TF_VAR_environment: ${{ vars.ENVIRONMENT }}
   TF_VAR_resource_name_prefix: ${{ vars.RESOURCE_NAME_PREFIX }}
+  TF_VAR_admin_email_address: ${{ vars.ADMIN_EMAIL_ADDRESS }}
   TF_VAR_kv_certificate_authority_username: ${{ secrets.KV_CERTIFICATE_AUTHORITY_USERNAME }}
   TF_VAR_kv_certificate_authority_password: ${{ secrets.KV_CERTIFICATE_AUTHORITY_PASSWORD }}
-  TF_VAR_kv_certificate_authority_admin_email: ${{ vars.ADMIN_EMAIL_ADDRESS }}
   TF_VAR_kv_certificate_authority_admin_first_name: ${{ secrets.KV_CERTIFICATE_AUTHORITY_ADMIN_FIRST_NAME }}
   TF_VAR_kv_certificate_authority_admin_last_name: ${{ secrets.KV_CERTIFICATE_AUTHORITY_ADMIN_LAST_NAME }}
   TF_VAR_kv_certificate_authority_admin_phone_no: ${{ secrets.KV_CERTIFICATE_AUTHORITY_ADMIN_PHONE_NO }}
