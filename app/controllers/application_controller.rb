@@ -38,8 +38,10 @@ class ApplicationController < ActionController::Base
   def prepare_cms
     # ensure correct API for each request
     ContentfulModel.use_preview_api = Rails.application.preview?
+
     # memoise the latest release timestamp
     Training::Module.reset_cache_key!
+
     :done
   end
 

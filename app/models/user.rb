@@ -68,9 +68,15 @@ class User < ApplicationRecord
   scope :confirmed, -> { where.not(confirmed_at: nil) }
   scope :unconfirmed, -> { where(confirmed_at: nil) }
   scope :locked_out, -> { where.not(locked_at: nil) }
-
+  scope :since_public_beta, -> { where(created_at: Rails.application.public_beta_launch_date..Time.zone.now) }
+  scope :month_old_confirmation, -> { where(confirmed_at: 4.weeks.ago.beginning_of_day..4.weeks.ago.end_of_day) }
   scope :with_local_authority, -> { where.not(local_authority: nil) }
   scope :with_notes, -> { joins(:notes).distinct.select(&:has_notes?) }
+  scope :not_started_training, -> { reject(&:course_started?) }
+  scope :course_in_progress, -> { select(&:course_in_progress?) }
+
+  scope :training_email_recipients, -> { where(training_emails: [true, nil]) }
+  scope :early_years_email_recipients, -> { where(early_years_emails: true) }
   scope :without_notes, -> { where.not(id: with_notes) }
 
   scope :closed, -> { where.not(closed_at: nil) }
@@ -80,6 +86,11 @@ class User < ApplicationRecord
 
   scope :with_assessments, -> { joins(:user_assessments) }
   scope :with_passing_assessments, -> { with_assessments.merge(UserAssessment.passes) }
+
+  scope :start_training_mail_job_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_complete.not_started_training }
+  scope :complete_registration_mail_job_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_incomplete }
+  scope :continue_training_mail_job_recipients, -> { order(:id).training_email_recipients.select(&:continue_training_recipient?) }
+  scope :new_module_mail_job_recipients, -> { order(:id).training_email_recipients.select(&:completed_available_modules?) }
 
   scope :dashboard, -> { not_closed }
 
@@ -165,6 +176,24 @@ class User < ApplicationRecord
     send_devise_notification(:account_closed_internal, user_account_email)
   end
 
+  def send_complete_registration_notification
+    send_devise_notification(:complete_registration)
+  end
+
+  def send_start_training_notification
+    send_devise_notification(:start_training)
+  end
+
+  # @param mod [Training::Module]
+  def send_continue_training_notification(mod)
+    send_devise_notification(:continue_training, mod)
+  end
+
+  # @param mod [Training::Module]
+  def send_new_module_notification(mod)
+    send_devise_notification(:new_module, mod)
+  end
+
   # @return [String]
   def name
     [first_name, last_name].compact.join(' ')
@@ -191,10 +220,20 @@ class User < ApplicationRecord
     !module_time_to_completion.empty?
   end
 
+  # @return [Boolean]
+  def course_in_progress?
+    course_started? && !module_time_to_completion.values.all?(&:positive?)
+  end
+
+  # @return [Array<String>]
+  def modules_in_progress
+    module_time_to_completion.select { |_k, v| v.zero? }.keys
+  end
+
   # @param module_name [String]
   # @return [Boolean]
   def module_completed?(module_name)
-    module_time_to_completion[module_name]&.positive?
+    module_time_to_completion.key?(module_name) && module_time_to_completion[module_name].positive?
   end
 
   # @return [Integer]
@@ -316,6 +355,21 @@ class User < ApplicationRecord
   # @return [Hash] override
   def dashboard_row
     data_attributes.dup.merge(module_ttc)
+  end
+
+  # @return [Boolean]
+  def completed_available_modules?
+    available_modules = ModuleRelease.pluck(:name)
+    available_modules.all? { |mod_name| module_completed?(mod_name) }
+  end
+
+  # @return [Boolean]
+  def continue_training_recipient?
+    return false unless course_in_progress?
+
+    recent_visits = Ahoy::Visit.last_4_weeks
+    old_visits = Ahoy::Visit.month_old.reject { |visit| recent_visits.pluck(:user_id).include?(visit.user_id) }
+    old_visits.pluck(:user_id).include?(id)
   end
 
 private

@@ -26,6 +26,10 @@ module Data
           'With Notes Percentage',
           'Without Notes',
           'Without Notes Percentage',
+          'Complete Registration Mail Recipients',
+          'Start Training Mail Recipients',
+          'Continue Training Mail Recipients',
+          'New Module Mail Recipients',
         ]
       end
 
@@ -52,6 +56,10 @@ module Data
           with_notes_percentage: with_notes_percentage,
           without_notes: without_notes_count,
           without_notes_percentage: 1 - with_notes_percentage,
+          complete_registration_mail_recipients: CompleteRegistrationMailJob.recipients.count,
+          start_training_mail_recipients: StartTrainingMailJob.recipients.count,
+          continue_training_mail_recipients: ContinueTrainingMailJob.recipients.count,
+          new_module_mail_recipients: NewModuleMailJob.recipients.count,
         }]
       end
 
