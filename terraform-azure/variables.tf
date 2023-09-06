@@ -1,3 +1,6 @@
+variable "oidc_request_token" {}
+variable "oidc_request_url" {}
+
 variable "azure_region" {
   default     = "westeurope"
   description = "Name of the Azure region to deploy resources"
