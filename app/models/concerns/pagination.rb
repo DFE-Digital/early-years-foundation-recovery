@@ -1,11 +1,7 @@
-module Pagination # Progress / section / navigation
-
+# Content in sections, navigation
+#
+module Pagination
   # BOOLEAN --------------------------------------------------------------------
-
-  # @return [Boolean]
-  def content?
-    !submodule_intro?
-  end
 
   # @return [Boolean]
   def section?
@@ -17,20 +13,18 @@ module Pagination # Progress / section / navigation
     topic_intro? || recap_page? || assessment_intro? || confidence_intro? || certificate?
   end
 
+  # @see app/views/training/pages/text_page.html.slim
+  #
   # @return [Boolean]
   def page_numbers?
-    case page_type
-    when /intro|thankyou/ then false
-    else
-      true
-    end
+    topic_intro? || text_page?
   end
 
   # BOOLEAN --------------------------------------------------------------------
 
-  # @return [Hash{Symbol => nil, Integer}]
+  # @return [Hash{Symbol => Integer}]
   def pagination
-    { current: position_within_submodule, total: number_within_submodule }
+    { current: section_content.index(self), total: section_size }
   end
 
   # @return [nil, Training::Page, Training::Video, Training::Question]
@@ -49,12 +43,12 @@ module Pagination # Progress / section / navigation
 
   # @return [String]
   def previous_item_id
-    parent.pages[position_within_module - 1].id
+    parent.pages[content_index - 1].id
   end
 
   # @return [String, nil]
   def next_item_id
-    parent.pages[position_within_module + 1]&.id
+    parent.pages[content_index + 1]&.id
   end
 
   # @return [Array<Training::Page, Training::Video, Training::Question>]
@@ -87,30 +81,29 @@ module Pagination # Progress / section / navigation
     topic
   end
 
-  # @return [Integer] (zero index)
-  def position_within_module  # position
-    parent.pages.rindex(self)
-  end
-
-  # @return [Integer] (zero index)
-  def position_within_submodule # section_position
-    section_content.index(self)
-  end
-
-  # @return [Integer] (zero index)
-  def position_within_topic # subsection_position
-    subsection_content.index(self)
-  end
-
   # @return [Integer]
-  def number_within_submodule # section_size
+  def section_size
     return 0 if module_intro?
 
-    section_content.count(&:content?)
+    section_content.count { |c| !c.submodule_intro? }
   end
 
   # @return [Integer]
-  def number_within_topic # subsection_size
+  def subsection_size
     subsection_content.count
+  end
+
+  # @see #debug_summary
+  # @param collection [Array<Training::Page, Training::Video, Training::Question>]
+  # @return [String]
+  def position_within(collection)
+    (collection.index(self) + 1).ordinalize
+  end
+
+private
+
+  # @return [Integer]
+  def content_index
+    parent.pages.rindex(self)
   end
 end

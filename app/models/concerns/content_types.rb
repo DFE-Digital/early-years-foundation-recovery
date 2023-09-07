@@ -1,7 +1,6 @@
 # Content page_types ordered by appearance
 #
 module ContentTypes
-
   # @return [Boolean]
   def interruption_page?
     page_type.eql?('interruption_page')
@@ -94,5 +93,4 @@ module ContentTypes
   def certificate?
     page_type.eql?('certificate')
   end
-
 end

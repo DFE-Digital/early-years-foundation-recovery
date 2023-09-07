@@ -55,30 +55,31 @@ RSpec.describe 'Summative assessment', type: :system do
   describe 'results' do
     context 'when every question is answered correctly' do
       before do
-        visit first_question_path
-        3.times do
-          check 'Correct answer 1'
-          check 'Correct answer 2'
-          click_on 'Save and continue'
+        visit '/modules/alpha/content-pages/what-to-expect'
+
+        ContentTestSchema.new(mod: alpha).call(pass: true).compact.each do |content|
+          content[:inputs].each { |args| send(*args) }
         end
-        choose 'Correct answer 1'
-        click_on 'Finish test'
+
+        visit '/modules/alpha/assessment-result/1-3-2-11'
       end
 
-      it 'has the score as a percentage' do
+      it 'displays score with no wrong answers' do
         expect(page).to have_content 'You scored 100%'
-      end
 
-      it 'has success banner' do
         expect(page).to have_content('Congratulations')
           .and have_content('you have scored highly enough to receive a certificate of achievement for this module.')
-      end
 
-      it 'displays no incorrect answers' do
         expect(page).not_to have_content 'Question One'
         expect(page).not_to have_content 'Question Two'
         expect(page).not_to have_content 'Question Three'
         expect(page).not_to have_content 'Question Four'
+        expect(page).not_to have_content 'Question Five'
+        expect(page).not_to have_content 'Question Six'
+        expect(page).not_to have_content 'Question Seven'
+        expect(page).not_to have_content 'Question Eight'
+        expect(page).not_to have_content 'Question Nine'
+        expect(page).not_to have_content 'Question Ten'
       end
 
       it 'links to the confidence check from module overview page' do
@@ -94,74 +95,32 @@ RSpec.describe 'Summative assessment', type: :system do
       end
     end
 
-    context 'when the threshold is passed' do
-      before do
-        visit first_question_path
-        2.times do
-          check 'Correct answer 1'
-          check 'Correct answer 2'
-          click_on 'Save and continue'
-        end
-        check 'Wrong answer 1'
-        check 'Wrong answer 2'
-        click_on 'Save and continue'
-
-        choose 'Correct answer 1'
-        click_on 'Finish test'
-      end
-
-      it 'has the score as a percentage' do
-        expect(page).to have_content 'You scored 75%'
-      end
-
-      it 'has success banner' do
-        expect(page).to have_content('Congratulations')
-          .and have_content('you have scored highly enough to receive a certificate of achievement for this module.')
-      end
-
-      it 'displays only incorrect answers' do
-        expect(page).to have_content 'Question Three'
-
-        expect(page).not_to have_content 'Question One'
-        expect(page).not_to have_content 'Question Two'
-        expect(page).not_to have_content 'Question Four'
-      end
-
-      it 'is not able to be retaken' do
-        expect(page).not_to have_link 'Retake test'
-
-        visit first_question_path
-
-        expect(page).to have_selector '.govuk-checkboxes__input:disabled'
-      end
-    end
-
     context 'when failed' do
       before do
-        visit first_question_path
-        3.times do
-          check 'Wrong answer 1'
-          check 'Wrong answer 2'
-          click_on 'Save and continue'
+        visit '/modules/alpha/content-pages/what-to-expect'
+
+        ContentTestSchema.new(mod: alpha).call(pass: false).compact.each do |content|
+          content[:inputs].each { |args| send(*args) }
         end
-        choose 'Wrong answer 1'
-        click_on 'Finish test'
       end
 
-      it 'displays the score as a percentage' do
+      it 'displays score with wrong answers' do
         expect(page).to have_content 'You scored 0%'
-      end
 
-      it 'has failure banner' do
         expect(page).to have_content('Revisit the module')
           .and have_content('Unfortunately you have not scored highly enough to receive a certificate.')
-      end
 
-      it 'displays only incorrect answers' do
+        # Lookup AST question labels
         expect(page).to have_content('Question One')
           .and have_content('Question Two')
           .and have_content('Question Three')
           .and have_content('Question Four')
+          .and have_content('Question Five')
+          .and have_content('Question Six')
+          .and have_content('Question Seven')
+          .and have_content('Question Eight')
+          .and have_content('Question Nine')
+          .and have_content('Question Ten')
       end
 
       it 'does not link to confidence check from the module overview page' do

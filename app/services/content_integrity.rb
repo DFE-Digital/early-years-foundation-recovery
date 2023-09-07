@@ -132,11 +132,10 @@ class ContentIntegrity
     page_by_type_position(type: 'sub_module_intro', position: 1)
   end
 
-  # TODO: assert topic intro follows submodule intro or similar
-  #
   # @return [Boolean] third page
   def topic?
-    page_by_type_position(type: 'topic_intro', position: 2)
+    page_by_type_position(type: 'topic_intro', position: 2) &&
+      (mod.topic_count >= mod.submodule_count)
   end
 
   # @return [Boolean] penultimate page
@@ -151,12 +150,12 @@ class ContentIntegrity
 
   # @return [Boolean]
   def text?
-    page_by_type_position(type: 'text_page')
+    mod.text_pages.any?
   end
 
   # @return [Boolean]
   def video?
-    page_by_type_position(type: 'video_page')
+    mod.video_pages.any?
   end
 
   # @return [Boolean]
@@ -166,18 +165,18 @@ class ContentIntegrity
 
   # @return [Boolean]
   def formative?
-    page_by_type_position(type: 'formative_questionnaire')
+    mod.formative_questions.any?
   end
 
   # 'Brain development and how children learn' has fewest
-  # @return [Boolean] demo modules have fewer questions than genuine content
+  # @return [Boolean]
   def confidence?
-    demo? || mod.page_by_type('confidence_questionnaire').count >= 4
+    mod.confidence_questions.count >= 4
   end
 
-  # @return [Boolean] demo modules have fewer questions than genuine content
+  # @return [Boolean]
   def summative?
-    demo? || mod.page_by_type('summative_questionnaire').count.eql?(10)
+    mod.summative_questions.count == 10
   end
 
   # @return [Boolean]
@@ -210,11 +209,6 @@ private
   # @return [Hash{Symbol=>String}]
   def validations
     MODULE_VALIDATIONS.merge(CONTENT_VALIDATIONS)
-  end
-
-  # @return [Boolean] content for development and testing
-  def demo?
-    env.eql?('test')
   end
 
   # @return [String] preview / delivery
@@ -259,6 +253,9 @@ private
     end
   end
 
+  # @param type [String]
+  # @param position [Integer]
+  # @return [Boolean]
   def page_by_type_position(type:, position: nil)
     return mod.pages.map(&:page_type).any?(type) unless position
 

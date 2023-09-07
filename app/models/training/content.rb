@@ -1,6 +1,5 @@
 module Training
   class Content < ContentfulModel::Base
-
     include ::Management
     include ::Pagination
     include ::ContentTypes
@@ -23,12 +22,12 @@ module Training
         uid: #{id}
         module uid: #{parent.id}
         module name: #{parent.name}
-        path: #{name}
         published at: #{published_at}
         page type: #{page_type}
 
         ---
         previous: #{previous_item&.name}
+        current: #{name}
         next: #{next_item&.name}
 
         ---
@@ -36,13 +35,13 @@ module Training
         topic: #{topic}
 
         ---
-        position in module: #{(position_within_module + 1).ordinalize}
-        position in submodule: #{position_within_submodule ? (position_within_submodule + 1).ordinalize : 'N/A'}
-        position in topic: #{position_within_topic ? (position_within_topic + 1).ordinalize : 'N/A'}
+        position in module: #{position_within(parent.pages)}
+        position in submodule: #{position_within(section_content)}
+        position in topic: #{position_within(subsection_content)}
 
         ---
-        submodule items count: #{number_within_submodule}
-        topic items count: #{number_within_topic}
+        pages in submodule: #{section_size}
+        pages in topic: #{subsection_size}
       SUMMARY
     end
 
@@ -75,6 +74,5 @@ module Training
     def notes?
       text_page? && notes
     end
-
   end
 end

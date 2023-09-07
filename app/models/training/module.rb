@@ -76,20 +76,20 @@ module Training
 
     # @return [Array<Training::Page, Training::Video, Training::Question>]
     def content
-      pages.reject(&:interruption_page?)
+      Array(pages).reject(&:interruption_page?)
     end
 
     # SECTIONS -----------------------------------------------------------------
 
     # @return [Hash{ Integer => Array<Training::Page, Training::Video, Training::Question> }]
-    def content_by_submodule
+    def content_by_submodule # content_sections
       content.slice_before(&:section?).each.with_index(1).to_h.invert
     end
 
     # @return [Hash{ Array<Integer> => Array<Training::Page, Training::Video, Training::Question> }]
-    def content_by_submodule_topic
+    def content_by_submodule_topic # content_subsections
       sections = content.slice_before(&:section?).each.with_index(1).map do |section_entries, submodule_num|
-        section_entries.slice_before(&:subsection?).each.with_index(1).map do |subsection_entries, topic_num|
+        section_entries.slice_before(&:subsection?).each.with_index(0).map do |subsection_entries, topic_num|
           { [submodule_num, topic_num] => subsection_entries }
         end
       end
@@ -99,7 +99,7 @@ module Training
 
     # @return [Integer]
     def topic_count
-      content_by_submodule_topic.count
+      content_by_submodule_topic.count - submodule_count
     end
 
     # @return [Integer]
@@ -122,9 +122,10 @@ module Training
     end
 
     # Selects from ordered array
+    # but not interruption page
     #
     # @return [Array<Training::Page, Training::Video, Training::Question>]
-    def page_by_type(type)
+    def pages_by_type(type)
       pages.select { |page| page.page_type.eql?(type) }
     end
 
@@ -152,12 +153,12 @@ module Training
 
     # @return [Training::Page]
     def content_start
-      page_by_type('sub_module_intro').first
+      pages_by_type('sub_module_intro').first
     end
 
     # @return [Training::Page]
     def first_content_page
-      page_by_type('topic_intro').first
+      pages_by_type('topic_intro').first
     end
 
     # @return [Training::Page]
