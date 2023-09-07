@@ -22,7 +22,7 @@ html.govuk-template lang='en'
     = javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true
     = yield :head
 
-  body.govuk-template__body.govuk-body
+  body.govuk-template__body
     script
       | document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
 

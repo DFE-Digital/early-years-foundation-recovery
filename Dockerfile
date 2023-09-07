@@ -83,10 +83,18 @@ COPY .yarnrc.yml ${APP_HOME}/.yarnrc.yml
 COPY --from=deps /build/.yarn ${APP_HOME}/.yarn
 COPY --from=deps /build/node_modules ${APP_HOME}/node_modules
 
+# TODO: remove cache deletion
+#
+# npm package dfe-frontend-alpha includes a dev dependency called ms-playwright.
+# This uses an extra ~1GB of disk space.
+# Once package maintainers move this out of the runtime group it will no longer be an issue.
+# Image building will stall here once the directory no longer exists.
+#
 RUN SECRET_KEY_BASE=x \
     GOVUK_APP_DOMAIN=x \
     GOVUK_WEBSITE_ROOT=x \
-    bundle exec rails assets:precompile
+    bundle exec rails assets:precompile; \
+    rm -r /root/.cache/ms-playwright
 
 COPY ./docker-entrypoint.sh /
 

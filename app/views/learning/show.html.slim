@@ -55,7 +55,7 @@ hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
 - if current_user.course.completed_modules.any?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
   .govuk-grid-row id='completed'
-    .govuk-grid-column-full
+    .govuk-grid-column-three-quarters-from-desktop
       = completed_modules_table
 
 = render 'debug'

@@ -1,4 +1,5 @@
 $govuk-new-link-styles: true;
+$govuk-page-width: 1200px;
 
 @import "govuk-frontend/govuk/all";
 @import "./govspeak";
@@ -16,6 +17,8 @@ $govuk-new-link-styles: true;
 @import "./header.scss";
 @import './module-overview.scss';
 @import "./assets-page.scss";
+@import 'dfe-frontend-alpha/packages/dfefrontend';
+@import 'dfe-header.scss';
 
 * {
   font-family: 
@@ -118,7 +121,6 @@ ul > li > ul > li {
   border: 0.5px solid;
   border-color: #b1b4b6;
   padding: 20px;
-  max-width: 600px;
   margin-bottom: 40px;
 }
 
@@ -146,4 +148,8 @@ ul > li > ul > li {
 
 .white-space-pre-wrap {
   white-space: pre-wrap;
+}
+
+.interrupt-panel p+h2 {
+  padding-top: 0;
 }
