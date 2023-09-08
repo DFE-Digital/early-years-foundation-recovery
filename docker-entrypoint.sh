@@ -27,14 +27,14 @@ fi
 
 bundle exec rails db:prepare assets:precompile
 
-if [ -z ${ENVIRONMENT} ]
-then
-  echo "ENVIRONMENT is not defined so development database may not contain seed data"
-else
-  if [ !${ENVIRONMENT}=="development" ]
-  then
-    bundle exec rails db:seed
-  fi
-fi
+#if [ -z ${ENVIRONMENT} ]
+#then
+#  echo "ENVIRONMENT is not defined so development database may not contain seed data"
+#else
+#  if [ !${ENVIRONMENT}=="development" ]
+#  then
+#    bundle exec rails db:seed
+#  fi
+#fi
 
 exec bundle exec "$@"
