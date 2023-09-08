@@ -2,6 +2,11 @@
   margin-left: auto
 }
 
+.dfe-width-container {
+  margin: 0 auto;
+  max-width: $govuk-page-width;
+}
+
 .dfe-width-container.dfe-header__container.dfe-header-f-header-flex {
   display: flex;
   flex-wrap: wrap;

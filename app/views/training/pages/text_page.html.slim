@@ -5,10 +5,16 @@
 - content_for :page_title do
   = html_title mod.title, content.heading
 
-- content_for :content_page do
-  = page_number(**content.pagination) if content.page_numbers?
+.govuk-grid-row
+  .govuk-grid-column-full-width
+    .govuk-grid-row 
+      .govuk-grid-column-two-thirds-from-desktop
+        = page_number(**content.pagination) if content.page_numbers?
 
-  h1= content.heading
-  .gem-c-govspeak= translate_markdown(content.body)
+        h1= content.heading
+        .gem-c-govspeak= translate_markdown(content.body)
 
-= render 'content_wrap'
+    - if content.notes?
+      = render partial: 'notes/form'
+    - else
+      = render partial: 'course_pages_footer'

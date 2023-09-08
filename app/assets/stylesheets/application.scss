@@ -21,7 +21,7 @@ $govuk-page-width: 1200px;
 @import 'dfe-header.scss';
 
 * {
-  font-family: 
+  font-family:
     BlinkMacSystemFont,
     'Segoe UI',
     Roboto,
@@ -45,10 +45,13 @@ pre.code-tip {
 
 .debug_dump {
   background: beige;
-  &, * {
+
+  &,
+  * {
     font-family: monospace !important;
   }
 }
+
 // --------------------------------------------
 
 .app-sidebar {
@@ -94,7 +97,7 @@ abbr {
 }
 
 // nested bullets (level 2) to be unfilled circles
-ul > li > ul > li {
+ul>li>ul>li {
   list-style-type: circle;
 }
 
@@ -112,7 +115,7 @@ ul > li > ul > li {
 }
 
 .white-background {
-  background-color: govuk-colour("white");; 
+  background-color: govuk-colour("white");
   border-left: none !important;
   padding: govuk-spacing(4);
 }
