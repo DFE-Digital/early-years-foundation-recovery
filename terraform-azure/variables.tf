@@ -98,6 +98,12 @@ variable "psqlfs_ha_enabled" {
   type        = bool
 }
 
+variable "as_service_principal_object_id" {
+  description = "Object ID of the service principal for App Service"
+  type        = string
+  sensitive   = true
+}
+
 variable "asp_sku" {
   default     = "S1"
   description = "SKU name for the App Service Plan"

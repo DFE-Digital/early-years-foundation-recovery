@@ -336,22 +336,14 @@ resource "azurerm_app_service_custom_hostname_binding" "webapp_custom_domain" {
 
 data "azurerm_client_config" "az_config" {}
 
-# TODO: Need an alternative solution as will only work locally and not GitHub Actions pipeline due to permissions
-data "azuread_service_principal" "microsoft_webapp" {
-  # Custom hostname only deployed to the Test and Production subscription
-  count = var.environment != "development" ? 1 : 0
-
-  # application_id: https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-certificate?tabs=apex#authorize-app-service-to-read-from-the-vault
-  application_id = "abfa0a7c-a6b6-4736-8310-5855508787cd"
-}
-
 resource "azurerm_key_vault_access_policy" "webapp_kv_ap" {
   # Custom hostname only deployed to the Test and Production subscription
   count = var.environment != "development" ? 1 : 0
 
-  key_vault_id            = var.kv_id
-  tenant_id               = data.azurerm_client_config.az_config.tenant_id
-  object_id               = data.azuread_service_principal.microsoft_webapp.object_id
+  key_vault_id = var.kv_id
+  tenant_id    = data.azurerm_client_config.az_config.tenant_id
+  # Can be retrieved using 'az ad sp show --id abfa0a7c-a6b6-4736-8310-5855508787cd --query id'
+  object_id               = var.as_service_principal_object_id
   secret_permissions      = ["Get"]
   certificate_permissions = ["Get"]
 }
