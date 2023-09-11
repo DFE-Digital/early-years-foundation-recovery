@@ -59,6 +59,16 @@ class CourseProgress
     module_progress(mod).completed?
   end
 
+  # @param mod [Training::Module]
+  # @return [Boolean] module released since user's last visit
+  def new_module?(mod)
+    return false unless user.visits.any?
+    
+    mod_release = ModuleRelease.find_by(module_position: mod.position)
+    last_visit = user.visits.last
+    last_visit.started_at < mod_release.first_published_at
+  end
+
 private
 
   # @param mod [Training::Module]
