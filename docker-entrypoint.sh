@@ -27,7 +27,7 @@ fi
 
 if [ -z ${ENVIRONMENT} ]
 then
-  echo "ENVIRONMENT is not defined so development database may not contain seed data"
+  echo "ENVIRONMENT is not defined so the app startup as intended"
 else
   if [ !${ENVIRONMENT}=="development" ]
   then
