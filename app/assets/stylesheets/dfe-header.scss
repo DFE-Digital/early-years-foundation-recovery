@@ -98,3 +98,7 @@
 .govuk-notification-banner__content>* {
   max-width: 44em;
 }
+
+.dfe-content-page--header {
+  background: tint($color_dfe-secondary-blue, 90%); // #ebf2f6
+}

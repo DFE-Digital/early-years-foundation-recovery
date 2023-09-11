@@ -1,6 +1,7 @@
 module Training
   class ModulesController < ApplicationController
     before_action :authenticate_registered_user!, only: :show
+    layout 'main_hero'
 
     helper_method :mod,
                   :progress_bar,

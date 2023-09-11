@@ -1,6 +1,7 @@
 class Training::PagesController < ApplicationController
   before_action :authenticate_registered_user!
   before_action :track_events, only: :show
+  layout 'main_hero'
 
   helper_method :mod,
                 :content,
