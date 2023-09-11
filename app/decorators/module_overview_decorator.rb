@@ -17,12 +17,20 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
   def sections
     mod.content_by_submodule.each.with_index(1).map do |(submodule, content_items), position|
       {
-        heading: content_items.first.heading,
+        heading: section_heading(content_items.first.heading, content_items.size, position != mod.submodule_count).html_safe, 
         position: position,
         display_line: position != mod.submodule_count,
         icon: status(content_items),
         subsections: subsections(submodule: submodule, items: content_items),
       }
+    end
+  end
+
+  def section_heading(heading, section_page_count, include_page_count = false)
+    if include_page_count 
+      heading + "<span class='greyed-out'>  (#{section_page_count} pages)</span>"
+    else 
+      heading
     end
   end
 

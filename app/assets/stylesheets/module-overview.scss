@@ -5,10 +5,14 @@ $progress-bar-container-width: 81px;
   margin-left: $progress-bar-container-width;
 }
 
+.greyed-out {
+  opacity: 0.5;
+}
+
 .module-overview--section {
   display: grid;
   grid-template-columns: $progress-bar-container-width auto;
-  
+
   .icon {
     border-radius: 50%;
     width: $icon-diameter;
@@ -18,19 +22,19 @@ $progress-bar-container-width: 81px;
     align-items: center;
     font-weight: bold;
     z-index: 2;
-  
+
     &.completed {
-      background-color: govuk-colour('black');
+      background-color: govuk-colour('blue');
       color: govuk-colour('white');
     }
-    
+
     &.started {
       background-color: govuk-colour('white');
-      color: govuk-color('black');
-      outline: 4px solid govuk-colour('black');
+      color: govuk-color('blue');
+      outline: 4px solid govuk-colour('blue');
       outline-offset: -4px;
     }
-    
+
     &.not_started {
       background-color: govuk-colour('white');
       color: govuk-color('black');
