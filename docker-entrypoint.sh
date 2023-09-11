@@ -27,7 +27,7 @@ fi
 
 if [ -z ${ENVIRONMENT} ]
 then
-  echo "ENVIRONMENT is not defined so the app startup as intended"
+  echo "ENVIRONMENT is not defined so the app may not startup as intended"
 else
   if [ !${ENVIRONMENT}=="development" ]
   then
