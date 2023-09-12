@@ -22,6 +22,17 @@ variable "admin_email_address" {
   sensitive   = true
 }
 
+variable "gcs_credentials" {
+  description = "Google Cloud Storage credentials"
+  type        = string
+  sensitive   = true
+}
+
+variable "tracking_id" {
+  description = "Google Tag Manager tracking"
+  type        = string
+}
+
 variable "kv_certificate_authority_username" {
   description = "Username for the Certificate provider"
   type        = string
