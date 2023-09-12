@@ -135,7 +135,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
     set_template(CONTINUE_TRAINING_TEMPLATE_ID)
     set_personalisation(
       mod_number: mod.position,
-      mod_name: mod.name,
+      mod_name: mod.title,
       url: root_url,
     )
     mail(to: record.email)
@@ -147,7 +147,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
     set_template(NEW_MODULE_TEMPLATE_ID)
     set_personalisation(
       mod_number: mod.position,
-      mod_name: mod.name,
+      mod_name: mod.title,
       mod_criteria: mod.criteria,
       url: root_url,
     )
