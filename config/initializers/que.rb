@@ -3,7 +3,7 @@ Que::Scheduler.configure do |config|
     DashboardJob: { cron: Rails.application.config.dashboard_update_interval },
     CompleteRegistrationMailJob: { cron: Rails.application.config.mail_job_interval },
     StartTrainingMailJob: { cron: Rails.application.config.mail_job_interval },
-    ContinueTrainingMailJob: { cron: Rails.application.config.mail_job_interval },
+    # ContinueTrainingMailJob: { cron: Rails.application.config.mail_job_interval },
   }
 end
 
