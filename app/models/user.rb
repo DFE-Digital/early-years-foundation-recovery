@@ -75,6 +75,7 @@ class User < ApplicationRecord
   scope :not_started_training, -> { reject(&:course_started?) }
   scope :course_in_progress, -> { select(&:course_in_progress?) }
 
+  scope :pre_nudge_mail_confimation, -> { where("confirmed_at < ?", Rails.application.nudge_email_launch_date - 4.weeks) }
   scope :training_email_recipients, -> { where(training_emails: [true, nil]) }
   scope :early_years_email_recipients, -> { where(early_years_emails: true) }
   scope :without_notes, -> { where.not(id: with_notes) }
@@ -91,6 +92,8 @@ class User < ApplicationRecord
   scope :complete_registration_mail_job_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_incomplete }
   scope :continue_training_mail_job_recipients, -> { order(:id).training_email_recipients.select(&:continue_training_recipient?) }
   scope :new_module_mail_job_recipients, -> { order(:id).training_email_recipients.select(&:completed_available_modules?) }
+  scope :historical_start_training_mail_job_recipients, -> { order(:id).training_email_recipients.pre_nudge_mail_confimation.registration_complete.not_started_training }
+  scope :historical_complete_registration_mail_job_recipients, -> { order(:id).training_email_recipients.pre_nudge_mail_confimation.registration_incomplete }
 
   scope :dashboard, -> { not_closed }
 

@@ -125,5 +125,9 @@ module EarlyYearsFoundationRecovery
     def non_linear_launch_date
       Time.zone.local(2023, 7, 10, 15, 43, 0)
     end
+
+    def nudge_email_launch_date
+      Time.zone.local(2023, 9, 11, 15, 30, 0)
+    end
   end
 end

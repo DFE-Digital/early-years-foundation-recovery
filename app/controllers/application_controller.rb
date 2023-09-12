@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_registered_user!
     authenticate_user! unless user_signed_in?
+    current_user.update!(last_logged_in_at: Time.zone.now)
     return true if current_user.registration_complete?
 
     redirect_to edit_registration_name_path, notice: 'Please complete registration'
