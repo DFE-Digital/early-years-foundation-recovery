@@ -29,7 +29,7 @@ variable "gcs_credentials" {
 }
 
 variable "tracking_id" {
-  description = "Google Tag Manager tracking"
+  description = "Google Tag Manager tracking ID"
   type        = string
 }
 
