@@ -75,7 +75,7 @@ class User < ApplicationRecord
   scope :not_started_training, -> { reject(&:course_started?) }
   scope :course_in_progress, -> { select(&:course_in_progress?) }
 
-  scope :pre_nudge_mail_confirmation, -> { where("confirmed_at < ?", Rails.application.nudge_email_launch_date - 4.weeks) }
+  scope :pre_nudge_mail_confirmation, -> { where('confirmed_at < ?', Rails.application.nudge_email_launch_date - 4.weeks) }
   scope :training_email_recipients, -> { where(training_emails: [true, nil]) }
   scope :early_years_email_recipients, -> { where(early_years_emails: true) }
   scope :without_notes, -> { where.not(id: with_notes) }
@@ -370,9 +370,7 @@ class User < ApplicationRecord
   def continue_training_recipient?
     return false unless course_in_progress?
 
-    recent_visits = Ahoy::Visit.last_4_weeks
-    old_visits = Ahoy::Visit.month_old.reject { |visit| recent_visits.pluck(:user_id).include?(visit.user_id) }
-    old_visits.pluck(:user_id).include?(id)
+    !last_logged_in_at.nil? && last_logged_in_at < 4.weeks.ago
   end
 
 private
