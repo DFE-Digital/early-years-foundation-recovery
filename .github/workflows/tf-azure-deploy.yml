@@ -12,12 +12,6 @@ on:
           - development
           - staging
           - production
-  push:
-    branches:
-      - main
-    paths:
-      - 'terraform-azure/**'
-      - '!terraform-azure/**.md'
 
 defaults:
   run:
