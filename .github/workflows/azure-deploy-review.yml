@@ -62,7 +62,7 @@ jobs:
 
       # Build and push image
       - name: Build and push dependencies
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: .
           build-args: BUILDKIT_INLINE_CACHE=1
@@ -73,7 +73,7 @@ jobs:
           target: deps
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           target: app
           context: .
