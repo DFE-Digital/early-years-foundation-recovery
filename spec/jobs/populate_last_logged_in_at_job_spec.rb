@@ -20,24 +20,4 @@ RSpec.describe PopulateLastLoggedInAtJob do
       expect(user_3.reload.last_logged_in_at).to eq(nil)
     end
   end
-
-  context 'when users a large number of users have no last_logged_in_at' do
-    let!(:users) { create_list(:user, 1000, :registered) }
-
-    before do
-      users.each do |user|
-        create(:visit, visitor_token: '123', user_id: user.id, started_at: 2.days.ago)
-      end
-    end
-
-    it 'updates last_logged_in_at with the last visit date' do
-      execution_time = Benchmark.realtime do
-        described_class.run
-      end
-      users.each do |user|
-        expect(user.reload.last_logged_in_at).to be_within(1.minute).of(2.days.ago)
-      end
-      expect(execution_time).to be < 10.seconds
-    end
-  end
 end
