@@ -181,7 +181,7 @@ variable "webapp_config_contentful_environment" {
 
 variable "webapp_config_contentful_preview" {
   default = null
-  type = string
+  type    = string
 }
 
 variable "webapp_config_domain" {

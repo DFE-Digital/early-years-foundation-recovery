@@ -39,7 +39,7 @@ jobs:
         with:
           ref: ${{ inputs.ref || github.ref_name }}
 
-      # Tag the branch with the release candidate version
+      # Tag the branch with the release version
       - name: Tag Version
         if: ${{ inputs.version }}
         run: |
