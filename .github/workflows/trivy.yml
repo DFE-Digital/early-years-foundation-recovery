@@ -37,7 +37,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       -
         name: Build and push Docker image (dependencies)
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           target: deps
           context: .
@@ -51,7 +51,7 @@ jobs:
             ${{ env.REGISTRY }}:deps
       -
         name: Build and push Docker image (application)
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           target: app
           context: .
