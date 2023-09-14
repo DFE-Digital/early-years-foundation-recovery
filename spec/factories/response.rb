@@ -33,6 +33,7 @@ FactoryBot.define do
         ]
       end
     end
+
     trait :summative do
       schema do
         [

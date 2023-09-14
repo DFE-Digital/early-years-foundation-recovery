@@ -42,7 +42,7 @@ module Training
       incorrect_options.map(&:id)
     end
 
-    # @return [Hash{Symbol => Array<Hash{Symbol => nil, Integer}>}]
+    # @return [Hash{Symbol => Array<Hash, Integer>}]
     def schema
       { options: options.map(&:schema), correct: correct_answers, incorrect: incorrect_answers }
     end
@@ -92,7 +92,7 @@ module Training
       alias_method :checked?, :checked
       alias_method :disabled?, :disabled
 
-      # @return [Hash{Symbol => nil, Integer}]
+      # @return [Hash{Symbol => nil, String}]
       def schema
         { id: id, label: label }
       end
