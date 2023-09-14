@@ -175,10 +175,12 @@ variable "webapp_config_bot_token" {
 }
 
 variable "webapp_config_contentful_environment" {
-  type = string
+  default = null
+  type    = string
 }
 
 variable "webapp_config_contentful_preview" {
+  default = null
   type = string
 }
 
