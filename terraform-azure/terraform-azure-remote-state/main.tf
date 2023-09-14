@@ -51,6 +51,7 @@ resource "azurerm_storage_account" "tfstate" {
   min_tls_version                 = "TLS1_2"
   account_replication_type        = "LRS"
   allow_nested_items_to_be_public = false
+
   queue_properties {
     logging {
       delete                = true
