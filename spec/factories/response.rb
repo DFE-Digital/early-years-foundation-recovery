@@ -30,6 +30,7 @@ FactoryBot.define do
             ],
             "incorrect": [],
           },
+          'confidence',
         ]
       end
     end
@@ -50,6 +51,7 @@ FactoryBot.define do
             ],
             "incorrect": [1, 4],
           },
+          'summative',
         ]
       end
     end

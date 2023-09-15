@@ -29,7 +29,7 @@ module Data
 
       # @return [Hash{Array<String, String, String> => Integer}]
       def confidence_check_scores
-        Response.confidence_check.group(:training_module, :question_name, :answers).count
+        Response.confidence.group(:training_module, :question_name, :answers).count
       end
     end
   end

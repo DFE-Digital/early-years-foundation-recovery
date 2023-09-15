@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Data::ConfidenceCheckScores do
+  before do
+    skip unless ENV['DISABLE_USER_ANSWER'].present?
+  end
+
   let(:headers) do
     %w[
       Module

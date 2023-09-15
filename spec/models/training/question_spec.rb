@@ -24,6 +24,10 @@ RSpec.describe Training::Question, type: :model do
         ['Wrong answer 1'],
       ]
     end
+
+    it '#question_type' do
+      expect(question.question_type).to eq 'formative'
+    end
   end
 
   describe '#options' do

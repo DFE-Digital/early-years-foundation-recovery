@@ -62,12 +62,21 @@ module Training
 
     # @return [Ahoy::Event] Update action
     def track_question_answer
-      track('questionnaire_answer',
-            uid: content.id,
-            mod_uid: mod.id,
-            type: content.assessments_type, # TODO: will be replaced with content.page_type
-            success: current_user_response.correct?,
-            answers: current_user_response.answers)
+      if ENV['DISABLE_USER_ANSWER'].present?
+        track('questionnaire_answer',
+              uid: content.id,
+              mod_uid: mod.id,
+              type: content.question_type,
+              success: current_user_response.correct?,
+              answers: current_user_response.answers)
+      else
+        track('questionnaire_answer',
+              uid: content.id,
+              mod_uid: mod.id,
+              type: content.assessments_type, # TODO: will be replaced with content.page_type
+              success: current_user_response.correct?,
+              answers: current_user_response.answers)
+      end
     end
   end
 end
