@@ -13,6 +13,7 @@ RSpec.describe Pagination do
     specify { expect(page.topic).to eq(4) }
   end
 
+  # used in debug summary
   describe '#position_within' do
     it 'returns the oridinal' do
       expect(page.position_within(page.parent.pages)).to eq '8th'

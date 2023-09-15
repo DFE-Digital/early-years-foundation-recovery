@@ -6,11 +6,6 @@ module ContentTypes
     page_type.eql?('interruption_page')
   end
 
-  # @return [Boolean]
-  def module_intro?
-    page_type.eql?('module_intro')
-  end
-
   # ============================================================================
   # TRAINING SECTIONS
   # ============================================================================

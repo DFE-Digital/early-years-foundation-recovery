@@ -83,8 +83,6 @@ module Pagination
 
   # @return [Integer]
   def section_size
-    return 0 if module_intro?
-
     section_content.count { |c| !c.submodule_intro? }
   end
 

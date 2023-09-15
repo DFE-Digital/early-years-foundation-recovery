@@ -16,12 +16,6 @@ RSpec.describe ContentTypes, type: :model do
     specify { expect(content).to be_interruption_page }
   end
 
-  describe '#module_intro?' do
-    before { content.page_type = 'module_intro' }
-
-    specify { expect(content).to be_module_intro }
-  end
-
   describe '#submodule_intro?' do
     before { content.page_type = 'sub_module_intro' }
 
@@ -104,5 +98,31 @@ RSpec.describe ContentTypes, type: :model do
     before { content.page_type = 'certificate' }
 
     specify { expect(content).to be_certificate }
+  end
+
+  describe '#page_type' do
+    let(:mod) { Training::Module.by_name(:alpha) }
+
+    let(:types) { mod.pages.map(&:page_type).uniq }
+
+    specify do
+      expect(types).to eq(%w[
+        interruption_page
+        sub_module_intro
+        topic_intro
+        text_page
+        formative_questionnaire
+        video_page
+        summary_intro
+        recap_page
+        assessment_intro
+        summative_questionnaire
+        assessment_results
+        confidence_intro
+        confidence_questionnaire
+        thankyou
+        certificate
+      ])
+    end
   end
 end

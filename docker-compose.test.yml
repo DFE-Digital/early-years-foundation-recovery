@@ -9,12 +9,7 @@ services:
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_test
       - RAILS_ENV=test
       - DOMAIN=recovery.app
-      # - CONTENTFUL_ENVIRONMENT=test
-
-      # revert before commit
-      - CONTENTFUL_ENVIRONMENT=demo-copy
-      - CONTENTFUL_PREVIEW=true
-
+      - CONTENTFUL_ENVIRONMENT=test
       - CONTENTFUL_MANAGEMENT_TOKEN=
       - BOT_TOKEN=bot_token
       - TIMEOUT_MINUTES=25
