@@ -92,6 +92,7 @@ jobs:
         with:
           app-name: ${{ vars.WEBAPP_NAME }}
           images: ${{ env.DOCKER_IMAGE }}:${{ inputs.version || github.ref_name }}
+          slot-name: ${{ vars.WEBAPP_DEPLOY_SLOT }}
 
       # Deploy Background Worker
       - name: Deploy to Azure Container Instances
