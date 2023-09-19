@@ -8,7 +8,7 @@ RSpec.describe NewModuleMailJob do
   let(:included) { [user] }
 
   let(:excluded) do
-    create_list :user, 2, :registered, confirmed_at: 4.weeks.ago
+    create_list :user, 2, :registered, confirmed_at: 4.weeks.ago, module_time_to_completion: { alpha: 1 }
   end
 
   # Recipients must have completed all available modules - in this case, alpha and bravo
