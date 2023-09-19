@@ -12,12 +12,12 @@ class CourseProgress
 
   # @return [Array<Training::Module>] 'Available modules' section
   def available_modules
-    by_state(:upcoming).select { |mod| available?(mod) && !mod.draft? }
+    by_state(:upcoming).reject(&:draft?)
   end
 
   # @return [Array<Training::Module>] 'Future modules in this course' section
   def upcoming_modules
-    by_state(:upcoming).select { |mod| !available?(mod) || mod.draft? }
+    by_state(:upcoming).select(&:draft?)
   end
 
   # @return [Array<Array>] 'Completed modules' section
@@ -43,7 +43,6 @@ class CourseProgress
         draft: #{mod.draft?}
         started: #{started?(mod)}
         completed: #{completed?(mod)}
-        available: #{available?(mod)}
         last: #{mod.thankyou_page&.name unless mod.draft?}
         certificate: #{mod.certificate_page&.name unless mod.draft?}
         milestone: #{module_progress(mod).milestone}
@@ -79,12 +78,6 @@ private
   # @return [Boolean]
   def upcoming?(mod)
     !started?(mod) && !completed?(mod)
-  end
-
-  # @param mod [Training::Module]
-  # @return [Boolean] true unless a mandatory prerequisite module must be finished
-  def available?(mod)
-    mod.depends_on.present? ? completed?(mod.depends_on) : true
   end
 
   # @param state [Symbol, String] :active, :upcoming or :completed

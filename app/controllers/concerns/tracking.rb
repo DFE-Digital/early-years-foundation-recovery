@@ -15,9 +15,15 @@ private
     properties = {
       path: request.fullpath,     # user perspective
       **request.path_parameters,  # developer perspective
+      **tracking_properties,
       **data,
     }
     ahoy.track(key, properties)
+  end
+
+  # @return [Hash]
+  def tracking_properties
+    {}
   end
 
   # Check if a specific user event has already been logged
