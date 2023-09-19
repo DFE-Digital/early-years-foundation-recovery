@@ -5,7 +5,7 @@
 - content_for :page_title do
   = html_title mod.title, content.heading
 
-- content_for :content_page do
+- content_for :page_content do
   = page_number(**content.pagination)
 
   h1= content.heading

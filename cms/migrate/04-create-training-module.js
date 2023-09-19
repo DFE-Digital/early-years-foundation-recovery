@@ -38,19 +38,6 @@ module.exports = function(migration) {
     required: true
   })
 
-  trainingModule.createField('depends_on', {
-    name: 'Depends on',
-    type: 'Link',
-    linkType: 'Entry',
-    validations: [
-      {
-        linkContentType: [
-          'trainingModule'
-        ]
-      }
-    ]
-  })
-
   trainingModule.createField('short_description', {
     name: 'Short description',
     type: 'Text',

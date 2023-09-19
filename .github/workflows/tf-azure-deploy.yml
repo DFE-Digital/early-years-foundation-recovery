@@ -12,12 +12,6 @@ on:
           - development
           - staging
           - production
-  push:
-    branches:
-      - main
-    paths:
-      - 'terraform-azure/**'
-      - '!terraform-azure/**.md'
 
 defaults:
   run:
@@ -46,7 +40,7 @@ jobs:
     steps:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Install the latest version of the Terraform CLI
       - name: Setup Terraform
@@ -139,7 +133,7 @@ jobs:
     steps:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
       - name: Setup Terraform
