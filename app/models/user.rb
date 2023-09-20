@@ -88,7 +88,7 @@ class User < ApplicationRecord
   scope :with_events, -> { joins(:events) }
   scope :with_module_start_events, -> { with_events.merge(Ahoy::Event.module_start) }
   scope :with_module_complete_events, -> { with_events.merge(Ahoy::Event.module_complete) }
-  scope :completed_available_modules, -> { with_module_complete_events.having('count(ahoy_events.id) = ?', ModuleRelease.count).group('users.id') }
+  scope :completed_available_modules, -> { with_module_complete_events.group('users.id').having('count(ahoy_events.id) = ?', ModuleRelease.count) }
   scope :started_training, -> { with_module_start_events.distinct }
   scope :not_started_training, -> { where.not(id: with_module_start_events) }
 
@@ -100,7 +100,7 @@ class User < ApplicationRecord
   scope :start_training_mail_job_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_complete.not_started_training }
   scope :complete_registration_mail_job_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_incomplete }
   scope :continue_training_mail_job_recipients, -> { order(:id).training_email_recipients.no_visits_this_month.distinct(&:course_in_progress?) }
-  scope :new_module_mail_job_recipients, -> { order(:id).training_email_recipients.completed_available_modules }
+  scope :new_module_mail_job_recipients, -> { order(:id).training_email_recipients.completed_available_modules.to_a }
 
   scope :dashboard, -> { not_closed }
 
