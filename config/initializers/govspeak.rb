@@ -1,7 +1,22 @@
 GOVSPEAK_TEMPLATES = {
   prompt: Slim::Template.new('app/views/govspeak/_prompt.html.slim'),
   video: Slim::Template.new('app/views/govspeak/_video.html.slim'),
+  quote: Slim::Template.new('app/views/govspeak/_quote.html.slim'),
 }.freeze
+
+# Big Quote
+Govspeak::Document.extension('quote', Govspeak::Document.surrounded_by('$QUOTE')) do |content|
+
+  citation = content.split("\n").last
+  quote = content.gsub(citation, Types::EMPTY_STRING)
+
+  locals = {
+    quote: Govspeak::Document.to_html(quote),
+    citation: citation,
+  }
+
+  GOVSPEAK_TEMPLATES[:quote].render(nil, locals)
+end
 
 # Custom Practitioner Prompts
 %i[info book brain].each do |icon|
