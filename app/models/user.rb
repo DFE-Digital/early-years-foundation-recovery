@@ -36,13 +36,18 @@ class User < ApplicationRecord
   has_many :events, class_name: 'Ahoy::Event'
   has_many :notes
 
-  # TODO: use scope with email alert
+  # account status
+  scope :public_beta_only_registration_complete, -> { registered_since_private_beta.registration_complete }
+  scope :since_public_beta, -> { where(created_at: Rails.application.public_beta_launch_date..Time.zone.now) }
+  scope :confirmed, -> { where.not(confirmed_at: nil) }
+  scope :unconfirmed, -> { where(confirmed_at: nil) }
+  scope :locked_out, -> { where.not(locked_at: nil) }
+  scope :closed, -> { where.not(closed_at: nil) }
+  scope :not_closed, -> { where(closed_at: nil) }
   # created an account within public beta but still not using service
   scope :registration_incomplete, -> { where(registration_complete: false) }
-
   # completed registration within public beta (may include private beta users)
   scope :registration_complete, -> { where(registration_complete: true) }
-
   # @note
   #   The default for :registration_complete was originally nil,
   #   when the registration journey was revised,
@@ -50,49 +55,40 @@ class User < ApplicationRecord
   #   and the default changed to false
   #
   scope :registered_since_private_beta, -> { where(private_beta_registration_complete: false) }
-
   # completed registration in both private and public beta
   scope :reregistered, -> { where(private_beta_registration_complete: true, registration_complete: true) }
-
   # only registered to completion within private beta
   scope :private_beta_only_registration_complete, -> { where(private_beta_registration_complete: true, registration_complete: false) }
-
   # registered within private beta but never completed
   scope :private_beta_only_registration_incomplete, -> { where(private_beta_registration_complete: nil) }
 
-  # new users only
-  scope :public_beta_only_registration_complete, -> { registered_since_private_beta.registration_complete }
-
-  scope :since_public_beta, -> { where(created_at: Rails.application.public_beta_launch_date..Time.zone.now) }
-
-  scope :confirmed, -> { where.not(confirmed_at: nil) }
-  scope :unconfirmed, -> { where(confirmed_at: nil) }
-  scope :locked_out, -> { where.not(locked_at: nil) }
-  scope :since_public_beta, -> { where(created_at: Rails.application.public_beta_launch_date..Time.zone.now) }
-  scope :month_old_confirmation, -> { where(confirmed_at: 4.weeks.ago.beginning_of_day..4.weeks.ago.end_of_day) }
-  scope :with_local_authority, -> { where.not(local_authority: nil) }
-  scope :with_notes, -> { joins(:notes).distinct.select(&:has_notes?) }
+  # training activity
   scope :not_started_training, -> { reject(&:course_started?) }
   scope :course_in_progress, -> { select(&:course_in_progress?) }
 
-  scope :training_email_recipients, -> { where(training_emails: [true, nil]) }
-  scope :early_years_email_recipients, -> { where(early_years_emails: true) }
+  # notes
+  scope :with_notes, -> { joins(:notes).merge(Note.filled) }
   scope :without_notes, -> { where.not(id: with_notes) }
 
-  scope :closed, -> { where.not(closed_at: nil) }
-  scope :not_closed, -> { where(closed_at: nil) }
-  validates :closed_reason, presence: true, if: -> { context == :close_account }
-  validates :closed_reason_custom, presence: true, if: proc { |u| u.closed_reason == 'other' }
-
+  # assessments
   scope :with_assessments, -> { joins(:user_assessments) }
   scope :with_passing_assessments, -> { with_assessments.merge(UserAssessment.passes) }
 
+  # emails
+  scope :training_email_recipients, -> { where(training_emails: [true, nil]) }
+  scope :early_years_email_recipients, -> { where(early_years_emails: true) }
   scope :start_training_mail_job_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_complete.not_started_training }
   scope :complete_registration_mail_job_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_incomplete }
   scope :continue_training_mail_job_recipients, -> { order(:id).training_email_recipients.select(&:continue_training_recipient?) }
   scope :new_module_mail_job_recipients, -> { order(:id).training_email_recipients.select(&:completed_available_modules?) }
 
+  # data
   scope :dashboard, -> { not_closed }
+  scope :month_old_confirmation, -> { where(confirmed_at: 4.weeks.ago.beginning_of_day..4.weeks.ago.end_of_day) }
+  scope :with_local_authority, -> { where.not(local_authority: nil) }
+
+  validates :closed_reason, presence: true, if: -> { context == :close_account }
+  validates :closed_reason_custom, presence: true, if: proc { |u| u.closed_reason == 'other' }
 
   validates :first_name, :last_name, :setting_type_id,
             presence: true,
@@ -105,7 +101,7 @@ class User < ApplicationRecord
   validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
 
   # @return [Boolean]
-  def has_notes?
+  def notes?
     notes.any?(&:filled?)
   end
 
