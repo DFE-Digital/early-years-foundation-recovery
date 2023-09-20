@@ -6,7 +6,6 @@ GOVSPEAK_TEMPLATES = {
 
 # Big Quote
 Govspeak::Document.extension('quote', Govspeak::Document.surrounded_by('$QUOTE')) do |content|
-
   citation = content.split("\n").last
   quote = content.gsub(citation, Types::EMPTY_STRING)
 
