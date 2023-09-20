@@ -1,23 +1,19 @@
-name: 'App Deploy [Azure - DEV]'
+name: 'App Deploy [Azure - PROD]'
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Create release version ("vx.x.x")'
+        type: string
+        required: true
+      ref:
+        description: 'Release candidate to deploy ("rcx.x.x")'
+        type: string
+        required: true
   push:
-    branches:
-      - main
-    paths-ignore:
-      - '**/*.md'
-      - .docker*
-      - .env.example
-      - .gitignore
-      - .pa11yci
-      - .tool-versions
-      - .yardopts
-      - bin/*
-      - docker-compose.*
-      - terraform/**
-      - terraform-azure/**
-      - uml/*
+    tags:
+      - v*
 
 # Permissions for OIDC authentication
 permissions:
@@ -34,12 +30,22 @@ env:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment: development
+    environment: production
 
     steps:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.ref_name }}
+
+      # Tag the branch with the release version
+      - name: Tag Version
+        if: ${{ inputs.version }}
+        run: |
+          git tag --force ${{ inputs.version }}
+          git push --force origin refs/tags/${{ inputs.version }}
+          echo "HEAD=$(git rev-parse ${{ inputs.version }})" >> $GITHUB_ENV
 
       # Create and boot Docker image builder
       - name: Set up Docker Buildx
@@ -57,7 +63,7 @@ jobs:
 
       # Build and push image
       - name: Build and push Docker Image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v4
         with:
           target: app
           context: .
@@ -67,9 +73,10 @@ jobs:
             SHA=${{ github.sha }}
           cache-from: |
             ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+            ${{ env.DOCKER_IMAGE }}:${{ inputs.ref || github.ref_name }}
           tags: |
             ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
-            ${{ env.DOCKER_IMAGE }}:latest
+            ${{ env.DOCKER_IMAGE }}:${{ inputs.version || github.ref_name }}
 
       # Login to Azure using OIDC
       - name: Login to Azure CLI
@@ -84,7 +91,8 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ vars.WEBAPP_NAME }}
-          images: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+          images: ${{ env.DOCKER_IMAGE }}:${{ inputs.version || github.ref_name }}
+          slot-name: ${{ vars.WEBAPP_DEPLOY_SLOT }}
 
       # Deploy Background Worker
       - name: Deploy to Azure Container Instances
@@ -94,7 +102,7 @@ jobs:
           inlineScript: |
             az container create --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.WORKERAPP_NAME }} \
-              --image ${{ env.DOCKER_IMAGE }}:${{ github.sha }} \
+              --image ${{ env.DOCKER_IMAGE }}:${{ inputs.version || github.ref_name }} \
               --cpu 1 \
               --memory 2 \
               --command-line "bundle exec que" \
@@ -103,4 +111,4 @@ jobs:
               --vnet ${{ secrets.AZURE_VNET }} \
               --subnet ${{ secrets.AZURE_WORKER_APP_SUBNET }} \
               --ip-address Private \
-              --environment-variables RAILS_ENV=${{ vars.WEBAPP_CONFIG_RAILS_ENV }} RAILS_MASTER_KEY=${{ secrets.WEBAPP_CONFIG_RAILS_MASTER_KEY }} RAILS_LOG_TO_STDOUT=${{ vars.WEBAPP_CONFIG_RAILS_LOG_TO_STDOUT }} GCS_CREDENTIALS=${{ secrets.GCS_CREDENTIALS }} GOOGLE_CLOUD_BUCKET=${{ vars.WEBAPP_CONFIG_GOOGLE_CLOUD_BUCKET }} DATABASE_URL=${{ secrets.WEBAPP_DATABASE_URL }} GOVUK_APP_DOMAIN=localhost GOVUK_WEBSITE_ROOT=www
+              --environment-variables RAILS_ENV=${{ vars.WEBAPP_CONFIG_RAILS_ENV }} RAILS_MASTER_KEY=${{ secrets.WEBAPP_CONFIG_RAILS_MASTER_KEY }} RAILS_LOG_TO_STDOUT=${{ vars.WEBAPP_CONFIG_RAILS_LOG_TO_STDOUT }} GOOGLE_CLOUD_BUCKET=${{ vars.WEBAPP_CONFIG_GOOGLE_CLOUD_BUCKET }} DATABASE_URL=${{ secrets.WEBAPP_DATABASE_URL }} GOVUK_APP_DOMAIN=localhost GOVUK_WEBSITE_ROOT=www

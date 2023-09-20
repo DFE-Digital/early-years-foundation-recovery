@@ -25,15 +25,23 @@ else
   bundle exec rails db:create db:migrate
 fi
 
-bundle exec rails db:prepare assets:precompile
-
 if [ -z ${ENVIRONMENT} ]
 then
-  echo "ENVIRONMENT is not defined so development database may not contain seed data"
+  echo "ENVIRONMENT is not defined so the app may not startup as intended"
 else
   if [ !${ENVIRONMENT}=="development" ]
   then
-    bundle exec rails db:seed
+    bundle exec rails db:prepare assets:precompile db:seed sitemap:refresh:no_ping
+  fi
+
+  if [ !${ENVIRONMENT}=="staging" ]
+  then
+    bundle exec rails db:prepare assets:precompile
+  fi
+
+  if [ !${ENVIRONMENT}=="production" ]
+  then
+    rm public/robots.txt && touch public/robots.txt && bundle exec rails db:prepare assets:precompile
   fi
 fi
 

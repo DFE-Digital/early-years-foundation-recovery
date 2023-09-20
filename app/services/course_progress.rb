@@ -50,6 +50,14 @@ class CourseProgress
     end
   end
 
+  # @param mod [Training::Module]
+  # @return [Boolean]
+  def completed?(mod)
+    return false if mod.draft?
+
+    module_progress(mod).completed?
+  end
+
 private
 
   # @param mod [Training::Module]
@@ -58,14 +66,6 @@ private
     return false if mod.draft?
 
     module_progress(mod).started?
-  end
-
-  # @param mod [Training::Module]
-  # @return [Boolean]
-  def completed?(mod)
-    return false if mod.draft?
-
-    module_progress(mod).completed?
   end
 
   # @param mod [Training::Module]

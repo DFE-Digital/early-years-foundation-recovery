@@ -47,6 +47,7 @@ module EarlyYearsFoundationRecovery
 
     config.google_cloud_bucket = ENV.fetch('GOOGLE_CLOUD_BUCKET', '#GOOGLE_CLOUD_BUCKET_env_var_missing')
     config.dashboard_update_interval = ENV.fetch('DASHBOARD_UPDATE_INTERVAL', '0 0 * * *') # Midnight daily
+    config.mail_job_interval = ENV.fetch('MAIL_JOB_INTERVAL', '0 12 * * *') # Noon daily
 
     config.bot_token = ENV['BOT_TOKEN']
     config.feedback_url = ENV.fetch('FEEDBACK_URL', '#FEEDBACK_URL_env_var_missing')

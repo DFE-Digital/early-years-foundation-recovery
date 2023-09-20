@@ -7,6 +7,18 @@
 # versions of RuboCop, may require this file to be generated again.
 
 # Offense count: 1
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: AllowInHeredoc.
+Layout/TrailingWhitespace:
+  Exclude:
+    - 'app/jobs/application_job.rb'
+
+# Offense count: 1
+Lint/MixedRegexpCaptureTypes:
+  Exclude:
+    - 'lib/seed_course_entries.rb'
+
+# Offense count: 1
 Lint/ShadowedException:
   Exclude:
     - 'app/models/concerns/to_csv.rb'
@@ -39,8 +51,8 @@ Rails/CreateTableWithTimestamps:
 # Include: app/**/*.rb, config/**/*.rb, db/**/*.rb, lib/**/*.rb
 Rails/Output:
   Exclude:
+    - 'app/jobs/application_job.rb'
     - 'app/jobs/content_check_job.rb'
-    - 'app/jobs/dashboard_job.rb'
     - 'app/jobs/fill_page_views_job.rb'
     - 'app/models/concerns/to_csv.rb'
     - 'app/services/content_integrity.rb'

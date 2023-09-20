@@ -44,7 +44,7 @@
         - row.with_value { nil }
       - email_preferences.with_row do |row|
         - row.with_key { 'Email updates about this training course' }
-        - row.with_value(text: current_user.training_emails ? t('my_account.training_emails_true') : t('my_account.training_emails_false'), classes: ['data-hj-suppress'])
+        - row.with_value(text: current_user.training_emails.nil? || current_user.training_emails ? t('.training_emails_true') : t('.training_emails_false'), classes: ['data-hj-suppress'])
         - row.with_action(text: t('links.change'), href: edit_training_emails_user_path, visually_hidden_text: 'training_emails', html_attributes: { id: :edit_training_emails_user })
 
     = content_resource 'my_account.closing.information'

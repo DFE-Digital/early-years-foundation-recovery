@@ -12,12 +12,6 @@ on:
           - development
           - staging
           - production
-  push:
-    branches:
-      - main
-    paths:
-      - 'terraform-azure/**'
-      - '!terraform-azure/**.md'
 
 defaults:
   run:
@@ -32,6 +26,8 @@ env:
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  ARM_USE_OIDC: true
+  ARM_SKIP_PROVIDER_REGISTRATION: true
 
 jobs:
   terraform-plan:
@@ -44,12 +40,13 @@ jobs:
     steps:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Install the latest version of the Terraform CLI
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
+          terraform_version: 1.5.6
           terraform_wrapper: false
 
       # Initialise a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
@@ -66,15 +63,17 @@ jobs:
       - name: Terraform Format
         run: terraform fmt -check
 
-      # Generates Terraform variable files
-      - name: Terraform Variables
+      # Generates Terraform input variables
+      - name: Generate Terraform Variables
         shell: bash
         env:
           WEB_SECRETS: ${{ toJSON(secrets) }}
-          WEB_VARS: ${{ toJSON(vars) }
+          WEB_VARS: ${{ toJSON(vars) }}
         run: |
-          printf '%s\n' "${WEB_SECRETS,,}" > web-secrets.auto.tfvars.json
-          printf '%s\n' "${WEB_VARS,,}" > web-vars.auto.tfvars.json
+          printf '%s\n' "$WEB_SECRETS" > tmp-secrets.json
+          printf '%s\n' "$WEB_VARS" > tmp-vars.json
+          jq 'with_entries(.key |= ascii_downcase)' tmp-secrets.json > web-secrets.auto.tfvars.json
+          jq 'with_entries(.key |= ascii_downcase)' tmp-vars.json > web-vars.auto.tfvars.json
 
       # Generates an execution plan for Terraform
       # An exit code of 0 indicated no changes, 1 a terraform failure, 2 there are pending changes.
@@ -134,11 +133,13 @@ jobs:
     steps:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.6
 
       # Initialise a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
@@ -149,15 +150,17 @@ jobs:
           -backend-config="container_name=${{ secrets.TERRAFORM_STATE_STORAGE_CONTAINER_NAME }}"
           -backend-config="key=${{ secrets.TERRAFORM_STATE_KEY }}"
 
-      # Generates Terraform variable files
-      - name: Terraform Variables
+      # Generates Terraform input variables
+      - name: Generate Terraform Variables
         shell: bash
         env:
           WEB_SECRETS: ${{ toJSON(secrets) }}
-          WEB_VARS: ${{ toJSON(vars) }
+          WEB_VARS: ${{ toJSON(vars) }}
         run: |
-          printf '%s\n' "${WEB_SECRETS,,}" > web-secrets.auto.tfvars.json
-          printf '%s\n' "${WEB_VARS,,}" > web-vars.auto.tfvars.json
+          printf '%s\n' "$WEB_SECRETS" > tmp-secrets.json
+          printf '%s\n' "$WEB_VARS" > tmp-vars.json
+          jq 'with_entries(.key |= ascii_downcase)' tmp-secrets.json > web-secrets.auto.tfvars.json
+          jq 'with_entries(.key |= ascii_downcase)' tmp-vars.json > web-vars.auto.tfvars.json
 
       # Download saved plan from artifacts
       - name: Download Terraform Plan
