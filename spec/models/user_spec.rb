@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  # subject(:user) { build(:user, :registered, **params) }
-
   it 'is valid after registration' do
     expect(build(:user, :registered)).to be_valid
   end
@@ -172,6 +170,40 @@ RSpec.describe User, type: :model do
 
     it 'filters by user progress state' do
       expect(user.active_modules.map(&:name)).to eq %w[alpha bravo]
+    end
+  end
+
+  describe 'learning log' do
+    subject(:user) { create(:user, :registered) }
+
+    context 'with notes' do
+      before { create(:note, user: user) }
+
+      it '#notes? is true' do
+        expect(user).to be_notes
+      end
+
+      it '#with_notes includes the user' do
+        expect(described_class.with_notes).to include(user)
+      end
+
+      it '#without_notes excludes the user' do
+        expect(described_class.without_notes).not_to include(user)
+      end
+    end
+
+    context 'without notes' do
+      it '#notes? is false' do
+        expect(user).not_to be_notes
+      end
+
+      it '#with_notes excludes the user' do
+        expect(described_class.with_notes).not_to include(user)
+      end
+
+      it '#without_notes includes the user' do
+        expect(described_class.without_notes).to include(user)
+      end
     end
   end
 end
