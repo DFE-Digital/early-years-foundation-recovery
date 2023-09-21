@@ -12,12 +12,9 @@ module LinkHelper
     end
   end
 
-  # @param state [Symbol]
-  # @param mod [Training::Module]
-  # @param content [Training::Content]
-  #
-  # @return [String] not_started / started / failed / completed
-  def link_to_action(state, mod, content)
+  # @return [Array<String>]
+  def link_to_action
+    state, content = module_progress.call_to_action
     text = t(state, scope: 'module_call_to_action')
     path =
       if state.eql?(:failed)
@@ -26,7 +23,7 @@ module LinkHelper
         training_module_page_path(mod.name, content.name)
       end
 
-    govuk_button_link_to text, path, id: 'module-call-to-action'
+    [text, path]
   end
 
   # @return [String] next page (ends on certificate)
@@ -47,8 +44,10 @@ module LinkHelper
         training_module_page_path(mod.name, content.previous_item.name)
       end
 
+    style = content.section? ? 'section-intro-previous-button' : 'govuk-button--secondary'
+
     govuk_button_link_to 'Previous', path,
-                         class: 'govuk-button--secondary',
+                         class: style,
                          aria: { label: 'Go to the previous page' }
   end
 

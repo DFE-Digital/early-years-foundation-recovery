@@ -1,11 +1,9 @@
 # Content in sections, navigation
 #
 module Pagination
-  # BOOLEAN --------------------------------------------------------------------
-
   # @return [Boolean]
   def section?
-    submodule_intro? || summary_intro?
+    submodule_intro? || summary_intro? || certificate?
   end
 
   # @return [Boolean]
@@ -18,13 +16,6 @@ module Pagination
   # @return [Boolean]
   def page_numbers?
     topic_intro? || text_page?
-  end
-
-  # BOOLEAN --------------------------------------------------------------------
-
-  # @return [Hash{Symbol => Integer}]
-  def pagination
-    { current: section_content.index(self), total: section_size }
   end
 
   # @return [nil, Training::Page, Training::Video, Training::Question]
@@ -53,23 +44,21 @@ module Pagination
 
   # @return [Array<Training::Page, Training::Video, Training::Question>]
   def section_content
-    parent.content_by_submodule.fetch(submodule)
+    parent.content_sections.fetch(submodule)
   end
 
-  # TODO: duplicated in overview decroator #fetch_submodule_topic
+  # TODO: duplicated in overview decorator #fetch_submodule_topic
   #
   # @return [Array<Training::Page, Training::Video, Training::Question>]
   def subsection_content
-    parent.content_by_submodule_topic.fetch([submodule, topic])
+    parent.content_subsections.fetch([submodule, topic])
   end
-
-  # INTEGER --------------------------------------------------------------------
 
   # @return [nil, Integer]
   def submodule
     return if interruption_page?
 
-    submodule, _entries = parent.content_by_submodule.find { |_, values| values.include?(self) }
+    submodule, _entries = parent.content_sections.find { |_, values| values.include?(self) }
     submodule
   end
 
@@ -77,15 +66,17 @@ module Pagination
   def topic
     return if interruption_page?
 
-    (_submodule, topic), _entries = parent.content_by_submodule_topic.find { |_, values| values.include?(self) }
+    (_submodule, topic), _entries = parent.content_subsections.find { |_, values| values.include?(self) }
     topic
   end
 
+  # @see #debug_summary
   # @return [Integer]
   def section_size
     section_content.count { |c| !c.submodule_intro? }
   end
 
+  # @see #debug_summary
   # @return [Integer]
   def subsection_size
     subsection_content.count

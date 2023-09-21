@@ -28,7 +28,7 @@ pre.debug_dump
       | (submodule #{item.submodule} / topic #{item.topic})
 
     '
-    = page_number(**item.pagination)
+    = PaginationDecorator.new(item).page_numbers
     '
     = "- [#{item.page_type}]"
     br

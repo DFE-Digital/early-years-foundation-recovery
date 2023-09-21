@@ -6,11 +6,9 @@ class Training::PagesController < ApplicationController
 
   helper_method :mod,
                 :content,
-                :progress_bar,
+                :section_bar,
                 :module_progress,
                 :note
-
-  include Learning
 
   def index
     redirect_to training_module_page_path(mod_name, 'what-to-expect')
@@ -36,7 +34,11 @@ private
   end
 
   def render_page
-    render content.page_type
+    if content.section? && !content.certificate?
+      render 'section_intro'
+    else
+      render content.page_type
+    end
   rescue ActionView::MissingTemplate
     render 'text_page'
   end

@@ -6,10 +6,8 @@ module Training
 
     helper_method :mod,
                   :content,
-                  :progress_bar,
+                  :section_bar,
                   :current_user_response
-
-    include Learning
 
     def update
       if save_response!

@@ -11,7 +11,7 @@
   :text: The first submodule
   :inputs:
     - - :click_on
-      - Next
+      - Start section
 - :path: /modules/alpha/content-pages/1-1-1
   :text: 1-1-1
   :inputs:
@@ -53,7 +53,7 @@
   :text: The second submodule
   :inputs:
     - - :click_on
-      - Next
+      - Start section
 - :path: /modules/alpha/content-pages/1-2-1
   :text: 1-2-1
   :inputs:
@@ -90,7 +90,7 @@
   :text: Summary and next steps
   :inputs:
     - - :click_on
-      - Next
+      - Start section
 - :path: /modules/alpha/content-pages/1-3-1
   :text: Recap
   :inputs:

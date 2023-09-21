@@ -1,13 +1,11 @@
 = render 'debug'
 
-= render 'shared/progress_bar'
+= render 'shared/section_bar'
 
 - content_for :page_title do
   = html_title mod.title, content.heading
 
 - content_for :page_content do
-  = page_number(**content.pagination)
-
   h1= content.heading
   .gem-c-govspeak= translate_markdown(content.body)
 

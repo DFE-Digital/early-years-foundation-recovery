@@ -21,10 +21,14 @@ RSpec.describe 'Module overview page progress' do
       end
 
       within '#section-content-3' do
-        expect(page).to have_content 'not started', count: 4
+        expect(page).to have_content 'not started', count: 3
         expect(page).not_to have_link 'Recap'
         expect(page).not_to have_link 'End of module test'
         expect(page).not_to have_link 'Reflect on your learning'
+      end
+
+      within '#section-content-4' do
+        expect(page).to have_content 'not started', count: 1
         expect(page).not_to have_link 'Download your certificate'
       end
     end
@@ -196,7 +200,11 @@ RSpec.describe 'Module overview page progress' do
       end
 
       within '#section-content-3' do
-        expect(page).to have_content 'complete', count: 4
+        expect(page).to have_content 'complete', count: 3
+      end
+
+      within '#section-content-4' do
+        expect(page).to have_content 'complete', count: 1
       end
     end
   end

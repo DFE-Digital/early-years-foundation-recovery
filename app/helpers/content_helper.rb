@@ -37,30 +37,12 @@ module ContentHelper
                 aria: { label: "#{icon} icon" }
   end
 
-  # @param icon [String, Symbol] Fontawesome icon name
-  # @param style [String, Symbol] Icon weight
-  # @param colour [String, Symbol] Icon colour
-  # @param label [String, Symbol] Aria label
   # @return [String]
-  def progress_node(icon, style, colour, label)
-    content_tag :span, nil, class: 'fa-stack fa-1x', aria: { label: label } do
-      # white background
-      concat(content_tag(:i, nil, class: 'fa-solid fa-stack-2x fa-circle')) unless label == 'started'
-
-      concat(content_tag(:i, nil, class: "fa-#{style} fa-stack-2x fa-#{icon} #{colour}"))
-
-      # white circle overlay to adjust previous circle's thickness
-      concat(content_tag(:i, nil, class: 'small-circle fa-solid fa-stack-2x fa-circle')) if label == 'started'
-    end
-  end
-
-  # @param percentage [Integer] of line in left colour
-  # @param left_colour [String]
-  # @param right_colour [String]
-  # @return [String]
-  def progress_line(percentage, left_colour, right_colour)
-    content_tag :div, nil, class: 'line line--slice',
-                           style: "border-image-source: linear-gradient(to right, #{left_colour}, #{left_colour} #{percentage}%, #{right_colour} #{percentage}%, #{right_colour});"
+  def module_summary
+    content_resource 'module.overview.summary',
+                     title: mod.card_title,
+                     description: mod.description,
+                     criteria: mod.criteria
   end
 
   # @return [String]
@@ -68,18 +50,6 @@ module ContentHelper
     button = '<button class="govuk-link gem-c-print-link__button" onclick="window.print()" data-module="print-link" >Print this page</button>'.html_safe
     classes = ['gem-c-print-link', 'print-button'] + additional_classes
     content_tag :div, button, class: classes
-  end
-
-  # @see ModuleItem.pagination
-  # @see Questionnaire.pagination
-  #
-  # @return [String, nil]
-  def page_number(current:, total:)
-    return if current.blank?
-
-    content_tag :span, class: 'govuk-caption-l data-hj-allow' do
-      t('page_number', current: current, total: total)
-    end
   end
 
   # @param success [Boolean]
