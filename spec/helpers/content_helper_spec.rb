@@ -124,9 +124,9 @@ describe 'ContentHelper', type: :helper do
         let(:input) do
           <<~QUOTE
             $QUOTE
-            a bird in the hand is worth two in the bush
+            Life is trying things to see if they work.
 
-            anon
+            Ray Bradbury
             $QUOTE
           QUOTE
         end
@@ -134,9 +134,9 @@ describe 'ContentHelper', type: :helper do
         it 'builds semantic markup' do
           expect(html).to eq <<~QUOTE
             <div class="blockquote-container"><blockquote class="quote">
-            <p>a bird in the hand is worth two in the bush</p>
+            <p>Life is trying things to see if they work.</p>
 
-            <cite>anon</cite>
+            <cite>Ray Bradbury</cite>
             </blockquote></div>
           QUOTE
         end
