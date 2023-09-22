@@ -55,6 +55,11 @@ variable "webapp_app_settings" {
   type        = map(string)
 }
 
+variable "webapp_slot_app_settings" {
+  description = "App Settings are exposed as environment variables"
+  type        = map(string)
+}
+
 variable "webapp_docker_registry_url" {
   description = "URL to the Docker Registry"
   type        = string

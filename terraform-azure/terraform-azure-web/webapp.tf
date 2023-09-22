@@ -109,7 +109,7 @@ resource "azurerm_linux_web_app_slot" "webapp_slot" {
   app_service_id            = azurerm_linux_web_app.webapp.id
   https_only                = true
   virtual_network_subnet_id = var.webapp_subnet_id
-  app_settings              = var.webapp_app_settings
+  app_settings              = var.webapp_slot_app_settings
 
   site_config {
     app_command_line                  = var.webapp_startup_command

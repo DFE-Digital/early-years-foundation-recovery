@@ -153,6 +153,12 @@ variable "webapp_database_url" {
   sensitive   = true
 }
 
+variable "webapp_slot_database_url" {
+  description = "URL to the slot Database"
+  type        = string
+  sensitive   = true
+}
+
 variable "webapp_docker_registry_url" {
   description = "URL to the Docker Registry"
   type        = string
