@@ -409,9 +409,10 @@ settings the following classes can be added:
 
 [prototype-app]: https://eye-recovery.herokuapp.com
 [interim-prototype-app]: https://child-development-training-prototype.london.cloudapps.digital
-[production]: https://eyfs-covid-recovery.london.cloudapps.digital
-[staging]: https://ey-recovery-staging.london.cloudapps.digital
-[development]: https://ey-recovery-dev.london.cloudapps.digital
+[production]: https://child-development-training.education.gov.uk
+[staging]: https://staging.child-development-training.education.gov.uk
+[development]: https://eyrecovery-dev.azurewebsites.net
+[review]: https://eyrecovery-review-pr-123.azurewebsites.net
 
 <!-- GH workflows -->
 
