@@ -82,12 +82,12 @@ module Training
     # SECTIONS -----------------------------------------------------------------
 
     # @return [Hash{ Integer => Array<Training::Page, Training::Video, Training::Question> }]
-    def content_by_submodule # content_sections
+    def content_by_submodule
       content.slice_before(&:section?).each.with_index(1).to_h.invert
     end
 
     # @return [Hash{ Array<Integer> => Array<Training::Page, Training::Video, Training::Question> }]
-    def content_by_submodule_topic # content_subsections
+    def content_by_submodule_topic
       sections = content.slice_before(&:section?).each.with_index(1).map do |section_entries, submodule_num|
         section_entries.slice_before(&:subsection?).each.with_index(0).map do |subsection_entries, topic_num|
           { [submodule_num, topic_num] => subsection_entries }

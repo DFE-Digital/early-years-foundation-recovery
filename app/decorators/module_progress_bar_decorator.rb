@@ -45,7 +45,7 @@ class ModuleProgressBarDecorator < DelegateClass(ModuleProgress)
 private
 
   # @return [Array<Training::Page>]
-  def node_items # sections
+  def node_items
     mod.pages.select(&:section?)
   end
 
