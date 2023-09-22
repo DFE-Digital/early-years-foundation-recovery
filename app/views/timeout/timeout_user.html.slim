@@ -1,7 +1,7 @@
 - content_for :page_title do
   = html_title t('timeout.title')
 
-h1 For your security, we signed you out
+h1 class="govuk-heading-l" For your security, we signed you out
 
 p= "You have not done anything for #{timeout_warning} minutes."
 p= link_to 'Sign in', new_user_session_path, class: 'govuk-button'
