@@ -47,3 +47,13 @@ resource "azurerm_postgresql_flexible_server_database" "psqldb" {
   collation = "en_US.utf8"
   charset   = "utf8"
 }
+
+resource "azurerm_postgresql_flexible_server_database" "psqldb_slot" {
+  # Secondary database only deployed for Green Web App slot on Production subscription
+  count = var.environment == "production" ? 1 : 0
+
+  name      = "${var.resource_name_prefix}-${random_pet.name.id}-psqldb-slot"
+  server_id = azurerm_postgresql_flexible_server.psqlfs.id
+  collation = "en_US.utf8"
+  charset   = "utf8"
+}

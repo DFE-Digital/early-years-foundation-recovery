@@ -18,6 +18,11 @@ variable "psqlfs_subnet_id" {
   type        = string
 }
 
+variable "environment" {
+  description = "Environment to deploy resources"
+  type        = string
+}
+
 variable "psqlfs_dns_zone_id" {
   description = "ID of the Private DNS Zone for the Database Server"
   type        = string
