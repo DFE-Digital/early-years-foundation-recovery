@@ -27,7 +27,7 @@ resource "azurerm_postgresql_flexible_server" "psqlfs" {
   }
 
   lifecycle {
-    ignore_changes = [tags]
+    ignore_changes = [tags, zone, high_availability]
   }
 
   #checkov:skip=CKV_AZURE_136:Geo-redundant backup is configurable depending on environment
