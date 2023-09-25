@@ -74,13 +74,26 @@ class User < ApplicationRecord
   scope :with_assessments, -> { joins(:user_assessments) }
   scope :with_passing_assessments, -> { with_assessments.merge(UserAssessment.passes) }
 
+  # events
+  scope :with_events, -> { joins(:events) }
+  scope :with_module_start_events, -> { with_events.merge(Ahoy::Event.module_start) }
+  scope :with_module_complete_events, -> { with_events.merge(Ahoy::Event.module_complete) }
+  scope :completed_available_modules, -> { with_module_complete_events.group('users.id').having('count(ahoy_events.id) = ?', ModuleRelease.count) }
+  scope :started_training, -> { with_module_start_events.distinct }
+  scope :not_started_training, -> { where.not(id: with_module_start_events) }
+
+  # visits
+  scope :with_visits, -> { joins(:visits) }
+  scope :visits_this_month, -> { with_visits.merge(Ahoy::Visit.within_4_weeks).distinct }
+  scope :no_visits_this_month, -> { where.not(id: visits_this_month) }
+
   # emails
   scope :training_email_recipients, -> { where(training_emails: [true, nil]) }
   scope :early_years_email_recipients, -> { where(early_years_emails: true) }
   scope :start_training_mail_job_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_complete.not_started_training }
   scope :complete_registration_mail_job_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_incomplete }
-  scope :continue_training_mail_job_recipients, -> { order(:id).training_email_recipients.select(&:continue_training_recipient?) }
-  scope :new_module_mail_job_recipients, -> { order(:id).training_email_recipients.select(&:completed_available_modules?) }
+  scope :continue_training_mail_job_recipients, -> { order(:id).training_email_recipients.no_visits_this_month.distinct(&:course_in_progress?) }
+  scope :new_module_mail_job_recipients, -> { order(:id).training_email_recipients.completed_available_modules.to_a }
 
   # data
   scope :dashboard, -> { not_closed }
@@ -361,8 +374,6 @@ class User < ApplicationRecord
 
   # @return [Boolean]
   def continue_training_recipient?
-    return false unless course_in_progress?
-
     recent_visits = Ahoy::Visit.last_4_weeks
     old_visits = Ahoy::Visit.month_old.reject { |visit| recent_visits.pluck(:user_id).include?(visit.user_id) }
     old_visits.pluck(:user_id).include?(id)
