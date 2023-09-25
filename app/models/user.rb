@@ -313,6 +313,11 @@ class User < ApplicationRecord
     role_type != 'Not applicable'
   end
 
+  # return [Boolean]
+  def training_emails_recipient?
+    training_emails || training_emails.nil?
+  end
+
   # @return [Boolean]
   def private_beta_registration_complete?
     !!private_beta_registration_complete
