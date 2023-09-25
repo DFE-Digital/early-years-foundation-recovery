@@ -2,24 +2,20 @@ require 'rails_helper'
 
 RSpec.describe Training::Question, type: :model do
   subject(:question) do
-    # uncached
-    # described_class.find_by(name: , training_module: { name: 'alpha' }).load.first
+    # NB: query class is only possible with a page name that is unique
+    described_class.find_by(name: '1-1-4-1').first
+  end
 
-    # cached
-    Training::Module.by_name('alpha').page_by_name('1-1-4')
+  describe '#parent' do
+    it 'returns the parent module' do
+      expect(question.parent).to be_a Training::Module
+      expect(question.parent.name).to eq 'alpha'
+    end
   end
 
   describe 'CMS fields' do
     it '#page_type' do
       expect(question.page_type).to eq 'formative_questionnaire'
-    end
-
-    it '#submodule' do
-      expect(question.submodule).to eq 1
-    end
-
-    it '#topic' do
-      expect(question.topic).to eq 4
     end
 
     it '#answers' do
@@ -69,6 +65,7 @@ RSpec.describe Training::Question, type: :model do
     context 'when the question is a confidence check' do
       subject(:question) do
         Training::Module.by_name('alpha').page_by_name('1-3-3-3')
+        # described_class.find_by(name: '1-3-3-3').load.size # => 3
       end
 
       specify do
@@ -88,7 +85,7 @@ RSpec.describe Training::Question, type: :model do
 
     context 'when the question is framed as true or false' do
       subject(:question) do
-        Training::Module.by_name('bravo').page_by_name('1-2-3')
+        Training::Module.by_name('bravo').page_by_name('1-2-1-3')
       end
 
       specify do

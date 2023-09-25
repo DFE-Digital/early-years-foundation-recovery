@@ -34,16 +34,13 @@ class ContentIntegrity
     # type and postition
     interruption: 'First page is wrong type',
     submodule: 'Second page is wrong type',
+    topic: 'Third page is wrong type', # others will also need changing
     thankyou: 'Penultimate page is wrong type',
     certificate: 'Last page is wrong type',
 
     # type and frequency
     summative: 'Insufficient summative questions',
     confidence: 'Insufficient confidence checks',
-
-    # structure of submodule/topic
-    submodules: 'Submodules are not consecutive',
-    topics: 'Topics are not consecutive',
 
     question_answers: 'Question answers are incorrectly formatted', # TODO: which question?
   }.freeze
@@ -64,12 +61,6 @@ class ContentIntegrity
   # @return [Training::Module]
   def mod
     Training::Module.by_name(module_name)
-  end
-
-  # @param numbers [Array<Integer>]
-  # @return [Boolean] 0, 1, 2, 3, 4...
-  def consecutive_integers?(numbers)
-    numbers.any? && numbers.first.zero? && numbers.each_cons(2).all? { |a, b| (a + 1).eql?(b) }
   end
 
   # Decorators ---------------------------------------------------------
@@ -131,18 +122,6 @@ class ContentIntegrity
 
   # CONTENT VALIDATIONS --------------------------------------------------------
 
-  # @return [Boolean] submodules increment correctly
-  def submodules?
-    consecutive_integers? sections.keys
-  end
-
-  # @return [Boolean] topics increment correctly
-  def topics?
-    sections.all? do |_, sub_topics|
-      sub_topics.map(&:last).map { |topics| consecutive_integers? Array(topics) }
-    end
-  end
-
   # @return [Boolean] first page
   def interruption?
     page_by_type_position(type: 'interruption_page', position: 0)
@@ -151,6 +130,12 @@ class ContentIntegrity
   # @return [Boolean] second page
   def submodule?
     page_by_type_position(type: 'sub_module_intro', position: 1)
+  end
+
+  # @return [Boolean] third page
+  def topic?
+    page_by_type_position(type: 'topic_intro', position: 2) &&
+      (mod.topic_count >= mod.submodule_count)
   end
 
   # @return [Boolean] penultimate page
@@ -165,12 +150,12 @@ class ContentIntegrity
 
   # @return [Boolean]
   def text?
-    page_by_type_position(type: 'text_page')
+    mod.text_pages.any?
   end
 
   # @return [Boolean]
   def video?
-    page_by_type_position(type: 'video_page')
+    mod.video_pages.any?
   end
 
   # @return [Boolean]
@@ -180,18 +165,18 @@ class ContentIntegrity
 
   # @return [Boolean]
   def formative?
-    page_by_type_position(type: 'formative_questionnaire')
+    mod.formative_questions.any?
   end
 
   # 'Brain development and how children learn' has fewest
-  # @return [Boolean] demo modules have fewer questions than genuine content
+  # @return [Boolean]
   def confidence?
-    demo? || mod.page_by_type('confidence_questionnaire').count >= 4
+    mod.confidence_questions.count >= 4
   end
 
-  # @return [Boolean] demo modules have fewer questions than genuine content
+  # @return [Boolean]
   def summative?
-    demo? || mod.page_by_type('summative_questionnaire').count.eql?(10)
+    mod.summative_questions.count == 10
   end
 
   # @return [Boolean]
@@ -226,11 +211,6 @@ private
     MODULE_VALIDATIONS.merge(CONTENT_VALIDATIONS)
   end
 
-  # @return [Boolean] content for development and testing
-  def demo?
-    env.eql?('test')
-  end
-
   # @return [String] preview / delivery
   def api
     ContentfulModel.use_preview_api ? 'preview' : 'delivery'
@@ -239,11 +219,6 @@ private
   # @return [String] master / staging / test
   def env
     ContentfulRails.configuration.environment
-  end
-
-  # @return [Hash{Integer=>Array<Integer>}] submodule => submodule topics
-  def sections
-    mod.content.group_by { |page| [page.submodule, page.topic] }.keys.group_by(&:first)
   end
 
   # @return [Array<Boolean>] validate module attributes
@@ -278,10 +253,13 @@ private
     end
   end
 
+  # @param type [String]
+  # @param position [Integer]
+  # @return [Boolean]
   def page_by_type_position(type:, position: nil)
-    return mod.content.map(&:page_type).any?(type) unless position
+    return mod.pages.map(&:page_type).any?(type) unless position
 
-    mod.content[position].page_type.eql?(type)
+    mod.pages[position].page_type.eql?(type)
   rescue NoMethodError
     false
   end

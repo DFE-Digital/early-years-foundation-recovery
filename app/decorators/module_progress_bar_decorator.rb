@@ -44,9 +44,9 @@ class ModuleProgressBarDecorator < DelegateClass(ModuleProgress)
 
 private
 
-  # @return [Array<Module::Content>]
+  # @return [Array<Training::Page>]
   def node_items
-    %w[sub_module_intro summary_intro].flat_map { |type| mod.page_by_type(type) }
+    mod.pages.select(&:section?)
   end
 
   # @return [nil, String] style the furthest node's heading
@@ -95,7 +95,7 @@ private
     if node_item.summary_intro?
       visited? node_item.parent.certificate_page
     elsif node_item.submodule_intro?
-      all? node_item.current_submodule_items
+      all? node_item.section_content
     end
   end
 

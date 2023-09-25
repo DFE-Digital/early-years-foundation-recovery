@@ -29,7 +29,7 @@ RSpec.describe 'Training content', type: :request do
     end
 
     context 'when content is a question' do
-      let(:page_name) { '1-1-4' }
+      let(:page_name) { '1-1-4-1' }
 
       it 'redirects to questions controller' do
         expect(response).to redirect_to training_module_question_path(:alpha, page_name)

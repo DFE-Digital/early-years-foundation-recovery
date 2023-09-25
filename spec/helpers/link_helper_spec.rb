@@ -107,7 +107,7 @@ describe 'LinkHelper', type: :helper do
 
       it 'links to results' do
         expect(link).to include 'View previous test result'
-        expect(link).to include 'href="/modules/alpha/assessment-result/1-3-2-5"'
+        expect(link).to include 'href="/modules/alpha/assessment-result/1-3-2-11"'
       end
     end
   end

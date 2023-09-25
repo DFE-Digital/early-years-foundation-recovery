@@ -62,21 +62,12 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
 
 private
 
-  # exclude intro or subpages
-  #
   # @param submodule [Integer]
   # @param items [Array<Module::Content>]
   #
   # @return [Array<String, Symbol, Array>]
   def subsections(submodule:, items:)
-    topics =
-      if submodule.zero?
-        items
-      else
-        items.drop(1).reject(&:topic_page_name?)
-      end
-
-    topics.map do |content_page|
+    items.select(&:subsection?).map do |content_page|
       section_content(submodule: submodule, subsection_item: content_page)
     end
   end
@@ -89,7 +80,7 @@ private
     subsection_status = if submodule.zero?
                           status([subsection_item])
                         else
-                          status(subsection_item.current_submodule_topic_items)
+                          status(subsection_item.subsection_content)
                         end
 
     # providing the next page name enables the hyperlink
