@@ -3,9 +3,7 @@ class CloseAccountsController < ApplicationController
 
   def show; end
 
-  def new
-    current_user
-  end
+  def new; end
 
   def update
     if current_user.valid_password?(user_password_params[:current_password])
@@ -23,15 +21,16 @@ class CloseAccountsController < ApplicationController
 
   def close_account
     current_user.send_account_closed_notification
-    User.new(email: @internal_mailbox).send_account_closed_internal_notification(current_user.email)
+
+    # TODO: refactor this internal user mailer logic
+    User.new(email: Rails.configuration.internal_mailbox).send_account_closed_internal_notification(current_user.email)
+
     current_user.redact!
     sign_out current_user
     redirect_to user_close_account_path
   end
 
-  def edit_reason
-    current_user
-  end
+  def edit_reason; end
 
   def update_reason
     current_user.context = :close_account

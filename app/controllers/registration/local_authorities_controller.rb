@@ -1,25 +1,41 @@
-class Registration::LocalAuthoritiesController < Registration::BaseController
-  def edit
-    @user_form = Users::LocalAuthorityForm.new(user: current_user, setting_type_id: current_user.setting_type_id, local_authority: current_user.local_authority)
-  end
+module Registration
+  class LocalAuthoritiesController < BaseController
+    def edit; end
 
-  def update
-    @user_form = Users::LocalAuthorityForm.new(user_params.merge(user: current_user, setting_type_id: current_user.setting_type_id))
+    def update
+      form.local_authority = user_params[:local_authority]
 
-    if @user_form.save
-      if @user_form.role_type_next?
-        redirect_to edit_registration_role_type_path
+      if form.save
+        redirect_to next_form_path
       else
-        redirect_to edit_registration_training_emails_path
+        render :edit, status: :unprocessable_entity
       end
-    else
-      render :edit, status: :unprocessable_entity
     end
-  end
 
-private
+  private
 
-  def user_params
-    params.require(:user).permit(:local_authority)
+    # @return [Hash]
+    def user_params
+      params.require(:user).permit(:local_authority)
+    end
+
+    # @return [String]
+    def next_form_path
+      if form.setting_type.has_role?
+        edit_registration_role_type_path
+      else
+        edit_registration_training_emails_path
+      end
+    end
+
+    # @return [Registration::LocalAuthorityForm]
+    def form
+      @form ||=
+        LocalAuthorityForm.new(
+          user: current_user,
+          setting_type_id: current_user.setting_type_id,
+          local_authority: current_user.local_authority,
+        )
+    end
   end
 end

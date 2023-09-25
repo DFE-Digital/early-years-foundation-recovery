@@ -1,13 +1,8 @@
 module Training
   class Module < ContentfulModel::Base
-    # has_many :pages, class_name: 'Training::Page'
-    # has_many :questions, class_name: 'Training::Question'
-    # has_many :videos, class_name: 'Training::Video'
+    validates_presence_of :name
 
-    # @deprecated Not required for CMS
-    def module_items
-      content
-    end
+    include ::Management
 
     extend ::Caching
 
@@ -16,25 +11,38 @@ module Training
       'trainingModule'
     end
 
-    # @return [Array<Training::Module>] minimum requirement "name"
+    # @return [Array<Training::Module>]
     def self.ordered
-      fetch_or_store to_key(__method__) do
-        load_children(0).order(:position).load!.to_a.select(&:named?)
+      fetch_or_store to_key("#{name}.__method__") do
+        order(:position).load.to_a.select(&:named?)
       end
     end
 
-    # @return [Training::Module] cached result
+    # @return [Array<Training::Module>]
+    def self.live
+      ordered.reject(&:draft?)
+    end
+
+    # @param id [String]
+    # @return [Training::Module]
     def self.by_id(id)
       fetch_or_store to_key(id) do
-        load_children(0).find(id)
+        find(id)
       end
     end
 
-    # @return [Training::Module] cached result
+    # @param name [String]
+    # @return [Training::Module]
     def self.by_name(name)
       fetch_or_store to_key(name) do
-        load_children(0).find_by(name: name.to_s).first
+        find_by(name: name.to_s).first
       end
+    end
+
+    # @param id [String]
+    # @return [Training::Module]
+    def self.by_content_id(id)
+      ordered.find { |mod| mod.content.find { |content| content.id.eql?(id) } }
     end
 
     # @return [String]
@@ -66,37 +74,32 @@ module Training
       end
     end
 
-    # @return [Training::Module, nil] cached result
-    def depends_on
-      self.class.by_id(fields[:depends_on].id) if fields[:depends_on]
+    # @return [Array<Training::Page, Training::Video, Training::Question>]
+    def content
+      Array(pages).reject(&:interruption_page?)
     end
 
-    # Most expensive method: source of truth for content order
-    #
-    # @return [Array<Training::Page, Training::Video, Training::Question>] cached result
-    def content
-      Array(fields[:pages]).map do |child_link|
-        fetch_or_store self.class.to_key(child_link.id) do
-          child_by_id(child_link.id)
+    # SECTIONS -----------------------------------------------------------------
+
+    # @return [Hash{ Integer => Array<Training::Page, Training::Video, Training::Question> }]
+    def content_by_submodule
+      content.slice_before(&:section?).each.with_index(1).to_h.invert
+    end
+
+    # @return [Hash{ Array<Integer> => Array<Training::Page, Training::Video, Training::Question> }]
+    def content_by_submodule_topic
+      sections = content.slice_before(&:section?).each.with_index(1).map do |section_entries, submodule_num|
+        section_entries.slice_before(&:subsection?).each.with_index(0).map do |subsection_entries, topic_num|
+          { [submodule_num, topic_num] => subsection_entries }
         end
       end
-    end
 
-    # @return [Hash{ Integer=>Array<Module::Content> }]
-    def content_by_submodule
-      content.group_by(&:submodule).except(0)
-    end
-
-    # @return [Hash{ Array<Integer> => Array<Module::Content> }]
-    def content_by_submodule_topic
-      content.group_by { |page|
-        [page.submodule, page.topic] unless page.topic.zero?
-      }.except(nil)
+      sections.flatten.reduce(&:merge)
     end
 
     # @return [Integer]
     def topic_count
-      content_by_submodule_topic.count
+      content_by_submodule_topic.count - submodule_count
     end
 
     # @return [Integer]
@@ -108,26 +111,29 @@ module Training
     #
     # @return [Training::Page, Training::Video, Training::Question]
     def page_by_id(id)
-      content.find { |page| page.id.eql?(id) }
+      pages.find { |page| page.id.eql?(id) }
     end
 
     # Selects from ordered array
     #
     # @return [Training::Page, Training::Video, Training::Question]
     def page_by_name(name)
-      content.find { |page| page.name.eql?(name) }
+      pages.find { |page| page.name.eql?(name) }
     end
 
     # Selects from ordered array
+    # but not interruption page
     #
     # @return [Array<Training::Page, Training::Video, Training::Question>]
-    def page_by_type(type)
-      content.select { |page| page.page_type.eql?(type) }
+    def pages_by_type(type)
+      pages.select { |page| page.page_type.eql?(type) }
     end
 
-    # state ---------------------------------
+    # STATE --------------------------------------------------------------------
 
-    # @see ContentfulCourseProgress
+    # TODO: consider terminology and replace #draft? with #invalid?
+    #
+    # @see CourseProgress
     # @return [Boolean] incomplete content will not be deemed 'available'
     def draft?
       @draft ||= !data.valid?
@@ -143,33 +149,21 @@ module Training
       Array(fields[:pages]).any?
     end
 
-    # @return [String, nil]
-    def published_at
-      return unless Rails.env.development? && ENV['CONTENTFUL_MANAGEMENT_TOKEN'].present?
+    # SINGLE ENTRY -------------------------------------------------------------
 
-      entry.published_at&.in_time_zone(ENV['TZ'])&.strftime('%d-%m-%Y %H:%M')
+    # @return [Training::Page]
+    def content_start
+      pages_by_type('sub_module_intro').first
     end
-
-    # @see Training::Module#debug_summary
-    # @see ContentfulCourseProgress#debug_summary
-    #
-    # @return [Contentful::Management::Entry]
-    def entry
-      @entry ||= to_management
-    rescue NoMethodError
-      @entry = refetch_management_entry
-    end
-
-    # content pages ---------------------------------
 
     # @return [Training::Page]
     def first_content_page
-      text_pages.first
+      pages_by_type('topic_intro').first
     end
 
     # @return [Training::Page]
     def interruption_page
-      content.find(&:interruption_page?)
+      pages.find(&:interruption_page?)
     end
 
     # @return [Training::Page]
@@ -202,7 +196,7 @@ module Training
       content.find(&:certificate?)
     end
 
-    # collections ---------------------------------
+    # MANY ENTRIES -------------------------------------------------------------
 
     # @return [Array<Training::Page>]
     def text_pages
@@ -240,7 +234,7 @@ module Training
       questions.select { |q| q.answer.contains?(text) }.map(&:name)
     end
 
-    # view decorators ---------------------------------
+    # DECORATORS ---------------------------------------------------------------
 
     # @return [String]
     def tab_label
@@ -265,19 +259,12 @@ module Training
 
     # @return [Array<Array>] AST for automated module completion
     def schema
-      content.map(&:schema)
+      pages.map(&:schema)
     end
 
-    # @return [ContentfulDataIntegrity]
+    # @return [ContentIntegrity]
     def data
-      @data ||= ContentfulDataIntegrity.new(module_name: name)
-    end
-
-  private
-
-    # @return [Training::Page, Training::Question, Training::Video] content sought by likelihood (Page more numerous than Video)
-    def child_by_id(id)
-      Training::Page.by_id(id) || Training::Question.by_id(id) || Training::Video.by_id(id)
+      @data ||= ContentIntegrity.new(module_name: name)
     end
   end
 end

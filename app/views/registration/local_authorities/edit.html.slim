@@ -1,11 +1,23 @@
+= render 'user/debug'
+
+- content_for :page_title do
+  = html_title t('register_authority.heading')
+
 = govuk_back_link href: edit_registration_setting_type_path
+
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
-    = form_for @user_form, url: registration_local_authority_path, method: :patch do |f|
+
+    = form_for form, url: registration_local_authority_path, method: :patch do |f|
       = f.govuk_error_summary
-      = f.govuk_fieldset legend: { text: t('.heading') }, aria: { required: true } do
-        =translate_markdown(t('.body'))
-        = f.govuk_collection_select :local_authority, LocalAuthority.all, :name, :name, options: { include_blank: true }, label: { text: 'Local authority', class: 'govuk-visually-hidden' }, data: { controller: 'autocomplete', 'autocomplete-message-value': t('.autocomplete_not_found') }, aria: { label: 'registration local authority'}, form_group: { classes: ['data-hj-suppress'] }
+
+      = f.govuk_fieldset legend: { text: t('register_authority.heading') }, aria: { required: true } do
+
+        = translate_markdown t('register_authority.body')
+
+        = f.select_trainee_authority
+
         p.govuk_body
-          = govuk_link_to t('.multiple_local_authorities'), edit_registration_role_type_path
-      = f.govuk_submit t('.button')
+          = govuk_link_to t('register_authority.other_link'), edit_registration_role_type_path
+
+      = f.govuk_submit t('links.continue')

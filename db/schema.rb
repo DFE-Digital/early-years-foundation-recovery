@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_06_133651) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_23_163600) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,6 +54,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_133651) do
     t.datetime "started_at"
     t.index ["user_id"], name: "index_ahoy_visits_on_user_id"
     t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
+  end
+
+  create_table "module_releases", force: :cascade do |t|
+    t.bigint "release_id", null: false
+    t.integer "module_position", null: false
+    t.string "name", null: false
+    t.datetime "first_published_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["module_position"], name: "index_module_releases_on_module_position", unique: true
+    t.index ["name"], name: "index_module_releases_on_name", unique: true
+    t.index ["release_id"], name: "index_module_releases_on_release_id"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -222,6 +234,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_133651) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token"
   end
 
+  add_foreign_key "module_releases", "releases"
   add_foreign_key "notes", "users"
   add_foreign_key "que_scheduler_audit_enqueued", "que_scheduler_audit", column: "scheduler_job_id", primary_key: "scheduler_job_id", name: "que_scheduler_audit_enqueued_scheduler_job_id_fkey"
   add_foreign_key "responses", "user_assessments"

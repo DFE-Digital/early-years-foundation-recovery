@@ -1,32 +1,67 @@
-#
-# OPTIMIZE: potentially dry-er course content controllers
-#
 module Learning
-  # def mod_name
-  #   params[:training_module_id]
-  # end
+  # ----------------------------------------------------------------------------
+  # Request Params
+  # ----------------------------------------------------------------------------
 
-  # def content_name
-  #   params[:id]
-  # end
+  # @return [String]
+  def mod_name
+    params[:training_module_id]
+  end
 
-  # def mod
-  #   Training::Module.by_name(mod_name)
-  # end
+  # @return [String]
+  def content_name
+    params[:id]
+  end
 
-  # def content
-  #   mod.page_by_name(content_name)
-  # end
+  # ----------------------------------------------------------------------------
+  # Contentful Entries
+  # ----------------------------------------------------------------------------
 
-  # def module_progress
-  #   ContentfulModuleOverviewDecorator.new(progress)
-  # end
+  # @return [Training::Module]
+  def mod
+    Training::Module.by_name(mod_name)
+  end
 
-  # def progress_bar
-  #   ContentfulModuleProgressBarDecorator.new(progress)
-  # end
+  # @return [Training::Page, Training::Video, Training::Question]
+  def content
+    mod.page_by_name(content_name)
+  end
 
-  # def progress
-  #   helpers.cms_module_progress(mod)
-  # end
+  # ----------------------------------------------------------------------------
+  # Progress Services
+  # ----------------------------------------------------------------------------
+
+  # @return [AssessmentProgress]
+  def assessment
+    helpers.assessment_progress_service(mod)
+  end
+
+  # @return [ModuleProgress]
+  def progress_service
+    helpers.module_progress_service(mod)
+  end
+
+  # ----------------------------------------------------------------------------
+  # Decorated Services
+  # ----------------------------------------------------------------------------
+
+  # @return [ModuleOverviewDecorator]
+  def module_progress
+    ModuleOverviewDecorator.new(progress_service)
+  end
+
+  # @return [ModuleProgressBarDecorator]
+  def progress_bar
+    ModuleProgressBarDecorator.new(progress_service)
+  end
+
+  # ----------------------------------------------------------------------------
+  # Database Records
+  # ----------------------------------------------------------------------------
+
+  # @note memoization ensures validation errors work
+  # @return [UserAnswer, Response]
+  def current_user_response
+    @current_user_response ||= current_user.response_for(content)
+  end
 end

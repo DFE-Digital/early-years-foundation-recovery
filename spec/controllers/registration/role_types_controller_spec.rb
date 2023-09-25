@@ -17,10 +17,13 @@ RSpec.describe Registration::RoleTypesController, type: :controller do
     end
   end
 
-  context 'when confirmed user signed in' do
-    let(:confirmed_user) { create :user, :confirmed, :name, :setting_type }
+  context 'when signed in' do
+    let(:user) do
+      create :user, :named,
+             setting_type_id: Trainee::Setting.with_roles.sample.name
+    end
 
-    before { sign_in confirmed_user }
+    before { sign_in user }
 
     describe 'GET #edit' do
       it 'succeeds' do
@@ -33,7 +36,7 @@ RSpec.describe Registration::RoleTypesController, type: :controller do
       it 'succeeds' do
         post :update, params: { user: { role_type: 'Manager' } }
         expect(response).to redirect_to edit_registration_training_emails_path
-        expect(confirmed_user.reload.role_type).to eq 'Manager'
+        expect(user.reload.role_type).to eq 'Manager'
       end
     end
   end

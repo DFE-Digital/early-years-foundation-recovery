@@ -1,7 +1,0 @@
----
-en:
-  pages:
-    email_preferences:
-      heading: Update your email preferences
-      body: |
-        [Continue](/registration/training-emails/edit){:class="govuk-button"}

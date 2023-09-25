@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Registration training email opt in', type: :request do
-  subject(:user) { create(:user, :confirmed, :name, :setting_type, :role_type) }
-
-  before do
-    sign_in user
+  subject(:user) do
+    create :user, :named,
+           setting_type_id: Trainee::Setting.all.sample.name,
+           role_type: Trainee::Role.all.sample.name
   end
+
+  before { sign_in user }
 
   describe 'GET /registration/training_emails/edit' do
     it 'returns http success' do
@@ -16,23 +18,21 @@ RSpec.describe 'Registration training email opt in', type: :request do
 
   describe 'PATCH /registration/training_emails' do
     let(:update_user) do
-      patch registration_training_emails_path, params: { user: user_params }
+      patch registration_training_emails_path, params: {
+        user: {
+          training_emails: true,
+        },
+      }
     end
 
-    context 'when training email opt in true in user params' do
-      let(:user_params) do
-        {
-          training_emails: true,
-        }
+    context 'when opting in' do
+      it 'updates user preferences' do
+        expect { update_user }.to change { user.reload.training_emails }.to(true)
       end
 
-      it 'Updates user defined email preferences' do
-        expect { update_user }.to change { user.reload.training_emails }.to(user_params[:training_emails])
-      end
-
-      it 'redirects to my training email preference' do
+      it 'redirects to my modules' do
         update_user
-        expect(response).to redirect_to(my_modules_path)
+        expect(response).to redirect_to my_modules_path
       end
     end
   end

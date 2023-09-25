@@ -1,25 +1,30 @@
-class Registration::RoleTypeOthersController < Registration::BaseController
-  def edit
-    @user_form = Users::RoleTypeOtherForm.new(user: current_user, role_type_other: current_user.role_type_other)
-  end
+module Registration
+  class RoleTypeOthersController < BaseController
+    def edit; end
 
-  def update
-    @user_form = Users::RoleTypeOtherForm.new(user_params.merge(user: current_user))
+    def update
+      form.role_type_other = user_params[:role_type_other]
 
-    if @user_form.save
-      if current_user.registration_complete?
-        redirect_to user_path, notice: t('.complete_update')
+      if form.save
+        if current_user.registration_complete?
+          redirect_to user_path, notice: t(:details_updated)
+        else
+          redirect_to edit_registration_training_emails_path
+        end
       else
-        redirect_to edit_registration_training_emails_path
+        render :edit, status: :unprocessable_entity
       end
-    else
-      render :edit, status: :unprocessable_entity
     end
-  end
 
-private
+  private
 
-  def user_params
-    params.require(:user).permit(:role_type_other)
+    def user_params
+      params.require(:user).permit(:role_type_other)
+    end
+
+    # @return [Registration::RoleTypeOtherForm]
+    def form
+      @form ||= RoleTypeOtherForm.new(user: current_user, role_type_other: current_user.role_type_other)
+    end
   end
 end

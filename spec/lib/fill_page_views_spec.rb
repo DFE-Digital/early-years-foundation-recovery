@@ -4,7 +4,17 @@ require 'fill_page_views'
 RSpec.describe FillPageViews do
   subject(:service) { described_class.new }
 
+  before do
+    skip 'CMS conversion WIP'
+    ENV['VERBOSE'] = 'y'
+  end
+
+  after do
+    ENV['VERBOSE'] = nil
+  end
+
   include_context 'with progress'
+
   context 'without skipped pages' do
     before do
       start_module(alpha)

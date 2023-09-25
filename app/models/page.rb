@@ -26,8 +26,9 @@ class Page < ContentfulModel::Base
     end
   end
 
-  # @deprecated Not required for CMS
-  def model
-    self
+  # @see ApplicationHelper#html_title
+  # @return [String]
+  def title
+    heading
   end
 end

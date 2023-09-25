@@ -17,10 +17,15 @@ RSpec.describe Registration::EarlyYearsEmailsController, type: :controller do
     end
   end
 
-  context 'when confirmed user signed in' do
-    let(:confirmed_user) { create :user, :confirmed, :name, :emails_opt_in, :setting_type, :role_type }
+  context 'when signed in' do
+    let(:user) do
+      create :user, :named,
+             setting_type_id: Trainee::Setting.all.sample.name,
+             role_type: Trainee::Role.all.sample.name,
+             training_emails: true
+    end
 
-    before { sign_in confirmed_user }
+    before { sign_in user }
 
     describe 'GET #edit' do
       it 'succeeds' do
@@ -32,9 +37,9 @@ RSpec.describe Registration::EarlyYearsEmailsController, type: :controller do
     describe 'POST #update' do
       it 'succeeds' do
         post :update, params: { user: { early_years_emails: 'true' } }
-        expect(confirmed_user.reload.early_years_emails).to eq true
         expect(response).to redirect_to my_modules_path
-        expect(confirmed_user.reload).to be_registration_complete
+        expect(user.reload.registration_complete).to be true
+        expect(user.reload.early_years_emails).to be true
       end
     end
   end

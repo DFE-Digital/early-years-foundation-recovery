@@ -145,6 +145,6 @@ private
 
   # @return [Boolean]
   def skip?
-    !pass && type.match?(/confidence|thank|certificate/)
+    !pass && type.match?(/results|confidence|thank|certificate/)
   end
 end

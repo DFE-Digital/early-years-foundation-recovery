@@ -1,39 +1,37 @@
 require 'rails_helper'
 
-RSpec.describe 'Registration name', type: :request do
+RSpec.describe 'Registration settings', type: :request do
   subject(:user) { create(:user, :confirmed) }
 
-  before do
-    sign_in user
-  end
+  before { sign_in user }
 
-  describe 'GET /registration/name/edit' do
+  describe 'GET /registration/setting_type/edit' do
     it 'returns http success' do
-      get edit_registration_name_path
+      get edit_registration_setting_type_path
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe 'PATCH /registration/name' do
+  describe 'PATCH /registration/setting_type' do
     let(:update_user) do
-      patch registration_name_path, params: { user: user_params }
+      patch registration_setting_type_path, params: {
+        user: {
+          # setting_type: 'Private Nursery,
+          setting_type_id: setting,
+        },
+      }
     end
 
-    context 'and adds first name to user' do
-      let(:user_params) do
-        {
-          first_name: Faker::Name.first_name,
-          last_name: Faker::Name.last_name,
-        }
+    context 'with setting' do
+      let(:setting) { 'nursery_private' }
+
+      it 'updates user names' do
+        expect { update_user }.to change { user.reload.setting_type_id }.to(setting)
       end
 
-      it 'Updates user name' do
-        expect { update_user }.to change { user.reload.first_name }.to(user_params[:first_name])
-      end
-
-      it 'redirects to setting type' do
+      it 'redirects to local authority form' do
         update_user
-        expect(response).to redirect_to(edit_registration_setting_type_path)
+        expect(response).to redirect_to edit_registration_local_authority_path
       end
     end
   end

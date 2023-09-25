@@ -1,10 +1,14 @@
+- content_for :page_title do
+  = html_title t(:title, scope: :account_password_change)
+
 - content_for :devise_form do
   = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
     = f.govuk_error_summary
     = f.hidden_field :reset_password_token
     = f.govuk_fieldset legend: { text: 'Choose a new password' } do
-      p.govuk-hint
-        = t('password.hardness', length: @minimum_password_length)
+
+      p.govuk-hint= password_complexity
+
       = f.govuk_password_field :password, label: { text: 'New password', size: 's' }, aria: { required: true }
       = f.govuk_password_field :password_confirmation, label: { text: 'Confirm password', size: 's' }, aria: { required: true }
     = f.govuk_submit 'Reset password'

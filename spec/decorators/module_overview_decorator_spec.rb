@@ -4,13 +4,9 @@ RSpec.describe ModuleOverviewDecorator do
   subject(:decorator) { described_class.new(progress) }
 
   let(:progress) { ModuleProgress.new(user: user, mod: bravo) }
-  let(:bravo) { TrainingModule.find_by(name: :bravo) }
+  let(:bravo) { Training::Module.by_name('bravo') }
 
   include_context 'with progress'
-
-  before do
-    skip 'YAML ONLY' if Rails.application.cms?
-  end
 
   describe '#call_to_action' do
     let(:output) do
@@ -29,14 +25,14 @@ RSpec.describe ModuleOverviewDecorator do
 
     context 'when the module has begun' do
       before do
-        start_second_submodule(bravo)
-        view_module_page_event('bravo', '1-1') # visit previous page
+        start_second_submodule(bravo)           # 2nd submodule intro is page 6
+        view_module_page_event('bravo', '1-1')  # visit any previous midway page
       end
 
       it 'goes to the furthest page' do
-        expect(user.events.count).to be 8
+        expect(user.events.count).to be 7
         expect(output[:state]).to be :started
-        expect(output[:page]).to eq '1-2'
+        expect(output[:page]).to eq '1-2'       # resumes from 2nd submodule intro
       end
     end
 
@@ -57,7 +53,7 @@ RSpec.describe ModuleOverviewDecorator do
       end
 
       it 'goes to the certificate' do
-        expect(user.events.count).to be 24
+        expect(user.events.count).to be 32
         expect(output[:state]).to be :completed
         expect(output[:page]).to eq '1-3-4'
       end

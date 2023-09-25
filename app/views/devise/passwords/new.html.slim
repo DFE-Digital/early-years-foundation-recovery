@@ -1,3 +1,6 @@
+- content_for :page_title do
+  = html_title t(:title, scope: :account_reset)
+
 = govuk_link_to 'Back', url_for(:back), class: 'govuk-back-link'
 
 - content_for :devise_form do

@@ -1,5 +1,7 @@
-- if Rails.application.cms?
-  = render 'learning/cms_debug'
+- content_for :page_title do
+  = html_title t('home.title')
+
+= render 'learning/cms_debug'
 
 - if debug?
   pre.debug_dump
@@ -13,7 +15,7 @@
           = content_resource 'home.hero', service_name: service_name
 
           = govuk_button_link_to course_overview_path, class: 'govuk-button--start govuk-!-margin-bottom-4' do
-            - if @user
+            - if current_user
               | Learn more
             - else
               | Learn more and enrol

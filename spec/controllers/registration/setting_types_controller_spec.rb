@@ -17,10 +17,10 @@ RSpec.describe Registration::SettingTypesController, type: :controller do
     end
   end
 
-  context 'when confirmed user signed in' do
-    let(:confirmed_user) { create :user, :confirmed, :name }
+  context 'when signed in' do
+    let(:user) { create :user, :named }
 
-    before { sign_in confirmed_user }
+    before { sign_in user }
 
     describe 'GET #edit' do
       it 'succeeds' do
@@ -31,9 +31,13 @@ RSpec.describe Registration::SettingTypesController, type: :controller do
 
     describe 'POST #update' do
       it 'succeeds' do
-        setting_type = SettingType.find_by(name: 'Private nursery')
-        post :update, params: { user: { setting_type_id: setting_type.id } }
+        post :update, params: { user: { setting_type_id: 'nursery_private' } }
         expect(response).to redirect_to edit_registration_local_authority_path
+      end
+
+      it 'fails with unknown input' do
+        post :update, params: { user: { setting_type_id: 'unknown' } }
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end

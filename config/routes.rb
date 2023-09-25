@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'audit', to: 'home#audit'
 
   get 'my-modules', to: 'learning#show' # @see User#course
-  get 'about-training', to: (Rails.application.cms? ? 'training/modules#index' : 'training_modules#index'), as: :course_overview
+  get 'about-training', to: 'training/modules#index', as: :course_overview
 
   get '/404', to: 'errors#not_found', via: :all
   get '/422', to: 'errors#unprocessable_entity', via: :all
@@ -62,42 +62,26 @@ Rails.application.routes.draw do
       post 'close_account'
     end
 
-    constraints proc { Rails.application.cms? } do
-      scope module: 'training' do
-        resource :notes, path: 'learning-log', only: %i[show create update]
-      end
-    end
-
-    resource :notes, only: %i[show create update], path: 'learning-log'
-  end
-
-  constraints proc { Rails.application.cms? } do
     scope module: 'training' do
-      resources :modules, only: %i[show], as: :training_modules do
-        resources :pages, only: %i[index show], path: 'content-pages'
-        resources :questions, only: %i[show], path: 'questionnaires'
-        resources :responses, only: %i[update]
-        resources :assessments, only: %i[show new], path: 'assessment-result'
-      end
-    end
-
-    post '/change', to: 'hook#change'
-    post '/release', to: 'hook#release'
-
-    constraints proc { Rails.application.preview? } do
-      resources :snippets, id: /[^\/]+/, only: %i[show]
+      resource :notes, path: 'learning-log', only: %i[show create update]
     end
   end
 
-  resources :modules, only: %i[show], as: :training_modules, controller: :training_modules do
-    resources :content_pages, only: %i[index show], path: 'content-pages'
-    resources :questionnaires, only: %i[show update]
-    resources :assessment_results, only: %i[show new], path: 'assessment-result'
+  constraints proc { Rails.application.preview? || Rails.env.test? } do
+    resources :snippets, id: /[^\/]+/, only: %i[show]
   end
 
-  if Rails.application.cms?
-    resources :pages, only: %i[show], path: '/', as: :static
-  else
-    get '/:id', to: 'static#show', as: :static
+  scope module: 'training' do
+    resources :modules, only: %i[show], as: :training_modules do
+      resources :pages, only: %i[index show], path: 'content-pages'
+      resources :questions, only: %i[show], path: 'questionnaires'
+      resources :responses, only: %i[update]
+      resources :assessments, only: %i[show new], path: 'assessment-result'
+    end
   end
+
+  post '/change', to: 'hook#change'
+  post '/release', to: 'hook#release'
+
+  resources :pages, only: %i[show], path: '/', as: :static
 end

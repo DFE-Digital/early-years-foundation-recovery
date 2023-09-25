@@ -1,10 +1,5 @@
 en:
-  user:
-    show:
-      your_setting_details_html: <h2 class='govuk-heading-m'>Your setting details</h2>
-      your_email_preferences_html: <h2 class='govuk-heading-m'>Your email preferences</h2>
-      training_emails_true: You have chosen to receive emails about this training course.
-      training_emails_false: You have chosen not to receive emails about this training course.
+  # Registration form validations ----------------------------------------------
 
   activemodel:
     errors:
@@ -43,6 +38,9 @@ en:
               blank: Choose an option.
             early_years_emails:
               blank: Choose an option.
+
+  # Validations ----------------------------------------------------------------
+
   activerecord:
     errors:
       models:
@@ -63,9 +61,6 @@ en:
               blank: Enter a first name.
             last_name:
               blank: Enter a surname.
-            postcode:
-              blank: Enter your setting's postcode.
-              invalid: Your setting's postcode is invalid.
             email:
               blank: Enter an email address.
               invalid: Enter a valid email address.
@@ -76,122 +71,52 @@ en:
               confirmation: Sorry, your passwords don't match.
             terms_and_conditions_agreed_at:
               blank: You must accept the terms and conditions and privacy policy to create an account.
-            ofsted_number:
-              invalid: This Ofsted number is not recognised.
+
+
+
+
+  # Form Builder ---------------------------------------------------------------
+
+  helpers:
+    label:
+      user:
+        first_name: First name
+        last_name: Surname
+        email: Email address
+        password: Create a new password
+        current_password: Enter your current password
+        password_confirmation: Confirm password
+        setting_type: Your setting type
+        setting_type_other: Other setting
+    hint:
+      user:
+        current_password: We need your current password to confirm your changes.
+
+  # Common Elements ------------------------------------------------------------
+
   phase_banner: This is a new service, your %{link} will help us improve it.
+
+  password_complexity: Your password must contain at least %{length} characters.
+
   page_number: Page %{current} of %{total}
+
+  na: Not applicable
+
   links:
     change: Change
     save: Save
+    continue: Continue
+    cancel: Cancel
+
   banners:
     alert: Warning
     error: Error
     important: Success
     notice: Success
+
+  # Training Modules -----------------------------------------------------------
+
   date_completed: 'Date completed: %{date}'
-
-  registration:
-    names:
-      edit:
-        heading: About you
-        body: We're asking for your details so we can personalise your training certificates.
-        button: Continue
-      update:
-        complete_update: You have updated your details
-    setting_types:
-      edit:
-        heading: What setting type do you work in?
-        body: |
-          {:.govuk-hint}
-            Search for the type of setting or organisation you work in, for example childminder or nursery.
-
-          {:.govuk-hint}
-            If you work in more than one early years setting, enter the one where you work most often.
-
-          {:.govuk-hint}
-            Your training progress won't be shared with anyone without your permission.
-        button: Continue
-        link_to_setting_type_other: I cannot find my setting or organisation
-        autocomplete_not_found: No setting found.
-      update:
-        complete_registration: Thank you for creating an Early years child development training account. You can now start your first module.
-        update_registration: Thank you for updating your Early years child development training account. You can now continue.
-        complete_update: You have updated your details
-    setting_type_others:
-      edit:
-        heading: Where do you work?
-        body: Enter the type of setting or organisation where you work.
-        button: Continue
-      update:
-        complete_registration: Thank you for creating an Early years child development training account. You can now start your first module.
-        update_registration: Thank you for updating your Early years child development training account. You can now continue.
-        complete_update: You have updated your details
-    local_authorities:
-      edit:
-        heading: What local authority area do you work in?
-        body: |
-          {:.govuk-hint}
-            This could be your county council, district council or London borough.
-        button: Continue
-        multiple_local_authorities: I work across more than one local authority
-        autocomplete_not_found: No local authority found.
-      update:
-        complete_registration: Thank you for creating an Early years child development training account. You can now start your first module.
-        update_registration: Thank you for updating your Early years child development training account. You can now continue.
-        complete_update: You have updated your details
-    role_types:
-      edit:
-        heading: Which of the following best describes your role?
-        body: |
-          Your role
-        button: Continue
-        link_to_role_type_other: I would describe my role in another way.
-      update:
-        complete_registration: Thank you for creating an Early years child development training account. You can now start your first module.
-        update_registration: Thank you for updating your Early years child development training account. You can now continue.
-        complete_update: You have updated your details
-    role_type_others:
-      edit:
-        heading: What is your role?
-        body: Enter your job title.
-        button: Continue
-      update:
-        complete_registration: Thank you for creating an Early years child development training account. You can now start your first module.
-        update_registration: Thank you for updating your Early years child development training account. You can now continue.
-        complete_update: You have updated your details
-    training_emails:
-      edit:
-        heading: 'Do you want to get email updates about this training course?'
-        body: |
-          {:.govuk-hint}
-            Turn on email updates to find out about new modules and features in this training course.
-        opt_in: 'Send me email updates about this training course'
-        opt_out: 'Do not send me email updates about this training course'
-        button: Continue
-      update:
-        complete_registration: Thank you for creating an Early years child development training account. You can now start your first module.
-        update_registration: Thank you for updating your Early years child development training account. You can now continue.
-        complete_update: You have updated your details
-    early_years_emails:
-      edit:
-        heading: 'Do you want to get early years email updates from the Department for Education?'
-        body: |
-          {:.govuk-hint}
-            Turn on email updates to get news about the early years foundation stage (EYFS) and other early years information from the Department for Education.
-        opt_in: 'Send me early years email updates'
-        opt_out: 'Do not send me early years email updates'
-        button: Continue
-      update:
-        complete_registration: Thank you for creating an Early years child development training account. You can now start your first module.
-        update_registration: Thank you for updating your Early years child development training account. You can now continue.
-        complete_update: You have updated your details
-  setting_type:
-    heading: Change your setting's information
-
-  password:
-    last_changed: Password last changed on %{date}
-    hardness: Your password must contain at least %{length} characters.
-    remember_me: Remember me
 
   module_indicator:
     completed: completed
@@ -205,43 +130,7 @@ en:
     started: Resume module
     not_started: Start module
 
-  experts:
-    heading: The experts
-    summary: This training course has been created by early years experts.
-    body: |
-      The experts who have worked with the Department for Education on this training have significant experience in early years education.
-
-      Their experience includes:
-
-      - working as early years practitioners
-      - working as nursery managers
-      - working in SEND residential environments
-      - teaching early years courses in college environments
-      - supporting a wide range of practitioners including childminders, apprentices and nursery staff
-
-      Their qualifications in early years practice include:
-
-      - Foundation Degree in Early Childhood Studies
-      - Certificate in Education (CertEd)
-      - BTEC National Diploma in EY Studies
-
-      Their qualifications in early years management include:
-
-      - CMI Level 5 Diploma Leadership and Management
-      - CMI Level 3 Certificate in Principles of Management and Leadership
-      - NCFE Level 2 Certificate in Equality and Diversity
-      - NCFE Level 2 Certificate in Counselling Skills
-      - Safeguarding and Prevent
-      - Licence to Observe
-      - D32/D33 Assessor Qualification
-
-      Their additional qualifications include:
-
-      - Diploma in Teaching in the Lifelong Learning Sector (DTLLS)
-      - GNVQ Advanced Health and Social Care
-      - NCFE CACHE Level 2 Certificate in Understanding Behaviour that Challenges
-      - NCFE CACHE Level 2 Certificate in Understanding Autism
-      - Makaton Stage 8
+  # -----------------------------------------------------------
 
   prompt:
     info: In your setting
@@ -249,14 +138,6 @@ en:
     brain: Reflection point
     note: Add to your learning log
     test: Check your understanding
-
-  timeout:
-    heading: You're about to be signed out
-    body: Your progress through the training has been saved. Other changes made to your account or learning log will not be saved.
-    noscript: |
-      For security, you'll be signed out at %{sign_out_time}.
-
-      To stay signed in, continue through the training or refresh the page.
 
   summary_intro:
     heading: Summary and next steps
@@ -346,55 +227,10 @@ en:
       You will be able to see if you get these questions right or wrong.
       Your scores are not recorded and they do not count towards the certificate of achievement.
 
-  close_account:
-    body: |
-      If you do not want to use your Early years child development training account anymore, you can ask us to close your account.
-
-      You will no longer be able to access the training modules. Any certificates you have earned will be permanently deleted.
-    button: Request to close account
-    confirm:
-      heading: Confirm you want to close your account
-      body: |
-        After you close your account you will no longer be able to access the training modules.
-
-        Any certificates you have earned will be permanently deleted.
-
-        We will delete your personal information within 10 working days. The personal information we will delete includes:
-
-        - your name
-        - your email address
-        - your postcode, if you provided it when you registered
-        - any notes you have written in your learning log 
-
-        We will keep some anonymous information about:
-
-        - your role
-        - your local authority
-        - your usage of the training modules
-        - why you closed your account
-
-        This is to help us improve the training. None of this information will be 
-        personally identifiable to you.
-
-        You may still receive emails while we are processing your account closure. 
-        After your personal information is deleted, you will not receive any further
-        emails from Early years child development training.
-
-      confirm_button: Close my account
-      cancel_button: Cancel and go back to my account
-    closed:
-      heading: Account closed
-      body: |
-        We have received your request to close your account.
-
-        Your data will be deleted within 10 working days.
-
-        You have been logged out.
-
   training:
     assessments:
-      heading: Assessment results
       show:
+        heading: Assessment results
         incorrect: You answered %{answers}. That's not quite right.
         pass:
           heading: Congratulations
@@ -416,135 +252,266 @@ en:
 
             You may wish to revisit some of the learning before taking the test again.
 
-  assessment_results:
-    heading: Assessment results
-    body: |
-      **Wrong** answers are shown below
-    show:
-      incorrect: You answered %{answers}. That's not quite right.
-      pass:
-        heading: Congratulations
-        text: |
-          ## **You scored %{score}%**
-
-          Congratulations - you have scored highly enough to receive a certificate of achievement for this module.
-      fail:
-        heading: Revisit the module
-        text: |
-          ## **You scored %{score}%**
-
-
-          Unfortunately you have not scored highly enough to receive a certificate.
-
-
-          You can see the questions you answered incorrectly.
-
-
-          You may wish to revisit some of the learning before taking the test again.
-
-  # Form Builder ---------------------------------------------------------------
-  helpers:
-    label:
-      user:
-        first_name: First name
-        last_name: Surname
-        email: Email address
-        password: Create a new password # /my-account/edit-password
-        current_password: Enter your current password
-        password_confirmation: Confirm password
-        postcode: Your setting's postcode
-        setting_type: Your setting type
-        setting_type_other: Other setting
-        ofsted_number: Your setting's Ofsted number, if you have one
-    hint:
-      user:
-        # email:
-        # email_html:
-
-        postcode: |
-          If you work in multiple settings, choose the one where you work most often.
-        ofsted_number: |
-          This might start with EY followed by 6 numbers, or it might be a number that is 6 or 7 digits long.
-        current_password: |
-          We need your current password to confirm your changes.
   notice:
     email_changed: |
       We have sent an email to your new email address with a link to click to confirm the change.
 
       If you have not received the email after a few minutes, please check your spam folder.
 
-  # Browser and bookmarks ------------------------------------------------------
-  html_title:
-    home:
-      index: Home page
-    learning:
-      show: My modules
-    notes:
-      show: Learning log
-    user:
-      show: My account
-      edit_name: Change name
-      edit_email: Change email address
-      edit_password: Change password
-      edit_postcode: Change your setting's postcode information
-      edit_ofsted_number: Change your setting's Ofsted number
-      edit_setting_type: Change your setting type
-      check_email_confirmation: Check email confirmation
-      check_email_password_reset: Check email password reset
-      edit_training_emails: Change email preferences
 
-    timeout:
-      timeout_user: User timeout
-    users/sessions:
-      new: Sign in
-    passwords:
-      new: Reset password
-      edit: Choose a new password
-    registrations:
-      new: Create an Early years child development training account
-      edit: Change your password
-    confirmations:
-      new: Resend your confirmation
-      show: Resend your confirmation
-    devise/unlocks:
-      new: Resend unlock instructions
-      show: Resend unlock instructions
-    settings:
-      show:
-        # FIXME: routing
-        cookie_policy: Cookie policy
-        cookie-policy: Cookie policy
+  # Pages ----------------------------------------------------------------------
 
-    # --------------------------------------------------------------------------
-    # YAML titles
-    training_modules:
-      index: About training
-    content_pages:
-      show:
-        what-to-expect: What to expect during the training
-    static:
-      show:
-        accessibility-statement: Accessibility statement
-        new-registration: Update your registration details
-        other-problems-signing-in: Other problems signing in
-        privacy-policy: Privacy policy
-        sitemap: Sitemap
-        terms-and-conditions: Terms and conditions
-        whats-new: What's new in the training
-        wifi-and-data: Free internet, wifi and data resources
-        promotional-materials: Promotional materials
+  # /my-learning
+  my_learning:
+    title: My modules
 
-    # --------------------------------------------------------------------------
-    # CMS titles
-    training/modules:
-      index: About training
-    training/pages:
-      show:
-        what-to-expect: What to expect during the training
+  my_learning_log:
+    title: Learning log
+
+  # /user/timeout
+  # and modal
+  timeout:
+    title: User timeout
+    heading: You're about to be signed out
+    body: Your progress through the training has been saved. Other changes made to your account or learning log will not be saved.
+    noscript: |
+      For security, you'll be signed out at %{sign_out_time}.
+
+      To stay signed in, continue through the training or refresh the page.
+
+  # Account management ---------------------------------------------------------
+
+  # /my-account
+  my_account:
+    title: My account
+    setting_details: <h2 class='govuk-heading-m'>Your setting details</h2>
+    email_preferences: <h2 class='govuk-heading-m'>Your email preferences</h2>
+    training_emails_true: You have chosen to receive emails about this training course.
+    training_emails_false: You have chosen not to receive emails about this training course.
+    password_changed: Password last changed on %{date}
+    remember_me: Remember me
+    closing:
+      button: Request to close account
+      information: |
+        ## Closing your account
+        {: .govuk-heading-m }
+
+        If you do not want to use your Early years child development training account anymore, you can ask us to close your account.
+
+        You will no longer be able to access the training modules.
+        Any certificates you have earned will be permanently deleted.
+
+  # /users/sign-up
+  account_register:
+    title: Create an Early years child development training account
+
+  # /my-account/edit-password
+  account_password:
+    title: Change your password
+
+  # /users/password/edit?reset_password_token=wXW-cNrWm4naanihcQW5
+  account_password_change:
+    title: Choose a new password
+
+  # /my-account/edit-email
+  account_email:
+    title: Change email address
+
+  account_reset:
+    title: Reset password
+
+  # /my-account/check-email-password-reset
+  account_reset_check:
+    title: Check email password reset
+    summary: Problems with the email?
+    intro: |
+      # Check your email
+      {: .govuk-heading-l}
+
+      We have sent you an email with instructions for how to reset your password.
+
+      If you have not received the email after a few minutes, please check your spam folder.
+
+  # /my-account/check-email-password-reset
+  # /my-account/check-email-confirmation
+  email_advice:
+    not_received: |
+      I haven’t received the email
+      {: .govuk-heading-s}
+
+      Please wait a few minutes for the email to arrive.
+      If it doesn’t appear in your inbox, please check your spam or junk email folder.
+      If you still cannot see the email, we can send it again.
+
+      [Send me another email](%{link})
+    different: |
+      I have a different problem
+      {: .govuk-heading-s}
+
+      For other problems with creating your account or signing in, please [contact us](%{link}){:target="_blank"}{:class="govuk-link"}.
+    no_access: |
+      I don’t have access to the email address I used to register
+      {: .govuk-heading-s}
+
+      You can set up your account using a different email address.
+
+      Please [create a new account](%{link})
 
 
-  # CMS microcopy
+  account_unlock:
+    title: Resend unlock instructions
+
+  account_confirm:
+    title: Resend your confirmation
+
+  # /my-account/check-email-confirmation
+  account_confirm_check:
+    title: Check email confirmation
+    summary: Problems with the activation email?
+    intro: |
+      # Check your email
+      {: .govuk-heading-l}
+
+      We will check if a training account has been created using the email address you entered.
+      If it has, you will receive an email shortly with instructions for how to verify your email address.
+    recipient: |
+      We sent the email to:
+
+      %{recipient}
+      {: .govuk-!-font-weight-bold}
+
+      To continue setting up your training account you must click the link in the email.
+      If you have not received the email after a few minutes, please check your spam folder.
+
+  account_login:
+    title: Sign in
+
+  account_closed:
+    title: Goodbye
+    body: |
+      # Account closed
+      {: .govuk-heading-l }
+
+      We have received your request to close your account.
+
+      Your data will be deleted within 10 working days.
+
+      You have been logged out.
+
+      [Go to %{service_name} home](/)
+
+
+  # TODO: refactor close_account i18n keys and templates
+  close_account:
+    confirm:
+      heading: Confirm you want to close your account
+      body: |
+        After you close your account you will no longer be able to access the training modules.
+
+        Any certificates you have earned will be permanently deleted.
+
+        We will delete your personal information within 10 working days. The personal information we will delete includes:
+
+        - your name
+        - your email address
+        - your postcode, if you provided it when you registered
+        - any notes you have written in your learning log
+
+        We will keep some anonymous information about:
+
+        - your role
+        - your local authority
+        - your usage of the training modules
+        - why you closed your account
+
+        This is to help us improve the training. None of this information will be
+        personally identifiable to you.
+
+        You may still receive emails while we are processing your account closure.
+        After your personal information is deleted, you will not receive any further
+        emails from Early years child development training.
+
+      confirm_button: Close my account
+      cancel_button: Cancel and go back to my account
+
+
+  # Registration Journey -------------------------------------------------------
+
+  # Common registration form elements
+  details_updated: You have updated your details
+  complete_registration: Thank you for creating an Early years child development training account. You can now start your first module.
+  update_registration: Thank you for updating your Early years child development training account. You can now continue.
+
+  # /registration/name/edit
+  register_name:
+    heading: About you
+    body: We're asking for your details so we can personalise your training certificates.
+
+  # /registration/setting-type/edit
+  register_setting:
+    heading: What setting type do you work in?
+    body: |
+      {:.govuk-hint}
+        Search for the type of setting or organisation you work in, for example childminder or nursery.
+
+      {:.govuk-hint}
+        If you work in more than one early years setting, enter the one where you work most often.
+
+      {:.govuk-hint}
+        Your training progress won't be shared with anyone without your permission.
+    label: Setting type
+    other_link: I cannot find my setting or organisation
+    not_found: No setting found.
+
+  # /registration/setting-type-other/edit
+  register_custom_setting:
+    heading: Where do you work?
+    body: Enter the type of setting or organisation where you work.
+
+  # /registration/local-authority/edit
+  register_authority:
+    heading: What local authority area do you work in?
+    body: |
+      {:.govuk-hint}
+        This could be your county council, district council or London borough.
+    label: Local authority
+    other_link: I work across more than one local authority
+    not_found: No local authority found.
+
+  # /registration/role-type/edit
+  register_role:
+    heading: Which of the following best describes your role?
+    body: |
+      Your role
+    other_link: I would describe my role in another way.
+
+  # /registration/role-type-other/edit
+  register_custom_role:
+    heading: What is your role?
+    body: Enter your job title.
+
+  # Email Preferences ----------------------------------------------------------
+
+  training_emails:
+    heading: Do you want to get email updates about this training course?
+    body: |
+      {:.govuk-hint}
+        Turn on email updates to find out about new modules and features in this training course.
+    opt_in: Send me email updates about this training course
+    opt_out: Do not send me email updates about this training course
+
+  early_years_emails:
+    heading: Do you want to get early years email updates from the Department for Education?
+    body: |
+      {:.govuk-hint}
+        Turn on email updates to get news about the early years foundation stage (EYFS) and other early years information from the Department for Education.
+    opt_in: Send me early years email updates
+    opt_out: Do not send me early years email updates
+
+
+  # /
   home:
+    title: Home page
     hero: |
       # %{service_name}
       {: .govuk-heading-l}
@@ -576,7 +543,10 @@ en:
 
       Sign in to continue learning, see your progress and download certificates.
 
+
+  # /about-training
   about:
+    title: About training
     enrol: |
       ## Ready to get started?
 
@@ -608,14 +578,15 @@ en:
     summary: |
       %{description}
 
-      ## What you'll learn
-      {: .govuk-heading-m}
+      **What you'll learn**
 
       This module covers:
 
       %{criteria}
 
+  # /settings/cookie-policy
   cookie_policy:
+    title: Cookie policy
     legend : Do you want to accept analytics cookies?
     flash: You’ve set your cookie preferences. [Go back to Early years child development training](%{path}).
     body: |
@@ -728,49 +699,40 @@ en:
       View your notes from all your modules here.
       You can also use the links provided to revisit a specific topic.
 
-  emails:
-    confirmation:
-      summary: Problems with the activation email?
-      intro: |
-        # Check your email
-        {: .govuk-heading-l}
+  experts:
+    heading: The experts
+    summary: This training course has been created by early years experts.
+    body: |
+      The experts who have worked with the Department for Education on this training have significant experience in early years education.
 
-        We will check if a training account has been created using the email address you entered.
-        If it has, you will receive an email shortly with instructions for how to verify your email address.
-      recipient: |
-        We sent the email to:
+      Their experience includes:
 
-        %{recipient}
-        {: .govuk-!-font-weight-bold}
+      - working as early years practitioners
+      - working as nursery managers
+      - working in SEND residential environments
+      - teaching early years courses in college environments
+      - supporting a wide range of practitioners including childminders, apprentices and nursery staff
 
-        To continue setting up your training account you must click the link in the email.
-        If you have not received the email after a few minutes, please check your spam folder.
-    password_reset: |
-      # Check your email
-      {: .govuk-heading-l}
+      Their qualifications in early years practice include:
 
-      We have sent you an email with instructions for how to reset your password.
+      - Foundation Degree in Early Childhood Studies
+      - Certificate in Education (CertEd)
+      - BTEC National Diploma in EY Studies
 
-      If you have not received the email after a few minutes, please check your spam folder.
-    summary: Problems with the email?
-    not_received: |
-      I haven’t received the email
-      {: .govuk-heading-s}
+      Their qualifications in early years management include:
 
-      Please wait a few minutes for the email to arrive.
-      If it doesn’t appear in your inbox, please check your spam or junk email folder.
-      If you still cannot see the email, we can send it again.
+      - CMI Level 5 Diploma Leadership and Management
+      - CMI Level 3 Certificate in Principles of Management and Leadership
+      - NCFE Level 2 Certificate in Equality and Diversity
+      - NCFE Level 2 Certificate in Counselling Skills
+      - Safeguarding and Prevent
+      - Licence to Observe
+      - D32/D33 Assessor Qualification
 
-      [Send me another email](%{link})
-    no_access: |
-      I don’t have access to the email address I used to register
-      {: .govuk-heading-s}
+      Their additional qualifications include:
 
-      You can set up your account using a different email address.
-
-      Please [create a new account](%{link})
-    different: |
-      I have a different problem
-      {: .govuk-heading-s}
-
-      For other problems with creating your account or signing in, please [contact us](%{link}){:target="_blank"}{:class="govuk-link"}.
+      - Diploma in Teaching in the Lifelong Learning Sector (DTLLS)
+      - GNVQ Advanced Health and Social Care
+      - NCFE CACHE Level 2 Certificate in Understanding Behaviour that Challenges
+      - NCFE CACHE Level 2 Certificate in Understanding Autism
+      - Makaton Stage 8

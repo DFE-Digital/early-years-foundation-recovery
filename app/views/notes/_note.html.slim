@@ -1,12 +1,13 @@
 div id="#{dom_id note}"
-  h3.govuk-heading-m= note.logged_at
+  h3.govuk-heading-m
+    = note.logged_at
 
   p
     strong Page:
-    =< govuk_link_to(note.title, training_module_content_page_path(note.training_module, note.name))
+    =< govuk_link_to(note.title, training_module_page_path(note.training_module, note.name))
 
   .log-entry
-    - if note.body.present?
+    - if note.filled?
       h4.govuk-heading-m You wrote:
 
       = simple_format(note.body, class: 'govuk-body data-hj-suppress')

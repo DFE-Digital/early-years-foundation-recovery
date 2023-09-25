@@ -1,25 +1,21 @@
 # User's module progress and submodule/topic state
 #
 class ModuleProgress
-  # @param user [User]
-  # @param mod [TrainingModule]
-  def initialize(user:, mod:)
-    @user = user
-    @mod = mod
-    @summative_assessment = SummativeAssessmentProgress.new(user: user, mod: mod)
-  end
+  extend Dry::Initializer
 
   # @!attribute [r] user
   #   @return [User]
+  option :user, Types.Instance(User), required: true
   # @!attribute [r] mod
-  #   @return [TrainingModule]
+  #   @return [Training::Module]
+  option :mod, Types.Instance(Training::Module), required: true
   # @!attribute [r] summative_assessment
-  #   @return [SummativeAssessmentProgress]
-  attr_reader :user, :mod, :summative_assessment
+  #   @return [AssessmentProgress]
+  option :summative_assessment, default: proc { AssessmentProgress.new(user: user, mod: mod) }
 
   # @return [Float] Module completion
   def value
-    visited.size.to_f / mod.module_items.size
+    visited.size.to_f / mod.content.size
   end
 
   # Name of last page viewed in module
@@ -30,13 +26,13 @@ class ModuleProgress
   end
 
   # Assumes gaps in page views due to skipping or revisions to content
-  # @return [ModuleItem]
+  # @return [Training::Content]
   def furthest_page
     visited.last
   end
 
   # Last visited module item with fallback to first item
-  # @return [ModuleItem]
+  # @return [Training::Content]
   def resume_page
     unvisited.first&.previous_item || mod.first_content_page
   end
@@ -48,8 +44,7 @@ class ModuleProgress
   def skipped?
     if unvisited.none?
       false
-    # elsif key_event('module_complete') && unvisited.any?
-    elsif visited?(mod.thankyou_page) && unvisited.any? # seen last content page but has gaps
+    elsif completed? && unvisited.any? # seen last content page but has gaps
       true
     elsif gaps?
       true
@@ -57,32 +52,27 @@ class ModuleProgress
   end
 
   # @see CourseProgress
-  # @return [Boolean] true if every page is visited (certificate excluded)
+  # @return [Boolean]
   def completed?
     key_event('module_complete').present?
   end
 
-  # TODO: refactor once every user has a "module_complete" event
-  #
-  # Completed date for module
-  # @return [DateTime, nil]
-  def completed_at
-    page_name = mod.pages.last.name
-    page_event = module_item_events(page_name).first
-    named_event = key_event('module_complete')
-    event = named_event || page_event
-    event&.time
-  end
-
   # @see CourseProgress
-  # @return [Boolean] module pages have been viewed (past interruption)
+  # @return [Boolean]
   def started?
-    visited?(mod.first_content_page)
+    key_event('module_start').present?
   end
 
+  # @param page [Training::Module]
   # @return [Boolean] view event logged for page
   def visited?(page)
     module_item_events(page.name).present?
+  end
+
+  # Completed date for module
+  # @return [DateTime, nil]
+  def completed_at
+    key_event('module_complete')&.time
   end
 
 protected
@@ -105,15 +95,13 @@ protected
     state(:none?, items)
   end
 
-  # @see SummativeAssessmentProgress
-  #
+  # @see AssessmentProgress
   # @return [Boolean]
   def failed_attempt?
     summative_assessment.attempted? && summative_assessment.failed?
   end
 
-  # @see SummativeAssessmentProgress
-  #
+  # @see AssessmentProgress
   # @return [Boolean]
   def successful_attempt?
     summative_assessment.attempted? && summative_assessment.passed?
@@ -127,25 +115,25 @@ protected
 
 private
 
-  # @return [Array<ModuleItem>]
+  # @return [Array<Module::Content>]
   def visited
-    mod.module_items.select { |item| visited?(item) }
+    mod.content.select { |item| visited?(item) }
   end
 
-  # @return [Array<ModuleItem>]
+  # @return [Array<Module::Content>]
   def unvisited
-    mod.pages.reject { |item| visited?(item) }
+    mod.content.reject { |item| visited?(item) }
   end
 
   # @param method [Symbol]
-  # @param items [Array<ModuleItem>]
+  # @param items [Array<Module::Content>]
   #
   # @return [Boolean]
   def state(method, items)
     items.send(method) { |item| module_item_events(item.name).present? }
   end
 
-  # @param item_id [String] module item name
+  # @param item_id [String] content slug
   # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
   def module_item_events(item_id)
     user.events.where_properties(training_module_id: mod.name, id: item_id)

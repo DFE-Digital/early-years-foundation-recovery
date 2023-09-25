@@ -1,15 +1,18 @@
+- content_for :page_title do
+  = html_title t('account_confirm_check.title')
+
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
     = govuk_back_link href: url_for(:back)
 
-    = content_resource 'emails.confirmation.intro'
+    = content_resource 'account_confirm_check.intro'
 
     - if @user
-      = content_resource 'emails.confirmation.recipient', recipient: @user.email
+      = content_resource 'account_confirm_check.recipient', recipient: @user.email
 
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
-    = govuk_details summary_text: t('emails.confirmation.summary') do
-      = content_resource 'emails.not_received', link: new_confirmation_path(:user)
-      = content_resource 'emails.no_access', link: new_registration_path(:user)
-      = content_resource 'emails.different', link: Rails.application.credentials.contact_us
+    = govuk_details summary_text: t('account_confirm_check.summary') do
+      = content_resource 'email_advice.not_received', link: new_confirmation_path(:user)
+      = content_resource 'email_advice.no_access', link: new_registration_path(:user)
+      = content_resource 'email_advice.different', link: Rails.application.credentials.contact_us

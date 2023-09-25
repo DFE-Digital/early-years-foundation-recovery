@@ -15,11 +15,11 @@ class SeedContentful
 private
 
   # @param message [String]
-  # @return [String]
+  # @return [String, nil]
   def log(message)
     if ENV['RAILS_LOG_TO_STDOUT'].present?
       Rails.logger.info(message)
-    else
+    elsif ENV['VERBOSE'].present?
       puts message
     end
   end

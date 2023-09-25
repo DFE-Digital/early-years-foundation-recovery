@@ -1,3 +1,6 @@
+- content_for :page_title do
+  = html_title 'For security, enter your password.'
+
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
     = govuk_back_link(href: user_path)
@@ -8,10 +11,10 @@
         = f.govuk_password_field :current_password,
           autofocus: true,
           aria: { required: true },
-          label: { text: 'For security, enter your password.'},
+          label: { text: 'For security, enter your password.' },
           hint: { text: 'Your password' } do 
           p= govuk_details(summary_text: 'Problems with your password?') do
             p.govuk-heading-s= 'I have forgotten my password'
             = "If you have forgotten your password you can "
             = govuk_link_to 'reset it', reset_password_user_close_account_path
-      = f.govuk_submit 'Continue'
+      = f.govuk_submit t('links.continue')

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Data::SummativeQuiz do
-  let(:user_1) { create :user, :registered, :agency_setting, role_type: 'childminder' }
-  let(:user_2) { create :user, :registered, :agency_setting, role_type: 'childminder' }
+  let(:user_1) { create :user, :agency_childminder }
+  let(:user_2) { create :user, :agency_childminder }
 
   before do
     create :user_assessment, :passed, user_id: user_1.id, score: 100, module: 'module_1'
@@ -18,7 +18,7 @@ RSpec.describe Data::SummativeQuiz do
     it 'calculates pass and fail values by User attribute' do
       expect(role_type).to eq(
         {
-          'childminder' => {
+          'Childminder' => {
             fail_count: 2,
             fail_percentage: 0.5,
             pass_count: 2,

@@ -1,4 +1,19 @@
 - if debug?
   pre.debug_dump
-    h2 Visits
-    = render @user.visits
+    hr
+
+    | setting_type_id: #{current_user.setting_type_id}
+    br
+    | setting_type: #{current_user.setting_type}
+    br
+    | setting_type_other: #{current_user.setting_type_other}
+    br
+    | role_type: #{current_user.role_type}
+    br
+    | role_type_other: #{current_user.role_type_other}
+    br
+    | local_authority: #{current_user.local_authority}
+    br
+    | training_emails: #{current_user.training_emails}
+    br
+    | early_years_emails: #{current_user.early_years_emails}

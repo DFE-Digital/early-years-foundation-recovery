@@ -39,13 +39,13 @@ class Ahoy::Event < ApplicationRecord
   scope :module_complete, -> { where(name: 'module_complete') }
   scope :confidence_check_complete, -> { where(name: 'confidence_check_complete') }
 
-  # @param mod_names [Array<String, Symbol>] filter by TrainingModule names
+  # @param mod_names [Array<String, Symbol>] filter by Training::Module names
   scope :where_module, lambda { |*mod_names|
     where("properties -> 'training_module_id' ?| array[:values]", values: mod_names)
   }
   # scope :where_module, lambda { |mod_name| where_properties(training_module_id: mod_name) }
 
-  # @param types [Array<String, Symbol>] filter by ModuleItem types
+  # @param types [Array<String, Symbol>] filter by Training::Content types
   scope :where_page_type, lambda { |*types|
     page_view.where("properties -> 'type' ?| array[:values]", values: types)
   }

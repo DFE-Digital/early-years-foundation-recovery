@@ -1,3 +1,6 @@
+- content_for :page_title do
+  = html_title t(:title, scope: :account_login)
+
 - content_for :devise_sidebar do
   h2.govuk-heading-m
     | Don't have an account yet?

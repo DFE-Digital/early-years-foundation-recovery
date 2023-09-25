@@ -1,3 +1,4 @@
+# :nocov:
 require 'seed_contentful'
 
 class SeedSnippets < SeedContentful
@@ -56,3 +57,4 @@ private
     result
   end
 end
+# :nocov:

@@ -1,3 +1,6 @@
+- content_for :page_title do
+  = html_title t(:title, scope: :my_learning)
+
 = render 'cms_debug'
 
 .govuk-grid-row
@@ -10,37 +13,37 @@ hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
 .govuk-grid-row id='started'
   .govuk-grid-column-full
     h2.govuk-heading-m Modules in progress
-    - if @user.course.current_modules.none?
-      - if @user.course.completed_modules.none?
+    - if current_user.course.current_modules.none?
+      - if current_user.course.completed_modules.none?
         p You have not started any modules. To begin the training course, start an available module.
       - else
         p You have not started any modules. Please choose an available module.
     - else
       .grid-container
-        - @user.course.current_modules.each do |mod|
+        - current_user.course.current_modules.each do |mod|
           = render 'card', mod: mod, current: true
 
-- if @user.course.available_modules.any? || @user.course.course_completed?
+- if current_user.course.available_modules.any? || current_user.course.course_completed?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
   .govuk-grid-row id='available'
     .govuk-grid-column-full
       h2.govuk-heading-m Available modules
-      - if @user.course.available_modules.any?
+      - if current_user.course.available_modules.any?
         .grid-container
-          - @user.course.available_modules.each do |mod|
+          - current_user.course.available_modules.each do |mod|
             = render 'card', mod: mod, current: false
 
-      - elsif @user.course.course_completed?
+      - elsif current_user.course.course_completed?
         p You do not have any modules available.
 
-- if @user.course.upcoming_modules.any?
+- if current_user.course.upcoming_modules.any?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
   .govuk-grid-row id='upcoming'
     .govuk-grid-column-full
       h2.govuk-heading-m Future modules in this course
 
       .grid-container
-        - @user.course.upcoming_modules.each do |mod|
+        - current_user.course.upcoming_modules.each do |mod|
           .govuk-card id=mod.name
             h3.govuk-heading-s
               = mod.card_title
@@ -49,7 +52,7 @@ hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
               = govuk_link_to 'View more information about this module',
                 course_overview_path + mod.card_anchor
 
-- if @user.course.completed_modules.any?
+- if current_user.course.completed_modules.any?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
   .govuk-grid-row id='completed'
     .govuk-grid-column-full

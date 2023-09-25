@@ -62,6 +62,7 @@ resource "azurerm_linux_web_app" "review-app" {
   #checkov:skip=CKV_AZURE_78:Disabled by default in Terraform version used
   #checkov:skip=CKV_AZURE_16:Using VNET Integration
   #checkov:skip=CKV_AZURE_71:Using VNET Integration
+  #checkov:skip=CKV_AZURE_222:Network access rules configured
 }
 
 # Create Subnet for Review Application

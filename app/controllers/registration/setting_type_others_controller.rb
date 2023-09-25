@@ -1,21 +1,26 @@
-class Registration::SettingTypeOthersController < Registration::BaseController
-  def edit
-    @user_form = Users::SettingTypeOtherForm.new(user: current_user, setting_type_other: current_user.setting_type_other)
-  end
+module Registration
+  class SettingTypeOthersController < BaseController
+    def edit; end
 
-  def update
-    @user_form = Users::SettingTypeOtherForm.new(user_params.merge(user: current_user))
+    def update
+      form.setting_type_other = user_params[:setting_type_other]
 
-    if @user_form.save
-      redirect_to edit_registration_local_authority_path
-    else
-      render :edit, status: :unprocessable_entity
+      if form.save
+        redirect_to edit_registration_local_authority_path
+      else
+        render :edit, status: :unprocessable_entity
+      end
     end
-  end
 
-private
+  private
 
-  def user_params
-    params.require(:user).permit(:setting_type_other)
+    def user_params
+      params.require(:user).permit(:setting_type_other)
+    end
+
+    # @return [Registration::SettingTypeOtherForm]
+    def form
+      @form ||= SettingTypeOtherForm.new(user: current_user, setting_type_other: current_user.setting_type_other)
+    end
   end
 end

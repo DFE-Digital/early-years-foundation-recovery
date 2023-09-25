@@ -1,10 +1,15 @@
 module Training
   class ResponsesController < ApplicationController
+    include Learning
+
     before_action :authenticate_registered_user!
 
-    helper_method :content,
+    helper_method :mod,
+                  :content,
                   :progress_bar,
                   :current_user_response
+
+    include Learning
 
     def update
       if save_response!
@@ -13,41 +18,6 @@ module Training
       else
         render 'training/questions/show', status: :unprocessable_entity
       end
-    end
-
-  protected
-
-    # @return [Training::Module]
-    def mod
-      Training::Module.by_name(mod_name)
-    end
-
-    # @return [Training::Question]
-    def content
-      mod.page_by_name(content_name)
-    end
-
-    def progress
-      helpers.cms_module_progress(mod)
-    end
-
-    def progress_bar
-      ContentfulModuleProgressBarDecorator.new(progress)
-    end
-
-    # @return [String]
-    def content_name
-      params[:id]
-    end
-
-    # @return [String]
-    def mod_name
-      params[:training_module_id]
-    end
-
-    # @return [UserAnswer, Response]
-    def current_user_response
-      @current_user_response ||= current_user.response_for(content)
     end
 
   private
@@ -81,7 +51,7 @@ module Training
     end
 
     def redirect
-      helpers.cms_assessment_progress(mod).complete! if content.last_assessment?
+      assessment.complete! if content.last_assessment?
 
       if content.formative_question?
         redirect_to training_module_question_path(mod.name, content.name)
@@ -93,8 +63,9 @@ module Training
     # @return [Ahoy::Event] Update action
     def track_question_answer
       track('questionnaire_answer',
-            cms: true,
-            type: content.assessments_type,
+            uid: content.id,
+            mod_uid: mod.id,
+            type: content.assessments_type, # TODO: will be replaced with content.page_type
             success: current_user_response.correct?,
             answers: current_user_response.answers)
     end

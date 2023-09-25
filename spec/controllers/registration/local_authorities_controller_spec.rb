@@ -17,10 +17,13 @@ RSpec.describe Registration::LocalAuthoritiesController, type: :controller do
     end
   end
 
-  context 'when confirmed user signed in' do
-    let(:confirmed_user) { create :user, :confirmed, :name, :setting_type_with_role_type }
+  context 'when signed in' do
+    subject(:user) do
+      create :user, :named,
+             setting_type_id: Trainee::Setting.with_roles.sample.name
+    end
 
-    before { sign_in confirmed_user }
+    before { sign_in user }
 
     describe 'GET #edit' do
       it 'succeeds' do
@@ -31,7 +34,7 @@ RSpec.describe Registration::LocalAuthoritiesController, type: :controller do
 
     describe 'POST #update' do
       it 'succeeds' do
-        post :update, params: { user: { local_authority: 'A Local Authority' } }
+        post :update, params: { user: { local_authority: 'Custom Local Authority' } }
         expect(response).to redirect_to edit_registration_role_type_path
       end
     end

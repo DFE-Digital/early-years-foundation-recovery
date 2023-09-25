@@ -1,14 +1,17 @@
-= govuk_back_link href: @back_link_href
+= render 'user/debug'
+
+- content_for :page_title do
+  = html_title t(:heading, scope: :training_emails)
+
+= govuk_back_link href: back_link
+
 .govuk-grid-row
   .govuk-grid-column-full
-    = form_for @user_form, url: registration_training_emails_path, method: :patch do |f|
+    = form_for form, url: registration_training_emails_path, method: :patch do |f|
       = f.govuk_error_summary
-      = f.govuk_collection_radio_buttons :training_emails,
-      [OpenStruct.new(id: true, name: t('.opt_in')),OpenStruct.new(id: false, name: t('.opt_out'))],
-      :id,
-      :name,
-      legend: { text: t('.heading') },
-      hint: { text: translate_markdown(t('.body')) }
+
+      - opt_in_out(:training_emails) do |options, legend, hint|
+        = f.govuk_collection_radio_buttons :training_emails, options, :id, :name, legend: { text: legend }, hint: { text: hint }
 
       div class='govuk-!-margin-top-4'
-      = f.govuk_submit t('.button')
+        = f.govuk_submit t('links.continue')

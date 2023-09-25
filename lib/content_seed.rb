@@ -1,3 +1,4 @@
+# :nocov:
 #
 # Seed user training module state
 #
@@ -82,3 +83,4 @@ private
     @time ||= Time.zone.now
   end
 end
+# :nocov:

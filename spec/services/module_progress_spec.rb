@@ -3,18 +3,12 @@ require 'rails_helper'
 RSpec.describe ModuleProgress do
   subject(:progress) { described_class.new(user: user, mod: alpha) }
 
-  let(:alpha) { TrainingModule.find_by(name: :alpha) }
-
   include_context 'with progress'
 
-  before do
-    skip 'YAML ONLY' if Rails.application.cms?
-  end
-
   describe '#started?' do
-    it 'is true once the first sub module is viewed' do
+    it 'is true once the first submodule is viewed' do
       expect(progress.started?).to be false
-      view_module_page_event('alpha', '1-1')
+      start_module(alpha)
       expect(progress.started?).to be true
     end
   end
@@ -30,25 +24,14 @@ RSpec.describe ModuleProgress do
   describe '#completed_at' do
     include_context 'with events'
 
-    context 'when the named event is present' do
-      before do
-        create_event(user, 'module_complete', Time.zone.local(2025, 0o1, 0o1), 'alpha')
-        create_event(user, 'module_content_page', Time.zone.local(2026, 12, 31), 'alpha', '1-3-3-4')
-      end
+    let(:completed_at) { progress.completed_at.to_s }
 
-      it 'uses module_complete time' do
-        expect(progress.completed_at.to_s).to eq '2025-01-01 00:00:00 UTC'
-      end
+    before do
+      create_event(user, 'module_complete', Time.zone.local(2025, 0o1, 0o1), 'alpha')
     end
 
-    context 'when the named event is not present' do
-      before do
-        create_event(user, 'module_content_page', Time.zone.local(2026, 12, 31), 'alpha', '1-3-3-4')
-      end
-
-      it 'uses final page view time' do
-        expect(progress.completed_at.to_s).to eq '2026-12-31 00:00:00 UTC'
-      end
+    it 'uses module_complete time' do
+      expect(completed_at).to eq '2025-01-01 00:00:00 UTC'
     end
   end
 

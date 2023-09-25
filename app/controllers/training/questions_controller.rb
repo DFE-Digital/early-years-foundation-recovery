@@ -1,5 +1,7 @@
 module Training
   class QuestionsController < ApplicationController
+    include Learning
+
     before_action :authenticate_registered_user!
     before_action :track_events, only: :show
 
@@ -8,59 +10,24 @@ module Training
                   :progress_bar,
                   :current_user_response
 
-    def show
-      # TODO: deprecate these instance variables
-      @module_item = content
-    end
-
-  protected
-
-    # common content methods ----------------------------------------------------------------------------
-
-    # @return [Training::Module] shallow
-    def mod
-      Training::Module.by_name(mod_name)
-    end
-
-    # @return [Training::Question]
-    def content
-      mod.page_by_name(content_name)
-    end
-
-    def progress
-      helpers.cms_module_progress(mod)
-    end
-
-    def progress_bar
-      ContentfulModuleProgressBarDecorator.new(progress)
-    end
-
-    # @return [String]
-    def content_name
-      params[:id]
-    end
-
-    # @return [String]
-    def mod_name
-      params[:training_module_id]
-    end
-
-    # response specific ----------------------------------------------------------------------------
-
-    # @return [UserAnswer, Response]
-    def current_user_response
-      current_user.response_for(content)
-    end
+    def show; end
 
   private
 
+    # @see Tracking
     # @return [Ahoy::Event] Show action
     def track_events
       if track_confidence_start?
-        track('confidence_check_start', cms: true)
+        track('confidence_check_start')
       elsif track_assessment_start?
-        track('summative_assessment_start', cms: true)
+        track('summative_assessment_start')
       end
+    end
+
+    # @see Tracking
+    # @return [Hash]
+    def tracking_properties
+      { uid: content.id, mod_uid: mod.id }
     end
 
     # Check current item type for matching named event ---------------------------

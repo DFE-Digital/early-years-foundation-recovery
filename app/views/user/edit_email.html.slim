@@ -1,13 +1,16 @@
+- content_for :page_title do
+  = html_title t(:title, scope: :account_email)
+
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
-    = form_for @user, url: { action: 'update_email' } do |f|
+    = form_for current_user, url: { action: 'update_email' } do |f|
       = f.govuk_error_summary
       = f.govuk_fieldset legend: { text: 'Change email address' } do
         = f.govuk_email_field :email, autofocus: true, autocomplete: 'email', aria: { required: true }
 
-      - if @user.pending_reconfirmation?
-        p Currently waiting confirmation for: #{@user.unconfirmed_email}
+      - if current_user.pending_reconfirmation?
+        p Currently waiting confirmation for: #{current_user.unconfirmed_email}
 
       .govuk-button-group
         = f.govuk_submit t('links.save')
-        = govuk_link_to 'Cancel', user_path
+        = govuk_link_to t('links.cancel'), user_path
