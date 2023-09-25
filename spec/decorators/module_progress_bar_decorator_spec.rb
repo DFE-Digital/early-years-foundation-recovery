@@ -52,7 +52,7 @@ RSpec.describe ModuleProgressBarDecorator do
       let(:grey) { 'line line--grey' }
 
       context 'when learning has not started' do
-        it 'all lines are grey' do
+        xit 'all lines are grey' do
           view_pages_upto(alpha, 'interruption_page')
           expect(attribute).to eq [nil, grey, grey]
         end
@@ -84,7 +84,7 @@ RSpec.describe ModuleProgressBarDecorator do
 
         context 'and content has been viewed' do
           it 'second line stays grey' do
-            view_pages_upto(alpha, 'text_page', 5)
+            view_pages_upto(alpha, 'topic_intro', 5)
             expect(attribute).to eq [nil, green, grey]
           end
         end

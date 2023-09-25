@@ -23,7 +23,7 @@ RSpec.describe 'Progress bar' do
     describe 'final topic page' do
       before do
         view_pages_upto_formative_question(alpha)
-        visit 'modules/alpha/questionnaires/1-1-4'
+        visit 'modules/alpha/questionnaires/1-1-4-1'
       end
 
       it 'shows a green circle with a tick' do
