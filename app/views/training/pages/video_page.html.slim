@@ -2,9 +2,6 @@
 
 = render 'shared/progress_bar'
 
-- content_for :page_title do
-  = html_title mod.title, content.heading
-
 .govuk-grid-row
   .govuk-grid-column-full-from-desktop
     = page_number(**content.pagination)

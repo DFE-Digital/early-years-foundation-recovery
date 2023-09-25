@@ -10,6 +10,8 @@
         - content_for :hero do
           = page_number(**content.pagination) if content.page_numbers?
           = render 'shared/progress_bar'
+- content_for :page_content do
+  = page_number(**content.pagination) if content.page_numbers?
 
         h1= content.heading
         .gem-c-govspeak= translate_markdown(content.body)

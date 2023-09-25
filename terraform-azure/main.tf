@@ -1,4 +1,6 @@
 provider "azurerm" {
+  skip_provider_registration = "true"
+
   features {
     resource_group {
       prevent_deletion_if_contains_resources = false
@@ -48,6 +50,7 @@ module "network" {
 module "database" {
   source = "./terraform-azure-database"
 
+  environment                 = var.environment
   location                    = var.azure_region
   resource_group              = azurerm_resource_group.rg.name
   resource_name_prefix        = var.resource_name_prefix
@@ -70,12 +73,14 @@ module "webapp" {
   location                                 = var.azure_region
   resource_group                           = azurerm_resource_group.rg.name
   resource_name_prefix                     = var.resource_name_prefix
+  as_service_principal_object_id           = var.as_service_principal_object_id
   asp_sku                                  = var.asp_sku
   webapp_admin_email_address               = var.admin_email_address
   webapp_worker_count                      = var.webapp_worker_count
   webapp_subnet_id                         = module.network.webapp_subnet_id
   webapp_name                              = var.webapp_name
   webapp_app_settings                      = local.webapp_app_settings
+  webapp_slot_app_settings                 = local.webapp_slot_app_settings
   webapp_docker_image                      = var.webapp_docker_image
   webapp_docker_image_tag                  = var.webapp_docker_image_tag
   webapp_docker_registry_url               = var.webapp_docker_registry_url

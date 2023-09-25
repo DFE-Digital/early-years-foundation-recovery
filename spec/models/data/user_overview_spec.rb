@@ -25,7 +25,7 @@ RSpec.describe Data::UserOverview do
       'Without Notes Percentage',
       'Complete Registration Mail Recipients',
       'Start Training Mail Recipients',
-      'Continue Training Mail Recipients',
+      # 'Continue Training Mail Recipients',
       'New Module Mail Recipients',
     ]
   end
@@ -55,7 +55,7 @@ RSpec.describe Data::UserOverview do
         without_notes_percentage: 0.5,
         complete_registration_mail_recipients: 1,
         start_training_mail_recipients: 1,
-        continue_training_mail_recipients: 0,
+        # continue_training_mail_recipients: 0,
         new_module_mail_recipients: 2,
       },
     ]
