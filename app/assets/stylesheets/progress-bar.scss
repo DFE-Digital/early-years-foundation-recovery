@@ -23,7 +23,7 @@
 
     .progress--heading {
       text-align: center;
-      font-size: 36px;
+      font-size: 12px;
   
       @include govuk-media-query($from: tablet) {
         font-size: 16px;
