@@ -13,8 +13,14 @@ RSpec.describe ContinueTrainingMailJob do
            module_time_to_completion: { alpha: 0 }
   end
 
+  let(:user_3) do
+    create :user, :registered,
+           confirmed_at: 4.weeks.ago,
+           module_time_to_completion: { alpha: 0 }
+  end
+
   let(:included) { [user] }
-  let(:excluded) { [user_2] }
+  let(:excluded) { [user_2, user_3] }
 
   # Must have started, but not completed training.
   # Must be 4 weeks since their last visit
@@ -37,6 +43,12 @@ RSpec.describe ContinueTrainingMailJob do
            visitor_token: '234',
            user_id: user_2.id,
            started_at: 2.weeks.ago
+
+    create :visit,
+           id: 10,
+           visitor_token: '456',
+           user_id: user_3.id,
+           started_at: 5.weeks.ago
 
     # Travel to 4 weeks ago so that the module start event won't count as a recent visit
     travel_to 4.weeks.ago
