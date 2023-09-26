@@ -25,10 +25,17 @@ RSpec.describe Data::HighFailQuestions do
   end
 
   before do
-    create(:user_answer, :correct, :questionnaire, :summative, module: 'module_1', name: 'q1')
-    create(:user_answer, :correct, :questionnaire, :summative, module: 'module_2', name: 'q1')
-    create(:user_answer, :incorrect, :questionnaire, :summative, module: 'module_1', name: 'q2')
-    create(:user_answer, :incorrect, :questionnaire, :summative, module: 'module_1', name: 'q2')
+    if ENV['DISABLE_USER_ANSWER'].present?
+      create(:response, :correct, :summative, training_module: 'module_1', question_name: 'q1', answers: [1])
+      create(:response, :correct, :summative, training_module: 'module_2', question_name: 'q1', answers: [1])
+      create(:response, :incorrect, :summative, training_module: 'module_1', question_name: 'q2', answers: [2])
+      create(:response, :incorrect, :summative, training_module: 'module_1', question_name: 'q2', answers: [2])
+    else
+      create(:user_answer, :correct, :questionnaire, :summative, module: 'module_1', name: 'q1')
+      create(:user_answer, :correct, :questionnaire, :summative, module: 'module_2', name: 'q1')
+      create(:user_answer, :incorrect, :questionnaire, :summative, module: 'module_1', name: 'q2')
+      create(:user_answer, :incorrect, :questionnaire, :summative, module: 'module_1', name: 'q2')
+    end
   end
 
   it_behaves_like 'a data export model'
