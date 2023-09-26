@@ -56,7 +56,7 @@ RSpec.describe Data::UserOverview do
         without_notes_percentage: 0.6,
         complete_registration_mail_recipients: 1,
         start_training_mail_recipients: 1,
-        continue_training_mail_recipients: 4,
+        continue_training_mail_recipients: 0,
         new_module_mail_recipients: 1,
       },
     ]
