@@ -40,7 +40,7 @@ development:
   DOMAIN: ey-recovery-dev.london.cloudapps.digital
   GOVUK_WEBSITE_ROOT: ey-recovery-dev
   # cms
-  CONTENTFUL_ENVIRONMENT: staging
+  CONTENTFUL_ENVIRONMENT: dev
   CONTENTFUL_PREVIEW: true
   # jobs
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-development
