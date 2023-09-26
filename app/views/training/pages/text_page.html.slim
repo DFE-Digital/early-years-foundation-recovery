@@ -13,10 +13,7 @@
 - content_for :page_content do
   = page_number(**content.pagination) if content.page_numbers?
 
-        h1= content.heading
-        .gem-c-govspeak= translate_markdown(content.body)
+  h1= content.heading
+  .gem-c-govspeak= translate_markdown(content.body)
 
-    - if content.notes?
-      = render partial: 'notes/form'
-    - else
-      = render partial: 'course_pages_footer'
+= render 'content_wrap'
