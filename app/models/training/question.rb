@@ -57,7 +57,7 @@ module Training
       answer.options.map(&:label).sort.eql? %w[False True]
     end
 
-    # TODO remove once user_answers is removed
+    # TODO: remove once user_answers is removed
     # @return [String]
     def assessments_type
       {
