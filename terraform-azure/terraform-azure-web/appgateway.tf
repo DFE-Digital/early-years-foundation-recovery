@@ -23,6 +23,14 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
       selector                = var.webapp_session_cookie_name
       selector_match_operator = "Equals"
     }
+
+    rule_group_override {
+      rule_group_name = "REQUEST-920-PROTOCOL-ENFORCEMENT"
+      rule {
+        id      = "920420"
+        enabled = false
+      }
+    }
   }
 
   policy_settings {
