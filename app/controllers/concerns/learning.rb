@@ -1,4 +1,8 @@
 module Learning
+  # ----------------------------------------------------------------------------
+  # Request Params
+  # ----------------------------------------------------------------------------
+
   # @return [String]
   def mod_name
     params[:training_module_id]
@@ -8,6 +12,10 @@ module Learning
   def content_name
     params[:id]
   end
+
+  # ----------------------------------------------------------------------------
+  # Contentful Entries
+  # ----------------------------------------------------------------------------
 
   # @return [Training::Module]
   def mod
@@ -19,15 +27,9 @@ module Learning
     mod.page_by_name(content_name)
   end
 
-  # @return [ModuleOverviewDecorator]
-  def module_progress
-    ModuleOverviewDecorator.new(progress_service)
-  end
-
-  # @return [ModuleProgressBarDecorator]
-  def progress_bar
-    ModuleProgressBarDecorator.new(progress_service)
-  end
+  # ----------------------------------------------------------------------------
+  # Progress Services
+  # ----------------------------------------------------------------------------
 
   # @return [AssessmentProgress]
   def assessment
@@ -38,6 +40,24 @@ module Learning
   def progress_service
     helpers.module_progress_service(mod)
   end
+
+  # ----------------------------------------------------------------------------
+  # Decorated Services
+  # ----------------------------------------------------------------------------
+
+  # @return [ModuleOverviewDecorator]
+  def module_progress
+    ModuleOverviewDecorator.new(progress_service)
+  end
+
+  # @return [ModuleProgressBarDecorator]
+  def progress_bar
+    ModuleProgressBarDecorator.new(progress_service)
+  end
+
+  # ----------------------------------------------------------------------------
+  # Database Records
+  # ----------------------------------------------------------------------------
 
   # @note memoization ensures validation errors work
   # @return [UserAnswer, Response]

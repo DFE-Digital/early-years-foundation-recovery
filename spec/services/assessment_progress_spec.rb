@@ -22,13 +22,19 @@ RSpec.describe AssessmentProgress do
     end
   end
 
-  context 'with all correct user responses' do
+  context 'with only correct responses' do
     let(:questions) do
       {
-        '1-3-2-1' => [1, 3],
-        '1-3-2-2' => [2, 3],
-        '1-3-2-3' => [3, 4],
-        '1-3-2-4' => [3],
+        '1-3-2-1' => [1, 3],  # correct
+        '1-3-2-2' => [2, 3],  # correct
+        '1-3-2-3' => [3, 4],  # correct
+        '1-3-2-4' => [3],     # correct
+        '1-3-2-5' => [3],     # correct
+        '1-3-2-6' => [3],     # correct
+        '1-3-2-7' => [3],     # correct
+        '1-3-2-8' => [3],     # correct
+        '1-3-2-9' => [3],     # correct
+        '1-3-2-10' => [3],    # correct
       }
     end
 
@@ -36,13 +42,19 @@ RSpec.describe AssessmentProgress do
     specify { expect(assessment).not_to be_failed }
   end
 
-  context 'with incorrect answers below threshold' do
+  context 'with insufficient correct responses' do
     let(:questions) do
       {
         '1-3-2-1' => [2, 3],  # incorrect
         '1-3-2-2' => [2, 4],  # incorrect
         '1-3-2-3' => [3, 4],  # correct
         '1-3-2-4' => [3],     # correct
+        '1-3-2-5' => [3],     # correct
+        '1-3-2-6' => [3],     # correct
+        '1-3-2-7' => [3],     # correct
+        '1-3-2-8' => [3],     # correct
+        '1-3-2-9' => [5],     # incorrect
+        '1-3-2-10' => [5],    # incorrect
       }
     end
 
@@ -66,11 +78,17 @@ RSpec.describe AssessmentProgress do
           '1-3-2-2' => [2, 3],  # correct
           '1-3-2-3' => [3, 4],  # correct
           '1-3-2-4' => [4],     # incorrect
+          '1-3-2-5' => [5],     # correct
+          '1-3-2-6' => [3],     # correct
+          '1-3-2-7' => [3],     # correct
+          '1-3-2-8' => [3],     # correct
+          '1-3-2-9' => [3],     # correct
+          '1-3-2-10' => [3],    # correct
         }
       end
 
       it 'calculates %' do
-        expect(assessment.score).to be 75.0
+        expect(assessment.score).to be 80.0
       end
     end
   end

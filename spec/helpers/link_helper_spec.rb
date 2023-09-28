@@ -4,7 +4,14 @@ describe 'LinkHelper', type: :helper do
   let(:mod) { Training::Module.ordered.first }
 
   describe '#link_to_next' do
-    subject(:link) { helper.link_to_next(content) }
+    subject(:link) { helper.link_to_next }
+
+    before do
+      without_partial_double_verification do
+        allow(view).to receive(:content).and_return(content)
+        allow(view).to receive(:mod).and_return(mod)
+      end
+    end
 
     context 'when page is midway' do
       let(:content) { mod.confidence_intro_page }
@@ -28,7 +35,14 @@ describe 'LinkHelper', type: :helper do
   end
 
   describe '#link_to_previous' do
-    subject(:link) { helper.link_to_previous(content) }
+    subject(:link) { helper.link_to_previous }
+
+    before do
+      without_partial_double_verification do
+        allow(view).to receive(:content).and_return(content)
+        allow(view).to receive(:mod).and_return(mod)
+      end
+    end
 
     context 'when page is midway' do
       let(:content) { mod.page_by_name('1-1') }
@@ -93,13 +107,13 @@ describe 'LinkHelper', type: :helper do
 
       it 'links to results' do
         expect(link).to include 'View previous test result'
-        expect(link).to include 'href="/modules/alpha/assessment-result/1-3-2-5"'
+        expect(link).to include 'href="/modules/alpha/assessment-result/1-3-2-11"'
       end
     end
   end
 
   describe '#link_to_action' do
-    subject(:link) { helper.link_to_action(state, content) }
+    subject(:link) { helper.link_to_action(state, mod, content) }
 
     let(:content) { mod.interruption_page } # any page works
     let(:state) { :not_started }

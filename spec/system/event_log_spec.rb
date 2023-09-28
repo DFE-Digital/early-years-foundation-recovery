@@ -22,14 +22,17 @@ RSpec.describe 'Event log' do
 
     context 'when all questions are answered' do
       before do
-        3.times do
-          choose 'Strongly agree'
-          click_on 'Next'
+        visit '/modules/alpha/content-pages/what-to-expect'
+
+        # OPTIMIZE: the setup for this context leverages the AST schema which supports future changes to content
+        ContentTestSchema.new(mod: alpha).call(pass: true).each do |content|
+          content[:inputs].each { |args| send(*args) }
         end
       end
 
       it 'tracks answers and completion' do
-        expect(events.where(name: 'questionnaire_answer').where_properties(type: 'confidence_check').size).to eq 3
+        # TODO: type will change to 'confidence' when CMS 'page_type' is updated
+        expect(events.where(name: 'questionnaire_answer').where_properties(type: 'confidence_check').size).to eq 4
         expect(events.where(name: 'confidence_check_complete').size).to eq 1
       end
     end
@@ -61,34 +64,33 @@ RSpec.describe 'Event log' do
 
     context 'when all questions are answered correctly' do
       before do
-        3.times do
-          check 'Correct answer 1'
-          check 'Correct answer 2'
-          click_on 'Save and continue'
+        visit '/modules/alpha/content-pages/what-to-expect'
+
+        # OPTIMIZE: the setup for this context leverages the AST schema which supports future changes to content
+        ContentTestSchema.new(mod: alpha).call(pass: true).each do |content|
+          content[:inputs].each { |args| send(*args) }
         end
-        choose 'Correct answer 1'
-        click_on 'Finish test'
       end
 
       it 'tracks answers and successful attempt' do
-        expect(events.where(name: 'questionnaire_answer').where_properties(success: true, type: 'summative_assessment').size).to eq 4
+        expect(events.where(name: 'questionnaire_answer').where_properties(success: true, type: 'summative_assessment').size).to eq 10
         expect(events.where(name: 'summative_assessment_complete').where_properties(score: 100, success: true).size).to eq 1
       end
     end
 
     context 'when all questions are answered incorrectly' do
       before do
-        3.times do
-          check 'Wrong answer 1'
-          check 'Wrong answer 2'
-          click_on 'Save and continue'
+        visit '/modules/alpha/content-pages/what-to-expect'
+
+        # OPTIMIZE: the setup for this context leverages the AST schema which supports future changes to content
+        ContentTestSchema.new(mod: alpha).call(pass: false).compact.each do |content|
+          content[:inputs].each { |args| send(*args) }
         end
-        choose 'Wrong answer 1'
-        click_on 'Finish test'
       end
 
       it 'tracks answers and failed attempt' do
-        expect(events.where(name: 'questionnaire_answer').where_properties(success: false, type: 'summative_assessment').size).to eq 4
+        # TODO: type will change to 'summative' when CMS 'page_type' is updated
+        expect(events.where(name: 'questionnaire_answer').where_properties(success: false, type: 'summative_assessment').size).to eq 10
         expect(events.where(name: 'summative_assessment_complete').where_properties(score: 0, success: false).size).to eq 1
       end
     end
@@ -96,20 +98,17 @@ RSpec.describe 'Event log' do
 
   describe 'formative question' do
     before do
-      view_pages_upto_formative_question(alpha)
-      visit '/modules/alpha'
-      click_on 'Resume module'
+      visit '/modules/alpha/content-pages/what-to-expect'
 
-      choose 'Correct answer 1'
-      4.times { click_on 'Next' }
-
-      check 'Correct answer 1'
-      check 'Correct answer 2'
-      click_on 'Next'
+      # OPTIMIZE: the setup for this context leverages the AST schema which supports future changes to content
+      ContentTestSchema.new(mod: alpha).call(pass: true).each do |content|
+        content[:inputs].each { |args| send(*args) }
+      end
     end
 
     it 'tracks answers' do
-      expect(events.where(name: 'questionnaire_answer').where_properties(success: true, type: 'formative_assessment').size).to eq 2
+      # TODO: type will change to 'formative' when CMS 'page_type' is updated
+      expect(events.where(name: 'questionnaire_answer').where_properties(success: true, type: 'formative_assessment').size).to eq 3
     end
   end
 
@@ -120,7 +119,7 @@ RSpec.describe 'Event log' do
 
     it 'tracks start and completion' do
       expect(events.where(name: 'module_start').size).to be 1
-      expect(events.where(name: 'module_content_page').size).to be 26
+      expect(events.where(name: 'module_content_page').size).to be 33
       expect(events.where(name: 'module_complete').size).to eq 1
     end
   end

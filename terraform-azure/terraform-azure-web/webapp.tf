@@ -51,17 +51,6 @@ resource "azurerm_linux_web_app" "webapp" {
       # Deploy App Gateway rules only to the Test and Production subscription
       for_each = var.environment != "development" ? [1] : []
       content {
-        name       = "Allow health check"
-        action     = "Allow"
-        priority   = 400
-        ip_address = "127.0.0.1/0"
-      }
-    }
-
-    dynamic "ip_restriction" {
-      # Deploy App Gateway rules only to the Test and Production subscription
-      for_each = var.environment != "development" ? [1] : []
-      content {
         name       = "Deny public"
         action     = "Deny"
         priority   = 500
@@ -109,7 +98,7 @@ resource "azurerm_linux_web_app_slot" "webapp_slot" {
   app_service_id            = azurerm_linux_web_app.webapp.id
   https_only                = true
   virtual_network_subnet_id = var.webapp_subnet_id
-  app_settings              = var.webapp_app_settings
+  app_settings              = var.webapp_slot_app_settings
 
   site_config {
     app_command_line                  = var.webapp_startup_command
@@ -336,22 +325,14 @@ resource "azurerm_app_service_custom_hostname_binding" "webapp_custom_domain" {
 
 data "azurerm_client_config" "az_config" {}
 
-# TODO: Need an alternative solution as will only work locally and not GitHub Actions pipeline due to permissions
-data "azuread_service_principal" "microsoft_webapp" {
-  # Custom hostname only deployed to the Test and Production subscription
-  count = var.environment != "development" ? 1 : 0
-
-  # application_id: https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-certificate?tabs=apex#authorize-app-service-to-read-from-the-vault
-  application_id = "abfa0a7c-a6b6-4736-8310-5855508787cd"
-}
-
 resource "azurerm_key_vault_access_policy" "webapp_kv_ap" {
   # Custom hostname only deployed to the Test and Production subscription
   count = var.environment != "development" ? 1 : 0
 
-  key_vault_id            = var.kv_id
-  tenant_id               = data.azurerm_client_config.az_config.tenant_id
-  object_id               = data.azuread_service_principal.microsoft_webapp.object_id
+  key_vault_id = var.kv_id
+  tenant_id    = data.azurerm_client_config.az_config.tenant_id
+  # Can be retrieved using 'az ad sp show --id abfa0a7c-a6b6-4736-8310-5855508787cd --query id'
+  object_id               = var.as_service_principal_object_id
   secret_permissions      = ["Get"]
   certificate_permissions = ["Get"]
 }

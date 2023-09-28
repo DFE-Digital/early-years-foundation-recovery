@@ -22,6 +22,22 @@ variable "admin_email_address" {
   sensitive   = true
 }
 
+variable "gcs_credentials" {
+  description = "Google Cloud Storage credentials"
+  type        = string
+  sensitive   = true
+}
+
+variable "hotjar_site_id" {
+  description = "Hotjar tracking ID"
+  type        = string
+}
+
+variable "tracking_id" {
+  description = "Google Tag Manager tracking ID"
+  type        = string
+}
+
 variable "kv_certificate_authority_username" {
   description = "Username for the Certificate provider"
   type        = string
@@ -98,6 +114,12 @@ variable "psqlfs_ha_enabled" {
   type        = bool
 }
 
+variable "as_service_principal_object_id" {
+  description = "Object ID of the service principal for App Service"
+  type        = string
+  sensitive   = true
+}
+
 variable "asp_sku" {
   default     = "S1"
   description = "SKU name for the App Service Plan"
@@ -131,6 +153,12 @@ variable "webapp_database_url" {
   sensitive   = true
 }
 
+variable "webapp_slot_database_url" {
+  description = "URL to the slot Database"
+  type        = string
+  sensitive   = true
+}
+
 variable "webapp_docker_registry_url" {
   description = "URL to the Docker Registry"
   type        = string
@@ -158,11 +186,13 @@ variable "webapp_config_bot_token" {
 }
 
 variable "webapp_config_contentful_environment" {
-  type = string
+  default = null
+  type    = string
 }
 
 variable "webapp_config_contentful_preview" {
-  type = string
+  default = null
+  type    = string
 }
 
 variable "webapp_config_domain" {

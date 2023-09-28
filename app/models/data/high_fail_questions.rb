@@ -25,14 +25,22 @@ module Data
 
     private
 
-      # @return [Hash{Array<String, String> => Integer}]
+      # @return [Hash{Array<String> => Integer}]
       def question_attempts
-        UserAnswer.summative.group(:module, :name).count
+        if ENV['DISABLE_USER_ANSWER'].present?
+          Response.summative.group(:training_module, :question_name).count
+        else
+          UserAnswer.summative.group(:module, :name).count
+        end
       end
 
-      # @return [Hash{Array<String, String> => Integer}]
+      # @return [Hash{Array<String> => Integer}]
       def question_failures
-        UserAnswer.summative.where(correct: false).group(:module, :name).count
+        if ENV['DISABLE_USER_ANSWER'].present?
+          Response.summative.where(correct: false).group(:training_module, :question_name).count
+        else
+          UserAnswer.summative.where(correct: false).group(:module, :name).count
+        end
       end
 
       # @return [Integer]
@@ -48,10 +56,10 @@ module Data
 
         question_failures.each do |(module_name, question_name), fail_count|
           total_count = question_attempts[[module_name, question_name]]
-          fail_rate = fail_count / total_count
+          fail_rate = fail_count / total_count.to_f
 
           if fail_rate >= average_fail_rate
-            high_fail_questions[[module_name, question_name]] = fail_rate.to_f
+            high_fail_questions[[module_name, question_name]] = fail_rate
           end
         end
 

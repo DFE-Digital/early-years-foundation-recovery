@@ -1,7 +1,6 @@
 require 'rails_helper'
-require 'content_test_schema'
 
-RSpec.describe ContentTestSchema, :cms do
+RSpec.describe ContentTestSchema do
   subject(:schema) { described_class.new(mod: alpha) }
 
   let(:alpha) { Training::Module.by_name(:alpha) }

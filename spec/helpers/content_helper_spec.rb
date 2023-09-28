@@ -119,6 +119,28 @@ describe 'ContentHelper', type: :helper do
           expect(html).to include '<li>one</li>'
         end
       end
+
+      describe 'Big quote prompt' do
+        let(:input) do
+          <<~QUOTE
+            $QUOTE
+            Life is trying things to see if they work.
+
+            Ray Bradbury
+            $QUOTE
+          QUOTE
+        end
+
+        it 'builds semantic markup' do
+          expect(html).to eq <<~QUOTE
+            <div class="blockquote-container"><blockquote class="quote">
+            <p>Life is trying things to see if they work.</p>
+
+            <cite>Ray Bradbury</cite>
+            </blockquote></div>
+          QUOTE
+        end
+      end
     end
   end
 
