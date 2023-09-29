@@ -7,7 +7,8 @@ module Training
     helper_method :mod,
                   :progress_bar,
                   :module_progress,
-                  :mods
+                  :mods,
+                  :module_table
 
     def index
       track('course_overview_page', cms: true)
@@ -16,12 +17,21 @@ module Training
     def show
       track('module_overview_page', mod_uid: mod.id)
 
-      if redirect?
-        redirect_to my_modules_path
-      elsif debug?
-        render partial: 'progress'
-      end
+      redirect_to my_modules_path if redirect?
     end
+
+    # @see ModuleDebugDecorator
+    #
+    # @example
+    #   /modules/alpha/structure
+    #
+    # Position  Visited Sections        Progress  Submodule Topic Pages       Model Type              Name
+    # --------------------------------------------------------------------------------------------------------------------------
+    # 1st       true    Section 1 of 5  14%       1         0     Page 1 of 7 page  sub_module_intro  content-management-system
+    # 2nd       true    Section 1 of 5  29%       1         1     Page 2 of 7 page  topic_intro       glossary-of-terms
+    # 3rd       false   Section 1 of 5  43%       1         2     Page 3 of 7 page  topic_intro       bespoke-markup
+    #
+    def structure; end
 
   protected
 
@@ -42,11 +52,6 @@ module Training
     # @return [Boolean]
     def unreleased?
       !Rails.application.preview? && mod.draft?
-    end
-
-    # @return [Boolean]
-    def debug?
-      params[:debug].present? && Rails.application.debug?
     end
 
     # @return [Array<Training::Module>]
