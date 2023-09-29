@@ -11,7 +11,6 @@ variable "environment" {
 }
 
 variable "resource_name_prefix" {
-  default     = "s187d01-eyrecovery"
   description = "Prefix for resource names"
   type        = string
 }
