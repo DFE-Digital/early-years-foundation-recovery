@@ -56,6 +56,10 @@ resource "azurerm_key_vault_access_policy" "kv_ap" {
     "SetIssuers",
     "Update"
   ]
+
+  lifecycle {
+    ignore_changes = [object_id]
+  }
 }
 
 resource "azurerm_key_vault_access_policy" "kv_mi_ap" {
