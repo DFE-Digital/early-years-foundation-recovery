@@ -95,6 +95,10 @@ resource "azurerm_key_vault_certificate_issuer" "kv_ca" {
     last_name     = var.kv_certificate_authority_admin_last_name
     phone         = var.kv_certificate_authority_admin_phone_no
   }
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 resource "azurerm_key_vault_certificate" "kv_cert" {
@@ -136,5 +140,9 @@ resource "azurerm_key_vault_certificate" "kv_cert" {
       subject            = var.kv_certificate_subject
       validity_in_months = 12
     }
+  }
+
+  lifecycle {
+    ignore_changes = all
   }
 }
