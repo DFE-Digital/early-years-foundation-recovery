@@ -25,14 +25,22 @@ module Data
 
     private
 
-      # @return [Hash{Array<String, String> => Integer}]
+      # @return [Hash{Array<String> => Integer}]
       def question_attempts
-        UserAnswer.summative.group(:module, :name).count
+        if ENV['DISABLE_USER_ANSWER'].present?
+          Response.summative.group(:training_module, :question_name).count
+        else
+          UserAnswer.summative.group(:module, :name).count
+        end
       end
 
-      # @return [Hash{Array<String, String> => Integer}]
+      # @return [Hash{Array<String> => Integer}]
       def question_failures
-        UserAnswer.summative.where(correct: false).group(:module, :name).count
+        if ENV['DISABLE_USER_ANSWER'].present?
+          Response.summative.where(correct: false).group(:training_module, :question_name).count
+        else
+          UserAnswer.summative.where(correct: false).group(:module, :name).count
+        end
       end
 
       # @return [Integer]
