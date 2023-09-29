@@ -22,17 +22,17 @@ class ModuleDebugDecorator < DelegateClass(ModuleProgress)
 private
 
   # @return [Array<String>]
-  HEADERS = [
-    'Position',
-    'Visited',
-    'Sections',
-    'Progress',
-    'Submodule',
-    'Topic',
-    'Pages',
-    'Model',
-    'Type',
-    'Name',
+  HEADERS = %w[
+    Position
+    Visited
+    Sections
+    Progress
+    Submodule
+    Topic
+    Pages
+    Model
+    Type
+    Name
   ].freeze
 
   # @return [Array<Array>]
