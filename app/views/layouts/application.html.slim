@@ -38,9 +38,6 @@ html.govuk-template lang='en'
         == t 'phase_banner', link: govuk_link_to('feedback', Rails.configuration.feedback_url, target: :_blank)
 
       .noprint = render 'layouts/timeout'
-      
-      - if request.path != '/email-preferences'
-        .noprint = back_link
 
       main#main-content.govuk-main-wrapper
         - flash.each do |variant, message|
