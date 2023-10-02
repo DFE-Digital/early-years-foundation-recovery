@@ -58,13 +58,13 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
 
 private
 
-  # @param items [Training::Page, Training::Question, Training::Video]
-  #
+  # @param page [Training::Page, Training::Question, Training::Video]
   # @return [String]
   def heading(page)
     page.certificate? ? 'Complete module' : page.heading
   end
 
+  # @param pages [Array<Training::Page, Training::Question, Training::Video>]
   # @return [String]
   def page_count(pages)
     "(Pages #{pages.size})" unless pages.one?
