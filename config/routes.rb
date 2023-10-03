@@ -73,6 +73,10 @@ Rails.application.routes.draw do
 
   scope module: 'training' do
     resources :modules, only: %i[show], as: :training_modules do
+      constraints proc { Rails.application.preview? || Rails.application.debug? } do
+        get '/structure', to: 'modules#structure'
+      end
+
       resources :pages, only: %i[index show], path: 'content-pages'
       resources :questions, only: %i[show], path: 'questionnaires'
       resources :responses, only: %i[update]

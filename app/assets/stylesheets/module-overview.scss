@@ -5,6 +5,12 @@ $progress-bar-container-width: 81px;
   margin-left: $progress-bar-container-width;
 }
 
+.module-section--pages {
+  margin-left: 10px;
+  color: govuk-colour('mid-grey');
+  font-weight: normal;
+}
+
 .module-overview--section {
   display: grid;
   grid-template-columns: $progress-bar-container-width auto;

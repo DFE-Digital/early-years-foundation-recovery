@@ -7,7 +7,7 @@ module Training
 
     helper_method :mod,
                   :content,
-                  :progress_bar,
+                  :section_bar,
                   :current_user_response
 
     def show; end

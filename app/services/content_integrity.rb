@@ -34,7 +34,7 @@ class ContentIntegrity
     # type and postition
     interruption: 'First page is wrong type',
     submodule: 'Second page is wrong type',
-    topic: 'Third page is wrong type', # others will also need changing
+    topic: 'Third page is wrong type',
     thankyou: 'Penultimate page is wrong type',
     certificate: 'Last page is wrong type',
 

@@ -7,7 +7,7 @@ module Training
 
     helper_method :mod,
                   :content,
-                  :progress_bar,
+                  :section_bar,
                   :assessment
 
     def new

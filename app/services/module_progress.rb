@@ -1,4 +1,10 @@
-# User's module progress and submodule/topic state
+# Overall module progress:
+#   - whether a page was visited
+#   - whether a page was skipped
+#   - whether key events have been recorded (start/complete)
+#   - the last page visited
+#   - the furthest page visited
+#   - the furthest page visited
 #
 class ModuleProgress
   extend Dry::Initializer
@@ -31,10 +37,10 @@ class ModuleProgress
     visited.last
   end
 
-  # Last visited module item with fallback to first item
-  # @return [Training::Content]
+  # @return [Training::Page, Training::Question, Training::Video]
   def resume_page
-    unvisited.first&.previous_item || mod.first_content_page
+    # unvisited.first&.previous_item || mod.first_content_page
+    mod.page_by_name(milestone) || mod.first_content_page
   end
 
   # Identify new content that has not been seen and would effect module state

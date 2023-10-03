@@ -63,6 +63,10 @@ private
       ]
     elsif type.match?(/certificate/)
       []
+    elsif type.match?(/sub_module_intro|summary_intro/)
+      [
+        [:click_on, 'Start section'],
+      ]
     else
       [
         [:click_on, 'Next'],

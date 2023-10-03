@@ -1,6 +1,11 @@
+/*
+https://frontend.design-system.service.gov.uk/sass-api-reference
+*/
+
 $govuk-new-link-styles: true;
 
 @import "govuk-frontend/govuk/all";
+@import "./dfe";
 @import "./govspeak";
 @import "./card";
 @import "./prompt";
@@ -12,10 +17,13 @@ $govuk-new-link-styles: true;
 @import "./icons";
 @import "./modal";
 @import "./autocomplete";
-@import "./progress-bar.scss";
-@import "./header.scss";
-@import './module-overview.scss';
-@import "./assets-page.scss";
+@import "./progress-bar";
+@import "./section-intro";
+@import "./section-bar";
+@import "./header";
+@import './module-overview';
+@import "./assets-page";
+
 
 * {
   font-family: 
