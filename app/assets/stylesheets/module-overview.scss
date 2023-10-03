@@ -9,6 +9,12 @@ $progress-bar-container-width: 81px;
   opacity: 0.5;
 }
 
+.module-section--pages {
+  margin-left: 10px;
+  color: govuk-colour('mid-grey');
+  font-weight: normal;
+}
+
 .module-overview--section {
   display: grid;
   grid-template-columns: $progress-bar-container-width auto;

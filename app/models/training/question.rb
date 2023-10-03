@@ -67,9 +67,17 @@ module Training
       }.fetch(page_type.to_sym)
     end
 
+    def question_type
+      {
+        formative_questionnaire: 'formative',
+        summative_questionnaire: 'summative',
+        confidence_questionnaire: 'confidence',
+      }.fetch(page_type.to_sym)
+    end
+
     # @return [Array<String, Hash>]
     def schema
-      [name, page_type, body, answer.schema]
+      [name, page_type, body, answer.schema, question_type]
     end
 
     # @return [String]

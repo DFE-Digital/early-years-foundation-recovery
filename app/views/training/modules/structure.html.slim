@@ -1,0 +1,18 @@
+pre.debug_dump
+  strong Module
+  br
+  = mod.name
+  '
+  = mod.id
+  br
+  br
+
+  strong Questions
+  br
+  = mod.questions.count
+  br
+  br
+
+pre.debug_dump
+  .gem-c-govspeak
+    = translate_markdown(module_table)

@@ -13,11 +13,21 @@ describe 'LinkHelper', type: :helper do
       end
     end
 
-    context 'when page is midway' do
-      let(:content) { mod.confidence_intro_page }
+    context 'when page introduces a section' do
+      let(:content) { mod.summary_intro_page }
 
       it 'targets next page' do
-        expect(link).to include 'href="/modules/alpha/content-pages/1-3-3-1"'
+        expect(link).to include 'Start section'
+        expect(link).to include 'href="/modules/alpha/content-pages/1-3-1"'
+      end
+    end
+
+    context 'when page does not introduce a section' do
+      let(:content) { mod.pages_by_type('video_page').first }
+
+      it 'targets next page' do
+        expect(link).to include 'Next'
+        expect(link).to include 'href="/modules/alpha/content-pages/1-2-1-3"'
       end
     end
 
@@ -113,20 +123,45 @@ describe 'LinkHelper', type: :helper do
   end
 
   describe '#link_to_action' do
-    subject(:link) { helper.link_to_action(state, mod, content) }
+    subject(:link) { helper.link_to_action }
 
-    let(:content) { mod.interruption_page } # any page works
-    let(:state) { :not_started }
+    before do
+      without_partial_double_verification do
+        allow(view).to receive(:mod).and_return(mod)
+        allow(view).to receive(:module_progress).and_return(module_progress)
+      end
+    end
 
-    it 'targets current page' do
-      expect(link).to include 'href="/modules/alpha/content-pages/what-to-expect"'
+    let(:user) { create :user, :registered }
+
+    let(:module_progress) do
+      ModuleOverviewDecorator.new ModuleProgress.new(user: user, mod: mod)
+    end
+
+    context 'with no activity' do
+      it 'targets the interruption page' do
+        expect(link).to eq ['Start module', '/modules/alpha/content-pages/what-to-expect']
+      end
+    end
+
+    context 'with progress' do
+      include_context 'with progress'
+
+      it 'targets the most recently visited page' do
+        start_first_topic(mod)
+        expect(link).to eq ['Resume module', '/modules/alpha/content-pages/1-1-1']
+        start_second_submodule(mod)
+        expect(link).to eq ['Resume module', '/modules/alpha/content-pages/1-1-1']
+      end
     end
 
     context 'with failed assessment' do
-      let(:state) { :failed }
+      before do
+        create :user_assessment, :failed, user_id: user.id, score: 0, module: mod.name
+      end
 
       it 'targets new assessment attempt' do
-        expect(link).to include 'href="/modules/alpha/assessment-result/new"'
+        expect(link).to eq ['Retake test', '/modules/alpha/assessment-result/new']
       end
     end
   end

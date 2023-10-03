@@ -1,14 +1,17 @@
 - content_for :page_title do
   = html_title mod.title, content.name
 
+
 = render 'training/questions/debug'
-= render 'shared/progress_bar'
+
+- content_for :hero do 
+  = render 'shared/section_bar'
+    
+
 
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
     = form_with model: current_user_response, url: training_module_response_path(mod.name, content.name), method: :patch do |f|
-
-      = page_number(**content.pagination)
 
       = render partial: content.to_partial_path, locals: { f: f }, object: current_user_response, as: :response
 

@@ -36,7 +36,7 @@ RSpec.describe ModuleProgress do
   end
 
   describe '#milestone' do
-    it 'returns the name of the last viewed page' do
+    it 'is the name of the last viewed page' do
       view_module_page_event('alpha', '1-1')
       view_module_page_event('alpha', '1-2-1-1')
       expect(progress.milestone).to eq '1-2-1-1'
@@ -47,7 +47,7 @@ RSpec.describe ModuleProgress do
   end
 
   describe '#resume_page' do
-    it 'returns the furthest visited module item' do
+    it 'is the most recently visited page' do
       %w[
         what-to-expect
         1-1
@@ -62,7 +62,7 @@ RSpec.describe ModuleProgress do
       expect(progress.resume_page.name).to eq '1-1-3-1'
 
       view_module_page_event('alpha', '1-1')
-      expect(progress.resume_page.name).to eq '1-1-3-1'
+      expect(progress.resume_page.name).to eq '1-1'
     end
   end
 end

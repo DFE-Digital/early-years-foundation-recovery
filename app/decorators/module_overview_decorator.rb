@@ -1,23 +1,27 @@
+# Module content sections and subsections
+# Call to action button logic
+#
 class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
-  # @yield [Symbol, Module::Content] state locales key and target page
+  # @return [Array<Symbol, <Training::Page, Training::Question, Training::Video>?] state locales key and target page
   def call_to_action
     if completed?
-      yield(:completed, mod.certificate_page)
+      [:completed, mod.certificate_page]
     elsif failed_attempt?
       # via AssessmentsController#new to archive attempt
-      yield(:failed, mod.assessment_intro_page)
+      [:failed, mod.assessment_intro_page]
     elsif started?
-      yield(:started, resume_page)
+      [:started, resume_page]
     else
-      yield(:not_started, mod.interruption_page)
+      [:not_started, mod.interruption_page]
     end
   end
 
   # @return [Hash{Symbol => Mixed}]
   def sections
-    mod.content_by_submodule.each.with_index(1).map do |(submodule, content_items), position|
+    mod.content_sections.each.with_index(1).map do |(submodule, content_items), position|
       {
-        heading: section_heading(content_items.first.heading, content_items.size, position != mod.submodule_count).html_safe, 
+        heading: heading(content_items.first),
+        page_count: page_count(content_items),
         position: position,
         display_line: position != mod.submodule_count,
         icon: status(content_items),
@@ -26,10 +30,10 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
     end
   end
 
-  def section_heading(heading, section_page_count, include_page_count = false)
-    if include_page_count 
+  def section_heading(heading, section_page_count, include_page_count: false)
+    if include_page_count
       heading + "<span class='greyed-out'>  (#{section_page_count} pages)</span>"
-    else 
+    else
       heading
     end
   end
@@ -37,7 +41,7 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
   # Check every item has been visited (public for debugging).
   # Presence of 'module_complete' bypasses individual checks.
   #
-  # @param items [Array<Module::Content>]
+  # @param items [Array<Training::Page, Training::Question, Training::Video>]
   # @return [Symbol]
   def status(items)
     if completed? || all?(items)
@@ -53,7 +57,7 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
 
   # @return [String]
   def debug_summary
-    mod.content_by_submodule_topic.map { |(submodule, topic), items|
+    mod.content_subsections.map { |(submodule, topic), items|
       <<~NODE
         #{submodule}.#{topic}: #{status(items)}
       NODE
@@ -62,8 +66,20 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
 
 private
 
+  # @param page [Training::Page, Training::Question, Training::Video]
+  # @return [String]
+  def heading(page)
+    page.certificate? ? 'Complete module' : page.heading
+  end
+
+  # @param pages [Array<Training::Page, Training::Question, Training::Video>]
+  # @return [String]
+  def page_count(pages)
+    "(Pages #{pages.size})" unless pages.one?
+  end
+
   # @param submodule [Integer]
-  # @param items [Array<Module::Content>]
+  # @param items [Array<Training::Page, Training::Question, Training::Video>]
   #
   # @return [Array<String, Symbol, Array>]
   def subsections(submodule:, items:)
@@ -73,7 +89,7 @@ private
   end
 
   # @param submodule [Integer]
-  # @param subsection_item [Module::Content]
+  # @param subsection_item [Training::Page, Training::Question, Training::Video]
   #
   # @return [Array<Array>]
   def section_content(submodule:, subsection_item:)
@@ -106,7 +122,7 @@ private
   end
 
   # @param submodule [Integer]
-  # @param subsection_item [Module::Content]
+  # @param subsection_item [Training::Page, Training::Question, Training::Video]
   #
   # @return [Boolean]
   def clickable?(submodule:, subsection_item:)
@@ -120,15 +136,15 @@ private
   end
 
   # @param submodule [Integer]
-  # @return [Array<Training::Content>]
+  # @return [Array<Training::Page, Training::Question, Training::Video>]
   def fetch_submodule(submodule)
-    mod.content_by_submodule.fetch(submodule)
+    mod.content_sections.fetch(submodule)
   end
 
   # @param submodule [Integer]
   # @param topic [Integer]
-  # @return [Array<Training::Content>]
+  # @return [Array<Training::Page, Training::Question, Training::Video>]
   def fetch_submodule_topic(submodule, topic)
-    mod.content_by_submodule_topic.fetch([submodule, topic])
+    mod.content_subsections.fetch([submodule, topic])
   end
 end

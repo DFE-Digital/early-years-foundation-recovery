@@ -36,35 +36,35 @@ RSpec.describe Training::Module, type: :model do
     end
   end
 
-  describe '#content_by_submodule' do
-    let(:sections) { mod.content_by_submodule }
+  describe '#content_sections' do
+    let(:sections) { mod.content_sections }
 
     it 'returns sections' do
       expect(sections).to be_a Hash
-      expect(sections.keys).to eq [1, 2, 3]
-      expect(sections.values.map(&:count)).to eq [7, 5, 21]
+      expect(sections.keys).to eq [1, 2, 3, 4]
+      expect(sections.values.map(&:count)).to eq [7, 5, 20, 1]
     end
   end
 
-  describe '#content_by_submodule_topic' do
-    let(:subsections) { mod.content_by_submodule_topic }
+  describe '#content_subsections' do
+    let(:subsections) { mod.content_subsections }
 
     it 'returns subsections' do
       expect(subsections).to be_a Hash
-      expect(subsections.keys).to eq [[1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [2, 0], [2, 1], [3, 0], [3, 1], [3, 2], [3, 3], [3, 4]]
+      expect(subsections.keys).to eq [[1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [2, 0], [2, 1], [3, 0], [3, 1], [3, 2], [3, 3], [4, 0]]
       expect(subsections.values.map(&:count)).to eq [1, 1, 1, 2, 2, 1, 4, 1, 1, 12, 6, 1]
     end
   end
 
   describe '#submodule_count' do
     it 'returns the number of sections' do
-      expect(mod.submodule_count).to eq 3
+      expect(mod.submodule_count).to eq 4
     end
   end
 
   describe '#topic_count' do
     it 'returns the number of subsections' do
-      expect(mod.topic_count).to eq 9 # 4, 1, 4
+      expect(mod.topic_count).to eq 8 # 4, 1, 3
     end
   end
 end

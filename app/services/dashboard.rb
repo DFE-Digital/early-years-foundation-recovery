@@ -17,6 +17,7 @@ class Dashboard
     { model: 'User',                            folder: 'userdata',         file: 'users'                         },
     { model: 'UserAnswer',                      folder: 'useranswers',      file: 'user_answers'                  },
     { model: 'Response',                        folder: 'useranswers',      file: 'responses'                     },
+    { model: 'Data::ConfidenceCheckScores',     folder: 'useranswers',      file: 'confidence_check_scores'       },
     { model: 'UserAssessment',                  folder: 'userassessments',  file: 'user_assessments'              },
     { model: 'Data::LocalAuthorityUser',        folder: 'localauthorities', file: 'local_authority_users'         },
     { model: 'Data::AveragePassScores',         folder: 'summativequiz',    file: 'average_pass_scores'           },

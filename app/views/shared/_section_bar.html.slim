@@ -1,0 +1,10 @@
+div style='background-color: #ebf2f6;' class='govuk-!-padding-top-9'
+
+  p#progress-intro
+    span= section_bar.section_numbers
+    span= section_bar.heading
+
+  p#progress-pages= section_bar.page_numbers
+
+  #progress-inactive
+    #progress-active style="width: #{section_bar.percentage}"

@@ -50,9 +50,14 @@ module Learning
     ModuleOverviewDecorator.new(progress_service)
   end
 
-  # @return [ModuleProgressBarDecorator]
-  def progress_bar
-    ModuleProgressBarDecorator.new(progress_service)
+  # @return [String]
+  def module_table
+    ModuleDebugDecorator.new(progress_service).markdown_table
+  end
+
+  # @return [PaginationDecorator]
+  def section_bar
+    PaginationDecorator.new(content)
   end
 
   # ----------------------------------------------------------------------------

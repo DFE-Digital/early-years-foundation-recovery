@@ -1,8 +1,15 @@
+/*
+https://frontend.design-system.service.gov.uk/sass-api-reference
+*/
+
 $govuk-new-link-styles: true;
 $govuk-page-width: 1200px;
 
 
 
+@import 'dfe-frontend-alpha/packages/dfefrontend';
+@import "./dfe";
+@import 'dfe-header';
 @import "govuk-frontend/govuk/all";
 @import "./govspeak";
 @import "./card";
@@ -15,12 +22,12 @@ $govuk-page-width: 1200px;
 @import "./icons";
 @import "./modal";
 @import "./autocomplete";
-@import "./progress-bar.scss";
-@import "./header.scss";
-@import './module-overview.scss';
-@import "./assets-page.scss";
-@import 'dfe-frontend-alpha/packages/dfefrontend';
-@import 'dfe-header.scss';
+@import "./progress-bar";
+@import "./section-intro";
+@import "./section-bar";
+@import "./header";
+@import './module-overview';
+@import "./assets-page";
 
 
 * {

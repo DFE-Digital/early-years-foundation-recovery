@@ -51,17 +51,6 @@ resource "azurerm_linux_web_app" "webapp" {
       # Deploy App Gateway rules only to the Test and Production subscription
       for_each = var.environment != "development" ? [1] : []
       content {
-        name       = "Allow health check"
-        action     = "Allow"
-        priority   = 400
-        ip_address = "127.0.0.1/0"
-      }
-    }
-
-    dynamic "ip_restriction" {
-      # Deploy App Gateway rules only to the Test and Production subscription
-      for_each = var.environment != "development" ? [1] : []
-      content {
         name       = "Deny public"
         action     = "Deny"
         priority   = 500

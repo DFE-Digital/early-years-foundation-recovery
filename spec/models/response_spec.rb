@@ -22,18 +22,7 @@ RSpec.describe Response, type: :model do
     end
 
     let(:headers) do
-      %w[
-        id
-        user_id
-        training_module
-        question_name
-        answers
-        archived
-        correct
-        user_assessment_id
-        created_at
-        updated_at
-      ]
+      %w[id user_id training_module question_name answers archived correct user_assessment_id created_at updated_at schema]
     end
 
     let(:rows) do

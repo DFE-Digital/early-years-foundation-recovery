@@ -157,6 +157,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_23_163600) do
     t.bigint "user_assessment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "schema"
     t.index ["user_assessment_id"], name: "index_responses_on_user_assessment_id"
     t.index ["user_id", "training_module", "question_name"], name: "user_question"
     t.index ["user_id"], name: "index_responses_on_user_id"

@@ -6,7 +6,9 @@ section.module-overview--section
       .line
 
   .module-section--content id="section-content-#{position}"
-    h4.govuk-heading-s= heading
+    h4.govuk-heading-s
+      = heading
+      span.module-section--pages = page_count
     p.govuk-body This section of this module includes:
     .module-section--container
       - subsections.each do |subsection|

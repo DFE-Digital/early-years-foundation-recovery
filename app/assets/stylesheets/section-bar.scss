@@ -1,0 +1,29 @@
+$progress-bar-height: 10px;
+
+p#progress-intro {
+  color: $govuk-secondary-text-colour;
+
+  span {
+    font-weight: bold;
+    display: block;
+
+    &:first-child {
+      font-weight: normal;
+    }
+  }
+}
+
+p#progress-pages {
+  font-weight: bold;
+}
+
+#progress-inactive {
+  height: $progress-bar-height;
+  background-color: $service-mid-blue;
+
+  #progress-active {
+    height: $progress-bar-height;
+    background-color: $govuk-success-colour;
+    border-right: calc($progress-bar-height / 3) govuk-colour('white') solid;
+  }
+}

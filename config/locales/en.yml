@@ -98,7 +98,9 @@ en:
 
   password_complexity: Your password must contain at least %{length} characters.
 
-  page_number: Page %{current} of %{total}
+  pagination:
+    section: Section %{current} of %{total}
+    page: Page %{current} of %{total}
 
   na: Not applicable
 
