@@ -257,7 +257,7 @@ GEM
       sentry-rails (~> 5.3)
       sentry-ruby (~> 5.3)
       statsd-ruby (~> 1.5)
-    govuk_design_system_formbuilder (4.0.0)
+    govuk_design_system_formbuilder (4.1.1)
       actionview (>= 6.1)
       activemodel (>= 6.1)
       activesupport (>= 6.1)
