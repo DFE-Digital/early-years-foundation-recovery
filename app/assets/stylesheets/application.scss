@@ -1,7 +1,8 @@
 $govuk-new-link-styles: true;
 $govuk-page-width: 1200px;
 
-@import 'dfe-frontend-alpha/packages/dfefrontend';
+
+
 @import "govuk-frontend/govuk/all";
 @import "./govspeak";
 @import "./card";
@@ -18,7 +19,9 @@ $govuk-page-width: 1200px;
 @import "./header.scss";
 @import './module-overview.scss';
 @import "./assets-page.scss";
+@import 'dfe-frontend-alpha/packages/dfefrontend';
 @import 'dfe-header.scss';
+
 
 * {
   font-family:
