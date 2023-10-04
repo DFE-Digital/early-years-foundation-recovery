@@ -1,9 +1,9 @@
-= render 'debug'
+- content_for :page_title do
+  = html_title mod.title, content.heading
 
-.govuk-grid-row
-  .govuk-grid-column-full-from-desktop
-    .govuk-grid-column-full.interrupt-panel
-      h1.govuk-heading-l What to expect during the training
-      .gem-c-govspeak= translate_markdown(content.body)
+- content_for :page_content do
+  .govuk-grid-column-full.interrupt-panel
+    h1.govuk-heading-l= content.heading
+    .gem-c-govspeak= translate_markdown(content.body)
 
-= render partial: 'course_pages_footer'
+= render 'content_wrap'

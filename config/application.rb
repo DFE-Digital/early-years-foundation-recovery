@@ -113,7 +113,7 @@ module EarlyYearsFoundationRecovery
 
     # @return [Boolean]
     def debug?
-      ENV['DEBUG'].present?
+      Types::Params::Bool[ENV.fetch('DEBUG', false)]
     end
 
     # @return [ActiveSupport::TimeWithZone]

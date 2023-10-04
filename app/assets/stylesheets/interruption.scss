@@ -1,13 +1,12 @@
+// /modules/foo/content-pages/what-to-expect
+
 .interrupt-panel {
   width: 100%;
   padding: 30px;
-  background: darken(govuk-colour("blue"), 3%);
+  margin-bottom: 30px;
+  background: darken(govuk-colour('blue'), 3%);
 
   * {
-    color: govuk-colour("white") !important;
+    color: govuk-colour('white') !important;
   }
-}
-
-a:visited {
-  color: #005ea5
 }

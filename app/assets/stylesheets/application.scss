@@ -3,34 +3,33 @@ https://frontend.design-system.service.gov.uk/sass-api-reference
 */
 
 $govuk-new-link-styles: true;
-
-$govuk-new-link-styles: true;
 $govuk-page-width: 1200px;
 
-
-
+@import 'govuk-frontend/govuk/all';
 @import 'dfe-frontend-alpha/packages/dfefrontend';
-@import "./dfe";
 @import 'dfe-header';
-@import "govuk-frontend/govuk/all";
-@import "./dfe";
-@import "./govspeak";
-@import "./card";
-@import "./prompt";
-@import "./video";
-@import "./question";
-@import "./interruption";
-@import "./print-link";
-@import "./quote";
-@import "./icons";
-@import "./modal";
-@import "./autocomplete";
-@import "./progress-bar";
-@import "./section-intro";
-@import "./section-bar";
-@import "./header";
-@import './module-overview';
-@import "./assets-page";
+
+@import 'govspeak';
+@import 'card';
+@import 'prompt';
+@import 'video';
+@import 'question';
+@import 'interruption';
+@import 'print-link';
+@import 'quote';
+@import 'icons';
+@import 'modal';
+@import 'autocomplete';
+@import 'assets-page';
+
+// training/modules#show
+@import 'progress-bar';
+@import 'module-overview';
+
+// training/pages#show (section intro)
+@import 'section-intro';
+@import 'section-bar';
+
 
 
 * {
@@ -114,23 +113,8 @@ ul>li>ul>li {
   list-style-type: circle;
 }
 
-.remove-borders {
-  border: none;
-}
-
 .first-column-bold td:first-child {
   font-weight: bold;
-}
-
-.light-grey-background {
-  background-color: govuk-colour("light-grey");
-  padding: govuk-spacing(6);
-}
-
-.white-background {
-  background-color: govuk-colour("white");
-  border-left: none !important;
-  padding: govuk-spacing(4);
 }
 
 .log-entry {
@@ -164,8 +148,4 @@ ul>li>ul>li {
 
 .white-space-pre-wrap {
   white-space: pre-wrap;
-}
-
-.interrupt-panel p+h2 {
-  padding-top: 0;
 }

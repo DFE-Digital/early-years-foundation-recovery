@@ -3,13 +3,14 @@ module Training
     include Learning
 
     before_action :authenticate_registered_user!, only: :show
-    layout 'main_hero'
 
     helper_method :mod,
                   :progress_bar,
                   :module_progress,
                   :mods,
                   :module_table
+
+    layout 'main_hero'
 
     def index
       track('course_overview_page', cms: true)

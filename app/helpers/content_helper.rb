@@ -38,14 +38,6 @@ module ContentHelper
   end
 
   # @return [String]
-  def module_summary
-    content_resource 'module.overview.summary',
-                     title: mod.card_title,
-                     description: mod.description,
-                     criteria: mod.criteria
-  end
-
-  # @return [String]
   def print_button(*additional_classes)
     button = '<button class="govuk-link gem-c-print-link__button" onclick="window.print()" data-module="print-link" >Print this page</button>'.html_safe
     classes = ['gem-c-print-link', 'print-button'] + additional_classes

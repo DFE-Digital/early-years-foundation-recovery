@@ -4,12 +4,13 @@ module Training
 
     before_action :authenticate_registered_user!
     before_action :track_events, only: :show
-    layout 'main_hero'
 
     helper_method :mod,
                   :content,
                   :section_bar,
                   :current_user_response
+
+    layout 'main_hero'
 
     def show; end
 

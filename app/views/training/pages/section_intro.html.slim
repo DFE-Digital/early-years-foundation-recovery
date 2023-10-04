@@ -1,16 +1,18 @@
-= render 'debug'
-
-.govuk-grid-row
-  .govuk-grid-column-two-thirds-from-desktop
-    - content_for :hero do
-      = render 'shared/section_bar'
-
 - content_for :page_title do
   = html_title mod.title, content.heading
 
-- content_for :page_content do
-  .section-intro-body
-    h1= content.heading
-    .gem-c-govspeak= translate_markdown(content.body)
+- content_for :hero do
+  = render 'shared/section_bar'
 
-= render 'content_wrap'
+= render 'debug'
+
+.govuk-grid-row
+  .govuk-grid-column-full-width
+    .govuk-grid-row
+      .govuk-grid-column-two-thirds-from-desktop
+        .section-intro-body
+          h1= content.heading
+          .gem-c-govspeak= translate_markdown(content.body)
+
+          = render partial: 'course_pages_footer'
+

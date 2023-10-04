@@ -1,17 +1,16 @@
 - content_for :page_title do
   = html_title t(:title, scope: :my_learning)
 
-= render 'cms_debug'
-
-- content_for :hero do 
-  div class='govuk-grid-row govuk-!-padding-top-9 govuk-!-padding-bottom-0'
+- content_for :hero do
+  .govuk-grid-row class='govuk-!-padding-top-9 govuk-!-padding-bottom-0'
     .govuk-grid-column-three-quarters
-      h1 class='dfe-heading-xl govuk-!-margin-bottom-4'
+      h1.dfe-heading-xl class='govuk-!-margin-bottom-4'
         | My modules
       p You can complete the Early years child development training in any order. However, to support your understanding of the training, you may find it helpful to complete the modules in order.
 
+= render 'cms_debug'
 
-.govuk-grid-row id='started'
+#started.govuk-grid-row
   .govuk-grid-column-full
     h2.govuk-heading-m Modules in progress
     - if current_user.course.current_modules.none?
@@ -26,7 +25,7 @@
 
 - if current_user.course.available_modules.any? || current_user.course.course_completed?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
-  .govuk-grid-row id='available'
+  #available.govuk-grid-row
     .govuk-grid-column-full
       h2.govuk-heading-m Available modules
       - if current_user.course.available_modules.any?
@@ -39,7 +38,7 @@
 
 - if current_user.course.upcoming_modules.any?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
-  .govuk-grid-row id='upcoming'
+  #upcoming.govuk-grid-row
     .govuk-grid-column-full
       h2.govuk-heading-m Future modules in this course
 
@@ -55,7 +54,7 @@
 
 - if current_user.course.completed_modules.any?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
-  .govuk-grid-row id='completed'
+  #completed.govuk-grid-row
     .govuk-grid-column-three-quarters-from-desktop
       = completed_modules_table
 

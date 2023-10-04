@@ -1,11 +1,10 @@
 - content_for :page_title do
   = html_title mod.title, content.name
 
-
-= render 'training/questions/debug'
-
 - content_for :hero do 
   = render 'shared/section_bar'
+
+= render 'training/questions/debug'
 
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop

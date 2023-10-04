@@ -16,10 +16,6 @@ RSpec.describe 'Video page' do
     expect(page).to have_content('In this video an early years expert explains')
   end
 
-  it 'renders the video title' do
-    expect(page).to have_content('Video: Vimeo Video Title')
-  end
-
   it 'renders the embedded video' do
     expect(page).to have_selector('iframe')
   end

@@ -676,11 +676,13 @@ en:
     overview:
       summary: |
         # %{title}
-        {: .govuk-heading-l}
+        {: .govuk-heading-xl}
 
         %{description}
 
-        This module covers:
+      criteria: |
+        ## This module covers:
+        {: .govuk-heading-m}
 
         %{criteria}
 

@@ -7,9 +7,6 @@ import "./controllers";
 
 import { initAll } from "govuk-frontend";
 
-import "govuk-frontend/govuk/vendor/polyfills/Function/prototype/bind";
-import "govuk-frontend/govuk/vendor/polyfills/Element/prototype/classList";
-
 function nodeListForEach (nodes, callback) {
   if (window.NodeList.prototype.forEach) {
     return nodes.forEach(callback)
@@ -18,7 +15,6 @@ function nodeListForEach (nodes, callback) {
     callback.call(window, nodes[i], i, nodes)
   }
 }
-
 
 
 /*
