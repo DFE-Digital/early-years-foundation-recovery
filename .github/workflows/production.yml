@@ -22,6 +22,8 @@ on:
         type: string
         required: true
   push:
+    paths-ignore:
+      - workflows/*
     tags:
       - v*
 
