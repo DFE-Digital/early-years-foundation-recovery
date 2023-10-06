@@ -9,6 +9,8 @@ module Training
                   :section_bar,
                   :current_user_response
 
+    layout 'main_hero'
+
     def update
       if save_response!
         track_question_answer
