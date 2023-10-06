@@ -10,6 +10,8 @@ module Training
                   :section_bar,
                   :assessment
 
+    layout 'main_hero'
+
     def new
       assessment.archive!
       redirect_to training_module_page_path(mod.name, mod.assessment_intro_page.name)

@@ -1,32 +1,27 @@
-= render 'debug'
-
-= render 'shared/section_bar'
-
 - content_for :page_title do
   = html_title mod.title, content.heading
+
+- content_for :hero do
+  = render 'shared/section_bar'
 
 - content_for :page_content do
   h1= content.heading
   .gem-c-govspeak= translate_markdown(content.body)
 
-  .govspeak-embed-container.light-grey-background
-    h2.govuk-heading-m class='govuk-!-margin-top-2'
-      | Video: #{content.video_title}
+  - if content.video_url
+    = render 'govspeak/video', title: content.video_title, url: content.video_url
+  - else
+    p.govuk-body class='govuk-!-text-align-centre'
+      | [Video to be added]
 
-    - if content.video_url
-      = render 'govspeak/video', title: content.video_title, url: content.video_url
+  details.govuk-details class='govuk-!-margin-top-6' data-module='govuk-details'
+    summary.govuk-details__summary
+      span.govuk-details__summary-text
+        | Transcript
+    .govuk-details__text.white-background
+      h2.gov-uk-heading-m class='govuk-!-margin-top-2'
+        | Transcript
+      .gem-c-govspeak= translate_markdown(content.transcript)
 
-    - else
-      p.govuk-body class='govuk-!-text-align-centre'
-        | [Video to be added]
-
-    details.govuk-details class='govuk-!-margin-top-6' data-module='govuk-details'
-      summary.govuk-details__summary
-        span.govuk-details__summary-text
-          | Transcript
-      .govuk-details__text.white-background
-        h2.gov-uk-heading-m class='govuk-!-margin-top-2'
-          | Transcript
-        .gem-c-govspeak= translate_markdown(content.transcript)
-
-= render 'content_wrap_full_width'
+= render 'debug'
+= render 'content_wrap'

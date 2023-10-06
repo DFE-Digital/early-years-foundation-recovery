@@ -30,6 +30,14 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
     end
   end
 
+  def section_heading(heading, section_page_count, include_page_count: false)
+    if include_page_count
+      heading + "<span class='greyed-out'>  (#{section_page_count} pages)</span>"
+    else
+      heading
+    end
+  end
+
   # Check every item has been visited (public for debugging).
   # Presence of 'module_complete' bypasses individual checks.
   #

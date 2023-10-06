@@ -4,21 +4,23 @@
 - content_for :page_title do
   = html_title mod.title
 
-= govuk_back_link text: 'Back to My modules', href: my_modules_path
+- content_for :hero do
+  = govuk_back_link text: 'Back to My modules', href: my_modules_path
+
+  div class='govuk-!-padding-top-9 govuk-!-padding-bottom-0'
+    = content_resource 'module.overview.summary', title: mod.card_title, description: mod.description
 
 = render 'editor_tools'
-
 = render 'learning/cms_debug'
 
-.light-grey-box
-  .govuk-grid-row
-    .govuk-grid-column-full
-      = module_summary
-
-= content_resource 'module.overview.progress'
+.govuk-grid-row
+  .govuk-grid-column-full-width
+    = content_resource 'module.overview.criteria', criteria: mod.criteria
+    hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
+    = content_resource 'module.overview.progress'
 
 .govuk-grid-row
-  .govuk-grid-column-full
+  .govuk-grid-column-full-width
     hr.govuk-section-break.govuk-section-break--m.govuk-section-break--visible.module-overview-section-break
 
     - module_progress.sections.each do |section|
@@ -29,5 +31,8 @@
 
       svg.govuk-button__start-icon xmlns='http://www.w3.org/2000/svg' width='17.5' height='19' viewBox='0 0 33 40' aria-hidden='true' focusable='false'
         path fill='currentColor' d='M0 0h13l20 20-20 20H0l20-20z'
+
+    /- TODO: move start button into a shared partial
+    /= render 'shared/start_button', link: link_to_action[1], text: link_to_action[0]
 
 = render 'debug'

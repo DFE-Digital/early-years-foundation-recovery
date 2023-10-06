@@ -1,12 +1,12 @@
-= render 'debug'
-
-= render 'shared/section_bar'
-
 - content_for :page_title do
   = html_title mod.title, content.heading
+
+- content_for :hero do
+  = render 'shared/section_bar'
 
 - content_for :page_content do
   h1= content.heading
   .gem-c-govspeak= translate_markdown(content.body)
 
+= render 'debug'
 = render 'content_wrap'

@@ -21,7 +21,7 @@ RSpec.describe 'New stuff page' do
 
     describe 'with subsequent logins' do
       before do
-        click_on 'Sign out'
+        click_on 'sign-out-desktop'
 
         visit '/users/sign-in'
         fill_in 'Email address', with: user.email

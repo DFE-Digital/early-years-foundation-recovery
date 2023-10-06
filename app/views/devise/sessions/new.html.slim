@@ -14,7 +14,7 @@
       p.govuk-body
         | You will need to reset your password if you enter the wrong details five times.
 
-    = f.govuk_fieldset legend: { text: "Sign in to #{service_name}" } do
+    = f.govuk_fieldset legend: { text: content_tag(:span, "Sign in to #{service_name}", class: 'govuk-heading-l') } do
       p.govuk-body
         | Enter your details to sign in to your personal #{service_name} account. These details are different to any other GOV.UK accounts you may use.
       = f.govuk_email_field :email, autofocus: true, autocomplete: 'email', label: { text: t('helpers.label.user.email') }, aria: { required: true }

@@ -10,6 +10,8 @@ module Training
                   :section_bar,
                   :current_user_response
 
+    layout 'main_hero'
+
     def show; end
 
   private

@@ -12,10 +12,12 @@
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^7.3.0",
     "accessible-autocomplete": "^2.0.4",
-    "axios": "^1.5.1",
-    "esbuild": "^0.19.4",
-    "govuk-frontend": "^4.6.0",
-    "puppeteer": "^21.3.6",
-    "sass": "^1.68.0"
+    "axios": "^1.4.0",
+    "dfe-frontend-alpha": "^0.1.9",
+    "esbuild": "^0.18.19",
+    "govuk-frontend": "^4.7.0",
+    "puppeteer": "^21.0.1",
+    "sass": "^1.64.2",
+    "stimulus-reveal-controller": "^4.1.0"
   }
 }
