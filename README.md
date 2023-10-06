@@ -52,6 +52,13 @@ Find advanced settings and other installation options at the [git-secrets projec
 
 ## Working locally
 
+1. `$ asdf plugin add ruby`
+1. `$ asdf install ruby`
+1. `$ asdf plugin add postgres`
+1. `$ asdf install postgres`
+1. `$ asdf plugin add nodejs`
+1. `$ asdf install nodejs`
+
 **Development**
 
 > Gemfile group :development

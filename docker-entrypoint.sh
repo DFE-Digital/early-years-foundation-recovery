@@ -16,6 +16,14 @@ then
   fi
 
   rm -f tmp/pids/server.pid
+
+  if [ -z ${PROXY_CERT} ]
+  then
+    echo "No proxy certificate to append"
+  else
+    echo "Appending proxy certificate"
+    cat $PROXY_CERT >> /etc/ssl/certs/ca-certificates.crt
+  fi
 fi
 
 if [ -z ${DATABASE_URL} ]
