@@ -33,7 +33,7 @@ locals {
     "RAILS_SERVE_STATIC_FILES"            = var.webapp_config_rails_serve_static_files
     "TRACKING_ID"                         = var.tracking_id
     "WEB_CONCURRENCY"                     = var.webapp_config_web_concurrency
-    "WEBSITES_CONTAINER_START_TIME_LIMIT" = 1800
+    "WEBSITES_CONTAINER_START_TIME_LIMIT" = 180
   }
 
   webapp_slot_app_settings = {
@@ -58,7 +58,7 @@ locals {
     "RAILS_SERVE_STATIC_FILES"            = var.webapp_config_rails_serve_static_files
     "TRACKING_ID"                         = var.tracking_id
     "WEB_CONCURRENCY"                     = var.webapp_config_web_concurrency
-    "WEBSITES_CONTAINER_START_TIME_LIMIT" = 1800
+    "WEBSITES_CONTAINER_START_TIME_LIMIT" = 180
   }
 
   # Background Worker Application Configuration
@@ -94,6 +94,6 @@ locals {
     "RAILS_MAX_THREADS"                   = var.webapp_config_rails_max_threads
     "RAILS_SERVE_STATIC_FILES"            = var.webapp_config_rails_serve_static_files
     "WEB_CONCURRENCY"                     = var.webapp_config_web_concurrency
-    "WEBSITES_CONTAINER_START_TIME_LIMIT" = 1800
+    "WEBSITES_CONTAINER_START_TIME_LIMIT" = 180
   }
 }

@@ -260,7 +260,7 @@ resource "azurerm_monitor_autoscale_setting" "asp_as" {
         metric_resource_id = azurerm_service_plan.asp.id
         statistic          = "Average"
         operator           = "GreaterThan"
-        threshold          = 70
+        threshold          = 80
         time_aggregation   = "Average"
         time_grain         = "PT1M"
         time_window        = "PT10M"
@@ -281,7 +281,7 @@ resource "azurerm_monitor_autoscale_setting" "asp_as" {
         metric_resource_id = azurerm_service_plan.asp.id
         statistic          = "Average"
         operator           = "LessThan"
-        threshold          = 50
+        threshold          = 65
         time_aggregation   = "Average"
         time_grain         = "PT1M"
         time_window        = "PT10M"
