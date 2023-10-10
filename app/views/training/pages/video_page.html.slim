@@ -6,7 +6,8 @@
 
 - content_for :page_content do
   h1= content.heading
-  .gem-c-govspeak= translate_markdown(content.body)
+
+  = translate_markdown(content.body)
 
   - if content.video_url
     = render 'govspeak/video', title: content.video_title, url: content.video_url
@@ -21,7 +22,8 @@
     .govuk-details__text.white-background
       h2.gov-uk-heading-m class='govuk-!-margin-top-2'
         | Transcript
-      .gem-c-govspeak= translate_markdown(content.transcript)
+
+      = translate_markdown(content.transcript)
 
 = render 'debug'
 = render 'content_wrap'

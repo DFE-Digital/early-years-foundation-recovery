@@ -15,8 +15,6 @@ locals {
     "ENVIRONMENT"                         = var.environment
     "DATABASE_URL"                        = var.webapp_database_url
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
-    "GOVUK_APP_DOMAIN"                    = "london.cloudapps.digital" #TODO: Remove this dependency post-migration to Azure
-    "GOVUK_WEBSITE_ROOT"                  = "ey-recovery-dev"          #TODO: Remove this dependency post-migration to Azure
     "BOT_TOKEN"                           = var.webapp_config_bot_token
     "CONTENTFUL_ENVIRONMENT"              = var.webapp_config_contentful_environment
     "CONTENTFUL_PREVIEW"                  = var.webapp_config_contentful_preview
@@ -40,8 +38,6 @@ locals {
     "ENVIRONMENT"                         = var.environment
     "DATABASE_URL"                        = var.webapp_slot_database_url
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
-    "GOVUK_APP_DOMAIN"                    = "london.cloudapps.digital" #TODO: Remove this dependency post-migration to Azure
-    "GOVUK_WEBSITE_ROOT"                  = "ey-recovery-dev"          #TODO: Remove this dependency post-migration to Azure
     "BOT_TOKEN"                           = var.webapp_config_bot_token
     "CONTENTFUL_ENVIRONMENT"              = var.webapp_config_contentful_environment
     "CONTENTFUL_PREVIEW"                  = var.webapp_config_contentful_preview
@@ -64,8 +60,6 @@ locals {
   # Background Worker Application Configuration
   app_worker_environment_variables = {
     "DATABASE_URL"        = var.webapp_database_url
-    "GOVUK_APP_DOMAIN"    = "localhost" #TODO: Remove this dependency post-migration to Azure
-    "GOVUK_WEBSITE_ROOT"  = "www"       #TODO: Remove this dependency post-migration to Azure
     "GCS_CREDENTIALS"     = var.gcs_credentials
     "GOOGLE_CLOUD_BUCKET" = var.webapp_config_google_cloud_bucket
     "RAILS_ENV"           = var.webapp_config_rails_env
@@ -78,8 +72,6 @@ locals {
     "ENVIRONMENT"                         = var.environment
     "DATABASE_URL"                        = var.webapp_database_url
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
-    "GOVUK_APP_DOMAIN"                    = "london.cloudapps.digital" #TODO: Remove this dependency post-migration to Azure
-    "GOVUK_WEBSITE_ROOT"                  = "ey-recovery-dev"          #TODO: Remove this dependency post-migration to Azure
     "BOT_TOKEN"                           = var.webapp_config_bot_token
     "CONTENTFUL_ENVIRONMENT"              = var.webapp_config_contentful_environment
     "DASHBOARD_UPDATE"                    = false

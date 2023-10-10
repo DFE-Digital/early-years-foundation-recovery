@@ -12,7 +12,8 @@
       .govuk-grid-column-two-thirds-from-desktop
         .section-intro-body
           h1= content.heading
-          .gem-c-govspeak= translate_markdown(content.body)
+
+          = translate_markdown(content.body)
 
           = render partial: 'course_pages_footer'
 

@@ -4,5 +4,4 @@
     h2#govuk-notification-banner-title.govuk-notification-banner__title
       = current_user_response.banner_title
   .govuk-notification-banner__content
-    .gem-c-govspeak
-      = translate_markdown current_user_response.summary
+    = translate_markdown current_user_response.summary

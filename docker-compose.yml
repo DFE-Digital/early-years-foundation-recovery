@@ -16,8 +16,6 @@ services:
       - NODE_ENV=production
       - RAILS_MASTER_KEY
       - RAILS_LOG_TO_STDOUT
-      - GOVUK_APP_DOMAIN
-      - GOVUK_WEBSITE_ROOT
       - GROVER_NO_SANDBOX=true
       - WEB_CONCURRENCY=0
     depends_on:

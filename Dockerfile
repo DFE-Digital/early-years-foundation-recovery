@@ -1,17 +1,9 @@
 # ------------------------------------------------------------------------------
 # Base - AMD64 & ARM64 compatible
 # ------------------------------------------------------------------------------
-FROM ruby:3.1.3-alpine as base
+FROM ruby:3.2.2-alpine as base
 
-RUN apk add --no-cache --no-progress build-base less curl tzdata gcompat \
-    "busybox>=1.34.1-r5" \
-    "gmp>=6.2.1-r1" \
-    "libretls>=3.3.4-r3" \
-    "ncurses-libs>=6.3_p20211120-r1" \
-    "nodejs>=16.16.0-r0" \
-    "pkgconf>=1.9.4-r0" \
-    "ssl_client>=1.34.1-r5" \
-    "zlib>=1.2.12-r0"
+RUN apk add --no-cache --no-progress build-base less curl tzdata gcompat
 
 ENV TZ Europe/London
 
@@ -44,13 +36,14 @@ RUN bundle config set without development test ui
 RUN bundle install --no-binstubs --retry=10 --jobs=4
 
 # ------------------------------------------------------------------------------
-# Production Stage - nodejs v16.17.1, postgresql v14.5, chromium v102.0.5005.182
+# Production Stage
 # ------------------------------------------------------------------------------
 FROM base AS app
 
 LABEL org.opencontainers.image.description "Early Years Recovery Rails Application"
 
-RUN apk add --no-cache --no-progress postgresql-dev yarn chromium
+RUN apk add --no-cache --no-progress postgresql-dev yarn chromium sassc
+# maybe just libsass?
 
 ENV GROVER_NO_SANDBOX true
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
@@ -84,8 +77,6 @@ COPY --from=deps /build/.yarn ${APP_HOME}/.yarn
 COPY --from=deps /build/node_modules ${APP_HOME}/node_modules
 
 RUN SECRET_KEY_BASE=x \
-    GOVUK_APP_DOMAIN=x \
-    GOVUK_WEBSITE_ROOT=x \
     bundle exec rails assets:precompile
 
 COPY ./docker-entrypoint.sh /
