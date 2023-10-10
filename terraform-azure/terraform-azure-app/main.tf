@@ -31,7 +31,7 @@ resource "azurerm_container_group" "app_worker" {
   subnet_ids = [var.app_worker_subnet_id]
 
   lifecycle {
-    ignore_changes = [tags]
+    ignore_changes = [tags, container.0.image]
   }
 
   #checkov:skip=CKV2_AZURE_28:Using VNet

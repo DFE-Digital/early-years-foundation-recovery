@@ -53,7 +53,7 @@ resource "azurerm_linux_web_app" "review-app" {
   }
 
   lifecycle {
-    ignore_changes = [tags]
+    ignore_changes = [tags, site_config.0.application_stack]
   }
 
   #checkov:skip=CKV_AZURE_13:App uses built-in authentication
