@@ -3,7 +3,9 @@ module ContentHelper
   # @param markdown [String]
   # @return [String]
   def translate_markdown(markdown)
-    raw Govspeak::Document.to_html(markdown.to_s, sanitize: false)
+    # raw Govspeak::Document.to_html(markdown.to_s, sanitize: false)
+    raw GovukMarkdown.render(markdown.to_s, filter_html: false)
+    # GovukMarkdown.render(markdown, headings_start_with: "l")
   end
 
   # Date format guidelines: "1 June 2002"
@@ -77,9 +79,14 @@ module ContentHelper
   # @param args [Hash]
   # @return [String]
   def content_resource(key, **args)
-    content_tag :div, class: 'gem-c-govspeak' do
-      translate_markdown t(key, **args)
-    end
+
+    # GovukMarkdown.render(markdown, headings_start_with: "l")
+
+    raw GovukMarkdown.render t(key, **args), headings_start_with: "l"
+
+    # content_tag :div, class: 'gem-c-govspeak' do
+    #   translate_markdown t(key, **args)
+    # end
   end
 
   # @yield [Array]

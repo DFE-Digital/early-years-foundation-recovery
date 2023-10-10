@@ -8,7 +8,8 @@
   = govuk_back_link text: 'Back to My modules', href: my_modules_path
 
   div class='govuk-!-padding-top-9 govuk-!-padding-bottom-0'
-    = content_resource 'module.overview.summary', title: mod.card_title, description: mod.description
+    / = content_resource 'module.overview.summary', title: mod.card_title, description: mod.description
+    = raw GovukMarkdown.render t('module.overview.summary', title: mod.card_title, description: mod.description), headings_start_with: "xl"
 
 = render 'editor_tools'
 = render 'learning/cms_debug'
