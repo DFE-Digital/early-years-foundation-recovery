@@ -388,6 +388,42 @@ en:
   account_login:
     title: Sign in
 
+  # /my-account/close/confirm
+  account_close:
+    title: Confirm you want to close your account
+    body: |
+      # Confirm you want to close your account
+
+      After you close your account you will no longer be able to access the training modules.
+
+      Any certificates you have earned will be permanently deleted.
+
+      We will delete your personal information within 10 working days. The personal information we will delete includes:
+
+      - your name
+      - your email address
+      - your postcode, if you provided it when you registered
+      - any notes you have written in your learning log
+
+      We will keep some anonymous information about:
+
+      - your role
+      - your local authority
+      - your usage of the training modules
+      - why you closed your account
+
+      This is to help us improve the training. None of this information will be
+      personally identifiable to you.
+
+      You may still receive emails while we are processing your account closure.
+      After your personal information is deleted, you will not receive any further
+      emails from Early years child development training.
+
+    buttons:
+      confirm: Close my account
+      cancel: Cancel and go back to my account
+
+  # /my-account/close
   account_closed:
     title: Goodbye
     body: |
@@ -401,41 +437,6 @@ en:
       You have been logged out.
 
       [Go to %{service_name} home](/)
-
-
-  # TODO: refactor close_account i18n keys and templates
-  close_account:
-    confirm:
-      heading: Confirm you want to close your account
-      body: |
-        After you close your account you will no longer be able to access the training modules.
-
-        Any certificates you have earned will be permanently deleted.
-
-        We will delete your personal information within 10 working days. The personal information we will delete includes:
-
-        - your name
-        - your email address
-        - your postcode, if you provided it when you registered
-        - any notes you have written in your learning log
-
-        We will keep some anonymous information about:
-
-        - your role
-        - your local authority
-        - your usage of the training modules
-        - why you closed your account
-
-        This is to help us improve the training. None of this information will be
-        personally identifiable to you.
-
-        You may still receive emails while we are processing your account closure.
-        After your personal information is deleted, you will not receive any further
-        emails from Early years child development training.
-
-      confirm_button: Close my account
-      cancel_button: Cancel and go back to my account
-
 
   # Registration Journey -------------------------------------------------------
 
@@ -516,19 +517,16 @@ en:
     title: Home page
     hero: |
       # %{service_name}
-      {: .govuk-heading-l}
 
       This free, online training provides an overview of child development and gives practical advice for supporting the development of children in your early years setting.
     thumb: |
-      ![A practitioner smiling as they do an activity with children in an early years setting](//images.ctfassets.net/dvmeh832nmjc/2VRBZCHJYLeKx0a2CIcJzE/687fb0d28c71104820cd42f131d7dfe2/_assets_thumb-1161068272-320x240.jpg?w=300){:class="full-width-img"}
+      ![A practitioner smiling as they do an activity with children in an early years setting](//images.ctfassets.net/dvmeh832nmjc/2VRBZCHJYLeKx0a2CIcJzE/687fb0d28c71104820cd42f131d7dfe2/_assets_thumb-1161068272-320x240.jpg?w=300)
     about: |
       ## About this training course
-      {: .govuk-heading-m}
 
       Each training module on this site covers an important area of child development and has been written by early years experts, working with the Department for Education.
 
       ## Why should I take this training?
-      {: .govuk-heading-m}
 
       This training:
 
@@ -541,7 +539,6 @@ en:
       - has been developed by expert practitioners
     login: |
       ## Return to your training
-      {: .govuk-heading-m}
 
       Sign in to continue learning, see your progress and download certificates.
 
@@ -556,7 +553,6 @@ en:
       You will need to sign in or create an account before starting a module.
     course: |
       # About this training course
-      {: govuk-heading-l}
 
       This training course will give you a thorough understanding of the most important aspects of child development in the early years.
 

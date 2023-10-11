@@ -30,10 +30,10 @@
   
     &:before {
       position: absolute;
-      content: '"';
+      content: '“'; // <-----
       font-size: 8em;
       margin-top: -0.4em;
-      background-color: govuk-colour("white");
+      background-color: govuk-colour('white');
       line-height: 0.9;
       height: 50px;
       padding-left: 10px;

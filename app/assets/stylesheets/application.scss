@@ -93,10 +93,6 @@ pre.code-tip {
   display: block;
 }
 
-.full-width-img {
-  width: 100%;
-}
-
 abbr {
   cursor: help;
   text-decoration: none;
@@ -128,12 +124,14 @@ ul>li>ul>li {
   background: #f3f2f1;
 }
 
+/*
 .gem-c-govspeak {
   a {
     @include govuk-link-common;
     @include govuk-link-style-default;
   }
 }
+*/
 
 #js-timeout-warning:focus {
   outline: 3px solid #ffdd00;

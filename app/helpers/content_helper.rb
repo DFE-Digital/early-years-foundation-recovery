@@ -1,12 +1,35 @@
 module ContentHelper
-  # GDS formatted markdown as HTML
-  # @param markdown [String]
-  # @return [String]
-  def translate_markdown(markdown)
-    # raw Govspeak::Document.to_html(markdown.to_s, sanitize: false)
-    raw GovukMarkdown.render(markdown.to_s, filter_html: false)
-    # GovukMarkdown.render(markdown, headings_start_with: "l")
-  end
+        # @param markdown [String]
+        # @return [String]
+        # def m(markdown)
+        def m(key, headings_start_with: 'l', **args)
+          # raw CustomMarkdown.render(markdown.to_s, filter_html: false)
+
+          if I18n.exists?(key)
+            raw CustomMarkdown.render t(key, **args), headings_start_with: headings_start_with, filter_html: false
+          else
+            raw CustomMarkdown.render(key.to_s, filter_html: false)
+          end
+        rescue Contentful::Error
+          raw CustomMarkdown.render(key.to_s, filter_html: false)
+        end
+
+        # GDS formatted markdown as HTML
+        # @param markdown [String]
+        # @return [String]
+        def translate_markdown(markdown)
+          m(markdown)
+        end
+
+        # @param key [String]
+        # @param args [Hash]
+        # @return [String]
+        def content_resource(key, headings_start_with: 'l', **args) # knocks the size down because these are commonly smaller snippets
+          # raw GovukMarkdown.render t(key, **args), headings_start_with: headings_start_with
+          m(key, headings_start_with: headings_start_with, **args)
+        end
+
+
 
   # Date format guidelines: "1 June 2002"
   # @return [String]
@@ -27,7 +50,7 @@ module ContentHelper
   # @param mod [Training::Module]
   # @return [String]
   def training_module_image(mod)
-    image_tag mod.thumbnail_url, class: 'full-width-img', width: 200, alt: '', title: ''
+    image_tag mod.thumbnail_url, width: 200, alt: '', title: ''
   end
 
   # @param icon [String, Symbol] Fontawesome icon name
@@ -75,20 +98,7 @@ module ContentHelper
     Rails.configuration.service_name
   end
 
-  # @param key [String]
-  # @param args [Hash]
-  # @return [String]
-  def content_resource(key, **args)
-
-    # GovukMarkdown.render(markdown, headings_start_with: "l")
-
-    raw GovukMarkdown.render t(key, **args), headings_start_with: "l"
-
-    # content_tag :div, class: 'gem-c-govspeak' do
-    #   translate_markdown t(key, **args)
-    # end
-  end
-
+  # replace with form builder fields
   # @yield [Array]
   def opt_in_out(type)
     yield [

@@ -8,6 +8,6 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 
 .svg-inline--fa {
   background-color: $prompt-hue;
-  color: govuk-colour("white");
+  color: govuk-colour('white');
   padding: govuk-spacing(4) !important;
 }

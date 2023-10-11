@@ -38,12 +38,14 @@ $prompt-hue: govuk-colour("turquoise");
     }
   }
 
+  /*
   .gem-c-govspeak {
     padding-top: govuk-spacing(4);
     @media(max-width: 40.0625em) {
       padding-right: govuk-spacing(4);
     }
   }
+  */
 
   .small-screen-padding-right {
     @media(max-width: 40.0625em) {
