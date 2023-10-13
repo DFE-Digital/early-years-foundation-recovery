@@ -17,12 +17,13 @@
   }
 }
 
-.move-me {
+header #service-name {
   align-self: flex-end;
   width: 100%;
   order: 3;
 
-  .dfe-header__link--service, .dfe-header__link--service:hover {
+  .dfe-header__link--service,
+  .dfe-header__link--service:hover {
     color: #fff;
     font-size: 1.125em;
     margin-top: 12px;

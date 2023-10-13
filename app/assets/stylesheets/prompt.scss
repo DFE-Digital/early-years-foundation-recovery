@@ -2,12 +2,12 @@
 https://design-system.service.gov.uk/styles/colour/
 -----------------------------------------------
 */
-$prompt-hue: govuk-colour("turquoise");
+$prompt-hue: govuk-colour('turquoise');
 // --------------------------------------------
 
 
 .prompt {
-  background-color: govuk-colour("light-grey");
+  background-color: govuk-colour('light-grey');
   border-top: $prompt-hue solid 10px;
   margin: govuk-spacing(5) govuk-spacing(0);
   padding-left: govuk-spacing(4);
@@ -37,15 +37,6 @@ $prompt-hue: govuk-colour("turquoise");
       padding-left: govuk-spacing(7);
     }
   }
-
-  /*
-  .gem-c-govspeak {
-    padding-top: govuk-spacing(4);
-    @media(max-width: 40.0625em) {
-      padding-right: govuk-spacing(4);
-    }
-  }
-  */
 
   .small-screen-padding-right {
     @media(max-width: 40.0625em) {

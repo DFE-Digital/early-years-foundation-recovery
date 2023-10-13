@@ -12,7 +12,6 @@
     .light-grey-box
       .govuk-grid-row
         .govuk-grid-column-two-thirds
-          / = content_resource 'home.hero', service_name: service_name, headings_start_with: 'xl'
           = m('home.hero', service_name: service_name)
 
           = govuk_button_link_to course_overview_path, class: 'govuk-button--start govuk-!-margin-bottom-4' do

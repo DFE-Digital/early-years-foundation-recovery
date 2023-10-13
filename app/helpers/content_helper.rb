@@ -1,35 +1,16 @@
 module ContentHelper
-        # @param markdown [String]
-        # @return [String]
-        # def m(markdown)
-        def m(key, headings_start_with: 'l', **args)
-          # raw CustomMarkdown.render(markdown.to_s, filter_html: false)
+  # GDS formatted markdown as HTML
+  # knocks the size down because these are commonly smaller snippets
+  #
+  # @param key [String]
+  # @return [String]
+  def m(key, headings_start_with: 'l', **args)
+    markdown = I18n.exists?(key, scope: args[:scope]) ? t(key, **args) : key.to_s
 
-          if I18n.exists?(key)
-            raw CustomMarkdown.render t(key, **args), headings_start_with: headings_start_with, filter_html: false
-          else
-            raw CustomMarkdown.render(key.to_s, filter_html: false)
-          end
-        rescue Contentful::Error
-          raw CustomMarkdown.render(key.to_s, filter_html: false)
-        end
-
-        # GDS formatted markdown as HTML
-        # @param markdown [String]
-        # @return [String]
-        def translate_markdown(markdown)
-          m(markdown)
-        end
-
-        # @param key [String]
-        # @param args [Hash]
-        # @return [String]
-        def content_resource(key, headings_start_with: 'l', **args) # knocks the size down because these are commonly smaller snippets
-          # raw GovukMarkdown.render t(key, **args), headings_start_with: headings_start_with
-          m(key, headings_start_with: headings_start_with, **args)
-        end
-
-
+    raw CustomMarkdown.render(markdown, headings_start_with: headings_start_with, filter_html: false)
+  rescue Contentful::Error
+    raw CustomMarkdown.render(key)
+  end
 
   # Date format guidelines: "1 June 2002"
   # @return [String]
@@ -77,7 +58,7 @@ module ContentHelper
     title = t(".#{state}.heading")
     text = t(".#{state}.text", score: score)
 
-    govuk_notification_banner(title_text: title, text: translate_markdown(text))
+    govuk_notification_banner(title_text: title, text: m(text))
   end
 
   # @param status [String, Symbol]
@@ -98,7 +79,8 @@ module ContentHelper
     Rails.configuration.service_name
   end
 
-  # replace with form builder fields
+  # TODO: replace with form builder fields, Replace Openstruct with DATA
+  #
   # @yield [Array]
   def opt_in_out(type)
     yield [
@@ -107,7 +89,7 @@ module ContentHelper
         OpenStruct.new(id: false, name: t(:opt_out, scope: type)),
       ],
       t(:heading, scope: type),
-      translate_markdown(t(:body, scope: type)),
+      m(:body, scope: type),
     ]
   end
 

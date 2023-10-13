@@ -7,7 +7,7 @@
 - content_for :page_content do
   h1= content.heading
 
-  = translate_markdown(content.body)
+  = m(content.body)
 
   - if content.video_url
     = render 'govspeak/video', title: content.video_title, url: content.video_url
@@ -23,7 +23,7 @@
       h2.gov-uk-heading-m class='govuk-!-margin-top-2'
         | Transcript
 
-      = translate_markdown(content.transcript)
+      = m(content.transcript)
 
 = render 'debug'
 = render 'content_wrap'

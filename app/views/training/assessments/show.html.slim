@@ -23,7 +23,7 @@
         .govuk-inset-text
           p= t('.incorrect', answers: incorrect_response.selected_answers)
 
-          = translate_markdown(incorrect_response.question.failure_message)
+          = m(incorrect_response.question.failure_message)
 
         = f.govuk_submit disabled: true, class: 'govuk-visually-hidden'
 

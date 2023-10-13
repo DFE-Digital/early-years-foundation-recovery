@@ -47,5 +47,5 @@
         - row.with_value(text: current_user.training_emails_recipient? ? t('my_account.training_emails_true') : t('my_account.training_emails_false'), classes: ['data-hj-suppress'])
         - row.with_action(text: t('links.change'), href: edit_training_emails_user_path, visually_hidden_text: 'training_emails', html_attributes: { id: :edit_training_emails_user })
 
-    = content_resource 'my_account.closing.information'
+    = m('my_account.closing.information')
     = govuk_button_link_to t('my_account.closing.button'), new_user_close_account_path
