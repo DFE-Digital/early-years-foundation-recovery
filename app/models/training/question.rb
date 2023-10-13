@@ -14,15 +14,6 @@ module Training
       @answer ||= Answer.new(json: json)
     end
 
-    # @return [Hash{Symbol => nil, Integer}]
-    def pagination
-      return super if formative_question?
-
-      question_group = summative_question? ? parent.summative_questions : parent.confidence_questions
-
-      { current: question_group.find_index(self) + 1, total: question_group.count }
-    end
-
     # @return [String] powered by JSON not type
     def to_partial_path
       partial = multi_select? ? 'check_boxes' : 'radio_buttons'

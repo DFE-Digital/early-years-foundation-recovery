@@ -1,7 +1,7 @@
 #
 # Module structure and user activity in a tabular form
 #
-# :nocov
+# :nocov:
 class ModuleDebugDecorator < DelegateClass(ModuleProgress)
   # @return [String]
   def markdown_table
@@ -59,4 +59,4 @@ private
     [HEADERS, *columns]
   end
 end
-# :nocov
+# :nocov:

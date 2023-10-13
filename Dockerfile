@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 FROM ruby:3.2.2-alpine as base
 
-RUN apk add --no-cache --no-progress build-base less curl tzdata gcompat
+RUN apk add --no-cache --no-progress --no-check-certificate build-base less curl tzdata gcompat
 
 ENV TZ Europe/London
 
@@ -14,7 +14,7 @@ FROM base as deps
 
 LABEL org.opencontainers.image.description "Application Dependencies"
 
-RUN apk add --no-cache --no-progress postgresql-dev yarn chromium
+RUN apk add --no-cache --no-progress --no-check-certificate postgresql-dev yarn chromium
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
@@ -42,8 +42,7 @@ FROM base AS app
 
 LABEL org.opencontainers.image.description "Early Years Recovery Rails Application"
 
-RUN apk add --no-cache --no-progress postgresql-dev yarn chromium sassc
-# maybe just libsass?
+RUN apk add --no-cache --no-progress --no-check-certificate postgresql-dev yarn chromium
 
 ENV GROVER_NO_SANDBOX true
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
@@ -77,6 +76,8 @@ COPY --from=deps /build/.yarn ${APP_HOME}/.yarn
 COPY --from=deps /build/node_modules ${APP_HOME}/node_modules
 
 RUN SECRET_KEY_BASE=x \
+    GOVUK_APP_DOMAIN=x \
+    GOVUK_WEBSITE_ROOT=x \
     bundle exec rails assets:precompile
 
 COPY ./docker-entrypoint.sh /
@@ -92,8 +93,8 @@ CMD ["bundle", "exec", "rails", "server"]
 # ------------------------------------------------------------------------------
 FROM app as dev
 
-RUN apk add --no-cache --no-progress postgresql-client npm graphviz
-RUN npm install --global adr-log contentful-cli
+RUN apk add --no-cache --no-progress --no-check-certificate postgresql-client npm graphviz
+# RUN npm install --global adr-log contentful-cli
 
 RUN bundle config unset without
 RUN bundle config set without test ui
@@ -104,7 +105,7 @@ RUN bundle install --no-binstubs --retry=10 --jobs=4
 # ------------------------------------------------------------------------------
 FROM app as test
 
-RUN apk add --no-cache --no-progress postgresql-client
+RUN apk add --no-cache --no-progress --no-check-certificate postgresql-client
 
 RUN bundle config unset without
 RUN bundle config set without development ui
@@ -154,7 +155,7 @@ LABEL org.opencontainers.image.description "Accessibility auditor"
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
 
-RUN apk add --no-cache --no-progress npm chromium
+RUN apk add --no-cache --no-progress --no-check-certificate npm chromium
 RUN npm install --global --unsafe-perm puppeteer pa11y-ci
 
 COPY .pa11yci /usr/config.json
