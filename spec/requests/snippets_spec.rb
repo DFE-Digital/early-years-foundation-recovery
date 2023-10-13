@@ -20,7 +20,7 @@ RSpec.describe 'Snippets', type: :request do
     let(:resource) { 'unwritten.content.name' }
 
     specify do
-      expect(response.body).to include 'translation missing: en.unwritten.content.name'
+      expect(response.body).to include '<p class="govuk-body-m">unwritten.content.name</p>'
     end
 
     specify { expect(response).to have_http_status(:success) }

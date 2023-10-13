@@ -7,9 +7,9 @@ module ContentHelper
   def m(key, headings_start_with: 'l', **args)
     markdown = I18n.exists?(key, scope: args[:scope]) ? t(key, **args) : key.to_s
 
-    raw CustomMarkdown.render(markdown, headings_start_with: headings_start_with, filter_html: false)
+    CustomMarkdown.render(markdown, headings_start_with: headings_start_with, filter_html: false).html_safe
   rescue Contentful::Error
-    raw CustomMarkdown.render(key)
+    CustomMarkdown.render(key).html_safe
   end
 
   # Date format guidelines: "1 June 2002"
@@ -81,7 +81,7 @@ module ContentHelper
 
   # TODO: replace with form builder fields, Replace Openstruct with DATA
   #
-  # @yield [Array]
+  # @yield [Array] options / legend / hint
   def opt_in_out(type)
     yield [
       [
@@ -89,7 +89,7 @@ module ContentHelper
         OpenStruct.new(id: false, name: t(:opt_out, scope: type)),
       ],
       t(:heading, scope: type),
-      m(:body, scope: type),
+      t(:body, scope: type),
     ]
   end
 

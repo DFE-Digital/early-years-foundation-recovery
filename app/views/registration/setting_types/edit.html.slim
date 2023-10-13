@@ -12,9 +12,6 @@
       = f.govuk_error_summary
 
       = f.govuk_fieldset legend: { text: t(:heading, scope: :register_setting) }, aria: { required: true } do
-
-        = m(:body, scope: :register_setting)
-
         = f.select_trainee_setting
 
         p.govuk_body

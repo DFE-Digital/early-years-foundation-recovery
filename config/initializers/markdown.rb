@@ -104,12 +104,12 @@ private
 
   # @return [Slim::Template]
   def prompt_template
-    @prompt_template ||= Slim::Template.new('app/views/govspeak/_prompt.html.slim')
+    @prompt_template ||= Slim::Template.new('app/views/markup/_prompt.html.slim')
   end
 
   # @return [Slim::Template]
   def quote_template
-    @quote_template ||= Slim::Template.new('app/views/govspeak/_quote.html.slim')
+    @quote_template ||= Slim::Template.new('app/views/markup/_quote.html.slim')
   end
 end
 
