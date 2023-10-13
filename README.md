@@ -317,7 +317,7 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
 ## Content
 
-Content designers can author text in [markdown][markdown] which is parsed using [govuk_markdown][govuk_markdown] which applies default frontend classes.
+Content designers can author text in markdown which is parsed using [govuk_markdown](https://github.com/DFE-Digital/govuk-markdown) which applies default frontend classes.
 
 This service uses the following bespoke markup:
 

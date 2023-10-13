@@ -94,7 +94,7 @@ CMD ["bundle", "exec", "rails", "server"]
 FROM app as dev
 
 RUN apk add --no-cache --no-progress --no-check-certificate postgresql-client npm graphviz
-# RUN npm install --global adr-log contentful-cli
+RUN npm install --global adr-log contentful-cli
 
 RUN bundle config unset without
 RUN bundle config set without test ui

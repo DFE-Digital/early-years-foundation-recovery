@@ -38,6 +38,7 @@ services:
       - BROWSER
       - DRIVER
       - USER_PASSWORD
+      - E2E
     depends_on:
       app:
         condition: service_healthy
