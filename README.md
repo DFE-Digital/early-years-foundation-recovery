@@ -317,33 +317,20 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
 ## Content
 
-Content designers are also using the docker development environment.
+Content designers can author text in [markdown][markdown] which is parsed using [govuk_markdown][govuk_markdown] which applies default frontend classes.
 
-You can demo this environment locally using the account `completed@example.com:StrongPassword`.
-When there are significant changes to content structure a soft restart the server may be necessary `./bin/docker-rails restart`.
-CSS styling changes will appear automatically without needing to restart.
+This service uses the following bespoke markup:
 
+- Button links: `{button}[Continue](/path/to/page){/button}`
+- External links: `{external}[Read more](https://example.com){/external}`
+- User prompts:
+    ```
+    {quote}
+    This is the quote
 
-### CMS
-
-Refresh cache in instances and workers
-
-- `cf restart ey-recovery-dev --strategy rolling`
-
-- `cf ssh ey-recovery-dev-worker`
-- rails eyfs:jobs:plug_content
-
-- Validation: `$ ./bin/docker-rails 'eyfs:cms:validate'`
-
-### YAML
-
-- [guide](https://www.commonwl.org/user_guide/yaml)
-
-### Govspeak
-
-- [live preview](https://govspeak-preview.publishing.service.gov.uk)
-- [designer guide](https://govspeak-preview.publishing.service.gov.uk/guide)
-- [developer guide](https://docs.publishing.service.gov.uk/repos/govspeak.html)
+    This is the citation
+    {/quote}
+    ```
 
 ---
 

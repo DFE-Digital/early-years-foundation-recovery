@@ -1,7 +1,5 @@
 module ContentHelper
-  # GDS formatted markdown as HTML
-  # knocks the size down because these are commonly smaller snippets
-  #
+  # @see [CustomMarkdown]
   # @param key [String]
   # @return [String]
   def m(key, headings_start_with: 'l', **args)

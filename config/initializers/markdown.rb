@@ -44,7 +44,7 @@ class CustomPreprocessor < GovukMarkdown::Preprocessor
   #   {quote}
   #   This is the quote
   #
-  #   THis is the citation
+  #   This is the citation
   #   {/quote}
   #
   # @return [CustomPreprocessor]
