@@ -4,16 +4,11 @@
 - content_for :hero do
   = render 'shared/section_bar'
 
+- content_for :page_content do
+  #section-intro-body.govuk-grid-column-full
+    h1.govuk-heading-l= content.heading
+
+    = m(content.body)
+
 = render 'debug'
-
-.govuk-grid-row
-  .govuk-grid-column-full-width
-    .govuk-grid-row
-      .govuk-grid-column-two-thirds-from-desktop
-        .section-intro-body
-          h1= content.heading
-
-          = m(content.body)
-
-          = render partial: 'course_pages_footer'
-
+= render 'content_wrap'

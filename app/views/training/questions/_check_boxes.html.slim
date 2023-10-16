@@ -1,4 +1,4 @@
-= f.govuk_check_boxes_fieldset :answers, legend: { text: m(response.legend) } do
+= f.govuk_check_boxes_fieldset :answers, legend: { text: response.legend } do
   = f.govuk_error_summary
 
   - response.options.each do |option|

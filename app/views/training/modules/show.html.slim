@@ -14,15 +14,16 @@
 = render 'learning/cms_debug'
 
 .govuk-grid-row
-  .govuk-grid-column-full-width
+  .govuk-grid-column-full
 
-    / Could now combine?
     = m('module.overview.criteria', criteria: mod.criteria)
-    hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
+
+    hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-padding-2'
+
     = m('module.overview.progress')
 
 .govuk-grid-row
-  .govuk-grid-column-full-width
+  .govuk-grid-column-full
     hr.govuk-section-break.govuk-section-break--m.govuk-section-break--visible.module-overview-section-break
 
     - module_progress.sections.each do |section|

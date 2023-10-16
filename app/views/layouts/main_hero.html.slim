@@ -33,7 +33,7 @@ html.govuk-template lang='en'
 
     = navigation
 
-    div class='dfe-content-page--header govuk-!-padding-bottom-4'
+    .dfe-content-page--header class='govuk-!-padding-bottom-4'
       .dfe-width-container 
         = govuk_phase_banner(tag: { text: 'Beta' }, classes: 'noprint') do
           == t 'phase_banner', link: govuk_link_to('feedback', Rails.configuration.feedback_url, target: :_blank)
@@ -45,9 +45,12 @@ html.govuk-template lang='en'
     
 
     .dfe-width-container
-      main.govuk-main-wrapper
-        - flash.each do |variant, message|
-          = govuk_notification_banner title_text: t("banners.#{variant}"), text: m(message), success: %w[important notice].include?(variant), classes: "govuk-notification-banner--#{variant}"
+      main#main-content.govuk-main-wrapper role='main'
+        .govuk-grid-row
+          .govuk-grid-column-two-thirds-from-desktop
+            - flash.each do |variant, message|
+              = govuk_notification_banner title_text: t("banners.#{variant}"), text: m(message), success: %w[important notice].include?(variant), classes: "govuk-notification-banner--#{variant}"
+
         = yield
 
     = render 'layouts/footer'

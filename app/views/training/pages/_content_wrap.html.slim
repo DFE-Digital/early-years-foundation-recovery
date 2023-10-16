@@ -1,10 +1,7 @@
 .govuk-grid-row
-  .govuk-grid-column-full-width
-    .govuk-grid-row 
-      .govuk-grid-column-two-thirds-from-desktop
-        = yield :page_content
+  = yield :page_content
 
-        - if content.notes?
-          = render partial: 'notes/form'
-        - else
-          = render partial: 'course_pages_footer'
+  - if content.notes?
+    = render partial: 'notes/form'
+  - else
+    = render partial: 'course_pages_footer'

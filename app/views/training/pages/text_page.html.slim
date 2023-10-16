@@ -5,9 +5,10 @@
   = render 'shared/section_bar'
 
 - content_for :page_content do
-  h1= content.heading
+  .govuk-grid-column-two-thirds-from-desktop
+    h1.govuk-heading-l= content.heading
 
-  = m(content.body)
+    = m(content.body)
 
 = render 'debug'
 = render 'content_wrap'

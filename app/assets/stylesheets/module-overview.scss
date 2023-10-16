@@ -11,7 +11,7 @@ $progress-bar-container-width: 81px;
 
 .module-section--pages {
   margin-left: 10px;
-  color: govuk-colour('mid-grey');
+  color: $govuk-secondary-text-colour;
   font-weight: normal;
 }
 
@@ -70,4 +70,8 @@ $progress-bar-container-width: 81px;
       margin-left: auto;
     }
   }
+}
+
+#module-call-to-action {
+  @include govuk-responsive-margin(8, 'top');
 }
