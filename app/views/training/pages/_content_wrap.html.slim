@@ -1,7 +1,7 @@
 .govuk-grid-row
   = yield :page_content
 
-  - if content.notes?
-    = render partial: 'notes/form'
-  - else
-    = render partial: 'course_pages_footer'
+- if content.notes?
+  = render partial: 'notes/form'
+- else
+  = render partial: 'course_pages_footer'
