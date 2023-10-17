@@ -4,6 +4,7 @@
 - content_for :page_content do
   .govuk-grid-column-full.interrupt-panel
     h1.govuk-heading-l= content.heading
-    .gem-c-govspeak= translate_markdown(content.body)
+
+    = m(content.body)
 
 = render 'content_wrap'

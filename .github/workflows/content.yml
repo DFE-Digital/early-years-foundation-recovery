@@ -40,7 +40,6 @@ jobs:
       PR_NUMBER: pr-${{ github.event.number }}
       # @see terraform/workspace-variables/app_config.yml[:content]
       DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
-      GOVUK_WEBSITE_ROOT: ey-recovery-pr-${{ github.event.number }}
     steps:
       -
         name: Checkout Code

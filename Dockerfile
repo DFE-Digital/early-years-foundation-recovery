@@ -75,10 +75,7 @@ COPY .yarnrc.yml ${APP_HOME}/.yarnrc.yml
 COPY --from=deps /build/.yarn ${APP_HOME}/.yarn
 COPY --from=deps /build/node_modules ${APP_HOME}/node_modules
 
-RUN SECRET_KEY_BASE=x \
-    GOVUK_APP_DOMAIN=x \
-    GOVUK_WEBSITE_ROOT=x \
-    bundle exec rails assets:precompile
+RUN SECRET_KEY_BASE=x bundle exec rails assets:precompile
 
 COPY ./docker-entrypoint.sh /
 
@@ -94,7 +91,7 @@ CMD ["bundle", "exec", "rails", "server"]
 FROM app as dev
 
 RUN apk add --no-cache --no-progress --no-check-certificate postgresql-client npm graphviz
-# RUN npm install --global adr-log contentful-cli
+RUN npm install --global adr-log contentful-cli
 
 RUN bundle config unset without
 RUN bundle config set without test ui

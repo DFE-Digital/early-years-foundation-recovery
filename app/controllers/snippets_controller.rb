@@ -16,6 +16,6 @@ private
 
   # @return [String]
   def resource
-    helpers.content_resource(resource_name)
+    helpers.m(resource_name)
   end
 end

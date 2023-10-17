@@ -9,7 +9,6 @@ $govuk-page-width: 1200px;
 @import 'dfe-frontend-alpha/packages/dfefrontend';
 @import 'dfe-header';
 
-@import 'govspeak';
 @import 'card';
 @import 'prompt';
 @import 'video';
@@ -94,10 +93,6 @@ pre.code-tip {
   display: block;
 }
 
-.full-width-img {
-  width: 100%;
-}
-
 abbr {
   cursor: help;
   text-decoration: none;
@@ -127,13 +122,6 @@ ul>li>ul>li {
 .form-container {
   padding: 30px;
   background: #f3f2f1;
-}
-
-.gem-c-govspeak {
-  a {
-    @include govuk-link-common;
-    @include govuk-link-style-default;
-  }
 }
 
 #js-timeout-warning:focus {

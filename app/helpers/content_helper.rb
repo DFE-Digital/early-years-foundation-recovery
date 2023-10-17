@@ -1,9 +1,13 @@
 module ContentHelper
-  # GDS formatted markdown as HTML
-  # @param markdown [String]
+  # @see [CustomMarkdown]
+  # @param key [String]
   # @return [String]
-  def translate_markdown(markdown)
-    raw Govspeak::Document.to_html(markdown.to_s, sanitize: false)
+  def m(key, headings_start_with: 'l', **args)
+    markdown = I18n.exists?(key, scope: args[:scope]) ? t(key, **args) : key.to_s
+
+    CustomMarkdown.render(markdown, headings_start_with: headings_start_with, filter_html: false).html_safe
+  rescue Contentful::Error
+    CustomMarkdown.render(key).html_safe
   end
 
   # Date format guidelines: "1 June 2002"
@@ -25,7 +29,7 @@ module ContentHelper
   # @param mod [Training::Module]
   # @return [String]
   def training_module_image(mod)
-    image_tag mod.thumbnail_url, class: 'full-width-img', width: 200, alt: '', title: ''
+    image_tag mod.thumbnail_url, width: 200, alt: '', title: ''
   end
 
   # @param icon [String, Symbol] Fontawesome icon name
@@ -52,7 +56,7 @@ module ContentHelper
     title = t(".#{state}.heading")
     text = t(".#{state}.text", score: score)
 
-    govuk_notification_banner(title_text: title, text: translate_markdown(text))
+    govuk_notification_banner(title_text: title, text: m(text))
   end
 
   # @param status [String, Symbol]
@@ -73,16 +77,9 @@ module ContentHelper
     Rails.configuration.service_name
   end
 
-  # @param key [String]
-  # @param args [Hash]
-  # @return [String]
-  def content_resource(key, **args)
-    content_tag :div, class: 'gem-c-govspeak' do
-      translate_markdown t(key, **args)
-    end
-  end
-
-  # @yield [Array]
+  # TODO: replace with form builder fields, Replace Openstruct with DATA
+  #
+  # @yield [Array] options / legend / hint
   def opt_in_out(type)
     yield [
       [
@@ -90,7 +87,7 @@ module ContentHelper
         OpenStruct.new(id: false, name: t(:opt_out, scope: type)),
       ],
       t(:heading, scope: type),
-      translate_markdown(t(:body, scope: type)),
+      t(:body, scope: type),
     ]
   end
 

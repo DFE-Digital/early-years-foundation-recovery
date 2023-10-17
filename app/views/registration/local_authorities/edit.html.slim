@@ -12,9 +12,6 @@
       = f.govuk_error_summary
 
       = f.govuk_fieldset legend: { text: t('register_authority.heading') }, aria: { required: true } do
-
-        = translate_markdown t('register_authority.body')
-
         = f.select_trainee_authority
 
         p.govuk_body

@@ -6,10 +6,11 @@
 
 - content_for :page_content do
   h1= content.heading
-  .gem-c-govspeak= translate_markdown(content.body)
+
+  = m(content.body)
 
   - if content.video_url
-    = render 'govspeak/video', title: content.video_title, url: content.video_url
+    = render 'markup/video', title: content.video_title, url: content.video_url
   - else
     p.govuk-body class='govuk-!-text-align-centre'
       | [Video to be added]
@@ -18,10 +19,11 @@
     summary.govuk-details__summary
       span.govuk-details__summary-text
         | Transcript
-    .govuk-details__text.white-background
+    .govuk-details__text
       h2.gov-uk-heading-m class='govuk-!-margin-top-2'
         | Transcript
-      .gem-c-govspeak= translate_markdown(content.transcript)
+
+      = m(content.transcript)
 
 = render 'debug'
 = render 'content_wrap'

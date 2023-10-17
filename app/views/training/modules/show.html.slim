@@ -8,16 +8,18 @@
   = govuk_back_link text: 'Back to My modules', href: my_modules_path
 
   div class='govuk-!-padding-top-9 govuk-!-padding-bottom-0'
-    = content_resource 'module.overview.summary', title: mod.card_title, description: mod.description
+    = m('module.overview.summary', title: mod.card_title, description: mod.description, headings_start_with: 'xl')
 
 = render 'editor_tools'
 = render 'learning/cms_debug'
 
 .govuk-grid-row
   .govuk-grid-column-full-width
-    = content_resource 'module.overview.criteria', criteria: mod.criteria
+
+    / Could now combine?
+    = m('module.overview.criteria', criteria: mod.criteria)
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
-    = content_resource 'module.overview.progress'
+    = m('module.overview.progress')
 
 .govuk-grid-row
   .govuk-grid-column-full-width

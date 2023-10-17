@@ -25,7 +25,7 @@
 
     = govuk_summary_list do |other_details|
       - other_details.with_row do |row|
-        - row.with_key { raw t('my_account.setting_details') }
+        - row.with_key { m('my_account.setting_details') }
         - row.with_value { nil }
         - row.with_action(text: t('links.change'), href: edit_registration_setting_type_path, visually_hidden_text: 'setting_type', html_attributes: { id: :edit_setting_type_registration })
       - other_details.with_row do |row|
@@ -40,12 +40,12 @@
 
     = govuk_summary_list do |email_preferences|
       - email_preferences.with_row do |row|
-        - row.with_key { raw t('my_account.email_preferences') }
+        - row.with_key { m('my_account.email_preferences') }
         - row.with_value { nil }
       - email_preferences.with_row do |row|
         - row.with_key { 'Email updates about this training course' }
-        - row.with_value(text: current_user.training_emails_recipient? ? t('my_account.training_emails_true') : t('my_account.training_emails_false'), classes: ['data-hj-suppress'])
+        - row.with_value(text: t(current_user.training_emails_recipient?, scope: 'my_account.training_emails'), classes: %w[data-hj-suppress])
         - row.with_action(text: t('links.change'), href: edit_training_emails_user_path, visually_hidden_text: 'training_emails', html_attributes: { id: :edit_training_emails_user })
 
-    = content_resource 'my_account.closing.information'
+    = m('my_account.closing.information')
     = govuk_button_link_to t('my_account.closing.button'), new_user_close_account_path

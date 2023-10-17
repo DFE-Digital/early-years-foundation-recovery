@@ -10,11 +10,11 @@
 
       = f.govuk_fieldset legend: { text: t('register_name.heading') } do
 
-        = translate_markdown t('register_name.body')
+        = m('register_name.body')
 
         = f.govuk_text_field :first_name, aria: { required: true }
         = f.govuk_text_field :last_name, aria: { required: true }
 
       .govuk-button-group
         = f.govuk_submit t('links.continue')
-        = govuk_link_to t('cancel'), root_path
+        = govuk_link_to t('cancel'), user_path

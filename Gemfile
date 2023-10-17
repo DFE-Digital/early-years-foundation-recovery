@@ -48,9 +48,8 @@ gem 'contentful_rails'
 gem 'govuk-components'
 gem 'govuk_design_system_formbuilder'
 
-# Markdown support
-gem 'govspeak'
-gem 'sassc' # govspeak assets
+# # Markdown support
+gem 'govuk_markdown'
 
 gem 'govuk_notify_rails'
 

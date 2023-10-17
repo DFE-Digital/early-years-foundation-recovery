@@ -6,7 +6,8 @@
 
 - content_for :page_content do
   h1= content.heading
-  .gem-c-govspeak= translate_markdown(content.body)
+
+  = m(content.body)
 
 = render 'debug'
 = render 'content_wrap'

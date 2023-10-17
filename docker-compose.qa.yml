@@ -12,8 +12,6 @@ services:
     environment:
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_production
       - DOMAIN=https://localhost:3000
-      - GOVUK_APP_DOMAIN=recovery.eyfs.dfe.gov.uk
-      - GOVUK_WEBSITE_ROOT=www
       # overrides
       - WORKSPACE
       - USER_PASSWORD
@@ -38,6 +36,7 @@ services:
       - BROWSER
       - DRIVER
       - USER_PASSWORD
+      - E2E
     depends_on:
       app:
         condition: service_healthy
