@@ -7,14 +7,15 @@
 - content_for :hero do
   = govuk_back_link text: 'Back to My modules', href: my_modules_path
 
-  div class='govuk-!-padding-top-9 govuk-!-padding-bottom-0'
-    = m('module.overview.summary', title: mod.card_title, description: mod.description, headings_start_with: 'xl')
+  .govuk-grid-row
+    .govuk-grid-column-three-quarters-from-desktop class='govuk-!-padding-top-9 govuk-!-padding-bottom-0'
+      = m('module.overview.summary', title: mod.card_title, description: mod.description, headings_start_with: 'xl')
 
 = render 'editor_tools'
 = render 'learning/cms_debug'
 
 .govuk-grid-row
-  .govuk-grid-column-full
+  .govuk-grid-column-three-quarters-from-desktop
 
     = m('module.overview.criteria', criteria: mod.criteria)
 
