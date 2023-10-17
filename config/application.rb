@@ -92,8 +92,6 @@ module EarlyYearsFoundationRecovery
       Types::Params::Bool[ENV.fetch('DASHBOARD_UPDATE', true)]
     end
 
-    # TODO: refactor to use coerced type post CMS release
-    #
     # CI workflow uses DELIVERY
     # CMS validation workflow uses PREVIEW then DELIVERY
     #
@@ -104,10 +102,8 @@ module EarlyYearsFoundationRecovery
     def preview?
       if Rails.env.test? && ENV['CONTENTFUL_PREVIEW'].blank?
         false
-      elsif ENV['CONTENTFUL_PREVIEW'].present?
-        true
       else
-        false
+        Types::Params::Bool[ENV.fetch('CONTENTFUL_PREVIEW', false)]
       end
     end
 

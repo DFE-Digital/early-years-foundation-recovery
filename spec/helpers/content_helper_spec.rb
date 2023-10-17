@@ -49,7 +49,7 @@ describe 'ContentHelper', type: :helper do
         it 'creates an external link' do
           expect(html).to eq <<~HTML.strip
             <p class="govuk-body-m"><a href=/link class="govuk-link" target="_blank" rel="noopener noreferrer">
-            text (opens in new tab)
+            text (opens in a new tab)
             </a></p>
           HTML
         end

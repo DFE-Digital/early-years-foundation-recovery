@@ -17,7 +17,7 @@ on:
   workflow_dispatch:
     inputs:
       workspace:
-        description: Deployment workspace to test against (staging, dev, pr-xxx)
+        description: Deployment workspace to test against (staging, dev, review-pr-xxx)
         type: string
         default: staging
 
@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-      DOMAIN: ey-recovery-${{ inputs.workspace || 'dev' }}.london.cloudapps.digital
+      DOMAIN: https://eyrecovery-${{ inputs.workspace || 'dev' }}.azurewebsites.net
     steps:
       -
         name: Checkout Code

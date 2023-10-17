@@ -40,9 +40,12 @@ RUN bundle install --no-binstubs --retry=10 --jobs=4
 # ------------------------------------------------------------------------------
 FROM base AS app
 
+LABEL org.opencontainers.image.source=https://github.com/DFE-Digital/early-years-foundation-recovery
 LABEL org.opencontainers.image.description "Early Years Recovery Rails Application"
 
-RUN apk add --no-cache --no-progress --no-check-certificate postgresql-dev yarn chromium
+RUN echo "Welcome to the EYFS Recovery Application" > /etc/motd
+RUN apk add --no-cache --no-progress --no-check-certificate postgresql-dev yarn chromium openssh
+RUN echo "root:Docker!" | chpasswd && cd /etc/ssh/ && ssh-keygen -A
 
 ENV GROVER_NO_SANDBOX true
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
@@ -77,11 +80,12 @@ COPY --from=deps /build/node_modules ${APP_HOME}/node_modules
 
 RUN SECRET_KEY_BASE=x bundle exec rails assets:precompile
 
+COPY sshd_config /etc/ssh/
 COPY ./docker-entrypoint.sh /
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
-EXPOSE 3000
+EXPOSE 2222 3000
 
 CMD ["bundle", "exec", "rails", "server"]
 

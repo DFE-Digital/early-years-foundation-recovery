@@ -26,9 +26,6 @@ GOOGLE_ANALYTICS_DOMAINS = %w[
   www.googletagmanager.com
   *.hotjar.com
   *.hotjar.io
-  *.ytimg.com
-  www.youtube.com
-  www.youtube-nocookie.com
   i.vimeocdn.com
   player.vimeo.com
   www.vimeo.com
@@ -47,11 +44,10 @@ GOOGLE_STATIC_DOMAINS = %w[
   script.hotjar.com
 ].freeze
 
-CONTENTFUL_DOMAINS = %w[
-  *.ctfassets.net
-].freeze
-
 Rails.application.config.content_security_policy do |policy|
+  # @see https://www.contentful.com/developers/docs/tutorials/general/live-preview/#set-up-live-preview
+  policy.frame_ancestors :self, 'https://app.contentful.com'
+
   policy.default_src :self,
                      :https,
                      *GOVUK_DOMAINS
@@ -67,8 +63,9 @@ Rails.application.config.content_security_policy do |policy|
                      *GOVUK_DOMAINS,
                      *GOOGLE_ANALYTICS_DOMAINS, # Tracking pixels
                      *OPTIMIZE_DOMAINS,
-                     *CONTENTFUL_DOMAINS,
+                     '*.ctfassets.net',
                      :data # Base64 encoded images
+
   policy.object_src  :none
   policy.script_src  :self,
                      *GOVUK_DOMAINS,
@@ -84,8 +81,8 @@ Rails.application.config.content_security_policy do |policy|
                      *GOOGLE_STATIC_DOMAINS,
                      *OPTIMIZE_DOMAINS,
                      :unsafe_inline
+
   if Rails.env.development?
-    # :nocov: by definition will not run in test
     policy.connect_src :self,
                        :https,
                        :wss,
@@ -93,7 +90,6 @@ Rails.application.config.content_security_policy do |policy|
                        *GOOGLE_ANALYTICS_DOMAINS,
                        'http://localhost:3035',
                        'ws://localhost:3035'
-    # :nocov:
   else
     policy.connect_src :self,
                        :https,

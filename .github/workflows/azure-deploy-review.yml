@@ -3,7 +3,7 @@ name: 'App Deploy [Azure - REVIEW]'
 on:
   pull_request:
     types:
-      - labeled
+      - labeled # uses 'review'
       - synchronize
     paths-ignore:
       - '**/*.md'
@@ -30,12 +30,12 @@ env:
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-  DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
+  DOCKER_REGISTRY: ghcr.io/dfe-digital/early-years-foundation-recovery
   PR_NUMBER: pr-${{ github.event.number }}
 
 jobs:
   build-and-deploy:
-    if: contains(github.event.pull_request.labels.*.name, 'deployed')
+    if: contains(github.event.pull_request.labels.*.name, 'review')
     runs-on: ubuntu-latest
     environment: development
 
@@ -64,30 +64,34 @@ jobs:
       - name: Build and push dependencies
         uses: docker/build-push-action@v5
         with:
-          context: .
-          build-args: BUILDKIT_INLINE_CACHE=1
-          cache-from: |
-            ${{ env.DOCKER_IMAGE }}:deps
-          push: true
-          tags: ${{ env.DOCKER_IMAGE }}:deps
           target: deps
+          context: .
+          # platforms: linux/amd64,linux/arm64
+          push: true
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
+            SHA=${{ github.event.pull_request.head.sha }}
+          cache-from: |
+            ${{ env.DOCKER_REGISTRY }}:deps
+          tags: ${{ env.DOCKER_REGISTRY }}:deps
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           target: app
           context: .
+          # platforms: linux/amd64,linux/arm64
           push: true
           build-args: |
             BUILDKIT_INLINE_CACHE=1
             SHA=${{ github.event.pull_request.head.sha }}
           cache-from: |
-            ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
-            ${{ env.DOCKER_IMAGE }}:${{ env.PR_NUMBER }}
-            ${{ env.DOCKER_IMAGE }}:latest
+            ${{ env.DOCKER_REGISTRY }}:${{ github.event.pull_request.head.sha }}
+            ${{ env.DOCKER_REGISTRY }}:${{ env.PR_NUMBER }}
+            ${{ env.DOCKER_REGISTRY }}:latest
           tags: |
-            ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
-            ${{ env.DOCKER_IMAGE }}:${{ env.PR_NUMBER }}
+            ${{ env.DOCKER_REGISTRY }}:${{ github.event.pull_request.head.sha }}
+            ${{ env.DOCKER_REGISTRY }}:${{ env.PR_NUMBER }}
 
       # Login to Azure using OIDC
       - name: Login to Azure CLI
@@ -115,7 +119,7 @@ jobs:
               --name ${{ vars.REVIEWAPP_NAME }} \
               --slot ${{ env.PR_NUMBER }} \
               --configuration-source ${{ vars.REVIEWAPP_NAME }} \
-              --deployment-container-image-name ${{ env.DOCKER_IMAGE }}:${{ env.PR_NUMBER }} \
+              --deployment-container-image-name ${{ env.DOCKER_REGISTRY }}:${{ env.PR_NUMBER }} \
               --output none
             az webapp vnet-integration add --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.REVIEWAPP_NAME }} \

@@ -313,24 +313,6 @@ The status of GovUK notify can be checked here: <https://status.notifications.se
 For more information the Notify team can be contacted here: <https://www.notifications.service.gov.uk/support>,
 or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
----
-
-## Content
-
-Content designers can author text in markdown which is parsed using [govuk_markdown](https://github.com/DFE-Digital/govuk-markdown) which applies default frontend classes.
-
-This service uses the following bespoke markup:
-
-- Button links: `{button}[Continue](/path/to/page){/button}`
-- External links: `{external}[Read more](https://example.com){/external}`
-- User prompts:
-    ```
-    {quote}
-    This is the quote
-
-    This is the citation
-    {/quote}
-    ```
 
 ---
 
