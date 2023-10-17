@@ -39,7 +39,7 @@ html.govuk-template lang='en'
 
       .noprint = render 'layouts/timeout'
 
-      main.govuk-main-wrapper
+      main#main-content.govuk-main-wrapper role='main'
         - flash.each do |variant, message|
           = govuk_notification_banner title_text: t("banners.#{variant}"), text: m(message), success: %w[important notice].include?(variant), classes: "govuk-notification-banner--#{variant}"
         = yield
