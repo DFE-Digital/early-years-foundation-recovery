@@ -75,10 +75,7 @@ COPY .yarnrc.yml ${APP_HOME}/.yarnrc.yml
 COPY --from=deps /build/.yarn ${APP_HOME}/.yarn
 COPY --from=deps /build/node_modules ${APP_HOME}/node_modules
 
-RUN SECRET_KEY_BASE=x \
-    GOVUK_APP_DOMAIN=x \
-    GOVUK_WEBSITE_ROOT=x \
-    bundle exec rails assets:precompile
+RUN SECRET_KEY_BASE=x bundle exec rails assets:precompile
 
 COPY ./docker-entrypoint.sh /
 
