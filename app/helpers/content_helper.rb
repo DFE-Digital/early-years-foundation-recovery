@@ -29,7 +29,7 @@ module ContentHelper
   # @param mod [Training::Module]
   # @return [String]
   def training_module_image(mod)
-    image_tag mod.thumbnail_url, width: 200, alt: '', title: ''
+    image_tag mod.thumbnail_url, alt: '', title: ''
   end
 
   # @param icon [String, Symbol] Fontawesome icon name

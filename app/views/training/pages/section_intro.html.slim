@@ -4,12 +4,15 @@
 - content_for :hero do
   = render 'training/modules/section_bar'
 
-- content_for :page_content do
+= render 'debug'
+
+.govuk-grid-row
   .govuk-grid-column-full
     #section-intro-panel
-      h1.govuk-heading-l= content.heading
+      h1.govuk-heading-xl= content.heading
 
       = m(content.body)
 
-= render 'debug'
-= render 'content'
+      .govuk-button-group
+        = link_to_previous
+        = link_to_next

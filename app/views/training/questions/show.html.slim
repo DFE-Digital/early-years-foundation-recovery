@@ -10,7 +10,7 @@
 
   .govuk-grid-row
     .govuk-grid-column-two-thirds-from-desktop
-
+      = f.govuk_error_summary
       = render partial: content.to_partial_path, locals: { f: f }, object: current_user_response, as: :response
 
       - if content.formative_question? && current_user_response.responded?
