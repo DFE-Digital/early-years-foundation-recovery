@@ -53,4 +53,6 @@ else
   fi
 fi
 
+/usr/sbin/sshd
+
 exec bundle exec "$@"
