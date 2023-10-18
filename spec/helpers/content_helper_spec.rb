@@ -112,6 +112,22 @@ describe 'ContentHelper', type: :helper do
           expect(html).to eq '<div class="blockquote-container"><blockquote class="quote"><p class="govuk-body-m">Life is trying things to see if they work.</p><cite>Ray Bradbury</cite></blockquote></div>'
         end
       end
+
+      describe 'Row templates' do
+        let(:input) do
+          <<~MARKUP
+            {two_thirds}
+            Description of an image
+
+            ![image title](/path/to/image)
+            {/two_thirds}
+          MARKUP
+        end
+
+        it 'builds semantic markup' do
+          expect(html).to eq '<div class="govuk-grid-column-two-thirds"><p class="govuk-body-m">Description of an image</p></div><div class="govuk-grid-column-one-third"><p class="govuk-body-m"><img src="/path/to/image" alt="image title"></p></div>'
+        end
+      end
     end
   end
 

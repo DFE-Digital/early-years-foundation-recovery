@@ -16,11 +16,14 @@
 
 .govuk-grid-row
   .govuk-grid-column-three-quarters-from-desktop
-
     = m('module.overview.criteria', criteria: mod.criteria)
 
+.govuk-grid-row
+  .govuk-grid-column-full
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-padding-2'
 
+.govuk-grid-row
+  .govuk-grid-column-three-quarters-from-desktop
     = m('module.overview.progress')
 
 .govuk-grid-row

@@ -10,7 +10,7 @@ module Training
                   :section_bar,
                   :assessment
 
-    layout 'main_hero'
+    layout 'hero'
 
     def new
       assessment.archive!

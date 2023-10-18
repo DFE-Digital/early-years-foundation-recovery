@@ -57,6 +57,30 @@ main img {
 }
 
 /*
+Default layout
+-----------------------------------------------
+*/
+
+#default-layout {
+  // noop
+}
+
+
+
+/*
+Hero layout
+-----------------------------------------------
+*/
+
+#hero-layout {
+  .govuk-notification-banner {
+    margin-top: govuk-spacing(3);
+    margin-bottom: govuk-spacing(-4);
+  }
+}
+
+
+/*
 Internal
 -----------------------------------------------
 */

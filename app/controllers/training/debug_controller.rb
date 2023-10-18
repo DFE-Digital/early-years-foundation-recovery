@@ -8,7 +8,7 @@ module Training
     helper_method :mod,
                   :module_table
 
-    layout 'main_hero'
+    layout 'hero'
 
     # @see ModuleDebugDecorator
     #
