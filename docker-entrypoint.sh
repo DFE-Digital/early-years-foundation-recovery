@@ -37,6 +37,8 @@ if [ -z ${ENVIRONMENT} ]
 then
   echo "ENVIRONMENT is not defined so the app may not startup as intended"
 else
+  /usr/sbin/sshd
+
   if [ !${ENVIRONMENT}=="development" ]
   then
     bundle exec rails db:prepare assets:precompile db:seed sitemap:refresh:no_ping
@@ -52,7 +54,5 @@ else
     rm public/robots.txt && touch public/robots.txt && bundle exec rails db:prepare assets:precompile
   fi
 fi
-
-/usr/sbin/sshd
 
 exec bundle exec "$@"
