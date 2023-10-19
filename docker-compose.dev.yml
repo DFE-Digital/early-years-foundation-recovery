@@ -10,14 +10,6 @@ services:
       test: curl --fail http://localhost:3000/health || exit 1
     restart: on-failure
     environment:
-      # rails credentials
-      - EDITOR=vi
-      # psql client
-      - PGUSER=postgres
-      - PGPASSWORD=password
-      - PGHOST=db
-      - PGDATABASE=early_years_foundation_recovery_development
-      # app config
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
       - RAILS_ENV=development
       - DOMAIN=app:3000
@@ -30,7 +22,7 @@ services:
   worker:
     container_name: recovery_worker
     image: recovery:dev
-    command: bundle exec que
+    command: que
     environment:
       - RAILS_ENV=development
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
