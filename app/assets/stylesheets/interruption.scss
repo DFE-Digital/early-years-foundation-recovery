@@ -1,9 +1,7 @@
 // /modules/foo/content-pages/what-to-expect
 
-.interrupt-panel {
-  width: 100%;
-  padding: 30px;
-  margin-bottom: 30px;
+#interrupt-panel {
+  padding: govuk-spacing(7);
   background: darken(govuk-colour('blue'), 3%);
 
   * {

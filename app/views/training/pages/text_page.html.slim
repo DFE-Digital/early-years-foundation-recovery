@@ -2,12 +2,13 @@
   = html_title mod.title, content.heading
 
 - content_for :hero do
-  = render 'shared/section_bar'
+  = render 'training/modules/section_bar'
 
 - content_for :page_content do
-  h1= content.heading
+  .govuk-grid-column-three-quarters-from-desktop
+    h1.govuk-heading-l= content.heading
 
-  = m(content.body)
+    = m(content.body)
 
 = render 'debug'
-= render 'content_wrap'
+= render 'content'

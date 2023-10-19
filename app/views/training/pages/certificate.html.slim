@@ -2,28 +2,27 @@
   = html_title mod.title, content.heading
 
 - content_for :hero do
-  .noprint
-    = render 'shared/section_bar'
+  .govuk-grid-row
+    .govuk-grid-column-full class='govuk-!-padding-top-9 govuk-!-padding-bottom-7'
+      h1.govuk-heading-l Get your certificate
 
-  h1.govuk-heading-l Get your certificate 
+      - if module_progress.completed?
+        p Congratulations! You have now completed this module.
+      - else
+        p You have not yet completed the module.
 
-  - if module_progress.completed?
-    p Congratulations! You have now completed this module.
-  - else
-    p You have not yet completed the module.
-
-  p.govuk_body
-    | If the name on your certificate is not what you expect, you can update it in
-    =< govuk_link_to 'My account', user_path
-    | .
+      p.govuk_body
+        | If the name on your certificate is not what you expect, you can update it in
+        =< govuk_link_to 'My account', user_path
+        | .
 
 h3.govuk-heading-s Certificate of achievement
 
 - if module_progress.completed?
-  h2.govuk-heading-m.data-hj-suppress= current_user.name
+  h1.govuk-heading-xl.data-hj-suppress= current_user.name
   p has completed the following module:
 - else
-  h2.govuk-heading-m Your name will appear here
+  h1.govuk-heading-xl Your name will appear here
 
 h2.govuk-heading-m= mod.title
 

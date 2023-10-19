@@ -3,7 +3,27 @@
 class CustomPreprocessor < GovukMarkdown::Preprocessor
   # @return [CustomPreprocessor]
   def apply_all
-    inject_inset_text.inject_details.button.external.quote.brain.book.info
+    inject_inset_text.inject_details.two_thirds.button.external.quote.brain.book.info
+  end
+
+  # @example
+  #   {two_thirds}
+  #   This is the body copy
+  #
+  #   ![right hand image](//path/to/image)
+  #   {/two_thirds}
+  #
+  # @return [CustomPreprocessor]
+  def two_thirds
+    pattern = build_regexp('two_thirds')
+    @output = output.gsub(pattern) do
+      text, image = split_content Regexp.last_match(1)
+      left_markup = nested_markdown(text)
+      right_markup = nested_markdown("#{image}\n")
+
+      two_thirds_template.render(nil, left: left_markup, right: right_markup)
+    end
+    self
   end
 
   # @example
@@ -11,8 +31,9 @@ class CustomPreprocessor < GovukMarkdown::Preprocessor
   #
   # @return [CustomPreprocessor]
   def button
-    @output = output.gsub(build_regexp('button')) do
-      text, link = hyperlink(Regexp.last_match(1))
+    pattern = build_regexp('button')
+    @output = output.gsub(pattern) do
+      text, link = hyperlink Regexp.last_match(1)
 
       <<~HTML
         <a href=#{link} class="govuk-link govuk-button">
@@ -28,8 +49,9 @@ class CustomPreprocessor < GovukMarkdown::Preprocessor
   #
   # @return [CustomPreprocessor]
   def external
-    @output = output.gsub(build_regexp('external')) do
-      text, link = hyperlink(Regexp.last_match(1))
+    pattern = build_regexp('external')
+    @output = output.gsub(pattern) do
+      text, link = hyperlink Regexp.last_match(1)
 
       <<~HTML
         <a href=#{link} class="govuk-link" target="_blank" rel="noopener noreferrer">
@@ -49,11 +71,9 @@ class CustomPreprocessor < GovukMarkdown::Preprocessor
   #
   # @return [CustomPreprocessor]
   def quote
-    @output = output.gsub(build_regexp('quote')) do
-      content = Regexp.last_match(1)
-      citation = content.split("\n").last
-      quote = content.gsub(citation, Types::EMPTY_STRING)
-
+    pattern = build_regexp('quote')
+    @output = output.gsub(pattern) do
+      quote, citation = split_content Regexp.last_match(1)
       quote_template.render(nil, quote: nested_markdown(quote), citation: citation)
     end
     self
@@ -61,32 +81,34 @@ class CustomPreprocessor < GovukMarkdown::Preprocessor
 
   # @return [CustomPreprocessor]
   def brain
-    @output =
-      output.gsub(build_regexp('brain')) do
-        learning_prompt('brain', Regexp.last_match(1))
-      end
+    pattern = build_regexp('brain')
+    @output = output.gsub(pattern) { learning_prompt 'brain', Regexp.last_match(1) }
     self
   end
 
   # @return [CustomPreprocessor]
   def book
-    @output =
-      output.gsub(build_regexp('book')) do
-        learning_prompt('book', Regexp.last_match(1))
-      end
+    pattern = build_regexp('book')
+    @output = output.gsub(pattern) { learning_prompt 'book', Regexp.last_match(1) }
     self
   end
 
   # @return [CustomPreprocessor]
   def info
-    @output =
-      output.gsub(build_regexp('info')) do
-        learning_prompt('info', Regexp.last_match(1))
-      end
+    pattern = build_regexp('info')
+    @output = output.gsub(pattern) { learning_prompt 'info', Regexp.last_match(1) }
     self
   end
 
 private
+
+  # @param content [String]
+  # @return [Array<String>]
+  def split_content(content)
+    content_end = content.split("\n").last
+    content_start = content.gsub(content_end, Types::EMPTY_STRING)
+    [content_start, content_end]
+  end
 
   # @param content [String]
   # @return [Array<String>]
@@ -100,6 +122,11 @@ private
   # @return [String]
   def learning_prompt(type, content)
     prompt_template.render(nil, icon: type, body: nested_markdown(content))
+  end
+
+  # @return [Slim::Template]
+  def two_thirds_template
+    @two_thirds_template ||= Slim::Template.new('app/views/markup/_two_thirds.html.slim')
   end
 
   # @return [Slim::Template]

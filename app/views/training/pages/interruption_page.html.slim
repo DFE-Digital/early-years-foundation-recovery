@@ -2,9 +2,10 @@
   = html_title mod.title, content.heading
 
 - content_for :page_content do
-  .govuk-grid-column-full.interrupt-panel
-    h1.govuk-heading-l= content.heading
+  .govuk-grid-column-two-thirds-from-desktop
+    #interrupt-panel
+      h1.govuk-heading-l= content.heading
 
-    = m(content.body)
+      = m(content.body)
 
-= render 'content_wrap'
+= render 'content'
