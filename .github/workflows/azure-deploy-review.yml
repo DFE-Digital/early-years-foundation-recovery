@@ -64,19 +64,21 @@ jobs:
       - name: Build and push dependencies
         uses: docker/build-push-action@v5
         with:
+          target: deps
           context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
           build-args: BUILDKIT_INLINE_CACHE=1
           cache-from: |
             ${{ env.DOCKER_IMAGE }}:deps
-          push: true
           tags: ${{ env.DOCKER_IMAGE }}:deps
-          target: deps
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           target: app
           context: .
+          platforms: linux/amd64,linux/arm64
           push: true
           build-args: |
             BUILDKIT_INLINE_CACHE=1
