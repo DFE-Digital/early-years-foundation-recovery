@@ -7,26 +7,31 @@
 - content_for :hero do
   = govuk_back_link text: 'Back to My modules', href: my_modules_path
 
-  div class='govuk-!-padding-top-9 govuk-!-padding-bottom-0'
-    = m('module.overview.summary', title: mod.card_title, description: mod.description, headings_start_with: 'xl')
+  .govuk-grid-row
+    .govuk-grid-column-three-quarters-from-desktop class='govuk-!-padding-top-9 govuk-!-padding-bottom-0'
+      = m('module.overview.summary', title: mod.card_title, description: mod.description, headings_start_with: 'xl')
 
 = render 'editor_tools'
 = render 'learning/cms_debug'
 
 .govuk-grid-row
-  .govuk-grid-column-full-width
-
-    / Could now combine?
+  .govuk-grid-column-three-quarters-from-desktop
     = m('module.overview.criteria', criteria: mod.criteria)
-    hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
+
+.govuk-grid-row
+  .govuk-grid-column-full
+    hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-padding-2'
+
+.govuk-grid-row
+  .govuk-grid-column-three-quarters-from-desktop
     = m('module.overview.progress')
 
 .govuk-grid-row
-  .govuk-grid-column-full-width
+  .govuk-grid-column-full
     hr.govuk-section-break.govuk-section-break--m.govuk-section-break--visible.module-overview-section-break
 
     - module_progress.sections.each do |section|
-      = render 'shared/module_overview_section', **section
+      = render 'section', **section
 
     = govuk_button_link_to link_to_action[1], class: 'govuk-button--start', id: 'module-call-to-action' do
       | #{link_to_action[0]}

@@ -25,3 +25,13 @@ iframe {
     height: 100%;
   }
 }
+
+
+#video-panel {
+  padding: govuk-spacing(7);
+  background: govuk-colour('light-grey');
+
+  .govuk-details__text {
+    background: govuk-colour('white');
+  }
+}

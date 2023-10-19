@@ -1,7 +1,5 @@
 h1.govuk-heading-l Learning check
 
-= f.govuk_error_summary
-
 .prompt
   .govuk-grid-row
     .govuk-grid-column-one-quarter
@@ -13,6 +11,6 @@ h1.govuk-heading-l Learning check
       div class='govuk-!-margin-4'
         = m(content.legend)
 
-        = f.govuk_check_boxes_fieldset :answers, legend: { text: m(content.legend), hidden: true } do
+        = f.govuk_check_boxes_fieldset :answers, legend: { text: content.legend, hidden: true } do
           - response.options.each do |option|
             = f.question_check_box(option)

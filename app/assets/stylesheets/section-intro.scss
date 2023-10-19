@@ -1,13 +1,23 @@
-.section-intro-body {
+#section-intro-panel {
   padding: govuk-spacing(7);
   background-color: govuk-colour('light-grey');
   border-radius: 6px;
-}
 
-.section-intro-previous-button {
-  background-color: $color_dfe-secondary-blue;
+  h1 {
+    margin-bottom: govuk-spacing(4);
+  }
 
-  &:hover, &:focus {
+  .govuk-button-group {
+    margin-top: govuk-spacing(2);
+    margin-bottom: govuk-spacing(0);
+  }
+
+  .section-intro-previous-button {
     background-color: $color_dfe-secondary-blue;
+
+    &:hover, &:focus {
+      background-color: $color_dfe-secondary-blue;
+    }
   }
 }
+

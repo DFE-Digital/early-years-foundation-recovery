@@ -1,5 +1,10 @@
 $progress-bar-height: 10px;
 
+#section-bar {
+  padding-top: govuk-spacing(9);
+  padding-bottom: govuk-spacing(7);
+}
+
 p#progress-intro {
   color: $govuk-secondary-text-colour;
 

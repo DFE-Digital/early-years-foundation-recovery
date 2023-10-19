@@ -11,7 +11,7 @@ module Training
                   :module_progress,
                   :note
 
-    layout 'main_hero'
+    layout 'hero'
 
     def index
       redirect_to training_module_page_path(mod_name, 'what-to-expect')
