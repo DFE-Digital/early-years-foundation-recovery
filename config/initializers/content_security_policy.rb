@@ -45,7 +45,6 @@ GOOGLE_STATIC_DOMAINS = %w[
 ].freeze
 
 Rails.application.config.content_security_policy do |policy|
-
   # @see https://www.contentful.com/developers/docs/tutorials/general/live-preview/#set-up-live-preview
   policy.frame_ancestors :self, 'https://app.contentful.com'
 
