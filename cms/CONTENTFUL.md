@@ -93,7 +93,7 @@ As above replace `http://localhost:3000` with `https://ey-recovery-dev.london.cl
 
 Used by content editors when editing genuine module content.
 
-As above replace `http://localhost:3000` with `https://ey-recovery-staging.london.cloudapps.digital`
+As above replace `http://localhost:3000` with `https://staging.child-development-training.education.gov.uk`
 
 
 ## Webhooks
@@ -109,7 +109,7 @@ As above replace `http://localhost:3000` with `https://ey-recovery-staging.londo
 
 - Name: `Autosave content for Staging (preview)`
 - Filters: `sys.environment.sys.id` equals `staging`
-- URL: `POST` to `https://ey-recovery-staging.london.cloudapps.digital/change`
+- URL: `POST` to `https://staging.child-development-training.education.gov.uk/change`
 - Content events triggers: `Autosave` of `Entry` or `Asset`
 - Other API events: N/A
 
@@ -149,14 +149,22 @@ As above replace `http://localhost:3000` with `https://ey-recovery-staging.londo
 
 ## Markup
 
-<https://kramdown.gettalong.org/quickref.html#html-elements>
+Content designers can author text in markdown which is parsed using [govuk_markdown](https://github.com/DFE-Digital/govuk-markdown) which applies default frontend classes.
 
-```markdown
-  > A blockquote with a title
-  {:title="The blockquote title"}
-  {: #myid .class1 .class2}
-```
+This service uses bespoke tags for customised components, including:
 
+- Button links:
+    `{button}[Continue](/path/to/page){/button}`
+- External links:
+    `{external}[Read more](https://example.com){/external}`
+- User prompts:
+    ```
+    {quote}
+    This is the quote
+
+    This is the citation
+    {/quote}
+    ```
 
 ## Terminology
 
