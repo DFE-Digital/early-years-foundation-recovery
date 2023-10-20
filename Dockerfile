@@ -40,6 +40,7 @@ RUN bundle install --no-binstubs --retry=10 --jobs=4
 # ------------------------------------------------------------------------------
 FROM base AS app
 
+LABEL org.opencontainers.image.source=https://github.com/DFE-Digital/early-years-foundation-recovery
 LABEL org.opencontainers.image.description "Early Years Recovery Rails Application"
 
 RUN apk add --no-cache --no-progress --no-check-certificate postgresql-dev yarn chromium openssh

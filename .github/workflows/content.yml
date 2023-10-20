@@ -69,7 +69,6 @@ jobs:
         with:
           target: deps
           context: .
-          platforms: linux/amd64,linux/arm64
           push: true
           build-args: BUILDKIT_INLINE_CACHE=1
           cache-from: |
@@ -81,7 +80,6 @@ jobs:
         with:
           target: app
           context: .
-          platforms: linux/amd64,linux/arm64
           push: true
           build-args: |
             BUILDKIT_INLINE_CACHE=1

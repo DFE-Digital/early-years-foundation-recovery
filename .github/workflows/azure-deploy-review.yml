@@ -3,7 +3,7 @@ name: 'App Deploy [Azure - REVIEW]'
 on:
   pull_request:
     types:
-      - labeled
+      - labeled # uses 'review'
       - synchronize
     paths-ignore:
       - '**/*.md'
@@ -35,7 +35,7 @@ env:
 
 jobs:
   build-and-deploy:
-    if: contains(github.event.pull_request.labels.*.name, 'deployed')
+    if: contains(github.event.pull_request.labels.*.name, 'review')
     runs-on: ubuntu-latest
     environment: review
 
