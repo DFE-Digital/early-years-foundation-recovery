@@ -33,11 +33,17 @@ else
   bundle exec rails db:create db:migrate
 fi
 
+# production deployments only
 if [ -z ${ENVIRONMENT} ]
 then
   echo "ENVIRONMENT is not defined so the app may not startup as intended"
 else
-  /usr/sbin/sshd
+
+  if [ -z ${WORKSPACE} ]
+  then
+    echo "WORKSPACE is not defined so we are deploying to Azure"
+    /usr/sbin/sshd
+  fi
 
   if [ !${ENVIRONMENT}=="development" ]
   then
