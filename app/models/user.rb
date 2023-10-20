@@ -21,12 +21,20 @@ class User < ApplicationRecord
     DASHBOARD_ATTRS + Training::Module.live.map { |mod| "module_#{mod.position}_time" }
   end
 
+  # @return [User]
+  def self.create_from_email(email)
+    user = User.new(email: email, confirmed_at: Time.zone.now)
+    user.save(validate: false)
+    user
+  end
+
   # Include default devise modules. Others available are:
   # :timeoutable, :trackable, :recoverable and :omniauthable
   attr_accessor :context
 
   devise :database_authenticatable, :registerable, :recoverable,
-         :validatable, :rememberable, :confirmable, :lockable, :timeoutable
+         :validatable, :rememberable, :confirmable, :lockable, :timeoutable,
+         :omniauthable, omniauth_providers: [:openid_connect]
 
   has_many :responses
   has_many :user_answers

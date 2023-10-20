@@ -69,4 +69,6 @@ RSpec.configure do |config|
 
   # enable ShowMeTheCookies
   config.include ShowMeTheCookies, type: :system
+
+  config.include Devise::Test::ControllerHelpers, type: :controller
 end

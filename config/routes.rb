@@ -18,6 +18,7 @@ Rails.application.routes.draw do
                confirmations: 'confirmations',
                passwords: 'passwords',
                registrations: 'registrations',
+               omniauth_callbacks: 'users/omniauth_callbacks',
              },
              path_names: {
                sign_in: 'sign-in',
@@ -31,6 +32,7 @@ Rails.application.routes.draw do
     get 'check_session_timeout', to: 'timeout#check'
     get 'extend_session', to: 'timeout#extend'
     get 'users/timeout', to: 'timeout#timeout_user'
+    get '/users/sign_out', to: 'users/sessions#destroy'
   end
 
   namespace :registration do
@@ -52,6 +54,7 @@ Rails.application.routes.draw do
     get 'check-email-confirmation'
     get 'check-email-password-reset'
     get 'edit-training-emails'
+    devise_for :users, controllers: { omniauth_callbacks: 'controllers/users/omniauth_callbacks' }
     patch 'update-training-emails'
 
     resource :close_account, only: %i[new update show], path: 'close' do

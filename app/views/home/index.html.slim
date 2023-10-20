@@ -13,7 +13,7 @@
       .govuk-grid-row
         .govuk-grid-column-two-thirds
           = content_resource 'home.hero', service_name: service_name
-
+          
           = govuk_button_link_to course_overview_path, class: 'govuk-button--start govuk-!-margin-bottom-4' do
             - if current_user
               | Learn more
@@ -37,6 +37,4 @@
         = content_resource 'home.login'
 
         .govuk-button-group
-          = govuk_button_link_to 'Sign in', new_user_session_path
-          .white-space-pre-wrap= ' or '
-          = govuk_link_to 'create an account', new_user_registration_path
+          = govuk_button_link_to 'Sign in with Gov One Login', login_uri

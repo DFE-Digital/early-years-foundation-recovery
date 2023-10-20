@@ -14,14 +14,6 @@
         - row.with_key { 'Name' }
         - row.with_value(text: current_user.name, classes: ['data-hj-suppress'])
         - row.with_action(text: t('links.change'), href: edit_registration_name_path, visually_hidden_text: 'name', html_attributes: { id: :edit_name_registration })
-      - your_details.with_row do |row|
-        - row.with_key { 'Email' }
-        - row.with_value(text:current_user.email, classes: ['data-hj-suppress'])
-        - row.with_action(text: t('links.change'), href: edit_email_user_path, visually_hidden_text: 'email', html_attributes: { id: :edit_email_user })
-      - your_details.with_row do |row|
-        - row.with_key { 'Password' }
-        - row.with_value { t('my_account.password_changed', date: current_user.password_last_changed) }
-        - row.with_action(text: t('links.change'), href: edit_password_user_path, visually_hidden_text: 'password', html_attributes: { id: :edit_password_user })
 
     = govuk_summary_list do |other_details|
       - other_details.with_row do |row|
