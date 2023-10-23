@@ -10,7 +10,7 @@ resource "azurerm_container_group" "app_worker" {
   container {
     name                  = var.container_name
     image                 = "${var.app_worker_docker_registry}/${var.app_worker_docker_image}:${var.app_worker_docker_image_tag}"
-    cpu                   = "1.0"
+    cpu                   = "2.0"
     memory                = "2.0"
     environment_variables = var.app_worker_environment_variables
     commands              = var.app_worker_startup_command
