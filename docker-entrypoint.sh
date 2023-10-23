@@ -45,30 +45,26 @@ else
 # Production
 #
 # ------------------------------------------------------------------------------
-  /usr/sbin/sshd
-
   if [ -z ${ENVIRONMENT} ]
   then
-    echo "ENVIRONMENT is not defined"
+    echo "Azure ENVIRONMENT is not defined"
   else
+    /usr/sbin/sshd
+
     bundle exec rails db:prepare
 
     case ${ENVIRONMENT} in
-      "review" )
-        bundle exec rails db:seed
-        ;;
       "development" )
-        bundle exec rails sitemap:refresh:no_ping
+        bundle exec rails db:seed sitemap:refresh:no_ping
         ;;
       "staging" )
         # no op
         ;;
       "production" )
-        rm public/robots.txt
-        touch public/robots.txt
+        rm public/robots.txt && touch public/robots.txt
         ;;
       * )
-        echo "ENVIRONMENT ${ENVIRONMENT} is not defined"
+        echo "Azure ENVIRONMENT ${ENVIRONMENT} is not supported"
     esac
   fi
 
