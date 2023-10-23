@@ -45,30 +45,27 @@ else
 # Production
 #
 # ------------------------------------------------------------------------------
+  /usr/sbin/sshd
+
   if [ -z ${ENVIRONMENT} ]
   then
     echo "ENVIRONMENT is not defined"
   else
-    /usr/sbin/sshd
+    bundle exec rails db:prepare
 
     case ${ENVIRONMENT} in
       "review" )
-        # bundle exec rails db:prepare assets:precompile db:seed
-        bundle exec rails db:prepare db:seed
+        bundle exec rails db:seed
         ;;
       "development" )
-        # bundle exec rails db:prepare assets:precompile sitemap:refresh:no_ping
-        bundle exec rails db:prepare sitemap:refresh:no_ping
+        bundle exec rails sitemap:refresh:no_ping
         ;;
       "staging" )
-        # bundle exec rails db:prepare assets:precompile
-        bundle exec rails db:prepare
+        # no op
         ;;
       "production" )
         rm public/robots.txt
         touch public/robots.txt
-        # bundle exec rails db:prepare assets:precompile
-        bundle exec rails db:prepare
         ;;
       * )
         echo "ENVIRONMENT ${ENVIRONMENT} is not defined"
