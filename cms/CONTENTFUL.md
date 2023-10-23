@@ -166,6 +166,10 @@ This service uses bespoke tags for customised components, including:
     {/quote}
     ```
 
+## Review
+
+<http://localhost:3000/modules/alpha/structure>
+
 ## Terminology
 
 Information for onboarding content editors:

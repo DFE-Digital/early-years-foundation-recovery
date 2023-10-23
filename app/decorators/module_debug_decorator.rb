@@ -1,22 +1,11 @@
+# :nocov:
 #
 # Module structure and user activity in a tabular form
 #
-# :nocov:
 class ModuleDebugDecorator < DelegateClass(ModuleProgress)
-  # @return [String]
-  def markdown_table
-    body = []
-    body << '|'
-    rows.each do |row|
-      row.each do |value|
-        body << value
-        body << '|'
-      end
-      body << "\n"
-    end
-    body << "\n"
-
-    body.join
+  # @return [Array<Array>]
+  def rows
+    [HEADERS, *columns]
   end
 
 private
@@ -38,25 +27,33 @@ private
   # @return [Array<Array>]
   def columns
     mod.content.each.with_index(1).map do |item, pos|
-      pagination = PaginationDecorator.new(item)
+      pagination = paginate(item)
       [
         pos.ordinalize,
-        visited?(item),
+        visited?(item).to_s,
         pagination.section_numbers,
         pagination.percentage,
-        item.submodule,
-        item.topic,
+        item.submodule.to_s,
+        item.topic.to_s,
         pagination.page_numbers,
         item.content_type.id,
         item.page_type,
-        item.name,
+        link_to(item),
       ]
     end
   end
 
-  # @return [Array<Array>]
-  def rows
-    [HEADERS, *columns]
+  # @return [String]
+  # @param item [Training::Page, Training::Question, Training::Video]
+  def link_to(item)
+    path = Rails.application.routes.url_helpers.training_module_page_path(mod.name, item.name)
+    ApplicationController.helpers.link_to(item.name, path)
+  end
+
+  # @return [PaginationDecorator]
+  # @param item [Training::Page, Training::Question, Training::Video]
+  def paginate(item)
+    PaginationDecorator.new(item)
   end
 end
 # :nocov:

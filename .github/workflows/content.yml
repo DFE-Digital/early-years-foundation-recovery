@@ -70,7 +70,9 @@ jobs:
           target: deps
           context: .
           push: true
-          build-args: BUILDKIT_INLINE_CACHE=1
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
+            SHA=${{ github.event.pull_request.head.sha }}
           cache-from: |
             ${{ env.REGISTRY }}:deps
           tags: ${{ env.REGISTRY }}:deps

@@ -146,6 +146,16 @@ variable "reviewapp_name" {
   type        = string
 }
 
+variable "reviewapp_config_contentful_environment" {
+  default = null
+  type    = string
+}
+
+variable "reviewapp_config_contentful_preview" {
+  default = null
+  type    = string
+}
+
 variable "webapp_database_url" {
   description = "URL to the Database"
   type        = string

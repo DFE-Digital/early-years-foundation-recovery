@@ -10,6 +10,13 @@ services:
       test: curl --fail http://localhost:3000/health || exit 1
     restart: on-failure
     environment:
+      - ENVIRONMENT=
+      # psql client
+      - PGUSER=postgres
+      - PGPASSWORD=password
+      - PGHOST=db
+      - PGDATABASE=early_years_foundation_recovery_development
+      # app config
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
       - RAILS_ENV=development
       - DOMAIN=app:3000

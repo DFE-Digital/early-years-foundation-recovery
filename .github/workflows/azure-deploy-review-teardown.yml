@@ -19,7 +19,7 @@ env:
 jobs:
   teardown:
     runs-on: ubuntu-latest
-    environment: review
+    environment: development
 
     steps:
       # Login to Azure using OIDC

@@ -55,7 +55,7 @@ class CustomPreprocessor < GovukMarkdown::Preprocessor
 
       <<~HTML
         <a href=#{link} class="govuk-link" target="_blank" rel="noopener noreferrer">
-        #{text} (opens in new tab)
+        #{text} (opens in a new tab)
         </a>
       HTML
     end
