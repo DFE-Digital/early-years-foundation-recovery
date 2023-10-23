@@ -100,9 +100,11 @@ module EarlyYearsFoundationRecovery
     #
     # @return [Boolean]
     def preview?
-      return false unless if Rails.env.test? && ENV['CONTENTFUL_PREVIEW'].blank?
-
-      Types::Params::Bool[ENV.fetch('CONTENTFUL_PREVIEW', false)]
+      if Rails.env.test? && ENV['CONTENTFUL_PREVIEW'].blank?
+        false
+      else
+        Types::Params::Bool[ENV.fetch('CONTENTFUL_PREVIEW', false)]
+      end
     end
 
     # @return [Boolean]
