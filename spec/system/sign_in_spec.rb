@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Sign in' do
   let(:email_address) { user.email }
-  let(:password) { 'StrongPassword123' }
+  let(:password) { 'StrongPassword12!@' }
 
   before do
     visit '/users/sign-in'

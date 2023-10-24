@@ -132,3 +132,5 @@ group :ui do
   gem 'selenium-webdriver'
   gem 'site_prism'
 end
+
+gem "devise-security", "~> 0.18.0"

@@ -135,6 +135,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-security (0.18.0)
+      devise (>= 4.3.0)
     dibber (0.7.0)
     diff-lcs (1.5.0)
     digest-crc (0.6.5)
@@ -571,6 +573,7 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise
+  devise-security (~> 0.18.0)
   dibber
   dotenv-rails
   dry-core
@@ -622,4 +625,4 @@ RUBY VERSION
    ruby 3.2.2p53
 
 BUNDLED WITH
-   2.3.26
+   2.4.13
