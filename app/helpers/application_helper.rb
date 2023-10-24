@@ -1,4 +1,10 @@
 module ApplicationHelper
+  CONFIG_SUMMARY = [
+    ['Rails version', Rails.version],
+    ['Ruby version', RUBY_VERSION],
+    ['GOV.UK Frontend', JSON.parse(File.read(Rails.root.join('package.json'))).dig('dependencies', 'govuk-frontend').tr('^', '')],
+  ].freeze
+
   # @return [String]
   def navigation
     render(HeaderComponent.new(classes: 'dfe-header noprint', container_classes: %w[dfe-header-f-header-flex], navigation_label: 'Primary navigation')) do |header|
@@ -16,21 +22,6 @@ module ApplicationHelper
       end
     end
   end
-
-  # @return [String]
-  def custom_logo
-    [
-      image_tag('crest.png', alt: 'Department for Education homepage', class: 'govuk-header__logotype-crown-fallback-image'),
-      content_tag(:span, 'Department for Education | ', class: 'govuk-header__logotype-text'),
-      content_tag(:span, service_name, class: 'govuk-header__product-name'),
-    ].join.html_safe
-  end
-
-  CONFIG_SUMMARY = [
-    ['Rails version', Rails.version],
-    ['Ruby version', RUBY_VERSION],
-    ['GOV.UK Frontend', JSON.parse(File.read(Rails.root.join('package.json'))).dig('dependencies', 'govuk-frontend').tr('^', '')],
-  ].freeze
 
   # @return [String]
   def configuration_summary_list

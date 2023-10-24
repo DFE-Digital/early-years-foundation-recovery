@@ -22,7 +22,7 @@ html.govuk-template lang='en'
     = javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true
     = yield :head
 
-  body.govuk-template__body
+  body#default-layout.govuk-template__body
     script
       | document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
 
@@ -34,14 +34,13 @@ html.govuk-template lang='en'
     = navigation
 
     .govuk-width-container
-      = govuk_phase_banner(tag: { text: 'Beta' }, classes: 'noprint') do
-        == t 'phase_banner', link: govuk_link_to('feedback', Rails.configuration.feedback_url, target: :_blank)
+      = render 'layouts/banner'
 
       .noprint = render 'layouts/timeout'
 
-      main#main-content.govuk-main-wrapper
-        - flash.each do |variant, message|
-          = govuk_notification_banner title_text: t("banners.#{variant}"), text: translate_markdown(message), success: %w[important notice].include?(variant), classes: "govuk-notification-banner--#{variant}"
+      main#main-content.govuk-main-wrapper role='main'
+        = render 'layouts/flash'
+
         = yield
 
     = render 'layouts/footer'

@@ -1,144 +1,131 @@
 require 'rails_helper'
 
 describe 'ContentHelper', type: :helper do
-  describe '#content_resource' do
-    subject(:html) do
-      helper.content_resource('email_advice.not_received', link: 'foo')
+  describe '#m' do
+    subject(:html) { helper.m(input) }
+
+    context 'with a locale key' do
+      subject(:html) do
+        helper.m('email_advice.not_received', link: 'foo')
+      end
+
+      it 'interpolates variables' do
+        expect(html).to include '<a href="foo" class="govuk-link">Send me another email</a>'
+      end
     end
 
-    it 'wraps content in govspeak element' do
-      expect(html).to include '<div class="gem-c-govspeak">'
-    end
-
-    it 'applies Kramdown styling' do
-      expect(html).to include '<p class="govuk-heading-s">I haven’t received the email</p>'
-    end
-
-    it 'interpolates variables' do
-      expect(html).to include '<a href="foo">Send me another email</a>'
-    end
-  end
-
-  describe '#translate_markdown' do
-    subject(:html) { helper.translate_markdown(input) }
-
-    describe 'plain text' do
+    context 'with plain text' do
       let(:input) { 'text' }
 
       it 'returns text within p tags' do
-        expect(html.strip).to eq '<p>text</p>'
+        expect(html).to eq '<p class="govuk-body-m">text</p>'
       end
     end
 
-    describe 'markdown' do
+    context 'with markdown' do
       let(:input) { '## text' }
 
       it 'translates markdown' do
-        expect(html.strip).to eq '<h2 id="text">text</h2>'
+        expect(html).to eq '<h2 id="text" class="govuk-heading-m">text</h2>'
       end
     end
 
-    describe 'default govspeak' do
-      let(:input) { '%This is a warning callout%' }
+    context 'with custom markup' do
+      describe 'button' do
+        let(:input) { '{button}[text](/link){/button}' }
 
-      it 'uses Govspeak warning callout' do
-        expect(html).to include '<div role="note" aria-label="Warning" class="application-notice help-notice">'
-        expect(html).to include '<p>This is a warning callout</p>'
-      end
-    end
-
-    describe 'custom govspeak' do
-      describe 'YouTube' do
-        let(:input) { '$YT[Test title](foo)$ENDYT' }
-
-        it 'embeds video' do
-          expect(html).to include 'title="Test title"'
-          expect(html).to include 'src="https://www.youtube.com/embed/foo?enablejsapi=1&amp;origin=recovery.app"'
+        it 'creates a button link' do
+          expect(html).to eq <<~HTML.strip
+            <p class="govuk-body-m"><a href=/link class="govuk-link govuk-button">
+            text
+            </a></p>
+          HTML
         end
       end
 
-      describe 'Vimeo' do
-        let(:input) { '$VM[Test title](foo)$ENDVM' }
+      describe 'external' do
+        let(:input) { '{external}[text](/link){/external}' }
 
-        it 'embeds video' do
-          expect(html).to include 'title="Test title"'
-          expect(html).to include 'src="https://player.vimeo.com/video/foo?enablejsapi=1&amp;origin=recovery.app"'
+        it 'creates an external link' do
+          expect(html).to eq <<~HTML.strip
+            <p class="govuk-body-m"><a href=/link class="govuk-link" target="_blank" rel="noopener noreferrer">
+            text (opens in new tab)
+            </a></p>
+          HTML
         end
       end
 
       describe 'In your setting prompt' do
         let(:input) do
-          <<~INFO
-            $INFO
-            - one
-            - two
-            - three
-            $INFO
-          INFO
+          <<~MARKUP
+            {info}
+            hello world
+            {/info}
+          MARKUP
         end
 
         it 'uses the info icon' do
-          expect(html).to include '<i aria-describedby="info icon" class="fa-2x fa-solid fa-info">'
-          expect(html).to include '<h2 class="govuk-heading-m">In your setting</h2>'
-          expect(html).to include '<li>one</li>'
+          expect(html).to eq '<div class="prompt"><div class="govuk-grid-row"><div class="govuk-grid-column-one-quarter"><i aria-describedby="info icon" class="fa-2x fa-solid fa-info"></i></div><div class="govuk-grid-column-three-quarters"><h2 class="govuk-heading-m">In your setting</h2><p class="govuk-body-m">hello world</p></div></div></div>'
         end
       end
 
       describe 'Reflection point prompt' do
         let(:input) do
-          <<~BRAIN
-            $BRAIN
-            - one
-            - two
-            - three
-            $BRAIN
-          BRAIN
+          <<~MARKUP
+            {brain}
+            hello world
+            {/brain}
+          MARKUP
         end
 
         it 'uses the brain icon' do
-          expect(html).to include '<i aria-describedby="brain icon" class="fa-2x fa-solid fa-brain">'
-          expect(html).to include '<h2 class="govuk-heading-m">Reflection point</h2>'
-          expect(html).to include '<li>one</li>'
+          expect(html).to eq '<div class="prompt prompt-bg"><div class="govuk-grid-row"><div class="govuk-grid-column-one-quarter"><i aria-describedby="brain icon" class="fa-2x fa-solid fa-brain"></i></div><div class="govuk-grid-column-three-quarters"><h2 class="govuk-heading-m">Reflection point</h2><p class="govuk-body-m">hello world</p></div></div></div>'
         end
       end
 
       describe 'Further reading prompt' do
         let(:input) do
-          <<~BOOK
-            $BOOK
-            - one
-            - two
-            - three
-            $BOOK
-          BOOK
+          <<~MARKUP
+            {book}
+            hello world
+            {/book}
+          MARKUP
         end
 
         it 'uses the book icon' do
-          expect(html).to include '<i aria-describedby="book icon" class="fa-2x fa-solid fa-book">'
-          expect(html).to include '<h2 class="govuk-heading-m">Further reading</h2>'
-          expect(html).to include '<li>one</li>'
+          expect(html).to eq '<div class="prompt"><div class="govuk-grid-row"><div class="govuk-grid-column-one-quarter"><i aria-describedby="book icon" class="fa-2x fa-solid fa-book"></i></div><div class="govuk-grid-column-three-quarters"><h2 class="govuk-heading-m">Further reading</h2><p class="govuk-body-m">hello world</p></div></div></div>'
         end
       end
 
       describe 'Big quote prompt' do
         let(:input) do
-          <<~QUOTE
-            $QUOTE
+          <<~MARKUP
+            {quote}
             Life is trying things to see if they work.
 
             Ray Bradbury
-            $QUOTE
-          QUOTE
+            {/quote}
+          MARKUP
         end
 
         it 'builds semantic markup' do
-          expect(html).to eq <<~QUOTE
-            <div class="blockquote-container"><blockquote class="quote">
-            <p>Life is trying things to see if they work.</p>
+          expect(html).to eq '<div class="blockquote-container"><blockquote class="quote"><p class="govuk-body-m">Life is trying things to see if they work.</p><cite>Ray Bradbury</cite></blockquote></div>'
+        end
+      end
 
-            <cite>Ray Bradbury</cite>
-            </blockquote></div>
-          QUOTE
+      describe 'Row templates' do
+        let(:input) do
+          <<~MARKUP
+            {two_thirds}
+            Description of an image
+
+            ![image title](/path/to/image)
+            {/two_thirds}
+          MARKUP
+        end
+
+        it 'builds semantic markup' do
+          expect(html).to eq '<div class="govuk-grid-column-two-thirds"><p class="govuk-body-m">Description of an image</p></div><div class="govuk-grid-column-one-third"><p class="govuk-body-m"><img src="/path/to/image" alt="image title"></p></div>'
         end
       end
     end

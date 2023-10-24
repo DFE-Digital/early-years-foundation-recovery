@@ -9,7 +9,7 @@ module Training
                   :section_bar,
                   :current_user_response
 
-    layout 'main_hero'
+    layout 'hero'
 
     def update
       if save_response!

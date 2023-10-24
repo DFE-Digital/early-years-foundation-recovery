@@ -47,7 +47,7 @@ private
 
   class NavigationItem < GovukComponent::HeaderComponent::NavigationItem
     def active_class
-      ['dfe-header__navigation-item--current'] if active?
+      %w[dfe-header__navigation-item--current] if active?
     end
 
     def call

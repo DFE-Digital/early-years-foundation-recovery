@@ -10,7 +10,7 @@
     = form_for form, url: registration_role_type_other_path, method: :patch do |f|
       = f.govuk_error_summary
 
-      = f.govuk_fieldset legend: { text: t('register_custom_role.heading') } do
-        = f.govuk_text_field :role_type_other, label: { text: t('register_custom_role.body') }, aria: { required: true }
+      = f.govuk_fieldset legend: { text: t('register_custom_role.heading'), aria: { required: true } } do
+        = f.govuk_text_field :role_type_other, label: { text: t('register_custom_role.body'), class: 'govuk-visually-hidden' }, hint: { text: t('register_custom_role.body') }, aria: { required: true }
 
       = f.govuk_submit t('links.continue')

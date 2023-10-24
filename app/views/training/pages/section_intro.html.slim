@@ -2,17 +2,22 @@
   = html_title mod.title, content.heading
 
 - content_for :hero do
-  = render 'shared/section_bar'
+  = render 'training/modules/section_bar'
 
 = render 'debug'
 
 .govuk-grid-row
-  .govuk-grid-column-full-width
-    .govuk-grid-row
-      .govuk-grid-column-two-thirds-from-desktop
-        .section-intro-body
-          h1= content.heading
-          .gem-c-govspeak= translate_markdown(content.body)
+  .govuk-grid-column-full
+    #section-intro-panel
+      .govuk-grid-row
+        .govuk-grid-column-two-thirds
+          h1.govuk-heading-xl= content.heading
 
-          = render partial: 'course_pages_footer'
+      .govuk-grid-row
+        = m(content.body)
 
+      .govuk-grid-row
+        .govuk-grid-column-full
+          .govuk-button-group
+            = link_to_previous
+            = link_to_next

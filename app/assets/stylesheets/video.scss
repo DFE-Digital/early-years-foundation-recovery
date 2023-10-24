@@ -26,8 +26,12 @@ iframe {
   }
 }
 
-.white-background {
-  background-color: govuk-colour("white");
-  border-left: none !important;
-  padding: govuk-spacing(4);
+
+#video-panel {
+  padding: govuk-spacing(7);
+  background: govuk-colour('light-grey');
+
+  .govuk-details__text {
+    background: govuk-colour('white');
+  }
 }

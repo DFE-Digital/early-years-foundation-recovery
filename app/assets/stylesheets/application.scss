@@ -1,15 +1,22 @@
 /*
 https://frontend.design-system.service.gov.uk/sass-api-reference
+https://design.education.gov.uk/design-system/dfe-frontend
+
+$color_dfe-blue             #003a69 Primary brand colour
+$color_dfe-secondary-blue   #347ca9
 */
 
 $govuk-new-link-styles: true;
 $govuk-page-width: 1200px;
 
+.govuk-width-container {
+  max-width: $govuk-page-width;
+}
+
 @import 'govuk-frontend/govuk/all';
 @import 'dfe-frontend-alpha/packages/dfefrontend';
 @import 'dfe-header';
 
-@import 'govspeak';
 @import 'card';
 @import 'prompt';
 @import 'video';
@@ -42,6 +49,34 @@ $govuk-page-width: 1200px;
     Cantarell,
     'Helvetica Neue',
     sans-serif !important;
+}
+
+
+main img {
+  max-width: 100%;
+}
+
+/*
+Default layout
+-----------------------------------------------
+*/
+
+#default-layout {
+  // noop
+}
+
+
+
+/*
+Hero layout
+-----------------------------------------------
+*/
+
+#hero-layout {
+  .govuk-notification-banner {
+    margin-top: govuk-spacing(3);
+    margin-bottom: govuk-spacing(-4);
+  }
 }
 
 
@@ -94,10 +129,6 @@ pre.code-tip {
   display: block;
 }
 
-.full-width-img {
-  width: 100%;
-}
-
 abbr {
   cursor: help;
   text-decoration: none;
@@ -127,13 +158,6 @@ ul>li>ul>li {
 .form-container {
   padding: 30px;
   background: #f3f2f1;
-}
-
-.gem-c-govspeak {
-  a {
-    @include govuk-link-common;
-    @include govuk-link-style-default;
-  }
 }
 
 #js-timeout-warning:focus {

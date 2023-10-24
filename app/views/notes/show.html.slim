@@ -1,7 +1,7 @@
 - content_for :page_title do
   = html_title t(:title, scope: :my_learning_log)
 
-= content_resource 'notes.intro'
+= m('notes.intro')
 
 = govuk_tabs(title: 'Module notes') do |c|
   - @training_modules.each do |mod|

@@ -44,8 +44,6 @@ applications:
       RAILS_MASTER_KEY: ((rails_master_key))
 
       DATABASE_URL: 'postgres://postgres@localhost:5432/db'
-      GOVUK_WEBSITE_ROOT: ey-recovery-test
-      GOVUK_APP_DOMAIN: london.cloudapps.digital
       DOMAIN: ey-recovery-test.london.cloudapps.digital
 
       NODE_ENV: production

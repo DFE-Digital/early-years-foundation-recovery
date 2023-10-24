@@ -160,6 +160,7 @@ en:
       impact on your practice. It is not aimed to provide a pass or fail.
 
       ## Before you start
+
       This test has 10 multiple choice questions.
 
       You must answer all of the questions.
@@ -191,8 +192,7 @@ en:
   thankyou:
     heading: Thank you
     body: |
-      You can also <a href='%{feedback_url}' target="_blank">give feedback about
-      the training (opens in new window)</a>
+      You can also {external}[give feedback about the training](%{feedback_url}){/external}
 
   certificate:
     heading: Download your certificate
@@ -245,12 +245,9 @@ en:
           text: |
             ## **You scored %{score}%**
 
-
             Unfortunately you have not scored highly enough to receive a certificate.
 
-
             You can see the questions you answered incorrectly.
-
 
             You may wish to revisit some of the learning before taking the test again.
 
@@ -286,17 +283,19 @@ en:
   # /my-account
   my_account:
     title: My account
-    setting_details: <h2 class='govuk-heading-m'>Your setting details</h2>
-    email_preferences: <h2 class='govuk-heading-m'>Your email preferences</h2>
-    training_emails_true: You have chosen to receive emails about this training course.
-    training_emails_false: You have chosen not to receive emails about this training course.
+    setting_details: |
+      ## Your setting details
+    email_preferences: |
+      ## Your email preferences
+    training_emails:
+      true: You have chosen to receive emails about this training course.
+      false: You have chosen not to receive emails about this training course.
     password_changed: Password last changed on %{date}
     remember_me: Remember me
     closing:
       button: Request to close account
       information: |
         ## Closing your account
-        {: .govuk-heading-m }
 
         If you do not want to use your Early years child development training account anymore, you can ask us to close your account.
 
@@ -328,7 +327,6 @@ en:
     summary: Problems with the email?
     intro: |
       # Check your email
-      {: .govuk-heading-l}
 
       We have sent you an email with instructions for how to reset your password.
 
@@ -338,8 +336,7 @@ en:
   # /my-account/check-email-confirmation
   email_advice:
     not_received: |
-      I haven’t received the email
-      {: .govuk-heading-s}
+      ### I haven’t received the email
 
       Please wait a few minutes for the email to arrive.
       If it doesn’t appear in your inbox, please check your spam or junk email folder.
@@ -347,18 +344,15 @@ en:
 
       [Send me another email](%{link})
     different: |
-      I have a different problem
-      {: .govuk-heading-s}
+      ### I have a different problem
 
-      For other problems with creating your account or signing in, please [contact us](%{link}){:target="_blank"}{:class="govuk-link"}.
+      For other problems with creating your account or signing in, please {external}[contact us](%{link}){/external}.
     no_access: |
-      I don’t have access to the email address I used to register
-      {: .govuk-heading-s}
+      ### I don’t have access to the email address I used to register
 
       You can set up your account using a different email address.
 
       Please [create a new account](%{link})
-
 
   account_unlock:
     title: Resend unlock instructions
@@ -372,15 +366,13 @@ en:
     summary: Problems with the activation email?
     intro: |
       # Check your email
-      {: .govuk-heading-l}
 
       We will check if a training account has been created using the email address you entered.
       If it has, you will receive an email shortly with instructions for how to verify your email address.
     recipient: |
       We sent the email to:
 
-      %{recipient}
-      {: .govuk-!-font-weight-bold}
+      **%{recipient}**
 
       To continue setting up your training account you must click the link in the email.
       If you have not received the email after a few minutes, please check your spam folder.
@@ -388,11 +380,46 @@ en:
   account_login:
     title: Sign in
 
+  # /my-account/close/confirm
+  account_close:
+    title: Confirm you want to close your account
+    body: |
+      # Confirm you want to close your account
+
+      After you close your account you will no longer be able to access the training modules.
+
+      Any certificates you have earned will be permanently deleted.
+
+      We will delete your personal information within 10 working days. The personal information we will delete includes:
+
+      - your name
+      - your email address
+      - your postcode, if you provided it when you registered
+      - any notes you have written in your learning log
+
+      We will keep some anonymous information about:
+
+      - your role
+      - your local authority
+      - your usage of the training modules
+      - why you closed your account
+
+      This is to help us improve the training. None of this information will be
+      personally identifiable to you.
+
+      You may still receive emails while we are processing your account closure.
+      After your personal information is deleted, you will not receive any further
+      emails from Early years child development training.
+
+    buttons:
+      confirm: Close my account
+      cancel: Cancel and go back to my account
+
+  # /my-account/close
   account_closed:
     title: Goodbye
     body: |
       # Account closed
-      {: .govuk-heading-l }
 
       We have received your request to close your account.
 
@@ -401,41 +428,6 @@ en:
       You have been logged out.
 
       [Go to %{service_name} home](/)
-
-
-  # TODO: refactor close_account i18n keys and templates
-  close_account:
-    confirm:
-      heading: Confirm you want to close your account
-      body: |
-        After you close your account you will no longer be able to access the training modules.
-
-        Any certificates you have earned will be permanently deleted.
-
-        We will delete your personal information within 10 working days. The personal information we will delete includes:
-
-        - your name
-        - your email address
-        - your postcode, if you provided it when you registered
-        - any notes you have written in your learning log
-
-        We will keep some anonymous information about:
-
-        - your role
-        - your local authority
-        - your usage of the training modules
-        - why you closed your account
-
-        This is to help us improve the training. None of this information will be
-        personally identifiable to you.
-
-        You may still receive emails while we are processing your account closure.
-        After your personal information is deleted, you will not receive any further
-        emails from Early years child development training.
-
-      confirm_button: Close my account
-      cancel_button: Cancel and go back to my account
-
 
   # Registration Journey -------------------------------------------------------
 
@@ -453,14 +445,9 @@ en:
   register_setting:
     heading: What setting type do you work in?
     body: |
-      {:.govuk-hint}
-        Search for the type of setting or organisation you work in, for example childminder or nursery.
-
-      {:.govuk-hint}
-        If you work in more than one early years setting, enter the one where you work most often.
-
-      {:.govuk-hint}
-        Your training progress won't be shared with anyone without your permission.
+      Search for the type of setting or organisation you work in, for example childminder or nursery.
+      If you work in more than one early years setting, enter the one where you work most often.
+      Your training progress won't be shared with anyone without your permission.
     label: Setting type
     other_link: I cannot find my setting or organisation
     not_found: No setting found.
@@ -473,9 +460,7 @@ en:
   # /registration/local-authority/edit
   register_authority:
     heading: What local authority area do you work in?
-    body: |
-      {:.govuk-hint}
-        This could be your county council, district council or London borough.
+    body: This could be your county council, district council or London borough.
     label: Local authority
     other_link: I work across more than one local authority
     not_found: No local authority found.
@@ -483,8 +468,8 @@ en:
   # /registration/role-type/edit
   register_role:
     heading: Which of the following best describes your role?
-    body: |
-      Your role
+    label: Role type
+    body: Your role
     other_link: I would describe my role in another way.
 
   # /registration/role-type-other/edit
@@ -496,17 +481,13 @@ en:
 
   training_emails:
     heading: Do you want to get email updates about this training course?
-    body: |
-      {:.govuk-hint}
-        Turn on email updates to find out about new modules and features in this training course.
+    body: Turn on email updates to find out about new modules and features in this training course.
     opt_in: Send me email updates about this training course
     opt_out: Do not send me email updates about this training course
 
   early_years_emails:
     heading: Do you want to get early years email updates from the Department for Education?
-    body: |
-      {:.govuk-hint}
-        Turn on email updates to get news about the early years foundation stage (EYFS) and other early years information from the Department for Education.
+    body: Turn on email updates to get news about the early years foundation stage (EYFS) and other early years information from the Department for Education.
     opt_in: Send me early years email updates
     opt_out: Do not send me early years email updates
 
@@ -516,19 +497,16 @@ en:
     title: Home page
     hero: |
       # %{service_name}
-      {: .govuk-heading-l}
 
       This free, online training provides an overview of child development and gives practical advice for supporting the development of children in your early years setting.
     thumb: |
-      ![A practitioner smiling as they do an activity with children in an early years setting](//images.ctfassets.net/dvmeh832nmjc/2VRBZCHJYLeKx0a2CIcJzE/687fb0d28c71104820cd42f131d7dfe2/_assets_thumb-1161068272-320x240.jpg?w=300){:class="full-width-img"}
+      ![A practitioner smiling as they do an activity with children in an early years setting](//images.ctfassets.net/dvmeh832nmjc/2VRBZCHJYLeKx0a2CIcJzE/687fb0d28c71104820cd42f131d7dfe2/_assets_thumb-1161068272-320x240.jpg?w=300)
     about: |
       ## About this training course
-      {: .govuk-heading-m}
 
       Each training module on this site covers an important area of child development and has been written by early years experts, working with the Department for Education.
 
       ## Why should I take this training?
-      {: .govuk-heading-m}
 
       This training:
 
@@ -541,7 +519,6 @@ en:
       - has been developed by expert practitioners
     login: |
       ## Return to your training
-      {: .govuk-heading-m}
 
       Sign in to continue learning, see your progress and download certificates.
 
@@ -556,7 +533,6 @@ en:
       You will need to sign in or create an account before starting a module.
     course: |
       # About this training course
-      {: govuk-heading-l}
 
       This training course will give you a thorough understanding of the most important aspects of child development in the early years.
 
@@ -593,7 +569,6 @@ en:
     flash: You’ve set your cookie preferences. [Go back to Early years child development training](%{path}).
     body: |
       # Cookies
-      {: .govuk-heading-l}
 
       Cookies are small files saved on your phone, tablet or computer when you
       visit a website.
@@ -605,13 +580,13 @@ en:
 
       Essential cookies keep your information secure while you use Early years child development training. We do not need to ask permission to use them.
 
-      | Name                                      | Purpose                                                                        | Expires                   |
-      | ------------------------------------------| ------------------------------------------------------------------------------ | ------------------------- |
-      | _early_years_foundation_recovery_session  | Stores your session information                                                     | Expires when you log out  |
-      | ahoy_visit                                | Tracks where you are in the module and allows you to pause and restart modules | 3 hours                   |
-      | ahoy_visitor                              | Tracks your progress through the training modules                               | 2 years                   |
-      | remember_user_token                       | Stores whether you clicked the remember me checkbox when you signed in         | 48 hours                  |
-      | track_analytics                           | Saves your cookie consent settings                                             | 6 months                  |
+      | Name                                       | Purpose                                                                        | Expires                   |
+      | ------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------- |
+      | _early_years_foundation_recovery_session   | Stores your session information                                                | Expires when you log out  |
+      | ahoy_visit                                 | Tracks where you are in the module and allows you to pause and restart modules | 3 hours                   |
+      | ahoy_visitor                               | Tracks your progress through the training modules                              | 2 years                   |
+      | remember_user_token                        | Stores whether you clicked the remember me checkbox when you signed in         | 48 hours                  |
+      | track_analytics                            | Saves your cookie consent settings                                             | 6 months                  |
 
       ## Analytics cookies (optional)
 
@@ -627,78 +602,73 @@ en:
 
       Google Analytics sets the following cookies:
 
-      | Name                                      | Purpose                                                                        | Expires                   |
-      | ------------------------------------------| ------------------------------------------------------------------------------ | ------------------------- |
-      | _ga_L17YMGD11W                            | Generates statistics about how you use the website                                                  | 2 years                   |
-      | _ga                                       | Helps count how many people visit this site by tracking if you’ve visited before                                                      | 2 years                   |
-      | _gid                                      | Helps count how many people visit this site by tracking if you’ve visited before                                                      | 24 hours                  |
-      | _ga_WRRWDTSGBP                            | Generates statistics about how you use the website                                                      | 2 years                   |
-      | _ga_76JLPNZBCP                            | Generates statistics about how you use the website                                                      | 18 months                 |
+      | Name                                       | Purpose                                                                          | Expires                   |
+      | ------------------------------------------ | ------------------------------------------------------------------------------   | ------------------------- |
+      | _ga_L17YMGD11W                             | Generates statistics about how you use the website                               | 2 years                   |
+      | _ga                                        | Helps count how many people visit this site by tracking if you’ve visited before | 2 years                   |
+      | _gid                                       | Helps count how many people visit this site by tracking if you’ve visited before | 24 hours                  |
+      | _ga_WRRWDTSGBP                             | Generates statistics about how you use the website                               | 2 years                   |
+      | _ga_76JLPNZBCP                             | Generates statistics about how you use the website                               | 18 months                 |
 
       Hotjar sets the following cookies:
 
       ### Relating to you
 
-      | Name      | Purpose |   Expires
-      | ----------- | ----------- | ----------- |
-      | _hjSessionUser_3169682  | Helps count how many people visit this site by tracking if you’ve visited before  | 365 days
-      | _hjid | Registers a unique ID to generate statistics about how you use the website  | 365 days
-      | _hjFirstSeen  | Identifies your first session | Per session
-      | _hjUserAttributesHash | Holds information about your visit so your information can be kept up to date | Per session
-      | _hjCachedUserAttributes | Stores user attributes which are sent whenever your visit is not in the sample  | Per session
-      | _hjViewportId | Stores information about the screen you use to visit the website, such as size and dimensions | Per session
+      | Name                    | Purpose                                                                                       | Expires     |
+      | -----------             | -----------                                                                                   | ----------- |
+      | _hjSessionUser_3169682  | Helps count how many people visit this site by tracking if you’ve visited before              | 365 days    |
+      | _hjid                   | Registers a unique ID to generate statistics about how you use the website                    | 365 days    |
+      | _hjFirstSeen            | Identifies your first session                                                                 | Per session |
+      | _hjUserAttributesHash   | Holds information about your visit so your information can be kept up to date                 | Per session |
+      | _hjCachedUserAttributes | Stores user attributes which are sent whenever your visit is not in the sample                | Per session |
+      | _hjViewportId           | Stores information about the screen you use to visit the website, such as size and dimensions | Per session |
+      | _hjViewportId           | Stores information about the screen you use to visit the website, such as size and dimensions | Per session |
 
       ### Relating to your session
 
-      | Name      | Purpose |   Expires
-      | ----------- | ----------- | ----------- |
-      | _hjSession_3169682  | Holds information about your current session. Makes sure that subsequent requests inside the session window are attributed to your session  | 30 minutes
-      | _hjSessionTooLarge  | Causes Hotjar to stop collecting data if a session becomes too large  | Per session
-      | _hjSessionRejected  | Applied in extremely rare situations to prevent severe performance issues | Per session
-      | _hjSessionResumed | Set when your session or recording is reconnected to Hotjar servers after a break in connection | Per session
-      | _hjLocalStorageTest | Used to check if the Hotjar tracking script can use browser storage on your device  | Per session
-      | _hjIncludedInPageviewSample | Lets Hotjar know whether you are included in data sampling  | 30 minutes
-      | _hjIncludedInSessionSample  | Lets Hotjar know whether you are included in data sampling  | 30 minutes
-      | _hjAbsoluteSessionInProgress  | Used to detect the first page you look at during a session | 30 minutes
-      | _hjTLDTest  | Used to determine where cookies will be stored. After this check, the cookie is removed | Per session
+      | Name                         | Purpose                                                                                                                                    | Expires     |
+      | -----------                  | -----------                                                                                                                                | ----------- |
+      | _hjSession_3169682           | Holds information about your current session. Makes sure that subsequent requests inside the session window are attributed to your session | 30 minutes  |
+      | _hjSessionTooLarge           | Causes Hotjar to stop collecting data if a session becomes too large                                                                       | Per session |
+      | _hjSessionRejected           | Applied in extremely rare situations to prevent severe performance issues                                                                  | Per session |
+      | _hjSessionResumed            | Set when your session or recording is reconnected to Hotjar servers after a break in connection                                            | Per session |
+      | _hjLocalStorageTest          | Used to check if the Hotjar tracking script can use browser storage on your device                                                         | Per session |
+      | _hjIncludedInPageviewSample  | Lets Hotjar know whether you are included in data sampling                                                                                 | 30 minutes  |
+      | _hjIncludedInSessionSample   | Lets Hotjar know whether you are included in data sampling                                                                                 | 30 minutes  |
+      | _hjAbsoluteSessionInProgress | Used to detect the first page you look at during a session                                                                                 | 30 minutes  |
+      | _hjTLDTest                   | Used to determine where cookies will be stored. After this check, the cookie is removed                                                    | Per session |
 
       ### Relating to recordings
 
-      | Name      | Purpose |   Expires
-      | ----------- | ----------- | ----------- |
-      | _hjRecordingEnabled | Tells Hotjar if you are already in a recording in a particular session  | Per session
-      | _hjRecordingLastActivity  | Gets updated when a visitor recording starts and when you perform an action that Hotjar records | Per session
+      | Name                     | Purpose                                                                                         | Expires     |
+      | -----------              | -----------                                                                                     | ----------- |
+      | _hjRecordingEnabled      | Tells Hotjar if you are already in a recording in a particular session                          | Per session |
+      | _hjRecordingLastActivity | Gets updated when a visitor recording starts and when you perform an action that Hotjar records | Per session |
 
       ## Change your cookie settings
-      {: .govuk-heading-l}
 
   module:
     overview:
       summary: |
         # %{title}
-        {: .govuk-heading-xl}
 
         %{description}
 
       criteria: |
         ## This module covers:
-        {: .govuk-heading-m}
 
         %{criteria}
 
       progress: |
         ## Your module progress
-        {: .govuk-heading-m}
 
         You can continue your learning, look at your module progress, or revisit pages of the training.
 
         ### Module contents
-        {: .govuk-heading-s}
 
   notes:
     intro: |
       # Your learning log
-      {: .govuk-heading-l}
 
       View your notes from all your modules here.
       You can also use the links provided to revisit a specific topic.

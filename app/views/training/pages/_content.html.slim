@@ -1,0 +1,13 @@
+.govuk-grid-row
+  = yield :page_content
+
+- if content.notes?
+  = render partial: 'notes/form'
+- else
+  .govuk-grid-row
+    .govuk-grid-column-full
+      hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
+
+      .govuk-button-group
+        = link_to_previous
+        = link_to_next

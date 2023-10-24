@@ -74,7 +74,7 @@ module Training
 
     # @return [Boolean]
     def notes?
-      text_page? && notes
+      (topic_intro? || text_page?) && notes
     end
   end
 end
