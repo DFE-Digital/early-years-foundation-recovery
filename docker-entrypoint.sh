@@ -41,7 +41,7 @@ else
 
   if [ !${ENVIRONMENT}=="development" ]
   then
-    bundle exec rails db:prepare assets:precompile db:seed sitemap:refresh:no_ping
+    bundle exec rails db:prepare assets:precompile db:seed eyfs:bot sitemap:refresh:no_ping
   fi
 
   if [ !${ENVIRONMENT}=="staging" ]

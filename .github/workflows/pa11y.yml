@@ -24,8 +24,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    environment: development
     env:
-      BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+      BOT_TOKEN: ${{ secrets.WEBAPP_CONFIG_BOT_TOKEN }}
       DOMAIN: eyrecovery-${{ inputs.workspace || 'dev' }}.azurewebsites.net
     steps:
       -
