@@ -86,7 +86,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ vars.WEBAPP_NAME }}
-          images: ${{ env.DOCKER_REGISTRY }}:${{ github.sha }}
+          images: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
 
       # Deploy Background Worker
       - name: Deploy to Azure Container Instances
@@ -96,7 +96,7 @@ jobs:
           inlineScript: |
             az container create --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.WORKERAPP_NAME }} \
-              --image ${{ env.DOCKER_REGISTRY }}:${{ github.sha }} \
+              --image ${{ env.DOCKER_IMAGE }}:${{ github.sha }} \
               --cpu 1 \
               --memory 2 \
               --command-line "que" \
