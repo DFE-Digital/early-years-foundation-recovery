@@ -16,6 +16,7 @@ locals {
     "DATABASE_URL"                        = var.webapp_database_url
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
     "BOT_TOKEN"                           = var.webapp_config_bot_token
+    "USER_PASSWORD"                       = var.webapp_config_user_password
     "CONTENTFUL_ENVIRONMENT"              = var.webapp_config_contentful_environment
     "CONTENTFUL_PREVIEW"                  = var.webapp_config_contentful_preview
     "DOMAIN"                              = var.webapp_config_domain
@@ -39,6 +40,7 @@ locals {
     "DATABASE_URL"                        = var.webapp_slot_database_url
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
     "BOT_TOKEN"                           = var.webapp_config_bot_token
+    "USER_PASSWORD"                       = var.webapp_config_user_password
     "CONTENTFUL_ENVIRONMENT"              = var.webapp_config_contentful_environment
     "CONTENTFUL_PREVIEW"                  = var.webapp_config_contentful_preview
     "DOMAIN"                              = var.webapp_config_domain
@@ -73,6 +75,7 @@ locals {
     "DATABASE_URL"                        = var.webapp_database_url
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
     "BOT_TOKEN"                           = var.webapp_config_bot_token
+    "USER_PASSWORD"                       = var.webapp_config_user_password
     "CONTENTFUL_ENVIRONMENT"              = var.reviewapp_config_contentful_environment
     "CONTENTFUL_PREVIEW"                  = var.reviewapp_config_contentful_preview
     "DASHBOARD_UPDATE"                    = false
