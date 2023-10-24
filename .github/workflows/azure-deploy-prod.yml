@@ -25,7 +25,7 @@ env:
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-  DOCKER_REGISTRY: ghcr.io/dfe-digital/early-years-foundation-recovery
+  DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
 
 jobs:
   build-and-deploy:
@@ -72,11 +72,11 @@ jobs:
             BUILDKIT_INLINE_CACHE=1
             SHA=${{ github.sha }}
           cache-from: |
-            ${{ env.DOCKER_REGISTRY }}:${{ github.sha }}
-            ${{ env.DOCKER_REGISTRY }}:${{ inputs.ref || github.ref_name }}
+            ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+            ${{ env.DOCKER_IMAGE }}:${{ inputs.ref || github.ref_name }}
           tags: |
-            ${{ env.DOCKER_REGISTRY }}:${{ github.sha }}
-            ${{ env.DOCKER_REGISTRY }}:${{ inputs.version || github.ref_name }}
+            ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+            ${{ env.DOCKER_IMAGE }}:${{ inputs.version || github.ref_name }}
 
       # Login to Azure using OIDC
       - name: Login to Azure CLI
@@ -91,7 +91,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ vars.WEBAPP_NAME }}
-          images: ${{ env.DOCKER_REGISTRY }}:${{ inputs.version || github.ref_name }}
+          images: ${{ env.DOCKER_IMAGE }}:${{ inputs.version || github.ref_name }}
           slot-name: ${{ vars.WEBAPP_DEPLOY_SLOT }}
 
       # Deploy Background Worker
@@ -102,7 +102,7 @@ jobs:
           inlineScript: |
             az container create --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.WORKERAPP_NAME }} \
-              --image ${{ env.DOCKER_REGISTRY }}:${{ inputs.version || github.ref_name }} \
+              --image ${{ env.DOCKER_IMAGE }}:${{ inputs.version || github.ref_name }} \
               --cpu 1 \
               --memory 2 \
               --command-line "que" \
