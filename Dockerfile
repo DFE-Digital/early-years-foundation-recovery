@@ -85,9 +85,8 @@ COPY ./docker-entrypoint.sh /
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
-# Test GPaaS port conflict
-# EXPOSE 2222 3000
-EXPOSE 3000
+EXPOSE 2222 3000
+# EXPOSE 3000
 
 CMD ["bundle", "exec", "rails", "server"]
 
