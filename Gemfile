@@ -133,4 +133,5 @@ group :ui do
   gem 'site_prism'
 end
 
-gem "devise-security", "~> 0.18.0"
+gem 'devise-pwned_password', '~> 0.1.10'
+gem 'devise-security', '~> 0.18.0'

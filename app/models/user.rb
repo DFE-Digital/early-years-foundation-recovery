@@ -26,7 +26,8 @@ class User < ApplicationRecord
   attr_accessor :context
 
   devise :database_authenticatable, :registerable, :recoverable,
-         :validatable, :rememberable, :confirmable, :lockable, :timeoutable
+         :validatable, :rememberable, :confirmable, :lockable, :timeoutable, :secure_validatable
+  devise :pwned_password unless Rails.env.test?
 
   has_many :responses
   has_many :user_answers
@@ -362,7 +363,7 @@ class User < ApplicationRecord
             last_name: 'User',
             email: "redacted_user#{id}@example.com",
             closed_at: Time.zone.now,
-            password: 'redacteduser')
+            password: 'RedactedUser12!@')
 
     notes.destroy_all
   end
