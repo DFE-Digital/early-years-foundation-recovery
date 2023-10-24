@@ -67,6 +67,9 @@ module EarlyYearsFoundationRecovery
     config.contentful_management_access_token = ENV.fetch('CONTENTFUL_MANAGEMENT_TOKEN', credentials.dig(:contentful, :management_access_token)) # TODO: use service account management token
     config.contentful_environment             = ENV.fetch('CONTENTFUL_ENVIRONMENT', credentials.dig(:contentful, :environment))
 
+    # Gov one
+    config.gov_one_private_key = ENV.fetch('GOV_ONE_PRIVATE_KEY', credentials.dig(:gov_one, :private_key))
+
     # @return [Boolean]
     def live?
       ENV['WORKSPACE'].eql?('production')

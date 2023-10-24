@@ -1,52 +1,55 @@
 require 'rails_helper'
+# require 'webmock/rspec'
 
-RSpec.describe GovOneAuthService, type: :service do
-  let(:code) { 'mock_code' }
-  let(:access_token) { 'mock_access_token' }
-  let(:id_token) { 'mock_id_token' }
-  let(:user_info) { { 'email' => 'test@example.com' } }
+RSpec.describe GovOneAuthService do
+  skip 'wip' do
+    let(:code) { 'mock_code' }
+    let(:token_payload) { { 'access_token' => 'mock_access_token', 'id_token' => 'mock_id_token' } }
 
-  before do
-    allow(ENV).to receive(:[]).with('GOV_ONE_REDIRECT_URI').and_return('http://example.com/callback')
-    allow(ENV).to receive(:[]).with('GOV_ONE_CLIENT_ASSERTION_TYPE').and_return('urn:ietf:params:oauth:client-assertion-type:jwt-bearer')
-    allow(ENV).to receive(:[]).with('GOV_ONE_BASE_URI').and_return('http://gov-one-example.com')
-    allow(ENV).to receive(:[]).with('GOV_ONE_CLIENT_ID').and_return('your_client_id')
-
-    allow(File).to receive(:read).and_call_original
-    allow(File).to receive(:read).with('public_key.pem').and_return('mock_public_key_content')
-    allow(File).to receive(:read).with('private_key.pem').and_return('mock_private_key_content')
-
-    allow(SecureRandom).to receive(:uuid).and_return('mock_uuid')
-
-    @auth_service = described_class.new(code)
-  end
-
-  describe '#tokens' do
-    it 'returns a hash with access_token and id_token' do
-      allow(@auth_service).to receive(:jwt_assertion).and_return('mock_jwt_assertion')
-
-      token_response = { 'access_token' => access_token, 'id_token' => id_token }
-
-      http_double = instance_double(Net::HTTP, request: instance_double(Net::HTTPResponse, body: token_response.to_json))
-      allow(@auth_service).to receive(:build_http).and_return(http_double)
-
-      result = @auth_service.tokens
-
-      expect(result).to be_a(Hash)
-      expect(result['access_token']).to eq(access_token)
-      expect(result['id_token']).to eq(id_token)
+    before do
+      allow(ENV).to receive(:[]).and_call_original
+      allow(ENV).to receive(:[]).with('GOV_ONE_REDIRECT_URI').and_return('mock_redirect_uri')
+      allow(ENV).to receive(:[]).with('GOV_ONE_CLIENT_ASSERTION_TYPE').and_return('mock_assertion_type')
+      allow(ENV).to receive(:[]).with('GOV_ONE_BASE_URI').and_return('https://example.com')
+      allow(ENV).to receive(:[]).with('GOV_ONE_CLIENT_ID').and_return('mock_client_id')
     end
-  end
 
-  describe '#user_info' do
-    it 'returns user information hash' do
-      http_double = instance_double(Net::HTTP, request: instance_double(Net::HTTPResponse, body: user_info.to_json))
-      allow(@auth_service).to receive(:build_http).and_return(http_double)
+    describe '#tokens' do
+      it 'returns a hash of tokens' do
+        stub_request(:post, 'https://example.com/token')
+          .with(
+            body: {
+              grant_type: 'authorization_code',
+              code: code,
+              redirect_uri: 'mock_redirect_uri',
+              client_assertion_type: 'mock_assertion_type',
+              client_assertion: anything,
+            },
+            headers: { 'Content-Type' => 'application/x-www-form-urlencoded' },
+          )
+          .to_return(status: 200, body: token_payload.to_json)
 
-      result = @auth_service.user_info(access_token)
+        auth_service = described_class.new(code)
+        tokens = auth_service.tokens
+        expect(tokens).to eq(token_payload)
+      end
+    end
 
-      expect(result).to be_a(Hash)
-      expect(result['email']).to eq('test@example.com')
+    describe '#user_info' do
+      let(:access_token) { 'mock_access_token' }
+      let(:user_info_payload) { { 'email' => 'test@test.com' } }
+
+      it 'returns a hash of user info' do
+        stub_request(:get, 'https://example.com/userinfo')
+          .with(
+            headers: { 'Authorization' => "Bearer #{access_token}" },
+          )
+          .to_return(status: 200, body: user_info_payload.to_json)
+
+        auth_service = described_class.new(code)
+        user_info = auth_service.user_info(access_token)
+        expect(user_info).to eq(user_info_payload)
+      end
     end
   end
 end

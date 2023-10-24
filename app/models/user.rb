@@ -24,7 +24,7 @@ class User < ApplicationRecord
   # @return [User]
   def self.create_from_email(email)
     user = User.new(email: email, confirmed_at: Time.zone.now)
-    user.save(validate: false)
+    user.save!(validate: false)
     user
   end
 

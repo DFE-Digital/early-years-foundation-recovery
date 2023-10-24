@@ -122,6 +122,8 @@ GEM
       contentful_model (~> 1.0)
       rails (>= 4.2)
       redcarpet (~> 3.2)
+    crack (0.4.5)
+      rexml
     crass (1.0.6)
     cssbundling-rails (1.3.3)
       railties (>= 6.0.0)
@@ -284,6 +286,7 @@ GEM
     grover (1.1.5)
       combine_pdf (~> 1.0)
       nokogiri (~> 1.0)
+    hashdiff (1.0.1)
     hashie (5.0.0)
     html-attributes-utils (1.0.2)
       activesupport (>= 6.1.4.4)
@@ -843,6 +846,10 @@ GEM
       activesupport
       faraday (~> 2.0)
       faraday-follow_redirects
+    webmock (3.19.1)
+      addressable (>= 2.8.0)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
     webrick (1.8.1)
     websocket (1.2.10)
     websocket-driver (0.7.6)
@@ -929,6 +936,7 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data
   web-console
+  webmock
   yard-junk
 
 RUBY VERSION

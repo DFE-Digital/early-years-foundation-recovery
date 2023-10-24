@@ -315,7 +315,6 @@ Devise.setup do |config|
       scheme: 'https',
       host: 'oidc.integration.account.gov.uk',
       identifier: ENV['GOV_ONE_CLIENT_ID'],
-      secret: ENV['GOV_ONE_CLIENT_SECRET'],
       redirect_uri: 'users/auth/openid_connect/callback',
     },
     authorize_params: {

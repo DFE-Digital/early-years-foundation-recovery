@@ -22,6 +22,9 @@ class GovOneAuthService
     token_response = http.request(token_request)
 
     JSON.parse(token_response.body)
+  rescue StandardError => e
+    Rails.logger.error "GovOneAuthService.tokens: #{e.message}"
+    {}
   end
 
   # @param access_token [String]
@@ -34,6 +37,9 @@ class GovOneAuthService
     userinfo_response = http.request(userinfo_request)
 
     JSON.parse(userinfo_response.body)
+  rescue StandardError => e
+    Rails.logger.error "GovOneAuthService.user_info: #{e.message}"
+    {}
   end
 
 private
@@ -48,16 +54,15 @@ private
 
   # @return [String]
   def jwt_assertion
-    rsa_public = OpenSSL::PKey::RSA.new(File.read('public_key.pem'))
-    rsa_private = OpenSSL::PKey::RSA.new(File.read('private_key.pem'))
+    rsa_private = OpenSSL::PKey::RSA.new(Rails.application.config.gov_one_private_key)
 
     payload = {
       aud: "#{ENV['GOV_ONE_BASE_URI']}/token",
       iss: ENV['GOV_ONE_CLIENT_ID'],
       sub: ENV['GOV_ONE_CLIENT_ID'],
-      exp: Time.now.to_i + 5 * 60,
+      exp: Time.zone.now.to_i + 5 * 60,
       jti: SecureRandom.uuid,
-      iat: Time.now.to_i,
+      iat: Time.zone.now.to_i,
     }
 
     JWT.encode payload, rsa_private, 'RS256'
