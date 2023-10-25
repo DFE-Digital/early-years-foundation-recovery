@@ -36,7 +36,7 @@ class CustomPreprocessor < GovukMarkdown::Preprocessor
       text, link = hyperlink Regexp.last_match(1)
 
       <<~HTML
-        <a href=#{link} class="govuk-link govuk-button">
+        <a href="#{link}" class="govuk-link govuk-button">
         #{text}
         </a>
       HTML
@@ -54,8 +54,8 @@ class CustomPreprocessor < GovukMarkdown::Preprocessor
       text, link = hyperlink Regexp.last_match(1)
 
       <<~HTML
-        <a href=#{link} class="govuk-link" target="_blank" rel="noopener noreferrer">
-        #{text} (opens in new tab)
+        <a href="#{link}" class="govuk-link" target="_blank" rel="noopener noreferrer">
+        #{text} (opens in a new tab)
         </a>
       HTML
     end

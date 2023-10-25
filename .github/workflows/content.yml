@@ -67,13 +67,15 @@ jobs:
         name: Build and push Docker image for dependencies
         uses: docker/build-push-action@v5
         with:
+          target: deps
           context: .
-          build-args: BUILDKIT_INLINE_CACHE=1
+          push: true
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
+            SHA=${{ github.event.pull_request.head.sha }}
           cache-from: |
             ${{ env.REGISTRY }}:deps
-          push: true
           tags: ${{ env.REGISTRY }}:deps
-          target: deps
       -
         name: Build and push Docker image
         uses: docker/build-push-action@v5

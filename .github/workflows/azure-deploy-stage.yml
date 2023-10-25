@@ -105,10 +105,13 @@ jobs:
               --image ${{ env.DOCKER_IMAGE }}:${{ inputs.candidate || github.ref_name }} \
               --cpu 1 \
               --memory 2 \
-              --command-line "bundle exec que" \
+              --command-line "que" \
               --restart-policy OnFailure \
               --log-analytics-workspace ${{ secrets.AZURE_LOG_ANALYTICS_WORKSPACE }} \
               --vnet ${{ secrets.AZURE_VNET }} \
               --subnet ${{ secrets.AZURE_WORKER_APP_SUBNET }} \
               --ip-address Private \
-              --environment-variables RAILS_ENV=${{ vars.WEBAPP_CONFIG_RAILS_ENV }} RAILS_MASTER_KEY=${{ secrets.WEBAPP_CONFIG_RAILS_MASTER_KEY }} RAILS_LOG_TO_STDOUT=${{ vars.WEBAPP_CONFIG_RAILS_LOG_TO_STDOUT }} GOOGLE_CLOUD_BUCKET=${{ vars.WEBAPP_CONFIG_GOOGLE_CLOUD_BUCKET }} DATABASE_URL=${{ secrets.WEBAPP_DATABASE_URL }}
+              --environment-variables \
+                EDITOR=vi RAILS_ENV=production RAILS_LOG_TO_STDOUT=true \
+                GOOGLE_CLOUD_BUCKET=${{ vars.WEBAPP_CONFIG_GOOGLE_CLOUD_BUCKET }} \
+                RAILS_MASTER_KEY=${{ secrets.WEBAPP_CONFIG_RAILS_MASTER_KEY }} DATABASE_URL=${{ secrets.WEBAPP_DATABASE_URL }} GCS_CREDENTIALS=${{ secrets.GCS_CREDENTIALS }}

@@ -1,3 +1,5 @@
+require_relative 'types'
+
 require 'management'
 require 'caching'
 require 'pagination'

@@ -52,7 +52,7 @@ module Learning
 
   # @return [String]
   def module_table
-    ModuleDebugDecorator.new(progress_service).markdown_table
+    ModuleDebugDecorator.new(progress_service).rows
   end
 
   # @return [PaginationDecorator]
