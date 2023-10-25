@@ -93,6 +93,6 @@ module ContentHelper
 
   # @yield [String]
   def password_complexity
-    t('password_complexity.html', length: User.password_length.first)
+    t('password_complexity', length: User.password_length.first)
   end
 end

@@ -93,19 +93,9 @@ en:
 
   phase_banner: This is a new service, your %{link} will help us improve it.
 
-  password_complexity:
-    html: |
-      <span class="tooltiptext">
-        <ul class="govuk-list" id="password-tooltip">
-          <li>Password fields should:<li>
-          <li>a) Be a minimum of %{length} characters long</li>
-          <li>b) Not contain a dictionary word of more than 4 characters</li>
-          <li>c) Contain at least two uppercase letters</li>
-          <li>d) Contain at least two lowercase letters</li>
-          <li>e) Contain at least two numbers</li>
-          <li>f) Contain at least two special characters or non-alphanumeric characters, such as: ! \" £ $ % & * @</li>
-        </ul>
-      </span>
+  password_complexity: |
+    Password fields should be a minimum of %{length} characters long, contain at least two uppercase letters,
+    two lowercase letters, two numbers, and two special characters or non-alphanumeric characters.
 
   pagination:
     section: Section %{current} of %{total}
