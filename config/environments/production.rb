@@ -49,11 +49,11 @@ Rails.application.configure do
   if Rails.application.preview?
     # Contentful Live-Preview of secured pages
     config.action_dispatch.cookies_same_site_protection = :none
-  # elsif Rails.application.live?
-  #   config.action_dispatch.cookies_same_site_protection = :strict
-  # else
-  #   # default
-  #   config.action_dispatch.cookies_same_site_protection = :lax
+    # elsif Rails.application.live?
+    #   config.action_dispatch.cookies_same_site_protection = :strict
+    # else
+    #   # default
+    #   config.action_dispatch.cookies_same_site_protection = :lax
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
