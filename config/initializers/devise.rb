@@ -216,7 +216,7 @@ Devise.setup do |config|
   # secure: true in order to force SSL only cookies.
   config.rememberable_options = {
     same_site: :none,
-    secure: true
+    secure: true,
   }
 
   # ==> Configuration for :validatable
