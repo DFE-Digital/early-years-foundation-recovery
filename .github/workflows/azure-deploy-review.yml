@@ -136,3 +136,5 @@ jobs:
         with:
           message: https://${{ vars.REVIEWAPP_NAME }}-${{ env.PR_NUMBER }}.azurewebsites.net
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+          allow-repeats: true
+          refresh-message-position: true
