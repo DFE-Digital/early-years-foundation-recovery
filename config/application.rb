@@ -92,18 +92,15 @@ module EarlyYearsFoundationRecovery
       Types::Params::Bool[ENV.fetch('DASHBOARD_UPDATE', true)]
     end
 
-    # CI workflow uses DELIVERY
-    # CMS validation workflow uses PREVIEW then DELIVERY
-    #
     # @see ContentfulRails.configuration.enable_preview_domain
     # @see ContentfulModel.use_preview_api
     #
     # @return [Boolean]
     def preview?
-      if Rails.env.test? && ENV['CONTENTFUL_PREVIEW'].blank?
-        false
-      else
+      if defined?(::Types)
         Types::Params::Bool[ENV.fetch('CONTENTFUL_PREVIEW', false)]
+      else
+        false
       end
     end
 
