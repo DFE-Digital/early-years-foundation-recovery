@@ -46,6 +46,9 @@ Rails.application.configure do
     'X-Robots-Tag' => ('none' unless Rails.application.live?),
   }.compact
 
+  # Contentful Live-Preview of secured pages
+  config.action_dispatch.cookies_same_site_protection = :none
+
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
