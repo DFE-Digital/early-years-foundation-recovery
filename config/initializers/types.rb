@@ -1,8 +1,6 @@
-unless defined?(::Types)
-  require 'dry-types'
+require 'dry-types'
 
-  module Types
-    include Dry.Types()
-    include Dry::Core::Constants
-  end
+module Types
+  include Dry.Types()
+  include Dry::Core::Constants
 end

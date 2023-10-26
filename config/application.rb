@@ -97,11 +97,7 @@ module EarlyYearsFoundationRecovery
     #
     # @return [Boolean]
     def preview?
-      if defined?(::Types)
-        Types::Params::Bool[ENV.fetch('CONTENTFUL_PREVIEW', false)]
-      else
-        false
-      end
+      Dry::Types['params.bool'][ENV.fetch('CONTENTFUL_PREVIEW', false)]
     end
 
     # @return [Boolean]

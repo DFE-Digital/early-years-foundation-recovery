@@ -52,7 +52,6 @@ Rails.application.configure do
     # elsif Rails.application.live?
     #   config.action_dispatch.cookies_same_site_protection = :strict
     # else
-    #   # default
     #   config.action_dispatch.cookies_same_site_protection = :lax
   end
 
