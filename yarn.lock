@@ -4597,9 +4597,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dfe-frontend-alpha@npm:^0.1.9":
-  version: 0.1.9
-  resolution: "dfe-frontend-alpha@npm:0.1.9"
+"dfe-frontend-alpha@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "dfe-frontend-alpha@npm:1.0.1"
   dependencies:
     "@babel/core": ^7.12.10
     "@babel/preset-env": ^7.12.11
@@ -4628,7 +4628,7 @@ __metadata:
     wait-on: ^6.0.0
     webpack: ^5.74.0
     webpack-stream: ^5.2.1
-  checksum: 1aef4330218bb173e5ccd2b73cf7d820aa415b977c9ffb9b7dbda32bb4fff2139697f6bc4852370d67973c7c72c6e4af3cba0064630a1d8b6e93572b82111e2a
+  checksum: 6c7d364dc99c765da58009f7df860f6627ea6770b6d578e8348ec8ec38e76fc849b678f9fe973abfc5159502808c87f84f547b6bff58fa18928855f9f0fae797
   languageName: node
   linkType: hard
 
@@ -5438,7 +5438,7 @@ __metadata:
     "@hotwired/turbo-rails": ^7.3.0
     accessible-autocomplete: ^2.0.4
     axios: ^1.4.0
-    dfe-frontend-alpha: ^0.1.9
+    dfe-frontend-alpha: ^1.0.1
     esbuild: ^0.18.19
     govuk-frontend: ^4.7.0
     puppeteer: ^21.0.1
