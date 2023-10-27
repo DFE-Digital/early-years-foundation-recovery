@@ -28,5 +28,11 @@
     }
   }
 
-}
+  .govuk-grid-row {
+    @include govuk-media-query($until: tablet) {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+  }
 
+}
