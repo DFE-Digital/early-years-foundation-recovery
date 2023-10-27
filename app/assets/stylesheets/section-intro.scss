@@ -19,5 +19,14 @@
       background-color: $color_dfe-secondary-blue;
     }
   }
+
+  .blockquote-container {
+    blockquote.quote {
+      &:before {
+        background-color: govuk-colour('light-grey');
+      }
+    }
+  }
+
 }
 

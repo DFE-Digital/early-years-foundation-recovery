@@ -15,9 +15,7 @@ $prompt-hue: govuk-colour('turquoise');
   .svg-inline--fa {
     position: relative;
     display: inline-block;
-    width: 32px; // height of size 2x
-    // top: -16px;
-    // left: -32px;
+    width: 32px;
     top: govuk-spacing(-3);
     left: govuk-spacing(-6);
   }
