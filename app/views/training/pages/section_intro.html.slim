@@ -6,18 +6,15 @@
 
 = render 'debug'
 
-.govuk-grid-row
-  .govuk-grid-column-full
-    #section-intro-panel
-      .govuk-grid-row
-          h1.govuk-heading-xl= content.heading
+#section-intro-panel
+  .govuk-grid-row
+    .govuk-grid-column-full
+      h1.govuk-heading-xl= content.heading
 
-      .govuk-grid-row
-        .govuk-grid-column-two-thirds
-          = m(content.body)
+  = m(content.body)
 
-      .govuk-grid-row
-        .govuk-grid-column-full
-          .govuk-button-group
-            = link_to_previous
-            = link_to_next
+  .govuk-grid-row
+    .govuk-grid-column-full
+      .govuk-button-group
+        = link_to_previous
+        = link_to_next
