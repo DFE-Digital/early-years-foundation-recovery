@@ -48,7 +48,7 @@ private
   # @return [Net::HTTP]
   def build_http(uri)
     http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
+    http.use_ssl = true unless Rails.env.test?
     http
   end
 
