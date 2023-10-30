@@ -12,7 +12,6 @@ RSpec.describe GovOneAuthService do
     allow(ENV).to receive(:[]).with('GOV_ONE_CLIENT_ASSERTION_TYPE').and_return('mock_assertion_type')
     allow(ENV).to receive(:[]).with('GOV_ONE_BASE_URI').and_return('https://example.com')
     allow(ENV).to receive(:[]).with('GOV_ONE_CLIENT_ID').and_return('mock_client_id')
-    allow(ENV).to receive(:[]).with('GOV_ONE_CLIENT_ASSERTION').and_return('mock_client_assertion')
     allow(mock_http).to receive(:request).and_return(mock_response)
     allow(Net::HTTP).to receive(:new).and_return(mock_http)
   end

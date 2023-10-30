@@ -11,7 +11,7 @@ class GovOneAuthService
       code: @code,
       redirect_uri: ENV['GOV_ONE_REDIRECT_URI'],
       client_assertion_type: ENV['GOV_ONE_CLIENT_ASSERTION_TYPE'],
-      client_assertion: ENV['GOV_ONE_CLIENT_ASSERTION'] || jwt_assertion,
+      client_assertion: jwt_assertion,
     }
 
     token_uri = URI.parse("#{ENV['GOV_ONE_BASE_URI']}/token")
