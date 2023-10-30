@@ -2,7 +2,7 @@
 # ------------------------------------------------------------------------------
 set -e
 
-if [ !${RAILS_ENV}=="production" ]
+if [ ${RAILS_ENV} != "production" ]
 then
 
   if [ -z ${PROXY_CERT} ]
