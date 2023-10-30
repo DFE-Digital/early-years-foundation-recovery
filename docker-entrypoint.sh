@@ -51,6 +51,8 @@ else
   else
     /usr/sbin/sshd
 
+    printenv >> /root/.profile
+
     bundle exec rails db:prepare
 
     case ${ENVIRONMENT} in
