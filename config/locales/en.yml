@@ -562,6 +562,11 @@ en:
 
       %{criteria}
 
+  # /gov-one/info
+  gov-one:
+    info:
+      title: Gov One Login
+
   # /settings/cookie-policy
   cookie_policy:
     title: Cookie policy
