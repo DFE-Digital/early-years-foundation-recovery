@@ -51,7 +51,7 @@ else
   else
     # Azure WebSSH
     /usr/sbin/sshd
-    eval $(printenv | sed -n "s/^\([^=]\+\)=\(.*\)$/export \1=\2/p" | sed 's/"/\\\"/g' | sed '/=/s//="/' | sed 's/$/"/' > /root/.profile)
+    eval $(printenv | xargs 2>/dev/null | export > /root/.profile)
 
     bundle exec rails db:prepare
 
