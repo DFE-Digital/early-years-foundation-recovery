@@ -94,8 +94,7 @@ en:
   phase_banner: This is a new service, your %{link} will help us improve it.
 
   password_complexity: |
-    Password fields should be a minimum of %{length} characters long, contain at least two uppercase letters,
-    two lowercase letters, two numbers, and two special characters or non-alphanumeric characters.
+    Passwords should be a minimum of %{length} characters long, contain at least two uppercase letters, two lowercase letters, two numbers, and two special characters or non-alphanumeric characters.
 
   pagination:
     section: Section %{current} of %{total}
