@@ -3,7 +3,7 @@ name: 'App Deploy [Azure - REVIEW]'
 on:
   pull_request:
     types:
-      - labeled
+      - labeled # uses 'review'
       - synchronize
     paths-ignore:
       - '**/*.md'
@@ -35,7 +35,7 @@ env:
 
 jobs:
   build-and-deploy:
-    if: contains(github.event.pull_request.labels.*.name, 'deployed')
+    if: contains(github.event.pull_request.labels.*.name, 'review')
     runs-on: ubuntu-latest
     environment: development
 
@@ -64,13 +64,15 @@ jobs:
       - name: Build and push dependencies
         uses: docker/build-push-action@v5
         with:
+          target: deps
           context: .
-          build-args: BUILDKIT_INLINE_CACHE=1
+          push: true
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
+            SHA=${{ github.event.pull_request.head.sha }}
           cache-from: |
             ${{ env.DOCKER_IMAGE }}:deps
-          push: true
           tags: ${{ env.DOCKER_IMAGE }}:deps
-          target: deps
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
@@ -125,7 +127,7 @@ jobs:
             az webapp config appsettings set --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.REVIEWAPP_NAME }} \
               --slot ${{ env.PR_NUMBER }} \
-              --slot-settings DOMAIN="https://${{ vars.REVIEWAPP_NAME }}-${{ env.PR_NUMBER }}.azurewebsites.net" \
+              --slot-settings DOMAIN="${{ vars.REVIEWAPP_NAME }}-${{ env.PR_NUMBER }}.azurewebsites.net" \
               --output none
 
       # Add URL to Pull Request

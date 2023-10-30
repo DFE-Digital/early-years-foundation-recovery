@@ -19,17 +19,21 @@ production:
   DOMAIN: child-development-training.education.gov.uk
   TRACKING_ID: GTM-NFZ88TP # Live data
   HOTJAR_SITE_ID: 3169682
-  GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-live
+  # jobs
+  GOOGLE_CLOUD_BUCKET: eyfs-recovery-production
+  # DASHBOARD_UPDATE: false
 
 # ey-recovery-staging
 staging:
   <<: *defaults
   DOMAIN: ey-recovery-staging.london.cloudapps.digital
   TRACKING_ID: GTM-W6W95FD # Test data
-  GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-staging
   # cms
   CONTENTFUL_ENVIRONMENT: staging
   CONTENTFUL_PREVIEW: true
+  # jobs
+  GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-staging
+  DASHBOARD_UPDATE: false
 
 # ey-recovery-dev
 development:
@@ -40,6 +44,7 @@ development:
   CONTENTFUL_PREVIEW: true
   # jobs
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-development
+  DASHBOARD_UPDATE: false
 
 # ey-recovery-content
 content:

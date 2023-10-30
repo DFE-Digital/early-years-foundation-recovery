@@ -19,5 +19,20 @@
       background-color: $color_dfe-secondary-blue;
     }
   }
-}
 
+  .blockquote-container {
+    blockquote.quote {
+      &:before {
+        background-color: govuk-colour('light-grey');
+      }
+    }
+  }
+
+  .govuk-grid-row {
+    @include govuk-media-query($until: tablet) {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+  }
+
+}

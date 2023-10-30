@@ -36,7 +36,7 @@ describe 'ContentHelper', type: :helper do
 
         it 'creates a button link' do
           expect(html).to eq <<~HTML.strip
-            <p class="govuk-body-m"><a href=/link class="govuk-link govuk-button">
+            <p class="govuk-body-m"><a href="/link" class="govuk-link govuk-button">
             text
             </a></p>
           HTML
@@ -44,12 +44,12 @@ describe 'ContentHelper', type: :helper do
       end
 
       describe 'external' do
-        let(:input) { '{external}[text](/link){/external}' }
+        let(:input) { '{external}[text](https://forms.external.com/foo.aspx?id=xxx){/external}' }
 
         it 'creates an external link' do
           expect(html).to eq <<~HTML.strip
-            <p class="govuk-body-m"><a href=/link class="govuk-link" target="_blank" rel="noopener noreferrer">
-            text (opens in new tab)
+            <p class="govuk-body-m"><a href="https://forms.external.com/foo.aspx?id=xxx" class="govuk-link" target="_blank" rel="noopener noreferrer">
+            text (opens in a new tab)
             </a></p>
           HTML
         end
@@ -125,7 +125,7 @@ describe 'ContentHelper', type: :helper do
         end
 
         it 'builds semantic markup' do
-          expect(html).to eq '<div class="govuk-grid-column-two-thirds"><p class="govuk-body-m">Description of an image</p></div><div class="govuk-grid-column-one-third"><p class="govuk-body-m"><img src="/path/to/image" alt="image title"></p></div>'
+          expect(html).to eq '<div class="govuk-grid-row"><div class="govuk-grid-column-two-thirds"><p class="govuk-body-m">Description of an image</p></div><div class="govuk-grid-column-one-third"><p class="govuk-body-m"><img src="/path/to/image" alt="image title"></p></div></div>'
         end
       end
     end
