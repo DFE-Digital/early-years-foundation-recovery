@@ -53,8 +53,6 @@ ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
 ENV APP_HOME /srv
 ENV RAILS_ENV ${RAILS_ENV:-production}
 
-COPY .docker-profile /root/.profile
-
 RUN mkdir -p ${APP_HOME}/tmp/pids ${APP_HOME}/log
 
 WORKDIR ${APP_HOME}

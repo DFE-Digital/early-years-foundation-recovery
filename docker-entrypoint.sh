@@ -49,9 +49,9 @@ else
   then
     echo "Azure ENVIRONMENT is not defined"
   else
+    # Azure WebSSH
     /usr/sbin/sshd
-
-    printenv >> /root/.profile
+    printenv | sed -n "s/^\([^=]\+\)=\(.*\)$/export \1=\2/p" | sed 's/"/\\\"/g' | sed '/=/s//="/' | sed 's/$/"/' > /root/.profile
 
     bundle exec rails db:prepare
 
