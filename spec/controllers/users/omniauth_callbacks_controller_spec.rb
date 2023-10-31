@@ -19,22 +19,33 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
     end
 
     context 'when a User does not exist' do
-      it 'sets session id_token and creates the user' do
+      it 'creates the user with the email and id_token' do
         get :openid_connect, params: { 'code' => 'mock_code' }
-        expect(session[:id_token]).to eq(id_token)
         expect(User.find_by(email: email)).to be_truthy
+        expect(User.find_by(id_token: id_token)).to be_truthy
         expect(response).to redirect_to(edit_registration_name_path)
       end
     end
 
-    context 'when a User exists' do
+    context 'when a User email exists' do
       before do
         create :user, :registered, email: email
       end
 
-      it 'sets session id_token and signs in the user' do
+      it 'updates the user id_token and signs them in' do
         get :openid_connect, params: { 'code' => 'mock_code' }
-        expect(session[:id_token]).to eq(id_token)
+        expect(User.find_by(id_token: id_token)).to be_truthy
+        expect(response).to redirect_to(my_modules_path)
+      end
+    end
+
+    context 'when a User id_token exists' do
+      before do
+        create :user, :registered, id_token: id_token
+      end
+
+      it 'signs the user in' do
+        get :openid_connect, params: { 'code' => 'mock_code' }
         expect(response).to redirect_to(my_modules_path)
       end
     end

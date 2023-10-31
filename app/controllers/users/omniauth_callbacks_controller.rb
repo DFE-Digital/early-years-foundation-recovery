@@ -10,23 +10,28 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
 
     access_token = tokens_response['access_token']
-    session[:id_token] = tokens_response['id_token']
 
     user_info_response = auth_service.user_info(access_token)
     if user_info_response.empty? || user_info_response['email'].blank?
       flash[:alert] = 'There was a problem signing in. Please try again.'
       redirect_to root_path and return
     end
-    @email = user_info_response['email']
-    gov_user = find_or_create_user
+    gov_user = find_or_create_user(user_info_response['email'], tokens_response['id_token'])
     sign_in_and_redirect gov_user if gov_user
   end
 
 private
 
   # @return [User]
-  def find_or_create_user
-    User.find_by(email: @email) || User.create_from_email(@email)
+  def find_or_create_user(email, id_token)
+    existing_user = User.find_by(email: email)
+
+    if existing_user
+      existing_user.update!(id_token: id_token)
+    else
+      existing_user = User.find_by(id_token: id_token) || User.create_from_gov_one(email: email, id_token: id_token)
+    end
+    existing_user
   end
 
   def after_sign_in_path_for(resource)

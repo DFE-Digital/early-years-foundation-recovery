@@ -6,6 +6,6 @@ module GovOneHelper
 
   # @return [String]
   def logout_uri
-    "#{ENV['GOV_ONE_SIGN_OUT_URI']}?id_token_hint=#{session[:id_token]}&post_logout_redirect_uri=#{ENV['GOV_ONE_SIGN_OUT_REDIRECT_URI']}&state=#{SecureRandom.uuid}"
+    "#{ENV['GOV_ONE_SIGN_OUT_URI']}?id_token_hint=#{current_user.id_token}&post_logout_redirect_uri=#{ENV['GOV_ONE_SIGN_OUT_REDIRECT_URI']}&state=#{SecureRandom.uuid}"
   end
 end

@@ -22,8 +22,8 @@ class User < ApplicationRecord
   end
 
   # @return [User]
-  def self.create_from_email(email)
-    user = User.new(email: email, confirmed_at: Time.zone.now)
+  def self.create_from_gov_one(email:, id_token:)
+    user = User.new(email: email, id_token: id_token, confirmed_at: Time.zone.now)
     user.save!(validate: false)
     user
   end
