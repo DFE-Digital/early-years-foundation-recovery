@@ -42,6 +42,16 @@ class GovOneAuthService
     {}
   end
 
+  # @param token [String]
+  # @return [Array<Hash>]
+  def decode_id_token(token)
+    kid = JWT.decode(token, nil, false).last['kid']
+    key_params = jwks['keys'].find { |key| key['kid'] == kid }
+    jwk = JWT::JWK.new(key_params)
+
+    JWT.decode(token, jwk.public_key, true, algorithm: 'ES256')
+  end
+
 private
 
   # @param uri [URI]
@@ -50,6 +60,14 @@ private
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true unless Rails.env.test?
     http
+  end
+
+  def jwks
+    discovery_url = "#{ENV['GOV_ONE_BASE_URI']}/.well-known/jwks.json"
+    uri = URI.parse(discovery_url)
+    http = build_http(uri)
+    response = http.request(Net::HTTP::Get.new(uri.path))
+    JSON.parse(response.body)
   end
 
   # @return [String]

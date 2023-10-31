@@ -21,9 +21,11 @@ class User < ApplicationRecord
     DASHBOARD_ATTRS + Training::Module.live.map { |mod| "module_#{mod.position}_time" }
   end
 
+  # @param email [String]
+  # @param gov_one_id [String]
   # @return [User]
-  def self.create_from_gov_one(email:, id_token:)
-    user = User.new(email: email, id_token: id_token, confirmed_at: Time.zone.now)
+  def self.create_from_gov_one(email:, gov_one_id:)
+    user = User.new(email: email, gov_one_id: gov_one_id, confirmed_at: Time.zone.now)
     user.save!(validate: false)
     user
   end
