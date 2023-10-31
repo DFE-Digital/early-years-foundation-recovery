@@ -101,6 +101,8 @@ en:
   pagination:
     section: Section %{current} of %{total}
     page: Page %{current} of %{total}
+    previous: Previous Page
+    next: Next Page
 
   na: Not applicable
 
