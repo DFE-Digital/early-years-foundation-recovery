@@ -11,7 +11,10 @@
     color: $color_dfe-secondary-blue;
     padding: govuk-spacing(2) govuk-spacing(1);
     top: govuk-spacing(-6);
-    left: govuk-spacing(-6);
+
+    @include govuk-media-query($from: tablet) {
+      left: govuk-spacing(-6);
+    }
   }
 
   p, ul, h1, h2, h3 {
