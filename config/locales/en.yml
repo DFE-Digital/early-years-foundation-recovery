@@ -566,6 +566,10 @@ en:
   gov-one:
     info:
       title: Gov One Login
+      body: |
+        # Gov One Login
+
+        This is some information about Gov One Login... 
       sign-in-button: Sign in with Gov One Login
       sign-out-button: Sign out of Gov One Login
 
