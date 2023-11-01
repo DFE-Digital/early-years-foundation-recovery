@@ -48,15 +48,18 @@ private
   # @return [User]
   def find_or_create_user(email, id)
     existing_user = User.find_by(email: email)
-
-    if existing_user
+    if User.find_by(email: email)
       existing_user.update!(gov_one_id: id)
+    elsif User.find_by(gov_one_id: id)
+      existing_user = User.find_by(gov_one_id: id)
+      existing_user.update!(email: email)
     else
-      existing_user = User.find_by(gov_one_id: id) || User.create_from_gov_one(email: email, gov_one_id: id)
+      return User.create_from_gov_one(email: email, gov_one_id: id)
     end
     existing_user
   end
 
+  # @return [String]
   def after_sign_in_path_for(resource)
     if resource.registration_complete?
       if resource.display_whats_new?
