@@ -6,11 +6,20 @@
   padding-bottom: govuk-spacing(5);
   padding-left: govuk-spacing(2);
 
+  @include govuk-media-query($until: tablet) {
+    margin: govuk-spacing(2);
+    margin-top: govuk-spacing(6);
+  }
+
   span.fa-stack {
     background-color: $color_dfe-secondary-blue;
     color: $color_dfe-secondary-blue;
-    padding: govuk-spacing(2) govuk-spacing(1);
+    padding: govuk-spacing(1) govuk-spacing(0);
     top: govuk-spacing(-6);
+
+    .fa-circle {
+      width: 40px;
+    }
 
     @include govuk-media-query($from: tablet) {
       left: govuk-spacing(-6);

@@ -92,4 +92,12 @@ header #service-name {
 
 .dfe-content-page--header {
   background: $light-blue;
+
+  @include govuk-media-query($until: tablet) {
+    padding: govuk-spacing(2);
+  }
+
+  img {
+    max-width: 100%;
+  }
 }

@@ -80,6 +80,14 @@ Hero layout
     margin-top: govuk-spacing(6);
     margin-bottom: govuk-spacing(-4);
   }
+
+  @include govuk-media-query($until: tablet) {
+    .govuk-grid-column-one-half > p,
+    .govuk-grid-column-one-half > h2 {
+      margin-left: govuk-spacing(2);
+      margin-right: govuk-spacing(2);
+    }
+  }
 }
 
 
@@ -120,7 +128,11 @@ pre.code-tip {
 .light-grey-box {
   padding: govuk-spacing(5);
   margin-bottom: govuk-spacing(5);
-  background: govuk-colour("light-grey");
+  background: govuk-colour('light-grey');
+
+  @include govuk-media-query($until: tablet) {
+    margin: govuk-spacing(2);
+  }
 
   .govuk-button {
     margin: 0;
