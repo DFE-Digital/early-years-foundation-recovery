@@ -13,8 +13,7 @@ class GovOneAuthService
       client_assertion_type: ENV['GOV_ONE_CLIENT_ASSERTION_TYPE'],
       client_assertion: jwt_assertion,
     }
-
-    token_uri = URI.parse("#{ENV['GOV_ONE_BASE_URI']}/token")
+    
     http = build_http(token_uri)
 
     token_request = Net::HTTP::Post.new(token_uri.path, { 'Content-Type' => 'application/x-www-form-urlencoded' })
@@ -53,6 +52,11 @@ class GovOneAuthService
   end
 
 private
+
+  # @return [URI]
+  def token_uri
+    URI.parse("#{ENV['GOV_ONE_BASE_URI']}/token")
+  end
 
   # @param uri [URI]
   # @return [Net::HTTP]

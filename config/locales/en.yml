@@ -566,6 +566,8 @@ en:
   gov-one:
     info:
       title: Gov One Login
+      sign-in-button: Sign in with Gov One Login
+      sign-out-button: Sign out of Gov One Login
 
   # /settings/cookie-policy
   cookie_policy:

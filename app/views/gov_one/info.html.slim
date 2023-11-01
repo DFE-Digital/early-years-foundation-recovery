@@ -3,15 +3,12 @@
 - content_for :page_title do
   = html_title t('gov-one.info.title')
 
-.h1.govuk-heading-xl
-  = t('gov-one.info.title')
-
 .govuk-grid-row
   .govuk-grid-column-one-half
     = m('gov-one-info.body')
 
     - if current_user
-      = govuk_button_link_to 'Sign out of Gov One Login', logout_uri
+      = govuk_button_link_to t('gov-one-info.sign-out-button'), logout_uri
     - else
-      = govuk_button_link_to 'Sign in with Gov One Login', login_uri
+      = govuk_button_link_to t('gov-one-info.sign-in-button'), login_uri
   

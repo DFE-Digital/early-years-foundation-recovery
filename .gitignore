@@ -57,10 +57,6 @@ localhost.crt
 localhost.key
 nscacert.pem
 
-# gov one login keys
-private_key.pem
-public_key.pem
-
 # Yarn files
 .yarn/*
 

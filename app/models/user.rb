@@ -25,7 +25,7 @@ class User < ApplicationRecord
   # @param gov_one_id [String]
   # @return [User]
   def self.create_from_gov_one(email:, gov_one_id:)
-    user = User.new(email: email, gov_one_id: gov_one_id, confirmed_at: Time.zone.now)
+    user = new(email: email, gov_one_id: gov_one_id, confirmed_at: Time.zone.now)
     user.save!(validate: false)
     user
   end
