@@ -1,31 +1,11 @@
 - content_for :page_title do
   = html_title t('home.title')
 
+- content_for :hero do
+  = render 'hero'
+
 = render 'learning/cms_debug'
-
-- if debug?
-  pre.debug_dump
-    = configuration_summary_list
-
-.govuk-grid-row
-  .govuk-grid-column-full
-    .light-grey-box
-      .govuk-grid-row
-        .govuk-grid-column-two-thirds
-          = m('home.hero', service_name: service_name)
-
-          = govuk_button_link_to course_overview_path, class: 'govuk-button--start govuk-!-margin-bottom-4' do
-            - if current_user
-              | Learn more
-            - else
-              | Learn more and enrol
-              p.govuk-visually-hidden on the course
-
-            svg.govuk-button__start-icon xmlns='http://www.w3.org/2000/svg' width='17.5' height='19' viewBox='0 0 33 40' aria-hidden='true' focusable='false'
-              path fill='currentColor' d='M0 0h13l20 20-20 20H0l20-20z'
-
-        .govuk-grid-column-one-third class='govuk-!-text-align-right'
-          = m('home.thumb')
+= render 'debug'
 
 .govuk-grid-row
   .govuk-grid-column-one-half
@@ -40,3 +20,15 @@
           = govuk_button_link_to 'Sign in', new_user_session_path
           .white-space-pre-wrap= ' or '
           = govuk_link_to 'create an account', new_user_registration_path
+
+
+.govuk-grid-row
+  .govuk-grid-column-full
+    .home-prompt
+      span.fa-stack.fa-2x
+        i.fa.fa-circle.fa-stack-1x.fa-2x.fa-inverse
+        i.fa.fa-info.fa-stack-1x.fa-1x
+
+      .govuk-grid-row
+        .govuk-grid-column-three-quarters
+          = m('home.prompt')

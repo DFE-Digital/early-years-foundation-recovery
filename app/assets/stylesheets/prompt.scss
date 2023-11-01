@@ -1,18 +1,37 @@
-/*
-https://design-system.service.gov.uk/styles/colour/
------------------------------------------------
-*/
-$prompt-hue: govuk-colour('turquoise');
-// --------------------------------------------
+.home-prompt {
+  background: $light-blue;
+  border-top: $color_dfe-secondary-blue solid 10px;
+  margin: govuk-spacing(5) govuk-spacing(0);
+  padding-top: govuk-spacing(-9);
+  padding-bottom: govuk-spacing(5);
+  padding-left: govuk-spacing(2);
+
+  span.fa-stack {
+    background-color: $color_dfe-secondary-blue;
+    color: $color_dfe-secondary-blue;
+    padding: govuk-spacing(2) govuk-spacing(1);
+    top: govuk-spacing(-6);
+    left: govuk-spacing(-6);
+  }
+
+  p, ul, h1, h2, h3 {
+    @include govuk-media-query($from: tablet) {
+      margin-left: calc(2 * govuk-spacing(8));
+    }
+  }
+}
 
 
 .prompt {
   background-color: govuk-colour('light-grey');
-  border-top: $prompt-hue solid 10px;
+  border-top: govuk-colour('turquoise') solid 10px;
   margin: govuk-spacing(5) govuk-spacing(0);
   padding-left: govuk-spacing(4);
 
   .svg-inline--fa {
+    background-color: govuk-colour('turquoise');
+    color: govuk-colour('white');
+    padding: govuk-spacing(4) !important;
     position: relative;
     display: inline-block;
     width: 32px;
@@ -43,7 +62,7 @@ $prompt-hue: govuk-colour('turquoise');
   }
 
   &.prompt-bg {
-    background-color: lighten($prompt-hue, 50%);
+    background-color: lighten(govuk-colour('turquoise'), 50%);
   }
 
 }
