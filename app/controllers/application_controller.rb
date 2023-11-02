@@ -71,7 +71,7 @@ private
 
   def check_service_availability
     if ENV['SERVICE_UNAVAILABLE'] == 'true' && request.path != '/service-unavailable'
-      redirect_to '/service-unavailable'
+      redirect_to static_path('service-unavailable')
     end
   end
 
