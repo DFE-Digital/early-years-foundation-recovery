@@ -1,7 +1,7 @@
 - if debug?
   pre.debug_dump
-    hr
-    | Page Type: #{content.page_type}
+    = content.debug_summary
+
     hr
     | Class: #{ENV['DISABLE_USER_ANSWER'].present? ? 'Response' : 'UserAnswer'}
     hr
@@ -18,5 +18,3 @@
     - current_user_response.options.map do |option|
       br
       = option.to_h
-    hr
-    | Pagination: #{content.pagination}

@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       workspace:
-        description: Deployment workspace to test against (dev, pr-xxx)
+        description: Deployment workspace to test against (dev, review-pr-xxx)
         type: string
         default: dev
 
@@ -24,7 +24,7 @@ on:
       - completed
 
 env:
-  BASE_URL: https://ey-recovery-${{ inputs.workspace || 'dev' }}.london.cloudapps.digital
+  BASE_URL: https://eyrecovery-${{ inputs.workspace || 'dev' }}.azurewebsites.net
   USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
 
 jobs:
@@ -46,14 +46,14 @@ jobs:
     steps:
       -
         name: Checkout deployed code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         # with:
         #   ref: ${{ github.event.workflow_run.head_branch }}
       -
         name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.1.3
+          ruby-version: 3.2.2
           bundler-cache: true
       -
         name: Install Rubygems

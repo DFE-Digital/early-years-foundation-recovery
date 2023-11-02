@@ -1,0 +1,9 @@
+.prompt class=('prompt-bg' if icon.eql?('brain'))
+  .govuk-grid-row
+    .govuk-grid-column-one-quarter
+      i.fa-2x.fa-solid class="fa-#{icon}" aria-describedby="#{icon} icon"
+
+    .govuk-grid-column-three-quarters
+      h2.govuk-heading-m= I18n.t(icon, scope: 'prompt')
+
+      == body

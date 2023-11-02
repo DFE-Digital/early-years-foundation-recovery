@@ -3,7 +3,7 @@ name: 'App Deploy [Azure - REVIEW]'
 on:
   pull_request:
     types:
-      - labeled
+      - labeled # uses 'review'
       - synchronize
     paths-ignore:
       - '**/*.md'
@@ -35,26 +35,26 @@ env:
 
 jobs:
   build-and-deploy:
-    if: contains(github.event.pull_request.labels.*.name, 'deployed')
+    if: contains(github.event.pull_request.labels.*.name, 'review')
     runs-on: ubuntu-latest
     environment: development
 
     steps:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
       # Create and boot Docker image builder
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
         with:
           version: v0.9.1
 
       # Login to the container registry
       - name: Login to Github Container Registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
@@ -62,18 +62,20 @@ jobs:
 
       # Build and push image
       - name: Build and push dependencies
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
+          target: deps
           context: .
-          build-args: BUILDKIT_INLINE_CACHE=1
+          push: true
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
+            SHA=${{ github.event.pull_request.head.sha }}
           cache-from: |
             ${{ env.DOCKER_IMAGE }}:deps
-          push: true
           tags: ${{ env.DOCKER_IMAGE }}:deps
-          target: deps
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           target: app
           context: .
@@ -103,11 +105,20 @@ jobs:
         with:
           azcliversion: 2.50.0
           inlineScript: |
+            az postgres flexible-server db create --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+              --server-name ${{ vars.RESOURCE_NAME_PREFIX }}-psqlfs \
+              --database-name ${{ env.PR_NUMBER }} \
+              --output none
+            az webapp config appsettings set --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+              --name ${{ vars.REVIEWAPP_NAME }} \
+              --settings DATABASE_URL="postgresql://${{ secrets.PSQLFS_USERNAME }}:${{ secrets.PSQLFS_PASSWORD }}@${{ vars.RESOURCE_NAME_PREFIX }}-psqlfs.postgres.database.azure.com/${{ env.PR_NUMBER }}?sslmode=require" \
+              --output none
             az webapp deployment slot create --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.REVIEWAPP_NAME }} \
               --slot ${{ env.PR_NUMBER }} \
               --configuration-source ${{ vars.REVIEWAPP_NAME }} \
-              --deployment-container-image-name ${{ env.DOCKER_IMAGE }}:${{ env.PR_NUMBER }}
+              --deployment-container-image-name ${{ env.DOCKER_IMAGE }}:${{ env.PR_NUMBER }} \
+              --output none
             az webapp vnet-integration add --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.REVIEWAPP_NAME }} \
               --slot ${{ env.PR_NUMBER }} \
@@ -116,7 +127,7 @@ jobs:
             az webapp config appsettings set --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.REVIEWAPP_NAME }} \
               --slot ${{ env.PR_NUMBER }} \
-              --slot-settings DOMAIN="https://${{ vars.REVIEWAPP_NAME }}-${{ env.PR_NUMBER }}.azurewebsites.net" \
+              --slot-settings DOMAIN="${{ vars.REVIEWAPP_NAME }}-${{ env.PR_NUMBER }}.azurewebsites.net" \
               --output none
 
       # Add URL to Pull Request

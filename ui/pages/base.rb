@@ -6,7 +6,7 @@ module Pages
       super(ENV['BASE_URL'] + path)
     end
 
-    section :header, Sections::Header, 'header.govuk-header'
-    section :footer, Sections::Footer, 'footer.govuk-footer'
+    section :header, Sections::Header, 'header'
+    section :footer, Sections::Footer, 'footer'
   end
 end

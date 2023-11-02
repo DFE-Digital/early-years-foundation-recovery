@@ -30,7 +30,7 @@ RSpec.describe Training::ResponsesController, type: :controller do
   describe '#update' do
     context 'with formative' do
       context 'when single choice (radio buttons)' do
-        let(:question_name) { '1-1-4' }
+        let(:question_name) { '1-1-4-1' }
 
         context 'with correct answer' do
           let(:answers) { [1] }

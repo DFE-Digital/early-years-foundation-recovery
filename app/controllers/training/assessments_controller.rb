@@ -1,14 +1,16 @@
 module Training
   class AssessmentsController < ApplicationController
+    include Learning
+
     before_action :authenticate_registered_user!
     after_action :track_events, only: :show
 
     helper_method :mod,
                   :content,
-                  :progress_bar,
+                  :section_bar,
                   :assessment
 
-    include Learning
+    layout 'hero'
 
     def new
       assessment.archive!
@@ -33,6 +35,8 @@ module Training
 
       track('summative_assessment_complete',
             type: 'summative_assessment',
+            uid: content.id,
+            mod_uid: mod.id,
             score: assessment.score,
             success: assessment.passed?)
     end

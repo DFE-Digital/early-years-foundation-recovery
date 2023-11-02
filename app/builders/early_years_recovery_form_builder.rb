@@ -46,6 +46,7 @@ class EarlyYearsRecoveryFormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
                             Trainee::Setting.all, :name, :title,
                             options: { include_blank: true },
                             label: { text: I18n.t('register_setting.label'), class: 'govuk-visually-hidden' },
+                            hint: { text: I18n.t('register_setting.body') },
                             data: { controller: 'autocomplete', 'autocomplete-message-value': I18n.t('register_setting.not_found') },
                             aria: { label: 'registration setting type' },
                             form_group: { classes: %w[data-hj-suppress] }
@@ -56,6 +57,7 @@ class EarlyYearsRecoveryFormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
                             Trainee::Authority.all, :name, :name,
                             options: { include_blank: true },
                             label: { text: I18n.t('register_authority.label'), class: 'govuk-visually-hidden' },
+                            hint: { text: I18n.t('register_authority.body') },
                             data: { controller: 'autocomplete', 'autocomplete-message-value': I18n.t('register_authority.not_found') },
                             aria: { label: 'registration local authority' },
                             form_group: { classes: %w[data-hj-suppress] }

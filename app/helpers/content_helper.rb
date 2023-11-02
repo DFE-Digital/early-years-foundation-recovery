@@ -1,9 +1,13 @@
 module ContentHelper
-  # GDS formatted markdown as HTML
-  # @param markdown [String]
+  # @see [CustomMarkdown]
+  # @param key [String]
   # @return [String]
-  def translate_markdown(markdown)
-    raw Govspeak::Document.to_html(markdown.to_s, sanitize: false)
+  def m(key, headings_start_with: 'l', **args)
+    markdown = I18n.exists?(key, scope: args[:scope]) ? t(key, **args) : key.to_s
+
+    CustomMarkdown.render(markdown, headings_start_with: headings_start_with, filter_html: false).html_safe
+  rescue Contentful::Error
+    CustomMarkdown.render(key).html_safe
   end
 
   # Date format guidelines: "1 June 2002"
@@ -25,7 +29,7 @@ module ContentHelper
   # @param mod [Training::Module]
   # @return [String]
   def training_module_image(mod)
-    image_tag mod.thumbnail_url, class: 'full-width-img', width: 200, alt: '', title: ''
+    image_tag mod.thumbnail_url, alt: '', title: ''
   end
 
   # @param icon [String, Symbol] Fontawesome icon name
@@ -37,49 +41,11 @@ module ContentHelper
                 aria: { label: "#{icon} icon" }
   end
 
-  # @param icon [String, Symbol] Fontawesome icon name
-  # @param style [String, Symbol] Icon weight
-  # @param colour [String, Symbol] Icon colour
-  # @param label [String, Symbol] Aria label
-  # @return [String]
-  def progress_node(icon, style, colour, label)
-    content_tag :span, nil, class: 'fa-stack fa-1x', aria: { label: label } do
-      # white background
-      concat(content_tag(:i, nil, class: 'fa-solid fa-stack-2x fa-circle')) unless label == 'started'
-
-      concat(content_tag(:i, nil, class: "fa-#{style} fa-stack-2x fa-#{icon} #{colour}"))
-
-      # white circle overlay to adjust previous circle's thickness
-      concat(content_tag(:i, nil, class: 'small-circle fa-solid fa-stack-2x fa-circle')) if label == 'started'
-    end
-  end
-
-  # @param percentage [Integer] of line in left colour
-  # @param left_colour [String]
-  # @param right_colour [String]
-  # @return [String]
-  def progress_line(percentage, left_colour, right_colour)
-    content_tag :div, nil, class: 'line line--slice',
-                           style: "border-image-source: linear-gradient(to right, #{left_colour}, #{left_colour} #{percentage}%, #{right_colour} #{percentage}%, #{right_colour});"
-  end
-
   # @return [String]
   def print_button(*additional_classes)
     button = '<button class="govuk-link gem-c-print-link__button" onclick="window.print()" data-module="print-link" >Print this page</button>'.html_safe
     classes = ['gem-c-print-link', 'print-button'] + additional_classes
     content_tag :div, button, class: classes
-  end
-
-  # @see ModuleItem.pagination
-  # @see Questionnaire.pagination
-  #
-  # @return [String, nil]
-  def page_number(current:, total:)
-    return if current.blank?
-
-    content_tag :span, class: 'govuk-caption-l data-hj-allow' do
-      t('page_number', current: current, total: total)
-    end
   end
 
   # @param success [Boolean]
@@ -90,7 +56,7 @@ module ContentHelper
     title = t(".#{state}.heading")
     text = t(".#{state}.text", score: score)
 
-    govuk_notification_banner(title_text: title, text: translate_markdown(text))
+    govuk_notification_banner(title_text: title, text: m(text))
   end
 
   # @param status [String, Symbol]
@@ -111,16 +77,9 @@ module ContentHelper
     Rails.configuration.service_name
   end
 
-  # @param key [String]
-  # @param args [Hash]
-  # @return [String]
-  def content_resource(key, **args)
-    content_tag :div, class: 'gem-c-govspeak' do
-      translate_markdown t(key, **args)
-    end
-  end
-
-  # @yield [Array]
+  # TODO: replace with form builder fields, Replace Openstruct with DATA
+  #
+  # @yield [Array] options / legend / hint
   def opt_in_out(type)
     yield [
       [
@@ -128,7 +87,7 @@ module ContentHelper
         OpenStruct.new(id: false, name: t(:opt_out, scope: type)),
       ],
       t(:heading, scope: type),
-      translate_markdown(t(:body, scope: type)),
+      t(:body, scope: type),
     ]
   end
 

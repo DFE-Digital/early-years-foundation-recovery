@@ -14,15 +14,6 @@ module Training
       @answer ||= Answer.new(json: json)
     end
 
-    # @return [Hash{Symbol => nil, Integer}]
-    def pagination
-      return super if formative_question?
-
-      question_group = summative_question? ? parent.summative_questions : parent.confidence_questions
-
-      { current: question_group.find_index(self) + 1, total: question_group.count }
-    end
-
     # @return [String] powered by JSON not type
     def to_partial_path
       partial = multi_select? ? 'check_boxes' : 'radio_buttons'
@@ -57,6 +48,7 @@ module Training
       answer.options.map(&:label).sort.eql? %w[False True]
     end
 
+    # TODO: remove once user_answers is removed
     # @return [String]
     def assessments_type
       {
@@ -66,15 +58,19 @@ module Training
       }.fetch(page_type.to_sym)
     end
 
-    # @return [Array<String, Hash>]
-    def schema
-      [name, page_type, body, answer.schema]
+    def question_type
+      {
+        formative_questionnaire: 'formative',
+        summative_questionnaire: 'summative',
+        confidence_questionnaire: 'confidence',
+      }.fetch(page_type.to_sym)
     end
 
-    # Demo content currently positions questions as topics which genuine content does not.
-    # As a result, for example, questions appear in the module overview page.
-    # For this reason Question#heading is required within the test suite.
-    #
+    # @return [Array<String, Hash>]
+    def schema
+      [name, page_type, body, answer.schema, question_type]
+    end
+
     # @return [String]
     def heading
       body

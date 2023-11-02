@@ -12,12 +12,6 @@ on:
           - development
           - staging
           - production
-  push:
-    branches:
-      - main
-    paths:
-      - 'terraform-azure/**'
-      - '!terraform-azure/**.md'
 
 defaults:
   run:
@@ -27,24 +21,27 @@ defaults:
 permissions:
   id-token: write
   contents: write
+  issues: write
 
 env:
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  ARM_USE_OIDC: true
+  ARM_SKIP_PROVIDER_REGISTRATION: true
 
 jobs:
   terraform-plan:
     name: 'Terraform Plan'
     runs-on: ubuntu-latest
-    environment: development
+    environment: ${{ inputs.environment }}
     outputs:
       tfplanExitCode: ${{ steps.tf-plan.outputs.exitcode }}
 
     steps:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Install the latest version of the Terraform CLI
       - name: Setup Terraform
@@ -135,13 +132,25 @@ jobs:
     needs: [terraform-plan]
 
     steps:
+      # Request review of Terraform Plan for deployment approval
+      - name: Terraform Plan Approval
+        uses: trstringer/manual-approval@v1
+        with:
+          secret: ${{ github.TOKEN }}
+          approvers: ebrett,jack-coggin,peterdavidhamilton,sunny-sidhu-and
+          minimum-approvals: 1
+          issue-title: "Terraform deployment to ${{ inputs.environment }}"
+          issue-body: "Please review the Terraform Plan on the task summary and approve or deny the deployment"
+
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.6
 
       # Initialise a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init

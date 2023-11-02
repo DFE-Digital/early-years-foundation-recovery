@@ -40,11 +40,10 @@ jobs:
       PR_NUMBER: pr-${{ github.event.number }}
       # @see terraform/workspace-variables/app_config.yml[:content]
       DOMAIN: ey-recovery-pr-${{ github.event.number }}.london.cloudapps.digital
-      GOVUK_WEBSITE_ROOT: ey-recovery-pr-${{ github.event.number }}
     steps:
       -
         name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       -
@@ -54,30 +53,32 @@ jobs:
           terraform_version: 1.1.7
       -
         name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
         with:
           version: v0.9.1
       -
         name: Login to Github Container Registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       -
         name: Build and push Docker image for dependencies
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
+          target: deps
           context: .
-          build-args: BUILDKIT_INLINE_CACHE=1
+          push: true
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
+            SHA=${{ github.event.pull_request.head.sha }}
           cache-from: |
             ${{ env.REGISTRY }}:deps
-          push: true
           tags: ${{ env.REGISTRY }}:deps
-          target: deps
       -
         name: Build and push Docker image
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           target: app
           context: .

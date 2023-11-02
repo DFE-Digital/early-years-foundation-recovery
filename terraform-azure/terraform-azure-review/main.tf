@@ -11,6 +11,7 @@ resource "azurerm_service_plan" "asp" {
   }
 
   #checkov:skip=CKV_AZURE_212:Argument not available
+  #checkov:skip=CKV_AZURE_225:Ensure the App Service Plan is zone redundant
 }
 
 # Create Review Application
@@ -53,7 +54,7 @@ resource "azurerm_linux_web_app" "review-app" {
   }
 
   lifecycle {
-    ignore_changes = [tags]
+    ignore_changes = [tags, site_config.0.application_stack]
   }
 
   #checkov:skip=CKV_AZURE_13:App uses built-in authentication
@@ -62,6 +63,7 @@ resource "azurerm_linux_web_app" "review-app" {
   #checkov:skip=CKV_AZURE_78:Disabled by default in Terraform version used
   #checkov:skip=CKV_AZURE_16:Using VNET Integration
   #checkov:skip=CKV_AZURE_71:Using VNET Integration
+  #checkov:skip=CKV_AZURE_222:Network access rules configured
 }
 
 # Create Subnet for Review Application

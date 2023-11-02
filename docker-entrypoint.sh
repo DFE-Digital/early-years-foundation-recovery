@@ -16,6 +16,14 @@ then
   fi
 
   rm -f tmp/pids/server.pid
+
+  if [ -z ${PROXY_CERT} ]
+  then
+    echo "No proxy certificate to append"
+  else
+    echo "Appending proxy certificate"
+    cat $PROXY_CERT >> /etc/ssl/certs/ca-certificates.crt
+  fi
 fi
 
 if [ -z ${DATABASE_URL} ]
@@ -25,15 +33,25 @@ else
   bundle exec rails db:create db:migrate
 fi
 
-bundle exec rails db:prepare assets:precompile
-
 if [ -z ${ENVIRONMENT} ]
 then
-  echo "ENVIRONMENT is not defined so development database may not contain seed data"
+  echo "ENVIRONMENT is not defined so the app may not startup as intended"
 else
+  /usr/sbin/sshd
+
   if [ !${ENVIRONMENT}=="development" ]
   then
-    bundle exec rails db:seed
+    bundle exec rails db:prepare assets:precompile db:seed eyfs:bot sitemap:refresh:no_ping
+  fi
+
+  if [ !${ENVIRONMENT}=="staging" ]
+  then
+    bundle exec rails db:prepare assets:precompile
+  fi
+
+  if [ !${ENVIRONMENT}=="production" ]
+  then
+    rm public/robots.txt && touch public/robots.txt && bundle exec rails db:prepare assets:precompile
   fi
 fi
 

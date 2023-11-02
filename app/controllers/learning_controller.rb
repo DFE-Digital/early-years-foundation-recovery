@@ -2,6 +2,7 @@
 
 class LearningController < ApplicationController
   before_action :authenticate_registered_user!
+  layout 'hero'
 
   # GET /my-modules
   def show

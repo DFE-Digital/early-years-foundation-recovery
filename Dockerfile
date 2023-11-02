@@ -1,17 +1,9 @@
 # ------------------------------------------------------------------------------
 # Base - AMD64 & ARM64 compatible
 # ------------------------------------------------------------------------------
-FROM ruby:3.1.3-alpine as base
+FROM ruby:3.2.2-alpine as base
 
-RUN apk add --no-cache --no-progress build-base less curl tzdata gcompat \
-    "busybox>=1.34.1-r5" \
-    "gmp>=6.2.1-r1" \
-    "libretls>=3.3.4-r3" \
-    "ncurses-libs>=6.3_p20211120-r1" \
-    "nodejs>=16.16.0-r0" \
-    "pkgconf>=1.9.4-r0" \
-    "ssl_client>=1.34.1-r5" \
-    "zlib>=1.2.12-r0"
+RUN apk add --no-cache --no-progress --no-check-certificate build-base less curl tzdata gcompat
 
 ENV TZ Europe/London
 
@@ -22,7 +14,7 @@ FROM base as deps
 
 LABEL org.opencontainers.image.description "Application Dependencies"
 
-RUN apk add --no-cache --no-progress postgresql-dev yarn chromium
+RUN apk add --no-cache --no-progress --no-check-certificate postgresql-dev yarn chromium
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
@@ -44,13 +36,16 @@ RUN bundle config set without development test ui
 RUN bundle install --no-binstubs --retry=10 --jobs=4
 
 # ------------------------------------------------------------------------------
-# Production Stage - nodejs v16.17.1, postgresql v14.5, chromium v102.0.5005.182
+# Production Stage
 # ------------------------------------------------------------------------------
 FROM base AS app
 
+LABEL org.opencontainers.image.source=https://github.com/DFE-Digital/early-years-foundation-recovery
 LABEL org.opencontainers.image.description "Early Years Recovery Rails Application"
 
-RUN apk add --no-cache --no-progress postgresql-dev yarn chromium
+RUN echo "Welcome to the EYFS Recovery Application" > /etc/motd
+RUN apk add --no-cache --no-progress --no-check-certificate postgresql-dev yarn chromium openssh
+RUN echo "root:Docker!" | chpasswd && cd /etc/ssh/ && ssh-keygen -A
 
 ENV GROVER_NO_SANDBOX true
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
@@ -83,11 +78,9 @@ COPY .yarnrc.yml ${APP_HOME}/.yarnrc.yml
 COPY --from=deps /build/.yarn ${APP_HOME}/.yarn
 COPY --from=deps /build/node_modules ${APP_HOME}/node_modules
 
-RUN SECRET_KEY_BASE=x \
-    GOVUK_APP_DOMAIN=x \
-    GOVUK_WEBSITE_ROOT=x \
-    bundle exec rails assets:precompile
+RUN SECRET_KEY_BASE=x bundle exec rails assets:precompile
 
+COPY sshd_config /etc/ssh/
 COPY ./docker-entrypoint.sh /
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
@@ -101,7 +94,7 @@ CMD ["bundle", "exec", "rails", "server"]
 # ------------------------------------------------------------------------------
 FROM app as dev
 
-RUN apk add --no-cache --no-progress postgresql-client npm graphviz
+RUN apk add --no-cache --no-progress --no-check-certificate postgresql-client npm graphviz
 RUN npm install --global adr-log contentful-cli
 
 RUN bundle config unset without
@@ -113,7 +106,7 @@ RUN bundle install --no-binstubs --retry=10 --jobs=4
 # ------------------------------------------------------------------------------
 FROM app as test
 
-RUN apk add --no-cache --no-progress postgresql-client
+RUN apk add --no-cache --no-progress --no-check-certificate postgresql-client
 
 RUN bundle config unset without
 RUN bundle config set without development ui
@@ -163,7 +156,7 @@ LABEL org.opencontainers.image.description "Accessibility auditor"
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
 
-RUN apk add --no-cache --no-progress npm chromium
+RUN apk add --no-cache --no-progress --no-check-certificate npm chromium
 RUN npm install --global --unsafe-perm puppeteer pa11y-ci
 
 COPY .pa11yci /usr/config.json

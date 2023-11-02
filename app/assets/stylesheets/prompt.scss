@@ -2,12 +2,12 @@
 https://design-system.service.gov.uk/styles/colour/
 -----------------------------------------------
 */
-$prompt-hue: govuk-colour("turquoise");
+$prompt-hue: govuk-colour('turquoise');
 // --------------------------------------------
 
 
 .prompt {
-  background-color: govuk-colour("light-grey");
+  background-color: govuk-colour('light-grey');
   border-top: $prompt-hue solid 10px;
   margin: govuk-spacing(5) govuk-spacing(0);
   padding-left: govuk-spacing(4);
@@ -15,15 +15,13 @@ $prompt-hue: govuk-colour("turquoise");
   .svg-inline--fa {
     position: relative;
     display: inline-block;
-    width: 32px; // height of size 2x
-    // top: -16px;
-    // left: -32px;
+    width: 32px;
     top: govuk-spacing(-3);
     left: govuk-spacing(-6);
   }
 
   .govuk-grid-column-one-quarter {
-    margin-right: -90px;
+    margin-right: -120px;
   }
 
   .govuk-grid-column-three-quarters {
@@ -35,13 +33,6 @@ $prompt-hue: govuk-colour("turquoise");
 
     @media(min-width: 40em) and (max-width: 61.5em) {
       padding-left: govuk-spacing(7);
-    }
-  }
-
-  .gem-c-govspeak {
-    padding-top: govuk-spacing(4);
-    @media(max-width: 40.0625em) {
-      padding-right: govuk-spacing(4);
     }
   }
 

@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'content_test_schema'
 
 RSpec.describe 'Training Module Completion', type: :system do
   subject(:mod) { alpha }
@@ -8,10 +7,6 @@ RSpec.describe 'Training Module Completion', type: :system do
   include_context 'with progress'
 
   let(:schema) { ContentTestSchema.new(mod: mod) }
-
-  def make_note(field, input)
-    fill_in field, with: input
-  end
 
   before do
     skip 'WIP' if ENV['DISABLE_USER_ANSWER'].present?
@@ -44,7 +39,7 @@ RSpec.describe 'Training Module Completion', type: :system do
       end
 
       expect(UserAssessment.count).to be 1
-      expect(UserAnswer.count(&:correct)).to be 10
+      expect(UserAnswer.count(&:correct)).to be 17
 
       expect(Note.count).to be 1
       expect(Note.first.body).to eq 'hello world'

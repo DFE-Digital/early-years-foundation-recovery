@@ -12,7 +12,7 @@ RSpec.describe Response, type: :model do
   let(:user) { create :user, :registered }
 
   context 'with radio buttons' do
-    let(:question_name) { '1-1-4' }
+    let(:question_name) { '1-1-4-1' }
 
     describe 'and no answer' do
       let(:answers) { nil }

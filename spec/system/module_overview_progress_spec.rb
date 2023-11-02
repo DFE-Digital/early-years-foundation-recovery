@@ -21,10 +21,14 @@ RSpec.describe 'Module overview page progress' do
       end
 
       within '#section-content-3' do
-        expect(page).to have_content 'not started', count: 4
+        expect(page).to have_content 'not started', count: 3
         expect(page).not_to have_link 'Recap'
         expect(page).not_to have_link 'End of module test'
         expect(page).not_to have_link 'Reflect on your learning'
+      end
+
+      within '#section-content-4' do
+        expect(page).to have_content 'not started', count: 1
         expect(page).not_to have_link 'Download your certificate'
       end
     end
@@ -120,9 +124,9 @@ RSpec.describe 'Module overview page progress' do
     end
   end
 
-  context "when some but not all of a topic's pages has been viewed" do
+  context 'when only some of a topic has been viewed' do
     before do
-      view_pages_upto(alpha, 'text_page', 3)
+      view_pages_upto(alpha, 'topic_intro', 3)
       visit '/modules/alpha'
     end
 
@@ -134,7 +138,7 @@ RSpec.describe 'Module overview page progress' do
 
     it 'the topic is not a link' do
       within '#section-content-1 .module-section--container .module-section--item:nth-child(5)' do
-        expect(page).not_to have_link('1-1-3', href: '/modules/alpha/content-pages/1-1-1')
+        expect(page).not_to have_link('1-1-3', href: '/modules/alpha/content-pages/1-1-3')
       end
     end
   end
@@ -152,21 +156,19 @@ RSpec.describe 'Module overview page progress' do
     end
 
     it 'resumes from the last visited page' do
-      expect(page).to have_link 'Resume module', href: '/modules/alpha/content-pages/1-1-4'
+      expect(page).to have_link 'Resume module', href: '/modules/alpha/content-pages/1-1-4-1'
     end
   end
 
   context 'when the summative assessment is failed' do
     before do
-      start_summative_assessment(alpha)
-      visit '/modules/alpha/questionnaires/1-3-2-1'
-      3.times do
-        check 'Wrong answer 1'
-        check 'Wrong answer 2'
-        click_on 'Save and continue'
+      visit '/modules/alpha/content-pages/what-to-expect'
+
+      # OPTIMIZE: the setup for this context leverages the AST schema which supports future changes to content
+      ContentTestSchema.new(mod: alpha).call(pass: false).compact.each do |content|
+        content[:inputs].each { |args| send(*args) }
       end
-      choose 'Wrong answer 1'
-      click_on 'Finish test'
+
       visit '/modules/alpha'
     end
 
@@ -198,7 +200,11 @@ RSpec.describe 'Module overview page progress' do
       end
 
       within '#section-content-3' do
-        expect(page).to have_content 'complete', count: 4
+        expect(page).to have_content 'complete', count: 3
+      end
+
+      within '#section-content-4' do
+        expect(page).to have_content 'complete', count: 1
       end
     end
   end

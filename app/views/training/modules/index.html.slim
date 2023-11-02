@@ -6,13 +6,13 @@
 
 = govuk_back_link href: root_path
 
-= content_resource 'about.course', all_modules: mods.count, published_modules: mods.reject(&:draft?).count
+= m('about.course', all_modules: mods.count, published_modules: mods.reject(&:draft?).count)
 
 - unless current_user
   .govuk-grid-row
     .govuk-grid-column-two-thirds
       div class='light-grey-box govuk-!-margin-bottom-4'
-        = content_resource 'about.enrol'
+        = m('about.enrol')
 
         .govuk-button-group
           = govuk_button_link_to 'Create an account', new_user_registration_path
@@ -21,12 +21,10 @@
 
 .govuk-grid-row
   .govuk-grid-column-full
-
-    - # TODO: move accordion into a content helper
     = govuk_accordion do |accordion|
       - mods.reject(&:draft?).map do |mod|
         - accordion.with_section(heading_text: mod.card_title, summary_text: mod.objective) do
-          = content_resource 'about.summary', description: mod.description, criteria: mod.criteria
+          = m('about.summary', description: mod.description, criteria: mod.criteria)
 
       - accordion.with_section(heading_text: t('experts.heading'), summary_text: t('experts.summary')) do
-        = content_resource 'experts.body'
+        = m('experts.body')

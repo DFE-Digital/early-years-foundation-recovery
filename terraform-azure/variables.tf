@@ -11,7 +11,6 @@ variable "environment" {
 }
 
 variable "resource_name_prefix" {
-  default     = "s187d01-eyrecovery"
   description = "Prefix for resource names"
   type        = string
 }
@@ -20,6 +19,22 @@ variable "admin_email_address" {
   description = "Email Address of the Admin"
   type        = string
   sensitive   = true
+}
+
+variable "gcs_credentials" {
+  description = "Google Cloud Storage credentials"
+  type        = string
+  sensitive   = true
+}
+
+variable "hotjar_site_id" {
+  description = "Hotjar tracking ID"
+  type        = string
+}
+
+variable "tracking_id" {
+  description = "Google Tag Manager tracking ID"
+  type        = string
 }
 
 variable "kv_certificate_authority_username" {
@@ -98,6 +113,12 @@ variable "psqlfs_ha_enabled" {
   type        = bool
 }
 
+variable "as_service_principal_object_id" {
+  description = "Object ID of the service principal for App Service"
+  type        = string
+  sensitive   = true
+}
+
 variable "asp_sku" {
   default     = "S1"
   description = "SKU name for the App Service Plan"
@@ -125,8 +146,24 @@ variable "reviewapp_name" {
   type        = string
 }
 
+variable "reviewapp_config_contentful_environment" {
+  default = null
+  type    = string
+}
+
+variable "reviewapp_config_contentful_preview" {
+  default = null
+  type    = string
+}
+
 variable "webapp_database_url" {
   description = "URL to the Database"
+  type        = string
+  sensitive   = true
+}
+
+variable "webapp_slot_database_url" {
+  description = "URL to the slot Database"
   type        = string
   sensitive   = true
 }
@@ -152,17 +189,24 @@ variable "custom_domain_name" {
   type        = string
 }
 
+variable "webapp_config_user_password" {
+  type      = string
+  sensitive = true
+}
+
 variable "webapp_config_bot_token" {
   type      = string
   sensitive = true
 }
 
 variable "webapp_config_contentful_environment" {
-  type = string
+  default = null
+  type    = string
 }
 
 variable "webapp_config_contentful_preview" {
-  type = string
+  default = null
+  type    = string
 }
 
 variable "webapp_config_domain" {

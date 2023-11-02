@@ -52,6 +52,13 @@ Find advanced settings and other installation options at the [git-secrets projec
 
 ## Working locally
 
+1. `$ asdf plugin add ruby`
+1. `$ asdf install ruby`
+1. `$ asdf plugin add postgres`
+1. `$ asdf install postgres`
+1. `$ asdf plugin add nodejs`
+1. `$ asdf install nodejs`
+
 **Development**
 
 > Gemfile group :development
@@ -306,37 +313,6 @@ The status of GovUK notify can be checked here: <https://status.notifications.se
 For more information the Notify team can be contacted here: <https://www.notifications.service.gov.uk/support>,
 or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
----
-
-## Content
-
-Content designers are also using the docker development environment.
-
-You can demo this environment locally using the account `completed@example.com:StrongPassword`.
-When there are significant changes to content structure a soft restart the server may be necessary `./bin/docker-rails restart`.
-CSS styling changes will appear automatically without needing to restart.
-
-
-### CMS
-
-Refresh cache in instances and workers
-
-- `cf restart ey-recovery-dev --strategy rolling`
-
-- `cf ssh ey-recovery-dev-worker`
-- rails eyfs:jobs:plug_content
-
-- Validation: `$ ./bin/docker-rails 'eyfs:cms:validate'`
-
-### YAML
-
-- [guide](https://www.commonwl.org/user_guide/yaml)
-
-### Govspeak
-
-- [live preview](https://govspeak-preview.publishing.service.gov.uk)
-- [designer guide](https://govspeak-preview.publishing.service.gov.uk/guide)
-- [developer guide](https://docs.publishing.service.gov.uk/repos/govspeak.html)
 
 ---
 
@@ -409,9 +385,10 @@ settings the following classes can be added:
 
 [prototype-app]: https://eye-recovery.herokuapp.com
 [interim-prototype-app]: https://child-development-training-prototype.london.cloudapps.digital
-[production]: https://eyfs-covid-recovery.london.cloudapps.digital
-[staging]: https://ey-recovery-staging.london.cloudapps.digital
-[development]: https://ey-recovery-dev.london.cloudapps.digital
+[production]: https://child-development-training.education.gov.uk
+[staging]: https://staging.child-development-training.education.gov.uk
+[development]: https://eyrecovery-dev.azurewebsites.net
+[review]: https://eyrecovery-review-pr-123.azurewebsites.net
 
 <!-- GH workflows -->
 

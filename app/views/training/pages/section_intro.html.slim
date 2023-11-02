@@ -1,0 +1,20 @@
+- content_for :page_title do
+  = html_title mod.title, content.heading
+
+- content_for :hero do
+  = render 'training/modules/section_bar'
+
+= render 'debug'
+
+#section-intro-panel
+  .govuk-grid-row
+    .govuk-grid-column-full
+      h1.govuk-heading-xl= content.heading
+
+  = m(content.body)
+
+  .govuk-grid-row
+    .govuk-grid-column-full
+      .govuk-button-group
+        = link_to_previous
+        = link_to_next

@@ -63,6 +63,10 @@ private
       ]
     elsif type.match?(/certificate/)
       []
+    elsif type.match?(/sub_module_intro|summary_intro/)
+      [
+        [:click_on, 'Start section'],
+      ]
     else
       [
         [:click_on, 'Next'],
@@ -145,6 +149,6 @@ private
 
   # @return [Boolean]
   def skip?
-    !pass && type.match?(/confidence|thank|certificate/)
+    !pass && type.match?(/results|confidence|thank|certificate/)
   end
 end

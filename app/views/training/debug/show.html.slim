@@ -1,0 +1,18 @@
+pre.debug_dump
+  h1.govuk-heading-l Module #{mod.position}
+
+  = mod.id
+
+  dl
+    dt: strong Content
+    dd= mod.content.count
+    dt: strong Pages
+    dd= mod.text_pages.count
+    dt: strong Questions
+    dd= mod.questions.count
+    dt: strong Videos
+    dd= mod.video_pages.count
+
+
+.light-grey-box
+  = govuk_table(rows: module_table, caption: mod.title)

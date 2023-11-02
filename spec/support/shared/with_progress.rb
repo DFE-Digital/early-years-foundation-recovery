@@ -18,7 +18,7 @@ RSpec.shared_context 'with progress' do
 
   # @param mod [Training::Module]
   def start_first_topic(mod)
-    view_pages_upto(mod, 'text_page')
+    view_pages_upto(mod, 'topic_intro')
   end
 
   # @param mod [Training::Module]
