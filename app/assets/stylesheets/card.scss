@@ -10,17 +10,20 @@
 }
 
 .govuk-card {
-  border-bottom: govuk-colour("blue") 3px solid;
+  border-bottom: govuk-colour('blue') 3px solid;
   box-sizing: border-box;
   padding: 20px;
-  max-width: 300px;
+
+  @include govuk-media-query($from: tablet) {
+    max-width: 300px;
+  }
 
   &--contained {
-    background-color: govuk-colour("light-grey");
+    background-color: govuk-colour('light-grey');
   }
 
   &--contained--on-background {
-    background-color: govuk-colour("white");
+    background-color: govuk-colour('white');
   }
 }
 
@@ -37,7 +40,7 @@
   position: relative;
 
   h3 {
-    color: govuk-colour("blue");
+    color: govuk-colour('blue');
   }
 }
 
@@ -50,14 +53,14 @@
 }
 
 .govuk-card--selectable:hover {
-  background-color: govuk-colour("blue");
+  background-color: govuk-colour('blue');
 }
 
 .govuk-card--selectable:hover > .govuk-card__content > h3,
 .govuk-card--selectable:hover > .govuk-card__content > p,
 .govuk-card--selectable:hover > .govuk-card__content > h3 > a,
 .govuk-card--selectable:hover > .govuk-card__actions > ul > li > a {
-  color: govuk-colour("white") !important;
+  color: govuk-colour('white') !important;
 }
 
 .govuk-card--selectable:hover .govuk-card__content a,
@@ -149,8 +152,8 @@
 
 .card {
   position: relative;
-  background-color: govuk-colour("light-grey");
-  border-bottom: 3px solid govuk-colour("blue");
+  background-color: govuk-colour('light-grey');
+  border-bottom: 3px solid govuk-colour('blue');
   max-width: 300px;
 
   &-container {
@@ -158,19 +161,19 @@
   }
 
   &:hover, &:focus-within {
-    background-color: govuk-colour("blue");
+    background-color: govuk-colour('blue');
     a {
-      color: govuk-colour("white");
+      color: govuk-colour('white');
     }
   }
 
   &:hover &-link--retake {
     &:hover {
-      color: govuk-colour("light-grey");
+      color: govuk-colour('light-grey');
     }
 
     &:focus {
-      color: govuk-colour("black");
+      color: govuk-colour('black');
     }
   }
 
@@ -188,7 +191,7 @@
       box-shadow: none;
 
       .card-container & {
-        color: govuk-colour("black");
+        color: govuk-colour('black');
       }
     }
   }
@@ -200,7 +203,7 @@
   
   &-link--header {
     text-decoration: none;
-    color: govuk-colour("blue");
+    color: govuk-colour('blue');
     
     &:after {
       position: absolute;
