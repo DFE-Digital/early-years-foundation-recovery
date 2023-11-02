@@ -12,7 +12,7 @@ module GovOneHelper
       state: state,
     }
 
-    uri = URI.parse("#{Rails.application.config.gov_one_base_uri}/authorize")
+    uri = URI.parse("#{ENV['GOV_ONE_BASE_URI']}/authorize")
     uri.query = URI.encode_www_form(params)
     "#{uri.to_s}&redirect_uri=#{ENV['GOV_ONE_REDIRECT_URI']}"
   end
@@ -24,7 +24,7 @@ module GovOneHelper
       state: SecureRandom.uuid,
     }
 
-    uri = URI.parse("#{Rails.application.config.gov_one_base_uri}/logout")
+    uri = URI.parse("#{ENV['GOV_ONE_BASE_URI']}/logout")
     uri.query = URI.encode_www_form(params)
     "#{uri.to_s}&post_logout_redirect_uri=#{ENV['GOV_ONE_LOGOUT_REDIRECT_URI']}"
   end
