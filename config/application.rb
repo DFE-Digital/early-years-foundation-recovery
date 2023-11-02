@@ -68,7 +68,9 @@ module EarlyYearsFoundationRecovery
     config.contentful_environment             = ENV.fetch('CONTENTFUL_ENVIRONMENT', credentials.dig(:contentful, :environment))
 
     # Gov one
+    config.gov_one_base_uri = ENV.fetch('GOV_ONE_BASE_URI')
     config.gov_one_private_key = ENV.fetch('GOV_ONE_PRIVATE_KEY', credentials.dig(:gov_one, :private_key))
+    config.gov_one_client_id = ENV.fetch('GOV_ONE_CLIENT_ID', credentials.dig(:gov_one, :client_id))
 
     # @return [Boolean]
     def live?

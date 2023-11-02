@@ -314,7 +314,7 @@ Devise.setup do |config|
       port: 443,
       scheme: 'https',
       host: 'oidc.integration.account.gov.uk',
-      identifier: ENV['GOV_ONE_CLIENT_ID'],
+      identifier: Rails.application.config.gov_one_client_id,
       redirect_uri: 'users/auth/openid_connect/callback',
     },
     authorize_params: {

@@ -10,7 +10,7 @@ class GovOneAuthService
       grant_type: 'authorization_code',
       code: @code,
       redirect_uri: ENV['GOV_ONE_REDIRECT_URI'],
-      client_assertion_type: ENV['GOV_ONE_CLIENT_ASSERTION_TYPE'],
+      client_assertion_type: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
       client_assertion: jwt_assertion,
     }
 
@@ -29,7 +29,6 @@ class GovOneAuthService
   # @param access_token [String]
   # @return [Hash]
   def user_info(access_token)
-    userinfo_uri = URI.parse("#{ENV['GOV_ONE_BASE_URI']}/userinfo")
     http = build_http(userinfo_uri)
 
     userinfo_request = Net::HTTP::Get.new(userinfo_uri.path, { 'Authorization' => "Bearer #{access_token}" })
@@ -58,6 +57,10 @@ private
     URI.parse("#{ENV['GOV_ONE_BASE_URI']}/token")
   end
 
+  def userinfo_uri
+    URI.parse("#{ENV['GOV_ONE_BASE_URI']}/userinfo")
+  end
+
   # @param uri [URI]
   # @return [Net::HTTP]
   def build_http(uri)
@@ -80,8 +83,8 @@ private
 
     payload = {
       aud: "#{ENV['GOV_ONE_BASE_URI']}/token",
-      iss: ENV['GOV_ONE_CLIENT_ID'],
-      sub: ENV['GOV_ONE_CLIENT_ID'],
+      iss: Rails.application.config.gov_one_client_id,
+      sub: Rails.application.config.gov_one_client_id,
       exp: Time.zone.now.to_i + 5 * 60,
       jti: SecureRandom.uuid,
       iat: Time.zone.now.to_i,
