@@ -10,7 +10,7 @@ class GovOneAuthService
       grant_type: 'authorization_code',
       code: @code,
       redirect_uri: ENV['GOV_ONE_REDIRECT_URI'],
-      client_assertion_type: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+      client_assertion_type: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
       client_assertion: jwt_assertion,
     }
 

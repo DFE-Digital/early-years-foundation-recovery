@@ -14,7 +14,7 @@ module GovOneHelper
 
     uri = URI.parse("#{ENV['GOV_ONE_BASE_URI']}/authorize")
     uri.query = URI.encode_www_form(params)
-    "#{uri.to_s}&redirect_uri=#{ENV['GOV_ONE_REDIRECT_URI']}"
+    "#{uri}&redirect_uri=#{ENV['GOV_ONE_REDIRECT_URI']}"
   end
 
   # @return [String]
@@ -26,6 +26,6 @@ module GovOneHelper
 
     uri = URI.parse("#{ENV['GOV_ONE_BASE_URI']}/logout")
     uri.query = URI.encode_www_form(params)
-    "#{uri.to_s}&post_logout_redirect_uri=#{ENV['GOV_ONE_LOGOUT_REDIRECT_URI']}"
+    "#{uri}&post_logout_redirect_uri=#{ENV['GOV_ONE_LOGOUT_REDIRECT_URI']}"
   end
 end
