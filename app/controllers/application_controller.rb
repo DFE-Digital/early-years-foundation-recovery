@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
                 :set_hotjar_site_id,
                 :prepare_cms
 
+  before_action :check_service_availability
+
   helper_method :current_user,
                 :timeout_timer,
                 :debug?
@@ -66,6 +68,12 @@ class ApplicationController < ActionController::Base
   end
 
 private
+
+  def check_service_availability
+    if ENV['SERVICE_UNAVAILABLE'] == 'true' && request.path != '/service-unavailable'
+      redirect_to "/service-unavailable"
+    end
+  end
 
   def set_time_zone(&block)
     Time.use_zone(ENV['TZ'], &block)
