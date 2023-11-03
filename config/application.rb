@@ -105,6 +105,11 @@ module EarlyYearsFoundationRecovery
       Types::Params::Bool[ENV.fetch('DEBUG', false)]
     end
 
+    # @return [Boolean]
+    def maintenance?
+      Types::Params::Bool[ENV.fetch('MAINTENANCE', false)]
+    end
+
     # @return [ActiveSupport::TimeWithZone]
     def public_beta_launch_date
       Time.zone.local(2023, 2, 9, 15, 0, 0)

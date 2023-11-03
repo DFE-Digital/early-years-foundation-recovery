@@ -6,11 +6,12 @@ class ApplicationController < ActionController::Base
                 :set_hotjar_site_id,
                 :prepare_cms
 
-  before_action :check_service_availability
+  before_action :service_unavailable_page, if: :maintenance?
 
   helper_method :current_user,
                 :timeout_timer,
-                :debug?
+                :debug?,
+                :maintenance?
 
   default_form_builder(EarlyYearsRecoveryFormBuilder)
 
@@ -69,10 +70,13 @@ class ApplicationController < ActionController::Base
 
 private
 
-  def check_service_availability
-    if ENV['SERVICE_UNAVAILABLE'] == 'true' && request.path != '/service-unavailable'
-      redirect_to static_path('service-unavailable')
-    end
+  # @return [Boolean]
+  def maintenance?
+    Rails.application.maintenance?
+  end
+
+  def service_unavailable_page
+    redirect_to static_path('service-unavailable') unless request.path == '/service-unavailable'
   end
 
   def set_time_zone(&block)
