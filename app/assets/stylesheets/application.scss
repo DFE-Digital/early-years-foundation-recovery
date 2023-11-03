@@ -114,6 +114,12 @@ pre.code-tip {
   font-weight: normal;
 }
 
+.govuk-fieldset__legend {
+  @include govuk-media-query($until: tablet) {
+    display: none;
+  }
+}
+
 .light-grey-box {
   padding: govuk-spacing(5);
   margin-bottom: govuk-spacing(5);
