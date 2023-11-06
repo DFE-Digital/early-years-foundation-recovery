@@ -32,7 +32,7 @@ module LinkHelper
 
     govuk_button_link_to content.next_button_text, training_module_page_path(mod.name, page.name),
                          id: 'next-action',
-                         aria: { label: 'Go to the next page' }
+                         aria: { label: t('pagination.next') }
   end
 
   # @return [String] previous page or module overview
@@ -48,7 +48,7 @@ module LinkHelper
 
     govuk_button_link_to 'Previous', path,
                          class: style,
-                         aria: { label: 'Go to the previous page' }
+                         aria: { label: t('pagination.previous') }
   end
 
   # Bottom of my-modules card component
