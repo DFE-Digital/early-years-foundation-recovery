@@ -39,6 +39,7 @@
   border-top: govuk-colour('turquoise') solid 10px;
   margin: govuk-spacing(5) govuk-spacing(0);
   padding-left: govuk-spacing(4);
+  padding-right: govuk-spacing(4);
 
   .svg-inline--fa {
     background-color: govuk-colour('turquoise');
@@ -56,12 +57,8 @@
   }
 
   .govuk-grid-column-three-quarters {
-    padding: govuk-spacing(3) govuk-spacing(0);
+    padding: govuk-spacing(3);
     
-    @media (max-width: 40em) {
-      padding-left: govuk-spacing(3);
-    }
-
     @media(min-width: 40em) and (max-width: 61.5em) {
       padding-left: govuk-spacing(7);
     }
