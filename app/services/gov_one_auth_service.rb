@@ -6,18 +6,10 @@ class GovOneAuthService
 
   # @return [Hash]
   def tokens
-    body = {
-      grant_type: 'authorization_code',
-      code: @code,
-      redirect_uri: ENV['GOV_ONE_REDIRECT_URI'],
-      client_assertion_type: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
-      client_assertion: jwt_assertion,
-    }
-
     http = build_http(token_uri)
 
     token_request = Net::HTTP::Post.new(token_uri.path, { 'Content-Type' => 'application/x-www-form-urlencoded' })
-    token_request.set_form_data(body)
+    token_request.set_form_data(token_body)
     token_response = http.request(token_request)
 
     JSON.parse(token_response.body)
@@ -91,5 +83,16 @@ private
     }
 
     JWT.encode payload, rsa_private, 'RS256'
+  end
+
+  # @return [Hash]
+  def token_body
+    {
+      grant_type: 'authorization_code',
+      code: @code,
+      redirect_uri: ENV['GOV_ONE_REDIRECT_URI'],
+      client_assertion_type: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
+      client_assertion: jwt_assertion,
+    }
   end
 end
