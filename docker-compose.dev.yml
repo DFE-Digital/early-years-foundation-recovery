@@ -21,6 +21,10 @@ services:
       - RAILS_ENV=development
       - DOMAIN=app:3000
       - RAILS_SERVE_STATIC_FILES=true
+      # gov one login
+      - GOV_ONE_BASE_URI=https://oidc.integration.account.gov.uk 
+      - GOV_ONE_REDIRECT_URI=http://localhost:3000/users/auth/openid_connect/callback
+      - GOV_ONE_LOGOUT_REDIRECT_URI=http://localhost:3000/users/sign_out
     volumes:
       - .:/srv
     tty: true
