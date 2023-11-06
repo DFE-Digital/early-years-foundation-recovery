@@ -10,21 +10,21 @@
 #   https://ey-recovery-staging.london.cloudapps.digital
 #
 name: Deploy Staging App
-on:
-  workflow_dispatch:
-    inputs:
-      candidate:
-        description: Create release candidate version ("rcx.x.x")
-        type: string
-        required: true
-      ref:
-        description: Git ref or branch to deploy
-        type: string
-        required: true
-        default: main
-  push:
-    tags:
-      - rc*
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       candidate:
+#         description: Create release candidate version ("rcx.x.x")
+#         type: string
+#         required: true
+#       ref:
+#         description: Git ref or branch to deploy
+#         type: string
+#         required: true
+#         default: main
+#   push:
+#     tags:
+#       - rc*
 
 jobs:
   deploy:
