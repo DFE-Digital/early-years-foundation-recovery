@@ -115,7 +115,7 @@ module EarlyYearsFoundationRecovery
       Types::Params::Bool[ENV.fetch('GOV_ONE_LOGIN_ENABLED', false)]
     end
 
-     # @return [Boolean]
+    # @return [Boolean]
     def maintenance?
       Types::Params::Bool[ENV.fetch('MAINTENANCE', false)]
     end

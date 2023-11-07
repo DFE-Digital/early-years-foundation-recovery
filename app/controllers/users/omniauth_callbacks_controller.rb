@@ -1,6 +1,5 @@
 # Controller handling OmniAuth callbacks for user authentication.
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-
   # This method is called by Devise after successful Gov One Login authentication
   # @return [nil]
   def openid_connect
