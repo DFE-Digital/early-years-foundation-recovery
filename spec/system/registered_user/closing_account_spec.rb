@@ -120,7 +120,7 @@ RSpec.describe 'Account deletion' do
         expect(user.last_name).to eq 'User'
         expect(user.email).to have_text 'redacted_user'
         expect(user.notes.count).to eq 0
-        expect(user.valid_password?('redacteduser')).to eq true
+        expect(user.valid_password?('RedactedUser12!@')).to eq true
       end
     end
   end

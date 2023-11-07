@@ -72,9 +72,6 @@ en:
             terms_and_conditions_agreed_at:
               blank: You must accept the terms and conditions and privacy policy to create an account.
 
-
-
-
   # Form Builder ---------------------------------------------------------------
 
   helpers:
@@ -96,7 +93,8 @@ en:
 
   phase_banner: This is a new service, your %{link} will help us improve it.
 
-  password_complexity: Your password must contain at least %{length} characters.
+  password_complexity: |
+    Passwords should be a minimum of %{length} characters long, contain at least two uppercase letters, two lowercase letters, two numbers, and two special characters or non-alphanumeric characters.
 
   pagination:
     section: Section %{current} of %{total}
@@ -120,7 +118,7 @@ en:
 
   # Training Modules -----------------------------------------------------------
 
-  date_completed: 'Date completed: %{date}'
+  date_completed: "Date completed: %{date}"
 
   module_indicator:
     completed: completed
@@ -258,7 +256,6 @@ en:
       We have sent an email to your new email address with a link to click to confirm the change.
 
       If you have not received the email after a few minutes, please check your spam folder.
-
 
   # Pages ----------------------------------------------------------------------
 
@@ -493,7 +490,6 @@ en:
     opt_in: Send me early years email updates
     opt_out: Do not send me early years email updates
 
-
   # /
   home:
     title: Home page
@@ -523,7 +519,6 @@ en:
       ## Return to your training
 
       Sign in to continue learning, see your progress and download certificates.
-
 
   # /about-training
   about:
@@ -567,7 +562,7 @@ en:
   # /settings/cookie-policy
   cookie_policy:
     title: Cookie policy
-    legend : Do you want to accept analytics cookies?
+    legend: Do you want to accept analytics cookies?
     flash: You’ve set your cookie preferences. [Go back to Early years child development training](%{path}).
     body: |
       # Cookies
