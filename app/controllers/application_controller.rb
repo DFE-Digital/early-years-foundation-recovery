@@ -6,10 +6,11 @@ class ApplicationController < ActionController::Base
                 :set_hotjar_site_id,
                 :prepare_cms
 
+  before_action :maintenance_page, if: :maintenance?
+
   helper_method :current_user,
                 :timeout_timer,
                 :debug?
-
   default_form_builder(EarlyYearsRecoveryFormBuilder)
 
   include Tracking
@@ -66,6 +67,15 @@ class ApplicationController < ActionController::Base
   end
 
 private
+
+  # @return [Boolean]
+  def maintenance?
+    Rails.application.maintenance? && request.path != '/maintenance'
+  end
+
+  def maintenance_page
+    redirect_to static_path('maintenance')
+  end
 
   def set_time_zone(&block)
     Time.use_zone(ENV['TZ'], &block)
