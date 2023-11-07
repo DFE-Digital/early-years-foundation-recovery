@@ -97,8 +97,8 @@ Internal
 */
 pre.code-tip {
   padding: 0 5px;
-  color: govuk-colour("red");
-  background-color: govuk-colour("light-grey");
+  color: govuk-colour('red');
+  background-color: govuk-colour('light-grey');
 }
 
 .debug_dump {
@@ -114,7 +114,7 @@ pre.code-tip {
 
 .app-sidebar {
   padding: govuk-spacing(5) govuk-spacing(3);
-  background-color: govuk-colour("light-grey");
+  background-color: govuk-colour('light-grey');
 
   *:last-child {
     margin: 0;
@@ -137,7 +137,8 @@ pre.code-tip {
   background: govuk-colour('light-grey');
 
   @include govuk-media-query($until: tablet) {
-    margin: govuk-spacing(2);
+    margin-top: govuk-spacing(6);
+    margin-bottom: govuk-spacing(6);
   }
 
   &.enrol-box {

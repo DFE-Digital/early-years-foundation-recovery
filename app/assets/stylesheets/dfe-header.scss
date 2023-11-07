@@ -104,5 +104,10 @@ header #service-name {
 
   img {
     max-width: 100%;
+    width: 100%;
+
+    @include govuk-media-query($until: tablet) {
+      padding-top: govuk-spacing(4);
+    }
   }
 }
