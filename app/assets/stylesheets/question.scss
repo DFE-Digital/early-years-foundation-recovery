@@ -21,3 +21,9 @@
 .govuk-fieldset__heading p {
   @extend .govuk-heading-l;
 }
+
+.prompt .govuk-fieldset__legend {
+  @include govuk-media-query($until: tablet) {
+    display: none;
+  }
+}
