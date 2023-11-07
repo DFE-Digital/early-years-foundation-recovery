@@ -42,6 +42,12 @@
     background: $light-blue;
     border-top: $color_dfe-secondary-blue solid 10px;
 
+    .govuk-grid-column-one-quarter {
+      @include govuk-media-query($from: desktop) {
+        margin-right: -220px;
+      }
+    }
+
     .svg-inline--fa {
       background-color: $color_dfe-secondary-blue !important;
     }
