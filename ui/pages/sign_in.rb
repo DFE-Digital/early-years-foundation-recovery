@@ -11,12 +11,12 @@ module Pages
     # Authenticate using email and password
     #
     # @param email [String] login email address (default: completed@example.com)
-    # @param password [String] login password (default: StrongPassword)
+    # @param password [String] login password (default: StrongPassword12!@)
     def with_email_and_password(email = nil, password = nil)
       wait_until_header_visible
 
       email ||= 'completed@example.com'
-      password ||= ENV.fetch('USER_PASSWORD', 'StrongPassword')
+      password ||= ENV.fetch('USER_PASSWORD', 'StrongPassword12!@')
 
       email_field.set(email)
       password_field.set(password)

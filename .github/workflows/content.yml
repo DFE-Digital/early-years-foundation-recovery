@@ -9,25 +9,25 @@
 #   https://ey-recovery-pr-123.london.cloudapps.digital
 #
 name: Deploy Content App
-on:
-  pull_request:
-    # branches:
-    #   - main
-    types:
-      - labeled
-      - synchronize
-    paths-ignore:
-      - '**/*.md'
-      - .docker*
-      - .env.example
-      - .gitignore
-      - .pa11yci
-      - .tool-versions
-      - .yardopts
-      - bin/*
-      - docker-compose.*
-      - Dockerfile
-      - terraform
+# on:
+#   pull_request:
+#     # branches:
+#     #   - main
+#     types:
+#       - labeled
+#       - synchronize
+#     paths-ignore:
+#       - '**/*.md'
+#       - .docker*
+#       - .env.example
+#       - .gitignore
+#       - .pa11yci
+#       - .tool-versions
+#       - .yardopts
+#       - bin/*
+#       - docker-compose.*
+#       - Dockerfile
+#       - terraform
 
 jobs:
   deploy:
@@ -48,7 +48,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
       -
         name: Pin Terraform version
-        uses: hashicorp/setup-terraform@v2.0.3
+        uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.1.7
       -

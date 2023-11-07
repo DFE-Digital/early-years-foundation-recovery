@@ -1,5 +1,10 @@
 #section-intro-panel {
   padding: govuk-spacing(7);
+
+  @include govuk-media-query($until: tablet) {
+    padding: govuk-spacing(6);
+  }
+
   background-color: govuk-colour('light-grey');
   border-radius: 6px;
 

@@ -7,22 +7,22 @@
 #   https://ey-recovery-dev.london.cloudapps.digital
 #
 name: Deploy Development App
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - '**/*.md'
-      - .docker*
-      - .env.example
-      - .gitignore
-      - .pa11yci
-      - .tool-versions
-      - .yardopts
-      - bin/*
-      - docker-compose.*
-      - uml/*
+# on:
+#   workflow_dispatch:
+#   push:
+#     branches:
+#       - main
+#     paths-ignore:
+#       - '**/*.md'
+#       - .docker*
+#       - .env.example
+#       - .gitignore
+#       - .pa11yci
+#       - .tool-versions
+#       - .yardopts
+#       - bin/*
+#       - docker-compose.*
+#       - uml/*
 
 jobs:
   deploy:
@@ -39,7 +39,7 @@ jobs:
         #   ref: ${{ github.sha }}
       -
         name: Pin Terraform version
-        uses: hashicorp/setup-terraform@v2.0.3
+        uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.1.7
       -

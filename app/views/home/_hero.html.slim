@@ -1,0 +1,21 @@
+.govuk-grid-row class='govuk-!-margin-top-9'
+  .govuk-grid-column-two-thirds
+
+    h1.govuk-heading-xl class='govuk-!-margin-bottom-4'
+      = service_name
+
+    p.govuk-body-l
+      = t('home.hero')
+
+    = govuk_button_link_to course_overview_path, class: 'govuk-button--start govuk-!-margin-bottom-4' do
+      - if current_user
+        | Learn more
+      - else
+        | Learn more and enrol
+        p.govuk-visually-hidden on the course
+
+      svg.govuk-button__start-icon xmlns='http://www.w3.org/2000/svg' width='17.5' height='19' viewBox='0 0 33 40' aria-hidden='true' focusable='false'
+        path fill='currentColor' d='M0 0h13l20 20-20 20H0l20-20z'
+
+  .govuk-grid-column-one-third class='govuk-!-text-align-right'
+    = m('home.thumb')
