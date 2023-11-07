@@ -1,8 +1,9 @@
+# Service for interacting with Gov One Login
+
 class GovOneAuthService
-  # @param code [String]
-  def initialize(code)
-    @code = code
-  end
+  extend Dry::Initializer
+
+  option :code, Types::String
 
   # @return [Hash]
   def tokens
@@ -61,6 +62,7 @@ private
     http
   end
 
+  # @return [Hash]
   def jwks
     discovery_url = "#{ENV['GOV_ONE_BASE_URI']}/.well-known/jwks.json"
     uri = URI.parse(discovery_url)

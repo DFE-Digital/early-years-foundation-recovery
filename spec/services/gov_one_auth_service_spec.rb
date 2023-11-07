@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe GovOneAuthService do
   let(:code) { 'mock_code' }
   let(:mock_response) { instance_double('response') }
-  let(:auth_service) { described_class.new(code) }
+  let(:auth_service) { described_class.new(code: code) }
   let(:mock_http) { instance_double('Sentry::Net::HTTP') }
 
   before do
