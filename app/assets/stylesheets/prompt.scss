@@ -1,39 +1,3 @@
-.home-prompt {
-  background: $light-blue;
-  border-top: $color_dfe-secondary-blue solid 10px;
-  margin: govuk-spacing(5) govuk-spacing(0);
-  padding-top: govuk-spacing(-9);
-  padding-bottom: govuk-spacing(5);
-  padding-left: govuk-spacing(2);
-
-  @include govuk-media-query($until: tablet) {
-    margin: govuk-spacing(2);
-    margin-top: govuk-spacing(6);
-  }
-
-  span.fa-stack {
-    background-color: $color_dfe-secondary-blue;
-    color: $color_dfe-secondary-blue;
-    padding: govuk-spacing(1) govuk-spacing(0);
-    top: govuk-spacing(-6);
-
-    .fa-circle {
-      width: 40px;
-    }
-
-    @include govuk-media-query($from: tablet) {
-      left: govuk-spacing(-6);
-    }
-  }
-
-  p, ul, h1, h2, h3 {
-    @include govuk-media-query($from: tablet) {
-      margin-left: calc(2 * govuk-spacing(8));
-    }
-  }
-}
-
-
 .prompt {
   background-color: govuk-colour('light-grey');
   border-top: govuk-colour('turquoise') solid 10px;
@@ -74,6 +38,14 @@
     background-color: lighten(govuk-colour('turquoise'), 50%);
   }
 
+  &.prompt-home {
+    background: $light-blue;
+    border-top: $color_dfe-secondary-blue solid 10px;
+
+    .svg-inline--fa {
+      background-color: $color_dfe-secondary-blue !important;
+    }
+  }
 }
 
 .legend {

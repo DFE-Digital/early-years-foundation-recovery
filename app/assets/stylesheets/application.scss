@@ -140,9 +140,14 @@ pre.code-tip {
     margin: govuk-spacing(2);
   }
 
-  .govuk-button {
-    margin: 0;
+  &.enrol-box {
+    border-radius: 6px;
+
+    .govuk-button {
+      margin: 0;
+    }
   }
+
 }
 
 .float-right {
