@@ -1,6 +1,7 @@
 /*
 https://frontend.design-system.service.gov.uk/sass-api-reference
 https://design.education.gov.uk/design-system/dfe-frontend
+https://design-system.service.gov.uk/styles/colour/
 
 $color_dfe-blue             #003a69 Primary brand colour
 $color_dfe-secondary-blue   #347ca9
@@ -15,8 +16,10 @@ $govuk-page-width: 1200px;
 
 @import 'govuk-frontend/govuk/all';
 @import 'dfe-frontend-alpha/packages/dfefrontend';
-@import 'dfe-header';
 
+$light-blue: tint($color_dfe-secondary-blue, 90%);
+
+@import 'dfe-header';
 @import 'card';
 @import 'prompt';
 @import 'video';
@@ -77,6 +80,14 @@ Hero layout
     margin-top: govuk-spacing(6);
     margin-bottom: govuk-spacing(-4);
   }
+
+  @include govuk-media-query($until: tablet) {
+    .govuk-grid-column-one-half > p,
+    .govuk-grid-column-one-half > h2 {
+      margin-left: govuk-spacing(2);
+      margin-right: govuk-spacing(2);
+    }
+  }
 }
 
 
@@ -86,8 +97,8 @@ Internal
 */
 pre.code-tip {
   padding: 0 5px;
-  color: govuk-colour("red");
-  background-color: govuk-colour("light-grey");
+  color: govuk-colour('red');
+  background-color: govuk-colour('light-grey');
 }
 
 .debug_dump {
@@ -103,7 +114,7 @@ pre.code-tip {
 
 .app-sidebar {
   padding: govuk-spacing(5) govuk-spacing(3);
-  background-color: govuk-colour("light-grey");
+  background-color: govuk-colour('light-grey');
 
   *:last-child {
     margin: 0;
@@ -114,20 +125,24 @@ pre.code-tip {
   font-weight: normal;
 }
 
-.govuk-fieldset__legend {
-  @include govuk-media-query($until: tablet) {
-    display: none;
-  }
-}
-
 .light-grey-box {
   padding: govuk-spacing(5);
   margin-bottom: govuk-spacing(5);
-  background: govuk-colour("light-grey");
+  background: govuk-colour('light-grey');
 
-  .govuk-button {
-    margin: 0;
+  @include govuk-media-query($until: tablet) {
+    margin-top: govuk-spacing(6);
+    margin-bottom: govuk-spacing(6);
   }
+
+  &.enrol-box {
+    border-radius: 6px;
+
+    .govuk-button {
+      margin: 0;
+    }
+  }
+
 }
 
 .float-right {

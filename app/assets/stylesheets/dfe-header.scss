@@ -96,5 +96,18 @@ header #service-name {
 }
 
 .dfe-content-page--header {
-  background: tint($color_dfe-secondary-blue, 90%);
+  background: $light-blue;
+
+  @include govuk-media-query($until: tablet) {
+    padding: govuk-spacing(2);
+  }
+
+  img {
+    max-width: 100%;
+    width: 100%;
+
+    @include govuk-media-query($until: tablet) {
+      padding-top: govuk-spacing(4);
+    }
+  }
 }

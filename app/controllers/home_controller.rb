@@ -1,6 +1,8 @@
 class HomeController < ApplicationController
   before_action :authenticate_registered_user!, only: %i[audit]
 
+  layout 'hero'
+
   def index
     track('home_page')
   end
