@@ -113,11 +113,11 @@ module EarlyYearsFoundationRecovery
     # @return [Boolean]
     def gov_one_login_enabled?
       Types::Params::Bool[ENV.fetch('GOV_ONE_LOGIN_ENABLED', false)]
+    end
 
      # @return [Boolean]
     def maintenance?
       Types::Params::Bool[ENV.fetch('MAINTENANCE', false)]
-
     end
 
     # @return [ActiveSupport::TimeWithZone]
