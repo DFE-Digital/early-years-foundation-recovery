@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.describe 'Registered user changing password', type: :system do
   subject(:user) { create :user, :registered, created_at: 1.month.ago }
 
-  let(:password) { 'StrongPassword12!@' }
+  let(:password) { 'Str0ngPa$$w0rd' }
 
   include_context 'with user'
 
   before do
     visit '/my-account/edit-password'
-    fill_in 'Enter your current password', with: 'StrongPassword12!@'
+    fill_in 'Enter your current password', with: 'Str0ngPa$$w0rd'
     fill_in 'Create a new password', with: password
     fill_in 'Confirm password', with: password
   end
