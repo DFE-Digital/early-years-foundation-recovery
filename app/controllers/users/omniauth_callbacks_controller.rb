@@ -3,7 +3,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # This method is called by Devise after successful Gov One Login authentication
   # @return [nil]
   def openid_connect
-    return error_redirect unless valid_params? || Rails.application.gov_one_login_enabled?
+    return error_redirect unless valid_params? || Rails.application.gov_one_login?
 
     session.delete(:gov_one_auth_state)
 
@@ -17,9 +17,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     gov_one_id = auth_service.decode_id_token(id_token)[0]['sub']
 
     user_info_response = auth_service.user_info(tokens_response['access_token'])
+    email = user_info_response['email']
     return error_redirect unless valid_user_info?(user_info_response)
 
-    gov_user = find_or_create_user(user_info_response['email'], gov_one_id)
+    gov_user = User.find_or_create_from_gov_one(email: email, gov_one_id: gov_one_id)
     sign_in_and_redirect gov_user if gov_user
   end
 
@@ -46,18 +47,6 @@ private
   def error_redirect
     flash[:alert] = 'There was a problem signing in. Please try again.'
     redirect_to root_path
-  end
-
-  # @return [User]
-  def find_or_create_user(email, id)
-    existing_user = User.find_by(email: email) || User.find_by(gov_one_id: id)
-    if existing_user
-      existing_user.update!(email: email)
-      existing_user.update!(gov_one_id: id) if existing_user.gov_one_id.nil?
-    else
-      return User.create_from_gov_one(email: email, gov_one_id: id)
-    end
-    existing_user
   end
 
   # @return [String]

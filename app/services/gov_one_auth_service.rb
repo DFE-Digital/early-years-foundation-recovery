@@ -5,6 +5,8 @@ class GovOneAuthService
 
   option :code, Types::String
 
+  BASE_URL = ENV['GOV_ONE_BASE_URI'].freeze
+
   # @return [Hash]
   def tokens
     http = build_http(token_uri)
@@ -47,11 +49,11 @@ private
 
   # @return [URI]
   def token_uri
-    URI.parse("#{ENV['GOV_ONE_BASE_URI']}/token")
+    URI.parse("#{BASE_URL}/token")
   end
 
   def userinfo_uri
-    URI.parse("#{ENV['GOV_ONE_BASE_URI']}/userinfo")
+    URI.parse("#{BASE_URL}/userinfo")
   end
 
   # @param uri [URI]
@@ -64,7 +66,7 @@ private
 
   # @return [Hash]
   def jwks
-    discovery_url = "#{ENV['GOV_ONE_BASE_URI']}/.well-known/jwks.json"
+    discovery_url = "#{BASE_URL}/.well-known/jwks.json"
     uri = URI.parse(discovery_url)
     http = build_http(uri)
     response = http.request(Net::HTTP::Get.new(uri.path))
@@ -76,7 +78,7 @@ private
     rsa_private = OpenSSL::PKey::RSA.new(Rails.application.config.gov_one_private_key)
 
     payload = {
-      aud: "#{ENV['GOV_ONE_BASE_URI']}/token",
+      aud: "#{BASE_URL}/token",
       iss: Rails.application.config.gov_one_client_id,
       sub: Rails.application.config.gov_one_client_id,
       exp: Time.zone.now.to_i + 5 * 60,
@@ -91,7 +93,7 @@ private
   def token_body
     {
       grant_type: 'authorization_code',
-      code: @code,
+      code: code,
       redirect_uri: ENV['GOV_ONE_REDIRECT_URI'],
       client_assertion_type: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
       client_assertion: jwt_assertion,

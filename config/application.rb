@@ -111,7 +111,7 @@ module EarlyYearsFoundationRecovery
     end
 
     # @return [Boolean]
-    def gov_one_login_enabled?
+    def gov_one_login?
       Types::Params::Bool[ENV.fetch('GOV_ONE_LOGIN_ENABLED', false)]
     end
 

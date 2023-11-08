@@ -12,8 +12,7 @@ module GovOneHelper
       state: state,
     }
 
-    uri = URI.parse("#{ENV['GOV_ONE_BASE_URI']}/authorize")
-    uri.query = URI.encode_www_form(params)
+    uri = uri_constructor('authorize', params)
     "#{uri}&redirect_uri=#{ENV['GOV_ONE_REDIRECT_URI']}"
   end
 
@@ -24,8 +23,15 @@ module GovOneHelper
       state: SecureRandom.uuid,
     }
 
-    uri = URI.parse("#{ENV['GOV_ONE_BASE_URI']}/logout")
-    uri.query = URI.encode_www_form(params)
+    uri = uri_constructor('logout', params)
     "#{uri}&post_logout_redirect_uri=#{ENV['GOV_ONE_LOGOUT_REDIRECT_URI']}"
+  end
+
+private
+
+  def uri_constructor(endpoint, params)
+    uri = URI.parse("#{ENV['GOV_ONE_BASE_URI']}/#{endpoint}")
+    uri.query = URI.encode_www_form(params)
+    uri
   end
 end
