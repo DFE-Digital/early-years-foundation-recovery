@@ -62,6 +62,7 @@ private
     gov_one_uri('userinfo')
   end
 
+  # @param endpoint [String]
   # @return [URI]
   def gov_one_uri(endpoint)
     URI.parse("#{Rails.application.config.gov_one_base_uri}/#{endpoint}")
