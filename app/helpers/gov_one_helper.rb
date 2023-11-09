@@ -30,8 +30,8 @@ module GovOneHelper
 
 private
 
-# @param endpoint [String] the gov one endpoint
-# @param params [Hash] query params
+  # @param endpoint [String] the gov one endpoint
+  # @param params [Hash] query params
   def gov_one_uri(endpoint, params)
     uri = URI.parse("#{ENV['GOV_ONE_BASE_URI']}/#{endpoint}")
     uri.query = URI.encode_www_form(params)
