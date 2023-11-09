@@ -1,11 +1,16 @@
 # Service for interacting with Gov One Login
+# This service is initialised with an authorisation code and can be used to:
+# - exchange an authorisation code for tokens (access and id)
+# - exchange an access token for user info
+# - decode an id token to get the user's gov one id
+#
+# More information on the Gov One Login integration environment can be found here:
+# https://docs.sign-in.service.gov.uk/integrate-with-integration-environment/
 
 class GovOneAuthService
   extend Dry::Initializer
 
   option :code, Types::String
-
-  BASE_URL = ENV['GOV_ONE_BASE_URI'].freeze
 
   # @return [Hash]
   def tokens
@@ -49,11 +54,17 @@ private
 
   # @return [URI]
   def token_uri
-    URI.parse("#{BASE_URL}/token")
+    gov_one_uri('token')
   end
 
+  # @return [URI]
   def userinfo_uri
-    URI.parse("#{BASE_URL}/userinfo")
+    gov_one_uri('userinfo')
+  end
+
+  # @return [URI]
+  def gov_one_uri(endpoint)
+    URI.parse("#{Rails.application.config.gov_one_base_uri}/#{endpoint}")
   end
 
   # @param uri [URI]
@@ -66,8 +77,7 @@ private
 
   # @return [Hash]
   def jwks
-    discovery_url = "#{BASE_URL}/.well-known/jwks.json"
-    uri = URI.parse(discovery_url)
+    uri = gov_one_uri('.well-known/jwks.json')
     http = build_http(uri)
     response = http.request(Net::HTTP::Get.new(uri.path))
     JSON.parse(response.body)
@@ -78,7 +88,7 @@ private
     rsa_private = OpenSSL::PKey::RSA.new(Rails.application.config.gov_one_private_key)
 
     payload = {
-      aud: "#{BASE_URL}/token",
+      aud: token_uri.to_s,
       iss: Rails.application.config.gov_one_client_id,
       sub: Rails.application.config.gov_one_client_id,
       exp: Time.zone.now.to_i + 5 * 60,

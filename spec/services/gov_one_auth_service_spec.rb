@@ -7,9 +7,8 @@ RSpec.describe GovOneAuthService do
   let(:mock_http) { instance_double('Sentry::Net::HTTP') }
 
   before do
-    allow(ENV).to receive(:[]).and_call_original
-    allow(ENV).to receive(:[]).with('GOV_ONE_REDIRECT_URI').and_return('mock_redirect_uri')
-    allow(ENV).to receive(:[]).with('GOV_ONE_BASE_URI').and_return('https://example.com')
+    allow(Rails.application.config).to receive(:gov_one_base_uri).and_return('https://example.com')
+    allow(Rails.application.config).to receive(:gov_one_redirect_uri).and_return('mock_redirect_uri')
     allow(mock_http).to receive(:request).and_return(mock_response)
     allow(Net::HTTP).to receive(:new).and_return(mock_http)
   end

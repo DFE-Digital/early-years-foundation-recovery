@@ -1,4 +1,6 @@
 # Controller handling OmniAuth callbacks for user authentication.
+# This controller uses the GovOneAuthService to retrieve user informaton and create or sign in an user based on the email address or gov one id
+
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # This method is called by Devise after successful Gov One Login authentication
   # @return [nil]

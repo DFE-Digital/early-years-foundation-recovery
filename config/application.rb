@@ -69,6 +69,9 @@ module EarlyYearsFoundationRecovery
     config.contentful_environment             = ENV.fetch('CONTENTFUL_ENVIRONMENT', credentials.dig(:contentful, :environment))
 
     # Gov one
+    config.gov_one_base_uri = ENV.fetch('GOV_ONE_BASE_URI', '#GOV_ONE_BASE_URI_env_var_missing')
+    config.gov_one_redirect_uri = ENV.fetch('GOV_ONE_REDIRECT_URI', '#GOV_ONE_REDIRECT_URI_env_var_missing')
+    config.gov_one_logout_redirect_uri = ENV.fetch('GOV_ONE_LOGOUT_REDIRECT_URI', '#GOV_ONE_LOGOUT_REDIRECT_URI_env_var_missing')
     config.gov_one_private_key = ENV.fetch('GOV_ONE_PRIVATE_KEY', credentials.dig(:gov_one, :private_key))
     config.gov_one_client_id = ENV.fetch('GOV_ONE_CLIENT_ID', credentials.dig(:gov_one, :client_id))
 
@@ -112,7 +115,7 @@ module EarlyYearsFoundationRecovery
 
     # @return [Boolean]
     def gov_one_login?
-      Types::Params::Bool[ENV.fetch('GOV_ONE_LOGIN_ENABLED', false)]
+      Types::Params::Bool[ENV.fetch('GOV_ONE_LOGIN', false)]
     end
 
     # @return [Boolean]
