@@ -6,6 +6,8 @@ on:
   merge_group:
   pull_request:
     paths-ignore:
+      - '.github/workflows/*'
+      - '!.github/workflows/ci.yml'
       - '**/*.md'
       - .docker*
       - .env.example
