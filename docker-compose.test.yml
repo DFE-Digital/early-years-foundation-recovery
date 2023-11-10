@@ -15,7 +15,5 @@ services:
       - BOT_TOKEN=bot_token
       - TIMEOUT_MINUTES=25
       - GOV_ONE_BASE_URI=https://oidc.test.account.gov.uk
-      - GOV_ONE_REDIRECT_URI=http://recovery.app/users/auth/openid_connect/callback
-      - GOV_ONE_LOGOUT_REDIRECT_URI=http://recovery.app/users/sign_out
     tty: true
     stdin_open: true
