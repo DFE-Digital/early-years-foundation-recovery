@@ -114,6 +114,11 @@ en:
     save: Save
     continue: Continue
     cancel: Cancel
+    footer:
+      cookies: Cookies
+      privacy: Privacy policy
+      contact_us: Contact
+      feedback: Feedback
 
   banners:
     alert: Warning
