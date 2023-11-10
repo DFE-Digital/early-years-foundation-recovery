@@ -9,7 +9,7 @@ name: Check WCAG Standards
 on:
   workflow_run:
     workflows:
-      - App Deploy [Azure - DEV]
+      - 'App Deploy [Azure - DEV]'
     branches:
       - main
     types:
