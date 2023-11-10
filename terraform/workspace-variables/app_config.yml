@@ -17,7 +17,7 @@ defaults: &defaults
 production:
   <<: *defaults
   DOMAIN: child-development-training.education.gov.uk
-  TRACKING_ID: GTM-NFZ88TP # Live data
+  TRACKING_ID: GTM-P8TKDFCN # Live data
   HOTJAR_SITE_ID: 3169682
   # jobs
   GOOGLE_CLOUD_BUCKET: eyfs-recovery-production

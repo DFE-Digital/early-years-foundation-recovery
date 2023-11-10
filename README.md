@@ -373,6 +373,15 @@ settings the following classes can be added:
 - `data-hj-suppress` to redact additional user information
 - `data-hj-allow` to allow data that is automatically redacted
 
+
+## Azure
+
+Production console access
+
+- https://eyrecovery-dev.scm.azurewebsites.net/webssh/host
+- https://eyrecovery-stage.scm.azurewebsites.net/webssh/host
+- https://eyrecovery-prod.scm.azurewebsites.net/webssh/host
+
 ---
 
 [app-repo]: https://github.com/DFE-Digital/early-years-foundation-recovery
