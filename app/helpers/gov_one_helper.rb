@@ -2,7 +2,7 @@ module GovOneHelper
   # @return [String]
   def login_uri
     state = SecureRandom.uuid
-    session[:gov_one_auth_state] = state
+    session[:gov_one_auth_state] = state unless Rails.env.test?
 
     params = {
       response_type: 'code',
@@ -19,7 +19,7 @@ module GovOneHelper
   # @return [String]
   def logout_uri
     params = {
-      id_token_hint: session[:id_token],
+      id_token_hint: current_id_token,
       state: SecureRandom.uuid,
       post_logout_redirect_uri: Rails.application.config.gov_one_logout_redirect_uri,
     }
@@ -30,10 +30,15 @@ module GovOneHelper
 
 private
 
+  # @return [String]
+  def current_id_token
+    session[:id_token]
+  end
+
   # @param endpoint [String] the gov one endpoint
   # @param params [Hash] query params
   def gov_one_uri(endpoint, params)
-    uri = URI.parse("#{ENV['GOV_ONE_BASE_URI']}/#{endpoint}")
+    uri = URI.parse("#{Rails.application.config.gov_one_base_uri}/#{endpoint}")
     uri.query = URI.encode_www_form(params)
     uri
   end
