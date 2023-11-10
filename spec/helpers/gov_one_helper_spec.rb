@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe 'GovOneHelper', type: :helper do
-
   describe '#login_uri' do
     subject(:login_uri) { helper.login_uri }
 
