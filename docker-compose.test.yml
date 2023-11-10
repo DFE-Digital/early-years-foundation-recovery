@@ -14,5 +14,8 @@ services:
       - DEBUG=false
       - BOT_TOKEN=bot_token
       - TIMEOUT_MINUTES=25
+      - GOV_ONE_CLIENT_ID=client_id
+      - GOV_ONE_BASE_URI=https://oidc.integration.account.gov.uk
+      - GOV_ONE_REDIRECT_URI=mock_redirect_uri
     tty: true
     stdin_open: true

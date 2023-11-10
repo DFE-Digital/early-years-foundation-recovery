@@ -10,10 +10,10 @@ module GovOneHelper
       client_id: Rails.application.config.gov_one_client_id,
       nonce: SecureRandom.uuid,
       state: state,
+      redirect_uri: Rails.application.config.gov_one_redirect_uri,
     }
 
-    uri = gov_one_uri('authorize', params)
-    "#{uri}&redirect_uri=#{Rails.application.config.gov_one_redirect_uri}"
+    gov_one_uri('authorize', params)
   end
 
   # @return [String]
@@ -24,8 +24,7 @@ module GovOneHelper
       post_logout_redirect_uri: Rails.application.config.gov_one_logout_redirect_uri,
     }
 
-    uri = gov_one_uri('logout', params)
-    "#{uri}&post_logout_redirect_uri=#{Rails.application.config.gov_one_logout_redirect_uri}"
+    gov_one_uri('logout', params)
   end
 
 private
@@ -37,6 +36,7 @@ private
 
   # @param endpoint [String] the gov one endpoint
   # @param params [Hash] query params
+  # @return [URI]
   def gov_one_uri(endpoint, params)
     uri = URI.parse("#{Rails.application.config.gov_one_base_uri}/#{endpoint}")
     uri.query = URI.encode_www_form(params)

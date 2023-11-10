@@ -7,7 +7,7 @@ RSpec.shared_examples 'an unsuccessful request' do
   end
 end
 
-RSpec.shared_examples 'a successful request' do |payload|
+RSpec.shared_examples 'a successful request' do
   it 'returns a hash of user data' do
     allow(mock_response).to receive(:body).and_return(payload.to_json)
     expect(result).to eq(payload)
@@ -21,8 +21,6 @@ RSpec.describe GovOneAuthService do
   let(:mock_http) { instance_double('Sentry::Net::HTTP') }
 
   before do
-    allow(Rails.application.config).to receive(:gov_one_base_uri).and_return('https://example.com')
-    allow(Rails.application.config).to receive(:gov_one_redirect_uri).and_return('mock_redirect_uri')
     allow(mock_http).to receive(:request).and_return(mock_response)
     allow(Net::HTTP).to receive(:new).and_return(mock_http)
   end

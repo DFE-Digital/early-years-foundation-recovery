@@ -4,13 +4,18 @@
 # - exchange an access token for user info
 # - decode an id token to get the user's gov one id
 #
-# More information on the Gov One Login integration environment can be found here:
-# https://docs.sign-in.service.gov.uk/integrate-with-integration-environment/
+# @see https://docs.sign-in.service.gov.uk/integrate-with-integration-environment/
 
 class GovOneAuthService
   extend Dry::Initializer
 
   option :code, Types::String
+
+  GOV_ONE_URIS = {
+    token: '/token',
+    userinfo: '/userinfo',
+    jwk: '/.well-known/jwks.json',
+  }.freeze
 
   # @return [Hash]
   def tokens
@@ -29,6 +34,7 @@ class GovOneAuthService
   # @param access_token [String]
   # @return [Hash]
   def user_info(access_token)
+    userinfo_uri = gov_one_uri(GOV_ONE_URIS[:userinfo])
     http = build_http(userinfo_uri)
 
     userinfo_request = Net::HTTP::Get.new(userinfo_uri.path, { 'Authorization' => "Bearer #{access_token}" })
@@ -54,18 +60,13 @@ private
 
   # @return [URI]
   def token_uri
-    gov_one_uri('token')
-  end
-
-  # @return [URI]
-  def userinfo_uri
-    gov_one_uri('userinfo')
+    gov_one_uri(GOV_ONE_URIS[:token])
   end
 
   # @param endpoint [String]
   # @return [URI]
   def gov_one_uri(endpoint)
-    URI.parse("#{Rails.application.config.gov_one_base_uri}/#{endpoint}")
+    URI.join(Rails.application.config.gov_one_base_uri, endpoint)
   end
 
   # @param uri [URI]
@@ -78,7 +79,7 @@ private
 
   # @return [Hash]
   def jwks
-    uri = gov_one_uri('.well-known/jwks.json')
+    uri = gov_one_uri(GOV_ONE_URIS[:jwk])
     http = build_http(uri)
     response = http.request(Net::HTTP::Get.new(uri.path))
     JSON.parse(response.body)
