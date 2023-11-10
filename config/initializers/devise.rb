@@ -313,7 +313,7 @@ Devise.setup do |config|
     client_options: {
       port: 443,
       scheme: 'https',
-      host: 'oidc.integration.account.gov.uk',
+      host: Rails.application.config.gov_one_base_uri,
       identifier: Rails.application.config.gov_one_client_id,
       redirect_uri: 'users/auth/openid_connect/callback',
     },
