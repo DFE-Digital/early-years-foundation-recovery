@@ -33,10 +33,6 @@ jobs:
       DATABASE_URL: postgres://postgres:password@localhost:5432/test
       DOMAIN: recovery.app
       BOT_TOKEN: bot_token
-      GOV_ONE_CLIENT_ID: client_id
-      GOV_ONE_BASE_URI: https://oidc.integration.account.gov.uk
-      GOV_ONE_REDIRECT_URI: mock_redirect_uri
-
     services:
       postgres:
         image: postgres:15.4-alpine
