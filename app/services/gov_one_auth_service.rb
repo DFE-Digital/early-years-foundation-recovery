@@ -1,29 +1,36 @@
-# Service for interacting with Gov One Login
-# This service is initialised with an authorisation code and can be used to:
+#
 # - exchange an authorisation code for tokens (access and id)
 # - exchange an access token for user info
 # - decode an id token to get the user's gov one id
 #
-# @see https://docs.sign-in.service.gov.uk/integrate-with-integration-environment/
-
+# @see https://docs.sign-in.service.gov.uk/
 class GovOneAuthService
-  extend Dry::Initializer
-
-  option :code, Types::String
-
-  GOV_ONE_URIS = {
-    token: '/token',
-    userinfo: '/userinfo',
-    jwk: '/.well-known/jwks.json',
+  # @return [Hash{Symbol => String}]
+  CALLBACKS = {
+    login: "#{Rails.application.config.service_url}/users/auth/openid_connect/callback",
+    logout: "#{Rails.application.config.service_url}/users/sign_out",
   }.freeze
 
+  # @return [Hash{Symbol => String}]
+  ENDPOINTS = {
+    login: "#{Rails.application.config.gov_one_base_uri}/authorize",
+    logout: "#{Rails.application.config.gov_one_base_uri}/logout",
+    token: "#{Rails.application.config.gov_one_base_uri}/token",
+    userinfo: "#{Rails.application.config.gov_one_base_uri}/userinfo",
+    jwks: "#{Rails.application.config.gov_one_base_uri}/.well-known/jwks.json",
+  }.freeze
+
+  extend Dry::Initializer
+
+  option :code, Types::Strict::String
+
+  # POST /token
   # @return [Hash]
   def tokens
-    http = build_http(token_uri)
-
-    token_request = Net::HTTP::Post.new(token_uri.path, { 'Content-Type' => 'application/x-www-form-urlencoded' })
+    uri, http = build_http(ENDPOINTS[:token])
+    token_request = Net::HTTP::Post.new(uri.path, { 'Content-Type' => 'application/x-www-form-urlencoded' })
     token_request.set_form_data(token_body)
-    token_response = http.request(token_request)
+    token_response = response(token_request, http)
 
     JSON.parse(token_response.body)
   rescue StandardError => e
@@ -31,19 +38,32 @@ class GovOneAuthService
     {}
   end
 
+  # GET /userinfo
   # @param access_token [String]
   # @return [Hash]
   def user_info(access_token)
-    userinfo_uri = gov_one_uri(GOV_ONE_URIS[:userinfo])
-    http = build_http(userinfo_uri)
-
-    userinfo_request = Net::HTTP::Get.new(userinfo_uri.path, { 'Authorization' => "Bearer #{access_token}" })
-    userinfo_response = http.request(userinfo_request)
+    uri, http = build_http(ENDPOINTS[:userinfo])
+    userinfo_request = Net::HTTP::Get.new(uri.path, { 'Authorization' => "Bearer #{access_token}" })
+    userinfo_response = response(userinfo_request, http)
 
     JSON.parse(userinfo_response.body)
   rescue StandardError => e
     Rails.logger.error "GovOneAuthService.user_info: #{e.message}"
     {}
+  end
+
+  # @param request [Net::HTTP::Get, Net::HTTP::Post]
+  # @param http [Net::HTTP]
+  # @return [Net::HTTPResponse]
+  def response(request, http)
+    http.request(request)
+  end
+
+  # @param request [Net::HTTP::Get, Net::HTTP::Post]
+  # @return [Hash]
+  def handle_request(request)
+    response = http.request(request)
+    JSON.parse(response.body)
   end
 
   # @param token [String]
@@ -56,31 +76,20 @@ class GovOneAuthService
     JWT.decode(token, jwk.public_key, true, algorithm: 'ES256')
   end
 
-private
-
-  # @return [URI]
-  def token_uri
-    gov_one_uri(GOV_ONE_URIS[:token])
-  end
-
-  # @param endpoint [String]
-  # @return [URI]
-  def gov_one_uri(endpoint)
-    URI.join(Rails.application.config.gov_one_base_uri, endpoint)
-  end
-
-  # @param uri [URI]
-  # @return [Net::HTTP]
-  def build_http(uri)
+  # @param address [String]
+  # @return [Array<URI::HTTP, Net::HTTP>]
+  def build_http(address)
+    uri = URI.parse(address)
     http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true unless Rails.env.test?
-    http
+    http.use_ssl = true
+    [uri, http]
   end
+
+private
 
   # @return [Hash]
   def jwks
-    uri = gov_one_uri(GOV_ONE_URIS[:jwk])
-    http = build_http(uri)
+    uri, http = build_http(ENDPOINTS[:jwks])
     response = http.request(Net::HTTP::Get.new(uri.path))
     JSON.parse(response.body)
   end
@@ -88,17 +97,19 @@ private
   # @return [String]
   def jwt_assertion
     rsa_private = OpenSSL::PKey::RSA.new(Rails.application.config.gov_one_private_key)
+    JWT.encode jwt_payload, rsa_private, 'RS256'
+  end
 
-    payload = {
-      aud: token_uri.to_s,
+  # @return [Hash]
+  def jwt_payload
+    {
+      aud: ENDPOINTS[:token],
       iss: Rails.application.config.gov_one_client_id,
       sub: Rails.application.config.gov_one_client_id,
       exp: Time.zone.now.to_i + 5 * 60,
       jti: SecureRandom.uuid,
       iat: Time.zone.now.to_i,
     }
-
-    JWT.encode payload, rsa_private, 'RS256'
   end
 
   # @return [Hash]
@@ -106,7 +117,7 @@ private
     {
       grant_type: 'authorization_code',
       code: code,
-      redirect_uri: ENV['GOV_ONE_REDIRECT_URI'],
+      redirect_uri: CALLBACKS[:login],
       client_assertion_type: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
       client_assertion: jwt_assertion,
     }

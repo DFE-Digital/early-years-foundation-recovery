@@ -67,6 +67,12 @@ en:
             password:
               blank: Enter a password.
               too_short: Password must be at least 10 characters. # devise override
+              password_complexity:
+                digit: Password must contain at least 2 digits
+                lower: Password must contain at least 2 lowercase characters
+                upper: Password must contain at least 2 uppercase characters
+                symbol: Password must contain at least 2 special characters or non-alphanumeric characters
+
             password_confirmation:
               confirmation: Sorry, your passwords don't match.
             terms_and_conditions_agreed_at:
@@ -105,10 +111,14 @@ en:
   na: Not applicable
 
   links:
-    change: Change
     save: Save
     continue: Continue
     cancel: Cancel
+    footer:
+      cookies: Cookies
+      privacy: Privacy policy
+      contact_us: Contact
+      feedback: Feedback
 
   banners:
     alert: Warning
@@ -561,15 +571,15 @@ en:
       %{criteria}
 
   # /gov-one/info
-  gov-one:
-    info:
-      title: Gov One Login
-      body: |
-        # Gov One Login
+  gov_one:
+    title: Gov One Login
+    body: |
+      # Gov One Login
 
-        This is some information about Gov One Login... 
-      sign-in-button: Sign in with Gov One Login
-      sign-out-button: Sign out of Gov One Login
+      This is some information about Gov One Login...
+    links:
+      sign_in: Sign in with Gov One Login
+      sign_out: Sign out of Gov One Login
 
   # /settings/cookie-policy
   cookie_policy:

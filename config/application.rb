@@ -32,6 +32,8 @@ module EarlyYearsFoundationRecovery
     end
 
     config.service_name = 'Early years child development training'
+    config.service_url = (Rails.env.production? ? 'https://' : 'http://') + ENV.fetch('DOMAIN', 'child-development-training')
+
     config.internal_mailbox = ENV.fetch('INTERNAL_MAILBOX', 'child-development.training@education.gov.uk')
     config.middleware.use Grover::Middleware
     config.active_record.yaml_column_permitted_classes = [Symbol]
@@ -69,11 +71,9 @@ module EarlyYearsFoundationRecovery
     config.contentful_environment             = ENV.fetch('CONTENTFUL_ENVIRONMENT', credentials.dig(:contentful, :environment))
 
     # Gov one
-    config.gov_one_base_uri = ENV.fetch('GOV_ONE_BASE_URI', '#GOV_ONE_BASE_URI_env_var_missing')
-    config.gov_one_redirect_uri = ENV.fetch('GOV_ONE_REDIRECT_URI', '#GOV_ONE_REDIRECT_URI_env_var_missing')
-    config.gov_one_logout_redirect_uri = ENV.fetch('GOV_ONE_LOGOUT_REDIRECT_URI', '#GOV_ONE_LOGOUT_REDIRECT_URI_env_var_missing')
-    config.gov_one_private_key = ENV.fetch('GOV_ONE_PRIVATE_KEY', credentials.dig(:gov_one, :private_key))
-    config.gov_one_client_id = ENV.fetch('GOV_ONE_CLIENT_ID', credentials.dig(:gov_one, :client_id))
+    config.gov_one_base_uri     = ENV.fetch('GOV_ONE_BASE_URI', credentials.dig(:gov_one, :base_uri))
+    config.gov_one_private_key  = ENV.fetch('GOV_ONE_PRIVATE_KEY', credentials.dig(:gov_one, :private_key))
+    config.gov_one_client_id    = ENV.fetch('GOV_ONE_CLIENT_ID', credentials.dig(:gov_one, :client_id))
 
     # @return [Boolean]
     def live?

@@ -25,16 +25,14 @@ class User < ApplicationRecord
   # @param gov_one_id [String]
   # @return [User]
   def self.find_or_create_from_gov_one(email:, gov_one_id:)
-    existing_user = find_by(email: email) || find_by(gov_one_id: gov_one_id)
-
-    if existing_user
-      existing_user.update!(email: email)
-      existing_user.update!(gov_one_id: gov_one_id) if existing_user.gov_one_id.nil?
+    if (user = find_by(email: email) || find_by(gov_one_id: gov_one_id))
+      user.update!(email: email)
+      user.update!(gov_one_id: gov_one_id) if user.gov_one_id.nil?
     else
-      existing_user = new(email: email, gov_one_id: gov_one_id, confirmed_at: Time.zone.now)
-      existing_user.save!(validate: false)
+      user = new(email: email, gov_one_id: gov_one_id, confirmed_at: Time.zone.now)
+      user.save!(validate: false)
     end
-    existing_user
+    user
   end
 
   # Include default devise modules. Others available are:

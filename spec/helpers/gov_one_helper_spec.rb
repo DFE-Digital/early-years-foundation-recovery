@@ -1,42 +1,39 @@
 require 'rails_helper'
 
-RSpec.describe GovOneHelper do
-  let(:class_instance) { Class.new { include GovOneHelper }.new }
-
-  before do
-    allow(Rails.application.config).to receive(:gov_one_logout_redirect_uri).and_return('mock_logout_redirect_uri')
-  end
-
-  describe '#gov_one_uri' do
-    it 'constructs the URI with correct parameters' do
-      endpoint = 'authorize'
-      params = { response_type: 'code', scope: 'email openid', client_id: 'client_id' }
-
-      uri = class_instance.send(:gov_one_uri, endpoint, params)
-
-      expect(uri.to_s).to eq('https://oidc.integration.account.gov.uk/authorize?response_type=code&scope=email+openid&client_id=client_id')
-    end
-  end
-
+describe 'GovOneHelper', type: :helper do
   describe '#login_uri' do
-    it 'constructs the URI with correct parameters' do
-      uri = class_instance.login_uri
+    subject(:login_uri) { helper.login_uri }
 
-      expect(uri.to_s).to include('https://oidc.integration.account.gov.uk/authorize')
-      expect(uri.query).to include('response_type=code', 'scope=email+openid', 'client_id=client_id', 'redirect_uri=mock_redirect_uri')
+    it 'returns a URI object with the correct host and path' do
+      expect(login_uri.host).to eq 'oidc.test.account.gov.uk'
+      expect(login_uri.path).to eq '/authorize'
+    end
+
+    it 'encodes the authorize endpoint params' do
+      expect(login_uri.query).to start_with 'response_type=code&scope=email+openid&client_id='
+      expect(login_uri.query).to end_with '&redirect_uri=http%3A%2F%2Frecovery.app%2Fusers%2Fauth%2Fopenid_connect%2Fcallback'
     end
   end
 
   describe '#logout_uri' do
-    before do
-      allow(class_instance).to receive(:current_id_token).and_return('mock_id_token')
+    subject(:logout_uri) { helper.logout_uri }
+
+    it 'returns a URI object with the correct host and path' do
+      expect(logout_uri.host).to eq 'oidc.test.account.gov.uk'
+      expect(logout_uri.path).to eq '/logout'
     end
 
+<<<<<<< HEAD
     it 'constructs the URI with correct parameters' do
       uri = class_instance.logout_uri
 
       expect(uri.to_s).to include('https://oidc.integration.account.gov.uk/logout')
       expect(uri.query).to include('id_token_hint=mock_id_token', 'state=', 'post_logout_redirect_uri=mock_logout_redirect_uri')
+=======
+    it 'encodes the logout endpoint params' do
+      expect(logout_uri.query).to start_with 'id_token_hint&state='
+      expect(logout_uri.query).to end_with '&post_logout_redirect_uri=http%3A%2F%2Frecovery.app%2Fusers%2Fsign_out'
+>>>>>>> gov-one-refactor
     end
   end
 end

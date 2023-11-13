@@ -313,6 +313,11 @@ The status of GovUK notify can be checked here: <https://status.notifications.se
 For more information the Notify team can be contacted here: <https://www.notifications.service.gov.uk/support>,
 or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
+---
+
+# One Login
+
+<https://signin.integration.account.gov.uk/sign-in-or-create>
 
 ---
 
@@ -367,6 +372,15 @@ identifiable information should be redacted. In order to override the default
 settings the following classes can be added:
 - `data-hj-suppress` to redact additional user information
 - `data-hj-allow` to allow data that is automatically redacted
+
+
+## Azure
+
+Production console access
+
+- https://eyrecovery-dev.scm.azurewebsites.net/webssh/host
+- https://eyrecovery-stage.scm.azurewebsites.net/webssh/host
+- https://eyrecovery-prod.scm.azurewebsites.net/webssh/host
 
 ---
 

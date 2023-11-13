@@ -14,8 +14,7 @@
 #     }
 #   ]
 #
-protocol = Rails.env.production? ? 'https://' : 'http://'
-SitemapGenerator::Sitemap.default_host = protocol + ENV['DOMAIN']
+SitemapGenerator::Sitemap.default_host = Rails.application.config.service_url
 SitemapGenerator::Sitemap.compress = false
 
 # Run this command to update /public/sitemap.xml

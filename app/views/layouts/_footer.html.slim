@@ -7,13 +7,13 @@
             = govuk_link_to page.heading, static_path(page.name), class: 'govuk-footer__link'
 
         li.govuk-footer__list-item
-          = govuk_link_to 'Cookies', '/settings/cookie-policy', class: 'govuk-footer__link'
+          = govuk_link_to t('links.footer.cookies'), '/settings/cookie-policy', class: 'govuk-footer__link'
 
         li.govuk-footer__list-item
-          = govuk_link_to 'Privacy Policy', Rails.configuration.privacy_policy_url, class: 'govuk-footer__link', target: '_blank'
+          = govuk_link_to t('links.footer.privacy'), Rails.configuration.privacy_policy_url, class: 'govuk-footer__link', target: '_blank'
 
         li.govuk-footer__list-item
-          = govuk_link_to 'Contact', Rails.application.credentials.contact_us, class: 'govuk-footer__link', target: '_blank'
+          = govuk_link_to t('links.footer.contact_us'), Rails.application.credentials.contact_us, class: 'govuk-footer__link', target: '_blank'
 
         li.govuk-footer__list-item
-          = govuk_link_to 'Feedback', Rails.configuration.feedback_url, class: 'govuk-footer__link', target: '_blank'
+          = govuk_link_to t('links.footer.feedback'), Rails.configuration.feedback_url, target: '_blank', class: 'govuk-footer__link'

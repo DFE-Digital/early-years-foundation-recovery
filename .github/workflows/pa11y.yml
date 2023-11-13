@@ -9,7 +9,7 @@ name: Check WCAG Standards
 on:
   workflow_run:
     workflows:
-      - Deploy Development App
+      - 'App Deploy [Azure - DEV]'
     branches:
       - main
     types:
@@ -34,7 +34,7 @@ jobs:
         uses: actions/checkout@v4
       -
         name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18.x
           cache: npm
