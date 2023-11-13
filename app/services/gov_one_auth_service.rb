@@ -30,7 +30,7 @@ class GovOneAuthService
     uri, http = build_http(ENDPOINTS[:token])
     token_request = Net::HTTP::Post.new(uri.path, { 'Content-Type' => 'application/x-www-form-urlencoded' })
     token_request.set_form_data(token_body)
-    token_response = http.request(token_request)
+    token_response = response(token_request, http)
 
     JSON.parse(token_response.body)
   rescue StandardError => e
@@ -44,12 +44,26 @@ class GovOneAuthService
   def user_info(access_token)
     uri, http = build_http(ENDPOINTS[:userinfo])
     userinfo_request = Net::HTTP::Get.new(uri.path, { 'Authorization' => "Bearer #{access_token}" })
-    userinfo_response = http.request(userinfo_request)
+    userinfo_response = response(userinfo_request, http)
 
     JSON.parse(userinfo_response.body)
   rescue StandardError => e
     Rails.logger.error "GovOneAuthService.user_info: #{e.message}"
     {}
+  end
+
+  # @param request [Net::HTTP::Get, Net::HTTP::Post]
+  # @param http [Net::HTTP]
+  # @return [Net::HTTPResponse]
+  def response(request, http)
+    http.request(request)
+  end
+
+  # @param request [Net::HTTP::Get, Net::HTTP::Post]
+  # @return [Hash]
+  def handle_request(request)
+    response = http.request(request)
+    JSON.parse(response.body)
   end
 
   # @param token [String]
@@ -62,16 +76,16 @@ class GovOneAuthService
     JWT.decode(token, jwk.public_key, true, algorithm: 'ES256')
   end
 
-private
-
   # @param address [String]
   # @return [Array<URI::HTTP, Net::HTTP>]
   def build_http(address)
     uri = URI.parse(address)
     http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true unless Rails.env.test?
+    http.use_ssl = true
     [uri, http]
   end
+
+private
 
   # @return [Hash]
   def jwks
@@ -83,8 +97,12 @@ private
   # @return [String]
   def jwt_assertion
     rsa_private = OpenSSL::PKey::RSA.new(Rails.application.config.gov_one_private_key)
+    JWT.encode jwt_payload, rsa_private, 'RS256'
+  end
 
-    payload = {
+  # @return [Hash]
+  def jwt_payload
+    {
       aud: ENDPOINTS[:token],
       iss: Rails.application.config.gov_one_client_id,
       sub: Rails.application.config.gov_one_client_id,
@@ -92,8 +110,6 @@ private
       jti: SecureRandom.uuid,
       iat: Time.zone.now.to_i,
     }
-
-    JWT.encode payload, rsa_private, 'RS256'
   end
 
   # @return [Hash]

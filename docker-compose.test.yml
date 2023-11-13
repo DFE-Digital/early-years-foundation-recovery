@@ -14,6 +14,5 @@ services:
       - DEBUG=false
       - BOT_TOKEN=bot_token
       - TIMEOUT_MINUTES=25
-      - GOV_ONE_BASE_URI=https://oidc.test.account.gov.uk
     tty: true
     stdin_open: true
