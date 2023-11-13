@@ -8,13 +8,7 @@
     = m('gov_one.body')
 
     - if current_user
-<<<<<<< HEAD
-      = govuk_button_link_to t('gov-one-info.sign-out-button'), logout_uri.to_s
-    - else
-      = govuk_button_link_to t('gov-one-info.sign-in-button'), login_uri.to_s
-=======
       = govuk_button_link_to t('gov_one.links.sign_out'), logout_uri.to_s
     - else
       = govuk_button_link_to t('gov_one.links.sign_in'), login_uri.to_s
->>>>>>> gov-one-refactor
   

@@ -23,17 +23,9 @@ describe 'GovOneHelper', type: :helper do
       expect(logout_uri.path).to eq '/logout'
     end
 
-<<<<<<< HEAD
-    it 'constructs the URI with correct parameters' do
-      uri = class_instance.logout_uri
-
-      expect(uri.to_s).to include('https://oidc.integration.account.gov.uk/logout')
-      expect(uri.query).to include('id_token_hint=mock_id_token', 'state=', 'post_logout_redirect_uri=mock_logout_redirect_uri')
-=======
     it 'encodes the logout endpoint params' do
       expect(logout_uri.query).to start_with 'id_token_hint&state='
       expect(logout_uri.query).to end_with '&post_logout_redirect_uri=http%3A%2F%2Frecovery.app%2Fusers%2Fsign_out'
->>>>>>> gov-one-refactor
     end
   end
 end
