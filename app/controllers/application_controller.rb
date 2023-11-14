@@ -70,9 +70,9 @@ private
 
   # @return [Boolean]
   def maintenance?
-    return false if request.path != '/health'
+    return false if request.path.eql?('/maintenance') || request.path.eql?('/health')
 
-    Rails.application.maintenance? && request.path != '/maintenance'
+    Rails.application.maintenance?
   end
 
   def maintenance_page
