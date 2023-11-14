@@ -9,7 +9,7 @@ namespace :eyfs do
     unless User.find_by(email: "#{bot_token}@example.com")
       User.create!(
         email: "#{bot_token}@example.com",
-        password: ENV.fetch('USER_PASSWORD', 'StrongPassword'),
+        password: ENV.fetch('USER_PASSWORD', 'Str0ngPa$$w0rd'),
         confirmed_at: Time.zone.now,
         terms_and_conditions_agreed_at: Time.zone.now,
         first_name: 'Bot',

@@ -1,5 +1,10 @@
 #section-intro-panel {
   padding: govuk-spacing(7);
+
+  @include govuk-media-query($until: tablet) {
+    padding: govuk-spacing(6);
+  }
+
   background-color: govuk-colour('light-grey');
   border-radius: 6px;
 
@@ -19,5 +24,20 @@
       background-color: $color_dfe-secondary-blue;
     }
   }
-}
 
+  .blockquote-container {
+    blockquote.quote {
+      &:before {
+        background-color: govuk-colour('light-grey');
+      }
+    }
+  }
+
+  .govuk-grid-row {
+    @include govuk-media-query($until: tablet) {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+  }
+
+}

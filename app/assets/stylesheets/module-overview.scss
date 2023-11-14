@@ -1,4 +1,5 @@
 $icon-diameter: 36px;
+$line-shift: calc(($icon-diameter + 1px) / 2);
 $progress-bar-container-width: 81px;
 
 .module-overview-section-break {
@@ -54,10 +55,10 @@ $progress-bar-container-width: 81px;
     border-left: 1px solid govuk-colour('mid-grey');
     position: relative;
     z-index: 1;
-    right: 7.5px + ($icon-diameter + 1px)/2;
+    right: $line-shift + 7.5px;
     
     @include govuk-media-query($from: tablet) {
-      right: 10px + ($icon-diameter + 1px)/2;
+      right: $line-shift + 10px;
     }
   }
 

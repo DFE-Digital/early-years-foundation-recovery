@@ -9,7 +9,7 @@ name: Check WCAG Standards
 on:
   workflow_run:
     workflows:
-      - Deploy Development App
+      - 'App Deploy [Azure - DEV]'
     branches:
       - main
     types:
@@ -17,23 +17,24 @@ on:
   workflow_dispatch:
     inputs:
       workspace:
-        description: Deployment workspace to test against (staging, dev, pr-xxx)
+        description: Deployment workspace to test against (staging, dev, review-pr-xxx)
         type: string
         default: staging
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    environment: development
     env:
-      BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-      DOMAIN: ey-recovery-${{ inputs.workspace || 'dev' }}.london.cloudapps.digital
+      BOT_TOKEN: ${{ secrets.WEBAPP_CONFIG_BOT_TOKEN }}
+      DOMAIN: eyrecovery-${{ inputs.workspace || 'dev' }}.azurewebsites.net
     steps:
       -
         name: Checkout Code
         uses: actions/checkout@v4
       -
         name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18.x
           cache: npm

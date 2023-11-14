@@ -7,3 +7,6 @@
 
   #progress-inactive
     #progress-active style="width: #{section_bar.percentage}"
+
+- if Rails.application.preview?
+  = govuk_link_to 'Edit in Contentful', "https://app.contentful.com/spaces/#{Rails.application.config.contentful_space}/environments/#{Rails.application.config.contentful_environment}/entries/#{content.id}"

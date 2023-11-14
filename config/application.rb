@@ -51,6 +51,7 @@ module EarlyYearsFoundationRecovery
 
     config.bot_token = ENV['BOT_TOKEN']
     config.feedback_url = ENV.fetch('FEEDBACK_URL', '#FEEDBACK_URL_env_var_missing')
+    config.privacy_policy_url = 'https://www.gov.uk/government/publications/privacy-information-members-of-the-public/privacy-information-members-of-the-public'
     config.google_analytics_tracking_id = ENV.fetch('TRACKING_ID', '#TRACKING_ID_env_var_missing')
     config.hotjar_site_id = ENV.fetch('HOTJAR_SITE_ID', '#HOTJAR_SITE_ID_env_var_missing')
 
@@ -92,28 +93,22 @@ module EarlyYearsFoundationRecovery
       Types::Params::Bool[ENV.fetch('DASHBOARD_UPDATE', true)]
     end
 
-    # TODO: refactor to use coerced type post CMS release
-    #
-    # CI workflow uses DELIVERY
-    # CMS validation workflow uses PREVIEW then DELIVERY
-    #
     # @see ContentfulRails.configuration.enable_preview_domain
     # @see ContentfulModel.use_preview_api
     #
     # @return [Boolean]
     def preview?
-      if Rails.env.test? && ENV['CONTENTFUL_PREVIEW'].blank?
-        false
-      elsif ENV['CONTENTFUL_PREVIEW'].present?
-        true
-      else
-        false
-      end
+      Dry::Types['params.bool'][ENV.fetch('CONTENTFUL_PREVIEW', false)]
     end
 
     # @return [Boolean]
     def debug?
       Types::Params::Bool[ENV.fetch('DEBUG', false)]
+    end
+
+    # @return [Boolean]
+    def maintenance?
+      Types::Params::Bool[ENV.fetch('MAINTENANCE', false)]
     end
 
     # @return [ActiveSupport::TimeWithZone]

@@ -82,7 +82,7 @@ variable "paas_web_app_start_timeout" {
 # Background Jobs
 
 variable "paas_worker_app_start_command" {
-  default = "bundle exec que"
+  default = "que"
 }
 
 variable "paas_worker_app_memory" {

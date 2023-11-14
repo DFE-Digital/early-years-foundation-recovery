@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'User following forgotten password process' do
   let(:user) { create :user, :confirmed }
   let(:token) { user.send_reset_password_instructions }
-  let(:password) { 'ABCDE123xyh' }
+  let(:password) { 'ABCDE123xyh!@' }
 
   context 'when choosing a new password' do
     before do
@@ -12,7 +12,7 @@ RSpec.describe 'User following forgotten password process' do
 
     # Happy path scenario
     context 'and new password meets criteria' do
-      let(:password) { 'NewPassword123' }
+      let(:password) { 'NewPassword12!@' }
 
       it 'flash message displays correctly' do
         fill_in 'New password', with: password
@@ -39,8 +39,8 @@ RSpec.describe 'User following forgotten password process' do
     end
 
     context "and password and confirm password don't match" do
-      let(:password) { 'NewPassword123' }
-      let(:confirm_password) { 'NewPassword456' }
+      let(:password) { 'NewPassword12!@' }
+      let(:confirm_password) { 'NewPassword45!@' }
 
       it 'displays error message' do
         fill_in 'New password', with: password

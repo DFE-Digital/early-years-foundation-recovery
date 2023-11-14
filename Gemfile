@@ -132,3 +132,6 @@ group :ui do
   gem 'selenium-webdriver'
   gem 'site_prism'
 end
+
+gem 'devise-pwned_password', '~> 0.1.10'
+gem 'devise-security', '~> 0.18.0'

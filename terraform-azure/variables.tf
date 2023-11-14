@@ -146,6 +146,16 @@ variable "reviewapp_name" {
   type        = string
 }
 
+variable "reviewapp_config_contentful_environment" {
+  default = null
+  type    = string
+}
+
+variable "reviewapp_config_contentful_preview" {
+  default = null
+  type    = string
+}
+
 variable "webapp_database_url" {
   description = "URL to the Database"
   type        = string
@@ -177,6 +187,11 @@ variable "webapp_docker_image_tag" {
 variable "custom_domain_name" {
   description = "Custom domain hostname"
   type        = string
+}
+
+variable "webapp_config_user_password" {
+  type      = string
+  sensitive = true
 }
 
 variable "webapp_config_bot_token" {
