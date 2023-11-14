@@ -22,7 +22,7 @@ production:
   # jobs
   GOOGLE_CLOUD_BUCKET: eyfs-recovery-production
   # DASHBOARD_UPDATE: false
-  MAINTENANCE: true
+  MAINTENANCE_PAGE: true
 
 # ey-recovery-staging
 staging:
