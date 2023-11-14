@@ -120,7 +120,7 @@ module EarlyYearsFoundationRecovery
 
     # @return [Boolean]
     def maintenance?
-      Types::Params::Bool[ENV.fetch('MAINTENANCE', false)]
+      Types::Params::Bool[ENV.fetch('MAINTENANCE', true)] && !live?
     end
 
     # @return [ActiveSupport::TimeWithZone]
