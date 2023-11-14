@@ -58,3 +58,4 @@ content:
   #
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
+  MAINTENANCE_PAGE: true
