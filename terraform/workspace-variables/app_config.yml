@@ -22,7 +22,6 @@ production:
   # jobs
   GOOGLE_CLOUD_BUCKET: eyfs-recovery-production
   # DASHBOARD_UPDATE: false
-  MAINTENANCE_PAGE: true
 
 # ey-recovery-staging
 staging:
@@ -58,4 +57,4 @@ content:
   #
   # @see .github/workflows/content.yml
   # DOMAIN: xxx.london.cloudapps.digital
-  MAINTENANCE_PAGE: true
+  SERVICE_DOWN: true
