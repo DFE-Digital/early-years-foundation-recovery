@@ -1,14 +1,26 @@
-= render 'learning/cms_debug'
-
 - content_for :page_title do
-  = html_title t('gov_one.title')
+  = html_title t('home.title')
+
+- content_for :hero do
+  .govuk-grid-row class='govuk-!-padding-top-9 govuk-!-padding-bottom-0'
+    .govuk-grid-column-three-quarters
+      h1.dfe-heading-xl class='govuk-!-margin-bottom-4'
+        = t('gov-one-info.hero-header')
+      p.govuk-body-l = t('gov-one-info.hero-body')
+
 
 .govuk-grid-row
-  .govuk-grid-column-one-half
-    = m('gov_one.body')
+  .govuk-grid-column-three-quarters
+    . class='govuk-!-margin-bottom-5'
+        = m('gov-one-info.body')
+        hr
 
-    - if current_user
-      = govuk_button_link_to t('gov_one.links.sign_out'), logout_uri.to_s
-    - else
-      = govuk_button_link_to t('gov_one.links.sign_in'), login_uri.to_s
+    = govuk_button_link_to t('gov-one-info.sign-int-button'), login_uri
+
+    details.govuk-details class='govuk-!-margin-top-6' data-module='govuk-details'
+        summary.govuk-details__summary
+          span.govuk-details__summary-text
+            | How to access an existing training account
+        .govuk-details__text
+          | If you have an existing early years child development training account but you do not yet have a GOV.UK One Login, you must use the same email address for both accounts. This will ensure that any progress you have made through the training is retained.
   
