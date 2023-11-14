@@ -19,9 +19,8 @@ services:
       # app config
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
       - RAILS_ENV=development
-      - DOMAIN=localhost:3000 # put back to app
+      - DOMAIN=app:3000
       - RAILS_SERVE_STATIC_FILES=true
-      - GOV_ONE_BASE_URI=https://oidc.integration.account.gov.uk
     volumes:
       - .:/srv
     tty: true

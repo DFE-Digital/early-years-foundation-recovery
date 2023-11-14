@@ -56,27 +56,46 @@ RSpec.describe GovOneAuthService do
   end
 
   describe 'CALLBACKS' do
-    it 'returns a frozen hash of callbacks urls' do
-      expect(described_class::CALLBACKS).to eq({
-        login: 'http://recovery.app/users/auth/openid_connect/callback',
-        logout: 'http://recovery.app/users/sign_out',
-      })
+    subject(:callbacks) { described_class::CALLBACKS }
 
-      expect(described_class::CALLBACKS).to be_frozen
+    specify 'callbacks' do
+      expect(callbacks).to be_frozen
+    end
+
+    specify 'login' do
+      expect(callbacks[:login]).to eq 'http://recovery.app/users/auth/openid_connect/callback'
+    end
+
+    specify 'logout' do
+      expect(callbacks[:logout]).to eq 'http://recovery.app/users/sign_out'
     end
   end
 
   describe 'ENDPOINTS' do
-    it 'returns a frozen hash of endpoints urls' do
-      expect(described_class::ENDPOINTS).to eq({
-        login: 'https://oidc.test.account.gov.uk/authorize',
-        logout: 'https://oidc.test.account.gov.uk/logout',
-        token: 'https://oidc.test.account.gov.uk/token',
-        userinfo: 'https://oidc.test.account.gov.uk/userinfo',
-        jwks: 'https://oidc.test.account.gov.uk/.well-known/jwks.json',
-      })
+    subject(:endpoints) { described_class::ENDPOINTS }
 
-      expect(described_class::ENDPOINTS).to be_frozen
+    specify 'endpoints' do
+      expect(endpoints).to be_frozen
+    end
+
+    specify 'login' do
+      expect(endpoints[:login]).to eq 'https://oidc.test.account.gov.uk/authorize'
+    end
+
+    specify 'logout' do
+      expect(endpoints[:logout]).to eq 'https://oidc.test.account.gov.uk/logout'
+    end
+
+    specify 'token' do
+      expect(endpoints[:token]).to eq 'https://oidc.test.account.gov.uk/token'
+    end
+
+    specify 'userinfo' do
+      expect(endpoints[:userinfo]).to eq 'https://oidc.test.account.gov.uk/userinfo'
+    end
+
+    specify 'jwks' do
+      expect(endpoints[:jwks]).to eq 'https://oidc.test.account.gov.uk/.well-known/jwks.json'
     end
   end
 
@@ -96,8 +115,8 @@ RSpec.describe GovOneAuthService do
 
     it 'returns a hash of correct jwt payload' do
       expect(jwt_payload[:aud]).to eq('https://oidc.test.account.gov.uk/token')
-      expect(jwt_payload[:iss]).to be_a(String)
-      expect(jwt_payload[:sub]).to be_a(String)
+      expect(jwt_payload[:iss]).to eq('some_client_id')
+      expect(jwt_payload[:sub]).to eq('some_client_id')
       expect(jwt_payload[:exp]).to be_between(Time.zone.now.to_i + 4 * 60, Time.zone.now.to_i + 6 * 60)
       expect(jwt_payload[:jti]).to be_a(String)
       expect(jwt_payload[:iat]).to be_a(Integer)

@@ -206,4 +206,39 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '.find_or_create_from_gov_one' do
+    let(:email) { 'test@test.com' }
+    let(:gov_one_id) { '123' }
+
+    context 'when user exists with email but no gov_one_id' do
+      let!(:user) { create(:user, email: email) }
+
+      it 'updates the user gov_one_id' do
+        described_class.find_or_create_from_gov_one(email: email, gov_one_id: gov_one_id)
+        expect(user.reload.gov_one_id).to eq(gov_one_id)
+      end
+    end
+
+    context 'when user exists with gov_one_id' do
+      let!(:user) { create(:user, gov_one_id: gov_one_id) }
+
+      it 'updates the user email' do
+        described_class.find_or_create_from_gov_one(email: email, gov_one_id: gov_one_id)
+        expect(user.reload.email).to eq(email)
+      end
+    end
+
+    context 'when user does not exist' do
+      let(:email) { 'some_new_email@test.com' }
+      let(:gov_one_id) { '321' }
+
+      it 'creates a new user' do
+        described_class.find_or_create_from_gov_one(email: email, gov_one_id: gov_one_id)
+        expect(described_class.count).to eq(1)
+        expect(described_class.first.email).to eq(email)
+        expect(described_class.first.gov_one_id).to eq(gov_one_id)
+      end
+    end
+  end
 end

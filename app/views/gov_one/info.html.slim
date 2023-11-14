@@ -8,7 +8,7 @@
     = m('gov_one.body')
 
     - if current_user
-      = govuk_button_link_to t('gov_one.links.sign_out'), logout_uri.to_s
+      = logout_button
     - else
-      = govuk_button_link_to t('gov_one.links.sign_in'), login_uri.to_s
+      = login_button
   
