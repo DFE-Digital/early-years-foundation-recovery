@@ -17,19 +17,17 @@ module EarlyYearsFoundationRecovery
     # @see ErrorsController
     config.exceptions_app = routes
 
+    config.generators do |g|
+      g.test_framework :rspec
+    end
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
     # config.eager_load_paths << Rails.root.join("extras")
-
-    # causes log colting error when deploying a review app in GPaaS
     # config.time_zone = ENV.fetch('TZ', 'Europe/London')
-
-    config.generators do |g|
-      g.test_framework :rspec
-    end
 
     config.service_name = 'Early years child development training'
     config.internal_mailbox = ENV.fetch('INTERNAL_MAILBOX', 'child-development.training@education.gov.uk')
@@ -38,12 +36,12 @@ module EarlyYearsFoundationRecovery
     config.action_view.sanitized_allowed_tags = ALLOWED_TAGS
 
     # Background Jobs
-    config.active_job.queue_adapter = :que
+    config.active_job.queue_adapter               = :que
     config.action_mailer.deliver_later_queue_name = :default
-    config.action_mailbox.queues.incineration = :default
-    config.action_mailbox.queues.routing = :default
-    config.active_storage.queues.analysis = :default
-    config.active_storage.queues.purge = :default
+    config.action_mailbox.queues.incineration     = :default
+    config.action_mailbox.queues.routing          = :default
+    config.active_storage.queues.analysis         = :default
+    config.active_storage.queues.purge            = :default
 
     config.google_cloud_bucket = ENV.fetch('GOOGLE_CLOUD_BUCKET', '#GOOGLE_CLOUD_BUCKET_env_var_missing')
     config.dashboard_update_interval = ENV.fetch('DASHBOARD_UPDATE_INTERVAL', '0 0 * * *') # Midnight daily
@@ -70,27 +68,7 @@ module EarlyYearsFoundationRecovery
 
     # @return [Boolean]
     def live?
-      ENV['WORKSPACE'].eql?('production')
-    end
-
-    # @return [Boolean]
-    def candidate?
-      ENV['WORKSPACE'].eql?('staging')
-    end
-
-    # @return [Boolean]
-    def main?
-      ENV['WORKSPACE'].eql?('development')
-    end
-
-    # @return [Boolean]
-    def review?
-      ENV['WORKSPACE'].eql?('content')
-    end
-
-    # @return [Boolean] Upload to CSV files to the dashboard
-    def dashboard?
-      Types::Params::Bool[ENV.fetch('DASHBOARD_UPDATE', true)]
+      ENV['WORKSPACE'].eql?('production') || ENV['ENVIRONMENT'].eql?('production')
     end
 
     # @see ContentfulRails.configuration.enable_preview_domain
@@ -99,6 +77,11 @@ module EarlyYearsFoundationRecovery
     # @return [Boolean]
     def preview?
       Dry::Types['params.bool'][ENV.fetch('CONTENTFUL_PREVIEW', false)]
+    end
+
+    # @return [Boolean] Upload to CSV files to the dashboard
+    def dashboard?
+      Types::Params::Bool[ENV.fetch('DASHBOARD_UPDATE', true)]
     end
 
     # @return [Boolean]
@@ -110,7 +93,6 @@ module EarlyYearsFoundationRecovery
     def maintenance?
       Types::Params::Bool[ENV.fetch('MAINTENANCE', false)]
     end
-
     # @return [ActiveSupport::TimeWithZone]
     def public_beta_launch_date
       Time.zone.local(2023, 2, 9, 15, 0, 0)
