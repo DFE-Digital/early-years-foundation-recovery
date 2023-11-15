@@ -71,9 +71,9 @@ module EarlyYearsFoundationRecovery
     config.contentful_environment             = ENV.fetch('CONTENTFUL_ENVIRONMENT', credentials.dig(:contentful, :environment))
 
     # Gov one
-    config.gov_one_base_uri     = ENV.fetch('GOV_ONE_BASE_URI', credentials.dig(:gov_one, :base_uri))
-    config.gov_one_private_key  = ENV.fetch('GOV_ONE_PRIVATE_KEY', credentials.dig(:gov_one, :private_key))
-    config.gov_one_client_id    = ENV.fetch('GOV_ONE_CLIENT_ID', credentials.dig(:gov_one, :client_id))
+    config.gov_one_base_uri     = credentials.dig(:gov_one, :base_uri)
+    config.gov_one_private_key  = credentials.dig(:gov_one, :private_key)
+    config.gov_one_client_id    = credentials.dig(:gov_one, :client_id)
 
     # @return [Boolean]
     def live?
@@ -115,7 +115,7 @@ module EarlyYearsFoundationRecovery
 
     # @return [Boolean]
     def gov_one_login?
-      Types::Params::Bool[ENV.fetch('GOV_ONE_LOGIN', true)] && !live?
+      Types::Params::Bool[ENV.fetch('GOV_ONE_LOGIN', false)] || !live?
     end
 
     # @return [Boolean]

@@ -26,8 +26,9 @@ class User < ApplicationRecord
   # @return [User]
   def self.find_or_create_from_gov_one(email:, gov_one_id:)
     if (user = find_by(email: email) || find_by(gov_one_id: gov_one_id))
-      user.update!(email: email)
-      user.update!(gov_one_id: gov_one_id) if user.gov_one_id.nil?
+      user.update_column(:email, email)
+      user.update_column(:gov_one_id, gov_one_id) if user.gov_one_id.nil?
+      user.save!
     else
       user = new(email: email, gov_one_id: gov_one_id, confirmed_at: Time.zone.now)
       user.save!(validate: false)

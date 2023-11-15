@@ -5,8 +5,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # This method is called by Devise after successful Gov One Login authentication
   # @return [nil]
   def openid_connect
-    return error_redirect unless valid_params? || Rails.application.gov_one_login?
-
     session.delete(:gov_one_auth_state)
 
     auth_service = GovOneAuthService.new(code: params['code'])

@@ -12,7 +12,7 @@ module GovOneHelper
 
     session[:gov_one_auth_state] = params[:state]
 
-    gov_one_uri(:login, params)
+    gov_one_uri(:login, params).to_s
   end
 
   # @return [String]
@@ -23,7 +23,12 @@ module GovOneHelper
       post_logout_redirect_uri: GovOneAuthService::CALLBACKS[:logout],
     }
 
-    gov_one_uri(:logout, params)
+    gov_one_uri(:logout, params).to_s
+  end
+
+  # @return [String]
+  def login_button
+    govuk_button_link_to t('gov-one-info.sign-in-button'), login_uri
   end
 
 private
