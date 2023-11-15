@@ -8,8 +8,7 @@ name: Check WCAG Standards
 
 on:
   workflow_run:
-    workflows:
-      - 'App Deploy [Azure - DEV]'
+    workflows: ["App Deploy [Azure - STAGE]"]
     branches:
       - main
     types:
@@ -17,9 +16,9 @@ on:
   workflow_dispatch:
     inputs:
       workspace:
-        description: Deployment workspace to test against (staging, dev, review-pr-xxx)
+        description: Deployment workspace to test against (stage, dev, review-pr-xxx)
         type: string
-        default: staging
+        default: stage
 
 jobs:
   test:
@@ -27,7 +26,7 @@ jobs:
     environment: development
     env:
       BOT_TOKEN: ${{ secrets.WEBAPP_CONFIG_BOT_TOKEN }}
-      DOMAIN: eyrecovery-${{ inputs.workspace || 'dev' }}.azurewebsites.net
+      DOMAIN: eyrecovery-${{ inputs.workspace || 'stage' }}.azurewebsites.net
     steps:
       -
         name: Checkout Code
