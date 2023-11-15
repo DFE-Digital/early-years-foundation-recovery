@@ -17,10 +17,11 @@
 
     = govuk_button_link_to t('gov-one-info.sign-in-button'), login_uri
 
-    details.govuk-details class='govuk-!-margin-top-6 govuk-!-margin-bottom-9' data-module='govuk-details'
-        summary.govuk-details__summary
-          span.govuk-details__summary-text
-            | How to access an existing training account
-        .govuk-details__text
-          | If you have an existing early years child development training account but you do not yet have a GOV.UK One Login, you must use the same email address for both accounts. This will ensure that any progress you have made through the training is retained.
+. class='govuk-!-margin-top-6 govuk-!-margin-bottom-9'
+  details.govuk-details data-module='govuk-details'
+      summary.govuk-details__summary
+        span.govuk-details__summary-text
+          = t('gov-one-info.details-summary')
+      .govuk-details__text
+        = t('gov-one-info.details-text')
   
