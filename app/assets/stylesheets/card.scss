@@ -9,7 +9,7 @@ Progress bar
 }
 
 .bar-progress {
-  height: 10px;
+  height: 8px;
   top: 10px;
   border-radius: 4px;
 }
@@ -42,6 +42,7 @@ Progress bar
 
 .card-container img {
   max-width: 100%;
+  margin-bottom: govuk-spacing(1);
 }
 
 .card {
@@ -54,6 +55,9 @@ Progress bar
   }
 
   &-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 40px);
     padding: govuk-spacing(4);
 
     .card-progress-bar {
