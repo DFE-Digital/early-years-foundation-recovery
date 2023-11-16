@@ -7,22 +7,22 @@
 #   https://ey-recovery-dev.london.cloudapps.digital
 #
 name: Deploy Development App
-# on:
-#   workflow_dispatch:
-#   push:
-#     branches:
-#       - main
-#     paths-ignore:
-#       - '**/*.md'
-#       - .docker*
-#       - .env.example
-#       - .gitignore
-#       - .pa11yci
-#       - .tool-versions
-#       - .yardopts
-#       - bin/*
-#       - docker-compose.*
-#       - uml/*
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**/*.md'
+      - .docker*
+      - .env.example
+      - .gitignore
+      - .pa11yci
+      - .tool-versions
+      - .yardopts
+      - bin/*
+      - docker-compose.*
+      - uml/*
 
 jobs:
   deploy:
