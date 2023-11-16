@@ -1,36 +1,39 @@
 module GovOneHelper
-  # @return [String]
+  # @return [URI]
   def login_uri
     params = {
+      redirect_uri: GovOneAuthService::CALLBACKS[:login],
+      client_id: Rails.application.config.gov_one_client_id,
       response_type: 'code',
       scope: 'email openid',
-      client_id: Rails.application.config.gov_one_client_id,
       nonce: SecureRandom.uuid,
       state: SecureRandom.uuid,
     }
 
     session[:gov_one_auth_state] = params[:state]
 
-    "#{gov_one_uri(:login, params)}&redirect_uri=#{GovOneAuthService::CALLBACKS[:login]}"
+    gov_one_uri(:login, params)
   end
 
-  # @return [String]
+  # @return [URI]
   def logout_uri
     params = {
+      post_logout_redirect_uri: GovOneAuthService::CALLBACKS[:logout],
       id_token_hint: session[:id_token],
       state: SecureRandom.uuid,
     }
-    "#{gov_one_uri(:logout, params)}&post_logout_redirect_uri=#{GovOneAuthService::CALLBACKS[:logout]}"
+
+    gov_one_uri(:logout, params)
   end
 
   # @return [String]
   def login_button
-    govuk_button_link_to t('gov-one-info.sign-in-button'), login_uri
+    govuk_button_link_to t('gov-one-info.sign-in-button'), login_uri.to_s
   end
 
   # @return [String]
   def logout_button
-    govuk_button_link_to t('gov-one-info.sign-out-button'), logout_uri
+    govuk_button_link_to t('gov-one-info.sign-out-button'), logout_uri.to_s
   end
 
 private
