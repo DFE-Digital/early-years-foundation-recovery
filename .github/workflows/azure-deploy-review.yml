@@ -20,11 +20,12 @@ on:
       - terraform-azure
       - uml/*
 
-# Permissions for OIDC authentication
+# Permissions for OIDC authentication and URL comment step
 permissions:
   id-token: write
   contents: write
   packages: write
+  pull-requests: write
 
 env:
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}

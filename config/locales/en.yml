@@ -272,6 +272,10 @@ en:
   # /my-learning
   my_learning:
     title: My modules
+    progress:
+      percentage: "Your progress: %{num}"
+      viewed: You have read %{num} pages
+      remaining: Only %{num} pages remaining
 
   my_learning_log:
     title: Learning log
