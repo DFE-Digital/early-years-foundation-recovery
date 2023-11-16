@@ -111,7 +111,7 @@ module "app-worker" {
   app_worker_docker_image          = var.webapp_docker_image
   app_worker_docker_image_tag      = var.webapp_docker_image_tag
   app_worker_docker_registry       = "ghcr.io"
-  app_worker_startup_command       = ["bundle", "exec", "que"]
+  app_worker_startup_command       = ["que"]
   depends_on                       = [module.network, module.database]
 }
 

@@ -9,25 +9,25 @@
 #   https://ey-recovery-pr-123.london.cloudapps.digital
 #
 name: Deploy Content App
-# on:
-#   pull_request:
-#     # branches:
-#     #   - main
-#     types:
-#       - labeled
-#       - synchronize
-#     paths-ignore:
-#       - '**/*.md'
-#       - .docker*
-#       - .env.example
-#       - .gitignore
-#       - .pa11yci
-#       - .tool-versions
-#       - .yardopts
-#       - bin/*
-#       - docker-compose.*
-#       - Dockerfile
-#       - terraform
+on:
+  pull_request:
+    # branches:
+    #   - main
+    types:
+      - labeled
+      - synchronize
+    paths-ignore:
+      - '**/*.md'
+      - .docker*
+      - .env.example
+      - .gitignore
+      - .pa11yci
+      - .tool-versions
+      - .yardopts
+      - bin/*
+      - docker-compose.*
+      - Dockerfile
+      - terraform
 
 jobs:
   deploy:

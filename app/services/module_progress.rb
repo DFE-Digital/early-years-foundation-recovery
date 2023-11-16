@@ -119,8 +119,6 @@ protected
     (unvisited.first.id..unvisited.last.id).count != unvisited.map(&:id).count
   end
 
-private
-
   # @return [Array<Module::Content>]
   def visited
     mod.content.select { |item| visited?(item) }
@@ -130,6 +128,8 @@ private
   def unvisited
     mod.content.reject { |item| visited?(item) }
   end
+
+private
 
   # @param method [Symbol]
   # @param items [Array<Module::Content>]
