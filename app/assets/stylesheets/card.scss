@@ -54,6 +54,9 @@ Progress bar
   }
 
   &-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 40px);
     padding: govuk-spacing(4);
 
     .card-progress-bar {
