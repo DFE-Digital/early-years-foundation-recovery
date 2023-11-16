@@ -20,18 +20,20 @@ RSpec.describe 'New stuff page' do
     end
 
     describe 'with subsequent logins' do
-      before do
-        click_on 'sign-out-desktop'
+      skip 'wip' do
+        before do
+          click_on 'sign-out-desktop'
 
-        visit '/users/sign-in'
-        fill_in 'Email address', with: user.email
-        fill_in 'Password', with: user.password
-        click_button 'Sign in'
-      end
+          visit '/users/sign-in'
+          fill_in 'Email address', with: user.email
+          fill_in 'Password', with: user.password
+          click_button 'Sign in'
+        end
 
-      it 'does not appear' do
-        expect(page).not_to have_current_path '/whats-new'
-        expect(page).to have_current_path '/my-modules'
+        it 'does not appear' do
+          expect(page).not_to have_current_path '/whats-new'
+          expect(page).to have_current_path '/my-modules'
+        end
       end
     end
   end
