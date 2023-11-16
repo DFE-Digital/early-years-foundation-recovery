@@ -24,7 +24,7 @@ describe 'GovOneHelper', type: :helper do
 
     it 'returns a button link to the gov one login uri' do
       expect(login_button).to include 'govuk-button'
-      expect(login_button).to include 'Sign in with Gov One Login'
+      expect(login_button).to include 'Continue to GOV.UK One Login'
       expect(login_button).to include 'href="https://oidc.test.account.gov.uk/authorize?response_type=code&amp;scope=email+openid&amp;client_id=some_client_id&'
     end
   end
