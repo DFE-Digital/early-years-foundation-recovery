@@ -211,7 +211,7 @@ RSpec.describe User, type: :model do
     let(:email) { 'test@test.com' }
     let(:gov_one_id) { '123' }
 
-    context 'when user exists with email but no gov_one_id' do
+    context 'with an existing user having an email but no gov_one_id' do
       let!(:user) { create(:user, email: email) }
 
       it 'updates the user gov_one_id' do
@@ -220,7 +220,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context 'when user exists with gov_one_id' do
+    context 'with an existing user having a gov_one_id' do
       let!(:user) { create(:user, gov_one_id: gov_one_id) }
 
       it 'updates the user email' do
@@ -229,7 +229,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context 'when user does not exist' do
+    context 'without an existing user' do
       let(:email) { 'some_new_email@test.com' }
       let(:gov_one_id) { '321' }
 

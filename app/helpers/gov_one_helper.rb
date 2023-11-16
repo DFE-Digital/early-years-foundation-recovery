@@ -7,12 +7,11 @@ module GovOneHelper
       client_id: Rails.application.config.gov_one_client_id,
       nonce: SecureRandom.uuid,
       state: SecureRandom.uuid,
-      redirect_uri: GovOneAuthService::CALLBACKS[:login],
     }
 
     session[:gov_one_auth_state] = params[:state]
 
-    gov_one_uri(:login, params).to_s
+    "#{gov_one_uri(:login, params)}&redirect_uri=#{GovOneAuthService::CALLBACKS[:login]}"
   end
 
   # @return [String]
@@ -20,10 +19,8 @@ module GovOneHelper
     params = {
       id_token_hint: session[:id_token],
       state: SecureRandom.uuid,
-      post_logout_redirect_uri: GovOneAuthService::CALLBACKS[:logout],
     }
-
-    gov_one_uri(:logout, params).to_s
+    "#{gov_one_uri(:logout, params)}&post_logout_redirect_uri=#{GovOneAuthService::CALLBACKS[:logout]}"
   end
 
   # @return [String]

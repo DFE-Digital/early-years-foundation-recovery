@@ -18,4 +18,5 @@ completed@example.com:
   setting_type: Childminder as part of an agency
   role_type: Childminder
   early_years_emails: true
+  training_emails: true
   registration_complete: true
