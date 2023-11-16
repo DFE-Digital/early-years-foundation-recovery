@@ -574,17 +574,6 @@ en:
 
       %{criteria}
 
-  # /gov-one/info
-  gov_one:
-    title: Gov One Login
-    body: |
-      # Gov One Login
-
-      This is some information about Gov One Login...
-    links:
-      sign_in: Sign in with Gov One Login
-      sign_out: Sign out of Gov One Login
-
   # /settings/cookie-policy
   cookie_policy:
     title: Cookie policy
