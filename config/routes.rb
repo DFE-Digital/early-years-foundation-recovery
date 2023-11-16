@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   get 'my-modules', to: 'learning#show' # @see User#course
   get 'about-training', to: 'training/modules#index', as: :course_overview
-  get 'gov-one/info', to: 'gov_one#info', as: :gov_one_info
+  get 'gov-one/info', to: 'gov_one#info'
 
   get '/404', to: 'errors#not_found', via: :all
   get '/422', to: 'errors#unprocessable_entity', via: :all
