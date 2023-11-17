@@ -97,11 +97,6 @@ module EarlyYearsFoundationRecovery
     end
 
     # @return [Boolean]
-    def gov_one_login?
-      Types::Params::Bool[ENV.fetch('GOV_ONE_LOGIN', false)] || !live?
-    end
-
-    # @return [Boolean]
     def maintenance?
       Types::Params::Bool[ENV.fetch('MAINTENANCE', false)]
     end

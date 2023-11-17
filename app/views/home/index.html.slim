@@ -20,4 +20,7 @@
       = m('home.prompt', headings_start_with: 'xl')
 
 - unless current_user
-  = render 'cta'
+    .govuk-button-group
+    = govuk_button_link_to gov_one_info_path, class: "govuk-button--start" do
+      | #{t('home.gov_one_button')}
+      = render 'chevron'

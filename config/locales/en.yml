@@ -532,6 +532,7 @@ en:
       ## Return to your training
 
       Sign in to continue learning, see your progress and download certificates.
+    gov_one_button: Start your training now
 
   # /about-training
   about:
@@ -571,6 +572,16 @@ en:
       This module covers:
 
       %{criteria}
+
+  # /gov-one/info
+  gov_one_info:
+    title: Gov One Info
+    hero_header: How to access this training course
+    hero_body: This service uses GOV.UK One Login which is managed by the Government Digital Service.
+    body: You will be asked to sign in to your account, or create a One Login account, in this service
+    sign_in_button: Continue to GOV.UK One Login
+    details_summary: How to access an existing training account
+    details_text: If you have an existing early years child development training account but you do not yet have a GOV.UK One Login, you must use the same email address for both accounts. This will ensure that any progress you have made through the training is retained.
 
   # /settings/cookie-policy
   cookie_policy:
