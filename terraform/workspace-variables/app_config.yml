@@ -14,6 +14,7 @@ defaults: &defaults
   EDITOR: vi
   # Service Down
   MAINTENANCE: true
+  DASHBOARD_UPDATE: false
 
 # ey-recovery
 production:
@@ -23,7 +24,6 @@ production:
   HOTJAR_SITE_ID: 3169682
   # jobs
   GOOGLE_CLOUD_BUCKET: eyfs-recovery-production
-  # DASHBOARD_UPDATE: false
 
 # ey-recovery-staging
 staging:
@@ -35,7 +35,6 @@ staging:
   CONTENTFUL_PREVIEW: true
   # jobs
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-staging
-  DASHBOARD_UPDATE: false
 
 # ey-recovery-dev
 development:
@@ -46,13 +45,11 @@ development:
   CONTENTFUL_PREVIEW: true
   # jobs
   GOOGLE_CLOUD_BUCKET: eyfs-data-dashboard-development
-  DASHBOARD_UPDATE: false
 
 # ey-recovery-content
 content:
   <<: *defaults
   # jobs
-  DASHBOARD_UPDATE: false
   # DASHBOARD_UPDATE_INTERVAL: '*/5 * * * *' # every 5 mins (default: daily at noon)
   # cms
   CONTENTFUL_ENVIRONMENT: training
