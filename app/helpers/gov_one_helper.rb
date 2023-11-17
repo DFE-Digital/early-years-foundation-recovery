@@ -28,12 +28,12 @@ module GovOneHelper
 
   # @return [String]
   def login_button
-    govuk_button_link_to t('gov-one-info.sign-in-button'), login_uri.to_s
+    govuk_button_link_to t('gov_one_info.sign_in_button'), login_uri.to_s
   end
 
   # @return [String]
   def logout_button
-    govuk_button_link_to t('gov-one-info.sign-out-button'), logout_uri.to_s
+    govuk_button_link_to t('gov_one_info.sign_out_button'), logout_uri.to_s
   end
 
 private
