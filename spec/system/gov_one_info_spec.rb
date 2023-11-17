@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Gov One Info' do
-  context 'when the user is not logged in' do
+  context 'with an unauthenticated visitor' do
     before do
       visit '/gov-one/info'
     end
@@ -15,15 +15,14 @@ RSpec.describe 'Gov One Info' do
 
     it 'has the correct login link' do
       link = find_link('Continue to GOV.UK One Login')
-      expect(link[:href]).to start_with('https://oidc.test.account.gov.uk/authorize?response_type=code&scope=email+openid&client_id=some_client_id')
-      expect(link[:href]).to end_with('&redirect_uri=http%3A%2F%2Frecovery.app%2Fusers%2Fauth%2Fopenid_connect%2Fcallback')
+      expect(link[:href]).to start_with('https://oidc.test.account.gov.uk/authorize?redirect_uri=http%3A%2F%2Frecovery.app%2Fusers%2Fauth%2Fopenid_connect%2Fcallback&client_id=some_client_id&response_type=code&scope=email+openid&nonce=')
     end
   end
 
-  context 'when the user is logged in' do
+  context 'with an authenticated user' do
     include_context 'with user'
 
-    it 'they are redirected to the my modules page' do
+    it 'redirects to the my modules page' do
       visit '/gov-one/info'
       expect(page).to have_current_path('/my-modules')
     end
