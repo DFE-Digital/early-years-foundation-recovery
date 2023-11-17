@@ -91,25 +91,23 @@ RSpec.describe GovOneAuthService do
   describe 'OIDC endpoints' do
     subject(:endpoints) { described_class::ENDPOINTS }
 
-    # opportunity to add more detail and use specs for documentation on exactly what each endpoint
-    # is for in the description text
-    specify 'login' do
+    specify 'login endpoint for starting gov one user session and redirecting back to service' do
       expect(endpoints[:login]).to eq 'https://oidc.test.account.gov.uk/authorize'
     end
 
-    specify 'logout' do
+    specify 'logout endpoint for ending gov one user session and redirecting back to service' do
       expect(endpoints[:logout]).to eq 'https://oidc.test.account.gov.uk/logout'
     end
 
-    specify 'token' do
+    specify 'token endpoint for retrieving user access token and id token' do
       expect(endpoints[:token]).to eq 'https://oidc.test.account.gov.uk/token'
     end
 
-    specify 'userinfo' do
+    specify 'userinfo endpoint for retrieving user email' do
       expect(endpoints[:userinfo]).to eq 'https://oidc.test.account.gov.uk/userinfo'
     end
 
-    specify 'jwks' do
+    specify 'jwks endpoint for retrieving public key for verifying user id token' do
       expect(endpoints[:jwks]).to eq 'https://oidc.test.account.gov.uk/.well-known/jwks.json'
     end
   end

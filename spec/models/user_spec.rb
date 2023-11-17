@@ -208,33 +208,40 @@ RSpec.describe User, type: :model do
   end
 
   describe '.find_or_create_from_gov_one' do
+    subject(:find_or_create) { described_class.find_or_create_from_gov_one(email: email, gov_one_id: gov_one_id) }
+
     let(:email) { 'test@test.com' }
     let(:gov_one_id) { '123' }
+    let(:user) { create(:user) }
 
     context 'with an existing user having an email but no gov_one_id' do
-      let!(:user) { create(:user, email: email) }
+      before do
+        user.update_column(:email, email)
+        find_or_create
+      end
 
       it 'updates the user gov_one_id' do
-        described_class.find_or_create_from_gov_one(email: email, gov_one_id: gov_one_id)
         expect(user.reload.gov_one_id).to eq(gov_one_id)
       end
     end
 
     context 'with an existing user having a gov_one_id' do
-      let!(:user) { create(:user, gov_one_id: gov_one_id) }
+      before do
+        user.update_column(:gov_one_id, gov_one_id)
+        find_or_create
+      end
 
       it 'updates the user email' do
-        described_class.find_or_create_from_gov_one(email: email, gov_one_id: gov_one_id)
         expect(user.reload.email).to eq(email)
       end
     end
 
     context 'without an existing user' do
-      let(:email) { 'some_new_email@test.com' }
-      let(:gov_one_id) { '321' }
+      before do
+        find_or_create
+      end
 
       it 'creates a new user' do
-        described_class.find_or_create_from_gov_one(email: email, gov_one_id: gov_one_id)
         expect(described_class.count).to eq(1)
         expect(described_class.first.email).to eq(email)
         expect(described_class.first.gov_one_id).to eq(gov_one_id)
