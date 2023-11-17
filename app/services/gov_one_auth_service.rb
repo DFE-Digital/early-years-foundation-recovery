@@ -59,13 +59,6 @@ class GovOneAuthService
     http.request(request)
   end
 
-  # @param request [Net::HTTP::Get, Net::HTTP::Post]
-  # @return [Hash]
-  def handle_request(request)
-    response = http.request(request)
-    JSON.parse(response.body)
-  end
-
   # @param token [String]
   # @return [Array<Hash>]
   def decode_id_token(token)

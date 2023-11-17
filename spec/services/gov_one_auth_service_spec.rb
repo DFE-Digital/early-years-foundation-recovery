@@ -8,25 +8,24 @@ RSpec.describe GovOneAuthService do
 
   before do
     allow(auth_service).to receive(:response).and_return(mock_response)
+    allow(mock_response).to receive(:body).and_return(payload.to_json)
   end
 
   describe '#tokens' do
     let(:result) { auth_service.tokens }
 
-    context 'when the request is successful' do
+    context 'when successful' do
       it 'returns a hash of tokens' do
-        allow(mock_response).to receive(:body).and_return(payload.to_json)
-
         expect(result).to eq(payload)
         expect(auth_service).to have_received(:response).with(an_instance_of(Net::HTTP::Post), an_instance_of(Net::HTTP))
       end
     end
 
-    context 'when the request is unsuccessful' do
-      it 'returns an empty hash' do
-        allow(mock_response).to receive(:body).and_return({}.to_json)
+    context 'when unsuccessful' do
+      let(:payload) { {} }
 
-        expect(result).to eq({})
+      it 'returns an empty hash' do
+        expect(result).to eq(payload)
         expect(auth_service).to have_received(:response).with(an_instance_of(Net::HTTP::Post), an_instance_of(Net::HTTP))
       end
     end
@@ -36,66 +35,20 @@ RSpec.describe GovOneAuthService do
     let(:access_token) { 'mock_access_token' }
     let(:result) { auth_service.user_info(access_token) }
 
-    context 'when the request is successful' do
+    context 'when successful' do
       it 'returns a hash of user info' do
-        allow(mock_response).to receive(:body).and_return(payload.to_json)
-
         expect(result).to eq(payload)
         expect(auth_service).to have_received(:response).with(an_instance_of(Net::HTTP::Get), an_instance_of(Net::HTTP))
       end
     end
 
-    context 'when the request is unsuccessful' do
-      it 'returns an empty hash' do
-        allow(mock_response).to receive(:body).and_return({}.to_json)
+    context 'when unsuccessful' do
+      let(:payload) { {} }
 
-        expect(result).to eq({})
+      it 'returns an empty hash' do
+        expect(result).to eq(payload)
         expect(auth_service).to have_received(:response).with(an_instance_of(Net::HTTP::Get), an_instance_of(Net::HTTP))
       end
-    end
-  end
-
-  describe 'CALLBACKS' do
-    subject(:callbacks) { described_class::CALLBACKS }
-
-    specify 'callbacks' do
-      expect(callbacks).to be_frozen
-    end
-
-    specify 'login' do
-      expect(callbacks[:login]).to eq 'http://recovery.app/users/auth/openid_connect/callback'
-    end
-
-    specify 'logout' do
-      expect(callbacks[:logout]).to eq 'http://recovery.app/users/sign_out'
-    end
-  end
-
-  describe 'ENDPOINTS' do
-    subject(:endpoints) { described_class::ENDPOINTS }
-
-    specify 'endpoints' do
-      expect(endpoints).to be_frozen
-    end
-
-    specify 'login' do
-      expect(endpoints[:login]).to eq 'https://oidc.test.account.gov.uk/authorize'
-    end
-
-    specify 'logout' do
-      expect(endpoints[:logout]).to eq 'https://oidc.test.account.gov.uk/logout'
-    end
-
-    specify 'token' do
-      expect(endpoints[:token]).to eq 'https://oidc.test.account.gov.uk/token'
-    end
-
-    specify 'userinfo' do
-      expect(endpoints[:userinfo]).to eq 'https://oidc.test.account.gov.uk/userinfo'
-    end
-
-    specify 'jwks' do
-      expect(endpoints[:jwks]).to eq 'https://oidc.test.account.gov.uk/.well-known/jwks.json'
     end
   end
 
@@ -114,12 +67,50 @@ RSpec.describe GovOneAuthService do
     let(:jwt_payload) { auth_service.send(:jwt_payload) }
 
     it 'returns a hash of correct jwt payload' do
-      expect(jwt_payload[:aud]).to eq('https://oidc.test.account.gov.uk/token')
-      expect(jwt_payload[:iss]).to eq('some_client_id')
-      expect(jwt_payload[:sub]).to eq('some_client_id')
+      expect(jwt_payload[:aud]).to eq 'https://oidc.test.account.gov.uk/token'
+      expect(jwt_payload[:iss]).to eq 'some_client_id'
+      expect(jwt_payload[:sub]).to eq 'some_client_id'
       expect(jwt_payload[:exp]).to be_between(Time.zone.now.to_i + 4 * 60, Time.zone.now.to_i + 6 * 60)
-      expect(jwt_payload[:jti]).to be_a(String)
-      expect(jwt_payload[:iat]).to be_a(Integer)
+      expect(jwt_payload[:jti]).to be_a String
+      expect(jwt_payload[:iat]).to be_a Integer
+    end
+  end
+
+  describe 'Internal callbacks' do
+    subject(:callbacks) { described_class::CALLBACKS }
+
+    specify 'login' do
+      expect(callbacks[:login]).to eq 'http://recovery.app/users/auth/openid_connect/callback'
+    end
+
+    specify 'logout' do
+      expect(callbacks[:logout]).to eq 'http://recovery.app/users/sign_out'
+    end
+  end
+
+  describe 'OIDC endpoints' do
+    subject(:endpoints) { described_class::ENDPOINTS }
+
+    # opportunity to add more detail and use specs for documentation on exactly what each endpoint
+    # is for in the description text
+    specify 'login' do
+      expect(endpoints[:login]).to eq 'https://oidc.test.account.gov.uk/authorize'
+    end
+
+    specify 'logout' do
+      expect(endpoints[:logout]).to eq 'https://oidc.test.account.gov.uk/logout'
+    end
+
+    specify 'token' do
+      expect(endpoints[:token]).to eq 'https://oidc.test.account.gov.uk/token'
+    end
+
+    specify 'userinfo' do
+      expect(endpoints[:userinfo]).to eq 'https://oidc.test.account.gov.uk/userinfo'
+    end
+
+    specify 'jwks' do
+      expect(endpoints[:jwks]).to eq 'https://oidc.test.account.gov.uk/.well-known/jwks.json'
     end
   end
 end
