@@ -7,16 +7,16 @@ RSpec.describe 'Front page' do
     it 'logged in content' do
       visit '/'
       expect(page).to have_text 'Learn more'
-      expect(page).not_to have_text 'Learn more and enrol'
-      expect(page).not_to have_text 'Sign in to continue learning'
+      expect(page).not_to have_text 'Learn more about this training'
+      expect(page).not_to have_text 'Start your training now'
     end
   end
 
   context 'with an unauthenticated visitor' do
     it 'log in content' do
       visit '/'
-      expect(page).to have_text('Learn more and enrol')
-        .and have_text('Sign in to continue learning')
+      expect(page).to have_text('Learn more about this training')
+        .and have_text('Start your training now')
     end
   end
 end
