@@ -38,6 +38,15 @@ class GovOneAuthService
     {}
   end
 
+  # @param token [String]
+  # @param nonce [String]
+  # @return [Boolean]
+  def valid_id_token?(token, nonce)
+    token['iss'] == "#{Rails.application.config.gov_one_base_uri}/" &&
+      token['aud'] == Rails.application.config.gov_one_client_id &&
+      token['nonce'] == nonce
+  end
+
   # GET /userinfo
   # @param access_token [String]
   # @return [Hash]
@@ -66,7 +75,7 @@ class GovOneAuthService
     key_params = jwks['keys'].find { |key| key['kid'] == kid }
     jwk = JWT::JWK.new(key_params)
 
-    JWT.decode(token, jwk.public_key, true, algorithm: 'ES256')
+    JWT.decode(token, jwk.public_key, true, { verify_iat: true, algorithm: 'ES256' })
   end
 
   # @param address [String]
@@ -81,10 +90,17 @@ class GovOneAuthService
 private
 
   # @return [Hash]
+  def fetch_and_cache_jwks
+    Rails.cache.fetch('jwks', expires_in: 24.hours) do
+      uri, http = build_http(ENDPOINTS[:jwks])
+      response = http.request(Net::HTTP::Get.new(uri.path))
+      JSON.parse(response.body)
+    end
+  end
+
+  # @return [Hash]
   def jwks
-    uri, http = build_http(ENDPOINTS[:jwks])
-    response = http.request(Net::HTTP::Get.new(uri.path))
-    JSON.parse(response.body)
+    @jwks ||= fetch_and_cache_jwks
   end
 
   # @return [String]

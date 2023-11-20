@@ -18,6 +18,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
     allow(auth_service).to receive(:user_info).and_return({ 'email' => email })
     allow(auth_service).to receive(:jwt_assertion).and_return('mock_jwt_assertion')
     allow(auth_service).to receive(:decode_id_token).and_return([{ 'sub' => 'mock_sub' }])
+    allow(auth_service).to receive(:valid_id_token?).and_return(true)
   end
 
   context 'with a new user' do
