@@ -6,6 +6,8 @@ on:
   merge_group:
   pull_request:
     paths-ignore:
+      - '.github/workflows/*'
+      - '!.github/workflows/ci.yml'
       - '**/*.md'
       - .docker*
       - .env.example
@@ -62,7 +64,7 @@ jobs:
         run: bundle install --jobs 20 --retry 3
       -
         name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18.x
           cache: npm

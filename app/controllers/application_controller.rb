@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   around_action :set_time_zone
 
+  before_action :maintenance_page, if: :maintenance?
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_analytics_tracking_id,
                 :set_hotjar_site_id,
@@ -66,6 +67,17 @@ class ApplicationController < ActionController::Base
   end
 
 private
+
+  # @return [Boolean] health check and landing page requests are exempt
+  def maintenance?
+    return false if %w[/maintenance /health].include?(request.path)
+
+    Rails.application.maintenance?
+  end
+
+  def maintenance_page
+    redirect_to static_path('maintenance')
+  end
 
   def set_time_zone(&block)
     Time.use_zone(ENV['TZ'], &block)

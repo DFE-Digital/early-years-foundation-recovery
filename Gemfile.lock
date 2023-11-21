@@ -135,6 +135,11 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-pwned_password (0.1.10)
+      devise (~> 4)
+      pwned (~> 2.0.0)
+    devise-security (0.18.0)
+      devise (>= 4.3.0)
     dibber (0.7.0)
     diff-lcs (1.5.0)
     digest-crc (0.6.5)
@@ -174,7 +179,7 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    faker (3.2.1)
+    faker (3.2.2)
       i18n (>= 1.8.11, < 2)
     faraday (2.7.11)
       base64
@@ -276,7 +281,7 @@ GEM
     language_server-protocol (3.17.0.3)
     launchy (2.5.2)
       addressable (~> 2.8)
-    loofah (2.21.3)
+    loofah (2.21.4)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     mail (2.8.1)
@@ -288,7 +293,7 @@ GEM
     matrix (0.4.2)
     method_source (1.0.0)
     mini_mime (1.1.5)
-    mini_portile2 (2.8.4)
+    mini_portile2 (2.8.5)
     minitest (5.20.0)
     msgpack (1.7.2)
     multi_json (1.15.0)
@@ -339,6 +344,7 @@ GEM
     public_suffix (5.0.3)
     puma (6.4.0)
       nio4r (~> 2.0)
+    pwned (2.0.2)
     que (2.2.1)
     que-scheduler (4.4.0)
       activesupport (>= 5.0)
@@ -346,7 +352,7 @@ GEM
       hashie (>= 3, < 6)
       que (>= 0.14, < 3.0.0)
     raabro (1.4.0)
-    racc (1.7.1)
+    racc (1.7.3)
     rack (2.2.8)
     rack-test (2.1.0)
       rack (>= 1.3)
@@ -384,7 +390,7 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
-    rake (13.0.6)
+    rake (13.1.0)
     rdoc (6.5.0)
       psych (>= 4.0.0)
     redcarpet (3.6.0)
@@ -461,14 +467,14 @@ GEM
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     safely_block (0.4.0)
-    selenium-webdriver (4.13.1)
+    selenium-webdriver (4.15.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    sentry-rails (5.11.0)
+    sentry-rails (5.13.0)
       railties (>= 5.0)
-      sentry-ruby (~> 5.11.0)
-    sentry-ruby (5.11.0)
+      sentry-ruby (~> 5.13.0)
+    sentry-ruby (5.13.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
     show_me_the_cookies (6.0.0)
       capybara (>= 2, < 4)
@@ -490,10 +496,10 @@ GEM
     site_prism-all_there (2.0.2)
     sitemap_generator (6.3.0)
       builder (~> 3.0)
-    slim (5.1.1)
+    slim (5.2.0)
       temple (~> 0.10.0)
       tilt (>= 2.1.0)
-    slim-rails (3.6.2)
+    slim-rails (3.6.3)
       actionpack (>= 3.1)
       railties (>= 3.1)
       slim (>= 3.0, < 6.0, != 5.0.0)
@@ -508,11 +514,11 @@ GEM
       railties (>= 6.0.0)
     stringio (3.0.8)
     temple (0.10.3)
-    thor (1.2.2)
+    thor (1.3.0)
     tilt (2.3.0)
     timeout (0.4.0)
     trailblazer-option (0.1.2)
-    turbo-rails (1.4.0)
+    turbo-rails (1.5.0)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
@@ -571,6 +577,8 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise
+  devise-pwned_password (~> 0.1.10)
+  devise-security (~> 0.18.0)
   dibber
   dotenv-rails
   dry-core
@@ -622,4 +630,4 @@ RUBY VERSION
    ruby 3.2.2p53
 
 BUNDLED WITH
-   2.3.26
+   2.4.13

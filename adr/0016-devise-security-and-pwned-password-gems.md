@@ -1,0 +1,22 @@
+# Use gems Devise Security and Deviese Pwned Passwords
+
+* Status: accepted
+
+## Context and Problem Statement
+
+Increase security by using DfE standards for password complexity. Original request was to 'do not allow a dictionary word of more than 4 letters'.
+
+## Decision Drivers
+
+* [Devise-Security](https://github.com/devise-security/devise-security) is currently used on [HfEYP](https://help-for-early-years-providers.education.gov.uk)
+* This is a short term solution to bridge until we start using Gov One Login
+* Lack of good dictionary word solution
+* Alternative proposed of using [Devise-Pwned_Password](https://github.com/michaelbanfield/devise-pwned_password) which will cover most worst case passwords by using the api for 
+
+## Considered Options
+* [Devise_zxcvbn](https://github.com/bitzesty/devise_zxcvbn) Devise plugin to reject weak passwords using zxcvbn
+
+## Decision Outcome
+
+* Chosen option: [Devise-Security](https://github.com/devise-security/devise-security)
+* Chosen option: [Devise-Pwned_Password](https://github.com/michaelbanfield/devise-pwned_password)

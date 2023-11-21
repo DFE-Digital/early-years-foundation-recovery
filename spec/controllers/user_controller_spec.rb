@@ -52,9 +52,9 @@ RSpec.describe UserController, type: :controller do
     context 'when successful' do
       let(:params) do
         {
-          password: 'NewPassword123',
-          confirm_password: 'NewPassword123',
-          current_password: 'StrongPassword123',
+          password: 'NewPassword12!@',
+          confirm_password: 'NewPassword12!@',
+          current_password: 'Str0ngPa$$w0rd',
         }
       end
 
@@ -70,8 +70,8 @@ RSpec.describe UserController, type: :controller do
     context 'when current password is wrong' do
       let(:params) do
         {
-          password: 'NewPassword123',
-          confirm_password: 'NewPassword123',
+          password: 'NewPassword12!@',
+          confirm_password: 'NewPassword12!@',
           current_password: 'wrongpassword',
         }
       end
@@ -90,7 +90,7 @@ RSpec.describe UserController, type: :controller do
         {
           password: '',
           confirm_password: '',
-          current_password: 'StrongPassword123',
+          current_password: 'Str0ngPa$$w0rd',
         }
       end
 

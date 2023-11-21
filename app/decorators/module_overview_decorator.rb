@@ -2,6 +2,22 @@
 # Call to action button logic
 #
 class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
+  # @see LearningController#module_progress
+  # @return [String]
+  def description
+    if unvisited.size <= 20
+      I18n.t('my_learning.progress.remaining', num: unvisited.size)
+    else
+      I18n.t('my_learning.progress.viewed', num: visited.size)
+    end
+  end
+
+  # @see LearningController#module_progress
+  # @return [String]
+  def percentage
+    "#{(value * 100).round}%"
+  end
+
   # @return [Array<Symbol, <Training::Page, Training::Question, Training::Video>?] state locales key and target page
   def call_to_action
     if completed?
