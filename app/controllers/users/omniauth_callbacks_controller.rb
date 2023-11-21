@@ -5,7 +5,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # This method is called by Devise after successful Gov One Login authentication
   # @return [nil]
   def openid_connect
-    session.delete(:gov_one_auth_state)
+    return unless session_params? && valid_params?
 
     auth_service = GovOneAuthService.new(code: params['code'])
     tokens_response = auth_service.tokens
@@ -21,7 +21,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     return error_redirect unless valid_user_info?(user_info_response)
 
     gov_user = User.find_or_create_from_gov_one(email: email, gov_one_id: gov_one_id)
-    session.delete(:nonce)
+    
+    delete_session_params
     sign_in_and_redirect gov_user if gov_user
   end
 
@@ -30,6 +31,12 @@ private
   # @return [Boolean]
   def valid_params?
     params['code'].present? && params['state'].present? && params['state'] == session[:gov_one_auth_state]
+  end
+
+  # check state and nonce are saved in session
+  # @return [Boolean]
+  def session_params?
+    session[:gov_one_auth_state].present? && session[:gov_one_auth_nonce].present?
   end
 
   # @param tokens_response [Hash]
@@ -48,6 +55,12 @@ private
   def error_redirect
     flash[:alert] = 'There was a problem signing in. Please try again.'
     redirect_to root_path
+  end
+
+  # @return [nil]
+  def delete_session_params
+    session.delete(:gov_one_auth_state)
+    session.delete(:gov_one_auth_nonce)
   end
 
   # @return [String]

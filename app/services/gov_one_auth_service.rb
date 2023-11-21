@@ -89,6 +89,7 @@ class GovOneAuthService
 
 private
 
+  # GET /.well-known/jwks.json
   # @return [Hash]
   def fetch_and_cache_jwks
     Rails.cache.fetch('jwks', expires_in: 24.hours) do
