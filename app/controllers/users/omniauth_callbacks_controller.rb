@@ -21,7 +21,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     return error_redirect unless valid_user_info?(user_info_response)
 
     gov_user = User.find_or_create_from_gov_one(email: email, gov_one_id: gov_one_id)
-    
+
     delete_session_params
     sign_in_and_redirect gov_user if gov_user
   end
