@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe 'Automated bot', type: :request do
   let(:bot_email) { 'bot_token@example.com' }
+  let(:bot_name) { 'Bot' }
 
   before do
-    create :user, :registered, email: bot_email
+    create :user, :registered, email: bot_email, first_name: bot_name
   end
 
   context 'with header' do
@@ -14,7 +15,7 @@ RSpec.describe 'Automated bot', type: :request do
 
     it 'is not redirected and can access secure pages' do
       expect(response).not_to redirect_to new_user_session_path
-      expect(response.body).to include bot_email
+      expect(response.body).to include bot_name
     end
   end
 
