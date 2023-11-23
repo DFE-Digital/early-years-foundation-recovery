@@ -1,8 +1,7 @@
 .card
   .card-container
     = training_module_image(mod)
-    - if current_user.course.new_module?(mod)
-      span.govuk-tag.govuk-tag--ey NEW
+    span.govuk-tag.govuk-tag--ey NEW
     h3.govuk-heading-s
       = govuk_link_to mod.card_title, training_module_path(mod.name), no_visited_state: true, class: 'card-link--header'
 
