@@ -67,6 +67,7 @@ class CourseProgress
   # @return [Boolean] module released since user's last visit
   def new_module?(mod)
     return false unless user.visits.count > 1
+    return false if active?(mod) || completed?(mod)
 
     mod_release = ModuleRelease.find_by(module_position: mod.position)
     last_visit = user.visits.order(started_at: :desc).second
