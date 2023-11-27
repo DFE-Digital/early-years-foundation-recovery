@@ -70,6 +70,8 @@ class CourseProgress
     return false if active?(mod) || completed?(mod)
 
     mod_release = ModuleRelease.find_by(module_position: mod.position)
+    return false unless mod_release
+    
     last_visit = user.visits.order(started_at: :desc).second
     last_visit.started_at < mod_release.first_published_at
   end
