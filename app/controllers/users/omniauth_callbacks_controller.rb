@@ -12,7 +12,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     return error_redirect unless valid_tokens?(tokens_response)
 
     id_token = auth_service.decode_id_token(tokens_response['id_token'])[0]
-    session[:id_token] = tokens_response['id_token']
+    session[:id_token] = id_token
     gov_one_id = id_token['sub']
     return error_redirect unless auth_service.valid_id_token?(id_token, session[:gov_one_auth_nonce])
 
