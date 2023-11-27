@@ -17,7 +17,7 @@ protected
     elsif resource.private_beta_registration_complete?
       static_path('new-registration')
     else
-      edit_registration_name_path
+      edit_registration_terms_and_conditions_path
     end
   end
 end

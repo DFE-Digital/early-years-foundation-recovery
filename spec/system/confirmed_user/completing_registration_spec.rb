@@ -6,6 +6,18 @@ RSpec.describe 'Confirmed users completing registration' do
   let(:user) { create :user, :confirmed }
 
   it 'requires name and a setting type and email preferences and a complete' do
+    expect(page).to have_text('Terms and conditions')
+
+    click_button 'Continue'
+
+    expect(page).to have_text('There is a problem')
+      .and have_text('You must accept the terms and conditions and privacy policy to create an account.')
+
+    expect(page).to have_text('Agree to our terms and conditions')
+
+    check 'I confirm that I accept the terms and conditions and privacy policy.'
+    click_button 'Continue'
+
     expect(page).to have_text('About you')
     click_button 'Continue'
 
