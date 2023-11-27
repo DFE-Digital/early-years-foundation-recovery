@@ -276,6 +276,9 @@ en:
       percentage: "Your progress: %{num}"
       viewed: You have read %{num} pages
       remaining: Only %{num} pages remaining
+    new:
+      card_tag: NEW
+      section_tag: NEW MODULE AVAILABLE
 
   my_learning_log:
     title: Learning log

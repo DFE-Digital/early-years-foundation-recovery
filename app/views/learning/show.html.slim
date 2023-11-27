@@ -29,7 +29,9 @@
     .govuk-grid-column-full
       h2.govuk-heading-m
         | Available modules
-        span.govuk-tag class="govuk-!-margin-left-1" NEW MODULE AVAILABLE
+        - if current_user.course.new_modules.any?
+          span.govuk-tag class="govuk-!-margin-left-1"
+            = t('my_learning.new.section_tag')
       - if current_user.course.available_modules.any?
         .grid-container
           - current_user.course.available_modules.each do |mod|
