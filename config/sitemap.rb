@@ -71,6 +71,7 @@ SitemapGenerator::Sitemap.create do
   # edit registration/account
   add edit_email_user_path
   add edit_password_user_path
+  add edit_registration_terms_and_conditions_path
   add edit_registration_name_path
   add edit_registration_setting_type_path
   add edit_registration_setting_type_other_path

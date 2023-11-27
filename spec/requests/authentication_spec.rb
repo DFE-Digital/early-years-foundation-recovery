@@ -4,7 +4,7 @@ require 'rails_helper'
 #
 RSpec.describe 'Authentication', type: :request do
   describe 'viewing authenticate_user! controller action' do
-    let(:action_path) { edit_registration_name_path }
+    let(:action_path) { edit_registration_terms_and_conditions_path }
 
     context 'with User not signed in' do
       it 'redirects to sign in page' do
@@ -89,7 +89,7 @@ RSpec.describe 'Authentication', type: :request do
 
       it 'redirects to finish registration' do
         get action_path
-        expect(response).to redirect_to(edit_registration_name_path)
+        expect(response).to redirect_to(edit_registration_terms_and_conditions_path)
       end
 
       it 'displays message to complete registration' do
