@@ -30,7 +30,7 @@
       h2.govuk-heading-m
         | Available modules
         - if current_user.course.new_modules.any?
-          span.govuk-tag class="govuk-!-margin-left-1"
+          span.govuk-tag.section-tag
             = t('my_learning.new.section_tag')
       - if current_user.course.available_modules.any?
         .grid-container
