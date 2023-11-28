@@ -103,7 +103,7 @@ jobs:
             az container create --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.WORKERAPP_NAME }} \
               --image ${{ env.DOCKER_IMAGE }}:${{ inputs.version || github.ref_name }} \
-              --cpu 1 \
+              --cpu 2 \
               --memory 2 \
               --command-line "que" \
               --restart-policy OnFailure \
@@ -111,6 +111,7 @@ jobs:
               --vnet ${{ secrets.AZURE_VNET }} \
               --subnet ${{ secrets.AZURE_WORKER_APP_SUBNET }} \
               --ip-address Private \
+              --output none \
               --environment-variables \
                 EDITOR=vi RAILS_ENV=production RAILS_LOG_TO_STDOUT=true \
                 GOOGLE_CLOUD_BUCKET=${{ vars.WEBAPP_CONFIG_GOOGLE_CLOUD_BUCKET }} \
