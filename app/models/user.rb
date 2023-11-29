@@ -227,6 +227,11 @@ class User < ApplicationRecord
     @course ||= CourseProgress.new(user: self)
   end
 
+  # @return [VisitChanges] changes since last visit
+  def visit_changes
+    @visit_changes ||= VisitChanges.new(user: self)
+  end
+
   # @return [Boolean]
   def course_started?
     !module_time_to_completion.empty?
@@ -385,6 +390,11 @@ class User < ApplicationRecord
     recent_visits = Ahoy::Visit.last_4_weeks
     old_visits = Ahoy::Visit.month_old.reject { |visit| recent_visits.pluck(:user_id).include?(visit.user_id) }
     old_visits.pluck(:user_id).include?(id)
+  end
+
+  # @return [Boolean]
+  def previous_visits?
+    visits.count > 1
   end
 
 private

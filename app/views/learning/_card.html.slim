@@ -1,7 +1,7 @@
 .card
   .card-container
     = training_module_image(mod)
-    - if current_user.course.new_module?(mod)
+    - if current_user.visit_changes.new_module?(mod)
       span.govuk-tag.govuk-tag--ey
         = t('my_learning.new.card_tag')
     h3.govuk-heading-s

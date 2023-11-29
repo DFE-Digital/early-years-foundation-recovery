@@ -27,11 +27,6 @@ class CourseProgress
     end
   end
 
-  # @return [Array<Training::Module>] Modules released since user's last visit
-  def new_modules
-    available_modules.select { |mod| new_module?(mod) }
-  end
-
   # @return [Boolean]
   def course_completed?
     published_modules.all? { |mod| completed?(mod) }
@@ -64,27 +59,14 @@ class CourseProgress
   end
 
   # @param mod [Training::Module]
-  # @return [Boolean] module released since user's last visit
-  def new_module?(mod)
-    return false unless user.visits.count > 1
-    return false if active?(mod) || completed?(mod)
-
-    mod_release = ModuleRelease.find_by(module_position: mod.position)
-    return false unless mod_release
-
-    last_visit = user.visits.order(started_at: :desc).second
-    last_visit.started_at < mod_release.first_published_at
-  end
-
-private
-
-  # @param mod [Training::Module]
   # @return [Boolean] module content has been viewed
   def started?(mod)
     return false if mod.draft?
 
     module_progress(mod).started?
   end
+
+private
 
   # @param mod [Training::Module]
   # @return [Boolean]
