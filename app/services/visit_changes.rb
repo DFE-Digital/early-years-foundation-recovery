@@ -1,31 +1,31 @@
-# Gets changes since the user's last visit
+# Changes since the user's last visit
 #
+# ContentChanges (powered by visits) might be more appropriate?
 class VisitChanges
   extend Dry::Initializer
 
   option :user, required: true
 
-  # @return [Array<Training::Module>] Modules released since user's last visit
+  # @return [Boolean]
+  def new_modules?
+    previous_visit && new_modules.any?
+  end
+
+  # @param mod [Training::Module]
+  # @return [Boolean]
+  def new_module?(mod)
+    previous_visit && previous_visit.started_at.to_i < mod.first_published_at.to_i
+  end
+
+  # @return [Array<Training::Module>]
   def new_modules
     user.course.available_modules.select { |mod| new_module?(mod) }
   end
 
-  # @param mod [Training::Module]
-  # @return [Boolean] module released since user's last visit
-  def new_module?(mod)
-    return false unless user.previous_visits?
-    return false if user.course.started?(mod)
-
-    mod_release = ModuleRelease.find_by(module_position: mod.position)
-    return false unless mod_release
-
-    last_visit.started_at < mod_release.first_published_at
-  end
-
 private
 
-  # @return [Visit]
-  def last_visit
+  # @return [Ahoy::Visit]
+  def previous_visit
     user.visits.order(started_at: :desc).second
   end
 end
