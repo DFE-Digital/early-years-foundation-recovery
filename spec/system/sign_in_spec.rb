@@ -43,6 +43,10 @@ RSpec.describe 'Sign in' do
   context 'when user is confirmed' do
     let(:user) { create :user, :confirmed }
 
+    before do
+      allow(Rails.application).to receive(:gov_one_login?).and_return(true)
+    end
+
     context 'and enters valid credentials' do
       it 'signs in successfully' do
         expect(page).to have_text('Agree to our terms and conditions') # extra registration
