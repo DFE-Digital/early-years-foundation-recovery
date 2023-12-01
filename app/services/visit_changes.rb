@@ -8,15 +8,23 @@ class VisitChanges
 
   # @return [Boolean]
   def new_modules?
+    # for consistency change me too
     previous_visit && new_modules.any?
   end
 
   # @param mod [Training::Module]
   # @return [Boolean]
   def new_module?(mod)
-    return false if user.course.started?(mod)
+    # chained conditions
+    previous_visit &&
+      previous_visit.started_at.to_i < mod.first_published_at.to_i &&
+      !user.course.started?(mod)
 
-    previous_visit && previous_visit.started_at.to_i < mod.first_published_at.to_i
+    # or
+    # primary condition with two guards
+    return false if previous_visit.nil? || user.course.started?(mod)
+
+    previous_visit.started_at < mod.first_published_at
   end
 
   # @return [Array<Training::Module>]
