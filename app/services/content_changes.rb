@@ -1,27 +1,20 @@
-# Changes since the user's last visit
+# Content changes since the user's last visit, powered by Ahoy::Visit
 #
-# ContentChanges (powered by visits) might be more appropriate?
-class VisitChanges
+class ContentChanges
   extend Dry::Initializer
 
   option :user, required: true
 
   # @return [Boolean]
   def new_modules?
-    # for consistency change me too
+    return false if previous_visit.nil?
+
     previous_visit && new_modules.any?
   end
 
   # @param mod [Training::Module]
   # @return [Boolean]
   def new_module?(mod)
-    # chained conditions
-    previous_visit &&
-      previous_visit.started_at.to_i < mod.first_published_at.to_i &&
-      !user.course.started?(mod)
-
-    # or
-    # primary condition with two guards
     return false if previous_visit.nil? || user.course.started?(mod)
 
     previous_visit.started_at < mod.first_published_at

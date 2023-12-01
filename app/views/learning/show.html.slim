@@ -29,8 +29,8 @@
     .govuk-grid-column-full
       h2.govuk-heading-m
         | Available modules
-        - if current_user.visit_changes.new_modules?
-          span.govuk-tag.section-tag
+        - if current_user.content_changes.new_modules?
+          span.govuk-tag
             = t('my_learning.new_tag.section')
       - if current_user.course.available_modules.any?
         .grid-container

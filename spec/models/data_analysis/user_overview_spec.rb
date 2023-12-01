@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe DataAnalysis::UserOverview do
   include_context 'with progress'
+  include_context 'with module releases'
   let(:headers) do
     [
       'Registration Complete',
@@ -73,11 +74,6 @@ RSpec.describe DataAnalysis::UserOverview do
   let(:release_1) { create(:release) }
 
   before do
-    # create records for the previously released modules completed by the `new_module_mail_recipients`
-    create(:module_release, release_id: release_1.id, module_position: 1, name: 'alpha')
-    create(:module_release, release_id: release_1.id, module_position: 2, name: 'bravo')
-    create(:module_release, release_id: release_1.id, module_position: 3, name: 'charlie')
-
     # create notes for the `with_notes` and `without_notes` users
     create(:note, user: user_1)
     create(:note, user: user_2)

@@ -388,8 +388,8 @@ class User < ApplicationRecord
   end
 
   # @return [VisitChanges] changes since last visit
-  def visit_changes
-    @visit_changes ||= VisitChanges.new(user: self)
+  def content_changes
+    @content_changes ||= ContentChanges.new(user: self)
   end
 
 private
