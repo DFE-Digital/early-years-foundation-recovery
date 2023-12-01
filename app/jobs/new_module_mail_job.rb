@@ -25,7 +25,7 @@ private
   def new_module_published?
     return false unless ModuleRelease.exists?
 
-    ModuleRelease.ordered.last.module_position < latest_module.position
+    ModuleRelease.ordered.last&.module_position.to_i < latest_module.position
   end
 
   # @param mod [Training::Module]
