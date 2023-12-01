@@ -191,10 +191,10 @@ ul>li>ul>li {
   display: none;
 }
 
-.section-tag {
-  margin-left: govuk-spacing(1);
-}
-
 .white-space-pre-wrap {
   white-space: pre-wrap;
+}
+
+#available .govuk-tag {
+  margin-left: govuk-spacing(1);
 }

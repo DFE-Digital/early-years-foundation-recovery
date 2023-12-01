@@ -14,6 +14,8 @@ class VisitChanges
   # @param mod [Training::Module]
   # @return [Boolean]
   def new_module?(mod)
+    return false if user.course.started?(mod)
+
     previous_visit && previous_visit.started_at.to_i < mod.first_published_at.to_i
   end
 
