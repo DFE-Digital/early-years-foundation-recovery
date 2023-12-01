@@ -91,17 +91,12 @@ private
 
   # GET /.well-known/jwks.json
   # @return [Hash]
-  def fetch_and_cache_jwks
+  def jwks
     Rails.cache.fetch('jwks', expires_in: 24.hours) do
       uri, http = build_http(ENDPOINTS[:jwks])
       response = http.request(Net::HTTP::Get.new(uri.path))
       JSON.parse(response.body)
     end
-  end
-
-  # @return [Hash]
-  def jwks
-    @jwks ||= fetch_and_cache_jwks
   end
 
   # @return [String]
