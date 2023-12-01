@@ -1,15 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe 'Confirmed users completing registration' do
-  include_context 'with user'
+  before do
+    allow(Rails.application).to receive(:gov_one_login?).and_return(true)
+  end
 
+  include_context 'with user'
   let(:user) { create :user, :confirmed }
 
   it 'requires name and a setting type and email preferences and a complete' do
     expect(page).to have_text('Terms and conditions')
-
     click_button 'Continue'
-
     expect(page).to have_text('There is a problem')
       .and have_text('You must accept the terms and conditions and privacy policy to create an account.')
 
@@ -60,14 +61,12 @@ RSpec.describe 'Confirmed users completing registration' do
 
     expect(page).to have_text('What is your role?')
       .and have_text('Enter your job title.')
-
     click_button 'Continue'
 
     expect(page).to have_text('There is a problem')
       .and have_text('Enter your job title.')
 
     fill_in 'Enter your job title.', with: 'user defined job title'
-
     click_button 'Continue'
 
     expect(page).to have_text('Do you want to get email updates about this training course?')
