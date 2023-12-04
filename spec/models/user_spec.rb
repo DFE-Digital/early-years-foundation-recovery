@@ -208,43 +208,52 @@ RSpec.describe User, type: :model do
   end
 
   describe '.find_or_create_from_gov_one' do
-    subject(:find_or_create) { described_class.find_or_create_from_gov_one(email: email, gov_one_id: gov_one_id) }
+    let(:email) { 'current@test.com' }
+    let(:gov_one_id) { 'urn:fdc:gov.uk:2022:23-random-alpha-numeric' }
 
-    let(:email) { 'test@test.com' }
-    let(:gov_one_id) { '123' }
-    let(:user) { create(:user) }
-
-    context 'with an existing user having an email but no gov_one_id' do
-      before do
-        user.update_column(:email, email)
-        find_or_create
-      end
-
-      it 'updates the user gov_one_id' do
-        expect(user.reload.gov_one_id).to eq(gov_one_id)
-      end
+    before do
+      described_class.find_or_create_from_gov_one(**params)
     end
 
-    context 'with an existing user having a gov_one_id' do
-      before do
-        user.update_column(:gov_one_id, gov_one_id)
-        find_or_create
-      end
-
-      it 'updates the user email' do
-        expect(user.reload.email).to eq(email)
-      end
-    end
-
-    context 'without an existing user' do
-      before do
-        find_or_create
+    context 'without an existing account' do
+      let(:params) do
+        { email: email, gov_one_id: gov_one_id }
       end
 
       it 'creates a new user' do
-        expect(described_class.count).to eq(1)
-        expect(described_class.first.email).to eq(email)
-        expect(described_class.first.gov_one_id).to eq(gov_one_id)
+        expect(described_class.count).to eq 1
+        expect(described_class.first.email).to eq params[:email]
+        expect(described_class.first.gov_one_id).to eq params[:gov_one_id]
+      end
+    end
+
+    context 'with an existing account' do
+      context 'and using GovOne for the first time' do
+        let(:user) do
+          create :user, :registered, email: email
+        end
+
+        let(:params) do
+          { email: user.email, gov_one_id: gov_one_id }
+        end
+
+        it 'associates GovOne ID' do
+          expect(user.reload.gov_one_id).to eq gov_one_id
+        end
+      end
+
+      context 'and using GovOne with a new email' do
+        let(:user) do
+          create :user, :registered, email: 'old@test.com', gov_one_id: gov_one_id
+        end
+
+        let(:params) do
+          { email: email, gov_one_id: user.gov_one_id }
+        end
+
+        it 'updates email' do
+          expect(user.reload.email).to eq email
+        end
       end
     end
   end

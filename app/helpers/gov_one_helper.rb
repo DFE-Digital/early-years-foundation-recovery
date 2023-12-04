@@ -6,11 +6,12 @@ module GovOneHelper
       client_id: Rails.application.config.gov_one_client_id,
       response_type: 'code',
       scope: 'email openid',
-      nonce: SecureRandom.uuid,
+      nonce: SecureRandom.alphanumeric(25),
       state: SecureRandom.uuid,
     }
 
     session[:gov_one_auth_state] = params[:state]
+    session[:gov_one_auth_nonce] = params[:nonce]
 
     gov_one_uri(:login, params)
   end
