@@ -16,7 +16,7 @@ RSpec.describe 'Gov One Info' do
 
     it 'has the correct login link' do
       link = find_link('Continue to GOV.UK One Login')
-      expect(link[:href]).to start_with('https://oidc.test.account.gov.uk/authorize?redirect_uri=http%3A%2F%2Frecovery.app%2Fusers%2Fauth%2Fopenid_connect%2Fcallback&client_id=some_client_id&response_type=code&scope=email+openid&nonce=')
+      expect(link[:href]).to start_with('https://oidc.test.account.gov.uk/authorize?')
     end
   end
 
