@@ -578,8 +578,9 @@ en:
   # /gov-one/info
   gov_one_info:
     title: Gov One Info
-    hero_header: How to access this training course
-    hero_body: This service uses GOV.UK One Login which is managed by the Government Digital Service.
+    hero:
+      header: How to access this training course
+      body: This service uses GOV.UK One Login which is managed by the Government Digital Service.
     body: You will be asked to sign in to your account, or create a One Login account, in this service
     button:
       sign_in: Continue to GOV.UK One Login
