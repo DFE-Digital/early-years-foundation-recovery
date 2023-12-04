@@ -20,7 +20,6 @@ RSpec.describe 'New stuff page' do
     end
 
     describe 'with subsequent logins' do
-      skip 'wip' do
         before do
           click_on 'sign-out-desktop'
 
@@ -36,5 +35,4 @@ RSpec.describe 'New stuff page' do
         end
       end
     end
-  end
 end

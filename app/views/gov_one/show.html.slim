@@ -1,0 +1,14 @@
+= render 'learning/cms_debug'
+
+- content_for :page_title do
+  = html_title t('gov_one_info.title')
+
+.govuk-grid-row
+  .govuk-grid-column-one-half
+    = m('gov_one_info.body')
+
+    - if current_user
+      = logout_button
+    - else
+      = login_button
+  

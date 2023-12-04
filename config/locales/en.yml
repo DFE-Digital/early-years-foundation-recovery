@@ -508,8 +508,6 @@ en:
   home:
     title: Home page
     hero: |
-      # %{service_name}
-      
       This free, online training provides an overview of child development and gives practical advice for supporting the development of children in your early years setting.
     thumb: |
       ![A practitioner smiling as they do an activity with children in an early years setting](//images.ctfassets.net/dvmeh832nmjc/2VRBZCHJYLeKx0a2CIcJzE/687fb0d28c71104820cd42f131d7dfe2/_assets_thumb-1161068272-320x240.jpg?fit=scale&w=380)
@@ -581,7 +579,8 @@ en:
     hero_header: How to access this training course
     hero_body: This service uses GOV.UK One Login which is managed by the Government Digital Service.
     body: You will be asked to sign in to your account, or create a One Login account, in this service
-    sign_in_button: Continue to GOV.UK One Login
+    button:
+      sign_in: Continue to GOV.UK One Login
     details_summary: How to access an existing training account
     details_text: If you have an existing early years child development training account but you do not yet have a GOV.UK One Login, you must use the same email address for both accounts. This will ensure that any progress you have made through the training is retained.
 
