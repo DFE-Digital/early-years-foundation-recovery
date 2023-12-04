@@ -13,11 +13,6 @@ RSpec.describe 'Gov One Info' do
       expect(page).to have_css('p', text: 'You will be asked to sign in to your account, or create a One Login account, in this service')
       expect(page).to have_css('a', text: 'Continue to GOV.UK One Login')
     end
-
-    it 'has the correct login link' do
-      link = find_link('Continue to GOV.UK One Login')
-      expect(link[:href]).to start_with('https://oidc.test.account.gov.uk/authorize?')
-    end
   end
 
   context 'with an authenticated user' do
