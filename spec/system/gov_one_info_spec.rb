@@ -1,11 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Gov One Info' do
-  context 'with an unauthenticated visitor' do
-    before do
-      visit '/gov-one/info'
-    end
+  before do
+    allow(Rails.application).to receive(:gov_one_login?).and_return(false)
+    visit '/gov-one/info'
+  end
 
+  context 'with an unauthenticated visitor' do
     it 'displays the correct content' do
       expect(page).to have_css('h1', text: 'How to access this training course')
       expect(page).to have_css('p', text: 'This service uses GOV.UK One Login which is managed by the Government Digital Service.')
@@ -23,7 +24,6 @@ RSpec.describe 'Gov One Info' do
     include_context 'with user'
 
     it 'redirects to the my modules page' do
-      visit '/gov-one/info'
       expect(page).to have_current_path('/my-modules')
     end
   end
