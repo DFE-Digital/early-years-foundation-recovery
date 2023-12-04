@@ -85,7 +85,10 @@ RSpec.describe 'Authentication', type: :request do
     end
 
     context 'with partially registered User' do
-      before { sign_in create(:user, :confirmed) }
+      before do
+        allow(Rails.application).to receive(:gov_one_login?).and_return(true)
+        sign_in create(:user, :confirmed)
+      end
 
       it 'redirects to finish registration' do
         get action_path
