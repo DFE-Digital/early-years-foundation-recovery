@@ -29,6 +29,6 @@ private
 
   # @return [Ahoy::Visit]
   def previous_visit
-    user.visits.order(started_at: :desc).first
+    user.visits.order(started_at: :desc).last
   end
 end
