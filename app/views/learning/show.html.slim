@@ -27,7 +27,11 @@
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
   #available.govuk-grid-row
     .govuk-grid-column-full
-      h2.govuk-heading-m Available modules
+      h2.govuk-heading-m
+        | Available modules
+        - if current_user.content_changes.new_modules?
+          span.govuk-tag
+            = t('my_learning.new_tag.section')
       - if current_user.course.available_modules.any?
         .grid-container
           - current_user.course.available_modules.each do |mod|

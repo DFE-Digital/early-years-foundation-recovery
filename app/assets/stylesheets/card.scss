@@ -54,6 +54,11 @@ Progress bar
     max-width: 300px;
   }
 
+.govuk-tag--ey {
+  width: min-content;
+  margin: govuk-spacing(1) 0;
+}
+
   &-container {
     display: flex;
     flex-direction: column;
@@ -107,6 +112,11 @@ Progress bar
     .bar-progress,
     .bar-ball {
       background-color: govuk-colour('yellow');
+    }
+
+    .govuk-tag {
+      background-color: govuk-colour('light-grey');
+      color: govuk-colour('blue');
     }
   }
 

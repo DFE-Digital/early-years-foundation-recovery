@@ -194,3 +194,7 @@ ul>li>ul>li {
 .white-space-pre-wrap {
   white-space: pre-wrap;
 }
+
+#available h2 .govuk-tag {
+  margin-left: govuk-spacing(1);
+}

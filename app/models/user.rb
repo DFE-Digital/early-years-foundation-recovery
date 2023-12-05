@@ -387,6 +387,11 @@ class User < ApplicationRecord
     old_visits.pluck(:user_id).include?(id)
   end
 
+  # @return [VisitChanges] changes since last visit
+  def content_changes
+    @content_changes ||= ContentChanges.new(user: self)
+  end
+
 private
 
   # @return [Hash]

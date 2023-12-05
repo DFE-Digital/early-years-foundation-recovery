@@ -29,7 +29,7 @@ class CourseProgress
 
   # @return [Boolean]
   def course_completed?
-    published_modules.all? { |mod| completed?(mod) }
+    Training::Module.live.all? { |mod| completed?(mod) }
   end
 
   # @return [Array<String>]
@@ -58,8 +58,6 @@ class CourseProgress
     module_progress(mod).completed?
   end
 
-private
-
   # @param mod [Training::Module]
   # @return [Boolean] module content has been viewed
   def started?(mod)
@@ -67,6 +65,8 @@ private
 
     module_progress(mod).started?
   end
+
+private
 
   # @param mod [Training::Module]
   # @return [Boolean]
@@ -84,22 +84,12 @@ private
   # @return [Array<Training::Module>] training modules by state
   def by_state(state)
     case state.to_sym
-    when :active    then training_modules.select { |mod| active?(mod) }
-    when :upcoming  then training_modules.select { |mod| upcoming?(mod) }
-    when :completed then training_modules.select { |mod| completed?(mod) }
+    when :active    then Training::Module.ordered.select { |mod| active?(mod) }
+    when :upcoming  then Training::Module.ordered.select { |mod| upcoming?(mod) }
+    when :completed then Training::Module.ordered.select { |mod| completed?(mod) }
     else
       raise 'CourseProgress#by_state can query either :active, :upcoming or :completed modules'
     end
-  end
-
-  # @return [Array<Training::Module>] training modules with finalised content
-  def published_modules
-    training_modules.reject(&:draft?)
-  end
-
-  # @return [Array<Training::Module>]
-  def training_modules
-    @training_modules ||= Training::Module.ordered
   end
 
   # @return [ModuleProgress]

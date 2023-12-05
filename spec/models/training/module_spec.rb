@@ -67,4 +67,12 @@ RSpec.describe Training::Module, type: :model do
       expect(mod.topic_count).to eq 8 # 4, 1, 3
     end
   end
+
+  describe '#first_published_at' do
+    include_context 'with module releases'
+
+    it 'returns the first published date' do
+      expect(mod.first_published_at).to be_within(1.second).of 2.days.ago
+    end
+  end
 end
