@@ -5,6 +5,7 @@ RSpec.describe 'Sign in' do
   let(:password) { 'Str0ngPa$$w0rd' }
 
   before do
+    allow(Rails.application).to receive(:gov_one_login?).and_return(true)
     visit '/users/sign-in'
     fill_in 'Email address', with: email_address
     fill_in 'Password', with: password
@@ -42,10 +43,6 @@ RSpec.describe 'Sign in' do
 
   context 'when user is confirmed' do
     let(:user) { create :user, :confirmed }
-
-    before do
-      allow(Rails.application).to receive(:gov_one_login?).and_return(true)
-    end
 
     context 'and enters valid credentials' do
       it 'signs in successfully' do
