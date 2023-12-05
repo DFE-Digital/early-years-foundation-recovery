@@ -1,6 +1,6 @@
 ---
 registered@example.com:
-  password: <%= ENV.fetch('USER_PASSWORD', 'Str0ngPa$$word') %>
+  password: <%= ENV.fetch('USER_PASSWORD', 'Str0ngPa$$word12') %>
   terms_and_conditions_agreed_at: <%= 1.minute.ago %>
 
 confirmed@example.com:
@@ -9,7 +9,7 @@ confirmed@example.com:
   confirmed_at: <%= 1.minute.ago %>
 
 completed@example.com:
-  password: <%= ENV.fetch('USER_PASSWORD', 'Str0ngPa$$w0rd') %>
+  password: <%= ENV.fetch('USER_PASSWORD', 'Str0ngPa$$w0rd12') %>
   terms_and_conditions_agreed_at: <%= 1.minute.ago %>
   confirmed_at: <%= 1.minute.ago %>
   first_name: Demo
