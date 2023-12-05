@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe DataAnalysis::UserOverview do
   include_context 'with progress'
-  include_context 'with module releases'
   let(:headers) do
     [
       'Registration Complete',
@@ -58,35 +57,45 @@ RSpec.describe DataAnalysis::UserOverview do
         complete_registration_mail_recipients: 1,
         start_training_mail_recipients: 1,
         continue_training_mail_recipients: 0,
-        new_module_mail_recipients: 1,
+        new_module_mail_recipients: 5,
       },
     ]
   end
 
-  let(:user_1) do
-    create :user, :registered, module_time_to_completion: { alpha: 1, bravo: 1, charlie: 0 }
+  let(:user) do
+    create :user, :registered
   end
 
   let(:user_2) do
-    create :user, :registered, module_time_to_completion: { alpha: 2, bravo: 0, charlie: 1 }
+    create :user, :registered,
+           module_time_to_completion: { alpha: 1, bravo: 1, charlie: 0 }
   end
 
-  let(:release_1) { create(:release) }
+  let(:user_3) do
+    create :user, :registered,
+           module_time_to_completion: { alpha: 2, bravo: 0, charlie: 1 }
+  end
+
+  let(:release) { create(:release) }
 
   before do
-    # create notes for the `with_notes` and `without_notes` users
-    create(:note, user: user_1)
-    create(:note, user: user_2)
+    create(:module_release, release_id: release.id, module_position: 1, name: 'alpha')
+    create(:module_release, release_id: release.id, module_position: 2, name: 'bravo')
+    create(:module_release, release_id: release.id, module_position: 3, name: 'charlie')
 
-    # A user who confirmed their email 4 weeks ago will receive the complete registration mail
-    create(:user, :confirmed, confirmed_at: 4.weeks.ago)
-    # A registered user who will receive the start training mail
-    create(:user, :registered, confirmed_at: 4.weeks.ago)
-
-    # This will complete the alpha, bravo and charlie modules for `user`
+    # user#1
     complete_module(alpha, 1.minute)
     complete_module(bravo, 1.minute)
     complete_module(charlie, 1.minute)
+
+    # user#2 user#3 with notes
+    create(:note, user: user_2)
+    create(:note, user: user_3)
+
+    # user#4 complete registration notification
+    create(:user, :confirmed, confirmed_at: 4.weeks.ago)
+    # user#5 start training notification
+    create(:user, :registered, confirmed_at: 4.weeks.ago)
   end
 
   it_behaves_like 'a data export model'
