@@ -9,7 +9,7 @@ class ContentChanges
   def new_modules?
     return false if previous_visit.nil?
 
-    previous_visit && new_modules.any?
+    new_modules.any?
   end
 
   # @param mod [Training::Module]

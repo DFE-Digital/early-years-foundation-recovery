@@ -76,6 +76,28 @@ RSpec.describe ContentChanges do
       it 'returns true' do
         expect(changes.new_module?(alpha)).to be true
       end
+
+      context 'with a module in progress' do
+        include_context 'with progress'
+        before do
+          create :visit,
+                 id: 3,
+                 visitor_token: '321',
+                 user_id: user.id,
+                 started_at: 5.days.ago
+
+          create :visit,
+                 id: 4,
+                 visitor_token: '654',
+                 user_id: user.id,
+                 started_at: 5.days.ago
+          start_module(alpha)
+        end
+
+        it 'returns false' do
+          expect(changes.new_module?(alpha)).to be false
+        end
+      end
     end
   end
 end
