@@ -449,6 +449,13 @@ en:
   complete_registration: Thank you for creating an Early years child development training account. You can now start your first module.
   update_registration: Thank you for updating your Early years child development training account. You can now continue.
 
+  # /registration/terms-and-conditions/edit
+  register_terms_and_conditions:
+    heading: Set up your training account
+    subheading: Agree to our terms and conditions
+    legend: |
+      To use this service, you must accept the [terms and conditions](/terms-and-conditions) and [privacy policy](/privacy-policy).
+
   # /registration/name/edit
   register_name:
     heading: About you

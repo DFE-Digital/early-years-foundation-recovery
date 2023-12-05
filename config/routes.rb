@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   end
 
   namespace :registration do
+    resource :terms_and_conditions, only: %i[edit update], path: 'terms-and-conditions'
     resource :name, only: %i[edit update]
     resource :setting_type, only: %i[edit update], path: 'setting-type'
     resource :setting_type_other, only: %i[edit update], path: 'setting-type-other'

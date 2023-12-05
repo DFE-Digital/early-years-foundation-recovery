@@ -12,13 +12,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     return error_redirect unless valid_tokens?(tokens_response)
 
     id_token = auth_service.decode_id_token(tokens_response['id_token'])[0]
-    session[:id_token] = id_token
+    session[:id_token] = tokens_response['id_token']
     gov_one_id = id_token['sub']
     return error_redirect unless auth_service.valid_id_token?(id_token, session[:gov_one_auth_nonce])
 
     user_info_response = auth_service.user_info(tokens_response['access_token'])
     email = user_info_response['email']
-    return error_redirect unless valid_user_info?(user_info_response)
+    return error_redirect unless valid_user_info?(user_info_response, gov_one_id)
 
     gov_user = User.find_or_create_from_gov_one(email: email, gov_one_id: gov_one_id)
 
@@ -47,8 +47,8 @@ private
 
   # @param user_info_response [Hash]
   # @return [Boolean]
-  def valid_user_info?(user_info_response)
-    user_info_response.present? && user_info_response['email'].present? && user_info_response['sub'] == session[:id_token]['sub']
+  def valid_user_info?(user_info_response, gov_one_id)
+    user_info_response.present? && user_info_response['email'].present? && user_info_response['sub'] == gov_one_id
   end
 
   # @return [nil]
@@ -78,7 +78,7 @@ private
     elsif resource.private_beta_registration_complete?
       static_path('new-registration')
     else
-      edit_registration_name_path
+      edit_registration_terms_and_conditions_path
     end
   end
 end

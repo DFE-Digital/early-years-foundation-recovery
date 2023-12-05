@@ -34,8 +34,8 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
     end
 
     it 'redirects to complete registration' do
-      expect(session[:id_token]).to eq decoded_id_token
-      expect(response).to redirect_to edit_registration_name_path
+      expect(session[:id_token]).to eq id_token
+      expect(response).to redirect_to edit_registration_terms_and_conditions_path
     end
   end
 
@@ -50,7 +50,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
     end
 
     it 'redirects to /my-modules' do
-      expect(session[:id_token]).to eq decoded_id_token
+      expect(session[:id_token]).to eq id_token
       expect(response).to redirect_to my_modules_path
     end
   end
@@ -62,7 +62,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
     end
 
     it 'redirects to /my-modules' do
-      expect(session[:id_token]).to eq decoded_id_token
+      expect(session[:id_token]).to eq id_token
       expect(response).to redirect_to my_modules_path
     end
   end
