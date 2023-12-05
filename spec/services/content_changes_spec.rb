@@ -21,12 +21,6 @@ RSpec.describe ContentChanges do
                visitor_token: '123',
                user_id: user.id,
                started_at: 1.day.ago
-
-        create :visit,
-               id: 2,
-               visitor_token: '456',
-               user_id: user.id,
-               started_at: 1.minute.ago
       end
 
       it 'returns true' do
@@ -63,12 +57,6 @@ RSpec.describe ContentChanges do
         create :visit,
                id: 1,
                visitor_token: '123',
-               user_id: user.id,
-               started_at: 5.days.ago
-
-        create :visit,
-               id: 2,
-               visitor_token: '456',
                user_id: user.id,
                started_at: 5.days.ago
       end
