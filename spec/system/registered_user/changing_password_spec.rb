@@ -5,9 +5,11 @@ RSpec.describe 'Registered user changing password', type: :system do
 
   let(:password) { 'Str0ngPa$$w0rd' }
 
+  
   include_context 'with user'
 
   before do
+    puts user.email
     visit '/my-account/edit-password'
     fill_in 'Enter your current password', with: 'Str0ngPa$$w0rd'
     fill_in 'Create a new password', with: password
