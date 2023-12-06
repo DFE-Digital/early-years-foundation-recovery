@@ -31,10 +31,11 @@ RSpec.describe ContentChanges do
 
   describe '#new_module?' do
     let(:alpha) { Training::Module.by_name(:alpha) }
+    let(:new_mod?) { changes.new_module?(alpha) }
 
     context 'without previous visits' do
       it 'returns false' do
-        expect(changes.new_module?(alpha)).to be false
+        expect(new_mod?).to be false
       end
     end
 
@@ -48,7 +49,7 @@ RSpec.describe ContentChanges do
       end
 
       it 'returns false' do
-        expect(changes.new_module?(alpha)).to be false
+        expect(new_mod?).to be false
       end
     end
 
@@ -62,7 +63,7 @@ RSpec.describe ContentChanges do
       end
 
       it 'returns true' do
-        expect(changes.new_module?(alpha)).to be true
+        expect(new_mod?).to be true
       end
 
       context 'and a module in progress' do
@@ -72,7 +73,7 @@ RSpec.describe ContentChanges do
         end
 
         it 'returns false' do
-          expect(changes.new_module?(alpha)).to be false
+          expect(new_mod?).to be false
         end
       end
     end
