@@ -12,6 +12,10 @@ on:
           - development
           - staging
           - production
+      version:
+        description: 'App version to deploy'
+        type: string
+        default: latest
 
 defaults:
   run:
@@ -168,6 +172,7 @@ jobs:
           WEB_SECRETS: ${{ toJSON(secrets) }}
           WEB_VARS: ${{ toJSON(vars) }}
         run: |
+          jq '${{ env.WEB_VARS }} += { "webapp_docker_image_tag": "${{ inputs.version }}" }'
           printf '%s\n' "$WEB_SECRETS" > tmp-secrets.json
           printf '%s\n' "$WEB_VARS" > tmp-vars.json
           jq 'with_entries(.key |= ascii_downcase)' tmp-secrets.json > web-secrets.auto.tfvars.json
