@@ -18,8 +18,6 @@ module GovOneHelper
 
   # @return [URI]
   def logout_uri
-    puts "logout_uri: #{session[:id_token]}"
-    puts "logout_uri: #{session[:id_token]}"
     params = {
       post_logout_redirect_uri: GovOneAuthService::CALLBACKS[:logout],
       id_token_hint: session[:id_token],
