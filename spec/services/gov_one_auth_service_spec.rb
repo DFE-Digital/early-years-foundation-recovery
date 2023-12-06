@@ -1,5 +1,12 @@
 require 'rails_helper'
 
+shared_examples 'a one login request' do
+  it 'returns a hash of the expected payload' do
+    expect(result).to eq(payload)
+    expect(auth_service).to have_received(:response).with(an_instance_of(request_type), an_instance_of(Net::HTTP))
+  end
+end
+
 RSpec.describe GovOneAuthService do
   let(:code) { 'mock_code' }
   let(:mock_response) { instance_double('response') }
@@ -13,42 +20,32 @@ RSpec.describe GovOneAuthService do
 
   describe '#tokens' do
     let(:result) { auth_service.tokens }
+    let(:request_type) { Net::HTTP::Post }
 
     context 'when successful' do
-      it 'returns a hash of tokens' do
-        expect(result).to eq(payload)
-        expect(auth_service).to have_received(:response).with(an_instance_of(Net::HTTP::Post), an_instance_of(Net::HTTP))
-      end
+      it_behaves_like 'a one login request'
     end
 
     context 'when unsuccessful' do
       let(:payload) { {} }
 
-      it 'returns an empty hash' do
-        expect(result).to eq(payload)
-        expect(auth_service).to have_received(:response).with(an_instance_of(Net::HTTP::Post), an_instance_of(Net::HTTP))
-      end
+      it_behaves_like 'a one login request'
     end
   end
 
   describe '#user_info' do
     let(:access_token) { 'mock_access_token' }
     let(:result) { auth_service.user_info(access_token) }
+    let(:request_type) { Net::HTTP::Get }
 
     context 'when successful' do
-      it 'returns a hash of user info' do
-        expect(result).to eq(payload)
-        expect(auth_service).to have_received(:response).with(an_instance_of(Net::HTTP::Get), an_instance_of(Net::HTTP))
-      end
+      it_behaves_like 'a one login request'
     end
 
     context 'when unsuccessful' do
       let(:payload) { {} }
 
-      it 'returns an empty hash' do
-        expect(result).to eq(payload)
-        expect(auth_service).to have_received(:response).with(an_instance_of(Net::HTTP::Get), an_instance_of(Net::HTTP))
-      end
+      it_behaves_like 'a one login request'
     end
   end
 
