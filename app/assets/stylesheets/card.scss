@@ -9,7 +9,7 @@ Progress bar
 }
 
 .bar-progress {
-  height: 10px;
+  height: 8px;
   top: 10px;
   border-radius: 4px;
 }
@@ -42,6 +42,7 @@ Progress bar
 
 .card-container img {
   max-width: 100%;
+  margin-bottom: govuk-spacing(1);
 }
 
 .card {
@@ -53,7 +54,15 @@ Progress bar
     max-width: 300px;
   }
 
+.govuk-tag--ey {
+  width: min-content;
+  margin: govuk-spacing(1) 0;
+}
+
   &-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 40px);
     padding: govuk-spacing(4);
 
     .card-progress-bar {
@@ -103,6 +112,11 @@ Progress bar
     .bar-progress,
     .bar-ball {
       background-color: govuk-colour('yellow');
+    }
+
+    .govuk-tag {
+      background-color: govuk-colour('light-grey');
+      color: govuk-colour('blue');
     }
   }
 

@@ -60,6 +60,11 @@ module Training
       SUMMARY
     end
 
+    # @return [DateTime, nil]
+    def first_published_at
+      ModuleRelease.find_by(module_position: position)&.first_published_at
+    end
+
     # entry references ---------------------------------
 
     # @example

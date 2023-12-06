@@ -1,3 +1,6 @@
+# @see HookController#release
+#
+# Notify users of the latest published module and record the release timestamp
 class NewModuleMailJob < MailJob
   # @param release_id [Integer]
   def run(release_id)
@@ -8,9 +11,7 @@ class NewModuleMailJob < MailJob
         recipient.send_new_module_notification(latest_module)
       end
 
-      newest_release = Release.find(release_id)
-
-      record_module_release(latest_module, newest_release)
+      record_module_release latest_module, Release.find(release_id)
     end
   end
 
@@ -23,9 +24,7 @@ private
 
   # @return [Boolean]
   def new_module_published?
-    return false unless ModuleRelease.exists?
-
-    ModuleRelease.ordered.last.module_position < latest_module.position
+    ModuleRelease.ordered.last&.module_position.to_i < latest_module.position
   end
 
   # @param mod [Training::Module]

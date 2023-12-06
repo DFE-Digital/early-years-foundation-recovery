@@ -182,3 +182,7 @@ ul>li>ul>li {
 .govuk-footer__copyright-logo {
   display: none;
 }
+
+#available h2 .govuk-tag {
+  margin-left: govuk-spacing(1);
+}

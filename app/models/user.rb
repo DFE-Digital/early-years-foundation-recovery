@@ -107,12 +107,12 @@ class User < ApplicationRecord
   scope :last_visit_4_weeks_ago, -> { where(id: month_old_visits).where.not(id: visits_within_month) }
 
   # emails
-  scope :training_email_recipients, -> { where(training_emails: [true, nil]) }
-  scope :early_years_email_recipients, -> { where(early_years_emails: true) }
+  scope :training_email_recipients, -> { order(:id).where(training_emails: [true, nil]) }
+  scope :early_years_email_recipients, -> { order(:id).where(early_years_emails: true) }
   scope :start_training_mail_job_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_complete.not_started_training }
   scope :complete_registration_mail_job_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_incomplete }
   scope :continue_training_mail_job_recipients, -> { order(:id).training_email_recipients.last_visit_4_weeks_ago.distinct(&:course_in_progress?) }
-  scope :new_module_mail_job_recipients, -> { order(:id).training_email_recipients.completed_available_modules.to_a }
+  scope :new_module_mail_job_recipients, -> { order(:id).training_email_recipients }
 
   # data
   scope :dashboard, -> { not_closed }
@@ -401,6 +401,11 @@ class User < ApplicationRecord
     recent_visits = Ahoy::Visit.last_4_weeks
     old_visits = Ahoy::Visit.month_old.reject { |visit| recent_visits.pluck(:user_id).include?(visit.user_id) }
     old_visits.pluck(:user_id).include?(id)
+  end
+
+  # @return [VisitChanges] changes since last visit
+  def content_changes
+    @content_changes ||= ContentChanges.new(user: self)
   end
 
 private
