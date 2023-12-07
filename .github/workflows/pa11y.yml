@@ -1,23 +1,26 @@
 # Pa11y-CI automated accessibility audit
 #
-# - manual dispatch audits integration by default
-# - review app audited after workflow completes
+# manual dispatch audits integration by default
 # ------------------------------------------------------------------------------
 ---
 name: Check WCAG Standards
 
 on:
-  workflow_run:
-    workflows:
-      - Continuous Integration
-    types:
-      - completed
   workflow_dispatch:
     inputs:
       workspace:
         description: Deployment workspace to test against (dev, review-pr-xxx)
         type: string
         default: dev
+  merge_group:
+  pull_request:
+    types:
+      - labeled # uses 'review'
+      - synchronize
+    paths:
+      - app/views/**/*.html.slim
+      - app/javascript/**/*
+      - app/assets/stylesheets/*
 
 env:
   REVIEW_APP: review-pr-${{ github.event.number }}
