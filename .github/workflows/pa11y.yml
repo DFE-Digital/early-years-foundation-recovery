@@ -14,19 +14,13 @@ on:
         default: dev
   merge_group:
   pull_request:
-    types:
-      - labeled # uses 'review'
-      - synchronize
-    paths:
-      - app/views/**/*.html.slim
-      - app/javascript/**/*
-      - app/assets/stylesheets/*
 
 env:
   REVIEW_APP: review-pr-${{ github.event.number }}
 
 jobs:
   test:
+    if: contains(github.event.pull_request.labels.*.name, 'review') && contains(github.event.pull_request.labels.*.name, 'frontend')
     runs-on: ubuntu-latest
     environment: development
     env:
