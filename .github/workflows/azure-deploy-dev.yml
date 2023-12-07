@@ -9,6 +9,7 @@ on:
       - '**/*.md'
       - .docker*
       - .env.example
+      - .github
       - .gitignore
       - .pa11yci
       - .tool-versions
@@ -105,6 +106,7 @@ jobs:
               --vnet ${{ secrets.AZURE_VNET }} \
               --subnet ${{ secrets.AZURE_WORKER_APP_SUBNET }} \
               --ip-address Private \
+              --output none \
               --environment-variables \
                 EDITOR=vi RAILS_ENV=production RAILS_LOG_TO_STDOUT=true \
                 GOOGLE_CLOUD_BUCKET=${{ vars.WEBAPP_CONFIG_GOOGLE_CLOUD_BUCKET }} \

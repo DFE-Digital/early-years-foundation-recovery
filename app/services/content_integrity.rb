@@ -67,7 +67,7 @@ class ContentIntegrity
 
   # @return [Boolean]
   def debug?
-    (Rails.application.debug? || Rails.application.candidate?) && !valid?
+    (Rails.application.debug? || Rails.application.preview?) && !valid?
   end
 
   # @return [Array<String>]

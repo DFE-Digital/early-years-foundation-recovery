@@ -56,6 +56,28 @@ namespace :eyfs do
       SeedSnippets.new.call
     end
 
+    # ./bin/docker-rails 'eyfs:cms:seed_releases'
+    desc 'Seed content releases'
+    task seed_releases: :environment do
+      Training::Module.live.each do |mod|
+        next if ModuleRelease.find_by(module_position: mod.position)
+
+        release =
+          Release.create!(
+            name: Random.hex,
+            properties: {},
+            time: Time.zone.now,
+          )
+
+        ModuleRelease.create!(
+          release_id: release.id,
+          module_position: mod.position,
+          name: mod.name,
+          first_published_at: release.time,
+        )
+      end
+    end
+
     # @see .env
     #   CONTENTFUL_ENVIRONMENT=demo
     #

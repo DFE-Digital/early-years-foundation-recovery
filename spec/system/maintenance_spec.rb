@@ -1,38 +1,43 @@
 require 'rails_helper'
 
-RSpec.shared_examples 'displays service unavailable page' do
-  it 'displays the service unavailable message and title' do
-    expect(page).to have_css('h1', text: 'Sorry, the service is unavailable')
-    expect(page).to have_title('Early years child development training : Sorry, the service is unavailable')
+RSpec.describe 'Service unavailable' do
+  shared_examples 'down for maintenance' do
+    it 'makes the service unavailable' do
+      expect(page).to have_title 'Early years child development training : Sorry, the service is unavailable'
+      expect(page).to have_content 'Sorry, the service is unavailable'
+    end
   end
-end
 
-RSpec.describe 'Service Unavailable' do
   before do
     allow(Rails.application).to receive(:maintenance?).and_return(true)
+    visit destination
   end
 
-  context 'when the service is unavailable and user navigates to home' do
-    before do
-      visit '/'
-    end
+  context 'with internal health check' do
+    let(:destination) { '/health' }
 
-    it_behaves_like 'displays service unavailable page'
+    specify { expect(destination).to be_successful }
   end
 
-  context 'when the service is unavailable and user navigates to my modules page' do
-    before do
-      visit my_modules_path
-    end
+  context 'with maintenance page' do
+    let(:destination) { '/maintenance' }
 
-    it_behaves_like 'displays service unavailable page'
+    specify { expect(destination).to be_successful }
   end
 
-  context 'when the service is unavailable and user is already on the service unavailable page' do
-    before do
-      visit '/maintenance'
-    end
+  context 'with a public page' do
+    let(:destination) { '/' }
 
-    it_behaves_like 'displays service unavailable page'
+    specify { expect(destination).not_to be_successful }
+
+    it_behaves_like 'down for maintenance'
+  end
+
+  context 'with a private page' do
+    let(:destination) { '/my-account' }
+
+    specify { expect(destination).not_to be_successful }
+
+    it_behaves_like 'down for maintenance'
   end
 end

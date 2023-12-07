@@ -21,17 +21,21 @@
     - else
       .grid-container
         - current_user.course.current_modules.each do |mod|
-          = render 'card', mod: mod, current: true
+          = render 'card', mod: mod, progress: module_progress(mod)
 
 - if current_user.course.available_modules.any? || current_user.course.course_completed?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
   #available.govuk-grid-row
     .govuk-grid-column-full
-      h2.govuk-heading-m Available modules
+      h2.govuk-heading-m
+        | Available modules
+        - if current_user.content_changes.new_modules?
+          span.govuk-tag
+            = t('my_learning.new_tag.section')
       - if current_user.course.available_modules.any?
         .grid-container
           - current_user.course.available_modules.each do |mod|
-            = render 'card', mod: mod, current: false
+            = render 'card', mod: mod, progress: false
 
       - elsif current_user.course.course_completed?
         p You do not have any modules available.

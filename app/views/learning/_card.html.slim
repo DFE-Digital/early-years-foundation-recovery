@@ -1,7 +1,24 @@
 .card
   .card-container
     = training_module_image(mod)
+
+    - if current_user.content_changes.new_module?(mod)
+      span.govuk-tag.govuk-tag--ey
+        = t('my_learning.new_tag.card')
+
     h3.govuk-heading-s
       = govuk_link_to mod.card_title, training_module_path(mod.name), no_visited_state: true, class: 'card-link--header'
-    - if current
+
+    - if progress
       = link_to_retake_or_results(mod)
+
+      .card-progress-bar
+        .percentage
+          = t('my_learning.progress.percentage', num: progress.percentage)
+
+        .bar-settings
+          .bar-bg
+          .bar-progress style="width: #{progress.percentage}"
+            .bar-ball
+
+        .description= progress.description

@@ -23,7 +23,7 @@ RSpec.describe 'Learning activity' do
     end
 
     describe 'Available modules' do
-      it 'shows all published modules' do
+      it 'shows all released modules' do
         within '#available' do
           expect(page).to have_text 'Available modules'
           expect(page).to have_text 'First Training Module'
@@ -36,24 +36,13 @@ RSpec.describe 'Learning activity' do
     end
 
     describe 'Future modules' do
-      it 'shows unpublished modules' do
+      it 'shows unreleased modules' do
         within '#upcoming' do
           expect(page).to have_text 'Future modules in this course'
           expect(page).not_to have_text 'First Training Module'
           expect(page).not_to have_text 'Second Training Module'
           expect(page).not_to have_text 'Third Training Module'
 
-          # within '#bravo' do
-          #   expect(page).to have_text 'Second Training Module'
-          #   expect(page).to have_link 'View more information about this module', href: '/about-training#module-2-second-training-module'
-          # end
-
-          # within '#charlie' do
-          #   expect(page).to have_text 'Third Training Module'
-          #   expect(page).to have_link 'View more information about this module', href: '/about-training#module-3-third-training-module'
-          # end
-
-          # unpublished draft module
           within '#delta' do
             expect(page).to have_text 'Fourth Training Module'
             expect(page).not_to have_link 'View more information about this module', href: '/about-training#module-4-fourth-training-module'
@@ -69,7 +58,7 @@ RSpec.describe 'Learning activity' do
     end
   end
 
-  context 'when a user has started the first mandatory module' do
+  context 'when a user has started a module' do
     before do
       visit '/modules/alpha/content-pages/1-1'
       visit '/my-modules'
@@ -80,6 +69,9 @@ RSpec.describe 'Learning activity' do
         expect(page).to have_text 'Modules in progress'
         expect(page).to have_text 'First Training Module'
         expect(page).not_to have_text 'You have not started any modules.'
+
+        expect(page).to have_text 'You have read 1 pages' # FIXME: plurality
+        expect(page).to have_text 'Your progress: 3%'
       end
     end
   end
