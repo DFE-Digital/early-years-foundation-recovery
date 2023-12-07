@@ -16,7 +16,7 @@ module Pages
       wait_until_header_visible
 
       email ||= 'completed@example.com'
-      password ||= ENV.fetch('USER_PASSWORD', 'Str0ngPa$$w0rd')
+      password ||= Rails.configuration.user_password
 
       email_field.set(email)
       password_field.set(password)

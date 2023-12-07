@@ -35,6 +35,15 @@ RSpec.describe 'Application configuration' do
     expect(config.dashboard_update_interval).to eq '0 0 * * *'
   end
 
+  it 'sets password for seeds' do
+    expect(config.user_password).to eq 'Str0ngPa$$word12'
+
+    seeds = (Dibber::Seeder.seed(:user, name_method: :email)).count
+    users = User.count
+
+    expect(seeds).to eq(users)
+  end
+
   describe 'time out' do
     it 'sets interval in minutes' do
       expect(config.user_timeout_minutes).to eq 25
