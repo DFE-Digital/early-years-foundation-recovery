@@ -1,24 +1,26 @@
----
 # Pa11y-CI automated accessibility audit
 #
-# - automatically runs when new code is merged into main and deployed
-# - a manually trigger run tests release candidate in pre-production by default
+# - manual dispatch audits integration by default
+# - review app audited after workflow completes
 # ------------------------------------------------------------------------------
+---
 name: Check WCAG Standards
 
 on:
   workflow_run:
-    workflows: ["App Deploy [Azure - STAGE]"]
-    branches:
-      - main
+    workflows:
+      - Continuous Integration
     types:
       - completed
   workflow_dispatch:
     inputs:
       workspace:
-        description: Deployment workspace to test against (stage, dev, review-pr-xxx)
+        description: Deployment workspace to test against (dev, review-pr-xxx)
         type: string
-        default: stage
+        default: dev
+
+env:
+  REVIEW_APP: review-pr-${{ github.event.number }}
 
 jobs:
   test:
@@ -26,7 +28,7 @@ jobs:
     environment: development
     env:
       BOT_TOKEN: ${{ secrets.WEBAPP_CONFIG_BOT_TOKEN }}
-      DOMAIN: eyrecovery-${{ inputs.workspace || 'stage' }}.azurewebsites.net
+      DOMAIN: eyrecovery-${{ inputs.workspace || env.REVIEW_APP }}.azurewebsites.net
     steps:
       -
         name: Checkout Code

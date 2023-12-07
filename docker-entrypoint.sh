@@ -57,10 +57,10 @@ else
 
     case ${ENVIRONMENT} in
       "development" )
-        bundle exec rails db:seed
+        bundle exec rails db:seed eyfs:bot sitemap:refresh:no_ping
         ;;
       "staging" )
-        bundle exec rails eyfs:bot sitemap:refresh:no_ping
+        # no op
         ;;
       "production" )
         rm public/robots.txt && touch public/robots.txt
