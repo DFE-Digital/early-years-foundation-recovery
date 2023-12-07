@@ -67,7 +67,7 @@ SitemapGenerator::Sitemap.create do
   add edit_registration_local_authority_path
   add edit_registration_role_type_path
   add edit_registration_role_type_other_path
-  add edit_registration_training_email_path
+  add edit_registration_training_emails_path
   add edit_registration_early_years_emails_path
 
   # close account
