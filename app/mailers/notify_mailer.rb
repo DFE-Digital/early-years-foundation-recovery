@@ -44,7 +44,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
   def activation_instructions(record, token, _opts = {})
     set_template(ACTIVATION_TEMPLATE_ID)
 
-    Rails.logger.info("activation mail with token: #{token}")
+    Rails.logger.info("token included in activation mail?: #{token.present?}")
 
     set_personalisation(
       confirmation_url: confirmation_url(record, confirmation_token: token),
@@ -66,7 +66,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
   def email_confirmation_instructions(record, token, _opts = {})
     set_template(EMAIL_CONFIRMATION_TEMPLATE_ID)
 
-    Rails.logger.info("email confirmation mail with token: #{token}")
+    Rails.logger.info("token included in email confirmation mail?: #{token.present?}")
 
     set_personalisation(
       confirmation_url: confirmation_url(record, confirmation_token: token),
@@ -98,7 +98,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
   def reset_password_instructions(record, token, _opts = {})
     set_template(RESET_PASSWORD_TEMPLATE_ID)
 
-    Rails.logger.info("password reset mail with token: #{token}")
+    Rails.logger.info("token included in password reset mail?: #{token.present?}")
 
     set_personalisation(
       name: record.name,

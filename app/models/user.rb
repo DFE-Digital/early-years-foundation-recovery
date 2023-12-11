@@ -169,7 +169,7 @@ class User < ApplicationRecord
       generate_confirmation_token!
     end
 
-    Rails.logger.info("confirmation instructions with token: #{@raw_confirmation_token}")
+    Rails.logger.info("token present in confirmation instructions?: #{@raw_confirmation_token.present?}")
     opts = pending_reconfirmation? ? { to: unconfirmed_email } : {}
     mailer = registration_complete? ? :email_confirmation_instructions : :activation_instructions
     send_devise_notification(mailer, @raw_confirmation_token, opts)
