@@ -1,26 +1,31 @@
 ---
 ADR:
-- adr/*.md
+  - changed-files:
+    - adr/*.md
 
 documentation:
-- README.md
-- data/*.md
-- cms/*.md
+  - changed-files:
+    - README.md
+    - data/*.md
+    - cms/*.md
 
 terraform:
-- terraform/**/*
-- terraform-azure/**/*
+  - changed-files:
+    - terraform-azure/**/*
 
 frontend:
-- app/assets/images/*
-- app/assets/stylesheets/**/*
-- app/javascript/**/*
+  - changed-files:
+    - app/assets/images/*
+    - app/assets/stylesheets/**/*
+    - app/javascript/**/*
 
 content:
-- config/locales/modules/**/*.yml
-- config/locales/static/*.yml
-- data/**/*.yml
-- cms/migrate/*.js
+  - changed-files:
+    - config/locales/modules/**/*.yml
+    - config/locales/static/*.yml
+    - data/**/*.yml
+    - cms/migrate/*.js
 
 pipeline:
-- .github/**/*.yml
+  - changed-files:
+    - .github/**/*.yml
