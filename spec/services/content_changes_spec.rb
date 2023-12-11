@@ -9,9 +9,7 @@ RSpec.describe ContentChanges do
 
   describe '#new_modules?' do
     context 'without previous visits' do
-      it 'returns false' do
-        expect(changes.new_modules?).to be false
-      end
+      specify { expect(changes.new_modules?).to be false }
     end
 
     context 'with visits predating a modules release' do
@@ -21,27 +19,18 @@ RSpec.describe ContentChanges do
                visitor_token: '123',
                user_id: user.id,
                started_at: 1.day.ago
-
-        create :visit,
-               id: 2,
-               visitor_token: '456',
-               user_id: user.id,
-               started_at: 1.minute.ago
       end
 
-      it 'returns true' do
-        expect(changes.new_modules?).to be true
-      end
+      specify { expect(changes.new_modules?).to be true }
     end
   end
 
   describe '#new_module?' do
-    let(:alpha) { Training::Module.by_name(:alpha) }
+    let(:param) { Training::Module.by_name(:alpha) }
+    let(:result) { changes.new_module?(param) }
 
     context 'without previous visits' do
-      it 'returns false' do
-        expect(changes.new_module?(alpha)).to be false
-      end
+      specify { expect(result).to be false }
     end
 
     context 'with visits since the modules release' do
@@ -53,9 +42,7 @@ RSpec.describe ContentChanges do
                started_at: 1.minute.ago
       end
 
-      it 'returns false' do
-        expect(changes.new_module?(alpha)).to be false
-      end
+      specify { expect(result).to be false }
     end
 
     context 'with visits predating a modules release' do
@@ -65,17 +52,9 @@ RSpec.describe ContentChanges do
                visitor_token: '123',
                user_id: user.id,
                started_at: 5.days.ago
-
-        create :visit,
-               id: 2,
-               visitor_token: '456',
-               user_id: user.id,
-               started_at: 5.days.ago
       end
 
-      it 'returns true' do
-        expect(changes.new_module?(alpha)).to be true
-      end
+      specify { expect(result).to be true }
 
       context 'and a module in progress' do
         include_context 'with progress'
@@ -83,9 +62,7 @@ RSpec.describe ContentChanges do
           start_module(alpha)
         end
 
-        it 'returns false' do
-          expect(changes.new_module?(alpha)).to be false
-        end
+        specify { expect(result).to be false }
       end
     end
   end

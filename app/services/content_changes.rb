@@ -15,7 +15,7 @@ class ContentChanges
   # @param mod [Training::Module]
   # @return [Boolean]
   def new_module?(mod)
-    return false if previous_visit.nil? || user.course.started?(mod)
+    return false if previous_visit.nil? || user.course.started?(mod) || mod.first_published_at.nil?
 
     previous_visit.started_at < mod.first_published_at
   end
@@ -29,6 +29,6 @@ private
 
   # @return [Ahoy::Visit]
   def previous_visit
-    user.visits.order(started_at: :desc).second
+    user.visits.order(started_at: :desc).first
   end
 end

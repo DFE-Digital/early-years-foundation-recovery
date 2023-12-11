@@ -9,6 +9,7 @@ on:
       - '**/*.md'
       - .docker*
       - .env.example
+      - .github
       - .gitignore
       - .pa11yci
       - .tool-versions
