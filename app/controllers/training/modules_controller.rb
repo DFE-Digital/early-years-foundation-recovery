@@ -10,7 +10,7 @@ module Training
                   :mods,
                   :module_table
 
-    layout 'hero', only: :show
+    layout 'hero'
 
     def index
       track('course_overview_page', cms: true)

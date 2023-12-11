@@ -541,16 +541,9 @@ en:
   # /about-training
   about:
     title: About training
-    enrol: |
-      ## Ready to get started?
-
-      Enrol on this course and begin your first module.
-      You will need to sign in or create an account before starting a module.
+    heading: About this training course
+    hero: This training course will give you a thorough understanding of the most important aspects of child development in the early years.
     course: |
-      # About this training course
-
-      This training course will give you a thorough understanding of the most important aspects of child development in the early years.
-
       The course has %{all_modules} modules.
       %{published_modules} modules are currently available.
 
@@ -568,6 +561,11 @@ en:
       - the opportunity to download a personalised certificate of completion
 
       Some modules also have short videos to enhance your understanding.
+    enrol: |
+      ## Ready to get started?
+
+      Enrol on this course and begin your first module.
+      You will need to sign in or create an account before starting a module.
     summary: |
       %{description}
 
