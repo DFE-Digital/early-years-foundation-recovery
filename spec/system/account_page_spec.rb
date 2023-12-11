@@ -30,7 +30,7 @@ RSpec.describe 'Account page', type: :system do
     it 'password options are not listed and helper text is displayed' do
       expect(page).to have_text('Manage your account')
       expect(page).not_to have_css('a', text: 'Change password')
-      expect(page).to have_content('Changing your name on this account will not affect your Gov.UK One Login account')
+      expect(page).to have_content('Changing your name on this account will not affect your Gov.UK One Login')
     end
   end
 end
