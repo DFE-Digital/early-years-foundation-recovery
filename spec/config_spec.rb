@@ -31,17 +31,22 @@ RSpec.describe 'Application configuration' do
     expect(config.internal_mailbox).to eq 'child-development.training@education.gov.uk'
   end
 
+  it 'sets password for seeds' do
+    expect(config.user_password).to eq 'Str0ngPa$$word12'
+  end
+
   it 'exports dashboard statistics daily at midnight' do
     expect(config.dashboard_update_interval).to eq '0 0 * * *'
   end
 
-  it 'sets password for seeds' do
-    expect(config.user_password).to eq 'Str0ngPa$$word12'
+  describe 'seeded users' do
+    before do
+      Dibber::Seeder.seed(:user, name_method: :email)
+    end
 
-    seeds = (Dibber::Seeder.seed(:user, name_method: :email)).count
-    users = User.count
-
-    expect(seeds).to eq(users)
+    specify do
+      expect(User.count).to eq 3
+    end
   end
 
   describe 'time out' do
