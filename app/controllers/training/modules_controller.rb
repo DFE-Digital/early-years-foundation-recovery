@@ -7,14 +7,9 @@ module Training
     helper_method :mod,
                   :progress_bar,
                   :module_progress,
-                  :mods,
                   :module_table
 
     layout 'hero'
-
-    def index
-      track('course_overview_page', cms: true)
-    end
 
     def show
       track('module_overview_page', mod_uid: mod.id)
@@ -43,15 +38,10 @@ module Training
       !Rails.application.preview? && mod.draft?
     end
 
-    # @return [Array<Training::Module>]
-    def mods
-      Training::Module.ordered
-    end
-
     # @see Learning
     # @return [String]
     def mod_name
-      params[:id]
+      params.permit(:id)[:id]
     end
   end
 end

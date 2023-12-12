@@ -54,6 +54,11 @@ SitemapGenerator::Sitemap.create do
   add users_timeout_path
 
   add course_overview_path
+  add experts_path
+
+  Training::Module.ordered do |mod|
+    add about_path(mod.name)
+  end
 
   # devise
   add new_user_unlock_path

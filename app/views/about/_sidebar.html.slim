@@ -1,0 +1,7 @@
+ul.govuk-list
+  li= govuk_link_to 'About this training course', course_overview_path
+
+  - mods.reject(&:draft?).map do |mod|
+    li= govuk_link_to mod.card_title, about_path(mod.name)
+
+  li= govuk_link_to 'The experts', experts_path

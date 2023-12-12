@@ -1,0 +1,15 @@
+- content_for :head do
+  = tag.meta name: 'turbo-visit-control', content: 'reload'
+
+- content_for :page_title do
+  = html_title t('about.title')
+
+- content_for :hero do
+  = render 'hero', heading: t('about.heading'), body: t('about.hero')
+
+.govuk-grid-row
+  .govuk-grid-column-one-quarter
+    = render 'sidebar'
+  .govuk-grid-column-three-quarters
+    = m('about.course', all_modules: mods.count, published_modules: mods.reject(&:draft?).count)
+    = render 'enrol'

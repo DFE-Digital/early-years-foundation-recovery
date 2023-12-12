@@ -8,18 +8,22 @@ RSpec.describe Training::ModulesController, type: :controller do
     end
 
     it 'allows user to access target page' do
-      get :index
+      get :show, params: { id: 'alpha' }
       expect(response).to have_http_status(:success)
     end
 
-    context 'when user has times out' do
+    context 'when session has timed out' do
       let(:timeout) do
         Rails.configuration.user_timeout_minutes.minutes + 1.second
       end
 
       it 'redirects to timeout error' do
-        get :index, session: { 'warden.user.user.session' => { 'last_request_at' => timeout.ago } }
-        expect(response).to redirect_to(users_timeout_path)
+        get :show, params: { id: 'alpha' }, session: {
+          'warden.user.user.session' => {
+            'last_request_at' => timeout.ago,
+          },
+        }
+        expect(response).to redirect_to users_timeout_path
       end
     end
   end
