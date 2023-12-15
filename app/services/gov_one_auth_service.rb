@@ -38,15 +38,6 @@ class GovOneAuthService
     {}
   end
 
-  # @param token [String]
-  # @param nonce [String]
-  # @return [Boolean]
-  def valid_id_token?(token, nonce)
-    token['iss'] == "#{Rails.application.config.gov_one_base_uri}/" &&
-      token['aud'] == Rails.application.config.gov_one_client_id &&
-      token['nonce'] == nonce
-  end
-
   # GET /userinfo
   # @param access_token [String]
   # @return [Hash]

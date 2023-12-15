@@ -5,16 +5,17 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # This method is called by Devise after successful Gov One Login authentication
   # @return [nil]
   def openid_connect
-    return unless session_params? && valid_params?
+    return error_redirect unless session_params? && valid_params?
 
     auth_service = GovOneAuthService.new(code: params['code'])
     tokens_response = auth_service.tokens
     return error_redirect unless valid_tokens?(tokens_response)
 
     id_token = auth_service.decode_id_token(tokens_response['id_token'])[0]
+    return error_redirect unless valid_id_token?(id_token)
+
     session[:id_token] = tokens_response['id_token']
     gov_one_id = id_token['sub']
-    return error_redirect unless auth_service.valid_id_token?(id_token, session[:gov_one_auth_nonce])
 
     user_info_response = auth_service.user_info(tokens_response['access_token'])
     email = user_info_response['email']
@@ -43,6 +44,15 @@ private
   # @return [Boolean]
   def valid_tokens?(tokens_response)
     tokens_response.present? && tokens_response['access_token'].present? && tokens_response['id_token'].present?
+  end
+
+  # @param id_token [Hash]
+  # @return [Boolean]
+  def valid_id_token?(id_token)
+    id_token.present? &&
+      id_token['nonce'] == session[:gov_one_auth_nonce] &&
+      id_token['iss'] == ENV['GOV_ONE_ISSUER'] &&
+      id_token['aud'] == ENV['GOV_ONE_CLIENT_ID']
   end
 
   # @param user_info_response [Hash]

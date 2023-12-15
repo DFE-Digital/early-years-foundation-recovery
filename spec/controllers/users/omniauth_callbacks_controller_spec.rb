@@ -4,7 +4,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
   let(:auth_service) { instance_double(GovOneAuthService) }
   let(:access_token) { 'mock_access_token' }
   let(:id_token) { 'mock_id_token' }
-  let(:decoded_id_token) { { 'sub' => 'mock_sub' } }
+  let(:decoded_id_token) { { 'sub' => 'mock_sub', 'nonce' => 'mock_nonce', 'iss' => ENV['GOV_ONE_ISSUER'], 'aud' => ENV['GOV_ONE_CLIENT_ID'] } }
   let(:email) { 'test@example.com' }
   let(:params) do
     { 'code' => 'mock_code', 'state' => 'mock_state' }
@@ -20,7 +20,6 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
     allow(auth_service).to receive(:user_info).and_return({ 'email' => email, 'sub' => 'mock_sub' })
     allow(auth_service).to receive(:jwt_assertion).and_return('mock_jwt_assertion')
     allow(auth_service).to receive(:decode_id_token).and_return([decoded_id_token])
-    allow(auth_service).to receive(:valid_id_token?).and_return(true)
   end
 
   context 'with a new user' do
@@ -64,6 +63,18 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
     it 'redirects to /my-modules' do
       expect(session[:id_token]).to eq id_token
       expect(response).to redirect_to my_modules_path
+    end
+  end
+
+  context 'with invalid session parameters' do
+    before do
+      session[:gov_one_auth_state] = nil
+      get :openid_connect, params: params
+    end
+  
+    it 'redirects to root path with an error message' do
+      expect(flash[:alert]).to eq 'There was a problem signing in. Please try again.'
+      expect(response).to redirect_to root_path
     end
   end
 end
