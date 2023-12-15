@@ -1,31 +1,34 @@
 ---
 ADR:
   - changed-files:
-    - adr/*.md
+    - any-glob-to-any-file: adr/*.md
 
-documentation:
+Documentation:
   - changed-files:
-    - README.md
-    - data/*.md
-    - cms/*.md
+    - any-glob-to-any-file:
+      - README.md
+      - data/*.md
+      - cms/*.md
 
 terraform:
   - changed-files:
-    - terraform-azure/**/*
+    - any-glob-to-any-file: terraform-azure/**/*
 
 frontend:
   - changed-files:
-    - app/assets/images/*
-    - app/assets/stylesheets/**/*
-    - app/javascript/**/*
+    - any-glob-to-any-file:
+      - app/assets/images/*
+      - app/assets/stylesheets/**/*
+      - app/javascript/**/*
 
 content:
   - changed-files:
-    - config/locales/modules/**/*.yml
-    - config/locales/static/*.yml
-    - data/**/*.yml
-    - cms/migrate/*.js
+    - any-glob-to-any-file:
+      - config/locales/modules/**/*.yml
+      - config/locales/static/*.yml
+      - data/**/*.yml
+      - cms/migrate/*.js
 
 pipeline:
   - changed-files:
-    - .github/**/*.yml
+    - any-glob-to-any-file: .github/**/*.yml
