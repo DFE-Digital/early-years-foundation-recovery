@@ -14,7 +14,7 @@
     h1.govuk-heading-l
       = t('.heading')
 
-    = results_banner(**assessment.result)
+    .assessment-result-banner = results_banner(**assessment.result)
 
     - assessment.incorrect_responses.each do |incorrect_response|
       = form_with model: incorrect_response, url: training_module_response_path(mod.name, content.name), method: :patch do |f|
