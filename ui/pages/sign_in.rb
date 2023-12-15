@@ -11,7 +11,7 @@ module Pages
     # Authenticate using email and password
     #
     # @param email [String] login email address (default: completed@example.com)
-    # @param password [String] login password (default: Str0ngPa$$w0rd)
+    # @param password [String] login password (default: Str0ngPa$$w0rd12)
     def with_email_and_password(email = nil, password = nil)
       wait_until_header_visible
 
