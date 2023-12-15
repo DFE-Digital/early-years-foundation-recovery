@@ -71,7 +71,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
       session[:gov_one_auth_state] = nil
       get :openid_connect, params: params
     end
-  
+
     it 'redirects to root path with an error message' do
       expect(flash[:alert]).to eq 'There was a problem signing in. Please try again.'
       expect(response).to redirect_to root_path
