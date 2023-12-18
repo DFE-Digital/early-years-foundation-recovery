@@ -1,0 +1,202 @@
+.menu-btn {
+  display: none;
+
+  &:checked ~ .dfe-vertical-nav {
+    display: block;
+  }
+
+  &:not(:checked) ~ .dfe-vertical-nav {
+    display: none;
+
+    @include govuk-media-query($from: tablet) {
+      display: block;
+    }
+  }
+}
+
+label.menu-icon {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  gap: govuk-spacing(2);
+  color: $govuk-link-colour;
+
+  @include govuk-media-query($from: tablet) {
+    display: none;
+  }
+}
+
+.dfe-vertical-nav {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.14286;
+}
+
+.dfe-vertical-nav__section {
+  margin: 0 0 govuk-spacing(4);
+  padding: 0px;
+  list-style-type: none;
+}
+
+.dfe-vertical-nav__section-item {
+  border-left: 4px solid govuk-colour('mid-grey');
+  font-size: 16px;
+  line-height: 1.25;
+
+  &:hover {
+    border-left: 4px solid $color_dfe-secondary-blue;
+  }
+
+  &--current {
+    border-left: 4px solid $color_dfe-blue;
+    font-weight: 700;
+    background: govuk-colour('light-grey');
+
+    .dfe-vertical-nav__link {
+      border-left-color: $color_dfe-blue;
+      font-weight: 700;
+      color: $color_dfe-blue;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+}
+
+.dfe-vertical-nav__link {
+  display: block;
+  padding: 7px 30px 8px 10px;
+  text-decoration: none;
+  margin-bottom: govuk-spacing(1);
+  color: $color_dfe-blue;
+
+  &:active,
+  &:hover {
+    color: govuk-colour('blue');
+    border-left-color: $color_dfe-secondary-blue;
+    box-shadow: none;
+    outline: 0;
+  }
+
+  &:focus {
+    background: govuk-colour('yellow');
+    color: govuk-colour('black');
+    box-shadow: none;
+    outline: 0;
+  }
+}
+
+.about-module-box {
+  background: $light-blue;
+  display: flex;
+  flex-direction: column-reverse;
+  margin-bottom: govuk-spacing(6);
+
+  @include govuk-media-query($from: tablet) {
+    flex-direction: row;
+  }
+
+  &-panel {
+    flex: 100%;
+    padding: 1.5em;
+    background-size: cover;
+    background-position: center;
+
+    @include govuk-media-query($from: tablet) {
+      flex: 50%;
+      padding: 3em;
+    }
+  }
+}
+
+/*------------------------------------------------------------------------------
+
+.dfe-vertical-nav .dfe-vertical-nav--section-header {
+  color: $govuk-secondary-text-colour;
+  font-size: 19px;
+  line-height: 1.25;
+  font-weight: 600;
+  color: $govuk-secondary-text-colour;
+  margin-bottom: govuk-spacing(3);
+  padding-top: 0;
+}
+
+.dfe-vertical-nav__section--nested {
+  margin-bottom: govuk-spacing(1);
+}
+
+.dfe-vertical-nav__section--nested .dfe-vertical-nav__link {
+  padding-left: govuk-spacing(4);
+  font-weight: 400;
+  margin-bottom: 0px;
+  margin-top: govuk-spacing(-1);
+}
+
+.dfe-vertical-nav__section--nested .dfe-vertical-nav__section-item::before {
+  content: "—";
+  margin-left: govuk-spacing(-4);
+  color: $govuk-secondary-text-colour;
+}
+
+.dfe-vertical-nav--count {
+  float: right;
+  background: govuk-colour('mid-grey');
+  padding: 9px govuk-spacing(1);
+  border-radius: 0px;
+  color: govuk-colour('black');
+  font-weight: 700;
+  min-width: govuk-spacing(5);
+  text-align: center;
+  font-size: 12px;
+}
+
+@media print {
+  .dfe-vertical-nav__theme {
+    font-family: sans-serif;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .dfe-vertical-nav__theme {
+    font-size: 19px;
+    // font-size: 1.1875rem;
+    line-height: 1.31579;
+  }
+
+  .dfe-vertical-nav--count {
+    padding: 12px 8px;
+  }
+}
+
+.dfe-vertical-nav__section .dfe-vertical-nav__section-item--current--child-active .dfe-vertical-nav__link {
+  font-weight: 400;
+}
+
+.dfe-vertical-nav__section .dfe-vertical-nav__section {
+  margin-bottom: 0px;
+}
+
+.dfe-vertical-nav__section .dfe-vertical-nav__section .dfe-vertical-nav__section-item {
+  border-left: none;
+}
+
+.dfe-vertical-nav__section .dfe-vertical-nav__section .dfe-vertical-nav__section-item :before {
+  content: "—";
+  margin-left: 0;
+  margin-right: govuk-spacing(1);
+}
+
+.dfe-vertical-nav__section .dfe-vertical-nav__section .dfe-vertical-nav__section-item--current {
+  border-left: none;
+  background: $color_dfe-secondary-blue;
+}
+
+.dfe-vertical-nav__section .dfe-vertical-nav__section .dfe-vertical-nav__section-item--current .dfe-vertical-nav__link {
+  font-weight: 700;
+}
+
+*/

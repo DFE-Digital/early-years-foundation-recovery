@@ -9,7 +9,7 @@
 
 .govuk-grid-row
   .govuk-grid-column-one-quarter
-    = render 'sidebar'
+    = render 'sidebar', active: :course
   .govuk-grid-column-three-quarters
     = m('about.course', all_modules: mods.count, published_modules: mods.reject(&:draft?).count)
     = render 'enrol'

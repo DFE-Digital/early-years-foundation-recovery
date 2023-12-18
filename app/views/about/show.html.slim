@@ -9,28 +9,23 @@
     .govuk-grid-column-two-thirds
       span.govuk-caption-xl
         | #{mod.tab_label}:
-
       h1.govuk-heading-xl class='govuk-!-margin-bottom-4'
         = mod.title
       p.govuk-body-l
         = mod.objective
 
-
 .govuk-grid-row
   .govuk-grid-column-one-quarter
-    = render 'sidebar'
+    = render 'sidebar', active: mod.name
 
   .govuk-grid-column-three-quarters
+    .about-module-box
+      .about-module-box-panel
+        p.govuk-body-l
+          = mod.description.split("\n").first
+      .about-module-box-panel style="min-height: 150px; background-image: url(#{mod.thumbnail_url})"
 
     - # OPTIMIZE: mod.description needs to be divided to support the About Page layout design
-    .about-module-box
-      .govuk-grid-row
-        .govuk-grid-column-one-half
-          = mod.description.split("\n").first
-
-        .govuk-grid-column-one-half
-          = training_module_image(mod)
 
     = m('about.summary', description: mod.description.split("\n").drop(1).join("\n"), criteria: mod.criteria)
-
     = render 'enrol'

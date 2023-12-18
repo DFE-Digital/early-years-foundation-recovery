@@ -11,11 +11,10 @@
   .govuk-grid-column-one-half
     = m('home.about', headings_start_with: 'xl')
 
-  - unless current_user
-    .govuk-grid-column-one-half
+  .govuk-grid-column-one-half
+    - unless current_user
       .light-grey-box.enrol-box
         = m('home.login', headings_start_with: 'xl')
-
         = render 'enrol_buttons'
 
 .prompt.prompt-home

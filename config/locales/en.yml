@@ -541,6 +541,7 @@ en:
     title: About training
     heading: About this training course
     hero: This training course will give you a thorough understanding of the most important aspects of child development in the early years.
+    menu: Section menu
     course: |
       The course has %{all_modules} modules.
       %{published_modules} modules are currently available.
@@ -684,6 +685,7 @@ en:
       View your notes from all your modules here.
       You can also use the links provided to revisit a specific topic.
 
+  # /about/experts
   experts:
     heading: The experts
     summary: This training course has been created by early years experts.
