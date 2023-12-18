@@ -135,6 +135,14 @@ pre.code-tip {
     margin-bottom: govuk-spacing(6);
   }
 
+  &.enrol-box {
+    border-radius: 6px;
+
+    .govuk-button {
+      margin: 0;
+    }
+  }
+
 }
 
 .float-right {
@@ -181,6 +189,10 @@ ul>li>ul>li {
 
 .govuk-footer__copyright-logo {
   display: none;
+}
+
+.white-space-pre-wrap {
+  white-space: pre-wrap;
 }
 
 #available h2 .govuk-tag {
