@@ -4,7 +4,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
   let(:auth_service) { instance_double(GovOneAuthService) }
   let(:access_token) { 'mock_access_token' }
   let(:id_token) { 'mock_id_token' }
-  let(:decoded_id_token) { { 'sub' => 'mock_sub', 'nonce' => 'mock_nonce', 'iss' => ENV['GOV_ONE_ISSUER'], 'aud' => ENV['GOV_ONE_CLIENT_ID'] } }
+  let(:decoded_id_token) { { 'sub' => 'mock_sub', 'nonce' => 'mock_nonce', 'iss' => "#{Rails.application.config.gov_one_base_uri}/", 'aud' => Rails.application.config.gov_one_client_id } }
   let(:email) { 'test@example.com' }
   let(:params) do
     { 'code' => 'mock_code', 'state' => 'mock_state' }
