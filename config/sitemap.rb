@@ -56,7 +56,7 @@ SitemapGenerator::Sitemap.create do
   add course_overview_path
   add experts_path
 
-  Training::Module.ordered do |mod|
+  Training::Module.ordered.each do |mod|
     add about_path(mod.name)
   end
 
