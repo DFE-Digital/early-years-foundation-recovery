@@ -51,8 +51,8 @@ private
   def valid_id_token?(id_token)
     id_token.present? &&
       id_token['nonce'] == session[:gov_one_auth_nonce] &&
-      id_token['iss'] == ENV['GOV_ONE_ISSUER'] &&
-      id_token['aud'] == ENV['GOV_ONE_CLIENT_ID']
+      id_token['iss'] == Rails.application.config.gov_one_base_uri + "/" &&
+      id_token['aud'] == Rails.application.config.gov_one_client_id
   end
 
   # @param user_info_response [Hash]
