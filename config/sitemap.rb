@@ -27,20 +27,9 @@ SitemapGenerator::Sitemap.compress = false
 SitemapGenerator::Sitemap.create do
   # TODO: test dynamic page content like question feedback
 
-  # non-course pages
-  %w[
-    accessibility-statement
-    new-registration
-    other-problems-signing-in
-    privacy-policy
-    promotional-materials
-    sitemap
-    terms-and-conditions
-    whats-new
-    email-preferences
-    wifi-and-data
-  ].each do |path|
-    add static_path(path)
+  # static pages
+  Page.order(:heading).load.each do |page|
+    add static_path(page.name)
   end
 
   # settings
@@ -78,8 +67,8 @@ SitemapGenerator::Sitemap.create do
   add edit_registration_local_authority_path
   add edit_registration_role_type_path
   add edit_registration_role_type_other_path
-  # TODO: missing paths
-  # add edit_registration_training_email_path
+  add edit_registration_training_emails_path
+  add edit_registration_early_years_emails_path
 
   # close account
   add edit_reason_user_close_account_path
@@ -91,34 +80,16 @@ SitemapGenerator::Sitemap.create do
   add my_modules_path
   add user_notes_path
 
-  # Representative content
-  mod = Training::Module.ordered.first
-  add training_module_path(mod.name)
-  add training_module_page_path(mod.name, mod.interruption_page.name)
-  add training_module_page_path(mod.name, mod.first_content_page.name)
-  add training_module_page_path(mod.name, mod.text_pages.first.name)
-  add training_module_page_path(mod.name, mod.video_pages.first.name)
-  add training_module_page_path(mod.name, mod.summary_intro_page.name)
-  add training_module_page_path(mod.name, mod.assessment_intro_page.name)
-  add training_module_page_path(mod.name, mod.confidence_intro_page.name)
-  add training_module_page_path(mod.name, mod.thankyou_page.name)
-  add training_module_page_path(mod.name, mod.certificate_page.name)
-  add training_module_question_path(mod.name, mod.formative_questions.first.name)
-  add training_module_question_path(mod.name, mod.summative_questions.first.name)
-  add training_module_question_path(mod.name, mod.confidence_questions.first.name)
-  add training_module_assessment_path(mod.name, mod.assessment_results_page.name)
-
-  # All content
-  # mods = Training::Module.ordered
-  # mods.each do |mod|
-  #   mod.content.each do |page|
-  #     if page.is_question?
-  #       add training_module_question_path(mod.name, page.name)
-  #     elsif page.assessment_results?
-  #       add training_module_assessment_path(mod.name, page.name)
-  #     else
-  #       add training_module_page_path(mod.name, page.name)
-  #     end
-  #   end
-  # end
+  # Course content
+  Training::Module.ordered.each do |mod|
+    mod.content.each do |page|
+      if page.is_question?
+        add training_module_question_path(mod.name, page.name)
+      elsif page.assessment_results?
+        add training_module_assessment_path(mod.name, page.name)
+      else
+        add training_module_page_path(mod.name, page.name)
+      end
+    end
+  end
 end
