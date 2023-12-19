@@ -5,6 +5,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # This method is called by Devise after successful Gov One Login authentication
   # @return [nil]
   def openid_connect
+    if params['error'].present?
+      Rails.logger.error("Authentication error: #{params['error']}, #{params['error_description']}")
+      return error_redirect
+    end
+
     return error_redirect unless session_params? && valid_params?
 
     auth_service = GovOneAuthService.new(code: params['code'])
@@ -34,7 +39,6 @@ private
     params['code'].present? && params['state'].present? && params['state'] == session[:gov_one_auth_state]
   end
 
-  # check state and nonce are saved in session
   # @return [Boolean]
   def session_params?
     session[:gov_one_auth_state].present? && session[:gov_one_auth_nonce].present?
@@ -43,7 +47,10 @@ private
   # @param tokens_response [Hash]
   # @return [Boolean]
   def valid_tokens?(tokens_response)
-    tokens_response.present? && tokens_response['access_token'].present? && tokens_response['id_token'].present?
+    tokens_response.present? &&
+      tokens_response['access_token'].present? &&
+      tokens_response['id_token'].present? &&
+      tokens_response['error'].blank?
   end
 
   # @param id_token [Hash]
@@ -58,7 +65,10 @@ private
   # @param user_info_response [Hash]
   # @return [Boolean]
   def valid_user_info?(user_info_response, gov_one_id)
-    user_info_response.present? && user_info_response['email'].present? && user_info_response['sub'] == gov_one_id
+    user_info_response.present? &&
+      user_info_response['email'].present? &&
+      user_info_response['sub'] == gov_one_id &&
+      user_info_response['error'].blank?
   end
 
   # @return [nil]
