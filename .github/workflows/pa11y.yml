@@ -6,23 +6,24 @@
 name: Check WCAG Standards
 
 on:
-  workflow_dispatch:
-    inputs:
-      workspace:
-        description: Deployment workspace to test against (dev, review-pr-xxx)
-        type: string
-        default: dev
+  # workflow_dispatch:
+  #   inputs:
+  #     workspace:
+  #       description: Deployment workspace to test against (dev, review-pr-xxx)
+  #       type: string
+  #       default: dev
   merge_group:
   pull_request:
 
 jobs:
   test:
-    if: contains(github.event.pull_request.labels.*.name, 'review') && contains(github.event.pull_request.labels.*.name, 'frontend')
+    if: contains(github.event.pull_request.labels.*.name, 'review')
     runs-on: ubuntu-latest
     environment: development
     env:
       BOT_TOKEN: ${{ secrets.WEBAPP_CONFIG_BOT_TOKEN }}
-      DOMAIN: eyrecovery-${{ inputs.workspace || review-pr-${{ github.event.number }} }}.azurewebsites.net
+      # DOMAIN: eyrecovery-${{ inputs.workspace }}.azurewebsites.net
+      DOMAIN: eyrecovery-review-pr-${{ github.event.number }}.azurewebsites.net
     steps:
       -
         name: Checkout Code
