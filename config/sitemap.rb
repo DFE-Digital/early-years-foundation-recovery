@@ -28,8 +28,8 @@ SitemapGenerator::Sitemap.create do
   # TODO: test dynamic page content like question feedback
 
   # static pages
-  Page.order(:heading).load.map(&:name).each do |path|
-    add static_path("/#{path}")
+  Page.order(:heading).load.each do |page|
+    add static_path(page.name)
   end
 
   # settings
