@@ -32,7 +32,7 @@ RSpec.describe 'Application configuration' do
   end
 
   it 'sets password for seeds' do
-    expect(config.user_password).to eq 'Str0ngPa$$word12'
+    expect(config.user_password).to eq 'Str0ngPa$$w0rd12'
   end
 
   it 'exports dashboard statistics daily at midnight' do

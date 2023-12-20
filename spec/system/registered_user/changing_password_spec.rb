@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Registered user changing password', type: :system do
   subject(:user) { create :user, :registered, created_at: 1.month.ago }
 
-  let(:password) { 'Str0ngPa$$w0rd12' }
+  let(:password) { 'Str0ngPa$$w0rd13' }
 
   include_context 'with user'
 
