@@ -20,6 +20,7 @@ $govuk-page-width: 1200px;
 $light-blue: tint($color_dfe-secondary-blue, 90%);
 
 @import 'dfe-header';
+@import 'about';
 @import 'card';
 @import 'prompt';
 @import 'video';

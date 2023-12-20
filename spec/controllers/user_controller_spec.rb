@@ -54,7 +54,7 @@ RSpec.describe UserController, type: :controller do
         {
           password: 'NewPassword12!@',
           confirm_password: 'NewPassword12!@',
-          current_password: 'Str0ngPa$$w0rd',
+          current_password: 'Str0ngPa$$w0rd12',
         }
       end
 
@@ -90,7 +90,7 @@ RSpec.describe UserController, type: :controller do
         {
           password: '',
           confirm_password: '',
-          current_password: 'Str0ngPa$$w0rd',
+          current_password: 'Str0ngPa$$w0rd12',
         }
       end
 

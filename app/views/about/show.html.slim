@@ -1,0 +1,31 @@
+- content_for :head do
+  = tag.meta name: 'turbo-visit-control', content: 'reload'
+
+- content_for :page_title do
+  = html_title mod.title
+
+- content_for :hero do
+  .govuk-grid-row class='govuk-!-margin-top-9'
+    .govuk-grid-column-three-quarters
+      span.govuk-caption-xl
+        | #{mod.tab_label}:
+      h1.govuk-heading-xl class='govuk-!-margin-bottom-4'
+        = mod.title
+      p.govuk-body-l
+        = mod.objective
+
+.govuk-grid-row
+  .govuk-grid-column-one-quarter
+    = render 'sidebar', active: mod.name
+
+  .govuk-grid-column-three-quarters
+    .about-module-box
+      .about-module-box-panel
+        p.govuk-body-l
+          = mod.description.split("\n").first
+      .about-module-box-panel style="min-height: 150px; background-image: url(#{mod.thumbnail_url})"
+
+    - # OPTIMIZE: mod.description needs to be divided to support the About Page layout design
+
+    = m('about.summary', description: mod.description.split("\n").drop(1).join("\n"), criteria: mod.criteria)
+    = render 'enrol'

@@ -6,11 +6,11 @@ RSpec.describe 'Snippets', type: :request do
   end
 
   context 'when authored' do
-    let(:resource) { 'home.hero' }
+    let(:resource) { 'about.summary' }
 
     it 'is expected to include microcopy' do
       # NB: variables are not processed
-      expect(response.body).to include '%{service_name}'
+      expect(response.body).to include '%{description}'
     end
 
     specify { expect(response).to have_http_status(:success) }
