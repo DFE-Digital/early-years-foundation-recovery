@@ -566,7 +566,9 @@ en:
       Enrol on this course and begin your first module.
       You will need to sign in or create an account before starting a module.
     summary: |
-      %{description}
+      **On completion of this module you will be able to:**
+
+      %{skills}
 
       **What you'll learn**
 
@@ -665,6 +667,10 @@ en:
         # %{title}
 
         %{description}
+
+        On completion of this module you will be able to:
+
+        %{skills}
 
       criteria: |
         ## This module covers:

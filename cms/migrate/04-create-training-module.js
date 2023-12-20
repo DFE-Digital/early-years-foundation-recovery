@@ -50,6 +50,12 @@ module.exports = function(migration) {
     required: true
   })
 
+  trainingModule.createField('skills', {
+    name: 'Skills',
+    type: 'Text',
+    required: true
+  })
+
   trainingModule.createField('criteria', {
     name: 'Criteria',
     type: 'Text',
