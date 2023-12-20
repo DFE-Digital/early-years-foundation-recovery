@@ -2,13 +2,11 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'health', to: 'home#show'
   get 'audit', to: 'home#audit'
-
   get 'my-modules', to: 'learning#show' # @see User#course
-  get 'about-training', to: 'training/modules#index', as: :course_overview
 
-  get '/404', to: 'errors#not_found', via: :all
-  get '/422', to: 'errors#unprocessable_entity', via: :all
-  get '/500', to: 'errors#internal_server_error', via: :all
+  get '404', to: 'errors#not_found', via: :all
+  get '422', to: 'errors#unprocessable_entity', via: :all
+  get '500', to: 'errors#internal_server_error', via: :all
 
   resources :settings, controller: :settings, only: %i[show create]
 
@@ -84,8 +82,12 @@ Rails.application.routes.draw do
     end
   end
 
-  post '/change', to: 'hook#change'
-  post '/release', to: 'hook#release'
+  post 'change', to: 'hook#change'
+  post 'release', to: 'hook#release'
+
+  get 'about-training', to: 'about#course', as: :course_overview
+  get 'about/the-experts', to: 'about#experts', as: :experts
+  resources :about, only: %i[show], path: 'about'
 
   resources :pages, only: %i[show], path: '/', as: :static
 end
