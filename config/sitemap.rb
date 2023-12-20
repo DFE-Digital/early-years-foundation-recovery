@@ -68,6 +68,9 @@ SitemapGenerator::Sitemap.create do
   # account
   add user_path
 
+  # GOV.UK one login
+  add gov_one_info_path
+
   # edit registration/account
   add edit_email_user_path
   add edit_password_user_path
