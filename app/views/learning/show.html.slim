@@ -50,7 +50,7 @@
         - current_user.course.upcoming_modules.each do |mod|
           .govuk-card id=mod.name
             h3.govuk-heading-s
-              = mod.card_title
+              = mod.heading
             p.govuk-body= mod.short_description
             - unless mod.draft?
               = govuk_link_to 'View more information about this module',

@@ -13,7 +13,7 @@ class ContentIntegrity
     description: 'Missing description',
     objective: 'Missing objective',
     summary: 'Missing short description',
-    skills: 'Missing skills',
+    # skills: 'Missing skills', # UNCOMMMENT
     position: 'Missing position',
     duration: 'Missing duration',
     thumbnail: 'Missing thumbnail image',
