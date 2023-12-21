@@ -11,11 +11,11 @@ class ContentIntegrity
   MODULE_VALIDATIONS = {
     criteria: 'Missing criteria',
     description: 'Missing description',
-    duration: 'Missing duration',
     objective: 'Missing objective',
-    position: 'Missing position',
     summary: 'Missing short description',
-    threshold: 'Missing assessment threshold percentage',
+    skills: 'Missing skills',
+    position: 'Missing position',
+    duration: 'Missing duration',
     thumbnail: 'Missing thumbnail image',
   }.freeze
 
@@ -101,8 +101,13 @@ class ContentIntegrity
   end
 
   # @return [Boolean]
-  def threshold?
-    mod.fields[:summative_threshold].present?
+  def skills?
+    mod.fields[:skills].present?
+  end
+
+  # @return [Boolean]
+  def criteria?
+    mod.fields[:criteria].present?
   end
 
   # @return [Boolean]
@@ -113,11 +118,6 @@ class ContentIntegrity
   # @return [Boolean]
   def duration?
     mod.fields[:duration].present?
-  end
-
-  # @return [Boolean]
-  def criteria?
-    mod.fields[:criteria].present?
   end
 
   # CONTENT VALIDATIONS --------------------------------------------------------

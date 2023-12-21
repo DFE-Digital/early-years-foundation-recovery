@@ -88,20 +88,6 @@ module.exports = function(migration) {
     ]
   })
 
-  trainingModule.createField('summative_threshold', {
-    name: 'Summative threshold',
-    type: 'Integer',
-    required: true,
-    defaultValue: {
-      'en-US': 70,
-    },
-    validations: [
-      {
-        range: { min: 1, max: 100 }
-      }
-    ]
-  })
-
   trainingModule.createField('position', {
     name: 'Position',
     type: 'Integer',
@@ -165,10 +151,6 @@ module.exports = function(migration) {
 
   trainingModule.changeFieldControl('position', 'builtin', 'numberEditor', {
     helpText: 'Order of the module.'
-  })
-
-  trainingModule.changeFieldControl('summative_threshold', 'builtin', 'numberEditor', {
-    helpText: 'Percentage required to pass assessment.'
   })
 
   /* linked entries */

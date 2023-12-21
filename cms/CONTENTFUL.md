@@ -4,6 +4,30 @@
 - [API Keys](https://app.contentful.com/spaces/dvmeh832nmjc/api/keys/) are granted access to new environments but targeting aliases is preferred.
 - [User roles](https://app.contentful.com/spaces/dvmeh832nmjc/settings/users).
 
+### TrainingModule text fields
+
+**short_description**
+
+TBC describe the value/purpose of each and where it is leveraged
+
+- validations: None
+
+**description**
+
+- validations: None
+
+**skills (new)**
+
+- validations: None
+
+**criteria**
+
+- validations: None
+
+**objective**
+
+- validations: NO markdown
+
 
 ## Tasks
 

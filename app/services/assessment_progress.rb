@@ -3,6 +3,9 @@
 class AssessmentProgress
   extend Dry::Initializer
 
+  # @return [Integer]
+  THRESHOLD = 70
+
   # @!attribute [r] user
   #   @return [User]
   option :user, Types.Instance(User), required: true
@@ -38,7 +41,7 @@ class AssessmentProgress
 
   # @return [Boolean]
   def passed?
-    score >= mod.summative_threshold
+    score >= THRESHOLD
   end
 
   # @return [Boolean]
