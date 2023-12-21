@@ -23,7 +23,6 @@ RSpec.describe DataAnalysis::LocalAuthorityUser do
 
   before do
     # Incomplete registration
-    create :user, :confirmed, local_authority: 'LA3'
     create :user, :named, local_authority: 'LA3'
 
     # Registered user
