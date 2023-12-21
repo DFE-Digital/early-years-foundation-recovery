@@ -1,0 +1,15 @@
+- content_for :head do
+  = tag.meta name: 'turbo-visit-control', content: 'reload'
+
+- content_for :page_title do
+  = html_title t('experts.heading')
+
+- content_for :hero do
+  = render 'hero', heading: t('experts.heading'), body: t('experts.summary')
+
+.govuk-grid-row
+  .govuk-grid-column-one-quarter
+    = render 'sidebar', active: :experts
+  .govuk-grid-column-three-quarters
+    = m('experts.body')
+    = render 'enrol'

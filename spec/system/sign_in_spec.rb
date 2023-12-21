@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Sign in' do
   let(:email_address) { user.email }
-  let(:password) { 'Str0ngPa$$w0rd' }
+  let(:password) { Rails.configuration.user_password }
 
   before do
     allow(Rails.application).to receive(:gov_one_login?).and_return(true)

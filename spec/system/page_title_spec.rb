@@ -3,6 +3,11 @@ require 'rails_helper'
 RSpec.describe 'Page' do
   context 'when user is not authenticated' do
     it { expect(root_path).to have_page_title 'Home page' }
+
+    it { expect(course_overview_path).to have_page_title 'About training' }
+    it { expect(experts_path).to have_page_title 'The experts' }
+    it { expect(about_path('alpha')).to have_page_title 'First Training Module' }
+
     it { expect(new_user_session_path).to have_page_title 'Sign in' }
     it { expect(new_user_password_path).to have_page_title 'Reset password' }
     it { expect(cancel_user_registration_path).to have_page_title 'Create an Early years child development training account' }

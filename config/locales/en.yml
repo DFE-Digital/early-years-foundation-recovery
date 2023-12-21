@@ -519,8 +519,6 @@ en:
   home:
     title: Home page
     hero: |
-      # %{service_name}
-      
       This free, online training provides an overview of child development and gives practical advice for supporting the development of children in your early years setting.
     thumb: |
       ![A practitioner smiling as they do an activity with children in an early years setting](//images.ctfassets.net/dvmeh832nmjc/2VRBZCHJYLeKx0a2CIcJzE/687fb0d28c71104820cd42f131d7dfe2/_assets_thumb-1161068272-320x240.jpg?fit=scale&w=380)
@@ -550,16 +548,10 @@ en:
   # /about-training
   about:
     title: About training
-    enrol: |
-      ## Ready to get started?
-
-      Enrol on this course and begin your first module.
-      You will need to sign in or create an account before starting a module.
+    heading: About this training course
+    hero: This training course will give you a thorough understanding of the most important aspects of child development in the early years.
+    menu: Section menu
     course: |
-      # About this training course
-
-      This training course will give you a thorough understanding of the most important aspects of child development in the early years.
-
       The course has %{all_modules} modules.
       %{published_modules} modules are currently available.
 
@@ -577,6 +569,11 @@ en:
       - the opportunity to download a personalised certificate of completion
 
       Some modules also have short videos to enhance your understanding.
+    enrol: |
+      ## Ready to get started?
+
+      Enrol on this course and begin your first module.
+      You will need to sign in or create an account before starting a module.
     summary: |
       %{description}
 
@@ -709,6 +706,7 @@ en:
       View your notes from all your modules here.
       You can also use the links provided to revisit a specific topic.
 
+  # /about/experts
   experts:
     heading: The experts
     summary: This training course has been created by early years experts.

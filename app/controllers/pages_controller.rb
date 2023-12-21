@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   before_action :authenticate_registered_user!, if: :restricted?
+
   helper_method :page
 
   def show
@@ -23,6 +24,7 @@ private
     ::Page.by_name(page_params[:id])
   end
 
+  # @return [String]
   def page_params
     params.permit(:id)
   end
