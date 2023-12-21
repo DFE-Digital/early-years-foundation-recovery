@@ -30,6 +30,8 @@ module EarlyYearsFoundationRecovery
     # config.time_zone = ENV.fetch('TZ', 'Europe/London')
 
     config.service_name = 'Early years child development training'
+    config.service_url = (Rails.env.production? ? 'https://' : 'http://') + ENV.fetch('DOMAIN', 'child-development-training')
+
     config.internal_mailbox = ENV.fetch('INTERNAL_MAILBOX', 'child-development.training@education.gov.uk')
     config.middleware.use Grover::Middleware
     config.active_record.yaml_column_permitted_classes = [Symbol]
@@ -68,6 +70,11 @@ module EarlyYearsFoundationRecovery
     config.contentful_management_access_token = ENV.fetch('CONTENTFUL_MANAGEMENT_TOKEN', credentials.dig(:contentful, :management_access_token)) # TODO: use service account management token
     config.contentful_environment             = ENV.fetch('CONTENTFUL_ENVIRONMENT', credentials.dig(:contentful, :environment))
 
+    # Gov one
+    config.gov_one_base_uri     = credentials.dig(:gov_one, :base_uri)
+    config.gov_one_private_key  = credentials.dig(:gov_one, :private_key)
+    config.gov_one_client_id    = credentials.dig(:gov_one, :client_id)
+
     # @return [Boolean]
     def live?
       ENV['WORKSPACE'].eql?('production') || ENV['ENVIRONMENT'].eql?('production')
@@ -94,6 +101,11 @@ module EarlyYearsFoundationRecovery
     # @return [Boolean]
     def maintenance?
       Types::Params::Bool[ENV.fetch('MAINTENANCE', false)]
+    end
+
+    # @return [Boolean]
+    def gov_one_login?
+      Types::Params::Bool[ENV.fetch('GOV_ONE_LOGIN', false)]
     end
 
     # @return [ActiveSupport::TimeWithZone]

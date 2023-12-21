@@ -21,12 +21,28 @@ class User < ApplicationRecord
     DASHBOARD_ATTRS + Training::Module.live.map { |mod| "module_#{mod.position}_time" }
   end
 
+  # @param email [String]
+  # @param gov_one_id [String]
+  # @return [User]
+  def self.find_or_create_from_gov_one(email:, gov_one_id:)
+    if (user = find_by(email: email) || find_by(gov_one_id: gov_one_id))
+      user.update_column(:email, email)
+      user.update_column(:gov_one_id, gov_one_id) if user.gov_one_id.nil?
+      user.save!
+    else
+      user = new(email: email, gov_one_id: gov_one_id, confirmed_at: Time.zone.now)
+      user.save!(validate: false)
+    end
+    user
+  end
+
   # Include default devise modules. Others available are:
   # :timeoutable, :trackable, :recoverable and :omniauthable
   attr_accessor :context
 
   devise :database_authenticatable, :registerable, :recoverable,
-         :validatable, :rememberable, :confirmable, :lockable, :timeoutable, :secure_validatable
+         :validatable, :rememberable, :confirmable, :lockable, :timeoutable,
+         :secure_validatable, :omniauthable, omniauth_providers: [:openid_connect]
   devise :pwned_password unless Rails.env.test?
 
   has_many :responses

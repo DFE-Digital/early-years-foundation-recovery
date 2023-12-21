@@ -7,21 +7,28 @@
   .govuk-grid-column-full
     h1.govuk-heading-l Manage your account
     h2.govuk-heading-m Your details
-    hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
+    hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class="govuk-!-margin-bottom-0"
 
     = govuk_summary_list do |your_details|
       - your_details.with_row do |row|
         - row.with_key { 'Name' }
         - row.with_value(text: current_user.name, classes: %w[data-hj-suppress])
         - row.with_action(text: 'Change name', href: edit_registration_name_path, html_attributes: { id: :edit_name_registration })
-      - your_details.with_row do |row|
-        - row.with_key { 'Email' }
-        - row.with_value(text:current_user.email, classes: %w[data-hj-suppress])
-        - row.with_action(text: 'Change email', href: edit_email_user_path, html_attributes: { id: :edit_email_user })
-      - your_details.with_row do |row|
-        - row.with_key { 'Password' }
-        - row.with_value { t('my_account.password_changed', date: current_user.password_last_changed) }
-        - row.with_action(text: 'Change password', href: edit_password_user_path, html_attributes: { id: :edit_password_user })
+
+      - unless Rails.application.gov_one_login?
+        - your_details.with_row do |row|
+          - row.with_key { 'Email' }
+          - row.with_value(text: current_user.email, classes: %w[data-hj-suppress])
+          - row.with_action(text: 'Change email', href: edit_email_user_path, html_attributes: { id: :edit_email_user })
+        - your_details.with_row do |row|
+          - row.with_key { 'Password' }
+          - row.with_value { t('my_account.password_changed', date: current_user.password_last_changed) }
+          - row.with_action(text: 'Change password', href: edit_password_user_path, html_attributes: { id: :edit_password_user })
+          
+    - if Rails.application.gov_one_login?
+      p.text-secondary
+        = t('my_account.name_information')
+
 
     = govuk_summary_list do |other_details|
       - other_details.with_row do |row|
