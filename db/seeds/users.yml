@@ -1,15 +1,15 @@
 ---
 registered@example.com:
-  password: <%= ENV.fetch('USER_PASSWORD', 'Str0ngPa$$word') %>
+  password: <%= Rails.configuration.user_password %>
   terms_and_conditions_agreed_at: <%= 1.minute.ago %>
 
 confirmed@example.com:
-  password: <%= ENV.fetch('USER_PASSWORD', 'Str0ngPa$$w0rd12') %>
+  password: <%= Rails.configuration.user_password %>
   terms_and_conditions_agreed_at: <%= 1.minute.ago %>
   confirmed_at: <%= 1.minute.ago %>
 
 completed@example.com:
-  password: <%= ENV.fetch('USER_PASSWORD', 'Str0ngPa$$w0rd') %>
+  password: <%= Rails.configuration.user_password %>
   terms_and_conditions_agreed_at: <%= 1.minute.ago %>
   confirmed_at: <%= 1.minute.ago %>
   first_name: Demo
