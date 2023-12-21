@@ -306,9 +306,21 @@ Devise.setup do |config|
   config.sign_out_via = :get
 
   # ==> OmniAuth
-  # Add a new OmniAuth provider. Check the wiki for more information on setting
-  # up on your models and hooks.
-  # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  config.omniauth :openid_connect, {
+    name: :gov_one,
+    scope: %i[openid email],
+    response_type: :code,
+    client_options: {
+      port: 443,
+      scheme: 'https',
+      host: Rails.application.config.gov_one_base_uri,
+      identifier: Rails.application.config.gov_one_client_id,
+      redirect_uri: 'users/auth/openid_connect/callback',
+    },
+    authorize_params: {
+      prompt: 'login',
+    },
+  }
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

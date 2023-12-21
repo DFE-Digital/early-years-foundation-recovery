@@ -20,7 +20,11 @@ class ApplicationController < ActionController::Base
     authenticate_user! unless user_signed_in?
     return true if current_user.registration_complete?
 
-    redirect_to edit_registration_name_path, notice: 'Please complete registration'
+    if Rails.application.gov_one_login?
+      redirect_to edit_registration_terms_and_conditions_path, notice: 'Please complete registration'
+    else
+      redirect_to edit_registration_name_path, notice: 'Please complete registration'
+    end
   end
 
   def configure_permitted_parameters

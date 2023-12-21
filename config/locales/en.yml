@@ -299,6 +299,7 @@ en:
   # /my-account
   my_account:
     title: My account
+    name_information: This is the name that will appear on you end of module certificate. You can use this setting to change how your name appears. Changing your name on this account will not affect your GOV.UK One Login
     setting_details: |
       ## Your setting details
     email_preferences: |
@@ -452,6 +453,13 @@ en:
   complete_registration: Thank you for creating an Early years child development training account. You can now start your first module.
   update_registration: Thank you for updating your Early years child development training account. You can now continue.
 
+  # /registration/terms-and-conditions/edit
+  register_terms_and_conditions:
+    heading: Set up your training account
+    subheading: Agree to our terms and conditions
+    legend: |
+      To use this service, you must accept the [terms and conditions](/terms-and-conditions) and [privacy policy](/privacy-policy).
+
   # /registration/name/edit
   register_name:
     heading: About you
@@ -535,6 +543,7 @@ en:
       ## Return to your training
 
       Sign in to continue learning, see your progress and download certificates.
+    gov_one_button: Start your training now
 
   # /about-training
   about:
@@ -575,6 +584,18 @@ en:
       This module covers:
 
       %{criteria}
+
+  # /gov-one/info
+  gov_one_info:
+    title: Gov One Info
+    hero:
+      header: How to access this training course
+      body: This service uses GOV.UK One Login which is managed by the Government Digital Service.
+    body: You will be asked to sign in to your account, or create a One Login account, in this service
+    button:
+      sign_in: Continue to GOV.UK One Login
+    details_summary: How to access an existing training account
+    details_text: If you have an existing early years child development training account but you do not yet have a GOV.UK One Login, you must use the same email address for both accounts. This will ensure that any progress you have made through the training is retained.
 
   # /settings/cookie-policy
   cookie_policy:

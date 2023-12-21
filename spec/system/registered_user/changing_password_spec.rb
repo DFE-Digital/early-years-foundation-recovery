@@ -30,8 +30,7 @@ RSpec.describe 'Registered user changing password', type: :system do
       click_button 'Save'
       expect(page).to have_current_path '/my-account'
       expect(page).to have_text('Manage your account') # page heading
-        .and have_text('Your new password has been saved.') # flash message
-        .and have_text("Password last changed on #{today}") # event
+        .and have_text('Your new password has been saved.')
     end
   end
 

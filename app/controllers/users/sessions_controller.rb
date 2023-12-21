@@ -16,6 +16,8 @@ protected
       end
     elsif resource.private_beta_registration_complete?
       static_path('new-registration')
+    elsif Rails.application.gov_one_login?
+      edit_registration_terms_and_conditions_path
     else
       edit_registration_name_path
     end

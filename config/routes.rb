@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'health', to: 'home#show'
   get 'audit', to: 'home#audit'
   get 'my-modules', to: 'learning#show' # @see User#course
+  get 'gov-one/info', to: 'gov_one#show'
 
   get '404', to: 'errors#not_found', via: :all
   get '422', to: 'errors#unprocessable_entity', via: :all
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
                confirmations: 'confirmations',
                passwords: 'passwords',
                registrations: 'registrations',
+               omniauth_callbacks: 'users/omniauth_callbacks',
              },
              path_names: {
                sign_in: 'sign-in',
@@ -29,9 +31,11 @@ Rails.application.routes.draw do
     get 'check_session_timeout', to: 'timeout#check'
     get 'extend_session', to: 'timeout#extend'
     get 'users/timeout', to: 'timeout#timeout_user'
+    get '/users/sign_out', to: 'users/sessions#destroy'
   end
 
   namespace :registration do
+    resource :terms_and_conditions, only: %i[edit update], path: 'terms-and-conditions'
     resource :name, only: %i[edit update]
     resource :setting_type, only: %i[edit update], path: 'setting-type'
     resource :setting_type_other, only: %i[edit update], path: 'setting-type-other'
@@ -50,6 +54,7 @@ Rails.application.routes.draw do
     get 'check-email-confirmation'
     get 'check-email-password-reset'
     get 'edit-training-emails'
+    devise_for :users, controllers: { omniauth_callbacks: 'controllers/users/omniauth_callbacks' }
     patch 'update-training-emails'
 
     resource :close_account, only: %i[new update show], path: 'close' do
