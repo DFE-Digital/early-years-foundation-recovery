@@ -53,6 +53,8 @@ class User < ApplicationRecord
   has_many :events, class_name: 'Ahoy::Event'
   has_many :notes
 
+  scope :gov_one_login, -> { where.not(gov_one_login: nil) }
+
   # account status
   scope :public_beta_only_registration_complete, -> { registered_since_private_beta.registration_complete }
   scope :since_public_beta, -> { where(created_at: Rails.application.public_beta_launch_date..Time.zone.now) }

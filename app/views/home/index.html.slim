@@ -21,10 +21,10 @@
         = m('home.prompt', headings_start_with: 'xl')
 
   - unless current_user
-    .govuk-grid-row class="govuk-!-margin-top-9"
+    .govuk-grid-row class='govuk-!-margin-top-9'
       .govuk-grid-column-full
-        = govuk_button_link_to gov_one_info_path, class: "govuk-button--start" do
-          | #{t('home.gov_one_button')}
+        = govuk_button_link_to gov_one_info_path, class: 'govuk-button--start' do
+          = t('home.gov_one_button')
           = render 'chevron'
 
 - else

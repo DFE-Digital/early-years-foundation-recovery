@@ -62,11 +62,19 @@ module ApplicationHelper
 
   # @return [String]
   def login_path
-    Rails.application.gov_one_login? ? gov_one_info_path : new_user_session_path
+    if Rails.application.gov_one_login?
+      gov_one_info_path
+    else
+      new_user_session_path
+    end
   end
 
   # @return [String]
   def logout_path
-    Rails.application.gov_one_login? ? logout_uri.to_s : destroy_user_session_path
+    if Rails.application.gov_one_login? && current_user.gov_one_login.nil?
+      logout_uri.to_s
+    else
+      destroy_user_session_path
+    end
   end
 end

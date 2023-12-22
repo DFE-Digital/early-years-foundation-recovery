@@ -2,16 +2,16 @@
 # ------------------------------------------------------------------------------
 set -e
 
+if [ -z ${PROXY_CERT} ]
+then
+  echo "No proxy certificate to append"
+else
+  echo "Appending proxy certificate"
+  cat $PROXY_CERT >> /etc/ssl/certs/ca-certificates.crt
+fi
+
 if [ ${RAILS_ENV} != "production" ]
 then
-
-  if [ -z ${PROXY_CERT} ]
-  then
-    echo "No proxy certificate to append"
-  else
-    echo "Appending proxy certificate"
-    cat $PROXY_CERT >> /etc/ssl/certs/ca-certificates.crt
-  fi
 
 #
 # Development & Test
