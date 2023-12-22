@@ -63,7 +63,7 @@ SitemapGenerator::Sitemap.create do
   add user_path
 
   # GOV.UK one login
-  add gov_one_info_path
+  # add gov_one_info_path
 
   # edit registration/account
   add edit_email_user_path
