@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------
 # Seed the production database:
 #
-#   $ docker exec -it recovery_prod rails db:seed
+#   $ docker exec -it recovery_prod rails db:create db:prepare db:seed
 #
 ---
 services:
@@ -12,7 +12,7 @@ services:
     environment:
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_production
       - DOMAIN=https://localhost:3000
-      # - PROXY_CERT=/srv/localhost.crt
+      - PROXY_CERT=/srv/localhost.crt
       # overrides
       - WORKSPACE
       - USER_PASSWORD
