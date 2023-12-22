@@ -71,7 +71,7 @@ module ApplicationHelper
 
   # @return [String]
   def logout_path
-    if Rails.application.gov_one_login? && current_user.gov_one_id.present? && session[:gov_one_auth_state].present?
+    if Rails.application.gov_one_login? && session[:id_token].present?
       logout_uri.to_s
     else
       destroy_user_session_path
