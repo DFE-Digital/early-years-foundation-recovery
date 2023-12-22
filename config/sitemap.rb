@@ -44,7 +44,7 @@ SitemapGenerator::Sitemap.create do
   add course_overview_path
   add experts_path
 
-  Training::Module.ordered.each do |mod|
+  Training::Module.live.each do |mod|
     add about_path(mod.name)
   end
 
