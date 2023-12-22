@@ -48,6 +48,10 @@ SitemapGenerator::Sitemap.create do
     add about_path(mod.name)
   end
 
+
+  # GOV.UK one login
+  add gov_one_info_path
+
   # devise
   add new_user_unlock_path
   add new_user_confirmation_path
@@ -61,9 +65,6 @@ SitemapGenerator::Sitemap.create do
 
   # account
   add user_path
-
-  # GOV.UK one login
-  add gov_one_info_path
 
   # edit registration/account
   add edit_email_user_path
