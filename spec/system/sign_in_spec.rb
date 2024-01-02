@@ -5,7 +5,8 @@ RSpec.describe 'Sign in' do
   let(:password) { Rails.configuration.user_password }
 
   before do
-    allow(Rails.application).to receive(:gov_one_login?).and_return(true)
+    skip if Rails.application.gov_one_login?
+
     visit '/users/sign-in'
     fill_in 'Email address', with: email_address
     fill_in 'Password', with: password

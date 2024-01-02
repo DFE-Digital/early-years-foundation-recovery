@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   get 'health', to: 'home#show'
   get 'audit', to: 'home#audit'
   get 'my-modules', to: 'learning#show' # @see User#course
-  get 'gov-one/info', to: 'gov_one#show'
 
   get '404', to: 'errors#not_found', via: :all
   get '422', to: 'errors#unprocessable_entity', via: :all

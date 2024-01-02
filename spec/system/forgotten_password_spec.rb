@@ -5,6 +5,10 @@ RSpec.describe 'User following forgotten password process' do
   let(:token) { user.send_reset_password_instructions }
   let(:password) { 'ABCDE123xyh!@' }
 
+  before do
+    skip if Rails.application.gov_one_login?
+  end
+
   context 'when choosing a new password' do
     before do
       visit edit_user_password_path + "?reset_password_token=#{token}"

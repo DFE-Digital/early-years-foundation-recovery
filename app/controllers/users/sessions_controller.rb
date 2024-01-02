@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
+  layout 'hero' if Rails.application.gov_one_login?
+
+  def new
+    render 'gov_one' if Rails.application.gov_one_login?
+  end
+
 protected
 
   def after_sign_in_path_for(resource)
