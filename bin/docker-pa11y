@@ -3,7 +3,7 @@
 # Check accessibility of running dev container against latest sitemap
 # or an external site
 #
-# ./bin/docker-pa11y https://ey-recovery-dev.london.cloudapps.digital
+# ./bin/docker-pa11y https://eyrecovery-dev.azurewebsites.net
 # ------------------------------------------------------------------------------
 set -e
 

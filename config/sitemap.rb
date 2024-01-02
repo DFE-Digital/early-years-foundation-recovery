@@ -63,7 +63,7 @@ SitemapGenerator::Sitemap.create do
   add user_path
 
   # GOV.UK one login
-  # add gov_one_info_path
+  add gov_one_info_path
 
   # edit registration/account
   add edit_email_user_path
@@ -88,16 +88,18 @@ SitemapGenerator::Sitemap.create do
   add my_modules_path
   add user_notes_path
 
-  # Course content
-  Training::Module.ordered.each do |mod|
-    mod.content.each do |page|
-      if page.is_question?
-        add training_module_question_path(mod.name, page.name)
-      elsif page.assessment_results?
-        add training_module_assessment_path(mod.name, page.name)
-      else
-        add training_module_page_path(mod.name, page.name)
-      end
+  # Course common start page
+  mod = Training::Module.ordered.first
+  add training_module_page_path(mod.name, mod.pages.first.name)
+
+  # Course content random module
+  Training::Module.ordered.sample.content.each do |page|
+    if page.is_question?
+      add training_module_question_path(page.parent.name, page.name)
+    elsif page.assessment_results?
+      add training_module_assessment_path(page.parent.name, page.name)
+    else
+      add training_module_page_path(page.parent.name, page.name)
     end
   end
 end

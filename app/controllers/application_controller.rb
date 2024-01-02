@@ -98,7 +98,7 @@ private
   # @see Auditing
   # @return [Boolean]
   def user_signed_in?
-    return true if bot?
+    return true if bot? # || session[:id_token].present?
 
     super
   end
