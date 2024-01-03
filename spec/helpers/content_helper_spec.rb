@@ -1,6 +1,31 @@
 require 'rails_helper'
 
 describe 'ContentHelper', type: :helper do
+  describe '#completed_modules_table' do
+    subject(:html) { helper.completed_modules_table }
+
+    let(:user) { create(:user, :registered) }
+
+    before do
+      create :event,
+             name: 'module_complete',
+             user: user, properties:
+             { training_module_id: 'alpha' }
+
+      allow(helper).to receive(:current_user).and_return(user)
+    end
+
+    it 'creates a table' do
+      expect(html).to include '<table class="govuk-table">'
+      expect(html).to include 'Completed modules'
+      expect(html).to include 'Module name'
+      expect(html).to include 'Date completed'
+      expect(html).to include 'Actions'
+      expect(html).to have_link 'First Training Module', href: '/modules/alpha'
+      expect(html).to have_link 'View certificate', href: '/modules/alpha/content-pages/1-3-4'
+    end
+  end
+
   describe '#m' do
     subject(:html) { helper.m(input) }
 
