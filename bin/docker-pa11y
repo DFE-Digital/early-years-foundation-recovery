@@ -9,10 +9,12 @@ set -e
 
 ./bin/docker-rails eyfs:bot sitemap:refresh:no_ping
 
+BASE_URL=${1-"http://app:3000"} \
+
 docker-compose \
   -f docker-compose.yml \
   -f docker-compose.dev.yml \
   --project-name recovery \
   run \
   --name recovery_pa11y \
-  --rm pa11y $1
+  --rm pa11y $BASE_URL

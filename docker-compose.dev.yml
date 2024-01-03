@@ -67,7 +67,7 @@ services:
       target: pa11y
     image: recovery:pa11y
     environment:
-      - DOMAIN=app:3000
+      - DOMAIN=localhost:3000
       - BOT_TOKEN
     depends_on:
       app:

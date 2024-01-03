@@ -36,18 +36,16 @@ class User < ApplicationRecord
     user
   end
 
-  # Include default devise modules. Others available are:
-  # :timeoutable, :trackable, :recoverable and :omniauthable
   attr_accessor :context
 
   devise :database_authenticatable, :registerable, :recoverable,
          :validatable, :rememberable, :confirmable, :lockable, :timeoutable,
          :secure_validatable, :omniauthable, omniauth_providers: [:openid_connect]
 
+  # FIXME: retire old devise functionality
   # if Rails.application.gov_one_login?
-  #   devise :database_authenticatable, :registerable, :recoverable,
-  #          :rememberable, :confirmable, :lockable, :timeoutable,
-  #          :secure_validatable, :omniauthable, omniauth_providers: [:openid_connect]
+  #   devise :database_authenticatable, :rememberable, :lockable, :timeoutable,
+  #          :omniauthable, omniauth_providers: [:openid_connect]
   # else
   #   devise :database_authenticatable, :registerable, :recoverable,
   #          :validatable, :rememberable, :confirmable, :lockable, :timeoutable,

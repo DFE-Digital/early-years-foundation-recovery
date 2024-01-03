@@ -13,15 +13,15 @@ Rails.application.routes.draw do
   devise_for :users,
              controllers: {
                sessions: 'users/sessions',
-               confirmations: 'confirmations',
-               passwords: 'passwords',
-               registrations: 'registrations',
+               confirmations: 'confirmations',  # unless Rails.application.gov_one_login?
+               passwords: 'passwords',          # unless Rails.application.gov_one_login?
+               registrations: 'registrations',  # unless Rails.application.gov_one_login?
                omniauth_callbacks: 'users/omniauth_callbacks',
              },
              path_names: {
                sign_in: 'sign-in',
                sign_out: 'sign-out',
-               sign_up: 'sign-up',
+               sign_up: 'sign-up',              # unless Rails.application.gov_one_login?
              }
 
   # @see TimeoutWarning js component
@@ -53,7 +53,6 @@ Rails.application.routes.draw do
     get 'check-email-confirmation'
     get 'check-email-password-reset'
     get 'edit-training-emails'
-    devise_for :users, controllers: { omniauth_callbacks: 'controllers/users/omniauth_callbacks' }
     patch 'update-training-emails'
 
     resource :close_account, only: %i[new update show], path: 'close' do
