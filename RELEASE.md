@@ -22,7 +22,7 @@ We use 9 swim lanes on the [Jira][jira] board.
 
 - `content` deployment
 - `ER-456` branch
-- <https://ey-recovery-pr-123.london.cloudapps.digital>
+- <https://eyrecovery-review-pr-123.azurewebsites.net>
 - [feature deployments][deployments]
 - meets [definition of done](#definition-of-done)
 - mark PR as `ready` and [request review](#review-process)
@@ -40,14 +40,14 @@ We use 9 swim lanes on the [Jira][jira] board.
 
 - `development` deployment
 - `main` branch
-- <https://ey-recovery-dev.london.cloudapps.digital>
+- <https://eyrecovery-dev.azurewebsites.net>
 - update accessibility and quality checks as required
 
 **7. Approval**
 
 - `staging` deployment
 - `rcx.x.x` release candidate tag
-- <https://ey-recovery-staging.london.cloudapps.digital>
+- <https://staging.child-development-training.education.gov.uk>
 - [open milestones (release candidates)][release-candidates]
 - seek product owner sign-off
 
@@ -55,7 +55,7 @@ We use 9 swim lanes on the [Jira][jira] board.
 
 - `production` deployment
 - `vx.x.x` version tag
-- <https://ey-recovery.london.cloudapps.digital>
+- <https://child-development-training.education.gov.uk>
 - [close milestone][released-versions] and rename from `rc` to `v`
 - periodically publish a [release][releases] CHANGELOG
 

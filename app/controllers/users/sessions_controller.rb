@@ -4,7 +4,11 @@ class Users::SessionsController < Devise::SessionsController
   layout 'hero' if Rails.application.gov_one_login?
 
   def new
-    render 'gov_one' if Rails.application.gov_one_login?
+    if Rails.application.gov_one_login?
+      render 'gov_one'
+    else
+      super
+    end
   end
 
 protected

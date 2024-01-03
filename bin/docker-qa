@@ -5,7 +5,7 @@
 # @example
 #   $ ./bin/docker-prod
 #   $ TYPE=firefox ./bin/docker-qa
-#   $ BASE_URL=https://ey-recovery.london.cloudapps.digital USER_PASSWORD=secret ./bin/docker-qa
+#   $ BASE_URL=https://eyrecovery-pr-123.azurewebsites.net USER_PASSWORD=secret ./bin/docker-qa
 #
 # ------------------------------------------------------------------------------
 set -e

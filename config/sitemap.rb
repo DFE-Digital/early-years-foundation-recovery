@@ -60,7 +60,7 @@ SitemapGenerator::Sitemap.create do
   # ------------------------------------------
 
   # account
-  add user_path
+  add user_path # doubled?
 
   # edit registration/account
   add edit_email_user_path

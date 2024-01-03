@@ -47,7 +47,7 @@ RSpec.describe 'Sign in' do
 
     context 'and enters valid credentials' do
       it 'signs in successfully' do
-        expect(page).to have_text('Agree to our terms and conditions') # extra registration
+        expect(page).to have_text 'About you' # extra registration
       end
     end
 
