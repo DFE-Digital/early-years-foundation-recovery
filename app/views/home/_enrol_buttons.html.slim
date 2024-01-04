@@ -1,8 +1,0 @@
-.govuk-button-group
-  - if Rails.application.gov_one_login?
-    = govuk_link_to 'Create an account or sign in', new_user_session_path
-
-  - else
-    = govuk_button_link_to 'Create an account', new_user_registration_path
-    .white-space-pre-wrap= ' or '
-    = govuk_link_to 'sign in', new_user_session_path
