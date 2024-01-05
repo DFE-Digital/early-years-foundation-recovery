@@ -5,9 +5,9 @@
 --markup markdown
 -
 cms/*.md
-gov_one_login/*.md
 data/*.md
 uml/*.md
 adr/*.md
 RELEASE.md
+GOV_ONE.md
 LICENSE

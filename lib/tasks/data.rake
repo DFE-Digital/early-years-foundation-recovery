@@ -16,7 +16,7 @@ namespace :data do
     puts 'Truncate responses'
     ActiveRecord::Base.connection.execute('TRUNCATE responses RESTART IDENTITY CASCADE')
     puts 'Migrating user answers to responses'
-    UserAnswer.all.each do |user_answer|
+    UserAnswer.all.find_each do |user_answer|
       response = Response.create!(
         user_id: user_answer.user_id,
         training_module: user_answer.module,

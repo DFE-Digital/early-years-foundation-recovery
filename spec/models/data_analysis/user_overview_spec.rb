@@ -17,6 +17,7 @@ RSpec.describe DataAnalysis::UserOverview do
       'Locked Out',
       'Confirmed',
       'Unconfirmed',
+      'GovOne',
       'User Defined Roles',
       'Started Learning',
       'Not Started Learning',
@@ -34,30 +35,31 @@ RSpec.describe DataAnalysis::UserOverview do
   let(:rows) do
     [
       {
-        registration_complete: 4,
+        registration_complete: 5,
         registration_incomplete: 1,
         reregistered: 0,
-        registered_since_private_beta: 5,
+        registered_since_private_beta: 6,
         private_beta_only_registration_incomplete: 0,
         private_beta_only_registration_complete: 0,
         registration_events: 0,
         private_beta_registration_events: 0,
         public_beta_registration_events: 0,
-        total: 5,
+        total: 6,
         locked_out: 0,
-        confirmed: 5,
+        confirmed: 6,
         unconfirmed: 0,
+        gov_one: 1,
         user_defined_roles: 2,
         started_learning: 3,
-        not_started_learning: 2,
+        not_started_learning: 3,
         with_notes: 2,
-        with_notes_percentage: 0.4,
-        without_notes: 3,
-        without_notes_percentage: 0.6,
+        with_notes_percentage: 0.33,
+        without_notes: 4,
+        without_notes_percentage: 0.67,
         complete_registration_mail_recipients: 1,
         start_training_mail_recipients: 1,
         continue_training_mail_recipients: 0,
-        new_module_mail_recipients: 5,
+        new_module_mail_recipients: 6,
       },
     ]
   end
@@ -79,23 +81,25 @@ RSpec.describe DataAnalysis::UserOverview do
   let(:release) { create(:release) }
 
   before do
-    create(:module_release, release_id: release.id, module_position: 1, name: 'alpha')
-    create(:module_release, release_id: release.id, module_position: 2, name: 'bravo')
-    create(:module_release, release_id: release.id, module_position: 3, name: 'charlie')
+    create :module_release, release_id: release.id, module_position: 1, name: 'alpha'
+    create :module_release, release_id: release.id, module_position: 2, name: 'bravo'
+    create :module_release, release_id: release.id, module_position: 3, name: 'charlie'
 
     # user#1
-    complete_module(alpha, 1.minute)
-    complete_module(bravo, 1.minute)
-    complete_module(charlie, 1.minute)
+    complete_module alpha, 1.minute
+    complete_module bravo, 1.minute
+    complete_module charlie, 1.minute
 
     # user#2 user#3 with notes
-    create(:note, user: user_2)
-    create(:note, user: user_3)
+    create :note, user: user_2
+    create :note, user: user_3
 
     # user#4 complete registration notification
-    create(:user, :confirmed, confirmed_at: 4.weeks.ago)
+    create :user, :confirmed, confirmed_at: 4.weeks.ago
     # user#5 start training notification
-    create(:user, :registered, confirmed_at: 4.weeks.ago)
+    create :user, :registered, confirmed_at: 4.weeks.ago
+    # user#6
+    create :gov_one_user
   end
 
   it_behaves_like 'a data export model'
