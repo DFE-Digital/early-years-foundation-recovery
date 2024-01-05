@@ -37,6 +37,16 @@ RSpec.shared_context 'with progress' do
   end
 
   # @param mod [Training::Module]
+  def start_end_of_module_feedback_intro(mod)
+    view_pages_upto(mod, 'feedback_intro')
+  end
+
+  # @param mod [Training::Module]
+  def start_end_of_module_feedback_form(mod)
+    view_pages_upto(mod, 'feedback_form')
+  end
+
+  # @param mod [Training::Module]
   def start_summative_assessment(mod)
     view_pages_upto(mod, 'summative_questionnaire')
   end

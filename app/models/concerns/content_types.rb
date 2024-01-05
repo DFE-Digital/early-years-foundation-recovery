@@ -80,6 +80,16 @@ module ContentTypes
   end
 
   # @return [Boolean]
+  def feedback_intro?
+    page_type.eql?('feedback_intro')
+  end
+
+  # @return [Boolean]
+  def feedback_question?
+    page_type.eql?('feedback_form')
+  end
+
+  # @return [Boolean]
   def thankyou?
     page_type.eql?('thankyou')
   end

@@ -88,6 +88,18 @@ RSpec.describe ContentTypes, type: :model do
     specify { expect(content).to be_confidence_question }
   end
 
+  describe '#feedback_intro?' do
+    before { content.page_type = 'feedback_intro' }
+
+    specify { expect(content).to be_feedback_intro }
+  end
+
+  describe '#feedback_question?' do
+    before { content.page_type = 'feedback_form' }
+
+    specify { expect(content).to be_feedback_question }
+  end
+
   describe '#thankyou?' do
     before { content.page_type = 'thankyou' }
 
@@ -120,6 +132,8 @@ RSpec.describe ContentTypes, type: :model do
         assessment_results
         confidence_intro
         confidence_questionnaire
+        feedback_intro
+        feedback_form
         thankyou
         certificate
       ])
