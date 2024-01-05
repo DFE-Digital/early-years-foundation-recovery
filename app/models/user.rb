@@ -28,14 +28,13 @@ class User < ApplicationRecord
     if (user = find_by(email: email) || find_by(gov_one_id: gov_one_id))
       user.update_column(:email, email)
       user.update_column(:gov_one_id, gov_one_id) if user.gov_one_id.nil?
-      user.save!
     else
       special_characters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+']
       password = SecureRandom.alphanumeric(10).upcase + SecureRandom.alphanumeric(10).downcase + special_characters.sample(3).join
 
       user = new(email: email, gov_one_id: gov_one_id, confirmed_at: Time.zone.now, password: password)
-      user.save!
     end
+    user.save!
     user
   end
 
