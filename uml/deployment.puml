@@ -63,15 +63,15 @@ rectangle "Early Years Recovery Deployment" {
       }
 
       rectangle "ey-recovery-staging" as preprod <<space>> {
-        artifact "ey-recovery-staging.london.cloudapps.digital" as rc1 <<i>>
-        artifact "ey-recovery-dev.london.cloudapps.digital" as main <<i>>
+        artifact "staging.child-development-training.education.gov.uk" as rc1 <<i>>
+        artifact "eyrecovery-dev.azurewebsites.net" as main <<i>>
       }
 
       ' artifact or node? or device?
       rectangle "ey-recovery-content" as feature <<space>> {
-        artifact "ey-recovery-pr-123.london.cloudapps.digital" as 123 <<i>>
-        artifact "ey-recovery-pr-124.london.cloudapps.digital" as 124 <<i>>
-        artifact "ey-recovery-pr-125.london.cloudapps.digital" as 125 <<i>>
+        artifact "eyrecovery-review-pr-123.azurewebsites.net" as 123 <<i>>
+        artifact "eyrecovery-review-pr-124.azurewebsites.net" as 124 <<i>>
+        artifact "eyrecovery-review-pr-125.azurewebsites.net" as 125 <<i>>
       }
     }
   }

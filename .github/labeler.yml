@@ -17,6 +17,7 @@ terraform:
 frontend:
   - changed-files:
     - any-glob-to-any-file:
+      - app/views/**/*.html.slim
       - app/assets/images/*
       - app/assets/stylesheets/**/*
       - app/javascript/**/*

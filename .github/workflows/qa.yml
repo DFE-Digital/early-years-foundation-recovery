@@ -38,10 +38,14 @@ jobs:
         image: selenium/standalone-chrome:latest
         ports:
           - 4441:4444
+        volumes:
+          - /dev/shm:/dev/shm
       firefox:
         image: selenium/standalone-firefox:latest
         ports:
           - 4442:4444
+        volumes:
+          - /dev/shm:/dev/shm
 
     steps:
       -

@@ -1,115 +1,103 @@
 require 'rails_helper'
 
-# TODO: refactor so let=user is the variable and the before block is defined once
-#
 RSpec.describe 'Authentication', type: :request do
-  describe 'viewing authenticate_user! controller action' do
-    let(:action_path) { edit_registration_terms_and_conditions_path }
-
-    context 'with User not signed in' do
-      it 'redirects to sign in page' do
-        get action_path
-        expect(response).to redirect_to(new_user_session_path)
+  describe '#authenticate_user!' do
+    describe 'a guest' do
+      before do
+        get edit_registration_terms_and_conditions_path
       end
 
-      it 'displays message to sign in' do
-        get action_path
+      it { expect(response).to redirect_to new_user_session_path }
+
+      it 'must authenticate' do
         follow_redirect!
-        expect(response.body).to include('You need to sign in')
+        expect(response.body).to include 'You need to sign in'
       end
     end
 
-    context 'with unconfirmed user' do
-      before { sign_in create(:user) }
-
-      it 'redirects to sign in page' do
-        get action_path
-        expect(response).to redirect_to(new_user_session_path)
+    describe 'a user' do
+      before do
+        sign_in user
+        get edit_registration_terms_and_conditions_path
       end
 
-      it 'displays message that confirmation link email sent' do
-        get action_path
-        follow_redirect!
-        expect(response.body).to include('You have to confirm your email address')
+      context 'when unconfirmed' do
+        let(:user) { create :user }
+
+        it { expect(response).to redirect_to new_user_session_path }
+
+        it 'email address must be confirmed' do
+          follow_redirect!
+          expect(response.body).to include 'You have to confirm your email address'
+        end
       end
-    end
 
-    context 'with partially registered user' do
-      before { sign_in create(:user, :confirmed) }
+      context 'when partially registered' do
+        let(:user) { create :user, :confirmed }
 
-      it 'renders page' do
-        get action_path
-        expect(response).to have_http_status(:success)
+        it { expect(response).to have_http_status :success }
       end
-    end
 
-    context 'with registered User' do
-      before { sign_in create(:user, :registered) }
+      context 'when registered' do
+        let(:user) { create :user, :registered }
 
-      it 'renders page' do
-        get action_path
-        expect(response).to have_http_status(:success)
+        it { expect(response).to have_http_status :success }
       end
     end
   end
 
-  describe 'viewing :authenticate_registered_user! controller action' do
-    let(:action_path) { my_modules_path }
-
-    context 'with User not signed in' do
-      it 'redirects to sign in page' do
-        get action_path
-        expect(response).to redirect_to(new_user_session_path)
-      end
-
-      it 'displays message to sign in' do
-        get action_path
-        follow_redirect!
-        expect(response.body).to include('You need to sign in')
-      end
-    end
-
-    context 'with unconfirmed user' do
-      before { sign_in create(:user) }
-
-      it 'redirects to sign in page' do
-        get action_path
-        expect(response).to redirect_to(new_user_session_path)
-      end
-
-      it 'displays message that confirmation link email sent' do
-        get action_path
-        follow_redirect!
-        expect(response.body).to include('You have to confirm your email address')
-      end
-    end
-
-    context 'with partially registered User' do
+  describe '#authenticate_registered_user!' do
+    describe 'a guest' do
       before do
-        allow(Rails.application).to receive(:gov_one_login?).and_return(true)
-        sign_in create(:user, :confirmed)
+        get my_modules_path
       end
 
-      it 'redirects to finish registration' do
-        get action_path
-        expect(response).to redirect_to(edit_registration_terms_and_conditions_path)
-      end
+      it { expect(response).to redirect_to new_user_session_path }
 
-      it 'displays message to complete registration' do
-        get action_path
+      it 'must authenticate' do
         follow_redirect!
-        expect(response.body).to include('Please complete registration')
+        expect(response.body).to include 'You need to sign in'
       end
     end
 
-    context 'with registered User' do
+    describe 'a user' do
       before do
-        sign_in create(:user, :registered)
+        sign_in user
+        get my_modules_path
       end
 
-      it 'renders page' do
-        get action_path
-        expect(response).to have_http_status(:success)
+      context 'when unconfirmed' do
+        let(:user) { create :user }
+
+        it { expect(response).to redirect_to new_user_session_path }
+
+        it 'email address must be confirmed' do
+          follow_redirect!
+          expect(response.body).to include 'You have to confirm your email address'
+        end
+      end
+
+      context 'when partially registered' do
+        let(:user) { create :user, :confirmed }
+
+        it do
+          if Rails.application.gov_one_login?
+            expect(response).to redirect_to edit_registration_terms_and_conditions_path
+          else
+            expect(response).to redirect_to edit_registration_name_path
+          end
+        end
+
+        it 'registration must be completed' do
+          follow_redirect!
+          expect(response.body).to include 'Please complete registration'
+        end
+      end
+
+      context 'when registered' do
+        let(:user) { create :user, :registered }
+
+        it { expect(response).to have_http_status :success }
       end
     end
   end
