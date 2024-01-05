@@ -69,8 +69,6 @@ Default layout
   // noop
 }
 
-
-
 /*
 Hero layout
 -----------------------------------------------
@@ -80,6 +78,10 @@ Hero layout
   .govuk-notification-banner {
     margin-top: govuk-spacing(6);
     margin-bottom: govuk-spacing(-4);
+  }
+
+  #assessment-results .govuk-notification-banner {
+    margin-bottom: govuk-spacing(8);
   }
 
   @include govuk-media-query($until: tablet) {
