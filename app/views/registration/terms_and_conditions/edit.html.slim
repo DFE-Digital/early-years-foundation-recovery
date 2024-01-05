@@ -1,0 +1,22 @@
+= render 'user/debug'
+
+- content_for :page_title do
+  = html_title 'Terms and Conditions'
+
+.govuk-grid-row
+  .govuk-grid-column-two-thirds-from-desktop
+    = form_for form, url: registration_terms_and_conditions_path, method: :patch do |f|
+      = f.govuk_error_summary
+
+      h1.govuk-heading-l = t('register_terms_and_conditions.heading')
+
+      h3 = t('register_terms_and_conditions.subheading')
+
+      = f.govuk_check_boxes_fieldset :terms_and_conditions_agreed_at,
+        legend: { class: 'govuk-visually-hidden', text: 'Terms and conditions'}, classes: 'light-grey-box' do
+        = m('register_terms_and_conditions.legend')
+        = f.terms_and_conditions_check_box
+
+
+      .govuk-button-group
+        = f.govuk_submit t('links.continue')

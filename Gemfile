@@ -37,6 +37,9 @@ gem 'bootsnap', require: false
 
 # User authentication
 gem 'devise'
+gem 'jwt'
+gem 'omniauth_openid_connect'
+gem 'omniauth-rails_csrf_protection'
 
 # HTML abstraction markup language
 gem 'slim-rails'

@@ -5,6 +5,7 @@ RSpec.describe 'Sign in' do
   let(:password) { Rails.configuration.user_password }
 
   before do
+    allow(Rails.application).to receive(:gov_one_login?).and_return(true)
     visit '/users/sign-in'
     fill_in 'Email address', with: email_address
     fill_in 'Password', with: password
@@ -45,7 +46,7 @@ RSpec.describe 'Sign in' do
 
     context 'and enters valid credentials' do
       it 'signs in successfully' do
-        expect(page).to have_text('About you') # extra registration
+        expect(page).to have_text('Agree to our terms and conditions') # extra registration
       end
     end
 

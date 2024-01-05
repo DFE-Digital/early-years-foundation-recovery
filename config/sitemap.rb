@@ -14,8 +14,7 @@
 #     }
 #   ]
 #
-protocol = Rails.env.production? ? 'https://' : 'http://'
-SitemapGenerator::Sitemap.default_host = protocol + ENV['DOMAIN']
+SitemapGenerator::Sitemap.default_host = Rails.application.config.service_url
 SitemapGenerator::Sitemap.compress = false
 
 # Run this command to update /public/sitemap.xml
@@ -63,9 +62,13 @@ SitemapGenerator::Sitemap.create do
   # account
   add user_path
 
+  # GOV.UK one login
+  add gov_one_info_path
+
   # edit registration/account
   add edit_email_user_path
   add edit_password_user_path
+  add edit_registration_terms_and_conditions_path
   add edit_registration_name_path
   add edit_registration_setting_type_path
   add edit_registration_setting_type_other_path

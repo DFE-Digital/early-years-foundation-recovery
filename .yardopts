@@ -5,6 +5,7 @@
 --markup markdown
 -
 cms/*.md
+gov_one_login/*.md
 data/*.md
 uml/*.md
 adr/*.md
