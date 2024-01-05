@@ -13,8 +13,6 @@
 #
 # Add URLs in order to import images or javascript from another domain
 #
-# '*.s3.eu-west-2.amazonaws.com',
-# 'eyfs-cms-preprod.london.cloudapps.digital',
 GOVUK_DOMAINS = %w[
   *.education.gov.uk
 ].freeze

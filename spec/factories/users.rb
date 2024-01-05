@@ -27,6 +27,12 @@ FactoryBot.define do
       registration_complete { true }
     end
 
+    factory :gov_one_user do
+      registered
+      gov_one_id { 'urn:fdc:gov.uk:2022:23-random-alpha-numeric' }
+      # password { nil }
+    end
+
     # Personas -----------------------------------------------------------------
 
     trait :agency_childminder do

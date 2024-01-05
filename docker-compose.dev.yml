@@ -19,7 +19,7 @@ services:
       # app config
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
       - RAILS_ENV=development
-      - DOMAIN=app:3000
+      - DOMAIN=localhost:3000
       - RAILS_SERVE_STATIC_FILES=true
     volumes:
       - .:/srv
@@ -67,7 +67,7 @@ services:
       target: pa11y
     image: recovery:pa11y
     environment:
-      - DOMAIN=app:3000
+      - DOMAIN=localhost:3000
       - BOT_TOKEN
     depends_on:
       app:

@@ -1,23 +1,22 @@
 require 'rails_helper'
 
-RSpec.describe 'Confirmed users completing registration' do
-  before do
-    allow(Rails.application).to receive(:gov_one_login?).and_return(true)
-  end
-
+RSpec.describe 'Confirmed users' do
   include_context 'with user'
+
   let(:user) { create :user, :confirmed }
 
-  it 'requires name and a setting type and email preferences and a complete' do
-    expect(page).to have_text('Terms and conditions')
-    click_button 'Continue'
-    expect(page).to have_text('There is a problem')
-      .and have_text('You must accept the terms and conditions and privacy policy to create an account.')
+  it 'complete registration' do
+    if Rails.application.gov_one_login?
+      expect(page).to have_text('Terms and conditions')
+      click_button 'Continue'
+      expect(page).to have_text('There is a problem')
+        .and have_text('You must accept the terms and conditions and privacy policy to create an account.')
 
-    expect(page).to have_text('Agree to our terms and conditions')
+      expect(page).to have_text('Agree to our terms and conditions')
 
-    check 'I confirm that I accept the terms and conditions and privacy policy.'
-    click_button 'Continue'
+      check 'I confirm that I accept the terms and conditions and privacy policy.'
+      click_button 'Continue'
+    end
 
     expect(page).to have_text('About you')
     click_button 'Continue'

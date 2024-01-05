@@ -31,18 +31,27 @@ class User < ApplicationRecord
       user.save!
     else
       user = new(email: email, gov_one_id: gov_one_id, confirmed_at: Time.zone.now)
-      user.save!(validate: false)
+      user.save!(validate: false) # TODO: validate despite blank password
     end
     user
   end
 
-  # Include default devise modules. Others available are:
-  # :timeoutable, :trackable, :recoverable and :omniauthable
   attr_accessor :context
 
   devise :database_authenticatable, :registerable, :recoverable,
          :validatable, :rememberable, :confirmable, :lockable, :timeoutable,
          :secure_validatable, :omniauthable, omniauth_providers: [:openid_connect]
+
+  # FIXME: retire old devise functionality
+  # if Rails.application.gov_one_login?
+  #   devise :database_authenticatable, :rememberable, :lockable, :timeoutable,
+  #          :omniauthable, omniauth_providers: [:openid_connect]
+  # else
+  #   devise :database_authenticatable, :registerable, :recoverable,
+  #          :validatable, :rememberable, :confirmable, :lockable, :timeoutable,
+  #          :secure_validatable
+  # end
+
   devise :pwned_password unless Rails.env.test?
 
   has_many :responses
@@ -52,6 +61,8 @@ class User < ApplicationRecord
   has_many :visits, class_name: 'Ahoy::Visit'
   has_many :events, class_name: 'Ahoy::Event'
   has_many :notes
+
+  scope :gov_one, -> { where.not(gov_one_id: nil) }
 
   # account status
   scope :public_beta_only_registration_complete, -> { registered_since_private_beta.registration_complete }

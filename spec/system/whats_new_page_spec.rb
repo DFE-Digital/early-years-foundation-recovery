@@ -23,10 +23,15 @@ RSpec.describe 'New stuff page' do
       before do
         click_on 'sign-out-desktop'
 
-        visit '/users/sign-in'
-        fill_in 'Email address', with: user.email
-        fill_in 'Password', with: user.password
-        click_button 'Sign in'
+        if Rails.application.gov_one_login?
+          sign_in user
+          visit '/users/sign-in'
+        else
+          visit '/users/sign-in'
+          fill_in 'Email address', with: user.email
+          fill_in 'Password', with: user.password
+          click_button 'Sign in'
+        end
       end
 
       it 'does not appear' do
