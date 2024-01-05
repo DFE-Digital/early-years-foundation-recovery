@@ -290,7 +290,7 @@ class User < ApplicationRecord
 
   # @return [String]
   def authority_name
-    (local_authority.presence || 'Multiple')
+    local_authority.presence || 'Multiple'
   end
 
   # @return [String]
@@ -314,7 +314,8 @@ class User < ApplicationRecord
     return false unless registration_complete?
     return true if setting_other?
     return false unless setting_valid?
-    return true if select_new_role?
+
+    true if select_new_role?
   end
 
   # @return [Boolean]
