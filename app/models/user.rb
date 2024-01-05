@@ -21,6 +21,12 @@ class User < ApplicationRecord
     DASHBOARD_ATTRS + Training::Module.live.map { |mod| "module_#{mod.position}_time" }
   end
 
+  # @return [String]
+  def self.random_password
+    special_characters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+']
+    password = SecureRandom.alphanumeric(5).upcase + SecureRandom.alphanumeric(5).downcase + special_characters.sample(3).join + SecureRandom.hex(5)
+  end
+
   # @param email [String]
   # @param gov_one_id [String]
   # @return [User]
@@ -29,10 +35,7 @@ class User < ApplicationRecord
       user.update_column(:email, email)
       user.update_column(:gov_one_id, gov_one_id) if user.gov_one_id.nil?
     else
-      special_characters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+']
-      password = SecureRandom.alphanumeric(10).upcase + SecureRandom.alphanumeric(10).downcase + special_characters.sample(3).join
-
-      user = new(email: email, gov_one_id: gov_one_id, confirmed_at: Time.zone.now, password: password)
+      user = new(email: email, gov_one_id: gov_one_id, confirmed_at: Time.zone.now, password: random_password)
     end
     user.save!
     user

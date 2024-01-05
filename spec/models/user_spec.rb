@@ -1,5 +1,11 @@
 require 'rails_helper'
 
+# @return [String]
+# def random_password
+#   special_characters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+']
+#   password = SecureRandom.alphanumeric(5).upcase + SecureRandom.alphanumeric(5).downcase + special_characters.sample(3).join + SecureRandom.hex(5)
+# end
+
 RSpec.describe User, type: :model do
   it 'is valid after registration' do
     expect(build(:user, :registered)).to be_valid
@@ -255,6 +261,16 @@ RSpec.describe User, type: :model do
           expect(user.reload.email).to eq email
         end
       end
+    end
+  end
+
+  describe '.random_password' do
+    it 'generates a valid password' do
+      expect(described_class.random_password).to be_a String
+      expect(described_class.random_password.scan(/[A-Z]/).count).to be >= 2
+      expect(described_class.random_password.scan(/[a-z]/).count).to be >= 2
+      expect(described_class.random_password.scan(/[0-9]/).count).to be >= 2
+      expect(described_class.random_password.scan(/[^A-Za-z0-9]/).count).to be >= 2
     end
   end
 end
