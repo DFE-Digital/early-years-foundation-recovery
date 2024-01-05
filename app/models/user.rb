@@ -30,8 +30,11 @@ class User < ApplicationRecord
       user.update_column(:gov_one_id, gov_one_id) if user.gov_one_id.nil?
       user.save!
     else
-      user = new(email: email, gov_one_id: gov_one_id, confirmed_at: Time.zone.now)
-      user.save!(validate: false)
+      special_characters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+']
+      password = SecureRandom.alphanumeric(10).upcase + SecureRandom.alphanumeric(10).downcase + special_characters.sample(3).join
+
+      user = new(email: email, gov_one_id: gov_one_id, confirmed_at: Time.zone.now, password: password)
+      user.save!
     end
     user
   end
@@ -130,7 +133,7 @@ class User < ApplicationRecord
             inclusion: { in: Trainee::Setting.valid_types },
             if: proc { |u| u.registration_complete? }
 
-  validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
+  validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :update, if: proc { |u| u.registration_complete? }
 
   # @return [Boolean]
   def notes?
