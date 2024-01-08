@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Sign up' do
   before do
+    skip if Rails.application.gov_one_login?
     visit '/users/sign-up'
   end
 
