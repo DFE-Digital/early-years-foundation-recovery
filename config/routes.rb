@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'health', to: 'home#show'
   get 'audit', to: 'home#audit'
-  get 'gov-one', to: 'home#gov_one' unless Rails.application.gov_one_login?
   get 'my-modules', to: 'learning#show' # @see User#course
 
   get '404', to: 'errors#not_found', via: :all

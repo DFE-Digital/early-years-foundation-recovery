@@ -9,10 +9,6 @@ class HomeController < ApplicationController
     flash.now[:important] = t('banners.gov_one') unless Rails.application.gov_one_login?
   end
 
-  def gov_one
-    render 'devise/sessions/gov_one'
-  end
-
   def show
     render json: { status: 'HEALTHY' }, status: :ok
   end
