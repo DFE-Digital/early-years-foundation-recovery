@@ -146,7 +146,11 @@ class User < ApplicationRecord
             inclusion: { in: Trainee::Setting.valid_types },
             if: proc { |u| u.registration_complete? }
 
-  validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :update, if: proc { |u| u.registration_complete? }
+  if Rails.application.gov_one_login?
+    validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :update, if: proc { |u| u.registration_complete? }
+  else
+    validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
+  end
 
   # @return [Boolean]
   def notes?
