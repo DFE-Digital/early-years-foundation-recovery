@@ -123,8 +123,13 @@ en:
   banners:
     alert: Warning
     error: Error
-    important: Success
+    important: Important
     notice: Success
+    gov_one: |
+      ## Access to this website is changing
+
+      From next month, you will require a GOV.UK One login account to access this website.
+      To find out about creating a GOV.UK One login account then [read this useful information page](/gov-one).
 
   # Training Modules -----------------------------------------------------------
 
