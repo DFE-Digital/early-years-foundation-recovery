@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Page, type: :model do
   describe '.by_name' do
     specify do
-      expect(described_class.by_name('sitemap')).to be_a Page
+      expect(described_class.by_name('sitemap')).to be_a described_class
     end
   end
 
