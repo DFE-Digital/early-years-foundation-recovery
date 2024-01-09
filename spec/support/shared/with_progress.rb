@@ -38,7 +38,7 @@ RSpec.shared_context 'with progress' do
 
   # @param mod [Training::Module]
   def start_end_of_module_feedback_intro(mod)
-    view_pages_upto(mod, 'feedback_intro')
+    view_pages_upto(mod, 'opinion_intro')
   end
 
   # @param mod [Training::Module]

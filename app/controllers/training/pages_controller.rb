@@ -23,6 +23,8 @@ module Training
         redirect_to training_module_question_path(mod.name, content.name)
       elsif content.assessment_results?
         redirect_to training_module_assessment_path(mod.name, content.name)
+      # elsif content.opinion_intro?
+      #   redirect_to training_module_opinion_path(mod.name, content.name)
       else
         render_page
       end
