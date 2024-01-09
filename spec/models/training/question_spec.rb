@@ -77,6 +77,16 @@ RSpec.describe Training::Question, type: :model do
       end
     end
 
+    context 'when the question is a feedback question' do
+      subject(:question) do
+        Training::Module.by_name('alpha').page_by_name('feedback1')
+      end
+
+      specify do
+        expect(question.legend).to start_with 'Strongly agree'
+      end
+    end
+
     context 'when multiple options are correct' do
       subject(:question) do
         Training::Module.by_name('alpha').page_by_name('1-3-2-1')

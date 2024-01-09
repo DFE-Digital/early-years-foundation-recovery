@@ -26,6 +26,10 @@ module Training
       confidence_question? ? false : answer.multi_select?
     end
 
+    def opinion_question?
+      page_type == 'opinion'
+    end
+
     # @return [Boolean] event tracking
     def first_confidence?
       parent.confidence_questions.first.eql?(self)
@@ -55,6 +59,7 @@ module Training
         formative_questionnaire: 'formative_assessment',
         summative_questionnaire: 'summative_assessment',
         confidence_questionnaire: 'confidence_check',
+        opinion: 'opinion',
       }.fetch(page_type.to_sym)
     end
 
@@ -63,6 +68,7 @@ module Training
         formative_questionnaire: 'formative',
         summative_questionnaire: 'summative',
         confidence_questionnaire: 'confidence',
+        opinion: 'opinion',
       }.fetch(page_type.to_sym)
     end
 
@@ -92,6 +98,8 @@ module Training
 
           #{body}
         LEGEND
+      elsif opinion_question?
+        body.to_s
       else
         "#{body} (Select one answer)"
       end

@@ -8,7 +8,7 @@ module Pagination
 
   # @return [Boolean]
   def subsection?
-    topic_intro? || recap_page? || assessment_intro? || confidence_intro? || certificate?
+    topic_intro? || recap_page? || assessment_intro? || confidence_intro? || opinion_intro? || certificate?
   end
 
   # @see app/views/training/pages/text_page.html.slim
