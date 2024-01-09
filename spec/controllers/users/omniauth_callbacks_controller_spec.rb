@@ -11,6 +11,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
   end
 
   before do
+    skip unless Rails.application.gov_one_login?
     request.env['devise.mapping'] = Devise.mappings[:user]
     session[:gov_one_auth_state] = 'mock_state'
     session[:gov_one_auth_nonce] = 'mock_nonce'

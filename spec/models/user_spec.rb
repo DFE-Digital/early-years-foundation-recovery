@@ -1,11 +1,5 @@
 require 'rails_helper'
 
-# @return [String]
-# def random_password
-#   special_characters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+']
-#   password = SecureRandom.alphanumeric(5).upcase + SecureRandom.alphanumeric(5).downcase + special_characters.sample(3).join + SecureRandom.hex(5)
-# end
-
 RSpec.describe User, type: :model do
   it 'is valid after registration' do
     expect(build(:user, :registered)).to be_valid
@@ -218,6 +212,7 @@ RSpec.describe User, type: :model do
     let(:gov_one_id) { 'urn:fdc:gov.uk:2022:23-random-alpha-numeric' }
 
     before do
+      skip unless Rails.application.gov_one_login?
       described_class.find_or_create_from_gov_one(**params)
     end
 
