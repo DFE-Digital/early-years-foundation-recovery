@@ -6,7 +6,7 @@ RSpec.describe Registration::TermsAndConditionsForm do
   let(:user) { create(:user) }
 
   describe '#validate' do
-    let(:terms_and_conditions_errors) { form.errors[:terms_and_conditions_agreed_at] }
+    let(:errors) { form.errors[:terms_and_conditions_agreed_at] }
 
     before do
       form.terms_and_conditions_agreed_at = time
@@ -17,7 +17,7 @@ RSpec.describe Registration::TermsAndConditionsForm do
       let(:time) { nil }
 
       specify do
-        expect(terms_and_conditions_errors).to be_present
+        expect(errors).to be_present
       end
     end
 
@@ -25,7 +25,7 @@ RSpec.describe Registration::TermsAndConditionsForm do
       let(:time) { Time.zone.now }
 
       specify do
-        expect(terms_and_conditions_errors).not_to be_present
+        expect(errors).not_to be_present
       end
     end
   end
