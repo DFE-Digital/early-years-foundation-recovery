@@ -212,7 +212,6 @@ RSpec.describe User, type: :model do
     let(:gov_one_id) { 'urn:fdc:gov.uk:2022:23-random-alpha-numeric' }
 
     context 'without an existing account' do
-
       before do
         skip unless Rails.application.gov_one_login?
         described_class.find_or_create_from_gov_one(**params)
@@ -230,11 +229,10 @@ RSpec.describe User, type: :model do
     end
 
     context 'with an existing account' do
-
       before do
         described_class.find_or_create_from_gov_one(**params)
       end
-      
+
       context 'and using GovOne for the first time' do
         let(:user) do
           create :user, :registered, email: email
