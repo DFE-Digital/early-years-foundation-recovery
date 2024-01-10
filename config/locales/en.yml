@@ -305,7 +305,7 @@ en:
   # /my-account
   my_account:
     title: My account
-    name_information: This is the name that will appear on you end of module certificate. You can use this setting to change how your name appears. Changing your name on this account will not affect your GOV.UK One Login
+    name_information: This is the name that will appear on your end of module certificate. You can use this setting to change how your name appears. Changing your name on this account will not affect your GOV.UK One Login
     setting_details: |
       ## Your setting details
     email_preferences: |

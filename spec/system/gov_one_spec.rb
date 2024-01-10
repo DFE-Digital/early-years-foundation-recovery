@@ -15,6 +15,7 @@ RSpec.describe 'Gov One' do
       expect(page).to have_text 'This service uses GOV.UK One Login which is managed by the Government Digital Service.'
       expect(page).to have_text 'You will be asked to sign in to your account, or create a One Login account, in this service'
       expect(page).to have_text 'Continue to GOV.UK One Login'
+      expect(page).to have_text 'If you have an existing early years child development training account but you do not yet have a GOV.UK One Login, you must use the same email address for both accounts. This will ensure that any progress you have made through the training is retained.'
     end
   end
 
