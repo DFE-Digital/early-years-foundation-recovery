@@ -75,18 +75,49 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#module_ttc' do
-    subject(:user) do
-      create(:user,
-             module_time_to_completion: {
-               foo: 9,
-               bravo: 2,
-               alpha: 4,
-             })
+  describe 'course engagement' do
+    include_context 'with progress'
+
+    describe '#module_ttc' do
+      subject(:user) do
+        create(:user,
+               module_time_to_completion: {
+                 foo: 9,
+                 bravo: 2,
+                 alpha: 4,
+               })
+      end
+
+      it 'lists seconds taken to complete published modules in order' do
+        expect(user.module_ttc).to eq({ 'alpha' => 4, 'bravo' => 2, 'charlie' => nil })
+      end
     end
 
-    it 'lists seconds taken to complete published modules in order' do
-      expect(user.module_ttc).to eq({ 'alpha' => 4, 'bravo' => 2, 'charlie' => nil })
+    describe '#course_started?' do
+      it 'is true once a module is started' do
+        expect(user).not_to be_course_started
+        start_module(alpha)
+        expect(user).to be_course_started
+      end
+    end
+
+    describe '#module_in_progress?' do
+      it 'is true if a module is incomplete' do
+        expect(user).not_to be_module_in_progress
+        start_module(bravo)
+        expect(user).to be_module_in_progress
+        sleep(1) # time taken to complete
+        complete_module(bravo)
+        expect(user).not_to be_module_in_progress
+      end
+    end
+
+    describe '#modules_in_progress' do
+      it 'lists started modules' do
+        expect(user.modules_in_progress).to be_empty
+        start_module(charlie)
+        expect(user.modules_in_progress).not_to be_empty
+      end
     end
   end
 
@@ -270,70 +301,6 @@ RSpec.describe User, type: :model do
       expect(described_class.random_password.scan(/[a-z]/).count).to be >= 2
       expect(described_class.random_password.scan(/[0-9]/).count).to be >= 2
       expect(described_class.random_password.scan(/[^A-Za-z0-9]/).count).to be >= 2
-    end
-  end
-
-  describe '.course_started?' do
-    subject(:user) { create(:user, :registered) }
-
-    include_context 'with progress'
-
-    context 'with no started modules' do
-      specify { expect(user.course_started?).to eq(false) }
-    end
-
-    context 'with modules in progress' do
-      before do
-        start_module(alpha)
-      end
-
-      specify { expect(user.course_started?).to eq(true) }
-    end
-
-    context 'with completed modules' do
-      before do
-        complete_module(alpha)
-      end
-
-      specify { expect(user.course_started?).to eq(true) }
-    end
-  end
-
-  describe '.course_in_progress?' do
-    subject(:user) { create(:user, :registered) }
-
-    include_context 'with progress'
-
-    context 'with no modules in progress' do
-      specify { expect(user.course_in_progress?).to eq(false) }
-    end
-
-    context 'with modules in progress' do
-      before do
-        start_module(alpha)
-      end
-
-      specify { expect(user.course_in_progress?).to eq(true) }
-    end
-  end
-
-  describe '.modules_in_progress' do
-    subject(:user) { create(:user, :registered) }
-
-    include_context 'with progress'
-
-    context 'with no modules in progress' do
-      specify { expect(user.modules_in_progress).to eq([]) }
-    end
-
-    context 'with modules in progress' do
-      before do
-        start_module(alpha)
-      end
-
-      it 'returns the names of those modules' do
-        expect(user.modules_in_progress).to eq(%w[alpha])
-      end
     end
   end
 end
