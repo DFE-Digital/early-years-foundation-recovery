@@ -102,5 +102,17 @@ namespace :eyfs do
         File.write(file_path, file_data)
       end
     end
+
+    desc 'Resource tally'
+    task resources: :environment do
+      cms_resources = Page::Resource.ordered.map(&:name)
+      require 'seed_snippets'
+      yaml_locales = SeedSnippets.new.list
+      tally = (yaml_locales - cms_resources).sort
+
+      puts "'#{Rails.application.config.contentful_environment}' is missing #{tally.count} resources:"
+      puts '------------------------------------'
+      tally.each { |r| puts r }
+    end
   end
 end
