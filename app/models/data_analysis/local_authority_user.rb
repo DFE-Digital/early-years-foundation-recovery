@@ -30,7 +30,7 @@ module DataAnalysis
 
       # @return [User::ActiveRecord_Relation]
       def public_beta_users
-        User.since_public_beta.with_local_authority.registration_complete
+        User.not_closed.since_public_beta.with_local_authority.registration_complete
       end
     end
   end
