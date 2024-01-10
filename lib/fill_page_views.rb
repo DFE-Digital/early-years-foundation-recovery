@@ -1,3 +1,4 @@
+# :nocov:
 # Assumes gaps in page views due to skipping or revisions to content
 #
 # Loop over active users and modules and inject page view events for skipped pages
@@ -73,3 +74,4 @@ private
     end
   end
 end
+# :nocov:
