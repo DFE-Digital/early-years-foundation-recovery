@@ -15,11 +15,13 @@ services:
       - EDITOR=vi
       - RAILS_ENV=production
       - NODE_ENV=production
-      - RAILS_MASTER_KEY
-      - RAILS_LOG_TO_STDOUT
       - GROVER_NO_SANDBOX=true
       - WEB_CONCURRENCY=0
+      # overrides
+      - RAILS_MASTER_KEY
+      - RAILS_LOG_TO_STDOUT
       - PROXY_CERT
+      - GOV_ONE_LOGIN
     depends_on:
       - db
     ports:

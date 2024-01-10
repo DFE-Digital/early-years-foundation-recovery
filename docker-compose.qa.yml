@@ -11,7 +11,7 @@ services:
       test: curl --fail --insecure https://localhost:3000/health || exit 1
     environment:
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_production
-      - DOMAIN=https://localhost:3000
+      - DOMAIN=localhost:3000
       - PROXY_CERT=/srv/localhost.crt
       # overrides
       - WORKSPACE
