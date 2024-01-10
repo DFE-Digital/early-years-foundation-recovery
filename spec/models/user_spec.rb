@@ -276,13 +276,15 @@ RSpec.describe User, type: :model do
   describe '.course_started?' do
     subject(:user) { create(:user, :registered) }
 
+    include_context 'with progress'
+
     context 'with no started modules' do
       specify { expect(user.course_started?).to eq(false) }
     end
 
     context 'with modules in progress' do
       before do
-        user.module_time_to_completion = { alpha: 0 }
+        start_module(alpha)
       end
 
       specify { expect(user.course_started?).to eq(true) }
@@ -290,7 +292,7 @@ RSpec.describe User, type: :model do
 
     context 'with completed modules' do
       before do
-        user.module_time_to_completion = { alpha: 1 }
+        complete_module(alpha)
       end
 
       specify { expect(user.course_started?).to eq(true) }
@@ -300,13 +302,15 @@ RSpec.describe User, type: :model do
   describe '.course_in_progress?' do
     subject(:user) { create(:user, :registered) }
 
+    include_context 'with progress'
+
     context 'with no modules in progress' do
       specify { expect(user.course_in_progress?).to eq(false) }
     end
 
     context 'with modules in progress' do
       before do
-        user.module_time_to_completion = { alpha: 0 }
+        start_module(alpha)
       end
 
       specify { expect(user.course_in_progress?).to eq(true) }
@@ -316,13 +320,15 @@ RSpec.describe User, type: :model do
   describe '.modules_in_progress' do
     subject(:user) { create(:user, :registered) }
 
+    include_context 'with progress'
+
     context 'with no modules in progress' do
       specify { expect(user.modules_in_progress).to eq([]) }
     end
 
     context 'with modules in progress' do
       before do
-        user.module_time_to_completion = { alpha: 0 }
+        start_module(alpha)
       end
 
       it 'returns the names of those modules' do
