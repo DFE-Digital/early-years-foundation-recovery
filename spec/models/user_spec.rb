@@ -75,18 +75,49 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#module_ttc' do
-    subject(:user) do
-      create(:user,
-             module_time_to_completion: {
-               foo: 9,
-               bravo: 2,
-               alpha: 4,
-             })
+  describe 'course engagement' do
+    include_context 'with progress'
+
+    describe '#module_ttc' do
+      subject(:user) do
+        create(:user,
+               module_time_to_completion: {
+                 foo: 9,
+                 bravo: 2,
+                 alpha: 4,
+               })
+      end
+
+      it 'lists seconds taken to complete published modules in order' do
+        expect(user.module_ttc).to eq({ 'alpha' => 4, 'bravo' => 2, 'charlie' => nil })
+      end
     end
 
-    it 'lists seconds taken to complete published modules in order' do
-      expect(user.module_ttc).to eq({ 'alpha' => 4, 'bravo' => 2, 'charlie' => nil })
+    describe '#course_started?' do
+      it 'is true once a module is started' do
+        expect(user).not_to be_course_started
+        start_module(alpha)
+        expect(user).to be_course_started
+      end
+    end
+
+    describe '#module_in_progress?' do
+      it 'is true if a module is incomplete' do
+        expect(user).not_to be_module_in_progress
+        start_module(bravo)
+        expect(user).to be_module_in_progress
+        sleep(1) # time taken to complete
+        complete_module(bravo)
+        expect(user).not_to be_module_in_progress
+      end
+    end
+
+    describe '#modules_in_progress' do
+      it 'lists started modules' do
+        expect(user.modules_in_progress).to be_empty
+        start_module(charlie)
+        expect(user.modules_in_progress).not_to be_empty
+      end
     end
   end
 
@@ -211,11 +242,12 @@ RSpec.describe User, type: :model do
     let(:email) { 'current@test.com' }
     let(:gov_one_id) { 'urn:fdc:gov.uk:2022:23-random-alpha-numeric' }
 
-    before do
-      described_class.find_or_create_from_gov_one(**params)
-    end
-
     context 'without an existing account' do
+      before do
+        skip unless Rails.application.gov_one_login?
+        described_class.find_or_create_from_gov_one(**params)
+      end
+
       let(:params) do
         { email: email, gov_one_id: gov_one_id }
       end
@@ -228,6 +260,10 @@ RSpec.describe User, type: :model do
     end
 
     context 'with an existing account' do
+      before do
+        described_class.find_or_create_from_gov_one(**params)
+      end
+
       context 'and using GovOne for the first time' do
         let(:user) do
           create :user, :registered, email: email
@@ -255,6 +291,16 @@ RSpec.describe User, type: :model do
           expect(user.reload.email).to eq email
         end
       end
+    end
+  end
+
+  describe '.random_password' do
+    it 'generates a valid password' do
+      expect(described_class.random_password).to be_a String
+      expect(described_class.random_password.scan(/[A-Z]/).count).to be >= 2
+      expect(described_class.random_password.scan(/[a-z]/).count).to be >= 2
+      expect(described_class.random_password.scan(/[0-9]/).count).to be >= 2
+      expect(described_class.random_password.scan(/[^A-Za-z0-9]/).count).to be >= 2
     end
   end
 end
