@@ -1,41 +1,28 @@
-- if Rails.application.gov_one_login?
-  - content_for :page_title do
-    = html_title t('home.title')
+- content_for :page_title do
+  = html_title t('home.title')
 
-  - content_for :hero do
-    = render 'hero'
+- content_for :hero do
+  = render 'hero'
 
-  = render 'learning/cms_debug'
-  = render 'debug'
+= render 'learning/cms_debug'
+= render 'debug'
+
+- if Rails.application.gov_one_login? # ----------------------------------------
 
   .govuk-grid-row
     .govuk-grid-column-one-half
       = m('home.about', headings_start_with: 'xl')
 
-  .prompt.prompt-home
-    .govuk-grid-row
-      .govuk-grid-column-one-quarter
-        i.fa-2x.fa-solid.fa-circle-info aria-describedby='info icon'
-
-      .govuk-grid-column-three-quarters
-        = m('home.prompt', headings_start_with: 'xl')
+  = render 'prompt'
 
   - unless current_user
-    .govuk-grid-row class="govuk-!-margin-top-9"
+    .govuk-grid-row class='govuk-!-margin-top-9'
       .govuk-grid-column-full
-        = govuk_button_link_to gov_one_info_path, class: "govuk-button--start" do
-          | #{t('home.gov_one_button')}
+        = govuk_button_link_to new_user_session_path, class: 'govuk-button--start' do
+          = t('home.gov_one_button')
           = render 'chevron'
 
-- else
-  - content_for :page_title do
-    = html_title t('home.title')
-
-  - content_for :hero do
-    = render 'hero'
-
-  = render 'learning/cms_debug'
-  = render 'debug'
+- else # -----------------------------------------------------------------------
 
   .govuk-grid-row
     .govuk-grid-column-one-half
@@ -51,10 +38,4 @@
             .white-space-pre-wrap= ' or '
             = govuk_link_to 'create an account', new_user_registration_path
 
-  .prompt.prompt-home
-    .govuk-grid-row
-      .govuk-grid-column-one-quarter
-        i.fa-2x.fa-solid.fa-circle-info aria-describedby='info icon'
-
-      .govuk-grid-column-three-quarters
-        = m('home.prompt', headings_start_with: 'xl')
+  = render 'prompt'

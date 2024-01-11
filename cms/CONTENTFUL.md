@@ -111,7 +111,7 @@ Used by developers when editing module content, usually demo content.
 
 Used by developers when editing demo module content.
 
-As above replace `http://localhost:3000` with `https://ey-recovery-dev.london.cloudapps.digital`
+As above replace `http://localhost:3000` with `https://eyrecovery-dev.azurewebsites.net`
 
 **Staging**
 
@@ -141,7 +141,7 @@ As above replace `http://localhost:3000` with `https://staging.child-development
 
 - Name: `Release content for Production (delivery)`
 - Filters: `sys.environment.sys.id` equals `master`
-- URL: `POST` to `https://ey-recovery.london.cloudapps.digital/release`
+- URL: `POST` to `https://child-development-training.education.gov.uk/release`
 - Content events triggers: N/A
 - Other API events: `Release` action `Execute`
 
@@ -149,7 +149,7 @@ As above replace `http://localhost:3000` with `https://staging.child-development
 
 - Name: `Publish stand-alone pages for Production (delivery)`
 - Filters: `sys.environment.sys.id` equals `master` and `sys.contentType.sys.id` in `static` or `resource`
-- URL: `POST` to `https://ey-recovery.london.cloudapps.digital/change`
+- URL: `POST` to `https://child-development-training.education.gov.uk/change`
 - Content events triggers: `Publish` of `Entry` if `static`
 - Other API events: N/A
 
@@ -157,7 +157,7 @@ As above replace `http://localhost:3000` with `https://staging.child-development
 
 - Name: `Autosave demo training content for Dev (preview)`
 - Filters: `sys.environment.sys.id` equals `test`
-- URL: `POST` to `https://ey-recovery-dev.london.cloudapps.digital/change`
+- URL: `POST` to `https://eyrecovery-dev.azurewebsites.net/change`
 - Content events triggers: `Autosave` of `Entry` or `Asset`
 - Other API events: N/A
 

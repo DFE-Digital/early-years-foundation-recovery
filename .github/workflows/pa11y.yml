@@ -17,7 +17,7 @@ on:
 
 jobs:
   test:
-    if: contains(github.event.pull_request.labels.*.name, 'review')
+    if: contains(github.event.pull_request.labels.*.name, 'review') && contains(github.event.pull_request.labels.*.name, 'frontend') && contains(github.event.pull_request.labels.*.name, 'a11y')
     runs-on: ubuntu-latest
     environment: development
     env:

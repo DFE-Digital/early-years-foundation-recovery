@@ -16,7 +16,7 @@ module Pages
       wait_until_header_visible
 
       email ||= 'completed@example.com'
-      password ||= 'Str0ngPa$$w0rd12'
+      password ||= ENV.fetch('USER_PASSWORD', 'Str0ngPa$$w0rd12')
 
       email_field.set(email)
       password_field.set(password)

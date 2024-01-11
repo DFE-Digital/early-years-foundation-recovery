@@ -1,20 +1,19 @@
 - content_for :page_title do
-  = html_title t('home.title')
+  = html_title t('account_login.title')
 
 - content_for :hero do
   .govuk-grid-row class='govuk-!-padding-top-9'
     .govuk-grid-column-three-quarters
       h1.dfe-heading-xl class='govuk-!-margin-bottom-4'
         = t('gov_one_info.hero.header')
-      p.govuk-body-l = t('gov_one_info.hero.body')
+      p.govuk-body-l
+        = t('gov_one_info.hero.body')
 
 
 .govuk-grid-row
   .govuk-grid-column-full
-    . class='govuk-!-margin-bottom-5'
-        = m('gov_one_info.body')
-        hr
-
+    = m('gov_one_info.body')
+    hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
     = login_button
 
 .govuk-grid-row

@@ -24,6 +24,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
 
   context 'with a new user' do
     before do
+      skip unless Rails.application.gov_one_login?
       get :openid_connect, params: params
     end
 

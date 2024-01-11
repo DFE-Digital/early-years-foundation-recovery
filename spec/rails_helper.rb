@@ -67,6 +67,9 @@ RSpec.configure do |config|
   # enable #travel_to
   config.include ActiveSupport::Testing::TimeHelpers
 
-  # enable ShowMeTheCookies
+  # enable cookie banner
   config.include ShowMeTheCookies, type: :system
+
+  # enable OIDC session
+  config.include Devise::Test::IntegrationHelpers, type: :system if Rails.application.gov_one_login?
 end

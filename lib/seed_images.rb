@@ -23,7 +23,7 @@ class SeedImages < SeedContentful
 private
 
   # @return [String]
-  IMG_HOST = 'https://ey-recovery-dev.london.cloudapps.digital'.freeze
+  IMG_HOST = 'https://eyrecovery-dev.azurewebsites.net'.freeze
 
   # @param asset [Contentful::Management::Asset]
   # @return [String]

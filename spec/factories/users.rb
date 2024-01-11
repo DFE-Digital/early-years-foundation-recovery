@@ -27,6 +27,19 @@ FactoryBot.define do
       registration_complete { true }
     end
 
+    trait :closed do
+      registered
+      closed_at { '2024-01-08 10:23:40.946267' }
+      closed_reason { 'other' }
+      closed_reason_custom { 'I did not find the training useful' }
+    end
+
+    factory :gov_one_user do
+      registered
+      gov_one_id { 'urn:fdc:gov.uk:2022:23-random-alpha-numeric' }
+      # password { nil }
+    end
+
     # Personas -----------------------------------------------------------------
 
     trait :agency_childminder do

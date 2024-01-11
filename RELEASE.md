@@ -40,7 +40,7 @@ We use 9 swim lanes on the [Jira][jira] board.
 
 - `development` deployment
 - `main` branch
-- <https://eyrecovery-dev.azurewebsites.net/>
+- <https://eyrecovery-dev.azurewebsites.net>
 - update accessibility and quality checks as required
 
 **7. Approval**
