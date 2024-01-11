@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 describe 'ContentHelper', type: :helper do
+  describe '#service_name' do
+    it { expect(helper.service_name).to eq 'Early years child development training' }
+  end
+
+  describe '#privacy_policy_url' do
+    it { expect(helper.privacy_policy_url).to eq 'https://www.gov.uk/government/publications/privacy-information-members-of-the-public/privacy-information-members-of-the-public' }
+  end
+
   describe '#completed_modules_table' do
     subject(:html) { helper.completed_modules_table }
 
@@ -154,9 +162,5 @@ describe 'ContentHelper', type: :helper do
         end
       end
     end
-  end
-
-  describe '#service_name' do
-    it { expect(helper.service_name).to eq 'Early years child development training' }
   end
 end

@@ -60,5 +60,5 @@ lowlevel_error_handler do |error|
   Sentry.capture_message(error.message)
   # FileUtils.touch Rails.root.join('tmp/restart.txt')
 
-  # [500, {}, ["Contact #{Rails.application.config.internal_mailbox} for support\n"]]
+  # [500, {}, ["Contact #{Course.first.internal_mailbox} for support\n"]]
 end
