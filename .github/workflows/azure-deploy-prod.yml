@@ -94,6 +94,15 @@ jobs:
           images: ${{ env.DOCKER_IMAGE }}:${{ inputs.version || github.ref_name }}
           slot-name: ${{ vars.WEBAPP_DEPLOY_SLOT }}
 
+      # Destroy Background Worker
+      - name: Destroy existing Azure Container Instances
+        uses: azure/CLI@v1
+        with:
+          azcliversion: 2.50.0
+          inlineScript: |
+            az container delete --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+              --name ${{ vars.WORKERAPP_NAME }}
+
       # Deploy Background Worker
       - name: Deploy to Azure Container Instances
         uses: azure/CLI@v1
