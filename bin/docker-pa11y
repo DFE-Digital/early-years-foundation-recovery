@@ -3,11 +3,13 @@
 # Check accessibility of running dev container against latest sitemap
 # or an external site
 #
-# ./bin/docker-pa11y https://ey-recovery-dev.london.cloudapps.digital
+# ./bin/docker-pa11y https://eyrecovery-dev.azurewebsites.net
 # ------------------------------------------------------------------------------
 set -e
 
 ./bin/docker-rails eyfs:bot sitemap:refresh:no_ping
+
+BASE_URL=${1-"http://app:3000"} \
 
 docker-compose \
   -f docker-compose.yml \
@@ -15,4 +17,4 @@ docker-compose \
   --project-name recovery \
   run \
   --name recovery_pa11y \
-  --rm pa11y $1
+  --rm pa11y $BASE_URL

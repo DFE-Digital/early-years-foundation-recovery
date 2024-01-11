@@ -44,7 +44,7 @@ SitemapGenerator::Sitemap.create do
   add course_overview_path
   add experts_path
 
-  Training::Module.ordered.each do |mod|
+  Training::Module.live.each do |mod|
     add about_path(mod.name)
   end
 
@@ -53,12 +53,14 @@ SitemapGenerator::Sitemap.create do
   add gov_one_info_path
 
   # devise
+  # unless Rails.application.gov_one_login?
   add new_user_unlock_path
   add new_user_confirmation_path
   add new_user_registration_path
-  add new_user_session_path
+  # end
   add check_email_confirmation_user_path
   add check_email_password_reset_user_path
+  add new_user_session_path
 
   # private pages
   # ------------------------------------------
@@ -70,7 +72,7 @@ SitemapGenerator::Sitemap.create do
   add edit_email_user_path
   add edit_password_user_path
   add edit_registration_terms_and_conditions_path
-  add edit_registration_name_path
+  add edit_registration_name_path # unless Rails.application.gov_one_login?
   add edit_registration_setting_type_path
   add edit_registration_setting_type_other_path
   add edit_registration_local_authority_path
@@ -89,16 +91,18 @@ SitemapGenerator::Sitemap.create do
   add my_modules_path
   add user_notes_path
 
-  # Course content
-  Training::Module.ordered.each do |mod|
-    mod.content.each do |page|
-      if page.is_question?
-        add training_module_question_path(mod.name, page.name)
-      elsif page.assessment_results?
-        add training_module_assessment_path(mod.name, page.name)
-      else
-        add training_module_page_path(mod.name, page.name)
-      end
+  # Course common start page
+  mod = Training::Module.live.first
+  add training_module_page_path(mod.name, mod.pages.first.name)
+
+  # Course content random module
+  Training::Module.live.sample.content.each do |page|
+    if page.is_question?
+      add training_module_question_path(page.parent.name, page.name)
+    elsif page.assessment_results?
+      add training_module_assessment_path(page.parent.name, page.name)
+    else
+      add training_module_page_path(page.parent.name, page.name)
     end
   end
 end

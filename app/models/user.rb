@@ -21,6 +21,12 @@ class User < ApplicationRecord
     DASHBOARD_ATTRS + Training::Module.live.map { |mod| "module_#{mod.position}_time" }
   end
 
+  # @return [String]
+  def self.random_password
+    special_characters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+']
+    SecureRandom.alphanumeric(5).upcase + SecureRandom.alphanumeric(5).downcase + special_characters.sample(3).join + SecureRandom.hex(5)
+  end
+
   # @param email [String]
   # @param gov_one_id [String]
   # @return [User]
@@ -28,21 +34,29 @@ class User < ApplicationRecord
     if (user = find_by(email: email) || find_by(gov_one_id: gov_one_id))
       user.update_column(:email, email)
       user.update_column(:gov_one_id, gov_one_id) if user.gov_one_id.nil?
-      user.save!
     else
-      user = new(email: email, gov_one_id: gov_one_id, confirmed_at: Time.zone.now)
-      user.save!(validate: false)
+      user = new(email: email, gov_one_id: gov_one_id, confirmed_at: Time.zone.now, password: random_password)
     end
+    user.save!
     user
   end
 
-  # Include default devise modules. Others available are:
-  # :timeoutable, :trackable, :recoverable and :omniauthable
   attr_accessor :context
 
   devise :database_authenticatable, :registerable, :recoverable,
          :validatable, :rememberable, :confirmable, :lockable, :timeoutable,
          :secure_validatable, :omniauthable, omniauth_providers: [:openid_connect]
+
+  # FIXME: retire old devise functionality
+  # if Rails.application.gov_one_login?
+  #   devise :database_authenticatable, :rememberable, :lockable, :timeoutable,
+  #          :omniauthable, omniauth_providers: [:openid_connect]
+  # else
+  #   devise :database_authenticatable, :registerable, :recoverable,
+  #          :validatable, :rememberable, :confirmable, :lockable, :timeoutable,
+  #          :secure_validatable
+  # end
+
   devise :pwned_password unless Rails.env.test?
 
   has_many :responses
@@ -53,7 +67,7 @@ class User < ApplicationRecord
   has_many :events, class_name: 'Ahoy::Event'
   has_many :notes
 
-  scope :gov_one_login, -> { where.not(gov_one_login: nil) }
+  scope :gov_one, -> { where.not(gov_one_id: nil) }
 
   # account status
   scope :public_beta_only_registration_complete, -> { registered_since_private_beta.registration_complete }
@@ -113,7 +127,7 @@ class User < ApplicationRecord
   scope :early_years_email_recipients, -> { order(:id).where(early_years_emails: true) }
   scope :start_training_mail_job_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_complete.not_started_training }
   scope :complete_registration_mail_job_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_incomplete }
-  scope :continue_training_mail_job_recipients, -> { order(:id).training_email_recipients.last_visit_4_weeks_ago.distinct(&:course_in_progress?) }
+  scope :continue_training_mail_job_recipients, -> { order(:id).training_email_recipients.last_visit_4_weeks_ago.distinct(&:module_in_progress?) }
   scope :new_module_mail_job_recipients, -> { order(:id).training_email_recipients }
 
   # data
@@ -132,7 +146,11 @@ class User < ApplicationRecord
             inclusion: { in: Trainee::Setting.valid_types },
             if: proc { |u| u.registration_complete? }
 
-  validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
+  if Rails.application.gov_one_login?
+    validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :update, if: proc { |u| u.registration_complete? }
+  else
+    validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
+  end
 
   # @return [Boolean]
   def notes?
@@ -251,7 +269,7 @@ class User < ApplicationRecord
   end
 
   # @return [Boolean]
-  def course_in_progress?
+  def module_in_progress?
     course_started? && !module_time_to_completion.values.all?(&:positive?)
   end
 
@@ -273,7 +291,7 @@ class User < ApplicationRecord
 
   # @return [String]
   def authority_name
-    (local_authority.presence || 'Multiple')
+    local_authority.presence || 'Multiple'
   end
 
   # @return [String]
@@ -297,7 +315,8 @@ class User < ApplicationRecord
     return false unless registration_complete?
     return true if setting_other?
     return false unless setting_valid?
-    return true if select_new_role?
+
+    true if select_new_role?
   end
 
   # @return [Boolean]

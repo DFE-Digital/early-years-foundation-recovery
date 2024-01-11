@@ -16,6 +16,11 @@ class SeedSnippets < SeedContentful
     end
   end
 
+  # @return [Array<String>]
+  def list
+    locales.map { |l| l[:name] }
+  end
+
 private
 
   # @param resource [Contentful::Management::DynamicEntry]

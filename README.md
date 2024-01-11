@@ -163,7 +163,7 @@ Manually adding the **"deployed"** label to a pull request in Github will cause 
 This supports manual testing and content review in a production environment.
 
 When a feature branch review application is deployed, the URL to access it is added as a comment
-in the PR conversation in the format: <https://ey-recovery-pr-##.london.cloudapps.digital/>
+in the PR conversation in the format: <https://eyrecovery-review-pr-##.azurewebsites.net>
 
 Review applications are deployed with 3 seeded user accounts that share a restricted password.
 This facilitates team members demoing content and functionality, so registration is not required.
@@ -315,9 +315,10 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
 ---
 
-# One Login
+# GovOne Login
 
-<https://signin.integration.account.gov.uk/sign-in-or-create>
+Register an account on the integration OIDC used in development <https://signin.integration.account.gov.uk/sign-in-or-create>.
+Using this authentication method also requires basic HTTP auth credentials.
 
 ---
 

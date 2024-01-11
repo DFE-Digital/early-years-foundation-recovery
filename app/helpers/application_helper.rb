@@ -11,14 +11,14 @@ module ApplicationHelper
       header.with_navigation_item(text: 'Home', href: root_path, classes: %w[dfe-header__navigation-item])
       if user_signed_in?
         header.with_action_link(text: 'My Account', href: user_path, options: { inverse: true })
-        header.with_action_link(text: 'Sign out', href: logout_path, options: { id: 'sign-out-desktop', data: { turbo_method: :get }, inverse: true })
+        header.with_action_link(text: 'Sign out', href: destroy_user_session_path, options: { id: 'sign-out-desktop', data: { turbo_method: :get }, inverse: true })
         header.with_navigation_item(text: 'My modules', href: my_modules_path, classes: %w[dfe-header__navigation-item])
         header.with_navigation_item(text: 'Learning log', href: user_notes_path, classes: %w[dfe-header__navigation-items]) if current_user.course_started?
         header.with_navigation_item(text: 'My account', href: user_path, classes: %w[dfe-header__navigation-item dfe-header-f-mob])
-        header.with_navigation_item(text: 'Sign out', href: logout_path, options: { data: { turbo_method: :get } }, classes: %w[dfe-header__navigation-item dfe-header-f-mob], html_attributes: { id: 'sign-out-f-mob' })
+        header.with_navigation_item(text: 'Sign out', href: destroy_user_session_path, options: { data: { turbo_method: :get } }, classes: %w[dfe-header__navigation-item dfe-header-f-mob], html_attributes: { id: 'sign-out-f-mob' })
       else
-        header.with_action_link(text: 'Sign in', href: login_path, options: { inverse: true })
-        header.with_navigation_item(text: 'Sign in', href: login_path, classes: %w[dfe-header__navigation-item dfe-header-f-mob])
+        header.with_action_link(text: 'Sign in', href: new_user_session_path, options: { inverse: true })
+        header.with_navigation_item(text: 'Sign in', href: new_user_session_path, classes: %w[dfe-header__navigation-item dfe-header-f-mob])
       end
     end
   end
@@ -58,23 +58,5 @@ module ApplicationHelper
   # @return [String]
   def calculate_module_state
     CalculateModuleState.new(user: current_user).call
-  end
-
-  # @return [String]
-  def login_path
-    if Rails.application.gov_one_login?
-      gov_one_info_path
-    else
-      new_user_session_path
-    end
-  end
-
-  # @return [String]
-  def logout_path
-    if Rails.application.gov_one_login? && session[:id_token].present?
-      logout_uri.to_s
-    else
-      destroy_user_session_path
-    end
   end
 end
