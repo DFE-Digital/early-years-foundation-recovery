@@ -314,6 +314,8 @@ en:
     training_emails:
       true: You have chosen to receive emails about this training course.
       false: You have chosen not to receive emails about this training course.
+    early_years_experience:
+      Time worked in early years
     password_changed: Password last changed on %{date}
     remember_me: Remember me
     closing:

@@ -5,7 +5,7 @@ module Registration
     validates :early_years_experience, presence: true
 
     def early_years_experiences
-      YAML.load_file(Rails.root.join('data/early_years_experience.yml')).map { |hash| OpenStruct.new(hash) }
+      YAML.load_file(Rails.root.join('data/early_years_experience.yml'))
     end
 
     # @return [Boolean]

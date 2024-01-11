@@ -1,10 +1,5 @@
-- id: less_than_2_years    
-  name: Less than 2 years
-- id: 2_to_5_years
-  name: Between 2 and 5 years
-- id: 6_to_9_years
-  name: Between 6 and 9 years
-- id: 10_years_or_more
-  name: 10 years or more
-- id: not_applicable
-  name: Not applicable
+- Less than 2 years
+- Between 2 and 5 years
+- Between 6 and 9 years
+- 10 years or more
+- Not applicable
