@@ -127,7 +127,7 @@ class User < ApplicationRecord
   scope :early_years_email_recipients, -> { order(:id).where(early_years_emails: true) }
   scope :start_training_mail_job_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_complete.not_started_training }
   scope :complete_registration_mail_job_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_incomplete }
-  scope :continue_training_mail_job_recipients, -> { order(:id).training_email_recipients.last_visit_4_weeks_ago.distinct(&:course_in_progress?) }
+  scope :continue_training_mail_job_recipients, -> { order(:id).training_email_recipients.last_visit_4_weeks_ago.distinct(&:module_in_progress?) }
   scope :new_module_mail_job_recipients, -> { order(:id).training_email_recipients }
 
   # data
@@ -269,7 +269,7 @@ class User < ApplicationRecord
   end
 
   # @return [Boolean]
-  def course_in_progress?
+  def module_in_progress?
     course_started? && !module_time_to_completion.values.all?(&:positive?)
   end
 
