@@ -1,0 +1,17 @@
+= render 'user/debug'
+
+- content_for :page_title do
+  = html_title t(:heading, scope: :early_years_experience)
+
+= govuk_back_link href: back_link
+
+.govuk-grid-row
+  .govuk-grid-column-full
+    = form_for form, url: registration_early_years_experience_path, method: :patch do |f|
+      = f.govuk_error_summary
+
+      = f.govuk_fieldset legend: { text: t('register_early_years_experience.heading') }, aria: { required: true } do
+        .data-hj-suppress
+          = f.govuk_collection_radio_buttons :early_years_experience, form.early_years_experiences, :id, :name, legend: { text: t('early_years_experienc.heading'), class: 'govuk-visually-hidden' }, form_group: { classes: %w[data-hj-suppress] }
+
+      = f.govuk_submit t('links.continue')
