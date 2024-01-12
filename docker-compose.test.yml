@@ -9,7 +9,7 @@ services:
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_test
       - RAILS_ENV=test
       - DOMAIN=recovery.app
-      - CONTENTFUL_ENVIRONMENT=test
+      # - CONTENTFUL_ENVIRONMENT=test Remember to undo this comment
       - CONTENTFUL_MANAGEMENT_TOKEN=
       - DEBUG=false
       - BOT_TOKEN=bot_token
