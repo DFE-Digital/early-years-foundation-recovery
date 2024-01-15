@@ -315,10 +315,14 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
 ---
 
-# GovOne Login
+# GOV.UK One Login
 
 Register an account on the integration OIDC used in development <https://signin.integration.account.gov.uk/sign-in-or-create>.
 Using this authentication method also requires basic HTTP auth credentials.
+
+For status updates see <https://status.account.gov.uk/>
+
+Questions can be directed to the `#govuk-one-login` slack channel <https://ukgovernmentdigital.slack.com/archives/C02AQUJ6WTC>
 
 ---
 
