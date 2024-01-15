@@ -46,7 +46,7 @@
   section.certificate
     .certificate-thumbnail
       = govuk_link_to training_module_page_path(mod.name, mod.certificate_page.name, format: :pdf) do
-        = image_tag('certificate-sample.png', alt: '', title: '', class: 'certificate-thumbnail-image')
+        = image_tag('certificate-sample.png', alt: 'Certificate sample', title: '', class: 'certificate-thumbnail-image')
 
     .certificate-details
       h2.certificate-title
@@ -56,7 +56,7 @@
         span.certificate-attribute
           abbr.certificate-abbr title='Portable Document Format' PDF
         = ', '
-        span.certificate-attribute aria-label='file size'  0.4 MB
+        span.certificate-attribute aria-label='file size' 0.4 MB
         = ', '
         span.certificate-attribute aria-label='page size' 1 page
 
