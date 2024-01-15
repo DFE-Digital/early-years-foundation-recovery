@@ -2,7 +2,7 @@
   = html_title mod.title, content.heading
 
 - content_for :hero do
-  .govuk-grid-row
+  .govuk-grid-row.noprint
     .govuk-grid-column-full class='govuk-!-padding-top-9 govuk-!-padding-bottom-7'
       h1.govuk-heading-l Get your certificate
 
@@ -16,45 +16,53 @@
         =< govuk_link_to 'My account', user_path
         | .
 
-h3.govuk-heading-s Certificate of achievement
-
-- if module_progress.completed?
-  h1.govuk-heading-xl.data-hj-suppress= current_user.name
-  p has completed the following module:
-- else
-  h1.govuk-heading-xl Your name will appear here
-
-h2.govuk-heading-m= mod.title
-
-- if module_progress.completed?
-  p= t('date_completed', date: certificate_date(module_progress.completed_at))
-
-p This module has covered:
-
-= m(mod.criteria)
-
-p class='govuk-!-margin-top-7'
-
-h4 Certified by the Department for Education
-
 .govuk-grid-row
-  .govuk-grid-column-one-third-from-desktop
+  .govuk-grid-column-three-quarters-from-desktop id=('award' if request.original_url.end_with?('.pdf'))
+
+    h3.govuk-heading-s Certificate of achievement
+
+    - if module_progress.completed?
+      h1.govuk-heading-xl.data-hj-suppress= current_user.name
+      p has completed the following module:
+    - else
+      h1.govuk-heading-xl Your name will appear here
+
+    h2.govuk-heading-m= mod.title
+
+    - if module_progress.completed?
+      p= t 'date_completed', date: certificate_date(module_progress.completed_at)
+
+    p This module has covered:
+
+    = m(mod.criteria)
+
+    h4 class='govuk-!-margin-top-7' Certified by the Department for Education
+
     = image_tag('department-for-education-certificate.png', width: '220', alt: 'Department for Education logo', title: 'Department for Education logo')
 
 .noprint
-  .govuk-button-group
-    = print_button
-    = govuk_link_to 'Download certificate', training_module_page_path(mod.name, mod.certificate_page.name, format: :pdf), aria: { describedby: 'pdf-details' }
+  hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
 
-  p#pdf-details.govuk-body
-    span aria-label='file type'
-      abbr title='Portable Document Format' PDF
-    = ', '
-    span aria-label='file size' 0.4 MB
-    = ', '
-    span aria-label='page size' 1 page
+  section.gem-c-attachment
+    .gem-c-attachment__thumbnail
+      = govuk_link_to training_module_page_path(mod.name, mod.certificate_page.name, format: :pdf) do
+        = image_tag('certificate-sample.png', alt: '', title: '', class: 'gem-c-attachment__thumbnail-image gem-c-attachment__thumbnail-image--custom')
+
+    .gem-c-attachment__details
+      h2.gem-c-attachment__title
+        = govuk_link_to 'Download or print your certificate', training_module_page_path(mod.name, mod.certificate_page.name, format: :pdf), aria: { describedby: 'pdf-details' }, class: 'gem-c-attachment__link'
+
+      p.gem-c-attachment__metadata
+        span.gem-c-attachment__attribute
+          abbr.gem-c-attachment__abbr title='Portable Document Format' PDF
+        = ', '
+        span.gem-c-attachment__attribute aria-label='file size'  0.4 MB
+        = ', '
+        span.gem-c-attachment__attribute aria-label='page size' 1 page
 
 
   hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
 
   = govuk_button_link_to 'Go to My modules', my_modules_path
+
+

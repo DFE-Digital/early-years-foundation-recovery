@@ -26,7 +26,6 @@ $light-blue: tint($color_dfe-secondary-blue, 90%);
 @import 'video';
 @import 'question';
 @import 'interruption';
-@import 'print-link';
 @import 'quote';
 @import 'icons';
 @import 'modal';
@@ -40,6 +39,9 @@ $light-blue: tint($color_dfe-secondary-blue, 90%);
 // training/pages#show (section intro)
 @import 'section-intro';
 @import 'section-bar';
+
+// training/pages#show (certificate)
+@import 'certificate';
 
 
 

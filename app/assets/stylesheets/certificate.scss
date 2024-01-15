@@ -1,0 +1,118 @@
+#award {
+  border: solid 3px govuk-colour('black');
+  padding: govuk-spacing(6);
+  margin-left: govuk-spacing(4);
+  margin-right: govuk-spacing(4);
+  margin-bottom: govuk-spacing(4);
+}
+
+.gem-c-attachment {
+  font-weight: 400;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.25;
+  position: relative;
+
+  @include govuk-media-query($from: tablet) {
+    font-size: 19px;
+    font-size: 1.1875rem;
+    line-height: 1.3157894737;
+  }
+
+  .gem-c-attachment__title {
+    font-weight: 400;
+    font-size: 18px;
+    font-size: 1.125rem;
+    line-height: 1.1111111111;
+    margin: 0 0 15px;
+
+    @include govuk-media-query($from: tablet) {
+      font-size: 27px;
+      font-size: 1.6875rem;
+      line-height: 1.1111111111;
+    }
+  }
+
+  .gem-c-attachment__thumbnail {
+    position: relative;
+    width: auto;
+    margin-right: govuk-spacing(5);
+    margin-bottom: govuk-spacing(3);
+    padding: govuk-spacing(1);
+    float: left;
+
+    @include govuk-media-query($from: tablet) {
+      width: 140px;
+      height: auto;
+      max-width: 140px;
+      margin-right: govuk-spacing(4);
+    }
+  }
+
+  .gem-c-attachment__thumbnail-image {
+    display: block;
+    max-width: 280px;
+    width: 140px;
+    height: auto;
+    border: rgba(11,12,12,0.1);
+    outline: 5px solid rgba(11,12,12,0.1);
+    background: #fff;
+    box-shadow: 0 2px 2px rgba(11,12,12,0.4);
+    fill: #b1b4b6;
+    stroke: #b1b4b6;
+  }
+
+  .gem-c-attachment__metadata {
+    font-weight: 400;
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.25;
+    margin: 0 0 15px;
+    color: #505a5f;
+
+    &:last-of-type {
+      margin-bottom: 0
+    }
+
+    @include govuk-media-query($from: tablet) {
+      font-size: 19px;
+      font-size: 1.1875rem;
+      line-height: 1.3157894737;
+    }
+  }
+}
+
+
+
+
+// ---------------------------------------------------------------------
+
+
+.gem-c-attachment:after {
+  content: "";
+  display: block;
+  clear: both
+}
+
+.gem-c-attachment__details {
+  padding-left: 134px
+}
+
+.gem-c-attachment__link {
+  line-height: 1.29
+}
+
+.gem-c-attachment__metadata .gem-c-attachment__attribute {
+  word-wrap: break-word;
+  overflow-wrap: break-word
+}
+
+.gem-c-attachment__abbr {
+  text-decoration: none;
+  cursor: help
+}
+
+.gem-c-attachment-link__abbr {
+  text-decoration: none;
+  cursor: help
+}
