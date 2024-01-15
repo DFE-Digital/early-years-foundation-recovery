@@ -77,16 +77,6 @@ RSpec.describe Training::Question, type: :model do
       end
     end
 
-    context 'when the question is a feedback question' do
-      subject(:question) do
-        Training::Module.by_name('alpha').page_by_name('feedback1')
-      end
-
-      specify do
-        expect(question.legend).to start_with 'Strongly agree'
-      end
-    end
-
     context 'when multiple options are correct' do
       subject(:question) do
         Training::Module.by_name('alpha').page_by_name('1-3-2-1')
@@ -104,6 +94,18 @@ RSpec.describe Training::Question, type: :model do
 
       specify do
         expect(question.legend).to start_with 'True or false?'
+      end
+    end
+
+    context 'when the question is a feedback question' do
+      subject(:question) do
+        Training::Module.by_name('alpha').page_by_name('feedback1')
+      end
+
+      let(:first_option) { question.options.first }
+
+      specify do
+        expect(first_option.label).to eq 'Strongly agree'
       end
     end
   end

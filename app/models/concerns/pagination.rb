@@ -3,12 +3,12 @@
 module Pagination
   # @return [Boolean]
   def section?
-    submodule_intro? || summary_intro? || opinion_intro? || certificate?
+    submodule_intro? || summary_intro? || certificate?
   end
 
   # @return [Boolean]
   def subsection?
-    topic_intro? || recap_page? || assessment_intro? || confidence_intro? || certificate?
+    topic_intro? || recap_page? || assessment_intro? || confidence_intro? || opinion_intro? || certificate?
   end
 
   # @see app/views/training/pages/text_page.html.slim
