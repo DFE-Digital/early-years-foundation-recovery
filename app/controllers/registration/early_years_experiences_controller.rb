@@ -24,7 +24,7 @@ module Registration
       params.require(:user).permit(:early_years_experience)
     end
 
-    # @return [Registration::RoleTypeForm]
+    # @return [Registration::EarlyYearsExperiencesForm]
     def form
       @form ||= EarlyYearsExperiencesForm.new(user: current_user, early_years_experience: current_user.early_years_experience)
     end
