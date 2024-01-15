@@ -50,18 +50,18 @@ label.menu-icon {
   line-height: 1.25;
 
   &:hover {
-    border-left: 4px solid $color_dfe-secondary-blue;
+    border-left: 4px solid $department-for-education-websafe;
   }
 
   &--current {
-    border-left: 4px solid $color_dfe-blue;
+    border-left: 4px solid $department-for-education;
     font-weight: 700;
     background: govuk-colour('light-grey');
 
     .dfe-vertical-nav__link {
-      border-left-color: $color_dfe-blue;
+      border-left-color: $department-for-education;
       font-weight: 700;
-      color: $color_dfe-blue;
+      color: $department-for-education;
 
       &:hover {
         text-decoration: none;
@@ -76,12 +76,12 @@ label.menu-icon {
   padding: 7px 30px 8px 10px;
   text-decoration: none;
   margin-bottom: govuk-spacing(1);
-  color: $color_dfe-blue;
+  color: $department-for-education;
 
   &:active,
   &:hover {
     color: govuk-colour('blue');
-    border-left-color: $color_dfe-secondary-blue;
+    border-left-color: $department-for-education-websafe;
     box-shadow: none;
     outline: 0;
   }

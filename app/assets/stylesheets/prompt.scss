@@ -40,7 +40,7 @@
 
   &.prompt-home {
     background: $light-blue;
-    border-top: $color_dfe-secondary-blue solid 10px;
+    border-top: $department-for-education-websafe solid 10px;
 
     .govuk-grid-column-one-quarter {
       @include govuk-media-query($from: desktop) {
@@ -49,7 +49,7 @@
     }
 
     .svg-inline--fa {
-      background-color: $color_dfe-secondary-blue !important;
+      background-color: $department-for-education-websafe !important;
     }
   }
 }
