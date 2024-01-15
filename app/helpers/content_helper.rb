@@ -74,12 +74,12 @@ module ContentHelper
 
   # @return [String]
   def service_name
-    Course.first.service_name
+    Course.config.service_name
   end
 
   # @return [String]
   def privacy_policy_url
-    Course.first.privacy_policy_url
+    Course.config.privacy_policy_url
   end
 
   # TODO: replace with form builder fields, Replace Openstruct with DATA

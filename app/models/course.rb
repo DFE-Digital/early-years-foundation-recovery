@@ -1,6 +1,5 @@
 class Course < ContentfulModel::Base
   validates_presence_of :service_name, :privacy_policy_url, :internal_mailbox
-  # validates :service_name, :privacy_policy_url, :internal_mailbox, presence: true
 
   extend ::Caching
 
@@ -15,7 +14,7 @@ class Course < ContentfulModel::Base
   end
 
   # @return [Course]
-  def first
-    fetch_or_store('course') { super }
+  def self.config
+    fetch_or_store('course') { first }
   end
 end

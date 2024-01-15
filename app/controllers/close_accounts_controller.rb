@@ -23,7 +23,7 @@ class CloseAccountsController < ApplicationController
     current_user.send_account_closed_notification
 
     # TODO: refactor this internal user mailer logic
-    User.new(email: Course.first.internal_mailbox).send_account_closed_internal_notification(current_user.email)
+    User.new(email: Course.config.internal_mailbox).send_account_closed_internal_notification(current_user.email)
 
     current_user.redact!
     sign_out current_user
