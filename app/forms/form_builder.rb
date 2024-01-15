@@ -34,11 +34,11 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
   # @param option [Training::Answer::Option]
   def opinion_radio_button(option)
     govuk_radio_button :answers,
-                        option.id,
-                        label: { text: option.label },
-                        link_errors: true,
-                        disabled: option.disabled?,
-                        checked: option.checked?
+                       option.id,
+                       label: { text: option.label },
+                       link_errors: true,
+                       disabled: option.disabled?,
+                       checked: option.checked?
   end
 
   # @param option [Training::Answer::Option]
