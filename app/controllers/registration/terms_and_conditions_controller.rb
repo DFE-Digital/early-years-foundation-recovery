@@ -1,6 +1,8 @@
 module Registration
   class TermsAndConditionsController < BaseController
-    def edit; end
+    def edit
+      track('registration_terms_and_conditions')
+    end
 
     def update
       form.terms_and_conditions_agreed_at = user_params[:terms_and_conditions_agreed_at]

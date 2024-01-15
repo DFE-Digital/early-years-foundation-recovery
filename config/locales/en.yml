@@ -513,6 +513,7 @@ en:
   # /registration/early-years-experience/edit
   register_early_years_experience:
     heading: How long have you worked in early years?
+    label: Early years experience
 
   # Email Preferences ----------------------------------------------------------
 

@@ -1,6 +1,8 @@
 module Registration
   class EarlyYearsExperiencesController < BaseController
-    def edit; end
+    def edit
+      track('registration_early_years_experience')
+    end
 
     def update
       form.early_years_experience = user_params[:early_years_experience]
