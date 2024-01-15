@@ -317,12 +317,19 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
 # GOV.UK One Login
 
+### Account Registration
 Register an account on the integration OIDC used in development <https://signin.integration.account.gov.uk/sign-in-or-create>.
 Using this authentication method also requires basic HTTP auth credentials.
 
+### Status Updates
 For status updates see <https://status.account.gov.uk/>
 
+### Questions
 Questions can be directed to the `#govuk-one-login` slack channel <https://ukgovernmentdigital.slack.com/archives/C02AQUJ6WTC>
+
+### Credentials
+- Integration GOV.UK One Login environment credentials are stored in Rails development credentials (`config/credentials/development.yml.enc`)
+- Production GOV.UK One Login environment credentials are stored in Rails production credentials (`config/credentials/production.yml.enc`).
 
 ---
 
