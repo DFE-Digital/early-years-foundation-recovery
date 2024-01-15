@@ -6,7 +6,7 @@
   margin-bottom: govuk-spacing(4);
 }
 
-.gem-c-attachment {
+.certificate {
   font-weight: 400;
   font-size: 16px;
   font-size: 1rem;
@@ -19,12 +19,22 @@
     line-height: 1.3157894737;
   }
 
-  .gem-c-attachment__title {
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  .certificate-title {
     font-weight: 400;
     font-size: 18px;
     font-size: 1.125rem;
     line-height: 1.1111111111;
     margin: 0 0 15px;
+
+    .certificate-link {
+      line-height: 1.29;
+    }
 
     @include govuk-media-query($from: tablet) {
       font-size: 27px;
@@ -33,7 +43,11 @@
     }
   }
 
-  .gem-c-attachment__thumbnail {
+  .certificate-details {
+    padding-left: 134px
+  }
+
+  .certificate-thumbnail {
     position: relative;
     width: auto;
     margin-right: govuk-spacing(5);
@@ -49,7 +63,7 @@
     }
   }
 
-  .gem-c-attachment__thumbnail-image {
+  .certificate-thumbnail-image {
     display: block;
     max-width: 280px;
     width: 140px;
@@ -62,7 +76,7 @@
     stroke: #b1b4b6;
   }
 
-  .gem-c-attachment__metadata {
+  .certificate-metadata {
     font-weight: 400;
     font-size: 16px;
     font-size: 1rem;
@@ -74,45 +88,20 @@
       margin-bottom: 0
     }
 
+    .certificate-attribute {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+
+      abbr.certificate-abbr {
+        text-decoration: none;
+        cursor: help;
+      }
+    }
+
     @include govuk-media-query($from: tablet) {
       font-size: 19px;
       font-size: 1.1875rem;
       line-height: 1.3157894737;
     }
   }
-}
-
-
-
-
-// ---------------------------------------------------------------------
-
-
-.gem-c-attachment:after {
-  content: "";
-  display: block;
-  clear: both
-}
-
-.gem-c-attachment__details {
-  padding-left: 134px
-}
-
-.gem-c-attachment__link {
-  line-height: 1.29
-}
-
-.gem-c-attachment__metadata .gem-c-attachment__attribute {
-  word-wrap: break-word;
-  overflow-wrap: break-word
-}
-
-.gem-c-attachment__abbr {
-  text-decoration: none;
-  cursor: help
-}
-
-.gem-c-attachment-link__abbr {
-  text-decoration: none;
-  cursor: help
 }

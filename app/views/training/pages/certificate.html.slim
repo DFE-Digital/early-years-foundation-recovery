@@ -43,26 +43,23 @@
 .noprint
   hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
 
-  section.gem-c-attachment
-    .gem-c-attachment__thumbnail
+  section.certificate
+    .certificate-thumbnail
       = govuk_link_to training_module_page_path(mod.name, mod.certificate_page.name, format: :pdf) do
-        = image_tag('certificate-sample.png', alt: '', title: '', class: 'gem-c-attachment__thumbnail-image gem-c-attachment__thumbnail-image--custom')
+        = image_tag('certificate-sample.png', alt: '', title: '', class: 'certificate-thumbnail-image')
 
-    .gem-c-attachment__details
-      h2.gem-c-attachment__title
-        = govuk_link_to 'Download or print your certificate', training_module_page_path(mod.name, mod.certificate_page.name, format: :pdf), aria: { describedby: 'pdf-details' }, class: 'gem-c-attachment__link'
+    .certificate-details
+      h2.certificate-title
+        = govuk_link_to 'Download or print your certificate', training_module_page_path(mod.name, mod.certificate_page.name, format: :pdf), aria: { describedby: 'pdf-details' }, class: 'certificate-link'
 
-      p.gem-c-attachment__metadata
-        span.gem-c-attachment__attribute
-          abbr.gem-c-attachment__abbr title='Portable Document Format' PDF
+      p.certificate-metadata
+        span.certificate-attribute
+          abbr.certificate-abbr title='Portable Document Format' PDF
         = ', '
-        span.gem-c-attachment__attribute aria-label='file size'  0.4 MB
+        span.certificate-attribute aria-label='file size'  0.4 MB
         = ', '
-        span.gem-c-attachment__attribute aria-label='page size' 1 page
-
+        span.certificate-attribute aria-label='page size' 1 page
 
   hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
 
   = govuk_button_link_to 'Go to My modules', my_modules_path
-
-
