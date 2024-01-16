@@ -35,7 +35,12 @@ class User < ApplicationRecord
       user.update_column(:email, email)
       user.update_column(:gov_one_id, gov_one_id) if user.gov_one_id.nil?
     else
-      user = new(email: email, gov_one_id: gov_one_id, confirmed_at: Time.zone.now, password: random_password)
+      user = new(
+        email: email,
+        gov_one_id: gov_one_id,
+        confirmed_at: Time.zone.now,
+        password: random_password,
+      )
     end
     user.save!
     user
