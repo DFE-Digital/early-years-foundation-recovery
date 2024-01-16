@@ -8,12 +8,14 @@ module Registration
       form.training_emails = user_params[:training_emails]
 
       if form.save
+        track('user_training_emails_change', { success: true })
         if current_user.registration_complete?
           redirect_to my_modules_path, notice: t(:details_updated)
         else
           complete_registration
         end
       else
+        track('user_training_emails_change', { success: false })
         render :edit, status: :unprocessable_entity
       end
     end
