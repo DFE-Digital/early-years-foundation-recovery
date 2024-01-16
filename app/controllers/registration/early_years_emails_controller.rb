@@ -13,7 +13,7 @@ module Registration
           complete_registration
         end
       else
-        track('user_early_years_emails', { success: false })
+        track('user_early_years_emails_change', { success: false })
         render :edit, status: :unprocessable_entity
       end
     end
