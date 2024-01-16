@@ -1,6 +1,6 @@
 .prompt {
   background-color: govuk-colour('light-grey');
-  border-top: govuk-colour('turquoise') solid 10px;
+  border-top: govuk-colour('turquoise') solid govuk-spacing(2);
   margin: govuk-spacing(5) govuk-spacing(0);
   padding-left: govuk-spacing(4);
   padding-right: govuk-spacing(4);
@@ -23,11 +23,13 @@
   .govuk-grid-column-three-quarters {
     padding: govuk-spacing(3);
     
+    // OPTIMIZE: change to use media query
     @media(min-width: 40em) and (max-width: 61.5em) {
       padding-left: govuk-spacing(7);
     }
   }
 
+  // change to use media query
   .small-screen-padding-right {
     @media(max-width: 40.0625em) {
       padding-right: govuk-spacing(4);
@@ -40,7 +42,7 @@
 
   &.prompt-home {
     background: $light-blue;
-    border-top: $department-for-education-websafe solid 10px;
+    border-top: $department-for-education-websafe solid govuk-spacing(2);
 
     .govuk-grid-column-one-quarter {
       @include govuk-media-query($from: desktop) {

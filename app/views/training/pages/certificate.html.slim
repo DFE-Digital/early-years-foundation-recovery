@@ -17,7 +17,7 @@
         | .
 
 .govuk-grid-row
-  .govuk-grid-column-three-quarters-from-desktop id=('award' if request.original_url.end_with?('.pdf'))
+  .govuk-grid-column-three-quarters-from-desktop id=('award' if pdf?)
 
     h3.govuk-heading-s Certificate of achievement
 
@@ -28,6 +28,9 @@
       h1.govuk-heading-xl Your name will appear here
 
     h2.govuk-heading-m= mod.title
+
+    - if pdf?
+      hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     - if module_progress.completed?
       p= t 'date_completed', date: certificate_date(module_progress.completed_at)

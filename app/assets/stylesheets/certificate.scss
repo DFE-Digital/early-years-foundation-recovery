@@ -1,9 +1,16 @@
 #award {
+  font-family: helvetica-neue;
   border: solid 3px govuk-colour('black');
   padding: govuk-spacing(6);
   margin-left: govuk-spacing(4);
   margin-right: govuk-spacing(4);
   margin-bottom: govuk-spacing(4);
+
+  h2 {
+    margin-bottom: 0px;
+    font-size: 32px;
+    font-weight: bold;
+  }
 }
 
 .certificate {
@@ -64,10 +71,10 @@
     max-width: 280px;
     width: 140px;
     height: auto;
-    border: tint(govuk-colour('black'), 90%);
-    outline: govuk-spacing(1) solid tint(govuk-colour('black'), 90%);
+    border: lighten(govuk-colour('black'), 90%);
+    outline: govuk-spacing(1) solid lighten(govuk-colour('black'), 90%);
     background: govuk-colour('white');
-    box-shadow: 0 2px 2px tint(govuk-colour('black'), 60%);
+    box-shadow: 0 2px 2px lighten(govuk-colour('black'), 60%);
     fill: govuk-colour('light-grey');
     stroke: govuk-colour('light-grey');
   }
