@@ -7,3 +7,5 @@
           = f.govuk_text_field :other_description, label: { text: content.other }
       - else
         = f.opinion_radio_button(option)
+  - else
+    = f.govuk_text_area '', rows: 9
