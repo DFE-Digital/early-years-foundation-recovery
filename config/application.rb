@@ -28,11 +28,8 @@ module EarlyYearsFoundationRecovery
     #
     # config.eager_load_paths << Rails.root.join("extras")
     # config.time_zone = ENV.fetch('TZ', 'Europe/London')
-
-    config.service_name = 'Early years child development training'
     config.service_url = (Rails.env.production? ? 'https://' : 'http://') + ENV.fetch('DOMAIN', 'child-development-training')
 
-    config.internal_mailbox = ENV.fetch('INTERNAL_MAILBOX', 'child-development.training@education.gov.uk')
     config.middleware.use Grover::Middleware
     config.active_record.yaml_column_permitted_classes = [Symbol]
     config.action_view.sanitized_allowed_tags = ALLOWED_TAGS
@@ -51,8 +48,7 @@ module EarlyYearsFoundationRecovery
 
     config.user_password = ENV.fetch('USER_PASSWORD', 'Str0ngPa$$w0rd12')
     config.bot_token = ENV['BOT_TOKEN']
-    config.feedback_url = ENV.fetch('FEEDBACK_URL', '#FEEDBACK_URL_env_var_missing')
-    config.privacy_policy_url = 'https://www.gov.uk/government/publications/privacy-information-members-of-the-public/privacy-information-members-of-the-public'
+    config.feedback_url = ENV.fetch('FEEDBACK_URL', '#FEEDBACK_URL_env_var_missing') # TODO: deprecate
     config.google_analytics_tracking_id = ENV.fetch('TRACKING_ID', '#TRACKING_ID_env_var_missing')
     config.hotjar_site_id = ENV.fetch('HOTJAR_SITE_ID', '#HOTJAR_SITE_ID_env_var_missing')
 

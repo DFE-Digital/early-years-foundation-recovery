@@ -61,6 +61,8 @@ module.exports = function(migration) {
     }
   })
 
+  /* Interface -------------------------------------------------------------- */
+
   staticPage.changeFieldControl('name', 'builtin', 'slugEditor', {
     helpText: 'Unique page slug',
   })

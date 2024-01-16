@@ -10,10 +10,12 @@
           = govuk_link_to t('links.footer.cookies'), '/settings/cookie-policy', class: 'govuk-footer__link'
 
         li.govuk-footer__list-item
-          = govuk_link_to t('links.footer.privacy'), Rails.configuration.privacy_policy_url, class: 'govuk-footer__link', target: '_blank'
+          = govuk_link_to t('links.footer.privacy'), privacy_policy_url, class: 'govuk-footer__link', target: '_blank'
 
         li.govuk-footer__list-item
+          -# TODO: make contact us link internal
           = govuk_link_to t('links.footer.contact_us'), Rails.application.credentials.contact_us, class: 'govuk-footer__link', target: '_blank'
 
         li.govuk-footer__list-item
+          -# TODO: make feedback link internal
           = govuk_link_to t('links.footer.feedback'), Rails.configuration.feedback_url, target: '_blank', class: 'govuk-footer__link'
