@@ -20,7 +20,7 @@ module.exports = function(migration) {
     type: 'Symbol',
     required: true,
     validations: [
-      { 'regexp' : { 'pattern': '^\w[\w.-]*@([\w-]+\.)+[\w-]+$' } }
+      { 'regexp' : { 'pattern': '^\\w[\\w.-]*@([\\w-]+\\.)+[\\w-]+$' } }
     ]    
   })
 
@@ -29,7 +29,7 @@ module.exports = function(migration) {
     type: 'Symbol',
     required: true,
     validations: [
-      { 'regexp' : { 'pattern': '^(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?$' } }
+      { 'regexp' : { 'pattern': '^(http|https):\\/\\/(\w+:{0,1}\\w*@)?(\\S+)(:[0-9]+)?(\\/|\\/([\\w#!:.?+=&%@!\\-/]))?$' } }
     ]    
   })
 
