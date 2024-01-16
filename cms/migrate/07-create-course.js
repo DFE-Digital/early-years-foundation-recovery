@@ -1,6 +1,6 @@
 module.exports = function(migration) {
 
-  const userSetting = migration.createContentType('course', {
+  const course = migration.createContentType('course', {
     name: 'Course',
     displayField: 'service_name',
     description: 'Top-level site-wide configuration'
@@ -9,35 +9,35 @@ module.exports = function(migration) {
   /* Fields ----------------------------------------------------------------- */
 
   // displayField
-  userSetting.createField('service_name', {
+  course.createField('service_name', {
     name: 'Service Name',
     type: 'Symbol',
     required: true
   })
 
-  userSetting.createField('internal_mailbox', {
+  course.createField('internal_mailbox', {
     name: 'Internal Mailbox',
     type: 'Symbol',
     required: true,
     validations: [
       {
-        // email
+        { 'regexp' : { 'pattern': '^\w[\w.-]*@([\w-]+\.)+[\w-]+$' } }
       }
     ]    
   })
 
-  userSetting.createField('privacy_policy_url', {
+  course.createField('privacy_policy_url', {
     name: 'Privacy policy',
     type: 'Symbol',
     required: true,
     validations: [
       {
-        // url
+        { 'regexp' : { 'pattern': '^(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?$' } }
       }
     ]    
   })
 
-  trainingModule.createField('feedback', {
+  course.createField('feedback', {
     name: 'Feedback Form',
     type: 'Array',
     items: {
@@ -53,4 +53,14 @@ module.exports = function(migration) {
     }
   })
 
+  /* Interface -------------------------------------------------------------- */
+
+  /* linked entries */
+  course.changeFieldControl('feedback', 'builtin', 'entryCardsEditor', {
+    helpText: 'Define service feedback questions and order here.',
+  })
+
+  course.changeFieldControl('privacy_policy_url', 'builtin', 'urlEditor', {
+    helpText: 'External privacy policy page',
+  })
 }

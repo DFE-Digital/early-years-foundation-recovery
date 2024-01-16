@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Course, type: :model do
   subject(:course) { described_class.config }
 
-  describe '#config' do
+  describe '.config' do
     it 'service_name' do
       expect(course.service_name).to eq 'Early years child development training'
     end

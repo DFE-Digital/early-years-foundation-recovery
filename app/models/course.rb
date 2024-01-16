@@ -17,4 +17,9 @@ class Course < ContentfulModel::Base
   def self.config
     fetch_or_store('course') { first }
   end
+
+  # @return [Array<Training::Question>]
+  def feedback
+    super.to_a
+  end
 end
