@@ -7,8 +7,8 @@ Grover.configure do |config|
     launch_args: ['--disable-dev-shm-usage'],
     format: 'A4',
     margin: {
-      top: '20px',
-      bottom: '20px',
+      top: '5px',
+      bottom: '5px',
       left: '20px',
       right: '20px',
     },
