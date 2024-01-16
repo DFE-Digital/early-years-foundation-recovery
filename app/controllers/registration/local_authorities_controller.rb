@@ -6,10 +6,10 @@ module Registration
       form.local_authority = user_params[:local_authority]
 
       if form.save
-        track('user_local_authority_change', { success: true })
+        track('user_local_authority_change', success: true)
         redirect_to next_form_path
       else
-        track('user_local_authority_change', { success: false })
+        track('user_local_authority_change', success: false)
         render :edit, status: :unprocessable_entity
       end
     end
