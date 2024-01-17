@@ -70,12 +70,6 @@ module.exports = function(migration) {
 
   /* Interface -------------------------------------------------------------- */
 
-  /* linked entries */
-
-  page.changeFieldControl('training_module', 'builtin', 'entryLinkEditor', {
-    helpText: 'Select the module the page belongs to from "Add existing content".',
-  })
-
   /* text */
 
   page.changeFieldControl('heading', 'builtin', 'multipleLine', {

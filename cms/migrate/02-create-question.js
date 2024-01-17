@@ -78,13 +78,6 @@ module.exports = function(migration) {
 
   /* Interface -------------------------------------------------------------- */
 
-
-  /* linked entries */
-
-  question.changeFieldControl('training_module', 'builtin', 'entryLinkEditor', {
-    helpText: 'Select the module the page belongs to from "Add existing content".',
-  })
-
   /* JSON */
 
   question.changeFieldControl('answers', 'builtin', 'objectEditor', {
