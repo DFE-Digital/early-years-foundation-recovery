@@ -20,7 +20,9 @@ module Training
     # @return [Ahoy::Event] Show action
     def track_events
       # binding.pry
-      if track_confidence_start?
+      if track_feedback_start?
+        track('feedback_start')
+      elsif track_confidence_start?
         track('confidence_check_start')
       elsif track_assessment_start?
         track('summative_assessment_start')
@@ -38,6 +40,11 @@ module Training
     # @return [Boolean]
     def track_confidence_start?
       content.first_confidence? && confidence_start_untracked?
+    end
+
+    # @return [Boolean]
+    def track_feedback_start?
+      content.opinion_question? || content.opinion_intro?
     end
 
     # @return [Boolean]
