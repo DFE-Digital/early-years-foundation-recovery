@@ -7,7 +7,7 @@ module ApplicationHelper
 
   # @return [String]
   def navigation
-    render(HeaderComponent.new(classes: 'dfe-header noprint', container_classes: %w[dfe-header-f-header-flex], navigation_label: 'Primary navigation')) do |header|
+    render(HeaderComponent.new(service_name: service_name, classes: 'dfe-header noprint', container_classes: %w[dfe-header-f-header-flex], navigation_label: 'Primary navigation')) do |header|
       header.with_navigation_item(text: 'Home', href: root_path, classes: %w[dfe-header__navigation-item])
       if user_signed_in?
         header.with_action_link(text: 'My Account', href: user_path, options: { inverse: true })

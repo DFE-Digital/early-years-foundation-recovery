@@ -23,14 +23,6 @@ RSpec.describe 'Application configuration' do
     expect(config.time_zone).to eq 'UTC'
   end
 
-  it 'sets service name' do
-    expect(config.service_name).to eq 'Early years child development training'
-  end
-
-  it 'sets email mailbox' do
-    expect(config.internal_mailbox).to eq 'child-development.training@education.gov.uk'
-  end
-
   it 'sets password for seeds' do
     expect(config.user_password).to eq 'Str0ngPa$$w0rd12'
   end

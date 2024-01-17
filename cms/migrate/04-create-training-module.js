@@ -155,10 +155,6 @@ module.exports = function(migration) {
 
   /* linked entries */
 
-  trainingModule.changeFieldControl('depends_on', 'builtin', 'entryLinkEditor', {
-    helpText: 'Leave blank if you don’t have to have completed a previous module to start this module.',
-  })
-
   trainingModule.changeFieldControl('image', 'builtin', 'assetLinkEditor', {
     helpText: 'Select thumbnail image.',
   })
