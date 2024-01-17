@@ -1,6 +1,5 @@
 #award {
   font-family:  helvetica-neue !important;
-  border: solid 3px govuk-colour('black');
   padding-top: 60px;
   padding: govuk-spacing(6);
   margin-left: govuk-spacing(4);
@@ -15,13 +14,13 @@
     margin-bottom: 0;
   }
 
-  h3 {
-    font-size: 14px;
-  }
-
   h2 {
     font-size: 24px;
     font-weight: bold;
+  }
+
+  h3 {
+    font-size: 14px;
   }
 
   li {
