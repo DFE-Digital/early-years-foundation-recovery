@@ -26,6 +26,11 @@ module ContentTypes
   end
 
   # @return [Boolean]
+  def is_opinion?
+    page_type.match?(/opinion/)
+  end
+
+  # @return [Boolean]
   def text_page?
     page_type.eql?('text_page')
   end

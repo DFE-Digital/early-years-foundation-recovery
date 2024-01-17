@@ -65,6 +65,8 @@ module Training
         'Finish test'
       elsif next_item.summative_question? && !summative_question?
         'Start test'
+      elsif opinion_intro?
+        'Give feedback'
       elsif next_item.certificate?
         'Finish'
       else

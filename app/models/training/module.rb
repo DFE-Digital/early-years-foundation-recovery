@@ -197,6 +197,11 @@ module Training
     end
 
     # @return [Training::Page]
+    def opinion_intro_page
+      content.find(&:opinion_intro?)
+    end
+
+    # @return [Training::Page]
     def thankyou_page
       content.find(&:thankyou?)
     end
