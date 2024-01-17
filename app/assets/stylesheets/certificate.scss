@@ -9,33 +9,39 @@
     margin-top: 0;
   }
 
+  // user name
   h1 {
-    font-size: 32px;
+    font-size: 36px;
+    margin-top: govuk-spacing(6);
     margin-bottom: 0;
   }
 
+  // training module name
   h2 {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
   }
 
+  // "Certificate of achievement"
   h3 {
     font-size: 14px;
   }
 
+  // "Certified by the Department for Education"
+  h4 {
+    margin-top: govuk-spacing(4);
+  }
+
+  // training module criteria
   li {
-    font-size: 10px;
-  }
-
-  .size-10 {
-    font-size: 10px;
-  }
-
-  .size-12 {
     font-size: 12px;
   }
 
-  .size-16 {
+  .description {
+    font-size: 12px;
+  }
+
+  #certificate-date {
     font-size: 16px;
   }
 }

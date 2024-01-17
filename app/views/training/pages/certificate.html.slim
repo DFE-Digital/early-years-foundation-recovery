@@ -27,7 +27,7 @@
       - if pdf?
         hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
-      p.size-12 has completed the following module:
+      p.description has completed the following module:
     - else
       h1.govuk-heading-xl Your name will appear here
 
@@ -37,13 +37,13 @@
     h2.govuk-heading-m= mod.title
 
     - if module_progress.completed?
-      p.size-16= t 'date_completed', date: certificate_date(module_progress.completed_at)
+      p#certificate-date= t 'date_completed', date: certificate_date(module_progress.completed_at)
 
-    p.size-12 This module has covered:
+    p.description This module has covered:
 
     = m(mod.criteria)
 
-    h4.size-12 class='govuk-!-margin-top-7' Certified by the Department for Education
+    h4.description class='govuk-!-margin-top-7' Certified by the Department for Education
 
     = image_tag('department-for-education-certificate.png', width: '220', alt: 'Department for Education logo', title: 'Department for Education logo')
 
