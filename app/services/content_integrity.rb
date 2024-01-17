@@ -11,9 +11,9 @@ class ContentIntegrity
   MODULE_VALIDATIONS = {
     criteria: 'Missing criteria',
     description: 'Missing description',
-    objective: 'Missing objective',
+    about: 'Missing about text',
     summary: 'Missing short description',
-    # skills: 'Missing skills', # UNCOMMMENT
+    outcomes: 'Missing outcomes',
     position: 'Missing position',
     duration: 'Missing duration',
     thumbnail: 'Missing thumbnail image',
@@ -96,13 +96,13 @@ class ContentIntegrity
   end
 
   # @return [Boolean]
-  def objective?
-    mod.fields[:objective].present?
+  def about?
+    mod.fields[:about].present?
   end
 
   # @return [Boolean]
-  def skills?
-    mod.fields[:skills].present?
+  def outcomes?
+    mod.fields[:outcomes].present?
   end
 
   # @return [Boolean]

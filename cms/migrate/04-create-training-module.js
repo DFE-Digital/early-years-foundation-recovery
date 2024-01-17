@@ -41,16 +41,27 @@ module.exports = function(migration) {
   trainingModule.createField('short_description', {
     name: 'Short description',
     type: 'Text',
-    required: true
+    required: true,
+    validations: [
+      {
+        prohibitRegexp: { pattern: '\\n' }
+      }
+    ]
   })
 
-  trainingModule.createField('description', {
+  // markdown not permitted
+  trainingModule.createField('description', { // list moved to outcomes
     name: 'Description',
     type: 'Text',
-    required: true
+    required: true,
+    validations: [
+      {
+        prohibitRegexp: { pattern: '\\n' }
+      }
+    ]
   })
 
-  trainingModule.createField('skills', {
+  trainingModule.createField('outcomes', { // list moved out of description
     name: 'Skills',
     type: 'Text',
     required: true
@@ -63,7 +74,7 @@ module.exports = function(migration) {
   })
 
   // markdown not permitted
-  trainingModule.createField('objective', {
+  trainingModule.createField('about', { // formerly objective
     name: 'Objective',
     type: 'Text',
     required: true,
@@ -125,21 +136,25 @@ module.exports = function(migration) {
 
   /* markdown */
 
-  trainingModule.changeFieldControl('description', 'builtin', 'markdown', {
-    helpText: 'A lead in sentence about the content. Followed by "On completion of this module you will be able to:" then add bullet points.'
+  trainingModule.changeFieldControl('criteria', 'builtin', 'markdown', {
+    helpText: 'Bullet points which follow on from the sentence "TOn completion of this module you will be able to:".'
   })
 
   trainingModule.changeFieldControl('criteria', 'builtin', 'markdown', {
     helpText: 'Bullet points which follow on from the sentence "This module covers:".'
   })
 
+  /* text */
+
   trainingModule.changeFieldControl('short_description', 'builtin', 'markdown', {
     helpText: 'Title of module'
   })
 
-  /* text */
+  trainingModule.changeFieldControl('description', 'builtin', 'multipleLine', {
+    helpText: 'A lead in sentence about the content.'
+  })
 
-  trainingModule.changeFieldControl('objective', 'builtin', 'multipleLine', {
+  trainingModule.changeFieldControl('about', 'builtin', 'multipleLine', {
     helpText: 'One or two sentence that describes what the module is about. Usual starts with "This module explores..."'
   })
 

@@ -279,8 +279,8 @@ module Training
 
     # TEMP ---------------------------------------------------------------
 
-    def skills
-      'WILL BE REPLACED BY CMS FIELD'
+    def outcomes
+      super || 'WILL BE REPLACED BY CMS FIELD'
     end
   end
 end

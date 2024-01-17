@@ -10,7 +10,7 @@ RSpec.describe 'Snippets', type: :request do
 
     it 'is expected to include microcopy' do
       # NB: variables are not processed
-      expect(response.body).to include '%{skills}'
+      expect(response.body).to include '%{outcomes}'
     end
 
     specify { expect(response).to have_http_status(:success) }
