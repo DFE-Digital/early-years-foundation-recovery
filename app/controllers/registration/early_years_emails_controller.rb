@@ -6,12 +6,14 @@ module Registration
       form.early_years_emails = user_params[:early_years_emails]
 
       if form.save
+        track('user_early_years_emails_change', success: true)
         if current_user.registration_complete?
           redirect_to user_path, notice: t(:details_updated)
         else
           complete_registration
         end
       else
+        track('user_early_years_emails_change', success: false)
         render :edit, status: :unprocessable_entity
       end
     end

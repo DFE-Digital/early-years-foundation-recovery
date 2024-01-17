@@ -6,6 +6,7 @@ module Registration
       form.setting_type_id = user_params[:setting_type_id]
 
       if form.save
+        track('user_setting_type_change', success: true)
         if form.setting_type.local_authority?
           redirect_to edit_registration_local_authority_path
         elsif current_user.registration_complete?
@@ -14,6 +15,7 @@ module Registration
           redirect_to edit_registration_training_emails_path
         end
       else
+        track('user_setting_type_change', success: false)
         render :edit, status: :unprocessable_entity
       end
     end

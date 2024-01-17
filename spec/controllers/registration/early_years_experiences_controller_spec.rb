@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Registration::RoleTypesController, type: :controller do
+RSpec.describe Registration::EarlyYearsExperiencesController, type: :controller do
   context 'when not signed in' do
     describe 'GET #edit' do
       it 'redirects' do
@@ -18,10 +18,7 @@ RSpec.describe Registration::RoleTypesController, type: :controller do
   end
 
   context 'when signed in' do
-    let(:user) do
-      create :user, :named,
-             setting_type_id: Trainee::Setting.with_roles.sample.name
-    end
+    let(:user) { create :user, :confirmed }
 
     before { sign_in user }
 
@@ -34,9 +31,9 @@ RSpec.describe Registration::RoleTypesController, type: :controller do
 
     describe 'POST #update' do
       it 'succeeds' do
-        post :update, params: { user: { role_type: 'Manager' } }
-        expect(response).to redirect_to edit_registration_early_years_experience_path
-        expect(user.reload.role_type).to eq 'Manager'
+        post :update, params: { user: { early_years_experience: 'Less than 2 years' } }
+        expect(response).to redirect_to edit_registration_training_emails_path
+        expect(user.reload.early_years_experience).to eq 'Less than 2 years'
       end
     end
   end
