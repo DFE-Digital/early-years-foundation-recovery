@@ -101,7 +101,8 @@ jobs:
           azcliversion: 2.50.0
           inlineScript: |
             az container delete --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-              --name ${{ vars.WORKERAPP_NAME }}
+              --name ${{ vars.WORKERAPP_NAME }} \
+              --yes
 
       # Deploy Background Worker
       - name: Deploy to Azure Container Instances

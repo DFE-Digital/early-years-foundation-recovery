@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
                 :timeout_timer,
                 :debug?
 
-  default_form_builder(EarlyYearsRecoveryFormBuilder)
+  default_form_builder ::FormBuilder
 
   include Tracking
   include Auditing

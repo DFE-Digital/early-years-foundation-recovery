@@ -8,12 +8,14 @@ module Registration
       form.training_emails = user_params[:training_emails]
 
       if form.save
+        track('user_training_emails_change', success: true)
         if current_user.registration_complete?
           redirect_to my_modules_path, notice: t(:details_updated)
         else
           complete_registration
         end
       else
+        track('user_training_emails_change', success: false)
         render :edit, status: :unprocessable_entity
       end
     end
@@ -31,15 +33,11 @@ module Registration
 
     # @return [String]
     def back_link
-      return '/email-preferences' if request.referer&.include?('/email-preferences')
+      referer_from_email_preferences? ? '/email-preferences' : edit_registration_early_years_experience_path
+    end
 
-      if current_user.role_applicable?
-        edit_registration_role_type_path
-      elsif current_user.setting_local_authority?
-        edit_registration_local_authority_path
-      else
-        edit_registration_setting_type_path
-      end
+    def referer_from_email_preferences?
+      request.referer&.include?('/email-preferences')
     end
   end
 end
