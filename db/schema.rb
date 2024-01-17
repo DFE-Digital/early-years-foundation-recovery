@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_31_132907) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_10_150648) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -230,6 +230,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_31_132907) do
     t.boolean "training_emails"
     t.boolean "early_years_emails"
     t.string "gov_one_id"
+    t.string "early_years_experience"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["gov_one_id"], name: "index_users_on_gov_one_id", unique: true
