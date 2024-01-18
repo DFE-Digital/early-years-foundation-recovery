@@ -7,7 +7,7 @@ RSpec.describe 'End of module feedback form' do
   it 'shows feedback question' do
     visit '/modules/alpha/content-pages/feedback-intro'
     expect(page).to have_content('Additional feedback')
-    click_on 'Next'
+    click_on 'Give feedback'
     expect(page).to have_content('Regarding the training module you have just completed: the content was easy to understand')
     expect(page).to have_content('Strongly agree')
   end
