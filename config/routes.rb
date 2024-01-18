@@ -41,6 +41,7 @@ Rails.application.routes.draw do
     resource :local_authority, only: %i[edit update], path: 'local-authority'
     resource :role_type, only: %i[edit update], path: 'role-type'
     resource :role_type_other, only: %i[edit update], path: 'role-type-other'
+    resource :early_years_experience, only: %i[edit update], path: 'early-years-experience'
     resource :training_emails, only: %i[edit update], path: 'training-emails'
     resource :early_years_emails, only: %i[edit update], path: 'early-years-emails'
   end
@@ -52,6 +53,7 @@ Rails.application.routes.draw do
     patch 'update-password'
     get 'check-email-confirmation'
     get 'check-email-password-reset'
+    get 'early-years-experience'
     get 'edit-training-emails'
     patch 'update-training-emails'
 
