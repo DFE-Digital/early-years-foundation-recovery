@@ -276,11 +276,5 @@ module Training
     def data
       @data ||= ContentIntegrity.new(module_name: name)
     end
-
-    # TEMP ---------------------------------------------------------------
-
-    def outcomes
-      super || 'WILL BE REPLACED BY CMS FIELD'
-    end
   end
 end
