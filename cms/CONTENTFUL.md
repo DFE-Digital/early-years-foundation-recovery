@@ -6,28 +6,30 @@
 
 ### TrainingModule text fields
 
-**short_description**
+**upcoming** only used in `Future modules in this course`
 
-TBC describe the value/purpose of each and where it is leveraged
+- editor: multiline
+- validations: No markdown by checking for new lines
 
-- validations: None
+**about** only used in the `About` pages
+
+- editor: multiline
+- validations: No markdown by checking for new lines
 
 **description**
 
+- editor: multiline
+- validations: No markdown by checking for new lines
+
+**outcomes** bullet-pointed list
+
+- editor: markdown
 - validations: None
 
-**skills (new)**
+**criteria** bullet-pointed list
 
+- editor: markdown
 - validations: None
-
-**criteria**
-
-- validations: None
-
-**objective**
-
-- validations: NO markdown
-
 
 ## Tasks
 

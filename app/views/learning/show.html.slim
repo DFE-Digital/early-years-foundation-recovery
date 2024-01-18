@@ -51,7 +51,7 @@
           .govuk-card id=mod.name
             h3.govuk-heading-s
               = mod.heading
-            p.govuk-body= mod.short_description
+            p.govuk-body= mod.upcoming
             - unless mod.draft?
               = govuk_link_to 'View more information about this module',
                 course_overview_path + mod.card_anchor

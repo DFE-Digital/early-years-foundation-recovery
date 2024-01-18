@@ -38,8 +38,8 @@ module.exports = function(migration) {
     required: true
   })
 
-  trainingModule.createField('short_description', {
-    name: 'Short description',
+  trainingModule.createField('upcoming', {
+    name: 'Upcoming',
     type: 'Text',
     required: true,
     validations: [
@@ -146,8 +146,8 @@ module.exports = function(migration) {
 
   /* text */
 
-  trainingModule.changeFieldControl('short_description', 'builtin', 'markdown', {
-    helpText: 'Title of module'
+  trainingModule.changeFieldControl('upcoming', 'builtin', 'markdown', {
+    helpText: 'A short introduction for a future module'
   })
 
   trainingModule.changeFieldControl('description', 'builtin', 'multipleLine', {
