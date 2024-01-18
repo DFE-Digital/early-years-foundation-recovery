@@ -29,6 +29,8 @@ RSpec.describe DataAnalysis::UserOverview do
       'Start Training Mail Recipients',
       'Continue Training Mail Recipients',
       'New Module Mail Recipients',
+      'Closed',
+      'Terms and Conditions Agreed',
     ]
   end
 
@@ -60,6 +62,8 @@ RSpec.describe DataAnalysis::UserOverview do
         start_training_mail_recipients: 1,
         continue_training_mail_recipients: 0,
         new_module_mail_recipients: 6,
+        closed: 0,
+        terms_and_conditions_agreed: 6,
       },
     ]
   end
