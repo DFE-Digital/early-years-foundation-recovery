@@ -9,7 +9,8 @@ module Training
                   :content,
                   :section_bar,
                   :module_progress,
-                  :note
+                  :note,
+                  :pdf?
 
     layout 'hero'
 
@@ -93,6 +94,11 @@ module Training
       return false if untracked?('module_start', training_module_id: mod.name)
 
       untracked?('module_complete', training_module_id: mod.name)
+    end
+
+    # @return [Boolean]
+    def pdf?
+      request.original_url.end_with?('.pdf')
     end
   end
 end
