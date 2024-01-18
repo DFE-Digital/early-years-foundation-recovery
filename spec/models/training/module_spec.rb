@@ -75,4 +75,16 @@ RSpec.describe Training::Module, type: :model do
       expect(mod.first_published_at).to be_within(1.second).of 2.days.ago
     end
   end
+
+  describe '#heading' do
+    context 'when released' do
+      it { expect(mod.heading).to eq 'Module 1: First Training Module' }
+    end
+
+    context 'when unreleased' do
+      subject(:mod) { described_class.by_name(:delta) }
+
+      it { expect(mod.heading).to eq 'Coming soon - Module 4: Fourth Training Module' }
+    end
+  end
 end

@@ -96,7 +96,7 @@ Github PRs use descriptive [labels][labels], most of which are applied automatic
 Manual labels:
 
 1. **blocked**, Currently blocked.
-1. **deployed**, Review app deployed for testing.
+1. **review**, Review app deployed for testing.
 1. **bug**, Squashes a bug.
 1. **pass**, Acceptance criteria met.
 1. **fail**, Acceptance criteria NOT met.

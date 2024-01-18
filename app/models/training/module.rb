@@ -265,9 +265,9 @@ module Training
       tab_label.parameterize
     end
 
-    # @see also accordion on training/modules#index
+    # @see My Modules card / About page sidebar
     # @return [String]
-    def card_title
+    def heading
       coming_soon = 'Coming soon - ' if draft?
       "#{coming_soon}Module #{position}: #{title}"
     end
