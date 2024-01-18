@@ -75,7 +75,7 @@ module.exports = function(migration) {
 
   // markdown not permitted
   trainingModule.createField('about', { // formerly objective
-    name: 'Objective',
+    name: 'About',
     type: 'Text',
     required: true,
     validations: [
@@ -136,8 +136,8 @@ module.exports = function(migration) {
 
   /* markdown */
 
-  trainingModule.changeFieldControl('criteria', 'builtin', 'markdown', {
-    helpText: 'Bullet points which follow on from the sentence "TOn completion of this module you will be able to:".'
+  trainingModule.changeFieldControl('outcomes', 'builtin', 'markdown', {
+    helpText: 'Bullet points which follow on from the sentence "On completion of this module you will be able to:".'
   })
 
   trainingModule.changeFieldControl('criteria', 'builtin', 'markdown', {
