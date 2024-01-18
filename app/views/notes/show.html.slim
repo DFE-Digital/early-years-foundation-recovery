@@ -15,4 +15,5 @@
         p.govuk_body You have not made any notes for this module.
 
       span.noprint
-        = print_button
+        button.govuk-link.print-link-button onclick='window.print()' data-module='print-link'
+          | Print this page
