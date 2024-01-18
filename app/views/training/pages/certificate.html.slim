@@ -2,7 +2,7 @@
   = html_title mod.title, content.heading
 
 - content_for :hero do
-  .govuk-grid-row
+  .govuk-grid-row.noprint
     .govuk-grid-column-full class='govuk-!-padding-top-9 govuk-!-padding-bottom-7'
       h1.govuk-heading-l Get your certificate
 
@@ -16,44 +16,56 @@
         =< govuk_link_to 'My account', user_path
         | .
 
-h3.govuk-heading-s Certificate of achievement
-
-- if module_progress.completed?
-  h1.govuk-heading-xl.data-hj-suppress= current_user.name
-  p has completed the following module:
-- else
-  h1.govuk-heading-xl Your name will appear here
-
-h2.govuk-heading-m= mod.title
-
-- if module_progress.completed?
-  p= t('date_completed', date: certificate_date(module_progress.completed_at))
-
-p This module has covered:
-
-= m(mod.criteria)
-
-p class='govuk-!-margin-top-7'
-
-h4 Certified by the Department for Education
-
 .govuk-grid-row
-  .govuk-grid-column-one-third-from-desktop
+  .govuk-grid-column-three-quarters-from-desktop id=('award' if pdf?)
+
+    h3.govuk-heading-s Certificate of achievement
+
+    - if module_progress.completed?
+      h1.govuk-heading-xl.data-hj-suppress= current_user.name
+
+      - if pdf?
+        hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
+
+      p.description has completed the following module:
+    - else
+      h1.govuk-heading-xl Your name will appear here
+
+      - if pdf?
+        hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
+
+    h2.govuk-heading-m= mod.title
+
+    - if module_progress.completed?
+      p#certificate-date= t 'date_completed', date: certificate_date(module_progress.completed_at)
+
+    p.description This module has covered:
+
+    = m(mod.criteria)
+
+    h4.description class='govuk-!-margin-top-7' Certified by the Department for Education
+
     = image_tag('department-for-education-certificate.png', width: '220', alt: 'Department for Education logo', title: 'Department for Education logo')
 
 .noprint
-  .govuk-button-group
-    = print_button
-    = govuk_link_to 'Download certificate', training_module_page_path(mod.name, mod.certificate_page.name, format: :pdf), aria: { describedby: 'pdf-details' }
+  hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
 
-  p#pdf-details.govuk-body
-    span aria-label='file type'
-      abbr title='Portable Document Format' PDF
-    = ', '
-    span aria-label='file size' 0.4 MB
-    = ', '
-    span aria-label='page size' 1 page
+  section.certificate
+    .certificate-thumbnail
+      = govuk_link_to training_module_page_path(mod.name, mod.certificate_page.name, format: :pdf) do
+        = image_tag('certificate-sample.png', alt: 'Certificate sample', title: '', class: 'certificate-thumbnail-image')
 
+    .certificate-details
+      h2.certificate-title
+        = govuk_link_to 'Download or print your certificate', training_module_page_path(mod.name, mod.certificate_page.name, format: :pdf), aria: { describedby: 'pdf-details' }, class: 'certificate-link'
+
+      p.certificate-metadata
+        span.certificate-attribute
+          abbr.certificate-abbr title='Portable Document Format' PDF
+        = ', '
+        span.certificate-attribute aria-label='file size' 0.4 MB
+        = ', '
+        span.certificate-attribute aria-label='page size' 1 page
 
   hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
 

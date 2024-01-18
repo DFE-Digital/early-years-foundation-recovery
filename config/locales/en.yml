@@ -32,6 +32,8 @@ en:
               blank: Select your role.
             role_type_other:
               blank: Enter your job title.
+            early_years_experience:
+              blank: Choose an option.
             local_authority:
               blank: Enter the local authority of the setting or organisation you work in most of the time.
             training_emails:
@@ -312,6 +314,8 @@ en:
     training_emails:
       true: You have chosen to receive emails about this training course.
       false: You have chosen not to receive emails about this training course.
+    early_years_experience:
+      Time worked in early years
     password_changed: Password last changed on %{date}
     remember_me: Remember me
     closing:
@@ -505,6 +509,11 @@ en:
   register_custom_role:
     heading: What is your role?
     body: Enter your job title.
+
+  # /registration/early-years-experience/edit
+  register_early_years_experience:
+    heading: How long have you worked in early years?
+    label: Early years experience
 
   # Email Preferences ----------------------------------------------------------
 

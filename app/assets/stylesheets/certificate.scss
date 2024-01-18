@@ -1,0 +1,141 @@
+#award {
+  font-family:  helvetica-neue !important;
+  padding-top: 60px;
+  padding: govuk-spacing(6);
+  margin-left: govuk-spacing(4);
+  margin-right: govuk-spacing(4);
+
+  hr {
+    margin-top: 0;
+  }
+
+  // user name
+  h1 {
+    font-size: 36px;
+    margin-top: govuk-spacing(6);
+    margin-bottom: 0;
+  }
+
+  // training module name
+  h2 {
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  // "Certificate of achievement"
+  h3 {
+    font-size: 14px;
+  }
+
+  // "Certified by the Department for Education"
+  h4 {
+    margin-top: govuk-spacing(4);
+  }
+
+  // training module criteria
+  li {
+    font-size: 12px;
+  }
+
+  .description {
+    font-size: 12px;
+  }
+
+  #certificate-date {
+    font-size: 16px;
+  }
+}
+
+.certificate {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.25;
+  position: relative;
+
+  @include govuk-media-query($from: tablet) {
+    font-size: 19px;
+    line-height: 1.3157894737;
+  }
+
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  .certificate-title {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.1111111111;
+    margin: 0 0 govuk-spacing(3);
+
+    .certificate-link {
+      line-height: 1.29;
+    }
+
+    @include govuk-media-query($from: tablet) {
+      font-size: 27px;
+      line-height: 1.1111111111;
+    }
+  }
+
+  .certificate-details {
+    padding-left: 134px;
+  }
+
+  .certificate-thumbnail {
+    position: relative;
+    float: left;
+    width: auto;
+    margin-right: govuk-spacing(5);
+    margin-bottom: govuk-spacing(3);
+    padding: govuk-spacing(1);
+
+    @include govuk-media-query($from: tablet) {
+      width: 140px;
+      height: auto;
+      max-width: 140px;
+      margin-right: govuk-spacing(4);
+    }
+  }
+
+  .certificate-thumbnail-image {
+    display: block;
+    max-width: 280px;
+    width: 140px;
+    height: auto;
+    border: lighten(govuk-colour('black'), 90%);
+    outline: govuk-spacing(1) solid lighten(govuk-colour('black'), 90%);
+    background: govuk-colour('white');
+    box-shadow: 0 2px 2px lighten(govuk-colour('black'), 60%);
+    fill: govuk-colour('light-grey');
+    stroke: govuk-colour('light-grey');
+  }
+
+  .certificate-metadata {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.25;
+    margin: 0 0 govuk-spacing(3);
+    color:  $govuk-secondary-text-colour;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .certificate-attribute {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+
+      abbr.certificate-abbr {
+        text-decoration: none;
+        cursor: help;
+      }
+    }
+
+    @include govuk-media-query($from: tablet) {
+      font-size: 19px;
+      line-height: 1.3157894737;
+    }
+  }
+}

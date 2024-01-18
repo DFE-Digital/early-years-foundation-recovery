@@ -1,4 +1,5 @@
-.govuk-grid-row
-  .govuk-grid-column-full
-    - flash.each do |variant, message|
-      = govuk_notification_banner title_text: t("banners.#{variant}"), text: m(message), success: %w[notice].include?(variant), classes: "govuk-notification-banner--#{variant}"
+- if flash.any?
+  .govuk-grid-row
+    .govuk-grid-column-full
+      - flash.each do |variant, message|
+        = govuk_notification_banner title_text: t("banners.#{variant}"), text: m(message), success: %w[notice].include?(variant), classes: "govuk-notification-banner--#{variant}"
