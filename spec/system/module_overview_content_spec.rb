@@ -30,6 +30,10 @@ RSpec.describe 'Module overview' do
       .and have_content('Summary and next steps')
   end
 
+  it 'hides feedback section' do
+    expect(page).not_to have_content('Additional feedback')
+  end
+
   it 'has the topic names' do
     expect(page).to have_content('1-1-1')
       .and have_content('1-1-2')

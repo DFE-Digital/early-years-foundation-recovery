@@ -13,8 +13,16 @@ RSpec.describe 'End of module feedback form' do
   end
 
   it do
-    visit '/modules/alpha/questionnaires/feedback2'
+    visit '/modules/alpha/questionnaires/feedback3'
     expect(page).to have_content('Did the module meet your expectations')
     expect(page).to have_content('Yes')
+  end
+
+  context 'when no answer is submitted' do
+    it 'displays an error message' do
+      visit '/modules/alpha/questionnaires/feedback2'
+      click_on 'Next'
+      expect(page).to have_content 'Please select an answer'
+    end
   end
 end
