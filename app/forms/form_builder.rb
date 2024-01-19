@@ -37,7 +37,7 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
                        option.id,
                        label: { text: option.label },
                        link_errors: true,
-                       # disabled: option.disabled?,
+                       disabled: option.disabled?,
                        checked: option.checked?
   end
 

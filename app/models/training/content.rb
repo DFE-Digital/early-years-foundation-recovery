@@ -59,16 +59,16 @@ module Training
         'Next'
       elsif next_item.eql?(self) && (Rails.application.preview? || Rails.env.test?)
         'Next page has not been created'
-      elsif section?
+      elsif opinion_intro?
+        'Give feedback'
+      elsif section? && !opinion_intro
         'Start section'
       elsif next_item.assessment_results?
         'Finish test'
       elsif next_item.summative_question? && !summative_question?
         'Start test'
-      elsif opinion_intro?
-        'Give feedback'
       elsif next_item.certificate?
-        'Finish'
+        'View certificate'
       else
         'Next'
       end
