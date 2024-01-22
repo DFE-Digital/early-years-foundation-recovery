@@ -33,7 +33,7 @@ RSpec.describe 'Registration roles', type: :request do
 
       it 'redirects to training email preference form' do
         update_user
-        expect(response).to redirect_to edit_registration_training_emails_path
+        expect(response).to redirect_to edit_registration_early_years_experience_path
       end
     end
   end

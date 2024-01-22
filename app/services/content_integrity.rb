@@ -9,13 +9,16 @@ class ContentIntegrity
   #
   # @return [Hash{Symbol=>String}] valid as upcoming module
   MODULE_VALIDATIONS = {
-    criteria: 'Missing criteria',
-    description: 'Missing description',
-    duration: 'Missing duration',
-    objective: 'Missing objective',
-    position: 'Missing position',
-    summary: 'Missing short description',
-    threshold: 'Missing assessment threshold percentage',
+    upcoming: 'Missing upcoming text',
+    about: 'Missing about text',
+    description: 'Missing description text',
+
+    criteria: 'Missing criteria list',
+    outcomes: 'Missing outcomes list',
+
+    duration: 'Missing duration number',
+    position: 'Missing position number',
+
     thumbnail: 'Missing thumbnail image',
   }.freeze
 
@@ -91,18 +94,23 @@ class ContentIntegrity
   end
 
   # @return [Boolean]
-  def summary?
-    mod.fields[:short_description].present?
+  def upcoming?
+    mod.fields[:upcoming].present?
   end
 
   # @return [Boolean]
-  def objective?
-    mod.fields[:objective].present?
+  def about?
+    mod.fields[:about].present?
   end
 
   # @return [Boolean]
-  def threshold?
-    mod.fields[:summative_threshold].present?
+  def outcomes?
+    mod.fields[:outcomes].present?
+  end
+
+  # @return [Boolean]
+  def criteria?
+    mod.fields[:criteria].present?
   end
 
   # @return [Boolean]
@@ -113,11 +121,6 @@ class ContentIntegrity
   # @return [Boolean]
   def duration?
     mod.fields[:duration].present?
-  end
-
-  # @return [Boolean]
-  def criteria?
-    mod.fields[:criteria].present?
   end
 
   # CONTENT VALIDATIONS --------------------------------------------------------

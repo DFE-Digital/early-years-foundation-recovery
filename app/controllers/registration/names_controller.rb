@@ -7,12 +7,14 @@ module Registration
       form.last_name = user_params[:last_name]
 
       if form.save
+        track('user_name_change', success: true)
         if current_user.registration_complete?
           redirect_to user_path, notice: t(:details_updated)
         else
           redirect_to edit_registration_setting_type_path
         end
       else
+        track('user_name_change', success: false)
         render :edit, status: :unprocessable_entity
       end
     end

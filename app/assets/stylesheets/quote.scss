@@ -8,6 +8,7 @@
     padding: 20px;
     margin: 16px 20px;
 
+    // change to use media query
     @media (min-width: 40.0625em) {
       margin: 16px 40px;
     }
@@ -19,6 +20,7 @@
       z-index: 9999;
       border: none;
 
+      // change to use media query
       @media (min-width: 40.0625em) {
         padding-left: 40px;
       }

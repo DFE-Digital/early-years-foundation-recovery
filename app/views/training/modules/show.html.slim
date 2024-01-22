@@ -9,7 +9,7 @@
 
   .govuk-grid-row
     .govuk-grid-column-three-quarters-from-desktop class='govuk-!-padding-top-9 govuk-!-padding-bottom-0'
-      = m('module.overview.summary', title: mod.card_title, description: mod.description, headings_start_with: 'xl')
+      = m('module.overview.summary', title: mod.heading, description: mod.description, outcomes: mod.outcomes, headings_start_with: 'xl')
 
 = render 'editor_tools'
 = render 'learning/cms_debug'

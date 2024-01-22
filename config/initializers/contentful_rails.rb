@@ -3,6 +3,7 @@ require 'caching'
 require 'pagination'
 require 'content_types'
 
+require 'course'
 require 'training/content'
 require 'training/module'
 require 'training/page'
@@ -51,6 +52,7 @@ ContentfulRails.configure do |config|
       'page' => Training::Page,
       'question' => Training::Question,
       'video' => Training::Video,
+      'course' => Course,
     },
   }
 end

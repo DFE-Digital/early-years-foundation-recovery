@@ -41,13 +41,6 @@ module ContentHelper
                 aria: { label: "#{icon} icon" }
   end
 
-  # @return [String]
-  def print_button(*additional_classes)
-    button = '<button class="govuk-link gem-c-print-link__button" onclick="window.print()" data-module="print-link" >Print this page</button>'.html_safe
-    classes = ['gem-c-print-link', 'print-button'] + additional_classes
-    content_tag :div, button, class: classes
-  end
-
   # @param success [Boolean]
   # @param score [Integer]
   # @return [String]
@@ -74,7 +67,12 @@ module ContentHelper
 
   # @return [String]
   def service_name
-    Rails.configuration.service_name
+    Course.config.service_name
+  end
+
+  # @return [String]
+  def privacy_policy_url
+    Course.config.privacy_policy_url
   end
 
   # TODO: replace with form builder fields, Replace Openstruct with DATA

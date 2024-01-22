@@ -38,14 +38,31 @@ module.exports = function(migration) {
     required: true
   })
 
-  trainingModule.createField('short_description', {
-    name: 'Short description',
+  trainingModule.createField('upcoming', {
+    name: 'Upcoming',
     type: 'Text',
-    required: true
+    required: true,
+    validations: [
+      {
+        prohibitRegexp: { pattern: '\\n' }
+      }
+    ]
   })
 
-  trainingModule.createField('description', {
+  // markdown not permitted
+  trainingModule.createField('description', { // list moved to outcomes
     name: 'Description',
+    type: 'Text',
+    required: true,
+    validations: [
+      {
+        prohibitRegexp: { pattern: '\\n' }
+      }
+    ]
+  })
+
+  trainingModule.createField('outcomes', { // list moved out of description
+    name: 'Skills',
     type: 'Text',
     required: true
   })
@@ -57,8 +74,8 @@ module.exports = function(migration) {
   })
 
   // markdown not permitted
-  trainingModule.createField('objective', {
-    name: 'Objective',
+  trainingModule.createField('about', { // formerly objective
+    name: 'About',
     type: 'Text',
     required: true,
     validations: [
@@ -78,20 +95,6 @@ module.exports = function(migration) {
     validations: [
       {
         range: { min: 0.5, max: 3 }
-      }
-    ]
-  })
-
-  trainingModule.createField('summative_threshold', {
-    name: 'Summative threshold',
-    type: 'Integer',
-    required: true,
-    defaultValue: {
-      'en-US': 70,
-    },
-    validations: [
-      {
-        range: { min: 1, max: 100 }
       }
     ]
   })
@@ -133,21 +136,25 @@ module.exports = function(migration) {
 
   /* markdown */
 
-  trainingModule.changeFieldControl('description', 'builtin', 'markdown', {
-    helpText: 'A lead in sentence about the content. Followed by "On completion of this module you will be able to:" then add bullet points.'
+  trainingModule.changeFieldControl('outcomes', 'builtin', 'markdown', {
+    helpText: 'Bullet points which follow on from the sentence "On completion of this module you will be able to:".'
   })
 
   trainingModule.changeFieldControl('criteria', 'builtin', 'markdown', {
     helpText: 'Bullet points which follow on from the sentence "This module covers:".'
   })
 
-  trainingModule.changeFieldControl('short_description', 'builtin', 'markdown', {
-    helpText: 'Title of module'
-  })
-
   /* text */
 
-  trainingModule.changeFieldControl('objective', 'builtin', 'multipleLine', {
+  trainingModule.changeFieldControl('upcoming', 'builtin', 'markdown', {
+    helpText: 'A short introduction for a future module'
+  })
+
+  trainingModule.changeFieldControl('description', 'builtin', 'multipleLine', {
+    helpText: 'A lead in sentence about the content.'
+  })
+
+  trainingModule.changeFieldControl('about', 'builtin', 'multipleLine', {
     helpText: 'One or two sentence that describes what the module is about. Usual starts with "This module explores..."'
   })
 
@@ -161,15 +168,7 @@ module.exports = function(migration) {
     helpText: 'Order of the module.'
   })
 
-  trainingModule.changeFieldControl('summative_threshold', 'builtin', 'numberEditor', {
-    helpText: 'Percentage required to pass assessment.'
-  })
-
   /* linked entries */
-
-  trainingModule.changeFieldControl('depends_on', 'builtin', 'entryLinkEditor', {
-    helpText: 'Leave blank if you don’t have to have completed a previous module to start this module.',
-  })
 
   trainingModule.changeFieldControl('image', 'builtin', 'assetLinkEditor', {
     helpText: 'Select thumbnail image.',
