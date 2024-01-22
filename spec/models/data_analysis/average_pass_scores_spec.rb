@@ -11,7 +11,7 @@ RSpec.describe DataAnalysis::AveragePassScores do
   let(:rows) do
     [
       {
-        module_name: 'module_1',
+        module_name: 'alpha',
         pass_score: 100.0,
       },
     ]
@@ -20,8 +20,13 @@ RSpec.describe DataAnalysis::AveragePassScores do
   let(:user) { create(:user, :registered) }
 
   before do
-    create :user_assessment, :passed, user_id: user.id, score: 100, module: 'module_1'
-    create :user_assessment, :failed, user_id: user.id, score: 0, module: 'module_1'
+    if Rails.application.migrated_answers?
+      create :assessment, :passed
+      create :assessment, :failed
+    else
+      create :user_assessment, :passed, user_id: user.id, score: 100, module: 'alpha'
+      create :user_assessment, :failed, user_id: user.id, score: 0, module: 'alpha'
+    end
   end
 
   it_behaves_like 'a data export model'

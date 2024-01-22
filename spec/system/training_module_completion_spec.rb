@@ -9,7 +9,7 @@ RSpec.describe 'Training Module Completion', type: :system do
   let(:schema) { ContentTestSchema.new(mod: mod) }
 
   before do
-    skip 'WIP' if ENV['DISABLE_USER_ANSWER'].present?
+    skip 'WIP' if Rails.application.migrated_answers?
 
     visit "/modules/#{mod.name}"
     click_on 'Start module'

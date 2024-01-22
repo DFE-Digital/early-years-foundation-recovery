@@ -30,12 +30,20 @@ module DataAnalysis
 
       # @return [Hash]
       def assessments_by_month
-        UserAssessment.summative.group_by { |assessment| assessment.created_at.strftime('%B %Y') }
+        if Rails.application.migrated_answers?
+          Assessment.all.group_by { |assessment| assessment.completed_at.strftime('%B %Y') }
+        else
+          UserAssessment.all.group_by { |assessment| assessment.created_at.strftime('%B %Y') }
+        end
       end
 
       # @return [Hash]
       def assessments_by_module_by_month
-        assessments_by_month.transform_values { |assessments| assessments.group_by(&:module) }
+        if Rails.application.migrated_answers?
+          assessments_by_month.transform_values { |assessments| assessments.group_by(&:training_module) }
+        else
+          assessments_by_month.transform_values { |assessments| assessments.group_by(&:module) }
+        end
       end
     end
   end

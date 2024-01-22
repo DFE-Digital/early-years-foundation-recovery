@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_10_150648) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_19_163001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,6 +54,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_10_150648) do
     t.datetime "started_at"
     t.index ["user_id"], name: "index_ahoy_visits_on_user_id"
     t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
+  end
+
+  create_table "assessments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "training_module", null: false
+    t.float "score"
+    t.boolean "passed"
+    t.datetime "started_at"
+    t.datetime "completed_at"
+    t.index ["score", "passed"], name: "index_assessments_on_score_and_passed"
+    t.index ["user_id"], name: "index_assessments_on_user_id"
   end
 
   create_table "module_releases", force: :cascade do |t|
@@ -152,13 +163,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_10_150648) do
     t.string "training_module", null: false
     t.string "question_name", null: false
     t.jsonb "answers", default: []
-    t.boolean "archived", default: false
     t.boolean "correct"
-    t.bigint "user_assessment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.jsonb "schema"
-    t.index ["user_assessment_id"], name: "index_responses_on_user_assessment_id"
+    t.string "question_type"
+    t.bigint "assessment_id"
+    t.index ["assessment_id"], name: "index_responses_on_assessment_id"
     t.index ["user_id", "training_module", "question_name"], name: "user_question"
     t.index ["user_id"], name: "index_responses_on_user_id"
   end
@@ -238,10 +248,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_10_150648) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token"
   end
 
+  add_foreign_key "assessments", "users"
   add_foreign_key "module_releases", "releases"
   add_foreign_key "notes", "users"
   add_foreign_key "que_scheduler_audit_enqueued", "que_scheduler_audit", column: "scheduler_job_id", primary_key: "scheduler_job_id", name: "que_scheduler_audit_enqueued_scheduler_job_id_fkey"
-  add_foreign_key "responses", "user_assessments"
+  add_foreign_key "responses", "assessments"
   add_foreign_key "responses", "users"
   add_foreign_key "user_answers", "user_assessments"
   add_foreign_key "user_answers", "users"

@@ -25,13 +25,14 @@ Rails/BulkChangeTable:
   Exclude:
     - 'db/migrate/20220617020303_add_summative_assessment_fields_to_user_answers.rb'
 
-# Offense count: 3
+# Offense count: 4
 # Configuration parameters: Include.
 # Include: db/**/*.rb
 Rails/CreateTableWithTimestamps:
   Exclude:
     - 'db/migrate/20220419121105_create_ahoy_visits_and_events.rb'
     - 'db/migrate/20230316130014_create_releases.rb'
+    - 'db/migrate/20240119091634_create_assessments.rb'
 
 # Offense count: 4
 # This cop supports unsafe autocorrection (--autocorrect-all).

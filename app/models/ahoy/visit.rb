@@ -1,3 +1,4 @@
+# TODO: remove dependency namespace Ahoy
 class Ahoy::Visit < ApplicationRecord
   include ToCsv
 

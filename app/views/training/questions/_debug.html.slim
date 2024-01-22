@@ -3,7 +3,7 @@
     = content.debug_summary
 
     hr
-    | Class: #{ENV['DISABLE_USER_ANSWER'].present? ? 'Response' : 'UserAnswer'}
+    | Class: #{Rails.application.migrated_answers? ? 'Response' : 'UserAnswer'}
     hr
     | Question Options:
     - (content.answers || content.class::CONFIDENCE_OPTIONS).map do |option|

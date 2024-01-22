@@ -1,4 +1,4 @@
-module GovOneHelper
+module AuthenticationHelper
   # @return [URI]
   def login_uri
     params = {
