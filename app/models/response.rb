@@ -28,7 +28,7 @@ class Response < ApplicationRecord
   # Disable if already answered unless confidence check
   # @return [Array<Training::Answer::Option>]
   def options
-    if question.confidence_question?
+    if question.confidence_question? || question.opinion_question?
       question.options(checked: answers)
     else
       question.options(checked: answers, disabled: responded?)
@@ -37,12 +37,13 @@ class Response < ApplicationRecord
 
   # @return [Boolean]
   def responded?
+    # binding.pry
     answers.any?
   end
 
   # @return [Boolean]
   def correct?
-    question.confidence_question? || question.correct_answers.eql?(answers)
+    question.confidence_question? || question.opinion_question? || question.correct_answers.eql?(answers)
   end
 
   # @return [Boolean]

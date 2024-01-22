@@ -22,7 +22,14 @@ RSpec.describe 'End of module feedback form' do
     it 'displays an error message' do
       visit '/modules/alpha/questionnaires/feedback2'
       click_on 'Next'
-      expect(page).to have_content 'Please select an answer'
+      expect(page).to have_content 'Please select an option'
     end
+  end
+
+  it 'does not link to additional feedback from the module overview page' do
+    visit '/modules/alpha'
+
+    expect(page).to have_content 'Reflect on your learning'
+    expect(page).not_to have_link 'Additional feedback'
   end
 end
