@@ -1,7 +1,10 @@
 section.module-overview--section
   .progress-bar
     span.icon class=icon
-      span.number = position
+      - if position == 5
+        span.number = 4
+      - else
+       span.number = position
     - if display_line
       .line
 

@@ -50,7 +50,7 @@ module LinkHelper
         training_module_page_path(mod.name, content.previous_item.name)
       end
 
-    style = content.section? ? 'section-intro-previous-button' : 'govuk-button--secondary'
+    style = content.section? && !content.opinion_intro? ? 'section-intro-previous-button' : 'govuk-button--secondary'
 
     govuk_button_link_to 'Previous', path,
                          class: style,
