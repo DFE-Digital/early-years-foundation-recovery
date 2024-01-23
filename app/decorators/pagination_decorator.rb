@@ -15,7 +15,7 @@ class PaginationDecorator
 
   # @return [String]
   def section_numbers
-    if content.opinion_intro? || content.thankyou?
+    if content.opinion_intro? || content.opinion_question? || content.thankyou?
       I18n.t(:section, scope: :pagination, current: content.submodule - 1, total: section_total - 1)
     else
       I18n.t(:section, scope: :pagination, current: content.submodule, total: section_total)

@@ -243,6 +243,11 @@ module Training
       content.select(&:confidence_question?)
     end
 
+    # @return [Array<Training::Question>]
+    def opinion_questions
+      content.select(&:opinion?)
+    end
+
     # @param text [String]
     # @return [Array<String>]
     def answers_with(text)
