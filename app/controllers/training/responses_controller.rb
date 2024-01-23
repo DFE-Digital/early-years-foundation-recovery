@@ -16,6 +16,10 @@ module Training
         track_question_answer
         redirect
       else
+        if content.opinion_question?
+          current_user_response.errors.clear
+          current_user_response.errors.add :answers, :invalid
+        end
         render 'training/questions/show', status: :unprocessable_entity
       end
     end

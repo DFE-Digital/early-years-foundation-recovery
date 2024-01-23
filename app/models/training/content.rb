@@ -61,7 +61,7 @@ module Training
         'Next page has not been created'
       elsif opinion_intro?
         'Give feedback'
-      elsif section? && !opinion_intro
+      elsif section? && !opinion_intro?
         'Start section'
       elsif next_item.assessment_results?
         'Finish test'

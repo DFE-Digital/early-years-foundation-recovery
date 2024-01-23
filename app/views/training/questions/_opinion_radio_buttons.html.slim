@@ -3,9 +3,9 @@
   - if response.options.any?
     - response.options.each.with_index(1) do |option, index|
       - if response.options.count.eql?(index) && content.other.present?
-        = f.govuk_radio_button :answers, 'other', label: { text: 'No' } do
-          = f.govuk_text_area :other_description, label: { text: content.other }
+        = f.govuk_radio_button :answers, 'other', label: { text: 'No' }, link_errors: true, checked: option.checked? do
+          = f.govuk_text_area :answers_description, label: { text: content.other }
       - else
         = f.opinion_radio_button(option)
   - else
-    = f.govuk_text_area '', rows: 9
+    = f.govuk_text_area :answers, rows: 9

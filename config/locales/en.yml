@@ -50,8 +50,7 @@ en:
           attributes:
             answers:
               blank: Please select an answer.
-            options:
-              blank: Please select an option.
+              invalid: Please select an option.
         user_answer:
           attributes:
             answer:
