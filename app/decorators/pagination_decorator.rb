@@ -18,7 +18,7 @@ class PaginationDecorator
     if content.opinion_intro? || content.opinion_question? || content.thankyou?
       I18n.t(:section, scope: :pagination, current: content.submodule - 1, total: section_total - 1)
     else
-      I18n.t(:section, scope: :pagination, current: content.submodule, total: section_total)
+      I18n.t(:section, scope: :pagination, current: content.submodule, total: section_total - 1)
     end
   end
 
