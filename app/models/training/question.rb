@@ -47,6 +47,16 @@ module Training
       parent.summative_questions.last.eql?(self)
     end
 
+    # @return [Boolean] event tracking
+    def first_feedback?
+      parent.opinion_questions.first.eql?(self)
+    end
+
+    # @return [Boolean] event tracking
+    def last_feedback?
+      parent.opinion_questions.last.eql?(self)
+    end
+
     # @return [Boolean]
     def true_false?
       return false if multi_select?

@@ -49,7 +49,7 @@ class UserAnswer < ApplicationRecord
 
   # [Array<Training::Answer::Option>]
   def options
-    if question.confidence_question? || question.opinion_question?
+    if question.confidence_question?
       question.options(checked: answers)
     else
       question.options(checked: answers, disabled: responded?)
