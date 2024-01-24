@@ -87,6 +87,10 @@ Rails.application.routes.draw do
     end
   end
 
+
+  
+  resources :feedback, only: [:show]
+
   post 'change', to: 'hook#change'
   post 'release', to: 'hook#release'
 

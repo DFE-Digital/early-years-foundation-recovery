@@ -1,12 +1,8 @@
 
-class FeedbackController
+class FeedbackController < ApplicationController
+  helper_method :next_feedback, :previous_feedback, :current_question
 
-    before_action :find_course
-    before_action :find_question, only: [:show, :update]
-
-    def show
-
-        @question = @course.feedback.find(params[:id])
+    def show;
     end
 
     def intro; end
@@ -23,38 +19,35 @@ class FeedbackController
         end
     end
 
-    def next_step
-
-        next_question = @course.questions.where('id > ?', params[:id]).first
-        if next_question
-            redirect_to feedback_path(next_question)
-        else
-            redirect_to feedback_complete_path
-        end
+    def next_feedback
+      if params[:id].to_i == questions.count
+        my_modules_path
+      else
+        feedback_path(params[:id].to_i + 1)
+      end
     end
 
-    def previous_step
-
-        previous_question = @course.questions.where('id < ?', params[:id]).last
-        if previous_question
-          redirect_to feedback_path(previous_question)
-        else
-          redirect_to feedback_intro_path
-        end
+    def previous_feedback
+      if params[:id] == '1'
+        feedback_path(1)
+      else
+        feedback_path(params[:id].to_i - 1)
+      end
     end
 
     private
 
-    def find_course
-      @course = Course.find(params[:course_id])
+
+    def questions
+      Course.config.feedback
     end
   
-    def find_question
-      @question = @course.questions.find(params[:id])
+    def current_question
+      @current_question ||= questions[params[:id].to_i - 1]
     end
 
     def form
-      @form ||= FeedbackForm.new(user: current_user, question: @question, answer: params[:answer])
+      @form ||= FeedbackForm.new(user: current_user, question: current_question, answer: params[:answer])
     end
 end
 
