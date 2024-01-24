@@ -329,7 +329,7 @@ Questions can be directed to the `#govuk-one-login` slack channel <https://ukgov
 
 ### Credentials
 - Integration GOV.UK One Login environment credentials are stored in Rails development credentials (`config/credentials/development.yml.enc`)
-- Production GOV.UK One Login environment credentials are stored in Rails production credentials (`config/credentials/production.yml.enc`).
+- Both production and integration GOV.UK One Login environment credentials are stored in Rails production credentials (`config/credentials/production.yml.enc`).
 
 ---
 
