@@ -32,6 +32,8 @@ en:
               blank: Select your role.
             role_type_other:
               blank: Enter your job title.
+            early_years_experience:
+              blank: Choose an option.
             local_authority:
               blank: Enter the local authority of the setting or organisation you work in most of the time.
             training_emails:
@@ -123,8 +125,13 @@ en:
   banners:
     alert: Warning
     error: Error
-    important: Success
+    important: Important
     notice: Success
+    gov_one: |
+      ## Access to this website is changing
+
+      From next month, you will require a GOV.UK One login account to access this website.
+      To find out about creating a GOV.UK One login account then [read this useful information page](https://www.gov.uk/using-your-gov-uk-one-login).
 
   # Training Modules -----------------------------------------------------------
 
@@ -299,7 +306,7 @@ en:
   # /my-account
   my_account:
     title: My account
-    name_information: This is the name that will appear on you end of module certificate. You can use this setting to change how your name appears. Changing your name on this account will not affect your GOV.UK One Login
+    name_information: This is the name that will appear on your end of module certificate. You can use this setting to change how your name appears. Changing your name on this account will not affect your GOV.UK One Login
     setting_details: |
       ## Your setting details
     email_preferences: |
@@ -307,6 +314,8 @@ en:
     training_emails:
       true: You have chosen to receive emails about this training course.
       false: You have chosen not to receive emails about this training course.
+    early_years_experience:
+      Time worked in early years
     password_changed: Password last changed on %{date}
     remember_me: Remember me
     closing:
@@ -501,6 +510,11 @@ en:
     heading: What is your role?
     body: Enter your job title.
 
+  # /registration/early-years-experience/edit
+  register_early_years_experience:
+    heading: How long have you worked in early years?
+    label: Early years experience
+
   # Email Preferences ----------------------------------------------------------
 
   training_emails:
@@ -575,7 +589,9 @@ en:
       Enrol on this course and begin your first module.
       You will need to sign in or create an account before starting a module.
     summary: |
-      %{description}
+      **On completion of this module you will be able to:**
+
+      %{outcomes}
 
       **What you'll learn**
 
@@ -686,6 +702,10 @@ en:
         # %{title}
 
         %{description}
+
+        On completion of this module you will be able to:
+
+        %{outcomes}
 
       criteria: |
         ## This module covers:

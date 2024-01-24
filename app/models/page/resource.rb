@@ -18,4 +18,11 @@ class Page::Resource < ContentfulModel::Base
       find_by(name: name.to_s).first
     end
   end
+
+  # @return [Array<Page::Resource>]
+  def self.ordered
+    fetch_or_store to_key("#{name}.__method__") do
+      limit(1_000).order(:name).load.to_a
+    end
+  end
 end

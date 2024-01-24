@@ -21,6 +21,12 @@ class User < ApplicationRecord
     DASHBOARD_ATTRS + Training::Module.live.map { |mod| "module_#{mod.position}_time" }
   end
 
+  # @return [String]
+  def self.random_password
+    special_characters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+']
+    SecureRandom.alphanumeric(5).upcase + SecureRandom.alphanumeric(5).downcase + special_characters.sample(3).join + SecureRandom.hex(5)
+  end
+
   # @param email [String]
   # @param gov_one_id [String]
   # @return [User]
@@ -28,11 +34,15 @@ class User < ApplicationRecord
     if (user = find_by(email: email) || find_by(gov_one_id: gov_one_id))
       user.update_column(:email, email)
       user.update_column(:gov_one_id, gov_one_id) if user.gov_one_id.nil?
-      user.save!
     else
-      user = new(email: email, gov_one_id: gov_one_id, confirmed_at: Time.zone.now)
-      user.save!(validate: false) # TODO: validate despite blank password
+      user = new(
+        email: email,
+        gov_one_id: gov_one_id,
+        confirmed_at: Time.zone.now,
+        password: random_password,
+      )
     end
+    user.save!
     user
   end
 
@@ -122,7 +132,7 @@ class User < ApplicationRecord
   scope :early_years_email_recipients, -> { order(:id).where(early_years_emails: true) }
   scope :start_training_mail_job_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_complete.not_started_training }
   scope :complete_registration_mail_job_recipients, -> { order(:id).training_email_recipients.month_old_confirmation.registration_incomplete }
-  scope :continue_training_mail_job_recipients, -> { order(:id).training_email_recipients.last_visit_4_weeks_ago.distinct(&:course_in_progress?) }
+  scope :continue_training_mail_job_recipients, -> { order(:id).training_email_recipients.last_visit_4_weeks_ago.distinct(&:module_in_progress?) }
   scope :new_module_mail_job_recipients, -> { order(:id).training_email_recipients }
 
   # data
@@ -141,7 +151,11 @@ class User < ApplicationRecord
             inclusion: { in: Trainee::Setting.valid_types },
             if: proc { |u| u.registration_complete? }
 
-  validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
+  if Rails.application.gov_one_login?
+    validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :update, if: proc { |u| u.registration_complete? }
+  else
+    validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
+  end
 
   # @return [Boolean]
   def notes?
@@ -260,7 +274,7 @@ class User < ApplicationRecord
   end
 
   # @return [Boolean]
-  def course_in_progress?
+  def module_in_progress?
     course_started? && !module_time_to_completion.values.all?(&:positive?)
   end
 

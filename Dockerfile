@@ -44,7 +44,7 @@ LABEL org.opencontainers.image.source=https://github.com/DFE-Digital/early-years
 LABEL org.opencontainers.image.description "Early Years Recovery Rails Application"
 
 RUN echo "Welcome to the EYFS Recovery Application" > /etc/motd
-RUN apk add --no-cache --no-progress --no-check-certificate postgresql-dev yarn chromium openssh
+RUN apk add --no-cache --no-progress --no-check-certificate postgresql-dev yarn chromium font-liberation openssh
 RUN echo "root:Docker!" | chpasswd && cd /etc/ssh/ && ssh-keygen -A
 
 ENV GROVER_NO_SANDBOX true

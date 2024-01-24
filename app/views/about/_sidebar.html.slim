@@ -13,7 +13,7 @@ nav.dfe-vertical-nav
 
     - mods.reject(&:draft?).map do |mod|
       li.dfe-vertical-nav__section-item class=('dfe-vertical-nav__section-item--current' if active.eql?(mod.name))
-        = govuk_link_to mod.card_title, about_path(mod.name), class: 'dfe-vertical-nav__link'
+        = govuk_link_to mod.heading, about_path(mod.name), class: 'dfe-vertical-nav__link'
 
     li.dfe-vertical-nav__section-item class=('dfe-vertical-nav__section-item--current' if active.eql?(:experts))
       = govuk_link_to t('experts.heading'), experts_path, class: 'dfe-vertical-nav__link'
