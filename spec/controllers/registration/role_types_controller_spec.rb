@@ -35,7 +35,7 @@ RSpec.describe Registration::RoleTypesController, type: :controller do
     describe 'POST #update' do
       it 'succeeds' do
         post :update, params: { user: { role_type: 'Manager' } }
-        expect(response).to redirect_to edit_registration_training_emails_path
+        expect(response).to redirect_to edit_registration_early_years_experience_path
         expect(user.reload.role_type).to eq 'Manager'
       end
     end

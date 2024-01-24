@@ -31,6 +31,8 @@ module DataAnalysis
           'Start Training Mail Recipients',
           'Continue Training Mail Recipients',
           'New Module Mail Recipients',
+          'Closed',
+          'Terms and Conditions Agreed',
         ]
       end
 
@@ -62,6 +64,8 @@ module DataAnalysis
           start_training_mail_recipients: StartTrainingMailJob.recipients.count,
           continue_training_mail_recipients: ContinueTrainingMailJob.recipients.count,
           new_module_mail_recipients: NewModuleMailJob.recipients.count,
+          closed: User.closed.count,
+          terms_and_conditions_agreed: terms_and_conditions_agreed_count,
         }]
       end
 
@@ -80,6 +84,11 @@ module DataAnalysis
       # @return [Integer]
       def without_notes_count
         User.not_closed.without_notes.count
+      end
+
+      # @return [Integer]
+      def terms_and_conditions_agreed_count
+        User.all.count { |u| u.terms_and_conditions_agreed_at.present? }
       end
 
       # @note Ahoy::Event.module_start.distinct.count(:user_id)

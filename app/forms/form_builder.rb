@@ -1,4 +1,4 @@
-class EarlyYearsRecoveryFormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
+class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
   def govuk_text_field(attribute_name, options = {})
     super(attribute_name, **options.reverse_merge(width: 'two-thirds'))
   end
@@ -60,6 +60,14 @@ class EarlyYearsRecoveryFormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
                             hint: { text: I18n.t('register_authority.body') },
                             data: { controller: 'autocomplete', 'autocomplete-message-value': I18n.t('register_authority.not_found') },
                             aria: { label: 'registration local authority' },
+                            form_group: { classes: %w[data-hj-suppress] }
+  end
+
+  def select_trainee_experience
+    govuk_collection_select :early_years_experience,
+                            Trainee::Experience.all, :name, :name,
+                            label: { text: I18n.t('register_early_years_experience.label'), class: 'govuk-visually-hidden' },
+                            aria: { label: 'registration early years experience' },
                             form_group: { classes: %w[data-hj-suppress] }
   end
 end

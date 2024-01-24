@@ -4,6 +4,32 @@
 - [API Keys](https://app.contentful.com/spaces/dvmeh832nmjc/api/keys/) are granted access to new environments but targeting aliases is preferred.
 - [User roles](https://app.contentful.com/spaces/dvmeh832nmjc/settings/users).
 
+### TrainingModule text fields
+
+**upcoming** only used in `Future modules in this course`
+
+- editor: multiline
+- validations: No markdown by checking for new lines
+
+**about** only used in the `About` pages
+
+- editor: multiline
+- validations: No markdown by checking for new lines
+
+**description**
+
+- editor: multiline
+- validations: No markdown by checking for new lines
+
+**outcomes** bullet-pointed list
+
+- editor: markdown
+- validations: None
+
+**criteria** bullet-pointed list
+
+- editor: markdown
+- validations: None
 
 ## Tasks
 

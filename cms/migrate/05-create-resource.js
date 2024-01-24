@@ -15,7 +15,7 @@ module.exports = function(migration) {
     required: true,
     validations: [
       { 'unique': true },
-      { 'regexp' : { 'pattern': '^[a-z\\._/-]*$'}}
+      { 'regexp' : { 'pattern': '^[a-z\\._/-]*$' } }
     ]
   })
 

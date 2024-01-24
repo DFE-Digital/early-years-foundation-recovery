@@ -68,6 +68,17 @@ RSpec.describe 'Confirmed users' do
     fill_in 'Enter your job title.', with: 'user defined job title'
     click_button 'Continue'
 
+    expect(page).to have_text('How long have you worked in early years?')
+
+    click_button 'Continue'
+
+    expect(page).to have_text('There is a problem')
+      .and have_text('Choose an option.')
+
+    choose 'Less than 2 years'
+
+    click_button 'Continue'
+
     expect(page).to have_text('Do you want to get email updates about this training course?')
 
     click_button 'Continue'
