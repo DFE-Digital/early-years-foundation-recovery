@@ -46,9 +46,16 @@ module LinkHelper
 
     style = content.section? && !content.opinion_intro? ? 'section-intro-previous-button' : 'govuk-button--secondary'
 
-    govuk_button_link_to 'Previous', path,
-                         class: style,
-                         aria: { label: t('pagination.previous') }
+    # Check if feedback questions have been skipped
+    if content.thankyou?
+      govuk_button_link_to 'Previous', training_module_page_path(mod.name, mod.opinion_intro_page.name),
+                           class: style,
+                           aria: { label: t('pagination.previous') }
+    else
+      govuk_button_link_to 'Previous', path,
+                           class: style,
+                           aria: { label: t('pagination.previous') }
+    end
   end
 
   # Bottom of my-modules card component
