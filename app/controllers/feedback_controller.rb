@@ -2,34 +2,34 @@
 class FeedbackController < ApplicationController
   
   helper_method :previous_path, :content, :is_checkbox?
-    def show;
-    end
+    def show; end
 
     def intro; end
 
     def is_checkbox?
-      puts content.name
       content.response_type
     end
 
     def update
-      puts params
-      puts params[:answers]
-
       answer_wording = []
 
       answers = params[:answers]
+      
+      if answers.empty? || answers.is_a?(Array) && answers.all?(&:empty?)
+        flash[:error] = "Please answer the question"
+        redirect_to feedback_path(params[:id])
+        return
+      end
+
+
       if answers.is_a?(Array)
         answers.each do |answer|
-          puts answer
           answer_wording << content.answers[answer.to_i - 1] if answer != ""
         end
       else
         answer_wording << content.answers[answers.to_i - 1]
       end
-
-      puts answer_wording
-      current_user.responses.create(answers: answer_wording)
+      current_user.responses.create(answers: answer_wording.flatten, question_name: content.name)
 
       next_feedback
     end
