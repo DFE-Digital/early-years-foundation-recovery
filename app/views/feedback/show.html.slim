@@ -1,14 +1,19 @@
+= form_with url: feedback_path, method: :patch do |f|
   .govuk-grid-row
     .govuk-grid-column-full
 
       hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
 
       h1.govuk-heading-xl class='govuk-!-margin-bottom-4'
-        = current_question.body
+        
+        - if !is_checkbox?
+          = render 'training/questions/opinion_radio_buttons', f: f, response: content, required: true
+        - else
+          = render 'training/questions/check_boxes', f: f, response: content, required: true
 
         
     
 
       .govuk-button-group
-        = govuk_button_link_to 'Previous', previous_feedback
-        = govuk_button_link_to 'Next', next_feedback
+        = govuk_button_link_to 'Previous', previous_path
+        = f.submit 'Next', class: 'govuk-button'

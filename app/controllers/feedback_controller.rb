@@ -1,33 +1,48 @@
 
 class FeedbackController < ApplicationController
-  helper_method :next_feedback, :previous_feedback, :current_question
-
+  
+  helper_method :previous_path, :content, :is_checkbox?
     def show;
     end
 
     def intro; end
 
+    def is_checkbox?
+      puts content.name
+      content.response_type
+    end
+
     def update
+      puts params
+      puts params[:answers]
 
-        form.answer = params[:answer]
+      answer_wording = []
 
-        if form.save
-            next_step 
-        else
-            flash[:error] = 'Please answer the question'
-            render :show
+      answers = params[:answers]
+      if answers.is_a?(Array)
+        answers.each do |answer|
+          puts answer
+          answer_wording << content.answers[answer.to_i - 1] if answer != ""
         end
+      else
+        answer_wording << content.answers[answers.to_i - 1]
+      end
+
+      puts answer_wording
+      current_user.responses.create(answers: answer_wording)
+
+      next_feedback
     end
 
     def next_feedback
       if params[:id].to_i == questions.count
-        my_modules_path
+        redirect_to my_modules_path
       else
-        feedback_path(params[:id].to_i + 1)
+        redirect_to feedback_path(params[:id].to_i + 1)
       end
     end
 
-    def previous_feedback
+    def previous_path
       if params[:id] == '1'
         feedback_path(1)
       else
@@ -42,12 +57,8 @@ class FeedbackController < ApplicationController
       Course.config.feedback
     end
   
-    def current_question
-      @current_question ||= questions[params[:id].to_i - 1]
-    end
-
-    def form
-      @form ||= FeedbackForm.new(user: current_user, question: current_question, answer: params[:answer])
+    def content
+      @content ||= questions[params[:id].to_i - 1]
     end
 end
 
