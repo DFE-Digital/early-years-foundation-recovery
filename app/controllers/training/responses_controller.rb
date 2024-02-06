@@ -12,11 +12,11 @@ module Training
     layout 'hero'
 
     def update
-      if save_response!
+      if save_response! || (content.opinion_question? && content.options.blank?)
         track_question_answer
         redirect
       else
-        if content.opinion_question?
+        if content.opinion_question? && user_answer_text.blank? && content.options.present?
           current_user_response.errors.clear
           current_user_response.errors.add :answers, :invalid
         end
@@ -42,8 +42,15 @@ module Training
     def save_response!
       correct_answers = content.confidence_question? || content.opinion_question? ? true : content.correct_answers.eql?(user_answers)
 
+      question_answer =
+        if content.opinion_question? && !user_answer_text.eql?(nil) && content.options.blank?
+          [0]
+        else
+          user_answers
+        end
+
       if ENV['DISABLE_USER_ANSWER'].present?
-        current_user_response.update(answers: user_answers, correct: correct_answers, schema: content.schema)
+        current_user_response.update(answers: question_answer, correct: correct_answers, schema: content.schema, text_input: user_answer_text)
       else
         current_user_response.update(answer: user_answers, correct: correct_answers)
       end
@@ -52,6 +59,10 @@ module Training
     # @return [Array<Integer>]
     def user_answers
       Array(response_params[:answers]).compact_blank.map(&:to_i)
+    end
+
+    def user_answer_text
+      response_params[:text_input]
     end
 
     def redirect
@@ -72,7 +83,8 @@ module Training
               mod_uid: mod.id,
               type: content.question_type,
               success: current_user_response.correct?,
-              answers: current_user_response.answers)
+              answers: current_user_response.answers,
+              text_input: user_answer_text)
       else
         track('questionnaire_answer',
               uid: content.id,

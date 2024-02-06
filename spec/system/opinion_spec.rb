@@ -4,8 +4,8 @@ RSpec.describe 'End of module feedback form' do
   include_context 'with progress'
   include_context 'with user'
 
-  let(:second_question_path) { '/modules/alpha/questionnaires/feedback2' }
-  let(:third_question_path) { '/modules/alpha/questionnaires/feedback3' }
+  let(:second_question_path) { '/modules/alpha/questionnaires/end-of-module-feedback-2' }
+  let(:third_question_path) { '/modules/alpha/questionnaires/end-of-module-feedback-3' }
 
   it 'shows feedback question' do
     visit '/modules/alpha/content-pages/feedback-intro'

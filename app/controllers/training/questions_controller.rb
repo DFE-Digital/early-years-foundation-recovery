@@ -19,7 +19,6 @@ module Training
     # @see Tracking
     # @return [Ahoy::Event] Show action
     def track_events
-      # binding.pry
       if track_feedback_start?
         track('feedback_start')
       elsif track_confidence_start?

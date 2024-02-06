@@ -26,9 +26,24 @@ module LinkHelper
     [text, path]
   end
 
+  # @return [Boolean]
+  def research_question_next?
+    content.next_item.name == 'end-of-module-feedback-5' && content.next_item.answers.any?
+  end
+
+  # @return [Boolean]
+  def research_question_previous?
+    content.previous_item.name == 'end-of-module-feedback-5' && content.previous_item.answers.any?
+  end
+
   # @return [String] next page (ends on certificate)
   def link_to_next
-    page = content.interruption_page? ? mod.content_start : content.next_item
+    page =
+      if content.opinion_question?
+        research_question_next? ? content.next_item.next_item : content.next_item
+      else
+        content.interruption_page? ? mod.content_start : content.next_item
+      end
 
     govuk_button_link_to content.next_button_text, training_module_page_path(mod.name, page.name),
                          id: 'next-action',
@@ -41,13 +56,12 @@ module LinkHelper
       if content.interruption_page?
         training_module_path(mod.name)
       else
-        training_module_page_path(mod.name, content.previous_item.name)
+        training_module_page_path(mod.name, (research_question_previous? ? content.previous_item.previous_item.name : content.previous_item.name))
       end
-
     style = content.section? && !content.opinion_intro? ? 'section-intro-previous-button' : 'govuk-button--secondary'
 
     # Check if feedback questions have been skipped
-    if content.thankyou?
+    if content.thankyou? && !current_user.response_for(content.previous_item, mod.name).responded?
       govuk_button_link_to 'Previous', training_module_page_path(mod.name, mod.opinion_intro_page.name),
                            class: style,
                            aria: { label: t('pagination.previous') }

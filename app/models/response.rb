@@ -37,7 +37,6 @@ class Response < ApplicationRecord
 
   # @return [Boolean]
   def responded?
-    # binding.pry
     answers.any?
   end
 
