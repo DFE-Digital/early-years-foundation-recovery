@@ -7,12 +7,9 @@
       h1.govuk-heading-xl class='govuk-!-margin-bottom-4'
         
         - if !is_checkbox?
-          = render 'training/questions/opinion_radio_buttons', f: f, response: content, required: true
+          = render 'training/questions/main_feedback_radio_buttons', f: f, response: content, required: true
         - else
-          = render 'training/questions/check_boxes', f: f, response: content, required: true
-
-        
-    
+          = render 'training/questions/main_feedback_check_boxes', f: f, response: content, required: true
 
       .govuk-button-group
         = govuk_button_link_to 'Previous', previous_path

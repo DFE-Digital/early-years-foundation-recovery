@@ -89,8 +89,7 @@ Rails.application.routes.draw do
 
 
   
-  resources :feedback, only: %i[show new create edit update]
-
+  resources :feedback, only: %i[index show update]
   post 'change', to: 'hook#change'
   post 'release', to: 'hook#release'
 

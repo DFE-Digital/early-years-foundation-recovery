@@ -1,33 +1,58 @@
 require 'rails_helper'
 
 RSpec.describe FeedbackController, type: :controller do
-  let(:user) { User.create!(/* user attributes */) }
-#   let(:question)
-#   let(:feedback)
-#   let(:course) { Course.create!(feedback: feedback) }
-# TODO: create feedback and question
+  context 'when user is signed in' do
+    let(:user) { create :user, :registered }
+    let(:valid_attributes) {
+      { id: 1, answers: ['Yes'], answers_custom: 'Custom answer' }
+    }
 
-  before do
-    sign_in user
-    allow(controller).to receive(:find_course).and_return(course)
-    allow(controller).to receive(:find_question).and_return(question)
-  end
+    before { sign_in user }
 
-  describe 'PUT #update' do
-    context 'when answer is provided' do
-      it 'saves the answer and redirects to the next question' do
-        put :update, params: { id: question.id, answer: 'Some answer' }
-
-        expect(response).to redirect_to(feedback_path(assigns(:next_question)))
+    describe "GET #show" do
+      it "returns a success response" do
+        get :show, params: { id: 1 }
+        expect(response).to be_successful
       end
     end
 
-    context 'when no answer is provided' do
-      it 'does not save the answer and re-renders the show view with an alert' do
-        put :update, params: { id: question.id, answer: nil }
+    describe "GET #index" do
+      it "returns a success response" do
+        get :index
+        expect(response).to be_successful
+      end
+    end
 
-        expect(response).to render_template(:show)
-        expect(flash[:alert]).to eq('You must select an answer.')
+    describe "POST #update" do
+      context "with valid params" do
+
+        it "creates a new Response" do
+          expect {
+            post :update, params: valid_attributes
+          }.to change(Response, :count).by(1)
+        end
+
+        it "redirects to the next feedback path" do
+          post :update, params: valid_attributes
+          expect(response).to redirect_to(feedback_path(2))
+        end
+      end
+
+      context "with invalid params" do
+        let(:invalid_attributes) {
+          { id: 1, answers: [''] }
+        }
+
+        it "does not create a new Response" do
+          expect {
+            post :update, params: invalid_attributes
+          }.not_to change(Response, :count)
+        end
+
+        it "redirects to the current feedback path" do
+          post :update, params: invalid_attributes
+          expect(response).to redirect_to(feedback_path(1))
+        end
       end
     end
   end
