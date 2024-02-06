@@ -99,7 +99,7 @@ RSpec.describe Training::Question, type: :model do
 
     context 'when the question is a feedback question' do
       subject(:question) do
-        Training::Module.by_name('alpha').page_by_name('feedback1')
+        Training::Module.by_name('alpha').page_by_name('end-of-module-feedback-1')
       end
 
       let(:first_option) { question.options.first }

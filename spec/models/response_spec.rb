@@ -16,7 +16,7 @@ RSpec.describe Response, type: :model do
     end
 
     let(:response) do
-      user.response_for(question).tap do |response|
+      user.response_for(question, 'alpha').tap do |response|
         response.update(answers: [1], correct: true, schema: question.schema)
       end
     end
