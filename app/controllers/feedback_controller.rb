@@ -1,98 +1,98 @@
-
 class FeedbackController < ApplicationController
-  
   helper_method :previous_path, :next_path, :content, :is_checkbox?
-    
-    def show; end # @return [nil]
-    def index; end # @return [nil]
 
-    # @return [nil]
-    def update
-      return if invalid_answer? || other_blank?
+  # @return [nil]
+  def show; end
+  # @return [nil]
+  def index; end
 
-      create_response
-      redirect_to next_path
+  # @return [nil]
+  def update
+    return if invalid_answer? || other_blank?
+
+    create_response
+    redirect_to next_path
+  end
+
+  # @return [String]
+  def is_checkbox?
+    content.response_type
+  end
+
+  # @return [String] path to next feedback step
+  def next_path
+    return feedback_path(1) if params[:id].nil?
+    return my_modules_path if params[:id].to_i == questions.count
+
+    feedback_path(params[:id].to_i + 1)
+  end
+
+  # @return [String] path to previous feedback step
+  def previous_path
+    return feedback_path(1) if params[:id] == '1'
+
+    feedback_path(params[:id].to_i - 1)
+  end
+
+private
+
+  # @return [Boolean]
+  def invalid_answer?
+    if answer.blank? || answer.is_a?(Array) && answer.all?(&:blank?)
+      flash[:error] = 'Please answer the question'
+      redirect_to current_feedback_path and return true
+    else
+      false
     end
+  end
 
-    # @return [String]
-    def is_checkbox?
-      content.response_type
+  # @return [Boolean]
+  def other_blank?
+    if answer_content.include?('Other') && params[:answers_custom].blank?
+      flash[:error] = 'Please specify'
+      redirect_to current_feedback_path and return true
+    else
+      false
     end
+  end
 
-    # @return [String] path to next feedback step
-    def next_path
-      return feedback_path(1) if params[:id].nil?
-      return my_modules_path if params[:id].to_i == questions.count
+  # @return [Response]
+  def create_response
+    Response.create(user_id: current_user.id, answers: answer_content, question_name: content.name)
+  end
 
-      feedback_path(params[:id].to_i + 1)
+  # @param answer [String]
+  # @return [String]
+  def answer_wording(answer)
+    content.answers[answer.to_i - 1].first
+  end
+
+  # @return [Array<Hash>]
+  def questions
+    Course.config.feedback
+  end
+
+  # @return [String]
+  def current_feedback_path
+    feedback_path(params[:id])
+  end
+
+  # @return [Hash]
+  def content
+    @content ||= questions[params[:id].to_i - 1]
+  end
+
+  # @return [Array<String>]
+  def answer
+    @answer ||= Array.wrap(params[:answers])
+  end
+
+  # @return [Array<String>]
+  def answer_content
+    @answer_content ||= begin
+      return [] if answer.blank?
+
+      answer.reject(&:blank?).map { |a| answer_wording(a) }.flatten
     end
-
-    # @return [String] path to previous feedback step
-    def previous_path
-      return feedback_path(1) if params[:id] == '1'
-      
-      feedback_path(params[:id].to_i - 1)
-    end
-
-    private
-
-    # @return [Boolean]
-    def invalid_answer?
-      if answer.blank? || answer.is_a?(Array) && answer.all?(&:blank?)
-        flash[:error] = "Please answer the question"
-        redirect_to current_feedback_path and return true
-      else
-        false
-      end
-    end
-
-    # @return [Boolean]
-    def other_blank?
-      if answer_content.include?('Other') && params[:answers_custom].blank?
-        flash[:error] = "Please specify"
-        redirect_to current_feedback_path and return true
-      else
-        false
-      end
-    end
-
-    # @return [Response]
-    def create_response
-      Response.create(user_id: current_user.id, answers: answer_content, question_name: content.name)
-    end
-
-
-    # @param answer [String]
-    # @return [String]
-    def answer_wording(answer)
-      content.answers[answer.to_i - 1].first
-    end
-
-    # @return [Array<Hash>]
-    def questions
-      Course.config.feedback
-    end
-
-    # @return [String]
-    def current_feedback_path
-      feedback_path(params[:id])
-    end
-  
-    # @return [Hash]
-    def content
-      @content ||= questions[params[:id].to_i - 1]
-    end
-
-    # @return [Array<String>]
-    def answer
-      @answer ||= Array.wrap(params[:answers])
-    end
-
-    # @return [Array<String>]
-    def answer_content
-      @answer_content ||= begin
-        return [] if answer.blank?
-        answer.reject(&:blank?).map { |a| answer_wording(a) }.flatten
-      end
-    end
+  end
 end
