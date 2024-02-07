@@ -1,2 +1,10 @@
-.govuk-button-group
-    = govuk_button_link_to 'Start', next_path
+.govuk-grid-row
+  .govuk-grid-column-full
+        - if feedback_exists?
+            h1 You have already submitted feedback
+            .govuk-button-group
+                .govuk-button-group 
+                    = govuk_button_link_to 'Previous', previous_path
+                    = govuk_button_link_to 'Update my feedback', next_path
+        - else
+            = govuk_button_link_to 'Start', next_path

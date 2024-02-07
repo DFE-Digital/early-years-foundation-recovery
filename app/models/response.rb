@@ -4,7 +4,7 @@
 class Response < ApplicationRecord
   include ToCsv
 
-  belongs_to :user
+  belongs_to :user, optional: true
 
   validates :answers, presence: true
 

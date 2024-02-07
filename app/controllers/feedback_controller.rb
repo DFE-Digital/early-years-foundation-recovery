@@ -1,5 +1,5 @@
 class FeedbackController < ApplicationController
-  helper_method :previous_path, :next_path, :content, :is_checkbox?
+  helper_method :previous_path, :next_path, :content, :is_checkbox?, :feedback_exists?
 
   # @return [nil]
   def show; end
@@ -19,6 +19,12 @@ class FeedbackController < ApplicationController
     content.response_type
   end
 
+  def feedback_exists?
+    return false if current_user.nil?
+
+    Response.where(user_id: current_user.id).exists?
+  end
+
   # @return [String] path to next feedback step
   def next_path
     return feedback_path(1) if params[:id].nil?
@@ -29,6 +35,7 @@ class FeedbackController < ApplicationController
 
   # @return [String] path to previous feedback step
   def previous_path
+    return my_modules_path if params[:id].nil?
     return feedback_path(1) if params[:id] == '1'
 
     feedback_path(params[:id].to_i - 1)
@@ -58,7 +65,12 @@ private
 
   # @return [Response]
   def create_response
-    Response.create(user_id: current_user.id, answers: answer_content, question_name: content.name)
+    res = Response.create!(
+      user_id: current_user ? current_user.id : nil,
+      answers: answer_content,
+      question_name: content.name,
+      text_input: params[:answers_custom]
+    )
   end
 
   # @param answer [String]
