@@ -1,8 +1,11 @@
 class FeedbackController < ApplicationController
-  helper_method :previous_path, :next_path, :content, :is_checkbox?, :feedback_exists?
+  helper_method :previous_path, :next_path, :content, :is_checkbox?, :is_free_text?, :feedback_exists?
 
   # @return [nil]
-  def show; end
+  def show
+    return redirect_to next_path if skip_question?
+  end
+
   # @return [nil]
   def index; end
 
@@ -10,7 +13,7 @@ class FeedbackController < ApplicationController
   def update
     return if invalid_answer? || other_blank?
 
-    create_response
+    response_exists? ? update_response : create_response
     redirect_to next_path
   end
 
@@ -19,6 +22,12 @@ class FeedbackController < ApplicationController
     content.response_type
   end
 
+  # @return [Boolean]
+  def is_free_text?
+    content.answers.empty?
+  end
+
+  # @return [Boolean]
   def feedback_exists?
     return false if current_user.nil?
 
@@ -28,7 +37,7 @@ class FeedbackController < ApplicationController
   # @return [String] path to next feedback step
   def next_path
     return feedback_path(1) if params[:id].nil?
-    return my_modules_path if params[:id].to_i == questions.count
+    return my_modules_path if params[:id].to_i >= questions.count
 
     feedback_path(params[:id].to_i + 1)
   end
@@ -65,12 +74,39 @@ private
 
   # @return [Response]
   def create_response
-    res = Response.create!(
+    Response.create!(
       user_id: current_user ? current_user.id : nil,
       answers: answer_content,
       question_name: content.name,
       text_input: params[:answers_custom]
     )
+  end
+
+  # @return [Response]
+  def update_response
+    Response.where(user_id: current_user.id, question_name: content.name).update(
+      answers: answer_content,
+      text_input: params[:answers_custom]
+    )
+  end
+
+  # @return [Boolean]
+  def response_exists?
+    return false if current_user.nil?
+
+    Response.where(user_id: current_user.id, question_name: content.name).exists?
+  end
+
+  # @return [Boolean]
+  def skip_question?
+    return false unless skipped_questions.include?(content.name)
+    return true if current_user.nil? 
+
+  end
+
+  # @return [Array<String>]
+  def skipped_questions
+    ['main-feedback-6']
   end
 
   # @param answer [String]

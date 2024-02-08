@@ -1,5 +1,4 @@
 = f.govuk_radio_buttons_fieldset :answers, multiple: true, legend: { text: response.legend } do
-  =  m(content.hint) unless content.hint.nil?
 
   = f.hidden_field :answers, multiple: true
   - if response.options.any?
@@ -9,3 +8,6 @@
           = f.govuk_text_field :answers_custom, label: { text: content.other }
       - else
         = f.opinion_radio_button(option)
+  - else
+    =  m(content.hint) unless content.hint.nil?
+    = f.govuk_text_area :answers, label: nil, multiple: true, required: true
