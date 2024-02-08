@@ -1,10 +1,17 @@
 .govuk-grid-row
   .govuk-grid-column-full
         - if feedback_exists?
-            h1 You have already submitted feedback
+            h1 t('feedback.feedback_exists.heading')
             .govuk-button-group
                 .govuk-button-group 
-                    = govuk_button_link_to 'Previous', previous_path
-                    = govuk_button_link_to 'Update my feedback', next_path
+                    = govuk_button_link_to t('feedback.feedback_exists.back_button'), previous_path, class: 'govuk-button--secondary'
+                    = govuk_button_link_to t('feedback.feedback_exists.next_button'), next_path
         - else
-            = govuk_button_link_to 'Start', next_path
+            h1 = t('feedback.heading')
+            p = m('feedback.body')
+            h2 = t('feedback.technical_support.heading')
+            p.text-secondary = t('feedback.technical_support.body')
+
+            hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
+
+            = govuk_button_link_to t('feedback.next_button'), next_path

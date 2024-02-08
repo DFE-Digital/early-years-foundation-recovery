@@ -3,7 +3,7 @@ class FeedbackController < ApplicationController
 
   # @return [nil]
   def show
-    return redirect_to next_path if skip_question?
+    redirect_to next_path if skip_question?
   end
 
   # @return [nil]
@@ -36,8 +36,9 @@ class FeedbackController < ApplicationController
 
   # @return [String] path to next feedback step
   def next_path
+    return my_modules_path if action_name == 'thank_you'
     return feedback_path(1) if params[:id].nil?
-    return my_modules_path if params[:id].to_i >= questions.count
+    return thank_you_path if params[:id].to_i == questions.count
 
     feedback_path(params[:id].to_i + 1)
   end
@@ -54,7 +55,7 @@ private
 
   # @return [Boolean]
   def invalid_answer?
-    if answer.blank? || answer.is_a?(Array) && answer.all?(&:blank?)
+    if answer.blank? || answer.all?(&:blank?)
       flash[:error] = 'Please answer the question'
       redirect_to current_feedback_path and return true
     else
@@ -64,7 +65,7 @@ private
 
   # @return [Boolean]
   def other_blank?
-    if answer_content.include?('Other') && params[:answers_custom].blank?
+    if answer_content.include?('Other') && text_input.blank?
       flash[:error] = 'Please specify'
       redirect_to current_feedback_path and return true
     else
@@ -78,7 +79,7 @@ private
       user_id: current_user ? current_user.id : nil,
       answers: answer_content,
       question_name: content.name,
-      text_input: params[:answers_custom]
+      text_input: text_input,
     )
   end
 
@@ -86,7 +87,7 @@ private
   def update_response
     Response.where(user_id: current_user.id, question_name: content.name).update(
       answers: answer_content,
-      text_input: params[:answers_custom]
+      text_input: text_input,
     )
   end
 
@@ -100,13 +101,13 @@ private
   # @return [Boolean]
   def skip_question?
     return false unless skipped_questions.include?(content.name)
-    return true if current_user.nil? 
 
+    true if current_user.nil?
   end
 
   # @return [Array<String>]
   def skipped_questions
-    ['main-feedback-6']
+    %w[main-feedback-6]
   end
 
   # @param answer [String]
@@ -132,15 +133,24 @@ private
 
   # @return [Array<String>]
   def answer
-    @answer ||= Array.wrap(params[:answers])
+    @answer ||= if is_free_text?
+                  params[:answers]
+                else
+                  Array.wrap(params[:answers])
+                end
   end
 
   # @return [Array<String>]
   def answer_content
     @answer_content ||= begin
       return [] if answer.blank?
+      return answer if is_free_text?
 
       answer.reject(&:blank?).map { |a| answer_wording(a) }.flatten
     end
+  end
+
+  def text_input
+    @text_input ||= params[:answers_custom]
   end
 end

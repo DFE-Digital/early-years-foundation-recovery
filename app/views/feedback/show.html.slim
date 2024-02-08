@@ -12,5 +12,5 @@
           = render 'training/questions/main_feedback_check_boxes', f: f, response: content, required: true
 
       .govuk-button-group
-        = govuk_button_link_to 'Previous', previous_path
+        = govuk_button_link_to 'Previous', previous_path, class: 'govuk-button--secondary'
         = f.submit 'Next', class: 'govuk-button'
