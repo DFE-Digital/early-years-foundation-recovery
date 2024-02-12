@@ -166,7 +166,7 @@ class User < ApplicationRecord
 
   # @return [Boolean]
   def gov_one?
-    !self.gov_one_id.nil?
+    !gov_one_id.nil?
   end
 
   # @see Devise database_authenticatable
