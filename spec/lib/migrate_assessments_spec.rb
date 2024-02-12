@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'migrate_assessments'
 
 RSpec.describe MigrateAssessments do
-  describe 'migration' do
+  context 'with answers' do
     let(:assessment) do
       create :user_assessment, user_id: create(:user).id, module: 'alpha'
     end
@@ -15,22 +15,23 @@ RSpec.describe MigrateAssessments do
 
     it 'migrates all assessments' do
       expect(Assessment.count).to be 1
-      expect(Assessment.first).to eq []
+      expect(Assessment.first.training_module).to eq 'alpha'
     end
   end
 
-  describe 'transaction' do
+  context 'without answers' do
     before do
-      ENV['test'] = 'foo'
+      create :user_assessment, user_id: create(:user).id, module: 'alpha'
+      # ENV['abort'] = 'foo'
+      described_class.new.call
     end
 
-    it 'migrates no assessments' do
-      described_class.new.call
-      expect(Assessment.count).to be 0
+    it 'migrates all assessments' do
+      expect(Assessment.count).to be 1
     end
   end
 
-  describe 'truncation' do
+  context 'when new table is not clean' do
     before do
       create :assessment, :passed
     end
