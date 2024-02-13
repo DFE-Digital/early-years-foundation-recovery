@@ -1,3 +1,8 @@
+#
+# TODO: Logic around potential FK question_name changes that could cause an assessment to contain more than 10 responses
+# TODO: Checks that scores are numeric, otherwise zero is recorded
+#
+#
 module Training
   class ResponsesController < ApplicationController
     include Learning

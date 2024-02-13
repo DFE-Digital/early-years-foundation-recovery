@@ -114,7 +114,8 @@ class AssessmentProgress
     assessment_responses.select(&:correct?)
   end
 
-  # @return [UserAssessment, Assessment] drop memoisation
+  # TODO: drop memoisation
+  # @return [UserAssessment, Assessment]
   def assessment
     @assessment ||= if Rails.application.migrated_answers?
                       user.assessments.where(training_module: mod.name).order(:started_at).last
@@ -122,7 +123,7 @@ class AssessmentProgress
                       UserAssessment.create!(
                         user_id: user.id,
                         score: score.to_i,
-                        status: status,
+                        status: (passed? ? 'passed' : 'failed'),
                         module: mod.name,
                         assessments_type: 'summative_assessment',
                       )

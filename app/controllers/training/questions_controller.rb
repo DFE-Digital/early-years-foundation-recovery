@@ -1,3 +1,14 @@
+# Question flavours:
+#
+#   Tests:
+#     - formative question    (immediate feedback)
+#     - summative question    (grouped by assessment)
+#
+#   Opinions:
+#     - confidence question   (static options)
+#     - feedback question     (dynamic options)
+#
+#
 module Training
   class QuestionsController < ApplicationController
     include Learning
