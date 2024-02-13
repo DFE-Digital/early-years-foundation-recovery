@@ -8,6 +8,9 @@
           = f.govuk_text_field :answers_custom, label: { text: content.other }
       - else
         = f.opinion_radio_button(option)
+    - if !content.hint.nil?
+      = f.govuk_text_area :answers_custom, label: { text: content.hint, class: 'govuk-!-font-weight-bold govuk-!-margin-top-8 govuk-!-margin-bottom-4' }
   - else
     =  m(content.hint) unless content.hint.nil?
     = f.govuk_text_area :answers, label: nil, multiple: true
+    
