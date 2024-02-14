@@ -14,6 +14,11 @@ module Training
       @answer ||= Answer.new(json: json)
     end
 
+    # @return [Boolean]
+    def skippable?
+      !always_show_question
+    end
+
     # @return [String] powered by JSON not type
     def to_partial_path
       return 'training/questions/opinion_radio_buttons' if opinion_question?

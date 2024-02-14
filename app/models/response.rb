@@ -6,7 +6,8 @@ class Response < ApplicationRecord
 
   belongs_to :user
 
-  validates :answers, presence: true
+  validates :answers, presence: true, unless: -> { question.opinion_question? && question.options.empty? }
+  validates :text_input, presence: true, if: -> { question.opinion_question? && question.options.empty? }
 
   scope :unarchived, -> { where(archived: false) }
   scope :formative, -> { where('schema->>4 = ?', 'formative') }
@@ -37,7 +38,8 @@ class Response < ApplicationRecord
 
   # @return [Boolean]
   def responded?
-    answers.any?
+    answers.any? || text_input.present?
+    # answers.any? unless question.opinion_question? && question.answers.empty?
   end
 
   # @return [Boolean]

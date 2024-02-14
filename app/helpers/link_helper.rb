@@ -33,23 +33,17 @@ module LinkHelper
   end
 
   # @return [Boolean]
-  def research_question_next?
-    content.next_item.name == 'end-of-module-feedback-5' && content.next_item.answers.any?
-  end
-
-  # @return [Boolean]
-  def research_question_previous?
-    content.previous_item.name == 'end-of-module-feedback-5' && content.previous_item.answers.any?
+  def one_off_question?
+    always_show_question.eql?(false)
   end
 
   # @return [String] next page (ends on certificate)
   def link_to_next
-    page =
-      if content.opinion_question?
-        research_question_next? ? content.next_item.next_item : content.next_item
-      else
-        content.interruption_page? ? mod.content_start : content.next_item
-      end
+    page = content.interruption_page? ? mod.content_start : content.next_item
+
+    if content.next_item.skippable? && current_user.response_for_shared(content.next_item, mod).responded?
+      page = page.next_item
+    end
 
     govuk_button_link_to content.next_button_text, training_module_page_path(mod.name, page.name),
                          id: 'next-action',
@@ -58,16 +52,22 @@ module LinkHelper
 
   # @return [String] previous page or module overview
   def link_to_previous
+    previous_content = content.previous_item
     path =
       if content.interruption_page?
         training_module_path(mod.name)
       else
-        training_module_page_path(mod.name, (research_question_previous? ? content.previous_item.previous_item.name : content.previous_item.name))
+        training_module_page_path(mod.name, previous_content.name)
       end
+
+    if content.previous_item.skippable? && current_user.response_for_shared(content.previous_item, mod).responded?
+      path = training_module_page_path(mod.name, previous_content.previous_item.name)
+    end
+
     style = content.section? && !content.opinion_intro? ? 'section-intro-previous-button' : 'govuk-button--secondary'
 
     # Check if feedback questions have been skipped
-    if content.thankyou? && !current_user.response_for(content.previous_item, mod.name).responded?
+    if content.thankyou? && !current_user.response_for_shared(content.previous_item, mod).responded?
       govuk_button_link_to 'Previous', training_module_page_path(mod.name, mod.opinion_intro_page.name),
                            class: style,
                            aria: { label: t('pagination.previous') }
@@ -92,7 +92,7 @@ module LinkHelper
     end
   end
 
-  # @return [String] thank you page (skips feedback questions)
+  # @return [String, nil] thank you page (skips feedback questions)
   def link_to_skip
     return unless content.opinion_intro?
 
