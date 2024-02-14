@@ -7,29 +7,34 @@ RSpec.describe 'Training response data migration', type: :system do
 
   subject(:operation) { MigrateTraining.new(verbose: true) }
 
+  let(:alpha_assessment) { Assessment.where(training_module: 'alpha').first }
+  let(:bravo_assessment) { Assessment.where(training_module: 'bravo').first }
+
+  let(:ast) do
+    YAML.load_file Rails.root.join('spec/support/ast/training-migration.yml')
+  end
+
   before do
     skip if Rails.application.migrated_answers?
 
-    # PASS ALPHA
-    visit '/modules/alpha/content-pages/what-to-expect'
+    visit '/my-modules'
 
-    ContentTestSchema.new(mod: alpha).call(pass: true).compact.each do |content|
+    ast.each do |content|
+      expect(page).to have_current_path content[:path]
+      expect(page).to have_content content[:text]
+
       content[:inputs].each { |args| send(*args) }
     end
-
-    visit '/modules/alpha/assessment-result/1-3-2-11'
-
-    # FAIL BRAVO
-    visit '/modules/bravo/content-pages/what-to-expect'
-
-    ContentTestSchema.new(mod: bravo).call(pass: false).compact.each do |content|
-      content[:inputs].each { |args| send(*args) }
-    end
-
-    visit '/modules/bravo/assessment-result/1-3-2-11'
   end
 
+  # alpha pass then bravo fail
+  #
   it 'is successful' do
+
+    # data = ContentTestSchema.new(mod: bravo).call(pass: false).compact
+    # file = Rails.root.join('spec/support/ast/bravo-fail.yml')
+    # File.open(file, 'w') { |file| file.write(data.to_yaml) }
+
     expect(UserAssessment.count).to eq 2
     expect(Assessment.count).to be 0
 
@@ -47,13 +52,13 @@ RSpec.describe 'Training response data migration', type: :system do
     expect(UserAnswer.count).to be 28
     expect(Response.count).to be 28
 
-    expect(Assessment.where(training_module: 'alpha').first.passed).to eq true
-    expect(Assessment.where(training_module: 'alpha').first.score).to eq 100.0
-    expect(Assessment.where(training_module: 'alpha').first.responses.count).to eq 10
+    expect(alpha_assessment.passed).to eq true
+    expect(alpha_assessment.score).to eq 100.0
+    expect(alpha_assessment.responses.count).to eq 10
 
-    expect(Assessment.where(training_module: 'bravo').first.passed).to eq false
-    expect(Assessment.where(training_module: 'bravo').first.score).to eq 0.0
-    expect(Assessment.where(training_module: 'bravo').first.responses.count).to eq 10
+    expect(bravo_assessment.passed).to eq false
+    expect(bravo_assessment.score).to eq 0.0
+    expect(bravo_assessment.responses.count).to eq 10
   end
 
 end
