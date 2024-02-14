@@ -42,15 +42,8 @@ module Training
     def save_response!
       correct_answers = content.confidence_question? || content.opinion_question? ? true : content.correct_answers.eql?(user_answers)
 
-      question_answer =
-        if content.opinion_question? && !user_answer_text.eql?(nil) && content.options.blank?
-          [0]
-        else
-          user_answers
-        end
-
-      if ENV['DISABLE_USER_ANSWER'].present?
-        current_user_response.update(answers: question_answer, correct: correct_answers, schema: content.schema, text_input: user_answer_text)
+      if ENV['DISABLE_USER_ANSWER'].present? && ENV['FEEDBACK_FORM'].present?
+        current_user_response.update(answers: user_answers, correct: correct_answers, text_input: user_answer_text)
       else
         current_user_response.update(answer: user_answers, correct: correct_answers)
       end

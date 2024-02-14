@@ -24,13 +24,7 @@ class PaginationDecorator
 
   # @return [String]
   def page_numbers
-    # if content.opinion_intro?
-    #   I18n.t(:page, scope: :pagination, current: 1, total: 2)
-    # elsif content.thankyou?
-    #   I18n.t(:page, scope: :pagination, current: 2, total: 2)
-    # else
     I18n.t(:page, scope: :pagination, current: current_page, total: page_total)
-    # end
   end
 
   # @return [String]
@@ -47,7 +41,17 @@ private
 
   # @return [Integer]
   def page_total
-    content.section_content.size
+    size = content.section_content.size
+    if content.section_content.any?(&:skippable?) # && response_for_shared.responded?
+      # don't count skipped page
+      content.section_content.each do |section_content|
+        if section_content.opinion_question? && section_content.always_show_question.eql?(false)
+          size -= 1
+        end
+      end
+    end
+
+    size
   end
 
   # @return [Integer]

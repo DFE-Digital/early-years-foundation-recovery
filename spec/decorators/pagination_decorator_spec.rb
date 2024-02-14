@@ -5,22 +5,41 @@ RSpec.describe PaginationDecorator do
     described_class.new(content)
   end
 
-  let(:mod) { Training::Module.by_name(:alpha) }
-  let(:content) { mod.page_by_name('1-1-1') }
+  context('when First Submodule') do
+    let(:mod) { Training::Module.by_name(:alpha) }
+    let(:content) { mod.page_by_name('1-1-1') }
 
-  it '#heading' do
-    expect(decorator.heading).to eq 'The first submodule'
+    it '#heading' do
+      expect(decorator.heading).to eq 'The first submodule'
+    end
+
+    it '#section_numbers' do
+      expect(decorator.section_numbers).to eq 'Section 1 of 4'
+    end
+
+    it '#page_numbers' do
+      expect(decorator.page_numbers).to eq 'Page 2 of 7'
+    end
+
+    it '#percentage' do
+      expect(decorator.percentage).to eq '29%'
+    end
   end
 
-  it '#section_numbers' do
-    expect(decorator.section_numbers).to eq 'Section 1 of 4'
-  end
+  context('when Feedback form') do
+    let(:mod) { Training::Module.by_name(:alpha) }
+    let(:content) { mod.page_by_name('end-of-module-feedback-4') }
 
-  it '#page_numbers' do
-    expect(decorator.page_numbers).to eq 'Page 2 of 7'
-  end
+    it '#heading' do
+      expect(decorator.heading).to eq 'Additional feedback'
+    end
 
-  it '#percentage' do
-    expect(decorator.percentage).to eq '29%'
+    it '#section_numbers' do
+      expect(decorator.section_numbers).to eq 'Section 3 of 4'
+    end
+
+    it '#page_numbers' do
+      expect(decorator.page_numbers).to eq 'Page 4 of 5'
+    end
   end
 end

@@ -95,6 +95,11 @@ module ContentTypes
   end
 
   # @return [Boolean]
+  def one_off_question?
+    always_show_question.eql?(false)
+  end
+
+  # @return [Boolean]
   def opinion_question?
     page_type.eql?('opinion')
   end

@@ -152,21 +152,24 @@ class User < ApplicationRecord
   # @see ResponsesController#response_params
   # @param content [Training::Question]
   # @return [UserAnswer, Response]
-  def response_for(content, module_name)
+  def response_for_shared(content, mod)
+    responses.find_or_initialize_by(
+      question_name: content.name,
+      training_module: mod.name,
+      archived: false,
+    )
+  end
+
+  # @see ResponsesController#response_params
+  # @param content [Training::Question]
+  # @return [UserAnswer, Response]
+  def response_for(content)
     if ENV['DISABLE_USER_ANSWER'].present?
-      if content.opinion_question?
-        responses.find_or_initialize_by(
-          question_name: content.name,
-          training_module: module_name,
-          archived: false,
-        )
-      else
-        responses.find_or_initialize_by(
-          question_name: content.name,
-          training_module: content.parent.name,
-          archived: false,
-        )
-      end
+      responses.find_or_initialize_by(
+        question_name: content.name,
+        training_module: content.parent.name,
+        archived: false,
+      )
     else
       user_answers.find_or_initialize_by(
         assessments_type: content.assessments_type,

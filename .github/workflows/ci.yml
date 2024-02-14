@@ -33,7 +33,6 @@ jobs:
       DATABASE_URL: postgres://postgres:password@localhost:5432/test
       DOMAIN: recovery.app
       BOT_TOKEN: bot_token
-      CONTENTFUL_ENVIRONMENT: feedback # TODO: Reminder to delete this line
       CONTENTFUL_PREVIEW: true # TODO: Reminder to delete this line
 
     services:

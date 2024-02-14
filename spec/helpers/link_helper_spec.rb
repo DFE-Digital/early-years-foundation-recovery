@@ -44,10 +44,16 @@ describe 'LinkHelper', type: :helper do
     end
 
     context 'when page is feedback intro' do
+      let(:skip_link) { helper.link_to_skip }
+
       let(:content) { mod.pages_by_type('opinion_intro').first }
 
       it 'targets start of feedback questions' do
         expect(link).to include 'Give feedback'
+      end
+
+      it 'offers button to skip feedback questions' do
+        expect(skip_link).to include 'Skip feedback'
       end
     end
   end

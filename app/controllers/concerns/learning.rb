@@ -67,6 +67,6 @@ module Learning
   # @note memoization ensures validation errors work
   # @return [UserAnswer, Response]
   def current_user_response
-    @current_user_response ||= current_user.response_for(content, mod.name)
+    @current_user_response ||= content.opinion_question? ? current_user.response_for_shared(content, mod) : current_user.response_for(content)
   end
 end
