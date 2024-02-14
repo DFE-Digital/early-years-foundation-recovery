@@ -8,7 +8,7 @@ module Registration
     def save
       return false unless valid?
 
-      user.update!(local_authority: local_authority)
+      user.update!(local_authority: local_authority.gsub(/\(.*?\)/, ''))
     end
   end
 end

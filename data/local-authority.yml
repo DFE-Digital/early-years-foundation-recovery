@@ -29,7 +29,7 @@
 - name: County Durham
 - name: Coventry
 - name: Croydon
-- name: Cumbria
+- name: Cumberland (previously Cumbria)
 - name: Darlington
 - name: Derby
 - name: Derbyshire
@@ -143,6 +143,7 @@
 - name: West Northamptonshire
 - name: West Sussex
 - name: Westminster
+- name: Westmorland and Furness (previously Cumbria)
 - name: Wigan
 - name: Wiltshire
 - name: Windsor and Maidenhead

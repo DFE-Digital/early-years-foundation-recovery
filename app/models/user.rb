@@ -104,6 +104,7 @@ class User < ApplicationRecord
   scope :private_beta_only_registration_complete, -> { where(private_beta_registration_complete: true, registration_complete: false) }
   # registered within private beta but never completed
   scope :private_beta_only_registration_incomplete, -> { where(private_beta_registration_complete: nil) }
+  scope :registration_complete_all_users, -> { registration_complete.or(where(private_beta_registration_complete: true)) }
 
   # training activity
   scope :not_started_training, -> { reject(&:course_started?) }

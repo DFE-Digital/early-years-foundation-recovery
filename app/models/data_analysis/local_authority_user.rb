@@ -25,12 +25,12 @@ module DataAnalysis
 
       # @return [Hash{Symbol => Integer}]
       def authorities
-        public_beta_users.group(:local_authority).order(:local_authority).count
+        all_users.group(:local_authority).order(:local_authority).count
       end
 
       # @return [User::ActiveRecord_Relation]
-      def public_beta_users
-        User.not_closed.with_local_authority.registration_complete
+      def all_users
+        User.not_closed.with_local_authority.registration_complete_all_users
       end
     end
   end
