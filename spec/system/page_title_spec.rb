@@ -33,14 +33,14 @@ RSpec.describe 'Page' do
     it { expect(users_timeout_path).to have_page_title('User timeout') }
     it { expect(setting_path('cookie-policy')).to have_page_title('Cookie policy') }
 
-    it { expect(edit_registration_terms_and_conditions_path).to have_page_title('Terms and conditions') }
+    it { expect(edit_registration_terms_and_conditions_path).to have_page_title('Terms and Conditions') }
     it { expect(edit_registration_name_path).to have_page_title 'About you' }
     it { expect(edit_registration_setting_type_path).to have_page_title('What setting type do you work in?') }
     it { expect(edit_registration_setting_type_other_path).to have_page_title('Where do you work?') }
     it { expect(edit_registration_local_authority_path).to have_page_title('What local authority area do you work in?') }
     it { expect(edit_registration_role_type_path).to have_page_title('Which of the following best describes your role?') }
     it { expect(edit_registration_role_type_other_path).to have_page_title('What is your role?') }
-    it { expect(edit_registration_early_years_emails_path).to have_page_title('Email preferences') }
+    it { expect(edit_registration_early_years_emails_path).to have_page_title('Do you want to get early years email updates from the Department for Education?') }
 
     it { expect(static_path('whats-new')).to have_page_title "What's new in the training" }
 
