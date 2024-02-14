@@ -3,16 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.2.2'
 
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails'
-
-# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
-
-# Use postgresql as the database for Active Record
 gem 'pg'
-
-# Use the Puma web server [https://github.com/puma/puma]
 gem 'puma'
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -37,6 +30,8 @@ gem 'bootsnap', require: false
 
 # User authentication
 gem 'devise'
+gem 'devise-pwned_password'
+gem 'devise-security'
 gem 'jwt'
 gem 'omniauth_openid_connect'
 gem 'omniauth-rails_csrf_protection'
@@ -60,9 +55,6 @@ gem 'govuk_notify_rails'
 gem 'sentry-rails'
 gem 'sentry-ruby'
 
-# Manage seeds
-gem 'dibber'
-
 # Track users
 gem 'ahoy_matey'
 
@@ -85,7 +77,8 @@ gem 'dry-struct'
 gem 'dry-types'
 
 group :development, :test do
-  # Use fake data for specs
+  gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'dibber'
   gem 'dotenv-rails'
   gem 'faker'
   gem 'foreman'
@@ -93,28 +86,17 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rubocop-govuk', require: false
   gem 'rubocop-performance', require: false
-
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem 'debug', platforms: %i[mri mingw x64_mingw]
-
-  gem 'launchy'
 end
 
 group :development do
-  # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'brakeman'
   gem 'pry-doc'
   gem 'rails-erd'
-  gem 'redcarpet' # code syntax in Yardoc
+  gem 'redcarpet'
   gem 'web-console'
   gem 'yard-junk'
-  # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
-  # gem "rack-mini-profiler"
-
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
 end
 
 group :test do
@@ -135,6 +117,3 @@ group :ui do
   gem 'selenium-webdriver'
   gem 'site_prism'
 end
-
-gem 'devise-pwned_password', '~> 0.1.10'
-gem 'devise-security', '~> 0.18.0'
