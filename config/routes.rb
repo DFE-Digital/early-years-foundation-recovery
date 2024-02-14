@@ -13,15 +13,11 @@ Rails.application.routes.draw do
   devise_for :users,
              controllers: {
                sessions: 'users/sessions',
-               confirmations: 'confirmations',  # unless Rails.application.gov_one_login?
-               passwords: 'passwords',          # unless Rails.application.gov_one_login?
-               registrations: 'registrations',  # unless Rails.application.gov_one_login?
                omniauth_callbacks: 'users/omniauth_callbacks',
              },
              path_names: {
                sign_in: 'sign-in',
                sign_out: 'sign-out',
-               sign_up: 'sign-up',              # unless Rails.application.gov_one_login?
              }
 
   # @see TimeoutWarning js component

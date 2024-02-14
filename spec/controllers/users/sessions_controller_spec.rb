@@ -47,10 +47,6 @@ RSpec.describe Users::SessionsController, type: :controller do
   context 'when gov one login is enabled' do
     let(:user) { create :user, :confirmed }
 
-    before do
-      skip unless Rails.application.gov_one_login?
-    end
-
     it 'redirects to terms and conditions page' do
       expect(response).to redirect_to edit_registration_terms_and_conditions_path
     end

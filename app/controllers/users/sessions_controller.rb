@@ -1,14 +1,10 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
-  layout 'hero' if Rails.application.gov_one_login?
+  layout 'hero'
 
   def new
-    if Rails.application.gov_one_login?
-      render 'gov_one'
-    else
-      super
-    end
+    render 'gov_one'
   end
 
 protected
@@ -26,10 +22,8 @@ protected
       end
     elsif resource.private_beta_registration_complete?
       static_path('new-registration')
-    elsif Rails.application.gov_one_login?
-      edit_registration_terms_and_conditions_path
     else
-      edit_registration_name_path
+      edit_registration_terms_and_conditions_path
     end
   end
 end

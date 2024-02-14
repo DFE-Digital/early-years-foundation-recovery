@@ -49,7 +49,7 @@ class User < ApplicationRecord
   attr_accessor :context
 
   devise :database_authenticatable, :registerable, :recoverable,
-         :validatable, :rememberable, :confirmable, :lockable, :timeoutable,
+         :validatable, :rememberable, :lockable, :timeoutable,
          :secure_validatable, :omniauthable, omniauth_providers: [:openid_connect]
 
   # FIXME: retire old devise functionality
@@ -152,11 +152,7 @@ class User < ApplicationRecord
             inclusion: { in: Trainee::Setting.valid_types },
             if: proc { |u| u.registration_complete? }
 
-  if Rails.application.gov_one_login?
-    validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :update, if: proc { |u| u.registration_complete? }
-  else
-    validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
-  end
+  validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :update, if: proc { |u| u.registration_complete? }
 
   # @return [Boolean]
   def notes?
@@ -202,18 +198,6 @@ class User < ApplicationRecord
     Training::Module.live.select do |mod|
       module_time_to_completion.key?(mod.name)
     end
-  end
-
-  # @see Devise::Confirmable
-  # send_confirmation_instructions
-  def send_confirmation_instructions
-    unless @raw_confirmation_token
-      generate_confirmation_token!
-    end
-
-    opts = pending_reconfirmation? ? { to: unconfirmed_email } : {}
-    mailer = registration_complete? ? :email_confirmation_instructions : :activation_instructions
-    send_devise_notification(mailer, @raw_confirmation_token, opts)
   end
 
   # send email to registered user if attempt is made to create account with registered email
@@ -399,9 +383,6 @@ class User < ApplicationRecord
   end
 
   def redact!
-    skip_reconfirmation!
-    skip_email_changed_notification!
-    skip_password_change_notification!
     update!(first_name: 'Redacted',
             last_name: 'User',
             email: "redacted_user#{id}@example.com",

@@ -99,11 +99,6 @@ module EarlyYearsFoundationRecovery
       Types::Params::Bool[ENV.fetch('MAINTENANCE', false)]
     end
 
-    # @return [Boolean]
-    def gov_one_login?
-      Types::Params::Bool[ENV.fetch('GOV_ONE_LOGIN', false)]
-    end
-
     # @return [ActiveSupport::TimeWithZone]
     def public_beta_launch_date
       Time.zone.local(2023, 2, 9, 15, 0, 0)

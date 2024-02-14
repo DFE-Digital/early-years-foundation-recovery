@@ -244,7 +244,6 @@ RSpec.describe User, type: :model do
 
     context 'without an existing account' do
       before do
-        skip unless Rails.application.gov_one_login?
         described_class.find_or_create_from_gov_one(**params)
       end
 
