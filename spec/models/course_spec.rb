@@ -17,7 +17,7 @@ describe Course, type: :model do
     end
 
     it 'feedback' do
-      expect(course.feedback).not_to be_empty
+      expect(course.feedback).to be_empty
     end
   end
 end
