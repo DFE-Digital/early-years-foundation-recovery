@@ -26,7 +26,7 @@ module DataAnalysis
       # @param [Range<Time>] time_range
       # @return [Integer]
       def visits_count(time_range)
-        visits = Ahoy::Visit.where(started_at: time_range)
+        visits = Visit.where(started_at: time_range)
         visits.group(:user_id).having('count(user_id) > 1').count.size
       end
 

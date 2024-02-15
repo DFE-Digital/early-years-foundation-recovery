@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :event, class: 'Ahoy::Event' do
+  factory :event do
     user
     name { 'module_content_page' }
     properties { {} }

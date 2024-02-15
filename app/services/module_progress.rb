@@ -140,23 +140,23 @@ private
   end
 
   # @param item_id [String] content slug
-  # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
+  # @return [Event::ActiveRecord_AssociationRelation]
   def module_item_events(item_id)
     user.events.where_properties(training_module_id: mod.name, id: item_id)
   end
 
-  # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
+  # @return [Event::ActiveRecord_AssociationRelation]
   def training_module_events
     user.events.where_properties(training_module_id: mod.name)
   end
 
-  # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
+  # @return [Event::ActiveRecord_AssociationRelation]
   def module_page_events
     training_module_events.where(name: 'module_content_page')
   end
 
   # @param key [String] module_start, module_complete
-  # @return [Ahoy::Event]
+  # @return [Event]
   def key_event(key)
     training_module_events.where(name: key).first
   end

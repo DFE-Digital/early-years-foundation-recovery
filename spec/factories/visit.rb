@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :visit, class: 'Ahoy::Visit' do
+  factory :visit do
     user_id {}
   end
 end

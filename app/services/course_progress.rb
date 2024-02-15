@@ -98,7 +98,7 @@ private
   end
 
   # @param module_id [String] training module name
-  # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
+  # @return [Event::ActiveRecord_AssociationRelation]
   def training_module_events(module_id)
     user.events.where_properties(training_module_id: module_id)
   end
