@@ -25,7 +25,7 @@ module Registration
       params.require(:user).permit(:terms_and_conditions_agreed_at)
     end
 
-    # @return [Registration::NameForm]
+    # @return [Registration::TermsAndConditionsForm]
     def form
       @form ||=
         TermsAndConditionsForm.new(
