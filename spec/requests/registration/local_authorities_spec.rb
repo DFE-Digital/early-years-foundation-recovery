@@ -25,7 +25,7 @@ RSpec.describe 'Registration local authority', type: :request do
     end
 
     context 'with available option' do
-      let(:local_authority) { Trainee::Authority.all.sample.name }
+      let(:local_authority) { Trainee::Authority.all.sample.persisted_name }
 
       it 'updates user' do
         expect { update_user }.to change { user.reload.local_authority }.to(local_authority)
