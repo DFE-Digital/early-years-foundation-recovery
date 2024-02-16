@@ -14,6 +14,7 @@ class User < ApplicationRecord
     registration_complete_any?
     registered_at
     terms_and_conditions_agreed_at
+    gov_one?
   ].freeze
 
   # @return [Array<String>]
@@ -171,6 +172,11 @@ class User < ApplicationRecord
   # @return [Boolean]
   def notes?
     notes.any?(&:filled?)
+  end
+
+  # @return [Boolean]
+  def gov_one?
+    !gov_one_id.nil?
   end
 
   # @see Devise database_authenticatable

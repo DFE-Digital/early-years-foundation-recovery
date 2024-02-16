@@ -4,7 +4,7 @@ class UserAnswer < ApplicationRecord
 
   belongs_to :user
 
-  serialize :answer, Array
+  serialize :answer, type: Array
 
   # Need to use IS as `where.not(archive: true)` always returns nil
   scope :not_archived, -> { where 'user_answers.archived IS NOT true' }
