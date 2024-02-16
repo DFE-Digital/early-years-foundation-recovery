@@ -11,5 +11,13 @@ module Trainee
     def self.data
       YAML.load_file Rails.root.join('data/local-authority.yml')
     end
+
+    # @example
+    #   Sanitise LA name changes before persisting
+    #     "Cumberland (previously Cumbria)" => "Cumberland"
+    # @return [String]
+    def persisted_name
+      name.gsub(/\(.*?\)/, '').strip
+    end
   end
 end

@@ -4,7 +4,6 @@
 #
 #
 class Ahoy::Store < Ahoy::DatabaseStore
-
   def visit_model
     Visit
   end
@@ -12,7 +11,6 @@ class Ahoy::Store < Ahoy::DatabaseStore
   def event_model
     Event
   end
-
 end
 
 # set to true for JavaScript tracking

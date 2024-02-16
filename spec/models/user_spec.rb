@@ -167,11 +167,11 @@ RSpec.describe User, type: :model do
 
     it 'exports formatted attributes as CSV' do
       expect(described_class.to_csv(batch_size: 2)).to eq <<~CSV
-        id,local_authority,setting_type,setting_type_other,role_type,role_type_other,registration_complete,private_beta_registration_complete,registration_complete_any?,registered_at,terms_and_conditions_agreed_at,module_1_time,module_2_time,module_3_time
-        1,Watford Borough Council,,DfE,other,Developer,true,true,true,,2000-01-01 00:00:00,4,2,0
-        2,Leeds City Council,,DfE,Trainer or lecturer,,true,false,true,,2000-01-01 00:00:00,1,0,
-        3,City of London,,DfE,other,Developer,true,false,true,2023-01-12 10:15:59,2000-01-01 00:00:00,3,,
-        4,,,,,,false,false,false,,2000-01-01 00:00:00,,,
+        id,local_authority,setting_type,setting_type_other,role_type,role_type_other,registration_complete,private_beta_registration_complete,registration_complete_any?,registered_at,terms_and_conditions_agreed_at,gov_one?,module_1_time,module_2_time,module_3_time
+        1,Watford Borough Council,,DfE,other,Developer,true,true,true,,2000-01-01 00:00:00,false,4,2,0
+        2,Leeds City Council,,DfE,Trainer or lecturer,,true,false,true,,2000-01-01 00:00:00,false,1,0,
+        3,City of London,,DfE,other,Developer,true,false,true,2023-01-12 10:15:59,2000-01-01 00:00:00,false,3,,
+        4,,,,,,false,false,false,,2000-01-01 00:00:00,false,,,
       CSV
     end
   end

@@ -17,7 +17,7 @@ class FormOption
   # @param field [Symbol]
   # @return [Array<FormOption>]
   def self.build(field)
-    [ new(field), new(field, choice: false) ]
+    [new(field), new(field, choice: false)]
   end
 
   # @return [Boolean]

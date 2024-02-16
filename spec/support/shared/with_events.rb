@@ -9,7 +9,7 @@ RSpec.shared_context 'with events' do
 
   def create_event(user, name, time, training_module, id = nil)
     Event.new(user: user, name: name, time: time,
-                    properties: { training_module_id: training_module, id: id },
-                    visit: Visit.new).save!
+              properties: { training_module_id: training_module, id: id },
+              visit: Visit.new).save!
   end
 end
