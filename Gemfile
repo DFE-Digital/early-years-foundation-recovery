@@ -28,10 +28,11 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 
-# User authentication
+# Users
 gem 'devise'
 gem 'devise-pwned_password'
 gem 'devise-security'
+gem 'dibber'
 gem 'jwt'
 gem 'omniauth_openid_connect'
 gem 'omniauth-rails_csrf_protection'
@@ -78,7 +79,6 @@ gem 'dry-types'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
-  gem 'dibber'
   gem 'dotenv-rails'
   gem 'faker'
   gem 'foreman'
