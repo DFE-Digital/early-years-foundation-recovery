@@ -14,9 +14,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_10_150648) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  # Essential function creation present in migrations
-  Que.migrate!(version: 7)
-
   create_table "ahoy_events", force: :cascade do |t|
     t.bigint "visit_id"
     t.bigint "user_id"
@@ -81,6 +78,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_10_150648) do
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
+
+  # Essential function creation present in migrations
+  # Que.migrate!(version: 7)
+  # Que::Scheduler::Migrations.migrate!(version: 7)
 
   create_table "que_jobs", comment: "7", force: :cascade do |t|
     t.integer "priority", limit: 2, default: 100, null: false
