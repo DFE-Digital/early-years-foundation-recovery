@@ -12,9 +12,6 @@ on:
         type: string
         required: true
         default: main
-  push:
-    tags:
-      - rc*
 
 # Permissions for OIDC authentication
 permissions:
