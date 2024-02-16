@@ -14,7 +14,7 @@
     "accessible-autocomplete": "^2.0.4",
     "axios": "^1.6.2",
     "dfe-frontend-alpha": "^1.0.0",
-    "esbuild": "^0.19.9",
+    "esbuild": "^0.20.0",
     "govuk-frontend": "^4.7.0",
     "puppeteer": "^21.7.0",
     "sass": "^1.69.5",
