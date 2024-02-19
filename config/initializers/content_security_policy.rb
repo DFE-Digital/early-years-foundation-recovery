@@ -62,6 +62,7 @@ Rails.application.config.content_security_policy do |policy|
                      *GOOGLE_ANALYTICS_DOMAINS, # Tracking pixels
                      *OPTIMIZE_DOMAINS,
                      '*.ctfassets.net',
+                     'github.com', # eyrecovery-dev.azurewebsites.net
                      :data # Base64 encoded images
 
   policy.object_src  :none
@@ -80,21 +81,14 @@ Rails.application.config.content_security_policy do |policy|
                      *OPTIMIZE_DOMAINS,
                      :unsafe_inline
 
-  if Rails.env.development?
-    policy.connect_src :self,
-                       :https,
-                       :wss,
-                       *GOVUK_DOMAINS,
-                       *GOOGLE_ANALYTICS_DOMAINS,
-                       'http://localhost:3035',
-                       'ws://localhost:3035'
-  else
-    policy.connect_src :self,
-                       :https,
-                       :wss,
-                       *GOVUK_DOMAINS,
-                       *GOOGLE_ANALYTICS_DOMAINS
-  end
+  webpack_dev_server = %w[http://localhost:3035 ws://localhost:3035] if Rails.env.development?
+
+  policy.connect_src :self,
+                     :https,
+                     :wss,
+                     *GOVUK_DOMAINS,
+                     *GOOGLE_ANALYTICS_DOMAINS,
+                     *webpack_dev_server.to_a
 end
 
 # If you are using UJS then enable automatic nonce generation

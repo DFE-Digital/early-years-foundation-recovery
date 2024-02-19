@@ -32,8 +32,10 @@ We use rails credentials to manage secrets; obtain the encryption keys from the 
 
 To edit, use either:
 
-- `EDITOR=vi rails credentials:edit --environment <env>`.
-- `./bin/docker-rails credentials:edit --environment <env>`
+```sh
+$ EDITOR=vi rails credentials:edit --environment <env>
+$ ./bin/docker-rails credentials:edit --environment <env>
+```
 
 Full instructions can be found by running `rails credentials:help`
 
@@ -41,10 +43,12 @@ Full instructions can be found by running `rails credentials:help`
 
 This will help to prevent unintentional commits of access keys.
 
-- `brew install git-secrets`
-- `cd /path/to/my/repo`
-- `git secrets --install`
-- `git secrets --register-aws`
+```sh
+$ brew install git-secrets
+$ cd ./path/to/repo
+$ git secrets --install
+$ git secrets --register-aws
+```
 
 Find advanced settings and other installation options at the [git-secrets project][git-secrets].
 
@@ -52,12 +56,14 @@ Find advanced settings and other installation options at the [git-secrets projec
 
 ## Working locally
 
-1. `$ asdf plugin add ruby`
-1. `$ asdf install ruby`
-1. `$ asdf plugin add postgres`
-1. `$ asdf install postgres`
-1. `$ asdf plugin add nodejs`
-1. `$ asdf install nodejs`
+```sh
+$ asdf plugin add ruby
+$ asdf install ruby
+$ asdf plugin add postgres
+$ asdf install postgres
+$ asdf plugin add nodejs
+$ asdf install nodejs
+```
 
 **Development**
 
@@ -83,9 +89,13 @@ Running locally in the production rails environment requires generating a self-s
 Use `bin/qa` to run the test framework under `/ui` against a given URL.
 These tests have additional dependencies:
 
-- `brew install chromedriver geckodriver`
-- `xattr -d com.apple.quarantine /usr/local/bin/chromedriver` on Intel
-- `xattr -d com.apple.quarantine /opt/homebrew/bin/chromedriver` on ARM
+```sh
+$ brew install chromedriver geckodriver
+# on OSX Intel
+$ xattr -d com.apple.quarantine /usr/local/bin/chromedriver
+# on OSX ARM
+$ xattr -d com.apple.quarantine /opt/homebrew/bin/chromedriver
+```
 
 ## Using Docker
 
@@ -134,104 +144,42 @@ These commands can be used to debug problems:
 
 Custom tasks are namespaced under `eyfs`, list them using `rake --tasks eyfs`.
 
-- `rake eyfs:bot`                   # Generate secure bot user
-- `rake eyfs:jobs:plug_content`     # Que job to insert page view events for injected module items
-- `rake eyfs:user_progress`         # Recalculate module completion time
-- `rake eyfs:whats_new`             # Enable the post login 'What's new' page
-
-
-Trigger a task on a deployed application in either the `ey-recovery-content` or `ey-recovery-staging` spaces, not `production`, using `bin/cf-task`.
-
-- `./bin/cf-task pr-123 eyfs:bot`
-- `./bin/cf-task dev eyfs:whats_new[email1@example.com,email2@example.com]`
-
-Refer to this script for the steps necessary to ssh in and run a task manually.
+```sh
+# Generate secure bot user
+$ rake eyfs:bot
+# Que job to insert page view events for injected module items
+$ rake eyfs:jobs:plug_content
+# Recalculate module completion time
+$ rake eyfs:user_progress
+# Enable the post login 'What's new' page
+$ rake eyfs:whats_new
+```
 
 ---
 
-## Deployment Pipeline
+## Deployment Pipelines
 
 Visit the [Github Container Registry][ghcr].
 
-### Development Space
-
 [Development][development] is deployed automatically with the latest commit from `main`.
 
-### Content Space
-
-Manually adding the **"deployed"** label to a pull request in Github will cause it to be deployed.
-This supports manual testing and content review in a production environment.
-
-When a feature branch review application is deployed, the URL to access it is added as a comment
+Adding the `review` label to a pull request in Github will trigger a deployment for review.
+Once a feature branch is deployed, the URL to access it is added as a comment
 in the PR conversation in the format: <https://eyrecovery-review-pr-##.azurewebsites.net>
 
-Review applications are deployed with 3 seeded user accounts that share a restricted password.
-This facilitates team members demoing content and functionality, so registration is not required.
-
-### Staging Space
-
-[Staging][staging] is deployed automatically when a candidate tag is pushed.
-
-- `git checkout <ref/branch>`
-- `git tag --force rc0.0.x`
-- `git push --force origin rc0.0.x`
-
-A tag can also be created and a deployment run from this [workflow][staging-workflow].
 We intend to use [semantic versioning](https://semver.org/).
 
-### Production Space
+[Staging][staging] is deployed from this [workflow][staging-workflow].
+[Production][production] is deployed from this [workflow][production-workflow].
 
-[Production][production] is deployed automatically when a version tag is pushed.
 
-- `git checkout rc0.0.x`
-- `git tag v0.0.x`
-- `git push origin v0.0.x`
+## Azure
 
-A tag can also be created and a deployment run from this [workflow][production-workflow].
+Production console access
 
-## Autoscaling
-
-Auto scaling policy is 
-```
-Scale up when CPU > 85%
-Scale down when CPU < 30%
-```
-
-Created with the following commands:
-
-1) Install autoscaling plugin:
-```
-cf install-plugin -r CF-Community app-autoscaler-plugin
-```
-2) Create an autoscaler service:
-
-```
-cf create-service autoscaler autoscaler-free-plan scale-ey-recovery
-```
-
-3) Bind the autoscaler service to the app:
-
-```
-cf bind-service ey-recovery scale-ey-recovery
-```
-
-Policy is found in `policy.json`
-
-4) Attach the autoscaling policy to the app:
-
-```
-cf attach-autoscaling-policy ey-recovery policy.json
-```
-
-5) Observe the app scaling automatically:
-
-```
-cf autoscaling-history ey-recovery
-```
-
-For further information see [Managing apps - autoscaling]: https://docs.cloud.service.gov.uk/managing_apps.html#autoscaling
-
-The link includes additional examples for policies e.g. adding a schedule to scale at certain times or days of the month
+- https://eyrecovery-dev.scm.azurewebsites.net/webssh/host
+- https://eyrecovery-stage.scm.azurewebsites.net/webssh/host
+- https://eyrecovery-prod.scm.azurewebsites.net/webssh/host
 
 ## Monitoring
 
@@ -318,16 +266,20 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 # GOV.UK One Login
 
 ### Account Registration
+
 Register an account on the integration OIDC used in development <https://signin.integration.account.gov.uk/sign-in-or-create>.
 Using this authentication method also requires basic HTTP auth credentials.
 
 ### Status Updates
+
 For status updates see <https://status.account.gov.uk/>
 
 ### Questions
+
 Questions can be directed to the `#govuk-one-login` slack channel <https://ukgovernmentdigital.slack.com/archives/C02AQUJ6WTC>
 
 ### Credentials
+
 - Integration GOV.UK One Login environment credentials are stored in Rails development credentials (`config/credentials/development.yml.enc`)
 - Both production and integration GOV.UK One Login environment credentials are stored in Rails production credentials (`config/credentials/production.yml.enc`).
 
@@ -357,13 +309,6 @@ User [service accounts](https://cloud.google.com/iam/docs/service-accounts) can 
 - `gsutil -m cp -r "gs://eyfs-data-dashboard-live/eventsdata" "gs://eyfs-data-dashboard-live/useranswers" .` (export folders recursively)
 
 
-**Cloning production data**
-
-- Export production database as plaintext dump: `$ cf conduit --space ey-recovery ey-recovery-db -- pg_dump --file "./tmp/ey-recovery-db-<DATE>.sql" --no-acl --no-owner -Z 9`
-- Clone exported live data to an existing empty local development database: `$ docker exec -it recovery_dev psql prod_clone < ./tmp/ey-recovery-db-<DATE>.sql`
-- Optional: Restart dev server pointing to the `prod_clone` database
-
-
 ---
 
 ## User experience
@@ -385,14 +330,6 @@ settings the following classes can be added:
 - `data-hj-suppress` to redact additional user information
 - `data-hj-allow` to allow data that is automatically redacted
 
-
-## Azure
-
-Production console access
-
-- https://eyrecovery-dev.scm.azurewebsites.net/webssh/host
-- https://eyrecovery-stage.scm.azurewebsites.net/webssh/host
-- https://eyrecovery-prod.scm.azurewebsites.net/webssh/host
 
 ---
 
