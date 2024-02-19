@@ -20,3 +20,28 @@ completed@example.com:
   early_years_emails: true
   training_emails: true
   registration_complete: true
+
+<%= ENV['DEV_EMAIL'] %>:
+  gov_one_id: <%= ENV['DEV_GOV_ONE_TOKEN'] %>
+  first_name: <%= ENV['DEV_FIRST_NAME'] %>
+  last_name: <%= ENV['DEV_LAST_NAME'] %>
+
+  password: <%= Rails.configuration.user_password %>
+  confirmed_at: <%= Time.zone.now %>
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+  terms_and_conditions_agreed_at: <%= Time.zone.now %>
+
+  registration_complete: true
+  private_beta_registration_complete: false
+  display_whats_new: false
+  training_emails: true
+  early_years_emails: true
+
+  setting_type: other
+  setting_type_other: DfE
+  local_authority:
+  role_type: other
+  role_type_other: Developer
+  setting_type_id: other
+  early_years_experience: Not applicable
