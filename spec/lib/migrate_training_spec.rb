@@ -1,12 +1,31 @@
 require 'rails_helper'
 require 'migrate_training'
 
+# UserAnswer names like '1-3-2-1' must be genuine and exist in the CMS env
+#
 RSpec.describe MigrateTraining do
   subject(:operation) { described_class.new(verbose: false) }
 
   let(:user) { create(:user, :registered) }
 
-  context 'with an error' do
+  context 'with truncate' do
+    subject(:operation) { described_class.new(verbose: false, truncate: true) }
+
+    let(:assessment) { create :assessment, user: user }
+
+    before do
+      create_list :response, 10, user: user, question_type: 'summative', assessment: assessment
+      operation.call
+    end
+
+    it 'preserves user records' do
+      expect(Assessment.count).to eq 0
+      expect(Response.count).to eq 0
+      expect(User.count).to eq 1
+    end
+  end
+
+  context 'with simulate' do
     subject(:operation) { described_class.new(verbose: false, simulate: true) }
 
     before do
@@ -20,9 +39,8 @@ RSpec.describe MigrateTraining do
     end
   end
 
-  context 'with valid data' do
+  context 'when data is valid' do
     before do
-
       create :user_answer,
              user_id: user.id,
              name: '1-1-4-1', # genuine key
@@ -143,7 +161,7 @@ RSpec.describe MigrateTraining do
     end
   end
 
-  context 'with invalid score' do
+  context 'when assessment score is invalid' do
     before do
       # Charlie (inconsistent)
       charlie_assessment =
@@ -154,15 +172,14 @@ RSpec.describe MigrateTraining do
                status: 'passed',
                score: '150'
 
-      20.times.each do |num|
-        create :user_answer,
-               user_id: user.id,
-               name: '1-3-2-1', # genuine key
-               module: 'charlie',
-               user_assessment_id: charlie_assessment.id,
-               questionnaire_id: 0,
-               created_at: Time.zone.now
-      end
+      create_list :user_answer, 20,
+                  user_id: user.id,
+                  name: '1-3-2-1', # genuine key
+                  module: 'charlie',
+                  assessments_type: 'summative_assessment',
+                  user_assessment_id: charlie_assessment.id,
+                  questionnaire_id: 0,
+                  created_at: Time.zone.now
 
       operation.call
     end
@@ -178,6 +195,55 @@ RSpec.describe MigrateTraining do
       expect(Assessment.first.responses.count).to eq 20
 
       expect(Assessment.first.score).to eq 100.0
+    end
+  end
+
+  context 'with resume' do
+    before do
+      assessment_1 =
+        create :user_assessment,
+               user_id: user.id,
+               module: 'alpha'
+
+      create_list :user_answer, 10,
+                  user_id: user.id,
+                  name: '1-3-2-1',
+                  module: 'alpha',
+                  assessments_type: 'summative_assessment',
+                  user_assessment_id: assessment_1.id,
+                  questionnaire_id: 0,
+                  created_at: Time.zone.local(2023, 1, 1)
+
+      operation.call
+    end
+
+    it 'migrates remaining data' do
+      last_user_answer_id = UserAnswer.last.id
+
+      assessment_2 =
+        create :user_assessment,
+               user_id: user.id,
+               module: 'charlie'
+
+      create_list :user_answer, 10,
+                  user_id: user.id,
+                  name: '1-3-2-1',
+                  module: 'charlie',
+                  assessments_type: 'summative_assessment',
+                  user_assessment_id: assessment_2.id,
+                  questionnaire_id: 0,
+                  created_at: Time.zone.now
+
+      described_class.new(verbose: false, resume: last_user_answer_id + 1).call
+
+      expect(UserAnswer.pluck(:id)[9]).to eq last_user_answer_id
+      expect(UserAnswer.pluck(:id)[19]).to eq UserAnswer.last.id
+
+      expect(UserAssessment.count).to eq 2
+      expect(Assessment.count).to be 2
+
+      expect(UserAnswer.count).to be 20
+      expect(Response.count).to be 20
     end
   end
 end

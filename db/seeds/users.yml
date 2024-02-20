@@ -21,6 +21,7 @@ completed@example.com:
   training_emails: true
   registration_complete: true
 
+<% if ENV['DEV_EMAIL'] %>
 <%= ENV['DEV_EMAIL'] %>:
   gov_one_id: <%= ENV['DEV_GOV_ONE_TOKEN'] %>
   first_name: <%= ENV['DEV_FIRST_NAME'] %>
@@ -45,3 +46,4 @@ completed@example.com:
   role_type_other: Developer
   setting_type_id: other
   early_years_experience: Not applicable
+<% end %>

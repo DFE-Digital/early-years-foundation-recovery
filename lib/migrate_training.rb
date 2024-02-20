@@ -17,15 +17,19 @@ class MigrateTraining
   extend Dry::Initializer
 
   # @return [Boolean]
+  option :truncate, Types::Bool, default: proc { false }, reader: :private
+  # @return [Boolean]
   option :simulate, Types::Bool, default: proc { false }, reader: :private
   # @return [Boolean]
   option :verbose, Types::Bool, default: proc { true }, reader: :private
+  # @return [Integer, nil]
+  option :resume, Types::Integer, optional: true, reader: :private
 
   # @return [?]
   def call
     ActiveRecord::Base.transaction do
       log "Migration started: #{Time.zone.now}"
-      truncate!
+      truncate! if truncate
       migrate!
       log "Migration finished: #{Time.zone.now}"
       raise Error if simulate
@@ -36,18 +40,33 @@ private
 
   # @return [PG::Result]
   def truncate!
-    log 'Truncate responses'
-    ActiveRecord::Base.connection.execute 'TRUNCATE responses RESTART IDENTITY CASCADE'
-
-    log 'Truncate assessments'
-    ActiveRecord::Base.connection.execute 'TRUNCATE assessments RESTART IDENTITY CASCADE'
+    log 'Truncate responses and assessments'
+    ActiveRecord::Base.connection.execute 'TRUNCATE responses, assessments RESTART IDENTITY'
   end
 
   # @return [nil]
   def migrate!
-    UserAnswer.all.order(:created_at).find_each do |user_answer|
-      response = process_user_answer(user_answer)
-      log response.attributes.to_json
+    UserAnswer.find_each(start: resume) do |user_answer|
+      if valid?(user_answer)
+        response = process_user_answer(user_answer)
+        log response.attributes.to_json, alert: false
+      else
+        log "User: #{user_answer.user_id} UserAnswer: #{user_answer.id}"
+      end
+    end
+  end
+
+  # @param user_answer [UserAnswer]
+  # @return [Boolean]
+  def valid?(user_answer)
+    if user_answer.name.blank? ||
+        user_answer.module.blank? ||
+        user_answer.assessments_type.blank? ||
+        user_answer.question.nil? ||
+        !user_answer.question.respond_to?(:question_type)
+      false
+    else
+      true
     end
   end
 
@@ -118,12 +137,16 @@ private
   end
 
   # @param message [String]
+  # @param alert [Boolean] Send to Sentry
   # @return [String, nil]
-  def log(message)
+  def log(message, alert: true)
     if ENV['RAILS_LOG_TO_STDOUT'].present?
       Rails.logger.info(message)
 
-      Sentry.capture_message("#{self.class.name}: #{ENV['ENVIRONMENT']} - #{message}", level: :info)
+      if alert
+        alert_message = "#{self.class.name}: #{ENV['ENVIRONMENT']} - #{message}"
+        Sentry.capture_message(alert_message, level: :info)
+      end
     elsif verbose
       puts message
     end
