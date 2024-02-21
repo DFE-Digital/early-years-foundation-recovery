@@ -93,4 +93,57 @@ RSpec.describe CourseProgress do
       end
     end
   end
+
+  describe '#debug_summary' do
+    it 'summarises information' do
+      expect(course.debug_summary).to eq(
+        <<~SUMMARY,
+          ---
+          title: First Training Module
+          published at: Management Key Missing
+          position: 1
+          name: alpha
+          draft: false
+          started: false
+          completed: false
+          last: 1-3-3-5
+          certificate: 1-3-4
+          milestone: N/A
+          ---
+          title: Second Training Module
+          published at: Management Key Missing
+          position: 2
+          name: bravo
+          draft: false
+          started: false
+          completed: false
+          last: 1-3-3-5
+          certificate: 1-3-4
+          milestone: N/A
+          ---
+          title: Third Training Module
+          published at: Management Key Missing
+          position: 3
+          name: charlie
+          draft: false
+          started: false
+          completed: false
+          last: 1-3-3-5
+          certificate: 1-3-4
+          milestone: N/A
+          ---
+          title: Fourth Training Module
+          published at: Management Key Missing
+          position: 4
+          name: delta
+          draft: true
+          started: false
+          completed: false
+          last: N/A
+          certificate: N/A
+          milestone: N/A
+        SUMMARY
+      )
+    end
+  end
 end

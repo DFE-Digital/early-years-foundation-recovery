@@ -97,4 +97,36 @@ RSpec.describe Training::Question, type: :model do
       end
     end
   end
+
+  describe '#debug_summary' do
+    it 'summarises information' do
+      expect(question.debug_summary).to eq(
+        <<~SUMMARY,
+          uid: 49Z7xDMPfGAnIY8jzyD4ia
+          module uid: 6EczqUOpieKis8imYPc6mG
+          module name: alpha
+          published at: Management Key Missing
+          page type: formative_questionnaire
+
+          ---
+          previous: 1-1-4
+          current: 1-1-4-1
+          next: 1-2
+
+          ---
+          submodule: 1
+          topic: 4
+
+          ---
+          position in module: 8th
+          position in submodule: 7th
+          position in topic: 2nd
+
+          ---
+          pages in submodule: 6
+          pages in topic: 2
+        SUMMARY
+      )
+    end
+  end
 end

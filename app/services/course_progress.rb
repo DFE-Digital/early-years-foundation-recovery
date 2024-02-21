@@ -34,20 +34,21 @@ class CourseProgress
 
   # @return [Array<String>]
   def debug_summary
-    training_modules.map do |mod|
+    Training::Module.ordered.map { |mod|
       <<~SUMMARY
+        ---
         title: #{mod.title}
-        published at: #{mod.published_at}
+        published at: #{mod.published_at || 'Management Key Missing'}
         position: #{mod.position}
         name: #{mod.name}
         draft: #{mod.draft?}
         started: #{started?(mod)}
         completed: #{completed?(mod)}
-        last: #{mod.thankyou_page&.name unless mod.draft?}
-        certificate: #{mod.certificate_page&.name unless mod.draft?}
-        milestone: #{module_progress(mod).milestone}
+        last: #{mod.thankyou_page&.name || 'N/A'}
+        certificate: #{mod.certificate_page&.name || 'N/A'}
+        milestone: #{module_progress(mod).milestone || 'N/A'}
       SUMMARY
-    end
+    }.join
   end
 
   # @param mod [Training::Module]
