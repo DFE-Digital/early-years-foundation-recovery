@@ -4622,7 +4622,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dfe-frontend-alpha@npm:^1.0.1":
+"dfe-frontend-alpha@npm:^1.0.0":
   version: 1.0.1
   resolution: "dfe-frontend-alpha@npm:1.0.1"
   dependencies:
@@ -5482,7 +5482,7 @@ __metadata:
     "@hotwired/turbo-rails": ^8.0.2
     accessible-autocomplete: ^2.0.4
     axios: ^1.6.2
-    dfe-frontend-alpha: ^1.0.1
+    dfe-frontend-alpha: ^1.0.0
     esbuild: ^0.20.0
     govuk-frontend: ^4.7.0
     puppeteer: ^22.1.0
