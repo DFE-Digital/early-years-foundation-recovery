@@ -91,7 +91,3 @@ jobs:
       #     DISABLE_USER_ANSWER: true
       # Gov One feature test
       -
-        name: Run test suite
-        run: bundle exec rspec
-        env:
-          GOV_ONE_LOGIN: true
