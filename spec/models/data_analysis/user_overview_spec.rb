@@ -103,7 +103,7 @@ RSpec.describe DataAnalysis::UserOverview do
     # user#5 start training notification
     create :user, :registered, confirmed_at: 4.weeks.ago
     # user#6
-    create :registered
+    create :user, :registered
   end
 
   it_behaves_like 'a data export model'
