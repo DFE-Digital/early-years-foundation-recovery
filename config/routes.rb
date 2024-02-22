@@ -87,6 +87,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :feedback, only: %i[index show update] do
+    collection do
+      get 'thank-you', to: 'feedback#thank_you'
+    end
+  end
+
   post 'change', to: 'hook#change'
   post 'release', to: 'hook#release'
 

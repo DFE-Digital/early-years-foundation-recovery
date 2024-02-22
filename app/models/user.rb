@@ -197,11 +197,19 @@ class User < ApplicationRecord
   # @return [UserAnswer, Response]
   def response_for(content)
     if ENV['DISABLE_USER_ANSWER'].present?
-      responses.find_or_initialize_by(
-        question_name: content.name,
-        training_module: content.parent.name,
-        archived: false,
-      )
+      if content.opinion_question?
+        responses.find_or_initialize_by(
+          question_name: content.name,
+          training_module: module_name,
+          archived: false,
+        )
+      else
+        responses.find_or_initialize_by(
+          question_name: content.name,
+          training_module: content.parent.name,
+          archived: false,
+        )
+      end
     else
       user_answers.find_or_initialize_by(
         assessments_type: content.assessments_type,

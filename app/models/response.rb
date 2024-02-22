@@ -4,7 +4,7 @@
 class Response < ApplicationRecord
   include ToCsv
 
-  belongs_to :user
+  belongs_to :user, optional: true
 
   validates :answers, presence: true, unless: -> { question.opinion_question? && question.options.empty? }
   validates :text_input, presence: true, if: -> { question.opinion_question? && question.options.empty? }
@@ -39,7 +39,6 @@ class Response < ApplicationRecord
   # @return [Boolean]
   def responded?
     answers.any? || text_input.present?
-    # answers.any? unless question.opinion_question? && question.answers.empty?
   end
 
   # @return [Boolean]

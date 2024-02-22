@@ -42,16 +42,6 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
   end
 
   # @param option [Training::Answer::Option]
-  def opinion_radio_button(option)
-    govuk_radio_button :answers,
-                        option.id,
-                        label: { text: option.label },
-                        link_errors: true,
-                        disabled: option.disabled?,
-                        checked: option.checked?
-  end
-
-  # @param option [Training::Answer::Option]
   def question_check_box(option)
     govuk_check_box :answers,
                     option.id,
