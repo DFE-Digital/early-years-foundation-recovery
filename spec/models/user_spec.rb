@@ -265,7 +265,7 @@ RSpec.describe User, type: :model do
 
       context 'and using GovOne for the first time' do
         let(:user) do
-          create :pre_one_login_user, email: email
+          create :user, :registered, email: email, gov_one_id: nil
         end
 
         let(:params) do

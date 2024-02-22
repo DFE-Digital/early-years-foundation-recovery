@@ -40,7 +40,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
 
   context 'with an existing non-gov-one user' do
     before do
-      create :pre_one_login_user, email: email
+      create :user, :registered, email: email, gov_one_id: nil
       get :openid_connect, params: params
     end
 
