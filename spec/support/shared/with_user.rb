@@ -1,5 +1,5 @@
 RSpec.shared_context 'with user' do
-  let(:user) { create(:gov_one_user) }
+  let(:user) { create(:registered) }
 
   before do
     sign_in user
