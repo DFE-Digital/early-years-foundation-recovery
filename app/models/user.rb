@@ -116,8 +116,13 @@ class User < ApplicationRecord
   scope :without_notes, -> { where.not(id: with_notes) }
 
   # assessments
-  scope :with_assessments, -> { joins(:user_assessments) }
-  scope :with_passing_assessments, -> { with_assessments.merge(UserAssessment.passes) }
+  if Rails.application.migrated_answers?
+    scope :with_assessments, -> { joins(:assessments) }
+    scope :with_passing_assessments, -> { with_assessments.merge(Assessment.passed) }
+  else
+    scope :with_assessments, -> { joins(:user_assessments) }
+    scope :with_passing_assessments, -> { with_assessments.merge(UserAssessment.passes) }
+  end
 
   # events
   scope :with_events, -> { joins(:events) }
@@ -190,11 +195,20 @@ class User < ApplicationRecord
   # @param content [Training::Question]
   # @return [UserAnswer, Response]
   def response_for(content)
-    if ENV['DISABLE_USER_ANSWER'].present?
+    if Rails.application.migrated_answers?
+      if content.summative_question?
+        # creates new assessment on first summative_question
+        assessment =
+          assessments.passed.find_by(training_module: content.parent.name) ||
+          assessments.incomplete.find_by(training_module: content.parent.name) || # needed?
+          assessments.create(training_module: content.parent.name, started_at: Time.zone.now)
+      end
+
       responses.find_or_initialize_by(
-        question_name: content.name,
+        assessment_id: assessment&.id,
         training_module: content.parent.name,
-        archived: false,
+        question_name: content.name,
+        question_type: content.question_type, # TODO: RENAME options for Question#page_type removing "questionnaire" suffix
       )
     else
       user_answers.find_or_initialize_by(
