@@ -34,13 +34,13 @@ module DataAnalysis
             in_progress: in_progress(mod),
             completed: completed(mod),
             true_false: true_false_count(mod),
-            module_start: Ahoy::Event.module_start.where_module(mod.name).count,
-            module_complete: Ahoy::Event.module_complete.where_module(mod.name).count,
-            confidence_check_start: Ahoy::Event.confidence_check_start.where_module(mod.name).count,
-            confidence_check_complete: Ahoy::Event.confidence_check_complete.where_module(mod.name).count,
-            start_assessment: Ahoy::Event.summative_assessment_start.where_module(mod.name).count,
-            pass_assessment: Ahoy::Event.summative_assessment_pass(mod.name).count,
-            fail_assessment: Ahoy::Event.summative_assessment_fail(mod.name).count,
+            module_start: Event.module_start.where_module(mod.name).count,
+            module_complete: Event.module_complete.where_module(mod.name).count,
+            confidence_check_start: Event.confidence_check_start.where_module(mod.name).count,
+            confidence_check_complete: Event.confidence_check_complete.where_module(mod.name).count,
+            start_assessment: Event.summative_assessment_start.where_module(mod.name).count,
+            pass_assessment: Event.summative_assessment_pass(mod.name).count,
+            fail_assessment: Event.summative_assessment_fail(mod.name).count,
           }
         end
       end

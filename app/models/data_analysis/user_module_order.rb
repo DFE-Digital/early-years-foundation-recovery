@@ -36,7 +36,7 @@ module DataAnalysis
       # users that started a new module since we permitted jumping around
       # @return [Array<User>]
       def users
-        User.find Ahoy::Event.module_start.since_non_linear.map(&:user_id)
+        User.find Event.module_start.since_non_linear.map(&:user_id)
       end
 
       # modules in order of activity for each user

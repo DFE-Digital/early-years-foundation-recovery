@@ -5,8 +5,7 @@
     = form_for current_user, url: { action: 'update_training_emails' } do |f|
       = f.govuk_error_summary
 
-      - opt_in_out(:training_emails) do |options, legend, hint|
-        = f.govuk_collection_radio_buttons :training_emails, options, :id, :name, legend: { text: legend }, hint: { text: hint }
+      = f.opt_in_out :training_emails
 
       div class='govuk-button-group govuk-!-margin-top-4'
         = f.govuk_submit t('links.save')

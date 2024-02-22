@@ -77,7 +77,7 @@ RSpec.describe ToCsv do
 
       it 'exports all rows' do
         expect(UserAnswer.to_csv(batch_size: 2).split("\n").count).to eq(6)
-        expect(Ahoy::Event.to_csv(batch_size: 2).split("\n").count).to eq(6)
+        expect(Event.to_csv(batch_size: 2).split("\n").count).to eq(6)
       end
     end
   end

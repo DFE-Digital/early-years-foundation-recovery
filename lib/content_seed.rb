@@ -55,7 +55,7 @@ private
     )
   end
 
-  # @return [Ahoy::Event]
+  # @return [Event]
   def create_event(slug:, name: 'module_content_page')
     user.events.create!(
       visit_id: visit.id,
@@ -69,9 +69,9 @@ private
     )
   end
 
-  # @return [Ahoy::Visit]
+  # @return [Visit]
   def visit
-    @visit ||= Ahoy::Visit.create(
+    @visit ||= Visit.create(
       user_agent: 'ContentSeed',
       user_id: user.id,
       started_at: time,

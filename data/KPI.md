@@ -28,7 +28,7 @@ Events in production may have these additional properties:
 - `seed: true` to recreate completion of the first module for interim product users
 
 ```ruby
-Ahoy::Event.where(name: 'module_content_page').where_properties(seed: true).count
+Event.where(name: 'module_content_page').where_properties(seed: true).count
 #=> 8680
 ```
 

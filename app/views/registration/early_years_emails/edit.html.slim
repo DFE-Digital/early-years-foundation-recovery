@@ -10,8 +10,7 @@
     = form_for form, url: registration_early_years_emails_path, method: :patch do |f|
       = f.govuk_error_summary
 
-      - opt_in_out(:early_years_emails) do |options, legend, hint|
-        = f.govuk_collection_radio_buttons :early_years_emails, options, :id, :name, legend: { text: legend }, hint: { text: hint }
+      = f.opt_in_out :early_years_emails
 
       div class='govuk-!-margin-top-4'
         = f.govuk_submit t('links.continue')

@@ -155,9 +155,9 @@ RSpec.describe User, type: :model do
                       alpha: 3,
                     })
 
-      Ahoy::Event.new(
+      Event.new(
         user: user,
-        visit: Ahoy::Visit.new,
+        visit: Visit.new,
         name: 'user_registration',
         time: Time.zone.local(2023, 0o1, 12, 10, 15, 59),
       ).save!

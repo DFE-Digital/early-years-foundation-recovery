@@ -2,11 +2,9 @@
 # Record user event transactions for key performance metrics
 # @see ./data/KPI.md
 #
-class Ahoy::Event < ApplicationRecord
+class Event < ApplicationRecord
   include Ahoy::QueryMethods
   include ToCsv
-
-  self.table_name = 'ahoy_events'
 
   belongs_to :visit
   belongs_to :user, optional: true

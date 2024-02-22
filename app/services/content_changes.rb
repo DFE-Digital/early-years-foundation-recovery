@@ -1,4 +1,4 @@
-# Content changes since the user's last visit, powered by Ahoy::Visit
+# Content changes since the user's last visit, powered by Visit
 #
 class ContentChanges
   extend Dry::Initializer
@@ -27,7 +27,7 @@ class ContentChanges
 
 private
 
-  # @return [Ahoy::Visit]
+  # @return [Visit]
   def previous_visit
     user.visits.order(started_at: :desc).first
   end

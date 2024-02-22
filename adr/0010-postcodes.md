@@ -1,6 +1,6 @@
 # Use UK_Postcode for validation and normalisation
 
-* Status: proposed
+* Status: rejected
 
 ## Context and Problem Statement
 
