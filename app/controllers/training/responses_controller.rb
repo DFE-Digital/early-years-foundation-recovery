@@ -60,7 +60,7 @@ module Training
       end
     end
 
-    # @return [Ahoy::Event] Update action
+    # @return [Event] Update action
     def track_question_answer
       if ENV['DISABLE_USER_ANSWER'].present?
         track('questionnaire_answer',

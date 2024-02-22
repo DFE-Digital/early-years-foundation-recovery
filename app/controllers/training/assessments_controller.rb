@@ -29,7 +29,7 @@ module Training
     end
 
     # Record the attempt result unless already passed
-    # @return [Ahoy::Event, nil]
+    # @return [Event, nil]
     def track_events
       return unless assessment.attempted? && assessment_pass_untracked?
 

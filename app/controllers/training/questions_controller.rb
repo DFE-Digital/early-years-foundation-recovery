@@ -17,7 +17,7 @@ module Training
   private
 
     # @see Tracking
-    # @return [Ahoy::Event] Show action
+    # @return [Event] Show action
     def track_events
       if track_confidence_start?
         track('confidence_check_start')

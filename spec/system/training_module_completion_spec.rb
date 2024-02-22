@@ -35,7 +35,7 @@ RSpec.describe 'Training Module Completion', type: :system do
         confidence_check_complete
         module_complete
       ].each do |event_name|
-        expect(Ahoy::Event.find_by(name: event_name)).to be_present
+        expect(Event.find_by(name: event_name)).to be_present
       end
 
       expect(UserAssessment.count).to be 1
@@ -65,7 +65,7 @@ RSpec.describe 'Training Module Completion', type: :system do
         summative_assessment_start
         summative_assessment_complete
       ].each do |event_name|
-        expect(Ahoy::Event.find_by(name: event_name)).to be_present
+        expect(Event.find_by(name: event_name)).to be_present
       end
 
       %w[
@@ -73,7 +73,7 @@ RSpec.describe 'Training Module Completion', type: :system do
         confidence_check_complete
         module_complete
       ].each do |event_name|
-        expect(Ahoy::Event.find_by(name: event_name)).not_to be_present
+        expect(Event.find_by(name: event_name)).not_to be_present
       end
 
       expect(UserAssessment.count).to be 1
