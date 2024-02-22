@@ -2,12 +2,9 @@
 # Record user event transactions for key performance metrics
 # @see ./data/KPI.md
 #
-# TODO: remove dependency namespace Ahoy
-class Ahoy::Event < ApplicationRecord
+class Event < ApplicationRecord
   include Ahoy::QueryMethods
   include ToCsv
-
-  self.table_name = 'ahoy_events'
 
   belongs_to :visit
   belongs_to :user, optional: true
@@ -31,8 +28,10 @@ class Ahoy::Event < ApplicationRecord
                                    }
 
   scope :since_non_linear, -> { where(time: Rails.application.non_linear_launch_date..Time.zone.now) }
+  # scope :since_cms, -> { where(time: Rails.application.cms_launch_date..Time.zone.now) }
 
-  # @see Training::PagesController#track_events
+  # @see ContentPagesController#track_events
+  # ----------------------------------------------------------------------------
   scope :page_view, -> { where(name: 'module_content_page') }
   scope :module_start, -> { where(name: 'module_start') }
   scope :module_complete, -> { where(name: 'module_complete') }
@@ -49,11 +48,13 @@ class Ahoy::Event < ApplicationRecord
     page_view.where("properties -> 'type' ?| array[:values]", values: types)
   }
 
-  # @see Training::QuestionsController#track_events
+  # @see QuestionnairesController#track_events
+  # ----------------------------------------------------------------------------
   scope :summative_assessment_start, -> { where(name: 'summative_assessment_start') }
   scope :confidence_check_start, -> { where(name: 'confidence_check_start') }
 
-  # @see Training::AssessmentsController#track_events
+  # @see AssessmentResultsController#track_events
+  # ----------------------------------------------------------------------------
   scope :summative_assessment_complete, -> { where(name: 'summative_assessment_complete') }
 
   # @param mod_name [String]

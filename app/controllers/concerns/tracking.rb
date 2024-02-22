@@ -1,4 +1,4 @@
-# Create and query Ahoy::Events
+# Create and query Events
 #
 module Tracking
   extend ActiveSupport::Concern
@@ -33,6 +33,6 @@ private
   #
   # @return [Boolean]
   def untracked?(key, **params)
-    Ahoy::Event.where(user_id: current_user, name: key).where_properties(**params).empty?
+    Event.where(user_id: current_user, name: key).where_properties(**params).empty?
   end
 end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Ahoy::Event, type: :model do
+RSpec.describe Event, type: :model do
   subject(:events) { described_class }
 
   describe '.summative_assessment_pass' do

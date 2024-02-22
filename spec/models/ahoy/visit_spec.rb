@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Ahoy::Visit, type: :model do
+RSpec.describe Visit, type: :model do
   subject(:visits) { described_class }
 
   describe '.dashboard' do

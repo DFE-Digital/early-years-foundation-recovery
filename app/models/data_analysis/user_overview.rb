@@ -45,9 +45,9 @@ module DataAnalysis
           registered_since_private_beta: User.registered_since_private_beta.count,
           private_beta_only_registration_incomplete: User.private_beta_only_registration_incomplete.count,
           private_beta_only_registration_complete: User.private_beta_only_registration_complete.count,
-          registration_events: Ahoy::Event.user_registration.count,
-          private_beta_registration_events: Ahoy::Event.private_beta_registration.count,
-          public_beta_registration_events: Ahoy::Event.public_beta_registration.count,
+          registration_events: Event.user_registration.count,
+          private_beta_registration_events: Event.private_beta_registration.count,
+          public_beta_registration_events: Event.public_beta_registration.count,
           total: User.all.count,
           locked_out: User.locked_out.count,
           confirmed: User.confirmed.count,
@@ -91,7 +91,7 @@ module DataAnalysis
         User.all.count { |u| u.terms_and_conditions_agreed_at.present? }
       end
 
-      # @note Ahoy::Event.module_start.distinct.count(:user_id)
+      # @note Event.module_start.distinct.count(:user_id)
       # @return [Integer]
       def started_learning
         User.all.count { |u| !u.module_time_to_completion.empty? }

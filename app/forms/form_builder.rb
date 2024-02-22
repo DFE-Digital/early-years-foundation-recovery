@@ -70,4 +70,11 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
                             aria: { label: 'registration early years experience' },
                             form_group: { classes: %w[data-hj-suppress] }
   end
+
+  def opt_in_out(field)
+    govuk_collection_radio_buttons field,
+                                   FormOption.build(field), :id, :name,
+                                   legend: { text: I18n.t(:heading, scope: field) },
+                                   hint: { text: I18n.t(:body, scope: field) }
+  end
 end

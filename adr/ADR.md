@@ -8,7 +8,7 @@ This log lists the architectural decisions for EYFS Recovery
 * [ADR-0001](0001-web-framework.md) - Primary development language and framework
 * [ADR-0002](0002-development-environments.md) - Development Environments
 * [ADR-0003](0003-video-hosting-platform.md) - Use YouTube as Video Hosting solution
-* [ADR-0004](0004-authentication-technology.md) - Use Devise for authentication
+* [ADR-0004](0004-authentication.md) - Use Devise for authentication
 * [ADR-0005](0005-content-storage-strategy.md) - Use YAML + Markdown for Content
 * [ADR-0006](0006-secrets-management.md) - Use Bitwarden for secrets management
 * [ADR-0007](0007-deployment-environments.md) - Production, Integration, Staging and Content Preview environments will be resourced
@@ -20,8 +20,8 @@ This log lists the architectural decisions for EYFS Recovery
 * [ADR-0013](0013-sensitive-data-encryption.md) - Use Active Record Encryption to protect sensitive data
 * [ADR-0014](0014-user-tracking.md) - Use Hotjar for tracking user journeys
 * [ADR-0015](0015-background-jobs.md) - Use Que for processing background jobs
-* [ADR-0016](0016-devise-security-and-pwned-passwords-gems.md) - Use Devise Security and Devise Pwned Password gems
-* [ADR-0017](0017-gov-one-login.md) - GOV.UK One Login
+* [ADR-0016](0016-password-vulnerability.md) - Use Devise Security and Devise Pwned Passwords
+* [ADR-0017](0017-external-authentication.md) - Use GOV.UK One Login
 
 <!-- adrlogstop -->
 

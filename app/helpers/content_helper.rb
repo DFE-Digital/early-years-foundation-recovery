@@ -74,20 +74,7 @@ module ContentHelper
     Course.config.privacy_policy_url
   end
 
-  # TODO: replace with form builder fields, Replace Openstruct with DATA
-  #
-  # @yield [Array] options / legend / hint
-  def opt_in_out(type)
-    yield [
-      [
-        OpenStruct.new(id: true, name: t(:opt_in, scope: type)),
-        OpenStruct.new(id: false, name: t(:opt_out, scope: type)),
-      ],
-      t(:heading, scope: type),
-      t(:body, scope: type),
-    ]
-  end
-
+  # TODO: remove this method and coresponding locale string
   # @yield [String]
   def password_complexity
     t('password_complexity', length: User.password_length.first)

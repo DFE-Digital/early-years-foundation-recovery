@@ -65,7 +65,7 @@ module Training
       end
     end
 
-    # @return [Ahoy::Event] Update action
+    # @return [Event] Update action
     def track_question_answer
       if Rails.application.migrated_answers?
         track('questionnaire_answer',

@@ -74,8 +74,8 @@ class User < ApplicationRecord
     has_many :user_assessments
   end
 
-  has_many :visits, class_name: 'Ahoy::Visit'
-  has_many :events, class_name: 'Ahoy::Event'
+  has_many :visits
+  has_many :events
   has_many :notes
 
   scope :gov_one, -> { where.not(gov_one_id: nil) }
@@ -116,26 +116,21 @@ class User < ApplicationRecord
   scope :without_notes, -> { where.not(id: with_notes) }
 
   # assessments
-  if Rails.application.migrated_answers?
-    scope :with_assessments, -> { joins(:assessments) }
-    scope :with_passing_assessments, -> { with_assessments.merge(Assessment.passed) }
-  else
-    scope :with_assessments, -> { joins(:user_assessments) }
-    scope :with_passing_assessments, -> { with_assessments.merge(UserAssessment.passes) }
-  end
+  scope :with_assessments, -> { joins(:user_assessments) }
+  scope :with_passing_assessments, -> { with_assessments.merge(UserAssessment.passes) }
 
   # events
   scope :with_events, -> { joins(:events) }
-  scope :with_module_start_events, -> { with_events.merge(Ahoy::Event.module_start) }
-  scope :with_module_complete_events, -> { with_events.merge(Ahoy::Event.module_complete) }
+  scope :with_module_start_events, -> { with_events.merge(Event.module_start) }
+  scope :with_module_complete_events, -> { with_events.merge(Event.module_complete) }
   scope :completed_available_modules, -> { with_module_complete_events.group('users.id').having('count(ahoy_events.id) = ?', ModuleRelease.count) }
   scope :started_training, -> { with_module_start_events.distinct }
   scope :not_started_training, -> { where.not(id: with_module_start_events) }
 
   # visits
   scope :with_visits, -> { joins(:visits) }
-  scope :visits_within_month, -> { with_visits.merge(Ahoy::Visit.within_4_weeks).distinct }
-  scope :month_old_visits, -> { with_visits.merge(Ahoy::Visit.month_old).distinct }
+  scope :visits_within_month, -> { with_visits.merge(Visit.within_4_weeks).distinct }
+  scope :month_old_visits, -> { with_visits.merge(Visit.month_old).distinct }
   scope :no_visits_this_month, -> { where.not(id: visits_within_month) }
   scope :last_visit_4_weeks_ago, -> { where(id: month_old_visits).where.not(id: visits_within_month) }
 
@@ -195,20 +190,11 @@ class User < ApplicationRecord
   # @param content [Training::Question]
   # @return [UserAnswer, Response]
   def response_for(content)
-    if Rails.application.migrated_answers?
-      if content.summative_question?
-        # creates new assessment on first summative_question
-        assessment =
-          assessments.passed.find_by(training_module: content.parent.name) ||
-          assessments.incomplete.find_by(training_module: content.parent.name) || # needed?
-          assessments.create(training_module: content.parent.name, started_at: Time.zone.now)
-      end
-
+    if ENV['DISABLE_USER_ANSWER'].present?
       responses.find_or_initialize_by(
-        assessment_id: assessment&.id,
-        training_module: content.parent.name,
         question_name: content.name,
-        question_type: content.question_type, # TODO: RENAME options for Question#page_type removing "questionnaire" suffix
+        training_module: content.parent.name,
+        archived: false,
       )
     else
       user_answers.find_or_initialize_by(
@@ -450,8 +436,8 @@ class User < ApplicationRecord
 
   # @return [Boolean]
   def continue_training_recipient?
-    recent_visits = Ahoy::Visit.last_4_weeks
-    old_visits = Ahoy::Visit.month_old.reject { |visit| recent_visits.pluck(:user_id).include?(visit.user_id) }
+    recent_visits = Visit.last_4_weeks
+    old_visits = Visit.month_old.reject { |visit| recent_visits.pluck(:user_id).include?(visit.user_id) }
     old_visits.pluck(:user_id).include?(id)
   end
 
@@ -467,7 +453,7 @@ private
     DASHBOARD_ATTRS.map { |field| { field => send(field) } }.reduce(&:merge)
   end
 
-  # @return [Ahoy::Event::ActiveRecord_AssociationRelation]
+  # @return [Event::ActiveRecord_AssociationRelation]
   def password_changed_events
     events.where(name: 'user_password_change')
   end
