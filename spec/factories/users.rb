@@ -35,6 +35,11 @@ FactoryBot.define do
       closed_reason_custom { 'I did not find the training useful' }
     end
 
+    factory :pre_one_login_user do
+      registered
+      gov_one_id { nil }
+    end
+
     # Personas -----------------------------------------------------------------
 
     trait :agency_childminder do

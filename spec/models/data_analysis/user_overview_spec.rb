@@ -50,7 +50,7 @@ RSpec.describe DataAnalysis::UserOverview do
         locked_out: 0,
         confirmed: 6,
         unconfirmed: 0,
-        gov_one: 1,
+        gov_one: 6,
         user_defined_roles: 2,
         started_learning: 3,
         not_started_learning: 3,
