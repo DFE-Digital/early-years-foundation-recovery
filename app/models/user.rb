@@ -50,7 +50,7 @@ class User < ApplicationRecord
   attr_accessor :context
 
   devise :database_authenticatable, :rememberable, :lockable, :timeoutable,
-          :omniauthable, omniauth_providers: [:openid_connect]
+         :omniauthable, omniauth_providers: [:openid_connect]
 
   devise :pwned_password unless Rails.env.test?
 
@@ -193,11 +193,6 @@ class User < ApplicationRecord
     Training::Module.live.select do |mod|
       module_time_to_completion.key?(mod.name)
     end
-  end
-
-  # send email to registered user if attempt is made to create account with registered email
-  def send_email_taken_notification
-    send_devise_notification(:email_taken)
   end
 
   def send_account_closed_notification

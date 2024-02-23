@@ -2,7 +2,6 @@ class NotifyMailer < GovukNotifyRails::Mailer
   ACCOUNT_CLOSED_TEMPLATE_ID = '0a4754ee-6175-444c-98a1-ebef0b14e7f7'.freeze
   ACCOUNT_CLOSED_INTERNAL_TEMPLATE_ID = 'a2dba0ef-84f1-4b4d-b50a-ce953050798e'.freeze
   ACTIVATION_TEMPLATE_ID = 'd6ab2e3b-923e-429e-abd2-cfe7be0e9193'.freeze
-  EMAIL_TAKEN_TEMPLATE_ID = '857dc6d0-7179-48bf-8079-916fedb43528'.freeze
   UNLOCK_TEMPLATE_ID = 'e18e8419-cfcc-4fcb-abdb-84f932f3cf55'.freeze
   COMPLETE_REGISTRATION_TEMPLATE_ID = 'b960eb6a-d183-484b-ac3b-93ae01b3cee1'.freeze
   START_TRAINING_TEMPLATE_ID = 'b3c2e4ff-da06-4672-8941-b2f50d37eadc'.freeze
@@ -33,17 +32,6 @@ class NotifyMailer < GovukNotifyRails::Mailer
     set_personalisation(
       email: record.email,
       user_email_address: user_email_address,
-    )
-    mail(to: record.email)
-  end
-
-  def email_taken(record)
-    set_template(EMAIL_TAKEN_TEMPLATE_ID)
-
-    set_personalisation(
-      name: record.name,
-      email: record.email,
-      reset_password_url: new_user_password_url,
     )
     mail(to: record.email)
   end

@@ -4,16 +4,6 @@ RSpec.describe NotifyMailer, type: :mailer do
   let(:user) { create(:user) }
   let(:mailbox) { User.new(email: 'child-development.training@education.gov.uk') }
 
-  describe 'email address taken' do
-    context 'when email is taken' do
-      it 'send email to user to tell them how to access their account' do
-        mail = described_class.email_taken(user)
-        expect(mail.to).to contain_exactly(user.email)
-        expect(mail.subject).to eq 'Email taken'
-      end
-    end
-  end
-
   describe 'users without email preferences' do
     context 'when user not completed registration and not opted out of emails' do
       it 'sends email to user to remind them to complete registration' do
