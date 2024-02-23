@@ -42,7 +42,7 @@ RSpec.describe Training::Module, type: :model do
     it 'returns sections' do
       expect(sections).to be_a Hash
       expect(sections.keys).to eq [1, 2, 3, 4, 5]
-      expect(sections.values.map(&:count)).to eq [7, 5, 19, 7, 1]
+      expect(sections.values.map(&:count)).to eq [7, 5, 19, 6, 1]
     end
   end
 
@@ -52,7 +52,7 @@ RSpec.describe Training::Module, type: :model do
     it 'returns subsections' do
       expect(subsections).to be_a Hash
       expect(subsections.keys).to eq [[1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [2, 0], [2, 1], [3, 0], [3, 1], [3, 2], [3, 3], [4, 0], [5, 0]]
-      expect(subsections.values.map(&:count)).to eq [1, 1, 1, 2, 2, 1, 4, 1, 1, 12, 5, 7, 1]
+      expect(subsections.values.map(&:count)).to eq [1, 1, 1, 2, 2, 1, 4, 1, 1, 12, 5, 6, 1]
     end
   end
 

@@ -41,7 +41,7 @@ module LinkHelper
   def link_to_next
     page = content.interruption_page? ? mod.content_start : content.next_item
 
-    if content.next_item.skippable? && current_user.response_for_shared(content.next_item, mod).responded?
+    if !content.interruption_page? && content.next_item.skippable? && current_user.response_for_shared(content.next_item, mod).responded?
       page = page.next_item
     end
 
@@ -60,7 +60,7 @@ module LinkHelper
         training_module_page_path(mod.name, previous_content.name)
       end
 
-    if content.previous_item.skippable? && current_user.response_for_shared(content.previous_item, mod).responded?
+    if !content.interruption_page? && content.previous_item.skippable? && current_user.response_for_shared(content.previous_item, mod).responded?
       path = training_module_page_path(mod.name, previous_content.previous_item.name)
     end
 

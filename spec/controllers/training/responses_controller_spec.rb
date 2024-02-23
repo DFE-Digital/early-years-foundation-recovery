@@ -84,7 +84,7 @@ RSpec.describe Training::ResponsesController, type: :controller do
         let(:question_name) { 'end-of-module-feedback-4' }
 
         context 'with text input' do
-          let(:answers) { [0] }
+          let(:answers) { nil }
           let(:text_input) { 'Text input for feedback question' }
 
           specify { expect(response).to have_http_status(:redirect) }
