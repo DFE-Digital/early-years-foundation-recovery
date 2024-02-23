@@ -49,19 +49,8 @@ class User < ApplicationRecord
 
   attr_accessor :context
 
-  devise :database_authenticatable, :registerable, :recoverable,
-         :validatable, :rememberable, :lockable, :timeoutable,
-         :secure_validatable, :omniauthable, omniauth_providers: [:openid_connect]
-
-  # FIXME: retire old devise functionality
-  # if Rails.application.gov_one_login?
-  #   devise :database_authenticatable, :rememberable, :lockable, :timeoutable,
-  #          :omniauthable, omniauth_providers: [:openid_connect]
-  # else
-  #   devise :database_authenticatable, :registerable, :recoverable,
-  #          :validatable, :rememberable, :confirmable, :lockable, :timeoutable,
-  #          :secure_validatable
-  # end
+  devise :database_authenticatable, :rememberable, :lockable, :timeoutable,
+          :omniauthable, omniauth_providers: [:openid_connect]
 
   devise :pwned_password unless Rails.env.test?
 
