@@ -85,7 +85,7 @@ Hero layout
   }
 
   #assessment-results .govuk-notification-banner {
-    margin-bottom: govuk-spacing(8);
+    margin-bottom: govuk-spacing(4);
   }
 
   @include govuk-media-query($until: tablet) {
