@@ -25,7 +25,7 @@
       .govuk-button-group
         = link_to_previous
 
-        - if content.confidence_question? || !current_user_response.responded?
+        - unless content.formative_question? && current_user_response.responded?
           = f.govuk_submit content.next_button_text
         - else
           = f.govuk_submit 'Responded', class: 'govuk-visually-hidden', disabled: true

@@ -1,34 +1,37 @@
 require 'rails_helper'
 
 RSpec.describe Response, type: :model do
+  subject(:response) { user.response_for(question) }
+
   before do
-    skip if ENV['DISABLE_USER_ANSWER'].blank?
+    skip unless Rails.application.migrated_answers?
+    response.update!(answers: [1], correct: true)
   end
 
-  describe 'dashboard' do
-    let(:user) { create :user }
-    let(:question) do
-      # uncached
-      # described_class.find_by(name: , training_module: { name: 'alpha' }).load.first
+  let(:user) { create :user }
 
-      # cached
-      Training::Module.by_name('alpha').page_by_name('1-1-4')
-    end
-
-    let(:response) do
-      user.response_for(question, 'alpha').tap do |response|
-        response.update(answers: [1], correct: true, schema: question.schema)
-      end
-    end
-
-    let(:headers) do
-      %w[id user_id training_module question_name answers archived correct user_assessment_id created_at updated_at schema]
-    end
-
-    let(:rows) do
-      [response]
-    end
-
-    it_behaves_like 'a data export model'
+  let(:headers) do
+    %w[
+      id
+      user_id
+      training_module
+      question_name
+      answers
+      correct
+      created_at
+      updated_at
+      question_type
+      assessment_id
+    ]
   end
+
+  let(:rows) do
+    [response]
+  end
+
+  let(:question) do
+    Training::Module.by_name('alpha').page_by_name('1-1-4-1')
+  end
+
+  it_behaves_like 'a data export model'
 end

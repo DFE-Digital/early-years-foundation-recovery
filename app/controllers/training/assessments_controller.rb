@@ -13,7 +13,7 @@ module Training
     layout 'hero'
 
     def new
-      assessment.archive!
+      assessment.retake! # TODO: permit testers to try again
       redirect_to training_module_page_path(mod.name, mod.assessment_intro_page.name)
     end
 

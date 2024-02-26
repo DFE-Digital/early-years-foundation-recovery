@@ -27,7 +27,7 @@ module Training
         uid: #{id}
         module uid: #{parent.id}
         module name: #{parent.name}
-        published at: #{published_at}
+        published at: #{published_at || 'Management Key Missing'}
         page type: #{page_type}
 
         ---

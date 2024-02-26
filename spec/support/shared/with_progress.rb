@@ -52,11 +52,6 @@ RSpec.shared_context 'with progress' do
   end
 
   # @param mod [Training::Module]
-  def fail_summative_assessment(mod)
-    create(:user_assessment, user_id: user.id, module: mod.name)
-  end
-
-  # @param mod [Training::Module]
   def view_pages_upto_formative_question(mod, count = 1)
     view_pages_upto(mod, 'formative_questionnaire', count)
   end

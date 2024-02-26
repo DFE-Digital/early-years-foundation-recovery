@@ -5,10 +5,17 @@ RSpec.describe DataAnalysis::SummativeQuiz do
   let(:user_2) { create :user, :agency_childminder }
 
   before do
-    create :user_assessment, :passed, user_id: user_1.id, score: 100, module: 'module_1'
-    create :user_assessment, :failed, user_id: user_1.id, score: 0, module: 'module_1'
-    create :user_assessment, :passed, user_id: user_2.id, score: 80, module: 'module_1'
-    create :user_assessment, :failed, user_id: user_2.id, score: 0, module: 'module_1'
+    if Rails.application.migrated_answers?
+      create :assessment, :failed, user: user_1
+      create :assessment, :passed, user: user_1
+      create :assessment, :failed, user: user_2
+      create :assessment, :passed, user: user_2
+    else
+      create :user_assessment, :passed, user_id: user_1.id, score: 100, module: 'module_1'
+      create :user_assessment, :failed, user_id: user_1.id, score: 0, module: 'module_1'
+      create :user_assessment, :passed, user_id: user_2.id, score: 80, module: 'module_1'
+      create :user_assessment, :failed, user_id: user_2.id, score: 0, module: 'module_1'
+    end
   end
 
   describe '.pass_rate' do

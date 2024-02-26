@@ -100,7 +100,11 @@ describe 'LinkHelper', type: :helper do
 
     context 'with a failed assessment' do
       before do
-        create :user_assessment, :failed, user_id: user.id, score: 0, module: mod.name
+        if Rails.application.migrated_answers?
+          create :assessment, :failed, user: user, training_module: mod.name
+        else
+          create :user_assessment, :failed, user_id: user.id, score: 0, module: mod.name
+        end
       end
 
       it 'links to retake' do
@@ -111,13 +115,18 @@ describe 'LinkHelper', type: :helper do
 
     context 'with a passed assessment' do
       before do
-        create :user_assessment, user_id: user.id, module: mod.name
+        if Rails.application.migrated_answers?
+          create :assessment, :passed, user: user, training_module: mod.name
+        else
+          create :user_assessment, user_id: user.id, module: mod.name
+        end
 
         mod.summative_questions.map do |question|
-          if ENV['DISABLE_USER_ANSWER'].present?
+          if Rails.application.migrated_answers?
             create :response, user: user,
                               training_module: mod.name,
                               question_name: question.name,
+                              question_type: 'summative',
                               answers: question.correct_answers
           else
             create :user_answer, user: user,
@@ -171,7 +180,11 @@ describe 'LinkHelper', type: :helper do
 
     context 'with failed assessment' do
       before do
-        create :user_assessment, :failed, user_id: user.id, score: 0, module: mod.name
+        if Rails.application.migrated_answers?
+          create :assessment, :failed, user: user, training_module: mod.name
+        else
+          create :user_assessment, :failed, user_id: user.id, score: 0, module: mod.name
+        end
       end
 
       it 'targets new assessment attempt' do

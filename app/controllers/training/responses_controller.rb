@@ -1,3 +1,8 @@
+#
+# TODO: Logic around potential FK question_name changes that could cause an assessment to contain more than 10 responses
+# TODO: Checks that scores are numeric, otherwise zero is recorded
+#
+#
 module Training
   class ResponsesController < ApplicationController
     include Learning
@@ -29,7 +34,7 @@ module Training
     # @note migrate from user_answer to response
     # @see User#response_for
     def response_params
-      if ENV['DISABLE_USER_ANSWER'].present?
+      if Rails.application.migrated_answers?
         params.require(:response).permit!
       else
         params.require(:user_answer).permit!
@@ -42,7 +47,7 @@ module Training
     def save_response!
       correct_answers = content.confidence_question? || content.opinion_question? ? true : content.correct_answers.eql?(user_answers)
 
-      if ENV['DISABLE_USER_ANSWER'].present? && ENV['FEEDBACK_FORM'].present?
+      if Rails.application.migrated_answers? && ENV['FEEDBACK_FORM'].present?
         current_user_response.update(answers: user_answers, correct: correct_answers, text_input: user_answer_text)
       else
         current_user_response.update(answer: user_answers, correct: correct_answers)
@@ -59,7 +64,7 @@ module Training
     end
 
     def redirect
-      assessment.complete! if content.last_assessment?
+      assessment.grade! if content.last_assessment?
 
       if content.formative_question?
         redirect_to training_module_question_path(mod.name, content.name)
@@ -70,7 +75,7 @@ module Training
 
     # @return [Event] Update action
     def track_question_answer
-      if ENV['DISABLE_USER_ANSWER'].present?
+      if Rails.application.migrated_answers?
         track('questionnaire_answer',
               uid: content.id,
               mod_uid: mod.id,

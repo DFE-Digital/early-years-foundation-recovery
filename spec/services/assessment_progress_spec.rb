@@ -5,12 +5,18 @@ RSpec.describe AssessmentProgress do
 
   include_context 'with progress'
 
+  let(:attempt) do
+    create :assessment, training_module: 'alpha', user: user
+  end
+
   before do
     questions.each do |question_name, answers|
-      if ENV['DISABLE_USER_ANSWER'].present?
+      if Rails.application.migrated_answers?
         create :response, user: user,
+                          assessment: attempt,
                           training_module: 'alpha',
                           question_name: question_name,
+                          question_type: 'summative',
                           answers: answers
       else
         create :user_answer, user: user,

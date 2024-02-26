@@ -1,10 +1,11 @@
-# Summative assessment evaluation
+# Assessment grading
 #
+# An assessment is created when the first summative question is answered?
 class AssessmentProgress
   extend Dry::Initializer
 
-  # @return [Integer]
-  THRESHOLD = 70
+  # @return [Float]
+  THRESHOLD = 70.0
 
   # @!attribute [r] user
   #   @return [User]
@@ -15,33 +16,48 @@ class AssessmentProgress
 
   # @see Training::ResponsesController#redirect
   #
-  # @return [Array<UserAnswer, Response>]
-  def complete!
-    update_responses(user_assessment_id: user_assessment.id)
+  # @return [Array<UserAnswer>, Assessment, nil]
+  def grade!
+    if Rails.application.migrated_answers?
+      unless graded?
+        assessment.update(
+          score: score,
+          passed: passed?,
+          completed_at: Time.zone.now,
+        )
+      end
+    else
+      update_responses(user_assessment_id: assessment.id)
+    end
   end
 
   # @see Training::AssessmentsController#new
   #
-  # @return [Array<UserAnswer, Response>]
-  def archive!
-    update_responses(archived: true)
+  # @return [Array<UserAnswer>] deprecate
+  def retake!
+    if Rails.application.migrated_answers?
+      :no_op
+    else
+      update_responses(archived: true)
+    end
   end
 
-  # @see ContentHelper#results_banner
-  #
-  # @return [Hash]
-  def result
-    { success: passed?, score: score.to_i }
-  end
-
-  # @return [Symbol]
+  # @see ContentHelper#assessment_banner
+  # @return [Symbol] I18n key
   def status
-    passed? ? :passed : :failed
+    passed? ? :pass : :fail
   end
+
+  # @return [Boolean, nil]
+  delegate :graded?, to: :assessment, allow_nil: true
 
   # @return [Boolean]
   def passed?
-    score >= THRESHOLD
+    if Rails.application.migrated_answers?
+      assessment&.passed? || score >= THRESHOLD
+    else
+      score >= THRESHOLD
+    end
   end
 
   # @return [Boolean]
@@ -49,17 +65,24 @@ class AssessmentProgress
     !passed?
   end
 
-  # TODO: assessments_type is a useless field and should be removed
-  #
+  # deprecate see track_events
   # @return [Boolean] CTA failed_attempt state
   def attempted?
-    user.user_assessments.where(assessments_type: 'summative_assessment', module: mod.name).any?
+    if Rails.application.migrated_answers?
+      assessment.present?
+    else
+      user.user_assessments.where(assessments_type: 'summative_assessment', module: mod.name).any?
+    end
   end
 
   # @return [Float] percentage of correct responses
   def score
-    (correct_responses.count.to_f / mod.summative_questions.count) * 100
-  rescue ZeroDivisionError
+    if Rails.application.migrated_answers?
+      assessment.score || (correct_responses.count.to_f / mod.summative_questions.count) * 100
+    else
+      (correct_responses.count.to_f / mod.summative_questions.count) * 100
+    end
+  rescue ZeroDivisionError, NoMethodError
     0.0
   end
 
@@ -68,14 +91,11 @@ class AssessmentProgress
     assessment_responses.reject(&:correct?)
   end
 
-private
-
+  # delegate :responses, to: :assessment # swap to delegation
   # @return [Array<Response>, Array<UserAnswers>]
   def assessment_responses
-    if ENV['DISABLE_USER_ANSWER'].present?
-      user.responses
-        .unarchived.where(training_module: mod.name)
-        .select { |response| response.question.summative_question? }
+    if Rails.application.migrated_answers?
+      assessment.responses
     else
       user.user_answers
         .not_archived.where(module: mod.name)
@@ -83,25 +103,30 @@ private
     end
   end
 
-  # @return [Array<UserAnswer, Response>]
+  # @return [Array<UserAnswer>] deprecate
   def update_responses(params)
     assessment_responses.each { |response| response.update!(params) }
   end
 
-  # @note #correct? uses answers validate against question
+  # @note #correct? validates against current question options
   # @return [Array<Response>]
   def correct_responses
     assessment_responses.select(&:correct?)
   end
 
-  # @return [UserAssessment]
-  def user_assessment
-    @user_assessment ||= UserAssessment.create!(
-      user_id: user.id,
-      score: score.to_i,
-      status: status,
-      module: mod.name,
-      assessments_type: 'summative_assessment',
-    )
+  # TODO: drop memoisation
+  # @return [UserAssessment, Assessment]
+  def assessment
+    @assessment ||= if Rails.application.migrated_answers?
+                      user.assessments.where(training_module: mod.name).order(:started_at).last
+                    else
+                      UserAssessment.create!(
+                        user_id: user.id,
+                        score: score.to_i,
+                        status: (passed? ? 'passed' : 'failed'),
+                        module: mod.name,
+                        assessments_type: 'summative_assessment',
+                      )
+                    end
   end
 end

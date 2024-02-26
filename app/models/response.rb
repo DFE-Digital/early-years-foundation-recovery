@@ -1,18 +1,25 @@
 #
-# Persisted answers to CMS Questions
+# Submitted response to Training::Question
 #
 class Response < ApplicationRecord
   include ToCsv
 
   belongs_to :user, optional: true
+  belongs_to :assessment, optional: true
 
   validates :answers, presence: true, unless: -> { question.opinion_question? && question.options.empty? }
   validates :text_input, presence: true, if: -> { question.opinion_question? && question.options.empty? }
 
-  scope :unarchived, -> { where(archived: false) }
-  scope :formative, -> { where('schema->>4 = ?', 'formative') }
-  scope :summative, -> { where('schema->>4 = ?', 'summative') }
-  scope :confidence, -> { where('schema->>4 = ?', 'confidence') }
+  scope :incorrect, -> { where(correct: false) }
+  scope :correct, -> { where(correct: true) }
+
+  scope :ungraded, -> { where(graded: false) }
+  scope :graded, -> { where(graded: true) }
+
+  scope :formative, -> { where(question_type: 'formative') }
+  scope :summative, -> { where(question_type: 'summative') }
+  scope :confidence, -> { where(question_type: 'confidence') }
+  scope :feedback, -> { where(question_type: 'feedback') }
 
   delegate :to_partial_path, :legend, to: :question
 
@@ -26,14 +33,20 @@ class Response < ApplicationRecord
     mod.page_by_name(question_name)
   end
 
-  # Disable if already answered unless confidence check
   # @return [Array<Training::Answer::Option>]
   def options
     if question.confidence_question? || question.opinion_question?
       question.options(checked: answers)
-    else
+    elsif question.formative_question? || assessment&.graded?
       question.options(checked: answers, disabled: responded?)
+    else
+      question.options(checked: answers)
     end
+  end
+
+  # @return [Boolean]
+  def archived?
+    archived
   end
 
   # @return [Boolean]

@@ -83,12 +83,16 @@ module LinkHelper
   # @param mod [Training::Module]
   # @return [String, nil]
   def link_to_retake_or_results(mod)
-    return unless assessment_progress_service(mod).attempted?
+    if Rails.application.migrated_answers?
+      return unless assessment_progress_service(mod).graded?
+    else
+      return unless assessment_progress_service(mod).attempted?
+    end
 
     if assessment_progress_service(mod).failed?
       govuk_link_to 'Retake end of module test', new_training_module_assessment_path(mod.name), no_visited_state: true, class: 'card-link--retake'
     else
-      govuk_link_to 'View previous test result', training_module_assessment_path(mod.name, mod.assessment_results_page.name)
+      govuk_link_to 'View previous test result', training_module_assessment_path(mod.name, mod.assessment_results_page.name), no_visited_state: true, class: 'card-link--retake'
     end
   end
 

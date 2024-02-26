@@ -10,7 +10,7 @@ RSpec.describe ContentTestSchema do
   end
 
   before do
-    skip 'WIP' if ENV['DISABLE_USER_ANSWER'].present?
+    skip 'WIP' if Rails.application.migrated_answers?
   end
 
   context 'when pass is true' do

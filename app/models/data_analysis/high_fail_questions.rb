@@ -27,7 +27,7 @@ module DataAnalysis
 
       # @return [Hash{Array<String> => Integer}]
       def question_attempts
-        if ENV['DISABLE_USER_ANSWER'].present?
+        if Rails.application.migrated_answers?
           Response.summative.group(:training_module, :question_name).count
         else
           UserAnswer.summative.group(:module, :name).count
@@ -36,8 +36,8 @@ module DataAnalysis
 
       # @return [Hash{Array<String> => Integer}]
       def question_failures
-        if ENV['DISABLE_USER_ANSWER'].present?
-          Response.summative.where(correct: false).group(:training_module, :question_name).count
+        if Rails.application.migrated_answers?
+          Response.summative.incorrect.group(:training_module, :question_name).count
         else
           UserAnswer.summative.where(correct: false).group(:module, :name).count
         end

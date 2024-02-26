@@ -85,11 +85,11 @@ jobs:
         name: Run rubocop
         run: bundle exec rubocop
       # Answer migration feature test
-      # -
-      #   name: Run test suite
-      #   run: bundle exec rspec
-      #   env:
-      #     DISABLE_USER_ANSWER: true
+      -
+        name: Run test suite
+        run: bundle exec rspec
+        env:
+          DISABLE_USER_ANSWER: true
       # Gov One feature test
       -
         name: Run test suite
