@@ -4,7 +4,7 @@ RSpec.describe Training::ResponsesController, type: :controller do
   before do
     sign_in create(:user, :registered)
 
-    if ENV['DISABLE_USER_ANSWER'].present?
+    if Rails.application.migrated_answers?
       patch :update, params: {
         training_module_id: 'alpha',
         id: question_name,
@@ -20,7 +20,7 @@ RSpec.describe Training::ResponsesController, type: :controller do
   end
 
   let(:records) do
-    if ENV['DISABLE_USER_ANSWER'].present?
+    if Rails.application.migrated_answers?
       Response.count
     else
       UserAnswer.count

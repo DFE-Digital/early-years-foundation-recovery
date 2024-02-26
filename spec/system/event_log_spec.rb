@@ -31,8 +31,11 @@ RSpec.describe 'Event log' do
       end
 
       it 'tracks answers and completion' do
-        # TODO: type will change to 'confidence' when CMS 'page_type' is updated
-        expect(events.where(name: 'questionnaire_answer').where_properties(type: 'confidence_check').size).to eq 4
+        if Rails.application.migrated_answers?
+          expect(events.where(name: 'questionnaire_answer').where_properties(type: 'confidence').size).to eq 4
+        else
+          expect(events.where(name: 'questionnaire_answer').where_properties(type: 'confidence_check').size).to eq 4
+        end
         expect(events.where(name: 'confidence_check_complete').size).to eq 1
       end
     end
@@ -73,7 +76,11 @@ RSpec.describe 'Event log' do
       end
 
       it 'tracks answers and successful attempt' do
-        expect(events.where(name: 'questionnaire_answer').where_properties(success: true, type: 'summative_assessment').size).to eq 10
+        if Rails.application.migrated_answers?
+          expect(events.where(name: 'questionnaire_answer').where_properties(success: true, type: 'summative').size).to eq 10
+        else
+          expect(events.where(name: 'questionnaire_answer').where_properties(success: true, type: 'summative_assessment').size).to eq 10
+        end
         expect(events.where(name: 'summative_assessment_complete').where_properties(score: 100, success: true).size).to eq 1
       end
     end
@@ -89,8 +96,12 @@ RSpec.describe 'Event log' do
       end
 
       it 'tracks answers and failed attempt' do
-        # TODO: type will change to 'summative' when CMS 'page_type' is updated
-        expect(events.where(name: 'questionnaire_answer').where_properties(success: false, type: 'summative_assessment').size).to eq 10
+        if Rails.application.migrated_answers?
+          expect(events.where(name: 'questionnaire_answer').where_properties(success: false, type: 'summative').size).to eq 10
+        else
+          expect(events.where(name: 'questionnaire_answer').where_properties(success: false, type: 'summative_assessment').size).to eq 10
+        end
+
         expect(events.where(name: 'summative_assessment_complete').where_properties(score: 0, success: false).size).to eq 1
       end
     end
@@ -107,8 +118,11 @@ RSpec.describe 'Event log' do
     end
 
     it 'tracks answers' do
-      # TODO: type will change to 'formative' when CMS 'page_type' is updated
-      expect(events.where(name: 'questionnaire_answer').where_properties(success: true, type: 'formative_assessment').size).to eq 3
+      if Rails.application.migrated_answers?
+        expect(events.where(name: 'questionnaire_answer').where_properties(success: true, type: 'formative').size).to eq 3
+      else
+        expect(events.where(name: 'questionnaire_answer').where_properties(success: true, type: 'formative_assessment').size).to eq 3
+      end
     end
   end
 

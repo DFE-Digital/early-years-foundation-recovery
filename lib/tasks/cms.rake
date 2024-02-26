@@ -18,19 +18,27 @@ namespace :eyfs do
 
     desc 'Define Contentful entry models'
     task migrate: :environment do
-      migrations = Dir[Rails.root.join('cms/migrate/*')]
-      token = ContentfulRails.configuration.management_token
-      space = ContentfulRails.configuration.space
-      env = ContentfulRails.configuration.environment
-
-      migrations.each do |file|
+      Dir[Rails.root.join('cms/migrate/*')].each do |file|
         system <<~CMD
           contentful space migration \
-          --management-token #{token} \
-          --space-id #{space} \
-          --environment-id #{env} \
+          --management-token #{ContentfulRails.configuration.management_token} \
+          --space-id #{ContentfulRails.configuration.space} \
+          --environment-id #{ContentfulRails.configuration.environment} \
           --yes #{file}
         CMD
+      end
+    end
+
+    desc 'Change multiple Contentful entry values'
+    task bulk_edit: :environment do
+      Dir[Rails.root.join('cms/bulk_edit/*')].each do |file|
+        # system <<~CMD
+        #   contentful space migration \
+        #   --management-token #{ContentfulRails.configuration.management_token} \
+        #   --space-id #{ContentfulRails.configuration.space} \
+        #   --environment-id #{ContentfulRails.configuration.environment} \
+        #   --yes #{file}
+        # CMD
       end
     end
 

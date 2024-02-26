@@ -26,14 +26,14 @@ module.exports = function(migration) {
     type: 'Symbol',
     required: true,
     defaultValue: {
-      'en-US': 'formative_questionnaire',
+      'en-US': 'formative',
     },
     validations: [
       {
         in: [
-         'formative_questionnaire',
-         'summative_questionnaire',
-         'confidence_questionnaire',
+         'formative',
+         'summative',
+         'confidence',
         ]
       }
     ]

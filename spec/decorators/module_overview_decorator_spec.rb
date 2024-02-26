@@ -36,7 +36,11 @@ RSpec.describe ModuleOverviewDecorator do
 
     context 'when the assessment was failed' do
       before do
-        fail_summative_assessment(bravo)
+        if Rails.application.migrated_answers?
+          create :assessment, :failed, user: user, training_module: 'bravo'
+        else
+          create :user_assessment, user_id: user.id, module: 'bravo'
+        end
       end
 
       it 'retakes the assessment' do

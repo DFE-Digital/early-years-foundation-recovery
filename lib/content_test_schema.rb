@@ -133,7 +133,7 @@ private
   # @param option [Integer]
   # @return [String]
   def field_name(option)
-    model = ENV['DISABLE_USER_ANSWER'].present? ? 'response' : 'user-answer'
+    model = Rails.application.migrated_answers? ? 'response' : 'user-answer'
     "#{model}-answers-#{option}-field"
   end
 
