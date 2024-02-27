@@ -47,7 +47,7 @@ module Training
     def save_response!
       correct_answers = content.confidence_question? || content.opinion_question? ? true : content.correct_answers.eql?(user_answers)
 
-      if Rails.application.migrated_answers? && ENV['FEEDBACK_FORM'].present?
+      if Rails.application.migrated_answers?
         current_user_response.update(answers: user_answers, correct: correct_answers, text_input: user_answer_text)
       else
         current_user_response.update(answer: user_answers, correct: correct_answers)

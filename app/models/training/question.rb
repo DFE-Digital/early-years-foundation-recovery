@@ -37,6 +37,11 @@ module Training
       page_type == 'opinion'
     end
 
+    # @return [Boolean] feedback free text
+    def free_text?
+      opinion_question? && options.empty?
+    end
+
     # @return [Boolean] event tracking
     def first_confidence?
       parent.confidence_questions.first.eql?(self)

@@ -96,11 +96,6 @@ module EarlyYearsFoundationRecovery
       Types::Params::Bool[ENV.fetch('GOV_ONE_LOGIN', false)]
     end
 
-    # @return [Boolean]
-    def feedback_form?
-      Types::Params::Bool[ENV.fetch('FEEDBACK_FORM', false)]
-    end
-
     def migrated_answers?
       Types::Params::Bool[ENV.fetch('DISABLE_USER_ANSWER', false)]
     end

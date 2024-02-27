@@ -4,7 +4,7 @@ RSpec.describe 'End of module feedback form' do
   include_context 'with progress'
   include_context 'with user'
 
-  let(:second_question_path) { '/modules/alpha/questionnaires/end-of-module-feedback-2' }
+  let(:first_question_path) { '/modules/alpha/questionnaires/end-of-module-feedback-1' }
   let(:third_question_path) { '/modules/alpha/questionnaires/end-of-module-feedback-3' }
 
   it 'shows feedback question' do
@@ -23,7 +23,7 @@ RSpec.describe 'End of module feedback form' do
 
   context 'when no answer is submitted' do
     it 'displays an error message' do
-      visit second_question_path
+      visit first_question_path
       click_on 'Next'
       expect(page).to have_content 'Please select an option'
     end

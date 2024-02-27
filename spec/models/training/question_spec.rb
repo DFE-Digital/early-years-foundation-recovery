@@ -108,6 +108,16 @@ RSpec.describe Training::Question, type: :model do
         expect(first_option.label).to eq 'Strongly agree'
       end
     end
+
+    context 'when the question is a feedback free text question' do
+      subject(:question) do
+        Training::Module.by_name('alpha').page_by_name('end-of-module-feedback-4')
+      end
+
+      specify do
+        expect(question.answers).to eq []
+      end
+    end
   end
 
   describe '#debug_summary' do

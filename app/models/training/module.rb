@@ -245,7 +245,7 @@ module Training
 
     # @return [Array<Training::Question>]
     def opinion_questions
-      content.select(&:opinion?)
+      content.select(&:opinion_question?)
     end
 
     # @param text [String]

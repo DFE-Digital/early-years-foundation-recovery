@@ -41,7 +41,7 @@ module LinkHelper
   def link_to_next
     page = content.interruption_page? ? mod.content_start : content.next_item
 
-    if !content.interruption_page? && content.next_item.skippable? && current_user.response_for_shared(content.next_item, mod).responded?
+    if !content.interruption_page? && !content.video_page? && content.next_item.skippable? && current_user.response_for_shared(content.next_item, mod).responded?
       page = page.next_item
     end
 

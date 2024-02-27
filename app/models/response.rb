@@ -7,8 +7,8 @@ class Response < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :assessment, optional: true
 
-  validates :answers, presence: true, unless: -> { question.opinion_question? && question.options.empty? }
-  validates :text_input, presence: true, if: -> { question.opinion_question? && question.options.empty? }
+  validates :answers, presence: true, unless: -> { free_text_answer? }
+  validates :text_input, presence: true, if: -> { free_text_answer? }
 
   scope :incorrect, -> { where(correct: false) }
   scope :correct, -> { where(correct: true) }
@@ -62,6 +62,11 @@ class Response < ApplicationRecord
   # @return [Boolean]
   def revised?
     correct && !correct?
+  end
+
+  # @return [Boolean]
+  def free_text_answer?
+    question.free_text? && text_input.present? unless training_module.nil?
   end
 
   ########################
