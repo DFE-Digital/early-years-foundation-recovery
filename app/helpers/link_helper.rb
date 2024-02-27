@@ -34,9 +34,7 @@ module LinkHelper
 
   # @return [String] next page (ends on certificate)
   def link_to_next
-    page = content.interruption_page? ? mod.content_start : content.next_item
-
-    govuk_button_link_to content.next_button_text, training_module_page_path(mod.name, page.name),
+    govuk_button_link_to next_page.text, training_module_page_path(mod.name, next_page.name),
                          id: 'next-action',
                          aria: { label: t('pagination.next') }
   end
@@ -73,5 +71,15 @@ module LinkHelper
     else
       govuk_link_to 'View previous test result', training_module_assessment_path(mod.name, mod.assessment_results_page.name), no_visited_state: true, class: 'card-link--retake'
     end
+  end
+
+  # @return [NextPageDecorator]
+  def next_page
+    NextPageDecorator.new(
+      user: current_user,
+      mod: mod,
+      content: content,
+      assessment: assessment_progress_service(mod),
+    )
   end
 end
