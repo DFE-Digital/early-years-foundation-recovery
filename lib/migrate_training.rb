@@ -25,7 +25,7 @@ class MigrateTraining
   # @return [Integer, nil]
   option :resume, Types::Integer, optional: true, reader: :private
 
-  # @return [?]
+  # @return [nil]
   def call
     ActiveRecord::Base.transaction do
       log "Migration started: #{Time.zone.now}"
@@ -106,7 +106,7 @@ private
     assessment
   end
 
-  # @param user_answer [UserAssessment]
+  # @param user_assessment [UserAssessment]
   # @return [Hash<Symbol=>Mixed>]
   def assessment_params(user_assessment)
     {
