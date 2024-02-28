@@ -72,9 +72,9 @@ class ApplicationController < ActionController::Base
 
 private
 
-  # @return [Boolean] health check and landing page requests are exempt
+  # @return [Boolean]
   def maintenance?
-    return false if %w[/maintenance /health].include?(request.path)
+    return false if Rails.configuration.protected_endpoints.include?(request.path)
 
     Rails.application.maintenance?
   end
