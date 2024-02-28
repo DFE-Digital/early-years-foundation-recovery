@@ -2,7 +2,6 @@ require_relative 'boot'
 require 'rails/all'
 
 Bundler.require(*Rails.groups)
-# require 'grover'
 
 module EarlyYearsFoundationRecovery
   class Application < Rails::Application
@@ -17,6 +16,15 @@ module EarlyYearsFoundationRecovery
     # config.eager_load_paths << Rails.root.join("extras")
     # config.time_zone = ENV.fetch('TZ', 'Europe/London')
     config.service_url = (Rails.env.production? ? 'https://' : 'http://') + ENV.fetch('DOMAIN', 'child-development-training')
+
+    # @see #maintenance?
+    # These endpoints are exempt from maintenance page redirection
+    config.protected_endpoints = %w[
+      /maintenance
+      /health
+      /change
+      /release
+    ]
 
     config.middleware.use Grover::Middleware
     config.active_record.yaml_column_permitted_classes = [Symbol]
