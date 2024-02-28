@@ -114,6 +114,7 @@ module Training
 
     # Selects from ordered array
     #
+    # @param id [String]
     # @return [Training::Page, Training::Video, Training::Question]
     def page_by_id(id)
       pages.find { |page| page.id.eql?(id) }
@@ -121,6 +122,7 @@ module Training
 
     # Selects from ordered array
     #
+    # @param name [String]
     # @return [Training::Page, Training::Video, Training::Question]
     def page_by_name(name)
       pages.find { |page| page.name.eql?(name) }

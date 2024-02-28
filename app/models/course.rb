@@ -22,4 +22,17 @@ class Course < ContentfulModel::Base
   def feedback
     super.to_a
   end
+
+  # @return [Array<Training::Question>] with parent
+  def pages
+    feedback.map do |question|
+      question.define_singleton_method(:parent) { Course.config }
+      question
+    end
+  end
+
+  # @return [Training::Question]
+  def page_by_id(id)
+    pages.find { |page| page.id.eql?(id) }
+  end
 end
