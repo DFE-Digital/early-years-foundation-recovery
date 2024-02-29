@@ -39,13 +39,7 @@ module LinkHelper
 
   # @return [String] next page (ends on certificate)
   def link_to_next
-    page = content.interruption_page? ? mod.content_start : content.next_item
-
-    if !content.interruption_page? && !content.video_page? && content.next_item.skippable? && current_user.response_for_shared(content.next_item, mod).responded?
-      page = page.next_item
-    end
-
-    govuk_button_link_to content.next_button_text, training_module_page_path(mod.name, page.name),
+    govuk_button_link_to next_page.text, training_module_page_path(mod.name, next_page.name),
                          id: 'next-action',
                          aria: { label: t('pagination.next') }
   end
@@ -101,5 +95,15 @@ module LinkHelper
     return unless content.opinion_intro?
 
     govuk_link_to 'Skip feedback', training_module_page_path(mod.name, mod.thankyou_page.name)
+  end
+
+  # @return [NextPageDecorator]
+  def next_page
+    NextPageDecorator.new(
+      user: current_user,
+      mod: mod,
+      content: content,
+      assessment: assessment_progress_service(mod),
+    )
   end
 end

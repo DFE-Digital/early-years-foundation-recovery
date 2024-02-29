@@ -132,15 +132,6 @@ module Training
       end
     end
 
-    # @return [String] decorator
-    def next_button_text
-      if summative_question?
-        last_assessment? ? 'Finish test' : 'Save and continue'
-      else
-        'Next'
-      end
-    end
-
   private
 
     # @return [Array<Array>]

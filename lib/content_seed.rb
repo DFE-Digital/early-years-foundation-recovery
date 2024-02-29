@@ -10,7 +10,7 @@ class ContentSeed
   option :user, Types.Instance(User), required: true
   # @!attribute [r] mod
   #   @return [Training::Module]
-  option :mod, Types.Instance(Training::Module), required: true
+  option :mod, Types::TrainingModule, required: true
 
   # @return [Array<Array>]
   def call
