@@ -46,13 +46,17 @@ private
 
   # @return [nil]
   def migrate!
-    UserAnswer.find_each(start: resume) do |user_answer|
-      if valid?(user_answer)
-        response = process_user_answer(user_answer)
-        log response.attributes.to_json, alert: false
-      else
-        log "User: #{user_answer.user_id} UserAnswer: #{user_answer.id}"
+    UserAnswer.find_in_batches(start: resume, batch_size: 100) do |group|
+      group.each do |user_answer|
+        if valid?(user_answer)
+          response = process_user_answer(user_answer)
+          log response.attributes.to_json, alert: false
+        else
+          log "User: #{user_answer.user_id} UserAnswer: #{user_answer.id}"
+        end
       end
+
+      # GC.start
     end
   end
 
@@ -140,7 +144,7 @@ private
   # @param alert [Boolean] Send to Sentry
   # @return [String, nil]
   def log(message, alert: true)
-    if ENV['RAILS_LOG_TO_STDOUT'].present?
+    if Rails.env.production?
       Rails.logger.info(message)
 
       if alert
