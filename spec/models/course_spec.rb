@@ -17,9 +17,8 @@ describe Course, type: :model do
     end
 
     it 'feedback' do
-      expect(course.feedback).to be_empty
-      # - only one question type
-      # - number of questions
+      expect(course.feedback.count).to eq 5
+      expect(course.feedback.first.page_type).to eq 'opinion'
     end
   end
 end
