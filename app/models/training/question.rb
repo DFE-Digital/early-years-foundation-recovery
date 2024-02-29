@@ -14,8 +14,15 @@ module Training
       @answer ||= Answer.new(json: json)
     end
 
+    # @return [Boolean]
+    def skippable?
+      !always_show_question
+    end
+
     # @return [String] powered by JSON not type
     def to_partial_path
+      return 'training/questions/opinion_radio_buttons' if opinion_question?
+
       partial = multi_select? ? 'check_boxes' : 'radio_buttons'
       partial = "learning_#{partial}" if formative_question?
       "training/questions/#{partial}"
@@ -23,7 +30,16 @@ module Training
 
     # @return [Boolean]
     def multi_select?
-      confidence_question? ? false : answer.multi_select?
+      confidence_question? || opinion_question? ? false : answer.multi_select?
+    end
+
+    def opinion_question?
+      page_type == 'opinion'
+    end
+
+    # @return [Boolean] feedback free text
+    def free_text?
+      opinion_question? && options.empty?
     end
 
     # @return [Boolean] event tracking
@@ -41,6 +57,16 @@ module Training
       parent.summative_questions.last.eql?(self)
     end
 
+    # @return [Boolean] event tracking
+    def first_feedback?
+      parent.opinion_questions.first.eql?(self)
+    end
+
+    # @return [Boolean] event tracking
+    def last_feedback?
+      parent.opinion_questions.last.eql?(self)
+    end
+
     # @return [Boolean]
     def true_false?
       return false if multi_select?
@@ -55,6 +81,7 @@ module Training
         formative_questionnaire: 'formative_assessment',
         summative_questionnaire: 'summative_assessment',
         confidence_questionnaire: 'confidence_check',
+        opinion: 'opinion',
       }.fetch(page_type.to_sym)
     end
 
@@ -67,6 +94,7 @@ module Training
         summative_questionnaire: 'summative',
         summative: 'summative',
         confidence_questionnaire: 'confidence',
+        opinion: 'opinion',
         confidence: 'confidence',
       }.fetch(page_type.to_sym)
     end
@@ -97,6 +125,8 @@ module Training
 
           #{body}
         LEGEND
+      elsif opinion_question?
+        body.to_s
       else
         "#{body} (Select one answer)"
       end

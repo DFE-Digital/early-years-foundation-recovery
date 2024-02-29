@@ -32,6 +32,11 @@ module LinkHelper
     [text, path]
   end
 
+  # @return [Boolean]
+  def one_off_question?
+    always_show_question.eql?(false)
+  end
+
   # @return [String] next page (ends on certificate)
   def link_to_next
     govuk_button_link_to next_page.text, training_module_page_path(mod.name, next_page.name),
@@ -41,18 +46,30 @@ module LinkHelper
 
   # @return [String] previous page or module overview
   def link_to_previous
+    previous_content = content.previous_item
     path =
       if content.interruption_page?
         training_module_path(mod.name)
       else
-        training_module_page_path(mod.name, content.previous_item.name)
+        training_module_page_path(mod.name, previous_content.name)
       end
 
-    style = content.section? ? 'section-intro-previous-button' : 'govuk-button--secondary'
+    if !content.interruption_page? && content.previous_item.skippable? && current_user.response_for_shared(content.previous_item, mod).responded?
+      path = training_module_page_path(mod.name, previous_content.previous_item.name)
+    end
 
-    govuk_button_link_to 'Previous', path,
-                         class: style,
-                         aria: { label: t('pagination.previous') }
+    style = content.section? && !content.opinion_intro? ? 'section-intro-previous-button' : 'govuk-button--secondary'
+
+    # Check if feedback questions have been skipped
+    if content.thankyou? && !current_user.response_for_shared(content.previous_item, mod).responded?
+      govuk_button_link_to 'Previous', training_module_page_path(mod.name, mod.opinion_intro_page.name),
+                           class: style,
+                           aria: { label: t('pagination.previous') }
+    else
+      govuk_button_link_to 'Previous', path,
+                           class: style,
+                           aria: { label: t('pagination.previous') }
+    end
   end
 
   # Bottom of my-modules card component
@@ -71,6 +88,13 @@ module LinkHelper
     else
       govuk_link_to 'View previous test result', training_module_assessment_path(mod.name, mod.assessment_results_page.name), no_visited_state: true, class: 'card-link--retake'
     end
+  end
+
+  # @return [String, nil] thank you page (skips feedback questions)
+  def link_to_skip
+    return unless content.opinion_intro?
+
+    govuk_link_to 'Skip feedback', training_module_page_path(mod.name, mod.thankyou_page.name)
   end
 
   # @return [NextPageDecorator]

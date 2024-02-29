@@ -4,10 +4,11 @@
 class Response < ApplicationRecord
   include ToCsv
 
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :assessment, optional: true
 
-  validates :answers, presence: true
+  validates :answers, presence: true, unless: -> { free_text_answer? }
+  validates :text_input, presence: true, if: -> { free_text_answer? }
 
   scope :incorrect, -> { where(correct: false) }
   scope :correct, -> { where(correct: true) }
@@ -34,7 +35,9 @@ class Response < ApplicationRecord
 
   # @return [Array<Training::Answer::Option>]
   def options
-    if question.formative_question? || assessment&.graded?
+    if question.confidence_question? || question.opinion_question?
+      question.options(checked: answers)
+    elsif question.formative_question? || assessment&.graded?
       question.options(checked: answers, disabled: responded?)
     else
       question.options(checked: answers)
@@ -48,7 +51,7 @@ class Response < ApplicationRecord
 
   # @return [Boolean]
   def responded?
-    answers.any?
+    answers.any? || text_input.present?
   end
 
   # @return [Boolean]
@@ -59,6 +62,11 @@ class Response < ApplicationRecord
   # @return [Boolean]
   def revised?
     correct && !correct?
+  end
+
+  # @return [Boolean]
+  def free_text_answer?
+    question.free_text? && text_input.present? unless training_module.nil?
   end
 
   ########################

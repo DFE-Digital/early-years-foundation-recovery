@@ -70,6 +70,8 @@ RSpec.shared_context 'with content' do
       assessment_results
       confidence_intro
       confidence_questionnaire
+      opinion_intro
+      opinion
       thankyou
       certificate
     ]

@@ -48,6 +48,20 @@ describe 'LinkHelper', type: :helper do
         expect(link).to include 'Next page has not been created'
       end
     end
+
+    context 'when page is feedback intro' do
+      let(:skip_link) { helper.link_to_skip }
+
+      let(:content) { mod.pages_by_type('opinion_intro').first }
+
+      it 'targets start of feedback questions' do
+        expect(link).to include 'Give feedback'
+      end
+
+      it 'offers button to skip feedback questions' do
+        expect(skip_link).to include 'Skip feedback'
+      end
+    end
   end
 
   describe '#link_to_previous' do
@@ -181,6 +195,25 @@ describe 'LinkHelper', type: :helper do
 
       it 'targets new assessment attempt' do
         expect(link).to eq ['Retake test', '/modules/alpha/assessment-result/new']
+      end
+    end
+  end
+
+  describe '#link_to_skip' do
+    subject(:link) { helper.link_to_skip }
+
+    before do
+      without_partial_double_verification do
+        allow(view).to receive(:content).and_return(content)
+        allow(view).to receive(:mod).and_return(mod)
+      end
+    end
+
+    context 'when page is feedback intro' do
+      let(:content) { mod.pages_by_type('opinion_intro').first }
+
+      it 'targets thank you page' do
+        expect(link).to include 'Skip feedback'
       end
     end
   end

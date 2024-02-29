@@ -194,6 +194,16 @@ class User < ApplicationRecord
   # @see ResponsesController#response_params
   # @param content [Training::Question]
   # @return [UserAnswer, Response]
+  def response_for_shared(content, mod)
+    responses.find_or_initialize_by(
+      question_name: content.name,
+      training_module: mod.name,
+    )
+  end
+
+  # @see ResponsesController#response_params
+  # @param content [Training::Question]
+  # @return [UserAnswer, Response]
   def response_for(content)
     if Rails.application.migrated_answers?
       if content.summative_question?
@@ -204,12 +214,19 @@ class User < ApplicationRecord
           assessments.create(training_module: content.parent.name, started_at: Time.zone.now)
       end
 
-      responses.find_or_initialize_by(
-        assessment_id: assessment&.id,
-        training_module: content.parent.name,
-        question_name: content.name,
-        question_type: content.question_type, # TODO: RENAME options for Question#page_type removing "questionnaire" suffix
-      )
+      if content.opinion_question?
+        responses.find_or_initialize_by(
+          question_name: content.name,
+          training_module: module_name,
+        )
+      else
+        responses.find_or_initialize_by(
+          assessment_id: assessment&.id,
+          training_module: content.parent.name,
+          question_name: content.name,
+          question_type: content.question_type, # TODO: RENAME options for Question#page_type removing "questionnaire" suffix
+        )
+      end
     else
       user_answers.find_or_initialize_by(
         assessments_type: content.assessments_type,

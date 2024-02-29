@@ -100,4 +100,16 @@ RSpec.describe Response, type: :model do
       end
     end
   end
+
+  context 'with radio buttons for opinion question' do
+    let(:question_name) { 'end-of-module-feedback-1' }
+
+    describe 'and no answer' do
+      let(:answers) { nil }
+
+      it 'is invalid' do
+        expect(response).to be_invalid
+      end
+    end
+  end
 end

@@ -129,8 +129,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_14_175923) do
   end
 
   create_table "responses", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "training_module", null: false
+    t.bigint "user_id"
+    t.string "training_module"
     t.string "question_name", null: false
     t.jsonb "answers", default: []
     t.boolean "correct"
@@ -138,6 +138,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_14_175923) do
     t.datetime "updated_at", null: false
     t.string "question_type"
     t.bigint "assessment_id"
+    t.text "text_input"
     t.index ["assessment_id"], name: "index_responses_on_assessment_id"
     t.index ["user_id", "training_module", "question_name"], name: "user_question"
     t.index ["user_id"], name: "index_responses_on_user_id"

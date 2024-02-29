@@ -199,6 +199,11 @@ module Training
     end
 
     # @return [Training::Page]
+    def opinion_intro_page
+      content.find(&:opinion_intro?)
+    end
+
+    # @return [Training::Page]
     def thankyou_page
       content.find(&:thankyou?)
     end
@@ -238,6 +243,11 @@ module Training
     # @return [Array<Training::Question>]
     def confidence_questions
       content.select(&:confidence_question?)
+    end
+
+    # @return [Array<Training::Question>]
+    def opinion_questions
+      content.select(&:opinion_question?)
     end
 
     # @param text [String]

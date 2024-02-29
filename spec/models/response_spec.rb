@@ -22,6 +22,7 @@ RSpec.describe Response, type: :model do
       updated_at
       question_type
       assessment_id
+      text_input
     ]
   end
 

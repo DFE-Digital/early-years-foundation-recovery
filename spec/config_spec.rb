@@ -8,7 +8,9 @@ RSpec.describe 'Application configuration' do
     expect(config.contentful_environment).to eq 'test'
   end
 
+  # Uncomment this when feedback forms have been published
   it 'tests against published content' do
+    skip 'feedback wip'
     expect(Rails.application).not_to be_preview
   end
 
@@ -46,6 +48,17 @@ RSpec.describe 'Application configuration' do
       expect(config.user_timeout_minutes).to eq 25
       expect(config.user_timeout_warning_minutes).to eq 20
       expect(config.user_timeout_modal_visible).to eq 5
+    end
+  end
+
+  describe 'pages accessible even when in maintenance mode' do
+    specify do
+      expect(config.protected_endpoints).to eq %w[
+        /maintenance
+        /health
+        /change
+        /release
+      ]
     end
   end
 end

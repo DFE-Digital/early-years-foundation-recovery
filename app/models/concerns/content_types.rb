@@ -6,6 +6,11 @@ module ContentTypes
     page_type.eql?('interruption_page')
   end
 
+  # @return [Boolean]
+  def feedback_page?
+    page_type.eql?('feedback')
+  end
+
   # ============================================================================
   # TRAINING SECTIONS
   # ============================================================================
@@ -23,6 +28,11 @@ module ContentTypes
   # @return [Boolean]
   def is_question?
     page_type.match?(/question/)
+  end
+
+  # @return [Boolean]
+  def is_opinion?
+    page_type.match?(/opinion/)
   end
 
   # @return [Boolean]
@@ -77,6 +87,21 @@ module ContentTypes
   # @return [Boolean]
   def confidence_question?
     page_type.eql?('confidence_questionnaire')
+  end
+
+  # @return [Boolean]
+  def opinion_intro?
+    page_type.eql?('opinion_intro')
+  end
+
+  # @return [Boolean]
+  def one_off_question?
+    always_show_question.eql?(false)
+  end
+
+  # @return [Boolean]
+  def opinion_question?
+    page_type.eql?('opinion')
   end
 
   # @return [Boolean]

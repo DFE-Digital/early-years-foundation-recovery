@@ -8,7 +8,7 @@ RSpec.describe Training::ResponsesController, type: :controller do
       patch :update, params: {
         training_module_id: 'alpha',
         id: question_name,
-        response: { answers: answers },
+        response: { answers: answers, text_input: 'Text input' },
       }
     else
       patch :update, params: {
@@ -76,6 +76,26 @@ RSpec.describe Training::ResponsesController, type: :controller do
 
           specify { expect(response).to have_http_status(:unprocessable_entity) }
           specify { expect(records).to be 0 }
+        end
+      end
+
+      context 'when text input (text area)' do
+        let(:question_name) { 'end-of-module-feedback-4' }
+
+        context 'with text input' do
+          let(:answers) { [] }
+          let(:text_input) { 'Text input for feedback question' }
+
+          specify { expect(response).to have_http_status(:redirect) }
+          specify { expect(records).to be 1 }
+        end
+
+        context 'and no text input' do
+          let(:answers) { [] }
+          let(:text_input) { nil }
+
+          specify { expect(response).to have_http_status(:redirect) }
+          specify { expect(records).to be 1 }
         end
       end
     end

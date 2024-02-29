@@ -50,6 +50,7 @@ en:
           attributes:
             answers:
               blank: Please select an answer.
+              invalid: Please select an option.
         user_answer:
           attributes:
             answer:
@@ -120,6 +121,7 @@ en:
     save_continue: Save and continue
     finish_test: Finish test
     finish: Finish
+    give_feedback: Give feedback
 
   links:
     save: Save
@@ -607,6 +609,33 @@ en:
       This module covers:
 
       %{criteria}
+  
+  # /feedback
+  feedback:
+    heading: Give feedback
+    body: |
+      The purpose of this feedback form is to gather your opinon on the child development training course that the Department for Education has created for early years practitioners.
+
+      For more information on how you data will be used, please view our privacy notice. ADD LINK
+
+      Completing this form is voluntary and you can withdraw your feedback at any time.
+
+      By completing this form you have understood the above and consent to take part.
+    feedback_exists:
+      heading: You have already submitted feedback
+      body: Thank you for helping to improve this training
+      back_button: Previous
+      next_button: Update my feedback
+    technical_support:
+      heading: Technical support queries
+      body: If you have any questions about how to sue this website or are experiencing any technical issues, please use our contact form ADD LINK so that our team can follow up with your enquiry.
+    next_button: Next
+    
+    # /feedback/thank-you
+    thank_you:
+      heading: Thank you
+      body: Thank you for helping to improve this training
+      next_button: Go to my modules
 
   # /gov-one/info
   gov_one_info:

@@ -34,7 +34,8 @@ class NextPageDecorator
     case
     when next?            then label[:next]
     when missing?         then label[:missing]
-    when content.section? then label[:section]
+    when content_section? then label[:section]
+    when opinion_intro?   then label[:give_feedback] # Make confidence outro
     when test_start?      then label[:start_test]
     when test_finish?     then label[:finish_test]
     when finish?          then label[:finish]
@@ -97,6 +98,14 @@ private
   # @return [Boolean]
   def missing?
     content.next_item.eql?(content) && wip?
+  end
+
+  def opinion_intro?
+    content.opinion_intro?
+  end
+
+  def content_section?
+    content.section? && !content.opinion_intro?
   end
 
   # @return [Boolean]

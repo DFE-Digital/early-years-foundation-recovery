@@ -3,7 +3,7 @@
 module Pagination
   # @return [Boolean]
   def section?
-    submodule_intro? || summary_intro? || certificate?
+    submodule_intro? || summary_intro? || opinion_intro? || certificate?
   end
 
   # @return [Boolean]
@@ -34,7 +34,7 @@ module Pagination
 
   # @return [String]
   def previous_item_id
-    parent.pages[content_index - 1].id
+    content_index.zero? ? parent.pages[content_index].id : parent.pages[content_index - 1].id
   end
 
   # @return [String, nil]

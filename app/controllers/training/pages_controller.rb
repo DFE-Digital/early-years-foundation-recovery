@@ -19,7 +19,7 @@ module Training
     end
 
     def show
-      if content.is_question?
+      if content.is_question? || content.opinion_question?
         redirect_to training_module_question_path(mod.name, content.name)
       elsif content.assessment_results?
         redirect_to training_module_assessment_path(mod.name, content.name)
@@ -38,7 +38,7 @@ module Training
     end
 
     def render_page
-      if content.section? && !content.certificate?
+      if content.section? && !content.certificate? && !content.opinion_intro?
         render 'section_intro'
       else
         render content.page_type
