@@ -18,7 +18,8 @@ namespace :eyfs do
 
     desc 'Define Contentful entry models'
     task migrate: :environment do
-      Dir[Rails.root.join('cms/migrate/*')].each do |file|
+      # Dir[Rails.root.join('cms/migrate/*')].each do |file|
+      Dir[Rails.root.join('cms/migrate/*question*')].each do |file|
         system <<~CMD
           contentful space migration \
           --management-token #{ContentfulRails.configuration.management_token} \

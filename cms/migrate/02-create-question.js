@@ -1,9 +1,9 @@
 module.exports = function(migration) {
 
-  const question = migration.createContentType('question', {
-    name: 'Question',
+  const question = migration.createContentType('question_test', {
+    name: 'Question test',
     displayField: 'name',
-    description: 'Formative, Summative or Confidence'
+    description: 'Formative, Summative, Confidence or Feedback'
   })
 
   /* Fields ----------------------------------------------------------------- */
@@ -34,6 +34,7 @@ module.exports = function(migration) {
          'formative',
          'summative',
          'confidence',
+         'feedback',
         ]
       }
     ]
@@ -51,6 +52,7 @@ module.exports = function(migration) {
     formative: customise both
     summative: customise failure only (success unused)
     confidence: both use default
+    feedback: both use default
   */
 
   question.createField('success_message', {
@@ -76,6 +78,44 @@ module.exports = function(migration) {
     type: 'Object',
   })
 
+  /* Feedback Only ---------------------------------------------------------- */
+
+  question.createField('other', {
+    name: 'Other',
+    type: 'Text',
+  })
+
+  question.createField('or', {
+    name: 'Or',
+    type: 'Text',
+  })
+
+  question.createField('hint', {
+    name: 'Hint',
+    type: 'Text',
+  })
+
+  /*
+    overrides default
+    ======================
+    formative and summative are dynamic based off number of correct options
+    confidence are hard-coded
+    feedback are more nuanced
+  */
+  question.createField('response_type', {
+    name: 'Feedback response type',
+    type: 'Symbol',
+  })
+
+  question.createField('skippable', {
+    name: 'One-shot question',
+    type: 'Boolean',
+    required: true,
+    defaultValue: {
+      'en-US': false
+    }
+  })
+
   /* Interface -------------------------------------------------------------- */
 
   /* JSON */
@@ -98,14 +138,13 @@ module.exports = function(migration) {
     helpText: 'Displayed after "That’s not quite right" if the user selects the wrong answer.'
   })
 
-  /* number */
+  /* toggle */
 
-  question.changeFieldControl('submodule', 'builtin', 'numberEditor', {
-    helpText: 'Select the sub-module number the page belongs to, the second number of the page name.'
+  question.changeFieldControl('skippable', 'builtin', 'boolean', {
+    helpText: 'Hide once answered?',
+    trueLabel: 'yes',
+    falseLabel: 'no'
   })
 
-  question.changeFieldControl('topic', 'builtin', 'numberEditor', {
-    helpText: 'Select the topic number the page belongs to, the third number in the page name.'
-  })
 
 }

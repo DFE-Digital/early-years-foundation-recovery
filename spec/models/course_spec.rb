@@ -21,4 +21,28 @@ describe Course, type: :model do
       expect(course.feedback.first.page_type).to eq 'opinion'
     end
   end
+
+  # PoC to ensure exisiting parent#pages logic is reusable
+  #
+  describe 'site-wide feedback form navigation/pagination' do
+    let(:parent) { described_class.config }
+    let(:pages) { described_class.config.pages }
+
+    it 'parent has pages' do
+      expect(parent.pages.first).to be_a Training::Question
+      expect(pages.first.parent.pages.last).to be_a Training::Question
+    end
+
+    it 'pages have a parent' do
+      expect(pages.first.parent).to be_a described_class
+      expect(pages.first.parent).to eq pages.last.parent
+    end
+
+    it 'page order uing previous_item/next_item' do
+      expect(pages.first.name).to eq 'main-feedback-1'
+      expect(pages.first.next_item.name).to eq 'main-feedback-2'
+      expect(pages.first.next_item.next_item.name).to eq 'main-feedback-3'
+      expect(pages.first.next_item.previous_item.name).to eq 'main-feedback-1'
+    end
+  end
 end
