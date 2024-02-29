@@ -219,7 +219,7 @@
   :text: Additional Feedback
   :inputs:
     - - :click_on
-      - Skip feedback
+      - Give feedback
 - :path: /modules/alpha/content-pages/1-3-3-5
   :text: Thank you
   :inputs:
