@@ -4,11 +4,11 @@
 class Response < ApplicationRecord
   include ToCsv
 
-  belongs_to :user, optional: true  
+  belongs_to :user, optional: true
   belongs_to :assessment, optional: true
 
   validates :answers, presence: true, unless: -> { free_text_answer? }
-  validates :text_input, presence: true, if: -> { free_text_answer? || other_selected?}
+  validates :text_input, presence: true, if: -> { free_text_answer? || other_selected? }
 
   scope :incorrect, -> { where(correct: false) }
   scope :correct, -> { where(correct: true) }

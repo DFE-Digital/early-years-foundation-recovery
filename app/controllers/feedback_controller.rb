@@ -14,12 +14,12 @@ class FeedbackController < ApplicationController
     return if invalid_answer?
 
     res = response_exists? ? update_response : create_response
-     
-  unless res.save and res.errors[:text_input].empty?
-      flash[:error] = res.errors.full_messages.to_sentence
-      redirect_to current_feedback_path 
+
+    if res.save and res.errors[:text_input].empty?
+      redirect_to next_path
     else
-    redirect_to next_path
+      flash[:error] = res.errors.full_messages.to_sentence
+      redirect_to current_feedback_path
     end
   end
 
@@ -60,6 +60,11 @@ class FeedbackController < ApplicationController
 private
 
   # @return [Boolean]
+  def guest?
+    current_user.nil?
+  end
+
+  # @return [Boolean]
   def invalid_answer?
     if answer.blank? || answer.all?(&:blank?)
       flash[:error] = 'Please answer the question'
@@ -71,32 +76,36 @@ private
 
   # @return [Response]
   def create_response
-    current_id = current_user ? current_user.id : current_visit.visitor_token
-    response = Response.new(
-      user_id: current_id,
+    Response.new(
+      user_id: current_user ? current_user.id : nil,
       answers: answer_content,
       question_name: content.name,
       text_input: text_input,
+      guest_visit: guest? ? current_visit.visitor_token : nil,
     )
-    
-    response
   end
 
   # @return [Response]
   def update_response
-    current_id = current_user ? current_user.id : current_visit.visitor_token
-    Response.where(user_id: current_id, question_name: content.name).update(
+    existing_response.update(
       answers: answer_content,
       text_input: text_input,
-    ).first
+    )
+    existing_response
   end
 
   # @return [Boolean]
   def response_exists?
-    # TODO - replace with visitor in the case of nil user
-    current_id = current_user ? current_user.id : current_visit.visitor_token
+    existing_response.present?
+  end
 
-    Response.where(user_id: current_id, question_name: content.name).exists?
+  # @return [Response]
+  def existing_response
+    Response.find_by(
+      guest_visit: guest? ? current_visit.visitor_token : nil,
+      user_id: current_user&.id,
+      question_name: content.name,
+    )
   end
 
   # @return [Boolean]

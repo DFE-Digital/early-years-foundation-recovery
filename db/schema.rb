@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_14_175923) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_01_164142) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -139,6 +139,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_14_175923) do
     t.string "question_type"
     t.bigint "assessment_id"
     t.text "text_input"
+    t.string "guest_visit"
     t.index ["assessment_id"], name: "index_responses_on_assessment_id"
     t.index ["user_id", "training_module", "question_name"], name: "user_question"
     t.index ["user_id"], name: "index_responses_on_user_id"
