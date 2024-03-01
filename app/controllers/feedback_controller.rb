@@ -3,7 +3,7 @@ class FeedbackController < ApplicationController
 
   # @return [nil]
   def show
-    redirect_to next_path if skip_question?
+    redirect_to next_path unless always_show_question?
   end
 
   # @return [nil]
@@ -11,10 +11,16 @@ class FeedbackController < ApplicationController
 
   # @return [nil]
   def update
-    return if invalid_answer? || other_blank?
+    return if invalid_answer?
 
-    response_exists? ? update_response : create_response
+    res = response_exists? ? update_response : create_response
+     
+  unless res.save and res.errors[:text_input].empty?
+      flash[:error] = res.errors.full_messages.to_sentence
+      redirect_to current_feedback_path 
+    else
     redirect_to next_path
+    end
   end
 
   # @return [String]
@@ -63,51 +69,44 @@ private
     end
   end
 
-  # @return [Boolean]
-  def other_blank?
-    if answer_content.include?('Other') && text_input.blank?
-      flash[:error] = 'Please specify'
-      redirect_to current_feedback_path and return true
-    else
-      false
-    end
-  end
-
   # @return [Response]
   def create_response
-    Response.create!(
-      user_id: current_user ? current_user.id : nil,
+    current_id = current_user ? current_user.id : current_visit.visitor_token
+    response = Response.new(
+      user_id: current_id,
       answers: answer_content,
       question_name: content.name,
       text_input: text_input,
     )
+    
+    response
   end
 
   # @return [Response]
   def update_response
-    Response.where(user_id: current_user.id, question_name: content.name).update(
+    current_id = current_user ? current_user.id : current_visit.visitor_token
+    Response.where(user_id: current_id, question_name: content.name).update(
       answers: answer_content,
       text_input: text_input,
-    )
+    ).first
   end
 
   # @return [Boolean]
   def response_exists?
-    return false if current_user.nil?
+    # TODO - replace with visitor in the case of nil user
+    current_id = current_user ? current_user.id : current_visit.visitor_token
 
-    Response.where(user_id: current_user.id, question_name: content.name).exists?
+    Response.where(user_id: current_id, question_name: content.name).exists?
   end
 
   # @return [Boolean]
-  def skip_question?
-    return false unless skipped_questions.include?(content.name)
-
-    true if current_user.nil?
+  def show_question?
+    always_show_question? && (!current_user.nil? || !response_exists?)
   end
 
-  # @return [Array<String>]
-  def skipped_questions
-    %w[main-feedback-6]
+  # @return [Boolean]
+  def always_show_question?
+    !content.always_show_question.eql?(false)
   end
 
   # @param answer [String]
