@@ -21,7 +21,7 @@ module Training
 
     # @return [String] powered by JSON not type
     def to_partial_path
-      return 'training/questions/opinion_radio_buttons' if opinion_question?
+      return 'training/questions/opinion_radio_buttons' if feedback_question?
 
       partial = multi_select? ? 'check_boxes' : 'radio_buttons'
       partial = "learning_#{partial}" if formative_question?
@@ -30,16 +30,16 @@ module Training
 
     # @return [Boolean]
     def multi_select?
-      confidence_question? || opinion_question? ? false : answer.multi_select?
+      confidence_question? || feedback_question? ? false : answer.multi_select?
     end
 
-    def opinion_question?
-      page_type == 'opinion'
+    def feedback_question?
+      page_type == 'feedback'
     end
 
     # @return [Boolean] feedback free text
     def free_text?
-      opinion_question? && options.empty?
+      feedback_question? && options.empty?
     end
 
     # @return [Boolean] event tracking
@@ -81,7 +81,7 @@ module Training
         formative_questionnaire: 'formative_assessment',
         summative_questionnaire: 'summative_assessment',
         confidence_questionnaire: 'confidence_check',
-        opinion: 'opinion',
+        feedback: 'feedback',
       }.fetch(page_type.to_sym)
     end
 
@@ -94,7 +94,7 @@ module Training
         summative_questionnaire: 'summative',
         summative: 'summative',
         confidence_questionnaire: 'confidence',
-        opinion: 'opinion',
+        feedback: 'feedback',
         confidence: 'confidence',
       }.fetch(page_type.to_sym)
     end
@@ -125,7 +125,7 @@ module Training
 
           #{body}
         LEGEND
-      elsif opinion_question?
+      elsif feedback_question?
         body.to_s
       else
         "#{body} (Select one answer)"

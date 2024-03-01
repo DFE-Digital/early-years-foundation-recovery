@@ -54,7 +54,7 @@ module Training
 
     # @return [Boolean]
     def track_feedback_start?
-      content.opinion_question? || content.opinion_intro?
+      content.feedback_question? || content.opinion_intro?
     end
 
     # @return [Boolean]

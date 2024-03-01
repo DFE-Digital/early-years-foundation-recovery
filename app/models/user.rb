@@ -214,7 +214,7 @@ class User < ApplicationRecord
           assessments.create(training_module: content.parent.name, started_at: Time.zone.now)
       end
 
-      if content.opinion_question?
+      if content.feedback_question?
         responses.find_or_initialize_by(
           question_name: content.name,
           training_module: module_name,

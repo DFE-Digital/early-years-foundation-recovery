@@ -90,8 +90,8 @@ module ContentTypes
   end
 
   # @return [Boolean]
-  def opinion_question?
-    page_type.eql?('opinion')
+  def feedback_question?
+    page_type.eql?('feedback')
   end
 
   # @return [Boolean]

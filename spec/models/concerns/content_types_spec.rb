@@ -94,10 +94,10 @@ RSpec.describe ContentTypes, type: :model do
     specify { expect(content).to be_opinion_intro }
   end
 
-  describe '#opinion_question?' do
-    before { content.page_type = 'opinion' }
+  describe '#feedback_question?' do
+    before { content.page_type = 'feedback' }
 
-    specify { expect(content).to be_opinion_question }
+    specify { expect(content).to be_feedback_question }
   end
 
   describe '#thankyou?' do
@@ -133,7 +133,7 @@ RSpec.describe ContentTypes, type: :model do
         confidence_intro
         confidence_questionnaire
         opinion_intro
-        opinion
+        feedback
         thankyou
         certificate
       ])

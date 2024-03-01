@@ -15,7 +15,7 @@ class PaginationDecorator
 
   # @return [String]
   def section_numbers
-    if content.opinion_intro? || content.opinion_question?
+    if content.opinion_intro? || content.feedback_question?
       I18n.t(:section, scope: :pagination, current: content.submodule - 1, total: section_total - 1)
     else
       I18n.t(:section, scope: :pagination, current: content.submodule, total: section_total - 1)
@@ -45,7 +45,7 @@ private
     if content.section_content.any?(&:skippable?) # && response_for_shared.responded?
       # don't count skipped page
       content.section_content.each do |section_content|
-        if section_content.opinion_question? && section_content.always_show_question.eql?(false)
+        if section_content.feedback_question? && section_content.always_show_question.eql?(false)
           size -= 1
         end
       end

@@ -25,7 +25,7 @@ RSpec.describe PaginationDecorator do
   end
 
   describe 'skippable questions' do
-    let(:content) { mod.page_by_name('end-of-module-feedback-4') }
+    let(:content) { mod.page_by_name('feedback-freetext') }
 
     context 'when answered' do
       before do

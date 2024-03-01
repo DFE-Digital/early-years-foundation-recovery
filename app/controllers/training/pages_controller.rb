@@ -19,7 +19,7 @@ module Training
     end
 
     def show
-      if content.is_question? || content.opinion_question?
+      if content.is_question? || content.feedback_question?
         redirect_to training_module_question_path(mod.name, content.name)
       elsif content.assessment_results?
         redirect_to training_module_assessment_path(mod.name, content.name)

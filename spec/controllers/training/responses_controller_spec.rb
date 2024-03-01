@@ -80,7 +80,7 @@ RSpec.describe Training::ResponsesController, type: :controller do
       end
 
       context 'when the question expects text and is answered' do
-        let(:question_name) { 'end-of-module-feedback-4' }
+        let(:question_name) { 'feedback-freetext' }
         let(:answers) { [] }
 
         context 'with text input' do

@@ -17,11 +17,11 @@ module Training
     layout 'hero'
 
     def update
-      if save_response! || (content.opinion_question? && content.options.blank?)
+      if save_response! || (content.feedback_question? && content.options.blank?)
         track_question_answer
         redirect
       else
-        if content.opinion_question? && user_answer_text.blank? && content.options.present?
+        if content.feedback_question? && user_answer_text.blank? && content.options.present?
           current_user_response.errors.clear
           current_user_response.errors.add :answers, :invalid
         end
@@ -45,7 +45,7 @@ module Training
     # @note migrate from user_answer to response
     # @return [Boolean]
     def save_response!
-      correct_answers = content.confidence_question? || content.opinion_question? ? true : content.correct_answers.eql?(user_answers)
+      correct_answers = content.confidence_question? || content.feedback_question? ? true : content.correct_answers.eql?(user_answers)
 
       if Rails.application.migrated_answers?
         current_user_response.update(answers: user_answers, correct: correct_answers, text_input: user_answer_text)

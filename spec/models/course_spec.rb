@@ -18,7 +18,7 @@ describe Course, type: :model do
 
     it 'feedback' do
       expect(course.feedback.count).to eq 5
-      expect(course.feedback.first.page_type).to eq 'opinion'
+      expect(course.feedback.first.page_type).to eq 'feedback'
     end
   end
 
