@@ -79,19 +79,18 @@ RSpec.describe Training::ResponsesController, type: :controller do
         end
       end
 
-      context 'when text input (text area)' do
+      context 'when the question expects text and is answered' do
         let(:question_name) { 'end-of-module-feedback-4' }
+        let(:answers) { [] }
 
         context 'with text input' do
-          let(:answers) { [] }
           let(:text_input) { 'Text input for feedback question' }
 
           specify { expect(response).to have_http_status(:redirect) }
           specify { expect(records).to be 1 }
         end
 
-        context 'and no text input' do
-          let(:answers) { [] }
+        context 'with no text input' do
           let(:text_input) { nil }
 
           specify { expect(response).to have_http_status(:redirect) }

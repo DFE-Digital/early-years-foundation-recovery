@@ -8,6 +8,6 @@
         = f.govuk_radio_button :answers, option.id, label: { text: 'No' }, link_errors: true, checked: option.checked? do
           = f.govuk_text_area :text_input, label: { text: content.other }
       - else
-        = f.opinion_radio_button(option)
+        = f.question_radio_button(option)
   - else
     = f.govuk_text_area :text_input, label: nil, rows: 9

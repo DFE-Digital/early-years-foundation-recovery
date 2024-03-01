@@ -35,9 +35,7 @@ class Response < ApplicationRecord
 
   # @return [Array<Training::Answer::Option>]
   def options
-    if question.confidence_question? || question.opinion_question?
-      question.options(checked: answers)
-    elsif question.formative_question? || assessment&.graded?
+    if question.formative_question? || assessment&.graded?
       question.options(checked: answers, disabled: responded?)
     else
       question.options(checked: answers)

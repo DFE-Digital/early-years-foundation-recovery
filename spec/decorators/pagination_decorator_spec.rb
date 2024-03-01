@@ -24,10 +24,10 @@ RSpec.describe PaginationDecorator do
     expect(decorator.percentage).to eq '29%'
   end
 
-  describe('skippable questions') do
+  describe 'skippable questions' do
     let(:content) { mod.page_by_name('end-of-module-feedback-4') }
 
-    context('when answered') do
+    context 'when answered' do
       before do
         create(:response, question_name: content.name, text_input: 'text input')
       end
@@ -37,7 +37,7 @@ RSpec.describe PaginationDecorator do
       end
     end
 
-    context('when unanswered') do
+    context 'when unanswered' do
       it '#page_numbers' do
         expect(decorator.page_numbers).to eq 'Page 4 of 5'
       end

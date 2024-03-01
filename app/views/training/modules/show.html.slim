@@ -33,6 +33,7 @@
     - module_progress.sections.each do |section|
       - unless section[:hide]
         = render 'section', **section
+        /= the feedback section is not visible in the module overview
 
     = govuk_button_link_to link_to_action[1], class: 'govuk-button--start', id: 'module-call-to-action' do
       | #{link_to_action[0]}
