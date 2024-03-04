@@ -42,6 +42,22 @@ module Training
       feedback_question? && options.empty?
     end
 
+    # @return [Boolean]
+    def has_hint?
+      hint.present?
+    end
+
+    # @return [Boolean]
+    def has_other?
+      other.present?
+    end
+
+    # @param index [Integer]
+    # @return [Boolean]
+    def is_last_option?(index)
+      options.count == index
+    end
+
     # @return [Boolean] event tracking
     def first_confidence?
       parent.confidence_questions.first.eql?(self)

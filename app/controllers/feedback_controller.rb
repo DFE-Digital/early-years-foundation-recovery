@@ -15,7 +15,7 @@ class FeedbackController < ApplicationController
 
     res = response_exists? ? update_response : create_response
 
-    if res.save and res.errors[:text_input].empty?
+    if res.save && res.errors[:text_input].empty?
       redirect_to next_path
     else
       flash[:error] = res.errors.full_messages.to_sentence
@@ -87,7 +87,7 @@ private
 
   # @return [Response]
   def update_response
-    existing_response.update(
+    existing_response.update!(
       answers: answer_content,
       text_input: text_input,
     )
@@ -159,6 +159,6 @@ private
   end
 
   def text_input
-    @text_input ||= params[:answers_custom]
+    @text_input ||= params[:text_input]
   end
 end

@@ -2,14 +2,4 @@
   =  m(content.hint) unless content.hint.nil?
 
   = f.hidden_field :answers, multiple: true
-  - if response.options.any?
-    - response.options.each.with_index(1) do |option, index|
-      - if response.options.count.eql?(index) && content.other.present?
-        = f.govuk_check_box :answers, option.id, label: { text: 'Other' }, link_errors: true do
-          = f.govuk_text_field :answers_custom, label: { text: content.other }
-      - elsif response.options.count.eql?(index) && content.or.present?
-        .govuk-checkboxes__divider
-        = 'Or'
-        = f.govuk_check_box :answers, 'Or', label: { text: content.or }, link_errors: true
-      - else
-        = f.question_check_box(option)
+  = f.feedback_question_check_boxes(content)
