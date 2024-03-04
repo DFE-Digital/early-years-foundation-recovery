@@ -1,4 +1,4 @@
-= f.govuk_check_boxes_fieldset :answers, multiple: true, legend: { text: response.legend } do
+= f.govuk_check_boxes_fieldset :answers, multiple: true, legend: { text: content.legend } do
   =  m(content.hint) unless content.hint.nil?
 
   = f.hidden_field :answers, multiple: true
