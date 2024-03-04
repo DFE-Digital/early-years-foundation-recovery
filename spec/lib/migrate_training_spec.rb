@@ -146,14 +146,8 @@ RSpec.describe MigrateTraining do
       expect(bravo_assessment.completed_at).to be_nil
     end
 
-    it 'preserves keys' do
+    it 'preserves response primary key' do
       operation.call
-
-      user_assessment = UserAssessment.find_by(module: 'alpha')
-      assessment = Assessment.find_by(training_module: 'alpha')
-
-      expect(assessment.id).to eq user_assessment.id
-
       user_answer = UserAnswer.find_by(name: '1-3-2-1')
       response = Response.find_by(question_name: '1-3-2-1')
 

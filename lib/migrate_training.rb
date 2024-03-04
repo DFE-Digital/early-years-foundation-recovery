@@ -22,6 +22,8 @@ class MigrateTraining
   option :simulate, Types::Bool, default: proc { false }, reader: :private
   # @return [Boolean]
   option :verbose, Types::Bool, default: proc { true }, reader: :private
+  # @return [Integer]
+  option :batch, Types::Integer, default: proc { 100 }, reader: :private
   # @return [Integer, nil]
   option :resume, Types::Integer, optional: true, reader: :private
 
@@ -46,17 +48,13 @@ private
 
   # @return [nil]
   def migrate!
-    UserAnswer.find_in_batches(start: resume, batch_size: 100) do |group|
-      group.each do |user_answer|
-        if valid?(user_answer)
-          response = process_user_answer(user_answer)
-          log response.attributes.to_json, alert: false
-        else
-          log "User: #{user_answer.user_id} UserAnswer: #{user_answer.id}"
-        end
+    UserAnswer.find_each(start: resume, batch_size: batch) do |user_answer|
+      if valid?(user_answer)
+        response = process_user_answer(user_answer)
+        log response.attributes.to_json, alert: false
+      else
+        log "User: #{user_answer.user_id} UserAnswer: #{user_answer.id}"
       end
-
-      # GC.start
     end
   end
 
@@ -114,7 +112,6 @@ private
   # @return [Hash<Symbol=>Mixed>]
   def assessment_params(user_assessment)
     {
-      id: user_assessment.id,                                                          # int primary key
       user_id: user_assessment.user_id,                                                # int foreign key
       training_module: user_assessment.module,                                         # string foreign key
       passed: user_assessment.status.eql?('passed'),                                   # bool
