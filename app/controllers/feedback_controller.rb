@@ -56,7 +56,7 @@ private
 
   # @return [Boolean]
   def invalid_answer?
-    if answer.blank? || answer.all?(&:blank?)
+    if answer.blank? || answer.all?(&:blank?) || (content.free_text? && text_input.blank?)
       flash[:error] = 'Please answer the question'
       redirect_to current_feedback_path and return true
     else
