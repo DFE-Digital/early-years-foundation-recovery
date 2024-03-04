@@ -29,6 +29,22 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
     end
   end
 
+  def end_of_module_feedback_question_radio_buttons(content, response)
+    @template.capture do
+      response.options.each.with_index(1) do |option, index|
+        if content.last_option?(index) && content.has_other?
+          @template.concat feedback_other_radio_button(content, option)
+        else
+          @template.concat question_radio_button(option)
+        end
+      end
+
+      if content.has_hint? && content.has_other?
+        @template.concat govuk_text_area :text_input, label: { text: content.hint, class: 'govuk-!-font-weight-bold govuk-!-margin-top-8 govuk-!-margin-bottom-4' }
+      end
+    end
+  end
+
   # @param content [Object]
   # @return [String]
   def feedback_question_check_boxes(content)
@@ -59,7 +75,7 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
   # @param option [Object] The content for the 'Other' radio button option
   # @return [String]
   def feedback_other_radio_button(content, option)
-    govuk_radio_button :answers, option.id, label: { text: 'Other' }, link_errors: true do
+    govuk_radio_button :answers, option.id, label: { text: option.label }, link_errors: true, checked: option.checked? do
       govuk_text_field :text_input, label: { text: content.other }
     end
   end

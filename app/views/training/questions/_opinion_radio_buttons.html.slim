@@ -1,13 +1,11 @@
-= f.govuk_radio_buttons_fieldset :answers, legend: { text: response.legend } do
-  =  m(content.hint) unless content.hint.nil?
+- if !content.free_text?
 
-  = f.hidden_field :answers, multiple: true
-  - if response.options.any?
-    - response.options.each.with_index(1) do |option, index|
-      - if response.options.count.eql?(index) && content.other.present?
-        = f.govuk_radio_button :answers, option.id, label: { text: 'No' }, link_errors: true, checked: option.checked? do
-          = f.govuk_text_area :text_input, label: { text: content.other }
-      - else
-        = f.question_radio_button(option)
-  - else
+    = f.govuk_radio_buttons_fieldset :answers, multiple: true, legend: { text: content.legend } do
+      = f.hidden_field :answers, multiple: true
+      =  m(content.hint) unless content.hint.nil?
+      = f.end_of_module_feedback_question_radio_buttons(content, response)
+
+- else
+  = f.govuk_fieldset legend: { text: m(content.legend) } do
+    = m(content.hint) if content.has_hint?
     = f.govuk_text_area :text_input, label: nil, rows: 9
