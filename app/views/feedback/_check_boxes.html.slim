@@ -1,0 +1,5 @@
+h1 Feedback Partial
+
+= f.govuk_check_boxes_fieldset :answers, legend: { text: response.legend } do
+  - response.options.each do |option|
+    = f.question_check_box(option)

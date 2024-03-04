@@ -44,14 +44,22 @@ module Pagination
 
   # @return [Array<Training::Page, Training::Video, Training::Question>]
   def section_content
-    parent.content_sections.fetch(submodule)
+    if parent.is_a? Training::Module # OPTIMIZE: introduce parent check predicates?
+      parent.content_sections.fetch(submodule)
+    else
+      Course.config.pages
+    end
   end
 
   # TODO: duplicated in overview decorator #fetch_submodule_topic
   #
   # @return [Array<Training::Page, Training::Video, Training::Question>]
   def subsection_content
-    parent.content_subsections.fetch([submodule, topic])
+    if parent.is_a? Training::Module
+      parent.content_subsections.fetch([submodule, topic])
+    else
+      Course.config.pages
+    end
   end
 
   # @return [nil, Integer]

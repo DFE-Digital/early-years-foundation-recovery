@@ -33,7 +33,6 @@ jobs:
       DATABASE_URL: postgres://postgres:password@localhost:5432/test
       DOMAIN: recovery.app
       BOT_TOKEN: bot_token
-      CONTENTFUL_PREVIEW: true # TODO: Reminder to delete this line
 
     services:
       postgres:
@@ -82,6 +81,8 @@ jobs:
         name: Run test suite
         run: bundle exec rspec
         env:
+          # TODO: Check envs before merging into main
+          CONTENTFUL_PREVIEW: true
           DISABLE_USER_ANSWER: true
           GOV_ONE_LOGIN: true
       -

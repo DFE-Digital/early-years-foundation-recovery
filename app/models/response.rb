@@ -20,12 +20,17 @@ class Response < ApplicationRecord
   scope :summative, -> { where(question_type: 'summative') }
   scope :confidence, -> { where(question_type: 'confidence') }
   scope :feedback, -> { where(question_type: 'feedback') }
+  scope :main_feedback, -> { where(question_type: 'feedback', training_module: nil) }
 
   delegate :to_partial_path, :legend, to: :question
 
-  # @return [Training::Module]
+  # @return [Training::Module, Course]
   def mod
-    Training::Module.by_name(training_module)
+    if training_module
+      Training::Module.by_name(training_module)
+    else
+      Course.config
+    end
   end
 
   # @return [Training::Question]
@@ -59,7 +64,7 @@ class Response < ApplicationRecord
 
   # @return [Boolean]
   def correct?
-    question.confidence_question? || question.correct_answers.eql?(answers)
+    question.opinon_question? || question.correct_answers.eql?(answers)
   end
 
   # @return [Boolean]

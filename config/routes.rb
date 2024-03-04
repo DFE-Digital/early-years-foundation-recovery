@@ -87,7 +87,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'feedback/thank-you', to: 'feedback#thank_you', as: :feedback_thank_you
+  get 'feedback/thank-you', to: 'feedback#thank_you'
   resources :feedback, only: %i[index show update]
 
   post 'change', to: 'hook#change'

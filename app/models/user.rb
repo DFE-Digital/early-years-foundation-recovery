@@ -477,6 +477,11 @@ class User < ApplicationRecord
     @content_changes ||= ContentChanges.new(user: self)
   end
 
+  # @return [Boolean]
+  def completed_main_feedback?
+    responses.main_feedback.any?
+  end
+
 private
 
   # @return [Hash]

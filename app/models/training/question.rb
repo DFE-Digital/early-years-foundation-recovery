@@ -21,20 +21,23 @@ module Training
 
     # @return [String] powered by JSON not type
     def to_partial_path
-      return 'training/questions/opinion_radio_buttons' if feedback_question?
-
       partial = multi_select? ? 'check_boxes' : 'radio_buttons'
+
+      return "feedback/#{partial}" if feedback_question?
+
       partial = "learning_#{partial}" if formative_question?
       "training/questions/#{partial}"
     end
 
     # @return [Boolean]
     def multi_select?
-      confidence_question? || feedback_question? ? false : answer.multi_select?
-    end
-
-    def feedback_question?
-      page_type == 'feedback'
+      if feedback_question?
+        response_type # FIXME: this field smells
+      elsif confidence_question?
+        false
+      else
+        answer.multi_select?
+      end
     end
 
     # @return [Boolean] feedback free text

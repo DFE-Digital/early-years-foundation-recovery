@@ -1,0 +1,6 @@
+h1 Feedback Partial
+
+= f.govuk_radio_buttons_fieldset :answers, legend: { text: response.legend } do
+  = f.hidden_field :answers
+  - response.options.each do |option|
+    = f.question_radio_button(option)

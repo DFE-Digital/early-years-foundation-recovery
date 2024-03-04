@@ -45,7 +45,7 @@ module Training
     # @note migrate from user_answer to response
     # @return [Boolean]
     def save_response!
-      correct_answers = content.confidence_question? || content.feedback_question? ? true : content.correct_answers.eql?(user_answers)
+      correct_answers = content.opinion_question? ? true : content.correct_answers.eql?(user_answers)
 
       if Rails.application.migrated_answers?
         current_user_response.update(answers: user_answers, correct: correct_answers, text_input: user_answer_text)

@@ -1,154 +1,59 @@
 class FeedbackController < ApplicationController
-  helper_method :previous_path, :next_path, :content, :feedback_exists?
+  helper_method :content,
+                :mod,
+                :current_user_response
 
-  # @return [nil]
-  def show
-    redirect_to next_path unless always_show_question?
-  end
+  def show; end
 
-  # @return [nil]
   def index; end
 
-  # @return [nil]
   def update
-    return if invalid_answer?
-
-    res = response_exists? ? update_response : create_response
-
-    if res.save && res.errors[:text_input].empty?
-      redirect_to next_path
+    if save_response!
+      redirect_to feedback_path(content.next_item.name)
     else
-      flash[:error] = res.errors.full_messages.to_sentence
-      redirect_to current_feedback_path
+      render 'feedback/show', status: :unprocessable_entity
     end
-  end
-
-  # @return [Boolean]
-  def feedback_exists?
-    return false if current_user.nil?
-
-    Response.where(user_id: current_user.id).exists?
-  end
-
-  # @return [String] path to next feedback step
-  def next_path
-    return my_modules_path if action_name == 'thank_you'
-    return feedback_path(1) if params[:id].nil?
-    return feedback_thank_you_path if params[:id].to_i == questions.count
-
-    feedback_path(params[:id].to_i + 1)
-  end
-
-  # @return [String] path to previous feedback step
-  def previous_path
-    return my_modules_path if params[:id].nil?
-    return feedback_path(1) if params[:id] == '1'
-
-    feedback_path(params[:id].to_i - 1)
   end
 
 private
 
   # @return [Boolean]
-  def guest?
-    current_user.nil?
-  end
-
-  # @return [Boolean]
-  def invalid_answer?
-    if answer.blank? || answer.all?(&:blank?) || (content.free_text? && text_input.blank?)
-      flash[:error] = 'Please answer the question'
-      redirect_to current_feedback_path and return true
-    else
-      false
-    end
-  end
-
-  # @return [Response]
-  def create_response
-    Response.new(
-      user_id: current_user ? current_user.id : nil,
-      answers: answer_content,
-      question_name: content.name,
-      text_input: text_input,
-      guest_visit: guest? ? current_visit.visitor_token : nil,
+  def save_response!
+    current_user_response.update(
+      question_type: 'feedback',
+      answers: user_answers,
+      correct: true,
+      text_input: response_params[:text_input],
     )
   end
 
-  # @return [Response]
-  def update_response
-    existing_response.update!(
-      answers: answer_content,
-      text_input: text_input,
-    )
-    existing_response
+  # @return [Course]
+  def mod
+    Course.config
   end
 
-  # @return [Boolean]
-  def response_exists?
-    existing_response.present?
-  end
-
-  # @return [Response]
-  def existing_response
-    Response.find_by(
-      guest_visit: guest? ? current_visit.visitor_token : nil,
-      user_id: current_user&.id,
-      question_name: content.name,
-    )
-  end
-
-  # @return [Boolean]
-  def show_question?
-    always_show_question? && (!current_user.nil? || !response_exists?)
-  end
-
-  # @return [Boolean]
-  def always_show_question?
-    !content.always_show_question.eql?(false)
-  end
-
-  # @param answer [String]
-  # @return [String]
-  def answer_wording(answer)
-    content.answers[answer.to_i - 1].first
-  end
-
-  # @return [Array<Hash>]
-  def questions
-    Course.config.feedback
-  end
-
-  # @return [String]
-  def current_feedback_path
-    feedback_path(params[:id])
-  end
-
-  # @return [Hash]
+  # @return [Training::Question]
   def content
-    @content ||= questions[params[:id].to_i - 1]
+    mod.page_by_name(question_name)
   end
 
-  # @return [Array<String>]
-  def answer
-    @answer ||= if content.free_text?
-                  params[:answers]
-                else
-                  Array.wrap(params[:answers])
-                end
+  # @return [Response]
+  def current_user_response
+    @current_user_response ||= current_user.response_for_shared(content, mod)
   end
 
-  # @return [Array<String>]
-  def answer_content
-    @answer_content ||= begin
-      return [] if answer.blank?
-      return answer if content.free_text?
-
-      answer.reject(&:blank?).map { |a| answer_wording(a) }.flatten
-    end
+  # @return [String]
+  def question_name
+    params[:id]
   end
 
-  def text_input
-    @text_input ||= params[:text_input]
+  # OPTIMIZE: duplicated from ResponsesController
+  def response_params
+    params.require(:response).permit!
+  end
+
+  # OPTIMIZE: duplicated from ResponsesController
+  def user_answers
+    Array(response_params[:answers]).compact_blank.map(&:to_i)
   end
 end

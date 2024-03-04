@@ -123,7 +123,12 @@ en:
     finish: View certificate
     give_feedback: Give feedback
 
+  previous_page:
+    previous: Previous
+
   links:
+    my_modules: Go to my modules
+    update_feedback: Update my feedback
     save: Save
     continue: Continue
     cancel: Cancel
@@ -621,21 +626,21 @@ en:
       Completing this form is voluntary and you can withdraw your feedback at any time.
 
       By completing this form you have understood the above and consent to take part.
+
     feedback_exists:
       heading: You have already submitted feedback
       body: Thank you for helping to improve this training
-      back_button: Previous
-      next_button: Update my feedback
+
     technical_support:
       heading: Technical support queries
-      body: If you have any questions about how to sue this website or are experiencing any technical issues, please use our contact form ADD LINK so that our team can follow up with your enquiry.
-    next_button: Next
+      body: |
+        If you have any questions about how to sue this website or are experiencing any
+        technical issues, please use our contact form ADD LINK so that our team can follow up with your enquiry.
     
     # /feedback/thank-you
     thank_you:
       heading: Thank you
       body: Thank you for helping to improve this training
-      next_button: Go to my modules
 
   # /gov-one/info
   gov_one_info:

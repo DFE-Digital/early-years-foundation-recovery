@@ -18,6 +18,25 @@ class Course < ContentfulModel::Base
     fetch_or_store('course') { first }
   end
 
+  #
+  # Quacks like training module
+  #
+
+  # @return [nil] mod.name
+  def name
+    nil
+  end
+
+  # @return [Array] mod.content_sections
+  def content_sections
+    Types::EMPTY_ARRAY
+  end
+
+  # @return [Array] mod.content_subsections
+  def content_subsections
+    Types::EMPTY_ARRAY
+  end
+
   # @return [Array<Training::Question>]
   def feedback
     super.to_a
@@ -34,5 +53,10 @@ class Course < ContentfulModel::Base
   # @return [Training::Question]
   def page_by_id(id)
     pages.find { |page| page.id.eql?(id) }
+  end
+
+  # @return [Training::Question]
+  def page_by_name(name)
+    pages.find { |page| page.name.eql?(name) }
   end
 end
