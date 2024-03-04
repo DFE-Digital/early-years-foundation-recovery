@@ -34,7 +34,7 @@ class FeedbackController < ApplicationController
   def next_path
     return my_modules_path if action_name == 'thank_you'
     return feedback_path(1) if params[:id].nil?
-    return thank_you_path if params[:id].to_i == questions.count
+    return feedback_thank_you_path if params[:id].to_i == questions.count
 
     feedback_path(params[:id].to_i + 1)
   end
