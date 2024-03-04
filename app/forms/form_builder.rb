@@ -16,7 +16,7 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
   def feedback_question_radio_buttons(content)
     @template.capture do
       content.options.each.with_index(1) do |option, index|
-        if content.is_last_option?(index) && content.has_other?
+        if content.last_option?(index) && content.has_other?
           @template.concat feedback_other_radio_button(content, option)
         else
           @template.concat question_radio_button(option)
@@ -34,9 +34,9 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
   def feedback_question_check_boxes(content)
     @template.capture do
       content.options.each.with_index(1) do |option, index|
-        if content.is_last_option?(index) && content.other.present?
+        if content.last_option?(index) && content.other.present?
           @template.concat feedback_other_check_box(content, option)
-        elsif content.is_last_option?(index) && content.or.present?
+        elsif content.last_option?(index) && content.or.present?
           @template.concat @template.content_tag(:div, 'Or', class: 'govuk-checkboxes__divider')
           @template.concat govuk_check_box :answers, 'Or', label: { text: content.or }, link_errors: true
         else

@@ -1,0 +1,3 @@
+= f.govuk_fieldset legend: { text: m(content.legend) } do
+  = m(content.hint) if content.has_hint?
+  = f.govuk_text_area :answers, label: nil, multiple: true

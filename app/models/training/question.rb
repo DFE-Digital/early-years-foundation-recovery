@@ -54,8 +54,13 @@ module Training
 
     # @param index [Integer]
     # @return [Boolean]
-    def is_last_option?(index)
+    def last_option?(index)
       options.count == index
+    end
+
+    # @return [Boolean]
+    def checkbox?
+      response_type
     end
 
     # @return [Boolean] event tracking

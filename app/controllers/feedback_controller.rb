@@ -1,5 +1,5 @@
 class FeedbackController < ApplicationController
-  helper_method :previous_path, :next_path, :content, :is_checkbox?, :is_free_text?, :feedback_exists?
+  helper_method :previous_path, :next_path, :content, :feedback_exists?
 
   # @return [nil]
   def show
@@ -21,16 +21,6 @@ class FeedbackController < ApplicationController
       flash[:error] = res.errors.full_messages.to_sentence
       redirect_to current_feedback_path
     end
-  end
-
-  # @return [String]
-  def is_checkbox?
-    content.response_type
-  end
-
-  # @return [Boolean]
-  def is_free_text?
-    content.answers.empty?
   end
 
   # @return [Boolean]
@@ -141,7 +131,7 @@ private
 
   # @return [Array<String>]
   def answer
-    @answer ||= if is_free_text?
+    @answer ||= if content.free_text?
                   params[:answers]
                 else
                   Array.wrap(params[:answers])
@@ -152,7 +142,7 @@ private
   def answer_content
     @answer_content ||= begin
       return [] if answer.blank?
-      return answer if is_free_text?
+      return answer if content.free_text?
 
       answer.reject(&:blank?).map { |a| answer_wording(a) }.flatten
     end

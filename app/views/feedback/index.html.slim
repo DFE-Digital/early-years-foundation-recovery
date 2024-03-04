@@ -1,7 +1,7 @@
 .govuk-grid-row
   .govuk-grid-column-full
         - if feedback_exists?
-            h1 t('feedback.feedback_exists.heading')
+            h1 = t('feedback.feedback_exists.heading')
             .govuk-button-group
                 .govuk-button-group 
                     = govuk_button_link_to t('feedback.feedback_exists.back_button'), previous_path, class: 'govuk-button--secondary'
