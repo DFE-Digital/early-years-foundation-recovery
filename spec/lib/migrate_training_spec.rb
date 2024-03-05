@@ -25,20 +25,6 @@ RSpec.describe MigrateTraining do
     end
   end
 
-  context 'with simulate' do
-    subject(:operation) { described_class.new(verbose: false, simulate: true) }
-
-    before do
-      create_list :response, 10
-      operation.call
-    rescue MigrateTraining::Error
-    end
-
-    it 'reverts changes' do
-      expect(Response.count).to eq 10
-    end
-  end
-
   context 'when data is valid' do
     before do
       create :user_answer,
@@ -46,6 +32,7 @@ RSpec.describe MigrateTraining do
              name: '1-1-4-1', # genuine key
              module: 'alpha',
              correct: false,
+             answer: %w[1 2 3],
              assessments_type: 'formative_assessment',
              user_assessment_id: nil,
              questionnaire_id: 0,
@@ -66,6 +53,7 @@ RSpec.describe MigrateTraining do
              name: '1-3-2-1', # genuine key
              module: 'alpha',
              correct: true,
+             answer: %w[1 2 3],
              assessments_type: 'summative_assessment',
              user_assessment_id: alpha_assessment.id,
              questionnaire_id: 0,
@@ -76,6 +64,7 @@ RSpec.describe MigrateTraining do
              name: '1-3-2-2', # genuine key
              module: 'alpha',
              correct: true,
+             answer: %i[1 2 3],
              assessments_type: 'summative_assessment',
              user_assessment_id: alpha_assessment.id,
              questionnaire_id: 0,
@@ -87,6 +76,7 @@ RSpec.describe MigrateTraining do
              name: '1-3-2-1', # genuine key
              module: 'bravo',
              correct: true,
+             answer: [1, 2, 3],
              assessments_type: 'summative_assessment',
              user_assessment_id: nil,
              questionnaire_id: 0,
@@ -97,10 +87,16 @@ RSpec.describe MigrateTraining do
              name: '1-3-2-2', # genuine key
              module: 'bravo',
              correct: true,
+             answer: ['', '1', :'2', 3],
              assessments_type: 'summative_assessment',
              user_assessment_id: nil,
              questionnaire_id: 0,
              created_at: Time.zone.local(2024, 2, 2)
+    end
+
+    it 'coerces errant answers to numbers' do
+      operation.call
+      expect(Response.all.map(&:answers)).to eq(Array.new(5) { [1, 2, 3] })
     end
 
     it 'migrates everything' do

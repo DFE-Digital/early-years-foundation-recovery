@@ -19,8 +19,6 @@ class MigrateTraining
   # @return [Boolean]
   option :truncate, Types::Bool, default: proc { false }, reader: :private
   # @return [Boolean]
-  option :simulate, Types::Bool, default: proc { false }, reader: :private
-  # @return [Boolean]
   option :verbose, Types::Bool, default: proc { true }, reader: :private
   # @return [Integer]
   option :batch, Types::Integer, default: proc { 100 }, reader: :private
@@ -33,7 +31,6 @@ class MigrateTraining
     truncate! if truncate
     migrate!
     log "Migration finished: #{Time.zone.now}"
-    raise Error if simulate
   end
 
 private
@@ -124,17 +121,23 @@ private
   # @return [Hash<Symbol=>Mixed>]
   def response_params(user_answer)
     {
-      id: user_answer.id,                                   # int db primary key
-      user_id: user_answer.user_id,                         # int db foreign key
-      assessment_id: user_answer.user_assessment_id,        # int db foreign key
-      training_module: user_answer.module,                  # string cms key
-      question_name: user_answer.name,                      # string cms key
-      question_type: user_answer.question.question_type,    # string cms filter
-      answers: user_answer.answer,                          # array
-      correct: user_answer.correct,                         # bool
-      created_at: user_answer.created_at,                   # datetime
-      updated_at: user_answer.updated_at,                   # datetime
+      id: user_answer.id,                                 # int db primary key
+      user_id: user_answer.user_id,                       # int db foreign key
+      assessment_id: user_answer.user_assessment_id,      # int db foreign key
+      training_module: user_answer.module,                # string cms key
+      question_name: user_answer.name,                    # string cms key
+      question_type: user_answer.question.question_type,  # string cms filter
+      answers: coerce_answers(user_answer.answer),        # array
+      correct: user_answer.correct,                       # bool
+      created_at: user_answer.created_at,                 # datetime
+      updated_at: user_answer.updated_at,                 # datetime
     }
+  end
+
+  # @param serialised_answer [Array<Symbol, String, Integer>]
+  # @return [Array<Integer>]
+  def coerce_answers(serialised_answer)
+    Array(serialised_answer).map(&:to_s).compact_blank.map(&:to_i)
   end
 
   # @param message [String]
