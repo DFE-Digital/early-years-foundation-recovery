@@ -41,10 +41,17 @@ module LinkHelper
 
   # @return [String] previous page or module overview
   def link_to_previous
-    govuk_button_link_to previous_page.text, previous_page.previous_path,
-                         id: 'previous-action',
-                         class: previous_page.style,
-                         aria: { label: t('pagination.previous') }
+    if content.interruption_page?
+      govuk_button_link_to previous_page.text, training_module_path(mod.name),
+                           id: 'previous-action',
+                           class: previous_page.style,
+                           aria: { label: t('pagination.previous') }
+    else
+      govuk_button_link_to previous_page.text, training_module_page_path(mod.name, previous_page.name),
+                           id: 'previous-action',
+                           class: previous_page.style,
+                           aria: { label: t('pagination.previous') }
+    end
   end
 
   # Bottom of my-modules card component

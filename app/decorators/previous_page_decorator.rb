@@ -21,25 +21,14 @@ class PreviousPageDecorator
 
   # @return [String]
   def name
-    if content.interruption_page?
-      mod.content_start.name
-    else
-      content.previous_item.name
-    end
-  end
-
-  # @return [String]
-  def previous_path
     previous_content = content.previous_item
 
-    if content.interruption_page?
-      Rails.application.routes.url_helpers.training_module_path(mod.name)
-    elsif skippable_page?
-      Rails.application.routes.url_helpers.training_module_page_path(mod.name, previous_content.previous_item.name)
+    if skippable_page?
+      previous_content.previous_item.name
     elsif skip_back_to_feedback_intro?
-      Rails.application.routes.url_helpers.training_module_page_path(mod.name, mod.opinion_intro_page.name)
+      mod.opinion_intro_page.name
     else
-      Rails.application.routes.url_helpers.training_module_page_path(mod.name, content.previous_item.name)
+      content.previous_item.name
     end
   end
 
@@ -82,18 +71,8 @@ private
   end
 
   # @return [Boolean]
-  def save?
-    content.notes? || content.summative_question?
-  end
-
-  # @return [Boolean]
   def answered?
     user.response_for(content).responded?
-  end
-
-  # @return [Boolean]
-  def missing?
-    content.previous_item.eql?(content) && wip?
   end
 
   # @return [Boolean]
@@ -114,10 +93,5 @@ private
   # @return [Boolean]
   def skip_back_to_feedback_intro?
     content.thankyou? && !user.response_for_shared(content.previous_item, mod).responded?
-  end
-
-  # @return [Boolean]
-  def wip?
-    Rails.application.preview? || Rails.env.test?
   end
 end
