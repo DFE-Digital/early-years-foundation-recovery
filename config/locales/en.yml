@@ -612,8 +612,9 @@ en:
   
   # /feedback
   feedback:
-    heading: Give feedback
-    body: |
+    intro: |
+      # Give feedback
+
       The purpose of this feedback form is to gather your opinon on the child development
       training course that the Department for Education has created for early years practitioners.
 
@@ -623,15 +624,18 @@ en:
 
       By completing this form you have understood the above and consent to take part.
 
-    feedback_exists:
-      heading: You have already submitted feedback
-      body: Thank you for helping to improve this training
+    feedback_exists: |
+      # You have already submitted feedback
 
-    technical_support:
-      heading: Technical support queries
-      body: |
-        If you have any questions about how to sue this website or are experiencing any
-        technical issues, please use our contact form ADD LINK so that our team can follow up with your enquiry.
+      Thank you for helping to improve this training
+
+      ## Technical support queries
+
+      If you have any questions about how to sue this website or are experiencing any
+      technical issues, please use our contact form ADD LINK so that our team can follow up with your enquiry.
+
+      ---
+        
     
     # /feedback/thank-you
     thank_you:

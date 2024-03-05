@@ -31,7 +31,7 @@ RSpec.describe FormBuilder do
 
     it 'options' do
       options = YAML.load_file Rails.root.join('data/setting-type.yml')
-      expect(output).to include *options.map { |s| s['name'] }
+      expect(output).to include(*options.map { |s| s['name'] })
     end
   end
 end

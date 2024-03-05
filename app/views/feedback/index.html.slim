@@ -1,7 +1,17 @@
 .govuk-grid-row
   .govuk-grid-column-full
     - if respondant.completed_main_feedback?
-      = render 'completed_main_feedback_introduction', mod: mod
+      = m('feedback.feedback_exists')
+
+      .govuk-button-group
+        = govuk_button_link_to t('previous_page.previous'), my_modules_path, secondary: true
+        = govuk_button_link_to t('links.update_feedback'), feedback_path(mod.pages.first.name)
 
     - else
-      = render 'main_feedback_introduction', mod: mod
+      = m('feedback.intro')
+
+      .govuk-button-group
+        = govuk_button_link_to t('next_page.give_feedback'), feedback_path(mod.pages.first.name)
+
+      
+      
