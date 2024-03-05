@@ -2,6 +2,8 @@
   .govuk-grid-column-full
     - if current_user.completed_main_feedback?
 
+      -# why not one single block of markdown?
+
       h1= t('feedback.feedback_exists.heading')
 
       .govuk-button-group
@@ -10,9 +12,12 @@
           = govuk_button_link_to t('links.update_feedback'), feedback_path(mod.pages.first.name)
 
     - else
+
+      -# why not one single block of markdown?
+
       h1= t('feedback.heading')
 
-      p= m('feedback.body')
+      = m('feedback.body')
 
       h2= t('feedback.technical_support.heading')
 

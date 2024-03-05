@@ -8,12 +8,14 @@
 
       = f.govuk_error_summary
 
+      -# a form inside a heading element is not accessible
+
       h1.govuk-heading-xl class='govuk-!-margin-bottom-4'
 
         = render partial: content.to_partial_path, locals: { f: f }, object: current_user_response, as: :response
 
       .govuk-button-group
-        - if mod.pages.first.eql?(content)
+        - if content.first_feedback?
           = govuk_button_link_to t('previous_page.previous'), feedback_index_path, secondary: true
         - else
           = govuk_button_link_to t('previous_page.previous'), feedback_path(content.previous_item.name), secondary: true

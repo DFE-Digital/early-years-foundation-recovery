@@ -57,11 +57,11 @@ module LinkHelper
 
     # Check if feedback questions have been skipped
     if content.thankyou? && !current_user.response_for_shared(content.previous_item, mod).responded?
-      govuk_button_link_to 'Previous', training_module_page_path(mod.name, mod.opinion_intro_page.name),
+      govuk_button_link_to t('previous_page.previous'), training_module_page_path(mod.name, mod.opinion_intro_page.name),
                            class: style,
                            aria: { label: t('pagination.previous') }
     else
-      govuk_button_link_to 'Previous', path,
+      govuk_button_link_to t('previous_page.previous'), path,
                            class: style,
                            aria: { label: t('pagination.previous') }
     end

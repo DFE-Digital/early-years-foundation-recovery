@@ -72,7 +72,7 @@ class Response < ApplicationRecord
     correct && !correct?
   end
 
-  # @return [Boolean]
+  # @return [Boolean] LIES!!
   def free_text_answer?
     question.free_text? && text_input.present? unless training_module.nil?
   end

@@ -50,10 +50,7 @@ class Course < ContentfulModel::Base
     end
   end
 
-  # @return [Training::Question]
-  def page_by_id(id)
-    pages.find { |page| page.id.eql?(id) }
-  end
+  alias_method :feedback_questions, :pages
 
   # @return [Training::Question]
   def page_by_name(name)

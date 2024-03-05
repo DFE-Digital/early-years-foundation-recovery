@@ -81,14 +81,9 @@ module Training
       parent.summative_questions.last.eql?(self)
     end
 
-    # @return [Boolean] event tracking
+    # @return [Boolean]
     def first_feedback?
       parent.feedback_questions.first.eql?(self)
-    end
-
-    # @return [Boolean] event tracking
-    def last_feedback?
-      parent.feedback_questions.last.eql?(self)
     end
 
     # @return [Boolean]

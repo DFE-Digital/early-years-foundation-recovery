@@ -1,5 +1,7 @@
 = f.govuk_check_boxes_fieldset :answers, multiple: true, legend: { text: content.legend } do
-  =  m(content.hint) unless content.hint.nil?
-
   = f.hidden_field :answers, multiple: true
+
+  - if content.has_hint?
+    = m(content.hint)
+
   = f.feedback_question_check_boxes(content)

@@ -222,11 +222,6 @@ en:
 
       Please rate to what extent you agree with the statements on the following pages.
 
-  thankyou:
-    heading: Thank you
-    body: |
-      You can also {external}[give feedback about the training](%{feedback_url}){/external}
-
   certificate:
     heading: Download your certificate
 
@@ -619,7 +614,8 @@ en:
   feedback:
     heading: Give feedback
     body: |
-      The purpose of this feedback form is to gather your opinion on the child development training course that the Department for Education has created for early years practitioners.
+      The purpose of this feedback form is to gather your opinon on the child development
+      training course that the Department for Education has created for early years practitioners.
 
       For more information on how you data will be used, please view our privacy notice. ADD LINK
 
