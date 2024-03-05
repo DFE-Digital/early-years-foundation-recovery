@@ -23,6 +23,8 @@ class NextPageDecorator
   def name
     if content.interruption_page?
       mod.content_start.name
+    elsif skippable_page?
+      content.next_item.next_item.name
     else
       content.next_item.name
     end
@@ -113,5 +115,10 @@ private
   # @return [Boolean]
   def wip?
     Rails.application.preview? || Rails.env.test?
+  end
+
+  # @return [Boolean]
+  def skippable_page?
+    !content.interruption_page? && content.next_item.skippable? && user.response_for_shared(content.next_item, mod).responded?
   end
 end
