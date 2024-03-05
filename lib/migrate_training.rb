@@ -29,13 +29,11 @@ class MigrateTraining
 
   # @return [nil]
   def call
-    ActiveRecord::Base.transaction do
-      log "Migration started: #{Time.zone.now}"
-      truncate! if truncate
-      migrate!
-      log "Migration finished: #{Time.zone.now}"
-      raise Error if simulate
-    end
+    log "Migration started: #{Time.zone.now}"
+    truncate! if truncate
+    migrate!
+    log "Migration finished: #{Time.zone.now}"
+    raise Error if simulate
   end
 
 private
@@ -50,8 +48,10 @@ private
   def migrate!
     UserAnswer.find_each(start: resume, batch_size: batch) do |user_answer|
       if valid?(user_answer)
-        response = process_user_answer(user_answer)
-        log response.attributes.to_json, alert: false
+        ActiveRecord::Base.transaction do
+          response = process_user_answer(user_answer)
+          log response.attributes.to_json, alert: false
+        end
       else
         log "User: #{user_answer.user_id} UserAnswer: #{user_answer.id}"
       end
