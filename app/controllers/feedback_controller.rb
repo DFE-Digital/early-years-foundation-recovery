@@ -1,7 +1,8 @@
 class FeedbackController < ApplicationController
   helper_method :content,
                 :mod,
-                :current_user_response
+                :current_user_response,
+                :respondant
 
   def show; end
 
@@ -13,6 +14,11 @@ class FeedbackController < ApplicationController
     else
       render 'feedback/show', status: :unprocessable_entity
     end
+  end
+
+  # @return [User | Guest]
+  def respondant
+    @respondant ||= current_user || Guest.new(visit_id: current_visit.id)
   end
 
 private
@@ -39,7 +45,7 @@ private
 
   # @return [Response]
   def current_user_response
-    @current_user_response ||= current_user.response_for_shared(content, mod)
+    @current_user_response ||= respondant.response_for_shared(content, mod)
   end
 
   # @return [String]

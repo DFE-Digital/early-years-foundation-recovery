@@ -179,6 +179,11 @@ class User < ApplicationRecord
     !gov_one_id.nil?
   end
 
+  # @return [Boolean]
+  def guest?
+    false
+  end
+
   # @see Devise database_authenticatable
   # @param params [Hash]
   # @return [Boolean]
