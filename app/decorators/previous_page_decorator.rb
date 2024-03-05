@@ -1,9 +1,9 @@
 # TODO: assessments controller #new can be removed
 #
-# Button or link labels to the next page
-# @see [LinkHelper#link_to_next]
+# Button or link labels to the previous page
+# @see [LinkHelper#link_to_previous]
 #
-class NextPageDecorator
+class PreviousPageDecorator
   extend Dry::Initializer
 
   # @!attribute [r] user
@@ -24,25 +24,38 @@ class NextPageDecorator
     if content.interruption_page?
       mod.content_start.name
     else
-      content.next_item.name
+      content.previous_item.name
+    end
+  end
+
+  # @return [String]
+  def previous_path
+    previous_content = content.previous_item
+
+    if content.interruption_page?
+      Rails.application.routes.url_helpers.training_module_path(mod.name)
+    elsif skippable_page?
+      Rails.application.routes.url_helpers.training_module_page_path(mod.name, previous_content.previous_item.name)
+    elsif skip_back_to_feedback_intro?
+      Rails.application.routes.url_helpers.training_module_page_path(mod.name, mod.opinion_intro_page.name)
+    else
+      Rails.application.routes.url_helpers.training_module_page_path(mod.name, content.previous_item.name)
+    end
+  end
+
+  # @return [String]
+  def style
+    if content.section? && !content.opinion_intro?
+      'section-intro-previous-button'
+    else
+      'govuk-button--secondary'
     end
   end
 
   # @see [Pagination]
   # @return [String]
   def text
-    case
-    when next?            then label[:next]
-    when missing?         then label[:missing]
-    when content_section? then label[:section]
-    when opinion_intro?   then label[:give_feedback] # Make confidence outro
-    when test_start?      then label[:start_test]
-    when test_finish?     then label[:finish_test]
-    when finish?          then label[:finish]
-    when save?            then label[:save_continue]
-    else
-      label[:next]
-    end
+    label[:previous]
   end
 
   # @return [Boolean]
@@ -60,11 +73,11 @@ private
 
   # @return [Hash=>Symbol]
   def label
-    I18n.t(:next_page)
+    I18n.t(:previous_page)
   end
 
   # @return [Boolean]
-  def next?
+  def previous?
     content.interruption_page? || disable_question_submission?
   end
 
@@ -79,25 +92,8 @@ private
   end
 
   # @return [Boolean]
-  def finish?
-    content.next_item.certificate?
-  end
-
-  # @return [Boolean]
-  def test_start?
-    content.next_item.summative_question? &&
-      !content.summative_question? &&
-      !disable_question_submission?
-  end
-
-  # @return [Boolean]
-  def test_finish?
-    content.next_item.assessment_results? && !disable_question_submission?
-  end
-
-  # @return [Boolean]
   def missing?
-    content.next_item.eql?(content) && wip?
+    content.previous_item.eql?(content) && wip?
   end
 
   # @return [Boolean]
@@ -108,6 +104,16 @@ private
   # @return [Boolean]
   def content_section?
     content.section? && !content.opinion_intro?
+  end
+
+  # @return [Boolean]
+  def skippable_page?
+    !content.interruption_page? && content.previous_item.skippable? && user.response_for_shared(content.previous_item, mod).responded?
+  end
+
+  # @return [Boolean]
+  def skip_back_to_feedback_intro?
+    content.thankyou? && !user.response_for_shared(content.previous_item, mod).responded?
   end
 
   # @return [Boolean]

@@ -41,30 +41,10 @@ module LinkHelper
 
   # @return [String] previous page or module overview
   def link_to_previous
-    previous_content = content.previous_item
-    path =
-      if content.interruption_page?
-        training_module_path(mod.name)
-      else
-        training_module_page_path(mod.name, previous_content.name)
-      end
-
-    if !content.interruption_page? && content.previous_item.skippable? && current_user.response_for_shared(content.previous_item, mod).responded?
-      path = training_module_page_path(mod.name, previous_content.previous_item.name)
-    end
-
-    style = content.section? && !content.opinion_intro? ? 'section-intro-previous-button' : 'govuk-button--secondary'
-
-    # Check if feedback questions have been skipped
-    if content.thankyou? && !current_user.response_for_shared(content.previous_item, mod).responded?
-      govuk_button_link_to t('previous_page.previous'), training_module_page_path(mod.name, mod.opinion_intro_page.name),
-                           class: style,
-                           aria: { label: t('pagination.previous') }
-    else
-      govuk_button_link_to t('previous_page.previous'), path,
-                           class: style,
-                           aria: { label: t('pagination.previous') }
-    end
+    govuk_button_link_to previous_page.text, previous_page.previous_path,
+                         id: 'previous-action',
+                         class: previous_page.style,
+                         aria: { label: t('pagination.previous') }
   end
 
   # Bottom of my-modules card component
@@ -95,6 +75,16 @@ module LinkHelper
   # @return [NextPageDecorator]
   def next_page
     NextPageDecorator.new(
+      user: current_user,
+      mod: mod,
+      content: content,
+      assessment: assessment_progress_service(mod),
+    )
+  end
+
+  # @return [PreviousPageDecorator]
+  def previous_page
+    PreviousPageDecorator.new(
       user: current_user,
       mod: mod,
       content: content,
