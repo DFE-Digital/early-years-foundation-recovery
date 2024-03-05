@@ -55,12 +55,6 @@ module Training
       other.present?
     end
 
-    # @param index [Integer]
-    # @return [Boolean]
-    def last_option?(index)
-      options.count == index
-    end
-
     # @return [Boolean]
     def checkbox?
       response_type

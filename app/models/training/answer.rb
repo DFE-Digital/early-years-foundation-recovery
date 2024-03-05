@@ -13,6 +13,15 @@ module Training
     #
     attribute :json, Types::Array.of(Types::Array).default(Types::EMPTY_ARRAY)
 
+    class Option < Dry::Struct
+      attribute :answer, Types.Instance(Answer)
+
+      # @return [Boolean]
+      def last_option?
+        answer.options.last.eql?(self)
+      end
+    end
+
     # @return [Boolean]
     def valid?
       options.all? && gteq?(options, 2) && gteq?(correct_answers, 1)
@@ -58,6 +67,7 @@ module Training
           correct: value,
           disabled: disabled,
           checked: checked.include?(order),
+          answer: self,
         )
       end
     end
