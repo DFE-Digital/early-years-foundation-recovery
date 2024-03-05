@@ -246,7 +246,7 @@ module Training
     end
 
     # @return [Array<Training::Question>]
-    def opinion_questions
+    def feedback_questions
       content.select(&:feedback_question?)
     end
 

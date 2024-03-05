@@ -32,11 +32,6 @@ module LinkHelper
     [text, path]
   end
 
-  # @return [Boolean]
-  def one_off_question?
-    always_show_question.eql?(false)
-  end
-
   # @return [String] next page (ends on certificate)
   def link_to_next
     govuk_button_link_to next_page.text, training_module_page_path(mod.name, next_page.name),

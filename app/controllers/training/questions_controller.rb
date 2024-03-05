@@ -54,7 +54,7 @@ module Training
 
     # @return [Boolean]
     def track_feedback_start?
-      content.feedback_question? || content.opinion_intro?
+      content.first_feedback? && feedback_start_untracked?
     end
 
     # @return [Boolean]
@@ -72,6 +72,11 @@ module Training
     # @return [Boolean]
     def confidence_start_untracked?
       untracked?('confidence_check_start', training_module_id: mod.name)
+    end
+
+    # @return [Boolean]
+    def feedback_start_untracked?
+      untracked?('feedback_start', training_module_id: mod.name)
     end
   end
 end

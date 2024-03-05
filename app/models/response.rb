@@ -64,7 +64,7 @@ class Response < ApplicationRecord
 
   # @return [Boolean]
   def correct?
-    question.opinon_question? || question.correct_answers.eql?(answers)
+    question.opinion_question? || question.correct_answers.eql?(answers)
   end
 
   # @return [Boolean]
