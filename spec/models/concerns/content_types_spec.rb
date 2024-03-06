@@ -88,12 +88,6 @@ RSpec.describe ContentTypes, type: :model do
     specify { expect(content).to be_confidence_question }
   end
 
-  describe '#opinion_intro?' do
-    before { content.page_type = 'opinion_intro' }
-
-    specify { expect(content).to be_opinion_intro }
-  end
-
   describe '#feedback_question?' do
     before { content.page_type = 'feedback' }
 

@@ -3,7 +3,7 @@
 module Pagination
   # @return [Boolean]
   def section?
-    submodule_intro? || summary_intro? || opinion_intro? || certificate?
+    submodule_intro? || summary_intro? || feedback_form? || certificate?
   end
 
   # @return [Boolean]
@@ -95,6 +95,16 @@ module Pagination
   # @return [String]
   def position_within(collection)
     (collection.index(self) + 1).ordinalize
+  end
+
+  # @return [Boolean]
+  def feedback_form?
+    parent.feedback_questions.first.eql?(self)
+  end
+
+  # @return [Boolean]
+  def feedback_form_heading
+    parent.page_by_id('feedback-intro')
   end
 
 private

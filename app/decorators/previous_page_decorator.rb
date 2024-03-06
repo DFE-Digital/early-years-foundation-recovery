@@ -28,7 +28,11 @@ class PreviousPageDecorator
 
   # @return [String]
   def style
-    content_section? ? 'section-intro-previous-button' : 'govuk-button--secondary'
+    if content.section? && !content.first_feedback?
+      'section-intro-previous-button'
+    else
+      'govuk-button--secondary'
+    end
   end
 
   # @see [Pagination]
@@ -53,7 +57,7 @@ private
 
   # @return [Boolean]
   def content_section?
-    content.section? && !content.opinion_intro?
+    content.section? && !content.first_feedback?
   end
 
   # @return [Boolean]

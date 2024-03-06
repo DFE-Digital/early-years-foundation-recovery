@@ -90,15 +90,9 @@ module ContentTypes
   end
 
   # @return [Boolean]
-  def opinion_intro?
-    page_type.eql?('opinion_intro')
-    # def confidence_outro?
-    #   page_type.eql?('confidence_outro')
-  end
-
-  # @return [Boolean]
   def one_off_question?
-    always_show_question.eql?(false)
+    # is this in the right place?
+    skippable_question.eql?(true)
   end
 
   # @return [Boolean]

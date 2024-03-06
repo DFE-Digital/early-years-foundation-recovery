@@ -57,7 +57,11 @@ module Learning
 
   # @return [PaginationDecorator]
   def section_bar
-    PaginationDecorator.new(content)
+    if content.feedback_question?
+      FeedbackPaginationDecorator.new(content)
+    else
+      PaginationDecorator.new(content)
+    end
   end
 
   # ----------------------------------------------------------------------------

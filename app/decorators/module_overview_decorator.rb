@@ -42,7 +42,7 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
         display_line: position != mod.submodule_count,
         icon: status(content_items),
         subsections: subsections(submodule: submodule, items: content_items),
-        hide: content_items.first.opinion_intro?,
+        hide: content_items.first.feedback_form?,
       }
     end
   end

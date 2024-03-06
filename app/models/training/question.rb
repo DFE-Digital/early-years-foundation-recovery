@@ -16,7 +16,7 @@ module Training
 
     # @return [Boolean]
     def skippable?
-      !always_show_question
+      skippable_question
     end
 
     # @return [String] powered by JSON not type

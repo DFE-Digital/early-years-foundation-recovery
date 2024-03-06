@@ -11,4 +11,5 @@
       .govuk-button-group
         = link_to_previous
         = link_to_next
-        = link_to_skip
+        - if content.next_item.feedback_question?
+          = link_to_skip
