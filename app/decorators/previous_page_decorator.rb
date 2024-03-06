@@ -1,4 +1,3 @@
-# TODO: assessments controller #new can be removed
 #
 # Button or link labels to the previous page
 # @see [LinkHelper#link_to_previous]
@@ -15,18 +14,13 @@ class PreviousPageDecorator
   # @!attribute [r] content
   #   @return [Training::Page, Training::Question, Training::Video]
   option :content, Types::TrainingContent, required: true
-  # @!attribute [r] assessment
-  #   @return [AssessmentProgress]
-  option :assessment, required: true
 
   # @return [String]
   def name
-    previous_content = content.previous_item
-
-    if skippable_page?
-      previous_content.previous_item.name
-    elsif skip_back_to_feedback_intro?
-      mod.opinion_intro_page.name
+    if skip_previous_question?
+      content.previous_item.previous_item.name
+    elsif feedback_not_started?
+      mod.feedback_questions.first.previous_item.name # OPTIMIZE: doubtful a specific type is even necessary
     else
       content.previous_item.name
     end
@@ -34,28 +28,13 @@ class PreviousPageDecorator
 
   # @return [String]
   def style
-    if content.section? && !content.opinion_intro?
-      'section-intro-previous-button'
-    else
-      'govuk-button--secondary'
-    end
+    content_section? ? 'section-intro-previous-button' : 'govuk-button--secondary'
   end
 
   # @see [Pagination]
   # @return [String]
   def text
     label[:previous]
-  end
-
-  # @return [Boolean]
-  def disable_question_submission?
-    if content.formative_question?
-      answered?
-    elsif content.summative_question?
-      answered? && (Rails.application.migrated_answers? ? assessment.graded? : assessment.score.present?)
-    else
-      false
-    end
   end
 
 private
@@ -66,18 +45,10 @@ private
   end
 
   # @return [Boolean]
-  def previous?
-    content.interruption_page? || disable_question_submission?
-  end
+  def answered?(question)
+    return false unless question.feedback_question?
 
-  # @return [Boolean]
-  def answered?
-    user.response_for(content).responded?
-  end
-
-  # @return [Boolean]
-  def opinion_intro?
-    content.opinion_intro?
+    user.response_for_shared(question, mod).responded?
   end
 
   # @return [Boolean]
@@ -86,12 +57,18 @@ private
   end
 
   # @return [Boolean]
-  def skippable_page?
-    !content.interruption_page? && content.previous_item.skippable? && user.response_for_shared(content.previous_item, mod).responded?
+  def skip_previous_question?
+    content.previous_item.skippable? && answered?(content.previous_item)
   end
 
+  # on the post-feedback page with the last feedback question unanswered
+  #
+  #   - once a feedback question is answered the feedback form is started
+  #   - a response for the last question is therefore sufficient to determine this
+  #   - because you can't get here without answering the last question
+  #
   # @return [Boolean]
-  def skip_back_to_feedback_intro?
-    content.thankyou? && !user.response_for_shared(content.previous_item, mod).responded?
+  def feedback_not_started?
+    content.thankyou? && !answered?(content.previous_item)
   end
 end

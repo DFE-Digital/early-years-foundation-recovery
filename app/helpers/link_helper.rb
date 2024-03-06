@@ -90,7 +90,6 @@ module LinkHelper
       user: current_user,
       mod: mod,
       content: content,
-      assessment: assessment_progress_service(mod),
     )
   end
 end

@@ -20,6 +20,20 @@ RSpec.describe PreviousPageDecorator do
   let(:content) { mod.page_by_name('1-1-2') }
   let(:assessment) { double }
 
+  describe '#style' do
+    it do
+      expect(decorator.style).to eq 'govuk-button--secondary'
+    end
+
+    context 'when page introduces a section' do
+      let(:content) { mod.page_by_name('1-2') }
+
+      it do
+        expect(decorator.style).to eq 'section-intro-previous-button'
+      end
+    end
+  end
+
   describe '#text' do
     it do
       expect(decorator.text).to eq 'Previous'
@@ -31,7 +45,23 @@ RSpec.describe PreviousPageDecorator do
       expect(decorator.name).to eq '1-1-1'
     end
 
+    context 'when feedback was skipped' do
+      let(:content) { mod.page_by_name('1-3-3-5') }
+
+      it 'skips back to start of feedback form' do
+        expect(decorator.name).to eq 'feedback-intro'
+      end
+    end
+
     context 'when previous page is skippable' do
+      # This context is insufficiently prepared
+      #
+      # The assertion here is that a special kind of feedback question is asked
+      # in every form but once answered is never asked again.
+      #
+      # Therefore, as we transition through 'alpha' in this spec, we need a scenario
+      # where the question was answered in the main feedack form or another module.
+      #
       let(:content) { mod.page_by_name('1-3-3-5') }
 
       context 'and unanswered' do
