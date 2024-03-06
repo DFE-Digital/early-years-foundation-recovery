@@ -1,16 +1,18 @@
 = f.govuk_check_boxes_fieldset :answers, legend: { text: response.legend } do
-  = f.hidden_field :answers
 
   - response.options.each do |option|
 
     - if option.last?
       - if content.has_other?
-        = f.other_check_box(option, content.other)
+        = f.other_check_box(option, text: content.other)
 
-      - elsif content.has_or?
+      - if content.has_or?
         / TODO: use locale
         = f.govuk_check_box_divider 'Or'
         = f.govuk_check_box :answers, 'Or', label: { text: content.or }, link_errors: true
 
     - else
       = f.question_check_box(option)
+
+  - if content.has_hint?
+    = f.govuk_text_area :text_input, label: { text: content.hint, class: 'govuk-!-font-weight-bold govuk-!-margin-top-8 govuk-!-margin-bottom-4' }

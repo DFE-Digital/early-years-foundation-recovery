@@ -22,17 +22,17 @@ module ContentTypes
 
   # @return [Boolean]
   def is_question?
-    page_type.match?(/formative|summative|confidence|feedback/)
+    factual_question? || opinion_question?
   end
 
   # @return [Boolean]
   def opinion_question?
-    page_type.match?(/confidence|feedback/)
+    confidence_question? || feedback_question?
   end
 
   # @return [Boolean]
   def factual_question?
-    page_type.match?(/formative|summative/)
+    formative_question? || summative_question?
   end
 
   # @return [Boolean]

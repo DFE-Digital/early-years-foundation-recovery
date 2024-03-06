@@ -14,31 +14,6 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
     super(attribute_name, **options.reverse_merge(width: 'two-thirds'))
   end
 
-  # @param option [Training::Answer::Option]
-  # @param text [String]
-  # @return [String]
-  def other_check_box(option, text)
-    govuk_check_box :answers,
-                    option.id,
-                    label: { text: 'Other' }, # TODO: use locale
-                    link_errors: true do
-      govuk_text_field :text_input, label: { text: text }
-    end
-  end
-
-  # @param option [Training::Answer::Option]
-  # @param text [String]
-  # @return [String]
-  def other_radio_button(option, text)
-    govuk_radio_button :answers,
-                       option.id,
-                       label: { text: option.label },
-                       link_errors: true,
-                       checked: option.checked? do
-      govuk_text_field :text_input, label: { text: text }
-    end
-  end
-
   # @return [String]
   def terms_and_conditions_check_box
     govuk_check_box :terms_and_conditions_agreed_at,
@@ -62,6 +37,20 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
   end
 
   # @param option [Training::Answer::Option]
+  # @option text [String]
+  # @return [String]
+  def other_radio_button(option, text:)
+    govuk_radio_button :answers,
+                    option.id,
+                    label: { text: option.label },
+                    link_errors: true,
+                    disabled: option.disabled?,
+                    checked: option.checked? do
+      govuk_text_field :text_input, label: { text: text }
+    end
+  end
+
+  # @param option [Training::Answer::Option]
   # @return [String]
   def question_check_box(option)
     govuk_check_box :answers,
@@ -70,6 +59,20 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
                     link_errors: true,
                     disabled: option.disabled?,
                     checked: option.checked?
+  end
+
+  # @param option [Training::Answer::Option]
+  # @option text [String]
+  # @return [String]
+  def other_check_box(option, text:)
+    govuk_check_box :answers,
+                    option.id,
+                    label: { text: option.label },
+                    link_errors: true,
+                    disabled: option.disabled?,
+                    checked: option.checked? do
+      govuk_text_field :text_input, label: { text: text }
+    end
   end
 
   # @return [String]

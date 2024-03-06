@@ -5,7 +5,12 @@
 
     - if option.last?
       - if content.has_other?
-        = f.other_radio_button(content, option)
+        = f.other_radio_button(option, text: content.other)
+
+      - if content.has_or?
+        / TODO: use locale
+        = f.govuk_radio_divider 'Or'
+        = f.govuk_radio_button :answers, 'Or', label: { text: content.or }, link_errors: true
 
     - else
       = f.question_radio_button(option)
