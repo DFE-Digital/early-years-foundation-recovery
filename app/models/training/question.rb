@@ -56,6 +56,11 @@ module Training
     end
 
     # @return [Boolean]
+    def has_or?
+      self.or.present?
+    end
+
+    # @return [Boolean]
     def checkbox?
       response_type
     end

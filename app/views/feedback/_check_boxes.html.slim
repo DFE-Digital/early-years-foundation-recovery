@@ -1,5 +1,16 @@
-h1 Feedback Partial
-
 = f.govuk_check_boxes_fieldset :answers, legend: { text: response.legend } do
+  = f.hidden_field :answers
+
   - response.options.each do |option|
-    = f.question_check_box(option)
+
+    - if option.last?
+      - if content.has_other?
+        = f.other_check_box(option, content.other)
+
+      - elsif content.has_or?
+        / TODO: use locale
+        = f.govuk_check_box_divider 'Or'
+        = f.govuk_check_box :answers, 'Or', label: { text: content.or }, link_errors: true
+
+    - else
+      = f.question_check_box(option)

@@ -73,11 +73,11 @@ RSpec.describe PreviousPageDecorator do
       context 'and answered' do
         before do
           create :response,
-            question_name: 'end-of-module-feedback-5',
-            training_module: 'alpha',
-            answers: [1],
-            correct: true,
-            user: create(:user)
+                 question_name: 'end-of-module-feedback-5',
+                 training_module: 'alpha',
+                 answers: [1],
+                 correct: true,
+                 user: create(:user)
         end
 
         it 'is two steps back' do

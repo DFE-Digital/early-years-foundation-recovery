@@ -14,75 +14,32 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
     super(attribute_name, **options.reverse_merge(width: 'two-thirds'))
   end
 
-  # @param content [Object]
+  # @param option [Training::Answer::Option]
+  # @param text [String]
   # @return [String]
-  def feedback_question_radio_buttons(content)
-    @template.capture do
-      content.options.each.with_index(1) do |option, _index|
-        if option.last_option? && content.has_other?
-          @template.concat feedback_other_radio_button(content, option)
-        else
-          @template.concat question_radio_button(option)
-        end
-      end
-
-      if content.has_hint?
-        @template.concat govuk_text_area :text_input, label: { text: content.hint, class: 'govuk-!-font-weight-bold govuk-!-margin-top-8 govuk-!-margin-bottom-4' }
-      end
+  def other_check_box(option, text)
+    govuk_check_box :answers,
+                    option.id,
+                    label: { text: 'Other' }, # TODO: use locale
+                    link_errors: true do
+      govuk_text_field :text_input, label: { text: text }
     end
   end
 
-  def end_of_module_feedback_question_radio_buttons(content, response)
-    @template.capture do
-      response.options.each.with_index(1) do |option, _index|
-        if option.last_option? && content.has_other?
-          @template.concat feedback_other_radio_button(content, option)
-        else
-          @template.concat question_radio_button(option)
-        end
-      end
-
-      if content.has_hint? && content.has_other?
-        @template.concat govuk_text_area :text_input, label: { text: content.hint, class: 'govuk-!-font-weight-bold govuk-!-margin-top-8 govuk-!-margin-bottom-4' }
-      end
-    end
-  end
-
-  # @param content [Object]
+  # @param option [Training::Answer::Option]
+  # @param text [String]
   # @return [String]
-  def feedback_question_check_boxes(content)
-    @template.capture do
-      content.options.each.with_index(1) do |option, _index|
-        if option.last_option? && content.other.present?
-          @template.concat feedback_other_check_box(content, option)
-        elsif option.last_option? && content.or.present?
-          @template.concat @template.content_tag(:div, 'Or', class: 'govuk-checkboxes__divider')
-          @template.concat govuk_check_box :answers, 'Or', label: { text: content.or }, link_errors: true
-        else
-          @template.concat question_check_box(option)
-        end
-      end
+  def other_radio_button(option, text)
+    govuk_radio_button :answers,
+                       option.id,
+                       label: { text: option.label },
+                       link_errors: true,
+                       checked: option.checked? do
+      govuk_text_field :text_input, label: { text: text }
     end
   end
 
-  # @param content [Object]
-  # @param option [Object] The content for the 'Other' checkbox option
   # @return [String]
-  def feedback_other_check_box(content, option)
-    govuk_check_box :answers, option.id, label: { text: 'Other' }, link_errors: true do
-      govuk_text_field :text_input, label: { text: content.other }
-    end
-  end
-
-  # @param content [Object]
-  # @param option [Object] The content for the 'Other' radio button option
-  # @return [String]
-  def feedback_other_radio_button(content, option)
-    govuk_radio_button :answers, option.id, label: { text: option.label }, link_errors: true, checked: option.checked? do
-      govuk_text_field :text_input, label: { text: content.other }
-    end
-  end
-
   def terms_and_conditions_check_box
     govuk_check_box :terms_and_conditions_agreed_at,
                     Time.zone.now,
@@ -94,6 +51,7 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
   end
 
   # @param option [Training::Answer::Option]
+  # @return [String]
   def question_radio_button(option)
     govuk_radio_button :answers,
                        option.id,
@@ -104,6 +62,7 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
   end
 
   # @param option [Training::Answer::Option]
+  # @return [String]
   def question_check_box(option)
     govuk_check_box :answers,
                     option.id,
@@ -113,6 +72,7 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
                     checked: option.checked?
   end
 
+  # @return [String]
   def select_trainee_setting
     govuk_collection_select :setting_type_id,
                             Trainee::Setting.all, :name, :title,
@@ -124,6 +84,7 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
                             form_group: { classes: %w[data-hj-suppress] }
   end
 
+  # @return [String]
   def select_trainee_authority
     govuk_collection_select :local_authority,
                             Trainee::Authority.all, :name, :name,
@@ -135,6 +96,7 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
                             form_group: { classes: %w[data-hj-suppress] }
   end
 
+  # @return [String]
   def select_trainee_experience
     govuk_collection_select :early_years_experience,
                             Trainee::Experience.all, :name, :name,
@@ -143,6 +105,8 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
                             form_group: { classes: %w[data-hj-suppress] }
   end
 
+  # @param field [Symbol]
+  # @return [String]
   def opt_in_out(field)
     govuk_collection_radio_buttons field,
                                    FormOption.build(field), :id, :name,

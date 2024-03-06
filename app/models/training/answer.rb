@@ -17,7 +17,7 @@ module Training
       attribute :answer, Types.Instance(Answer)
 
       # @return [Boolean]
-      def last_option?
+      def last?
         answer.options.last.eql?(self)
       end
     end

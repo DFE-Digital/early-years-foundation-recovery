@@ -92,8 +92,8 @@ module ContentTypes
   # @return [Boolean]
   def opinion_intro?
     page_type.eql?('opinion_intro')
-  # def confidence_outro?
-  #   page_type.eql?('confidence_outro')
+    # def confidence_outro?
+    #   page_type.eql?('confidence_outro')
   end
 
   # @return [Boolean]

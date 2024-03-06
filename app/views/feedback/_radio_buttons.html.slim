@@ -1,6 +1,14 @@
-h1 Feedback Partial
-
 = f.govuk_radio_buttons_fieldset :answers, legend: { text: response.legend } do
   = f.hidden_field :answers
+
   - response.options.each do |option|
-    = f.question_radio_button(option)
+
+    - if option.last?
+      - if content.has_other?
+        = f.other_radio_button(content, option)
+
+    - else
+      = f.question_radio_button(option)
+
+  - if content.has_hint?
+    = f.govuk_text_area :text_input, label: { text: content.hint, class: 'govuk-!-font-weight-bold govuk-!-margin-top-8 govuk-!-margin-bottom-4' }
