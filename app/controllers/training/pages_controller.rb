@@ -38,7 +38,7 @@ module Training
     end
 
     def render_page
-      if content.section? && !content.certificate? && !content.feedback_question?
+      if content.section? && !content.certificate?
         render 'section_intro'
       else
         render content.page_type

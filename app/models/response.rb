@@ -7,8 +7,11 @@ class Response < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :assessment, optional: true
 
-  validates :answers, presence: true, unless: -> { free_text_answer? }
-  validates :text_input, presence: true, if: -> { free_text_answer? || other_selected? }
+  # validates :training_module, presence: true
+  validates :question_type, inclusion: { in: %w(formative summative confidence feedback) }
+
+  validates :answers, presence: true, unless: -> { text_input_only? }
+  validates :text_input, presence: true, if: -> { text_input_extra? }
 
   scope :incorrect, -> { where(correct: false) }
   scope :correct, -> { where(correct: true) }
@@ -20,6 +23,8 @@ class Response < ApplicationRecord
   scope :summative, -> { where(question_type: 'summative') }
   scope :confidence, -> { where(question_type: 'confidence') }
   scope :feedback, -> { where(question_type: 'feedback') }
+
+  # OPTIMIZE: module name needn't be nil now
   scope :main_feedback, -> { where(question_type: 'feedback', training_module: nil) }
 
   delegate :to_partial_path, :legend, to: :question
@@ -42,14 +47,38 @@ class Response < ApplicationRecord
   def options
     if question.formative_question? || assessment&.graded?
       question.options(checked: answers, disabled: responded?)
+
+    # the numeric value for "Or" could be all options plus one but "zero" is consistent
+    elsif question.feedback_question? && !question.has_other? && question.has_or? && text_input.present?
+      question.options(checked: [0])
+
     else
       question.options(checked: answers)
     end
   end
 
   # @return [Boolean]
-  def other_selected?
-    answers.include?('Other')
+  def checked_other?
+    question.has_other? && answers.include?(question.options.last.id)
+    # question.has_other? && question.options.last.checked?
+  end
+
+  # @see #options
+  # Additional "Or" option is given index zero
+  # @return [Boolean]
+  def checked_or?
+    answers.include?(0)
+    # answers.pop.zero?
+  end
+
+  # @return [Boolean]
+  def text_input_only?
+    question.only_text?
+  end
+
+  # @return [Boolean]
+  def text_input_extra?
+    question.and_text? && checked_other?
   end
 
   # @return [Boolean]
@@ -70,11 +99,6 @@ class Response < ApplicationRecord
   # @return [Boolean]
   def revised?
     correct && !correct?
-  end
-
-  # @return [Boolean] LIES!!
-  def free_text_answer?
-    question.free_text? && text_input.present? unless training_module.nil?
   end
 
   ########################

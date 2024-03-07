@@ -13,15 +13,6 @@ module Training
     #
     attribute :json, Types::Array.of(Types::Array).default(Types::EMPTY_ARRAY)
 
-    class Option < Dry::Struct
-      attribute :answer, Types.Instance(Answer)
-
-      # @return [Boolean]
-      def last?
-        answer.options.last.eql?(self)
-      end
-    end
-
     # @return [Boolean]
     def valid?
       options.all? && gteq?(options, 2) && gteq?(correct_answers, 1)
@@ -67,7 +58,7 @@ module Training
           correct: value,
           disabled: disabled,
           checked: checked.include?(order),
-          answer: self,
+          last: json.size.eql?(order),
         )
       end
     end
@@ -97,10 +88,12 @@ module Training
       attribute :correct, Types::Params::Bool.fallback(false)
       attribute :disabled, Types::Params::Bool.default(false)
       attribute :checked, Types::Params::Bool.default(false)
+      attribute :last, Types::Params::Bool.default(false)
 
       alias_method :correct?, :correct
       alias_method :checked?, :checked
       alias_method :disabled?, :disabled
+      alias_method :last?, :last
 
       # @return [Hash{Symbol => nil, String}]
       def schema

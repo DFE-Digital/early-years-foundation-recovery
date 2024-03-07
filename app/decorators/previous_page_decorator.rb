@@ -20,7 +20,7 @@ class PreviousPageDecorator
     if skip_previous_question?
       content.previous_item.previous_item.name
     elsif feedback_not_started?
-      mod.feedback_questions.first.previous_item.name # OPTIMIZE: doubtful a specific type is even necessary
+      mod.feedback_questions.first.previous_item.name
     else
       content.previous_item.name
     end
@@ -28,11 +28,7 @@ class PreviousPageDecorator
 
   # @return [String]
   def style
-    if content.section? && !content.first_feedback?
-      'section-intro-previous-button'
-    else
-      'govuk-button--secondary'
-    end
+    content_section? ? 'section-intro-previous-button' : 'govuk-button--secondary'
   end
 
   # @see [Pagination]
@@ -57,7 +53,7 @@ private
 
   # @return [Boolean]
   def content_section?
-    content.section? && !content.first_feedback?
+    content.section? && !content.feedback_question?
   end
 
   # @return [Boolean]

@@ -45,7 +45,8 @@ class ContentIntegrity
     summative: 'Insufficient summative questions',
     confidence: 'Insufficient confidence checks',
 
-    question_answers: 'Question answers are incorrectly formatted', # TODO: which question?
+    # NB: disabled until new validity of feedback questions can be asserted
+    # question_answers: 'Question answers are incorrectly formatted', # TODO: which question?
   }.freeze
 
   # @return [nil]

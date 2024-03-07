@@ -24,6 +24,7 @@ class Course < ContentfulModel::Base
 
   # @return [nil] mod.name
   def name
+    # OPTIMIZE: this could return a string
     nil
   end
 
@@ -49,8 +50,13 @@ class Course < ContentfulModel::Base
       question
     end
   end
-
   alias_method :feedback_questions, :pages
+
+  # @see Pagination
+  # @return [Training::Question]
+  def page_by_id(id)
+    pages.find { |page| page.id.eql?(id) }
+  end
 
   # @return [Training::Question]
   def page_by_name(name)

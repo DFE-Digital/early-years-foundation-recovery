@@ -1,8 +1,7 @@
 class FeedbackController < ApplicationController
   helper_method :content,
                 :mod,
-                :current_user_response,
-                :respondant
+                :current_user_response
 
   def show; end
 
@@ -16,17 +15,11 @@ class FeedbackController < ApplicationController
     end
   end
 
-  # @return [User | Guest]
-  def respondant
-    @respondant ||= current_user || Guest.new(visit_id: current_visit.id)
-  end
-
 private
 
   # @return [Boolean]
   def save_response!
     current_user_response.update(
-      question_type: 'feedback',
       answers: user_answers,
       correct: true,
       text_input: response_params[:text_input],
@@ -43,9 +36,14 @@ private
     mod.page_by_name(question_name)
   end
 
+  # @return [User, Guest, nil]
+  def current_user
+    super || guest
+  end
+
   # @return [Response]
   def current_user_response
-    @current_user_response ||= respondant.response_for_shared(content, mod)
+    @current_user_response ||= current_user.response_for_shared(content, mod)
   end
 
   # @return [String]

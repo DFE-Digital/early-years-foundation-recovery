@@ -16,11 +16,6 @@ module Training
       @parent ||= Training::Module.by_content_id(id)
     end
 
-    # @return [Boolean]
-    def skippable?
-      false
-    end
-
     # @return [String]
     def debug_summary
       <<~SUMMARY
@@ -61,6 +56,11 @@ module Training
     # @return [Boolean]
     def notes?
       (topic_intro? || text_page?) && notes
+    end
+
+    # @return [Boolean]
+    def skippable?
+      false
     end
   end
 end

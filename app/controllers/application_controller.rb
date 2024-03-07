@@ -88,16 +88,22 @@ private
   end
 
   # @see Auditing
-  # @return [User]
+  # @return [User, nil]
   def current_user
     return bot if bot?
 
     super
   end
 
+  # @return [Guest, nil]
+  def guest
+    Guest.new(visit: current_visit) if current_visit.present?
+  end
+
   # @see Auditing
   # @return [Boolean]
   def user_signed_in?
+    return false if current_user&.guest?
     return true if bot?
 
     super

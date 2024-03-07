@@ -90,12 +90,6 @@ module ContentTypes
   end
 
   # @return [Boolean]
-  def one_off_question?
-    # is this in the right place?
-    skippable_question.eql?(true)
-  end
-
-  # @return [Boolean]
   def feedback_question?
     page_type.eql?('feedback')
   end

@@ -3,14 +3,13 @@
 
   - response.options.each do |option|
 
-    - if option.last?
-      - if content.has_other?
-        = f.other_radio_button(option, text: content.other)
+    - if content.has_other? && option.last?
+      = f.other_radio_button(option, text: content.other)
 
-      - if content.has_or?
-        / TODO: use locale
-        = f.govuk_radio_divider 'Or'
-        = f.govuk_radio_button :answers, 'Or', label: { text: content.or }, link_errors: true
+    - elsif content.has_or? && option.last?
+      = f.question_radio_button(option)
+      = f.govuk_radio_divider 'Or'
+      = f.or_radio_button(text: content.or, checked: response.checked_or?)
 
     - else
       = f.question_radio_button(option)

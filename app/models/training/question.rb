@@ -14,19 +14,17 @@ module Training
       @answer ||= Answer.new(json: json)
     end
 
-    # @return [Boolean]
-    def skippable?
-      skippable_question
-    end
-
     # @return [String] powered by JSON not type
     def to_partial_path
       partial = multi_select? ? 'check_boxes' : 'radio_buttons'
 
-      return "feedback/#{partial}" if feedback_question?
-
-      partial = "learning_#{partial}" if formative_question?
-      "training/questions/#{partial}"
+      if feedback_question?
+        partial = 'text_area' if only_text?
+        "feedback/#{partial}"
+      else
+        partial = "learning_#{partial}" if formative_question?
+        "training/questions/#{partial}"
+      end
     end
 
     # @return [Boolean]
@@ -40,29 +38,44 @@ module Training
       end
     end
 
-    # @return [Boolean] feedback free text
-    def free_text?
+    # @return [Boolean]
+    def skippable?
+      feedback_question? && skippable_question
+    end
+
+    # @return [Boolean]
+    def no_options?
       feedback_question? && options.empty?
     end
 
     # @return [Boolean]
+    def only_text?
+      no_options? && !has_hint?
+    end
+
+    # @return [Boolean]
+    def and_text?
+      !no_options? && (has_hint? || has_or?)
+    end
+
+    # @return [Boolean]
     def has_hint?
-      hint.present?
+      feedback_question? && hint.present?
     end
 
     # @return [Boolean]
     def has_other?
-      other.present?
+      feedback_question? && other.present?
     end
 
     # @return [Boolean]
     def has_or?
-      self.or.present?
+      feedback_question? && self.or.present?
     end
 
     # @return [Boolean]
     def checkbox?
-      response_type
+      feedback_question? && response_type
     end
 
     # @return [Boolean] event tracking

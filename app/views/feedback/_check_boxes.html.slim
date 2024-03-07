@@ -2,15 +2,8 @@
 
   - response.options.each do |option|
 
-    - if option.last?
-      - if content.has_other?
-        = f.other_check_box(option, text: content.other)
-
-      - if content.has_or?
-        / TODO: use locale
-        = f.govuk_check_box_divider 'Or'
-        = f.govuk_check_box :answers, 'Or', label: { text: content.or }, link_errors: true
-
+    - if content.has_other? && option.last?
+      = f.other_check_box(option, text: content.other)
     - else
       = f.question_check_box(option)
 

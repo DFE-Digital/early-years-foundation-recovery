@@ -17,14 +17,10 @@ module Training
     layout 'hero'
 
     def update
-      if save_response! || (content.feedback_question? && content.options.blank?)
+      if save_response!
         track_question_answer
         redirect
       else
-        if content.feedback_question? && user_answer_text.blank? && content.options.present?
-          current_user_response.errors.clear
-          current_user_response.errors.add :answers, :invalid
-        end
         render 'training/questions/show', status: :unprocessable_entity
       end
     end

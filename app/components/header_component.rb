@@ -14,7 +14,12 @@ private
   def navigation_html_attributes
     nc = %w[dfe-header__navigation] << custom_navigation_classes.compact
 
-    { id: 'header-navigation', class: nc, data: { 'reveal-target': 'item' }, aria: { label: navigation_label, labelledby: 'label-navigation' } }
+    {
+      id: 'header-navigation',
+      class: nc,
+      data: { 'reveal-target': 'item' },
+      aria: { label: navigation_label, labelledby: 'label-navigation' },
+    }
   end
 
   def container_html_attributes
@@ -31,7 +36,7 @@ private
 
   class ActionLinkItem < GovukComponent::HeaderComponent::NavigationItem
     def active_class
-      ['dfe-header__action-item--current'] if active?
+      %w[dfe-header__action-item--current] if active?
     end
 
     def call
