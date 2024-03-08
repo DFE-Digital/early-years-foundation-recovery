@@ -6,8 +6,9 @@ class Response < ApplicationRecord
 
   belongs_to :user, optional: true
   belongs_to :assessment, optional: true
+  belongs_to :visit, optional: true
 
-  # validates :training_module, presence: true
+  validates :training_module, presence: true
   validates :question_type, inclusion: { in: %w(formative summative confidence feedback) }
 
   validates :answers, presence: true, unless: -> { text_input_only? }
@@ -23,18 +24,16 @@ class Response < ApplicationRecord
   scope :summative, -> { where(question_type: 'summative') }
   scope :confidence, -> { where(question_type: 'confidence') }
   scope :feedback, -> { where(question_type: 'feedback') }
-
-  # OPTIMIZE: module name needn't be nil now
-  scope :main_feedback, -> { where(question_type: 'feedback', training_module: nil) }
+  scope :course_feedback, -> { feedback.where(training_module: 'course') }
 
   delegate :to_partial_path, :legend, to: :question
 
   # @return [Training::Module, Course]
   def mod
-    if training_module
-      Training::Module.by_name(training_module)
-    else
+    if training_module.eql?('course')
       Course.config
+    else
+      Training::Module.by_name(training_module)
     end
   end
 

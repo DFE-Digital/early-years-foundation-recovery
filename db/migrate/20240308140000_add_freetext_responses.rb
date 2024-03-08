@@ -1,4 +1,4 @@
-class AddTextInputToResponses < ActiveRecord::Migration[7.0]
+class AddFreetextResponses < ActiveRecord::Migration[7.1]
   def change
     add_column :responses, :text_input, :text
   end

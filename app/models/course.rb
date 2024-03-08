@@ -18,14 +18,9 @@ class Course < ContentfulModel::Base
     fetch_or_store('course') { first }
   end
 
-  #
-  # Quacks like training module
-  #
-
-  # @return [nil] mod.name
+  # @return [String] mod.name
   def name
-    # OPTIMIZE: this could return a string
-    nil
+    'course'
   end
 
   # @return [Array] mod.content_sections

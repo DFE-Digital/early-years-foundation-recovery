@@ -9,13 +9,14 @@ class Guest < Dry::Struct
   end
 
   # @param content [Training::Question] feedback questions
+  # @param mod [Course]
   # @return [Response]
-  def response_for_shared(content, _mod)
+  def response_for_shared(content, mod)
     responses.find_or_initialize_by(
       question_type: content.page_type,
       question_name: content.name,
-      # training_module: nil,
-      guest_visit: visit.id,
+      training_module: mod.name,
+      visit_id: visit.id,
     )
   end
 
@@ -33,6 +34,6 @@ private
 
   # @return [Response::ActiveRecord_Relation]
   def responses
-    Response.main_feedback.where(guest_visit: visit.id)
+    Response.course_feedback.where(visit_id: visit.id)
   end
 end

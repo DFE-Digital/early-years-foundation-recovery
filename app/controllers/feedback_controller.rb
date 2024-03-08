@@ -9,13 +9,25 @@ class FeedbackController < ApplicationController
 
   def update
     if save_response!
-      redirect_to feedback_path(content.next_item.name)
+      redirect
     else
       render 'feedback/show', status: :unprocessable_entity
     end
   end
 
 private
+
+  def redirect
+    if content.eql?(mod.pages.last)
+      if current_user.guest?
+        redirect_to root_path
+      else
+        redirect_to feedback_thank_you_path
+      end
+    else
+      redirect_to feedback_path(content.next_item.name)
+    end
+  end
 
   # @return [Boolean]
   def save_response!

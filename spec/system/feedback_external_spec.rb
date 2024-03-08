@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Feedback form' do
+RSpec.describe 'Feedback external' do
   before do
     visit '/'
   end
