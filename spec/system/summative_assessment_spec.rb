@@ -7,7 +7,7 @@ RSpec.describe 'Summative assessment', type: :system do
   let(:first_question_path) { '/modules/alpha/questionnaires/1-3-2-1' }
 
   before do
-    start_summative_assessment(alpha)
+    view_pages_upto alpha, 'summative_questionnaire'
   end
 
   describe 'intro' do
@@ -54,13 +54,10 @@ RSpec.describe 'Summative assessment', type: :system do
 
   describe 'results' do
     context 'when every question is answered correctly' do
+      # include_context 'with automated path'
+      include_context 'with alpha happy path'
+
       before do
-        visit '/modules/alpha/content-pages/what-to-expect'
-
-        ContentTestSchema.new(mod: alpha).call(pass: true).compact.each do |content|
-          content[:inputs].each { |args| send(*args) }
-        end
-
         visit '/modules/alpha/assessment-result/1-3-2-11'
       end
 
@@ -96,13 +93,9 @@ RSpec.describe 'Summative assessment', type: :system do
     end
 
     context 'when failed' do
-      before do
-        visit '/modules/alpha/content-pages/what-to-expect'
-
-        ContentTestSchema.new(mod: alpha).call(pass: false).compact.each do |content|
-          content[:inputs].each { |args| send(*args) }
-        end
-      end
+      # include_context 'with automated path'
+      # let(:happy) { false }
+      include_context 'with alpha unhappy path'
 
       it 'displays score with wrong answers' do
         expect(page).to have_content 'You scored 0%'

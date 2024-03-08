@@ -6,11 +6,11 @@ RSpec.describe ContentTestSchema do
   let(:alpha) { Training::Module.by_name(:alpha) }
 
   let(:ast) do
-    YAML.load_file(Rails.root.join("spec/support/ast/#{fixture}.yml"))
-  end
-
-  before do
-    skip 'WIP' if Rails.application.migrated_answers?
+    if Rails.application.migrated_answers?
+      YAML.load_file(Rails.root.join("spec/support/ast/#{fixture}-response.yml"))
+    else
+      YAML.load_file(Rails.root.join("spec/support/ast/#{fixture}.yml"))
+    end
   end
 
   context 'when pass is true' do
