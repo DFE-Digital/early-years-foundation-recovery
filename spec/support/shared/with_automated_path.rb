@@ -1,70 +1,36 @@
-# Dynamic AST schema which supports future changes to content
+# Defaults to dynamic schema using happy path for alpha
+# but loads a YAML fixture instead if provided
+#
+# @example
+#   Dynamic:
+#
+#     include_context 'with automated path'
+#     let(:mod) { <Training::Module> }
+#     let(:happy) { <Boolean> }
+#
+#   Static:
+#
+#     include_context 'with automated path'
+#     let(:fixture) { 'spec/support/ast/bespoke-module-journey.yml' }
+#
 RSpec.shared_context 'with automated path' do
-  include_context 'with progress'
-  include_context 'with user'
-
-  let(:mod) { alpha }
+  let(:mod) { Training::Module.by_name(:alpha) }
   let(:happy) { true }
+  # Or
+  let(:fixture) { nil }
 
   let(:schema) do
-    ContentTestSchema.new(mod: mod).call(pass: happy).compact
-  end
-
-  before do
-    visit "/modules/#{mod.name}/content-pages/what-to-expect"
-
-    schema.each do |content|
-      # puts content[:path]
-      content[:inputs].each { |args| send(*args) }
-    end
-  end
-end
-
-# Static file export of AST schema answered correctly
-RSpec.shared_context 'with alpha happy path' do
-  include_context 'with progress'
-  include_context 'with user'
-
-  let(:mod) { alpha }
-
-  let(:schema) do
-    if Rails.application.migrated_answers?
-      YAML.load_file Rails.root.join('spec/support/ast/alpha-pass-response.yml')
+    if fixture.present?
+      YAML.load_file Rails.root.join(fixture)
     else
-      YAML.load_file Rails.root.join('spec/support/ast/alpha-pass.yml')
+      ContentTestSchema.new(mod: mod).call(pass: happy).compact
     end
   end
 
   before do
-    visit '/modules/alpha/content-pages/what-to-expect'
+    visit schema.first[:path]
 
     schema.each do |content|
-      # puts content[:path]
-      content[:inputs].each { |args| send(*args) }
-    end
-  end
-end
-
-# Static file export of AST schema answered incorrectly
-RSpec.shared_context 'with alpha unhappy path' do
-  include_context 'with progress'
-  include_context 'with user'
-
-  let(:mod) { alpha }
-
-  let(:schema) do
-    if Rails.application.migrated_answers?
-      YAML.load_file Rails.root.join('spec/support/ast/alpha-fail-response.yml')
-    else
-      YAML.load_file Rails.root.join('spec/support/ast/alpha-fail.yml')
-    end
-  end
-
-  before do
-    visit '/modules/alpha/content-pages/what-to-expect'
-
-    schema.each do |content|
-      # puts content[:path]
       content[:inputs].each { |args| send(*args) }
     end
   end

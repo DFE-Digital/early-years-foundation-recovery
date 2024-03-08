@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Event log' do
   include_context 'with events'
+  include_context 'with user'
   include_context 'with automated path'
-  # include_context 'with alpha happy path'
 
   describe 'confidence check' do
     context 'when viewing the first question' do

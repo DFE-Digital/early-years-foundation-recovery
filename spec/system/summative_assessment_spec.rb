@@ -54,8 +54,15 @@ RSpec.describe 'Summative assessment', type: :system do
 
   describe 'results' do
     context 'when every question is answered correctly' do
-      # include_context 'with automated path'
-      include_context 'with alpha happy path'
+      include_context 'with automated path'
+
+      let(:fixture) do
+        if Rails.application.migrated_answers?
+          'spec/support/ast/alpha-pass-response.yml'
+        else
+          'spec/support/ast/alpha-pass.yml'
+        end
+      end
 
       before do
         visit '/modules/alpha/assessment-result/1-3-2-11'
@@ -93,9 +100,15 @@ RSpec.describe 'Summative assessment', type: :system do
     end
 
     context 'when failed' do
-      # include_context 'with automated path'
-      # let(:happy) { false }
-      include_context 'with alpha unhappy path'
+      include_context 'with automated path'
+
+      let(:fixture) do
+        if Rails.application.migrated_answers?
+          'spec/support/ast/alpha-fail-response.yml'
+        else
+          'spec/support/ast/alpha-fail.yml'
+        end
+      end
 
       it 'displays score with wrong answers' do
         expect(page).to have_content 'You scored 0%'

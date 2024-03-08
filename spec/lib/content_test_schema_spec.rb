@@ -25,7 +25,7 @@ RSpec.describe ContentTestSchema do
     let(:fixture) { 'alpha-fail' }
 
     specify do
-      expect(schema.call(pass: false)).to eq ast
+      expect(schema.call(pass: false).compact).to eq ast
     end
   end
 end
