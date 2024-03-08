@@ -109,7 +109,7 @@ private
 
   # @return [Boolean]
   def content_section?
-    content.section? && !content.first_feedback?
+    content.section? && !content.feedback_question?
   end
 
   # @return [Boolean]
