@@ -57,10 +57,6 @@ private
       [
         [:click_on, results_button],
       ]
-    elsif type.match?(/opinion_intro/)
-      [
-        [:click_on, 'Skip feedback'],
-      ]
     elsif type.match?(/thankyou/)
       [
         [:click_on, 'View certificate'],
