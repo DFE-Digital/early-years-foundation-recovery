@@ -145,7 +145,7 @@ RSpec.describe 'Module overview page progress' do
 
   context 'when the last page of the first submodule is reached' do
     before do
-      view_pages_upto_formative_question(alpha)
+      view_pages_upto alpha, 'formative_questionnaire'
       visit '/modules/alpha'
     end
 
@@ -161,16 +161,11 @@ RSpec.describe 'Module overview page progress' do
   end
 
   context 'when the summative assessment is failed' do
-    before do
-      visit '/modules/alpha/content-pages/what-to-expect'
+    include_context 'with automated path'
 
-      # OPTIMIZE: the setup for this context leverages the AST schema which supports future changes to content
-      ContentTestSchema.new(mod: alpha).call(pass: false).compact.each do |content|
-        content[:inputs].each { |args| send(*args) }
-      end
+    let(:happy) { false }
 
-      visit '/modules/alpha'
-    end
+    before { visit '/modules/alpha' }
 
     specify { expect(page).to have_link 'Retake test' }
   end

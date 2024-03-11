@@ -7,7 +7,7 @@ RSpec.describe 'Confidence check' do
   let(:first_question_path) { '/modules/alpha/questionnaires/1-3-3-1' }
 
   before do
-    start_confidence_check(alpha)
+    view_pages_upto alpha, 'confidence_questionnaire'
     visit first_question_path
   end
 
