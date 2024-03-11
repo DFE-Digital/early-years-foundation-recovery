@@ -49,7 +49,7 @@ RSpec.describe 'Event log' do
     end
 
     context 'when all questions are answered incorrectly' do
-      # include_context 'with alpha unhappy path'
+      # let(:fixture) { 'spec/support/ast/alpha-fail-response.yml' }
       let(:happy) { false }
 
       it 'tracks answers and failed attempt' do
