@@ -437,6 +437,7 @@ class User < ApplicationRecord
     @content_changes ||= ContentChanges.new(user: self)
   end
 
+  # FIXME: completed vs started
   # @return [Boolean]
   def completed_main_feedback?
     responses.course_feedback.any?

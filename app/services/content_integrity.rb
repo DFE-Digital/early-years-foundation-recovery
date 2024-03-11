@@ -45,8 +45,9 @@ class ContentIntegrity
     summative: 'Insufficient summative questions',
     confidence: 'Insufficient confidence checks',
 
-    # NB: disabled until new validity of feedback questions can be asserted
-    question_answers: 'Question answers are incorrectly formatted', # TODO: which question?
+    # TODO: validity of feedback questions
+    # feedback_questions: 'TODO',
+    factual_questions: 'Factual questions have sufficient options',
   }.freeze
 
   # @return [nil]
@@ -163,8 +164,8 @@ class ContentIntegrity
   end
 
   # @return [Boolean]
-  def question_answers?
-    mod.questions.all? { |question| question.answer.valid? || question.feedback_question? }
+  def factual_questions?
+    mod.questions.select(&:factual_question?).all? { |question| question.answer.valid? }
   end
 
   # @return [Boolean]

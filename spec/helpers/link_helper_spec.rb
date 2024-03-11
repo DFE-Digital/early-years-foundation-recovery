@@ -44,15 +44,15 @@ describe 'LinkHelper', type: :helper do
         expect(link).to include 'href="/modules/alpha/content-pages/1-3-4"'
       end
 
-      it 'offers feedback to content authors' do
+      specify do
         expect(link).to include 'Next page has not been created'
       end
     end
 
-    context 'when page is feedback intro' do
+    context 'when next section is feedback questions' do
       let(:content) { mod.page_by_name('feedback-intro') }
 
-      it 'targets start of feedback questions' do
+      specify do
         expect(link).to include 'Give feedback'
       end
     end
@@ -193,7 +193,7 @@ describe 'LinkHelper', type: :helper do
     end
   end
 
-  describe '#link_to_skip' do
+  describe '#link_to_skip_feedback' do
     subject(:link) { helper.link_to_skip_feedback }
 
     before do
