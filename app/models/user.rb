@@ -52,8 +52,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :rememberable, :lockable, :timeoutable,
          :omniauthable, omniauth_providers: [:openid_connect]
 
-  devise :pwned_password unless Rails.env.test?
-
   has_many :responses
   has_many :user_answers
 

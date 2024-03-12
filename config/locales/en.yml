@@ -66,17 +66,6 @@ en:
             email:
               blank: Enter an email address.
               invalid: Enter a valid email address.
-            password:
-              blank: Enter a password.
-              too_short: Password must be at least 10 characters. # devise override
-              password_complexity:
-                digit: Password must contain at least 2 digits
-                lower: Password must contain at least 2 lowercase characters
-                upper: Password must contain at least 2 uppercase characters
-                symbol: Password must contain at least 2 special characters or non-alphanumeric characters
-
-            password_confirmation:
-              confirmation: Sorry, your passwords don't match.
             terms_and_conditions_agreed_at:
               blank: You must accept the terms and conditions and privacy policy to create an account.
 
@@ -100,10 +89,6 @@ en:
   # Common Elements ------------------------------------------------------------
 
   phase_banner: This is a new service, your %{link} will help us improve it.
-
-  password_complexity: |
-    Passwords should be a minimum of %{length} characters long, contain at least two uppercase letters, two lowercase letters, two numbers, and two special characters or non-alphanumeric characters.
-
   pagination:
     section: Section %{current} of %{total}
     page: Page %{current} of %{total}
