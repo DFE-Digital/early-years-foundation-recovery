@@ -162,18 +162,6 @@ class User < ApplicationRecord
     !gov_one_id.nil?
   end
 
-  # @see Devise database_authenticatable
-  # @param params [Hash]
-  # @return [Boolean]
-  def update_with_password(params)
-    if params[:password].blank?
-      errors.add :password, :blank
-      return false
-    end
-
-    super
-  end
-
   # @see ResponsesController#response_params
   # @param content [Training::Question]
   # @return [UserAnswer, Response]

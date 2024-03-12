@@ -6,21 +6,10 @@ en:
       models:
         user:
           attributes:
-            current_password:
-              blank: Enter your current password.
-              invalid: Current password is invalid.
             first_name:
               blank: Enter a first name.
             last_name:
               blank: Enter a surname.
-            email:
-              blank: Enter an email address.
-              invalid: Enter a valid email address.
-            password:
-              blank: Enter a password.
-              too_short: Password must be at least 10 characters. # devise override
-            password_confirmation:
-              confirmation: Sorry, your passwords don't match.
             terms_and_conditions_agreed_at:
               blank: You must accept the terms and conditions and privacy policy to create an account.
             setting_type_id:

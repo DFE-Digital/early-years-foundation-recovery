@@ -75,7 +75,6 @@ SitemapGenerator::Sitemap.create do
   # close account
   add edit_reason_user_close_account_path
   add confirm_user_close_account_path
-  add new_user_close_account_path
   add user_close_account_path
 
   # learning

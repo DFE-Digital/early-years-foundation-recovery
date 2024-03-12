@@ -53,7 +53,7 @@ Rails.application.routes.draw do
     get 'edit-training-emails'
     patch 'update-training-emails'
 
-    resource :close_account, only: %i[new update show], path: 'close' do
+    resource :close_account, only: %i[update show], path: 'close' do
       get 'reset-password'
       get 'edit-reason'
       patch 'update-reason'
