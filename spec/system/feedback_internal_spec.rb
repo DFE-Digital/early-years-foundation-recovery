@@ -10,5 +10,4 @@ RSpec.describe 'Feedback internal' do
       expect(page).to have_content 'The purpose of this feedback form is to gather your opinon on the child development training course'
     end
   end
-
 end

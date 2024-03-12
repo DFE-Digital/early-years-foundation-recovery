@@ -32,7 +32,7 @@ RSpec.describe Training::Module, type: :model do
       expect(mod.answers_with('foo')).to eq [] # no match
       # expect(mod.answers_with('')).to eq [] # formative
       expect(mod.answers_with('Wrong\s.+ 3')).to eq %w[1-3-2-4 1-3-2-5 1-3-2-6 1-3-2-7 1-3-2-8 1-3-2-9 1-3-2-10] # summative
-      expect(mod.answers_with('NOR')).to eq %w[1-3-3-1 1-3-3-2 1-3-3-3 1-3-3-4] # confidence
+      expect(mod.answers_with('NOR')).to eq %w[1-3-3-1 1-3-3-2 1-3-3-3 1-3-3-4 feedback-radiobutton] # confidence
     end
   end
 
@@ -42,7 +42,7 @@ RSpec.describe Training::Module, type: :model do
     it 'returns sections' do
       expect(sections).to be_a Hash
       expect(sections.keys).to eq [1, 2, 3, 4, 5]
-      expect(sections.values.map(&:count)).to eq [7, 5, 19, 6, 1]
+      expect(sections.values.map(&:count)).to eq [7, 5, 20, 9, 1]
     end
   end
 
@@ -52,7 +52,7 @@ RSpec.describe Training::Module, type: :model do
     it 'returns subsections' do
       expect(subsections).to be_a Hash
       expect(subsections.keys).to eq [[1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [2, 0], [2, 1], [3, 0], [3, 1], [3, 2], [3, 3], [4, 0], [5, 0]]
-      expect(subsections.values.map(&:count)).to eq [1, 1, 1, 2, 2, 1, 4, 1, 1, 12, 5, 6, 1]
+      expect(subsections.values.map(&:count)).to eq [1, 1, 1, 2, 2, 1, 4, 1, 1, 12, 6, 9, 1]
     end
   end
 

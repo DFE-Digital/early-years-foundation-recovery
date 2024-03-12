@@ -17,7 +17,7 @@ describe Course, type: :model do
     end
 
     it 'feedback' do
-      expect(course.feedback.count).to eq 5
+      expect(course.feedback.count).to eq 8
       expect(course.feedback.first.page_type).to eq 'feedback'
     end
   end
@@ -39,10 +39,10 @@ describe Course, type: :model do
     end
 
     it 'page order uing previous_item/next_item' do
-      expect(pages.first.name).to eq 'main-feedback-1'
-      expect(pages.first.next_item.name).to eq 'main-feedback-2'
-      expect(pages.first.next_item.next_item.name).to eq 'main-feedback-3'
-      expect(pages.first.next_item.previous_item.name).to eq 'main-feedback-1'
+      expect(pages.first.name).to eq 'feedback-radiobutton'
+      expect(pages.first.next_item.name).to eq 'feedback-yesnoandtext'
+      expect(pages.first.next_item.next_item.name).to eq 'feedback-freetext'
+      expect(pages.first.next_item.previous_item.name).to eq 'feedback-radiobutton'
     end
   end
 end

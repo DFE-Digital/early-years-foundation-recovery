@@ -9,7 +9,7 @@ class Response < ApplicationRecord
   belongs_to :visit, optional: true
 
   validates :training_module, presence: true
-  validates :question_type, inclusion: { in: %w(formative summative confidence feedback) }
+  validates :question_type, inclusion: { in: %w[formative summative confidence feedback] }
 
   validates :answers, presence: true, unless: -> { text_input_only? }
   validates :text_input, presence: true, if: -> { text_input_extra? }

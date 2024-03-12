@@ -15,7 +15,7 @@ class Guest < Dry::Struct
     responses.find_or_initialize_by(
       question_type: content.page_type,
       question_name: content.name,
-      training_module: mod.name,
+      training_module: mod.nil? ? nil : mod.name,
       visit_id: visit.id,
     )
   end

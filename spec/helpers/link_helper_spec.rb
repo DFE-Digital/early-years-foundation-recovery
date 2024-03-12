@@ -50,16 +50,10 @@ describe 'LinkHelper', type: :helper do
     end
 
     context 'when page is feedback intro' do
-      let(:skip_link) { helper.link_to_skip }
-
-      let(:content) { mod.pages_by_type('opinion_intro').first }
+      let(:content) { mod.page_by_name('feedback-intro') }
 
       it 'targets start of feedback questions' do
         expect(link).to include 'Give feedback'
-      end
-
-      it 'offers button to skip feedback questions' do
-        expect(skip_link).to include 'Skip feedback'
       end
     end
   end
@@ -200,7 +194,7 @@ describe 'LinkHelper', type: :helper do
   end
 
   describe '#link_to_skip' do
-    subject(:link) { helper.link_to_skip }
+    subject(:link) { helper.link_to_skip_feedback }
 
     before do
       without_partial_double_verification do
@@ -210,7 +204,7 @@ describe 'LinkHelper', type: :helper do
     end
 
     context 'when page is feedback intro' do
-      let(:content) { mod.pages_by_type('opinion_intro').first }
+      let(:content) { mod.page_by_name('feedback-intro') }
 
       it 'targets thank you page' do
         expect(link).to include 'Skip feedback'

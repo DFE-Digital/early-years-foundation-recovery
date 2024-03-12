@@ -4,7 +4,7 @@ RSpec.describe FeedbackController, type: :controller do
   context 'when user is signed in' do
     let(:user) { create :user, :registered }
     let(:valid_attributes) do
-      { id: 1, answers: %w[Yes], answers_custom: 'Custom answer', training_module: nil, question_name: 'main-feedback-1' }
+      { id: 1, answers: %w[Yes], answers_custom: 'Custom answer', training_module: nil, question_name: 'feedback-radiobutton' }
     end
 
     before { sign_in user }
