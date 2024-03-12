@@ -66,14 +66,14 @@ RSpec.describe PreviousPageDecorator do
 
       context 'and unanswered' do
         it 'is one step back' do
-          expect(decorator.name).to eq 'end-of-module-feedback-5'
+          expect(decorator.name).to eq 'feedback-checkbox-otherandtext'
         end
       end
 
       context 'and answered' do
         before do
           create :response,
-                 question_name: 'end-of-module-feedback-5',
+                 question_name: 'feedback-checkbox-otherandtext',
                  training_module: 'alpha',
                  answers: [1],
                  correct: true,

@@ -126,7 +126,6 @@ RSpec.describe ContentTypes, type: :model do
         assessment_results
         confidence_intro
         confidence_questionnaire
-        opinion_intro
         feedback
         thankyou
         certificate

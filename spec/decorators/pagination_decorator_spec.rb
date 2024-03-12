@@ -13,7 +13,7 @@ RSpec.describe PaginationDecorator do
   end
 
   it '#section_numbers' do
-    expect(decorator.section_numbers).to eq 'Section 1 of 4'
+    expect(decorator.section_numbers).to eq 'Section 1 of 5'
   end
 
   it '#page_numbers' do
@@ -33,13 +33,13 @@ RSpec.describe PaginationDecorator do
       end
 
       it '#page_numbers' do
-        expect(decorator.page_numbers).to eq 'Page 4 of 5'
+        expect(decorator.page_numbers).to eq 'Page 3 of 9'
       end
     end
 
     context 'when unanswered' do
       it '#page_numbers' do
-        expect(decorator.page_numbers).to eq 'Page 4 of 5'
+        expect(decorator.page_numbers).to eq 'Page 3 of 9'
       end
     end
   end
