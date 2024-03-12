@@ -7,6 +7,14 @@ class Users::SessionsController < Devise::SessionsController
     render 'gov_one'
   end
 
+  # @return [nil]
+  def sign_in_test_user
+    unless Rails.application.live?
+      test_user = User.test_user
+      sign_in_and_redirect test_user if test_user
+    end
+  end
+
 protected
 
   def after_sign_in_path_for(resource)

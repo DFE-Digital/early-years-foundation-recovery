@@ -47,6 +47,19 @@ class User < ApplicationRecord
     user
   end
 
+  # @return [User]
+  def self.test_user
+    find_or_create_from_gov_one(
+      email: 'completed@example.com',
+      gov_one_id: 'urn:fdc:gov.uk:2022'
+    )
+  end
+
+  # @return [Boolean]
+  def test_user?
+    email == 'completed@example.com'
+  end
+
   attr_accessor :context
 
   devise :database_authenticatable, :rememberable, :lockable, :timeoutable,
