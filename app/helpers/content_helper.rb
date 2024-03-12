@@ -1,6 +1,7 @@
 module ContentHelper
   # @see [CustomMarkdown]
   # @param key [String]
+  # @param args [Hash]
   # @return [String]
   def m(key, headings_start_with: 'l', **args)
     markdown = I18n.exists?(key, scope: args[:scope]) ? t(key, **args) : key.to_s
@@ -41,15 +42,13 @@ module ContentHelper
                 aria: { label: "#{icon} icon" }
   end
 
-  # @param success [Boolean]
-  # @param score [Integer]
+  # @param assessment [AssessmentProgress]
   # @return [String]
-  def results_banner(success:, score:)
-    state = success ? :pass : :fail
-    title = t(".#{state}.heading")
-    text = t(".#{state}.text", score: score)
-
-    govuk_notification_banner(title_text: title, text: m(text))
+  def assessment_banner(assessment)
+    govuk_notification_banner(
+      title_text: t("training.assessments.show.#{assessment.status}.heading"),
+      text: m("training.assessments.show.#{assessment.status}.text", score: assessment.score.to_i),
+    )
   end
 
   # @param status [String, Symbol]

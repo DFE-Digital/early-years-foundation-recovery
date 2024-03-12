@@ -1,3 +1,4 @@
+# TODO: to be deprecated
 class UserAnswer < ApplicationRecord
   include ToCsv
 

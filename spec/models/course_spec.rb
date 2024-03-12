@@ -18,6 +18,8 @@ describe Course, type: :model do
 
     it 'feedback' do
       expect(course.feedback).to be_empty
+      # - only one question type
+      # - number of questions
     end
   end
 end

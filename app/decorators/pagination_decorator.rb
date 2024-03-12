@@ -6,7 +6,7 @@ class PaginationDecorator
 
   # @!attribute [r] content
   #   @return [Training::Page, Training::Question, Training::Video]
-  param :content, required: true
+  param :content, Types::TrainingContent, required: true
 
   # @return [String]
   def heading

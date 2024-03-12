@@ -33,9 +33,7 @@ module LinkHelper
 
   # @return [String] next page (ends on certificate)
   def link_to_next
-    page = content.interruption_page? ? mod.content_start : content.next_item
-
-    govuk_button_link_to content.next_button_text, training_module_page_path(mod.name, page.name),
+    govuk_button_link_to next_page.text, training_module_page_path(mod.name, next_page.name),
                          id: 'next-action',
                          aria: { label: t('pagination.next') }
   end
@@ -61,12 +59,26 @@ module LinkHelper
   # @param mod [Training::Module]
   # @return [String, nil]
   def link_to_retake_or_results(mod)
-    return unless assessment_progress_service(mod).attempted?
+    if Rails.application.migrated_answers?
+      return unless assessment_progress_service(mod).graded?
+    else
+      return unless assessment_progress_service(mod).attempted?
+    end
 
     if assessment_progress_service(mod).failed?
       govuk_link_to 'Retake end of module test', new_training_module_assessment_path(mod.name), no_visited_state: true, class: 'card-link--retake'
     else
-      govuk_link_to 'View previous test result', training_module_assessment_path(mod.name, mod.assessment_results_page.name)
+      govuk_link_to 'View previous test result', training_module_assessment_path(mod.name, mod.assessment_results_page.name), no_visited_state: true, class: 'card-link--retake'
     end
+  end
+
+  # @return [NextPageDecorator]
+  def next_page
+    NextPageDecorator.new(
+      user: current_user,
+      mod: mod,
+      content: content,
+      assessment: assessment_progress_service(mod),
+    )
   end
 end

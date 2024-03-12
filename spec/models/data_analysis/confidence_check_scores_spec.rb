@@ -2,10 +2,11 @@ require 'rails_helper'
 
 RSpec.describe DataAnalysis::ConfidenceCheckScores do
   before do
-    skip if ENV['DISABLE_USER_ANSWER'].blank?
-    create(:response, :confidence_check, training_module: 'module_1', question_name: 'q1', answers: [1])
-    create(:response, :confidence_check, training_module: 'module_1', question_name: 'q2', answers: [2])
-    create(:response, :confidence_check, training_module: 'module_1', question_name: 'q2', answers: [2])
+    skip unless Rails.application.migrated_answers?
+
+    create(:response, question_type: 'confidence', training_module: 'module_1', question_name: 'q1', answers: [1])
+    create(:response, question_type: 'confidence', training_module: 'module_1', question_name: 'q2', answers: [2])
+    create(:response, question_type: 'confidence', training_module: 'module_1', question_name: 'q2', answers: [2])
   end
 
   let(:headers) do

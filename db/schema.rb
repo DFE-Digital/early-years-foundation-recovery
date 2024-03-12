@@ -14,6 +14,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_14_175923) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "assessments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "training_module", null: false
+    t.float "score"
+    t.boolean "passed"
+    t.datetime "started_at"
+    t.datetime "completed_at"
+    t.index ["score", "passed"], name: "index_assessments_on_score_and_passed"
+    t.index ["user_id"], name: "index_assessments_on_user_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.bigint "visit_id"
     t.bigint "user_id"
@@ -122,13 +133,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_14_175923) do
     t.string "training_module", null: false
     t.string "question_name", null: false
     t.jsonb "answers", default: []
-    t.boolean "archived", default: false
     t.boolean "correct"
-    t.bigint "user_assessment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.jsonb "schema"
-    t.index ["user_assessment_id"], name: "index_responses_on_user_assessment_id"
+    t.string "question_type"
+    t.bigint "assessment_id"
+    t.index ["assessment_id"], name: "index_responses_on_assessment_id"
     t.index ["user_id", "training_module", "question_name"], name: "user_question"
     t.index ["user_id"], name: "index_responses_on_user_id"
   end
@@ -238,10 +248,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_14_175923) do
     t.index ["visit_token"], name: "index_visits_on_visit_token", unique: true
   end
 
+  add_foreign_key "assessments", "users"
   add_foreign_key "module_releases", "releases"
   add_foreign_key "notes", "users"
   add_foreign_key "que_scheduler_audit_enqueued", "que_scheduler_audit", column: "scheduler_job_id", primary_key: "scheduler_job_id", name: "que_scheduler_audit_enqueued_scheduler_job_id_fkey"
-  add_foreign_key "responses", "user_assessments"
+  add_foreign_key "responses", "assessments"
   add_foreign_key "responses", "users"
   add_foreign_key "user_answers", "user_assessments"
   add_foreign_key "user_answers", "users"

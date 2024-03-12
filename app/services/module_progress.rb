@@ -14,7 +14,7 @@ class ModuleProgress
   option :user, Types.Instance(User), required: true
   # @!attribute [r] mod
   #   @return [Training::Module]
-  option :mod, Types.Instance(Training::Module), required: true
+  option :mod, Types::TrainingModule, required: true
   # @!attribute [r] summative_assessment
   #   @return [AssessmentProgress]
   option :summative_assessment, default: proc { AssessmentProgress.new(user: user, mod: mod) }
@@ -104,13 +104,21 @@ protected
   # @see AssessmentProgress
   # @return [Boolean]
   def failed_attempt?
-    summative_assessment.attempted? && summative_assessment.failed?
+    if Rails.application.migrated_answers?
+      summative_assessment.attempted? && summative_assessment.failed?
+    else
+      summative_assessment.attempted? && summative_assessment.failed?
+    end
   end
 
   # @see AssessmentProgress
   # @return [Boolean]
   def successful_attempt?
-    summative_assessment.attempted? && summative_assessment.passed?
+    if Rails.application.migrated_answers?
+      summative_assessment.passed?
+    else
+      summative_assessment.attempted? && summative_assessment.passed?
+    end
   end
 
   # In progress modules with new pages that have been skipped

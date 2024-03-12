@@ -48,4 +48,15 @@ RSpec.describe 'Application configuration' do
       expect(config.user_timeout_modal_visible).to eq 5
     end
   end
+
+  describe 'pages accessible even when in maintenance mode' do
+    specify do
+      expect(config.protected_endpoints).to eq %w[
+        /maintenance
+        /health
+        /change
+        /release
+      ]
+    end
+  end
 end

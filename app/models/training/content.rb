@@ -22,7 +22,7 @@ module Training
         uid: #{id}
         module uid: #{parent.id}
         module name: #{parent.name}
-        published at: #{published_at}
+        published at: #{published_at || 'Management Key Missing'}
         page type: #{page_type}
 
         ---
@@ -51,25 +51,6 @@ module Training
     # @return [String]
     def title
       heading
-    end
-
-    # @return [String]
-    def next_button_text
-      if interruption_page?
-        'Next'
-      elsif next_item.eql?(self) && (Rails.application.preview? || Rails.env.test?)
-        'Next page has not been created'
-      elsif section?
-        'Start section'
-      elsif next_item.assessment_results?
-        'Finish test'
-      elsif next_item.summative_question? && !summative_question?
-        'Start test'
-      elsif next_item.certificate?
-        'Finish'
-      else
-        'Next'
-      end
     end
 
     # @return [Boolean]

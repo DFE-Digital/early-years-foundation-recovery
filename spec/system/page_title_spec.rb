@@ -26,6 +26,10 @@ RSpec.describe 'Page' do
     include_context 'with progress'
     include_context 'with user'
 
+    before do
+      create :assessment, :passed, user: user
+    end
+
     it { expect(root_path).to have_page_title('Home page') }
     it { expect(user_path).to have_page_title('My account') }
     it { expect(my_modules_path).to have_page_title('My modules') }
@@ -82,7 +86,7 @@ RSpec.describe 'Page' do
       ].each do |page, title|
         describe "/modules/alpha/content-pages/#{page}" do
           let(:path) do
-            training_module_page_path(training_module_id: alpha.name, id: page)
+            training_module_page_path(training_module_id: 'alpha', id: page)
           end
 
           it { expect(path).to have_page_title(title) }

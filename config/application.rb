@@ -1,18 +1,10 @@
 require_relative 'boot'
-
 require 'rails/all'
 
-# Require the gems listed in Gemfile, including any gems
-# you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
-
-require 'grover'
-
-ALLOWED_TAGS = %w[p ul li div ol strong].freeze
 
 module EarlyYearsFoundationRecovery
   class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
     # @see ErrorsController
     config.exceptions_app = routes
@@ -21,18 +13,22 @@ module EarlyYearsFoundationRecovery
       g.test_framework :rspec
     end
 
-    # Configuration for the application, engines, and railties goes here.
-    #
-    # These settings can be overridden in specific environments using the files
-    # in config/environments, which are processed later.
-    #
     # config.eager_load_paths << Rails.root.join("extras")
     # config.time_zone = ENV.fetch('TZ', 'Europe/London')
     config.service_url = (Rails.env.production? ? 'https://' : 'http://') + ENV.fetch('DOMAIN', 'child-development-training')
 
+    # @see #maintenance?
+    # These endpoints are exempt from maintenance page redirection
+    config.protected_endpoints = %w[
+      /maintenance
+      /health
+      /change
+      /release
+    ]
+
     config.middleware.use Grover::Middleware
     config.active_record.yaml_column_permitted_classes = [Symbol]
-    config.action_view.sanitized_allowed_tags = ALLOWED_TAGS
+    config.action_view.sanitized_allowed_tags = %w[p ul li div ol strong].freeze
 
     # Background Jobs
     config.active_job.queue_adapter               = :que
