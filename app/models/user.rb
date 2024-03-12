@@ -51,7 +51,7 @@ class User < ApplicationRecord
   def self.test_user
     find_or_create_from_gov_one(
       email: 'completed@example.com',
-      gov_one_id: 'urn:fdc:gov.uk:2022'
+      gov_one_id: 'urn:fdc:gov.uk:2022',
     )
   end
 

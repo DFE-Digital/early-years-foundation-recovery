@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_14_175923) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_08_142000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -129,7 +129,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_14_175923) do
   end
 
   create_table "responses", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.string "training_module", null: false
     t.string "question_name", null: false
     t.jsonb "answers", default: []
@@ -138,9 +138,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_14_175923) do
     t.datetime "updated_at", null: false
     t.string "question_type"
     t.bigint "assessment_id"
+    t.text "text_input"
+    t.bigint "visit_id"
     t.index ["assessment_id"], name: "index_responses_on_assessment_id"
     t.index ["user_id", "training_module", "question_name"], name: "user_question"
     t.index ["user_id"], name: "index_responses_on_user_id"
+    t.index ["visit_id"], name: "index_responses_on_visit_id"
   end
 
   create_table "user_answers", force: :cascade do |t|
@@ -254,6 +257,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_14_175923) do
   add_foreign_key "que_scheduler_audit_enqueued", "que_scheduler_audit", column: "scheduler_job_id", primary_key: "scheduler_job_id", name: "que_scheduler_audit_enqueued_scheduler_job_id_fkey"
   add_foreign_key "responses", "assessments"
   add_foreign_key "responses", "users"
+  add_foreign_key "responses", "visits"
   add_foreign_key "user_answers", "user_assessments"
   add_foreign_key "user_answers", "users"
   add_foreign_key "user_assessments", "users"

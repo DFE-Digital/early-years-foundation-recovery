@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     get 'extend_session', to: 'timeout#extend'
     get 'users/timeout', to: 'timeout#timeout_user'
     get '/users/sign_out', to: 'users/sessions#destroy'
-    get 'users/review', to: 'users/sessions#sign_in_test_user' unless Rails.env.live?
+    get 'users/review', to: 'users/sessions#sign_in_test_user' unless Rails.application.live?
   end
 
   namespace :registration do
