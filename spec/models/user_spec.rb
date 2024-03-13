@@ -302,4 +302,11 @@ RSpec.describe User, type: :model do
       expect(described_class.random_password.scan(/[^A-Za-z0-9]/).count).to be >= 2
     end
   end
+
+  describe '.test_user' do
+    let!(:user) { create :user, email: 'completed@example.com' }
+    it 'returns the completed seeded user' do
+      expect(described_class.test_user).to eq user
+    end
+  end
 end

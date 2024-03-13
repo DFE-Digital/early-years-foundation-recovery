@@ -49,10 +49,7 @@ class User < ApplicationRecord
 
   # @return [User]
   def self.test_user
-    find_or_create_from_gov_one(
-      email: 'completed@example.com',
-      gov_one_id: 'urn:fdc:gov.uk:2022',
-    )
+    find_by(email: "completed@example.com")
   end
 
   # @return [Boolean]
