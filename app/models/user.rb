@@ -49,7 +49,7 @@ class User < ApplicationRecord
 
   # @return [User]
   def self.test_user
-    find_by(email: "completed@example.com")
+    find_by(email: 'completed@example.com')
   end
 
   # @return [Boolean]

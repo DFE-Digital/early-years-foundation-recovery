@@ -305,6 +305,7 @@ RSpec.describe User, type: :model do
 
   describe '.test_user' do
     let!(:user) { create :user, email: 'completed@example.com' }
+
     it 'returns the completed seeded user' do
       expect(described_class.test_user).to eq user
     end
