@@ -215,11 +215,16 @@
       - response-answers-5-field
     - - :click_on
       - Next
+- :path: /modules/alpha/content-pages/feedback-intro
+  :text: Additional feedback
+  :inputs:
+    - - :click_on
+      - Skip feedback
 - :path: /modules/alpha/content-pages/1-3-3-5
   :text: Thank you
   :inputs:
     - - :click_on
-      - Finish
+      - View certificate
 - :path: /modules/alpha/content-pages/1-3-4
   :text: Congratulations!
   :inputs: []

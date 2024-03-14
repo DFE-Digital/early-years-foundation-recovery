@@ -102,7 +102,7 @@ RSpec.describe Response, type: :model do
   end
 
   context 'with radio buttons for feedback question' do
-    let(:question_name) { 'end-of-module-feedback-1' }
+    let(:question_name) { 'feedback-radiobutton' }
 
     describe 'and no answer' do
       let(:answers) { nil }
