@@ -310,4 +310,10 @@ RSpec.describe User, type: :model do
       expect(described_class.test_user).to eq user
     end
   end
+
+  describe '.test_user?' do
+    let!(:user) { create :user, email: 'completed@example.com' }
+
+    specify { expect(user.test_user?).to eq true }
+  end
 end
