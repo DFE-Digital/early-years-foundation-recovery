@@ -20,13 +20,6 @@ class Guest < Dry::Struct
     )
   end
 
-  # @return [Hash]
-  def feedback_complete_cookie
-    cookies[:feedback_complete] = {
-      value: visit.visit_token,
-    }
-  end
-
 private
 
   # @return [Response::ActiveRecord_Relation]
