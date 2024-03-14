@@ -55,4 +55,32 @@ RSpec.describe FeedbackController, type: :controller do
       end
     end
   end
+
+  describe 'feedback_exists?' do
+    let(:user) { create :user, :registered }
+
+    context 'when feedback exists' do
+      before do
+        allow(controller).to receive(:current_user).and_return(user)
+        allow(user).to receive(:completed_main_feedback?).and_return(true)
+      end
+
+      it 'is true' do
+        get :index
+        expect(controller.feedback_exists?).to be true
+      end
+    end
+
+    context 'when feedback does not exist' do
+      before do
+        allow(controller).to receive(:current_user).and_return(user)
+        allow(user).to receive(:completed_main_feedback?).and_return(false)
+      end
+
+      it 'is false' do
+        get :index
+        expect(controller.feedback_exists?).to be false
+      end
+    end
+  end
 end
