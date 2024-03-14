@@ -10,7 +10,7 @@ class PaginationDecorator
 
   # @return [String]
   def heading
-    # TODO Look at improving this so it isn't hardcoded
+    # TODO: Look at improving this so it isn't hardcoded
     return 'Summary and next steps' if content.thankyou?
 
     content.section_content.first.heading

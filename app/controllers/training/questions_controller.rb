@@ -32,6 +32,8 @@ module Training
     def track_events
       if track_feedback_start?
         track('feedback_start')
+      elsif track_feedback_complete?
+        track('feedback_complete')
       elsif track_confidence_start?
         track('confidence_check_start')
       elsif track_assessment_start?
@@ -58,6 +60,11 @@ module Training
     end
 
     # @return [Boolean]
+    def track_feedback_complete?
+      content.last_feedback? && feedback_complete_untracked?
+    end
+
+    # @return [Boolean]
     def track_assessment_start?
       content.first_assessment? && summative_start_untracked?
     end
@@ -77,6 +84,11 @@ module Training
     # @return [Boolean]
     def feedback_start_untracked?
       untracked?('feedback_start', training_module_id: mod.name)
+    end
+
+    # @return [Boolean]
+    def feedback_complete_untracked?
+      untracked?('feedback_complete', training_module_id: mod.name)
     end
   end
 end

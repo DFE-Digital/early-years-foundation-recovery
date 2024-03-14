@@ -99,6 +99,11 @@ module Training
     end
 
     # @return [Boolean]
+    def last_feedback?
+      parent.feedback_questions.last.eql?(self)
+    end
+
+    # @return [Boolean]
     def true_false?
       return false if multi_select?
 

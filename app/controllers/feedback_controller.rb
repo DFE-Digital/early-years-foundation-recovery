@@ -1,7 +1,10 @@
 class FeedbackController < ApplicationController
+  before_action :track_feedback_start, only: :show
+  after_action :track_feedback_complete, only: :update
   helper_method :content,
                 :mod,
-                :current_user_response
+                :current_user_response,
+                :feedback_exists?
 
   def show; end
 
@@ -15,11 +18,21 @@ class FeedbackController < ApplicationController
     end
   end
 
+  # @return [Boolean]
+  def feedback_exists?
+    if current_user.guest?
+      cookies[:feedback_complete].present?
+    else
+      current_user.completed_main_feedback?
+    end
+  end
+
 private
 
   def redirect
     if content.eql?(mod.pages.last)
       if current_user.guest?
+        feedback_complete_cookie
         redirect_to root_path
       else
         redirect_to feedback_thank_you_path
@@ -58,6 +71,13 @@ private
     @current_user_response ||= current_user.response_for_shared(content, mod)
   end
 
+  # @return [Hash]
+  def feedback_complete_cookie
+    cookies[:feedback_complete] = {
+      value: current_user.visit.visit_token,
+    }
+  end
+
   # @return [String]
   def question_name
     params[:id]
@@ -71,5 +91,25 @@ private
   # OPTIMIZE: duplicated from ResponsesController
   def user_answers
     Array(response_params[:answers]).compact_blank.map(&:to_i)
+  end
+
+  def track_feedback_start
+    if content.first_feedback? && feedback_start_untracked?
+      track('feedback_start')
+    end
+  end
+
+  def track_feedback_complete
+    if content.last_feedback? && feedback_complete_untracked?
+      track('feedback_complete')
+    end
+  end
+
+  def feedback_start_untracked?
+    untracked?('feedback_start', training_module_id: mod.name)
+  end
+
+  def feedback_complete_untracked?
+    untracked?('feedback_complete', training_module_id: mod.name)
   end
 end

@@ -20,14 +20,11 @@ class Guest < Dry::Struct
     )
   end
 
-  # @return [Boolean]
-  # def started_main_feedback?
-  #   responses.any?
-  # end
-
-  # @return [Boolean]
-  def completed_main_feedback?
-    Course.config.pages.count.eql? responses.count
+  # @return [Hash]
+  def feedback_complete_cookie
+    cookies[:feedback_complete] = {
+      value: visit.visit_token,
+    }
   end
 
 private

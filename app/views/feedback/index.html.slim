@@ -1,6 +1,6 @@
 .govuk-grid-row
   .govuk-grid-column-full
-    - if current_user.completed_main_feedback?
+    - if feedback_exists?
       = m('feedback.feedback_exists')
 
       .govuk-button-group
