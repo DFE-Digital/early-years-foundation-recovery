@@ -58,8 +58,9 @@ RSpec.describe FeedbackController, type: :controller do
 
   describe 'feedback_exists?' do
     let(:user) { create :user, :registered }
+    let(:visit) { create :visit }
 
-    context 'when feedback exists' do
+    context 'when user feedback exists' do
       before do
         allow(controller).to receive(:current_user).and_return(user)
         allow(user).to receive(:completed_main_feedback?).and_return(true)
@@ -71,10 +72,34 @@ RSpec.describe FeedbackController, type: :controller do
       end
     end
 
-    context 'when feedback does not exist' do
+    context 'when user feedback does not exist' do
       before do
         allow(controller).to receive(:current_user).and_return(user)
         allow(user).to receive(:completed_main_feedback?).and_return(false)
+      end
+
+      it 'is false' do
+        get :index
+        expect(controller.feedback_exists?).to be false
+      end
+    end
+
+    context 'when guest feedback exists' do
+      before do
+        allow(controller).to receive(:current_user).and_return(Guest.new(visit: visit))
+        allow(controller).to receive(:cookies).and_return({ feedback_complete: 'some-token' })
+      end
+
+      it 'is true' do
+        get :index
+        expect(controller.feedback_exists?).to be true
+      end
+    end
+
+    context 'when guest feedback does not exist' do
+      before do
+        allow(controller).to receive(:current_user).and_return(Guest.new(visit: visit))
+        allow(controller).to receive(:cookies).and_return({})
       end
 
       it 'is false' do
