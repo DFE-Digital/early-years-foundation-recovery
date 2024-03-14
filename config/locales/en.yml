@@ -112,6 +112,15 @@ en:
 
   na: Not applicable
 
+  next_page:
+    missing: Next page has not been created
+    section: Start section
+    next: Next
+    start_test: Start test
+    save_continue: Save and continue
+    finish_test: Finish test
+    finish: Finish
+
   links:
     save: Save
     continue: Continue

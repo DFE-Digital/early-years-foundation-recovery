@@ -1,3 +1,4 @@
+#
 # Content changes since the user's last visit, powered by Visit
 #
 class ContentChanges

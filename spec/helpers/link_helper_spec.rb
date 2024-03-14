@@ -3,6 +3,12 @@ require 'rails_helper'
 describe 'LinkHelper', type: :helper do
   let(:mod) { Training::Module.ordered.first }
 
+  let(:user) { create(:user, :registered) }
+
+  before do
+    allow(helper).to receive(:current_user).and_return(user)
+  end
+
   describe '#link_to_next' do
     subject(:link) { helper.link_to_next }
 

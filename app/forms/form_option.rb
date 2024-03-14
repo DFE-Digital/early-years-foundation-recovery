@@ -1,3 +1,4 @@
+#
 # Build an array of radio button binary options
 #
 # - opt_in.<field>

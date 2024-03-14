@@ -32,26 +32,6 @@ RSpec.shared_context 'with progress' do
   end
 
   # @param mod [Training::Module]
-  def start_confidence_check(mod)
-    view_pages_upto(mod, 'confidence_questionnaire')
-  end
-
-  # @param mod [Training::Module]
-  def start_summative_assessment(mod)
-    view_pages_upto(mod, 'summative_questionnaire')
-  end
-
-  # @param mod [Training::Module]
-  def view_pages_upto_formative_question(mod, count = 1)
-    view_pages_upto(mod, 'formative_questionnaire', count)
-  end
-
-  # @param mod [Training::Module]
-  def view_certificate_page(mod)
-    view_pages_upto(mod, 'certificate')
-  end
-
-  # @param mod [Training::Module]
   # @param duration [ActiveSupport::Duration]
   def complete_module(mod, duration = nil)
     view_pages_upto(mod, 'certificate')

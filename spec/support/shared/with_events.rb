@@ -4,7 +4,7 @@ RSpec.shared_context 'with events' do
   let(:user2) { create(:user, :registered) }
 
   let(:events) do
-    Event.where(user_id: user.id).where_properties(training_module_id: module_name)
+    Event.where(user_id: user.id).where_properties(training_module_id: mod.name)
   end
 
   def create_event(user, name, time, training_module, id = nil)

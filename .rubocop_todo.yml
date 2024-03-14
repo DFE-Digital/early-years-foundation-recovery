@@ -71,6 +71,12 @@ Rails/Validation:
     - 'app/models/course.rb'
     - 'app/models/training/module.rb'
 
+# Offense count: 1
+# This cop supports safe autocorrection (--autocorrect).
+Style/EmptyCaseCondition:
+  Exclude:
+    - 'app/decorators/next_page_decorator.rb'
+
 # Offense count: 2
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Style/IdenticalConditionalBranches:
