@@ -9,12 +9,12 @@
 = form_with model: current_user_response, url: training_module_response_path(mod.name, content.name), method: :patch do |f|
 
   .govuk-grid-row
-    #assessment-results.govuk-grid-column-two-thirds-from-desktop
+    .govuk-grid-column-two-thirds-from-desktop
       = f.govuk_error_summary
       = render partial: content.to_partial_path, locals: { f: f }, object: current_user_response, as: :response
 
       - if content.formative_question? && current_user_response.responded?
-        = render 'assessment_banner'
+        #formative-results= render 'assessment_banner'
 
 
   .govuk-grid-row
