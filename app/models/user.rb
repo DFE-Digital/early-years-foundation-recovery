@@ -478,7 +478,7 @@ class User < ApplicationRecord
 
   # @return [Boolean]
   def completed_main_feedback?
-    responses.main_feedback.any?
+    responses.course_feedback.any?
   end
 
 private

@@ -14,6 +14,8 @@
     hr
     | FEEDBACK
     br
+    |   User type: #{current_user.guest? ? 'guest' : 'authenticated user'}
+    br
     |   Hint: #{content.hint}
     br
     |   Or: #{content.or}
