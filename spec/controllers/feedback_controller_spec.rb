@@ -45,7 +45,7 @@ RSpec.describe FeedbackController, type: :controller do
 
         it 'redirects to the next feedback path' do
           post :update, params: valid_attributes
-          expect(response).to redirect_to(feedback_path(2))
+          expect(response).to redirect_to(feedback_path('feedback-yesnoandtext'))
         end
 
         it 'tracks feedback complete' do
