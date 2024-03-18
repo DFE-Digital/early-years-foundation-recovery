@@ -10,24 +10,24 @@ class FeedbackPaginationDecorator < PaginationDecorator
   end
 
   # @return [String]
-  # def section_numbers
-  #   I18n.t(:section, scope: :pagination, current: content.submodule - 1, total: section_total - 1)
-  # end
+  def section_numbers
+    I18n.t(:section, scope: :pagination, current: content.submodule - 1, total: section_total - 1)
+  end
 
-  # private
+private
 
   # @return [Integer]
-  # def page_total
-  #   size = content.section_content.size
-  #   if content.section_content.any?(&:skippable?) # && response_for_shared.responded?
-  #     # don't count skipped page
-  #     content.section_content.each do |section_content|
-  #       if section_content.feedback_question? && section_content.skippable_question.eql?(false)
-  #         size -= 1
-  #       end
-  #     end
-  #   end
+  def page_total
+    size = content.section_content.size
+    if content.section_content.any?(&:skippable?)
+      # don't count skipped page
+      content.section_content.each do |section_content|
+        if section_content.feedback_question? && section_content.skippable_question.eql?(true) # && response_for_shared.responded?
+          size -= 1
+        end
+      end
+    end
 
-  #   size
-  # end
+    size
+  end
 end

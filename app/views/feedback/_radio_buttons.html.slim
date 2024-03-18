@@ -14,5 +14,5 @@
     - else
       = f.question_radio_button(option)
 
-  - if content.has_hint?
+  - if content.has_hint? && !content.skippable?
     = f.govuk_text_area :text_input, label: { text: content.hint, class: 'govuk-!-font-weight-bold govuk-!-margin-top-8 govuk-!-margin-bottom-4' }

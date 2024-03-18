@@ -22,7 +22,6 @@ RSpec.describe Response, type: :model do
       updated_at
       question_type
       assessment_id
-      guest_visit
       text_input
       visit_id
     ]

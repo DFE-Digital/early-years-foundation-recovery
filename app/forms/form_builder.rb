@@ -62,6 +62,17 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
   end
 
   # @param option [Training::Answer::Option]
+  # @option text [String]
+  # @return [String]
+  def or_checkbox_button(text:, checked:)
+    govuk_check_box :answers,
+                    0,
+                    label: { text: text },
+                    link_errors: true,
+                    checked: checked
+  end
+
+  # @param option [Training::Answer::Option]
   # @return [String]
   def question_check_box(option)
     govuk_check_box :answers,

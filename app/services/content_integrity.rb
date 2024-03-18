@@ -46,7 +46,7 @@ class ContentIntegrity
     confidence: 'Insufficient confidence checks',
 
     # NB: disabled until new validity of feedback questions can be asserted
-    # question_answers: 'Question answers are incorrectly formatted', # TODO: which question?
+    question_answers: 'Question answers are incorrectly formatted', # TODO: which question?
   }.freeze
 
   # @return [nil]
@@ -164,7 +164,7 @@ class ContentIntegrity
 
   # @return [Boolean]
   def question_answers?
-    mod.questions.all? { |question| question.answer.valid? }
+    mod.questions.all? { |question| question.answer.valid? && question.feedback_question? }
   end
 
   # @return [Boolean]

@@ -108,7 +108,7 @@ module.exports = function(migration) {
   })
 
   question.createField('skippable', {
-    name: 'One-shot question',
+    name: 'One-off question',
     type: 'Boolean',
     required: true,
     defaultValue: {
