@@ -26,7 +26,25 @@ class ContentChanges
     user.course.available_modules.select { |mod| new_module?(mod) }
   end
 
+  # @param mod [Training::Module]
+  # @return [String, nil]
+  # The latest release that predates the user's first visit to the module
+  def module_version(mod)
+    mod.module_release.versions.select { |_, time| module_started_at(mod) > time }.keys.last
+  end
+
 private
+
+  # @param mod [Training::Module]
+  # @return [DateTime]
+  def module_started_at(mod)
+    user.course.current_modules.find(mod).events
+    .where(name: 'module_start')
+    .where("properties ->> 'training_module_id' = ?", mod.name)
+    .order(time: :desc)
+    .first
+    .time
+  end
 
   # @return [Visit]
   def previous_visit

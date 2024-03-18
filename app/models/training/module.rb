@@ -65,6 +65,11 @@ module Training
       ModuleRelease.find_by(module_position: position)&.first_published_at
     end
 
+    # @return [ModuleRelease, nil]
+    def module_release
+      ModuleRelease.find_by(module_position: position)
+    end
+
     # entry references ---------------------------------
 
     # @example
@@ -161,7 +166,6 @@ module Training
       pages_by_type('sub_module_intro').first
     end
 
-    # @return [Training::Page]
     def first_content_page
       pages_by_type('topic_intro').first
     end

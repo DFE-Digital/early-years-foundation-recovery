@@ -36,6 +36,7 @@ private
       module_position: mod.position,
       name: mod.name,
       first_published_at: release.time,
+      versions: { release.properties.dig('sys', 'version') => release.time },
     )
   end
 end

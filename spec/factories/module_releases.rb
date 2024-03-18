@@ -4,5 +4,6 @@ FactoryBot.define do
     module_position { 1 }
     name { 'alpha' }
     first_published_at { Time.zone.now }
+    versions { { '1' => Time.zone.now } }
   end
 end

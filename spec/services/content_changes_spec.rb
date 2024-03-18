@@ -66,4 +66,19 @@ RSpec.describe ContentChanges do
       end
     end
   end
+
+  describe '#module_version' do
+    let(:mod) { Training::Module.by_name(:delta) }
+  
+    context 'with module versions predating the user\'s module start' do
+      before do
+        create :module_release, id: 4, name: mod.name, module_position: mod.position, versions: { '1' => 3.days.ago, '2' => 2.days.ago, '3' => 1.hour.ago }
+        allow(changes).to receive(:module_started_at).and_return(1.day.ago)
+      end
+  
+      it 'returns the latest version for that user' do
+        expect(changes.module_version(mod)).to eq('2')
+      end
+    end
+  end
 end

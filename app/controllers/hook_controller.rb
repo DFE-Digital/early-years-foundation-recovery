@@ -16,6 +16,15 @@ class HookController < ApplicationController
       properties: payload,
     )
 
+    parent_mod = Training::Module.by_content_id(payload.dig('sys', 'id'))
+    
+    if mod.module_release
+      mod.module_release.update!(
+        versions: mod.module_release.versions.merge(
+          payload.dig('sys', 'version') => new_release.time,
+        ),
+      )
+
     NewModuleMailJob.enqueue(new_release.id)
     render json: { status: 'content release received' }, status: :ok
   end
