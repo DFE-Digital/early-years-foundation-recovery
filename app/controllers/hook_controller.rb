@@ -10,18 +10,20 @@ class HookController < ApplicationController
   #     - Release (execute)
   #
   def release
+    content_id = payload.dig('sys', 'id')
+    parent_mod = Training::Module.by_content_id(payload.dig('sys', 'id'))
+
     new_release = Release.create!(
-      name: payload.dig('sys', 'id'),
+      name: content_id,
       time: payload.dig('sys', 'completedAt'),
       properties: payload,
     )
 
-    parent_mod = Training::Module.by_content_id(payload.dig('sys', 'id'))
-    
-    if mod.module_release
-      mod.module_release.update!(
-        versions: mod.module_release.versions.merge(
-          payload.dig('sys', 'version') => new_release.time,
+    if parent_mod.module_release
+      current_version = parent_mod.module_release.versions[content_id] || 0
+      parent_mod.module_release.update!(
+        versions: parent_mod.module_release.versions.merge(
+          content_id => current_version + 1,
         ),
       )
 
