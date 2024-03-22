@@ -179,6 +179,11 @@ class User < ApplicationRecord
     !gov_one_id.nil?
   end
 
+  # @return [Boolean]
+  def guest?
+    false
+  end
+
   # @see Devise database_authenticatable
   # @param params [Hash]
   # @return [Boolean]
@@ -189,6 +194,17 @@ class User < ApplicationRecord
     end
 
     super
+  end
+
+  # @see ResponsesController#response_params
+  # @param content [Training::Question]
+  # @return [UserAnswer, Response]
+  def response_for_shared(content, mod)
+    responses.find_or_initialize_by(
+      question_type: content.page_type,
+      question_name: content.name,
+      training_module: mod.name,
+    )
   end
 
   # @see ResponsesController#response_params
@@ -458,6 +474,11 @@ class User < ApplicationRecord
   # @return [VisitChanges] changes since last visit
   def content_changes
     @content_changes ||= ContentChanges.new(user: self)
+  end
+
+  # @return [Boolean]
+  def completed_main_feedback?
+    responses.course_feedback.any?
   end
 
 private

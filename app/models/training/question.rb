@@ -17,13 +17,65 @@ module Training
     # @return [String] powered by JSON not type
     def to_partial_path
       partial = multi_select? ? 'check_boxes' : 'radio_buttons'
-      partial = "learning_#{partial}" if formative_question?
-      "training/questions/#{partial}"
+
+      if feedback_question?
+        partial = 'text_area' if only_text?
+        "feedback/#{partial}"
+      else
+        partial = "learning_#{partial}" if formative_question?
+        "training/questions/#{partial}"
+      end
     end
 
     # @return [Boolean]
     def multi_select?
-      confidence_question? ? false : answer.multi_select?
+      if feedback_question?
+        response_type # FIXME: this field smells
+      elsif confidence_question?
+        false
+      else
+        answer.multi_select?
+      end
+    end
+
+    # @return [Boolean]
+    def skippable?
+      feedback_question? && skippable_question
+    end
+
+    # @return [Boolean]
+    def no_options?
+      feedback_question? && options.empty?
+    end
+
+    # @return [Boolean]
+    def only_text?
+      no_options? && !has_hint?
+    end
+
+    # @return [Boolean]
+    def and_text?
+      !no_options? && (has_hint? || has_or?)
+    end
+
+    # @return [Boolean]
+    def has_hint?
+      feedback_question? && hint.present?
+    end
+
+    # @return [Boolean]
+    def has_other?
+      feedback_question? && other.present?
+    end
+
+    # @return [Boolean]
+    def has_or?
+      feedback_question? && self.or.present?
+    end
+
+    # @return [Boolean]
+    def checkbox?
+      feedback_question? && response_type
     end
 
     # @return [Boolean] event tracking
@@ -42,6 +94,16 @@ module Training
     end
 
     # @return [Boolean]
+    def first_feedback?
+      parent.feedback_questions.first.eql?(self)
+    end
+
+    # @return [Boolean]
+    def last_feedback?
+      parent.feedback_questions.last.eql?(self)
+    end
+
+    # @return [Boolean]
     def true_false?
       return false if multi_select?
 
@@ -55,6 +117,7 @@ module Training
         formative_questionnaire: 'formative_assessment',
         summative_questionnaire: 'summative_assessment',
         confidence_questionnaire: 'confidence_check',
+        feedback: 'feedback',
       }.fetch(page_type.to_sym)
     end
 
@@ -67,6 +130,7 @@ module Training
         summative_questionnaire: 'summative',
         summative: 'summative',
         confidence_questionnaire: 'confidence',
+        feedback: 'feedback',
         confidence: 'confidence',
       }.fetch(page_type.to_sym)
     end
@@ -97,6 +161,8 @@ module Training
 
           #{body}
         LEGEND
+      elsif feedback_question?
+        body.to_s
       else
         "#{body} (Select one answer)"
       end

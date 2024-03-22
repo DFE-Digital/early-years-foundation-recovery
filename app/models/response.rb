@@ -4,10 +4,15 @@
 class Response < ApplicationRecord
   include ToCsv
 
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :assessment, optional: true
+  belongs_to :visit, optional: true
 
-  validates :answers, presence: true
+  validates :training_module, presence: true
+  validates :question_type, inclusion: { in: %w[formative summative confidence feedback] }
+
+  validates :answers, presence: true, unless: -> { text_input_only? }
+  validates :text_input, presence: true, if: -> { text_input_extra? }
 
   scope :incorrect, -> { where(correct: false) }
   scope :correct, -> { where(correct: true) }
@@ -19,12 +24,17 @@ class Response < ApplicationRecord
   scope :summative, -> { where(question_type: 'summative') }
   scope :confidence, -> { where(question_type: 'confidence') }
   scope :feedback, -> { where(question_type: 'feedback') }
+  scope :course_feedback, -> { feedback.where(training_module: 'course') }
 
   delegate :to_partial_path, :legend, to: :question
 
-  # @return [Training::Module]
+  # @return [Training::Module, Course]
   def mod
-    Training::Module.by_name(training_module)
+    if training_module.eql?('course')
+      Course.config
+    else
+      Training::Module.by_name(training_module)
+    end
   end
 
   # @return [Training::Question]
@@ -36,9 +46,38 @@ class Response < ApplicationRecord
   def options
     if question.formative_question? || assessment&.graded?
       question.options(checked: answers, disabled: responded?)
+
+    # the numeric value for "Or" could be all options plus one but "zero" is consistent
+    elsif question.feedback_question? && !question.has_other? && question.has_or? && text_input.present?
+      question.options(checked: [0])
+
     else
       question.options(checked: answers)
     end
+  end
+
+  # @return [Boolean]
+  def checked_other?
+    question.has_other? && answers.include?(question.options.last.id)
+    # question.has_other? && question.options.last.checked?
+  end
+
+  # @see #options
+  # Additional "Or" option is given index zero
+  # @return [Boolean]
+  def checked_or?
+    answers.include?(0)
+    # answers.pop.zero?
+  end
+
+  # @return [Boolean]
+  def text_input_only?
+    question.only_text?
+  end
+
+  # @return [Boolean]
+  def text_input_extra?
+    question.and_text? && checked_other?
   end
 
   # @return [Boolean]
@@ -48,12 +87,12 @@ class Response < ApplicationRecord
 
   # @return [Boolean]
   def responded?
-    answers.any?
+    answers.any? || text_input.present?
   end
 
   # @return [Boolean]
   def correct?
-    question.confidence_question? || question.correct_answers.eql?(answers)
+    question.opinion_question? || question.correct_answers.eql?(answers)
   end
 
   # @return [Boolean]

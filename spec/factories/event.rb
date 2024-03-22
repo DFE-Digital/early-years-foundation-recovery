@@ -5,6 +5,10 @@ FactoryBot.define do
     properties { {} }
     time { Time.zone.now }
 
+    trait :feedback_complete do
+      name { 'feedback_complete' }
+    end
+
     # FIXME: event.user != visit.user
     association :visit, factory: :visit
   end

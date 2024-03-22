@@ -59,7 +59,7 @@ private
       ]
     elsif type.match?(/thankyou/)
       [
-        [:click_on, 'Finish'],
+        [:click_on, 'View certificate'],
       ]
     elsif type.match?(/certificate/)
       []

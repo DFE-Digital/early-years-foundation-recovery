@@ -57,5 +57,10 @@ module Training
     def notes?
       (topic_intro? || text_page?) && notes
     end
+
+    # @return [Boolean]
+    def skippable?
+      false
+    end
   end
 end

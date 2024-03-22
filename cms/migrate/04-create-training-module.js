@@ -38,6 +38,7 @@ module.exports = function(migration) {
     required: true
   })
 
+  // markdown not permitted
   trainingModule.createField('upcoming', {
     name: 'Upcoming',
     type: 'Text',
@@ -50,7 +51,7 @@ module.exports = function(migration) {
   })
 
   // markdown not permitted
-  trainingModule.createField('description', { // list moved to outcomes
+  trainingModule.createField('description', {
     name: 'Description',
     type: 'Text',
     required: true,
@@ -61,7 +62,7 @@ module.exports = function(migration) {
     ]
   })
 
-  trainingModule.createField('outcomes', { // list moved out of description
+  trainingModule.createField('outcomes', {
     name: 'Skills',
     type: 'Text',
     required: true
@@ -74,7 +75,7 @@ module.exports = function(migration) {
   })
 
   // markdown not permitted
-  trainingModule.createField('about', { // formerly objective
+  trainingModule.createField('about', {
     name: 'About',
     type: 'Text',
     required: true,

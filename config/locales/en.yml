@@ -50,6 +50,7 @@ en:
           attributes:
             answers:
               blank: Please select an answer.
+              invalid: Please select an option.
         user_answer:
           attributes:
             answer:
@@ -119,9 +120,15 @@ en:
     start_test: Start test
     save_continue: Save and continue
     finish_test: Finish test
-    finish: Finish
+    finish: View certificate
+    give_feedback: Give feedback
+
+  previous_page:
+    previous: Previous
 
   links:
+    my_modules: Go to my modules
+    update_feedback: Update my feedback
     save: Save
     continue: Continue
     cancel: Cancel
@@ -214,11 +221,6 @@ en:
       Answers will be anonymous, and we will not know what you individually select.
 
       Please rate to what extent you agree with the statements on the following pages.
-
-  thankyou:
-    heading: Thank you
-    body: |
-      You can also {external}[give feedback about the training](%{feedback_url}){/external}
 
   certificate:
     heading: Download your certificate
@@ -607,6 +609,38 @@ en:
       This module covers:
 
       %{criteria}
+  
+  # /feedback
+  feedback:
+    intro: |
+      # Give feedback
+
+      The purpose of this feedback form is to gather your opinion on the child development
+      training course that the Department for Education has created for early years practitioners.
+
+      For more information on how you data will be used, please view our privacy notice. ADD LINK
+
+      Completing this form is voluntary and you can withdraw your feedback at any time.
+
+      By completing this form you have understood the above and consent to take part.
+
+    feedback_exists: |
+      # You have already submitted feedback
+
+      Thank you for helping to improve this training
+
+      ## Technical support queries
+
+      If you have any questions about how to sue this website or are experiencing any
+      technical issues, please use our contact form ADD LINK so that our team can follow up with your enquiry.
+
+      ---
+        
+    
+    # /feedback/thank-you
+    thank_you:
+      heading: Thank you
+      body: Thank you for helping to improve this training
 
   # /gov-one/info
   gov_one_info:

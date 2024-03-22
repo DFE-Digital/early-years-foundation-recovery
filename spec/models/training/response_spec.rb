@@ -100,4 +100,16 @@ RSpec.describe Response, type: :model do
       end
     end
   end
+
+  context 'with radio buttons for feedback question' do
+    let(:question_name) { 'feedback-radiobutton' }
+
+    describe 'and no answer' do
+      let(:answers) { nil }
+
+      it 'is invalid' do
+        expect(response).to be_invalid
+      end
+    end
+  end
 end

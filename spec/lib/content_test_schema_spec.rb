@@ -14,7 +14,7 @@ RSpec.describe ContentTestSchema do
   end
 
   context 'when pass is true' do
-    let(:fixture) { 'alpha-pass' }
+    let(:fixture) { 'alpha-pass-feedback-form' }
 
     specify do
       expect(schema.call).to eq ast
@@ -22,7 +22,7 @@ RSpec.describe ContentTestSchema do
   end
 
   context 'when pass is false' do
-    let(:fixture) { 'alpha-fail' }
+    let(:fixture) { 'alpha-fail-feedback-form' }
 
     specify do
       expect(schema.call(pass: false).compact).to eq ast

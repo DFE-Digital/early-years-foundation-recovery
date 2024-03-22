@@ -4,6 +4,7 @@ RSpec.describe 'Summative assessment', type: :system do
   include_context 'with progress'
   include_context 'with user'
 
+  let(:fixture) { 'spec/support/ast/alpha-pass-response.yml' }
   let(:first_question_path) { '/modules/alpha/questionnaires/1-3-2-1' }
 
   before do

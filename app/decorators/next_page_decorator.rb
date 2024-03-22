@@ -23,6 +23,8 @@ class NextPageDecorator
   def name
     if content.interruption_page?
       mod.content_start.name
+    elsif skippable_page?
+      content.next_item.next_item.name
     else
       content.next_item.name
     end
@@ -32,13 +34,14 @@ class NextPageDecorator
   # @return [String]
   def text
     case
-    when next?            then label[:next]
-    when missing?         then label[:missing]
-    when content.section? then label[:section]
-    when test_start?      then label[:start_test]
-    when test_finish?     then label[:finish_test]
-    when finish?          then label[:finish]
-    when save?            then label[:save_continue]
+    when next?             then label[:next]
+    when missing?          then label[:missing]
+    when content_section?  then label[:section]
+    when confidence_outro? then label[:give_feedback]
+    when test_start?       then label[:start_test]
+    when test_finish?      then label[:finish_test]
+    when finish?           then label[:finish]
+    when save?             then label[:save_continue]
     else
       label[:next]
     end
@@ -100,7 +103,22 @@ private
   end
 
   # @return [Boolean]
+  def confidence_outro?
+    mod.feedback_questions.first.previous_item.eql?(content)
+  end
+
+  # @return [Boolean]
+  def content_section?
+    content.section? && !content.feedback_question?
+  end
+
+  # @return [Boolean]
   def wip?
     Rails.application.preview? || Rails.env.test?
+  end
+
+  # @return [Boolean]
+  def skippable_page?
+    !content.interruption_page? && content.next_item.skippable? && user.response_for_shared(content.next_item, mod).responded?
   end
 end

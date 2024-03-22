@@ -45,6 +45,7 @@ class ContentIntegrity
     summative: 'Insufficient summative questions',
     confidence: 'Insufficient confidence checks',
 
+    # NB: disabled until new validity of feedback questions can be asserted
     question_answers: 'Question answers are incorrectly formatted', # TODO: which question?
   }.freeze
 
@@ -163,7 +164,7 @@ class ContentIntegrity
 
   # @return [Boolean]
   def question_answers?
-    mod.questions.all? { |question| question.answer.valid? }
+    mod.questions.all? { |question| question.answer.valid? && question.feedback_question? }
   end
 
   # @return [Boolean]
@@ -200,6 +201,11 @@ class ContentIntegrity
   # @return [Boolean]
   def confidence_intro?
     page_by_type_position(type: 'confidence_intro')
+  end
+
+  # @return [Boolean]
+  def feedback?
+    page_by_type_position(type: 'feedback')
   end
 
   # @return [Boolean]

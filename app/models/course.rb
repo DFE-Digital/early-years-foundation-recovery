@@ -18,8 +18,43 @@ class Course < ContentfulModel::Base
     fetch_or_store('course') { first }
   end
 
+  # @return [String] mod.name
+  def name
+    'course'
+  end
+
+  # @return [Array] mod.content_sections
+  def content_sections
+    Types::EMPTY_ARRAY
+  end
+
+  # @return [Array] mod.content_subsections
+  def content_subsections
+    Types::EMPTY_ARRAY
+  end
+
   # @return [Array<Training::Question>]
   def feedback
     super.to_a
+  end
+
+  # @return [Array<Training::Question>] with parent
+  def pages
+    feedback.map do |question|
+      question.define_singleton_method(:parent) { Course.config }
+      question
+    end
+  end
+  alias_method :feedback_questions, :pages
+
+  # @see Pagination
+  # @return [Training::Question]
+  def page_by_id(id)
+    pages.find { |page| page.id.eql?(id) }
+  end
+
+  # @return [Training::Question]
+  def page_by_name(name)
+    pages.find { |page| page.name.eql?(name) }
   end
 end
