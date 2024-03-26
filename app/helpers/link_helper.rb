@@ -1,8 +1,7 @@
 module LinkHelper
-  # @note Handle active sessions for feature flag Rails.application.gov_one_login?
   # @return [String]
   def destroy_user_session_path
-    session[:id_token].present? ? logout_uri.to_s : super
+    session[:id_token].present? && !current_user.test_user? ? logout_uri.to_s : super
   end
 
   # OPTIMIZE: use this helper for all back link logic and consistent location

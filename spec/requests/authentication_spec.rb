@@ -21,17 +21,6 @@ RSpec.describe 'Authentication', type: :request do
         get edit_registration_terms_and_conditions_path
       end
 
-      context 'when unconfirmed' do
-        let(:user) { create :user }
-
-        it { expect(response).to redirect_to new_user_session_path }
-
-        it 'email address must be confirmed' do
-          follow_redirect!
-          expect(response.body).to include 'You have to confirm your email address'
-        end
-      end
-
       context 'when partially registered' do
         let(:user) { create :user, :confirmed }
 
@@ -66,26 +55,11 @@ RSpec.describe 'Authentication', type: :request do
         get my_modules_path
       end
 
-      context 'when unconfirmed' do
-        let(:user) { create :user }
-
-        it { expect(response).to redirect_to new_user_session_path }
-
-        it 'email address must be confirmed' do
-          follow_redirect!
-          expect(response.body).to include 'You have to confirm your email address'
-        end
-      end
-
       context 'when partially registered' do
         let(:user) { create :user, :confirmed }
 
         it do
-          if Rails.application.gov_one_login?
-            expect(response).to redirect_to edit_registration_terms_and_conditions_path
-          else
-            expect(response).to redirect_to edit_registration_name_path
-          end
+          expect(response).to redirect_to edit_registration_terms_and_conditions_path
         end
 
         it 'registration must be completed' do

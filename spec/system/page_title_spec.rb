@@ -9,9 +9,6 @@ RSpec.describe 'Page' do
     it { expect(about_path('alpha')).to have_page_title 'First Training Module' }
 
     it { expect(new_user_session_path).to have_page_title 'Sign in' }
-    it { expect(new_user_password_path).to have_page_title 'Reset password' }
-    it { expect(cancel_user_registration_path).to have_page_title 'Create an Early years child development training account' }
-    it { expect(new_user_registration_path).to have_page_title 'Create an Early years child development training account' }
 
     it { expect(setting_path('cookie-policy')).to have_page_title 'Cookie policy' }
 
@@ -23,37 +20,6 @@ RSpec.describe 'Page' do
     it { expect(static_path('sitemap')).to have_page_title 'Sitemap' }
     it { expect(static_path('terms-and-conditions')).to have_page_title 'Terms and conditions' }
     it { expect(static_path('wifi-and-data')).to have_page_title 'Free internet, wifi and data resources' }
-
-    context 'and is confirmed' do
-      let(:user) { create(:user, :confirmed) }
-
-      it 'requesting password reset' do
-        token = user.send_reset_password_instructions
-        expect(edit_user_password_path(reset_password_token: token)).to have_page_title 'Choose a new password'
-      end
-    end
-
-    context 'and is unconfirmed' do
-      let(:user) { create(:user) }
-
-      it 'is a valid confirmation token' do
-        expect(user_confirmation_path(confirmation_token: user.confirmation_token)).to have_page_title 'Sign in'
-        expect(page).to have_current_path new_user_session_path
-      end
-
-      it { expect(new_user_unlock_path).to have_page_title 'Resend unlock instructions' }
-
-      it 'is a valid unlock token' do
-        token = user.lock_access!
-        expect(user_unlock_path(unlock_token: token)).to have_page_title 'Sign in'
-        expect(page).to have_current_path new_user_session_path
-      end
-
-      it 'is an expired/invalid unlock token' do
-        user.lock_access!
-        expect(user_unlock_path(unlock_token: 'invalid_token')).to have_page_title 'Resend unlock instructions'
-      end
-    end
   end
 
   context 'when user is authenticated' do
@@ -71,21 +37,14 @@ RSpec.describe 'Page' do
     it { expect(users_timeout_path).to have_page_title('User timeout') }
     it { expect(setting_path('cookie-policy')).to have_page_title('Cookie policy') }
 
-    it { expect(edit_user_registration_path).to have_page_title('Change your password') }
-    it { expect(new_user_confirmation_path).to have_page_title('Resend your confirmation') }
-
+    it { expect(edit_registration_terms_and_conditions_path).to have_page_title('Terms and Conditions') }
     it { expect(edit_registration_name_path).to have_page_title 'About you' }
     it { expect(edit_registration_setting_type_path).to have_page_title('What setting type do you work in?') }
     it { expect(edit_registration_setting_type_other_path).to have_page_title('Where do you work?') }
     it { expect(edit_registration_local_authority_path).to have_page_title('What local authority area do you work in?') }
     it { expect(edit_registration_role_type_path).to have_page_title('Which of the following best describes your role?') }
     it { expect(edit_registration_role_type_other_path).to have_page_title('What is your role?') }
-
-    it { expect(edit_email_user_path).to have_page_title('Change email address') }
-    it { expect(edit_password_user_path).to have_page_title('Change your password') }
-
-    it { expect(check_email_confirmation_user_path).to have_page_title('Check email confirmation') }
-    it { expect(check_email_password_reset_user_path).to have_page_title('Check email password reset') }
+    it { expect(edit_registration_early_years_emails_path).to have_page_title('Do you want to get early years email updates from the Department for Education?') }
 
     it { expect(static_path('whats-new')).to have_page_title "What's new in the training" }
 

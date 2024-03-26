@@ -150,11 +150,6 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise-pwned_password (0.1.10)
-      devise (~> 4)
-      pwned (~> 2.0.0)
-    devise-security (0.18.0)
-      devise (>= 4.3.0)
     dibber (0.7.0)
     diff-lcs (1.5.1)
     digest-crc (0.6.5)
@@ -396,7 +391,6 @@ GEM
     public_suffix (5.0.4)
     puma (6.4.2)
       nio4r (~> 2.0)
-    pwned (2.0.2)
     que (2.3.0)
     que-scheduler (4.4.0)
       activesupport (>= 5.0)
@@ -657,8 +651,6 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise
-  devise-pwned_password
-  devise-security
   dibber
   dotenv-rails
   dry-core

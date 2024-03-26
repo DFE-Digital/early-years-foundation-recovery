@@ -95,22 +95,9 @@ module EarlyYearsFoundationRecovery
       Types::Params::Bool[ENV.fetch('MAINTENANCE', false)]
     end
 
-    #
-    # Feature flags
-    #
-
-    # @return [Boolean]
-    def gov_one_login?
-      Types::Params::Bool[ENV.fetch('GOV_ONE_LOGIN', false)]
-    end
-
     def migrated_answers?
       Types::Params::Bool[ENV.fetch('DISABLE_USER_ANSWER', false)]
     end
-
-    #
-    # Significant dates
-    #
 
     # @return [ActiveSupport::TimeWithZone]
     def public_beta_launch_date
