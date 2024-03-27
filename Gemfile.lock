@@ -399,7 +399,7 @@ GEM
       que (>= 0.14, < 3.0.0)
     raabro (1.4.0)
     racc (1.7.3)
-    rack (3.0.9)
+    rack (3.0.9.1)
     rack-oauth2 (2.2.1)
       activesupport
       attr_required
