@@ -58,9 +58,8 @@ RSpec.describe 'Account deletion' do
         context 'and text box is blank' do
           let(:reason_other) { nil }
 
-          it 'cannot progress to confirmation page' do
-            expect(page).to have_content('There is a problem')
-              .and have_content('Enter a reason why you want to close your account')
+          it 'can progress to confirmation page' do
+            expect(page).to have_current_path '/my-account/close/confirm'
           end
         end
       end
