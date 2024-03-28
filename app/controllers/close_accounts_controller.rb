@@ -27,16 +27,16 @@ class CloseAccountsController < ApplicationController
 
   def update_reason
     current_user.context = :close_account
-
+  
+    if user_params[:closed_reason] == 'other' && user_params[:closed_reason_custom].blank?
+      params[:user][:closed_reason_custom] = 'No reason provided'
+    end
+  
     if current_user.update(user_params)
       redirect_to confirm_user_close_account_path
     else
       current_user.errors.clear
-      if user_params[:closed_reason] == 'other'
-        current_user.errors.add :closed_reason_custom, :blank, message: 'Enter a reason why you want to close your account'
-      else
-        current_user.errors.add :closed_reason, :blank, message: 'Select a reason for closing your account'
-      end
+      current_user.errors.add :closed_reason, :blank, message: 'Select a reason for closing your account'
       render :edit_reason, status: :unprocessable_entity
     end
   end
