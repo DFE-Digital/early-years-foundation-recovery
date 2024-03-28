@@ -43,8 +43,8 @@ RSpec.describe 'Application configuration' do
 
   describe 'time out' do
     it 'sets interval in minutes' do
-      expect(config.user_timeout_minutes).to eq 25
-      expect(config.user_timeout_warning_minutes).to eq 20
+      expect(config.user_timeout_minutes).to eq 60
+      expect(config.user_timeout_warning_minutes).to eq 55
       expect(config.user_timeout_modal_visible).to eq 5
     end
   end
