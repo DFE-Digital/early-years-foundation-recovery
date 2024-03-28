@@ -93,7 +93,7 @@ jobs:
 
       # Destroy Background Worker
       - name: Destroy existing Azure Container Instances
-        uses: azure/CLI@v1
+        uses: azure/CLI@v2
         with:
           azcliversion: 2.50.0
           inlineScript: |
@@ -103,7 +103,7 @@ jobs:
 
       # Deploy Background Worker
       - name: Deploy to Azure Container Instances
-        uses: azure/CLI@v1
+        uses: azure/CLI@v2
         with:
           azcliversion: 2.50.0
           inlineScript: |
