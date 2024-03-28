@@ -27,11 +27,11 @@ class CloseAccountsController < ApplicationController
 
   def update_reason
     current_user.context = :close_account
-  
+
     if user_params[:closed_reason] == 'other' && user_params[:closed_reason_custom].blank?
       params[:user][:closed_reason_custom] = 'No reason provided'
     end
-  
+
     if current_user.update(user_params)
       redirect_to confirm_user_close_account_path
     else
