@@ -71,5 +71,5 @@ RSpec.configure do |config|
   config.include ShowMeTheCookies, type: :system
 
   # enable OIDC session
-  config.include Devise::Test::IntegrationHelpers, type: :system if Rails.application.gov_one_login?
+  config.include Devise::Test::IntegrationHelpers, type: :system
 end

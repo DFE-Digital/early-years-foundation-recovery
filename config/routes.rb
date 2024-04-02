@@ -13,15 +13,11 @@ Rails.application.routes.draw do
   devise_for :users,
              controllers: {
                sessions: 'users/sessions',
-               confirmations: 'confirmations',  # unless Rails.application.gov_one_login?
-               passwords: 'passwords',          # unless Rails.application.gov_one_login?
-               registrations: 'registrations',  # unless Rails.application.gov_one_login?
                omniauth_callbacks: 'users/omniauth_callbacks',
              },
              path_names: {
                sign_in: 'sign-in',
                sign_out: 'sign-out',
-               sign_up: 'sign-up',              # unless Rails.application.gov_one_login?
              }
 
   # @see TimeoutWarning js component
@@ -31,6 +27,7 @@ Rails.application.routes.draw do
     get 'extend_session', to: 'timeout#extend'
     get 'users/timeout', to: 'timeout#timeout_user'
     get '/users/sign_out', to: 'users/sessions#destroy'
+    get 'users/review', to: 'users/sessions#sign_in_test_user' unless Rails.application.live?
   end
 
   namespace :registration do
@@ -57,7 +54,7 @@ Rails.application.routes.draw do
     get 'edit-training-emails'
     patch 'update-training-emails'
 
-    resource :close_account, only: %i[new update show], path: 'close' do
+    resource :close_account, only: %i[update show], path: 'close' do
       get 'reset-password'
       get 'edit-reason'
       patch 'update-reason'

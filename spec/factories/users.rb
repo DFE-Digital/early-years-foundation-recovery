@@ -3,6 +3,7 @@ FactoryBot.define do
     email { Faker::Internet.email }
     password { Rails.configuration.user_password }
     terms_and_conditions_agreed_at { Date.new(2000, 0o1, 0o1) }
+    gov_one_id { "urn:fdc:gov.uk:2022:23-#{Faker::Alphanumeric.alphanumeric(number: 10)}" }
 
     trait :confirmed do
       confirmed_at { 1.minute.ago }
@@ -32,12 +33,6 @@ FactoryBot.define do
       closed_at { '2024-01-08 10:23:40.946267' }
       closed_reason { 'other' }
       closed_reason_custom { 'I did not find the training useful' }
-    end
-
-    factory :gov_one_user do
-      registered
-      gov_one_id { 'urn:fdc:gov.uk:2022:23-random-alpha-numeric' }
-      # password { nil }
     end
 
     # Personas -----------------------------------------------------------------

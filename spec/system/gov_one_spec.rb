@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Gov One' do
-  before do
-    skip unless Rails.application.gov_one_login?
-  end
-
   context 'with an unauthenticated visitor' do
     before do
       visit '/users/sign-in'

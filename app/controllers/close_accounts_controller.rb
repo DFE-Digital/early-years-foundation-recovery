@@ -3,15 +3,8 @@ class CloseAccountsController < ApplicationController
 
   def show; end
 
-  def new; end
-
   def update
-    if current_user.valid_password?(user_password_params[:current_password])
-      redirect_to edit_reason_user_close_account_path
-    else
-      current_user.errors.add(:current_password, :confirmation_invalid, message: 'Enter a valid password')
-      render :new, status: :unprocessable_entity
-    end
+    redirect_to edit_reason_user_close_account_path
   end
 
   def reset_password

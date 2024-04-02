@@ -20,17 +20,11 @@ class ApplicationController < ActionController::Base
     authenticate_user! unless user_signed_in?
     return true if current_user.registration_complete?
 
-    if Rails.application.gov_one_login?
-      redirect_to edit_registration_terms_and_conditions_path, notice: 'Please complete registration'
-    else
-      redirect_to edit_registration_name_path, notice: 'Please complete registration'
-    end
+    redirect_to edit_registration_terms_and_conditions_path, notice: 'Please complete registration'
   end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:terms_and_conditions_agreed_at])
-    update_attrs = %i[password password_confirmation current_password]
-    devise_parameter_sanitizer.permit :account_update, keys: update_attrs
   end
 
   # @return [nil]

@@ -164,7 +164,7 @@ class ContentIntegrity
 
   # @return [Boolean]
   def question_answers?
-    mod.questions.all? { |question| question.answer.valid? && question.feedback_question? }
+    mod.questions.all? { |question| question.answer.valid? || question.feedback_question? }
   end
 
   # @return [Boolean]

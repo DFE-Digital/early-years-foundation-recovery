@@ -265,6 +265,9 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 
 # GOV.UK One Login
 
+GOV.UK One Login admin tool exists for managing the integration environment client config.
+It can be accessed at <https://admin.sign-in.service.gov.uk> (currently only 1 email can access the client config).
+
 ### Account Registration
 
 Register an account on the integration OIDC used in development <https://signin.integration.account.gov.uk/sign-in-or-create>.

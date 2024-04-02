@@ -47,23 +47,20 @@ class User < ApplicationRecord
     user
   end
 
+  # @return [User]
+  def self.test_user
+    find_by(email: 'completed@example.com')
+  end
+
+  # @return [Boolean]
+  def test_user?
+    email == 'completed@example.com'
+  end
+
   attr_accessor :context
 
-  devise :database_authenticatable, :registerable, :recoverable,
-         :validatable, :rememberable, :confirmable, :lockable, :timeoutable,
-         :secure_validatable, :omniauthable, omniauth_providers: [:openid_connect]
-
-  # FIXME: retire old devise functionality
-  # if Rails.application.gov_one_login?
-  #   devise :database_authenticatable, :rememberable, :lockable, :timeoutable,
-  #          :omniauthable, omniauth_providers: [:openid_connect]
-  # else
-  #   devise :database_authenticatable, :registerable, :recoverable,
-  #          :validatable, :rememberable, :confirmable, :lockable, :timeoutable,
-  #          :secure_validatable
-  # end
-
-  devise :pwned_password unless Rails.env.test?
+  devise :database_authenticatable, :rememberable, :lockable, :timeoutable,
+         :omniauthable, omniauth_providers: [:openid_connect]
 
   has_many :responses
   has_many :user_answers
@@ -163,11 +160,7 @@ class User < ApplicationRecord
             inclusion: { in: Trainee::Setting.valid_types },
             if: proc { |u| u.registration_complete? }
 
-  if Rails.application.gov_one_login?
-    validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :update, if: proc { |u| u.registration_complete? }
-  else
-    validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :create
-  end
+  validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :update, if: proc { |u| u.registration_complete? }
 
   # @return [Boolean]
   def notes?
@@ -182,18 +175,6 @@ class User < ApplicationRecord
   # @return [Boolean]
   def guest?
     false
-  end
-
-  # @see Devise database_authenticatable
-  # @param params [Hash]
-  # @return [Boolean]
-  def update_with_password(params)
-    if params[:password].blank?
-      errors.add :password, :blank
-      return false
-    end
-
-    super
   end
 
   # @see ResponsesController#response_params
@@ -243,23 +224,6 @@ class User < ApplicationRecord
     Training::Module.live.select do |mod|
       module_time_to_completion.key?(mod.name)
     end
-  end
-
-  # @see Devise::Confirmable
-  # send_confirmation_instructions
-  def send_confirmation_instructions
-    unless @raw_confirmation_token
-      generate_confirmation_token!
-    end
-
-    opts = pending_reconfirmation? ? { to: unconfirmed_email } : {}
-    mailer = registration_complete? ? :email_confirmation_instructions : :activation_instructions
-    send_devise_notification(mailer, @raw_confirmation_token, opts)
-  end
-
-  # send email to registered user if attempt is made to create account with registered email
-  def send_email_taken_notification
-    send_devise_notification(:email_taken)
   end
 
   def send_account_closed_notification
@@ -440,9 +404,6 @@ class User < ApplicationRecord
   end
 
   def redact!
-    skip_reconfirmation!
-    skip_email_changed_notification!
-    skip_password_change_notification!
     update!(first_name: 'Redacted',
             last_name: 'User',
             email: "redacted_user#{id}@example.com",

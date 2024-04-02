@@ -6,6 +6,7 @@ RSpec.describe Response, type: :model do
       training_module: 'alpha',
       question_name: question_name,
       answers: answers,
+      question_type: 'formative',
     )
   end
 
@@ -27,6 +28,7 @@ RSpec.describe Response, type: :model do
       let(:answers) { [1] }
 
       it '#correct?' do
+        expect(response.errors.full_messages).to be_empty
         expect(response).to be_correct
       end
 

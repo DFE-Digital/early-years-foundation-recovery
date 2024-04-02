@@ -174,10 +174,10 @@ RSpec.describe User, type: :model do
     it 'exports formatted attributes as CSV' do
       expect(described_class.to_csv(batch_size: 2)).to eq <<~CSV
         id,local_authority,setting_type,setting_type_other,role_type,role_type_other,registration_complete,private_beta_registration_complete,registration_complete_any?,registered_at,terms_and_conditions_agreed_at,gov_one?,module_1_time,module_2_time,module_3_time
-        1,Watford Borough Council,,DfE,other,Developer,true,true,true,,2000-01-01 00:00:00,false,4,2,0
-        2,Leeds City Council,,DfE,Trainer or lecturer,,true,false,true,,2000-01-01 00:00:00,false,1,0,
-        3,City of London,,DfE,other,Developer,true,false,true,2023-01-12 10:15:59,2000-01-01 00:00:00,false,3,,
-        4,,,,,,false,false,false,,2000-01-01 00:00:00,false,,,
+        1,Watford Borough Council,,DfE,other,Developer,true,true,true,,2000-01-01 00:00:00,true,4,2,0
+        2,Leeds City Council,,DfE,Trainer or lecturer,,true,false,true,,2000-01-01 00:00:00,true,1,0,
+        3,City of London,,DfE,other,Developer,true,false,true,2023-01-12 10:15:59,2000-01-01 00:00:00,true,3,,
+        4,,,,,,false,false,false,,2000-01-01 00:00:00,true,,,
       CSV
     end
   end
@@ -250,7 +250,6 @@ RSpec.describe User, type: :model do
 
     context 'without an existing account' do
       before do
-        skip unless Rails.application.gov_one_login?
         described_class.find_or_create_from_gov_one(**params)
       end
 
@@ -272,7 +271,7 @@ RSpec.describe User, type: :model do
 
       context 'and using GovOne for the first time' do
         let(:user) do
-          create :user, :registered, email: email
+          create :user, :registered, email: email, gov_one_id: nil
         end
 
         let(:params) do
@@ -308,5 +307,19 @@ RSpec.describe User, type: :model do
       expect(described_class.random_password.scan(/[0-9]/).count).to be >= 2
       expect(described_class.random_password.scan(/[^A-Za-z0-9]/).count).to be >= 2
     end
+  end
+
+  describe '.test_user' do
+    let!(:user) { create :user, email: 'completed@example.com' }
+
+    it 'returns the completed seeded user' do
+      expect(described_class.test_user).to eq user
+    end
+  end
+
+  describe '.test_user?' do
+    let!(:user) { create :user, email: 'completed@example.com' }
+
+    specify { expect(user.test_user?).to eq true }
   end
 end
