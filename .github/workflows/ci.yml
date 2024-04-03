@@ -84,7 +84,6 @@ jobs:
           # TODO: Check envs before merging into main
           CONTENTFUL_PREVIEW: true
           DISABLE_USER_ANSWER: true
-          GOV_ONE_LOGIN: true
       -
         name: Run rubocop
         run: bundle exec rubocop
