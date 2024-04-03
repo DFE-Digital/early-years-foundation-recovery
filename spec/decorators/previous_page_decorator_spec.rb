@@ -64,25 +64,18 @@ RSpec.describe PreviousPageDecorator do
       #
       let(:content) { mod.page_by_name('1-3-3-5') }
 
-      context 'and unanswered' do
-        it 'is one step back' do
-          expect(decorator.name).to eq 'feedback-checkbox-otherandtext'
-        end
-      end
-
       context 'and answered' do
         before do
           create :response,
-                 question_name: 'feedback-checkbox-otherandtext',
-                 training_module: 'alpha',
+                 question_name: 'feedback-oneoffquestion',
+                 training_module: mod.name,
                  answers: [1],
                  correct: true,
-                 user: create(:user)
+                 user: user,
+                 question_type: 'feedback'
         end
 
-        it 'is two steps back' do
-          expect(decorator.name).to eq 'feedback-freetext'
-        end
+        specify { expect(decorator.name).to eq 'feedback-checkbox-otherandtext' }
       end
     end
   end
