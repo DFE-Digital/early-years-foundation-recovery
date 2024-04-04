@@ -31,12 +31,10 @@ private
 
   def redirect
     if content.eql?(mod.pages.last)
-      if current_user.guest?
-        feedback_complete_cookie
-        redirect_to root_path
-      else
-        redirect_to feedback_thank_you_path
-      end
+      redirect_to feedback_thank_you_path
+    elsif content.eql?(mod.pages[-2]) && current_user.guest?
+      redirect_to feedback_thank_you_path
+      feedback_complete_cookie
     else
       redirect_to feedback_path(content.next_item.name)
     end

@@ -61,7 +61,7 @@ RSpec.describe FeedbackController, type: :controller do
             id: 'feedback-radiobutton',
             response: {
               answers: [''],
-            }
+            },
           }
         end
 
@@ -94,11 +94,13 @@ RSpec.describe FeedbackController, type: :controller do
 
       context 'and form started' do
         let(:completed) { true }
+
         specify { expect(controller).to be_feedback_exists }
       end
 
       context 'and form not started' do
         let(:completed) { false }
+
         specify { expect(controller).not_to be_feedback_exists }
       end
     end
@@ -113,11 +115,13 @@ RSpec.describe FeedbackController, type: :controller do
 
       context 'and form started' do
         let(:cookie) { { feedback_complete: 'some-token' } }
+
         specify { expect(controller).to be_feedback_exists }
       end
 
       context 'and form not started' do
         let(:cookie) { {} }
+
         specify { expect(controller).not_to be_feedback_exists }
       end
     end
