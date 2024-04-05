@@ -30,8 +30,6 @@ gem 'bootsnap', require: false
 
 # Users
 gem 'devise'
-gem 'devise-pwned_password'
-gem 'devise-security'
 gem 'dibber'
 gem 'jwt'
 gem 'omniauth_openid_connect'

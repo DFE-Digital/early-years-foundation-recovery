@@ -6,32 +6,7 @@ RSpec.describe 'Account deletion' do
   context 'when on my account page' do
     it 'has button to close account' do
       visit '/my-account'
-      expect(page).to have_link 'Request to close account', href: '/my-account/close/new'
-    end
-  end
-
-  context 'when on password confirmation page' do
-    before do
-      visit '/my-account/close/new'
-      fill_in 'For security, enter your password', with: password
-      click_on 'Continue'
-    end
-
-    context 'and correct password is entered' do
-      let(:password) { user.password }
-
-      it 'can progress to next page' do
-        expect(page).to have_current_path '/my-account/close/edit-reason'
-      end
-    end
-
-    context 'and incorrect password is entered' do
-      let(:password) { 'IncorrectPassword' }
-
-      it 'cannot progress to next page' do
-        expect(page).to have_content('There is a problem')
-          .and have_content('Enter a valid password')
-      end
+      expect(page).to have_link 'Request to close account', href: '/my-account/close/edit-reason'
     end
   end
 

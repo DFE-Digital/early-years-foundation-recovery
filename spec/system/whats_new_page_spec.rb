@@ -22,16 +22,8 @@ RSpec.describe 'New stuff page' do
     describe 'with subsequent logins' do
       before do
         click_on 'sign-out-desktop'
-
-        if Rails.application.gov_one_login?
-          sign_in user
-          visit '/users/sign-in'
-        else
-          visit '/users/sign-in'
-          fill_in 'Email address', with: user.email
-          fill_in 'Password', with: user.password
-          click_button 'Sign in'
-        end
+        sign_in user
+        visit '/users/sign-in'
       end
 
       it 'does not appear' do

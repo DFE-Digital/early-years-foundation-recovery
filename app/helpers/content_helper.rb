@@ -73,10 +73,4 @@ module ContentHelper
   def privacy_policy_url
     Course.config.privacy_policy_url
   end
-
-  # TODO: remove this method and coresponding locale string
-  # @yield [String]
-  def password_complexity
-    t('password_complexity', length: User.password_length.first)
-  end
 end
