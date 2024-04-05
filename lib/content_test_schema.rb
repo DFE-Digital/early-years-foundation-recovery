@@ -46,7 +46,7 @@ private
       ]
     elsif payload[:note]
       [
-        [:make_note, 'note-body-field', payload[:note]],
+        [:input_text, 'note-body-field', payload[:note]],
         [:click_on, 'Save and continue'],
       ]
     elsif type.match?(/assessment_intro/)

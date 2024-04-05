@@ -23,7 +23,7 @@ class FeedbackController < ApplicationController
     if current_user.guest?
       cookies[:feedback_complete].present?
     else
-      current_user.completed_main_feedback?
+      current_user.started_main_feedback?
     end
   end
 
@@ -32,9 +32,9 @@ private
   def redirect
     if content.eql?(mod.pages.last)
       redirect_to feedback_thank_you_path
-    elsif content.eql?(mod.pages[-2]) && current_user.guest?
+    elsif content.next_item.skippable? && (current_user.guest? || current_user.response_for_shared(content.next_item, mod).responded?)
       redirect_to feedback_thank_you_path
-      feedback_complete_cookie
+      feedback_complete_cookie if current_user.guest?
     else
       redirect_to feedback_path(content.next_item.name)
     end
@@ -65,8 +65,8 @@ private
   end
 
   # @return [Response]
-  def current_user_response
-    @current_user_response ||= current_user.response_for_shared(content, mod)
+  def current_user_response(question = content)
+    @current_user_response ||= current_user.response_for_shared(question, mod)
   end
 
   # @return [Hash]

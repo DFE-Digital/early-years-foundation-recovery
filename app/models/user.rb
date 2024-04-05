@@ -439,7 +439,7 @@ class User < ApplicationRecord
 
   # FIXME: completed vs started
   # @return [Boolean]
-  def completed_main_feedback?
+  def started_main_feedback?
     responses.course_feedback.any?
   end
 
