@@ -32,7 +32,7 @@ class ModuleProgress
   end
 
   # Assumes gaps in page views due to skipping or revisions to content
-  # @return [Training::Content]
+  # @return [Training::Page, Training::Question, Training::Video]
   def furthest_page
     visited.last
   end
@@ -69,10 +69,10 @@ class ModuleProgress
     key_event('module_start').present?
   end
 
-  # @param page [Training::Module]
-  # @return [Boolean] view event logged for page
+  # @param page [Training::Page, Training::Question, Training::Video]
+  # @return [Boolean]
   def visited?(page)
-    module_item_events(page.name).present?
+    content_events_count(page.name).positive?
   end
 
   # Completed date for module
@@ -84,21 +84,24 @@ class ModuleProgress
 protected
 
   # @see ModuleOverviewDecorator
+  # @param content [Array<Training::Page, Training::Question, Training::Video>]
   # @return [Boolean] all items viewed
-  def all?(items)
-    state(:all?, items)
+  def all?(content)
+    state(:all?, content)
   end
 
   # @see ModuleOverviewDecorator
+  # @param content [Array<Training::Page, Training::Question, Training::Video>]
   # @return [Boolean] some items viewed
-  def any?(items)
-    state(:any?, items)
+  def any?(content)
+    state(:any?, content)
   end
 
   # @see ModuleOverviewDecorator
+  # @param content [Array<Training::Page, Training::Question, Training::Video>]
   # @return [Boolean] no items viewed
-  def none?(items)
-    state(:none?, items)
+  def none?(content)
+    state(:none?, content)
   end
 
   # @see AssessmentProgress
@@ -127,30 +130,30 @@ protected
     (unvisited.first.id..unvisited.last.id).count != unvisited.map(&:id).count
   end
 
-  # @return [Array<Module::Content>]
+  # @return [Array<Training::Page, Training::Question, Training::Video>]
   def visited
-    mod.content.select { |item| visited?(item) }
+    mod.content.select { |page| visited?(page) }
   end
 
-  # @return [Array<Module::Content>]
+  # @return [Array<Training::Page, Training::Question, Training::Video>]
   def unvisited
-    mod.content.reject { |item| visited?(item) }
+    mod.content.reject { |page| visited?(page) }
   end
 
 private
 
   # @param method [Symbol]
-  # @param items [Array<Module::Content>]
+  # @param content [Array<Training::Page, Training::Question, Training::Video>]
   #
   # @return [Boolean]
-  def state(method, items)
-    items.send(method) { |item| module_item_events(item.name).present? }
+  def state(method, content)
+    content.send(method) { |page| visited?(page) }
   end
 
-  # @param item_id [String] content slug
-  # @return [Event::ActiveRecord_AssociationRelation]
-  def module_item_events(item_id)
-    user.events.where_properties(training_module_id: mod.name, id: item_id)
+  # @param name [String]
+  # @return [Integer]
+  def content_events_count(name)
+    training_module_events.where_properties(id: name).count
   end
 
   # @return [Event::ActiveRecord_AssociationRelation]
