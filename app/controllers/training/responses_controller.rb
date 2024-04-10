@@ -64,9 +64,16 @@ module Training
 
       if content.formative_question?
         redirect_to training_module_question_path(mod.name, content.name)
+      elsif skip_next_question?
+        redirect_to training_module_page_path(mod.name, content.next_item.next_item.name)
       else
         redirect_to training_module_page_path(mod.name, content.next_item.name)
       end
+    end
+
+    # @return [Boolean]
+    def skip_next_question?
+      current_user.skip_question?(content.next_item)
     end
 
     # @return [Event] Update action

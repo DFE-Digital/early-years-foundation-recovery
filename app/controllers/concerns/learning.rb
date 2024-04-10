@@ -55,10 +55,10 @@ module Learning
     ModuleDebugDecorator.new(progress_service).rows
   end
 
-  # @return [PaginationDecorator]
+  # @return [PaginationDecorator, FeedbackPaginationDecorator]
   def section_bar
-    if content.feedback_question?
-      FeedbackPaginationDecorator.new(content)
+    if content.feedback_question? || content.previous_item.feedback_question?
+      FeedbackPaginationDecorator.new(content, current_user)
     else
       PaginationDecorator.new(content)
     end

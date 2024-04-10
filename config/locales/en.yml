@@ -103,7 +103,9 @@ en:
   links:
     home: Go to home
     my_modules: Go to my modules
-    update_feedback: Update my feedback
+    feedback:
+      update: Update my feedback
+      skip: Skip feedback
     save: Save
     continue: Continue
     cancel: Cancel
@@ -585,8 +587,8 @@ en:
 
       %{criteria}
   
-  # /feedback
   feedback:
+    # /feedback
     intro: |
       # Give feedback
 
@@ -599,7 +601,8 @@ en:
 
       By completing this form you have understood the above and consent to take part.
 
-    feedback_exists: |
+    # /feedback
+    complete: |
       # You have already submitted feedback
 
       Thank you for helping to improve this training
@@ -611,7 +614,6 @@ en:
 
       ---
         
-    
     # /feedback/thank-you
     thank_you:
       heading: Thank you

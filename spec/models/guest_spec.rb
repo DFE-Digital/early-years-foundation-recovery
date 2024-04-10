@@ -18,17 +18,14 @@ RSpec.describe Guest, type: :model do
 
   describe '#response_for_shared' do
     before do
-      create :response, question_name: content.name # , training_module: nil
+      create :response, question_name: content.name, training_module: 'course'
     end
 
     let(:content) { Course.config.pages.first }
-    let(:response) { guest.response_for_shared(content, nil) }
+    let(:response) { guest.response_for_shared(content) }
 
     specify do
       expect(response).to be_a Response
     end
   end
-
-  # describe 'completed_main_feedback?' do
-  # end
 end

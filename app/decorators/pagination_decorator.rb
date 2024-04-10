@@ -38,7 +38,6 @@ private
     content.section_content.index(content) + 1
   end
 
-  # TODO: - update for skipped questions
   # @return [Integer]
   def page_total
     content.section_content.size

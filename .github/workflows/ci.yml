@@ -79,11 +79,10 @@ jobs:
         run: bundle exec rails assets:precompile
       -
         name: Run test suite
-        run: bundle exec rspec
         env:
-          # TODO: Check envs before merging into main
-          CONTENTFUL_PREVIEW: true
           DISABLE_USER_ANSWER: true
+          CONTENTFUL_PREVIEW: true
+        run: bundle exec rspec
       -
         name: Run rubocop
         run: bundle exec rubocop

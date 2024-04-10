@@ -30,7 +30,7 @@ module Training
     # @return [Boolean]
     def multi_select?
       if feedback_question?
-        response_type # FIXME: this field smells
+        multi_select
       elsif confidence_question?
         false
       else
@@ -40,7 +40,7 @@ module Training
 
     # @return [Boolean]
     def skippable?
-      feedback_question? && skippable_question
+      feedback_question? && skippable
     end
 
     # @return [Boolean]

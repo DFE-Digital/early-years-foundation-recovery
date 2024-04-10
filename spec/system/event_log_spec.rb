@@ -4,7 +4,7 @@ RSpec.describe 'Event log' do
   include_context 'with events'
   include_context 'with user'
   include_context 'with automated path'
-  let(:fixture) { 'spec/support/ast/alpha-pass-response.yml' }
+  let(:fixture) { 'spec/support/ast/alpha-pass-response-skip-feedback.yml' }
 
   describe 'confidence check' do
     context 'when viewing the first question' do

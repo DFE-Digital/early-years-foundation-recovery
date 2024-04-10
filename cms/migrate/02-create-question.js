@@ -1,6 +1,6 @@
 module.exports = function(migration) {
 
-  const question = migration.createContentType('question_test', {
+  const question = migration.createContentType('question', {
     name: 'Question test',
     displayField: 'name',
     description: 'Formative, Summative, Confidence or Feedback'
@@ -100,15 +100,15 @@ module.exports = function(migration) {
     ======================
     formative and summative are dynamic based off number of correct options
     confidence are hard-coded
-    feedback are more nuanced
+    feedback are controlled by content editors
   */
-  question.createField('response_type', {
-    name: 'Feedback response type',
-    type: 'Symbol',
+  question.createField('multi_select', {
+    name: 'Multi select',
+    type: 'Boolean'
   })
 
   question.createField('skippable', {
-    name: 'One-off question',
+    name: 'Skippable',
     type: 'Boolean',
     required: true,
     defaultValue: {
@@ -140,11 +140,16 @@ module.exports = function(migration) {
 
   /* toggle */
 
+  question.changeFieldControl('multi_select', 'builtin', 'boolean', {
+    helpText: 'Select multiple options?',
+    trueLabel: 'yes',
+    falseLabel: 'no'
+  })
+
   question.changeFieldControl('skippable', 'builtin', 'boolean', {
     helpText: 'Hide once answered?',
     trueLabel: 'yes',
     falseLabel: 'no'
   })
-
 
 }

@@ -23,7 +23,7 @@ class NextPageDecorator
   def name
     if content.interruption_page?
       mod.content_start.name
-    elsif skippable_page?
+    elsif skip_next_question?
       content.next_item.next_item.name
     else
       content.next_item.name
@@ -118,7 +118,7 @@ private
   end
 
   # @return [Boolean]
-  def skippable_page?
-    !content.interruption_page? && content.next_item.skippable? && user.response_for_shared(content.next_item, mod).responded?
+  def skip_next_question?
+    user.skip_question?(content.next_item)
   end
 end

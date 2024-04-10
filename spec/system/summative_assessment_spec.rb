@@ -4,7 +4,7 @@ RSpec.describe 'Summative assessment', type: :system do
   include_context 'with progress'
   include_context 'with user'
 
-  let(:fixture) { 'spec/support/ast/alpha-pass-response.yml' }
+  let(:fixture) { 'spec/support/ast/alpha-pass-response-skip-feedback.yml' }
   let(:first_question_path) { '/modules/alpha/questionnaires/1-3-2-1' }
 
   before do
@@ -59,7 +59,7 @@ RSpec.describe 'Summative assessment', type: :system do
 
       let(:fixture) do
         if Rails.application.migrated_answers?
-          'spec/support/ast/alpha-pass-response.yml'
+          'spec/support/ast/alpha-pass-response-skip-feedback.yml'
         else
           'spec/support/ast/alpha-pass.yml'
         end

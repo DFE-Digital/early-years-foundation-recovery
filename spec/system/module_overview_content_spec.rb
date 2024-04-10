@@ -9,19 +9,19 @@ RSpec.describe 'Module overview' do
   end
 
   it 'has back button' do
-    expect(page).to have_link('Back to My modules', href: '/my-modules')
+    expect(page).to have_link 'Back to My modules', href: '/my-modules'
   end
 
   it 'has the module number and name' do
-    expect(page).to have_content('Module 1: First Training Module')
+    expect(page).to have_content 'Module 1: First Training Module'
   end
 
   it 'has the module description' do
-    expect(page).to have_content('first module description')
+    expect(page).to have_content 'first module description'
   end
 
   it 'has a call to action button to start the module' do
-    expect(page).to have_link('Start module')
+    expect(page).to have_link 'Start module'
   end
 
   it 'has the section headings' do
@@ -31,7 +31,8 @@ RSpec.describe 'Module overview' do
   end
 
   it 'hides feedback section' do
-    expect(page).not_to have_content('Additional feedback')
+    expect(page).to have_content 'Reflect on your learning'
+    expect(page).not_to have_content 'Additional feedback'
   end
 
   it 'has the topic names' do

@@ -1,43 +1,54 @@
 class FeedbackController < ApplicationController
-  before_action :track_feedback_start, only: :show
-  after_action :track_feedback_complete, only: :update
   helper_method :content,
                 :mod,
                 :current_user_response,
-                :feedback_exists?
-
-  def show; end
+                :feedback_complete?
 
   def index; end
 
-  def update
-    if save_response!
-      redirect
-    else
-      render 'feedback/show', status: :unprocessable_entity
+  def show
+    if question_name.eql? 'thank-you'
+      feedback_cookie(:completed)
+      track_feedback_complete
+      render :thank_you
     end
   end
 
-  # @return [Boolean]
-  def feedback_exists?
-    if current_user.guest?
-      cookies[:feedback_complete].present?
+  def update
+    if save_response!
+      feedback_cookie(:started)
+      track_feedback_start
+      redirect
     else
-      current_user.started_main_feedback?
+      render :show, status: :unprocessable_entity
+    end
+  end
+
+  # @see feedback#index
+  # @return [Boolean]
+  def feedback_complete?
+    if current_user.guest?
+      cookies[:course_feedback_completed].present?
+    else
+      current_user.completed_course_feedback?
     end
   end
 
 private
 
   def redirect
-    if content.eql?(mod.pages.last)
-      redirect_to feedback_thank_you_path
-    elsif content.next_item.skippable? && (current_user.guest? || current_user.response_for_shared(content.next_item, mod).responded?)
-      redirect_to feedback_thank_you_path
-      feedback_complete_cookie if current_user.guest?
+    if content.last_feedback?
+      redirect_to feedback_path('thank-you')
+    elsif skip_next_question?
+      redirect_to feedback_path(content.next_item.next_item.name)
     else
       redirect_to feedback_path(content.next_item.name)
     end
+  end
+
+  # @return [Boolean]
+  def skip_next_question?
+    current_user.skip_question?(content.next_item)
   end
 
   # @return [Boolean]
@@ -64,16 +75,10 @@ private
     super || guest
   end
 
+  # @param question [Training::Question] default: current question
   # @return [Response]
   def current_user_response(question = content)
     @current_user_response ||= current_user.response_for_shared(question, mod)
-  end
-
-  # @return [Hash]
-  def feedback_complete_cookie
-    cookies[:feedback_complete] = {
-      value: current_user.visit.visit_token,
-    }
   end
 
   # @return [String]
@@ -91,16 +96,18 @@ private
     Array(response_params[:answers]).compact_blank.map(&:to_i)
   end
 
+  # @param state [Symbol, String]
+  # @return [Hash]
+  def feedback_cookie(state)
+    cookies["course_feedback_#{state}"] = { value: current_user.cookie_token }
+  end
+
   def track_feedback_start
-    if content.first_feedback? && feedback_start_untracked?
-      track('feedback_start')
-    end
+    track('feedback_start') if feedback_start_untracked?
   end
 
   def track_feedback_complete
-    if content.last_feedback? && feedback_complete_untracked?
-      track('feedback_complete')
-    end
+    track('feedback_complete') if feedback_complete_untracked?
   end
 
   def feedback_start_untracked?

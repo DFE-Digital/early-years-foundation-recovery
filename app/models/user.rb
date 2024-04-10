@@ -177,6 +177,20 @@ class User < ApplicationRecord
     false
   end
 
+  # @see FeedbackPaginationDecorator
+  #
+  # Checks all feedback forms for answers
+  #
+  # @param question [Training::Question]
+  # @return [Boolean]
+  def skip_question?(question)
+    return false unless question.skippable?
+
+    (Training::Module.live.to_a << Course.config).any? do |form|
+      response_for_shared(question, form).responded?
+    end
+  end
+
   # @see ResponsesController#response_params
   # @param content [Training::Question]
   # @return [UserAnswer, Response]
@@ -437,10 +451,14 @@ class User < ApplicationRecord
     @content_changes ||= ContentChanges.new(user: self)
   end
 
-  # FIXME: completed vs started
   # @return [Boolean]
-  def started_main_feedback?
-    responses.course_feedback.any?
+  def completed_course_feedback?
+    responses.course_feedback.count.eql? Course.config.feedback_questions.count
+  end
+
+  # @return [String]
+  def cookie_token
+    visits.last.visit_token
   end
 
 private

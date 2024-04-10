@@ -50,7 +50,7 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
     end
   end
 
-  # @param option [Training::Answer::Option]
+  # @option checked [Boolean]
   # @option text [String]
   # @return [String]
   def or_radio_button(text:, checked:)
@@ -61,7 +61,7 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
                        checked: checked
   end
 
-  # @param option [Training::Answer::Option]
+  # @option checked [Boolean]
   # @option text [String]
   # @return [String]
   def or_checkbox_button(text:, checked:)

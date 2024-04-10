@@ -17,8 +17,8 @@ RSpec.describe Dashboard do
   describe '#call' do
     let(:data_files) { Dir.glob path.join('*/*/*.csv') }
 
-    it 'exports 7 database tables' do
-      expect(data_files.count).to be 21
+    it 'exports database tables' do
+      expect(data_files.count).to be 22
     end
 
     it 'exports data in CSV format' do

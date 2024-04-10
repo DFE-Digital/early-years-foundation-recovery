@@ -68,7 +68,7 @@ module LinkHelper
 
   # @return [String]
   def link_to_skip_feedback
-    govuk_link_to 'Skip feedback', training_module_page_path(mod.name, mod.thankyou_page.name)
+    govuk_link_to t('links.feedback.skip'), training_module_page_path(mod.name, mod.thankyou_page.name)
   end
 
   # @return [NextPageDecorator]

@@ -7,9 +7,9 @@ RSpec.describe FeedbackController, type: :controller do
     before { sign_in user }
 
     describe 'GET #show' do
-      it 'tracks feedback start' do
-        expect(controller).to receive(:track_feedback_start)
-        get :show, params: { id: 'feedback-radiobutton' }
+      it 'tracks feedback complete' do
+        expect(controller).to receive(:track_feedback_complete)
+        get :show, params: { id: 'thank-you' }
       end
 
       it 'returns a success response' do
@@ -49,8 +49,8 @@ RSpec.describe FeedbackController, type: :controller do
           expect(response).to redirect_to feedback_path('feedback-yesnoandtext')
         end
 
-        it 'tracks feedback complete' do
-          expect(controller).to receive(:track_feedback_complete)
+        it 'tracks feedback started' do
+          expect(controller).to receive(:track_feedback_start)
           post :update, params: params
         end
       end
@@ -79,7 +79,7 @@ RSpec.describe FeedbackController, type: :controller do
     end
   end
 
-  describe '#feedback_exists?' do
+  describe '#feedback_complete?' do
     before do
       allow(controller).to receive(:current_user).and_return(user)
     end
@@ -88,20 +88,20 @@ RSpec.describe FeedbackController, type: :controller do
       let(:user) { create :user, :registered }
 
       before do
-        allow(user).to receive(:completed_main_feedback?).and_return(completed)
+        allow(user).to receive(:completed_course_feedback?).and_return(completed)
         get :index
       end
 
-      context 'and form started' do
+      context 'and form completed' do
         let(:completed) { true }
 
-        specify { expect(controller).to be_feedback_exists }
+        specify { expect(controller).to be_feedback_complete }
       end
 
-      context 'and form not started' do
+      context 'and form not completed' do
         let(:completed) { false }
 
-        specify { expect(controller).not_to be_feedback_exists }
+        specify { expect(controller).not_to be_feedback_complete }
       end
     end
 
@@ -113,16 +113,16 @@ RSpec.describe FeedbackController, type: :controller do
         get :index
       end
 
-      context 'and form started' do
-        let(:cookie) { { feedback_complete: 'some-token' } }
+      context 'and form completed' do
+        let(:cookie) { { course_feedback_completed: 'some-token' } }
 
-        specify { expect(controller).to be_feedback_exists }
+        specify { expect(controller).to be_feedback_complete }
       end
 
-      context 'and form not started' do
+      context 'and form not completed' do
         let(:cookie) { {} }
 
-        specify { expect(controller).not_to be_feedback_exists }
+        specify { expect(controller).not_to be_feedback_complete }
       end
     end
   end

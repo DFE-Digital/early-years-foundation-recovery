@@ -8,9 +8,7 @@ RSpec.describe 'Application configuration' do
     expect(config.contentful_environment).to eq 'test'
   end
 
-  # Uncomment this when feedback forms have been published
   it 'tests against published content' do
-    skip 'feedback wip'
     expect(Rails.application).not_to be_preview
   end
 
