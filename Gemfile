@@ -91,6 +91,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'brakeman'
   gem 'pry-doc'
+  gem 'rack-mini-profiler'
   gem 'rails-erd'
   gem 'redcarpet'
   gem 'web-console'
