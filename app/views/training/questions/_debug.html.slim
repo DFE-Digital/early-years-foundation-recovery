@@ -14,17 +14,19 @@
     hr
     | FEEDBACK
     br
+    |   Or: #{content.or}
+    br
+    |   Other: #{content.other}
+    br
+    |   More: #{content.more}
+    br
     |   User type: #{current_user.guest? ? 'guest' : 'authenticated user'}
+    br
+    |   Cookie: #{current_user.visit_token}
     br
     |   Skippable: #{content.skippable?}
     br
     |   Skip next question: #{current_user.skip_question?(content.next_item)}
-    br
-    |   Hint: #{content.hint}
-    br
-    |   Or: #{content.or}
-    br
-    |   Other: #{content.other}
     br
     |   Only text input: #{content.only_text?}
     br

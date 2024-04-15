@@ -4,59 +4,82 @@
   :inputs:
     - - :click_on
       - Next
-- :path: /feedback/feedback-radiobutton
-  :text: Feedback question 1 - Select from following
+- :path: /feedback/feedback-radio-only
+  :text: Feedback radio buttons only
   :inputs:
     - - :choose
       - response-answers-1-field
     - - :click_on
       - Next
-- :path: /feedback/feedback-yesnoandtext
-  :text: Feedback question 2 - Select from following
+- :path: /feedback/feedback-checkbox-only
+  :text: Feedback checkboxes only
   :inputs:
-    - - :choose
+    - - :check
       - response-answers-1-field
     - - :click_on
       - Next
-- :path: /feedback/feedback-freetext
-  :text: Feedback question 3 - Complete the following
+- :path: /feedback/feedback-textarea-only
+  :text: Feedback textarea only
   :inputs:
     - - :input_text
       - response-text-input-field
-      - hello world
+      - free text
     - - :click_on
       - Next
-- :path: /feedback/feedback-radio-otherandtext
-  :text: Feedback question 4 - Select from following
+- :path: /feedback/feedback-radio-other-more
+  :text: Feedback radio buttons with large other
   :inputs:
     - - :choose
-      - response-answers-1-field
+      - response-answers-5-field
+    - - :input_text
+      - response-text-input-field
+      - other text
     - - :click_on
       - Next
-- :path: /feedback/feedback-radio-and-freetext
-  :text: Feedback question 5 - Select from following
-  :inputs:
-    - - :choose
-      - response-answers-1-field
-    - - :click_on
-      - Next
-- :path: /feedback/feedback-checkbox-othertextandor
-  :text: Feedback question 6 - Select from following
+- :path: /feedback/feedback-checkbox-other-more
+  :text: Feedback checkbox with large other
   :inputs:
     - - :check
       - response-answers-1-field
+    # WIP
+    # - - :check
+    #   - response-answers-5-field
+    # - - :input_text
+    #   - response-text-input-field
+    #   - other text
     - - :click_on
       - Next
-- :path: /feedback/feedback-checkbox-otherandtext
-  :text: Feedback question 7 - Select from following
+
+- :path: /feedback/feedback-radio-more
+  :text: Feedback radio buttons with additional reasons
+  :inputs:
+    - - :choose
+      - response-answers-1-field
+    # WIP
+    # - - :input_text
+    #   - response-text-input-field
+    #   - other text
+    - - :click_on
+      - Next
+- :path: /feedback/feedback-checkbox-other-or
+  :text: Feedback checkboxes with Other and Or
   :inputs:
     - - :check
       - response-answers-1-field
+    # OR
+    # - - :check
+    #   - response-answers-0-field
+    # OTHER
+    # - - :check
+    #   - response-answers-5-field
+    # - - :input_text
+    #   - response-text-input-field
+    #   - other text
     - - :click_on
       - Next
 # skippable --------------------------------------------------------------------
-- :path: /feedback/feedback-oneoffquestion
-  :text: Feedback question 8 - Select from following
+- :path: /feedback/feedback-skippable
+  :text: Skippable
   :inputs:
     - - :choose
       - response-answers-1-field

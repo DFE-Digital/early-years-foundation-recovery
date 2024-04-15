@@ -38,15 +38,20 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
 
   # @param option [Training::Answer::Option]
   # @option text [String]
+  # @option more [Boolean]
   # @return [String]
-  def other_radio_button(option, text:)
+  def other_radio_button(option, text:, more:)
     govuk_radio_button :answers,
                        option.id,
                        label: { text: option.label },
                        link_errors: true,
                        disabled: option.disabled?,
                        checked: option.checked? do
-      govuk_text_field :text_input, label: { text: text }
+      if more
+        govuk_text_area :text_input, label: { text: text }
+      else
+        govuk_text_field :text_input, label: { text: text }
+      end
     end
   end
 

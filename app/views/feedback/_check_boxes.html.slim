@@ -11,5 +11,6 @@
       = f.govuk_radio_divider 'Or'
       = f.or_checkbox_button(text: content.or, checked: response.checked_or?)
 
-  - if content.has_hint?
-    = f.govuk_text_area :text_input, label: { text: content.hint, class: 'govuk-!-font-weight-bold govuk-!-margin-top-8 govuk-!-margin-bottom-4' }
+
+  - if content.has_more?
+    = f.govuk_text_area :text_input, label: { text: t('feedback.reasons'), class: 'govuk-!-font-weight-bold govuk-!-margin-top-8 govuk-!-margin-bottom-4' }

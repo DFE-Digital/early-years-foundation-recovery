@@ -7,13 +7,17 @@ RSpec.describe FeedbackController, type: :controller do
     before { sign_in user }
 
     describe 'GET #show' do
-      it 'tracks feedback complete' do
-        expect(controller).to receive(:track_feedback_complete)
-        get :show, params: { id: 'thank-you' }
+      context 'last page' do
+        it 'is tracked as complete' do
+          expect(controller).to receive(:track_feedback_complete)
+          expect(cookies[:course_feedback_completed]).not_to be_present
+          get :show, params: { id: 'thank-you' }
+          expect(cookies[:course_feedback_completed]).to be_present
+        end
       end
 
       it 'returns a success response' do
-        get :show, params: { id: 'feedback-radiobutton' }
+        get :show, params: { id: 'feedback-radio-only' }
         expect(response).to have_http_status(:success)
       end
     end
@@ -29,10 +33,9 @@ RSpec.describe FeedbackController, type: :controller do
       context 'with valid params' do
         let(:params) do
           {
-            id: 'feedback-radiobutton',
+            id: 'feedback-radio-only',
             response: {
-              answers: %w[Yes],
-              answers_custom: 'Custom answer',
+              answers: %w[1],
             },
           }
         end
@@ -46,19 +49,21 @@ RSpec.describe FeedbackController, type: :controller do
         it 'redirects to the next question' do
           post :update, params: params
           expect(response).to have_http_status(:redirect)
-          expect(response).to redirect_to feedback_path('feedback-yesnoandtext')
+          expect(response).to redirect_to feedback_path('feedback-checkbox-only')
         end
 
-        it 'tracks feedback started' do
+        it 'is tracked as started' do
           expect(controller).to receive(:track_feedback_start)
+          expect(cookies[:course_feedback_started]).not_to be_present
           post :update, params: params
+          expect(cookies[:course_feedback_started]).to be_present
         end
       end
 
       context 'with invalid params' do
         let(:params) do
           {
-            id: 'feedback-radiobutton',
+            id: 'feedback-radio-only',
             response: {
               answers: [''],
             },
@@ -74,6 +79,12 @@ RSpec.describe FeedbackController, type: :controller do
           expect {
             post :update, params: params
           }.not_to change(Response, :count)
+        end
+
+        it 'is not tracked as started' do
+          expect(controller).not_to receive(:track_feedback_start)
+          post :update, params: params
+          expect(cookies[:course_feedback_started]).not_to be_present
         end
       end
     end

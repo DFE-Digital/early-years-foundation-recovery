@@ -117,6 +117,7 @@ private
     Rails.application.preview? || Rails.env.test?
   end
 
+  # @note only used if a skippable question follows a non-question
   # @return [Boolean]
   def skip_next_question?
     user.skip_question?(content.next_item)

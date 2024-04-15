@@ -27,10 +27,15 @@ module Training
       end
     end
 
+    # Factual questions: dynamic based on available correct options
+    # Opinion questions:
+    #   - Feedback (default: false)
+    #   - Confidence (always: false)
+    #
     # @return [Boolean]
     def multi_select?
       if feedback_question?
-        multi_select
+        !!multi_select
       elsif confidence_question?
         false
       else
@@ -38,29 +43,21 @@ module Training
       end
     end
 
-    # @return [Boolean]
-    def skippable?
-      feedback_question? && skippable
-    end
-
-    # @return [Boolean]
-    def no_options?
-      feedback_question? && options.empty?
-    end
-
-    # @return [Boolean]
+    # @return [Boolean] textarea by itself no validations
     def only_text?
-      no_options? && !has_hint?
+      options.empty? && has_more?
     end
 
-    # @return [Boolean]
+    # @return [Boolean] "Could you give use reasons for your answer"
     def and_text?
-      !no_options? && (has_hint? || has_or?)
+      options.present? && !multi_select? && has_more?
     end
 
+    # Turns the last "other" option input field into a textarea
+    #
     # @return [Boolean]
-    def has_hint?
-      feedback_question? && hint.present?
+    def has_more?
+      feedback_question? && more.present?
     end
 
     # @return [Boolean]
@@ -68,14 +65,16 @@ module Training
       feedback_question? && other.present?
     end
 
+    # Additional "Or" option is appended and given index zero
+    #
     # @return [Boolean]
     def has_or?
       feedback_question? && self.or.present?
     end
 
-    # @return [Boolean]
-    def checkbox?
-      feedback_question? && response_type
+    # @return [Boolean] default: false
+    def skippable?
+      feedback_question? && !!skippable
     end
 
     # @return [Boolean] event tracking

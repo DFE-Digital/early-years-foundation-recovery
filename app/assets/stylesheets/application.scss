@@ -117,16 +117,22 @@ pre.code-tip {
   }
 }
 
-// --------------------------------------------
+#feedback-cta {
+  padding: govuk-spacing(5);
+  background-color: $department-for-education-websafe;
 
-.app-sidebar {
-  padding: govuk-spacing(5) govuk-spacing(3);
-  background-color: govuk-colour('light-grey');
+  * {
+    color: govuk-colour('white');
+  }
 
-  *:last-child {
-    margin: 0;
+  .govuk-button {
+    background-color: $department-for-education-websafe;
+    border-color: govuk-colour('white');
+    box-shadow: none;
   }
 }
+// --------------------------------------------
+
 
 .govuk-label {
   font-weight: normal;

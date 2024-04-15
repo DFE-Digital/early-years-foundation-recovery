@@ -40,7 +40,11 @@ private
     if content.last_feedback?
       redirect_to feedback_path('thank-you')
     elsif skip_next_question?
-      redirect_to feedback_path(content.next_item.next_item.name)
+      if content.next_item.last_feedback?
+        redirect_to feedback_path('thank-you')
+      else
+        redirect_to feedback_path(content.next_item.next_item.name)
+      end
     else
       redirect_to feedback_path(content.next_item.name)
     end
@@ -99,7 +103,7 @@ private
   # @param state [Symbol, String]
   # @return [Hash]
   def feedback_cookie(state)
-    cookies["course_feedback_#{state}"] = { value: current_user.cookie_token }
+    cookies["course_feedback_#{state}"] = { value: current_user.visit_token }
   end
 
   def track_feedback_start

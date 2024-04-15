@@ -48,3 +48,6 @@
 
     = m('my_account.closing.information')
     = govuk_button_link_to t('my_account.closing.button'), edit_reason_user_close_account_path
+
+- content_for :cta do
+  = render 'feedback/cta'

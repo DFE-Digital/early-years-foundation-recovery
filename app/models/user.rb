@@ -457,7 +457,7 @@ class User < ApplicationRecord
   end
 
   # @return [String]
-  def cookie_token
+  def visit_token
     visits.last.visit_token
   end
 

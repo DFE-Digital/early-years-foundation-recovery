@@ -99,19 +99,19 @@ RSpec.describe Training::Question, type: :model do
 
     context 'when the question is a feedback question' do
       subject(:question) do
-        Training::Module.by_name('alpha').page_by_name('feedback-radiobutton')
+        Training::Module.by_name('alpha').page_by_name('feedback-radio-only')
       end
 
       let(:first_option) { question.options.first }
 
       specify do
-        expect(first_option.label).to eq 'Strongly agree'
+        expect(first_option.label).to eq 'Option 1'
       end
     end
 
     context 'when the question is a feedback free text question' do
       subject(:question) do
-        Training::Module.by_name('alpha').page_by_name('feedback-freetext')
+        Training::Module.by_name('alpha').page_by_name('feedback-textarea-only')
       end
 
       specify do

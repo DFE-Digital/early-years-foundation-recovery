@@ -6,6 +6,9 @@ class Guest < Dry::Struct
   #   @return [Visit]
   attribute :visit, Types.Instance(Visit)
 
+  # @return [String]
+  delegate :visit_token, to: :visit
+
   # @return [Boolean]
   def guest?
     true
@@ -27,11 +30,6 @@ class Guest < Dry::Struct
       training_module: mod.name,
       visit_id: visit.id,
     )
-  end
-
-  # @return [String]
-  def cookie_token
-    visit.visit_token
   end
 
 private

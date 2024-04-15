@@ -1,3 +1,6 @@
+# Answer all factual questions incorrectly
+# @see ContentTestSchema
+#
 ---
 - :path: "/modules/bravo/content-pages/what-to-expect"
   :text: What to expect during the training

@@ -3,7 +3,7 @@
 #   feedback-intro (opinion_intro)
 #   end-of-module-feedback-1 (feedback)
 #   end-of-module-feedback-3 (feedback)
-#   feedback-freetext (feedback)
+#   feedback-textarea-only (feedback)
 #   end-of-module-feedback-5 (feedback) <-- SKIPPABLE
 #   1-3-3-5 (thankyou)
 #
@@ -54,20 +54,12 @@ RSpec.describe PreviousPageDecorator do
     end
 
     context 'when previous page is skippable' do
-      # This context is insufficiently prepared
-      #
-      # The assertion here is that a special kind of feedback question is asked
-      # in every form but once answered is never asked again.
-      #
-      # Therefore, as we transition through 'alpha' in this spec, we need a scenario
-      # where the question was answered in the main feedack form or another module.
-      #
       let(:content) { mod.page_by_name('1-3-3-5') }
 
       context 'and answered' do
         before do
           create :response,
-                 question_name: 'feedback-oneoffquestion',
+                 question_name: 'feedback-skippable',
                  training_module: mod.name,
                  answers: [1],
                  correct: true,
@@ -75,7 +67,7 @@ RSpec.describe PreviousPageDecorator do
                  question_type: 'feedback'
         end
 
-        specify { expect(decorator.name).to eq 'feedback-checkbox-otherandtext' }
+        specify { expect(decorator.name).to eq 'feedback-checkbox-other-or' }
       end
     end
   end

@@ -59,17 +59,16 @@ class Response < ApplicationRecord
   # @return [Boolean]
   def checked_other?
     question.has_other? && answers.include?(question.options.last.id)
-    # question.has_other? && question.options.last.checked?
   end
 
-  # @see #options
-  # Additional "Or" option is given index zero
+  # @see Question#options
   # @return [Boolean]
   def checked_or?
-    answers.include?(0)
-    # answers.pop.zero?
+    question.has_or? && answers.include?(0)
   end
 
+  # Validate that an option is selected unless question only expects text.
+  #
   # @return [Boolean]
   def text_input_only?
     question.only_text?
@@ -78,6 +77,11 @@ class Response < ApplicationRecord
   # @return [Boolean]
   def text_input_extra?
     question.and_text? && checked_other?
+
+    # was previously
+    # better in manual tests but breaks spec/system/course_feedback_spec.rb
+    # fails at feedback-checkbox-other-or
+    # question.and_text? || checked_other?
   end
 
   # @return [Boolean]

@@ -1,5 +1,7 @@
+# Answer all factual questions correctly
 #
-# Feedback form for end of module
+# @see ContentTestSchema
+# @note Fixture includes feedback form but answering is not implemented
 #
 ---
 - :path: /modules/alpha/content-pages/what-to-expect
@@ -220,43 +222,44 @@
   :inputs:
     - - :click_on
       - Next
-- :path: /modules/alpha/content-pages/feedback-radiobutton
-  :text: 'Feedback question 1 - Select from following'
+- :path: /modules/alpha/content-pages/feedback-radio-only
+  :text: Feedback radio buttons only
   :inputs:
     - - :click_on
       - Next
-- :path: /modules/alpha/content-pages/feedback-yesnoandtext
-  :text: Feedback question 2 - Select from following
+- :path: /modules/alpha/content-pages/feedback-checkbox-only
+  :text: Feedback checkboxes only
   :inputs:
     - - :click_on
       - Next
-- :path: /modules/alpha/content-pages/feedback-freetext
-  :text: Feedback question 3 - Complete the following
+- :path: /modules/alpha/content-pages/feedback-textarea-only
+  :text: Feedback textarea only
   :inputs:
     - - :click_on
       - Next
-- :path: /modules/alpha/content-pages/feedback-radio-otherandtext
-  :text: Feedback question 4 - Select from following
+- :path: /modules/alpha/content-pages/feedback-radio-other-more
+  :text: Feedback radio buttons with large other
+  :inputs:
   :inputs:
     - - :click_on
       - Next
-- :path: /modules/alpha/content-pages/feedback-radio-and-freetext
-  :text: Feedback question 5 - Select from following
+- :path: /modules/alpha/content-pages/feedback-checkbox-other-more
+  :text: Feedback checkbox with large other
   :inputs:
     - - :click_on
       - Next
-- :path: /modules/alpha/content-pages/feedback-checkbox-othertextandor
-  :text: Feedback question 6 - Select from following
+- :path: /modules/alpha/content-pages/feedback-radio-more
+  :text: Feedback radio buttons with additional reasons
   :inputs:
     - - :click_on
       - Next
-- :path: /modules/alpha/content-pages/feedback-checkbox-otherandtext
-  :text: Feedback question 7 - Select from following
+- :path: /modules/alpha/content-pages/feedback-checkbox-other-or
+  :text: Feedback checkboxes with Other and Or
   :inputs:
     - - :click_on
       - Next
-- :path: /modules/alpha/content-pages/feedback-oneoffquestion
-  :text: Feedback question 8 - Select from following
+- :path: /modules/alpha/content-pages/feedback-skippable
+  :text: Skippable
   :inputs:
     - - :click_on
       - Next

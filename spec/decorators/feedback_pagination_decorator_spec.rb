@@ -7,7 +7,7 @@ RSpec.describe FeedbackPaginationDecorator do
 
   let(:user) { create :user }
   let(:mod) { Training::Module.by_name(:alpha) }
-  let(:content) { mod.page_by_name('feedback-radiobutton') }
+  let(:content) { mod.page_by_name('feedback-radio-only') }
 
   it '#heading' do
     expect(decorator.heading).to eq 'Additional feedback'
@@ -28,7 +28,7 @@ RSpec.describe FeedbackPaginationDecorator do
   context 'when one-off questions have already been answered' do
     before do
       create :response,
-             question_name: 'feedback-oneoffquestion',
+             question_name: 'feedback-skippable',
              training_module: 'bravo',
              answers: [1],
              correct: true,
@@ -42,11 +42,11 @@ RSpec.describe FeedbackPaginationDecorator do
   end
 
   context 'when one-off questions are being answered' do
-    let(:content) { mod.page_by_name('feedback-oneoffquestion') }
+    let(:content) { mod.page_by_name('feedback-skippable') }
 
     before do
       create :response,
-             question_name: 'feedback-oneoffquestion',
+             question_name: 'feedback-skippable',
              training_module: 'alpha',
              answers: [1],
              correct: true,

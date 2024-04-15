@@ -1,6 +1,2 @@
-= f.govuk_fieldset legend: { text: m(content.legend) } do
- - if content.has_hint?
-   = m(content.hint)
-
- = f.govuk_text_area :text_input, label: nil, rows: 9
- 
+= f.govuk_fieldset legend: { text: content.legend } do
+  = f.govuk_text_area :text_input, label: nil, rows: 9

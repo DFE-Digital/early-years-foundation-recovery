@@ -61,12 +61,6 @@ private
     content.previous_item.skippable? && answered?(content.previous_item)
   end
 
-  # on the post-feedback page with the last feedback question unanswered
-  #
-  #   - once a feedback question is answered the feedback form is started
-  #   - a response for the last question is therefore sufficient to determine this
-  #   - because you can't get here without answering the last question
-  #
   # @return [Boolean]
   def feedback_not_started?
     content.thankyou? && !answered?(content.previous_item)

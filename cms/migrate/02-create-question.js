@@ -80,19 +80,26 @@ module.exports = function(migration) {
 
   /* Feedback Only ---------------------------------------------------------- */
 
+  // the last option has an additional conditional text input
   question.createField('other', {
     name: 'Other',
     type: 'Text',
   })
 
+  // an extra option is appended with an index of zero
   question.createField('or', {
     name: 'Or',
     type: 'Text',
   })
 
-  question.createField('hint', {
-    name: 'Hint',
-    type: 'Text',
+  /*
+  - increases the other input to a text area
+  - appends an additional textbox
+  - replaces options with a textbox
+  */
+  question.createField('more', {
+    name: 'More',
+    type: 'Boolean'
   })
 
   /*
@@ -109,11 +116,7 @@ module.exports = function(migration) {
 
   question.createField('skippable', {
     name: 'Skippable',
-    type: 'Boolean',
-    required: true,
-    defaultValue: {
-      'en-US': false
-    }
+    type: 'Boolean'
   })
 
   /* Interface -------------------------------------------------------------- */
@@ -141,13 +144,19 @@ module.exports = function(migration) {
   /* toggle */
 
   question.changeFieldControl('multi_select', 'builtin', 'boolean', {
-    helpText: 'Select multiple options?',
+    helpText: 'Select multiple options? (default no)',
     trueLabel: 'yes',
     falseLabel: 'no'
   })
 
   question.changeFieldControl('skippable', 'builtin', 'boolean', {
-    helpText: 'Hide once answered?',
+    helpText: 'Hide once answered?  (default no)',
+    trueLabel: 'yes',
+    falseLabel: 'no'
+  })
+
+  question.changeFieldControl('more', 'builtin', 'boolean', {
+    helpText: 'Allow more user input? (default no)',
     trueLabel: 'yes',
     falseLabel: 'no'
   })

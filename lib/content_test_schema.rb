@@ -1,6 +1,6 @@
 #
 # Transform basic Content schema into RSpec actionable AST
-#
+# Answering all factual questions either correctly or incorrectly
 #
 class ContentTestSchema
   extend Dry::Initializer

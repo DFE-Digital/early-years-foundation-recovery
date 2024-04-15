@@ -31,6 +31,7 @@ en:
               blank: Choose an option.
 
   # Validations ----------------------------------------------------------------
+  # https://guides.rubyonrails.org/i18n.html#translations-for-active-record-models
 
   activerecord:
     errors:
@@ -40,6 +41,9 @@ en:
             answers:
               blank: Please select an answer.
               invalid: Please select an option.
+            text_input:
+              blank: Tell us more!!! # FIXME
+
         user_answer:
           attributes:
             answer:
@@ -586,38 +590,46 @@ en:
       This module covers:
 
       %{criteria}
-  
+  # /feedback
   feedback:
-    # /feedback
+    cta: |
+      # Can you help us improve this training further?
+
+      We are constantly looking at ways we can improve this training for you and your colleagues.
+      We really value your feedback.
+      It will take no more than 5 minutes to answer all the questions.
+
     intro: |
       # Give feedback
 
       The purpose of this feedback form is to gather your opinion on the child development
       training course that the Department for Education has created for early years practitioners.
 
-      For more information on how you data will be used, please view our privacy notice. ADD LINK
+      For more information on how you data will be used, please view our
+      {external}[privacy notice](https://www.gov.uk/government/publications/privacy-information-members-of-the-public/privacy-information-members-of-the-public){/external}.
 
       Completing this form is voluntary and you can withdraw your feedback at any time.
 
       By completing this form you have understood the above and consent to take part.
 
-    # /feedback
+      ## Technical support queries
+
+      If you have any questions about how to use this website or are experiencing any
+      technical issues, please {external}[use our contact form](%{contact_us}){/external} so that our team can follow up with your enquiry.
     complete: |
       # You have already submitted feedback
 
       Thank you for helping to improve this training
-
-      ## Technical support queries
-
-      If you have any questions about how to sue this website or are experiencing any
-      technical issues, please use our contact form ADD LINK so that our team can follow up with your enquiry.
-
-      ---
-        
     # /feedback/thank-you
-    thank_you:
-      heading: Thank you
-      body: Thank you for helping to improve this training
+    thank_you: |
+      # Thank you
+
+      Thank you for helping to improve this training
+    # one-off question
+    research: |
+      Participation is entirely voluntary, and you can withdraw at any point before,
+      during or after the research takes place and you do not need to give a reason.
+    reasons: Could you give use reasons for your answer?
 
   # /gov-one/info
   gov_one_info:

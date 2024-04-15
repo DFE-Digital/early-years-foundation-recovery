@@ -39,10 +39,10 @@ describe Course, type: :model do
     end
 
     it 'page order uing previous_item/next_item' do
-      expect(pages.first.name).to eq 'feedback-radiobutton'
-      expect(pages.first.next_item.name).to eq 'feedback-yesnoandtext'
-      expect(pages.first.next_item.next_item.name).to eq 'feedback-freetext'
-      expect(pages.first.next_item.previous_item.name).to eq 'feedback-radiobutton'
+      expect(pages.first.name).to eq 'feedback-radio-only'
+      expect(pages.first.next_item.name).to eq 'feedback-checkbox-only'
+      expect(pages.first.next_item.next_item.name).to eq 'feedback-textarea-only'
+      expect(pages.first.next_item.previous_item.name).to eq 'feedback-radio-only'
     end
   end
 end
