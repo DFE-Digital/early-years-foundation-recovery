@@ -32,6 +32,11 @@ class Guest < Dry::Struct
     )
   end
 
+  # @return [Boolean]
+  def completed_course_feedback?
+    responses.count.eql? Course.config.feedback_questions.count
+  end
+
 private
 
   # @return [Response::ActiveRecord_Relation]

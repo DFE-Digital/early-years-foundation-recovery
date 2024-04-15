@@ -1,8 +1,7 @@
 class FeedbackController < ApplicationController
   helper_method :content,
                 :mod,
-                :current_user_response,
-                :feedback_complete?
+                :current_user_response
 
   def index; end
 
@@ -21,16 +20,6 @@ class FeedbackController < ApplicationController
       redirect
     else
       render :show, status: :unprocessable_entity
-    end
-  end
-
-  # @see feedback#index
-  # @return [Boolean]
-  def feedback_complete?
-    if current_user.guest?
-      cookies[:course_feedback_completed].present?
-    else
-      current_user.completed_course_feedback?
     end
   end
 

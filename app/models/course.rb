@@ -15,7 +15,7 @@ class Course < ContentfulModel::Base
 
   # @return [Course]
   def self.config
-    fetch_or_store('course') { first }
+    fetch_or_store(to_key('course')) { first }
   end
 
   # @return [String] mod.name

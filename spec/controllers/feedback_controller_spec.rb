@@ -90,51 +90,51 @@ RSpec.describe FeedbackController, type: :controller do
     end
   end
 
-  describe '#feedback_complete?' do
-    before do
-      allow(controller).to receive(:current_user).and_return(user)
-    end
+  # xdescribe '#feedback_complete?' do
+  #   before do
+  #     allow(controller).to receive(:current_user).and_return(user)
+  #   end
 
-    context 'with registered user' do
-      let(:user) { create :user, :registered }
+  #   context 'with registered user' do
+  #     let(:user) { create :user, :registered }
 
-      before do
-        allow(user).to receive(:completed_course_feedback?).and_return(completed)
-        get :index
-      end
+  #     before do
+  #       allow(user).to receive(:completed_course_feedback?).and_return(completed)
+  #       get :index
+  #     end
 
-      context 'and form completed' do
-        let(:completed) { true }
+  #     context 'and form completed' do
+  #       let(:completed) { true }
 
-        specify { expect(controller).to be_feedback_complete }
-      end
+  #       specify { expect(controller).to be_feedback_complete }
+  #     end
 
-      context 'and form not completed' do
-        let(:completed) { false }
+  #     context 'and form not completed' do
+  #       let(:completed) { false }
 
-        specify { expect(controller).not_to be_feedback_complete }
-      end
-    end
+  #       specify { expect(controller).not_to be_feedback_complete }
+  #     end
+  #   end
 
-    context 'with guest' do
-      let(:user) { Guest.new(visit: create(:visit)) }
+  #   context 'with guest' do
+  #     let(:user) { Guest.new(visit: create(:visit)) }
 
-      before do
-        allow(controller).to receive(:cookies).and_return(cookie)
-        get :index
-      end
+  #     before do
+  #       allow(controller).to receive(:cookies).and_return(cookie)
+  #       get :index
+  #     end
 
-      context 'and form completed' do
-        let(:cookie) { { course_feedback_completed: 'some-token' } }
+  #     context 'and form completed' do
+  #       let(:cookie) { { course_feedback_completed: 'some-token' } }
 
-        specify { expect(controller).to be_feedback_complete }
-      end
+  #       specify { expect(controller).to be_feedback_complete }
+  #     end
 
-      context 'and form not completed' do
-        let(:cookie) { {} }
+  #     context 'and form not completed' do
+  #       let(:cookie) { {} }
 
-        specify { expect(controller).not_to be_feedback_complete }
-      end
-    end
-  end
+  #       specify { expect(controller).not_to be_feedback_complete }
+  #     end
+  #   end
+  # end
 end
