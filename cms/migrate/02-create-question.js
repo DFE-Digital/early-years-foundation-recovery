@@ -1,7 +1,7 @@
 module.exports = function(migration) {
 
   const question = migration.createContentType('question', {
-    name: 'Question test',
+    name: 'Question',
     displayField: 'name',
     description: 'Formative, Summative, Confidence or Feedback'
   })
