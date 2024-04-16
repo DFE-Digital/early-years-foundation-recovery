@@ -5477,7 +5477,7 @@ __metadata:
     axios: ^1.6.2
     dfe-frontend-alpha: ^1.0.0
     esbuild: ^0.20.0
-    govuk-frontend: ^4.7.0
+    govuk-frontend: ^5.3.0
     puppeteer: ^22.6.0
     sass: ^1.72.0
     stimulus-reveal-controller: ^4.1.0
@@ -6144,10 +6144,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"govuk-frontend@npm:^4.5.0, govuk-frontend@npm:^4.7.0":
+"govuk-frontend@npm:^4.5.0":
   version: 4.8.0
   resolution: "govuk-frontend@npm:4.8.0"
   checksum: e255f924f399319e109347ec4993e0441fc5847a6a73ba44a465b1599c7d03e85c29212743b081ccd60e19224c6301143c77540b8e4bfe615fcb3e162b8663f4
+  languageName: node
+  linkType: hard
+
+"govuk-frontend@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "govuk-frontend@npm:5.3.0"
+  checksum: 2ab97dfbb5c5badb9ad1078ba5200f23089411eafe00c262886ec582b093a98b393a4190c288484e6227bc3322633b35eaa34d3e24583f86e090355ac76768b0
   languageName: node
   linkType: hard
 
