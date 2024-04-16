@@ -1573,20 +1573,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hotwired/turbo-rails@npm:^8.0.2":
-  version: 8.0.2
-  resolution: "@hotwired/turbo-rails@npm:8.0.2"
+"@hotwired/turbo-rails@npm:^8.0.4":
+  version: 8.0.4
+  resolution: "@hotwired/turbo-rails@npm:8.0.4"
   dependencies:
-    "@hotwired/turbo": ^8.0.2
+    "@hotwired/turbo": ^8.0.4
     "@rails/actioncable": ^7.0
-  checksum: c6e66eac18c1255654d72d1f02b5fe126767509bbfe53e7a5a262d0177b054a7c12d57a38a92ac9c39c127a086b34c1456371b55dfde7ffa023d2c1d80f3c8d2
+  checksum: 0f1a0cfb92262075bd0bf6e5e731b465d53d66da8c1a4caa57ab4a406aac650a31b04e3bf1c28f34aaef4dd2fda244c650784f7b42adcf54c4a580146146c553
   languageName: node
   linkType: hard
 
-"@hotwired/turbo@npm:^8.0.2":
-  version: 8.0.2
-  resolution: "@hotwired/turbo@npm:8.0.2"
-  checksum: 131075e828854278dceda132a03fe119d8fecf6c53132c9c4df8abda1121cc84ca37325fa7cef18b5210cdaed4b1bbe715765c5ae7c15d601f8e4169be6ce242
+"@hotwired/turbo@npm:^8.0.4":
+  version: 8.0.4
+  resolution: "@hotwired/turbo@npm:8.0.4"
+  checksum: 87c592f05e6d9945cd56eb94aa8213e2ff09c482c28163bb5f0a2a70d887cfbc7e4d36725ca804a9ddff8f28ab1d68274262fc045e396b9c5b032232706920b1
   languageName: node
   linkType: hard
 
@@ -1945,20 +1945,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@puppeteer/browsers@npm:2.0.1":
-  version: 2.0.1
-  resolution: "@puppeteer/browsers@npm:2.0.1"
+"@puppeteer/browsers@npm:2.2.0":
+  version: 2.2.0
+  resolution: "@puppeteer/browsers@npm:2.2.0"
   dependencies:
     debug: 4.3.4
     extract-zip: 2.0.1
     progress: 2.0.3
     proxy-agent: 6.4.0
+    semver: 7.6.0
     tar-fs: 3.0.5
     unbzip2-stream: 1.4.3
     yargs: 17.7.2
   bin:
     browsers: lib/cjs/main-cli.js
-  checksum: 9f40b920d0b67dd62a7af59bf88a8e930c0fa58d62aad09a3743b564c6c6893d591f911311a5690f7b5927f99333c79ee5274a95984a7d9cdf8e7f7e3b57cff0
+  checksum: cab093b1f3c482a17b1696b691f4958681e88da9f10d15db8bc200a9f0c1cbd920ab42588f247c0fa539b7442594cc4a854c9b02adcf3f18ea512c57a35e343b
   languageName: node
   linkType: hard
 
@@ -3860,15 +3861,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromium-bidi@npm:0.5.9":
-  version: 0.5.9
-  resolution: "chromium-bidi@npm:0.5.9"
+"chromium-bidi@npm:0.5.13":
+  version: 0.5.13
+  resolution: "chromium-bidi@npm:0.5.13"
   dependencies:
     mitt: 3.0.1
     urlpattern-polyfill: 10.0.0
+    zod: 3.22.4
   peerDependencies:
     devtools-protocol: "*"
-  checksum: 5885a5ab93ddccc2b64ec6fe5455258c440e235daf7c9fb55e1de32ad95b514b721fae8bb7ddaee48d5c7745b57bdcf8a7114f012a41af3ea34b5fe6f1c22646
+  checksum: 245a0d6bacae487f4a3e5392c66d1ebd613652c7344bda1498eebfb16be6d8d9b22e889c78e8cbe57239ea85b4b6a0e2a3350c9f9d467d95ed547a47bdcb49a2
   languageName: node
   linkType: hard
 
@@ -4309,15 +4311,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-fetch@npm:4.0.0":
-  version: 4.0.0
-  resolution: "cross-fetch@npm:4.0.0"
-  dependencies:
-    node-fetch: ^2.6.12
-  checksum: ecca4f37ffa0e8283e7a8a590926b66713a7ef7892757aa36c2d20ffa27b0ac5c60dcf453119c809abe5923fc0bae3702a4d896bfb406ef1077b0d0018213e24
-  languageName: node
-  linkType: hard
-
 "cross-spawn@npm:^6.0.0":
   version: 6.0.5
   resolution: "cross-spawn@npm:6.0.5"
@@ -4615,10 +4608,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"devtools-protocol@npm:0.0.1232444":
-  version: 0.0.1232444
-  resolution: "devtools-protocol@npm:0.0.1232444"
-  checksum: b421a3c20506d597211d101c3ed4e550db2ca195d59c3371b2e04a8d057f33be60e732bafc80dc53b34546593a7751857321971e235e9ce9f1c5a9523fd8fa20
+"devtools-protocol@npm:0.0.1262051":
+  version: 0.0.1262051
+  resolution: "devtools-protocol@npm:0.0.1262051"
+  checksum: beaad00059964a661ab056d5e993492742c612c0370c6f08acd91490181c4d4ecf57d316eedb5a37fb6bb59321901d09ce50762f79ea09a50751d86f601b8f8e
   languageName: node
   linkType: hard
 
@@ -5479,14 +5472,14 @@ __metadata:
   dependencies:
     "@fortawesome/fontawesome-free": ^6.5.1
     "@hotwired/stimulus": ^3.2.1
-    "@hotwired/turbo-rails": ^8.0.2
+    "@hotwired/turbo-rails": ^8.0.4
     accessible-autocomplete: ^2.0.4
     axios: ^1.6.2
     dfe-frontend-alpha: ^1.0.0
     esbuild: ^0.20.0
     govuk-frontend: ^4.7.0
-    puppeteer: ^22.1.0
-    sass: ^1.71.0
+    puppeteer: ^22.6.0
+    sass: ^1.72.0
     stimulus-reveal-controller: ^4.1.0
   languageName: unknown
   linkType: soft
@@ -5735,12 +5728,12 @@ __metadata:
   linkType: hard
 
 "follow-redirects@npm:^1.14.7, follow-redirects@npm:^1.14.9, follow-redirects@npm:^1.15.4":
-  version: 1.15.5
-  resolution: "follow-redirects@npm:1.15.5"
+  version: 1.15.6
+  resolution: "follow-redirects@npm:1.15.6"
   peerDependenciesMeta:
     debug:
       optional: true
-  checksum: 5ca49b5ce6f44338cbfc3546823357e7a70813cecc9b7b768158a1d32c1e62e7407c944402a918ea8c38ae2e78266312d617dc68783fac502cbb55e1047b34ec
+  checksum: a62c378dfc8c00f60b9c80cab158ba54e99ba0239a5dd7c81245e5a5b39d10f0c35e249c3379eae719ff0285fff88c365dd446fab19dee771f1d76252df1bbf5
   languageName: node
   linkType: hard
 
@@ -8701,7 +8694,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^2.6.12, node-fetch@npm:^2.6.2":
+"node-fetch@npm:^2.6.2":
   version: 2.7.0
   resolution: "node-fetch@npm:2.7.0"
   dependencies:
@@ -9734,30 +9727,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"puppeteer-core@npm:22.1.0":
-  version: 22.1.0
-  resolution: "puppeteer-core@npm:22.1.0"
+"puppeteer-core@npm:22.6.0":
+  version: 22.6.0
+  resolution: "puppeteer-core@npm:22.6.0"
   dependencies:
-    "@puppeteer/browsers": 2.0.1
-    chromium-bidi: 0.5.9
-    cross-fetch: 4.0.0
+    "@puppeteer/browsers": 2.2.0
+    chromium-bidi: 0.5.13
     debug: 4.3.4
-    devtools-protocol: 0.0.1232444
+    devtools-protocol: 0.0.1262051
     ws: 8.16.0
-  checksum: b5efbcb58b735cab4579498730184fe11d9d86a43b19765e069e887553062fa81eac258ebe04834e806bc2b5841b7bfdd13403f7fa0cfa048fcc154854e3a1ca
+  checksum: b0639fbddcfa908f780de5e4d590e5ae58e94965033cd87f8293af9cfeebc389c89a98bdaea3d11c7c630cfb79d0d1ae6b24ee10a98dc7a6f3a72b04a45988b4
   languageName: node
   linkType: hard
 
-"puppeteer@npm:^22.1.0":
-  version: 22.1.0
-  resolution: "puppeteer@npm:22.1.0"
+"puppeteer@npm:^22.6.0":
+  version: 22.6.0
+  resolution: "puppeteer@npm:22.6.0"
   dependencies:
-    "@puppeteer/browsers": 2.0.1
+    "@puppeteer/browsers": 2.2.0
     cosmiconfig: 9.0.0
-    puppeteer-core: 22.1.0
+    devtools-protocol: 0.0.1262051
+    puppeteer-core: 22.6.0
   bin:
     puppeteer: lib/esm/puppeteer/node/cli.js
-  checksum: 80f9e6b25a8cc0ebbb4f4bcc4efff84531a6fa541206a97804e3a9506837f6d3a39e5b59843cc8a1cba5d141b5a3dcad768b30c37086d5a5c43cf10ef9cf84ea
+  checksum: fe8134e05d452661889ea25be284d6362b083e2c4b730d481801a4c37f7c2555c2376478938fa41a317752ed735041005d60ec2dd8148052d8571680d986676c
   languageName: node
   linkType: hard
 
@@ -10301,7 +10294,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.44.0, sass@npm:^1.71.0":
+"sass@npm:^1.44.0":
   version: 1.71.0
   resolution: "sass@npm:1.71.0"
   dependencies:
@@ -10311,6 +10304,19 @@ __metadata:
   bin:
     sass: sass.js
   checksum: 5ba6b4b994c7ae94286919d8be8a3692038c27175b4ad3a3ac43f51a91188590d3ddd3a0ef1022135503b9d70d0732efdbedfd56f3ee1a4651549f5b13f8942f
+  languageName: node
+  linkType: hard
+
+"sass@npm:^1.72.0":
+  version: 1.72.0
+  resolution: "sass@npm:1.72.0"
+  dependencies:
+    chokidar: ">=3.0.0 <4.0.0"
+    immutable: ^4.0.0
+    source-map-js: ">=0.6.2 <2.0.0"
+  bin:
+    sass: sass.js
+  checksum: f420079c7d51660b7256ee52463c1499ede36f7fd5c8ef50c687451777ad641509001454dea45244073cedd7c00e7a3bc1c362e55206ac6686171b994edb41e4
   languageName: node
   linkType: hard
 
@@ -10379,16 +10385,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^6.0.0, semver@npm:^6.3.0, semver@npm:^6.3.1":
-  version: 6.3.1
-  resolution: "semver@npm:6.3.1"
-  bin:
-    semver: bin/semver.js
-  checksum: ae47d06de28836adb9d3e25f22a92943477371292d9b665fb023fae278d345d508ca1958232af086d85e0155aee22e313e100971898bbb8d5d89b8b1d4054ca2
-  languageName: node
-  linkType: hard
-
-"semver@npm:^7.2.1, semver@npm:^7.3.2, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.5.3":
+"semver@npm:7.6.0, semver@npm:^7.2.1, semver@npm:^7.3.2, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.5.3":
   version: 7.6.0
   resolution: "semver@npm:7.6.0"
   dependencies:
@@ -10396,6 +10393,15 @@ __metadata:
   bin:
     semver: bin/semver.js
   checksum: 7427f05b70786c696640edc29fdd4bc33b2acf3bbe1740b955029044f80575fc664e1a512e4113c3af21e767154a94b4aa214bf6cd6e42a1f6dba5914e0b208c
+  languageName: node
+  linkType: hard
+
+"semver@npm:^6.0.0, semver@npm:^6.3.0, semver@npm:^6.3.1":
+  version: 6.3.1
+  resolution: "semver@npm:6.3.1"
+  bin:
+    semver: bin/semver.js
+  checksum: ae47d06de28836adb9d3e25f22a92943477371292d9b665fb023fae278d345d508ca1958232af086d85e0155aee22e313e100971898bbb8d5d89b8b1d4054ca2
   languageName: node
   linkType: hard
 
@@ -11366,8 +11372,8 @@ __metadata:
   linkType: hard
 
 "tar@npm:^6.1.11, tar@npm:^6.1.2":
-  version: 6.2.0
-  resolution: "tar@npm:6.2.0"
+  version: 6.2.1
+  resolution: "tar@npm:6.2.1"
   dependencies:
     chownr: ^2.0.0
     fs-minipass: ^2.0.0
@@ -11375,7 +11381,7 @@ __metadata:
     minizlib: ^2.1.1
     mkdirp: ^1.0.3
     yallist: ^4.0.0
-  checksum: db4d9fe74a2082c3a5016630092c54c8375ff3b280186938cfd104f2e089c4fd9bad58688ef6be9cf186a889671bf355c7cda38f09bbf60604b281715ca57f5c
+  checksum: f1322768c9741a25356c11373bce918483f40fa9a25c69c59410c8a1247632487edef5fe76c5f12ac51a6356d2f1829e96d2bc34098668a2fc34d76050ac2b6c
   languageName: node
   linkType: hard
 
@@ -12687,6 +12693,13 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: f77b3d8d00310def622123df93d4ee654fc6a0096182af8bd60679ddcdfb3474c56c6c7190817c84a2785648cdee9d721c0154eb45698c62176c322fb46fc700
+  languageName: node
+  linkType: hard
+
+"zod@npm:3.22.4":
+  version: 3.22.4
+  resolution: "zod@npm:3.22.4"
+  checksum: 80bfd7f8039b24fddeb0718a2ec7c02aa9856e4838d6aa4864335a047b6b37a3273b191ef335bf0b2002e5c514ef261ffcda5a589fb084a48c336ffc4cdbab7f
   languageName: node
   linkType: hard
 
