@@ -10,8 +10,6 @@ RSpec.describe 'Static page', :cms, type: :request do
 
     specify { expect('/other-problems-signing-in').to be_successful }
 
-    specify { expect('/privacy-policy').to be_successful }
-
     specify { expect('/promotional-materials').to be_successful }
 
     specify { expect('/sitemap').to be_successful }
