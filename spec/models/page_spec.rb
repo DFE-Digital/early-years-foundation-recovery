@@ -9,7 +9,7 @@ RSpec.describe Page, type: :model do
 
   describe '.footer' do
     specify do
-      expect(described_class.footer.count).to be 5
+      expect(described_class.footer.count).to be 4
     end
   end
 
