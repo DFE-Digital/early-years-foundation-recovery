@@ -19,21 +19,18 @@ class MigrateTraining
   # @return [Boolean]
   option :truncate, Types::Bool, default: proc { false }, reader: :private
   # @return [Boolean]
-  option :simulate, Types::Bool, default: proc { false }, reader: :private
-  # @return [Boolean]
   option :verbose, Types::Bool, default: proc { true }, reader: :private
+  # @return [Integer]
+  option :batch, Types::Integer, default: proc { 100 }, reader: :private
   # @return [Integer, nil]
   option :resume, Types::Integer, optional: true, reader: :private
 
   # @return [nil]
   def call
-    ActiveRecord::Base.transaction do
-      log "Migration started: #{Time.zone.now}"
-      truncate! if truncate
-      migrate!
-      log "Migration finished: #{Time.zone.now}"
-      raise Error if simulate
-    end
+    log "Migration started: #{Time.zone.now}"
+    truncate! if truncate
+    migrate!
+    log "Migration finished: #{Time.zone.now}"
   end
 
 private
@@ -46,10 +43,12 @@ private
 
   # @return [nil]
   def migrate!
-    UserAnswer.find_each(start: resume) do |user_answer|
+    UserAnswer.find_each(start: resume, batch_size: batch) do |user_answer|
       if valid?(user_answer)
-        response = process_user_answer(user_answer)
-        log response.attributes.to_json, alert: false
+        ActiveRecord::Base.transaction do
+          response = process_user_answer(user_answer)
+          log response.attributes.to_json, alert: false
+        end
       else
         log "User: #{user_answer.user_id} UserAnswer: #{user_answer.id}"
       end
@@ -110,7 +109,6 @@ private
   # @return [Hash<Symbol=>Mixed>]
   def assessment_params(user_assessment)
     {
-      id: user_assessment.id,                                                          # int primary key
       user_id: user_assessment.user_id,                                                # int foreign key
       training_module: user_assessment.module,                                         # string foreign key
       passed: user_assessment.status.eql?('passed'),                                   # bool
@@ -123,24 +121,30 @@ private
   # @return [Hash<Symbol=>Mixed>]
   def response_params(user_answer)
     {
-      id: user_answer.id,                                   # int db primary key
-      user_id: user_answer.user_id,                         # int db foreign key
-      assessment_id: user_answer.user_assessment_id,        # int db foreign key
-      training_module: user_answer.module,                  # string cms key
-      question_name: user_answer.name,                      # string cms key
-      question_type: user_answer.question.question_type,    # string cms filter
-      answers: user_answer.answer,                          # array
-      correct: user_answer.correct,                         # bool
-      created_at: user_answer.created_at,                   # datetime
-      updated_at: user_answer.updated_at,                   # datetime
+      id: user_answer.id,                                 # int db primary key
+      user_id: user_answer.user_id,                       # int db foreign key
+      assessment_id: user_answer.user_assessment_id,      # int db foreign key
+      training_module: user_answer.module,                # string cms key
+      question_name: user_answer.name,                    # string cms key
+      question_type: user_answer.question.question_type,  # string cms filter
+      answers: coerce_answers(user_answer.answer),        # array
+      correct: user_answer.correct,                       # bool
+      created_at: user_answer.created_at,                 # datetime
+      updated_at: user_answer.updated_at,                 # datetime
     }
+  end
+
+  # @param serialised_answer [Array<Symbol, String, Integer>]
+  # @return [Array<Integer>]
+  def coerce_answers(serialised_answer)
+    Array(serialised_answer).map(&:to_s).compact_blank.map(&:to_i)
   end
 
   # @param message [String]
   # @param alert [Boolean] Send to Sentry
   # @return [String, nil]
   def log(message, alert: true)
-    if ENV['RAILS_LOG_TO_STDOUT'].present?
+    if Rails.env.production?
       Rails.logger.info(message)
 
       if alert
