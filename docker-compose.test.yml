@@ -13,6 +13,5 @@ services:
       - CONTENTFUL_MANAGEMENT_TOKEN=
       - DEBUG=false
       - BOT_TOKEN=bot_token
-      - TIMEOUT_MINUTES=25
     tty: true
     stdin_open: true

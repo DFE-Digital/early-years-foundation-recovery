@@ -1573,20 +1573,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hotwired/turbo-rails@npm:^8.0.2":
-  version: 8.0.2
-  resolution: "@hotwired/turbo-rails@npm:8.0.2"
+"@hotwired/turbo-rails@npm:^8.0.4":
+  version: 8.0.4
+  resolution: "@hotwired/turbo-rails@npm:8.0.4"
   dependencies:
-    "@hotwired/turbo": ^8.0.2
+    "@hotwired/turbo": ^8.0.4
     "@rails/actioncable": ^7.0
-  checksum: c6e66eac18c1255654d72d1f02b5fe126767509bbfe53e7a5a262d0177b054a7c12d57a38a92ac9c39c127a086b34c1456371b55dfde7ffa023d2c1d80f3c8d2
+  checksum: 0f1a0cfb92262075bd0bf6e5e731b465d53d66da8c1a4caa57ab4a406aac650a31b04e3bf1c28f34aaef4dd2fda244c650784f7b42adcf54c4a580146146c553
   languageName: node
   linkType: hard
 
-"@hotwired/turbo@npm:^8.0.2":
-  version: 8.0.2
-  resolution: "@hotwired/turbo@npm:8.0.2"
-  checksum: 131075e828854278dceda132a03fe119d8fecf6c53132c9c4df8abda1121cc84ca37325fa7cef18b5210cdaed4b1bbe715765c5ae7c15d601f8e4169be6ce242
+"@hotwired/turbo@npm:^8.0.4":
+  version: 8.0.4
+  resolution: "@hotwired/turbo@npm:8.0.4"
+  checksum: 87c592f05e6d9945cd56eb94aa8213e2ff09c482c28163bb5f0a2a70d887cfbc7e4d36725ca804a9ddff8f28ab1d68274262fc045e396b9c5b032232706920b1
   languageName: node
   linkType: hard
 
@@ -5472,7 +5472,7 @@ __metadata:
   dependencies:
     "@fortawesome/fontawesome-free": ^6.5.1
     "@hotwired/stimulus": ^3.2.1
-    "@hotwired/turbo-rails": ^8.0.2
+    "@hotwired/turbo-rails": ^8.0.4
     accessible-autocomplete: ^2.0.4
     axios: ^1.6.2
     dfe-frontend-alpha: ^1.0.0
@@ -5728,12 +5728,12 @@ __metadata:
   linkType: hard
 
 "follow-redirects@npm:^1.14.7, follow-redirects@npm:^1.14.9, follow-redirects@npm:^1.15.4":
-  version: 1.15.5
-  resolution: "follow-redirects@npm:1.15.5"
+  version: 1.15.6
+  resolution: "follow-redirects@npm:1.15.6"
   peerDependenciesMeta:
     debug:
       optional: true
-  checksum: 5ca49b5ce6f44338cbfc3546823357e7a70813cecc9b7b768158a1d32c1e62e7407c944402a918ea8c38ae2e78266312d617dc68783fac502cbb55e1047b34ec
+  checksum: a62c378dfc8c00f60b9c80cab158ba54e99ba0239a5dd7c81245e5a5b39d10f0c35e249c3379eae719ff0285fff88c365dd446fab19dee771f1d76252df1bbf5
   languageName: node
   linkType: hard
 
@@ -11372,8 +11372,8 @@ __metadata:
   linkType: hard
 
 "tar@npm:^6.1.11, tar@npm:^6.1.2":
-  version: 6.2.0
-  resolution: "tar@npm:6.2.0"
+  version: 6.2.1
+  resolution: "tar@npm:6.2.1"
   dependencies:
     chownr: ^2.0.0
     fs-minipass: ^2.0.0
@@ -11381,7 +11381,7 @@ __metadata:
     minizlib: ^2.1.1
     mkdirp: ^1.0.3
     yallist: ^4.0.0
-  checksum: db4d9fe74a2082c3a5016630092c54c8375ff3b280186938cfd104f2e089c4fd9bad58688ef6be9cf186a889671bf355c7cda38f09bbf60604b281715ca57f5c
+  checksum: f1322768c9741a25356c11373bce918483f40fa9a25c69c59410c8a1247632487edef5fe76c5f12ac51a6356d2f1829e96d2bc34098668a2fc34d76050ac2b6c
   languageName: node
   linkType: hard
 
