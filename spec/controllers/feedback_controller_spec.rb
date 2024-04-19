@@ -7,12 +7,10 @@ RSpec.describe FeedbackController, type: :controller do
     before { sign_in user }
 
     describe 'GET #show' do
-      context 'last page' do
+      context 'with last page' do
         it 'is tracked as complete' do
           expect(controller).to receive(:track_feedback_complete)
-          expect(cookies[:course_feedback_completed]).not_to be_present
           get :show, params: { id: 'thank-you' }
-          expect(cookies[:course_feedback_completed]).to be_present
         end
       end
 
@@ -54,9 +52,9 @@ RSpec.describe FeedbackController, type: :controller do
 
         it 'is tracked as started' do
           expect(controller).to receive(:track_feedback_start)
-          expect(cookies[:course_feedback_started]).not_to be_present
+          expect(cookies[:course_feedback]).not_to be_present
           post :update, params: params
-          expect(cookies[:course_feedback_started]).to be_present
+          expect(cookies[:course_feedback]).to be_present
         end
       end
 
@@ -84,57 +82,9 @@ RSpec.describe FeedbackController, type: :controller do
         it 'is not tracked as started' do
           expect(controller).not_to receive(:track_feedback_start)
           post :update, params: params
-          expect(cookies[:course_feedback_started]).not_to be_present
+          expect(cookies[:course_feedback]).not_to be_present
         end
       end
     end
   end
-
-  # xdescribe '#feedback_complete?' do
-  #   before do
-  #     allow(controller).to receive(:current_user).and_return(user)
-  #   end
-
-  #   context 'with registered user' do
-  #     let(:user) { create :user, :registered }
-
-  #     before do
-  #       allow(user).to receive(:completed_course_feedback?).and_return(completed)
-  #       get :index
-  #     end
-
-  #     context 'and form completed' do
-  #       let(:completed) { true }
-
-  #       specify { expect(controller).to be_feedback_complete }
-  #     end
-
-  #     context 'and form not completed' do
-  #       let(:completed) { false }
-
-  #       specify { expect(controller).not_to be_feedback_complete }
-  #     end
-  #   end
-
-  #   context 'with guest' do
-  #     let(:user) { Guest.new(visit: create(:visit)) }
-
-  #     before do
-  #       allow(controller).to receive(:cookies).and_return(cookie)
-  #       get :index
-  #     end
-
-  #     context 'and form completed' do
-  #       let(:cookie) { { course_feedback_completed: 'some-token' } }
-
-  #       specify { expect(controller).to be_feedback_complete }
-  #     end
-
-  #     context 'and form not completed' do
-  #       let(:cookie) { {} }
-
-  #       specify { expect(controller).not_to be_feedback_complete }
-  #     end
-  #   end
-  # end
 end

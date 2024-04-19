@@ -7,7 +7,6 @@ class FeedbackController < ApplicationController
 
   def show
     if question_name.eql? 'thank-you'
-      feedback_cookie(:completed)
       track_feedback_complete
       render :thank_you
     end
@@ -15,7 +14,7 @@ class FeedbackController < ApplicationController
 
   def update
     if save_response!
-      feedback_cookie(:started)
+      feedback_cookie
       track_feedback_start
       redirect
     else
@@ -89,10 +88,9 @@ private
     Array(response_params[:answers]).compact_blank.map(&:to_i)
   end
 
-  # @param state [Symbol, String]
   # @return [Hash]
-  def feedback_cookie(state)
-    cookies["course_feedback_#{state}"] = { value: current_user.visit_token }
+  def feedback_cookie
+    cookies[:course_feedback] = { value: current_user.visit_token }
   end
 
   def track_feedback_start

@@ -264,6 +264,3 @@ to determine if it is a radio button or checkbox.
 
 If the question needs to be hidden once it is answered, so it is not answered again in another form, enable `skippable`.
 
----
-
-Cookies: `course_feedback_started` and `course_feedback_completed`

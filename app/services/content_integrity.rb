@@ -207,11 +207,6 @@ class ContentIntegrity
   end
 
   # @return [Boolean]
-  def feedback?
-    page_by_type_position(type: 'feedback')
-  end
-
-  # @return [Boolean]
   def results?
     page_by_type_position(type: 'assessment_results')
   end

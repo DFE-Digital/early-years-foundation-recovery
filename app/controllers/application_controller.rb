@@ -91,7 +91,7 @@ private
 
   # @return [Guest, nil]
   def guest
-    visit = Visit.find_by(visit_token: cookies[:course_feedback_started]) || current_visit
+    visit = Visit.find_by(visit_token: cookies[:course_feedback]) || current_visit
     Guest.new(visit: visit) if visit.present?
   end
 
