@@ -16,7 +16,6 @@ services:
       # overrides
       - WORKSPACE
       - USER_PASSWORD
-      - TIMEOUT_MINUTES
       - CONTENTFUL_ENVIRONMENT
       - CONTENTFUL_PREVIEW
     volumes:

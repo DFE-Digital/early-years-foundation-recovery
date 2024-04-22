@@ -33,7 +33,6 @@ RSpec.describe 'Page' do
     it { expect(user_path).to have_page_title('My account') }
     it { expect(my_modules_path).to have_page_title('My modules') }
     it { expect(course_overview_path).to have_page_title('About training') }
-    it { expect(users_timeout_path).to have_page_title('User timeout') }
     it { expect(setting_path('cookie-policy')).to have_page_title('Cookie policy') }
 
     it { expect(edit_registration_terms_and_conditions_path).to have_page_title('Terms and Conditions') }

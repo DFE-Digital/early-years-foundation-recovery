@@ -20,13 +20,8 @@ Rails.application.routes.draw do
                sign_out: 'sign-out',
              }
 
-  # @see TimeoutWarning js component
-  # @note these path names are required
   devise_scope :user do
-    get 'check_session_timeout', to: 'timeout#check'
-    get 'extend_session', to: 'timeout#extend'
-    get 'users/timeout', to: 'timeout#timeout_user'
-    get '/users/sign_out', to: 'users/sessions#destroy'
+    get 'users/sign_out', to: 'users/sessions#destroy'
     get 'users/review', to: 'users/sessions#sign_in_test_user' unless Rails.application.live?
   end
 
@@ -74,7 +69,7 @@ Rails.application.routes.draw do
   scope module: 'training' do
     resources :modules, only: %i[show], as: :training_modules do
       constraints proc { Rails.application.preview? || Rails.application.debug? } do
-        get '/structure', to: 'debug#show'
+        get 'structure', to: 'debug#show'
       end
 
       resources :pages, only: %i[index show], path: 'content-pages'
