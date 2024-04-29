@@ -7,7 +7,7 @@ class NewModuleMailJob < MailJob
     super do
       return unless new_module_published?
 
-      self.class.recipients.each do |recipient|
+      self.class.recipients.find_each do |recipient|
         recipient.send_new_module_notification(latest_module)
       end
 
@@ -17,9 +17,9 @@ class NewModuleMailJob < MailJob
 
 private
 
-  # @return [Training::Module]
+  # @return [Training::Module] uncached
   def latest_module
-    Training::Module.live.last
+    Training::Module.order(:position).load.to_a.select(&:named?).reject(&:draft?).last
   end
 
   # @return [Boolean]
