@@ -29,6 +29,7 @@ class Dashboard
     { model: 'DataAnalysis::ModulesPerMonth',           folder: 'summativequiz',    file: 'modules_per_month'             },
     { model: 'DataAnalysis::UserOverview',              folder: 'overview',         file: 'user_overview'                 },
     { model: 'DataAnalysis::ModuleOverview',            folder: 'overview',         file: 'module_overview'               },
+    { model: 'DataAnalysis::ClosedAccounts',            folder: 'overview',         file: 'closed_accounts'               },
     { model: 'DataAnalysis::UserModuleOrder',           folder: 'nonlinear',        file: 'user_module_order'             },
     { model: 'DataAnalysis::UserModuleCompletion',      folder: 'nonlinear',        file: 'user_module_completion'        },
     { model: 'DataAnalysis::UserModuleCompletionCount', folder: 'nonlinear',        file: 'user_module_completions_count' },
