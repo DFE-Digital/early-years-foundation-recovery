@@ -3111,17 +3111,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.6.8":
-  version: 1.6.8
-  resolution: "axios@npm:1.6.8"
-  dependencies:
-    follow-redirects: ^1.15.6
-    form-data: ^4.0.0
-    proxy-from-env: ^1.1.0
-  checksum: bf007fa4b207d102459300698620b3b0873503c6d47bf5a8f6e43c0c64c90035a4f698b55027ca1958f61ab43723df2781c38a99711848d232cad7accbcdfcdd
-  languageName: node
-  linkType: hard
-
 "b4a@npm:^1.6.4":
   version: 1.6.6
   resolution: "b4a@npm:1.6.6"
@@ -5477,7 +5466,6 @@ __metadata:
     "@hotwired/stimulus": ^3.2.1
     "@hotwired/turbo-rails": ^8.0.4
     accessible-autocomplete: ^3.0.0
-    axios: ^1.6.8
     dfe-frontend-alpha: ^1.0.0
     esbuild: ^0.20.2
     govuk-frontend: ^4.7.0
@@ -5730,7 +5718,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.14.7, follow-redirects@npm:^1.14.9, follow-redirects@npm:^1.15.6":
+"follow-redirects@npm:^1.14.7, follow-redirects@npm:^1.14.9":
   version: 1.15.6
   resolution: "follow-redirects@npm:1.15.6"
   peerDependenciesMeta:
