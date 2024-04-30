@@ -14,11 +14,13 @@ RSpec.describe NewModuleMailJob do
   # Create records for the previously released modules completed by the recipients
   # Each `module_release` must have a corresponding `release` record
   before do
-    create(:release, id: 1, name: 'first', time: '2023-03-16 13:00:00')
-    create(:module_release, release_id: 1, module_position: 1, name: 'alpha')
+    create :release, id: 1, name: 'first', time: '2023-03-16 13:00:00'
+    create :module_release, release_id: 1, module_position: 1, name: 'alpha'
+
     Training::Module.reset_cache_key!
-    create(:release, id: 2, name: 'second')
-    create(:module_release, release_id: 1, module_position: 2, name: 'bravo')
+
+    create :release, id: 2, name: 'second'
+    create :module_release, release_id: 1, module_position: 2, name: 'bravo'
   end
 
   it_behaves_like 'an email prompt', 2, Training::Module.by_name(:charlie)
