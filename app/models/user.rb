@@ -142,7 +142,7 @@ class User < ApplicationRecord
   scope :start_training_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_complete.not_started_training }
   scope :complete_registration_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_incomplete }
   scope :continue_training_mail_job_recipients, -> { training_email_recipients.last_visit_4_weeks_ago.distinct(&:module_in_progress?) }
-  scope :new_module_mail_job_recipients, -> { training_email_recipients }
+  scope :new_module_mail_job_recipients, -> { training_email_recipients.not_closed }
 
   # data
   scope :dashboard, -> { not_closed }
