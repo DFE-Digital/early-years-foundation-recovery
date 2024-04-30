@@ -23,4 +23,10 @@ RSpec.describe NewModuleMailJob do
   end
 
   it_behaves_like 'an email prompt', 2, Training::Module.by_name(:charlie)
+
+  it 'resets cache' do
+    expect(Training::Module.cache_key).to eq 'initial'
+    described_class.run(2)
+    expect(Training::Module.cache_key).not_to eq 'initial'
+  end
 end
