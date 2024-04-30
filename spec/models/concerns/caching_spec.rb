@@ -3,11 +3,9 @@ require 'rails_helper'
 RSpec.describe Caching do
   let(:described_class) { Training::Module }
 
-  describe '.cache_key' do
-    before do
-      described_class.reset_cache_key!
-    end
+  before { described_class.cache.clear }
 
+  describe '.cache_key' do
     it 'has a default' do
       expect(Release.all.count).to be 0
       expect(Release.cache_key).to be_nil
