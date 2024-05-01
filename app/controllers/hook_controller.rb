@@ -17,6 +17,7 @@ class HookController < ApplicationController
     )
 
     NewModuleMailJob.enqueue(new_release.id)
+
     render json: { status: 'content release received' }, status: :ok
   end
 
