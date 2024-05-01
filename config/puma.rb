@@ -42,18 +42,16 @@ preload_app!
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
 
-app_details = "[#{ENV['CF_INSTANCE_INDEX']}] #{ENV['DOMAIN']}"
-
 on_worker_boot do
-  Sentry.capture_message "EYFS booting #{app_details}"
+  Sentry.capture_message "EYFS booting #{ENV['DOMAIN']}"
 end
 
 on_restart do
-  Sentry.capture_message "EYFS restarting #{app_details}"
+  Sentry.capture_message "EYFS restarting #{ENV['DOMAIN']}"
 end
 
 raise_exception_on_sigterm do
-  Sentry.capture_message "EYFS terminating #{app_details}"
+  Sentry.capture_message "EYFS terminating #{ENV['DOMAIN']}"
 end
 
 lowlevel_error_handler do |error|
