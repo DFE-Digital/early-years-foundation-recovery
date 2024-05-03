@@ -20,4 +20,39 @@ RSpec.describe 'Account page', type: :system do
 
     expect(page).to have_text 'Closing your account'
   end
+
+  describe 'edit details' do
+    it 'user defined answers' do
+      click_on 'Change setting details'
+      expect(page).to have_current_path '/registration/setting-type/edit'
+
+      click_on 'I cannot find my setting or organisation'
+      expect(page).to have_current_path '/registration/setting-type-other/edit'
+
+      fill_in 'Enter the type of setting or organisation where you work.', with: 'DfE'
+      click_button 'Continue'
+      expect(page).to have_current_path '/registration/local-authority/edit'
+
+      click_on 'I work across more than one local authority'
+      expect(page).to have_current_path '/registration/role-type/edit'
+
+      click_on 'I would describe my role in another way.'
+      expect(page).to have_current_path '/registration/role-type-other/edit'
+
+      fill_in 'Enter your job title.', with: 'Developer'
+      click_button 'Continue'
+      expect(page).to have_current_path '/registration/early-years-experience/edit'
+
+      # choose 'Not applicable'
+      choose 'Between 6 and 9 years'
+      click_button 'Continue'
+
+      expect(page).to have_current_path '/my-account'
+
+      expect(page).to have_text 'DfE'
+      expect(page).to have_text 'Developer'
+      # expect(page).to have_text 'Not applicable'
+      expect(page).to have_text 'Between 6 and 9 years'
+    end
+  end
 end
