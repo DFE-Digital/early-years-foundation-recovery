@@ -24,7 +24,7 @@ p#progress-pages {
 
 #progress-inactive {
   height: $progress-bar-height;
-  background-color: $department-for-education-websafe;
+  background-color: govuk-organisation-colour('department-for-education');
 
   #progress-active {
     height: $progress-bar-height;

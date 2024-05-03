@@ -9,7 +9,7 @@
 
 .dfe-width-container {
   margin: 0 auto;
-  max-width: $govuk-page-width;
+  max-width: 1200px;
 
   @include govuk-media-query($until: tablet) {
     padding-left: govuk-spacing(3);

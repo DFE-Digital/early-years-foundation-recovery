@@ -18,10 +18,10 @@
   }
 
   .section-intro-previous-button {
-    background-color: $department-for-education-websafe;
+    background-color: govuk-organisation-colour('department-for-education');
 
     &:hover, &:focus {
-      background-color: $department-for-education-websafe;
+      background-color: govuk-organisation-colour('department-for-education');
     }
   }
 
