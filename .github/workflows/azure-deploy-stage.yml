@@ -120,6 +120,11 @@ jobs:
               --ip-address Private \
               --output none \
               --environment-variables \
-                EDITOR=vi RAILS_ENV=production RAILS_LOG_TO_STDOUT=true \
+                EDITOR=vi \
+                RAILS_ENV=production \
+                RAILS_LOG_TO_STDOUT=true \
+                DOMAIN=${{ vars.WEBAPP_CONFIG_DOMAIN }} \
                 GOOGLE_CLOUD_BUCKET=${{ vars.WEBAPP_CONFIG_GOOGLE_CLOUD_BUCKET }} \
-                RAILS_MASTER_KEY=${{ secrets.WEBAPP_CONFIG_RAILS_MASTER_KEY }} DATABASE_URL=${{ secrets.WEBAPP_DATABASE_URL }} GCS_CREDENTIALS=${{ secrets.GCS_CREDENTIALS }}
+                RAILS_MASTER_KEY=${{ secrets.WEBAPP_CONFIG_RAILS_MASTER_KEY }} \
+                DATABASE_URL=${{ secrets.WEBAPP_DATABASE_URL }} \
+                GCS_CREDENTIALS=${{ secrets.GCS_CREDENTIALS }}
