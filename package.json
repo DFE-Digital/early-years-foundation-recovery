@@ -17,7 +17,7 @@
     "esbuild": "^0.20.2",
     "govuk-frontend": "^4.7.0",
     "puppeteer": "^22.7.1",
-    "sass": "^1.75.0",
+    "sass": "^1.76.0",
     "stimulus-reveal-controller": "^4.1.0"
   }
 }
