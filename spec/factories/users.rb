@@ -30,7 +30,7 @@ FactoryBot.define do
 
     trait :closed do
       registered
-      closed_at { '2024-01-08 10:23:40.946267' }
+      closed_at { '2024-01-08 10:23:40' }
       closed_reason { 'other' }
       closed_reason_custom { 'I did not find the training useful' }
     end
