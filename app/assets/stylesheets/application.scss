@@ -9,7 +9,7 @@ https://design-system.service.gov.uk/styles/colour/
 
 $light-blue: tint(govuk-organisation-colour('department-for-education'), 90%);
 
-@import 'dfe-header';
+@import 'header';
 @import 'print';
 @import 'about';
 @import 'card';
@@ -53,17 +53,9 @@ main img {
   max-width: 100%;
 }
 
-.govuk-width-container,
-.dfe-width-container {
-  margin: 0 auto;
+footer .govuk-width-container {
   max-width: 1200px;
-
-  @include govuk-media-query($until: tablet) {
-    padding-left: govuk-spacing(3);
-    padding-right: govuk-spacing(3);
-  }
 }
-
 
 /*
 Default layout
