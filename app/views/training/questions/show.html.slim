@@ -14,7 +14,7 @@
       = render partial: content.to_partial_path, locals: { f: f }, object: current_user_response, as: :response
 
       - if content.formative_question? && current_user_response.responded?
-        = render 'assessment_banner'
+        #formative-results= render 'assessment_banner'
 
 
   .govuk-grid-row

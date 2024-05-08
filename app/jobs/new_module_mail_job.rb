@@ -5,9 +5,14 @@ class NewModuleMailJob < MailJob
   # @param release_id [Integer]
   def run(release_id)
     super do
-      return unless new_module_published?
+      log "Cache key: #{Training::Module.cache_key}"
+      log 'Recalculating key...'
+      Training::Module.reset_cache_key!
+      log "Cache key: #{Training::Module.cache_key}"
 
-      self.class.recipients.each do |recipient|
+      return :no_new_module unless new_module_published?
+
+      self.class.recipients.find_each do |recipient|
         recipient.send_new_module_notification(latest_module)
       end
 

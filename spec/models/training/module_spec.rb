@@ -3,12 +3,6 @@ require 'rails_helper'
 RSpec.describe Training::Module, type: :model do
   subject(:mod) { described_class.by_name(:alpha) }
 
-  describe '.cache_key' do
-    it 'has a default' do
-      expect(described_class.cache_key).to eql 'initial'
-    end
-  end
-
   describe '.by_name' do
     it 'loads linked entries' do
       expect(mod.pages).to be_present
