@@ -26,20 +26,4 @@ RSpec.describe Response, '#feedback', type: :model do
 
     specify { expect(response).to be_valid }
   end
-
-  # validate answers array unless
-  # - question options are empty
-  # - question hint empty
-  #
-  describe '#text_input_extra?' do
-    subject(:response) do
-      build :response,
-            **params,
-            question_name: 'feedback-textarea-only',
-            answers: [],
-            text_input: nil
-    end
-
-    specify { expect(response).to be_valid }
-  end
 end

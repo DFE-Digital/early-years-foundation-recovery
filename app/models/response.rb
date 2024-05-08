@@ -10,9 +10,7 @@ class Response < ApplicationRecord
 
   validates :training_module, presence: true
   validates :question_type, inclusion: { in: %w[formative summative confidence feedback] }
-
   validates :answers, presence: true, unless: -> { text_input_only? }
-  validates :text_input, presence: true, if: -> { text_input_extra? }
 
   scope :incorrect, -> { where(correct: false) }
   scope :correct, -> { where(correct: true) }
@@ -72,16 +70,6 @@ class Response < ApplicationRecord
   # @return [Boolean]
   def text_input_only?
     question.only_text?
-  end
-
-  # @return [Boolean]
-  def text_input_extra?
-    question.and_text? && checked_other?
-
-    # was previously
-    # better in manual tests but breaks spec/system/course_feedback_spec.rb
-    # fails at feedback-checkbox-other-or
-    # question.and_text? || checked_other?
   end
 
   # @return [Boolean]
