@@ -27,7 +27,7 @@
 
   .blockquote-container {
     blockquote.quote {
-      &:before {
+      &::before {
         background-color: govuk-colour('light-grey');
       }
     }

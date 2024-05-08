@@ -2,7 +2,7 @@
   margin-left: auto;
   order: 2;
 
-  &.dfe-header__content:after {
+  &.dfe-header__content::after {
     display: none;
   }
 }
@@ -57,7 +57,7 @@ header #service-name {
 }
 
 .dfe-header__menu-toggle {
-  right: 0px;
+  right: 0;
 }
 
 @media (min-width: 61.875em) {
@@ -91,7 +91,7 @@ header #service-name {
   }
 }
 
-.dfe-header-f-header-flex .dfe-header__container:after {
+.dfe-header-f-header-flex .dfe-header__container::after {
   display: none;
 }
 

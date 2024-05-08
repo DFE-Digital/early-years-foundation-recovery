@@ -159,7 +159,7 @@ Progress bar
     color: govuk-colour('blue');
     
     // TODO: document what this is doing
-    &:after {
+    &::after {
       position: absolute;
       content: '';
       left: 0;

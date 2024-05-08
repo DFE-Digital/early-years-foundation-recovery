@@ -19,5 +19,15 @@
     "puppeteer": "^22.7.1",
     "sass": "^1.75.0",
     "stimulus-reveal-controller": "^4.1.0"
+  },
+  "devDependencies": {
+    "postcss": "8",
+    "stylelint": "^16.5.0",
+    "stylelint-config-gds": "^2.0.0"
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-gds/scss"
+    ]
   }
 }
