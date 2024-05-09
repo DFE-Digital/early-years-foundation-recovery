@@ -8,16 +8,16 @@
     "postinstall": "cp -R node_modules/govuk-frontend/govuk/assets/fonts/. app/assets/builds/fonts && cp -R node_modules/govuk-frontend/govuk/assets/images/. app/assets/builds/images"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.5.1",
+    "@fortawesome/fontawesome-free": "^6.5.2",
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^8.0.4",
-    "accessible-autocomplete": "^2.0.4",
-    "axios": "^1.6.2",
+    "accessible-autocomplete": "^3.0.0",
+    "axios": "^1.6.8",
     "dfe-frontend-alpha": "^1.0.0",
     "esbuild": "^0.20.2",
     "govuk-frontend": "^4.7.0",
-    "puppeteer": "^22.6.5",
-    "sass": "^1.72.0",
+    "puppeteer": "^22.7.1",
+    "sass": "^1.75.0",
     "stimulus-reveal-controller": "^4.1.0"
   }
 }
