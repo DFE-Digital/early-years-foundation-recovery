@@ -383,6 +383,16 @@ class User < ApplicationRecord
     training_emails || training_emails.nil?
   end
 
+  # return [Boolean]
+  def research_participant?
+    response = responses.feedback.find { |preference| preference.question.skippable? }
+    return false if response.nil?
+
+    option = response.question.options(checked: response.answers).find(&:checked?)
+    # Dry::Types['params.bool']['Yes']
+    option.id.eql?(1)
+  end
+
   # @return [Boolean]
   def private_beta_registration_complete?
     !!private_beta_registration_complete

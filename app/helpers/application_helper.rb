@@ -59,4 +59,9 @@ module ApplicationHelper
   def calculate_module_state
     CalculateModuleState.new(user: current_user).call
   end
+
+  # @return [Training::Question] feedback skippable
+  def user_research_question
+    Course.config.feedback.find(&:skippable?)
+  end
 end

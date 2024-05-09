@@ -41,8 +41,6 @@ en:
             answers:
               blank: Please select an answer.
               invalid: Please select an option.
-            text_input:
-              blank: Tell us more!!! # FIXME
 
         user_answer:
           attributes:
@@ -301,11 +299,25 @@ en:
     name_information: This is the name that will appear on your end of module certificate. You can use this setting to change how your name appears. Changing your name on this account will not affect your GOV.UK One Login
     setting_details: |
       ## Your setting details
-    email_preferences: |
-      ## Your email preferences
-    training_emails:
-      true: You have chosen to receive emails about this training course.
-      false: You have chosen not to receive emails about this training course.
+
+    email_preferences:
+      heading: |
+        ## Your email preferences
+      label: Email updates about this training course
+      link_text: Change email preferences
+      preference:
+        true: You have chosen to receive emails about this training course.
+        false: You have chosen not to receive emails about this training course.
+
+    research_preferences:
+      heading: |
+        ## Your research preferences
+      label: Willing to speak to a researcher to improve this service
+      link_text: Change research preferences
+      preference:
+        true: You have chosen to participate in research.
+        false: You have chosen not to participate in research.
+
     early_years_experience:
       Time worked in early years
     password_changed: Password last changed on %{date}

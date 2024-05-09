@@ -4,6 +4,14 @@ RSpec.describe 'Account page', type: :system do
   include_context 'with user'
 
   before do
+    create :response,
+           question_name: 'feedback-skippable',
+           training_module: 'course',
+           answers: [1],
+           correct: true,
+           user: user,
+           question_type: 'feedback'
+
     visit '/my-account'
   end
 
@@ -16,7 +24,12 @@ RSpec.describe 'Account page', type: :system do
     expect(page).to have_content 'Changing your name on this account will not affect your GOV.UK One Login'
 
     expect(page).to have_link 'Change setting details'
+
     expect(page).to have_link 'Change email preferences'
+    expect(page).to have_text 'You have chosen to receive emails about this training course.'
+
+    expect(page).to have_link 'Change research preferences'
+    expect(page).to have_text 'You have chosen to participate in research.'
 
     expect(page).to have_text 'Closing your account'
   end
