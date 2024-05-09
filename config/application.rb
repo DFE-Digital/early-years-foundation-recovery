@@ -47,7 +47,10 @@ module EarlyYearsFoundationRecovery
     config.feedback_url = ENV.fetch('FEEDBACK_URL', '#FEEDBACK_URL_env_var_missing') # TODO: deprecate
     config.google_analytics_tracking_id = ENV.fetch('TRACKING_ID', '#TRACKING_ID_env_var_missing')
     config.hotjar_site_id = ENV.fetch('HOTJAR_SITE_ID', '#HOTJAR_SITE_ID_env_var_missing')
-    config.unlock_in_minutes = ENV.fetch('UNLOCK_IN_MINUTES', '120').to_i
+
+    # Devise
+    config.unlock_in_minutes  = ENV.fetch('UNLOCK_IN_MINUTES', '120').to_i
+    config.timeout_in_minutes = ENV.fetch('TIMEOUT_IN_MINUTES', '60').to_i
 
     # Contentful
     config.contentful_space                   = ENV.fetch('CONTENTFUL_SPACE', credentials.dig(:contentful, :space))
