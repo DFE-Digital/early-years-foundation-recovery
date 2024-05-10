@@ -299,11 +299,6 @@ class User < ApplicationRecord
     role_other? ? role_type_other : role_type
   end
 
-  # @return [String, nil]
-  def early_years_experience
-    Trainee::Experience.all.find { |exp| exp.id.eql?(super) }&.name || super
-  end
-
   # @return [Boolean]
   def childminder?
     setting_other? ? false : setting.role_type.eql?('childminder')

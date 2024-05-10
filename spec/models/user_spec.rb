@@ -64,24 +64,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#early_years_experience' do
-    context 'with old data' do
-      subject(:user) { create(:user, :registered, early_years_experience: 'Old data') }
-
-      it 'shows old data' do
-        expect(user.early_years_experience).to eql 'Old data'
-      end
-    end
-
-    context 'with new data' do
-      subject(:user) { create(:user, :registered, early_years_experience: '2-5') }
-
-      it 'shows old data' do
-        expect(user.early_years_experience).to eql 'Between 2 and 5 years'
-      end
-    end
-  end
-
   describe '#course' do
     subject(:user) { create(:user, :registered) }
 
