@@ -386,11 +386,15 @@ class User < ApplicationRecord
   # return [Boolean]
   def research_participant?
     response = responses.feedback.find { |preference| preference.question.skippable? }
-    return false if response.nil?
-
-    option = response.question.options(checked: response.answers).find(&:checked?)
-    # Dry::Types['params.bool']['Yes']
-    option.id.eql?(1)
+    if response.nil?
+      update(research_participant: false)
+      false
+    else
+      option = response.question.options(checked: response.answers).find(&:checked?)
+      opt_in = option.id.eql?(1)
+      update(research_participant: opt_in)
+      opt_in
+    end
   end
 
   # @return [Boolean]
