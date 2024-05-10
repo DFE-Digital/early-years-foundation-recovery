@@ -1,7 +1,5 @@
 - name: Less than 2 years
-- name: Between 2 and 5 years
-- name: Between 6 and 9 years
 - name: 2 to 5 years
-- name: 6 - 9 years
+- name: 6 to 9 years
 - name: 10 years or more
 - name: Not applicable
