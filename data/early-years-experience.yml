@@ -1,5 +1,10 @@
-- name: Less than 2 years
-- name: 2 to 5 years
-- name: 6 to 9 years
-- name: 10 years or more
-- name: Not applicable
+- id: 0-2
+  name: Less than 2 years
+- id: 2-5
+  name: Between 2 and 5 years
+- id: 6-9
+  name: Between 6 and 9 years
+- id: 10+
+  name: 10 years or more
+- id: na
+  name: Not applicable

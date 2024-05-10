@@ -31,7 +31,7 @@ RSpec.describe Registration::EarlyYearsExperiencesController, type: :controller 
 
     describe 'POST #update' do
       it 'succeeds' do
-        post :update, params: { user: { early_years_experience: 'Less than 2 years' } }
+        post :update, params: { user: { early_years_experience: '0-2' } }
         expect(response).to redirect_to edit_registration_training_emails_path
         expect(user.reload.early_years_experience).to eq 'Less than 2 years'
       end
