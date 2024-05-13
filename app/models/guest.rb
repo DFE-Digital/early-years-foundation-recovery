@@ -17,7 +17,8 @@ class Guest < Dry::Struct
   # @param question [Training::Question]
   # @return [Boolean]
   def skip_question?(question)
-    question.skippable? && response_for_shared(question).responded?
+    question.name.eql?('prevent-from-completing-training') ||
+      (question.skippable? && response_for_shared(question).responded?)
   end
 
   # @param content [Training::Question] feedback questions

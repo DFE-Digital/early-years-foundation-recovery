@@ -1,7 +1,7 @@
 .govuk-grid-row
   .govuk-grid-column-full
 
-    - if current_user.completed_course_feedback?
+    - if current_user&.completed_course_feedback?
       = m('feedback.complete')
     - else
       = m('feedback.intro', contact_us: Rails.application.credentials.contact_us)

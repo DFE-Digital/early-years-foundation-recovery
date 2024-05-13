@@ -20,7 +20,7 @@
     br
     |   More: #{content.more}
     br
-    |   User type: #{current_user.guest? ? 'guest' : 'authenticated user'}
+    |   User type: #{current_user&.class.name}
     br
     |   Cookie: #{current_user.visit_token}
     br
