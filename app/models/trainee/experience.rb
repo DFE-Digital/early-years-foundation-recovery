@@ -1,5 +1,6 @@
 module Trainee
   class Experience < Dry::Struct
+    attribute :id,   Types::Strict::String.constrained(filled: true)
     attribute :name, Types::Strict::String.constrained(filled: true)
 
     # @return [Array<Trainee::Authority>]

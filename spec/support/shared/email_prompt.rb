@@ -15,6 +15,7 @@ RSpec.shared_examples 'an email prompt' do |job_vars, mailer_vars|
   end
 
   it 'uses the correct template' do
+    included # verbose logging counts users
     email = instance_double(Mail::Message, deliver: nil)
 
     described_class.recipients.each do |recipient|
