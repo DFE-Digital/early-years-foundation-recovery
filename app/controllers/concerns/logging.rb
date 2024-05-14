@@ -6,11 +6,9 @@ module Logging
 private
 
   def log_caching
-    begin
-      yield
-    rescue HTTP::TimeoutError
-      Sentry.capture_message "Repopulating cache #{ENV['DOMAIN']}", level: :info
-      yield
-    end
+    yield
+  rescue HTTP::TimeoutError
+    Sentry.capture_message "Repopulating cache #{ENV['DOMAIN']}", level: :info
+    yield
   end
 end
