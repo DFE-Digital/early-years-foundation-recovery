@@ -185,7 +185,7 @@ GEM
     email_validator (2.2.4)
       activemodel
     erubi (1.12.0)
-    et-orbi (1.2.7)
+    et-orbi (1.2.11)
       tzinfo
     factory_bot (6.4.6)
       activesupport (>= 5.0.0)
@@ -205,8 +205,8 @@ GEM
       ffi (>= 1.0.0)
       rake
     foreman (0.87.2)
-    fugit (1.9.0)
-      et-orbi (~> 1, >= 1.2.7)
+    fugit (1.11.0)
+      et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -391,8 +391,8 @@ GEM
     puma (6.4.2)
       nio4r (~> 2.0)
     que (2.3.0)
-    que-scheduler (4.4.0)
-      activesupport (>= 5.0)
+    que-scheduler (5.1.0)
+      activesupport (>= 6.0)
       fugit (~> 1.1, >= 1.1.8)
       hashie (>= 3, < 6)
       que (>= 0.14, < 3.0.0)
