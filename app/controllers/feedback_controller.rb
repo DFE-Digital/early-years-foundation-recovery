@@ -28,14 +28,15 @@ private
     if content.last_feedback?
       redirect_to feedback_path('thank-you')
     elsif skip_next_question?
-      if content.next_item.last_feedback?
-        redirect_to feedback_path('thank-you')
-      else
-        redirect_to feedback_path(content.next_item.next_item.name)
-      end
+      redirect_to feedback_path(skip_to_question)
     else
       redirect_to feedback_path(content.next_item.name)
     end
+  end
+
+  # @return [String]
+  def skip_to_question
+    content.next_item.last_feedback? ? 'thank-you' : content.next_item.next_item.name
   end
 
   # @return [Boolean]

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Course feedback' do
   context 'with unauthenticated user' do
     include_context 'with automated path'
-    let(:fixture) { 'spec/support/ast/course-feedback.yml' }
+    let(:fixture) { 'spec/support/ast/course-feedback-guest.yml' }
 
     it 'returns to homepage once completed' do
       expect(page).to have_current_path '/feedback/thank-you'
@@ -13,8 +13,11 @@ describe 'Course feedback' do
     end
 
     it 'saves all answers' do
-      expect(Response.course_feedback.count).to be 8
-      expect(Response.course_feedback.first).to be_persisted
+      expect(Response.course_feedback.count).to be 7
+    end
+
+    it 'is linked to a visit not a user' do
+      expect(Response.course_feedback.first.user).not_to be_present
       expect(Response.course_feedback.first.visit).to be_present
     end
 
@@ -33,6 +36,7 @@ describe 'Course feedback' do
         visit '/feedback'
         click_on 'Update my feedback'
         expect(page).to have_current_path '/feedback/feedback-radio-only'
+        expect(page).to have_checked_field 'Option 1'
       end
     end
   end
@@ -40,7 +44,7 @@ describe 'Course feedback' do
   context 'with authenticated user' do
     include_context 'with user'
     include_context 'with automated path'
-    let(:fixture) { 'spec/support/ast/course-feedback.yml' }
+    let(:fixture) { 'spec/support/ast/course-feedback-user.yml' }
 
     it 'returns to modules page once completed' do
       expect(page).to have_current_path '/feedback/thank-you'
@@ -52,7 +56,10 @@ describe 'Course feedback' do
 
     it 'saves all answers' do
       expect(Response.course_feedback.count).to be 8
-      expect(Response.course_feedback.first).to be_persisted
+    end
+
+    it 'is linked to a user not a visit' do
+      expect(Response.course_feedback.first.visit).not_to be_present
       expect(Response.course_feedback.first.user).to be_present
     end
 
@@ -71,6 +78,7 @@ describe 'Course feedback' do
         visit '/feedback'
         click_on 'Update my feedback'
         expect(page).to have_current_path '/feedback/feedback-radio-only'
+        expect(page).to have_checked_field 'Option 1'
       end
     end
   end

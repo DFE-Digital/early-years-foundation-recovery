@@ -17,8 +17,7 @@ class Guest < Dry::Struct
   # @param question [Training::Question]
   # @return [Boolean]
   def skip_question?(question)
-    question.name.eql?('prevent-from-completing-training') ||
-      (question.skippable? && response_for_shared(question).responded?)
+    question.skippable? || question.name.eql?('prevent-from-completing-training')
   end
 
   # @param content [Training::Question] feedback questions
@@ -35,10 +34,15 @@ class Guest < Dry::Struct
 
   # @return [Boolean]
   def completed_course_feedback?
-    responses.count.eql? Course.config.feedback_questions.count
+    guest_questions.count.eql?(responses.count)
   end
 
 private
+
+  # @return [Array<Training::Question>]
+  def guest_questions
+    Course.config.feedback_questions.reject { |question| skip_question?(question) }
+  end
 
   # @return [Response::ActiveRecord_Relation]
   def responses
