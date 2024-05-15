@@ -84,8 +84,9 @@ Rails.application.routes.draw do
     end
   end
 
-  post 'change', to: 'hook#change'
+  post 'change',  to: 'hook#change'
   post 'release', to: 'hook#release'
+  post 'notify',  to: 'hook#notify' # if Rails.application.live?
 
   get 'about-training', to: 'about#course', as: :course_overview
   get 'about/the-experts', to: 'about#experts', as: :experts
