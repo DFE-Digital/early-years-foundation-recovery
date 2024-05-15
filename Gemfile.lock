@@ -298,7 +298,7 @@ GEM
       bindata
       faraday (~> 2.0)
       faraday-follow_redirects
-    jwt (2.8.0)
+    jwt (2.8.1)
       base64
     language_server-protocol (3.17.0.3)
     loofah (2.22.0)
