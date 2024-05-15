@@ -63,5 +63,14 @@ RSpec.describe NotifyMailer, type: :mailer do
         expect { delivery.deliver!(mail) }.to output(/This is a GOV.UK Notify email with template/).to_stdout_from_any_process
       end
     end
+
+    context 'when an email is invalid' do
+      # known issue
+      let(:user) { create(:user, email: 'first.last@example.org.uk.') }
+
+      it 'skips' do
+        expect(delivery.deliver!(mail)).to eq :skipped_due_to_error
+      end
+    end
   end
 end

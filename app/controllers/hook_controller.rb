@@ -1,7 +1,6 @@
-# TODO: version history, content delta, author history, publish history
 class HookController < ApplicationController
   before_action :authenticate_hook!
-  skip_before_action :verify_authenticity_token, only: %i[release change]
+  skip_before_action :verify_authenticity_token
 
   # @note
   #   Production deployment via Delivery API
