@@ -19,11 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.deployment }}
     steps:
-      - name: Integration mailer test
+      - name: Mock callback
         run: |
           curl \
             --request POST \
             --header 'BOT: ${{ secrets.BOT_TOKEN }}' \
             --header 'Content-type: application/json' \
             --data '{"to": "${{ inputs.email }}"}' \
-            '${{ vars.WEBAPP_CONFIG_DOMAIN }}/notify'
+            'https://${{ vars.WEBAPP_CONFIG_DOMAIN }}/notify'
