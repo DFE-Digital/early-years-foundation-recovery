@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     get 'check_session_timeout', to: 'timeout#check'
     get 'extend_session', to: 'timeout#extend'
     get 'users/timeout', to: 'timeout#timeout_user'
-    get '/users/sign_out', to: 'users/sessions#destroy'
+    get 'users/sign_out', to: 'users/sessions#destroy'
     get 'users/review', to: 'users/sessions#sign_in_test_user' unless Rails.application.live?
   end
 
@@ -44,18 +44,11 @@ Rails.application.routes.draw do
   end
 
   resource :user, controller: :user, only: %i[show], path: 'my-account' do
-    get 'edit-email'
-    get 'edit-password'
-    patch 'update-email'
-    patch 'update-password'
-    get 'check-email-confirmation'
-    get 'check-email-password-reset'
     get 'early-years-experience'
     get 'edit-training-emails'
     patch 'update-training-emails'
 
     resource :close_account, only: %i[update show], path: 'close' do
-      get 'reset-password'
       get 'edit-reason'
       patch 'update-reason'
       get 'confirm'
@@ -74,7 +67,7 @@ Rails.application.routes.draw do
   scope module: 'training' do
     resources :modules, only: %i[show], as: :training_modules do
       constraints proc { Rails.application.preview? || Rails.application.debug? } do
-        get '/structure', to: 'debug#show'
+        get 'structure', to: 'debug#show'
       end
 
       resources :pages, only: %i[index show], path: 'content-pages'
@@ -84,8 +77,9 @@ Rails.application.routes.draw do
     end
   end
 
-  post 'change', to: 'hook#change'
+  post 'change',  to: 'hook#change'
   post 'release', to: 'hook#release'
+  post 'notify',  to: 'hook#notify' # if Rails.application.live?
 
   get 'about-training', to: 'about#course', as: :course_overview
   get 'about/the-experts', to: 'about#experts', as: :experts

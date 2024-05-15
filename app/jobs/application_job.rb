@@ -2,20 +2,21 @@ class ApplicationJob < Que::Job
   class DuplicateJobError < StandardError
   end
 
-  # We are checking for duplicate jobs to prevent undesirable mulitple actions in the event of blocked or slow jobs
+  # Prevent duplicates
   #
   # @return [void]
   def run(*)
     start_time = Time.zone.now
-    log "#{self.class.name} running"
+    log 'running'
 
     if duplicate_job_queued?
-      raise DuplicateJobError, "#{self.class.name} already queued"
+      log 'already queued'
+      raise DuplicateJobError, 'already queued'
     elsif block_given?
       yield
     end
 
-    log "#{self.class.name} finished in #{(Time.zone.now - start_time).round(2)} seconds"
+    log "finished in #{(Time.zone.now - start_time).round(2)} seconds"
   end
 
 private
@@ -28,12 +29,13 @@ private
   # @param error [Error]
   # @return [void]
   def handle_error(error)
-    log("#{self.class.name} failed with '#{error.message}'")
+    log("failed with '#{error.message}'")
   end
 
   # @return [String]
   def log(message)
-    Sentry.capture_message(message, level: :info) if Rails.application.live?
+    message = "#{ENV['DOMAIN']} - #{self.class.name} #{message}"
+    Sentry.capture_message(message, level: :info) if Rails.env.production?
 
     if ENV['RAILS_LOG_TO_STDOUT'].present?
       Rails.logger.info(message)
