@@ -30,6 +30,9 @@ private
   # @return [void]
   def handle_error(error)
     log("failed with '#{error.message}'")
+    case error
+    when DuplicateJobError then expire
+    end
   end
 
   # @return [String]
