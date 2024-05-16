@@ -10,7 +10,7 @@ class ApplicationJob < Que::Job
     log 'running'
 
     if duplicate_job_queued?
-      log 'already queued'
+      log 'already queued', :warn
       raise DuplicateJobError, 'already queued'
     elsif block_given?
       yield
@@ -29,14 +29,16 @@ private
   # @param error [Error]
   # @return [void]
   def handle_error(error)
-    log("failed with '#{error.message}'")
+    log "failed with '#{error.message}'", :warn
     case error
     when DuplicateJobError then expire
     end
   end
 
+  # @param message [String]
+  # @param level [Symbol]
   # @return [String]
-  def log(message)
+  def log(message, level = :info)
     message = "#{ENV['DOMAIN']} - #{self.class.name} #{message}"
     Sentry.capture_message(message, level: :info) if Rails.env.production?
 
