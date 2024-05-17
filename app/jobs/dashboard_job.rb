@@ -10,7 +10,7 @@ class DashboardJob < ApplicationJob
   # @param upload [Boolean] defaults to true in production or if $DASHBOARD_UPDATE exists
   def run(upload: Rails.application.dashboard?)
     super do
-      log "DashboardJob: Running upload=#{upload}"
+      log "upload=#{upload}"
 
       Dashboard.new(path: build_dir).call(upload: upload, clean: true)
     end

@@ -3,7 +3,7 @@ class ContentCheckJob < ApplicationJob
   # @return [Boolean]
   def run(*)
     Training::Module.cache.clear
-    log "#{self.class.name}: Running in '#{env}' via '#{api}'"
+    log "Running in '#{env}' via '#{api}'"
     valid?
   end
 
@@ -17,7 +17,7 @@ private
       log Training::Module.cache.size # should be larger than 0
 
       unless check.valid?
-        log "ContentCheckJob: #{mod.name} in '#{env}' via '#{api}' is not valid", :warn
+        log "#{mod.name} in '#{env}' via '#{api}' is not valid", :warn
       end
 
       check.valid?
