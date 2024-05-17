@@ -6,6 +6,7 @@ class PagesController < ApplicationController
   def show
     if page.present?
       track 'static_page'
+      log_caching { render :show }
     else
       render 'errors/not_found', status: :not_found
     end
