@@ -40,7 +40,7 @@ private
   # @return [String]
   def log(message, level = :info)
     message = "#{ENV['DOMAIN']} - #{self.class.name} #{message}"
-    Sentry.capture_message(message, level: :info) if Rails.env.production?
+    Sentry.capture_message(message, level: level) if Rails.env.production?
 
     if ENV['RAILS_LOG_TO_STDOUT'].present?
       Rails.logger.info(message)

@@ -11,5 +11,5 @@ class NotifyDelivery < GovukNotifyRails::Delivery
 end
 
 ActionMailer::Base.add_delivery_method(
-  :govuk_notify, NotifyDelivery, api_key: Rails.application.config.notify_token,
+  :govuk_notify, NotifyDelivery, api_key: Rails.application.config.notify_token
 )
