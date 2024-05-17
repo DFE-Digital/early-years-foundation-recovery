@@ -5,10 +5,12 @@ module Logging
 
 private
 
+  # @yield [nil]
   def log_caching
     yield
   rescue HTTP::TimeoutError
-    Sentry.capture_message "Repopulating cache #{ENV['DOMAIN']}", level: :info
+    message = "Repopulating cache #{ENV['ENVIRONMENT']} #{self.class.name}"
+    Sentry.capture_message message, level: :info
     yield
   end
 end
