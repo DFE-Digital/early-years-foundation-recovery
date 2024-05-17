@@ -46,9 +46,6 @@ SitemapGenerator::Sitemap.create do
     add about_path(mod.name)
   end
 
-  # devise
-  add check_email_confirmation_user_path
-  add check_email_password_reset_user_path
   add new_user_session_path
 
   # private pages
@@ -58,7 +55,6 @@ SitemapGenerator::Sitemap.create do
   add user_path
 
   # edit registration/account
-  add edit_password_user_path
   add edit_registration_terms_and_conditions_path
   add edit_registration_name_path # unless Rails.application.gov_one_login?
   add edit_registration_setting_type_path

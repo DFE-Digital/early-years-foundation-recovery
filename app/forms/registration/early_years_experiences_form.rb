@@ -4,7 +4,7 @@ module Registration
 
     validates :early_years_experience, presence: true
 
-    # @return [Trainee::Experience]
+    # @return [Array<Trainee::Experience>]
     def early_years_experiences
       Trainee::Experience.all
     end

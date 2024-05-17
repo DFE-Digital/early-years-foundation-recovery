@@ -12,8 +12,9 @@ class ApplicationController < ActionController::Base
 
   default_form_builder ::FormBuilder
 
-  include Tracking
   include Auditing
+  include Logging
+  include Tracking
 
   def authenticate_registered_user!
     authenticate_user! unless user_signed_in?
