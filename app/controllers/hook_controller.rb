@@ -42,7 +42,7 @@ class HookController < ApplicationController
   # @see https://docs.notifications.service.gov.uk/ruby.html#delivery-receipts
   def notify
     user = User.find_by(email: payload['to'])
-    user.update!(notify_callback: payload)
+    user.update!(notify_callback: payload) if user
     render json: { status: 'callback received' }, status: :ok
   end
 

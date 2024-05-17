@@ -7,10 +7,10 @@ class NewModuleMailJob < MailJob
   # @param release_id [Integer]
   def run(release_id)
     super do
-      log "Cache key: #{Training::Module.cache_key}"
-      log 'Recalculating key...'
+      log "cache key #{Training::Module.cache_key}"
+      log 'recalculating key...'
       Training::Module.reset_cache_key!
-      log "Cache key: #{Training::Module.cache_key}"
+      log "cache key #{Training::Module.cache_key}"
 
       return :no_new_module unless new_module_published?
 
