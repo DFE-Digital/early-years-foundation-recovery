@@ -5,6 +5,7 @@ class HomeController < ApplicationController
 
   def index
     track('home_page')
+    log_caching { render :index }
   end
 
   def show
