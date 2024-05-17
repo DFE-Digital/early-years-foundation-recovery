@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_08_142000) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_15_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -98,11 +98,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_08_142000) do
     t.check_constraint "array_ndims(worker_priorities) = 1 AND array_length(worker_priorities, 1) IS NOT NULL", name: "valid_worker_priorities"
   end
 
-  create_table "que_scheduler_audit", primary_key: "scheduler_job_id", id: :bigint, default: nil, comment: "7", force: :cascade do |t|
+  create_table "que_scheduler_audit", primary_key: "scheduler_job_id", id: :bigint, default: nil, comment: "8", force: :cascade do |t|
     t.timestamptz "executed_at", null: false
   end
 
-  create_table "que_scheduler_audit_enqueued", id: false, force: :cascade do |t|
+  create_table "que_scheduler_audit_enqueued", force: :cascade do |t|
     t.bigint "scheduler_job_id", null: false
     t.string "job_class", limit: 255, null: false
     t.string "queue", limit: 255
@@ -214,6 +214,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_08_142000) do
     t.boolean "early_years_emails"
     t.string "gov_one_id"
     t.string "early_years_experience"
+    t.jsonb "notify_callback"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["gov_one_id"], name: "index_users_on_gov_one_id", unique: true

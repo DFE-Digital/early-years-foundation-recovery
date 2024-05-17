@@ -1,0 +1,29 @@
+---
+# ------------------------------------------------------------------------------
+#
+name: Notify callback simulator
+on:
+  workflow_dispatch:
+    inputs:
+      deployment:
+        description: development, staging, production
+        type: string
+        default: development
+      email:
+        description: User email address
+        type: string
+
+jobs:
+  test:
+    name: webhook
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.deployment }}
+    steps:
+      - name: Mock callback
+        run: |
+          curl \
+            --request POST \
+            --header 'BOT: ${{ secrets.BOT_TOKEN }}' \
+            --header 'Content-type: application/json' \
+            --data '{"to": "${{ inputs.email }}"}' \
+            'https://${{ vars.WEBAPP_CONFIG_DOMAIN }}/notify'

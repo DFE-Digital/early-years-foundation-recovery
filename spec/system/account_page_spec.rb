@@ -43,16 +43,14 @@ RSpec.describe 'Account page', type: :system do
       click_button 'Continue'
       expect(page).to have_current_path '/registration/early-years-experience/edit'
 
-      # choose 'Not applicable'
-      choose 'Between 6 and 9 years'
+      choose 'Not applicable'
       click_button 'Continue'
 
       expect(page).to have_current_path '/my-account'
 
       expect(page).to have_text 'DfE'
       expect(page).to have_text 'Developer'
-      # expect(page).to have_text 'Not applicable'
-      expect(page).to have_text 'Between 6 and 9 years'
+      expect(page).to have_text 'Not applicable'
     end
   end
 end

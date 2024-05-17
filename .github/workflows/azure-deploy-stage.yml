@@ -123,6 +123,7 @@ jobs:
                 EDITOR=vi \
                 RAILS_ENV=production \
                 RAILS_LOG_TO_STDOUT=true \
+                ENVIRONMENT=${{ vars.ENVIRONMENT }} \
                 DOMAIN=${{ vars.WEBAPP_CONFIG_DOMAIN }} \
                 GOOGLE_CLOUD_BUCKET=${{ vars.WEBAPP_CONFIG_GOOGLE_CLOUD_BUCKET }} \
                 RAILS_MASTER_KEY=${{ secrets.WEBAPP_CONFIG_RAILS_MASTER_KEY }} \

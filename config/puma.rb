@@ -43,11 +43,11 @@ preload_app!
 plugin :tmp_restart
 
 on_worker_boot do
-  Sentry.capture_message "EYFS booting #{ENV['DOMAIN']}"
+  Sentry.capture_message "EYFS booting #{ENV['DOMAIN']}", level: :info
 end
 
 on_restart do
-  Sentry.capture_message "EYFS restarting #{ENV['DOMAIN']}"
+  Sentry.capture_message "EYFS restarting #{ENV['DOMAIN']}", level: :info
 end
 
 raise_exception_on_sigterm do
