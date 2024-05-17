@@ -40,7 +40,10 @@ module EarlyYearsFoundationRecovery
 
     config.google_cloud_bucket       = ENV.fetch('GOOGLE_CLOUD_BUCKET', '#GOOGLE_CLOUD_BUCKET_env_var_missing')
     config.dashboard_update_interval = ENV.fetch('DASHBOARD_UPDATE_INTERVAL', '0 0 * * *') # Midnight daily
-    config.mail_job_interval         = ENV.fetch('MAIL_JOB_INTERVAL', '0 12 * * *')        # Noon daily
+
+    # Notify
+    config.notify_token       = ENV.fetch('GOVUK_NOTIFY_API_KEY', credentials.notify_api_key)
+    config.mail_job_interval  = ENV.fetch('MAIL_JOB_INTERVAL', '0 12 * * *') # Noon daily
 
     config.user_password = ENV.fetch('USER_PASSWORD', 'Str0ngPa$$w0rd12')
     config.bot_token = ENV['BOT_TOKEN']

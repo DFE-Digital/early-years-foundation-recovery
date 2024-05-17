@@ -1,24 +1,18 @@
 class NotifyMailer < GovukNotifyRails::Mailer
-  ACCOUNT_CLOSED_TEMPLATE_ID = '0a4754ee-6175-444c-98a1-ebef0b14e7f7'.freeze
-  ACCOUNT_CLOSED_INTERNAL_TEMPLATE_ID = 'a2dba0ef-84f1-4b4d-b50a-ce953050798e'.freeze
-  ACTIVATION_TEMPLATE_ID = 'd6ab2e3b-923e-429e-abd2-cfe7be0e9193'.freeze
-  UNLOCK_TEMPLATE_ID = 'e18e8419-cfcc-4fcb-abdb-84f932f3cf55'.freeze
-  COMPLETE_REGISTRATION_TEMPLATE_ID = 'b960eb6a-d183-484b-ac3b-93ae01b3cee1'.freeze
-  START_TRAINING_TEMPLATE_ID = 'b3c2e4ff-da06-4672-8941-b2f50d37eadc'.freeze
-  CONTINUE_TRAINING_TEMPLATE_ID = '83dd3dc6-c5de-4e32-a6b4-25c76e805d87'.freeze
-  NEW_MODULE_TEMPLATE_ID = '2352b6ce-a098-47f0-870a-286308b9798f'.freeze
+  # @return [Hash<Symbol => String>]
+  TEMPLATE_IDS = {
+    account_closed: '0a4754ee-6175-444c-98a1-ebef0b14e7f7',
+    account_closed_internal: 'a2dba0ef-84f1-4b4d-b50a-ce953050798e',
+    complete_registration: 'b960eb6a-d183-484b-ac3b-93ae01b3cee1',
+    continue_training: '83dd3dc6-c5de-4e32-a6b4-25c76e805d87',
+    new_module: '2352b6ce-a098-47f0-870a-286308b9798f',
+    start_training: 'b3c2e4ff-da06-4672-8941-b2f50d37eadc',
+  }.freeze
 
-  include Devise::Controllers::UrlHelpers
-
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.notify_mailer.test_email.subject
-  #
-
+  # @param record [User]
+  # @return [Mail::Message]
   def account_closed(record)
-    set_template(ACCOUNT_CLOSED_TEMPLATE_ID)
-
+    set_template TEMPLATE_IDS[:account_closed]
     set_personalisation(
       name: record.name,
       email: record.email,
@@ -26,9 +20,11 @@ class NotifyMailer < GovukNotifyRails::Mailer
     mail(to: record.email)
   end
 
+  # @param record [User]
+  # @param user_email_address [String]
+  # @return [Mail::Message]
   def account_closed_internal(record, user_email_address)
-    set_template(ACCOUNT_CLOSED_INTERNAL_TEMPLATE_ID)
-
+    set_template TEMPLATE_IDS[:account_closed_internal]
     set_personalisation(
       email: record.email,
       user_email_address: user_email_address,
@@ -36,28 +32,31 @@ class NotifyMailer < GovukNotifyRails::Mailer
     mail(to: record.email)
   end
 
-  # @param [User] record
+  # @param record [User]
+  # @return [Mail::Message]
   def complete_registration(record)
-    set_template(COMPLETE_REGISTRATION_TEMPLATE_ID)
+    set_template TEMPLATE_IDS[:complete_registration]
     set_personalisation(
       url: root_url,
     )
     mail(to: record.email)
   end
 
-  # @param [User] record
+  # @param record [User]
+  # @return [Mail::Message]
   def start_training(record)
-    set_template(START_TRAINING_TEMPLATE_ID)
+    set_template TEMPLATE_IDS[:start_training]
     set_personalisation(
       url: root_url,
     )
     mail(to: record.email)
   end
 
-  # @param [User] record
-  # @param [Training::Module] mod
+  # @param record [User]
+  # @param mod [Training::Module]
+  # @return [Mail::Message]
   def continue_training(record, mod)
-    set_template(CONTINUE_TRAINING_TEMPLATE_ID)
+    set_template TEMPLATE_IDS[:continue_training]
     set_personalisation(
       mod_number: mod.position,
       mod_name: mod.title,
@@ -66,10 +65,11 @@ class NotifyMailer < GovukNotifyRails::Mailer
     mail(to: record.email)
   end
 
-  # @param [User] record
-  # @param [Training::Module] mod
+  # @param record [User]
+  # @param mod [Training::Module]
+  # @return [Mail::Message]
   def new_module(record, mod)
-    set_template(NEW_MODULE_TEMPLATE_ID)
+    set_template TEMPLATE_IDS[:new_module]
     set_personalisation(
       mod_number: mod.position,
       mod_name: mod.title,

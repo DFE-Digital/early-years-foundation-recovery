@@ -2,6 +2,8 @@
 #
 # Notify users of the latest published module and record the release timestamp
 class NewModuleMailJob < MailJob
+  self.maximum_retry_count = 0
+
   # @param release_id [Integer]
   def run(release_id)
     super do
