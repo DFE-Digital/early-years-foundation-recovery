@@ -35,7 +35,8 @@
         - row.with_value(text: current_user.role_name, classes: %w[data-hj-suppress])
       - other_details.with_row do |row|
         - row.with_key { t('my_account.early_years_experience') }
-        - row.with_value(text: current_user.early_years_experience, classes: %w[data-hj-suppress])
+        /- row.with_value(text: current_user.early_years_experience, classes: %w[data-hj-suppress])
+        - row.with_value(text: early_years_experience_patch, classes: %w[data-hj-suppress])
 
     = govuk_summary_list do |email_preferences|
       - email_preferences.with_row do |row|

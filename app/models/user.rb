@@ -9,6 +9,7 @@ class User < ApplicationRecord
     setting_type_other
     role_type
     role_type_other
+    early_years_experience
     registration_complete
     private_beta_registration_complete
     registration_complete_any?

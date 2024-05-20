@@ -30,7 +30,6 @@ $light-blue: tint($department-for-education-websafe, 90%);
 @import 'interruption';
 @import 'quote';
 @import 'icons';
-@import 'modal';
 @import 'autocomplete';
 @import 'assets-page';
 
@@ -196,12 +195,6 @@ ul>li>ul>li {
 .form-container {
   padding: 30px;
   background: #f3f2f1;
-}
-
-#js-timeout-warning:focus {
-  outline: 3px solid #ffdd00;
-  outline-offset: 0;
-  box-shadow: inset 0 0 0 2px;
 }
 
 .govuk-footer__copyright-logo {

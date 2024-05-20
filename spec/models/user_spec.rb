@@ -138,6 +138,7 @@ RSpec.describe User, type: :model do
              private_beta_registration_complete: true,
              id: 1,
              local_authority: 'Watford Borough Council',
+             early_years_experience: 'na',
              module_time_to_completion: {
                alpha: 4,
                bravo: 2,
@@ -149,6 +150,7 @@ RSpec.describe User, type: :model do
              local_authority: 'Leeds City Council',
              role_type: 'Trainer or lecturer',
              role_type_other: nil,
+             early_years_experience: '2-5',
              module_time_to_completion: {
                alpha: 1,
                bravo: 0,
@@ -173,11 +175,11 @@ RSpec.describe User, type: :model do
 
     it 'exports formatted attributes as CSV' do
       expect(described_class.to_csv(batch_size: 2)).to eq <<~CSV
-        id,local_authority,setting_type,setting_type_other,role_type,role_type_other,registration_complete,private_beta_registration_complete,registration_complete_any?,registered_at,terms_and_conditions_agreed_at,gov_one?,module_1_time,module_2_time,module_3_time
-        1,Watford Borough Council,,DfE,other,Developer,true,true,true,,2000-01-01 00:00:00,true,4,2,0
-        2,Leeds City Council,,DfE,Trainer or lecturer,,true,false,true,,2000-01-01 00:00:00,true,1,0,
-        3,City of London,,DfE,other,Developer,true,false,true,2023-01-12 10:15:59,2000-01-01 00:00:00,true,3,,
-        4,,,,,,false,false,false,,2000-01-01 00:00:00,true,,,
+        id,local_authority,setting_type,setting_type_other,role_type,role_type_other,early_years_experience,registration_complete,private_beta_registration_complete,registration_complete_any?,registered_at,terms_and_conditions_agreed_at,gov_one?,module_1_time,module_2_time,module_3_time
+        1,Watford Borough Council,,DfE,other,Developer,na,true,true,true,,2000-01-01 00:00:00,true,4,2,0
+        2,Leeds City Council,,DfE,Trainer or lecturer,,2-5,true,false,true,,2000-01-01 00:00:00,true,1,0,
+        3,City of London,,DfE,other,Developer,,true,false,true,2023-01-12 10:15:59,2000-01-01 00:00:00,true,3,,
+        4,,,,,,,false,false,false,,2000-01-01 00:00:00,true,,,
       CSV
     end
   end

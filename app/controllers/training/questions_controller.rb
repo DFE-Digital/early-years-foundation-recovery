@@ -23,7 +23,9 @@ module Training
 
     layout 'hero'
 
-    def show; end
+    def show
+      log_caching { render :show }
+    end
 
   private
 

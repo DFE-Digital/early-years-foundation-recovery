@@ -24,7 +24,7 @@ module Training
       elsif content.assessment_results?
         redirect_to training_module_assessment_path(mod.name, content.name)
       else
-        render_page
+        log_caching { render_page }
       end
     end
 

@@ -280,17 +280,6 @@ en:
   my_learning_log:
     title: Learning log
 
-  # /user/timeout
-  # and modal
-  timeout:
-    title: User timeout
-    heading: You're about to be signed out
-    body: Your progress through the training has been saved. Other changes made to your account or learning log will not be saved.
-    noscript: |
-      For security, you'll be signed out at %{sign_out_time}.
-
-      To stay signed in, continue through the training or refresh the page.
-
   # Account management ---------------------------------------------------------
 
   # /my-account
@@ -351,61 +340,11 @@ en:
   account_reset:
     title: Reset password
 
-  # /my-account/check-email-password-reset
-  account_reset_check:
-    title: Check email password reset
-    summary: Problems with the email?
-    intro: |
-      # Check your email
-
-      We have sent you an email with instructions for how to reset your password.
-
-      If you have not received the email after a few minutes, please check your spam folder.
-
-  # /my-account/check-email-password-reset
-  # /my-account/check-email-confirmation
-  email_advice:
-    not_received: |
-      ### I haven’t received the email
-
-      Please wait a few minutes for the email to arrive.
-      If it doesn’t appear in your inbox, please check your spam or junk email folder.
-      If you still cannot see the email, we can send it again.
-
-      [Send me another email](%{link})
-    different: |
-      ### I have a different problem
-
-      For other problems with creating your account or signing in, please {external}[contact us](%{link}){/external}.
-    no_access: |
-      ### I don’t have access to the email address I used to register
-
-      You can set up your account using a different email address.
-
-      Please [create a new account](%{link})
-
   account_unlock:
     title: Resend unlock instructions
 
   account_confirm:
     title: Resend your confirmation
-
-  # /my-account/check-email-confirmation
-  account_confirm_check:
-    title: Check email confirmation
-    summary: Problems with the activation email?
-    intro: |
-      # Check your email
-
-      We will check if a training account has been created using the email address you entered.
-      If it has, you will receive an email shortly with instructions for how to verify your email address.
-    recipient: |
-      We sent the email to:
-
-      **%{recipient}**
-
-      To continue setting up your training account you must click the link in the email.
-      If you have not received the email after a few minutes, please check your spam folder.
 
   account_login:
     title: Sign in

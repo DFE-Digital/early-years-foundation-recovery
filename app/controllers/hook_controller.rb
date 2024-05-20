@@ -1,7 +1,6 @@
-# TODO: version history, content delta, author history, publish history
 class HookController < ApplicationController
   before_action :authenticate_hook!
-  skip_before_action :verify_authenticity_token, only: %i[release change]
+  skip_before_action :verify_authenticity_token
 
   # @note
   #   Production deployment via Delivery API
@@ -38,6 +37,13 @@ class HookController < ApplicationController
     ContentCheckJob.enqueue
 
     render json: { status: 'content change received' }, status: :ok
+  end
+
+  # @see https://docs.notifications.service.gov.uk/ruby.html#delivery-receipts
+  def notify
+    user = User.find_by(email: payload['to'])
+    user.update!(notify_callback: payload) if user
+    render json: { status: 'callback received' }, status: :ok
   end
 
 private

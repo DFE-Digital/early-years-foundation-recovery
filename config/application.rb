@@ -40,19 +40,19 @@ module EarlyYearsFoundationRecovery
 
     config.google_cloud_bucket       = ENV.fetch('GOOGLE_CLOUD_BUCKET', '#GOOGLE_CLOUD_BUCKET_env_var_missing')
     config.dashboard_update_interval = ENV.fetch('DASHBOARD_UPDATE_INTERVAL', '0 0 * * *') # Midnight daily
-    config.mail_job_interval         = ENV.fetch('MAIL_JOB_INTERVAL', '0 12 * * *')        # Noon daily
+
+    # Notify
+    config.notify_token       = ENV.fetch('GOVUK_NOTIFY_API_KEY', credentials.notify_api_key)
+    config.mail_job_interval  = ENV.fetch('MAIL_JOB_INTERVAL', '0 12 * * *') # Noon daily
 
     config.user_password = ENV.fetch('USER_PASSWORD', 'Str0ngPa$$w0rd12')
     config.bot_token = ENV['BOT_TOKEN']
     config.google_analytics_tracking_id = ENV.fetch('TRACKING_ID', '#TRACKING_ID_env_var_missing')
     config.hotjar_site_id = ENV.fetch('HOTJAR_SITE_ID', '#HOTJAR_SITE_ID_env_var_missing')
 
-    # Timeout
-    # user_timeout_warning_minutes and user_timeout_modal_visible value combined must be lower than user_timeout_minutes
-    config.unlock_in_minutes            = ENV.fetch('UNLOCK_IN_MINUTES', '120').to_i
-    config.user_timeout_minutes         = ENV.fetch('TIMEOUT_MINUTES', '60').to_i
-    config.user_timeout_warning_minutes = ENV.fetch('TIMEOUT_WARNING_MINUTES', '55').to_i
-    config.user_timeout_modal_visible   = ENV.fetch('TIMEOUT_MODAL_VISIBLE', '5').to_i
+    # Devise
+    config.unlock_in_minutes  = ENV.fetch('UNLOCK_IN_MINUTES', '120').to_i
+    config.timeout_in_minutes = ENV.fetch('TIMEOUT_IN_MINUTES', '60').to_i
 
     # Contentful
     config.contentful_space                   = ENV.fetch('CONTENTFUL_SPACE', credentials.dig(:contentful, :space))
