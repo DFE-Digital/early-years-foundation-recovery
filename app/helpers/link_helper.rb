@@ -77,7 +77,7 @@ module LinkHelper
       user: current_user,
       mod: mod,
       content: content,
-      assessment: assessment_progress_service(mod),
+      assessment: (mod.is_a?(Training::Module) ? assessment_progress_service(mod) : nil),
     )
   end
 

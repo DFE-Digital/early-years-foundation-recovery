@@ -39,8 +39,10 @@ module Training
       end
     end
 
+    # Module content must not be shared and have unique names
+    #
     # @param id [String]
-    # @return [Training::Module]
+    # @return [Training::Module] first result
     def self.by_content_id(id)
       ordered.find { |mod| mod.content.find { |content| content.id.eql?(id) } }
     end

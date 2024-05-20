@@ -27,21 +27,9 @@ private
   def redirect
     if content.last_feedback?
       redirect_to feedback_path('thank-you')
-    elsif skip_next_question?
-      redirect_to feedback_path(skip_to_question)
     else
-      redirect_to feedback_path(content.next_item.name)
+      redirect_to feedback_path(helpers.next_page.name)
     end
-  end
-
-  # @return [String]
-  def skip_to_question
-    content.next_item.last_feedback? ? 'thank-you' : content.next_item.next_item.name
-  end
-
-  # @return [Boolean]
-  def skip_next_question?
-    current_user.skip_question?(content.next_item)
   end
 
   # @return [Boolean]

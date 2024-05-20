@@ -32,6 +32,11 @@ module Pagination
     parent.page_by_id(next_item_id) || self
   end
 
+  # @return [nil, Training::Page, Training::Video, Training::Question]
+  def next_next_item
+    parent.page_by_id(next_next_item_id)
+  end
+
   # @return [String]
   def previous_item_id
     parent.pages[content_index - 1].id
@@ -40,6 +45,11 @@ module Pagination
   # @return [String, nil]
   def next_item_id
     parent.pages[content_index + 1]&.id
+  end
+
+  # @return [String, nil]
+  def next_next_item_id
+    parent.pages[content_index + 2]&.id
   end
 
   # @return [Array<Training::Page, Training::Video, Training::Question>]

@@ -6,6 +6,7 @@
 module Training
   class ResponsesController < ApplicationController
     include Learning
+    include Pagination
 
     before_action :authenticate_registered_user!
 
@@ -64,16 +65,9 @@ module Training
 
       if content.formative_question?
         redirect_to training_module_question_path(mod.name, content.name)
-      elsif skip_next_question?
-        redirect_to training_module_page_path(mod.name, content.next_item.next_item.name)
       else
-        redirect_to training_module_page_path(mod.name, content.next_item.name)
+        redirect_to training_module_page_path(mod.name, helpers.next_page.name)
       end
-    end
-
-    # @return [Boolean]
-    def skip_next_question?
-      current_user.skip_question?(content.next_item)
     end
 
     # @return [Event] Update action

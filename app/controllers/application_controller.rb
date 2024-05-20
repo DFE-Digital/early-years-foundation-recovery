@@ -91,8 +91,11 @@ private
   # @see Auditing
   # @return [Boolean]
   def user_signed_in?
-    return false if current_user&.guest?
-    return true if bot?
+    if bot? || !current_user&.guest?
+      true
+    elsif current_user&.guest?
+      false
+    end
 
     super
   end

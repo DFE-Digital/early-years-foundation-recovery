@@ -10,23 +10,23 @@ class NextPageDecorator
   #   @return [User]
   option :user, Types.Instance(User), required: true
   # @!attribute [r] mod
-  #   @return [Training::Module]
-  option :mod, Types::TrainingModule, required: true
+  #   @return [Course, Training::Module]
+  option :mod, Types::Parent, required: true
   # @!attribute [r] content
   #   @return [Training::Page, Training::Question, Training::Video]
   option :content, Types::TrainingContent, required: true
   # @!attribute [r] assessment
   #   @return [AssessmentProgress]
-  option :assessment, required: true
+  option :assessment
 
   # @return [String]
   def name
     if content.interruption_page?
       mod.content_start.name
     elsif skip_next_question?
-      content.next_item.next_item.name
+      (mod.is_a?(Course) && next_item.last_feedback?) ? 'thank-you' : next_next_item.name
     else
-      content.next_item.name
+      next_item.name
     end
   end
 
@@ -82,7 +82,7 @@ private
 
   # @return [Boolean]
   def finish?
-    content.next_item.certificate?
+    next_item.certificate?
   end
 
   # @return [Boolean]
@@ -94,12 +94,12 @@ private
 
   # @return [Boolean]
   def test_finish?
-    content.next_item.assessment_results? && !disable_question_submission?
+    next_item.assessment_results? && !disable_question_submission?
   end
 
   # @return [Boolean]
   def missing?
-    content.next_item.eql?(content) && wip?
+    next_item.eql?(content) && wip?
   end
 
   # @return [Boolean]
@@ -120,6 +120,16 @@ private
   # @note only used if a skippable question follows a non-question
   # @return [Boolean]
   def skip_next_question?
-    user.skip_question?(content.next_item)
+    user.skip_question?(next_item)
+  end
+
+  # @return [Training::Page, Training::Question, Training::Video]
+  def next_next_item
+    content.with_parent(mod).next_next_item
+  end
+
+  # @return [Training::Page, Training::Question, Training::Video]
+  def next_item
+    content.with_parent(mod).next_item
   end
 end

@@ -14,6 +14,11 @@ class Guest < Dry::Struct
     true
   end
 
+  # @return [Boolean]
+  def course_started?
+    false
+  end
+
   # @param question [Training::Question]
   # @return [Boolean]
   def skip_question?(question)

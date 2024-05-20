@@ -24,15 +24,31 @@ RSpec.describe Pagination do
 
   describe '#section?' do
     it 'returns true if the page defines a section boundary' do
-      expect(page.section?).to eq(false)
-      expect(mod.page_by_name('1-2').section?).to eq(true)
+      expect(page).not_to be_section
+      expect(mod.page_by_name('1-2')).to be_section
     end
   end
 
   describe '#subsection?' do
     it 'returns true if the page defines a subsection boundary' do
-      expect(page.subsection?).to eq(false)
-      expect(mod.page_by_name('1-3-2').subsection?).to eq(true) # assessment subsection
+      expect(page).not_to be_subsection
+      expect(mod.page_by_name('1-3-2')).to be_subsection # assessment subsection
+    end
+  end
+
+  context '#with_parent' do
+    subject(:page) { mod.page_by_name('feedback-checkbox-other-or') }
+
+    let(:mod) { Training::Module.by_name(:bravo) }
+
+    it 'navigates shared content in the correct parent' do
+      expect(page.parent.name).to eq 'alpha'
+      expect(page.with_parent(mod).parent.name).to eq 'bravo'
+      expect(page.with_parent(mod).next_item.parent.name).to eq 'alpha'
+
+      expect(page.next_item.name).to eq 'feedback-skippable'
+      expect(page.with_parent(mod).next_item.name).to eq 'feedback-skippable'
+      expect(page.with_parent(mod).next_next_item.name).to eq '1-3-3-5-bravo'
     end
   end
 end
