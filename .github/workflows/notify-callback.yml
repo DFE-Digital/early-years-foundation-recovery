@@ -22,6 +22,7 @@ jobs:
       - name: Mock callback
         run: |
           curl \
+            --no-progress-meter \
             --request POST \
             --header 'BOT: ${{ secrets.BOT_TOKEN }}' \
             --header 'Content-type: application/json' \
