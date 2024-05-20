@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'home#index'
-  get 'health', to: 'home#show'
-  get 'audit', to: 'home#audit'
+  get 'health',     to: 'home#show'
+  get 'audit',      to: 'home#audit'
   get 'my-modules', to: 'learning#show' # @see User#course
 
   get '404', to: 'errors#not_found', via: :all
@@ -20,27 +20,22 @@ Rails.application.routes.draw do
                sign_out: 'sign-out',
              }
 
-  # @see TimeoutWarning js component
-  # @note these path names are required
   devise_scope :user do
-    get 'check_session_timeout', to: 'timeout#check'
-    get 'extend_session', to: 'timeout#extend'
-    get 'users/timeout', to: 'timeout#timeout_user'
     get 'users/sign_out', to: 'users/sessions#destroy'
-    get 'users/review', to: 'users/sessions#sign_in_test_user' unless Rails.application.live?
+    get 'users/review',   to: 'users/sessions#sign_in_test_user' unless Rails.application.live?
   end
 
   namespace :registration do
-    resource :terms_and_conditions, only: %i[edit update], path: 'terms-and-conditions'
-    resource :name, only: %i[edit update]
-    resource :setting_type, only: %i[edit update], path: 'setting-type'
-    resource :setting_type_other, only: %i[edit update], path: 'setting-type-other'
-    resource :local_authority, only: %i[edit update], path: 'local-authority'
-    resource :role_type, only: %i[edit update], path: 'role-type'
-    resource :role_type_other, only: %i[edit update], path: 'role-type-other'
+    resource :terms_and_conditions,   only: %i[edit update], path: 'terms-and-conditions'
+    resource :name,                   only: %i[edit update]
+    resource :setting_type,           only: %i[edit update], path: 'setting-type'
+    resource :setting_type_other,     only: %i[edit update], path: 'setting-type-other'
+    resource :local_authority,        only: %i[edit update], path: 'local-authority'
+    resource :role_type,              only: %i[edit update], path: 'role-type'
+    resource :role_type_other,        only: %i[edit update], path: 'role-type-other'
     resource :early_years_experience, only: %i[edit update], path: 'early-years-experience'
-    resource :training_emails, only: %i[edit update], path: 'training-emails'
-    resource :early_years_emails, only: %i[edit update], path: 'early-years-emails'
+    resource :training_emails,        only: %i[edit update], path: 'training-emails'
+    resource :early_years_emails,     only: %i[edit update], path: 'early-years-emails'
   end
 
   resource :user, controller: :user, only: %i[show], path: 'my-account' do
@@ -70,18 +65,18 @@ Rails.application.routes.draw do
         get 'structure', to: 'debug#show'
       end
 
-      resources :pages, only: %i[index show], path: 'content-pages'
-      resources :questions, only: %i[show], path: 'questionnaires'
-      resources :responses, only: %i[update]
-      resources :assessments, only: %i[show new], path: 'assessment-result'
+      resources :pages,       only: %i[index show], path: 'content-pages'
+      resources :questions,   only: %i[show],       path: 'questionnaires'
+      resources :assessments, only: %i[show new],   path: 'assessment-result'
+      resources :responses,   only: %i[update]
     end
   end
 
   post 'change',  to: 'hook#change'
   post 'release', to: 'hook#release'
-  post 'notify',  to: 'hook#notify' # if Rails.application.live?
+  post 'notify',  to: 'hook#notify'
 
-  get 'about-training', to: 'about#course', as: :course_overview
+  get 'about-training',    to: 'about#course',  as: :course_overview
   get 'about/the-experts', to: 'about#experts', as: :experts
   resources :about, only: %i[show], path: 'about'
 
