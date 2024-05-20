@@ -8,7 +8,7 @@ class NextPageDecorator
 
   # @!attribute [r] user
   #   @return [User]
-  option :user, Types.Instance(User), required: true
+  option :user, Types::User, required: true
   # @!attribute [r] mod
   #   @return [Course, Training::Module]
   option :mod, Types::Parent, required: true
