@@ -19,6 +19,11 @@ RSpec.describe 'Application configuration' do
     expect(config.contentful_management_access_token).not_to be_present # user specific
   end
 
+  it 'expires sessions after 24 hrs' do
+    expect(config.timeout_in_minutes).to eq 1440
+    expect(Devise.timeout_in.in_days).to eq 1.0
+  end
+
   it 'sets time zone' do
     expect(config.time_zone).to eq 'UTC'
   end
@@ -48,6 +53,7 @@ RSpec.describe 'Application configuration' do
         /health
         /change
         /release
+        /notify
       ]
     end
   end
