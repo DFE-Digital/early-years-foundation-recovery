@@ -72,9 +72,9 @@ Rails.application.routes.draw do
     end
   end
 
-  post 'change',  to: 'hook#change'
-  post 'release', to: 'hook#release'
-  post 'notify',  to: 'hook#notify'
+  post 'notify',  to: 'notify#update'
+  post 'change',  to: 'release#update'
+  post 'release', to: 'release#new'
 
   get 'about-training',    to: 'about#course',  as: :course_overview
   get 'about/the-experts', to: 'about#experts', as: :experts
