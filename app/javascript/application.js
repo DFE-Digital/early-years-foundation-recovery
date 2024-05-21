@@ -1,9 +1,7 @@
-import "@hotwired/turbo-rails";
-import "@fortawesome/fontawesome-free/js/all";
+import '@hotwired/turbo-rails';
+import '@fortawesome/fontawesome-free/js/all';
 
-import TimeoutWarning from "./timeout-warning";
-
-import "./controllers";
+import './controllers';
 
 import { initAll } from "govuk-frontend";
 
@@ -16,19 +14,8 @@ function nodeListForEach (nodes, callback) {
   }
 }
 
-
 /*
-Govuk Accordion component suffers from lag without the turbo listener
-*/
-document.addEventListener("turbo:load", function() {
+document.addEventListener('turbo:load', function() {
   initAll();
-
-  /*
-  timeout functionality
-  */
-  var $timeoutWarnings = document.querySelectorAll('[data-module="govuk-timeout-warning"]')
-
-  nodeListForEach($timeoutWarnings, function ($timeoutWarning) {
-    new TimeoutWarning($timeoutWarning).init()
-  });
 })
+*/

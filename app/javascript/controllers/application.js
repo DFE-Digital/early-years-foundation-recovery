@@ -1,4 +1,4 @@
-import { Application } from "@hotwired/stimulus"
+import { Application } from '@hotwired/stimulus'
 import Reveal from 'stimulus-reveal-controller'
 
 const application = Application.start()
