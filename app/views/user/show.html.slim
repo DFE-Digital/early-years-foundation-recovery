@@ -1,7 +1,8 @@
-= render 'debug'
-
 - content_for :page_title do
   = html_title t('my_account.title')
+
+- content_for :cta do
+  = render 'feedback/cta'
 
 .govuk-grid-row
   .govuk-grid-column-full
@@ -56,8 +57,8 @@
         - row.with_value(text: t(current_user.research_participant?, scope: 'my_account.research_preferences.preference'), classes: %w[data-hj-suppress])
         - row.with_action(text: t('my_account.research_preferences.link_text'), href: feedback_path(user_research_question.name))
 
+    = render 'debug'
+
     = m('my_account.closing.information')
     = govuk_button_link_to t('my_account.closing.button'), edit_reason_user_close_account_path
 
-- content_for :cta do
-  = render 'feedback/cta'

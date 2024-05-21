@@ -33,19 +33,18 @@ class Course < ContentfulModel::Base
     Types::EMPTY_ARRAY
   end
 
-  # @return [Array<Training::Question>]
-  def feedback
-    super.to_a
-  end
-
-  # @return [Array<Training::Question>] with parent
+  # @return [Array<Training::Question, Training::Page>]
   def pages
-    feedback.map do |question|
+    feedback.to_a.map do |question|
       question.define_singleton_method(:parent) { Course.config }
       question
     end
   end
-  alias_method :feedback_questions, :pages
+
+  # @return [Array<Training::Question>]
+  def feedback_questions
+    pages.select(&:feedback_question?)
+  end
 
   # @see Pagination
   # @return [Training::Question]

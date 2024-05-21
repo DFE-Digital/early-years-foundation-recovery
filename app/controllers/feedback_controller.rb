@@ -6,17 +6,25 @@ class FeedbackController < ApplicationController
   def index; end
 
   def show
-    if question_name.eql? 'thank-you'
+    if content_name.eql? 'thank-you'
       track_feedback_complete
       render :thank_you
     end
   end
 
   def update
-    if save_response!
+    if research_participation_updated?
+      if save_response!
+        flash[:success] = 'Your details have been updated'
+        redirect_to user_path
+      else
+        render :show, status: :unprocessable_entity
+      end
+
+    elsif save_response!
       feedback_cookie
       track_feedback_start
-      redirect
+      redirect_to feedback_path(helpers.next_page.name)
     else
       render :show, status: :unprocessable_entity
     end
@@ -24,12 +32,9 @@ class FeedbackController < ApplicationController
 
 private
 
-  def redirect
-    if content.last_feedback?
-      redirect_to feedback_path('thank-you')
-    else
-      redirect_to feedback_path(helpers.next_page.name)
-    end
+  # @return [Boolean]
+  def research_participation_updated?
+    current_user_response.question.skippable? && current_user_response.persisted?
   end
 
   # @return [Boolean]
@@ -46,9 +51,9 @@ private
     Course.config
   end
 
-  # @return [Training::Question]
+  # @return [Training::Question, Training::Page]
   def content
-    mod.page_by_name(question_name)
+    mod.page_by_name(content_name)
   end
 
   # @return [User, Guest, nil]
@@ -63,7 +68,7 @@ private
   end
 
   # @return [String]
-  def question_name
+  def content_name
     params[:id]
   end
 

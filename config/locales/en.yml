@@ -571,11 +571,6 @@ en:
       # You have already submitted feedback
 
       Thank you for helping to improve this training
-    # /feedback/thank-you
-    thank_you: |
-      # Thank you
-
-      Thank you for helping to improve this training
     # one-off question
     research: |
       Participation is entirely voluntary, and you can withdraw at any point before,

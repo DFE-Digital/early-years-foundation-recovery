@@ -65,5 +65,16 @@ RSpec.describe 'Account page', type: :system do
       expect(page).to have_text 'Developer'
       expect(page).to have_text 'Not applicable'
     end
+
+    it 'research participation preference' do
+      expect(page).to have_text 'You have chosen to participate in research.'
+      click_on 'Change research preferences'
+      expect(page).to have_current_path '/feedback/feedback-skippable'
+      choose 'Option 2'
+      click_button 'Next'
+      expect(page).to have_current_path '/my-account'
+      expect(page).to have_text 'You have chosen not to participate in research.'
+      expect(page).to have_text 'Your details have been updated'
+    end
   end
 end

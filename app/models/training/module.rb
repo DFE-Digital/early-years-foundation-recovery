@@ -90,7 +90,7 @@ module Training
 
     # @return [Hash{ Integer => Array<Training::Page, Training::Video, Training::Question> }]
     def content_sections
-      content.slice_before(&:section?).each.with_index(1).to_h.invert
+      @content_sections ||= content.slice_before(&:section?).each.with_index(1).to_h.invert
     end
 
     # @return [Hash{ Array<Integer> => Array<Training::Page, Training::Video, Training::Question> }]

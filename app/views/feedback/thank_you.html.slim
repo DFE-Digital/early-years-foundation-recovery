@@ -1,7 +1,8 @@
 .govuk-grid-row
   .govuk-grid-column-full
+    h1.govuk-heading-xl= content.heading
 
-    = m('feedback.thank_you', headings_start_with: 'xl')
+    = m(content.body)
 
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
 

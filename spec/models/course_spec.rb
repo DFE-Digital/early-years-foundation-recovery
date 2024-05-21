@@ -16,9 +16,14 @@ describe Course, type: :model do
       expect(course.internal_mailbox).to eq 'child-development.training@education.gov.uk'
     end
 
-    it 'feedback' do
-      expect(course.feedback.count).to eq 8
-      expect(course.feedback.first.page_type).to eq 'feedback'
+    it 'pages' do
+      expect(course.pages.count).to eq 9
+      expect(course.pages.first.page_type).to eq 'feedback'
+      expect(course.pages.last.page_type).to eq 'text_page'
+    end
+
+    it 'feedback_questions' do
+      expect(course.feedback_questions.count).to eq 8
     end
   end
 
@@ -30,7 +35,7 @@ describe Course, type: :model do
 
     it 'parent has pages' do
       expect(parent.pages.first).to be_a Training::Question
-      expect(pages.first.parent.pages.last).to be_a Training::Question
+      expect(pages.first.parent.pages.last).to be_a Training::Page
     end
 
     it 'pages have a parent' do

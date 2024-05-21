@@ -7,8 +7,8 @@ class NextPageDecorator
   extend Dry::Initializer
 
   # @!attribute [r] user
-  #   @return [User]
-  option :user, Types::User, required: true
+  #   @return [User, Guest]
+  option :user, Types.Instance(User) | Types.Instance(Guest), required: true
   # @!attribute [r] mod
   #   @return [Course, Training::Module]
   option :mod, Types::Parent, required: true
@@ -24,7 +24,7 @@ class NextPageDecorator
     if content.interruption_page?
       mod.content_start.name
     elsif skip_next_question?
-      (mod.is_a?(Course) && next_item.last_feedback?) ? 'thank-you' : next_next_item.name
+      next_next_item.name
     else
       next_item.name
     end

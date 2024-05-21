@@ -36,7 +36,7 @@ RSpec.describe Pagination do
     end
   end
 
-  context '#with_parent' do
+  describe '#with_parent' do
     subject(:page) { mod.page_by_name('feedback-checkbox-other-or') }
 
     let(:mod) { Training::Module.by_name(:bravo) }
