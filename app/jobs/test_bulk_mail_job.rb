@@ -5,11 +5,19 @@ class TestBulkMailJob < MailJob
 
     super do
       self.class.recipients.find_each do |recipient|
-        recipient.send_devise_notification(:bulk_test)
+        recipient.test_email
 
         # TODO: user record log of mail activity?
         # recipient.update!(notify_log:)
+        # where("notify_callback -> 'template_id' ?", template_id)
       end
+    end
+
+    private
+
+    # @return [String]
+    def template_id
+      NotifyMailer::TEMPLATE_IDS[:bulk_test]
     end
   end
 end
