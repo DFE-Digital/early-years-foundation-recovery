@@ -10,7 +10,6 @@ class ApplicationJob < Que::Job
     log 'running'
 
     if duplicate_job_queued?
-      log 'already queued', :warn
       raise DuplicateJobError, 'already queued'
     elsif block_given?
       yield
@@ -31,7 +30,7 @@ private
   def handle_error(error)
     log "failed with '#{error.message}'", :warn
     case error
-    when DuplicateJobError then expire
+    when StandardError then expire
     end
   end
 
