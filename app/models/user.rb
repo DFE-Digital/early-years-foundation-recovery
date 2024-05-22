@@ -161,6 +161,12 @@ class User < ApplicationRecord
     email_delivered.where('notify_callback @> ?', { template_id: template_id }.to_json)
   }
 
+  # scope :new_module_delivered, -> {
+  #   # where("properties -> 'training_module_id' ?| array[:values]", values: mod_names)
+  #   where("notify_callback -> 'template_id' ?", NotifyMailer::TEMPLATE_IDS[:new_module])
+  #   # '2352b6ce-a098-47f0-870a-286308b9798f'
+  # }
+
   # data
   scope :dashboard, -> { not_closed }
   scope :month_old_confirmation, -> { where(confirmed_at: 4.weeks.ago.beginning_of_day..4.weeks.ago.end_of_day) }
