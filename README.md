@@ -314,16 +314,6 @@ User [service accounts](https://cloud.google.com/iam/docs/service-accounts) can 
 
 ---
 
-## User experience
-
-Session timeout functionality:
-
-- default timeout period is 25 minutes
-- default timeout warning appears after 5 minutes
-- screen readers announce every time the timeout refreshes every 15 secs
-
----
-
 ## Hotjar
 
 This project uses Hotjar for user insight. Hotjar records user journeys and

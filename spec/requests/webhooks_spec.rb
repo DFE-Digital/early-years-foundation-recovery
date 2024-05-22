@@ -37,6 +37,10 @@ RSpec.describe 'Webhooks', type: :request do
     end
 
     describe 'POST /notify' do
+      let(:headers) do
+        { 'Authorization' => 'Bearer token: bot_token' }
+      end
+
       it 'persists the callback' do
         post '/notify', params: notify, as: :json, headers: headers
         expect(response).to have_http_status(:ok)

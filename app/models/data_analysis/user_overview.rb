@@ -27,12 +27,17 @@ module DataAnalysis
           'With Notes Percentage',
           'Without Notes',
           'Without Notes Percentage',
+          'Training Mail Recipients',
+          'Early Years Recipients',
           'Complete Registration Mail Recipients',
           'Start Training Mail Recipients',
           'Continue Training Mail Recipients',
           'New Module Mail Recipients',
+          'Pre-prod Test Recipients',
           'Closed',
           'Terms and Conditions Agreed',
+          'Received Mail Yesterday',
+          'Received Mail Today',
         ]
       end
 
@@ -60,12 +65,17 @@ module DataAnalysis
           with_notes_percentage: with_notes_percentage.round(2),
           without_notes: without_notes_count,
           without_notes_percentage: (1 - with_notes_percentage).round(2),
+          training_mail_recipients: User.training_email_recipients.count,
+          early_years_mail_recipients: User.early_years_email_recipients.count,
           complete_registration_mail_recipients: CompleteRegistrationMailJob.recipients.count,
           start_training_mail_recipients: StartTrainingMailJob.recipients.count,
           continue_training_mail_recipients: ContinueTrainingMailJob.recipients.count,
           new_module_mail_recipients: NewModuleMailJob.recipients.count,
+          test_mail_recipients: TestBulkMailJob.recipients.count,
           closed: User.closed.count,
           terms_and_conditions_agreed: terms_and_conditions_agreed_count,
+          mail_yesterday: User.email_delivered_days_ago(1).count,
+          mail_today: User.email_delivered_today.count,
         }]
       end
 

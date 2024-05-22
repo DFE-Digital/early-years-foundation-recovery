@@ -7,7 +7,15 @@ class NotifyMailer < GovukNotifyRails::Mailer
     continue_training: '83dd3dc6-c5de-4e32-a6b4-25c76e805d87',
     new_module: '2352b6ce-a098-47f0-870a-286308b9798f',
     start_training: 'b3c2e4ff-da06-4672-8941-b2f50d37eadc',
+    bulk_test: '7c5fa953-4208-4bc4-919a-4ede23db65c1',
   }.freeze
+
+  # @param record [User]
+  # @return [Mail::Message]
+  def bulk_test(record)
+    set_template TEMPLATE_IDS[:bulk_test]
+    mail(to: record.email)
+  end
 
   # @param record [User]
   # @return [Mail::Message]

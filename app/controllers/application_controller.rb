@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
                 :prepare_cms
 
   helper_method :current_user,
-                :timeout_timer,
                 :debug?
 
   default_form_builder ::FormBuilder
@@ -56,13 +55,6 @@ class ApplicationController < ActionController::Base
   # @return [Boolean] do not run accessibility tests with debug panels visible
   def debug?
     Rails.application.debug? && !bot?
-  end
-
-  def timeout_timer
-    timeout_controller = TimeoutController.new
-    timeout_controller.request = request
-    timeout_controller.response = response
-    timeout_controller.send(:ttl_to_timeout)
   end
 
 private

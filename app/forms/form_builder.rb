@@ -65,10 +65,10 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
 
   def select_trainee_experience
     govuk_collection_radio_buttons :early_years_experience,
-                            Trainee::Experience.all, :id, :name,
-                            legend: { text: I18n.t('register_early_years_experience.label'), class: 'govuk-visually-hidden govuk-!-padding-top-9' },
-                            aria: { label: 'registration early years experience' },
-                            form_group: { classes: %w[data-hj-suppress] }
+                                   Trainee::Experience.all, :id, :name,
+                                   legend: { text: I18n.t('register_early_years_experience.label'), class: 'govuk-visually-hidden govuk-!-padding-top-9' },
+                                   aria: { label: 'registration early years experience' },
+                                   form_group: { classes: %w[data-hj-suppress] }
   end
 
   def opt_in_out(field)

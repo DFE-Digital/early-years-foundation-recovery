@@ -1,14 +1,11 @@
-class HookController < ApplicationController
-  before_action :authenticate_hook!
-  skip_before_action :verify_authenticity_token
-
+class ReleaseController < WebhookController
   # @note
   #   Production deployment via Delivery API
   #
   #   Other API events:
   #     - Release (execute)
   #
-  def release
+  def new
     new_release = Release.create!(
       name: payload.dig('sys', 'id'),
       time: payload.dig('sys', 'completedAt'),
@@ -27,7 +24,7 @@ class HookController < ApplicationController
   #     - Autosave (Entry, Asset)
   #     - Publish (Entry 'static' only)
   #
-  def change
+  def update
     Release.create!(
       name: payload.dig('sys', 'id'),
       time: payload.dig('sys', 'updatedAt'),
@@ -37,23 +34,5 @@ class HookController < ApplicationController
     ContentCheckJob.enqueue
 
     render json: { status: 'content change received' }, status: :ok
-  end
-
-  # @see https://docs.notifications.service.gov.uk/ruby.html#delivery-receipts
-  def notify
-    user = User.find_by(email: payload['to'])
-    user.update!(notify_callback: payload)
-    render json: { status: 'callback received' }, status: :ok
-  end
-
-private
-
-  def authenticate_hook!
-    render json: { status: 'invalid secure header' }, status: :unauthorized unless bot_token?
-  end
-
-  # @return [Hash]
-  def payload
-    @payload ||= JSON.parse(request.body.read)
   end
 end

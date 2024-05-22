@@ -6,7 +6,7 @@ class MailJob < ApplicationJob
   end
 
   def run(*)
-    log "#{self.class.name}: #{self.class.recipients.count} recipients"
+    log "#{self.class.recipients.count} recipients"
 
     super
   end
