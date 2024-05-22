@@ -25,12 +25,17 @@ RSpec.describe DataAnalysis::UserOverview do
       'With Notes Percentage',
       'Without Notes',
       'Without Notes Percentage',
+      'Training Mail Recipients',
+      'Early Years Recipients',
       'Complete Registration Mail Recipients',
       'Start Training Mail Recipients',
       'Continue Training Mail Recipients',
       'New Module Mail Recipients',
+      'Pre-prod Test Recipients',
       'Closed',
       'Terms and Conditions Agreed',
+      'Received Mail Yesterday',
+      'Received Mail Today',
     ]
   end
 
@@ -58,18 +63,26 @@ RSpec.describe DataAnalysis::UserOverview do
         with_notes_percentage: 0.33,
         without_notes: 4,
         without_notes_percentage: 0.67,
+        training_mail_recipients: 6,
+        early_years_mail_recipients: 0,
         complete_registration_mail_recipients: 1,
         start_training_mail_recipients: 1,
         continue_training_mail_recipients: 0,
         new_module_mail_recipients: 6,
+        test_mail_recipients: 1,
         closed: 0,
         terms_and_conditions_agreed: 6,
+        mail_yesterday: 0,
+        mail_today: 1,
       },
     ]
   end
 
   let(:user) do
-    create :user, :registered
+    create :user, :registered,
+           email: 'user@education.gov.uk', notify_callback: {
+             notification_type: 'email', sent_at: Time.zone.today, status: 'delivered'
+           }
   end
 
   let(:user_2) do
