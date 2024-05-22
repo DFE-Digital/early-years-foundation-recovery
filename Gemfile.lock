@@ -347,7 +347,7 @@ GEM
       hashie (>= 3.4.6)
       rack (>= 2.2.3)
       rack-protection
-    omniauth-rails_csrf_protection (1.0.1)
+    omniauth-rails_csrf_protection (1.0.2)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
     omniauth_openid_connect (0.7.1)
@@ -397,7 +397,7 @@ GEM
       hashie (>= 3, < 6)
       que (>= 0.14, < 3.0.0)
     raabro (1.4.0)
-    racc (1.7.3)
+    racc (1.8.0)
     rack (3.0.11)
     rack-mini-profiler (3.3.1)
       rack (>= 1.2.0)
