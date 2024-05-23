@@ -6,17 +6,9 @@ class TestBulkMailJob < MailJob
     expire if Rails.application.live?
 
     super do
-      self.class.recipients.find_each(&:test_email)
+      self.class.recipients.find_each do |user|
+        deliver_message(user)
+      end
     end
   end
-
-  # TODO: user record log of mail activity?
-  # recipient.update!(notify_log:)
-  # where("notify_callback -> 'template_id' ?", template_id)
-  # private
-
-  # @return [String]
-  # def template_id
-  #   NotifyMailer::TEMPLATE_IDS[:bulk_test]
-  # end
 end

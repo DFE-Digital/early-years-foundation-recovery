@@ -14,8 +14,8 @@ class NewModuleMailJob < MailJob
 
       return :no_new_module unless new_module_published?
 
-      self.class.recipients.find_each do |recipient|
-        recipient.send_new_module_notification(latest_module)
+      self.class.recipients.find_each do |user|
+        deliver_message(user, latest_module)
       end
 
       record_module_release latest_module, Release.find(release_id)

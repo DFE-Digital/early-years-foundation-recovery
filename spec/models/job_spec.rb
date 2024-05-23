@@ -18,11 +18,11 @@ RSpec.describe Job, type: :model do
     expect(described_class.expired.count).to eq 0
     expect(described_class.scheduled.count).to eq 0
 
-    expect(described_class.not_errored.count).to eq 2
-    expect(described_class.not_expired.count).to eq 0
-    expect(described_class.not_finished.count).to eq 0
     expect(described_class.not_ready.count).to eq 0
-    expect(described_class.not_scheduled.count).to eq 0
+    expect(described_class.not_errored.count).to eq 2
+    expect(described_class.not_expired.count).to eq 2
+    expect(described_class.not_finished.count).to eq 2
+    expect(described_class.not_scheduled.count).to eq 2
   end
 
   it 'custom scopes by class' do

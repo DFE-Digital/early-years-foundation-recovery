@@ -84,7 +84,9 @@ RSpec.describe 'Account deletion' do
         click_on 'Close my account'
       end
 
-      it 'redirects to account closed page' do
+      it 'is confirmed' do
+        expect(user.mail_events.last.template).to eq '0a4754ee-6175-444c-98a1-ebef0b14e7f7'
+        expect(page).to have_current_path '/my-account/close'
         expect(page).to have_text 'Account closed'
       end
 

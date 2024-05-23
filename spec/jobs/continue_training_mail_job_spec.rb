@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe ContinueTrainingMailJob do
   include_context 'with progress'
 
-  let(:template) { :continue_training }
-
   let(:user) { create(:user, :registered, confirmed_at: 4.weeks.ago) }
 
   let(:user_2) do
@@ -19,8 +17,8 @@ RSpec.describe ContinueTrainingMailJob do
            module_time_to_completion: { alpha: 0 }
   end
 
-  let(:included) { [user] }
-  let(:excluded) { [user_2, user_3] }
+  let!(:included) { [user] }
+  let!(:excluded) { [user_2, user_3] }
 
   # Must have started, but not completed training.
   # Must be 4 weeks since their last visit
