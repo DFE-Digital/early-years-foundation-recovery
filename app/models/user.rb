@@ -15,6 +15,9 @@ class User < ApplicationRecord
     registration_complete_any?
     registered_at
     terms_and_conditions_agreed_at
+    training_emails
+    early_years_emails
+    email_delivery_status
     gov_one?
   ].freeze
 
@@ -138,12 +141,25 @@ class User < ApplicationRecord
   scope :last_visit_4_weeks_ago, -> { where(id: month_old_visits).where.not(id: visits_within_month) }
 
   # emails
-  scope :training_email_recipients, -> { order(:id).where(training_emails: [true, nil]) }
-  scope :early_years_email_recipients, -> { order(:id).where(early_years_emails: true) }
-  scope :start_training_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_complete.not_started_training }
-  scope :complete_registration_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_incomplete }
+  scope :training_email_recipients, -> { order(:id).where(training_emails: [true, nil]).distinct }
+  scope :early_years_email_recipients, -> { order(:id).where(early_years_emails: true).distinct }
+  scope :start_training_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_complete.not_started_training.distinct }
+  scope :complete_registration_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_incomplete.distinct }
   scope :continue_training_mail_job_recipients, -> { training_email_recipients.last_visit_4_weeks_ago.distinct(&:module_in_progress?) }
-  scope :new_module_mail_job_recipients, -> { training_email_recipients.not_closed }
+  scope :new_module_mail_job_recipients, -> { training_email_recipients.not_closed.distinct }
+  scope :test_bulk_mail_job_recipients, -> { where("lower(email) LIKE '%@education.gov.uk'").distinct }
+
+  # email callbacks
+  scope :email_delivered, lambda {
+    training_email_recipients.or(early_years_email_recipients).where('notify_callback @> ?', { notification_type: 'email', status: 'delivered' }.to_json).distinct
+  }
+  scope :email_delivered_days_ago, lambda { |num|
+    email_delivered.where("CAST(notify_callback ->> 'sent_at' AS DATE) = CURRENT_DATE - #{num}")
+  }
+  scope :email_delivered_today, -> { email_delivered_days_ago(0) }
+  scope :last_email_delivered, lambda { |template_id|
+    email_delivered.where('notify_callback @> ?', { template_id: template_id }.to_json)
+  }
 
   # data
   scope :dashboard, -> { not_closed }
@@ -211,6 +227,10 @@ class User < ApplicationRecord
     end
   end
 
+  def test_email
+    send_devise_notification(:bulk_test) unless Rails.application.live?
+  end
+
   def send_account_closed_notification
     send_devise_notification(:account_closed)
   end
@@ -244,8 +264,8 @@ class User < ApplicationRecord
   end
 
   # @return [String]
-  def email_to_confirm
-    pending_reconfirmation? ? unconfirmed_email : email
+  def email_delivery_status
+    notify_callback.to_h.fetch('status', 'unknown')
   end
 
   # @return [String]
