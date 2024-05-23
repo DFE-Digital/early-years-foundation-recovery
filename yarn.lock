@@ -4611,10 +4611,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"devtools-protocol@npm:0.0.1273771":
-  version: 0.0.1273771
-  resolution: "devtools-protocol@npm:0.0.1273771"
-  checksum: 2a88694ec0f2f167f826cea8c3d6030ede911c2db79d2a62d76d1be450bcb395e8283ca03f225fa308710ab06182dced47eed8cece56b377d1946403a321b64f
+"devtools-protocol@npm:0.0.1286932":
+  version: 0.0.1286932
+  resolution: "devtools-protocol@npm:0.0.1286932"
+  checksum: b63223a0d775b4e4823d5078b9d8e6aadf4f5c9aa08521d313d3e32af8b81b3631dcaaad5cf4ba5bbcdf3a6fef7377194a396845f059185c536a2af444f7ffcb
   languageName: node
   linkType: hard
 
@@ -5481,7 +5481,7 @@ __metadata:
     dfe-frontend-alpha: ^1.0.0
     esbuild: ^0.21.3
     govuk-frontend: ^4.7.0
-    puppeteer: ^22.8.2
+    puppeteer: ^22.9.0
     sass: ^1.77.2
     stimulus-reveal-controller: ^4.1.0
   languageName: unknown
@@ -9723,30 +9723,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"puppeteer-core@npm:22.8.2":
-  version: 22.8.2
-  resolution: "puppeteer-core@npm:22.8.2"
+"puppeteer-core@npm:22.9.0":
+  version: 22.9.0
+  resolution: "puppeteer-core@npm:22.9.0"
   dependencies:
     "@puppeteer/browsers": 2.2.3
     chromium-bidi: 0.5.19
     debug: 4.3.4
-    devtools-protocol: 0.0.1273771
+    devtools-protocol: 0.0.1286932
     ws: 8.17.0
-  checksum: a19e13f0a2a2feed89df124dc918df72a8836e8a4fa7d824e806de2461bed1bf462baedd2bb708f7c01ccc87c3056f956a9db97492356db53c41933481e1fca7
+  checksum: 7e632796b8c556ea1f0f3dfe6faf6a26fa8928269f6c4ed360e23b524409da9a11831794cc30306f94f31467a903b38831e7812488423be23104ffaa7266e7e0
   languageName: node
   linkType: hard
 
-"puppeteer@npm:^22.8.2":
-  version: 22.8.2
-  resolution: "puppeteer@npm:22.8.2"
+"puppeteer@npm:^22.9.0":
+  version: 22.9.0
+  resolution: "puppeteer@npm:22.9.0"
   dependencies:
     "@puppeteer/browsers": 2.2.3
     cosmiconfig: 9.0.0
-    devtools-protocol: 0.0.1273771
-    puppeteer-core: 22.8.2
+    devtools-protocol: 0.0.1286932
+    puppeteer-core: 22.9.0
   bin:
     puppeteer: lib/esm/puppeteer/node/cli.js
-  checksum: b9c67f1457413902c8e6be454b3cf58c9873d96547bdb4602493dabe392934eb07a0bc6cff07a50284e234e871834c435afd70fc1d753097524377b82e39a4cb
+  checksum: 77cf73bf6ca46a889cd66f36f09c69b95e35ca3065810dcd1b70b2a00e06ac98c4ef4e88c9b52e8f377dd328b68e776062af2748bab41350235e8d0585b07dd4
   languageName: node
   linkType: hard
 
