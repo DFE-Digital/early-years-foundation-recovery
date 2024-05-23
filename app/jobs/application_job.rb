@@ -22,7 +22,7 @@ private
 
   # @return [Boolean]
   def duplicate_job_queued?
-    Que.job_stats.any? { |job| job[:job_class] == self.class.name && job[:count] > 1 }
+    Job.by_job_class(self.class.name).count > 1
   end
 
   # @param error [Error]
