@@ -1,9 +1,13 @@
 class NotifyController < WebhookController
   # @see https://docs.notifications.service.gov.uk/ruby.html#delivery-receipts
   def update
-    user.update!(notify_callback: payload)
-    mail_event.update!(callback: payload)
-    render json: { status: 'callback received' }, status: :ok
+    if user
+      user.update!(notify_callback: payload)
+      mail_event.update!(callback: payload) if mail_event
+      render json: { status: 'callback received' }, status: :ok
+    else
+      render json: { status: 'callback received' }, status: :not_modified
+    end
   end
 
 private
