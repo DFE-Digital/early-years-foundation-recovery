@@ -1,8 +1,10 @@
+# Notify only supports a single callback URL
+#
 class NotifyController < WebhookController
   # @see https://docs.notifications.service.gov.uk/ruby.html#delivery-receipts
   def update
-    if user
-      user.update!(notify_callback: payload)
+    if recipient
+      recipient.update!(notify_callback: payload)
       mail_event.update!(callback: payload) if mail_event
       render json: { status: 'callback received' }, status: :ok
     else
@@ -17,13 +19,13 @@ private
     request.headers['Authorization']&.include?(Rails.configuration.bot_token)
   end
 
-  # @return [User]
-  def user
+  # @return [User, nil]
+  def recipient
     User.find_by(email: payload['to'])
   end
 
-  # @return [MailEvent]
+  # @return [MailEvent, nil]
   def mail_event
-    user.mail_events.where(template: payload['template']).last
+    recipient.mail_events.where(template: payload['template_id']).last
   end
 end
