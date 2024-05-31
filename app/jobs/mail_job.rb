@@ -1,4 +1,4 @@
-# Base class for NotifyMailer actions
+# Base class for NotifyMailer jobs
 #
 class MailJob < ApplicationJob
   # @return [Array<User>]
@@ -27,13 +27,13 @@ private
 
   # @param args [Array]
   # @return [Mail::Message, ActionMailer::MailDeliveryJob]
-  def deliver_message(*args)
+  def prepare_message(*args)
     message = NotifyMailer.send(self.class.template, *args)
     enqueue? ? message.deliver_later : message.deliver_now
   end
 
   # @return [Boolean]
   def enqueue?
-    Types::Params::Bool[ENV.fetch('DELIVERY_QUEUE', false)]
+    Types::Params::Bool[ENV.fetch('DELIVERY_QUEUE', Rails.env.production?)]
   end
 end

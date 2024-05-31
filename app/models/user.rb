@@ -147,13 +147,29 @@ class User < ApplicationRecord
   scope :start_training_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_complete.not_started_training.distinct }
   scope :complete_registration_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_incomplete.distinct }
   scope :continue_training_mail_job_recipients, -> { training_email_recipients.last_visit_4_weeks_ago.distinct(&:module_in_progress?) }
-  scope :new_module_mail_job_recipients, -> { training_email_recipients.not_closed.distinct }
+
+  # @note
+  #
+  #   Bulk mail like 'New Module' publication notifications are sent to nearly the entire dataset.
+  #   In order to prevent duplicate messages in the event of an exception causing the job to restart
+  #   or the worker container crashing, we exclude users from the recipient list if a delivered MailEvent exists
+  #   or if a queued mail delivery Job exists.
+  #
+  scope :new_module_mail_job_recipients, lambda {
+    training_email_recipients.not_closed
+    .where.not(id: with_new_module_mail_events)
+    .where.not(id: Job.newest_module_mail.map(&:mail_user_id))
+    .distinct
+  }
 
   # @note prefix/suffix ensures testing of invalid email
   # @example "person@education.gov.uk."
   scope :test_bulk_mail_job_recipients, -> { where("lower(email) LIKE '%@education.gov.uk%'").distinct }
 
   # email callbacks
+  scope :with_mail_events, -> { joins(:mail_events) }
+  scope :with_new_module_mail_events, -> { with_mail_events.merge(MailEvent.newest_module).distinct }
+
   scope :email_delivered, lambda {
     training_email_recipients.or(early_years_email_recipients).where('notify_callback @> ?', { notification_type: 'email', status: 'delivered' }.to_json).distinct
   }
