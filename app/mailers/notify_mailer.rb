@@ -63,7 +63,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
     mail(to: user.email)
   end
 
-  # @param record [User]
+  # @param user [User]
   # @return [Mail::Message]
   def start_training(user)
     set_template TEMPLATE_IDS[:start_training]
