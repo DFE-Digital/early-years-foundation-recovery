@@ -17,6 +17,11 @@ class MailJob < ApplicationJob
     NotifyMailer::TEMPLATE_IDS[template]
   end
 
+  # @return [Boolean]
+  def self.enqueue?
+    Types::Params::Bool[ENV.fetch('DELIVERY_QUEUE', Rails.env.production?)]
+  end
+
   def run(*)
     log "#{self.class.recipients.count} recipients"
 
@@ -25,15 +30,11 @@ class MailJob < ApplicationJob
 
 private
 
+  # @note Mailer arguments must be able to be serialised for delayed delivery
   # @param args [Array]
   # @return [Mail::Message, ActionMailer::MailDeliveryJob]
   def prepare_message(*args)
     message = NotifyMailer.send(self.class.template, *args)
-    enqueue? ? message.deliver_later : message.deliver_now
-  end
-
-  # @return [Boolean]
-  def enqueue?
-    Types::Params::Bool[ENV.fetch('DELIVERY_QUEUE', Rails.env.production?)]
+    self.class.enqueue? ? message.deliver_later : message.deliver_now
   end
 end

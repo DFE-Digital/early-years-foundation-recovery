@@ -12,11 +12,6 @@ class NotifyMailer < GovukNotifyRails::Mailer
     test_bulk: '7c5fa953-4208-4bc4-919a-4ede23db65c1',
   }.freeze
 
-  # rescue_from StandardError do |error|
-  #   Sentry.capture_message "#{self.class.name} failed: '#{message.display}'", level: :error
-  #   :skipped_due_to_error
-  # end
-
   # @param user [User]
   # @return [Mail::Message]
   def test_bulk(user)
@@ -86,6 +81,8 @@ class NotifyMailer < GovukNotifyRails::Mailer
     mail(to: user.email)
   end
 
+  # @see https://apidock.com/rails/v7.1.3.2/ActiveJob/SerializationError
+  #
   # @param user [User]
   # @param mod [Training::Module]
   # @return [Mail::Message]

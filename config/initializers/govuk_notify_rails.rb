@@ -7,7 +7,7 @@ class NotifyDelivery < GovukNotifyRails::Delivery
   rescue StandardError
     message.display
     errors = message.errors.map { |e| "'#{e.last.message}'" }.join(', ')
-    Sentry.capture_message "#{self.class.name} failed: #{errors}", level: :error
+    Sentry.capture_message("#{self.class.name} failed with #{errors}", level: :warn) unless Rails.application.live?
     :skipped_due_to_error
   end
 end
