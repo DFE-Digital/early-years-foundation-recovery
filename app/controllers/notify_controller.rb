@@ -26,6 +26,6 @@ private
 
   # @return [MailEvent, nil]
   def mail_event
-    recipient.mail_events.where(template: payload['template_id']).last
+    recipient.mail_events.where(template: payload['template_id'], callback: nil).last
   end
 end
