@@ -144,11 +144,9 @@ class User < ApplicationRecord
   # emails
   scope :training_email_recipients, -> { order(:id).where(training_emails: [true, nil]).distinct }
   scope :early_years_email_recipients, -> { order(:id).where(early_years_emails: true).distinct }
-  scope :continue_training_mail_job_recipients, -> { training_email_recipients.last_visit_4_weeks_ago.distinct(&:module_in_progress?) }
-
-  # FIXME: email address confirmation is no longer relevant
-  scope :start_training_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_complete.not_started_training.distinct }
   scope :complete_registration_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_incomplete.distinct }
+  scope :start_training_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_complete.not_started_training.distinct }
+  scope :continue_training_mail_job_recipients, -> { training_email_recipients.last_visit_4_weeks_ago.distinct(&:module_in_progress?) }
 
   # @note
   #
