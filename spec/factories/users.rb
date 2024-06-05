@@ -54,5 +54,10 @@ FactoryBot.define do
       role_type { 'Childminder' }
       role_type_other { nil }
     end
+
+    trait :team_member do
+      registered
+      sequence(:email) { |n| "person#{n}@education.gov.uk" }
+    end
   end
 end

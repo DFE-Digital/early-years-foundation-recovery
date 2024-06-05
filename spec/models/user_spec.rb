@@ -209,6 +209,31 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe '.new_module_mail_job_recipients' do
+    subject(:user) { create(:user, :registered) }
+
+    context 'without mail event' do
+      it 'includes user' do
+        expect(described_class.new_module_mail_job_recipients).to include(user)
+        expect(described_class.with_new_module_mail_events).not_to include(user)
+      end
+    end
+
+    context 'with mail event' do
+      before do
+        create :mail_event,
+               user: user,
+               template: NotifyMailer::TEMPLATE_IDS[:new_module],
+               personalisation: { mod_number: 3 }
+      end
+
+      it 'excludes user' do
+        expect(described_class.new_module_mail_job_recipients).not_to include(user)
+        expect(described_class.with_new_module_mail_events).to include(user)
+      end
+    end
+  end
+
   describe 'learning log' do
     subject(:user) { create(:user, :registered) }
 

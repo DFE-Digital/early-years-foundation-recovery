@@ -12,13 +12,19 @@ class NewModuleMailJob < MailJob
       Training::Module.reset_cache_key!
       log "cache key #{Training::Module.cache_key}"
 
-      return :no_new_module unless new_module_published?
-
-      self.class.recipients.find_each do |recipient|
-        recipient.send_new_module_notification(latest_module)
+      begin
+        release = Release.find(release_id)
+      rescue ActiveRecord::RecordNotFound
+        return :no_new_module_release if release.blank?
       end
 
-      record_module_release latest_module, Release.find(release_id)
+      return :no_new_module unless new_module_published?
+
+      self.class.recipients.find_each do |user|
+        prepare_message(user, latest_module)
+      end
+
+      record_module_release latest_module, release
     end
   end
 

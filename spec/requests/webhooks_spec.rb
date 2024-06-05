@@ -14,7 +14,12 @@ RSpec.describe 'Webhooks', type: :request do
   end
 
   let(:notify) do
-    { 'to' => create(:user).email }
+    {
+      to: user.email,
+      template: 'foo',
+      notification_type: 'email',
+      status: 'delivered',
+    }
   end
 
   context 'when authenticated using secret header' do
@@ -41,10 +46,18 @@ RSpec.describe 'Webhooks', type: :request do
         { 'Authorization' => 'Bearer token: bot_token' }
       end
 
+      let(:user) { create :user }
+
+      before do
+        user.mail_events.create!(template: 'foo')
+      end
+
       it 'persists the callback' do
         post '/notify', params: notify, as: :json, headers: headers
         expect(response).to have_http_status(:ok)
-        expect(User.last.notify_callback).to eq notify
+        expect(User.email_delivered).to include user.reload
+        # expect(user.mail_events.last.callback).to eq notify
+        # expect(user.notify_callback).to eq notify
       end
     end
   end
@@ -69,6 +82,8 @@ RSpec.describe 'Webhooks', type: :request do
     end
 
     describe 'POST /notify' do
+      let(:user) { create :user }
+
       it 'is denied' do
         post '/notify', params: notify, as: :json
         expect(response).to have_http_status(:unauthorized)

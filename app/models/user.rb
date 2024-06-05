@@ -77,6 +77,7 @@ class User < ApplicationRecord
 
   has_many :visits
   has_many :events
+  has_many :mail_events
   has_many :notes
 
   scope :gov_one, -> { where.not(gov_one_id: nil) }
@@ -143,13 +144,32 @@ class User < ApplicationRecord
   # emails
   scope :training_email_recipients, -> { order(:id).where(training_emails: [true, nil]).distinct }
   scope :early_years_email_recipients, -> { order(:id).where(early_years_emails: true).distinct }
-  scope :start_training_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_complete.not_started_training.distinct }
   scope :complete_registration_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_incomplete.distinct }
+  scope :start_training_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_complete.not_started_training.distinct }
   scope :continue_training_mail_job_recipients, -> { training_email_recipients.last_visit_4_weeks_ago.distinct(&:module_in_progress?) }
-  scope :new_module_mail_job_recipients, -> { training_email_recipients.not_closed.distinct }
-  scope :test_bulk_mail_job_recipients, -> { where("lower(email) LIKE '%@education.gov.uk'").distinct }
+
+  # @note
+  #
+  #   Bulk mail like 'New Module' publication notifications are sent to nearly the entire dataset.
+  #   In order to prevent duplicate messages in the event of an exception causing the job to restart
+  #   or the worker container crashing, we exclude users from the recipient list if a delivered MailEvent exists
+  #   or if a queued mail delivery Job exists.
+  #
+  scope :new_module_mail_job_recipients, lambda {
+    training_email_recipients.not_closed
+    .where.not(id: with_new_module_mail_events)
+    .where.not(id: Job.newest_module_mail.map(&:mail_user_id))
+    .distinct
+  }
+
+  # @note prefix/suffix ensures testing of invalid email
+  # @example "person@education.gov.uk."
+  scope :test_bulk_mail_job_recipients, -> { where("lower(email) LIKE '%@education.gov.uk%'").distinct }
 
   # email callbacks
+  scope :with_mail_events, -> { joins(:mail_events) }
+  scope :with_new_module_mail_events, -> { with_mail_events.merge(MailEvent.newest_module).distinct }
+
   scope :email_delivered, lambda {
     training_email_recipients.or(early_years_email_recipients).where('notify_callback @> ?', { notification_type: 'email', status: 'delivered' }.to_json).distinct
   }
@@ -225,37 +245,6 @@ class User < ApplicationRecord
     Training::Module.live.select do |mod|
       module_time_to_completion.key?(mod.name)
     end
-  end
-
-  def test_email
-    send_devise_notification(:bulk_test) unless Rails.application.live?
-  end
-
-  def send_account_closed_notification
-    send_devise_notification(:account_closed)
-  end
-
-  # TODO: refactor this internal user mailer logic
-  def send_account_closed_internal_notification(user_account_email)
-    send_devise_notification(:account_closed_internal, user_account_email)
-  end
-
-  def send_complete_registration_notification
-    send_devise_notification(:complete_registration)
-  end
-
-  def send_start_training_notification
-    send_devise_notification(:start_training)
-  end
-
-  # @param mod [Training::Module]
-  def send_continue_training_notification(mod)
-    send_devise_notification(:continue_training, mod)
-  end
-
-  # @param mod [Training::Module]
-  def send_new_module_notification(mod)
-    send_devise_notification(:new_module, mod)
   end
 
   # @return [String]
