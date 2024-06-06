@@ -448,6 +448,7 @@ class User < ApplicationRecord
             closed_at: Time.zone.now,
             password: 'RedactedUser12!@')
 
+    responses.feedback.update_all(text_input: nil)
     notes.destroy_all
   end
 
