@@ -5481,7 +5481,7 @@ __metadata:
     dfe-frontend-alpha: ^1.0.0
     esbuild: ^0.21.3
     govuk-frontend: ^4.7.0
-    puppeteer: ^22.9.0
+    puppeteer: ^22.10.0
     sass: ^1.77.2
     stimulus-reveal-controller: ^4.1.0
   languageName: unknown
@@ -9723,30 +9723,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"puppeteer-core@npm:22.9.0":
-  version: 22.9.0
-  resolution: "puppeteer-core@npm:22.9.0"
+"puppeteer-core@npm:22.10.0":
+  version: 22.10.0
+  resolution: "puppeteer-core@npm:22.10.0"
   dependencies:
     "@puppeteer/browsers": 2.2.3
     chromium-bidi: 0.5.19
     debug: 4.3.4
     devtools-protocol: 0.0.1286932
     ws: 8.17.0
-  checksum: 7e632796b8c556ea1f0f3dfe6faf6a26fa8928269f6c4ed360e23b524409da9a11831794cc30306f94f31467a903b38831e7812488423be23104ffaa7266e7e0
+  checksum: 6eb736ab807be9f36afa9b67cde4380e1ab6d70506729a9a88a96d8cb089a6d26ad219c907adda0fefc464930cd64851536850f7ff0e9bdf970c78517facbc7f
   languageName: node
   linkType: hard
 
-"puppeteer@npm:^22.9.0":
-  version: 22.9.0
-  resolution: "puppeteer@npm:22.9.0"
+"puppeteer@npm:^22.10.0":
+  version: 22.10.0
+  resolution: "puppeteer@npm:22.10.0"
   dependencies:
     "@puppeteer/browsers": 2.2.3
     cosmiconfig: 9.0.0
     devtools-protocol: 0.0.1286932
-    puppeteer-core: 22.9.0
+    puppeteer-core: 22.10.0
   bin:
     puppeteer: lib/esm/puppeteer/node/cli.js
-  checksum: 77cf73bf6ca46a889cd66f36f09c69b95e35ca3065810dcd1b70b2a00e06ac98c4ef4e88c9b52e8f377dd328b68e776062af2748bab41350235e8d0585b07dd4
+  checksum: 267b01fb93a93aa8dcb74d8d8af35d9b845c24f0d22136226dce3e838bcd971ffa85e2381a9dae7265bbad508f180c69eb266b807bbe1b0cf4afe8767b53122c
   languageName: node
   linkType: hard
 
