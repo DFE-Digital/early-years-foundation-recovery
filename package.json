@@ -16,7 +16,7 @@
     "dfe-frontend-alpha": "^1.0.0",
     "esbuild": "^0.21.3",
     "govuk-frontend": "^4.7.0",
-    "puppeteer": "^22.9.0",
+    "puppeteer": "^22.10.0",
     "sass": "^1.77.2",
     "stimulus-reveal-controller": "^4.1.0"
   }
