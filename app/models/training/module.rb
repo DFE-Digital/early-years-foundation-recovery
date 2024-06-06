@@ -1,5 +1,26 @@
 module Training
   class Module < ContentfulModel::Base
+    class Serialiser < ActiveJob::Serializers::ObjectSerializer
+      # @param mod [Training::Module]
+      # @return [Hash]
+      def serialize(mod)
+        super('id' => mod.id)
+      end
+
+      # @param hash [Hash]
+      # @return [Training::Module]
+      def deserialize(hash)
+        klass.by_id(hash['id'])
+      end
+
+    private
+
+      # @return [Class]
+      def klass
+        Training::Module
+      end
+    end
+
     validates_presence_of :name
 
     include ::Management

@@ -15,6 +15,9 @@ class User < ApplicationRecord
     registration_complete_any?
     registered_at
     terms_and_conditions_agreed_at
+    training_emails
+    early_years_emails
+    email_delivery_status
     gov_one?
   ].freeze
 
@@ -74,6 +77,7 @@ class User < ApplicationRecord
 
   has_many :visits
   has_many :events
+  has_many :mail_events
   has_many :notes
 
   scope :gov_one, -> { where.not(gov_one_id: nil) }
@@ -138,12 +142,44 @@ class User < ApplicationRecord
   scope :last_visit_4_weeks_ago, -> { where(id: month_old_visits).where.not(id: visits_within_month) }
 
   # emails
-  scope :training_email_recipients, -> { order(:id).where(training_emails: [true, nil]) }
-  scope :early_years_email_recipients, -> { order(:id).where(early_years_emails: true) }
-  scope :start_training_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_complete.not_started_training }
-  scope :complete_registration_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_incomplete }
+  scope :training_email_recipients, -> { order(:id).where(training_emails: [true, nil]).distinct }
+  scope :early_years_email_recipients, -> { order(:id).where(early_years_emails: true).distinct }
+  scope :complete_registration_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_incomplete.distinct }
+  scope :start_training_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_complete.not_started_training.distinct }
   scope :continue_training_mail_job_recipients, -> { training_email_recipients.last_visit_4_weeks_ago.distinct(&:module_in_progress?) }
-  scope :new_module_mail_job_recipients, -> { training_email_recipients.not_closed }
+
+  # @note
+  #
+  #   Bulk mail like 'New Module' publication notifications are sent to nearly the entire dataset.
+  #   In order to prevent duplicate messages in the event of an exception causing the job to restart
+  #   or the worker container crashing, we exclude users from the recipient list if a delivered MailEvent exists
+  #   or if a queued mail delivery Job exists.
+  #
+  scope :new_module_mail_job_recipients, lambda {
+    training_email_recipients.not_closed
+    .where.not(id: with_new_module_mail_events)
+    .where.not(id: Job.newest_module_mail.map(&:mail_user_id))
+    .distinct
+  }
+
+  # @note prefix/suffix ensures testing of invalid email
+  # @example "person@education.gov.uk."
+  scope :test_bulk_mail_job_recipients, -> { where("lower(email) LIKE '%@education.gov.uk%'").distinct }
+
+  # email callbacks
+  scope :with_mail_events, -> { joins(:mail_events) }
+  scope :with_new_module_mail_events, -> { with_mail_events.merge(MailEvent.newest_module).distinct }
+
+  scope :email_delivered, lambda {
+    training_email_recipients.or(early_years_email_recipients).where('notify_callback @> ?', { notification_type: 'email', status: 'delivered' }.to_json).distinct
+  }
+  scope :email_delivered_days_ago, lambda { |num|
+    email_delivered.where("CAST(notify_callback ->> 'sent_at' AS DATE) = CURRENT_DATE - #{num}")
+  }
+  scope :email_delivered_today, -> { email_delivered_days_ago(0) }
+  scope :last_email_delivered, lambda { |template_id|
+    email_delivered.where('notify_callback @> ?', { template_id: template_id }.to_json)
+  }
 
   # data
   scope :dashboard, -> { not_closed }
@@ -241,41 +277,14 @@ class User < ApplicationRecord
     end
   end
 
-  def send_account_closed_notification
-    send_devise_notification(:account_closed)
-  end
-
-  # TODO: refactor this internal user mailer logic
-  def send_account_closed_internal_notification(user_account_email)
-    send_devise_notification(:account_closed_internal, user_account_email)
-  end
-
-  def send_complete_registration_notification
-    send_devise_notification(:complete_registration)
-  end
-
-  def send_start_training_notification
-    send_devise_notification(:start_training)
-  end
-
-  # @param mod [Training::Module]
-  def send_continue_training_notification(mod)
-    send_devise_notification(:continue_training, mod)
-  end
-
-  # @param mod [Training::Module]
-  def send_new_module_notification(mod)
-    send_devise_notification(:new_module, mod)
-  end
-
   # @return [String]
   def name
     [first_name, last_name].compact.join(' ')
   end
 
   # @return [String]
-  def email_to_confirm
-    pending_reconfirmation? ? unconfirmed_email : email
+  def email_delivery_status
+    notify_callback.to_h.fetch('status', 'unknown')
   end
 
   # @return [String]

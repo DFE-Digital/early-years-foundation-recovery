@@ -12,12 +12,10 @@ class CloseAccountsController < ApplicationController
     redirect_to new_user_password_path
   end
 
+  # TODO: use deliver_later for closed accounts
   def close_account
-    current_user.send_account_closed_notification
-
-    # TODO: refactor this internal user mailer logic
-    User.new(email: Course.config.internal_mailbox).send_account_closed_internal_notification(current_user.email)
-
+    NotifyMailer.account_closed(current_user).deliver_now
+    NotifyMailer.account_closed_internal(current_user).deliver_now
     current_user.redact!
     sign_out current_user
     redirect_to user_close_account_path

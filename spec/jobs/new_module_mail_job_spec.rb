@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe NewModuleMailJob do
-  let(:template) { :new_module }
-
-  let(:included) do
+  let!(:included) do
     create_list :user, 1, :registered
   end
 
-  let(:excluded) do
+  let!(:excluded) do
     create_list :user, 2, :closed
   end
+
+  let(:job_vars) { [2] }
 
   # Create records for the previously released modules completed by the recipients
   # Each `module_release` must have a corresponding `release` record
@@ -27,7 +27,7 @@ RSpec.describe NewModuleMailJob do
 
   it 'resets cache' do
     expect(Training::Module.cache_key).to eq '16-03-2023-13-00'
-    described_class.run(2)
+    described_class.run(*job_vars)
     expect(Training::Module.cache_key).to eq Time.zone.now.strftime('%d-%m-%Y-%H-%M')
   end
 end

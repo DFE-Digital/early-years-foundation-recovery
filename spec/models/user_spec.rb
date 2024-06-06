@@ -161,6 +161,9 @@ RSpec.describe User, type: :model do
                     local_authority: 'City of London',
                     module_time_to_completion: {
                       alpha: 3,
+                    },
+                    notify_callback: {
+                      status: 'delivered',
                     })
 
       Event.new(
@@ -175,11 +178,11 @@ RSpec.describe User, type: :model do
 
     it 'exports formatted attributes as CSV' do
       expect(described_class.to_csv(batch_size: 2)).to eq <<~CSV
-        id,local_authority,setting_type,setting_type_other,role_type,role_type_other,early_years_experience,registration_complete,private_beta_registration_complete,registration_complete_any?,registered_at,terms_and_conditions_agreed_at,gov_one?,module_1_time,module_2_time,module_3_time
-        1,Watford Borough Council,,DfE,other,Developer,na,true,true,true,,2000-01-01 00:00:00,true,4,2,0
-        2,Leeds City Council,,DfE,Trainer or lecturer,,2-5,true,false,true,,2000-01-01 00:00:00,true,1,0,
-        3,City of London,,DfE,other,Developer,,true,false,true,2023-01-12 10:15:59,2000-01-01 00:00:00,true,3,,
-        4,,,,,,,false,false,false,,2000-01-01 00:00:00,true,,,
+        id,local_authority,setting_type,setting_type_other,role_type,role_type_other,early_years_experience,registration_complete,private_beta_registration_complete,registration_complete_any?,registered_at,terms_and_conditions_agreed_at,training_emails,early_years_emails,email_delivery_status,gov_one?,module_1_time,module_2_time,module_3_time
+        1,Watford Borough Council,,DfE,other,Developer,na,true,true,true,,2000-01-01 00:00:00,true,false,unknown,true,4,2,0
+        2,Leeds City Council,,DfE,Trainer or lecturer,,2-5,true,false,true,,2000-01-01 00:00:00,true,false,unknown,true,1,0,
+        3,City of London,,DfE,other,Developer,,true,false,true,2023-01-12 10:15:59,2000-01-01 00:00:00,true,false,delivered,true,3,,
+        4,,,,,,,false,false,false,,2000-01-01 00:00:00,,,unknown,true,,,
       CSV
     end
   end
@@ -209,6 +212,31 @@ RSpec.describe User, type: :model do
 
     it 'filters by user progress state' do
       expect(user.active_modules.map(&:name)).to eq %w[alpha bravo]
+    end
+  end
+
+  describe '.new_module_mail_job_recipients' do
+    subject(:user) { create(:user, :registered) }
+
+    context 'without mail event' do
+      it 'includes user' do
+        expect(described_class.new_module_mail_job_recipients).to include(user)
+        expect(described_class.with_new_module_mail_events).not_to include(user)
+      end
+    end
+
+    context 'with mail event' do
+      before do
+        create :mail_event,
+               user: user,
+               template: NotifyMailer::TEMPLATE_IDS[:new_module],
+               personalisation: { mod_number: 3 }
+      end
+
+      it 'excludes user' do
+        expect(described_class.new_module_mail_job_recipients).not_to include(user)
+        expect(described_class.with_new_module_mail_events).to include(user)
+      end
     end
   end
 

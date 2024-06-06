@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_15_120000) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_25_053022) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -35,6 +35,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_15_120000) do
     t.index ["properties"], name: "index_events_on_properties", opclass: :jsonb_path_ops, using: :gin
     t.index ["user_id"], name: "index_events_on_user_id"
     t.index ["visit_id"], name: "index_events_on_visit_id"
+  end
+
+  create_table "mail_events", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "template"
+    t.jsonb "personalisation"
+    t.jsonb "callback"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_mail_events_on_user_id"
   end
 
   create_table "module_releases", force: :cascade do |t|
@@ -254,6 +264,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_15_120000) do
   end
 
   add_foreign_key "assessments", "users"
+  add_foreign_key "mail_events", "users"
   add_foreign_key "module_releases", "releases"
   add_foreign_key "notes", "users"
   add_foreign_key "que_scheduler_audit_enqueued", "que_scheduler_audit", column: "scheduler_job_id", primary_key: "scheduler_job_id", name: "que_scheduler_audit_enqueued_scheduler_job_id_fkey"

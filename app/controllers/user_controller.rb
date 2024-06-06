@@ -1,6 +1,5 @@
 class UserController < ApplicationController
-  before_action :authenticate_registered_user!,
-                except: %i[check_email_confirmation check_email_password_reset]
+  before_action :authenticate_registered_user!
 
   def show
     track('profile_page')
@@ -56,19 +55,7 @@ class UserController < ApplicationController
     end
   end
 
-  def check_email_confirmation
-    return unless params[:ref]
-
-    @user = User.find_by(confirmation_token: params[:ref])
-  end
-
-  def check_email_password_reset; end
-
 private
-
-  # def user
-  #   @user ||= current_user
-  # end
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :postcode, :ofsted_number, :email, :setting_type, :setting_type_other, :training_emails)

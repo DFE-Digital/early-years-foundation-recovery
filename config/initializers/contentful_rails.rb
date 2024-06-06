@@ -13,6 +13,8 @@ require 'page'
 require 'page/resource'
 require 'trainee/setting'
 
+Rails.application.config.active_job.custom_serializers << ::Training::Module::Serialiser
+
 # Without this the value is nil and defaults to delivery API
 ContentfulModel.use_preview_api = Rails.application.preview?
 

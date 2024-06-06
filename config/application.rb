@@ -24,6 +24,7 @@ module EarlyYearsFoundationRecovery
       /health
       /change
       /release
+      /notify
     ]
 
     config.middleware.use Grover::Middleware
@@ -47,12 +48,12 @@ module EarlyYearsFoundationRecovery
 
     config.user_password = ENV.fetch('USER_PASSWORD', 'Str0ngPa$$w0rd12')
     config.bot_token = ENV['BOT_TOKEN']
-    config.google_analytics_tracking_id = ENV.fetch('TRACKING_ID', '#TRACKING_ID_env_var_missing')
     config.hotjar_site_id = ENV.fetch('HOTJAR_SITE_ID', '#HOTJAR_SITE_ID_env_var_missing')
+    config.google_analytics_tracking_id = ENV.fetch('TRACKING_ID', '#TRACKING_ID_env_var_missing')
 
     # Devise
     config.unlock_in_minutes  = ENV.fetch('UNLOCK_IN_MINUTES', '120').to_i
-    config.timeout_in_minutes = ENV.fetch('TIMEOUT_IN_MINUTES', '60').to_i
+    config.timeout_in_minutes = ENV.fetch('TIMEOUT_IN_MINUTES', '1440').to_i
 
     # Contentful
     config.contentful_space                   = ENV.fetch('CONTENTFUL_SPACE', credentials.dig(:contentful, :space))
