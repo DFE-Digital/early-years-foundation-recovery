@@ -8,6 +8,8 @@ class Response < ApplicationRecord
   belongs_to :assessment, optional: true
   belongs_to :visit, optional: true
 
+  encrypts :text_input
+
   validates :training_module, presence: true
   validates :question_type, inclusion: { in: %w[formative summative confidence feedback] }
   validates :answers, presence: true, unless: -> { text_input_only? }

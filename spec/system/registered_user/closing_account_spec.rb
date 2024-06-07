@@ -68,8 +68,8 @@ RSpec.describe 'Account deletion' do
 
   context 'when on confirmation page' do
     before do
-      user.notes.create(training_module: 'alpha', body: 'this is a note')
-      user.responses.feedback.create(
+      user.notes.create!(training_module: 'alpha', body: 'this is a note')
+      user.responses.feedback.create!(
         training_module: 'course',
         question_name: 'feedback-textarea-only',
         question_type: 'feedback',
