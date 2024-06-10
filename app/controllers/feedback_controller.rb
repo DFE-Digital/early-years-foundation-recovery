@@ -87,19 +87,24 @@ private
     cookies[:course_feedback] = { value: current_user.visit_token }
   end
 
+  # @return [Boolean, nil]
   def track_feedback_start
-    track('feedback_start') if feedback_start_untracked?
+    track('feedback_start') if untracked?('feedback_start')
   end
 
+  # @return [Boolean, nil]
   def track_feedback_complete
-    track('feedback_complete') if feedback_complete_untracked?
+    track('feedback_complete') if untracked?('feedback_complete')
   end
 
-  def feedback_start_untracked?
-    untracked?('feedback_start', training_module_id: mod.name)
-  end
-
-  def feedback_complete_untracked?
-    untracked?('feedback_complete', training_module_id: mod.name)
+  # @param key [String]
+  # @param params [Hash]
+  # @return [Boolean]
+  def untracked?(key)
+    if current_user.guest?
+      Event.where(visit_id: current_visit, name: key).empty?
+    else
+      Event.where(user_id: current_user, name: key).empty?
+    end
   end
 end

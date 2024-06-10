@@ -16,6 +16,11 @@ describe 'Course feedback' do
       expect(Response.course_feedback.count).to be 7
     end
 
+    it 'records milestone events' do
+      expect(Event.feedback_start.count).to be 1
+      expect(Event.feedback_complete.count).to be 1
+    end
+
     it 'is linked to a visit not a user' do
       expect(Response.course_feedback.first.user).not_to be_present
       expect(Response.course_feedback.first.visit).to be_present
@@ -56,6 +61,11 @@ describe 'Course feedback' do
 
     it 'saves all answers' do
       expect(Response.course_feedback.count).to be 8
+    end
+
+    it 'records milestone events' do
+      expect(Event.feedback_start.count).to be 1
+      expect(Event.feedback_complete.count).to be 1
     end
 
     it 'is linked to a user not a visit' do
