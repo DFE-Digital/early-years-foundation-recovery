@@ -31,7 +31,6 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
     govuk_radio_button :answers,
                        option.id,
                        label: { text: option.label },
-                       link_errors: true,
                        disabled: option.disabled?,
                        checked: option.checked?
   end
@@ -44,7 +43,6 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
     govuk_radio_button :answers,
                        option.id,
                        label: { text: option.label },
-                       link_errors: true,
                        disabled: option.disabled?,
                        checked: option.checked? do
       if more
@@ -62,7 +60,6 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
     govuk_radio_button :answers,
                        0,
                        label: { text: text },
-                       link_errors: true,
                        checked: checked
   end
 
@@ -73,7 +70,6 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
     govuk_check_box :answers,
                     0,
                     label: { text: text },
-                    link_errors: true,
                     checked: checked
   end
 
@@ -83,7 +79,6 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
     govuk_check_box :answers,
                     option.id,
                     label: { text: option.label },
-                    link_errors: true,
                     disabled: option.disabled?,
                     checked: option.checked?
   end
@@ -95,7 +90,6 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
     govuk_check_box :answers,
                     option.id,
                     label: { text: option.label },
-                    link_errors: true,
                     disabled: option.disabled?,
                     checked: option.checked? do
       govuk_text_field :text_input, label: { text: text }
