@@ -8,7 +8,7 @@ module Registration
       if form.save
         track('user_early_years_experience_change', success: true)
         if current_user.registration_complete?
-          redirect_to user_path, notice: t(:details_updated)
+          redirect_to user_path, notice: helpers.m(:details_updated)
         else
           redirect_to edit_registration_training_emails_path
         end

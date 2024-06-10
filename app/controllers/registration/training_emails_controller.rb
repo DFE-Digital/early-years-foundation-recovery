@@ -10,7 +10,7 @@ module Registration
       if form.save
         track('user_training_emails_change', success: true)
         if current_user.registration_complete?
-          redirect_to my_modules_path, notice: t(:details_updated)
+          redirect_to my_modules_path, notice: helpers.m(:details_updated)
         else
           complete_registration
         end
