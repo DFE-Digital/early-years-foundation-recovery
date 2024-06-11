@@ -187,6 +187,7 @@ RSpec.describe User, type: :model do
     it 'redacts personal information' do
       user.redact!
 
+      expect(user.gov_one_id).to start_with "#{user.id}urn:fdc:gov.uk:2022:"
       expect(user.first_name).to eq 'Redacted'
       expect(user.last_name).to eq 'User'
       expect(user.email).to eq "redacted_user#{user.id}@example.com"
