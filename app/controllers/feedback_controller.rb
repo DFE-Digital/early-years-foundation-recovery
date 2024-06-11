@@ -98,7 +98,6 @@ private
   end
 
   # @param key [String]
-  # @param params [Hash]
   # @return [Boolean]
   def untracked?(key)
     if current_user.guest?

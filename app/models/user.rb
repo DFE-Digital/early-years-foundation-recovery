@@ -287,12 +287,6 @@ class User < ApplicationRecord
     notify_callback.to_h.fetch('status', 'unknown')
   end
 
-  # @return [String]
-  def password_last_changed
-    timestamp = password_changed_events&.last&.time || created_at
-    timestamp.to_date&.to_formatted_s(:rfc822)
-  end
-
   # @return [CourseProgress] course activity query interface
   def course
     @course ||= CourseProgress.new(user: self)
@@ -381,11 +375,6 @@ class User < ApplicationRecord
   # @return [Boolean]
   def role_other?
     role_type == 'other'
-  end
-
-  # @return [Boolean]
-  def role_applicable?
-    role_type != 'Not applicable'
   end
 
   # return [Boolean]

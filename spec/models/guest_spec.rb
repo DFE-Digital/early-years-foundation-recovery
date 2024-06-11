@@ -28,4 +28,10 @@ RSpec.describe Guest, type: :model do
       expect(response).to be_a Response
     end
   end
+
+  describe '#course_started?' do
+    specify do
+      expect(guest).not_to be_course_started
+    end
+  end
 end
