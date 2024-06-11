@@ -1,3 +1,6 @@
+- content_for :page_title do
+  = html_title content.name
+
 = render 'training/questions/debug'
 
 = form_with model: current_user_response, url: feedback_path, method: :patch do |f|

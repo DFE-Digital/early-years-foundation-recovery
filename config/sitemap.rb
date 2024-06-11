@@ -41,6 +41,11 @@ SitemapGenerator::Sitemap.create do
 
   add course_overview_path
   add experts_path
+  add feedback_index_path
+
+  Course.config.pages.each do |content|
+    add feedback_path(content.name)
+  end
 
   Training::Module.live.each do |mod|
     add about_path(mod.name)
