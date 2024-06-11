@@ -8,7 +8,7 @@ module Registration
       if form.save
         track('user_terms_and_conditions_agreed_at_change', success: true)
         if current_user.registration_complete?
-          redirect_to user_path, notice: t(:details_updated)
+          redirect_to user_path, notice: helpers.m(:details_updated)
         else
           redirect_to edit_registration_name_path
         end
