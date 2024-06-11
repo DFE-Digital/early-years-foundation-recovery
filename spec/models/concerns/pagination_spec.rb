@@ -44,11 +44,13 @@ RSpec.describe Pagination do
     it 'navigates shared content in the correct parent' do
       expect(page.parent.name).to eq 'alpha'
       expect(page.with_parent(mod).parent.name).to eq 'bravo'
-      expect(page.with_parent(mod).next_item.parent.name).to eq 'alpha'
 
       expect(page.next_item.name).to eq 'feedback-skippable'
       expect(page.with_parent(mod).next_item.name).to eq 'feedback-skippable'
       expect(page.with_parent(mod).next_next_item.name).to eq '1-3-3-5-bravo'
+
+      expect(page.with_parent(mod).previous_item.name).to eq 'feedback-radio-more'
+      expect(page.with_parent(mod).previous_previous_item.name).to eq 'feedback-checkbox-other-more'
     end
   end
 end

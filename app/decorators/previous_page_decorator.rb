@@ -6,11 +6,11 @@ class PreviousPageDecorator
   extend Dry::Initializer
 
   # @!attribute [r] user
-  #   @return [User]
-  option :user, Types.Instance(User), required: true
+  #   @return [User, Guest]
+  option :user, Types.Instance(User) | Types.Instance(Guest), required: true
   # @!attribute [r] mod
-  #   @return [Training::Module]
-  option :mod, Types::TrainingModule, required: true
+  #   @return [Course, Training::Module]
+  option :mod, Types::Parent, required: true
   # @!attribute [r] content
   #   @return [Training::Page, Training::Question, Training::Video]
   option :content, Types::TrainingContent, required: true
@@ -18,11 +18,11 @@ class PreviousPageDecorator
   # @return [String]
   def name
     if skip_previous_question?
-      content.previous_item.previous_item.name
+      previous_previous_item.name
     elsif feedback_not_started?
       mod.feedback_questions.first.previous_item.name
     else
-      content.previous_item.name
+      previous_item.name
     end
   end
 
@@ -45,6 +45,16 @@ private
   end
 
   # @return [Boolean]
+  def content_section?
+    content.section? && !content.feedback_question?
+  end
+
+  # @return [Boolean]
+  def skip_previous_question?
+    user.skip_question?(previous_item)
+  end
+
+  # @return [Boolean]
   def answered?(question)
     return false unless question.feedback_question?
 
@@ -52,17 +62,17 @@ private
   end
 
   # @return [Boolean]
-  def content_section?
-    content.section? && !content.feedback_question?
-  end
-
-  # @return [Boolean]
-  def skip_previous_question?
-    content.previous_item.skippable? && answered?(content.previous_item)
-  end
-
-  # @return [Boolean]
   def feedback_not_started?
-    content.thankyou? && !answered?(content.previous_item)
+    content.thankyou? && !answered?(previous_item)
+  end
+
+  # @return [Training::Page, Training::Question, Training::Video]
+  def previous_previous_item
+    content.with_parent(mod).previous_previous_item
+  end
+
+  # @return [Training::Page, Training::Question, Training::Video]
+  def previous_item
+    content.with_parent(mod).previous_item
   end
 end

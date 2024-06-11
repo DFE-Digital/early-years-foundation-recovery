@@ -37,9 +37,19 @@ module Pagination
     parent.page_by_id(next_next_item_id)
   end
 
+  # @return [nil, Training::Page, Training::Video, Training::Question]
+  def previous_previous_item
+    parent.page_by_id(previous_previous_item_id)
+  end
+
   # @return [String]
   def previous_item_id
     parent.pages[content_index - 1].id
+  end
+
+  # @return [String, nil]
+  def previous_previous_item_id
+    parent.pages[content_index - 2]&.id
   end
 
   # @return [String, nil]
