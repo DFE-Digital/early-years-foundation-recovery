@@ -433,8 +433,14 @@ class User < ApplicationRecord
     end
   end
 
+  # @note
+  #   Restoration of closed accounts is possible using #gov_one_id to associate
+  #   a new record to an existing closed one by cloning the email address.
+  #
+  # @see User.find_or_create_from_gov_one
   def redact!
-    update!(first_name: 'Redacted',
+    update!(gov_one_id: "#{id}#{gov_one_id}",
+            first_name: 'Redacted',
             last_name: 'User',
             email: "redacted_user#{id}@example.com",
             closed_at: Time.zone.now,
