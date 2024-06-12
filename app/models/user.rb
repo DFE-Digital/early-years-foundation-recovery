@@ -66,13 +66,16 @@ class User < ApplicationRecord
   devise :database_authenticatable, :rememberable, :lockable, :timeoutable,
          :omniauthable, omniauth_providers: [:openid_connect]
 
-  has_many :responses
-  has_many :user_answers
-
   if Rails.application.migrated_answers?
+    has_many :responses
+    has_many :feedback_responses, -> { where(question_type: 'feedback') }, class_name: 'Response'
     has_many :assessments
+
+    # feedback
+    scope :with_feedback, -> { joins(:responses).merge(Response.feedback) }
   else
     has_many :user_assessments
+    has_many :user_answers
   end
 
   has_many :visits
@@ -473,6 +476,10 @@ class User < ApplicationRecord
   # @return [String]
   def visit_token
     visits.last.visit_token
+  end
+
+  def feedback_attributes
+    data_attributes
   end
 
 private

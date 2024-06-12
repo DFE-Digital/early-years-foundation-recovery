@@ -17,6 +17,8 @@ class Response < ApplicationRecord
   scope :incorrect, -> { where(correct: false) }
   scope :correct, -> { where(correct: true) }
 
+  scope :visitor, -> { where(user_id: nil) }
+
   scope :ungraded, -> { where(graded: false) }
   scope :graded, -> { where(graded: true) }
 
