@@ -14,7 +14,7 @@ module DataAnalysis
 
       # @return [Array<Hash{Symbol => Mixed}>]
       def dashboard
-        Response.visitor.feedback.select(
+        Response.visitor.feedback.order(:visit_id, :question_name).select(
           :visit_id,
           :question_name,
           :answers,

@@ -14,13 +14,13 @@ RSpec.describe DataAnalysis::GuestFeedbackScores do
     [
       {
         visit_id: guest.visit.id,
-        question_name: 'feedback-radio-only',
-        answers: [1],
-      },
- {
-        visit_id: guest.visit.id,
         question_name: 'feedback-checkbox-only',
         answers: [1, 2],
+      },
+      {
+        visit_id: guest.visit.id,
+        question_name: 'feedback-radio-only',
+        answers: [1],
       },
     ]
   end

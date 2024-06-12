@@ -8,9 +8,9 @@ module DataAnalysis
         [
           'User ID',
           'Role',
-          'Role Other',
+          'Custom Role',
           'Setting',
-          'Setting Other',
+          'Custom Setting',
           'Local Authority',
           'Years Experience',
           'Module',
@@ -21,7 +21,7 @@ module DataAnalysis
 
       # @return [Array<Hash{Symbol => Mixed}>]
       def dashboard
-        User.with_feedback.order(:user_id).select(*agreed_attributes).map do |user|
+        User.with_feedback.order(:user_id, :question_name).select(*agreed_attributes).map do |user|
           user.attributes.symbolize_keys.except(:id)
         end
       end
