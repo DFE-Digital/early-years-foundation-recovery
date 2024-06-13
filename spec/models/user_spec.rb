@@ -185,8 +185,8 @@ RSpec.describe User, type: :model do
     subject(:user) { create(:user, :registered) }
 
     before do
-      user.mail_events.create(template: '000')
-      user.notes.create(training_module: 'alpha', body: 'this is a note')
+      user.mail_events.create!(template: '000')
+      user.notes.create!(training_module: 'alpha', body: 'this is a note')
     end
 
     it 'redacts personal information' do
