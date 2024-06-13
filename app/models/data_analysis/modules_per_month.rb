@@ -31,7 +31,7 @@ module DataAnalysis
       # @return [Hash]
       def assessments_by_month
         if Rails.application.migrated_answers?
-          Assessment.all.group_by { |assessment| assessment.completed_at.strftime('%B %Y') }
+          Assessment.complete.group_by { |assessment| assessment.completed_at.strftime('%B %Y') }
         else
           UserAssessment.all.group_by { |assessment| assessment.created_at.strftime('%B %Y') }
         end
