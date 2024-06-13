@@ -410,6 +410,7 @@ class User < ApplicationRecord
             closed_at: Time.zone.now,
             password: 'RedactedUser12!@')
 
+    mail_events.destroy_all
     notes.destroy_all
   end
 
