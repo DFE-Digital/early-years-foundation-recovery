@@ -10,7 +10,7 @@ module Registration
         if form.setting_type.local_authority?
           redirect_to edit_registration_local_authority_path
         elsif current_user.registration_complete?
-          redirect_to user_path, notice: t(:details_updated)
+          redirect_to user_path, notice: helpers.m(:details_updated)
         else
           redirect_to edit_registration_training_emails_path
         end
