@@ -380,22 +380,19 @@ class User < ApplicationRecord
     role_type == 'other'
   end
 
-  # return [Boolean]
+  # @return [Boolean]
   def training_emails_recipient?
     training_emails || training_emails.nil?
   end
 
-  # return [Boolean]
+  # @return [Boolean]
   def research_participant?
-    response = responses.feedback.find { |preference| preference.question.skippable? }
-    if response.nil?
+    if user_research_response.nil?
       update(research_participant: false)
       false
     else
-      option = response.question.options(checked: response.answers).find(&:checked?)
-      opt_in = option.id.eql?(1)
-      update(research_participant: opt_in)
-      opt_in
+      update(research_participant: user_research_response.answers.eql?([1]))
+      research_participant
     end
   end
 
@@ -489,6 +486,11 @@ class User < ApplicationRecord
   end
 
 private
+
+  # @return [Response]
+  def user_research_response
+    responses.feedback.find { |response| response.question.skippable? }
+  end
 
   # @return [Hash]
   def data_attributes

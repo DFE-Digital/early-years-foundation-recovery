@@ -4,14 +4,6 @@ RSpec.describe 'Account page', type: :system do
   include_context 'with user'
 
   before do
-    create :response,
-           question_name: 'feedback-skippable',
-           training_module: 'course',
-           answers: [1],
-           correct: true,
-           user: user,
-           question_type: 'feedback'
-
     visit '/my-account'
   end
 
@@ -29,7 +21,7 @@ RSpec.describe 'Account page', type: :system do
     expect(page).to have_text 'You have chosen to receive emails about this training course.'
 
     expect(page).to have_link 'Change research preferences'
-    expect(page).to have_text 'You have chosen to participate in research.'
+    expect(page).to have_text 'You have chosen not to participate in research.'
 
     expect(page).to have_text 'Closing your account'
   end
@@ -66,15 +58,29 @@ RSpec.describe 'Account page', type: :system do
       expect(page).to have_text 'Not applicable'
     end
 
-    it 'research participation preference' do
-      expect(page).to have_text 'You have chosen to participate in research.'
-      click_on 'Change research preferences'
-      expect(page).to have_current_path '/feedback/feedback-skippable'
-      choose 'Option 2'
-      click_button 'Next'
-      expect(page).to have_current_path '/my-account'
-      expect(page).to have_text 'You have chosen not to participate in research.'
-      expect(page).to have_text 'Your details have been updated'
+    describe 'research participation preference' do
+      before do
+        create :response,
+               question_name: 'feedback-skippable',
+               training_module: 'course',
+               answers: [1],
+               correct: true,
+               user: user,
+               question_type: 'feedback'
+
+        visit '/my-account'
+      end
+
+      it 'changes response' do
+        expect(page).to have_text 'You have chosen to participate in research.'
+        click_on 'Change research preferences'
+        expect(page).to have_current_path '/feedback/feedback-skippable'
+        choose 'Option 2'
+        click_button 'Next'
+        expect(page).to have_current_path '/my-account'
+        expect(page).to have_text 'You have chosen not to participate in research.'
+        expect(page).to have_text 'Your details have been updated'
+      end
     end
   end
 end
