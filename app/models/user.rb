@@ -440,6 +440,7 @@ class User < ApplicationRecord
             password: 'RedactedUser12!@')
 
     responses.feedback.update_all(text_input: nil)
+    mail_events.destroy_all
     notes.destroy_all
   end
 

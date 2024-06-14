@@ -190,8 +190,17 @@ RSpec.describe User, type: :model do
   describe '#redact!' do
     subject(:user) { create(:user, :registered) }
 
+    before do
+      user.mail_events.create!(template: '000')
+      user.notes.create!(training_module: 'alpha', body: 'this is a note')
+    end
+
     it 'redacts personal information' do
+      expect(user.mail_events.count).to be 1
+      expect(user.notes.count).to be 1
       user.redact!
+      expect(user.mail_events.count).to be 0
+      expect(user.notes.count).to be 0
 
       expect(user.gov_one_id).to start_with "#{user.id}urn:fdc:gov.uk:2022:"
       expect(user.first_name).to eq 'Redacted'
