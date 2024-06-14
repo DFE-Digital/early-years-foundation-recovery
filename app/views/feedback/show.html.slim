@@ -16,7 +16,7 @@
       hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
 
       .govuk-button-group
-        - if !current_user.guest? && current_user.events.last.name.eql?('profile_page')
+        - if current_user.profile_updated?
           = f.govuk_submit t('links.save')
         - else
           - if content.first_feedback?

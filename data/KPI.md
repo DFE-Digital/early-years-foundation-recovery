@@ -32,9 +32,6 @@ Event.where(name: 'module_content_page').where_properties(seed: true).count
 #=> 8680
 ```
 
-- `skipped: true` to preserve a user's progress when new module content pages are injected ([FillPageViews](../../FillPageViews)).
-  This will be necessary until content versioning is implemented.
-
 - `cloned: true` where named events such as `module_start` are created for users who have already started the module.
 
 #### Event Dictionary
@@ -86,34 +83,32 @@ Example event data from the `ahoy_visits` table.
 
 ## Transactions
 
-| Active | Feature                       | Key                             | Controllers                       | Path                                         |
-| :---   | :---                          | :---                            | :---                              | :---                                         |
-| [x]    | Homepage                      | `home_page`                     | `HomeController`                  | `/`                                          |
-| [x]    | Monitoring progress           | `learning_page`                 | `LearningController`              | `/my-modules`                                |
-| [x]    | Course overview               | `course_overview_page`          | `Training::ModulesController`     | `/modules`                                   |
-| [x]    | Module overview               | `module_overview_page`          | `Training::ModulesController`     | `/modules/{alpha}`                           |
-| [x]    | Module content                | `module_content_page`           | `Training::PagesController`       | `/modules/{alpha}/content-pages/{1}`         |
-| [x]    | Static page content           | `static_page`                   | `PagesController`                 | `/example-page`                              |
-| [x]    | Account completion            | `user_registration`             | `Registration::<Attrs>Controller` | `/registration/{attr}`                       |
-| [x]    | User profile                  | `profile_page`                  | `UserController`                  | `/my-account`                                |
-| [x]    | User name change              | `user_name_change`              | `UserController`                  | `/my-account/update-name`                    |
-| [ ]    | User email change             | `user_email_change`             | `UserController`                  | `/my-account/update-email`                   |
-| [ ]    | User password change          | `user_password_change`          | `UserController`                  | `/my-account/update-password`                |
-| [x]    | Email address taken           | `email_address_taken`           | `RegistrationsController`         | `/users/sign-up`                             |
-| [x]    | User inactivity logout        | `error_page`                    | `ErrorsController`                | `/timeout`                                   |
-| [x]    | 404 Error                     | `error_page`                    | `ErrorsController`                | `/404`                                       |
-| [x]    | 500 Error                     | `error_page`                    | `ErrorsController`                | `/500`                                       |
-| [x]    | Module start                  | `module_start`                  | `Training::PagesController`       | `/modules/{alpha}/content-pages/intro`       |
-| [x]    | Module complete               | `module_complete`               | `Training::ModulesController`     | `/modules/{alpha}/certificate`               |
-| [x]    | Questionnaire answered        | `questionnaire_answer`          | `Training::QuestionsController`   | `/modules/{alpha}/questionnaires/{path}`     |
-| [x]    | Summative assessment start    | `summative_assessment_start`    | `Training::QuestionsController`   | `/modules/{alpha}/questionnaires/{path}`     |
-| [x]    | Summative assessment complete | `summative_assessment_complete` | `Training::AssessmentsController` | `/modules/{alpha}/assessment-results/{path}` |
-| [x]    | Confidence check start        | `confidence_check_start`        | `Training::QuestionsController`   | `/modules/{alpha}/questionnaires/{path}`     |
-| [x]    | Confidence check complete     | `confidence_check_complete`     | `Training::PagesController`       | `/modules/{alpha}/questionnaires/{path}`     |
-| [x]    | User note created             | `user_note_created`             | `Training::NotesController`       | `/my-account/learning-log`                   |
-| [x]    | User note updated             | `user_note_updated`             | `Training::NotesController`       | `/my-account/learning-log`                   |
-| [x]    | Feedback started              | `feedback_start`                | `FeedbackController`              | `/feedback/{1}`                              |
-| [x]    | Feedback completed            | `feedback_complete`             | `FeedbackController`              | `/feedback/thank-you`                        |
+| Feature                       | Key                             | Controllers                       | Path                                         |
+| :---                          | :---                            | :---                              | :---                                         |
+| Homepage                      | `home_page`                     | `HomeController`                  | `/`                                          |
+| Monitoring progress           | `learning_page`                 | `LearningController`              | `/my-modules`                                |
+| Course overview               | `course_overview_page`          | `Training::ModulesController`     | `/modules`                                   |
+| Module overview               | `module_overview_page`          | `Training::ModulesController`     | `/modules/{alpha}`                           |
+| Module content                | `module_content_page`           | `Training::PagesController`       | `/modules/{alpha}/content-pages/{1}`         |
+| Static page content           | `static_page`                   | `PagesController`                 | `/example-page`                              |
+| Account completion            | `user_registration`             | `Registration::<Attrs>Controller` | `/registration/{attr}`                       |
+| User profile                  | `profile_page`                  | `UserController`                  | `/my-account`                                |
+| User name change              | `user_name_change`              | `UserController`                  | `/my-account/update-name`                    |
+| Email address taken           | `email_address_taken`           | `RegistrationsController`         | `/users/sign-up`                             |
+| User inactivity logout        | `error_page`                    | `ErrorsController`                | `/timeout`                                   |
+| 404 Error                     | `error_page`                    | `ErrorsController`                | `/404`                                       |
+| 500 Error                     | `error_page`                    | `ErrorsController`                | `/500`                                       |
+| Module start                  | `module_start`                  | `Training::PagesController`       | `/modules/{alpha}/content-pages/intro`       |
+| Module complete               | `module_complete`               | `Training::ModulesController`     | `/modules/{alpha}/certificate`               |
+| Questionnaire answered        | `questionnaire_answer`          | `Training::QuestionsController`   | `/modules/{alpha}/questionnaires/{path}`     |
+| Summative assessment start    | `summative_assessment_start`    | `Training::QuestionsController`   | `/modules/{alpha}/questionnaires/{path}`     |
+| Summative assessment complete | `summative_assessment_complete` | `Training::AssessmentsController` | `/modules/{alpha}/assessment-results/{path}` |
+| Confidence check start        | `confidence_check_start`        | `Training::QuestionsController`   | `/modules/{alpha}/questionnaires/{path}`     |
+| Confidence check complete     | `confidence_check_complete`     | `Training::PagesController`       | `/modules/{alpha}/questionnaires/{path}`     |
+| User note created             | `user_note_created`             | `Training::NotesController`       | `/my-account/learning-log`                   |
+| User note updated             | `user_note_updated`             | `Training::NotesController`       | `/my-account/learning-log`                   |
+| Feedback started              | `feedback_start`                | `FeedbackController`              | `/feedback/{1}`                              |
+| Feedback completed            | `feedback_complete`             | `FeedbackController`              | `/feedback/thank-you`                        |
 
 ## Metrics
 

@@ -13,7 +13,7 @@ class FeedbackController < ApplicationController
   end
 
   def update
-    if research_participation_updated?
+    if current_user.profile_updated?
       if save_response!
         flash[:success] = 'Your details have been updated'
         redirect_to user_path
@@ -31,11 +31,6 @@ class FeedbackController < ApplicationController
   end
 
 private
-
-  # @return [Boolean]
-  def research_participation_updated?
-    current_user_response.question.skippable? && current_user_response.persisted?
-  end
 
   # @return [Boolean]
   def save_response!

@@ -24,12 +24,6 @@ namespace :eyfs do
   end
 
   namespace :jobs do
-    # NB: Not yet CMS compatible
-    desc 'Add page view events for injected module items'
-    task plug_content: :environment do
-      FillPageViewsJob.enqueue
-    end
-
     # Queueing a dashboard job via Rake inverts the default and will not
     #   upload files to Looker Studio unless explicitly requested.
     #

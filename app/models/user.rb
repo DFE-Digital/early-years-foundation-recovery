@@ -450,6 +450,11 @@ class User < ApplicationRecord
   end
 
   # @return [Boolean]
+  def profile_updated?
+    events.any? && events.last.name.eql?('profile_page')
+  end
+
+  # @return [Boolean]
   def completed_available_modules?
     available_modules = ModuleRelease.pluck(:name)
     available_modules.all? { |mod_name| module_completed?(mod_name) }

@@ -31,7 +31,7 @@ RSpec.describe FeedbackController, type: :controller do
       context 'with valid params' do
         let(:params) do
           {
-            id: 'feedback-radio-only',
+            id: 'feedback-skippable',
             response: {
               answers: %w[1],
             },
@@ -44,10 +44,21 @@ RSpec.describe FeedbackController, type: :controller do
           }.to change(Response, :count).by(1)
         end
 
-        it 'redirects to the next question' do
-          post :update, params: params
-          expect(response).to have_http_status(:redirect)
-          expect(response).to redirect_to feedback_path('feedback-checkbox-only')
+        context 'and first response' do
+          it 'redirects to the next feedback content' do
+            post :update, params: params
+            expect(response).to have_http_status(:redirect)
+            expect(response).to redirect_to feedback_path('thank-you')
+          end
+        end
+
+        context 'and subsequent responses' do
+          it 'redirects to the profile page' do
+            create :event, user: user, name: 'profile_page'
+            post :update, params: params
+            expect(response).to have_http_status(:redirect)
+            expect(response).to redirect_to user_path
+          end
         end
 
         it 'is tracked as started' do
