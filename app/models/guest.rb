@@ -24,6 +24,11 @@ class Guest < Dry::Struct
     false
   end
 
+  # @return [nil]
+  def user_research_response
+    nil
+  end
+
   # @param question [Training::Question]
   # @return [Boolean]
   def skip_question?(question)

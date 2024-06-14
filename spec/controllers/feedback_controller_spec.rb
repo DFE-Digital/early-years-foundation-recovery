@@ -18,6 +18,26 @@ RSpec.describe FeedbackController, type: :controller do
         get :show, params: { id: 'feedback-radio-only' }
         expect(response).to have_http_status(:success)
       end
+
+      context 'when the shared question was answered during a training module' do
+        let(:answer) do
+          create :response,
+            user: user,
+            training_module: 'alpha',
+            question_name: 'feedback-skippable',
+            question_type: 'feedback',
+            answers: [1] # yes / participate
+        end
+
+        it 'moved to the main form' do
+          expect {
+            get :show, params: { id: 'feedback-skippable' }
+          }.to change {
+            answer.reload.training_module
+          }.from('alpha').to('course')
+        end
+      end
+
     end
 
     describe 'GET #index' do

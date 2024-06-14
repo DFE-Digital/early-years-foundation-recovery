@@ -1,4 +1,6 @@
 class FeedbackController < ApplicationController
+  before_action :research_participation, only: :show
+
   helper_method :content,
                 :mod,
                 :current_user_response
@@ -13,14 +15,9 @@ class FeedbackController < ApplicationController
   end
 
   def update
-    if current_user.profile_updated?
-      if save_response!
-        flash[:success] = 'Your details have been updated'
-        redirect_to user_path
-      else
-        render :show, status: :unprocessable_entity
-      end
-
+    if current_user.profile_updated? && save_response!
+      flash[:success] = 'Your details have been updated'
+      redirect_to user_path
     elsif save_response!
       feedback_cookie
       track_feedback_start
@@ -31,6 +28,17 @@ class FeedbackController < ApplicationController
   end
 
 private
+
+  # @note
+  #   associate the user research participation question to the course form
+  #   if answered during a training module
+  #
+  def research_participation
+    response = current_user.user_research_response
+    if content.skippable? && response.present? && !response.training_module.eql?('course')
+      response.update(training_module: 'course')
+    end
+  end
 
   # @return [Boolean]
   def save_response!

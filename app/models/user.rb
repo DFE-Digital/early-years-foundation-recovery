@@ -487,12 +487,12 @@ class User < ApplicationRecord
     data_attributes
   end
 
-private
-
   # @return [Response]
   def user_research_response
     responses.feedback.find { |response| response.question.skippable? }
   end
+
+private
 
   # @return [Hash]
   def data_attributes
