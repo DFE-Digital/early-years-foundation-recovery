@@ -19,6 +19,11 @@ RSpec.describe 'Application configuration' do
     expect(config.contentful_management_access_token).not_to be_present # user specific
   end
 
+  it 'expires sessions after 24 hrs' do
+    expect(config.timeout_in_minutes).to eq 1440
+    expect(Devise.timeout_in.in_days).to eq 1.0
+  end
+
   it 'sets time zone' do
     expect(config.time_zone).to eq 'UTC'
   end
@@ -41,14 +46,6 @@ RSpec.describe 'Application configuration' do
     end
   end
 
-  describe 'time out' do
-    it 'sets interval in minutes' do
-      expect(config.user_timeout_minutes).to eq 60
-      expect(config.user_timeout_warning_minutes).to eq 55
-      expect(config.user_timeout_modal_visible).to eq 5
-    end
-  end
-
   describe 'pages accessible even when in maintenance mode' do
     specify do
       expect(config.protected_endpoints).to eq %w[
@@ -56,6 +53,7 @@ RSpec.describe 'Application configuration' do
         /health
         /change
         /release
+        /notify
       ]
     end
   end

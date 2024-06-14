@@ -16,8 +16,6 @@ RSpec.describe 'Static page', :cms, type: :request do
 
     specify { expect('/terms-and-conditions').to be_successful }
 
-    specify { expect('/users/timeout').to be_successful }
-
     specify { expect('/wifi-and-data').to be_successful }
   end
 

@@ -1,4 +1,6 @@
 class NotifyMailer < GovukNotifyRails::Mailer
+  after_deliver :log_delivery
+
   # @return [Hash<Symbol => String>]
   TEMPLATE_IDS = {
     account_closed: '0a4754ee-6175-444c-98a1-ebef0b14e7f7',
@@ -7,68 +9,84 @@ class NotifyMailer < GovukNotifyRails::Mailer
     continue_training: '83dd3dc6-c5de-4e32-a6b4-25c76e805d87',
     new_module: '2352b6ce-a098-47f0-870a-286308b9798f',
     start_training: 'b3c2e4ff-da06-4672-8941-b2f50d37eadc',
+    test_bulk: '7c5fa953-4208-4bc4-919a-4ede23db65c1',
   }.freeze
 
-  # @param record [User]
+  # @param user [User]
   # @return [Mail::Message]
-  def account_closed(record)
+  def test_bulk(user)
+    set_template TEMPLATE_IDS[:test_bulk]
+    set_personalisation(
+      name: user.name,
+      url: root_url,
+      email: user.email,
+      domain: ENV['DOMAIN'],
+      env: ENV['ENVIRONMENT'],
+    )
+    mail(to: user.email)
+  end
+
+  # @param user [User]
+  # @return [Mail::Message]
+  def account_closed(user)
     set_template TEMPLATE_IDS[:account_closed]
     set_personalisation(
-      name: record.name,
-      email: record.email,
+      name: user.name,
+      email: user.email,
     )
-    mail(to: record.email)
+    mail(to: user.email)
   end
 
-  # @param record [User]
-  # @param user_email_address [String]
+  # @param user [User]
   # @return [Mail::Message]
-  def account_closed_internal(record, user_email_address)
+  def account_closed_internal(user)
     set_template TEMPLATE_IDS[:account_closed_internal]
     set_personalisation(
-      email: record.email,
-      user_email_address: user_email_address,
+      user_email_address: user.email,
+      email: Course.config.internal_mailbox,
     )
-    mail(to: record.email)
+    mail(to: Course.config.internal_mailbox)
   end
 
-  # @param record [User]
+  # @param user [User]
   # @return [Mail::Message]
-  def complete_registration(record)
+  def complete_registration(user)
     set_template TEMPLATE_IDS[:complete_registration]
     set_personalisation(
       url: root_url,
     )
-    mail(to: record.email)
+    mail(to: user.email)
   end
 
-  # @param record [User]
+  # @param user [User]
   # @return [Mail::Message]
-  def start_training(record)
+  def start_training(user)
     set_template TEMPLATE_IDS[:start_training]
     set_personalisation(
       url: root_url,
     )
-    mail(to: record.email)
+    mail(to: user.email)
   end
 
-  # @param record [User]
+  # @param user [User]
   # @param mod [Training::Module]
   # @return [Mail::Message]
-  def continue_training(record, mod)
+  def continue_training(user, mod)
     set_template TEMPLATE_IDS[:continue_training]
     set_personalisation(
       mod_number: mod.position,
       mod_name: mod.title,
       url: root_url,
     )
-    mail(to: record.email)
+    mail(to: user.email)
   end
 
-  # @param record [User]
+  # @see https://apidock.com/rails/v7.1.3.2/ActiveJob/SerializationError
+  #
+  # @param user [User]
   # @param mod [Training::Module]
   # @return [Mail::Message]
-  def new_module(record, mod)
+  def new_module(user, mod)
     set_template TEMPLATE_IDS[:new_module]
     set_personalisation(
       mod_number: mod.position,
@@ -76,6 +94,19 @@ class NotifyMailer < GovukNotifyRails::Mailer
       mod_criteria: mod.criteria,
       url: root_url,
     )
-    mail(to: record.email)
+    mail(to: user.email)
+  end
+
+private
+
+  # @return [MailEvent, nil]
+  def log_delivery
+    if (user = User.find_by(email: Array(message.to).first))
+      MailEvent.create!(
+        user: user,
+        template: govuk_notify_template,
+        personalisation: govuk_notify_personalisation,
+      )
+    end
   end
 end

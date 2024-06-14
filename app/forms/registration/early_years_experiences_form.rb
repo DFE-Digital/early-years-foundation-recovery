@@ -4,11 +4,6 @@ module Registration
 
     validates :early_years_experience, presence: true
 
-    # @return [Array<Trainee::Experience>]
-    def early_years_experiences
-      Trainee::Experience.all
-    end
-
     # @return [Boolean]
     def save
       return false unless valid?

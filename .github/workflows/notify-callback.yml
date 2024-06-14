@@ -8,7 +8,7 @@ on:
       deployment:
         description: development, staging, production
         type: string
-        default: development
+        default: staging
       email:
         description: User email address
         type: string
@@ -19,11 +19,12 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.deployment }}
     steps:
-      - name: Mock callback
+      - name: Mock test message delivery
         run: |
           curl \
+            --no-progress-meter \
             --request POST \
-            --header 'BOT: ${{ secrets.BOT_TOKEN }}' \
+            --header 'Authorization: Bearer token ${{ secrets.BOT_TOKEN }}' \
             --header 'Content-type: application/json' \
-            --data '{"to": "${{ inputs.email }}"}' \
+            --data '{"to":"${{ inputs.email }}","template_id":"7c5fa953-4208-4bc4-919a-4ede23db65c1","status":"delivered","notification_type":"email"}' \
             'https://${{ vars.WEBAPP_CONFIG_DOMAIN }}/notify'

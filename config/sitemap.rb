@@ -39,8 +39,6 @@ SitemapGenerator::Sitemap.create do
   # add '/422'
   add '/500'
 
-  add users_timeout_path
-
   add course_overview_path
   add experts_path
 
