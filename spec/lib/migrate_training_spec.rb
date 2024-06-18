@@ -23,6 +23,24 @@ RSpec.describe MigrateTraining do
       expect(Response.count).to eq 0
       expect(User.count).to eq 1
     end
+
+    it 'resets primary keys' do
+      create :assessment, user: user
+      create :response, user: user
+      expect(Assessment.last.id).to eq 1
+      expect(Response.last.id).to eq 1
+    end
+  end
+
+  context 'when data is invalid' do
+    before do
+      create :user_answer, user_id: user.id, name: 'foo', questionnaire_id: 0
+    end
+
+    it 'is ignored' do
+      expect { described_class.new.call }.to output(/Invalid UserAnswer/).to_stdout
+      expect(Response.count).to eq 0
+    end
   end
 
   context 'when data is valid' do
@@ -141,19 +159,10 @@ RSpec.describe MigrateTraining do
       # last question
       expect(bravo_assessment.completed_at).to be_nil
     end
-
-    it 'preserves response primary key' do
-      operation.call
-      user_answer = UserAnswer.find_by(name: '1-3-2-1')
-      response = Response.find_by(question_name: '1-3-2-1')
-
-      expect(response.id).to eq user_answer.id
-    end
   end
 
-  context 'when assessment score is invalid' do
+  context 'when assessment score exceeds 100' do
     before do
-      # Charlie (inconsistent)
       charlie_assessment =
         create :user_assessment,
                user_id: user.id,
@@ -175,20 +184,12 @@ RSpec.describe MigrateTraining do
     end
 
     it 'is corrected' do
-      expect(UserAssessment.count).to eq 1
       expect(Assessment.count).to be 1
-
-      expect(UserAnswer.count).to be 20
-      expect(Response.count).to be 20
-
-      expect(UserAssessment.first.user_answers.count).to eq 20
-      expect(Assessment.first.responses.count).to eq 20
-
       expect(Assessment.first.score).to eq 100.0
     end
   end
 
-  context 'with resume' do
+  context 'when resuming' do
     before do
       assessment_1 =
         create :user_assessment,
@@ -208,8 +209,17 @@ RSpec.describe MigrateTraining do
     end
 
     it 'migrates remaining data' do
-      last_user_answer_id = UserAnswer.last.id
+      # in progress
+      create_list :user_answer, 3,
+                  user_id: user.id,
+                  name: '1-3-2-1',
+                  module: 'bravo',
+                  assessments_type: 'summative_assessment',
+                  user_assessment_id: nil,
+                  questionnaire_id: 0,
+                  created_at: Time.zone.now
 
+      # completed
       assessment_2 =
         create :user_assessment,
                user_id: user.id,
@@ -224,16 +234,16 @@ RSpec.describe MigrateTraining do
                   questionnaire_id: 0,
                   created_at: Time.zone.now
 
-      described_class.new(verbose: false, resume: last_user_answer_id + 1).call
-
-      expect(UserAnswer.pluck(:id)[9]).to eq last_user_answer_id
-      expect(UserAnswer.pluck(:id)[19]).to eq UserAnswer.last.id
+      described_class.new(verbose: false).call
 
       expect(UserAssessment.count).to eq 2
-      expect(Assessment.count).to be 2
+      expect(Assessment.count).to be 3
 
-      expect(UserAnswer.count).to be 20
-      expect(Response.count).to be 20
+      expect(UserAnswer.count).to be 23
+      expect(Response.count).to be 23
+
+      expect(Assessment.all.map(&:training_module)).to eq %w[alpha bravo charlie]
+      expect(Assessment.all.map(&:score)).to eq [0.0, nil, 0.0]
     end
   end
 end
