@@ -36,7 +36,7 @@ private
   def research_participation
     response = current_user.user_research_response
     if content.skippable? && response.present? && !response.training_module.eql?('course')
-      response.update(training_module: 'course')
+      response.update!(training_module: 'course')
     end
   end
 

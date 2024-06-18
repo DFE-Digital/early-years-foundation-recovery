@@ -9,6 +9,8 @@ module DataAnalysis
           Guest
           Question
           Answers
+          Created
+          Updated
         ]
       end
 
@@ -18,9 +20,18 @@ module DataAnalysis
           :visit_id,
           :question_name,
           :answers,
+          :created_at,
+          :updated_at,
         ).map do |user|
-          user.attributes.symbolize_keys.except(:id)
+          decorator.call user.attributes.symbolize_keys.except(:id)
         end
+      end
+
+    private
+
+      # @return [CoercionDecorator]
+      def decorator
+        @decorator ||= CoercionDecorator.new
       end
     end
   end

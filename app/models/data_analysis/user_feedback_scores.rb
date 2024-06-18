@@ -16,23 +16,30 @@ module DataAnalysis
           'Module',
           'Question',
           'Answers',
+          'Created',
+          'Updated',
         ]
       end
 
       # @return [Array<Hash{Symbol => Mixed}>]
       def dashboard
         User.with_feedback.order(:user_id, :question_name).select(*agreed_attributes).map do |user|
-          user.attributes.symbolize_keys.except(:id)
+          decorator.call user.attributes.symbolize_keys.except(:id)
         end
       end
 
     private
 
+      # @return [CoercionDecorator]
+      def decorator
+        @decorator ||= CoercionDecorator.new
+      end
+
       # @note Personally identifiable information must not be revealed
       #
       # @return [Array<Symbol>]
       def agreed_attributes
-        %i[
+        %w[
           user_id
           role_type
           role_type_other
@@ -43,6 +50,8 @@ module DataAnalysis
           training_module
           question_name
           answers
+          responses.created_at
+          responses.updated_at
         ]
       end
     end

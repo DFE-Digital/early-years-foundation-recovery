@@ -15,6 +15,8 @@ RSpec.describe DataAnalysis::UserFeedbackScores do
       'Module',
       'Question',
       'Answers',
+      'Created',
+      'Updated',
     ]
   end
   let(:rows) do
@@ -30,6 +32,8 @@ RSpec.describe DataAnalysis::UserFeedbackScores do
         training_module: 'course',
         question_name: 'feedback-checkbox-only',
         answers: [1, 2],
+        created_at: '2023-01-01 00:00:00',
+        updated_at: '2023-01-01 00:00:00',
       },
       {
         user_id: user_1.id,
@@ -42,6 +46,8 @@ RSpec.describe DataAnalysis::UserFeedbackScores do
         training_module: 'course',
         question_name: 'feedback-textarea-only',
         answers: [],
+        created_at: '2023-01-01 00:00:00',
+        updated_at: '2023-01-01 00:00:00',
       },
       {
         user_id: user_2.id,
@@ -54,6 +60,8 @@ RSpec.describe DataAnalysis::UserFeedbackScores do
         training_module: 'alpha',
         question_name: 'feedback-checkbox-only',
         answers: [1, 2, 3, 4],
+        created_at: '2023-01-01 00:00:00',
+        updated_at: '2023-01-01 00:00:00',
       },
       {
         user_id: user_2.id,
@@ -66,6 +74,8 @@ RSpec.describe DataAnalysis::UserFeedbackScores do
         training_module: 'alpha',
         question_name: 'feedback-radio-only',
         answers: [1],
+        created_at: '2023-01-01 00:00:00',
+        updated_at: '2023-01-01 00:00:00',
       },
       {
         user_id: user_2.id,
@@ -78,6 +88,8 @@ RSpec.describe DataAnalysis::UserFeedbackScores do
         training_module: 'alpha',
         question_name: 'feedback-textarea-only',
         answers: [],
+        created_at: '2023-01-01 00:00:00',
+        updated_at: '2023-01-01 00:00:00',
       },
     ]
   end
@@ -86,16 +98,59 @@ RSpec.describe DataAnalysis::UserFeedbackScores do
     skip unless Rails.application.migrated_answers?
 
     # guests not included
-    create(:response, user: nil, visit: Visit.new, question_type: 'feedback', training_module: 'course', question_name: 'feedback-radio-only', answers: [1])
+    create(:response,
+           user: nil,
+           visit: Visit.new,
+           question_type: 'feedback',
+           training_module: 'course',
+           question_name: 'feedback-radio-only',
+           answers: [1])
 
     # course
-    create(:response, user: user_1, question_type: 'feedback', training_module: 'course', question_name: 'feedback-checkbox-only', answers: [1, 2])
-    create(:response, user: user_1, question_type: 'feedback', training_module: 'course', question_name: 'feedback-textarea-only', text_input: 'potential PII', answers: [])
+    create(:response,
+           user: user_1,
+           question_type: 'feedback',
+           training_module: 'course',
+           question_name: 'feedback-checkbox-only',
+           answers: [1, 2],
+           created_at: Time.zone.local(2023, 1, 1),
+           updated_at: Time.zone.local(2023, 1, 1))
+    create(:response,
+           user: user_1,
+           question_type: 'feedback',
+           training_module: 'course',
+           question_name: 'feedback-textarea-only',
+           text_input: 'potential PII',
+           answers: [],
+           created_at: Time.zone.local(2023, 1, 1),
+           updated_at: Time.zone.local(2023, 1, 1))
 
     # module
-    create(:response, user: user_2, question_type: 'feedback', training_module: 'alpha', question_name: 'feedback-radio-only', answers: [1])
-    create(:response, user: user_2, question_type: 'feedback', training_module: 'alpha', question_name: 'feedback-checkbox-only', answers: [1, 2, 3, 4])
-    create(:response, user: user_2, question_type: 'feedback', training_module: 'alpha', question_name: 'feedback-textarea-only', text_input: 'potential PII', answers: [])
+    create(:response,
+           user: user_2,
+           question_type: 'feedback',
+           training_module: 'alpha',
+           question_name: 'feedback-radio-only',
+           answers: [1],
+           created_at: Time.zone.local(2023, 1, 1),
+           updated_at: Time.zone.local(2023, 1, 1))
+    create(:response,
+           user: user_2,
+           question_type: 'feedback',
+           training_module: 'alpha',
+           question_name: 'feedback-checkbox-only',
+           answers: [1, 2, 3, 4],
+           created_at: Time.zone.local(2023, 1, 1),
+           updated_at: Time.zone.local(2023, 1, 1))
+    create(:response,
+           user: user_2,
+           question_type: 'feedback',
+           training_module: 'alpha',
+           question_name: 'feedback-textarea-only',
+           text_input: 'potential PII',
+           answers: [],
+           created_at: Time.zone.local(2023, 1, 1),
+           updated_at: Time.zone.local(2023, 1, 1))
   end
 
   it_behaves_like 'a data export model'

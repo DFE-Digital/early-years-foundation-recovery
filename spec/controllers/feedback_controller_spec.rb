@@ -22,11 +22,11 @@ RSpec.describe FeedbackController, type: :controller do
       context 'when the shared question was answered during a training module' do
         let(:answer) do
           create :response,
-            user: user,
-            training_module: 'alpha',
-            question_name: 'feedback-skippable',
-            question_type: 'feedback',
-            answers: [1] # yes / participate
+                 user: user,
+                 training_module: 'alpha',
+                 question_name: 'feedback-skippable',
+                 question_type: 'feedback',
+                 answers: [1] # yes / participate
         end
 
         it 'moved to the main form' do
@@ -37,7 +37,6 @@ RSpec.describe FeedbackController, type: :controller do
           }.from('alpha').to('course')
         end
       end
-
     end
 
     describe 'GET #index' do
