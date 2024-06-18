@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_25_053022) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_16_092250) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -169,6 +169,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_25_053022) do
     t.string "name"
     t.string "assessments_type"
     t.bigint "user_assessment_id"
+    t.string "state"
     t.index ["questionnaire_id", "user_id"], name: "index_user_answers_on_questionnaire_id_and_user_id"
     t.index ["questionnaire_id"], name: "index_user_answers_on_questionnaire_id"
     t.index ["user_assessment_id"], name: "index_user_answers_on_user_assessment_id"

@@ -63,7 +63,7 @@ jobs:
 
       # Build and push image
       - name: Build and push dependencies
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           target: deps
           context: .
@@ -76,7 +76,7 @@ jobs:
           tags: ${{ env.DOCKER_IMAGE }}:deps
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           target: app
           context: .
