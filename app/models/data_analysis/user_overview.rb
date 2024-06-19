@@ -38,6 +38,8 @@ module DataAnalysis
           'Terms and Conditions Agreed',
           'Received Mail Yesterday',
           'Received Mail Today',
+          'User Email Success',
+          'User Email Fail',
         ]
       end
 
@@ -76,6 +78,8 @@ module DataAnalysis
           terms_and_conditions_agreed: terms_and_conditions_agreed_count,
           mail_yesterday: User.email_delivered_days_ago(1).count,
           mail_today: User.email_delivered_today.count,
+          mail_delivered: User.email_status('delivered').count,
+          mail_undelivered: User.email_status('undelivered').count,
         }]
       end
 
