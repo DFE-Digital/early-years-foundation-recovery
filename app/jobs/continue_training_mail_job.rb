@@ -1,3 +1,5 @@
+# Sends mail for continue training for a module
+# @note This queues up this job unless stated otherwise
 class ContinueTrainingMailJob < MailJob
   def run
     super do
