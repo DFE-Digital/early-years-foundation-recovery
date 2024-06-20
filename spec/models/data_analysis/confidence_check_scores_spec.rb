@@ -20,15 +20,15 @@ RSpec.describe DataAnalysis::ConfidenceCheckScores do
     [
       {
         module_name: 'module_1',
-        question_name: 'q1',
-        answers: [1],
-        count: 1,
-      },
-      {
-        module_name: 'module_1',
         question_name: 'q2',
         answers: [2],
         count: 2,
+      },
+      {
+        module_name: 'module_1',
+        question_name: 'q1',
+        answers: [1],
+        count: 1,
       },
     ]
   end

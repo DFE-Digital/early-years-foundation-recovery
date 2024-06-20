@@ -97,7 +97,7 @@ describe 'LinkHelper', type: :helper do
 
       it 'links to retake' do
         expect(link).to include 'Retake end of module test'
-        expect(link).to include 'href="/modules/alpha/assessment-result/new"'
+        expect(link).to include 'href="/modules/alpha/content-pages/1-3-2"'
       end
     end
 
@@ -160,7 +160,7 @@ describe 'LinkHelper', type: :helper do
       end
 
       it 'targets new assessment attempt' do
-        expect(link).to eq ['Retake test', '/modules/alpha/assessment-result/new']
+        expect(link).to eq ['Retake test', '/modules/alpha/content-pages/1-3-2']
       end
     end
   end

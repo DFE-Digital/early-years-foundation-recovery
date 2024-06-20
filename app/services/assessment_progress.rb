@@ -46,7 +46,6 @@ class AssessmentProgress
     !passed?
   end
 
-  # deprecate see track_events
   # @return [Boolean] CTA failed_attempt state
   def attempted?
     assessment.present?
@@ -73,7 +72,6 @@ class AssessmentProgress
     assessment_responses.select(&:correct?)
   end
 
-  # TODO: drop memoisation
   # @return [Assessment]
   def assessment
     @assessment ||= user.assessments.where(training_module: mod.name).order(:started_at).last

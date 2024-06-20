@@ -12,10 +12,6 @@ module Training
 
     layout 'hero'
 
-    def new
-      redirect_to training_module_page_path(mod.name, mod.assessment_intro_page.name)
-    end
-
     def show; end
 
   private
