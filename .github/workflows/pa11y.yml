@@ -36,6 +36,7 @@ jobs:
           cache: npm
       -
         name: Install Chrome
+        id: setup-chrome
         uses: browser-actions/setup-chrome@latest
       -
         name: Install pa11y-ci
@@ -48,7 +49,7 @@ jobs:
       -
         name: Audit
         env:
-          PUPPETEER_EXECUTABLE_PATH: /opt/hostedtoolcache/chromium/latest/x64/chrome
+          PUPPETEER_EXECUTABLE_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
         run: pa11y-ci --sitemap https://${DOMAIN}/sitemap.xml > report.txt
       -
         name: Report

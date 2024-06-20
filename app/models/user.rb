@@ -170,15 +170,15 @@ class User < ApplicationRecord
   scope :with_mail_events, -> { joins(:mail_events) }
   scope :with_new_module_mail_events, -> { with_mail_events.merge(MailEvent.newest_module).distinct }
 
-  scope :email_delivered, lambda {
-    training_email_recipients.or(early_years_email_recipients).where('notify_callback @> ?', { notification_type: 'email', status: 'delivered' }.to_json).distinct
+  scope :email_status, lambda { |status|
+    training_email_recipients.or(early_years_email_recipients).where('notify_callback @> ?', { notification_type: 'email', status: status }.to_json).distinct
   }
   scope :email_delivered_days_ago, lambda { |num|
-    email_delivered.where("CAST(notify_callback ->> 'sent_at' AS DATE) = CURRENT_DATE - #{num}")
+    email_status('delivered').where("CAST(notify_callback ->> 'sent_at' AS DATE) = CURRENT_DATE - #{num}")
   }
   scope :email_delivered_today, -> { email_delivered_days_ago(0) }
   scope :last_email_delivered, lambda { |template_id|
-    email_delivered.where('notify_callback @> ?', { template_id: template_id }.to_json)
+    email_status('delivered').where('notify_callback @> ?', { template_id: template_id }.to_json)
   }
 
   # data
@@ -254,7 +254,7 @@ class User < ApplicationRecord
 
   # @return [String]
   def email_delivery_status
-    notify_callback.to_h.fetch('status', 'unknown')
+    notify_callback.to_h.symbolize_keys.fetch(:status, 'unknown')
   end
 
   # @return [String]
@@ -408,8 +408,10 @@ class User < ApplicationRecord
             last_name: 'User',
             email: "redacted_user#{id}@example.com",
             closed_at: Time.zone.now,
-            password: 'RedactedUser12!@')
+            password: 'RedactedUser12!@',
+            notify_callback: nil)
 
+    mail_events.destroy_all
     notes.destroy_all
   end
 
