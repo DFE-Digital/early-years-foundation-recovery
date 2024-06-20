@@ -57,11 +57,7 @@ RSpec.describe 'Summative assessment', type: :system do
       include_context 'with automated path'
 
       let(:fixture) do
-        if Rails.application.migrated_answers?
-          'spec/support/ast/alpha-pass-response.yml'
-        else
-          'spec/support/ast/alpha-pass.yml'
-        end
+        'spec/support/ast/alpha-pass-response.yml'
       end
 
       before do
@@ -103,11 +99,7 @@ RSpec.describe 'Summative assessment', type: :system do
       include_context 'with automated path'
 
       let(:fixture) do
-        if Rails.application.migrated_answers?
-          'spec/support/ast/alpha-fail-response.yml'
-        else
-          'spec/support/ast/alpha-fail.yml'
-        end
+        'spec/support/ast/alpha-fail-response.yml'
       end
 
       it 'displays score with wrong answers' do

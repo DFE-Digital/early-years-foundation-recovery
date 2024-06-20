@@ -16,29 +16,14 @@ class AssessmentProgress
 
   # @see Training::ResponsesController#redirect
   #
-  # @return [Array<UserAnswer>, Assessment, nil]
+  # @return [Assessment, nil]
   def grade!
-    if Rails.application.migrated_answers?
-      unless graded?
-        assessment.update(
-          score: score,
-          passed: passed?,
-          completed_at: Time.zone.now,
-        )
-      end
-    else
-      update_responses(user_assessment_id: assessment.id)
-    end
-  end
-
-  # @see Training::AssessmentsController#new
-  #
-  # @return [Array<UserAnswer>] deprecate
-  def retake!
-    if Rails.application.migrated_answers?
-      :no_op
-    else
-      update_responses(archived: true)
+    unless graded?
+      assessment.update(
+        score: score,
+        passed: passed?,
+        completed_at: Time.zone.now,
+      )
     end
   end
 
@@ -53,11 +38,7 @@ class AssessmentProgress
 
   # @return [Boolean]
   def passed?
-    if Rails.application.migrated_answers?
-      assessment&.passed? || score >= THRESHOLD
-    else
-      score >= THRESHOLD
-    end
+    assessment&.passed? || score >= THRESHOLD
   end
 
   # @return [Boolean]
@@ -68,65 +49,33 @@ class AssessmentProgress
   # deprecate see track_events
   # @return [Boolean] CTA failed_attempt state
   def attempted?
-    if Rails.application.migrated_answers?
-      assessment.present?
-    else
-      user.user_assessments.where(assessments_type: 'summative_assessment', module: mod.name).any?
-    end
+    assessment.present?
   end
 
   # @return [Float] percentage of correct responses
   def score
-    if Rails.application.migrated_answers?
-      assessment.score || (correct_responses.count.to_f / mod.summative_questions.count) * 100
-    else
-      (correct_responses.count.to_f / mod.summative_questions.count) * 100
-    end
+    assessment.score || (correct_responses.count.to_f / mod.summative_questions.count) * 100
   rescue ZeroDivisionError, NoMethodError
     0.0
   end
+
+  # @note #correct? validates against current question options
+  # @return [Array<Response>]
+  delegate :responses, to: :assessment, prefix: true
 
   # @return [Array<Response>]
   def incorrect_responses
     assessment_responses.reject(&:correct?)
   end
 
-  # delegate :responses, to: :assessment # swap to delegation
-  # @return [Array<Response>, Array<UserAnswers>]
-  def assessment_responses
-    if Rails.application.migrated_answers?
-      assessment.responses
-    else
-      user.user_answers
-        .not_archived.where(module: mod.name)
-        .select { |response| response.question.summative_question? }
-    end
-  end
-
-  # @return [Array<UserAnswer>] deprecate
-  def update_responses(params)
-    assessment_responses.each { |response| response.update!(params) }
-  end
-
-  # @note #correct? validates against current question options
   # @return [Array<Response>]
   def correct_responses
     assessment_responses.select(&:correct?)
   end
 
   # TODO: drop memoisation
-  # @return [UserAssessment, Assessment]
+  # @return [Assessment]
   def assessment
-    @assessment ||= if Rails.application.migrated_answers?
-                      user.assessments.where(training_module: mod.name).order(:started_at).last
-                    else
-                      UserAssessment.create!(
-                        user_id: user.id,
-                        score: score.to_i,
-                        status: (passed? ? 'passed' : 'failed'),
-                        module: mod.name,
-                        assessments_type: 'summative_assessment',
-                      )
-                    end
+    @assessment ||= user.assessments.where(training_module: mod.name).order(:started_at).last
   end
 end

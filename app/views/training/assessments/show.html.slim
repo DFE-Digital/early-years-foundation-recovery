@@ -4,11 +4,6 @@
 - content_for :hero do
   = render 'training/modules/section_bar'
 
-- if debug?
-  pre.debug_dump
-    hr
-    | Class: #{Rails.application.migrated_answers? ? 'Response' : 'UserAnswer'}
-
 .govuk-grid-row
   #assessment-results.govuk-grid-column-full
     h1.govuk-heading-l

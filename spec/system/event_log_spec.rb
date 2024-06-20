@@ -14,11 +14,7 @@ RSpec.describe 'Event log' do
 
     context 'when all questions are answered' do
       it 'tracks answers and completion' do
-        if Rails.application.migrated_answers?
-          expect(events.where(name: 'questionnaire_answer').where_properties(type: 'confidence').size).to eq 4
-        else
-          expect(events.where(name: 'questionnaire_answer').where_properties(type: 'confidence_check').size).to eq 4
-        end
+        expect(events.where(name: 'questionnaire_answer').where_properties(type: 'confidence').size).to eq 4
         expect(events.where(name: 'confidence_check_complete').size).to eq 1
       end
     end
@@ -39,11 +35,7 @@ RSpec.describe 'Event log' do
 
     context 'when all questions are answered correctly' do
       it 'tracks answers and successful attempt' do
-        if Rails.application.migrated_answers?
-          expect(events.where(name: 'questionnaire_answer').where_properties(success: true, type: 'summative').size).to eq 10
-        else
-          expect(events.where(name: 'questionnaire_answer').where_properties(success: true, type: 'summative_assessment').size).to eq 10
-        end
+        expect(events.where(name: 'questionnaire_answer').where_properties(success: true, type: 'summative').size).to eq 10
         expect(events.where(name: 'summative_assessment_complete').where_properties(score: 100, success: true).size).to eq 1
       end
     end
@@ -53,12 +45,7 @@ RSpec.describe 'Event log' do
       let(:happy) { false }
 
       it 'tracks answers and failed attempt' do
-        if Rails.application.migrated_answers?
-          expect(events.where(name: 'questionnaire_answer').where_properties(success: false, type: 'summative').size).to eq 10
-        else
-          expect(events.where(name: 'questionnaire_answer').where_properties(success: false, type: 'summative_assessment').size).to eq 10
-        end
-
+        expect(events.where(name: 'questionnaire_answer').where_properties(success: false, type: 'summative').size).to eq 10
         expect(events.where(name: 'summative_assessment_complete').where_properties(score: 0, success: false).size).to eq 1
       end
     end
@@ -66,11 +53,7 @@ RSpec.describe 'Event log' do
 
   describe 'formative question' do
     it 'tracks answers' do
-      if Rails.application.migrated_answers?
-        expect(events.where(name: 'questionnaire_answer').where_properties(success: true, type: 'formative').size).to eq 3
-      else
-        expect(events.where(name: 'questionnaire_answer').where_properties(success: true, type: 'formative_assessment').size).to eq 3
-      end
+      expect(events.where(name: 'questionnaire_answer').where_properties(success: true, type: 'formative').size).to eq 3
     end
   end
 

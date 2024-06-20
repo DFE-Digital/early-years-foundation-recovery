@@ -55,10 +55,6 @@ RSpec.describe Training::Question, type: :model do
     expect(question.multi_select?).to be false
   end
 
-  it '#assessments_type' do
-    expect(question.assessments_type).to eq 'formative_assessment'
-  end
-
   describe '#legend' do
     context 'when one option is correct' do
       specify do

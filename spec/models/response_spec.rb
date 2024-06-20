@@ -4,7 +4,6 @@ RSpec.describe Response, type: :model do
   subject(:response) { user.response_for(question) }
 
   before do
-    skip unless Rails.application.migrated_answers?
     response.update!(answers: [1], correct: true)
   end
 

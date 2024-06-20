@@ -45,17 +45,10 @@ RSpec.describe DataAnalysis::ModulesPerMonth do
   let(:user_2) { create :user, :registered }
 
   before do
-    if Rails.application.migrated_answers?
-      create :assessment, :failed, user: user_1, completed_at: Time.zone.local(2023, 1, 1)
-      create :assessment, :passed, user: user_1, completed_at: Time.zone.local(2023, 1, 1)
-      create :assessment, :failed, user: user_1, completed_at: Time.zone.local(2023, 2, 1)
-      create :assessment, :passed, user: user_2, completed_at: Time.zone.local(2023, 3, 1)
-    else
-      create(:user_assessment, :passed, user_id: user_1.id, score: 100, module: 'alpha', created_at: Time.zone.local(2023, 1, 1))
-      create(:user_assessment, :failed, user_id: user_1.id, score: 0, module: 'alpha', created_at: Time.zone.local(2023, 2, 1))
-      create(:user_assessment, :passed, user_id: user_2.id, score: 80, module: 'alpha', created_at: Time.zone.local(2023, 3, 1))
-      create(:user_assessment, :failed, user_id: user_1.id, score: 0, module: 'alpha', created_at: Time.zone.local(2023, 1, 1))
-    end
+    create :assessment, :failed, user: user_1, completed_at: Time.zone.local(2023, 1, 1)
+    create :assessment, :passed, user: user_1, completed_at: Time.zone.local(2023, 1, 1)
+    create :assessment, :failed, user: user_1, completed_at: Time.zone.local(2023, 2, 1)
+    create :assessment, :passed, user: user_2, completed_at: Time.zone.local(2023, 3, 1)
   end
 
   it_behaves_like 'a data export model'

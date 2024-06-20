@@ -6,11 +6,7 @@ RSpec.describe ContentTestSchema do
   let(:alpha) { Training::Module.by_name(:alpha) }
 
   let(:ast) do
-    if Rails.application.migrated_answers?
-      YAML.load_file(Rails.root.join("spec/support/ast/#{fixture}-response.yml"))
-    else
-      YAML.load_file(Rails.root.join("spec/support/ast/#{fixture}.yml"))
-    end
+    YAML.load_file(Rails.root.join("spec/support/ast/#{fixture}-response.yml"))
   end
 
   context 'when pass is true' do
