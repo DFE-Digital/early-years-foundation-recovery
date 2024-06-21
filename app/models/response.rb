@@ -8,6 +8,7 @@ class Response < ApplicationRecord
   belongs_to :assessment, optional: true
   belongs_to :visit, optional: true
 
+  # FIXME: remove encryption before release?
   encrypts :text_input
 
   validates :training_module, presence: true
