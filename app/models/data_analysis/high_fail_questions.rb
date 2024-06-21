@@ -27,20 +27,12 @@ module DataAnalysis
 
       # @return [Hash{Array<String> => Integer}]
       def question_attempts
-        if Rails.application.migrated_answers?
-          Response.summative.group(:training_module, :question_name).count
-        else
-          UserAnswer.summative.group(:module, :name).count
-        end
+        Response.summative.group(:training_module, :question_name).count
       end
 
       # @return [Hash{Array<String> => Integer}]
       def question_failures
-        if Rails.application.migrated_answers?
-          Response.summative.incorrect.group(:training_module, :question_name).count
-        else
-          UserAnswer.summative.where(correct: false).group(:module, :name).count
-        end
+        Response.summative.incorrect.group(:training_module, :question_name).count
       end
 
       # @return [Integer]

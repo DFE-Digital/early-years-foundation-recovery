@@ -67,14 +67,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:openid_connect]
 
   has_many :responses
-  has_many :user_answers
-
-  if Rails.application.migrated_answers?
-    has_many :assessments
-  else
-    has_many :user_assessments
-  end
-
+  has_many :assessments
   has_many :visits
   has_many :events
   has_many :mail_events
@@ -118,13 +111,8 @@ class User < ApplicationRecord
   scope :without_notes, -> { where.not(id: with_notes) }
 
   # assessments
-  if Rails.application.migrated_answers?
-    scope :with_assessments, -> { joins(:assessments) }
-    scope :with_passing_assessments, -> { with_assessments.merge(Assessment.passed) }
-  else
-    scope :with_assessments, -> { joins(:user_assessments) }
-    scope :with_passing_assessments, -> { with_assessments.merge(UserAssessment.passes) }
-  end
+  scope :with_assessments, -> { joins(:assessments) }
+  scope :with_passing_assessments, -> { with_assessments.merge(Assessment.passed) }
 
   # events
   scope :with_events, -> { joins(:events) }
@@ -211,33 +199,22 @@ class User < ApplicationRecord
 
   # @see ResponsesController#response_params
   # @param content [Training::Question]
-  # @return [UserAnswer, Response]
+  # @return [Response]
   def response_for(content)
-    if Rails.application.migrated_answers?
-      if content.summative_question?
-        # creates new assessment on first summative_question
-        assessment =
-          assessments.passed.find_by(training_module: content.parent.name) ||
-          assessments.incomplete.find_by(training_module: content.parent.name) || # needed?
-          assessments.create(training_module: content.parent.name, started_at: Time.zone.now)
-      end
-
-      responses.find_or_initialize_by(
-        assessment_id: assessment&.id,
-        training_module: content.parent.name,
-        question_name: content.name,
-        question_type: content.question_type, # TODO: RENAME options for Question#page_type removing "questionnaire" suffix
-      )
-    else
-      user_answers.find_or_initialize_by(
-        assessments_type: content.assessments_type,
-        module: content.parent.name,
-        name: content.name,
-        questionnaire_id: 0,
-        question: 'N/A for CMS only questions',
-        archived: nil,
-      )
+    if content.summative_question?
+      # creates new assessment on first summative_question
+      assessment =
+        assessments.passed.find_by(training_module: content.parent.name) ||
+        assessments.incomplete.find_by(training_module: content.parent.name) || # needed?
+        assessments.create(training_module: content.parent.name, started_at: Time.zone.now)
     end
+
+    responses.find_or_initialize_by(
+      assessment_id: assessment&.id,
+      training_module: content.parent.name,
+      question_name: content.name,
+      question_type: content.question_type, # TODO: RENAME options for Question#page_type removing "questionnaire" suffix
+    )
   end
 
   # @return [Array<Training::Module>]

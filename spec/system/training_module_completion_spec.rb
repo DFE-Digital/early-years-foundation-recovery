@@ -9,8 +9,6 @@ RSpec.describe 'Training Module Completion', type: :system do
   let(:schema) { ContentTestSchema.new(mod: mod) }
 
   before do
-    skip 'WIP' if Rails.application.migrated_answers?
-
     visit "/modules/#{mod.name}"
     click_on 'Start module'
   end
@@ -38,8 +36,8 @@ RSpec.describe 'Training Module Completion', type: :system do
         expect(Event.find_by(name: event_name)).to be_present
       end
 
-      expect(UserAssessment.count).to be 1
-      expect(UserAnswer.count(&:correct)).to be 17
+      expect(Assessment.count).to be 1
+      expect(Response.count(&:correct)).to be 17
 
       expect(Note.count).to be 1
       expect(Note.first.body).to eq 'hello world'
@@ -76,8 +74,8 @@ RSpec.describe 'Training Module Completion', type: :system do
         expect(Event.find_by(name: event_name)).not_to be_present
       end
 
-      expect(UserAssessment.count).to be 1
-      expect(UserAnswer.count(&:correct)).to be 0
+      expect(Assessment.count).to be 1
+      expect(Response.count(&:correct)).to be 0
 
       expect(Note.count).to be 1
       expect(Note.first.body).to eq 'hello world'

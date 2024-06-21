@@ -49,7 +49,7 @@ class NextPageDecorator
     if content.formative_question?
       answered?
     elsif content.summative_question?
-      answered? && (Rails.application.migrated_answers? ? assessment.graded? : assessment.score.present?)
+      answered? && assessment.graded?
     else
       false
     end

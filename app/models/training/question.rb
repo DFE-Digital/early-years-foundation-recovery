@@ -48,16 +48,6 @@ module Training
       answer.options.map(&:label).sort.eql? %w[False True]
     end
 
-    # TODO: Non longer required if Rails.application.migrated_answers?
-    # @return [String]
-    def assessments_type
-      {
-        formative_questionnaire: 'formative_assessment',
-        summative_questionnaire: 'summative_assessment',
-        confidence_questionnaire: 'confidence_check',
-      }.fetch(page_type.to_sym)
-    end
-
     # TODO: remove once CMS model page_types have suffix removed
     # @return [String]
     def question_type

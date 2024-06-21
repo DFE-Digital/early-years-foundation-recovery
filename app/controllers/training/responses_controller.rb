@@ -1,8 +1,3 @@
-#
-# TODO: Logic around potential FK question_name changes that could cause an assessment to contain more than 10 responses
-# TODO: Checks that scores are numeric, otherwise zero is recorded
-#
-#
 module Training
   class ResponsesController < ApplicationController
     include Learning
@@ -30,11 +25,7 @@ module Training
     # @note migrate from user_answer to response
     # @see User#response_for
     def response_params
-      if Rails.application.migrated_answers?
-        params.require(:response).permit!
-      else
-        params.require(:user_answer).permit!
-      end
+      params.require(:response).permit!
     end
 
     # @see User#response_for
@@ -43,11 +34,7 @@ module Training
     def save_response!
       correct_answers = content.confidence_question? ? true : content.correct_answers.eql?(user_answers)
 
-      if Rails.application.migrated_answers?
-        current_user_response.update(answers: user_answers, correct: correct_answers)
-      else
-        current_user_response.update(answer: user_answers, correct: correct_answers)
-      end
+      current_user_response.update(answers: user_answers, correct: correct_answers)
     end
 
     # @return [Array<Integer>]
@@ -67,21 +54,12 @@ module Training
 
     # @return [Event] Update action
     def track_question_answer
-      if Rails.application.migrated_answers?
-        track('questionnaire_answer',
-              uid: content.id,
-              mod_uid: mod.id,
-              type: content.question_type,
-              success: current_user_response.correct?,
-              answers: current_user_response.answers)
-      else
-        track('questionnaire_answer',
-              uid: content.id,
-              mod_uid: mod.id,
-              type: content.assessments_type, # TODO: will be replaced with content.page_type
-              success: current_user_response.correct?,
-              answers: current_user_response.answers)
-      end
+      track('questionnaire_answer',
+            uid: content.id,
+            mod_uid: mod.id,
+            type: content.question_type,
+            success: current_user_response.correct?,
+            answers: current_user_response.answers)
     end
   end
 end

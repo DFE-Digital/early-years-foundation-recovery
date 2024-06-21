@@ -25,21 +25,12 @@ module DataAnalysis
 
       # @return [Hash{String => Integer}]
       def total_users_not_passing_per_module
-        if Rails.application.migrated_answers?
-          Assessment.all
-            .group(:training_module, :user_id)
-            .count
-            .reject { |(module_name, user_id), _| Assessment.all.where(training_module: module_name, user_id: user_id).passed.exists? }
-            .group_by { |(module_name, _), _| module_name }
-            .transform_values(&:size)
-        else
-          UserAssessment.all
-            .group(:module, :user_id)
-            .count
-            .reject { |(module_name, user_id), _| UserAssessment.all.where(module: module_name, user_id: user_id).passes.exists? }
-            .group_by { |(module_name, _), _| module_name }
-            .transform_values(&:size)
-        end
+        Assessment.all
+          .group(:training_module, :user_id)
+          .count
+          .reject { |(module_name, user_id), _| Assessment.all.where(training_module: module_name, user_id: user_id).passed.exists? }
+          .group_by { |(module_name, _), _| module_name }
+          .transform_values(&:size)
       end
     end
   end

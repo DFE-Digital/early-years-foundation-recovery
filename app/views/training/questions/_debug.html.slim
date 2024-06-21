@@ -3,8 +3,6 @@
     = content.debug_summary
 
     hr
-    | Class: #{Rails.application.migrated_answers? ? 'Response' : 'UserAnswer'}
-    hr
     | Question Options:
     - (content.answers || content.class::CONFIDENCE_OPTIONS).map do |option|
       br
