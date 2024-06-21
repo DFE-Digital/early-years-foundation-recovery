@@ -1,6 +1,8 @@
 class DataMigrationJob < ApplicationJob
   def run
     require 'migrate_training'
-    MigrateTraining.new.call
+    super do
+      MigrateTraining.new.call
+    end
   end
 end
