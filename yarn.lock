@@ -1159,7 +1159,7 @@ __metadata:
     axios: ^1.7.2
     dfe-frontend: ^2.0.1
     esbuild: ^0.21.4
-    govuk-frontend: ^4.7.0
+    govuk-frontend: ^5.3.1
     postcss: 8
     puppeteer: ^22.10.0
     sass: ^1.77.4
@@ -1425,13 +1425,6 @@ __metadata:
   version: 0.1.4
   resolution: "globjoin@npm:0.1.4"
   checksum: 0a47d88d566122d9e42da946453ee38b398e0021515ac6a95d13f980ba8c1e42954e05ee26cfcbffce1ac1ee094d0524b16ce1dd874ca52408d6db5c6d39985b
-  languageName: node
-  linkType: hard
-
-"govuk-frontend@npm:^4.7.0":
-  version: 4.8.0
-  resolution: "govuk-frontend@npm:4.8.0"
-  checksum: e255f924f399319e109347ec4993e0441fc5847a6a73ba44a465b1599c7d03e85c29212743b081ccd60e19224c6301143c77540b8e4bfe615fcb3e162b8663f4
   languageName: node
   linkType: hard
 

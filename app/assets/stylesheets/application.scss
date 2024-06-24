@@ -4,7 +4,8 @@ https://design.education.gov.uk/design-system/dfe-frontend
 https://design-system.service.gov.uk/styles/colour/
 */
 
-@import 'govuk-frontend/govuk/all';
+$govuk-assets-path: '/govuk/assets/';
+@import 'govuk-frontend/dist/govuk/all';
 @import 'dfe-frontend/packages/dfefrontend';
 
 $light-blue: tint(govuk-organisation-colour('department-for-education'), 90%);

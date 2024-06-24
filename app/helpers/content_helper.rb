@@ -61,7 +61,7 @@ module ContentHelper
       when :started then 'yellow'
       end
 
-    govuk_tag(text: t(status, scope: 'module_indicator'), colour: colour)
+    govuk_tag(text: t(status, scope: 'module_indicator').capitalize, colour: colour)
   end
 
   # @return [String]
