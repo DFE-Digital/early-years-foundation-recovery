@@ -344,17 +344,43 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '.test_user' do
-    let!(:user) { create :user, email: 'completed@example.com' }
+  describe 'authentication bypass for developers' do
+    let(:user) { create :user, email: 'completed@example.com' }
 
-    it 'returns the completed seeded user' do
-      expect(described_class.test_user).to eq user
+    describe '.test_user' do
+      it 'returns the completed seeded user' do
+        expect(user).to eq described_class.test_user
+      end
+    end
+
+    describe '#test_user?' do
+      specify { expect(user).to be_test_user }
     end
   end
 
-  describe '.test_user?' do
-    let!(:user) { create :user, email: 'completed@example.com' }
+  describe '#response_for' do
+    subject(:response) { user.response_for(question) }
 
-    specify { expect(user.test_user?).to eq true }
+    let(:user) { create :user, :registered }
+    let(:question) do
+      # default formative used in factory
+      Training::Module.by_name('alpha').page_by_name('1-1-4-1')
+    end
+
+    before do
+      skip unless Rails.application.migrated_answers?
+    end
+
+    context 'with duplicates' do
+      before do
+        create :response, user: user, answers: [2], correct: false, created_at: Time.zone.local(2020, 1, 1)
+        create :response, user: user, answers: [2], correct: false, created_at: Time.zone.local(2021, 1, 1)
+        create :response, user: user, answers: [1], correct: true, created_at: Time.zone.local(2022, 1, 1)
+      end
+
+      it 'selects the most recent' do
+        expect(response.answers).to eq [1]
+      end
+    end
   end
 end

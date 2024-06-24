@@ -222,7 +222,7 @@ class User < ApplicationRecord
           assessments.create(training_module: content.parent.name, started_at: Time.zone.now)
       end
 
-      responses.find_or_initialize_by(
+      responses.order('created_at DESC').find_or_initialize_by(
         assessment_id: assessment&.id,
         training_module: content.parent.name,
         question_name: content.name,
