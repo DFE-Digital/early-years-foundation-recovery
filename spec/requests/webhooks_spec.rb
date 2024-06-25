@@ -55,9 +55,7 @@ RSpec.describe 'Webhooks', type: :request do
       it 'persists the callback' do
         post '/notify', params: notify, as: :json, headers: headers
         expect(response).to have_http_status(:ok)
-        expect(User.email_delivered).to include user.reload
-        # expect(user.mail_events.last.callback).to eq notify
-        # expect(user.notify_callback).to eq notify
+        expect(User.email_status('delivered')).to include user.reload
       end
     end
   end

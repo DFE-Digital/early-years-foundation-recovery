@@ -15,10 +15,10 @@
     "accessible-autocomplete": "^3.0.0",
     "axios": "^1.7.2",
     "dfe-frontend": "^2.0.1",
-    "esbuild": "^0.21.4",
+    "esbuild": "^0.21.5",
     "govuk-frontend": "^5.3.1",
-    "puppeteer": "^22.10.0",
-    "sass": "^1.77.4",
+    "puppeteer": "^22.11.2",
+    "sass": "^1.77.6",
     "stimulus-reveal-controller": "^4.1.0"
   },
   "devDependencies": {

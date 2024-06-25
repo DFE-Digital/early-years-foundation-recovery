@@ -199,6 +199,7 @@ RSpec.describe User, type: :model do
       expect(user.gov_one_id).to start_with "#{user.id}urn:fdc:gov.uk:2022:"
       expect(user.first_name).to eq 'Redacted'
       expect(user.last_name).to eq 'User'
+      expect(user.notify_callback).to be_nil
       expect(user.email).to eq "redacted_user#{user.id}@example.com"
       expect(user.valid_password?('RedactedUser12!@')).to eq true
       expect(user.closed_at).to be_within(30).of(Time.zone.now)
