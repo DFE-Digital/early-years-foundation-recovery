@@ -56,6 +56,16 @@ footer .govuk-width-container {
   max-width: 1200px;
 }
 
+.govuk-width-container,
+.dfe-width-container {
+  max-width: 1200px;
+
+  @include govuk-media-query($until: tablet) {
+    padding-left: govuk-spacing(3);
+    padding-right: govuk-spacing(3);
+  }
+}
+
 /*
 Default layout
 -----------------------------------------------
