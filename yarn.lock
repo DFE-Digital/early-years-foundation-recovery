@@ -798,7 +798,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cosmiconfig@npm:9.0.0, cosmiconfig@npm:^9.0.0":
+"cosmiconfig@npm:^9.0.0":
   version: 9.0.0
   resolution: "cosmiconfig@npm:9.0.0"
   dependencies:
@@ -859,7 +859,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:4.3.5, debug@npm:^4.1.1, debug@npm:^4.3.4":
+"debug@npm:4, debug@npm:^4.1.1, debug@npm:^4.3.4, debug@npm:^4.3.5":
   version: 4.3.5
   resolution: "debug@npm:4.3.5"
   dependencies:
@@ -1161,7 +1161,7 @@ __metadata:
     esbuild: ^0.21.5
     govuk-frontend: ^5.3.1
     postcss: 8
-    puppeteer: ^22.11.2
+    puppeteer: ^22.12.0
     sass: ^1.77.6
     stimulus-reveal-controller: ^4.1.0
     stylelint: ^16.5.0
@@ -2259,30 +2259,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"puppeteer-core@npm:22.12.0":
-  version: 22.12.0
-  resolution: "puppeteer-core@npm:22.12.0"
+"puppeteer-core@npm:22.12.1":
+  version: 22.12.1
+  resolution: "puppeteer-core@npm:22.12.1"
   dependencies:
     "@puppeteer/browsers": 2.2.3
     chromium-bidi: 0.5.24
-    debug: 4.3.5
+    debug: ^4.3.5
     devtools-protocol: 0.0.1299070
-    ws: 8.17.1
-  checksum: b5e5541d855006caf160a9e11bf3f47c520e7c8cbe9a86557d23ab356b6ebf11c77ec9ea05807cbe34a2167ee93b6fc45488c036a686b8db4a8ca7bb082e0daf
+    ws: ^8.17.1
+  checksum: 22678bba55cfc84aad3994ed653e1bc7ded0b0b933db15dae93415fe7cc6a188561ec7ddcd7bc36fc7c86f4e261cd742328a8d323b0e5ac74f9db8a73baa7d13
   languageName: node
   linkType: hard
 
-"puppeteer@npm:^22.11.2":
-  version: 22.12.0
-  resolution: "puppeteer@npm:22.12.0"
+"puppeteer@npm:^22.12.0":
+  version: 22.12.1
+  resolution: "puppeteer@npm:22.12.1"
   dependencies:
     "@puppeteer/browsers": 2.2.3
-    cosmiconfig: 9.0.0
+    cosmiconfig: ^9.0.0
     devtools-protocol: 0.0.1299070
-    puppeteer-core: 22.12.0
+    puppeteer-core: 22.12.1
   bin:
     puppeteer: lib/esm/puppeteer/node/cli.js
-  checksum: 13ffc64e9cef4ee38f8c7f9837a9192bfa57606d3a656b9c99178c30cca2296c25cef0459fc69066161dfd6b940ecb47e799e4f8a30025e00438f6bd86795cb9
+  checksum: 07e899d987857c00c7124f282007c413c79a2e98068a5d44dbd85dbcf869602e4a5528603349750007b108e36bb9e4af4442621279083e3030eeec093ef34b87
   languageName: node
   linkType: hard
 
@@ -2951,7 +2951,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:8.17.1":
+"ws@npm:^8.17.1":
   version: 8.17.1
   resolution: "ws@npm:8.17.1"
   peerDependencies:
