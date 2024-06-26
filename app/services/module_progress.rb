@@ -1,9 +1,10 @@
+# OPTIMIZE: N+1 query
+#
 # Overall module progress:
 #   - whether a page was visited
-#   - whether a page was skipped
+#   - whether any/all/no pages in a section were visited
 #   - whether key events have been recorded (start/complete)
 #   - the last page visited
-#   - the furthest page visited
 #   - the furthest page visited
 #
 class ModuleProgress
@@ -107,12 +108,6 @@ protected
     else
       summative_assessment.attempted? && summative_assessment.passed?
     end
-  end
-
-  # In progress modules with new pages that have been skipped
-  # @return [Boolean]
-  def gaps?
-    (unvisited.first.id..unvisited.last.id).count != unvisited.map(&:id).count
   end
 
   # @return [Array<Training::Page, Training::Question, Training::Video>]
