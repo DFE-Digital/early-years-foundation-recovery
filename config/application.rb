@@ -97,7 +97,7 @@ module EarlyYearsFoundationRecovery
     end
 
     def migrated_answers?
-      Types::Params::Bool[ENV.fetch('DISABLE_USER_ANSWER', false)]
+      Types::Params::Bool[ENV.fetch('DISABLE_USER_ANSWER', true)]
     end
 
     # @return [ActiveSupport::TimeWithZone]
