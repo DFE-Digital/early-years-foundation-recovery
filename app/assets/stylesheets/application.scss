@@ -51,7 +51,9 @@ main img {
 .govuk-width-container,
 .dfe-width-container {
   max-width: 1200px;
+}
 
+.dfe-width-container {
   @include govuk-media-query($until: tablet) {
     padding-left: govuk-spacing(3);
     padding-right: govuk-spacing(3);
