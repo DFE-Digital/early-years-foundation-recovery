@@ -53,13 +53,6 @@ main img {
   max-width: 1200px;
 }
 
-.dfe-width-container {
-  @include govuk-media-query($until: tablet) {
-    padding-left: govuk-spacing(3);
-    padding-right: govuk-spacing(3);
-  }
-}
-
 // Default layout
 // -----------------------------------------------
 
