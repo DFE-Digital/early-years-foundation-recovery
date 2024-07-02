@@ -3,9 +3,10 @@
   "packageManager": "yarn@3.2.1",
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --outdir=app/assets/builds",
-    "build:css": "sass ./app/assets/stylesheets/application.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules --quiet-deps",
+    "build:css": "sass app/assets/stylesheets/application.scss app/assets/builds/application.css --no-source-map --load-path=node_modules --quiet-deps",
     "preinstall": "mkdir -p app/assets/builds",
-    "postinstall": "cp -R node_modules/govuk-frontend/govuk/assets/fonts/. app/assets/builds/fonts && cp -R node_modules/govuk-frontend/govuk/assets/images/. app/assets/builds/images"
+    "postinstall": "cp -R node_modules/govuk-frontend/dist/govuk/assets/fonts/. app/assets/builds/fonts && cp -R node_modules/govuk-frontend/dist/govuk/assets/images/. app/assets/builds/images",
+    "lint": "npx stylelint app/assets/stylesheets/* --fix"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.5.2",
@@ -13,11 +14,21 @@
     "@hotwired/turbo-rails": "^8.0.4",
     "accessible-autocomplete": "^3.0.0",
     "axios": "^1.7.2",
-    "dfe-frontend-alpha": "^1.0.0",
+    "dfe-frontend": "^2.0.1",
     "esbuild": "^0.21.5",
-    "govuk-frontend": "^4.7.0",
+    "govuk-frontend": "^5.3.1",
     "puppeteer": "^22.12.0",
     "sass": "^1.77.6",
     "stimulus-reveal-controller": "^4.1.0"
+  },
+  "devDependencies": {
+    "postcss": "8",
+    "stylelint": "^16.5.0",
+    "stylelint-config-gds": "^2.0.0"
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-gds/scss"
+    ]
   }
 }
