@@ -15,11 +15,11 @@ html.govuk-template lang='en'
     = navigation
 
     main#main-content role='main'
-      .govuk-width-container
+      .dfe-width-container
         = render 'layouts/banner'
 
-        .govuk-width-container class='govuk-!-padding-top-7 govuk-!-padding-bottom-7'
-          = render 'layouts/flash'
-          = yield
+      .dfe-width-container class='govuk-!-padding-top-7 govuk-!-padding-bottom-7'
+        = render 'layouts/flash'
+        = yield
 
     = render 'layouts/footer'
