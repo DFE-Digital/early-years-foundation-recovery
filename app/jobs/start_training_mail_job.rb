@@ -1,3 +1,5 @@
+# Sends mail for start training
+# @note email delivery is queued unless DELIVERY_QUEUE=false
 class StartTrainingMailJob < MailJob
   def run
     super do
