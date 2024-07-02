@@ -4,6 +4,7 @@ RSpec.describe 'Event log' do
   include_context 'with events'
   include_context 'with user'
   include_context 'with automated path'
+  let(:fixture) { 'spec/support/ast/alpha-pass-response-skip-feedback.yml' }
 
   describe 'confidence check' do
     context 'when viewing the first question' do
@@ -49,7 +50,7 @@ RSpec.describe 'Event log' do
     end
 
     context 'when all questions are answered incorrectly' do
-      # let(:fixture) { 'spec/support/ast/alpha-fail-response.yml' }
+      let(:fixture) { 'spec/support/ast/alpha-fail-response.yml' }
       let(:happy) { false }
 
       it 'tracks answers and failed attempt' do
@@ -77,7 +78,7 @@ RSpec.describe 'Event log' do
   describe 'visiting every page' do
     it 'tracks start and completion' do
       expect(events.where(name: 'module_start').size).to be 1
-      expect(events.where(name: 'module_content_page').size).to be 34
+      expect(events.where(name: 'module_content_page').size).to be 35
       expect(events.where(name: 'module_complete').size).to eq 1
     end
   end

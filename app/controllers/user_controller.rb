@@ -23,28 +23,6 @@ class UserController < ApplicationController
     end
   end
 
-  # @see config/initializers/devise.rb
-  def update_password
-    if current_user.update_with_password(user_password_params)
-      track('user_password_change', success: true)
-      bypass_sign_in(current_user)
-      redirect_to user_path, notice: 'Your new password has been saved.'
-    else
-      track('user_password_change', success: false)
-      render :edit_password, status: :unprocessable_entity
-    end
-  end
-
-  def update_email
-    if current_user.update(user_params)
-      track('user_email_change', success: true)
-      redirect_to user_path, notice: t('notice.email_changed')
-    else
-      track('user_email_change', success: false)
-      render :edit_email, status: :unprocessable_entity
-    end
-  end
-
   def update_training_emails
     if current_user.update(user_params)
       track('user_training_emails_change', success: true)

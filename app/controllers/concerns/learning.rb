@@ -55,9 +55,13 @@ module Learning
     ModuleDebugDecorator.new(progress_service).rows
   end
 
-  # @return [PaginationDecorator]
+  # @return [PaginationDecorator, FeedbackPaginationDecorator]
   def section_bar
-    PaginationDecorator.new(content)
+    if content.feedback_question? || content.previous_item.feedback_question?
+      FeedbackPaginationDecorator.new(content, current_user)
+    else
+      PaginationDecorator.new(content)
+    end
   end
 
   # ----------------------------------------------------------------------------
@@ -67,6 +71,6 @@ module Learning
   # @note memoization ensures validation errors work
   # @return [UserAnswer, Response]
   def current_user_response
-    @current_user_response ||= current_user.response_for(content)
+    @current_user_response ||= content.feedback_question? ? current_user.response_for_shared(content, mod) : current_user.response_for(content)
   end
 end

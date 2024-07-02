@@ -3,7 +3,7 @@
 module Pagination
   # @return [Boolean]
   def section?
-    submodule_intro? || summary_intro? || certificate?
+    submodule_intro? || summary_intro? || feedback_intro? || certificate?
   end
 
   # @return [Boolean]
@@ -32,9 +32,24 @@ module Pagination
     parent.page_by_id(next_item_id) || self
   end
 
+  # @return [nil, Training::Page, Training::Video, Training::Question]
+  def next_next_item
+    parent.page_by_id(next_next_item_id)
+  end
+
+  # @return [nil, Training::Page, Training::Video, Training::Question]
+  def previous_previous_item
+    parent.page_by_id(previous_previous_item_id)
+  end
+
   # @return [String]
   def previous_item_id
     parent.pages[content_index - 1].id
+  end
+
+  # @return [String, nil]
+  def previous_previous_item_id
+    parent.pages[content_index - 2]&.id
   end
 
   # @return [String, nil]
@@ -42,16 +57,29 @@ module Pagination
     parent.pages[content_index + 1]&.id
   end
 
+  # @return [String, nil]
+  def next_next_item_id
+    parent.pages[content_index + 2]&.id
+  end
+
   # @return [Array<Training::Page, Training::Video, Training::Question>]
   def section_content
-    parent.content_sections.fetch(submodule)
+    if parent.is_a? Training::Module # OPTIMIZE: introduce parent check predicates?
+      parent.content_sections.fetch(submodule)
+    else
+      Course.config.pages
+    end
   end
 
   # TODO: duplicated in overview decorator #fetch_submodule_topic
   #
   # @return [Array<Training::Page, Training::Video, Training::Question>]
   def subsection_content
-    parent.content_subsections.fetch([submodule, topic])
+    if parent.is_a? Training::Module
+      parent.content_subsections.fetch([submodule, topic])
+    else
+      Course.config.pages
+    end
   end
 
   # @return [nil, Integer]
@@ -90,6 +118,11 @@ module Pagination
   end
 
 private
+
+  # @return [Boolean]
+  def feedback_intro?
+    feedback_question? && first_feedback?
+  end
 
   # @return [Integer]
   def content_index

@@ -4,6 +4,10 @@
 - content_for :hero do
   = render 'hero'
 
+- content_for :cta do
+  - if current_user
+    = render 'feedback/cta'
+
 = render 'learning/cms_debug'
 = render 'debug'
 

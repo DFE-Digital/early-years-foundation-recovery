@@ -1,0 +1,16 @@
+= f.govuk_check_boxes_fieldset :answers, legend: { text: response.legend } do
+
+  - response.options.each do |option|
+
+    - if content.has_other? && option.last?
+      = f.other_check_box(option, text: content.other)
+    - else
+      = f.question_check_box(option)
+
+    - if content.has_or? && option.last?
+      = f.govuk_radio_divider 'Or'
+      = f.or_checkbox_button(text: content.or, checked: response.checked_or?)
+
+
+  - if content.has_more?
+    = f.govuk_text_area :text_input, label: { text: t('feedback.reasons'), class: 'govuk-!-font-weight-bold govuk-!-margin-top-8 govuk-!-margin-bottom-4' }

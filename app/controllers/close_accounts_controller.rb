@@ -46,8 +46,4 @@ private
   def user_params
     params.require(:user).permit(:closed_reason, :closed_reason_custom)
   end
-
-  def user_password_params
-    params.require(:user).permit(:current_password)
-  end
 end

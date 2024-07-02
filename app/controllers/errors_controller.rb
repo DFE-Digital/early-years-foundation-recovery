@@ -1,19 +1,20 @@
 class ErrorsController < ApplicationController
   before_action :log_error
 
-  # 404 error
   def not_found
     render status: :not_found
   end
 
-  # 422 error
   def unprocessable_entity
     render status: :unprocessable_entity
   end
 
-  # 500 error
   def internal_server_error
     render status: :internal_server_error
+  end
+
+  def service_unavailable
+    render status: :service_unavailable
   end
 
 private

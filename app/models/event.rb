@@ -37,6 +37,9 @@ class Event < ApplicationRecord
   scope :module_complete, -> { where(name: 'module_complete') }
   scope :confidence_check_complete, -> { where(name: 'confidence_check_complete') }
 
+  scope :feedback_start, -> { where(name: 'feedback_start') }
+  scope :feedback_complete, -> { where(name: 'feedback_complete') }
+
   # @param mod_names [Array<String, Symbol>] filter by Training::Module names
   scope :where_module, lambda { |*mod_names|
     where("properties -> 'training_module_id' ?| array[:values]", values: mod_names)

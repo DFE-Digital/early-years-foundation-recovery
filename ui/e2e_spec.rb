@@ -7,7 +7,7 @@ RSpec.describe 'E2E' do
     YAML.load_file('ui/support/ast/child-development-and-the-eyfs.yml')
   end
 
-  def make_note(field, input)
+  def input_text(field, input)
     fill_in field, with: input
   end
 

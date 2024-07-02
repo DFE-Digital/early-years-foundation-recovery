@@ -50,7 +50,7 @@ gem 'govuk_markdown'
 
 gem 'govuk_notify_rails'
 
-# Sentry -Monitor errors
+# Monitor errors
 gem 'sentry-rails'
 gem 'sentry-ruby'
 

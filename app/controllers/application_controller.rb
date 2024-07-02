@@ -75,16 +75,23 @@ private
   end
 
   # @see Auditing
-  # @return [User]
+  # @return [User, nil]
   def current_user
     return bot if bot?
 
     super
   end
 
+  # @return [Guest, nil]
+  def guest
+    visit = Visit.find_by(visit_token: cookies[:course_feedback]) || current_visit
+    Guest.new(visit: visit) if visit.present?
+  end
+
   # @see Auditing
   # @return [Boolean]
   def user_signed_in?
+    return false if current_user&.guest?
     return true if bot?
 
     super

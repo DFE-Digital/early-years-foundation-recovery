@@ -82,16 +82,6 @@ module.exports = function(migration) {
     helpText: 'All page content including sub-headings, bullet points and images.',
   })
 
-  /* number */
-
-  page.changeFieldControl('submodule', 'builtin', 'numberEditor', {
-    helpText: 'Select the sub-module number the page belongs to, the second number of the page name.'
-  })
-
-  page.changeFieldControl('topic', 'builtin', 'numberEditor', {
-    helpText: 'Select the topic number the page belongs to, the third number in the page name.'
-  })
-
   /* toggle */
 
   page.changeFieldControl('notes', 'builtin', 'boolean', {

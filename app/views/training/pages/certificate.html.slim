@@ -16,6 +16,9 @@
         =< govuk_link_to 'My account', user_path
         | .
 
+- content_for :cta do
+  = render 'feedback/cta'
+
 .govuk-grid-row
   .govuk-grid-column-three-quarters-from-desktop id=('award' if pdf?)
 

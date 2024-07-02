@@ -117,7 +117,7 @@ RSpec.describe CourseProgress do
           draft: false
           started: false
           completed: false
-          last: 1-3-3-5
+          last: 1-3-3-5-bravo
           certificate: 1-3-4
           milestone: N/A
           ---

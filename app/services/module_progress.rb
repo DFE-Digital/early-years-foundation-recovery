@@ -39,22 +39,7 @@ class ModuleProgress
 
   # @return [Training::Page, Training::Question, Training::Video]
   def resume_page
-    # unvisited.first&.previous_item || mod.first_content_page
     mod.page_by_name(milestone) || mod.first_content_page
-  end
-
-  # Identify new content that has not been seen and would effect module state
-  #
-  # @see FillPageViews task
-  # @return [Boolean]
-  def skipped?
-    if unvisited.none?
-      false
-    elsif completed? && unvisited.any? # seen last content page but has gaps
-      true
-    elsif gaps?
-      true
-    end
   end
 
   # @see CourseProgress

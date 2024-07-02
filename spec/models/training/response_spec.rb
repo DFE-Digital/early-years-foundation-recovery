@@ -6,6 +6,7 @@ RSpec.describe Response, type: :model do
       training_module: 'alpha',
       question_name: question_name,
       answers: answers,
+      question_type: 'formative',
     )
   end
 
@@ -27,6 +28,7 @@ RSpec.describe Response, type: :model do
       let(:answers) { [1] }
 
       it '#correct?' do
+        expect(response.errors.full_messages).to be_empty
         expect(response).to be_correct
       end
 
@@ -97,6 +99,18 @@ RSpec.describe Response, type: :model do
 
       it '#summary' do
         expect(response.summary).to match(/You did not select the correct answers/)
+      end
+    end
+  end
+
+  context 'with radio buttons for feedback question' do
+    let(:question_name) { 'feedback-radio-only' }
+
+    describe 'and no answer' do
+      let(:answers) { nil }
+
+      it 'is invalid' do
+        expect(response).to be_invalid
       end
     end
   end

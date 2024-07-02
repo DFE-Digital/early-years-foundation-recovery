@@ -79,6 +79,9 @@ jobs:
         run: bundle exec rails assets:precompile
       -
         name: Run test suite
+        env:
+          DISABLE_USER_ANSWER: true
+          CONTENTFUL_PREVIEW: true
         run: bundle exec rspec
       -
         name: Run rubocop

@@ -223,3 +223,44 @@ Information for onboarding content editors:
 - `API`: Application Programming Interface.
 - `Delivery API`: The mechanism that returns published content.
 - `Preview API`: The mechanism that returns both published and draft content.
+
+
+## Question types
+
+Questions come in two flavours, factual questions (divided into either `formative` or `summative`) and opinion questions (divided into either `confidence` or `feedback`).
+
+### Feedback questions
+
+Feedback questions use additional model fields to control their increased functionality.
+
+These questions can:
+
+- be shared and used across multiple training modules
+- have user-defined text in an optional input field or textarea
+- replace radio buttons and checkboxes completely with a free text input
+- be asked only once
+
+The different permutations are controlled using these fields:
+
+- answers       [Array]
+- or            [String]
+- other         [String]
+- more          [Boolean]
+- skippable     [Boolean]
+- multi_select  [Boolean]
+
+In order to show a text input when the last option is selected, provide a string in the `other` field.
+This string becomes the label text.
+If you want to provide the user with more space to write, also turn on the `more` field.
+This changes the text input to a textarea field.
+
+If instead you want to append a textarea field after to record the reasons for their answer, just enable `more` without `other`.
+
+To give an alternative `answer` separated by a divider, provide a string in the `or` field.
+
+If the question is a feedback question it will not dynamically use the number of correct answers
+to determine if it is a radio button or checkbox.
+`multi_select` defaults to off using the radio button template.
+
+If the question needs to be hidden once it is answered, so it is not answered again in another form, enable `skippable`.
+

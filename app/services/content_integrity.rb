@@ -24,10 +24,8 @@ class ContentIntegrity
 
   # @return [Hash{Symbol=>String}] valid as released module
   CONTENT_VALIDATIONS = {
-    # type
     text: 'Missing text pages',
     video: 'Missing video pages',
-    formative: 'Missing formative questions',
     assessment_intro: 'Missing assessment intro page',
     confidence_intro: 'Missing confidence intro page',
     recap: 'Missing recap page',
@@ -41,11 +39,12 @@ class ContentIntegrity
     thankyou: 'Penultimate page is wrong type',
     certificate: 'Last page is wrong type',
 
-    # type and frequency
+    # questions
+    formative: 'Missing formative questions',
+    feedback: 'Missing feedback questions',
     summative: 'Insufficient summative questions',
-    confidence: 'Insufficient confidence checks',
-
-    question_answers: 'Question answers are incorrectly formatted', # TODO: which question?
+    confidence: 'Insufficient confidence questions',
+    factual: 'Factual questions have sufficient options',
   }.freeze
 
   # @return [nil]
@@ -162,13 +161,18 @@ class ContentIntegrity
   end
 
   # @return [Boolean]
-  def question_answers?
-    mod.questions.all? { |question| question.answer.valid? }
+  def factual?
+    mod.questions.select(&:factual_question?).all? { |question| question.answer.valid? }
   end
 
   # @return [Boolean]
   def formative?
     mod.formative_questions.any?
+  end
+
+  # @return [Boolean]
+  def feedback?
+    mod.feedback_questions.any?
   end
 
   # 'Brain development and how children learn' has fewest

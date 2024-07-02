@@ -1,0 +1,21 @@
+= f.govuk_radio_buttons_fieldset :answers, legend: { text: response.legend } do
+  = f.hidden_field :answers
+
+  - if content.skippable?
+    p.govuk-hint = t('feedback.research')
+
+  - response.options.each do |option|
+
+    - if content.has_other? && option.last?
+      = f.other_radio_button(option, text: content.other, more: content.has_more?)
+
+    - elsif content.has_or? && option.last?
+      = f.question_radio_button(option)
+      = f.govuk_radio_divider 'Or'
+      = f.or_radio_button(text: content.or, checked: response.checked_or?)
+
+    - else
+      = f.question_radio_button(option)
+
+  - if content.has_more? && !content.has_other?
+    = f.govuk_text_area :text_input, label: { text: t('feedback.reasons'), class: 'govuk-!-font-weight-bold govuk-!-margin-top-8 govuk-!-margin-bottom-4' }

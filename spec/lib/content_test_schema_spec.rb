@@ -6,15 +6,17 @@ RSpec.describe ContentTestSchema do
   let(:alpha) { Training::Module.by_name(:alpha) }
 
   let(:ast) do
-    if Rails.application.migrated_answers?
-      YAML.load_file(Rails.root.join("spec/support/ast/#{fixture}-response.yml"))
-    else
-      YAML.load_file(Rails.root.join("spec/support/ast/#{fixture}.yml"))
-    end
+    YAML.load_file(Rails.root.join("spec/support/ast/alpha-#{fixture}.yml"))
   end
 
   context 'when pass is true' do
-    let(:fixture) { 'alpha-pass' }
+    let(:fixture) do
+      if Rails.application.migrated_answers?
+        'pass-response-with-feedback'
+      else
+        'pass'
+      end
+    end
 
     specify do
       expect(schema.call).to eq ast
@@ -22,7 +24,13 @@ RSpec.describe ContentTestSchema do
   end
 
   context 'when pass is false' do
-    let(:fixture) { 'alpha-fail' }
+    let(:fixture) do
+      if Rails.application.migrated_answers?
+        'fail-response'
+      else
+        'fail'
+      end
+    end
 
     specify do
       expect(schema.call(pass: false).compact).to eq ast
