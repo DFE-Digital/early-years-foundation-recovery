@@ -67,21 +67,12 @@ module Training
 
     # @return [Event] Update action
     def track_question_answer
-      if Rails.application.migrated_answers?
-        track('questionnaire_answer',
-              uid: content.id,
-              mod_uid: mod.id,
-              type: content.page_type,
-              success: current_user_response.correct?,
-              answers: current_user_response.answers)
-      else
-        track('questionnaire_answer',
-              uid: content.id,
-              mod_uid: mod.id,
-              type: content.page_type,
-              success: current_user_response.correct?,
-              answers: current_user_response.answers)
-      end
+      track('questionnaire_answer',
+            uid: content.id,
+            mod_uid: mod.id,
+            type: content.page_type,
+            success: current_user_response.correct?,
+            answers: current_user_response.answers)
     end
   end
 end

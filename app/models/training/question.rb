@@ -50,7 +50,7 @@ module Training
 
     # @return [Array<String, Hash>]
     def schema
-      [name, page_type, body, answer.schema, page_type]
+      [name, page_type, body, answer.schema]
     end
 
     # @return [String]
