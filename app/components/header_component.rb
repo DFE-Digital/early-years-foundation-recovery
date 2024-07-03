@@ -37,7 +37,7 @@ private
     def call
       tag.li(**html_attributes) do
         if link?
-          govuk_link_to(text, href, class: 'dfe-header__action-link', **options)
+          govuk_link_to(text, href, **options)
         else
           text
         end
@@ -46,14 +46,13 @@ private
   end
 
   class NavigationItem < GovukComponent::HeaderComponent::NavigationItem
-    def active_class
-      %w[dfe-header__navigation-item--current] if active?
-    end
-
     def call
       tag.li(**html_attributes) do
         if link?
-          link_to(text, href, class: 'dfe-header__navigation-link', **options)
+          # link_to(text, href, class: 'dfe-header__navigation-link', **options)
+          link_to(href, class: 'dfe-header__navigation-link', **options) do
+            text
+          end
         else
           text
         end
