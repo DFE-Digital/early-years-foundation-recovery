@@ -51,7 +51,9 @@ private
         if link?
           # link_to(text, href, class: 'dfe-header__navigation-link', **options)
           link_to(href, class: 'dfe-header__navigation-link', **options) do
-            text
+            content_tag :a do
+              content_tag(:svg)
+            end
           end
         else
           text
