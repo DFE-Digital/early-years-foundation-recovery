@@ -226,7 +226,7 @@ class User < ApplicationRecord
         assessment_id: assessment&.id,
         training_module: content.parent.name,
         question_name: content.name,
-        question_type: content.question_type, # TODO: RENAME options for Question#page_type removing "questionnaire" suffix
+        question_type: content.page_type,
       )
     else
       user_answers.find_or_initialize_by(

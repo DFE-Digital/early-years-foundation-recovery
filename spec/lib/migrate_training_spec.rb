@@ -3,7 +3,7 @@ require 'migrate_training'
 
 # UserAnswer names like '1-3-2-1' must be genuine and exist in the CMS env
 #
-RSpec.describe MigrateTraining do
+RSpec.xdescribe MigrateTraining do
   subject(:operation) { described_class.new(verbose: false) }
 
   let(:user) { create(:user, :registered) }

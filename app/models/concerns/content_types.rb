@@ -22,7 +22,7 @@ module ContentTypes
 
   # @return [Boolean]
   def is_question?
-    page_type.match?(/question/)
+    formative_question? || summative_question? || confidence_question?
   end
 
   # @return [Boolean]
@@ -37,7 +37,7 @@ module ContentTypes
 
   # @return [Boolean]
   def formative_question?
-    page_type.eql?('formative_questionnaire')
+    page_type.eql?('formative')
   end
 
   # ============================================================================
@@ -61,7 +61,7 @@ module ContentTypes
 
   # @return [Boolean]
   def summative_question?
-    page_type.eql?('summative_questionnaire')
+    page_type.eql?('summative')
   end
 
   # @return [Boolean]
@@ -76,7 +76,7 @@ module ContentTypes
 
   # @return [Boolean]
   def confidence_question?
-    page_type.eql?('confidence_questionnaire')
+    page_type.eql?('confidence')
   end
 
   # @return [Boolean]

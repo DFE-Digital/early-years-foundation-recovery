@@ -5,7 +5,7 @@ RSpec.describe 'Formative question' do
   include_context 'with user'
 
   before do
-    view_pages_upto alpha, 'formative_questionnaire', 1
+    view_pages_upto alpha, 'formative', 1
   end
 
   context 'when a user has visited each page up to and including a formative question' do
