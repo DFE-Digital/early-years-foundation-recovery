@@ -44,6 +44,7 @@ module EarlyYearsFoundationRecovery
 
     # Notify
     config.notify_token       = ENV.fetch('GOVUK_NOTIFY_API_KEY', credentials.notify_api_key)
+    # @note Nudge mail must only run once per day
     config.mail_job_interval  = ENV.fetch('MAIL_JOB_INTERVAL', '0 12 * * *') # Noon daily
 
     config.user_password  = ENV.fetch('USER_PASSWORD', 'Str0ngPa$$w0rd12')

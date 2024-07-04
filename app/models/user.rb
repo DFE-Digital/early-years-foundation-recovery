@@ -205,15 +205,15 @@ class User < ApplicationRecord
       # creates new assessment on first summative_question
       assessment =
         assessments.passed.find_by(training_module: content.parent.name) ||
-        assessments.incomplete.find_by(training_module: content.parent.name) || # needed?
+        assessments.incomplete.find_by(training_module: content.parent.name) ||
         assessments.create(training_module: content.parent.name, started_at: Time.zone.now)
     end
 
-    responses.find_or_initialize_by(
+    responses.order('created_at DESC').find_or_initialize_by(
       assessment_id: assessment&.id,
       training_module: content.parent.name,
       question_name: content.name,
-      question_type: content.question_type, # TODO: RENAME options for Question#page_type removing "questionnaire" suffix
+      question_type: content.page_type,
     )
   end
 

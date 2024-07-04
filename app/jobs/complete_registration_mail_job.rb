@@ -1,3 +1,5 @@
+# Sends mail for complete registration
+# @note email delivery is queued unless DELIVERY_QUEUE=false
 class CompleteRegistrationMailJob < MailJob
   def run
     super do

@@ -18,16 +18,16 @@
   }
 
   .section-intro-previous-button {
-    background-color: $department-for-education-websafe;
+    background-color: govuk-organisation-colour('department-for-education');
 
     &:hover, &:focus {
-      background-color: $department-for-education-websafe;
+      background-color: govuk-organisation-colour('department-for-education');
     }
   }
 
   .blockquote-container {
     blockquote.quote {
-      &:before {
+      &::before {
         background-color: govuk-colour('light-grey');
       }
     }

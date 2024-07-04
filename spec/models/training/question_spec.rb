@@ -15,7 +15,7 @@ RSpec.describe Training::Question, type: :model do
 
   describe 'CMS fields' do
     it '#page_type' do
-      expect(question.page_type).to eq 'formative_questionnaire'
+      expect(question.page_type).to eq 'formative'
     end
 
     it '#answers' do
@@ -23,10 +23,6 @@ RSpec.describe Training::Question, type: :model do
         ['Correct answer 1', true],
         ['Wrong answer 1'],
       ]
-    end
-
-    it '#question_type' do
-      expect(question.question_type).to eq 'formative'
     end
   end
 
@@ -102,7 +98,7 @@ RSpec.describe Training::Question, type: :model do
           module uid: 6EczqUOpieKis8imYPc6mG
           module name: alpha
           published at: Management Key Missing
-          page type: formative_questionnaire
+          page type: formative
 
           ---
           previous: 1-1-4

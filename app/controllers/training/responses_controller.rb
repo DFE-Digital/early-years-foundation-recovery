@@ -57,7 +57,7 @@ module Training
       track('questionnaire_answer',
             uid: content.id,
             mod_uid: mod.id,
-            type: content.question_type,
+            type: content.page_type,
             success: current_user_response.correct?,
             answers: current_user_response.answers)
     end

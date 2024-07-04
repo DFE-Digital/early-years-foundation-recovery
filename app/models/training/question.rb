@@ -48,22 +48,9 @@ module Training
       answer.options.map(&:label).sort.eql? %w[False True]
     end
 
-    # TODO: remove once CMS model page_types have suffix removed
-    # @return [String]
-    def question_type
-      {
-        formative_questionnaire: 'formative',
-        formative: 'formative',
-        summative_questionnaire: 'summative',
-        summative: 'summative',
-        confidence_questionnaire: 'confidence',
-        confidence: 'confidence',
-      }.fetch(page_type.to_sym)
-    end
-
     # @return [Array<String, Hash>]
     def schema
-      [name, page_type, body, answer.schema, question_type]
+      [name, page_type, body, answer.schema]
     end
 
     # @return [String]

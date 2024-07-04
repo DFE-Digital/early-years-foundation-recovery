@@ -1,4 +1,5 @@
 # Simple background job using a dummy template
+# @note email delivery is queued unless DELIVERY_QUEUE=false
 class TestBulkMailJob < MailJob
   # @note guard clause prevents testing against production data
   #

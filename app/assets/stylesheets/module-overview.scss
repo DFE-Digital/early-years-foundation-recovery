@@ -65,7 +65,9 @@ $progress-bar-container-width: 81px;
   .module-section--container {
     display: grid;
     grid-template-columns: auto 139px;
-    gap: 5px;
+    gap: 7px;
+    margin-left: 10px;
+    margin-right: 10px;
     
     .progress-indicator {
       margin-left: auto;

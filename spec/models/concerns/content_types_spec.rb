@@ -41,7 +41,7 @@ RSpec.describe ContentTypes, type: :model do
   end
 
   describe '#formative_question?' do
-    before { content.page_type = 'formative_questionnaire' }
+    before { content.page_type = 'formative' }
 
     specify { expect(content).to be_formative_question }
   end
@@ -65,7 +65,7 @@ RSpec.describe ContentTypes, type: :model do
   end
 
   describe '#summative_question?' do
-    before { content.page_type = 'summative_questionnaire' }
+    before { content.page_type = 'summative' }
 
     specify { expect(content).to be_summative_question }
   end
@@ -83,7 +83,7 @@ RSpec.describe ContentTypes, type: :model do
   end
 
   describe '#confidence_question?' do
-    before { content.page_type = 'confidence_questionnaire' }
+    before { content.page_type = 'confidence' }
 
     specify { expect(content).to be_confidence_question }
   end
@@ -111,15 +111,15 @@ RSpec.describe ContentTypes, type: :model do
         sub_module_intro
         topic_intro
         text_page
-        formative_questionnaire
+        formative
         video_page
         summary_intro
         recap_page
         assessment_intro
-        summative_questionnaire
+        summative
         assessment_results
         confidence_intro
-        confidence_questionnaire
+        confidence
         thankyou
         certificate
       ])
