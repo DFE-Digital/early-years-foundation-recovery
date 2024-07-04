@@ -75,18 +75,20 @@ SitemapGenerator::Sitemap.create do
   add my_modules_path
   add user_notes_path
 
-  # Course common start page
-  mod = Training::Module.live.first
-  add training_module_page_path(mod.name, mod.pages.first.name)
+  if Training::Module.live.any?
+    # Course common start page
+    mod = Training::Module.live.first
+    add training_module_page_path(mod.name, mod.pages.first.name)
 
-  # Course content random module
-  Training::Module.live.sample.content.each do |page|
-    if page.is_question?
-      add training_module_question_path(page.parent.name, page.name)
-    elsif page.assessment_results?
-      add training_module_assessment_path(page.parent.name, page.name)
-    else
-      add training_module_page_path(page.parent.name, page.name)
+    # Course content random module
+    Training::Module.live.sample.content.each do |page|
+      if page.is_question?
+        add training_module_question_path(page.parent.name, page.name)
+      elsif page.assessment_results?
+        add training_module_assessment_path(page.parent.name, page.name)
+      else
+        add training_module_page_path(page.parent.name, page.name)
+      end
     end
   end
 end
