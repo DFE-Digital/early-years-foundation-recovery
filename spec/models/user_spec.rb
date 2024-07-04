@@ -367,10 +367,6 @@ RSpec.describe User, type: :model do
       Training::Module.by_name('alpha').page_by_name('1-1-4-1')
     end
 
-    before do
-      skip unless Rails.application.migrated_answers?
-    end
-
     context 'with duplicates' do
       before do
         create :response, user: user, answers: [2], correct: false, created_at: Time.zone.local(2020, 1, 1)
