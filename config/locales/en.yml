@@ -291,7 +291,6 @@ en:
     password_changed: Password last changed on %{date}
     remember_me: Remember me
     closing:
-      button: Request to close account
       information: |
         ## Closing your account
 
