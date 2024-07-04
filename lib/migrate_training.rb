@@ -8,7 +8,7 @@
 #   Assessment is created with the first Response meaning:
 #     - every Assessment has a minimum of 1 Response
 #     - every Assessment has a maximum score of 100%
-#
+#     - Assessments will outnumber UserAssessments
 #
 class MigrateTraining
   class Error < StandardError
@@ -22,8 +22,6 @@ class MigrateTraining
   option :verbose, Types::Bool, default: proc { true }, reader: :private
   # @return [Integer]
   option :batch, Types::Integer, default: proc { 100 }, reader: :private
-  # @return [Integer, nil]
-  option :resume, Types::Integer, optional: true, reader: :private
 
   # @return [nil]
   def call
@@ -38,19 +36,22 @@ private
   # @return [PG::Result]
   def truncate!
     log 'Truncate responses and assessments'
+    UserAnswer.update_all(state: nil)
     ActiveRecord::Base.connection.execute 'TRUNCATE responses, assessments RESTART IDENTITY'
   end
 
   # @return [nil]
   def migrate!
-    UserAnswer.find_each(start: resume, batch_size: batch) do |user_answer|
+    UserAnswer.where(state: nil).find_each(batch_size: batch) do |user_answer|
       if valid?(user_answer)
         ActiveRecord::Base.transaction do
           response = process_user_answer(user_answer)
+          user_answer.update(state: 'done')
           log response.attributes.to_json, alert: false
         end
       else
-        log "User: #{user_answer.user_id} UserAnswer: #{user_answer.id}"
+        user_answer.update(state: 'skip')
+        log "Invalid UserAnswer: #{user_answer.id}", alert: false
       end
     end
   end
@@ -84,22 +85,30 @@ private
     return unless user_answer.question.summative_question?
 
     if user_answer.user_assessment_id.nil?
-      assessment =
-        Assessment
-          .create_with(started_at: user_answer.created_at)
-          .find_or_create_by(user_id: user_answer.user_id, training_module: user_answer.module)
+      assessment_in_progress(user_answer)
     else
-      user_assessment = UserAssessment.find(user_answer.user_assessment_id)
-      params = assessment_params(user_assessment)
-      assessment = Assessment.find_or_create_by(params)
+      assessment_completed(user_answer)
+    end
+  end
 
-      if assessment.score.nil?
-        if user_assessment.score.to_i > 100
-          assessment.update(score: 100)
-        else
-          assessment.update(score: user_assessment.score)
-        end
-      end
+  # @param user_answer [UserAnswer]
+  # @return [Assessment]
+  def assessment_in_progress(user_answer)
+    Assessment
+      .create_with(started_at: user_answer.created_at)
+      .find_or_create_by(user_id: user_answer.user_id, training_module: user_answer.module)
+  end
+
+  # @param user_answer [UserAnswer]
+  # @return [Assessment]
+  def assessment_completed(user_answer)
+    user_assessment = UserAssessment.find(user_answer.user_assessment_id)
+    params = assessment_params(user_assessment)
+    assessment = Assessment.find_or_create_by(params)
+
+    if assessment.score.nil?
+      score = user_assessment.score.to_i > 100 ? 100 : user_assessment.score
+      assessment.update(score: score)
     end
 
     assessment
@@ -121,9 +130,7 @@ private
   # @return [Hash<Symbol=>Mixed>]
   def response_params(user_answer)
     {
-      id: user_answer.id,                                 # int db primary key
       user_id: user_answer.user_id,                       # int db foreign key
-      assessment_id: user_answer.user_assessment_id,      # int db foreign key
       training_module: user_answer.module,                # string cms key
       question_name: user_answer.name,                    # string cms key
       question_type: user_answer.question.question_type,  # string cms filter

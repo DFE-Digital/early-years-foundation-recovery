@@ -89,10 +89,4 @@ namespace :eyfs do
       end
     end
   end
-
-  desc 'Migrate training data to response and assessment models'
-  task migrate_training_data: :environment do
-    require 'migrate_training'
-    MigrateTraining.new.call
-  end
 end

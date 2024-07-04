@@ -99,6 +99,13 @@ class NotifyMailer < GovukNotifyRails::Mailer
 
 private
 
+  # @note
+  #   Avoid deploying mailer changes when scheduled mail jobs will run.
+  #
+  #   Background worker deployment is not gated therefore database migrations
+  #   that impact after_deliver callbacks can potentially raise errors until the
+  #   web app is released.
+  #
   # @return [MailEvent, nil]
   def log_delivery
     if (user = User.find_by(email: Array(message.to).first))

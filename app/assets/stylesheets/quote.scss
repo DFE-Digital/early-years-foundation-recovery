@@ -25,12 +25,12 @@
         padding-left: 40px;
       }
 
-      &:before {
+      &::before {
         content: none;
       }
     }
   
-    &:before {
+    &::before {
       position: absolute;
       content: '“'; // <-----
       font-size: 8em;
@@ -57,7 +57,7 @@ cite {
     padding-left: 40px;
   }
   
-  &:before {
+  &::before {
     content: "-";
   }
 }

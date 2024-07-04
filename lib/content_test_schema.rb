@@ -40,7 +40,7 @@ private
 
   # @return [Array<Array>]
   def inputs
-    if type.match?(/question/)
+    if type.match?(/\A(formative|summative|confidence)\z/)
       [
         *question_answers, *question_buttons
       ]
@@ -77,7 +77,7 @@ private
   # @return [String]
   def controller
     case type
-    when /question/ then 'questionnaires'
+    when /\A(formative|summative|confidence)\z/ then 'questionnaires'
     when /results/ then 'assessment-result'
     else
       'content-pages'
@@ -95,11 +95,11 @@ private
       [
         [:click_on, 'Finish test'],
       ]
-    elsif type.match?(/summative/)
+    elsif type.eql?('summative')
       [
         [:click_on, 'Save and continue'],
       ]
-    elsif type.match?(/formative/)
+    elsif type.eql?('formative')
       [
         [:click_on, 'Next'],
         [:click_on, 'Next'],
@@ -115,7 +115,7 @@ private
   def question_answers
     answers = payload[pass ? :correct : :incorrect]
 
-    if pass && type.match?(/confidence/)
+    if pass && type.eql?('confidence')
       [
         [:choose, field_name(payload[:correct].last)],
       ]

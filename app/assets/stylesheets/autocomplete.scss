@@ -74,7 +74,7 @@
 }
 
 .autocomplete__menu--overlay {
-  box-shadow: rgba(0, 0, 0, .256863) 0 2px 6px;
+  box-shadow: rgba(0, 0, 0, .2569) 0 2px 6px;
   left: 0;
   position: absolute;
   top: 100%;
@@ -136,11 +136,10 @@
 }
 
 @media (min-width:641px) {
-
   .autocomplete__hint,
   .autocomplete__input,
   .autocomplete__option {
       font-size: 19px;
-      line-height: 1.31579
+      line-height: 1.3158
   }
 }

@@ -54,10 +54,10 @@
 
   @include govuk-media-query($from: tablet) {
     font-size: 19px;
-    line-height: 1.3157894737;
+    line-height: 1.3158;
   }
 
-  &:after {
+  &::after {
     content: "";
     display: block;
     clear: both;
@@ -66,7 +66,7 @@
   .certificate-title {
     font-weight: 400;
     font-size: 18px;
-    line-height: 1.1111111111;
+    line-height: 1.1111;
     margin: 0 0 govuk-spacing(3);
 
     .certificate-link {
@@ -75,7 +75,7 @@
 
     @include govuk-media-query($from: tablet) {
       font-size: 27px;
-      line-height: 1.1111111111;
+      line-height: 1.1111;
     }
   }
 
@@ -135,7 +135,7 @@
 
     @include govuk-media-query($from: tablet) {
       font-size: 19px;
-      line-height: 1.3157894737;
+      line-height: 1.3158;
     }
   }
 }

@@ -8,7 +8,7 @@ RSpec.describe 'Summative assessment', type: :system do
   let(:first_question_path) { '/modules/alpha/questionnaires/1-3-2-1' }
 
   before do
-    view_pages_upto alpha, 'summative_questionnaire'
+    view_pages_upto alpha, 'summative'
   end
 
   describe 'intro' do

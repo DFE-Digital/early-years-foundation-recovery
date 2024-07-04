@@ -33,12 +33,12 @@ label.menu-icon {
 .dfe-vertical-nav {
   font-weight: 400;
   font-size: 16px;
-  line-height: 1.14286;
+  line-height: 1.1429;
 }
 
 .dfe-vertical-nav__section {
   margin: 0 0 govuk-spacing(4);
-  padding: 0px;
+  padding: 0;
   list-style-type: none;
 }
 
@@ -48,18 +48,18 @@ label.menu-icon {
   line-height: 1.25;
 
   &:hover {
-    border-left: 4px solid $department-for-education-websafe;
+    border-left: 4px solid govuk-organisation-colour('department-for-education');
   }
 
   &--current {
-    border-left: 4px solid $department-for-education;
+    border-left: 4px solid govuk-organisation-colour('department-for-education', false);
     font-weight: 700;
     background: govuk-colour('light-grey');
 
     .dfe-vertical-nav__link {
-      border-left-color: $department-for-education;
+      border-left-color: govuk-organisation-colour('department-for-education', false);
       font-weight: 700;
-      color: $department-for-education;
+      color: govuk-organisation-colour('department-for-education', false);
 
       &:hover {
         text-decoration: none;
@@ -74,12 +74,12 @@ label.menu-icon {
   padding: 7px 30px 8px 10px;
   text-decoration: none;
   margin-bottom: govuk-spacing(1);
-  color: $department-for-education;
+  color: govuk-organisation-colour('department-for-education', false);
 
   &:active,
   &:hover {
     color: govuk-colour('blue');
-    border-left-color: $department-for-education-websafe;
+    border-left-color: govuk-organisation-colour('department-for-education');
     box-shadow: none;
     outline: 0;
   }

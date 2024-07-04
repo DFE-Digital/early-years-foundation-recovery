@@ -1,26 +1,13 @@
-/*
-https://frontend.design-system.service.gov.uk/sass-api-reference
-https://design.education.gov.uk/design-system/dfe-frontend
-https://design-system.service.gov.uk/styles/colour/
+// https://frontend.design-system.service.gov.uk/sass-api-reference
+// https://design.education.gov.uk/design-system/dfe-frontend
+// https://design-system.service.gov.uk/styles/colour/
 
-https://github.com/alphagov/govuk_frontend_toolkit/blob/master/stylesheets/_colours.scss
-*/
-$department-for-education: #003a69;
-$department-for-education-websafe: #347ca9;
+@import 'govuk-frontend/dist/govuk/all';
+@import 'dfe-frontend/packages/dfefrontend';
 
-$govuk-new-link-styles: true;
-$govuk-page-width: 1200px;
+$light-blue: tint(govuk-organisation-colour('department-for-education'), 90%);
 
-.govuk-width-container {
-  max-width: $govuk-page-width;
-}
-
-@import 'govuk-frontend/govuk/all';
-@import 'dfe-frontend-alpha/packages/dfefrontend';
-
-$light-blue: tint($department-for-education-websafe, 90%);
-
-@import 'dfe-header';
+@import 'header';
 @import 'print';
 @import 'about';
 @import 'card';
@@ -44,8 +31,6 @@ $light-blue: tint($department-for-education-websafe, 90%);
 // training/pages#show (certificate)
 @import 'certificate';
 
-
-
 * {
   font-family:
     BlinkMacSystemFont,
@@ -63,21 +48,20 @@ main img {
   max-width: 100%;
 }
 
-/*
-Default layout
------------------------------------------------
-*/
-
-#default-layout {
-  .govuk-notification-banner {
-    margin-bottom: govuk-spacing(8);
-  }
+.govuk-width-container,
+.dfe-width-container {
+  max-width: 1200px;
 }
 
-/*
-Hero layout
------------------------------------------------
-*/
+// Default layout
+// -----------------------------------------------
+
+#default-layout .govuk-notification-banner {
+    margin-bottom: govuk-spacing(8);
+}
+
+// Hero layout
+// -----------------------------------------------
 
 #hero-layout {
   .govuk-notification-banner {
@@ -102,11 +86,9 @@ Hero layout
   }
 }
 
+// Internal
+// -----------------------------------------------
 
-/*
-Internal
------------------------------------------------
-*/
 pre.code-tip {
   padding: 0 5px;
   color: govuk-colour('red');
@@ -189,14 +171,14 @@ ul>li>ul>li {
 
 .log-entry {
   border: 0.5px solid;
-  border-color: #b1b4b6;
+  border-color: $govuk-border-colour;
   padding: 20px;
   margin-bottom: 40px;
 }
 
 .form-container {
   padding: 30px;
-  background: #f3f2f1;
+  background: govuk-colour('light-grey');
 }
 
 .govuk-footer__copyright-logo {
