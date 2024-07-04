@@ -103,23 +103,22 @@ pre.code-tip {
     font-family: monospace !important;
   }
 }
+// --------------------------------------------
 
 #feedback-cta {
   padding: govuk-spacing(5);
-  background-color: $department-for-education-websafe;
+  background-color: govuk-organisation-colour('department-for-education');
 
   * {
     color: govuk-colour('white');
   }
 
   .govuk-button {
-    background-color: $department-for-education-websafe;
+    background-color: govuk-organisation-colour('department-for-education');
     border-color: govuk-colour('white');
     box-shadow: none;
   }
 }
-// --------------------------------------------
-
 
 .govuk-label {
   font-weight: normal;
