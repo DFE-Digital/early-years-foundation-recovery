@@ -22,7 +22,7 @@ private
   end
 
   def container_html_attributes
-    { class: %w[dfe-header__container dfe-width-container] << custom_container_classes.compact }
+    { class: %w[dfe-header__container dfe-width-container] }
   end
 
   class ActionLinkItem < GovukComponent::HeaderComponent::NavigationItem
@@ -31,7 +31,7 @@ private
     end
 
     def call
-      tag.li(**html_attributes) do
+      tag.li do
         if link?
           govuk_link_to(text, href, **options)
         else
