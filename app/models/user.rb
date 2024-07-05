@@ -222,7 +222,7 @@ class User < ApplicationRecord
 
   # @see ResponsesController#response_params
   # @param content [Training::Question]
-  # @return [UserAnswer, Response]
+  # @return [Response]
   def response_for_shared(content, mod)
     responses.find_or_initialize_by(
       question_type: content.page_type,
