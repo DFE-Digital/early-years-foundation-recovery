@@ -4,9 +4,9 @@ RSpec.describe 'Account deletion' do
   include_context 'with user'
 
   context 'when on my account page' do
-    it 'has button to close account' do
+    it 'has link to close account' do
       visit '/my-account'
-      expect(page).to have_link 'Request to close account', href: '/my-account/close/edit-reason'
+      expect(page).to have_link 'ask us to close your account', href: '/my-account/close/edit-reason'
     end
   end
 
