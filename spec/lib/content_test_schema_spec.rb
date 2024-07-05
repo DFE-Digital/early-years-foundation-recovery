@@ -10,13 +10,7 @@ RSpec.describe ContentTestSchema do
   end
 
   context 'when pass is true' do
-    let(:fixture) do
-      if Rails.application.migrated_answers?
-        'pass-response-with-feedback'
-      else
-        'pass'
-      end
-    end
+    let(:fixture) { 'pass-response-with-feedback' }
 
     specify do
       expect(schema.call).to eq ast
@@ -24,13 +18,7 @@ RSpec.describe ContentTestSchema do
   end
 
   context 'when pass is false' do
-    let(:fixture) do
-      if Rails.application.migrated_answers?
-        'fail-response'
-      else
-        'fail'
-      end
-    end
+    let(:fixture) { 'fail-response' }
 
     specify do
       expect(schema.call(pass: false).compact).to eq ast

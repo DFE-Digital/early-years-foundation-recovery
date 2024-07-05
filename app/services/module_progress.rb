@@ -93,21 +93,13 @@ protected
   # @see AssessmentProgress
   # @return [Boolean]
   def failed_attempt?
-    if Rails.application.migrated_answers?
-      summative_assessment.attempted? && summative_assessment.failed?
-    else
-      summative_assessment.attempted? && summative_assessment.failed?
-    end
+    summative_assessment.attempted? && summative_assessment.failed?
   end
 
   # @see AssessmentProgress
   # @return [Boolean]
   def successful_attempt?
-    if Rails.application.migrated_answers?
-      summative_assessment.passed?
-    else
-      summative_assessment.attempted? && summative_assessment.passed?
-    end
+    summative_assessment.passed?
   end
 
   # @return [Array<Training::Page, Training::Question, Training::Video>]

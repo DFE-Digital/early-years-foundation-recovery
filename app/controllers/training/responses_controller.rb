@@ -1,8 +1,3 @@
-#
-# TODO: Logic around potential FK question_name changes that could cause an assessment to contain more than 10 responses
-# TODO: Checks that scores are numeric, otherwise zero is recorded
-#
-#
 module Training
   class ResponsesController < ApplicationController
     include Learning
@@ -31,11 +26,7 @@ module Training
     # @note migrate from user_answer to response
     # @see User#response_for
     def response_params
-      if Rails.application.migrated_answers?
-        params.require(:response).permit!
-      else
-        params.require(:user_answer).permit!
-      end
+      params.require(:response).permit!
     end
 
     # @see User#response_for
@@ -44,11 +35,7 @@ module Training
     def save_response!
       correct_answers = content.opinion_question? ? true : content.correct_answers.eql?(user_answers)
 
-      if Rails.application.migrated_answers?
-        current_user_response.update(answers: user_answers, correct: correct_answers, text_input: user_answer_text)
-      else
-        current_user_response.update(answer: user_answers, correct: correct_answers)
-      end
+      current_user_response.update(answers: user_answers, correct: correct_answers, text_input: user_answer_text)
     end
 
     # @return [Array<Integer>]

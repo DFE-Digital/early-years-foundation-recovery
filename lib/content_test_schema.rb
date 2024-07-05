@@ -133,8 +133,7 @@ private
   # @param option [Integer]
   # @return [String]
   def field_name(option)
-    model = Rails.application.migrated_answers? ? 'response' : 'user-answer'
-    "#{model}-answers-#{option}-field"
+    "response-answers-#{option}-field"
   end
 
   # @return [String, nil]

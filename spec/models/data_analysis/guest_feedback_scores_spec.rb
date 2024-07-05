@@ -32,8 +32,6 @@ RSpec.describe DataAnalysis::GuestFeedbackScores do
   end
 
   before do
-    skip unless Rails.application.migrated_answers?
-
     # users not included
     create(:response,
            question_type: 'feedback',

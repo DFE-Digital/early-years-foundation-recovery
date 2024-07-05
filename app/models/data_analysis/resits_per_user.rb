@@ -34,11 +34,7 @@ module DataAnalysis
 
       # @return [Hash{Array => Integer}]
       def assessments
-        if Rails.application.migrated_answers?
-          Assessment.order(:user_id).group(:training_module, :user_id).count
-        else
-          UserAssessment.summative.group(:module, :user_id).count
-        end
+        Assessment.order(:user_id).group(:training_module, :user_id).count
       end
 
       # @return [Hash{Array => Integer}]

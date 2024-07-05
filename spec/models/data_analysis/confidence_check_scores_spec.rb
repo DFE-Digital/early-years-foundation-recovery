@@ -2,8 +2,6 @@ require 'rails_helper'
 
 RSpec.describe DataAnalysis::ConfidenceCheckScores do
   before do
-    skip unless Rails.application.migrated_answers?
-
     create(:response, question_type: 'confidence', training_module: 'alpha', question_name: '1-3-3-1', answers: [1])
     create(:response, question_type: 'confidence', training_module: 'alpha', question_name: '1-3-3-2', answers: [2])
     create(:response, question_type: 'confidence', training_module: 'alpha', question_name: '1-3-3-2', answers: [2])
