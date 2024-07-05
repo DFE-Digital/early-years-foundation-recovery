@@ -10,6 +10,8 @@ class PaginationDecorator
 
   # @return [String]
   def heading
+    return I18n.t('summary_intro.heading') if content.thankyou?
+
     content.section_content.first.heading
   end
 

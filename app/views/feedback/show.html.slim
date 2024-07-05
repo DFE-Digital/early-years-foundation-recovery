@@ -1,0 +1,27 @@
+- content_for :page_title do
+  = html_title content.name
+
+= render 'training/questions/debug'
+
+= form_with model: current_user_response, url: feedback_path, method: :patch do |f|
+  .govuk-grid-row
+    .govuk-grid-column-two-thirds
+      = govuk_back_link href: url_for(:back)
+
+      = f.govuk_error_summary
+
+      = render partial: content.to_partial_path, locals: { f: f }, object: current_user_response, as: :response
+
+    .govuk-grid-column-full
+      hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
+
+      .govuk-button-group
+        - if current_user.profile_updated?
+          = f.govuk_submit t('links.save')
+        - else
+          - if content.first_feedback?
+            = govuk_button_link_to t('previous_page.previous'), feedback_index_path, secondary: true
+          - else
+            = govuk_button_link_to t('previous_page.previous'), feedback_path(previous_page.name), secondary: true
+
+          = f.govuk_submit t('next_page.next')

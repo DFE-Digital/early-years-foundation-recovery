@@ -88,6 +88,28 @@ RSpec.describe Training::Question, type: :model do
         expect(question.legend).to start_with 'True or false?'
       end
     end
+
+    context 'when the question is a feedback question' do
+      subject(:question) do
+        Training::Module.by_name('alpha').page_by_name('feedback-radio-only')
+      end
+
+      let(:first_option) { question.options.first }
+
+      specify do
+        expect(first_option.label).to eq 'Option 1'
+      end
+    end
+
+    context 'when the question is a feedback free text question' do
+      subject(:question) do
+        Training::Module.by_name('alpha').page_by_name('feedback-textarea-only')
+      end
+
+      specify do
+        expect(question.answers).to eq []
+      end
+    end
   end
 
   describe '#debug_summary' do

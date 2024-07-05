@@ -44,8 +44,16 @@ describe 'LinkHelper', type: :helper do
         expect(link).to include 'href="/modules/alpha/content-pages/1-3-4"'
       end
 
-      it 'offers feedback to content authors' do
+      specify do
         expect(link).to include 'Next page has not been created'
+      end
+    end
+
+    context 'when next section is feedback questions' do
+      let(:content) { mod.page_by_name('feedback-intro') }
+
+      specify do
+        expect(link).to include 'Give feedback'
       end
     end
   end
@@ -181,6 +189,25 @@ describe 'LinkHelper', type: :helper do
 
       it 'targets new assessment attempt' do
         expect(link).to eq ['Retake test', '/modules/alpha/assessment-result/new']
+      end
+    end
+  end
+
+  describe '#link_to_skip_feedback' do
+    subject(:link) { helper.link_to_skip_feedback }
+
+    before do
+      without_partial_double_verification do
+        allow(view).to receive(:content).and_return(content)
+        allow(view).to receive(:mod).and_return(mod)
+      end
+    end
+
+    context 'when page is feedback intro' do
+      let(:content) { mod.page_by_name('feedback-intro') }
+
+      it 'targets thank you page' do
+        expect(link).to include 'Skip feedback'
       end
     end
   end

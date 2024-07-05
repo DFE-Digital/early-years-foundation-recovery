@@ -31,6 +31,7 @@ en:
               blank: Choose an option.
 
   # Validations ----------------------------------------------------------------
+  # https://guides.rubyonrails.org/i18n.html#translations-for-active-record-models
 
   activerecord:
     errors:
@@ -39,6 +40,8 @@ en:
           attributes:
             answers:
               blank: Please select an answer.
+              invalid: Please select an option.
+
         user_answer:
           attributes:
             answer:
@@ -93,9 +96,18 @@ en:
     start_test: Start test
     save_continue: Save and continue
     finish_test: Finish test
-    finish: Finish
+    finish: View certificate
+    give_feedback: Give feedback
+
+  previous_page:
+    previous: Previous
 
   links:
+    home: Go to home
+    my_modules: Go to my modules
+    feedback:
+      update: Update my feedback
+      skip: Skip feedback
     save: Save
     continue: Continue
     cancel: Cancel
@@ -189,11 +201,6 @@ en:
 
       Please rate to what extent you agree with the statements on the following pages.
 
-  thankyou:
-    heading: Thank you
-    body: |
-      You can also {external}[give feedback about the training](%{feedback_url}){/external}
-
   certificate:
     heading: Download your certificate
 
@@ -251,12 +258,6 @@ en:
 
             You may wish to revisit some of the learning before taking the test again.
 
-  notice:
-    email_changed: |
-      We have sent an email to your new email address with a link to click to confirm the change.
-
-      If you have not received the email after a few minutes, please check your spam folder.
-
   # Pages ----------------------------------------------------------------------
 
   # /my-learning
@@ -281,11 +282,25 @@ en:
     name_information: This is the name that will appear on your end of module certificate. You can use this setting to change how your name appears. Changing your name on this account will not affect your GOV.UK One Login
     setting_details: |
       ## Your setting details
-    email_preferences: |
-      ## Your email preferences
-    training_emails:
-      true: You have chosen to receive emails about this training course.
-      false: You have chosen not to receive emails about this training course.
+
+    email_preferences:
+      heading: |
+        ## Your email preferences
+      label: Email updates about this training course
+      link_text: Change email preferences
+      preference:
+        true: You have chosen to receive emails about this training course.
+        false: You have chosen not to receive emails about this training course.
+
+    research_preferences:
+      heading: |
+        ## Your research preferences
+      label: Willing to speak to a researcher to improve this service
+      link_text: Change research preferences
+      preference:
+        true: You have chosen to participate in research.
+        false: You have chosen not to participate in research.
+
     early_years_experience:
       Time worked in early years
     password_changed: Password last changed on %{date}
@@ -519,6 +534,41 @@ en:
       This module covers:
 
       %{criteria}
+  # /feedback
+  feedback:
+    cta: |
+      # Can you help us improve this training further?
+
+      We are constantly looking at ways we can improve this training for you and your colleagues.
+      We really value your feedback.
+      It will take no more than 5 minutes to answer all the questions.
+
+    intro: |
+      # Give feedback
+
+      The purpose of this feedback form is to gather your opinion on the child development
+      training course that the Department for Education has created for early years practitioners.
+
+      For more information on how you data will be used, please view our
+      {external}[privacy notice](https://www.gov.uk/government/publications/privacy-information-members-of-the-public/privacy-information-members-of-the-public){/external}.
+
+      Completing this form is voluntary and you can withdraw your feedback at any time.
+
+      By completing this form you have understood the above and consent to take part.
+
+      ## Technical support queries
+
+      If you have any questions about how to use this website or are experiencing any
+      technical issues, please {external}[use our contact form](%{contact_us}){/external} so that our team can follow up with your enquiry.
+    complete: |
+      # You have already submitted feedback
+
+      Thank you for helping to improve this training
+    # one-off question
+    research: |
+      Participation is entirely voluntary, and you can withdraw at any point before,
+      during or after the research takes place and you do not need to give a reason.
+    reasons: Could you give us reasons for your answer?
 
   # /gov-one/info
   gov_one_info:

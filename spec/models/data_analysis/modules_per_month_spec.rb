@@ -50,6 +50,7 @@ RSpec.describe DataAnalysis::ModulesPerMonth do
       create :assessment, :passed, user: user_1, completed_at: Time.zone.local(2023, 1, 1)
       create :assessment, :failed, user: user_1, completed_at: Time.zone.local(2023, 2, 1)
       create :assessment, :passed, user: user_2, completed_at: Time.zone.local(2023, 3, 1)
+      create :assessment, user: user_2, training_module: 'bravo'
     else
       create(:user_assessment, :passed, user_id: user_1.id, score: 100, module: 'alpha', created_at: Time.zone.local(2023, 1, 1))
       create(:user_assessment, :failed, user_id: user_1.id, score: 0, module: 'alpha', created_at: Time.zone.local(2023, 2, 1))

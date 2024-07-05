@@ -36,27 +36,25 @@ SitemapGenerator::Sitemap.create do
 
   # errors
   add '/404'
-  # add '/422'
   add '/500'
+  add '/503'
 
   add course_overview_path
   add experts_path
+  add feedback_index_path
 
-  Training::Module.live.each do |mod|
-    add about_path(mod.name)
+  Course.config.pages.each do |content|
+    add feedback_path(content.name)
   end
 
   add new_user_session_path
-
-  # private pages
-  # ------------------------------------------
 
   # account
   add user_path
 
   # edit registration/account
   add edit_registration_terms_and_conditions_path
-  add edit_registration_name_path # unless Rails.application.gov_one_login?
+  add edit_registration_name_path
   add edit_registration_setting_type_path
   add edit_registration_setting_type_other_path
   add edit_registration_local_authority_path
@@ -75,13 +73,12 @@ SitemapGenerator::Sitemap.create do
   add my_modules_path
   add user_notes_path
 
+  # course content
   if Training::Module.live.any?
-    # Course common start page
-    mod = Training::Module.live.first
-    add training_module_page_path(mod.name, mod.pages.first.name)
+    mod = Training::Module.live.sample
+    add about_path(mod.name)
 
-    # Course content random module
-    Training::Module.live.sample.content.each do |page|
+    mod.content.each do |page|
       if page.is_question?
         add training_module_question_path(page.parent.name, page.name)
       elsif page.assessment_results?

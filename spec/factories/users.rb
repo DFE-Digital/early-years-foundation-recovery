@@ -40,10 +40,12 @@ FactoryBot.define do
     trait :agency_childminder do
       registered
       setting_type_id { 'childminder_agency' }
-      setting_type { 'Childminder as part of an agency' } # Why are we persisting the titles?
+      setting_type { 'Childminder as part of an agency' }
       setting_type_other { nil }
       role_type { 'Childminder' }
       role_type_other { nil }
+      early_years_experience { '6-9' }
+      local_authority { 'Hertfordshire' }
     end
 
     trait :independent_childminder do
@@ -53,6 +55,8 @@ FactoryBot.define do
       setting_type_other { nil }
       role_type { 'Childminder' }
       role_type_other { nil }
+      early_years_experience { '0-2' }
+      local_authority { 'Leeds' }
     end
 
     trait :team_member do

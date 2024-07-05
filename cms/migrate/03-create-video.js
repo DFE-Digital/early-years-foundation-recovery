@@ -76,16 +76,6 @@ module.exports = function(migration) {
     helpText: 'Title of video.',
   })
 
-  /* number */
-
-  video.changeFieldControl('submodule', 'builtin', 'numberEditor', {
-    helpText: 'Select the sub-module number the page belongs to, the second number of the page name.'
-  })
-
-  video.changeFieldControl('topic', 'builtin', 'numberEditor', {
-    helpText: 'Select the topic number the page belongs to, the third number in the page name.'
-  })
-
   /* markdown */
 
   video.changeFieldControl('body', 'builtin', 'markdown', {

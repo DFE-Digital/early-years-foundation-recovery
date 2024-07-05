@@ -1,7 +1,8 @@
-= render 'debug'
-
 - content_for :page_title do
   = html_title t('my_account.title')
+
+- content_for :cta do
+  = render 'feedback/cta'
 
 .govuk-grid-row
   .govuk-grid-column-full
@@ -40,11 +41,22 @@
 
     = govuk_summary_list do |email_preferences|
       - email_preferences.with_row do |row|
-        - row.with_key { m('my_account.email_preferences') }
+        - row.with_key { m('my_account.email_preferences.heading') }
         - row.with_value { nil }
       - email_preferences.with_row do |row|
-        - row.with_key { 'Email updates about this training course' }
-        - row.with_value(text: t(current_user.training_emails_recipient?, scope: 'my_account.training_emails'), classes: %w[data-hj-suppress])
-        - row.with_action(text: 'Change email preferences', href: edit_training_emails_user_path, html_attributes: { id: :edit_training_emails_user })
+        - row.with_key { t('my_account.email_preferences.label') }
+        - row.with_value(text: t(current_user.training_emails_recipient?, scope: 'my_account.email_preferences.preference'), classes: %w[data-hj-suppress])
+        - row.with_action(text: t('my_account.email_preferences.link_text'), href: edit_training_emails_user_path, html_attributes: { id: :edit_training_emails_user })
+
+    = govuk_summary_list do |research_preferences|
+      - research_preferences.with_row do |row|
+        - row.with_key { m('my_account.research_preferences.heading') }
+        - row.with_value { nil }
+      - research_preferences.with_row do |row|
+        - row.with_key { t('my_account.research_preferences.label') }
+        - row.with_value(text: t(current_user.research_participant?, scope: 'my_account.research_preferences.preference'), classes: %w[data-hj-suppress])
+        - row.with_action(text: t('my_account.research_preferences.link_text'), href: feedback_path(user_research_question.name))
+
+    = render 'debug'
 
     = m('my_account.closing.information')
