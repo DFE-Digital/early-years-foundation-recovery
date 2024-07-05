@@ -225,6 +225,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_16_092250) do
     t.boolean "early_years_emails"
     t.string "gov_one_id"
     t.string "early_years_experience"
+    t.boolean "research_participant"
     t.jsonb "notify_callback"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

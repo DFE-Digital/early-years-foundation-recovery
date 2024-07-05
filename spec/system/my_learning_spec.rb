@@ -71,7 +71,7 @@ RSpec.describe 'Learning activity' do
         expect(page).not_to have_text 'You have not started any modules.'
 
         expect(page).to have_text 'You have read 1 pages' # FIXME: plurality
-        expect(page).to have_text 'Your progress: 3%'
+        expect(page).to have_text 'Your progress: 2%'
       end
     end
   end

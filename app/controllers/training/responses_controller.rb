@@ -1,6 +1,7 @@
 module Training
   class ResponsesController < ApplicationController
     include Learning
+    include Pagination
 
     before_action :authenticate_registered_user!
 
@@ -32,14 +33,18 @@ module Training
     # @note migrate from user_answer to response
     # @return [Boolean]
     def save_response!
-      correct_answers = content.confidence_question? ? true : content.correct_answers.eql?(user_answers)
+      correct_answers = content.opinion_question? ? true : content.correct_answers.eql?(user_answers)
 
-      current_user_response.update(answers: user_answers, correct: correct_answers)
+      current_user_response.update(answers: user_answers, correct: correct_answers, text_input: user_answer_text)
     end
 
     # @return [Array<Integer>]
     def user_answers
       Array(response_params[:answers]).compact_blank.map(&:to_i)
+    end
+
+    def user_answer_text
+      response_params[:text_input]
     end
 
     def redirect
@@ -48,7 +53,7 @@ module Training
       if content.formative_question?
         redirect_to training_module_question_path(mod.name, content.name)
       else
-        redirect_to training_module_page_path(mod.name, content.next_item.name)
+        redirect_to training_module_page_path(mod.name, helpers.next_page.name)
       end
     end
 

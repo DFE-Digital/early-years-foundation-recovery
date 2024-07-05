@@ -7,7 +7,7 @@ RSpec.describe Training::ResponsesController, type: :controller do
     patch :update, params: {
       training_module_id: 'alpha',
       id: question_name,
-      response: { answers: answers },
+      response: { answers: answers, text_input: 'Text input' },
     }
   end
 
@@ -64,6 +64,25 @@ RSpec.describe Training::ResponsesController, type: :controller do
 
           specify { expect(response).to have_http_status(:unprocessable_entity) }
           specify { expect(records).to be 0 }
+        end
+      end
+
+      context 'when the question expects text and is answered' do
+        let(:question_name) { 'feedback-textarea-only' }
+        let(:answers) { [] }
+
+        context 'with text input' do
+          let(:text_input) { 'Text input for feedback question' }
+
+          specify { expect(response).to have_http_status(:redirect) }
+          specify { expect(records).to be 1 }
+        end
+
+        context 'with no text input' do
+          let(:text_input) { nil }
+
+          specify { expect(response).to have_http_status(:redirect) }
+          specify { expect(records).to be 1 }
         end
       end
     end

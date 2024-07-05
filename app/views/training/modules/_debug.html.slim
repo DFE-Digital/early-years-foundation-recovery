@@ -1,5 +1,7 @@
 - if debug?
   pre.debug_dump
+    = govuk_link_to 'Structure', training_module_structure_path(mod.name)
+
     hr
     h4 Module
     = mod.debug_summary

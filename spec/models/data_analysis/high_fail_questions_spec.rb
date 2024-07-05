@@ -17,8 +17,8 @@ RSpec.describe DataAnalysis::HighFailQuestions do
         fail_rate_percentage: 0.5,
       },
       {
-        module_name: 'module_1',
-        question_name: 'q2',
+        module_name: 'alpha',
+        question_name: '1-3-2-2',
         fail_rate_percentage: 1.0,
       },
     ]
@@ -27,29 +27,29 @@ RSpec.describe DataAnalysis::HighFailQuestions do
   before do
     create :response,
            question_type: 'summative',
-           training_module: 'module_1',
-           question_name: 'q1',
+           training_module: 'alpha',
+           question_name: '1-3-2-1',
            answers: [1],
            correct: true
 
     create :response,
            question_type: 'summative',
-           training_module: 'module_2',
-           question_name: 'q1',
+           training_module: 'bravo',
+           question_name: '1-3-2-1',
            answers: [1],
            correct: true
 
     create :response,
            question_type: 'summative',
-           training_module: 'module_1',
-           question_name: 'q2',
+           training_module: 'alpha',
+           question_name: '1-3-2-2',
            answers: [2],
            correct: false
 
     create :response,
            question_type: 'summative',
-           training_module: 'module_1',
-           question_name: 'q2',
+           training_module: 'alpha',
+           question_name: '1-3-2-2',
            answers: [2],
            correct: false
   end

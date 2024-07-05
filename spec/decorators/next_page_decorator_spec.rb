@@ -89,7 +89,7 @@ RSpec.describe NextPageDecorator do
     let(:content) { mod.page_by_name('1-3-3-5') }
 
     it '#text' do
-      expect(decorator.text).to eq 'Finish'
+      expect(decorator.text).to eq 'View certificate'
     end
   end
 end

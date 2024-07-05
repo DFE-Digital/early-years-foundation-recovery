@@ -1,0 +1,15 @@
+- content_for :page_title do
+  = html_title 'Thank you'
+
+.govuk-grid-row
+  .govuk-grid-column-full
+    h1.govuk-heading-xl= content.heading
+
+    = m(content.body)
+
+    hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
+
+    - if current_user.guest?
+      = govuk_button_link_to t('links.home'), root_path
+    - else
+      = govuk_button_link_to t('links.my_modules'), my_modules_path

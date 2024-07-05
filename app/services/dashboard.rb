@@ -33,6 +33,9 @@ class Dashboard
     { model: 'DataAnalysis::UserModuleCompletion',      folder: 'nonlinear',        file: 'user_module_completion'        },
     { model: 'DataAnalysis::UserModuleCompletionCount', folder: 'nonlinear',        file: 'user_module_completions_count' },
     { model: 'DataAnalysis::ReturningUsers',            folder: 'nonlinear',        file: 'returning_users'               },
+    { model: 'DataAnalysis::ModuleFeedbackForms',       folder: 'feedback',         file: 'feedback_forms'                },
+    { model: 'DataAnalysis::UserFeedbackScores',        folder: 'feedback',         file: 'feedback_user_scores'          },
+    { model: 'DataAnalysis::GuestFeedbackScores',       folder: 'feedback',         file: 'feedback_guest_scores'         },
   ].freeze
 
   # @return [String] 30-06-2022-09-30

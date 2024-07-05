@@ -16,7 +16,12 @@ RSpec.describe 'Account page', type: :system do
     expect(page).to have_content 'Changing your name on this account will not affect your GOV.UK One Login'
 
     expect(page).to have_link 'Change setting details'
+
     expect(page).to have_link 'Change email preferences'
+    expect(page).to have_text 'You have chosen to receive emails about this training course.'
+
+    expect(page).to have_link 'Change research preferences'
+    expect(page).to have_text 'You have chosen not to participate in research.'
 
     expect(page).to have_text 'Closing your account'
   end
@@ -51,6 +56,31 @@ RSpec.describe 'Account page', type: :system do
       expect(page).to have_text 'DfE'
       expect(page).to have_text 'Developer'
       expect(page).to have_text 'Not applicable'
+    end
+
+    describe 'research participation preference' do
+      before do
+        create :response,
+               question_name: 'feedback-skippable',
+               training_module: 'course',
+               answers: [1],
+               correct: true,
+               user: user,
+               question_type: 'feedback'
+
+        visit '/my-account'
+      end
+
+      it 'changes response' do
+        expect(page).to have_text 'You have chosen to participate in research.'
+        click_on 'Change research preferences'
+        expect(page).to have_current_path '/feedback/feedback-skippable'
+        choose 'Option 2'
+        click_button 'Save'
+        expect(page).to have_current_path '/my-account'
+        expect(page).to have_text 'You have chosen not to participate in research.'
+        expect(page).to have_text 'Your details have been updated'
+      end
     end
   end
 end

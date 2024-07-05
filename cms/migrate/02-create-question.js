@@ -3,7 +3,7 @@ module.exports = function(migration) {
   const question = migration.createContentType('question', {
     name: 'Question',
     displayField: 'name',
-    description: 'Formative, Summative or Confidence'
+    description: 'Formative, Summative, Confidence or Feedback'
   })
 
   /* Fields ----------------------------------------------------------------- */
@@ -34,6 +34,7 @@ module.exports = function(migration) {
          'formative',
          'summative',
          'confidence',
+         'feedback',
         ]
       }
     ]
@@ -51,6 +52,7 @@ module.exports = function(migration) {
     formative: customise both
     summative: customise failure only (success unused)
     confidence: both use default
+    feedback: both use default
   */
 
   question.createField('success_message', {
@@ -76,6 +78,47 @@ module.exports = function(migration) {
     type: 'Object',
   })
 
+  /* Feedback Only ---------------------------------------------------------- */
+
+  // the last option has an additional conditional text input
+  question.createField('other', {
+    name: 'Other',
+    type: 'Text',
+  })
+
+  // an extra option is appended with an index of zero
+  question.createField('or', {
+    name: 'Or',
+    type: 'Text',
+  })
+
+  /*
+  - increases the other input to a text area
+  - appends an additional textbox
+  - replaces options with a textbox
+  */
+  question.createField('more', {
+    name: 'More',
+    type: 'Boolean'
+  })
+
+  /*
+    overrides default
+    ======================
+    formative and summative are dynamic based off number of correct options
+    confidence are hard-coded
+    feedback are controlled by content editors
+  */
+  question.createField('multi_select', {
+    name: 'Multi select',
+    type: 'Boolean'
+  })
+
+  question.createField('skippable', {
+    name: 'Skippable',
+    type: 'Boolean'
+  })
+
   /* Interface -------------------------------------------------------------- */
 
   /* JSON */
@@ -98,14 +141,24 @@ module.exports = function(migration) {
     helpText: 'Displayed after "That’s not quite right" if the user selects the wrong answer.'
   })
 
-  /* number */
+  /* toggle */
 
-  question.changeFieldControl('submodule', 'builtin', 'numberEditor', {
-    helpText: 'Select the sub-module number the page belongs to, the second number of the page name.'
+  question.changeFieldControl('multi_select', 'builtin', 'boolean', {
+    helpText: 'Select multiple options? (default no)',
+    trueLabel: 'yes',
+    falseLabel: 'no'
   })
 
-  question.changeFieldControl('topic', 'builtin', 'numberEditor', {
-    helpText: 'Select the topic number the page belongs to, the third number in the page name.'
+  question.changeFieldControl('skippable', 'builtin', 'boolean', {
+    helpText: 'Hide once answered?  (default no)',
+    trueLabel: 'yes',
+    falseLabel: 'no'
+  })
+
+  question.changeFieldControl('more', 'builtin', 'boolean', {
+    helpText: 'Allow more user input? (default no)',
+    trueLabel: 'yes',
+    falseLabel: 'no'
   })
 
 }

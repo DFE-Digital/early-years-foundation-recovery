@@ -56,9 +56,7 @@ RSpec.describe 'Summative assessment', type: :system do
     context 'when every question is answered correctly' do
       include_context 'with automated path'
 
-      let(:fixture) do
-        'spec/support/ast/alpha-pass-response.yml'
-      end
+      let(:fixture) { 'spec/support/ast/alpha-pass-response-skip-feedback.yml' }
 
       before do
         visit '/modules/alpha/assessment-result/1-3-2-11'
@@ -98,9 +96,7 @@ RSpec.describe 'Summative assessment', type: :system do
     context 'when failed' do
       include_context 'with automated path'
 
-      let(:fixture) do
-        'spec/support/ast/alpha-fail-response.yml'
-      end
+      let(:fixture) { 'spec/support/ast/alpha-fail-response.yml' }
 
       it 'displays score with wrong answers' do
         expect(page).to have_content 'You scored 0%'

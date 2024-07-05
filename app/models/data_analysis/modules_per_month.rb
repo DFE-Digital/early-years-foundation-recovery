@@ -30,7 +30,7 @@ module DataAnalysis
 
       # @return [Hash]
       def assessments_by_month
-        Assessment.all.group_by do |assessment|
+        Assessment.complete.group_by do |assessment|
           assessment.completed_at.strftime('%B %Y')
         end
       end

@@ -26,6 +26,14 @@ RSpec.describe 'Common page' do
     end
   end
 
+  describe 'feedback intro' do
+    subject(:common_page) { '/modules/alpha/content-pages/feedback-intro' }
+
+    it 'uses generic content' do
+      expect(page).to have_content 'Additional feedback'
+    end
+  end
+
   describe 'thank you' do
     subject(:common_page) { '/modules/alpha/content-pages/1-3-3-5' }
 
