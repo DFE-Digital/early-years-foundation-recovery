@@ -1,24 +1,19 @@
-# Validate whether a module's content meets minimum functional requirements
+# Validate module content meets minimum functional requirements
 #
 class ContentIntegrity
   extend Dry::Initializer
 
   option :module_name, Types::String
 
-  # NB: Able to be validated in the CMS editor
-  #
   # @return [Hash{Symbol=>String}] valid as upcoming module
   MODULE_VALIDATIONS = {
     upcoming: 'Missing upcoming text',
     about: 'Missing about text',
     description: 'Missing description text',
-
     criteria: 'Missing criteria list',
     outcomes: 'Missing outcomes list',
-
     duration: 'Missing duration number',
     position: 'Missing position number',
-
     thumbnail: 'Missing thumbnail image',
   }.freeze
 
@@ -55,7 +50,7 @@ class ContentIntegrity
     log "#{module_name.upcase}: " + (valid? ? 'pass' : 'fail')
   end
 
-  # @return [Boolean] Validate modules with content
+  # @return [Boolean]
   def valid?
     (module_results + content_results).all? && mod.pages?
   end
