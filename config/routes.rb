@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   get 'my-modules', to: 'learning#show' # @see User#course
 
   get '404', to: 'errors#not_found', via: :all
-  get '422', to: 'errors#unprocessable_entity', via: :all
   get '500', to: 'errors#internal_server_error', via: :all
   get '503', to: 'errors#service_unavailable', via: :all
 
