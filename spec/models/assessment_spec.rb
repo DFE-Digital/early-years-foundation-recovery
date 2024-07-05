@@ -5,10 +5,6 @@ RSpec.describe Assessment, type: :model do
     create :assessment
   end
 
-  before do
-    skip unless Rails.application.migrated_answers?
-  end
-
   specify { expect(assessment).not_to be_passed }
   specify { expect(assessment).not_to be_graded }
 end

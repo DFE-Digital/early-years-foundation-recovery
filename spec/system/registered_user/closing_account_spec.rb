@@ -4,9 +4,9 @@ RSpec.describe 'Account deletion' do
   include_context 'with user'
 
   context 'when on my account page' do
-    it 'has button to close account' do
+    it 'has link to close account' do
       visit '/my-account'
-      expect(page).to have_link 'Request to close account', href: '/my-account/close/edit-reason'
+      expect(page).to have_link 'ask us to close your account', href: '/my-account/close/edit-reason'
     end
   end
 
@@ -67,11 +67,16 @@ RSpec.describe 'Account deletion' do
   end
 
   context 'when on confirmation page' do
-    let!(:note) { create(:note) }
-
     before do
-      user.notes.push(note)
-      user.save!
+      user.notes.create!(training_module: 'alpha', body: 'this is a note')
+      user.responses.feedback.create!(
+        training_module: 'course',
+        question_name: 'feedback-textarea-only',
+        question_type: 'feedback',
+        text_input: 'this is feedback',
+        correct: true,
+      )
+
       visit '/my-account/close/confirm'
     end
 
@@ -95,6 +100,8 @@ RSpec.describe 'Account deletion' do
         expect(user.last_name).to eq 'User'
         expect(user.email).to have_text 'redacted_user'
         expect(user.notes.count).to eq 0
+        expect(user.responses.feedback.count).to eq 1
+        expect(user.responses.feedback.first.text_input).to be_nil
         expect(user.valid_password?('RedactedUser12!@')).to eq true
       end
     end

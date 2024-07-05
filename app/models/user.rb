@@ -67,20 +67,17 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:openid_connect]
 
   has_many :responses
-  has_many :user_answers
-
-  if Rails.application.migrated_answers?
-    has_many :assessments
-  else
-    has_many :user_assessments
-  end
-
+  has_many :assessments
   has_many :visits
   has_many :events
   has_many :mail_events
   has_many :notes
+  has_many :feedback_responses, -> { where(question_type: 'feedback') }, class_name: 'Response'
 
   scope :gov_one, -> { where.not(gov_one_id: nil) }
+
+  # feedback
+  scope :with_feedback, -> { joins(:responses).merge(Response.feedback) }
 
   # account status
   scope :public_beta_only_registration_complete, -> { registered_since_private_beta.registration_complete }
@@ -118,13 +115,8 @@ class User < ApplicationRecord
   scope :without_notes, -> { where.not(id: with_notes) }
 
   # assessments
-  if Rails.application.migrated_answers?
-    scope :with_assessments, -> { joins(:assessments) }
-    scope :with_passing_assessments, -> { with_assessments.merge(Assessment.passed) }
-  else
-    scope :with_assessments, -> { joins(:user_assessments) }
-    scope :with_passing_assessments, -> { with_assessments.merge(UserAssessment.passes) }
-  end
+  scope :with_assessments, -> { joins(:assessments) }
+  scope :with_passing_assessments, -> { with_assessments.merge(Assessment.passed) }
 
   # events
   scope :with_events, -> { joins(:events) }
@@ -209,35 +201,54 @@ class User < ApplicationRecord
     !gov_one_id.nil?
   end
 
+  # @return [Boolean]
+  def guest?
+    false
+  end
+
+  # @see FeedbackPaginationDecorator
+  #
+  # Checks all feedback forms for answers
+  #
+  # @param question [Training::Question]
+  # @return [Boolean]
+  def skip_question?(question)
+    return false unless question.skippable?
+
+    (Training::Module.live.to_a << Course.config).any? do |form|
+      response_for_shared(question, form).responded?
+    end
+  end
+
   # @see ResponsesController#response_params
   # @param content [Training::Question]
-  # @return [UserAnswer, Response]
-  def response_for(content)
-    if Rails.application.migrated_answers?
-      if content.summative_question?
-        # creates new assessment on first summative_question
-        assessment =
-          assessments.passed.find_by(training_module: content.parent.name) ||
-          assessments.incomplete.find_by(training_module: content.parent.name) || # needed?
-          assessments.create(training_module: content.parent.name, started_at: Time.zone.now)
-      end
+  # @return [Response]
+  def response_for_shared(content, mod)
+    responses.find_or_initialize_by(
+      question_type: content.page_type,
+      question_name: content.name,
+      training_module: mod.name,
+    )
+  end
 
-      responses.order('created_at DESC').find_or_initialize_by(
-        assessment_id: assessment&.id,
-        training_module: content.parent.name,
-        question_name: content.name,
-        question_type: content.page_type,
-      )
-    else
-      user_answers.find_or_initialize_by(
-        assessments_type: content.assessments_type,
-        module: content.parent.name,
-        name: content.name,
-        questionnaire_id: 0,
-        question: 'N/A for CMS only questions',
-        archived: nil,
-      )
+  # @see ResponsesController#response_params
+  # @param content [Training::Question]
+  # @return [Response]
+  def response_for(content)
+    if content.summative_question?
+      # creates new assessment on first summative_question
+      assessment =
+        assessments.passed.find_by(training_module: content.parent.name) ||
+        assessments.incomplete.find_by(training_module: content.parent.name) ||
+        assessments.create(training_module: content.parent.name, started_at: Time.zone.now)
     end
+
+    responses.order('created_at DESC').find_or_initialize_by(
+      assessment_id: assessment&.id,
+      training_module: content.parent.name,
+      question_name: content.name,
+      question_type: content.page_type,
+    )
   end
 
   # @return [Array<Training::Module>]
@@ -255,12 +266,6 @@ class User < ApplicationRecord
   # @return [String]
   def email_delivery_status
     notify_callback.to_h.symbolize_keys.fetch(:status, 'unknown')
-  end
-
-  # @return [String]
-  def password_last_changed
-    timestamp = password_changed_events&.last&.time || created_at
-    timestamp.to_date&.to_formatted_s(:rfc822)
   end
 
   # @return [CourseProgress] course activity query interface
@@ -354,13 +359,15 @@ class User < ApplicationRecord
   end
 
   # @return [Boolean]
-  def role_applicable?
-    role_type != 'Not applicable'
-  end
-
-  # return [Boolean]
   def training_emails_recipient?
     training_emails || training_emails.nil?
+  end
+
+  # @return [Boolean]
+  def research_participant?
+    preference = user_research_response.nil? ? false : user_research_response.answers.eql?([1])
+    update(research_participant: preference)
+    research_participant
   end
 
   # @return [Boolean]
@@ -411,6 +418,7 @@ class User < ApplicationRecord
             password: 'RedactedUser12!@',
             notify_callback: nil)
 
+    responses.feedback.update_all(text_input: nil)
     mail_events.destroy_all
     notes.destroy_all
   end
@@ -419,6 +427,11 @@ class User < ApplicationRecord
   # @return [Hash] override
   def dashboard_row
     data_attributes.dup.merge(module_ttc)
+  end
+
+  # @return [Boolean]
+  def profile_updated?
+    events.any? && events.last.name.eql?('profile_page')
   end
 
   # @return [Boolean]
@@ -437,6 +450,25 @@ class User < ApplicationRecord
   # @return [VisitChanges] changes since last visit
   def content_changes
     @content_changes ||= ContentChanges.new(user: self)
+  end
+
+  # @return [Boolean]
+  def completed_course_feedback?
+    responses.course_feedback.count.eql? Course.config.feedback_questions.count
+  end
+
+  # @return [String]
+  def visit_token
+    visits.last.visit_token
+  end
+
+  def feedback_attributes
+    data_attributes
+  end
+
+  # @return [Response]
+  def user_research_response
+    responses.feedback.find { |response| response.question.skippable? }
   end
 
 private

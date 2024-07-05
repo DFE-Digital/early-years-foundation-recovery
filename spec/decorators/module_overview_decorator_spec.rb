@@ -36,11 +36,7 @@ RSpec.describe ModuleOverviewDecorator do
 
     context 'when the assessment was failed' do
       before do
-        if Rails.application.migrated_answers?
-          create :assessment, :failed, user: user, training_module: 'bravo'
-        else
-          create :user_assessment, user_id: user.id, module: 'bravo'
-        end
+        create :assessment, :failed, user: user, training_module: 'bravo'
       end
 
       it 'retakes the assessment' do
@@ -55,7 +51,7 @@ RSpec.describe ModuleOverviewDecorator do
       end
 
       it 'goes to the certificate' do
-        expect(user.events.count).to be 32
+        expect(user.events.count).to be 41
         expect(state).to be :completed
         expect(page_name).to eq '1-3-4'
       end

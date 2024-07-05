@@ -22,7 +22,17 @@ module ContentTypes
 
   # @return [Boolean]
   def is_question?
-    formative_question? || summative_question? || confidence_question?
+    factual_question? || opinion_question?
+  end
+
+  # @return [Boolean]
+  def opinion_question?
+    confidence_question? || feedback_question?
+  end
+
+  # @return [Boolean]
+  def factual_question?
+    formative_question? || summative_question?
   end
 
   # @return [Boolean]
@@ -77,6 +87,11 @@ module ContentTypes
   # @return [Boolean]
   def confidence_question?
     page_type.eql?('confidence')
+  end
+
+  # @return [Boolean]
+  def feedback_question?
+    page_type.eql?('feedback')
   end
 
   # @return [Boolean]

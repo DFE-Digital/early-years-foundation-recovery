@@ -60,8 +60,10 @@ module Training
       end
     end
 
+    # Module content must not be shared and have unique names
+    #
     # @param id [String]
-    # @return [Training::Module]
+    # @return [Training::Module] first result
     def self.by_content_id(id)
       ordered.find { |mod| mod.content.find { |content| content.id.eql?(id) } }
     end
@@ -109,7 +111,7 @@ module Training
 
     # @return [Hash{ Integer => Array<Training::Page, Training::Video, Training::Question> }]
     def content_sections
-      content.slice_before(&:section?).each.with_index(1).to_h.invert
+      @content_sections ||= content.slice_before(&:section?).each.with_index(1).to_h.invert
     end
 
     # @return [Hash{ Array<Integer> => Array<Training::Page, Training::Video, Training::Question> }]
@@ -135,6 +137,7 @@ module Training
 
     # Selects from ordered array
     #
+    # @param id [String]
     # @return [Training::Page, Training::Video, Training::Question]
     def page_by_id(id)
       pages.find { |page| page.id.eql?(id) }
@@ -142,6 +145,7 @@ module Training
 
     # Selects from ordered array
     #
+    # @param name [String]
     # @return [Training::Page, Training::Video, Training::Question]
     def page_by_name(name)
       pages.find { |page| page.name.eql?(name) }
@@ -257,6 +261,11 @@ module Training
     # @return [Array<Training::Question>]
     def confidence_questions
       content.select(&:confidence_question?)
+    end
+
+    # @return [Array<Training::Question>]
+    def feedback_questions
+      content.select(&:feedback_question?)
     end
 
     # @param text [String]

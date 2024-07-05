@@ -23,7 +23,7 @@ module LinkHelper
     text = t(state, scope: 'module_call_to_action')
     path =
       if state.eql?(:failed)
-        new_training_module_assessment_path(mod.name)
+        training_module_page_path(mod.name, mod.assessment_intro_page.name)
       else
         training_module_page_path(mod.name, content.name)
       end
@@ -40,17 +40,11 @@ module LinkHelper
 
   # @return [String] previous page or module overview
   def link_to_previous
-    path =
-      if content.interruption_page?
-        training_module_path(mod.name)
-      else
-        training_module_page_path(mod.name, content.previous_item.name)
-      end
+    path = content.interruption_page? ? training_module_path(mod.name) : training_module_page_path(mod.name, previous_page.name)
 
-    style = content.section? ? 'section-intro-previous-button' : 'govuk-button--secondary'
-
-    govuk_button_link_to 'Previous', path,
-                         class: style,
+    govuk_button_link_to previous_page.text, path,
+                         id: 'previous-action',
+                         class: previous_page.style,
                          aria: { label: t('pagination.previous') }
   end
 
@@ -59,17 +53,18 @@ module LinkHelper
   # @param mod [Training::Module]
   # @return [String, nil]
   def link_to_retake_or_results(mod)
-    if Rails.application.migrated_answers?
-      return unless assessment_progress_service(mod).graded?
-    else
-      return unless assessment_progress_service(mod).attempted?
-    end
+    return unless assessment_progress_service(mod).graded?
 
     if assessment_progress_service(mod).failed?
-      govuk_link_to 'Retake end of module test', new_training_module_assessment_path(mod.name), no_visited_state: true, class: 'card-link--retake'
+      govuk_link_to 'Retake end of module test', training_module_page_path(mod.name, mod.assessment_intro_page.name), no_visited_state: true, class: 'card-link--retake'
     else
       govuk_link_to 'View previous test result', training_module_assessment_path(mod.name, mod.assessment_results_page.name), no_visited_state: true, class: 'card-link--retake'
     end
+  end
+
+  # @return [String]
+  def link_to_skip_feedback
+    govuk_link_to t('links.feedback.skip'), training_module_page_path(mod.name, mod.thankyou_page.name)
   end
 
   # @return [NextPageDecorator]
@@ -78,7 +73,16 @@ module LinkHelper
       user: current_user,
       mod: mod,
       content: content,
-      assessment: assessment_progress_service(mod),
+      assessment: (mod.is_a?(Training::Module) ? assessment_progress_service(mod) : nil),
+    )
+  end
+
+  # @return [PreviousPageDecorator]
+  def previous_page
+    PreviousPageDecorator.new(
+      user: current_user,
+      mod: mod,
+      content: content,
     )
   end
 end

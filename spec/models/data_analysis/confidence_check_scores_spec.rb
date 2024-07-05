@@ -2,11 +2,9 @@ require 'rails_helper'
 
 RSpec.describe DataAnalysis::ConfidenceCheckScores do
   before do
-    skip unless Rails.application.migrated_answers?
-
-    create(:response, question_type: 'confidence', training_module: 'module_1', question_name: 'q1', answers: [1])
-    create(:response, question_type: 'confidence', training_module: 'module_1', question_name: 'q2', answers: [2])
-    create(:response, question_type: 'confidence', training_module: 'module_1', question_name: 'q2', answers: [2])
+    create(:response, question_type: 'confidence', training_module: 'alpha', question_name: '1-3-3-1', answers: [1])
+    create(:response, question_type: 'confidence', training_module: 'alpha', question_name: '1-3-3-2', answers: [2])
+    create(:response, question_type: 'confidence', training_module: 'alpha', question_name: '1-3-3-2', answers: [2])
   end
 
   let(:headers) do
@@ -21,14 +19,14 @@ RSpec.describe DataAnalysis::ConfidenceCheckScores do
   let(:rows) do
     [
       {
-        module_name: 'module_1',
-        question_name: 'q1',
+        module_name: 'alpha',
+        question_name: '1-3-3-1',
         answers: [1],
         count: 1,
       },
       {
-        module_name: 'module_1',
-        question_name: 'q2',
+        module_name: 'alpha',
+        question_name: '1-3-3-2',
         answers: [2],
         count: 2,
       },

@@ -58,6 +58,7 @@ module Training
           correct: value,
           disabled: disabled,
           checked: checked.include?(order),
+          last: json.size.eql?(order),
         )
       end
     end
@@ -87,10 +88,12 @@ module Training
       attribute :correct, Types::Params::Bool.fallback(false)
       attribute :disabled, Types::Params::Bool.default(false)
       attribute :checked, Types::Params::Bool.default(false)
+      attribute :last, Types::Params::Bool.default(false)
 
       alias_method :correct?, :correct
       alias_method :checked?, :checked
       alias_method :disabled?, :disabled
+      alias_method :last?, :last
 
       # @return [Hash{Symbol => nil, String}]
       def schema

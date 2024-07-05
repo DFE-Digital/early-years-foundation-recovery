@@ -2,7 +2,6 @@
 #
 #
 ---
-version: '3.8'
 services:
   app:
     container_name: recovery_prod
@@ -21,7 +20,6 @@ services:
       - RAILS_MASTER_KEY
       - RAILS_LOG_TO_STDOUT
       - PROXY_CERT
-      - GOV_ONE_LOGIN
     depends_on:
       - db
     ports:

@@ -1,5 +1,3 @@
 - if debug?
   pre.debug_dump
-    - current_user.course.debug_summary.each do |summary|
-      = summary
-      hr
+    = current_user.course.debug_summary

@@ -16,6 +16,13 @@ module Training
       @parent ||= Training::Module.by_content_id(id)
     end
 
+    # @param mod [Course, Training::Module]
+    # @return [Training::Page, Training::Video, Training::Question]
+    def with_parent(mod)
+      @parent = mod
+      self
+    end
+
     # @return [String]
     def debug_summary
       <<~SUMMARY
@@ -56,6 +63,11 @@ module Training
     # @return [Boolean]
     def notes?
       (topic_intro? || text_page?) && notes
+    end
+
+    # @return [Boolean]
+    def skippable?
+      false
     end
   end
 end

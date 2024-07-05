@@ -4,27 +4,15 @@ RSpec.describe Training::ResponsesController, type: :controller do
   before do
     sign_in create(:user, :registered)
 
-    if Rails.application.migrated_answers?
-      patch :update, params: {
-        training_module_id: 'alpha',
-        id: question_name,
-        response: { answers: answers },
-      }
-    else
-      patch :update, params: {
-        training_module_id: 'alpha',
-        id: question_name,
-        user_answer: { answers: answers },
-      }
-    end
+    patch :update, params: {
+      training_module_id: 'alpha',
+      id: question_name,
+      response: { answers: answers, text_input: 'Text input' },
+    }
   end
 
   let(:records) do
-    if Rails.application.migrated_answers?
-      Response.count
-    else
-      UserAnswer.count
-    end
+    Response.count
   end
 
   describe '#update' do
@@ -76,6 +64,25 @@ RSpec.describe Training::ResponsesController, type: :controller do
 
           specify { expect(response).to have_http_status(:unprocessable_content) }
           specify { expect(records).to be 0 }
+        end
+      end
+
+      context 'when the question expects text and is answered' do
+        let(:question_name) { 'feedback-textarea-only' }
+        let(:answers) { [] }
+
+        context 'with text input' do
+          let(:text_input) { 'Text input for feedback question' }
+
+          specify { expect(response).to have_http_status(:redirect) }
+          specify { expect(records).to be 1 }
+        end
+
+        context 'with no text input' do
+          let(:text_input) { nil }
+
+          specify { expect(response).to have_http_status(:redirect) }
+          specify { expect(records).to be 1 }
         end
       end
     end

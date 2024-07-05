@@ -4,12 +4,13 @@ RSpec.describe Response, type: :model do
   subject(:response) { user.response_for(question) }
 
   before do
-    skip unless Rails.application.migrated_answers?
     response.update!(answers: [1], correct: true)
   end
 
   let(:user) { create :user }
-
+  let(:question) do
+    Training::Module.by_name('alpha').page_by_name('1-1-4-1')
+  end
   let(:headers) do
     %w[
       id
@@ -22,16 +23,11 @@ RSpec.describe Response, type: :model do
       updated_at
       question_type
       assessment_id
+      text_input
+      visit_id
     ]
   end
-
-  let(:rows) do
-    [response]
-  end
-
-  let(:question) do
-    Training::Module.by_name('alpha').page_by_name('1-1-4-1')
-  end
+  let(:rows) { [response] }
 
   it_behaves_like 'a data export model'
 end

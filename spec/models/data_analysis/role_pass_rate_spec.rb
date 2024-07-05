@@ -27,15 +27,9 @@ RSpec.describe DataAnalysis::RolePassRate do
   let(:user_2) { create :user, :registered, role_type: 'childminder' }
 
   before do
-    if Rails.application.migrated_answers?
-      create :assessment, :failed, user: user_1
-      create :assessment, :passed, user: user_1
-      create :assessment, :passed, user: user_2
-    else
-      create(:user_assessment, :passed, user_id: user_1.id, score: 100, module: 'alpha')
-      create(:user_assessment, :failed, user_id: user_1.id, score: 0, module: 'alpha')
-      create(:user_assessment, :passed, user_id: user_2.id, score: 80, module: 'alpha')
-    end
+    create :assessment, :failed, user: user_1
+    create :assessment, :passed, user: user_1
+    create :assessment, :passed, user: user_2
   end
 
   it_behaves_like 'a data export model'

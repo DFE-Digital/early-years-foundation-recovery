@@ -1,6 +1,6 @@
 #
 # Transform basic Content schema into RSpec actionable AST
-#
+# Answering all factual questions either correctly or incorrectly
 #
 class ContentTestSchema
   extend Dry::Initializer
@@ -46,7 +46,7 @@ private
       ]
     elsif payload[:note]
       [
-        [:make_note, 'note-body-field', payload[:note]],
+        [:input_text, 'note-body-field', payload[:note]],
         [:click_on, 'Save and continue'],
       ]
     elsif type.match?(/assessment_intro/)
@@ -59,7 +59,7 @@ private
       ]
     elsif type.match?(/thankyou/)
       [
-        [:click_on, 'Finish'],
+        [:click_on, 'View certificate'],
       ]
     elsif type.match?(/certificate/)
       []
@@ -133,8 +133,7 @@ private
   # @param option [Integer]
   # @return [String]
   def field_name(option)
-    model = Rails.application.migrated_answers? ? 'response' : 'user-answer'
-    "#{model}-answers-#{option}-field"
+    "response-answers-#{option}-field"
   end
 
   # @return [String, nil]
@@ -149,6 +148,6 @@ private
 
   # @return [Boolean]
   def skip?
-    !pass && type.match?(/results|confidence|thank|certificate/)
+    !pass && (type.match?(/results|confidence|thank|certificate/) || slug.match?(/feedback/))
   end
 end

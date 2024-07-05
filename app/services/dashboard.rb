@@ -15,10 +15,9 @@ class Dashboard
     { model: 'Event',                                   folder: 'eventsdata',       file: 'ahoy_events'                   },
     { model: 'Visit',                                   folder: 'visitsdata',       file: 'ahoy_visits'                   },
     { model: 'User',                                    folder: 'userdata',         file: 'users'                         },
-    { model: 'UserAnswer',                              folder: 'useranswers',      file: 'user_answers'                  },
     { model: 'Response',                                folder: 'useranswers',      file: 'responses'                     },
     { model: 'DataAnalysis::ConfidenceCheckScores',     folder: 'useranswers',      file: 'confidence_check_scores'       },
-    { model: 'UserAssessment',                          folder: 'userassessments',  file: 'user_assessments'              },
+    { model: 'Assessment',                              folder: 'userassessments',  file: 'assessments'                   },
     { model: 'DataAnalysis::LocalAuthorityUser',        folder: 'localauthorities', file: 'local_authority_users'         },
     { model: 'DataAnalysis::AveragePassScores',         folder: 'summativequiz',    file: 'average_pass_scores'           },
     { model: 'DataAnalysis::HighFailQuestions',         folder: 'summativequiz',    file: 'high_fail_questions'           },
@@ -34,6 +33,9 @@ class Dashboard
     { model: 'DataAnalysis::UserModuleCompletion',      folder: 'nonlinear',        file: 'user_module_completion'        },
     { model: 'DataAnalysis::UserModuleCompletionCount', folder: 'nonlinear',        file: 'user_module_completions_count' },
     { model: 'DataAnalysis::ReturningUsers',            folder: 'nonlinear',        file: 'returning_users'               },
+    { model: 'DataAnalysis::ModuleFeedbackForms',       folder: 'feedback',         file: 'feedback_forms'                },
+    { model: 'DataAnalysis::UserFeedbackScores',        folder: 'feedback',         file: 'feedback_user_scores'          },
+    { model: 'DataAnalysis::GuestFeedbackScores',       folder: 'feedback',         file: 'feedback_guest_scores'         },
   ].freeze
 
   # @return [String] 30-06-2022-09-30

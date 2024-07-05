@@ -1,0 +1,23 @@
+- content_for :page_title do
+  = html_title 'Feedback'
+
+.govuk-grid-row
+  .govuk-grid-column-full
+
+    - if current_user&.completed_course_feedback?
+      = m('feedback.complete')
+    - else
+      = m('feedback.intro', contact_us: Rails.application.credentials.contact_us)
+
+    hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible class='govuk-!-margin-top-4'
+
+    .govuk-button-group
+      - if current_user.completed_course_feedback?
+
+        - unless current_user.guest?
+          = govuk_button_link_to t('previous_page.previous'), my_modules_path, secondary: true
+
+        = govuk_button_link_to t('links.feedback.update'), feedback_path(mod.pages.first.name)
+
+      - else
+        = govuk_button_link_to t('next_page.next'), feedback_path(mod.pages.first.name)

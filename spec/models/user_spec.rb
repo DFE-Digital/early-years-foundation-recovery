@@ -5,6 +5,12 @@ RSpec.describe User, type: :model do
     expect(build(:user, :registered)).to be_valid
   end
 
+  describe '#guest?' do
+    specify do
+      expect(build(:user, :registered)).not_to be_guest
+    end
+  end
+
   describe '#first_name' do
     it 'must be present' do
       expect(build(:user, :registered, first_name: nil)).not_to be_valid
@@ -365,10 +371,6 @@ RSpec.describe User, type: :model do
     let(:question) do
       # default formative used in factory
       Training::Module.by_name('alpha').page_by_name('1-1-4-1')
-    end
-
-    before do
-      skip unless Rails.application.migrated_answers?
     end
 
     context 'with duplicates' do

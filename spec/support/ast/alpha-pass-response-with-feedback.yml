@@ -1,5 +1,7 @@
+# Answer all factual questions correctly
 #
 # @see ContentTestSchema
+# @note Fixture includes feedback form but answering is not implemented
 #
 ---
 - :path: /modules/alpha/content-pages/what-to-expect
@@ -30,7 +32,7 @@
 - :path: /modules/alpha/content-pages/1-1-3-1
   :text: 1-1-3-1
   :inputs:
-    - - :make_note
+    - - :input_text
       - note-body-field
       - hello world
     - - :click_on
@@ -215,11 +217,57 @@
       - response-answers-5-field
     - - :click_on
       - Next
+- :path: /modules/alpha/content-pages/feedback-intro
+  :text: Additional feedback
+  :inputs:
+    - - :click_on
+      - Next
+- :path: /modules/alpha/content-pages/feedback-radio-only
+  :text: Feedback radio buttons only
+  :inputs:
+    - - :click_on
+      - Next
+- :path: /modules/alpha/content-pages/feedback-checkbox-only
+  :text: Feedback checkboxes only
+  :inputs:
+    - - :click_on
+      - Next
+- :path: /modules/alpha/content-pages/feedback-textarea-only
+  :text: Feedback textarea only
+  :inputs:
+    - - :click_on
+      - Next
+- :path: /modules/alpha/content-pages/feedback-radio-other-more
+  :text: Feedback radio buttons with large other
+  :inputs:
+  :inputs:
+    - - :click_on
+      - Next
+- :path: /modules/alpha/content-pages/feedback-checkbox-other-more
+  :text: Feedback checkbox with large other
+  :inputs:
+    - - :click_on
+      - Next
+- :path: /modules/alpha/content-pages/feedback-radio-more
+  :text: Feedback radio buttons with additional reasons
+  :inputs:
+    - - :click_on
+      - Next
+- :path: /modules/alpha/content-pages/feedback-checkbox-other-or
+  :text: Feedback checkboxes with Other and Or
+  :inputs:
+    - - :click_on
+      - Next
+- :path: /modules/alpha/content-pages/feedback-skippable
+  :text: Skippable
+  :inputs:
+    - - :click_on
+      - Next
 - :path: /modules/alpha/content-pages/1-3-3-5
   :text: Thank you
   :inputs:
     - - :click_on
-      - Finish
+      - View certificate
 - :path: /modules/alpha/content-pages/1-3-4
   :text: Congratulations!
   :inputs: []
