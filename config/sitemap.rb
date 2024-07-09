@@ -43,8 +43,8 @@ SitemapGenerator::Sitemap.create do
   add experts_path
   add feedback_index_path
 
-  Course.config.pages.each do |content|
-    add feedback_path(content.name)
+  Course.config.pages.each do |page|
+    add feedback_path(page.name)
   end
 
   add new_user_session_path
@@ -52,7 +52,7 @@ SitemapGenerator::Sitemap.create do
   # account
   add user_path
 
-  # edit registration/account
+  # account preferences
   add edit_registration_terms_and_conditions_path
   add edit_registration_name_path
   add edit_registration_setting_type_path
@@ -64,7 +64,7 @@ SitemapGenerator::Sitemap.create do
   add edit_registration_training_emails_path
   add edit_registration_early_years_emails_path
 
-  # close account
+  # account closure
   add edit_reason_user_close_account_path
   add confirm_user_close_account_path
   add user_close_account_path

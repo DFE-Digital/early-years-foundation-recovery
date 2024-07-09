@@ -40,6 +40,8 @@ module Training
     def render_page
       if content.section? && !content.certificate?
         render 'section_intro'
+      elsif content.interruption_page?
+        render content.page_type, layout: 'application'
       else
         render content.page_type
       end

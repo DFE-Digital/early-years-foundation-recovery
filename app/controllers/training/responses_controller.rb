@@ -23,27 +23,32 @@ module Training
 
   private
 
-    # @note migrate from user_answer to response
-    # @see User#response_for
+    # @return [ActionController::Parameters]
     def response_params
       params.require(:response).permit!
     end
 
-    # @see User#response_for
-    # @note migrate from user_answer to response
     # @return [Boolean]
     def save_response!
-      correct_answers = content.opinion_question? ? true : content.correct_answers.eql?(user_answers)
+      current_user_response.update(
+        answers: response_answers,
+        correct: correct?,
+        text_input: response_text_input,
+      )
+    end
 
-      current_user_response.update(answers: user_answers, correct: correct_answers, text_input: user_answer_text)
+    # @return [Boolean]
+    def correct?
+      content.opinion_question? ? true : content.correct_answers.eql?(response_answers)
     end
 
     # @return [Array<Integer>]
-    def user_answers
+    def response_answers
       Array(response_params[:answers]).compact_blank.map(&:to_i)
     end
 
-    def user_answer_text
+    # @return [String]
+    def response_text_input
       response_params[:text_input]
     end
 

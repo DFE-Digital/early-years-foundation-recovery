@@ -1,21 +1,18 @@
 = render 'user/debug'
 
 - content_for :page_title do
-  = html_title t(:heading, scope: :register_setting)
-
-= govuk_back_link href: edit_registration_name_path
+  = html_title t('register_setting.heading')
 
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
-
     = form_for form, url: registration_setting_type_path, method: :patch do |f|
       = f.govuk_error_summary
 
-      = f.govuk_fieldset legend: { text: t(:heading, scope: :register_setting) }, aria: { required: true } do
+      = f.govuk_fieldset legend: { text: t('register_setting.heading') }, aria: { required: true } do
         = f.select_trainee_setting
 
         p.govuk_body
-          = govuk_link_to t(:other_link, scope: :register_setting), edit_registration_setting_type_other_path
+          = govuk_link_to t('register_setting.other_link'), edit_registration_setting_type_other_path
 
       = f.govuk_submit t('links.continue')
 

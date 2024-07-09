@@ -36,18 +36,22 @@ private
     end
   end
 
+  # @return [ActionController::Parameters]
   def settings_params
     params.permit(:request_path, :track_analytics, :settings_updated)
   end
 
+  # @return [Boolean]
   def template_valid?
     template_exists?(template, lookup_context.prefixes)
   end
 
+  # @return [String]
   def template
     page_params[:id].underscore
   end
 
+  # @return [String]
   def page_params
     params.permit(:id)
   end

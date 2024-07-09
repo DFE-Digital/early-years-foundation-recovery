@@ -39,10 +39,6 @@ Rails.application.routes.draw do
   end
 
   resource :user, controller: :user, only: %i[show], path: 'my-account' do
-    get 'early-years-experience'
-    get 'edit-training-emails'
-    patch 'update-training-emails'
-
     resource :close_account, only: %i[update show], path: 'close' do
       get 'edit-reason'
       patch 'update-reason'

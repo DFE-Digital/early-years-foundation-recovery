@@ -9,7 +9,7 @@ set -e
 
 ./bin/docker-rails eyfs:bot sitemap:refresh:no_ping
 
-BASE_URL=${1-"http://app:3000"} \
+BASE_URL=${1-"http://app:3000"}
 
 docker-compose \
   -f docker-compose.yml \

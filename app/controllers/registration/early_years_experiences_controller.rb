@@ -20,6 +20,7 @@ module Registration
 
   private
 
+    # @return [ActionController::Parameters]
     def user_params
       params.require(:user).permit(:early_years_experience)
     end

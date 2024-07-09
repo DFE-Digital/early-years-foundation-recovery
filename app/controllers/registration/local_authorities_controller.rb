@@ -16,7 +16,7 @@ module Registration
 
   private
 
-    # @return [Hash]
+    # @return [ActionController::Parameters]
     def user_params
       params.require(:user).permit(:local_authority)
     end

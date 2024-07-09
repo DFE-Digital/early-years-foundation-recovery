@@ -3,11 +3,8 @@
 
 .govuk-grid-row
   .govuk-grid-column-two-thirds-from-desktop
-    = govuk_back_link(href: edit_reason_user_close_account_path)
-
     = m('account_close.body')
 
     .govuk-button-group
       = govuk_button_to t('account_close.buttons.confirm'), close_account_user_close_account_path, warning: true
       = govuk_link_to t('account_close.buttons.cancel'), user_path
-      -# OPTIMIZE: govuk_exit_this_page

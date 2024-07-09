@@ -5,8 +5,6 @@
   = html_title mod.title
 
 - content_for :hero do
-  = govuk_back_link text: 'Back to My modules', href: my_modules_path
-
   .govuk-grid-row
     .govuk-grid-column-three-quarters-from-desktop class='govuk-!-padding-top-9 govuk-!-padding-bottom-0'
       = m('module.overview.summary', title: mod.heading, description: mod.description, outcomes: mod.outcomes, headings_start_with: 'xl')

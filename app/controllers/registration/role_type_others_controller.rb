@@ -16,6 +16,7 @@ module Registration
 
   private
 
+    # @return [ActionController::Parameters]
     def user_params
       params.require(:user).permit(:role_type_other)
     end

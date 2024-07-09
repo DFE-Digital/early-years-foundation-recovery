@@ -400,6 +400,7 @@ en:
 
   # /registration/terms-and-conditions/edit
   register_terms_and_conditions:
+    title: Terms and Conditions
     heading: Set up your training account
     subheading: Agree to our terms and conditions
     legend: |

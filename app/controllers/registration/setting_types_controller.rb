@@ -22,6 +22,7 @@ module Registration
 
   private
 
+    # @return [ActionController::Parameters]
     def user_params
       params.require(:user).permit(:setting_type_id)
     end

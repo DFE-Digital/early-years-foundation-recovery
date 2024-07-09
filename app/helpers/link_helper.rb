@@ -4,17 +4,25 @@ module LinkHelper
     session[:id_token].present? && !current_user.test_user? ? logout_uri.to_s : super
   end
 
-  # OPTIMIZE: use this helper for all back link logic and consistent location
-  #
   # @return [String, nil]
   def back_link
     case params[:controller]
-    when 'training/pages', 'training/questions', 'training/assessments'
+    when %r{training/(modules)}
+      govuk_back_link text: 'Back to My modules', href: my_modules_path
+    when %r{training/(pages|questions|assessments)}
       govuk_back_link href: training_module_path(mod.name),
                       text: "Back to Module #{mod.position} overview"
-    when 'settings', 'pages'
+    when 'pages', 'settings', 'feedback', %r{registration/*.}, 'close_accounts'
       govuk_back_link href: url_for(:back)
     end
+  end
+
+  # @return [String]
+  def link_to_cms
+    cms = 'https://app.contentful.com'
+    space = Rails.application.config.contentful_space
+    env = Rails.application.config.contentful_environment
+    govuk_link_to 'Edit in Contentful', "#{cms}/spaces/#{space}/environments/#{env}/entries/#{content.id}"
   end
 
   # @return [Array<String>]
