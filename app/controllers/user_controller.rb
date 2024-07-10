@@ -19,7 +19,7 @@ class UserController < ApplicationController
       redirect_to user_path, notice: 'You have saved your details'
     else
       track('user_name_change', success: false)
-      render :edit_name, status: :unprocessable_entity
+      render :edit_name, status: :unprocessable_content
     end
   end
 
@@ -29,7 +29,7 @@ class UserController < ApplicationController
       redirect_to user_path, notice: 'Your email preferences have been saved.'
     else
       track('user_training_emails_change', success: false)
-      render :edit_training_emails, status: :unprocessable_entity
+      render :edit_training_emails, status: :unprocessable_content
     end
   end
 

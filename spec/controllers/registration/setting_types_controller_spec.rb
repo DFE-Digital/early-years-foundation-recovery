@@ -37,7 +37,7 @@ RSpec.describe Registration::SettingTypesController, type: :controller do
 
       it 'fails with unknown input' do
         post :update, params: { user: { setting_type_id: 'unknown' } }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
   end
