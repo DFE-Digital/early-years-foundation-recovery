@@ -17,7 +17,7 @@ module Training
         track_question_answer
         redirect
       else
-        render 'training/questions/show', status: :unprocessable_entity
+        render 'training/questions/show', status: :unprocessable_content
       end
     end
 

@@ -10,7 +10,7 @@ module Registration
         redirect_to edit_registration_early_years_experience_path
       else
         track('user_role_type_other_change', success: false)
-        render :edit, status: :unprocessable_entity
+        render :edit, status: :unprocessable_content
       end
     end
 
