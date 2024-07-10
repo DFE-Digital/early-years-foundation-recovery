@@ -4,27 +4,15 @@ RSpec.describe Training::ResponsesController, type: :controller do
   before do
     sign_in create(:user, :registered)
 
-    if Rails.application.migrated_answers?
-      patch :update, params: {
-        training_module_id: 'alpha',
-        id: question_name,
-        response: { answers: answers, text_input: 'Text input' },
-      }
-    else
-      patch :update, params: {
-        training_module_id: 'alpha',
-        id: question_name,
-        user_answer: { answers: answers },
-      }
-    end
+    patch :update, params: {
+      training_module_id: 'alpha',
+      id: question_name,
+      response: { answers: answers, text_input: 'Text input' },
+    }
   end
 
   let(:records) do
-    if Rails.application.migrated_answers?
-      Response.count
-    else
-      UserAnswer.count
-    end
+    Response.count
   end
 
   describe '#update' do
@@ -49,7 +37,7 @@ RSpec.describe Training::ResponsesController, type: :controller do
         context 'and no answer' do
           let(:answers) { nil }
 
-          specify { expect(response).to have_http_status(:unprocessable_entity) }
+          specify { expect(response).to have_http_status(:unprocessable_content) }
           specify { expect(records).to be 0 }
         end
       end
@@ -74,7 +62,7 @@ RSpec.describe Training::ResponsesController, type: :controller do
         context 'and no answers' do
           let(:answers) { nil }
 
-          specify { expect(response).to have_http_status(:unprocessable_entity) }
+          specify { expect(response).to have_http_status(:unprocessable_content) }
           specify { expect(records).to be 0 }
         end
       end

@@ -71,12 +71,12 @@ RSpec.describe ToCsv do
 
     describe 'when using a custom batch size' do
       before do
-        create_list :user_answer, 5, :questionnaire, :confidence
+        create_list :response, 5, question_type: 'confidence'
         create_list :event, 5, name: 'module_start'
       end
 
       it 'exports all rows' do
-        expect(UserAnswer.to_csv(batch_size: 2).split("\n").count).to eq(6)
+        expect(Response.to_csv(batch_size: 2).split("\n").count).to eq(6)
         expect(Event.to_csv(batch_size: 2).split("\n").count).to eq(6)
       end
     end

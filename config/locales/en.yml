@@ -438,7 +438,6 @@ en:
   register_role:
     heading: Which of the following best describes your role?
     label: Role type
-    body: Your role
     other_link: I would describe my role in another way.
 
   # /registration/role-type-other/edit

@@ -16,7 +16,7 @@ module Registration
         end
       else
         track('user_setting_type_change', success: false)
-        render :edit, status: :unprocessable_entity
+        render :edit, status: :unprocessable_content
       end
     end
 

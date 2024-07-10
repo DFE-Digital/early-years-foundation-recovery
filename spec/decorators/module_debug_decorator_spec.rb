@@ -10,14 +10,23 @@ RSpec.describe ModuleDebugDecorator do
   describe '#rows' do
     let(:output) { decorator.rows }
 
-    it 'has heading' do
-      expect(output[0]).to eq %w[
-        Position Visited Sections Progress Submodule Topic Pages Model Type Name
+    it 'headers' do
+      expect(output.first).to eq %w[
+        Position
+        Visited
+        Sections
+        Progress
+        Submodule
+        Topic
+        Pages
+        Model
+        Type
+        Name
       ]
     end
 
-    it 'has rows' do
-      expect(output[1]).to eq [
+    it 'rows' do
+      expect(output.second).to eq [
         '1st',
         'false',
         'Section 1 of 5',
@@ -28,6 +37,19 @@ RSpec.describe ModuleDebugDecorator do
         'page',
         'sub_module_intro',
         '<a href="/modules/bravo/content-pages/1-1">1-1</a>',
+      ]
+
+      expect(output.third).to eq [
+        '2nd',
+        'false',
+        'Section 1 of 5',
+        '50%',
+        '1',
+        '1',
+        'Page 2 of 4',
+        'page',
+        'topic_intro',
+        '<a href="/modules/bravo/content-pages/1-1-1">1-1-1</a>',
       ]
     end
   end

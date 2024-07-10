@@ -1,30 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Training Module Completion', type: :system do
-  subject(:mod) { alpha }
-
   include_context 'with user'
-  include_context 'with progress'
-
-  let(:schema) { ContentTestSchema.new(mod: mod) }
-
-  before do
-    skip 'WIP' if Rails.application.migrated_answers?
-
-    visit "/modules/#{mod.name}"
-    click_on 'Start module'
-  end
+  include_context 'with automated path'
 
   context 'when all answers are correct' do
-    let(:ast) { schema.call }
+    let(:fixture) { 'spec/support/ast/alpha-pass-response-skip-feedback.yml' }
 
     it 'completes the module' do
-      ast.each do |content|
-        expect(page).to have_current_path content[:path]
-        expect(page).to have_content content[:text]
-        content[:inputs].each { |args| send(*args) }
-      end
-
       %w[
         learning_page
         module_start
@@ -38,8 +21,8 @@ RSpec.describe 'Training Module Completion', type: :system do
         expect(Event.find_by(name: event_name)).to be_present
       end
 
-      expect(UserAssessment.count).to be 1
-      expect(UserAnswer.count(&:correct)).to be 17
+      expect(Assessment.count).to be 1
+      expect(Response.count(&:correct)).to be 17
 
       expect(Note.count).to be 1
       expect(Note.first.body).to eq 'hello world'
@@ -47,17 +30,9 @@ RSpec.describe 'Training Module Completion', type: :system do
   end
 
   context 'when the assessment threshold is not passed' do
-    let(:ast) { schema.call(pass: false) }
+    let(:fixture) { 'spec/support/ast/alpha-fail-response.yml' }
 
     it 'does not complete the module' do
-      ast.each do |content|
-        next if content.nil?
-
-        expect(page).to have_current_path content[:path]
-        expect(page).to have_content content[:text]
-        content[:inputs].each { |args| send(*args) }
-      end
-
       %w[
         learning_page
         module_start
@@ -76,8 +51,8 @@ RSpec.describe 'Training Module Completion', type: :system do
         expect(Event.find_by(name: event_name)).not_to be_present
       end
 
-      expect(UserAssessment.count).to be 1
-      expect(UserAnswer.count(&:correct)).to be 0
+      expect(Assessment.count).to be 1
+      expect(Response.count(&:correct)).to be 0
 
       expect(Note.count).to be 1
       expect(Note.first.body).to eq 'hello world'

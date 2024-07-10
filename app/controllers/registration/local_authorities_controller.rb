@@ -10,7 +10,7 @@ module Registration
         redirect_to next_form_path
       else
         track('user_local_authority_change', success: false)
-        render :edit, status: :unprocessable_entity
+        render :edit, status: :unprocessable_content
       end
     end
 

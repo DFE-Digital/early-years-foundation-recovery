@@ -100,41 +100,25 @@ describe 'LinkHelper', type: :helper do
 
     context 'with a failed assessment' do
       before do
-        if Rails.application.migrated_answers?
-          create :assessment, :failed, user: user, training_module: mod.name
-        else
-          create :user_assessment, :failed, user_id: user.id, score: 0, module: mod.name
-        end
+        create :assessment, :failed, user: user, training_module: mod.name
       end
 
       it 'links to retake' do
         expect(link).to include 'Retake end of module test'
-        expect(link).to include 'href="/modules/alpha/assessment-result/new"'
+        expect(link).to include 'href="/modules/alpha/content-pages/1-3-2"'
       end
     end
 
     context 'with a passed assessment' do
       before do
-        if Rails.application.migrated_answers?
-          create :assessment, :passed, user: user, training_module: mod.name
-        else
-          create :user_assessment, user_id: user.id, module: mod.name
-        end
+        create :assessment, :passed, user: user, training_module: mod.name
 
         mod.summative_questions.map do |question|
-          if Rails.application.migrated_answers?
-            create :response, user: user,
-                              training_module: mod.name,
-                              question_name: question.name,
-                              question_type: 'summative',
-                              answers: question.correct_answers
-          else
-            create :user_answer, user: user,
-                                 module: mod.name,
-                                 name: question.name,
-                                 answer: question.correct_answers,
-                                 questionnaire_id: 0
-          end
+          create :response, user: user,
+                            training_module: mod.name,
+                            question_name: question.name,
+                            question_type: 'summative',
+                            answers: question.correct_answers
         end
       end
 
@@ -180,15 +164,11 @@ describe 'LinkHelper', type: :helper do
 
     context 'with failed assessment' do
       before do
-        if Rails.application.migrated_answers?
-          create :assessment, :failed, user: user, training_module: mod.name
-        else
-          create :user_assessment, :failed, user_id: user.id, score: 0, module: mod.name
-        end
+        create :assessment, :failed, user: user, training_module: mod.name
       end
 
       it 'targets new assessment attempt' do
-        expect(link).to eq ['Retake test', '/modules/alpha/assessment-result/new']
+        expect(link).to eq ['Retake test', '/modules/alpha/content-pages/1-3-2']
       end
     end
   end

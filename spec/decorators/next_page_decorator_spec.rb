@@ -67,24 +67,13 @@ RSpec.describe NextPageDecorator do
     let(:assessment) { instance_double(AssessmentProgress, graded?: true, score: 100) }
 
     before do
-      if Rails.application.migrated_answers?
-        create :response,
-               user: user,
-               question_name: '1-3-2-1',
-               question_type: 'summative',
-               training_module: 'alpha',
-               answers: [1],
-               assessment: create(:assessment, user: user)
-      else
-        create :user_answer,
-               user: user,
-               name: '1-3-2-1',
-               module: 'alpha',
-               assessments_type: 'summative_assessment',
-               question: 'N/A for CMS only questions',
-               questionnaire_id: 0,
-               answer: [1]
-      end
+      create :response,
+             user: user,
+             question_name: '1-3-2-1',
+             question_type: 'summative',
+             training_module: 'alpha',
+             answers: [1],
+             assessment: create(:assessment, user: user)
     end
 
     it '#text' do

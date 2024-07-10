@@ -100,7 +100,7 @@ RSpec.describe FeedbackController, type: :controller do
 
         it 'is not processed' do
           post :update, params: params
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
 
         it 'is not persisted' do

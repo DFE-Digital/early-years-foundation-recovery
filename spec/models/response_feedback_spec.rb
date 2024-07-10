@@ -11,10 +11,6 @@ RSpec.describe Response, '#feedback', type: :model do
     }
   end
 
-  before do
-    skip unless Rails.application.migrated_answers?
-  end
-
   # validate answers array
   describe '#answers' do
     subject(:response) do
