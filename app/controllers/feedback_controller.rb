@@ -23,7 +23,7 @@ class FeedbackController < ApplicationController
       track_feedback_start
       redirect_to feedback_path(helpers.next_page.name)
     else
-      render :show, status: :unprocessable_entity
+      render :show, status: :unprocessable_content
     end
   end
 

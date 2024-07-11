@@ -10,7 +10,7 @@
 
       = f.govuk_fieldset legend: { text: t('register_role.heading') }, aria: { required: true } do
         .data-hj-suppress
-          = f.govuk_collection_radio_buttons :role_type, form.role_types, :name, :name, legend: { text: t('register_role.label'), class: 'govuk-visually-hidden' }, hint: { text: t('register_role.body') }, form_group: { classes: %w[data-hj-suppress] }
+          = f.govuk_collection_radio_buttons :role_type, form.role_types, :name, :name, legend: { text: t('register_role.label'), class: 'govuk-visually-hidden' }, form_group: { classes: %w[data-hj-suppress] }
 
         p.govuk_body
           = govuk_link_to t('register_role.other_link'), edit_registration_role_type_other_path

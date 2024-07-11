@@ -37,7 +37,7 @@ RSpec.describe Training::ResponsesController, type: :controller do
         context 'and no answer' do
           let(:answers) { nil }
 
-          specify { expect(response).to have_http_status(:unprocessable_entity) }
+          specify { expect(response).to have_http_status(:unprocessable_content) }
           specify { expect(records).to be 0 }
         end
       end
@@ -62,7 +62,7 @@ RSpec.describe Training::ResponsesController, type: :controller do
         context 'and no answers' do
           let(:answers) { nil }
 
-          specify { expect(response).to have_http_status(:unprocessable_entity) }
+          specify { expect(response).to have_http_status(:unprocessable_content) }
           specify { expect(records).to be 0 }
         end
       end

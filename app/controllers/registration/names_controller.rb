@@ -15,7 +15,7 @@ module Registration
         end
       else
         track('user_name_change', success: false)
-        render :edit, status: :unprocessable_entity
+        render :edit, status: :unprocessable_content
       end
     end
 

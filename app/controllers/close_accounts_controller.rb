@@ -35,7 +35,7 @@ class CloseAccountsController < ApplicationController
     else
       current_user.errors.clear
       current_user.errors.add :closed_reason, :blank, message: 'Select a reason for closing your account'
-      render :edit_reason, status: :unprocessable_entity
+      render :edit_reason, status: :unprocessable_content
     end
   end
 

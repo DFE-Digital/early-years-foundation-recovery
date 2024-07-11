@@ -5,7 +5,7 @@ RSpec.describe SeedSnippets do
   subject(:locales) { described_class.new.call }
 
   it 'converts all translations' do
-    expect(locales.count).to be 201
+    expect(locales.count).to be 200
   end
 
   it 'dot separated key -> Page::Resource#name' do
