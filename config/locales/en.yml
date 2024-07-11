@@ -102,6 +102,30 @@ en:
   previous_page:
     previous: Previous
 
+  error:
+    404: |
+      # Page not found
+
+      If you typed the web address, check it is correct.
+
+      If you pasted the web address, check you copied the entire address.
+
+      If the web address is correct or you selected a link or button,
+      contact %{service_name} to report a fault with the service.
+
+    500: |
+      # Sorry, there is a problem with the service
+
+      Try again later.
+
+      We saved your progress through the training.
+
+      If you were completing an end of module test, we have not saved your answers.
+      When the service is available, you’ll have to start again.
+
+    503: |
+      # Service Unavailable
+
   links:
     home: Go to home
     my_modules: Go to my modules
