@@ -11,7 +11,6 @@ module Registration
           redirect_to user_path, notice: helpers.m(:details_updated)
         else
           complete_registration
-          redirect_to my_modules_path
         end
       else
         track('user_training_emails_change', success: false)
@@ -28,7 +27,11 @@ module Registration
 
     # @return [Registration::TrainingEmailsForm]
     def form
-      @form ||= TrainingEmailsForm.new(user: current_user, training_emails: current_user.training_emails)
+      @form ||=
+        TrainingEmailsForm.new(
+          user: current_user,
+          training_emails: current_user.training_emails,
+        )
     end
   end
 end

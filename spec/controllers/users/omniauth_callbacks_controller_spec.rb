@@ -22,6 +22,14 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
     allow(auth_service).to receive(:decode_id_token).and_return([decoded_id_token])
   end
 
+  context 'with an error response' do
+    let(:params) do
+      { 'error' => 'error_code', 'error_description' => 'Something went wrong' }
+    end
+
+    xit 'WIP' {}
+  end
+
   context 'with a new user' do
     before do
       get :openid_connect, params: params
@@ -38,7 +46,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
     end
   end
 
-  context 'with an existing non-gov-one user' do
+  context 'with an existing pre-gov-one user' do
     before do
       create :user, :registered, email: email, gov_one_id: nil
       get :openid_connect, params: params
@@ -63,6 +71,18 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
     it 'redirects to /my-modules' do
       expect(session[:id_token]).to eq id_token
       expect(response).to redirect_to my_modules_path
+    end
+  end
+
+  context 'with whats-new enabled' do
+    before do
+      create :user, :registered, gov_one_id: 'mock_sub', display_whats_new: true
+      get :openid_connect, params: params
+    end
+
+    it 'redirects to /whats-new' do
+      expect(session[:id_token]).to eq id_token
+      expect(response).to redirect_to static_path('whats-new')
     end
   end
 

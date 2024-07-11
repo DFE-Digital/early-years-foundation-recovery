@@ -22,8 +22,9 @@ RSpec.describe 'Gov One' do
       visit '/users/sign-in'
     end
 
-    it 'redirects to the my modules page' do
-      expect(page).to have_current_path '/my-modules'
+    it 'redirects to the home page' do
+      expect(page).to have_current_path '/'
+      expect(page).to have_text 'You are already signed in.'
     end
   end
 end

@@ -29,7 +29,11 @@ module Registration
 
     # @return [Registration::SettingTypeForm]
     def form
-      @form ||= SettingTypeForm.new(user: current_user, setting_type_id: current_user.setting_type_id)
+      @form ||=
+        SettingTypeForm.new(
+          user: current_user,
+          setting_type_id: current_user.setting_type_id,
+        )
     end
   end
 end

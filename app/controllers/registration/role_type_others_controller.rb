@@ -23,7 +23,11 @@ module Registration
 
     # @return [Registration::RoleTypeOtherForm]
     def form
-      @form ||= RoleTypeOtherForm.new(user: current_user, role_type_other: current_user.role_type_other)
+      @form ||=
+        RoleTypeOtherForm.new(
+          user: current_user,
+          role_type_other: current_user.role_type_other,
+        )
     end
   end
 end

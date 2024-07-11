@@ -51,7 +51,7 @@ class User < ApplicationRecord
     user
   end
 
-  # @return [User]
+  # @return [User, nil]
   def self.test_user
     find_by(email: 'completed@example.com')
   end
@@ -63,8 +63,8 @@ class User < ApplicationRecord
 
   attr_accessor :context
 
-  devise :database_authenticatable, :rememberable, :lockable, :timeoutable,
-         :omniauthable, omniauth_providers: [:openid_connect]
+  devise :database_authenticatable, :timeoutable, :omniauthable, omniauth_providers: [:openid_connect]
+
 
   has_many :responses
   has_many :assessments
@@ -178,18 +178,26 @@ class User < ApplicationRecord
   scope :month_old_confirmation, -> { where(confirmed_at: 4.weeks.ago.beginning_of_day..4.weeks.ago.end_of_day) }
   scope :with_local_authority, -> { where.not(local_authority: nil) }
 
-  validates :closed_reason, presence: true, if: -> { context == :close_account }
-  validates :closed_reason_custom, presence: true, if: proc { |u| u.closed_reason == 'other' }
-
+  validates :closed_reason,
+            presence: true,
+            if: -> { context == :close_account }
+  validates :closed_reason_custom,
+            presence: true,
+            if: proc { |u| u.closed_reason == 'other' }
   validates :first_name, :last_name, :setting_type_id,
             presence: true,
             if: proc { |u| u.registration_complete? }
-  validates :role_type, presence: true, if: proc { |u| u.role_type_required? }
+  validates :role_type,
+            presence: true,
+            if: proc { |u| u.role_type_required? }
   validates :setting_type_id,
             inclusion: { in: Trainee::Setting.valid_types },
             if: proc { |u| u.registration_complete? }
-
-  validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :update, if: proc { |u| u.registration_complete? }
+  validates :terms_and_conditions_agreed_at,
+            presence: true,
+            allow_nil: false,
+            on: :update,
+            if: proc { |u| u.registration_complete? }
 
   # @return [Boolean]
   def notes?
@@ -476,10 +484,5 @@ private
   # @return [Hash]
   def data_attributes
     DASHBOARD_ATTRS.map { |field| { field => send(field) } }.reduce(&:merge)
-  end
-
-  # @return [Event::ActiveRecord_AssociationRelation]
-  def password_changed_events
-    events.where(name: 'user_password_change')
   end
 end

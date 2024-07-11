@@ -27,7 +27,11 @@ module Registration
 
     # @return [Registration::EarlyYearsEmailsForm]
     def form
-      @form ||= EarlyYearsEmailsForm.new(user: current_user, early_years_emails: current_user.early_years_emails)
+      @form ||=
+        EarlyYearsEmailsForm.new(
+          user: current_user,
+          early_years_emails: current_user.early_years_emails,
+        )
     end
   end
 end

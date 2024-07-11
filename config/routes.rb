@@ -16,12 +16,11 @@ Rails.application.routes.draw do
                omniauth_callbacks: 'users/omniauth_callbacks',
              },
              path_names: {
-               sign_in: 'sign-in',
-               sign_out: 'sign-out',
+               sign_in: 'sign-in'
              }
 
   devise_scope :user do
-    get 'users/sign_out', to: 'users/sessions#destroy'
+    get 'users/sign_out', to: 'users/sessions#destroy' # post_logout_redirect_uri
     get 'users/review',   to: 'users/sessions#sign_in_test_user' unless Rails.application.live?
   end
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Account deletion' do
+RSpec.describe 'Closing account' do
   include_context 'with user'
 
   context 'when on my account page' do
