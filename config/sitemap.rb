@@ -24,7 +24,6 @@ SitemapGenerator::Sitemap.compress = false
 # NB: `app._routes.named_routes.helper_names`
 #
 SitemapGenerator::Sitemap.create do
-
   # static pages
   Page.order(:heading).load.each do |page|
     add static_path(page.name)

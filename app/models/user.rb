@@ -63,10 +63,23 @@ class User < ApplicationRecord
   attr_accessor :context
 
   devise :database_authenticatable,
-    :timeoutable,
-    :omniauthable,
-    omniauth_providers: [:openid_connect]
+         :timeoutable,
+         :omniauthable,
+         omniauth_providers: [:openid_connect]
 
+  # OPTIMIZE: User fields to delete
+  #           confirmation_sent_at
+  #           confirmation_token
+  #           confirmed_at
+  #           encrypted_password
+  #           failed_attempts
+  #           locked_at
+  #           private_beta_registration_complete
+  #           remember_created_at
+  #           reset_password_sent_at
+  #           reset_password_token
+  #           unconfirmed_email
+  #           unlock_token
 
   has_many :responses
   has_many :assessments

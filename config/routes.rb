@@ -16,7 +16,7 @@ Rails.application.routes.draw do
                omniauth_callbacks: 'users/omniauth_callbacks',
              },
              path_names: {
-               sign_in: 'sign-in'
+               sign_in: 'sign-in',
              }
 
   devise_scope :user do

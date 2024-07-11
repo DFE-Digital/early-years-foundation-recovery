@@ -22,14 +22,6 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
     allow(auth_service).to receive(:decode_id_token).and_return([decoded_id_token])
   end
 
-  context 'with an error response' do
-    let(:params) do
-      { 'error' => 'error_code', 'error_description' => 'Something went wrong' }
-    end
-
-    xit 'WIP' {}
-  end
-
   context 'with a new user' do
     before do
       get :openid_connect, params: params

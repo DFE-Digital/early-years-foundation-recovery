@@ -16,9 +16,9 @@ RSpec.describe 'Page' do
 
     it { expect(setting_path('cookie-policy')).to have_page_title 'Cookie policy' }
 
-    it { expect('404').to have_page_title 'Page not found' }
-    it { expect('500').to have_page_title 'Service unavailable' }
-    it { expect('503').to have_page_title 'Sorry, there is a problem with the service' }
+    it { expect(static_path('404')).to have_page_title 'Page not found' }
+    it { expect(static_path('500')).to have_page_title 'Sorry, there is a problem with the service' }
+    it { expect(static_path('503')).to have_page_title 'Service unavailable' }
 
     it { expect(static_path('accessibility-statement')).to have_page_title 'Accessibility statement' }
     it { expect(static_path('new-registration')).to have_page_title 'Update your registration details' }
