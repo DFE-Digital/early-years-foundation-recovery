@@ -16,7 +16,6 @@ class User < ApplicationRecord
     registered_at
     terms_and_conditions_agreed_at
     training_emails
-    early_years_emails
     email_delivery_status
     gov_one?
   ].freeze
@@ -63,7 +62,10 @@ class User < ApplicationRecord
 
   attr_accessor :context
 
-  devise :database_authenticatable, :timeoutable, :omniauthable, omniauth_providers: [:openid_connect]
+  devise :database_authenticatable,
+    :timeoutable,
+    :omniauthable,
+    omniauth_providers: [:openid_connect]
 
 
   has_many :responses
@@ -135,7 +137,6 @@ class User < ApplicationRecord
 
   # emails
   scope :training_email_recipients, -> { order(:id).where(training_emails: [true, nil]).distinct }
-  scope :early_years_email_recipients, -> { order(:id).where(early_years_emails: true).distinct }
   scope :complete_registration_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_incomplete.distinct }
   scope :start_training_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_complete.not_started_training.distinct }
   scope :continue_training_mail_job_recipients, -> { training_email_recipients.last_visit_4_weeks_ago.distinct(&:module_in_progress?) }
@@ -163,7 +164,7 @@ class User < ApplicationRecord
   scope :with_new_module_mail_events, -> { with_mail_events.merge(MailEvent.newest_module).distinct }
 
   scope :email_status, lambda { |status|
-    training_email_recipients.or(early_years_email_recipients).where('notify_callback @> ?', { notification_type: 'email', status: status }.to_json).distinct
+    training_email_recipients.where('notify_callback @> ?', { notification_type: 'email', status: status }.to_json).distinct
   }
   scope :email_delivered_days_ago, lambda { |num|
     email_status('delivered').where("CAST(notify_callback ->> 'sent_at' AS DATE) = CURRENT_DATE - #{num}")

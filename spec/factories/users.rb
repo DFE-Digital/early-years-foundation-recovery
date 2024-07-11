@@ -24,7 +24,6 @@ FactoryBot.define do
       role_type_other { 'Developer' }
       # local_authority { '' }
       training_emails { true }
-      early_years_emails { false }
       registration_complete { true }
     end
 

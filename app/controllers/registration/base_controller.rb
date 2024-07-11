@@ -8,7 +8,6 @@
 #   5. role_type / role_type_other
 #   6. early_years_experience
 #   7. training_emails
-#   8. early_years_emails (interruption)
 #
 module Registration
   class BaseController < ApplicationController

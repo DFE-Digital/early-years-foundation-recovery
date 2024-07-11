@@ -24,7 +24,6 @@ SitemapGenerator::Sitemap.compress = false
 # NB: `app._routes.named_routes.helper_names`
 #
 SitemapGenerator::Sitemap.create do
-  # TODO: test dynamic page content like question feedback
 
   # static pages
   Page.order(:heading).load.each do |page|
@@ -62,7 +61,6 @@ SitemapGenerator::Sitemap.create do
   add edit_registration_role_type_other_path
   add edit_registration_early_years_experience_path
   add edit_registration_training_emails_path
-  add edit_registration_early_years_emails_path
 
   # account closure
   add edit_reason_user_close_account_path
