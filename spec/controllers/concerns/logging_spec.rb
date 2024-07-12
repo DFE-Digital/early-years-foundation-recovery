@@ -15,10 +15,14 @@ RSpec.describe Logging do
         @attempt = 0
         log_caching do
           @attempt += 1
-          raise HTTP::TimeoutError if !success && @attempt.eql?(1)
+          raise potential_error if !success && @attempt.eql?(1)
 
           result << success
         end
+      end
+
+      def potential_error
+        [Contentful::Error, HTTP::TimeoutError].sample
       end
     }.new
   end

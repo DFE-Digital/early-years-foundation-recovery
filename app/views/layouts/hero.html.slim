@@ -7,26 +7,18 @@ html.govuk-template lang='en'
     script
       | document.body.className = ((document.body.className) ? document.body.className + ' js-enabled govuk-frontend-supported' : 'js-enabled govuk-frontend-supported');
 
-    = render 'layouts/analytics_body'
-    = render 'layouts/cookie_banner'
-    
-    = govuk_skip_link(href: '#main-content')
-
-    = navigation
+    = render 'layouts/navigation'
 
     main#main-content role='main'
       .dfe-content-page--header class='govuk-!-padding-bottom-4'
         .dfe-width-container
           = render 'layouts/banner'
-
           .noprint= back_link
 
           = render 'layouts/flash'
-
           = yield :hero
 
       .dfe-width-container class='govuk-!-padding-top-7 govuk-!-padding-bottom-7'
         = yield
 
-    = yield :cta
     = render 'layouts/footer'

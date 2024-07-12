@@ -8,7 +8,7 @@ private
   # @yield [nil]
   def log_caching
     yield
-  rescue HTTP::TimeoutError
+  rescue HTTP::TimeoutError, Contentful::Error
     message = "Repopulating cache #{ENV['ENVIRONMENT']} #{self.class.name}"
     Sentry.capture_message message, level: :info
     yield

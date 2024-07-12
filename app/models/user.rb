@@ -180,7 +180,7 @@ class User < ApplicationRecord
     training_email_recipients.where('notify_callback @> ?', { notification_type: 'email', status: status }.to_json).distinct
   }
   scope :email_delivered_days_ago, lambda { |num|
-    email_status('delivered').where("CAST(notify_callback ->> 'sent_at' AS DATE) = CURRENT_DATE - #{num}")
+    email_status('delivered').where("CAST(notify_callback ->> 'sent_at' AS DATE) = CURRENT_DATE - #{num.to_i}")
   }
   scope :email_delivered_today, -> { email_delivered_days_ago(0) }
   scope :last_email_delivered, lambda { |template_id|

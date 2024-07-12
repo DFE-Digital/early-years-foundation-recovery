@@ -1,4 +1,6 @@
 class FeedbackController < ApplicationController
+  include Answering
+
   before_action :research_participation, only: :show
 
   helper_method :content,
@@ -40,15 +42,6 @@ private
     end
   end
 
-  # @return [Boolean]
-  def save_response!
-    current_user_response.update(
-      answers: user_answers,
-      correct: true,
-      text_input: response_params[:text_input],
-    )
-  end
-
   # @return [Course]
   def mod
     Course.config
@@ -73,16 +66,6 @@ private
   # @return [String]
   def content_name
     params[:id]
-  end
-
-  # @return [ActionController::Parameters]
-  def response_params
-    params.require(:response).permit!
-  end
-
-  # @return [Array<Integer>]
-  def user_answers
-    Array(response_params[:answers]).compact_blank.map(&:to_i)
   end
 
   # @return [Hash]

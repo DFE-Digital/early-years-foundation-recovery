@@ -7,25 +7,15 @@ html.govuk-template lang='en'
     script
       | document.body.className = ((document.body.className) ? document.body.className + ' js-enabled govuk-frontend-supported' : 'js-enabled govuk-frontend-supported');
 
-    = render 'layouts/analytics_body'
-    = render 'layouts/cookie_banner'
-    
-    = govuk_skip_link(href: '#main-content')
-
-    / 1. header
-    = navigation
+    = render 'layouts/navigation'
 
     .dfe-width-container
-      / 2. phase banner
       = render 'layouts/banner'
-      / 3. back
       .noprint= back_link
 
-    / 4. main
     main#main-content role='main'
       .dfe-width-container class='govuk-!-padding-top-7 govuk-!-padding-bottom-7'
         = render 'layouts/flash'
         = yield
 
-    = yield :cta
     = render 'layouts/footer'
