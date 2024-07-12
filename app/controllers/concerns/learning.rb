@@ -1,3 +1,5 @@
+# Common methods for training controllers
+#
 module Learning
   # ----------------------------------------------------------------------------
   # Request Params

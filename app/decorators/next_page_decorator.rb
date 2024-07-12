@@ -1,5 +1,3 @@
-# TODO: assessments controller #new can be removed
-#
 # Button or link labels to the next page
 # @see [LinkHelper#link_to_next]
 #
