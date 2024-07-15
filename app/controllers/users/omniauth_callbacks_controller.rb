@@ -1,6 +1,5 @@
-# Controller handling OmniAuth callbacks for user authentication.
-# This controller uses the GovOneAuthService to retrieve user informaton and create or sign in an user based on the email address or gov one id
-
+# @see GovOneAuthService
+#
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # This method is called by Devise after successful Gov One Login authentication
   # @return [nil]
@@ -85,6 +84,11 @@ private
     session.delete(:gov_one_auth_nonce)
   end
 
+  # 1. /my-modules                                (default)
+  # 2. /whats-new                                 (static interruption page)
+  # 2. /email-preferences                         (static interruption page)
+  # 3. /registration/terms-and-conditions/edit    (new account)
+  #
   # @return [String]
   def after_sign_in_path_for(resource)
     if resource.registration_complete?
@@ -97,8 +101,6 @@ private
       else
         my_modules_path
       end
-    elsif resource.private_beta_registration_complete?
-      static_path('new-registration')
     else
       edit_registration_terms_and_conditions_path
     end

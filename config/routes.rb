@@ -17,11 +17,10 @@ Rails.application.routes.draw do
              },
              path_names: {
                sign_in: 'sign-in',
-               sign_out: 'sign-out',
              }
 
   devise_scope :user do
-    get 'users/sign_out', to: 'users/sessions#destroy'
+    get 'users/sign_out', to: 'users/sessions#destroy' # post_logout_redirect_uri
     get 'users/review',   to: 'users/sessions#sign_in_test_user' unless Rails.application.live?
   end
 
@@ -35,14 +34,9 @@ Rails.application.routes.draw do
     resource :role_type_other,        only: %i[edit update], path: 'role-type-other'
     resource :early_years_experience, only: %i[edit update], path: 'early-years-experience'
     resource :training_emails,        only: %i[edit update], path: 'training-emails'
-    resource :early_years_emails,     only: %i[edit update], path: 'early-years-emails'
   end
 
   resource :user, controller: :user, only: %i[show], path: 'my-account' do
-    get 'early-years-experience'
-    get 'edit-training-emails'
-    patch 'update-training-emails'
-
     resource :close_account, only: %i[update show], path: 'close' do
       get 'edit-reason'
       patch 'update-reason'

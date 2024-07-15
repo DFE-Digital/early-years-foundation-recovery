@@ -16,6 +16,10 @@ RSpec.describe 'Page' do
 
     it { expect(setting_path('cookie-policy')).to have_page_title 'Cookie policy' }
 
+    it { expect(static_path('404')).to have_page_title 'Page not found' }
+    it { expect(static_path('500')).to have_page_title 'Sorry, there is a problem with the service' }
+    it { expect(static_path('503')).to have_page_title 'Service unavailable' }
+
     it { expect(static_path('accessibility-statement')).to have_page_title 'Accessibility statement' }
     it { expect(static_path('new-registration')).to have_page_title 'Update your registration details' }
     it { expect(static_path('other-problems-signing-in')).to have_page_title 'Other problems signing in' }
@@ -46,7 +50,6 @@ RSpec.describe 'Page' do
     it { expect(edit_registration_local_authority_path).to have_page_title('What local authority area do you work in?') }
     it { expect(edit_registration_role_type_path).to have_page_title('Which of the following best describes your role?') }
     it { expect(edit_registration_role_type_other_path).to have_page_title('What is your role?') }
-    it { expect(edit_registration_early_years_emails_path).to have_page_title('Do you want to get early years email updates from the Department for Education?') }
 
     it { expect(static_path('whats-new')).to have_page_title "What's new in the training" }
 

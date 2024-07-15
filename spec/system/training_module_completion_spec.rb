@@ -1,15 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe 'Training Module Completion', type: :system do
+RSpec.describe 'Training Module completion', type: :system do
   include_context 'with user'
   include_context 'with automated path'
 
   context 'when all answers are correct' do
     let(:fixture) { 'spec/support/ast/alpha-pass-response-skip-feedback.yml' }
 
-    it 'completes the module' do
+    it 'records answers and milestones' do
       %w[
-        learning_page
         module_start
         user_note_created
         summative_assessment_start
@@ -32,9 +31,8 @@ RSpec.describe 'Training Module Completion', type: :system do
   context 'when the assessment threshold is not passed' do
     let(:fixture) { 'spec/support/ast/alpha-fail-response.yml' }
 
-    it 'does not complete the module' do
+    it 'records answers and milestones' do
       %w[
-        learning_page
         module_start
         user_note_created
         summative_assessment_start
@@ -46,6 +44,8 @@ RSpec.describe 'Training Module Completion', type: :system do
       %w[
         confidence_check_start
         confidence_check_complete
+        feedback_start
+        feedback_complete
         module_complete
       ].each do |event_name|
         expect(Event.find_by(name: event_name)).not_to be_present

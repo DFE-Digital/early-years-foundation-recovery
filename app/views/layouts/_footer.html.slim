@@ -1,3 +1,5 @@
+= yield :cta
+
 = govuk_footer classes: 'noprint' do |footer|
   - footer.with_navigation do
     .govuk-footer__section.govuk-grid-column-two-thirds
@@ -13,7 +15,6 @@
           = govuk_link_to t('links.footer.privacy'), privacy_policy_url, class: 'govuk-footer__link', target: '_blank'
 
         li.govuk-footer__list-item
-          -# TODO: make contact us link internal
           = govuk_link_to t('links.footer.contact_us'), Rails.application.credentials.contact_us, class: 'govuk-footer__link', target: '_blank'
 
         li.govuk-footer__list-item

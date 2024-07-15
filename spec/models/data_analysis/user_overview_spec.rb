@@ -66,7 +66,6 @@ RSpec.describe DataAnalysis::UserOverview do
         without_notes: 4,
         without_notes_percentage: 0.67,
         training_mail_recipients: 6,
-        early_years_mail_recipients: 2,
         complete_registration_mail_recipients: 1,
         start_training_mail_recipients: 1,
         continue_training_mail_recipients: 0,
@@ -84,7 +83,6 @@ RSpec.describe DataAnalysis::UserOverview do
 
   let(:user) do
     create :user, :registered,
-           early_years_emails: true,
            email: 'user@education.gov.uk', notify_callback: {
              notification_type: 'email', sent_at: Time.zone.today, status: 'delivered'
            }
@@ -92,7 +90,6 @@ RSpec.describe DataAnalysis::UserOverview do
 
   let(:user_2) do
     create :user, :registered,
-           early_years_emails: true,
            module_time_to_completion: { alpha: 1, bravo: 1, charlie: 0 }
   end
 

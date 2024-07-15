@@ -16,7 +16,6 @@ class User < ApplicationRecord
     registered_at
     terms_and_conditions_agreed_at
     training_emails
-    early_years_emails
     email_delivery_status
     gov_one?
   ].freeze
@@ -51,7 +50,7 @@ class User < ApplicationRecord
     user
   end
 
-  # @return [User]
+  # @return [User, nil]
   def self.test_user
     find_by(email: 'completed@example.com')
   end
@@ -63,8 +62,24 @@ class User < ApplicationRecord
 
   attr_accessor :context
 
-  devise :database_authenticatable, :rememberable, :lockable, :timeoutable,
-         :omniauthable, omniauth_providers: [:openid_connect]
+  devise :database_authenticatable,
+         :timeoutable,
+         :omniauthable,
+         omniauth_providers: [:openid_connect]
+
+  # OPTIMIZE: User fields to delete
+  #           confirmation_sent_at
+  #           confirmation_token
+  #           confirmed_at
+  #           encrypted_password
+  #           failed_attempts
+  #           locked_at
+  #           private_beta_registration_complete
+  #           remember_created_at
+  #           reset_password_sent_at
+  #           reset_password_token
+  #           unconfirmed_email
+  #           unlock_token
 
   has_many :responses
   has_many :assessments
@@ -135,7 +150,6 @@ class User < ApplicationRecord
 
   # emails
   scope :training_email_recipients, -> { order(:id).where(training_emails: [true, nil]).distinct }
-  scope :early_years_email_recipients, -> { order(:id).where(early_years_emails: true).distinct }
   scope :complete_registration_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_incomplete.distinct }
   scope :start_training_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_complete.not_started_training.distinct }
   scope :continue_training_mail_job_recipients, -> { training_email_recipients.last_visit_4_weeks_ago.distinct(&:module_in_progress?) }
@@ -163,10 +177,10 @@ class User < ApplicationRecord
   scope :with_new_module_mail_events, -> { with_mail_events.merge(MailEvent.newest_module).distinct }
 
   scope :email_status, lambda { |status|
-    training_email_recipients.or(early_years_email_recipients).where('notify_callback @> ?', { notification_type: 'email', status: status }.to_json).distinct
+    training_email_recipients.where('notify_callback @> ?', { notification_type: 'email', status: status }.to_json).distinct
   }
   scope :email_delivered_days_ago, lambda { |num|
-    email_status('delivered').where("CAST(notify_callback ->> 'sent_at' AS DATE) = CURRENT_DATE - #{num}")
+    email_status('delivered').where("CAST(notify_callback ->> 'sent_at' AS DATE) = CURRENT_DATE - #{num.to_i}")
   }
   scope :email_delivered_today, -> { email_delivered_days_ago(0) }
   scope :last_email_delivered, lambda { |template_id|
@@ -178,18 +192,26 @@ class User < ApplicationRecord
   scope :month_old_confirmation, -> { where(confirmed_at: 4.weeks.ago.beginning_of_day..4.weeks.ago.end_of_day) }
   scope :with_local_authority, -> { where.not(local_authority: nil) }
 
-  validates :closed_reason, presence: true, if: -> { context == :close_account }
-  validates :closed_reason_custom, presence: true, if: proc { |u| u.closed_reason == 'other' }
-
+  validates :closed_reason,
+            presence: true,
+            if: -> { context == :close_account }
+  validates :closed_reason_custom,
+            presence: true,
+            if: proc { |u| u.closed_reason == 'other' }
   validates :first_name, :last_name, :setting_type_id,
             presence: true,
             if: proc { |u| u.registration_complete? }
-  validates :role_type, presence: true, if: proc { |u| u.role_type_required? }
+  validates :role_type,
+            presence: true,
+            if: proc { |u| u.role_type_required? }
   validates :setting_type_id,
             inclusion: { in: Trainee::Setting.valid_types },
             if: proc { |u| u.registration_complete? }
-
-  validates :terms_and_conditions_agreed_at, presence: true, allow_nil: false, on: :update, if: proc { |u| u.registration_complete? }
+  validates :terms_and_conditions_agreed_at,
+            presence: true,
+            allow_nil: false,
+            on: :update,
+            if: proc { |u| u.registration_complete? }
 
   # @return [Boolean]
   def notes?
@@ -476,10 +498,5 @@ private
   # @return [Hash]
   def data_attributes
     DASHBOARD_ATTRS.map { |field| { field => send(field) } }.reduce(&:merge)
-  end
-
-  # @return [Event::ActiveRecord_AssociationRelation]
-  def password_changed_events
-    events.where(name: 'user_password_change')
   end
 end

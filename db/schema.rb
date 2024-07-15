@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_16_092250) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_11_145421) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -222,7 +222,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_16_092250) do
     t.string "closed_reason"
     t.string "closed_reason_custom"
     t.boolean "training_emails"
-    t.boolean "early_years_emails"
     t.string "gov_one_id"
     t.string "early_years_experience"
     t.boolean "research_participant"

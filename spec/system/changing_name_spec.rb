@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Registered user changing name', type: :system do
+RSpec.describe 'Changing name', type: :system do
   include_context 'with user'
 
   before do
@@ -12,7 +12,7 @@ RSpec.describe 'Registered user changing name', type: :system do
     it 'updates name' do
       fill_in 'First name', with: 'Foo'
       fill_in 'Surname', with: 'Bar'
-      click_button 'Continue'
+      click_button 'Save'
 
       expect(page).to have_current_path '/my-account'
       expect(page).to have_text('Manage your account')
@@ -24,7 +24,7 @@ RSpec.describe 'Registered user changing name', type: :system do
     it 'renders an error message' do
       fill_in 'First name', with: ''
       fill_in 'Surname', with: ''
-      click_button 'Continue'
+      click_button 'Save'
 
       expect(page).to have_text 'Enter a first name.'
       expect(page).to have_text 'Enter a surname.'

@@ -17,7 +17,6 @@ completed@example.com:
   setting_type_id: childminder_agency
   setting_type: Childminder as part of an agency
   role_type: Childminder
-  early_years_emails: true
   training_emails: true
   registration_complete: true
 
@@ -37,7 +36,6 @@ completed@example.com:
   private_beta_registration_complete: false
   display_whats_new: false
   training_emails: true
-  early_years_emails: true
 
   setting_type: other
   setting_type_other: DfE

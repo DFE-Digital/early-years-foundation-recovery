@@ -38,7 +38,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
     end
   end
 
-  context 'with an existing non-gov-one user' do
+  context 'with an existing pre-gov-one user' do
     before do
       create :user, :registered, email: email, gov_one_id: nil
       get :openid_connect, params: params
@@ -63,6 +63,18 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
     it 'redirects to /my-modules' do
       expect(session[:id_token]).to eq id_token
       expect(response).to redirect_to my_modules_path
+    end
+  end
+
+  context 'with whats-new enabled' do
+    before do
+      create :user, :registered, gov_one_id: 'mock_sub', display_whats_new: true
+      get :openid_connect, params: params
+    end
+
+    it 'redirects to /whats-new' do
+      expect(session[:id_token]).to eq id_token
+      expect(response).to redirect_to static_path('whats-new')
     end
   end
 

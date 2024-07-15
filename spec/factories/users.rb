@@ -22,9 +22,8 @@ FactoryBot.define do
       setting_type_other { 'DfE' }
       role_type { 'other' }
       role_type_other { 'Developer' }
-      # local_authority { '' }
+      local_authority { nil }
       training_emails { true }
-      early_years_emails { false }
       registration_complete { true }
     end
 

@@ -1,7 +1,5 @@
 module Registration
   class TrainingEmailsController < BaseController
-    helper_method :back_link
-
     def edit; end
 
     def update
@@ -10,7 +8,7 @@ module Registration
       if form.save
         track('user_training_emails_change', success: true)
         if current_user.registration_complete?
-          redirect_to my_modules_path, notice: helpers.m(:details_updated)
+          redirect_to user_path, notice: helpers.m(:details_updated)
         else
           complete_registration
         end
@@ -22,22 +20,18 @@ module Registration
 
   private
 
+    # @return [ActionController::Parameters]
     def user_params
       params.require(:user).permit(:training_emails)
     end
 
     # @return [Registration::TrainingEmailsForm]
     def form
-      @form ||= TrainingEmailsForm.new(user: current_user, training_emails: current_user.training_emails)
-    end
-
-    # @return [String]
-    def back_link
-      referer_from_email_preferences? ? '/email-preferences' : edit_registration_early_years_experience_path
-    end
-
-    def referer_from_email_preferences?
-      request.referer&.include?('/email-preferences')
+      @form ||=
+        TrainingEmailsForm.new(
+          user: current_user,
+          training_emails: current_user.training_emails,
+        )
     end
   end
 end

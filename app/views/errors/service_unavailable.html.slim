@@ -3,5 +3,4 @@
 
 .govuk-grid-row
   .govuk-grid-column-two-thirds
-    h1.govuk-heading-xl
-      | Service unavailable
+    = m('error.503', headings_start_with: 'xl')

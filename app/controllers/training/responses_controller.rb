@@ -1,7 +1,7 @@
 module Training
   class ResponsesController < ApplicationController
     include Learning
-    include Pagination
+    include Answering
 
     before_action :authenticate_registered_user!
 
@@ -22,30 +22,6 @@ module Training
     end
 
   private
-
-    # @note migrate from user_answer to response
-    # @see User#response_for
-    def response_params
-      params.require(:response).permit!
-    end
-
-    # @see User#response_for
-    # @note migrate from user_answer to response
-    # @return [Boolean]
-    def save_response!
-      correct_answers = content.opinion_question? ? true : content.correct_answers.eql?(user_answers)
-
-      current_user_response.update(answers: user_answers, correct: correct_answers, text_input: user_answer_text)
-    end
-
-    # @return [Array<Integer>]
-    def user_answers
-      Array(response_params[:answers]).compact_blank.map(&:to_i)
-    end
-
-    def user_answer_text
-      response_params[:text_input]
-    end
 
     def redirect
       assessment.grade! if content.last_assessment?

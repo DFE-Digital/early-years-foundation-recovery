@@ -46,7 +46,7 @@
       - email_preferences.with_row do |row|
         - row.with_key { t('my_account.email_preferences.label') }
         - row.with_value(text: t(current_user.training_emails_recipient?, scope: 'my_account.email_preferences.preference'), classes: %w[data-hj-suppress])
-        - row.with_action(text: t('my_account.email_preferences.link_text'), href: edit_training_emails_user_path, html_attributes: { id: :edit_training_emails_user })
+        - row.with_action(text: t('my_account.email_preferences.link_text'), href: edit_registration_training_emails_path, html_attributes: { id: :edit_training_emails_user })
 
     = govuk_summary_list do |research_preferences|
       - research_preferences.with_row do |row|

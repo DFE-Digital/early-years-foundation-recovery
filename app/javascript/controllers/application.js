@@ -1,5 +1,5 @@
 import { Application } from '@hotwired/stimulus'
-import Reveal from 'stimulus-reveal-controller'
+import Reveal from '@stimulus-components/reveal'
 
 const application = Application.start()
 

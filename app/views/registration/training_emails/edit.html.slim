@@ -1,9 +1,7 @@
 = render 'user/debug'
 
 - content_for :page_title do
-  = html_title t(:heading, scope: :training_emails)
-
-= govuk_back_link href: back_link
+  = html_title t('training_emails.heading')
 
 .govuk-grid-row
   .govuk-grid-column-full
@@ -12,5 +10,9 @@
 
       = f.opt_in_out :training_emails
 
-      div class='govuk-!-margin-top-4'
-        = f.govuk_submit t('links.continue')
+      .govuk-button-group class='govuk-!-margin-top-4'
+        - if current_user.registration_complete?
+          = f.govuk_submit t('links.save')
+          = govuk_link_to t('links.cancel'), user_path
+        - else
+          = f.govuk_submit t('links.continue')

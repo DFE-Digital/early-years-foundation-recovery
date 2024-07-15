@@ -4,19 +4,19 @@ RSpec.describe DataAnalysis::UserFeedbackScores do
   let(:user_1) { create :user, :agency_childminder }
   let(:user_2) { create :user, :independent_childminder }
   let(:headers) do
-    [
-      'User ID',
-      'Role',
-      'Custom Role',
-      'Setting',
-      'Custom Setting',
-      'Local Authority',
-      'Years Experience',
-      'Module',
-      'Question',
-      'Answers',
-      'Created',
-      'Updated',
+    %w[
+      user_id
+      role_type
+      role_type_other
+      setting_type
+      setting_type_other
+      local_authority
+      early_years_experience
+      training_module
+      question_name
+      answers
+      responses.created_at
+      responses.updated_at
     ]
   end
   let(:rows) do

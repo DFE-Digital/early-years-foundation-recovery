@@ -27,8 +27,6 @@ en:
               blank: Enter the local authority of the setting or organisation you work in most of the time.
             training_emails:
               blank: Choose an option.
-            early_years_emails:
-              blank: Choose an option.
 
   # Validations ----------------------------------------------------------------
   # https://guides.rubyonrails.org/i18n.html#translations-for-active-record-models
@@ -101,6 +99,30 @@ en:
 
   previous_page:
     previous: Previous
+
+  error:
+    404: |
+      # Page not found
+
+      If you typed the web address, check it is correct.
+
+      If you pasted the web address, check you copied the entire address.
+
+      If the web address is correct or you selected a link or button,
+      contact %{service_name} to report a fault with the service.
+
+    500: |
+      # Sorry, there is a problem with the service
+
+      Try again later.
+
+      We saved your progress through the training.
+
+      If you were completing an end of module test, we have not saved your answers.
+      When the service is available, you’ll have to start again.
+
+    503: |
+      # Service Unavailable
 
   links:
     home: Go to home
@@ -400,6 +422,7 @@ en:
 
   # /registration/terms-and-conditions/edit
   register_terms_and_conditions:
+    title: Terms and Conditions
     heading: Set up your training account
     subheading: Agree to our terms and conditions
     legend: |
@@ -457,12 +480,6 @@ en:
     body: Turn on email updates to find out about new modules and features in this training course.
     opt_in: Send me email updates about this training course
     opt_out: Do not send me email updates about this training course
-
-  early_years_emails:
-    heading: Do you want to get early years email updates from the Department for Education?
-    body: Turn on email updates to get news about the early years foundation stage (EYFS) and other early years information from the Department for Education.
-    opt_in: Send me early years email updates
-    opt_out: Do not send me early years email updates
 
   # /
   home:

@@ -20,7 +20,7 @@ module Registration
 
   private
 
-    # @return [Hash]
+    # @return [ActionController::Parameters]
     def user_params
       params.require(:user).permit(:terms_and_conditions_agreed_at)
     end

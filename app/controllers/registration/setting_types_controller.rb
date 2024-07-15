@@ -22,13 +22,18 @@ module Registration
 
   private
 
+    # @return [ActionController::Parameters]
     def user_params
       params.require(:user).permit(:setting_type_id)
     end
 
     # @return [Registration::SettingTypeForm]
     def form
-      @form ||= SettingTypeForm.new(user: current_user, setting_type_id: current_user.setting_type_id)
+      @form ||=
+        SettingTypeForm.new(
+          user: current_user,
+          setting_type_id: current_user.setting_type_id,
+        )
     end
   end
 end

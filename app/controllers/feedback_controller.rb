@@ -1,4 +1,6 @@
 class FeedbackController < ApplicationController
+  include Answering
+
   before_action :research_participation, only: :show
 
   helper_method :content,
@@ -40,15 +42,6 @@ private
     end
   end
 
-  # @return [Boolean]
-  def save_response!
-    current_user_response.update(
-      answers: user_answers,
-      correct: true,
-      text_input: response_params[:text_input],
-    )
-  end
-
   # @return [Course]
   def mod
     Course.config
@@ -75,19 +68,12 @@ private
     params[:id]
   end
 
-  # OPTIMIZE: duplicated from ResponsesController
-  def response_params
-    params.require(:response).permit!
-  end
-
-  # OPTIMIZE: duplicated from ResponsesController
-  def user_answers
-    Array(response_params[:answers]).compact_blank.map(&:to_i)
-  end
-
   # @return [Hash]
   def feedback_cookie
-    cookies[:course_feedback] = { value: current_user.visit_token }
+    cookies[:course_feedback] = {
+      value: current_user.visit_token,
+      expires: 2.days.from_now,
+    }
   end
 
   # @return [Boolean, nil]

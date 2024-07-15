@@ -68,7 +68,6 @@ module DataAnalysis
           without_notes: without_notes_count,
           without_notes_percentage: (1 - with_notes_percentage).round(2),
           training_mail_recipients: User.training_email_recipients.count,
-          early_years_mail_recipients: User.early_years_email_recipients.count,
           complete_registration_mail_recipients: CompleteRegistrationMailJob.recipients.count,
           start_training_mail_recipients: StartTrainingMailJob.recipients.count,
           continue_training_mail_recipients: ContinueTrainingMailJob.recipients.count,

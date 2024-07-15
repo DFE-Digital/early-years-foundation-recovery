@@ -1,3 +1,14 @@
+#
+# Registration journey order:
+#
+#   1. terms_and_conditions (one-off)
+#   2. name
+#   3. setting_type / setting_type_other
+#   4. local_authority
+#   5. role_type / role_type_other
+#   6. early_years_experience
+#   7. training_emails
+#
 module Registration
   class BaseController < ApplicationController
     before_action :authenticate_user!

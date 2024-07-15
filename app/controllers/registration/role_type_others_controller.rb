@@ -16,13 +16,18 @@ module Registration
 
   private
 
+    # @return [ActionController::Parameters]
     def user_params
       params.require(:user).permit(:role_type_other)
     end
 
     # @return [Registration::RoleTypeOtherForm]
     def form
-      @form ||= RoleTypeOtherForm.new(user: current_user, role_type_other: current_user.role_type_other)
+      @form ||=
+        RoleTypeOtherForm.new(
+          user: current_user,
+          role_type_other: current_user.role_type_other,
+        )
     end
   end
 end
