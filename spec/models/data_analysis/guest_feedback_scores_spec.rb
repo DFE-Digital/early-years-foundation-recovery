@@ -5,11 +5,11 @@ RSpec.describe DataAnalysis::GuestFeedbackScores do
   let(:guest) { Guest.new(visit: Visit.new) }
   let(:headers) do
     %w[
-      Guest
-      Question
-      Answers
-      Created
-      Updated
+      visit_id
+      question_name
+      answers
+      created_at
+      updated_at
     ]
   end
   let(:rows) do
