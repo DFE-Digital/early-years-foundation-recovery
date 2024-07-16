@@ -11,6 +11,10 @@ on:
   push:
     paths:
       - Dockerfile
+      - Gemfile
+      - Gemfile.lock
+      - package.json
+      - yarn.lock
 
 env:
   REGISTRY: ghcr.io/dfe-digital/early-years-foundation-recovery

@@ -137,6 +137,7 @@ GEM
     crass (1.0.6)
     cssbundling-rails (1.4.0)
       railties (>= 6.0.0)
+    csv (3.3.0)
     date (3.3.4)
     debug (1.9.2)
       irb (~> 1.10)
@@ -655,6 +656,7 @@ DEPENDENCIES
   capybara
   contentful_rails
   cssbundling-rails
+  csv
   debug
   devise
   dibber

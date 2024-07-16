@@ -64,6 +64,7 @@ gem 'grover'
 gem 'sitemap_generator'
 
 # Data dashboard feed
+gem 'csv'
 gem 'google-cloud-storage'
 
 # Background Jobs
