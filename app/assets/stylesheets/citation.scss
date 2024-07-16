@@ -1,0 +1,142 @@
+.gem-c-metadata {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 14px;
+  font-size: .875rem;
+  line-height: 1.1429;
+
+  @include govuk-media-query($from: tablet) {
+    font-size:16px;
+    font-size: 1rem;
+    line-height: 1.25;
+
+    a {
+      font-family: sans-serif;
+    }
+
+    &--inverse-padded .gem-c-metadata__list {
+      margin: 15px;
+    }
+
+    &__term {
+      box-sizing:border-box;
+      float: left;
+      clear: left;
+      padding-right: 5px;
+      margin-top: 0;
+    }
+
+    &__term .gem-c-metadata__definition {
+      line-height: 1.4;
+    }
+
+    &__definition:not(:last-of-type) {
+      margin-bottom: 5px;
+    }
+  }
+
+  a {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-decoration: underline;
+    font-weight: bold;
+    color: govuk-colour('black');
+  }
+
+  .gem-c-metadata::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  .direction-rtl {
+    direction: rtl;
+    text-align: start;
+  }
+
+  &-inverse {
+    color: govuk-colour('white');
+
+    a:link,
+    a:hover,
+    a:visited,
+    a:active {
+        color: govuk-colour('white');
+      }
+
+    a:focus {
+      color: govuk-colour('black');
+    }
+
+    &-padded {
+      padding: 10px;
+    }
+
+    &-padded &.gem-c-metadata__list {
+      margin: 10px;
+    }
+  }
+
+  &__definition {
+    margin: 0;
+  }
+
+  &__toggle-wrap {
+    display: none;
+  }
+
+}
+
+.gem-c-metadata .gem-c-metadata__definition-link {
+  font-weight: normal;
+}
+
+.gem-c-metadata.direction-rtl .gem-c-metadata__definition {
+  float: right;
+}
+
+@media (min-width: 40.0625em) {
+  .gem-c-metadata--inverse-padded .gem-c-metadata__list {
+    margin: 15px;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .gem-c-metadata.direction-rtl .gem-c-metadata__term {
+    padding-left: 5px;
+    padding-right: 0;
+  }
+}
+
+@media print {
+  .gem-c-metadata {
+    color: #000000;
+    font-family: sans-serif;
+    font-size: 14pt;
+    line-height: 1.2;
+  }
+}
+
+.js-enabled {
+  .gem-c-metadata__toggle-wrap {
+    display: block;
+  }
+
+  .gem-c-metadata__toggle-items {
+    .js-hidden {
+      display: none;
+    }
+  }
+}
+
+dl.gem-c-metadata__list {
+  margin: 0;
+}
+
+.hf-citation {
+  background: #eeeeee75;
+  padding: 15px 10px 15px 20px;
+  margin-top: 60px;
+  border-left: 5px solid #347ca9;
+}
