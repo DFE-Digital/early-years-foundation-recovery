@@ -102,6 +102,8 @@ group :test do
   gem 'capybara'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
+  gem 'rubocop-capybara'
+  gem 'rubocop-rspec'
   gem 'show_me_the_cookies'
   gem 'simplecov'
 end

@@ -11,7 +11,10 @@ inherit_mode:
   merge:
     - Exclude
 
-require: rubocop-performance
+require:
+  - rubocop-performance
+  - rubocop-rspec
+  - rubocop-capybara
 
 AllCops:
   TargetRubyVersion: 3.2.2

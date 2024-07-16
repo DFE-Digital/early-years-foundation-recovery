@@ -686,8 +686,10 @@ DEPENDENCIES
   rails-erd
   redcarpet
   rspec-rails
+  rubocop-capybara
   rubocop-govuk
   rubocop-performance
+  rubocop-rspec
   selenium-webdriver
   sentry-rails
   sentry-ruby
