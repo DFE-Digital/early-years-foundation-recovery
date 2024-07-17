@@ -17,13 +17,13 @@ RSpec.describe DataAnalysis::UsersNotPassing do
     ]
   end
 
-  let(:user_1) { create :user, :registered }
-  let(:user_2) { create :user, :registered }
+  let(:user_one) { create :user, :registered }
+  let(:user_two) { create :user, :registered }
 
   before do
-    create :assessment, :failed, user: user_1
-    create :assessment, :failed, user: user_2
-    create :assessment, :passed, user: user_2
+    create :assessment, :failed, user: user_one
+    create :assessment, :failed, user: user_two
+    create :assessment, :passed, user: user_two
   end
 
   it_behaves_like 'a data export model'

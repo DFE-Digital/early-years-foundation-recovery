@@ -17,29 +17,6 @@ Lint/SuppressedException:
   Exclude:
     - 'lib/tasks/cms.rake'
 
-# Offense count: 2
-# This cop supports unsafe autocorrection (--autocorrect-all).
-RSpec/BeEq:
-  Exclude:
-    - 'spec/models/user_spec.rb'
-    - 'spec/system/closing_account_spec.rb'
-
-# Offense count: 25
-# Configuration parameters: Max, AllowedIdentifiers, AllowedPatterns.
-RSpec/IndexedLet:
-  Exclude:
-    - 'spec/jobs/continue_training_mail_job_spec.rb'
-    - 'spec/models/data_analysis/modules_per_month_spec.rb'
-    - 'spec/models/data_analysis/resits_per_user_spec.rb'
-    - 'spec/models/data_analysis/role_pass_rate_spec.rb'
-    - 'spec/models/data_analysis/setting_pass_rate_spec.rb'
-    - 'spec/models/data_analysis/summative_quiz_spec.rb'
-    - 'spec/models/data_analysis/user_feedback_scores_spec.rb'
-    - 'spec/models/data_analysis/user_overview_spec.rb'
-    - 'spec/models/data_analysis/users_not_passing_spec.rb'
-    - 'spec/services/calculate_module_state_spec.rb'
-    - 'spec/support/shared/with_events.rb'
-
 # Offense count: 8
 RSpec/LetSetup:
   Exclude:
