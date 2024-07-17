@@ -13,6 +13,11 @@ class DropUserAnswersTable < ActiveRecord::Migration[7.1]
       t.boolean :archived
       t.index %i[questionnaire_id user_id]
       t.timestamps
+      t.string :module
+      t.string :name
+      t.string :assessments_type
+      t.references :user_assessment, null: true, foreign_key: true
+      t.string :state
     end
   end
 end
