@@ -13,24 +13,31 @@ module DataAnalysis
 
       # @return [Array<Hash{Symbol => Mixed}>]
       def dashboard
-        total_users_not_passing_per_module.map do |module_name, count|
+        unpassed_assessments.group_by { |(mod, _), _| mod }.map do |mod, users|
           {
-            module_name: module_name,
-            count: count,
+            module_name: mod,
+            count: users.count,
           }
         end
       end
 
     private
 
+      # @return [Hash{Array => Integer}]
+      def all_failures
+        Assessment.where(passed: false).group(:training_module, :user_id).count
+      end
+
+      # @param user_id [Integer]
+      # @param training_module [String]
+      # @return [Boolean]
+      def eventually_passed?(training_module, user_id)
+        Assessment.where(training_module: training_module, user_id: user_id, passed: true).any?
+      end
+
       # @return [Hash{String => Integer}]
-      def total_users_not_passing_per_module
-        Assessment.all
-          .group(:training_module, :user_id)
-          .count
-          .reject { |(module_name, user_id), _| Assessment.all.where(training_module: module_name, user_id: user_id).passed.exists? }
-          .group_by { |(module_name, _), _| module_name }
-          .transform_values(&:size)
+      def unpassed_assessments
+        all_failures.reject { |attempt, _| eventually_passed?(*attempt) }
       end
     end
   end
