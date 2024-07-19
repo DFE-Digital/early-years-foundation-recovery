@@ -12,30 +12,33 @@ class Dashboard
 
   # @return [Array<Hash{ Symbol => String }>]
   DATA_SOURCES = [
-    { model: 'Event',                                   folder: 'eventsdata',       file: 'ahoy_events'                   },
-    { model: 'Visit',                                   folder: 'visitsdata',       file: 'ahoy_visits'                   },
-    { model: 'User',                                    folder: 'userdata',         file: 'users'                         },
-    { model: 'Response',                                folder: 'useranswers',      file: 'responses'                     },
-    { model: 'DataAnalysis::ConfidenceCheckScores',     folder: 'useranswers',      file: 'confidence_check_scores'       },
-    { model: 'Assessment',                              folder: 'userassessments',  file: 'assessments'                   },
-    { model: 'DataAnalysis::LocalAuthorityUser',        folder: 'localauthorities', file: 'local_authority_users'         },
-    { model: 'DataAnalysis::AveragePassScores',         folder: 'summativequiz',    file: 'average_pass_scores'           },
-    { model: 'DataAnalysis::HighFailQuestions',         folder: 'summativequiz',    file: 'high_fail_questions'           },
-    { model: 'DataAnalysis::SettingPassRate',           folder: 'summativequiz',    file: 'setting_pass_rate'             },
-    { model: 'DataAnalysis::RolePassRate',              folder: 'summativequiz',    file: 'role_pass_rate'                },
-    { model: 'DataAnalysis::UsersNotPassing',           folder: 'summativequiz',    file: 'users_not_passing_per_module'  },
-    { model: 'DataAnalysis::ResitsPerUser',             folder: 'summativequiz',    file: 'resits_per_user'               },
-    { model: 'DataAnalysis::ModulesPerMonth',           folder: 'summativequiz',    file: 'modules_per_month'             },
-    { model: 'DataAnalysis::UserOverview',              folder: 'overview',         file: 'user_overview'                 },
-    { model: 'DataAnalysis::ModuleOverview',            folder: 'overview',         file: 'module_overview'               },
-    { model: 'DataAnalysis::ClosedAccounts',            folder: 'overview',         file: 'closed_accounts'               },
-    { model: 'DataAnalysis::UserModuleOrder',           folder: 'nonlinear',        file: 'user_module_order'             },
-    { model: 'DataAnalysis::UserModuleCompletion',      folder: 'nonlinear',        file: 'user_module_completion'        },
-    { model: 'DataAnalysis::UserModuleCompletionCount', folder: 'nonlinear',        file: 'user_module_completions_count' },
-    { model: 'DataAnalysis::ReturningUsers',            folder: 'nonlinear',        file: 'returning_users'               },
-    { model: 'DataAnalysis::ModuleFeedbackForms',       folder: 'feedback',         file: 'feedback_forms'                },
-    { model: 'DataAnalysis::UserFeedbackScores',        folder: 'feedback',         file: 'feedback_user_scores'          },
-    { model: 'DataAnalysis::GuestFeedbackScores',       folder: 'feedback',         file: 'feedback_guest_scores'         },
+    { model: 'Event',                                   folder: 'events',   file: 'events'                        },
+
+    { model: 'Visit',                                   folder: 'visits',   file: 'visits'                        },
+
+    { model: 'DataAnalysis::UserOverview',              folder: 'users',    file: 'user_overview'                 },
+    { model: 'User',                                    folder: 'users',    file: 'users'                         },
+    { model: 'DataAnalysis::ClosedAccounts',            folder: 'users',    file: 'closed_accounts'               },
+    { model: 'DataAnalysis::ReturningUsers',            folder: 'users',    file: 'returning_users'               },
+    { model: 'DataAnalysis::LocalAuthorityUser',        folder: 'users',    file: 'local_authority_users'         },
+
+    { model: 'Assessment',                              folder: 'training', file: 'assessments'                   },
+    { model: 'DataAnalysis::ConfidenceCheckScores',     folder: 'training', file: 'confidence_check_scores'       },
+    { model: 'DataAnalysis::AveragePassScores',         folder: 'training', file: 'average_pass_scores'           },
+    { model: 'DataAnalysis::HighFailQuestions',         folder: 'training', file: 'high_fail_questions'           },
+    { model: 'DataAnalysis::SettingPassRate',           folder: 'training', file: 'setting_pass_rate'             },
+    { model: 'DataAnalysis::RolePassRate',              folder: 'training', file: 'role_pass_rate'                },
+    { model: 'DataAnalysis::UsersNotPassing',           folder: 'training', file: 'assessment_failures'           },
+    { model: 'DataAnalysis::ResitsPerUser',             folder: 'training', file: 'resits_per_user'               },
+    { model: 'DataAnalysis::ModulesPerMonth',           folder: 'training', file: 'modules_per_month'             },
+    { model: 'DataAnalysis::ModuleOverview',            folder: 'training', file: 'module_overview'               },
+    { model: 'DataAnalysis::UserModuleOrder',           folder: 'training', file: 'module_order'                  },
+    { model: 'DataAnalysis::UserModuleCompletion',      folder: 'training', file: 'module_completion'             },
+    { model: 'DataAnalysis::UserModuleCompletionCount', folder: 'training', file: 'module_completions_count'      },
+
+    { model: 'DataAnalysis::GuestFeedbackScores',       folder: 'feedback', file: 'guest_feedback'                },
+    { model: 'DataAnalysis::UserFeedbackScores',        folder: 'feedback', file: 'course_feedback'               },
+    { model: 'DataAnalysis::ModuleFeedbackForms',       folder: 'feedback', file: 'module_feedback'               },
   ].freeze
 
   # @return [String] 30-06-2022-09-30
