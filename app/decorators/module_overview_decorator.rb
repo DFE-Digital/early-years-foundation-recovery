@@ -92,7 +92,7 @@ private
   # @param pages [Array<Training::Page, Training::Question, Training::Video>]
   # @return [String]
   def page_count(pages)
-    "(Pages #{pages.size})" unless pages.one?
+    "(#{pages.size} pages)" unless pages.one?
   end
 
   # @param submodule [Integer]
