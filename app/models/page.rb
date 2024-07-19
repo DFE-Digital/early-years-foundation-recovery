@@ -31,8 +31,4 @@ class Page < ContentfulModel::Base
   def title
     heading
   end
-
-  def created_at
-    released_at || super
-  end
 end

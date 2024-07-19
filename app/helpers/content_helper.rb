@@ -73,4 +73,9 @@ module ContentHelper
   def privacy_policy_url
     Course.config.privacy_policy_url
   end
+
+  # @return [Boolean]
+  def updated_content?
+    content.created_at.to_fs(:long) < content.updated_at.to_fs(:long)
+  end
 end
