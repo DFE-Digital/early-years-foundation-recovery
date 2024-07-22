@@ -17,7 +17,7 @@ require:
   - rubocop-capybara
 
 AllCops:
-  TargetRubyVersion: 3.2.2
+  TargetRubyVersion: 3.3.4
 
 Style/StringLiterals:
   EnforcedStyle: single_quotes

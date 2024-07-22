@@ -12,18 +12,32 @@ RSpec.describe DataAnalysis::UsersNotPassing do
     [
       {
         module_name: 'alpha',
-        count: 1,
+        count: 2,
+      },
+      {
+        module_name: 'bravo',
+        count: 0,
+      },
+      {
+        module_name: 'charlie',
+        count: 0,
       },
     ]
   end
 
-  let(:user_one) { create :user, :registered }
-  let(:user_two) { create :user, :registered }
+  let(:user_1) { create :user, :registered }
+  let(:user_2) { create :user, :registered }
+  let(:user_3) { create :user, :registered }
 
   before do
-    create :assessment, :failed, user: user_one
-    create :assessment, :failed, user: user_two
-    create :assessment, :passed, user: user_two
+    create :assessment, :failed, user: user_1
+    create :assessment, :failed, user: user_1
+    create :assessment, :failed, user: user_1
+
+    create :assessment, :failed, user: user_2
+    create :assessment, :passed, user: user_2
+
+    create :assessment, :failed, user: user_3
   end
 
   it_behaves_like 'a data export model'

@@ -130,4 +130,5 @@ jobs:
                 GOOGLE_CLOUD_BUCKET=${{ vars.WEBAPP_CONFIG_GOOGLE_CLOUD_BUCKET }} \
                 RAILS_MASTER_KEY=${{ secrets.WEBAPP_CONFIG_RAILS_MASTER_KEY }} \
                 DATABASE_URL=${{ secrets.WEBAPP_DATABASE_URL }} \
-                GCS_CREDENTIALS=${{ secrets.GCS_CREDENTIALS }}
+                GCS_CREDENTIALS=${{ secrets.GCS_CREDENTIALS }} \
+                SENTRY_TOKEN=${{ secrets.SENTRY_TOKEN }}
