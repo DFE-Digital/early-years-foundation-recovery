@@ -17,10 +17,10 @@ class PreviousPageDecorator
 
   # @return [String]
   def name
-    if skip_previous_question?
-      previous_previous_item.name
-    elsif feedback_not_started?
+    if skip_feedback_section?
       mod.feedback_questions.first.previous_item.name
+    elsif skip_previous_question?
+      previous_previous_item.name
     else
       previous_item.name
     end
@@ -62,7 +62,7 @@ private
   end
 
   # @return [Boolean]
-  def feedback_not_started?
+  def skip_feedback_section?
     content.thankyou? && !answered?(previous_item)
   end
 
