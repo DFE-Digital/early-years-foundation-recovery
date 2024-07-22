@@ -40,7 +40,7 @@
     h2.govuk-heading-m= mod.title
 
     - if module_progress.completed?
-      p#certificate-date= t 'date_completed', date: certificate_date(module_progress.completed_at)
+      p#certificate-date= t 'date_completed', date: format_date(module_progress.completed_at)
 
     p.description This module has covered:
 
