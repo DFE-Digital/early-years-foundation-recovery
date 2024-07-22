@@ -19,7 +19,8 @@ on:
 permissions: write-all
 
 env:
-  REGISTRY: ghcr.io/dfe-digital/early-years-foundation-recovery
+  DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
+  # REGISTRY: ghcr.io/dfe-digital/early-years-foundation-recovery
 
 jobs:
   build:
