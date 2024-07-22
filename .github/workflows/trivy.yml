@@ -14,8 +14,6 @@ on:
       - yarn.lock
 
 permissions:
-  # id-token: write
-  # contents: write
   packages: write
   pull-requests: write
 
@@ -73,3 +71,4 @@ jobs:
           ignore-unfixed: true
           vuln-type: os,library
           severity: CRITICAL,HIGH
+          skip-dirs: /etc/ssh
