@@ -13,24 +13,25 @@ module DataAnalysis
 
       # @return [Array<Hash{Symbol => Mixed}>]
       def dashboard
-        total_users_not_passing_per_module.map do |module_name, count|
+        Training::Module.live.map do |mod|
           {
-            module_name: module_name,
-            count: count,
+            module_name: mod.name,
+            count: still_failed(mod),
           }
         end
       end
 
     private
 
-      # @return [Hash{String => Integer}]
-      def total_users_not_passing_per_module
-        Assessment.all
-          .group(:training_module, :user_id)
-          .count
-          .reject { |(module_name, user_id), _| Assessment.all.where(training_module: module_name, user_id: user_id).passed.exists? }
-          .group_by { |(module_name, _), _| module_name }
-          .transform_values(&:size)
+      # @param mod [Training::Module]
+      # @return [Integer]
+      def still_failed(mod)
+        passed_user_ids = Assessment.passed.where(training_module: mod.name).pluck(:user_id)
+
+        Assessment.failed
+          .where(training_module: mod.name)
+          .where.not(user_id: passed_user_ids)
+          .pluck(:user_id).uniq.count
       end
     end
   end
