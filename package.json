@@ -9,7 +9,7 @@
     "lint": "npx stylelint app/assets/stylesheets/* --fix"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.5.2",
+    "@fortawesome/fontawesome-free": "^6.6.0",
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^8.0.4",
     "@stimulus-components/reveal": "^5.0.0",
