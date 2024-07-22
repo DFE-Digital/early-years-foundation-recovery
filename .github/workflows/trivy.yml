@@ -8,7 +8,7 @@
 #
 name: OS Security
 on:
-  push:
+  pull_request:
     paths:
       - Dockerfile
       - Gemfile
