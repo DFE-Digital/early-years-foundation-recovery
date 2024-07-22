@@ -1,11 +1,11 @@
-.citation-wrapper {
+.timestamp-wrapper {
   background: #eeeeee75;
   padding: govuk-spacing(3) govuk-spacing(2) govuk-spacing(3) govuk-spacing(4);
   margin-top: 60px;
   border-left: govuk-spacing(1) solid #347ca9;
 }
 
-.citation {
+.timestamp {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -22,7 +22,7 @@
       font-family: sans-serif;
     }
 
-    &--inverse-padded .citation__list {
+    &--inverse-padded .timestamp__list {
       margin: 15px;
     }
 
@@ -34,7 +34,7 @@
       margin-top: 0;
     }
 
-    &__term .citation__definition {
+    &__term .timestamp__definition {
       line-height: 1.4;
     }
 
@@ -51,7 +51,7 @@
     color: govuk-colour('black');
   }
 
-  &.citation::after {
+  &.timestamp::after {
     content: '';
     display: block;
     clear: both;
@@ -80,7 +80,7 @@
       padding: 10px;
     }
 
-    &-padded &.citation__list {
+    &-padded &.timestamp__list {
       margin: 10px;
     }
   }
@@ -96,26 +96,26 @@
 }
 
 dl {
-  &.citation__list {
+  &.timestamp__list {
     margin: 0;
   }
 }
 
-.citation .citation__definition-link {
+.timestamp .timestamp__definition-link {
   font-weight: normal;
 }
 
-.citation.direction-rtl .citation__definition {
+.timestamp.direction-rtl .timestamp__definition {
   float: right;
 }
 
-.citation--inverse-padded .citation__list {
+.timestamp--inverse-padded .timestamp__list {
   @include govuk-media-query($from: tablet) {
     margin: govuk-spacing(3);
   }
 }
 
-.citation.direction-rtl .citation__term {
+.timestamp.direction-rtl .timestamp__term {
   @include govuk-media-query($from: tablet) {
     padding-left: govuk-spacing(1);
     padding-right: 0;
@@ -123,7 +123,7 @@ dl {
 }
 
 @media print {
-  .citation {
+  .timestamp {
     color: govuk-colour('black');
     font-family: sans-serif;
     font-size: 14pt;
@@ -132,11 +132,11 @@ dl {
 }
 
 .js-enabled {
-  .citation__toggle-wrap {
+  .timestamp__toggle-wrap {
     display: block;
   }
 
-  .citation__toggle-items {
+  .timestamp__toggle-items {
     .js-hidden {
       display: none;
     }
