@@ -26,37 +26,87 @@ jobs:
     name: Build and validate Docker image
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout Code
+      # -
+      #   name: Checkout Code
+      #   uses: actions/checkout@v4
+      # -
+      #   name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v3
+      #   with:
+      #     platforms: linux/amd64,linux/arm64
+      # -
+      #   name: Login to Github Container Registry
+      #   uses: docker/login-action@v3
+      #   with:
+      #     registry: ghcr.io
+      #     username: ${{ github.repository_owner }}
+      #     password: ${{ secrets.GITHUB_TOKEN }}
+      # -
+      #   name: Build and push Docker image (dependencies)
+      #   uses: docker/build-push-action@v6
+      #   with:
+      #     target: deps
+      #     context: .
+      #     push: true
+      #     build-args: |
+      #       BUILDKIT_INLINE_CACHE=1
+      #       SHA=${{ github.sha }}
+      #     cache-from: |
+      #       ${{ env.REGISTRY }}:deps
+      #     tags: |
+      #       ${{ env.REGISTRY }}:deps
+      # -
+      #   name: Build and push Docker image (application)
+      #   uses: docker/build-push-action@v6
+      #   with:
+      #     target: app
+      #     context: .
+      #     push: true
+      #     build-args: |
+      #       BUILDKIT_INLINE_CACHE=1
+      #       SHA=${{ github.sha }}
+      #     cache-from: |
+      #       ${{ env.REGISTRY }}:${{ github.sha }}
+      #       ${{ env.REGISTRY }}:latest
+      #     tags: |
+      #       ${{ env.REGISTRY }}:${{ github.sha }}
+
+
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout Code
         uses: actions/checkout@v4
-      -
-        name: Set up Docker Buildx
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      # Create and boot Docker image builder
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
-          platforms: linux/amd64,linux/arm64
-      -
-        name: Login to Github Container Registry
+          version: v0.9.1
+
+      # Login to the container registry
+      - name: Login to Github Container Registry
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      -
-        name: Build and push Docker image (dependencies)
-        uses: docker/build-push-action@v6
-        with:
-          target: deps
-          context: .
-          push: true
-          build-args: |
-            BUILDKIT_INLINE_CACHE=1
-            SHA=${{ github.sha }}
-          cache-from: |
-            ${{ env.REGISTRY }}:deps
-          tags: |
-            ${{ env.REGISTRY }}:deps
-      -
-        name: Build and push Docker image (application)
+
+      # Build and push image
+      # - name: Build and push dependencies
+      #   uses: docker/build-push-action@v6
+      #   with:
+      #     target: deps
+      #     context: .
+      #     push: true
+      #     build-args: |
+      #       BUILDKIT_INLINE_CACHE=1
+      #       SHA=${{ github.event.pull_request.head.sha }}
+      #     cache-from: |
+      #       ${{ env.DOCKER_IMAGE }}:deps
+      #     tags: ${{ env.DOCKER_IMAGE }}:deps
+
+      - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           target: app
@@ -64,17 +114,19 @@ jobs:
           push: true
           build-args: |
             BUILDKIT_INLINE_CACHE=1
-            SHA=${{ github.sha }}
+            SHA=${{ github.event.pull_request.head.sha }}
           cache-from: |
-            ${{ env.REGISTRY }}:${{ github.sha }}
-            ${{ env.REGISTRY }}:latest
+            ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
           tags: |
-            ${{ env.REGISTRY }}:${{ github.sha }}
+            ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
+
+
       -
         name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.24.0
         with:
-          image-ref: ${{ env.REGISTRY }}:${{ github.sha }}
+          # image-ref: ${{ env.REGISTRY }}:${{ github.sha }}
+          image-ref: ${{ env.REGISTRY }}:${{ github.event.pull_request.head.sha }}
           format: table
           exit-code: 1
           ignore-unfixed: true
