@@ -16,6 +16,9 @@ on:
       - package.json
       - yarn.lock
 
+permissions:
+  pull-requests: write
+
 env:
   REGISTRY: ghcr.io/dfe-digital/early-years-foundation-recovery
 
