@@ -109,8 +109,8 @@ dl {
   float: right;
 }
 
-@media (min-width: 40.0625em) {
-  .citation--inverse-padded .citation__list {
+.citation--inverse-padded .citation__list {
+  @include govuk-media-query($from: tablet) {
     margin: govuk-spacing(3);
   }
 }
