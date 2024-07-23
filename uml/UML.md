@@ -21,21 +21,19 @@ Options:
 
 ## Diagrams
 
-<!--
-### (WIP) Application UML
+### Content
+
+https://app.contentful.com/spaces/dvmeh832nmjc/environments/master/visual_modeler/content_types
+
+### Application
 
 ![Application UML](application.svg "Application")
--->
 
 ### Entity Relationship Diagram
 
 ![Entity Relationship](erd.svg "Database")
 
-### Docker Compose Environments
-
-![Docker UML](docker.svg "Docker")
-
-### Deployment Workflows
+### Deployment
 
 ![Deployment UML](deployment.svg "Deployment")
 

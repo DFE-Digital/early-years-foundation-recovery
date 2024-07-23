@@ -1,11 +1,4 @@
 @startuml
-' custom themes
-' !theme sketchy-outline
-
-' make <<style>> invisible
-' hide stereotype
-
-
 <style>
   .app {
     BackgroundColor LightBlue
@@ -14,84 +7,77 @@
     BackgroundColor DarkSlateGray
     FontColor White
   }
-  .space {
+  .subscription {
+    BackgroundColor Yellow
+  }
+  .resource {
     BackgroundColor LightGreen
   }
-  .i {
-    BackgroundColor SkyBlue
-    FontStyle italic
-  }
-  .b {
+  .service {
     BackgroundColor LightSlateGray
     FontStyle italic
   }
 }
 </style>
 
-' Legend colours need to be updated manually
-legend
+
+legend top left
 |<back:DarkSlateGray><color:White>Platform|
-|<back:LightGreen>Environments|
+|<back:Yellow>Subscription|
+|<back:LightGreen>Resource Group|
 |<back:LightBlue>Application|
-|<back:SkyBlue>Server|
-|<back:LightSlateGrey>Backend Services|
 endlegend
 
 
+rectangle "Early Years Child Development Training" {
 
-rectangle "Early Years Recovery Deployment" {
-  rectangle "Application" as app <<app>> {
-    node "Ruby on Rails" as rails
-    database "Postgres DB" as postgres <<b>>
+  rectangle "Github" as github <<service>>
+
+  rectangle "Deployment" as deployment <<app>> {
+    database "Database" as db
+    rectangle "Container" as jobs
+    rectangle "AppService" as web
   }
 
-  rectangle "Prototype" as prototype <<app>> {
-    node "Node JS"
-  }
-
-  ' rectangle "Gov.uk Notify" as notify <<b>>
-
-  rectangle "Deployment Environments" {
-
-    rectangle "Railway" <<platform>> {
-      artifact "eye-recovery.railway.app" as UR <<i>>
+  rectangle "Azure" as azure <<platform>> {
+    rectangle "s187-eyrecovery-production" as prod-sub <<subscription>> {
+      rectangle "s187p01-eyrecovery-rg" as prod-rg <<resource>> {
+        artifact "child-development-training.education.gov.uk" as prod <<app>>
+        artifact "eyrecovery-prod-green.azurewebsites.net" as prod_green <<app>>
+      }
     }
 
-    rectangle "GPaaS" as cf <<platform>> {
-      rectangle "ey-recovery" as prod <<space>> {
-        artifact "child-development-training.education.gov.uk" as v1 <<i>>
+    rectangle "s187-eyrecovery-test" as test-sub <<subscription>> {
+      rectangle "s187t01-eyrecovery-rg" as test-rg <<resource>> {
+        artifact "staging.child-development-training.education.gov.uk" as test <<app>>
       }
+    }
 
-      rectangle "ey-recovery-staging" as preprod <<space>> {
-        artifact "staging.child-development-training.education.gov.uk" as rc1 <<i>>
-        artifact "eyrecovery-dev.azurewebsites.net" as main <<i>>
-      }
+    rectangle "s187-eyrecovery-development" as dev-sub <<subscription>> {
+      rectangle "s187d01-eyrecovery-rg" as dev-rg <<resource>> {
+        artifact "eyrecovery-dev.azurewebsites.net" as dev <<app>>
 
-      ' artifact or node? or device?
-      rectangle "ey-recovery-content" as feature <<space>> {
-        artifact "eyrecovery-review-pr-123.azurewebsites.net" as 123 <<i>>
-        artifact "eyrecovery-review-pr-124.azurewebsites.net" as 124 <<i>>
-        artifact "eyrecovery-review-pr-125.azurewebsites.net" as 125 <<i>>
+        artifact "eyrecovery-review-pr-123.azurewebsites.net" as pr123 <<app>>
+        artifact "eyrecovery-review-pr-124.azurewebsites.net" as pr124 <<app>>
+        artifact "eyrecovery-review-pr-125.azurewebsites.net" as pr125 <<app>>
       }
     }
   }
 }
 
 
-note right of rails
-Rails v7.0.4, Ruby 3.1.3
-endnote
-note bottom of main: main
-note bottom of 123: ER-456-new-feature
-note bottom of rc1: rc0.0.1
-note bottom of v1: v0.0.1
+note bottom of dev: main
+note bottom of pr123: ER-456-new-feature
+note bottom of test: rc0.2.10
+note bottom of prod_green: pre-release
+note bottom of prod: v1.0.0
 
+web <--> db
+jobs <--> db
 
-rails --> postgres
-prototype --> UR: User research
-app --> main: Bleeding edge
-app --> 123: Feature review
-app --> rc1: Pre-production candidate
-app --> v1: Production release
+github --> pr123: Active Branch (feature)
+github --> dev: Development Branch (integration)
+github --> test: Staging Release (candidate)
+github --> prod: Production Release (public)
 
 @enduml

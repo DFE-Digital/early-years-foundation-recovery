@@ -1,8 +1,23 @@
 @startuml
+!theme sketchy-outline
 hide stereotype
 
 <style>
-  .g {
+  .app {
+    BackgroundColor LightBlue
+  }
+  .process {
+    BackgroundColor LightGreen
+    FontColor Black
+  }
+  .db {
+    BackgroundColor DarkSlateGray
+    FontColor White
+  }
+  .cache {
+    BackgroundColor Yellow
+  }
+  .service {
     BackgroundColor LightSlateGray
     FontStyle italic
   }
@@ -10,51 +25,59 @@ hide stereotype
 </style>
 
 
-legend
-|<back:LightSlateGrey>Model</back>|
+legend top left
+|<back:LightBlue>Container|
+|<back:LightGreen>Process|
+|<back:DarkSlateGray><color:White>Database|
+|<back:Yellow>Cache|
+|<back:LightSlateGrey>Third-party|
 endlegend
 
 
-rectangle "Early Years Recovery Application" {
-  rectangle models <<g>> {
-    class TrainingModule
-    class ModuleItem
+
+rectangle "Early Years Child Development Training" {
+  rectangle "Container" as db <<app>> {
+    database "Database" as data <<db>>
   }
 
-  rectangle services {
-    class CourseOverview
-    class ModuleOverview
+  rectangle "Container" as app <<app>> {
+    node "Application" as web <<process>>
+    database "Memory" as app_cache <<cache>>
   }
+
+  rectangle "Container" as worker <<app>> {
+    node "Worker" as jobs <<process>>
+    database "Memory" as worker_cache <<cache>>
+  }
+
+  rectangle "Sentry" as alert <<service>>
+
+  rectangle "Google Cloud Bucket" as dashboard <<service>>
+
+  rectangle "Gov.uk Notify" as email <<service>>
+
+  rectangle "Contentful CMS" as content <<service>>
+
+  rectangle "Gov.uk One Login" as auth <<service>>
 }
 
 
-' package "Some Group" {
-'    HTTP - [First Component]
-'   [Another Component]
-' }
+note right of db: Postgres 15.4 (alpine)
+note left of app: Ruby 3.3.4 (alpine)
+note bottom of web: Rails v7.1.3
+note right of worker: Ruby 3.3.4 (alpine)
+note bottom of jobs: Que v2.3.0
 
-' node "Other Groups" {
-'   FTP - [Second Component]
-'   [First Component] --> FTP
-' }
+web <-u-> data
+jobs <-u-> data
 
-' cloud {
-'   [Example 1]
-' }
+app <-- content: Preview/Delivery
+app --> auth: OIDC
+app --> alert
 
-
-' database "MySql" {
-'   folder "This is my folder" {
-'     [Folder 3]
-'   }
-'   frame "Foo" {
-'     [Frame 4]
-'   }
-' }
-
-
-' [Another Component] --> [Example 1]
-' [Example 1] --> [Folder 3]
-' [Folder 3] --> [Frame 4]
+worker <-- content: Preview/Delivery
+worker --> alert
+worker <--> email
+worker --> dashboard
 
 @enduml
