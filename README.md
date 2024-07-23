@@ -127,18 +127,7 @@ The commands run common tasks inside containers:
     equivalent of `bin/rspec`
 - `bin/docker-doc` runs a YARD documentation server
 - `bin/docker-uml` exports UML diagrams as default PNGs
-- `bin/docker-prod` starts rails in production under `https`
-- `bin/docker-qa` runs the browser tests against a running production application,
-    a containerised equivalent of `bin/qa`
 - `bin/docker-pa11y` runs WCAG checks against a generated `sitemap.xml`
-
-These commands can be used to debug problems:
-
-- `docker ps` lists all active **Docker** processes
-- `docker system prune` tidies up your system
-- `docker-compose -f docker-compose.yml -f docker-compose.<FILE>.yml --project-name recovery run --rm app`
-    can help identify why the application is not running in either the `dev`, `test`, or `qa` contexts
-- `BASE_URL=https://app:3000 docker-compose -f docker-compose.yml -f docker-compose.qa.yml --project-name recovery up app` debug the UAT tests
 
 ## Using Rake
 
@@ -147,10 +136,6 @@ Custom tasks are namespaced under `eyfs`, list them using `rake --tasks eyfs`.
 ```sh
 # Generate secure bot user
 $ rake eyfs:bot
-# Que job to insert page view events for injected module items
-$ rake eyfs:jobs:plug_content
-# Recalculate module completion time
-$ rake eyfs:user_progress
 # Enable the post login 'What's new' page
 $ rake eyfs:whats_new
 ```
@@ -195,19 +180,6 @@ Production console access
     | 6274627 | eyf-reform   | early-years-foundation-reform | Rails        |
     | 6274651 | eyf-recovery | early-years-foundation-reform | eyf-recovery |
     +---------+--------------+-------------------------------+--------------+
-
-## Quality Assurance
-
-The UI/UA test suite can be run against any site.
-A production-like application is available as a composed Docker service for local development.
-To run a self-signed certificate must first be generated.
-
-1. `./bin/docker-certs` (Mac users can trust the certificate in [Keychain Access](https://support.apple.com/en-gb/guide/keychain-access))
-2. `./bin/docker-qa` (this will build and bring up the application with a clean database)
-3. `./bin/docker-prod-reset` (clean and reseed the prerequisite user accounts)
-4. `./bin/docker-qa` (retest)
-4. `BASE_URL=https://deployment ./bin/docker-qa` (alternative test against another server)
-
 
 ## Accessibility Standards
 
@@ -277,7 +249,7 @@ Using this authentication method also requires basic HTTP auth credentials.
 
 For status updates see <https://status.account.gov.uk/>
 
-### Questions
+### Support
 
 Questions can be directed to the `#govuk-one-login` slack channel <https://ukgovernmentdigital.slack.com/archives/C02AQUJ6WTC>
 
@@ -302,14 +274,14 @@ User [service accounts](https://cloud.google.com/iam/docs/service-accounts) can 
 - [Staging Dashboard](https://lookerstudio.google.com/reporting/8f550461-c4e7-4c9f-b597-6f27669ff14c)
 - [Staging Bucket](https://console.cloud.google.com/storage/browser/eyfs-data-dashboard-staging)
 - [Production Dashboard](https://lookerstudio.google.com/reporting/095cfc94-d1d2-4a32-a2ba-d5899c3ecea5)
-- [Production Bucket](https://console.cloud.google.com/storage/browser/eyfs-data-dashboard-live)
+- [Production Bucket](https://console.cloud.google.com/storage/browser/eyfs-recovery-production)
 
 **Downloading exported data**
 
 - `gcloud auth login`
 - `gcloud config set project eyfsdashboard`
 - `gsutil ls` (list buckets)
-- `gsutil -m cp -r "gs://eyfs-data-dashboard-live/eventsdata" "gs://eyfs-data-dashboard-live/useranswers" .` (export folders recursively)
+- `gsutil -m cp -r "gs://eyfs-recovery-production/events" "gs://eyfs-recovery-production/training" .` (export folders recursively)
 
 
 ---
@@ -357,7 +329,6 @@ File.open(file, 'w') { |file| file.write(data.to_yaml) }
 <!-- Deployments -->
 
 [prototype-app]: https://eye-recovery.herokuapp.com
-[interim-prototype-app]: https://child-development-training-prototype.london.cloudapps.digital
 [production]: https://child-development-training.education.gov.uk
 [staging]: https://staging.child-development-training.education.gov.uk
 [development]: https://eyrecovery-dev.azurewebsites.net
@@ -370,11 +341,9 @@ File.open(file, 'w') { |file| file.write(data.to_yaml) }
 [ci-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml
 [production-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/production.yml
 [staging-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/staging.yml
-[qa-workflow]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/qa.yml
 
 <!-- GH workflow badges -->
 
 [brakeman-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/brakeman.yml/badge.svg
 [pa11y-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/pa11y.yml/badge.svg
 [ci-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/ci.yml/badge.svg
-[qa-badge]: https://github.com/DFE-Digital/early-years-foundation-recovery/actions/workflows/qa.yml/badge.svg
