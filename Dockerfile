@@ -118,33 +118,6 @@ COPY .rubocop_todo.yml ${APP_HOME}/.rubocop_todo.yml
 CMD ["bundle", "exec", "rspec"]
 
 # ------------------------------------------------------------------------------
-# Test UI Stage (additional non-Ruby dependencies, containerised version of local dev experience)
-# ------------------------------------------------------------------------------
-FROM app as ui
-
-RUN bundle config unset without
-RUN bundle config set without development
-RUN bundle install --no-binstubs --retry=10 --jobs=4
-
-COPY ui ${APP_HOME}/ui
-
-CMD ["bundle", "exec", "rspec", "--default-path", "ui"]
-
-# ------------------------------------------------------------------------------
-# QA Stage - ./bin/docker-qa
-# ------------------------------------------------------------------------------
-FROM base as qa
-
-RUN gem install pry-byebug rspec capybara site_prism selenium-webdriver faker dry-inflector
-
-WORKDIR /srv
-
-COPY ui /srv/spec
-COPY .rspec /srv/.rspec
-
-CMD ["rspec"]
-
-# ------------------------------------------------------------------------------
 # Pa11y CI - ./bin/docker-pa11y
 # ------------------------------------------------------------------------------
 FROM base as pa11y
