@@ -1,8 +1,8 @@
-.cdt-citation
+.citation-wrapper
   .citation
     dl.citation__list
       dt.citation__term Published:
-      dd.citation__definition = format_date(content.created_at.to_fs)
+      dd.citation__definition = format_date(content.published_at_date)
       - if content.updated_content?
         dt.citation__term Updated:
-        dd.citation__definition = format_date(content.updated_at.to_fs)
+        dd.citation__definition = format_date(content.updated_at)

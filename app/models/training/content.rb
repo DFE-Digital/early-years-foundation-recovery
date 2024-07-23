@@ -16,6 +16,16 @@ module Training
       @parent ||= Training::Module.by_content_id(id)
     end
 
+    # @return [Boolean]
+    def updated_content?
+      created_at < updated_at
+    end
+
+    # @return [Date]
+    def published_at_date
+      ModuleRelease.find_by(module_position: parent.position)&.first_published_at || created_at
+    end
+
     # @param mod [Course, Training::Module]
     # @return [Training::Page, Training::Video, Training::Question]
     def with_parent(mod)
