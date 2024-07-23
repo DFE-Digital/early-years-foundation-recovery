@@ -10,8 +10,8 @@ RSpec.describe Training::Content, type: :model do
   #   expect(content.updated_content?).to eq true
   # end
 
-  # describe '#published_at_date' do
+  # describe '#published_at' do
   # it 'returns the published at date' do
-  #   expect(content.published_at_date).to eq ''
+  #   expect(content.published_at).to eq ''
   # end
 end
