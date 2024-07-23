@@ -471,7 +471,7 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     retriable (3.1.2)
-    rexml (3.3.2)
+    rexml (3.3.1)
       strscan
     rouge (4.2.0)
     rspec-core (3.13.0)
@@ -535,14 +535,7 @@ GEM
       rexml
     ruby-progressbar (1.13.0)
     ruby-rc4 (0.1.5)
-    rubyzip (2.3.2)
     safely_block (0.4.0)
-    selenium-webdriver (4.23.0)
-      base64 (~> 0.2)
-      logger (~> 1.4)
-      rexml (~> 3.2, >= 3.2.5)
-      rubyzip (>= 1.2.2, < 3.0)
-      websocket (~> 1.0)
     sentry-rails (5.18.1)
       railties (>= 5.0)
       sentry-ruby (~> 5.18.1)
@@ -562,11 +555,6 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
-    site_prism (5.0.3)
-      addressable (~> 2.8, >= 2.8.4)
-      capybara (~> 3.32)
-      site_prism-all_there (> 2, < 5)
-    site_prism-all_there (3.0.5)
     sitemap_generator (6.3.0)
       builder (~> 3.0)
     slim (5.2.1)
@@ -625,7 +613,6 @@ GEM
       faraday (~> 2.0)
       faraday-follow_redirects
     webrick (1.8.1)
-    websocket (1.2.11)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -665,7 +652,6 @@ DEPENDENCIES
   dibber
   dotenv-rails
   dry-core
-  dry-inflector
   dry-initializer
   dry-struct
   dry-types
@@ -697,12 +683,10 @@ DEPENDENCIES
   rspec-rails
   rubocop-govuk
   rubocop-performance
-  selenium-webdriver
   sentry-rails
   sentry-ruby
   show_me_the_cookies
   simplecov
-  site_prism
   sitemap_generator
   slim-rails
   sprockets-rails
