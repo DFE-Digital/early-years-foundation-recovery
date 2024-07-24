@@ -8,6 +8,28 @@ RSpec.describe ModuleOverviewDecorator do
 
   include_context 'with progress'
 
+  describe '#sections' do
+    let(:output) { decorator.sections }
+
+    it 'have sequential positions' do
+      expect(output.map { |s| s[:position] }).to eq [1, 2, 3, 4, 4]
+    end
+
+    it 'hides feedback section' do
+      expect(output.map { |s| s[:hide] }).to eq [false, false, false, true, false]
+    end
+
+    it 'counts pages' do
+      expect(output.map { |s| s[:page_count] }).to eq [
+        '(Pages 4)',
+        '(Pages 5)',
+        '(Pages 20)',
+        '(Pages 9)',
+        nil,
+      ]
+    end
+  end
+
   describe '#call_to_action' do
     let(:output) { decorator.call_to_action }
     let(:state) { output[0] }
