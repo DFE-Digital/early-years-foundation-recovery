@@ -75,6 +75,20 @@ $progress-bar-container-width: 81px;
   }
 }
 
+section.completed {
+  background-color: govuk-colour('light-grey');
+  border-radius: 6px;
+  padding: govuk-spacing(7);
+
+  @include govuk-media-query($until: tablet) {
+    padding: govuk-spacing(4);
+  }
+}
+
+.govuk-table {
+  margin-bottom: 0;
+}
+
 #module-call-to-action {
   @include govuk-responsive-margin(8, 'top');
 }
