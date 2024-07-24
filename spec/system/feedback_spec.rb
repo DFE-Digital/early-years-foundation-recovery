@@ -21,4 +21,31 @@ RSpec.describe 'Feedback' do
       end
     end
   end
+
+  describe 'questions' do
+    include_context 'with user'
+
+    it 'have previous/next buttons' do
+      visit '/my-account'
+      visit '/feedback'
+      click_on 'Next'
+      expect(page).to have_current_path '/feedback/feedback-radio-only'
+      expect(Event.last.name).to eq 'feedback_intro'
+      expect(page).to have_link 'Previous', href: '/feedback'
+      expect(page).to have_button 'Next'
+      expect(page).not_to have_button 'Save'
+    end
+
+    context 'when updated from account profile' do
+      it 'have a save button' do
+        visit '/my-account'
+        click_on 'Change research preferences'
+        expect(page).to have_current_path '/feedback/feedback-skippable'
+        expect(Event.last.name).to eq 'profile_page'
+        expect(page).not_to have_link 'Previous'
+        expect(page).not_to have_button 'Next'
+        expect(page).to have_button 'Save'
+      end
+    end
+  end
 end

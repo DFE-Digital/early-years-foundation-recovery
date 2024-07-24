@@ -108,14 +108,3 @@ group :test do
   gem 'show_me_the_cookies'
   gem 'simplecov'
 end
-
-# NB:
-# This gem group is being installed into an as yet unused Docker target 'ui' that
-# adds additional test dependencies for /ui tests alongside application code.
-# However, this is also available in an isolated container, target 'qa'.
-#
-group :ui do
-  gem 'dry-inflector'
-  gem 'selenium-webdriver'
-  gem 'site_prism'
-end

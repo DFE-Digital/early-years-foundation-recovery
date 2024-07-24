@@ -7,7 +7,9 @@ class FeedbackController < ApplicationController
                 :mod,
                 :current_user_response
 
-  def index; end
+  def index
+    track('feedback_intro')
+  end
 
   def show
     if content_name.eql? 'thank-you'

@@ -18,7 +18,6 @@ on:
       - bin/*
       - docker-compose.*
       - Dockerfile
-      - terraform
       - terraform-azure
 
 jobs:
