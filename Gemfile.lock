@@ -506,6 +506,8 @@ GEM
       parser (>= 3.3.1.0)
     rubocop-capybara (2.21.0)
       rubocop (~> 1.41)
+    rubocop-factory_bot (2.26.1)
+      rubocop (~> 1.61)
     rubocop-govuk (5.0.2)
       rubocop (= 1.64.1)
       rubocop-ast (= 1.31.3)
@@ -676,6 +678,7 @@ DEPENDENCIES
   redcarpet
   rspec-rails
   rubocop-capybara
+  rubocop-factory_bot
   rubocop-govuk
   rubocop-performance
   rubocop-rspec
