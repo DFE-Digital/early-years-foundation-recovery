@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_17_072554) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_11_145421) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -156,6 +156,40 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_17_072554) do
     t.index ["visit_id"], name: "index_responses_on_visit_id"
   end
 
+  create_table "user_answers", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "questionnaire_id", null: false
+    t.string "question"
+    t.string "answer"
+    t.boolean "correct"
+    t.boolean "archived"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "module"
+    t.string "name"
+    t.string "assessments_type"
+    t.bigint "user_assessment_id"
+    t.string "state"
+    t.index ["questionnaire_id", "user_id"], name: "index_user_answers_on_questionnaire_id_and_user_id"
+    t.index ["questionnaire_id"], name: "index_user_answers_on_questionnaire_id"
+    t.index ["user_assessment_id"], name: "index_user_answers_on_user_assessment_id"
+    t.index ["user_id"], name: "index_user_answers_on_user_id"
+  end
+
+  create_table "user_assessments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "score"
+    t.string "status"
+    t.string "module"
+    t.string "assessments_type"
+    t.boolean "archived"
+    t.datetime "completed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["score", "status"], name: "index_user_assessments_on_score_and_status"
+    t.index ["user_id"], name: "index_user_assessments_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -237,4 +271,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_17_072554) do
   add_foreign_key "responses", "assessments"
   add_foreign_key "responses", "users"
   add_foreign_key "responses", "visits"
+  add_foreign_key "user_answers", "user_assessments"
+  add_foreign_key "user_answers", "users"
+  add_foreign_key "user_assessments", "users"
 end
