@@ -13,7 +13,7 @@
 
 = render 'cms_debug'
 
-- if current_user.course.completed_modules.all?
+- if current_user.course.completed_modules.all? && current_user.course.upcoming_modules.none?
   #started.govuk-grid-row
     .govuk-grid-column-full
       p You have completed all available modules. You may use the links below to revisit any of the course content.
