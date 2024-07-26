@@ -54,7 +54,7 @@ private
     mod.page_by_name(content_name)
   end
 
-  # @return [User, Guest, nil]
+  # @return [User, Guest]
   def current_user
     super || guest
   end

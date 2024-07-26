@@ -10,13 +10,13 @@ module ApplicationHelper
     render(HeaderComponent.new(service_name: service_name, classes: 'dfe-header noprint', navigation_label: 'Primary navigation')) do |header|
       header.with_navigation_item(text: 'Home', href: root_path, classes: %w[dfe-header__navigation-item])
       if user_signed_in?
-        header.with_action_link(text: 'My Account', href: user_path, options: { inverse: true })
+        header.with_action_link(text: t('my_account.title'), href: user_path, options: { inverse: true })
         header.with_action_link(text: 'Sign out', href: destroy_user_session_path, options: { id: 'sign-out-desktop', data: { turbo_method: :get }, inverse: true })
-        header.with_navigation_item(text: 'My modules', href: my_modules_path, classes: %w[dfe-header__navigation-item])
-        header.with_navigation_item(text: 'Learning log', href: user_notes_path, classes: %w[dfe-header__navigation-items]) if current_user.course_started?
+        header.with_navigation_item(text: t('my_learning.title'), href: my_modules_path, classes: %w[dfe-header__navigation-item])
+        header.with_navigation_item(text: t('my_learning_log.title'), href: user_notes_path, classes: %w[dfe-header__navigation-items]) if current_user.course_started?
       else
-        header.with_action_link(text: 'Sign in', href: new_user_session_path, options: { inverse: true })
-        header.with_navigation_item(text: 'Sign in', href: new_user_session_path, classes: %w[dfe-header__navigation-item dfe-header-f-mob])
+        header.with_action_link(text: t('account_login.title'), href: new_user_session_path, options: { inverse: true })
+        header.with_navigation_item(text: t('account_login.title'), href: new_user_session_path, classes: %w[dfe-header__navigation-item dfe-header-f-mob])
       end
     end
   end
