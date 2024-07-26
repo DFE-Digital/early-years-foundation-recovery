@@ -677,11 +677,9 @@ DEPENDENCIES
   rails-erd
   redcarpet
   rspec-rails
-  rubocop-capybara
   rubocop-factory_bot
   rubocop-govuk
   rubocop-performance
-  rubocop-rspec
   sentry-rails
   sentry-ruby
   show_me_the_cookies
