@@ -1,12 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Feedback' do
-  before do
-    visit '/'
-  end
-
   describe 'in beta banner' do
     specify do
+      visit '/'
       within '.govuk-phase-banner' do
         expect(page).to have_text 'This is a new service, your feedback will help us improve it.'
         expect(page).to have_link 'feedback', href: '/feedback'
@@ -16,6 +13,7 @@ RSpec.describe 'Feedback' do
 
   describe 'in footer' do
     specify do
+      visit '/'
       within '.govuk-footer' do
         expect(page).to have_link 'Feedback', href: '/feedback'
       end
@@ -24,7 +22,7 @@ RSpec.describe 'Feedback' do
 
   describe 'questions' do
     context 'with guest' do
-      it 'has question' do
+      it 'has previous/next buttons' do
         visit '/feedback/feedback-radio-only'
         expect(page).to have_text 'Feedback radio buttons only'
         expect(page).to have_link 'Previous', href: '/feedback'
@@ -35,7 +33,7 @@ RSpec.describe 'Feedback' do
     context 'with user' do
       include_context 'with user'
 
-      it 'have previous/next buttons' do
+      it 'has previous/next buttons' do
         visit '/my-account'
         visit '/feedback'
         click_on 'Next'
@@ -47,7 +45,7 @@ RSpec.describe 'Feedback' do
       end
 
       context 'when updated from account profile' do
-        it 'have a save button' do
+        it 'has a save button' do
           visit '/my-account'
           click_on 'Change research preferences'
           expect(page).to have_current_path '/feedback/feedback-skippable'

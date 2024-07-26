@@ -4,23 +4,30 @@ RSpec.describe ApplicationController, type: :controller do
   describe '#guest' do
     subject(:guest) { controller.send(:guest) }
 
-    let(:cookie_token) { 'some-token' }
-
-    it 'is nil without a current_visit' do
-      expect(guest).to be_nil
+    context 'with a bot' do
+      it 'instantiates a new visit' do
+        expect(guest.visit.id).to be_nil
+        expect(guest).to be_a Guest
+      end
     end
 
-    it 'is a Guest with a current_visit' do
-      allow(controller).to receive(:current_visit).and_return(create(:visit))
-      expect(guest).to be_a Guest
+    context 'with a browser' do
+      it 'uses the current visit' do
+        allow(controller).to receive(:current_visit).and_return(create(:visit))
+        expect(guest).to be_a Guest
+      end
     end
 
-    it 'restores a previous visit from a cookie' do
-      allow(controller).to receive(:current_visit).and_return(create(:visit))
-      create(:visit, visit_token: cookie_token)
-      request.cookies[:course_feedback] = cookie_token
-      expect(guest).to be_a Guest
-      expect(guest.visit_token).to eq cookie_token
+    context 'with a cookie' do
+      let(:cookie_token) { 'some-token' }
+
+      it 'fetches a previous visit' do
+        allow(controller).to receive(:current_visit).and_return(create(:visit))
+        create(:visit, visit_token: cookie_token)
+        request.cookies[:course_feedback] = cookie_token
+        expect(guest).to be_a Guest
+        expect(guest.visit_token).to eq cookie_token
+      end
     end
   end
 end

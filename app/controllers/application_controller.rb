@@ -82,10 +82,10 @@ private
     super
   end
 
-  # @return [Guest, nil]
+  # @return [Guest]
   def guest
-    visit = Visit.find_by(visit_token: cookies[:course_feedback]) || current_visit
-    Guest.new(visit: visit) if visit.present?
+    visit = Visit.find_by(visit_token: cookies[:course_feedback]) || current_visit || Visit.new
+    Guest.new(visit: visit)
   end
 
   # @see Auditing
