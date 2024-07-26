@@ -83,6 +83,7 @@ group :development, :test do
   gem 'foreman'
   gem 'pry-byebug'
   gem 'pry-rails'
+  gem 'rubocop-factory_bot', require: false
   gem 'rubocop-govuk', require: false
   gem 'rubocop-performance', require: false
 end

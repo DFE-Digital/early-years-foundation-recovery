@@ -1,7 +1,7 @@
 RSpec.shared_context 'with events' do
   let(:user) { create(:user, :registered) }
-  let(:user1) { create(:user, :registered) }
-  let(:user2) { create(:user, :registered) }
+  let(:user_one) { create(:user, :registered) }
+  let(:user_two) { create(:user, :registered) }
 
   let(:events) do
     Event.where(user_id: user.id).where_properties(training_module_id: mod.name)
