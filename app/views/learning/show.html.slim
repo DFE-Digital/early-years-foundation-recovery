@@ -65,7 +65,7 @@
                 course_overview_path + mod.card_anchor
 
 - if current_user.course.completed_modules.any?
-  section class='completed'
+  section class=(current_user.course.completed_modules.all? && current_user.course.upcoming_modules.none? ? 'completed' : 'completed govuk-!-margin-top-7')
     #completed.govuk-grid-row
       .govuk-grid-column-full
         = completed_modules_table
