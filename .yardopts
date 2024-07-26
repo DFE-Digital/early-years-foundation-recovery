@@ -8,6 +8,6 @@ cms/*.md
 data/*.md
 uml/*.md
 adr/*.md
-RELEASE.md
+RECOVERY.md
 GOV_ONE.md
 LICENSE
