@@ -22,6 +22,10 @@ RSpec.describe Training::Page, type: :model do
     end
   end
 
+  xdescribe '#updated_content' do
+    it_behaves_like 'updated content'
+  end
+
   describe '#debug_summary' do
     it 'summarises information' do
       expect(page.debug_summary).to eq(

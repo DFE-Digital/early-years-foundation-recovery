@@ -112,6 +112,10 @@ RSpec.describe Training::Question, type: :model do
     end
   end
 
+  xdescribe '#updated_content' do
+    it_behaves_like 'updated content'
+  end
+
   describe '#debug_summary' do
     it 'summarises information' do
       expect(question.debug_summary).to eq(
