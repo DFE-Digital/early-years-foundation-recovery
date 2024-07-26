@@ -88,12 +88,12 @@ RSpec.describe DataAnalysis::UserOverview do
            }
   end
 
-  let(:user_2) do
+  let(:user_two) do
     create :user, :registered,
            module_time_to_completion: { alpha: 1, bravo: 1, charlie: 0 }
   end
 
-  let(:user_3) do
+  let(:user_three) do
     create :user, :registered,
            module_time_to_completion: { alpha: 2, bravo: 0, charlie: 1 }
   end
@@ -111,8 +111,8 @@ RSpec.describe DataAnalysis::UserOverview do
     complete_module charlie, 1.minute
 
     # user#2 user#3 with notes
-    create :note, user: user_2
-    create :note, user: user_3
+    create :note, user: user_two
+    create :note, user: user_three
 
     # user#4 complete registration notification
     create :user, :confirmed, confirmed_at: 4.weeks.ago

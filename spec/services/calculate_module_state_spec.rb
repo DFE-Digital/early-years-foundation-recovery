@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe CalculateModuleState do
   subject(:service) { described_class.new(user: user) }
 
-  let(:day_1) { Time.zone.local(2000, 0o1, 0o1) } # start alpha
-  let(:day_2) { Time.zone.local(2000, 0o1, 0o2) } # start bravo
-  let(:day_3) { Time.zone.local(2000, 0o1, 0o3) } # complete alpha
-  let(:day_5) { Time.zone.local(2000, 0o1, 0o5) } # complete bravo
+  let(:day_one) { Time.zone.local(2000, 0o1, 0o1) } # start alpha
+  let(:day_two) { Time.zone.local(2000, 0o1, 0o2) } # start bravo
+  let(:day_three) { Time.zone.local(2000, 0o1, 0o3) } # complete alpha
+  let(:day_five) { Time.zone.local(2000, 0o1, 0o5) } # complete bravo
 
   include_context 'with events'
 
@@ -40,7 +40,7 @@ RSpec.describe CalculateModuleState do
 
     context 'when a module is started' do
       before do
-        create_event(user, 'module_start', day_1, 'alpha')
+        create_event(user, 'module_start', day_one, 'alpha')
       end
 
       it 'records a value of zero' do
@@ -50,8 +50,8 @@ RSpec.describe CalculateModuleState do
 
     context 'when a module is completed' do
       before do
-        create_event(user, 'module_start', day_1, 'alpha')
-        create_event(user, 'module_complete', day_3, 'alpha')
+        create_event(user, 'module_start', day_one, 'alpha')
+        create_event(user, 'module_complete', day_three, 'alpha')
       end
 
       it 'records a value greater than zero' do
@@ -60,7 +60,7 @@ RSpec.describe CalculateModuleState do
 
       context 'and the next module is started' do
         before do
-          create_event(user, 'module_start', day_2, 'bravo')
+          create_event(user, 'module_start', day_two, 'bravo')
         end
 
         it 'appends the module to the state object' do
@@ -69,7 +69,7 @@ RSpec.describe CalculateModuleState do
 
         context 'and then completed' do
           before do
-            create_event(user, 'module_complete', day_5, 'bravo')
+            create_event(user, 'module_complete', day_five, 'bravo')
           end
 
           it 'calculates the delta between named events in seconds' do
