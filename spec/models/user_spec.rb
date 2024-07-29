@@ -207,7 +207,7 @@ RSpec.describe User, type: :model do
       expect(user.last_name).to eq 'User'
       expect(user.notify_callback).to be_nil
       expect(user.email).to eq "redacted_user#{user.id}@example.com"
-      expect(user.valid_password?('RedactedUser12!@')).to eq true
+      expect(user.valid_password?('RedactedUser12!@')).to be true
       expect(user.closed_at).to be_within(30).of(Time.zone.now)
     end
   end

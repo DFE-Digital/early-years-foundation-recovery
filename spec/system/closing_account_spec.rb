@@ -102,7 +102,7 @@ RSpec.describe 'Closing account' do
         expect(user.notes.count).to eq 0
         expect(user.responses.feedback.count).to eq 1
         expect(user.responses.feedback.first.text_input).to be_nil
-        expect(user.valid_password?('RedactedUser12!@')).to eq true
+        expect(user.valid_password?('RedactedUser12!@')).to be true
       end
     end
   end

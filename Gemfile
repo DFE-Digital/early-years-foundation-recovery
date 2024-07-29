@@ -48,11 +48,11 @@ gem 'govuk_design_system_formbuilder'
 # # Markdown support
 gem 'govuk_markdown'
 
+# Email
 gem 'govuk_notify_rails'
 
 # Monitor errors
 gem 'sentry-rails'
-gem 'sentry-ruby'
 
 # Track users
 gem 'ahoy_matey'
@@ -83,6 +83,7 @@ group :development, :test do
   gem 'foreman'
   gem 'pry-byebug'
   gem 'pry-rails'
+  gem 'rubocop-factory_bot', require: false
   gem 'rubocop-govuk', require: false
   gem 'rubocop-performance', require: false
 end
@@ -105,15 +106,4 @@ group :test do
   gem 'rspec-rails'
   gem 'show_me_the_cookies'
   gem 'simplecov'
-end
-
-# NB:
-# This gem group is being installed into an as yet unused Docker target 'ui' that
-# adds additional test dependencies for /ui tests alongside application code.
-# However, this is also available in an isolated container, target 'qa'.
-#
-group :ui do
-  gem 'dry-inflector'
-  gem 'selenium-webdriver'
-  gem 'site_prism'
 end

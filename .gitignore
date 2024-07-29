@@ -53,9 +53,7 @@ doc
 coverage
 
 # Self-signed certificates
-localhost.crt
-localhost.key
-nscacert.pem
+*.pem
 
 # Yarn files
 .yarn/*

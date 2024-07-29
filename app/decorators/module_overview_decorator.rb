@@ -32,13 +32,14 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
     end
   end
 
+  # @note The feedback section is hidden
   # @return [Hash{Symbol => Mixed}]
   def sections
     mod.content_sections.each.with_index(1).map do |(submodule, content_items), position|
       {
         heading: heading(content_items.first),
         page_count: page_count(content_items),
-        position: position,
+        position: content_items.first.certificate? ? (position - 1) : position,
         display_line: position != mod.submodule_count,
         icon: status(content_items),
         subsections: subsections(submodule: submodule, items: content_items),
@@ -92,7 +93,7 @@ private
   # @param pages [Array<Training::Page, Training::Question, Training::Video>]
   # @return [String]
   def page_count(pages)
-    "(Pages #{pages.size})" unless pages.one?
+    I18n.t('my_learning.page_count', num: pages.size) unless pages.one?
   end
 
   # @param submodule [Integer]

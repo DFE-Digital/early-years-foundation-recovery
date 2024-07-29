@@ -1,6 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe FeedbackController, type: :controller do
+  context 'when user is a guest' do
+    describe 'GET #show' do
+      it 'returns a success response' do
+        get :show, params: { id: 'feedback-radio-only' }
+        expect(response).to have_http_status(:success)
+      end
+    end
+  end
+
   context 'when user is signed in' do
     let(:user) { create :user, :registered }
 

@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe DataAnalysis::SummativeQuiz do
-  let(:user_1) { create :user, :agency_childminder }
-  let(:user_2) { create :user, :agency_childminder }
+  let(:user_one) { create :user, :agency_childminder }
+  let(:user_two) { create :user, :agency_childminder }
 
   before do
-    create :assessment, :failed, user: user_1
-    create :assessment, :passed, user: user_1
-    create :assessment, :failed, user: user_2
-    create :assessment, :passed, user: user_2
+    create :assessment, :failed, user: user_one
+    create :assessment, :passed, user: user_one
+    create :assessment, :failed, user: user_two
+    create :assessment, :passed, user: user_two
   end
 
   describe '.pass_rate' do

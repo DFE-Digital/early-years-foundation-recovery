@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe DataAnalysis::UserFeedbackScores do
-  let(:user_1) { create :user, :agency_childminder }
-  let(:user_2) { create :user, :independent_childminder }
+  let(:user_one) { create :user, :agency_childminder }
+  let(:user_two) { create :user, :independent_childminder }
   let(:headers) do
     %w[
       user_id
@@ -22,7 +22,7 @@ RSpec.describe DataAnalysis::UserFeedbackScores do
   let(:rows) do
     [
       {
-        user_id: user_1.id,
+        user_id: user_one.id,
         role_type: 'Childminder',
         role_type_other: nil,
         setting_type: 'Childminder as part of an agency',
@@ -36,7 +36,7 @@ RSpec.describe DataAnalysis::UserFeedbackScores do
         updated_at: '2023-01-01 00:00:00',
       },
       {
-        user_id: user_1.id,
+        user_id: user_one.id,
         role_type: 'Childminder',
         role_type_other: nil,
         setting_type: 'Childminder as part of an agency',
@@ -50,7 +50,7 @@ RSpec.describe DataAnalysis::UserFeedbackScores do
         updated_at: '2023-01-01 00:00:00',
       },
       {
-        user_id: user_2.id,
+        user_id: user_two.id,
         role_type: 'Childminder',
         role_type_other: nil,
         setting_type: 'Independent childminder',
@@ -64,7 +64,7 @@ RSpec.describe DataAnalysis::UserFeedbackScores do
         updated_at: '2023-01-01 00:00:00',
       },
       {
-        user_id: user_2.id,
+        user_id: user_two.id,
         role_type: 'Childminder',
         role_type_other: nil,
         setting_type: 'Independent childminder',
@@ -78,7 +78,7 @@ RSpec.describe DataAnalysis::UserFeedbackScores do
         updated_at: '2023-01-01 00:00:00',
       },
       {
-        user_id: user_2.id,
+        user_id: user_two.id,
         role_type: 'Childminder',
         role_type_other: nil,
         setting_type: 'Independent childminder',
@@ -106,7 +106,7 @@ RSpec.describe DataAnalysis::UserFeedbackScores do
 
     # course
     create(:response,
-           user: user_1,
+           user: user_one,
            question_type: 'feedback',
            training_module: 'course',
            question_name: 'feedback-checkbox-only',
@@ -114,7 +114,7 @@ RSpec.describe DataAnalysis::UserFeedbackScores do
            created_at: Time.zone.local(2023, 1, 1),
            updated_at: Time.zone.local(2023, 1, 1))
     create(:response,
-           user: user_1,
+           user: user_one,
            question_type: 'feedback',
            training_module: 'course',
            question_name: 'feedback-textarea-only',
@@ -125,7 +125,7 @@ RSpec.describe DataAnalysis::UserFeedbackScores do
 
     # module
     create(:response,
-           user: user_2,
+           user: user_two,
            question_type: 'feedback',
            training_module: 'alpha',
            question_name: 'feedback-radio-only',
@@ -133,7 +133,7 @@ RSpec.describe DataAnalysis::UserFeedbackScores do
            created_at: Time.zone.local(2023, 1, 1),
            updated_at: Time.zone.local(2023, 1, 1))
     create(:response,
-           user: user_2,
+           user: user_two,
            question_type: 'feedback',
            training_module: 'alpha',
            question_name: 'feedback-checkbox-only',
@@ -141,7 +141,7 @@ RSpec.describe DataAnalysis::UserFeedbackScores do
            created_at: Time.zone.local(2023, 1, 1),
            updated_at: Time.zone.local(2023, 1, 1))
     create(:response,
-           user: user_2,
+           user: user_two,
            question_type: 'feedback',
            training_module: 'alpha',
            question_name: 'feedback-textarea-only',

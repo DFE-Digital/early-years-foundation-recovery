@@ -292,6 +292,7 @@ en:
     new_tag:
       card: NEW
       section: NEW MODULE AVAILABLE
+    page_count: (%{num} pages)
 
   my_learning_log:
     title: Learning log

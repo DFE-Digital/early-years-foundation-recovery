@@ -115,6 +115,10 @@
     }
   }
 
+  .govuk-tag {
+    max-width: 100%;
+  }
+
   &:hover &-link--retake {
     &:hover {
       color: govuk-colour('light-grey');

@@ -7,7 +7,9 @@ class FeedbackController < ApplicationController
                 :mod,
                 :current_user_response
 
-  def index; end
+  def index
+    track('feedback_intro')
+  end
 
   def show
     if content_name.eql? 'thank-you'
@@ -52,7 +54,7 @@ private
     mod.page_by_name(content_name)
   end
 
-  # @return [User, Guest, nil]
+  # @return [User, Guest]
   def current_user
     super || guest
   end

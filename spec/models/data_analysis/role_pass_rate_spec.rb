@@ -23,13 +23,13 @@ RSpec.describe DataAnalysis::RolePassRate do
     ]
   end
 
-  let(:user_1) { create :user, :registered, role_type: 'childminder' }
-  let(:user_2) { create :user, :registered, role_type: 'childminder' }
+  let(:user_one) { create :user, :registered, role_type: 'childminder' }
+  let(:user_two) { create :user, :registered, role_type: 'childminder' }
 
   before do
-    create :assessment, :failed, user: user_1
-    create :assessment, :passed, user: user_1
-    create :assessment, :passed, user: user_2
+    create :assessment, :failed, user: user_one
+    create :assessment, :passed, user: user_one
+    create :assessment, :passed, user: user_two
   end
 
   it_behaves_like 'a data export model'
