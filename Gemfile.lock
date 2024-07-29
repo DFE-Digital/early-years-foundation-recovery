@@ -532,10 +532,10 @@ GEM
     ruby-progressbar (1.13.0)
     ruby-rc4 (0.1.5)
     safely_block (0.4.0)
-    sentry-rails (5.18.1)
+    sentry-rails (5.18.2)
       railties (>= 5.0)
-      sentry-ruby (~> 5.18.1)
-    sentry-ruby (5.18.1)
+      sentry-ruby (~> 5.18.2)
+    sentry-ruby (5.18.2)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
     show_me_the_cookies (6.0.0)
@@ -681,7 +681,6 @@ DEPENDENCIES
   rubocop-govuk
   rubocop-performance
   sentry-rails
-  sentry-ruby
   show_me_the_cookies
   simplecov
   sitemap_generator
