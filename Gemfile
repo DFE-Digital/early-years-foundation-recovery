@@ -48,11 +48,11 @@ gem 'govuk_design_system_formbuilder'
 # # Markdown support
 gem 'govuk_markdown'
 
+# Email
 gem 'govuk_notify_rails'
 
 # Monitor errors
 gem 'sentry-rails'
-gem 'sentry-ruby'
 
 # Track users
 gem 'ahoy_matey'
