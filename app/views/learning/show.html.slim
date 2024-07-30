@@ -60,9 +60,9 @@
                 course_overview_path + mod.card_anchor
 
 - if current_user.course.completed_modules.any?
-  section.completed class='govuk-!-margin-top-7'
-    #completed.govuk-grid-row
-      .govuk-grid-column-full
-        = completed_modules_table
+  hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
+  #completed.govuk-grid-row
+    .govuk-grid-column-three-quarters-from-desktop
+      = completed_modules_table
 
 = render 'debug'
