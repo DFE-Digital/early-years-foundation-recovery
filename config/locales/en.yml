@@ -293,6 +293,7 @@ en:
       card: NEW
       section: NEW MODULE AVAILABLE
     page_count: (%{num} pages)
+    completed_all_modules: You have completed all available modules. You may use the links below to revisit any of the course content.
 
   my_learning_log:
     title: Learning log

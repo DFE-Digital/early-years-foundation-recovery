@@ -92,6 +92,10 @@ RSpec.describe CourseProgress do
         expect(completion_time.to_s).to eq '2022-06-30 00:30:00 UTC'
       end
     end
+
+    it do
+      expect(course.completed_all_modules?).to eq false
+    end
   end
 
   describe '#debug_summary' do

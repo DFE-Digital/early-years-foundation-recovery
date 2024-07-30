@@ -32,6 +32,10 @@ class CourseProgress
     Training::Module.live.all? { |mod| completed?(mod) }
   end
 
+  def completed_all_modules?
+    completed_modules.all? && upcoming_modules.none? && available_modules.none?
+  end
+
   # @return [Array<String>]
   def debug_summary
     Training::Module.ordered.map { |mod|
