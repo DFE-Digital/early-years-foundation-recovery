@@ -13,42 +13,37 @@
 
 = render 'cms_debug'
 
-- if current_user.course.completed_modules.all? && current_user.course.upcoming_modules.none? && current_user.course.available_modules.none?
-  #started.govuk-grid-row
-    .govuk-grid-column-full
-      p You have completed all available modules. You may use the links below to revisit any of the course content.
-- else
-  #started.govuk-grid-row
-    .govuk-grid-column-full
-      h2.govuk-heading-m Modules in progress
-      - if current_user.course.current_modules.none?
-        - if current_user.course.completed_modules.none?
-          p You have not started any modules. To begin the training course, start an available module.
-        - else
-          p You have not started any modules. Please choose an available module.
+#started.govuk-grid-row
+  .govuk-grid-column-full
+    h2.govuk-heading-m Modules in progress
+    - if current_user.course.current_modules.none?
+      - if current_user.course.completed_modules.none?
+        p You have not started any modules. To begin the training course, start an available module.
       - else
+        p You have not started any modules. Please choose an available module.
+    - else
+      .grid-container
+        - current_user.course.current_modules.each do |mod|
+          = render 'card', mod: mod, progress: module_progress(mod)
+
+- if current_user.course.available_modules.any? || current_user.course.course_completed?
+  hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
+  #available.govuk-grid-row
+    .govuk-grid-column-full
+      h2.govuk-heading-m
+        | Available modules
+        - if current_user.content_changes.new_modules?
+          span.govuk-tag
+            = t('my_learning.new_tag.section')
+      - if current_user.course.available_modules.any?
         .grid-container
-          - current_user.course.current_modules.each do |mod|
-            = render 'card', mod: mod, progress: module_progress(mod)
+          - current_user.course.available_modules.each do |mod|
+            = render 'card', mod: mod, progress: false
 
-  - if current_user.course.available_modules.any? || current_user.course.course_completed?
-    hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
-    #available.govuk-grid-row
-      .govuk-grid-column-full
-        h2.govuk-heading-m
-          | Available modules
-          - if current_user.content_changes.new_modules?
-            span.govuk-tag
-              = t('my_learning.new_tag.section')
-        - if current_user.course.available_modules.any?
-          .grid-container
-            - current_user.course.available_modules.each do |mod|
-              = render 'card', mod: mod, progress: false
+      - elsif current_user.course.course_completed?
+        p You do not have any modules available.
 
-        - elsif current_user.course.course_completed?
-          p You do not have any modules available.
-
-  - if current_user.course.upcoming_modules.any?
+- if current_user.course.upcoming_modules.any?
   hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
   #upcoming.govuk-grid-row
     .govuk-grid-column-full
@@ -65,7 +60,7 @@
                 course_overview_path + mod.card_anchor
 
 - if current_user.course.completed_modules.any?
-  section.completed class=(current_user.course.completed_modules.all? && current_user.course.upcoming_modules.none? && current_user.course.available_modules.none? ? '' : 'govuk-!-margin-top-7')
+  section.completed class='govuk-!-margin-top-7'
     #completed.govuk-grid-row
       .govuk-grid-column-full
         = completed_modules_table
