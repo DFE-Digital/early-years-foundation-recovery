@@ -94,7 +94,7 @@ RSpec.describe CourseProgress do
     end
 
     it do
-      expect(course.completed_all_modules?).to eq false
+      expect(course.completed_all_modules?).to be false
     end
   end
 

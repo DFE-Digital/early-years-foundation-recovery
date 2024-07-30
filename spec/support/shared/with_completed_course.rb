@@ -33,7 +33,7 @@ RSpec.shared_context 'with completed course' do
     calculate_ttc
   end
 
-    # @param mod_name [String]
+  # @param mod_name [String]
   # @param page_name [String]
   # @return [true] create a fake page view event
   def view_module_page_event(mod_name, page_name)

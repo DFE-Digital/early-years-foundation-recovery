@@ -107,7 +107,7 @@ RSpec.describe 'Learning activity' do
       visit '/my-modules'
     end
 
-    xit 'shows the completed modules' do
+    it 'shows the completed modules', skip: 'fix this spec for course completed' do
       expect(page).to have_text 'You have completed all available modules'
     end
   end
