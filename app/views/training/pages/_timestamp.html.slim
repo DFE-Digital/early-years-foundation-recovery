@@ -1,0 +1,8 @@
+.timestamp-wrapper
+  .timestamp
+    dl.timestamp__list
+      dt.timestamp__term Published:
+      dd.timestamp__definition = format_date(content.published_at)
+      - if content.edited?
+        dt.timestamp__term Updated:
+        dd.timestamp__definition = format_date(content.updated_at)
