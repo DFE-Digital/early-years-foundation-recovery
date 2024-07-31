@@ -23,7 +23,7 @@ module Training
 
     # @return [DateTime]
     def published_at
-      ModuleRelease.find_by(module_position: parent.position)&.first_published_at || created_at
+      module_release&.first_published_at
     end
 
     # @param mod [Course, Training::Module]
@@ -78,6 +78,12 @@ module Training
     # @return [Boolean]
     def skippable?
       false
+    end
+
+  private
+
+    def module_release
+      ModuleRelease.find_by(module_position: parent.position)
     end
   end
 end

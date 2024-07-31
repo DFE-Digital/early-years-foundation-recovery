@@ -6,6 +6,8 @@ RSpec.describe Training::Page, type: :model do
     described_class.find_by(name: '1-1-1-1').first
   end
 
+  it_behaves_like 'updated content', '1-1-4'
+
   # describe 'CMS fields' do
   # end
 
@@ -20,10 +22,6 @@ RSpec.describe Training::Page, type: :model do
     it 'returns the schema' do
       expect(page.schema).to eq ['1-1-1-1', 'text_page', 'text_page', {}]
     end
-  end
-
-  xdescribe '#updated_content' do
-    it_behaves_like 'updated content'
   end
 
   describe '#debug_summary' do
