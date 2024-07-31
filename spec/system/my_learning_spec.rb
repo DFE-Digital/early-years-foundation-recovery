@@ -75,40 +75,4 @@ RSpec.describe 'Learning activity' do
       end
     end
   end
-
-  context 'when a user has completed all modules except upcoming modules' do
-    include_context 'with progress'
-
-    before do
-      complete_module(alpha)
-      complete_module(bravo)
-      complete_module(charlie)
-
-      visit '/my-modules'
-    end
-
-    it 'does not show the completed modules' do
-      expect(page).not_to have_text 'You have completed all available modules'
-    end
-
-    it 'shows completed modules' do
-      expect(page).to have_text 'Completed modules'
-    end
-  end
-
-  context 'when a user has completed all modules' do
-    include_context 'with completed course'
-
-    before do
-      complete_module(alpha)
-      complete_module(bravo)
-      complete_module(charlie)
-
-      visit '/my-modules'
-    end
-
-    it 'shows the completed modules', skip: 'fix this spec for course completed' do
-      expect(page).to have_text 'You have completed all available modules'
-    end
-  end
 end

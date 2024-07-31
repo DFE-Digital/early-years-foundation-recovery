@@ -13,62 +13,20 @@
 
 = render 'cms_debug'
 
-
 - if current_user.course.completed_all_modules?
   #started.govuk-grid-row
     .govuk-grid-column-full
       p = t('my_learning.completed_all_modules')
 - else
-  #started.govuk-grid-row
-    .govuk-grid-column-full
-      h2.govuk-heading-m Modules in progress
-      - if current_user.course.current_modules.none?
-        - if current_user.course.completed_modules.none?
-          p You have not started any modules. To begin the training course, start an available module.
-        - else
-          p You have not started any modules. Please choose an available module.
-      - else
-        .grid-container
-          - current_user.course.current_modules.each do |mod|
-            = render 'card', mod: mod, progress: module_progress(mod)
+  = render 'in_progress_modules'
 
   - if current_user.course.available_modules.any? || current_user.course.course_completed?
-    hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
-    #available.govuk-grid-row
-      .govuk-grid-column-full
-        h2.govuk-heading-m
-          | Available modules
-          - if current_user.content_changes.new_modules?
-            span.govuk-tag
-              = t('my_learning.new_tag.section')
-        - if current_user.course.available_modules.any?
-          .grid-container
-            - current_user.course.available_modules.each do |mod|
-              = render 'card', mod: mod, progress: false
-
-        - elsif current_user.course.course_completed?
-          p You do not have any modules available.
+    = render 'available_modules'
 
   - if current_user.course.upcoming_modules.any?
-  hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
-  #upcoming.govuk-grid-row
-    .govuk-grid-column-full
-      h2.govuk-heading-m Future modules in this course
-
-      .grid-container
-        - current_user.course.upcoming_modules.each do |mod|
-          .govuk-card id=mod.name
-            h3.govuk-heading-s
-              = mod.heading
-            p.govuk-body= mod.upcoming
-            - unless mod.draft?
-              = govuk_link_to 'View more information about this module',
-                course_overview_path + mod.card_anchor
+    = render 'upcoming_modules'
 
 - if current_user.course.completed_modules.any?
-  section.completed class=(current_user.course.completed_all_modules? ? '' : 'govuk-!-margin-top-7')
-    #completed.govuk-grid-row
-      .govuk-grid-column-full
-        = completed_modules_table
+  = render 'completed_modules'
 
 = render 'debug'

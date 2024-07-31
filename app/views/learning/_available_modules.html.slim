@@ -1,0 +1,15 @@
+hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
+#available.govuk-grid-row
+  .govuk-grid-column-full
+    h2.govuk-heading-m
+      = t('my_learning.available_modules_title')
+      - if current_user.content_changes.new_modules?
+        span.govuk-tag
+          = t('my_learning.new_tag.section')
+    - if current_user.course.available_modules.any?
+      .grid-container
+        - current_user.course.available_modules.each do |mod|
+          = render 'card', mod: mod, progress: false
+
+    - elsif current_user.course.course_completed?
+      p = t('my_learning.course_completed')

@@ -5,6 +5,8 @@ RSpec.describe CourseProgress do
 
   include_context 'with progress'
 
+  it_behaves_like 'with progress'
+
   describe '#course_completed?' do
     it 'is false for new users' do
       expect(course.course_completed?).to be false
@@ -92,7 +94,9 @@ RSpec.describe CourseProgress do
         expect(completion_time.to_s).to eq '2022-06-30 00:30:00 UTC'
       end
     end
+  end
 
+  describe '#completed_all_modules?' do
     it do
       expect(course.completed_all_modules?).to be false
     end
