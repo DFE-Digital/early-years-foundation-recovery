@@ -17,8 +17,14 @@ module Training
     end
 
     # @return [Boolean]
-    def updated_content?
-      published_at < updated_at
+    def edited?
+      if Rails.application.preview?
+        created_at < updated_at
+      elsif published_at.present?
+        published_at < updated_at
+      else
+        false
+      end
     end
 
     # @return [DateTime]

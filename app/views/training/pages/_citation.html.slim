@@ -3,6 +3,6 @@
     dl.citation__list
       dt.citation__term Published:
       dd.citation__definition = format_date(content.published_at)
-      - if content.updated_content?
+      - if content.edited?
         dt.citation__term Updated:
         dd.citation__definition = format_date(content.updated_at)
