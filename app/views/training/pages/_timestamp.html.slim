@@ -1,8 +1,8 @@
-.timestamp-wrapper
+- if !content.published_at.nil?
   .timestamp
-    dl.timestamp__list
-      dt.timestamp__term Published:
-      dd.timestamp__definition = format_date(content.published_at)
+    dl
+      dt Published:
+      dd = format_date(content.published_at)
       - if content.edited?
-        dt.timestamp__term Updated:
-        dd.timestamp__definition = format_date(content.updated_at)
+        dt Updated:
+        dd = format_date(content.updated_at)

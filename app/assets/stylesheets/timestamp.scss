@@ -1,11 +1,9 @@
-.timestamp-wrapper {
+.timestamp {
   background: #eeeeee75;
   padding: govuk-spacing(3) govuk-spacing(2) govuk-spacing(3) govuk-spacing(4);
   margin-top: 60px;
   border-left: govuk-spacing(1) solid #347ca9;
-}
 
-.timestamp {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -22,7 +20,7 @@
       font-family: sans-serif;
     }
 
-    &--inverse-padded .timestamp__list {
+    &--inverse-padded dl {
       margin: 15px;
     }
 
@@ -34,14 +32,16 @@
       margin-top: 0;
     }
 
-    &__term .timestamp__definition {
+    &__term dd {
       line-height: 1.4;
     }
 
     &__definition:not(:last-of-type) {
       margin-bottom: 5px;
     }
-  }
+}
+
+
 
   a {
     -webkit-font-smoothing: antialiased;
@@ -80,7 +80,7 @@
       padding: 10px;
     }
 
-    &-padded &.timestamp__list {
+    &-padded &dl {
       margin: 10px;
     }
   }
@@ -96,9 +96,19 @@
 }
 
 dl {
-  &.timestamp__list {
-    margin: 0;
-  }
+  margin: 0;
+}
+
+dt {
+  box-sizing: border-box;
+  float: left;
+  clear: left;
+  padding-right: 5px;
+  margin-top: 0;
+}
+
+dd {
+  margin: 0;
 }
 
 .timestamp .timestamp__definition-link {
@@ -109,13 +119,13 @@ dl {
   float: right;
 }
 
-.timestamp--inverse-padded .timestamp__list {
+.timestamp--inverse-padded dl {
   @include govuk-media-query($from: tablet) {
     margin: govuk-spacing(3);
   }
 }
 
-.timestamp.direction-rtl .timestamp__term {
+.timestamp.direction-rtl dt {
   @include govuk-media-query($from: tablet) {
     padding-left: govuk-spacing(1);
     padding-right: 0;
