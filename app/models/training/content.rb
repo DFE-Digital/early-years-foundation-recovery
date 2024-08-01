@@ -27,7 +27,7 @@ module Training
       end
     end
 
-    # @return [DateTime]
+    # @return [DateTime, nil]
     def published_at
       module_release&.first_published_at
     end
