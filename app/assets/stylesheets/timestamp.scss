@@ -57,11 +57,6 @@
     clear: both;
   }
 
-  .direction-rtl {
-    direction: rtl;
-    text-align: start;
-  }
-
   &-inverse {
     color: govuk-colour('white');
 
@@ -115,20 +110,9 @@ dd {
   font-weight: normal;
 }
 
-.timestamp.direction-rtl .timestamp__definition {
-  float: right;
-}
-
 .timestamp--inverse-padded dl {
   @include govuk-media-query($from: tablet) {
     margin: govuk-spacing(3);
-  }
-}
-
-.timestamp.direction-rtl dt {
-  @include govuk-media-query($from: tablet) {
-    padding-left: govuk-spacing(1);
-    padding-right: 0;
   }
 }
 
