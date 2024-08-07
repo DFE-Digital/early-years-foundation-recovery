@@ -1,8 +1,8 @@
 .timestamp {
-  background: #eeeeee75;
+  background: govuk-colour('light-grey');
   padding: govuk-spacing(3) govuk-spacing(2) govuk-spacing(3) govuk-spacing(4);
   margin-top: 60px;
-  border-left: govuk-spacing(1) solid #347ca9;
+  border-left: govuk-spacing(1) solid govuk-organisation-colour('department-for-education');
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -19,29 +19,7 @@
     a {
       font-family: sans-serif;
     }
-
-    &--inverse-padded dl {
-      margin: 15px;
-    }
-
-    &__term {
-      box-sizing:border-box;
-      float: left;
-      clear: left;
-      padding-right: 5px;
-      margin-top: 0;
-    }
-
-    &__term dd {
-      line-height: 1.4;
-    }
-
-    &__definition:not(:last-of-type) {
-      margin-bottom: 5px;
-    }
 }
-
-
 
   a {
     -webkit-font-smoothing: antialiased;
@@ -57,53 +35,25 @@
     clear: both;
   }
 
-  &-inverse {
-    color: govuk-colour('white');
-
-    a:link,
-    a:hover,
-    a:visited,
-    a:active {
-        color: govuk-colour('white');
-      }
-
-    a:focus {
-      color: govuk-colour('black');
-    }
-
-    &-padded {
-      padding: 10px;
-    }
-
-    &-padded &dl {
-      margin: 10px;
-    }
-  }
-
-  &__definition {
-    margin: 0;
-  }
-
   &__toggle-wrap {
     display: none;
   }
 
-}
-
-dl {
-  margin: 0;
-}
-
-dt {
-  box-sizing: border-box;
-  float: left;
-  clear: left;
-  padding-right: 5px;
-  margin-top: 0;
-}
-
-dd {
-  margin: 0;
+  dl {
+    margin: 0;
+  }
+  
+  dt {
+    box-sizing: border-box;
+    float: left;
+    clear: left;
+    padding-right: 5px;
+    margin-top: 0;
+  }
+  
+  dd {
+    margin: 0;
+  }
 }
 
 .timestamp .timestamp__definition-link {

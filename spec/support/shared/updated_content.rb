@@ -7,19 +7,19 @@ RSpec.shared_examples 'updated content' do |name|
       # make Rails.application.preview? return true
       it do
         allow(Rails.application).to receive(:preview?).and_return(true)
-        expect(content.edited?).to be true
+        expect(content).to be_edited
       end
     end
 
     context 'when delivery' do
       it do
         create(:module_release, first_published_at: Time.zone.local(2023, 1, 1))
-        expect(content.edited?).to be true
+        expect(content).to be_edited
       end
 
       it do
         create(:module_release, first_published_at: Time.zone.local(3_099, 1, 1))
-        expect(content.edited?).to be false
+        expect(content).not_to be_edited
       end
     end
   end

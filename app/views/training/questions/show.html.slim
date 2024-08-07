@@ -15,8 +15,8 @@
 
       - if content.formative_question? && current_user_response.responded?
         #formative-results= render 'assessment_banner'
-
-      = render 'training/pages/timestamp' if content.formative_question?
+      - if content.formative_question?
+        = render 'training/pages/timestamp'
   .govuk-grid-row
     .govuk-grid-column-full
 
