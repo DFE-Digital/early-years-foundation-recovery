@@ -289,10 +289,24 @@ en:
       percentage: "Your progress: %{num}"
       viewed: You have read %{num} pages
       remaining: Only %{num} pages remaining
+    available_modules_title: Available modules
+    modules_in_progress_title: Modules in progress
     new_tag:
       card: NEW
       section: NEW MODULE AVAILABLE
     page_count: (%{num} pages)
+    completed_all_modules: You have completed all available modules. You may use the links below to revisit any of the course content.
+    begin_training_course: You have not started any modules. To begin the training course, start an available module.
+    choose_available_module: You have not started any modules. Please choose an available module.
+    course_completed: You do not have any modules available.
+    future_modules_title: Future modules in this course
+    view_more_module_information: View more information about this module
+    completed_all_modules_table:
+      module_name: Module Name
+      date_completed: Date completed
+      actions: Actions
+      view_certificate: View certificate
+
 
   my_learning_log:
     title: Learning log
