@@ -5,6 +5,7 @@ Grover.configure do |config|
   config.options = {
     executable_path: '/usr/bin/chromium-browser',
     launch_args: [
+      '--disable-gpu',
       '--disable-dev-shm-usage',
       '--font-render-hinting=none',
     ],
