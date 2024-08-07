@@ -1,0 +1,8 @@
+- if !content.published_at.nil?
+  .timestamp
+    dl
+      dt Published:
+      dd = format_date(content.published_at)
+      - if content.edited?
+        dt Updated:
+        dd = format_date(content.updated_at)
