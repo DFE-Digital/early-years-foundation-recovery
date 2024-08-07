@@ -31,6 +31,10 @@ iframe {
   padding: govuk-spacing(7);
   background: govuk-colour('light-grey');
 
+  @include govuk-media-query($until: tablet) {
+    padding: govuk-spacing(4) govuk-spacing(3)
+  }
+
   .govuk-details__text {
     background: govuk-colour('white');
   }
