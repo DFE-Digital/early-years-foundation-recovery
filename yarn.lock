@@ -345,21 +345,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@puppeteer/browsers@npm:2.2.4":
-  version: 2.2.4
-  resolution: "@puppeteer/browsers@npm:2.2.4"
+"@puppeteer/browsers@npm:2.3.0":
+  version: 2.3.0
+  resolution: "@puppeteer/browsers@npm:2.3.0"
   dependencies:
     debug: "npm:^4.3.5"
     extract-zip: "npm:^2.0.1"
     progress: "npm:^2.0.3"
     proxy-agent: "npm:^6.4.0"
-    semver: "npm:^7.6.2"
+    semver: "npm:^7.6.3"
     tar-fs: "npm:^3.0.6"
     unbzip2-stream: "npm:^1.4.3"
     yargs: "npm:^17.7.2"
   bin:
     browsers: lib/cjs/main-cli.js
-  checksum: 02f62a3b09a8b0cf8d4b65a0b94a08430c37687ee694475fa8932234fa46da7343f051f39dc9e93b7ce57c6098ce13b467ec07963d48b67fe2eac24559f45656
+  checksum: 0a7c791fc05800305e9d52329eb02381b989fe68bfaa55ba901f090490f3fc7ee6df46df34c4f43d8cd1fe7a727bad02a218d2c9daa251a8db01f06f3347ba02
   languageName: node
   linkType: hard
 
@@ -540,14 +540,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.7.2":
-  version: 1.7.2
-  resolution: "axios@npm:1.7.2"
+"axios@npm:^1.7.4":
+  version: 1.7.4
+  resolution: "axios@npm:1.7.4"
   dependencies:
     follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 6ae80dda9736bb4762ce717f1a26ff997d94672d3a5799ad9941c24d4fb019c1dff45be8272f08d1975d7950bac281f3ba24aff5ecd49ef5a04d872ec428782f
+  checksum: 7a1429be1e3d0c2e1b96d4bba4d113efbfabc7c724bed107beb535c782c7bea447ff634886b0c7c43395a264d085450d009eb1154b5f38a8bae49d469fdcbc61
   languageName: node
   linkType: hard
 
@@ -735,16 +735,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromium-bidi@npm:0.6.1":
-  version: 0.6.1
-  resolution: "chromium-bidi@npm:0.6.1"
+"chromium-bidi@npm:0.6.2":
+  version: 0.6.2
+  resolution: "chromium-bidi@npm:0.6.2"
   dependencies:
     mitt: "npm:3.0.1"
     urlpattern-polyfill: "npm:10.0.0"
     zod: "npm:3.23.8"
   peerDependencies:
     devtools-protocol: "*"
-  checksum: 08569902a7fa2c2119242375efaf245d8fab824f5e3d608c47eb4e7e98cd6e80eda82a99f34a60f58ab3c83c611e8c3c75b189e9093863fbd54a31011dabd685
+  checksum: 20ec6c3bfc36c215cc20ad85407c7f25f85e0ba13fcca7da9a6d65c5781f70b3bbee720c21b737cb688957242502e6a067f39cc66fb97eea186707959be2600f
   languageName: node
   linkType: hard
 
@@ -887,6 +887,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"debug@npm:^4.3.6":
+  version: 4.3.6
+  resolution: "debug@npm:4.3.6"
+  dependencies:
+    ms: "npm:2.1.2"
+  peerDependenciesMeta:
+    supports-color:
+      optional: true
+  checksum: d3adb9af7d57a9e809a68f404490cf776122acca16e6359a2702c0f462e510e91f9765c07f707b8ab0d91e03bad57328f3256f5082631cefb5393d0394d50fb7
+  languageName: node
+  linkType: hard
+
 "degenerator@npm:^5.0.0":
   version: 5.0.1
   resolution: "degenerator@npm:5.0.1"
@@ -905,10 +917,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"devtools-protocol@npm:0.0.1299070":
-  version: 0.0.1299070
-  resolution: "devtools-protocol@npm:0.0.1299070"
-  checksum: 40370003bc885f4c3df8aa5b7c5b2fb5124dd0edac7e6637d09358c0ac474e6046df8780db7ce8defa5de8bcb1c534994547334b82bb220d746155618616d22f
+"devtools-protocol@npm:0.0.1312386":
+  version: 0.0.1312386
+  resolution: "devtools-protocol@npm:0.0.1312386"
+  checksum: bd5e3d280d1293bba9b2283c7b372981f566f46b57fa56d40af3b9e90d3a91dbd49ddad39a2164c87d7b5157c8aa876ef3b0539cf61d655bc46583f4b4589782
   languageName: node
   linkType: hard
 
@@ -1164,13 +1176,13 @@ __metadata:
     "@hotwired/turbo-rails": "npm:^8.0.5"
     "@stimulus-components/reveal": "npm:^5.0.0"
     accessible-autocomplete: "npm:^3.0.0"
-    axios: "npm:^1.7.2"
+    axios: "npm:^1.7.4"
     dfe-frontend: "npm:^2.0.1"
     esbuild: "npm:^0.23.0"
     govuk-frontend: "npm:^5.3.1"
-    puppeteer: "npm:^22.13.1"
+    puppeteer: "npm:^22.14.0"
     sass: "npm:^1.77.8"
-    stylelint: "npm:^16.7.0"
+    stylelint: "npm:^16.8.1"
     stylelint-config-gds: "npm:^2.0.0"
   languageName: unknown
   linkType: soft
@@ -2146,6 +2158,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss-resolve-nested-selector@npm:^0.1.4":
+  version: 0.1.4
+  resolution: "postcss-resolve-nested-selector@npm:0.1.4"
+  checksum: c53a1aa453690dacb9a34d60afb994c828779ad20d0abb8d7b37639f1144c0fd34f91e112cb7061f606d0459371c12463dae5777d465d4418fd20db054deb465
+  languageName: node
+  linkType: hard
+
 "postcss-safe-parser@npm:^7.0.0":
   version: 7.0.0
   resolution: "postcss-safe-parser@npm:7.0.0"
@@ -2174,6 +2193,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss-selector-parser@npm:^6.1.1":
+  version: 6.1.1
+  resolution: "postcss-selector-parser@npm:6.1.1"
+  dependencies:
+    cssesc: "npm:^3.0.0"
+    util-deprecate: "npm:^1.0.2"
+  checksum: ce2af36b56d9333a6873498d3b6ee858466ceb3e9560f998eeaf294e5c11cafffb122d307f3c2904ee8f87d12c71c5ab0b26ca4228b97b6c70b7d1e7cd9b5737
+  languageName: node
+  linkType: hard
+
 "postcss-value-parser@npm:^4.2.0":
   version: 4.2.0
   resolution: "postcss-value-parser@npm:4.2.0"
@@ -2181,14 +2210,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.39":
-  version: 8.4.39
-  resolution: "postcss@npm:8.4.39"
+"postcss@npm:^8.4.40":
+  version: 8.4.41
+  resolution: "postcss@npm:8.4.41"
   dependencies:
     nanoid: "npm:^3.3.7"
     picocolors: "npm:^1.0.1"
     source-map-js: "npm:^1.2.0"
-  checksum: ad9c1add892c96433b9a5502878201ede4a20c4ce02d056251f61f8d9a3e5426dab3683fe5a086edfa78a1a19f2b4988c8cea02c5122136d29758cb5a17e2621
+  checksum: 6e6176c2407eff60493ca60a706c6b7def20a722c3adda94ea1ece38345eb99964191336fd62b62652279cec6938e79e0b1e1d477142c8d3516e7a725a74ee37
   languageName: node
   linkType: hard
 
@@ -2263,30 +2292,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"puppeteer-core@npm:22.13.1":
-  version: 22.13.1
-  resolution: "puppeteer-core@npm:22.13.1"
+"puppeteer-core@npm:22.14.0":
+  version: 22.14.0
+  resolution: "puppeteer-core@npm:22.14.0"
   dependencies:
-    "@puppeteer/browsers": "npm:2.2.4"
-    chromium-bidi: "npm:0.6.1"
+    "@puppeteer/browsers": "npm:2.3.0"
+    chromium-bidi: "npm:0.6.2"
     debug: "npm:^4.3.5"
-    devtools-protocol: "npm:0.0.1299070"
+    devtools-protocol: "npm:0.0.1312386"
     ws: "npm:^8.18.0"
-  checksum: ebc04c7cdbb4dddd1052ab5614e62d82324bbaf5ad2eecb52404ac09d446a7469f53a19fe19cd23a04a5bd0e71c164e5d13d07d76658e28d5b1512a6573246a3
+  checksum: 9ddae8be6066890b5e861fa3b999ae8422e718b108b770a0f1270c0c15321f63c85d56cf950c66e3ed9afc753e2e2c04052abc1d9794c7a77450a526ea1386fe
   languageName: node
   linkType: hard
 
-"puppeteer@npm:^22.13.1":
-  version: 22.13.1
-  resolution: "puppeteer@npm:22.13.1"
+"puppeteer@npm:^22.14.0":
+  version: 22.14.0
+  resolution: "puppeteer@npm:22.14.0"
   dependencies:
-    "@puppeteer/browsers": "npm:2.2.4"
+    "@puppeteer/browsers": "npm:2.3.0"
     cosmiconfig: "npm:^9.0.0"
-    devtools-protocol: "npm:0.0.1299070"
-    puppeteer-core: "npm:22.13.1"
+    devtools-protocol: "npm:0.0.1312386"
+    puppeteer-core: "npm:22.14.0"
   bin:
     puppeteer: lib/esm/puppeteer/node/cli.js
-  checksum: a64f69385d5d156ce2467246a671339db1bbfe3424a7d09be8b039a9c2ae9eecdd0320ff37ceef3abfc8b3977728fb72f27f0e680ea95aaba2164f5e2636896f
+  checksum: 33a2b3cc78d2bc2490acf51119724079877ecccf763c3fe083008c970435119d8a0cb0c2517e0172ba135ae26b6872b6f81d5944db7a9f6666f2ddd7494dc9dc
   languageName: node
   linkType: hard
 
@@ -2393,7 +2422,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.6.2":
+"semver@npm:^7.6.3":
   version: 7.6.3
   resolution: "semver@npm:7.6.3"
   bin:
@@ -2636,9 +2665,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint@npm:^16.7.0":
-  version: 16.7.0
-  resolution: "stylelint@npm:16.7.0"
+"stylelint@npm:^16.8.1":
+  version: 16.8.1
+  resolution: "stylelint@npm:16.8.1"
   dependencies:
     "@csstools/css-parser-algorithms": "npm:^2.7.1"
     "@csstools/css-tokenizer": "npm:^2.4.1"
@@ -2650,7 +2679,7 @@ __metadata:
     cosmiconfig: "npm:^9.0.0"
     css-functions-list: "npm:^3.2.2"
     css-tree: "npm:^2.3.1"
-    debug: "npm:^4.3.5"
+    debug: "npm:^4.3.6"
     fast-glob: "npm:^3.3.2"
     fastest-levenshtein: "npm:^1.0.16"
     file-entry-cache: "npm:^9.0.0"
@@ -2667,10 +2696,10 @@ __metadata:
     micromatch: "npm:^4.0.7"
     normalize-path: "npm:^3.0.0"
     picocolors: "npm:^1.0.1"
-    postcss: "npm:^8.4.39"
-    postcss-resolve-nested-selector: "npm:^0.1.1"
+    postcss: "npm:^8.4.40"
+    postcss-resolve-nested-selector: "npm:^0.1.4"
     postcss-safe-parser: "npm:^7.0.0"
-    postcss-selector-parser: "npm:^6.1.0"
+    postcss-selector-parser: "npm:^6.1.1"
     postcss-value-parser: "npm:^4.2.0"
     resolve-from: "npm:^5.0.0"
     string-width: "npm:^4.2.3"
@@ -2681,7 +2710,7 @@ __metadata:
     write-file-atomic: "npm:^5.0.1"
   bin:
     stylelint: bin/stylelint.mjs
-  checksum: 50e1c55670b02a8839e26c9d63b11820e0f1bcf108c76da17cde938bc9240377aa1622e5bfeb40e4590894d476c2e1fce6d7a6a90f3052c6ddd889797dbfd975
+  checksum: 834d10490866b8472047938790f68cdc5bd298057ef7bfcf3be2e56259a8d3d05cbb66eefa235d603652fee92126e74d737ad40012721556c54d707407cbf7f1
   languageName: node
   linkType: hard
 

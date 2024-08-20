@@ -21,10 +21,10 @@ RSpec.describe ModuleOverviewDecorator do
 
     it 'counts pages' do
       expect(output.map { |s| s[:page_count] }).to eq [
-        '(Pages 4)',
-        '(Pages 5)',
-        '(Pages 20)',
-        '(Pages 9)',
+        '(4 pages)',
+        '(5 pages)',
+        '(20 pages)',
+        '(9 pages)',
         nil,
       ]
     end
