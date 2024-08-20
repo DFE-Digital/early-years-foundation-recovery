@@ -20,6 +20,10 @@ $progress-bar-container-width: 81px;
   display: grid;
   grid-template-columns: $progress-bar-container-width auto;
 
+  @include govuk-media-query($until: tablet) {
+    grid-template-columns: 50px auto;
+  }
+
   .icon {
     border-radius: 50%;
     width: $icon-diameter;
@@ -29,6 +33,7 @@ $progress-bar-container-width: 81px;
     align-items: center;
     font-weight: bold;
     z-index: 2;
+    position: absolute;
 
     &.completed {
       background-color: govuk-colour('blue');
@@ -55,11 +60,7 @@ $progress-bar-container-width: 81px;
     border-left: 1px solid govuk-colour('mid-grey');
     position: relative;
     z-index: 1;
-    right: $line-shift + 7.5px;
-    
-    @include govuk-media-query($from: tablet) {
-      right: $line-shift + 10px;
-    }
+    right: -18px;
   }
 
   .module-section--container {
@@ -72,6 +73,42 @@ $progress-bar-container-width: 81px;
     .progress-indicator {
       margin-left: auto;
     }
+  }
+}
+
+section.completed {
+  background-color: govuk-colour('light-grey');
+  border-radius: 6px;
+  padding: govuk-spacing(7);
+
+  @include govuk-media-query($until: tablet) {
+    padding: govuk-spacing(4);
+  }
+}
+
+.govuk-table {
+  margin-bottom: 0;
+}
+
+.module-section--item {
+  font-size: 1.1875rem;
+
+  ul {
+    list-style-type: disc;
+    padding-left: 15px;
+    margin-bottom: 0;
+
+    @include govuk-media-query($until: tablet) {
+      padding-left: 10px;
+    }
+  }
+
+  li {
+    list-style: square;
+  }
+
+  ul > li:last-child {
+    margin-bottom: 0;
   }
 }
 
