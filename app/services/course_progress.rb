@@ -34,7 +34,7 @@ class CourseProgress
 
   # @return [Boolean]
   def completed_all_modules?
-    completed_modules.all? && upcoming_modules.none? && available_modules.none?
+    completed_modules.all? && upcoming_modules.none? && available_modules.none? && course_completed?
   end
 
   # @return [Array<String>]
