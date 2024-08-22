@@ -5,8 +5,6 @@ RSpec.describe CourseProgress do
 
   include_context 'with progress'
 
-  it_behaves_like 'with progress'
-
   describe '#course_completed?' do
     it 'is false for new users' do
       expect(course.course_completed?).to be false
