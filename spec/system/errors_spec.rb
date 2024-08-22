@@ -11,16 +11,6 @@ RSpec.describe 'Errors page' do
     end
   end
 
-  context 'when page is not found using the incorrect format' do
-    before do
-      visit '/randompage.yml'
-    end
-
-    specify do
-      expect(page).to have_content 'Page not found'
-    end
-  end
-
   context 'when there is an internal server error' do
     before do
       visit '/500'

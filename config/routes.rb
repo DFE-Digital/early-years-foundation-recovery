@@ -8,8 +8,6 @@ Rails.application.routes.draw do
   get '500', to: 'errors#internal_server_error', via: :all
   get '503', to: 'errors#service_unavailable', via: :all
 
-  get '/*unmatched_route', to: 'errors#not_found', via: :get, format: 'html'
-
   resources :settings, controller: :settings, only: %i[show create]
 
   devise_for :users,
