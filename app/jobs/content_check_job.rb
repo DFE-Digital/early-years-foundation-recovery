@@ -14,7 +14,7 @@ private
     Training::Module.ordered.all? do |mod|
       check = ContentIntegrity.new(module_name: mod.name)
       check.call # print results
-      log Training::Module.cache.size # should be larger than 0
+      # log Training::Module.cache.size # should be larger than 0
 
       unless check.valid?
         log "#{mod.name} in '#{env}' via '#{api}' is not valid", :warn
