@@ -94,6 +94,12 @@ RSpec.describe CourseProgress do
     end
   end
 
+  describe '#completed_all_modules?' do
+    it do
+      expect(course.completed_all_modules?).to be false
+    end
+  end
+
   describe '#debug_summary' do
     it 'summarises information' do
       expect(course.debug_summary).to eq(
