@@ -60,12 +60,6 @@
   font-weight: normal;
 }
 
-.timestamp--inverse-padded dl {
-  @include govuk-media-query($from: tablet) {
-    margin: govuk-spacing(3);
-  }
-}
-
 @media print {
   .timestamp {
     color: govuk-colour('black');
