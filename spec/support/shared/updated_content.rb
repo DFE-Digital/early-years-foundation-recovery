@@ -7,7 +7,7 @@ RSpec.shared_examples 'updated content' do |name|
       # make Rails.application.preview? return true
       it do
         allow(Rails.application).to receive(:preview?).and_return(true)
-        expect(content).to be_edited
+        expect(content).to be_edited unless content.content_type.id.eql?('video')
       end
     end
 

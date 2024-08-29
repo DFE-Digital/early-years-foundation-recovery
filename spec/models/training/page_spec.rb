@@ -6,7 +6,7 @@ RSpec.describe Training::Page, type: :model do
     described_class.find_by(name: '1-1-1-1').first
   end
 
-  # it_behaves_like 'updated content', '1-1-4'
+  it_behaves_like 'updated content', '1-1-3'
 
   # describe 'CMS fields' do
   # end
