@@ -20,4 +20,14 @@ RSpec.describe 'Errors page' do
       expect(page).to have_content 'Sorry, there is a problem with the service'
     end
   end
+
+  context 'when there is a service unavailable error' do
+    before do
+      visit '/503'
+    end
+
+    specify do
+      expect(page).to have_content 'Service Unavailable'
+    end
+  end
 end
