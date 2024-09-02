@@ -1,0 +1,4 @@
+section.completed class=(current_user.course.completed_all_modules? ? '' : 'govuk-!-margin-top-7')
+  #completed.govuk-grid-row
+    .govuk-grid-column-full
+      = completed_modules_table
