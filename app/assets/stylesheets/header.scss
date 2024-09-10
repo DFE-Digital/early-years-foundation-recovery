@@ -48,6 +48,10 @@ header #service-name {
   }
 }
 
+.dfe-header__menu {
+  float: right;
+}
+
 .dfe-header__logo {
   order: 1;
 }
@@ -74,7 +78,7 @@ header #service-name {
     order: 3;
   }
 
-  .govuk-notification-banner__content > * {
+  .govuk-notification-banner__content>* {
     max-width: 44em;
   }
 }
@@ -101,5 +105,11 @@ header #service-name {
     @include govuk-media-query($until: tablet) {
       padding-top: govuk-spacing(4);
     }
+  }
+}
+
+@media (max-width: 61.875em) {
+  .dfe-header__navigation-item.dfe-header__navigation-item--current a {
+    color: govuk-colour('black');
   }
 }
