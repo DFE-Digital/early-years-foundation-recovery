@@ -68,6 +68,9 @@ module EarlyYearsFoundationRecovery
     config.gov_one_private_key = credentials.dig(:gov_one, :private_key)
     config.gov_one_client_id   = credentials.dig(:gov_one, :client_id)
 
+    # Sentry
+    config.sentry_dsn = ENV.fetch('SENTRY_DSN', '#SENTRY_DSN_env_var_missing')
+
     # @return [Boolean]
     def live?
       ENV['ENVIRONMENT'].eql?('production')
