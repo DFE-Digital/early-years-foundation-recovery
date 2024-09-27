@@ -1,0 +1,82 @@
+.timestamp {
+  background: govuk-colour('light-grey');
+  padding: govuk-spacing(3) govuk-spacing(2) govuk-spacing(3) govuk-spacing(4);
+  margin-top: 60px;
+  border-left: govuk-spacing(1) solid govuk-organisation-colour('department-for-education');
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 14px;
+  font-size: .875rem;
+  line-height: 1.1429;
+
+  @include govuk-media-query($from: tablet) {
+    font-size:16px;
+    font-size: 1rem;
+    line-height: 1.25;
+
+    a {
+      font-family: sans-serif;
+    }
+}
+
+  a {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-decoration: underline;
+    font-weight: bold;
+    color: govuk-colour('black');
+  }
+
+  &.timestamp::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  &__toggle-wrap {
+    display: none;
+  }
+
+  dl {
+    margin: 0;
+  }
+  
+  dt {
+    box-sizing: border-box;
+    float: left;
+    clear: left;
+    padding-right: 5px;
+    margin-top: 0;
+  }
+  
+  dd {
+    margin: 0;
+  }
+}
+
+.timestamp .timestamp__definition-link {
+  font-weight: normal;
+}
+
+@media print {
+  .timestamp {
+    color: govuk-colour('black');
+    font-family: sans-serif;
+    font-size: 14pt;
+    line-height: 1.2;
+  }
+}
+
+.js-enabled {
+  .timestamp__toggle-wrap {
+    display: block;
+  }
+
+  .timestamp__toggle-items {
+    .js-hidden {
+      display: none;
+    }
+  }
+}
