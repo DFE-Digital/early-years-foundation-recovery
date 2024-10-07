@@ -16,6 +16,22 @@ module Training
       @parent ||= Training::Module.by_content_id(id)
     end
 
+    # @return [Boolean]
+    def edited?
+      if Rails.application.preview?
+        created_at < updated_at
+      elsif published_at.present?
+        published_at < updated_at
+      else
+        false
+      end
+    end
+
+    # @return [DateTime, nil]
+    def published_at
+      module_release&.first_published_at
+    end
+
     # @param mod [Course, Training::Module]
     # @return [Training::Page, Training::Video, Training::Question]
     def with_parent(mod)
@@ -68,6 +84,12 @@ module Training
     # @return [Boolean]
     def skippable?
       false
+    end
+
+  private
+
+    def module_release
+      ModuleRelease.find_by(module_position: parent.position)
     end
   end
 end

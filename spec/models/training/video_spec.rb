@@ -6,6 +6,8 @@ describe Training::Video, type: :model do
     described_class.find_by(name: '1-2-1-2').first
   end
 
+  it_behaves_like 'updated content', '1-2-1-2'
+
   describe '#parent' do
     it 'returns the parent module' do
       expect(video.parent).to be_a Training::Module
