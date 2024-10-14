@@ -94,6 +94,12 @@ class User < ApplicationRecord
   # feedback
   scope :with_feedback, -> { joins(:responses).merge(Response.feedback) }
 
+  # confidence
+  scope :role_type_leader, -> { where("lower(role_type_other) LIKE '%leader%'") }
+  scope :role_type_manager, -> { where("lower(role_type_other) LIKE '%manager%'") }
+  scope :leader_or_manager, -> { where(role_type: 'Manager or team leader').or(role_type_leader).or(role_type_manager) }
+  scope :with_confidence_score, -> { joins(:responses).merge(Response.confidence) }
+
   # account status
   scope :public_beta_only_registration_complete, -> { registered_since_private_beta.registration_complete }
   scope :since_public_beta, -> { where(created_at: Rails.application.public_beta_launch_date..Time.zone.now) }

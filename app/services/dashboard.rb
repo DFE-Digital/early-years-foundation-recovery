@@ -24,6 +24,7 @@ class Dashboard
 
     { model: 'Assessment',                              folder: 'training', file: 'assessments'                   },
     { model: 'DataAnalysis::ConfidenceCheckScores',     folder: 'training', file: 'confidence_check_scores'       },
+    { model: 'DataAnalysis::ConfidenceCheckScoresForManagerOrLeader', folder: 'training', file: 'confidence_check_scores_for_manager_or_leader' },
     # { model: 'DataAnalysis::AveragePassScores',         folder: 'training', file: 'average_pass_scores'           },
     # { model: 'DataAnalysis::HighFailQuestions',         folder: 'training', file: 'high_fail_questions'           },
     # { model: 'DataAnalysis::SettingPassRate',           folder: 'training', file: 'setting_pass_rate'             },
