@@ -99,7 +99,7 @@ private
       elsif !resource.email_preferences_complete?
         static_path('email-preferences')
       else
-        my_modules_path(refresh: true)
+        my_modules_path
       end
     else
       edit_registration_terms_and_conditions_path

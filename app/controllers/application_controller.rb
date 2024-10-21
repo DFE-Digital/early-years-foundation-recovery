@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   before_action :set_analytics_tracking_id,
                 :set_hotjar_site_id,
                 :prepare_cms
-  before_action :handle_refresh
 
   helper_method :current_user,
                 :debug?
@@ -96,13 +95,5 @@ private
     return true if bot?
 
     super
-  end
-
-  def handle_refresh
-    # Check if the `refresh` parameter is present
-    if params[:refresh]
-      # Perform a page reload or any other logic you need
-      redirect_to request.path, status: :found # Reload the page without the `refresh` parameter
-    end
   end
 end
