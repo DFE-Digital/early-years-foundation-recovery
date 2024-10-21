@@ -50,7 +50,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
 
     it 'redirects to /my-modules' do
       expect(session[:id_token]).to eq id_token
-      expect(response).to redirect_to my_modules_path(refresh: true)
+      expect(response).to redirect_to my_modules_path
     end
   end
 
@@ -62,7 +62,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
 
     it 'redirects to /my-modules' do
       expect(session[:id_token]).to eq id_token
-      expect(response).to redirect_to my_modules_path(refresh: true)
+      expect(response).to redirect_to my_modules_path
     end
   end
 
