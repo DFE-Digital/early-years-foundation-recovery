@@ -35,4 +35,43 @@ RSpec.describe ApplicationController, type: :controller do
       end
     end
   end
+
+  describe '#set_time_zone' do
+    controller do
+      def index
+        render plain: 'Time zone set'
+      end
+    end
+
+    before do
+      allow(Time).to receive(:use_zone).and_yield
+    end
+
+    context 'when ENV["TZ"] is set to a valid time zone' do
+      before { allow(ENV).to receive(:[]).with('TZ').and_return('America/New_York') }
+
+      it 'sets the time zone correctly' do
+        expect(Time).to receive(:use_zone).with('America/New_York')
+        get :index
+      end
+    end
+
+    context 'when ENV["TZ"] is set to an invalid time zone' do
+      before { allow(ENV).to receive(:[]).with('TZ').and_return('Invalid/Timezone') }
+
+      it 'falls back to UTC' do
+        expect(Time).to receive(:use_zone).with('UTC')
+        get :index
+      end
+    end
+
+    context 'when ENV["TZ"] is not set' do
+      before { allow(ENV).to receive(:[]).with('TZ').and_return(nil) }
+
+      it 'falls back to UTC' do
+        expect(Time).to receive(:use_zone).with('UTC')
+        get :index
+      end
+    end
+  end
 end
