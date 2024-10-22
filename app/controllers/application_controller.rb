@@ -71,8 +71,18 @@ private
   end
 
   def set_time_zone(&block)
-    Time.use_zone(ENV['TZ'], &block)
+    time_zone = ENV['TZ'] || Time.zone_default.name
+
+    if valid_time_zone?(time_zone)
+      Time.use_zone(time_zone, &block)
+    else
+      Rails.logger.warn("Invalid time zone '#{time_zone}' specified. Falling back to default time zone.")
+      Time.use_zone(Time.zone_default.name, &block)
+    end
   end
+  # def set_time_zone(&block)
+  #   Time.use_zone(ENV['TZ'], &block)
+  # end
 
   # @see Auditing
   # @return [User, nil]
@@ -96,4 +106,8 @@ private
 
     super
   end
+end
+
+def valid_time_zone?(time_zone)
+  ActiveSupport::TimeZone[time_zone].present?
 end
