@@ -3,10 +3,18 @@ class ErrorsController < ApplicationController
 
   def not_found
     render status: :not_found
+  rescue ActionView::MissingTemplate => e
+    # If the template is missing, return a 404 status without rendering any page
+    Rails.logger.warn "Missing template: #{e.message}"
+    head :not_found
   end
 
   def internal_server_error
     render status: :internal_server_error
+  rescue ActionView::MissingTemplate => e
+    # If the template is missing, return a 500 status without rendering any page
+    Rails.logger.warn "Missing template: #{e.message}"
+    head :internal_server_error
   end
 
   def service_unavailable
