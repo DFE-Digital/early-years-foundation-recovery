@@ -25,7 +25,7 @@ RSpec.describe 'Errors page' do
     before do
       visit '/503'
     end
-
+    // This is a test for a 503 error page
     specify do
       expect(page).to have_content 'Service Unavailable'
     end
