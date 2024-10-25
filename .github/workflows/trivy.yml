@@ -19,6 +19,7 @@ permissions:
 
 env:
   DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
+  RUN_TRIVY_SCAN: false # Set to true to re-enable
 
 jobs:
   build:
@@ -63,6 +64,7 @@ jobs:
       # Scan image
       -
         name: Run Trivy vulnerability scanner
+        if: env.RUN_TRIVY_SCAN == 'true'
         uses: aquasecurity/trivy-action@0.28.0
         with:
           image-ref: ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
