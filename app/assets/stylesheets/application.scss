@@ -202,5 +202,7 @@ ul>li>ul>li {
 }
 
 .cookie-policy-body {
-  overflow-wrap: anywhere;
+  @include govuk-media-query($until: tablet) {
+    overflow-wrap: anywhere;
+  }
 }
