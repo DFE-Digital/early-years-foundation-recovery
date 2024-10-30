@@ -196,3 +196,13 @@ ul>li>ul>li {
 .text-secondary {
   color: $govuk-secondary-text-colour;
 }
+
+.govuk-cookie-banner .govuk-button-group {
+  align-items: center;
+}
+
+.cookie-policy-body {
+  @include govuk-media-query($until: tablet) {
+    overflow-wrap: anywhere;
+  }
+}
