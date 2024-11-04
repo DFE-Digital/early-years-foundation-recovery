@@ -19,7 +19,7 @@ permissions:
 
 env:
   DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
-  RUN_TRIVY_SCAN: false # Set to true to re-enable
+  RUN_TRIVY_SCAN: true # Set to true to re-enable
 
 jobs:
   build:
