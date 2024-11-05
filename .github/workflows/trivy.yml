@@ -74,3 +74,6 @@ jobs:
           scanners: vuln
           vuln-type: os,library
           severity: CRITICAL,HIGH
+          version: "v0.57.0"
+        env:
+          TRIVY_DB_REPOSITORY: public.ecr.aws/aquasecurity/trivy-db:2
