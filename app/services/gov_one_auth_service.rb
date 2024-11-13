@@ -67,6 +67,8 @@ class GovOneAuthService
     jwk = JWT::JWK.new(key_params)
 
     JWT.decode(token, jwk.public_key, true, { verify_iat: true, algorithm: 'ES256' })
+  rescue StandardError => e
+    Rails.logger.error "GovOneAuthService.decode_id_token: #{e.message}"
   end
 
   # @param address [String]
@@ -76,6 +78,8 @@ class GovOneAuthService
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     [uri, http]
+  rescue StandardError => e
+    Rails.logger.error "GovOneAuthService.build_http: #{e.message}"
   end
 
 private
@@ -87,6 +91,8 @@ private
       uri, http = build_http(ENDPOINTS[:jwks])
       response = http.request(Net::HTTP::Get.new(uri.path))
       JSON.parse(response.body)
+    rescue StandardError => e
+      Rails.logger.error "GovOneAuthService.jwks: #{e.message}"
     end
   end
 
