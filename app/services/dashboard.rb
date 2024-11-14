@@ -22,7 +22,8 @@ class Dashboard
     { model: 'DataAnalysis::ReturningUsers',            folder: 'users',    file: 'returning_users'               },
     # { model: 'DataAnalysis::LocalAuthorityUser',        folder: 'users',    file: 'local_authority_users'         },
 
-    { model: 'Assessment',                              folder: 'training', file: 'assessments'                   },
+    { model: 'Assessment',                              folder: 'training', file: 'assessments' },
+    { model: 'DataAnalysis::AssessmentForLeadersAndManagers', folder: 'training', file: 'assessments_managers_and_leaders' },
     { model: 'DataAnalysis::ConfidenceCheckScores',     folder: 'training', file: 'confidence_check_scores'       },
     # { model: 'DataAnalysis::AveragePassScores',         folder: 'training', file: 'average_pass_scores'           },
     # { model: 'DataAnalysis::HighFailQuestions',         folder: 'training', file: 'high_fail_questions'           },
