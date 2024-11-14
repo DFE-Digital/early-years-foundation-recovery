@@ -6,28 +6,29 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def openid_connect
     if params['error'].present?
       Rails.logger.error("Authentication error: #{params['error']}, #{params['error_description']}")
-      return error_redirect
+      return error_redirect('Params errors present')
     end
 
-    return error_redirect unless session_params? && valid_params?
+    return error_redirect('Session_params & Valid_params error') unless session_params? && valid_params?
 
     auth_service = GovOneAuthService.new(code: params['code'])
     tokens_response = auth_service.tokens
-    return error_redirect unless valid_tokens?(tokens_response)
+    return error_redirect('No valid_tokens') unless valid_tokens?(tokens_response)
 
     id_token = auth_service.decode_id_token(tokens_response['id_token'])[0]
-    return error_redirect unless valid_id_token?(id_token)
+    return error_redirect('No valid_id_token') unless valid_id_token?(id_token)
 
     session[:id_token] = tokens_response['id_token']
     gov_one_id = id_token['sub']
 
     user_info_response = auth_service.user_info(tokens_response['access_token'])
     email = user_info_response['email']
-    return error_redirect unless valid_user_info?(user_info_response, gov_one_id)
+    return error_redirect('No valid_user_info') unless valid_user_info?(user_info_response, gov_one_id)
 
     gov_user = User.find_or_create_from_gov_one(email: email, gov_one_id: gov_one_id)
 
     delete_session_params
+    Rails.logger.info("Logging in: #{gov_user}")
     sign_in_and_redirect gov_user if gov_user
   end
 
@@ -71,11 +72,13 @@ private
   end
 
   # @return [nil]
-  def error_redirect
+  def error_redirect(msg = 'default message')
     return if user_signed_in?
 
     flash[:alert] = 'There was a problem signing in. Please try again.'
     redirect_to root_path
+  rescue StandardError => e
+    Rails.logger.error("Error redirect: #{e.message} - #{msg}")
   end
 
   # @return [nil]
