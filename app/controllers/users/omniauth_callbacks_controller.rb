@@ -4,6 +4,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # This method is called by Devise after successful Gov One Login authentication
   # @return [nil]
   def openid_connect
+    redirect_to my_modules_path if user_signed_in?
+
     if params['error'].present?
       Rails.logger.error("Authentication error: #{params['error']}, #{params['error_description']}")
       return error_redirect('Params errors present')
