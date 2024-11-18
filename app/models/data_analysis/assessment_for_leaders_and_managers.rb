@@ -26,7 +26,7 @@ module DataAnalysis
       # @param mod [Training::Module]
       # @return [Integer]
       def filtered_assessment
-        User.with_assessments.leader_or_manager
+        User.with_assessments.leader_or_manager_only
       end
 
     private

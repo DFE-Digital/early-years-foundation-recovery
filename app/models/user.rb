@@ -139,7 +139,6 @@ class User < ApplicationRecord
   # assessments
   scope :with_assessments, -> { joins(:assessments) }
   scope :with_passing_assessments, -> { with_assessments.merge(Assessment.passed) }
-  scope :leader_or_manager, -> { where(role_type: 'Manager or team leader') }
 
   # events
   scope :with_events, -> { joins(:events) }

@@ -24,7 +24,7 @@ class Dashboard
 
     { model: 'Assessment',                              folder: 'training', file: 'assessments' },
     { model: 'DataAnalysis::AssessmentForLeadersAndManagers', folder: 'training', file: 'assessments_managers_and_leaders' },
-    { model: 'DataAnalysis::ConfidenceCheckScores',     folder: 'training', file: 'confidence_check_scores'       },
+    { model: 'DataAnalysis::ConfidenceCheckScores', folder: 'training', file: 'confidence_check_scores' },
     { model: 'DataAnalysis::ConfidenceCheckScoresForManagerOrLeaderOnly', folder: 'training', file: 'confidence_check_scores_for_manager_or_leader_only' },
     { model: 'DataAnalysis::ConfidenceCheckScoresForManagerOrLeaderAndOther', folder: 'training', file: 'confidence_check_scores_for_manager_or_leader_and_other' },
     # { model: 'DataAnalysis::AveragePassScores',         folder: 'training', file: 'average_pass_scores'           },
