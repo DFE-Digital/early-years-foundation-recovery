@@ -95,10 +95,7 @@ class User < ApplicationRecord
   scope :with_feedback, -> { joins(:responses).merge(Response.feedback) }
 
   # confidence
-  scope :role_type_leader, -> { where("lower(role_type_other) LIKE '%lead%'") }
-  scope :role_type_manager, -> { where("lower(role_type_other) LIKE '%manager%'") }
   scope :leader_or_manager_only, -> { where(role_type: 'Manager or team leader') }
-  scope :leader_or_manager_and_other, -> { where(role_type: 'Manager or team leader').or(role_type_leader).or(role_type_manager) }
   scope :with_confidence_score, -> { joins(:responses).merge(Response.confidence) }
 
   # account status
