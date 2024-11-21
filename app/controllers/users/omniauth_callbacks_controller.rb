@@ -74,6 +74,8 @@ private
 
   # @return [nil]
   def error_redirect(msg = 'default message')
+    return if user_signed_in?
+
     flash[:alert] = 'There was a problem signing in. Please try again.'
     redirect_to root_path
   rescue StandardError => e
