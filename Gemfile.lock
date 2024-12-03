@@ -673,6 +673,7 @@ DEPENDENCIES
   rails
   rails-erd
   redcarpet
+  rexml
   rspec-rails
   rubocop-factory_bot
   rubocop-govuk
