@@ -3,7 +3,6 @@
 [![ci][ci-badge]][ci-workflow]
 [![brakeman][brakeman-badge]][brakeman-workflow]
 [![pa11y][pa11y-badge]][pa11y-workflow]
-[![qa][qa-badge]][qa-workflow]
 
 This is a Rails 7 application using the [DfE template][rails-template].
 
@@ -18,12 +17,11 @@ Optionally create `.env` to override or set default variables like `DATABASE_URL
 
 ## Useful Links
 
-- [Project Documentation][confluence]
+- The Project Documentation is located within the EYFS Steady State team intranet 'site'
 - [Production Environment][production]
 - [Staging Environment][staging]
 - [Prototype Repo][prototype-repo]
 - [Prototype App][prototype-app]
-- [Experts & Mentors Interim App][interim-prototype-app]
 - [Flow Diagram][figma]
 
 ## Rails Credentials
@@ -81,21 +79,6 @@ Rails system specs use RackTest only for efficiency.
 **Production**
 
 Running locally in the production rails environment requires generating a self-signed certificate. Use `bin/docker-certs`
-
-**UI Framework**
-
-> Gemfile group :ui
-
-Use `bin/qa` to run the test framework under `/ui` against a given URL.
-These tests have additional dependencies:
-
-```sh
-$ brew install chromedriver geckodriver
-# on OSX Intel
-$ xattr -d com.apple.quarantine /usr/local/bin/chromedriver
-# on OSX ARM
-$ xattr -d com.apple.quarantine /opt/homebrew/bin/chromedriver
-```
 
 ## Using Docker
 
