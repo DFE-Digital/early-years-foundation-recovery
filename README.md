@@ -4,16 +4,28 @@
 [![brakeman][brakeman-badge]][brakeman-workflow]
 [![pa11y][pa11y-badge]][pa11y-workflow]
 
-This is a Rails 7 application using the [DfE template][rails-template].
+This is an application, written in Ruby on Rails (Version 7), based on the [DFE-Digital][rails-template] template. It uses a [Contentful](https://app.contentful.com/spaces/dvmeh832nmjc/) workspace for the content, managed by the content editors in the Early years child development training service.
 
-Optionally create `.env` to override or set default variables like `DATABASE_URL`.
+Optionally create `.env` to override or set default variables.
+
+## Dependencies
+
+Ruby version `3.3.x`
+Node version `20.18.x`
+PostgreSQL version `15.4`
+Yarn version `4.0.x`
+
+Suggest using [asdf](asdf) for local development.
 
 ## Getting Started
 
 1. Clone the [repository][app-repo]
 2. Install [git-secrets](#git-secrets)
 3. Obtain the master keys
-4. Start the server
+4. Run `bundle install` to install the gem dependencies
+5. Run `yarn` to install node dependencies
+6. Copy the .env.example settings into the .env file
+7. Run `bin/dev` to launch the app on http://localhost:3000
 
 ## Useful Links
 
@@ -308,6 +320,7 @@ File.open(file, 'w') { |file| file.write(data.to_yaml) }
 [docker]: https://www.docker.com
 [git-secrets]: https://github.com/awslabs/git-secrets
 [sentry]: https://sentry.io/organizations/early-years-foundation-reform
+[asdf]: https://asdf-vm.com
 
 <!-- Deployments -->
 
