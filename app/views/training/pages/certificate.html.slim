@@ -17,7 +17,8 @@
         | .
 
 - content_for :cta do
-  = render 'feedback/cta'
+  .noprint
+    = render 'feedback/cta'
 
 .govuk-grid-row
   .govuk-grid-column-three-quarters-from-desktop id=('award' if pdf?)
