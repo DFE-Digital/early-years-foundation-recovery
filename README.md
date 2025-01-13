@@ -15,7 +15,7 @@ Node version `20.18.x`
 PostgreSQL version `15.4`
 Yarn version `4.0.x`
 
-Suggest using [asdf](asdf) for local development.
+Suggest using [asdf][asdf] for local development.
 
 ## Getting Started
 
