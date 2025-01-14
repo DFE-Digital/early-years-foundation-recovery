@@ -674,7 +674,7 @@ DEPENDENCIES
   rails
   rails-erd
   redcarpet
-  rexml (>= 3.4.0)
+  rexml
   rspec-rails
   rubocop-factory_bot
   rubocop-govuk
