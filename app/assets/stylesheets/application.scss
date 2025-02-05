@@ -2,7 +2,7 @@
 // https://design.education.gov.uk/design-system/dfe-frontend
 // https://design-system.service.gov.uk/styles/colour/
 
-@import 'govuk-frontend/dist/govuk/all';
+@import 'govuk-frontend/dist/govuk/index';
 @import 'dfe-frontend/packages/dfefrontend';
 
 $light-blue: tint(govuk-organisation-colour('department-for-education'), 90%);
@@ -179,10 +179,6 @@ ul>li>ul>li {
 .form-container {
   padding: 30px;
   background: govuk-colour('light-grey');
-}
-
-.govuk-footer__copyright-logo {
-  display: none;
 }
 
 .white-space-pre-wrap {
