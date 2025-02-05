@@ -37,7 +37,7 @@
   }
 
   &.prompt-bg {
-    background-color: lighten(govuk-colour('turquoise'), 50%);
+    background-color: color.adjust(govuk-colour('turquoise'), $lightness: 50%);
   }
 
   &.prompt-home {

@@ -104,10 +104,10 @@
     max-width: 280px;
     width: 140px;
     height: auto;
-    border: lighten(govuk-colour('black'), 90%);
-    outline: govuk-spacing(1) solid lighten(govuk-colour('black'), 90%);
+    border: color.adjust(govuk-colour('black'), $lightness: 90%);
+    outline: govuk-spacing(1) solid color.adjust(govuk-colour('black'), $lightness: 90%);
     background: govuk-colour('white');
-    box-shadow: 0 2px 2px lighten(govuk-colour('black'), 60%);
+    box-shadow: 0 2px 2px color.adjust(govuk-colour('black'), $lightness: 60%);
     fill: govuk-colour('light-grey');
     stroke: govuk-colour('light-grey');
   }
