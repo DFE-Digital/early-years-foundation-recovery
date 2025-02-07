@@ -395,7 +395,7 @@ GEM
     public_suffix (6.0.1)
     puma (6.6.0)
       nio4r (~> 2.0)
-    que (2.4.0)
+    que (2.4.1)
     que-scheduler (5.1.0)
       activesupport (>= 6.0)
       fugit (~> 1.1, >= 1.1.8)
