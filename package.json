@@ -22,7 +22,7 @@
     "sass": "^1.85.0"
   },
   "devDependencies": {
-    "stylelint": "^16.9.0",
+    "stylelint": "^16.14.1",
     "stylelint-config-gds": "^2.0.0"
   },
   "stylelint": {
