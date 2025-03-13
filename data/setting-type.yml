@@ -12,7 +12,7 @@
 - id: nursery_local_authority
   name: Local authority maintained nursery school
   local_authority: true
-  role_type: other 
+  role_type: other
 - id: nursery_private
   name: Private nursery
   local_authority: true

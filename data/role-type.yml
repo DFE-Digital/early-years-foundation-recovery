@@ -5,8 +5,6 @@
   group: childminder
 
 # other ------------------------------------------------------------------------
-- name: Owner or director
-  group: other
 - name: Manager or team leader
   group: other
 - name: Practitioner
@@ -15,5 +13,7 @@
   group: other
 - name: Student or studying
   group: other
-- name: Trainer or lecturer
+- name: Reception teacher
+  group: other
+- name: Reception teaching assistant
   group: other
