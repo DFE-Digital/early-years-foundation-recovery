@@ -14,7 +14,7 @@
     "@hotwired/turbo-rails": "^8.0.12",
     "@stimulus-components/reveal": "^5.0.0",
     "accessible-autocomplete": "^3.0.1",
-    "axios": "^1.8.2",
+    "axios": "^1.8.3",
     "dfe-frontend": "^2.0.1",
     "esbuild": "^0.25.0",
     "govuk-frontend": "^5.8.0",
