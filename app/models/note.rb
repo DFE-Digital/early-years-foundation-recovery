@@ -6,7 +6,7 @@ class Note < ApplicationRecord
   scope :filled, -> { where.not(body: [nil, Types::EMPTY_STRING]) }
 
   def logged_at
-    created_at.to_date.strftime('%-d %B %Y')
+    updated_at.to_date.strftime('%-d %B %Y')
   end
 
   # @note blanks lines still counted
