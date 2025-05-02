@@ -41,6 +41,14 @@ resource "azurerm_postgresql_flexible_server_configuration" "psqlfs_config" {
   value     = "CITEXT,FUZZYSTRMATCH,PGCRYPTO,PLPGSQL,UUID-OSSP"
 }
 
+resource "azurerm_postgresql_flexible_server_configuration" "log_min_duration_statement" {
+  name      = "log_min_duration_statement"
+  server_id = azurerm_postgresql_flexible_server.psqlfs.id
+  # To enable: this is in milliseconds, update this to a positive value in milliseconds to enable this logging
+  # To disable: update this to -1
+  value = 5000
+}
+
 # Create Database
 resource "azurerm_postgresql_flexible_server_database" "psqldb" {
   name      = "${var.resource_name_prefix}-${random_pet.name.id}-psqldb"
