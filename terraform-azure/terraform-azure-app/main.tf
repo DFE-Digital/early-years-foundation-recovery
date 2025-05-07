@@ -8,12 +8,12 @@ resource "azurerm_container_group" "app_worker" {
   restart_policy      = "OnFailure"
 
   container {
-    name                  = var.container_name
-    image                 = "${var.app_worker_docker_registry}/${var.app_worker_docker_image}:${var.app_worker_docker_image_tag}"
-    cpu                   = "2.0"
-    memory                = "2.0"
-    environment_variables = var.app_worker_environment_variables
-    commands              = var.app_worker_startup_command
+    name                         = var.container_name
+    image                        = "${var.app_worker_docker_registry}/${var.app_worker_docker_image}:${var.app_worker_docker_image_tag}"
+    cpu                          = "2.0"
+    memory                       = "2.0"
+    secure_environment_variables = var.app_worker_environment_variables
+    commands                     = var.app_worker_startup_command
 
     ports {
       port     = 80
