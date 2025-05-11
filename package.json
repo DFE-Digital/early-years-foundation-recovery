@@ -19,7 +19,7 @@
     "esbuild": "^0.25.2",
     "govuk-frontend": "^5.8.0",
     "puppeteer": "^24.4.0",
-    "sass": "^1.85.1"
+    "sass": "^1.88.0"
   },
   "devDependencies": {
     "stylelint": "^16.9.0",
