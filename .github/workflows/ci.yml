@@ -26,6 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: test
     env:
+      ENVIRONMENT: test
       RAILS_ENV: test
       # https://github.com/DFE-Digital/early-years-foundation-recovery/settings/secrets/dependabot
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
