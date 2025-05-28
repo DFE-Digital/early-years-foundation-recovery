@@ -5,19 +5,15 @@
   group: childminder
 
 # other ------------------------------------------------------------------------
-- name: Owner or Director
+- name: Early years practitioner (including childminder, nursery assistant, play worker, nanny)
+  group: other
+- name: Reception teacher
+  group: other
+- name: Reception teaching assistant
   group: other
 - name: Manager or team leader
   group: other
-- name: Practitioner
+- name: Apprentice or trainee
   group: other
-- name: Trainee
+- name: Student
   group: other
-- name: Student or studying
-  group: other
-- name: Trainer or Lecturer
-  group: other
-#- name: Reception teacher
- # group: other
-#- name: Reception teaching assistant
- # group: other
