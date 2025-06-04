@@ -19,6 +19,7 @@ class ModuleProgress
   # @!attribute [r] summative_assessment
   #   @return [AssessmentProgress]
   option :summative_assessment, default: proc { AssessmentProgress.new(user: user, mod: mod) }
+  option :events_by_module_name, default: proc {nil}
 
   # @return [Float] Module completion
   def value
@@ -135,7 +136,13 @@ private
 
   # @return [Event::ActiveRecord_AssociationRelation]
   def module_page_events
-    training_module_events.where(name: 'module_content_page')
+    @training_module_events ||= begin
+    if events_by_module_name
+      events_by_module_name[mod.name] || []
+    else
+      user.events.where_properties(training_module_id: mod.name)
+    end
+    end
   end
 
   # @param key [String] module_start, module_complete
