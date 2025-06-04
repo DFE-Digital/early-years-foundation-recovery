@@ -52,6 +52,7 @@ RSpec.describe 'Module overview page progress' do
   context 'when the module intro is reached' do
     before do
       start_module(alpha)
+      visit '/modules/alpha/content-pages/1-1'
       visit '/modules/alpha'
     end
 
@@ -63,6 +64,7 @@ RSpec.describe 'Module overview page progress' do
   context 'when the first submodule intro is reached' do
     before do
       start_module(alpha)
+      visit '/modules/alpha/content-pages/1-1'
       visit '/modules/alpha'
     end
 
@@ -201,6 +203,39 @@ RSpec.describe 'Module overview page progress' do
       within '#section-content-4' do
         expect(page).to have_content 'complete', count: 1
       end
+    end
+  end
+
+  context 'when controller logic for progress decorator is applied' do
+    before do
+      visit '/modules/alpha'
+    end
+
+    it 'displays the correct number of decorated progress indicators' do
+      expect(page).to have_selector('.progress-indicator', minimum: 9) # Adjust this if needed
+    end
+
+    it 'shows "not started" progress pulled from decorator logic' do
+      within '#section-content-1' do
+        expect(page).to have_content 'not started'
+      end
+    end
+  end
+
+  context 'when user progress influences visible content' do
+    before do
+      view_pages_upto alpha, 'topic_intro', 3
+      visit '/modules/alpha'
+    end
+
+    it 'shows "in progress" state, proving controller calculated progress' do
+      within '#section-content-1' do
+        expect(page).to have_content 'in progress'
+      end
+    end
+
+    it 'shows correct Resume link from progress' do
+      expect(page).to have_link 'Resume module', href: '/modules/alpha/content-pages/1-1-3'
     end
   end
 end
