@@ -1,8 +1,7 @@
 require 'rails_helper'
-
+EventStub = Struct.new(:name, :properties, :time)
 describe 'LinkHelper', type: :helper do
   let(:mod) { Training::Module.ordered.first }
-
   let(:user) { create(:user, :registered) }
 
   before do
@@ -113,7 +112,7 @@ describe 'LinkHelper', type: :helper do
       before do
         create :assessment, :passed, user: user, training_module: mod.name
 
-        mod.summative_questions.map do |question|
+        mod.summative_questions.each do |question|
           create :response, user: user,
                             training_module: mod.name,
                             question_name: question.name,
@@ -141,28 +140,43 @@ describe 'LinkHelper', type: :helper do
 
     let(:user) { create :user, :registered }
 
-    let(:module_progress) do
-      ModuleOverviewDecorator.new ModuleProgress.new(user: user, mod: mod)
-    end
-
     context 'with no activity' do
+      let(:module_progress) do
+        ModuleOverviewDecorator.new(ModuleProgress.new(user: user, mod: mod, user_module_events: []))
+      end
+
       it 'targets the interruption page' do
         expect(link).to eq ['Start module', '/modules/alpha/content-pages/what-to-expect']
       end
     end
 
     context 'with progress' do
-      include_context 'with progress'
+      let(:now) { Time.zone.now }
+      let(:user_module_events) do
+        [
+          EventStub.new('page_view', { 'training_module_id' => 'alpha', 'id' => 'what-to-expect' }, now - 6.minutes),
+          EventStub.new('module_start', { 'training_module_id' => 'alpha', 'id' => '1-1' }, now - 5.minutes),
+          EventStub.new('page_view', { 'training_module_id' => 'alpha', 'id' => '1-1-1' }, now - 4.minutes),
+          EventStub.new('page_view', { 'training_module_id' => 'alpha', 'id' => '1-1-2' }, now - 3.minutes),
+          EventStub.new('page_view', { 'training_module_id' => 'alpha', 'id' => '1-1-3' }, now - 2.minutes),
+          EventStub.new('page_view', { 'training_module_id' => 'alpha', 'id' => '1-1-3-1' }, now - 1.minute),
+        ]
+      end
+
+      let(:module_progress) do
+        ModuleOverviewDecorator.new(ModuleProgress.new(user: user, mod: mod, user_module_events: user_module_events))
+      end
 
       it 'targets the most recently visited page' do
-        start_first_topic(mod)
-        expect(link).to eq ['Resume module', '/modules/alpha/content-pages/1-1-1']
-        start_second_submodule(mod)
-        expect(link).to eq ['Resume module', '/modules/alpha/content-pages/1-1-1']
+        expect(link).to eq ['Resume module', '/modules/alpha/content-pages/1-1-3-1']
       end
     end
 
     context 'with failed assessment' do
+      let(:module_progress) do
+        ModuleOverviewDecorator.new(ModuleProgress.new(user: user, mod: mod, user_module_events: []))
+      end
+
       before do
         create :assessment, :failed, user: user, training_module: mod.name
       end

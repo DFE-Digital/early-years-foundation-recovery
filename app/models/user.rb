@@ -295,6 +295,7 @@ class User < ApplicationRecord
   end
 
   # @return [CourseProgress] course activity query interface
+  # OPTIMIZE: this is a heavy object, consider caching user events here for course progress to use in moduleprogress
   def course
     @course ||= CourseProgress.new(user: self)
   end
