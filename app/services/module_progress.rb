@@ -137,11 +137,11 @@ private
   # @return [Event::ActiveRecord_AssociationRelation]
   def module_page_events
     @training_module_events ||= begin
-    if events_by_module_name
-      events_by_module_name[mod.name] || []
-    else
-      user.events.where_properties(training_module_id: mod.name)
-    end
+      if events_by_module_name
+        events_by_module_name[mod.name] || []
+      else
+        user.events.where_properties(training_module_id: mod.name)
+      end
     end
   end
 
