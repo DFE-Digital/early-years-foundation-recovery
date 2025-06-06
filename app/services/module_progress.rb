@@ -22,7 +22,7 @@ class ModuleProgress
   def initialize(mod:, events:, assessment:)
     @mod = mod
     @training_module_events = events
-    @summative_assessment = assessment
+    @summative_assessment = AssessmentProgress.new(mod: mod, assessment: assessment)
   end
 
   # @return [Float] Module completion
