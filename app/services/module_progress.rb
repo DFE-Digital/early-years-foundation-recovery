@@ -8,17 +8,22 @@
 #   - the furthest page visited
 #
 class ModuleProgress
-  extend Dry::Initializer
+  # extend Dry::Initializer
 
   # @!attribute [r] user
   #   @return [User]
-  option :user, Types.Instance(User), required: true
+  # option :user, Types.Instance(User), required: true
   # @!attribute [r] mod
   #   @return [Training::Module]
-  option :mod, Types::TrainingModule, required: true
+  # option :mod, Types::TrainingModule, required: true
   # @!attribute [r] summative_assessment
   #   @return [AssessmentProgress]
-  option :summative_assessment, default: proc { AssessmentProgress.new(user: user, mod: mod) }
+  # option :summative_assessment, default: proc { AssessmentProgress.new(user: user, mod: mod) }
+  def initialize(mod:, events:, assessment:)
+    @mod = mod
+    @training_module_events = events
+    @summative_assessment = assessment
+  end
 
   # @return [Float] Module completion
   def value
@@ -114,6 +119,8 @@ protected
 
 private
 
+  attr_reader :mod, :training_module_events, :summative_assessment
+
   # @param method [Symbol]
   # @param content [Array<Training::Page, Training::Question, Training::Video>]
   #
@@ -125,22 +132,17 @@ private
   # @param name [String]
   # @return [Integer]
   def content_events_count(name)
-    training_module_events.where_properties(id: name).count
-  end
-
-  # @return [Event::ActiveRecord_AssociationRelation]
-  def training_module_events
-    user.events.where_properties(training_module_id: mod.name)
+    training_module_events.count { |e| e.id == name }
   end
 
   # @return [Event::ActiveRecord_AssociationRelation]
   def module_page_events
-    training_module_events.where(name: 'module_content_page')
+    training_module_events.select { |e| e.name == 'module_content_page' }
   end
 
   # @param key [String] module_start, module_complete
   # @return [Event]
   def key_event(key)
-    training_module_events.where(name: key).first
+    training_module_events.detect { |e| e.name == key }
   end
 end

@@ -13,20 +13,20 @@
 
 = render 'cms_debug'
 
-- if current_user.course.completed_all_modules?
+- if @course.completed_all_modules?
   #started.govuk-grid-row
     .govuk-grid-column-full
       p = t('my_learning.completed_all_modules')
 - else
-  = render 'in_progress_modules'
+  = render 'in_progress_modules', course: @course
 
-  - if current_user.course.available_modules.any? || current_user.course.course_completed?
-    = render 'available_modules'
+  - if @course.available_modules.any? || @course.course_completed?
+    = render 'available_modules', course: @course
 
-  - if current_user.course.upcoming_modules.any?
-    = render 'upcoming_modules'
+  - if @course.upcoming_modules.any?
+    = render 'upcoming_modules', course: @course
 
-- if current_user.course.completed_modules.any?
-  = render 'completed_modules'
+- if @course.completed_modules.any?
+  = render 'completed_modules', course: @course
 
 = render 'debug'

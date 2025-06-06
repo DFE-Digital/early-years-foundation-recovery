@@ -13,8 +13,8 @@ module ContentHelper
 
   # Date format guidelines: "1 June 2002"
   # @return [String]
-  def completed_modules_table
-    mods = current_user.course.completed_modules
+  def completed_modules_table course
+    mods = course.completed_modules
     header = ['Module name', 'Date completed', 'Actions']
     rows = mods.map do |mod, timestamp|
       [

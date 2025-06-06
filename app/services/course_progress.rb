@@ -1,7 +1,10 @@
 # User's course progress and module state used on the 'My modules' page
 #
 class CourseProgress
-  extend Dry::Initializer
+  def initialize(events, assessments)
+    @events = events
+    @assessments = assessments
+  end
 
   option :user, required: true
 
@@ -100,12 +103,14 @@ private
 
   # @return [ModuleProgress]
   def module_progress(mod)
-    ModuleProgress.new(user: user, mod: mod)
+    ModuleProgress.new(mod: mod,
+                       events: @events.select { |e| e.training_module_id == mod.name },
+                       assessment: @assessments.sort_by { |a| a.started_at }.reverse.detect { |a| a.training_module = mod.name })
   end
 
   # @param module_id [String] training module name
   # @return [Event::ActiveRecord_AssociationRelation]
-  def training_module_events(module_id)
-    user.events.where_properties(training_module_id: module_id)
-  end
+  # def training_module_events(module_id)
+  #   @events.where_properties(training_module_id: module_id)
+  # end
 end

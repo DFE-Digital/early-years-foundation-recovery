@@ -2,17 +2,22 @@
 #
 # An assessment is created when the first summative question is answered?
 class AssessmentProgress
-  extend Dry::Initializer
+  # extend Dry::Initializer
 
   # @return [Float]
   THRESHOLD = 70.0
 
   # @!attribute [r] user
   #   @return [User]
-  option :user, Types.Instance(User), required: true
+  # option :user, Types.Instance(User), required: true
   # @!attribute [r] mod
   #   @return [Training::Module]
-  option :mod, Types::TrainingModule, required: true
+  # option :mod, Types::TrainingModule, required: true
+
+  def initialize(mod:, assessment:)
+    @mod = mod
+    @assessment = assessment
+  end
 
   # @see Training::ResponsesController#redirect
   #
@@ -72,8 +77,12 @@ class AssessmentProgress
     assessment_responses.select(&:correct?)
   end
 
+  private
+
+  attr_reader :mod, :assessment
+
   # @return [Assessment]
-  def assessment
-    @assessment ||= user.assessments.where(training_module: mod.name).order(:started_at).last
-  end
+  # def assessment
+  #   @assessment ||= user.assessments.where(training_module: mod.name).order(:started_at).last
+  # end
 end
