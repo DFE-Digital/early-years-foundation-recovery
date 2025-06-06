@@ -6,7 +6,7 @@ class CourseProgress
     @assessments = assessments
   end
 
-  option :user, required: true
+  # option :user, required: true
 
   # @return [Array<Training::Module>] 'Modules in progress' section
   def current_modules
