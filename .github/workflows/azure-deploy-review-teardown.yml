@@ -30,11 +30,15 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+      # # Clear Azure cli account cache
+      # - name: Clear Azure CLI account cache
+      #   run: az account clear
+
       # Destroy Web Application
       - name: Destroy Azure Web Application
         uses: azure/CLI@v2
         with:
-          azcliversion: 2.50.0
+          azcliversion: 2.51.0
           inlineScript: |
             az webapp deployment slot delete --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.REVIEWAPP_NAME }} \
