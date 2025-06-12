@@ -1,5 +1,3 @@
-# OPTIMIZE: N+1 query
-#
 # Overall module progress:
 #   - whether a page was visited
 #   - whether any/all/no pages in a section were visited
@@ -8,17 +6,18 @@
 #   - the furthest page visited
 #
 class ModuleProgress
-  extend Dry::Initializer
+  attr_reader :user, :mod, :user_module_events, :events
 
-  # @!attribute [r] user
-  #   @return [User]
-  option :user, Types.Instance(User), required: true
-  # @!attribute [r] mod
-  #   @return [Training::Module]
-  option :mod, Types::TrainingModule, required: true
-  # @!attribute [r] summative_assessment
-  #   @return [AssessmentProgress]
-  option :summative_assessment, default: proc { AssessmentProgress.new(user: user, mod: mod) }
+  # @param user [User]
+  # @param mod [Training::Module]
+  def initialize(user:, mod:, user_module_events:)
+    @user = user
+    @mod = mod
+    @events_by_module_name = user_module_events
+      .select { |e| e.properties['training_module_id'].present? }
+      .group_by { |e| e.properties['training_module_id'].to_s }
+    @summative_assessment = AssessmentProgress.new(user: user, mod: mod)
+  end
 
   # @return [Float] Module completion
   def value
@@ -93,13 +92,13 @@ protected
   # @see AssessmentProgress
   # @return [Boolean]
   def failed_attempt?
-    summative_assessment.attempted? && summative_assessment.failed?
+    @summative_assessment.attempted? && @summative_assessment.failed?
   end
 
   # @see AssessmentProgress
   # @return [Boolean]
   def successful_attempt?
-    summative_assessment.passed?
+    @summative_assessment.passed?
   end
 
   # @return [Array<Training::Page, Training::Question, Training::Video>]
@@ -125,22 +124,22 @@ private
   # @param name [String]
   # @return [Integer]
   def content_events_count(name)
-    training_module_events.where_properties(id: name).count
+    module_page_events.count { |event| event.properties['id'] == name }
   end
 
   # @return [Event::ActiveRecord_AssociationRelation]
-  def training_module_events
-    user.events.where_properties(training_module_id: mod.name)
-  end
-
-  # @return [Event::ActiveRecord_AssociationRelation]
+  # @note This method is used to fetch events for the current module.
   def module_page_events
-    training_module_events.where(name: 'module_content_page')
+    @module_page_events ||= if @events_by_module_name
+                              @events_by_module_name[mod.name] || []
+                            else
+                              user.events.where_properties(training_module_id: mod.name)
+                            end
   end
 
   # @param key [String] module_start, module_complete
   # @return [Event]
   def key_event(key)
-    training_module_events.where(name: key).first
+    module_page_events.find { |event| event.name == key }
   end
 end

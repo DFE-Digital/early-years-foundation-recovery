@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ModuleDebugDecorator do
   subject(:decorator) { described_class.new(progress) }
 
-  let(:progress) { ModuleProgress.new(user: user, mod: bravo) }
+  let(:progress) { ModuleProgress.new(user: user, mod: bravo, user_module_events: []) }
   let(:bravo) { Training::Module.by_name('bravo') }
   let(:user) { create(:user, :registered) }
 
