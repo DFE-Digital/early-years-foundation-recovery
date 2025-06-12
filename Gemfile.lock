@@ -321,7 +321,7 @@ GEM
     multi_json (1.15.0)
     net-http (0.4.1)
       uri
-    net-imap (0.5.7)
+    net-imap (0.5.8)
       date
       net-protocol
     net-pop (0.1.2)
@@ -403,7 +403,7 @@ GEM
       que (>= 0.14, < 3.0.0)
     raabro (1.4.0)
     racc (1.8.1)
-    rack (3.1.14)
+    rack (3.1.16)
     rack-mini-profiler (3.3.1)
       rack (>= 1.2.0)
     rack-oauth2 (2.2.1)
