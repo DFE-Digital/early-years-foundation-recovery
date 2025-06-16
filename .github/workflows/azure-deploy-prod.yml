@@ -95,7 +95,7 @@ jobs:
       - name: Destroy existing Azure Container Instances
         uses: azure/CLI@v2
         with:
-          azcliversion: 2.50.0
+          azcliversion: 2.74.0
           inlineScript: |
             az container delete --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.WORKERAPP_NAME }} \
@@ -105,11 +105,12 @@ jobs:
       - name: Deploy to Azure Container Instances
         uses: azure/CLI@v2
         with:
-          azcliversion: 2.50.0
+          azcliversion: 2.74.0
           inlineScript: |
             az container create --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.WORKERAPP_NAME }} \
               --image ${{ env.DOCKER_IMAGE }}:${{ inputs.version || github.ref_name }} \
+              --os type Linux \
               --cpu 2 \
               --memory 2 \
               --command-line "que" \
