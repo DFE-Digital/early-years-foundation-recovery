@@ -38,8 +38,10 @@ module ApplicationHelper
 
   # @param mod [Training::Module]
   # @return [ModuleProgress]
+  # TODO: optimise this method is called multiple times per module, consider caching/grouping
   def module_progress_service(mod)
-    ModuleProgress.new(user: current_user, mod: mod)
+    user_module_events = current_user.events.where_properties(training_module_id: mod.name)
+    ModuleProgress.new(user: current_user, mod: mod, user_module_events: user_module_events)
   end
 
   # @return [Boolean]

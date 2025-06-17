@@ -100,7 +100,8 @@ private
 
   # @return [ModuleProgress]
   def module_progress(mod)
-    ModuleProgress.new(user: user, mod: mod)
+    @module_progresses ||= {}
+    @module_progresses[mod.name] ||= ModuleProgress.new(user: user, mod: mod, user_module_events: user.events.where_properties(training_module_id: mod.name))
   end
 
   # @param module_id [String] training module name
