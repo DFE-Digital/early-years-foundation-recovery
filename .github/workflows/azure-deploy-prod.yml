@@ -110,7 +110,7 @@ jobs:
             az container create --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.WORKERAPP_NAME }} \
               --image ${{ env.DOCKER_IMAGE }}:${{ inputs.version || github.ref_name }} \
-              --os type Linux \
+              --os-type Linux \
               --cpu 2 \
               --memory 2 \
               --command-line "que" \
