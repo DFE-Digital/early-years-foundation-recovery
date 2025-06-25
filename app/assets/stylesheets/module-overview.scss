@@ -64,19 +64,22 @@ $progress-bar-container-width: 81px;
   }
 
   .module-section--container {
-    display: grid;
-    grid-template-columns: auto 139px;
-    gap: 7px;
     margin-left: 10px;
     margin-right: 10px;
-    
-    .progress-indicator {
-      margin-left: auto;
-    }
   }
 }
 
-section.completed {
+.module-section--list {
+  list-style-type: square;
+  padding-left: 20px;
+  margin: 0;
+
+  @include govuk-media-query($until: tablet) {
+    padding-left: 15px;
+  }
+}
+
+.completed-section {
   background-color: govuk-colour('light-grey');
   border-radius: 6px;
   padding: govuk-spacing(7);
@@ -92,26 +95,27 @@ section.completed {
 
 .module-section--item {
   font-size: 1.1875rem;
+  display: list-item;
+  margin-bottom: 8px;
+  position: relative;
+  padding-right: 150px;
 
-  ul {
-    list-style-type: disc;
-    padding-left: 15px;
-    margin-bottom: 0;
-
-    @include govuk-media-query($until: tablet) {
-      padding-left: 10px;
-    }
+  @include govuk-media-query($until: tablet) {
+    font-size: 1rem;
+    padding-right: 120px; 
   }
 
-  li {
-    list-style: square;
+  &:last-child {
+    margin-bottom: 0;
   }
 
-  ul > li:last-child {
-    margin-bottom: 0;
+  .progress-indicator {
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 }
 
-#module-call-to-action {
+.module-call-to-action {
   @include govuk-responsive-margin(8, 'top');
 }
