@@ -11,6 +11,7 @@ section.module-overview--section
       span.module-section--pages = page_count
     p.govuk-body This section of this module includes:
     .module-section--container
-      - subsections.each do |subsection|
-        = render 'subsection', **subsection
+      ul.module-section--list
+        - subsections.each do |subsection|
+          = render 'subsection', **subsection
     hr.govuk-section-break.govuk-section-break--m.govuk-section-break--visible
