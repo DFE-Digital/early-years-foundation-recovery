@@ -3,4 +3,4 @@
     .govuk-grid-column-full
       - flash.each do |variant, message|
         - unless %w{timedout}.include?(variant)
-          = govuk_notification_banner title_text: t("banners.#{variant}"), text: m(message), success: %w[notice].include?(variant), classes: "govuk-notification-banner--#{variant}"
+          = govuk_notification_banner title_text: t("banners.#{variant}"), disable_auto_focus: true, text: m(message), success: %w[notice].include?(variant), classes: "govuk-notification-banner--#{variant}"
