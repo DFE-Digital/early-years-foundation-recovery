@@ -9,7 +9,7 @@ RSpec.describe 'Registration' do
     visit '/registration/terms-and-conditions/edit'
   end
 
-  it 'can be completed' do
+  it 'can be completed when other setting is chosen' do
     # T&Cs
     expect(page).to have_current_path '/registration/terms-and-conditions/edit'
     expect(page).to have_text 'Terms and conditions'
@@ -46,12 +46,6 @@ RSpec.describe 'Registration' do
       .and have_text('Enter the type of setting or organisation where you work.')
     fill_in 'user-setting-type-other-field', with: 'user defined setting type'
     click_button 'Continue'
-
-    # Local authority
-    expect(page).to have_current_path '/registration/local-authority/edit'
-    expect(page).to have_text('What local authority area do you work in?')
-      .and have_text('This could be your county council, district council or London borough.')
-    click_link 'I work across more than one local authority'
 
     # Role
     expect(page).to have_current_path '/registration/role-type/edit'
@@ -91,5 +85,47 @@ RSpec.describe 'Registration' do
 
     # End
     expect(page).to have_text 'Thank you for creating an Early years child development training account. You can now start your first module.'
+  end
+
+  it 'can be completed with a standard setting that requires local authority' do
+    visit '/registration/terms-and-conditions/edit'
+
+    # T&Cs
+    check 'I confirm that I accept the terms and conditions and privacy policy.'
+    click_button 'Continue'
+
+    # Name
+    fill_in 'First name', with: 'John'
+    fill_in 'Surname', with: 'Smith'
+    click_button 'Continue'
+
+    # Setting
+    expect(page).to have_current_path '/registration/setting-type/edit'
+    select 'Local authority maintained nursery school', from: 'user[setting_type_id]'
+    click_button 'Continue'
+
+    # Local authority
+    expect(page).to have_current_path '/registration/local-authority/edit'
+    expect(page).to have_text('What local authority area do you work in?')
+      .and have_text('This could be your county council, district council or London borough.')
+    click_link 'I work across more than one local authority'
+
+    # Role
+    expect(page).to have_current_path '/registration/role-type/edit'
+    choose 'Student'
+    click_button 'Continue'
+
+    # Years experience
+    expect(page).to have_current_path '/registration/early-years-experience/edit'
+    choose 'Less than 2 years'
+    click_button 'Continue'
+
+    # Email preference
+    expect(page).to have_current_path '/registration/training-emails/edit'
+    choose 'Send me email updates about this training course'
+    click_button 'Continue'
+
+    # End
+    expect(page).to have_text 'Thank you for creating an Early years child development training account'
   end
 end
