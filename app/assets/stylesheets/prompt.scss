@@ -2,34 +2,47 @@
   background-color: govuk-colour('light-grey');
   border-top: govuk-colour('turquoise') solid govuk-spacing(2);
   margin: govuk-spacing(5) govuk-spacing(0);
-  padding-left: govuk-spacing(4);
-  padding-right: govuk-spacing(4);
+  padding: govuk-spacing(4);
+
+  .govuk-grid-row {
+    display: flex;
+    align-items: flex-start;
+    gap: govuk-spacing(3);
+    
+    @include govuk-media-query($from: tablet) {
+      gap: govuk-spacing(4);
+    }
+  }
+
+  .govuk-grid-column-one-quarter {
+    flex: 0 0 auto;
+    width: auto;
+    padding: 0;
+    margin: 0;
+    
+    position: relative;
+    top: govuk-spacing(-2);
+  }
+
+  .govuk-grid-column-three-quarters {
+    flex: 1;
+    padding: govuk-spacing(3);
+    margin: 0;
+    min-width: 0; 
+  }
 
   .svg-inline--fa {
     background-color: govuk-colour('turquoise');
     color: govuk-colour('white');
     padding: govuk-spacing(4) !important;
-    position: relative;
     display: inline-block;
     width: 32px;
-    top: govuk-spacing(-3);
-    left: govuk-spacing(-6);
-  }
-
-  .govuk-grid-column-one-quarter {
-    margin-right: -120px;
-  }
-
-  .govuk-grid-column-three-quarters {
-    padding: govuk-spacing(3);
+    position: relative;
     
-    // OPTIMIZE: change to use media query
-    @media(min-width: 40em) and (max-width: 61.5em) {
-      padding-left: govuk-spacing(7);
-    }
+    top: 0;
+    left: 0;
   }
 
-  // change to use media query
   .small-screen-padding-right {
     @media(max-width: 40.0625em) {
       padding-right: govuk-spacing(4);
@@ -43,12 +56,6 @@
   &.prompt-home {
     background: $light-blue;
     border-top: govuk-organisation-colour('department-for-education') solid govuk-spacing(2);
-
-    .govuk-grid-column-one-quarter {
-      @include govuk-media-query($from: desktop) {
-        margin-right: -220px;
-      }
-    }
 
     .svg-inline--fa {
       background-color: govuk-organisation-colour('department-for-education') !important;
