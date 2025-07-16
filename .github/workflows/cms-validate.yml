@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: test
     env:
+      ENVIRONMENT: test
       RAILS_ENV: test
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
       CONTENTFUL_ENVIRONMENT: ${{ inputs.alias }}
