@@ -8,7 +8,7 @@
     = form_for form, url: registration_setting_type_path, method: :patch do |f|
       = f.govuk_error_summary
 
-      = f.govuk_fieldset legend: { text: t('register_setting.heading') }, aria: { required: true } do
+      = f.govuk_fieldset legend: { text: t('register_setting.heading') } do
         = f.select_trainee_setting
 
         p.govuk_body

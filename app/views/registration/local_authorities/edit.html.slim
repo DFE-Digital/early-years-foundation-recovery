@@ -8,7 +8,7 @@
     = form_for form, url: registration_local_authority_path, method: :patch do |f|
       = f.govuk_error_summary
 
-      = f.govuk_fieldset legend: { text: t('register_authority.heading') }, aria: { required: true } do
+      = f.govuk_fieldset legend: { text: t('register_authority.heading') } do
         = f.select_trainee_authority
 
         p.govuk_body

@@ -8,7 +8,7 @@
     = form_for form, url: registration_role_type_path, method: :patch do |f|
       = f.govuk_error_summary
 
-      = f.govuk_fieldset legend: { text: t('register_role.heading') }, aria: { required: true } do
+      = f.govuk_fieldset legend: { text: t('register_role.heading') } do
         .data-hj-suppress
           = f.govuk_collection_radio_buttons :role_type, form.role_types, :name, :name, legend: { text: t('register_role.label'), class: 'govuk-visually-hidden' }, hint_method: :hint_text, form_group: { classes: %w[data-hj-suppress] }
 
