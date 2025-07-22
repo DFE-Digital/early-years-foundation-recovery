@@ -44,6 +44,9 @@ private
 
   # @return [Integer]
   def section_total
-    content.parent.content_sections.size
+    content.parent.content_sections.count do |(_, content_items)|
+      first_item = content_items.first
+      !first_item.feedback_question?
+    end
   end
 end

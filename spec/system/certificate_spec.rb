@@ -6,7 +6,7 @@ RSpec.describe 'Certificate' do
 
   context 'when module is not completed' do
     before do
-      visit '/modules/alpha/content-pages/1-3-4'
+      visit '/modules/bravo/content-pages/1-3-4'
     end
 
     it 'does not show completion date' do
@@ -26,8 +26,8 @@ RSpec.describe 'Certificate' do
   context 'when module is completed' do
     before do
       travel_to Time.zone.parse('2022-06-30') do
-        complete_module(alpha)
-        visit '/modules/alpha/content-pages/1-3-4'
+        complete_module(bravo)
+        visit '/modules/bravo/content-pages/1-3-4'
       end
     end
 
