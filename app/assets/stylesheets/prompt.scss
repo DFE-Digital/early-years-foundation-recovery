@@ -18,14 +18,22 @@
 
   .govuk-grid-column-one-quarter {
     margin-right: -120px;
+
+    @media (max-width: 320px) {
+      margin-right: 0;
+    }
   }
 
   .govuk-grid-column-three-quarters {
     padding: govuk-spacing(3);
-    
+
     // OPTIMIZE: change to use media query
     @media(min-width: 40em) and (max-width: 61.5em) {
       padding-left: govuk-spacing(7);
+    }
+
+    @media (max-width: 320px) {
+      padding: govuk-spacing(2);
     }
   }
 
@@ -47,6 +55,10 @@
     .govuk-grid-column-one-quarter {
       @include govuk-media-query($from: desktop) {
         margin-right: -220px;
+      }
+
+      @media (max-width: 320px) {
+        margin-right: 0;
       }
     }
 

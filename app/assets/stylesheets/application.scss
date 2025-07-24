@@ -159,6 +159,10 @@ abbr {
 .accordion-section-left-column {
   display: inline-block;
   max-width: calc(100% - 142px);
+
+  @media (max-width: 320px) {
+    max-width: calc(100% - 60px);
+  }
 }
 
 // nested bullets (level 2) to be unfilled circles
