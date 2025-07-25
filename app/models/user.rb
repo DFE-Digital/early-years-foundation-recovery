@@ -350,7 +350,7 @@ class User < ApplicationRecord
   def role_type_required?
     return false unless setting_type_id
     return false unless registration_complete?
-    return true if setting_other?
+
     return false unless setting_valid?
 
     true if select_new_role?

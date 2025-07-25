@@ -32,7 +32,7 @@ RSpec.describe Registration::SettingTypeOthersController, type: :controller do
     describe 'POST #update' do
       it 'succeeds' do
         post :update, params: { user: { setting_type_other: 'User defined setting type' } }
-        expect(response).to redirect_to edit_registration_local_authority_path
+        expect(response).to redirect_to edit_registration_role_type_path
         expect(user.reload.setting_type_other).to eq 'User defined setting type'
         expect(user.reload.setting_type_id).to eq 'other'
       end
