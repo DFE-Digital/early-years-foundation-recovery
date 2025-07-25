@@ -1,16 +1,32 @@
 # childminder ------------------------------------------------------------------
 - id: childminder_agency
-  name: Childminder as part of an agency
+  name: Childminder (agency)
   local_authority: true
   role_type: childminder
 - id: childminder_independent
-  name: Independent childminder
+  name: Childminder (independent)
+  local_authority: true
+  role_type: childminder
+- id: childminding_assistant
+  name: Childminding assistant
+  local_authority: true
+  role_type: childminder
+- id: daycare_childminder
+  name: Daycare (childminder)
+  local_authority: true
+  role_type: childminder
+- id: home_childminder
+  name: Home
+  local_authority: true
+  role_type: childminder
+- id: home_based_childminder
+  name: Home-based
   local_authority: true
   role_type: childminder
 
 # other ------------------------------------------------------------------------
 - id: nursery_local_authority
-  name: Local authority maintained nursery school
+  name: Nursery school (local authority maintained)
   local_authority: true
   role_type: other
 - id: nursery_private
@@ -29,6 +45,34 @@
   name: Preschool
   local_authority: true
   role_type: other
+- id: preschool_attached_to_school
+  name: Preschool (attached to school)
+  local_authority: true
+  role_type: other
+- id: preschool_local_authority_maintained
+  name: Preschool (local authority maintained)
+  local_authority: true
+  role_type: other
+- id: preschool_other
+  name: Preschool (private, voluntary, independent)
+  local_authority: true
+  role_type: other
+- id: nursery_attached_to_school
+  name: Nursery (attached to a school)
+  local_authority: true
+  role_type: other
+- id: nursery
+  name: Nursery
+  local_authority: true
+  role_type: other
+- id: nursery_other
+  name: Nursery (private, voluntary, independent)
+  local_authority: true
+  role_type: other
+- id: kindergarten
+  name: Kindergarten
+  local_authority: true
+  role_type: other
 - id: playgroup
   name: Playgroup
   local_authority: true
@@ -37,8 +81,20 @@
   name: Childcare centre
   local_authority: true
   role_type: other
-- id: nursery_attached_to_school
-  name: Nursery attached to a school
+- id: daycare_nursery
+  name: Daycare (nursery)
+  local_authority: true
+  role_type: other
+- id: supply_early_years_la_maintained_nursery_school
+  name: Supply early years (LA maintained nursery school)
+  local_authority: true
+  role_type: other
+- id: supply_early_years_nursery_attached_to_school
+  name: Supply early years (nursery attached to a school)
+  local_authority: true
+  role_type: other
+- id: supply_early_years_other
+  name: Supply early years (private, voluntary, independent)
   local_authority: true
   role_type: other
 - id: free_school
@@ -53,6 +109,50 @@
   name: Academy
   local_authority: true
   role_type: other
+- id: academy_trust
+  name: Academy trust
+  local_authority: true
+  role_type: other
+- id: multi_academy_trust
+  name: Multi-Academy trust
+  local_authority: true
+  role_type: other
+- id: infant_school
+  name: Infant school
+  local_authority: true
+  role_type: other
+- id: reception_class
+  name: Reception class
+  local_authority: true
+  role_type: other
+- id: early_years_reception_class
+  name: Early years reception class
+  local_authority: true
+  role_type: other
+- id: combined_pre_reception_reception_class
+  name: Combined pre-reception and reception class
+  local_authority: true
+  role_type: other
+- id: independent_school
+  name: Independent school
+  local_authority: true
+  role_type: other
+- id: primary_school
+  name: Primary school
+  local_authority: true
+  role_type: other
+- id: school
+  name: School
+  local_authority: true
+  role_type: other
+- id: supply_school
+  name: Supply (school)
+  local_authority: true
+  role_type: other
+- id: supply_early_years
+  name: Supply (early years)
+  local_authority: true
+  role_type: other
 
 # none -------------------------------------------------------------------------
 - id: training_provider
@@ -60,7 +160,7 @@
   local_authority: false
   role_type: none
 - id: central_government
-  name: Central government
+  name: Government (central)
   local_authority: false
   role_type: none
 - id: department_for_education
@@ -68,6 +168,110 @@
   local_authority: false
   role_type: none
 - id: local_authority
-  name: Local authority
+  name: Local authority (LA)
+  local_authority: true
+  role_type: none
+- id: unemployed
+  name: Unemployed
+  local_authority: true
+  role_type: none
+- id: baby_and_toddler_group
+  name: Baby and toddler group
+  local_authority: true
+  role_type: none
+- id: childcare
+  name: Childcare
+  local_authority: true
+  role_type: none
+- id: before_and_or_after_school_club
+  name: Before and/or after school club
+  local_authority: true
+  role_type: none
+- id: breakfast_and_or_after_school_club
+  name: Breakfast and/or after school club
+  local_authority: true
+  role_type: none
+- id: out_of_school_club
+  name: Out of school club
+  local_authority: true
+  role_type: none
+- id: care_home_care_agency
+  name: Care home / Care agency
+  local_authority: true
+  role_type: none
+- id: childrens_services
+  name: Children's services
+  local_authority: true
+  role_type: none
+- id: childrens_social_care
+  name: Children's social care
+  local_authority: true
+  role_type: none
+- id: social_care
+  name: Social care
+  local_authority: true
+  role_type: none
+- id: healthcare
+  name: Healthcare
+  local_authority: true
+  role_type: none
+- id: hospital
+  name: Hospital
+  local_authority: true
+  role_type: none
+- id: nhs
+  name: NHS
+  local_authority: true
+  role_type: none
+- id: family_services
+  name: Family services
+  local_authority: true
+  role_type: none
+- id: family_hub
+  name: Family hub
+  local_authority: true
+  role_type: none
+- id: support_work
+  name: Support work
+  local_authority: true
+  role_type: none
+- id: charity
+  name: Charity
+  local_authority: true
+  role_type: none
+- id: family_support
+  name: Family support
+  local_authority: true
+  role_type: none
+- id: foster_care
+  name: Foster care
+  local_authority: true
+  role_type: none
+- id: community_setting
+  name: Community setting
+  local_authority: true
+  role_type: none
+- id: education
+  name: Education
+  local_authority: true
+  role_type: none
+- id: university
+  name: University
+  local_authority: true
+  role_type: none
+- id: college
+  name: college
+  local_authority: true
+  role_type: none
+- id: government_local
+  name: Government (local)
+  local_authority: true
+  role_type: none
+- id: local_council
+  name: Local council
+  local_authority: true
+  role_type: none
+- id: private_company
+  name: Private company
   local_authority: true
   role_type: none
