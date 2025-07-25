@@ -29,7 +29,7 @@ RSpec.describe ModuleDebugDecorator do
       expect(output.second).to eq [
         '1st',
         'false',
-        'Section 1 of 5',
+        'Section 1 of 4',
         '25%',
         '1',
         '0',
@@ -42,7 +42,7 @@ RSpec.describe ModuleDebugDecorator do
       expect(output.third).to eq [
         '2nd',
         'false',
-        'Section 1 of 5',
+        'Section 1 of 4',
         '50%',
         '1',
         '1',
