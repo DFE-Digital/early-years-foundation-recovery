@@ -34,7 +34,7 @@ RSpec.describe 'Registration custom settings', type: :request do
 
       it 'redirects to local authority form' do
         update_user
-        expect(response).to redirect_to edit_registration_local_authority_path
+        expect(response).to redirect_to edit_registration_role_type_path
       end
     end
   end

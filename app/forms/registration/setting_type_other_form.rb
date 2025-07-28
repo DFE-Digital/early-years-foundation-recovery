@@ -12,6 +12,7 @@ module Registration
         setting_type: 'other',
         setting_type_id: 'other',
         setting_type_other: setting_type_other,
+        local_authority: I18n.t(:na),
       )
     end
   end

@@ -36,9 +36,6 @@ RSpec.describe 'Account page', type: :system do
 
       fill_in 'Enter the type of setting or organisation where you work.', with: 'DfE'
       click_button 'Continue'
-      expect(page).to have_current_path '/registration/local-authority/edit'
-
-      click_on 'I work across more than one local authority'
       expect(page).to have_current_path '/registration/role-type/edit'
 
       click_on 'I would describe my role in another way.'

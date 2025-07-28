@@ -9,6 +9,7 @@ module Registration
     def save
       return false unless valid?
 
+      # Clear fields *before* calling update with form_params
       user.update(setting.form_params)
       user.save(validate: false)
     end
