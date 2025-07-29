@@ -14,7 +14,7 @@ FROM base as deps
 
 LABEL org.opencontainers.image.description "Application Dependencies"
 
-RUN apk add --no-cache --no-progress --no-check-certificate postgresql-dev yarn chromium
+RUN apk add --no-cache --no-progress --no-check-certificate postgresql-dev yarn chromium yaml-dev
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
