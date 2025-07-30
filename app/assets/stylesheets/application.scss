@@ -119,6 +119,18 @@ pre.code-tip {
     background-color: govuk-organisation-colour('department-for-education');
     border-color: govuk-colour('white');
     box-shadow: none;
+
+    &:focus {
+      outline: 3px solid govuk-colour('yellow');
+      outline-offset: 2px;
+      box-shadow: none;
+      color: govuk-colour('black');
+      background-color: govuk-colour('yellow');
+    }
+
+    &:hover {
+      background-color: lighten(govuk-organisation-colour('department-for-education'), 10%);
+    }
   }
 }
 
