@@ -2,18 +2,36 @@
   background-color: govuk-colour('light-grey');
   border-top: govuk-colour('turquoise') solid govuk-spacing(2);
   margin: govuk-spacing(5) govuk-spacing(0);
-  padding-left: govuk-spacing(4);
-  padding-right: govuk-spacing(4);
+  padding: govuk-spacing(4);
+  position: relative;
+
+  .govuk-grid-row {
+    display: block;
+  }
+
+  .govuk-grid-column-one-quarter {
+    position: absolute;
+    top: govuk-spacing(-1);
+    left: govuk-spacing(-2);
+    margin: 0;
+    padding: 0;
+  }
+
+  .govuk-grid-column-three-quarters {
+    margin-left: 80px;
+    padding: govuk-spacing(3);
+    width: auto;
+  }
 
   .svg-inline--fa {
     background-color: govuk-colour('turquoise');
     color: govuk-colour('white');
     padding: govuk-spacing(4) !important;
-    position: relative;
     display: inline-block;
     width: 32px;
-    top: govuk-spacing(-3);
-    left: govuk-spacing(-6);
+    position: relative;
+    top: govuk-spacing(-2);
+    left: 0;
   }
 
   .govuk-grid-column-one-quarter {
