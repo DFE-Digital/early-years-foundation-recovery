@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_07_17_072554) do
+ActiveRecord::Schema[7.2].define(version: 9999_99_99_999999) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_07_17_072554) do
     t.datetime "started_at"
     t.datetime "completed_at"
     t.index ["score", "passed"], name: "index_assessments_on_score_and_passed"
+    t.index ["user_id", "training_module"], name: "index_assessments_on_user_id_and_training_module"
     t.index ["user_id"], name: "index_assessments_on_user_id"
   end
 
@@ -31,8 +32,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_07_17_072554) do
     t.string "name"
     t.jsonb "properties"
     t.datetime "time"
+    t.index "((properties ->> 'training_module_id'::text))", name: "index_events_on_training_module_id"
     t.index ["name", "time"], name: "index_events_on_name_and_time"
     t.index ["properties"], name: "index_events_on_properties", opclass: :jsonb_path_ops, using: :gin
+    t.index ["user_id", "name"], name: "index_events_on_user_id_and_name_performance"
+    t.index ["user_id", "time"], name: "index_events_on_user_id_and_time_performance"
     t.index ["user_id"], name: "index_events_on_user_id"
     t.index ["visit_id"], name: "index_events_on_visit_id"
   end
@@ -44,6 +48,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_07_17_072554) do
     t.jsonb "callback"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id", "template"], name: "index_mail_events_on_user_id_and_template"
     t.index ["user_id"], name: "index_mail_events_on_user_id"
   end
 
@@ -192,9 +197,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_07_17_072554) do
     t.string "early_years_experience"
     t.boolean "research_participant"
     t.jsonb "notify_callback"
+    t.index ["closed_at"], name: "index_users_on_closed_at"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["confirmed_at", "training_emails"], name: "index_users_on_confirmed_at_and_training_emails"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["gov_one_id"], name: "index_users_on_gov_one_id", unique: true
+    t.index ["registration_complete", "created_at"], name: "index_users_on_registration_complete_and_created_at"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token"
   end
