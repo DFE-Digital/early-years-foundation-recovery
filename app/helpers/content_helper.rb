@@ -1,3 +1,5 @@
+require 'ostruct'
+
 module ContentHelper
   # @see [CustomMarkdown]
   # @param key [String]
