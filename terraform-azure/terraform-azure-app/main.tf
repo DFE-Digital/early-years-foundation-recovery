@@ -28,7 +28,14 @@ resource "azurerm_container_group" "app_worker" {
     }
   }
 
+  exposed_port = {
+    port     = 80
+    protocol = "TCP"
+  }
+
   subnet_ids = [var.app_worker_subnet_id]
+
+  tags = var.tags
 
   lifecycle {
     ignore_changes = [tags]
