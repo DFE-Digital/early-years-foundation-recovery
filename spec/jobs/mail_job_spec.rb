@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe MailJob do
   describe '.recipients' do
     it 'expects a scope to filter users' do
-      expect { described_class.recipients }.to raise_error NoMethodError, "undefined method `mail_job_recipients' for class User"
+      expect { described_class.recipients }.to raise_error(NoMethodError, "undefined method 'mail_job_recipients' for class User")
     end
   end
 
