@@ -7,6 +7,10 @@ RSpec.describe Dashboard do
 
   before do
     create(:user, :registered, id: 123, local_authority: 'Watford Borough Council')
+
+    # Stub GCS upload for the upload test
+    allow(Google::Cloud::Storage).to receive(:new).and_raise(StandardError, 'Authorization failed')
+
     service.call
   end
 
