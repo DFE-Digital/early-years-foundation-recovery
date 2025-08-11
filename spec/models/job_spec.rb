@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Job, type: :model do
   before do
+    allow(Que::Scheduler::SchedulerJob).to receive(:enqueue)
+    create :job, job_class: 'Que::Scheduler::SchedulerJob'
     create :job, job_class: 'TestJob'
   end
 

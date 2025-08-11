@@ -12,7 +12,9 @@ private
 
   # @return [Boolean]
   def correct?
+    # rubocop:disable Style/RedundantCondition
     content.opinion_question? ? true : content.correct_answers.eql?(response_answers)
+    # rubocop:enable Style/RedundantCondition
   end
 
   # @return [ActionController::Parameters]
