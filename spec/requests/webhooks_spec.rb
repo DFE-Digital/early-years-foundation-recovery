@@ -22,6 +22,15 @@ RSpec.describe 'Webhooks', type: :request do
     }
   end
 
+  before do
+    # stub the Resource class to avoid loading it from the database
+    stub_const('Resource', Class.new do
+      def self.reset_cache_key!; end
+    end)
+    allow(Resource).to receive(:reset_cache_key!)
+    allow(Page).to receive(:reset_cache_key!)
+  end
+
   context 'when authenticated using secret header' do
     describe 'POST /release' do
       it 'persists the latest release event' do
