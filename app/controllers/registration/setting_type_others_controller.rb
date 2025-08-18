@@ -6,8 +6,16 @@ module Registration
       form.setting_type_other = user_params[:setting_type_other]
 
       if form.save
+        setting = form.setting_type
+        user = current_user
+
         track('user_setting_type_other_change', success: true)
-        redirect_to edit_registration_local_authority_path
+
+        if setting.local_authority? && user.local_authority.blank?
+          redirect_to edit_registration_local_authority_path
+        else
+          redirect_to edit_registration_role_type_path
+        end
       else
         track('user_setting_type_other_change', success: false)
         render :edit, status: :unprocessable_content

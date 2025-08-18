@@ -63,9 +63,9 @@ rectangle "Early Years Child Development Training" {
 
 
 note right of db: Postgres 15.4 (alpine)
-note left of app: Ruby 3.3.4 (alpine)
+note left of app: Ruby 3.4.5 (alpine)
 note bottom of web: Rails v7.1.3
-note right of worker: Ruby 3.3.4 (alpine)
+note right of worker: Ruby 3.4.5 (alpine)
 note bottom of jobs: Que v2.3.0
 
 web <-u-> data

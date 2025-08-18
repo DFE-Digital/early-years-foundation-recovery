@@ -14,7 +14,7 @@ RSpec.describe FeedbackPaginationDecorator do
   end
 
   it '#section_numbers' do
-    expect(decorator.section_numbers).to eq 'Section 4 of 5'
+    expect(decorator.section_numbers).to eq 'Section 4 of 4'
   end
 
   it '#page_numbers' do
