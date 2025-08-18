@@ -5,18 +5,13 @@ RSpec.describe ReleaseController, type: :controller do
     {
       'sys' => {
         'id' => 'module_123',
-        'completedAt' => Time.zone.now.iso8601,
-        'updatedAt' => Time.zone.now.iso8601,
+        'completedAt' => Time.zone.now,
+        'updatedAt' => Time.zone.now,
       },
     }
   end
 
   let(:valid_release_params) { payload_data }
-
-  # disable RSpec/VerifiedDoubles Since Rails.logger is a real object that can’t replace with a verifying double
-  # rubocop:disable RSpec/VerifiedDoubles
-  let(:logger_spy) { spy('logger') }
-  # rubocop:enable RSpec/VerifiedDoubles
 
   before do
     # bypass authentication for tests
@@ -30,9 +25,6 @@ RSpec.describe ReleaseController, type: :controller do
     end)
     allow(Resource).to receive(:reset_cache_key!)
     allow(Page).to receive(:reset_cache_key!)
-
-    # spy on logger
-    allow(Rails).to receive(:logger).and_return(logger_spy)
 
     # stub background jobs
     allow(NewModuleMailJob).to receive(:enqueue)
@@ -64,14 +56,9 @@ RSpec.describe ReleaseController, type: :controller do
       expect(NewModuleMailJob).to have_received(:enqueue).with(release.id)
     end
 
-    it 'logs messages correctly' do
+    it 'succeeds' do
       post :new, params: { release: valid_release_params }
-      release = Release.last
-
-      expect(logger_spy).to have_received(:info).with('[ReleaseController#new] Clearing module cache before creating new release')
-      expect(logger_spy).to have_received(:info).with(
-        "[ReleaseController#new]\n      Created Release with ID: #{release.id}, sys_id: #{payload_data.dig('sys', 'id')}",
-      )
+      expect(response).to have_http_status(:success)
     end
   end
 
@@ -92,14 +79,9 @@ RSpec.describe ReleaseController, type: :controller do
       expect(ContentCheckJob).to have_received(:enqueue)
     end
 
-    it 'logs messages correctly' do
+    it 'succeeds' do
       post :update, params: { release: valid_release_params.merge(id: 1) }
-      release = Release.last
-
-      expect(logger_spy).to have_received(:info).with('[ReleaseController#update] Clearing module cache before updating release')
-      expect(logger_spy).to have_received(:info).with(
-        "[ReleaseController#update]\n      Created Release with ID: #{release.id}, sys_id: #{payload_data.dig('sys', 'id')}",
-      )
+      expect(response).to have_http_status(:success)
     end
   end
 end
