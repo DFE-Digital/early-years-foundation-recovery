@@ -54,7 +54,8 @@ class AssessmentProgress
   # @return [Float] percentage of correct responses
   def score
     assessment.score || (correct_responses.count.to_f / mod.summative_questions.count) * 100
-  rescue ZeroDivisionError, NoMethodError
+  rescue ZeroDivisionError, NoMethodError => e
+    Rails.logger.error "AssessmentProgress.score: #{e.message}"
     0.0
   end
 
