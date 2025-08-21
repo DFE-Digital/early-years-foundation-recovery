@@ -56,5 +56,11 @@ RSpec.describe 'Formative question' do
       click_on 'Next'
       expect(page).to have_content 'Please select an answer'
     end
+
+    it 'does not show the internal server error page' do
+      visit 'modules/alpha/questionnaires/1-1-4-1'
+      click_on 'Next'
+      expect(response).not_to have_http_status(:internal_server_error)
+    end
   end
 end
