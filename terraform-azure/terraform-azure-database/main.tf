@@ -38,7 +38,7 @@ resource "azurerm_postgresql_flexible_server" "psqlfs" {
 resource "azurerm_postgresql_flexible_server_configuration" "psqlfs_config" {
   name      = "azure.extensions"
   server_id = azurerm_postgresql_flexible_server.psqlfs.id
-  value     = "CITEXT,FUZZYSTRMATCH,PGCRYPTO,PLPGSQL,UUID-OSSP"
+  value     = var.environment == "CITEXT,FUZZYSTRMATCH,PGCRYPTO,UUID-OSSP"
 }
 
 resource "azurerm_postgresql_flexible_server_configuration" "log_min_duration_statement" {
@@ -46,7 +46,7 @@ resource "azurerm_postgresql_flexible_server_configuration" "log_min_duration_st
   server_id = azurerm_postgresql_flexible_server.psqlfs.id
   # To enable: this is in milliseconds, update this to a positive value in milliseconds to enable this logging
   # To disable: update this to -1
-  value = 5000
+  value = 500
 }
 
 # Create Database
