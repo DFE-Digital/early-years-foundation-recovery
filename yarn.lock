@@ -1391,7 +1391,7 @@ __metadata:
     axios: "npm:^1.11.0"
     dfe-frontend: "npm:^2.0.1"
     esbuild: "npm:^0.25.9"
-    govuk-frontend: "npm:^5.8.0"
+    govuk-frontend: "npm:^5.11.1"
     puppeteer: "npm:^24.10.0"
     sass: "npm:^1.85.1"
     stylelint: "npm:^16.9.0"
@@ -1684,17 +1684,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"govuk-frontend@npm:^5.11.1":
+  version: 5.11.1
+  resolution: "govuk-frontend@npm:5.11.1"
+  checksum: fc4916785a8bd87315eb2682ed581aca1a65aade9e3e7a4a2d979cd01fb7fdf8811357ba6677966a86f01411b3bfd5db006e38f58b01418da45e52f76a8f2040
+  languageName: node
+  linkType: hard
+
 "govuk-frontend@npm:^5.3.1":
   version: 5.4.0
   resolution: "govuk-frontend@npm:5.4.0"
   checksum: 29ead8bdc3cdfec5d5d28c256a71ef8533f3519581cd6dd99b05f3e509f0b1be9c4e7716e8936d3b679765c26c2785b787f3a1e3efcb9d8ac87739dab13dde41
-  languageName: node
-  linkType: hard
-
-"govuk-frontend@npm:^5.8.0":
-  version: 5.8.0
-  resolution: "govuk-frontend@npm:5.8.0"
-  checksum: 86fb7a09f8e53a739799b4c4d93f3c2bd2d7efe481660d3c32087982271ddbb90fb8fcf5585babef6fd184295979078248b5ff42505d4826e4c0911951f33ab9
   languageName: node
   linkType: hard
 
