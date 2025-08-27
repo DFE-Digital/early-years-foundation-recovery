@@ -12,7 +12,9 @@ private
 
   # @return [Boolean]
   def correct?
+    # rubocop:disable Style/RedundantCondition
     content.opinion_question? ? true : content.correct_answers.eql?(response_answers)
+    # rubocop:enable Style/RedundantCondition
   end
 
   # @return [ActionController::Parameters]
@@ -36,10 +38,12 @@ private
 
   # @return [Boolean]
   def save_response!
-    current_user_response.update(
+    current_user_response.update!(
       answers: response_answers,
       correct: correct?,
       text_input: response_text_input,
     )
+  rescue StandardError
+    false
   end
 end

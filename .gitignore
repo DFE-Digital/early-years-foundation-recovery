@@ -72,3 +72,5 @@ uml/*.*
 
 # Contentful
 errors-*.log
+
+.DS_Store

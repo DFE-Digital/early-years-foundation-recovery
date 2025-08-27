@@ -2,7 +2,7 @@ module Trainee
   class Role < Dry::Struct
     attribute :name, Types::Strict::String.constrained(filled: true)
     attribute :group, Types::Strict::String.constrained(filled: true)
-
+    attribute :hint_text, Types::Strict::String.optional.default(nil)
     # @return [Array<Trainee::Role>]
     def self.all
       data.map { |params| new(params.symbolize_keys) }

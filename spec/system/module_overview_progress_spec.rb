@@ -81,7 +81,7 @@ RSpec.describe 'Module overview page progress' do
     end
 
     it 'the first topic indicator is "not started"' do
-      within '#section-content-1 .module-section--container .progress-indicator:nth-child(2)' do
+      within '#section-content-1 .module-section--container .module-section--item:nth-child(1) .progress-indicator' do
         expect(page).to have_content 'not started'
       end
     end
@@ -104,19 +104,19 @@ RSpec.describe 'Module overview page progress' do
     end
 
     it 'the first topic indicator is "complete"' do
-      within '#section-content-1 .module-section--container .progress-indicator:nth-child(2)' do
+      within '#section-content-1 .module-section--container .module-section--item:nth-child(1) .progress-indicator' do
         expect(page).to have_content 'complete'
       end
     end
 
     it 'the second topic cannot be clicked' do
-      within '#section-content-1 .module-section--container .module-section--item:nth-child(3)' do
+      within '#section-content-1 .module-section--container .module-section--item:nth-child(2)' do
         expect(page).not_to have_link('1-1-1', href: '/modules/alpha/content-pages/1-1-1')
       end
     end
 
     it 'the second topic indicator is "not started"' do
-      within '#section-content-1 .module-section--container .progress-indicator:nth-child(4)' do
+      within '#section-content-1 .module-section--container .module-section--item:nth-child(2) .progress-indicator' do
         expect(page).to have_content 'not started'
       end
     end
@@ -133,13 +133,13 @@ RSpec.describe 'Module overview page progress' do
     end
 
     it 'the progress indicator is "in progress"' do
-      within '#section-content-1 .module-section--container .progress-indicator:nth-child(6)' do
+      within '#section-content-1 .module-section--container .module-section--item:nth-child(3) .progress-indicator' do
         expect(page).to have_content 'in progress'
       end
     end
 
     it 'the topic is not a link' do
-      within '#section-content-1 .module-section--container .module-section--item:nth-child(5)' do
+      within '#section-content-1 .module-section--container .module-section--item:nth-child(3)' do
         expect(page).not_to have_link('1-1-3', href: '/modules/alpha/content-pages/1-1-3')
       end
     end

@@ -119,6 +119,18 @@ pre.code-tip {
     background-color: govuk-organisation-colour('department-for-education');
     border-color: govuk-colour('white');
     box-shadow: none;
+
+    &:focus {
+      outline: 3px solid govuk-colour('yellow');
+      outline-offset: 2px;
+      box-shadow: none;
+      color: govuk-colour('black');
+      background-color: govuk-colour('yellow');
+    }
+
+    &:hover {
+      background-color: lighten(govuk-organisation-colour('department-for-education'), 10%);
+    }
   }
 }
 
@@ -159,6 +171,10 @@ abbr {
 .accordion-section-left-column {
   display: inline-block;
   max-width: calc(100% - 142px);
+
+  @media (max-width: 320px) {
+    max-width: calc(100% - 60px);
+  }
 }
 
 // nested bullets (level 2) to be unfilled circles

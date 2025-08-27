@@ -5,8 +5,9 @@
   group: childminder
 
 # other ------------------------------------------------------------------------
-- name: Early years practitioner (including childminder, nursery assistant, play worker, nanny)
+- name: Early years practitioner
   group: other
+  hint_text: including childminder, nursery assistant, play worker, nanny
 - name: Reception teacher
   group: other
 - name: Reception teaching assistant
