@@ -51,7 +51,9 @@ class ModuleProgress
   # @see CourseProgress
   # @return [Boolean]
   def started?
-    key_event('module_start').present?
+    return true if key_event('module_start').present?
+
+    module_page_events.any? { |event| event.name == 'module_content_page' }
   end
 
   # @param page [Training::Page, Training::Question, Training::Video]
