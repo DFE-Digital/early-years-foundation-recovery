@@ -20,9 +20,10 @@ class Dashboard
     { model: 'User',                                    folder: 'users',    file: 'users'                         },
     { model: 'DataAnalysis::ClosedAccounts',            folder: 'users',    file: 'closed_accounts'               },
     { model: 'DataAnalysis::ReturningUsers',            folder: 'users',    file: 'returning_users'               },
+    { model: 'DataAnalysis::UserCountByRoleAndExperience', folder: 'users', file: 'user_count_by_role_and_experience' },
     # { model: 'DataAnalysis::LocalAuthorityUser',        folder: 'users',    file: 'local_authority_users'         },
 
-    { model: 'Assessment',                              folder: 'training', file: 'assessments' },
+    { model: 'Assessment', folder: 'training', file: 'assessments' },
     { model: 'DataAnalysis::AssessmentForLeadersAndManagers', folder: 'training', file: 'assessments_managers_and_leaders' },
     { model: 'DataAnalysis::ConfidenceCheckScores', folder: 'training', file: 'confidence_check_scores' },
     { model: 'DataAnalysis::ConfidenceCheckScoresForManagerOrLeaderOnly', folder: 'training', file: 'confidence_check_scores_for_manager_or_leader_only' },
