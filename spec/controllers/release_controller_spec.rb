@@ -23,7 +23,6 @@ RSpec.describe ReleaseController, type: :controller do
     stub_const('Resource', Class.new do
       def self.reset_cache_key!; end
     end)
-    allow(Resource).to receive(:reset_cache_key!)
     allow(Page).to receive(:reset_cache_key!)
 
     # stub background jobs

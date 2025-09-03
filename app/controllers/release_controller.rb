@@ -2,7 +2,6 @@ class ReleaseController < WebhookController
   def new
     Rails.logger.info('[ReleaseController#new] Clearing module cache before creating new release')
     Training::Module.cache.clear
-    Resource.reset_cache_key!
     Page.reset_cache_key!
 
     new_release = Release.create!(
@@ -22,7 +21,6 @@ class ReleaseController < WebhookController
   def update
     Rails.logger.info('[ReleaseController#update] Clearing module cache before updating release')
     Training::Module.cache.clear
-    Resource.reset_cache_key!
     Page.reset_cache_key!
 
     release = Release.create!(
