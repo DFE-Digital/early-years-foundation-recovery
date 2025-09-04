@@ -52,6 +52,7 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
 ENV APP_HOME /srv
 ENV RAILS_ENV ${RAILS_ENV:-production}
+ENV ENVIRONMENT ${ENVIRONMENT:-production}
 
 RUN mkdir -p ${APP_HOME}/tmp/pids ${APP_HOME}/log
 

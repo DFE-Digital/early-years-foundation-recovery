@@ -71,9 +71,11 @@ module EarlyYearsFoundationRecovery
     # Sentry
     config.sentry_dsn = ENV.fetch('SENTRY_DSN', '#SENTRY_DSN_env_var_missing')
 
+    config.environment = ENV.fetch('ENVIRONMENT')
+
     # @return [Boolean]
     def live?
-      ENV['ENVIRONMENT'].eql?('production')
+      config.environment.eql?('production')
     end
 
     # @see ContentfulRails.configuration.enable_preview_domain

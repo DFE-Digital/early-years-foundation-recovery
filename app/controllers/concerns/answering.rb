@@ -38,10 +38,12 @@ private
 
   # @return [Boolean]
   def save_response!
-    current_user_response.update(
+    current_user_response.update!(
       answers: response_answers,
       correct: correct?,
       text_input: response_text_input,
     )
+  rescue StandardError
+    false
   end
 end
