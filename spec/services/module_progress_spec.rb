@@ -13,14 +13,48 @@ RSpec.describe ModuleProgress do
   include_context 'with progress'
 
   describe '#started?' do
-    let(:user_module_events) do
-      [
-        EventStub.new('module_start', { 'training_module_id' => 'alpha', 'id' => '1-1' }, now - 1.minute),
-      ]
+    context 'with module_start event present' do
+      let(:user_module_events) do
+        [
+          EventStub.new('module_start', { 'training_module_id' => 'alpha', 'id' => '1-1' }, now - 1.minute),
+        ]
+      end
+
+      it 'is true once the module start event is recorded' do
+        expect(progress.started?).to be true
+      end
     end
 
-    it 'is true once the module start event is recorded' do
-      expect(progress.started?).to be true
+    context 'without module_start but with page views (module_content_page)' do
+      let(:user_module_events) do
+        [
+          EventStub.new('module_content_page', { 'training_module_id' => 'alpha', 'id' => '1-1' }, now - 1.minute),
+        ]
+      end
+
+      it 'falls back to true (started)' do
+        expect(progress.started?).to be true
+      end
+    end
+
+    context 'without module_start but with page views (page_view legacy)' do
+      let(:user_module_events) do
+        [
+          EventStub.new('page_view', { 'training_module_id' => 'alpha', 'id' => '1-1' }, now - 1.minute),
+        ]
+      end
+
+      it 'falls back to true (started)' do
+        expect(progress.started?).to be true
+      end
+    end
+
+    context 'with no events' do
+      let(:user_module_events) { [] }
+
+      it 'is false' do
+        expect(progress.started?).to be false
+      end
     end
   end
 
@@ -95,6 +129,30 @@ RSpec.describe ModuleProgress do
       it 'updates to the most recent page' do
         expect(progress.resume_page.name).to eq '1-1'
       end
+    end
+  end
+
+  describe '#module_page_events' do
+    let(:user_module_events) do
+      [
+        # Event with no time — should be treated as earliest (Time.at(0))
+        EventStub.new('page_view', { 'training_module_id' => 'alpha', 'id' => '2-1' }, nil),
+
+        # Event with an older timestamp
+        EventStub.new('page_view', { 'training_module_id' => 'alpha', 'id' => '1-1' }, now - 5.minutes),
+
+        # Event with the most recent timestamp
+        EventStub.new('page_view', { 'training_module_id' => 'alpha', 'id' => '3-1' }, now - 1.minute),
+      ]
+    end
+
+    it 'returns events sorted by time, with events missing time treated as earliest' do
+      # The expected order is:
+      # 1. Event with nil time ('2-1') - sorted to the front by Time.at(0)
+      # 2. Event with older timestamp ('1-1')
+      # 3. Event with most recent timestamp ('3-1')
+      sorted_ids = progress.send(:module_page_events).map { |e| e.properties['id'] }
+      expect(sorted_ids).to eq(%w[2-1 1-1 3-1])
     end
   end
 end
