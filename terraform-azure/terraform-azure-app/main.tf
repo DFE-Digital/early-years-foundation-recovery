@@ -1,4 +1,7 @@
 # Create Background Worker Application
+/*
+NB: the worker container group is handled by the code release pipeline
+
 resource "azurerm_container_group" "app_worker" {
   name                = var.app_worker_name
   location            = var.location
@@ -50,3 +53,4 @@ resource "azurerm_log_analytics_workspace" "app_worker_logs" {
     ignore_changes = [tags]
   }
 }
+*/
