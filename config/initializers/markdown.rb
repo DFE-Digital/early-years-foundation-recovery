@@ -6,6 +6,11 @@ class CustomPreprocessor < GovukMarkdown::Preprocessor
     inject_inset_text.inject_details.two_thirds.button.external.quote.brain.book.info
   end
 
+  # Ensure nested markdown uses our CustomRenderer (govuk-body paragraphs, etc.)
+  def nested_markdown(markdown)
+    CustomMarkdown.render(markdown)
+  end
+
   # @example
   #   {two_thirds}
   #   This is the body copy
@@ -121,7 +126,9 @@ private
   # @param content [String]
   # @return [String]
   def learning_prompt(type, content)
-    prompt_template.render(nil, icon: type, body: nested_markdown(content))
+    current_options = Thread.current[:custom_markdown_options] || {}
+    prompt_body = CustomMarkdown.render(content, **current_options.merge(strict_heading_levels: true))
+    prompt_template.render(nil, icon: type, body: prompt_body)
   end
 
   # @return [Slim::Template]
@@ -143,15 +150,43 @@ end
 class CustomRenderer < GovukMarkdown::Renderer
   include Redcarpet::Render::SmartyPants
 
+  def initialize(options = {}, render_options = {})
+    super
+    @custom_options = options || {}
+  end
+
   # @param document [String]
   # @return [String]
   def preprocess(document)
     CustomPreprocessor.new(document).apply_all.output
   end
+
+  def paragraph(text)
+    %(<p class="govuk-body">#{text}</p>)
+  end
+
+  def header(text, level)
+    options = @custom_options || {}
+    return super unless options[:strict_heading_levels]
+
+    css_class =
+      case level
+      when 1 then 'govuk-heading-l'
+      when 2 then 'govuk-heading-m'
+      else 'govuk-heading-s'
+      end
+
+    rendered_level = [level, 3].max
+    slug = text.downcase.gsub(/<[^>]*>/, '').gsub(/[^a-z0-9\s-]/i, '').strip.gsub(/\s+/, '-')
+    %(<h#{rendered_level} id="#{slug}" class="#{css_class}">#{text}</h#{rendered_level}>)
+  end
 end
 
 module CustomMarkdown
   def self.render(markdown, **options)
+    if defined?(Rails) && Rails.env.development?
+      Rails.logger.debug { "[CustomMarkdown] options=#{options.inspect} markdown:\n#{markdown}" }
+    end
     renderer = CustomRenderer.new(options, { with_toc_data: true, link_attributes: { class: 'govuk-link' } })
     Redcarpet::Markdown.new(renderer, tables: true, no_intra_emphasis: true).render(markdown).strip
   end
