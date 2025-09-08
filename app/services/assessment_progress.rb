@@ -19,7 +19,7 @@ class AssessmentProgress
   # @return [Assessment, nil]
   def grade!
     unless graded?
-      assessment.update(
+      assessment&.update(
         score: score,
         passed: passed?,
         completed_at: Time.zone.now,
@@ -53,15 +53,23 @@ class AssessmentProgress
 
   # @return [Float] percentage of correct responses
   def score
-    assessment.score || (correct_responses.count.to_f / mod.summative_questions.count) * 100
-  rescue ZeroDivisionError, NoMethodError => e
-    Rails.logger.error "AssessmentProgress.score: #{e.message}"
+    existing_score = assessment&.score
+    return existing_score if existing_score.present?
+
+    total_questions = mod.summative_questions.count
+    return 0.0 if total_questions.zero?
+
+    (correct_responses.count.to_f / total_questions) * 100
+  rescue StandardError => e
+    Rails.logger.error "AssessmentProgress.score error user_id=#{user&.id} mod=#{mod&.name}: #{e.class}: #{e.message}"
     0.0
   end
 
   # @note #correct? validates against current question options
-  # @return [Array<Response>]
-  delegate :responses, to: :assessment, prefix: true
+  # @return [Array<Response>] safe accessor; empty when no assessment exists
+  def assessment_responses
+    assessment&.responses || []
+  end
 
   # @return [Array<Response>]
   def incorrect_responses
