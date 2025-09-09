@@ -3,7 +3,6 @@ module DataAnalysis
     include ToCsv
 
     class << self
-      # CSV headers
       def column_names
         %w[
           Experience
@@ -12,28 +11,36 @@ module DataAnalysis
         ]
       end
 
-      # Returns an array of hashes for CSV export
+      # Main entry point for CSV export
       def dashboard
-        users = User
-                  .where(closed_at: nil)
-                  .pluck(:id, :early_years_experience, :module_time_to_completion)
-
-        # Count completed modules per user
-        counts_by_experience = users.each_with_object(Hash.new { |h, k| h[k] = Hash.new(0) }) do |(_id, experience, modules), h|
-          completed_count = modules.values.count(&:present?)
-          h[experience][completed_count] += 1
-        end
-
-        # Flatten to array of hashes for CSV export
         counts_by_experience.flat_map do |experience, counts|
-          counts.map do |completed_count, user_count|
+          counts.map do |modules_completed, user_count|
             {
               experience: experience,
-              modules_completed: completed_count,
+              modules_completed: modules_completed,
               user_count: user_count,
             }
           end
         end
+      end
+
+    private
+
+      # Returns a hash of counts grouped by experience and completed modules
+      def counts_by_experience
+        all_users.each_with_object(Hash.new { |h, k| h[k] = Hash.new(0) }) do |user, h|
+          h[user.early_years_experience][completed_modules_count(user)] += 1
+        end
+      end
+
+      # Count of completed modules for a single user
+      def completed_modules_count(user)
+        user.module_time_to_completion.values.count(&:present?)
+      end
+
+      # Only active users
+      def all_users
+        User.where(closed_at: nil)
       end
     end
   end
