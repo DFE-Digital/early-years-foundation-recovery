@@ -20,13 +20,13 @@ module DataAnalysis
         end
 
         # Group by module_name and experience, then count users
-        per_user_module_status.group_by { |row| [row[:module_name], row[:experience]] }.map do |(module_name, experience), rows|
+        per_user_module_status.group_by { |row| [row[:module_name], row[:experience]] }.map { |(module_name, experience), rows|
           {
             module_name: module_name,
             experience: experience,
             user_count: rows.size,
           }
-        end.sort_by { |h| [h[:module_name], h[:experience]] }
+        }.sort_by { |h| [h[:module_name], h[:experience]] }
       end
 
     private
