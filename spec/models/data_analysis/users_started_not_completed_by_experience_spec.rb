@@ -1,3 +1,4 @@
+# spec/models/data_analysis/users_started_not_completed_by_experience_spec.rb
 require 'rails_helper'
 
 RSpec.describe DataAnalysis::UsersStartedNotCompletedByExperience do
@@ -46,4 +47,40 @@ RSpec.describe DataAnalysis::UsersStartedNotCompletedByExperience do
   end
 
   it_behaves_like 'a data export model'
+
+  describe '.not_completed_modules' do
+    it 'returns only modules with zero completion time' do
+      user = build(:user, module_time_to_completion: {
+        'Module A' => 0,
+        'Module B' => 200,
+        'Module C' => nil,
+      })
+
+      result = described_class.send(:not_completed_modules, user)
+
+      expect(result).to contain_exactly('Module A', 'Module C')
+    end
+  end
+
+  describe '.per_user_module_status' do
+    it 'returns module and experience pairs for incomplete modules' do
+      # Clear out other users created by the before block
+      User.delete_all
+
+      create(:user, early_years_experience: '0-2',
+                    module_time_to_completion: {
+                      'Module X' => 0,
+                      'Module Y' => 10,
+                    })
+
+      result = described_class.send(:per_user_module_status)
+
+      expect(result).to include(
+        { module_name: 'Module X', experience: '0-2' },
+      )
+      expect(result).not_to include(
+        { module_name: 'Module Y', experience: '0-2' },
+      )
+    end
+  end
 end
