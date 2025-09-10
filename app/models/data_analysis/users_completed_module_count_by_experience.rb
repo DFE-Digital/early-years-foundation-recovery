@@ -40,7 +40,7 @@ module DataAnalysis
 
       # Only active users
       def all_users
-        User.where(closed_at: nil)
+        User.not_closed
       end
     end
   end
