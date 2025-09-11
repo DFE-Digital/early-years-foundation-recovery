@@ -20,7 +20,7 @@ RSpec.describe 'Snippets', type: :request do
     let(:resource) { 'unwritten.content.name' }
 
     specify do
-      expect(response.body).to include '<p class="govuk-body-m">unwritten.content.name</p>'
+      expect(response.body).to include '<p class="govuk-body">unwritten.content.name</p>'
     end
 
     specify { expect(response).to have_http_status(:success) }

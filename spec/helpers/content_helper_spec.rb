@@ -52,7 +52,7 @@ describe 'ContentHelper', type: :helper do
       let(:input) { 'text' }
 
       it 'returns text within p tags' do
-        expect(html).to eq '<p class="govuk-body-m">text</p>'
+        expect(html).to eq '<p class="govuk-body">text</p>'
       end
     end
 
@@ -70,7 +70,7 @@ describe 'ContentHelper', type: :helper do
 
         it 'creates a button link' do
           expect(html).to eq <<~HTML.strip
-            <p class="govuk-body-m"><a href="/link" class="govuk-link govuk-button">
+            <p class="govuk-body"><a href="/link" class="govuk-link govuk-button">
             text
             </a></p>
           HTML
@@ -82,7 +82,7 @@ describe 'ContentHelper', type: :helper do
 
         it 'creates an external link' do
           expect(html).to eq <<~HTML.strip
-            <p class="govuk-body-m"><a href="https://forms.external.com/foo.aspx?id=xxx" class="govuk-link" target="_blank" rel="noopener noreferrer">
+            <p class="govuk-body"><a href="https://forms.external.com/foo.aspx?id=xxx" class="govuk-link" target="_blank" rel="noopener noreferrer">
             text (opens in a new tab)
             </a></p>
           HTML
@@ -99,7 +99,7 @@ describe 'ContentHelper', type: :helper do
         end
 
         it 'uses the info icon' do
-          expect(html).to eq '<div class="prompt"><div class="govuk-grid-row"><div class="govuk-grid-column-one-quarter"><i aria-describedby="info icon" class="fa-2x fa-solid fa-info"></i></div><div class="govuk-grid-column-three-quarters"><h2 class="govuk-heading-m">In your setting</h2><p class="govuk-body-m">hello world</p></div></div></div>'
+          expect(html).to eq '<div class="prompt"><div class="govuk-grid-row"><div class="govuk-grid-column-one-quarter"><i aria-describedby="info icon" class="fa-2x fa-solid fa-info"></i></div><div class="govuk-grid-column-three-quarters"><h3 class="govuk-heading-s">In your setting</h3><p class="govuk-body">hello world</p></div></div></div>'
         end
       end
 
@@ -113,7 +113,7 @@ describe 'ContentHelper', type: :helper do
         end
 
         it 'uses the brain icon' do
-          expect(html).to eq '<div class="prompt prompt-bg"><div class="govuk-grid-row"><div class="govuk-grid-column-one-quarter"><i aria-describedby="brain icon" class="fa-2x fa-solid fa-brain"></i></div><div class="govuk-grid-column-three-quarters"><h2 class="govuk-heading-m">Reflection point</h2><p class="govuk-body-m">hello world</p></div></div></div>'
+          expect(html).to eq '<div class="prompt prompt-bg"><div class="govuk-grid-row"><div class="govuk-grid-column-one-quarter"><i aria-describedby="brain icon" class="fa-2x fa-solid fa-brain"></i></div><div class="govuk-grid-column-three-quarters"><h3 class="govuk-heading-s">Reflection point</h3><p class="govuk-body">hello world</p></div></div></div>'
         end
       end
 
@@ -127,7 +127,7 @@ describe 'ContentHelper', type: :helper do
         end
 
         it 'uses the book icon' do
-          expect(html).to eq '<div class="prompt"><div class="govuk-grid-row"><div class="govuk-grid-column-one-quarter"><i aria-describedby="book icon" class="fa-2x fa-solid fa-book"></i></div><div class="govuk-grid-column-three-quarters"><h2 class="govuk-heading-m">Further reading</h2><p class="govuk-body-m">hello world</p></div></div></div>'
+          expect(html).to eq '<div class="prompt"><div class="govuk-grid-row"><div class="govuk-grid-column-one-quarter"><i aria-describedby="book icon" class="fa-2x fa-solid fa-book"></i></div><div class="govuk-grid-column-three-quarters"><h3 class="govuk-heading-s">Further reading</h3><p class="govuk-body">hello world</p></div></div></div>'
         end
       end
 
@@ -143,7 +143,7 @@ describe 'ContentHelper', type: :helper do
         end
 
         it 'builds semantic markup' do
-          expect(html).to eq '<div class="blockquote-container"><blockquote class="quote"><p class="govuk-body-m">Life is trying things to see if they work.</p><cite>Ray Bradbury</cite></blockquote></div>'
+          expect(html).to eq '<div class="blockquote-container"><blockquote class="quote"><p class="govuk-body">Life is trying things to see if they work.</p><cite>Ray Bradbury</cite></blockquote></div>'
         end
       end
 
@@ -159,7 +159,22 @@ describe 'ContentHelper', type: :helper do
         end
 
         it 'builds semantic markup' do
-          expect(html).to eq '<div class="govuk-grid-row"><div class="govuk-grid-column-two-thirds"><p class="govuk-body-m">Description of an image</p></div><div class="govuk-grid-column-one-third"><p class="govuk-body-m"><img src="/path/to/image" alt="image title"></p></div></div>'
+          expect(html).to eq '<div class="govuk-grid-row"><div class="govuk-grid-column-two-thirds"><p class="govuk-body">Description of an image</p></div><div class="govuk-grid-column-one-third"><p class="govuk-body"><img src="/path/to/image" alt="image title"></p></div></div>'
+        end
+      end
+
+      describe 'Headings inside prompt body' do
+        let(:input) do
+          <<~MARKUP
+            {info}
+            ## My sub
+            ### My sub 2
+            {/info}
+          MARKUP
+        end
+
+        it 'renders ## as h3.govuk-heading-m and ### as h3.govuk-heading-s inside prompts' do
+          expect(html).to eq '<div class="prompt"><div class="govuk-grid-row"><div class="govuk-grid-column-one-quarter"><i aria-describedby="info icon" class="fa-2x fa-solid fa-info"></i></div><div class="govuk-grid-column-three-quarters"><h3 class="govuk-heading-s">In your setting</h3><h3 id="my-sub" class="govuk-heading-m">My sub</h3><h3 id="my-sub-2" class="govuk-heading-s">My sub 2</h3></div></div></div>'
         end
       end
     end
