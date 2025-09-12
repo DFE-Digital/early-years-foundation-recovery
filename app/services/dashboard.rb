@@ -45,7 +45,6 @@ class Dashboard
     { model: 'DataAnalysis::GuestFeedbackScores',       folder: 'feedback', file: 'guest_feedback'                },
     { model: 'DataAnalysis::UserFeedbackScores',        folder: 'feedback', file: 'course_feedback'               },
     { model: 'DataAnalysis::ModuleFeedbackForms',       folder: 'feedback', file: 'module_feedback'               },
-    { model: 'DataAnalysis::UserModuleOrderByExperience', folder: 'training', file: 'module_order_by_experience' },
   ].freeze
 
   # @return [String] 30-06-2022-09-30
