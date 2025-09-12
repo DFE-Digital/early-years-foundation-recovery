@@ -33,16 +33,6 @@ module DataAnalysis
 
     private
 
-      # Fetches all assessments and groups them by user
-      # def all_ordered_accesses
-      #   assessments = Assessment
-      #                   .includes(:user)                    # eager load users to avoid N+1 queries
-      #                   .where(users: { closed_at: nil })   # only include active users
-      #                   .order('users.id ASC, assessments.started_at ASC') # order modules by start time per user
-
-      #   assessments.group_by(&:user_id) # returns a hash: { user_id => [assessment1, assessment2, ...] }
-      # end
-
       def all_ordered_accesses
         User.not_closed.includes(:assessments).order(:id).to_h do |user|
           [user.id, user.assessments]
