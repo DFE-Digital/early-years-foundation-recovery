@@ -40,6 +40,7 @@ class Dashboard
     { model: 'DataAnalysis::UserModuleCompletionCount', folder: 'training', file: 'module_completions_count'      },
     { model: 'DataAnalysis::UsersStartedNotCompletedByExperience', folder: 'training', file: 'users_started_not_completed_by_experience' },
     { model: 'DataAnalysis::UsersCompletedModuleCountByExperience', folder: 'training', file: 'users_completed_module_count_by_experience' },
+    { model: 'DataAnalysis::UserModuleOrderByExperience', folder: 'training', file: 'module_order_by_experience' },
 
     { model: 'DataAnalysis::GuestFeedbackScores',       folder: 'feedback', file: 'guest_feedback'                },
     { model: 'DataAnalysis::UserFeedbackScores',        folder: 'feedback', file: 'course_feedback'               },
