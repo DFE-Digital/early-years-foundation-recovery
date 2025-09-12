@@ -23,7 +23,7 @@ module DataAnalysis
     private
 
       def all_users
-        User.where(closed_at: nil)
+        User.not_closed
       end
 
       def per_user_module_status
