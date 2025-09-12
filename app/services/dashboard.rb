@@ -38,6 +38,7 @@ class Dashboard
     # { model: 'DataAnalysis::UserModuleOrder',           folder: 'training', file: 'module_order'                  },
     { model: 'DataAnalysis::UserModuleCompletion',      folder: 'training', file: 'module_completion'             },
     { model: 'DataAnalysis::UserModuleCompletionCount', folder: 'training', file: 'module_completions_count'      },
+    { model: 'DataAnalysis::UsersCompletedModuleCountByExperience', folder: 'training', file: 'users_completed_module_count_by_experience' },
 
     { model: 'DataAnalysis::GuestFeedbackScores',       folder: 'feedback', file: 'guest_feedback'                },
     { model: 'DataAnalysis::UserFeedbackScores',        folder: 'feedback', file: 'course_feedback'               },
