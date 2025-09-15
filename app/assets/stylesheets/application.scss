@@ -21,6 +21,7 @@ $light-blue: tint(govuk-organisation-colour('department-for-education'), 90%);
 @import 'autocomplete';
 @import 'assets-page';
 @import 'timestamp';
+@import 'fonts';
 
 // training/modules#show
 @import 'progress-bar';
@@ -35,6 +36,7 @@ $light-blue: tint(govuk-organisation-colour('department-for-education'), 90%);
 
 * {
   font-family:
+    'Inter',
     BlinkMacSystemFont,
     'Segoe UI',
     Roboto,
