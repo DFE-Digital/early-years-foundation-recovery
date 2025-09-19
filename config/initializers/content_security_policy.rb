@@ -22,8 +22,6 @@ GOOGLE_ANALYTICS_DOMAINS = %w[
   ssl.google-analytics.com
   stats.g.doubleclick.net
   www.googletagmanager.com
-  *.hotjar.com
-  *.hotjar.io
   i.vimeocdn.com
   player.vimeo.com
   www.vimeo.com
@@ -38,8 +36,6 @@ OPTIMIZE_DOMAINS = %w[
 GOOGLE_STATIC_DOMAINS = %w[
   fonts.gstatic.com
   www.gstatic.com
-  static.hotjar.com
-  script.hotjar.com
 ].freeze
 
 Rails.application.config.content_security_policy do |policy|

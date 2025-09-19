@@ -27,11 +27,6 @@ variable "gcs_credentials" {
   sensitive   = true
 }
 
-variable "hotjar_site_id" {
-  description = "Hotjar tracking ID"
-  type        = string
-}
-
 variable "tracking_id" {
   description = "Google Tag Manager tracking ID"
   type        = string

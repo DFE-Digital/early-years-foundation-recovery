@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   before_action :maintenance_page, if: :maintenance?
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_analytics_tracking_id,
-                :set_hotjar_site_id,
                 :prepare_cms
 
   helper_method :current_user,
@@ -46,10 +45,6 @@ class ApplicationController < ActionController::Base
 
   def set_analytics_tracking_id
     @tracking_id = Rails.configuration.google_analytics_tracking_id
-  end
-
-  def set_hotjar_site_id
-    @hotjar_id = Rails.configuration.hotjar_site_id
   end
 
   # @return [Boolean] do not run accessibility tests with debug panels visible
