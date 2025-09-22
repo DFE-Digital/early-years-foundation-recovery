@@ -3,71 +3,102 @@
   name: Childminder as part of an agency
   local_authority: true
   role_type: childminder
+  active: true
+
 - id: childminder_independent
   name: Independent childminder
   local_authority: true
   role_type: childminder
+  active: true
 
 # other ------------------------------------------------------------------------
 - id: nursery_local_authority
   name: Local authority maintained nursery school
   local_authority: true
   role_type: other
+  active: true
+
 - id: nursery_private
   name: Private nursery
   local_authority: true
   role_type: other
-- id: nurser_independent
+  active: true
+
+- id: nursery_independent
   name: Independent nursery
   local_authority: true
   role_type: other
+  active: true
+
 - id: daycare
   name: Daycare
   local_authority: true
   role_type: other
+  active: false   # hidden from autocomplete but still valid if a user has it saved
+
 - id: preschool
   name: Preschool
   local_authority: true
   role_type: other
+  active: false   # same as above
+
 - id: playgroup
   name: Playgroup
   local_authority: true
   role_type: other
+  active: true
+
 - id: childcare_centre
   name: Childcare centre
   local_authority: true
   role_type: other
+  active: false
+
 - id: nursery_attached_to_school
   name: Nursery attached to a school
   local_authority: true
   role_type: other
+  active: true
+
 - id: free_school
   name: Free School
   local_authority: true
   role_type: other
+  active: true
+
 - id: special_school
   name: Special school
   local_authority: true
   role_type: other
+  active: true
+
 - id: academy
   name: Academy
   local_authority: true
   role_type: other
+  active: true
 
 # none -------------------------------------------------------------------------
 - id: training_provider
   name: Training provider
   local_authority: false
   role_type: none
+  active: true
+
 - id: central_government
   name: Central government
   local_authority: false
   role_type: none
+  active: true
+
 - id: department_for_education
   name: Department for Education
   local_authority: false
   role_type: none
+  active: true
+
 - id: local_authority
   name: Local authority
   local_authority: true
   role_type: none
+  active: true
