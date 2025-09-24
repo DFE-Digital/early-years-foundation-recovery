@@ -21,6 +21,7 @@ locals {
     "CONTENTFUL_PREVIEW"                  = var.webapp_config_contentful_preview
     "DOMAIN"                              = var.webapp_config_domain
     "EDITOR"                              = var.webapp_config_editor
+    "FEEDBACK_URL"                        = var.webapp_config_feedback_url
     "GROVER_NO_SANDBOX"                   = var.webapp_config_grover_no_sandbox
     "HOTJAR_SITE_ID"                      = var.hotjar_site_id
     "MAINTENANCE"                         = var.environment == "development" ? "no" : "false"
@@ -46,8 +47,10 @@ locals {
     "CONTENTFUL_PREVIEW"                  = var.webapp_config_contentful_preview
     "DOMAIN"                              = var.webapp_config_domain
     "EDITOR"                              = var.webapp_config_editor
+    "FEEDBACK_URL"                        = var.webapp_config_feedback_url
     "GROVER_NO_SANDBOX"                   = var.webapp_config_grover_no_sandbox
     "HOTJAR_SITE_ID"                      = var.hotjar_site_id
+    "MAINTENANCE"                         = var.environment == "development" ? "no" : "false"
     "NODE_ENV"                            = var.webapp_config_node_env
     "RAILS_ENV"                           = var.webapp_config_rails_env
     "RAILS_LOG_TO_STDOUT"                 = var.webapp_config_rails_log_to_stdout
