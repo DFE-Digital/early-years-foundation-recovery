@@ -1,4 +1,4 @@
-header.govuk-super-navigation-header
+header.govuk-super-navigation-header.noprint
   .govuk-super-navigation-header__container.govuk-clearfix
     .govuk-width-container
       .govuk-super-navigation-header__header-logo
@@ -14,7 +14,7 @@ header.govuk-super-navigation-header
                 = item
 
 - if service_name.present? || navigation_items.any?
-  section.govuk-service-navigation aria-label='Service information' data-module='govuk-service-navigation'
+  section.govuk-service-navigation.noprint aria-label='Service information' data-module='govuk-service-navigation'
     .govuk-width-container
       .govuk-service-navigation__container
         - if service_name.present?
