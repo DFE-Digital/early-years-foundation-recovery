@@ -77,6 +77,7 @@ COPY .yarnrc.yml ${APP_HOME}/.yarnrc.yml
 COPY --from=deps /build/.yarn ${APP_HOME}/.yarn
 COPY --from=deps /build/node_modules ${APP_HOME}/node_modules
 
+RUN yarn run copy:assets
 RUN SECRET_KEY_BASE=x bundle exec rails assets:precompile
 
 COPY sshd_config /etc/ssh/
