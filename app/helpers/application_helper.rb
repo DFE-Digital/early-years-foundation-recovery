@@ -12,7 +12,10 @@ module ApplicationHelper
         header.with_action_link(text: t('my_account.title'), href: user_path, options: { inverse: true })
         header.with_action_link(text: 'Sign out', href: destroy_user_session_path, options: { id: 'sign-out-desktop', class: 'training-signout-link', data: { turbo_method: :get }, inverse: true })
       else
-        header.with_action_link(text: t('account_login.title'), href: new_user_session_path, options: { inverse: true })
+        # Only show "Sign in" if not already on the sign-in page
+        unless controller_name == 'sessions' && action_name == 'new'
+          header.with_action_link(text: t('account_login.title'), href: new_user_session_path, options: { inverse: true })
+        end
       end
 
       header.with_navigation_item(text: 'Home', href: root_path, classes: [
