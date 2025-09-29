@@ -55,6 +55,7 @@
             build-args: |
               BUILDKIT_INLINE_CACHE=1
               SHA=${{ github.event.pull_request.head.sha }}
+              no-cache = true
             cache-from: |
               ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
             tags: |
