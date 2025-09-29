@@ -22,18 +22,20 @@ ENV APP_HOME /build
 
 WORKDIR ${APP_HOME}
 
+# Copy only Gemfile and Gemfile.lock first to leverage Docker cache
+COPY Gemfile Gemfile.lock ./
+
+RUN bundle config set no-cache true
+RUN bundle config set without development test ui
+RUN bundle install --no-binstubs --retry=10 --jobs=4
+
+# Copy JS/yarn dependencies and install
 COPY package.json ${APP_HOME}/package.json
 COPY yarn.lock ${APP_HOME}/yarn.lock
 COPY .yarn ${APP_HOME}/.yarn
 COPY .yarnrc.yml ${APP_HOME}/.yarnrc.yml
 
 RUN yarn install
-
-COPY Gemfile* ./
-
-RUN bundle config set no-cache true
-RUN bundle config set without development test ui
-RUN bundle install --no-binstubs --retry=10 --jobs=4
 
 # ------------------------------------------------------------------------------
 # Production Stage
@@ -58,9 +60,11 @@ RUN mkdir -p ${APP_HOME}/tmp/pids ${APP_HOME}/log
 
 WORKDIR ${APP_HOME}
 
+# Copy Gemfile and installed gems from deps
 COPY Gemfile* ./
 COPY --from=deps /usr/local/bundle /usr/local/bundle
 
+# Copy the rest of the application code
 COPY config.ru ${APP_HOME}/config.ru
 COPY Rakefile ${APP_HOME}/Rakefile
 COPY public ${APP_HOME}/public
