@@ -9,9 +9,8 @@
       = f.govuk_error_summary
 
       = f.govuk_fieldset legend: { text: t('register_early_years_experience.heading') } do
-        .data-hj-suppress
-          div class='govuk-!-margin-top-4'
-            = f.select_trainee_experience
+        div class='govuk-!-margin-top-4'
+          = f.select_trainee_experience
 
       = f.govuk_submit t('links.continue')
       

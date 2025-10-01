@@ -51,7 +51,10 @@ class ModuleProgress
   # @see CourseProgress
   # @return [Boolean]
   def started?
-    key_event('module_start').present?
+    return true if key_event('module_start').present?
+
+    # Fallback: any recorded page view within this module implies the user has started
+    module_page_events.any? { |event| %w[module_content_page page_view].include?(event.name) }
   end
 
   # @param page [Training::Page, Training::Question, Training::Video]
@@ -129,12 +132,18 @@ private
 
   # @return [Event::ActiveRecord_AssociationRelation]
   # @note This method is used to fetch events for the current module.
+
   def module_page_events
-    @module_page_events ||= if @events_by_module_name
-                              @events_by_module_name[mod.name] || []
-                            else
-                              user.events.where_properties(training_module_id: mod.name)
-                            end
+    @module_page_events ||= begin
+      events = if @events_by_module_name
+                 @events_by_module_name[mod.name] || []
+               else
+                 user.events.where_properties(training_module_id: mod.name)
+               end
+
+      # Ensure they're in chronological order
+      events.sort_by { |e| e.time || Time.zone.at(0) }
+    end
   end
 
   # @param key [String] module_start, module_complete
