@@ -148,6 +148,7 @@ resource "azurerm_application_gateway" "agw" {
     firewall_policy_id             = azurerm_web_application_firewall_policy.agw_wafp[0].id
     protocol                       = "Https"
     ssl_certificate_name           = local.ssl_certificate_name
+    require_sni                    = false
   }
 
   request_routing_rule {
