@@ -6,7 +6,7 @@ ruby '3.4.5'
 gem 'pg'
 gem 'puma'
 gem 'rails'
-gem 'rexml', '>= 3.4.0'
+gem 'rexml', '>= 3.4.2'
 gem 'sprockets-rails'
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
