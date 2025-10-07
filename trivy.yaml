@@ -1,0 +1,7 @@
+scan:
+  scanners:
+    - vuln
+  # Ignore Ruby default gemspec for rexml that ships with the Ruby image
+  skip-files:
+    - "/usr/local/lib/ruby/gems/*/specifications/rexml-*.gemspec"
+
