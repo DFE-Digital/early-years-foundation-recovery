@@ -23,6 +23,7 @@ locals {
     "EDITOR"                              = var.webapp_config_editor
     "FEEDBACK_URL"                        = var.webapp_config_feedback_url
     "GROVER_NO_SANDBOX"                   = var.webapp_config_grover_no_sandbox
+    "MAINTENANCE"                         = var.environment == "development" ? "no" : "false"
     "NODE_ENV"                            = var.webapp_config_node_env
     "RAILS_ENV"                           = var.webapp_config_rails_env
     "RAILS_LOG_TO_STDOUT"                 = var.webapp_config_rails_log_to_stdout
@@ -47,19 +48,19 @@ locals {
     "EDITOR"                              = var.webapp_config_editor
     "FEEDBACK_URL"                        = var.webapp_config_feedback_url
     "GROVER_NO_SANDBOX"                   = var.webapp_config_grover_no_sandbox
+    "MAINTENANCE"                         = var.environment == "development" ? "no" : "false"
     "NODE_ENV"                            = var.webapp_config_node_env
     "RAILS_ENV"                           = var.webapp_config_rails_env
     "RAILS_LOG_TO_STDOUT"                 = var.webapp_config_rails_log_to_stdout
     "RAILS_MASTER_KEY"                    = var.webapp_config_rails_master_key
     "RAILS_MAX_THREADS"                   = var.webapp_config_rails_max_threads
     "RAILS_SERVE_STATIC_FILES"            = var.webapp_config_rails_serve_static_files
-    "SENTRY_DSN"                          = var.webapp_config_sentry_dsn
     "TRACKING_ID"                         = var.tracking_id
     "WEB_CONCURRENCY"                     = var.webapp_config_web_concurrency
     "WEBSITES_CONTAINER_START_TIME_LIMIT" = 720
   }
 
-  # Background Worker Application Configuration
+  # Background Worker Application Configuration, passed securely to container instances
   app_worker_environment_variables = {
     "DATABASE_URL"        = var.webapp_database_url
     "GCS_CREDENTIALS"     = var.gcs_credentials

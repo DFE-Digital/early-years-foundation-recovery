@@ -73,6 +73,7 @@ resource "azurerm_subnet" "webapp_snet" {
 }
 
 # Create Subnet for Background Worker App
+# NB Background Worker App is deployed (always destroyed and replaced) using az CLI, it is not created with IaC
 resource "azurerm_subnet" "app_worker_snet" {
   name                 = "${var.resource_name_prefix}-app-worker-snet"
   virtual_network_name = azurerm_virtual_network.vnet.name

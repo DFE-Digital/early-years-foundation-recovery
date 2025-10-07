@@ -3,6 +3,10 @@
 // https://design-system.service.gov.uk/styles/colour/
 @use 'sass:color';
 
+// Override GOV.UK default font to prevent loading GDS Transport
+$govuk-font-family: 'Inter', sans-serif;
+$govuk-include-default-font-face: false;
+
 @import 'govuk-frontend/dist/govuk/index';
 @import 'dfe-frontend/packages/dfefrontend';
 
@@ -21,6 +25,7 @@ $light-blue: tint(govuk-organisation-colour('department-for-education'), 90%);
 @import 'autocomplete';
 @import 'assets-page';
 @import 'timestamp';
+@import 'fonts';
 
 // training/modules#show
 @import 'progress-bar';
@@ -35,14 +40,8 @@ $light-blue: tint(govuk-organisation-colour('department-for-education'), 90%);
 
 * {
   font-family:
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen-Sans,
-    Ubuntu,
-    Cantarell,
-    'Helvetica Neue',
-    sans-serif !important;
+    'Inter',
+    sans-serif;
 }
 
 
