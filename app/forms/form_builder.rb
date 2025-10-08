@@ -104,7 +104,8 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
                             label: { text: I18n.t('register_setting.label'), class: 'govuk-visually-hidden' },
                             hint: { text: I18n.t('register_setting.body') },
                             data: { controller: 'autocomplete', 'autocomplete-message-value': I18n.t('register_setting.not_found') },
-                            aria: { label: 'registration setting type' }
+                            aria: { label: 'registration setting type' },
+                            form_group: { attributes: { 'data-clarity-mask': 'True' } }
   end
 
   # @return [String]
@@ -115,7 +116,8 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
                             label: { text: I18n.t('register_authority.label'), class: 'govuk-visually-hidden' },
                             hint: { text: I18n.t('register_authority.body') },
                             data: { controller: 'autocomplete', 'autocomplete-message-value': I18n.t('register_authority.not_found') },
-                            aria: { label: 'registration local authority' }
+                            aria: { label: 'registration local authority' },
+                            form_group: { attributes: { 'data-clarity-mask': 'True' } }
   end
 
   # @return [String]
@@ -123,7 +125,8 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
     govuk_collection_radio_buttons :early_years_experience,
                                    Trainee::Experience.all, :id, :name,
                                    legend: { text: I18n.t('register_early_years_experience.label'), class: 'govuk-visually-hidden govuk-!-padding-top-9' },
-                                   aria: { label: 'registration early years experience' }
+                                   aria: { label: 'registration early years experience' },
+                                   form_group: { attributes: { 'data-clarity-mask': 'True' } }
   end
 
   # @param field [Symbol]

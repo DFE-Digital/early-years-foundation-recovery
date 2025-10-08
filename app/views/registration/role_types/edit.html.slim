@@ -9,7 +9,8 @@
       = f.govuk_error_summary
 
       = f.govuk_fieldset legend: { text: t('register_role.heading') } do
-        = f.govuk_collection_radio_buttons :role_type, form.role_types, :name, :name, legend: { text: t('register_role.label'), class: 'govuk-visually-hidden' }, hint_method: :hint_text
+        div data-clarity-mask='True'
+          = f.govuk_collection_radio_buttons :role_type, form.role_types, :name, :name, legend: { text: t('register_role.label'), class: 'govuk-visually-hidden' }, hint_method: :hint_text, form_group: { attributes: { 'data-clarity-mask': 'True' } }
 
         p.govuk_body
           = govuk_link_to t('register_role.other_link'), edit_registration_role_type_other_path
