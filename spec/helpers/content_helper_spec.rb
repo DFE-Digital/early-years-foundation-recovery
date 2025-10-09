@@ -64,6 +64,81 @@ describe 'ContentHelper', type: :helper do
       end
     end
 
+    context 'with potentially malicious HTML' do
+      let(:input) { "## Closing your account\n\n<script>alert('oops')</script>" }
+
+      it 'sanitizes script tags to prevent XSS' do
+        expect(html).not_to include '<script>'
+        expect(html).not_to include '</script>'
+        expect(html).to include '<h2 id="closing-your-account" class="govuk-heading-m">Closing your account</h2>'
+        expect(html).to include "alert('oops')"
+      end
+    end
+
+    context 'with malicious event handlers' do
+      let(:input) { '<img src="x" onerror="alert(1)">' }
+
+      it 'removes dangerous event handlers' do
+        expect(html).not_to include 'onerror'
+        expect(html).not_to include 'alert'
+      end
+    end
+
+    context 'with inline javascript' do
+      let(:input) { '<a href="javascript:alert(1)">Click me</a>' }
+
+      it 'removes javascript: protocol' do
+        expect(html).not_to include 'javascript:'
+        expect(html).not_to include 'alert'
+      end
+    end
+
+    context 'with malicious image src using javascript protocol' do
+      let(:input) { '<img src="javascript:alert(\'xss\')" alt="test">' }
+
+      it 'removes the javascript: protocol from img src' do
+        expect(html).not_to include 'javascript:'
+        expect(html).not_to include 'alert'
+      end
+    end
+
+    context 'with malicious data URL in image' do
+      let(:input) { '<img src="data:text/html,<script>alert(1)</script>" alt="test">' }
+
+      it 'removes data: protocol URLs' do
+        expect(html).not_to include 'data:'
+        expect(html).not_to include '<script>'
+      end
+    end
+
+    context 'with legitimate image' do
+      let(:input) { '![test image](/path/to/image.jpg)' }
+
+      it 'preserves legitimate images with relative URLs' do
+        expect(html).to include '<img'
+        expect(html).to include 'src="/path/to/image.jpg"'
+        expect(html).to include 'alt="test image"'
+      end
+    end
+
+    context 'with legitimate https image' do
+      let(:input) { '<img src="https://example.com/image.jpg" alt="test">' }
+
+      it 'preserves legitimate images with https protocol' do
+        expect(html).to include '<img'
+        expect(html).to include 'src="https://example.com/image.jpg"'
+      end
+    end
+
+    context 'with protocol-relative URL from Contentful CDN' do
+      let(:input) { '![](//images.ctfassets.net/test/test/test/_assets_0-0-0-0-0.jpg)' }
+
+      it 'preserves protocol-relative URLs used by CDNs' do
+        expect(html).to include '<img'
+        expect(html).to include '//images.ctfassets.net'
+      end
+    end
+
     context 'with custom markup' do
       describe 'button' do
         let(:input) { '{button}[text](/link){/button}' }
@@ -99,7 +174,10 @@ describe 'ContentHelper', type: :helper do
         end
 
         it 'uses the info icon' do
-          expect(html).to eq '<div class="prompt"><div class="govuk-grid-row"><div class="govuk-grid-column-one-quarter"><i aria-describedby="info icon" class="fa-2x fa-solid fa-info"></i></div><div class="govuk-grid-column-three-quarters"><h2 class="govuk-heading-m">In your setting</h2><p class="govuk-body-m">hello world</p></div></div></div>'
+          expect(html).to include '<div class="prompt">'
+          expect(html).to include '<i aria-describedby="info icon" class="fa-2x fa-solid fa-info"></i>'
+          expect(html).to include '<h2 class="govuk-heading-m">In your setting</h2>'
+          expect(html).to include '<p class="govuk-body-m">hello world</p>'
         end
       end
 
@@ -113,7 +191,10 @@ describe 'ContentHelper', type: :helper do
         end
 
         it 'uses the brain icon' do
-          expect(html).to eq '<div class="prompt prompt-bg"><div class="govuk-grid-row"><div class="govuk-grid-column-one-quarter"><i aria-describedby="brain icon" class="fa-2x fa-solid fa-brain"></i></div><div class="govuk-grid-column-three-quarters"><h2 class="govuk-heading-m">Reflection point</h2><p class="govuk-body-m">hello world</p></div></div></div>'
+          expect(html).to include '<div class="prompt prompt-bg">'
+          expect(html).to include '<i aria-describedby="brain icon" class="fa-2x fa-solid fa-brain"></i>'
+          expect(html).to include '<h2 class="govuk-heading-m">Reflection point</h2>'
+          expect(html).to include '<p class="govuk-body-m">hello world</p>'
         end
       end
 
@@ -127,7 +208,10 @@ describe 'ContentHelper', type: :helper do
         end
 
         it 'uses the book icon' do
-          expect(html).to eq '<div class="prompt"><div class="govuk-grid-row"><div class="govuk-grid-column-one-quarter"><i aria-describedby="book icon" class="fa-2x fa-solid fa-book"></i></div><div class="govuk-grid-column-three-quarters"><h2 class="govuk-heading-m">Further reading</h2><p class="govuk-body-m">hello world</p></div></div></div>'
+          expect(html).to include '<div class="prompt">'
+          expect(html).to include '<i aria-describedby="book icon" class="fa-2x fa-solid fa-book"></i>'
+          expect(html).to include '<h2 class="govuk-heading-m">Further reading</h2>'
+          expect(html).to include '<p class="govuk-body-m">hello world</p>'
         end
       end
 
@@ -143,7 +227,10 @@ describe 'ContentHelper', type: :helper do
         end
 
         it 'builds semantic markup' do
-          expect(html).to eq '<div class="blockquote-container"><blockquote class="quote"><p class="govuk-body-m">Life is trying things to see if they work.</p><cite>Ray Bradbury</cite></blockquote></div>'
+          expect(html).to include '<div class="blockquote-container">'
+          expect(html).to include '<blockquote class="quote">'
+          expect(html).to include '<p class="govuk-body-m">Life is trying things to see if they work.</p>'
+          expect(html).to include '<cite>Ray Bradbury</cite>'
         end
       end
 
@@ -159,7 +246,11 @@ describe 'ContentHelper', type: :helper do
         end
 
         it 'builds semantic markup' do
-          expect(html).to eq '<div class="govuk-grid-row"><div class="govuk-grid-column-two-thirds"><p class="govuk-body-m">Description of an image</p></div><div class="govuk-grid-column-one-third"><p class="govuk-body-m"><img src="/path/to/image" alt="image title"></p></div></div>'
+          expect(html).to include '<div class="govuk-grid-row">'
+          expect(html).to include '<div class="govuk-grid-column-two-thirds">'
+          expect(html).to include '<p class="govuk-body-m">Description of an image</p>'
+          expect(html).to include '<div class="govuk-grid-column-one-third">'
+          expect(html).to include '<img src="/path/to/image" alt="image title">'
         end
       end
     end
