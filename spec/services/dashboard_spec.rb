@@ -22,7 +22,7 @@ RSpec.describe Dashboard do
     let(:data_files) { Dir.glob path.join('*/*/*.csv') }
 
     describe 'exported files' do
-      specify { expect(data_files.count).to be described_class::DATA_SOURCES.size }
+      specify { expect(data_files.count).to eq described_class::DATA_SOURCES.size }
     end
 
     it 'exports data in CSV format' do
