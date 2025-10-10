@@ -301,6 +301,33 @@ File.open(file, 'w') { |file| file.write(data.to_yaml) }
 
 ---
 
+### Creating data exports (WIP)
+
+#### Scripts
+
+The data export scripts are located within `app/models/data_analysis`
+
+The script will then need to be added to `DATA_SOURCES` within `app/services/dashboard.rb`
+e.g adding in `{ model: 'DataAnalysis::DeviceEngagement', folder: 'training', file: 'device_engagement' },`
+this will then generate the file `tmp/<current date>/training/device_engagement.csv`
+
+#### Seeding
+
+An example of creating seed data can be found here `lib/seed_device_events.rb`
+
+seeds scripts can be executed by running `bin/docker-rails runner <seed script>`
+
+e.g
+`bin/docker-rails runner lib/seed_device_events.rb`
+
+#### Running
+
+`bin/docker-rails console` to get into the console
+then run DashboardJob.run(upload: false)
+
+files can be found within tmp/<current date>
+
+
 [app-repo]: https://github.com/DFE-Digital/early-years-foundation-recovery
 [prototype-repo]: https://github.com/DFE-Digital/ey-recovery-prototype
 [rails-template]: https://github.com/DFE-Digital/rails-template

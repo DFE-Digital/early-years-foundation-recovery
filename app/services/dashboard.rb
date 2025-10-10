@@ -42,6 +42,9 @@ class Dashboard
     { model: 'DataAnalysis::UsersCompletedModuleCountByExperience', folder: 'training', file: 'users_completed_module_count_by_experience' },
     { model: 'DataAnalysis::UsersModuleOrderByExperience', folder: 'training', file: 'users_module_order_by_experience' },
 
+    { model: 'DataAnalysis::DeviceEngagement', folder: 'training', file: 'device_engagement' },
+    { model: 'DataAnalysis::ModuleDurationBuckets', folder: 'training', file: 'module_duration_buckets' },
+
     { model: 'DataAnalysis::GuestFeedbackScores',       folder: 'feedback', file: 'guest_feedback'                },
     { model: 'DataAnalysis::UserFeedbackScores',        folder: 'feedback', file: 'course_feedback'               },
     { model: 'DataAnalysis::ModuleFeedbackForms',       folder: 'feedback', file: 'module_feedback'               },
