@@ -1,12 +1,12 @@
   #started.govuk-grid-row
     .govuk-grid-column-full
       h2.govuk-heading-m = t('my_learning.modules_in_progress_title')
-      - if current_user.course.current_modules.none?
+      - if @current_modules.none?
         - if current_user.course.completed_modules.none?
           p = t('my_learning.begin_training_course')
         - else
           p = t('my_learning.choose_available_module')
       - else
         .grid-container
-          - current_user.course.current_modules.each do |mod|
+          - @current_modules.each do |mod|
             = render 'card', mod: mod, progress: module_progress(mod)

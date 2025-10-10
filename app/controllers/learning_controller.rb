@@ -8,6 +8,8 @@ class LearningController < ApplicationController
 
   # GET /my-modules
   def show
+    @available_modules = current_user.course.available_modules
+    @current_modules = current_user.course.current_modules
     track('learning_page')
   end
 

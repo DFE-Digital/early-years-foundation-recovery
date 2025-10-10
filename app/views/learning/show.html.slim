@@ -20,7 +20,7 @@
 - else
   = render 'in_progress_modules'
 
-  - if current_user.course.available_modules.any? || current_user.course.course_completed?
+  - if @available_modules.any? || current_user.course.course_completed?
     = render 'available_modules'
 
   - if current_user.course.upcoming_modules.any?

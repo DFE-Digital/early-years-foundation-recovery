@@ -6,9 +6,9 @@ hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
       - if current_user.content_changes.new_modules?
         span.govuk-tag
           = t('my_learning.new_tag.section')
-    - if current_user.course.available_modules.any?
+    - if @available_modules.any?
       .grid-container
-        - current_user.course.available_modules.each do |mod|
+        - @available_modules.each do |mod|
           = render 'card', mod: mod, progress: false
 
     - elsif current_user.course.course_completed?
