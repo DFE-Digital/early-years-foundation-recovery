@@ -5,7 +5,7 @@
     "build": "esbuild app/javascript/*.* --bundle --outdir=app/assets/builds",
     "build:css": "sass app/assets/stylesheets/application.scss app/assets/builds/application.css --no-source-map --load-path=node_modules --quiet-deps",
     "preinstall": "mkdir -p app/assets/builds",
-    "postinstall": "cp -R node_modules/govuk-frontend/dist/govuk/assets/fonts/. app/assets/builds/fonts && cp -R node_modules/govuk-frontend/dist/govuk/assets/images/. app/assets/builds/images",
+    "copy:assets": "mkdir -p app/assets/builds/fonts app/assets/builds/images && cp -R node_modules/govuk-frontend/dist/govuk/assets/images/. app/assets/builds/images && cp -R node_modules/@fortawesome/fontawesome-free/webfonts/. app/assets/builds/fonts && sh -c 'if [ -d app/assets/fonts ]; then cp -R app/assets/fonts/. app/assets/builds/fonts; fi'",
     "lint": "npx stylelint app/assets/stylesheets/* --fix"
   },
   "dependencies": {
