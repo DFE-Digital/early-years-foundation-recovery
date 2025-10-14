@@ -253,6 +253,38 @@ describe 'ContentHelper', type: :helper do
           expect(html).to include '<img src="/path/to/image" alt="image title">'
         end
       end
+
+      describe 'Headings for h2 and h3' do
+        let(:input) do
+          <<~MARKUP
+            ## My sub
+            ### My sub 2
+          MARKUP
+        end
+
+        it 'renders heading using correct heading class' do
+          expect(html).to eq <<~HTML.strip
+            <h2 id="my-sub" class="govuk-heading-m">My sub</h2>
+            <h3 id="my-sub-2" class="govuk-heading-s">My sub 2</h3>
+          HTML
+        end
+      end
+
+      describe 'Headings for h3 then h2' do
+        let(:input) do
+          <<~MARKUP
+            ### My h3 heading
+            ## My h2 heading
+          MARKUP
+        end
+
+        it 'renders heading using correct heading class' do
+          expect(html).to eq <<~HTML.strip
+            <h3 id="my-h3-heading" class="govuk-heading-s">My h3 heading</h3>
+            <h2 id="my-h2-heading" class="govuk-heading-m">My h2 heading</h2>
+          HTML
+        end
+      end
     end
   end
 end
