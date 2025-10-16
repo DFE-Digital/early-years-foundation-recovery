@@ -2,8 +2,12 @@ header.govuk-super-navigation-header.noprint
   .govuk-super-navigation-header__container.govuk-clearfix
     .govuk-width-container
       .govuk-super-navigation-header__header-logo
-        = link_to root_path, class: 'govuk-header__link govuk-header__link--homepage', id: 'logo', aria: { label: 'Go to the homepage' }
-          = image_tag 'dfe-logo.png', alt: 'Department for Education', class: 'govuk-header__logotype dfe-rebrand-logo'
+        - if user_signed_in? && !current_user.registration_complete?
+          span id='logo' aria-label='Go to the homepage'
+            = image_tag 'dfe-logo.png', alt: 'Department for Education', class: 'govuk-header__logotype dfe-rebrand-logo'
+        - else
+          = link_to root_path, class: 'govuk-header__link govuk-header__link--homepage', id: 'logo', aria: { label: 'Go to the homepage' }
+            = image_tag 'dfe-logo.png', alt: 'Department for Education', class: 'govuk-header__logotype dfe-rebrand-logo'
 
 
       - if action_links.any?
@@ -19,7 +23,10 @@ header.govuk-super-navigation-header.noprint
       .govuk-service-navigation__container
         - if service_name.present?
           span.govuk-service-navigation__service-name
-            = link_to service_name, service_url, class: 'govuk-service-navigation__link govuk-service-navigation__item--active'
+            - if user_signed_in? && !current_user.registration_complete?
+              span.service-name--static = service_name
+            - else
+              = link_to service_name, service_url, class: 'govuk-service-navigation__link govuk-service-navigation__item--active'
         - if navigation_items.any?
           nav.govuk-service-navigation__wrapper aria-label='Menu'
             button.govuk-service-navigation__toggle.govuk-js-service-navigation-toggle type='button' aria-controls='navigation' hidden=""

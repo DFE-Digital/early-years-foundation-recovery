@@ -47,6 +47,11 @@
   width: auto;
 }
 
+.govuk-super-navigation-header__header-logo .govuk-header__logotype {
+  height: 30px;
+  width: auto;
+}
+
 .govuk-header__link:focus .govuk-header__logotype {
   content: url(/assets/dfe-logo-alt.png);
 }
@@ -103,4 +108,9 @@
   .govuk-template--rebranded .govuk-service-navigation__service-name {
     padding-bottom: 0;
   }
+}
+
+.govuk-template--rebranded .govuk-service-navigation__service-name .service-name--static {
+  display: inline-block;
+  padding-bottom: govuk-spacing(3);
 }
