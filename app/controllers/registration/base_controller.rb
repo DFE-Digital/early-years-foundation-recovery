@@ -22,18 +22,27 @@ module Registration
 
       if current_user.display_whats_new?
         current_user.update! display_whats_new: false
-        redirect_to static_path('whats-new'), notice: registration_notification
+        flash[:notice] = registration_notification
+        redirect_to static_path('whats-new')
       else
-        redirect_to my_modules_path, notice: registration_notification
+        notice_payload = registration_notification
+        flash[:notice] = notice_payload
+        redirect_to my_modules_path
       end
     end
 
-    # @return [String]
     def registration_notification
-      if current_user.private_beta_registration_complete?
-        t(:update_registration)
+      key = if current_user.private_beta_registration_complete?
+              "update_registration"
+            else
+              "complete_registration"
+            end
+
+      notice = I18n.t(key, options: :flash)
+      if notice.is_a?(Hash)
+        notice = notice.deep_symbolize_keys
       else
-        t(:complete_registration)
+        notice
       end
     end
 
