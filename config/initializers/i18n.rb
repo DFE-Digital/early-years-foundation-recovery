@@ -6,18 +6,26 @@
 #
 # @see https://github.com/ruby-i18n/i18n/wiki/Backend
 module I18n::Backend::Content
-  # @return [String, nil]
+  # @return [String, Hash, nil]
   def lookup(locale, key, scope = [], options = {})
-    original = super
-    resource_name = scope ? Array(scope).push(key).join('.') : key
-    find_resource(resource_name)&.body || original
-  end
+    full_key = Array(scope).push(key).join('.')
 
-private
+    # Only intercept registration_form_banners keys
+    if full_key.start_with?('registration_form_banners.')
+      # First try CMS resource
+      resource_body = find_resource(full_key)&.body
 
-  # @return [Page::Resource, nil]
-  def find_resource(resource_name)
-    Page::Resource.by_name(resource_name)
+      if resource_body.is_a?(Hash)
+        return resource_body
+      elsif resource_body.nil?
+        # fallback to YAML
+        original = super
+        return original if original.is_a?(Hash)
+      end
+    end
+
+    # Default behavior for everything else
+    super
   end
 end
 
