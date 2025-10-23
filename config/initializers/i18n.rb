@@ -20,7 +20,6 @@ module I18n::Backend::Content
       original = super
       return original if original.is_a?(Hash)
     end
-  end
 
     # Default behavior for everything else
     super
