@@ -36,6 +36,7 @@ module ContentHelper
     dl
     dt
     dd
+    section
   ].freeze
 
   ALLOWED_ATTRIBUTES = %w[
@@ -51,6 +52,7 @@ module ContentHelper
     rowspan
     aria-label
     aria-describedby
+    download
   ].freeze
 
   ALLOWED_PROTOCOLS = %w[
