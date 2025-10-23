@@ -33,14 +33,14 @@ module Registration
 
     def registration_notification
       key = if current_user.private_beta_registration_complete?
-              "update_registration"
+              'update_registration'
             else
-              "complete_registration"
+              'complete_registration'
             end
 
       notice = I18n.t(key, options: :flash)
       if notice.is_a?(Hash)
-        notice = notice.deep_symbolize_keys
+        notice.deep_symbolize_keys
       else
         notice
       end
