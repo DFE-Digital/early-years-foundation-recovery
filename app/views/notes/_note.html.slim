@@ -10,7 +10,7 @@ div id="#{dom_id note}"
     - if note.filled?
       h4.govuk-heading-m You wrote:
 
-      = simple_format(note.body, class: 'govuk-body')
-    - else 
+      = simple_format(note.body, class: 'govuk-body', data: { clarity_mask: 'True' })
+    - else
       p.govuk_body aria-label="You have not made any notes for #{note.title}"
         | You have not made any notes on this page yet.
