@@ -1,6 +1,12 @@
 - if flash.any?
+
   .govuk-grid-row
-    .govuk-grid-column-full
+    .govuk-grid-column-two-thirds
       - flash.each do |variant, message|
-        - unless %w{timedout}.include?(variant)
-          = govuk_notification_banner title_text: t("banners.#{variant}"), disable_auto_focus: true, text: m(message), success: %w[notice].include?(variant), classes: "govuk-notification-banner--#{variant}"
+        - unless %w[timedout].include?(variant)
+          - if message.is_a?(Hash)
+            = govuk_notification_banner(title_text: message['label'], success: %w[notice].include?(variant), disable_auto_focus: true) do
+              h3.govuk-notification-banner__heading= message['heading']
+              p.govuk-body= message['body']
+          - elsif message.is_a?(String)
+            = govuk_notification_banner(title_text: t("banners.#{variant}"), text: m(message), success: %w[notice].include?(variant), disable_auto_focus: true)
