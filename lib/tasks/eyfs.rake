@@ -14,9 +14,11 @@ namespace :eyfs do
         terms_and_conditions_agreed_at: Time.zone.now,
         first_name: 'Bot',
         last_name: 'User',
-        setting_type_id: 'childminder_independent',
+        setting_type_id: 'other',
+        setting_type_other: 'Childminder',
         local_authority: 'Lewisham',
-        role_type: 'childminder',
+        role_type: 'other',
+        role_type_other: 'Childminder',
         registration_complete: true,
         display_whats_new: false,
       )
