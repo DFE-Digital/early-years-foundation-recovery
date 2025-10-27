@@ -1,7 +1,7 @@
 - if flash.any?
 
   .govuk-grid-row
-    .govuk-grid-column-full
+    .govuk-grid-column-two-thirds
       - flash.each do |variant, message|
         - unless %w[timedout].include?(variant)
           - if message.is_a?(Hash)
