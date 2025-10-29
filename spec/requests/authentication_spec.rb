@@ -64,7 +64,7 @@ RSpec.describe 'Authentication', type: :request do
 
         it 'registration must be completed' do
           follow_redirect!
-          expect(response.body).to include 'Please complete registration'
+          expect(response.body).to include 'You must agree to the terms and conditions before you can use this service.'
         end
       end
 

@@ -438,6 +438,10 @@ en:
   details_updated: You have updated your details
   update_registration: Thank you for updating your Early years child development training account. You can now continue.
 
+  terms_and_conditions:
+    label: Important
+    heading: You must agree to the terms and conditions before you can use this service.
+
   # /registration/terms-and-conditions/edit
   register_terms_and_conditions:
     title: Terms and Conditions
