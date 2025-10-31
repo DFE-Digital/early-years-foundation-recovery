@@ -59,12 +59,12 @@ RSpec.describe 'Authentication', type: :request do
         let(:user) { create :user, :confirmed }
 
         it do
-          expect(response).to redirect_to edit_registration_terms_and_conditions_path
+          expect(response).to redirect_to edit_registration_setting_type_path
         end
 
         it 'registration must be completed' do
           follow_redirect!
-          expect(response.body).to include 'You must agree to the terms and conditions before you can use this service.'
+          expect(response.body).to include 'You must finish your profile registration before you can use this service.'
         end
       end
 

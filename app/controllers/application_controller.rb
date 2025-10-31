@@ -19,8 +19,29 @@ class ApplicationController < ActionController::Base
     authenticate_user! unless user_signed_in?
     return true if current_user.registration_complete?
 
-    flash[:important] = terms_and_conditions_notification
-    redirect_to edit_registration_terms_and_conditions_path
+    if :terms_and_conditions_agreed_at.nil?
+      flash[:important] = terms_and_conditions_notification
+      redirect_to edit_registration_terms_and_conditions_path
+    else
+      flash[:important] = complete_registration_notification
+      # Redirect to last incomplete registration step
+      # Role, setting, time
+      redirect_to edit_registration_setting_type_path
+      # redirect_to edit_registration_role_type_path if :role_type.nil?
+      # redirect_to edit_registration_early_years_experience_path if :early_years_experience.nil?
+      # redirect_to edit_registration_training_emails_path if :training_emails.nil?
+    end
+  end
+
+  def complete_registration_notification
+    key = 'complete_user_registration'
+
+    notice = I18n.t(key, options: :flash)
+    if notice.is_a?(Hash)
+      notice.deep_symbolize_keys
+    else
+      notice
+    end
   end
 
   def terms_and_conditions_notification
