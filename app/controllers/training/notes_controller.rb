@@ -18,6 +18,7 @@ class Training::NotesController < ApplicationController
       track('user_note_created')
       redirect_to next_page_path
     else
+      Rails.logger.error("Learning log save failed for user #{current_user.id}: #{note.errors.full_messages.join(', ')}")
       render_current_page
     end
   end
@@ -28,6 +29,7 @@ class Training::NotesController < ApplicationController
       track('user_note_updated')
       redirect_to next_page_path
     else
+      Rails.logger.error("Learning log update failed for user #{current_user.id}: #{note.errors.full_messages.join(', ')}")
       render_current_page
     end
   end
