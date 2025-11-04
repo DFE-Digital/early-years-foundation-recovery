@@ -25,12 +25,16 @@ class ApplicationController < ActionController::Base
     else
       flash[:important] = complete_registration_notification
       # Redirect to last incomplete registration step
-      # Role, setting, time
-      redirect_to edit_registration_setting_type_path
-      # redirect_to edit_registration_role_type_path if :role_type.nil?
-      # redirect_to edit_registration_early_years_experience_path if :early_years_experience.nil?
-      # redirect_to edit_registration_training_emails_path if :training_emails.nil?
+      registration_path_redirect
     end
+  end
+
+  def registration_path_redirect
+    path = edit_registration_training_emails_path if current_user.training_emails.nil?
+    path = edit_registration_early_years_experience_path if current_user.early_years_experience.nil?
+    path = edit_registration_setting_type_path if current_user.setting_type.nil?
+
+    redirect_to path
   end
 
   def complete_registration_notification

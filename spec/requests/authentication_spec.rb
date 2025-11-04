@@ -68,6 +68,32 @@ RSpec.describe 'Authentication', type: :request do
         end
       end
 
+      context 'when partially registered up to early years experience' do
+        let(:user) { create :user, :partly_registered }
+
+        it do
+          expect(response).to redirect_to edit_registration_setting_type_path
+        end
+
+        it 'registration must be completed' do
+          follow_redirect!
+          expect(response.body).to include 'You must finish your profile registration before you can use this service.'
+        end
+      end
+
+      context 'when partially registered up to training emails' do
+        let(:user) { create :user, :partly_registered_training }
+
+        it do
+          expect(response).to redirect_to edit_registration_setting_type_path
+        end
+
+        it 'registration must be completed' do
+          follow_redirect!
+          expect(response.body).to include 'You must finish your profile registration before you can use this service.'
+        end
+      end
+
       context 'when registered' do
         let(:user) { create :user, :registered }
 
