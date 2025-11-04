@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe DataAnalysis::ClosedAccounts do
   let(:headers) do
     [
+      'User ID',
       'Closed',
       'Setting',
       'Custom setting',
@@ -108,5 +109,19 @@ RSpec.describe DataAnalysis::ClosedAccounts do
     create :user, :closed, closed_reason: 'other', closed_reason_custom: 'I know everything'
   end
 
-  it_behaves_like 'a data export model'
+  it 'has correct headers' do
+    expect(described_class.column_names).to eq(headers)
+  end
+
+  it 'has user ids' do
+    dashboard_data = described_class.dashboard
+    expect(dashboard_data).to all(include(:user_id))
+  end
+
+  it 'matches expected data' do
+    # Compare everything else except user_id
+    dashboard_data = described_class.dashboard
+    actual_rows_without_id = dashboard_data.map { |r| r.except(:user_id) }
+    expect(actual_rows_without_id).to match_array(rows.map { |r| r.except(:user_id) })
+  end
 end
