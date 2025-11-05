@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     authenticate_user! unless user_signed_in?
     return true if current_user.registration_complete?
 
-    if :terms_and_conditions_agreed_at.nil?
+    if current_user.terms_and_conditions_agreed_at.nil?
       flash[:important] = terms_and_conditions_notification
       redirect_to edit_registration_terms_and_conditions_path
     else
