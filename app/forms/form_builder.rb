@@ -23,7 +23,6 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
                     link_errors: true,
                     aria: { required: true },
                     label: { text: 'I confirm that I accept the terms and conditions and privacy policy.' }
-    # checked: :terms_and_conditions_agreed_at.nil? ? false : true
   end
 
   # @param option [Training::Answer::Option]
