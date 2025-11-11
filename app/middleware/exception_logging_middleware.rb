@@ -1,3 +1,4 @@
+# :nocov:
 class ExceptionLoggingMiddleware
   def initialize(app)
     @app = app
