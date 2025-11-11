@@ -19,6 +19,11 @@ module Trainee
       end
     end
 
+    # @return [Array<Trainee::Setting>]
+    def self.active
+      all.select(&:active?)
+    end
+
     # @return [Trainee::Setting, OpenStruct]
     def self.by_name(name)
       return OpenStruct.new(local_authority?: true, has_role?: true) if name.eql?('other')
@@ -35,7 +40,7 @@ module Trainee
 
     # @return [Array<Trainee::Setting>]
     def self.with_roles
-      all.select(&:has_role?)
+      active.select(&:has_role?)
     end
 
     # @note Guard clause required for container image build
@@ -45,7 +50,15 @@ module Trainee
     def self.valid_types
       return [] if Rails.application.config.contentful_space.nil?
 
-      order(:name).load.map(&:name).push('other')
+      active.map(&:name).push('other')
+    end
+
+    # @param name [String]
+    # @return [Boolean]
+    def self.allowed_name?(name)
+      return true if name.eql?('other')
+
+      all.any? { |setting| setting.name == name }
     end
 
     # @return [Boolean]
@@ -56,6 +69,14 @@ module Trainee
     # @return [Boolean] childminder, other
     def has_role?
       role_type != 'none'
+    end
+
+    # @return [Boolean]
+    def active?
+      return true unless respond_to?(:active)
+
+      value = ActiveModel::Type::Boolean.new.cast(active)
+      value.nil? || value
     end
 
     # @return [Hash{Symbol => String}]
