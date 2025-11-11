@@ -69,7 +69,7 @@ module ApplicationHelper
 
   # @return [Boolean]
   def track_analytics?
-    cookies[:track_analytics] == 'true'
+    cookies[:track_analytics_v2] == 'true'
   end
 
   # @param parts [Array<String>]
