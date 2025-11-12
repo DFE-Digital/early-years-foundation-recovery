@@ -8,7 +8,6 @@ class HomeController < ApplicationController
     @public_modules = Training::Module.ordered.reject(&:draft?)
     if current_user.nil?  # logged-out user
       @public_modules.each do |mod|
-        Rails.logger.info "mod.name = #{mod.name.inspect}"
         custom_desc = I18n.t("training_module_custom_descriptions.#{mod.name}.description", default: 'fallback triggered')
 
         # override the description method for this instance
