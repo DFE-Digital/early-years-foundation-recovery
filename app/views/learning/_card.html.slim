@@ -2,7 +2,7 @@
   .card-container
     = training_module_image(mod)
 
-    - if current_user.content_changes.new_module?(mod)
+    - if current_user&.content_changes&.new_module?(mod)
       span.govuk-tag.govuk-tag--ey
         = t('my_learning.new_tag.card')
 
@@ -22,3 +22,7 @@
             .bar-ball
 
         .description= progress.description
+    - elsif current_user.nil?
+        - description_text = mod.description || ''
+        .description= description_text
+
