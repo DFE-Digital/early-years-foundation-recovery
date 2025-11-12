@@ -5,7 +5,18 @@ class HomeController < ApplicationController
 
   def index
     track('home_page')
+    @public_modules = Training::Module.ordered.reject(&:draft?)
+    if current_user.nil?  # logged-out user
+      @public_modules.each do |mod|
+        Rails.logger.info "mod.name = #{mod.name.inspect}"
+        custom_desc = I18n.t("training_module_custom_descriptions.#{mod.name}.description", default: 'fallback triggered')
+
+        # override the description method for this instance
+        mod.define_singleton_method(:description) { custom_desc }
+      end
+    end
     log_caching { render :index }
+
   end
 
   def show
