@@ -306,5 +306,9 @@ module Training
     def data
       @data ||= ContentIntegrity.new(module_name: name)
     end
+
+    def custom_description
+      I18n.t("training_module_custom_descriptions.#{mod.name}.description", default: description)
+    end
   end
 end

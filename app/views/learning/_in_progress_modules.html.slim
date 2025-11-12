@@ -9,4 +9,4 @@
       - else
         .grid-container
           - @current_modules.each do |mod|
-            = render 'card', mod: mod, progress: module_progress(mod)
+            = render 'card', mod: mod, progress: module_progress(mod), show_description: false
