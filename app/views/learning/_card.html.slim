@@ -21,7 +21,8 @@
           .bar-progress style="width: #{progress.percentage}"
             .bar-ball
 
-    / Always show the description regardless of progress
-    - description_text = progress.respond_to?(:description) ? progress.description : mod.description || mod.about
-    .description= description_text
+        .description= progress.description
+    - elsif current_user.nil?
+        - description_text = mod.description || ''
+        .description= description_text
 
