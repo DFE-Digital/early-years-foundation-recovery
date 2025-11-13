@@ -21,4 +21,9 @@ resource "azurerm_application_insights" "app_insights" {
   workspace_id               = azurerm_log_analytics_workspace.log_analytics.id
   internet_ingestion_enabled = true
   internet_query_enabled     = true
+  tags                       = var.tags
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
