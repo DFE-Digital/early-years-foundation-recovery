@@ -15,7 +15,7 @@ provider "azurerm" {
 
 moved {
   from = module.webapp.azurerm_log_analytics_workspace.webapp_logs
-  to = module.monitor.azurerm_log_analytics_workspace.log_analytics
+  to   = module.monitor.azurerm_log_analytics_workspace.log_analytics
 }
 
 # Create Resource Group

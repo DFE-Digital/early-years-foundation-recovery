@@ -68,15 +68,15 @@ variable "webapp_startup_command" {
 
 variable "logs_id" {
   description = "Log Analystics workspace ID"
-  type = string
+  type        = string
 }
 
 variable "instrumentation_key" {
   description = "App Insights instrumentation key"
-  type = string
+  type        = string
 }
 
 variable "insights_connection_string" {
   description = "App Insights connection string"
-  type = string
+  type        = string
 }

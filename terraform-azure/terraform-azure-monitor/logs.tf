@@ -14,11 +14,11 @@ resource "azurerm_log_analytics_workspace" "log_analytics" {
 
 # Create Application Insights
 resource "azurerm_application_insights" "app_insights" {
-    name                       = "${var.resource_name_prefix}-appinsights"
-    resource_group_name        = var.resource_group
-    location                   = var.location
-    application_type           = "web"
-    workspace_id               = azurerm_log_analytics_workspace.log_analytics.id
-    internet_ingestion_enabled = true
-    internet_query_enabled =     true
+  name                       = "${var.resource_name_prefix}-appinsights"
+  resource_group_name        = var.resource_group
+  location                   = var.location
+  application_type           = "web"
+  workspace_id               = azurerm_log_analytics_workspace.log_analytics.id
+  internet_ingestion_enabled = true
+  internet_query_enabled     = true
 }

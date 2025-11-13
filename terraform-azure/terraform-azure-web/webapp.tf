@@ -23,7 +23,7 @@ resource "azurerm_linux_web_app" "webapp" {
   service_plan_id           = azurerm_service_plan.asp.id
   https_only                = true
   virtual_network_subnet_id = var.webapp_subnet_id
-  app_settings              = merge({
+  app_settings = merge({
     "APPINSIGHTS_INSTRUMENTATIONKEY"             = var.instrumentation_key
     "APPLICATIONINSIGHTS_CONNECTION_STRING"      = var.insights_connection_string
     "ApplicationInsightsAgent_EXTENSION_VERSION" = "~3"
