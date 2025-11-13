@@ -22,7 +22,12 @@ resource "azurerm_linux_web_app" "review-app" {
   service_plan_id           = azurerm_service_plan.asp.id
   https_only                = true
   virtual_network_subnet_id = azurerm_subnet.reviewapp_snet.id
-  app_settings              = var.webapp_app_settings
+
+  app_settings = merge({
+    "APPINSIGHTS_INSTRUMENTATIONKEY"             = var.instrumentation_key
+    "APPLICATIONINSIGHTS_CONNECTION_STRING"      = var.insights_connection_string
+    "ApplicationInsightsAgent_EXTENSION_VERSION" = "~3"
+  }, var.webapp_app_settings)
 
   site_config {
     app_command_line                  = var.webapp_startup_command
