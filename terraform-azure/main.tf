@@ -13,6 +13,11 @@ provider "azurerm" {
   }
 }
 
+moved {
+  from = module.webapp.azurerm_log_analytics_workspace.webapp_logs
+  to   = module.monitor.azurerm_log_analytics_workspace.log_analytics
+}
+
 # Create Resource Group
 resource "azurerm_resource_group" "rg" {
   name     = "${var.resource_name_prefix}-rg"
@@ -23,6 +28,16 @@ resource "azurerm_resource_group" "rg" {
   lifecycle {
     ignore_changes = [tags]
   }
+}
+
+module "monitor" {
+  source = "./terraform-azure-monitor"
+
+  environment          = var.environment
+  location             = var.azure_region
+  resource_group       = azurerm_resource_group.rg.name
+  resource_name_prefix = var.resource_name_prefix
+  tags                 = local.common_tags
 }
 
 # Create Network resources
@@ -94,6 +109,9 @@ module "webapp" {
   kv_id                                    = module.network.kv_id
   kv_cert_secret_id                        = module.network.kv_cert_secret_id
   kv_mi_id                                 = module.network.kv_mi_id
+  insights_connection_string               = module.monitor.insights_connection_string
+  instrumentation_key                      = module.monitor.insights_instrumentation_key
+  logs_id                                  = module.monitor.logs_id
   depends_on                               = [module.network, module.database]
 }
 
@@ -115,5 +133,8 @@ module "review-apps" {
   webapp_docker_registry_url               = var.webapp_docker_registry_url
   webapp_health_check_path                 = "/health"
   webapp_health_check_eviction_time_in_min = 10
+  insights_connection_string               = module.monitor.insights_connection_string
+  instrumentation_key                      = module.monitor.insights_instrumentation_key
+  logs_id                                  = module.monitor.logs_id
   depends_on                               = [module.network, module.database]
 }
