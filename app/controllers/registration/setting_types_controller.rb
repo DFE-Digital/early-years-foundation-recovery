@@ -7,7 +7,7 @@ module Registration
 
       if form.save
         track('user_setting_type_change', success: true)
-        flash[:important] = complete_registration_banner
+        flash[:important] = complete_registration_banner if returning_user?
         if form.setting_type.local_authority?
           redirect_to edit_registration_local_authority_path
         elsif current_user.registration_complete?

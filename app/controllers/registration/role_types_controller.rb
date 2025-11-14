@@ -7,11 +7,11 @@ module Registration
 
       if form.save
         track('user_role_type_change', success: true)
-        flash[:important] = complete_registration_banner
+        flash[:important] = complete_registration_banner if returning_user?
         redirect_to edit_registration_early_years_experience_path
       else
         track('user_role_type_change', success: false)
-        flash[:important] = complete_registration_banner
+        flash[:important] = complete_registration_banner if returning_user?
         render :edit, status: :unprocessable_content
       end
     end
