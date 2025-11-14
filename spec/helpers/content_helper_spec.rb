@@ -264,8 +264,7 @@ describe 'ContentHelper', type: :helper do
 
         it 'renders heading using correct heading class' do
           expect(html).to eq <<~HTML.strip
-            <h2 id="my-sub" class="govuk-heading-m">My sub</h2>
-            <h3 id="my-sub-2" class="govuk-heading-s">My sub 2</h3>
+            <h2 id="my-sub" class="govuk-heading-m">My sub</h2><h3 id="my-sub-2" class="govuk-heading-s">My sub 2</h3>
           HTML
         end
       end
@@ -280,8 +279,7 @@ describe 'ContentHelper', type: :helper do
 
         it 'renders heading using correct heading class' do
           expect(html).to eq <<~HTML.strip
-            <h3 id="my-h3-heading" class="govuk-heading-s">My h3 heading</h3>
-            <h2 id="my-h2-heading" class="govuk-heading-m">My h2 heading</h2>
+            <h3 id="my-h3-heading" class="govuk-heading-s">My h3 heading</h3><h2 id="my-h2-heading" class="govuk-heading-m">My h2 heading</h2>
           HTML
         end
       end
