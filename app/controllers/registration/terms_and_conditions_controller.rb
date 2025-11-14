@@ -7,6 +7,7 @@ module Registration
 
       if form.save
         track('user_terms_and_conditions_agreed_at_change', success: true)
+        flash[:important] = complete_registration_banner
         if current_user.registration_complete?
           redirect_to user_path, notice: helpers.m(:details_updated)
         else

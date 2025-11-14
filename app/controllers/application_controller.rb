@@ -23,21 +23,6 @@ class ApplicationController < ActionController::Base
     redirect_to edit_registration_terms_and_conditions_path
   end
 
-  def complete_registration_banner
-    flash[:important] = complete_registration_notification
-  end
-
-  def complete_registration_notification
-    key = 'complete_user_registration'
-
-    notice = I18n.t(key, options: :flash)
-    if notice.is_a?(Hash)
-      notice.deep_symbolize_keys
-    else
-      notice
-    end
-  end
-
   def terms_and_conditions_notification
     key = 'terms_and_conditions'
 

@@ -46,6 +46,16 @@ module Registration
       end
     end
 
+    def complete_registration_banner
+      key = 'complete_user_registration'
+      notice = I18n.t(key, options: :flash)
+      if notice.is_a?(Hash)
+        notice.deep_symbolize_keys
+      else
+        notice
+      end
+    end
+
     # @see Auditing
     # @return [Boolean]
     def authenticate_user!

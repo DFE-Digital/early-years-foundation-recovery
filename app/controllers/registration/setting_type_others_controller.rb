@@ -11,6 +11,7 @@ module Registration
 
         track('user_setting_type_other_change', success: true)
 
+        flash[:important] = complete_registration_banner
         if setting.local_authority? && user.local_authority.blank?
           redirect_to edit_registration_local_authority_path
         else
