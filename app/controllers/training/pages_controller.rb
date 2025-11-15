@@ -59,6 +59,8 @@ module Training
     def track_events
       track('module_content_page')
 
+      ensure_module_started
+
       if track_module_start?
         track('module_start')
         helpers.calculate_module_state
@@ -101,6 +103,16 @@ module Training
     # @return [Boolean]
     def pdf?
       request.original_url.end_with?('.pdf')
+    end
+
+    def ensure_module_started
+      # we can not ensure started on this page or it will immediately complete
+      return if content.certificate?
+
+      if untracked?('module_start', training_module_id: mod.name)
+        track('module_start', training_module_id: mod.name)
+        helpers.calculate_module_state
+      end
     end
   end
 end
