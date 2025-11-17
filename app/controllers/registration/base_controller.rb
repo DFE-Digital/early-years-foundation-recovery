@@ -47,12 +47,12 @@ module Registration
     end
 
     def returning_user?
-      !current_user.first_name.nil? ||
+      !current_user.registration_complete && (!current_user.first_name.nil? ||
         !current_user.last_name.nil? ||
         !current_user.setting_type_id.nil? ||
         !current_user.role_type.nil? ||
         !current_user.early_years_experience.nil? ||
-        !current_user.training_emails.nil?
+        !current_user.training_emails.nil?)
     end
 
     def complete_registration_banner
