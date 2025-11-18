@@ -21,6 +21,9 @@ class Training::NotesController < ApplicationController
       Rails.logger.error("Learning log save failed for user #{current_user.id}: #{note.errors.full_messages.join(', ')}")
       render_current_page
     end
+  rescue StandardError => e
+    Rails.logger.error("Learning log create exception for user #{current_user.id}: #{e.class} - #{e.message}")
+    raise
   end
 
   # PATCH/PUT /my-account/learning-log
@@ -32,6 +35,9 @@ class Training::NotesController < ApplicationController
       Rails.logger.error("Learning log update failed for user #{current_user.id}: #{note.errors.full_messages.join(', ')}")
       render_current_page
     end
+  rescue StandardError => e
+    Rails.logger.error("Learning log update exception for user #{current_user.id}: #{e.class} - #{e.message}")
+    raise
   end
 
 private
