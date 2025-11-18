@@ -1,8 +1,8 @@
 - if flash.any?
   .govuk-grid-row
     - flash.each do |variant, message|
-      - next if %w[timedout].include?(variant)
-      div class=flash_wrapper_class(message)
+      - unless %w[timedout].include?(variant)
+      div class=notification_banner_width(message)
         - if message.is_a?(Hash)
           = govuk_notification_banner title_text: message['label'],
                                       success: %w[notice].include?(variant),

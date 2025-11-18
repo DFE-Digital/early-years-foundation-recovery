@@ -89,14 +89,12 @@ module ApplicationHelper
   end
 
   # @param message [String, Hash]
-  def flash_wrapper_class(message)
+  def notification_banner_width(message)
     # Default width if nothing is specified
     default_width = 'full'
-
     if message.is_a?(Hash)
       # Get the width from the message hash, fallback to default
       width = message['container_width'] || default_width
-
       # Map width values to GOV.UK grid classes
       container_width =   case width
                           when 'full'
@@ -107,9 +105,11 @@ module ApplicationHelper
                             'govuk-grid-column-one-half'
                           when 'one-third'
                             'govuk-grid-column-one-third'
+                          when 'three-quarters'
+                            'govuk-grid-column-three-quarters'
                           else
                             # fallback to default if unknown value
-                            'govuk-grid-column-two-thirds'
+                            'govuk-grid-column-full'
                           end
       return container_width
     end
