@@ -95,6 +95,7 @@ module ApplicationHelper
     if message.is_a?(Hash)
       # Get the width from the message hash, fallback to default
       width = message['container_width'] || default_width
+
       # Map width values to GOV.UK grid classes
       container_width =   case width
                           when 'full'

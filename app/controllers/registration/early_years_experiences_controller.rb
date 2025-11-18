@@ -7,7 +7,7 @@ module Registration
 
       if form.save
         track('user_early_years_experience_change', success: true)
-        flash[:important] = complete_registration_banner if returning_user?
+        flash[:important] = complete_registration_banner('full') if returning_user?
         if current_user.registration_complete?
           redirect_to user_path, notice: helpers.m(:details_updated)
         else
