@@ -115,7 +115,7 @@ module ApplicationHelper
     end
 
     # Default for plain string messages
-    'govuk-grid-column-two-thirds'
+    'govuk-grid-column-full'
   end
 
 end
