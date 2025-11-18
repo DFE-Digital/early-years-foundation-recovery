@@ -7,7 +7,7 @@ module Registration
 
       if form.save
         track('user_local_authority_change', success: true)
-        flash[:important] = complete_registration_banner if returning_user?
+        flash[:important] = complete_registration_banner('full') if returning_user?
         redirect_to next_form_path
       else
         track('user_local_authority_change', success: false)

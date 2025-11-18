@@ -55,8 +55,12 @@ module Registration
         !current_user.training_emails.nil?)
     end
 
-    def complete_registration_banner
-      key = 'complete_user_registration'
+    def complete_registration_banner(width = nil)
+      key = if width == 'full'
+              'complete_user_registration_full'
+            else
+              'complete_user_registration'
+            end
       notice = I18n.t(key, options: :flash)
       if notice.is_a?(Hash)
         notice.deep_symbolize_keys
