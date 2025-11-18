@@ -20,6 +20,7 @@ class Dashboard
     { model: 'User',                                    folder: 'users',    file: 'users'                         },
     { model: 'DataAnalysis::ClosedAccounts',            folder: 'users',    file: 'closed_accounts'               },
     { model: 'DataAnalysis::ReturningUsers',            folder: 'users',    file: 'returning_users'               },
+    { model: 'DataAnalysis::UserLastInteraction',       folder: 'users',    file: 'user_last_interaction'         },
     { model: 'DataAnalysis::UserCountByRoleAndExperience', folder: 'users', file: 'user_count_by_role_and_experience' },
     # { model: 'DataAnalysis::LocalAuthorityUser',        folder: 'users',    file: 'local_authority_users'         },
 
