@@ -441,10 +441,18 @@ en:
   terms_and_conditions:
     label: Important
     heading: You must agree to the terms and conditions before you can use this service.
+    container_width: two-thirds
 
+  # Common complete registration banners
   complete_user_registration:
     label: Important
     heading: You must finish your profile registration before you can use this service.
+    container_width: two-thirds
+
+  complete_user_registration_full:
+    label: Important
+    heading: You must finish your profile registration before you can use this service.
+    container_width: full
 
   # /registration/terms-and-conditions/edit
   register_terms_and_conditions:

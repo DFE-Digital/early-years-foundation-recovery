@@ -46,6 +46,29 @@ module Registration
       end
     end
 
+    def returning_user?
+      !current_user.registration_complete && (!current_user.first_name.nil? ||
+        !current_user.last_name.nil? ||
+        !current_user.setting_type_id.nil? ||
+        !current_user.role_type.nil? ||
+        !current_user.early_years_experience.nil? ||
+        !current_user.training_emails.nil?)
+    end
+
+    def complete_registration_banner(width = nil)
+      key = if width == 'full'
+              'complete_user_registration_full'
+            else
+              'complete_user_registration'
+            end
+      notice = I18n.t(key, options: :flash)
+      if notice.is_a?(Hash)
+        notice.deep_symbolize_keys
+      else
+        notice
+      end
+    end
+
     # @see Auditing
     # @return [Boolean]
     def authenticate_user!
