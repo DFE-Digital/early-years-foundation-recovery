@@ -7,7 +7,9 @@
         = t('my_learning.new_tag.card')
 
     h3.govuk-heading-s
-      = govuk_link_to mod.heading, training_module_path(mod.name), no_visited_state: true, class: 'card-link--header'
+      = govuk_link_to mod.heading, training_module_path(mod.name),
+                        no_visited_state: true,
+                        class: 'card-link--header'
 
     - if progress
       = link_to_retake_or_results(mod)
@@ -21,8 +23,9 @@
           .bar-progress style="width: #{progress.percentage}"
             .bar-ball
 
-      - if show_description
+      - if show_progress_description && progress.description.present?
         .description= progress.description
+
     - else
-      - if show_description
+      - if show_module_description && mod.description.present?
         .description= mod.description
