@@ -166,6 +166,25 @@ en:
     started: Resume module
     not_started: Start module
 
+  modules_title: |
+    ## Modules
+  training_module_custom_descriptions:
+    child-development-and-the-eyfs:
+      description: Learn how babies and toddlers develop communication skills and how you can support them
+    brain-development-and-how-children-learn:
+      description: Explore key stages of physical growth and how to encourage healthy movement
+    personal-social-and-emotional-development:
+      description: Understand how children develop social interaction skills and build relationships
+    module-4:
+      description: Learn strategies to support emotional regulation and resilience in young children.
+    module-5:
+      description: Explore how children think, problem-solve, and develop early learning skills.
+    module-6:
+      description: Understand early reading and writing development and how to encourage literacy.
+    module-7:
+      description: Learn how young children begin to understand numbers, shapes, and patterns.
+    module-8:
+      description: Discover ways to support creativity, imagination, and expressive play in children.
   # -----------------------------------------------------------
 
   prompt:
@@ -507,7 +526,7 @@ en:
     opt_in: Send me email updates about this training course
     opt_out: Do not send me email updates about this training course
 
-  # /
+  # / Home
   home:
     title: Home page
     hero: |
@@ -536,6 +555,8 @@ en:
 
       Sign in to continue learning, see your progress and download certificates.
     gov_one_button: Start your training now
+    modules:
+      info: There are 8 modules, written by early years experts, that covers key areas of child development. The average completion time of each module is 2 hours and you can complete these at your own pace.
 
   # /about-training
   about:
