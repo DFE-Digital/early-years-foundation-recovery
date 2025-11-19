@@ -26,7 +26,8 @@
     h3.govuk-heading-s Certificate of achievement
 
     - if module_progress.completed?
-      h1.govuk-heading-xl= current_user.name
+      h1.govuk-heading-xl data-clarity-mask='True'
+        = current_user.name
 
       - if pdf?
         hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
