@@ -306,6 +306,5 @@ module Training
     def data
       @data ||= ContentIntegrity.new(module_name: name)
     end
-
   end
 end
