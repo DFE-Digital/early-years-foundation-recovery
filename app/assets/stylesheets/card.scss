@@ -94,7 +94,7 @@
   }
 
   &:hover, &:focus-within {
-    background-color: govuk-colour('blue');
+    background-color: govuk-colour('dark-blue');
 
     a, .percentage, .description {
       color: govuk-colour('white');
@@ -152,11 +152,11 @@
     position: relative;
     z-index: 2;
   }
-  
+
   &-link--header {
     text-decoration: none;
     color: govuk-colour('blue');
-    
+
     // TODO: document what this is doing
     &::after {
       position: absolute;

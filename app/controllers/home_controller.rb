@@ -6,7 +6,7 @@ class HomeController < ApplicationController
   def index
     track('home_page')
     @public_modules = Training::Module.ordered.reject(&:draft?)
-    if current_user.nil?  # logged-out user
+    if current_user.nil? # logged-out user
       @public_modules.each do |mod|
         custom_desc = I18n.t("training_module_custom_descriptions.#{mod.name}.description", default: 'fallback triggered')
 
@@ -15,7 +15,6 @@ class HomeController < ApplicationController
       end
     end
     log_caching { render :index }
-
   end
 
   def show
