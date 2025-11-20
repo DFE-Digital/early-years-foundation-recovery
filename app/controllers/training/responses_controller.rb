@@ -41,6 +41,8 @@ module Training
             type: content.page_type,
             success: current_user_response.correct?,
             answers: current_user_response.answers)
+    rescue StandardError
+      false
     end
   end
 end
