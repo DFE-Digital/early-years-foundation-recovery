@@ -27,27 +27,6 @@ FactoryBot.define do
       registration_complete { true }
     end
 
-    trait :partly_registered do
-      named
-      setting_type_id { 'other' }
-      setting_type { nil }
-      setting_type_other { 'DfE' }
-      role_type { 'other' }
-      role_type_other { 'Developer' }
-      local_authority { nil }
-    end
-
-    trait :partly_registered_training do
-      named
-      setting_type_id { 'other' }
-      setting_type { nil }
-      setting_type_other { 'DfE' }
-      role_type { 'other' }
-      role_type_other { 'Developer' }
-      local_authority { nil }
-      early_years_experience { '0-2' }
-    end
-
     trait :closed do
       registered
       closed_at { '2024-01-08 10:23:40' }
