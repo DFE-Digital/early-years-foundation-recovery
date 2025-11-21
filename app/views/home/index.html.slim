@@ -15,6 +15,9 @@
   .govuk-grid-column-one-half
     = m('home.about', headings_start_with: 'xl')
 
+  .govuk-grid-column-full
+    = render 'modules'
+
 = render 'prompt'
 
 - unless current_user
