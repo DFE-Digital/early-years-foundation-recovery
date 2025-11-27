@@ -442,10 +442,6 @@ en:
     label: Important
     heading: You must agree to the terms and conditions before you can use this service.
 
-  complete_user_registration:
-    label: Important
-    heading: You must finish your profile registration before you can use this service.
-
   # /registration/terms-and-conditions/edit
   register_terms_and_conditions:
     title: Terms and Conditions
