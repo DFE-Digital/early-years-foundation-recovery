@@ -14,9 +14,10 @@ completed@example.com:
   confirmed_at: <%= 1.minute.ago %>
   first_name: Demo
   last_name: User
-  setting_type_id: childminder_agency
-  setting_type: Childminder as part of an agency
-  role_type: Childminder
+  setting_type_id: other
+  setting_type_other: Childminder
+  role_type: other
+  role_type_other: Childminder
   training_emails: true
   registration_complete: true
 

@@ -2,8 +2,7 @@ module Registration
   class SettingTypeForm < BaseForm
     validates :setting_type_id, presence: true
 
-    validates :setting_type_id,
-              inclusion: { in: Trainee::Setting.valid_types }
+    validate :setting_type_is_valid
 
     # @return [Boolean]
     def save
@@ -15,6 +14,15 @@ module Registration
     end
 
   private
+
+    # @return [void]
+    def setting_type_is_valid
+      return if setting_type_id.blank?
+      return if Trainee::Setting.valid_types.include?(setting_type_id)
+      return if user&.setting_type_id == setting_type_id
+
+      errors.add(:setting_type_id, :inclusion)
+    end
 
     # @return [Trainee::Setting]
     def setting

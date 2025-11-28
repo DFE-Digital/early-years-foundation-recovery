@@ -98,8 +98,19 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
 
   # @return [String]
   def select_trainee_setting
+    settings = Trainee::Setting.active
+    current_setting_id = object.respond_to?(:setting_type_id) ? object.setting_type_id : nil
+
+    if current_setting_id.present?
+      current_setting = Trainee::Setting.by_name(current_setting_id)
+
+      if current_setting.respond_to?(:name) && current_setting.respond_to?(:title) && settings.none? { |setting| setting.name == current_setting.name }
+        settings = (settings + [current_setting]).sort_by { |setting| setting.title.to_s }
+      end
+    end
+
     govuk_collection_select :setting_type_id,
-                            Trainee::Setting.all, :name, :title,
+                            settings, :name, :title,
                             options: { include_blank: true },
                             label: { text: I18n.t('register_setting.label'), class: 'govuk-visually-hidden' },
                             hint: { text: I18n.t('register_setting.body') },

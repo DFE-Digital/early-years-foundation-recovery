@@ -8,6 +8,8 @@ private
   # @return [Boolean]
   def multiple_choice?
     params[:response][:answers].is_a?(Array)
+  rescue StandardError
+    false
   end
 
   # @return [Boolean]

@@ -84,7 +84,7 @@ RSpec.describe 'Registration' do
     click_button 'Continue'
 
     # End
-    expect(page).to have_text 'Thank you for creating an Early years child development training account. You can now start your first module.'
+    expect(page).to have_text 'You can now start your first module.'
   end
 
   it 'can be completed with a standard setting that requires local authority' do
@@ -126,6 +126,6 @@ RSpec.describe 'Registration' do
     click_button 'Continue'
 
     # End
-    expect(page).to have_text 'Thank you for creating an Early years child development training account'
+    expect(page).to have_text 'You can now start your first module.'
   end
 end

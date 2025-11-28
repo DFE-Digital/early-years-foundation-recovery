@@ -430,10 +430,17 @@ en:
 
   # Registration Journey -------------------------------------------------------
 
-  # Common registration form elements
+  # Common registration form banners:
+  complete_registration:
+    label: Success
+    heading: You have created your account
+    body: You can now start your first module.
   details_updated: You have updated your details
-  complete_registration: Thank you for creating an Early years child development training account. You can now start your first module.
   update_registration: Thank you for updating your Early years child development training account. You can now continue.
+
+  terms_and_conditions:
+    label: Important
+    heading: You must agree to the terms and conditions before you can use this service.
 
   # /registration/terms-and-conditions/edit
   register_terms_and_conditions:

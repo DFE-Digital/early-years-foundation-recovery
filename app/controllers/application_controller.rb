@@ -19,7 +19,19 @@ class ApplicationController < ActionController::Base
     authenticate_user! unless user_signed_in?
     return true if current_user.registration_complete?
 
-    redirect_to edit_registration_terms_and_conditions_path, notice: 'Please complete registration'
+    flash[:important] = terms_and_conditions_notification
+    redirect_to edit_registration_terms_and_conditions_path
+  end
+
+  def terms_and_conditions_notification
+    key = 'terms_and_conditions'
+
+    notice = I18n.t(key, options: :flash)
+    if notice.is_a?(Hash)
+      notice.deep_symbolize_keys
+    else
+      notice
+    end
   end
 
   def configure_permitted_parameters
