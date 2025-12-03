@@ -170,21 +170,21 @@ en:
     ## Modules
   training_module_custom_descriptions:
     child-development-and-the-eyfs:
-      description: Learn how babies and toddlers develop communication skills and how you can support them
+      description: Factors affecting children’s development and effective implementation of EYFS.
     brain-development-and-how-children-learn:
-      description: Explore key stages of physical growth and how to encourage healthy movement
+      description: Theories of cognitive development, delays in brain development and the importance of a healthy lifestyle for learning.
     personal-social-and-emotional-development:
-      description: Understand how children develop social interaction skills and build relationships
+      description: How secure relationships affect learning and behaviour and why self-regulation is important.
     module-4:
-      description: Learn strategies to support emotional regulation and resilience in young children.
+      description: Factors affecting language development and your role in creating a language rich environment.
     module-5:
-      description: Explore how children think, problem-solve, and develop early learning skills.
+      description: The typical stages of physical development and how physical skills impact on learning, development and behaviour.
     module-6:
-      description: Understand early reading and writing development and how to encourage literacy.
+      description: How to nurture positive attitudes and interests in mathematics and provide early number experiences.
     module-7:
-      description: Learn how young children begin to understand numbers, shapes, and patterns.
+      description: Looking at the curriculum as a progression model and different approaches to teaching and learning.
     module-8:
-      description: Discover ways to support creativity, imagination, and expressive play in children.
+      description: The importance of identifying and supporting differences and needs in children’s learning and development.
   # -----------------------------------------------------------
 
   prompt:

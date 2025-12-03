@@ -43,7 +43,7 @@
 .card {
   position: relative;
   background-color: govuk-colour('light-grey');
-  border-bottom: 3px solid govuk-colour('blue');
+  border-bottom: 3px solid govuk-colour('dark-blue');
 
   @include govuk-media-query($from: tablet) {
     max-width: 300px;
@@ -94,7 +94,7 @@
   }
 
   &:hover, &:focus-within {
-    background-color: govuk-colour('blue');
+    background-color:  $govuk-link-hover-colour;
 
     a, .percentage, .description {
       color: govuk-colour('white');
