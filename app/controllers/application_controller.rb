@@ -57,6 +57,7 @@ class ApplicationController < ActionController::Base
 
   def set_analytics_tracking_id
     @tracking_id = Rails.configuration.google_analytics_tracking_id
+    @clarity_tracking_id = Rails.configuration.clarity_tracking_id
   end
 
   # @return [Boolean] do not run accessibility tests with debug panels visible
