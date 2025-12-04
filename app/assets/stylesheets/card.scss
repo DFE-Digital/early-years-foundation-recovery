@@ -40,6 +40,60 @@
   margin-bottom: govuk-spacing(1);
 }
 
+.home-card-container img {
+  max-width: 100%;
+  margin-bottom: govuk-spacing(1);
+}
+
+.home-content {
+  padding: govuk-spacing(6);
+  min-height: 190px;
+}
+
+.home-grid-container {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 15px;
+
+  @media screen and (min-width: 640px) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
+    grid-gap: 20px;
+  }
+}
+
+.home-card {
+  position: relative;
+  background-color: govuk-colour('light-grey');
+  border-bottom: 3px solid govuk-colour('dark-blue');
+
+  &:hover, &:focus-within {
+    background-color:  $govuk-link-hover-colour;
+
+    a, .percentage, .description {
+      color: govuk-colour('white');
+    }
+
+    .bar-bg {
+      background-color: govuk-colour('black');
+    }
+
+    .bar-progress,
+    .bar-ball {
+      background-color: govuk-colour('yellow');
+    }
+
+    .govuk-tag {
+      background-color: govuk-colour('light-grey');
+      color: govuk-colour('blue');
+    }
+  }
+
+  &:focus-within {
+    outline: 3px solid govuk-colour('yellow');
+  }
+}
+
 .card {
   position: relative;
   background-color: govuk-colour('light-grey');
