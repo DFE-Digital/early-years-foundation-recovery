@@ -25,7 +25,7 @@ resource "azurerm_linux_web_app" "webapp" {
   virtual_network_subnet_id = var.webapp_subnet_id
   app_settings = merge({
     "APPINSIGHTS_INSTRUMENTATIONKEY"             = var.instrumentation_key
-    "APPLICATIONINSIGHTS_CONNECTION_STRING"      = var.insights_connection_string
+    "APPLICATION_INSIGHTS_CONNECTION_STRING"     = var.insights_connection_string
     "ApplicationInsightsAgent_EXTENSION_VERSION" = "~3"
   }, var.webapp_app_settings)
 
