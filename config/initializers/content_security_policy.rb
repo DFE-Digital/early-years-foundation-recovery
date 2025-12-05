@@ -38,6 +38,15 @@ GOOGLE_STATIC_DOMAINS = %w[
   www.gstatic.com
 ].freeze
 
+# c.bing.com is required for Clarity pixels delivered via Bing CDN
+CLARITY_DOMAINS = %w[
+  www.clarity.ms
+  scripts.clarity.ms
+  j.clarity.ms
+  c.clarity.ms
+  c.bing.com
+].freeze
+
 Rails.application.config.content_security_policy do |policy|
   # @see https://www.contentful.com/developers/docs/tutorials/general/live-preview/#set-up-live-preview
   policy.frame_ancestors :self, 'https://app.contentful.com'
@@ -57,6 +66,7 @@ Rails.application.config.content_security_policy do |policy|
                      *GOVUK_DOMAINS,
                      *GOOGLE_ANALYTICS_DOMAINS, # Tracking pixels
                      *OPTIMIZE_DOMAINS,
+                     *CLARITY_DOMAINS,
                      '*.ctfassets.net',
                      'github.com', # eyrecovery-dev.azurewebsites.net
                      :data # Base64 encoded images
@@ -67,6 +77,7 @@ Rails.application.config.content_security_policy do |policy|
                      *GOOGLE_ANALYTICS_DOMAINS,
                      *GOOGLE_STATIC_DOMAINS,
                      *OPTIMIZE_DOMAINS,
+                     *CLARITY_DOMAINS,
                      # Allow all inline scripts until we can conclusively
                      # document all the inline scripts we use,
                      # and there's a better way to filter out junk reports
@@ -84,6 +95,7 @@ Rails.application.config.content_security_policy do |policy|
                      :wss,
                      *GOVUK_DOMAINS,
                      *GOOGLE_ANALYTICS_DOMAINS,
+                     *CLARITY_DOMAINS,
                      *webpack_dev_server.to_a
 end
 
