@@ -10,21 +10,29 @@ services:
       test: curl --fail http://localhost:3000/health || exit 1
     restart: on-failure
     environment:
+      # General dev env
       - ENVIRONMENT=
-      # psql client
       - PGUSER=postgres
       - PGPASSWORD=password
       - PGHOST=db
       - PGDATABASE=early_years_foundation_recovery_development
-      # app config
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
       - RAILS_ENV=development
       - DOMAIN=localhost:3000
       - RAILS_SERVE_STATIC_FILES=true
+
+      # OpenTelemetry config pointing to collector in docker-compose
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
+      - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
+      - OTEL_SERVICE_NAME=early-years-foundation-recovery
+      - APPLICATION_INSIGHTS_CONNECTION_STRING=${APPLICATION_INSIGHTS_CONNECTION_STRING}
+
     volumes:
       - .:/srv
     tty: true
     stdin_open: true
+    networks:
+      - recovery
 
   worker:
     container_name: recovery_worker
@@ -34,18 +42,24 @@ services:
       - RAILS_ENV=development
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
       - DASHBOARD_UPDATE=false
-      # overrides
       - SENTRY_TOKEN
       - DASHBOARD_UPDATE_INTERVAL
       - GOOGLE_CLOUD_BUCKET
+
+      # OpenTelemetry config pointing to collector
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_EXPORTER_OTLP_PROTOCOL=http
+      - OTEL_SERVICE_NAME=early-years-foundation-recovery
+      - APPLICATION_INSIGHTS_CONNECTION_STRING=${APPLICATION_INSIGHTS_CONNECTION_STRING}
+
     depends_on:
       - db
     volumes:
       - .:/srv
-    networks:
-      - recovery
     tty: true
     stdin_open: true
+    networks:
+      - recovery
 
   doc:
     container_name: recovery_doc
@@ -78,3 +92,6 @@ services:
       - ./tmp/pa11y:/tmp/pa11y
     tty: true
     stdin_open: true
+
+networks:
+  recovery:
