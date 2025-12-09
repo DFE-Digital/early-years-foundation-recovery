@@ -28,7 +28,6 @@ services:
     command: ["--config", "/etc/otel-collector-config.yml"]
     ports:
       - "4317:4317"
-      - "4318:4318"
     environment:
       - APPLICATION_INSIGHTS_CONNECTION_STRING=${APPLICATION_INSIGHTS_CONNECTION_STRING}
     networks:
