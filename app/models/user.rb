@@ -208,9 +208,8 @@ class User < ApplicationRecord
   validates :role_type,
             presence: true,
             if: proc { |u| u.role_type_required? }
-  validates :setting_type_id,
-            inclusion: { in: Trainee::Setting.valid_types },
-            if: proc { |u| u.registration_complete? }
+  validate :validate_setting_type_id,
+           if: proc { |u| u.registration_complete? }
   validates :terms_and_conditions_agreed_at,
             presence: true,
             allow_nil: false,
@@ -358,7 +357,10 @@ class User < ApplicationRecord
 
   # @return [Boolean]
   def setting_valid?
-    Trainee::Setting.valid_types.include?(setting_type_id)
+    return true if Trainee::Setting.valid_types.include?(setting_type_id)
+    return true if setting_type_id == setting_type_id_was
+
+    Trainee::Setting.by_name(setting_type_id)&.active?
   end
 
   # @return [Boolean]
@@ -503,5 +505,13 @@ private
   # @return [Hash]
   def data_attributes
     DASHBOARD_ATTRS.map { |field| { field => send(field) } }.reduce(&:merge)
+  end
+
+  def validate_setting_type_id
+    return if Trainee::Setting.valid_types.include?(setting_type_id)
+    return if setting_type_id == setting_type_id_was
+    return if Trainee::Setting.by_name(setting_type_id)&.active?
+
+    errors.add(:setting_type_id, :inclusion)
   end
 end
