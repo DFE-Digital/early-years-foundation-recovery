@@ -1,31 +1,52 @@
-# Deployment Strategy: Embedded OpenTelemetry Collector
+# 19. Embedded OpenTelemetry Collector
 
-## The Challenge
+- Status: accepted
+- Date: 2025-12-12
 
-We need to deploy the OpenTelemetry Collector alongside our Rails application to process and export traces to Azure Application Insights. However, Azure Web Apps (Linux) typically manages one container per app service, making a traditional "sidecar" container deployment complex to configure via Terraform key-value pairs alone.
+## Context and Problem Statement
 
-## The Solution: Embedded Sidecar
+We need to deploy the OpenTelemetry Collector alongside our Rails application to process and export traces to Azure Application Insights. The Collector acts as an intermediary, converting OTLP traces from the app into Azure Monitor-compatible data.
 
-We embed the Collector binary directly into the Rails application image and start it as a background process.
+However, our hosting environment (Azure Web Apps for Containers) is optimized for running a single container per specific app service. Deploying a traditional "sidecar" (multi-container pod) is complex and requires significant infrastructure changes (Moving to Kubernetes or Azure Sidecars/Container Apps).
 
-### How it works
+## Decision Drivers
 
-1.  **Multi-Stage Build**: We use Docker's multi-stage build feature to fetch the official `otelcol-contrib` binary from the `otel/opentelemetry-collector-contrib` image.
-2.  **Copy Binary**: This binary is copied to `/usr/bin/otelcol` in our production image. It is a static Go binary with no external dependencies.
-3.  **Process Management**: We modify the `CMD` to start the collector in the background before launching Rails.
+- Need for reliable telemetry (tracing) in Production.
+- Desire to minimize infrastructure complexity (Terraform changes).
+- Constraint: Azure Web Apps typically runs one container image.
 
-### The Command Explained
+## Considered Options
 
-```dockerfile
-CMD ["sh", "-c", "otelcol --config=/etc/otel-collector-config.yml >/dev/null 2>&1 & exec bundle exec rails server"]
+- **External Collector:** Run a centralized Collector service. (Adds network complexity/latency/cost).
+- **Kubernetes / Sidecars:** Move to AKS or Container Apps. (Migration overhead too high).
+- **Embedded Sidecar (Chosen):** Bundle the Collector binary inside the Rails container image.
+
+## Decision Outcome
+
+We chose to **Embed the Collector** directly into the Docker image.
+
+### Implementation Details
+
+1.  **Multi-Stage Build**: We fetch the `otelcol-contrib` binary from the official image during the Docker build.
+2.  **Startup Wrapper**: We use a shell command to start the collector in the background (`&`) before executing the main Rails process.
+    ```bash
+    otelcol --config=/etc/otel-collector-config.yml >/dev/null 2>&1 & exec bundle exec rails server
+    ```
+3.  **Local Communication**: The Rails app sends traces to `localhost:4318`.
+
+### Specific Handling for Background Workers
+
+The Web App automatically uses the `CMD` defined in the Dockerfile.
+However, **Background Workers** (running in Azure Container Instances) typically override the default command (e.g., specifying `que` directly).
+To support tracing in workers, the deployment workflow must _explicitly_ wrap the worker command:
+
+```yaml
+command-line: "sh -c 'otelcol --config=/etc/otel-collector-config.yml >/dev/null 2>&1 & exec que'"
 ```
 
-- **`otelcol ... &`**: Starts the collector in the background (`&`). It begins listening on `localhost:4318` immediately.
-- **`>/dev/null 2>&1`**: Redirects collector logs to null. This prevents the collector's internal logs from mixing with valid Rails application logs. (Errors are fail-safe; if the collector dies, the app continues).
-- **`exec ...`**:Crucial for production. It replaces the current shell process with the Rails server process. This makes Rails `PID 1` (or the main process), ensuring it correctly receives `SIGTERM` signals for graceful shutdowns during deployment.
+## Consequences
 
-### Benefits
-
-- **Zero Infrastructure Change**: No need to modify Terraform, Networking, or App Service configuration.
-- **Atomic Deployment**: The app and its telemetry version deploy together.
-- **Performance**: Communication happens over `localhost`, minimizing latency.
+- **Positive**: Zero infrastructure changes required. Deployment is atomic (App + Config + Collector).
+- **Positive**: Low latency (localhost communication).
+- **Negative**: Container image size increases slightly (~60MB).
+- **Negative**: Logs from the collector are discarded (`/dev/null`) to prevent noise, making collector debugging harder in production (must remove redirection to debug).

@@ -1,4 +1,4 @@
-name: 'App Deploy [Azure - REVIEW]'
+name: "App Deploy [Azure - REVIEW]"
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
       - labeled # uses 'review'
       - synchronize
     paths-ignore:
-      - '**/*.md'
+      - "**/*.md"
       - .docker*
       - .env.example
       - .gitignore
@@ -128,6 +128,11 @@ jobs:
               --name ${{ vars.REVIEWAPP_NAME }} \
               --slot ${{ env.PR_NUMBER }} \
               --slot-settings DOMAIN="${{ vars.REVIEWAPP_NAME }}-${{ env.PR_NUMBER }}.azurewebsites.net" \
+              --output none
+            az webapp config appsettings set --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+              --name ${{ vars.REVIEWAPP_NAME }} \
+              --slot ${{ env.PR_NUMBER }} \
+              --settings APPLICATION_INSIGHTS_CONNECTION_STRING="${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}" \
               --output none
 
       # Add URL to Pull Request
