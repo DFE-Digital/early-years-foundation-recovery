@@ -13,4 +13,4 @@
       = govuk_link_to mod.heading, destination, no_visited_state: true, class: 'card-link--header'
 
     - if show_module_description && mod.description.present?
-      .description= mod.description
+      p.govuk-body.description= mod.description
