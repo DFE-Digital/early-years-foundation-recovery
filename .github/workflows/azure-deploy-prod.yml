@@ -1,4 +1,4 @@
-name: 'App Deploy [Azure - PROD]'
+name: "App Deploy [Azure - PROD]"
 
 on:
   workflow_dispatch:
