@@ -8,6 +8,9 @@
     "copy:assets": "mkdir -p app/assets/builds/fonts app/assets/builds/images && cp -R node_modules/govuk-frontend/dist/govuk/assets/images/. app/assets/builds/images && cp -R node_modules/@fortawesome/fontawesome-free/webfonts/. app/assets/builds/fonts && sh -c 'if [ -d app/assets/fonts ]; then cp -R app/assets/fonts/. app/assets/builds/fonts; fi'",
     "lint": "npx stylelint app/assets/stylesheets/* --fix"
   },
+  "resolutions": {
+    "glob": "^10.5.0"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
     "@hotwired/stimulus": "^3.2.1",
@@ -16,7 +19,7 @@
     "accessible-autocomplete": "^3.0.1",
     "axios": "^1.12.0",
     "dfe-frontend": "^2.0.1",
-    "esbuild": "^0.25.9",
+    "esbuild": "^0.27.1",
     "govuk-frontend": "^5.11.1",
     "puppeteer": "^24.10.0",
     "sass": "^1.85.1"
