@@ -1,0 +1,11 @@
+.govuk-grid-row
+  .govuk-grid-column-full
+    = m('modules_title', headings_start_with: 'l')
+    p.govuk-body-m There are 8 modules, written by early years experts, that covers key areas of child development. The average completion time of each module is 2 hours and you can complete these at your own pace.
+    .govuk-grid-container
+        .home-grid-container
+            - if @public_modules.any?
+                    - @public_modules.each do |mod|
+                        = render 'home_card', mod: mod, progress: false, show_module_description: true, show_progress_description: false
+            - else
+                'No modules available to show at this time'

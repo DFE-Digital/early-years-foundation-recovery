@@ -12,8 +12,11 @@
 = render 'debug'
 
 .govuk-grid-row
-  .govuk-grid-column-one-half
+  .govuk-grid-column-full
     = m('home.about', headings_start_with: 'xl')
+
+  .govuk-grid-column-full
+    = render 'modules'
 
 = render 'prompt'
 
