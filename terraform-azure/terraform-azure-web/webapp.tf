@@ -23,7 +23,11 @@ resource "azurerm_linux_web_app" "webapp" {
   service_plan_id           = azurerm_service_plan.asp.id
   https_only                = true
   virtual_network_subnet_id = var.webapp_subnet_id
-  app_settings              = var.webapp_app_settings
+  app_settings = merge({
+    "APPINSIGHTS_INSTRUMENTATIONKEY"             = var.instrumentation_key
+    "APPLICATION_INSIGHTS_CONNECTION_STRING"     = var.insights_connection_string
+    "ApplicationInsightsAgent_EXTENSION_VERSION" = "~3"
+  }, var.webapp_app_settings)
 
   site_config {
     app_command_line                  = var.webapp_startup_command
@@ -135,24 +139,10 @@ resource "azurerm_linux_web_app_slot" "webapp_slot" {
   }
 }
 
-# Create Log Analytics
-resource "azurerm_log_analytics_workspace" "webapp_logs" {
-  name                = "${var.resource_name_prefix}-log"
-  location            = var.location
-  resource_group_name = var.resource_group
-  sku                 = "PerGB2018"
-  retention_in_days   = 30
-  daily_quota_gb      = 1
-
-  lifecycle {
-    ignore_changes = [tags]
-  }
-}
-
 resource "azurerm_monitor_diagnostic_setting" "webapp_logs_monitor" {
   name                       = "${var.resource_name_prefix}-webapp-mon"
   target_resource_id         = azurerm_linux_web_app.webapp.id
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.webapp_logs.id
+  log_analytics_workspace_id = var.logs_id
 
   enabled_log {
     category = "AppServiceConsoleLogs"
@@ -178,7 +168,7 @@ resource "azurerm_monitor_diagnostic_setting" "webapp_logs_monitor" {
 resource "azurerm_monitor_diagnostic_setting" "webapp_slot_logs_monitor" {
   name                       = "${var.resource_name_prefix}-webapp-green-mon"
   target_resource_id         = azurerm_linux_web_app_slot.webapp_slot.id
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.webapp_logs.id
+  log_analytics_workspace_id = var.logs_id
 
   enabled_log {
     category = "AppServiceConsoleLogs"
