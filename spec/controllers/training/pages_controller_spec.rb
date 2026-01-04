@@ -9,8 +9,10 @@ RSpec.describe Training::PagesController, type: :controller do
     end
   end
 
+  let(:user) { create(:user, :registered) }
+
   before do
-    sign_in create(:user, :registered)
+    sign_in user
   end
 
   describe '#ensure_module_started' do
@@ -27,6 +29,7 @@ RSpec.describe Training::PagesController, type: :controller do
     before do
       allow(controller).to receive(:track)
       allow(controller.helpers).to receive(:calculate_module_state)
+      allow(UserModuleProgress).to receive(:record_start)
     end
 
     it 'tracks module_start and recalculates module state on first non-certificate page' do
@@ -38,6 +41,14 @@ RSpec.describe Training::PagesController, type: :controller do
       expect(controller.helpers).to have_received(:calculate_module_state)
     end
 
+    it 'records module start timestamp when starting a module' do
+      allow(controller).to receive(:untracked?).with('module_start', training_module_id: module_name).and_return(true)
+
+      controller.send(:ensure_module_started, content: non_certificate_content, module_name: module_name)
+
+      expect(UserModuleProgress).to have_received(:record_start).with(user: user, module_name: module_name)
+    end
+
     it 'does not track module_start again if already tracked' do
       allow(controller).to receive(:untracked?).with('module_start', training_module_id: module_name).and_return(false)
 
@@ -45,12 +56,14 @@ RSpec.describe Training::PagesController, type: :controller do
 
       expect(controller).not_to have_received(:track).with('module_start', training_module_id: module_name)
       expect(controller.helpers).not_to have_received(:calculate_module_state)
+      expect(UserModuleProgress).not_to have_received(:record_start)
     end
 
     it 'does not track module_start on certificate pages' do
       controller.send(:ensure_module_started, content: certificate_content, module_name: module_name)
 
       expect(controller).not_to have_received(:track).with('module_start', training_module_id: module_name)
+      expect(UserModuleProgress).not_to have_received(:record_start)
     end
   end
 
@@ -153,6 +166,36 @@ RSpec.describe Training::PagesController, type: :controller do
       get :show, params: { training_module_id: 'alpha', id: '1-3-4', format: 'pdf' }
     rescue ActionView::MissingTemplate
       expect(pdf).to be true
+    end
+  end
+
+  describe '#record_module_start' do
+    let(:module_name) { 'alpha' }
+    let(:mod) { Struct.new(:name).new(module_name) }
+
+    before do
+      allow(controller).to receive(:mod).and_return(mod)
+    end
+
+    it 'calls UserModuleProgress.record_start' do
+      expect(UserModuleProgress).to receive(:record_start).with(user: user, module_name: module_name)
+
+      controller.send(:record_module_start, module_name)
+    end
+  end
+
+  describe '#record_module_completion' do
+    let(:module_name) { 'alpha' }
+    let(:mod) { Struct.new(:name).new(module_name) }
+
+    before do
+      allow(controller).to receive(:mod).and_return(mod)
+    end
+
+    it 'calls UserModuleProgress.record_completion' do
+      expect(UserModuleProgress).to receive(:record_completion).with(user: user, module_name: module_name)
+
+      controller.send(:record_module_completion)
     end
   end
 end
