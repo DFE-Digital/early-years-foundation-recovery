@@ -110,9 +110,16 @@ RSpec.describe DataAnalysis::UserOverview do
     complete_module bravo, 1.minute
     complete_module charlie, 1.minute
 
-    # user#2 user#3 with notes
+    # user#2 user#3 with notes - also create UserModuleProgress records
     create :note, user: user_two
+    UserModuleProgress.create!(user: user_two, module_name: 'alpha', started_at: 2.days.ago, completed_at: 1.day.ago)
+    UserModuleProgress.create!(user: user_two, module_name: 'bravo', started_at: 2.days.ago, completed_at: 1.day.ago)
+    UserModuleProgress.create!(user: user_two, module_name: 'charlie', started_at: 1.day.ago)
+
     create :note, user: user_three
+    UserModuleProgress.create!(user: user_three, module_name: 'alpha', started_at: 2.days.ago, completed_at: 1.day.ago)
+    UserModuleProgress.create!(user: user_three, module_name: 'bravo', started_at: 1.day.ago)
+    UserModuleProgress.create!(user: user_three, module_name: 'charlie', started_at: 2.days.ago, completed_at: 1.day.ago)
 
     # user#4 complete registration notification
     create :user, :confirmed, confirmed_at: 4.weeks.ago
