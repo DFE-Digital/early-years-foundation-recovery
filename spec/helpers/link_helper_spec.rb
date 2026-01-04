@@ -142,7 +142,7 @@ describe 'LinkHelper', type: :helper do
 
     context 'with no activity' do
       let(:module_progress) do
-        ModuleOverviewDecorator.new(ModuleProgress.new(user: user, mod: mod, user_module_events: []))
+        ModuleOverviewDecorator.new(ModuleProgress.new(user: user, mod: mod))
       end
 
       it 'targets the interruption page' do
@@ -152,19 +152,27 @@ describe 'LinkHelper', type: :helper do
 
     context 'with progress' do
       let(:now) { Time.zone.now }
-      let(:user_module_events) do
-        [
-          EventStub.new('page_view', { 'training_module_id' => 'alpha', 'id' => 'what-to-expect' }, now - 6.minutes),
-          EventStub.new('module_start', { 'training_module_id' => 'alpha', 'id' => '1-1' }, now - 5.minutes),
-          EventStub.new('page_view', { 'training_module_id' => 'alpha', 'id' => '1-1-1' }, now - 4.minutes),
-          EventStub.new('page_view', { 'training_module_id' => 'alpha', 'id' => '1-1-2' }, now - 3.minutes),
-          EventStub.new('page_view', { 'training_module_id' => 'alpha', 'id' => '1-1-3' }, now - 2.minutes),
-          EventStub.new('page_view', { 'training_module_id' => 'alpha', 'id' => '1-1-3-1' }, now - 1.minute),
-        ]
+
+      let!(:progress_record) do
+        create(
+          :user_module_progress,
+          user: user,
+          module_name: 'alpha',
+          started_at: now - 6.minutes,
+          last_page: '1-1-3-1',
+          visited_pages: {
+            'what-to-expect' => (now - 6.minutes).iso8601,
+            '1-1' => (now - 5.minutes).iso8601,
+            '1-1-1' => (now - 4.minutes).iso8601,
+            '1-1-2' => (now - 3.minutes).iso8601,
+            '1-1-3' => (now - 2.minutes).iso8601,
+            '1-1-3-1' => (now - 1.minute).iso8601,
+          },
+        )
       end
 
       let(:module_progress) do
-        ModuleOverviewDecorator.new(ModuleProgress.new(user: user, mod: mod, user_module_events: user_module_events))
+        ModuleOverviewDecorator.new(ModuleProgress.new(user: user, mod: mod, user_module_progress: progress_record))
       end
 
       it 'targets the most recently visited page' do
@@ -174,10 +182,11 @@ describe 'LinkHelper', type: :helper do
 
     context 'with failed assessment' do
       let(:module_progress) do
-        ModuleOverviewDecorator.new(ModuleProgress.new(user: user, mod: mod, user_module_events: []))
+        ModuleOverviewDecorator.new(ModuleProgress.new(user: user, mod: mod))
       end
 
       before do
+        UserModuleProgress.create!(user: user, module_name: 'alpha', started_at: Time.zone.now)
         create :assessment, :failed, user: user, training_module: mod.name
       end
 
