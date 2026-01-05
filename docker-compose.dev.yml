@@ -9,6 +9,8 @@ services:
     healthcheck:
       test: curl --fail http://localhost:3000/health || exit 1
     restart: on-failure
+    ports:
+      - 3000:3000
     environment:
       # General dev env
       - ENVIRONMENT=

@@ -26,7 +26,6 @@ services:
     volumes:
       - ./otel-collector-config.yml:/etc/otel-collector-config.yml
     command: ["--config", "/etc/otel-collector-config.yml"]
-    ports:
 
     environment:
       - APPLICATION_INSIGHTS_CONNECTION_STRING=${APPLICATION_INSIGHTS_CONNECTION_STRING}
