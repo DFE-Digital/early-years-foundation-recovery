@@ -42,6 +42,8 @@ services:
       - db:/var/lib/postgresql/data
     networks:
       - recovery
+    ports:
+      - "${DB_PORT:-5432}:5432"
 
 volumes:
   db:
