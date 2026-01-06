@@ -55,6 +55,7 @@ module Training
     # - create 'confidence_check_complete' once the last question is submitted
     #
     # - recalculate the user's progress state as a module is started/completed
+    # - record timestamps in user_module_progress for CSV export
     #
     def track_events
       track('module_content_page')
@@ -68,6 +69,7 @@ module Training
         track('confidence_check_complete')
       elsif track_module_complete?
         track('module_complete')
+        record_module_completion
         helpers.calculate_module_state
       end
     end
@@ -113,8 +115,19 @@ module Training
 
       if untracked?('module_start', training_module_id: module_name)
         track('module_start', training_module_id: module_name)
+        record_module_start(module_name)
         helpers.calculate_module_state
       end
+    end
+
+    # @param module_name [String]
+    def record_module_start(module_name = mod.name)
+      UserModuleProgress.record_start(user: current_user, module_name: module_name)
+    end
+
+    # @param module_name [String]
+    def record_module_completion(module_name = mod.name)
+      UserModuleProgress.record_completion(user: current_user, module_name: module_name)
     end
   end
 end

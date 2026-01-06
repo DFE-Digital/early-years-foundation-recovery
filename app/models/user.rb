@@ -87,6 +87,7 @@ class User < ApplicationRecord
   has_many :events
   has_many :mail_events
   has_many :notes
+  has_many :user_module_progresses
   has_many :feedback_responses, -> { where(question_type: 'feedback') }, class_name: 'Response'
 
   scope :gov_one, -> { where.not(gov_one_id: nil) }
@@ -455,7 +456,20 @@ class User < ApplicationRecord
   # @see ToCsv#dashboard_row
   # @return [Hash] override
   def dashboard_row
-    data_attributes.dup.merge(module_ttc)
+    data_attributes.dup.merge(module_time_from_progress)
+  end
+
+  # @return [Hash{String => Integer, nil}] module time in seconds from user_module_progresses table
+  #   - nil: not started
+  #   - 0: started but not completed
+  #   - positive integer: seconds taken to complete
+  def module_time_from_progress
+    progress_by_module = user_module_progresses.index_by(&:module_name)
+
+    Training::Module.live.each_with_object({}) do |mod, hash|
+      progress = progress_by_module[mod.name]
+      hash["module_#{mod.position}_time"] = calculate_module_time(progress)
+    end
   end
 
   # @return [Boolean]
@@ -505,6 +519,16 @@ private
   # @return [Hash]
   def data_attributes
     DASHBOARD_ATTRS.map { |field| { field => send(field) } }.reduce(&:merge)
+  end
+
+  # @param progress [UserModuleProgress, nil]
+  # @return [Integer, nil] seconds taken to complete module
+  def calculate_module_time(progress)
+    return nil unless progress&.started_at
+
+    return 0 unless progress.completed_at
+
+    (progress.completed_at - progress.started_at).to_i
   end
 
   def validate_setting_type_id
