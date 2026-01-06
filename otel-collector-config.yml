@@ -1,0 +1,20 @@
+receivers:
+  otlp:
+    protocols:
+      http:
+        endpoint: "0.0.0.0:4318"
+
+exporters:
+  azuremonitor:
+    connection_string: "${APPLICATION_INSIGHTS_CONNECTION_STRING}"
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: []
+      exporters: [azuremonitor]
+    logs:
+      receivers: [otlp]
+      processors: []
+      exporters: [azuremonitor]

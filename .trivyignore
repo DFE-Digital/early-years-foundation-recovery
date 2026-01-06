@@ -1,0 +1,4 @@
+# CVE-2025-61729: Go stdlib crypto/x509 vulnerability in otelcol binary.
+# Fixed in Go 1.25.5, but the upstream otel-collector image hasn't been rebuilt yet.
+# Low risk as the collector only connects to trusted Azure endpoints.
+CVE-2025-61729

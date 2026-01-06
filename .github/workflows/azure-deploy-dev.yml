@@ -1,4 +1,4 @@
-name: 'App Deploy [Azure - DEV]'
+name: "App Deploy [Azure - DEV]"
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths-ignore:
-      - '**/*.md'
+      - "**/*.md"
       - .docker*
       - .env.example
       - .github
@@ -110,7 +110,7 @@ jobs:
               --os-type Linux \
               --cpu 1 \
               --memory 2 \
-              --command-line "que" \
+              --command-line "sh -c 'otelcol --config=/etc/otel-collector-config.yml >/dev/null 2>&1 & exec que'" \
               --restart-policy OnFailure \
               --log-analytics-workspace ${{ secrets.AZURE_LOG_ANALYTICS_WORKSPACE }} \
               --vnet ${{ secrets.AZURE_VNET }} \
@@ -121,11 +121,11 @@ jobs:
                 EDITOR=vi \
                 RAILS_ENV=production \
                 RAILS_LOG_TO_STDOUT=true \
-                CONTENTFUL_ENVIRONMENT=test \
                 ENVIRONMENT=${{ vars.ENVIRONMENT }} \
                 DOMAIN=${{ vars.WEBAPP_CONFIG_DOMAIN }} \
                 GOOGLE_CLOUD_BUCKET=${{ vars.WEBAPP_CONFIG_GOOGLE_CLOUD_BUCKET }} \
                 RAILS_MASTER_KEY=${{ secrets.WEBAPP_CONFIG_RAILS_MASTER_KEY }} \
                 DATABASE_URL=${{ secrets.WEBAPP_DATABASE_URL }} \
                 GCS_CREDENTIALS=${{ secrets.GCS_CREDENTIALS }} \
-                SENTRY_TOKEN=${{ secrets.SENTRY_TOKEN }}
+                SENTRY_TOKEN=${{ secrets.SENTRY_TOKEN }} \
+                APPLICATION_INSIGHTS_CONNECTION_STRING=${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}

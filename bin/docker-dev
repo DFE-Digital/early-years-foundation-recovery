@@ -6,6 +6,6 @@ docker-compose \
   -f docker-compose.yml \
   -f docker-compose.dev.yml \
   --project-name recovery \
-  up --detach app
+  up --detach app otel-collector
 
 docker attach recovery_dev

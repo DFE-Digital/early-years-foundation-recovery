@@ -36,6 +36,11 @@ RUN bundle config set without development test ui
 RUN bundle install --no-binstubs --retry=10 --jobs=4
 
 # ------------------------------------------------------------------------------
+# OpenTelemetry Collector
+# ------------------------------------------------------------------------------
+FROM otel/opentelemetry-collector-contrib:latest AS otel-collector
+
+# ------------------------------------------------------------------------------
 # Production Stage
 # ------------------------------------------------------------------------------
 FROM base AS app
@@ -83,11 +88,16 @@ RUN SECRET_KEY_BASE=x bundle exec rails assets:precompile
 COPY sshd_config /etc/ssh/
 COPY ./docker-entrypoint.sh /
 
+# Install OpenTelemetry Collector
+COPY --from=otel-collector /otelcol-contrib /usr/bin/otelcol
+COPY otel-collector-config.yml /etc/otel-collector-config.yml
+
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 EXPOSE 3000
 
-CMD ["bundle", "exec", "rails", "server"]
+# Start Collector in background, then Rails
+CMD ["sh", "-c", "otelcol --config=/etc/otel-collector-config.yml >/dev/null 2>&1 & exec bundle exec rails server"]
 
 # ------------------------------------------------------------------------------
 # Development Stage - ./bin/docker-dev

@@ -71,6 +71,9 @@ module EarlyYearsFoundationRecovery
     # Sentry
     config.sentry_dsn = ENV.fetch('SENTRY_DSN', '#SENTRY_DSN_env_var_missing')
 
+    # Azure Application Insights
+    config.application_insights_connection_string = ENV['APPLICATION_INSIGHTS_CONNECTION_STRING']
+
     config.environment = ENV.fetch('ENVIRONMENT')
 
     # @return [Boolean]
