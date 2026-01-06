@@ -1,4 +1,4 @@
-name: 'App Deploy [Azure - PROD]'
+name: "App Deploy [Azure - PROD]"
 
 on:
   workflow_dispatch:
@@ -113,7 +113,7 @@ jobs:
               --os-type Linux \
               --cpu 2 \
               --memory 2 \
-              --command-line "que" \
+              --command-line "sh -c 'otelcol --config=/etc/otel-collector-config.yml >/dev/null 2>&1 & exec que'" \
               --restart-policy OnFailure \
               --log-analytics-workspace ${{ secrets.AZURE_LOG_ANALYTICS_WORKSPACE }} \
               --vnet ${{ secrets.AZURE_VNET }} \

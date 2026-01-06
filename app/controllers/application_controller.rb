@@ -19,33 +19,8 @@ class ApplicationController < ActionController::Base
     authenticate_user! unless user_signed_in?
     return true if current_user.registration_complete?
 
-    if current_user.terms_and_conditions_agreed_at.nil?
-      flash[:important] = terms_and_conditions_notification
-      redirect_to edit_registration_terms_and_conditions_path
-    else
-      flash[:important] = complete_registration_notification
-      # Redirect to last incomplete registration step
-      registration_path_redirect
-    end
-  end
-
-  def registration_path_redirect
-    path = edit_registration_training_emails_path if current_user.training_emails.nil?
-    path = edit_registration_early_years_experience_path if current_user.early_years_experience.nil?
-    path = edit_registration_setting_type_path if current_user.setting_type.nil?
-
-    redirect_to path
-  end
-
-  def complete_registration_notification
-    key = 'complete_user_registration'
-
-    notice = I18n.t(key, options: :flash)
-    if notice.is_a?(Hash)
-      notice.deep_symbolize_keys
-    else
-      notice
-    end
+    flash[:important] = terms_and_conditions_notification
+    redirect_to edit_registration_terms_and_conditions_path
   end
 
   def terms_and_conditions_notification
@@ -82,6 +57,7 @@ class ApplicationController < ActionController::Base
 
   def set_analytics_tracking_id
     @tracking_id = Rails.configuration.google_analytics_tracking_id
+    @clarity_tracking_id = Rails.configuration.clarity_tracking_id
   end
 
   # @return [Boolean] do not run accessibility tests with debug panels visible

@@ -65,3 +65,18 @@ variable "webapp_startup_command" {
   description = "Startup command to pass into the Web Application"
   type        = string
 }
+
+variable "logs_id" {
+  description = "Log Analystics workspace ID"
+  type        = string
+}
+
+variable "instrumentation_key" {
+  description = "App Insights instrumentation key"
+  type        = string
+}
+
+variable "insights_connection_string" {
+  description = "App Insights connection string"
+  type        = string
+}

@@ -166,20 +166,16 @@ class CustomRenderer < GovukMarkdown::Renderer
     %(<p class="govuk-body-m">#{text}</p>)
   end
 
-  def header(text, level)
-    options = @custom_options || {}
-    return super unless options[:strict_heading_levels]
-
+  def header(text, heading_level)
     css_class =
-      case level
+      case heading_level
       when 1 then 'govuk-heading-l'
       when 2 then 'govuk-heading-m'
       else 'govuk-heading-s'
       end
 
-    rendered_level = [level, 3].max
     slug = text.downcase.gsub(/<[^>]*>/, '').gsub(/[^a-z0-9\s-]/i, '').strip.gsub(/\s+/, '-')
-    %(<h#{rendered_level} id="#{slug}" class="#{css_class}">#{text}</h#{rendered_level}>)
+    %(<h#{heading_level} id="#{slug}" class="#{css_class}">#{text}</h#{heading_level}>)
   end
 end
 
