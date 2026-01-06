@@ -21,7 +21,7 @@
     "dfe-frontend": "^2.0.1",
     "esbuild": "^0.27.1",
     "govuk-frontend": "^5.11.1",
-    "puppeteer": "^24.10.0",
+    "puppeteer": "^24.34.0",
     "sass": "^1.85.1"
   },
   "devDependencies": {
