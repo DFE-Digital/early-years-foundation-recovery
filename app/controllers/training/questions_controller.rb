@@ -5,8 +5,9 @@
 #     - summative    (grouped by assessment)
 #
 #   Opinions:
-#     - confidence   (static options)
-#     - feedback     (dynamic options)
+#     - pre_confidence (static options)
+#     - confidence     (static options)
+#     - feedback       (dynamic options)
 #
 #
 module Training

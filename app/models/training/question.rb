@@ -31,12 +31,13 @@ module Training
     # Opinion questions:
     #   - Feedback (default: false)
     #   - Confidence (always: false)
+    #   - Pre-Confidence (always: false)
     #
     # @return [Boolean]
     def multi_select?
       if feedback_question?
         !!multi_select
-      elsif confidence_question?
+      elsif confidence_question? || pre_confidence_question?
         false
       else
         answer.multi_select?
@@ -63,6 +64,11 @@ module Training
     # @return [Boolean]
     def has_other?
       feedback_question? && other.present?
+    end
+
+    # @return [Boolean]
+    def has_hint?
+      pre_confidence_question? && hint.present?
     end
 
     # Additional "Or" option is appended and given index zero
@@ -153,6 +159,15 @@ module Training
       ['Strongly disagree', true],
     ].freeze
 
+    # @return [Array<Array>]
+    PRECONFIDENCE_OPTIONS = [
+      ['Very confident', true],
+      ['Somewhat confident', true],
+      ['Neutral', true],
+      ['Not very confident', true],
+      ['Not confident at all', true],
+    ].freeze
+
     # @note Default values are not available to Contentful JSON fields
     # @return [Array<Array>]
     DRAFT_OPTIONS = [
@@ -162,6 +177,7 @@ module Training
 
     # @return [Array<Array>]
     def json
+      return PRECONFIDENCE_OPTIONS if pre_confidence_question?
       return CONFIDENCE_OPTIONS if confidence_question?
 
       fields[:answers] || DRAFT_OPTIONS

@@ -9,7 +9,7 @@ class Response < ApplicationRecord
   belongs_to :visit, optional: true
 
   validates :training_module, presence: true
-  validates :question_type, inclusion: { in: %w[formative summative confidence feedback] }
+  validates :question_type, inclusion: { in: %w[formative summative confidence feedback pre_confidence ] }
   validates :answers, presence: true, unless: -> { text_input_only? }
 
   scope :incorrect, -> { where(correct: false) }
@@ -23,6 +23,7 @@ class Response < ApplicationRecord
   scope :formative, -> { where(question_type: 'formative') }
   scope :summative, -> { where(question_type: 'summative') }
   scope :confidence, -> { where(question_type: 'confidence') }
+  scope :pre_confidence, -> { where(question_type: 'pre_confidence') }
   scope :feedback, -> { where(question_type: 'feedback') }
   scope :course_feedback, -> { feedback.where(training_module: 'course') }
 
