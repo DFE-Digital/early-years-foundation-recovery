@@ -137,6 +137,7 @@ RSpec.describe User, type: :model do
       create(:user, :registered,
              private_beta_registration_complete: true,
              id: 1,
+             created_at: Time.zone.local(2000, 0o1, 0o1, 0, 0, 0),
              local_authority: 'Watford Borough Council',
              early_years_experience: 'na',
              module_time_to_completion: {
@@ -147,6 +148,7 @@ RSpec.describe User, type: :model do
 
       create(:user, :registered,
              id: 2,
+             created_at: Time.zone.local(2000, 0o1, 0o1, 0, 0, 0),
              local_authority: 'Leeds City Council',
              role_type: 'Trainer or lecturer',
              role_type_other: nil,
@@ -156,33 +158,24 @@ RSpec.describe User, type: :model do
                bravo: 0,
              })
 
-      user = create(:user, :registered,
-                    id: 3,
-                    local_authority: 'City of London',
-                    module_time_to_completion: {
-                      alpha: 3,
-                    },
-                    notify_callback: {
-                      status: 'delivered',
-                    })
-
-      Event.new(
-        user: user,
-        visit: Visit.new,
-        name: 'user_registration',
-        time: Time.zone.local(2023, 0o1, 12, 10, 15, 59),
-      ).save!
-
-      create(:user, :confirmed, id: 4)
+      create(:user, :registered,
+             id: 3,
+             created_at: Time.zone.local(2023, 0o1, 12, 10, 15, 59),
+             local_authority: 'City of London',
+             module_time_to_completion: {
+               alpha: 3,
+             },
+             notify_callback: {
+               status: 'delivered',
+             })
     end
 
     it 'exports formatted attributes as CSV' do
       expect(described_class.to_csv(batch_size: 2)).to eq <<~CSV
         id,local_authority,setting_type,setting_type_other,role_type,role_type_other,early_years_experience,registration_complete,private_beta_registration_complete,registration_complete_any?,registered_at,terms_and_conditions_agreed_at,training_emails,email_delivery_status,gov_one?,module_1_time,module_2_time,module_3_time
-        1,Watford Borough Council,,DfE,other,Developer,na,true,true,true,,2000-01-01 00:00:00,true,unknown,true,4,2,0
-        2,Leeds City Council,,DfE,Trainer or lecturer,,2-5,true,false,true,,2000-01-01 00:00:00,true,unknown,true,1,0,
+        1,Watford Borough Council,,DfE,other,Developer,na,true,true,true,2000-01-01 00:00:00,2000-01-01 00:00:00,true,unknown,true,4,2,0
+        2,Leeds City Council,,DfE,Trainer or lecturer,,2-5,true,false,true,2000-01-01 00:00:00,2000-01-01 00:00:00,true,unknown,true,1,0,
         3,City of London,,DfE,other,Developer,,true,false,true,2023-01-12 10:15:59,2000-01-01 00:00:00,true,delivered,true,3,,
-        4,,,,,,,false,false,false,,2000-01-01 00:00:00,,unknown,true,,,
       CSV
     end
   end

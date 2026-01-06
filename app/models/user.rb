@@ -192,7 +192,7 @@ class User < ApplicationRecord
   }
 
   # data
-  scope :dashboard, -> { not_closed }
+  scope :dashboard, -> { not_closed.registration_complete }
   scope :month_old_confirmation, -> { where(confirmed_at: 4.weeks.ago.beginning_of_day..4.weeks.ago.end_of_day) }
   scope :with_local_authority, -> { where.not(local_authority: nil) }
 
@@ -411,7 +411,9 @@ class User < ApplicationRecord
 
   # @return [Datetime]
   def registered_at
-    events.where(name: 'user_registration').first&.time # :first returns private_beta or public_beta if that is the only one
+    return unless registration_complete?
+
+    created_at
   end
 
   # @return [Trainee::Setting, nil]
