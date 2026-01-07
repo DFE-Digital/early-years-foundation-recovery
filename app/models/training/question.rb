@@ -68,7 +68,7 @@ module Training
 
     # @return [Boolean]
     def has_hint?
-      pre_confidence_question? && hint.present?
+      pre_confidence_question? && hint.present? || false
     end
 
     # Additional "Or" option is appended and given index zero
