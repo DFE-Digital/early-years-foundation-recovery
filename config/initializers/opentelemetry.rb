@@ -25,7 +25,6 @@ module OpenTelemetryConfiguration
     def configure_tracing
       OpenTelemetry::SDK.configure do |c|
         c.service_name = service_name
-        c.tracer_provider = tracer_provider
 
         # Add batch processor for exporting spans
         if !Rails.env.test? || ENV['OTEL_EXPORTER_OTLP_ENDPOINT'].present?
