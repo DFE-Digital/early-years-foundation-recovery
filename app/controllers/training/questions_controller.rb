@@ -58,6 +58,11 @@ module Training
     end
 
     # @return [Boolean]
+    def track_pre_confidence_start?
+      content.first_pre_confidence? && pre_confidence_start_untracked?
+    end
+
+    # @return [Boolean]
     def track_feedback_start?
       content.first_feedback? && feedback_start_untracked?
     end

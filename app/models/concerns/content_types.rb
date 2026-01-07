@@ -27,7 +27,7 @@ module ContentTypes
 
   # @return [Boolean]
   def opinion_question?
-    confidence_question? || feedback_question?
+    confidence_question? || feedback_question? || pre_confidence_question?
   end
 
   # @return [Boolean]

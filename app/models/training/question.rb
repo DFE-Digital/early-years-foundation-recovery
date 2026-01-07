@@ -66,11 +66,6 @@ module Training
       feedback_question? && other.present?
     end
 
-    # @return [Boolean]
-    # def has_hint?
-    #   pre_confidence_question? && hint.present? || false
-    # end
-
     # Additional "Or" option is appended and given index zero
     #
     # @return [Boolean]
@@ -86,6 +81,11 @@ module Training
     # @return [Boolean] event tracking
     def first_confidence?
       parent.confidence_questions.first.eql?(self)
+    end
+
+    # @return [Boolean] event tracking
+    def first_pre_confidence?
+      parent.pre_confidence_questions.first.eql?(self)
     end
 
     # @return [Boolean] event tracking
@@ -141,7 +141,7 @@ module Training
 
           #{body}
         LEGEND
-      elsif feedback_question?
+      elsif feedback_question? || pre_confidence_question?
         body.to_s
       else
         "#{body} (Select one answer)"
