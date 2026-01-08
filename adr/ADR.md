@@ -23,7 +23,7 @@ This log lists the architectural decisions for EYFS Recovery
 * [ADR-0016](0016-background-jobs.md) - Use Que for processing background jobs
 * [ADR-0017](0017-password-vulnerability.md) - Use Devise Security and Devise Pwned Passwords
 * [ADR-0018](0018-external-authentication.md) - Use GOV.UK One Login
-* [ADR-0019](0019-clarity-metrics) - Switch to Microsoft Clarity to track user journeys
+* [ADR-0019](0019-clarity-metrics.md) - Switch to Microsoft Clarity to track user journeys
 * [ADR-0020](0020-telemetry-collector-app-insights-dev.md) - Introduce OpenTelemetry and Azure Application Insights using a Telemetry Collector Container
 * [ADR-0021](0021-opentelemetry_deployment_sidecar.md) - Embedded OpenTelemetry Collector
 
