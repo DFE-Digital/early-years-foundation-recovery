@@ -1,6 +1,6 @@
 # Use Clarity for tracking user journeys
 
-* Status: accepted, supersedes [ADR-0015](0015-user-tracking.md)
+* Status: accepted, supersedes [ADR-0017](0017-user-tracking.md)
 
 ## Context and Problem Statement
 
