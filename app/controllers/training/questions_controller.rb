@@ -5,8 +5,9 @@
 #     - summative    (grouped by assessment)
 #
 #   Opinions:
-#     - confidence   (static options)
-#     - feedback     (dynamic options)
+#     - pre_confidence (static options)
+#     - confidence     (static options)
+#     - feedback       (dynamic options)
 #
 #
 module Training
@@ -54,6 +55,11 @@ module Training
     # @return [Boolean]
     def track_confidence_start?
       content.first_confidence? && confidence_start_untracked?
+    end
+
+    # @return [Boolean]
+    def track_pre_confidence_start?
+      content.first_pre_confidence? && pre_confidence_start_untracked?
     end
 
     # @return [Boolean]
