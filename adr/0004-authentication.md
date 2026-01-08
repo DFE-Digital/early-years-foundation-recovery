@@ -1,6 +1,6 @@
 # Use Devise for authentication
 
-* Status: accepted
+* Status: accepted, see also [ADR-0018](0018-external-authentication.md)
 
 ## Context and Problem Statement
 
