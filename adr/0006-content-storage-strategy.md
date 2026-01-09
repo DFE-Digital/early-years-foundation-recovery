@@ -1,6 +1,6 @@
 # Use YAML + Markdown for Content
 
-* Status: accepted, superseded by [ADR-0010](0010-contentful.md)
+* Status: accepted, superseded by [ADR-0011](0011-contentful.md)
 
 ## Context and Problem Statement
 
