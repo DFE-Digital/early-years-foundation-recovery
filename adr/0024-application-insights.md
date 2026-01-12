@@ -26,5 +26,5 @@ Application Insights *via* an open telemetry collector configured to pass throug
 OTel collector can run in the same container as the service
 
 More implentation details, and more around the reasoning behind this decision, are available at:
-* [ADR-0024](0024-application-insights/0024-telemetry-collector-app-insights-dev.md) - Introduce OpenTelemetry and Azure Application Insights using a Telemetry Collector Container
-* [ADR-0024](0024-application-insights/0024-opentelemetry_deployment_sidecar.md) - Embedded OpenTelemetry Collector
+* [ADR-0024](./0024-application-insights/0024-telemetry-collector-app-insights-dev.md) - Introduce OpenTelemetry and Azure Application Insights using a Telemetry Collector Container
+* [ADR-0024](./0024-application-insights/0024-opentelemetry_deployment_sidecar.md) - Embedded OpenTelemetry Collector
