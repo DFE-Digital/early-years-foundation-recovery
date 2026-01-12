@@ -1,8 +1,5 @@
 ## Introduce OpenTelemetry and Azure Application Insights using a Telemetry Collector Container
 
-* Status: Accepted
-* Date: 2025-12-08
-
 ## Context
 
 We need reliable, modern observability for the Early Years Foundation Recovery service. Specifically, the team requires:

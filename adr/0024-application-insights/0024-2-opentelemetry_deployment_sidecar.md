@@ -1,8 +1,5 @@
 # Embedded OpenTelemetry Collector
 
-* Status: accepted
-* Date: 2025-12-12
-
 ## Context and Problem Statement
 
 We need to deploy the OpenTelemetry Collector alongside our Rails application to process and export traces to Azure Application Insights. The Collector acts as an intermediary, converting OTLP traces from the app into Azure Monitor-compatible data.

@@ -28,8 +28,7 @@ This log lists the architectural decisions for EYFS Recovery
 * [ADR-0021](0021-external-authentication.md) - Use GOV.UK One Login
 * [ADR-0022](0022-sentry-monitoring.md) - Monitoring with Sentry
 * [ADR-0023](0023-clarity-metrics.md) - Switch to Microsoft Clarity to track user journeys
-* [ADR-0024](0024-telemetry-collector-app-insights-dev.md) - Introduce OpenTelemetry and Azure Application Insights using a Telemetry Collector Container
-* [ADR-0025](0025-opentelemetry_deployment_sidecar.md) - Embedded OpenTelemetry Collector
+* [ADR-0024](0024-application-insights.md) - Deploy Azure Application Insights
 
 <!-- adrlogstop -->
 
