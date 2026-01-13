@@ -55,6 +55,15 @@ gem 'govuk_notify_rails'
 # Monitor errors
 gem 'sentry-rails'
 
+# Azure Application Insights / OpenTelemetry
+gem 'opentelemetry-exporter-otlp'
+gem 'opentelemetry-instrumentation-active_record'
+gem 'opentelemetry-instrumentation-http'
+gem 'opentelemetry-instrumentation-net_http'
+gem 'opentelemetry-instrumentation-rack'
+gem 'opentelemetry-instrumentation-rails'
+gem 'opentelemetry-sdk'
+
 # Track users
 gem 'ahoy_matey'
 
