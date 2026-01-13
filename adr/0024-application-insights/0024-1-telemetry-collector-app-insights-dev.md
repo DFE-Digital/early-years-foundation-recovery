@@ -1,7 +1,4 @@
-## ADR: Introduce OpenTelemetry and Azure Application Insights using a Telemetry Collector Container
-
-- **Status:** Accepted
-- **Date:** 2025-12-08
+## Introduce OpenTelemetry and Azure Application Insights using a Telemetry Collector Container
 
 ## Context
 

@@ -1,6 +1,6 @@
 # Use Hotjar for tracking user journeys
 
-* Status: accepted
+* Status: superseded by [ADR-0023](0023-clarity-metrics.md)
 
 ## Context and Problem Statement
 
