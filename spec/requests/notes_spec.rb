@@ -20,13 +20,13 @@ RSpec.describe 'Learning log', type: :request do
     specify { expect('/my-account/learning-log').to be_successful }
 
     it 'indicates no notes when there are none' do
-      registered_user.module_time_to_completion = { 'alpha' => 0 }
+      create :user_module_progress, user: registered_user, module_name: 'alpha', started_at: 1.day.ago
       get user_notes_path
       expect(response.body).to include('You have not made any notes for this module.')
     end
 
     it 'lists notes' do
-      registered_user.module_time_to_completion = { 'alpha' => 0 }
+      create :user_module_progress, user: registered_user, module_name: 'alpha', started_at: 1.day.ago
       create :note, user: registered_user, body: 'My very special note'
       get user_notes_path
       expect(response.body).to include('Your learning log')

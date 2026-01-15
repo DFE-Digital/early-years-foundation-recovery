@@ -99,6 +99,25 @@ RSpec.describe User, type: :model do
       end
     end
 
+    describe '#module_time_from_progress' do
+      subject(:user) { create(:user, :registered) }
+
+      let(:started_at) { Time.zone.local(2025, 1, 1, 10, 0, 0) }
+      let(:completed_at) { Time.zone.local(2025, 1, 1, 10, 30, 0) } # 30 minutes = 1800 seconds
+
+      before do
+        UserModuleProgress.create!(user: user, module_name: 'alpha', started_at: started_at, completed_at: completed_at)
+        UserModuleProgress.create!(user: user, module_name: 'bravo', started_at: started_at, completed_at: nil)
+      end
+
+      it 'returns time in seconds for each module keyed by position' do
+        times = user.module_time_from_progress
+        expect(times['module_1_time']).to eq 1800           # completed: 30 mins in seconds
+        expect(times['module_2_time']).to eq 0              # started but not completed
+        expect(times['module_3_time']).to be_nil            # not started
+      end
+    end
+
     describe '#course_started?' do
       it 'is true once a module is started' do
         expect(user).not_to be_course_started
@@ -131,43 +150,56 @@ RSpec.describe User, type: :model do
   # end
 
   describe '.to_csv' do
+    let(:module_1_started) { Time.zone.local(2025, 1, 1, 10, 0, 0) }
+    let(:module_1_completed) { Time.zone.local(2025, 1, 1, 10, 30, 0) }
+    let(:module_2_started) { Time.zone.local(2025, 1, 2, 9, 0, 0) }
+    let(:module_2_completed) { Time.zone.local(2025, 1, 2, 9, 45, 0) }
+    let(:module_3_started) { Time.zone.local(2025, 1, 3, 14, 0, 0) }
+
     before do
       described_class.delete_all
+      UserModuleProgress.delete_all
 
-      create(:user, :registered,
-             private_beta_registration_complete: true,
-             id: 1,
-             local_authority: 'Watford Borough Council',
-             early_years_experience: 'na',
-             module_time_to_completion: {
-               alpha: 4,
-               bravo: 2,
-               charlie: 0,
-             })
+      user1 = create(:user, :registered,
+                     private_beta_registration_complete: true,
+                     id: 1,
+                     local_authority: 'Watford Borough Council',
+                     early_years_experience: 'na',
+                     module_time_to_completion: {
+                       alpha: 4,
+                       bravo: 2,
+                       charlie: 0,
+                     })
+      UserModuleProgress.create!(user: user1, module_name: 'alpha', started_at: module_1_started, completed_at: module_1_completed)
+      UserModuleProgress.create!(user: user1, module_name: 'bravo', started_at: module_2_started, completed_at: module_2_completed)
+      UserModuleProgress.create!(user: user1, module_name: 'charlie', started_at: module_3_started, completed_at: nil)
 
-      create(:user, :registered,
-             id: 2,
-             local_authority: 'Leeds City Council',
-             role_type: 'Trainer or lecturer',
-             role_type_other: nil,
-             early_years_experience: '2-5',
-             module_time_to_completion: {
-               alpha: 1,
-               bravo: 0,
-             })
+      user2 = create(:user, :registered,
+                     id: 2,
+                     local_authority: 'Leeds City Council',
+                     role_type: 'Trainer or lecturer',
+                     role_type_other: nil,
+                     early_years_experience: '2-5',
+                     module_time_to_completion: {
+                       alpha: 1,
+                       bravo: 0,
+                     })
+      UserModuleProgress.create!(user: user2, module_name: 'alpha', started_at: module_1_started, completed_at: module_1_completed)
+      UserModuleProgress.create!(user: user2, module_name: 'bravo', started_at: module_2_started, completed_at: nil)
 
-      user = create(:user, :registered,
-                    id: 3,
-                    local_authority: 'City of London',
-                    module_time_to_completion: {
-                      alpha: 3,
-                    },
-                    notify_callback: {
-                      status: 'delivered',
-                    })
+      user3 = create(:user, :registered,
+                     id: 3,
+                     local_authority: 'City of London',
+                     module_time_to_completion: {
+                       alpha: 3,
+                     },
+                     notify_callback: {
+                       status: 'delivered',
+                     })
+      UserModuleProgress.create!(user: user3, module_name: 'alpha', started_at: module_1_started, completed_at: module_1_completed)
 
       Event.new(
-        user: user,
+        user: user3,
         visit: Visit.new,
         name: 'user_registration',
         time: Time.zone.local(2023, 0o1, 12, 10, 15, 59),
@@ -176,12 +208,15 @@ RSpec.describe User, type: :model do
       create(:user, :confirmed, id: 4)
     end
 
-    it 'exports formatted attributes as CSV' do
+    # module_1: 10:00 to 10:30 = 1800 seconds
+    # module_2: 09:00 to 09:45 = 2700 seconds
+    # module_3: started but not completed = 0
+    it 'exports formatted attributes as CSV with module time in seconds' do
       expect(described_class.to_csv(batch_size: 2)).to eq <<~CSV
         id,local_authority,setting_type,setting_type_other,role_type,role_type_other,early_years_experience,registration_complete,private_beta_registration_complete,registration_complete_any?,registered_at,terms_and_conditions_agreed_at,training_emails,email_delivery_status,gov_one?,module_1_time,module_2_time,module_3_time
-        1,Watford Borough Council,,DfE,other,Developer,na,true,true,true,,2000-01-01 00:00:00,true,unknown,true,4,2,0
-        2,Leeds City Council,,DfE,Trainer or lecturer,,2-5,true,false,true,,2000-01-01 00:00:00,true,unknown,true,1,0,
-        3,City of London,,DfE,other,Developer,,true,false,true,2023-01-12 10:15:59,2000-01-01 00:00:00,true,delivered,true,3,,
+        1,Watford Borough Council,,DfE,other,Developer,na,true,true,true,,2000-01-01 00:00:00,true,unknown,true,1800,2700,0
+        2,Leeds City Council,,DfE,Trainer or lecturer,,2-5,true,false,true,,2000-01-01 00:00:00,true,unknown,true,1800,0,
+        3,City of London,,DfE,other,Developer,,true,false,true,2023-01-12 10:15:59,2000-01-01 00:00:00,true,delivered,true,1800,,
         4,,,,,,,false,false,false,,2000-01-01 00:00:00,,unknown,true,,,
       CSV
     end
@@ -213,12 +248,12 @@ RSpec.describe User, type: :model do
   end
 
   describe '#active_modules' do
-    subject(:user) do
-      create(:user,
-             module_time_to_completion: {
-               alpha: 4,
-               bravo: 2,
-             })
+    subject(:user) { create(:user, :registered) }
+
+    before do
+      # Create in-progress modules (started but not completed)
+      create(:user_module_progress, user: user, module_name: 'alpha', started_at: 1.day.ago, completed_at: nil)
+      create(:user_module_progress, user: user, module_name: 'bravo', started_at: 2.days.ago, completed_at: nil)
     end
 
     it 'filters by user progress state' do
