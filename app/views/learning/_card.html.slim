@@ -2,12 +2,14 @@
   .card-container
     = training_module_image(mod)
 
-    - if current_user.content_changes.new_module?(mod)
+    - if current_user&.content_changes&.new_module?(mod)
       span.govuk-tag.govuk-tag--ey
         = t('my_learning.new_tag.card')
 
+    - destination = current_user ? training_module_path(mod.name) : about_path(mod.name)
+
     h3.govuk-heading-s
-      = govuk_link_to mod.heading, training_module_path(mod.name), no_visited_state: true, class: 'card-link--header'
+      = govuk_link_to mod.heading, destination, no_visited_state: true, class: 'card-link--header'
 
     - if progress
       = link_to_retake_or_results(mod)
@@ -21,4 +23,9 @@
           .bar-progress style="width: #{progress.percentage}"
             .bar-ball
 
+      - if show_progress_description && progress.description.present?
         .description= progress.description
+
+    - else
+      - if show_module_description && mod.description.present?
+        .description= mod.description
