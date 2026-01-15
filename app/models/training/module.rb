@@ -104,7 +104,7 @@ module Training
 
     # @return [Array<Training::Page, Training::Video, Training::Question>]
     def content
-      Array(pages).reject(&:interruption_page?)
+      Array(pages).reject(&:interruption_page?).reject(&:disable_pre_confidence_page?)
     end
 
     # SECTIONS -----------------------------------------------------------------
@@ -293,7 +293,7 @@ module Training
     # @see My Modules card / About page sidebar
     # @return [String]
     def heading
-      coming_soon = 'Coming soon - ' if draft?
+      coming_soon = 'Coming soon - ' if draft? && ENV['DISABLE_PRE_CONFIDENCE_CHECK'].eql?('true')
       "#{coming_soon}Module #{position}: #{title}"
     end
 

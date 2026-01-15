@@ -95,6 +95,15 @@ module ContentTypes
   end
 
   # @return [Boolean]
+  def disable_pre_confidence_page?
+    (pre_confidence_intro? || page_type.eql?('pre_confidence')) && (ENV['DISABLE_PRE_CONFIDENCE_CHECK'] == 'true')
+  end
+
+  def pre_confidence_intro?
+    page_type.eql?('text_page') && heading.eql?('Confidence check')
+  end
+
+  # @return [Boolean]
   def feedback_question?
     page_type.eql?('feedback')
   end

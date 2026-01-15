@@ -22,6 +22,12 @@ RSpec.describe ContentTypes, type: :model do
     specify { expect(content).to be_submodule_intro }
   end
 
+  describe '#pre_confidence_question?' do
+    before { content.page_type = 'pre_confidence' }
+
+    specify { expect(content).to be_pre_confidence_question }
+  end
+
   describe '#topic_intro?' do
     before { content.page_type = 'topic_intro' }
 
