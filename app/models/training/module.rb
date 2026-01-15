@@ -293,7 +293,7 @@ module Training
     # @see My Modules card / About page sidebar
     # @return [String]
     def heading
-      coming_soon = 'Coming soon - ' if draft?
+      coming_soon = 'Coming soon - ' if draft? && ENV['DISABLE_PRE_CONFIDENCE_CHECK'].eql?('true')
       "#{coming_soon}Module #{position}: #{title}"
     end
 
