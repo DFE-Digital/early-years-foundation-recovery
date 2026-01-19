@@ -11,6 +11,7 @@ private
 
   # @return [Boolean] are all modules valid
   def valid?
+    # TODO: Update logic to allow pre-confidence pages
     Training::Module.ordered.all? do |mod|
       check = ContentIntegrity.new(module_name: mod.name)
       check.call # print results
