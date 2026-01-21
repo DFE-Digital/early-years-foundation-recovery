@@ -9,7 +9,8 @@
     "lint": "npx stylelint app/assets/stylesheets/* --fix"
   },
   "resolutions": {
-    "glob": "^10.5.0"
+    "glob": "^10.5.0",
+    "tar": "7.5.4"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
