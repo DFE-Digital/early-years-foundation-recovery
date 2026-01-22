@@ -13,12 +13,12 @@ This log lists the architectural decisions for EYFS Recovery
 * [ADR-0006](0006-content-storage-strategy.md) - Use YAML + Markdown for Content
 * [ADR-0007](0007-secrets-management.md) - Use Bitwarden for secrets management
 * [ADR-0008](0008-deployment-environments.md) - Production, Integration, Staging and Content Preview environments will be resourced
-* [ADR-0009](0009-infrastructure-as-code.md) - Use Terraform for infrastructure as code
+* [ADR-0009](0009-infrastructure-as-code.md) - Deployment pipeline, and Infrastructure as Code
 * [ADR-0010](0010-ci-cd-strategy.md) - CI/CD strategy: GitHub Actions + Review App Deployments on Azure
 * [ADR-0011](0011-contentful.md) - Use Contentful CMS for content storage
 * [ADR-0012](0012-linting.md) - Use Gov.UK Rubocop for code linting
 * [ADR-0013](0013-security-vulnerabilities.md) - Use Trivy to monitor Docker vulnerabilities
-* [ADR-0014](0014-postcodes.md) - Use UK_Postcode for validation and normalisation (rejected)
+* [ADR-0014](0014-postcodes.md) - Use UK_Postcode for validation and normalisation
 * [ADR-0015](0015-event-tracking.md) - Event Tracking
 * [ADR-0016](0016-accessibility-standards.md) - Use Pa11y CI to ensure WCAG standards
 * [ADR-0017](0017-sensitive-data-encryption.md) - Use Active Record Encryption to protect sensitive data
@@ -27,8 +27,10 @@ This log lists the architectural decisions for EYFS Recovery
 * [ADR-0020](0020-password-vulnerability.md) - Use Devise Security and Devise Pwned Passwords
 * [ADR-0021](0021-external-authentication.md) - Use GOV.UK One Login
 * [ADR-0022](0022-sentry-monitoring.md) - Monitoring with Sentry
-* [ADR-0023](0023-clarity-metrics.md) - Switch to Microsoft Clarity to track user journeys
+* [ADR-0023](0023-clarity-metrics.md) - Use Clarity for tracking user journeys
 * [ADR-0024](0024-application-insights.md) - Deploy Azure Application Insights
+* [ADR-0024-1](0024-application-insights/0024-1-telemetry-collector-app-insights-dev.md) -  Introduce OpenTelemetry and Azure Application Insights using a Telemetry Collector Container
+* [ADR-0024-2](0024-application-insights/0024-2-opentelemetry_deployment_sidecar.md) - Embedded OpenTelemetry Collector
 
 <!-- adrlogstop -->
 
