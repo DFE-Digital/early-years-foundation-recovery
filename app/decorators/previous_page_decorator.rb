@@ -66,6 +66,11 @@ private
     content.thankyou? && !answered?(previous_item)
   end
 
+  # @return [Boolean]
+  def skip_pre_confidence_section?
+    content.first_content_page? && !answered?(previous_item)
+  end
+
   # @return [Training::Page, Training::Question, Training::Video]
   def previous_previous_item
     content.with_parent(mod).previous_previous_item
