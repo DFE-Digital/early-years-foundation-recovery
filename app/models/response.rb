@@ -26,7 +26,7 @@ class Response < ApplicationRecord
   scope :feedback, -> { where(question_type: 'feedback') }
   scope :course_feedback, -> { feedback.where(training_module: 'course') }
 
-  delegate :to_partial_path, :legend, to: :question
+  delegate :to_partial_path, :legend, :description, to: :question
 
   # @return [Training::Module, Course]
   def mod

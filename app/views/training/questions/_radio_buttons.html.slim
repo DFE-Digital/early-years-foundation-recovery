@@ -1,4 +1,4 @@
-= f.govuk_radio_buttons_fieldset :answers, legend: { text: response.legend } do
+= f.govuk_radio_buttons_fieldset :answers, legend: { text: response.legend }, hint: (response.description.present? ? { text: m(response.description) } : nil) do
   = f.hidden_field :answers
   - response.options.each do |option|
     = f.question_radio_button(option)

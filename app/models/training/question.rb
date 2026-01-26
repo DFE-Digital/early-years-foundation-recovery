@@ -125,6 +125,11 @@ module Training
       name
     end
 
+    # @return [String, nil]
+    def description
+      fields[:description] if confidence_question?
+    end
+
     # @return [String]
     def legend
       if multi_select?
