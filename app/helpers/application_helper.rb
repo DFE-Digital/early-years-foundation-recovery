@@ -26,6 +26,12 @@ module ApplicationHelper
           'govuk-service-navigation__item',
           ('govuk-service-navigation__item--current' if current_page?(root_path)),
         ].compact)
+        unless user_signed_in?
+          header.with_navigation_item(text: 'Modules', href: course_overview_path, classes: [
+            'govuk-service-navigation__item',
+            ('govuk-service-navigation__item--current' if current_page?(course_overview_path)),
+          ].compact)
+        end
       end
       if user_signed_in?
         unless incomplete

@@ -166,6 +166,25 @@ en:
     started: Resume module
     not_started: Start module
 
+  modules_title: |
+    ## Modules
+  training_module_custom_descriptions:
+    child-development-and-the-eyfs:
+      description: Factors affecting children’s development and effective implementation of EYFS.
+    brain-development-and-how-children-learn:
+      description: Theories of cognitive development, delays in brain development and the importance of a healthy lifestyle for learning.
+    personal-social-and-emotional-development:
+      description: How secure relationships affect learning and behaviour and why self-regulation is important.
+    module-4:
+      description: Factors affecting language development and your role in creating a language rich environment.
+    module-5:
+      description: The typical stages of physical development and how physical skills impact on learning, development and behaviour.
+    module-6:
+      description: How to nurture positive attitudes and interests in mathematics and provide early number experiences.
+    module-7:
+      description: Looking at the curriculum as a progression model and different approaches to teaching and learning.
+    module-8:
+      description: The importance of identifying and supporting differences and needs in children’s learning and development.
   # -----------------------------------------------------------
 
   prompt:
@@ -430,17 +449,11 @@ en:
 
   # Registration Journey -------------------------------------------------------
 
-  # Common registration form banners:
-  complete_registration:
-    label: Success
-    heading: You have created your account
-    body: You can now start your first module.
+  # Common registration form elements
   details_updated: You have updated your details
+  complete_registration: Thank you for creating an Early years child development training account. You can now start your first module.
   update_registration: Thank you for updating your Early years child development training account. You can now continue.
-
-  terms_and_conditions:
-    label: Important
-    heading: You must agree to the terms and conditions before you can use this service.
+  terms_and_conditions: You must agree to the terms and conditions before you can use this service.
 
   # /registration/terms-and-conditions/edit
   register_terms_and_conditions:
@@ -507,31 +520,36 @@ en:
   home:
     title: Home page
     hero: |
-      This free, online training provides an overview of child development and gives practical advice for supporting the development of children in your early years setting.
+      This free online training is designed to build and strengthen your understanding of child development. It provides practical tips and ideas to use in your setting to help all children aged 0-5 years.
     thumb: |
       ![A practitioner smiling as they do an activity with children in an early years setting](//images.ctfassets.net/dvmeh832nmjc/2VRBZCHJYLeKx0a2CIcJzE/687fb0d28c71104820cd42f131d7dfe2/_assets_thumb-1161068272-320x240.jpg?fit=scale&w=380)
     about: |
-      ## About this training course
+      ## Who this training is for
 
-      Each training module on this site covers an important area of child development and has been written by early years experts, working with the Department for Education.
+      This training is for anyone working with children in any type of early years setting, including:
+
+      - childminders
+      - nursery practitioners
+      - reception teachers and teaching assistants
+
+      The training is for anyone who is new to early years and looking to build their child development knowledge. However, it is also useful for anyone looking to refresh their knowledge.
     prompt: |
-      ## Why should I take this training?
+      ## Why you should take this training
 
-      This training:
+      You can:
 
-      - is free
-      - is for childminders, nursery practitioners and reception staff
-      - combines theory with practical tips and ideas to use in your setting
-      - includes opportunities to reflect on your practice
-      - reinforces your understanding through learning check questions and tests
-      - links to additional resources
-      - offers the opportunity to download certificates of completion
-      - has been developed by expert practitioners
+      - start and pause the training at any time so you can complete each module at your own pace.
+      - get practical ideas to use in your setting
+      - use the learning log to make notes on your reflections
+      - test your knowledge and reflect on your own practice
+      - watch videos filmed in real early years setting
+      - complete the modules in any order
+      - download a certificate of completion after each module
     login: |
       ## Return to your training
 
       Sign in to continue learning, see your progress and download certificates.
-    gov_one_button: Start your training now
+    gov_one_button: Register or sign in
 
   # /about-training
   about:
