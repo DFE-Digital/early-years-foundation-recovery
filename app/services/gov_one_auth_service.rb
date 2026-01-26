@@ -23,6 +23,7 @@ class GovOneAuthService
   extend Dry::Initializer
 
   option :code, Types::Strict::String
+  option :http_client, default: -> { Net::HTTP }
 
   # POST /token
   # @return [Hash]
@@ -63,19 +64,34 @@ class GovOneAuthService
   # @return [Array<Hash>]
   def decode_id_token(token)
     kid = JWT.decode(token, nil, false).last['kid']
-    key_params = jwks['keys'].find { |key| key['kid'] == kid }
-    jwk = JWT::JWK.new(key_params)
+    keys, _refreshed = fetch_jwks_with_cache
+    key_params = keys['keys'].find { |key| key['kid'] == kid }
 
+    unless key_params
+      Rails.logger.warn "JWKS kid #{kid} not found in cache, refreshing JWKS..."
+      keys, _refreshed = fetch_jwks_with_cache(force_refresh: true)
+      key_params = keys['keys'].find { |key| key['kid'] == kid }
+      unless key_params
+        Rails.logger.error "GovOneAuthService.decode_id_token: kid #{kid} not found after JWKS refresh"
+        raise JWT::DecodeError, "kid #{kid} not found in JWKS"
+      end
+    end
+
+    jwk = JWT::JWK.new(key_params)
     JWT.decode(token, jwk.public_key, true, { verify_iat: true, algorithm: 'ES256' })
+  rescue JWT::DecodeError
+    # Let JWT::DecodeError propagate
+    raise
   rescue StandardError => e
     Rails.logger.error "GovOneAuthService.decode_id_token: #{e.message}"
+    nil
   end
 
   # @param address [String]
   # @return [Array<URI::HTTP, Net::HTTP>]
   def build_http(address)
     uri = URI.parse(address)
-    http = Net::HTTP.new(uri.host, uri.port)
+    http = http_client.new(uri.host, uri.port)
     http.use_ssl = true
     [uri, http]
   rescue StandardError => e
@@ -84,15 +100,68 @@ class GovOneAuthService
 
 private
 
-  # GET /.well-known/jwks.json
-  # @return [Hash]
-  def jwks
-    Rails.cache.fetch('jwks', expires_in: 24.hours) do
-      uri, http = build_http(ENDPOINTS[:jwks])
+  # Fetch JWKS with cache, supporting force refresh and cache expiry from Cache-Control
+  # @param force_refresh [Boolean]
+  # @return [Array<Hash, Boolean>] JWKS and whether it was freshly fetched
+  def fetch_jwks_with_cache(force_refresh: false)
+    cache_key = 'jwks'
+    if force_refresh
+      Rails.cache.delete(cache_key)
+    end
+    jwks, expiry = Rails.cache.fetch(cache_key, expires_in: 24.hours, race_condition_ttl: 10) do
+      uri, http = build_http(jwks_uri_from_discovery)
       response = http.request(Net::HTTP::Get.new(uri.path))
-      JSON.parse(response.body)
+      if response.code.to_i == 200
+        max_age = parse_max_age(response['Cache-Control'])
+        Rails.logger.info "Fetched JWKS, setting cache expiry to #{max_age} seconds"
+        [JSON.parse(response.body), max_age]
+      else
+        Rails.logger.error "GovOneAuthService.jwks: HTTP #{response.code}"
+        raise 'JWKS fetch failed'
+      end
     rescue StandardError => e
       Rails.logger.error "GovOneAuthService.jwks: #{e.message}"
+      # fallback: return last cached value if available
+      cached = Rails.cache.read(cache_key)
+      if cached
+        Rails.logger.warn 'Using stale JWKS from cache due to fetch error'
+        return [cached[0], false]
+      else
+        raise
+      end
+    end
+    # Set expiry if max-age present
+    if expiry.is_a?(Integer) && expiry.positive?
+      Rails.cache.write(cache_key, [jwks, expiry], expires_in: expiry)
+    end
+    [jwks, true]
+  end
+
+  # Parse max-age from Cache-Control header
+  def parse_max_age(header)
+    return nil unless header
+
+    if (m = header.match(/max-age=(\d+)/))
+      m[1].to_i
+    end
+  end
+
+  # Optionally fetch JWKS URI from OpenID discovery endpoint
+  def jwks_uri_from_discovery
+    discovery_url = "#{Rails.application.config.gov_one_base_uri}/.well-known/openid-configuration"
+    begin
+      uri, http = build_http(discovery_url)
+      response = http.request(Net::HTTP::Get.new(uri.path))
+      if response.code.to_i == 200
+        json = JSON.parse(response.body)
+        json['jwks_uri'] || ENDPOINTS[:jwks]
+      else
+        Rails.logger.warn 'OpenID discovery failed, using default JWKS URI'
+        ENDPOINTS[:jwks]
+      end
+    rescue StandardError => e
+      Rails.logger.warn "OpenID discovery error: #{e.message}, using default JWKS URI"
+      ENDPOINTS[:jwks]
     end
   end
 
