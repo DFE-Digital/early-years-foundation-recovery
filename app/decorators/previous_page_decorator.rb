@@ -19,6 +19,8 @@ class PreviousPageDecorator
   def name
     if skip_feedback_section?
       mod.feedback_questions.first.previous_item.name
+    elsif skip_pre_confidence_section?
+      mod.pre_confidence_questions.first.previous_item.name
     elsif skip_previous_question?
       previous_previous_item.name
     else
@@ -68,7 +70,7 @@ private
 
   # @return [Boolean]
   def skip_pre_confidence_section?
-    content.first_content_page? && !answered?(previous_item)
+    content.topic_intro? && !answered?(previous_item) && previous_item.pre_confidence_question?
   end
 
   # @return [Training::Page, Training::Question, Training::Video]
