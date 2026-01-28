@@ -99,7 +99,6 @@ class UserModuleProgress < ApplicationRecord
       visited[page_name] ||= event.time&.iso8601 if page_name.present?
     end
 
-    # Merge in the oldest known start and completion times
     user_started_at = [progress.started_at, start_event&.time, page_events.first&.time].compact.min
     user_completed_at = [progress.completed_at, complete_event&.time].compact.min
 
@@ -111,7 +110,6 @@ class UserModuleProgress < ApplicationRecord
       progress.visited_pages[page_name] ||= timestamp
     end
 
-    # Avoid overwriting newer "last_page" tracked by the new system
     if progress.last_page.blank? && page_events.any?
       progress.last_page = page_events.last&.properties&.dig('id')
     end
