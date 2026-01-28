@@ -61,7 +61,7 @@ RSpec.describe 'Event log' do
   describe 'visiting every page' do
     it 'tracks start and completion' do
       expect(events.where(name: 'module_start').size).to be 1
-      expect(events.where(name: 'module_content_page').size).to be 35
+      # module_content_page events are no longer tracked (page views are stored in user_module_progress)
       expect(events.where(name: 'module_complete').size).to eq 1
     end
   end

@@ -6,29 +6,45 @@
 #   - the furthest page visited
 #
 class ModuleProgress
-  attr_reader :user, :mod, :user_module_events, :events
+  attr_reader :user, :mod
 
   # @param user [User]
   # @param mod [Training::Module]
-  def initialize(user:, mod:, user_module_events:)
+  # @param user_module_progress [UserModuleProgress, nil, :preloaded_nil]
+  #   Provide a preloaded record (or :preloaded_nil) to avoid extra queries.
+  def initialize(user:, mod:, user_module_progress: :not_provided)
     @user = user
     @mod = mod
-    @events_by_module_name = user_module_events
-      .select { |e| e.properties['training_module_id'].present? }
-      .group_by { |e| e.properties['training_module_id'].to_s }
     @summative_assessment = AssessmentProgress.new(user: user, mod: mod)
+    @user_module_progress = if user_module_progress == :not_provided
+                              UserModuleProgress.find_by(user: user, module_name: mod.name)
+                            else
+                              user_module_progress
+                            end
   end
 
   # @return [Float] Module completion
   def value
-    visited.size.to_f / mod.content.size
+    total = mod.content_count
+    return 0.0 if total.zero?
+
+    visited_count.to_f / total
+  end
+
+  # @return [Integer] number of visited pages
+  def visited_count
+    @user_module_progress&.visited_pages_count || 0
+  end
+
+  # @return [Integer] number of unvisited pages
+  def unvisited_count
+    mod.content_count - visited_count
   end
 
   # Name of last page viewed in module
-  # @return [String]
+  # @return [String, nil]
   def milestone
-    page = module_page_events.last
-    page.properties['id'] if page.present?
+    @user_module_progress&.last_page
   end
 
   # Assumes gaps in page views due to skipping or revisions to content
@@ -45,28 +61,25 @@ class ModuleProgress
   # @see CourseProgress
   # @return [Boolean]
   def completed?
-    key_event('module_complete').present?
+    @user_module_progress&.completed_at.present?
   end
 
   # @see CourseProgress
   # @return [Boolean]
   def started?
-    return true if key_event('module_start').present?
-
-    # Fallback: any recorded page view within this module implies the user has started
-    module_page_events.any? { |event| %w[module_content_page page_view].include?(event.name) }
+    @user_module_progress&.started_at.present?
   end
 
   # @param page [Training::Page, Training::Question, Training::Video]
   # @return [Boolean]
   def visited?(page)
-    content_events_count(page.name).positive?
+    @user_module_progress&.visited?(page.name) || false
   end
 
   # Completed date for module
   # @return [DateTime, nil]
   def completed_at
-    key_event('module_complete')&.time
+    @user_module_progress&.completed_at
   end
 
 protected
@@ -122,33 +135,5 @@ private
   # @return [Boolean]
   def state(method, content)
     content.send(method) { |page| visited?(page) }
-  end
-
-  # @param name [String]
-  # @return [Integer]
-  def content_events_count(name)
-    module_page_events.count { |event| event.properties['id'] == name }
-  end
-
-  # @return [Event::ActiveRecord_AssociationRelation]
-  # @note This method is used to fetch events for the current module.
-
-  def module_page_events
-    @module_page_events ||= begin
-      events = if @events_by_module_name
-                 @events_by_module_name[mod.name] || []
-               else
-                 user.events.where_properties(training_module_id: mod.name)
-               end
-
-      # Ensure they're in chronological order
-      events.sort_by { |e| e.time || Time.zone.at(0) }
-    end
-  end
-
-  # @param key [String] module_start, module_complete
-  # @return [Event]
-  def key_event(key)
-    module_page_events.find { |event| event.name == key }
   end
 end

@@ -1,5 +1,6 @@
 class LearningController < ApplicationController
   before_action :authenticate_registered_user!
+  before_action :migrate_progress_if_needed, only: :show
   before_action :set_module_progress_data, only: :show
 
   helper_method :module_progress
@@ -8,35 +9,47 @@ class LearningController < ApplicationController
 
   # GET /my-modules
   def show
-    @available_modules = current_user.course.available_modules
-    @current_modules = current_user.course.current_modules
+    @current_modules = Training::Module.live.select { |mod| started?(mod) && !completed?(mod) }
+    @available_modules = Training::Module.live.reject { |mod| started?(mod) || mod.draft? }
     track('learning_page')
   end
 
-  def set_module_progress_data
-    modules = current_user.course.current_modules
-    mod_names = modules.map(&:name)
+  def migrate_progress_if_needed
+    return if current_user.user_module_progress.exists?
 
-    # Preload once
-    user_module_events = current_user.events.where_properties(training_module_id: mod_names)
+    has_module_events = current_user.events
+      .where(name: %w[module_start module_content_page page_view])
+      .exists?
 
-    @progress_by_module_id = modules.index_with do |mod|
-      ModuleOverviewDecorator.new(
-        ModuleProgress.new(user: current_user, mod: mod, user_module_events: user_module_events),
-      )
+    return unless has_module_events
+
+    Training::Module.live.each do |mod|
+      UserModuleProgress.migrate_from_events(user: current_user, module_name: mod.name)
     end
+  end
+
+  def set_module_progress_data
+    @user_progress_by_module = current_user.user_module_progress.index_by(&:module_name)
+    @progress_by_module_id = {}
   end
 
 private
 
-  # Assuming you preload @progress_by_module_id hash mapping mod.id to ModuleOverviewDecorator
+  def started?(mod)
+    @user_progress_by_module[mod.name]&.started_at.present?
+  end
+
+  def completed?(mod)
+    @user_progress_by_module[mod.name]&.completed_at.present?
+  end
 
   def module_progress(mod)
-    @progress_by_module_id[mod.name] ||= begin
-      user_module_events = current_user.events.where_properties(training_module_id: mod.name)
-      ModuleOverviewDecorator.new(
-        ModuleProgress.new(user: current_user, mod: mod, user_module_events: user_module_events),
-      )
-    end
+    @progress_by_module_id[mod.name] ||= ModuleOverviewDecorator.new(
+      ModuleProgress.new(
+        user: current_user,
+        mod: mod,
+        user_module_progress: @user_progress_by_module[mod.name],
+      ),
+    )
   end
 end
