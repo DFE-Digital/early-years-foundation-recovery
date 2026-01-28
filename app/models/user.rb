@@ -416,7 +416,9 @@ class User < ApplicationRecord
 
   # @return [Datetime]
   def registered_at
-    events.where(name: 'user_registration').first&.time # :first returns private_beta or public_beta if that is the only one
+    return unless registration_complete?
+
+    created_at
   end
 
   # @return [Trainee::Setting, nil]
