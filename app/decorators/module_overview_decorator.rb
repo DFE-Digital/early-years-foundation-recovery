@@ -5,10 +5,10 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
   # @see LearningController#module_progress
   # @return [String]
   def description
-    if unvisited.size <= 20
-      I18n.t('my_learning.progress.remaining', num: unvisited.size)
+    if unvisited_count <= 20
+      I18n.t('my_learning.progress.remaining', num: unvisited_count)
     else
-      I18n.t('my_learning.progress.viewed', num: visited.size)
+      I18n.t('my_learning.progress.viewed', num: visited_count)
     end
   end
 
