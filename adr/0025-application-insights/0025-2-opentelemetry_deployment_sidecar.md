@@ -1,7 +1,4 @@
-# 19. Embedded OpenTelemetry Collector
-
-- Status: accepted
-- Date: 2025-12-12
+# Embedded OpenTelemetry Collector
 
 ## Context and Problem Statement
 
