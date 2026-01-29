@@ -19,6 +19,7 @@ locals {
     "USER_PASSWORD"                          = var.webapp_config_user_password
     "CONTENTFUL_ENVIRONMENT"                 = var.webapp_config_contentful_environment
     "CONTENTFUL_PREVIEW"                     = var.webapp_config_contentful_preview
+    "DISABLE_PRE_CONFIDENCE_CHECK"           = var.webapp_config_disable_pre_confidence_check
     "DOMAIN"                                 = var.webapp_config_domain
     "EDITOR"                                 = var.webapp_config_editor
     "FEEDBACK_URL"                           = var.webapp_config_feedback_url
@@ -46,6 +47,7 @@ locals {
     "USER_PASSWORD"                          = var.webapp_config_user_password
     "CONTENTFUL_ENVIRONMENT"                 = var.webapp_config_contentful_environment
     "CONTENTFUL_PREVIEW"                     = var.webapp_config_contentful_preview
+    "DISABLE_PRE_CONFIDENCE_CHECK"           = var.webapp_config_disable_pre_confidence_check
     "DOMAIN"                                 = var.webapp_config_domain
     "EDITOR"                                 = var.webapp_config_editor
     "FEEDBACK_URL"                           = var.webapp_config_feedback_url
@@ -83,6 +85,7 @@ locals {
     "USER_PASSWORD"                          = var.webapp_config_user_password
     "CONTENTFUL_ENVIRONMENT"                 = var.reviewapp_config_contentful_environment
     "CONTENTFUL_PREVIEW"                     = var.reviewapp_config_contentful_preview
+    "DISABLE_PRE_CONFIDENCE_CHECK"           = var.reviewapp_config_disable_pre_confidence_check
     "DASHBOARD_UPDATE"                       = false
     "DOMAIN"                                 = var.webapp_config_domain
     "EDITOR"                                 = var.webapp_config_editor
