@@ -264,6 +264,11 @@ module Training
     end
 
     # @return [Array<Training::Question>]
+    def pre_confidence_questions
+      content.select(&:pre_confidence_question?)
+    end
+
+    # @return [Array<Training::Question>]
     def feedback_questions
       content.select(&:feedback_question?)
     end

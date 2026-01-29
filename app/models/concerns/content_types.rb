@@ -27,7 +27,7 @@ module ContentTypes
 
   # @return [Boolean]
   def opinion_question?
-    confidence_question? || feedback_question?
+    confidence_question? || feedback_question? || pre_confidence_question?
   end
 
   # @return [Boolean]
@@ -87,6 +87,11 @@ module ContentTypes
   # @return [Boolean]
   def confidence_question?
     page_type.eql?('confidence')
+  end
+
+  # @return [Boolean]
+  def pre_confidence_question?
+    page_type.eql?('pre_confidence')
   end
 
   # @return [Boolean]

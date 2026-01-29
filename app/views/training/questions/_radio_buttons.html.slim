@@ -1,4 +1,6 @@
 = f.govuk_radio_buttons_fieldset :answers, legend: { text: response.legend } do
   = f.hidden_field :answers
+  - if content.pre_confidence_question?
+    p.govuk-hint = content.hint if content.hint.present?
   - response.options.each do |option|
     = f.question_radio_button(option)
