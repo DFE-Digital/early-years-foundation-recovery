@@ -4,7 +4,7 @@
 
 ## Context and Problem Statement
 
-How might we host video for incorporation into the module content
+How might we host video for incorporation into the module content?
 
 ## Decision Drivers
 
