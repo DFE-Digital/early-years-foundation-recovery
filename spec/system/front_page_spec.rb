@@ -23,7 +23,7 @@ RSpec.describe 'Front page' do
       visit '/'
 
       expect(page).to have_text 'Learn more about this training'
-      expect(page).to have_text 'Start your training now'
+      expect(page).to have_text 'Register or sign in'
 
       # banner
       expect(page).not_to have_text 'Access to this website is changing'

@@ -9,7 +9,7 @@ hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
     - if @available_modules.any?
       .grid-container
         - @available_modules.each do |mod|
-          = render 'card', mod: mod, progress: false
+          = render 'card', mod: mod, progress: false, show_module_description: false, show_progress_description: false
 
     - elsif current_user.course.course_completed?
       p = t('my_learning.course_completed')

@@ -14,6 +14,7 @@ How might we handle processing background jobs?
 ## Considered Options
 
 * [Arask](https://github.com/Ebbe/arask)
+* [Que](https://github.com/que-rb/que) ruby library
 * [Sidekiq](https://github.com/sidekiq/sidekiq)
 
 ## Decision Outcome
