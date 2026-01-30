@@ -154,6 +154,7 @@ private
     Google::Cloud::Storage.new(credentials: credentials, project: credentials['project_id'])
   end
 
+  # test ignore
   # @param message [String]
   # @return [String, nil]
   def log(message)
