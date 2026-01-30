@@ -20,6 +20,7 @@ locals {
     "CONTENTFUL_ENVIRONMENT"                 = var.webapp_config_contentful_environment
     "CONTENTFUL_PREVIEW"                     = var.webapp_config_contentful_preview
     "DISABLE_PRE_CONFIDENCE_CHECK"           = var.webapp_config_disable_pre_confidence_check
+    "SHOW_PRE_CONFIDENCE_HINT"               = var.webapp_config_show_pre_confidence_hint
     "DOMAIN"                                 = var.webapp_config_domain
     "EDITOR"                                 = var.webapp_config_editor
     "FEEDBACK_URL"                           = var.webapp_config_feedback_url
@@ -48,6 +49,7 @@ locals {
     "CONTENTFUL_ENVIRONMENT"                 = var.webapp_config_contentful_environment
     "CONTENTFUL_PREVIEW"                     = var.webapp_config_contentful_preview
     "DISABLE_PRE_CONFIDENCE_CHECK"           = var.webapp_config_disable_pre_confidence_check
+    "SHOW_PRE_CONFIDENCE_HINT"               = var.webapp_config_show_pre_confidence_hint
     "DOMAIN"                                 = var.webapp_config_domain
     "EDITOR"                                 = var.webapp_config_editor
     "FEEDBACK_URL"                           = var.webapp_config_feedback_url
@@ -86,6 +88,7 @@ locals {
     "CONTENTFUL_ENVIRONMENT"                 = var.reviewapp_config_contentful_environment
     "CONTENTFUL_PREVIEW"                     = var.reviewapp_config_contentful_preview
     "DISABLE_PRE_CONFIDENCE_CHECK"           = var.reviewapp_config_disable_pre_confidence_check
+    "SHOW_PRE_CONFIDENCE_HINT"               = var.reviewapp_config_show_pre_confidence_hint
     "DASHBOARD_UPDATE"                       = false
     "DOMAIN"                                 = var.webapp_config_domain
     "EDITOR"                                 = var.webapp_config_editor
