@@ -104,7 +104,7 @@ module Training
 
     # @return [Array<Training::Page, Training::Video, Training::Question>]
     def content
-      Array(pages).reject(&:interruption_page?)
+      Array(pages).reject(&:interruption_page?).reject(&:disable_pre_confidence_page?)
     end
 
     # SECTIONS -----------------------------------------------------------------
@@ -261,6 +261,11 @@ module Training
     # @return [Array<Training::Question>]
     def confidence_questions
       content.select(&:confidence_question?)
+    end
+
+    # @return [Array<Training::Question>]
+    def pre_confidence_questions
+      content.select(&:pre_confidence_question?)
     end
 
     # @return [Array<Training::Question>]

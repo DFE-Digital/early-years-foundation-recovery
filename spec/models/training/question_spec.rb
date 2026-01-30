@@ -26,6 +26,18 @@ RSpec.describe Training::Question, type: :model do
         ['Wrong answer 1'],
       ]
     end
+
+    describe '#description' do
+      let(:confidence_question) { Training::Module.by_name('alpha').page_by_name('1-3-3-3') }
+
+      it 'returns nil for confidence questions without a description field' do
+        expect(confidence_question.description).to be_nil
+      end
+
+      it 'returns nil for non-confidence questions' do
+        expect(question.description).to be_nil
+      end
+    end
   end
 
   describe '#options' do
