@@ -108,4 +108,109 @@ RSpec.describe GovOneAuthService do
       expect(endpoints[:jwks]).to eq 'https://oidc.test.account.gov.uk/.well-known/jwks.json'
     end
   end
+
+  describe 'JWKS/key rotation logic' do
+    let(:jwt_token) { 'mock.jwt.token' }
+    let(:kid) { 'test-kid' }
+    let(:other_kid) { 'other-kid' }
+    let(:jwks_keys) { { 'keys' => [{ 'kid' => kid, 'kty' => 'RSA', 'n' => 'test', 'e' => 'AQAB' }] } }
+    let(:jwks_keys_other) { { 'keys' => [{ 'kid' => other_kid, 'kty' => 'RSA', 'n' => 'test', 'e' => 'AQAB' }] } }
+    let(:jwks_response) do
+      instance_double(Net::HTTPResponse, code: '200', body: jwks_keys.to_json).tap do |resp|
+        allow(resp).to receive(:[]).with('Cache-Control').and_return(nil)
+      end
+    end
+    let(:jwks_response_other) do
+      instance_double(Net::HTTPResponse, code: '200', body: jwks_keys_other.to_json).tap do |resp|
+        allow(resp).to receive(:[]).with('Cache-Control').and_return(nil)
+      end
+    end
+    let(:cache_control_response) do
+      instance_double(Net::HTTPResponse, code: '200', body: jwks_keys.to_json).tap do |resp|
+        allow(resp).to receive(:[]).with('Cache-Control').and_return('max-age=1234')
+      end
+    end
+    let(:discovery_response) do
+      instance_double(Net::HTTPResponse, code: '200', body: { 'jwks_uri' => 'https://custom-jwks' }.to_json)
+    end
+    let(:mock_http) { http_with_request(jwks_response) }
+    let(:mock_http_other) { http_with_request(jwks_response_other) }
+    let(:mock_http_cache_control) { http_with_request(cache_control_response) }
+    let(:mock_http_discovery) { http_with_request(discovery_response) }
+
+    def http_with_request(response)
+      instance_double('MockHTTP', request: response).tap do |http|
+        allow(http).to receive(:use_ssl=)
+      end
+    end
+
+    before do
+      allow(JWT).to receive(:decode).and_return([{}, { 'kid' => kid }])
+      allow(JWT::JWK).to receive(:new).and_return(instance_double('JWK', public_key: 'pubkey'))
+      allow(Rails.cache).to receive(:fetch).and_call_original
+      allow(Rails.cache).to receive(:delete)
+      allow(Rails.cache).to receive(:write)
+      allow(Rails.cache).to receive(:read)
+      allow(Rails.logger).to receive(:warn)
+      allow(Rails.logger).to receive(:info)
+      allow(Rails.logger).to receive(:error)
+    end
+
+    it 'refreshes JWKS cache and retries verification on kid miss' do
+      allow(JWT).to receive(:decode).and_return([{}, { 'kid' => other_kid }])
+      # Both initial and refreshed JWKS do not contain the kid (empty keys array)
+      jwks_keys_empty = { 'keys' => [] }
+      jwks_response_empty = instance_double(Net::HTTPResponse, code: '200', body: jwks_keys_empty.to_json)
+      allow(jwks_response_empty).to receive(:[]).with('Cache-Control').and_return(nil)
+      mock_http_empty = http_with_request(jwks_response_empty)
+      http_client_double = class_double(Net::HTTP, new: mock_http_empty)
+      auth_service = described_class.new(code: code, http_client: http_client_double)
+      expect(Rails.cache).to receive(:delete).with('jwks')
+      expect(Rails.logger).to receive(:warn).with(/JWKS kid/)
+      expect(Rails.logger).to receive(:error).with(/kid #{other_kid} not found after JWKS refresh/)
+      expect { auth_service.decode_id_token(jwt_token) }.to raise_error(JWT::DecodeError)
+    end
+
+    it 'sets JWKS cache expiry from Cache-Control header' do
+      http_client_double = class_double(Net::HTTP, new: mock_http_cache_control)
+      auth_service = described_class.new(code: code, http_client: http_client_double)
+      expect(Rails.cache).to receive(:write).with('jwks', anything, expires_in: 1234)
+      auth_service.send(:fetch_jwks_with_cache, force_refresh: true)
+    end
+
+    it 'falls back to cached JWKS on fetch failure' do
+      failing_http = instance_double('FailingHTTP')
+      allow(failing_http).to receive(:request).and_raise(StandardError, 'network error')
+      allow(failing_http).to receive(:use_ssl=)
+      http_client_double = class_double(Net::HTTP, new: failing_http)
+      auth_service = described_class.new(code: code, http_client: http_client_double)
+      allow(Rails.cache).to receive(:read).with('jwks').and_return([jwks_keys, false])
+      expect(Rails.logger).to receive(:warn).with(/stale JWKS/)
+      expect { auth_service.send(:fetch_jwks_with_cache, force_refresh: true) }.not_to raise_error
+    end
+
+    it 'fetches JWKS URI from OpenID discovery endpoint' do
+      http_client_double = class_double(Net::HTTP, new: mock_http_discovery)
+      auth_service = described_class.new(code: code, http_client: http_client_double)
+      expect(auth_service.send(:jwks_uri_from_discovery)).to eq('https://custom-jwks')
+    end
+
+    it 'logs JWKS refresh events and failures' do
+      http_client_double = class_double(Net::HTTP, new: mock_http)
+      auth_service = described_class.new(code: code, http_client: http_client_double)
+      expect(Rails.logger).to receive(:info).with(/Fetched JWKS/)
+      auth_service.send(:fetch_jwks_with_cache, force_refresh: true)
+      failing_http = instance_double('FailingHTTP')
+      allow(failing_http).to receive(:request).and_raise(StandardError, 'network error')
+      allow(failing_http).to receive(:use_ssl=)
+      http_client_double = class_double(Net::HTTP, new: failing_http)
+      auth_service = described_class.new(code: code, http_client: http_client_double)
+      expect(Rails.logger).to receive(:error).with(/GovOneAuthService.jwks/)
+      begin
+        auth_service.send(:fetch_jwks_with_cache, force_refresh: true)
+      rescue StandardError
+        # expected
+      end
+    end
+  end
 end
