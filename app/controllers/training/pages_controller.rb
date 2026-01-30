@@ -49,17 +49,9 @@ module Training
       render 'text_page'
     end
 
-    # - create 'module_content_page' for every page view
-    # - create 'module_start' once the intro is viewed
-    # - create 'module_complete' once the certificate is viewed
-    # - create 'confidence_check_complete' once the last question is submitted
-    #
-    # - recalculate the user's progress state as a module is started/completed
-    #
     def track_events
-      track('module_content_page')
-
-      ensure_module_started
+      migrate_progress_if_needed
+      record_page_view
 
       if track_module_start?
         track('module_start')
@@ -68,7 +60,22 @@ module Training
         track('confidence_check_complete')
       elsif track_module_complete?
         track('module_complete')
+        record_module_completion
         helpers.calculate_module_state
+      end
+    end
+
+    def migrate_progress_if_needed
+      return if current_user.user_module_progress.exists?
+
+      has_module_events = current_user.events
+        .where(name: %w[module_start module_content_page page_view])
+        .exists?
+
+      return unless has_module_events
+
+      Training::Module.live.each do |m|
+        UserModuleProgress.migrate_from_events(user: current_user, module_name: m.name)
       end
     end
 
@@ -80,7 +87,9 @@ module Training
 
     # @return [Boolean]
     def track_module_complete?
-      content.certificate? && module_complete_untracked?
+      return false unless content.certificate?
+
+      !untracked?('module_start', training_module_id: mod.name) && untracked?('module_complete', training_module_id: mod.name)
     end
 
     # @return [Boolean]
@@ -94,27 +103,20 @@ module Training
     end
 
     # @return [Boolean]
-    def module_complete_untracked?
-      return false if untracked?('module_start', training_module_id: mod.name)
-
-      untracked?('module_complete', training_module_id: mod.name)
-    end
-
-    # @return [Boolean]
     def pdf?
       request.original_url.end_with?('.pdf')
     end
 
-    # @param content [Training::Page, Training::Video, Training::Question]
-    # @param module_name [String]
-    def ensure_module_started(content: self.content, module_name: mod.name)
-      # we can not ensure started on this page or it will immediately complete
-      return if content.certificate?
+    def record_page_view
+      UserModuleProgress.record_page_view(
+        user: current_user,
+        module_name: mod.name,
+        page_name: content.name,
+      )
+    end
 
-      if untracked?('module_start', training_module_id: module_name)
-        track('module_start', training_module_id: module_name)
-        helpers.calculate_module_state
-      end
+    def record_module_completion
+      UserModuleProgress.record_completion(user: current_user, module_name: mod.name)
     end
   end
 end

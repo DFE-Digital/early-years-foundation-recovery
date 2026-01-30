@@ -6,6 +6,7 @@ RSpec.describe Dashboard do
   let(:path) { Rails.root.join('tmp/dashboard-test') }
 
   before do
+    FileUtils.rm_rf(path, secure: true)
     create(:user, :registered, id: 123, local_authority: 'Watford Borough Council')
 
     # Stub GCS upload for the upload test

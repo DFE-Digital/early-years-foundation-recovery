@@ -34,7 +34,7 @@ class CourseProgress
 
   # @return [Boolean]
   def completed_all_modules?
-    completed_modules.all? && upcoming_modules.none? && available_modules.none? && course_completed?
+    course_completed? && current_modules.none? && available_modules.none? && upcoming_modules.none?
   end
 
   # @return [Array<String>]
@@ -72,25 +72,9 @@ class CourseProgress
     module_progress(mod).started?
   end
 
-  # @return [Hash<String, Array>] events grouped by training_module_id
-  def events_by_module_name
-    @events_by_module_name ||= begin
-      raise ArgumentError, 'CourseProgress requires a user' unless user
-      unless user.respond_to?(:events)
-        raise ArgumentError, 'CourseProgress requires user to respond to #events'
-      end
-
-      # Get all module names to fetch events for
-      modules = Training::Module.ordered
-      module_names = modules.map(&:name)
-
-      # Pull all events for these modules in one query
-      events = user.events&.where_module(*module_names)
-      raise ArgumentError, 'CourseProgress requires user.events association' if events.nil?
-
-      # Group events by training_module_id
-      events.group_by { |event| event.properties['training_module_id'] }
-    end
+  # @return [Hash<String, UserModuleProgress>] progress records indexed by module_name
+  def progress_by_module_name
+    @progress_by_module_name ||= user.user_module_progress.index_by(&:module_name)
   end
 
 private
@@ -121,13 +105,11 @@ private
 
   # @return [ModuleProgress]
   def module_progress(mod)
-    @module_progresses ||= {}
-    @module_progresses[mod.name] ||= ModuleProgress.new(user: user, mod: mod, user_module_events: events_by_module_name[mod.name] || [])
-  end
-
-  # @param module_id [String] training module name
-  # @return [Array<Event>] events for the specified module from cache
-  def training_module_events(module_id)
-    events_by_module_name[module_id] || []
+    @module_progress_by_name ||= {}
+    @module_progress_by_name[mod.name] ||= ModuleProgress.new(
+      user: user,
+      mod: mod,
+      user_module_progress: progress_by_module_name[mod.name],
+    )
   end
 end

@@ -12,14 +12,16 @@ class Dashboard
 
   # @return [Array<Hash{ Symbol => String }>]
   DATA_SOURCES = [
-    { model: 'Event',                                   folder: 'events',   file: 'events'                        },
-
-    { model: 'Visit',                                   folder: 'visits',   file: 'visits'                        },
+    # cannot be used for KPIs
+    # { model: 'Event',                                   folder: 'events',   file: 'events'                        },
+    # cannot be used for KPIs
+    # { model: 'Visit',                                   folder: 'visits',   file: 'visits'                        },
 
     { model: 'DataAnalysis::UserOverview',              folder: 'users',    file: 'user_overview'                 },
     { model: 'User',                                    folder: 'users',    file: 'users'                         },
     { model: 'DataAnalysis::ClosedAccounts',            folder: 'users',    file: 'closed_accounts'               },
     { model: 'DataAnalysis::ReturningUsers',            folder: 'users',    file: 'returning_users'               },
+    { model: 'DataAnalysis::UserLastInteraction',       folder: 'users',    file: 'user_last_interaction'         },
     { model: 'DataAnalysis::UserCountByRoleAndExperience', folder: 'users', file: 'user_count_by_role_and_experience' },
     # { model: 'DataAnalysis::LocalAuthorityUser',        folder: 'users',    file: 'local_authority_users'         },
 

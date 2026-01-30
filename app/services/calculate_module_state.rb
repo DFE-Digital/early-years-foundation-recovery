@@ -1,6 +1,6 @@
 # User's time taken to complete a module
 #
-# Delta of :module_start and :module_complete event times calculated in seconds
+# Updates module_time_to_completion from user_module_progress table
 #
 class CalculateModuleState
   attr_reader :user
@@ -31,14 +31,15 @@ private
   # @param training_module [String]
   # @return [Integer] time in seconds
   def new_time(training_module)
-    module_complete = mod_complete(training_module)
-    module_start = mod_start(training_module)
+    progress = UserModuleProgress.find_by(user: user, module_name: training_module)
+
+    return nil unless progress&.started_at
 
     # 'in progress' => 'completed'
-    if module_complete.present? && module_start.present?
-      (module_complete.time - module_start.time).to_i
+    if progress.completed_at.present?
+      (progress.completed_at - progress.started_at).to_i
     # 'not started' => 'in progress'
-    elsif module_start.present?
+    else
       0
     end
   end
@@ -46,17 +47,5 @@ private
   # @return [Array<String>]
   def module_names
     Training::Module.ordered.reject(&:draft?).map(&:name)
-  end
-
-  def mod_event(training_module, event_name)
-    user.events.where(name: event_name).where_properties(training_module_id: training_module).first
-  end
-
-  def mod_complete(training_module)
-    mod_event(training_module, 'module_complete')
-  end
-
-  def mod_start(training_module)
-    mod_event(training_module, 'module_start')
   end
 end

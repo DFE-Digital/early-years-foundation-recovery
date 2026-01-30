@@ -20,6 +20,14 @@ describe 'ContentHelper', type: :helper do
              user: user, properties:
              { training_module_id: 'alpha' }
 
+      # Create UserModuleProgress record for completed module
+      UserModuleProgress.create!(
+        user: user,
+        module_name: 'alpha',
+        started_at: 1.hour.ago,
+        completed_at: Time.zone.now,
+      )
+
       allow(helper).to receive(:current_user).and_return(user)
     end
 
