@@ -1,3 +1,5 @@
+require 'ostruct'
+
 module Trainee
   class Setting < ContentfulModel::Base
     extend ::Caching
