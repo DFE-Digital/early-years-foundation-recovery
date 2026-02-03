@@ -13,6 +13,10 @@ RSpec.describe Training::Module, type: :model do
     it 'does not include interruption the page' do
       expect(mod.content.map(&:page_type)).not_to include 'interruption_page'
     end
+
+    it 'does not include pre-confidence page' do
+      expect(mod.content.map(&:page_type)).not_to include 'pre-confidence'
+    end
   end
 
   describe 'attributes' do

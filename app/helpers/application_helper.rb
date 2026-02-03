@@ -76,6 +76,11 @@ module ApplicationHelper
     cookies[:track_analytics_v2] == 'true'
   end
 
+  # @return [Boolean]
+  def show_pre_confidence_hint?
+    ENV['SHOW_PRE_CONFIDENCE_HINT'] == 'true'
+  end
+
   # @param parts [Array<String>]
   # @return [String]
   def html_title(*parts)

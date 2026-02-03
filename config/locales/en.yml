@@ -130,6 +130,8 @@ en:
     feedback:
       update: Update my feedback
       skip: Skip feedback
+    confidence:
+      skip: Skip questions
     save: Save
     continue: Continue
     cancel: Cancel

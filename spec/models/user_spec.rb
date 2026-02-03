@@ -423,4 +423,35 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '#pre_confidence_response_for' do
+    let(:user) { create :user, :registered }
+    let(:confidence_question) do
+      Training::Module.by_name('alpha').confidence_questions.first
+    end
+
+    context 'without a pre-confidence response' do
+      it 'returns nil' do
+        expect(user.pre_confidence_response_for(confidence_question)).to be_nil
+      end
+    end
+
+    context 'with a pre-confidence response' do
+      before do
+        create :response,
+               user: user,
+               training_module: 'alpha',
+               question_name: confidence_question.name,
+               question_type: 'pre_confidence',
+               answers: [1]
+      end
+
+      it 'returns the pre-confidence response' do
+        response = user.pre_confidence_response_for(confidence_question)
+        expect(response).to be_present
+        expect(response.question_type).to eq 'pre_confidence'
+        expect(response.answers).to eq [1]
+      end
+    end
+  end
 end

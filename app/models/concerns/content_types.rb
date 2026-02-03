@@ -27,7 +27,7 @@ module ContentTypes
 
   # @return [Boolean]
   def opinion_question?
-    confidence_question? || feedback_question?
+    confidence_question? || feedback_question? || pre_confidence_question?
   end
 
   # @return [Boolean]
@@ -87,6 +87,20 @@ module ContentTypes
   # @return [Boolean]
   def confidence_question?
     page_type.eql?('confidence')
+  end
+
+  # @return [Boolean]
+  def pre_confidence_question?
+    page_type.eql?('pre_confidence')
+  end
+
+  # @return [Boolean]
+  def disable_pre_confidence_page?
+    (pre_confidence_intro? || page_type.eql?('pre_confidence')) && (ENV['DISABLE_PRE_CONFIDENCE_CHECK'] == 'true')
+  end
+
+  def pre_confidence_intro?
+    page_type.eql?('text_page') && heading.eql?('Confidence check')
   end
 
   # @return [Boolean]

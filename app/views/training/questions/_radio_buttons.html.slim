@@ -1,4 +1,10 @@
-= f.govuk_radio_buttons_fieldset :answers, legend: { text: response.legend } do
+= f.govuk_radio_buttons_fieldset :answers, legend: { text: response.legend }, hint: (response.description.present? ? { text: m(response.description) } : nil) do
   = f.hidden_field :answers
+  - if content.pre_confidence_question?
+    p.govuk-hint = content.hint if content.hint.present?
+  - elsif content.confidence_question? && show_pre_confidence_hint?
+    - pre_response = current_user.pre_confidence_response_for(content)
+    - if pre_response&.responded?
+      p.govuk-hint Before starting the module, you answered: #{pre_response.selected_answers}
   - response.options.each do |option|
     = f.question_radio_button(option)
