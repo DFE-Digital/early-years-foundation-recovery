@@ -87,6 +87,7 @@ class User < ApplicationRecord
   has_many :events
   has_many :mail_events
   has_many :notes
+  has_many :user_module_progress
   has_many :feedback_responses, -> { where(question_type: 'feedback') }, class_name: 'Response'
 
   scope :gov_one, -> { where.not(gov_one_id: nil) }
@@ -139,11 +140,14 @@ class User < ApplicationRecord
 
   # events
   scope :with_events, -> { joins(:events) }
-  scope :with_module_start_events, -> { with_events.merge(Event.module_start) }
-  scope :with_module_complete_events, -> { with_events.merge(Event.module_complete) }
-  scope :completed_available_modules, -> { with_module_complete_events.group('users.id').having('count(ahoy_events.id) = ?', ModuleRelease.count) }
-  scope :started_training, -> { with_module_start_events.distinct }
-  scope :not_started_training, -> { where.not(id: with_module_start_events) }
+
+  # module progress
+  scope :with_module_progress, -> { joins(:user_module_progress) }
+  scope :with_started_modules, -> { with_module_progress.merge(UserModuleProgress.started) }
+  scope :with_completed_modules, -> { with_module_progress.merge(UserModuleProgress.completed) }
+  scope :completed_available_modules, -> { with_completed_modules.group('users.id').having('count(user_module_progress.id) = ?', ModuleRelease.count) }
+  scope :started_training, -> { with_started_modules.distinct }
+  scope :not_started_training, -> { where.not(id: with_started_modules) }
 
   # visits
   scope :with_visits, -> { joins(:visits) }
@@ -278,8 +282,9 @@ class User < ApplicationRecord
 
   # @return [Array<Training::Module>]
   def active_modules
+    started_module_names = user_module_progress.started.pluck(:module_name)
     Training::Module.live.select do |mod|
-      module_time_to_completion.key?(mod.name)
+      started_module_names.include?(mod.name)
     end
   end
 
@@ -301,23 +306,23 @@ class User < ApplicationRecord
 
   # @return [Boolean]
   def course_started?
-    !module_time_to_completion.empty?
+    user_module_progress.started.exists?
   end
 
   # @return [Boolean]
   def module_in_progress?
-    course_started? && !module_time_to_completion.values.all?(&:positive?)
+    user_module_progress.in_progress.exists?
   end
 
   # @return [Array<String>]
   def modules_in_progress
-    module_time_to_completion.select { |_k, v| v.zero? }.keys
+    user_module_progress.in_progress.pluck(:module_name)
   end
 
   # @param module_name [String]
   # @return [Boolean]
   def module_completed?(module_name)
-    module_time_to_completion.key?(module_name) && module_time_to_completion[module_name].positive?
+    user_module_progress.completed.exists?(module_name: module_name)
   end
 
   # @return [Integer]
@@ -411,7 +416,9 @@ class User < ApplicationRecord
 
   # @return [Datetime]
   def registered_at
-    events.where(name: 'user_registration').first&.time # :first returns private_beta or public_beta if that is the only one
+    return unless registration_complete?
+
+    created_at
   end
 
   # @return [Trainee::Setting, nil]
@@ -455,7 +462,20 @@ class User < ApplicationRecord
   # @see ToCsv#dashboard_row
   # @return [Hash] override
   def dashboard_row
-    data_attributes.dup.merge(module_ttc)
+    data_attributes.dup.merge(module_time_from_progress)
+  end
+
+  # @return [Hash{String => Integer, nil}] module time in seconds from user_module_progress table
+  #   - nil: not started
+  #   - 0: started but not completed
+  #   - positive integer: seconds taken to complete
+  def module_time_from_progress
+    progress_by_module = user_module_progress.index_by(&:module_name)
+
+    Training::Module.live.each_with_object({}) do |mod, hash|
+      progress = progress_by_module[mod.name]
+      hash["module_#{mod.position}_time"] = calculate_module_time(progress)
+    end
   end
 
   # @return [Boolean]
@@ -505,6 +525,16 @@ private
   # @return [Hash]
   def data_attributes
     DASHBOARD_ATTRS.map { |field| { field => send(field) } }.reduce(&:merge)
+  end
+
+  # @param progress [UserModuleProgress, nil]
+  # @return [Integer, nil] seconds taken to complete module
+  def calculate_module_time(progress)
+    return nil unless progress&.started_at
+
+    return 0 unless progress.completed_at
+
+    (progress.completed_at - progress.started_at).to_i
   end
 
   def validate_setting_type_id
