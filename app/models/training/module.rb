@@ -60,8 +60,6 @@ module Training
       end
     end
 
-    # Module content must not be shared and have unique names
-    #
     # @param id [String]
     # @return [Training::Module] first result
     def self.by_content_id(id)
@@ -88,11 +86,6 @@ module Training
       ModuleRelease.find_by(module_position: position)&.first_published_at
     end
 
-    # entry references ---------------------------------
-
-    # @example
-    #   mod.thumbnail => "//images.ctfassets.net/dvmeh832nmjc/6ICCjd5b2gVc1jMHwgQHpH/a074dbf76e101efcca35dac2e1de6638/1-1-1-1-869488712.jpg"
-    #
     # @return [String, nil] cached result
     def thumbnail_url
       return '//external-image-resource-placeholder' if fields[:image].blank?
@@ -107,7 +100,10 @@ module Training
       Array(pages).reject(&:interruption_page?).reject(&:disable_pre_confidence_page?)
     end
 
-    # SECTIONS -----------------------------------------------------------------
+    # @return [Integer] cached count of content pages
+    def content_count
+      @content_count ||= content.size
+    end
 
     # @return [Hash{ Integer => Array<Training::Page, Training::Video, Training::Question> }]
     def content_sections
@@ -135,35 +131,23 @@ module Training
       content_sections.count
     end
 
-    # Selects from ordered array
-    #
     # @param id [String]
     # @return [Training::Page, Training::Video, Training::Question]
     def page_by_id(id)
       pages.find { |page| page.id.eql?(id) }
     end
 
-    # Selects from ordered array
-    #
     # @param name [String]
     # @return [Training::Page, Training::Video, Training::Question]
     def page_by_name(name)
       pages.find { |page| page.name.eql?(name) }
     end
 
-    # Selects from ordered array
-    # but not interruption page
-    #
     # @return [Array<Training::Page, Training::Video, Training::Question>]
     def pages_by_type(type)
       pages.select { |page| page.page_type.eql?(type) }
     end
 
-    # STATE --------------------------------------------------------------------
-
-    # TODO: consider terminology and replace #draft? with #invalid?
-    #
-    # @see CourseProgress
     # @return [Boolean] incomplete content will not be deemed 'available'
     def draft?
       @draft ||= !data.valid?
@@ -178,8 +162,6 @@ module Training
     def pages?
       Array(fields[:pages]).any?
     end
-
-    # SINGLE ENTRY -------------------------------------------------------------
 
     # @return [Training::Page]
     def content_start
@@ -231,8 +213,6 @@ module Training
       content.find(&:certificate?)
     end
 
-    # MANY ENTRIES -------------------------------------------------------------
-
     # @return [Array<Training::Page>]
     def text_pages
       content.select(&:text_page?)
@@ -278,8 +258,6 @@ module Training
     def answers_with(text)
       questions.select { |q| q.answer.contains?(text) }.map(&:name)
     end
-
-    # DECORATORS ---------------------------------------------------------------
 
     # @return [String]
     def tab_label

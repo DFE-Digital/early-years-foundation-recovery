@@ -7,9 +7,12 @@
             = icon(:pencil)
           .govuk-grid-column-three-quarters
             = f.hidden_field :module_item_id, value: content.id
-            = f.hidden_field :title
-            = f.hidden_field :training_module
-            = f.hidden_field :name
+            = f.hidden_field :title, value: content.title
+            = f.hidden_field :training_module, value: content.parent&.name
+            = f.hidden_field :name, value: content.name
+            - if content.next_item
+              = f.hidden_field :next_page_name, value: content.next_item.name
+              = f.hidden_field :next_page_module, value: content.parent&.name
 
             div class='govuk-!-margin-bottom-4'
               h2.govuk-heading-m Add to your learning log

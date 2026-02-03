@@ -4,14 +4,7 @@ RSpec.describe ModuleOverviewDecorator do
   subject(:decorator) { described_class.new(progress) }
 
   let(:bravo) { Training::Module.by_name('bravo') }
-  # Lazily get events for bravo module and build progress with those events
-  let(:user_module_events) { user_module_events_for('bravo') }
-  let(:progress) { ModuleProgress.new(user: user, mod: bravo, user_module_events: user_module_events) }
-
-  # Helper to get only user events relevant to a module
-  def user_module_events_for(module_name)
-    user.events.to_a.select { |e| e.properties['training_module_id'] == module_name }
-  end
+  let(:progress) { ModuleProgress.new(user: user, mod: bravo) }
 
   include_context 'with progress'
 
@@ -44,7 +37,6 @@ RSpec.describe ModuleOverviewDecorator do
 
     context 'when the module has not begun' do
       it 'goes to the prompt page' do
-        expect(user.events.count).to be_zero
         expect(state).to eq :not_started
         expect(page_name).to eq 'what-to-expect'
       end
@@ -57,7 +49,6 @@ RSpec.describe ModuleOverviewDecorator do
       end
 
       it 'goes to the most recently visited page' do
-        expect(user.events.count).to be 7
         expect(state).to eq :started
         expect(page_name).to eq '1-1'
       end
@@ -65,6 +56,7 @@ RSpec.describe ModuleOverviewDecorator do
 
     context 'when the assessment was failed' do
       before do
+        UserModuleProgress.record_page_view(user: user, module_name: 'bravo', page_name: 'what-to-expect')
         create :assessment, :failed, user: user, training_module: 'bravo'
       end
 
@@ -80,7 +72,6 @@ RSpec.describe ModuleOverviewDecorator do
       end
 
       it 'goes to the certificate' do
-        expect(user.events.count).to be 41
         expect(state).to eq :completed
         expect(page_name).to eq '1-3-4'
       end

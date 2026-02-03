@@ -47,6 +47,8 @@ RSpec.shared_context 'with progress' do
   # @param mod [Training::Module]
   def module_start_event(mod)
     tracker.track('module_start', training_module_id: mod.name)
+    UserModuleProgress.record_start(user: user, module_name: mod.name)
+    user.user_module_progress.reload
     calculate_ttc
   end
 
@@ -54,25 +56,21 @@ RSpec.shared_context 'with progress' do
   # @param mod [Training::Module]
   def module_complete_event(mod)
     tracker.track('module_complete', training_module_id: mod.name)
+    UserModuleProgress.record_completion(user: user, module_name: mod.name)
+    user.user_module_progress.reload
     calculate_ttc
   end
 
   # @param mod_name [String]
   # @param page_name [String]
-  # @return [true] create a fake page view event
+  # @return [UserModuleProgress] record page view in user_module_progress
   def view_module_page_event(mod_name, page_name)
     mod = Training::Module.by_name(mod_name)
     content = mod.page_by_name(page_name)
 
     puts "tracking #{mod.name}: #{content.name}" if ENV['VERBOSE'].present?
 
-    tracker.track('module_content_page', {
-      id: page_name,
-      action: 'show',
-      controller: 'training/pages',
-      training_module_id: mod_name,
-      type: content.page_type,
-    })
+    UserModuleProgress.record_page_view(user: user, module_name: mod_name, page_name: page_name)
   end
 
 private
@@ -84,8 +82,6 @@ private
   # Visit every page upto the nth instance of the given type
   # @param mod [Training::Module]
   def view_pages_upto(mod, type, count = 1)
-    module_start_event(mod)
-
     counter = 0
     mod.content.map do |entry|
       view_module_page_event(mod.name, entry.name)
