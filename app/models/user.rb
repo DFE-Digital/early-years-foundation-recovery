@@ -202,7 +202,7 @@ class User < ApplicationRecord
   validates :closed_reason_custom,
             presence: true,
             if: proc { |u| u.closed_reason == 'other' }
-  validates :first_name, :last_name, :setting_type_id,
+  validates :first_name, :last_name, :setting_type_id, :early_years_experience,
             presence: true,
             if: proc { |u| u.registration_complete? }
   validates :role_type,
