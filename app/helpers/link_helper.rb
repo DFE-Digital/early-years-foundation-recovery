@@ -75,6 +75,11 @@ module LinkHelper
     govuk_link_to t('links.feedback.skip'), training_module_page_path(mod.name, mod.thankyou_page.name)
   end
 
+  # @return [String]
+  def link_to_skip_pre_confidence
+    govuk_link_to t('links.confidence.skip'), training_module_page_path(mod.name, mod.first_content_page.name)
+  end
+
   # @return [NextPageDecorator]
   def next_page
     NextPageDecorator.new(
