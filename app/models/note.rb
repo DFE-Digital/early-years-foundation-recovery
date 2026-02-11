@@ -3,6 +3,10 @@ class Note < ApplicationRecord
 
   encrypts :body
 
+  validates :body, presence: true, allow_blank: false, allow_nil: false
+  validates :training_module, presence: true, allow_blank: false, allow_nil: false
+  validates :name, presence: true, allow_blank: false, allow_nil: false
+
   scope :filled, -> { where.not(body: [nil, Types::EMPTY_STRING]) }
 
   def logged_at
