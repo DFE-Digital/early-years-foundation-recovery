@@ -31,12 +31,13 @@ module Training
     # Opinion questions:
     #   - Feedback (default: false)
     #   - Confidence (always: false)
+    #   - Pre-Confidence (always: false)
     #
     # @return [Boolean]
     def multi_select?
       if feedback_question?
         !!multi_select
-      elsif confidence_question?
+      elsif confidence_question? || pre_confidence_question?
         false
       else
         answer.multi_select?
@@ -83,6 +84,11 @@ module Training
     end
 
     # @return [Boolean] event tracking
+    def first_pre_confidence?
+      parent.pre_confidence_questions.first.eql?(self)
+    end
+
+    # @return [Boolean] event tracking
     def first_assessment?
       parent.summative_questions.first.eql?(self)
     end
@@ -125,6 +131,11 @@ module Training
       name
     end
 
+    # @return [String, nil]
+    def description
+      fields[:description] if confidence_question?
+    end
+
     # @return [String]
     def legend
       if multi_select?
@@ -135,7 +146,7 @@ module Training
 
           #{body}
         LEGEND
-      elsif feedback_question?
+      elsif feedback_question? || pre_confidence_question?
         body.to_s
       else
         "#{body} (Select one answer)"
@@ -153,6 +164,15 @@ module Training
       ['Strongly disagree', true],
     ].freeze
 
+    # @return [Array<Array>]
+    PRECONFIDENCE_OPTIONS = [
+      ['Very confident', true],
+      ['Somewhat confident', true],
+      ['Neutral', true],
+      ['Not very confident', true],
+      ['Not confident at all', true],
+    ].freeze
+
     # @note Default values are not available to Contentful JSON fields
     # @return [Array<Array>]
     DRAFT_OPTIONS = [
@@ -162,6 +182,7 @@ module Training
 
     # @return [Array<Array>]
     def json
+      return PRECONFIDENCE_OPTIONS if pre_confidence_question?
       return CONFIDENCE_OPTIONS if confidence_question?
 
       fields[:answers] || DRAFT_OPTIONS
