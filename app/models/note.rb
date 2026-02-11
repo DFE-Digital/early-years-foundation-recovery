@@ -6,7 +6,6 @@ class Note < ApplicationRecord
   validates :body, presence: true
   validates :training_module, presence: true
   validates :name, presence: true
-  validates :user_id, uniqueness: { scope: [:training_module, :name], message: "already has a note for this page" }
 
   scope :filled, -> { where.not(body: [nil, Types::EMPTY_STRING]) }
 
