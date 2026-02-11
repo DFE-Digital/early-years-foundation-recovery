@@ -3,9 +3,9 @@ class Note < ApplicationRecord
 
   encrypts :body
 
-  validates :body, presence: true
-  validates :training_module, presence: true
-  validates :name, presence: true
+  validates :body, presence: true, allow_blank: false, allow_nil: false
+  validates :training_module, presence: true, allow_blank: false, allow_nil: false
+  validates :name, presence: true, allow_blank: false, allow_nil: false
 
   scope :filled, -> { where.not(body: [nil, Types::EMPTY_STRING]) }
 
