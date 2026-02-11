@@ -24,6 +24,7 @@ class Response < ApplicationRecord
   scope :summative, -> { where(question_type: 'summative') }
   scope :confidence, -> { where(question_type: 'confidence') }
   scope :pre_confidence, -> { where(question_type: 'pre_confidence') }
+  scope :pre_and_post_confidence, -> { where(question_type: 'pre_confidence').or(where(question_type: 'confidence')) }
   scope :feedback, -> { where(question_type: 'feedback') }
   scope :course_feedback, -> { feedback.where(training_module: 'course') }
 
