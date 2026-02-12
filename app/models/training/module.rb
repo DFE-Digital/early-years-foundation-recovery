@@ -169,6 +169,11 @@ module Training
     end
 
     # @return [Training::Page]
+    def first_intro_page
+      pages_by_type('text_page').first
+    end
+
+    # @return [Training::Page]
     def first_content_page
       pages_by_type('topic_intro').first
     end
