@@ -186,13 +186,15 @@ class ContentIntegrity
   end
 
   def pre_confidence?
-    return true if ENV['DISABLE_PRE_CONFIDENCE_CHECK'].present?
+    return true if ENV['DISABLE_PRE_CONFIDENCE_CHECK'] == 'true'
+    # Only require pre-confidence questions if the module actually has them
+    return true unless mod.pages.any? { |page| page.page_type == 'pre_confidence' }
 
     mod.pre_confidence_questions.count >= 4
   end
 
   def pre_confidence_position?
-    mod.pre_confidence_questions.any?
+    mod.pages.any? { |page| page.page_type == 'pre_confidence' }
   end
 
   # @return [Boolean]
