@@ -39,6 +39,7 @@ class ContentIntegrity
     feedback: 'Missing feedback questions',
     summative: 'Insufficient summative questions',
     confidence: 'Insufficient confidence questions',
+    pre_confidence: 'Insufficient pre_confidence questions',
     factual: 'Factual questions have sufficient options',
   }.freeze
 
@@ -174,6 +175,14 @@ class ContentIntegrity
   # @return [Boolean]
   def confidence?
     mod.confidence_questions.count >= 4
+  end
+
+  # @return [Boolean]
+  def pre_confidence?
+    # pre_confidence_questions = mod.pre_confidence_questions? 5 : 0
+    # mod.pre_confidence_questions? : mod.pre_confidence_questions.count = 5 : mod.pre_confidence_questions.count = 0
+    # !mod.pre_confidence_questions? || mod.pre_confidence_questions.size == 5
+    !mod.pre_confidence_questions.any? || mod.pre_confidence_questions.size == 5
   end
 
   # @return [Boolean]
