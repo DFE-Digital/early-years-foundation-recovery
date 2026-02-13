@@ -70,7 +70,7 @@ private
 
   # @return [Boolean]
   def skip_pre_confidence_section?
-    content.topic_intro? && !answered?(previous_item) && previous_item.pre_confidence_question?
+    content.submodule_intro? && !answered?(previous_item) && previous_item.pre_confidence_question?
   end
 
   # @return [Training::Page, Training::Question, Training::Video]

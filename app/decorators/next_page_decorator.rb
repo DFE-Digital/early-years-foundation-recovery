@@ -19,7 +19,9 @@ class NextPageDecorator
 
   # @return [String]
   def name
-    if content.interruption_page?
+    if content.interruption_page? && mod.pre_confidence_questions.any?
+      mod.first_intro_page.name
+    elsif content.interruption_page? && mod.pre_confidence_questions.none?
       mod.content_start.name
     elsif skip_next_question?
       next_next_item.name
