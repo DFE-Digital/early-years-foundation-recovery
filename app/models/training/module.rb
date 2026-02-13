@@ -97,7 +97,7 @@ module Training
 
     # @return [Array<Training::Page, Training::Video, Training::Question>]
     def content
-      Array(pages).reject(&:interruption_page?)
+      Array(pages).reject(&:interruption_page?).reject(&:disable_pre_confidence_page?)
     end
 
     # @return [Integer] cached count of content pages
@@ -166,6 +166,11 @@ module Training
     # @return [Training::Page]
     def content_start
       pages_by_type('sub_module_intro').first
+    end
+
+    # @return [Training::Page]
+    def first_intro_page
+      pages_by_type('text_page').first
     end
 
     # @return [Training::Page]
@@ -241,6 +246,11 @@ module Training
     # @return [Array<Training::Question>]
     def confidence_questions
       content.select(&:confidence_question?)
+    end
+
+    # @return [Array<Training::Question>]
+    def pre_confidence_questions
+      content.select(&:pre_confidence_question?)
     end
 
     # @return [Array<Training::Question>]
