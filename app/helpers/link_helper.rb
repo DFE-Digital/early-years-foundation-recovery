@@ -77,7 +77,7 @@ module LinkHelper
 
   # @return [String]
   def link_to_skip_pre_confidence
-    govuk_link_to t('links.confidence.skip'), training_module_page_path(mod.name, mod.first_content_page.name)
+    govuk_link_to t('links.confidence.skip'), training_module_page_path(mod.name, mod.content_start.name)
   end
 
   # @return [NextPageDecorator]

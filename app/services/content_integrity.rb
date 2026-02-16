@@ -39,6 +39,7 @@ class ContentIntegrity
     feedback: 'Missing feedback questions',
     summative: 'Insufficient summative questions',
     confidence: 'Insufficient confidence questions',
+    pre_confidence: 'Insufficient pre_confidence questions',
     factual: 'Factual questions have sufficient options',
   }.freeze
 
@@ -126,13 +127,21 @@ class ContentIntegrity
 
   # @return [Boolean] second page
   def submodule?
-    page_by_type_position(type: 'sub_module_intro', position: 1)
+    if pre_confidence_position?
+      page_by_type_position(type: 'sub_module_intro', position: 7)
+    else
+      page_by_type_position(type: 'sub_module_intro', position: 1)
+    end
   end
 
   # @return [Boolean] third page
   def topic?
-    page_by_type_position(type: 'topic_intro', position: 2) &&
-      (mod.topic_count >= mod.submodule_count)
+    if pre_confidence_position?
+      page_by_type_position(type: 'topic_intro', position: 8) && (mod.topic_count >= mod.submodule_count)
+    else
+      page_by_type_position(type: 'topic_intro', position: 2) &&
+        (mod.topic_count >= mod.submodule_count)
+    end
   end
 
   # @return [Boolean] penultimate page
@@ -174,6 +183,18 @@ class ContentIntegrity
   # @return [Boolean]
   def confidence?
     mod.confidence_questions.count >= 4
+  end
+
+  def pre_confidence?
+    return true if ENV['DISABLE_PRE_CONFIDENCE_CHECK'] == 'true'
+    # Only require pre-confidence questions if the module actually has them
+    return true unless mod.pages.any? { |page| page.page_type == 'pre_confidence' }
+
+    mod.pre_confidence_questions.count >= 4
+  end
+
+  def pre_confidence_position?
+    mod.pages.any? { |page| page.page_type == 'pre_confidence' }
   end
 
   # @return [Boolean]
