@@ -33,18 +33,32 @@ class ModuleOverviewDecorator < DelegateClass(ModuleProgress)
   end
 
   def sections
-    mod.content_sections.each_with_index.map do |(submodule, content_items), idx|
+    # First, build all sections with hide flag
+    raw_sections = mod.content_sections.each_with_index.map do |(submodule, content_items), idx|
       first_item = content_items.first
-      position = first_item.certificate? ? idx : (idx + 1)
-
+      hide_section = first_item.feedback_question? || first_item.pre_confidence_question? || first_item.pre_confidence_intro?
       {
-        heading: heading(first_item),
-        page_count: page_count(content_items),
+        submodule: submodule,
+        content_items: content_items,
+        first_item: first_item,
+        idx: idx,
+        hide: hide_section,
+      }
+    end
+
+    # Assign sequential positions to only visible sections
+    visible_position = 1
+    raw_sections.map do |section|
+      position = section[:hide] ? nil : visible_position
+      visible_position += 1 unless section[:hide]
+      {
+        heading: heading(section[:first_item]),
+        page_count: page_count(section[:content_items]),
         position: position,
-        display_line: (idx + 1) != mod.submodule_count,
-        icon: status(content_items),
-        subsections: subsections(submodule: submodule, items: content_items),
-        hide: first_item.feedback_question?,
+        display_line: visible_position <= mod.submodule_count,
+        icon: status(section[:content_items]),
+        subsections: subsections(submodule: section[:submodule], items: section[:content_items]),
+        hide: section[:hide],
       }
     end
   end
