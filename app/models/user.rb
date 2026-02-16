@@ -88,6 +88,7 @@ class User < ApplicationRecord
   has_many :mail_events
   has_many :notes
   has_many :user_module_progress
+  has_many :confidence_check_progress
   has_many :feedback_responses, -> { where(question_type: 'feedback') }, class_name: 'Response'
 
   scope :gov_one, -> { where.not(gov_one_id: nil) }
@@ -349,7 +350,7 @@ class User < ApplicationRecord
 
   # @return [Integer]
   def modules_completed
-    module_time_to_completion.values.count(&:positive?)
+    module_time_to_completion.values.compact.count(&:positive?)
   end
 
   # @return [String]

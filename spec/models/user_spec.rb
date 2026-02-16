@@ -429,8 +429,11 @@ RSpec.describe User, type: :model do
     let(:confidence_question) do
       Training::Module.by_name('alpha').confidence_questions.first
     end
-    let(:paired_pre_confidence_question) do
-      Training::Module.by_name('alpha').pre_confidence_questions.first
+    let(:pre_confidence_question_name) { '1-1-4-1' }
+
+    before do
+      pre_conf = double('pre_confidence_question', name: pre_confidence_question_name) # rubocop:disable RSpec/VerifiedDoubles
+      allow(confidence_question.parent).to receive(:pre_confidence_questions).and_return([pre_conf])
     end
 
     context 'without a pre-confidence response' do
@@ -444,7 +447,7 @@ RSpec.describe User, type: :model do
         create :response,
                user: user,
                training_module: 'alpha',
-               question_name: paired_pre_confidence_question.name,
+               question_name: pre_confidence_question_name,
                question_type: 'pre_confidence',
                answers: [1]
       end
@@ -452,7 +455,7 @@ RSpec.describe User, type: :model do
       it 'returns the pre-confidence response' do
         response = user.pre_confidence_response_for(confidence_question)
         expect(response).to be_present
-        expect(response.question_name).to eq paired_pre_confidence_question.name
+        expect(response.question_name).to eq pre_confidence_question_name
         expect(response.question_type).to eq 'pre_confidence'
         expect(response.answers).to eq [1]
       end

@@ -89,6 +89,16 @@ module Training
     end
 
     # @return [Boolean] event tracking
+    def last_pre_confidence?
+      parent.pre_confidence_questions.last.eql?(self)
+    end
+
+    # @return [Boolean] event tracking
+    def last_confidence?
+      parent.confidence_questions.last.eql?(self)
+    end
+
+    # @return [Boolean] event tracking
     def first_assessment?
       parent.summative_questions.first.eql?(self)
     end
