@@ -30,7 +30,7 @@ RSpec.describe Training::Module, type: :model do
       expect(mod.answers_with('foo')).to eq [] # no match
       # expect(mod.answers_with('')).to eq [] # formative
       expect(mod.answers_with('Wrong\s.+ 3')).to eq %w[1-3-2-4 1-3-2-5 1-3-2-6 1-3-2-7 1-3-2-8 1-3-2-9 1-3-2-10] # summative
-      expect(mod.answers_with('NOR')).to eq %w[1-3-3-1 1-3-3-2 1-3-3-3 1-3-3-4] # confidence
+      expect(mod.answers_with('confident')).to eq %w[1-3-3-1 1-3-3-2 1-3-3-3 1-3-3-4] # confidence
     end
   end
 

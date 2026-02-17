@@ -167,11 +167,11 @@ module Training
 
     # @return [Array<Array>]
     CONFIDENCE_OPTIONS = [
-      ['Strongly agree', true],
-      ['Agree', true],
-      ['Neither agree nor disagree', true],
-      ['Disagree', true],
-      ['Strongly disagree', true],
+      ['Very confident', true],
+      ['Somewhat confident', true],
+      ['Neutral', true],
+      ['Not very confident', true],
+      ['Not confident at all', true],
     ].freeze
 
     # @return [Array<Array>]
