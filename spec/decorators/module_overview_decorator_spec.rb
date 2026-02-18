@@ -9,10 +9,14 @@ RSpec.describe ModuleOverviewDecorator do
   include_context 'with progress'
 
   describe '#sections' do
+    before do
+      stub_const('PageStruct', Struct.new(:pre_confidence_intro?, :pre_confidence_question?, :feedback_question?, :heading, :certificate?, :subsection?))
+    end
+
     let(:output) { decorator.sections }
 
     it 'have sequential positions' do
-      expect(output.map { |s| s[:position] }).to eq [1, 2, 3, 4, 4]
+      expect(output.map { |s| s[:position] }).to eq [1, 2, 3, nil, 4]
     end
 
     it 'hides feedback section' do
@@ -27,6 +31,29 @@ RSpec.describe ModuleOverviewDecorator do
         '(9 pages)',
         nil,
       ]
+    end
+
+    it 'hides pre-confidence and pre-confidence intro sections' do
+      pre_confidence_intro = PageStruct.new(true, false, false, 'Pre-confidence intro', false, false)
+      pre_confidence_question = PageStruct.new(false, true, false, 'Pre-confidence Q', false, false)
+      normal_page = PageStruct.new(false, false, false, 'Normal', false, false)
+      [pre_confidence_intro, pre_confidence_question, normal_page].each do |obj|
+        allow(obj).to receive(:is_a?).with(Training::Page).and_return(true)
+      end
+      mod = instance_double(Training::Module,
+                            content_sections: {
+                              1 => [pre_confidence_intro],
+                              2 => [pre_confidence_question],
+                              3 => [normal_page],
+                            },
+                            submodule_count: 3)
+      progress = instance_double(ModuleProgress, mod: mod, completed?: false, started?: false, failed_attempt?: false)
+      allow(progress).to receive_messages(all?: false, any?: false, none?: true)
+      decorator = described_class.new(progress)
+      sections = decorator.sections
+      expect(sections[0][:hide]).to be true
+      expect(sections[1][:hide]).to be true
+      expect(sections[2][:hide]).to be false
     end
   end
 

@@ -43,4 +43,65 @@ RSpec.describe PaginationDecorator do
       end
     end
   end
+
+  context 'when handling pre-confidence pages' do
+    let(:pre_confidence_intro) do
+      obj = Training::Page.allocate
+      allow(obj).to receive_messages(
+        pre_confidence_intro?: true,
+        pre_confidence_question?: false,
+        feedback_question?: false,
+        section_content: [],
+        parent: nil,
+      )
+      obj
+    end
+    let(:pre_confidence_question) do
+      obj = Training::Page.allocate
+      allow(obj).to receive_messages(
+        pre_confidence_intro?: false,
+        pre_confidence_question?: true,
+        feedback_question?: false,
+        section_content: [],
+        parent: nil,
+      )
+      obj
+    end
+    let(:normal_page) do
+      obj = Training::Page.allocate
+      allow(obj).to receive_messages(
+        pre_confidence_intro?: false,
+        pre_confidence_question?: false,
+        feedback_question?: false,
+        section_content: [],
+        parent: nil,
+      )
+      obj
+    end
+    let(:mod) do
+      instance_double(Training::Module,
+                      content_sections: {
+                        1 => [pre_confidence_intro],
+                        2 => [pre_confidence_question],
+                        3 => [normal_page],
+                      },
+                      submodule_count: 3)
+    end
+
+    before do
+      allow(pre_confidence_intro).to receive(:parent).and_return(mod)
+      allow(pre_confidence_question).to receive(:parent).and_return(mod)
+      allow(normal_page).to receive_messages(parent: mod, section_content: [pre_confidence_intro, pre_confidence_question, normal_page])
+    end
+
+    it 'skips pre-confidence pages in section_numbers' do
+      decorator = described_class.new(normal_page)
+      expect(decorator.section_numbers).to eq 'Section 1 of 1'
+    end
+
+    it 'skips pre-confidence intro pages in section_numbers' do
+      decorator = described_class.new(pre_confidence_intro)
+      expect(decorator.section_numbers).to be_nil
+    end
+  end
 end

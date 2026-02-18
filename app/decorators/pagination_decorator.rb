@@ -17,7 +17,18 @@ class PaginationDecorator
 
   # @return [String]
   def section_numbers
-    I18n.t(:section, scope: :pagination, current: content.submodule, total: section_total)
+    # Only show section index for visible sections
+    if content.pre_confidence_question? || content.pre_confidence_intro?
+      nil
+    else
+      # Find visible section index
+      visible_sections = content.parent.content_sections.select do |_, content_items|
+        first_item = content_items.first
+        !first_item.pre_confidence_question? && !first_item.pre_confidence_intro?
+      end
+      index = visible_sections.find_index { |_, items| items.include?(content) }&.then { |i| i + 1 }
+      I18n.t(:section, scope: :pagination, current: index, total: section_total) if index
+    end
   end
 
   # @return [String]
@@ -46,7 +57,7 @@ private
   def section_total
     content.parent.content_sections.count do |(_, content_items)|
       first_item = content_items.first
-      !first_item.feedback_question?
+      !first_item.feedback_question? && !first_item.pre_confidence_question? && !first_item.pre_confidence_intro?
     end
   end
 end
