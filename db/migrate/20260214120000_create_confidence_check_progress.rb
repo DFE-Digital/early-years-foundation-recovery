@@ -10,6 +10,8 @@ class CreateConfidenceCheckProgress < ActiveRecord::Migration[7.2]
       t.timestamps
     end
 
+    # Each user may only have one pre-check and one post-check record per module.
+    # This ensures idempotent upserts via find_or_initialize_by in the model.
     add_index :confidence_check_progress, %i[user_id module_name check_type],
               unique: true, name: 'index_confidence_check_on_user_module_type'
   end

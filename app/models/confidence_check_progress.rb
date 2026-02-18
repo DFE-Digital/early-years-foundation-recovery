@@ -29,6 +29,8 @@ class ConfidenceCheckProgress < ApplicationRecord
     progress.started_at ||= Time.zone.now
     progress.save!
     progress
+  rescue ActiveRecord::RecordNotUnique
+    retry
   end
 
   # @param user [User]
@@ -41,6 +43,8 @@ class ConfidenceCheckProgress < ApplicationRecord
     progress.completed_at ||= Time.zone.now
     progress.save!
     progress
+  rescue ActiveRecord::RecordNotUnique
+    retry
   end
 
   # @param user [User]
@@ -53,5 +57,7 @@ class ConfidenceCheckProgress < ApplicationRecord
     progress.skipped_at ||= Time.zone.now
     progress.save!
     progress
+  rescue ActiveRecord::RecordNotUnique
+    retry
   end
 end

@@ -156,7 +156,7 @@ module Training
 
           #{body}
         LEGEND
-      elsif feedback_question? || pre_confidence_question?
+      elsif feedback_question? || pre_confidence_question? || confidence_question?
         body.to_s
       else
         "#{body} (Select one answer)"
@@ -172,6 +172,15 @@ module Training
       ['Neutral', true],
       ['Not very confident', true],
       ['Not confident at all', true],
+    ].freeze
+
+    # @return [Array<Array>]
+    LEGACY_CONFIDENCE_OPTIONS = [
+      ['Strongly agree', true],
+      ['Agree', true],
+      ['Neither agree nor disagree', true],
+      ['Disagree', true],
+      ['Strongly disagree', true],
     ].freeze
 
     # @return [Array<Array>]
@@ -193,9 +202,18 @@ module Training
     # @return [Array<Array>]
     def json
       return PRECONFIDENCE_OPTIONS if pre_confidence_question?
-      return CONFIDENCE_OPTIONS if confidence_question?
+      return confidence_options if confidence_question?
 
       fields[:answers] || DRAFT_OPTIONS
+    end
+
+    # Use the new confidence wording only when the module includes a pre-check.
+    #
+    # @return [Array<Array>]
+    def confidence_options
+      return CONFIDENCE_OPTIONS if parent.pre_confidence_questions.any?
+
+      LEGACY_CONFIDENCE_OPTIONS
     end
   end
 end
