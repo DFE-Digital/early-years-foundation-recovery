@@ -75,11 +75,11 @@ RSpec.describe Training::Question, type: :model do
     context 'when the question is a confidence check' do
       subject(:question) do
         Training::Module.by_name('alpha').page_by_name('1-3-3-3')
-        # described_class.find_by(name: '1-3-3-3').load.size # => 3
       end
 
       specify do
-        expect(question.legend).to end_with '(Select one answer)'
+        expect(question.legend).not_to end_with '(Select one answer)'
+        expect(question.legend).to eq question.body.to_s
       end
     end
 

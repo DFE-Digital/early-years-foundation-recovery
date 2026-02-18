@@ -156,7 +156,7 @@ module Training
 
           #{body}
         LEGEND
-      elsif feedback_question? || pre_confidence_question?
+      elsif feedback_question? || pre_confidence_question? || confidence_question?
         body.to_s
       else
         "#{body} (Select one answer)"
