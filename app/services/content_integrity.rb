@@ -128,7 +128,7 @@ class ContentIntegrity
   # @return [Boolean] second page
   def submodule?
     if pre_confidence_position?
-      page_by_type_position(type: 'sub_module_intro', position: 7)
+      page_by_type_position(type: 'text_page', position: 1)
     else
       page_by_type_position(type: 'sub_module_intro', position: 1)
     end
@@ -137,7 +137,7 @@ class ContentIntegrity
   # @return [Boolean] third page
   def topic?
     if pre_confidence_position?
-      page_by_type_position(type: 'topic_intro', position: 8) && (mod.topic_count >= mod.submodule_count)
+      page_by_type_position(type: 'pre_confidence', position: 2) && (mod.topic_count >= mod.submodule_count)
     else
       page_by_type_position(type: 'topic_intro', position: 2) &&
         (mod.topic_count >= mod.submodule_count)
