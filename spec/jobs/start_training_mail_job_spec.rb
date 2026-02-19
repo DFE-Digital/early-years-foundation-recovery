@@ -10,13 +10,14 @@ RSpec.describe StartTrainingMailJob do
     [
       create(:user, :registered, confirmed_at: 2.months.ago),
       create(:user, :registered, confirmed_at: 4.weeks.ago),
+      create(:user, :registered, confirmed_at: 4.weeks.ago),
     ]
   end
 
   before do
-    create :event, name: 'module_start', user: excluded.last
-    # Also create UserModuleProgress record since scopes now use this table
-    UserModuleProgress.create!(user: excluded.last, module_name: 'alpha', started_at: Time.zone.now)
+    create :event, name: 'module_start', user: excluded.second
+    UserModuleProgress.create!(user: excluded.second, module_name: 'alpha', started_at: Time.zone.now)
+    create :event, name: 'module_start', user: excluded.third
   end
 
   it_behaves_like 'an email prompt'
