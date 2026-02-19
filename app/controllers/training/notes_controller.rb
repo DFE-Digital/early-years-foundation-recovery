@@ -86,7 +86,7 @@ private
   # @return [Hash]
   def tracking_properties
     {
-      length: note_params[:body].length,
+      length: note_params[:body].to_s.length,
       **note_params.except(:body, :module_item_id, :user),
     }
   end
