@@ -89,6 +89,16 @@ module Training
     end
 
     # @return [Boolean] event tracking
+    def last_pre_confidence?
+      parent.pre_confidence_questions.last.eql?(self)
+    end
+
+    # @return [Boolean] event tracking
+    def last_confidence?
+      parent.confidence_questions.last.eql?(self)
+    end
+
+    # @return [Boolean] event tracking
     def first_assessment?
       parent.summative_questions.first.eql?(self)
     end
@@ -146,7 +156,7 @@ module Training
 
           #{body}
         LEGEND
-      elsif feedback_question? || pre_confidence_question?
+      elsif feedback_question? || pre_confidence_question? || confidence_question?
         body.to_s
       else
         "#{body} (Select one answer)"
@@ -157,6 +167,15 @@ module Training
 
     # @return [Array<Array>]
     CONFIDENCE_OPTIONS = [
+      ['Very confident', true],
+      ['Somewhat confident', true],
+      ['Neutral', true],
+      ['Not very confident', true],
+      ['Not confident at all', true],
+    ].freeze
+
+    # @return [Array<Array>]
+    LEGACY_CONFIDENCE_OPTIONS = [
       ['Strongly agree', true],
       ['Agree', true],
       ['Neither agree nor disagree', true],
@@ -183,9 +202,18 @@ module Training
     # @return [Array<Array>]
     def json
       return PRECONFIDENCE_OPTIONS if pre_confidence_question?
-      return CONFIDENCE_OPTIONS if confidence_question?
+      return confidence_options if confidence_question?
 
       fields[:answers] || DRAFT_OPTIONS
+    end
+
+    # Use the new confidence wording only when the module includes a pre-check.
+    #
+    # @return [Array<Array>]
+    def confidence_options
+      return CONFIDENCE_OPTIONS if parent.pre_confidence_questions.any?
+
+      LEGACY_CONFIDENCE_OPTIONS
     end
   end
 end

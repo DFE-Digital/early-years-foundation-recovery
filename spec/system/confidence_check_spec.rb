@@ -25,17 +25,20 @@ RSpec.describe 'Confidence check' do
 
   context 'when completed' do
     it 'can be edited' do
+      first_choice = page.has_field?('Very confident') ? 'Very confident' : 'Strongly agree'
+      second_choice = page.has_field?('Not very confident') ? 'Not very confident' : 'Disagree'
+
       3.times do
-        choose 'Strongly agree'
+        choose first_choice
         click_on 'Next'
       end
 
       visit first_question_path
-      expect(page).to have_checked_field 'Strongly agree'
-      choose 'Disagree'
+      expect(page).to have_checked_field first_choice
+      choose second_choice
       click_on 'Next'
       click_on 'Previous'
-      expect(page).to have_checked_field 'Disagree'
+      expect(page).to have_checked_field second_choice
     end
   end
 end

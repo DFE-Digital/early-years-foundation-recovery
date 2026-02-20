@@ -88,6 +88,7 @@ class User < ApplicationRecord
   has_many :mail_events
   has_many :notes
   has_many :user_module_progress
+  has_many :confidence_check_progress
   has_many :feedback_responses, -> { where(question_type: 'feedback') }, class_name: 'Response'
 
   scope :gov_one, -> { where.not(gov_one_id: nil) }
@@ -283,11 +284,24 @@ class User < ApplicationRecord
   # @param confidence_question [Training::Question] a confidence question
   # @return [Response, nil]
   def pre_confidence_response_for(confidence_question)
-    responses.pre_confidence.find_by(
-      training_module: confidence_question.parent.name,
-      question_name: confidence_question.name,
+    paired_pre_confidence_name = paired_pre_confidence_question_name_for(confidence_question)
+    return nil if paired_pre_confidence_name.nil?
+
+    responses.pre_confidence.where(training_module: confidence_question.parent.name).order(created_at: :desc).find_by(
+      question_name: paired_pre_confidence_name,
     )
   end
+
+  # @param confidence_question [Training::Question]
+  # @return [String, nil]
+  def paired_pre_confidence_question_name_for(confidence_question)
+    mod = confidence_question.parent
+    confidence_index = mod.confidence_questions.index(confidence_question)
+    return nil if confidence_index.nil?
+
+    mod.pre_confidence_questions[confidence_index]&.name
+  end
+  private :paired_pre_confidence_question_name_for
 
   # @return [Array<Training::Module>]
   def active_modules
@@ -336,7 +350,7 @@ class User < ApplicationRecord
 
   # @return [Integer]
   def modules_completed
-    module_time_to_completion.values.count(&:positive?)
+    module_time_to_completion.values.compact.count(&:positive?)
   end
 
   # @return [String]
