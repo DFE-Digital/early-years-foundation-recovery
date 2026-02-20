@@ -175,6 +175,15 @@ module Training
     ].freeze
 
     # @return [Array<Array>]
+    LEGACY_CONFIDENCE_OPTIONS = [
+      ['Strongly agree', true],
+      ['Agree', true],
+      ['Neither agree nor disagree', true],
+      ['Disagree', true],
+      ['Strongly disagree', true],
+    ].freeze
+
+    # @return [Array<Array>]
     PRECONFIDENCE_OPTIONS = [
       ['Very confident', true],
       ['Somewhat confident', true],
@@ -193,9 +202,18 @@ module Training
     # @return [Array<Array>]
     def json
       return PRECONFIDENCE_OPTIONS if pre_confidence_question?
-      return CONFIDENCE_OPTIONS if confidence_question?
+      return confidence_options if confidence_question?
 
       fields[:answers] || DRAFT_OPTIONS
+    end
+
+    # Use the new confidence wording only when the module includes a pre-check.
+    #
+    # @return [Array<Array>]
+    def confidence_options
+      return CONFIDENCE_OPTIONS if parent.pre_confidence_questions.any?
+
+      LEGACY_CONFIDENCE_OPTIONS
     end
   end
 end

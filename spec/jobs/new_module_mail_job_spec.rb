@@ -27,7 +27,9 @@ RSpec.describe NewModuleMailJob do
 
   it 'resets cache' do
     expect(Training::Module.cache_key).to eq '16-03-2023-13-00'
-    described_class.run(*job_vars)
-    expect(Training::Module.cache_key).to eq Time.zone.now.strftime('%d-%m-%Y-%H-%M')
+    freeze_time do
+      described_class.run(*job_vars)
+      expect(Training::Module.cache_key).to eq Time.zone.now.strftime('%d-%m-%Y-%H-%M')
+    end
   end
 end
