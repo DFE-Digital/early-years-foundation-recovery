@@ -284,24 +284,11 @@ class User < ApplicationRecord
   # @param confidence_question [Training::Question] a confidence question
   # @return [Response, nil]
   def pre_confidence_response_for(confidence_question)
-    paired_pre_confidence_name = paired_pre_confidence_question_name_for(confidence_question)
-    return nil if paired_pre_confidence_name.nil?
-
-    responses.pre_confidence.where(training_module: confidence_question.parent.name).order(created_at: :desc).find_by(
-      question_name: paired_pre_confidence_name,
+    responses.pre_confidence.find_by(
+      training_module: confidence_question.parent.name,
+      question_name: confidence_question.name,
     )
   end
-
-  # @param confidence_question [Training::Question]
-  # @return [String, nil]
-  def paired_pre_confidence_question_name_for(confidence_question)
-    mod = confidence_question.parent
-    confidence_index = mod.confidence_questions.index(confidence_question)
-    return nil if confidence_index.nil?
-
-    mod.pre_confidence_questions[confidence_index]&.name
-  end
-  private :paired_pre_confidence_question_name_for
 
   # @return [Array<Training::Module>]
   def active_modules
