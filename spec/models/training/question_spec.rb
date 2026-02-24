@@ -55,6 +55,53 @@ RSpec.describe Training::Question, type: :model do
       expect(last_option.id).to eq 2
       expect(last_option.correct?).to be false
     end
+
+    context 'when the question is a confidence check' do
+      subject(:question) do
+        Training::Module.by_name('alpha').page_by_name('1-3-3-3')
+      end
+
+      after do
+        question.instance_variable_set(:@parent, nil)
+        question.instance_variable_set(:@answer, nil)
+      end
+
+      context 'when the module has pre-confidence questions' do
+        before do
+          question.instance_variable_set(:@answer, nil)
+          module_with_pre_confidence = instance_double(Training::Module, pre_confidence_questions: [double(:pre_confidence_question)]) # rubocop:disable RSpec/VerifiedDoubles
+          question.with_parent(module_with_pre_confidence)
+        end
+
+        it 'uses confidence-style options' do
+          expect(question.options.map(&:label)).to eq([
+            'Very confident',
+            'Somewhat confident',
+            'Neutral',
+            'Not very confident',
+            'Not confident at all',
+          ])
+        end
+      end
+
+      context 'when the module has no pre-confidence questions' do
+        before do
+          question.instance_variable_set(:@answer, nil)
+          module_without_pre_confidence = instance_double(Training::Module, pre_confidence_questions: [])
+          question.with_parent(module_without_pre_confidence)
+        end
+
+        it 'uses agree/disagree options' do
+          expect(question.options.map(&:label)).to eq([
+            'Strongly agree',
+            'Agree',
+            'Neither agree nor disagree',
+            'Disagree',
+            'Strongly disagree',
+          ])
+        end
+      end
+    end
   end
 
   it '#correct_answers' do
@@ -75,11 +122,11 @@ RSpec.describe Training::Question, type: :model do
     context 'when the question is a confidence check' do
       subject(:question) do
         Training::Module.by_name('alpha').page_by_name('1-3-3-3')
-        # described_class.find_by(name: '1-3-3-3').load.size # => 3
       end
 
       specify do
-        expect(question.legend).to end_with '(Select one answer)'
+        expect(question.legend).not_to end_with '(Select one answer)'
+        expect(question.legend).to eq question.body.to_s
       end
     end
 
