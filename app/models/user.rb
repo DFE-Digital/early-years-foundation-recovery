@@ -281,15 +281,6 @@ class User < ApplicationRecord
     )
   end
 
-  # @param confidence_question [Training::Question] a confidence question
-  # @return [Response, nil]
-  def pre_confidence_response_for(confidence_question)
-    responses.pre_confidence.find_by(
-      training_module: confidence_question.parent.name,
-      question_name: confidence_question.name,
-    )
-  end
-
   # @return [Array<Training::Module>]
   def active_modules
     started_module_names = user_module_progress.started.pluck(:module_name)
