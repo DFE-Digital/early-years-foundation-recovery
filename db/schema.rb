@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_12_23_155510) do
+ActiveRecord::Schema[7.2].define(version: 2026_02_14_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,6 +23,19 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_23_155510) do
     t.datetime "completed_at"
     t.index ["score", "passed"], name: "index_assessments_on_score_and_passed"
     t.index ["user_id"], name: "index_assessments_on_user_id"
+  end
+
+  create_table "confidence_check_progress", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "module_name", null: false
+    t.string "check_type", null: false
+    t.datetime "started_at"
+    t.datetime "completed_at"
+    t.datetime "skipped_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "module_name", "check_type"], name: "index_confidence_check_on_user_module_type", unique: true
+    t.index ["user_id"], name: "index_confidence_check_progress_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -243,6 +256,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_23_155510) do
   end
 
   add_foreign_key "assessments", "users"
+  add_foreign_key "confidence_check_progress", "users"
   add_foreign_key "mail_events", "users"
   add_foreign_key "module_releases", "releases"
   add_foreign_key "notes", "users"
