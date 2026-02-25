@@ -128,7 +128,6 @@ class User < ApplicationRecord
   scope :registration_complete_all_users, -> { registration_complete.or(where(private_beta_registration_complete: true)) }
 
   # training activity
-  scope :not_started_training, -> { reject(&:course_started?) }
   scope :course_in_progress, -> { select(&:course_in_progress?) }
 
   # notes
@@ -148,7 +147,12 @@ class User < ApplicationRecord
   scope :with_completed_modules, -> { with_module_progress.merge(UserModuleProgress.completed) }
   scope :completed_available_modules, -> { with_completed_modules.group('users.id').having('count(user_module_progress.id) = ?', ModuleRelease.count) }
   scope :started_training, -> { with_started_modules.distinct }
-  scope :not_started_training, -> { where.not(id: with_started_modules) }
+  scope :with_module_start_events, -> { with_events.merge(Event.module_start) }
+  scope :not_started_training, -> { where.not(id: with_started_modules).where.not(id: with_module_start_events) }
+  scope :with_module_in_progress, lambda {
+    where(id: with_module_progress.merge(UserModuleProgress.in_progress))
+      .or(where("EXISTS (SELECT 1 FROM jsonb_each_text(module_time_to_completion) AS x(key, value) WHERE x.value = '0')"))
+  }
 
   # visits
   scope :with_visits, -> { joins(:visits) }
@@ -161,7 +165,7 @@ class User < ApplicationRecord
   scope :training_email_recipients, -> { order(:id).where(training_emails: [true, nil]).distinct }
   scope :complete_registration_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_incomplete.distinct }
   scope :start_training_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_complete.not_started_training.distinct }
-  scope :continue_training_mail_job_recipients, -> { training_email_recipients.last_visit_4_weeks_ago.distinct(&:module_in_progress?) }
+  scope :continue_training_mail_job_recipients, -> { training_email_recipients.last_visit_4_weeks_ago.with_module_in_progress.distinct }
 
   # @note
   #
@@ -312,12 +316,14 @@ class User < ApplicationRecord
 
   # @return [Boolean]
   def module_in_progress?
-    user_module_progress.in_progress.exists?
+    user_module_progress.in_progress.exists? || module_time_to_completion.values.any? { |v| v&.zero? }
   end
 
   # @return [Array<String>]
   def modules_in_progress
-    user_module_progress.in_progress.pluck(:module_name)
+    progress_modules = user_module_progress.in_progress.pluck(:module_name)
+    legacy_modules = module_time_to_completion.select { |_k, v| v&.zero? }.keys.map(&:to_s)
+    (progress_modules + legacy_modules).uniq
   end
 
   # @param module_name [String]
