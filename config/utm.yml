@@ -1,0 +1,15 @@
+default: &default
+  source: service
+  medium: email
+  campaigns:
+    start_training: start_training
+    complete_module: complete_module
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

@@ -51,6 +51,7 @@ module EarlyYearsFoundationRecovery
     config.bot_token = ENV['BOT_TOKEN']
     config.google_analytics_tracking_id = ENV.fetch('TRACKING_ID', '#TRACKING_ID_env_var_missing (google analytics tracking id)')
     config.clarity_tracking_id = ENV.fetch('CLARITY_TRACKING_ID', '#CLARITY_TRACKING_ID_env_var_missing')
+    config.utm = config_for(:utm).deep_symbolize_keys
 
     # Devise
     config.unlock_in_minutes  = ENV.fetch('UNLOCK_IN_MINUTES', '120').to_i

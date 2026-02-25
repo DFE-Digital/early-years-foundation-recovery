@@ -63,7 +63,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
   def start_training(user)
     set_template TEMPLATE_IDS[:start_training]
     set_personalisation(
-      url: root_url,
+      url: root_url(**utm_params(:start_training)),
     )
     mail(to: user.email)
   end
@@ -76,7 +76,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
     set_personalisation(
       mod_number: mod.position,
       mod_name: mod.title,
-      url: root_url,
+      url: root_url(**utm_params(:complete_module)),
     )
     mail(to: user.email)
   end
@@ -115,5 +115,22 @@ private
         personalisation: govuk_notify_personalisation,
       )
     end
+  end
+
+  # @param campaign_key [Symbol]
+  # @return [Hash]
+  def utm_params(campaign_key)
+    config = Rails.application.config.utm || {}
+    source = config[:source]
+    medium = config[:medium]
+    campaign = config.dig(:campaigns, campaign_key)
+
+    return {} unless source.present? && medium.present? && campaign.present?
+
+    {
+      utm_source: source,
+      utm_medium: medium,
+      utm_campaign: campaign,
+    }
   end
 end
