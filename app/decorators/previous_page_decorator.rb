@@ -80,6 +80,11 @@ private
 
   # @return [Training::Page, Training::Question, Training::Video]
   def previous_item
-    content.with_parent(mod).previous_item
+    if ENV['DISABLE_PRE_CONFIDENCE_CHECK'] == 'true' && content.name == mod.content_start.name
+      # Ensure correct page is shown in this scenario when previous button is clicked
+      mod.interruption_page
+    else
+      content.with_parent(mod).previous_item
+    end
   end
 end
