@@ -70,7 +70,7 @@ private
 
   # @return [Boolean]
   def skip_pre_confidence_section?
-    content.submodule_intro? && !answered?(previous_item) && previous_item.pre_confidence_question?
+    content.submodule_intro? && !answered?(previous_item) && previous_item.pre_confidence_question? && ENV['DISABLE_PRE_CONFIDENCE_CHECK'] == 'false'
   end
 
   # @return [Training::Page, Training::Question, Training::Video]
