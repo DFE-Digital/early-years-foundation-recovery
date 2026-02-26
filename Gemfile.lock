@@ -791,6 +791,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
+  uri (>= 1.0.4)
   web-console
   yard-junk
 
