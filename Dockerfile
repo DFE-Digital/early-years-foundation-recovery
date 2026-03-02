@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------
 # Base - AMD64 & ARM64 compatible
 # ------------------------------------------------------------------------------
-FROM ruby:3.4.8-alpine as base
+FROM ruby:3.4.8-alpine AS base
 
 RUN apk add --no-cache --no-progress --no-check-certificate build-base less curl tzdata gcompat
 
@@ -10,7 +10,7 @@ ENV TZ Europe/London
 # ------------------------------------------------------------------------------
 # Dependencies
 # ------------------------------------------------------------------------------
-FROM base as deps
+FROM base AS deps
 
 LABEL org.opencontainers.image.description "Application Dependencies"
 
@@ -102,7 +102,7 @@ CMD ["sh", "-c", "otelcol --config=/etc/otel-collector-config.yml >/dev/null 2>&
 # ------------------------------------------------------------------------------
 # Development Stage - ./bin/docker-dev
 # ------------------------------------------------------------------------------
-FROM app as dev
+FROM app AS dev
 
 RUN apk add --no-cache --no-progress --no-check-certificate postgresql-client npm graphviz
 RUN npm install --global adr-log contentful-cli
