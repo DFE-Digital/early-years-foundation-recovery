@@ -49,8 +49,8 @@ Rails.application.configure do
     'X-Robots-Tag' => ('none' unless Rails.application.live?),
   }.compact
 
-    # Remove 'Server' header from all HTTP responses
-    config.middleware.insert_before 0, "RemoveServerHeader"
+  # Remove 'Server' header from all HTTP responses
+  config.middleware.insert_before 0, 'RemoveServerHeader'
 
   if Rails.application.preview?
     # Contentful Live-Preview of secured pages
