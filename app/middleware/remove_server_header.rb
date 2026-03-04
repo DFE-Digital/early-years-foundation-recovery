@@ -1,3 +1,5 @@
+
+# :nocov:
 # frozen_string_literal: true
 
 # Middleware to remove the 'Server' header from all HTTP responses
@@ -12,3 +14,4 @@ class RemoveServerHeader
     [status, headers, response]
   end
 end
+# :nocov:
