@@ -484,7 +484,7 @@ GEM
       que (>= 2.0, < 3.0)
     raabro (1.4.0)
     racc (1.8.1)
-    rack (3.1.18)
+    rack (3.1.20)
     rack-mini-profiler (4.0.0)
       rack (>= 1.2.0)
     rack-oauth2 (2.2.1)
@@ -681,7 +681,7 @@ GEM
     unicode-display_width (3.1.4)
       unicode-emoji (~> 4.0, >= 4.0.4)
     unicode-emoji (4.0.4)
-    uri (1.0.3)
+    uri (1.0.4)
     useragent (0.16.11)
     validate_url (1.0.15)
       activemodel (>= 3.0.0)
@@ -791,6 +791,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
+  uri (>= 1.0.4)
   web-console
   yard-junk
 
