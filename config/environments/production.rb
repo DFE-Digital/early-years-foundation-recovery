@@ -40,11 +40,17 @@ Rails.application.configure do
   # Security Headers
   # @see https://www.keycdn.com/blog/http-security-headers
   config.action_dispatch.default_headers = {
+    'Strict-Transport-Security' => 'max-age=63072000; includeSubDomains; preload',
+    'Referrer-Policy' => 'strict-origin-when-cross-origin',
+    'Permissions-Policy' => 'geolocation=(), microphone=(), camera=()',
     'X-XSS-Protection' => '0',
     'X-Frame-Options' => 'SAMEORIGIN',
     'X-Content-Type-Options' => 'nosniff',
     'X-Robots-Tag' => ('none' unless Rails.application.live?),
   }.compact
+
+  # Remove 'Server' header from all HTTP responses
+  config.middleware.insert_before 0, 'RemoveServerHeader'
 
   if Rails.application.preview?
     # Contentful Live-Preview of secured pages
