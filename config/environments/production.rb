@@ -50,7 +50,7 @@ Rails.application.configure do
   }.compact
 
   # Remove 'Server' header from all HTTP responses
-  config.middleware.insert_before 0, 'RemoveServerHeader'
+  config.middleware.insert_before 0, RemoveServerHeader
 
   if Rails.application.preview?
     # Contentful Live-Preview of secured pages
