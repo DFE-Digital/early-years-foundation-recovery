@@ -20,7 +20,7 @@ class Dashboard
     # { model: 'DataAnalysis::UserLastInteraction', folder: 'users', file: 'user_last_interaction' },
     # { model: 'DataAnalysis::UserCountByRoleAndExperience', folder: 'users', file: 'user_count_by_role_and_experience' },
     # { model: 'Assessment', folder: 'training', file: 'assessments' },
-    # { model: 'DataAnalysis::AssessmentForLeadersAndManagers', folder: 'training', file: 'assessments_managers_and_leaders' },
+    { model: 'DataAnalysis::AssessmentForLeadersAndManagers', folder: 'training', file: 'assessments_managers_and_leaders' },
     # { model: 'DataAnalysis::ConfidenceCheckScores', folder: 'training', file: 'confidence_check_scores' },
     # { model: 'DataAnalysis::PreConfidenceCheckAnswers', folder: 'training', file: 'pre_confidence_check_answers' },
     # { model: 'DataAnalysis::ConfidenceCheckScoresForManagerOrLeaderOnly', folder: 'training', file: 'confidence_check_scores_for_manager_or_leader_only' },
