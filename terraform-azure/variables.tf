@@ -204,6 +204,11 @@ variable "webapp_config_bot_token" {
   sensitive = true
 }
 
+variable "webapp_config_govuk_notify_api_key" {
+  type      = string
+  sensitive = true
+}
+
 variable "webapp_config_contentful_environment" {
   default = null
   type    = string
