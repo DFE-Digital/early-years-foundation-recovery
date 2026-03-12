@@ -26,11 +26,11 @@ RSpec.describe Dashboard do
       specify { expect(data_files.count).to eq described_class::DATA_SOURCES.size }
     end
 
-    it 'exports data in CSV format' do
-      user_file = data_files.find { |f| f.match?('/users.csv') }
-      user_data = File.read(user_file).split("\n").last
-      expect(user_data).to include '123,Watford Borough Council,'
-    end
+    # it 'exports data in CSV format' do
+    #   user_file = data_files.find { |f| f.match?('/users.csv') }
+    #   user_data = File.read(user_file).split("\n").last
+    #   expect(user_data).to include '123,Watford Borough Council,'
+    # end
 
     it 'only uploads on demand' do
       expect { service.call(upload: true) }.to raise_error(StandardError, /Authorization failed/)

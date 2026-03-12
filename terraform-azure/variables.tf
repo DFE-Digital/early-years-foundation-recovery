@@ -236,7 +236,8 @@ variable "webapp_config_grover_no_sandbox" {
 }
 
 variable "webapp_config_google_cloud_bucket" {
-  type = string
+  type      = string
+  sensitive = true
 }
 
 variable "webapp_config_node_env" {
