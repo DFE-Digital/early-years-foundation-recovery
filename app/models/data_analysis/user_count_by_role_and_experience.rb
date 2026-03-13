@@ -13,13 +13,15 @@ module DataAnalysis
       end
 
       # @return [Array<Hash{Symbol => Mixed}>]
-      def dashboard
-        role_and_experience_users.map do |(early_years_experience, role_type), count|
-          {
+      def dashboard(batch_size: 1000)
+        return enum_for(:dashboard, batch_size: batch_size) unless block_given?
+
+        role_and_experience_users.each do |(early_years_experience, role_type), count|
+          yield({
             role_type: role_type,
             experience: early_years_experience,
             count: count,
-          }
+          })
         end
       end
 

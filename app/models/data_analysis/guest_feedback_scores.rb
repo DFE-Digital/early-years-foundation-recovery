@@ -15,9 +15,11 @@ module DataAnalysis
       end
 
       # @return [Array<Hash{Symbol => Mixed}>]
-      def dashboard
-        Response.visitor.feedback.order(:visit_id, :question_name).select(*column_names).map do |user|
-          decorator.call user.attributes.symbolize_keys.except(:id)
+      def dashboard(batch_size: 1000)
+        return enum_for(:dashboard, batch_size: batch_size) unless block_given?
+
+        Response.visitor.feedback.order(:visit_id, :question_name).select(*column_names).find_each(batch_size: batch_size) do |user|
+          yield decorator.call user.attributes.symbolize_keys.except(:id)
         end
       end
 

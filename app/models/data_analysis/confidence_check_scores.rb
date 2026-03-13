@@ -15,13 +15,15 @@ module DataAnalysis
 
       # @return [Array<Hash{Symbol => Mixed}>]
       def dashboard
-        confidence_check_scores.map do |(module_name, question_name, answers), count|
-          {
+        return enum_for(:dashboard) unless block_given?
+
+        confidence_check_scores.each do |(module_name, question_name, answers), count|
+          yield({
             module_name: module_name,
             question_name: question_name,
             answers: answers,
             count: count,
-          }
+          })
         end
       end
 
