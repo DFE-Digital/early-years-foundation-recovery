@@ -15,11 +15,17 @@ module DataAnalysis
       end
 
       # @return [Array<Hash{Symbol => Mixed}>]
-      def dashboard(batch_size: 1000)
-        return enum_for(:dashboard, batch_size: batch_size) unless block_given?
-
-        Response.visitor.feedback.order(:visit_id, :question_name).select(*column_names).find_each(batch_size: batch_size) do |user|
-          yield decorator.call user.attributes.symbolize_keys.except(:id)
+      def dashboard
+        Response.where(user_id: nil, question_type: 'feedback')
+                .order(:visit_id, :question_name)
+                .map do |response|
+          {
+            visit_id: response.visit_id,
+            question_name: response.question_name,
+            answers: response.answers,
+            created_at: response.created_at&.strftime('%Y-%m-%d %H:%M:%S'),
+            updated_at: response.updated_at&.strftime('%Y-%m-%d %H:%M:%S'),
+          }
         end
       end
 

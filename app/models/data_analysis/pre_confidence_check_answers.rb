@@ -16,19 +16,20 @@ module DataAnalysis
       end
 
       # @return [Array<Hash{Symbol => Mixed}>]
-      def dashboard(batch_size: 1000)
-        return enum_for(:dashboard, batch_size: batch_size) unless block_given?
-
+      def dashboard(batch_size: 1000, &block)
+        results = []
         confidence_check_answers.find_each(batch_size: batch_size) do |response|
-          yield({
+          row = {
             user_id: response.user_id,
             training_module: response.training_module,
             question_type: response.question_type,
             question_name: response.question_name,
             answer: response.answers,
             created_at: response.created_at,
-          })
+          }
+          block ? yield(row) : results << row
         end
+        block ? nil : results
       end
 
     private

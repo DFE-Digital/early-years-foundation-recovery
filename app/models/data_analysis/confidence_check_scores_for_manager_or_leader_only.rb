@@ -14,17 +14,18 @@ module DataAnalysis
       end
 
       # @return [Array<Hash{Symbol => Mixed}>]
-      def dashboard
-        return enum_for(:dashboard) unless block_given?
-
+      def dashboard(&block)
+        results = []
         confidence_check_scores.each do |(module_name, question_name, answers), count|
-          yield({
+          row = {
             module_name: module_name,
             question_name: question_name,
             answers: answers,
             count: count,
-          })
+          }
+          block ? yield(row) : results << row
         end
+        block ? nil : results
       end
 
     private
