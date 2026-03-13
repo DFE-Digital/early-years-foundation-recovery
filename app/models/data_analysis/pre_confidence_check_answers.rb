@@ -27,7 +27,7 @@ module DataAnalysis
             answer: response.answers,
             created_at: response.created_at,
           }
-          block ? block.call(row) : results << row
+          block ? yield(row) : results << row
         end
         block ? nil : results
       end

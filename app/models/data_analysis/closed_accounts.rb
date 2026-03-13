@@ -31,7 +31,7 @@ module DataAnalysis
             closed_reason: user.closed_reason,
             closed_reason_custom: user.closed_reason_custom,
           }
-          block ? block.call(row) : results << row
+          block ? yield(row) : results << row
         end
         block ? nil : results
       end

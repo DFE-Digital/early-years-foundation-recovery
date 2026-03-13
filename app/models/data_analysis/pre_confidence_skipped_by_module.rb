@@ -21,7 +21,7 @@ module DataAnalysis
             training_module_skipped: record.module_name,
             timestamp: record.skipped_at,
           }
-          block ? block.call(row) : results << row
+          block ? yield(row) : results << row
         end
         block ? nil : results
       end

@@ -23,7 +23,7 @@ module DataAnalysis
             answers: answers,
             count: count,
           }
-          block ? block.call(row) : results << row
+          block ? yield(row) : results << row
         end
         block ? nil : results
       end

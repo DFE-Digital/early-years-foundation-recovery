@@ -21,7 +21,7 @@ module DataAnalysis
             experience: early_years_experience,
             count: count,
           }
-          block ? block.call(row) : results << row
+          block ? yield(row) : results << row
         end
         block ? nil : results
       end
