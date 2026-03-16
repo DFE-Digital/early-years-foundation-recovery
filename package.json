@@ -10,22 +10,29 @@
   },
   "resolutions": {
     "glob": "^10.5.0",
-    "tar": "7.5.8",
+    "tar": "7.5.11",
+    "js-yaml": "4.1.1",
+    "yauzl": "3.2.1",
+    "immutable": "5.1.5",
     "minimatch": "^10.2.3",
     "basic-ftp": "^5.2.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
     "@hotwired/stimulus": "^3.2.1",
-    "@hotwired/turbo-rails": "^8.0.12",
+    "@hotwired/turbo-rails": "^8.0.21",
     "@stimulus-components/reveal": "^5.0.0",
     "accessible-autocomplete": "^3.0.1",
-    "axios": "^1.13.5",
     "dfe-frontend": "^2.0.1",
     "esbuild": "^0.27.1",
+    "flatted": "^3.4.0",
     "govuk-frontend": "^5.11.1",
+    "immutable": "^5.1.5",
+    "js-yaml": "^4.1.1",
     "puppeteer": "^24.10.0",
-    "sass": "^1.97.2"
+    "sass": "^1.97.2",
+    "tar": "^7.5.11",
+    "yauzl": "^3.2.1"
   },
   "devDependencies": {
     "stylelint": "^16.26.1",
