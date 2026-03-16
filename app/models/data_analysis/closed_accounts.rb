@@ -17,10 +17,11 @@ module DataAnalysis
         ]
       end
 
-      # @return [Array<Hash{Symbol => Mixed}>]
-      def dashboard
-        User.closed.map do |user|
-          {
+      # @return [Enumerator<Hash{Symbol => Mixed}>]
+      def dashboard(batch_size: 1000, &block)
+        results = []
+        User.closed.find_each(batch_size: batch_size) do |user|
+          row = {
             user_id: user.id,
             closed_at: user.closed_at.strftime('%Y-%m-%d %H:%M:%S'),
             setting_type: user.setting_type,
@@ -30,7 +31,9 @@ module DataAnalysis
             closed_reason: user.closed_reason,
             closed_reason_custom: user.closed_reason_custom,
           }
+          block ? yield(row) : results << row
         end
+        block ? nil : results
       end
     end
   end

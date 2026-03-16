@@ -545,4 +545,7 @@ private
 
     errors.add(:setting_type_id, :inclusion)
   end
+
+  # Eager load user_module_progress for dashboard exports
+  scope :dashboard, -> { not_closed.includes(:user_module_progress) }
 end

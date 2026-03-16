@@ -13,14 +13,17 @@ module DataAnalysis
       end
 
       # @return [Array<Hash{Symbol => Mixed}>]
-      def dashboard
-        role_and_experience_users.map do |(early_years_experience, role_type), count|
-          {
+      def dashboard(&block)
+        results = []
+        role_and_experience_users.each do |(early_years_experience, role_type), count|
+          row = {
             role_type: role_type,
             experience: early_years_experience,
             count: count,
           }
+          block ? yield(row) : results << row
         end
+        block ? nil : results
       end
 
     private
