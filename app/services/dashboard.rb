@@ -43,7 +43,7 @@ class Dashboard
   # @param clean [Boolean] default: false
   # @return [String]
   def call(upload: false, clean: false)
-    Rails.logger.info("[EXPORT] Dashboard export started. Upload: ", upload)
+    Rails.logger.info("[EXPORT] Dashboard export started. Upload: #{upload}")
     purge if clean
 
     Rails.logger.info("[EXPORT] Exporting models to CSV...")

@@ -27,7 +27,7 @@ module ToCsv
       Rails.logger.info("[EXPORT] Starting #{name}.to_csv export with batch size #{batch_size}")
       decorator = CoercionDecorator.new
 
-      CSV.generate(headers: true) do |csv|
+      csv_string = CSV.generate(headers: true) do |csv|
         csv << dashboard_headers
 
         if dashboard.is_a?(Array)
@@ -39,11 +39,12 @@ module ToCsv
           dashboard.find_each(batch_size: batch_size) do |record|
             csv << decorator.call(record.dashboard_row).values
             batch_num += 1
-            Rails.logger.info("[EXPORT] #{name}.to_csv batch ", batch_num * batch_size) if (batch_num % 10).zero?
+            Rails.logger.info("[EXPORT] #{name}.to_csv batch #{batch_num * batch_size}") if (batch_num % 10).zero?
           end
         end
       end
       Rails.logger.info("[EXPORT] Finished #{name}.to_csv export")
+      csv_string
     end
   end
 
