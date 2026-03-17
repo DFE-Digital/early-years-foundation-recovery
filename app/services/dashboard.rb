@@ -43,15 +43,19 @@ class Dashboard
   # @param clean [Boolean] default: false
   # @return [String]
   def call(upload: false, clean: false)
+    Rails.logger.info("[EXPORT] Dashboard export started. Upload: ", upload)
     purge if clean
 
+    Rails.logger.info("[EXPORT] Exporting models to CSV...")
     export models_to_csv
 
     if upload
+      Rails.logger.info("[EXPORT] Uploading CSVs to remote storage...")
       rotate_data_sources
     else
       log 'SKIPPING UPLOAD'
     end
+    Rails.logger.info("[EXPORT] Dashboard export complete.")
   rescue StandardError => e
     Rails.logger.error("Dashboard export failed: #{e.class} - #{e.message}")
     Rails.logger.error(e.backtrace&.first(10)&.join("\n"))
