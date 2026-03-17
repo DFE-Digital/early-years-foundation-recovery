@@ -133,7 +133,14 @@ class User < ApplicationRecord
 
   # notes
   scope :with_notes, -> { joins(:notes).merge(Note.filled) }
-  scope :without_notes, -> { where.not(id: with_notes) }
+  scope :without_notes, lambda {
+    left_outer_joins(:notes)
+      .where(notes: { id: nil })
+      .or(
+        left_outer_joins(:notes)
+          .where(notes: { body: [nil, Types::EMPTY_STRING] }),
+      )
+  }
 
   # assessments
   scope :with_assessments, -> { joins(:assessments) }
@@ -545,4 +552,7 @@ private
 
     errors.add(:setting_type_id, :inclusion)
   end
+
+  # Eager load user_module_progress for dashboard exports
+  scope :dashboard, -> { not_closed.includes(:user_module_progress) }
 end

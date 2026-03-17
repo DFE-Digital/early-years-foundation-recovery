@@ -43,15 +43,23 @@ class Dashboard
   # @param clean [Boolean] default: false
   # @return [String]
   def call(upload: false, clean: false)
+    Rails.logger.info("[EXPORT] Dashboard export started. Upload: #{upload}")
     purge if clean
 
+    Rails.logger.info('[EXPORT] Exporting models to CSV...')
     export models_to_csv
 
     if upload
+      Rails.logger.info('[EXPORT] Uploading CSVs to remote storage...')
       rotate_data_sources
     else
       log 'SKIPPING UPLOAD'
     end
+    Rails.logger.info('[EXPORT] Dashboard export complete.')
+  rescue StandardError => e
+    Rails.logger.error("Dashboard export failed: #{e.class} - #{e.message}")
+    Rails.logger.error(e.backtrace&.first(10)&.join("\n"))
+    raise
   end
 
 private
@@ -74,6 +82,10 @@ private
       file_path = dir_path.join("#{source[:file]}.csv")
 
       [file_data, dir_path, file_path]
+    rescue StandardError => e
+      Rails.logger.error("Failed to generate CSV for #{source[:model]}: #{e.class} - #{e.message}")
+      Rails.logger.error(e.backtrace&.first(10)&.join("\n"))
+      raise
     end
   end
 
@@ -94,6 +106,10 @@ private
       File.write(file_path, file_data)
 
       log "#{file_path} created"
+    rescue StandardError => e
+      Rails.logger.error("Failed to write #{file_path}: #{e.class} - #{e.message}")
+      Rails.logger.error(e.backtrace&.first(10)&.join("\n"))
+      raise
     end
   end
 
@@ -122,6 +138,10 @@ private
       bucket.file(remote).copy(bucket_name, backup)
 
       log "Uploaded #{local} to #{remote} and archived as #{backup} on #{bucket.name}"
+    rescue StandardError => e
+      Rails.logger.error("Failed to upload #{local} to #{remote}: #{e.class} - #{e.message}")
+      Rails.logger.error(e.backtrace&.first(10)&.join("\n"))
+      raise
     end
   end
 

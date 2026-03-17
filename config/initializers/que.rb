@@ -12,5 +12,10 @@ end
 
 # @see https://github.com/que-rb/que/tree/master/docs#error-notifications
 #
-# Que.error_notifier = proc do |error, job|
-# end
+Que.error_notifier = proc do |error, job|
+  Sentry.with_scope do |scope|
+    scope.set_tags(component: 'que-worker', job_class: job[:job_class], queue: job[:queue])
+    scope.set_context('que_job', job)
+    Sentry.capture_exception(error)
+  end
+end

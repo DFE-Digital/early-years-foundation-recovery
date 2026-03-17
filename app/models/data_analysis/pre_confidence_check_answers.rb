@@ -16,9 +16,10 @@ module DataAnalysis
       end
 
       # @return [Array<Hash{Symbol => Mixed}>]
-      def dashboard
-        confidence_check_answers.map do |response|
-          {
+      def dashboard(batch_size: 1000, &block)
+        results = []
+        confidence_check_answers.find_each(batch_size: batch_size) do |response|
+          row = {
             user_id: response.user_id,
             training_module: response.training_module,
             question_type: response.question_type,
@@ -26,7 +27,9 @@ module DataAnalysis
             answer: response.answers,
             created_at: response.created_at,
           }
+          block ? yield(row) : results << row
         end
+        block ? nil : results
       end
 
     private

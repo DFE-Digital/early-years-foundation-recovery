@@ -23,6 +23,7 @@ locals {
     "DOMAIN"                                 = var.webapp_config_domain
     "EDITOR"                                 = var.webapp_config_editor
     "FEEDBACK_URL"                           = var.webapp_config_feedback_url
+    "GOOGLE_CLOUD_BUCKET"                    = var.webapp_config_google_cloud_bucket
     "GROVER_NO_SANDBOX"                      = var.webapp_config_grover_no_sandbox
     "MAINTENANCE"                            = var.environment == "development" ? "no" : "false"
     "NODE_ENV"                               = var.webapp_config_node_env
@@ -51,6 +52,7 @@ locals {
     "DOMAIN"                                 = var.webapp_config_domain
     "EDITOR"                                 = var.webapp_config_editor
     "FEEDBACK_URL"                           = var.webapp_config_feedback_url
+    "GOOGLE_CLOUD_BUCKET"                    = var.webapp_config_google_cloud_bucket
     "GROVER_NO_SANDBOX"                      = var.webapp_config_grover_no_sandbox
     "MAINTENANCE"                            = var.environment == "development" ? "no" : "false"
     "NODE_ENV"                               = var.webapp_config_node_env

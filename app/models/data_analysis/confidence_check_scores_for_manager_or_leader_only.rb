@@ -14,15 +14,18 @@ module DataAnalysis
       end
 
       # @return [Array<Hash{Symbol => Mixed}>]
-      def dashboard
-        confidence_check_scores.map do |(module_name, question_name, answers), count|
-          {
+      def dashboard(&block)
+        results = []
+        confidence_check_scores.each do |(module_name, question_name, answers), count|
+          row = {
             module_name: module_name,
             question_name: question_name,
             answers: answers,
             count: count,
           }
+          block ? yield(row) : results << row
         end
+        block ? nil : results
       end
 
     private
