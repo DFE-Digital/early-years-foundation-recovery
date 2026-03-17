@@ -35,11 +35,11 @@ module ToCsv
             csv << decorator.call(record).values
           end
         else
-          batch_num = 0
+          record_count = 0
           dashboard.find_each(batch_size: batch_size) do |record|
             csv << decorator.call(record.dashboard_row).values
-            batch_num += 1
-            Rails.logger.info("[EXPORT] #{name}.to_csv batch #{batch_num * batch_size}") if (batch_num % 10).zero?
+            record_count += 1
+            Rails.logger.info("[EXPORT] #{name}.to_csv processed #{record_count} records") if (record_count % 10).zero?
           end
         end
       end
