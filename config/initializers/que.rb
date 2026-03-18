@@ -19,3 +19,5 @@ Que.error_notifier = proc do |error, job|
     Sentry.capture_exception(error)
   end
 end
+
+Que.logger = Rails.logger
