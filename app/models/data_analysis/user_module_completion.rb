@@ -13,13 +13,15 @@ module DataAnalysis
       end
 
       # @return [Array<Hash>]
+
       def dashboard
+        registration_complete_user_ids = User.registration_complete.pluck(:id)
         Training::Module.ordered.reject(&:draft?).map do |mod|
-          completed_count = module_count(mod.name)
+          completed_count = UserModuleProgress.completed.where(module_name: mod.name, user_id: registration_complete_user_ids).count
           {
             module_name: mod.name,
             completed_count: completed_count,
-            completed_percentage: (completed_count / User.registration_complete.count.to_f),
+            completed_percentage: (completed_count / registration_complete_user_ids.size.to_f),
           }
         end
       end
