@@ -554,5 +554,12 @@ private
   end
 
   # Eager load user_module_progress for dashboard exports
-  scope :dashboard, -> { not_closed.includes(:user_module_progress) }
+  scope :dashboard, lambda {
+    not_closed.includes(
+      :user_module_progress,
+      :events,
+      :visits,
+      :responses,
+    )
+  }
 end
