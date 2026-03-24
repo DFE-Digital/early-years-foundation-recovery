@@ -23,6 +23,7 @@ locals {
     "DOMAIN"                                 = var.webapp_config_domain
     "EDITOR"                                 = var.webapp_config_editor
     "FEEDBACK_URL"                           = var.webapp_config_feedback_url
+    "GOVUK_NOTIFY_API_KEY"                   = var.webapp_config_govuk_notify_api_key
     "GOOGLE_CLOUD_BUCKET"                    = var.webapp_config_google_cloud_bucket
     "GROVER_NO_SANDBOX"                      = var.webapp_config_grover_no_sandbox
     "MAINTENANCE"                            = var.environment == "development" ? "no" : "false"
@@ -52,6 +53,7 @@ locals {
     "DOMAIN"                                 = var.webapp_config_domain
     "EDITOR"                                 = var.webapp_config_editor
     "FEEDBACK_URL"                           = var.webapp_config_feedback_url
+    "GOVUK_NOTIFY_API_KEY"                   = var.webapp_config_govuk_notify_api_key
     "GOOGLE_CLOUD_BUCKET"                    = var.webapp_config_google_cloud_bucket
     "GROVER_NO_SANDBOX"                      = var.webapp_config_grover_no_sandbox
     "MAINTENANCE"                            = var.environment == "development" ? "no" : "false"
@@ -70,12 +72,13 @@ locals {
 
   # Background Worker Application Configuration, passed securely to container instances
   app_worker_environment_variables = {
-    "DATABASE_URL"        = var.webapp_database_url
-    "GCS_CREDENTIALS"     = var.gcs_credentials
-    "GOOGLE_CLOUD_BUCKET" = var.webapp_config_google_cloud_bucket
-    "RAILS_ENV"           = var.webapp_config_rails_env
-    "RAILS_LOG_TO_STDOUT" = var.webapp_config_rails_log_to_stdout
-    "RAILS_MASTER_KEY"    = var.webapp_config_rails_master_key
+    "DATABASE_URL"         = var.webapp_database_url
+    "GCS_CREDENTIALS"      = var.gcs_credentials
+    "GOVUK_NOTIFY_API_KEY" = var.webapp_config_govuk_notify_api_key
+    "GOOGLE_CLOUD_BUCKET"  = var.webapp_config_google_cloud_bucket
+    "RAILS_ENV"            = var.webapp_config_rails_env
+    "RAILS_LOG_TO_STDOUT"  = var.webapp_config_rails_log_to_stdout
+    "RAILS_MASTER_KEY"     = var.webapp_config_rails_master_key
   }
 
   # Review Application Configuration
@@ -92,6 +95,8 @@ locals {
     "DOMAIN"                                 = var.webapp_config_domain
     "EDITOR"                                 = var.webapp_config_editor
     "FEEDBACK_URL"                           = var.webapp_config_feedback_url
+    "GOVUK_NOTIFY_API_KEY"                   = var.webapp_config_govuk_notify_api_key
+    "GOOGLE_CLOUD_BUCKET"                    = var.webapp_config_google_cloud_bucket
     "GROVER_NO_SANDBOX"                      = var.webapp_config_grover_no_sandbox
     "NODE_ENV"                               = var.webapp_config_node_env
     "RAILS_ENV"                              = var.webapp_config_rails_env
