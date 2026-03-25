@@ -161,11 +161,6 @@ variable "reviewapp_config_disable_pre_confidence_check" {
   type    = string
 }
 
-variable "reviewapp_config_show_pre_confidence_hint" {
-  default = false
-  type    = string
-}
-
 variable "webapp_database_url" {
   description = "URL to the Database"
   type        = string
@@ -209,6 +204,11 @@ variable "webapp_config_bot_token" {
   sensitive = true
 }
 
+variable "webapp_config_govuk_notify_api_key" {
+  type      = string
+  sensitive = true
+}
+
 variable "webapp_config_contentful_environment" {
   default = null
   type    = string
@@ -221,11 +221,6 @@ variable "webapp_config_contentful_preview" {
 
 variable "webapp_config_disable_pre_confidence_check" {
   default = true
-  type    = string
-}
-
-variable "webapp_config_show_pre_confidence_hint" {
-  default = false
   type    = string
 }
 
@@ -246,7 +241,8 @@ variable "webapp_config_grover_no_sandbox" {
 }
 
 variable "webapp_config_google_cloud_bucket" {
-  type = string
+  type      = string
+  sensitive = true
 }
 
 variable "webapp_config_node_env" {

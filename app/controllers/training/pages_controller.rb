@@ -55,6 +55,7 @@ module Training
 
       if track_module_start?
         track('module_start')
+        record_pre_confidence_skip_if_applicable
         helpers.calculate_module_state
       elsif track_confidence_check_complete?
         track('confidence_check_complete')
@@ -117,6 +118,15 @@ module Training
 
     def record_module_completion
       UserModuleProgress.record_completion(user: current_user, module_name: mod.name)
+    end
+
+    def record_pre_confidence_skip_if_applicable
+      return unless mod.pre_confidence_questions.any?
+
+      existing = current_user.confidence_check_progress.find_by(module_name: mod.name, check_type: 'pre')
+      return if existing&.started_at.present? || existing&.completed_at.present?
+
+      ConfidenceCheckProgress.record_skip(user: current_user, module_name: mod.name)
     end
   end
 end

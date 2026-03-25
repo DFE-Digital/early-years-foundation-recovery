@@ -88,6 +88,7 @@ class User < ApplicationRecord
   has_many :mail_events
   has_many :notes
   has_many :user_module_progress
+  has_many :confidence_check_progress
   has_many :feedback_responses, -> { where(question_type: 'feedback') }, class_name: 'Response'
 
   scope :gov_one, -> { where.not(gov_one_id: nil) }
@@ -131,7 +132,14 @@ class User < ApplicationRecord
 
   # notes
   scope :with_notes, -> { joins(:notes).merge(Note.filled) }
-  scope :without_notes, -> { where.not(id: with_notes) }
+  scope :without_notes, lambda {
+    left_outer_joins(:notes)
+      .where(notes: { id: nil })
+      .or(
+        left_outer_joins(:notes)
+          .where(notes: { body: [nil, Types::EMPTY_STRING] }),
+      )
+  }
 
   # assessments
   scope :with_assessments, -> { joins(:assessments) }
@@ -284,15 +292,6 @@ class User < ApplicationRecord
     )
   end
 
-  # @param confidence_question [Training::Question] a confidence question
-  # @return [Response, nil]
-  def pre_confidence_response_for(confidence_question)
-    responses.pre_confidence.find_by(
-      training_module: confidence_question.parent.name,
-      question_name: confidence_question.name,
-    )
-  end
-
   # @return [Array<Training::Module>]
   def active_modules
     started_module_names = user_module_progress.started.pluck(:module_name)
@@ -342,7 +341,7 @@ class User < ApplicationRecord
 
   # @return [Integer]
   def modules_completed
-    module_time_to_completion.values.count(&:positive?)
+    module_time_to_completion.values.compact.count(&:positive?)
   end
 
   # @return [String]
@@ -559,4 +558,7 @@ private
 
     errors.add(:setting_type_id, :inclusion)
   end
+
+  # Eager load user_module_progress for dashboard exports
+  scope :dashboard, -> { not_closed.includes(:user_module_progress) }
 end

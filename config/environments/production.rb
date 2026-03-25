@@ -37,15 +37,6 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for Apache
   # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
-  # Security Headers
-  # @see https://www.keycdn.com/blog/http-security-headers
-  config.action_dispatch.default_headers = {
-    'X-XSS-Protection' => '0',
-    'X-Frame-Options' => 'SAMEORIGIN',
-    'X-Content-Type-Options' => 'nosniff',
-    'X-Robots-Tag' => ('none' unless Rails.application.live?),
-  }.compact
-
   if Rails.application.preview?
     # Contentful Live-Preview of secured pages
     config.action_dispatch.cookies_same_site_protection = :none

@@ -12,45 +12,28 @@ class Dashboard
 
   # @return [Array<Hash{ Symbol => String }>]
   DATA_SOURCES = [
-    # cannot be used for KPIs
-    # { model: 'Event',                                   folder: 'events',   file: 'events'                        },
-    # cannot be used for KPIs
-    # { model: 'Visit',                                   folder: 'visits',   file: 'visits'                        },
-
-    { model: 'DataAnalysis::UserOverview',              folder: 'users',    file: 'user_overview'                 },
-    { model: 'User',                                    folder: 'users',    file: 'users'                         },
-    { model: 'DataAnalysis::ClosedAccounts',            folder: 'users',    file: 'closed_accounts'               },
-    { model: 'DataAnalysis::ReturningUsers',            folder: 'users',    file: 'returning_users'               },
-    { model: 'DataAnalysis::UserLastInteraction',       folder: 'users',    file: 'user_last_interaction'         },
+    { model: 'DataAnalysis::UserOverview', folder: 'users', file: 'user_overview' },
+    { model: 'User', folder: 'users', file: 'users' },
+    { model: 'DataAnalysis::ClosedAccounts', folder: 'users', file: 'closed_accounts' },
+    { model: 'DataAnalysis::ReturningUsers', folder: 'users', file: 'returning_users' },
+    { model: 'DataAnalysis::UserLastInteraction', folder: 'users', file: 'user_last_interaction' },
     { model: 'DataAnalysis::UserCountByRoleAndExperience', folder: 'users', file: 'user_count_by_role_and_experience' },
-    # { model: 'DataAnalysis::LocalAuthorityUser',        folder: 'users',    file: 'local_authority_users'         },
-
     { model: 'Assessment', folder: 'training', file: 'assessments' },
     { model: 'DataAnalysis::AssessmentForLeadersAndManagers', folder: 'training', file: 'assessments_managers_and_leaders' },
     { model: 'DataAnalysis::ConfidenceCheckScores', folder: 'training', file: 'confidence_check_scores' },
     { model: 'DataAnalysis::PreConfidenceCheckAnswers', folder: 'training', file: 'pre_confidence_check_answers' },
     { model: 'DataAnalysis::ConfidenceCheckScoresForManagerOrLeaderOnly', folder: 'training', file: 'confidence_check_scores_for_manager_or_leader_only' },
-    # { model: 'DataAnalysis::AveragePassScores',         folder: 'training', file: 'average_pass_scores'           },
-    # { model: 'DataAnalysis::HighFailQuestions',         folder: 'training', file: 'high_fail_questions'           },
-    # { model: 'DataAnalysis::SettingPassRate',           folder: 'training', file: 'setting_pass_rate'             },
-    # { model: 'DataAnalysis::RolePassRate',              folder: 'training', file: 'role_pass_rate'                },
-    # { model: 'DataAnalysis::UsersNotPassing',           folder: 'training', file: 'assessment_failures'           },
-    # { model: 'DataAnalysis::ResitsPerUser',             folder: 'training', file: 'resits_per_user'               },
-    # { model: 'DataAnalysis::ModulesPerMonth',           folder: 'training', file: 'modules_per_month'             },
-    # { model: 'DataAnalysis::ModuleOverview',            folder: 'training', file: 'module_overview'               },
-    # { model: 'DataAnalysis::UserModuleOrder',           folder: 'training', file: 'module_order'                  },
-    { model: 'DataAnalysis::UserModuleCompletion',      folder: 'training', file: 'module_completion'             },
-    { model: 'DataAnalysis::UserModuleCompletionCount', folder: 'training', file: 'module_completions_count'      },
+    { model: 'DataAnalysis::UserModuleCompletion', folder: 'training', file: 'module_completion' },
+    { model: 'DataAnalysis::UserModuleCompletionCount', folder: 'training', file: 'module_completions_count' },
     { model: 'DataAnalysis::UsersStartedNotCompletedByExperience', folder: 'training', file: 'users_started_not_completed_by_experience' },
     { model: 'DataAnalysis::UsersCompletedModuleCountByExperience', folder: 'training', file: 'users_completed_module_count_by_experience' },
     { model: 'DataAnalysis::UsersModuleOrderByExperience', folder: 'training', file: 'users_module_order_by_experience' },
-
+    { model: 'DataAnalysis::PreConfidenceSkippedByModule', folder: 'training', file: 'pre_confidence_skipped_by_module' },
     { model: 'DataAnalysis::DeviceEngagement', folder: 'training', file: 'device_engagement' },
     { model: 'DataAnalysis::ModuleDurationBuckets', folder: 'training', file: 'module_duration_buckets' },
-
-    { model: 'DataAnalysis::GuestFeedbackScores',       folder: 'feedback', file: 'guest_feedback'                },
-    { model: 'DataAnalysis::UserFeedbackScores',        folder: 'feedback', file: 'course_feedback'               },
-    { model: 'DataAnalysis::ModuleFeedbackForms',       folder: 'feedback', file: 'module_feedback'               },
+    { model: 'DataAnalysis::GuestFeedbackScores', folder: 'feedback', file: 'guest_feedback' },
+    { model: 'DataAnalysis::UserFeedbackScores', folder: 'feedback', file: 'course_feedback' },
+    { model: 'DataAnalysis::ModuleFeedbackForms', folder: 'feedback', file: 'module_feedback' },
   ].freeze
 
   # @return [String] 30-06-2022-09-30
@@ -60,15 +43,23 @@ class Dashboard
   # @param clean [Boolean] default: false
   # @return [String]
   def call(upload: false, clean: false)
+    Rails.logger.info("[EXPORT] Dashboard export started. Upload: #{upload}")
     purge if clean
 
+    Rails.logger.info('[EXPORT] Exporting models to CSV...')
     export models_to_csv
 
     if upload
+      Rails.logger.info('[EXPORT] Uploading CSVs to remote storage...')
       rotate_data_sources
     else
       log 'SKIPPING UPLOAD'
     end
+    Rails.logger.info('[EXPORT] Dashboard export complete.')
+  rescue StandardError => e
+    Rails.logger.error("Dashboard export failed: #{e.class} - #{e.message}")
+    Rails.logger.error(e.backtrace&.first(10)&.join("\n"))
+    raise
   end
 
 private
@@ -91,6 +82,10 @@ private
       file_path = dir_path.join("#{source[:file]}.csv")
 
       [file_data, dir_path, file_path]
+    rescue StandardError => e
+      Rails.logger.error("Failed to generate CSV for #{source[:model]}: #{e.class} - #{e.message}")
+      Rails.logger.error(e.backtrace&.first(10)&.join("\n"))
+      raise
     end
   end
 
@@ -111,6 +106,10 @@ private
       File.write(file_path, file_data)
 
       log "#{file_path} created"
+    rescue StandardError => e
+      Rails.logger.error("Failed to write #{file_path}: #{e.class} - #{e.message}")
+      Rails.logger.error(e.backtrace&.first(10)&.join("\n"))
+      raise
     end
   end
 
@@ -139,6 +138,10 @@ private
       bucket.file(remote).copy(bucket_name, backup)
 
       log "Uploaded #{local} to #{remote} and archived as #{backup} on #{bucket.name}"
+    rescue StandardError => e
+      Rails.logger.error("Failed to upload #{local} to #{remote}: #{e.class} - #{e.message}")
+      Rails.logger.error(e.backtrace&.first(10)&.join("\n"))
+      raise
     end
   end
 
