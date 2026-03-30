@@ -57,7 +57,11 @@ class AssessmentProgress
     return existing_score if existing_score.present?
 
     total_questions = mod.summative_questions.count
-    return 0.0 if total_questions.zero?
+
+    if total_questions.zero?
+      Rails.logger.error "Zero Percent progress logged user_id=#{user&.id} mod=#{mod&.name}"
+      return 0.0
+    end
 
     (correct_responses.count.to_f / total_questions) * 100
   rescue StandardError => e

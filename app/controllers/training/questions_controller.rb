@@ -26,6 +26,13 @@ module Training
 
     def show
       log_caching { render :show }
+
+      # Generate a unique key
+      # nonce = SecureRandom.uuid
+      # # Store the key in the session
+      # session[:form_nonce] = nonce
+      # # Pass the key to the form as a hidden field
+      # render_form(nonce: nonce)
     end
 
   private
