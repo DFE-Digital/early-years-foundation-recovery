@@ -1,3 +1,15 @@
+## Unit Testing Without Contentful
+
+Unit tests are now fully decoupled from Contentful. Tests do not require network access, Contentful credentials, or any environment variables. Instead, a `MockContentfulService` is provided, which mimics the interface of the real Contentful service and returns static or in-memory data.
+
+**How to use in tests:**
+
+- Require and instantiate `MockContentfulService` in your specs where Contentful data is needed.
+- Do not use VCR, WebMock, or ENV-based Contentful stubbing in unit tests.
+- All Contentful-related logic in unit tests should use the mock service or be stubbed with plain Ruby objects.
+
+This ensures tests are fast, reliable, and can run offline in any environment.
+
 # Early years child development training
 
 [![ci][ci-badge]][ci-workflow]

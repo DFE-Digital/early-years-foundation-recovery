@@ -141,7 +141,7 @@ describe 'ContentHelper', type: :helper do
     context 'with protocol-relative URL from Contentful CDN' do
       let(:input) { '![](//images.ctfassets.net/test/test/test/_assets_0-0-0-0-0.jpg)' }
 
-      it 'preserves protocol-relative URLs used by CDNs' do
+      it 'preserves protocol-relative URLs used by CDNs (no Contentful dependency)' do
         expect(html).to include '<img'
         expect(html).to include '//images.ctfassets.net'
       end

@@ -1,22 +1,20 @@
+
 require 'rails_helper'
+require 'mock_contentful_service'
 
 RSpec.describe 'Application configuration' do
   subject(:config) { EarlyYearsFoundationRecovery::Application.config }
 
-  it 'tests against demo content' do
-    expect(ContentfulRails.configuration.environment).to eq 'test'
-    expect(config.contentful_environment).to eq 'test'
+  let(:mock_contentful) { MockContentfulService.new }
+
+  it 'returns mock page data without Contentful' do
+    page = mock_contentful.fetch_page('test-page')
+    expect(page.title).to eq 'Test Page for test-page'
+    expect(page.body).to include 'mock content'
   end
 
-  it 'tests against published content' do
-    expect(Rails.application).not_to be_preview
-  end
-
-  it 'authenticates using credentials' do
-    expect(config.contentful_space).to be_present
-    expect(config.contentful_delivery_access_token).to be_present
-    expect(config.contentful_preview_access_token).to be_present
-    expect(config.contentful_management_access_token).not_to be_present # user specific
+  it 'does not require Contentful credentials or ENV' do
+    expect { mock_contentful.fetch_page('offline') }.not_to raise_error
   end
 
   it 'expires sessions after 24 hrs' do

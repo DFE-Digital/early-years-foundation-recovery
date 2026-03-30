@@ -13,21 +13,28 @@ RSpec.describe Trainee::Setting do
 
   describe '.valid_types' do
     context 'when contentful space is nil (e.g. build time)' do
-      it 'returns empty array' do
-        allow(Rails.application.config).to receive(:contentful_space).and_return(nil)
+      it 'returns empty array (offline, no Contentful)' do
+        stub_const('Rails', Class.new do
+          def self.application
+            OpenStruct.new(config: OpenStruct.new(contentful_space: nil))
+          end
+        end)
         expect(described_class.valid_types).to eq []
       end
     end
 
     context 'with active settings present' do
-      it 'returns active names plus other' do
-        allow(Rails.application.config).to receive(:contentful_space).and_return('space')
+      it 'returns active names plus other (offline, no Contentful)' do
+        stub_const('Rails', Class.new do
+          def self.application
+            OpenStruct.new(config: OpenStruct.new(contentful_space: 'space'))
+          end
+        end)
         setting_struct = Struct.new(:name)
         allow(described_class).to receive(:active).and_return([
           setting_struct.new('alpha'),
           setting_struct.new('beta'),
         ])
-
         expect(described_class.valid_types).to match_array %w[alpha beta other]
       end
     end
