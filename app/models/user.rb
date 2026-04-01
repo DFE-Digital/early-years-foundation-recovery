@@ -156,10 +156,7 @@ class User < ApplicationRecord
   scope :started_training, -> { with_started_modules.distinct }
   scope :with_module_start_events, -> { with_events.merge(Event.module_start) }
   scope :not_started_training, -> { where.not(id: with_started_modules).where.not(id: with_module_start_events) }
-  scope :with_module_in_progress, lambda {
-    where(id: with_module_progress.merge(UserModuleProgress.in_progress))
-      .or(where("EXISTS (SELECT 1 FROM jsonb_each_text(module_time_to_completion) AS x(key, value) WHERE x.value = '0')"))
-  }
+  scope :with_module_in_progress, -> { where(id: with_module_progress.merge(UserModuleProgress.in_progress)) }
 
   # visits
   scope :with_visits, -> { joins(:visits) }
@@ -323,14 +320,12 @@ class User < ApplicationRecord
 
   # @return [Boolean]
   def module_in_progress?
-    user_module_progress.in_progress.exists? || module_time_to_completion.values.any? { |v| v&.zero? }
+    user_module_progress.in_progress.exists?
   end
 
   # @return [Array<String>]
   def modules_in_progress
-    progress_modules = user_module_progress.in_progress.pluck(:module_name)
-    legacy_modules = module_time_to_completion.select { |_k, v| v&.zero? }.keys.map(&:to_s)
-    (progress_modules + legacy_modules).uniq
+    user_module_progress.in_progress.pluck(:module_name)
   end
 
   # @param module_name [String]
