@@ -19,6 +19,19 @@ module Training
       else
         render 'training/questions/show', status: :unprocessable_content
       end
+      # nonce = params[:submission_nonce]
+      # if nonce.present? && session[:submission_nonce] == nonce
+      #   session.delete(:submission_nonce)
+      #   if save_response!
+      #     track_question_answer
+      #     redirect
+      #   else
+      #     render 'training/questions/show', status: :unprocessable_content
+      #   end
+      # else
+      #   # Nonce already used or missing: ignore duplicate submission
+      #   render plain: 'This form has already been submitted or is invalid.', status: :unprocessable_entity
+      # end
     end
 
   private
