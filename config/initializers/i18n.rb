@@ -9,7 +9,7 @@ module I18n::Backend::Content
   # @return [String, Hash, nil] The translation from Contentful if present, else the original YAML
   def lookup(locale, key, scope = [], options = {})
     original = super
-    full_key = scope ? Array(scope).push(key).join('.') : key
+    full_key = scope ? [*scope, key].join('.') : key
 
     # Fetch Contentful resource if it exists
     resource = find_resource(full_key)
