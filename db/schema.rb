@@ -10,40 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_02_14_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_14_120000) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
 
   create_table "assessments", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "training_module", null: false
-    t.float "score"
-    t.boolean "passed"
-    t.datetime "started_at"
     t.datetime "completed_at"
+    t.boolean "passed"
+    t.float "score"
+    t.datetime "started_at"
+    t.string "training_module", null: false
+    t.bigint "user_id", null: false
     t.index ["score", "passed"], name: "index_assessments_on_score_and_passed"
     t.index ["user_id"], name: "index_assessments_on_user_id"
   end
 
   create_table "confidence_check_progress", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "module_name", null: false
     t.string "check_type", null: false
-    t.datetime "started_at"
     t.datetime "completed_at"
-    t.datetime "skipped_at"
     t.datetime "created_at", null: false
+    t.string "module_name", null: false
+    t.datetime "skipped_at"
+    t.datetime "started_at"
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["user_id", "module_name", "check_type"], name: "index_confidence_check_on_user_module_type", unique: true
     t.index ["user_id"], name: "index_confidence_check_progress_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
-    t.bigint "visit_id"
-    t.bigint "user_id"
     t.string "name"
     t.jsonb "properties"
     t.datetime "time"
+    t.bigint "user_id"
+    t.bigint "visit_id"
     t.index ["name", "time"], name: "index_events_on_name_and_time"
     t.index ["properties"], name: "index_events_on_properties", opclass: :jsonb_path_ops, using: :gin
     t.index ["user_id"], name: "index_events_on_user_id"
@@ -51,21 +51,21 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_14_120000) do
   end
 
   create_table "mail_events", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "template"
-    t.jsonb "personalisation"
     t.jsonb "callback"
     t.datetime "created_at", null: false
+    t.jsonb "personalisation"
+    t.string "template"
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_mail_events_on_user_id"
   end
 
   create_table "module_releases", force: :cascade do |t|
-    t.bigint "release_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "first_published_at", null: false
     t.integer "module_position", null: false
     t.string "name", null: false
-    t.datetime "first_published_at", null: false
-    t.datetime "created_at", null: false
+    t.bigint "release_id", null: false
     t.datetime "updated_at", null: false
     t.index ["module_position"], name: "index_module_releases_on_module_position", unique: true
     t.index ["name"], name: "index_module_releases_on_name", unique: true
@@ -73,30 +73,30 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_14_120000) do
   end
 
   create_table "notes", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "title"
     t.text "body"
-    t.string "training_module"
-    t.string "name"
     t.datetime "created_at", null: false
+    t.string "name"
+    t.string "title"
+    t.string "training_module"
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
   create_table "que_jobs", comment: "7", force: :cascade do |t|
-    t.integer "priority", limit: 2, default: 100, null: false
-    t.timestamptz "run_at", default: -> { "now()" }, null: false
-    t.text "job_class", null: false
-    t.integer "error_count", default: 0, null: false
-    t.text "last_error_message"
-    t.text "queue", default: "default", null: false
-    t.text "last_error_backtrace"
-    t.timestamptz "finished_at"
-    t.timestamptz "expired_at"
     t.jsonb "args", default: [], null: false
     t.jsonb "data", default: {}, null: false
+    t.integer "error_count", default: 0, null: false
+    t.timestamptz "expired_at"
+    t.timestamptz "finished_at"
+    t.text "job_class", null: false
     t.integer "job_schema_version", null: false
     t.jsonb "kwargs", default: {}, null: false
+    t.text "last_error_backtrace"
+    t.text "last_error_message"
+    t.integer "priority", limit: 2, default: 100, null: false
+    t.text "queue", default: "default", null: false
+    t.timestamptz "run_at", default: -> { "now()" }, null: false
     t.index ["args"], name: "que_jobs_args_gin_idx", opclass: :jsonb_path_ops, using: :gin
     t.index ["data"], name: "que_jobs_data_gin_idx", opclass: :jsonb_path_ops, using: :gin
     t.index ["job_class"], name: "que_scheduler_job_in_que_jobs_unique_index", unique: true, where: "(job_class = 'Que::Scheduler::SchedulerJob'::text)"
@@ -110,13 +110,13 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_14_120000) do
   end
 
   create_table "que_lockers", primary_key: "pid", id: :integer, default: nil, force: :cascade do |t|
+    t.integer "job_schema_version", default: 1
+    t.boolean "listening", null: false
+    t.text "queues", null: false, array: true
+    t.text "ruby_hostname", null: false
+    t.integer "ruby_pid", null: false
     t.integer "worker_count", null: false
     t.integer "worker_priorities", null: false, array: true
-    t.integer "ruby_pid", null: false
-    t.text "ruby_hostname", null: false
-    t.text "queues", null: false, array: true
-    t.boolean "listening", null: false
-    t.integer "job_schema_version", default: 1
     t.check_constraint "array_ndims(queues) = 1 AND array_length(queues, 1) IS NOT NULL", name: "valid_queues"
     t.check_constraint "array_ndims(worker_priorities) = 1 AND array_length(worker_priorities, 1) IS NOT NULL", name: "valid_worker_priorities"
   end
@@ -126,13 +126,13 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_14_120000) do
   end
 
   create_table "que_scheduler_audit_enqueued", force: :cascade do |t|
-    t.bigint "scheduler_job_id", null: false
-    t.string "job_class", limit: 255, null: false
-    t.string "queue", limit: 255
-    t.integer "priority"
     t.jsonb "args", null: false
+    t.string "job_class", limit: 255, null: false
     t.bigint "job_id"
+    t.integer "priority"
+    t.string "queue", limit: 255
     t.timestamptz "run_at"
+    t.bigint "scheduler_job_id", null: false
     t.index ["args"], name: "que_scheduler_audit_enqueued_args"
     t.index ["job_class"], name: "que_scheduler_audit_enqueued_job_class"
     t.index ["job_id"], name: "que_scheduler_audit_enqueued_job_id"
@@ -152,16 +152,16 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_14_120000) do
   end
 
   create_table "responses", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "training_module", null: false
-    t.string "question_name", null: false
     t.jsonb "answers", default: []
+    t.bigint "assessment_id"
     t.boolean "correct"
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "question_name", null: false
     t.string "question_type"
-    t.bigint "assessment_id"
     t.text "text_input"
+    t.string "training_module", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.bigint "visit_id"
     t.index ["assessment_id"], name: "index_responses_on_assessment_id"
     t.index ["user_id", "training_module", "question_name"], name: "user_question"
@@ -170,54 +170,54 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_14_120000) do
   end
 
   create_table "user_module_progress", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.string "last_page"
     t.string "module_name", null: false
     t.datetime "started_at"
-    t.datetime "completed_at"
-    t.jsonb "visited_pages", default: {}
-    t.string "last_page"
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.jsonb "visited_pages", default: {}
     t.index ["user_id", "module_name"], name: "index_user_module_progress_on_user_id_and_module_name", unique: true
     t.index ["user_id"], name: "index_user_module_progress_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "first_name"
-    t.string "last_name"
-    t.boolean "private_beta_registration_complete", default: false
-    t.integer "failed_attempts", default: 0, null: false
-    t.datetime "locked_at"
-    t.string "unlock_token"
-    t.string "setting_type"
-    t.string "setting_type_other"
-    t.jsonb "module_time_to_completion", default: {}, null: false
-    t.datetime "terms_and_conditions_agreed_at"
-    t.boolean "display_whats_new", default: false
-    t.string "local_authority"
-    t.string "role_type"
-    t.string "role_type_other"
-    t.string "setting_type_id"
-    t.boolean "registration_complete", default: false
     t.datetime "closed_at"
     t.string "closed_reason"
     t.string "closed_reason_custom"
-    t.boolean "training_emails"
-    t.string "gov_one_id"
+    t.datetime "confirmation_sent_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "created_at", null: false
+    t.boolean "display_whats_new", default: false
     t.string "early_years_experience"
-    t.boolean "research_participant"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "first_name"
+    t.string "gov_one_id"
+    t.string "last_name"
+    t.string "local_authority"
+    t.datetime "locked_at"
+    t.jsonb "module_time_to_completion", default: {}, null: false
     t.jsonb "notify_callback"
+    t.boolean "private_beta_registration_complete", default: false
+    t.boolean "registration_complete", default: false
+    t.datetime "remember_created_at"
+    t.boolean "research_participant"
+    t.datetime "reset_password_sent_at"
+    t.string "reset_password_token"
+    t.string "role_type"
+    t.string "role_type_other"
+    t.string "setting_type"
+    t.string "setting_type_id"
+    t.string "setting_type_other"
+    t.datetime "terms_and_conditions_agreed_at"
+    t.boolean "training_emails"
+    t.string "unconfirmed_email"
+    t.string "unlock_token"
+    t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["gov_one_id"], name: "index_users_on_gov_one_id", unique: true
@@ -226,31 +226,31 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_14_120000) do
   end
 
   create_table "visits", force: :cascade do |t|
-    t.string "visit_token"
-    t.string "visitor_token"
-    t.bigint "user_id"
-    t.string "ip"
-    t.text "user_agent"
-    t.text "referrer"
-    t.string "referring_domain"
-    t.text "landing_page"
+    t.string "app_version"
     t.string "browser"
-    t.string "os"
-    t.string "device_type"
-    t.string "country"
-    t.string "region"
     t.string "city"
+    t.string "country"
+    t.string "device_type"
+    t.string "ip"
+    t.text "landing_page"
     t.float "latitude"
     t.float "longitude"
-    t.string "utm_source"
-    t.string "utm_medium"
-    t.string "utm_term"
-    t.string "utm_content"
-    t.string "utm_campaign"
-    t.string "app_version"
+    t.string "os"
     t.string "os_version"
     t.string "platform"
+    t.text "referrer"
+    t.string "referring_domain"
+    t.string "region"
     t.datetime "started_at"
+    t.text "user_agent"
+    t.bigint "user_id"
+    t.string "utm_campaign"
+    t.string "utm_content"
+    t.string "utm_medium"
+    t.string "utm_source"
+    t.string "utm_term"
+    t.string "visit_token"
+    t.string "visitor_token"
     t.index ["user_id"], name: "index_visits_on_user_id"
     t.index ["visit_token"], name: "index_visits_on_visit_token", unique: true
   end
