@@ -17,6 +17,9 @@ class Page::Resource < ContentfulModel::Base
     fetch_or_store to_key(name) do
       find_by(name: name.to_s).first
     end
+  rescue HTTP::TimeoutError, ActionView::Template::Error => e
+    Rails.logger.error("Contentful timeout in Page::Resource.by_name: \\#{e.class} - \\#{e.message}")
+    nil
   end
 
   # @return [Array<Page::Resource>]

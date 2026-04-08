@@ -41,10 +41,10 @@ ContentfulRails.configure do |config|
     max_include_resolution_depth: 1,
     reuse_entries: true,
 
-    # Timeout settings
-    preview_api: { timeout_connect: 2, timeout_read: 6, timeout_write: 20 },
-    delivery_api: { timeout_connect: 2, timeout_read: 6, timeout_write: 20 },
-    management_api: { timeout_connect: 3, timeout_read: 100, timeout_write: 200 },
+    # Timeout settings (increased)
+    preview_api: { timeout_connect: 10, timeout_read: 30, timeout_write: 60 },
+    delivery_api: { timeout_connect: 10, timeout_read: 30, timeout_write: 60 },
+    management_api: { timeout_connect: 10, timeout_read: 120, timeout_write: 240 },
 
     entry_mapping: {
       'userSetting' => Trainee::Setting,

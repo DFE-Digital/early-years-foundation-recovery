@@ -1,12 +1,13 @@
 - content_for :page_title do
   = html_title mod.title, content.name
 
-- content_for :hero do 
+- content_for :hero do
   = render 'training/modules/section_bar'
 
 = render 'training/questions/debug'
 
 = form_with model: current_user_response, url: training_module_response_path(mod.name, content.name), method: :patch do |f|
+  = hidden_field_tag :submission_nonce, local_assigns[:submission_nonce]
 
   .govuk-grid-row
     .govuk-grid-column-two-thirds-from-desktop

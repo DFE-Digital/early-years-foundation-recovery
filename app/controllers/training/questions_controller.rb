@@ -25,7 +25,9 @@ module Training
     layout 'hero'
 
     def show
-      log_caching { render :show }
+      nonce = SecureRandom.uuid
+      session[:submission_nonce] = nonce
+      log_caching { render :show, locals: { submission_nonce: nonce } }
     end
 
   private
