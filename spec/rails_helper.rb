@@ -1,3 +1,7 @@
+
+# Load stubs for Rails/ActiveModel/ActiveRecord before anything else
+require File.expand_path('support/rails_model_stubs', __dir__)
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'

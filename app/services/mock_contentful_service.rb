@@ -13,4 +13,7 @@ class MockContentfulService
   end
 
   # Add more methods as needed to match your real Contentful service interface
+  Rails.application.config.after_initialize do
+    # Use test-only mocks to avoid superclass mismatch
+  end
 end
