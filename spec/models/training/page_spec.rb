@@ -1,9 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Training::Page, type: :model do
+
+  let(:mock_contentful) { MockContentfulService.new }
+
+  before do
+    allow(Training::Page).to receive(:find_by).and_return([mock_contentful.find('1-1-1-1')])
+  end
+
   subject(:page) do
-    # NB: query class is only possible with a page name that is unique
-    described_class.find_by(name: '1-1-1-1').first
+    Training::Page.find_by(name: '1-1-1-1').first
   end
 
   it_behaves_like 'updated content', '1-1-3'

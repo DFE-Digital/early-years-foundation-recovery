@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe CourseProgress do
+
+  let(:mock_contentful) { MockContentfulService.new }
+
+  before do
+    allow(Training::Module).to receive(:by_name).and_return(mock_contentful.find('alpha'))
+    allow(Training::Module).to receive(:ordered).and_return([mock_contentful.find('alpha'), mock_contentful.find('bravo')])
+  end
+
   subject(:course) { described_class.new(user: user) }
 
   include_context 'with progress'

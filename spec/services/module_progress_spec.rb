@@ -3,9 +3,16 @@
 require 'rails_helper'
 
 RSpec.describe ModuleProgress do
-  subject(:progress) { described_class.new(user: user, mod: alpha) }
 
+  let(:mock_contentful) { MockContentfulService.new }
   let(:now) { Time.zone.now }
+
+  before do
+    allow(Training::Module).to receive(:by_name).and_return(mock_contentful.find('alpha'))
+    allow(Training::Module).to receive(:ordered).and_return([mock_contentful.find('alpha'), mock_contentful.find('bravo')])
+  end
+
+  subject(:progress) { described_class.new(user: user, mod: Training::Module.by_name('alpha')) }
 
   include_context 'with progress'
 

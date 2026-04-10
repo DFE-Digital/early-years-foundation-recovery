@@ -1,12 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe CalculateModuleState do
-  subject(:service) { described_class.new(user: user) }
 
+  let(:mock_contentful) { MockContentfulService.new }
   let(:day_one) { Time.zone.local(2000, 0o1, 0o1) } # start alpha
   let(:day_two) { Time.zone.local(2000, 0o1, 0o2) } # start bravo
   let(:day_three) { Time.zone.local(2000, 0o1, 0o3) } # complete alpha
   let(:day_five) { Time.zone.local(2000, 0o1, 0o5) } # complete bravo
+
+  before do
+    allow(Training::Module).to receive(:by_name).and_return(mock_contentful.find('alpha'))
+    allow(Training::Module).to receive(:ordered).and_return([mock_contentful.find('alpha'), mock_contentful.find('bravo')])
+  end
+
+  subject(:service) { described_class.new(user: user) }
 
   include_context 'with events'
 

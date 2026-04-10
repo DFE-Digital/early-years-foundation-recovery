@@ -11,14 +11,21 @@
 require 'rails_helper'
 
 RSpec.describe PreviousPageDecorator do
+
+  let(:mock_contentful) { MockContentfulService.new }
+  let(:user) { create :user, :registered }
+  let(:mod) { mock_contentful.find('alpha') }
+  let(:content) { OpenStruct.new(name: '1-1-2', page_type: 'text_page', title: 'Page 1-1-2') }
+  let(:assessment) { double }
+
+  before do
+    allow(Training::Module).to receive(:by_name).and_return(mock_contentful.find('alpha'))
+    allow(Training::Module).to receive(:ordered).and_return([mock_contentful.find('alpha'), mock_contentful.find('bravo')])
+  end
+
   subject(:decorator) do
     described_class.new(user: user, mod: mod, content: content, assessment: assessment)
   end
-
-  let(:user) { create :user, :registered }
-  let(:mod) { Training::Module.by_name(:alpha) }
-  let(:content) { mod.page_by_name('1-1-2') }
-  let(:assessment) { double }
 
   describe '#style' do
     it do

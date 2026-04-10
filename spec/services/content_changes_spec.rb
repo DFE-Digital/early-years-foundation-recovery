@@ -1,9 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe ContentChanges do
-  subject(:changes) { described_class.new(user: user) }
 
+  let(:mock_contentful) { MockContentfulService.new }
   let(:user) { create(:user) }
+
+  before do
+    allow(Training::Module).to receive(:by_name).and_return(mock_contentful.find('alpha'))
+    allow(Training::Module).to receive(:ordered).and_return([mock_contentful.find('alpha'), mock_contentful.find('bravo')])
+  end
+
+  subject(:changes) { described_class.new(user: user) }
 
   include_context 'with module releases'
 

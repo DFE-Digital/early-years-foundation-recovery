@@ -1,12 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe PaginationDecorator do
+
+  let(:mock_contentful) { MockContentfulService.new }
+  let(:mod) { mock_contentful.find('alpha') }
+  let(:content) { OpenStruct.new(name: '1-1-1', page_type: 'text_page', title: 'The first submodule') }
+
+  before do
+    allow(Training::Module).to receive(:by_name).and_return(mock_contentful.find('alpha'))
+    allow(Training::Module).to receive(:ordered).and_return([mock_contentful.find('alpha'), mock_contentful.find('bravo')])
+  end
+
   subject(:decorator) do
     described_class.new(content)
   end
-
-  let(:mod) { Training::Module.by_name(:alpha) }
-  let(:content) { mod.page_by_name('1-1-1') }
 
   it '#heading' do
     expect(decorator.heading).to eq 'The first submodule'
@@ -78,6 +85,36 @@ RSpec.describe PaginationDecorator do
       )
       obj
     end
+      let(:pre_confidence_intro) do
+        page = MockTrainingPage.new('pre-confidence-intro', parent: mod)
+        def page.pre_confidence_intro?; true; end
+        def page.pre_confidence_question?; false; end
+        def page.feedback_question?; false; end
+        def page.heading; 'Pre-confidence intro'; end
+        def page.certificate?; false; end
+        def page.subsection?; false; end
+        page
+      end
+      let(:pre_confidence_question) do
+        page = MockTrainingPage.new('pre-confidence-question', parent: mod)
+        def page.pre_confidence_intro?; false; end
+        def page.pre_confidence_question?; true; end
+        def page.feedback_question?; false; end
+        def page.heading; 'Pre-confidence Q'; end
+        def page.certificate?; false; end
+        def page.subsection?; false; end
+        page
+      end
+      let(:normal_page) do
+        page = MockTrainingPage.new('normal', parent: mod)
+        def page.pre_confidence_intro?; false; end
+        def page.pre_confidence_question?; false; end
+        def page.feedback_question?; false; end
+        def page.heading; 'Normal'; end
+        def page.certificate?; false; end
+        def page.subsection?; false; end
+        page
+      end
     let(:mod) do
       instance_double(Training::Module,
                       content_sections: {

@@ -1,13 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe FeedbackPaginationDecorator do
+
+  let(:mock_contentful) { MockContentfulService.new }
+  let(:user) { create :user }
+  let(:mod) { mock_contentful.find('alpha') }
+  let(:content) { OpenStruct.new(name: 'feedback-radio-only', page_type: 'feedback', title: 'Feedback Radio Only') }
+
+  before do
+    allow(Training::Module).to receive(:by_name).and_return(mock_contentful.find('alpha'))
+    allow(Training::Module).to receive(:ordered).and_return([mock_contentful.find('alpha'), mock_contentful.find('bravo')])
+  end
+
   subject(:decorator) do
     described_class.new(content, user)
   end
-
-  let(:user) { create :user }
-  let(:mod) { Training::Module.by_name(:alpha) }
-  let(:content) { mod.page_by_name('feedback-radio-only') }
 
   it '#heading' do
     expect(decorator.heading).to eq 'Additional feedback'

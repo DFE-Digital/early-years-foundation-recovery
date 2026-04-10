@@ -1,10 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe ModuleOverviewDecorator do
-  subject(:decorator) { described_class.new(progress) }
 
-  let(:bravo) { Training::Module.by_name('bravo') }
+  let(:mock_contentful) { MockContentfulService.new }
+  let(:bravo) { mock_contentful.find('bravo') }
   let(:progress) { ModuleProgress.new(user: user, mod: bravo) }
+
+  before do
+    allow(Training::Module).to receive(:by_name).and_return(mock_contentful.find('bravo'))
+    allow(Training::Module).to receive(:ordered).and_return([mock_contentful.find('alpha'), mock_contentful.find('bravo')])
+  end
+
+  subject(:decorator) { described_class.new(progress) }
 
   include_context 'with progress'
 

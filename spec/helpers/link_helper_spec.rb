@@ -1,11 +1,14 @@
 require 'rails_helper'
 EventStub = Struct.new(:name, :properties, :time)
 describe 'LinkHelper', type: :helper do
-  let(:mod) { Training::Module.ordered.first }
+  let(:mock_contentful) { MockContentfulService.new }
+  let(:mod) { mock_contentful.find('alpha') }
   let(:user) { create(:user, :registered) }
 
   before do
     allow(helper).to receive(:current_user).and_return(user)
+    allow(Training::Module).to receive(:by_name).and_return(mock_contentful.find('alpha'))
+    allow(Training::Module).to receive(:ordered).and_return([mock_contentful.find('alpha'), mock_contentful.find('bravo')])
   end
 
   describe '#link_to_next' do
