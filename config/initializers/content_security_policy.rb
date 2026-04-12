@@ -56,7 +56,7 @@
 # Rails.application.config.content_security_policy do |policy|
 #   # @see https://www.contentful.com/developers/docs/tutorials/general/live-preview/#set-up-live-preview
 #   policy.frame_ancestors :self, 'https://app.contentful.com'
-# 
+#
 #   policy.default_src :self,
 #                      :https,
 #                      *GOVUK_DOMAINS
@@ -76,7 +76,7 @@
 #                      '*.ctfassets.net',
 #                      'github.com', # eyrecovery-dev.azurewebsites.net
 #                      :data # Base64 encoded images
-# 
+#
 #   policy.object_src  :none
 #   policy.script_src  :self,
 #                      *GOVUK_DOMAINS,
@@ -93,9 +93,9 @@
 #                      *GOOGLE_STATIC_DOMAINS,
 #                      *OPTIMIZE_DOMAINS,
 #                      :unsafe_inline
-# 
+#
 #   webpack_dev_server = %w[http://localhost:3035 ws://localhost:3035] if Rails.env.development?
-# 
+#
 #   policy.connect_src :self,
 #                      :https,
 #                      :wss,
