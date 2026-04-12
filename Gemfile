@@ -41,7 +41,7 @@ gem 'omniauth-rails_csrf_protection'
 gem 'slim-rails'
 
 # Headless CMS
-gem 'contentful_rails'
+# gem 'contentful_rails'
 
 # TODO: add ey-recovery to https://github.com/DFE-Digital/govuk-components
 gem 'govuk-components'

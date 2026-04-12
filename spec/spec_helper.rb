@@ -4,8 +4,6 @@ SimpleCov.start 'rails'
 
 require 'pry'
 
-# Make the mock Contentful service available in all specs
-require_relative 'support/mock_contentful_service'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|

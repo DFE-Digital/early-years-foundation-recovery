@@ -48,9 +48,9 @@ Rails.application.configure do
 
   # use integration GOV.UK One Login environment for development
   if ENV['ENVIRONMENT'].eql?('development')
-    config.gov_one_base_uri = credentials.dig(:gov_one, :integration, :base_uri)
-    config.gov_one_private_key = credentials.dig(:gov_one, :integration, :private_key)
-    config.gov_one_client_id = credentials.dig(:gov_one, :integration, :client_id)
+    config.gov_one_base_uri = credentials&.dig(:gov_one, :integration, :base_uri)
+    config.gov_one_private_key = credentials&.dig(:gov_one, :integration, :private_key)
+    config.gov_one_client_id = credentials&.dig(:gov_one, :integration, :client_id)
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).

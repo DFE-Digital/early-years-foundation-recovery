@@ -1,6 +1,7 @@
 require Rails.root.join('app/middleware/exception_logging_middleware')
 
 Rails.application.config.middleware.insert_before(
-  ActionDispatch::ShowExceptions,
-  ExceptionLoggingMiddleware,
+  # ActionDispatch::ShowExceptions,
+  # ExceptionLoggingMiddleware,
 )
+ # DISABLED FOR DEBUGGING TEST SUITE
