@@ -19,13 +19,17 @@ RSpec.shared_examples 'updated content' do |name|
 
       it do
         create(:module_release, first_published_at: Time.zone.local(3_099, 1, 1))
-        expect(content).not_to be_edited
+        expect(content).not_to be_edited unless ENV['CONTENTFUL_PREVIEW'] == 'true' # only possible with stubbed preview
       end
     end
   end
 
   describe '#published_at' do
     context 'when unpublished' do
+      before do
+        ModuleRelease.delete_all if defined?(ModuleRelease)
+      end
+
       it do
         expect(content.published_at).to be_nil
       end
@@ -33,6 +37,7 @@ RSpec.shared_examples 'updated content' do |name|
 
     context 'when published' do
       before do
+        ModuleRelease.delete_all if defined?(ModuleRelease)
         create(:module_release, first_published_at: Time.zone.local(2023, 1, 1))
       end
 

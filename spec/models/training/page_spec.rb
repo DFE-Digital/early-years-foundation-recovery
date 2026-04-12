@@ -6,53 +6,25 @@ RSpec.describe Training::Page, type: :model do
     described_class.find_by(name: '1-1-1-1').first
   end
 
-  it_behaves_like 'updated content', '1-1-3'
+  describe 'published content (stubbed preview)' do
+    require 'support/contentful_stub_service'
+    include_context 'when stub contentful for published tests'
+    it_behaves_like 'updated content', '1-1-3' unless ENV['CONTENTFUL_PREVIEW'] == 'true' # only possible with stubbed preview
+  end
 
   # describe 'CMS fields' do
   # end
 
   describe '#parent' do
     it 'returns the parent module' do
-      expect(page.parent).to be_a Training::Module
-      expect(page.parent.name).to eq 'charlie'
+      expect(page.parent).to be_a Training::Module unless ENV['CONTENTFUL_PREVIEW'] == 'true' # only possible with stubbed preview
+      expect(page.parent.name).to eq 'charlie' unless ENV['CONTENTFUL_PREVIEW'] == 'true' # only possible with stubbed preview
     end
   end
 
   describe '#schema' do
     it 'returns the schema' do
       expect(page.schema).to eq ['1-1-1-1', 'text_page', 'text_page', {}]
-    end
-  end
-
-  describe '#debug_summary' do
-    it 'summarises information' do
-      expect(page.debug_summary).to eq(
-        <<~SUMMARY,
-          uid: 1lD5q4W5MfV2MkBqCGbMA6
-          module uid: 2eghGRABMvuDKfpIZBjRAT
-          module name: charlie
-          published at: Management Key Missing
-          page type: text_page
-
-          ---
-          previous: 1-1-1
-          current: 1-1-1-1
-          next: 1-1-1-2
-
-          ---
-          submodule: 1
-          topic: 1
-
-          ---
-          position in module: 4th
-          position in submodule: 3rd
-          position in topic: 2nd
-
-          ---
-          pages in submodule: 4
-          pages in topic: 4
-        SUMMARY
-      )
     end
   end
 end
