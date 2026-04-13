@@ -13,25 +13,42 @@ module Training
     layout 'hero'
 
     def update
-      if save_response!
-        track_question_answer
-        redirect
+      if content.summative_question?
+        nonce = params[:submission_nonce]
+        if nonce.present? && session[:form_nonce] == nonce
+          if save_response!
+            track_question_answer
+            # Only consume nonce when assessment is completed (last question)
+            session.delete(:form_nonce) if content.last_assessment?
+            redirect
+          else
+            # On validation error, generate a new nonce for resubmission
+            new_nonce = SecureRandom.uuid
+            session[:form_nonce] = new_nonce
+            @submission_nonce = new_nonce
+            render 'training/questions/show', status: :unprocessable_entity
+          end
+        else
+          # If there are validation errors, show them (restore previous behavior)
+          if current_user_response && current_user_response.errors.any?
+            new_nonce = SecureRandom.uuid
+            session[:form_nonce] = new_nonce
+            @submission_nonce = new_nonce
+            render 'training/questions/show', status: :unprocessable_entity
+          else
+            # Nonce already used or missing: ignore duplicate submission
+            render plain: 'This form has already been submitted or is invalid.', status: :unprocessable_entity
+          end
+        end
       else
-        render 'training/questions/show', status: :unprocessable_content
+        # Formative and other questions: no nonce logic
+        if save_response!
+          track_question_answer
+          redirect
+        else
+          render 'training/questions/show', status: :unprocessable_entity
+        end
       end
-      # nonce = params[:submission_nonce]
-      # if nonce.present? && session[:submission_nonce] == nonce
-      #   session.delete(:submission_nonce)
-      #   if save_response!
-      #     track_question_answer
-      #     redirect
-      #   else
-      #     render 'training/questions/show', status: :unprocessable_content
-      #   end
-      # else
-      #   # Nonce already used or missing: ignore duplicate submission
-      #   render plain: 'This form has already been submitted or is invalid.', status: :unprocessable_entity
-      # end
     end
 
   private
