@@ -14,7 +14,7 @@ module Training
 
     def update
       if content.summative_question?
-        nonce = params[:submission_nonce]
+        nonce = params[:response] && params[:response][:submission_nonce]
         if nonce.present? && session[:form_nonce] == nonce
           if save_response!
             track_question_answer
@@ -26,6 +26,7 @@ module Training
             new_nonce = SecureRandom.uuid
             session[:form_nonce] = new_nonce
             @submission_nonce = new_nonce
+            flash.now[:alert] = "DEBUG: session[:form_nonce]=#{session[:form_nonce]} params[:submission_nonce]=#{params[:response]&.[](:submission_nonce)} @submission_nonce=#{@submission_nonce}"
             render 'training/questions/show', status: :unprocessable_entity
           end
         else
@@ -37,7 +38,8 @@ module Training
             render 'training/questions/show', status: :unprocessable_entity
           else
             # Nonce already used or missing: ignore duplicate submission
-            render plain: 'This form has already been submitted or is invalid.', status: :unprocessable_entity
+            redirect_to training_module_question_path(mod.name, content.name), Rails.logger.error("Duplicate or invalid submission detected for user #{current_user.id} on question #{content.name}")
+            # render plain: 'This form has already been submitted or is invalid.', status: :unprocessable_entity
           end
         end
       else
