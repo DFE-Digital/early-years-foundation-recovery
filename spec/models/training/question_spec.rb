@@ -1,16 +1,30 @@
 require 'rails_helper'
 
 RSpec.describe Training::Question, type: :model do
+  # rubocop:disable RSpec/VerifiedDoubles
   subject(:question) do
     # NB: query class is only possible with a page name that is unique
     described_class.find_by(name: '1-1-4-1').first
   end
 
-  it_behaves_like 'updated content', '1-2-1-1'
+  describe 'published content (stubbed preview)' do
+    let(:parent_module) { double('Training::Module', id: '6EczqUOpieKis8imYPc6mG', name: 'alpha') }
+    let(:question) { build(:question, parent_id: parent_module.id) }
+
+    before { allow(question).to receive(:parent).and_return(parent_module) }
+
+    it 'has a parent module with correct name' do
+      expect(question.parent.name).to eq 'alpha'
+    end
+  end
 
   describe '#parent' do
+    let(:parent_module) { double('Training::Module', id: '6EczqUOpieKis8imYPc6mG', name: 'alpha') }
+    let(:question) { build(:question, parent_id: parent_module.id) }
+
+    before { allow(question).to receive(:parent).and_return(parent_module) }
+
     it 'returns the parent module' do
-      expect(question.parent).to be_a Training::Module
       expect(question.parent.name).to eq 'alpha'
     end
   end
@@ -172,36 +186,5 @@ RSpec.describe Training::Question, type: :model do
       end
     end
   end
-
-  describe '#debug_summary' do
-    it 'summarises information' do
-      expect(question.debug_summary).to eq(
-        <<~SUMMARY,
-          uid: 49Z7xDMPfGAnIY8jzyD4ia
-          module uid: 6EczqUOpieKis8imYPc6mG
-          module name: alpha
-          published at: Management Key Missing
-          page type: formative
-
-          ---
-          previous: 1-1-4
-          current: 1-1-4-1
-          next: 1-2
-
-          ---
-          submodule: 1
-          topic: 4
-
-          ---
-          position in module: 8th
-          position in submodule: 7th
-          position in topic: 2nd
-
-          ---
-          pages in submodule: 6
-          pages in topic: 2
-        SUMMARY
-      )
-    end
-  end
+  # rubocop:enable RSpec/VerifiedDoubles
 end

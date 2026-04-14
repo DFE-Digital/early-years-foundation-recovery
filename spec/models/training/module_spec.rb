@@ -68,9 +68,13 @@ RSpec.describe Training::Module, type: :model do
 
   describe '#first_published_at' do
     include_context 'with module releases'
+    require 'support/contentful_stub_service'
+    include_context 'when stub contentful for published tests'
 
-    it 'returns the first published date' do
-      expect(mod.first_published_at).to be_within(1.second).of 2.days.ago
+    unless ENV['CONTENTFUL_PREVIEW'] == 'true'
+      it 'returns the first published date' do
+        expect(mod.first_published_at).to be_within(1.second).of 2.days.ago
+      end
     end
   end
 

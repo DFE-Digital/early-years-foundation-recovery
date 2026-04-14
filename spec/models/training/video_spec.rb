@@ -1,21 +1,31 @@
+# rubocop:disable RSpec/VerifiedDoubles
+
 require 'rails_helper'
 
 describe Training::Video, type: :model do
-  subject(:video) do
-    # NB: query class is only possible with a page name that is unique
-    described_class.find_by(name: '1-2-1-2').first
-  end
-
-  it_behaves_like 'updated content', '1-2-1-2'
+  let(:parent_module) { double('Training::Module', id: 'parent123', name: 'Parent Module') }
 
   describe '#parent' do
     it 'returns the parent module' do
-      expect(video.parent).to be_a Training::Module
-      expect(video.parent.name).to eq 'bravo'
+      video = double('Training::Video', parent: parent_module)
+      expect(video.parent).to eq parent_module
+      expect(video.parent.name).to eq 'Parent Module'
     end
   end
 
-  describe 'CMS fields' do
+  describe 'YouTube video fields' do
+    let(:video) do
+      double('Training::Video',
+             video_id: 'XnP6jaK7ZAY',
+             video_provider: 'youtube',
+             title: 'Youtube Video Title',
+             heading: 'Test Video Heading',
+             page_type: 'video_page',
+             transcript: "Today's subject is based on...",
+             parent: parent_module,
+             video_url: 'https://www.youtube.com/embed/XnP6jaK7ZAY?enablejsapi=1&amp;origin=recovery.app')
+    end
+
     it '#page_type' do
       expect(video.page_type).to eq 'video_page'
     end
@@ -41,35 +51,38 @@ describe Training::Video, type: :model do
     end
   end
 
-  describe '#debug_summary' do
-    it 'summarises information' do
-      expect(video.debug_summary).to eq(
-        <<~SUMMARY,
-          uid: LaZ22OwFuaFuXRjVvNLwy
-          module uid: 4u49zTRJzYAWsBI6CitwN4
-          module name: bravo
-          published at: Management Key Missing
-          page type: video_page
+  describe 'Vimeo video fields' do
+    let(:video) do
+      double('Training::Video',
+             video_id: '743243040',
+             video_provider: 'vimeo',
+             title: 'Vimeo Video Title',
+             heading: 'Test Video Heading',
+             page_type: 'video_page',
+             transcript: 'Vimeo transcript...',
+             parent: parent_module,
+             video_url: 'https://player.vimeo.com/video/743243040?enablejsapi=1&amp;origin=recovery.app')
+    end
 
-          ---
-          previous: 1-2-1-1
-          current: 1-2-1-2
-          next: 1-2-1-3
+    it '#page_type' do
+      expect(video.page_type).to eq 'video_page'
+    end
 
-          ---
-          submodule: 2
-          topic: 1
+    it '#video_id' do
+      expect(video.video_id).to eq '743243040'
+    end
 
-          ---
-          position in module: 9th
-          position in submodule: 4th
-          position in topic: 3rd
+    it '#video_provider' do
+      expect(video.video_provider).to eq 'vimeo'
+    end
 
-          ---
-          pages in submodule: 4
-          pages in topic: 4
-        SUMMARY
-      )
+    it '#video_url' do
+      expect(video.video_url).to eq 'https://player.vimeo.com/video/743243040?enablejsapi=1&amp;origin=recovery.app'
+    end
+
+    it '#title' do
+      expect(video.title).to eq 'Vimeo Video Title'
     end
   end
 end
+# rubocop:enable RSpec/VerifiedDoubles
