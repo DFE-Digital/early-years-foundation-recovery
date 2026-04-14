@@ -18,7 +18,7 @@ RSpec.describe 'Confidence check' do
   context 'when started' do
     it 'can be resumed' do
       visit '/modules/alpha'
-      click_on 'Resume module'
+      first(:link_or_button, 'Resume module').click
       expect(page).to have_current_path(first_question_path, ignore_query: true)
     end
   end

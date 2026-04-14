@@ -7,7 +7,6 @@
 - content_for :hero do
   .govuk-grid-row
     .govuk-grid-column-three-quarters-from-desktop class='govuk-!-padding-top-9 govuk-!-padding-bottom-0'
-
       = m('module.overview.summary', title: mod.heading, description: mod.description, outcomes: mod.outcomes, headings_start_with: 'xl')
       = render 'shared/start_button', link: link_to_action[1], text: link_to_action[0]
 
@@ -33,7 +32,6 @@
     - module_progress.sections.each do |section|
       - unless section[:hide]
         = render 'section', **section
-
 
     = render 'shared/start_button', link: link_to_action[1], text: link_to_action[0]
 
