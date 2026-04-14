@@ -25,14 +25,10 @@ module Training
     layout 'hero'
 
     def show
+      # Only generate a new nonce if not already present in the session
+      session[:form_nonce] ||= SecureRandom.uuid
+      @submission_nonce = session[:form_nonce]
       log_caching { render :show }
-
-      # Generate a unique key
-      # nonce = SecureRandom.uuid
-      # # Store the key in the session
-      # session[:form_nonce] = nonce
-      # # Pass the key to the form as a hidden field
-      # render_form(nonce: nonce)
     end
 
   private

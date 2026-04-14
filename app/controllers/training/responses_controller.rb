@@ -13,25 +13,39 @@ module Training
     layout 'hero'
 
     def update
-      if save_response!
+      if content.summative_question?
+        nonce = params[:response] && params[:response][:submission_nonce]
+        if nonce.present? && session[:form_nonce] == nonce
+          if save_response!
+            track_question_answer
+            # Only consume nonce when assessment is completed (last question)
+            session.delete(:form_nonce) if content.last_assessment?
+            redirect
+          else
+            # On validation error, generate a new nonce for resubmission
+            new_nonce = SecureRandom.uuid
+            session[:form_nonce] = new_nonce
+            @submission_nonce = new_nonce
+            flash.now[:alert] = "DEBUG: session[:form_nonce]=#{session[:form_nonce]} params[:submission_nonce]=#{params[:response]&.[](:submission_nonce)} @submission_nonce=#{@submission_nonce}"
+            render 'training/questions/show', status: :unprocessable_entity
+          end
+        elsif current_user_response && current_user_response.errors.any?
+          # If there are validation errors, show them (restore previous behavior)
+          new_nonce = SecureRandom.uuid
+          session[:form_nonce] = new_nonce
+          @submission_nonce = new_nonce
+          render 'training/questions/show', status: :unprocessable_entity
+        else
+          # Nonce already used or missing: ignore duplicate submission
+          redirect_to training_module_question_path(mod.name, content.name), Rails.logger.error("Duplicate or invalid submission detected for user #{current_user.id} on question #{content.name}")
+        end
+      elsif save_response!
+        # Formative and other questions: no nonce logic
         track_question_answer
         redirect
       else
-        render 'training/questions/show', status: :unprocessable_content
+        render 'training/questions/show', status: :unprocessable_entity
       end
-      # nonce = params[:submission_nonce]
-      # if nonce.present? && session[:submission_nonce] == nonce
-      #   session.delete(:submission_nonce)
-      #   if save_response!
-      #     track_question_answer
-      #     redirect
-      #   else
-      #     render 'training/questions/show', status: :unprocessable_content
-      #   end
-      # else
-      #   # Nonce already used or missing: ignore duplicate submission
-      #   render plain: 'This form has already been submitted or is invalid.', status: :unprocessable_entity
-      # end
     end
 
   private

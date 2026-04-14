@@ -517,7 +517,7 @@ class User < ApplicationRecord
 
   # @return [String]
   def visit_token
-    visits.last.visit_token
+    visits.last&.visit_token
   end
 
   def feedback_attributes
