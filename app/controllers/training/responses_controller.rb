@@ -38,7 +38,6 @@ module Training
         else
           # Nonce already used or missing: ignore duplicate submission
           redirect_to training_module_question_path(mod.name, content.name), Rails.logger.error("Duplicate or invalid submission detected for user #{current_user.id} on question #{content.name}")
-          # render plain: 'This form has already been submitted or is invalid.', status: :unprocessable_entity
         end
       elsif save_response!
         # Formative and other questions: no nonce logic
