@@ -29,27 +29,23 @@ module Training
             flash.now[:alert] = "DEBUG: session[:form_nonce]=#{session[:form_nonce]} params[:submission_nonce]=#{params[:response]&.[](:submission_nonce)} @submission_nonce=#{@submission_nonce}"
             render 'training/questions/show', status: :unprocessable_entity
           end
-        else
+        elsif current_user_response && current_user_response.errors.any?
           # If there are validation errors, show them (restore previous behavior)
-          if current_user_response && current_user_response.errors.any?
-            new_nonce = SecureRandom.uuid
-            session[:form_nonce] = new_nonce
-            @submission_nonce = new_nonce
-            render 'training/questions/show', status: :unprocessable_entity
-          else
-            # Nonce already used or missing: ignore duplicate submission
-            redirect_to training_module_question_path(mod.name, content.name), Rails.logger.error("Duplicate or invalid submission detected for user #{current_user.id} on question #{content.name}")
-            # render plain: 'This form has already been submitted or is invalid.', status: :unprocessable_entity
-          end
-        end
-      else
-        # Formative and other questions: no nonce logic
-        if save_response!
-          track_question_answer
-          redirect
-        else
+          new_nonce = SecureRandom.uuid
+          session[:form_nonce] = new_nonce
+          @submission_nonce = new_nonce
           render 'training/questions/show', status: :unprocessable_entity
+        else
+          # Nonce already used or missing: ignore duplicate submission
+          redirect_to training_module_question_path(mod.name, content.name), Rails.logger.error("Duplicate or invalid submission detected for user #{current_user.id} on question #{content.name}")
+          # render plain: 'This form has already been submitted or is invalid.', status: :unprocessable_entity
         end
+      elsif save_response!
+        # Formative and other questions: no nonce logic
+        track_question_answer
+        redirect
+      else
+        render 'training/questions/show', status: :unprocessable_entity
       end
     end
 
