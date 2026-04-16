@@ -1,24 +1,24 @@
 # ------------------------------------------------------------------------------
 # Base - AMD64 & ARM64 compatible
 # ------------------------------------------------------------------------------
-FROM ruby:3.4.5-alpine as base
+FROM ruby:3.4.9-alpine AS base
 
 RUN apk add --no-cache --no-progress --no-check-certificate build-base less curl tzdata gcompat
 
-ENV TZ Europe/London
+ENV TZ=Europe/London
 
 # ------------------------------------------------------------------------------
 # Dependencies
 # ------------------------------------------------------------------------------
-FROM base as deps
+FROM base AS deps
 
-LABEL org.opencontainers.image.description "Application Dependencies"
+LABEL org.opencontainers.image.description="Application Dependencies"
 
 RUN apk add --no-cache --no-progress --no-check-certificate postgresql-dev yarn chromium yaml-dev
 
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
-ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
-ENV APP_HOME /build
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+ENV APP_HOME=/build
 
 WORKDIR ${APP_HOME}
 
@@ -46,18 +46,18 @@ FROM otel/opentelemetry-collector-contrib:latest AS otel-collector
 FROM base AS app
 
 LABEL org.opencontainers.image.source=https://github.com/DFE-Digital/early-years-foundation-recovery
-LABEL org.opencontainers.image.description "Early Years Recovery Rails Application"
+LABEL org.opencontainers.image.description="Early Years Recovery Rails Application"
 
 RUN echo "Welcome to the EYFS Recovery Application" > /etc/motd
 RUN apk add --no-cache --no-progress --no-check-certificate postgresql-dev yarn chromium font-liberation openssh
 RUN echo "root:Docker!" | chpasswd && cd /etc/ssh/ && ssh-keygen -A
 
-ENV GROVER_NO_SANDBOX true
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
-ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
-ENV APP_HOME /srv
-ENV RAILS_ENV ${RAILS_ENV:-production}
-ENV ENVIRONMENT ${ENVIRONMENT:-production}
+ENV GROVER_NO_SANDBOX=true
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+ENV APP_HOME=/srv
+ENV RAILS_ENV=${RAILS_ENV:-production}
+ENV ENVIRONMENT=${ENVIRONMENT:-production}
 
 RUN mkdir -p ${APP_HOME}/tmp/pids ${APP_HOME}/log
 
@@ -102,7 +102,7 @@ CMD ["sh", "-c", "otelcol --config=/etc/otel-collector-config.yml >/dev/null 2>&
 # ------------------------------------------------------------------------------
 # Development Stage - ./bin/docker-dev
 # ------------------------------------------------------------------------------
-FROM app as dev
+FROM app AS dev
 
 RUN apk add --no-cache --no-progress --no-check-certificate postgresql-client npm graphviz
 RUN npm install --global adr-log contentful-cli
@@ -114,7 +114,7 @@ RUN bundle install --no-binstubs --retry=10 --jobs=4
 # ------------------------------------------------------------------------------
 # Test Stage - ./bin/docker-rspec
 # ------------------------------------------------------------------------------
-FROM app as test
+FROM app AS test
 
 RUN apk add --no-cache --no-progress --no-check-certificate postgresql-client
 
@@ -132,7 +132,7 @@ CMD ["bundle", "exec", "rspec"]
 # ------------------------------------------------------------------------------
 # Pa11y CI - ./bin/docker-pa11y
 # ------------------------------------------------------------------------------
-FROM base as pa11y
+FROM base AS pa11y
 
 LABEL org.opencontainers.image.description "Accessibility auditor"
 
