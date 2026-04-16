@@ -24,7 +24,7 @@ RSpec.describe 'Summative assessment', type: :system do
   context 'when a user has reached the assessment' do
     before do
       visit '/modules/alpha'
-      click_on 'Resume module'
+      first(:link_or_button, 'Resume module').click
     end
 
     it 'can resume from the module overview page' do

@@ -11,7 +11,7 @@ RSpec.describe 'Formative question' do
   context 'when a user has visited each page up to and including a formative question' do
     it 'call to action resumes the module at that question' do
       visit '/modules/alpha'
-      click_on 'Resume module'
+      first(:link_or_button, 'Resume module').click
       expect(page).to have_current_path '/modules/alpha/questionnaires/1-1-4-1', ignore_query: true
     end
   end
