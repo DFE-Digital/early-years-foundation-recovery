@@ -51,7 +51,7 @@ RSpec.describe 'Application configuration' do
     end
 
     specify do
-      expect(User.count).to eq 3
+      expect(User.count).to eq 2
     end
   end
 
