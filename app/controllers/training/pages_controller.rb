@@ -3,7 +3,8 @@ module Training
     include Learning
 
     before_action :authenticate_registered_user!
-    before_action :track_events, only: :show
+    before_action :ensure_content_and_mod_present, only: :show
+    before_action :track_events, only: :show, if: -> { content.present? && mod.present? }
 
     helper_method :mod,
                   :content,
@@ -19,12 +20,21 @@ module Training
     end
 
     def show
+      # ensure_content_and_mod_present will render not_found if needed
+      return if performed?
+
       if content.is_question?
         redirect_to training_module_question_path(mod.name, content.name)
       elsif content.assessment_results?
         redirect_to training_module_assessment_path(mod.name, content.name)
       else
         log_caching { render_page }
+      end
+    end
+
+    def ensure_content_and_mod_present
+      unless content.present? && mod.present?
+        render('errors/not_found', status: :not_found) and return
       end
     end
 

@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   helper_method :page
 
   def show
-    if page.blank?
+    if page.blank? || !page
       return render('errors/not_found', status: :not_found) if request.format.html?
 
       return head :not_found
