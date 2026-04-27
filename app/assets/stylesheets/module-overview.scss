@@ -162,3 +162,7 @@ $progress-bar-container-width: 81px;
 .module-call-to-action {
   @include govuk-responsive-margin(8, 'top');
 }
+
+.module-call-to-action--top {
+  margin-top: govuk-spacing(2) !important;
+}
