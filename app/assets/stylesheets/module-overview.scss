@@ -129,7 +129,7 @@ $progress-bar-container-width: 81px;
 
   @include govuk-media-query($until: tablet) {
     font-size: 1rem;
-    padding-right: 120px; 
+    padding-right: 120px;
   }
 
   @media (max-width: 320px) {
