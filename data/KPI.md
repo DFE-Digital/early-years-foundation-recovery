@@ -134,3 +134,4 @@ Particular states, such as `module_time_to_completion` or a user's **"ttc"** key
 ```ruby
 User.all.select { |u| u.module_time_to_completion.has_value?(nil) }
 ```
+**Do not use events/visit table when generating KPIs**

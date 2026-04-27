@@ -1,7 +1,7 @@
 # Contentful
 
 - [EY Recovery Service](https://app.contentful.com/spaces/dvmeh832nmjc)
-- [API Keys](https://app.contentful.com/spaces/dvmeh832nmjc/api/keys/) are granted access to new environments but targeting aliases is preferred.
+- [API Keys](https://app.contentful.com/spaces/dvmeh832nmjc/api/keys/) are granted access to new environments but targeting aliases is preferred. These keys are readily available in Contentful.
 - [User roles](https://app.contentful.com/spaces/dvmeh832nmjc/settings/users).
 
 ### TrainingModule text fields
