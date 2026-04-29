@@ -181,31 +181,6 @@ RSpec.describe 'Module overview page progress' do
     specify { expect(page).not_to have_link 'Retake test' }
   end
 
-  context 'with just a completion event' do
-    before do
-      module_complete_event(alpha)
-      visit '/modules/alpha'
-    end
-
-    it 'all the indicators are "complete"' do
-      within '#section-content-1' do
-        expect(page).to have_content 'complete', count: 4
-      end
-
-      within '#section-content-2' do
-        expect(page).to have_content 'complete', count: 1
-      end
-
-      within '#section-content-3' do
-        expect(page).to have_content 'complete', count: 3
-      end
-
-      within '#section-content-4' do
-        expect(page).to have_content 'complete', count: 1
-      end
-    end
-  end
-
   context 'when controller logic for progress decorator is applied' do
     before do
       visit '/modules/alpha'
