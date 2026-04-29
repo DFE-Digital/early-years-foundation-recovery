@@ -20,9 +20,6 @@ module Training
     end
 
     def show
-      # ensure_content_and_mod_present will render not_found if needed
-      return if performed?
-
       if content.is_question?
         redirect_to training_module_question_path(mod.name, content.name)
       elsif content.assessment_results?
