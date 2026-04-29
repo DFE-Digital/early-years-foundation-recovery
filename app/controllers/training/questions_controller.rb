@@ -14,7 +14,6 @@ module Training
   class QuestionsController < ApplicationController
     include Learning
 
-
     before_action :authenticate_registered_user!
     before_action :ensure_content_and_mod_present, only: :show
     before_action :track_events, only: :show, if: -> { content.present? && mod.present? }
@@ -26,7 +25,6 @@ module Training
 
     layout 'hero'
 
-
     def show
       # Only generate a new nonce if not already present in the session
       session[:form_nonce] ||= SecureRandom.uuid
@@ -34,15 +32,13 @@ module Training
       log_caching { render :show }
     end
 
-    private
+  private
 
     def ensure_content_and_mod_present
       unless content.present? && mod.present?
         render('errors/not_found', status: :not_found) and return
       end
     end
-
-  private
 
     # @see Tracking
     # @return [Event] Show action
