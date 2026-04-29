@@ -174,7 +174,10 @@ class CustomRenderer < GovukMarkdown::Renderer
       else 'govuk-heading-s'
       end
     css_class = 'govuk-heading-l' if text.eql?('Who this training is for') || text.eql?('Modules') || text.eql?('Why you should take this training')
-    slug = text.downcase.gsub(/<[^>]*>/, '').gsub(/[^a-z0-9\s-]/i, '').strip.gsub(/\s+/, '-')
+
+    # Use Rails sanitize helper to remove HTML tags and dangerous content
+    sanitized_text = ActionView::Base.full_sanitizer.sanitize(text)
+    slug = sanitized_text.downcase.gsub(/[^a-z0-9\s-]/i, '').strip.gsub(/\s+/, '-')
     %(<h#{heading_level} id="#{slug}" class="#{css_class}">#{text}</h#{heading_level}>)
   end
 end
