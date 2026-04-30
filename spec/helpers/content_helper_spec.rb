@@ -291,6 +291,16 @@ describe 'ContentHelper', type: :helper do
           HTML
         end
       end
+
+      context 'with HTML and special characters in header' do
+        let(:input) { '## <b>Header!</b> <script>alert(1)</script> @2026' }
+
+        it 'sanitizes header id correctly' do
+          expect(html).to include '<h2 id="header-2026" class="govuk-heading-m">'
+          expect(html).not_to include '<script>'
+          expect(html).not_to include '</script>'
+        end
+      end
     end
   end
 end
