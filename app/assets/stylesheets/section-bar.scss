@@ -24,11 +24,11 @@ p#progress-pages {
 
 #progress-inactive {
   height: $progress-bar-height;
-  background-color: govuk-organisation-colour('department-for-education');
+  background-color: govuk-colour('white');
+  border: govuk-colour('black') solid 2px;
 
   #progress-active {
     height: $progress-bar-height;
     background-color: $govuk-success-colour;
-    border-right: calc($progress-bar-height / 3) govuk-colour('white') solid;
   }
 }
