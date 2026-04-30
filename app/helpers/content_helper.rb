@@ -112,6 +112,10 @@ module ContentHelper
     )
   end
 
+  def completed_subsection(status)
+    status.eql?(:completed)
+  end
+
   # @param status [String, Symbol]
   # @return [String]
   def progress_indicator(status)
