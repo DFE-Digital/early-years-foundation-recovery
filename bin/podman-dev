@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# ------------------------------------------------------------------------------
+set -e
+
+podman compose \
+  -f docker-compose.yml \
+  -f docker-compose.dev.yml \
+  --project-name recovery \
+  up --detach app otel-collector
+
+podman attach recovery_dev
