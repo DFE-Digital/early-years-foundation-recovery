@@ -1,7 +1,7 @@
 module LinkHelper
   # @return [String]
   def destroy_user_session_path
-    session[:id_token].present? && !current_user.test_user? ? logout_uri.to_s : super
+    session[:id_token].present? ? logout_uri.to_s : super
   end
 
   # @return [String, nil]

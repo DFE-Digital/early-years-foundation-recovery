@@ -21,9 +21,6 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     get 'users/sign_out', to: 'users/sessions#destroy' # post_logout_redirect_uri
-    if Rails.env.development? || Rails.env.test?
-      get 'users/review', to: 'users/sessions#sign_in_test_user'
-    end
   end
 
   namespace :registration do

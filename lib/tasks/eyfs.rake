@@ -43,7 +43,7 @@ namespace :eyfs do
   # @example
   #
   #   $ rake eyfs:whats_new
-  #   $ rake 'eyfs:whats_new[completed@example.com,registered@example.com]'
+  #   $ rake 'eyfs:whats_new[confirmed@example.com,registered@example.com]'
   #   $ rake "eyfs:whats_new[`cat emails.csv`]"
   #
   desc "Enable the post login 'What's new' page"
@@ -70,11 +70,14 @@ namespace :eyfs do
   end
 
   # FIXME: not suitable for running on a deployment outside a worker job
-  desc 'Fake completed course'
-  task state: :environment do |_task, _args|
+  desc 'Fake completed course for an existing user'
+  task :state, [:email] => :environment do |_task, args|
     require 'content_seed'
 
-    user = User.find_by(email: 'completed@example.com')
+    email = args[:email] || ENV['STATE_USER_EMAIL']
+    raise ArgumentError, 'Provide a user email as eyfs:state[email] or STATE_USER_EMAIL' if email.blank?
+
+    user = User.find_by!(email: email)
 
     Training::Module.ordered.reject(&:draft?).each do |mod|
       ContentSeed.new(mod: mod, user: user).call

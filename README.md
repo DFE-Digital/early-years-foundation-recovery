@@ -114,12 +114,14 @@ The commands run common tasks inside containers:
 - `bin/docker-dev` starts `Procfile.dev`, containerised equivalent of `bin/dev`,
     using the `docker-compose.dev.yml` override
     Additionally, it will install bundle and yarn dependencies.
+- `bin/podman-dev` starts the same development stack via Podman Compose
 - `bin/docker-rails erd` generate an Entity Relationship Diagram
 - `bin/docker-rails db:seed` populates the containerised postgres database
 - `bin/docker-rails console` drops into a running development environment or starts one,
     containerised equivalent of `bin/rails console`
 - `bin/docker-rspec -f doc` runs the test suite with optional arguments, containerised
     equivalent of `bin/rspec`
+- `bin/podman-rspec -f doc` starts the same test stack via Podman Compose
 - `bin/docker-doc` runs a YARD documentation server
 - `bin/docker-uml` exports UML diagrams as default PNGs
 - `bin/docker-pa11y` runs WCAG checks against a generated `sitemap.xml`
