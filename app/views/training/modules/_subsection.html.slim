@@ -1,5 +1,5 @@
 li.module-section--item
-  - if completed_subsection(status)
+  - if next_page_name
     = govuk_link_to heading, training_module_page_path(mod_name, next_page_name)
   - else
     = heading
