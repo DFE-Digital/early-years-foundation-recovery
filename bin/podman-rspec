@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# ------------------------------------------------------------------------------
+# If the working directory is not mounted as a volume, then the test environment
+# RAILS_MASTER_KEY variable must be passed in.
+#
+# This behaviour is used in a GitHub workflow, however this script adds the mount
+#
+set -e
+
+host_pwd="$PWD"
+
+if pwd -W >/dev/null 2>&1; then
+  host_pwd="$(pwd -W)"
+fi
+
+MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL='*' podman compose \
+  -f docker-compose.yml \
+  -f docker-compose.test.yml \
+  --project-name recovery \
+  run \
+  --volume="${host_pwd}:/srv" \
+  --name recovery_rspec \
+  --rm app \
+  rspec "$@"

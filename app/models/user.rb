@@ -50,16 +50,6 @@ class User < ApplicationRecord
     user
   end
 
-  # @return [User, nil]
-  def self.test_user
-    find_by(email: 'completed@example.com')
-  end
-
-  # @return [Boolean]
-  def test_user?
-    email == 'completed@example.com'
-  end
-
   attr_accessor :context
 
   devise :database_authenticatable,
