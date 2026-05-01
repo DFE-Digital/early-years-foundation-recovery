@@ -388,20 +388,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe 'authentication bypass for developers' do
-    let(:user) { create :user, email: 'completed@example.com' }
-
-    describe '.test_user' do
-      it 'returns the completed seeded user' do
-        expect(user).to eq described_class.test_user
-      end
-    end
-
-    describe '#test_user?' do
-      specify { expect(user).to be_test_user }
-    end
-  end
-
   describe '#response_for' do
     subject(:response) { user.response_for(question) }
 

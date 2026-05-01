@@ -8,19 +8,6 @@ confirmed@example.com:
   terms_and_conditions_agreed_at: <%= 1.minute.ago %>
   confirmed_at: <%= 1.minute.ago %>
 
-completed@example.com:
-  password: <%= Rails.configuration.user_password %>
-  terms_and_conditions_agreed_at: <%= 1.minute.ago %>
-  confirmed_at: <%= 1.minute.ago %>
-  first_name: Demo
-  last_name: User
-  setting_type_id: other
-  setting_type_other: Childminder
-  role_type: other
-  role_type_other: Childminder
-  training_emails: true
-  registration_complete: true
-
 <% if ENV['DEV_EMAIL'] %>
 <%= ENV['DEV_EMAIL'] %>:
   gov_one_id: <%= ENV['DEV_GOV_ONE_TOKEN'] %>

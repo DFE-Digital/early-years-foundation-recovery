@@ -5,7 +5,7 @@
 #       "url": "http://app:3000/my-modules",
 #       "actions": [
 #         "wait for path to be /users/sign-in",
-#         "set field #user-email-field to completed@example.com",
+#         "set field #user-email-field to confirmed@example.com",
 #         "set field #user-password-field to StrongPassword",
 #         "click element #sign-in",
 #         "wait for element h2#govuk-notification-banner-title to be visible",

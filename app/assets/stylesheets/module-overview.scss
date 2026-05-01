@@ -129,7 +129,7 @@ $progress-bar-container-width: 81px;
 
   @include govuk-media-query($until: tablet) {
     font-size: 1rem;
-    padding-right: 120px; 
+    padding-right: 120px;
   }
 
   @media (max-width: 320px) {
@@ -161,4 +161,8 @@ $progress-bar-container-width: 81px;
 
 .module-call-to-action {
   @include govuk-responsive-margin(8, 'top');
+}
+
+.module-call-to-action--top {
+  margin-top: govuk-spacing(2) !important;
 }
