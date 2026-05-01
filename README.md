@@ -110,6 +110,8 @@ There are a number of convenience scripts to make working with **Docker** easier
 All containers for the project are named with the prefix `recovery_`.
 The project uses chained **Docker Compose** files to prepare different environments.
 
+There are also several scripts which can be run if Podman is installed. All of these Podman-specific scripts start with `bin/podman-...`. All Docker-related scripts start with `bin/docker-...`
+
 These commands help maintain your containerised workspace:
 
 - `bin/docker-build` creates tagged images for all the services
