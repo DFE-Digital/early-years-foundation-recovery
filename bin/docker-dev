@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 # ------------------------------------------------------------------------------
+# Historical use only. Use podman-dev instead.
+# ------------------------------------------------------------------------------
 set -e
 
 docker-compose \
   -f docker-compose.yml \
   -f docker-compose.dev.yml \
   --project-name recovery \
-  up --detach app otel-collector
+  up --detach app otel-collector gov-one-simulator
 
 docker attach recovery_dev

@@ -251,6 +251,35 @@ or in the UK Government digital slack workspace in the `#govuk-notify` channel.
 GOV.UK One Login admin tool exists for managing the integration environment client config.
 It can be accessed at <https://admin.sign-in.service.gov.uk> (currently only 1 email can access the client config).
 
+### Local development with the simulator
+
+For local development CDT runs against the official
+[GOV.UK One Login simulator](https://github.com/govuk-one-login/simulator)
+([docs](https://tech-docs.account.gov.uk/test-your-integration/gov-uk-one-login-simulator/))
+
+The simulator is started automatically by `bin/podman-dev`
+as the `gov-one-simulator` service in `docker-compose.dev.yml`. 
+
+Sanity-check with:
+```sh
+curl http://localhost:4000/.well-known/openid-configuration
+```
+
+The app reads its GOV.UK One Login configuration with env-var-first precedence
+(see `config/application.rb`); the dev defaults are in `.env.example`:
+
+| Variable                   | Dev default                                      |
+| -------------------------- | ------------------------------------------------ |
+| `GOV_ONE_BASE_URI`         | `http://gov-one-simulator:4000`                  |
+| `GOV_ONE_CLIENT_ID`        | `cdt-local-dev`                                  |
+| `GOV_ONE_PRIVATE_KEY_PATH` | `/srv/config/gov_one/dev_private_key.pem`        |
+
+The committed `config/gov_one/dev_private_key.pem` is the publicly-documented
+default keypair from the GOV.UK simulator docs — **development only, never used
+in any deployed environment**. The matching public key is pinned on the
+simulator service in `docker-compose.dev.yml` so signature validation works
+regardless of any future change to the simulator image's bundled defaults.
+
 ### Account Registration
 
 Register an account on the integration OIDC used in development <https://signin.integration.account.gov.uk/sign-in-or-create>.

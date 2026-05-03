@@ -56,10 +56,12 @@ private
 
   # @param id_token [Hash]
   # @return [Boolean]
+  #
+  # The `iss` comparison is tolerant of a trailing slash so that the local GOV.UK One Login simulator (which has `iss` without a trailing `/`) and the real GOV.UK One Login service (which has `iss` with a trailing `/`) are both valid.
   def valid_id_token?(id_token)
     id_token.present? &&
       id_token['nonce'] == session[:gov_one_auth_nonce] &&
-      id_token['iss'] == "#{Rails.application.config.gov_one_base_uri}/" &&
+      id_token['iss'].to_s.chomp('/') == Rails.application.config.gov_one_base_uri.to_s.chomp('/') &&
       id_token['aud'] == Rails.application.config.gov_one_client_id
   end
 

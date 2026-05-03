@@ -38,7 +38,8 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
   if Rails.application.preview?
-    # Contentful Live-Preview of secured pages
+    # Contentful Live-Preview of secured pages, we need to set the cookies to none to allow the preview to work
+    # this cannot be set to strict as it will break gov one login
     config.action_dispatch.cookies_same_site_protection = :none
     # elsif Rails.application.live?
     #   config.action_dispatch.cookies_same_site_protection = :strict
