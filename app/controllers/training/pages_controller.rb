@@ -20,6 +20,7 @@ module Training
     end
 
     def show
+      # Redirect to question or assessment if applicable, otherwise render page
       if content.is_question?
         redirect_to training_module_question_path(mod.name, content.name)
       elsif content.assessment_results?
