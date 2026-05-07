@@ -10,15 +10,17 @@ Optionally create `.env` to override or set default variables.
 
 ## Dependencies
 
-Ruby version `3.3.x`
+Ruby version `3.4.x`
 Node version `20.18.x`
 PostgreSQL version `15.17`
 Yarn version `4.0.x`
 
 Suggest using [asdf][asdf] for local development.
+It is recommended to install Ruby, Postgres and Nodejs using asdf (see instructions in 'Working locally' section). You may also be required to install dependencies to use these versions
 
 ## Getting Started
 
+### Run locally
 1. Clone the [repository][app-repo]
 2. Install [git-secrets](#git-secrets)
 3. Obtain the master keys
@@ -26,6 +28,15 @@ Suggest using [asdf][asdf] for local development.
 5. Run `yarn` to install node dependencies
 6. Copy the .env.example settings into the .env file
 7. Run `bin/dev` to launch the app on http://localhost:3000
+
+### Run through containerised environment
+1. Clone the [repository][app-repo]
+2. Install [git-secrets](#git-secrets)
+3. Obtain the master keys
+4. Run `bundle install` to install the gem dependencies
+5. Run `yarn` to install node dependencies
+6. Copy the .env.example settings into the .env file
+7. Run `bin/docker-dev` or `bin/podman-dev` to launch the app on http://localhost:3000
 
 ## Useful Links
 
@@ -99,6 +110,8 @@ There are a number of convenience scripts to make working with **Docker** easier
 All containers for the project are named with the prefix `recovery_`.
 The project uses chained **Docker Compose** files to prepare different environments.
 
+There are also several scripts which can be run if Podman is installed. All of these Podman-specific scripts start with `bin/podman-...`. All Docker-related scripts start with `bin/docker-...`
+
 These commands help maintain your containerised workspace:
 
 - `bin/docker-build` creates tagged images for all the services
@@ -125,6 +138,7 @@ The commands run common tasks inside containers:
 - `bin/docker-doc` runs a YARD documentation server
 - `bin/docker-uml` exports UML diagrams as default PNGs
 - `bin/docker-pa11y` runs WCAG checks against a generated `sitemap.xml`
+- `bin/docker-stylelint "name_of_file_goes_here"` runs stylelint (css linter)
 
 ## Using Rake
 
@@ -290,6 +304,10 @@ Production console access
 - https://eyrecovery-dev.scm.azurewebsites.net/webssh/host
 - https://eyrecovery-stage.scm.azurewebsites.net/webssh/host
 - https://eyrecovery-prod.scm.azurewebsites.net/webssh/host
+
+### Application Insights
+
+Application Insights *via* an open telemetry collector is configured to pass through to Azure Application Insights. This is being used to retrieve metrics, and more diagnostic logging, for the service.
 
 
 ## Programmatic testing
