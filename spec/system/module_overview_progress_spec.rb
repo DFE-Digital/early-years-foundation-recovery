@@ -138,9 +138,9 @@ RSpec.describe 'Module overview page progress' do
       end
     end
 
-    it 'the topic is not a link' do
+    it 'the topic is a link' do
       within '#section-content-1 .module-section--container .module-section--item:nth-child(3)' do
-        expect(page).not_to have_link('1-1-3', href: '/modules/alpha/content-pages/1-1-3')
+        expect(page).to have_link('1-1-3', href: '/modules/alpha/content-pages/1-1-3')
       end
     end
   end
