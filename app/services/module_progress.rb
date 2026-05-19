@@ -53,6 +53,10 @@ class ModuleProgress
     visited.last
   end
 
+  def resume_page
+    mod.page_by_name(milestone) || mod.first_content_page
+  end
+
   # @return [Training::Page, Training::Question, Training::Video]
   # def resume_page
   #   milestone_page = mod.page_by_name(milestone)
