@@ -204,6 +204,12 @@ RSpec.describe 'Module overview page progress' do
         expect(page).to have_content 'complete', count: 1
       end
     end
+
+    it 'renders completed topics as links' do
+      expect(page).to have_link('1-1-1', href: '/modules/alpha/content-pages/1-1-1')
+      expect(page).to have_link('1-2-1', href: '/modules/alpha/content-pages/1-2-1')
+      expect(page).to have_link('Reflect on your learning', href: '/modules/alpha/content-pages/1-3-3')
+    end
   end
 
   context 'when controller logic for progress decorator is applied' do
