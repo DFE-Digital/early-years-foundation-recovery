@@ -132,8 +132,9 @@ private
                           status(subsection_item.subsection_content)
                         end
 
-    # Started and completed topics should always link to their topic header page.
-    if %i[started completed].include?(subsection_status)
+    # Completed topics should always link to their topic header page.
+    # For in-progress topics, keep existing clickability checks.
+    if subsection_status.eql?(:completed)
       furthest_topic_page = subsection_item
     elsif clickable?(subsection_item: subsection_item, submodule: submodule)
       furthest_topic_page = subsection_status.eql?(:started) ? resume_page : subsection_item
