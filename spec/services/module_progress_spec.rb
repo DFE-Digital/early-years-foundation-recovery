@@ -80,22 +80,46 @@ RSpec.describe ModuleProgress do
   end
 
   describe '#resume_page' do
-    before do
-      UserModuleProgress.create!(
-        user: user,
-        module_name: 'alpha',
-        started_at: now - 5.minutes,
-        last_page: '1-1-3-1',
-        visited_pages: {
-          'what-to-expect' => (now - 5.minutes).iso8601,
-          '1-1' => (now - 4.minutes).iso8601,
-          '1-1-3-1' => (now - 1.minute).iso8601,
-        },
-      )
+    context 'when there are no earlier gaps' do
+      before do
+        UserModuleProgress.create!(
+          user: user,
+          module_name: 'alpha',
+          started_at: now - 5.minutes,
+          last_page: '1-1-3',
+          visited_pages: {
+            'what-to-expect' => (now - 5.minutes).iso8601,
+            '1-1' => (now - 4.minutes).iso8601,
+            '1-1-1' => (now - 3.minutes).iso8601,
+            '1-1-2' => (now - 2.minutes).iso8601,
+            '1-1-3' => (now - 1.minute).iso8601,
+          },
+        )
+      end
+
+      it 'is the most recently visited page' do
+        expect(progress.resume_page.name).to eq '1-1-3'
+      end
     end
 
-    it 'is the most recently visited page' do
-      expect(progress.resume_page.name).to eq '1-1-3-1'
+    context 'when the learner skipped ahead' do
+      before do
+        UserModuleProgress.create!(
+          user: user,
+          module_name: 'alpha',
+          started_at: now - 5.minutes,
+          last_page: '1-1-3-1',
+          visited_pages: {
+            'what-to-expect' => (now - 5.minutes).iso8601,
+            '1-1' => (now - 4.minutes).iso8601,
+            '1-1-3-1' => (now - 1.minute).iso8601,
+          },
+        )
+      end
+
+      it 'returns the earliest unvisited page' do
+        expect(progress.resume_page.name).to eq '1-1-1'
+      end
     end
   end
 

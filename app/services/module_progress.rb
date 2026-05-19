@@ -55,7 +55,20 @@ class ModuleProgress
 
   # @return [Training::Page, Training::Question, Training::Video]
   def resume_page
-    mod.page_by_name(milestone) || mod.first_content_page
+    milestone_page = mod.page_by_name(milestone)
+    return unvisited.first || mod.first_content_page if milestone_page.nil?
+
+    prior_pages = []
+    mod.content.each do |page|
+      break if page.name.eql?(milestone_page.name)
+
+      prior_pages << page
+    end
+
+    # If a learner has skipped ahead, route them to the earliest gap.
+    return unvisited.first if prior_pages.any? { |page| !visited?(page) }
+
+    milestone_page
   end
 
   # @see CourseProgress

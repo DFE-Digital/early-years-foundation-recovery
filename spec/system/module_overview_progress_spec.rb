@@ -145,6 +145,18 @@ RSpec.describe 'Module overview page progress' do
     end
   end
 
+  context 'when a learner skips ahead by URL' do
+    before do
+      start_module(alpha)
+      visit '/modules/alpha/content-pages/1-1-3-1'
+      visit '/modules/alpha'
+    end
+
+    it 'resumes from the earliest incomplete page' do
+      expect(page).to have_link 'Resume module', href: '/modules/alpha/content-pages/1-1-1'
+    end
+  end
+
   context 'when the last page of the first submodule is reached' do
     before do
       view_pages_upto alpha, 'formative'
