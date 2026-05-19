@@ -24,3 +24,5 @@ YAML editing workflow proving sub-optimal.
 Contentful is the mandated CMS for DfE projects. It supports editorial roles and permissions, has operations for content publishing.
 
 Introduces a run-time dependency on the Contentful API.
+
+It has been detailed that Contentful won't send a CSRF token when using the Webhook functionality, so the verification step is skipped in the Webhook Controller.
