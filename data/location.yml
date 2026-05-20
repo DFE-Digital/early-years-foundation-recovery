@@ -1,0 +1,10 @@
+- id: england
+  name: England
+- id: scotland
+  name: Scotland
+- id: wales
+  name: Wales
+- id: northern-ireland
+  name: Northern Ireland
+- id: outside-uk
+  name: Outside the UK

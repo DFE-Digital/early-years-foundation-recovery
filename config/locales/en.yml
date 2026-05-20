@@ -23,6 +23,8 @@ en:
               blank: Enter your job title.
             early_years_experience:
               blank: Choose an option.
+            where_you_live:
+              blank: Choose an option.
             local_authority:
               blank: Enter the local authority of the setting or organisation you work in most of the time.
             training_emails:
@@ -469,6 +471,13 @@ en:
   register_name:
     heading: About you
     body: We're asking for your details so we can personalise your training certificates.
+
+  # /registration/where_you_live/edit
+  register_where_you_live:
+    heading: Where do you live?
+    body: |
+      The training is based on the Early Years Foundation (EYFS) framework used in England. You can
+      still use the training even if you live outside England.
 
   # /registration/setting-type/edit
   register_setting:
