@@ -140,6 +140,15 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
                                    form_group: { attributes: { 'data-clarity-mask': 'True' } }
   end
 
+  # @return [String]
+  def select_where_you_live
+    govuk_collection_radio_buttons :where_you_live,
+                                   Trainee::Location.all, :id, :name,
+                                   legend: { text: I18n.t('register_where_you_live.label'), class: 'govuk-visually-hidden govuk-!-padding-top-9' },
+                                   aria: { label: 'registration where you live' },
+                                   form_group: { attributes: { 'data-clarity-mask': 'True' } }
+  end
+
   # @param field [Symbol]
   # @return [String]
   def opt_in_out(field)
