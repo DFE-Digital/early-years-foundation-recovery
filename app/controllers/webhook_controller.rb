@@ -1,5 +1,6 @@
 class WebhookController < ApplicationController
   before_action :authenticate_webhook!
+
   # Contentful won't send a CSRF token, so skip this check for webhooks
   skip_before_action :verify_authenticity_token
 
