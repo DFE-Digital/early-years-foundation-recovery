@@ -1,4 +1,6 @@
-$fa-font-path: '/assets/fonts';
+// Match $govuk-assets-path so Font Awesome webfonts also resolve
+// as static files under public/govuk-assets/fonts/.
+$fa-font-path: '/govuk-assets/fonts';
 
 @import '@fortawesome/fontawesome-free/scss/fontawesome';
 @import '@fortawesome/fontawesome-free/scss/solid';
