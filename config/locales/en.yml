@@ -478,6 +478,7 @@ en:
     body: |
       The training is based on the Early Years Foundation (EYFS) framework used in England. You can
       still use the training even if you live outside England.
+    label: Where you live
 
   # /registration/setting-type/edit
   register_setting:
