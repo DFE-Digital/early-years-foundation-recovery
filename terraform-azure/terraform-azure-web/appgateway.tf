@@ -1,6 +1,4 @@
-# Create App Gateway
 resource "azurerm_web_application_firewall_policy" "agw_wafp" {
-  # App Gateway only deployed to the Test and Production subscription
   count = var.environment != "development" ? 1 : 0
 
   name                = "${var.resource_name_prefix}-agw-wafp"
@@ -26,12 +24,14 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
       version = "0.1"
     }
 
+    # Session cookie should not be inspected as an arg value
     exclusion {
       match_variable          = "RequestCookieNames"
       selector                = var.webapp_session_cookie_name
       selector_match_operator = "Equals"
     }
 
+    # Keep only the two exclusions you already know are free-text user input
     exclusion {
       match_variable          = "RequestArgNames"
       selector                = "note[body]"
@@ -41,6 +41,13 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
     exclusion {
       match_variable          = "RequestArgNames"
       selector                = "note[title]"
+      selector_match_operator = "Equals"
+    }
+
+    # Additional confirmed request parameters used in learning and feedback flows.
+    exclusion {
+      match_variable          = "RequestArgNames"
+      selector                = "response[text_input]"
       selector_match_operator = "Equals"
     }
 
@@ -73,48 +80,14 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
       selector                = "note[next_page_module]"
       selector_match_operator = "Equals"
     }
-
-    exclusion {
-      match_variable          = "RequestArgNames"
-      selector                = "response[text_input]"
-      selector_match_operator = "Equals"
-    }
-  }
-
-  custom_rules {
-    # Limit bypass to free-text learning-log submissions only.
-    name      = "AllowLearningLogSubmissions"
-    priority  = 10
-    rule_type = "MatchRule"
-    action    = "Allow"
-
-    match_conditions {
-      match_variables {
-        variable_name = "RequestUri"
-      }
-
-      operator           = "BeginsWith"
-      negation_condition = false
-      match_values       = ["/my-account/learning-log"]
-    }
-
-    match_conditions {
-      match_variables {
-        variable_name = "RequestMethod"
-      }
-
-      operator           = "Equal"
-      negation_condition = false
-      match_values       = ["POST", "PUT", "PATCH"]
-    }
   }
 
   policy_settings {
     enabled                     = true
-    file_upload_limit_in_mb     = 100
-    max_request_body_size_in_kb = 128
     mode                        = "Prevention"
     request_body_check          = true
+    max_request_body_size_in_kb = 128
+    file_upload_limit_in_mb     = 100
   }
 
   lifecycle {
@@ -133,7 +106,6 @@ locals {
 }
 
 resource "azurerm_application_gateway" "agw" {
-  # App Gateway only deployed to the Test and Production subscription
   count = var.environment != "development" ? 1 : 0
 
   name                              = "${var.resource_name_prefix}-agw"
@@ -184,7 +156,6 @@ resource "azurerm_application_gateway" "agw" {
 
     match {
       status_code = [200]
-      body        = null
     }
   }
 
@@ -245,7 +216,6 @@ resource "azurerm_application_gateway" "agw" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "agw_logs_monitor" {
-  # App Gateway only deployed to the Test and Production subscription
   count = var.environment != "development" ? 1 : 0
 
   name                       = "${var.resource_name_prefix}-agw-mon"
