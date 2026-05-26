@@ -43,6 +43,70 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
       selector                = "note[title]"
       selector_match_operator = "Equals"
     }
+
+    exclusion {
+      match_variable          = "RequestArgNames"
+      selector                = "note[training_module]"
+      selector_match_operator = "Equals"
+    }
+
+    exclusion {
+      match_variable          = "RequestArgNames"
+      selector                = "note[name]"
+      selector_match_operator = "Equals"
+    }
+
+    exclusion {
+      match_variable          = "RequestArgNames"
+      selector                = "note[module_item_id]"
+      selector_match_operator = "Equals"
+    }
+
+    exclusion {
+      match_variable          = "RequestArgNames"
+      selector                = "note[next_page_name]"
+      selector_match_operator = "Equals"
+    }
+
+    exclusion {
+      match_variable          = "RequestArgNames"
+      selector                = "note[next_page_module]"
+      selector_match_operator = "Equals"
+    }
+
+    exclusion {
+      match_variable          = "RequestArgNames"
+      selector                = "response[text_input]"
+      selector_match_operator = "Equals"
+    }
+  }
+
+  custom_rules {
+    # Limit bypass to free-text learning-log submissions only.
+    name      = "AllowLearningLogSubmissions"
+    priority  = 10
+    rule_type = "MatchRule"
+    action    = "Allow"
+
+    match_conditions {
+      match_variables {
+        variable_name = "RequestUri"
+      }
+
+      operator           = "BeginsWith"
+      negation_condition = false
+      match_values       = ["/my-account/learning-log"]
+    }
+
+    match_conditions {
+      match_variables {
+        variable_name = "RequestMethod"
+      }
+
+      operator           = "Equal"
+      negation_condition = false
+      match_values       = ["POST", "PUT", "PATCH"]
+    }
   }
 
   policy_settings {
