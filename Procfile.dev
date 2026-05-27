@@ -1,3 +1,5 @@
 web: bin/rails server -b 0.0.0.0 -p 3000
 js: yarn; yarn build --watch
 css: yarn build:css --watch
+# Forwards 127.0.0.1:4000 inside this container to `gov-one-simulator:4000` to avoid setting host files
+gov_one_proxy: sh -c 'while true; do socat TCP-LISTEN:4000,reuseaddr,fork TCP-CONNECT:gov-one-simulator:4000 2>&1 || true; sleep 2; done'
