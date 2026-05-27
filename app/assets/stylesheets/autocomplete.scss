@@ -12,7 +12,7 @@
   -webkit-box-sizing: border-box;
   margin-bottom: 0;
   width: 100%;
-  font-family: 'GDS Transport';
+  font-family: 'Inter', sans-serif;
 }
 
 .autocomplete__input {
@@ -51,7 +51,7 @@
 }
 
 .autocomplete__menu {
-  font-family: 'GDS Transport';
+  font-family: 'Inter', sans-serif;
   background-color: govuk-colour('white');
   border: 2px solid govuk-colour('black');
   border-top: 0;
