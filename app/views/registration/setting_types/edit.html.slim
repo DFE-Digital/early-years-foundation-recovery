@@ -9,6 +9,9 @@
       = f.govuk_error_summary
 
       = f.govuk_fieldset legend: { text: t('register_setting.heading') } do
+
+        = m('register_setting.body')
+
         = f.select_trainee_setting
 
         p.govuk_body

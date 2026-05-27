@@ -474,9 +474,8 @@ en:
   register_setting:
     heading: What setting type do you work in?
     body: |
-      Search for the type of setting or organisation you work in, for example childminder or nursery.
-      If you work in more than one early years setting, enter the one where you work most often.
-      Your training progress won't be shared with anyone without your permission.
+      Select the setting you work in most often, for example childminder or nursery. if you don't work in a setting, for example you're a parent or carer or are unemployed, select these options.
+    hint: Search and select the most relevant setting
     label: Setting type
     other_link: I cannot find my setting or organisation
     not_found: No setting found.
