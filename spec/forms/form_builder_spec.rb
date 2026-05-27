@@ -26,7 +26,7 @@ RSpec.describe FormBuilder do
     end
 
     it 'hint' do
-      expect(output).to include 'Search for the type of setting or organisation you work in'
+      expect(output).to include 'Search and select the most relevant setting'
     end
 
     it 'options' do
