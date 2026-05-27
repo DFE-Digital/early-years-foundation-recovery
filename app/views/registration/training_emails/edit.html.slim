@@ -8,7 +8,11 @@
     = form_for form, url: registration_training_emails_path, method: :patch do |f|
       = f.govuk_error_summary
 
-      = f.opt_in_out :training_emails
+      = f.govuk_fieldset legend: { text: t('training_emails.heading') } do
+
+        = m('training_emails.body')
+
+        = f.opt_in_out :training_emails
 
       .govuk-button-group class='govuk-!-margin-top-4'
         - if current_user.registration_complete?
