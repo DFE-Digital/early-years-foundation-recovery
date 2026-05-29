@@ -109,6 +109,22 @@ RSpec.describe GovOneAuthService do
     end
   end
 
+  describe '#build_http' do
+    let(:fake_http) { Struct.new(:use_ssl).new(nil) }
+    let(:http_client_double) { class_double(Net::HTTP, new: fake_http) }
+    let(:auth_service) { described_class.new(code: code, http_client: http_client_double) }
+
+    it 'enables TLS for an https:// URL' do
+      _uri, http = auth_service.build_http('https://oidc.example.gov.uk/token')
+      expect(http.use_ssl).to be true
+    end
+
+    it 'disables TLS for an http:// URL (so the local simulator works)' do
+      _uri, http = auth_service.build_http('http://localhost:4500/token')
+      expect(http.use_ssl).to be false
+    end
+  end
+
   describe 'JWKS/key rotation logic' do
     let(:jwt_token) { 'mock.jwt.token' }
     let(:kid) { 'test-kid' }

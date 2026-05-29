@@ -89,4 +89,54 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
       expect(response).to redirect_to root_path
     end
   end
+
+  describe 'id_token iss claim validation' do
+    let(:base_uri) { Rails.application.config.gov_one_base_uri.to_s }
+
+    context 'when the simulator emits iss without a trailing slash' do
+      let(:decoded_id_token) do
+        { 'sub' => 'mock_sub',
+          'nonce' => 'mock_nonce',
+          'iss' => base_uri.chomp('/'),
+          'aud' => Rails.application.config.gov_one_client_id }
+      end
+
+      it 'is accepted and signs the user in' do
+        get :openid_connect, params: params
+        expect(session[:id_token]).to eq id_token
+        expect(User.find_by(email: email)).to be_present
+      end
+    end
+
+    context 'when GOV.UK One Login emits iss with a trailing slash' do
+      let(:decoded_id_token) do
+        { 'sub' => 'mock_sub',
+          'nonce' => 'mock_nonce',
+          'iss' => "#{base_uri.chomp('/')}/",
+          'aud' => Rails.application.config.gov_one_client_id }
+      end
+
+      it 'is accepted and signs the user in' do
+        get :openid_connect, params: params
+        expect(session[:id_token]).to eq id_token
+        expect(User.find_by(email: email)).to be_present
+      end
+    end
+
+    context 'when iss does not match the configured base URI at all' do
+      let(:decoded_id_token) do
+        { 'sub' => 'mock_sub',
+          'nonce' => 'mock_nonce',
+          'iss' => 'https://bad.example.com/',
+          'aud' => Rails.application.config.gov_one_client_id }
+      end
+
+      it 'is rejected and the user is redirected to the root path' do
+        get :openid_connect, params: params
+        expect(flash[:alert]).to eq 'There was a problem signing in. Please try again.'
+        expect(response).to redirect_to root_path
+        expect(User.find_by(email: email)).to be_nil
+      end
+    end
+  end
 end
