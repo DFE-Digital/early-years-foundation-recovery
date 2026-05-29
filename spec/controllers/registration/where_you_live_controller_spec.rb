@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe Registration::WhereYouLiveController, type: :controller do
   context 'when not signed in' do
-    xdescribe 'GET #edit' do
+    describe 'GET #edit' do
       it 'redirects' do
         get :edit
         expect(response).to have_http_status(:redirect)
       end
     end
 
-    xdescribe 'POST #update' do
+    describe 'POST #update' do
       it 'redirects' do
         post :update
         expect(response).to have_http_status(:redirect)
@@ -22,14 +22,14 @@ RSpec.describe Registration::WhereYouLiveController, type: :controller do
 
     before { sign_in user }
 
-    xdescribe 'GET #edit' do
+    describe 'GET #edit' do
       it 'succeeds' do
         get :edit
         expect(response).to have_http_status(:success)
       end
     end
 
-    xdescribe 'POST #update' do
+    describe 'POST #update' do
       it 'succeeds' do
         post :update, params: { user: { where_you_live: 'England' } }
         expect(response).to redirect_to edit_registration_setting_type_path
