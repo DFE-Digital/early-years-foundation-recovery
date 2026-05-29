@@ -16,6 +16,8 @@ RSpec.describe 'Account page', type: :system do
     expect(page).to have_content 'Changing your name on this account will not affect your GOV.UK One Login'
 
     expect(page).to have_link 'Change setting details'
+    expect(page).to have_link 'Change', href: edit_registration_where_you_live_path
+    expect(page).to have_text 'England'
 
     expect(page).to have_link 'Change email preferences'
     expect(page).to have_text 'You have chosen to receive emails about this training course.'
@@ -26,6 +28,21 @@ RSpec.describe 'Account page', type: :system do
     expect(page).to have_text 'Closing your account'
   end
 
+  it 'changes where you live from my details' do
+    click_link(id: 'edit_where_you_live_registration')
+    expect(page).to have_current_path '/registration/where-you-live/edit'
+
+    choose 'Scotland'
+    click_button 'Continue'
+
+    expect(page).to have_current_path '/registration/setting-type/edit'
+
+    visit '/my-account'
+    expect(page).to have_text 'Scotland'
+    expect(page).to have_text 'Not applicable'
+    expect(page).not_to have_text 'Multiple'
+  end
+
   describe 'edit details' do
     it 'user defined answers' do
       click_on 'Change setting details'
@@ -34,25 +51,11 @@ RSpec.describe 'Account page', type: :system do
       click_on 'I cannot find my setting or organisation'
       expect(page).to have_current_path '/registration/setting-type-other/edit'
 
-      fill_in 'Enter the type of setting or organisation where you work.', with: 'DfE'
+      fill_in 'Enter the type of setting or organisation where you work.', with: 'DfE Updated'
       click_button 'Continue'
-      expect(page).to have_current_path '/registration/role-type/edit'
-
-      click_on 'I would describe my role in another way.'
-      expect(page).to have_current_path '/registration/role-type-other/edit'
-
-      fill_in 'Enter your job title.', with: 'Developer'
-      click_button 'Continue'
-      expect(page).to have_current_path '/registration/early-years-experience/edit'
-
-      choose 'Not applicable'
-      click_button 'Continue'
-
       expect(page).to have_current_path '/my-account'
 
-      expect(page).to have_text 'DfE'
-      expect(page).to have_text 'Developer'
-      expect(page).to have_text 'Not applicable'
+      expect(page).to have_text 'DfE Updated'
     end
 
     describe 'research participation preference' do

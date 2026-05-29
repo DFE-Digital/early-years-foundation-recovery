@@ -7,11 +7,7 @@ module Registration
 
       if form.save
         track('user_where_you_live_change', success: true)
-        if current_user.registration_complete?
-          redirect_to user_path, notice: helpers.m(:details_updated)
-        else
-          redirect_to edit_registration_setting_type_path
-        end
+        redirect_to edit_registration_setting_type_path
       else
         track('user_where_you_live_change', success: false)
         render :edit, status: :unprocessable_content
@@ -30,8 +26,18 @@ module Registration
       @form ||=
         WhereYouLiveForm.new(
           user: current_user,
-          where_you_live: current_user.where_you_live,
+          where_you_live: selected_where_you_live,
         )
+    end
+
+    # @return [String]
+    def selected_where_you_live
+      value = current_user.country.to_s.strip
+      location = Trainee::Location.all.find do |candidate|
+        candidate.id == value || candidate.name.casecmp(value).zero?
+      end
+
+      location&.id || value
     end
   end
 end

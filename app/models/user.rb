@@ -331,7 +331,9 @@ class User < ApplicationRecord
 
   # @return [String]
   def authority_name
-    local_authority.presence || 'Multiple'
+    return local_authority.presence || 'Multiple' if country.to_s.casecmp('England').zero?
+
+    'Not applicable'
   end
 
   # @return [String]

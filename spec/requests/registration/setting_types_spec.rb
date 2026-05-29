@@ -34,5 +34,16 @@ RSpec.describe 'Registration settings', type: :request do
         expect(response).to redirect_to edit_registration_local_authority_path
       end
     end
+
+    context 'when user selected non-England country' do
+      subject(:user) { create(:user, :confirmed, country: 'Scotland') }
+
+      let(:setting) { 'nursery_private' }
+
+      it 'does not redirect to local authority form' do
+        update_user
+        expect(response).to redirect_to edit_registration_role_type_path
+      end
+    end
   end
 end

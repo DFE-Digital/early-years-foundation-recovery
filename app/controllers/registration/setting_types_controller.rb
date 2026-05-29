@@ -7,8 +7,10 @@ module Registration
 
       if form.save
         track('user_setting_type_change', success: true)
-        if form.setting_type.local_authority?
+        if england_selected? && form.setting_type.local_authority?
           redirect_to edit_registration_local_authority_path
+        elsif !england_selected?
+          redirect_to edit_registration_role_type_path
         elsif current_user.registration_complete?
           redirect_to user_path, notice: helpers.m(:details_updated)
         else
@@ -34,6 +36,12 @@ module Registration
           user: current_user,
           setting_type_id: current_user.setting_type_id,
         )
+    end
+
+    # @return [Boolean]
+    def england_selected?
+      country = current_user.country.to_s
+      country.blank? || country.casecmp('England').zero?
     end
   end
 end
