@@ -108,7 +108,6 @@ RSpec.describe 'Registration' do
     expect(page).to have_current_path '/registration/local-authority/edit'
     expect(page).to have_text('What local authority area do you work in?')
       .and have_text('This could be your county council, district council or London borough.')
-    click_link 'I work across more than one local authority'
 
     # Role
     expect(page).to have_current_path '/registration/role-type/edit'

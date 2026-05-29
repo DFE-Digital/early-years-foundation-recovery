@@ -9,9 +9,9 @@
       = f.govuk_error_summary
 
       = f.govuk_fieldset legend: { text: t('register_authority.heading') } do
-        = f.select_trainee_authority
 
-        p.govuk_body
-          = govuk_link_to t('register_authority.other_link'), edit_registration_role_type_path
+        = m('register_authority.body')
+
+        = f.select_trainee_authority
 
       = f.govuk_submit t('links.continue')
