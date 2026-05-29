@@ -125,7 +125,7 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
                             Trainee::Authority.all, :name, :name,
                             options: { include_blank: true },
                             label: { text: I18n.t('register_authority.label'), class: 'govuk-visually-hidden' },
-                            hint: { text: I18n.t('register_authority.body') },
+                            hint: { text: I18n.t('register_authority.hint') },
                             data: { controller: 'autocomplete', 'autocomplete-message-value': I18n.t('register_authority.not_found') },
                             aria: { label: 'registration local authority' },
                             form_group: { attributes: { 'data-clarity-mask': 'True' } }

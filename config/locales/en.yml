@@ -489,9 +489,9 @@ en:
   # /registration/local-authority/edit
   register_authority:
     heading: What local authority area do you work in?
-    body: This could be your county council, district council or London borough.
+    body: This could be your county council, district council or London borough. If you work across more than one local authority, select the most relevant.
+    hint: Search and select your local authority
     label: Local authority
-    other_link: I work across more than one local authority
     not_found: No local authority found.
 
   # /registration/role-type/edit
