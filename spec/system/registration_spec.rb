@@ -32,6 +32,12 @@ RSpec.describe 'Registration' do
     fill_in 'Surname', with: 'Doe'
     click_button 'Continue'
 
+    # Where you live
+    expect(page).to have_current_path '/registration/where-you-live/edit'
+    expect(page).to have_text 'Where do you live?'
+    choose 'Scotland'
+    click_button 'Continue'
+
     # Setting
     expect(page).to have_current_path '/registration/setting-type/edit'
     expect(page).to have_text 'What setting type do you work in?'
@@ -97,6 +103,11 @@ RSpec.describe 'Registration' do
     # Name
     fill_in 'First name', with: 'John'
     fill_in 'Surname', with: 'Smith'
+    click_button 'Continue'
+
+    # Where you live
+    expect(page).to have_current_path '/registration/where-you-live/edit'
+    choose 'England'
     click_button 'Continue'
 
     # Setting

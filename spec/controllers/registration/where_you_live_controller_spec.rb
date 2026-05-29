@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Registration::NamesController, type: :controller do
+RSpec.describe Registration::WhereYouLiveController, type: :controller do
   context 'when not signed in' do
     describe 'GET #edit' do
       it 'redirects' do
@@ -31,8 +31,9 @@ RSpec.describe Registration::NamesController, type: :controller do
 
     describe 'POST #update' do
       it 'succeeds' do
-        post :update, params: { user: { first_name: 'Jane', last_name: 'Smith' } }
-        expect(response).to redirect_to edit_registration_where_you_live_path
+        post :update, params: { user: { where_you_live: 'England' } }
+        expect(response).to redirect_to edit_registration_setting_type_path
+        expect(user.reload.country).to eq 'England'
       end
     end
   end
