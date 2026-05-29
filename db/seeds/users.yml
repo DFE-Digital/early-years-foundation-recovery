@@ -32,4 +32,5 @@ confirmed@example.com:
   role_type_other: Developer
   setting_type_id: other
   early_years_experience: Not applicable
+  country: England
 <% end %>

@@ -11,7 +11,7 @@ module Registration
         if current_user.registration_complete?
           redirect_to user_path, notice: helpers.m(:details_updated)
         else
-          redirect_to edit_registration_setting_type_path
+          redirect_to edit_registration_where_you_live_path
         end
       else
         track('user_name_change', success: false)

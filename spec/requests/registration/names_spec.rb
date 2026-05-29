@@ -31,9 +31,9 @@ RSpec.describe 'Registration names', type: :request do
         expect { update_user }.to change { user.reload.first_name }.to(user_params[:first_name])
       end
 
-      it 'redirects to setting type' do
+      it 'redirects to where you live' do
         update_user
-        expect(response).to redirect_to edit_registration_setting_type_path
+        expect(response).to redirect_to edit_registration_where_you_live_path
       end
     end
   end
