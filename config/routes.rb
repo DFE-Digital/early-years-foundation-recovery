@@ -26,7 +26,10 @@ Rails.application.routes.draw do
   namespace :registration do
     resource :terms_and_conditions,   only: %i[edit update], path: 'terms-and-conditions'
     resource :name,                   only: %i[edit update]
-    resource :where_you_live,         only: %i[edit update], path: 'where-you-live'
+    resource :where_you_live,
+             only: %i[edit update],
+             path: 'where-you-live',
+             controller: :where_you_live
     resource :setting_type,           only: %i[edit update], path: 'setting-type'
     resource :setting_type_other,     only: %i[edit update], path: 'setting-type-other'
     resource :local_authority,        only: %i[edit update], path: 'local-authority'

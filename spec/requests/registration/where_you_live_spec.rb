@@ -7,14 +7,14 @@ RSpec.describe 'Registration where you live', type: :request do
 
   before { sign_in user }
 
-  xdescribe 'GET /registration/where_you_live/edit' do
+  describe 'GET /registration/where_you_live/edit' do
     it 'returns http success' do
       get edit_registration_where_you_live_path
       expect(response).to have_http_status(:success)
     end
   end
 
-  xdescribe 'PATCH /registration/where_you_live' do
+  describe 'PATCH /registration/where_you_live' do
     let(:update_user) do
       patch registration_where_you_live_path, params: {
         user: {
@@ -27,12 +27,25 @@ RSpec.describe 'Registration where you live', type: :request do
       let(:where_you_live) { 'England' }
 
       it 'Updates where you live value' do
-        expect { update_user }.to change { user.reload.where_you_live }.to(where_you_live)
+        expect { update_user }.to change { user.reload.country }.to(where_you_live)
       end
 
       it 'redirects to setting type form' do
         update_user
-        expect(response).to redirect_to edit_setting_type_path
+        expect(response).to redirect_to edit_registration_setting_type_path
+      end
+    end
+
+    context 'with non-England option' do
+      let(:where_you_live) { 'Scotland' }
+
+      it 'updates country value' do
+        expect { update_user }.to change { user.reload.country }.to(where_you_live)
+      end
+
+      it 'redirects to setting type form' do
+        update_user
+        expect(response).to redirect_to edit_registration_setting_type_path
       end
     end
   end

@@ -30,7 +30,7 @@ module Registration
       @form ||=
         WhereYouLiveForm.new(
           user: current_user,
-          where_you_live: current_user.where_you_live,
+          where_you_live: current_user.country,
         )
     end
   end

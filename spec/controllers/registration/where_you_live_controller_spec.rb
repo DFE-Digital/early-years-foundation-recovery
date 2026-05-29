@@ -33,7 +33,7 @@ RSpec.describe Registration::WhereYouLiveController, type: :controller do
       it 'succeeds' do
         post :update, params: { user: { where_you_live: 'England' } }
         expect(response).to redirect_to edit_registration_setting_type_path
-        expect(user.reload.where_you_live).to eq 'England'
+        expect(user.reload.country).to eq 'England'
       end
     end
   end
