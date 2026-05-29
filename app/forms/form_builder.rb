@@ -116,10 +116,12 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
         object.user&.country
       end
 
-    if where_you_live == 'England'
-      settings = settings.select { |setting| setting.region == 'England' }
-    elsif where_you_live.present?
-      settings = settings.reject { |setting| setting.region == 'England' }
+    if settings.any? { |setting| setting.respond_to?(:region) }
+      if where_you_live == 'England'
+        settings = settings.select { |setting| !setting.respond_to?(:region) || setting.region == 'England' }
+      elsif where_you_live.present?
+        settings = settings.reject { |setting| setting.respond_to?(:region) && setting.region == 'England' }
+      end
     end
 
     govuk_collection_select :setting_type_id,

@@ -11,7 +11,7 @@ module Registration
 
         track('user_setting_type_other_change', success: true)
 
-        if setting.local_authority? && user.local_authority.blank?
+        if england_selected? && setting.local_authority? && user.local_authority.blank?
           redirect_to edit_registration_local_authority_path
         else
           redirect_to edit_registration_role_type_path
@@ -36,6 +36,12 @@ module Registration
           user: current_user,
           setting_type_other: current_user.setting_type_other,
         )
+    end
+
+    # @return [Boolean]
+    def england_selected?
+      country = current_user.country.to_s
+      country.blank? || country.casecmp('England').zero?
     end
   end
 end
