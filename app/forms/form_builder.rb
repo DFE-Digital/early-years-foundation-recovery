@@ -113,7 +113,7 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
                             settings, :name, :title,
                             options: { include_blank: true },
                             label: { text: I18n.t('register_setting.label'), class: 'govuk-visually-hidden' },
-                            hint: { text: I18n.t('register_setting.body') },
+                            hint: { text: I18n.t('register_setting.hint') },
                             data: { controller: 'autocomplete', 'autocomplete-message-value': I18n.t('register_setting.not_found') },
                             aria: { label: 'registration setting type' },
                             form_group: { attributes: { 'data-clarity-mask': 'True' } }
