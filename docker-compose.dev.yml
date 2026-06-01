@@ -29,12 +29,51 @@ services:
       - OTEL_SERVICE_NAME=early-years-foundation-recovery
       - APPLICATION_INSIGHTS_CONNECTION_STRING=${APPLICATION_INSIGHTS_CONNECTION_STRING}
 
+      # GOV.UK One Login (points at local simulator by default in dev).
+      - GOV_ONE_BASE_URI=${GOV_ONE_BASE_URI:-http://localhost:4000}
+      - GOV_ONE_CLIENT_ID=${GOV_ONE_CLIENT_ID:-cdt-local-dev}
+      - GOV_ONE_PRIVATE_KEY_PATH=${GOV_ONE_PRIVATE_KEY_PATH:-/srv/config/gov_one/dev_private_key.pem}
+
+    depends_on:
+      gov-one-simulator:
+        condition: service_healthy
     volumes:
       - .:/srv
     tty: true
     stdin_open: true
     networks:
       - recovery
+
+  gov-one-simulator:
+    container_name: recovery_gov_one_simulator
+    image: ghcr.io/govuk-one-login/simulator:latest
+    ports:
+      - "4000:4000"
+    environment:
+      PORT: 4000
+      SIMULATOR_URL: http://localhost:4000
+      CLIENT_ID: ${GOV_ONE_CLIENT_ID:-cdt-local-dev}
+      REDIRECT_URLS: http://localhost:3000/users/auth/openid_connect/callback
+      POST_LOGOUT_REDIRECT_URLS: http://localhost:3000/users/sign_out
+      SCOPES: openid,email
+      ID_TOKEN_SIGNING_ALGORITHM: ES256
+      PUBLIC_KEY: |-
+        -----BEGIN PUBLIC KEY-----
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmXXR3EsRvUMVhEJMtQ1w
+        exJjfQ00Q0MQ7ARfShN53BnOQEPFnS/I8ntBddkKdE3q+vMTI72w6Fv3SsMM+ciR
+        2LIHdEQfKgsLt6PGNcV1kG6GG/3nSW3psW8w65Q3fmy81P1748qezDrVfaGrF4PD
+        XALzX1ph+nz8mpKmck6aY6LEUJ4B+TIfYzlKmmwFe3ri0spSW+J5wE9mmT3VkR2y
+        SuHRYHQlxlF9dfX7ltOTsbgJFzN6TO01ZQDhY0iLwzdGwhSxO6R6N/ZINYHCKFPa
+        QD+tdKsrw7QDIYnx0IiXFnkGnizl3UtqSmXAaceTvPM2Pz84x2JiwHrp2Sml6RYL
+        CQIDAQAB
+        -----END PUBLIC KEY-----
+    networks:
+      - recovery
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:4000/.well-known/openid-configuration || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
 
   worker:
     container_name: recovery_worker

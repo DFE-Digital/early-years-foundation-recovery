@@ -6,6 +6,6 @@ podman compose \
   -f docker-compose.yml \
   -f docker-compose.dev.yml \
   --project-name recovery \
-  up --detach app otel-collector
+  up --detach app otel-collector gov-one-simulator
 
 podman attach recovery_dev

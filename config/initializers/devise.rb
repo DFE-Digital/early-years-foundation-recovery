@@ -267,14 +267,15 @@ Devise.setup do |config|
   config.sign_out_via = :get
 
   # ==> OmniAuth
+  gov_one_uri = URI.parse(Rails.application.config.gov_one_base_uri.to_s)
   config.omniauth :openid_connect, {
     name: :gov_one,
     scope: %i[openid email],
     response_type: :code,
     client_options: {
-      port: 443,
-      scheme: 'https',
-      host: Rails.application.config.gov_one_base_uri,
+      scheme: gov_one_uri.scheme || 'https',
+      host: gov_one_uri.host   || Rails.application.config.gov_one_base_uri,
+      port: gov_one_uri.port   || (gov_one_uri.scheme == 'http' ? 80 : 443),
       identifier: Rails.application.config.gov_one_client_id,
       redirect_uri: 'users/auth/openid_connect/callback',
     },

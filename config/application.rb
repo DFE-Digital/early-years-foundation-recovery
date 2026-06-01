@@ -5,6 +5,12 @@ Bundler.require(*Rails.groups)
 
 module EarlyYearsFoundationRecovery
   class Application < Rails::Application
+    # Resolve the GOV.UK One Login private key from GOV_ONE_PRIVATE_KEY_PATH, which must point to a readable PEM file.
+    def self.gov_one_private_key_from_env
+      path = ENV['GOV_ONE_PRIVATE_KEY_PATH']
+      File.read(path) if path.present? && File.exist?(path)
+    end
+
     config.load_defaults 7.0
     # @see ErrorsController
     config.exceptions_app = routes
@@ -65,9 +71,9 @@ module EarlyYearsFoundationRecovery
     config.contentful_environment             = ENV.fetch('CONTENTFUL_ENVIRONMENT', credentials.dig(:contentful, :environment))
 
     # Gov One
-    config.gov_one_base_uri    = credentials.dig(:gov_one, :base_uri)
-    config.gov_one_private_key = credentials.dig(:gov_one, :private_key)
-    config.gov_one_client_id   = credentials.dig(:gov_one, :client_id)
+    config.gov_one_base_uri    = ENV.fetch('GOV_ONE_BASE_URI',  credentials.dig(:gov_one, :base_uri))
+    config.gov_one_client_id   = ENV.fetch('GOV_ONE_CLIENT_ID', credentials.dig(:gov_one, :client_id))
+    config.gov_one_private_key = gov_one_private_key_from_env || credentials.dig(:gov_one, :private_key)
 
     # Sentry
     config.sentry_dsn = ENV.fetch('SENTRY_DSN', '#SENTRY_DSN_env_var_missing')

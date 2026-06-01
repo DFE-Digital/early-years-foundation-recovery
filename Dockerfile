@@ -104,7 +104,8 @@ CMD ["sh", "-c", "otelcol --config=/etc/otel-collector-config.yml >/dev/null 2>&
 # ------------------------------------------------------------------------------
 FROM app as dev
 
-RUN apk add --no-cache --no-progress --no-check-certificate postgresql-client npm graphviz
+# `socat` is used by Procfile.dev to forward 127.0.0.1:4000 inside this container
+RUN apk add --no-cache --no-progress --no-check-certificate postgresql-client npm graphviz socat
 RUN npm install --global adr-log contentful-cli
 
 RUN bundle config unset without

@@ -1,7 +1,14 @@
 scan:
   scanners:
     - vuln
-  # Ignore Ruby default gemspec for rexml that ships with the Ruby image
+  # Ignore Ruby default gemspecs that ship with the Ruby base image.
+  # The application's actual versions are resolved via Bundler (Gemfile.lock),
+  # so these default gemspecs are not used at runtime.
   skip-files:
     - "/usr/local/lib/ruby/gems/*/specifications/rexml-*.gemspec"
+    - "/usr/local/lib/ruby/gems/*/specifications/default/rexml-*.gemspec"
+    - "/usr/local/lib/ruby/gems/*/specifications/net-imap-*.gemspec"
+    - "/usr/local/lib/ruby/gems/*/specifications/default/net-imap-*.gemspec"
+    - "/usr/local/lib/ruby/gems/*/specifications/zlib-*.gemspec"
+    - "/usr/local/lib/ruby/gems/*/specifications/default/zlib-*.gemspec"
 

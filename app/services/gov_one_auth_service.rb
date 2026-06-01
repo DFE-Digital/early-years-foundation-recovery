@@ -92,7 +92,7 @@ class GovOneAuthService
   def build_http(address)
     uri = URI.parse(address)
     http = http_client.new(uri.host, uri.port)
-    http.use_ssl = true
+    http.use_ssl = uri.scheme == 'https'
     [uri, http]
   rescue StandardError => e
     Rails.logger.error "GovOneAuthService.build_http: #{e.message}"
