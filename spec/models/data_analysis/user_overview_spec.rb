@@ -124,7 +124,7 @@ RSpec.describe DataAnalysis::UserOverview do
     # user#4 complete registration notification
     create :user, :confirmed, confirmed_at: 4.weeks.ago
     # user#5 start training notification
-    create :user, :registered, confirmed_at: 4.weeks.ago
+    create :user, :registered, confirmed_at: 1.week.ago
     # user#6
     create :user, :registered
   end

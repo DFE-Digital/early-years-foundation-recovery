@@ -289,6 +289,56 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe '.start_training_mail_job_recipients' do
+    subject(:user) { create(:user, :registered, confirmed_at: 1.week.ago) }
+
+    context 'without mail event or queued delivery job' do
+      it 'includes user' do
+        expect(described_class.start_training_mail_job_recipients).to include(user)
+      end
+    end
+
+    context 'with delivered start training mail event' do
+      before do
+        create :mail_event,
+               user: user,
+               template: NotifyMailer::TEMPLATE_IDS[:start_training]
+      end
+
+      it 'excludes user' do
+        expect(described_class.start_training_mail_job_recipients).not_to include(user)
+        expect(described_class.with_start_training_mail_events).to include(user)
+      end
+    end
+
+    context 'with queued start training delivery job' do
+      before do
+        create :job,
+               job_class: 'ActionMailer::MailDeliveryJob',
+               args: [
+                 {
+                   arguments: [
+                     'NotifyMailer',
+                     'start_training',
+                     'deliver_now',
+                     {
+                       'args': [
+                         {
+                           '_aj_globalid': "gid://early-years-foundation-recovery/User/#{user.id}",
+                         },
+                       ],
+                     },
+                   ],
+                 },
+               ]
+      end
+
+      it 'excludes user' do
+        expect(described_class.start_training_mail_job_recipients).not_to include(user)
+      end
+    end
+  end
+
   describe 'learning log' do
     subject(:user) { create(:user, :registered) }
 
