@@ -145,7 +145,6 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
   def opt_in_out(field)
     govuk_collection_radio_buttons field,
                                    FormOption.build(field), :id, :name,
-                                   legend: { text: I18n.t(:heading, scope: field) },
-                                   hint: { text: I18n.t(:body, scope: field) }
+                                   legend: { text: I18n.t(:heading, scope: field), class: 'govuk-visually-hidden' }
   end
 end
