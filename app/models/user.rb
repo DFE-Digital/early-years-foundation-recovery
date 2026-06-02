@@ -158,7 +158,12 @@ class User < ApplicationRecord
   # emails
   scope :training_email_recipients, -> { order(:id).where(training_emails: [true, nil]).distinct }
   scope :complete_registration_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_incomplete.distinct }
-  scope :start_training_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_complete.not_started_training.distinct }
+  scope :start_training_mail_job_recipients, lambda {
+    training_email_recipients.week_old_confirmation.registration_complete.not_started_training
+      .where.not(id: with_start_training_mail_events)
+      .where.not(id: Job.start_training_mail.map(&:mail_user_id))
+      .distinct
+  }
   scope :continue_training_mail_job_recipients, -> { training_email_recipients.last_visit_4_weeks_ago.with_module_in_progress.distinct }
 
   # @note
@@ -182,6 +187,7 @@ class User < ApplicationRecord
   # email callbacks
   scope :with_mail_events, -> { joins(:mail_events) }
   scope :with_new_module_mail_events, -> { with_mail_events.merge(MailEvent.newest_module).distinct }
+  scope :with_start_training_mail_events, -> { with_mail_events.where(mail_events: { template: StartTrainingMailJob.template_id }).distinct }
 
   scope :email_status, lambda { |status|
     training_email_recipients.where('notify_callback @> ?', { notification_type: 'email', status: status }.to_json).distinct
@@ -196,6 +202,7 @@ class User < ApplicationRecord
 
   # data
   scope :dashboard, -> { not_closed }
+  scope :week_old_confirmation, -> { where(confirmed_at: 1.week.ago.beginning_of_day..1.week.ago.end_of_day) }
   scope :month_old_confirmation, -> { where(confirmed_at: 4.weeks.ago.beginning_of_day..4.weeks.ago.end_of_day) }
   scope :with_local_authority, -> { where.not(local_authority: nil) }
 
