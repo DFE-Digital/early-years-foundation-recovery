@@ -100,6 +100,18 @@ class Response < ApplicationRecord
   # Decorators           #
   ########################
 
+  def correct_formative_answers
+    options.select(&:correct?)
+  end
+
+  def correct_formative_answers_label
+    options.select(&:correct?).map(&:label).to_sentence
+  end
+
+  def only_one_correct_formative_answers_count
+    question.correct_answers.count.eql?(1) | false
+  end
+
   # @return [String]
   def banner_title
     correct? ? "That's right" : "That's not quite right"
