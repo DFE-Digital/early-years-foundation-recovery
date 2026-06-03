@@ -5,16 +5,16 @@
       = current_user_response.banner_title
   .govuk-notification-banner__content
     - if !current_user_response.correct?
-      p.notification-banner-bold Correct answer
+      h3.govuk-heading-s.assessment-banner-heading Correct answer
 
-      p The correct answer is:
       - if current_user_response.only_one_correct_formative_answers_count
-        p= current_user_response.correct_formative_answers_label
+        p.govuk-body-m.assessment-banner-content = current_user_response.correct_formative_answers_label
       - else
+        p.govuk-body-m.assessment-banner-text The correct answer is:
         ul.govuk-list.govuk-list--bullet
           - current_user_response.correct_formative_answers.map do |response|
             li= response.label
 
-      p.notification-banner-bold Explanation
+      h3.govuk-heading-s.assessment-banner-heading Explanation
 
-    = m(current_user_response.summary)
+    .assessment-banner-content = m(current_user_response.summary)
