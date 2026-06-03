@@ -32,9 +32,9 @@ RSpec.describe 'Registration custom settings', type: :request do
         expect { update_user }.to change { user.reload.setting_type_id }.to('other')
       end
 
-      it 'redirects to local authority form' do
+      it 'redirects to training emails form' do
         update_user
-        expect(response).to redirect_to edit_registration_role_type_path
+        expect(response).to redirect_to edit_registration_training_emails_path
       end
     end
   end
