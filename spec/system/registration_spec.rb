@@ -89,6 +89,16 @@ RSpec.describe 'Registration' do
     choose 'Send me email updates about this training course'
     click_button 'Continue'
 
+    # Research participation
+    expect(page).to have_current_path '/registration/research-participant/edit'
+    expect(page).to have_text 'Would you be willing to be contacted to help improve this training?'
+    expect(page).to have_text 'We sometimes invite users to take part in short user research activities. Participation is entirely voluntary and you are free to withdraw at any point.'
+    click_button 'Continue'
+    expect(page).to have_text('There is a problem')
+      .and have_text('Choose an option.')
+    choose 'Yes'
+    click_button 'Continue'
+
     # End
     expect(page).to have_text 'You can now start your first module.'
   end
@@ -134,6 +144,11 @@ RSpec.describe 'Registration' do
     # Email preference
     expect(page).to have_current_path '/registration/training-emails/edit'
     choose 'Send me email updates about this training course'
+    click_button 'Continue'
+
+    # Research participation
+    expect(page).to have_current_path '/registration/research-participant/edit'
+    choose 'No'
     click_button 'Continue'
 
     # End

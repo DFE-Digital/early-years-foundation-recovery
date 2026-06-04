@@ -30,9 +30,9 @@ RSpec.describe 'Registration training email opt in', type: :request do
         expect { update_user }.to change { user.reload.training_emails }.to(true)
       end
 
-      it 'redirects to my modules' do
+      it 'redirects to research participant form' do
         update_user
-        expect(response).to redirect_to my_modules_path
+        expect(response).to redirect_to edit_registration_research_participant_path
       end
     end
   end

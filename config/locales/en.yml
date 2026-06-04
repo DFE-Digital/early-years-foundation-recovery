@@ -29,6 +29,8 @@ en:
               blank: Enter the local authority of the setting or organisation you work in most of the time.
             training_emails:
               blank: Choose an option.
+            research_participant:
+              blank: Choose an option.
 
   # Validations ----------------------------------------------------------------
   # https://guides.rubyonrails.org/i18n.html#translations-for-active-record-models
@@ -530,6 +532,12 @@ en:
     body: Turn on email updates to find out about new modules and features in this training course.
     opt_in: Send me email updates about this training course
     opt_out: Do not send me email updates about this training course
+
+  research_participant:
+    heading: Would you be willing to be contacted to help improve this training?
+    body: We sometimes invite users to take part in short user research activities. Participation is entirely voluntary and you are free to withdraw at any point.
+    opt_in: 'Yes'
+    opt_out: 'No'
 
   # /
   home:
