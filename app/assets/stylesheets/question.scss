@@ -12,6 +12,18 @@
   }
 }
 
+.assessment-banner-content {
+  max-width: 100%;
+}
+
+.assessment-banner-heading {
+  margin-bottom: 8px;
+}
+
+.assessment-banner-text {
+  margin-bottom: 0;
+}
+
 .govuk-radios__input:disabled+.govuk-radios__label,
 .govuk-checkboxes__input:disabled+.govuk-checkboxes__label {
   opacity: 1.0;

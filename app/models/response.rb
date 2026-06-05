@@ -96,6 +96,21 @@ class Response < ApplicationRecord
     correct && !correct?
   end
 
+  # @return [Array<Training::Answer::Option>]
+  def correct_formative_answers
+    options.select(&:correct?)
+  end
+
+  # @return [String]
+  def correct_formative_answers_label
+    options.select(&:correct?).map(&:label).to_sentence
+  end
+
+  # @return [Boolean]
+  def only_one_correct_formative_answers_count
+    question.correct_answers.count.eql?(1) | false
+  end
+
   ########################
   # Decorators           #
   ########################

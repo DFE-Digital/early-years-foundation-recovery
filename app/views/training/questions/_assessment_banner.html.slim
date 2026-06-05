@@ -4,4 +4,17 @@
     h2#govuk-notification-banner-title.govuk-notification-banner__title
       = current_user_response.banner_title
   .govuk-notification-banner__content
-    = m(current_user_response.summary)
+    - if !current_user_response.correct?
+      h3.govuk-heading-s.assessment-banner-heading Correct answer
+
+      - if current_user_response.only_one_correct_formative_answers_count
+        p.govuk-body-m.assessment-banner-content = current_user_response.correct_formative_answers_label
+      - else
+        p.govuk-body-m.assessment-banner-text The correct answer is:
+        ul.govuk-list.govuk-list--bullet
+          - current_user_response.correct_formative_answers.map do |response|
+            li= response.label
+
+      h3.govuk-heading-s.assessment-banner-heading Explanation
+
+    .assessment-banner-content = m(current_user_response.summary)
