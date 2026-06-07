@@ -60,26 +60,19 @@ RSpec.describe 'Account page', type: :system do
 
     describe 'research participation preference' do
       before do
-        create :response,
-               question_name: 'feedback-skippable',
-               training_module: 'course',
-               answers: [1],
-               correct: true,
-               user: user,
-               question_type: 'feedback'
-
+        user.update!(research_participant: true)
         visit '/my-account'
       end
 
       it 'changes response' do
         expect(page).to have_text 'You have chosen to participate in research.'
         click_on 'Change research preferences'
-        expect(page).to have_current_path '/feedback/feedback-skippable'
-        choose 'Option 2'
+        expect(page).to have_current_path '/registration/research-participant/edit'
+        choose 'No'
         click_button 'Save'
         expect(page).to have_current_path '/my-account'
         expect(page).to have_text 'You have chosen not to participate in research.'
-        expect(page).to have_text 'Your details have been updated'
+        expect(page).to have_text 'You have updated your details'
       end
     end
   end
