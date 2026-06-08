@@ -33,6 +33,7 @@ This log lists the architectural decisions for EYFS Recovery
 * [ADR-0025-1](0025-application-insights/0025-1-telemetry-collector-app-insights-dev.md) -  Introduce OpenTelemetry and Azure Application Insights using a Telemetry Collector Container
 * [ADR-0025-2](0025-application-insights/0025-2-opentelemetry_deployment_sidecar.md) - Embedded OpenTelemetry Collector
 * [ADR-0026](0026-cookie-same-site-policy.md) - Cookie `SameSite` policy
+* [ADR-0027](0027-start-training-reminder-timing.md) - Reduce start training reminder delay to one week
 
 <!-- adrlogstop -->
 
