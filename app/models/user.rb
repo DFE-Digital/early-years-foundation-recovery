@@ -400,9 +400,7 @@ class User < ApplicationRecord
 
   # @return [Boolean]
   def research_participant?
-    preference = user_research_response.nil? ? false : user_research_response.answers.eql?([1])
-    update(research_participant: preference)
-    research_participant
+    !!research_participant
   end
 
   # @return [Boolean]

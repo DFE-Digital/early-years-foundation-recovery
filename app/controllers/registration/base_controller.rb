@@ -9,6 +9,7 @@
 #   6. role_type / role_type_other
 #   7. early_years_experience
 #   8. training_emails
+#   9. research_participant
 #
 module Registration
   class BaseController < ApplicationController

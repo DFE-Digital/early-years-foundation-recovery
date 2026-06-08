@@ -36,7 +36,7 @@ RSpec.describe 'Feedback' do
         it 'has a save button' do
           visit '/my-account'
           click_on 'Change research preferences'
-          expect(page).to have_current_path '/feedback/feedback-skippable'
+          expect(page).to have_current_path '/registration/research-participant/edit'
           expect(Event.last.name).to eq 'profile_page'
           expect(page).not_to have_link 'Previous'
           expect(page).not_to have_button 'Next'

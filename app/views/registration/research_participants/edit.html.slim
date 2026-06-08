@@ -1,0 +1,21 @@
+= render 'user/debug'
+
+- content_for :page_title do
+  = html_title t('research_participant.heading')
+
+.govuk-grid-row
+  .govuk-grid-column-two-thirds-from-desktop
+    = form_for form, url: registration_research_participant_path, method: :patch do |f|
+      = f.govuk_error_summary
+
+      = f.govuk_fieldset legend: { text: t('research_participant.heading'), tag: 'h1', size: 'l' } do
+        p.govuk-body = t('research_participant.body')
+
+        = f.opt_in_out :research_participant
+
+      .govuk-button-group class='govuk-!-margin-top-4'
+        - if current_user.registration_complete?
+          = f.govuk_submit t('links.save')
+          = govuk_link_to t('links.cancel'), user_path
+        - else
+          = f.govuk_submit t('links.continue')

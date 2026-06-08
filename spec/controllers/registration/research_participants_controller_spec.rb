@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Registration::TrainingEmailsController, type: :controller do
+RSpec.describe Registration::ResearchParticipantsController, type: :controller do
   context 'when not signed in' do
     describe 'GET #edit' do
       it 'redirects' do
@@ -31,10 +31,10 @@ RSpec.describe Registration::TrainingEmailsController, type: :controller do
 
     describe 'POST #update' do
       context 'and first time' do
-        it 'succeeds' do
-          post :update, params: { user: { training_emails: 'true' } }
-          expect(response).to redirect_to edit_registration_research_participant_path
-          expect(user.reload.training_emails).to be true
+        it 'completes registration' do
+          post :update, params: { user: { research_participant: 'true' } }
+          expect(response).to redirect_to my_modules_path
+          expect(user.reload.research_participant).to be true
         end
       end
 
@@ -42,9 +42,9 @@ RSpec.describe Registration::TrainingEmailsController, type: :controller do
         let(:user) { create :user, :registered }
 
         it 'succeeds' do
-          post :update, params: { user: { training_emails: 'false' } }
+          post :update, params: { user: { research_participant: 'false' } }
           expect(response).to redirect_to user_path
-          expect(user.reload.training_emails).to be false
+          expect(user.reload.research_participant).to be false
         end
       end
     end
