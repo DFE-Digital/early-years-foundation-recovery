@@ -22,7 +22,7 @@ services:
 
   # docker-compose.yml (collector service)
   otel-collector:
-    image: otel/opentelemetry-collector-contrib:latest
+    image: otel/opentelemetry-collector-contrib:0.153.0
     volumes:
       - ./otel-collector-config.yml:/etc/otel-collector-config.yml
     command: ["--config", "/etc/otel-collector-config.yml"]
