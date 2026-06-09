@@ -495,7 +495,7 @@ GEM
       date
       stringio
     public_suffix (7.0.5)
-    puma (6.6.0)
+    puma (7.2.1)
       nio4r (~> 2.0)
     que (2.4.1)
     que-scheduler (6.0.0)
@@ -701,8 +701,6 @@ GEM
       railties (>= 7.1.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    tzinfo-data (1.2026.2)
-      tzinfo (>= 1.0.0)
     uber (0.1.0)
     unicode-display_width (3.1.4)
       unicode-emoji (~> 4.0, >= 4.0.4)
@@ -797,7 +795,7 @@ DEPENDENCIES
   pry-byebug
   pry-doc
   pry-rails
-  puma
+  puma (~> 7.2.1)
   que-scheduler
   rack-mini-profiler
   rails
