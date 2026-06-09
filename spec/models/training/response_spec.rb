@@ -55,6 +55,14 @@ RSpec.describe Response, type: :model do
       it '#summary' do
         expect(response.summary).to match(/You did not select the correct answers/)
       end
+
+      it '#correct_formative_answers_label' do
+        expect(response.correct_formative_answers_label).to eq 'Correct answer 1'
+      end
+
+      it '#only_one_correct_formative_answers_count' do
+        expect(response.only_one_correct_formative_answers_count).to be true
+      end
     end
   end
 
@@ -99,6 +107,14 @@ RSpec.describe Response, type: :model do
 
       it '#summary' do
         expect(response.summary).to match(/You did not select the correct answers/)
+      end
+
+      it '#correct_formative_answers_label' do
+        expect(response.correct_formative_answers_label).to eq 'Correct answer 1 and Correct answer 2'
+      end
+
+      it '#only_one_correct_formative_answers_count' do
+        expect(response.only_one_correct_formative_answers_count).to be false
       end
     end
   end
