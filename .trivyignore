@@ -15,3 +15,6 @@ CVE-2026-41316
 
 # CVE-2026-45363: ruby-jwt empty-key HMAC bypass (fixed in 3.2.0).
 CVE-2026-45363
+
+# Dependent on otelcol (no fix available currently)
+CVE-2026-42504
