@@ -12,9 +12,17 @@ module LinkHelper
     when %r{training/(pages|questions|assessments)}
       govuk_back_link href: training_module_path(mod.name),
                       text: "Back to Module #{mod.position} overview"
-    when 'pages', 'settings', 'feedback', %r{registration/*.}, 'close_accounts'
+    when 'pages', 'settings', 'feedback', 'close_accounts'
       govuk_back_link href: url_for(:back)
+    when %r{registration/*.}
+      govuk_back_link href: registration_back_link_helper
     end
+  end
+
+  def registration_back_link_helper
+    # WIP - Add to this depending on the page in the registration journey
+    # and already completed information
+    url_for(:back)
   end
 
   # @return [String]
