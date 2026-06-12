@@ -15,6 +15,10 @@
         - row.with_key { 'Name' }
         - row.with_value(text: current_user.name, html_attributes: { 'data-clarity-mask': 'True' })
         - row.with_action(text: 'Change name', href: edit_registration_name_path, html_attributes: { id: :edit_name_registration })
+      - your_details.with_row do |row|
+        - row.with_key { t('my_account.where_you_live.label') }
+        - row.with_value(text: current_user.country.presence || t('my_account.where_you_live.default'), html_attributes: { 'data-clarity-mask': 'True' })
+        - row.with_action(text: t('my_account.where_you_live.link_text'), href: edit_registration_where_you_live_path, html_attributes: { id: :edit_where_you_live_registration })
 
     p.text-secondary
       = t('my_account.name_information')
@@ -54,7 +58,7 @@
       - research_preferences.with_row do |row|
         - row.with_key { t('my_account.research_preferences.label') }
         - row.with_value(text: t(current_user.research_participant?, scope: 'my_account.research_preferences.preference'), html_attributes: { 'data-clarity-mask': 'True' })
-        - row.with_action(text: t('my_account.research_preferences.link_text'), href: feedback_path(user_research_question.name))
+        - row.with_action(text: t('my_account.research_preferences.link_text'), href: edit_registration_research_participant_path, html_attributes: { id: :edit_research_participant_user })
 
     = render 'debug'
 

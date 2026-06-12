@@ -157,7 +157,7 @@ variable "reviewapp_config_contentful_preview" {
 }
 
 variable "reviewapp_config_disable_pre_confidence_check" {
-  default = true
+  default = false
   type    = string
 }
 
@@ -220,7 +220,7 @@ variable "webapp_config_contentful_preview" {
 }
 
 variable "webapp_config_disable_pre_confidence_check" {
-  default = true
+  default = false
   type    = string
 }
 

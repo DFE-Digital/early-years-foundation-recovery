@@ -3,11 +3,13 @@
 #
 #   1. terms_and_conditions (one-off)
 #   2. name
-#   3. setting_type / setting_type_other
-#   4. local_authority
-#   5. role_type / role_type_other
-#   6. early_years_experience
-#   7. training_emails
+#   3. where_you_live
+#   4. setting_type / setting_type_other
+#   5. local_authority
+#   6. role_type / role_type_other
+#   7. early_years_experience
+#   8. training_emails
+#   9. research_participant
 #
 module Registration
   class BaseController < ApplicationController

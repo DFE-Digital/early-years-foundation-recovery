@@ -1,0 +1,17 @@
+= render 'user/debug'
+
+- content_for :page_title do
+  = html_title t('register_where_you_live.heading')
+
+.govuk-grid-row
+  .govuk-grid-column-full
+    = form_for form, url: registration_where_you_live_path, method: :patch do |f|
+      = f.govuk_error_summary
+
+      = f.govuk_fieldset legend: { text: t('register_where_you_live.heading') } do
+        = m('register_where_you_live.body')
+
+        div class='govuk-!-margin-top-4' data-clarity-mask='True'
+          = f.select_where_you_live
+
+      = f.govuk_submit t('links.continue')

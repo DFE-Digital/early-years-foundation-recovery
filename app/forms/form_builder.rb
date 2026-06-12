@@ -109,11 +109,26 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
       end
     end
 
+    where_you_live =
+      if object.respond_to?(:where_you_live)
+        object.where_you_live
+      elsif object.respond_to?(:user)
+        object.user&.country
+      end
+
+    if settings.any? { |setting| setting.respond_to?(:region) }
+      if where_you_live == 'England'
+        settings = settings.select { |setting| !setting.respond_to?(:region) || setting.region == 'England' }
+      elsif where_you_live.present?
+        settings = settings.reject { |setting| setting.respond_to?(:region) && setting.region == 'England' }
+      end
+    end
+
     govuk_collection_select :setting_type_id,
                             settings, :name, :title,
                             options: { include_blank: true },
                             label: { text: I18n.t('register_setting.label'), class: 'govuk-visually-hidden' },
-                            hint: { text: I18n.t('register_setting.body') },
+                            hint: { text: I18n.t('register_setting.hint') },
                             data: { controller: 'autocomplete', 'autocomplete-message-value': I18n.t('register_setting.not_found') },
                             aria: { label: 'registration setting type' },
                             form_group: { attributes: { 'data-clarity-mask': 'True' } }
@@ -125,7 +140,7 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
                             Trainee::Authority.all, :name, :name,
                             options: { include_blank: true },
                             label: { text: I18n.t('register_authority.label'), class: 'govuk-visually-hidden' },
-                            hint: { text: I18n.t('register_authority.body') },
+                            hint: { text: I18n.t('register_authority.hint') },
                             data: { controller: 'autocomplete', 'autocomplete-message-value': I18n.t('register_authority.not_found') },
                             aria: { label: 'registration local authority' },
                             form_group: { attributes: { 'data-clarity-mask': 'True' } }
@@ -140,12 +155,20 @@ class FormBuilder < GOVUKDesignSystemFormBuilder::FormBuilder
                                    form_group: { attributes: { 'data-clarity-mask': 'True' } }
   end
 
+  # @return [String]
+  def select_where_you_live
+    govuk_collection_radio_buttons :where_you_live,
+                                   Trainee::Location.all, :id, :name,
+                                   legend: { text: I18n.t('register_where_you_live.label'), class: 'govuk-visually-hidden govuk-!-padding-top-9' },
+                                   aria: { label: 'registration where you live' },
+                                   form_group: { attributes: { 'data-clarity-mask': 'True' } }
+  end
+
   # @param field [Symbol]
   # @return [String]
   def opt_in_out(field)
     govuk_collection_radio_buttons field,
                                    FormOption.build(field), :id, :name,
-                                   legend: { text: I18n.t(:heading, scope: field) },
-                                   hint: { text: I18n.t(:body, scope: field) }
+                                   legend: { text: I18n.t(:heading, scope: field), class: 'govuk-visually-hidden' }
   end
 end

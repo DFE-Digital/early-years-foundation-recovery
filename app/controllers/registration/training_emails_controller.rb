@@ -10,7 +10,7 @@ module Registration
         if current_user.registration_complete?
           redirect_to user_path, notice: helpers.m(:details_updated)
         else
-          complete_registration
+          redirect_to edit_registration_research_participant_path
         end
       else
         track('user_training_emails_change', success: false)

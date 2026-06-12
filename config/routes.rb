@@ -26,6 +26,10 @@ Rails.application.routes.draw do
   namespace :registration do
     resource :terms_and_conditions,   only: %i[edit update], path: 'terms-and-conditions'
     resource :name,                   only: %i[edit update]
+    resource :where_you_live,
+             only: %i[edit update],
+             path: 'where-you-live',
+             controller: :where_you_live
     resource :setting_type,           only: %i[edit update], path: 'setting-type'
     resource :setting_type_other,     only: %i[edit update], path: 'setting-type-other'
     resource :local_authority,        only: %i[edit update], path: 'local-authority'
@@ -33,6 +37,7 @@ Rails.application.routes.draw do
     resource :role_type_other,        only: %i[edit update], path: 'role-type-other'
     resource :early_years_experience, only: %i[edit update], path: 'early-years-experience'
     resource :training_emails,        only: %i[edit update], path: 'training-emails'
+    resource :research_participant,   only: %i[edit update], path: 'research-participant'
   end
 
   resource :user, controller: :user, only: %i[show], path: 'my-account' do

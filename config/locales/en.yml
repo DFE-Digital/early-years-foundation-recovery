@@ -23,9 +23,13 @@ en:
               blank: Enter your job title.
             early_years_experience:
               blank: Choose an option.
+            where_you_live:
+              blank: Choose an option.
             local_authority:
               blank: Enter the local authority of the setting or organisation you work in most of the time.
             training_emails:
+              blank: Choose an option.
+            research_participant:
               blank: Choose an option.
 
   # Validations ----------------------------------------------------------------
@@ -340,6 +344,10 @@ en:
     name_information: This is the name that will appear on your end of module certificate. You can use this setting to change how your name appears. Changing your name on this account will not affect your GOV.UK One Login
     setting_details: |
       ## Your setting details
+    where_you_live:
+      label: Where you live
+      link_text: Change
+      default: England
 
     email_preferences:
       heading: |
@@ -470,13 +478,20 @@ en:
     heading: About you
     body: We're asking for your details so we can personalise your training certificates.
 
+  # /registration/where-you-live/edit
+  register_where_you_live:
+    heading: Where do you live?
+    body: |
+      The training is based on the Early Years Foundation (EYFS) framework used in England. You can
+      still use the training even if you live outside England.
+    label: Where you live
+
   # /registration/setting-type/edit
   register_setting:
     heading: What setting type do you work in?
     body: |
-      Search for the type of setting or organisation you work in, for example childminder or nursery.
-      If you work in more than one early years setting, enter the one where you work most often.
-      Your training progress won't be shared with anyone without your permission.
+      Select the setting you work in most often, for example childminder or nursery. if you don't work in a setting, for example you're a parent or carer or are unemployed, select these options.
+    hint: Search and select the most relevant setting
     label: Setting type
     other_link: I cannot find my setting or organisation
     not_found: No setting found.
@@ -489,9 +504,9 @@ en:
   # /registration/local-authority/edit
   register_authority:
     heading: What local authority area do you work in?
-    body: This could be your county council, district council or London borough.
+    body: This could be your county council, district council or London borough. If you work across more than one local authority, select the most relevant.
+    hint: Search and select your local authority
     label: Local authority
-    other_link: I work across more than one local authority
     not_found: No local authority found.
 
   # /registration/role-type/edit
@@ -517,6 +532,12 @@ en:
     body: Turn on email updates to find out about new modules and features in this training course.
     opt_in: Send me email updates about this training course
     opt_out: Do not send me email updates about this training course
+
+  research_participant:
+    heading: Would you be willing to be contacted to help improve this training?
+    body: We sometimes invite users to take part in short user research activities. Participation is entirely voluntary and you are free to withdraw at any point.
+    opt_in: 'Yes'
+    opt_out: 'No'
 
   # /
   home:
