@@ -1,5 +1,5 @@
 - if mod.data.debug?
-  pre.debug_dump style='background-color: red; color: white'
+  pre.debug_dump.debug_dump--error
     h2 CONTENT SUMMARY
     ol
       - mod.data.errors.each do |hint|

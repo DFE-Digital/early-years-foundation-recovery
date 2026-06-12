@@ -23,7 +23,9 @@
       .about-module-box-panel
         p.govuk-body-l
           = mod.description
-      .about-module-box-panel style="min-height: 150px; background-image: url(#{mod.thumbnail_url})"
+      .about-module-box-panel.about-module-box-panel--thumbnail
+        - if mod.thumbnail_url.present?
+          = image_tag mod.thumbnail_url, alt: '', class: 'about-module-box-thumbnail', loading: 'lazy'
 
     = m('about.summary', outcomes: mod.outcomes, criteria: mod.criteria)
     = render 'enrol'

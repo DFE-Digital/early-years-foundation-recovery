@@ -109,12 +109,26 @@ label.menu-icon {
   &-panel {
     flex: 100%;
     padding: 1.5em;
-    background-size: cover;
-    background-position: center;
 
     @include govuk-media-query($from: tablet) {
       flex: 50%;
       padding: 3em;
     }
   }
+
+  &-panel--thumbnail {
+    min-height: 150px;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    padding: 0;
+  }
+}
+
+.about-module-box-thumbnail {
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+  object-fit: cover;
+  display: block;
 }

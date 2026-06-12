@@ -32,3 +32,14 @@ p#progress-pages {
     background-color: $govuk-success-colour;
   }
 }
+
+@for $i from 0 through 100 {
+  .section-progress--#{$i} {
+    width: percentage($i / 100);
+  }
+}
+
+.debug_dump--error {
+  background-color: govuk-colour('red');
+  color: govuk-colour('white');
+}

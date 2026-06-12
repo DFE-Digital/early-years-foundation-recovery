@@ -20,7 +20,7 @@
 
         .bar-settings
           .bar-bg
-          .bar-progress style="width: #{progress.percentage}"
+          .bar-progress class="bar-progress--#{progress.percentage.to_i.clamp(0, 100)}"
             .bar-ball
 
       - if show_progress_description && progress.description.present?

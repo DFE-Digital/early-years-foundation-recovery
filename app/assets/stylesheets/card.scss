@@ -12,12 +12,22 @@
   border-radius: 4px;
 }
 
+@for $i from 0 through 100 {
+  .bar-progress--#{$i} {
+    width: percentage($i / 100);
+  }
+}
+
 .bar-ball {
   width: 17px;
   height: 17px;
   border-radius: 9px;
   top: -4px;
   right: 0;
+}
+
+.note-form-errors {
+  color: govuk-colour('red');
 }
 
 // ================================================================================

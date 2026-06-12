@@ -6,7 +6,7 @@
   p#progress-pages= section_bar.page_numbers
 
   #progress-inactive
-    #progress-active style="width: #{section_bar.percentage}"
+    #progress-active class="section-progress--#{section_bar.percentage.to_i.clamp(0, 100)}"
 
 - if Rails.application.preview?
   = link_to_cms

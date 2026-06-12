@@ -18,7 +18,7 @@
               h2.govuk-heading-m Add to your learning log
 
               - if note.errors.any?
-                div style='color: red'
+                .note-form-errors
                   h2= "#{pluralize(note.errors.count, 'error')} prohibited this note from being saved:"
                   ul
                     - note.errors.each do |error|
