@@ -5,11 +5,11 @@
 .menu-btn {
   display: none;
 
-  &:checked ~ .dfe-vertical-nav {
+  &:checked~.dfe-vertical-nav {
     display: block;
   }
 
-  &:not(:checked) ~ .dfe-vertical-nav {
+  &:not(:checked)~.dfe-vertical-nav {
     display: none;
 
     @include govuk-media-query($from: tablet) {

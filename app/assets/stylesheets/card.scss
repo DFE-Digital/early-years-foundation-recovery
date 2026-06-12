@@ -78,10 +78,13 @@
   background-color: govuk-colour('light-grey');
   border-bottom: 3px solid govuk-colour('dark-blue');
 
-  &:hover, &:focus-within {
-    background-color:  $govuk-link-hover-colour;
+  &:hover,
+  &:focus-within {
+    background-color: $govuk-link-hover-colour;
 
-    a, .percentage, .description {
+    a,
+    .percentage,
+    .description {
       color: govuk-colour('white');
     }
 
@@ -114,10 +117,10 @@
     max-width: 300px;
   }
 
-.govuk-tag--ey {
-  width: min-content;
-  margin: govuk-spacing(1) 0;
-}
+  .govuk-tag--ey {
+    width: min-content;
+    margin: govuk-spacing(1) 0;
+  }
 
   &-container {
     display: flex;
@@ -158,10 +161,13 @@
 
   }
 
-  &:hover, &:focus-within {
-    background-color:  $govuk-link-hover-colour;
+  &:hover,
+  &:focus-within {
+    background-color: $govuk-link-hover-colour;
 
-    a, .percentage, .description {
+    a,
+    .percentage,
+    .description {
       color: govuk-colour('white');
     }
 
@@ -198,7 +204,8 @@
     outline: 3px solid govuk-colour('yellow');
   }
 
-  &-link--retake, &-link--header {
+  &-link--retake,
+  &-link--header {
     &:focus {
       @include govuk-focused-text;
       background-color: $govuk-focus-colour;
@@ -217,11 +224,11 @@
     position: relative;
     z-index: 2;
   }
-  
+
   &-link--header {
     text-decoration: none;
     color: govuk-colour('blue');
-    
+
     // TODO: document what this is doing
     &::after {
       position: absolute;
