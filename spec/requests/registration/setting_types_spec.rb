@@ -45,5 +45,17 @@ RSpec.describe 'Registration settings', type: :request do
         expect(response).to redirect_to edit_registration_role_type_path
       end
     end
+
+    context 'when the chosen setting has no role' do
+      subject(:user) { create(:user, :confirmed, country: 'Scotland') }
+
+      let(:setting) { 'department_for_education' }
+
+      it 'skips the role form' do
+        update_user
+        expect(response).not_to redirect_to edit_registration_role_type_path
+        expect(response).to redirect_to edit_registration_training_emails_path
+      end
+    end
   end
 end

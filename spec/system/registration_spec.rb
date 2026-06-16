@@ -99,6 +99,13 @@ RSpec.describe 'Registration' do
     choose 'Yes'
     click_button 'Continue'
 
+    # Check your answers
+    expect(page).to have_current_path '/registration/check-your-answers/edit'
+    expect(page).to have_text('Check your answers')
+      .and have_text('user defined setting type')
+      .and have_text('user defined job title')
+    click_button 'Confirm and create account'
+
     # End
     expect(page).to have_text 'You can now start your first module.'
   end
@@ -151,6 +158,14 @@ RSpec.describe 'Registration' do
     expect(page).to have_current_path '/registration/research-participant/edit'
     choose 'No'
     click_button 'Continue'
+
+    # Check your answers
+    expect(page).to have_current_path '/registration/check-your-answers/edit'
+    expect(page).to have_text('Check your answers')
+      .and have_text('Local authority maintained nursery school')
+      .and have_text('Leeds')
+      .and have_text('Student')
+    click_button 'Confirm and create account'
 
     # End
     expect(page).to have_text 'You can now start your first module.'

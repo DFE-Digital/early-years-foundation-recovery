@@ -12,8 +12,76 @@ module LinkHelper
     when %r{training/(pages|questions|assessments)}
       govuk_back_link href: training_module_path(mod.name),
                       text: "Back to Module #{mod.position} overview"
-    when 'pages', 'settings', 'feedback', %r{registration/*.}, 'close_accounts'
+    when 'pages', 'settings', 'feedback', 'close_accounts'
       govuk_back_link href: url_for(:back)
+    when %r{registration/*.}
+      govuk_back_link href: registration_back_link_helper
+    end
+  end
+
+  # The previous page is derived from the user's saved answers so that it
+  # mirrors the forward journey
+  # @return [String]
+  def registration_back_link_helper
+    return edit_registration_check_your_answers_path if reviewing?
+
+    case params[:controller]
+    when 'registration/names'
+      edit_registration_terms_and_conditions_path
+    when 'registration/where_you_live'
+      edit_registration_name_path
+    when 'registration/setting_types'
+      edit_registration_where_you_live_path
+    when 'registration/setting_type_others'
+      edit_registration_setting_type_path
+    when 'registration/local_authorities'
+      registration_setting_step_path
+    when 'registration/role_types'
+      registration_la_step? ? edit_registration_local_authority_path : registration_setting_step_path
+    when 'registration/role_type_others'
+      edit_registration_role_type_path
+    when 'registration/early_years_experiences'
+      registration_role_step_path
+    when 'registration/training_emails'
+      registration_training_emails_back_path
+    when 'registration/research_participants'
+      edit_registration_training_emails_path
+    when 'registration/check_your_answers'
+      edit_registration_research_participant_path
+    else
+      url_for(:back)
+    end
+  end
+
+  # @return [String] the setting step the user passed through (custom or standard)
+  def registration_setting_step_path
+    current_user.setting_other? ? edit_registration_setting_type_other_path : edit_registration_setting_type_path
+  end
+
+  # @return [String] the role step the user passed through (custom or standard)
+  def registration_role_step_path
+    current_user.role_other? ? edit_registration_role_type_other_path : edit_registration_role_type_path
+  end
+
+  # @return [Boolean] a local authority was collected (England + LA setting)
+  def registration_la_step?
+    la = current_user.local_authority
+    la.present? && la != I18n.t(:na)
+  end
+
+  # @return [Boolean] a real role (and therefore experience) was collected
+  def registration_experience_step?
+    current_user.early_years_experience.present?
+  end
+
+  # @return [String] the page preceding the email preferences step
+  def registration_training_emails_back_path
+    if registration_experience_step?
+      edit_registration_early_years_experience_path
+    elsif registration_la_step?
+      edit_registration_local_authority_path
+    else
+      registration_setting_step_path
     end
   end
 

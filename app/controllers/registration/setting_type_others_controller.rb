@@ -11,7 +11,9 @@ module Registration
 
         track('user_setting_type_other_change', success: true)
 
-        if england_selected? && setting.local_authority? && user.local_authority.blank?
+        if reviewing?
+          redirect_to resume_registration_path
+        elsif england_selected? && setting.local_authority? && user.local_authority.blank?
           redirect_to edit_registration_local_authority_path
         elsif !england_selected?
           redirect_to edit_registration_role_type_path

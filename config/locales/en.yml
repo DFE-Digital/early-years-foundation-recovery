@@ -525,6 +525,18 @@ en:
     heading: How long have you worked in early years?
     label: Early years experience
 
+  # /registration/check-your-answers/edit
+  register_check_your_answers:
+    heading: Check your answers
+    your_details: Your details
+    setting_details: Setting details
+    your_preferences: Your preferences
+    research_label: Willing to participate in user research
+    change: Change
+    confirm: Confirm and create account
+    'true': 'Yes'
+    'false': 'No'
+
   # Email Preferences ----------------------------------------------------------
 
   training_emails:

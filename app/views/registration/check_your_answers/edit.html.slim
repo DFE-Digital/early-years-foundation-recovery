@@ -1,0 +1,56 @@
+= render 'user/debug'
+
+- content_for :page_title do
+  = html_title t('register_check_your_answers.heading')
+
+.govuk-grid-row
+  .govuk-grid-column-two-thirds-from-desktop
+    h1.govuk-heading-l = t('register_check_your_answers.heading')
+
+    h2.govuk-heading-m = t('register_check_your_answers.your_details')
+    = govuk_summary_list do |your_details|
+      - your_details.with_row do |row|
+        - row.with_key { 'Name' }
+        - row.with_value(text: current_user.name, html_attributes: { 'data-clarity-mask': 'True' })
+        - row.with_action(text: t('register_check_your_answers.change'), visually_hidden_text: 'name', href: edit_registration_name_path(return_to: 'check_your_answers'))
+      - your_details.with_row do |row|
+        - row.with_key { t('my_account.where_you_live.label') }
+        - row.with_value(text: current_user.country.presence || t('my_account.where_you_live.default'), html_attributes: { 'data-clarity-mask': 'True' })
+        - row.with_action(text: t('register_check_your_answers.change'), visually_hidden_text: 'where you live', href: edit_registration_where_you_live_path(return_to: 'check_your_answers'))
+
+    h2.govuk-heading-m = t('register_check_your_answers.setting_details')
+    = govuk_summary_list do |setting_details|
+      - setting_details.with_row do |row|
+        - row.with_key { 'Setting type' }
+        - row.with_value(text: current_user.setting_name, html_attributes: { 'data-clarity-mask': 'True' })
+        - row.with_action(text: t('register_check_your_answers.change'), visually_hidden_text: 'setting type', href: edit_registration_setting_type_path(return_to: 'check_your_answers'))
+      - if current_user.authority_name != t(:na)
+        - setting_details.with_row do |row|
+          - row.with_key { 'Local authority' }
+          - row.with_value(text: current_user.authority_name, html_attributes: { 'data-clarity-mask': 'True' })
+          - row.with_action(text: t('register_check_your_answers.change'), visually_hidden_text: 'local authority', href: edit_registration_local_authority_path(return_to: 'check_your_answers'))
+      - if current_user.role_name.present? && current_user.role_name != t(:na)
+        - setting_details.with_row do |row|
+          - row.with_key { 'Role' }
+          - row.with_value(text: current_user.role_name, html_attributes: { 'data-clarity-mask': 'True' })
+          - row.with_action(text: t('register_check_your_answers.change'), visually_hidden_text: 'role', href: edit_registration_role_type_path(return_to: 'check_your_answers'))
+      - if early_years_experience_patch.present? && early_years_experience_patch != t(:na)
+        - setting_details.with_row do |row|
+          - row.with_key { t('my_account.early_years_experience') }
+          - row.with_value(text: early_years_experience_patch, html_attributes: { 'data-clarity-mask': 'True' })
+          - row.with_action(text: t('register_check_your_answers.change'), visually_hidden_text: 'time worked in early years', href: edit_registration_early_years_experience_path(return_to: 'check_your_answers'))
+
+    h2.govuk-heading-m = t('register_check_your_answers.your_preferences')
+    = govuk_summary_list do |preferences|
+      - preferences.with_row do |row|
+        - row.with_key { 'Email updates' }
+        - row.with_value(text: t("register_check_your_answers.#{current_user.training_emails_recipient?}"), html_attributes: { 'data-clarity-mask': 'True' })
+        - row.with_action(text: t('register_check_your_answers.change'), visually_hidden_text: 'email updates', href: edit_registration_training_emails_path(return_to: 'check_your_answers'))
+      - preferences.with_row do |row|
+        - row.with_key { t('register_check_your_answers.research_label') }
+        - row.with_value(text: t("register_check_your_answers.#{current_user.research_participant?}"), html_attributes: { 'data-clarity-mask': 'True' })
+        - row.with_action(text: t('register_check_your_answers.change'), visually_hidden_text: 'willing to participate in user research', href: edit_registration_research_participant_path(return_to: 'check_your_answers'))
+
+    .govuk-button-group class='govuk-!-margin-top-6'
+      = govuk_button_link_to t('previous_page.previous'), edit_registration_research_participant_path, secondary: true
+      = govuk_button_to t('register_check_your_answers.confirm'), registration_check_your_answers_path, method: :patch

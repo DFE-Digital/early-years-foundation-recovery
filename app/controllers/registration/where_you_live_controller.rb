@@ -7,7 +7,7 @@ module Registration
 
       if form.save
         track('user_where_you_live_change', success: true)
-        redirect_to edit_registration_setting_type_path
+        redirect_to(reviewing? ? resume_registration_path : edit_registration_setting_type_path)
       else
         track('user_where_you_live_change', success: false)
         render :edit, status: :unprocessable_content

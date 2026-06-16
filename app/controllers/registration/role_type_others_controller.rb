@@ -7,7 +7,7 @@ module Registration
 
       if form.save
         track('user_role_type_other_change', success: true)
-        redirect_to edit_registration_early_years_experience_path
+        redirect_to(reviewing? ? resume_registration_path : edit_registration_early_years_experience_path)
       else
         track('user_role_type_other_change', success: false)
         render :edit, status: :unprocessable_content

@@ -48,5 +48,9 @@ RSpec.describe Registration::SettingTypeForm do
       expect(user.local_authority).to eq 'Not applicable'
       expect(user.role_type).to eq 'Not applicable'
     end
+
+    it 'clears the stale early years experience' do
+      expect(user.early_years_experience).to be_nil
+    end
   end
 end

@@ -7,9 +7,11 @@ module Registration
 
       if form.save
         track('user_setting_type_change', success: true)
-        if england_selected? && form.setting_type.local_authority?
+        if reviewing?
+          redirect_to resume_registration_path
+        elsif england_selected? && form.setting_type.local_authority?
           redirect_to edit_registration_local_authority_path
-        elsif !england_selected?
+        elsif !england_selected? && form.setting_type.has_role?
           redirect_to edit_registration_role_type_path
         elsif current_user.registration_complete?
           redirect_to user_path, notice: helpers.m(:details_updated)

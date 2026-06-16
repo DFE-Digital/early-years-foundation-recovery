@@ -7,10 +7,12 @@ module Registration
 
       if form.save
         track('user_research_participant_change', success: true)
-        if current_user.registration_complete?
+        if reviewing?
+          redirect_to resume_registration_path
+        elsif current_user.registration_complete?
           redirect_to user_path, notice: helpers.m(:details_updated)
         else
-          complete_registration
+          redirect_to edit_registration_check_your_answers_path
         end
       else
         track('user_research_participant_change', success: false)

@@ -196,6 +196,140 @@ describe 'LinkHelper', type: :helper do
     end
   end
 
+  describe '#registration_back_link_helper' do
+    subject(:back) { helper.registration_back_link_helper }
+
+    let(:user) do
+      create :user, :named,
+             country: 'England',
+             setting_type_id: 'nursery_private',
+             setting_type: 'Private nursery',
+             local_authority: 'Leeds',
+             role_type: 'Student',
+             early_years_experience: '2-5',
+             registration_complete: false
+    end
+
+    def reviewing(value)
+      without_partial_double_verification do
+        allow(helper).to receive(:reviewing?).and_return(value)
+      end
+    end
+
+    def on(controller)
+      without_partial_double_verification do
+        allow(helper).to receive(:params).and_return(
+          ActionController::Parameters.new(controller: controller),
+        )
+      end
+    end
+
+    context 'when editing answers from the check your answers page' do
+      before do
+        reviewing(true)
+        on('registration/names')
+      end
+
+      it 'returns to the check your answers page' do
+        expect(back).to eq edit_registration_check_your_answers_path
+      end
+    end
+
+    context 'when stepping back through the linear journey' do
+      before { reviewing(false) }
+
+      it 'name -> terms and conditions' do
+        on('registration/names')
+        expect(back).to eq edit_registration_terms_and_conditions_path
+      end
+
+      it 'where you live -> name' do
+        on('registration/where_you_live')
+        expect(back).to eq edit_registration_name_path
+      end
+
+      it 'setting type -> where you live' do
+        on('registration/setting_types')
+        expect(back).to eq edit_registration_where_you_live_path
+      end
+
+      it 'custom setting -> setting type' do
+        on('registration/setting_type_others')
+        expect(back).to eq edit_registration_setting_type_path
+      end
+
+      it 'local authority -> setting type' do
+        on('registration/local_authorities')
+        expect(back).to eq edit_registration_setting_type_path
+      end
+
+      it 'role -> local authority when a local authority was collected' do
+        on('registration/role_types')
+        expect(back).to eq edit_registration_local_authority_path
+      end
+
+      it 'experience -> role' do
+        on('registration/early_years_experiences')
+        expect(back).to eq edit_registration_role_type_path
+      end
+
+      it 'email preferences -> experience' do
+        on('registration/training_emails')
+        expect(back).to eq edit_registration_early_years_experience_path
+      end
+
+      it 'research participation -> email preferences' do
+        on('registration/research_participants')
+        expect(back).to eq edit_registration_training_emails_path
+      end
+
+      it 'check your answers -> research participation' do
+        on('registration/check_your_answers')
+        expect(back).to eq edit_registration_research_participant_path
+      end
+    end
+
+    context 'when outside England with a role but no local authority' do
+      let(:user) do
+        create :user, :named,
+               country: 'Scotland',
+               setting_type_id: 'childminder_independent',
+               setting_type: 'Independent childminder',
+               local_authority: nil,
+               role_type: 'Childminder',
+               early_years_experience: '0-2',
+               registration_complete: false
+      end
+
+      before { reviewing(false) }
+
+      it 'role -> setting type (local authority skipped)' do
+        on('registration/role_types')
+        expect(back).to eq edit_registration_setting_type_path
+      end
+    end
+
+    context 'when the setting needs no local authority, role or experience' do
+      let(:user) do
+        create :user, :named,
+               country: 'England',
+               setting_type_id: 'department_for_education',
+               setting_type: 'Department for Education',
+               local_authority: I18n.t(:na),
+               role_type: I18n.t(:na),
+               early_years_experience: nil,
+               registration_complete: false
+      end
+
+      before { reviewing(false) }
+
+      it 'email preferences -> setting type' do
+        on('registration/training_emails')
+        expect(back).to eq edit_registration_setting_type_path
+      end
+    end
+  end
+
   describe '#link_to_skip_feedback' do
     subject(:link) { helper.link_to_skip_feedback }
 

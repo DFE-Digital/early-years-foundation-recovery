@@ -30,9 +30,9 @@ RSpec.describe 'Registration research participation', type: :request do
         expect { update_user }.to change { user.reload.research_participant }.to(true)
       end
 
-      it 'completes registration and redirects to my modules' do
+      it 'redirects to the check your answers page' do
         update_user
-        expect(response).to redirect_to my_modules_path
+        expect(response).to redirect_to edit_registration_check_your_answers_path
       end
     end
   end

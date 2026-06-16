@@ -14,6 +14,7 @@ module Registration
         setting_type_other: setting_type_other,
         role_type: I18n.t(:na),
         local_authority: I18n.t(:na),
+        early_years_experience: nil,
       )
     end
   end

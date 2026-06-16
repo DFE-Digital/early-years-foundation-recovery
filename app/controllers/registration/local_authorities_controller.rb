@@ -7,7 +7,7 @@ module Registration
 
       if form.save
         track('user_local_authority_change', success: true)
-        redirect_to next_form_path
+        redirect_to(reviewing? ? resume_registration_path : next_form_path)
       else
         track('user_local_authority_change', success: false)
         render :edit, status: :unprocessable_content

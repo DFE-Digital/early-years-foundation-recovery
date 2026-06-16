@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     resource :early_years_experience, only: %i[edit update], path: 'early-years-experience'
     resource :training_emails,        only: %i[edit update], path: 'training-emails'
     resource :research_participant,   only: %i[edit update], path: 'research-participant'
+    resource :check_your_answers,     only: %i[edit update], path: 'check-your-answers'
   end
 
   resource :user, controller: :user, only: %i[show], path: 'my-account' do

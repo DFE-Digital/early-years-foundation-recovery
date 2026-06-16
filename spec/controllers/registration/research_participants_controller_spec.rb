@@ -31,9 +31,9 @@ RSpec.describe Registration::ResearchParticipantsController, type: :controller d
 
     describe 'POST #update' do
       context 'and first time' do
-        it 'completes registration' do
+        it 'redirects to check your answers' do
           post :update, params: { user: { research_participant: 'true' } }
-          expect(response).to redirect_to my_modules_path
+          expect(response).to redirect_to edit_registration_check_your_answers_path
           expect(user.reload.research_participant).to be true
         end
       end

@@ -89,6 +89,8 @@ module Trainee
         setting_type_other: nil,
         local_authority: (I18n.t(:na) unless local_authority?),
         role_type: (I18n.t(:na) unless has_role?),
+        # Experience is only collected after a role, so reset it with the role
+        early_years_experience: nil,
       }
     end
   end
