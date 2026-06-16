@@ -1,34 +1,18 @@
-# Bypass authentication using HTTP Header for automated accessibility audit
-#
 module Auditing
   extend ActiveSupport::Concern
 
 private
 
-  # @return [User]
-  def bot
-    User.find_by(email: bot_email)
+  # Authenticates the dedicated accessibility bot for /audit only.
+  def authenticate_audit_bot!
+    enforce_bot_auth!(scope: 'audit', valid: audit_bot_token?)
   end
 
-  # @return [Boolean]
-  def bot?
-    bot_request.present? && bot.present? && bot_token?
-  end
+  def audit_bot_token?
+    token = request.headers['BOT'].to_s
+    expected = Rails.configuration.audit_bot_token.to_s
 
-  # @return [String]
-  def bot_request
-    request.headers['BOT']
-  end
-
-  # @see lib/tasks/efys.rake
-  # @return [String]
-  def bot_email
-    "#{Rails.configuration.bot_token}@example.com"
-  end
-
-  # @return [Boolean]
-  def bot_token?
-    # Update this to be unique to endpoints
-    Rails.configuration.bot_token == bot_request
+    token.present? && expected.present? &&
+      ActiveSupport::SecurityUtils.secure_compare(token, expected)
   end
 end

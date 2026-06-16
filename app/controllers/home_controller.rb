@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_action :authenticate_registered_user!, only: %i[audit]
+  before_action :authenticate_audit_bot!, only: %i[audit]
 
   layout 'hero'
 

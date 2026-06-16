@@ -7,7 +7,19 @@ class WebhookController < ApplicationController
 private
 
   def authenticate_webhook!
-    render json: { status: 'invalid secure header' }, status: :unauthorized unless bot_token?
+    enforce_bot_auth!(scope: webhook_auth_scope, valid: webhook_token?)
+  end
+
+  def webhook_auth_scope
+    'contentful-webhook'
+  end
+
+  def webhook_token?
+    token = request.headers['BOT'].to_s
+    expected = Rails.configuration.contentful_webhook_token.to_s
+
+    token.present? && expected.present? &&
+      ActiveSupport::SecurityUtils.secure_compare(token, expected)
   end
 
   # @return [Hash]

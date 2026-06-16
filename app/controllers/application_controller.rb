@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
 
   default_form_builder ::FormBuilder
 
+  include BotAuthProtection
   include Auditing
   include Logging
   include Tracking
@@ -60,9 +61,9 @@ class ApplicationController < ActionController::Base
     @clarity_tracking_id = Rails.configuration.clarity_tracking_id
   end
 
-  # @return [Boolean] do not run accessibility tests with debug panels visible
+  # @return [Boolean]
   def debug?
-    Rails.application.debug? && !bot?
+    Rails.application.debug?
   end
 
 private
@@ -89,11 +90,7 @@ private
     end
   end
 
-  # @see Auditing
-  # @return [User, nil]
   def current_user
-    return bot if bot?
-
     super
   end
 
@@ -103,11 +100,8 @@ private
     Guest.new(visit: visit)
   end
 
-  # @see Auditing
-  # @return [Boolean]
   def user_signed_in?
     return false if current_user&.guest?
-    return true if bot?
 
     super
   end

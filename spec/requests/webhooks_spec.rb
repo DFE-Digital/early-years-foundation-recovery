@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Webhooks', type: :request do
-  let(:headers) do
-    { 'BOT' => 'bot_token' }
-  end
-
   let(:release) do
     { sys: { id: 'release', completedAt: Time.zone.now } }
   end
@@ -23,6 +19,9 @@ RSpec.describe 'Webhooks', type: :request do
   end
 
   before do
+    allow(Rails.configuration).to receive(:contentful_webhook_token).and_return('contentful_token')
+    allow(Rails.configuration).to receive(:notify_webhook_token).and_return('notify_token')
+
     # stub the Resource class to avoid loading it from the database
     stub_const('Resource', Class.new do
       def self.reset_cache_key!; end
@@ -32,6 +31,10 @@ RSpec.describe 'Webhooks', type: :request do
   end
 
   context 'when authenticated using secret header' do
+    let(:headers) do
+      { 'BOT' => 'contentful_token' }
+    end
+
     describe 'POST /release' do
       it 'persists the latest release event' do
         expect(Release.count).to be 0
@@ -52,7 +55,7 @@ RSpec.describe 'Webhooks', type: :request do
 
     describe 'POST /notify' do
       let(:headers) do
-        { 'Authorization' => 'Bearer token: bot_token' }
+        { 'Authorization' => 'Bearer notify_token' }
       end
 
       let(:user) { create :user }

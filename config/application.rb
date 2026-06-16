@@ -54,7 +54,11 @@ module EarlyYearsFoundationRecovery
     config.mail_job_interval  = ENV.fetch('MAIL_JOB_INTERVAL', '0 12 * * *') # Noon daily
 
     config.user_password = ENV.fetch('USER_PASSWORD', 'Str0ngPa$$w0rd12')
-    config.bot_token = ENV['BOT_TOKEN']
+    # BOT_TOKEN is retained as a backwards-compatible fallback while environments migrate
+    # to dedicated, per-service credentials.
+    config.audit_bot_token = ENV.fetch('AUDIT_BOT_TOKEN', ENV['BOT_TOKEN'])
+    config.contentful_webhook_token = ENV.fetch('CONTENTFUL_WEBHOOK_TOKEN', ENV['BOT_TOKEN'])
+    config.notify_webhook_token = ENV.fetch('NOTIFY_WEBHOOK_TOKEN', ENV['BOT_TOKEN'])
     config.google_analytics_tracking_id = ENV.fetch('TRACKING_ID', '#TRACKING_ID_env_var_missing (google analytics tracking id)')
     config.clarity_tracking_id = ENV.fetch('CLARITY_TRACKING_ID', '#CLARITY_TRACKING_ID_env_var_missing')
     config.utm = config_for(:utm).deep_symbolize_keys

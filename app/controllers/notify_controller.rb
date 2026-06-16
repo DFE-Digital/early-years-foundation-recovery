@@ -14,9 +14,20 @@ class NotifyController < WebhookController
 
 private
 
-  # @return [Boolean]
-  def bot_token?
-    request.headers['Authorization']&.include?(Rails.configuration.bot_token)
+  def webhook_auth_scope
+    'notify-webhook'
+  end
+
+  def webhook_token?
+    token = bearer_token
+    expected = Rails.configuration.notify_webhook_token.to_s
+
+    token.present? && expected.present? &&
+      ActiveSupport::SecurityUtils.secure_compare(token, expected)
+  end
+
+  def bearer_token
+    request.authorization.to_s.split(' ', 2).last.to_s
   end
 
   # @return [User, nil]
