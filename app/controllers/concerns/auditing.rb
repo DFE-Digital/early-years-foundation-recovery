@@ -28,6 +28,7 @@ private
 
   # @return [Boolean]
   def bot_token?
+    # Update this to be unique to endpoints
     Rails.configuration.bot_token == bot_request
   end
 end
