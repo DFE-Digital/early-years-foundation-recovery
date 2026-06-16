@@ -33,7 +33,7 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
 
     # Keep only the two exclusions you already know are free-text user input
     exclusion {
-      match_variable          = "RequestArgNames"
+      match_variable          = "RequestArgValues"
       selector                = "note[body]"
       selector_match_operator = "Equals"
     }
@@ -46,7 +46,7 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
 
     # Additional confirmed request parameters used in learning and feedback flows.
     exclusion {
-      match_variable          = "RequestArgNames"
+      match_variable          = "RequestArgValues"
       selector                = "response[text_input]"
       selector_match_operator = "Equals"
     }
