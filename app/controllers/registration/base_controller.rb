@@ -116,7 +116,8 @@ module Registration
     # @see Auditing
     # @return [Boolean]
     def authenticate_user!
-      return true if bot?
+      # TODO: Check which should be used here
+      return true if audit_bot_token?
 
       super
     end

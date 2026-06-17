@@ -19,8 +19,7 @@ RSpec.describe 'Webhooks', type: :request do
   end
 
   before do
-    allow(Rails.configuration).to receive(:contentful_webhook_token).and_return('contentful_token')
-    allow(Rails.configuration).to receive(:notify_webhook_token).and_return('notify_token')
+    allow(Rails.configuration).to receive_messages(contentful_webhook_token: 'contentful_token', notify_webhook_token: 'notify_token')
 
     # stub the Resource class to avoid loading it from the database
     stub_const('Resource', Class.new do
