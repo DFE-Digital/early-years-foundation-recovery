@@ -90,10 +90,6 @@ private
     end
   end
 
-  def current_user
-    super
-  end
-
   # @return [Guest]
   def guest
     visit = Visit.find_by(visit_token: cookies[:course_feedback]) || current_visit || Visit.new
