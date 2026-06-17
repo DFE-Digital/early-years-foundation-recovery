@@ -39,7 +39,7 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
     }
 
     exclusion {
-      match_variable          = "RequestArgNames"
+      match_variable          = "RequestArgValues"
       selector                = "note[title]"
       selector_match_operator = "Equals"
     }
