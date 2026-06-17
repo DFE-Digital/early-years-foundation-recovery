@@ -23,6 +23,7 @@ module LinkHelper
   # mirrors the forward journey
   # @return [String]
   def registration_back_link_helper
+    return user_path if current_user.registration_complete?
     return edit_registration_check_your_answers_path if reviewing?
 
     case params[:controller]

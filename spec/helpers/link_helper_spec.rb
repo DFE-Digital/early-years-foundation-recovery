@@ -235,6 +235,22 @@ describe 'LinkHelper', type: :helper do
       end
     end
 
+    context 'when a registered user is editing details from My Account' do
+      let(:user) { create(:user, :registered) }
+
+      before { reviewing(false) }
+
+      it 'returns to My Account rather than the previous step' do
+        on('registration/names')
+        expect(back).to eq user_path
+      end
+
+      it 'returns to My Account from a setting detail page' do
+        on('registration/role_types')
+        expect(back).to eq user_path
+      end
+    end
+
     context 'when stepping back through the linear journey' do
       before { reviewing(false) }
 
