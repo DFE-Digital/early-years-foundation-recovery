@@ -51,6 +51,7 @@
         - row.with_value(text: t("register_check_your_answers.#{current_user.research_participant?}"), html_attributes: { 'data-clarity-mask': 'True' })
         - row.with_action(text: t('register_check_your_answers.change'), visually_hidden_text: 'willing to participate in user research', href: edit_registration_research_participant_path(return_to: 'check_your_answers'))
 
-    .govuk-button-group class='govuk-!-margin-top-6'
-      = govuk_button_link_to t('previous_page.previous'), edit_registration_research_participant_path, secondary: true
-      = govuk_button_to t('register_check_your_answers.confirm'), registration_check_your_answers_path, method: :patch
+    = form_with url: registration_check_your_answers_path, method: :patch do |f|
+      .govuk-button-group class='govuk-!-margin-top-6'
+        = govuk_button_link_to t('previous_page.previous'), edit_registration_research_participant_path, secondary: true
+        = f.govuk_submit t('register_check_your_answers.confirm')
