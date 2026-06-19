@@ -169,14 +169,6 @@ We intend to use [semantic versioning](https://semver.org/).
 [Production][production] is deployed from this [workflow][production-workflow].
 
 
-## Azure
-
-Production console access
-
-- https://eyrecovery-dev.scm.azurewebsites.net/webssh/host
-- https://eyrecovery-stage.scm.azurewebsites.net/webssh/host
-- https://eyrecovery-prod.scm.azurewebsites.net/webssh/host
-
 ## Monitoring
 
 [Sentry][sentry] is used to monitor production environments

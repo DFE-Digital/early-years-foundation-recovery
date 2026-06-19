@@ -21,6 +21,8 @@ resource "azurerm_linux_web_app" "webapp" {
   location                  = var.location
   resource_group_name       = var.resource_group
   service_plan_id           = azurerm_service_plan.asp.id
+  ftp_publish_basic_authentication_enabled       = false
+  webdeploy_publish_basic_authentication_enabled = false
   https_only                = true
   virtual_network_subnet_id = var.webapp_subnet_id
   app_settings = merge({
@@ -62,6 +64,13 @@ resource "azurerm_linux_web_app" "webapp" {
         ip_address = "0.0.0.0/0"
       }
     }
+
+    scm_ip_restriction {
+      name       = "Deny public"
+      action     = "Deny"
+      priority   = 500
+      ip_address = "0.0.0.0/0"
+    }
   }
 
   sticky_settings {
@@ -101,6 +110,8 @@ resource "azurerm_linux_web_app" "webapp" {
 resource "azurerm_linux_web_app_slot" "webapp_slot" {
   name                      = "green"
   app_service_id            = azurerm_linux_web_app.webapp.id
+  ftp_publish_basic_authentication_enabled       = false
+  webdeploy_publish_basic_authentication_enabled = false
   https_only                = true
   virtual_network_subnet_id = var.webapp_subnet_id
   app_settings              = var.webapp_slot_app_settings
@@ -115,6 +126,13 @@ resource "azurerm_linux_web_app_slot" "webapp_slot" {
     application_stack {
       docker_image_name   = "${var.webapp_docker_image}:${var.webapp_docker_image_tag}"
       docker_registry_url = var.webapp_docker_registry_url
+    }
+
+    scm_ip_restriction {
+      name       = "Deny public"
+      action     = "Deny"
+      priority   = 500
+      ip_address = "0.0.0.0/0"
     }
   }
 
