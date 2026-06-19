@@ -21,8 +21,6 @@ resource "azurerm_linux_web_app" "webapp" {
   location                  = var.location
   resource_group_name       = var.resource_group
   service_plan_id           = azurerm_service_plan.asp.id
-  ftp_publish_basic_authentication_enabled       = false
-  webdeploy_publish_basic_authentication_enabled = false
   https_only                = true
   virtual_network_subnet_id = var.webapp_subnet_id
   app_settings = merge({
@@ -110,8 +108,6 @@ resource "azurerm_linux_web_app" "webapp" {
 resource "azurerm_linux_web_app_slot" "webapp_slot" {
   name                      = "green"
   app_service_id            = azurerm_linux_web_app.webapp.id
-  ftp_publish_basic_authentication_enabled       = false
-  webdeploy_publish_basic_authentication_enabled = false
   https_only                = true
   virtual_network_subnet_id = var.webapp_subnet_id
   app_settings              = var.webapp_slot_app_settings
