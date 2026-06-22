@@ -36,12 +36,32 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
       match_variable          = "RequestArgValues"
       selector                = "note[body]"
       selector_match_operator = "Equals"
+
+      excluded_rule_set {
+        type    = "OWASP"
+        version = "3.2"
+
+        rule_group {
+          rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
+          excluded_rules  = ["942440"]
+        }
+      }
     }
 
     exclusion {
       match_variable          = "RequestArgValues"
       selector                = "note[title]"
       selector_match_operator = "Equals"
+
+      excluded_rule_set {
+        type    = "OWASP"
+        version = "3.2"
+
+        rule_group {
+          rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
+          excluded_rules  = ["942440"]
+        }
+      }
     }
 
     # Additional confirmed request parameters used in learning and feedback flows.
@@ -49,6 +69,16 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
       match_variable          = "RequestArgValues"
       selector                = "response[text_input]"
       selector_match_operator = "Equals"
+
+      excluded_rule_set {
+        type    = "OWASP"
+        version = "3.2"
+
+        rule_group {
+          rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
+          excluded_rules  = ["942440"]
+        }
+      }
     }
 
     exclusion {
