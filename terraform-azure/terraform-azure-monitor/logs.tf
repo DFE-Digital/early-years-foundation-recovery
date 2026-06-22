@@ -4,7 +4,7 @@ resource "azurerm_log_analytics_workspace" "log_analytics" {
   location            = var.location
   resource_group_name = var.resource_group
   sku                 = "PerGB2018"
-  retention_in_days   = 180
+  retention_in_days   = 90
   daily_quota_gb      = 1
 
   lifecycle {
