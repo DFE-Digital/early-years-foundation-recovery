@@ -37,7 +37,8 @@ module Training
           render 'training/questions/show', status: :unprocessable_entity
         else
           # Nonce already used or missing: ignore duplicate submission
-          redirect_to training_module_question_path(mod.name, content.name), Rails.logger.error("Duplicate or invalid submission detected for user #{current_user.id} on question #{content.name}")
+          Rails.logger.error("Duplicate or invalid submission detected for user #{current_user.id} on question #{content.name}")
+          redirect_to training_module_question_path(mod.name, content.name)
         end
       elsif save_response!
         # Formative and other questions: no nonce logic
