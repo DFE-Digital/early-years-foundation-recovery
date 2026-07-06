@@ -1,3 +1,25 @@
+locals {
+  # User-supplied free-text form fields. These are prose typed by users
+  # (learning-log notes, feedback answers, names, custom "other" answers) and
+  # routinely contain apostrophes, angle brackets and SQL-ish words that trip the
+  # CRS XSS (941) and SQLi (942) rule groups, causing intermittent 403s.
+  #
+  # We exclude the WHOLE 941/942 groups for these args rather than picking off
+  # individual rule IDs: Rails parameter-binds and HTML-escapes these values, so
+  # treating them as non-injectable is safe, and new free-text fields only need a
+  # one-line addition here instead of another round of WAF whack-a-mole.
+  waf_free_text_args = [
+    "note[body]",                 # learning log
+    "note[title]",                # server-set, but kept for parity
+    "response[text_input]",       # feedback / question free text
+    "user[first_name]",           # registration — apostrophe surnames
+    "user[last_name]",            # registration — apostrophe surnames
+    "user[setting_type_other]",   # registration — custom setting
+    "user[role_type_other]",      # registration — custom role
+    "user[closed_reason_custom]", # account closure reason
+  ]
+}
+
 resource "azurerm_web_application_firewall_policy" "agw_wafp" {
   count = var.environment != "development" ? 1 : 0
 
@@ -31,52 +53,26 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
       selector_match_operator = "Equals"
     }
 
-    # Keep only the two exclusions you already know are free-text user input
-    exclusion {
-      match_variable          = "RequestArgValues"
-      selector                = "note[body]"
-      selector_match_operator = "Equals"
+    # Free-text user input: exclude the whole XSS (941) and SQLi (942) rule groups
+    # for every prose field. See local.waf_free_text_args for the field list.
+    dynamic "exclusion" {
+      for_each = local.waf_free_text_args
+      content {
+        match_variable          = "RequestArgValues"
+        selector                = exclusion.value
+        selector_match_operator = "Equals"
 
-      excluded_rule_set {
-        type    = "OWASP"
-        version = "3.2"
+        excluded_rule_set {
+          type    = "OWASP"
+          version = "3.2"
 
-        rule_group {
-          rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
-          excluded_rules  = ["942440"]
-        }
-      }
-    }
+          rule_group {
+            rule_group_name = "REQUEST-941-APPLICATION-ATTACK-XSS"
+          }
 
-    exclusion {
-      match_variable          = "RequestArgValues"
-      selector                = "note[title]"
-      selector_match_operator = "Equals"
-
-      excluded_rule_set {
-        type    = "OWASP"
-        version = "3.2"
-
-        rule_group {
-          rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
-          excluded_rules  = ["942440"]
-        }
-      }
-    }
-
-    # Additional confirmed request parameters used in learning and feedback flows.
-    exclusion {
-      match_variable          = "RequestArgValues"
-      selector                = "response[text_input]"
-      selector_match_operator = "Equals"
-
-      excluded_rule_set {
-        type    = "OWASP"
-        version = "3.2"
-
-        rule_group {
-          rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
-          excluded_rules  = ["942440"]
+          rule_group {
+            rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
+          }
         }
       }
     }

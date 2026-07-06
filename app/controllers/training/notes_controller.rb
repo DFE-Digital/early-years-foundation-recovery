@@ -16,8 +16,10 @@ class Training::NotesController < ApplicationController
   def create
     nav_keys = %i[next_page_name next_page_module module_item_id]
     attrs = note_params.except(*nav_keys)
-    note_instance = existing_note || Note.new(attrs)
-    if note_instance.save
+    # NB: assign attrs even when a note already exists, otherwise re-saving a page
+    # silently discards the user's edited body and redirects as if it succeeded.
+    note_instance = existing_note || Note.new
+    if note_instance.update(attrs)
       track('user_note_created')
       redirect_to next_page_path
     else
@@ -86,7 +88,7 @@ private
   # @return [Hash]
   def tracking_properties
     {
-      length: note_params[:body].length,
+      length: note_params[:body].to_s.length,
       **note_params.except(:body, :module_item_id, :user),
     }
   end
