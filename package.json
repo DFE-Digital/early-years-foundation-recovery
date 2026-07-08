@@ -10,8 +10,8 @@
   },
   "resolutions": {
     "glob": "^10.5.0",
-    "tar": "7.5.11",
-    "js-yaml": "4.1.1",
+    "tar": "7.5.16",
+    "js-yaml": "4.2.0",
     "yauzl": "3.2.1",
     "immutable": "5.1.5",
     "minimatch": "^10.2.3",
@@ -29,10 +29,10 @@
     "flatted": "3.4.2",
     "govuk-frontend": "^5.11.1",
     "immutable": "^5.1.5",
-    "js-yaml": "^4.1.1",
+    "js-yaml": "^4.2.0",
     "puppeteer": "25.2.1",
     "sass": "^1.97.2",
-    "tar": "^7.5.11",
+    "tar": "^7.5.16",
     "yauzl": "^3.2.1"
   },
   "devDependencies": {
