@@ -112,6 +112,5 @@ module Registration
         notice
       end
     end
-
   end
 end
