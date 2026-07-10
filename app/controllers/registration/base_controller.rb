@@ -113,13 +113,5 @@ module Registration
       end
     end
 
-    # @see Auditing
-    # @return [Boolean]
-    def authenticate_user!
-      # TODO: Check which should be used here
-      return true if audit_bot_token?
-
-      super
-    end
   end
 end

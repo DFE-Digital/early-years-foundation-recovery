@@ -45,4 +45,14 @@ RSpec.describe 'Automated bot', type: :request do
       expect(response).to redirect_to new_user_session_path
     end
   end
+
+  context 'with a valid audit header on a registration page' do
+    before do
+      get edit_registration_name_path, headers: { 'BOT' => 'audit_token' }
+    end
+
+    it 'does not bypass registration authentication' do
+      expect(response).to redirect_to new_user_session_path
+    end
+  end
 end

@@ -7,13 +7,16 @@ module BotAuthProtection
 private
 
   def enforce_bot_auth!(scope:, valid:, unauthorized_payload: { status: 'invalid secure header' })
+    if valid
+      clear_failed_bot_auth(scope)
+      return true
+    end
+
     if bot_auth_rate_limited?(scope)
       Rails.logger.warn("[BotAuth] rate limited scope=#{scope} ip=#{bot_auth_ip} path=#{request.path}")
       render json: { status: 'rate limited' }, status: :too_many_requests
       return false
     end
-
-    return true if valid
 
     track_failed_bot_auth(scope)
     render json: unauthorized_payload, status: :unauthorized
@@ -34,6 +37,10 @@ private
     end
 
     Rails.logger.warn("[BotAuth] unauthorized scope=#{scope} ip=#{bot_auth_ip} path=#{request.path} attempts=#{attempts}")
+  end
+
+  def clear_failed_bot_auth(scope)
+    Rails.cache.delete(bot_auth_cache_key(scope))
   end
 
   def bot_auth_cache_key(scope)
