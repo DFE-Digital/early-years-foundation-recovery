@@ -54,7 +54,8 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
     }
 
     # Free-text user input: exclude the whole XSS (941) and SQLi (942) rule groups
-    # for every prose field. See local.waf_free_text_args for the field list.
+    # and one high-noise RCE rule (932115) for every prose field.
+    # See local.waf_free_text_args for the field list.
     dynamic "exclusion" {
       for_each = local.waf_free_text_args
       content {
@@ -72,6 +73,11 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
 
           rule_group {
             rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
+          }
+
+          rule_group {
+            rule_group_name = "REQUEST-932-APPLICATION-ATTACK-RCE"
+            excluded_rules  = ["932115"]
           }
         }
       }
