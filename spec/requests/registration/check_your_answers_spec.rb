@@ -21,7 +21,7 @@ RSpec.describe 'Registration check your answers', type: :request do
       get edit_registration_check_your_answers_path
       expect(response).to have_http_status(:success)
       expect(response.body).to include('Check your answers')
-        .and include(user.name)
+        .and include(ERB::Util.html_escape(user.name))
         .and include('Leeds')
         .and include('Student')
     end
