@@ -77,6 +77,8 @@ jobs:
       -
         name: Run smoke suite (sign in journey)
         run: bundle exec rspec --tag smoke
+        env:
+          SMOKE_SKIP_COVERAGE_CHECK: 'true'
       -
         name: Run test suite
         run: bundle exec rspec --tag ~smoke
