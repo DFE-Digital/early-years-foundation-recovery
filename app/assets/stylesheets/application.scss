@@ -7,6 +7,10 @@
 $govuk-font-family: 'Inter', sans-serif;
 $govuk-include-default-font-face: false;
 
+// Serve govuk assets from public/govuk-assets/ 
+// This lets us keep config.assets.compile = false in production.
+$govuk-assets-path: '/govuk-assets/';
+
 @import 'govuk-frontend/dist/govuk/index';
 @import 'dfe-frontend/packages/dfefrontend';
 

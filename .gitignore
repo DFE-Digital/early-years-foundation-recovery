@@ -32,6 +32,7 @@ last_govuk_kids.json
 
 # Public files
 /public/assets
+/public/govuk-assets
 public/sitemap.xml
 
 # Ignore master key for decrypting credentials and more.
