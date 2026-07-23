@@ -161,6 +161,11 @@ variable "reviewapp_config_disable_pre_confidence_check" {
   type    = string
 }
 
+variable "reviewapp_config_show_important_banner" {
+  default = false
+  type    = string
+}
+
 variable "webapp_database_url" {
   description = "URL to the Database"
   type        = string
@@ -220,6 +225,11 @@ variable "webapp_config_contentful_preview" {
 }
 
 variable "webapp_config_disable_pre_confidence_check" {
+  default = false
+  type    = string
+}
+
+variable "webapp_config_show_important_banner" {
   default = false
   type    = string
 }
