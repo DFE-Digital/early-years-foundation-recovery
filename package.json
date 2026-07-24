@@ -17,7 +17,8 @@
     "brace-expansion": "5.0.7",
     "minimatch": "^10.2.3",
     "basic-ftp": "5.3.1",
-    "flatted": "3.4.2"
+    "flatted": "3.4.2",
+    "postcss": "8.5.12"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
