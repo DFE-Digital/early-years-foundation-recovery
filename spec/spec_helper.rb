@@ -1,5 +1,5 @@
 require 'simplecov'
-SimpleCov.minimum_coverage 92
+SimpleCov.minimum_coverage 92 unless ENV['SMOKE_SKIP_COVERAGE_CHECK']
 SimpleCov.start 'rails'
 
 require 'pry'

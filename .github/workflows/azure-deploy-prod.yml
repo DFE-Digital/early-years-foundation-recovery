@@ -91,6 +91,9 @@ jobs:
           images: ${{ env.DOCKER_IMAGE }}:${{ inputs.version || github.ref_name }}
           slot-name: ${{ vars.WEBAPP_DEPLOY_SLOT }}
 
+      - name: Smoke test sign in journey
+        run: bash .github/scripts/smoke_sign_in.sh "https://${{ vars.WEBAPP_NAME }}-${{ vars.WEBAPP_DEPLOY_SLOT }}.azurewebsites.net"
+
       # Destroy Background Worker
       - name: Destroy existing Azure Container Instances
         uses: azure/CLI@v2

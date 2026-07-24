@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Gov One' do
+RSpec.describe 'Gov One', :smoke do
   context 'with an unauthenticated visitor' do
     before do
       visit '/users/sign-in'
