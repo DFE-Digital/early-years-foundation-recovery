@@ -19,8 +19,7 @@ locals {
     "user[setting_type_other]",   # registration — custom setting
     "user[role_type_other]",      # registration — custom role
     "user[closed_reason_custom]", # account closure reason
-    "authenticity_token",         # Rails CSRF token (server-validated)
-    "_method",                    # Rails method override (server-validated)
+    # authenticity_token and _method are excluded via RequestArgNames blocks below
   ]
 }
 
@@ -114,6 +113,21 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
     exclusion {
       match_variable          = "RequestArgNames"
       selector                = "note[next_page_module]"
+      selector_match_operator = "Equals"
+    }
+
+    # Rails CSRF token: the value contains "--" sequences that trip SQLi rule 942440.
+    # The token is server-generated and server-validated, so full inspection exclusion is safe.
+    exclusion {
+      match_variable          = "RequestArgNames"
+      selector                = "authenticity_token"
+      selector_match_operator = "Equals"
+    }
+
+    # Rails method override: similarly safe to exclude outright.
+    exclusion {
+      match_variable          = "RequestArgNames"
+      selector                = "_method"
       selector_match_operator = "Equals"
     }
   }
