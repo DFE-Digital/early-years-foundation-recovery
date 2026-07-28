@@ -155,6 +155,10 @@ class User < ApplicationRecord
   scope :no_visits_this_month, -> { where.not(id: visits_within_month) }
   scope :last_visit_4_weeks_ago, -> { where(id: month_old_visits).where.not(id: visits_within_month) }
 
+  scope :visits_within_week, -> { with_visits.merge(Visit.within_1_week).distinct }
+  scope :week_old_visits, -> { with_visits.merge(Visit.week_old).distinct }
+  scope :last_visit_1_week_ago, -> { where(id: week_old_visits).where.not(id: visits_within_week) }
+
   # emails
   scope :training_email_recipients, -> { order(:id).where(training_emails: [true, nil]).distinct }
   scope :complete_registration_mail_job_recipients, -> { training_email_recipients.month_old_confirmation.registration_incomplete.distinct }
@@ -164,7 +168,7 @@ class User < ApplicationRecord
       .where.not(id: Job.start_training_mail.map(&:mail_user_id))
       .distinct
   }
-  scope :continue_training_mail_job_recipients, -> { training_email_recipients.last_visit_4_weeks_ago.with_module_in_progress.distinct }
+  scope :continue_training_mail_job_recipients, -> { training_email_recipients.last_visit_1_week_ago.with_module_in_progress.distinct }
 
   # @note
   #
