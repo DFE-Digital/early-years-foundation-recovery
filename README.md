@@ -169,6 +169,33 @@ We intend to use [semantic versioning](https://semver.org/).
 [Production][production] is deployed from this [workflow][production-workflow].
 
 
+## Smoke Tests
+
+A smoke test script is provided to verify the sign-in journey is working after a deployment.
+It checks that the health endpoint is reachable and that the sign-in page renders a valid GOV.UK One Login authorisation link.
+
+Run it manually against any deployed environment:
+
+```sh
+$ .github/scripts/smoke_sign_in.sh <base_url>
+```
+
+For example:
+
+```sh
+$ .github/scripts/smoke_sign_in.sh https://eyrecovery-dev.azurewebsites.net
+```
+
+The script will:
+1. Poll `GET /health` until the app responds (up to 30 attempts, 10 seconds apart)
+2. Poll `GET /users/sign-in` until the page contains a valid GOV.UK One Login `authorize` link with the expected OIDC query parameters (`client_id`, `redirect_uri`, `response_type=code`)
+
+It exits with a non-zero status code if either check fails, making it suitable for use in CI/CD pipelines.
+
+The smoke tests run automatically as part of the [staging][staging-workflow] and [production][production-workflow] deployment workflows.
+
+---
+
 ## Monitoring
 
 [Sentry][sentry] is used to monitor production environments
@@ -250,7 +277,7 @@ For local development CDT runs against the official
 ([docs](https://tech-docs.account.gov.uk/test-your-integration/gov-uk-one-login-simulator/))
 
 The simulator is started automatically by `bin/podman-dev`
-as the `gov-one-simulator` service in `docker-compose.dev.yml`. 
+as the `gov-one-simulator` service in `docker-compose.dev.yml`.
 
 Sanity-check with:
 ```sh

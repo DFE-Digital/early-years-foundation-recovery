@@ -12,11 +12,15 @@ locals {
     "note[body]",                 # learning log
     "note[title]",                # server-set, but kept for parity
     "response[text_input]",       # feedback / question free text
+    "response[answers]",          # summative / formative question answers (may be free text)
+    "response[submission_nonce]", # UUID anti-replay token; never free text but avoid name-match rules
     "user[first_name]",           # registration — apostrophe surnames
     "user[last_name]",            # registration — apostrophe surnames
     "user[setting_type_other]",   # registration — custom setting
     "user[role_type_other]",      # registration — custom role
     "user[closed_reason_custom]", # account closure reason
+    "authenticity_token",         # Rails CSRF token (server-validated)
+    "_method",                    # Rails method override (server-validated)
   ]
 }
 

@@ -82,6 +82,8 @@ COPY .yarnrc.yml ${APP_HOME}/.yarnrc.yml
 COPY --from=deps /build/.yarn ${APP_HOME}/.yarn
 COPY --from=deps /build/node_modules ${APP_HOME}/node_modules
 
+RUN mkdir -p app/assets/builds
+RUN yarn build:css && yarn build
 RUN yarn run copy:assets
 RUN SECRET_KEY_BASE=x bundle exec rails assets:precompile
 

@@ -135,6 +135,9 @@ jobs:
               --settings APPLICATION_INSIGHTS_CONNECTION_STRING="${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}" \
               --output none
 
+      - name: Smoke test sign in journey
+        run: bash .github/scripts/smoke_sign_in.sh "https://${{ vars.REVIEWAPP_NAME }}-${{ env.PR_NUMBER }}.azurewebsites.net"
+
       # Add URL to Pull Request
       - name: Comment URL to PR
         uses: mshick/add-pr-comment@v2
