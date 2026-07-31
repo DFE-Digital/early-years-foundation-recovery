@@ -73,41 +73,6 @@
   }
 }
 
-.home-card {
-  position: relative;
-  background-color: govuk-colour('light-grey');
-  border-bottom: 3px solid govuk-colour('dark-blue');
-
-  &:hover,
-  &:focus-within {
-    background-color: $govuk-link-hover-colour;
-
-    a,
-    .percentage,
-    .description {
-      color: govuk-colour('white');
-    }
-
-    .bar-bg {
-      background-color: govuk-colour('black');
-    }
-
-    .bar-progress,
-    .bar-ball {
-      background-color: govuk-colour('yellow');
-    }
-
-    .govuk-tag {
-      background-color: govuk-colour('light-grey');
-      color: govuk-colour('blue');
-    }
-  }
-
-  &:focus-within {
-    outline: 3px solid govuk-colour('yellow');
-  }
-}
-
 .card {
   position: relative;
   background-color: govuk-colour('light-grey');
