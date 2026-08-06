@@ -1178,7 +1178,7 @@ __metadata:
     flatted: "npm:3.4.2"
     govuk-frontend: "npm:^5.11.1"
     immutable: "npm:^5.1.8"
-    js-yaml: "npm:^4.3.0"
+    js-yaml: "npm:^5.2.3"
     puppeteer: "npm:25.2.1"
     sass: "npm:^1.97.2"
     stylelint: "npm:^16.26.1"
@@ -1613,14 +1613,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-yaml@npm:4.3.0":
-  version: 4.3.0
-  resolution: "js-yaml@npm:4.3.0"
+"js-yaml@npm:5.2.3":
+  version: 5.2.3
+  resolution: "js-yaml@npm:5.2.3"
   dependencies:
     argparse: "npm:^2.0.1"
   bin:
-    js-yaml: bin/js-yaml.js
-  checksum: 2bcec3a8118d7f744badeb04e14366578d234a736f353d41fe35d2305e4ce2409a8e041d277f07cd6bbc8aaa12128d650a68ce43247072519bede20962d2126f
+    js-yaml: bin/js-yaml.mjs
+  checksum: 5d2562f2d7e7bc51bd678b43d2dbc3965129ac854222c794157369c8904d249cfc78325dff8fc64becb505a2506242548c54c8fa50cdb24554bb1a557e460004
   languageName: node
   linkType: hard
 
