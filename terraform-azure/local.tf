@@ -27,6 +27,7 @@ locals {
     "GOOGLE_CLOUD_BUCKET"                    = var.webapp_config_google_cloud_bucket
     "GROVER_NO_SANDBOX"                      = var.webapp_config_grover_no_sandbox
     "MAINTENANCE"                            = var.environment == "development" ? "no" : "false"
+    "SHOW_IMPORTANT_BANNER"                  = var.webapp_config_show_important_banner
     "NODE_ENV"                               = var.webapp_config_node_env
     "RAILS_ENV"                              = var.webapp_config_rails_env
     "RAILS_LOG_TO_STDOUT"                    = var.webapp_config_rails_log_to_stdout
@@ -57,6 +58,7 @@ locals {
     "GOOGLE_CLOUD_BUCKET"                    = var.webapp_config_google_cloud_bucket
     "GROVER_NO_SANDBOX"                      = var.webapp_config_grover_no_sandbox
     "MAINTENANCE"                            = var.environment == "development" ? "no" : "false"
+    "SHOW_IMPORTANT_BANNER"                  = var.webapp_config_show_important_banner
     "NODE_ENV"                               = var.webapp_config_node_env
     "RAILS_ENV"                              = var.webapp_config_rails_env
     "RAILS_LOG_TO_STDOUT"                    = var.webapp_config_rails_log_to_stdout
@@ -98,6 +100,7 @@ locals {
     "GOVUK_NOTIFY_API_KEY"                   = var.webapp_config_govuk_notify_api_key
     "GOOGLE_CLOUD_BUCKET"                    = var.webapp_config_google_cloud_bucket
     "GROVER_NO_SANDBOX"                      = var.webapp_config_grover_no_sandbox
+    "SHOW_IMPORTANT_BANNER"                  = var.webapp_config_show_important_banner
     "NODE_ENV"                               = var.webapp_config_node_env
     "RAILS_ENV"                              = var.webapp_config_rails_env
     "RAILS_LOG_TO_STDOUT"                    = var.webapp_config_rails_log_to_stdout
