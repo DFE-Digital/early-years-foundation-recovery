@@ -9,7 +9,8 @@ services:
       - RAILS_ENV=development
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
-      - OTEL_SERVICE_NAME=early-years-foundation-recovery
+      - OTEL_SERVICE_NAME=${OTEL_SERVICE_NAME:-early-years-foundation-recovery}
+      - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
     volumes:
       - .:/srv
     depends_on:
@@ -20,15 +21,17 @@ services:
     tty: true
     stdin_open: true
 
-  # docker-compose.yml (collector service)
   otel-collector:
     image: otel/opentelemetry-collector-contrib:latest
     volumes:
-      - ./otel-collector-config.yml:/etc/otel-collector-config.yml
-    command: ["--config", "/etc/otel-collector-config.yml"]
+      - ./otel-collector-azure-config.yml:/etc/otel-collector-azure-config.yml
+    command: ["--config", "/etc/otel-collector-azure-config.yml"]
 
     environment:
-      - APPLICATION_INSIGHTS_CONNECTION_STRING=${APPLICATION_INSIGHTS_CONNECTION_STRING}
+      - APPLICATION_INSIGHTS_CONNECTION_STRING=${APPLICATION_INSIGHTS_CONNECTION_STRING:-}
+      - OTEL_SERVICE_NAME=${OTEL_SERVICE_NAME:-early-years-foundation-recovery}
+      - SPLUNK_ACCESS_TOKEN=${SPLUNK_ACCESS_TOKEN:-}
+      - SPLUNK_REALM=${SPLUNK_REALM:-}
     networks:
       - recovery
 
