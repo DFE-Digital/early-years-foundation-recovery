@@ -10,6 +10,8 @@ services:
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
       - OTEL_SERVICE_NAME=early-years-foundation-recovery
+      - SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT=${SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT:-}
+      - SPLUNK_OTEL_EXPORTER_OTLP_HEADERS=${SPLUNK_OTEL_EXPORTER_OTLP_HEADERS:-}
     volumes:
       - .:/srv
     depends_on:
