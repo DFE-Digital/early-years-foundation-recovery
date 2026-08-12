@@ -57,7 +57,7 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
     # and one high-noise RCE rule (932115) for every prose field.
     # See local.waf_free_text_args for the field list.
     dynamic "exclusion" {
-      for_each = local.waf_free_text_args
+      for_each = toset(local.waf_free_text_args)
       content {
         match_variable          = "RequestArgValues"
         selector                = exclusion.value

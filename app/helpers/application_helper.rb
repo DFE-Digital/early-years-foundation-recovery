@@ -76,6 +76,11 @@ module ApplicationHelper
     cookies[:track_analytics_v2] == 'true'
   end
 
+  # @return [Boolean]
+  def show_important_banner?
+    ENV['SHOW_IMPORTANT_BANNER'] == 'true'
+  end
+
   # @param parts [Array<String>]
   # @return [String]
   def html_title(*parts)

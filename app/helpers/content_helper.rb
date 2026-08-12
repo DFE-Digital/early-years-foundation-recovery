@@ -139,6 +139,11 @@ module ContentHelper
     Course.config.privacy_policy_url
   end
 
+  # return [Resource, OpenStruct]
+  def important_information_banner
+    Page::Resource.by_name('important_information_banner.body')
+  end
+
 private
 
   # Sanitize HTML to prevent XSS attacks
