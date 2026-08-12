@@ -1,7 +1,7 @@
-.card
-  .card-container
-    = training_module_image(mod)
+.dfe-card
+  = training_module_image(mod)
 
+  .dfe-card-container
     - if current_user&.content_changes&.new_module?(mod)
       span.govuk-tag.govuk-tag--ey
         = t('my_learning.new_tag.card')
@@ -9,7 +9,7 @@
     - destination = current_user ? training_module_path(mod.name) : about_path(mod.name)
 
     h3.govuk-heading-s
-      = govuk_link_to mod.heading, destination, no_visited_state: true, class: 'card-link--header'
+      = govuk_link_to mod.heading, destination, no_visited_state: true, class: 'dfe-card-link--header'
 
     - if progress
       = link_to_retake_or_results(mod)
