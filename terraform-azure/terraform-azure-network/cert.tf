@@ -12,7 +12,13 @@ resource "azurerm_key_vault" "kv" {
   enabled_for_disk_encryption = true
   soft_delete_retention_days  = 7
   purge_protection_enabled    = true
+  public_network_access_enabled = false
   sku_name                    = "standard"
+
+  network_acls {
+    bypass         = "None"
+    default_action = "Deny"
+  }
 
   lifecycle {
     ignore_changes = [tags]
@@ -21,6 +27,58 @@ resource "azurerm_key_vault" "kv" {
   #checkov:skip=CKV_AZURE_109:Access Policies configured
   #checkov:skip=CKV_AZURE_189:Access Policies configured
   #checkov:skip=CKV2_AZURE_32:VNET configuration adequate
+}
+
+resource "azurerm_private_dns_zone" "kv_dnsz" {
+  # Key Vault only deployed to the Test and Production subscription
+  count = var.environment != "development" ? 1 : 0
+
+  name                = "privatelink.vaultcore.azure.net"
+  resource_group_name = var.resource_group
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
+}
+
+resource "azurerm_private_dns_zone_virtual_network_link" "kv_dnsz_vnetl" {
+  # Key Vault only deployed to the Test and Production subscription
+  count = var.environment != "development" ? 1 : 0
+
+  name                  = "${var.resource_name_prefix}-kv-dnsz-vnetl"
+  private_dns_zone_name = azurerm_private_dns_zone.kv_dnsz[0].name
+  virtual_network_id    = azurerm_virtual_network.vnet.id
+  resource_group_name   = var.resource_group
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
+}
+
+resource "azurerm_private_endpoint" "kv_pe" {
+  # Key Vault only deployed to the Test and Production subscription
+  count = var.environment != "development" ? 1 : 0
+
+  name                = "${var.resource_name_prefix}-kv-pe"
+  location            = var.location
+  resource_group_name = var.resource_group
+  subnet_id           = azurerm_subnet.kv_pe_snet[0].id
+
+  private_service_connection {
+    name                           = "${var.resource_name_prefix}-kv-psc"
+    private_connection_resource_id = azurerm_key_vault.kv[0].id
+    is_manual_connection           = false
+    subresource_names              = ["vault"]
+  }
+
+  private_dns_zone_group {
+    name                 = "default"
+    private_dns_zone_ids = [azurerm_private_dns_zone.kv_dnsz[0].id]
+  }
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 resource "azurerm_user_assigned_identity" "kv_mi" {

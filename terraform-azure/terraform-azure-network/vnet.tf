@@ -106,3 +106,18 @@ resource "azurerm_subnet" "agw_snet" {
 
   #checkov:skip=CKV2_AZURE_31:NSG not required
 }
+
+# Create Subnet for Key Vault Private Endpoint
+resource "azurerm_subnet" "kv_pe_snet" {
+  # Key Vault only deployed to the Test and Production subscription
+  count = var.environment != "development" ? 1 : 0
+
+  name                 = "${var.resource_name_prefix}-kv-pe-snet"
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  resource_group_name  = var.resource_group
+  address_prefixes     = ["172.1.4.0/27"]
+
+  private_endpoint_network_policies = "Disabled"
+
+  #checkov:skip=CKV2_AZURE_31:NSG not required
+}
