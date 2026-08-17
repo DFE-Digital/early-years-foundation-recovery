@@ -45,16 +45,6 @@
 
 }
 
-.card-container img {
-  max-width: 100%;
-  margin-bottom: govuk-spacing(1);
-}
-
-.home-card-container img {
-  max-width: 100%;
-  margin-bottom: govuk-spacing(1);
-}
-
 .home-content {
   padding: govuk-spacing(5);
   min-height: 190px;
@@ -126,5 +116,25 @@
       background-color: govuk-colour('light-grey');
       color: govuk-colour('blue');
     }
+  }
+
+  &-link--retake {
+    &:focus {
+      @include govuk-focused-text;
+      background-color: $govuk-focus-colour;
+      border-color: transparent;
+      outline: 2px solid govuk-colour('yellow');
+      outline-offset: 2px;
+      box-shadow: none;
+
+      .dfe-card-container & {
+        color: govuk-colour('black');
+      }
+    }
+  }
+
+  &-link--retake {
+    position: relative;
+    z-index: 2;
   }
 }
