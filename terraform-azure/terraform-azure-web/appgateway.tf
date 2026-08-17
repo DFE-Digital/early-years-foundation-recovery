@@ -2,7 +2,7 @@ locals {
   # User-supplied free-text form fields. These are prose typed by users
   # (learning-log notes, feedback answers, names, custom "other" answers) and
   # routinely contain apostrophes, angle brackets and SQL-ish words that trip the
-  # CRS XSS (941) and SQLi (942) rule groups, causing intermittent 403s.
+  # CRS XSS (941) and SQLi (942) and PHP injection (933) and RCE (932) rule groups, causing intermittent 403s.
   #
   # We exclude the WHOLE 941/942/932/933 groups for these args rather than picking off
   # individual rule IDs: Rails parameter-binds and HTML-escapes these values, so
