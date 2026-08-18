@@ -2,9 +2,9 @@ locals {
   # User-supplied free-text form fields. These are prose typed by users
   # (learning-log notes, feedback answers, names, custom "other" answers) and
   # routinely contain apostrophes, angle brackets and SQL-ish words that trip the
-  # CRS XSS (941) and SQLi (942) rule groups, causing intermittent 403s.
+  # CRS XSS (941) and SQLi (942) and PHP injection (933) and RCE (932) rule groups, causing intermittent 403s.
   #
-  # We exclude the WHOLE 941/942 groups for these args rather than picking off
+  # We exclude the WHOLE 941/942/932/933 groups for these args rather than picking off
   # individual rule IDs: Rails parameter-binds and HTML-escapes these values, so
   # treating them as non-injectable is safe, and new free-text fields only need a
   # one-line addition here instead of another round of WAF whack-a-mole.
@@ -53,8 +53,9 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
       selector_match_operator = "Equals"
     }
 
-    # Free-text user input: exclude the whole XSS (941) and SQLi (942) rule groups
-    # and one high-noise RCE rule (932115) for every prose field.
+    # Free-text user input: exclude XSS (941), SQLi (942), RCE (932), and PHP
+    # injection (933) rule groups for every prose field. Rails parameter-binds
+    # and HTML-escapes all values so treating them as non-injectable is safe.
     # See local.waf_free_text_args for the field list.
     dynamic "exclusion" {
       for_each = toset(local.waf_free_text_args)
@@ -77,7 +78,10 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
 
           rule_group {
             rule_group_name = "REQUEST-932-APPLICATION-ATTACK-RCE"
-            excluded_rules  = ["932115"]
+          }
+
+          rule_group {
+            rule_group_name = "REQUEST-933-APPLICATION-ATTACK-PHP"
           }
         }
       }
