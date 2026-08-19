@@ -10,7 +10,7 @@ This guide covers how to connect to the PostgreSQL database in dev and prod envi
 
 - Azure CLI installed (`az` command)
 - SSH client
-- Either `psql` (CLI) or **TablePlus** (GUI recommended on macOS)
+- Either `psql` (CLI) or **Postico** (GUI recommended on macOS)
 - Authenticated to the correct Azure subscription
 
 ---
@@ -124,42 +124,71 @@ When done:
 
 ---
 
-## Method 2: TablePlus (GUI on macOS)
+## Method 2: Postico (GUI on macOS)
 
 ### Prerequisites
 
-Install **TablePlus** from [tableplus.com](https://tableplus.com) (free tier available).
+Install **Postico** from [eggerapps.at/postico2](https://eggerapps.at/postico2).
 
 ### Setup
 
-1. **Keep Bastion and SSH tunnels running** (Steps 1–3 from Method 1).
+1. Start only the Bastion tunnel from Method 1 Step 2.
 
-2. **Open TablePlus** → Click **+** (Create) → Select **PostgreSQL**.
+2. Do not run Method 1 Step 3 (ssh -L) when using Postico.
 
-3. **Configure the connection:**
+3. Open Postico.
 
-   | Field | Value |
-   |-------|-------|
-   | Name | `eyrecovery-dev` or `eyrecovery-prod` |
-   | Host | `s187d01-...postgres.database.azure.com` (dev) or `s187p01-...postgres.database.azure.com` (prod) |
-   | Port | `5432` |
-   | User | `psqladminDexter` (dev) or `psqladminTigger` (prod) |
-   | Password | *(your password)* |
-   | Database | `postgres` (dev) or `s187p01-eyrecovery-moose-psqldb` (prod) |
-   | **SSH Tunnel** | Enable |
-   | SSH Host | `127.0.0.1` |
-   | SSH Port | `2222` (dev) or `2223` (prod) |
-   | SSH User | `psqladmin` |
-   | SSH Password | *(the SSH password)* |
-   | SSL Mode | `require` |
+4. Click **New Favorite**.
 
-4. Click **Test** to verify the connection, then **Save**.
+5. In **General**, fill these fields exactly.
 
-5. Double-click the connection to open it.
+  **Prod:**
+  - Name: `eyrecovery-prod`
+  - Host (or Server): `s187p01-eyrecovery-psqlfs.postgres.database.azure.com`
+  - Port: `5432`
+  - User (or Username): `psqladminTigger`
+  - Password: Postgres password for `psqladminTigger`
+  - Database: `s187p01-eyrecovery-moose-psqldb`
+
+  **Dev:**
+  - Name: `eyrecovery-dev`
+  - Host (or Server): `s187d01-eyrecovery-psqlfs.postgres.database.azure.com`
+  - Port: `5432`
+  - User (or Username): `psqladminDexter`
+  - Password: Postgres password for `psqladminDexter`
+  - Database: `postgres`
+
+  **Important:** Do not set the General Host/Server field to `127.0.0.1`.
+
+6. Open **SSH** in the same favorite and enable **Connect via SSH**.
+
+7. In **SSH**, fill these fields exactly.
+
+  **Prod:**
+  - SSH Host: `127.0.0.1`
+  - SSH Port: `2223`
+  - SSH User: `psqladmin`
+  - SSH Password: VM SSH password for `psqladmin`
+
+  **Dev:**
+  - SSH Host: `127.0.0.1`
+  - SSH Port: `2222`
+  - SSH User: `psqladmin`
+  - SSH Password: VM SSH password for `psqladmin`
+
+8. Open **SSL** and set **SSL Mode** to Require.
+
+9. Click **Test**.
+
+10. If test succeeds, click **Connect**.
+
+11. If you want to reuse it later, save the favorite.
+
+12. If test fails with timeout or route errors, verify the Bastion tunnel terminal is still running and retry.
 
 ### Cleanup
 
-When done, close TablePlus and stop the Bastion/SSH tunnels (Ctrl+C in Terminals 1 & 2).
+When done, close Postico and stop the Bastion/SSH tunnels (Ctrl+C in Terminals 1 & 2).
 
 ---
 
@@ -178,6 +207,11 @@ This is normal with the `-N` flag (no shell). The tunnel is active. Proceed to S
 - Verify Terminal 2 (SSH tunnel) is still running.
 - Check that both Bastion (Terminal 1) and SSH (Terminal 2) tunnels are open.
 
+### Postico test fails
+- Verify the Bastion tunnel terminal is still running.
+- If Postico SSH is enabled, do not run a separate ssh -L tunnel.
+- Re-check SSH Port is `2222` (dev) or `2223` (prod).
+
 ### psql not found
 Install PostgreSQL client tools:
 ```sh
@@ -188,9 +222,9 @@ brew install postgresql
 sudo apt install postgresql-client
 ```
 
-### TablePlus "No route to host"
-- Ensure both tunnels are running (Terminals 1 & 2).
-- Verify SSH Host is `127.0.0.1` (not the actual VM IP).
+### Postico "No route to host"
+- Ensure Bastion tunnel is running.
+- Verify SSH Host is `127.0.0.1` (not the VM IP or DB host).
 
 ---
 
@@ -219,5 +253,5 @@ SELECT COUNT(*) FROM table_name;
 
 - Staging environment does not yet have a Bastion configured; use WebSSH or request infrastructure changes.
 - Always keep both Bastion and SSH tunnels open while connected.
-- TablePlus is recommended for macOS users as it handles SSH tunneling natively.
+- Postico is recommended for macOS users because it supports built-in SSH tunneling.
 - For security, store credentials securely (e.g., in macOS Keychain) rather than plain text.
