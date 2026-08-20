@@ -19,6 +19,7 @@ RSpec.describe Training::ResponsesController, type: :controller do
           response: { answers: answers, text_input: text_input },
         }
       end
+
       context 'when single choice (radio buttons)' do
         let(:question_name) { '1-1-4-1' }
 
@@ -90,9 +91,9 @@ RSpec.describe Training::ResponsesController, type: :controller do
     end
 
     context 'with summative' do
-      let(:question_name) { '1-3-2-1' }  # First summative question
-      let(:last_question_name) { '1-3-2-10' }  # Last summative question
-      let(:answers) { [1] }  # Correct answer for these questions
+      let(:question_name) { '1-3-2-1' } # First summative question
+      let(:last_question_name) { '1-3-2-10' } # Last summative question
+      let(:answers) { [1] } # Correct answer for these questions
       let(:submission_nonce) { SecureRandom.uuid }
 
       context 'when nonce is blank' do
