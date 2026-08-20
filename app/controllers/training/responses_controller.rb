@@ -15,30 +15,23 @@ module Training
     def update
       if content.summative_question?
         nonce = params[:response] && params[:response][:submission_nonce]
-        if nonce.present? && session[:form_nonce] == nonce
-          if save_response!
-            track_question_answer
-            # Only consume nonce when assessment is completed (last question)
-            session.delete(:form_nonce) if content.last_assessment?
-            redirect
-          else
-            # On validation error, generate a new nonce for resubmission
-            new_nonce = SecureRandom.uuid
-            session[:form_nonce] = new_nonce
-            @submission_nonce = new_nonce
-            flash.now[:alert] = "DEBUG: session[:form_nonce]=#{session[:form_nonce]} params[:submission_nonce]=#{params[:response]&.[](:submission_nonce)} @submission_nonce=#{@submission_nonce}"
-            render 'training/questions/show', status: :unprocessable_entity
-          end
-        elsif current_user_response && current_user_response.errors.any?
-          # If there are validation errors, show them (restore previous behavior)
+        if nonce.blank? || session[:form_nonce] != nonce
+          # Nonce already used or missing: ignore duplicate submission.
+          # Must redirect before touching current_user_response to avoid
+          # creating a spurious incomplete assessment for a failed attempt.
+          Rails.logger.error("Duplicate or invalid submission detected for user #{current_user.id} on question #{content.name}")
+          redirect_to training_module_question_path(mod.name, content.name)
+        elsif save_response!
+          track_question_answer
+          # Only consume nonce when assessment is completed (last question)
+          session.delete(:form_nonce) if content.last_assessment?
+          redirect
+        else
+          # On validation error, generate a new nonce for resubmission
           new_nonce = SecureRandom.uuid
           session[:form_nonce] = new_nonce
           @submission_nonce = new_nonce
           render 'training/questions/show', status: :unprocessable_entity
-        else
-          # Nonce already used or missing: ignore duplicate submission
-          Rails.logger.error("Duplicate or invalid submission detected for user #{current_user.id} on question #{content.name}")
-          redirect_to training_module_question_path(mod.name, content.name)
         end
       elsif save_response!
         # Formative and other questions: no nonce logic
