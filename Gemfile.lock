@@ -414,8 +414,9 @@ GEM
       tzinfo
       validate_url
       webfinger (~> 2.0)
-    opentelemetry-api (1.7.0)
-    opentelemetry-common (0.23.0)
+    opentelemetry-api (1.11.0)
+      logger
+    opentelemetry-common (0.25.1)
       opentelemetry-api (~> 1.0)
     opentelemetry-exporter-otlp (0.31.1)
       google-protobuf (>= 3.18)
@@ -438,7 +439,7 @@ GEM
       opentelemetry-instrumentation-active_support (~> 0.10)
     opentelemetry-instrumentation-active_support (0.10.1)
       opentelemetry-instrumentation-base (~> 0.25)
-    opentelemetry-instrumentation-base (0.25.0)
+    opentelemetry-instrumentation-base (0.26.1)
       opentelemetry-api (~> 1.7)
       opentelemetry-common (~> 0.21)
       opentelemetry-registry (~> 0.1)
@@ -448,7 +449,7 @@ GEM
       opentelemetry-instrumentation-base (~> 0.25)
     opentelemetry-instrumentation-net_http (0.26.1)
       opentelemetry-instrumentation-base (~> 0.25)
-    opentelemetry-instrumentation-rack (0.29.0)
+    opentelemetry-instrumentation-rack (0.31.1)
       opentelemetry-instrumentation-base (~> 0.25)
     opentelemetry-instrumentation-rails (0.39.1)
       opentelemetry-instrumentation-action_mailer (~> 0.6)
@@ -459,7 +460,7 @@ GEM
       opentelemetry-instrumentation-active_storage (~> 0.3)
       opentelemetry-instrumentation-active_support (~> 0.10)
       opentelemetry-instrumentation-concurrent_ruby (~> 0.23)
-    opentelemetry-registry (0.4.0)
+    opentelemetry-registry (0.6.3)
       opentelemetry-api (~> 1.1)
     opentelemetry-sdk (1.10.0)
       opentelemetry-api (~> 1.1)
