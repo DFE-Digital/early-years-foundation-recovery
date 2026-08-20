@@ -80,6 +80,7 @@ Rails.application.config.content_security_policy do |policy|
                      *CLARITY_DOMAINS
 
   policy.style_src   :self,
+                     :unsafe_inline, # required for GOV.UK Frontend JS and Turbo inline style mutations
                      *GOOGLE_STATIC_DOMAINS,
                      *OPTIMIZE_DOMAINS
 
@@ -90,7 +91,7 @@ Rails.application.config.content_security_policy do |policy|
                      *CLARITY_DOMAINS,
                      *webpack_dev_server.to_a
 
-  policy.upgrade_insecure_requests
+  # policy.upgrade_insecure_requests TODO: Figure out how to enable this without breaking GOV.UK Frontend JS and Turbo inline style mutations
   policy.block_all_mixed_content
 end
 
@@ -100,7 +101,7 @@ Rails.application.config.content_security_policy_nonce_generator = ->(_request) 
 #
 # Set the nonce only to specific directives
 #
-Rails.application.config.content_security_policy_nonce_directives = %w[script-src style-src]
+Rails.application.config.content_security_policy_nonce_directives = %w[script-src]
 #
 # Report CSP violations to a specified URI
 # For further information see the following documentation
