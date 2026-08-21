@@ -13,3 +13,7 @@
 
       - if show_module_description && mod.description.present?
         p.govuk-body.description= mod.description
+
+      - if mod.show_module_type_tag?
+        span.govuk-tag
+          = mod.module_type_tag
