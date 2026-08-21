@@ -1,39 +1,74 @@
 # ------------------------------------------------------------------------------
-# Base - AMD64 & ARM64 compatible
+# Build base - AMD64 & ARM64 compatible
 # ------------------------------------------------------------------------------
-FROM ruby:3.4.5-alpine as base
+FROM ruby:3.4.6-bookworm AS build-base
 
-RUN apk add --no-cache --no-progress --no-check-certificate build-base less curl tzdata gcompat
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libpq-dev \
+    libyaml-dev \
+    curl \
+    tzdata \
+    && rm -rf /var/lib/apt/lists/*
 
-ENV TZ Europe/London
+ENV TZ=Europe/London
 
 # ------------------------------------------------------------------------------
-# Dependencies
+# Ruby gem dependencies
 # ------------------------------------------------------------------------------
-FROM base as deps
+FROM build-base AS deps
 
 LABEL org.opencontainers.image.description "Application Dependencies"
 
-RUN apk add --no-cache --no-progress --no-check-certificate postgresql-dev yarn chromium yaml-dev
-
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
-ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
-ENV APP_HOME /build
-
+ENV APP_HOME=/build
 WORKDIR ${APP_HOME}
-
-COPY package.json ${APP_HOME}/package.json
-COPY yarn.lock ${APP_HOME}/yarn.lock
-COPY .yarn ${APP_HOME}/.yarn
-COPY .yarnrc.yml ${APP_HOME}/.yarnrc.yml
-
-RUN yarn install
 
 COPY Gemfile* ./
 
-RUN bundle config set no-cache true
-RUN bundle config set without development test ui
-RUN bundle install --no-binstubs --retry=10 --jobs=4
+RUN bundle config set no-cache true \
+    && bundle config set without "development test ui" \
+    && bundle install --no-binstubs --retry=10 --jobs=4
+
+# ------------------------------------------------------------------------------
+# JavaScript/CSS asset compilation
+# ------------------------------------------------------------------------------
+FROM build-base AS assets
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    nodejs \
+    npm \
+    chromium \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN npm install --global yarn
+
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+ENV RAILS_ENV=production
+ENV APP_HOME=/build
+
+WORKDIR ${APP_HOME}
+
+COPY package.json yarn.lock .yarnrc.yml ./
+COPY .yarn ./.yarn
+
+RUN yarn install
+
+COPY --from=deps /usr/local/bundle /usr/local/bundle
+COPY Gemfile* ./
+COPY config.ru Rakefile ./
+COPY public ./public
+COPY bin ./bin
+COPY lib ./lib
+COPY config ./config
+COPY db ./db
+COPY app ./app
+
+RUN mkdir -p app/assets/builds \
+    && yarn build:css \
+    && yarn build \
+    && yarn run copy:assets \
+    && SECRET_KEY_BASE=x bundle exec rails assets:precompile
 
 # ------------------------------------------------------------------------------
 # OpenTelemetry Collector
@@ -43,21 +78,33 @@ FROM otel/opentelemetry-collector-contrib:latest AS otel-collector
 # ------------------------------------------------------------------------------
 # Production Stage
 # ------------------------------------------------------------------------------
-FROM base AS app
+FROM ruby:3.4.6-slim-bookworm AS app
 
 LABEL org.opencontainers.image.source=https://github.com/DFE-Digital/early-years-foundation-recovery
 LABEL org.opencontainers.image.description "Early Years Recovery Rails Application"
 
-RUN echo "Welcome to the EYFS Recovery Application" > /etc/motd
-RUN apk add --no-cache --no-progress --no-check-certificate postgresql-dev yarn chromium font-liberation openssh
-RUN echo "root:Docker!" | chpasswd && cd /etc/ssh/ && ssh-keygen -A
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    chromium \
+    fonts-liberation \
+    libpq5 \
+    libyaml-0-2 \
+    openssh-server \
+    curl \
+    tzdata \
+    less \
+    && rm -rf /var/lib/apt/lists/*
 
-ENV GROVER_NO_SANDBOX true
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
-ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
-ENV APP_HOME /srv
-ENV RAILS_ENV ${RAILS_ENV:-production}
-ENV ENVIRONMENT ${ENVIRONMENT:-production}
+RUN echo "Welcome to the EYFS Recovery Application" > /etc/motd \
+    && echo "root:Docker!" | chpasswd \
+    && cd /etc/ssh/ && ssh-keygen -A
+
+ENV GROVER_NO_SANDBOX=true
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+ENV TZ=Europe/London
+ENV APP_HOME=/srv
+ENV RAILS_ENV=${RAILS_ENV:-production}
+ENV ENVIRONMENT=${ENVIRONMENT:-production}
 
 RUN mkdir -p ${APP_HOME}/tmp/pids ${APP_HOME}/log
 
@@ -68,7 +115,6 @@ COPY --from=deps /usr/local/bundle /usr/local/bundle
 
 COPY config.ru ${APP_HOME}/config.ru
 COPY Rakefile ${APP_HOME}/Rakefile
-COPY public ${APP_HOME}/public
 COPY bin ${APP_HOME}/bin
 COPY lib ${APP_HOME}/lib
 COPY data ${APP_HOME}/data
@@ -76,16 +122,8 @@ COPY config ${APP_HOME}/config
 COPY db ${APP_HOME}/db
 COPY app ${APP_HOME}/app
 
-COPY package.json ${APP_HOME}/package.json
-COPY yarn.lock ${APP_HOME}/yarn.lock
-COPY .yarnrc.yml ${APP_HOME}/.yarnrc.yml
-COPY --from=deps /build/.yarn ${APP_HOME}/.yarn
-COPY --from=deps /build/node_modules ${APP_HOME}/node_modules
-
-RUN mkdir -p app/assets/builds
-RUN yarn build:css && yarn build
-RUN yarn run copy:assets
-RUN SECRET_KEY_BASE=x bundle exec rails assets:precompile
+# Copy precompiled public assets from the assets stage
+COPY --from=assets /build/public ${APP_HOME}/public
 
 COPY sshd_config /etc/ssh/
 COPY ./docker-entrypoint.sh /
@@ -104,26 +142,35 @@ CMD ["sh", "-c", "otelcol --config=/etc/otel-collector-config.yml >/dev/null 2>&
 # ------------------------------------------------------------------------------
 # Development Stage - ./bin/docker-dev
 # ------------------------------------------------------------------------------
-FROM app as dev
+FROM app AS dev
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    postgresql-client \
+    nodejs \
+    npm \
+    graphviz \
+    socat \
+    && rm -rf /var/lib/apt/lists/*
 
 # `socat` is used by Procfile.dev to forward 127.0.0.1:4000 inside this container
-RUN apk add --no-cache --no-progress --no-check-certificate postgresql-client npm graphviz socat
-RUN npm install --global adr-log contentful-cli
+RUN npm install --global yarn adr-log contentful-cli
 
-RUN bundle config unset without
-RUN bundle config set without test ui
-RUN bundle install --no-binstubs --retry=10 --jobs=4
+RUN bundle config unset without \
+    && bundle config set without "test ui" \
+    && bundle install --no-binstubs --retry=10 --jobs=4
 
 # ------------------------------------------------------------------------------
 # Test Stage - ./bin/docker-rspec
 # ------------------------------------------------------------------------------
-FROM app as test
+FROM app AS test
 
-RUN apk add --no-cache --no-progress --no-check-certificate postgresql-client
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN bundle config unset without
-RUN bundle config set without development ui
-RUN bundle install --no-binstubs --retry=10 --jobs=4
+RUN bundle config unset without \
+    && bundle config set without "development ui" \
+    && bundle install --no-binstubs --retry=10 --jobs=4
 
 COPY spec ${APP_HOME}/spec
 COPY .rspec ${APP_HOME}/.rspec
@@ -135,14 +182,19 @@ CMD ["bundle", "exec", "rspec"]
 # ------------------------------------------------------------------------------
 # Pa11y CI - ./bin/docker-pa11y
 # ------------------------------------------------------------------------------
-FROM base as pa11y
+FROM build-base AS pa11y
 
 LABEL org.opencontainers.image.description "Accessibility auditor"
 
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
-ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 
-RUN apk add --no-cache --no-progress --no-check-certificate npm chromium
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    nodejs \
+    npm \
+    chromium \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN npm install --global --unsafe-perm puppeteer pa11y-ci
 
 COPY .pa11yci /usr/config.json
