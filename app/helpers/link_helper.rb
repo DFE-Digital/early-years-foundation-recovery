@@ -133,9 +133,9 @@ module LinkHelper
     return unless assessment_progress_service(mod).graded?
 
     if assessment_progress_service(mod).failed?
-      govuk_link_to 'Retake end of module test', training_module_page_path(mod.name, mod.assessment_intro_page.name), no_visited_state: true, class: 'card-link--retake'
+      govuk_link_to 'Retake end of module test', training_module_page_path(mod.name, mod.assessment_intro_page.name), no_visited_state: true, class: 'dfe-card-link--retake'
     else
-      govuk_link_to 'View previous test result', training_module_assessment_path(mod.name, mod.assessment_results_page.name), no_visited_state: true, class: 'card-link--retake'
+      govuk_link_to 'View previous test result', training_module_assessment_path(mod.name, mod.assessment_results_page.name), no_visited_state: true, class: 'dfe-card-link--retake'
     end
   end
 
