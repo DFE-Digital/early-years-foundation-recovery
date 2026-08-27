@@ -301,7 +301,6 @@ module Training
 
     # @return [Boolean]
     def show_module_type_tag?
-      # TODO: Improve this logic for checking if tag exists
       tag_present = fields[:module_type_tag].present?
 
       if tag_present.eql?(true)

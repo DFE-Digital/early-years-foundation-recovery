@@ -90,7 +90,6 @@ RSpec.describe Training::Module, type: :model do
     end
   end
 
-  # TODO: Update spec to include example module with tag text
   describe '#show_module_type_tag?' do
     context 'when module type tag does not exist' do
       it { expect(mod.show_module_type_tag?).to be false }
