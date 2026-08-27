@@ -11,6 +11,10 @@
     h3.govuk-heading-s
       = govuk_link_to mod.heading, destination, no_visited_state: true, class: 'dfe-card-link--header'
 
+    - if mod.show_module_type_tag?
+        span.govuk-tag class='govuk-!-margin-bottom-4'
+          = mod.module_type_tag
+
     - if progress
       = link_to_retake_or_results(mod)
 
