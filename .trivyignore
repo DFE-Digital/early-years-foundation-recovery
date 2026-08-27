@@ -18,3 +18,8 @@ CVE-2026-45363
 
 # CVE-2026-39822: Go stdlib os.Root symlink traversal (needs Go 1.26.5+ rebuild)
 CVE-2026-39822
+
+# This repo does not compile that binary.
+# The Dockerfile copies a prebuilt collector from otel/opentelemetry-collector-contrib:latest
+CVE-2026-56864
+CVE-2026-56865
