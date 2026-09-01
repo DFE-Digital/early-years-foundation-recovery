@@ -80,9 +80,10 @@ Rails.application.config.content_security_policy do |policy|
                      *CLARITY_DOMAINS
 
   policy.style_src   :self,
-                     :unsafe_inline, # required for GOV.UK Frontend JS and Turbo inline style mutations
                      *GOOGLE_STATIC_DOMAINS,
                      *OPTIMIZE_DOMAINS
+
+  policy.style_src_attr :unsafe_inline
 
   webpack_dev_server = %w[http://localhost:3035 ws://localhost:3035] if Rails.env.development?
 
@@ -91,7 +92,7 @@ Rails.application.config.content_security_policy do |policy|
                      *CLARITY_DOMAINS,
                      *webpack_dev_server.to_a
 
-  # policy.upgrade_insecure_requests TODO: Figure out how to enable this without breaking GOV.UK Frontend JS and Turbo inline style mutations
+  policy.upgrade_insecure_requests
   policy.block_all_mixed_content
 end
 
