@@ -49,6 +49,15 @@ describe Training::Video, type: :model do
     it '#transcript' do
       expect(video.transcript).to start_with "Today's subject is based on"
     end
+
+    it 'does not add the 1080p cap for YouTube videos' do
+      video = Training::Video.allocate
+
+      video.define_singleton_method(:video_id) { 'XnP6jaK7ZAY' }
+      video.define_singleton_method(:video_provider) { 'youtube' }
+
+      expect(video.video_url).not_to include('max_quality=1080p')
+    end
   end
 
   describe 'Vimeo video fields' do
@@ -61,7 +70,7 @@ describe Training::Video, type: :model do
              page_type: 'video_page',
              transcript: 'Vimeo transcript...',
              parent: parent_module,
-             video_url: 'https://player.vimeo.com/video/743243040?enablejsapi=1&amp;origin=recovery.app')
+             video_url: 'https://player.vimeo.com/video/743243040?enablejsapi=1&amp;origin=recovery.app&amp;max_quality=1080p')
     end
 
     it '#page_type' do
@@ -77,11 +86,20 @@ describe Training::Video, type: :model do
     end
 
     it '#video_url' do
-      expect(video.video_url).to eq 'https://player.vimeo.com/video/743243040?enablejsapi=1&amp;origin=recovery.app'
+      expect(video.video_url).to eq 'https://player.vimeo.com/video/743243040?enablejsapi=1&amp;origin=recovery.app&amp;max_quality=1080p'
     end
 
     it '#title' do
       expect(video.title).to eq 'Vimeo Video Title'
+    end
+
+    it 'caps Vimeo videos at 1080p' do
+      video = Training::Video.allocate
+
+      video.define_singleton_method(:video_id) { '743243040' }
+      video.define_singleton_method(:video_provider) { 'vimeo' }
+
+      expect(video.video_url).to include('max_quality=1080p')
     end
   end
 end
