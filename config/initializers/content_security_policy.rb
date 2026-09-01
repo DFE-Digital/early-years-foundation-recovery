@@ -80,10 +80,9 @@ Rails.application.config.content_security_policy do |policy|
                      *CLARITY_DOMAINS
 
   policy.style_src   :self,
+                     :unsafe_inline,
                      *GOOGLE_STATIC_DOMAINS,
                      *OPTIMIZE_DOMAINS
-
-  policy.style_src_attr :unsafe_inline
 
   webpack_dev_server = %w[http://localhost:3035 ws://localhost:3035] if Rails.env.development?
 
