@@ -51,7 +51,7 @@ describe Training::Video, type: :model do
     end
 
     it 'does not add the 1080p cap for YouTube videos' do
-      video = Training::Video.allocate
+      video = described_class.allocate
 
       video.define_singleton_method(:video_id) { 'XnP6jaK7ZAY' }
       video.define_singleton_method(:video_provider) { 'youtube' }
@@ -94,7 +94,7 @@ describe Training::Video, type: :model do
     end
 
     it 'caps Vimeo videos at 1080p' do
-      video = Training::Video.allocate
+      video = described_class.allocate
 
       video.define_singleton_method(:video_id) { '743243040' }
       video.define_singleton_method(:video_provider) { 'vimeo' }
