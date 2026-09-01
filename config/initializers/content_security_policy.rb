@@ -80,6 +80,7 @@ Rails.application.config.content_security_policy do |policy|
                      *CLARITY_DOMAINS
 
   policy.style_src   :self,
+                     :unsafe_inline,
                      *GOOGLE_STATIC_DOMAINS,
                      *OPTIMIZE_DOMAINS
 
@@ -100,7 +101,7 @@ Rails.application.config.content_security_policy_nonce_generator = ->(_request) 
 #
 # Set the nonce only to specific directives
 #
-Rails.application.config.content_security_policy_nonce_directives = %w[script-src style-src]
+Rails.application.config.content_security_policy_nonce_directives = %w[script-src]
 #
 # Report CSP violations to a specified URI
 # For further information see the following documentation
