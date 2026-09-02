@@ -21,8 +21,8 @@ CVE-2026-39822
 
 # Temporary OpenTelemetry Collector binary CVEs (usr/bin/otelcol)
 # Upstream collector image still ships vulnerable golang.org/x modules.
-# Remove once the collector image includes x/crypto >= 0.55.0, x/mod >= 0.40.0. and grpc >= 1.83.1
+# Remove once the collector image includes x/crypto >= 0.55.0, x/mod >= 0.40.0 and grpc >= 1.83.1
 CVE-2026-56854
 CVE-2026-56864
 CVE-2026-56865
-CVE-2026-84304 
+CVE-2026-84304
