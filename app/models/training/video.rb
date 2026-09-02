@@ -19,7 +19,7 @@ module Training
     def video_url
       return unless video_id
 
-      %(#{video_site}/#{video_id}?enablejsapi=1&amp;origin=#{ENV['DOMAIN']})
+      %(#{video_site}/#{video_id}?#{video_params})
     end
 
     # @return [Array<String, Hash>]
@@ -36,6 +36,14 @@ module Training
       elsif youtube?
         'https://www.youtube.com/embed'
       end
+    end
+
+    # @return [String]
+    def video_params
+      params = { enablejsapi: 1, origin: ENV['DOMAIN'] }
+      params = params.merge(max_quality: '1080p') if vimeo?
+
+      params.to_param
     end
 
     # @return [Boolean]
