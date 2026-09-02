@@ -9,6 +9,7 @@ gem 'rails'
 gem 'rexml', '>= 3.4.2'
 gem 'sprockets-rails'
 gem 'uri', '>= 1.0.4'
+gem 'resolv', '>= 0.7.2'
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'importmap-rails'
