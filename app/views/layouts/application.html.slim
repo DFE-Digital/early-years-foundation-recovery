@@ -4,7 +4,7 @@ html.govuk-template.govuk-template--rebranded lang='en'
     = render 'layouts/head'
 
   body#default-layout.govuk-template__body
-    = javascript_tag nonce: true, data: { turbo_eval: false } do
+    = javascript_tag nonce: true do
       | document.body.className = ((document.body.className) ? document.body.className + ' js-enabled govuk-frontend-supported' : 'js-enabled govuk-frontend-supported');
 
     = render 'layouts/navigation'
