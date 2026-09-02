@@ -5,7 +5,7 @@ ruby '3.4.5'
 
 gem 'pg'
 gem 'puma', '~> 7.2.1'
-gem 'rails'
+gem 'rails', '8.0.5.1'
 gem 'rexml', '>= 3.4.2'
 gem 'sprockets-rails'
 gem 'uri', '>= 1.0.4'
