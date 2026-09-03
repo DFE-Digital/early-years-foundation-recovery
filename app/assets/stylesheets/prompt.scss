@@ -68,7 +68,7 @@
 
   &.prompt-home {
     background: $light-blue;
-    border-top: govuk-organisation-colour('department-for-education') solid govuk-spacing(2);
+    border-top: $color_dfe-secondary-blue solid govuk-spacing(2);
 
     .govuk-grid-column-one-quarter {
       @include govuk-media-query($from: desktop) {
@@ -81,7 +81,7 @@
     }
 
     .svg-inline--fa {
-      background-color: govuk-organisation-colour('department-for-education') !important;
+      background-color: $color_dfe-secondary-blue !important;
     }
   }
 }

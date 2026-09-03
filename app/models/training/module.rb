@@ -298,5 +298,16 @@ module Training
     def custom_description
       I18n.t("training_module_custom_descriptions.#{mod.name}.description", default: description)
     end
+
+    # @return [Boolean]
+    def show_module_type_tag?
+      tag_present = fields[:module_type_tag].present?
+
+      if tag_present.eql?(true)
+        module_type_tag.present?
+      else
+        false
+      end
+    end
   end
 end

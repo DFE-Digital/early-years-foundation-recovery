@@ -7,7 +7,7 @@
 $govuk-font-family: 'Inter', sans-serif;
 $govuk-include-default-font-face: false;
 
-// Serve govuk assets from public/govuk-assets/ 
+// Serve govuk assets from public/govuk-assets/
 // This lets us keep config.assets.compile = false in production.
 $govuk-assets-path: '/govuk-assets/';
 
@@ -62,7 +62,7 @@ main img {
 // -----------------------------------------------
 
 #default-layout .govuk-notification-banner {
-    margin-bottom: govuk-spacing(8);
+  margin-bottom: govuk-spacing(8);
 }
 
 // Hero layout
@@ -79,12 +79,13 @@ main img {
   }
 
   #formative-results .govuk-notification-banner {
-      margin-bottom: govuk-spacing(4);
+    margin-bottom: govuk-spacing(4);
   }
 
   @include govuk-media-query($until: tablet) {
-    .govuk-grid-column-one-half > p,
-    .govuk-grid-column-one-half > h2 {
+
+    .govuk-grid-column-one-half>p,
+    .govuk-grid-column-one-half>h2 {
       margin-left: govuk-spacing(2);
       margin-right: govuk-spacing(2);
     }
@@ -108,18 +109,19 @@ pre.code-tip {
     font-family: monospace !important;
   }
 }
+
 // --------------------------------------------
 
 #feedback-cta {
   padding: govuk-spacing(5);
-  background-color: govuk-organisation-colour('department-for-education');
+  background-color: $color_dfe-secondary-blue;
 
   * {
     color: govuk-colour('white');
   }
 
   .govuk-button {
-    background-color: govuk-organisation-colour('department-for-education');
+    background-color: $color_dfe-secondary-blue;
     border-color: govuk-colour('white');
     box-shadow: none;
 
@@ -132,7 +134,7 @@ pre.code-tip {
     }
 
     &:hover {
-      background-color: lighten(govuk-organisation-colour('department-for-education'), 10%);
+      background-color: lighten($color_dfe-secondary-blue, 10%);
     }
   }
 }

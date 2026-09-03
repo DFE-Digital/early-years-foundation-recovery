@@ -111,11 +111,6 @@
     .bar-ball {
       background-color: govuk-colour('yellow');
     }
-
-    .govuk-tag {
-      background-color: govuk-colour('light-grey');
-      color: govuk-colour('blue');
-    }
   }
 
   &-link--retake {
@@ -136,5 +131,9 @@
   &-link--retake {
     position: relative;
     z-index: 2;
+  }
+
+  &-container > .govuk-tag {
+    align-self: flex-start;
   }
 }
