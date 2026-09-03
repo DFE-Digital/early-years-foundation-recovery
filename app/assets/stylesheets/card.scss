@@ -132,4 +132,8 @@
     position: relative;
     z-index: 2;
   }
+
+  &-container > .govuk-tag {
+    align-self: flex-start;
+  }
 }
