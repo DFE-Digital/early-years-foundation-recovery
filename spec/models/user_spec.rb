@@ -23,9 +23,9 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#setting_type' do
+  describe '#setting_type_id' do
     it 'must be present' do
-      expect(build(:user, :registered, setting_type: nil)).not_to be_valid
+      expect(build(:user, :registered, setting_type_id: nil)).not_to be_valid
     end
 
     it 'must be in list' do
