@@ -11,4 +11,6 @@ scan:
     - "/usr/local/lib/ruby/gems/*/specifications/default/net-imap-*.gemspec"
     - "/usr/local/lib/ruby/gems/*/specifications/zlib-*.gemspec"
     - "/usr/local/lib/ruby/gems/*/specifications/default/zlib-*.gemspec"
+    - "/usr/local/lib/ruby/gems/*/specifications/resolv-*.gemspec"
+    - "/usr/local/lib/ruby/gems/*/specifications/default/resolv-*.gemspec"
 
