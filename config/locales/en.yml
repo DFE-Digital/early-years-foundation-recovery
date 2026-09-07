@@ -568,6 +568,9 @@ en:
       - reception teachers and teaching assistants
 
       The training is for anyone who is new to early years and looking to build their child development knowledge. However, it is also useful for anyone looking to refresh their knowledge.
+    modules_summary:
+      one: There is 1 module, written by early years experts, that covers key areas of child development. The average completion time of each module is 2 hours and you can complete these at your own pace.
+      other: There are %{count} modules, written by early years experts, that cover key areas of child development. The average completion time of each module is 2 hours and you can complete these at your own pace.
     prompt: |
       ## Why you should take this training
 
