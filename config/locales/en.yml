@@ -734,11 +734,6 @@ en:
 
         %{outcomes}
 
-      criteria: |
-        ## This module covers:
-
-        %{criteria}
-
       progress: |
         ## Your module progress
 
