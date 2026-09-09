@@ -622,12 +622,6 @@ en:
       **On completion of this module you will be able to:**
 
       %{outcomes}
-
-      **What you'll learn**
-
-      This module covers:
-
-      %{criteria}
   # /feedback
   feedback:
     cta: |
