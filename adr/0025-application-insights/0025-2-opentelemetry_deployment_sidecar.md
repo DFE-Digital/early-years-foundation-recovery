@@ -22,6 +22,22 @@ However, our hosting environment (Azure Web Apps for Containers) is optimized fo
 
 We chose to **Embed the Collector** directly into the Docker image.
 
+### Side-by-side Splunk rollout
+
+To allow a gradual migration away from Azure Application Insights without breaking the existing telemetry path, the Rails app can now export the same OTLP traces to Splunk Observability Cloud in parallel with the existing collector-based Azure Monitor export.
+
+The application emits spans over OTLP/HTTP as before. When the optional Splunk environment variables are set, the app adds a second OTLP exporter for:
+
+- Azure Monitor via the existing collector and Application Insights connection string
+- Splunk APM via the optional Splunk OTLP endpoint and auth header
+
+The Splunk export is enabled only when the following environment variables are set:
+
+- `SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT`
+- `SPLUNK_OTEL_EXPORTER_OTLP_HEADERS`
+
+This keeps the rollout reversible and lets us validate the new destination while retaining the current Azure pipeline during the transition.
+
 ### Implementation Details
 
 1.  **Multi-Stage Build**: We fetch the `otelcol-contrib` binary from the official image during the Docker build.

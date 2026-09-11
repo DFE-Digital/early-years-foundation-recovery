@@ -2,19 +2,37 @@ receivers:
   otlp:
     protocols:
       http:
-        endpoint: "0.0.0.0:4318"
+        endpoint: "0.0.0.0:${SPLUNK_PORT}"
+
+processors:
+  memory_limiter:
+    check_interval: 1s
+    limit_percentage: 75
+    spike_limit_percentage: 15
+  batch:
+    send_batch_size: 10000
+    timeout: 2s
+  resource:
+    attributes:
+      - key: service.name
+        value: "${OTEL_SERVICE_NAME}"
+        action: upsert
 
 exporters:
   azuremonitor:
     connection_string: "${APPLICATION_INSIGHTS_CONNECTION_STRING}"
+  otlphttpp/traces:
+    traces_endpoint: "https://ingest.${SPLUNK_REALM}.observability.splunkcloud.com/v2/trace/otlp"
+  headers:
+    "X-SF-Token": "${SPLUNK_ACESS_TOKEN}"
 
 service:
   pipelines:
     traces:
       receivers: [otlp]
-      processors: []
-      exporters: [azuremonitor]
+      processors: [memory_limiter, resource, batch]
+      exporters: [azuremonitor, otlphttp/metrics]
     logs:
       receivers: [otlp]
-      processors: []
-      exporters: [azuremonitor]
+      processors: [memory_limiter, resource, batch]
+      exporters: [azuremonitor, otlphttp/metrics]
