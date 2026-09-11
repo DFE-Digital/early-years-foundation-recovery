@@ -27,5 +27,5 @@
         - if mod.thumbnail_url.present?
           = image_tag mod.thumbnail_url, alt: '', class: 'about-module-box-thumbnail', loading: 'lazy'
 
-    = m('about.summary', outcomes: mod.outcomes, criteria: mod.criteria)
+    = m('about.summary', outcomes: mod.outcomes)
     = render 'enrol'
