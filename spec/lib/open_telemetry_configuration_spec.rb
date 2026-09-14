@@ -32,12 +32,12 @@ RSpec.describe OpenTelemetryConfiguration do
 
     it 'adds a Splunk Observability OTLP exporter when Splunk settings are present' do
       ENV['OTEL_EXPORTER_OTLP_ENDPOINT'] = 'http://otel-collector:4318/v1/traces'
-      ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'] = 'https://ingest.us0.observability.splunkcloud.com/v2/trace/otlp'
+      ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'] = 'https://ingest.eu2.observability.splunkcloud.com/v2/trace/otlp'
       ENV['SPLUNK_OTEL_EXPORTER_OTLP_HEADERS'] = 'X-SF-Token=abc123'
 
       expect(described_class.trace_exporter_configs).to include(
         { endpoint: 'http://otel-collector:4318/v1/traces', headers: {} },
-        { endpoint: 'https://ingest.us0.observability.splunkcloud.com/v2/trace/otlp', headers: { 'X-SF-Token' => 'abc123' } },
+        { endpoint: 'https://ingest.eu2.observability.splunkcloud.com/v2/trace/otlp', headers: { 'X-SF-Token' => 'abc123' } },
       )
     end
   end
