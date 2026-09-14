@@ -10,6 +10,17 @@ variable "environment" {
   type        = string
 }
 
+variable "splunk_access_token" {
+  description = "Splunk Observability Cloud access token"
+  type        = string
+  sensitive   = true
+}
+
+variable "splunk_realm" {
+  description = "Splunk Observability Cloud realm"
+  type        = string
+}
+
 variable "resource_name_prefix" {
   description = "Prefix for resource names"
   type        = string
