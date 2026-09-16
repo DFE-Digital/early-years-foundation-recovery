@@ -95,7 +95,7 @@ RSpec.describe User, type: :model do
       end
 
       it 'lists seconds taken to complete published modules in order' do
-        expect(user.module_ttc).to eq({ 'alpha' => 4, 'bravo' => 2, 'charlie' => nil })
+        expect(user.module_ttc).to eq({ 'alpha' => 4, 'bravo' => 2, 'charlie' => nil, 'bitesize-module' => nil })
       end
     end
 

@@ -15,8 +15,8 @@ RSpec.describe 'About training', type: :request do
     end
 
     it 'counts course modules' do
-      expect(response.body).to include('The course has 4 modules.')
-      expect(response.body).to include('3 modules are currently available.')
+      expect(response.body).to include('The course has 5 modules.')
+      expect(response.body).to include('4 modules are currently available.')
     end
   end
 end

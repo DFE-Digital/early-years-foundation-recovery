@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Training::Module, type: :model do
   subject(:mod) { described_class.by_name(:alpha) }
+  # subject(:bitesize_mod) { described_class.by_name(:bitesize_module) }
 
   describe '.by_name' do
     it 'loads linked entries' do
@@ -94,5 +95,10 @@ RSpec.describe Training::Module, type: :model do
     context 'when module type tag does not exist' do
       it { expect(mod.show_module_type_tag?).to be false }
     end
+
+    # TODO: Expand this spec to include more for bitesize modules
+    # context 'when module type tag exists' do
+    #   it { expect(bitesize_module.show_module_type_tag?).to be true }
+    # end
   end
 end
