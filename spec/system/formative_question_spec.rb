@@ -46,7 +46,7 @@ RSpec.describe 'Formative question' do
   context 'when on a question page' do
     specify do
       visit 'modules/alpha/questionnaires/1-1-4-1'
-      expect(page).to have_link 'Back to Module 1 overview', href: '/modules/alpha'
+      expect(page).to have_link 'Back to module overview', href: '/modules/alpha'
     end
   end
 

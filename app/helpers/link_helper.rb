@@ -11,7 +11,7 @@ module LinkHelper
       govuk_back_link text: 'Back to My modules', href: my_modules_path
     when %r{training/(pages|questions|assessments)}
       govuk_back_link href: training_module_path(mod.name),
-                      text: "Back to Module #{mod.position} overview"
+                      text: 'Back to module overview'
     when 'pages', 'settings', 'feedback', 'close_accounts'
       govuk_back_link href: url_for(:back)
     when %r{registration/*.}
