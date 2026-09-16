@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   get '500', to: 'errors#internal_server_error', via: :all
   get '503', to: 'errors#service_unavailable', via: :all
 
+  get '/.well-known/security.txt',
+      to: redirect('https://vdp.security.education.gov.uk/.well-known/security.txt', status: 301)
+
   resources :settings, controller: :settings, only: %i[show create]
 
   devise_for :users,
