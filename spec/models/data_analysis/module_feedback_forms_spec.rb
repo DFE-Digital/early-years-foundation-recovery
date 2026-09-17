@@ -26,11 +26,6 @@ RSpec.describe DataAnalysis::ModuleFeedbackForms do
         started: 1,
         completed: 0,
       },
-      {
-        mod: 'Bitesize module',
-        started: 0,
-        completed: 0,
-      },
     ]
   end
 

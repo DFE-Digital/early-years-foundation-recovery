@@ -29,7 +29,7 @@ RSpec.describe CourseProgress do
   describe '#available_modules' do
     it 'returns a list of modules that can be started' do
       # Initially, all published modules should be available
-      expect(course.available_modules.map(&:name)).to eq %w[alpha bravo charlie bitesize-module]
+      expect(course.available_modules.map(&:name)).to eq %w[alpha bravo charlie]
 
       # Start the first module, it should no longer be available
       start_module(alpha)

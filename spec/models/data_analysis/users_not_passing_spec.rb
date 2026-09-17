@@ -22,10 +22,6 @@ RSpec.describe DataAnalysis::UsersNotPassing do
         module_name: 'charlie',
         count: 0,
       },
-      {
-        module_name: 'bitesize-module',
-        count: 0,
-      },
     ]
   end
 

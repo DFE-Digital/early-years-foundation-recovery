@@ -26,11 +26,6 @@ RSpec.describe DataAnalysis::UserModuleCompletion do
         completed_count: 0,
         completed_percentage: 0.0,
       },
-      {
-        module_name: 'bitesize-module',
-        completed_count: 0,
-        completed_percentage: 0.0,
-      },
     ]
   end
 
