@@ -39,7 +39,7 @@
     "yauzl": "^3.2.1"
   },
   "devDependencies": {
-    "stylelint": "^16.26.1",
+    "stylelint": "^17.14.1",
     "stylelint-config-gds": "^2.0.0"
   },
   "stylelint": {
