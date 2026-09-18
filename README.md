@@ -11,7 +11,7 @@ Optionally create `.env` to override or set default variables.
 ## Dependencies
 
 Ruby version `3.4.x`
-Node version `20.18.x`
+Node version `20.19.x`
 PostgreSQL version `15.17`
 Yarn version `4.0.x`
 
