@@ -2,9 +2,6 @@
 # Suppress false positive for uri gem vulnerability
 CVE-2025-61594
 
-# CVE-2025-61729: Go stdlib crypto/x509 vulnerability in otelcol binary.
-CVE-2025-61729
-
 # flat-cache depends on flatted@3.3.3
 CVE-2026-32141
 
@@ -16,13 +13,3 @@ CVE-2026-41316
 # CVE-2026-45363: ruby-jwt empty-key HMAC bypass (fixed in 3.2.0).
 CVE-2026-45363
 
-# CVE-2026-39822: Go stdlib os.Root symlink traversal (needs Go 1.26.5+ rebuild)
-CVE-2026-39822
-
-# Temporary OpenTelemetry Collector binary CVEs (usr/bin/otelcol)
-# Upstream collector image still ships vulnerable golang.org/x modules.
-# Remove once the collector image includes x/crypto >= 0.55.0, x/mod >= 0.40.0 and grpc >= 1.83.1
-CVE-2026-56854
-CVE-2026-56864
-CVE-2026-56865
-CVE-2026-84304

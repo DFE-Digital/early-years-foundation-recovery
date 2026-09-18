@@ -38,7 +38,7 @@ RSpec.describe 'Summative assessment', type: :system do
     end
 
     specify do
-      expect(page).to have_link 'Back to Module 1 overview', href: '/modules/alpha'
+      expect(page).to have_link 'Back to module overview', href: '/modules/alpha'
     end
 
     context 'and no answer is selected' do

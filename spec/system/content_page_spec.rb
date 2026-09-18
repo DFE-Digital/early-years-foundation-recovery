@@ -11,7 +11,7 @@ RSpec.describe 'Content page' do
     end
 
     specify do
-      expect(page).to have_link 'Back to Module 1 overview', href: '/modules/alpha'
+      expect(page).to have_link 'Back to module overview', href: '/modules/alpha'
     end
   end
 
@@ -22,7 +22,7 @@ RSpec.describe 'Content page' do
     end
 
     specify do
-      expect(page).to have_link 'Back to Module 2 overview', href: '/modules/bravo'
+      expect(page).to have_link 'Back to module overview', href: '/modules/bravo'
     end
   end
 end
