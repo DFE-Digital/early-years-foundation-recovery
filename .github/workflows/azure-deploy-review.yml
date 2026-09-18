@@ -133,6 +133,9 @@ jobs:
               --name ${{ vars.REVIEWAPP_NAME }} \
               --slot ${{ env.PR_NUMBER }} \
               --settings APPLICATION_INSIGHTS_CONNECTION_STRING="${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}" \
+                SPLUNK_ACCESS_TOKEN="${{ secrets.SPLUNK_ACCESS_TOKEN }}" \
+                SPLUNK_REALM="${{ secrets.SPLUNK_REALM }}" \
+                OTEL_SERVICE_NAME="early-years-foundation-recovery" \
               --output none
 
       - name: Smoke test sign in journey

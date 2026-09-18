@@ -29,11 +29,7 @@ private
   end
 
   def request_path
-    if URI(settings_params[:request_path]).relative?
-      settings_params[:request_path]
-    else
-      settings_path
-    end
+    url_from(settings_params[:request_path]) || root_path
   end
 
   # @return [ActionController::Parameters]
