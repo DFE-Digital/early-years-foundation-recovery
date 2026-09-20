@@ -29,7 +29,7 @@
     "@stimulus-components/reveal": "^5.0.0",
     "accessible-autocomplete": "^3.0.1",
     "dfe-frontend": "^2.0.1",
-    "esbuild": "^0.28.1",
+    "esbuild": "^0.28.2",
     "flatted": "3.4.2",
     "govuk-frontend": "6.4.0",
     "immutable": "^5.1.8",
