@@ -29,7 +29,7 @@ private
   end
 
   def request_path
-    url_from(settings_params[:request_path]) || root_path
+    url_from(settings_params[:request_path]) || settings_path
   end
 
   # @return [ActionController::Parameters]

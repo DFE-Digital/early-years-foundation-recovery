@@ -4,16 +4,20 @@ RSpec.describe 'Settings', type: :request do
   specify { expect('/settings/cookie-policy').to be_successful }
 
   describe 'POST /settings' do
-    it 'redirects to an internal request path' do
-      post settings_path, params: { request_path: '/settings/cookie-policy', track_analytics: 'true' }
-
-      expect(response).to redirect_to('/settings/cookie-policy')
+    it 'redirects back to a local page' do
+      post settings_path, params: {
+        track_analytics: 'true',
+        request_path: '/about-training',
+      }
+      expect(response).to redirect_to('/about-training')
     end
 
-    it 'falls back to the homepage when the request path is protocol-relative' do
-      post settings_path, params: { request_path: '//evil.test', track_analytics: 'true' }
-
-      expect(response).to redirect_to(root_path)
+    it 'falls back to settings for an external destination' do
+      post settings_path, params: {
+        track_analytics: 'true',
+        request_path: '//test.com',
+      }
+      expect(response).to redirect_to(settings_path)
     end
   end
 end
