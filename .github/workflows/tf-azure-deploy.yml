@@ -37,6 +37,8 @@ env:
   ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
   ARM_USE_OIDC: true
   ARM_SKIP_PROVIDER_REGISTRATION: true
+  TF_VAR_splunk_access_token: ${{ secrets.SPLUNK_ACCESS_TOKEN }}
+  TF_VAR_splunk_realm: ${{ secrets.SPLUNK_REALM }}
 
 jobs:
   terraform:
@@ -91,13 +93,13 @@ jobs:
         run: |
           export exitcode=0
           terraform plan -detailed-exitcode -no-color -out tfplan || export exitcode=$?
-          
+
           echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
-          
+
           if [ $exitcode -eq 1 ]; then
             echo Terraform Plan Failed!
             exit 1
-          else 
+          else
             exit 0
           fi
 

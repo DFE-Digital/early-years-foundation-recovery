@@ -38,6 +38,9 @@ locals {
     "TRACKING_ID"                            = var.tracking_id
     "CLARITY_TRACKING_ID"                    = var.clarity_tracking_id
     "APPLICATION_INSIGHTS_CONNECTION_STRING" = module.monitor.insights_connection_string
+    "SPLUNK_ACCESS_TOKEN"                    = var.splunk_access_token
+    "SPLUNK_REALM"                           = var.splunk_realm
+    "OTEL_SERVICE_NAME"                      = "early-years-foundation-recovery"
     "WEB_CONCURRENCY"                        = var.webapp_config_web_concurrency
     "WEBSITES_CONTAINER_START_TIME_LIMIT"    = 720
   }
@@ -68,6 +71,9 @@ locals {
     "TRACKING_ID"                            = var.tracking_id
     "CLARITY_TRACKING_ID"                    = var.clarity_tracking_id
     "APPLICATION_INSIGHTS_CONNECTION_STRING" = module.monitor.insights_connection_string
+    "SPLUNK_ACCESS_TOKEN"                    = var.splunk_access_token
+    "SPLUNK_REALM"                           = var.splunk_realm
+    "OTEL_SERVICE_NAME"                      = "early-years-foundation-recovery"
     "WEB_CONCURRENCY"                        = var.webapp_config_web_concurrency
     "WEBSITES_CONTAINER_START_TIME_LIMIT"    = 720
   }
@@ -81,6 +87,9 @@ locals {
     "RAILS_ENV"            = var.webapp_config_rails_env
     "RAILS_LOG_TO_STDOUT"  = var.webapp_config_rails_log_to_stdout
     "RAILS_MASTER_KEY"     = var.webapp_config_rails_master_key
+    "SPLUNK_ACCESS_TOKEN"  = var.splunk_access_token
+    "SPLUNK_REALM"         = var.splunk_realm
+    "OTEL_SERVICE_NAME"    = "early-years-foundation-recovery"
   }
 
   # Review Application Configuration
@@ -108,6 +117,9 @@ locals {
     "RAILS_MAX_THREADS"                      = var.webapp_config_rails_max_threads
     "RAILS_SERVE_STATIC_FILES"               = var.webapp_config_rails_serve_static_files
     "APPLICATION_INSIGHTS_CONNECTION_STRING" = module.monitor.insights_connection_string
+    "SPLUNK_ACCESS_TOKEN"                    = var.splunk_access_token
+    "SPLUNK_REALM"                           = var.splunk_realm
+    "OTEL_SERVICE_NAME"                      = "early-years-foundation-recovery"
     "WEB_CONCURRENCY"                        = var.webapp_config_web_concurrency
     "WEBSITES_CONTAINER_START_TIME_LIMIT"    = 720
   }
