@@ -16,24 +16,18 @@ processors:
 exporters:
   azuremonitor:
     connection_string: "${APPLICATION_INSIGHTS_CONNECTION_STRING}"
-  otlphttp/splunk:
-    traces_endpoint: "https://ingest.${SPLUNK_REALM}.observability.splunkcloud.com/v2/trace/otlp"
-    metrics_endpoint: "https://ingest.${SPLUNK_REALM}.observability.splunkcloud.com/v2/datapoint/otlp"
-    logs_endpoint: "https://ingest.${SPLUNK_REALM}.observability.splunkcloud.com/v1/log"
-    headers:
-      X-SF-Token: "${SPLUNK_ACCESS_TOKEN}"
 
 service:
   pipelines:
     traces:
       receivers: [otlp]
       processors: [memory_limiter, batch]
-      exporters: [azuremonitor, otlphttp/splunk]
+      exporters: [azuremonitor]
     metrics:
       receivers: [otlp]
       processors: [memory_limiter, batch]
-      exporters: [azuremonitor, otlphttp/splunk]
+      exporters: [azuremonitor]
     logs:
       receivers: [otlp]
       processors: [memory_limiter, batch]
-      exporters: [azuremonitor, otlphttp/splunk]
+      exporters: [azuremonitor]
