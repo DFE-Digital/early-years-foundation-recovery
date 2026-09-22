@@ -1,5 +1,5 @@
 require 'simplecov'
-# Minimum spec coverage has been set to 92
+# Minimum spec coverage has been set to 92 to ensure service has sufficient coverage.
 SimpleCov.minimum_coverage 92 unless ENV['SMOKE_SKIP_COVERAGE_CHECK']
 SimpleCov.start 'rails'
 
