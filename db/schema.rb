@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_05_29_104000) do
+ActiveRecord::Schema[7.2].define(version: 2026_09_21_153311) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -67,7 +67,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_29_104000) do
     t.datetime "first_published_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["module_position"], name: "index_module_releases_on_module_position", unique: true
+    t.string "contentful_entry_id"
+    t.datetime "release_email_queued_at"
+    t.index ["contentful_entry_id"], name: "index_module_releases_on_contentful_entry_id", unique: true
     t.index ["name"], name: "index_module_releases_on_name", unique: true
     t.index ["release_id"], name: "index_module_releases_on_release_id"
   end

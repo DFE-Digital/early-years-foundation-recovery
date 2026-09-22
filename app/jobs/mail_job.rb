@@ -1,10 +1,11 @@
 # Base class for NotifyMailer jobs
 #
 class MailJob < ApplicationJob
+  # @param args [Array]
   # @return [Array<User>]
-  def self.recipients
+  def self.recipients(*args)
     scope_name = "#{name.underscore}_recipients"
-    User.send(scope_name)
+    User.send(scope_name, *args)
   end
 
   # @return [Symbol]
@@ -23,8 +24,7 @@ class MailJob < ApplicationJob
   end
 
   def run(*)
-    log "#{self.class.recipients.count} recipients"
-
+    log_recipient_count
     super
   end
 
@@ -36,5 +36,9 @@ private
   def prepare_message(*args)
     message = NotifyMailer.send(self.class.template, *args)
     self.class.enqueue? ? message.deliver_later : message.deliver_now
+  end
+
+  def log_recipient_count
+    log "#{self.class.recipients.count} recipients"
   end
 end

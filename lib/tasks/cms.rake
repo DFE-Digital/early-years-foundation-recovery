@@ -68,7 +68,7 @@ namespace :eyfs do
     desc 'Seed content releases'
     task seed_releases: :environment do
       Training::Module.live.each do |mod|
-        next if ModuleRelease.find_by(module_position: mod.position)
+        next if ModuleRelease.exists?(contentful_entry_id: mod.id)
 
         release =
           Release.create!(
@@ -81,6 +81,7 @@ namespace :eyfs do
           release_id: release.id,
           module_position: mod.position,
           name: mod.name,
+          contentful_entry_id: mod.id,
           first_published_at: release.time,
         )
       end

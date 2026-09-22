@@ -1,6 +1,6 @@
-# @see HookController#release
+# @see ReleaseController#new
 #
-# Notify users of the latest published module and record the release timestamp
+# Record module publications and queue requested release emails.
 class NewModuleMailJob < MailJob
   self.maximum_retry_count = 0
 
@@ -18,37 +18,41 @@ class NewModuleMailJob < MailJob
         return :no_new_module_release if release.blank?
       end
 
-      return :no_new_module unless new_module_published?
+      Training::Module.live.each do |mod|
+        module_release = record_module_release(mod, release)
+        next unless mod.release_email_requested?
 
-      self.class.recipients.find_each do |user|
-        prepare_message(user, latest_module)
+        module_release.with_lock do
+          next if module_release.release_email_queued_at.present?
+
+          recipients = self.class.recipients(mod.id)
+          log "#{recipients.count} recipients for module #{mod.id}"
+
+          recipients.find_each do |user|
+            prepare_message(user, mod)
+          end
+
+          module_release.update!(release_email_queued_at: Time.current)
+        end
       end
-
-      record_module_release latest_module, release
     end
   end
 
 private
 
-  # @return [Training::Module]
-  def latest_module
-    Training::Module.live.last
-  end
-
-  # @return [Boolean]
-  def new_module_published?
-    ModuleRelease.ordered.last&.module_position.to_i < latest_module.position
-  end
-
   # @param mod [Training::Module]
   # @param release [Release]
   # @return [ModuleRelease]
   def record_module_release(mod, release)
-    ModuleRelease.create!(
-      release_id: release.id,
-      module_position: mod.position,
-      name: mod.name,
-      first_published_at: release.time,
-    )
+    ModuleRelease.find_or_create_by!(contentful_entry_id: mod.id) do |record|
+      record.release_id = release.id
+      record.module_position = mod.position
+      record.name = mod.name
+      record.first_published_at = release.time
+    end
+  end
+
+  def log_recipient_count
+    # Recipient counts are logged per module in run.
   end
 end
