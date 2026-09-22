@@ -10,7 +10,7 @@ RSpec.describe 'Assessment results page' do
   describe 'back link' do
     it 'targets the module overview' do
       visit 'modules/alpha/assessment-result/1-3-2-11'
-      expect(page).to have_link 'Back to Module 1 overview', href: '/modules/alpha'
+      expect(page).to have_link 'Back to module overview', href: '/modules/alpha'
     end
   end
 end
