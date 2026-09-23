@@ -1174,7 +1174,6 @@ __metadata:
     esbuild: "npm:^0.28.2"
     flatted: "npm:3.4.2"
     govuk-frontend: "npm:6.4.0"
-    immutable: "npm:^5.1.8"
     puppeteer: "npm:25.11.0"
     sass: "npm:^1.102.0"
     stylelint: "npm:^17.14.1"
@@ -1477,10 +1476,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"immutable@npm:5.1.8":
-  version: 5.1.8
-  resolution: "immutable@npm:5.1.8"
-  checksum: 10/f6907f3cf932860bf609c635283e3073ba5c978fcdd63e365fe4daa43c34ffef0037db0d3009d8803d9ebc2f1e2a00f06c8cac738250fbe715fb1484c7132f0c
+"immutable@npm:5.1.9":
+  version: 5.1.9
+  resolution: "immutable@npm:5.1.9"
+  checksum: 10/dc61ea6f79897320a048f193dec703dff25ad7bb633c3a0294677d2f258764c88da06e7c2b53d1aa51b6657c98d9f1c7341f49735b9b802fe6e834122cf78dcd
   languageName: node
   linkType: hard
 
