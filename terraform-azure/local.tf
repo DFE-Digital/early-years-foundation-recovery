@@ -41,6 +41,7 @@ locals {
     "SPLUNK_ACCESS_TOKEN"                    = var.splunk_access_token
     "SPLUNK_REALM"                           = var.splunk_realm
     "OTEL_SERVICE_NAME"                      = "early-years-foundation-recovery"
+    "OTEL_EXPORTER_OTLP_ENDPOINT"            = "http://localhost:4318/v1/traces"
     "WEB_CONCURRENCY"                        = var.webapp_config_web_concurrency
     "WEBSITES_CONTAINER_START_TIME_LIMIT"    = 720
   }
@@ -74,22 +75,24 @@ locals {
     "SPLUNK_ACCESS_TOKEN"                    = var.splunk_access_token
     "SPLUNK_REALM"                           = var.splunk_realm
     "OTEL_SERVICE_NAME"                      = "early-years-foundation-recovery"
+    "OTEL_EXPORTER_OTLP_ENDPOINT"            = "http://localhost:4318/v1/traces"
     "WEB_CONCURRENCY"                        = var.webapp_config_web_concurrency
     "WEBSITES_CONTAINER_START_TIME_LIMIT"    = 720
   }
 
   # Background Worker Application Configuration, passed securely to container instances
   app_worker_environment_variables = {
-    "DATABASE_URL"         = var.webapp_database_url
-    "GCS_CREDENTIALS"      = var.gcs_credentials
-    "GOVUK_NOTIFY_API_KEY" = var.webapp_config_govuk_notify_api_key
-    "GOOGLE_CLOUD_BUCKET"  = var.webapp_config_google_cloud_bucket
-    "RAILS_ENV"            = var.webapp_config_rails_env
-    "RAILS_LOG_TO_STDOUT"  = var.webapp_config_rails_log_to_stdout
-    "RAILS_MASTER_KEY"     = var.webapp_config_rails_master_key
-    "SPLUNK_ACCESS_TOKEN"  = var.splunk_access_token
-    "SPLUNK_REALM"         = var.splunk_realm
-    "OTEL_SERVICE_NAME"    = "early-years-foundation-recovery"
+    "DATABASE_URL"                = var.webapp_database_url
+    "GCS_CREDENTIALS"             = var.gcs_credentials
+    "GOVUK_NOTIFY_API_KEY"        = var.webapp_config_govuk_notify_api_key
+    "GOOGLE_CLOUD_BUCKET"         = var.webapp_config_google_cloud_bucket
+    "RAILS_ENV"                   = var.webapp_config_rails_env
+    "RAILS_LOG_TO_STDOUT"         = var.webapp_config_rails_log_to_stdout
+    "RAILS_MASTER_KEY"            = var.webapp_config_rails_master_key
+    "SPLUNK_ACCESS_TOKEN"         = var.splunk_access_token
+    "SPLUNK_REALM"                = var.splunk_realm
+    "OTEL_SERVICE_NAME"           = "early-years-foundation-recovery"
+    "OTEL_EXPORTER_OTLP_ENDPOINT" = "http://localhost:4318/v1/traces"
   }
 
   # Review Application Configuration
@@ -120,6 +123,7 @@ locals {
     "SPLUNK_ACCESS_TOKEN"                    = var.splunk_access_token
     "SPLUNK_REALM"                           = var.splunk_realm
     "OTEL_SERVICE_NAME"                      = "early-years-foundation-recovery"
+    "OTEL_EXPORTER_OTLP_ENDPOINT"            = "http://localhost:4318/v1/traces"
     "WEB_CONCURRENCY"                        = var.webapp_config_web_concurrency
     "WEBSITES_CONTAINER_START_TIME_LIMIT"    = 720
   }
