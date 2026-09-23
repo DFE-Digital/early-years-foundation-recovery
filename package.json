@@ -33,7 +33,7 @@
     "flatted": "3.4.2",
     "govuk-frontend": "6.4.0",
     "immutable": "^5.1.8",
-    "puppeteer": "25.7.0",
+    "puppeteer": "25.11.0",
     "sass": "^1.102.0",
     "tar": "^7.5.21"
   },
