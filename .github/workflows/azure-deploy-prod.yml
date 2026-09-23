@@ -139,3 +139,4 @@ jobs:
                 SPLUNK_REALM=${{ secrets.SPLUNK_REALM }} \
                 OTEL_SERVICE_NAME=early-years-foundation-recovery \
                 OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318/v1/traces
+                APPLICATION_INSIGHTS_CONNECTION_STRING=${APPLICATION_INSIGHTS_CONNECTION_STRING}
