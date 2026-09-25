@@ -13,12 +13,12 @@ RSpec.shared_examples 'updated content' do |name|
 
     context 'when delivery' do
       it do
-        create(:module_release, first_published_at: Time.zone.local(2023, 1, 1))
+        create(:module_release, contentful_entry_id: mod.id, first_published_at: Time.zone.local(2023, 1, 1))
         expect(content).to be_edited
       end
 
       it do
-        create(:module_release, first_published_at: Time.zone.local(3_099, 1, 1))
+        create(:module_release, contentful_entry_id: mod.id, first_published_at: Time.zone.local(3_099, 1, 1))
         expect(content).not_to be_edited unless ENV['CONTENTFUL_PREVIEW'] == 'true' # only possible with stubbed preview
       end
     end
@@ -38,7 +38,7 @@ RSpec.shared_examples 'updated content' do |name|
     context 'when published' do
       before do
         ModuleRelease.delete_all if defined?(ModuleRelease)
-        create(:module_release, first_published_at: Time.zone.local(2023, 1, 1))
+        create(:module_release, contentful_entry_id: mod.id, first_published_at: Time.zone.local(2023, 1, 1))
       end
 
       it do

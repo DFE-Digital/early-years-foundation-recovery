@@ -267,10 +267,12 @@ RSpec.describe User, type: :model do
   describe '.new_module_mail_job_recipients' do
     subject(:user) { create(:user, :registered) }
 
+    let(:contentful_entry_id) { 'module-alpha-id' }
+
     context 'without mail event' do
       it 'includes user' do
-        expect(described_class.new_module_mail_job_recipients).to include(user)
-        expect(described_class.with_new_module_mail_events).not_to include(user)
+        expect(described_class.new_module_mail_job_recipients(contentful_entry_id)).to include(user)
+        expect(described_class.with_new_module_mail_events(contentful_entry_id)).not_to include(user)
       end
     end
 
@@ -279,12 +281,12 @@ RSpec.describe User, type: :model do
         create :mail_event,
                user: user,
                template: NotifyMailer::TEMPLATE_IDS[:new_module],
-               personalisation: { mod_number: 3 }
+               personalisation: { contentful_entry_id: contentful_entry_id }
       end
 
       it 'excludes user' do
-        expect(described_class.new_module_mail_job_recipients).not_to include(user)
-        expect(described_class.with_new_module_mail_events).to include(user)
+        expect(described_class.new_module_mail_job_recipients(contentful_entry_id)).not_to include(user)
+        expect(described_class.with_new_module_mail_events(contentful_entry_id)).to include(user)
       end
     end
   end
