@@ -120,12 +120,14 @@ module DataAnalysis
           .where.not(release_email_queued_at: nil)
           .pluck(:contentful_entry_id)
 
-        mod = Training::Module.live.find do |training_module|
+        mods = Training::Module.live.select do |training_module|
           training_module.release_email_requested? &&
             !announced_ids.include?(training_module.id)
         end
 
-        mod ? NewModuleMailJob.recipients(mod.id).count : 0
+        mods.flat_map { |mod| NewModuleMailJob.recipients(mod.id).pluck(:id) }
+          .uniq
+          .count
       end
     end
   end
