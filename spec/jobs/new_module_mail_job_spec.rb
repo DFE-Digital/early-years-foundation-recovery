@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe NewModuleMailJob do
   let!(:included) do
+    allow(Page::Resource).to receive(:by_name).and_return(nil)
     create_list :user, 1, :registered
   end
 
