@@ -6,6 +6,7 @@
 #
 RSpec.shared_examples 'an email prompt' do |job_vars, mailer_vars|
   let(:recipient_args) { [] }
+  let(:expected_mail_event_count) { included.size }
 
   describe '#run' do
     it 'messages the correct users' do
@@ -33,7 +34,7 @@ RSpec.shared_examples 'an email prompt' do |job_vars, mailer_vars|
     it 'logs delivery event' do
       expect(MailEvent.count).to be_zero
       described_class.run(*job_vars)
-      expect(MailEvent.count).to eq included.size
+      expect(MailEvent.count).to eq expected_mail_event_count
     end
   end
 end
