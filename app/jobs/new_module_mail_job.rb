@@ -55,11 +55,4 @@ private
   def log_recipient_count
     # Recipient counts are logged per module in run.
   end
-
-  # Release announcements are bulk emails. Queue them so queue records and
-  # release_email_queued_at commit in the same transaction before delivery starts.
-  def prepare_message(*args)
-    message = NotifyMailer.send(self.class.template, *args)
-    message.deliver_later
-  end
 end
