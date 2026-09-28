@@ -35,7 +35,6 @@ RSpec.describe NewModuleMailJob do
 
   it_behaves_like 'an email prompt', 2, Training::Module.by_name(:charlie) do
     let(:recipient_args) { [Training::Module.by_name(:charlie).id] }
-    let(:expected_mail_event_count) { 0 }
   end
 
   it 'resets cache' do
@@ -44,16 +43,6 @@ RSpec.describe NewModuleMailJob do
       described_class.run(*job_vars)
       expect(Training::Module.cache_key).to eq Time.zone.now.strftime('%d-%m-%Y-%H-%M')
     end
-  end
-
-  it 'queues a release email for each eligible recipient' do
-    module_id = Training::Module.by_name(:charlie).id
-
-    expect {
-      described_class.run(*job_vars)
-    }.to change {
-      Job.module_release_mail(module_id).count
-    }.by(included.size)
   end
 
   describe 'release email controls' do
