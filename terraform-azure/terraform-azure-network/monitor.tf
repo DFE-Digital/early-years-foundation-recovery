@@ -167,6 +167,7 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "kv_access_failure_ale
     query = <<-QUERY
       AzureDiagnostics
       | where ResourceProvider == "MICROSOFT.KEYVAULT"
+      | where Category == "AuditEvent"
       | where Resource =~ "${azurerm_key_vault.kv[0].name}"
       | where ResultType != "Success"
     QUERY
