@@ -136,6 +136,7 @@ jobs:
                 SPLUNK_ACCESS_TOKEN="${{ secrets.SPLUNK_ACCESS_TOKEN }}" \
                 SPLUNK_REALM="${{ secrets.SPLUNK_REALM }}" \
                 OTEL_SERVICE_NAME="early-years-foundation-recovery" \
+                OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4318/v1/traces" \
               --output none
 
       - name: Smoke test sign in journey
