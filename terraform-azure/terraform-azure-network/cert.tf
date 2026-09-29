@@ -53,7 +53,7 @@ resource "azurerm_role_assignment" "kv_gh_certificate_user" {
   count = var.environment != "development" ? 1 : 0
 
   scope                = azurerm_key_vault.kv[0].id
-  role_definition_name = "Key Vault Certificates User"
+  role_definition_name = "Key Vault Certificate User"
   principal_id         = data.azurerm_client_config.az_config.object_id
 
   lifecycle {

@@ -356,7 +356,7 @@ resource "azurerm_role_assignment" "webapp_kv_certificate_user" {
   count = var.environment != "development" ? 1 : 0
 
   scope                = var.kv_id
-  role_definition_name = "Key Vault Certificates User"
+  role_definition_name = "Key Vault Certificate User"
   principal_id         = var.as_service_principal_object_id
 
   lifecycle {
