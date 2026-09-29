@@ -53,7 +53,20 @@ resource "azurerm_role_assignment" "kv_gh_certificate_user" {
   count = var.environment != "development" ? 1 : 0
 
   scope                = azurerm_key_vault.kv[0].id
-  role_definition_name = "Key Vault Certificate User"
+  role_definition_name = "Key Vault Certificates User"
+  principal_id         = data.azurerm_client_config.az_config.object_id
+
+  lifecycle {
+    ignore_changes = [principal_id]
+  }
+}
+
+resource "azurerm_role_assignment" "kv_gh_secret_user" {
+  # Key Vault only deployed to the Test and Production subscription
+  count = var.environment != "development" ? 1 : 0
+
+  scope                = azurerm_key_vault.kv[0].id
+  role_definition_name = "Key Vault Secrets User"
   principal_id         = data.azurerm_client_config.az_config.object_id
 
   lifecycle {
@@ -87,7 +100,11 @@ resource "azurerm_key_vault_certificate_issuer" "kv_ca" {
     phone         = var.kv_certificate_authority_admin_phone_no
   }
 
-  depends_on = [azurerm_role_assignment.kv_gh_certificates_officer, azurerm_role_assignment.kv_gh_certificate_user]
+  depends_on = [
+    azurerm_role_assignment.kv_gh_certificates_officer,
+    azurerm_role_assignment.kv_gh_certificate_user,
+    azurerm_role_assignment.kv_gh_secret_user,
+  ]
 }
 
 resource "azurerm_key_vault_certificate" "kv_cert" {
@@ -131,5 +148,9 @@ resource "azurerm_key_vault_certificate" "kv_cert" {
     }
   }
 
-  depends_on = [azurerm_role_assignment.kv_gh_certificates_officer, azurerm_role_assignment.kv_gh_certificate_user]
+  depends_on = [
+    azurerm_role_assignment.kv_gh_certificates_officer,
+    azurerm_role_assignment.kv_gh_certificate_user,
+    azurerm_role_assignment.kv_gh_secret_user,
+  ]
 }

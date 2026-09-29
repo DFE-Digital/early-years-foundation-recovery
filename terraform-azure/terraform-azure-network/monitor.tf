@@ -74,6 +74,80 @@ resource "azurerm_monitor_activity_log_alert" "kv_admin_changes_alert" {
   }
 }
 
+# Alert when the Key Vault is deleted
+resource "azurerm_monitor_activity_log_alert" "kv_deletion_alert" {
+  # Key Vault only deployed to the Test and Production subscription
+  count = var.environment != "development" ? 1 : 0
+
+  name                = "${var.resource_name_prefix}-kv-delete-alert"
+  resource_group_name = var.resource_group
+  scopes              = [azurerm_key_vault.kv[0].id]
+  description         = "Alerts when the Key Vault is deleted"
+
+  criteria {
+    resource_id    = azurerm_key_vault.kv[0].id
+    category       = "Administrative"
+    operation_name = "Microsoft.KeyVault/vaults/delete"
+  }
+
+  action {
+    action_group_id = azurerm_monitor_action_group.kv_alerts_ag[0].id
+  }
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
+}
+
+# Alert when RBAC assignments in the subscription are changed
+resource "azurerm_monitor_activity_log_alert" "kv_rbac_write_alert" {
+  # Key Vault only deployed to the Test and Production subscription
+  count = var.environment != "development" ? 1 : 0
+
+  name                = "${var.resource_name_prefix}-kv-rbac-write-alert"
+  resource_group_name = var.resource_group
+  scopes              = ["/subscriptions/${data.azurerm_client_config.az_config.subscription_id}"]
+  description         = "Alerts when RBAC role assignments are created or updated"
+
+  criteria {
+    category          = "Administrative"
+    operation_name    = "Microsoft.Authorization/roleAssignments/write"
+    resource_provider = "Microsoft.Authorization"
+  }
+
+  action {
+    action_group_id = azurerm_monitor_action_group.kv_alerts_ag[0].id
+  }
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
+}
+
+resource "azurerm_monitor_activity_log_alert" "kv_rbac_delete_alert" {
+  # Key Vault only deployed to the Test and Production subscription
+  count = var.environment != "development" ? 1 : 0
+
+  name                = "${var.resource_name_prefix}-kv-rbac-delete-alert"
+  resource_group_name = var.resource_group
+  scopes              = ["/subscriptions/${data.azurerm_client_config.az_config.subscription_id}"]
+  description         = "Alerts when RBAC role assignments are deleted"
+
+  criteria {
+    category          = "Administrative"
+    operation_name    = "Microsoft.Authorization/roleAssignments/delete"
+    resource_provider = "Microsoft.Authorization"
+  }
+
+  action {
+    action_group_id = azurerm_monitor_action_group.kv_alerts_ag[0].id
+  }
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
+}
+
 # Alert on failed/unauthorised access attempts against keys, secrets and
 # certificates stored in the Key Vault (data-plane operations)
 resource "azurerm_monitor_scheduled_query_rules_alert_v2" "kv_access_failure_alert" {
