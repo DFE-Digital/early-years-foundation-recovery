@@ -1178,7 +1178,6 @@ __metadata:
     sass: "npm:1.102.0"
     stylelint: "npm:17.15.0"
     stylelint-config-gds: "npm:3.0.0"
-    tar: "npm:7.5.22"
   languageName: unknown
   linkType: soft
 
