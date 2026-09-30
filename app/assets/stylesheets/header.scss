@@ -62,32 +62,6 @@
   &:not(:focus) { background-color: govuk-colour('blue'); }
 }
 
-.govuk-service-navigation__link {
-  position: relative;
-}
-
-
-.govuk-service-navigation__item--current .govuk-service-navigation__link::after {
-  content: '';
-  position: absolute;
-  bottom: -16px;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background-color: govuk-colour('blue');
-}
-
-@media (max-width: 550px) {
-  .govuk-service-navigation__item--current .govuk-service-navigation__link::after {
-    top: 0;
-    bottom: 0;
-    left: -15px;
-    right: auto;
-    width: 5px;
-    height: auto;
-  }
-}
-
 .training-signout-link {
   display: inline-block;
   margin: 0;
@@ -110,7 +84,7 @@
   }
 }
 
-.govuk-template--rebranded .govuk-service-navigation__service-name .service-name--static {
+.govuk-template--rebranded .govuk-service-navigation__service-name .govuk-service-navigation__text {
   display: inline-block;
   padding-bottom: govuk-spacing(3);
 }
