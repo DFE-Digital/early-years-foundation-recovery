@@ -11,7 +11,7 @@ locals {
   }
 
   # Web Application Configuration
-  webapp_app_settings = {
+  webapp_app_settings = merge({
     "ENVIRONMENT"                            = var.environment
     "DATABASE_URL"                           = var.webapp_database_url
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE"    = "false"
@@ -44,9 +44,14 @@ locals {
     "OTEL_EXPORTER_OTLP_ENDPOINT"            = "http://localhost:4318/v1/traces"
     "WEB_CONCURRENCY"                        = var.webapp_config_web_concurrency
     "WEBSITES_CONTAINER_START_TIME_LIMIT"    = 720
-  }
+    }, local.redis_enabled ? {
+    "REDIS_HOST"     = azurerm_redis_cache.redis[0].hostname
+    "REDIS_PASSWORD" = azurerm_redis_cache.redis[0].primary_access_key
+    "REDIS_PORT"     = tostring(azurerm_redis_cache.redis[0].ssl_port)
+    "REDIS_URL"      = "rediss://:${urlencode(azurerm_redis_cache.redis[0].primary_access_key)}@${azurerm_redis_cache.redis[0].hostname}:${azurerm_redis_cache.redis[0].ssl_port}/0"
+  } : {})
 
-  webapp_slot_app_settings = {
+  webapp_slot_app_settings = merge({
     "ENVIRONMENT"                            = var.environment
     "DATABASE_URL"                           = var.webapp_slot_database_url
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE"    = "false"
@@ -78,7 +83,12 @@ locals {
     "OTEL_EXPORTER_OTLP_ENDPOINT"            = "http://localhost:4318/v1/traces"
     "WEB_CONCURRENCY"                        = var.webapp_config_web_concurrency
     "WEBSITES_CONTAINER_START_TIME_LIMIT"    = 720
-  }
+    }, local.redis_enabled ? {
+    "REDIS_HOST"     = azurerm_redis_cache.redis[0].hostname
+    "REDIS_PASSWORD" = azurerm_redis_cache.redis[0].primary_access_key
+    "REDIS_PORT"     = tostring(azurerm_redis_cache.redis[0].ssl_port)
+    "REDIS_URL"      = "rediss://:${urlencode(azurerm_redis_cache.redis[0].primary_access_key)}@${azurerm_redis_cache.redis[0].hostname}:${azurerm_redis_cache.redis[0].ssl_port}/0"
+  } : {})
 
   # Background Worker Application Configuration, passed securely to container instances
   app_worker_environment_variables = {

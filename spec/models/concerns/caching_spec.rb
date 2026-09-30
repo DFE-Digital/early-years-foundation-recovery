@@ -29,5 +29,18 @@ RSpec.describe Caching do
       described_class.reset_cache_key!
       expect(described_class.cache_key).to eq '01-04-2023-12-00'
     end
+
+    it 'shares the cache version through Rails.cache' do
+      original_cache = Rails.cache
+      Rails.cache = ActiveSupport::Cache::MemoryStore.new
+
+      create :release, time: '2023-04-01 12:00:00'
+      described_class.reset_cache_key!
+      described_class.cache.clear
+
+      expect(described_class.cache_key).to eq '01-04-2023-12-00'
+    ensure
+      Rails.cache = original_cache
+    end
   end
 end

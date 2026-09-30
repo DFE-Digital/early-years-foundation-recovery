@@ -124,6 +124,12 @@ variable "psqlfs_ha_enabled" {
   type        = bool
 }
 
+variable "redis_private_endpoint_subnet_cidr" {
+  default     = "172.1.254.0/27"
+  description = "CIDR for the Redis private endpoint subnet"
+  type        = string
+}
+
 variable "as_service_principal_object_id" {
   description = "Object ID of the service principal for App Service"
   type        = string

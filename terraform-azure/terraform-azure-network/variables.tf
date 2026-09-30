@@ -18,6 +18,16 @@ variable "resource_name_prefix" {
   type        = string
 }
 
+variable "redis_enabled" {
+  description = "Whether to create networking for Redis"
+  type        = bool
+}
+
+variable "redis_private_endpoint_subnet_cidr" {
+  description = "CIDR for the Redis private endpoint subnet"
+  type        = string
+}
+
 variable "domain_name_label" {
   description = "DNS name label for assignment to Application Gateway"
   type        = string

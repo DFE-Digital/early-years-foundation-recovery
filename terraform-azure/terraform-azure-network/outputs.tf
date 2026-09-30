@@ -28,6 +28,16 @@ output "app_worker_subnet_id" {
   value       = azurerm_subnet.app_worker_snet.id
 }
 
+output "redis_private_endpoint_subnet_id" {
+  description = "ID of the Subnet for Redis Private Endpoints"
+  value       = var.redis_enabled ? azurerm_subnet.redis_pe_snet[0].id : null
+}
+
+output "redis_private_dns_zone_id" {
+  description = "ID of the Private DNS Zone for Azure Cache for Redis"
+  value       = var.redis_enabled ? azurerm_private_dns_zone.redis[0].id : null
+}
+
 output "agw_subnet_id" {
   description = "ID of the Subnet for the App Gateway"
   value       = var.environment != "development" ? azurerm_subnet.agw_snet[0].id : null

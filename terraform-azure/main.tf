@@ -59,6 +59,8 @@ module "network" {
   kv_certificate_authority_admin_phone_no   = var.kv_certificate_authority_admin_phone_no
   kv_certificate_label                      = var.kv_certificate_label
   kv_certificate_subject                    = var.kv_certificate_subject
+  redis_enabled                             = local.redis_enabled
+  redis_private_endpoint_subnet_cidr        = var.redis_private_endpoint_subnet_cidr
 }
 
 # Create Database resources
