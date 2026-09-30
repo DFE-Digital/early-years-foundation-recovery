@@ -5,16 +5,18 @@
 #   - excluded: array of users who should not receive an email
 #
 RSpec.shared_examples 'an email prompt' do |job_vars, mailer_vars|
+  let(:recipient_args) { [] }
+
   describe '#run' do
     it 'messages the correct users' do
-      expect(included).to eq described_class.recipients
-      expect(excluded).not_to eq described_class.recipients
+      expect(included).to eq described_class.recipients(*recipient_args)
+      expect(excluded).not_to eq described_class.recipients(*recipient_args)
     end
 
     it 'uses the correct template' do
       email = instance_double(ActionMailer::MessageDelivery, deliver_now: true, deliver_later: true)
 
-      described_class.recipients.each do |recipient|
+      described_class.recipients(*recipient_args).each do |recipient|
         allow(NotifyMailer).to receive(described_class.template).with(recipient, *mailer_vars).and_return(email)
       end
 

@@ -83,7 +83,7 @@ module Training
 
     # @return [DateTime, nil]
     def first_published_at
-      ModuleRelease.find_by(module_position: position)&.first_published_at
+      ModuleRelease.find_by(contentful_entry_id: id)&.first_published_at
     end
 
     # @return [String, nil] cached result
@@ -308,6 +308,10 @@ module Training
       else
         false
       end
+    end
+
+    def release_email_requested?
+      fields[:send_release_email] == true
     end
   end
 end

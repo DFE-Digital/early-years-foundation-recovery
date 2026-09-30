@@ -177,11 +177,13 @@ class User < ApplicationRecord
   #   or the worker container crashing, we exclude users from the recipient list if a delivered MailEvent exists
   #   or if a queued mail delivery Job exists.
   #
-  scope :new_module_mail_job_recipients, lambda {
+  scope :new_module_mail_job_recipients, lambda { |contentful_entry_id|
     training_email_recipients.not_closed
-    .where.not(id: with_new_module_mail_events)
-    .where.not(id: Job.newest_module_mail.map(&:mail_user_id))
-    .distinct
+      .where.not(id: with_new_module_mail_events(contentful_entry_id))
+      .where.not(
+        id: Job.module_release_mail(contentful_entry_id).map(&:mail_user_id),
+      )
+      .distinct
   }
 
   # @note prefix/suffix ensures testing of invalid email
@@ -190,7 +192,11 @@ class User < ApplicationRecord
 
   # email callbacks
   scope :with_mail_events, -> { joins(:mail_events) }
-  scope :with_new_module_mail_events, -> { with_mail_events.merge(MailEvent.newest_module).distinct }
+  scope :with_new_module_mail_events, lambda { |contentful_entry_id|
+    with_mail_events
+      .merge(MailEvent.for_module_release_email(contentful_entry_id))
+      .distinct
+  }
   scope :with_start_training_mail_events, -> { with_mail_events.where(mail_events: { template: StartTrainingMailJob.template_id }).distinct }
 
   scope :email_status, lambda { |status|

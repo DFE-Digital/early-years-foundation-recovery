@@ -127,6 +127,15 @@ RSpec.describe DataAnalysis::UserOverview do
     create :user, :registered, confirmed_at: 1.week.ago
     # user#6
     create :user, :registered
+
+    modules = Training::Module.live
+
+    modules.each do |mod|
+      allow(mod).to receive(:release_email_requested?)
+        .and_return(mod.name == 'charlie')
+    end
+
+    allow(Training::Module).to receive(:live).and_return(modules)
   end
 
   it_behaves_like 'a data export model'

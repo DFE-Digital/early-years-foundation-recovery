@@ -7,6 +7,11 @@ RSpec.shared_context 'with module releases' do
 
   def create_module_release(id, name, first_published_at)
     create(:release, id: id)
-    create(:module_release, release_id: id, module_position: id, name: name, first_published_at: first_published_at)
+    create(:module_release,
+           release_id: id,
+           module_position: id,
+           name: name,
+           contentful_entry_id: Training::Module.by_name(name).id,
+           first_published_at: first_published_at)
   end
 end

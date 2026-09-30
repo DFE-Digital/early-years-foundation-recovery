@@ -51,16 +51,55 @@ RSpec.describe Job, type: :model do
       expect(described_class.test_bulk_mail.count).to eq 1
     end
 
-    it '.newest_module_mail' do
-      expect(described_class.newest_module_mail.count).to eq 0
+    it '.module_release_mail' do
+      contentful_entry_id = 'module-alpha-id'
+
+      expect(
+        described_class.module_release_mail(contentful_entry_id),
+      ).to be_empty
+
+      matching_job = create :job,
+                            job_class: 'ActionMailer::MailDeliveryJob',
+                            args: [
+                              {
+                                arguments: [
+                                  'NotifyMailer',
+                                  'new_module',
+                                  'deliver_now',
+                                  { args: [{ id: contentful_entry_id }] },
+                                ],
+                              },
+                            ]
+
       create :job,
              job_class: 'ActionMailer::MailDeliveryJob',
              args: [
                {
-                 arguments: %w[NotifyMailer new_module deliver_now],
+                 arguments: [
+                   'NotifyMailer',
+                   'new_module',
+                   'deliver_now',
+                   { args: [{ id: 'module-bravo-id' }] },
+                 ],
                },
              ]
-      expect(described_class.newest_module_mail.count).to eq 1
+
+      create :job,
+             job_class: 'ActionMailer::MailDeliveryJob',
+             args: [
+               {
+                 arguments: [
+                   'NotifyMailer',
+                   'continue_training',
+                   'deliver_now',
+                   { args: [{ id: contentful_entry_id }] },
+                 ],
+               },
+             ]
+
+      expect(
+        described_class.module_release_mail(contentful_entry_id),
+      ).to contain_exactly(matching_job)
     end
 
     it '.start_training_mail' do

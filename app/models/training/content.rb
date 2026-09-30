@@ -89,7 +89,7 @@ module Training
   private
 
     def module_release
-      ModuleRelease.find_by(module_position: parent.position)
+      ModuleRelease.find_by(contentful_entry_id: parent.id)
     end
   end
 end

@@ -71,7 +71,7 @@ module DataAnalysis
           complete_registration_mail_recipients: CompleteRegistrationMailJob.recipients.count,
           start_training_mail_recipients: StartTrainingMailJob.recipients.count,
           continue_training_mail_recipients: ContinueTrainingMailJob.recipients.count,
-          new_module_mail_recipients: NewModuleMailJob.recipients.count,
+          new_module_mail_recipients: new_module_mail_recipient_count,
           test_mail_recipients: TestBulkMailJob.recipients.count,
           closed: User.closed.count,
           terms_and_conditions_agreed: terms_and_conditions_agreed_count,
@@ -113,6 +113,21 @@ module DataAnalysis
       # @return [Integer]
       def not_started_learning
         User.all.count { |u| u.module_time_to_completion.empty? }
+      end
+
+      def new_module_mail_recipient_count
+        announced_ids = ModuleRelease
+          .where.not(release_email_queued_at: nil)
+          .pluck(:contentful_entry_id)
+
+        mods = Training::Module.live.select do |training_module|
+          training_module.release_email_requested? &&
+            !announced_ids.include?(training_module.id)
+        end
+
+        mods.flat_map { |mod| NewModuleMailJob.recipients(mod.id).pluck(:id) }
+          .uniq
+          .count
       end
     end
   end

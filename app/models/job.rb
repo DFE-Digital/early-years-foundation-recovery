@@ -34,8 +34,10 @@ class Job < Que::ActiveRecord::Model
   end
 
   # @return [Job::ActiveRecord_Relation]
-  def self.newest_module_mail
-    mail.where('args @> ?', [{ arguments: %w[new_module] }].to_json)
+  def self.module_release_mail(contentful_entry_id)
+    mail
+      .where('args @> ?', [{ arguments: %w[new_module] }].to_json)
+      .where('args @> ?', [{ arguments: [{ args: [{ id: contentful_entry_id }] }] }].to_json)
   end
 
   # @return [Job::ActiveRecord_Relation]

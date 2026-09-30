@@ -68,7 +68,7 @@ namespace :eyfs do
     desc 'Seed content releases'
     task seed_releases: :environment do
       Training::Module.live.each do |mod|
-        next if ModuleRelease.find_by(module_position: mod.position)
+        next if ModuleRelease.exists?(contentful_entry_id: mod.id)
 
         release =
           Release.create!(
@@ -81,9 +81,49 @@ namespace :eyfs do
           release_id: release.id,
           module_position: mod.position,
           name: mod.name,
+          contentful_entry_id: mod.id,
           first_published_at: release.time,
         )
       end
+    end
+
+    # One-off deployment cutover: existing releases are treated as announced.
+    # ./bin/docker-rails 'eyfs:cms:backfill_module_releases'
+    desc 'Backfill contentful_entry_id and release_email_queued_at for pre-existing module releases'
+    task backfill_module_releases: :environment do
+      Training::Module.live.each do |mod|
+        module_release = ModuleRelease.find_by(name: mod.name)
+
+        if module_release.nil?
+          raise "No module_release found for '#{mod.name}' (#{mod.id}) - resolve the missing match before cutover"
+        end
+
+        if module_release.contentful_entry_id.present? && module_release.contentful_entry_id != mod.id
+          raise "Contentful ID mismatch for '#{mod.name}' (#{mod.id})"
+        end
+
+        attributes = {}
+        attributes[:contentful_entry_id] = mod.id if module_release.contentful_entry_id.blank?
+        if module_release.release_email_queued_at.nil?
+          attributes[:release_email_queued_at] = module_release.first_published_at || Time.current
+        end
+        next if attributes.empty?
+
+        module_release.update!(attributes)
+        puts "Backfilled module_release for '#{mod.name}' (#{mod.id})"
+      end
+
+      incomplete_releases = ModuleRelease.where(contentful_entry_id: [nil, ''])
+        .or(ModuleRelease.where(release_email_queued_at: nil))
+        .order(:id)
+        .pluck(:id, :name)
+
+      if incomplete_releases.any?
+        details = incomplete_releases.map { |id, name| "#{id} (#{name})" }.join(', ')
+        raise "Backfill incomplete for module releases: #{details}. Resolve these records before cutover and rerun the task."
+      end
+
+      puts 'All existing module releases have Contentful IDs and release email timestamps.'
     end
 
     # @see .env

@@ -89,6 +89,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
   def new_module(user, mod)
     set_template TEMPLATE_IDS[:new_module]
     set_personalisation(
+      contentful_entry_id: mod.id,
       mod_number: mod.position,
       mod_name: mod.title,
       mod_criteria: mod.criteria,
