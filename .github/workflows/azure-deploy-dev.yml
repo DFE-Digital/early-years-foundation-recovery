@@ -113,7 +113,7 @@ jobs:
               --os-type Linux \
               --cpu 1 \
               --memory 2 \
-              --command-line "sh -c '/usr/local/bin/otel-collector-entrypoint.sh >/dev/null 2>&1 & exec que'" \
+              --command-line "/usr/local/bin/start-with-otel que" \
               --restart-policy OnFailure \
               --log-analytics-workspace ${{ secrets.AZURE_LOG_ANALYTICS_WORKSPACE }} \
               --vnet ${{ secrets.AZURE_VNET }} \
@@ -136,4 +136,6 @@ jobs:
                 SPLUNK_ACCESS_TOKEN=${{ secrets.SPLUNK_ACCESS_TOKEN }} \
                 SPLUNK_REALM=${{ secrets.SPLUNK_REALM }} \
                 OTEL_SERVICE_NAME=early-years-foundation-recovery \
+                OTEL_SERVICE_VERSION=${{ github.sha }} \
+                OTEL_RESOURCE_ATTRIBUTES=deployment.environment.name=${{ vars.ENVIRONMENT }},cloud.provider=azure,cloud.platform=azure_container_instances \
                 OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318/v1/traces

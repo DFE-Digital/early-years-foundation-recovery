@@ -28,6 +28,13 @@ module OpenTelemetryConfiguration
       configs
     end
 
+    def resource_attributes
+      instance_id = ENV.values_at('WEBSITE_INSTANCE_ID', 'HOSTNAME').find { |value| value.to_s.strip.length.positive? }
+      return {} unless instance_id
+
+      { 'service.instance.id' => instance_id }
+    end
+
   private
 
     def enabled?
@@ -44,6 +51,8 @@ module OpenTelemetryConfiguration
 
       OpenTelemetry::SDK.configure do |c|
         c.service_name = service_name
+        c.service_version = ENV['OTEL_SERVICE_VERSION'] if ENV['OTEL_SERVICE_VERSION'].to_s.strip.length.positive?
+        c.resource = OpenTelemetry::SDK::Resources::Resource.create(resource_attributes)
 
         exporter_configs.each do |config|
           c.add_span_processor(

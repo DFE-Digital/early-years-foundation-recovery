@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -eu
+
+/usr/local/bin/otel-collector-entrypoint.sh &
+collector_pid=$!
+
+"$@" &
+application_pid=$!
+
+shutdown() {
+  kill -TERM "$application_pid" "$collector_pid" 2>/dev/null || true
+}
+
+trap shutdown INT TERM
+
+set +e
+wait -n "$collector_pid" "$application_pid"
+first_status=$?
+set -e
+
+if kill -0 "$application_pid" 2>/dev/null; then
+  kill -TERM "$application_pid" 2>/dev/null || true
+  wait "$application_pid" 2>/dev/null || true
+  [ "$first_status" -ne 0 ] && exit "$first_status"
+
+  exit 1
+fi
+
+kill -TERM "$collector_pid" 2>/dev/null || true
+wait "$collector_pid" 2>/dev/null || true
+
+exit "$first_status"

@@ -41,6 +41,7 @@ locals {
     "SPLUNK_ACCESS_TOKEN"                    = var.splunk_access_token
     "SPLUNK_REALM"                           = var.splunk_realm
     "OTEL_SERVICE_NAME"                      = "early-years-foundation-recovery"
+    "OTEL_RESOURCE_ATTRIBUTES"               = "deployment.environment.name=${var.environment},cloud.provider=azure,cloud.platform=azure_app_service"
     "OTEL_EXPORTER_OTLP_ENDPOINT"            = "http://localhost:4318/v1/traces"
     "WEB_CONCURRENCY"                        = var.webapp_config_web_concurrency
     "WEBSITES_CONTAINER_START_TIME_LIMIT"    = 720
@@ -75,6 +76,7 @@ locals {
     "SPLUNK_ACCESS_TOKEN"                    = var.splunk_access_token
     "SPLUNK_REALM"                           = var.splunk_realm
     "OTEL_SERVICE_NAME"                      = "early-years-foundation-recovery"
+    "OTEL_RESOURCE_ATTRIBUTES"               = "deployment.environment.name=${var.environment},cloud.provider=azure,cloud.platform=azure_app_service"
     "OTEL_EXPORTER_OTLP_ENDPOINT"            = "http://localhost:4318/v1/traces"
     "WEB_CONCURRENCY"                        = var.webapp_config_web_concurrency
     "WEBSITES_CONTAINER_START_TIME_LIMIT"    = 720
@@ -82,6 +84,7 @@ locals {
 
   # Background Worker Application Configuration, passed securely to container instances
   app_worker_environment_variables = {
+    "ENVIRONMENT"                 = var.environment
     "DATABASE_URL"                = var.webapp_database_url
     "GCS_CREDENTIALS"             = var.gcs_credentials
     "GOVUK_NOTIFY_API_KEY"        = var.webapp_config_govuk_notify_api_key
@@ -92,6 +95,7 @@ locals {
     "SPLUNK_ACCESS_TOKEN"         = var.splunk_access_token
     "SPLUNK_REALM"                = var.splunk_realm
     "OTEL_SERVICE_NAME"           = "early-years-foundation-recovery"
+    "OTEL_RESOURCE_ATTRIBUTES"    = "deployment.environment.name=${var.environment},cloud.provider=azure,cloud.platform=azure_container_instances"
     "OTEL_EXPORTER_OTLP_ENDPOINT" = "http://localhost:4318/v1/traces"
   }
 
@@ -123,6 +127,7 @@ locals {
     "SPLUNK_ACCESS_TOKEN"                    = var.splunk_access_token
     "SPLUNK_REALM"                           = var.splunk_realm
     "OTEL_SERVICE_NAME"                      = "early-years-foundation-recovery"
+    "OTEL_RESOURCE_ATTRIBUTES"               = "deployment.environment.name=${var.environment},cloud.provider=azure,cloud.platform=azure_app_service"
     "OTEL_EXPORTER_OTLP_ENDPOINT"            = "http://localhost:4318/v1/traces"
     "WEB_CONCURRENCY"                        = var.webapp_config_web_concurrency
     "WEBSITES_CONTAINER_START_TIME_LIMIT"    = 720

@@ -19,6 +19,44 @@ on:
       - terraform-azure
 
 jobs:
+  telemetry-config:
+    name: Validate telemetry configuration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Validate Splunk and Azure collector configuration
+        run: >-
+          docker run --rm
+          -e APPLICATION_INSIGHTS_CONNECTION_STRING=InstrumentationKey=00000000-0000-0000-0000-000000000000
+          -e SPLUNK_REALM=eu0
+          -e SPLUNK_ACCESS_TOKEN=test
+          -e OTEL_SERVICE_NAME=early-years-foundation-recovery
+          -e OTEL_SERVICE_VERSION=test
+          -e OTEL_RESOURCE_ATTRIBUTES=deployment.environment.name=test
+          -v "$PWD/otel-collector-config.yml:/etc/otelcol/config.yaml:ro"
+          otel/opentelemetry-collector-contrib:0.161.0@sha256:fd328de2552466ad78385e1b1289c3f2402b1c45f265b252aab1955b42845ac1
+          validate --config=/etc/otelcol/config.yaml
+      - name: Validate Azure-only collector configuration
+        run: >-
+          docker run --rm
+          -e APPLICATION_INSIGHTS_CONNECTION_STRING=InstrumentationKey=00000000-0000-0000-0000-000000000000
+          -e OTEL_SERVICE_NAME=early-years-foundation-recovery
+          -e OTEL_SERVICE_VERSION=test
+          -e OTEL_RESOURCE_ATTRIBUTES=deployment.environment.name=test
+          -v "$PWD/otel-collector-azure-config.yml:/etc/otelcol/config.yaml:ro"
+          otel/opentelemetry-collector-contrib:0.161.0@sha256:fd328de2552466ad78385e1b1289c3f2402b1c45f265b252aab1955b42845ac1
+          validate --config=/etc/otelcol/config.yaml
+      - name: Validate local collector configuration
+        run: >-
+          docker run --rm
+          -e OTEL_SERVICE_NAME=early-years-foundation-recovery
+          -e OTEL_SERVICE_VERSION=local
+          -e OTEL_RESOURCE_ATTRIBUTES=deployment.environment.name=development
+          -v "$PWD/otel-collector-local-config.yml:/etc/otelcol/config.yaml:ro"
+          otel/opentelemetry-collector-contrib:0.161.0@sha256:fd328de2552466ad78385e1b1289c3f2402b1c45f265b252aab1955b42845ac1
+          validate --config=/etc/otelcol/config.yaml
+
   test:
     name: Test and lint code
     runs-on: ubuntu-latest

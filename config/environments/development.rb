@@ -74,4 +74,21 @@ Rails.application.configure do
 
   # Configure default url for email
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  if ENV['OTEL_TELEMETRY_LOGS_ENABLED'] == 'true'
+    require Rails.root.join('lib/telemetry_json_formatter')
+
+    FileUtils.mkdir_p('/tmp/telemetry')
+
+    development_logger           = ActiveSupport::Logger.new(Rails.root.join('log/development.log'))
+    development_logger.formatter = config.log_formatter
+
+    telemetry_logger           = ActiveSupport::Logger.new('/tmp/telemetry/application.json.log')
+    telemetry_logger.formatter = TelemetryJsonFormatter.new
+
+    config.logger = ActiveSupport::BroadcastLogger.new(
+      ActiveSupport::TaggedLogging.new(development_logger),
+      ActiveSupport::TaggedLogging.new(telemetry_logger),
+    )
+  end
 end

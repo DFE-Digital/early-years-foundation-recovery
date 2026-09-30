@@ -3,7 +3,8 @@
 # ------------------------------------------------------------------------------
 FROM ruby:3.4.5-alpine as base
 
-RUN apk add --no-cache --no-progress --no-check-certificate build-base less curl tzdata gcompat
+RUN apk upgrade --no-cache --no-progress --no-check-certificate \
+  && apk add --no-cache --no-progress --no-check-certificate build-base less curl tzdata gcompat
 
 ENV TZ Europe/London
 
@@ -45,8 +46,11 @@ FROM otel/opentelemetry-collector-contrib:0.161.0@sha256:fd328de2552466ad78385e1
 # ------------------------------------------------------------------------------
 FROM base AS app
 
+ARG SHA=unknown
+
 LABEL org.opencontainers.image.source=https://github.com/DFE-Digital/early-years-foundation-recovery
 LABEL org.opencontainers.image.description "Early Years Recovery Rails Application"
+LABEL org.opencontainers.image.revision=${SHA}
 
 RUN echo "Welcome to the EYFS Recovery Application" > /etc/motd
 RUN apk add --no-cache --no-progress --no-check-certificate postgresql-dev yarn chromium font-liberation openssh
@@ -58,8 +62,9 @@ ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
 ENV APP_HOME /srv
 ENV RAILS_ENV ${RAILS_ENV:-production}
 ENV ENVIRONMENT ${ENVIRONMENT:-production}
+ENV OTEL_SERVICE_VERSION=${SHA}
 
-RUN mkdir -p ${APP_HOME}/tmp/pids ${APP_HOME}/log
+RUN mkdir -p ${APP_HOME}/tmp/pids ${APP_HOME}/log /tmp/telemetry
 
 WORKDIR ${APP_HOME}
 
@@ -94,14 +99,17 @@ COPY ./docker-entrypoint.sh /
 COPY --from=otel-collector /otelcol-contrib /usr/bin/otelcol
 COPY otel-collector-config.yml /etc/otel-collector-config.yml
 COPY otel-collector-azure-config.yml /etc/otel-collector-azure-config.yml
+COPY otel-collector-local-config.yml /etc/otel-collector-local-config.yml
 COPY otel-collector-entrypoint.sh /usr/local/bin/otel-collector-entrypoint.sh
+COPY bin/start-with-otel /usr/local/bin/start-with-otel
+RUN chmod +x /usr/local/bin/otel-collector-entrypoint.sh /usr/local/bin/start-with-otel
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 EXPOSE 3000
 
-# Start Collector in background, then Rails
-CMD ["sh", "-c", "/usr/local/bin/otel-collector-entrypoint.sh >/dev/null 2>&1 & exec bundle exec rails server"]
+# Start the collector and Rails under a signal-forwarding supervisor.
+CMD ["/usr/local/bin/start-with-otel", "rails", "server"]
 
 # ------------------------------------------------------------------------------
 # Development Stage - ./bin/docker-dev

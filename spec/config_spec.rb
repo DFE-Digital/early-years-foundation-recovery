@@ -66,4 +66,10 @@ RSpec.describe 'Application configuration' do
       ]
     end
   end
+
+  it 'logs application exceptions before ShowExceptions renders the response' do
+    middleware = Rails.application.middleware.map(&:klass)
+
+    expect(middleware.index(ExceptionLoggingMiddleware)).to be > middleware.index(ActionDispatch::ShowExceptions)
+  end
 end

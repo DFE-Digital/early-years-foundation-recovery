@@ -1,4 +1,6 @@
 # :nocov:
+require Rails.root.join('lib/application_insights_telemetry')
+
 class ExceptionLoggingMiddleware
   def initialize(app)
     @app = app
@@ -35,6 +37,8 @@ class ExceptionLoggingMiddleware
         params: params,
       })
     end
+
+    ApplicationInsightsTelemetry.record_exception(e)
 
     raise
   end

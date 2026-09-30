@@ -6,16 +6,26 @@ class ApplicationJob < Que::Job
   #
   # @return [void]
   def run(*)
-    start_time = Time.zone.now
-    log 'running'
+    ApplicationInsightsTelemetry.with_span(
+      "que.process #{self.class.name}",
+      {
+        'messaging.system' => 'que',
+        'messaging.operation.type' => 'process',
+        'code.function.name' => self.class.name,
+      },
+      kind: :consumer,
+    ) do
+      start_time = Time.zone.now
+      log 'running'
 
-    if duplicate_job_queued?
-      raise DuplicateJobError, 'already queued'
-    elsif block_given?
-      yield
+      if duplicate_job_queued?
+        raise DuplicateJobError, 'already queued'
+      elsif block_given?
+        yield
+      end
+
+      log "finished in #{(Time.zone.now - start_time).round(2)} seconds"
     end
-
-    log "finished in #{(Time.zone.now - start_time).round(2)} seconds"
   end
 
 private

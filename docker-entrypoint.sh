@@ -2,6 +2,8 @@
 # ------------------------------------------------------------------------------
 set -e
 
+mkdir -p /tmp/telemetry
+
 if [ -z ${PROXY_CERT} ]
 then
   echo "No proxy certificate to append"

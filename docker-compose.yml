@@ -10,9 +10,12 @@ services:
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
       - OTEL_SERVICE_NAME=${OTEL_SERVICE_NAME:-early-years-foundation-recovery}
+      - OTEL_SERVICE_VERSION=${OTEL_SERVICE_VERSION:-local}
+      - OTEL_RESOURCE_ATTRIBUTES=deployment.environment.name=development
       - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
     volumes:
       - .:/srv
+      - telemetry:/tmp/telemetry
     depends_on:
       - db
       - otel-collector
@@ -22,14 +25,22 @@ services:
     stdin_open: true
 
   otel-collector:
-    image: otel/opentelemetry-collector-contrib:latest
+    image: otel/opentelemetry-collector-contrib:0.161.0@sha256:fd328de2552466ad78385e1b1289c3f2402b1c45f265b252aab1955b42845ac1
+    user: "0:0"
+    entrypoint: ["/usr/local/bin/otel-collector-entrypoint.sh"]
     volumes:
+      - ./otel-collector-entrypoint.sh:/usr/local/bin/otel-collector-entrypoint.sh:ro
+      - ./otel-collector-config.yml:/etc/otel-collector-config.yml:ro
       - ./otel-collector-azure-config.yml:/etc/otel-collector-azure-config.yml
-    command: ["--config", "/etc/otel-collector-azure-config.yml"]
+      - ./otel-collector-local-config.yml:/etc/otel-collector-local-config.yml:ro
+      - telemetry:/tmp/telemetry
 
     environment:
       - APPLICATION_INSIGHTS_CONNECTION_STRING=${APPLICATION_INSIGHTS_CONNECTION_STRING:-}
       - OTEL_SERVICE_NAME=${OTEL_SERVICE_NAME:-early-years-foundation-recovery}
+      - OTEL_SERVICE_VERSION=${OTEL_SERVICE_VERSION:-local}
+      - OTEL_RESOURCE_ATTRIBUTES=deployment.environment.name=development
+      - OTEL_COLLECTOR_LOCAL=true
       - SPLUNK_ACCESS_TOKEN=${SPLUNK_ACCESS_TOKEN:-}
       - SPLUNK_REALM=${SPLUNK_REALM:-}
     networks:
@@ -50,6 +61,7 @@ services:
 
 volumes:
   db:
+  telemetry:
 
 networks:
   recovery:

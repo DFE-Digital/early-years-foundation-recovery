@@ -1,3 +1,5 @@
+require_relative 'telemetry_sanitizer'
+
 module ApplicationInsightsTelemetry
   # Helper module for adding custom telemetry to OpenTelemetry spans
   # Add custom attributes to the current span
@@ -42,27 +44,55 @@ module ApplicationInsightsTelemetry
     current_span = OpenTelemetry::Trace.current_span
     return unless current_span&.recording?
 
-    current_span.record_exception(exception, attributes: attributes)
+    record_exception_on_span(current_span, exception, attributes)
     current_span.status = OpenTelemetry::Trace::Status.error("Exception: #{exception.class}")
   end
 
   # Check if OpenTelemetry is enabled
   def self.enabled?
-    !!(defined?(OpenTelemetry) && ENV['APPLICATION_INSIGHTS_CONNECTION_STRING'] && !ENV['APPLICATION_INSIGHTS_CONNECTION_STRING'].empty?)
+    return false unless defined?(OpenTelemetry)
+
+    ENV.values_at(
+      'OTEL_EXPORTER_OTLP_ENDPOINT',
+      'SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT',
+    ).any? { |endpoint| endpoint.to_s.strip.length.positive? }
   end
 
   # Create a custom span for a block of code
   #
   # @param name [String] Span name (generic, not user-specific)
   # @param attributes [Hash] Span attributes (no PII!)
-  def self.with_span(name, attributes = {}, &block)
+  def self.with_span(name, attributes = {}, kind: nil, **keyword_attributes)
     return yield unless enabled?
 
     tracer = OpenTelemetry.tracer_provider.tracer('early-years-foundation-recovery')
+    attributes = attributes.merge(keyword_attributes)
     sanitized_attributes = attributes.transform_values(&:to_s).transform_keys(&:to_s)
-    tracer.in_span(name, attributes: sanitized_attributes, &block)
-  rescue StandardError => e
-    record_exception(e)
-    raise
+    options = {
+      attributes: sanitized_attributes,
+      record_exception: false,
+    }
+    options[:kind] = kind if kind
+    tracer.in_span(name, **options) do |span|
+      yield(span)
+    rescue StandardError => e
+      record_exception_on_span(span, e)
+      span.status = OpenTelemetry::Trace::Status.error("Exception: #{e.class}")
+      raise
+    end
   end
+
+  def self.record_exception_on_span(span, exception, attributes = {})
+    sanitized_attributes = attributes.transform_keys(&:to_s).transform_values do |value|
+      TelemetrySanitizer.sanitize(value)
+    end
+    sanitized_attributes.merge!(
+      'exception.type' => exception.class.name,
+      'exception.message' => TelemetrySanitizer.sanitize(exception.message),
+      'exception.stacktrace' => TelemetrySanitizer.sanitize(Array(exception.backtrace).join("\n")),
+    )
+
+    span.add_event('exception', attributes: sanitized_attributes)
+  end
+  private_class_method :record_exception_on_span
 end

@@ -74,7 +74,11 @@ RSpec.describe ApplicationInsightsTelemetry do
   describe '.record_exception' do
     context 'when OpenTelemetry is enabled' do
       let(:span) { instance_double(OpenTelemetry::Trace::Span, recording?: true) }
-      let(:exception) { StandardError.new('test error') }
+      let(:exception) do
+        StandardError.new('request failed access_token=secret').tap do |error|
+          error.set_backtrace(['/app/example.rb?api_key=secret:1'])
+        end
+      end
 
       before do
         allow(described_class).to receive(:enabled?).and_return(true)
@@ -82,15 +86,27 @@ RSpec.describe ApplicationInsightsTelemetry do
       end
 
       it 'records the exception on the current span' do
-        expect(span).to receive(:record_exception).with(exception, attributes: {})
-        expect(span).to receive(:status=)
+        expect(span).to receive(:add_event).with(
+          'exception',
+          attributes: {
+            'exception.type' => 'StandardError',
+            'exception.message' => 'request failed access_token=[FILTERED]',
+            'exception.stacktrace' => '/app/example.rb?[FILTERED]',
+          },
+        )
+        expect(span).to receive(:status=).with(
+          have_attributes(code: OpenTelemetry::Trace::Status::ERROR, description: 'Exception: StandardError'),
+        )
 
         described_class.record_exception(exception)
       end
 
       it 'accepts additional attributes' do
-        attrs = { 'context' => 'test' }
-        expect(span).to receive(:record_exception).with(exception, attributes: attrs)
+        attrs = { 'context' => 'client_secret=secret' }
+        expect(span).to receive(:add_event).with(
+          'exception',
+          attributes: hash_including('context' => 'client_secret=[FILTERED]'),
+        )
         expect(span).to receive(:status=)
 
         described_class.record_exception(exception, attrs)
@@ -99,10 +115,35 @@ RSpec.describe ApplicationInsightsTelemetry do
   end
 
   describe '.enabled?' do
-    context 'when OpenTelemetry is defined and connection string is present' do
+    around do |example|
+      original_values = ENV.values_at(
+        'OTEL_EXPORTER_OTLP_ENDPOINT',
+        'SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT',
+      )
+
+      example.run
+    ensure
+      %w[OTEL_EXPORTER_OTLP_ENDPOINT SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT].zip(original_values).each do |key, value|
+        value.nil? ? ENV.delete(key) : ENV[key] = value
+      end
+    end
+
+    context 'when OpenTelemetry is defined and the collector endpoint is present' do
       before do
         stub_const('OpenTelemetry', Module.new)
-        allow(ENV).to receive(:[]).with('APPLICATION_INSIGHTS_CONNECTION_STRING').and_return('test-connection-string')
+        ENV['OTEL_EXPORTER_OTLP_ENDPOINT'] = 'http://otel-collector:4318/v1/traces'
+      end
+
+      it 'returns true' do
+        expect(described_class.enabled?).to be true
+      end
+    end
+
+    context 'when only the direct Splunk endpoint is present' do
+      before do
+        stub_const('OpenTelemetry', Module.new)
+        ENV.delete('OTEL_EXPORTER_OTLP_ENDPOINT')
+        ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'] = 'https://ingest.eu2.observability.splunkcloud.com/v2/trace/otlp'
       end
 
       it 'returns true' do
@@ -120,10 +161,11 @@ RSpec.describe ApplicationInsightsTelemetry do
       end
     end
 
-    context 'when connection string is not present' do
+    context 'when no exporter endpoint is present' do
       before do
         stub_const('OpenTelemetry', Module.new)
-        allow(ENV).to receive(:[]).with('APPLICATION_INSIGHTS_CONNECTION_STRING').and_return(nil)
+        ENV.delete('OTEL_EXPORTER_OTLP_ENDPOINT')
+        ENV.delete('SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT')
       end
 
       it 'returns false' do
@@ -136,6 +178,7 @@ RSpec.describe ApplicationInsightsTelemetry do
     context 'when OpenTelemetry is enabled' do
       let(:tracer) { instance_double(OpenTelemetry::Trace::Tracer) }
       let(:tracer_provider) { instance_double(OpenTelemetry::Trace::TracerProvider) }
+      let(:span) { instance_double(OpenTelemetry::Trace::Span) }
 
       before do
         allow(described_class).to receive(:enabled?).and_return(true)
@@ -144,22 +187,49 @@ RSpec.describe ApplicationInsightsTelemetry do
       end
 
       it 'creates a custom span and yields to the block' do
-        expect(tracer).to receive(:in_span).with('custom_operation', attributes: { 'count' => '5' }).and_yield
+        allow(tracer).to receive(:in_span).and_yield(span)
 
         result = described_class.with_span('custom_operation', 'count' => 5) do
           'result'
         end
 
+        expect(tracer).to have_received(:in_span).with(
+          'custom_operation',
+          attributes: { 'count' => '5' },
+          record_exception: false,
+        )
         expect(result).to eq 'result'
+      end
+
+      it 'creates a span with an explicit kind' do
+        allow(tracer).to receive(:in_span).and_yield(span)
+
+        described_class.with_span('job operation', { 'messaging.system' => 'que' }, kind: :consumer) { nil }
+
+        expect(tracer).to have_received(:in_span).with(
+          'job operation',
+          attributes: { 'messaging.system' => 'que' },
+          kind: :consumer,
+          record_exception: false,
+        )
       end
 
       it 'records exceptions if they occur' do
         error = StandardError.new('test error')
-        allow(tracer).to receive(:in_span).and_raise(error)
-        expect(described_class).to receive(:record_exception).with(error)
+        allow(tracer).to receive(:in_span).and_yield(span)
+        expect(span).to receive(:add_event).with(
+          'exception',
+          attributes: hash_including(
+            'exception.type' => 'StandardError',
+            'exception.message' => 'test error',
+          ),
+        )
+        expect(span).to receive(:status=).with(
+          have_attributes(code: OpenTelemetry::Trace::Status::ERROR, description: 'Exception: StandardError'),
+        )
 
         expect {
-          described_class.with_span('failing_operation') { 'code' }
+          described_class.with_span('failing_operation') { raise error }
         }.to raise_error(StandardError, 'test error')
       end
     end

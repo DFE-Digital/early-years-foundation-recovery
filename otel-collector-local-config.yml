@@ -1,27 +1,141 @@
+extensions:
+  health_check:
+    endpoint: "0.0.0.0:13133"
+  file_storage:
+    directory: /tmp/telemetry/otelcol
+    create_directory: true
+
 receivers:
   otlp:
     protocols:
       http:
         endpoint: 0.0.0.0:4318
+  filelog:
+    include: [/tmp/telemetry/application.json.log]
+    include_file_path: false
+    start_at: beginning
+    storage: file_storage
+    operators:
+      - type: json_parser
+        timestamp:
+          parse_from: attributes.timestamp
+          layout_type: gotime
+          layout: "2006-01-02T15:04:05.999999Z07:00"
+        severity:
+          parse_from: attributes.severity
+      - type: trace_parser
+        trace_id:
+          parse_from: attributes.trace_id
+        span_id:
+          parse_from: attributes.span_id
+      - type: move
+        from: attributes.message
+        to: body
+  hostmetrics:
+    collection_interval: 60s
+    scrapers:
+      cpu:
+      memory:
+      filesystem:
+      network:
+      process:
+        mute_process_all_errors: true
+        include:
+          match_type: regexp
+          names: ["ruby", "otelcol.*"]
+  prometheus:
+    config:
+      scrape_configs:
+        - job_name: otel-collector
+          scrape_interval: 60s
+          static_configs:
+            - targets: ["127.0.0.1:8888"]
+          metric_relabel_configs:
+            - source_labels: [__name__]
+              regex: "otelcol_.*|otel_.*|up"
+              action: keep
 
 processors:
+  memory_limiter:
+    check_interval: 1s
+    limit_percentage: 75
+    spike_limit_percentage: 15
+  resourcedetection:
+    detectors: [env, system]
+    override: false
+    timeout: 2s
+    system:
+      hostname_sources: [os]
+  resource/service:
+    attributes:
+      - key: service.name
+        value: "${env:OTEL_SERVICE_NAME}"
+        action: upsert
+      - key: service.version
+        value: "${env:OTEL_SERVICE_VERSION}"
+        action: upsert
+  transform/privacy:
+    error_mode: ignore
+    trace_statements:
+      - context: span
+        statements:
+          - delete_key(span.attributes, "url.full")
+          - delete_key(span.attributes, "url.query")
+          - delete_key(span.attributes, "http.url")
+          - delete_key(span.attributes, "http.target")
+          - delete_key(span.attributes, "http.request.header.cookie")
+          - delete_key(span.attributes, "http.request.header.authorization")
+          - delete_key(span.attributes, "db.statement")
+      - context: spanevent
+        statements:
+          - delete_key(attributes, "exception.message")
+          - delete_key(attributes, "exception.stacktrace")
+    log_statements:
+      - context: log
+        statements:
+          - delete_key(log.attributes, "trace_id")
+          - delete_key(log.attributes, "span_id")
+          - delete_key(log.attributes, "service.name")
+          - delete_key(log.attributes, "service.version")
+          - delete_key(log.attributes, "deployment.environment.name")
   batch:
+    send_batch_size: 1000
+    send_batch_max_size: 2000
+    timeout: 2s
+
+connectors:
+  spanmetrics:
+    namespace: service
+    metrics_flush_interval: 60s
+    aggregation_cardinality_limit: 2000
+    histogram:
+      unit: ms
+      explicit:
+        buckets: [5ms, 10ms, 25ms, 50ms, 100ms, 250ms, 500ms, 1s, 2.5s, 5s, 10s]
+    dimensions:
+      - name: http.request.method
+      - name: http.route
+      - name: http.response.status_code
 
 exporters:
   debug:
     verbosity: detailed
 
 service:
+  extensions: [health_check, file_storage]
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [batch]
-      exporters: [debug]
+      processors: [memory_limiter, resourcedetection, resource/service, transform/privacy, batch]
+      exporters: [spanmetrics, debug]
     metrics:
-      receivers: [otlp]
-      processors: [batch]
+      receivers: [otlp, spanmetrics, hostmetrics, prometheus]
+      processors: [memory_limiter, resourcedetection, resource/service, batch]
       exporters: [debug]
     logs:
-      receivers: [otlp]
-      processors: [batch]
+      receivers: [otlp, filelog]
+      processors: [memory_limiter, resourcedetection, resource/service, transform/privacy, batch]
       exporters: [debug]
+  telemetry:
+    logs:
+      level: info

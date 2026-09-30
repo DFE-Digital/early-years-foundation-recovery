@@ -20,13 +20,17 @@ services:
       - PGDATABASE=early_years_foundation_recovery_development
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
       - RAILS_ENV=development
+      - ENVIRONMENT=development
       - DOMAIN=localhost:3000
       - RAILS_SERVE_STATIC_FILES=true
+      - OTEL_TELEMETRY_LOGS_ENABLED=true
 
       # OpenTelemetry config pointing to collector in docker-compose
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
       - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
       - OTEL_SERVICE_NAME=early-years-foundation-recovery
+      - OTEL_SERVICE_VERSION=${OTEL_SERVICE_VERSION:-local}
+      - OTEL_RESOURCE_ATTRIBUTES=deployment.environment.name=development
       - APPLICATION_INSIGHTS_CONNECTION_STRING=${APPLICATION_INSIGHTS_CONNECTION_STRING}
 
       # GOV.UK One Login (points at local simulator by default in dev).
@@ -81,22 +85,27 @@ services:
     command: que
     environment:
       - RAILS_ENV=development
+      - ENVIRONMENT=development
       - DATABASE_URL=postgres://postgres:password@db:5432/early_years_foundation_recovery_development
       - DASHBOARD_UPDATE=false
       - SENTRY_TOKEN
       - DASHBOARD_UPDATE_INTERVAL
       - GOOGLE_CLOUD_BUCKET
+      - OTEL_TELEMETRY_LOGS_ENABLED=true
 
       # OpenTelemetry config pointing to collector
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
       - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
       - OTEL_SERVICE_NAME=early-years-foundation-recovery
+      - OTEL_SERVICE_VERSION=${OTEL_SERVICE_VERSION:-local}
+      - OTEL_RESOURCE_ATTRIBUTES=deployment.environment.name=development
       - APPLICATION_INSIGHTS_CONNECTION_STRING=${APPLICATION_INSIGHTS_CONNECTION_STRING}
 
     depends_on:
       - db
     volumes:
       - .:/srv
+      - telemetry:/tmp/telemetry
     tty: true
     stdin_open: true
     networks:

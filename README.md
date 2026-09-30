@@ -357,6 +357,8 @@ Production console access
 
 Application Insights *via* an open telemetry collector is configured to pass through to Azure Application Insights. This is being used to retrieve metrics, and more diagnostic logging, for the service.
 
+The collector can also export traces, correlated logs, and metrics to Splunk Observability Cloud. See [Splunk observability](docs/splunk-observability.md) for configuration, verification, alerting, and rollback guidance.
+
 
 ## Programmatic testing
 
