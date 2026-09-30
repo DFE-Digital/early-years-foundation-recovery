@@ -63,6 +63,10 @@
   }
 }
 
+.dfe-card-container > h3:last-child {
+  margin-top: 0;
+}
+
 .card-progress-bar {
   color: $govuk-secondary-text-colour;
   margin-top: auto;
