@@ -3,7 +3,8 @@
 # ------------------------------------------------------------------------------
 FROM ruby:3.4.5-alpine as base
 
-RUN apk add --no-cache --no-progress --no-check-certificate build-base less curl tzdata gcompat
+RUN apk upgrade --no-cache --no-progress --no-check-certificate \
+  && apk add --no-cache --no-progress --no-check-certificate build-base less curl tzdata gcompat
 
 ENV TZ Europe/London
 
