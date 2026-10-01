@@ -24,6 +24,7 @@ receivers:
         severity:
           parse_from: attributes.severity
       - type: trace_parser
+        if: attributes.trace_id != nil and attributes.span_id != nil
         trace_id:
           parse_from: attributes.trace_id
         span_id:
