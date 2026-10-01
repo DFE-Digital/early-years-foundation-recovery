@@ -338,19 +338,29 @@ resource "azurerm_app_service_custom_hostname_binding" "webapp_custom_domain" {
 
 data "azurerm_client_config" "az_config" {}
 
-resource "azurerm_key_vault_access_policy" "webapp_kv_ap" {
+resource "azurerm_role_assignment" "webapp_kv_secret_user" {
   # Custom hostname only deployed to the Test and Production subscription
   count = var.environment != "development" ? 1 : 0
 
-  key_vault_id = var.kv_id
-  tenant_id    = data.azurerm_client_config.az_config.tenant_id
-  # Can be retrieved using 'az ad sp show --id abfa0a7c-a6b6-4736-8310-5855508787cd --query id'
-  object_id               = var.as_service_principal_object_id
-  secret_permissions      = ["Get"]
-  certificate_permissions = ["Get"]
+  scope                = var.kv_id
+  role_definition_name = "Key Vault Secrets User"
+  principal_id         = var.as_service_principal_object_id
 
   lifecycle {
-    ignore_changes = [tenant_id] // shouldn't change
+    ignore_changes = [principal_id]
+  }
+}
+
+resource "azurerm_role_assignment" "webapp_kv_certificate_user" {
+  # Custom hostname only deployed to the Test and Production subscription
+  count = var.environment != "development" ? 1 : 0
+
+  scope                = var.kv_id
+  role_definition_name = "Key Vault Certificate User"
+  principal_id         = var.as_service_principal_object_id
+
+  lifecycle {
+    ignore_changes = [principal_id]
   }
 }
 
@@ -362,6 +372,11 @@ resource "azurerm_app_service_certificate" "webapp_custom_domain_cert" {
   resource_group_name = var.resource_group
   location            = var.location
   key_vault_secret_id = var.kv_cert_secret_id
+
+  depends_on = [
+    azurerm_role_assignment.webapp_kv_secret_user,
+    azurerm_role_assignment.webapp_kv_certificate_user,
+  ]
 }
 
 resource "azurerm_app_service_certificate_binding" "webapp_custom_domain_cert_bind" {
