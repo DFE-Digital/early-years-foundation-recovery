@@ -53,6 +53,24 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
       selector_match_operator = "Equals"
     }
 
+    # Rails-generated CSRF tokens can contain "--", which falsely triggers the
+    # SQL comment sequence rule. Rails still validates the signed token.
+    exclusion {
+      match_variable          = "RequestArgValues"
+      selector                = "authenticity_token"
+      selector_match_operator = "Equals"
+
+      excluded_rule_set {
+        type    = "OWASP"
+        version = "3.2"
+
+        rule_group {
+          rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
+          excluded_rules  = ["942440"]
+        }
+      }
+    }
+
     # Free-text user input: exclude XSS (941), SQLi (942), RCE (932), and PHP
     # injection (933) rule groups for every prose field. Rails parameter-binds
     # and HTML-escapes all values so treating them as non-injectable is safe.
