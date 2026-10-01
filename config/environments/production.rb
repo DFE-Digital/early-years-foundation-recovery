@@ -101,9 +101,19 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new "app-name")
 
   if ENV['RAILS_LOG_TO_STDOUT'].present?
-    logger           = ActiveSupport::Logger.new($stdout)
-    logger.formatter = config.log_formatter
-    config.logger    = ActiveSupport::TaggedLogging.new(logger)
+    require Rails.root.join('lib/opentelemetry_configuration')
+
+    stdout_logger           = ActiveSupport::Logger.new($stdout)
+    stdout_logger.formatter = config.log_formatter
+    stdout_logger           = ActiveSupport::TaggedLogging.new(stdout_logger)
+
+    if OpenTelemetryConfiguration.logs_enabled?
+      require Rails.root.join('lib/telemetry_logger')
+      telemetry_logger = ActiveSupport::TaggedLogging.new(TelemetryLogger.new)
+      config.logger = ActiveSupport::BroadcastLogger.new(stdout_logger, telemetry_logger)
+    else
+      config.logger = stdout_logger
+    end
   end
 
   # Do not dump schema after migrations.
