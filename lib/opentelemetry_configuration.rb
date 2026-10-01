@@ -18,13 +18,6 @@ module OpenTelemetryConfiguration
         configs << { endpoint: endpoint, headers: headers_from_env('OTEL_EXPORTER_OTLP_HEADERS') }
       end
 
-      if (splunk_endpoint = ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'].to_s.strip).length.positive?
-        configs << {
-          endpoint: splunk_endpoint,
-          headers: headers_from_env('SPLUNK_OTEL_EXPORTER_OTLP_HEADERS'),
-        }
-      end
-
       configs
     end
 

@@ -52,10 +52,7 @@ module ApplicationInsightsTelemetry
   def self.enabled?
     return false unless defined?(OpenTelemetry)
 
-    ENV.values_at(
-      'OTEL_EXPORTER_OTLP_ENDPOINT',
-      'SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT',
-    ).any? { |endpoint| endpoint.to_s.strip.length.positive? }
+    ENV['OTEL_EXPORTER_OTLP_ENDPOINT'].to_s.strip.length.positive?
   end
 
   # Create a custom span for a block of code

@@ -24,26 +24,26 @@ We chose to **Embed the Collector** directly into the Docker image.
 
 ### Side-by-side Splunk rollout
 
-To allow a gradual migration away from Azure Application Insights without breaking the existing telemetry path, the Rails app can now export the same OTLP traces to Splunk Observability Cloud in parallel with the existing collector-based Azure Monitor export.
+To allow a gradual migration away from Azure Application Insights without breaking the existing telemetry path, the embedded collector exports telemetry to Splunk Observability Cloud and Azure Monitor in parallel.
 
-The application emits spans over OTLP/HTTP as before. When the optional Splunk environment variables are set, the app adds a second OTLP exporter for:
+The application emits spans over OTLP/HTTP only to the local collector. When the Splunk environment variables are set, the collector exports to:
 
-- Azure Monitor via the existing collector and Application Insights connection string
-- Splunk APM via the optional Splunk OTLP endpoint and auth header
+- Azure Monitor via the Application Insights connection string
+- Splunk Observability via its configured exporters
 
-The Splunk export is enabled only when the following environment variables are set:
+The Splunk export is enabled only when the following environment variables are set on the collector:
 
-- `SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT`
-- `SPLUNK_OTEL_EXPORTER_OTLP_HEADERS`
+- `SPLUNK_REALM`
+- `SPLUNK_ACCESS_TOKEN`
 
-This keeps the rollout reversible and lets us validate the new destination while retaining the current Azure pipeline during the transition.
+Routing all telemetry through the collector ensures its privacy processors run before either export.
 
 ### Implementation Details
 
 1.  **Multi-Stage Build**: We fetch the `otelcol-contrib` binary from the official image during the Docker build.
-2.  **Startup Wrapper**: We use a shell command to start the collector in the background (`&`) before executing the main Rails process.
+2.  **Startup Wrapper**: A supervisor script starts both the collector and application, forwards termination signals, and stops the application if the collector fails.
     ```bash
-    otelcol --config=/etc/otel-collector-config.yml >/dev/null 2>&1 & exec bundle exec rails server
+    /usr/local/bin/start-with-otel rails server
     ```
 3.  **Local Communication**: The Rails app sends traces to `localhost:4318`.
 

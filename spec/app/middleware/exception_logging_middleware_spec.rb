@@ -18,4 +18,18 @@ RSpec.describe ExceptionLoggingMiddleware do
 
     expect { middleware.call(request) }.to raise_error(error)
   end
+
+  it 'sanitizes exception details before broadcasting the log record' do
+    sensitive_error = StandardError.new('failed access_token=secret')
+    sensitive_error.set_backtrace(['/app/example.rb?api_key=secret:1'])
+    sensitive_app = ->(_env) { raise sensitive_error }
+
+    expect(Rails.logger).to receive(:error) do |&block|
+      message = block.call
+      expect(message).to include('access_token=[FILTERED]', '/app/example.rb?[FILTERED]')
+      expect(message).not_to include('secret')
+    end
+
+    expect { described_class.new(sensitive_app).call(request) }.to raise_error(sensitive_error)
+  end
 end

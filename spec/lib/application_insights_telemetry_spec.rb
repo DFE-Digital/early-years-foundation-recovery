@@ -118,12 +118,11 @@ RSpec.describe ApplicationInsightsTelemetry do
     around do |example|
       original_values = ENV.values_at(
         'OTEL_EXPORTER_OTLP_ENDPOINT',
-        'SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT',
       )
 
       example.run
     ensure
-      %w[OTEL_EXPORTER_OTLP_ENDPOINT SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT].zip(original_values).each do |key, value|
+      %w[OTEL_EXPORTER_OTLP_ENDPOINT].zip(original_values).each do |key, value|
         value.nil? ? ENV.delete(key) : ENV[key] = value
       end
     end
@@ -132,18 +131,6 @@ RSpec.describe ApplicationInsightsTelemetry do
       before do
         stub_const('OpenTelemetry', Module.new)
         ENV['OTEL_EXPORTER_OTLP_ENDPOINT'] = 'http://otel-collector:4318/v1/traces'
-      end
-
-      it 'returns true' do
-        expect(described_class.enabled?).to be true
-      end
-    end
-
-    context 'when only the direct Splunk endpoint is present' do
-      before do
-        stub_const('OpenTelemetry', Module.new)
-        ENV.delete('OTEL_EXPORTER_OTLP_ENDPOINT')
-        ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'] = 'https://ingest.eu2.observability.splunkcloud.com/v2/trace/otlp'
       end
 
       it 'returns true' do
@@ -165,7 +152,6 @@ RSpec.describe ApplicationInsightsTelemetry do
       before do
         stub_const('OpenTelemetry', Module.new)
         ENV.delete('OTEL_EXPORTER_OTLP_ENDPOINT')
-        ENV.delete('SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT')
       end
 
       it 'returns false' do

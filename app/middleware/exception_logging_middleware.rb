@@ -1,5 +1,6 @@
 # :nocov:
 require Rails.root.join('lib/application_insights_telemetry')
+require Rails.root.join('lib/telemetry_sanitizer')
 
 class ExceptionLoggingMiddleware
   def initialize(app)
@@ -20,13 +21,15 @@ class ExceptionLoggingMiddleware
     msg = e.message.to_s.gsub(/\s+/, ' ')[0, 500]
 
     Rails.logger.error do
-      [
+      TelemetrySanitizer.sanitize(
+        [
         "unhandled_exception error_class=#{e.class} message=#{msg.inspect} " \
         "method=#{req.request_method} path=#{req.fullpath.inspect} request_id=#{rid}",
         "params=#{params.inspect}",
         'backtrace:',
         *cleaned_bt.map { |line| "  #{line}" },
-      ].join("\n")
+        ].join("\n"),
+      )
     end
 
     if Rails.respond_to?(:error) && Rails.error.respond_to?(:report)

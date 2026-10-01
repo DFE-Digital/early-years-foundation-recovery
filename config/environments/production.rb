@@ -101,14 +101,13 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new "app-name")
 
   if ENV['RAILS_LOG_TO_STDOUT'].present?
+    require Rails.root.join('lib/telemetry_file_logger')
     require Rails.root.join('lib/telemetry_json_formatter')
-
-    FileUtils.mkdir_p('/tmp/telemetry')
 
     stdout_logger           = ActiveSupport::Logger.new($stdout)
     stdout_logger.formatter = config.log_formatter
 
-    telemetry_logger           = ActiveSupport::Logger.new('/tmp/telemetry/application.json.log')
+    telemetry_logger           = TelemetryFileLogger.new('/tmp/telemetry')
     telemetry_logger.formatter = TelemetryJsonFormatter.new
 
     config.logger = ActiveSupport::BroadcastLogger.new(
