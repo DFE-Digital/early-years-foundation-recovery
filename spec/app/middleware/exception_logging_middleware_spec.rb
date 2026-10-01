@@ -19,6 +19,16 @@ RSpec.describe ExceptionLoggingMiddleware do
     expect { middleware.call(request) }.to raise_error(error)
   end
 
+  it 'records exceptions before ShowExceptions renders an error response' do
+    exceptions_app = ->(_env) { [500, { Rack::CONTENT_TYPE => 'text/plain' }, %w[error]] }
+    stack = ActionDispatch::ShowExceptions.new(middleware, exceptions_app)
+    request['action_dispatch.show_exceptions'] = :all
+
+    expect(ApplicationInsightsTelemetry).to receive(:record_exception).with(error)
+
+    expect(stack.call(request).first).to eq(500)
+  end
+
   it 'sanitizes exception details before broadcasting the log record' do
     sensitive_error = StandardError.new('failed access_token=secret')
     sensitive_error.set_backtrace(['/app/example.rb?api_key=secret:1'])
