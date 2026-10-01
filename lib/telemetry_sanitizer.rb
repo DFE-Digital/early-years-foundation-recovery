@@ -10,13 +10,13 @@ module TelemetrySanitizer
       (?:[_-][a-z0-9]+)*
     )\b
     \1
-    (\s*(?:=|:)\s*)
+    (\s*(?:=>|=|:)\s*)
     (?:"[^"]*"|'[^']*'|[^\s,}]+)
   !ix
   EMAIL_ADDRESS = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i
   IP_ADDRESS = /\b(?:\d{1,3}\.){3}\d{1,3}\b/
   USER_REFERENCE = /\b(for\s+user|user(?:_id)?)\s+\d+\b/i
-  QUERY_STRING = /\?[^\s]+/
+  QUERY_STRING = /\?[^\s"']+/
 
   def self.sanitize(value, max_bytes: MAX_MESSAGE_BYTES)
     value

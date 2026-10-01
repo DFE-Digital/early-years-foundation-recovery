@@ -12,7 +12,7 @@ Required secrets:
 
 Resource identity is supplied through `OTEL_SERVICE_NAME`, `OTEL_SERVICE_VERSION`, and `OTEL_RESOURCE_ATTRIBUTES`. Never put credentials, user data, request parameters, or job arguments in resource attributes.
 
-The application writes a sanitized, rotating JSON log to `/tmp/telemetry/application.json.log`. The collector tails this file and promotes valid `trace_id` and `span_id` fields into OpenTelemetry log context. Existing stdout logs remain available to Azure container diagnostics.
+Each application process writes a sanitized, bounded rotating JSON log to `/tmp/telemetry/application-<pid>.json.log`. The collector tails these files and promotes valid `trace_id` and `span_id` fields into OpenTelemetry log context. Existing stdout logs remain available to Azure container diagnostics.
 
 ## Local Verification
 

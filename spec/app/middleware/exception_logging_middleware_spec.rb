@@ -23,13 +23,18 @@ RSpec.describe ExceptionLoggingMiddleware do
     sensitive_error = StandardError.new('failed access_token=secret')
     sensitive_error.set_backtrace(['/app/example.rb?api_key=secret:1'])
     sensitive_app = ->(_env) { raise sensitive_error }
+    sensitive_request = Rack::MockRequest.env_for('/broken?api_key=secret')
 
     expect(Rails.logger).to receive(:error) do |&block|
       message = block.call
-      expect(message).to include('access_token=[FILTERED]', '/app/example.rb?[FILTERED]')
+      expect(message).to include(
+        'access_token=[FILTERED]',
+        '?[FILTERED]',
+      )
+      expect(message).to match(/"api_key"\s*=>\s*\[FILTERED\]/)
       expect(message).not_to include('secret')
     end
 
-    expect { described_class.new(sensitive_app).call(request) }.to raise_error(sensitive_error)
+    expect { described_class.new(sensitive_app).call(sensitive_request) }.to raise_error(sensitive_error)
   end
 end

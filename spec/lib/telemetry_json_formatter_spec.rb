@@ -77,6 +77,17 @@ RSpec.describe TelemetryJsonFormatter do
     )
   end
 
+  it 'redacts credentials in inspected Ruby hashes' do
+    allow(OpenTelemetry::Trace).to receive(:current_span).and_return(nil)
+    sensitive_message = '{"access_token"=>"one", "api_key"=>"two"}'
+
+    parsed = JSON.parse(formatter.call('WARN', timestamp, nil, sensitive_message))
+
+    expect(parsed['message']).to eq(
+      '{"access_token"=>[FILTERED], "api_key"=>[FILTERED]}',
+    )
+  end
+
   it 'redacts a long quoted secret before truncating the message' do
     allow(OpenTelemetry::Trace).to receive(:current_span).and_return(nil)
     sensitive_message = %(client_secret="#{'secret ' * 2_000}" trailing)

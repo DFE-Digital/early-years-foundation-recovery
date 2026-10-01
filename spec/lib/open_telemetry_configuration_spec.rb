@@ -53,6 +53,5 @@ RSpec.describe OpenTelemetryConfiguration do
         { endpoint: 'http://otel-collector:4318/v1/traces', headers: {} },
       ])
     end
-
   end
 end
