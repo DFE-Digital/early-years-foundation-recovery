@@ -20,7 +20,8 @@ RSpec.describe 'Formative question' do
     before do
       visit '/modules/alpha/questionnaires/1-1-4-1'
       choose 'Correct answer 1'
-      2.times { click_on 'Next' }
+      click_on 'Check answer'
+      click_on 'Next'
     end
 
     it 'is not able to be changed' do
@@ -34,7 +35,8 @@ RSpec.describe 'Formative question' do
     before do
       visit '/modules/alpha/questionnaires/1-1-4-1'
       choose 'Wrong answer 1'
-      2.times { click_on 'Next' }
+      click_on 'Check answer'
+      click_on 'Next'
     end
 
     it 'is not able to be changed' do
@@ -53,13 +55,14 @@ RSpec.describe 'Formative question' do
   context 'when no answer is submitted' do
     it 'displays an error message' do
       visit 'modules/alpha/questionnaires/1-1-4-1'
-      click_on 'Next'
+      click_on 'Check answer'
       expect(page).to have_content 'Please select an answer'
+      expect(page).to have_button 'Check answer'
     end
 
     it 'does not show the internal server error page' do
       visit 'modules/alpha/questionnaires/1-1-4-1'
-      click_on 'Next'
+      click_on 'Check answer'
       expect(response).not_to have_http_status(:internal_server_error)
     end
   end
