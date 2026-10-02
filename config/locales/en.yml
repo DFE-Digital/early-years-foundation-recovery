@@ -736,6 +736,8 @@ en:
         ### Module contents
 
   notes:
+    heading: Learning log
+    menu: Section menu
     intro: |
       # Your learning log
 

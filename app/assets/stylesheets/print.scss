@@ -7,6 +7,15 @@
   .noprint {
     display: none !important;
   }
+
+  .learning-log-content {
+  width: 100%;
+  float: none;
+
+  .log-entry {
+    overflow-wrap: anywhere;
+  }
+}
 }
 
 .print-link-button {
