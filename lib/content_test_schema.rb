@@ -101,7 +101,7 @@ private
       ]
     elsif type.eql?('formative')
       [
-        [:click_on, 'Next'],
+        [:click_on, 'Check answer'],
         [:click_on, 'Next'],
       ]
     else

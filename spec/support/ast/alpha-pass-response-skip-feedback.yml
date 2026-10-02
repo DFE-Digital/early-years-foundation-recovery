@@ -46,7 +46,7 @@
     - - :choose
       - response-answers-1-field
     - - :click_on
-      - Next
+      - Check answer
     - - :click_on
       - Next
 - :path: /modules/alpha/content-pages/1-2
@@ -67,7 +67,7 @@
     - - :check
       - response-answers-3-field
     - - :click_on
-      - Next
+      - Check answer
     - - :click_on
       - Next
 - :path: /modules/alpha/content-pages/1-2-1-2
@@ -83,7 +83,7 @@
     - - :check
       - response-answers-3-field
     - - :click_on
-      - Next
+      - Check answer
     - - :click_on
       - Next
 - :path: /modules/alpha/content-pages/1-3

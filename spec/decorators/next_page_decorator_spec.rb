@@ -85,6 +85,29 @@ RSpec.describe NextPageDecorator do
     end
   end
 
+  context 'when answering a formative question' do
+    let(:content) { mod.page_by_name('1-1-4-1') }
+
+    it 'shows Check answer before an answer is submitted' do
+      expect(decorator.text).to eq 'Check answer'
+    end
+
+    context 'when an answer has been submitted' do
+      before do
+        create :response,
+               user: user,
+               question_name: content.name,
+               question_type: 'formative',
+               training_module: mod.name,
+               answers: [1]
+      end
+
+      it 'shows Next' do
+        expect(decorator.text).to eq 'Next'
+      end
+    end
+  end
+
   context 'when finishing a module' do
     let(:content) { mod.page_by_name('1-3-3-5') }
 
