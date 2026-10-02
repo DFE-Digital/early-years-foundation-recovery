@@ -12,7 +12,7 @@
     .govuk-grid-column-three-quarters.learning-log-content
       h1.govuk-heading-l class='govuk-!-font-size-36' #{@training_module.title}
 
-      - if @notes.any?
+      - if @notes.any?(&:filled?)
         = m('notes.intro')
         = render partial: 'notes/note', collection: @notes
       - else

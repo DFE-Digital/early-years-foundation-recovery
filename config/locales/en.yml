@@ -739,9 +739,7 @@ en:
     heading: Learning log
     menu: Section menu
     intro: |
-      # Your learning log
-
-      View your notes from all your modules here.
+      View your notes for this module.
       You can also use the links provided to revisit a specific topic.
 
   # /about/experts
