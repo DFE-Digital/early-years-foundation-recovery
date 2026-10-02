@@ -54,6 +54,8 @@ Rails.application.routes.draw do
 
     scope module: 'training' do
       resource :notes, path: 'learning-log', only: %i[show create update]
+
+      get 'learning-log/:module_name', to: 'notes#show', as: :module_notes
     end
   end
 

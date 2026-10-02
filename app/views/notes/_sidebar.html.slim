@@ -1,0 +1,15 @@
+ruby:
+  items = @training_modules.map do |mod|
+    {
+      key: mod.name,
+      text: mod.title,
+      href: module_notes_user_path(module_name: mod.name)
+    }
+  end
+
+= render 'shared/sidebar',
+  items: items,
+  active: @training_module.name,
+  menu_id: 'learning-log-menu',
+  menu_label: t('notes.menu'),
+  navigation_label: t('notes.heading')

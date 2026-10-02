@@ -1,19 +1,27 @@
 - content_for :page_title do
-  = html_title t(:title, scope: :my_learning_log)
+  - if @training_module
+    = html_title t(:title, scope: :my_learning_log), @training_module.title
+  - else
+    = html_title t(:title, scope: :my_learning_log)
 
-= m('notes.intro')
+- if @training_module
+  .govuk-grid-row
+    .govuk-grid-column-one-quarter.noprint
+      = render 'notes/sidebar'
 
-= govuk_tabs(title: 'Module notes') do |c|
-  - @training_modules.each do |mod|
-    - c.with_tab(label: mod.tab_label) do
+    .govuk-grid-column-three-quarters.learning-log-content
+      p.learning-log-caption
+        = t('notes.heading')
+      h1.govuk-heading-l class='govuk-!-font-size-36' #{@training_module.title}
 
-      h2.govuk-heading-m Notes for #{mod.tab_label}: #{mod.title}
-
-      - if current_user.notes.where(training_module: mod.name).any?
-        = render partial: 'notes/note', collection: current_user.notes.where(training_module: mod.name)
+      - if @notes.any?(&:filled?)
+        = m('notes.intro')
+        = render partial: 'notes/note', collection: @notes
       - else
-        p.govuk_body You have not made any notes for this module.
+        p.govuk-body You have not made any notes for this module.
 
       span.noprint
         button.govuk-link.print-link-button onclick='window.print()' data-module='print-link'
           | Print this page
+- else
+  p.govuk-body There are no modules available at the moment.

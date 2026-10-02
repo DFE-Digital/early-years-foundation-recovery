@@ -17,20 +17,124 @@ RSpec.describe 'Learning log', type: :request do
   end
 
   describe 'GET /my-account/learning-log' do
-    specify { expect('/my-account/learning-log').to be_successful }
+    it 'redirects to the first live module when no modules have been started' do
+      first_module = Training::Module.live.first
+      expect(first_module).to be_present
 
-    it 'indicates no notes when there are none' do
-      create :user_module_progress, user: registered_user, module_name: 'alpha', started_at: 1.day.ago
       get user_notes_path
-      expect(response.body).to include('You have not made any notes for this module.')
+
+      expect(response).to redirect_to(
+        module_notes_user_path(module_name: first_module.name),
+      )
     end
 
-    it 'lists notes' do
-      create :user_module_progress, user: registered_user, module_name: 'alpha', started_at: 1.day.ago
-      create :note, user: registered_user, body: 'My very special note'
-      get user_notes_path
-      expect(response.body).to include('Your learning log')
-      expect(response.body).to include('My very special note')
+    context 'when no live modules are available' do
+      before do
+        allow(Training::Module).to receive(:live).and_return([])
+      end
+
+      it 'shows an informative empty state' do
+        get user_notes_path
+
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include(
+          'There are no modules available at the moment.',
+        )
+      end
+    end
+  end
+
+  describe 'GET /my-account/learning-log/:module_name' do
+    let(:selected_module) { Training::Module.live.first }
+
+    it 'shows an empty state for an unstarted module' do
+      expect(selected_module).to be_present
+      get module_notes_user_path(module_name: selected_module.name)
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include(
+        'You have not made any notes for this module.',
+      )
+    end
+
+    it 'shows the current user’s notes for the selected module' do
+      expect(selected_module).to be_present
+      create :note,
+             user: registered_user,
+             training_module: selected_module.name,
+             body: 'My reflection on supporting children'
+
+      get module_notes_user_path(module_name: selected_module.name)
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include(
+        'My reflection on supporting children',
+      )
+      expect(response.body).not_to include(
+        'You have not made any notes for this module.',
+      )
+    end
+
+    it 'does not show another user’s notes' do
+      expect(selected_module).to be_present
+
+      other_user = create :user, :registered
+
+      create :note,
+             user: other_user,
+             training_module: selected_module.name,
+             body: 'Another learner’s private reflection'
+
+      get module_notes_user_path(module_name: selected_module.name)
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).not_to include(
+        'Another learner’s private reflection',
+      )
+      expect(response.body).to include(
+        'You have not made any notes for this module.',
+      )
+    end
+
+    it 'does not show notes from another module' do
+      expect(selected_module).to be_present
+
+      other_module = Training::Module.live.find do |mod|
+        mod.name != selected_module.name
+      end
+      expect(other_module).to be_present
+
+      create :note,
+             user: registered_user,
+             training_module: other_module.name,
+             body: 'My reflection from a different module'
+
+      get module_notes_user_path(module_name: selected_module.name)
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).not_to include(
+        'My reflection from a different module',
+      )
+      expect(response.body).to include(
+        'You have not made any notes for this module.',
+      )
+    end
+
+    it 'rejects an unknown module' do
+      expect {
+        get module_notes_user_path(module_name: 'nonexistent-module')
+      }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it 'rejects a module that is not live' do
+      expect(selected_module).to be_present
+      module_name = selected_module.name
+
+      allow(Training::Module).to receive(:live).and_return([])
+
+      expect {
+        get module_notes_user_path(module_name: module_name)
+      }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 
