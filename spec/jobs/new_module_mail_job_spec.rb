@@ -45,6 +45,10 @@ RSpec.describe NewModuleMailJob do
     end
   end
 
+  it 'returns early when the release cannot be found' do
+    expect(described_class.run(999)).to eq :no_new_module_release
+  end
+
   describe 'release email controls' do
     let(:mod) do
       Training::Module.live.find { |training_module| training_module.name == 'charlie' }
