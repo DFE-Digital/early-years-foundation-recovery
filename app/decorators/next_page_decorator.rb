@@ -34,14 +34,15 @@ class NextPageDecorator
   # @return [String]
   def text
     case
-    when next?             then label[:next]
-    when missing?          then label[:missing]
-    when content_section?  then label[:section]
-    when confidence_outro? then label[:give_feedback]
-    when test_start?       then label[:start_test]
-    when test_finish?      then label[:finish_test]
-    when finish?           then label[:finish]
-    when save?             then label[:save_continue]
+    when next?                then label[:next]
+    when formative_question?  then label[:check_answer]
+    when missing?             then label[:missing]
+    when content_section?     then label[:section]
+    when confidence_outro?    then label[:give_feedback]
+    when test_start?          then label[:start_test]
+    when test_finish?         then label[:finish_test]
+    when finish?              then label[:finish]
+    when save?                then label[:save_continue]
     else
       label[:next]
     end
@@ -131,5 +132,10 @@ private
   # @return [Training::Page, Training::Question, Training::Video]
   def next_item
     content.with_parent(mod).next_item
+  end
+
+  # @return [Boolean]
+  def formative_question?
+    content.formative_question?
   end
 end
