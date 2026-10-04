@@ -1172,7 +1172,7 @@ __metadata:
     accessible-autocomplete: "npm:3.0.1"
     dfe-frontend: "npm:2.0.1"
     esbuild: "npm:0.28.2"
-    govuk-frontend: "npm:6.4.0"
+    govuk-frontend: "npm:6.5.1"
     puppeteer: "npm:25.11.0"
     sass: "npm:1.102.0"
     stylelint: "npm:17.15.0"
@@ -1359,10 +1359,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"govuk-frontend@npm:6.4.0":
-  version: 6.4.0
-  resolution: "govuk-frontend@npm:6.4.0"
-  checksum: 10/e98a24d8e68626154775b5f84478ad12d144c1c4822d539faaf608bb3b60862d4786f6ac5f195893439b38bdb23c8177826768beb9cb793d8f8edb43e74a4e6f
+"govuk-frontend@npm:6.5.1":
+  version: 6.5.1
+  resolution: "govuk-frontend@npm:6.5.1"
+  checksum: 10/e428a9886b020c3816939df77d2c0c575bb853f64d061e43f040f93f572f63ef300c87fb3bcfa76020ea0f01070f160f0b57d1664b402a3c964c40420f8f8510
   languageName: node
   linkType: hard
 
