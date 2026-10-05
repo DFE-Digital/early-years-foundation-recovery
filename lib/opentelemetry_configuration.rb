@@ -2,19 +2,33 @@
 
 require 'opentelemetry/sdk'
 require 'opentelemetry/exporter/otlp'
+require 'opentelemetry-logs-sdk'
+require 'opentelemetry/exporter/otlp_logs'
 
 module OpenTelemetryConfiguration
   class << self
+    attr_reader :logger
+
     def configure!
       return unless enabled?
 
       configure_tracing
     end
 
+    def configure_logging!
+      return unless enabled?
+
+      configure_logging
+    end
+
+    def logs_enabled?
+      otlp_endpoint.length.positive?
+    end
+
     def trace_exporter_configs
       configs = []
 
-      if (endpoint = ENV['OTEL_EXPORTER_OTLP_ENDPOINT'].to_s.strip).length.positive?
+      if (endpoint = otlp_endpoint).length.positive?
         configs << { endpoint: endpoint, headers: headers_from_env('OTEL_EXPORTER_OTLP_HEADERS') }
       end
 
@@ -36,6 +50,15 @@ module OpenTelemetryConfiguration
 
     def service_name
       ENV.fetch('OTEL_SERVICE_NAME', 'rails-app-dev')
+    end
+
+    def otlp_endpoint
+      ENV['OTEL_EXPORTER_OTLP_ENDPOINT'].to_s.strip
+    end
+
+    def logs_endpoint
+      base_endpoint = otlp_endpoint.sub(%r{/*\z}, '').sub(%r{/v1/(?:traces|logs)\z}, '')
+      "#{base_endpoint}/v1/logs"
     end
 
     def configure_tracing
@@ -61,6 +84,22 @@ module OpenTelemetryConfiguration
         c.use 'OpenTelemetry::Instrumentation::Net::HTTP'
         c.use 'OpenTelemetry::Instrumentation::Rack', untraced_endpoints: ['/health']
       end
+    end
+
+    def configure_logging
+      return unless logs_enabled?
+
+      resource = OpenTelemetry::SDK::Resources::Resource.create('service.name' => service_name) # rubocop:disable Rails/SaveBang
+      provider = OpenTelemetry::SDK::Logs::LoggerProvider.new(resource: resource)
+      exporter = OpenTelemetry::Exporter::OTLP::Logs::LogsExporter.new(
+        endpoint: logs_endpoint,
+        headers: headers_from_env('OTEL_EXPORTER_OTLP_HEADERS'),
+      )
+      provider.add_log_record_processor(
+        OpenTelemetry::SDK::Logs::Export::BatchLogRecordProcessor.new(exporter),
+      )
+      @logger = provider.logger(name: 'rails')
+      at_exit { provider.shutdown }
     end
 
     def headers_from_env(env_key)
