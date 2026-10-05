@@ -47,10 +47,23 @@ RSpec.describe 'Learning log', type: :request do
   describe 'GET /my-account/learning-log/:module_name' do
     let(:selected_module) { Training::Module.live.first }
 
-    it 'shows an empty state for an unstarted module' do
+    it 'shows an empty state when there are no notes' do
       expect(selected_module).to be_present
       get module_notes_user_path(module_name: selected_module.name)
 
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include(
+        'You have not made any notes for this module.',
+      )
+    end
+
+    it 'shows an empty state when notes contain only whitespace' do
+      expect(selected_module).to be_present
+      create :note,
+             user: registered_user,
+             training_module: selected_module.name,
+             body: " \n \n"
+      get module_notes_user_path(module_name: selected_module.name)
       expect(response).to have_http_status(:ok)
       expect(response.body).to include(
         'You have not made any notes for this module.',
