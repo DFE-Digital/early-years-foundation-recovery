@@ -1,6 +1,6 @@
 .prompt {
   background-color: govuk-colour('light-grey');
-  border-top: govuk-colour('turquoise') solid govuk-spacing(2);
+  border-top: govuk-spacing(2) solid govuk-colour('teal');
   margin: govuk-spacing(5) govuk-spacing(0);
   padding: govuk-spacing(4);
   position: relative;
@@ -63,11 +63,11 @@
   }
 
   &.prompt-bg {
-    background-color: color.adjust(govuk-colour('turquoise'), $lightness: 50%);
+    background-color: govuk-colour('teal', $variant: 'tint-80');
   }
 
   &.prompt-home {
-    background: $light-blue;
+    background: govuk-colour('blue', $variant: 'tint-95');
     border-top: $color_dfe-secondary-blue solid govuk-spacing(2);
 
     .govuk-grid-column-one-quarter {
