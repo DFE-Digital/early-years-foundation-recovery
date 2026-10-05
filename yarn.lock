@@ -1174,7 +1174,7 @@ __metadata:
     esbuild: "npm:0.28.2"
     govuk-frontend: "npm:6.5.1"
     puppeteer: "npm:25.12.0"
-    sass: "npm:1.102.0"
+    sass: "npm:1.105.1"
     stylelint: "npm:17.15.0"
     stylelint-config-gds: "npm:3.0.0"
   languageName: unknown
