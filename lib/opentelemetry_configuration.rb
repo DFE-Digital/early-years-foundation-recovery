@@ -13,6 +13,11 @@ module OpenTelemetryConfiguration
       return unless enabled?
 
       configure_tracing
+    end
+
+    def configure_logging!
+      return unless enabled?
+
       configure_logging
     end
 

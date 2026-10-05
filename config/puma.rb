@@ -43,6 +43,7 @@ preload_app!
 plugin :tmp_restart
 
 on_worker_boot do
+  OpenTelemetryConfiguration.configure_logging!
   Sentry.capture_message "EYFS booting #{ENV['DOMAIN']}", level: :info
 end
 
