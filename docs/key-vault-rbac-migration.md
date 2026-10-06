@@ -2,26 +2,26 @@
 
 ## Current status
 
-- The proposed changes are preserved on `keyvault-misconfig-final` at commit
-  `0595cdb7`. The original Key Vault change is commit `431aee8c`.
+- The migration is being rebuilt safely on `keyvault-misconfig-final`. The
+  original one-step Key Vault change is preserved in commit `431aee8c`.
 - Staging uses the `s187-eyrecovery-test` subscription and the
   `s187t01-eyrecovery-kv` Key Vault.
 - The deployment identity currently has `Contributor` at subscription scope.
   This does not include `Microsoft.Authorization/roleAssignments/write`.
-- The failed deployment left the staging vault with
-  `enableRbacAuthorization` set to `false`.
+- Staging has been recovered and the vault has `enableRbacAuthorization` set to
+  `false`.
 - The undeclared-variable warnings are separate from the Key Vault failure. The
   workflow currently passes all GitHub environment variables and secrets to
   Terraform through auto-loaded variable files.
 
 ## Immediate recovery
 
-- [ ] Revert the Key Vault migration on `main` and deploy staging.
-- [ ] Confirm the two legacy Key Vault access policies have been restored:
+- [x] Revert the Key Vault migration on `main` and deploy staging.
+- [x] Confirm the legacy Key Vault access policies have been restored:
   - GitHub Actions can manage certificates and read secrets.
   - The Application Gateway managed identity can read the certificate secret.
-- [ ] Confirm the staging application and Application Gateway are healthy.
-- [ ] Confirm the current certificate is available and has not been replaced or
+- [x] Confirm the staging application and Application Gateway are healthy.
+- [x] Confirm the current certificate is available and has not been replaced or
   deleted.
 
 ## Required Azure permission
@@ -47,6 +47,22 @@ az role assignment create \
 - [ ] Confirm the grants with `az role assignment list` before running
   Terraform.
 
+## Deployment gate
+
+Do not deploy this branch until the staging permission grant above is confirmed.
+After the grant:
+
+1. Commit and push `keyvault-misconfig-final`.
+2. Run the Azure Terraform workflow for staging with `plan only`.
+3. Confirm the plan does not change `enableRbacAuthorization`, update the Key
+  Vault, or remove any access policy.
+4. Confirm the plan creates the six RBAC assignments and expected monitoring
+  resources only.
+5. Have another engineer review the plan before selecting `plan and apply`.
+
+Stop the deployment if the plan includes any permission-model change or access
+policy removal.
+
 ## Prepare a safe migration
 
 Do not switch the permission model and delete the existing access policies in
@@ -54,18 +70,20 @@ one apply. Prepare the migration as separate, reviewable phases.
 
 ### Phase 1: Add RBAC assignments
 
-- [ ] Branch from the reverted `main`, then bring forward the monitoring changes
+- [x] Branch from the reverted `main`, then bring forward the monitoring changes
   and the required RBAC resources from `keyvault-misconfig-final`.
-- [ ] Keep `enable_rbac_authorization` disabled.
-- [ ] Keep both existing `azurerm_key_vault_access_policy` resources.
-- [ ] Add the following Key Vault-scoped assignments:
+- [x] Keep `enable_rbac_authorization` disabled.
+- [x] Keep all three existing `azurerm_key_vault_access_policy` resources.
+- [x] Add the following Key Vault-scoped assignments:
   - GitHub Actions: `Key Vault Certificates Officer`.
   - GitHub Actions: `Key Vault Certificate User`.
   - GitHub Actions: `Key Vault Secrets User`.
   - Application Gateway managed identity: `Key Vault Secrets User`.
+  - App Service certificate principal: `Key Vault Certificate User`.
+  - App Service certificate principal: `Key Vault Secrets User`.
 - [ ] Run and review the staging Terraform plan. It must add role assignments
   without deleting access policies or changing the vault permission model.
-- [ ] Apply the plan and verify all four assignments in Azure.
+- [ ] Apply the plan and verify all six assignments in Azure.
 
 Role assignments can exist while the vault still uses access policies. They
 will take effect when Azure RBAC is enabled.
@@ -84,7 +102,7 @@ will take effect when Azure RBAC is enabled.
 
 ### Phase 3: Remove legacy policies
 
-- [ ] After staging has remained healthy, remove the two legacy access policy
+- [ ] After staging has remained healthy, remove the three legacy access policy
   resources. They are ignored by the vault after Azure RBAC is enabled.
 - [ ] Apply and validate staging again.
 - [ ] Repeat the same three phases for production. Do not combine them into one
