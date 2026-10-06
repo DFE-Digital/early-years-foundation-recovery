@@ -32,12 +32,18 @@ scope possible.
 For staging, an authorised administrator must run:
 
 ```bash
+DEPLOYMENT_IDENTITY_OBJECT_ID="..."
+KEY_VAULT_RESOURCE_ID="..."
+
 az role assignment create \
-  --assignee-object-id <deployment-identity-object-id> \
+  --assignee-object-id "$DEPLOYMENT_IDENTITY_OBJECT_ID" \
   --assignee-principal-type ServicePrincipal \
   --role "User Access Administrator" \
-  --scope <key-vault-resource-id>
+  --scope "$KEY_VAULT_RESOURCE_ID"
 ```
+
+Set these values in the administrator's shell; do not commit environment-specific
+Azure identifiers to the repository.
 
 - [ ] Grant the staging deployment identity `User Access Administrator` on the
   staging Key Vault.
