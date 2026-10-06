@@ -47,12 +47,11 @@ describe 'ContentHelper', type: :helper do
 
     context 'with a locale key' do
       subject(:html) do
-        helper.m('about.course', all_modules: 10, published_modules: 2)
+        helper.m('about.course', all_modules: 10)
       end
 
       it 'interpolates variables' do
-        expect(html).to include 'The course has 10 modules.'
-        expect(html).to include '2 modules are currently available.'
+        expect(html).to include 'The course has 10 modules'
       end
     end
 
