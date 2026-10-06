@@ -59,11 +59,9 @@ RSpec.describe ContentIntegrity do
       allow(Training::Module).to receive(:by_name).with('content-requirements').and_return(mod)
     end
 
-    describe '#video?' do
-      before { allow(mod).to receive(:video_pages).and_return([]) }
-
-      it 'does not require a video page' do
-        expect(integrity).to be_video
+    describe 'video requirement' do
+      it 'does not require a video validation' do
+        expect(described_class::CONTENT_VALIDATIONS).not_to have_key(:video)
       end
     end
 
