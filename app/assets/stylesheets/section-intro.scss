@@ -18,10 +18,14 @@
   }
 
   .section-intro-previous-button {
-    background-color: govuk-organisation-colour('department-for-education');
+    background-color: govuk-colour('blue');
 
-    &:hover, &:focus {
-      background-color: govuk-organisation-colour('department-for-education');
+    &:hover {
+      background-color: govuk-colour('blue', $variant: 'shade-25');
+    }
+
+    &:focus:not(:active):not(:hover) {
+      background-color: govuk-functional-colour('focus');
     }
   }
 
