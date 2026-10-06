@@ -26,9 +26,15 @@ RSpec.describe Training::NotesController, type: :controller do
     before { sign_in registered_user }
 
     describe 'GET #show' do
-      it 'succeeds' do
+      it 'redirects to the first live module' do
+        first_module = Training::Module.live.first
+        expect(first_module).to be_present
+
         get :show
-        expect(response).to have_http_status(:success)
+
+        expect(response).to redirect_to(
+          module_notes_user_path(module_name: first_module.name),
+        )
       end
     end
 

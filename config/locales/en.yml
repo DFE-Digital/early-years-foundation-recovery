@@ -597,23 +597,20 @@ en:
     hero: This training course will give you a thorough understanding of the most important aspects of child development in the early years.
     menu: Section menu
     course: |
-      The course has %{all_modules} modules.
-      %{published_modules} modules are currently available.
+      The course has %{all_modules} modules and the average completion time of each module is 2 hours.
 
-      Each module should take between 1 and 2 hours to complete.
+      You can:
 
-      You can pause and restart the training as much as you like.
-
-      Each module includes:
-
-      - opportunities to reflect on your learning and practice
-      - a learning log to make notes on your reflections
-      - practical tips and ideas to use in your setting
-      - learning check questions to test your understanding
-      - an end of module test
-      - the opportunity to download a personalised certificate of completion
-
-      Some modules also have short videos to enhance your understanding.
+      - start and pause the training at any point so you can complete each module at your own pace
+      - get practical ideas to use in your setting
+      - use the learning log to make notes of your reflections
+      - test your knowledge and reflect on your own practice
+      - watch videos filmed in real early years settings
+      - complete the modules in any order
+      - download a certificate of completion after each module
+      - access links to additional resources.
+      
+      All children develop at different paces. By understanding earlier stages of child development, it is possible to plan and meet the diverse needs of children in any setting.
     enrol: |
       ## Ready to get started?
 
@@ -740,10 +737,10 @@ en:
         ### Module contents
 
   notes:
+    heading: Learning log
+    menu: Section menu
     intro: |
-      # Your learning log
-
-      View your notes from all your modules here.
+      View your notes for this module.
       You can also use the links provided to revisit a specific topic.
 
   # /about/experts

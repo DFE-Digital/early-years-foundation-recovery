@@ -1,0 +1,6 @@
+= render 'shared/sidebar',
+  items: notes_sidebar_items(@training_modules),
+  active: @training_module.name,
+  menu_id: 'learning-log-menu',
+  menu_label: t('notes.menu'),
+  navigation_label: t('notes.heading')
