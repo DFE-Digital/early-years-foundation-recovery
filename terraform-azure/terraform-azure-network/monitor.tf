@@ -60,9 +60,7 @@ resource "azurerm_monitor_activity_log_alert" "kv_admin_changes_alert" {
   description         = "Alerts when the Key Vault's configuration, network rules or access control are changed"
 
   criteria {
-    resource_id    = azurerm_key_vault.kv[0].id
-    category       = "Administrative"
-    operation_name = "Microsoft.KeyVault/vaults/write"
+    category = "Administrative"
   }
 
   action {
