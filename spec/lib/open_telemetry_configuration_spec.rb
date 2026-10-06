@@ -11,6 +11,8 @@ RSpec.describe OpenTelemetryConfiguration do
         'SPLUNK_OTEL_EXPORTER_OTLP_HEADERS' => ENV['SPLUNK_OTEL_EXPORTER_OTLP_HEADERS'],
       }
 
+      original_values.each_key { |key| ENV.delete(key) }
+
       example.run
     ensure
       original_values&.each do |key, value|
