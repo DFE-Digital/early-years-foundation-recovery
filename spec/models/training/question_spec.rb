@@ -122,6 +122,12 @@ RSpec.describe Training::Question, type: :model do
     expect(question.correct_answers).to eq [1]
   end
 
+  describe '#formative_question_header' do
+    it 'returns true' do
+      expect(question.formative_question_header?).to be true
+    end
+  end
+
   it '#multi_select?' do
     expect(question.multi_select?).to be false
   end

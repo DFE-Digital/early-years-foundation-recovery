@@ -50,18 +50,6 @@ module ContentTypes
     page_type.eql?('formative')
   end
 
-  # @return [Boolean]
-  def formative_question_header?
-    page_type.eql?('formative') && description.nil?
-  end
-
-  # @return [Boolean]
-  def scenario_based_question?
-    # Use existing description field for content
-    # Standard learning check does not use a description
-    page_type.eql?('formative') && description.present?
-  end
-
   # ============================================================================
   # FINAL SECTION
   # ============================================================================
