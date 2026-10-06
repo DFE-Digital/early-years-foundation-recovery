@@ -20,7 +20,6 @@ class ContentIntegrity
   # @return [Hash{Symbol=>String}] valid as released module
   CONTENT_VALIDATIONS = {
     text: 'Missing text pages',
-    video: 'Missing video pages',
     assessment_intro: 'Missing assessment intro page',
     confidence_intro: 'Missing confidence intro page',
     recap: 'Missing recap page',
@@ -42,6 +41,8 @@ class ContentIntegrity
     pre_confidence: 'Insufficient pre_confidence questions',
     factual: 'Factual questions have sufficient options',
   }.freeze
+
+  MINIMUM_SUMMATIVE_QUESTIONS = 5
 
   # @return [nil]
   def call
@@ -193,7 +194,7 @@ class ContentIntegrity
 
   # @return [Boolean]
   def summative?
-    mod.summative_questions.count == 10
+    mod.summative_questions.count >= MINIMUM_SUMMATIVE_QUESTIONS
   end
 
   # @return [Boolean]

@@ -50,4 +50,35 @@ RSpec.describe ContentIntegrity do
       expect(integrity).to be_certificate
     end
   end
+
+  describe 'content requirements' do
+    let(:mod) { Training::Module.allocate }
+    let(:integrity) { described_class.new(module_name: 'content-requirements') }
+
+    before do
+      allow(Training::Module).to receive(:by_name).with('content-requirements').and_return(mod)
+    end
+
+    describe '#video?' do
+      before { allow(mod).to receive(:video_pages).and_return([]) }
+
+      it 'does not require a video page' do
+        expect(integrity).to be_video
+      end
+    end
+
+    describe '#summative?' do
+      it 'requires at least five summative questions' do
+        allow(mod).to receive(:summative_questions).and_return(Array.new(5))
+
+        expect(integrity).to be_summative
+      end
+
+      it 'rejects fewer than five summative questions' do
+        allow(mod).to receive(:summative_questions).and_return(Array.new(4))
+
+        expect(integrity).not_to be_summative
+      end
+    end
+  end
 end
