@@ -145,6 +145,12 @@ resource "azurerm_key_vault_certificate_issuer" "kv_ca" {
     last_name     = var.kv_certificate_authority_admin_last_name
     phone         = var.kv_certificate_authority_admin_phone_no
   }
+
+  depends_on = [
+    azurerm_role_assignment.kv_gh_certificates_officer,
+    azurerm_role_assignment.kv_gh_certificate_user,
+    azurerm_role_assignment.kv_gh_secret_user,
+  ]
 }
 
 resource "azurerm_key_vault_certificate" "kv_cert" {
@@ -187,4 +193,10 @@ resource "azurerm_key_vault_certificate" "kv_cert" {
       validity_in_months = 12
     }
   }
+
+  depends_on = [
+    azurerm_role_assignment.kv_gh_certificates_officer,
+    azurerm_role_assignment.kv_gh_certificate_user,
+    azurerm_role_assignment.kv_gh_secret_user,
+  ]
 }
