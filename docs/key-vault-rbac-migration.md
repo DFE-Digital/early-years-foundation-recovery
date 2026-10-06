@@ -4,8 +4,7 @@
 
 - The migration is being rebuilt safely on `keyvault-misconfig-final`. The
   original one-step Key Vault change is preserved in commit `431aee8c`.
-- Staging uses the `s187-eyrecovery-test` subscription and the
-  `s187t01-eyrecovery-kv` Key Vault.
+- The migration will be validated in staging before production.
 - The deployment identity currently has `Contributor` at subscription scope.
   This does not include `Microsoft.Authorization/roleAssignments/write`.
 - Staging has been recovered and the vault has `enableRbacAuthorization` set to
@@ -34,10 +33,10 @@ For staging, an authorised administrator must run:
 
 ```bash
 az role assignment create \
-  --assignee-object-id 72b0605a-56ae-4fdb-a29f-9744a510e53d \
+  --assignee-object-id <deployment-identity-object-id> \
   --assignee-principal-type ServicePrincipal \
   --role "User Access Administrator" \
-  --scope "/subscriptions/192fdb22-10a0-4602-a72f-592069bf1ddc/resourceGroups/s187t01-eyrecovery-rg/providers/Microsoft.KeyVault/vaults/s187t01-eyrecovery-kv"
+  --scope <key-vault-resource-id>
 ```
 
 - [ ] Grant the staging deployment identity `User Access Administrator` on the
@@ -116,8 +115,8 @@ After each apply:
 
   ```bash
   az keyvault show \
-    --name s187t01-eyrecovery-kv \
-    --subscription 192fdb22-10a0-4602-a72f-592069bf1ddc \
+    --name <key-vault-name> \
+    --subscription <subscription-id> \
     --query properties.enableRbacAuthorization
   ```
 
