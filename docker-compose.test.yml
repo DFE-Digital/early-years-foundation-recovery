@@ -13,5 +13,8 @@ services:
       - CONTENTFUL_MANAGEMENT_TOKEN=
       - DEBUG=false
       - BOT_TOKEN=bot_token
+      - OTEL_EXPORTER_OTLP_ENDPOINT=
+      - SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT=
+      - SPLUNK_OTEL_EXPORTER_OTLP_HEADERS=
     tty: true
     stdin_open: true
