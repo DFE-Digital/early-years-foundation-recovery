@@ -2,7 +2,7 @@
 
 #interrupt-panel {
   padding: govuk-spacing(7);
-  background: color.adjust(govuk-colour('blue'), $lightness: -3%);
+  background: govuk-colour('blue', $variant: 'shade-10');
 
   * {
     color: govuk-colour('white') !important;
