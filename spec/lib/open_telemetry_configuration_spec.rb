@@ -13,7 +13,7 @@ RSpec.describe OpenTelemetryConfiguration do
 
       example.run
     ensure
-      original_values.each do |key, value|
+      original_values&.each do |key, value|
         if value.nil?
           ENV.delete(key)
         else
