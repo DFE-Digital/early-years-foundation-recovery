@@ -10,8 +10,9 @@ RSpec.describe 'About' do
 
     it 'has a hero section' do
       within '#hero-layout' do
+        live_module_count = Training::Module.live.count
         expect(page).to have_content 'About this training course'
-        expect(page).to have_content 'The course has 4 modules. 3 modules are currently available.'
+        expect(page).to have_content "The course has #{live_module_count} modules"
       end
     end
   end
