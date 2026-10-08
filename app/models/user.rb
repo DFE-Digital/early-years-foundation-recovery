@@ -147,6 +147,25 @@ class User < ApplicationRecord
   scope :with_module_start_events, -> { with_events.merge(Event.module_start) }
   scope :not_started_training, -> { where.not(id: with_started_modules).where.not(id: with_module_start_events) }
   scope :with_module_in_progress, -> { where(id: with_module_progress.merge(UserModuleProgress.in_progress)) }
+  scope :last_module_progress_two_weeks_ago, lambda {
+    target_day = 2.weeks.ago.all_day
+
+    where(
+      id: UserModuleProgress
+        .group(:user_id)
+        .having(
+          'MAX(updated_at) BETWEEN ? AND ?',
+          target_day.begin,
+          target_day.end,
+        )
+        .select(:user_id),
+    )
+  }
+
+  scope :no_module_progress_two_weeks_after_signup, lambda {
+    where(created_at: 2.weeks.ago.all_day)
+      .where.not(id: UserModuleProgress.select(:user_id))
+  }
 
   # visits
   scope :with_visits, -> { joins(:visits) }
@@ -169,6 +188,16 @@ class User < ApplicationRecord
       .distinct
   }
   scope :continue_training_mail_job_recipients, -> { training_email_recipients.last_visit_1_week_ago.with_module_in_progress.distinct }
+  scope :drop_off_survey_mail_job_recipients, lambda {
+    eligible_users = last_module_progress_two_weeks_ago
+      .or(no_module_progress_two_weeks_after_signup)
+
+    training_email_recipients
+      .merge(eligible_users)
+      .where.not(id: with_drop_off_survey_mail_events)
+      .where.not(id: Job.drop_off_survey_mail.map(&:mail_user_id))
+      .distinct
+  }
 
   # @note
   #
@@ -198,6 +227,11 @@ class User < ApplicationRecord
       .distinct
   }
   scope :with_start_training_mail_events, -> { with_mail_events.where(mail_events: { template: StartTrainingMailJob.template_id }).distinct }
+  scope :with_drop_off_survey_mail_events, lambda {
+    with_mail_events
+      .where(mail_events: { template: NotifyMailer::TEMPLATE_IDS[:drop_off_survey] })
+      .distinct
+  }
 
   scope :email_status, lambda { |status|
     training_email_recipients.where('notify_callback @> ?', { notification_type: 'email', status: status }.to_json).distinct
@@ -503,6 +537,25 @@ class User < ApplicationRecord
   def completed_available_modules?
     available_modules = ModuleRelease.pluck(:name)
     available_modules.all? { |mod_name| module_completed?(mod_name) }
+  end
+
+  # @return [Boolean]
+  def completed_modules_available_at_last_progress?
+    last_progress_at = user_module_progress.maximum(:updated_at)
+    return false unless last_progress_at
+
+    available_module_names = ModuleRelease
+      .where(first_published_at: ..last_progress_at)
+      .pluck(:name)
+
+    return false if available_module_names.empty?
+
+    completed_module_names = user_module_progress
+      .completed
+      .where(completed_at: ..last_progress_at)
+      .pluck(:module_name)
+
+    (available_module_names - completed_module_names).empty?
   end
 
   # @return [Boolean]

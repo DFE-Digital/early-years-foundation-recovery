@@ -10,6 +10,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
     new_module: '2352b6ce-a098-47f0-870a-286308b9798f',
     start_training: 'b3c2e4ff-da06-4672-8941-b2f50d37eadc',
     test_bulk: '7c5fa953-4208-4bc4-919a-4ede23db65c1',
+    drop_off_survey: '7d704649-ce63-4761-9175-7da69f418ba5',
   }.freeze
 
   # @param user [User]
@@ -65,6 +66,13 @@ class NotifyMailer < GovukNotifyRails::Mailer
     set_personalisation(
       url: root_url(**utm_params(:start_training)),
     )
+    mail(to: user.email)
+  end
+
+  # @param user [User]
+  # @return [Mail::Message]
+  def drop_off_survey(user)
+    set_template TEMPLATE_IDS[:drop_off_survey]
     mail(to: user.email)
   end
 
