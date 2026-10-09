@@ -66,6 +66,18 @@ module Training
       feedback_question? && other.present?
     end
 
+    # @return [Boolean]
+    def formative_question_header?
+      formative_question? && description.nil?
+    end
+
+    # @return [Boolean]
+    def scenario_based_question?
+      # Use existing description field for content
+      # Standard learning check does not use a description
+      formative_question? && description.present?
+    end
+
     # Additional "Or" option is appended and given index zero
     #
     # @return [Boolean]
