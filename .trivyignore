@@ -13,3 +13,8 @@ CVE-2026-41316
 # CVE-2026-45363: ruby-jwt empty-key HMAC bypass (fixed in 3.2.0).
 CVE-2026-45363
 
+# Collector embeds vulnerable Go stdlib; awaiting an upstream fix.
+# Remove after upgrading to a Collector built with Go 1.26.9 / 1.27.2 or later patched Go.
+# Latest available otel/opentelemetry-collector-contrib:0.162.0 still has the vulnerable v1.26.8 stdlib
+CVE-2026-78667
+CVE-2026-97031
