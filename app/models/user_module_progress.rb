@@ -9,6 +9,16 @@ class UserModuleProgress < ApplicationRecord
   scope :started, -> { where.not(started_at: nil) }
   scope :completed, -> { where.not(completed_at: nil) }
   scope :in_progress, -> { started.where(completed_at: nil) }
+  scope :last_activity_two_weeks_ago, lambda {
+    target_day = 2.weeks.ago.all_day
+
+    where(updated_at: target_day)
+      .where.not(
+        user_id: UserModuleProgress
+          .where('updated_at > ?', target_day.end)
+          .select(:user_id),
+      )
+  }
 
   # @return [Integer, nil] seconds taken to complete, nil if not completed
   def time_to_completion

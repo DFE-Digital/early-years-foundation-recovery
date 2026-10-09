@@ -147,20 +147,7 @@ class User < ApplicationRecord
   scope :with_module_start_events, -> { with_events.merge(Event.module_start) }
   scope :not_started_training, -> { where.not(id: with_started_modules).where.not(id: with_module_start_events) }
   scope :with_module_in_progress, -> { where(id: with_module_progress.merge(UserModuleProgress.in_progress)) }
-  scope :last_module_progress_two_weeks_ago, lambda {
-    target_day = 2.weeks.ago.all_day
-
-    where(
-      id: UserModuleProgress
-        .group(:user_id)
-        .having(
-          'MAX(updated_at) BETWEEN ? AND ?',
-          target_day.begin,
-          target_day.end,
-        )
-        .select(:user_id),
-    )
-  }
+  scope :last_module_progress_two_weeks_ago, -> { where(id: UserModuleProgress.last_activity_two_weeks_ago.select(:user_id)) }
 
   scope :no_module_progress_two_weeks_after_signup, lambda {
     where(created_at: 2.weeks.ago.all_day)
