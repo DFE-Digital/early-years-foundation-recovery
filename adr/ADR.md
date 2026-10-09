@@ -36,6 +36,7 @@ This log lists the architectural decisions for EYFS Recovery
 * [ADR-0027](0027-start-training-reminder-timing.md) - Reduce start training reminder delay to one week
 * [ADR-0028](0028-content-security-policy-hardening.md) - Harden Content Security Policy and Introduce Controlled Rollout Mode
 * [ADR-0029](0029-asset-pipeline-static-paths.md) - Serve govuk-frontend and Font Awesome assets statically and disable runtime asset compilation
+* [ADR-0031](0031-key-vault-rbac-migration.md) - Migrate Azure Key Vault authorization to RBAC in phases
 
 <!-- adrlogstop -->
 

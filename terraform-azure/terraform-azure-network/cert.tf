@@ -80,6 +80,55 @@ resource "azurerm_key_vault_access_policy" "kv_mi_ap" {
   ]
 }
 
+# Pre-stage RBAC assignments before switching the Key Vault permission model.
+resource "azurerm_role_assignment" "kv_gh_certificates_officer" {
+  # Key Vault only deployed to the Test and Production subscription
+  count = var.environment != "development" ? 1 : 0
+
+  scope                = azurerm_key_vault.kv[0].id
+  role_definition_name = "Key Vault Certificates Officer"
+  principal_id         = data.azurerm_client_config.az_config.object_id
+
+  lifecycle {
+    ignore_changes = [principal_id]
+  }
+}
+
+resource "azurerm_role_assignment" "kv_gh_certificate_user" {
+  # Key Vault only deployed to the Test and Production subscription
+  count = var.environment != "development" ? 1 : 0
+
+  scope                = azurerm_key_vault.kv[0].id
+  role_definition_name = "Key Vault Certificate User"
+  principal_id         = data.azurerm_client_config.az_config.object_id
+
+  lifecycle {
+    ignore_changes = [principal_id]
+  }
+}
+
+resource "azurerm_role_assignment" "kv_gh_secret_user" {
+  # Key Vault only deployed to the Test and Production subscription
+  count = var.environment != "development" ? 1 : 0
+
+  scope                = azurerm_key_vault.kv[0].id
+  role_definition_name = "Key Vault Secrets User"
+  principal_id         = data.azurerm_client_config.az_config.object_id
+
+  lifecycle {
+    ignore_changes = [principal_id]
+  }
+}
+
+resource "azurerm_role_assignment" "kv_mi_secret_user" {
+  # Key Vault only deployed to the Test and Production subscription
+  count = var.environment != "development" ? 1 : 0
+
+  scope                = azurerm_key_vault.kv[0].id
+  role_definition_name = "Key Vault Secrets User"
+  principal_id         = azurerm_user_assigned_identity.kv_mi[0].principal_id
+}
+
 resource "azurerm_key_vault_certificate_issuer" "kv_ca" {
   # Key Vault only deployed to the Test and Production subscription
   count = var.environment != "development" ? 1 : 0
@@ -96,6 +145,12 @@ resource "azurerm_key_vault_certificate_issuer" "kv_ca" {
     last_name     = var.kv_certificate_authority_admin_last_name
     phone         = var.kv_certificate_authority_admin_phone_no
   }
+
+  depends_on = [
+    azurerm_role_assignment.kv_gh_certificates_officer,
+    azurerm_role_assignment.kv_gh_certificate_user,
+    azurerm_role_assignment.kv_gh_secret_user,
+  ]
 }
 
 resource "azurerm_key_vault_certificate" "kv_cert" {
@@ -138,4 +193,10 @@ resource "azurerm_key_vault_certificate" "kv_cert" {
       validity_in_months = 12
     }
   }
+
+  depends_on = [
+    azurerm_role_assignment.kv_gh_certificates_officer,
+    azurerm_role_assignment.kv_gh_certificate_user,
+    azurerm_role_assignment.kv_gh_secret_user,
+  ]
 }
