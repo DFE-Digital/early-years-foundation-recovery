@@ -50,6 +50,11 @@ module ContentTypes
     page_type.eql?('formative')
   end
 
+  # @return [Boolean]
+  def scenario_based_question?
+    page_type.eql?('formative') && description.present?
+  end
+
   # ============================================================================
   # FINAL SECTION
   # ============================================================================

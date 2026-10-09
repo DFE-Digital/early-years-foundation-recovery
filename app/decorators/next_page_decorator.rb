@@ -34,15 +34,16 @@ class NextPageDecorator
   # @return [String]
   def text
     case
-    when next?                then label[:next]
-    when formative_question?  then label[:check_answer]
-    when missing?             then label[:missing]
-    when content_section?     then label[:section]
-    when confidence_outro?    then label[:give_feedback]
-    when test_start?          then label[:start_test]
-    when test_finish?         then label[:finish_test]
-    when finish?              then label[:finish]
-    when save?                then label[:save_continue]
+    when next?                           then label[:next]
+    when show_next_question_button_text? then label[:next_question]
+    when formative_question?             then label[:check_answer]
+    when missing?                        then label[:missing]
+    when content_section?                then label[:section]
+    when confidence_outro?               then label[:give_feedback]
+    when test_start?                     then label[:start_test]
+    when test_finish?                    then label[:finish_test]
+    when finish?                         then label[:finish]
+    when save?                           then label[:save_continue]
     else
       label[:next]
     end
@@ -61,6 +62,21 @@ class NextPageDecorator
 
 private
 
+  # @return [Boolean]
+  def show_next_question_button_text?
+    content.scenario_based_question? && next_scenario_based_question?
+  end
+
+  # @return [Boolean]
+  def next_scenario_based_question?
+    next_question_is_scenario_based? && answered?
+  end
+
+  # @return [Boolean]
+  def next_question_is_scenario_based?
+    content.next_item.formative_question? && content.description.present?
+  end
+
   # @return [Hash=>Symbol]
   def label
     I18n.t(:next_page)
@@ -68,7 +84,7 @@ private
 
   # @return [Boolean]
   def next?
-    content.interruption_page? || disable_question_submission?
+    content.interruption_page? || (disable_question_submission? && !next_question_is_scenario_based?)
   end
 
   # @return [Boolean]
