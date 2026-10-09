@@ -20,7 +20,6 @@ class ContentIntegrity
   # @return [Hash{Symbol=>String}] valid as released module
   CONTENT_VALIDATIONS = {
     text: 'Missing text pages',
-    video: 'Missing video pages',
     assessment_intro: 'Missing assessment intro page',
     confidence_intro: 'Missing confidence intro page',
     recap: 'Missing recap page',
@@ -42,6 +41,8 @@ class ContentIntegrity
     pre_confidence: 'Insufficient pre_confidence questions',
     factual: 'Factual questions have sufficient options',
   }.freeze
+
+  MINIMUM_SUMMATIVE_QUESTIONS = 5
 
   # @return [nil]
   def call
@@ -120,38 +121,32 @@ class ContentIntegrity
 
   # CONTENT VALIDATIONS --------------------------------------------------------
 
-  # @return [Boolean] first page
+  # @return [Boolean]
   def interruption?
-    page_by_type_position(type: 'interruption_page', position: 0)
+    page_by_type_position(type: 'interruption_page')
   end
 
-  # @return [Boolean] second page
+  # @return [Boolean]
   def submodule?
-    if pre_confidence_position?
-      page_by_type_position(type: 'text_page', position: 1)
-    else
-      page_by_type_position(type: 'sub_module_intro', position: 1)
-    end
+    page_by_type_position(type: 'sub_module_intro') ||
+      (pre_confidence_position? && page_by_type_position(type: 'text_page'))
   end
 
-  # @return [Boolean] third page
+  # @return [Boolean]
   def topic?
-    if pre_confidence_position?
-      page_by_type_position(type: 'pre_confidence', position: 2) && (mod.topic_count >= mod.submodule_count)
-    else
-      page_by_type_position(type: 'topic_intro', position: 2) &&
-        (mod.topic_count >= mod.submodule_count)
-    end
+    (page_by_type_position(type: 'topic_intro') ||
+      (pre_confidence_position? && page_by_type_position(type: 'pre_confidence'))) &&
+      (mod.topic_count >= mod.submodule_count)
   end
 
-  # @return [Boolean] penultimate page
+  # @return [Boolean]
   def thankyou?
-    page_by_type_position(type: 'thankyou', position: -2)
+    page_by_type_position(type: 'thankyou')
   end
 
-  # @return [Boolean] last page
+  # @return [Boolean]
   def certificate?
-    page_by_type_position(type: 'certificate', position: -1)
+    page_by_type_position(type: 'certificate')
   end
 
   # @return [Boolean]
@@ -199,7 +194,7 @@ class ContentIntegrity
 
   # @return [Boolean]
   def summative?
-    mod.summative_questions.count == 10
+    mod.summative_questions.count >= MINIMUM_SUMMATIVE_QUESTIONS
   end
 
   # @return [Boolean]
