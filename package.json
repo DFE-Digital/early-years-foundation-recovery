@@ -35,7 +35,7 @@
     "sass": "1.105.1"
   },
   "devDependencies": {
-    "stylelint": "17.15.0",
+    "stylelint": "17.16.0",
     "stylelint-config-gds": "3.0.0"
   },
   "stylelint": {
