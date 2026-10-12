@@ -68,7 +68,7 @@ module Training
 
     # @return [Boolean]
     def formative_question_header?
-      formative_question? && description.nil?
+      formative_question? && description.blank?
     end
 
     # @return [Boolean]
