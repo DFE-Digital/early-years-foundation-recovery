@@ -101,6 +101,7 @@ en:
     finish: View certificate
     give_feedback: Give feedback
     check_answer: Check answer
+    next_question: Next question
 
   previous_page:
     previous: Previous

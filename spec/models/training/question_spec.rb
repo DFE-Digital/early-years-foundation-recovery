@@ -7,6 +7,8 @@ RSpec.describe Training::Question, type: :model do
     described_class.find_by(name: '1-1-4-1').first
   end
 
+  let(:scenario_based_question) { described_class.find_by(name: 'sf-q-2').first }
+
   describe 'published content (stubbed preview)' do
     let(:parent_module) { double('Training::Module', id: '6EczqUOpieKis8imYPc6mG', name: 'alpha') }
     let(:question) { build(:question, parent_id: parent_module.id) }
@@ -120,6 +122,26 @@ RSpec.describe Training::Question, type: :model do
 
   it '#correct_answers' do
     expect(question.correct_answers).to eq [1]
+  end
+
+  describe '#formative_question_header?' do
+    it 'returns true for a formative question' do
+      expect(question.formative_question_header?).to be true
+    end
+
+    it 'returns false for a scenario-based question' do
+      expect(scenario_based_question.formative_question_header?).to be false
+    end
+  end
+
+  describe '#scenario_based_question?' do
+    it 'returns true for a scenario-based question' do
+      expect(scenario_based_question.scenario_based_question?).to be true
+    end
+
+    it 'returns false for a formative question' do
+      expect(question.scenario_based_question?).to be false
+    end
   end
 
   it '#multi_select?' do
