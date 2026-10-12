@@ -84,7 +84,7 @@ private
 
   # @return [Boolean]
   def next?
-    content.interruption_page? || (disable_question_submission? && !next_question_is_scenario_based?)
+    content.interruption_page? || (disable_question_submission? && !show_next_question_button_text?)
   end
 
   # @return [Boolean]
