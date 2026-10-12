@@ -341,6 +341,117 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe '.drop_off_survey_mail_job_recipients' do
+    subject(:recipients) { described_class.drop_off_survey_mail_job_recipients }
+
+    let(:user) do
+      create :user, :registered,
+             created_at: 1.month.ago,
+             training_emails: true
+    end
+
+    before do
+      travel_to Time.zone.local(2026, 10, 8, 12)
+    end
+
+    after do
+      travel_back
+    end
+
+    context 'without progress records' do
+      it 'includes an account created exactly two weeks ago' do
+        user.update!(created_at: 2.weeks.ago)
+
+        expect(recipients).to include(user)
+      end
+
+      it 'excludes a newer account' do
+        user.update!(created_at: 13.days.ago)
+
+        expect(recipients).not_to include(user)
+      end
+
+      it 'excludes an older account' do
+        user.update!(created_at: 15.days.ago)
+
+        expect(recipients).not_to include(user)
+      end
+    end
+
+    context 'with module progress' do
+      before do
+        create :user_module_progress,
+               user: user,
+               started_at: 3.weeks.ago,
+               updated_at: 2.weeks.ago
+      end
+
+      it 'includes activity from exactly two weeks ago' do
+        expect(recipients).to include(user)
+      end
+
+      it 'excludes more recent activity in another module' do
+        create :user_module_progress,
+               user: user,
+               module_name: 'beta',
+               started_at: 1.week.ago,
+               updated_at: 1.week.ago
+
+        expect(recipients).not_to include(user)
+      end
+
+      it 'excludes activity older than two weeks' do
+        user.user_module_progress.first.update!(updated_at: 15.days.ago)
+
+        expect(recipients).not_to include(user)
+      end
+
+      it 'includes users with no email preference set' do
+        user.update!(training_emails: nil)
+
+        expect(recipients).to include(user)
+      end
+
+      it 'excludes users who opted out' do
+        user.update!(training_emails: false)
+
+        expect(recipients).not_to include(user)
+      end
+
+      it 'excludes previous survey recipients' do
+        create :mail_event,
+               user: user,
+               template: NotifyMailer::TEMPLATE_IDS[:drop_off_survey]
+
+        expect(recipients).not_to include(user)
+      end
+
+      it 'excludes users with a queued survey email' do
+        create :job,
+               job_class: 'ActionMailer::MailDeliveryJob',
+               args: [
+                 {
+                   arguments: [
+                     'NotifyMailer',
+                     'drop_off_survey',
+                     'deliver_now',
+                     {
+                       args: [
+                         {
+                           '_aj_globalid' =>
+                             "gid://early-years-foundation-recovery/User/#{user.id}",
+                         },
+                       ],
+                     },
+                   ],
+                 },
+               ]
+
+        expect(recipients).not_to include(user)
+      end
+    end
+  end
+
   describe 'learning log' do
     subject(:user) { create(:user, :registered) }
 
