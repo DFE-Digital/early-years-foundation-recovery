@@ -74,7 +74,7 @@ private
 
   # @return [Boolean]
   def next_question_is_scenario_based?
-    content.next_item.formative_question? && content.description.present?
+    content.next_item.formative_question? && content.next_item.description.present?
   end
 
   # @return [Hash=>Symbol]
