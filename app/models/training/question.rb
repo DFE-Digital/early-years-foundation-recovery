@@ -155,7 +155,7 @@ module Training
 
     # @return [String, nil]
     def description
-      fields[:description] if confidence_question?
+      fields[:description] if confidence_question? || formative_question?
     end
 
     # @return [String]
