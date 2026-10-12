@@ -18,3 +18,4 @@ CVE-2026-45363
 # Latest available otel/opentelemetry-collector-contrib:0.162.0 still has the vulnerable v1.26.8 stdlib
 CVE-2026-78667
 CVE-2026-97031
+CVE-2026-78669
