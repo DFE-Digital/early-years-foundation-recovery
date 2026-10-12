@@ -7,6 +7,7 @@ Que::Scheduler.configure do |config|
     CompleteRegistrationMailJob: { cron: Rails.application.config.mail_job_interval },
     StartTrainingMailJob: { cron: Rails.application.config.mail_job_interval },
     ContinueTrainingMailJob: { cron: Rails.application.config.mail_job_interval },
+    DropOffSurveyMailJob: { cron: Rails.application.config.mail_job_interval },
   }
 end
 
