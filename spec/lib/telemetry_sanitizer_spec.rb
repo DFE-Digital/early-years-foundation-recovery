@@ -20,6 +20,14 @@ RSpec.describe TelemetrySanitizer do
     )
   end
 
+  it 'redacts quoted hash-formatted authentication headers' do
+    message = '{"Authorization"=>"Bearer QZX", "Cookie"=>"session=abc"}'
+
+    expect(described_class.sanitize(message)).to eq(
+      '{"Authorization"=>[FILTERED], "Cookie"=>[FILTERED]}',
+    )
+  end
+
   it 'redacts before truncating and preserves valid UTF-8' do
     message = "#{'a' * 8_180} email=user@example.com €"
     sanitized = described_class.sanitize(message)

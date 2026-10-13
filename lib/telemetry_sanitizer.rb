@@ -3,7 +3,7 @@
 module TelemetrySanitizer
   MAX_MESSAGE_BYTES = 8_192
   SENSITIVE_HEADER = %r{
-    \b(authorization|proxy-authorization|cookie|set-cookie)
+    (["']?)\b(authorization|proxy-authorization|cookie|set-cookie)\1
     (\s*(?:=>|=|:)\s*)
     (?:"[^"]*"|'[^']*'|[^\r\n]+)
   }ix
@@ -26,7 +26,7 @@ module TelemetrySanitizer
     value
       .to_s
       .scrub('')
-      .gsub(SENSITIVE_HEADER, '\1\2[FILTERED]')
+      .gsub(SENSITIVE_HEADER, '\1\2\1\3[FILTERED]')
       .gsub(SENSITIVE_ASSIGNMENT, '\1\2\1\3[FILTERED]')
       .gsub(EMAIL_ADDRESS, '[FILTERED]')
       .gsub(IP_ADDRESS, '[FILTERED]')

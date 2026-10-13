@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'active_support/core_ext/enumerable'
 require_relative '../../lib/opentelemetry_configuration'
 
 RSpec.describe OpenTelemetryConfiguration do
@@ -10,8 +11,6 @@ RSpec.describe OpenTelemetryConfiguration do
         'SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT' => ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'],
         'SPLUNK_OTEL_EXPORTER_OTLP_HEADERS' => ENV['SPLUNK_OTEL_EXPORTER_OTLP_HEADERS'],
       }
-      original_values.each_key { |key| ENV.delete(key) }
-
       original_values.each_key { |key| ENV.delete(key) }
 
       example.run
@@ -47,10 +46,12 @@ RSpec.describe OpenTelemetryConfiguration do
 
   describe '.logs_enabled?' do
     around do |example|
-      original_endpoint = ENV['OTEL_EXPORTER_OTLP_ENDPOINT']
+      original_values = %w[OTEL_EXPORTER_OTLP_ENDPOINT SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT].index_with { |key| ENV[key] }
       example.run
     ensure
-      ENV['OTEL_EXPORTER_OTLP_ENDPOINT'] = original_endpoint
+      original_values.each do |key, value|
+        value.nil? ? ENV.delete(key) : ENV[key] = value
+      end
     end
 
     it 'is enabled when the local collector endpoint is configured' do
@@ -63,6 +64,96 @@ RSpec.describe OpenTelemetryConfiguration do
       ENV.delete('OTEL_EXPORTER_OTLP_ENDPOINT')
 
       expect(described_class.logs_enabled?).to be(false)
+    end
+
+    it 'is enabled with a direct Splunk endpoint' do
+      ENV.delete('OTEL_EXPORTER_OTLP_ENDPOINT')
+      ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'] = 'https://ingest.eu2.observability.splunkcloud.com/v2/trace/otlp'
+
+      expect(described_class.logs_enabled?).to be(true)
+    end
+  end
+
+  describe '.logs_exporter_configs' do
+    around do |example|
+      original_values = %w[
+        OTEL_EXPORTER_OTLP_ENDPOINT
+        OTEL_EXPORTER_OTLP_HEADERS
+        SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT
+        SPLUNK_OTEL_EXPORTER_OTLP_HEADERS
+      ].index_with { |key| ENV[key] }
+      original_values.each_key { |key| ENV.delete(key) }
+
+      example.run
+    ensure
+      original_values.each do |key, value|
+        value.nil? ? ENV.delete(key) : ENV[key] = value
+      end
+    end
+
+    it 'configures a Splunk logs endpoint with Splunk authentication headers' do
+      ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'] = 'https://ingest.eu2.observability.splunkcloud.com/v2/trace/otlp'
+      ENV['SPLUNK_OTEL_EXPORTER_OTLP_HEADERS'] = 'X-SF-Token=test-token'
+
+      expect(described_class.send(:logs_exporter_configs)).to eq([
+        {
+          endpoint: 'https://ingest.eu2.observability.splunkcloud.com/v1/log',
+          headers: { 'X-SF-Token' => 'test-token' },
+        },
+      ])
+    end
+  end
+
+  describe '.configure_logging!' do
+    around do |example|
+      original_values = {}
+      instance_variables = %i[@logger @logger_process_id @logging_process_id @logging_mutex]
+      original_values = instance_variables.index_with do |name|
+        described_class.instance_variable_get(name)
+      end
+      example.run
+    ensure
+      original_values.each do |name, value|
+        described_class.instance_variable_set(name, value)
+      end
+    end
+
+    it 'initializes the logger once when called concurrently' do
+      telemetry_logger = Object.new
+      calls = 0
+      calls_mutex = Mutex.new
+      allow(described_class).to receive(:enabled?).and_return(true)
+      allow(described_class).to receive(:configure_logging) do
+        calls_mutex.synchronize do
+          calls += 1
+          described_class.instance_variable_set(:@logger, telemetry_logger)
+          described_class.instance_variable_set(:@logger_process_id, Process.pid)
+        end
+      end
+
+      threads = Array.new(8) { Thread.new { described_class.configure_logging! } }
+      threads.each(&:value)
+
+      expect(calls).to eq(1)
+      expect(described_class.logger).to equal(telemetry_logger)
+    end
+
+    it 'reinitializes a logger inherited across a fork' do
+      inherited_logger = Object.new
+      worker_logger = Object.new
+      parent_process_id = Process.pid - 1
+      described_class.instance_variable_set(:@logging_process_id, parent_process_id)
+      described_class.instance_variable_set(:@logger_process_id, parent_process_id)
+      described_class.instance_variable_set(:@logger, inherited_logger)
+      allow(described_class).to receive(:enabled?).and_return(true)
+      allow(described_class).to receive(:configure_logging) do
+        described_class.instance_variable_set(:@logger, worker_logger)
+        described_class.instance_variable_set(:@logger_process_id, Process.pid)
+      end
+
+      described_class.configure_logging!
+
+      expect(described_class.logger).to equal(worker_logger)
     end
   end
 

@@ -4,10 +4,16 @@ require 'opentelemetry/sdk'
 require 'opentelemetry/exporter/otlp'
 require 'opentelemetry-logs-sdk'
 require 'opentelemetry/exporter/otlp_logs'
+require 'uri'
 
 module OpenTelemetryConfiguration
+  @logging_mutex = Mutex.new
+  @logging_process_id = Process.pid
+
   class << self
-    attr_reader :logger
+    def logger
+      @logger if @logger_process_id == Process.pid
+    end
 
     def configure!
       return unless enabled?
@@ -18,11 +24,16 @@ module OpenTelemetryConfiguration
     def configure_logging!
       return unless enabled?
 
-      configure_logging
+      reset_logging_state_after_fork
+      @logging_mutex.synchronize do
+        return @logger if @logger && @logger_process_id == Process.pid
+
+        configure_logging
+      end
     end
 
     def logs_enabled?
-      otlp_endpoint.length.positive?
+      logs_exporter_configs.any?
     end
 
     def trace_exporter_configs
@@ -61,6 +72,29 @@ module OpenTelemetryConfiguration
       "#{base_endpoint}/v1/logs"
     end
 
+    def logs_exporter_configs
+      configs = []
+
+      if otlp_endpoint.length.positive?
+        configs << { endpoint: logs_endpoint, headers: headers_from_env('OTEL_EXPORTER_OTLP_HEADERS') }
+      end
+
+      if (splunk_endpoint = ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'].to_s.strip).length.positive?
+        configs << {
+          endpoint: splunk_logs_endpoint(splunk_endpoint),
+          headers: headers_from_env('SPLUNK_OTEL_EXPORTER_OTLP_HEADERS'),
+        }
+      end
+
+      configs
+    end
+
+    def splunk_logs_endpoint(endpoint)
+      uri = URI.parse(endpoint)
+      uri.path = '/v1/log'
+      uri.to_s
+    end
+
     def configure_tracing
       exporter_configs = trace_exporter_configs
       return if exporter_configs.empty?
@@ -87,19 +121,34 @@ module OpenTelemetryConfiguration
     end
 
     def configure_logging
-      return unless logs_enabled?
+      exporter_configs = logs_exporter_configs
+      return if exporter_configs.empty?
 
       resource = OpenTelemetry::SDK::Resources::Resource.create('service.name' => service_name) # rubocop:disable Rails/SaveBang
       provider = OpenTelemetry::SDK::Logs::LoggerProvider.new(resource: resource)
-      exporter = OpenTelemetry::Exporter::OTLP::Logs::LogsExporter.new(
-        endpoint: logs_endpoint,
-        headers: headers_from_env('OTEL_EXPORTER_OTLP_HEADERS'),
-      )
-      provider.add_log_record_processor(
-        OpenTelemetry::SDK::Logs::Export::BatchLogRecordProcessor.new(exporter),
-      )
+      exporter_configs.each do |config|
+        exporter = OpenTelemetry::Exporter::OTLP::Logs::LogsExporter.new(
+          endpoint: config[:endpoint],
+          headers: config[:headers],
+        )
+        provider.add_log_record_processor(
+          OpenTelemetry::SDK::Logs::Export::BatchLogRecordProcessor.new(exporter),
+        )
+      end
+
       @logger = provider.logger(name: 'rails')
-      at_exit { provider.shutdown }
+      provider_process_id = Process.pid
+      @logger_process_id = provider_process_id
+      at_exit { provider.shutdown if Process.pid == provider_process_id }
+    end
+
+    def reset_logging_state_after_fork
+      return if @logging_process_id == Process.pid
+
+      @logging_mutex = Mutex.new
+      @logging_process_id = Process.pid
+      @logger = nil
+      @logger_process_id = nil
     end
 
     def headers_from_env(env_key)
