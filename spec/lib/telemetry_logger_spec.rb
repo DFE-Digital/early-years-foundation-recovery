@@ -30,6 +30,15 @@ RSpec.describe TelemetryLogger do
     expect(otel_logger).not_to have_received(:on_emit)
   end
 
+  it 'initializes OpenTelemetry logging when the provider is not configured' do
+    allow(OpenTelemetryConfiguration).to receive(:logger).and_return(nil, otel_logger)
+    expect(OpenTelemetryConfiguration).to receive(:configure_logging!)
+
+    logger.error('worker failed')
+
+    expect(otel_logger).to have_received(:on_emit).with(hash_including(body: "worker failed\n"))
+  end
+
   it 'accepts invalid UTF-8 without breaking application logging' do
     expect { logger.info("message \xC3".b) }.not_to raise_error
   end
