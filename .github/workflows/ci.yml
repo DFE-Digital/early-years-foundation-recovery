@@ -5,18 +5,6 @@ name: Continuous Integration
 on:
   merge_group:
   pull_request:
-    paths-ignore:
-      - '**/*.md'
-      - .docker*
-      - .env.example
-      - .gitignore
-      - .pa11yci
-      - .tool-versions
-      - .yardopts
-      - bin/*
-      - docker-compose.*
-      - Dockerfile
-      - terraform-azure
 
 jobs:
   test:
