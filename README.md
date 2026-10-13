@@ -289,7 +289,7 @@ The app reads its GOV.UK One Login configuration with env-var-first precedence
 
 | Variable                   | Dev default                                      |
 | -------------------------- | ------------------------------------------------ |
-| `GOV_ONE_BASE_URI`         | `http://gov-one-simulator:4000`                  |
+| `GOV_ONE_BASE_URI`         | `http://localhost:4000`                          |
 | `GOV_ONE_CLIENT_ID`        | `cdt-local-dev`                                  |
 | `GOV_ONE_PRIVATE_KEY_PATH` | `/srv/config/gov_one/dev_private_key.pem`        |
 
