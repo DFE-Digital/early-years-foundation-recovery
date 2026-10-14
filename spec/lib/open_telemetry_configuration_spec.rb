@@ -42,11 +42,30 @@ RSpec.describe OpenTelemetryConfiguration do
         { endpoint: 'https://ingest.eu2.observability.splunkcloud.com/v2/trace/otlp', headers: { 'X-SF-Token' => 'test-token' } },
       )
     end
+
+    it 'does not configure direct Splunk tracing without its auth token' do
+      ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'] = 'https://ingest.eu2.observability.splunkcloud.com/v2/trace/otlp'
+
+      expect(described_class.trace_exporter_configs).to eq([])
+    end
+
+    it 'ignores an invalid direct Splunk tracing endpoint' do
+      ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'] = 'https://bad host/v2/trace/otlp'
+      ENV['SPLUNK_OTEL_EXPORTER_OTLP_HEADERS'] = 'X-SF-Token=test-token'
+
+      expect(described_class.trace_exporter_configs).to eq([])
+    end
   end
 
   describe '.logs_enabled?' do
     around do |example|
-      original_values = %w[OTEL_EXPORTER_OTLP_ENDPOINT SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT].index_with { |key| ENV[key] }
+      original_values = {}
+      original_values.merge!(%w[
+        OTEL_EXPORTER_OTLP_ENDPOINT
+        SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT
+        SPLUNK_OTEL_EXPORTER_OTLP_HEADERS
+      ].index_with { |key| ENV[key] })
+      original_values.each_key { |key| ENV.delete(key) }
       example.run
     ensure
       original_values.each do |key, value|
@@ -69,19 +88,36 @@ RSpec.describe OpenTelemetryConfiguration do
     it 'is enabled with a direct Splunk endpoint' do
       ENV.delete('OTEL_EXPORTER_OTLP_ENDPOINT')
       ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'] = 'https://ingest.eu2.observability.splunkcloud.com/v2/trace/otlp'
+      ENV['SPLUNK_OTEL_EXPORTER_OTLP_HEADERS'] = 'X-SF-Token=test-token'
 
       expect(described_class.logs_enabled?).to be(true)
+    end
+
+    it 'is disabled for a Splunk endpoint without its auth token' do
+      ENV.delete('OTEL_EXPORTER_OTLP_ENDPOINT')
+      ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'] = 'https://ingest.eu2.observability.splunkcloud.com/v2/trace/otlp'
+      ENV.delete('SPLUNK_OTEL_EXPORTER_OTLP_HEADERS')
+
+      expect(described_class.logs_enabled?).to be(false)
+    end
+
+    it 'is disabled for an invalid direct Splunk endpoint' do
+      ENV.delete('OTEL_EXPORTER_OTLP_ENDPOINT')
+      ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'] = 'https://bad host/v2/trace/otlp'
+      ENV['SPLUNK_OTEL_EXPORTER_OTLP_HEADERS'] = 'X-SF-Token=test-token'
+
+      expect(described_class.logs_enabled?).to be(false)
     end
   end
 
   describe '.logs_exporter_configs' do
     around do |example|
-      original_values = %w[
-        OTEL_EXPORTER_OTLP_ENDPOINT
-        OTEL_EXPORTER_OTLP_HEADERS
-        SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT
-        SPLUNK_OTEL_EXPORTER_OTLP_HEADERS
-      ].index_with { |key| ENV[key] }
+      original_values = {
+        'OTEL_EXPORTER_OTLP_ENDPOINT' => ENV['OTEL_EXPORTER_OTLP_ENDPOINT'],
+        'OTEL_EXPORTER_OTLP_HEADERS' => ENV['OTEL_EXPORTER_OTLP_HEADERS'],
+        'SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT' => ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'],
+        'SPLUNK_OTEL_EXPORTER_OTLP_HEADERS' => ENV['SPLUNK_OTEL_EXPORTER_OTLP_HEADERS'],
+      }
       original_values.each_key { |key| ENV.delete(key) }
 
       example.run
@@ -89,6 +125,20 @@ RSpec.describe OpenTelemetryConfiguration do
       original_values.each do |key, value|
         value.nil? ? ENV.delete(key) : ENV[key] = value
       end
+    end
+
+    it 'does not configure Splunk log export without an auth token' do
+      ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'] = 'https://ingest.eu2.observability.splunkcloud.com/v2/trace/otlp'
+      ENV['SPLUNK_OTEL_EXPORTER_OTLP_HEADERS'] = 'X-SF-Token='
+
+      expect(described_class.send(:logs_exporter_configs)).to eq([])
+    end
+
+    it 'does not configure Splunk log export with an invalid endpoint' do
+      ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'] = 'https://bad host/v2/trace/otlp'
+      ENV['SPLUNK_OTEL_EXPORTER_OTLP_HEADERS'] = 'X-SF-Token=test-token'
+
+      expect(described_class.send(:logs_exporter_configs)).to eq([])
     end
 
     it 'configures a Splunk logs endpoint with Splunk authentication headers' do
@@ -107,14 +157,27 @@ RSpec.describe OpenTelemetryConfiguration do
   describe '.configure_logging!' do
     around do |example|
       original_values = {}
+      original_environment = {}
       instance_variables = %i[@logger @logger_process_id @logging_process_id @logging_mutex]
-      original_values = instance_variables.index_with do |name|
+      original_values.merge!(instance_variables.index_with do |name|
         described_class.instance_variable_get(name)
-      end
+      end)
+      environment_keys = %w[
+        OTEL_EXPORTER_OTLP_ENDPOINT
+        OTEL_EXPORTER_OTLP_HEADERS
+        SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT
+        SPLUNK_OTEL_EXPORTER_OTLP_HEADERS
+        OTEL_SERVICE_NAME
+      ]
+      original_environment.merge!(environment_keys.index_with { |key| ENV[key] })
+      environment_keys.each { |key| ENV.delete(key) }
       example.run
     ensure
       original_values.each do |name, value|
         described_class.instance_variable_set(name, value)
+      end
+      original_environment.each do |key, value|
+        value.nil? ? ENV.delete(key) : ENV[key] = value
       end
     end
 
@@ -154,6 +217,57 @@ RSpec.describe OpenTelemetryConfiguration do
       described_class.configure_logging!
 
       expect(described_class.logger).to equal(worker_logger)
+    end
+
+    it 'constructs exporters, processors, logger, and shutdown callback from configured endpoints' do
+      ENV['OTEL_EXPORTER_OTLP_ENDPOINT'] = 'http://otel-collector:4318/v1/traces'
+      ENV['OTEL_EXPORTER_OTLP_HEADERS'] = 'X-Collector-Token=collector-token'
+      ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'] = 'https://ingest.eu2.observability.splunkcloud.com/v2/trace/otlp'
+      ENV['SPLUNK_OTEL_EXPORTER_OTLP_HEADERS'] = 'X-SF-Token=splunk-token'
+      ENV['OTEL_SERVICE_NAME'] = 'test-service'
+      described_class.instance_variable_set(:@logging_process_id, Process.pid)
+      described_class.instance_variable_set(:@logger, nil)
+      described_class.instance_variable_set(:@logger_process_id, nil)
+
+      resource = instance_double(OpenTelemetry::SDK::Resources::Resource)
+      provider = instance_double(OpenTelemetry::SDK::Logs::LoggerProvider)
+      allow(provider).to receive(:shutdown)
+      collector_exporter = instance_double(OpenTelemetry::Exporter::OTLP::Logs::LogsExporter)
+      splunk_exporter = instance_double(OpenTelemetry::Exporter::OTLP::Logs::LogsExporter)
+      collector_processor = instance_double(OpenTelemetry::SDK::Logs::Export::BatchLogRecordProcessor)
+      splunk_processor = instance_double(OpenTelemetry::SDK::Logs::Export::BatchLogRecordProcessor)
+      telemetry_logger = instance_double(OpenTelemetry::SDK::Logs::Logger)
+      shutdown_callback = nil
+
+      allow(OpenTelemetry::SDK::Resources::Resource).to receive(:create)
+        .with('service.name' => 'test-service').and_return(resource)
+      allow(OpenTelemetry::SDK::Logs::LoggerProvider).to receive(:new)
+        .with(resource: resource).and_return(provider)
+      expect(OpenTelemetry::Exporter::OTLP::Logs::LogsExporter).to receive(:new)
+        .with(endpoint: 'http://otel-collector:4318/v1/logs', headers: { 'X-Collector-Token' => 'collector-token' })
+        .ordered.and_return(collector_exporter)
+      expect(OpenTelemetry::SDK::Logs::Export::BatchLogRecordProcessor).to receive(:new)
+        .with(collector_exporter).ordered.and_return(collector_processor)
+      expect(OpenTelemetry::Exporter::OTLP::Logs::LogsExporter).to receive(:new)
+        .with(endpoint: 'https://ingest.eu2.observability.splunkcloud.com/v1/log', headers: { 'X-SF-Token' => 'splunk-token' })
+        .ordered.and_return(splunk_exporter)
+      expect(OpenTelemetry::SDK::Logs::Export::BatchLogRecordProcessor).to receive(:new)
+        .with(splunk_exporter).ordered.and_return(splunk_processor)
+      expect(provider).to receive(:add_log_record_processor).with(collector_processor)
+      expect(provider).to receive(:add_log_record_processor).with(splunk_processor)
+      allow(provider).to receive(:logger).with(name: 'rails').and_return(telemetry_logger)
+      allow(described_class).to receive(:at_exit) { |&block| shutdown_callback = block }
+
+      described_class.configure_logging!
+
+      expect(OpenTelemetry::SDK::Resources::Resource).to have_received(:create)
+        .with('service.name' => 'test-service')
+      expect(OpenTelemetry::SDK::Logs::LoggerProvider).to have_received(:new).with(resource: resource)
+      expect(provider).to have_received(:logger).with(name: 'rails')
+      expect(described_class.logger).to equal(telemetry_logger)
+      expect(shutdown_callback).to be_a(Proc)
+      shutdown_callback.call
+      expect(provider).to have_received(:shutdown)
     end
   end
 

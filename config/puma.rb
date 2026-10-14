@@ -43,7 +43,11 @@ preload_app!
 plugin :tmp_restart
 
 on_worker_boot do
-  OpenTelemetryConfiguration.configure_logging!
+  begin
+    OpenTelemetryConfiguration.configure_logging!
+  rescue StandardError => e
+    warn("OpenTelemetry log exporter setup failed: #{e.class}")
+  end
   Sentry.capture_message "EYFS booting #{ENV['DOMAIN']}", level: :info
 end
 

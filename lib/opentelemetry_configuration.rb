@@ -43,10 +43,12 @@ module OpenTelemetryConfiguration
         configs << { endpoint: endpoint, headers: headers_from_env('OTEL_EXPORTER_OTLP_HEADERS') }
       end
 
-      if (splunk_endpoint = ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'].to_s.strip).length.positive?
+      if (splunk_endpoint = ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'].to_s.strip).length.positive? &&
+          (headers = splunk_exporter_headers).any? &&
+          (endpoint = splunk_endpoint_uri(splunk_endpoint))
         configs << {
-          endpoint: splunk_endpoint,
-          headers: headers_from_env('SPLUNK_OTEL_EXPORTER_OTLP_HEADERS'),
+          endpoint: endpoint.to_s,
+          headers: headers,
         }
       end
 
@@ -79,20 +81,26 @@ module OpenTelemetryConfiguration
         configs << { endpoint: logs_endpoint, headers: headers_from_env('OTEL_EXPORTER_OTLP_HEADERS') }
       end
 
-      if (splunk_endpoint = ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'].to_s.strip).length.positive?
+      if (splunk_endpoint = ENV['SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT'].to_s.strip).length.positive? &&
+          (headers = splunk_exporter_headers).any? &&
+          (endpoint = splunk_endpoint_uri(splunk_endpoint))
+        endpoint.path = '/v1/log'
         configs << {
-          endpoint: splunk_logs_endpoint(splunk_endpoint),
-          headers: headers_from_env('SPLUNK_OTEL_EXPORTER_OTLP_HEADERS'),
+          endpoint: endpoint.to_s,
+          headers: headers,
         }
       end
 
       configs
     end
 
-    def splunk_logs_endpoint(endpoint)
+    def splunk_endpoint_uri(endpoint)
       uri = URI.parse(endpoint)
-      uri.path = '/v1/log'
-      uri.to_s
+      return unless uri.is_a?(URI::HTTPS) && uri.host
+
+      uri
+    rescue URI::InvalidURIError
+      nil
     end
 
     def configure_tracing
@@ -161,6 +169,15 @@ module OpenTelemetryConfiguration
 
         headers[key.strip] = header_value.strip
       end
+    end
+
+    def splunk_exporter_headers
+      headers = headers_from_env('SPLUNK_OTEL_EXPORTER_OTLP_HEADERS')
+      return {} unless headers.any? do |key, value|
+        key.casecmp('X-SF-Token').zero? && value.to_s.strip.length.positive?
+      end
+
+      headers
     end
   end
 end

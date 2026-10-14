@@ -25,18 +25,22 @@ class TelemetryLogger < ActiveSupport::Logger
 
     message = block_given? ? yield : progname if message.nil?
     timestamp = Time.now # rubocop:disable Rails/TimeZone
-    body = formatter.call(Logger::SEV_LABEL[severity] || 'ANY', timestamp, progname, message)
-    otel_logger = OpenTelemetryConfiguration.logger
-    unless otel_logger
-      OpenTelemetryConfiguration.configure_logging!
+    begin
+      body = formatter.call(Logger::SEV_LABEL[severity] || 'ANY', timestamp, progname, message)
       otel_logger = OpenTelemetryConfiguration.logger
+      unless otel_logger
+        OpenTelemetryConfiguration.configure_logging!
+        otel_logger = OpenTelemetryConfiguration.logger
+      end
+      otel_logger&.on_emit(
+        timestamp: timestamp,
+        severity_number: SEVERITY_NUMBERS.fetch(severity, 0),
+        severity_text: Logger::SEV_LABEL[severity] || 'ANY',
+        body: TelemetrySanitizer.sanitize(body),
+      )
+    rescue StandardError
+      nil
     end
-    otel_logger&.on_emit(
-      timestamp: timestamp,
-      severity_number: SEVERITY_NUMBERS.fetch(severity, 0),
-      severity_text: Logger::SEV_LABEL[severity] || 'ANY',
-      body: TelemetrySanitizer.sanitize(body),
-    )
     true
   end
 end

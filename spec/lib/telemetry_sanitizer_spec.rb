@@ -28,6 +28,18 @@ RSpec.describe TelemetrySanitizer do
     )
   end
 
+  it 'redacts camelCase credential assignments and JSON values' do
+    message = 'apiKey=abc {"clientSecret":"xyz"}'
+
+    expect(described_class.sanitize(message)).to eq('apiKey=[FILTERED] {"clientSecret":[FILTERED]}')
+  end
+
+  it 'redacts escaped quotes in sensitive header and assignment values' do
+    message = 'Authorization: "Bearer \\"secretTOKEN\\"" api_key="a\\"bSECRET"'
+
+    expect(described_class.sanitize(message)).to eq('Authorization: [FILTERED] api_key=[FILTERED]')
+  end
+
   it 'redacts before truncating and preserves valid UTF-8' do
     message = "#{'a' * 8_180} email=user@example.com €"
     sanitized = described_class.sanitize(message)

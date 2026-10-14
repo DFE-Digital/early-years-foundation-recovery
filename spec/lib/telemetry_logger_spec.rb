@@ -42,4 +42,17 @@ RSpec.describe TelemetryLogger do
   it 'accepts invalid UTF-8 without breaking application logging' do
     expect { logger.info("message \xC3".b) }.not_to raise_error
   end
+
+  it 'does not let telemetry setup failures interrupt application logging' do
+    allow(OpenTelemetryConfiguration).to receive(:logger).and_return(nil)
+    allow(OpenTelemetryConfiguration).to receive(:configure_logging!).and_raise(StandardError, 'exporter unavailable')
+
+    expect { logger.error('application error') }.not_to raise_error
+  end
+
+  it 'does not let telemetry emission failures interrupt application logging' do
+    allow(otel_logger).to receive(:on_emit).and_raise(StandardError, 'export failed')
+
+    expect { logger.error('application error') }.not_to raise_error
+  end
 end
