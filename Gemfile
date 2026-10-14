@@ -59,11 +59,13 @@ gem 'sentry-rails'
 
 # Azure Application Insights / OpenTelemetry
 gem 'opentelemetry-exporter-otlp'
+gem 'opentelemetry-exporter-otlp-logs', '~> 0.6.0'
 gem 'opentelemetry-instrumentation-active_record'
 gem 'opentelemetry-instrumentation-http'
 gem 'opentelemetry-instrumentation-net_http'
 gem 'opentelemetry-instrumentation-rack'
 gem 'opentelemetry-instrumentation-rails'
+gem 'opentelemetry-logs-sdk', '~> 0.7.0'
 gem 'opentelemetry-sdk'
 
 # Track users
