@@ -7,13 +7,14 @@ module TelemetrySanitizer
     (\s*(?:=>|=|:)\s*)
     (?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|[^\r\n]+)
   }ix
-  SENSITIVE_ASSIGNMENT = %r!
+  SENSITIVE_ASSIGNMENT = %r~
+    (?<![a-z0-9_-])
     (?<quote>["']?)
     (?<key>[a-z0-9_-]+)
     \k<quote>
     (?<separator>\s*(?:=>|=|:)\s*)
     (?<value>"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|[^\s,}]+)
-  !ix
+  ~ix
   SENSITIVE_KEY_COMPONENT = /\A(?:passw\w*|secret|token|key|crypt\w*|salt|certificate|otp|ssn|email|user(?:_id)?|ip|session)\z/i
   EMAIL_ADDRESS = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i
   IP_ADDRESS = /\b(?:\d{1,3}\.){3}\d{1,3}\b/

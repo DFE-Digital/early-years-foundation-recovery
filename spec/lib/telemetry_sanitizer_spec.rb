@@ -40,6 +40,12 @@ RSpec.describe TelemetrySanitizer do
     expect(described_class.sanitize(message)).to eq('Authorization: [FILTERED] api_key=[FILTERED]')
   end
 
+  it 'handles long non-credential text without changing its contents before truncation' do
+    message = 'a' * 50_000
+
+    expect(described_class.sanitize(message)).to eq('a' * described_class::MAX_MESSAGE_BYTES)
+  end
+
   it 'redacts before truncating and preserves valid UTF-8' do
     message = "#{'a' * 8_180} email=user@example.com €"
     sanitized = described_class.sanitize(message)
