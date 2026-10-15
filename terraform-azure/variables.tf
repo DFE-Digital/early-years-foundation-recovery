@@ -94,6 +94,12 @@ variable "psqlfs_sku" {
   type        = string
 }
 
+variable "redis_sku_name" {
+  default     = "Balanced_B0"
+  description = "Azure Managed Redis SKU for staging and production; B0 provides 0.5 GB at the smallest available size"
+  type        = string
+}
+
 variable "psqlfs_storage" {
   default     = 32768
   description = "Max storage allowed for the Database Server"
