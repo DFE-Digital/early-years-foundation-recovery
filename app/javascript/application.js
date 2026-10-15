@@ -5,9 +5,15 @@ import "./controllers";
 
 import { initAll } from "govuk-frontend";
 
+const initialisedBodies = new WeakSet();
+
 function initialiseGovukFrontend() {
-  document.body.classList.add("js-enabled", "govuk-frontend-supported");
+  const body = document.body;
+  if (initialisedBodies.has(body)) return;
+
+  body.classList.add("js-enabled", "govuk-frontend-supported");
   initAll();
+  initialisedBodies.add(body);
 }
 
 document.addEventListener("turbo:load", initialiseGovukFrontend);
