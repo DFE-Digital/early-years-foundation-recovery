@@ -9,6 +9,7 @@ resource "azurerm_key_vault" "kv" {
   resource_group_name         = var.resource_group
   location                    = var.location
   tenant_id                   = data.azurerm_client_config.az_config.tenant_id
+  enable_rbac_authorization   = true
   enabled_for_disk_encryption = true
   soft_delete_retention_days  = 7
   purge_protection_enabled    = true
@@ -18,8 +19,8 @@ resource "azurerm_key_vault" "kv" {
     ignore_changes = [tags]
   }
 
-  #checkov:skip=CKV_AZURE_109:Access Policies configured
-  #checkov:skip=CKV_AZURE_189:Access Policies configured
+  #checkov:skip=CKV_AZURE_109:Key Vault RBAC roles are configured
+  #checkov:skip=CKV_AZURE_189:Key Vault RBAC roles are configured
   #checkov:skip=CKV2_AZURE_32:VNET configuration adequate
 }
 
@@ -32,55 +33,7 @@ resource "azurerm_user_assigned_identity" "kv_mi" {
   resource_group_name = var.resource_group
 }
 
-# Access Policy for GitHub Actions
-resource "azurerm_key_vault_access_policy" "kv_gh_ap" {
-  # Key Vault only deployed to the Test and Production subscription
-  count = var.environment != "development" ? 1 : 0
-
-  key_vault_id = azurerm_key_vault.kv[0].id
-  tenant_id    = data.azurerm_client_config.az_config.tenant_id
-  object_id    = data.azurerm_client_config.az_config.object_id
-
-  secret_permissions = [
-    "Get"
-  ]
-
-  certificate_permissions = [
-    "Create",
-    "Get",
-    "GetIssuers",
-    "Import",
-    "List",
-    "ListIssuers",
-    "ManageContacts",
-    "ManageIssuers",
-    "SetIssuers",
-    "Update"
-  ]
-
-  lifecycle {
-    ignore_changes = [object_id]
-  }
-}
-
-resource "azurerm_key_vault_access_policy" "kv_mi_ap" {
-  # Key Vault only deployed to the Test and Production subscription
-  count = var.environment != "development" ? 1 : 0
-
-  key_vault_id = azurerm_key_vault.kv[0].id
-  tenant_id    = data.azurerm_client_config.az_config.tenant_id
-  object_id    = azurerm_user_assigned_identity.kv_mi[0].principal_id
-
-  secret_permissions = [
-    "Get"
-  ]
-
-  certificate_permissions = [
-    "Get"
-  ]
-}
-
-# Pre-stage RBAC assignments before switching the Key Vault permission model.
+# Key Vault RBAC assignments.
 resource "azurerm_role_assignment" "kv_gh_certificates_officer" {
   # Key Vault only deployed to the Test and Production subscription
   count = var.environment != "development" ? 1 : 0
@@ -88,6 +41,7 @@ resource "azurerm_role_assignment" "kv_gh_certificates_officer" {
   scope                = azurerm_key_vault.kv[0].id
   role_definition_name = "Key Vault Certificates Officer"
   principal_id         = data.azurerm_client_config.az_config.object_id
+  principal_type       = "ServicePrincipal"
 
   lifecycle {
     ignore_changes = [principal_id]
@@ -101,6 +55,7 @@ resource "azurerm_role_assignment" "kv_gh_certificate_user" {
   scope                = azurerm_key_vault.kv[0].id
   role_definition_name = "Key Vault Certificate User"
   principal_id         = data.azurerm_client_config.az_config.object_id
+  principal_type       = "ServicePrincipal"
 
   lifecycle {
     ignore_changes = [principal_id]
@@ -114,6 +69,7 @@ resource "azurerm_role_assignment" "kv_gh_secret_user" {
   scope                = azurerm_key_vault.kv[0].id
   role_definition_name = "Key Vault Secrets User"
   principal_id         = data.azurerm_client_config.az_config.object_id
+  principal_type       = "ServicePrincipal"
 
   lifecycle {
     ignore_changes = [principal_id]
@@ -127,6 +83,7 @@ resource "azurerm_role_assignment" "kv_mi_secret_user" {
   scope                = azurerm_key_vault.kv[0].id
   role_definition_name = "Key Vault Secrets User"
   principal_id         = azurerm_user_assigned_identity.kv_mi[0].principal_id
+  principal_type       = "ServicePrincipal"
 }
 
 resource "azurerm_key_vault_certificate_issuer" "kv_ca" {

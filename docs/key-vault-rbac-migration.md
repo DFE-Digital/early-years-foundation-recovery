@@ -23,95 +23,41 @@
 - [x] Confirm the current certificate is available and has not been replaced or
   deleted.
 
-## Required Azure permission
+## Deployment identity
 
-An Azure Owner or User Access Administrator must grant the GitHub Actions
-service principal permission to manage role assignments. Use the narrowest
-scope possible.
+The Terraform workflows use the environment-specific `TF_AZURE_CLIENT_ID`
+secret and GitHub OIDC federation for the onboarded deployment app registration.
+Application deployment continues to use `AZURE_CLIENT_ID`.
 
-For staging, an authorised administrator must run:
+All six role assignments explicitly set `principal_type = "ServicePrincipal"`,
+including the Application Gateway managed identity. This supplies the principal
+type for Azure role-assignment condition evaluation; it does not change a
+principal's identity type or bypass the platform's authorization conditions.
 
-```bash
-DEPLOYMENT_IDENTITY_OBJECT_ID="..."
-KEY_VAULT_RESOURCE_ID="..."
+Terraform manages the scoped assignments. Do not request an unrestricted
+User Access Administrator grant as part of this migration.
 
-az role assignment create \
-  --assignee-object-id "$DEPLOYMENT_IDENTITY_OBJECT_ID" \
-  --assignee-principal-type ServicePrincipal \
-  --role "User Access Administrator" \
-  --scope "$KEY_VAULT_RESOURCE_ID"
-```
+## Direct RBAC cutover
 
-Set these values in the administrator's shell; do not commit environment-specific
-Azure identifiers to the repository.
+Terraform enables Key Vault RBAC, creates the six scoped role assignments, and
+removes all three legacy access policies in the same apply. This is a direct
+cutover; access-policy rollback is not part of this deployment.
 
-- [ ] Grant the staging deployment identity `User Access Administrator` on the
-  staging Key Vault.
-- [ ] Record the equivalent production deployment identity and Key Vault scope.
-- [ ] Grant the production permission only after staging migration succeeds.
-- [ ] Confirm the grants with `az role assignment list` before running
-  Terraform.
+Before running the workflow:
 
-## Deployment gate
-
-Do not deploy this branch until the staging permission grant above is confirmed.
-After the grant:
-
-1. Commit and push `keyvault-misconfig-final`.
-2. Run the Azure Terraform workflow for staging with `plan only`.
-3. Confirm the plan does not change `enableRbacAuthorization`, update the Key
-  Vault, or remove any access policy.
-4. Confirm the plan creates the six RBAC assignments and expected monitoring
-  resources only.
-5. Have another engineer review the plan before selecting `plan and apply`.
-
-Stop the deployment if the plan includes any permission-model change or access
-policy removal.
-
-## Prepare a safe migration
-
-Do not switch the permission model and delete the existing access policies in
-one apply. Prepare the migration as separate, reviewable phases.
-
-### Phase 1: Add RBAC assignments
-
-- [x] Branch from the reverted `main`, then bring forward the monitoring changes
-  and the required RBAC resources from `keyvault-misconfig-final`.
-- [x] Keep `enable_rbac_authorization` disabled.
-- [x] Keep all three existing `azurerm_key_vault_access_policy` resources.
-- [x] Add the following Key Vault-scoped assignments:
-  - GitHub Actions: `Key Vault Certificates Officer`.
-  - GitHub Actions: `Key Vault Certificate User`.
-  - GitHub Actions: `Key Vault Secrets User`.
-  - Application Gateway managed identity: `Key Vault Secrets User`.
-  - App Service certificate principal: `Key Vault Certificate User`.
-  - App Service certificate principal: `Key Vault Secrets User`.
-- [ ] Run and review the staging Terraform plan. It must add role assignments
-  without deleting access policies or changing the vault permission model.
-- [ ] Apply the plan and verify all six assignments in Azure.
-
-Role assignments can exist while the vault still uses access policies. They
-will take effect when Azure RBAC is enabled.
-
-### Phase 2: Switch to Azure RBAC
-
-- [ ] Add `enable_rbac_authorization = true` while retaining the legacy access
-  policy resources for rollback context.
-- [ ] Ensure certificate issuer and certificate resources depend on the GitHub
-  Actions role assignments.
-- [ ] Run a fresh staging plan and confirm the vault permission-model change is
-  the only access-control transition.
-- [ ] Apply during an agreed change window.
-- [ ] Allow time for Azure RBAC propagation before testing data-plane access.
-- [ ] Validate staging using the checks below.
-
-### Phase 3: Remove legacy policies
-
-- [ ] After staging has remained healthy, remove the three legacy access policy
-  resources. They are ignored by the vault after Azure RBAC is enabled.
-- [ ] Apply and validate staging again.
-- [ ] Repeat the same three phases for production. Do not combine them into one
-  production apply.
+- Confirm the selected environment uses its intended GitHub OIDC identity.
+- Confirm the deployment identity can create the required role assignments at
+  the Key Vault scope.
+- Ensure Terraform can refresh the existing certificate issuer and certificate
+  before the apply. The previous staging plan failed because the new identity
+  lacked certificate `Get` and `GetIssuers` access while the vault still used
+  access-policy authorization. The assignments in this plan do not grant that
+  access until the vault switches to RBAC.
+- Run `plan only` and review the complete plan. It should enable RBAC, create
+  the six intended role assignments, remove the three access policies, and
+  contain no unrelated destructive changes.
+- Apply during the agreed change window, allow time for role propagation, and
+  validate staging before repeating in production.
 
 ## Validation
 
@@ -134,18 +80,6 @@ After each apply:
 - [ ] Confirm the staging site serves HTTPS with the expected certificate.
 - [ ] Run a second Terraform plan and confirm it is empty.
 - [ ] Review Key Vault diagnostics and alerts for denied requests.
-
-## Rollback
-
-If Phase 2 causes an outage:
-
-1. Set `enable_rbac_authorization` back to `false` without removing the legacy
-   access policies.
-2. Apply the rollback.
-3. Confirm GitHub Actions and Application Gateway access through the restored
-   access-policy model.
-4. Retain the RBAC assignments while investigating; they are not active for
-   Key Vault data-plane access when Azure RBAC is disabled.
 
 ## Follow-up cleanup
 
