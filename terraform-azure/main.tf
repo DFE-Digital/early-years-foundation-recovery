@@ -59,8 +59,6 @@ module "network" {
   kv_certificate_authority_admin_phone_no   = var.kv_certificate_authority_admin_phone_no
   kv_certificate_label                      = var.kv_certificate_label
   kv_certificate_subject                    = var.kv_certificate_subject
-  logs_id                                   = module.monitor.logs_id
-  admin_email_address                       = var.admin_email_address
 }
 
 # Create Database resources
