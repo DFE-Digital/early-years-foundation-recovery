@@ -15,7 +15,7 @@ class NewModuleMailJob < MailJob
       begin
         release = Release.find(release_id)
       rescue ActiveRecord::RecordNotFound
-        return :no_new_module_release if release.blank?
+        return :no_new_module_release
       end
 
       Training::Module.live.each do |mod|
