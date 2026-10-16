@@ -354,6 +354,33 @@ resource "azurerm_key_vault_access_policy" "webapp_kv_ap" {
   }
 }
 
+# Pre-stage RBAC assignments before switching the Key Vault permission model.
+resource "azurerm_role_assignment" "webapp_kv_secret_user" {
+  # Custom hostname only deployed to the Test and Production subscription
+  count = var.environment != "development" ? 1 : 0
+
+  scope                = var.kv_id
+  role_definition_name = "Key Vault Secrets User"
+  principal_id         = var.as_service_principal_object_id
+
+  lifecycle {
+    ignore_changes = [principal_id]
+  }
+}
+
+resource "azurerm_role_assignment" "webapp_kv_certificate_user" {
+  # Custom hostname only deployed to the Test and Production subscription
+  count = var.environment != "development" ? 1 : 0
+
+  scope                = var.kv_id
+  role_definition_name = "Key Vault Certificate User"
+  principal_id         = var.as_service_principal_object_id
+
+  lifecycle {
+    ignore_changes = [principal_id]
+  }
+}
+
 resource "azurerm_app_service_certificate" "webapp_custom_domain_cert" {
   # Custom hostname only deployed to the Test and Production subscription
   count = var.environment != "development" ? 1 : 0
