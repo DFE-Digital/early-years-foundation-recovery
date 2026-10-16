@@ -1,3 +1,5 @@
+@use 'shared' as *;
+
 .govuk-super-navigation-header {
   background: govuk-colour('blue');
   border-bottom: -1px solid rgba(11, 12, 12, 0.13);

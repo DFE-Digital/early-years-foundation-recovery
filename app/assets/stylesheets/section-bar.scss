@@ -1,3 +1,6 @@
+@use 'shared' as *;
+@use "sass:math";
+
 $progress-bar-height: 10px;
 
 #section-bar {
@@ -35,7 +38,7 @@ p#progress-pages {
 
 @for $i from 0 through 100 {
   .section-progress--#{$i} {
-    width: percentage($i / 100);
+    width: math.percentage(math.div($i, 100));
   }
 }
 

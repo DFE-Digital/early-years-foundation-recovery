@@ -1,3 +1,5 @@
+@use 'shared' as *;
+
 iframe {
   position:absolute;
   top:0;
@@ -29,7 +31,7 @@ iframe {
 
 #video-panel {
   padding: govuk-spacing(7);
-  background: govuk-colour('light-grey');
+  background: govuk-colour("black", $variant: "tint-95");
 
   @include govuk-media-query($until: tablet) {
     padding: govuk-spacing(4) govuk-spacing(3)
