@@ -29,10 +29,10 @@ The Terraform workflows use the environment-specific `TF_AZURE_CLIENT_ID`
 secret and GitHub OIDC federation for the onboarded deployment app registration.
 Application deployment continues to use `AZURE_CLIENT_ID`.
 
-All six role assignments explicitly set `principal_type = "ServicePrincipal"`,
-including the Application Gateway managed identity. This supplies the principal
-type for Azure role-assignment condition evaluation; it does not change a
-principal's identity type or bypass the platform's authorization conditions.
+The pinned AzureRM 3.71.0 provider determines `principal_type` automatically;
+it does not support configuring this attribute. If Azure role-assignment
+conditions require an explicit principal type, a separately validated provider
+upgrade is needed. The direct cutover does not bypass authorization conditions.
 
 Terraform manages the scoped assignments. Do not request an unrestricted
 User Access Administrator grant as part of this migration.

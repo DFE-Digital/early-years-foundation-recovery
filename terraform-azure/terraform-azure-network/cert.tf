@@ -41,7 +41,6 @@ resource "azurerm_role_assignment" "kv_gh_certificates_officer" {
   scope                = azurerm_key_vault.kv[0].id
   role_definition_name = "Key Vault Certificates Officer"
   principal_id         = data.azurerm_client_config.az_config.object_id
-  principal_type       = "ServicePrincipal"
 
   lifecycle {
     ignore_changes = [principal_id]
@@ -55,7 +54,6 @@ resource "azurerm_role_assignment" "kv_gh_certificate_user" {
   scope                = azurerm_key_vault.kv[0].id
   role_definition_name = "Key Vault Certificate User"
   principal_id         = data.azurerm_client_config.az_config.object_id
-  principal_type       = "ServicePrincipal"
 
   lifecycle {
     ignore_changes = [principal_id]
@@ -69,7 +67,6 @@ resource "azurerm_role_assignment" "kv_gh_secret_user" {
   scope                = azurerm_key_vault.kv[0].id
   role_definition_name = "Key Vault Secrets User"
   principal_id         = data.azurerm_client_config.az_config.object_id
-  principal_type       = "ServicePrincipal"
 
   lifecycle {
     ignore_changes = [principal_id]
@@ -83,7 +80,6 @@ resource "azurerm_role_assignment" "kv_mi_secret_user" {
   scope                = azurerm_key_vault.kv[0].id
   role_definition_name = "Key Vault Secrets User"
   principal_id         = azurerm_user_assigned_identity.kv_mi[0].principal_id
-  principal_type       = "ServicePrincipal"
 }
 
 resource "azurerm_key_vault_certificate_issuer" "kv_ca" {

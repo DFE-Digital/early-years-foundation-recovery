@@ -346,7 +346,6 @@ resource "azurerm_role_assignment" "webapp_kv_secret_user" {
   scope                = var.kv_id
   role_definition_name = "Key Vault Secrets User"
   principal_id         = var.as_service_principal_object_id
-  principal_type       = "ServicePrincipal"
 
   lifecycle {
     ignore_changes = [principal_id]
@@ -360,7 +359,6 @@ resource "azurerm_role_assignment" "webapp_kv_certificate_user" {
   scope                = var.kv_id
   role_definition_name = "Key Vault Certificate User"
   principal_id         = var.as_service_principal_object_id
-  principal_type       = "ServicePrincipal"
 
   lifecycle {
     ignore_changes = [principal_id]
