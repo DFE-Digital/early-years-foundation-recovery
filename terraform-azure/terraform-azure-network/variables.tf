@@ -72,13 +72,3 @@ variable "kv_certificate_subject" {
   description = "Subject of the Certificate"
   type        = string
 }
-
-variable "logs_id" {
-  description = "ID of the Log Analytics workspace to send Key Vault diagnostic logs to"
-  type        = string
-}
-
-variable "admin_email_address" {
-  description = "Email address to notify of Key Vault security alerts"
-  type        = string
-}
