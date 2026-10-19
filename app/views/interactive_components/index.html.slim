@@ -1,0 +1,16 @@
+h1.govuk-heading-xl Interactive components
+
+h2.govuk-heading-l Flip cards
+
+p.govuk-body Consider each question, then select “Reveal answer”.
+
+.flip-card-grid
+  = render 'flip_card',
+      id: 'partnerships',
+      question: 'What is a possible barrier to building effective partnerships with parents and carers?',
+      answer: 'Different work schedules can make it difficult to find a convenient time to communicate.'
+
+  = render 'flip_card',
+      id: 'communication',
+      question: 'How could you make communication more accessible to parents and carers?',
+      answer: 'Ask families about their preferred ways to communicate and offer suitable alternatives.'
