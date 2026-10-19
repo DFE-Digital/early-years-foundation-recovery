@@ -63,6 +63,8 @@ module EarlyYearsFoundationRecovery
     config.clarity_tracking_id = ENV.fetch('CLARITY_TRACKING_ID', '#CLARITY_TRACKING_ID_env_var_missing')
     config.utm = config_for(:utm).deep_symbolize_keys
 
+    config.accessibility_url = ENV.fetch('ACCESSIBILITY_URL', '#ACCESSIBILITY_env_var_missing')
+
     # Devise
     config.unlock_in_minutes  = ENV.fetch('UNLOCK_IN_MINUTES', '120').to_i
     config.timeout_in_minutes = ENV.fetch('TIMEOUT_IN_MINUTES', '1440').to_i
