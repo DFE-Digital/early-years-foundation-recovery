@@ -14,3 +14,16 @@ p.govuk-body Consider each question, then select “Reveal answer”.
       id: 'communication',
       question: 'How could you make communication more accessible to parents and carers?',
       answer: 'Ask families about their preferred ways to communicate and offer suitable alternatives.'
+
+section aria-labelledby="hotspot-demo-heading"
+  h2.govuk-heading-l id="hotspot-demo-heading"
+    | Image hotspots
+
+  p.govuk-body
+    | Select a numbered marker to explore an area of the room.
+
+  = render 'hotspot_image',
+      id: @hotspot_example[:id],
+      image: @hotspot_example[:image],
+      alt: @hotspot_example[:alt],
+      hotspots: @hotspot_example[:hotspots]

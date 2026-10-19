@@ -23,6 +23,7 @@
     "nanoid": "3.3.18"
   },
   "dependencies": {
+    "@floating-ui/dom": "^1.8.0",
     "@fortawesome/fontawesome-free": "7.3.1",
     "@hotwired/stimulus": "3.2.2",
     "@hotwired/turbo-rails": "8.0.23",
