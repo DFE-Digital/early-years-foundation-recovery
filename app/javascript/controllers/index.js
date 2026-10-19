@@ -6,6 +6,8 @@ import { application } from "./application";
 
 import AutocompleteController from "./autocomplete_controller";
 import FlipCardController from "./flip_card_controller";
+import HotspotImageController from "./hotspot_image_controller";
 
 application.register("autocomplete", AutocompleteController);
 application.register("flip-card", FlipCardController);
+application.register("hotspot-image", HotspotImageController);
