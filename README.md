@@ -194,6 +194,37 @@ It exits with a non-zero status code if either check fails, making it suitable f
 
 The smoke tests run automatically as part of the [staging][staging-workflow] and [production][production-workflow] deployment workflows.
 
+### End-to-end login test
+
+The separate **One Login end-to-end** workflow runs on pull requests and merge
+groups, and can also be started manually. It uses Puppeteer and a pinned version
+of the official GOV.UK One Login simulator, not the live identity service.
+
+The test follows the actual authorisation redirect, callback, token exchange,
+ID-token signature validation and user-info request. It verifies that a new user
+can access authenticated registration pages and save their terms acceptance and name, then
+signs in again in a fresh browser session to verify that the same account is reused.
+No authentication responses are mocked.
+
+To run locally, install the project's Ruby and JavaScript dependencies (including
+Puppeteer's browser), provide the test Rails credentials key as for the existing
+test suite, and start Docker. Then run:
+
+```sh
+$ bash bin/login-e2e
+```
+
+The runner starts Rails in `test` mode on port 3001, the simulator on port 4001,
+and a disposable PostgreSQL database on port 5434. These ports must be free.
+It prepares the database and compiles assets, and stops the server and containers
+on exit. The database uses temporary storage and is discarded afterwards.
+Failure screenshots and server output are saved under `tmp/login-e2e/`.
+
+This configuration uses only synthetic user data and the documented development
+keypair. It does not change any deployed environment, use production credentials,
+or add a production authentication bypass. The existing deployment smoke checks
+remain unchanged.
+
 ---
 
 ## Monitoring

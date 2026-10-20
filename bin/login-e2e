@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+export RAILS_ENV=test
+export ENVIRONMENT=test
+export DOMAIN=localhost:3001
+export DATABASE_URL=postgresql://postgres:password@127.0.0.1:5434/recovery_login_e2e
+export GOV_ONE_BASE_URI=http://localhost:4001
+export GOV_ONE_CLIENT_ID=cdt-login-e2e
+export GOV_ONE_PRIVATE_KEY_PATH="$PWD/config/gov_one/dev_private_key.pem"
+export GOV_ONE_PUBLIC_KEY
+GOV_ONE_PUBLIC_KEY="$(openssl pkey -in "$GOV_ONE_PRIVATE_KEY_PATH" -pubout)"
+export BOT_TOKEN=login-e2e-test-token
+
+if docker compose version >/dev/null 2>&1; then
+  compose=(docker compose)
+else
+  compose=(docker-compose)
+fi
+compose+=(--project-name recovery-login-e2e --file docker-compose.e2e.yml)
+server_pid=
+mkdir -p tmp/login-e2e
+: >tmp/login-e2e/rails.log
+
+cleanup() {
+  status=$?
+  trap - EXIT
+  if [ -n "$server_pid" ]; then
+    kill "$server_pid" 2>/dev/null || true
+    wait "$server_pid" 2>/dev/null || true
+  fi
+  if [ "$status" -ne 0 ]; then
+    if [ -f tmp/login-e2e/rails.log ]; then
+      cat tmp/login-e2e/rails.log
+    fi
+    "${compose[@]}" logs --no-color
+  fi
+  "${compose[@]}" down --volumes
+  exit "$status"
+}
+trap cleanup EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+
+"${compose[@]}" up --detach --wait --wait-timeout 120
+bundle exec rails db:create db:migrate
+yarn copy:assets
+bundle exec rails assets:precompile
+bundle exec rails server --binding 127.0.0.1 --port 3001 --pid tmp/login-e2e/server.pid >tmp/login-e2e/rails.log 2>&1 &
+server_pid=$!
+
+ready=false
+for attempt in $(seq 1 60); do
+  if ! kill -0 "$server_pid" 2>/dev/null; then
+    echo "The E2E Rails server exited before becoming ready" >&2
+    exit 1
+  fi
+  if curl --silent --fail --max-time 2 http://localhost:3001/health >/dev/null; then
+    ready=true
+    break
+  fi
+  sleep 1
+done
+if [ "$ready" != true ]; then
+  echo "The E2E Rails server did not become ready" >&2
+  exit 1
+fi
+
+node --test spec/e2e/gov_one_login.test.mjs
