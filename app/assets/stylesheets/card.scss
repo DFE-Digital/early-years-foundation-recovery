@@ -1,6 +1,9 @@
 // Progress bar
 // ================================================================================
 
+@use 'shared' as *;
+@use "sass:math";
+
 .bar-bg {
   height: 8px;
   border-radius: 4px;
@@ -14,7 +17,7 @@
 
 @for $i from 0 through 100 {
   .bar-progress--#{$i} {
-    width: percentage($i / 100);
+    width: math.percentage(math.div($i, 100));
   }
 }
 

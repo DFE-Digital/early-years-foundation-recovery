@@ -1,3 +1,5 @@
+@use 'shared' as *;
+
 $icon-diameter: 36px;
 $line-shift: calc(($icon-diameter + 1px) / 2);
 $progress-bar-container-width: 81px;
@@ -68,14 +70,14 @@ $progress-bar-container-width: 81px;
     &.not_started {
       background-color: govuk-colour('white');
       color: govuk-color('black');
-      outline: 1px solid govuk-colour('mid-grey');
+      outline: 1px solid govuk-colour("black", $variant: "tint-80");
       outline-offset: -1px;
     }
   }
 
   .line {
     height: 100%;
-    border-left: 1px solid govuk-colour('mid-grey');
+    border-left: 1px solid govuk-colour("black", $variant: "tint-80");
     position: relative;
     z-index: 1;
     right: -18px;
@@ -107,7 +109,7 @@ $progress-bar-container-width: 81px;
 }
 
 .completed-section {
-  background-color: govuk-colour('light-grey');
+  background-color: govuk-colour("black", $variant: "tint-95");
   border-radius: 6px;
   padding: govuk-spacing(7);
 

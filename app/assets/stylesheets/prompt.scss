@@ -1,5 +1,7 @@
+@use 'shared' as *;
+
 .prompt {
-  background-color: govuk-colour('light-grey');
+  background-color: govuk-colour("black", $variant: "tint-95");
   border-top: govuk-spacing(2) solid govuk-colour('teal');
   margin: govuk-spacing(5) govuk-spacing(0);
   padding: govuk-spacing(4);
@@ -24,7 +26,7 @@
   }
 
   .svg-inline--fa {
-    background-color: govuk-colour('turquoise');
+    background-color: govuk-colour('teal');
     color: govuk-colour('white');
     padding: govuk-spacing(4) !important;
     display: inline-block;

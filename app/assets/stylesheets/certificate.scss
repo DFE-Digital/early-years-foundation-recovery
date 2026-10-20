@@ -1,3 +1,6 @@
+@use 'shared' as *;
+@use 'sass:color';
+
 #award {
   font-family:  helvetica-neue !important;
   padding-top: 60px;
@@ -108,8 +111,8 @@
     outline: govuk-spacing(1) solid color.adjust(govuk-colour('black'), $lightness: 90%);
     background: govuk-colour('white');
     box-shadow: 0 2px 2px color.adjust(govuk-colour('black'), $lightness: 60%);
-    fill: govuk-colour('light-grey');
-    stroke: govuk-colour('light-grey');
+    fill: govuk-colour("black", $variant: "tint-95");
+    stroke: govuk-colour("black", $variant: "tint-95");
   }
 
   .certificate-metadata {
