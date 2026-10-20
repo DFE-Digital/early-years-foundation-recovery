@@ -28,11 +28,15 @@ are created for development or review apps, and local development is unchanged.
 The default `redis_sku_name` is `Balanced_B0` (0.5 GB), the smallest available
 Managed Redis SKU. Production enables high availability; staging disables it
 to reduce costs and can lose its disposable cache during maintenance or failure.
-There is one instance per environment, shared by web workers and background jobs.
-The green deployment slot uses a separate key namespace to avoid sharing cached
-content with its separate database. Increase `redis_sku_name` only after checking
-memory use, evictions, latency, and connection counts. SKU and HA changes may
-require replacement; always inspect the plan.
+Terraform creates exactly one instance when `environment` is `staging` or
+`production`, and none for development. Each environment has its own instance;
+web instances within that environment share it. The current cache consumers are
+the bot-authentication failure counter and GOV.UK One Login signing keys.
+Background workers receive the Redis setting, but no job currently calls
+`Rails.cache` directly. The green deployment slot uses a separate key namespace
+from the live app. Increase `redis_sku_name` only after checking memory use,
+evictions, latency, and connection counts. SKU and HA changes may require
+replacement; always inspect the plan.
 
 Budget for the cache, a private endpoint and private DNS in each environment.
 No geo-replication, persistence, optional modules, or extra slot instance is
