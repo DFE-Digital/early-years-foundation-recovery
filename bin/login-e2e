@@ -9,9 +9,8 @@ export DOMAIN=localhost:3001
 export DATABASE_URL=postgresql://postgres:password@127.0.0.1:5434/recovery_login_e2e
 export GOV_ONE_BASE_URI=http://localhost:4001
 export GOV_ONE_CLIENT_ID=cdt-login-e2e
-export GOV_ONE_PRIVATE_KEY_PATH="$PWD/config/gov_one/dev_private_key.pem"
+export GOV_ONE_PRIVATE_KEY_PATH
 export GOV_ONE_PUBLIC_KEY
-GOV_ONE_PUBLIC_KEY="$(openssl pkey -in "$GOV_ONE_PRIVATE_KEY_PATH" -pubout)"
 export BOT_TOKEN=login-e2e-test-token
 
 if docker compose version >/dev/null 2>&1; then
@@ -21,8 +20,10 @@ else
 fi
 compose+=(--project-name recovery-login-e2e --file docker-compose.e2e.yml)
 server_pid=
+compose_started=false
 mkdir -p tmp/login-e2e
 : >tmp/login-e2e/rails.log
+GOV_ONE_PRIVATE_KEY_PATH="$(mktemp "${TMPDIR:-/tmp}/recovery-login-e2e-key.XXXXXX")"
 
 cleanup() {
   status=$?
@@ -35,15 +36,23 @@ cleanup() {
     if [ -f tmp/login-e2e/rails.log ]; then
       cat tmp/login-e2e/rails.log
     fi
-    "${compose[@]}" logs --no-color
+    if [ "$compose_started" = true ]; then
+      "${compose[@]}" logs --no-color || status=1
+    fi
   fi
-  "${compose[@]}" down --volumes
+  rm -f "$GOV_ONE_PRIVATE_KEY_PATH"
+  if [ "$compose_started" = true ]; then
+    "${compose[@]}" down --volumes || status=1
+  fi
   exit "$status"
 }
 trap cleanup EXIT
 trap 'exit 130' INT
 trap 'exit 143' TERM
 
+openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out "$GOV_ONE_PRIVATE_KEY_PATH"
+GOV_ONE_PUBLIC_KEY="$(openssl pkey -in "$GOV_ONE_PRIVATE_KEY_PATH" -pubout)"
+compose_started=true
 "${compose[@]}" up --detach --wait --wait-timeout 120
 bundle exec rails db:create db:migrate
 yarn copy:assets

@@ -220,8 +220,10 @@ It prepares the database and compiles assets, and stops the server and container
 on exit. The database uses temporary storage and is discarded afterwards.
 Failure screenshots and server output are saved under `tmp/login-e2e/`.
 
-This configuration uses only synthetic user data and the documented development
-keypair. It does not change any deployed environment, use production credentials,
+This configuration uses only synthetic user data and a temporary RSA keypair
+generated for each run. The private key is stored outside the failure-artifact
+directory and deleted on exit; no committed One Login key or additional CI secret
+is needed. It does not change any deployed environment, use production credentials,
 or add a production authentication bypass. The existing deployment smoke checks
 remain unchanged.
 
