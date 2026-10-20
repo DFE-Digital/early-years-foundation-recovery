@@ -10,8 +10,8 @@ This module provisions a new Azure Resource Group that assembles together the in
 Use Terraform 1.12.2 (the CI version) and AzureRM 4.67.0. AzureRM was upgraded
 from 3.71.0 to support Azure Managed Redis. Set `ARM_SUBSCRIPTION_ID` when
 running locally; the deployment workflows already supply it through OIDC.
-Resource provider registration remains externally managed. Ensure
-`Microsoft.Cache` is registered in the staging and production subscriptions.
+Terraform explicitly registers only `Microsoft.Cache` in each subscription;
+the deployment identity needs permission to register Azure resource providers.
 
 Run `terraform init -upgrade` and review a plan for each environment before
 applying the provider upgrade. Existing resources must not be unexpectedly
