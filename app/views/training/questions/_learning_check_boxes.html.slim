@@ -10,11 +10,14 @@
       = icon(:question)
 
     .govuk-grid-column-three-quarters
-      h2.govuk-heading-m Check your understanding
-
-      div class='govuk-!-margin-top-4'
+      - if content.scenario_based_question?
         = m(content.legend)
+      - else
+        h2.govuk-heading-m Check your understanding
 
-        = f.govuk_check_boxes_fieldset :answers, legend: { size: 'm', text: content.legend, hidden: true, inline: true } do
-          - response.options.each do |option|
-            = f.question_check_box(option)
+        div class='govuk-!-margin-top-4'
+          = m(content.legend)
+
+      = f.govuk_check_boxes_fieldset :answers, legend: { size: 'm', text: content.legend, hidden: true, inline: true } do
+        - response.options.each do |option|
+          = f.question_check_box(option)
