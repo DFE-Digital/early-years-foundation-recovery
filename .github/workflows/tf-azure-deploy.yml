@@ -74,7 +74,7 @@ jobs:
       - name: Terraform Format
         run: terraform fmt -check
 
-      # Generates Terraform input variables
+      # Generates only declared Terraform inputs from GitHub secrets and variables
       - name: Generate Terraform Variables
         shell: bash
         env:
@@ -83,8 +83,13 @@ jobs:
         run: |
           printf '%s\n' "$WEB_SECRETS" > tmp-secrets.json
           printf '%s\n' "$WEB_VARS" > tmp-vars.json
-          jq 'with_entries(.key |= ascii_downcase)' tmp-secrets.json > web-secrets.auto.tfvars.json
-          jq 'with_entries(.key |= ascii_downcase)' tmp-vars.json > web-vars.auto.tfvars.json
+          declared_variables=$(sed -n 's/^variable "\([^"]*\)".*/"\1"/p' ./*.tf | jq -s .)
+          jq --argjson declared "$declared_variables" \
+            'with_entries(.key |= ascii_downcase) | with_entries(select(.key as $key | $declared | index($key)))' \
+            tmp-secrets.json > web-secrets.auto.tfvars.json
+          jq --argjson declared "$declared_variables" \
+            'with_entries(.key |= ascii_downcase) | with_entries(select(.key as $key | $declared | index($key)))' \
+            tmp-vars.json > web-vars.auto.tfvars.json
 
       # Generates an execution plan for Terraform
       # An exit code of 0 indicated no changes, 1 a terraform failure, 2 there are pending changes.
