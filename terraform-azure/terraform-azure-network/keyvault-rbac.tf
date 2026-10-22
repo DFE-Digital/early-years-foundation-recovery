@@ -16,7 +16,7 @@ terraform {
 resource "azurerm_key_vault" "rbackv" {
   provider            = azurerm.keyvault_rbac
   location            = var.location
-  name                = "${var.resource_name_prefix}-kvrbac"
+  name                = "${var.resource_name_prefix}-rbkv"
   resource_group_name = var.resource_group
   sku_name            = "standard"
   tenant_id           = data.azurerm_client_config.az_config.tenant_id
