@@ -1,0 +1,45 @@
+---
+name: One Login end-to-end
+on:
+  merge_group:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  login:
+    name: Sign in with the GOV.UK One Login simulator
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: test
+    env:
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.4.5
+          bundler-cache: true
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22.x
+      - name: Install JavaScript dependencies
+        run: |
+          corepack enable
+          yarn install --immutable
+      - name: Run isolated login journey
+        run: bash bin/login-e2e
+      - name: Upload failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: login-e2e-failure
+          path: |
+            tmp/login-e2e/
+            log/test.log
+          retention-days: 7
