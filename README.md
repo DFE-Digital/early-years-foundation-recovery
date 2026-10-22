@@ -105,6 +105,77 @@ Running locally in the production rails environment requires generating a self-s
 
 ## Using Docker
 
+### Organisation-owned base images
+
+The Dockerfile pulls Ruby and the OpenTelemetry Collector from
+`ghcr.io/dfe-digital/early-years-foundation-recovery/base`, rather than directly
+from Docker Hub. These are organisation-hosted mirrors of the official Ruby
+Alpine image and the upstream OpenTelemetry Collector, not Docker Hardened
+Images. Mirroring controls hosting and availability; it does not change who
+maintains the upstream software or guarantee fewer vulnerabilities.
+
+Before merging this migration, an organisation/package administrator must:
+
+1. Approve hosting the base images in DFE-Digital's GHCR.
+2. Set the repository Actions variable `ENABLE_BASE_IMAGE_MIRROR` to `true`.
+3. Push the mirror workflow on the migration branch after approval, or rerun
+   its push-triggered workflow if the first run was skipped. Confirm both tags
+   were published, including AMD64 and ARM64 manifests. Once the workflow is on
+   the default branch, it can also be run manually.
+4. Configure the package's visibility and Actions access. Public visibility
+   permits existing local development commands to pull without new credentials;
+   a private package requires local GHCR login and repository read access.
+
+The mirror workflow uses the existing `GITHUB_TOKEN`; no Docker account or new
+Docker Hub secret is needed. It runs on workflow-file pushes and daily after
+being enabled, and records the
+published digests. Only this refresh workflow pulls the Ruby/Collector base
+images from Docker Hub; normal application builds use GHCR. GitHub package
+storage/transfer charges depend on the organisation's plan and package visibility.
+
+Keep the upstream references in the mirror workflow and the Dockerfile defaults
+in sync when upgrading. Ruby upgrades must also match the application's pinned
+Ruby version. A mirror refresh does not upgrade Ruby or the pinned Collector.
+Rebuild, scan and deploy the application after upstream/package updates;
+refreshing a base alone does not update running containers.
+
+Gems and assets are built in separate stages. Production excludes compilers,
+development headers, Yarn and asset-build JavaScript dependencies. Node,
+Puppeteer, Chromium and fonts remain necessary for Grover PDF generation;
+OpenSSH remains necessary for the existing Azure WebSSH startup.
+
+For local verification before the mirror has been provisioned, explicitly
+override the sources (this does not validate GHCR access):
+
+```sh
+docker build --target app \
+  --build-arg RUBY_BASE_IMAGE=docker.io/library/ruby:3.4.5-alpine \
+  --build-arg OTEL_BASE_IMAGE=docker.io/otel/opentelemetry-collector-contrib:0.161.0@sha256:fd328de2552466ad78385e1b1289c3f2402b1c45f265b252aab1955b42845ac1 \
+  -t recovery:runtime .
+```
+
+Before rollout, compare the old and new runtime images with the same Trivy
+version, vulnerability database, platform, severity filters and ignore policy.
+Retain both reports and verify the HIGH/CRITICAL count decreases. Run the test
+suite and deploy the GHCR-backed image to review/staging, including the existing
+sign-in smoke check and a PDF-generation check. Do not treat mirror publication
+or a local build alone as deployment/security acceptance.
+
+Local ARM64 validation on 20 October 2026, using Trivy 0.76.0 with the same
+database and existing ignore policy for both images, found:
+
+| Runtime image | HIGH | CRITICAL | Uncompressed size |
+| --- | ---: | ---: | ---: |
+| Before migration | 12 | 0 | 2.27 GB |
+| After migration | 0 | 0 | 1.47 GB |
+
+These results used explicit upstream build overrides, not the unprovisioned
+GHCR mirror. Production startup, `/health`, Grover PDF generation, and 10
+focused sign-in/helper/controller examples passed locally. Production HTTP
+sign-in still needs a configured review/staging environment; the isolated
+runtime had no Contentful credentials. AMD64 and deployment validation remain
+required, and vulnerability counts will change as the database is updated.
+
 Containerised services are available for use by developers and testers.
 There are a number of convenience scripts to make working with **Docker** easier.
 All containers for the project are named with the prefix `recovery_`.

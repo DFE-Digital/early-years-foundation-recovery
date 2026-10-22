@@ -12,6 +12,8 @@
         - Gemfile.lock
         - package.json
         - yarn.lock
+        - .github/workflows/base-images.yml
+        - .github/workflows/trivy.yml
 
   permissions:
     packages: write
