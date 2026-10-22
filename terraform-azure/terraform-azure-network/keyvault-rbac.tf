@@ -59,40 +59,40 @@ data "azurerm_role_definition" "kv_admin" {
 
 
 
-# Role assignments
+# Role assignments are deferred until the principals are available.
 
-resource "azurerm_role_assignment" "kv_user1" {
-  provider = azurerm.keyvault_rbac
-
-  scope                = azurerm_key_vault.rbackv.id
-  role_definition_name = "Key Vault Secrets User"
-  principal_id         = var.kv_user_object_id
-}
-
-resource "azurerm_role_assignment" "kv_officer" {
-  provider = azurerm.keyvault_rbac
-
-  scope                = azurerm_key_vault.rbackv.id
-  role_definition_name = "Key Vault Certificates Officer"
-  principal_id         = var.kv_officer_object_id
-}
-
-resource "azurerm_role_assignment" "kv_administrator" {
-  provider = azurerm.keyvault_rbac
-
-  scope                = azurerm_key_vault.rbackv.id
-  role_definition_name = "Key Vault Administrator"
-  principal_id         = var.kv_administrator_object_id
-}
-
-
-resource "azurerm_role_assignment" "kv_admin_sp" {
-  provider = azurerm.keyvault_rbac
-
-  scope                = azurerm_key_vault.rbackv.id
-  role_definition_name = "Key Vault Administrator"
-  principal_id         = var.kv_admin_sp_object_id
-}
+# resource "azurerm_role_assignment" "kv_user1" {
+#   provider = azurerm.keyvault_rbac
+#
+#   scope                = azurerm_key_vault.rbackv.id
+#   role_definition_name = "Key Vault Secrets User"
+#   principal_id         = var.kv_user_object_id
+# }
+#
+# resource "azurerm_role_assignment" "kv_officer" {
+#   provider = azurerm.keyvault_rbac
+#
+#   scope                = azurerm_key_vault.rbackv.id
+#   role_definition_name = "Key Vault Certificates Officer"
+#   principal_id         = var.kv_officer_object_id
+# }
+#
+# resource "azurerm_role_assignment" "kv_administrator" {
+#   provider = azurerm.keyvault_rbac
+#
+#   scope                = azurerm_key_vault.rbackv.id
+#   role_definition_name = "Key Vault Administrator"
+#   principal_id         = var.kv_administrator_object_id
+# }
+#
+#
+# resource "azurerm_role_assignment" "kv_admin_sp" {
+#   provider = azurerm.keyvault_rbac
+#
+#   scope                = azurerm_key_vault.rbackv.id
+#   role_definition_name = "Key Vault Administrator"
+#   principal_id         = var.kv_admin_sp_object_id
+# }
 
 # resource "azurerm_role_assignment" "kv_user" {
 #   scope              = azurerm_key_vault.rbackv.id
