@@ -23,7 +23,6 @@ locals {
     "DOMAIN"                                 = var.webapp_config_domain
     "EDITOR"                                 = var.webapp_config_editor
     "FEEDBACK_URL"                           = var.webapp_config_feedback_url
-    "ACCESSIBILITY_URL"                      = var.webapp_config_accessibility_url
     "GOVUK_NOTIFY_API_KEY"                   = var.webapp_config_govuk_notify_api_key
     "GOOGLE_CLOUD_BUCKET"                    = var.webapp_config_google_cloud_bucket
     "GROVER_NO_SANDBOX"                      = var.webapp_config_grover_no_sandbox
@@ -59,7 +58,6 @@ locals {
     "DOMAIN"                                 = var.webapp_config_domain
     "EDITOR"                                 = var.webapp_config_editor
     "FEEDBACK_URL"                           = var.webapp_config_feedback_url
-    "ACCESSIBILITY_URL"                      = var.webapp_config_accessibility_url
     "GOVUK_NOTIFY_API_KEY"                   = var.webapp_config_govuk_notify_api_key
     "GOOGLE_CLOUD_BUCKET"                    = var.webapp_config_google_cloud_bucket
     "GROVER_NO_SANDBOX"                      = var.webapp_config_grover_no_sandbox
@@ -111,7 +109,6 @@ locals {
     "DOMAIN"                                 = var.webapp_config_domain
     "EDITOR"                                 = var.webapp_config_editor
     "FEEDBACK_URL"                           = var.webapp_config_feedback_url
-    "ACCESSIBILITY_URL"                      = var.webapp_config_accessibility_url
     "GOVUK_NOTIFY_API_KEY"                   = var.webapp_config_govuk_notify_api_key
     "GOOGLE_CLOUD_BUCKET"                    = var.webapp_config_google_cloud_bucket
     "GROVER_NO_SANDBOX"                      = var.webapp_config_grover_no_sandbox

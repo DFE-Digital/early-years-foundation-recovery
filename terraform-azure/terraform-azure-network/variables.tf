@@ -72,3 +72,25 @@ variable "kv_certificate_subject" {
   description = "Subject of the Certificate"
   type        = string
 }
+
+
+
+variable "kv_officer_object_id" {
+  description = "Object ID of the principal assigned the Key Vault Certificates Officer role"
+  type        = string
+}
+
+variable "kv_administrator_object_id" {
+  description = "Object ID of the principal assigned the Key Vault Administrator role"
+  type        = string
+}
+
+variable "kv_admin_sp_object_id" {
+  description = "Object ID of the service principal assigned the Key Vault Administrator role"
+  type        = string
+}
+
+variable "kv_user_object_id" {
+  description = "Object ID of the principal assigned the Key Vault user role"
+  type        = string
+}
