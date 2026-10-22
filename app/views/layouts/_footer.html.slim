@@ -9,6 +9,12 @@
             = govuk_link_to page.heading, static_path(page.name), class: 'govuk-footer__link'
 
         li.govuk-footer__list-item
+          = govuk_link_to Rails.configuration.accessibility_url, class: 'govuk-footer__link', target: '_blank', rel: 'noopener noreferrer' do
+            | Accessibility
+            span.govuk-visually-hidden
+              | (opens in a new tab)
+
+        li.govuk-footer__list-item
           = govuk_link_to t('links.footer.cookies'), '/settings/cookie-policy', class: 'govuk-footer__link'
 
         li.govuk-footer__list-item
