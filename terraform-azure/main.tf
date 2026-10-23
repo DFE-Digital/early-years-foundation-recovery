@@ -1,5 +1,6 @@
 provider "azurerm" {
-  skip_provider_registration = "true"
+  resource_provider_registrations = "none"
+  resource_providers_to_register  = ["Microsoft.Cache"]
 
   features {
     resource_group {
@@ -112,7 +113,7 @@ module "webapp" {
   insights_connection_string               = module.monitor.insights_connection_string
   instrumentation_key                      = module.monitor.insights_instrumentation_key
   logs_id                                  = module.monitor.logs_id
-  depends_on                               = [module.network, module.database]
+  depends_on                               = [module.network, module.database, azurerm_private_endpoint.redis, azurerm_private_dns_zone_virtual_network_link.redis]
 }
 
 # Create Review Application resources
