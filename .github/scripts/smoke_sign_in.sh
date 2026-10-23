@@ -3,6 +3,7 @@ set -euo pipefail
 
 base_url="${1:?Usage: smoke_sign_in.sh <base_url>}"
 base_url="${base_url%/}"
+expected_issuer="${2:-}"
 
 health_url="${base_url}/health"
 sign_in_url="${base_url}/users/sign-in"
@@ -34,7 +35,12 @@ for attempt in $(seq 1 "${max_attempts}"); do
     if grep -q "Continue to GOV.UK One Login" <<<"${page}"; then
       echo "Sign-in page includes GOV.UK One Login CTA"
 
-      if ! grep -Eq 'href="https://[^"]*account\.gov\.uk[^"]*"' <<<"${page}"; then
+      if [ -n "$expected_issuer" ]; then
+        if ! grep -Fq "href=\"${expected_issuer%/}/authorize?" <<<"${page}"; then
+          echo "Expected review simulator authorize link not found" >&2
+          exit 1
+        fi
+      elif ! grep -Eq 'href="https://[^"]*account\.gov\.uk[^"]*"' <<<"${page}"; then
         echo "GOV.UK One Login account.gov.uk link not found" >&2
         exit 1
       fi

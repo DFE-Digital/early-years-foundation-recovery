@@ -134,6 +134,10 @@ COPY .rubocop_todo.yml ${APP_HOME}/.rubocop_todo.yml
 
 CMD ["bundle", "exec", "rspec"]
 
+# Review slots use this as their ingress, with Rails and One Login as sidecars.
+FROM nginx:1.28.0-alpine AS review-proxy
+COPY config/review-proxy.conf /etc/nginx/conf.d/default.conf
+
 # ------------------------------------------------------------------------------
 # Pa11y CI - ./bin/docker-pa11y
 # ------------------------------------------------------------------------------

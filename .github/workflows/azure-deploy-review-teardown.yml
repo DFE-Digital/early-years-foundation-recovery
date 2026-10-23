@@ -4,10 +4,16 @@ on:
   pull_request:
     types:
       - closed
+      - unlabeled
+
+concurrency:
+  group: review-${{ github.event.number }}
+  cancel-in-progress: false
 
 # Permissions for OIDC authentication
 permissions:
   id-token: write
+  contents: read
 
 env:
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
@@ -18,10 +24,18 @@ env:
 
 jobs:
   teardown:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      (github.event.action == 'closed' || github.event.label.name == 'review')
     runs-on: ubuntu-latest
     environment: development
 
     steps:
+      - name: Checkout cleanup script matching this workflow
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.workflow_sha }}
+
       # Login to Azure using OIDC
       - name: Login to Azure CLI
         uses: azure/login@v3
@@ -30,20 +44,14 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # # Clear Azure cli account cache
-      # - name: Clear Azure CLI account cache
-      #   run: az account clear
-
       # Destroy Web Application
       - name: Destroy Azure Web Application
         uses: azure/CLI@v3
+        env:
+          RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP }}
+          REVIEWAPP_NAME: ${{ vars.REVIEWAPP_NAME }}
+          RESOURCE_NAME_PREFIX: ${{ vars.RESOURCE_NAME_PREFIX }}
         with:
           azcliversion: 2.74.0
           inlineScript: |
-            az webapp deployment slot delete --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-              --name ${{ vars.REVIEWAPP_NAME }} \
-              --slot ${{ env.PR_NUMBER }}
-            az postgres flexible-server db delete --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-              --server-name ${{ vars.RESOURCE_NAME_PREFIX }}-psqlfs \
-              --database-name ${{ env.PR_NUMBER }} \
-              --yes
+            bash .github/scripts/teardown_review.sh

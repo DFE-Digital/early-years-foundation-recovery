@@ -163,6 +163,62 @@ Adding the `review` label to a pull request in Github will trigger a deployment 
 Once a feature branch is deployed, the URL to access it is added as a comment
 in the PR conversation in the format: <https://eyrecovery-review-pr-##.azurewebsites.net>
 
+### Review-app login and sidecars
+
+Review slots use Azure App Service's `sitecontainers` configuration:
+
+- Nginx is the ingress container on port 8080.
+- Rails runs as a sidecar on port 3000 with a separate `pr-<number>` database.
+- The pinned GOV.UK One Login simulator runs as a sidecar on port 4000.
+
+The proxy routes the simulator's OIDC endpoints on the review hostname to the
+simulator, and everything else to Rails. The simulator configuration API is not
+exposed. Azure terminates HTTPS; no extra hostname or certificate is needed.
+Only review slots are converted to sidecars, not the parent development app.
+
+Click **Continue to GOV.UK One Login**, then submit the simulator's identity form.
+It defaults to `review-pr-<number>@example.com`; change both the subject and email
+to use a different synthetic account. Reuse both values to return to that account.
+Account data persists across deployments until the review label is removed
+or the PR is closed. Do not enter real personal data: simulator login is not an
+access-control boundary. Apply App Service access restrictions if access needs to
+be limited to the team.
+
+`REVIEW_APP=true` explicitly enables simulator authentication in Rails production
+mode and is only permitted with `ENVIRONMENT=development`. Each deployment
+generates a dedicated RSA keypair and writes the private key to slot settings;
+the simulator is configured with the corresponding public key. Azure sidecars
+share the app environment, so only run trusted images. Email delivery is disabled in Rails
+for review apps. No worker is deployed for a review database.
+
+Deployment requires the existing development Azure credentials, PostgreSQL
+credentials, `AZURE_REVIEW_APP_SUBNET`, `AZURE_VNET`, `REVIEWAPP_NAME` and
+`RESOURCE_NAME_PREFIX`. The deployment identity must be able to manage
+`Microsoft.Web/sites/slots/sitecontainers` (API version `2024-11-01`).
+Ensure the existing review plan has spare slot, memory and CPU capacity.
+Deployment rejects plans with more than one instance: simulator authorization
+codes are held in memory, so scale-out needs a separate design. Do not enable
+autoscale on the review plan. Simulator restarts invalidate in-flight
+logins; retry from the sign-in page.
+
+The deployment first runs the page-level smoke check, then reuses the browser
+test from the isolated login workflow to verify login, saved account details,
+returning users and logout against the deployed hostname. Failure screenshots
+are uploaded to the workflow run. When diagnosing failures, check the proxy,
+Rails and simulator container logs in the review slot, then its database and
+VNet integration. A healthy Rails endpoint alone does not prove simulator health.
+
+Removing the `review` label or closing the PR deletes the slot (including all
+sidecars) and its database. Cleanup tolerates missing resources but fails on
+unexpected Azure errors. New commits update the existing slot using immutable
+image tags; deployment and teardown share per-PR concurrency.
+
+Before general rollout, deploy a labelled internal PR to verify Azure sidecar
+support, networking, permissions and the browser test. The shared PostgreSQL
+server is still configured as version 13 in Terraform: confirm its actual version
+and support status, and coordinate an upgrade separately rather than rebuilding
+the shared database as part of review-app provisioning.
+
 We intend to use [semantic versioning](https://semver.org/).
 
 [Staging][staging] is deployed from this [workflow][staging-workflow].

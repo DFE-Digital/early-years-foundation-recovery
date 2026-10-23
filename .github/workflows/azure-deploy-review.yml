@@ -5,6 +5,7 @@ on:
     types:
       - labeled # uses 'review'
       - synchronize
+      - reopened
     paths-ignore:
       - "**/*.md"
       - .docker*
@@ -13,16 +14,17 @@ on:
       - .pa11yci
       - .tool-versions
       - .yardopts
-      - bin/*
       - docker-compose.*
-      - Dockerfile
-      - terraform-azure
       - uml/*
+
+concurrency:
+  group: review-${{ github.event.number }}
+  cancel-in-progress: false
 
 # Permissions for OIDC authentication and URL comment step
 permissions:
   id-token: write
-  contents: write
+  contents: read
   packages: write
   pull-requests: write
 
@@ -35,7 +37,7 @@ env:
 
 jobs:
   build-and-deploy:
-    if: contains(github.event.pull_request.labels.*.name, 'review')
+    if: contains(github.event.pull_request.labels.*.name, 'review') && github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     environment: development
 
@@ -91,7 +93,14 @@ jobs:
             ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
             ${{ env.DOCKER_IMAGE }}:${{ env.PR_NUMBER }}
 
-      # Login to Azure using OIDC
+      - name: Build and push review proxy
+        uses: docker/build-push-action@v6
+        with:
+          target: review-proxy
+          context: .
+          push: true
+          tags: ${{ env.DOCKER_IMAGE }}:review-proxy-${{ github.event.pull_request.head.sha }}
+
       - name: Login to Azure CLI
         uses: azure/login@v3
         with:
@@ -99,48 +108,57 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+      - name: Check review deployment is still requested
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EXPECTED_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          gh pr view "${PR_NUMBER#pr-}" --json state,labels,headRefOid |
+            jq -e --arg sha "$EXPECTED_SHA" \
+              '.state == "OPEN" and .headRefOid == $sha and any(.labels[]; .name == "review")'
+
       # Deploy Web Application
       - name: Deploy to Azure App Services
         uses: azure/CLI@v3
+        env:
+          RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP }}
+          REVIEWAPP_NAME: ${{ vars.REVIEWAPP_NAME }}
+          RESOURCE_NAME_PREFIX: ${{ vars.RESOURCE_NAME_PREFIX }}
+          IMAGE_SHA: ${{ github.event.pull_request.head.sha }}
+          PSQLFS_USERNAME: ${{ secrets.PSQLFS_USERNAME }}
+          PSQLFS_PASSWORD: ${{ secrets.PSQLFS_PASSWORD }}
+          REVIEW_APP_SUBNET: ${{ secrets.AZURE_REVIEW_APP_SUBNET }}
+          AZURE_VNET: ${{ secrets.AZURE_VNET }}
         with:
           azcliversion: 2.74.0
           inlineScript: |
-            az postgres flexible-server db create --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-              --server-name ${{ vars.RESOURCE_NAME_PREFIX }}-psqlfs \
-              --database-name ${{ env.PR_NUMBER }} \
-              --output none
-            az webapp config appsettings set --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-              --name ${{ vars.REVIEWAPP_NAME }} \
-              --settings DATABASE_URL="postgresql://${{ secrets.PSQLFS_USERNAME }}:${{ secrets.PSQLFS_PASSWORD }}@${{ vars.RESOURCE_NAME_PREFIX }}-psqlfs.postgres.database.azure.com/${{ env.PR_NUMBER }}?sslmode=require" \
-              --output none
-            az webapp deployment slot create --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-              --name ${{ vars.REVIEWAPP_NAME }} \
-              --slot ${{ env.PR_NUMBER }} \
-              --configuration-source ${{ vars.REVIEWAPP_NAME }} \
-              --deployment-container-image-name ${{ env.DOCKER_IMAGE }}:${{ env.PR_NUMBER }} \
-              --output none
-            az webapp vnet-integration add --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-              --name ${{ vars.REVIEWAPP_NAME }} \
-              --slot ${{ env.PR_NUMBER }} \
-              --subnet ${{ secrets.AZURE_REVIEW_APP_SUBNET }} \
-              --vnet ${{ secrets.AZURE_VNET }}
-            az webapp config appsettings set --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-              --name ${{ vars.REVIEWAPP_NAME }} \
-              --slot ${{ env.PR_NUMBER }} \
-              --slot-settings DOMAIN="${{ vars.REVIEWAPP_NAME }}-${{ env.PR_NUMBER }}.azurewebsites.net" \
-              --output none
-            az webapp config appsettings set --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-              --name ${{ vars.REVIEWAPP_NAME }} \
-              --slot ${{ env.PR_NUMBER }} \
-              --settings APPLICATION_INSIGHTS_CONNECTION_STRING="${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}" \
-                SPLUNK_ACCESS_TOKEN="${{ secrets.SPLUNK_ACCESS_TOKEN }}" \
-                SPLUNK_REALM="${{ secrets.SPLUNK_REALM }}" \
-                OTEL_SERVICE_NAME="early-years-foundation-recovery" \
-                OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4318/v1/traces" \
-              --output none
+            bash .github/scripts/deploy_review.sh
 
       - name: Smoke test sign in journey
-        run: bash .github/scripts/smoke_sign_in.sh "https://${{ vars.REVIEWAPP_NAME }}-${{ env.PR_NUMBER }}.azurewebsites.net"
+        run: bash .github/scripts/smoke_sign_in.sh "https://${{ vars.REVIEWAPP_NAME }}-${{ env.PR_NUMBER }}.azurewebsites.net" "https://${{ vars.REVIEWAPP_NAME }}-${{ env.PR_NUMBER }}.azurewebsites.net"
+
+      - name: Set up Node for browser verification
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22.x
+
+      - name: Verify deployed login journey
+        env:
+          REVIEW_APP_URL: https://${{ vars.REVIEWAPP_NAME }}-${{ env.PR_NUMBER }}.azurewebsites.net
+          GOV_ONE_CLIENT_ID: review-${{ env.PR_NUMBER }}
+        run: |
+          corepack enable
+          yarn install --immutable
+          mkdir -p tmp/login-e2e
+          node --test spec/e2e/gov_one_login.test.mjs
+
+      - name: Upload login failure screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: review-login-failure-${{ env.PR_NUMBER }}
+          path: tmp/login-e2e/
+          retention-days: 7
 
       # Add URL to Pull Request
       - name: Comment URL to PR

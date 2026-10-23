@@ -45,7 +45,14 @@ Rails.application.configure do
   end
 
   # use integration GOV.UK One Login environment for development
-  if ENV['ENVIRONMENT'].eql?('development')
+  if ENV['REVIEW_APP'] == 'true'
+    raise 'Review apps must use the development environment' unless ENV['ENVIRONMENT'] == 'development'
+
+    config.gov_one_base_uri = config.service_url
+    config.gov_one_private_key = ENV.fetch('GOV_ONE_PRIVATE_KEY')
+    config.gov_one_client_id = ENV.fetch('GOV_ONE_CLIENT_ID')
+    config.action_mailer.perform_deliveries = false
+  elsif ENV['ENVIRONMENT'].eql?('development')
     config.gov_one_base_uri = credentials.dig(:gov_one, :integration, :base_uri)
     config.gov_one_private_key = credentials.dig(:gov_one, :integration, :private_key)
     config.gov_one_client_id = credentials.dig(:gov_one, :integration, :client_id)
