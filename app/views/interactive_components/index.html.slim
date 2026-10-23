@@ -1,3 +1,6 @@
+- content_for :head do
+  = javascript_include_tag 'https://www.riddle.com/embed/build-embedjs/embedV2.js',
+      defer: true
 - content_for :page_title do
   = html_title('Interactive components')
 
@@ -30,3 +33,27 @@ section aria-labelledby="hotspot-demo-heading"
       image: @hotspot_example[:image],
       alt: @hotspot_example[:alt],
       hotspots: @hotspot_example[:hotspots]
+
+section aria-labelledby="riddle-flashcard-heading"
+  h2.govuk-heading-l id="riddle-flashcard-heading"
+    | Flip cards — Riddle
+
+  .flip-card-grid
+    = render 'riddle_embed',
+        riddle_id: 'u0SGWMu0',
+        title: 'Flashcard — first Riddle example'
+
+    = render 'riddle_embed',
+        riddle_id: 'u0SGWMu0',
+        title: 'Flashcard — second Riddle example'
+
+section aria-labelledby="riddle-demo-heading"
+  h2.govuk-heading-l id="riddle-demo-heading"
+    | Image hotspots — Riddle
+
+  p.govuk-body
+    | An embedded Riddle example for comparison with our custom hotspot component.
+
+  = render 'riddle_embed',
+      riddle_id: '6wEYygzQ',
+      title: 'Interactive graphic — Riddle hotspot example'

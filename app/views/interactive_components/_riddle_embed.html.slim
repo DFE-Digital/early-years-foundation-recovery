@@ -1,0 +1,13 @@
+.riddle2-wrapper(
+  data-is-qzzr="false"
+  data-rid-id=riddle_id
+  data-auto-scroll="true"
+  data-is-fixed-height-enabled="false"
+  style="margin: 0 auto; max-width: 100%; width: 100%;"
+)
+  iframe(
+    title=title
+    src="https://www.riddle.com/embed/a/#{riddle_id}?lazyImages=false&staticHeight=false"
+    allow="autoplay"
+    referrerpolicy="strict-origin"
+  )
