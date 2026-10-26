@@ -4,8 +4,3 @@ CVE-2025-61594
 
 # flat-cache depends on flatted@3.3.3
 CVE-2026-32141
-
-# Temporary update
-CVE-2026-40200
-CVE-2026-22184
-CVE-2026-41316
