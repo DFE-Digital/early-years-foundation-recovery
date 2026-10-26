@@ -1,7 +1,3 @@
-#
-# Suppress false positive for uri gem vulnerability
-CVE-2025-61594
-
 # erb (erb-4.0.4.gemspec), musl-utils and zlib used by ruby:3.4.5-alpine, needs updating
 CVE-2026-41316
 CVE-2026-22184
