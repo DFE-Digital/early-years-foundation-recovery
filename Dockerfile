@@ -38,7 +38,7 @@ RUN bundle install --no-binstubs --retry=10 --jobs=4
 # ------------------------------------------------------------------------------
 # OpenTelemetry Collector
 # ------------------------------------------------------------------------------
-FROM otel/opentelemetry-collector-contrib:0.161.0@sha256:fd328de2552466ad78385e1b1289c3f2402b1c45f265b252aab1955b42845ac1 AS otel-collector
+FROM otel/opentelemetry-collector-contrib:0.163.2@sha256:7f22d2a6748110ffb6a59bc0df448bccbf501cdb667d610ede4c61d3863d5849 AS otel-collector
 
 # ------------------------------------------------------------------------------
 # Production Stage

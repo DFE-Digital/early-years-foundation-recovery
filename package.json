@@ -30,9 +30,9 @@
     "accessible-autocomplete": "3.0.2",
     "dfe-frontend": "2.0.1",
     "esbuild": "0.28.2",
-    "govuk-frontend": "6.5.1",
-    "puppeteer": "25.14.0",
-    "sass": "1.105.1"
+    "govuk-frontend": "6.6.0",
+    "puppeteer": "25.15.0",
+    "sass": "1.106.1"
   },
   "devDependencies": {
     "stylelint": "17.16.0",
