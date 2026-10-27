@@ -11,7 +11,7 @@ Optionally create `.env` to override or set default variables.
 ## Dependencies
 
 Ruby version `3.4.x`
-Node version `20.19.x` locally (`24.x` in the production image)
+Node version `22.12.x` locally (`24.x` in the production image)
 PostgreSQL version `15.17`
 Yarn version `4.0.x`
 
@@ -107,61 +107,18 @@ Running locally in the production rails environment requires generating a self-s
 
 ### Production image
 
-The `app` target uses the Docker Official Image `ruby:3.4.10-alpine3.23`,
-keeping the Ruby version aligned with `Gemfile` and CI. The previous base was
-also an official Ruby image, but used Ruby 3.4.5 and Alpine 3.22 and included build
-tools in production. Docker Hardened Images were evaluated, but require
-authentication to `dhi.io` that is not configured in our build workflows.
-Their minimal runtime also needs additional
-integration for our shell entrypoint, Azure WebSSH and Chromium-based PDFs.
-The Debian slim fallback was built and smoke-tested, but rejected because its
-HIGH/CRITICAL vulnerability count was higher than the original image's.
+The `app` target uses the Docker Official Image `ruby:3.4.10-alpine3.23`.
+Compilation and asset-building tools stay in build stages; the runtime includes
+only application dependencies and the system packages required by the app.
 
-The `deps` and `build` stages install compilation tools, development headers and
-Yarn, and compile the application assets. The final image starts from the runtime
-base, not the build stage. It contains the bundled production gems, precompiled
-assets and only the production JavaScript dependency (Puppeteer). Node.js,
-Chromium and fonts are needed for Grover PDF generation; PostgreSQL and YAML
-runtime libraries, CA certificates, timezone data, Azure WebSSH and the
-OpenTelemetry collector are retained. The `dev` and `test` targets keep build
-tools and the full JavaScript dependency set. Chromium's required transitive
-packages are retained, including `pkgconf`, required by its MIME/icon packages;
-the runtime has no compiler, Make, development headers for PostgreSQL/YAML,
-Yarn or asset-build packages.
+Build and smoke-test the image with:
 
-Build the production image with `docker build --pull --target app -t recovery:app .`.
-Run `bash .github/scripts/smoke_image.sh recovery:app` to verify native libraries,
-compiled assets, SSH configuration, the collector and Chromium PDF generation,
-and to check that build tools are absent. This also runs in the image scan workflow.
-For a base-image change, build the previous revision as a separate image and scan
-both with the same Trivy version, vulnerability database, configuration and
-HIGH/CRITICAL severity settings. Compare total findings as well as fixable
-findings; do not add exclusions to make the comparison pass.
+```sh
+docker build --pull --target app -t recovery:app .
+bash .github/scripts/smoke_image.sh recovery:app
+```
 
-Before promoting an image, run the test suite, check PDF generation and deploy a
-PR labelled `review`. Dockerfile changes trigger the review deployment, whose
-sign-in smoke check must pass. Use the staging deployment workflow for the same
-image changes and verify its sign-in smoke check, background jobs and telemetry.
-The runtime base applies Alpine package security updates during the build.
-Refresh the base image and rebuild regularly to pick up security fixes
-(`docker build --pull --no-cache --target app -t recovery:app .` also reruns
-package updates rather than reusing a cached layer);
-Ruby patch upgrades must also update `Gemfile`, its lockfile and CI consistently.
-
-On 27 October 2026, local ARM64 scans with Trivy 0.76.0 and the same vulnerability
-database (updated 27 October 2026 at 07:13 UTC), repository configuration and
-HIGH/CRITICAL severity filter gave:
-
-| Production image | HIGH | CRITICAL |
-| --- | ---: | ---: |
-| Previous Ruby 3.4.5 / Alpine 3.22 | 17 | 0 |
-| Rejected Ruby 3.4.5 / Debian 13 slim | 187 | 15 |
-| Ruby 3.4.10 / Alpine 3.23 | 0 | 0 |
-
-These counts include unfixed vulnerabilities and use the existing exclusions
-unchanged. They are point-in-time results, not a guarantee of no vulnerabilities.
-Repeat the scan for the deployment architecture in CI and confirm the review and
-staging checks before promoting.
+The PR workflow scans the image and review deployments run the sign-in smoke check.
 
 Containerised services are available for use by developers and testers.
 There are a number of convenience scripts to make working with **Docker** easier.
