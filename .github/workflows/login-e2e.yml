@@ -11,7 +11,7 @@ permissions:
 jobs:
   login:
     name: Sign in with the GOV.UK One Login simulator
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     environment: test
     env:
