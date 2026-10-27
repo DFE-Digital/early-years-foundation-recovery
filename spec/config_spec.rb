@@ -40,6 +40,10 @@ RSpec.describe 'Application configuration' do
       expect(config.user_password).to eq 'Str0ngPa$$w0rd12'
     end
 
+    it 'has a accessibility url' do
+      expect(config.accessibility_url).to be_present
+    end
+
     it 'exports dashboard statistics daily at midnight' do
       expect(config.dashboard_update_interval).to eq '0 0 */2 * *'
     end
