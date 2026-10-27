@@ -49,27 +49,6 @@ Expected steady state is enforced CSP in production (`CSP_REPORT_ONLY=false`).
 Report-only in production is temporary and only for rollout diagnostics or break-glass
 incident mitigation.
 
-### Analytics collection
-
-GA4 sends collection requests to regional hosts, including
-`region1.google-analytics.com`. Clarity load balances collection across multiple
-subdomains. Restricting collection to `www.google-analytics.com` and selected
-Clarity hosts blocks events even when the analytics scripts load successfully.
-
-Allow `https://*.google-analytics.com` and `https://*.clarity.ms` only in
-`connect-src` and `img-src`. Script sources retain their existing explicit hosts
-and nonce requirement; analytics still requires the user's cookie consent.
-These domain-scoped collection exceptions do not restore unrestricted HTTPS access.
-
-References: [Google's CSP guidance](https://developers.google.com/tag-platform/security/guides/csp)
-and [Clarity's CSP guidance](https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-csp).
-
-Validate with `CSP_REPORT_ONLY=false` in staging: accept analytics cookies, check
-that collection requests succeed without CSP errors, and confirm the visit in
-GA4 Realtime/DebugView and Clarity. Also verify that rejecting cookies prevents
-analytics loaders from being rendered. Repeat after a full reload and subsequent
-in-app navigation to detect separate script nonce issues.
-
 ## Consequences
 
 - Security posture improves against inline/script injection abuse paths.
