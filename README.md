@@ -184,7 +184,8 @@ The commands run common tasks inside containers:
 - `bin/docker-adr` rebuilds the architecture decision records table of contents
 - `bin/docker-dev` starts `Procfile.dev`, containerised equivalent of `bin/dev`,
     using the `docker-compose.dev.yml` override
-    Additionally, it will install bundle and yarn dependencies.
+    Additionally, it will install bundle and yarn dependencies before starting
+    the web server and asset watchers, including when `node_modules` already exists.
 - `bin/podman-dev` starts the same development stack via Podman Compose
 - `bin/docker-rails erd` generate an Entity Relationship Diagram
 - `bin/docker-rails db:seed` populates the containerised postgres database
