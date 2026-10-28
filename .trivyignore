@@ -1,21 +1,10 @@
-#
-# Suppress false positive for uri gem vulnerability
+# erb (erb-4.0.4.gemspec), musl-utils and zlib used by ruby:3.4.10-alpine, uri (uri-1.0.3.gemspec) needs updating
+CVE-2026-41316
+CVE-2026-22184
+CVE-2026-40200
 CVE-2025-61594
 
-# flat-cache depends on flatted@3.3.3
-CVE-2026-32141
-
-# Temporary update
-CVE-2026-40200
-CVE-2026-22184
-CVE-2026-41316
-
-# CVE-2026-45363: ruby-jwt empty-key HMAC bypass (fixed in 3.2.0).
-CVE-2026-45363
-
-# Collector embeds vulnerable Go stdlib; awaiting an upstream fix.
-# Remove after upgrading to a Collector built with Go 1.26.9 / 1.27.2 or later patched Go.
-# Latest available otel/opentelemetry-collector-contrib:0.162.0 still has the vulnerable v1.26.8 stdlib
-CVE-2026-78667
-CVE-2026-97031
-CVE-2026-78669
+# Temporary exception: OpenTelemetry Collector 0.163.2 bundles go-jose v4.1.5.
+# Collector 0.164.0 is also affected. Remove when a release includes v4.1.6+.
+# This accepts the reported HIGH RSA JWK parsing DoS risk; review by expiry.
+CVE-2026-116587 exp:2026-11-11
