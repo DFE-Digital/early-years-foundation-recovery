@@ -111,7 +111,7 @@ resource "azurerm_subnet" "keyvault_private_endpoint_snet" {
   name                                      = "${var.resource_name_prefix}-kv-pe-snet"
   virtual_network_name                      = azurerm_virtual_network.vnet.name
   resource_group_name                       = var.resource_group
-  address_prefixes                          = ["172.1.4.0/24"]
+  address_prefixes                          = ["172.1.5.0/24"]
   private_endpoint_network_policies_enabled = false
 }
 
