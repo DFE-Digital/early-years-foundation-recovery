@@ -110,6 +110,18 @@ jobs:
         with:
           azcliversion: 2.74.0
           inlineScript: |
+            set -e
+            redis_url=$(az webapp config appsettings list \
+              --resource-group "${{ secrets.AZURE_RESOURCE_GROUP }}" \
+              --name "${{ vars.WEBAPP_NAME }}" \
+              --query "[?name=='REDIS_URL'].value | [0]" --output tsv)
+            cache_namespace=$(az webapp config appsettings list \
+              --resource-group "${{ secrets.AZURE_RESOURCE_GROUP }}" \
+              --name "${{ vars.WEBAPP_NAME }}" \
+              --query "[?name=='CACHE_NAMESPACE'].value | [0]" --output tsv)
+            test -n "$redis_url" && test "$redis_url" != "None" || { echo "Missing REDIS_URL app setting" >&2; exit 1; }
+            test -n "$cache_namespace" && test "$cache_namespace" != "None" || { echo "Missing CACHE_NAMESPACE app setting" >&2; exit 1; }
+            printf '::add-mask::%s\n' "$redis_url"
             az container create --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.WORKERAPP_NAME }} \
               --image ${{ env.DOCKER_IMAGE }}:${{ inputs.version || github.ref_name }} \
@@ -139,4 +151,7 @@ jobs:
                 SPLUNK_REALM=${{ secrets.SPLUNK_REALM }} \
                 OTEL_SERVICE_NAME=early-years-foundation-recovery \
                 OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318/v1/traces \
-                APPLICATION_INSIGHTS_CONNECTION_STRING=${APPLICATION_INSIGHTS_CONNECTION_STRING}
+                APPLICATION_INSIGHTS_CONNECTION_STRING=${APPLICATION_INSIGHTS_CONNECTION_STRING} \
+              --secure-environment-variables \
+                REDIS_URL="$redis_url" \
+                CACHE_NAMESPACE="$cache_namespace"

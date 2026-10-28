@@ -165,7 +165,7 @@ resource "azurerm_application_gateway" "agw" {
   name                              = "${var.resource_name_prefix}-agw"
   location                          = var.location
   resource_group_name               = var.resource_group
-  enable_http2                      = true
+  http2_enabled                     = true
   firewall_policy_id                = azurerm_web_application_firewall_policy.agw_wafp[0].id
   force_firewall_policy_association = true
 

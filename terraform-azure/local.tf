@@ -11,7 +11,7 @@ locals {
   }
 
   # Web Application Configuration
-  webapp_app_settings = {
+  webapp_app_settings = merge({
     "ENVIRONMENT"                            = var.environment
     "DATABASE_URL"                           = var.webapp_database_url
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE"    = "false"
@@ -44,9 +44,9 @@ locals {
     "OTEL_EXPORTER_OTLP_ENDPOINT"            = "http://localhost:4318/v1/traces"
     "WEB_CONCURRENCY"                        = var.webapp_config_web_concurrency
     "WEBSITES_CONTAINER_START_TIME_LIMIT"    = 720
-  }
+  }, local.redis_app_settings)
 
-  webapp_slot_app_settings = {
+  webapp_slot_app_settings = merge({
     "ENVIRONMENT"                            = var.environment
     "DATABASE_URL"                           = var.webapp_slot_database_url
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE"    = "false"
@@ -78,7 +78,9 @@ locals {
     "OTEL_EXPORTER_OTLP_ENDPOINT"            = "http://localhost:4318/v1/traces"
     "WEB_CONCURRENCY"                        = var.webapp_config_web_concurrency
     "WEBSITES_CONTAINER_START_TIME_LIMIT"    = 720
-  }
+    }, local.redis_app_settings, local.redis_enabled ? {
+    CACHE_NAMESPACE = "${var.resource_name_prefix}:green"
+  } : {})
 
   # Background Worker Application Configuration, passed securely to container instances
   app_worker_environment_variables = {
