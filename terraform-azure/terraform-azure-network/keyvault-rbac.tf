@@ -27,7 +27,7 @@ resource "azurerm_key_vault" "rbackv" {
   public_network_access_enabled = false
 
   network_acls {
-    default_action = "Allow"
+    default_action = "Deny"
     bypass         = "AzureServices"
   }
 
@@ -36,6 +36,25 @@ resource "azurerm_key_vault" "rbackv" {
     "Parent Business"  = "Children's Care"
     "Product"          = "Early Years Qualifications"
     "Service Offering" = "Early Years Qualifications"
+  }
+}
+
+resource "azurerm_private_endpoint" "rbackv" {
+  name                = "${var.resource_name_prefix}-rbkv-pe"
+  location            = var.location
+  resource_group_name = var.resource_group
+  subnet_id           = azurerm_subnet.keyvault_private_endpoint_snet.id
+
+  private_service_connection {
+    name                           = "${var.resource_name_prefix}-rbkv-psc"
+    private_connection_resource_id = azurerm_key_vault.rbackv.id
+    subresource_names              = ["vault"]
+    is_manual_connection           = false
+  }
+
+  private_dns_zone_group {
+    name                 = "default"
+    private_dns_zone_ids = [azurerm_private_dns_zone.keyvault_private_dns.id]
   }
 }
 
