@@ -106,3 +106,31 @@ resource "azurerm_subnet" "agw_snet" {
 
   #checkov:skip=CKV2_AZURE_31:NSG not required
 }
+
+resource "azurerm_subnet" "keyvault_private_endpoint_snet" {
+  name                                      = "${var.resource_name_prefix}-kv-pe-snet"
+  virtual_network_name                      = azurerm_virtual_network.vnet.name
+  resource_group_name                       = var.resource_group
+  address_prefixes                          = ["172.1.5.0/24"]
+  private_endpoint_network_policies_enabled = false
+}
+
+resource "azurerm_private_dns_zone" "keyvault_private_dns" {
+  name                = "privatelink.vaultcore.azure.net"
+  resource_group_name = var.resource_group
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
+}
+
+resource "azurerm_private_dns_zone_virtual_network_link" "keyvault_private_dns_vnet_link" {
+  name                  = "${var.resource_name_prefix}-kv-dns-vnet-link"
+  private_dns_zone_name = azurerm_private_dns_zone.keyvault_private_dns.name
+  virtual_network_id    = azurerm_virtual_network.vnet.id
+  resource_group_name   = var.resource_group
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
+}
