@@ -2,7 +2,7 @@ module ApplicationHelper
   CONFIG_SUMMARY = [
     ['Rails version', Rails.version],
     ['Ruby version', RUBY_VERSION],
-    ['GOV.UK Frontend', JSON.parse(File.read(Rails.root.join('package.json'))).dig('dependencies', 'govuk-frontend').tr('^', '')],
+    ['GOV.UK Frontend', JSON.parse(File.read(Rails.root.join('package.json'))).dig('devDependencies', 'govuk-frontend').tr('^', '')],
   ].freeze
 
   # @return [String]

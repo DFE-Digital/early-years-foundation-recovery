@@ -11,7 +11,7 @@ Optionally create `.env` to override or set default variables.
 ## Dependencies
 
 Ruby version `3.4.x`
-Node version `20.19.x`
+Node version `22.12.x` locally (`24.x` in the production image)
 PostgreSQL version `15.17`
 Yarn version `4.0.x`
 
@@ -105,6 +105,21 @@ Running locally in the production rails environment requires generating a self-s
 
 ## Using Docker
 
+### Production image
+
+The `app` target uses the Docker Official Image `ruby:3.4.10-alpine3.23`.
+Compilation and asset-building tools stay in build stages; the runtime includes
+only application dependencies and the system packages required by the app.
+
+Build and smoke-test the image with:
+
+```sh
+docker build --pull --target app -t recovery:app .
+bash .github/scripts/smoke_image.sh recovery:app
+```
+
+The PR workflow scans the image and review deployments run the sign-in smoke check.
+
 Containerised services are available for use by developers and testers.
 There are a number of convenience scripts to make working with **Docker** easier.
 All containers for the project are named with the prefix `recovery_`.
@@ -126,7 +141,8 @@ The commands run common tasks inside containers:
 - `bin/docker-adr` rebuilds the architecture decision records table of contents
 - `bin/docker-dev` starts `Procfile.dev`, containerised equivalent of `bin/dev`,
     using the `docker-compose.dev.yml` override
-    Additionally, it will install bundle and yarn dependencies.
+    Additionally, it will install bundle and yarn dependencies before starting
+    the web server and asset watchers, including when `node_modules` already exists.
 - `bin/podman-dev` starts the same development stack via Podman Compose
 - `bin/docker-rails erd` generate an Entity Relationship Diagram
 - `bin/docker-rails db:seed` populates the containerised postgres database
