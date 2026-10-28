@@ -32,10 +32,11 @@ resource "azurerm_key_vault" "rbackv" {
   }
 
   tags = {
-    "Environment"      = var.environment
-    "Parent Business"  = "Children's Care"
-    "Product"          = "Early Years Qualifications"
-    "Service Offering" = "Early Years Qualifications"
+    "Environment" = var.environment
+  }
+
+  lifecycle {
+    ignore_changes = [tags]
   }
 }
 
