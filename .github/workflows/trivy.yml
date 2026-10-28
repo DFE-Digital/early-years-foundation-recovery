@@ -12,6 +12,9 @@
         - Gemfile.lock
         - package.json
         - yarn.lock
+        - .trivyignore
+        - .github/scripts/smoke_image.sh
+        - .github/workflows/trivy.yml
 
   permissions:
     packages: write
@@ -59,6 +62,9 @@
               ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
             tags: |
               ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
+
+        - name: Smoke test production image
+          run: bash .github/scripts/smoke_image.sh "${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}"
 
         # Scan image
         -

@@ -5,6 +5,12 @@ describe 'ApplicationHelper', type: :helper do
     expect(helper.html_title(:foo, 'bar')).to eq 'Early years child development training : foo : bar'
   end
 
+  it '#configuration_summary_list includes the compiled GOV.UK Frontend version' do
+    frontend_version = JSON.parse(File.read(Rails.root.join('package.json'))).fetch('devDependencies').fetch('govuk-frontend')
+
+    expect(helper.configuration_summary_list).to include('GOV.UK Frontend', frontend_version)
+  end
+
   describe '#show_important_banner' do
     context 'when SHOW_IMPORTANT_BANNER is true' do
       before { allow(ENV).to receive(:[]).with('SHOW_IMPORTANT_BANNER').and_return('true') }
