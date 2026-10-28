@@ -43,6 +43,12 @@ CLARITY_DOMAINS = %w[
   c.bing.com
 ].freeze
 
+# Collection hosts vary by region (GA4) and load-balanced environment (Clarity).
+ANALYTICS_COLLECTION_SOURCES = %w[
+  https://*.google-analytics.com
+  https://*.clarity.ms
+].freeze
+
 Rails.application.config.content_security_policy do |policy|
   # @see https://www.contentful.com/developers/docs/tutorials/general/live-preview/#set-up-live-preview
   policy.frame_ancestors :self, 'https://app.contentful.com'
@@ -61,6 +67,7 @@ Rails.application.config.content_security_policy do |policy|
 
   policy.img_src     :self,
                      *GOOGLE_ANALYTICS_DOMAINS, # Tracking pixels
+                     *ANALYTICS_COLLECTION_SOURCES,
                      *OPTIMIZE_DOMAINS,
                      *CLARITY_DOMAINS,
                      'images.ctfassets.net',
@@ -89,6 +96,7 @@ Rails.application.config.content_security_policy do |policy|
   policy.connect_src :self,
                      *GOOGLE_ANALYTICS_DOMAINS,
                      *CLARITY_DOMAINS,
+                     *ANALYTICS_COLLECTION_SOURCES,
                      *webpack_dev_server.to_a
 
   policy.upgrade_insecure_requests
