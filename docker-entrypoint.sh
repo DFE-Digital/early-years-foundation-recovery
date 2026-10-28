@@ -24,7 +24,10 @@ then
     bundle
   fi
 
-  if [ ! -d "node_modules" ]
+  if [ "${RAILS_ENV}" = "development" ]
+  then
+    yarn install --immutable
+  elif [ ! -d "node_modules" ]
   then
     bundle exec rails yarn:install
   fi
