@@ -2,7 +2,12 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from './application'
+import { application } from "./application";
 
-import AutocompleteController from './autocomplete_controller'
-application.register('autocomplete', AutocompleteController)
+import AutocompleteController from "./autocomplete_controller";
+import FlipCardController from "./flip_card_controller";
+import HotspotImageController from "./hotspot_image_controller";
+
+application.register("autocomplete", AutocompleteController);
+application.register("flip-card", FlipCardController);
+application.register("hotspot-image", HotspotImageController);

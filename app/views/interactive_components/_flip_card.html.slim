@@ -1,0 +1,48 @@
+.flip-card(
+  data-controller="flip-card"
+  data-action="click->flip-card#toggle turbo:before-cache@document->flip-card#reset"
+)
+  .flip-card__inner
+    .flip-card__face.flip-card__face--front(
+      data-flip-card-target="front"
+      role="group"
+      tabindex="-1"
+      aria-labelledby="#{id}-question-heading"
+      aria-describedby="#{id}-question"
+    )
+      h3.govuk-heading-m id="#{id}-question-heading"
+        i.fa-regular.fa-lightbulb.flip-card__icon aria-hidden="true"
+        |  Learning check
+
+      p.govuk-body id="#{id}-question"
+        = question
+
+      button.flip-card__button(
+        type="button"
+        hidden=true
+        data-flip-card-target="button"
+      )
+        | Reveal answer
+        i.fa-solid.fa-arrows-rotate< aria-hidden="true"
+
+    .flip-card__face.flip-card__face--back(
+      data-flip-card-target="back"
+      role="group"
+      tabindex="-1"
+      aria-labelledby="#{id}-answer-heading"
+      aria-describedby="#{id}-answer"
+    )
+      h3.govuk-heading-m id="#{id}-answer-heading"
+        i.fa-regular.fa-lightbulb.flip-card__icon aria-hidden="true"
+        |  Answer
+
+      p.govuk-body id="#{id}-answer"
+        = answer
+
+      button.flip-card__button(
+        type="button"
+        hidden=true
+        data-flip-card-target="button"
+      )
+        | Return to question
+        i.fa-solid.fa-arrows-rotate< aria-hidden="true"

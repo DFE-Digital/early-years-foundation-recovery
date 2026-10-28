@@ -1,0 +1,59 @@
+- content_for :head do
+  = javascript_include_tag 'https://www.riddle.com/embed/build-embedjs/embedV2.js',
+      defer: true
+- content_for :page_title do
+  = html_title('Interactive components')
+
+h1.govuk-heading-xl Interactive components
+
+h2.govuk-heading-l Flip cards
+
+p.govuk-body Consider each question, then select “Reveal answer”.
+
+.flip-card-grid
+  = render 'flip_card',
+      id: 'partnerships',
+      question: 'What is a possible barrier to building effective partnerships with parents and carers?',
+      answer: 'Different work schedules can make it difficult to find a convenient time to communicate.'
+
+  = render 'flip_card',
+      id: 'communication',
+      question: 'How could you make communication more accessible to parents and carers?',
+      answer: 'Ask families about their preferred ways to communicate and offer suitable alternatives.'
+
+section aria-labelledby="hotspot-demo-heading"
+  h2.govuk-heading-l id="hotspot-demo-heading"
+    | Image hotspots
+
+  p.govuk-body
+    | Select a numbered marker to explore an area of the room.
+
+  = render 'hotspot_image',
+      id: @hotspot_example[:id],
+      image: @hotspot_example[:image],
+      alt: @hotspot_example[:alt],
+      hotspots: @hotspot_example[:hotspots]
+
+section aria-labelledby="riddle-flashcard-heading"
+  h2.govuk-heading-l id="riddle-flashcard-heading"
+    | Flip cards — Riddle
+
+  .flip-card-grid
+    = render 'riddle_embed',
+        riddle_id: 'u0SGWMu0',
+        title: 'Flashcard — first Riddle example'
+
+    = render 'riddle_embed',
+        riddle_id: 'u0SGWMu0',
+        title: 'Flashcard — second Riddle example'
+
+section aria-labelledby="riddle-demo-heading"
+  h2.govuk-heading-l id="riddle-demo-heading"
+    | Image hotspots — Riddle
+
+  p.govuk-body
+    | An embedded Riddle example for comparison with our custom hotspot component.
+
+  = render 'riddle_embed',
+      riddle_id: '6wEYygzQ',
+      title: 'Interactive graphic — Riddle hotspot example'
