@@ -12,6 +12,7 @@
         - Gemfile.lock
         - package.json
         - yarn.lock
+        - .trivyignore
         - .github/scripts/smoke_image.sh
         - .github/workflows/trivy.yml
 

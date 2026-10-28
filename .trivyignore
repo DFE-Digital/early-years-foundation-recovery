@@ -3,3 +3,8 @@ CVE-2026-41316
 CVE-2026-22184
 CVE-2026-40200
 CVE-2025-61594
+
+# Temporary exception: OpenTelemetry Collector 0.163.2 bundles go-jose v4.1.5.
+# Collector 0.164.0 is also affected. Remove when a release includes v4.1.6+.
+# This accepts the reported HIGH RSA JWK parsing DoS risk; review by expiry.
+CVE-2026-116587 exp:2026-11-11
