@@ -2,6 +2,7 @@ class Training::NotesController < ApplicationController
   include Learning
 
   before_action :authenticate_registered_user!
+  before_action :resolve_note_page, only: %i[create update]
 
   helper_method :note,
                 :content
@@ -42,7 +43,7 @@ class Training::NotesController < ApplicationController
       redirect_to next_page_path
     else
       Rails.logger.error("Learning log save failed for user #{current_user.id}: #{note_instance.errors.full_messages.join(', ')}")
-      render_current_page
+      redirect_to_current_page
     end
   end
 
@@ -55,7 +56,7 @@ class Training::NotesController < ApplicationController
       redirect_to next_page_path
     else
       Rails.logger.error("Learning log update failed for user #{current_user.id}: #{note.errors.full_messages.join(', ')}")
-      render_current_page
+      redirect_to_current_page
     end
   end
 
@@ -86,8 +87,10 @@ private
   end
 
   # defensive
-  def render_current_page
-    render "training/pages/#{params[:page_type] || 'content'}", local: { note: note }
+  def redirect_to_current_page
+    redirect_to training_module_page_path(@training_module.name, @note_page.name),
+                flash: { error: 'Your note could not be saved. Please try again.' },
+                status: :see_other
   end
 
   # @return [Note]
@@ -115,5 +118,18 @@ private
     params.require(:note)
       .permit(:title, :body, :training_module, :name, :module_item_id, :next_page_name, :next_page_module)
       .with_defaults(user: current_user)
+  end
+
+  def resolve_note_page
+    @training_module = Training::Module.live.find do |mod|
+      mod.name == note_params[:training_module]
+    end
+
+    raise ActiveRecord::RecordNotFound unless @training_module
+
+    @note_page = @training_module.page_by_name(note_params[:name])
+    unless @note_page&.notes?
+      raise ActiveRecord::RecordNotFound
+    end
   end
 end
