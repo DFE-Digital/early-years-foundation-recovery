@@ -12,7 +12,7 @@ module SidebarHelper
       modules.map do |mod|
         {
           key: mod.name,
-          text: mod.heading,
+          text: mod.title,
           href: about_path(mod.name),
         }
       end,
