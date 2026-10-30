@@ -1,3 +1,5 @@
+@use 'shared' as *;
+
 .light-grey-box .govuk-button-group .govuk-link:last-child {
   margin-bottom: 0;
 }
@@ -43,7 +45,7 @@ label.menu-icon {
 }
 
 .dfe-vertical-nav__section-item {
-  border-left: 4px solid govuk-colour('mid-grey');
+  border-left: 4px solid govuk-colour("black", $variant: "tint-80");
   font-size: 16px;
   line-height: 1.25;
 
@@ -54,7 +56,7 @@ label.menu-icon {
   &--current {
     border-left: 4px solid govuk-organisation-colour('department-for-education', false);
     font-weight: 700;
-    background: govuk-colour('light-grey');
+    background: govuk-colour("black", $variant: "tint-95");
 
     .dfe-vertical-nav__link {
       border-left-color: govuk-organisation-colour('department-for-education', false);

@@ -1,0 +1,15 @@
+@forward 'govuk-frontend/dist/govuk/index' with (
+  $govuk-font-family: ('Inter', sans-serif),
+  $govuk-include-default-font-face: false,
+  $govuk-assets-path: '/govuk-assets/'
+);
+
+@forward 'dfe-frontend/packages/dfefrontend' show $color_dfe-secondary-blue;
+
+@use 'govuk-frontend/dist/govuk/index' as govuk;
+@use 'dfe-frontend/packages/dfefrontend' as dfe;
+
+$light-blue: dfe.tint(
+  govuk.govuk-organisation-colour('department-for-education'),
+  90%
+);

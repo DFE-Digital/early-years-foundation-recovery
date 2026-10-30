@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.4.5'
+ruby '3.4.10'
 
 gem 'pg'
 gem 'puma', '~> 7.2.1'
@@ -59,11 +59,13 @@ gem 'sentry-rails'
 
 # Azure Application Insights / OpenTelemetry
 gem 'opentelemetry-exporter-otlp'
+gem 'opentelemetry-exporter-otlp-logs', '~> 0.6.0'
 gem 'opentelemetry-instrumentation-active_record'
 gem 'opentelemetry-instrumentation-http'
 gem 'opentelemetry-instrumentation-net_http'
 gem 'opentelemetry-instrumentation-rack'
 gem 'opentelemetry-instrumentation-rails'
+gem 'opentelemetry-logs-sdk', '~> 0.7.0'
 gem 'opentelemetry-sdk'
 
 # Track users

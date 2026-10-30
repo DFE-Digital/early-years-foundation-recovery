@@ -1,0 +1,38 @@
+---
+services:
+  db:
+    image: postgres:15.17-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: recovery_login_e2e
+    ports:
+      - "127.0.0.1:5434:5432"
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d recovery_login_e2e"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  simulator:
+    image: ghcr.io/govuk-one-login/simulator:26.10.8
+    ports:
+      - "127.0.0.1:4001:4001"
+    environment:
+      PORT: 4001
+      SIMULATOR_URL: http://localhost:4001
+      CLIENT_ID: cdt-login-e2e
+      PUBLIC_KEY: ${GOV_ONE_PUBLIC_KEY:?Run bash bin/login-e2e}
+      REDIRECT_URLS: http://localhost:3001/users/auth/openid_connect/callback
+      POST_LOGOUT_REDIRECT_URLS: http://localhost:3001/users/sign_out
+      SCOPES: openid,email
+      ID_TOKEN_SIGNING_ALGORITHM: ES256
+      EMAIL: login-e2e@example.com
+      SUB: login-e2e-user
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:4001/.well-known/openid-configuration || exit 1"]
+      interval: 2s
+      timeout: 3s
+      retries: 30

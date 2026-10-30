@@ -21,7 +21,7 @@ private
 
   # @return [Array<Training::Module>]
   def mods
-    Training::Module.ordered
+    Training::Module.live
   end
 
   # @return [::Training::Module]

@@ -7,8 +7,26 @@ class Training::NotesController < ApplicationController
                 :content
 
   # GET /my-account/learning-log
+  # GET /my-account/learning-log/:module_name
   def show
-    @training_modules = current_user.active_modules
+    @training_modules = Training::Module.live
+
+    if params[:module_name].nil?
+      if @training_modules.empty?
+        return render 'notes/show'
+      end
+
+      return redirect_to module_notes_user_path(module_name: @training_modules.first.name)
+    end
+
+    @training_module = @training_modules.find do |mod|
+      mod.name == params[:module_name]
+    end
+
+    raise ActiveRecord::RecordNotFound unless @training_module
+
+    @notes = current_user.notes.where(training_module: @training_module.name)
+
     render 'notes/show'
   end
 

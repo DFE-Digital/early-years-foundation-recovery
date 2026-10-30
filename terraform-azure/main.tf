@@ -44,6 +44,11 @@ module "monitor" {
 module "network" {
   source = "./terraform-azure-network"
 
+  providers = {
+    azurerm               = azurerm
+    azurerm.keyvault_rbac = azurerm.keyvault_rbac
+  }
+
   environment                               = var.environment
   location                                  = var.azure_region
   resource_group                            = azurerm_resource_group.rg.name
@@ -59,8 +64,11 @@ module "network" {
   kv_certificate_authority_admin_phone_no   = var.kv_certificate_authority_admin_phone_no
   kv_certificate_label                      = var.kv_certificate_label
   kv_certificate_subject                    = var.kv_certificate_subject
-  logs_id                                   = module.monitor.logs_id
-  admin_email_address                       = var.admin_email_address
+  # Key Vault role assignments are deferred until the principals are available.
+  # kv_officer_object_id       = var.kv_officer_object_id
+  # kv_administrator_object_id = var.kv_administrator_object_id
+  # kv_admin_sp_object_id      = var.kv_admin_sp_object_id
+  # kv_user_object_id          = var.kv_user_object_id
 }
 
 # Create Database resources

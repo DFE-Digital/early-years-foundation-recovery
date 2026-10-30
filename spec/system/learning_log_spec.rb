@@ -10,8 +10,8 @@ RSpec.describe 'Learning log', type: :system do
         visit '/'
       end
 
-      it 'does not show learning log' do
-        expect(page.find('nav')).not_to have_text 'Learning log'
+      it 'shows learning log' do
+        expect(page).to have_link 'Learning log', href: user_notes_path
       end
     end
   end
@@ -23,7 +23,7 @@ RSpec.describe 'Learning log', type: :system do
     end
 
     it 'shows learning log' do
-      expect(page.find('nav')).to have_text 'Learning log'
+      expect(page).to have_link 'Learning log', href: user_notes_path
     end
   end
 end

@@ -257,6 +257,10 @@ variable "webapp_config_feedback_url" {
   type = string
 }
 
+variable "webapp_config_accessibility_url" {
+  type = string
+}
+
 variable "webapp_config_grover_no_sandbox" {
   type = bool
 }
@@ -298,3 +302,25 @@ variable "webapp_config_sentry_dsn" {
 variable "webapp_config_web_concurrency" {
   type = string
 }
+
+
+# Key Vault role assignments are deferred until the principals are available.
+# variable "kv_officer_object_id" {
+#   description = "Object ID of the principal assigned the Key Vault Certificates Officer role"
+#   type        = string
+# }
+
+# variable "kv_administrator_object_id" {
+#   description = "Object ID of the principal assigned the Key Vault Administrator role"
+#   type        = string
+# }
+
+# variable "kv_admin_sp_object_id" {
+#   description = "Object ID of the service principal assigned the Key Vault Administrator role"
+#   type        = string
+# }
+
+# variable "kv_user_object_id" {
+#   description = "Object ID of the principal assigned the Key Vault user role"
+#   type        = string
+# }

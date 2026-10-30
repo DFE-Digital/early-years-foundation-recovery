@@ -5,23 +5,14 @@ name: Continuous Integration
 on:
   merge_group:
   pull_request:
-    paths-ignore:
-      - '**/*.md'
-      - .docker*
-      - .env.example
-      - .gitignore
-      - .pa11yci
-      - .tool-versions
-      - .yardopts
-      - bin/*
-      - docker-compose.*
-      - Dockerfile
-      - terraform-azure
+
+permissions:
+  contents: read
 
 jobs:
   test:
     name: Test and lint code
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     environment: test
     env:
       ENVIRONMENT: test
@@ -54,7 +45,7 @@ jobs:
         name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.4.5
+          ruby-version: 3.4.10
           bundler-cache: true
       -
         name: Install Rubygems

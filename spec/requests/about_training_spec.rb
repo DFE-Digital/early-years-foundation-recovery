@@ -14,9 +14,12 @@ RSpec.describe 'About training', type: :request do
       expect(response.body).not_to include('delta')
     end
 
-    it 'counts course modules' do
-      expect(response.body).to include('The course has 4 modules.')
-      expect(response.body).to include('3 modules are currently available.')
+    it 'counts only live course modules' do
+      live_module_count = Training::Module.live.count
+
+      expect(response.body).to include(
+        "The course has #{live_module_count} modules",
+      )
     end
   end
 end

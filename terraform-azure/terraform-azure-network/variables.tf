@@ -73,12 +73,25 @@ variable "kv_certificate_subject" {
   type        = string
 }
 
-variable "logs_id" {
-  description = "ID of the Log Analytics workspace to send Key Vault diagnostic logs to"
-  type        = string
-}
 
-variable "admin_email_address" {
-  description = "Email address to notify of Key Vault security alerts"
-  type        = string
-}
+
+# Key Vault role assignments are deferred until the principals are available.
+# variable "kv_officer_object_id" {
+#   description = "Object ID of the principal assigned the Key Vault Certificates Officer role"
+#   type        = string
+# }
+
+# variable "kv_administrator_object_id" {
+#   description = "Object ID of the principal assigned the Key Vault Administrator role"
+#   type        = string
+# }
+
+# variable "kv_admin_sp_object_id" {
+#   description = "Object ID of the service principal assigned the Key Vault Administrator role"
+#   type        = string
+# }
+
+# variable "kv_user_object_id" {
+#   description = "Object ID of the principal assigned the Key Vault user role"
+#   type        = string
+# }

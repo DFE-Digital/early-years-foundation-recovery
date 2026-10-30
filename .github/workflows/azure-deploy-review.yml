@@ -15,7 +15,6 @@ on:
       - .yardopts
       - bin/*
       - docker-compose.*
-      - Dockerfile
       - terraform-azure
       - uml/*
 

@@ -1,46 +1,35 @@
 // https://frontend.design-system.service.gov.uk/sass-api-reference
 // https://design.education.gov.uk/design-system/dfe-frontend
 // https://design-system.service.gov.uk/styles/colour/
+
 @use 'sass:color';
+@use 'shared' as *;
 
-// Override GOV.UK default font to prevent loading GDS Transport
-$govuk-font-family: 'Inter', sans-serif;
-$govuk-include-default-font-face: false;
-
-// Serve govuk assets from public/govuk-assets/
-// This lets us keep config.assets.compile = false in production.
-$govuk-assets-path: '/govuk-assets/';
-
-@import 'govuk-frontend/dist/govuk/index';
-@import 'dfe-frontend/packages/dfefrontend';
-
-$light-blue: tint(govuk-organisation-colour('department-for-education'), 90%);
-
-@import 'header';
-@import 'print';
-@import 'about';
-@import 'card';
-@import 'prompt';
-@import 'video';
-@import 'question';
-@import 'interruption';
-@import 'quote';
-@import 'icons';
-@import 'autocomplete';
-@import 'assets-page';
-@import 'timestamp';
-@import 'fonts';
+@use 'header';
+@use 'print';
+@use 'about';
+@use 'card';
+@use 'prompt';
+@use 'video';
+@use 'question';
+@use 'interruption';
+@use 'quote';
+@use 'icons';
+@use 'autocomplete';
+@use 'assets-page';
+@use 'timestamp';
+@use 'fonts';
 
 // training/modules#show
-@import 'progress-bar';
-@import 'module-overview';
+@use 'progress-bar';
+@use 'module-overview';
 
 // training/pages#show (section intro)
-@import 'section-intro';
-@import 'section-bar';
+@use 'section-intro';
+@use 'section-bar';
 
 // training/pages#show (certificate)
-@import 'certificate';
+@use 'certificate';
 
 * {
   font-family:
@@ -98,7 +87,7 @@ main img {
 pre.code-tip {
   padding: 0 5px;
   color: govuk-colour('red');
-  background-color: govuk-colour('light-grey');
+  background-color: govuk-colour("black", $variant: "tint-95");
 }
 
 .debug_dump {
@@ -134,7 +123,7 @@ pre.code-tip {
     }
 
     &:hover {
-      background-color: lighten($color_dfe-secondary-blue, 10%);
+      background-color: color.adjust($color_dfe-secondary-blue, $lightness: 10%);
     }
   }
 }
@@ -146,7 +135,7 @@ pre.code-tip {
 .light-grey-box {
   padding: govuk-spacing(5);
   margin-bottom: govuk-spacing(5);
-  background: govuk-colour('light-grey');
+  background: govuk-colour("black", $variant: "tint-95");
 
   @include govuk-media-query($until: tablet) {
     margin-top: govuk-spacing(6);
@@ -200,7 +189,7 @@ ul>li>ul>li {
 
 .form-container {
   padding: 30px;
-  background: govuk-colour('light-grey');
+  background: govuk-colour("black", $variant: "tint-95");
 }
 
 .white-space-pre-wrap {

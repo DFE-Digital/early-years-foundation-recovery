@@ -1,5 +1,6 @@
 # Ignore local VS Code settings
 .vscode/settings.json
+.vscode/launch.json
 # GOV.UK JWKS rotation checker script and cache
 last_govuk_kids.json
 # See https://help.github.com/articles/ignoring-files for more about ignoring files.

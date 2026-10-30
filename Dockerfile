@@ -1,33 +1,64 @@
 # ------------------------------------------------------------------------------
-# Base - AMD64 & ARM64 compatible
+# OpenTelemetry Collector
 # ------------------------------------------------------------------------------
-FROM ruby:3.4.5-alpine as base
+FROM otel/opentelemetry-collector-contrib:0.163.2@sha256:7f22d2a6748110ffb6a59bc0df448bccbf501cdb667d610ede4c61d3863d5849 AS otel-collector
 
-RUN apk add --no-cache --no-progress --no-check-certificate build-base less curl tzdata gcompat
+# ------------------------------------------------------------------------------
+# Runtime base - AMD64 & ARM64 compatible
+# ------------------------------------------------------------------------------
+FROM ruby:3.4.10-alpine3.23 AS base
 
-ENV TZ Europe/London
+RUN apk upgrade --no-cache --no-progress \
+    && apk add --no-cache --no-progress \
+    ca-certificates chromium font-liberation libpq yaml nodejs openssh tzdata
+
+RUN echo "Welcome to the EYFS Recovery Application" > /etc/motd \
+    && echo "root:Docker!" | chpasswd \
+    && ssh-keygen -A \
+    && mkdir -p /run/sshd /srv/tmp/pids /srv/log
+
+ENV TZ=Europe/London \
+    GROVER_NO_SANDBOX=true \
+    PUPPETEER_SKIP_DOWNLOAD=true \
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser \
+    APP_HOME=/srv \
+    RAILS_ENV=production \
+    ENVIRONMENT=production
+
+WORKDIR ${APP_HOME}
+
+COPY sshd_config /etc/ssh/
+COPY docker-entrypoint.sh /
+COPY --from=otel-collector /otelcol-contrib /usr/bin/otelcol
+COPY otel-collector-config.yml /etc/otel-collector-config.yml
+COPY otel-collector-azure-config.yml /etc/otel-collector-azure-config.yml
+COPY otel-collector-entrypoint.sh /usr/local/bin/otel-collector-entrypoint.sh
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+EXPOSE 3000
+
+CMD ["sh", "-c", "/usr/local/bin/otel-collector-entrypoint.sh >/dev/null 2>&1 & exec bundle exec rails server"]
 
 # ------------------------------------------------------------------------------
 # Dependencies
 # ------------------------------------------------------------------------------
-FROM base as deps
+FROM base AS deps
 
-LABEL org.opencontainers.image.description "Application Dependencies"
+LABEL org.opencontainers.image.description="Application Dependencies"
 
-RUN apk add --no-cache --no-progress --no-check-certificate postgresql-dev yarn chromium yaml-dev
+RUN apk add --no-cache --no-progress build-base git postgresql-dev yaml-dev
 
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
-ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
-ENV APP_HOME /build
-
-WORKDIR ${APP_HOME}
+COPY .yarn/releases/yarn-4.18.0.cjs /usr/local/lib/yarn.cjs
+RUN chmod +x /usr/local/lib/yarn.cjs && ln -s /usr/local/lib/yarn.cjs /usr/local/bin/yarn
 
 COPY package.json ${APP_HOME}/package.json
 COPY yarn.lock ${APP_HOME}/yarn.lock
 COPY .yarn ${APP_HOME}/.yarn
 COPY .yarnrc.yml ${APP_HOME}/.yarnrc.yml
 
-RUN yarn install
+RUN yarn install --immutable
 
 COPY Gemfile* ./
 
@@ -36,35 +67,9 @@ RUN bundle config set without development test ui
 RUN bundle install --no-binstubs --retry=10 --jobs=4
 
 # ------------------------------------------------------------------------------
-# OpenTelemetry Collector
+# Build application assets
 # ------------------------------------------------------------------------------
-FROM otel/opentelemetry-collector-contrib:0.161.0@sha256:fd328de2552466ad78385e1b1289c3f2402b1c45f265b252aab1955b42845ac1 AS otel-collector
-
-# ------------------------------------------------------------------------------
-# Production Stage
-# ------------------------------------------------------------------------------
-FROM base AS app
-
-LABEL org.opencontainers.image.source=https://github.com/DFE-Digital/early-years-foundation-recovery
-LABEL org.opencontainers.image.description "Early Years Recovery Rails Application"
-
-RUN echo "Welcome to the EYFS Recovery Application" > /etc/motd
-RUN apk add --no-cache --no-progress --no-check-certificate postgresql-dev yarn chromium font-liberation openssh
-RUN echo "root:Docker!" | chpasswd && cd /etc/ssh/ && ssh-keygen -A
-
-ENV GROVER_NO_SANDBOX true
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
-ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
-ENV APP_HOME /srv
-ENV RAILS_ENV ${RAILS_ENV:-production}
-ENV ENVIRONMENT ${ENVIRONMENT:-production}
-
-RUN mkdir -p ${APP_HOME}/tmp/pids ${APP_HOME}/log
-
-WORKDIR ${APP_HOME}
-
-COPY Gemfile* ./
-COPY --from=deps /usr/local/bundle /usr/local/bundle
+FROM deps AS build
 
 COPY config.ru ${APP_HOME}/config.ru
 COPY Rakefile ${APP_HOME}/Rakefile
@@ -76,40 +81,37 @@ COPY config ${APP_HOME}/config
 COPY db ${APP_HOME}/db
 COPY app ${APP_HOME}/app
 
-COPY package.json ${APP_HOME}/package.json
-COPY yarn.lock ${APP_HOME}/yarn.lock
-COPY .yarnrc.yml ${APP_HOME}/.yarnrc.yml
-COPY --from=deps /build/.yarn ${APP_HOME}/.yarn
-COPY --from=deps /build/node_modules ${APP_HOME}/node_modules
-
 RUN mkdir -p app/assets/builds
 RUN yarn build:css && yarn build
 RUN yarn run copy:assets
 RUN SECRET_KEY_BASE=x bundle exec rails assets:precompile
 
-COPY sshd_config /etc/ssh/
-COPY ./docker-entrypoint.sh /
+# ------------------------------------------------------------------------------
+# Production dependencies - only Puppeteer is needed after assets are compiled
+# ------------------------------------------------------------------------------
+FROM build AS production-deps
 
-# Install OpenTelemetry Collector
-COPY --from=otel-collector /otelcol-contrib /usr/bin/otelcol
-COPY otel-collector-config.yml /etc/otel-collector-config.yml
-COPY otel-collector-azure-config.yml /etc/otel-collector-azure-config.yml
-COPY otel-collector-entrypoint.sh /usr/local/bin/otel-collector-entrypoint.sh
+RUN yarn workspaces focus --production \
+    && rm -rf .yarn /usr/local/bundle/cache
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+# ------------------------------------------------------------------------------
+# Production Stage
+# ------------------------------------------------------------------------------
+FROM base AS app
 
-EXPOSE 3000
+LABEL org.opencontainers.image.source=https://github.com/DFE-Digital/early-years-foundation-recovery
+LABEL org.opencontainers.image.description="Early Years Recovery Rails Application"
 
-# Start Collector in background, then Rails
-CMD ["sh", "-c", "/usr/local/bin/otel-collector-entrypoint.sh >/dev/null 2>&1 & exec bundle exec rails server"]
+COPY --from=production-deps /usr/local/bundle /usr/local/bundle
+COPY --from=production-deps /srv /srv
 
 # ------------------------------------------------------------------------------
 # Development Stage - ./bin/docker-dev
 # ------------------------------------------------------------------------------
-FROM app as dev
+FROM build AS dev
 
 # `socat` is used by Procfile.dev to forward 127.0.0.1:4000 inside this container
-RUN apk add --no-cache --no-progress --no-check-certificate postgresql-client npm graphviz socat
+RUN apk add --no-cache --no-progress postgresql-client npm graphviz socat less curl
 RUN npm install --global adr-log contentful-cli
 
 RUN bundle config unset without
@@ -119,9 +121,9 @@ RUN bundle install --no-binstubs --retry=10 --jobs=4
 # ------------------------------------------------------------------------------
 # Test Stage - ./bin/docker-rspec
 # ------------------------------------------------------------------------------
-FROM app as test
+FROM build AS test
 
-RUN apk add --no-cache --no-progress --no-check-certificate postgresql-client
+RUN apk add --no-cache --no-progress postgresql-client
 
 RUN bundle config unset without
 RUN bundle config set without development ui
@@ -137,14 +139,15 @@ CMD ["bundle", "exec", "rspec"]
 # ------------------------------------------------------------------------------
 # Pa11y CI - ./bin/docker-pa11y
 # ------------------------------------------------------------------------------
-FROM base as pa11y
+FROM base AS pa11y
 
 LABEL org.opencontainers.image.description "Accessibility auditor"
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+ENV PUPPETEER_SKIP_DOWNLOAD true
 ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
 
-RUN apk add --no-cache --no-progress --no-check-certificate npm chromium
+RUN apk add --no-cache --no-progress npm
 RUN npm install --global --unsafe-perm puppeteer pa11y-ci
 
 COPY .pa11yci /usr/config.json

@@ -2,7 +2,7 @@ module ApplicationHelper
   CONFIG_SUMMARY = [
     ['Rails version', Rails.version],
     ['Ruby version', RUBY_VERSION],
-    ['GOV.UK Frontend', JSON.parse(File.read(Rails.root.join('package.json'))).dig('dependencies', 'govuk-frontend').tr('^', '')],
+    ['GOV.UK Frontend', JSON.parse(File.read(Rails.root.join('package.json'))).dig('devDependencies', 'govuk-frontend').tr('^', '')],
   ].freeze
 
   # @return [String]
@@ -32,13 +32,9 @@ module ApplicationHelper
             navigation.with_navigation_item(text: 'Modules', href: course_overview_path, current: current_page?(course_overview_path))
           end
         end
-        if user_signed_in?
-          unless incomplete
-            navigation.with_navigation_item(text: t('my_learning.title'), href: my_modules_path, current: current_page?(my_modules_path))
-          end
-          if current_user.course_started?
-            navigation.with_navigation_item(text: t('my_learning_log.title'), href: user_notes_path, current: current_page?(user_notes_path))
-          end
+        if user_signed_in? && !incomplete
+          navigation.with_navigation_item(text: t('my_learning.title'), href: my_modules_path, current: current_page?(my_modules_path))
+          navigation.with_navigation_item(text: t('my_learning_log.title'), href: user_notes_path, current: controller_path == 'training/notes')
         end
       end
     end

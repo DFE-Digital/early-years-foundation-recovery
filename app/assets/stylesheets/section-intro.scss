@@ -1,3 +1,5 @@
+@use 'shared' as *;
+
 #section-intro-panel {
   padding: govuk-spacing(7);
 
@@ -5,7 +7,7 @@
     padding: govuk-spacing(6);
   }
 
-  background-color: govuk-colour('light-grey');
+  background-color: govuk-colour("black", $variant: "tint-95");
   border-radius: 6px;
 
   h1 {
@@ -18,17 +20,21 @@
   }
 
   .section-intro-previous-button {
-    background-color: govuk-organisation-colour('department-for-education');
+    background-color: govuk-colour('blue');
 
-    &:hover, &:focus {
-      background-color: govuk-organisation-colour('department-for-education');
+    &:hover {
+      background-color: govuk-colour('blue', $variant: 'shade-25');
+    }
+
+    &:focus:not(:active):not(:hover) {
+      background-color: govuk-functional-colour('focus');
     }
   }
 
   .blockquote-container {
     blockquote.quote {
       &::before {
-        background-color: govuk-colour('light-grey');
+        background-color: govuk-colour("black", $variant: "tint-95");
       }
     }
   }

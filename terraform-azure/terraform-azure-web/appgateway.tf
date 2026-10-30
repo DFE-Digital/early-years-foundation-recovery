@@ -53,6 +53,24 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
       selector_match_operator = "Equals"
     }
 
+    # Rails-generated CSRF tokens can contain "--", which falsely triggers the
+    # SQL comment sequence rule. Rails still validates the signed token.
+    exclusion {
+      match_variable          = "RequestArgValues"
+      selector                = "authenticity_token"
+      selector_match_operator = "Equals"
+
+      excluded_rule_set {
+        type    = "OWASP"
+        version = "3.2"
+
+        rule_group {
+          rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
+          excluded_rules  = ["942440"]
+        }
+      }
+    }
+
     # Free-text user input: exclude XSS (941), SQLi (942), RCE (932), and PHP
     # injection (933) rule groups for every prose field. Rails parameter-binds
     # and HTML-escapes all values so treating them as non-injectable is safe.
@@ -115,6 +133,48 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
       match_variable          = "RequestArgNames"
       selector                = "note[next_page_module]"
       selector_match_operator = "Equals"
+    }
+  }
+
+  custom_rules {
+    name      = "ApiRateLimit"
+    priority  = 10
+    rule_type = "RateLimitRule"
+    action    = "Block"
+
+    rate_limit_duration  = "OneMin"
+    rate_limit_threshold = 100
+    group_rate_limit_by  = "ClientAddr"
+
+    match_conditions {
+      match_variables {
+        variable_name = "RequestUri"
+      }
+
+      operator           = "Regex"
+      negation_condition = false
+      match_values       = ["^/(audit|change|release)/?([?].*)?$"]
+    }
+  }
+
+  custom_rules {
+    name      = "SiteWideRateLimit"
+    priority  = 20
+    rule_type = "RateLimitRule"
+    action    = "Block"
+
+    rate_limit_duration  = "OneMin"
+    rate_limit_threshold = 200
+    group_rate_limit_by  = "ClientAddr"
+
+    match_conditions {
+      match_variables {
+        variable_name = "RemoteAddr"
+      }
+
+      operator           = "IPMatch"
+      negation_condition = true
+      match_values       = ["255.255.255.255/32"]
     }
   }
 
