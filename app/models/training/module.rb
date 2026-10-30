@@ -13,8 +13,6 @@ module Training
         klass.by_id(hash['id'])
       end
 
-    private
-
       # @return [Class]
       def klass
         Training::Module
