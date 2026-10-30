@@ -13,7 +13,7 @@ module LinkHelper
       govuk_back_link href: training_module_path(mod.name),
                       text: 'Back to module overview'
     when 'pages', 'settings', 'feedback', 'close_accounts'
-      govuk_back_link href: url_for(:back)
+      govuk_back_link href: back_url
     when %r{registration/*.}
       govuk_back_link href: registration_back_link_helper
     end
@@ -50,7 +50,7 @@ module LinkHelper
     when 'registration/check_your_answers'
       edit_registration_research_participant_path
     else
-      url_for(:back)
+      back_url
     end
   end
 
@@ -166,5 +166,21 @@ module LinkHelper
       mod: mod,
       content: content,
     )
+  end
+
+private
+
+  def back_url
+    referrer = URI.parse(request.referer.to_s)
+
+    allowed =
+      referrer.is_a?(URI::HTTP) &&
+      referrer.scheme == request.scheme &&
+      referrer.host&.downcase == request.host.downcase &&
+      referrer.port == request.port
+
+    allowed ? referrer.to_s : root_path
+  rescue URI::InvalidURIError
+    root_path
   end
 end
