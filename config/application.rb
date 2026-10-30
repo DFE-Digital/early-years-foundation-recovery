@@ -12,6 +12,8 @@ module EarlyYearsFoundationRecovery
     end
 
     config.load_defaults 7.0
+    # Make to_time to preserve the timezone instead of just its UTC offset
+    config.active_support.to_time_preserves_timezone = :zone
     # @see ErrorsController
     config.exceptions_app = routes
 
