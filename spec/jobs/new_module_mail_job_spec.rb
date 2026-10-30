@@ -46,7 +46,10 @@ RSpec.describe NewModuleMailJob do
   end
 
   it 'returns early when the release cannot be found' do
-    expect(described_class.run(999)).to eq :no_new_module_release
+    allow(Release).to receive(:find).with(*job_vars)
+      .and_raise(ActiveRecord::RecordNotFound)
+
+    expect(described_class.new({}).run(*job_vars)).to eq :no_new_module_release
   end
 
   describe 'release email controls' do
