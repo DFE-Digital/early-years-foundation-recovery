@@ -34,7 +34,7 @@
     "dfe-frontend": "2.0.1",
     "esbuild": "0.28.2",
     "govuk-frontend": "6.6.0",
-    "sass": "1.106.1",
+    "sass": "1.107.0",
     "stylelint": "17.16.0",
     "stylelint-config-gds": "3.0.0"
   },
