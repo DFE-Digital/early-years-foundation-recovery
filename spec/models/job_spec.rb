@@ -114,6 +114,22 @@ RSpec.describe Job, type: :model do
       expect(described_class.start_training_mail.count).to eq 1
     end
 
+    it '.continue_training_mail' do
+      expect(described_class.continue_training_mail.count).to eq 0
+      create :job,
+             job_class: 'ActionMailer::MailDeliveryJob',
+             args: [
+               {
+                 arguments: %w[
+                   NotifyMailer
+                   continue_training
+                   deliver_now
+                 ],
+               },
+             ]
+      expect(described_class.continue_training_mail.count).to eq 1
+    end
+
     it '#mail_user_id' do
       create :user, :registered, id: 1234
       create :job,
