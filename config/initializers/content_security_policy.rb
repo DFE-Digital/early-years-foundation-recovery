@@ -63,8 +63,7 @@ Rails.application.config.content_security_policy do |policy|
 
   policy.frame_src   :self,
                      *GOOGLE_ANALYTICS_DOMAINS,
-                     *OPTIMIZE_DOMAINS,
-                     'https://www.riddle.com'
+                     *OPTIMIZE_DOMAINS
 
   policy.img_src     :self,
                      *GOOGLE_ANALYTICS_DOMAINS, # Tracking pixels
@@ -85,8 +84,7 @@ Rails.application.config.content_security_policy do |policy|
                      *GOOGLE_ANALYTICS_DOMAINS,
                      *GOOGLE_STATIC_DOMAINS,
                      *OPTIMIZE_DOMAINS,
-                     *CLARITY_DOMAINS,
-                     'https://www.riddle.com'
+                     *CLARITY_DOMAINS
 
   policy.style_src   :self,
                      :unsafe_inline,
