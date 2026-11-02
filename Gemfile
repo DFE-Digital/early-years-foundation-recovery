@@ -110,6 +110,7 @@ group :development do
   gem 'rack-mini-profiler'
   gem 'rails-erd'
   gem 'redcarpet'
+  gem 'ruby-graphviz'
   gem 'web-console'
   gem 'yard-junk'
 end

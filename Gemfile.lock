@@ -677,6 +677,8 @@ GEM
     rubocop-rspec (3.9.0)
       lint_roller (~> 1.1)
       rubocop (~> 1.81)
+    ruby-graphviz (1.2.5)
+      rexml
     ruby-progressbar (1.13.0)
     safely_block (1.0.0)
     securerandom (0.4.1)
@@ -838,6 +840,7 @@ DEPENDENCIES
   rubocop-factory_bot
   rubocop-govuk
   rubocop-performance
+  ruby-graphviz
   sentry-rails
   show_me_the_cookies
   simplecov
