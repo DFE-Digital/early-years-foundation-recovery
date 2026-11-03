@@ -313,7 +313,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@floating-ui/dom@npm:^1.8.0":
+"@floating-ui/dom@npm:1.8.0":
   version: 1.8.0
   resolution: "@floating-ui/dom@npm:1.8.0"
   dependencies:
@@ -1191,7 +1191,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "eyfs-recovery@workspace:."
   dependencies:
-    "@floating-ui/dom": "npm:^1.8.0"
+    "@floating-ui/dom": "npm:1.8.0"
     "@fortawesome/fontawesome-free": "npm:7.3.1"
     "@hotwired/stimulus": "npm:3.2.2"
     "@hotwired/turbo-rails": "npm:8.0.23"
