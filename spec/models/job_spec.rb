@@ -115,19 +115,22 @@ RSpec.describe Job, type: :model do
     end
 
     it '.continue_training_mail' do
-      expect(described_class.continue_training_mail.count).to eq 0
+      contentful_entry_id = 'module-alpha-id'
+
+      expect(described_class.continue_training_mail(contentful_entry_id).count).to eq 0
       create :job,
              job_class: 'ActionMailer::MailDeliveryJob',
              args: [
                {
-                 arguments: %w[
-                   NotifyMailer
-                   continue_training
-                   deliver_now
+                 arguments: [
+                   'NotifyMailer',
+                   'continue_training',
+                   'deliver_now',
+                   { args: [{ id: contentful_entry_id }] },
                  ],
                },
              ]
-      expect(described_class.continue_training_mail.count).to eq 1
+      expect(described_class.continue_training_mail(contentful_entry_id).count).to eq 1
     end
 
     it '#mail_user_id' do
