@@ -7,8 +7,8 @@ hr.govuk-section-break.govuk-section-break--visible.govuk-section-break--l
       - current_user.course.upcoming_modules.each do |mod|
         .govuk-card id=mod.name
           h3.govuk-heading-s
-            = mod.heading
+            = mod.title
           p.govuk-body= mod.upcoming
           - unless mod.draft?
             = govuk_link_to t('my_learning.view_more_module_information'),
-              course_overview_path + mod.card_anchor
+              about_path(mod.name)

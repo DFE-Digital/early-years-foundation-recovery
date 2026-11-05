@@ -6,3 +6,4 @@ exclude:
   - ActiveRecord::InternalMetadata
   - ActiveRecord::SchemaMigration
 inheritance: true
+generator: graphviz
