@@ -264,27 +264,6 @@ module Training
       questions.select { |q| q.answer.contains?(text) }.map(&:name)
     end
 
-    # @return [String]
-    def tab_label
-      ['Module', position].join(' ')
-    end
-
-    def tab_anchor
-      tab_label.parameterize
-    end
-
-    # @see My Modules card / About page sidebar
-    # @return [String]
-    def heading
-      coming_soon = 'Coming soon - ' if draft?
-      "#{coming_soon}Module #{position}: #{title}"
-    end
-
-    # @return [String]
-    def card_anchor
-      "#module-#{position}-#{title.downcase.parameterize}"
-    end
-
     # @return [Array<Array>] AST for automated module completion
     def schema
       pages.map(&:schema)
