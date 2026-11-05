@@ -186,7 +186,7 @@ GEM
       activemodel
     erb (6.0.7)
     erubi (1.13.1)
-    et-orbi (1.2.11)
+    et-orbi (1.4.2)
       tzinfo
     factory_bot (6.6.0)
       activesupport (>= 6.1.0)
@@ -216,8 +216,8 @@ GEM
       rake
     foreman (0.90.0)
       thor (~> 1.4)
-    fugit (1.11.1)
-      et-orbi (~> 1, >= 1.2.11)
+    fugit (1.14.0)
+      et-orbi (~> 1.4)
       raabro (~> 1.4)
     globalid (1.4.0)
       activesupport (>= 6.1)
@@ -290,7 +290,7 @@ GEM
       activemodel (>= 7.2)
       activesupport (>= 7.2)
       html-attributes-utils (~> 1)
-    govuk_markdown (2.0.3)
+    govuk_markdown (2.0.4)
       activesupport
       redcarpet
     govuk_notify_rails (3.0.0)
@@ -298,7 +298,7 @@ GEM
       rails (>= 4.1.0)
     grover (1.2.3)
       nokogiri (~> 1)
-    hashie (5.1.0)
+    hashie (5.2.0)
       logger
     html-attributes-utils (1.0.2)
       activesupport (>= 6.1.4.4)
@@ -492,7 +492,8 @@ GEM
       opentelemetry-api (~> 1.0)
     opentelemetry-registry (0.6.3)
       opentelemetry-api (~> 1.1)
-    opentelemetry-sdk (1.10.0)
+    opentelemetry-sdk (1.13.1)
+      logger
       opentelemetry-api (~> 1.1)
       opentelemetry-common (~> 0.20)
       opentelemetry-registry (~> 0.2)
@@ -528,12 +529,13 @@ GEM
     puma (7.2.1)
       nio4r (~> 2.0)
     que (2.4.1)
-    que-scheduler (6.0.0)
+    que-scheduler (7.2.0)
       activesupport (>= 6.0)
       fugit (~> 1.1, >= 1.11.1)
       hashie (>= 3, < 6)
       que (>= 2.0, < 3.0)
-    raabro (1.4.0)
+      sorbet-runtime (>= 0.5)
+    raabro (1.5.0)
     racc (1.8.1)
     rack (3.2.8)
     rack-mini-profiler (5.0.0)
@@ -574,11 +576,10 @@ GEM
       activesupport (>= 5.0.0)
       minitest
       nokogiri (>= 1.6)
-    rails-erd (1.7.2)
-      activerecord (>= 4.2)
-      activesupport (>= 4.2)
+    rails-erd (2.2.0)
+      activerecord (>= 7.0)
+      activesupport (>= 7.0)
       choice (~> 0.2.0)
-      ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.7.1)
       loofah (~> 2.25, >= 2.25.2)
       nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
@@ -706,6 +707,7 @@ GEM
       actionpack (>= 7.0)
       railties (>= 7.0)
       slim (>= 3.0, < 6.0, != 5.0.0)
+    sorbet-runtime (0.6.13612)
     sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
       logger
@@ -840,6 +842,7 @@ DEPENDENCIES
   rubocop-factory_bot
   rubocop-govuk
   rubocop-performance
+  ruby-graphviz
   sentry-rails
   show_me_the_cookies
   simplecov
