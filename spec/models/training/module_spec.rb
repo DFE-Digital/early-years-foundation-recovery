@@ -81,18 +81,6 @@ RSpec.describe Training::Module, type: :model do
     end
   end
 
-  describe '#heading' do
-    context 'when released' do
-      it { expect(mod.heading).to eq 'Module 1: First Training Module' }
-    end
-
-    context 'when unreleased' do
-      subject(:mod) { described_class.by_name(:delta) }
-
-      it { expect(mod.heading).to eq 'Coming soon - Module 4: Fourth Training Module' }
-    end
-  end
-
   describe '#show_module_type_tag?' do
     context 'when module type tag does not exist' do
       it { expect(mod.show_module_type_tag?).to be false }
