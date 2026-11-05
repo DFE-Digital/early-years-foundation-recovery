@@ -257,6 +257,10 @@ variable "webapp_config_feedback_url" {
   type = string
 }
 
+variable "webapp_config_accessibility_url" {
+  type = string
+}
+
 variable "webapp_config_grover_no_sandbox" {
   type = bool
 }

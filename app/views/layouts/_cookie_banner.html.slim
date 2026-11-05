@@ -3,10 +3,10 @@
   = govuk_cookie_banner do |cb|
     - cb.with_message(heading_text: "Cookies on #{service_name}") do |m|
       - m.with_action do
-        = govuk_button_to 'Accept analytics cookies', settings_path, params: { track_analytics: 'true', request_path: request.path }
+        = govuk_button_to 'Accept analytics cookies', settings_path, params: { track_analytics: 'true', request_path: request.path }, form: { data: { turbo: false } }
 
       - m.with_action do
-        = govuk_button_to 'Reject analytics cookies', settings_path, params: { track_analytics: 'false', request_path: request.path }
+        = govuk_button_to 'Reject analytics cookies', settings_path, params: { track_analytics: 'false', request_path: request.path }, form: { data: { turbo: false } }
 
       - m.with_action do
         = govuk_link_to 'Read the cookie policy', setting_path('cookie-policy')

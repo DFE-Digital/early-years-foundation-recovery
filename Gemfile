@@ -5,7 +5,7 @@ ruby '3.4.10'
 
 gem 'pg'
 gem 'puma', '~> 7.2.1'
-gem 'rails'
+gem 'rails', '~> 8.0.0'
 gem 'resolv', '>= 0.7.2'
 gem 'rexml', '>= 3.4.2'
 gem 'sprockets-rails'
@@ -110,6 +110,7 @@ group :development do
   gem 'rack-mini-profiler'
   gem 'rails-erd'
   gem 'redcarpet'
+  gem 'ruby-graphviz'
   gem 'web-console'
   gem 'yard-junk'
 end
