@@ -6,7 +6,7 @@
     .cookie-policy-body
       = m('cookie_policy.body')
 
-    = form_with url: settings_path, method: :post, local: true do |f|
+    = form_with url: settings_path, method: :post, local: true, data: { turbo: false } do |f|
       = f.hidden_field :request_path, value: request.path
       = f.hidden_field :settings_updated, value: 'true'
       = f.govuk_radio_buttons_fieldset(:checked, legend: { size: 'm', text: t('cookie_policy.legend') }, inline: true ) do
