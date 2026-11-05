@@ -1,0 +1,59 @@
+.hotspot-image(
+  data-controller="hotspot-image"
+  data-action="keydown.esc->hotspot-image#dismiss click@document->hotspot-image#closeOutside turbo:before-cache@document->hotspot-image#reset"
+)
+  .hotspot-image__canvas
+    = image_tag image,
+        alt: alt,
+        class: 'hotspot-image__image'
+
+    - hotspots.each_with_index do |hotspot, index|
+      a.hotspot-image__marker(
+        href="##{id}-#{hotspot[:id]}"
+        style="left: #{hotspot[:x]}%; top: #{hotspot[:y]}%;"
+        aria-label=hotspot[:label]
+        data-hotspot-image-target="fallback"
+      )
+        = index + 1
+
+      button.hotspot-image__marker(
+        type="button"
+        hidden=true
+        style="left: #{hotspot[:x]}%; top: #{hotspot[:y]}%;"
+        aria-label=hotspot[:label]
+        aria-expanded="false"
+        aria-controls="#{id}-#{hotspot[:id]}-popover"
+        data-hotspot-image-target="marker"
+        data-action="hotspot-image#toggle"
+      )
+        = index + 1
+
+      .hotspot-image__popover(
+        id="#{id}-#{hotspot[:id]}-popover"
+        hidden=true
+        role="region"
+        aria-labelledby="#{id}-#{hotspot[:id]}-title"
+        data-hotspot-image-target="popover"
+      )
+        h3.govuk-heading-s id="#{id}-#{hotspot[:id]}-title"
+          = hotspot[:label]
+
+        p.govuk-body
+          = hotspot[:description]
+
+        button.govuk-button.govuk-button--secondary(
+          type="button"
+          data-action="hotspot-image#dismiss"
+        )
+          | Close
+
+  .hotspot-image__descriptions data-hotspot-image-target="descriptions"
+    h3.govuk-heading-m Areas to explore
+
+    dl.govuk-body
+      - hotspots.each_with_index do |hotspot, index|
+        dt id="#{id}-#{hotspot[:id]}"
+          strong
+            = "#{index + 1}. #{hotspot[:label]}"
+        dd
+          = hotspot[:description]
