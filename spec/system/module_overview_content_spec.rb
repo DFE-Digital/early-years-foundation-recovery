@@ -12,8 +12,8 @@ RSpec.describe 'Module overview' do
     expect(page).to have_link 'Back to My modules', href: '/my-modules'
   end
 
-  it 'has the module number and name' do
-    expect(page).to have_content 'Module 1: First Training Module'
+  it 'has the module name' do
+    expect(page).to have_content 'First Training Module'
   end
 
   it 'has the module description' do

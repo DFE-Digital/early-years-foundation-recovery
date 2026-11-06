@@ -9,7 +9,7 @@
       - destination = current_user ? training_module_path(mod.name) : about_path(mod.name)
 
       h3.govuk-heading-m
-        = govuk_link_to mod.heading, destination, no_visited_state: true, class: 'dfe-card-link--header'
+        = govuk_link_to mod.title, destination, no_visited_state: true, class: 'dfe-card-link--header'
 
       - if show_module_description && mod.description.present?
         p.govuk-body.description= mod.description
