@@ -86,8 +86,8 @@ Rails.application.routes.draw do
   get 'about/the-experts', to: 'about#experts', as: :experts
   resources :about, only: %i[show], path: 'about'
 
-  # Development / staging route. Not ready for production
-  unless Rails.env.production?
+  # Development / staging route. Not for production
+  unless Rails.application.live?
     get '/interactive-components',
         to: 'interactive_components#index',
         as: :interactive_components
