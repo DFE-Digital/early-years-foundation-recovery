@@ -23,6 +23,7 @@
     "nanoid": "3.3.18"
   },
   "dependencies": {
+    "@floating-ui/dom": "1.8.0",
     "puppeteer": "25.16.0"
   },
   "devDependencies": {

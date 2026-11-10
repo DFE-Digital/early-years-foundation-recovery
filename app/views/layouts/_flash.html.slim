@@ -3,7 +3,12 @@
     .govuk-grid-column-two-thirds
       - flash.each do |variant, message|
         - unless %w[timedout].include?(variant)
-          - if message.is_a?(Hash)
+          - if variant == 'error' && message.is_a?(String)
+            .govuk-error-summary data-module="govuk-error-summary"
+              h2.govuk-error-summary__title There is a problem
+              .govuk-error-summary__body
+                p.govuk-body= message
+          - elsif message.is_a?(Hash)
             = govuk_notification_banner(title_text: message['label'], success: %w[notice].include?(variant), disable_auto_focus: true) do
               h3.govuk-notification-banner__heading= message['heading']
               p.govuk-body= message['body']

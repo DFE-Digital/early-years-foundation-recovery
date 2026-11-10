@@ -344,6 +344,33 @@ describe 'LinkHelper', type: :helper do
         expect(back).to eq edit_registration_setting_type_path
       end
     end
+
+    context 'when the registration step has no explicit back destination' do
+      before do
+        reviewing(false)
+        on('registration/unknown_step')
+
+        allow(helper.request).to receive_messages(
+          scheme: 'https',
+          host: 'example.com',
+          port: 443,
+        )
+      end
+
+      it 'uses a same-origin referrer' do
+        allow(helper.request).to receive(:referer)
+          .and_return('https://example.com/previous-step')
+
+        expect(back).to eq('https://example.com/previous-step')
+      end
+
+      it 'rejects an external referrer' do
+        allow(helper.request).to receive(:referer)
+          .and_return('https://other.example/page')
+
+        expect(back).to eq(root_path)
+      end
+    end
   end
 
   describe '#link_to_skip_feedback' do
@@ -361,6 +388,69 @@ describe 'LinkHelper', type: :helper do
 
       it 'targets thank you page' do
         expect(link).to include 'Skip feedback'
+      end
+    end
+  end
+
+  describe '#back_link' do
+    subject(:link) { helper.back_link }
+
+    let(:referrer) { 'https://example.com/my-account?tab=details' }
+
+    before do
+      without_partial_double_verification do
+        allow(helper).to receive(:params).and_return(
+          ActionController::Parameters.new(controller: 'settings'),
+        )
+      end
+
+      allow(helper.request).to receive_messages(
+        referer: referrer,
+        scheme: 'https',
+        host: 'example.com',
+        port: 443,
+      )
+    end
+
+    it 'preserves a same-origin URL including its query string' do
+      expect(link).to include(%(href="#{referrer}"))
+    end
+
+    context 'when the hostname uses different casing' do
+      let(:referrer) { 'https://EXAMPLE.COM/my-account' }
+
+      it 'accepts the URL' do
+        expect(link).to include(%(href="#{referrer}"))
+      end
+    end
+
+    context 'when the default port is explicit' do
+      let(:referrer) { 'https://example.com:443/my-account' }
+
+      it 'accepts the URL' do
+        expect(link).to include(%(href="#{URI.parse(referrer)}"))
+      end
+    end
+
+    {
+      'missing referrer' => nil,
+      'empty referrer' => '',
+      'malformed URL' => 'https://example.com/invalid path',
+      'external hostname' => 'https://other.example/page',
+      'misleading hostname' => 'https://example.com.attacker.test/page',
+      'different scheme' => 'http://example.com/page',
+      'different port' => 'https://example.com:444/page',
+      'JavaScript URL' => 'javascript:alert(1)',
+      'VBScript URL' => 'vbscript:msgbox(1)',
+      'scheme-relative URL' => '//example.com/page',
+      'relative path' => '/my-account',
+    }.each do |description, value|
+      context "with #{description}" do
+        let(:referrer) { value }
+
+        it 'falls back to the home page' do
+          expect(link).to include(%(href="#{root_path}"))
+        end
       end
     end
   end
