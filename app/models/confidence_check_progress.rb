@@ -31,6 +31,10 @@ class ConfidenceCheckProgress < ApplicationRecord
     progress
   rescue ActiveRecord::RecordNotUnique
     retry
+  rescue ActiveRecord::RecordInvalid => e
+    raise unless e.record.new_record? && e.record.errors.size == 1 && e.record.errors.of_kind?(:module_name, :taken)
+
+    retry
   end
 
   # @param user [User]
@@ -45,6 +49,10 @@ class ConfidenceCheckProgress < ApplicationRecord
     progress
   rescue ActiveRecord::RecordNotUnique
     retry
+  rescue ActiveRecord::RecordInvalid => e
+    raise unless e.record.new_record? && e.record.errors.size == 1 && e.record.errors.of_kind?(:module_name, :taken)
+
+    retry
   end
 
   # @param user [User]
@@ -58,6 +66,10 @@ class ConfidenceCheckProgress < ApplicationRecord
     progress.save!
     progress
   rescue ActiveRecord::RecordNotUnique
+    retry
+  rescue ActiveRecord::RecordInvalid => e
+    raise unless e.record.new_record? && e.record.errors.size == 1 && e.record.errors.of_kind?(:module_name, :taken)
+
     retry
   end
 end
