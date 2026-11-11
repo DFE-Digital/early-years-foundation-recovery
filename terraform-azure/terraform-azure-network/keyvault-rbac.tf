@@ -21,14 +21,15 @@ resource "azurerm_key_vault" "rbackv" {
   sku_name            = "standard"
   tenant_id           = data.azurerm_client_config.az_config.tenant_id
 
-  purge_protection_enabled = true
+  soft_delete_retention_days = 90
+  purge_protection_enabled   = true
 
   enable_rbac_authorization     = true
   public_network_access_enabled = false
 
   network_acls {
     default_action = "Deny"
-    bypass         = "AzureServices"
+    bypass         = "None"
   }
 
   tags = {
@@ -66,84 +67,31 @@ data "azurerm_role_definition" "kv_secrets_user" {
   scope = azurerm_key_vault.rbackv.id
 }
 
-data "azurerm_role_definition" "kv_secrets_officer" {
-  name  = "Key Vault Secrets Officer"
-  scope = azurerm_key_vault.rbackv.id
-}
-
-
 data "azurerm_role_definition" "kv_admin" {
   name  = "Key Vault Administrator"
   scope = azurerm_key_vault.rbackv.id
 }
 
+resource "azurerm_role_assignment" "kv_user" {
+  provider = azurerm.keyvault_rbac
+
+  scope                            = azurerm_key_vault.rbackv.id
+  role_definition_id               = data.azurerm_role_definition.kv_secrets_user.role_definition_id
+  principal_id                     = azurerm_user_assigned_identity.cl-identity-reader.principal_id
+  skip_service_principal_aad_check = true
+}
+
+resource "azurerm_role_assignment" "kv_administrator" {
+  provider = azurerm.keyvault_rbac
+
+  scope                            = azurerm_key_vault.rbackv.id
+  role_definition_id               = data.azurerm_role_definition.kv_admin.role_definition_id
+  principal_id                     = azurerm_user_assigned_identity.cl-identity-administrator.principal_id
+  skip_service_principal_aad_check = true
+}
 
 
-# Role assignments are deferred until the principals are available.
-
-# resource "azurerm_role_assignment" "kv_user1" {
-#   provider = azurerm.keyvault_rbac
-#
-#   scope                = azurerm_key_vault.rbackv.id
-#   role_definition_name = "Key Vault Secrets User"
-#   principal_id         = var.kv_user_object_id
-# }
-#
-# resource "azurerm_role_assignment" "kv_officer" {
-#   provider = azurerm.keyvault_rbac
-#
-#   scope                = azurerm_key_vault.rbackv.id
-#   role_definition_name = "Key Vault Certificates Officer"
-#   principal_id         = var.kv_officer_object_id
-# }
-#
-# resource "azurerm_role_assignment" "kv_administrator" {
-#   provider = azurerm.keyvault_rbac
-#
-#   scope                = azurerm_key_vault.rbackv.id
-#   role_definition_name = "Key Vault Administrator"
-#   principal_id         = var.kv_administrator_object_id
-# }
-#
-#
-# resource "azurerm_role_assignment" "kv_admin_sp" {
-#   provider = azurerm.keyvault_rbac
-#
-#   scope                = azurerm_key_vault.rbackv.id
-#   role_definition_name = "Key Vault Administrator"
-#   principal_id         = var.kv_admin_sp_object_id
-# }
-
-# resource "azurerm_role_assignment" "kv_user" {
-#   scope              = azurerm_key_vault.rbackv.id
-#   role_definition_id = data.azurerm_role_definition.kv_secrets_user.role_definition_id
-#   principal_id       = azurerm_user_assigned_identity.cl-identity-reader.principal_id
-#   principal_type     = "ServicePrincipal"
-# }
-
-# resource "azurerm_role_assignment" "kv_officer" {
-#   scope              = azurerm_key_vault.rbackv.id
-#   role_definition_id = data.azurerm_role_definition.kv_secrets_officer.role_definition_id
-#   principal_id       = azurerm_user_assigned_identity.cl-identity-administrator.principal_id
-#   principal_type     = "ServicePrincipal"
-# }
-
-# resource "azurerm_role_assignment" "kv_administrator" {
-#   scope              = azurerm_key_vault.rbackv.id
-#   role_definition_id = data.azurerm_role_definition.kv_admin.role_definition_id
-#   principal_id       = azurerm_user_assigned_identity.cl-identity-administrator.principal_id
-#   principal_type     = "ServicePrincipal"
-# }
-
-# resource "azurerm_role_assignment" "kv_admin_sp" {
-#   scope              = azurerm_key_vault.rbackv.id
-#   role_definition_id = data.azurerm_role_definition.kv_admin.role_definition_id
-#   principal_id       = data.azurerm_client_config.az_config.object_id
-#   principal_type     = "ServicePrincipal"
-# }
-
-
-#Identities
+# The reader identity is attached to runtime workloads; keep the administrator identity separate.
 resource "azurerm_user_assigned_identity" "cl-identity-reader" {
   name                = "${var.resource_name_prefix}mid-uks-cl-r"
   location            = var.location

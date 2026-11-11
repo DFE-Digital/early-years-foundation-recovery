@@ -107,11 +107,24 @@ jobs:
       # Deploy Background Worker
       - name: Deploy to Azure Container Instances
         uses: azure/CLI@v3
+        env:
+          AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP }}
+          RESOURCE_NAME_PREFIX: ${{ vars.RESOURCE_NAME_PREFIX }}
         with:
           azcliversion: 2.74.0
           inlineScript: |
+            identity_id=$(az identity show \
+              --resource-group "$AZURE_RESOURCE_GROUP" \
+              --name "${RESOURCE_NAME_PREFIX}mid-uks-cl-r" \
+              --query id --output tsv)
+            if [ -z "$identity_id" ]; then
+              echo "::error::Worker managed identity not found"
+              exit 1
+            fi
+
             az container create --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --name ${{ vars.WORKERAPP_NAME }} \
+              --assign-identity "$identity_id" \
               --image ${{ env.DOCKER_IMAGE }}:${{ inputs.candidate || github.ref_name }} \
               --os-type Linux \
               --cpu 2 \

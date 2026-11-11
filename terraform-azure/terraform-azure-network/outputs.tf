@@ -52,3 +52,8 @@ output "kv_mi_id" {
   description = "ID of the Managed Identity for the Key Vault"
   value       = var.environment != "development" ? azurerm_user_assigned_identity.kv_mi[0].id : null
 }
+
+output "kv_reader_identity_id" {
+  description = "ID of the managed identity used by runtime workloads to read Key Vault secrets"
+  value       = azurerm_user_assigned_identity.cl-identity-reader.id
+}
