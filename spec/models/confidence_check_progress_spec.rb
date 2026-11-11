@@ -3,6 +3,69 @@ require 'rails_helper'
 RSpec.describe ConfidenceCheckProgress, type: :model do
   let(:user) { create(:user, :registered) }
 
+  shared_examples 'handling concurrent progress creation' do |method, check_type|
+    let(:attributes) { { user: user, module_name: 'alpha', check_type: check_type } }
+    let(:arguments) { method == :record_skip ? attributes.except(:check_type) : attributes }
+
+    it 'uses the existing record when another request inserts before validation' do
+      stale_progress = described_class.new(attributes)
+      existing_progress = nil
+      allow(described_class).to receive(:find_or_initialize_by).and_call_original
+      allow(described_class).to receive(:find_or_initialize_by).with(**attributes).and_return(stale_progress)
+      allow(stale_progress).to receive(:save!).and_wrap_original do |original|
+        existing_progress = described_class.create!(attributes)
+        allow(described_class).to receive(:find_or_initialize_by).with(**attributes).and_call_original
+        original.call
+      end
+
+      progress = described_class.public_send(method, **arguments)
+
+      expect(progress).to eq existing_progress
+      expect(described_class.where(attributes).count).to eq 1
+      expect(progress.public_send(timestamp)).to be_present
+    end
+
+    it 'retries when another request inserts after validation' do
+      stale_progress = described_class.new(attributes)
+      existing_progress = nil
+      allow(described_class).to receive(:find_or_initialize_by).and_call_original
+      allow(described_class).to receive(:find_or_initialize_by).with(**attributes).and_return(stale_progress)
+      allow(stale_progress).to receive(:save!).and_wrap_original do |original|
+        existing_progress = described_class.create!(attributes)
+        allow(described_class).to receive(:find_or_initialize_by).with(**attributes).and_call_original
+        described_class.transaction(requires_new: true) { original.call(validate: false) }
+      end
+
+      progress = described_class.public_send(method, **arguments)
+
+      expect(progress).to eq existing_progress
+      expect(described_class.where(attributes).count).to eq 1
+      expect(progress.public_send(timestamp)).to be_present
+    end
+
+    it 'does not retry unrelated validation failures' do
+      expect(described_class).to receive(:find_or_initialize_by).once.and_call_original
+
+      expect {
+        described_class.public_send(method, **arguments.merge(module_name: nil))
+      }.to raise_error(ActiveRecord::RecordInvalid, /Module name can't be blank/)
+    end
+
+    it 'does not retry a uniqueness failure alongside other validation errors' do
+      invalid_progress = described_class.new(attributes.merge(module_name: nil))
+      allow(described_class).to receive(:find_or_initialize_by).and_return(invalid_progress)
+      expect(invalid_progress).to receive(:save!).once do
+        invalid_progress.valid?
+        invalid_progress.errors.add(:module_name, :taken)
+        raise ActiveRecord::RecordInvalid, invalid_progress
+      end
+
+      expect {
+        described_class.public_send(method, **arguments)
+      }.to raise_error(ActiveRecord::RecordInvalid)
+    end
+  end
+
   describe 'validations' do
     it 'is valid with valid attributes' do
       progress = described_class.new(user: user, module_name: 'alpha', check_type: 'pre')
@@ -99,6 +162,10 @@ RSpec.describe ConfidenceCheckProgress, type: :model do
   end
 
   describe '.record_start' do
+    let(:timestamp) { :started_at }
+
+    include_examples 'handling concurrent progress creation', :record_start, 'pre'
+
     it 'creates a new record with started_at' do
       expect {
         described_class.record_start(user: user, module_name: 'alpha', check_type: 'pre')
@@ -122,6 +189,10 @@ RSpec.describe ConfidenceCheckProgress, type: :model do
   end
 
   describe '.record_completion' do
+    let(:timestamp) { :completed_at }
+
+    include_examples 'handling concurrent progress creation', :record_completion, 'post'
+
     it 'creates a new record with both timestamps' do
       expect {
         described_class.record_completion(user: user, module_name: 'alpha', check_type: 'post')
@@ -144,6 +215,10 @@ RSpec.describe ConfidenceCheckProgress, type: :model do
   end
 
   describe '.record_skip' do
+    let(:timestamp) { :skipped_at }
+
+    include_examples 'handling concurrent progress creation', :record_skip, 'pre'
+
     it 'creates a pre check record with skipped_at' do
       expect {
         described_class.record_skip(user: user, module_name: 'alpha')
