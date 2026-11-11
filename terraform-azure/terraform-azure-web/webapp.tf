@@ -29,6 +29,11 @@ resource "azurerm_linux_web_app" "webapp" {
     "ApplicationInsightsAgent_EXTENSION_VERSION" = "~3"
   }, var.webapp_app_settings)
 
+  identity {
+    type         = "UserAssigned"
+    identity_ids = [var.kv_reader_identity_id]
+  }
+
   site_config {
     app_command_line                  = var.webapp_startup_command
     health_check_path                 = var.webapp_health_check_path
@@ -111,6 +116,11 @@ resource "azurerm_linux_web_app_slot" "webapp_slot" {
   https_only                = true
   virtual_network_subnet_id = var.webapp_subnet_id
   app_settings              = var.webapp_slot_app_settings
+
+  identity {
+    type         = "UserAssigned"
+    identity_ids = [var.kv_reader_identity_id]
+  }
 
   site_config {
     app_command_line                  = var.webapp_startup_command
