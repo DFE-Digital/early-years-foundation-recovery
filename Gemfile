@@ -65,7 +65,7 @@ gem 'opentelemetry-instrumentation-http'
 gem 'opentelemetry-instrumentation-net_http'
 gem 'opentelemetry-instrumentation-rack'
 gem 'opentelemetry-instrumentation-rails'
-gem 'opentelemetry-logs-sdk', '~> 0.7.0'
+gem 'opentelemetry-logs-sdk', '~> 0.8.1'
 gem 'opentelemetry-sdk'
 
 # Track users
