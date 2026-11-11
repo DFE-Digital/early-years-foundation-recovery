@@ -53,6 +53,8 @@ module "network" {
   location                                  = var.azure_region
   resource_group                            = azurerm_resource_group.rg.name
   resource_name_prefix                      = var.resource_name_prefix
+  logs_id                                   = module.monitor.logs_id
+  key_vault_alert_email                     = var.admin_email_address
   domain_name_label                         = var.webapp_name
   kv_certificate_authority_label            = "GlobalSignCA"
   kv_certificate_authority_name             = "GlobalSign"
@@ -119,6 +121,7 @@ module "webapp" {
   kv_id                                    = module.network.kv_id
   kv_cert_secret_id                        = module.network.kv_cert_secret_id
   kv_mi_id                                 = module.network.kv_mi_id
+  kv_reader_identity_id                    = module.network.kv_reader_identity_id
   insights_connection_string               = module.monitor.insights_connection_string
   instrumentation_key                      = module.monitor.insights_instrumentation_key
   logs_id                                  = module.monitor.logs_id
