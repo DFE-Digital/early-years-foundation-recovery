@@ -58,6 +58,10 @@ resource "azurerm_private_endpoint" "rbackv" {
     name                 = "default"
     private_dns_zone_ids = [azurerm_private_dns_zone.keyvault_private_dns.id]
   }
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 # RBAC: allow app identity to read secrets (use object_id, not client_id)
