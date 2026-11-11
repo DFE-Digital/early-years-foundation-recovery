@@ -18,6 +18,16 @@ variable "resource_name_prefix" {
   type        = string
 }
 
+variable "logs_id" {
+  description = "ID of the Log Analytics workspace for Key Vault diagnostics"
+  type        = string
+}
+
+variable "key_vault_alert_email" {
+  description = "Email address for Key Vault security alerts"
+  type        = string
+}
+
 variable "domain_name_label" {
   description = "DNS name label for assignment to Application Gateway"
   type        = string

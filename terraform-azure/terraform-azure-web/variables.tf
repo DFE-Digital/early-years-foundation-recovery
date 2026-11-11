@@ -133,6 +133,11 @@ variable "kv_mi_id" {
   type        = string
 }
 
+variable "kv_reader_identity_id" {
+  description = "ID of the managed identity used to read Key Vault secrets"
+  type        = string
+}
+
 variable "logs_id" {
   description = "Log Analystics workspace ID"
   type        = string
