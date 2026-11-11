@@ -142,3 +142,21 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "key_vault_sensitive_c
     action_groups = [azurerm_monitor_action_group.key_vault.id]
   }
 }
+
+resource "azurerm_monitor_activity_log_alert" "key_vault_role_changes" {
+  name                = "${var.resource_name_prefix}-kv-role-changes"
+  resource_group_name = var.resource_group
+  scopes              = ["/subscriptions/${data.azurerm_client_config.az_config.subscription_id}"]
+  description         = "Alert on role assignment changes in the application resource group, including Key Vault access."
+
+  criteria {
+    category          = "Administrative"
+    resource_group    = var.resource_group
+    resource_provider = "Microsoft.Authorization"
+    resource_type     = "Microsoft.Authorization/roleAssignments"
+  }
+
+  action {
+    action_group_id = azurerm_monitor_action_group.key_vault.id
+  }
+}

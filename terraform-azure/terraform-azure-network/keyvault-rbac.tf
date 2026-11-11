@@ -62,30 +62,20 @@ resource "azurerm_private_endpoint" "rbackv" {
 
 # RBAC: allow app identity to read secrets (use object_id, not client_id)
 
-data "azurerm_role_definition" "kv_secrets_user" {
-  name  = "Key Vault Secrets User"
-  scope = azurerm_key_vault.rbackv.id
-}
-
-data "azurerm_role_definition" "kv_admin" {
-  name  = "Key Vault Administrator"
-  scope = azurerm_key_vault.rbackv.id
-}
-
 resource "azurerm_role_assignment" "kv_user" {
   provider = azurerm.keyvault_rbac
 
   scope                            = azurerm_key_vault.rbackv.id
-  role_definition_id               = data.azurerm_role_definition.kv_secrets_user.role_definition_id
+  role_definition_name             = "Key Vault Secrets User"
   principal_id                     = azurerm_user_assigned_identity.cl-identity-reader.principal_id
   skip_service_principal_aad_check = true
 }
 
-resource "azurerm_role_assignment" "kv_administrator" {
+resource "azurerm_role_assignment" "kv_officer" {
   provider = azurerm.keyvault_rbac
 
   scope                            = azurerm_key_vault.rbackv.id
-  role_definition_id               = data.azurerm_role_definition.kv_admin.role_definition_id
+  role_definition_name             = "Key Vault Secrets Officer"
   principal_id                     = azurerm_user_assigned_identity.cl-identity-administrator.principal_id
   skip_service_principal_aad_check = true
 }
