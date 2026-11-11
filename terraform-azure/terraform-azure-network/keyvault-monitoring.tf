@@ -33,6 +33,10 @@ resource "azurerm_monitor_action_group" "key_vault" {
     email_address           = var.key_vault_alert_email
     use_common_alert_schema = true
   }
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 resource "azurerm_monitor_activity_log_alert" "key_vault_changes" {
@@ -52,6 +56,10 @@ resource "azurerm_monitor_activity_log_alert" "key_vault_changes" {
 
   action {
     action_group_id = azurerm_monitor_action_group.key_vault.id
+  }
+
+  lifecycle {
+    ignore_changes = [tags]
   }
 }
 
@@ -90,6 +98,10 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "key_vault_failed_acce
 
   action {
     action_groups = [azurerm_monitor_action_group.key_vault.id]
+  }
+
+  lifecycle {
+    ignore_changes = [tags]
   }
 }
 
@@ -141,6 +153,10 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "key_vault_sensitive_c
   action {
     action_groups = [azurerm_monitor_action_group.key_vault.id]
   }
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 resource "azurerm_monitor_activity_log_alert" "key_vault_role_changes" {
@@ -158,5 +174,9 @@ resource "azurerm_monitor_activity_log_alert" "key_vault_role_changes" {
 
   action {
     action_group_id = azurerm_monitor_action_group.key_vault.id
+  }
+
+  lifecycle {
+    ignore_changes = [tags]
   }
 }
