@@ -56,6 +56,6 @@ RSpec.describe ContinueTrainingMailJob do
   end
 
   it_behaves_like 'an email prompt', nil, Training::Module.by_name(:alpha) do
-    let(:contentful_entry_id) { [Training::Module.by_name(:alpha).id] }
+    let(:recipient_args) { [Training::Module.by_name(:alpha).id] }
   end
 end
