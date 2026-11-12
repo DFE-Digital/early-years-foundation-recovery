@@ -9,6 +9,7 @@ const appUrl = (process.env.REVIEW_APP_URL || 'http://localhost:3001').replace(/
 const simulatorUrl = review ? appUrl : 'http://localhost:4001';
 const clientId = review ? process.env.GOV_ONE_CLIENT_ID : 'cdt-login-e2e';
 const identity = `login-e2e-${randomUUID()}`;
+let reviewAccount;
 const termsPath = '/registration/terms-and-conditions/edit';
 let browser;
 
@@ -58,9 +59,20 @@ test('signs in through One Login and reuses the account in a fresh browser sessi
         link.click(),
       ]);
       assert.equal(new URL(page.url()).pathname, '/authorize');
-      await page.waitForSelector('[data-testid="sub"]');
-      await page.$eval('[data-testid="sub"]', (element, value) => { element.value = value; }, identity);
-      await page.$eval('[data-testid="email"]', (element, value) => { element.value = value; }, `${identity}@example.com`);
+      if (review) {
+        await page.waitForSelector('#account-name');
+        if (returningUser) {
+          await page.type('#account-name', reviewAccount);
+        } else {
+          await page.click('#create-account');
+          reviewAccount = await page.$eval('#account-name', element => element.value);
+          assert.match(reviewAccount, /^test-[a-f0-9]{32}$/);
+        }
+      } else {
+        await page.waitForSelector('[data-testid="sub"]');
+        await page.$eval('[data-testid="sub"]', (element, value) => { element.value = value; }, identity);
+        await page.$eval('[data-testid="email"]', (element, value) => { element.value = value; }, `${identity}@example.com`);
+      }
 
       const callbackResponse = page.waitForResponse(response => {
         const url = new URL(response.url());
@@ -69,7 +81,7 @@ test('signs in through One Login and reuses the account in a fresh browser sessi
       const [callback] = await Promise.all([
         callbackResponse,
         page.waitForNavigation({ waitUntil: 'networkidle0' }),
-        page.click('button[name="continue"]'),
+        page.click(review ? '#sign-in' : 'button[name="continue"]'),
       ]);
 
       assert.equal(callback.status(), 302, 'The real OIDC callback redirects after token validation');
