@@ -7,7 +7,7 @@
     p.govuk-body-l
       = t('home.hero')
 
-    = link_to course_overview_path, class: 'govuk-!-margin-bottom-4 govuk-link--no-visited-state govuk-!-font-weight-bold govuk-body' do
+    = link_to course_overview_path, class: 'govuk-link govuk-!-margin-bottom-4 govuk-link--no-visited-state govuk-!-font-weight-bold govuk-body' do
       - if current_user
         | Learn more
       - else
