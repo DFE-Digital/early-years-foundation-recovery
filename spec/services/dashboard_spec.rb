@@ -35,5 +35,18 @@ RSpec.describe Dashboard do
     it 'only uploads on demand' do
       expect { service.call(upload: true) }.to raise_error(StandardError, /Authorization failed/)
     end
+
+    it 'rejects uploads from review apps even when explicitly requested' do
+      allow(Rails.application.config).to receive(:review_app).and_return(true)
+
+      expect { service.call(upload: true) }.to raise_error(/uploads are disabled in review apps/)
+      expect(Google::Cloud::Storage).not_to have_received(:new)
+    end
+
+    it 'disables the dashboard job upload default in review apps' do
+      allow(Rails.application.config).to receive(:review_app).and_return(true)
+
+      expect(Rails.application.dashboard?).to be false
+    end
   end
 end
