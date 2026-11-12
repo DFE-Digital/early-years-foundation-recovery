@@ -5,7 +5,7 @@ ruby '3.4.10'
 
 gem 'pg'
 gem 'puma', '~> 7.2.1'
-gem 'rails'
+gem 'rails', '~> 8.1.4.1'
 gem 'redis', '~> 5.4'
 gem 'resolv', '>= 0.7.2'
 gem 'rexml', '>= 3.4.2'
@@ -66,7 +66,7 @@ gem 'opentelemetry-instrumentation-http'
 gem 'opentelemetry-instrumentation-net_http'
 gem 'opentelemetry-instrumentation-rack'
 gem 'opentelemetry-instrumentation-rails'
-gem 'opentelemetry-logs-sdk', '~> 0.7.0'
+gem 'opentelemetry-logs-sdk', '~> 0.8.1'
 gem 'opentelemetry-sdk'
 
 # Track users
@@ -111,6 +111,7 @@ group :development do
   gem 'rack-mini-profiler'
   gem 'rails-erd'
   gem 'redcarpet'
+  gem 'ruby-graphviz'
   gem 'web-console'
   gem 'yard-junk'
 end

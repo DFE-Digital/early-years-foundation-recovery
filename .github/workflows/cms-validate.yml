@@ -10,6 +10,9 @@ on:
         type: string
         default: master
 
+permissions:
+  contents: read
+
 jobs:
   test:
     name: Content 2i

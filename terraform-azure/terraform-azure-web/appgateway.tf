@@ -136,6 +136,27 @@ resource "azurerm_web_application_firewall_policy" "agw_wafp" {
     }
   }
 
+  custom_rules {
+    name      = "ApiRateLimit"
+    priority  = 10
+    rule_type = "RateLimitRule"
+    action    = "Block"
+
+    rate_limit_duration  = "OneMin"
+    rate_limit_threshold = 100
+    group_rate_limit_by  = "ClientAddr"
+
+    match_conditions {
+      match_variables {
+        variable_name = "RequestUri"
+      }
+
+      operator           = "Regex"
+      negation_condition = false
+      match_values       = ["^/(audit|change|release)/?([?].*)?$"]
+    }
+  }
+
   policy_settings {
     enabled                     = true
     mode                        = "Prevention"
