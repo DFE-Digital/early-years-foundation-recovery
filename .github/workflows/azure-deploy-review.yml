@@ -171,8 +171,8 @@ jobs:
             Review app verified for `${{ github.event.pull_request.head.sha }}`:
             ${{ steps.resources.outputs.url }}
 
-            Use synthetic identities only. Enter a new subject/email in the simulator for a new account,
-            or reuse the same subject/email for a returning account.
+            Use synthetic identities only. Choose a test account name to sign in again,
+            or select **Create new test user** in the review-only account picker.
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Mark review app removed

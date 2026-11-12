@@ -1,0 +1,18 @@
+* { box-sizing: border-box; }
+body { margin: 0; color: #0b0c0c; background: #fff; font: 19px/1.5 Arial, sans-serif; }
+header { padding: 18px max(24px, calc((100% - 960px) / 2)); color: #fff; background: #0b0c0c; border-bottom: 8px solid #1d70b8; }
+header span { font-weight: bold; margin-right: 20px; }
+main { max-width: 700px; margin: 40px auto; padding: 0 24px; }
+h1 { font-size: 36px; line-height: 1.15; margin: 20px 0; }
+h2 { font-size: 24px; margin-top: 40px; }
+p { margin: 0 0 20px; }
+.badge { display: inline-block; padding: 2px 10px; background: #fff7bf; font-weight: bold; }
+label { display: block; font-size: 24px; font-weight: bold; margin-top: 30px; }
+#account-hint, #account-format { color: #505a5f; margin: 10px 0; }
+input { display: block; width: 100%; max-width: 440px; border: 2px solid #0b0c0c; padding: 8px; font: inherit; }
+button { padding: 10px 16px; border: 0; border-bottom: 3px solid #002d18; color: #fff; background: #00703c; font: inherit; cursor: pointer; margin-top: 10px; }
+button.secondary { color: #0b0c0c; background: #f3f2f1; border-color: #929191; }
+button:disabled { opacity: .6; cursor: wait; }
+input:focus, button:focus { outline: 3px solid #ffdd00; outline-offset: 2px; }
+#error { border-left: 5px solid #d4351c; padding-left: 15px; color: #d4351c; font-weight: bold; }
+#new-account:not(:empty) { border-left: 5px solid #00703c; padding-left: 15px; }
