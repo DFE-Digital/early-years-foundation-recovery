@@ -82,8 +82,6 @@ class NotifyMailer < GovukNotifyRails::Mailer
   def continue_training(user, mod)
     set_template TEMPLATE_IDS[:continue_training]
     set_personalisation(
-      contentful_entry_id: mod.id,
-      mod_number: mod.position,
       mod_name: mod.title,
       url: root_url(**utm_params(:complete_module)),
     )
@@ -99,7 +97,6 @@ class NotifyMailer < GovukNotifyRails::Mailer
     set_template TEMPLATE_IDS[:new_module]
     set_personalisation(
       contentful_entry_id: mod.id,
-      mod_number: mod.position,
       mod_name: mod.title,
       mod_criteria: mod.criteria,
       url: root_url,
