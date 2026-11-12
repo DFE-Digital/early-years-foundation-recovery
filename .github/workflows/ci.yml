@@ -76,3 +76,9 @@ jobs:
       -
         name: Run rubocop
         run: bundle exec rubocop
+      -
+        name: Test review app deployment lifecycle
+        run: bundle exec rspec spec/deployment/review_app/deployer_spec.rb
+      -
+        name: Test review ingress routing
+        run: bash .github/scripts/test_review_ingress.sh
