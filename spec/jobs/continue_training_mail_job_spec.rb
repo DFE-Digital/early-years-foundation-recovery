@@ -55,5 +55,7 @@ RSpec.describe ContinueTrainingMailJob do
     travel_back
   end
 
-  it_behaves_like 'an email prompt', nil, Training::Module.by_name(:alpha)
+  it_behaves_like 'an email prompt', nil, Training::Module.by_name(:alpha) do
+    let(:recipient_args) { [Training::Module.by_name(:alpha).id] }
+  end
 end
