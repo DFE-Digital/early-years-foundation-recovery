@@ -1,9 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe 'Static page', :cms, type: :request do
-  context 'when public' do
-    specify { expect('/accessibility-statement').to be_successful }
+  context 'when accessibility statement has moved' do
+    before { allow(Rails.configuration).to receive(:accessibility_url).and_return('https://accessibility-statements.education.gov.uk/statement/14') }
 
+    specify do
+      get '/accessibility-statement'
+      expect(response).to have_http_status(:moved_permanently)
+      expect(response).to redirect_to('https://accessibility-statements.education.gov.uk/statement/14')
+    end
+
+    context 'when ACCESSIBILITY_URL is unset' do
+      before { allow(Rails.configuration).to receive(:accessibility_url).and_return('') }
+
+      specify do
+        get '/accessibility-statement'
+        expect(response).to have_http_status(:moved_permanently)
+        expect(response).to redirect_to('/')
+      end
+    end
+  end
+
+  context 'when public' do
     specify { expect('/settings/cookie-policy').to be_successful }
 
     specify { expect('/new-registration').to be_successful }
