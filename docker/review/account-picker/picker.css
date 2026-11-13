@@ -1,6 +1,7 @@
 * { box-sizing: border-box; }
 body { margin: 0; color: #0b0c0c; background: #fff; font: 19px/1.5 Arial, sans-serif; }
-header { padding: 18px max(24px, calc((100% - 960px) / 2)); color: #fff; background: #0b0c0c; border-bottom: 8px solid #1d70b8; }
+.test-banner { padding: 12px max(24px, calc((100% - 960px) / 2)); color: #0b0c0c; background: #ffdd00; font-size: 17px; }
+header { padding: 18px max(24px, calc((100% - 960px) / 2)); color: #fff; background: #505a5f; border-bottom: 8px solid #6f777b; }
 header span { font-weight: bold; margin-right: 20px; }
 main { max-width: 700px; margin: 40px auto; padding: 0 24px; }
 h1 { font-size: 36px; line-height: 1.15; margin: 20px 0; }
