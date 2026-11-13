@@ -39,7 +39,7 @@ RSpec.describe ReviewApp::Deployer do
       else
         case args.first(3)
         when %w[webapp show --resource-group]
-          { 'serverFarmId' => 'plan-id', 'defaultHostName' => "review-app-#{env.fetch('PR_NUMBER')}.azurewebsites.net" }
+          state[:parent] || { 'serverFarmId' => 'plan-id', 'defaultHostName' => "review-app-#{env.fetch('PR_NUMBER')}.azurewebsites.net" }
         when %w[appservice plan show]
           { 'sku' => { 'capacity' => state[:capacity] } }
         when %w[webapp config appsettings]
@@ -141,6 +141,21 @@ RSpec.describe ReviewApp::Deployer do
 
     expect { deployer.deploy(directory) }.to raise_error(/exactly one worker/)
     expect(state[:calls].length).to eq(2)
+  end
+
+  it 'reads the plan ID from Azure resource properties' do
+    state[:parent] = { 'properties' => { 'serverFarmId' => 'nested-plan-id' } }
+    state[:capacity] = 2
+
+    expect { deployer.deploy(directory) }.to raise_error(/exactly one worker/)
+    expect(state[:calls][1]).to include('--ids', 'nested-plan-id')
+  end
+
+  it 'reports a missing plan ID before making changes' do
+    state[:parent] = {}
+
+    expect { deployer.deploy(directory) }.to raise_error('Azure did not return the review App Service plan ID')
+    expect(state[:calls].length).to eq(1)
   end
 
   it 'makes cleanup safe to repeat when both resources are absent' do
