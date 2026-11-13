@@ -91,9 +91,14 @@ module ReviewApp
       end
     end
 
-    def deploy(directory)
+    def plan_id
       parent = ReviewApp.az('webapp', 'show', *@app)
-      plan = ReviewApp.az('appservice', 'plan', 'show', '--ids', parent.fetch('serverFarmId'))
+      parent['serverFarmId'] || parent.dig('properties', 'serverFarmId') ||
+        raise('Azure did not return the review App Service plan ID')
+    end
+
+    def deploy(directory)
+      plan = ReviewApp.az('appservice', 'plan', 'show', '--ids', plan_id)
       unless plan.dig('sku', 'capacity') == 1
         raise 'Review plan must have exactly one worker: simulator state is in memory'
       end
