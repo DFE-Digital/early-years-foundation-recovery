@@ -8,7 +8,7 @@
   justify-content: center;
 
   @include govuk-media-query($until: tablet) {
-    grid-template-columns: 400px;   
+    grid-template-columns: 400px;
   }
 }
 
@@ -20,8 +20,7 @@
 }
 
 .flip-card__inner {
-  display: grid;
-  gap: govuk-spacing(3);
+  display: none;
 }
 
 .flip-card__content {
@@ -38,10 +37,10 @@
   min-width: 0;
 
   @include govuk-media-query($until: tablet) {
-  .govuk-body {
-    font-size: 16px;
+    .govuk-body {
+      font-size: 16px;
+    }
   }
-}
 }
 
 .flip-card .flip-card__icon {
@@ -71,6 +70,34 @@
   }
 }
 
+.flip-card__static {
+  min-height: 356px;
+
+  .govuk-details {
+    margin-bottom: 0;
+  }
+
+  .govuk-body {
+    margin-bottom: 12px;
+  }
+
+  .govuk-details__text {
+    padding-bottom: 20px;
+  }
+
+  @include govuk-media-query($until: tablet) {
+    min-height: 328px;
+
+    .govuk-details {
+      font-size: 16px;
+    }
+  }
+}
+
+.flip-card__print-answer {
+  display: none;
+}
+
 .flip-card__button {
   align-self: flex-end;
   margin-top: auto;
@@ -93,10 +120,6 @@
     text-underline-offset: 4px;
   }
 
-  &[hidden] {
-    display: none;
-  }
-
   @include govuk-media-query($until: tablet) {
     font-size: 16px;
   }
@@ -115,11 +138,15 @@
   perspective: 1200px;
 
   .flip-card__inner {
-    gap: 0;
+    display: grid;
     transform-style: preserve-3d;
   }
 
-  .flip-card__face {
+  .flip-card__static {
+    display: none;
+  }
+
+  .flip-card__inner > .flip-card__face {
     grid-area: 1 / 1;
     height: 283px;
     min-height: 283px;
@@ -134,7 +161,7 @@
     }
   }
 
-  &:hover .flip-card__face {
+  &:hover .flip-card__inner > .flip-card__face {
     background-color: $color_dfe-blue;
 
     .govuk-heading-m,
@@ -148,7 +175,7 @@
     }
   }
 
-  &.flip-card--animated .flip-card__face {
+  &.flip-card--animated .flip-card__inner > .flip-card__face {
     // Symmetric easing reaches the edge-on position halfway through the flip.
     transition:
       transform var(--flip-duration) ease-in-out,
@@ -178,40 +205,32 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .flip-card--enhanced.flip-card--animated .flip-card__face {
-    transition: none;
+@media (prefers-reduced-motion: reduce), print {
+  .flip-card--enhanced {
+    cursor: default;
+    perspective: none;
+
+    .flip-card__inner {
+      display: none;
+    }
+
+    .flip-card__static {
+      display: flex;
+    }
   }
 }
 
 @media print {
-  .flip-card-grid {
+  .flip-card__static {
+    break-inside: avoid;
+    margin-bottom: govuk-spacing(3);
+
+    .govuk-details:not(.flip-card__print-answer) {
+      display: none;
+    }
+  }
+
+  .flip-card__print-answer {
     display: block;
-  }
-
-  .flip-card--enhanced {
-    perspective: none;
-
-    .flip-card__inner {
-      display: block;
-    }
-  }
-
-  .flip-card--enhanced,
-  .flip-card--enhanced.is-flipped,
-  .flip-card--enhanced.flip-card--animated {
-    .flip-card__face {
-      min-height: 0;
-      margin-bottom: govuk-spacing(3);
-      transform: none;
-      opacity: 1;
-      box-shadow: none;
-      break-inside: avoid;
-      transition: none;
-    }
-  }
-
-  .flip-card__button {
-    display: none;
   }
 }
