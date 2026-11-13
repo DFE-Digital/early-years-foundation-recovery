@@ -1,17 +1,12 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["front", "back", "button"];
+  static targets = ["front", "back"];
   static values = { flipped: Boolean };
 
   connect() {
     this.element.classList.remove("flip-card--animated");
     this.element.classList.add("flip-card--enhanced");
-
-    this.buttonTargets.forEach((button) => {
-      button.hidden = false;
-    });
-
     this.render();
   }
 

@@ -1,8 +1,8 @@
 .flip-card(
   data-controller="flip-card"
-  data-action="click->flip-card#toggle turbo:before-cache@document->flip-card#reset"
+  data-action="turbo:before-cache@document->flip-card#reset"
 )
-  .flip-card__inner
+  .flip-card__inner data-action="click->flip-card#toggle"
     .flip-card__face.flip-card__face--front(
       data-flip-card-target="front"
       role="group"
@@ -21,8 +21,6 @@
 
       button.flip-card__button(
         type="button"
-        hidden=true
-        data-flip-card-target="button"
       )
         | Reveal answer
         i.fa-solid.flip-card__button__icon.fa-repeat< aria-hidden="true"
@@ -45,8 +43,33 @@
 
       button.flip-card__button(
         type="button"
-        hidden=true
-        data-flip-card-target="button"
       )
         | Return to question
         i.fa-solid.fa-repeat< aria-hidden="true"
+
+  .flip-card__static.flip-card__face
+    .flip-card__content
+      i.fa-regular.fa-lightbulb.flip-card__icon aria-hidden="true"
+
+      .flip-card__body
+        h2.govuk-heading-m
+          | Question
+
+        p.govuk-body 
+          = question
+
+        details.govuk-details
+          summary.govuk-details__summary
+            span.govuk-details__summary-text
+              | Reveal answer
+
+          .govuk-details__text
+            = answer
+
+        details.govuk-details.flip-card__print-answer open=true
+          summary.govuk-details__summary
+            span.govuk-details__summary-text
+              | Reveal answer
+
+          .govuk-details__text
+            = answer
