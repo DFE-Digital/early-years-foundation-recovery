@@ -2,19 +2,21 @@
 
 .flip-card-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, 400px);
   gap: govuk-spacing(6);
   margin-bottom: govuk-spacing(6);
+  justify-content: center;
 
   @include govuk-media-query($until: tablet) {
-    grid-template-columns: 1fr;
+    grid-template-columns: 400px;   
   }
 }
 
 .flip-card {
   --flip-duration: 0.5s;
-
-  min-width: 0;
+  width: 400px;
+  min-width: 400px;
+  box-sizing: border-box;
 }
 
 .flip-card__inner {
@@ -22,9 +24,31 @@
   gap: govuk-spacing(3);
 }
 
+.flip-card__content {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding-right: 12px;
+  padding-left: 8px;
+}
+
+.flip-card__body {
+  flex: 1;
+  padding-top: 12px;
+  min-width: 0;
+
+  @include govuk-media-query($until: tablet) {
+  .govuk-body {
+    font-size: 16px;
+  }
+}
+}
+
 .flip-card .flip-card__icon {
-  width: 35px;
-  height: 35px;
+  flex-shrink: 0;
+  color: $color_dfe-blue;
+  width: 34px;
+  height: 46px;
   font-size: 35px;
   vertical-align: middle;
 }
@@ -34,29 +58,29 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  padding: govuk-spacing(5);
-  border: 3px solid #003a69;
+  padding-inline: 12px;
+  padding-block: 12px;
+  border: 2px solid $color_dfe-blue;
   border-radius: 24px;
   background: govuk-colour('white');
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   overflow-wrap: anywhere;
 
   &:focus {
     outline: 3px solid govuk-colour('yellow');
-    outline-offset: 3px;
   }
 }
 
 .flip-card__button {
   align-self: flex-end;
   margin-top: auto;
-  padding: govuk-spacing(2);
   border: 0;
   background: transparent;
   color: $govuk-link-colour;
   font: inherit;
   font-weight: 700;
   text-align: right;
+  font-size: 19px;
   cursor: pointer;
 
   &:focus-visible {
@@ -64,11 +88,26 @@
     color: govuk-colour('black');
     background: govuk-colour('yellow');
     box-shadow: 0 3px govuk-colour('black');
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 4px;
   }
 
   &[hidden] {
     display: none;
   }
+
+  @include govuk-media-query($until: tablet) {
+    font-size: 16px;
+  }
+}
+
+.flip-card__button .flip-card__button__icon {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  line-height: 20px;
+  text-align: center;
 }
 
 .flip-card--enhanced {
@@ -82,9 +121,31 @@
 
   .flip-card__face {
     grid-area: 1 / 1;
-    min-height: 340px;
+    height: 283px;
+    min-height: 283px;
+    overflow-y: auto;
+
     // Switch faces explicitly instead of relying on 3D back-face culling.
     backface-visibility: visible;
+
+    @include govuk-media-query($until: tablet) {
+      height: 250px;
+      min-height: 250px;
+    }
+  }
+
+  &:hover .flip-card__face {
+    background-color: $color_dfe-blue;
+
+    .govuk-heading-m,
+    .govuk-body,
+    .flip-card__icon,
+    .flip-card__button {
+      color: govuk-colour('white');
+    }
+    .flip-card__button:focus-visible {
+      color: govuk-colour('black');
+    }
   }
 
   &.flip-card--animated .flip-card__face {
