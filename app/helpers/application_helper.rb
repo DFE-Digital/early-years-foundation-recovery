@@ -63,7 +63,7 @@ module ApplicationHelper
 
   # @return [Boolean]
   def track_analytics?
-    cookies[:track_analytics_v2] == 'true'
+    !Rails.application.config.review_app && cookies[:track_analytics_v2] == 'true'
   end
 
   # @return [Boolean]
