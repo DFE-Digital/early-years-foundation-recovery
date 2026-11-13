@@ -4,7 +4,7 @@
   $govuk-assets-path: '/govuk-assets/'
 );
 
-@forward 'dfe-frontend/packages/dfefrontend' show $color_dfe-secondary-blue;
+@forward 'dfe-frontend/packages/dfefrontend' show $color_dfe-secondary-blue, $color_dfe-blue;
 
 @use 'govuk-frontend/dist/govuk/index' as govuk;
 @use 'dfe-frontend/packages/dfefrontend' as dfe;

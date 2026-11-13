@@ -10,12 +10,14 @@
       aria-labelledby="#{id}-question-heading"
       aria-describedby="#{id}-question"
     )
-      h3.govuk-heading-m id="#{id}-question-heading"
+      .flip-card__content
         i.fa-regular.fa-lightbulb.flip-card__icon aria-hidden="true"
-        |  Learning check
+        .flip-card__body
+          h2.govuk-heading-m id="#{id}-question-heading"
+            | Question
 
-      p.govuk-body id="#{id}-question"
-        = question
+          p.govuk-body id="#{id}-question"
+            = question
 
       button.flip-card__button(
         type="button"
@@ -23,7 +25,7 @@
         data-flip-card-target="button"
       )
         | Reveal answer
-        i.fa-solid.fa-arrows-rotate< aria-hidden="true"
+        i.fa-solid.flip-card__button__icon.fa-repeat< aria-hidden="true"
 
     .flip-card__face.flip-card__face--back(
       data-flip-card-target="back"
@@ -32,12 +34,14 @@
       aria-labelledby="#{id}-answer-heading"
       aria-describedby="#{id}-answer"
     )
-      h3.govuk-heading-m id="#{id}-answer-heading"
+      .flip-card__content
         i.fa-regular.fa-lightbulb.flip-card__icon aria-hidden="true"
-        |  Answer
+        .flip-card__body
+          h3.govuk-heading-m id="#{id}-answer-heading"
+            | Answer
 
-      p.govuk-body id="#{id}-answer"
-        = answer
+          p.govuk-body id="#{id}-answer"
+            = answer
 
       button.flip-card__button(
         type="button"
@@ -45,4 +49,4 @@
         data-flip-card-target="button"
       )
         | Return to question
-        i.fa-solid.fa-arrows-rotate< aria-hidden="true"
+        i.fa-solid.fa-repeat< aria-hidden="true"
