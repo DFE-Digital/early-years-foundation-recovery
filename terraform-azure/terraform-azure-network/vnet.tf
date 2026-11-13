@@ -112,8 +112,8 @@ resource "azurerm_subnet" "keyvault_private_endpoint_snet" {
   virtual_network_name = azurerm_virtual_network.vnet.name
   resource_group_name  = var.resource_group
   # Deployed prefixes differ (dev .5, staging .6) and an in-use prefix cannot change.
-  address_prefixes                          = [var.environment == "development" ? "172.1.5.0/24" : "172.1.6.0/24"]
-  private_endpoint_network_policies_enabled = false
+  address_prefixes                  = [var.environment == "development" ? "172.1.5.0/24" : "172.1.6.0/24"]
+  private_endpoint_network_policies = "Disabled"
 }
 
 resource "azurerm_private_dns_zone" "keyvault_private_dns" {
