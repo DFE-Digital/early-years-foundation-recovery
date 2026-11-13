@@ -11,6 +11,13 @@ Rails.application.routes.draw do
   get '/.well-known/security.txt',
       to: redirect('https://vdp.security.education.gov.uk/.well-known/security.txt', status: 301)
 
+  # Falls back to the homepage if ACCESSIBILITY_URL is unset or invalid
+  get '/accessibility-statement',
+      to: redirect(status: 301) { |_params, _req|
+        url = Rails.configuration.accessibility_url.to_s
+        url.start_with?('http') ? url : '/'
+      }
+
   resources :settings, controller: :settings, only: %i[show create]
 
   devise_for :users,
