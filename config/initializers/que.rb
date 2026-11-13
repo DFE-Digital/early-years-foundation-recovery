@@ -10,6 +10,7 @@ Que::Scheduler.configure do |config|
     # Temporarily disabled pending email template approval.
     # DropOffSurveyMailJob: { cron: Rails.application.config.mail_job_interval },
   }
+  config.schedule = {} if Rails.application.config.review_app
 end
 
 # @see https://github.com/que-rb/que/tree/master/docs#error-notifications

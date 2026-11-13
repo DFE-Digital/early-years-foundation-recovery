@@ -44,6 +44,8 @@ class Dashboard
   # @param clean [Boolean] default: false
   # @return [String]
   def call(upload: false, clean: false)
+    raise 'Dashboard uploads are disabled in review apps' if upload && Rails.application.config.review_app
+
     Rails.logger.info("[EXPORT] Dashboard export started. Upload: #{upload}")
     purge if clean
 

@@ -2,148 +2,183 @@ name: "App Deploy [Azure - REVIEW]"
 
 on:
   pull_request:
-    types:
-      - labeled # uses 'review'
-      - synchronize
-    paths-ignore:
-      - "**/*.md"
-      - .docker*
-      - .env.example
-      - .gitignore
-      - .pa11yci
-      - .tool-versions
-      - .yardopts
-      - bin/*
-      - docker-compose.*
-      - terraform-azure
-      - uml/*
+    types: [opened, reopened, labeled, unlabeled, synchronize, closed]
 
-# Permissions for OIDC authentication and URL comment step
 permissions:
   id-token: write
-  contents: write
+  contents: read
   packages: write
   pull-requests: write
 
+concurrency:
+  group: review-app-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
 env:
-  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
   DOCKER_IMAGE: ghcr.io/dfe-digital/early-years-foundation-recovery
-  PR_NUMBER: pr-${{ github.event.number }}
+  PR_NUMBER: pr-${{ github.event.pull_request.number }}
 
 jobs:
-  build-and-deploy:
-    if: contains(github.event.pull_request.labels.*.name, 'review')
+  reconcile:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      (contains(github.event.pull_request.labels.*.name, 'review') ||
+      github.event.action == 'closed' || github.event.label.name == 'review')
     runs-on: ubuntu-latest
+    timeout-minutes: 40
     environment: development
-
     steps:
-      # Checkout the repository to the GitHub Actions runner
-      - name: Checkout Code
+      - name: Check current PR state
+        id: state
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.pull_request.number }}
+          REQUESTED_SHA: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          pr="$(gh api "repos/$GH_REPO/pulls/$NUMBER")"
+          if jq -e '.state == "closed" or ([.labels[].name] | index("review") | not)' <<<"$pr" >/dev/null; then
+            echo "action=cleanup" >> "$GITHUB_OUTPUT"
+          elif [ "$(jq -r '.head.sha' <<<"$pr")" = "$REQUESTED_SHA" ]; then
+            echo "action=deploy" >> "$GITHUB_OUTPUT"
+          else
+            echo "Ignoring stale deployment request"
+          fi
+
+      - name: Checkout requested commit
+        if: steps.state.outputs.action != ''
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          # Open-PR cleanup uses the script on this PR; closed-PR cleanup remains available after branch deletion.
+          ref: ${{ github.event.action == 'closed' && github.event.repository.default_branch || github.event.pull_request.head.sha }}
 
-      # Create and boot Docker image builder
+      - name: Setup Ruby
+        if: steps.state.outputs.action != ''
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.4.10
+
       - name: Set up Docker Buildx
+        if: steps.state.outputs.action == 'deploy'
         uses: docker/setup-buildx-action@v3
         with:
           version: v0.31.1
 
-      # Login to the container registry
-      - name: Login to Github Container Registry
+      - name: Login to GitHub Container Registry
+        if: steps.state.outputs.action == 'deploy'
         uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Build and push image
-      - name: Build and push dependencies
-        uses: docker/build-push-action@v6
-        with:
-          target: deps
-          context: .
-          push: true
-          build-args: |
-            BUILDKIT_INLINE_CACHE=1
-            SHA=${{ github.event.pull_request.head.sha }}
-          cache-from: |
-            ${{ env.DOCKER_IMAGE }}:deps
-          tags: ${{ env.DOCKER_IMAGE }}:deps
-
-      - name: Build and push Docker image
+      - name: Build and push Rails
+        if: steps.state.outputs.action == 'deploy'
         uses: docker/build-push-action@v6
         with:
           target: app
           context: .
           push: true
-          build-args: |
-            BUILDKIT_INLINE_CACHE=1
-            SHA=${{ github.event.pull_request.head.sha }}
+          build-args: SHA=${{ github.event.pull_request.head.sha }}
           cache-from: |
-            ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
-            ${{ env.DOCKER_IMAGE }}:${{ env.PR_NUMBER }}
+            ${{ env.DOCKER_IMAGE }}:deps
             ${{ env.DOCKER_IMAGE }}:latest
-          tags: |
-            ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
-            ${{ env.DOCKER_IMAGE }}:${{ env.PR_NUMBER }}
+          tags: ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
 
-      # Login to Azure using OIDC
-      - name: Login to Azure CLI
+      - name: Build and push review ingress
+        if: steps.state.outputs.action == 'deploy'
+        uses: docker/build-push-action@v6
+        with:
+          context: docker/review
+          push: true
+          tags: ${{ env.DOCKER_IMAGE }}:review-ingress-${{ github.event.pull_request.head.sha }}
+
+      - name: Login to Azure
+        if: steps.state.outputs.action != ''
         uses: azure/login@v3
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # Deploy Web Application
-      - name: Deploy to Azure App Services
-        uses: azure/CLI@v3
+      - name: Reconcile review resources
+        if: steps.state.outputs.action != ''
+        id: resources
+        env:
+          AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP }}
+          REVIEWAPP_NAME: ${{ vars.REVIEWAPP_NAME }}
+          POSTGRES_SERVER: ${{ vars.RESOURCE_NAME_PREFIX }}-psqlfs
+          PSQLFS_USERNAME: ${{ secrets.PSQLFS_USERNAME }}
+          PSQLFS_PASSWORD: ${{ secrets.PSQLFS_PASSWORD }}
+          AZURE_REVIEW_APP_SUBNET: ${{ secrets.AZURE_REVIEW_APP_SUBNET }}
+          AZURE_VNET: ${{ secrets.AZURE_VNET }}
+          RAILS_IMAGE: ${{ env.DOCKER_IMAGE }}:${{ github.event.pull_request.head.sha }}
+          INGRESS_IMAGE: ${{ env.DOCKER_IMAGE }}:review-ingress-${{ github.event.pull_request.head.sha }}
+          ACTION: ${{ steps.state.outputs.action }}
+        run: ruby .github/scripts/review_app.rb "$ACTION"
+
+      - name: Smoke test sign in
+        if: steps.state.outputs.action == 'deploy'
+        env:
+          REVIEW_APP_URL: ${{ steps.resources.outputs.url }}
+        run: bash .github/scripts/smoke_sign_in.sh "$REVIEW_APP_URL" review
+
+      - name: Setup Node
+        if: steps.state.outputs.action == 'deploy'
+        uses: actions/setup-node@v7
         with:
-          azcliversion: 2.74.0
-          inlineScript: |
-            az postgres flexible-server db create --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-              --server-name ${{ vars.RESOURCE_NAME_PREFIX }}-psqlfs \
-              --database-name ${{ env.PR_NUMBER }} \
-              --output none
-            az webapp config appsettings set --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-              --name ${{ vars.REVIEWAPP_NAME }} \
-              --settings DATABASE_URL="postgresql://${{ secrets.PSQLFS_USERNAME }}:${{ secrets.PSQLFS_PASSWORD }}@${{ vars.RESOURCE_NAME_PREFIX }}-psqlfs.postgres.database.azure.com/${{ env.PR_NUMBER }}?sslmode=require" \
-              --output none
-            az webapp deployment slot create --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-              --name ${{ vars.REVIEWAPP_NAME }} \
-              --slot ${{ env.PR_NUMBER }} \
-              --configuration-source ${{ vars.REVIEWAPP_NAME }} \
-              --deployment-container-image-name ${{ env.DOCKER_IMAGE }}:${{ env.PR_NUMBER }} \
-              --output none
-            az webapp vnet-integration add --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-              --name ${{ vars.REVIEWAPP_NAME }} \
-              --slot ${{ env.PR_NUMBER }} \
-              --subnet ${{ secrets.AZURE_REVIEW_APP_SUBNET }} \
-              --vnet ${{ secrets.AZURE_VNET }}
-            az webapp config appsettings set --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-              --name ${{ vars.REVIEWAPP_NAME }} \
-              --slot ${{ env.PR_NUMBER }} \
-              --slot-settings DOMAIN="${{ vars.REVIEWAPP_NAME }}-${{ env.PR_NUMBER }}.azurewebsites.net" \
-              --output none
-            az webapp config appsettings set --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-              --name ${{ vars.REVIEWAPP_NAME }} \
-              --slot ${{ env.PR_NUMBER }} \
-              --settings APPLICATION_INSIGHTS_CONNECTION_STRING="${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}" \
-                SPLUNK_ACCESS_TOKEN="${{ secrets.SPLUNK_ACCESS_TOKEN }}" \
-                SPLUNK_REALM="${{ secrets.SPLUNK_REALM }}" \
-                OTEL_SERVICE_NAME="early-years-foundation-recovery" \
-                OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4318/v1/traces" \
-              --output none
+          node-version: 22.x
 
-      - name: Smoke test sign in journey
-        run: bash .github/scripts/smoke_sign_in.sh "https://${{ vars.REVIEWAPP_NAME }}-${{ env.PR_NUMBER }}.azurewebsites.net"
+      - name: Verify browser login and logout
+        if: steps.state.outputs.action == 'deploy'
+        env:
+          REVIEW_APP_URL: ${{ steps.resources.outputs.url }}
+          GOV_ONE_CLIENT_ID: review-${{ env.PR_NUMBER }}
+        run: |
+          corepack enable
+          yarn install --immutable
+          node --test spec/e2e/gov_one_login.test.mjs
 
-      # Add URL to Pull Request
-      - name: Comment URL to PR
+      - name: Capture container status
+        if: failure() && steps.resources.outcome != 'skipped' && steps.state.outputs.action == 'deploy'
+        env:
+          GROUP: ${{ secrets.AZURE_RESOURCE_GROUP }}
+          APP: ${{ vars.REVIEWAPP_NAME }}
+        run: |
+          mkdir -p tmp/login-e2e
+          az webapp sitecontainers list --resource-group "$GROUP" --name "$APP" --slot "$PR_NUMBER" \
+            --query '[].{name:name,image:image,isMain:isMain}' \
+            > tmp/login-e2e/containers.json
+          az webapp log download --resource-group "$GROUP" --name "$APP" --slot "$PR_NUMBER" \
+            --log-file tmp/login-e2e/startup-logs.zip
+
+      - name: Upload failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: review-app-${{ env.PR_NUMBER }}-failure
+          path: tmp/login-e2e/
+          retention-days: 7
+
+      - name: Comment verified review URL
+        if: steps.state.outputs.action == 'deploy'
         uses: mshick/add-pr-comment@v3
         with:
-          message: https://${{ vars.REVIEWAPP_NAME }}-${{ env.PR_NUMBER }}.azurewebsites.net
+          message-id: review-app
+          message: |
+            Review app verified for `${{ github.event.pull_request.head.sha }}`:
+            ${{ steps.resources.outputs.url }}
+
+            Use synthetic identities only. Choose a test account name to sign in again,
+            or select **Create new test user** in the review-only account picker.
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Mark review app removed
+        if: steps.state.outputs.action == 'cleanup'
+        uses: mshick/add-pr-comment@v3
+        with:
+          message-id: review-app
+          message: Review app and PR database removed.
           repo-token: ${{ secrets.GITHUB_TOKEN }}

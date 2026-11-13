@@ -43,6 +43,7 @@ It is recommended to install Ruby, Postgres and Nodejs using asdf (see instructi
 - The Project Documentation is located within the EYFS Steady State team intranet 'site'
 - [Production Environment][production]
 - [Staging Environment][staging]
+- [Azure PR review apps](docs/review-apps.md)
 - [Prototype Repo][prototype-repo]
 - [Prototype App][prototype-app]
 - [Flow Diagram][figma]

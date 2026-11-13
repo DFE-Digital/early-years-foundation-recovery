@@ -65,6 +65,9 @@ else
       "staging" )
         # no op
         ;;
+      "review" )
+        # Review slots migrate their own database without development seed data.
+        ;;
       "production" )
         rm public/robots.txt && touch public/robots.txt
         ;;

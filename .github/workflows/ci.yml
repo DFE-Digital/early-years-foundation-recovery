@@ -76,3 +76,12 @@ jobs:
       -
         name: Run rubocop
         run: bundle exec rubocop
+      -
+        name: Test review ingress routing
+        run: bash .github/scripts/test_review_ingress.sh
+      -
+        name: Test review account picker
+        run: |
+          corepack enable
+          yarn install --immutable
+          node --test spec/e2e/review_account_picker.test.mjs

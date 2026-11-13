@@ -1,5 +1,6 @@
 require_relative 'boot'
 require 'rails/all'
+require_relative '../lib/review_app_configuration'
 
 Bundler.require(*Rails.groups)
 
@@ -12,6 +13,7 @@ module EarlyYearsFoundationRecovery
     end
 
     config.load_defaults 7.0
+    config.review_app = ReviewAppConfiguration.enabled?(ENV)
     # @see ErrorsController
     config.exceptions_app = routes
 
@@ -79,7 +81,11 @@ module EarlyYearsFoundationRecovery
     # Gov One
     config.gov_one_base_uri    = ENV.fetch('GOV_ONE_BASE_URI',  credentials.dig(:gov_one, :base_uri))
     config.gov_one_client_id   = ENV.fetch('GOV_ONE_CLIENT_ID', credentials.dig(:gov_one, :client_id))
-    config.gov_one_private_key = gov_one_private_key_from_env || credentials.dig(:gov_one, :private_key)
+    config.gov_one_private_key = if config.review_app
+                                   ENV.fetch('GOV_ONE_PRIVATE_KEY')
+                                 else
+                                   gov_one_private_key_from_env || credentials.dig(:gov_one, :private_key)
+                                 end
 
     # Sentry
     config.sentry_dsn = ENV.fetch('SENTRY_DSN', '#SENTRY_DSN_env_var_missing')
@@ -104,7 +110,7 @@ module EarlyYearsFoundationRecovery
 
     # @return [Boolean] Upload to CSV files to the dashboard
     def dashboard?
-      Types::Params::Bool[ENV.fetch('DASHBOARD_UPDATE', true)]
+      !config.review_app && Types::Params::Bool[ENV.fetch('DASHBOARD_UPDATE', true)]
     end
 
     # @return [Boolean]
