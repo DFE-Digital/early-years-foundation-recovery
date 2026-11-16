@@ -17,8 +17,8 @@ locals {
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE"    = "false"
     "BOT_TOKEN"                              = var.webapp_config_bot_token
     "USER_PASSWORD"                          = var.webapp_config_user_password
-    "CONTENTFUL_ENVIRONMENT"                 = var.webapp_config_contentful_environment
-    "CONTENTFUL_PREVIEW"                     = var.webapp_config_contentful_preview
+    "CONTENTFUL_ENVIRONMENT"                 = var.webapp_config_contentful_environment != "" ? var.webapp_config_contentful_environment : null
+    "CONTENTFUL_PREVIEW"                     = var.webapp_config_contentful_preview != "" ? var.webapp_config_contentful_preview : null
     "DISABLE_PRE_CONFIDENCE_CHECK"           = var.webapp_config_disable_pre_confidence_check
     "DOMAIN"                                 = var.webapp_config_domain
     "EDITOR"                                 = var.webapp_config_editor
@@ -53,8 +53,8 @@ locals {
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE"    = "false"
     "BOT_TOKEN"                              = var.webapp_config_bot_token
     "USER_PASSWORD"                          = var.webapp_config_user_password
-    "CONTENTFUL_ENVIRONMENT"                 = var.webapp_config_contentful_environment
-    "CONTENTFUL_PREVIEW"                     = var.webapp_config_contentful_preview
+    "CONTENTFUL_ENVIRONMENT"                 = var.webapp_config_contentful_environment != "" ? var.webapp_config_contentful_environment : null
+    "CONTENTFUL_PREVIEW"                     = var.webapp_config_contentful_preview != "" ? var.webapp_config_contentful_preview : null
     "DISABLE_PRE_CONFIDENCE_CHECK"           = var.webapp_config_disable_pre_confidence_check
     "DOMAIN"                                 = var.webapp_config_domain
     "EDITOR"                                 = var.webapp_config_editor
@@ -104,8 +104,8 @@ locals {
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE"    = "false"
     "BOT_TOKEN"                              = var.webapp_config_bot_token
     "USER_PASSWORD"                          = var.webapp_config_user_password
-    "CONTENTFUL_ENVIRONMENT"                 = var.reviewapp_config_contentful_environment
-    "CONTENTFUL_PREVIEW"                     = var.reviewapp_config_contentful_preview
+    "CONTENTFUL_ENVIRONMENT"                 = var.reviewapp_config_contentful_environment != "" ? var.reviewapp_config_contentful_environment : null
+    "CONTENTFUL_PREVIEW"                     = var.reviewapp_config_contentful_preview != "" ? var.reviewapp_config_contentful_preview : null
     "DISABLE_PRE_CONFIDENCE_CHECK"           = var.reviewapp_config_disable_pre_confidence_check
     "DASHBOARD_UPDATE"                       = false
     "DOMAIN"                                 = var.webapp_config_domain
