@@ -138,7 +138,8 @@ Slots share the plan's CPU and memory: check capacity and slot availability befo
 increasing concurrent use.
 
 The deployment identity needs permission to manage slots, sidecars, slot settings,
-network integration and PR databases. Container images must be anonymously pullable
+network integration and PR databases, and to read the parent app and its hosting plan.
+Container images must be anonymously pullable
 from GHCR. Networking must allow PostgreSQL access and requests to the review app's
 own HTTPS hostname.
 
