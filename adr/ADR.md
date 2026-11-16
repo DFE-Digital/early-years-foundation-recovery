@@ -33,9 +33,12 @@ This log lists the architectural decisions for EYFS Recovery
 * [ADR-0025-1](0025-application-insights/0025-1-telemetry-collector-app-insights-dev.md) -  Introduce OpenTelemetry and Azure Application Insights using a Telemetry Collector Container
 * [ADR-0025-2](0025-application-insights/0025-2-opentelemetry_deployment_sidecar.md) - Embedded OpenTelemetry Collector
 * [ADR-0026](0026-cookie-same-site-policy.md) - Cookie `SameSite` policy
-* [ADR-0027](0027-start-training-reminder-timing.md) - Reduce start training reminder delay to one week
+* [ADR-0027](0027-start-training-reminder-timing.md) - Reduce Start Training Reminder Delay To One Week
+* [ADR-0028](0028-bot-authentication.md) - Bot authentication improvements
 * [ADR-0028](0028-content-security-policy-hardening.md) - Harden Content Security Policy and Introduce Controlled Rollout Mode
-* [ADR-0029](0029-asset-pipeline-static-paths.md) - Serve govuk-frontend and Font Awesome assets statically and disable runtime asset compilation
+* [ADR-0029](0029-asset-pipeline-static-paths.md) - Serve govuk-frontend assets statically and disable runtime asset compilation
+* [ADR-0030](0030-continue-module-reminder-timing.md) - Reduce Continue Module Reminder Delay To One Week
+* [ADR-0031](0031-azure-managed-redis-cache.md) - Use Azure Managed Redis For Distributed Application Caching
 
 <!-- adrlogstop -->
 
