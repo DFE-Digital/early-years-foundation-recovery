@@ -31,7 +31,7 @@ resource "azurerm_subnet" "redis" {
   name                              = "${var.resource_name_prefix}-redis-snet"
   resource_group_name               = azurerm_resource_group.rg.name
   virtual_network_name              = module.network.vnet_name
-  address_prefixes                  = ["172.1.4.0/28"]
+  address_prefixes                  = ["172.1.7.0/28"]
   private_endpoint_network_policies = "NetworkSecurityGroupEnabled"
 }
 
@@ -52,7 +52,7 @@ resource "azurerm_network_security_group" "redis" {
     source_port_range          = "*"
     destination_port_range     = "10000"
     source_address_prefixes    = ["172.1.1.0/26", "172.1.2.0/24"]
-    destination_address_prefix = "172.1.4.0/28"
+    destination_address_prefix = "172.1.7.0/28"
   }
 
   security_rule {
