@@ -18,6 +18,24 @@ describe 'ApplicationHelper', type: :helper do
       it 'returns true' do
         expect(helper.show_important_banner?).to be true
       end
+
+      describe '#track_analytics?' do
+        it 'honours consent outside review apps' do
+          cookies[:track_analytics_v2] = 'true'
+          expect(helper.track_analytics?).to be true
+        end
+
+        it 'requires consent outside review apps' do
+          expect(helper.track_analytics?).to be false
+        end
+
+        it 'never sends review activity to analytics even with consent' do
+          cookies[:track_analytics_v2] = 'true'
+          allow(Rails.application.config).to receive(:review_app).and_return(true)
+
+          expect(helper.track_analytics?).to be false
+        end
+      end
     end
 
     context 'when SHOW_IMPORTANT_BANNER is false' do

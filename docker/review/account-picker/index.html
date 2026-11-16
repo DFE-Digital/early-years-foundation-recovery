@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>TEST SITE - Choose a test account - Review app</title>
+  <link rel="stylesheet" href="/review-login/picker.css">
+  <script src="/review-login/picker.js" defer></script>
+</head>
+<body>
+  <div class="test-banner" role="note">
+    <strong>TEST SITE</strong> This is not a real service and is not GOV.UK One Login. Do not enter real personal details.
+  </div>
+  <header><span>Review app</span> Test sign in simulator</header>
+  <main>
+    <p class="badge">Testing only</p>
+    <h1>Choose a test account</h1>
+    <p>This is a simulated sign in for testing review apps. Use made-up details only.</p>
+    <form id="account-picker">
+      <label for="account-name">Test account name</label>
+      <p id="account-hint">Enter a short name such as <strong>alex-test</strong>. Reuse the same name to return to that account on this review app.</p>
+      <input id="account-name" name="account" type="text" required maxlength="40"
+        pattern="[a-z0-9][a-z0-9\-]{0,39}" autocomplete="off" autocapitalize="none"
+        spellcheck="false" aria-describedby="account-hint account-format">
+      <p id="account-format">Use lowercase letters, numbers and hyphens. Anyone with access to this review app can use the same test account name.</p>
+      <p id="new-account" role="status"></p>
+      <p id="error" role="alert" hidden></p>
+      <button id="sign-in" type="submit">Sign in with this test account</button>
+      <h2>Need a different account?</h2>
+      <p>Create a unique name for a new test user. Make a note of it if you want to sign in again.</p>
+      <button id="create-account" class="secondary" type="button">Create new test user</button>
+    </form>
+    <noscript><p>JavaScript is required to choose a review test account. Enable JavaScript and reload this page.</p></noscript>
+  </main>
+</body>
+</html>

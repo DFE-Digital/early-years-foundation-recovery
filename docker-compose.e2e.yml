@@ -31,6 +31,7 @@ services:
       ID_TOKEN_SIGNING_ALGORITHM: ES256
       EMAIL: login-e2e@example.com
       SUB: login-e2e-user
+      INTERACTIVE_MODE: "true"
     healthcheck:
       test: ["CMD-SHELL", "wget -qO- http://localhost:4001/.well-known/openid-configuration || exit 1"]
       interval: 2s

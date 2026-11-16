@@ -363,7 +363,7 @@ GEM
     minitest (6.1.0)
       drb (~> 2.0)
       prism (>= 1.5, < 3)
-    msgpack (1.8.5)
+    msgpack (1.8.7)
     multi_json (1.17.0)
     mutex_m (0.3.0)
     net-http (0.9.1)
@@ -612,6 +612,10 @@ GEM
       rbs (>= 4.0.0)
       tsort
     redcarpet (3.6.1)
+    redis (5.4.1)
+      redis-client (>= 0.22.0)
+    redis-client (0.31.0)
+      connection_pool
     regexp_parser (2.13.1)
     reline (0.7.0)
       io-console (~> 0.5)
@@ -843,6 +847,7 @@ DEPENDENCIES
   rails (~> 8.1.4.1)
   rails-erd
   redcarpet
+  redis (~> 5.4)
   resolv (>= 0.7.2)
   rexml (>= 3.4.2)
   rspec-rails
