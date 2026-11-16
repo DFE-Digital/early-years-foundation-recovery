@@ -43,6 +43,7 @@ resource "azurerm_monitor_activity_log_alert" "key_vault_changes" {
   for_each = local.key_vault_monitoring_targets
 
   name                = "${var.resource_name_prefix}-${each.key}-kv-changes"
+  location            = "global"
   resource_group_name = var.resource_group
   scopes              = ["/subscriptions/${data.azurerm_client_config.az_config.subscription_id}"]
   description         = "Alert on Azure control-plane changes to Key Vault."
@@ -161,6 +162,7 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "key_vault_sensitive_c
 
 resource "azurerm_monitor_activity_log_alert" "key_vault_role_changes" {
   name                = "${var.resource_name_prefix}-kv-role-changes"
+  location            = "global"
   resource_group_name = var.resource_group
   scopes              = ["/subscriptions/${data.azurerm_client_config.az_config.subscription_id}"]
   description         = "Alert on role assignment changes in the application resource group, including Key Vault access."

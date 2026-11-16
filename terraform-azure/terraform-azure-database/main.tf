@@ -4,19 +4,20 @@ resource "random_pet" "name" {
 
 # Create Database Server
 resource "azurerm_postgresql_flexible_server" "psqlfs" {
-  name                         = "${var.resource_name_prefix}-psqlfs"
-  resource_group_name          = var.resource_group
-  location                     = var.location
-  version                      = "13"
-  delegated_subnet_id          = var.psqlfs_subnet_id
-  private_dns_zone_id          = var.psqlfs_dns_zone_id
-  administrator_login          = var.psqlfs_username
-  administrator_password       = var.psqlfs_password
-  zone                         = "1"
-  storage_mb                   = var.psqlfs_storage
-  sku_name                     = var.psqlfs_sku
-  backup_retention_days        = 7
-  geo_redundant_backup_enabled = var.psqlfs_geo_redundant_backup
+  name                          = "${var.resource_name_prefix}-psqlfs"
+  resource_group_name           = var.resource_group
+  location                      = var.location
+  version                       = "13"
+  delegated_subnet_id           = var.psqlfs_subnet_id
+  private_dns_zone_id           = var.psqlfs_dns_zone_id
+  public_network_access_enabled = false
+  administrator_login           = var.psqlfs_username
+  administrator_password        = var.psqlfs_password
+  zone                          = "1"
+  storage_mb                    = var.psqlfs_storage
+  sku_name                      = var.psqlfs_sku
+  backup_retention_days         = 7
+  geo_redundant_backup_enabled  = var.psqlfs_geo_redundant_backup
 
   dynamic "high_availability" {
     for_each = var.psqlfs_ha_enabled ? [1] : []
@@ -39,6 +40,13 @@ resource "azurerm_postgresql_flexible_server_configuration" "psqlfs_config" {
   name      = "azure.extensions"
   server_id = azurerm_postgresql_flexible_server.psqlfs.id
   value     = "CITEXT,FUZZYSTRMATCH,PGCRYPTO,UUID-OSSP"
+}
+
+# Hash passwords with SCRAM rather than the MD5 default (ITHC 6.2.2)
+resource "azurerm_postgresql_flexible_server_configuration" "psqlfs_password_encryption" {
+  name      = "password_encryption"
+  server_id = azurerm_postgresql_flexible_server.psqlfs.id
+  value     = "SCRAM-SHA-256"
 }
 
 # Create Database
