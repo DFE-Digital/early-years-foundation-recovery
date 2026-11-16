@@ -92,7 +92,6 @@ env:
   TF_VAR_webapp_config_rails_serve_static_files: ${{ vars.WEBAPP_CONFIG_RAILS_SERVE_STATIC_FILES }}
   TF_VAR_webapp_config_web_concurrency: ${{ vars.WEBAPP_CONFIG_WEB_CONCURRENCY }}
 
-
 jobs:
   terraform-custom-command:
     name: 'Run Custom Terraform Command'
