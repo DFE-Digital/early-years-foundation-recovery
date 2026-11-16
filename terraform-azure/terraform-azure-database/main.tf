@@ -49,6 +49,20 @@ resource "azurerm_postgresql_flexible_server_configuration" "psqlfs_password_enc
   value     = "SCRAM-SHA-256"
 }
 
+# CIS 5.2.3 - enable connection throttling
+resource "azurerm_postgresql_flexible_server_configuration" "psqlfs_connection_throttle" {
+  name      = "connection_throttle.enable"
+  server_id = azurerm_postgresql_flexible_server.psqlfs.id
+  value     = "on"
+}
+
+# CIS 5.2.4 - retain log files for more than 3 days (Azure accepts 1-7)
+resource "azurerm_postgresql_flexible_server_configuration" "psqlfs_logfiles_retention" {
+  name      = "logfiles.retention_days"
+  server_id = azurerm_postgresql_flexible_server.psqlfs.id
+  value     = "7"
+}
+
 # Create Database
 resource "azurerm_postgresql_flexible_server_database" "psqldb" {
   name      = "${var.resource_name_prefix}-${random_pet.name.id}-psqldb"
