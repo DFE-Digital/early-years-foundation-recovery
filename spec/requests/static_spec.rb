@@ -35,6 +35,11 @@ RSpec.describe 'Static page', :cms, type: :request do
     specify { expect('/terms-and-conditions').to be_successful }
 
     specify { expect('/wifi-and-data').to be_successful }
+
+    specify 'does not disclose server software' do
+      get '/accessibility-statement'
+      expect(response.headers.keys.map(&:downcase)).not_to include('server')
+    end
   end
 
   context 'when authentication is required' do
