@@ -22,7 +22,9 @@ export default class extends Controller {
 
     this.element.classList.toggle("is-flipped", this.flippedValue);
 
-    activeFace.focus({ preventScroll: true });
+    activeFace
+      .querySelector(".flip-card__button")
+      .focus({ preventScroll: true });
 
     // Hide the old face after focus has left it.
     this.setFaceActive(inactiveFace, false);

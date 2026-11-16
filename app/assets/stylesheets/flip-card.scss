@@ -2,20 +2,18 @@
 
 .flip-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 400px);
+  grid-template-columns: repeat(auto-fit, minmax(0, 400px));
   gap: govuk-spacing(6);
   margin-bottom: govuk-spacing(6);
-  justify-content: center;
+  justify-content: start;
 
-  @include govuk-media-query($until: tablet) {
-    grid-template-columns: 400px;
-  }
 }
 
 .flip-card {
   --flip-duration: 0.5s;
-  width: 400px;
-  min-width: 400px;
+  width: 100%;
+  max-width: 400px;
+  min-width: 0;
   box-sizing: border-box;
 }
 
@@ -65,7 +63,8 @@
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   overflow-wrap: anywhere;
 
-  &:focus {
+  &:focus-visible,
+  &:has(:focus-visible) {
     outline: 3px solid govuk-colour('yellow');
   }
 }
@@ -161,7 +160,8 @@
     }
   }
 
-  &:hover .flip-card__inner > .flip-card__face {
+  &:hover .flip-card__inner > .flip-card__face,
+  &:focus-within .flip-card__inner > .flip-card__face {
     background-color: $color_dfe-blue;
 
     .govuk-heading-m,
