@@ -42,6 +42,13 @@ resource "azurerm_postgresql_flexible_server_configuration" "psqlfs_config" {
   value     = "CITEXT,FUZZYSTRMATCH,PGCRYPTO,UUID-OSSP"
 }
 
+# Hash passwords with SCRAM rather than the MD5 default (ITHC 6.2.2)
+resource "azurerm_postgresql_flexible_server_configuration" "psqlfs_password_encryption" {
+  name      = "password_encryption"
+  server_id = azurerm_postgresql_flexible_server.psqlfs.id
+  value     = "SCRAM-SHA-256"
+}
+
 # Create Database
 resource "azurerm_postgresql_flexible_server_database" "psqldb" {
   name      = "${var.resource_name_prefix}-${random_pet.name.id}-psqldb"
