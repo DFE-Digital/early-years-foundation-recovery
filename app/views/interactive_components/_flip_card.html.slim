@@ -23,8 +23,9 @@
         type="button"
         aria-label="Click to reveal answer"
       )
-        | Reveal answer
-        i.fa-solid.flip-card__button__icon.fa-repeat< aria-hidden="true"
+        span.flip-card__button-text
+          | Reveal answer
+        i.fa-solid.flip-card__button__icon.fa-repeat aria-hidden="true"
 
     .flip-card__face.flip-card__face--back(
       data-flip-card-target="back"
@@ -46,8 +47,9 @@
         type="button"
         aria-label="Click to return to question"
       )
-        | Return to question
-        i.fa-solid.fa-repeat< aria-hidden="true"
+        span.flip-card__button-text
+          | Return to question
+        i.fa-solid.flip-card__button__icon.fa-repeat aria-hidden="true"
 
   .flip-card__static.flip-card__face
     .flip-card__content
