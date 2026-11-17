@@ -81,3 +81,6 @@ uml/*.*
 errors-*.log
 
 .DS_Store
+
+# Personal AI assistant instructions
+AGENTS.md
