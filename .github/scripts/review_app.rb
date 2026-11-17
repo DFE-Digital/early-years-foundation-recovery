@@ -93,7 +93,11 @@ module ReviewApp
 
     def plan_id
       parent = ReviewApp.az('webapp', 'show', *@app)
-      parent['serverFarmId'] || parent.dig('properties', 'serverFarmId') ||
+      id = parent['serverFarmId'] || parent.dig('properties', 'serverFarmId')
+      return id if id
+
+      resource = ReviewApp.az('resource', 'show', *@app, '--resource-type', 'Microsoft.Web/sites')
+      resource.dig('properties', 'serverFarmId') ||
         raise('Azure did not return the review App Service plan ID')
     end
 

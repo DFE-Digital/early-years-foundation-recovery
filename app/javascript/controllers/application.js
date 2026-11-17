@@ -1,10 +1,10 @@
-import { Application } from '@hotwired/stimulus'
-import Reveal from '@stimulus-components/reveal'
+import { Application } from "@hotwired/stimulus";
+import Reveal from "@stimulus-components/reveal";
 
-const application = Application.start()
+const application = Application.start();
 
-application.register('reveal', Reveal)
+application.register("reveal", Reveal);
 
-application.debug = true
-window.Stimulus = application
-export { application }
+application.debug = false;
+window.Stimulus = application;
+export { application };
