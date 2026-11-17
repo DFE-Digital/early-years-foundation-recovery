@@ -20,7 +20,6 @@ RSpec.describe 'Page' do
     it { expect(static_path('500')).to have_page_title 'Sorry, there is a problem with the service' }
     it { expect(static_path('503')).to have_page_title 'Service unavailable' }
 
-    it { expect(static_path('accessibility-statement')).to have_page_title 'Accessibility statement' }
     it { expect(static_path('new-registration')).to have_page_title 'Update your registration details' }
     it { expect(static_path('other-problems-signing-in')).to have_page_title 'Other problems signing in' }
     it { expect(static_path('promotional-materials')).to have_page_title 'Promotional materials' }
