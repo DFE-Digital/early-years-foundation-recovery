@@ -50,6 +50,13 @@ class Job < Que::ActiveRecord::Model
     mail.where('args @> ?', [{ arguments: %w[drop_off_survey] }].to_json)
   end
 
+  # @return [Job::ActiveRecord_Relation]
+  def self.continue_training_mail(contentful_entry_id)
+    mail
+      .where('args @> ?', [{ arguments: %w[continue_training] }].to_json)
+      .where('args @> ?', [{ arguments: [{ args: [{ id: contentful_entry_id }] }] }].to_json)
+  end
+
   # @return [Integer]
   def mail_user_id
     mailer_user_gid.split('/').last.to_i

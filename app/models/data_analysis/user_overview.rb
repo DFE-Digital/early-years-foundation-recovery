@@ -70,7 +70,7 @@ module DataAnalysis
           training_mail_recipients: User.training_email_recipients.count,
           complete_registration_mail_recipients: CompleteRegistrationMailJob.recipients.count,
           start_training_mail_recipients: StartTrainingMailJob.recipients.count,
-          continue_training_mail_recipients: ContinueTrainingMailJob.recipients.count,
+          continue_training_mail_recipients: continue_training_mail_recipient_count,
           new_module_mail_recipients: new_module_mail_recipient_count,
           test_mail_recipients: TestBulkMailJob.recipients.count,
           closed: User.closed.count,
@@ -113,6 +113,18 @@ module DataAnalysis
       # @return [Integer]
       def not_started_learning
         User.all.count { |u| u.module_time_to_completion.empty? }
+      end
+
+      def continue_training_mail_recipient_count
+        Training::Module.live.flat_map { |mod|
+          ContinueTrainingMailJob.recipients(mod.id)
+            .where(
+              id: UserModuleProgress.in_progress
+                .where(module_name: mod.name)
+                .select(:user_id),
+            )
+            .pluck(:id)
+        }.uniq.count
       end
 
       def new_module_mail_recipient_count

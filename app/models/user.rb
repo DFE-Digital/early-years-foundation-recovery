@@ -174,7 +174,17 @@ class User < ApplicationRecord
       .where.not(id: Job.start_training_mail.map(&:mail_user_id))
       .distinct
   }
-  scope :continue_training_mail_job_recipients, -> { training_email_recipients.last_visit_1_week_ago.with_module_in_progress.distinct }
+  scope :continue_training_mail_job_recipients, lambda { |contentful_entry_id|
+    eligible_users = last_visit_1_week_ago.with_module_in_progress.distinct
+
+    training_email_recipients
+      .merge(eligible_users)
+      .where.not(id: with_continue_training_mail_events(contentful_entry_id))
+      .where.not(
+        id: Job.continue_training_mail(contentful_entry_id).map(&:mail_user_id),
+      )
+      .distinct
+  }
   scope :drop_off_survey_mail_job_recipients, lambda {
     eligible_users = last_module_progress_two_weeks_ago
       .or(no_module_progress_two_weeks_after_signup)
@@ -217,6 +227,12 @@ class User < ApplicationRecord
   scope :with_drop_off_survey_mail_events, lambda {
     with_mail_events
       .where(mail_events: { template: NotifyMailer::TEMPLATE_IDS[:drop_off_survey] })
+      .distinct
+  }
+
+  scope :with_continue_training_mail_events, lambda { |contentful_entry_id|
+    with_mail_events
+      .merge(MailEvent.for_continue_training_email(contentful_entry_id))
       .distinct
   }
 
