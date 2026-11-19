@@ -23,11 +23,11 @@ RSpec.describe Caching do
       expect(described_class.cache_key).to eq 'initial'
 
       described_class.reset_cache_key!
-      expect(described_class.cache_key).to eq '16-03-2023-13-00'
+      expect(described_class.cache_key).to eq "16-03-2023-13-00-#{Release.last.id}"
 
       create :release, time: '2023-04-01 12:00:00'
       described_class.reset_cache_key!
-      expect(described_class.cache_key).to eq '01-04-2023-12-00'
+      expect(described_class.cache_key).to eq "01-04-2023-12-00-#{Release.last.id}"
     end
   end
 end

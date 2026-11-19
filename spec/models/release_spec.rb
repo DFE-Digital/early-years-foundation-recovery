@@ -15,7 +15,18 @@ RSpec.describe Release, type: :model do
       end
 
       it 'is latest formatted timestamp' do
-        expect(described_class.cache_key).to eql '16-03-2023-13-00'
+        expect(described_class.cache_key).to eql "16-03-2023-13-00-#{described_class.last.id}"
+      end
+    end
+
+    it 'changes for releases with identical timestamps' do
+      freeze_time do
+        create :release
+        previous_key = described_class.cache_key
+        latest = create :release
+
+        expect(described_class.cache_key).not_to eq(previous_key)
+        expect(described_class.cache_key).to end_with("-#{latest.id}")
       end
     end
   end

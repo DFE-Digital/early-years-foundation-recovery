@@ -104,6 +104,25 @@ Rails system specs use RackTest only for efficiency.
 
 Running locally in the production rails environment requires generating a self-signed certificate. Use `bin/docker-certs`
 
+### Contentful caching
+
+Successful Contentful delivery API responses use `Rails.cache`, backed by Redis
+in staging and production when `REDIS_URL` is set. This follows the response-cache
+approach in [early-years-foundation-reform](https://github.com/DFE-Digital/early-years-foundation-reform).
+Responses are shared between workers for one hour, with separate keys for the API
+URL (including space and environment), query and access token. Tokens are hashed,
+not stored in keys. Preview and management APIs are not response-cached, and
+`NullStore` environments are unchanged. The existing per-process model cache
+remains as a first-level cache.
+
+The content version includes the release timestamp and database ID, so even
+webhooks within the same minute invalidate both cache layers. Each worker picks
+up persisted `/change` or `/release` events through the existing per-request cache
+reset. Old shared entries expire naturally without clearing unrelated Rails cache
+entries. API errors are not cached, and the Contentful SDK retains its built-in
+rate-limit retry handling. Simultaneous cold misses can still reach Contentful;
+caching reduces traffic but does not guarantee no rate limiting.
+
 ## Using Docker
 
 ### Production image

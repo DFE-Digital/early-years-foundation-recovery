@@ -49,6 +49,14 @@ RSpec.describe ReleaseController, type: :controller do
       expect(Training::Module.cache).to have_received(:clear)
     end
 
+    it 'refreshes the content version after persisting the release' do
+      allow(Page).to receive(:reset_cache_key!).and_call_original
+
+      post :new, params: { release: valid_release_params }
+
+      expect(Page.cache_key).to eq(Release.cache_key)
+    end
+
     it 'enqueues NewModuleMailJob' do
       post :new, params: { release: valid_release_params }
       release = Release.last
@@ -71,6 +79,14 @@ RSpec.describe ReleaseController, type: :controller do
     it 'clears the module cache' do
       post :update, params: { release: valid_release_params.merge(id: 1) }
       expect(Training::Module.cache).to have_received(:clear)
+    end
+
+    it 'refreshes the content version after persisting the change' do
+      allow(Page).to receive(:reset_cache_key!).and_call_original
+
+      post :update, params: { release: valid_release_params.merge(id: 1) }
+
+      expect(Page.cache_key).to eq(Release.cache_key)
     end
 
     it 'enqueues ContentCheckJob' do
