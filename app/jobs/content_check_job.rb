@@ -3,6 +3,7 @@ class ContentCheckJob < ApplicationJob
   # @return [Boolean]
   def run(*)
     Training::Module.cache.clear
+    Training::Module.reset_cache_key!
     log "Running in '#{env}' via '#{api}'"
     valid?
   end

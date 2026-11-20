@@ -1,5 +1,5 @@
 #
-# Use class-level in memory caching provided by dry-core
+# Keep SDK objects in process; ContentfulResponseCache shares HTTP data via Rails.cache.
 # @see https://github.com/dry-rb/dry-core/blob/main/lib/dry/core/cache.rb
 #
 module Caching
