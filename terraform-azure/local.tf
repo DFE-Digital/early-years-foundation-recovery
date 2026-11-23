@@ -42,6 +42,7 @@ locals {
     "SPLUNK_ACCESS_TOKEN"                    = var.splunk_access_token
     "SPLUNK_REALM"                           = var.splunk_realm
     "OTEL_SERVICE_NAME"                      = "early-years-foundation-recovery"
+    "OTEL_RESOURCE_ATTRIBUTES"               = var.otel_resource_attributes
     "OTEL_EXPORTER_OTLP_ENDPOINT"            = "http://localhost:4318/v1/traces"
     "WEB_CONCURRENCY"                        = var.webapp_config_web_concurrency
     "WEBSITES_CONTAINER_START_TIME_LIMIT"    = 720
@@ -77,6 +78,7 @@ locals {
     "SPLUNK_ACCESS_TOKEN"                    = var.splunk_access_token
     "SPLUNK_REALM"                           = var.splunk_realm
     "OTEL_SERVICE_NAME"                      = "early-years-foundation-recovery"
+    "OTEL_RESOURCE_ATTRIBUTES"               = var.otel_resource_attributes
     "OTEL_EXPORTER_OTLP_ENDPOINT"            = "http://localhost:4318/v1/traces"
     "WEB_CONCURRENCY"                        = var.webapp_config_web_concurrency
     "WEBSITES_CONTAINER_START_TIME_LIMIT"    = 720
@@ -96,6 +98,7 @@ locals {
     "SPLUNK_ACCESS_TOKEN"         = var.splunk_access_token
     "SPLUNK_REALM"                = var.splunk_realm
     "OTEL_SERVICE_NAME"           = "early-years-foundation-recovery"
+    "OTEL_RESOURCE_ATTRIBUTES"    = var.otel_resource_attributes
     "OTEL_EXPORTER_OTLP_ENDPOINT" = "http://localhost:4318/v1/traces"
   }
 
@@ -128,6 +131,7 @@ locals {
     "SPLUNK_ACCESS_TOKEN"                    = var.splunk_access_token
     "SPLUNK_REALM"                           = var.splunk_realm
     "OTEL_SERVICE_NAME"                      = "early-years-foundation-recovery"
+    "OTEL_RESOURCE_ATTRIBUTES"               = var.otel_resource_attributes
     "OTEL_EXPORTER_OTLP_ENDPOINT"            = "http://localhost:4318/v1/traces"
     "WEB_CONCURRENCY"                        = var.webapp_config_web_concurrency
     "WEBSITES_CONTAINER_START_TIME_LIMIT"    = 720

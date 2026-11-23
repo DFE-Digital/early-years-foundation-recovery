@@ -21,6 +21,17 @@ variable "splunk_realm" {
   type        = string
 }
 
+variable "otel_resource_attributes" {
+  description = "OpenTelemetry resource attributes, including deployment.environment.name"
+  type        = string
+  nullable    = false
+
+  validation {
+    condition     = can(regex("(^|,)deployment\\.environment\\.name=[^,[:space:]]+", var.otel_resource_attributes))
+    error_message = "OTEL_RESOURCE_ATTRIBUTES must include a non-empty deployment.environment.name attribute."
+  }
+}
+
 variable "resource_name_prefix" {
   description = "Prefix for resource names"
   type        = string

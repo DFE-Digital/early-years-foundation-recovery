@@ -28,8 +28,14 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     environment: production
+    env:
+      OTEL_RESOURCE_ATTRIBUTES: ${{ vars.OTEL_RESOURCE_ATTRIBUTES }}
 
     steps:
+      - name: Validate telemetry environment
+        run: |
+          : "${OTEL_RESOURCE_ATTRIBUTES:?Set the OTEL_RESOURCE_ATTRIBUTES GitHub environment variable}"
+
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -168,6 +174,7 @@ jobs:
                 SPLUNK_ACCESS_TOKEN=${{ secrets.SPLUNK_ACCESS_TOKEN }} \
                 SPLUNK_REALM=${{ secrets.SPLUNK_REALM }} \
                 OTEL_SERVICE_NAME=early-years-foundation-recovery \
+                OTEL_RESOURCE_ATTRIBUTES="$OTEL_RESOURCE_ATTRIBUTES" \
                 OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318/v1/traces \
                 APPLICATION_INSIGHTS_CONNECTION_STRING=${APPLICATION_INSIGHTS_CONNECTION_STRING} \
               --secure-environment-variables \

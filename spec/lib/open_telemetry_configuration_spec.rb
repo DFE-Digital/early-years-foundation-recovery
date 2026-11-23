@@ -168,6 +168,7 @@ RSpec.describe OpenTelemetryConfiguration do
         SPLUNK_OTEL_EXPORTER_OTLP_ENDPOINT
         SPLUNK_OTEL_EXPORTER_OTLP_HEADERS
         OTEL_SERVICE_NAME
+        OTEL_RESOURCE_ATTRIBUTES
       ]
       original_environment.merge!(environment_keys.index_with { |key| ENV[key] })
       environment_keys.each { |key| ENV.delete(key) }
@@ -241,6 +242,9 @@ RSpec.describe OpenTelemetryConfiguration do
 
       allow(OpenTelemetry::SDK::Resources::Resource).to receive(:create)
         .with('service.name' => 'test-service').and_return(resource)
+      default_resource = instance_double(OpenTelemetry::SDK::Resources::Resource)
+      allow(OpenTelemetry::SDK::Resources::Resource).to receive(:default).and_return(default_resource)
+      allow(default_resource).to receive(:merge).with(resource).and_return(resource)
       allow(OpenTelemetry::SDK::Logs::LoggerProvider).to receive(:new)
         .with(resource: resource).and_return(provider)
       expect(OpenTelemetry::Exporter::OTLP::Logs::LogsExporter).to receive(:new)
@@ -268,6 +272,30 @@ RSpec.describe OpenTelemetryConfiguration do
       expect(shutdown_callback).to be_a(Proc)
       shutdown_callback.call
       expect(provider).to have_received(:shutdown)
+    end
+
+    it 'includes environment resource attributes in logs without overriding the service name' do
+      ENV['OTEL_RESOURCE_ATTRIBUTES'] = 'deployment.environment.name=Dev,custom.attribute=preserved,service.name=other-service'
+      ENV['OTEL_SERVICE_NAME'] = 'test-service'
+      ENV['OTEL_EXPORTER_OTLP_ENDPOINT'] = 'http://otel-collector:4318/v1/traces'
+      described_class.instance_variable_set(:@logger, nil)
+      detected_resource = OpenTelemetry::SDK::Resources::Resource.telemetry_sdk
+      allow(OpenTelemetry::SDK::Resources::Resource).to receive(:default).and_return(detected_resource)
+      provider = instance_double(OpenTelemetry::SDK::Logs::LoggerProvider).as_null_object
+      allow(OpenTelemetry::SDK::Logs::LoggerProvider).to receive(:new).and_return(provider)
+      processor = instance_double(OpenTelemetry::SDK::Logs::Export::BatchLogRecordProcessor)
+      allow(OpenTelemetry::SDK::Logs::Export::BatchLogRecordProcessor).to receive(:new).and_return(processor)
+      allow(described_class).to receive(:at_exit)
+
+      described_class.configure_logging!
+
+      expect(OpenTelemetry::SDK::Logs::LoggerProvider).to have_received(:new) do |resource:|
+        expect(resource.attribute_enumerator.to_h).to include(
+          'deployment.environment.name' => 'Dev',
+          'custom.attribute' => 'preserved',
+          'service.name' => 'test-service',
+        )
+      end
     end
   end
 

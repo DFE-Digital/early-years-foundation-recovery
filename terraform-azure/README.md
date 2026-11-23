@@ -18,6 +18,18 @@ applying the provider upgrade. Existing resources must not be unexpectedly
 replaced. The PostgreSQL server explicitly retains private-only network access.
 The independent remote-state module is not part of this provider upgrade.
 
+## Splunk Environment Labels
+
+Set the GitHub environment variable `OTEL_RESOURCE_ATTRIBUTES` (not a secret):
+
+| GitHub environment | Value |
+| --- | --- |
+| `development` | `deployment.environment.name=Dev` |
+| `staging` | `deployment.environment.name=Staging` |
+| `production` | `deployment.environment.name=Production` |
+
+Apply Terraform and redeploy workers to pick up the setting.
+
 ## Redis Cache
 
 Staging and production use [Azure Managed Redis](https://learn.microsoft.com/en-us/azure/redis/overview),
