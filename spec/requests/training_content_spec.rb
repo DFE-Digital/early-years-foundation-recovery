@@ -69,4 +69,31 @@ RSpec.describe 'Training content', type: :request do
       end
     end
   end
+
+  describe 'taking the end of module test when a concurrent request creates a duplicate attempt' do
+    let(:user) { create(:user, :registered) }
+    let(:alpha) { Training::Module.by_name(:alpha) }
+
+    before do
+      sign_in user
+      get training_module_question_path(:alpha, alpha.summative_questions.first.name)
+      create :assessment, user: user, started_at: Time.zone.now
+
+      alpha.summative_questions.each do |question|
+        get training_module_question_path(:alpha, question.name)
+        patch training_module_response_path(:alpha, question.name), params: {
+          response: { answers: question.correct_answers, submission_nonce: session[:form_nonce] },
+        }
+      end
+    end
+
+    it 'scores the answers the user gave' do
+      expect(AssessmentProgress.new(user: user, mod: alpha)).to have_attributes(score: 100.0, passed?: true)
+    end
+
+    it 'shows the result' do
+      get training_module_assessment_path(:alpha, alpha.assessment_results_page.name)
+      expect(response).to have_http_status(:success)
+    end
+  end
 end
