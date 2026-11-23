@@ -321,7 +321,7 @@ class User < ApplicationRecord
       # creates new assessment on first summative_question
       assessment =
         assessments.passed.find_by(training_module: content.parent.name) ||
-        assessments.incomplete.find_by(training_module: content.parent.name) ||
+        open_assessment(content.parent.name) ||
         assessments.create(training_module: content.parent.name, started_at: Time.zone.now)
     end
 
@@ -331,6 +331,39 @@ class User < ApplicationRecord
       question_name: content.name,
       question_type: content.page_type,
     )
+  end
+
+  # The attempt answers are saved to and graded from.
+  # Stray empty attempts (e.g. from concurrent requests) are ignored.
+  #
+  # @param mod_name [String]
+  # @return [Assessment, nil]
+  def current_assessment(mod_name)
+    attempts = assessments.where(training_module: mod_name)
+
+    attempts.passed.order(:completed_at).last ||
+      open_assessment(mod_name) ||
+      attempts.complete.order(:completed_at).last
+  end
+
+  # Prefers the incomplete attempt with the most answers. An empty attempt
+  # only counts if it started after the latest attempt was completed.
+  #
+  # @param mod_name [String]
+  # @return [Assessment, nil]
+  def open_assessment(mod_name)
+    attempts = assessments.where(training_module: mod_name)
+    incomplete = attempts.incomplete.to_a
+    return if incomplete.empty?
+
+    counts = responses.summative.where(assessment_id: incomplete.map(&:id)).group(:assessment_id).count
+    answered = incomplete.select { |attempt| counts[attempt.id].to_i.positive? }
+    return answered.max_by { |attempt| [counts[attempt.id], attempt.started_at.to_f] } if answered.any?
+
+    last_completed_at = attempts.complete.maximum(:completed_at)
+    incomplete
+      .select { |attempt| last_completed_at.nil? || (attempt.started_at.present? && attempt.started_at > last_completed_at) }
+      .max_by { |attempt| attempt.started_at.to_f }
   end
 
   # @return [Array<Training::Module>]

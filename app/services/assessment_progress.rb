@@ -14,17 +14,29 @@ class AssessmentProgress
   #   @return [Training::Module]
   option :mod, Types::TrainingModule, required: true
 
+  # Idempotent: grades the current attempt once, then does nothing.
+  #
   # @see Training::ResponsesController#redirect
+  # @see Training::AssessmentsController#show
   #
   # @return [Assessment, nil]
   def grade!
-    unless graded?
-      assessment&.update(
-        score: score,
-        passed: passed?,
-        completed_at: Time.zone.now,
-      )
-    end
+    return if assessment.nil? || graded?
+
+    report_duplicates
+    assessment.update(
+      score: score,
+      passed: passed?,
+      completed_at: Time.zone.now,
+    )
+  end
+
+  # @return [Boolean] every current summative question has a response
+  def complete?
+    return false if assessment.nil?
+
+    answered = assessment.responses.pluck(:question_name)
+    mod.summative_questions.all? { |question| answered.include?(question.name) }
   end
 
   # @see ContentHelper#assessment_banner
@@ -87,6 +99,19 @@ class AssessmentProgress
 
   # @return [Assessment]
   def assessment
-    @assessment ||= user.assessments.where(training_module: mod.name).order(:started_at).last
+    @assessment ||= user.current_assessment(mod.name)
+  end
+
+private
+
+  # Stray incomplete attempts are harmless but tracked to measure frequency
+  # @return [void]
+  def report_duplicates
+    others = user.assessments.incomplete.where(training_module: mod.name).where.not(id: assessment.id).pluck(:id)
+    return if others.empty?
+
+    message = "Duplicate incomplete assessments user_id=#{user.id} mod=#{mod.name} graded=#{assessment.id} others=#{others.join(',')}"
+    Rails.logger.warn(message)
+    Sentry.capture_message(message, level: :warning)
   end
 end

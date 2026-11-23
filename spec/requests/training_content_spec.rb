@@ -36,4 +36,37 @@ RSpec.describe 'Training content', type: :request do
       end
     end
   end
+
+  describe 'GET /modules/:training_module_id/assessment-result/:id' do
+    let(:user) { create(:user, :registered) }
+    let(:alpha) { Training::Module.by_name(:alpha) }
+    let(:attempt) { create :assessment, user: user, started_at: 1.minute.ago }
+
+    before do
+      sign_in user
+      alpha.summative_questions.each do |question|
+        create :response, user: user, assessment: attempt, training_module: 'alpha',
+                          question_name: question.name, question_type: 'summative',
+                          answers: question.correct_answers
+      end
+    end
+
+    context 'when the final submission was lost' do
+      it 'grades the completed attempt' do
+        get training_module_assessment_path(:alpha, alpha.assessment_results_page.name)
+        expect(attempt.reload).to have_attributes(score: 100.0, passed: true)
+      end
+    end
+
+    context 'when an empty duplicate was graded at 0%' do
+      before do
+        create :assessment, :failed, user: user, started_at: attempt.started_at + 0.005
+      end
+
+      it 'grades the answered attempt instead' do
+        get training_module_assessment_path(:alpha, alpha.assessment_results_page.name)
+        expect(attempt.reload).to have_attributes(score: 100.0, passed: true)
+      end
+    end
+  end
 end

@@ -571,5 +571,33 @@ RSpec.describe User, type: :model do
         expect(response.answers).to eq [1]
       end
     end
+
+    context 'with a summative question and a stray empty attempt' do
+      let(:question) { Training::Module.by_name('alpha').page_by_name('1-3-2-2') }
+      let!(:attempt) { create :assessment, user: user, started_at: 1.minute.ago }
+
+      before do
+        create :response, user: user, assessment: attempt, training_module: 'alpha',
+                          question_name: '1-3-2-1', question_type: 'summative', answers: [1, 3]
+        create :assessment, user: user, started_at: Time.zone.now
+      end
+
+      it 'uses the answered attempt' do
+        expect(response.assessment_id).to eq attempt.id
+      end
+    end
+
+    context 'with a summative question after a failed attempt' do
+      let(:question) { Training::Module.by_name('alpha').page_by_name('1-3-2-1') }
+
+      before do
+        create :assessment, user: user, started_at: 2.minutes.ago
+        create :assessment, :failed, user: user, started_at: 2.minutes.ago, completed_at: 1.minute.ago
+      end
+
+      it 'starts a fresh attempt instead of reusing the stale empty one' do
+        expect { response }.to change(user.assessments, :count).by(1)
+      end
+    end
   end
 end

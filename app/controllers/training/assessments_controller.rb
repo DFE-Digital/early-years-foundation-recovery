@@ -12,7 +12,10 @@ module Training
 
     layout 'hero'
 
-    def show; end
+    def show
+      # Self-heal attempts whose final submission was lost or blocked
+      assessment.grade! if assessment.complete?
+    end
 
   private
 
