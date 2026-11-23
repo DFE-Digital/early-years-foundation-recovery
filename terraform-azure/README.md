@@ -20,7 +20,9 @@ The independent remote-state module is not part of this provider upgrade.
 
 ## Splunk Environment Labels
 
-Set the GitHub environment variable `OTEL_RESOURCE_ATTRIBUTES` (not a secret):
+The app deployment workflows set `OTEL_RESOURCE_ATTRIBUTES` for workers, and
+Terraform derives the same value for App Service settings from the selected
+environment:
 
 | GitHub environment | Value |
 | --- | --- |
@@ -28,7 +30,7 @@ Set the GitHub environment variable `OTEL_RESOURCE_ATTRIBUTES` (not a secret):
 | `staging` | `deployment.environment.name=Staging` |
 | `production` | `deployment.environment.name=Production` |
 
-Apply Terraform and redeploy workers to pick up the setting.
+Apply Terraform and redeploy workers to pick up changes to the environment label.
 
 ## Redis Cache
 

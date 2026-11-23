@@ -61,7 +61,6 @@ env:
   TF_VAR_webapp_config_sentry_dsn: ${{ secrets.WEBAPP_CONFIG_SENTRY_DSN }}
 
   # Vars
-  TF_VAR_otel_resource_attributes: ${{ vars.OTEL_RESOURCE_ATTRIBUTES }}
   TF_VAR_environment: ${{ vars.ENVIRONMENT }}
   TF_VAR_resource_name_prefix: ${{ vars.RESOURCE_NAME_PREFIX }}
   TF_VAR_admin_email_address: ${{ vars.ADMIN_EMAIL_ADDRESS }}

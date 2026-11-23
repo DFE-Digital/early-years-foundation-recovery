@@ -36,13 +36,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: development
     env:
-      OTEL_RESOURCE_ATTRIBUTES: ${{ vars.OTEL_RESOURCE_ATTRIBUTES }}
+      OTEL_RESOURCE_ATTRIBUTES: deployment.environment.name=Dev
 
     steps:
-      - name: Validate telemetry environment
-        run: |
-          : "${OTEL_RESOURCE_ATTRIBUTES:?Set the OTEL_RESOURCE_ATTRIBUTES GitHub environment variable}"
-
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout Code
         uses: actions/checkout@v4
