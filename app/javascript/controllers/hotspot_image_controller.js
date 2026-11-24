@@ -43,7 +43,9 @@ export default class extends Controller {
     marker.setAttribute("aria-expanded", "true");
     popover.hidden = false;
     this.activeMarker = marker;
+    this.activePopover = popover;
     this.positionPopover(marker, popover);
+    popover.querySelector(".hotspot-image__close").focus({ preventScroll: true });
   }
 
   dismiss(event) {
@@ -57,9 +59,13 @@ export default class extends Controller {
   }
 
   closeOutside(event) {
-    if (this.element.contains(event.target)) return;
+    if (!this.activePopover || this.activePopover.contains(event.target)) return;
+    // Marker clicks are handled by toggle, including the click that opens a popup.
+    if (this.markerTargets.some((marker) => marker.contains(event.target))) return;
 
+    const marker = this.activeMarker;
     this.reset();
+    marker.focus({ preventScroll: true });
   }
 
   reset() {
@@ -75,6 +81,7 @@ export default class extends Controller {
     });
 
     this.activeMarker = null;
+    this.activePopover = null;
   }
 
   positionPopover(marker, popover) {
@@ -113,21 +120,6 @@ export default class extends Controller {
         top: `${y}px`,
       });
     });
-  }
-
-  focusClose(event) {
-    if (event.shiftKey || event.currentTarget !== this.activeMarker) return;
-
-    const popover = this.popoverTargets.find(
-      (element) =>
-        element.id === this.activeMarker.getAttribute("aria-controls"),
-    );
-    const closeButton = popover?.querySelector(".hotspot-image__close");
-
-    if (!closeButton || popover.hidden) return;
-
-    event.preventDefault();
-    closeButton.focus();
   }
 
   disconnect() {

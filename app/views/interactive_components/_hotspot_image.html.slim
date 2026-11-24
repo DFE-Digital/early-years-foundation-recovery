@@ -1,6 +1,6 @@
 .hotspot-image(
   data-controller="hotspot-image"
-  data-action="keydown.esc->hotspot-image#dismiss click@document->hotspot-image#closeOutside turbo:before-cache@document->hotspot-image#reset"
+  data-action="keydown.esc@document->hotspot-image#dismiss click@document->hotspot-image#closeOutside turbo:before-cache@document->hotspot-image#reset"
 )
   .hotspot-image__canvas
     = image_tag image,
@@ -25,7 +25,7 @@
         aria-controls="#{id}-#{hotspot[:id]}-popover"
         data-hotspot-image-target="marker"
         data-desktop-placement=hotspot[:desktop_placement]
-        data-action="click->hotspot-image#toggle keydown.tab->hotspot-image#focusClose"
+        data-action="click->hotspot-image#toggle"
       )
         = index + 1
 
