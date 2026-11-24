@@ -102,6 +102,7 @@ export default class extends Controller {
       const placement = marker.dataset.desktopPlacement || "top";
       const bounds = {
         boundary: this.element.querySelector(".hotspot-image__canvas"),
+        rootBoundary: "document",
         padding: 8,
       };
 
