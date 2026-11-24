@@ -2,10 +2,14 @@
   data-controller="hotspot-image"
   data-action="keydown.esc@document->hotspot-image#dismiss click@document->hotspot-image#closeOutside turbo:before-cache@document->hotspot-image#reset"
 )
+  p.govuk-visually-hidden id="#{id}-instructions"
+    | Navigate to a numbered hotspot and activate it to explore the image. When the popup opens, focus moves to Close. Activate Close or press Escape to return to the hotspot.
   .hotspot-image__canvas
     = image_tag image,
         alt: alt,
-        class: 'hotspot-image__image'
+        tabindex: 0,
+        class: 'hotspot-image__image',
+        aria: { describedby: "#{id}-instructions" }
 
     - hotspots.each_with_index do |hotspot, index|
       a.hotspot-image__marker(
@@ -40,11 +44,13 @@
       h3.govuk-heading-s id="#{id}-#{hotspot[:id]}-title"
         = hotspot[:label]
 
-      p.govuk-body
+      p.govuk-body id="#{id}-#{hotspot[:id]}-description"
         = hotspot[:description]
 
       button.hotspot-image__close(
         type="button"
+        aria-label="Close #{hotspot[:label]}"
+        aria-describedby="#{id}-#{hotspot[:id]}-description"
         data-action="hotspot-image#dismiss"
       )
         span.hotspot-image__close-text Close

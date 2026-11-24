@@ -5,6 +5,10 @@
   margin-bottom: govuk-spacing(6);
 }
 
+.hotspot-image__image:focus-visible {
+  outline: 4px solid govuk-colour('yellow');
+}
+
 .hotspot-image__canvas {
   position: relative;
   margin-bottom: govuk-spacing(5);
