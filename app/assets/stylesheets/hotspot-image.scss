@@ -213,6 +213,10 @@
 }
 
 @media screen {
+  .hotspot-image-demo .hotspot-image {
+    max-width: 836px;
+  }
+
   .js-available .hotspot-image__descriptions,
   .js-available .hotspot-image__marker[data-hotspot-image-target="fallback"] {
     display: none;
