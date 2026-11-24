@@ -1,4 +1,5 @@
-.hotspot-image(
+section.hotspot-image(
+  aria-label="Interactive image hotspots"
   data-controller="hotspot-image"
   data-action="keydown.esc@document->hotspot-image#dismiss click@document->hotspot-image#closeOutside turbo:before-cache@document->hotspot-image#reset"
 )
@@ -11,27 +12,29 @@
         class: 'hotspot-image__image',
         aria: { describedby: "#{id}-instructions" }
 
-    - hotspots.each_with_index do |hotspot, index|
-      a.hotspot-image__marker(
-        href="##{id}-#{hotspot[:id]}"
-        style="left: #{hotspot[:x]}%; top: #{hotspot[:y]}%;"
-        aria-label=hotspot[:label]
-        data-hotspot-image-target="fallback"
-      )
-        = index + 1
+    ol.hotspot-image__markers role="list" aria-label="Image hotspots"
+      - hotspots.each_with_index do |hotspot, index|
+        li
+          a.hotspot-image__marker(
+            href="##{id}-#{hotspot[:id]}"
+            style="left: #{hotspot[:x]}%; top: #{hotspot[:y]}%;"
+            aria-label="#{hotspot[:label]}, hotspot #{index + 1} of #{hotspots.length}"
+            data-hotspot-image-target="fallback"
+          )
+            = index + 1
 
-      button.hotspot-image__marker(
-        type="button"
-        hidden=true
-        style="left: #{hotspot[:x]}%; top: #{hotspot[:y]}%;"
-        aria-label=hotspot[:label]
-        aria-expanded="false"
-        aria-controls="#{id}-#{hotspot[:id]}-popover"
-        data-hotspot-image-target="marker"
-        data-desktop-placement=hotspot[:desktop_placement]
-        data-action="click->hotspot-image#toggle"
-      )
-        = index + 1
+          button.hotspot-image__marker(
+            type="button"
+            hidden=true
+            style="left: #{hotspot[:x]}%; top: #{hotspot[:y]}%;"
+            aria-label="#{hotspot[:label]}, hotspot #{index + 1} of #{hotspots.length}"
+            aria-expanded="false"
+            aria-controls="#{id}-#{hotspot[:id]}-popover"
+            data-hotspot-image-target="marker"
+            data-desktop-placement=hotspot[:desktop_placement]
+            data-action="click->hotspot-image#toggle"
+          )
+            = index + 1
 
   - hotspots.each do |hotspot|
     .hotspot-image__popover(

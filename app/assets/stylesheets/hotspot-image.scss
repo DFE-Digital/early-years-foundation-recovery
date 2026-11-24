@@ -20,6 +20,12 @@
   height: auto;
 }
 
+.hotspot-image__markers {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .hotspot-image__marker {
   position: absolute;
   transform: translate(-50%, -50%);
