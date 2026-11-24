@@ -41,7 +41,6 @@ class InteractiveComponentsController < ApplicationController
 
     body = @content.body.to_s
     @body_before_hotspot = body
-    @body_after_hotspot = ''
     heading_position = body.index('Curriculum progression model')
     return unless heading_position
 
@@ -49,7 +48,6 @@ class InteractiveComponentsController < ApplicationController
     return unless image
 
     @body_before_hotspot = body[0...image.begin(0)]
-    @body_after_hotspot = body[image.end(0)..]
     @hotspot_example = {
       id: 'curriculum-progression-model',
       image: image[2].start_with?('//') ? "https:#{image[2]}" : image[2],
@@ -59,7 +57,7 @@ class InteractiveComponentsController < ApplicationController
           id: 'step-1',
           label: 'Curriculum',
           x: 17.5,
-          y: 25,
+          y: 7,
           desktop_placement: 'bottom-start',
           description: 'Plan the curriculum and what you want children to learn.',
         },
@@ -67,7 +65,7 @@ class InteractiveComponentsController < ApplicationController
           id: 'step-2',
           label: 'Pedagogy',
           x: 50,
-          y: 25,
+          y: 7,
           desktop_placement: 'bottom',
           description: 'Identify and deliver your chosen teaching and learning approaches.',
         },
@@ -75,14 +73,14 @@ class InteractiveComponentsController < ApplicationController
           id: 'step-3',
           label: 'Assessment',
           x: 82.5,
-          y: 25,
+          y: 7,
           desktop_placement: 'top-start',
           description: 'Observe and assess whether your approaches are having the impact you wanted.',
         },
         {
           id: 'step-4',
           label: 'Adapt your approaches',
-          x: 68,
+          x: 66,
           y: 85,
           desktop_placement: 'top',
           description: 'Where needed, adapt your approaches to ensure all children secure the intended learning.',
