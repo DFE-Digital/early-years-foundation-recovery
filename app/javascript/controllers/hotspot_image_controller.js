@@ -7,6 +7,8 @@ import {
 } from "@floating-ui/dom";
 import { Controller } from "@hotwired/stimulus";
 
+const DESKTOP_BREAKPOINT = 769;
+
 export default class extends Controller {
   static targets = ["fallback", "marker", "popover", "descriptions"];
 
@@ -76,21 +78,56 @@ export default class extends Controller {
   }
 
   positionPopover(marker, popover) {
+    const desktopViewport = window.matchMedia(
+      `(min-width: ${DESKTOP_BREAKPOINT}px)`,
+    );
     this.stopPositioning = autoUpdate(marker, popover, async () => {
+      if (!desktopViewport.matches) {
+        popover.style.removeProperty("left");
+        popover.style.removeProperty("top");
+        return;
+      }
+
+      const placement = marker.dataset.desktopPlacement || "top";
+      const bounds = {
+        boundary: this.element.querySelector(".hotspot-image__canvas"),
+        padding: 8,
+      };
+
       const { x, y } = await computePosition(marker, popover, {
-        placement: "top",
+        placement,
         strategy: "absolute",
-        middleware: [offset(12), flip({ padding: 16 }), shift({ padding: 16 })],
+        middleware: [offset(12), flip(bounds), shift(bounds)],
       });
 
-      // Ignore a result if this popover was closed while calculating.
-      if (this.activeMarker !== marker || popover.hidden) return;
+      // Ignore results after closing the popover or leaving the desktop layout.
+      if (
+        this.activeMarker !== marker ||
+        popover.hidden ||
+        !desktopViewport.matches
+      )
+        return;
 
       Object.assign(popover.style, {
         left: `${x}px`,
         top: `${y}px`,
       });
     });
+  }
+
+  focusClose(event) {
+    if (event.shiftKey || event.currentTarget !== this.activeMarker) return;
+
+    const popover = this.popoverTargets.find(
+      (element) =>
+        element.id === this.activeMarker.getAttribute("aria-controls"),
+    );
+    const closeButton = popover?.querySelector(".hotspot-image__close");
+
+    if (!closeButton || popover.hidden) return;
+
+    event.preventDefault();
+    closeButton.focus();
   }
 
   disconnect() {

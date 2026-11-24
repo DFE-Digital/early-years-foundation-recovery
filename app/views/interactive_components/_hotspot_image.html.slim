@@ -24,36 +24,53 @@
         aria-expanded="false"
         aria-controls="#{id}-#{hotspot[:id]}-popover"
         data-hotspot-image-target="marker"
-        data-action="hotspot-image#toggle"
+        data-desktop-placement=hotspot[:desktop_placement]
+        data-action="click->hotspot-image#toggle keydown.tab->hotspot-image#focusClose"
       )
         = index + 1
 
-      .hotspot-image__popover(
-        id="#{id}-#{hotspot[:id]}-popover"
-        hidden=true
-        role="region"
-        aria-labelledby="#{id}-#{hotspot[:id]}-title"
-        data-hotspot-image-target="popover"
+  - hotspots.each do |hotspot|
+    .hotspot-image__popover(
+      id="#{id}-#{hotspot[:id]}-popover"
+      hidden=true
+      role="region"
+      aria-labelledby="#{id}-#{hotspot[:id]}-title"
+      data-hotspot-image-target="popover"
+    )
+      h3.govuk-heading-s id="#{id}-#{hotspot[:id]}-title"
+        = hotspot[:label]
+
+      p.govuk-body
+        = hotspot[:description]
+
+      button.hotspot-image__close(
+        type="button"
+        data-action="hotspot-image#dismiss"
       )
-        h3.govuk-heading-s id="#{id}-#{hotspot[:id]}-title"
-          = hotspot[:label]
+        span.hotspot-image__close-text Close
+        i.fa-solid.fa-xmark aria-hidden="true"
 
-        p.govuk-body
-          = hotspot[:description]
+  details.govuk-details.hotspot-image__descriptions(
+    open=true
+    data-hotspot-image-target="descriptions"
+  )
+    summary.govuk-details__summary
+      span.govuk-details__summary-text
+        | Hotspots and their meaning
 
-        button.govuk-button.govuk-button--secondary(
-          type="button"
-          data-action="hotspot-image#dismiss"
-        )
-          | Close
+    .govuk-details__text
+      ol.govuk-list.govuk-list--number
+        - hotspots.each do |hotspot|
+          li id="#{id}-#{hotspot[:id]}"
+            = "#{hotspot[:label]} - #{hotspot[:description]}"
 
-  .hotspot-image__descriptions data-hotspot-image-target="descriptions"
-    h3.govuk-heading-m Areas to explore
+  details.govuk-details.hotspot-image__print-descriptions open=true
+    summary.govuk-details__summary
+      span.govuk-details__summary-text
+        | Hotspots and their meaning
 
-    dl.govuk-body
-      - hotspots.each_with_index do |hotspot, index|
-        dt id="#{id}-#{hotspot[:id]}"
-          strong
-            = "#{index + 1}. #{hotspot[:label]}"
-        dd
-          = hotspot[:description]
+    .govuk-details__text
+      ol.govuk-list.govuk-list--number
+        - hotspots.each do |hotspot|
+          li
+            = "#{hotspot[:label]} - #{hotspot[:description]}"

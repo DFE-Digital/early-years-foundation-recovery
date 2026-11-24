@@ -10,6 +10,7 @@ class InteractiveComponentsController < ApplicationController
           label: 'Reading corner',
           x: 20,
           y: 35,
+          desktop_placement: 'bottom-start',
           description: 'A comfortable reading space gives children opportunities to explore books and share stories.',
         },
         {
@@ -17,6 +18,7 @@ class InteractiveComponentsController < ApplicationController
           label: 'Play area',
           x: 50,
           y: 65,
+          desktop_placement: 'top',
           description: 'An open play area gives children space to explore materials and play together.',
         },
         {
@@ -24,6 +26,7 @@ class InteractiveComponentsController < ApplicationController
           label: 'Accessible storage',
           x: 85,
           y: 45,
+          desktop_placement: 'top-end',
           description: 'Clearly organised resources within reach can help children choose activities independently.',
         },
       ],
