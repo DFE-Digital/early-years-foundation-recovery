@@ -3,7 +3,7 @@ class InteractiveComponentsController < ApplicationController
     @hotspot_example = {
       id: 'learning-room',
       image: 'interactive-components/learning-room.jpg',
-      alt: 'An early-years room with a reading corner, a play area and low storage shelves.',
+      alt: 'Image of a play room set up. In the centre of the room there is an activities table, on the right role play equipment and on the left a reading corner. Tab to find out more about these areas.',
       hotspots: [
         {
           id: 'reading-corner',
