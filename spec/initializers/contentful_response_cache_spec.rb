@@ -111,7 +111,7 @@ RSpec.describe ContentfulResponseCache do
     expect(http_client).to have_received(:get).exactly(5).times
   end
 
-  it 'does not cache preview responses' do
+  it 'caches preview responses separately from delivery responses' do
     client.entries
     allow(ContentfulModel).to receive(:use_preview_api).and_return(true)
 
@@ -119,7 +119,7 @@ RSpec.describe ContentfulResponseCache do
     preview_client.entries
     preview_client.entries
 
-    expect(http_client).to have_received(:get).exactly(3).times
+    expect(http_client).to have_received(:get).twice
   end
 
   it 'does not cache management or lookalike delivery hosts' do

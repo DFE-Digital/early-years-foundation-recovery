@@ -2,8 +2,10 @@ require 'digest'
 
 # Cache HTTP data rather than SDK models so each worker hydrates its own entries.
 module ContentfulResponseCache
+  CACHEABLE_HOSTS = %w[cdn.contentful.com preview.contentful.com].freeze
+
   def get_http(url, query, headers = {}, proxy = {}, timeout = {})
-    return super if Rails.cache.is_a?(ActiveSupport::Cache::NullStore) || URI.parse(url).host != 'cdn.contentful.com'
+    return super if Rails.cache.is_a?(ActiveSupport::Cache::NullStore) || !CACHEABLE_HOSTS.include?(URI.parse(url).host)
 
     data = Rails.cache.fetch(response_cache_key(url, query, headers), expires_in: 1.hour, race_condition_ttl: 10) do
       response = super
