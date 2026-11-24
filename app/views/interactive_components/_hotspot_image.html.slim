@@ -54,7 +54,7 @@ section.hotspot-image(
         type="button"
         aria-label="Close #{hotspot[:label]}"
         aria-describedby="#{id}-#{hotspot[:id]}-description"
-        data-action="hotspot-image#dismiss"
+        data-action="click->hotspot-image#dismiss keydown.tab->hotspot-image#keepFocusOnClose keydown.shift+tab->hotspot-image#keepFocusOnClose"
       )
         span.hotspot-image__close-text Close
         i.fa-solid.fa-xmark aria-hidden="true"

@@ -48,6 +48,10 @@ export default class extends Controller {
     popover.querySelector(".hotspot-image__close").focus({ preventScroll: true });
   }
 
+  keepFocusOnClose(event) {
+    event.preventDefault();
+  }
+
   dismiss(event) {
     if (!this.activeMarker) return;
 
