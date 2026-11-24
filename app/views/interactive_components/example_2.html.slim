@@ -1,0 +1,23 @@
+- content_for :page_title do
+  = html_title @training_module.title, @content.heading
+
+.govuk-grid-row
+  .govuk-grid-column-three-quarters-from-desktop
+    h1.govuk-heading-l= @content.heading
+
+    = m(@body_before_flip_cards)
+
+    h2.govuk-heading-m Check your understanding
+
+    .flip-card-grid
+      = render 'flip_card',
+          id: 'example-2-poverty-development',
+          question: 'What type of things might impact a child’s development if they are living in poverty?',
+          answer: 'Coming to your setting hungry, being bullied because of what they are wearing or not being able to access toys and books, are all common difficulties for children living in poverty.'
+
+      = render 'flip_card',
+          id: 'example-2-poverty-mental-health',
+          question: 'How much more likely are children who are living in poverty to suffer with mental health issues?',
+          answer: 'Children living in low income households are 3 times more likely to experience mental health issues and have lower academic success than children from more affluent backgrounds.'
+
+    = m(@body_after_flip_cards)

@@ -1,0 +1,23 @@
+- content_for :page_title do
+  = html_title @training_module.title, @content.heading
+
+.govuk-grid-row
+  .govuk-grid-column-three-quarters-from-desktop
+    h1.govuk-heading-l= @content.heading
+
+    = m(@body_before_flip_cards)
+
+    h2.govuk-heading-m Check your understanding
+
+    .flip-card-grid
+      = render 'flip_card',
+          id: 'example-1-brain-development',
+          question: 'What happens to babies in the sensorimotor stage?',
+          answer: 'In this stage, 0 to 2 year olds use their senses to explore and grow'
+
+      = render 'flip_card',
+          id: 'example-1-learning',
+          question: 'What does Piaget mean by object permanence?',
+          answer: 'Object permanence is the ability to mentally picture an item even when it was no longer there.'
+
+    = m(@body_after_flip_cards)

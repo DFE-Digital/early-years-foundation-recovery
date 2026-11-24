@@ -1,0 +1,17 @@
+- content_for :page_title do
+  = html_title @training_module.title, @content.heading
+
+.govuk-grid-row
+  .govuk-grid-column-three-quarters-from-desktop
+    h1.govuk-heading-l= @content.heading
+
+    = m(@body_before_hotspot)
+
+    - if @hotspot_example
+      = render 'hotspot_image',
+          id: @hotspot_example[:id],
+          image: @hotspot_example[:image],
+          alt: @hotspot_example[:alt],
+          hotspots: @hotspot_example[:hotspots]
+
+    = m(@body_after_hotspot)
