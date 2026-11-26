@@ -44,8 +44,8 @@ Rails.application.configure do
     #   config.action_dispatch.cookies_same_site_protection = :lax
   end
 
-  # use integration GOV.UK One Login environment for development
-  if ENV['ENVIRONMENT'].eql?('development')
+  # Use integration GOV.UK One Login environment for development and staging.
+  if %w[development staging].include?(ENV['ENVIRONMENT'])
     config.gov_one_base_uri = credentials.dig(:gov_one, :integration, :base_uri)
     config.gov_one_private_key = credentials.dig(:gov_one, :integration, :private_key)
     config.gov_one_client_id = credentials.dig(:gov_one, :integration, :client_id)
