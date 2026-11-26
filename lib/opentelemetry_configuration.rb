@@ -133,6 +133,7 @@ module OpenTelemetryConfiguration
       return if exporter_configs.empty?
 
       resource = OpenTelemetry::SDK::Resources::Resource.create('service.name' => service_name) # rubocop:disable Rails/SaveBang
+      resource = OpenTelemetry::SDK::Resources::Resource.default.merge(resource)
       provider = OpenTelemetry::SDK::Logs::LoggerProvider.new(resource: resource)
       exporter_configs.each do |config|
         exporter = OpenTelemetry::Exporter::OTLP::Logs::LogsExporter.new(
