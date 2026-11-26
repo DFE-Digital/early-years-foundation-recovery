@@ -1,59 +1,85 @@
-.hotspot-image(
+section.hotspot-image(
+  aria-label="Interactive image hotspots"
   data-controller="hotspot-image"
-  data-action="keydown.esc->hotspot-image#dismiss click@document->hotspot-image#closeOutside turbo:before-cache@document->hotspot-image#reset"
+  data-action="keydown.esc@document->hotspot-image#dismiss click@document->hotspot-image#closeOutside turbo:before-cache@document->hotspot-image#reset"
 )
+  p.govuk-visually-hidden id="#{id}-instructions"
+    | Navigate to a numbered hotspot and activate it to explore the image. When the popup opens, focus moves to Close. Activate Close or press Escape to return to the hotspot.
   .hotspot-image__canvas
     = image_tag image,
         alt: alt,
-        class: 'hotspot-image__image'
+        tabindex: 0,
+        class: 'hotspot-image__image',
+        aria: { describedby: "#{id}-instructions" }
 
-    - hotspots.each_with_index do |hotspot, index|
-      a.hotspot-image__marker(
-        href="##{id}-#{hotspot[:id]}"
-        style="left: #{hotspot[:x]}%; top: #{hotspot[:y]}%;"
-        aria-label=hotspot[:label]
-        data-hotspot-image-target="fallback"
-      )
-        = index + 1
-
-      button.hotspot-image__marker(
-        type="button"
-        hidden=true
-        style="left: #{hotspot[:x]}%; top: #{hotspot[:y]}%;"
-        aria-label=hotspot[:label]
-        aria-expanded="false"
-        aria-controls="#{id}-#{hotspot[:id]}-popover"
-        data-hotspot-image-target="marker"
-        data-action="hotspot-image#toggle"
-      )
-        = index + 1
-
-      .hotspot-image__popover(
-        id="#{id}-#{hotspot[:id]}-popover"
-        hidden=true
-        role="region"
-        aria-labelledby="#{id}-#{hotspot[:id]}-title"
-        data-hotspot-image-target="popover"
-      )
-        h3.govuk-heading-s id="#{id}-#{hotspot[:id]}-title"
-          = hotspot[:label]
-
-        p.govuk-body
-          = hotspot[:description]
-
-        button.govuk-button.govuk-button--secondary(
-          type="button"
-          data-action="hotspot-image#dismiss"
-        )
-          | Close
-
-  .hotspot-image__descriptions data-hotspot-image-target="descriptions"
-    h3.govuk-heading-m Areas to explore
-
-    dl.govuk-body
+    ol.hotspot-image__markers role="list" aria-label="Image hotspots"
       - hotspots.each_with_index do |hotspot, index|
-        dt id="#{id}-#{hotspot[:id]}"
-          strong
-            = "#{index + 1}. #{hotspot[:label]}"
-        dd
-          = hotspot[:description]
+        li
+          a.hotspot-image__marker(
+            href="##{id}-#{hotspot[:id]}"
+            style="left: #{hotspot[:x]}%; top: #{hotspot[:y]}%;"
+            aria-label="#{hotspot[:label]}, hotspot #{index + 1} of #{hotspots.length}"
+            data-hotspot-image-target="fallback"
+          )
+            = index + 1
+
+          button.hotspot-image__marker(
+            type="button"
+            hidden=true
+            style="left: #{hotspot[:x]}%; top: #{hotspot[:y]}%;"
+            aria-label="#{hotspot[:label]}, hotspot #{index + 1} of #{hotspots.length}"
+            aria-expanded="false"
+            aria-controls="#{id}-#{hotspot[:id]}-popover"
+            data-hotspot-image-target="marker"
+            data-desktop-placement=hotspot[:desktop_placement]
+            data-action="click->hotspot-image#toggle"
+          )
+            = index + 1
+
+  - hotspots.each do |hotspot|
+    .hotspot-image__popover(
+      id="#{id}-#{hotspot[:id]}-popover"
+      hidden=true
+      role="region"
+      aria-labelledby="#{id}-#{hotspot[:id]}-title"
+      data-hotspot-image-target="popover"
+    )
+      h3.govuk-heading-s id="#{id}-#{hotspot[:id]}-title"
+        = hotspot[:label]
+
+      p.govuk-body id="#{id}-#{hotspot[:id]}-description"
+        = hotspot[:description]
+
+      button.hotspot-image__close(
+        type="button"
+        aria-label="Click to close #{hotspot[:label]}"
+        aria-describedby="#{id}-#{hotspot[:id]}-description"
+        data-action="click->hotspot-image#dismiss keydown.tab->hotspot-image#keepFocusOnClose keydown.shift+tab->hotspot-image#keepFocusOnClose"
+      )
+        span.hotspot-image__close-text Close
+        i.fa-solid.fa-xmark aria-hidden="true"
+
+  details.govuk-details.hotspot-image__descriptions(
+    open=true
+    data-hotspot-image-target="descriptions"
+  )
+    summary.govuk-details__summary
+      span.govuk-details__summary-text
+        | Hotspots and their meaning
+
+    .govuk-details__text
+      ol.govuk-list.govuk-list--number
+        - hotspots.each do |hotspot|
+          li id="#{id}-#{hotspot[:id]}"
+            = "#{hotspot[:label]} - #{hotspot[:description]}"
+
+  details.govuk-details.hotspot-image__print-descriptions open=true
+    summary.govuk-details__summary
+      span.govuk-details__summary-text
+        | Hotspots and their meaning
+
+    .govuk-details__text
+      ol.govuk-list.govuk-list--number
+        - hotspots.each do |hotspot|
+          li
+            = "#{hotspot[:label]} - #{hotspot[:description]}"

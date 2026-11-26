@@ -7,6 +7,8 @@ import {
 } from "@floating-ui/dom";
 import { Controller } from "@hotwired/stimulus";
 
+const DESKTOP_BREAKPOINT = 769;
+
 export default class extends Controller {
   static targets = ["fallback", "marker", "popover", "descriptions"];
 
@@ -41,7 +43,13 @@ export default class extends Controller {
     marker.setAttribute("aria-expanded", "true");
     popover.hidden = false;
     this.activeMarker = marker;
+    this.activePopover = popover;
     this.positionPopover(marker, popover);
+    popover.querySelector(".hotspot-image__close").focus({ preventScroll: true });
+  }
+
+  keepFocusOnClose(event) {
+    event.preventDefault();
   }
 
   dismiss(event) {
@@ -55,9 +63,13 @@ export default class extends Controller {
   }
 
   closeOutside(event) {
-    if (this.element.contains(event.target)) return;
+    if (!this.activePopover || this.activePopover.contains(event.target)) return;
+    // Marker clicks are handled by toggle, including the click that opens a popup.
+    if (this.markerTargets.some((marker) => marker.contains(event.target))) return;
 
+    const marker = this.activeMarker;
     this.reset();
+    marker.focus({ preventScroll: true });
   }
 
   reset() {
@@ -73,18 +85,40 @@ export default class extends Controller {
     });
 
     this.activeMarker = null;
+    this.activePopover = null;
   }
 
   positionPopover(marker, popover) {
+    const desktopViewport = window.matchMedia(
+      `(min-width: ${DESKTOP_BREAKPOINT}px)`,
+    );
     this.stopPositioning = autoUpdate(marker, popover, async () => {
+      if (!desktopViewport.matches) {
+        popover.style.removeProperty("left");
+        popover.style.removeProperty("top");
+        return;
+      }
+
+      const placement = marker.dataset.desktopPlacement || "top";
+      const bounds = {
+        boundary: this.element.querySelector(".hotspot-image__canvas"),
+        rootBoundary: "document",
+        padding: 8,
+      };
+
       const { x, y } = await computePosition(marker, popover, {
-        placement: "top",
+        placement,
         strategy: "absolute",
-        middleware: [offset(12), flip({ padding: 16 }), shift({ padding: 16 })],
+        middleware: [offset(12), flip(bounds), shift(bounds)],
       });
 
-      // Ignore a result if this popover was closed while calculating.
-      if (this.activeMarker !== marker || popover.hidden) return;
+      // Ignore results after closing the popover or leaving the desktop layout.
+      if (
+        this.activeMarker !== marker ||
+        popover.hidden ||
+        !desktopViewport.matches
+      )
+        return;
 
       Object.assign(popover.style, {
         left: `${x}px`,

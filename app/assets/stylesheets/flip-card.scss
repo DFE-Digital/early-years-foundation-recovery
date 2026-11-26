@@ -3,7 +3,7 @@
 .flip-card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(0, 400px));
-  gap: govuk-spacing(6);
+  gap: govuk-spacing(4);
   margin-bottom: govuk-spacing(6);
   justify-content: start;
 
@@ -95,6 +95,7 @@
 
 .flip-card__button {
   align-self: flex-end;
+  flex-shrink: 0;
   margin-top: auto;
   border: 0;
   background: transparent;
@@ -147,9 +148,7 @@
 
   .flip-card__inner > .flip-card__face {
     grid-area: 1 / 1;
-    height: 283px;
     min-height: 283px;
-    overflow-y: auto;
 
     // Switch faces explicitly instead of relying on 3D back-face culling.
     backface-visibility: visible;
@@ -161,7 +160,6 @@
     }
 
     @include govuk-media-query($until: tablet) {
-      height: 250px;
       min-height: 250px;
     }
   }

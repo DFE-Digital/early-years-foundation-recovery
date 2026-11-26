@@ -95,6 +95,18 @@ Rails.application.routes.draw do
 
   # Development / staging route. Not for production
   unless Rails.application.live?
+    get '/interactive-components/example-3',
+        to: 'interactive_components#example_3',
+        as: :interactive_components_example_3
+
+    get '/interactive-components/example-2',
+        to: 'interactive_components#example_2',
+        as: :interactive_components_example_2
+
+    get '/interactive-components/example-1',
+        to: 'interactive_components#example_1',
+        as: :interactive_components_example_1
+
     get '/interactive-components',
         to: 'interactive_components#index',
         as: :interactive_components

@@ -16,4 +16,7 @@ title= yield :page_title
 
 = javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true
 
+= javascript_tag nonce: true do
+  | document.documentElement.classList.add('js-available');
+
 = yield :head
