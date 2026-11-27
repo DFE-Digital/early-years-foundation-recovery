@@ -23,6 +23,26 @@ RSpec.describe DataAnalysis::UsersModuleOrderByExperience do
   let!(:user_no_experience) { create(:user, early_years_experience: nil) }
 
   before do
+    module_type = Struct.new(:name, :draft) do
+      def draft?
+        draft
+      end
+    end
+
+    module_names = %w[
+      child-development-and-the-eyfs
+      brain-development-and-how-children-learn
+      personal-social-and-emotional-development
+      module-4
+      module-5
+      module-6
+      module-7
+      module-8
+    ]
+
+    modules = module_names.map { |name| module_type.new(name, false) }
+    allow(Training::Module).to receive(:ordered).and_return(modules)
+
     # User bob: Less than 2 years
     create(:event, user: user_bob, name: 'module_start',
                    properties: { 'training_module_id' => 'child-development-and-the-eyfs' },
