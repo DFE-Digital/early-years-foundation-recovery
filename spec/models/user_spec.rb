@@ -112,9 +112,9 @@ RSpec.describe User, type: :model do
 
       it 'returns time in seconds for each module keyed by position' do
         times = user.module_time_from_progress
-        expect(times['module_1_time']).to eq 1800           # completed: 30 mins in seconds
-        expect(times['module_2_time']).to eq 0              # started but not completed
-        expect(times['module_3_time']).to be_nil            # not started
+        expect(times["module_#{alpha.id}_time"]).to eq 1800   # completed: 30 mins in seconds
+        expect(times["module_#{bravo.id}_time"]).to eq 0      # started but not completed
+        expect(times["module_#{charlie.id}_time"]).to be_nil  # not started
       end
     end
 
@@ -150,6 +150,10 @@ RSpec.describe User, type: :model do
   # end
 
   describe '.to_csv' do
+    let(:alpha) { Training::Module.by_name(:alpha) }
+    let(:bravo) { Training::Module.by_name(:bravo) }
+    let(:charlie) { Training::Module.by_name(:charlie) }
+
     let(:module_1_started) { Time.zone.local(2025, 1, 1, 10, 0, 0) }
     let(:module_1_completed) { Time.zone.local(2025, 1, 1, 10, 30, 0) }
     let(:module_2_started) { Time.zone.local(2025, 1, 2, 9, 0, 0) }
@@ -216,7 +220,7 @@ RSpec.describe User, type: :model do
     # module_3: started but not completed = 0
     it 'exports formatted attributes as CSV with module time in seconds' do
       expect(described_class.to_csv(batch_size: 2)).to eq <<~CSV
-        id,local_authority,setting_type,setting_type_other,role_type,role_type_other,early_years_experience,registration_complete,private_beta_registration_complete,registration_complete_any?,registered_at,terms_and_conditions_agreed_at,training_emails,email_delivery_status,gov_one?,module_1_time,module_2_time,module_3_time
+        id,local_authority,setting_type,setting_type_other,role_type,role_type_other,early_years_experience,registration_complete,private_beta_registration_complete,registration_complete_any?,registered_at,terms_and_conditions_agreed_at,training_emails,email_delivery_status,gov_one?,module_#{alpha.id}_time,module_#{bravo.id}_time,module_#{charlie.id}_time
         1,Watford Borough Council,,DfE,other,Developer,na,true,true,true,2000-01-01 00:00:00,2000-01-01 00:00:00,true,unknown,true,1800,2700,0
         2,Leeds City Council,,DfE,Trainer or lecturer,,2-5,true,false,true,2000-01-01 00:00:00,2000-01-01 00:00:00,true,unknown,true,1800,0,
         3,City of London,,DfE,other,Developer,,true,false,true,2023-01-12 10:15:59,2000-01-01 00:00:00,true,delivered,true,1800,,

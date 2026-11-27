@@ -23,6 +23,26 @@ RSpec.describe DataAnalysis::UsersModuleOrderByExperience do
   let!(:user_no_experience) { create(:user, early_years_experience: nil) }
 
   before do
+    module_type = Struct.new(:name, :draft) do
+      def draft?
+        draft
+      end
+    end
+
+    module_names = %w[
+      child-development-and-the-eyfs
+      brain-development-and-how-children-learn
+      personal-social-and-emotional-development
+      module-4
+      module-5
+      module-6
+      module-7
+      module-8
+    ]
+
+    modules = module_names.map { |name| module_type.new(name, false) }
+    allow(Training::Module).to receive(:ordered).and_return(modules)
+
     # User bob: Less than 2 years
     create(:event, user: user_bob, name: 'module_start',
                    properties: { 'training_module_id' => 'child-development-and-the-eyfs' },
@@ -69,31 +89,53 @@ RSpec.describe DataAnalysis::UsersModuleOrderByExperience do
       result = described_class.dashboard
 
       # Less than 2 years, Module 1
-      band1_module1 = result.find { |r| r[:experience] == 'Less than 2 years' && r[:module_name] == 'Module 1' }
+      band1_module1 = result.find { |r| r[:experience] == 'Less than 2 years' && r[:module_name] == 'child-development-and-the-eyfs' }
       expect(band1_module1['Module Started First']).to eq(1)
 
       # Between 6 and 9 years, Module 4
-      band3_module4 = result.find { |r| r[:experience] == 'Between 6 and 9 years' && r[:module_name] == 'Module 4' }
+      band3_module4 = result.find { |r| r[:experience] == 'Between 6 and 9 years' && r[:module_name] == 'module-4' }
       expect(band3_module4['Module Started Second']).to eq(1)
 
       # Between 6 and 9 years, Module 5
-      band3_module5 = result.find { |r| r[:experience] == 'Between 6 and 9 years' && r[:module_name] == 'Module 5' }
+      band3_module5 = result.find { |r| r[:experience] == 'Between 6 and 9 years' && r[:module_name] == 'module-5' }
       expect(band3_module5['Module Started First']).to eq(1)
 
       # 10 years or more, Module 7
-      band4_module7 = result.find { |r| r[:experience] == '10 years or more' && r[:module_name] == 'Module 7' }
+      band4_module7 = result.find { |r| r[:experience] == '10 years or more' && r[:module_name] == 'module-7' }
       expect(band4_module7['Module Started First']).to eq(1)
 
       # 10 years or more, Module 8
-      band4_module8 = result.find { |r| r[:experience] == '10 years or more' && r[:module_name] == 'Module 8' }
+      band4_module8 = result.find { |r| r[:experience] == '10 years or more' && r[:module_name] == 'module-8' }
       expect(band4_module8['Module Started Second']).to eq(1)
 
       # 10 years or more, Module 1
-      band4_module1 = result.find { |r| r[:experience] == '10 years or more' && r[:module_name] == 'Module 1' }
+      band4_module1 = result.find { |r| r[:experience] == '10 years or more' && r[:module_name] == 'child-development-and-the-eyfs' }
       expect(band4_module1['Module Started Third']).to eq(1)
 
       # Ensure users with no experience are excluded
       expect(result).to(be_none { |r| r[:experience].nil? })
+    end
+
+    it 'excludes draft modules from the report' do
+      module_type = Struct.new(:name, :draft) do
+        def draft?
+          draft
+        end
+      end
+
+      live_module = module_type.new('child-development-and-the-eyfs', false)
+      draft_module = module_type.new('draft-module', true)
+
+      allow(live_module).to receive(:draft?).and_return(false)
+      allow(draft_module).to receive(:draft?).and_return(true)
+
+      allow(Training::Module).to receive(:ordered)
+        .and_return([live_module, draft_module])
+
+      module_names = described_class.dashboard.map { |row| row[:module_name] }
+
+      expect(module_names).to include('child-development-and-the-eyfs')
+      expect(module_names).not_to include('draft-module')
     end
   end
 
@@ -101,12 +143,12 @@ RSpec.describe DataAnalysis::UsersModuleOrderByExperience do
     it 'produces a CSV with correct counts and headers' do
       csv = described_class.to_csv
       expect(csv).to include('Experience,ModuleName,Module_Started_First,Module_Started_Second,Module_Started_Third')
-      expect(csv).to include('Less than 2 years,Module 1,1,0,0')
-      expect(csv).to include('Between 6 and 9 years,Module 4,0,1,0')
-      expect(csv).to include('Between 6 and 9 years,Module 5,1,0,0')
-      expect(csv).to include('10 years or more,Module 7,1,0,0')
-      expect(csv).to include('10 years or more,Module 8,0,1,0')
-      expect(csv).to include('10 years or more,Module 1,0,0,1')
+      expect(csv).to include('Less than 2 years,child-development-and-the-eyfs,1,0,0')
+      expect(csv).to include('Between 6 and 9 years,module-4,0,1,0')
+      expect(csv).to include('Between 6 and 9 years,module-5,1,0,0')
+      expect(csv).to include('10 years or more,module-7,1,0,0')
+      expect(csv).to include('10 years or more,module-8,0,1,0')
+      expect(csv).to include('10 years or more,child-development-and-the-eyfs,0,0,1')
     end
   end
 
