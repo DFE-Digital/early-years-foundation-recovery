@@ -22,7 +22,7 @@ class User < ApplicationRecord
 
   # @return [Array<String>]
   def self.dashboard_headers
-    DASHBOARD_ATTRS + Training::Module.live.map { |mod| "module_#{mod.position}_time" }
+    DASHBOARD_ATTRS + Training::Module.live.map { |mod| "module_#{mod.id}_time" }
   end
 
   # @return [String]
@@ -527,7 +527,7 @@ class User < ApplicationRecord
 
     Training::Module.live.each_with_object({}) do |mod, hash|
       progress = progress_by_module[mod.name]
-      hash["module_#{mod.position}_time"] = calculate_module_time(progress)
+      hash["module_#{mod.id}_time"] = calculate_module_time(progress)
     end
   end
 
