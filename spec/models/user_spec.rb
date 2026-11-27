@@ -150,6 +150,10 @@ RSpec.describe User, type: :model do
   # end
 
   describe '.to_csv' do
+    let(:alpha) { Training::Module.by_name(:alpha) }
+    let(:bravo) { Training::Module.by_name(:bravo) }
+    let(:charlie) { Training::Module.by_name(:charlie) }
+
     let(:module_1_started) { Time.zone.local(2025, 1, 1, 10, 0, 0) }
     let(:module_1_completed) { Time.zone.local(2025, 1, 1, 10, 30, 0) }
     let(:module_2_started) { Time.zone.local(2025, 1, 2, 9, 0, 0) }
