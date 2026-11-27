@@ -9,37 +9,25 @@ module DataAnalysis
       '10 years or more' => 10..Float::INFINITY,
     }.freeze
 
-    MODULES = (1..8).map { |i| "Module #{i}" }.freeze
-
-    REAL_MODULE_MAP = {
-      'child-development-and-the-eyfs' => 'Module 1',
-      'brain-development-and-how-children-learn' => 'Module 2',
-      'personal-social-and-emotional-development' => 'Module 3',
-      'module-4' => 'Module 4',
-      'module-5' => 'Module 5',
-      'module-6' => 'Module 6',
-      'module-7' => 'Module 7',
-      'module-8' => 'Module 8',
-    }.freeze
-
     class << self
       def column_names
         %w[Experience ModuleName Module_Started_First Module_Started_Second Module_Started_Third]
       end
 
       def dashboard
+        module_names = Training::Module.live.map(&:name)
         result = []
 
         EXPERIENCE_BANDS.each do |band_name, range|
           user_module_orders = {}
 
           users_in_band(range) do |users_batch|
-            user_module_orders.merge!(build_user_module_orders(users_batch))
+            user_module_orders.merge!(build_user_module_orders(users_batch, module_names))
           end
 
           next if user_module_orders.empty?
 
-          MODULES.each do |mod_name|
+          module_names.each do |mod_name|
             counts = [0, 0, 0]
 
             user_module_orders.each_value do |modules_ordered|
@@ -87,7 +75,7 @@ module DataAnalysis
             .find_in_batches(batch_size: batch_size, &block)
       end
 
-      def build_user_module_orders(users)
+      def build_user_module_orders(users, module_names)
         user_ids = users.map(&:id)
         events = Event.where(user_id: user_ids, name: 'module_start')
                       .order(:time)
@@ -98,20 +86,13 @@ module DataAnalysis
         events.each do |user_id, properties|
           next unless properties.is_a?(Hash)
 
-          training_module_id = properties['training_module_id'] || properties['mod_uid']
-          next unless training_module_id
-
-          module_name = map_to_module_name(training_module_id)
-          next unless module_name
+          module_name = properties['training_module_id'] || properties['mod_uid']
+          next unless module_names.include?(module_name)
 
           orders[user_id] << module_name unless orders[user_id].include?(module_name)
         end
 
         orders
-      end
-
-      def map_to_module_name(training_module_id)
-        REAL_MODULE_MAP[training_module_id]
       end
     end
   end
